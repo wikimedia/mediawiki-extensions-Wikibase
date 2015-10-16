@@ -7,7 +7,7 @@
 	},
 	"wikibase-client-desc": "Client pe' l'estensione Wikibase",
 	"tooltip-t-wikibase": "Cullegamento d' 'o link a n'elemento 'e ll'archivio 'e date",
-	"apihelp-query+pageterms-description": "Piglia tuttuquante termene suoccie a na paggena via n'item suoccio a essa.",
+	"apihelp-query+pageterms-description": "Piglia tuttuquante termene suoccie a na paggena via n'item suoccio a essa. Dint'a na paggena entità 'e wikibase, 'e termene identità s'auserranno direttamente.\nAttenziò: su nu repository wiki, 'e termene song'ausate direttamente ncopp' 'e paggene 'e ll'entità, nun ncopp' 'e paggene cullegate a n'elemento. Sta cosa putesse cagnà 'n futuro.",
 	"apihelp-query+pageterms-example-simple": "Piglia tuttuquante 'e termene suoccie 'a paggena 'London', dint'a lengua utente.",
 	"apihelp-query+pageterms-example-label-en": "Piglia 'etichette e aliasse suoccie 'a paggena 'London', pe' ngrese.",
 	"apihelp-query+pageterms-example-item": "Piglia etichette e aliasse 'e ll'item Q84.",

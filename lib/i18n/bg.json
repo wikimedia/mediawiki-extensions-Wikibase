@@ -21,6 +21,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Език",
 	"wikibase-sitelinks-link-columnheading": "Свързана статия",
 	"wikibase-snakview-snaktypeselector-somevalue": "неизвестна стойност",
+	"wikibase-snakview-snaktypeselector-novalue": "без стойност",
 	"wikibase-tooltip-error-details": "Подробности",
 	"datatypes-type-wikibase-item": "Обект",
 	"datatypes-type-commonsMedia": "Файл от Общомедия"
