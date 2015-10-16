@@ -50,6 +50,24 @@
       "revId": "7fa55144013104a4ddf34897e9d9a3940ea534cb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_89c2c75b",
+        "filename": "repo/tests/phpunit/data/rdf/dump_empty.nt",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-10-16T17:53:32Z",
+      "side": 1,
+      "message": "according to Markus, it is.",
+      "parentUuid": "0ebaf39b_80106d5c",
+      "revId": "7fa55144013104a4ddf34897e9d9a3940ea534cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
