@@ -85,6 +85,17 @@ class EntityParserOutputGenerator {
 	 */
 	private $languageCode;
 
+	/**
+	 * @param EntityViewFactory $entityViewFactory
+	 * @param ParserOutputJsConfigBuilder $configBuilder
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
+	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TemplateFactory $templateFactory
+	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 * @param EntityParserOutputDataUpdater $parserOutputDataUpdater
+	 * @param string $languageCode
+	 */
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
@@ -192,7 +203,12 @@ class EntityParserOutputGenerator {
 	 * @return EntityInfo
 	 */
 	private function getEntityInfo( ParserOutput $parserOutput ) {
-		// set in ReferencedEntitiesDataUpdate
+		/**
+		 * Set in ReferencedEntitiesDataUpdate.
+		 *
+		 * @see ReferencedEntitiesDataUpdate::updateParserOutput
+		 * @fixme Use ReferencedEntitiesDataUpdate::getEntityIds instead.
+		 */
 		$entityIds = $parserOutput->getExtensionData( 'referenced-entities' );
 
 		if ( !is_array( $entityIds ) ) {
@@ -249,7 +265,7 @@ class EntityParserOutputGenerator {
 		if ( !is_string( $titleText ) ) {
 			$entityId = $entity->getId();
 
-			if ( $entityId !== null ) {
+			if ( $entityId instanceof EntityId ) {
 				$titleText = $entityId->getSerialization();
 			}
 		}
