@@ -27,8 +27,8 @@ class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
-				return $entityId->getSerialization();
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return $id->getSerialization();
 			} ) );
 
 		return $entityLookup;

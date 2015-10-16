@@ -61,11 +61,11 @@ class EntityIdLabelFormatterTest extends PHPUnit_Framework_TestCase {
 
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnCallback( function( EntityId $entityId ) use ( $languageCode ) {
-				if ( $entityId->getSerialization() === 'Q42' && $languageCode === 'es' ) {
+			->will( $this->returnCallback( function( EntityId $id ) use ( $languageCode ) {
+				if ( $id->getSerialization() === 'Q42' && $languageCode === 'es' ) {
 					return new Term( 'es', 'foo' );
 				} else {
-					throw new LabelDescriptionLookupException( $entityId, 'Label not found' );
+					throw new LabelDescriptionLookupException( $id, 'Label not found' );
 				}
 			} ) );
 
