@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_4614bca0",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-16T16:21:12Z",
+      "side": 1,
+      "message": "Would be nice if we could avoid re-generating the comment for every target page. This can be pretty expensive (especially label lookups, but also localization message interpolation, etc). The comment is nearly always going to be the same for all target pages. Perhaps we can detect the \"sitelinks changed\" case here, and only override the message for that case.",
+      "revId": "2551a33907d49c72e837eae1f5fc5dc89cd5a26a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
