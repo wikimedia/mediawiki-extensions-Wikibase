@@ -1,20 +1,15 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\ParserOutput;
 
 use ParserOptions;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
-use Wikibase\Repo\DataUpdates\EntityParserOutputDataUpdater;
-use Wikibase\Repo\DataUpdates\ExternalLinksDataUpdate;
-use Wikibase\Repo\DataUpdates\GeoDataDataUpdate;
-use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
-use Wikibase\Repo\DataUpdates\PageImagesDataUpdate;
-use Wikibase\Repo\DataUpdates\ParserOutputDataUpdate;
-use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;

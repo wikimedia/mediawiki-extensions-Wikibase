@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\DataUpdates;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\QuantityValue;
 use MediaWikiTestCase;
@@ -11,10 +11,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate;
+use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdate;
 
 /**
- * @covers Wikibase\Repo\DataUpdates\ReferencedEntitiesDataUpdate
+ * @covers Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdate
  *
  * @group Wikibase
  * @group WikibaseRepo

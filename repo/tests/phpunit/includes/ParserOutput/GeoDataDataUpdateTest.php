@@ -18,10 +18,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
-use Wikibase\Repo\DataUpdates\GeoDataDataUpdate;
+use Wikibase\Repo\ParserOutput\GeoDataDataUpdate;
 
 /**
- * @covers Wikibase\Repo\DataUpdates\GeoDataDataUpdate;
+ * @covers Wikibase\Repo\ParserOutput\GeoDataDataUpdate;
  *
  * @group Wikibase
  * @group WikibaseRepo

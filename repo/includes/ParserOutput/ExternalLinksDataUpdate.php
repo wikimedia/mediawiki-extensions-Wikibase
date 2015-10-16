@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\DataUpdates;
+namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\StringValue;
 use ParserOutput;
@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 
 /**
- * Register commonsMedia values as used images in ParserOutput.
+ * Add url data values as external links in ParserOutput.
  *
  * @since 0.5
  *
@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\PropertyDataTypeMatcher;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Mättig
  */
-class ImageLinksDataUpdate implements StatementDataUpdate {
+class ExternalLinksDataUpdate implements StatementDataUpdate {
 
 	/**
 	 * @var PropertyDataTypeMatcher
@@ -27,10 +27,10 @@ class ImageLinksDataUpdate implements StatementDataUpdate {
 	private $propertyDataTypeMatcher;
 
 	/**
-	 * @var null[] Hash set of the file name strings found while processing statements. Only the
-	 * array keys are used for performance reasons, the values are meaningless.
+	 * @var null[] Hash set of the URL strings found while processing statements. Only the array
+	 * keys are used for performance reasons, the values are meaningless.
 	 */
-	private $fileNames = array();
+	private $urls = array();
 
 	/**
 	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher
@@ -40,7 +40,7 @@ class ImageLinksDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
-	 * Add DataValue to list of used images if Snak property data type is commonsMedia.
+	 * Add DataValue to list of used urls, if Snak property has 'url' data type.
 	 *
 	 * @param Statement $statement
 	 */
@@ -59,25 +59,23 @@ class ImageLinksDataUpdate implements StatementDataUpdate {
 			$value = $snak->getDataValue();
 
 			if ( $value instanceof StringValue
-				&& $this->propertyDataTypeMatcher->isMatchingDataType( $id, 'commonsMedia' )
+				&& $this->propertyDataTypeMatcher->isMatchingDataType( $id, 'url' )
 			) {
-				$fileName = str_replace( ' ', '_', $value->getValue() );
+				$url = $value->getValue();
 
-				if ( $fileName !== '' ) {
-					$this->fileNames[$fileName] = null;
+				if ( $url !== '' ) {
+					$this->urls[$url] = null;
 				}
 			}
 		}
 	}
 
 	/**
-	 * Treat CommonsMedia values as file transclusions
-	 *
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		foreach ( $this->fileNames as $fileName => $null ) {
-			$parserOutput->addImage( $fileName );
+		foreach ( $this->urls as $url => $null ) {
+			$parserOutput->addExternalLink( $url );
 		}
 	}
 

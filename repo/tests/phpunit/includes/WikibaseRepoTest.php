@@ -281,7 +281,7 @@ class WikibaseRepoTest extends \MediaWikiTestCase {
 
 	public function testGetEntityParserOutputGeneratorFactory() {
 		$service = $this->getWikibaseRepo()->getEntityParserOutputGeneratorFactory();
-		$this->assertInstanceOf( 'Wikibase\EntityParserOutputGeneratorFactory', $service );
+		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory', $service );
 	}
 
 	public function testGetDataTypeValidatorFactory() {

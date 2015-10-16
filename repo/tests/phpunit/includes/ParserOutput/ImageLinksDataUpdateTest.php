@@ -1,16 +1,16 @@
 <?php
 
-namespace Wikibase\Repo\Tests\DataUpdates;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\DataUpdates\ImageLinksDataUpdate;
+use Wikibase\Repo\ParserOutput\ImageLinksDataUpdate;
 
 /**
- * @covers Wikibase\Repo\DataUpdates\ImageLinksDataUpdate
+ * @covers Wikibase\Repo\ParserOutput\ImageLinksDataUpdate
  *
  * @group Wikibase
  * @group WikibaseRepo

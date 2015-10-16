@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\Serializers\DataValueSerializer;
 use FormatJson;

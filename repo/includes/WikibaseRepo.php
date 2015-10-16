@@ -37,7 +37,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
-use Wikibase\EntityParserOutputGeneratorFactory;
+use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
