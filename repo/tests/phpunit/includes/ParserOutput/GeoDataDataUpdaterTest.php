@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use Coord;
 use CoordinatesOutput;
 use DataValues\DataValue;
-use DataValues\Geo\Values\LatLongValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use ParserOutput;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,7 +17,6 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
 
@@ -52,18 +51,18 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	 * @dataProvider processStatementProvider
 	 */
 	public function testProcessStatement( array $expected, array $statements, $message ) {
-		$dataUpdater = $this->newGeoDataDataUpdate(
+		$updater = $this->newGeoDataDataUpdater(
 			array( 'P625', 'P9000' )
 		);
 
 		foreach ( $statements as $statement ) {
-			$dataUpdater->processStatement( $statement );
+			$updater->processStatement( $statement );
 		}
 
 		$this->assertAttributeEquals(
 			$expected,
 			'coordinates',
-			$dataUpdater,
+			$updater,
 			$message
 		);
 	}
@@ -160,12 +159,12 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordPreferredStatement() {
-		$dataUpdater = $this->newGeoDataDataUpdate(
+		$updater = $this->newGeoDataDataUpdater(
 			array( 'P9000', 'P625' )
 		);
 
 		foreach ( $this->getStatements() as $statement ) {
-			$dataUpdater->processStatement( $statement );
+			$updater->processStatement( $statement );
 		}
 
 		$coords = $this->getCoords();
@@ -183,18 +182,18 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$parserOutput = new ParserOutput();
-		$dataUpdater->updateParserOutput( $parserOutput );
+		$updater->updateParserOutput( $parserOutput );
 
 		$this->assertEquals( $expected, $parserOutput->geoData );
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordNormalStatement() {
-		$dataUpdater = $this->newGeoDataDataUpdate(
+		$updater = $this->newGeoDataDataUpdater(
 			array( 'P625', 'P10' )
 		);
 
 		foreach ( $this->getStatements() as $statement ) {
-			$dataUpdater->processStatement( $statement );
+			$updater->processStatement( $statement );
 		}
 
 		$expected = new CoordinatesOutput();
@@ -211,18 +210,18 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$parserOutput = new ParserOutput();
-		$dataUpdater->updateParserOutput( $parserOutput );
+		$updater->updateParserOutput( $parserOutput );
 
 		$this->assertEquals( $expected, $parserOutput->geoData );
 	}
 
 	public function testUpdateParserOutput_noPrimaryCoord() {
-		$dataUpdater = $this->newGeoDataDataUpdate(
+		$updater = $this->newGeoDataDataUpdater(
 			array( 'P17', 'P404', 'P10', 'P20', 'P9000', 'P9001', 'P625' )
 		);
 
 		foreach ( $this->getStatements() as $statement ) {
-			$dataUpdater->processStatement( $statement );
+			$updater->processStatement( $statement );
 		}
 
 		$expected = new CoordinatesOutput();
@@ -232,12 +231,17 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$parserOutput = new ParserOutput();
-		$dataUpdater->updateParserOutput( $parserOutput );
+		$updater->updateParserOutput( $parserOutput );
 
 		$this->assertEquals( $expected, $parserOutput->geoData );
 	}
 
-	private function newGeoDataDataUpdate( array $preferredProperties ) {
+	/**
+	 * @param string[] $preferredProperties
+	 *
+	 * @return GeoDataDataUpdater
+	 */
+	private function newGeoDataDataUpdater( array $preferredProperties ) {
 		return new GeoDataDataUpdater(
 			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
 			$preferredProperties,
