@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_a67b38ea",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-16T16:24:06Z",
+      "side": 1,
+      "message": "If the class is called SiteLinkDataUpdate, the variable should be called $siteLinkDataUpdates. The names should be consistent. We should decide whether these are passive things (updates) or active things (updaters).",
+      "revId": "30c2183d71d193a7494545b202cd06871e6f4464",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
