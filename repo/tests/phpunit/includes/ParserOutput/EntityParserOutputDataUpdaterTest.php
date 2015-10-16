@@ -71,7 +71,7 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
-	public function testGivenInvalidDataUpdate_constructorThrowsException( array $argument ) {
+	public function testGivenInvalidDataUpdater_constructorThrowsException( array $argument ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 		new EntityParserOutputDataUpdater( new ParserOutput(), $argument );
 	}

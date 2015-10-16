@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
- * @todo have ItemParserOutputDataUpdate, etc. instead.
+ * @todo have ItemParserOutputDataUpdater, etc. instead.
  *
  * @since 0.5
  *
@@ -46,11 +46,11 @@ class EntityParserOutputDataUpdater {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( ParserOutput $parserOutput, array $dataUpdaters ) {
-		foreach ( $dataUpdaters as $dataUpdater ) {
-			if ( $dataUpdater instanceof StatementDataUpdater ) {
-				$this->statementDataUpdaters[] = $dataUpdater;
-			} elseif ( $dataUpdater instanceof SiteLinkDataUpdater ) {
-				$this->siteLinkDataUpdaters[] = $dataUpdater;
+		foreach ( $dataUpdaters as $updater ) {
+			if ( $updater instanceof StatementDataUpdater ) {
+				$this->statementDataUpdaters[] = $updater;
+			} elseif ( $updater instanceof SiteLinkDataUpdater ) {
+				$this->siteLinkDataUpdaters[] = $updater;
 			} else {
 				throw new InvalidArgumentException( 'Each $dataUpdaters element must be a '
 					. 'StatementDataUpdater, SiteLinkDataUpdater or both' );
@@ -83,8 +83,8 @@ class EntityParserOutputDataUpdater {
 		}
 
 		foreach ( $entity->getStatements() as $statement ) {
-			foreach ( $this->statementDataUpdaters as $dataUpdater ) {
-				$dataUpdater->processStatement( $statement );
+			foreach ( $this->statementDataUpdaters as $updater ) {
+				$updater->processStatement( $statement );
 			}
 		}
 	}
@@ -98,15 +98,15 @@ class EntityParserOutputDataUpdater {
 		}
 
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			foreach ( $this->siteLinkDataUpdaters as $dataUpdater ) {
-				$dataUpdater->processSiteLink( $siteLink );
+			foreach ( $this->siteLinkDataUpdaters as $updater ) {
+				$updater->processSiteLink( $siteLink );
 			}
 		}
 	}
 
 	public function finish() {
-		foreach ( $this->dataUpdaters as $dataUpdater ) {
-			$dataUpdater->updateParserOutput( $this->parserOutput );
+		foreach ( $this->dataUpdaters as $updater ) {
+			$updater->updateParserOutput( $this->parserOutput );
 		}
 	}
 
