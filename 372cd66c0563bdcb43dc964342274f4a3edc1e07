@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_c39e5e66",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-16T14:07:24Z",
+      "side": 1,
+      "message": "Not relevant for this patch, but I would expect the order rank \u003e mainSnak \u003e qualifiers \u003e references.",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_638c5233",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-16T14:07:24Z",
+      "side": 1,
+      "message": "The order of these is still a little bit different from the documentation.",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_23965a43",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-16T14:07:24Z",
+      "side": 1,
+      "message": "These 3 are documented to be optional. Either remove them here or fix the documentation, please.",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c3bbbeb8",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-16T14:07:24Z",
+      "side": 1,
+      "message": "Does it make sense to prepare a patch that does nothing but introducing this qualifiersListItemAdapter option? And the make these patches depend on each other? I do have the feeling this could help making review much easier.",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e3cda263",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-16T14:07:24Z",
+      "side": 1,
+      "message": "We are usually not using two stars in the end, only in the beginning of a doc comment.",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
