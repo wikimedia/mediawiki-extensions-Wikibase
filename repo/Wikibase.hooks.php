@@ -33,6 +33,7 @@ use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
 use WikiPage;
 
 /**
@@ -140,7 +141,8 @@ final class RepoHooks {
 
 		/** @var SqlStore $store */
 		$store = WikibaseRepo::getDefaultInstance()->getStore();
-		$store->doSchemaUpdate( $updater );
+		$schemaUpdater = new DatabaseSchemaUpdater( $store );
+		$schemaUpdater->doSchemaUpdate( $updater );
 
 		return true;
 	}
