@@ -16,6 +16,24 @@
       "revId": "bca6a4a34f3f70b7b17acd2ba674b9eb3cd25c88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2af0668d",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-17T20:17:39Z",
+      "side": 1,
+      "message": "Moved the @throws for the Storage- and InvalidArgumentException together, so that they\u0027re more obvious. The only other exception that could theoretically bubble up to this point, a RevisionedUnresolvedRedirectException, can only happen if we were to load Items.",
+      "parentUuid": "0ebaf39b_2ae7060f",
+      "revId": "bca6a4a34f3f70b7b17acd2ba674b9eb3cd25c88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
