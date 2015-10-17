@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_2ae7060f",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-10-17T17:27:45Z",
+      "side": 1,
+      "message": "StorageException is not InvalidArgumentException\n\nentityRevisionLookup-\u003egetEntityRevision also throws non StorageException",
+      "revId": "bca6a4a34f3f70b7b17acd2ba674b9eb3cd25c88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
