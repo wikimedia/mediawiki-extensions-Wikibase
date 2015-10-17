@@ -16,6 +16,24 @@
       "revId": "2551a33907d49c72e837eae1f5fc5dc89cd5a26a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_0a480231",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-17T16:27:05Z",
+      "side": 1,
+      "message": "Changed... made this target specific in case of site link changes only.",
+      "parentUuid": "0ebaf39b_4614bca0",
+      "revId": "2551a33907d49c72e837eae1f5fc5dc89cd5a26a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
