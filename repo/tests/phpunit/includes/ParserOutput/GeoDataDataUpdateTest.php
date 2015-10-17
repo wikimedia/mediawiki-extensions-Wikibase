@@ -33,8 +33,15 @@ use Wikibase\Repo\ParserOutput\GeoDataDataUpdate;
  */
 class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 
-	protected function setUp() {
+	private function willSkipTests() {
 		if ( !class_exists( 'GeoData' ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	protected function setUp() {
+		if ( $this->willSkipTests() ) {
 			$this->markTestSkipped( 'GeoData extension is required.' );
 		}
 
@@ -62,6 +69,10 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 	}
 
 	public function processStatementProvider() {
+		if ( $this->willSkipTests() ) {
+			return array();
+		}
+
 		$statements = $this->getStatements();
 		$coords = $this->getCoords();
 
