@@ -34,6 +34,24 @@
       "revId": "bca6a4a34f3f70b7b17acd2ba674b9eb3cd25c88",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_00cea15f",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-10-18T14:48:53Z",
+      "side": 1,
+      "message": "That is making a lot of assumptions about the dependencies of this class not part of their contract. Making a class appear to not do this via constructor injection and then doing it anyway is quite dangerous.",
+      "parentUuid": "0ebaf39b_2af0668d",
+      "revId": "bca6a4a34f3f70b7b17acd2ba674b9eb3cd25c88",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
