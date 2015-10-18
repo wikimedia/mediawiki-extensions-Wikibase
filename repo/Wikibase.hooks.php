@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use ApiBase;
 use ApiEditPage;
+use ApiQuerySiteinfo;
 use BaseTemplate;
 use Content;
 use ContentHandler;
@@ -957,6 +958,22 @@ final class RepoHooks {
 			default:
 				return true;
 		}
+	}
+
+	/**
+	 * Adds the list of datatypes to the API
+	 * @param ApiQuerySiteinfo $api
+	 * @param array $data
+	 */
+	public static function onAPIQuerySiteInfoGeneralInfo( ApiQuerySiteinfo $api, array &$data ) {
+		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
+		$types = array();
+		foreach ( $dataTypeFactory->getTypeIds() as $typeId ) {
+			$dataType = $dataTypeFactory->getType( $typeId );
+			$types[$typeId] = array( 'type' => $dataType->getDataValueType() );
+		}
+
+		$data['wikibase-datatypes'] = $types;
 	}
 
 	/**
