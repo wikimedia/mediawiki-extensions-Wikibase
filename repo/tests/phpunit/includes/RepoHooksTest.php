@@ -21,6 +21,7 @@ use WikiImporter;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class RepoHooksTest extends \MediaWikiTestCase {
 
@@ -36,6 +37,16 @@ class RepoHooksTest extends \MediaWikiTestCase {
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $this->saveAllowImport );
 
 		parent::tearDown();
+	}
+
+	public function testOnAPIQuerySiteInfoGeneralInfo() {
+		$api = $this->getMockBuilder( 'ApiQuerySiteinfo' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$actual = array();
+		RepoHooks::onAPIQuerySiteInfoGeneralInfo( $api, $actual );
+		$this->assertContainsOnly( 'string', $actual['wikibase-valuetypes'] );
 	}
 
 	public function revisionInfoProvider() {
