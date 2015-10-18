@@ -26,7 +26,7 @@
 	"wikibase-entitytermsforlanguagelistview-label": "Етикет",
 	"wikibase-entitytermsforlanguagelistview-language": "Език",
 	"wikibase-label-empty": "Не е зададен етикет",
-	"wikibase-label-edit-placeholder-language-aware": "въведете етикет на ($1)",
+	"wikibase-label-edit-placeholder-language-aware": "въведете етикет на $1",
 	"wikibase-description-empty": "Не е въведено описание",
 	"wikibase-description-edit-placeholder": "въведете описание",
 	"wikibase-description-edit-placeholder-language-aware": "въведете описание на $1",

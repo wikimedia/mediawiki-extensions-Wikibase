@@ -11,6 +11,8 @@
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
 	"tooltip-t-wikibase": "Link na povezane podatke spremišnih stavki",
 	"wikibase-after-page-move": "Možete također [$1 ažurirati] asociranu stavku Wikipodataka za održavanje jezičnih veza na premještenoj stranici.",
+	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}} stavka] povezana s ovom stranicom bit će automatski ažurirana. Imajte na umu da se ovo ponekad ne dogodi momentalno.",
+	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} stavka] povezana s ovom stranicom bit će automatski ažurirana. Imajte na umu da se ovo ponekad ne dogodi momentalno.",
 	"wikibase-comment-remove": "Asocirana stavka Wikipodataka je izbrisana. Jezične veze su uklonjene.",
 	"wikibase-comment-linked": "Neka stavka Wikipodataka je povezana prema ovoj stranici.",
 	"wikibase-comment-unlink": "Ova stranica je odvojena od stavke sa Wikipodataka. Jezične veze su uklonjene.",
