@@ -30,6 +30,20 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		);
 	}
 
+	protected function setUp() {
+		parent::setUp();
+
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
+		$this->setAllowDataAccessInUserLanguage( false );
+	}
+
+	protected function tearDown() {
+		parent::tearDown();
+
+		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
+	}
+
 	public function testConstructor() {
 		$engine = Scribunto::newDefaultEngine( array() );
 		$luaWikibaseLibrary = new Scribunto_LuaWikibaseEntityLibrary( $engine );
@@ -100,6 +114,14 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$engine->load();
 
 		return new Scribunto_LuaWikibaseEntityLibrary( $engine );
+	}
+
+	/**
+	 * @param bool $value
+	 */
+	private function setAllowDataAccessInUserLanguage( $value ) {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
 	}
 
 }

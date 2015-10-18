@@ -51,6 +51,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$this->oldAllowDataAccessInUserLanguage = $settings->getSetting( 'allowDataAccessInUserLanguage' );
+		$this->setAllowDataAccessInUserLanguage( false );
 	}
 
 	protected function tearDown() {
@@ -254,11 +255,17 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487' );
 
 		$snaks = $entityArr[0]['claims']['P342'][1]['qualifiers'];
-		$this->assertSame(
-			array( 'A qualifier Snak, Moar qualifiers' ),
-			$luaWikibaseLibrary->renderSnaks( $snaks )
-		);
+		$expected = array( 'A qualifier Snak, Moar qualifiers' );
+		if ( $allowDataAccessInUserLanguage ) {
+			global $wgUser;
 
+			$lang = Language::factory( $wgUser->getOption( 'language' ) );
+			$expected = array(
+				$lang->commaList( array( 'A qualifier Snak', 'Moar qualifiers' ) )
+			);
+		}
+
+		$this->assertSame( $expected, $luaWikibaseLibrary->renderSnaks( $snaks ) );
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
