@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_ddf076c6",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/GeoDataDataUpdateTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-18T00:02:21Z",
+      "side": 1,
+      "message": "array( array() ) should already work here",
+      "revId": "050d3dbf95d5b86c01336428adbb486ec4c5f8fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
