@@ -119,6 +119,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
+	 * @property {jQuery.wikibase.snakview}
+	 * @private
+	 */
+	_mainSnakSnakView: null,
+
+	/**
 	 * @property {jQuery.wikibase.statementview.RankSelector}
 	 * @private
 	 */
@@ -196,6 +202,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 */
 	_createMainSnak: function( snak ) {
 		if ( this.$mainSnak.data( 'snakview' ) ) {
+			this._mainSnakSnakView = this.$mainSnak.data( 'snakview' );
 			return;
 		}
 
@@ -210,7 +217,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			event.stopPropagation();
 		} );
 
-		this.$mainSnak.snakview( {
+		this._mainSnakSnakView = this.$mainSnak.snakview( {
 			value: snak || undefined,
 			locked: this.options.locked.mainSnak,
 			autoStartEditing: false,
@@ -220,7 +227,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			entityStore: this.options.entityStore,
 			valueViewBuilder: this.options.valueViewBuilder,
 			encapsulatedBy: ':' + this.widgetFullName.toLowerCase()
-		} );
+		} ).data( 'snakview' );
 	},
 
 	/**
@@ -314,30 +321,30 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return;
 		}
 
+		var lia = new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: $.wikibase.referenceview,
+			newItemOptionsFn: function( value ) {
+				return {
+					value: value || null,
+					statementGuid: self.options.value
+						? self.options.value.getClaim().getGuid()
+						: null,
+					dataTypeStore: self.options.dataTypeStore,
+					entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
+					entityIdPlainFormatter: self.options.entityIdPlainFormatter,
+					entityStore: self.options.entityStore,
+					valueViewBuilder: self.options.valueViewBuilder,
+					referencesChanger: self.options.referencesChanger
+				};
+			}
+		} );
+
 		$listview.listview( {
-			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-				listItemWidget: $.wikibase.referenceview,
-				newItemOptionsFn: function( value ) {
-					return {
-						value: value || null,
-						statementGuid: self.options.value
-							? self.options.value.getClaim().getGuid()
-							: null,
-						dataTypeStore: self.options.dataTypeStore,
-						entityIdHtmlFormatter: self.options.entityIdHtmlFormatter,
-						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
-						entityStore: self.options.entityStore,
-						valueViewBuilder: self.options.valueViewBuilder,
-						referencesChanger: self.options.referencesChanger
-					};
-				}
-			} ),
+			listItemAdapter: lia,
 			value: references
 		} );
 
 		this._referencesListview = $listview.data( 'listview' );
-
-		var lia = this._referencesListview.listItemAdapter();
 
 		$listview
 		.on( 'listviewitemadded listviewitemremoved', function( event, value, $li ) {
@@ -427,7 +434,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this._rankSelector.destroy();
 		this.$rankSelector.off( '.' + this.widgetName );
 
-		this.$mainSnak.snakview( 'destroy' );
+		this._mainSnakSnakView.destroy();
 		this.$mainSnak.off( '.' + this.widgetName );
 
 		this._destroyQualifiersListView();
@@ -473,7 +480,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		this._createMainSnak( this.options.value
 				? this.options.value.getClaim().getMainSnak()
-				: this.option( 'predefined' ).mainSnak || null
+				: this.options.predefined.mainSnak || null
 		);
 
 		if ( this.isInEditMode()
@@ -536,7 +543,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			}
 		}
 
-		return this.$mainSnak.data( 'snakview' ).isInitialValue();
+		return this._mainSnakSnakView.isInitialValue();
 	},
 
 	/**
@@ -547,7 +554,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {wikibase.datamodel.Statement|null}
 	 */
 	_instantiateStatement: function( guid ) {
-		var mainSnak = this.$mainSnak.data( 'snakview' ).snak();
+		var mainSnak = this._mainSnakSnakView.snak();
 
 		if ( !mainSnak ) {
 			return null;
@@ -693,7 +700,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			.fail( deferred.reject );
 		} );
 
-		this.$mainSnak.data( 'snakview' ).startEditing();
+		this._mainSnakSnakView.startEditing();
 
 		return deferred.promise();
 	},
@@ -703,8 +710,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @protected
 	 */
 	_afterStopEditing: function( dropValue ) {
-		if ( this.$mainSnak.data( 'snakview' ) ) {
-			this.$mainSnak.data( 'snakview' ).stopEditing( dropValue );
+		if ( this._mainSnakSnakView ) {
+			this._mainSnakSnakView.stopEditing( dropValue );
 		}
 		this._stopEditingQualifiers( dropValue );
 		this._rankSelector.stopEditing( dropValue );
@@ -773,7 +780,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			throw new Error( 'Unable to instantiate Statement' );
 		}
 
-		return this.option( 'claimsChanger' ).setStatement( statement )
+		return this.options.claimsChanger.setStatement( statement )
 		.done( function( savedStatement ) {
 			// Update model of represented Statement:
 			self.options.value = savedStatement;
@@ -786,7 +793,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	isEmpty: function() {
 		return false;
 		// TODO: Supposed to do at least...
-		// this.$mainSnak.data( 'snakview' ).isEmpty(); (does not exist at the moment of writing)
+		// this._mainSnakSnakView.isEmpty(); (does not exist at the moment of writing)
 	},
 
 	/**
@@ -796,7 +803,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var snaklistviews,
 			i;
 
-		if ( this.$mainSnak.data( 'snakview' ) && !this.$mainSnak.data( 'snakview' ).isValid() ) {
+		if ( this._mainSnakSnakView && !this._mainSnakSnakView.isValid() ) {
 			return false;
 		}
 
@@ -829,7 +836,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'disabled' ) {
-			this.$mainSnak.data( 'snakview' ).option( key, value );
+			this._mainSnakSnakView.option( key, value );
 			if ( this._qualifiers ) {
 				this._qualifiers.option( key, value );
 			}
@@ -844,7 +851,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @inheritdoc
 	 */
 	focus: function() {
-		this.$mainSnak.data( 'snakview' ).focus();
+		this._mainSnakSnakView.focus();
 	}
 } );
 
