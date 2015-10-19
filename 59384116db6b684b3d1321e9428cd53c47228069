@@ -16,6 +16,24 @@
       "revId": "59384116db6b684b3d1321e9428cd53c47228069",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2c171e58",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-19T12:30:24Z",
+      "side": 1,
+      "message": "No ticket, no merge, nooo ticket, no merge, I say",
+      "parentUuid": "0ebaf39b_ac330e09",
+      "revId": "59384116db6b684b3d1321e9428cd53c47228069",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
