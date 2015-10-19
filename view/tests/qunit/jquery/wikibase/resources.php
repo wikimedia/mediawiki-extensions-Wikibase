@@ -290,7 +290,6 @@ return call_user_func( function() {
 				'test.sinonjs',
 				'wikibase.datamodel.Claim',
 				'wikibase.datamodel.PropertyNoValueSnak',
-				'wikibase.datamodel.PropertyValueSnak',
 				'wikibase.datamodel.Reference',
 				'wikibase.datamodel.ReferenceList',
 				'wikibase.datamodel.Statement',
