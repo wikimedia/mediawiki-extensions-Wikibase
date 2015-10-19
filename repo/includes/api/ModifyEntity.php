@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -207,7 +208,12 @@ abstract class ModifyEntity extends ApiBase {
 
 			try {
 				$entityRevision = $this->revisionLookup->getEntityRevision( $entityId, $baseRevisionId );
+			} catch ( EntityLookupException $ex ) {
+				$this->errorReporter->dieException( $ex, 'no-such-entity' );
 			} catch ( StorageException $ex ) {
+				// @fixme EntityRevisionLookup still throws BadRevisionException, which
+				// is a subclass of StorageException, so we still have some inconsistency
+				// and need to check both.
 				$this->errorReporter->dieException( $ex, 'no-such-entity' );
 			}
 
