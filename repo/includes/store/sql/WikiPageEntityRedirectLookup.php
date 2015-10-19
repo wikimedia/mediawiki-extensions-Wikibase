@@ -105,7 +105,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
-		$forUpdate === 'for update' ? DB_MASTER : DB_SLAVE;
+		$forUpdate = $forUpdate === 'for update' ? DB_MASTER : DB_SLAVE;
 		$db = $this->loadBalancer->getConnection( $forUpdate );
 
 		$row = $db->selectRow(
