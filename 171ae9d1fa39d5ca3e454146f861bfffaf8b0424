@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_cc75222e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-19T10:42:50Z",
+      "side": 1,
+      "message": "For what do we need this?",
+      "revId": "171ae9d1fa39d5ca3e454146f861bfffaf8b0424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
