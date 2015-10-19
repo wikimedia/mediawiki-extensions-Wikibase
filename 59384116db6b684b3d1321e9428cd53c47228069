@@ -34,6 +34,24 @@
       "revId": "59384116db6b684b3d1321e9428cd53c47228069",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_57f21a04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T17:45:55Z",
+      "side": 1,
+      "message": "Yeah, and I don\u0027t get it. You can easily see in the related changes why this is necessary for a ticket. That doesn\u0027t make _this_ resolving a ticket. I\u0027d rather have you not merging this than wrongly linking it.",
+      "parentUuid": "0ebaf39b_2c171e58",
+      "revId": "59384116db6b684b3d1321e9428cd53c47228069",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
