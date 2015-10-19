@@ -16,6 +16,24 @@
       "revId": "5f715d67e4b65bc53c6a4339032fdca43fe2b67f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_6c367602",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T12:20:42Z",
+      "side": 1,
+      "message": "What do you mean by ›this‹? `_getSnakViewOptions` is clearly part of implementing `getListItemAdapterForSnakView`.",
+      "parentUuid": "0ebaf39b_0cc9fa54",
+      "revId": "5f715d67e4b65bc53c6a4339032fdca43fe2b67f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }

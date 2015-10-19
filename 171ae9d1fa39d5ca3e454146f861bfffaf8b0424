@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_4c4cd29f",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T12:20:42Z",
+      "side": 0,
+      "message": "It\u0027s necessary to get the tests passing again. I also mentioned this change in the commit message. To me it appears to be a minor bug, maybe a left-over or something. I can put it in a separate commit if you want me to, but I would be quite reluctant to open a ticket just for this.",
+      "parentUuid": "0ebaf39b_acd78ef1",
+      "revId": "171ae9d1fa39d5ca3e454146f861bfffaf8b0424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_ccd20201",
         "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-19T10:58:57Z",
       "side": 0,
       "message": "This is not part of the ticket",
+      "revId": "171ae9d1fa39d5ca3e454146f861bfffaf8b0424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_cc576228",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T12:20:42Z",
+      "side": 0,
+      "message": "It simplified adapting the tests and it\u0027s mentioned in the commit message. I can move it out into a separate change if you want me to.",
+      "parentUuid": "0ebaf39b_ccd20201",
       "revId": "171ae9d1fa39d5ca3e454146f861bfffaf8b0424",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
