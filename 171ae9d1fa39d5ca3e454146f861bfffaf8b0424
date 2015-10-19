@@ -16,6 +16,24 @@
       "revId": "171ae9d1fa39d5ca3e454146f861bfffaf8b0424",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2c407e5a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T12:23:32Z",
+      "side": 1,
+      "message": "Note that I only moved this within the object literal. To answer your question, the statement guid is used to identify the statement the references belongs to when saving it. It\u0027s the thing that makes it currently impossible to add references to a new statement.",
+      "parentUuid": "0ebaf39b_cc75222e",
+      "revId": "171ae9d1fa39d5ca3e454146f861bfffaf8b0424",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
