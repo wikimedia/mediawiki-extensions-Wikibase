@@ -145,11 +145,11 @@ QUnit.test( 'remove', function( assert ) {
 			),
 			referencesChanger: referencesChanger
 		} ),
-		statementview = $statementview.data( 'statementview' );
+		statementview = $statementview.data( 'statementview' ),
+		referenceslistview = statementview._referencesListview,
+		referenceview = referenceslistview.listItemAdapter().liInstance( $( referenceslistview.items()[0] ) );
 
-	statementview.remove(
-		$statementview.find( ':wikibase-referenceview' ).data( 'referenceview' )
-	);
+	statementview.remove( referenceview );
 	sinon.assert.calledWith( referencesChanger.removeReference, 'guid', reference );
 } );
 
@@ -216,14 +216,18 @@ QUnit.test( 'performs correct claimsChanger call', function( assert ) {
 		} ),
 		statementview = $statementview.data( 'statementview' );
 
-	statementview.startEditing();
-
-	statementview.$mainSnak.find( ':wikibase-entityselector' ).data( 'wikibase-entityselector' )._select( { id: 'P1' } );
-	statementview.$mainSnak.find( ':wikibase-snaktypeselector' ).data( 'snaktypeselector' ).snakType( 'novalue' );
-
 	QUnit.stop();
+	statementview.startEditing().then( function() {
+		QUnit.start();
+		assert.ok( statementview.isInEditMode(), 'should be in edit mode after starting editing' );
 
-	statementview.stopEditing( false ).then( function() {
+		// Change main snak
+		statementview.$mainSnak.find( ':wikibase-entityselector' ).data( 'wikibase-entityselector' )._select( { id: 'P1' } );
+		statementview.$mainSnak.find( ':wikibase-snaktypeselector' ).data( 'snaktypeselector' ).snakType( 'novalue' );
+
+		QUnit.stop();
+		return statementview.stopEditing( false );
+	} ).then( function() {
 		QUnit.start();
 		sinon.assert.calledWith(
 			setStatement,
