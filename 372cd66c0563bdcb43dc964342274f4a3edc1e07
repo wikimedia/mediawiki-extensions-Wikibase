@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_91ff45fc",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T08:02:37Z",
+      "side": 1,
+      "message": "Why that order?",
+      "parentUuid": "0ebaf39b_c39e5e66",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_638c5233",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
         "patchSetId": 2
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_b1192980",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T08:02:37Z",
+      "side": 1,
+      "message": "At this point they are set with the default values, though, if not passed. However, it\u0027s not necessary to check them either.",
+      "parentUuid": "0ebaf39b_23965a43",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c3bbbeb8",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
         "patchSetId": 2
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_714ad160",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T08:02:37Z",
+      "side": 1,
+      "message": "Pulling out any of these three injections here wouldn\u0027t make a lot of sense from my point of view, since we would have to pass all options to the statementview until all three injections are in place.",
+      "parentUuid": "0ebaf39b_c3bbbeb8",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_e3cda263",
         "filename": "view/resources/wikibase/view/ViewFactory.js",
         "patchSetId": 2
@@ -81,6 +135,24 @@
       "writtenOn": "2015-10-16T14:07:24Z",
       "side": 1,
       "message": "We are usually not using two stars in the end, only in the beginning of a doc comment.",
+      "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f13d61b9",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T08:02:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_e3cda263",
       "revId": "372cd66c0563bdcb43dc964342274f4a3edc1e07",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
