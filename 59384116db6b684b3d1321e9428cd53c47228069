@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_ac330e09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-19T12:25:33Z",
+      "side": 1,
+      "message": "To me, this change\u0027s relation to that bug is only transitive. On its own, this is just a small refactoring and code style change, and does not help in any way with T75380.",
+      "revId": "59384116db6b684b3d1321e9428cd53c47228069",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
