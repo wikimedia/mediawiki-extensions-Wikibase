@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\SiteLinkConflictLookup;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
 /**
  * Validator for checking that site links are unique across all Items.
