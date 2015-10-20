@@ -4,8 +4,13 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseBase;
 use DBAccessBase;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
 /**
@@ -16,7 +21,13 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflictLookup {
+class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflictLookup,
+	EntityStoreWatcher {
+
+	/**
+	 * @var ItemId[]
+	 */
+	private $itemConflictsToIgnore = array();
 
 	/**
 	 * @see SiteLinkConflictLookup::getConflictsForItem
@@ -72,11 +83,15 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 		$conflicts = array();
 
 		foreach ( $conflictingLinks as $link ) {
-			$conflicts[] = array(
-				'siteId' => $link->ips_site_id,
-				'itemId' => (int)$link->ips_item_id,
-				'sitePage' => $link->ips_site_page,
-			);
+			$numericId = (int)$link->ips_item_id;
+
+			if ( !array_key_exists( $numericId, $this->itemConflictsToIgnore ) ) {
+				$conflicts[] = array(
+					'siteId' => $link->ips_site_id,
+					'itemId' => $numericId,
+					'sitePage' => $link->ips_site_page,
+				);
+			}
 		}
 
 		if ( !$db ) {
@@ -84,6 +99,43 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 		}
 
 		return $conflicts;
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityDeleted
+	 *
+	 * @param EntityId $entityId
+	 */
+	public function entityDeleted( EntityId $entityId ) {
+		// no-op
+	}
+
+	/**
+	 * @see EntityStoreWatcher::entityUpdated
+	 *
+	 * @param EntityRevision $entityRevision
+	 */
+	public function entityUpdated( EntityRevision $entityRevision ) {
+		$entity = $entityRevision->getEntity();
+
+		if ( $entity instanceof Item ) {
+			$itemId = $entity->getId();
+
+			if ( $itemId instanceof ItemId ) {
+				$numericId = $itemId->getNumericId();
+				$this->itemConflictsToIgnore[$numericId] = $itemId;
+			}
+		}
+	}
+
+	/**
+	 * @see EntityStoreWatcher::redirectUpdated
+	 *
+	 * @param EntityRedirect $entityRedirect
+	 * @param int $revisionId
+	 */
+	public function redirectUpdated( EntityRedirect $entityRedirect, $revisionId ) {
+		// no-op
 	}
 
 }

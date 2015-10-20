@@ -68,6 +68,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
@@ -82,6 +83,7 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -197,6 +199,11 @@ class WikibaseRepo {
 	 * @var ContentLanguages|null
 	 */
 	private $monolingualTextLanguages = null;
+
+	/**
+	 * @var SiteLinkConflictLookup|null
+	 */
+	private $siteLinkConflictLookup = null;
 
 	/**
 	 * @var DataTypeDefinitions
@@ -948,7 +955,7 @@ class WikibaseRepo {
 	public function getEntityConstraintProvider() {
 		return new EntityConstraintProvider(
 			$this->getLabelDescriptionDuplicateDetector(),
-			$this->getStore()->getSiteLinkConflictLookup()
+			$this->getSiteLinkConflictLookup()
 		);
 	}
 
@@ -1385,6 +1392,32 @@ class WikibaseRepo {
 
 	private function getHtmlSnakFormatterFactory() {
 		return new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() );
+	}
+
+	private function getSiteLinkConflictLookup() {
+		if ( $this->siteLinkConflictLookup === null ) {
+			$this->siteLinkConflictLookup = $this->store->getSiteLinkConflictLookup();
+		}
+
+		return $this->siteLinkConflictLookup;
+	}
+
+	/**
+	 * @return ItemMergeInteractor
+	 */
+	public function newItemMergeInteractor( User $user, IContextSource $context ) {
+		$entityStore = $this->getEntityStore();
+		$entityStore->registerWatcher( $this->getSiteLinkConflictLookup() );
+
+		return new ItemMergeInteractor(
+			$this->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
+			$this->getEntityRevisionLookup( 'uncached' ),
+			$entityStore,
+			$this->getEntityPermissionChecker(),
+			$this->getSummaryFormatter(),
+			$user,
+			$this->newRedirectCreationInteractor( $user, $context )
+		);
 	}
 
 }
