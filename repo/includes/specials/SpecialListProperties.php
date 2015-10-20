@@ -273,9 +273,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 * @see SpecialPage::getSubpagesForPrefixSearch
 	 */
 	protected function getSubpagesForPrefixSearch() {
-		return array_map( function ( $dataType ) {
-			return $dataType->getId();
-		}, $this->dataTypeFactory->getTypes() );
+		return $this->dataTypeFactory->getTypeIds();
 	}
 
 }
