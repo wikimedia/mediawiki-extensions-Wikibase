@@ -4,7 +4,7 @@ namespace Wikibase\Test\Repo\Validators;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\SiteLinkConflictLookup;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\SiteLinkUniquenessValidator;
 use Wikibase\Test\ChangeOpTestMockProvider;
 

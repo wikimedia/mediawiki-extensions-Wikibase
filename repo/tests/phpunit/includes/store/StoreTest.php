@@ -93,4 +93,14 @@ class StoreTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\Repo\Store\ChangeStore', $store->getChangeStore() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetSiteLinkConflictLookup( Store $store ) {
+		$this->assertInstanceOf(
+			'\Wikibase\Repo\Store\SiteLinkConflictLookup',
+			$store->getSiteLinkConflictLookup()
+		);
+	}
+
 }
