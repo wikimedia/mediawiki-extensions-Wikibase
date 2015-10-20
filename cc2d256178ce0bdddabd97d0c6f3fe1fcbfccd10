@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_b8f102dc",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-10-20T11:28:14Z",
+      "side": 1,
+      "message": "Maybe extract this to reduce nesting",
+      "revId": "cc2d256178ce0bdddabd97d0c6f3fe1fcbfccd10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
