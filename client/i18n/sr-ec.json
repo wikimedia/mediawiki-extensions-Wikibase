@@ -55,7 +55,7 @@
 	"unconnectedpages": "Странице које нису повезане са ставкама",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|међујезичка веза|међујезичких веза}} на страници)",
 	"wikibase-unconnectedpages-submit": "Прикажи странице",
-	"pageswithbadges": "Странице с беџевима",
+	"pageswithbadges": "Странице с значкама",
 	"wikibase-pageinfo-entity-id": "ИД ставке на Википодацима",
 	"wikibase-pageinfo-entity-id-none": "Нема",
 	"wikibase-otherprojects": "Остали пројекти",

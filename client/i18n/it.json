@@ -72,7 +72,7 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|collegamento interlinguistico|collegamenti interlinguistici}} nella pagina)",
 	"wikibase-unconnectedpages-submit": "Mostra pagine",
 	"pageswithbadges": "Pagine con distintivi",
-	"pageswithbadges-summary": "In questa pagina vengono elencate le pagine con distintivi (ad es. voci in vetrina o di qualità). La lista è orinata per ID decrescente, quindi le pagine più recenti appariranno in alto.",
+	"pageswithbadges-summary": "In questa pagina vengono elencate le pagine con distintivi (ad esempio voci in vetrina o di qualità). La lista è ordinata per ID decrescente, quindi le pagine più recenti appariranno in alto.",
 	"wikibase-pageswithbadges-invalid-id": "$1 non è un ID elemento valido",
 	"wikibase-pageswithbadges-legend": "Elenco di pagine con un distintivo specificato",
 	"wikibase-pageswithbadges-badge": "Distintivo:",

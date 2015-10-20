@@ -352,5 +352,7 @@
 	"apihelp-wbsetaliases-example-3": "Удалить Foo и Bar из списка синонимов на английском языке для сущности с ID Q1",
 	"apihelp-wbsetaliases-example-4": "Удалить Foo из списка синонимов на английском языке для сущности с ID Q1, добавив при этом туда Bar",
 	"apihelp-wbsetdescription-param-language": "Язык описания",
-	"apihelp-wbsetdescription-param-value": "Устанавливаемое для описания значение"
+	"apihelp-wbsetdescription-param-value": "Устанавливаемое для описания значение",
+	"apihelp-wbsetlabel-param-language": "Язык метки",
+	"apihelp-wbsetlabel-param-value": "Значение метки"
 }
