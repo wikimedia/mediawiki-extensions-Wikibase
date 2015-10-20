@@ -25,8 +25,8 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\DataTypeValidatorFactory;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\CompositeFingerprintValidator;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
@@ -504,7 +504,7 @@ class ChangeOpTestMockProvider {
 			$getConflictsForItem = array( $this, 'getSiteLinkConflictsForItem' );
 		}
 
-		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkConflictLookup' );
+		$mock = $this->getMock( 'Wikibase\Repo\Store\SiteLinkConflictLookup' );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getConflictsForItem' )
 			->will( PHPUnit_Framework_TestCase::returnCallback( $getConflictsForItem ) );

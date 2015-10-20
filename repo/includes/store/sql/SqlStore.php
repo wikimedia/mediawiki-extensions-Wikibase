@@ -24,7 +24,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
@@ -33,7 +32,9 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
+use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\Store\SQL\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
@@ -745,7 +746,7 @@ class SqlStore implements Store {
 	 * @return SiteLinkConflictLookup
 	 */
 	public function getSiteLinkConflictLookup() {
-		return new SiteLinkTable( 'wb_items_per_site', false );
+		return new SqlSiteLinkConflictLookup();
 	}
 
 	/**
