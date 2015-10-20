@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
@@ -269,7 +270,11 @@ class ItemMergeInteractor {
 	}
 
 	private function saveEntity( Entity $entity, Summary $summary, $bot ) {
-		$flags = EDIT_UPDATE;
+		// Given we already check all constraints in ChangeOpsMerge, it's
+		// fine to ignore them here. This is also needed to not run into
+		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
+		// for reference)
+		$flags = EDIT_UPDATE | EntityContent::EDIT_IGNORE_CONSTRAINTS;
 		if ( $bot && $this->user->isAllowed( 'bot' ) ) {
 			$flags |= EDIT_FORCE_BOT;
 		}
