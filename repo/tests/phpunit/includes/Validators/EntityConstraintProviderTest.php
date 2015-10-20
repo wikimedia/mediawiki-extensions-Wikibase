@@ -22,7 +22,7 @@ class EntityConstraintProviderTest extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$siteLinkConflictLookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkConflictLookup' );
+		$siteLinkConflictLookup = $this->getMock( 'Wikibase\Repo\Store\SiteLinkConflictLookup' );
 
 		return new EntityConstraintProvider( $duplicateDetector, $siteLinkConflictLookup );
 	}

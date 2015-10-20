@@ -27,7 +27,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 use Wikibase\Lib\Store\HashSiteLinkStore;
-use Wikibase\Lib\Store\SiteLinkConflictLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\StorageException;
@@ -52,8 +51,7 @@ class MockRepository implements
 	EntityRedirectLookup,
 	EntityStore,
 	PropertyDataTypeLookup,
-	SiteLinkLookup,
-	SiteLinkConflictLookup
+	SiteLinkLookup
 {
 
 	/**
@@ -185,51 +183,6 @@ class MockRepository implements
 	 */
 	public function hasEntity( EntityId $entityId ) {
 		return $this->getEntity( $entityId ) !== null;
-	}
-
-	/**
-	 * @see SiteLinkConflictLookup::getConflictsForItem
-	 *
-	 * @param Item $item
-	 * @param DatabaseBase|null $db
-	 *
-	 * @return array[]
-	 */
-	public function getConflictsForItem( Item $item, DatabaseBase $db = null ) {
-		$newLinks = array();
-
-		/** @var SiteLink $siteLink */
-		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			$newLinks[$siteLink->getSiteId()] = $siteLink->getPageName();
-		}
-
-		$conflicts = array();
-
-		foreach ( array_keys( $this->entities ) as $idString ) {
-			$itemId = $this->parseId( $idString );
-
-			if ( !( $itemId instanceof ItemId ) ) {
-				continue;
-			}
-
-			$oldLinks = $this->getLinks( array( $itemId->getNumericId() ) );
-
-			foreach ( $oldLinks as $link ) {
-				list( $wiki, $page, $numericId ) = $link;
-
-				if ( $item->getId() && $numericId === $item->getId()->getNumericId() ) {
-					continue;
-				}
-
-				if ( isset( $newLinks[$wiki] ) ) {
-					if ( $page == $newLinks[$wiki] ) {
-						$conflicts[] = $link;
-					}
-				}
-			}
-		}
-
-		return $conflicts;
 	}
 
 	/**

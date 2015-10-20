@@ -19,7 +19,7 @@ use Wikibase\DataModel\SiteLink;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConflictLookup {
+class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 	/**
 	 * @since 0.1
@@ -264,73 +264,6 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore, SiteLinkConfl
 		$pageName = $siteLink->getPageName();
 
 		return $this->getItemIdForLink( $siteId, $pageName );
-	}
-
-	/**
-	 * @see SiteLinkConflictLookup::getConflictsForItem
-	 *
-	 * @param Item $item
-	 * @param DatabaseBase|null $db
-	 *
-	 * @return array[]
-	 */
-	public function getConflictsForItem( Item $item, DatabaseBase $db = null ) {
-		$siteLinks = $item->getSiteLinkList();
-
-		if ( $siteLinks->isEmpty() ) {
-			return array();
-		}
-
-		if ( $db ) {
-			$dbr = $db;
-		} else {
-			$dbr = $this->getConnection( DB_SLAVE );
-		}
-
-		$anyOfTheLinks = '';
-
-		/** @var SiteLink $siteLink */
-		foreach ( $siteLinks as $siteLink ) {
-			if ( $anyOfTheLinks !== '' ) {
-				$anyOfTheLinks .= "\nOR ";
-			}
-
-			$anyOfTheLinks .= '(';
-			$anyOfTheLinks .= 'ips_site_id=' . $dbr->addQuotes( $siteLink->getSiteId() );
-			$anyOfTheLinks .= ' AND ';
-			$anyOfTheLinks .= 'ips_site_page=' . $dbr->addQuotes( $siteLink->getPageName() );
-			$anyOfTheLinks .= ')';
-		}
-
-		//TODO: $anyOfTheLinks might get very large and hit some size limit imposed by the database.
-		//      We could chop it up of we know that size limit. For MySQL, it's select @@max_allowed_packet.
-
-		$conflictingLinks = $dbr->select(
-			$this->table,
-			array(
-				'ips_site_id',
-				'ips_site_page',
-				'ips_item_id',
-			),
-			"($anyOfTheLinks) AND ips_item_id != " . (int)$item->getId()->getNumericId(),
-			__METHOD__
-		);
-
-		$conflicts = array();
-
-		foreach ( $conflictingLinks as $link ) {
-			$conflicts[] = array(
-				'siteId' => $link->ips_site_id,
-				'itemId' => (int)$link->ips_item_id,
-				'sitePage' => $link->ips_site_page,
-			);
-		}
-
-		if ( !$db ) {
-			$this->releaseConnection( $dbr );
-		}
-
-		return $conflicts;
 	}
 
 	/**

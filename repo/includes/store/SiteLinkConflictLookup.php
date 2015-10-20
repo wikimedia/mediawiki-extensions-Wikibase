@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\Repo\Store;
 
 use DatabaseBase;
 use Wikibase\DataModel\Entity\Item;
