@@ -20,6 +20,10 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				},
 				$container = $referenceview.find( '.wikibase-toolbar-container' );
 
+			if ( !referenceview.options.statementGuid ) {
+				return;
+			}
+
 			if ( !$container.length ) {
 				$container = $( '<div/>' ).appendTo(
 					$referenceview.find( '.wikibase-referenceview-heading' )
@@ -54,8 +58,13 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 		'referenceviewchange referenceviewafterstartediting': function( event ) {
 			var $referenceview = $( event.target ),
 				referenceview = $referenceview.data( 'referenceview' ),
-				edittoolbar = $referenceview.data( 'edittoolbar' ),
-				btnSave = edittoolbar.getButton( 'save' ),
+				edittoolbar = $referenceview.data( 'edittoolbar' );
+
+			if ( !edittoolbar ) {
+				return;
+			}
+
+			var btnSave = edittoolbar.getButton( 'save' ),
 				enableSave = referenceview.isValid() && !referenceview.isInitialValue();
 
 			btnSave[enableSave ? 'enable' : 'disable']();
@@ -69,8 +78,13 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			}
 
 			var disable = referenceview.option( 'disabled' ),
-				edittoolbar = $referenceview.data( 'edittoolbar' ),
-				btnSave = edittoolbar.getButton( 'save' ),
+				edittoolbar = $referenceview.data( 'edittoolbar' );
+
+			if ( !edittoolbar ) {
+				return;
+			}
+
+			var btnSave = edittoolbar.getButton( 'save' ),
 				enableSave = ( referenceview.isValid() && !referenceview.isInitialValue() );
 
 			edittoolbar.option( 'disabled', disable );

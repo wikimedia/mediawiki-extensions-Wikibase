@@ -19,7 +19,7 @@
  * @param {jQuery.wikibase.listview.ListItemAdapater} options.listItemAdapter
  * @param {wikibase.entityChangers.ReferencesChanger} options.referencesChanger
  *        Required for saving the `Reference` represented by the widget instance.
- * @param {string} options.statementGuid
+ * @param {string|null} [options.statementGuid]
  *        The GUID of the `Statement` the `Reference` represented by the widget instance belongs to.
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-claimview-snak-new-tooltip' )]
  *        End-user message explaining how to interact with the widget. The message is most likely to
@@ -89,7 +89,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.statementGuid || !this.options.listItemAdapter || !this.options.referencesChanger ) {
+		if ( !this.options.listItemAdapter || !this.options.referencesChanger ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
