@@ -51,7 +51,7 @@
 				"QUnit": false
 			}
 		},
-		"view/tests/qunit/wikibase/entityIdFormatter/testEntityIdHtmlFormatter.js": {
+		"view/tests/qunit/**/test*.js": {
 			"globals": {
 				"QUnit": false
 			}

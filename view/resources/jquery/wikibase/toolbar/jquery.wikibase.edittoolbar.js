@@ -18,7 +18,9 @@ var PARENT = $.wikibase.toolbar;
  * Apart from the required methods, the interaction widget has to have defined a help message in
  * its options that will be used as tooltip message.
  *
- * @option {jQuery.Widget} interactionWidget
+ * @option {Function} [getHelpMessage=option.interactionWidget.getHelpMessage]
+ *
+ * @option {jQuery.Widget} [interactionWidget]
  *         Name of the widget the toolbar shall interact with.
  *
  * @option {Function} [onRemove]
@@ -44,6 +46,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	 * @see jQuery.wikibase.toolbar.options
 	 */
 	options: {
+		getHelpMessage: null,
 		interactionWidget: null,
 		onRemove: null,
 		buttonLabels: {
@@ -81,22 +84,28 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	_$tooltipAnchor: null,
 
 	/**
+	 * @property {jQuery.ui.EditableTemplatedWidget|wikibase.view.ViewController} [controller]
+	 * @private
+	 */
+	_controller: null,
+
+	/**
 	 * @see jQuery.wikibase.toolbar._create
 	 */
 	_create: function() {
-		if ( !this.options.interactionWidget ) {
-			throw new Error( 'Interaction widget needs to be defined' );
-		}
-
 		PARENT.prototype._create.call( this );
 
-		if ( !this.options.interactionWidget.getHelpMessage ) {
-			throw new Error( 'Interaction widget help message getter missing' );
-		}
-
-		var missingMethods = this.checkRequiredMethods();
-		if ( missingMethods.length ) {
-			throw new Error( 'Required method(s) missing: ' + missingMethods.join( ', ' ) );
+		if ( this.options.interactionWidget ) {
+			this.setController( this.options.interactionWidget );
+			if ( !this.options.getHelpMessage ) {
+				if ( !this.options.interactionWidget.getHelpMessage ) {
+					throw new Error( 'Interaction widget help message getter missing' );
+				}
+				this.options.getHelpMessage = $.proxy(
+					this.options.interactionWidget.getHelpMessage,
+					this.options.interactionWidget
+				);
+			}
 		}
 
 		this._buttons = {};
@@ -113,13 +122,23 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 		}
 	},
 
+	setController: function( controller ) {
+		this._controller = controller;
+		var missingMethods = this.checkRequiredMethods();
+		if ( missingMethods.length ) {
+			throw new Error( 'Required method(s) missing: ' + missingMethods.join( ', ' ) );
+		}
+	},
+
 	/**
 	 * @see jQuery.wikibase.toolbar.destroy
 	 */
 	destroy: function() {
 		var self = this;
 
-		this.options.interactionWidget.element.off( '.' + this.widgetName );
+		if ( this.options.interactionWidget ) {
+			this.options.interactionWidget.element.off( '.' + this.widgetName );
+		}
 
 		if ( this._$tooltipAnchor ) {
 			var $wbtooltip = this._$tooltipAnchor.find( ':wikibase-wbtooltip' ),
@@ -155,7 +174,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 		var self = this,
 			missingMethods = [];
 		$.each( this._requiredMethods, function( i, methodName ) {
-			if ( !$.isFunction( self.options.interactionWidget[methodName] ) ) {
+			if ( !$.isFunction( self._controller[methodName] ) ) {
 				missingMethods.push( methodName );
 			}
 		} );
@@ -203,7 +222,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 		} );
 	},
 
-	_attachEventHandlers: function() {
+	_attachInteractionWidgetEventHandlers: function() {
 		var self = this,
 			prefix = this.options.interactionWidget.widgetEventPrefix;
 
@@ -262,25 +281,36 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 				} );
 			}
 		} );
+	},
+
+	_attachEventHandlers: function() {
+		var self = this;
+
+		if ( this.options.interactionWidget ) {
+			this._attachInteractionWidgetEventHandlers();
+		}
 
 		this.getContainer()
 		.on( 'toolbarbuttonaction.' + this.widgetName, function( event ) {
 			if ( self._buttons.edit && event.target === self._buttons.edit.get( 0 ) ) {
-				self.options.interactionWidget.element.one(
-					prefix + 'afterstartediting.' + self.widgetName,
-					function() {
-						self._trigger( 'edit' );
-					}
-				);
-				self.options.interactionWidget.startEditing();
+				if ( self.options.interactionWidget ) {
+					var prefix = self.options.interactionWidget.widgetEventPrefix;
+					self.options.interactionWidget.element.one(
+						prefix + 'afterstartediting.' + self.widgetName,
+						function() {
+							self._trigger( 'edit' );
+						}
+					);
+				}
+				self._controller.startEditing();
 			} else if ( self._buttons.save && event.target === self._buttons.save.get( 0 ) ) {
-				self.options.interactionWidget.stopEditing();
+				self._controller.stopEditing();
 			} else if ( self._buttons.remove && event.target === self._buttons.remove.get( 0 ) ) {
 				self.disable();
 				self.toggleActionMessage( mw.msg( 'wikibase-remove-inprogress' ) );
 				self.options.onRemove();
 			} else if ( self._buttons.cancel && event.target === self._buttons.cancel.get( 0 ) ) {
-				self.options.interactionWidget.cancelEditing();
+				self._controller.cancelEditing();
 			}
 		} );
 	},
@@ -380,7 +410,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 			}
 		}
 
-		this.options.interactionWidget.getHelpMessage().done( addTooltip );
+		this.options.getHelpMessage().done( addTooltip );
 
 		return this._$tooltipAnchor;
 	},
@@ -459,7 +489,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 			permanent: true
 		} )
 		.one( 'wbtooltipafterhide.' + this.widgetName, function() {
-			self.options.interactionWidget.setError();
+			self._controller.setError();
 			var wbtooltip = $anchor.data( 'wbtooltip' );
 			if ( wbtooltip ) {
 				wbtooltip.destroy();
