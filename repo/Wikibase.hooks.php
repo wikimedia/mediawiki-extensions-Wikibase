@@ -7,7 +7,6 @@ use ApiEditPage;
 use BaseTemplate;
 use Content;
 use ContentHandler;
-use DatabaseUpdater;
 use ExtensionRegistry;
 use HistoryPager;
 use Html;
@@ -33,7 +32,6 @@ use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
 use WikiPage;
 
 /**
@@ -96,53 +94,6 @@ final class RepoHooks {
 				$wgNamespaceContentModels[$namespace] = $contentModel;
 			}
 		}
-
-		return true;
-	}
-
-	/**
-	 * Schema update to set up the needed database tables.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
-	 *
-	 * @since 0.1
-	 *
-	 * @param DatabaseUpdater $updater
-	 *
-	 * @return bool
-	 */
-	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
-		$type = $updater->getDB()->getType();
-
-		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
-			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
-
-			$updater->addExtensionTable(
-				'wb_changes',
-				__DIR__ . '/sql/changes' . $extension
-			);
-
-			if ( $type === 'mysql' && !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
-				$updater->addExtensionUpdate( array(
-					'applyPatch',
-					__DIR__ . '/sql/ChangeChangeObjectId.sql',
-					true
-				) );
-
-				$updater->insertUpdateRow( 'ChangeChangeObjectId.sql' );
-			}
-
-			$updater->addExtensionTable(
-				'wb_changes_dispatch',
-				__DIR__ . '/sql/changes_dispatch' . $extension
-			);
-		} else {
-			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
-		}
-
-		/** @var SqlStore $store */
-		$store = WikibaseRepo::getDefaultInstance()->getStore();
-		$schemaUpdater = new DatabaseSchemaUpdater( $store );
-		$schemaUpdater->doSchemaUpdate( $updater );
 
 		return true;
 	}

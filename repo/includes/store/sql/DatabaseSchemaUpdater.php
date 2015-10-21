@@ -37,15 +37,42 @@ class DatabaseSchemaUpdater {
 		$this->store = $store;
 	}
 
+	private static function newFromGlobalState() {
+		$store = WikibaseRepo::getDefaultInstance()->getStore();
+
+		return new self( $store );
+	}
+
 	/**
-	 * Updates the schema of the SQL store to it's latest version.
+	 * Schema update to set up the needed database tables.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
+	 * @param DatabaseUpdater $updater
+	 *
+	 * @return bool
+	 */
+	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
+		$schemaUpdater = self::newFromGlobalState();
+		$schemaUpdater->doSchemaUpdate( $updater );
+
+		return true;
+	}
+
+	/**
 	 * @param DatabaseUpdater $updater
 	 */
 	public function doSchemaUpdate( DatabaseUpdater $updater ) {
 		$db = $updater->getDB();
+		$type = $db->getType();
+
+		if ( $type !== 'mysql' && $type !== 'sqlite' ) {
+			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
+			return;
+		}
+
+		$this->addChangesTable( $updater, $type );
 
 		// Update from 0.1.
 		if ( !$db->tableExists( 'wb_terms' ) ) {
@@ -68,6 +95,32 @@ class DatabaseSchemaUpdater {
 		$this->updateChangesTable( $updater, $db );
 
 		$this->registerPropertyInfoTableUpdates( $updater );
+	}
+
+	/**
+	 * @param DatabaseUpdater $updater
+	 * @param string $type
+	 */
+	private function addChangesTable( DatabaseUpdater $updater, $type ) {
+		$updater->addExtensionTable(
+			'wb_changes',
+			$this->getUpdateScriptPath( 'changes', $type )
+		);
+
+		if ( $type === 'mysql' && !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
+			$updater->addExtensionUpdate( array(
+				'applyPatch',
+				$this->getUpdateScriptPath( 'ChangeChangeObjectId', $type ),
+				true
+			) );
+
+			$updater->insertUpdateRow( 'ChangeChangeObjectId.sql' );
+		}
+
+		$updater->addExtensionTable(
+			'wb_changes_dispatch',
+			$this->getUpdateScriptPath( 'changes_dispatch', $type )
+		);
 	}
 
 	/**

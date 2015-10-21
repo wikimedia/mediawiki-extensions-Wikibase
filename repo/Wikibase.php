@@ -198,7 +198,7 @@ call_user_func( function() {
 
 	// Hooks
 	$wgHooks['BeforePageDisplay'][] = 'Wikibase\RepoHooks::onBeforePageDisplay';
-	$wgHooks['LoadExtensionSchemaUpdates'][] = 'Wikibase\RepoHooks::onSchemaUpdate';
+	$wgHooks['LoadExtensionSchemaUpdates'][] = 'Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater::onSchemaUpdate';
 	$wgHooks['UnitTestsList'][] = 'Wikibase\RepoHooks::registerUnitTests';
 	$wgHooks['ResourceLoaderTestModules'][] = 'Wikibase\RepoHooks::registerQUnitTests';
 
