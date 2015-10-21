@@ -52,8 +52,7 @@
  * @event toggleerror
  * Triggered when an error occurred or has been resolved.
  * @param {jQuery.Event} event
- * @param {wikibase.api.RepoApiError|undefined} RepoApiError
- *        Object if an error occurred, `undefined` if the current error state is resolved.
+ * @param {boolean} error Whether an error occurred
  */
 $.widget( 'wikibase.referenceview', PARENT, {
 	/**
@@ -220,6 +219,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 			return;
 		}
 
+		// FIXME: There should be a listview::startEditing method
 		$.each( this.$listview.data( 'listview' ).value(), function() {
 			this.startEditing();
 		} );
@@ -236,56 +236,20 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * Stops the widget's edit mode.
 	 * @since 0.5
 	 */
-	stopEditing: function( dropValue ) {
-		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+	stopEditing: function() {
+		if ( !this.isInEditMode() ) {
 			return;
 		}
 
-		this._trigger( 'stopediting', null, [dropValue] );
+		this._isInEditMode = false;
+		this.element.removeClass( 'wb-edit' );
 
-		var self = this;
-
-		this.element.removeClass( 'wb-error' );
 		this._detachEditModeEventHandlers();
-		this.disable();
 
-		if ( dropValue ) {
-			this._stopEditingReferenceSnaks();
+		// FIXME: There should be a listview::stopEditing method
+		this._stopEditingReferenceSnaks();
 
-			this.enable();
-			this.element.removeClass( 'wb-edit' );
-			this._isInEditMode = false;
-
-			this._trigger( 'afterstopediting', null, [ dropValue ] );
-		} else {
-			this._saveReferenceApiCall()
-			.done( function( savedReference ) {
-				self.options.value = savedReference;
-
-				self._stopEditingReferenceSnaks();
-
-				self.enable();
-
-				self.element.removeClass( 'wb-edit' );
-				self._isInEditMode = false;
-
-				self._trigger( 'afterstopediting', null, [ dropValue ] );
-			} )
-			.fail( function( error ) {
-				self.enable();
-
-				self._attachEditModeEventHandlers();
-				self.setError( error );
-			} );
-		}
-	},
-
-	/**
-	 * Cancels edit mode.
-	 * @since 0.5
-	 */
-	cancelEditing: function() {
-		this.stopEditing( true );
+		this._trigger( 'afterstopediting' );
 	},
 
 	/**
@@ -377,39 +341,13 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	},
 
 	/**
-	 * Triggers the API call to save the reference.
-	 * @see wikibase.entityChangers.ReferencesChanger.setReference
-	 * @private
-	 *
-	 * @return {Object} jQuery.Promise
-	 * @return {Function} return.done
-	 * @return {Reference} return.done.savedReference
-	 * @return {Function} return.fail
-	 * @return {wikibase.api.RepoApiError} return.fail.error
-	 */
-	_saveReferenceApiCall: function() {
-		var self = this,
-			guid = this.options.statementGuid;
-
-		return this.options.referencesChanger.setReference( guid, this.value() )
-			.done( function( savedReference ) {
-			self._updateReferenceHashClass( savedReference );
-		} );
-	},
-
-	/**
 	 * Sets/removes error state from the widget.
 	 *
-	 * @param {wikibase.api.RepoApiError} [error]
+	 * @param {boolean} error
 	 */
 	setError: function( error ) {
-		if ( error ) {
-			this.element.addClass( 'wb-error' );
-			this._trigger( 'toggleerror', null, [ error ] );
-		} else {
-			this.element.removeClass( 'wb-error' );
-			this._trigger( 'toggleerror' );
-		}
+		this.element.toggleClass( 'wb-error', error );
+		this._trigger( 'toggleerror', null, [ error ] );
 	},
 
 	/**
@@ -425,6 +363,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 				throw new Error( 'Value has to be an instance of wikibase.datamodel.Reference' );
 			}
 			// TODO: Redraw
+			this._updateReferenceHashClass( value );
 		}
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
@@ -449,20 +388,8 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		} else {
 			this.element.focus();
 		}
-	},
-
-	/**
-	 * Get a help message related to editing
-	 *
-	 * @return {Object} jQuery promise
-	 *         Resolved parameters:
-	 *         - {string}
-	 *         No rejected parameters.
-	 */
-	getHelpMessage: function() {
-		// FIXME: Remove this once referenceview is an EditableTemplatedWidget
-		return $.Deferred().resolve( this.options.helpMessage ).promise();
 	}
+
 } );
 
 }( mediaWiki, wikibase, jQuery ) );
