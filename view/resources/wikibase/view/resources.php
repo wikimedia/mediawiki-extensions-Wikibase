@@ -22,6 +22,27 @@ return call_user_func( function() {
 				'wikibase'
 			)
 		),
+
+		'wikibase.view.ViewController' => $moduleTemplate + array(
+			'scripts' => 'ViewController.js',
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.view.__namespace',
+			)
+		),
+
+		'wikibase.view.ToolbarViewController' => $moduleTemplate + array(
+			'scripts' => 'ToolbarViewController.js',
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.view.__namespace',
+				'wikibase.view.ViewController',
+			),
+			'messages' => array(
+				'wikibase-save-inprogress',
+			)
+		),
+
 		'wikibase.view.ViewFactory' => $moduleTemplate + array(
 			'scripts' => array(
 				'ViewFactory.js'

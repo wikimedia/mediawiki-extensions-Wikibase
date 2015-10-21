@@ -15,9 +15,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 		referenceviewcreate: function( event ) {
 			var $referenceview = $( event.target ),
 				referenceview = $referenceview.data( 'referenceview' ),
-				options = {
-					interactionWidget: referenceview
-				},
+				options = {},
 				$container = $referenceview.find( '.wikibase-toolbar-container' );
 
 			if ( !referenceview.options.statementGuid ) {
@@ -42,32 +40,35 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				};
 			}
 
-			$referenceview.edittoolbar( options );
+			options.getHelpMessage = function() {
+				return $.Deferred().resolve( referenceview.options.helpMessage ).promise();
+			};
+
+			var edittoolbar = $referenceview.edittoolbar( options ).data( 'edittoolbar' );
+
+			var guid = referenceview.options.statementGuid;
+			var referencesChanger = referenceview.options.referencesChanger;
+			var controller = new wikibase.view.ToolbarViewController(
+				{
+					save: function( reference ) {
+						return referencesChanger.setReference( guid, reference );
+					}
+				},
+				edittoolbar,
+				referenceview
+			);
+			edittoolbar.setController( controller );
 
 			$referenceview.on( 'keydown.edittoolbar', function( event ) {
 				if ( referenceview.option( 'disabled' ) ) {
 					return;
 				}
 				if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
-					referenceview.stopEditing( true );
+					controller.stopEditing( true );
 				} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
-					referenceview.stopEditing( false );
+					controller.stopEditing( false );
 				}
 			} );
-		},
-		'referenceviewchange referenceviewafterstartediting': function( event ) {
-			var $referenceview = $( event.target ),
-				referenceview = $referenceview.data( 'referenceview' ),
-				edittoolbar = $referenceview.data( 'edittoolbar' );
-
-			if ( !edittoolbar ) {
-				return;
-			}
-
-			var btnSave = edittoolbar.getButton( 'save' ),
-				enableSave = referenceview.isValid() && !referenceview.isInitialValue();
-
-			btnSave[enableSave ? 'enable' : 'disable']();
 		},
 		referenceviewdisable: function( event ) {
 			var $referenceview = $( event.target ),
