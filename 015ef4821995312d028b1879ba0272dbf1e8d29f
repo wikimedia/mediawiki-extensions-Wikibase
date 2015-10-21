@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_916acc7c",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-21T17:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_85728a0e",
+      "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c58882ee",
         "filename": "repo/includes/PropertyDataTypeChanger.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-21T09:58:42Z",
       "side": 1,
       "message": "data value type. (realize it\u0027s slightly confusing that we have both \"DataType\" and DataValue type)",
+      "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_516454ae",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-21T17:29:09Z",
+      "side": 1,
+      "message": "Good catch... done.",
+      "parentUuid": "0ebaf39b_c58882ee",
       "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -64,6 +100,24 @@
       "writtenOn": "2015-10-21T09:58:42Z",
       "side": 1,
       "message": "data value type",
+      "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_51fbf4b9",
+        "filename": "repo/tests/phpunit/includes/PropertyDataTypeChangerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-21T17:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_c55f2276",
       "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
