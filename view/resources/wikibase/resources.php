@@ -16,6 +16,11 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'wikibase.Controller' => $moduleTemplate + array(
+			'scripts' => 'Controller.js',
+			'dependencies' => 'wikibase'
+		),
+
 		// common styles independent from JavaScript being enabled or disabled
 		'wikibase.common' => $moduleTemplate + array(
 			'position' => 'top',
