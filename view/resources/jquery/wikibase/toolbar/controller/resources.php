@@ -102,6 +102,7 @@ return call_user_func( function() {
 				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.toolbarcontroller',
+				'wikibase.Controller'
 			),
 		),
 
