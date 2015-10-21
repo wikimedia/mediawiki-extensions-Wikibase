@@ -15,9 +15,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 		referenceviewcreate: function( event ) {
 			var $referenceview = $( event.target ),
 				referenceview = $referenceview.data( 'referenceview' ),
-				options = {
-					interactionWidget: referenceview
-				},
+				options = {},
 				$container = $referenceview.find( '.wikibase-toolbar-container' );
 
 			if ( !referenceview.options.statementGuid ) {
@@ -42,32 +40,43 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				};
 			}
 
+			var controller;
+			var bridge = {
+				cancelEditing: function() { return controller.cancelEditing.apply( controller, arguments ); },
+				element: $referenceview,
+				getHelpMessage: function() {
+					return $.Deferred().resolve( referenceview.options.helpMessage ).promise();
+				},
+				startEditing: function() { return controller.startEditing.apply( controller, arguments ); },
+				stopEditing: function() { return controller.stopEditing.apply( controller, arguments ); },
+				setError: function() { return controller.setError.apply( controller, arguments ); }
+			};
+			options.interactionWidget = bridge;
+
 			$referenceview.edittoolbar( options );
+
+			var guid = referenceview.options.statementGuid;
+			var referencesChanger = referenceview.options.referencesChanger;
+			controller = new wikibase.view.ToolbarController(
+				{
+					save: function( reference ) {
+						return referencesChanger.setReference( guid, reference );
+					}
+				},
+				$referenceview.data( 'edittoolbar' ),
+				referenceview
+			);
 
 			$referenceview.on( 'keydown.edittoolbar', function( event ) {
 				if ( referenceview.option( 'disabled' ) ) {
 					return;
 				}
 				if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
-					referenceview.stopEditing( true );
+					controller.stopEditing( true );
 				} else if ( event.keyCode === $.ui.keyCode.ENTER ) {
-					referenceview.stopEditing( false );
+					controller.stopEditing( false );
 				}
 			} );
-		},
-		'referenceviewchange referenceviewafterstartediting': function( event ) {
-			var $referenceview = $( event.target ),
-				referenceview = $referenceview.data( 'referenceview' ),
-				edittoolbar = $referenceview.data( 'edittoolbar' );
-
-			if ( !edittoolbar ) {
-				return;
-			}
-
-			var btnSave = edittoolbar.getButton( 'save' ),
-				enableSave = referenceview.isValid() && !referenceview.isInitialValue();
-
-			btnSave[enableSave ? 'enable' : 'disable']();
 		},
 		referenceviewdisable: function( event ) {
 			var $referenceview = $( event.target ),
