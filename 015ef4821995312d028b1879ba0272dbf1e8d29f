@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_85728a0e",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-21T09:58:42Z",
+      "side": 1,
+      "message": "I would say \"Could not\" instead of \"Couldn\u0027t\" :)",
+      "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c58882ee",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-21T09:58:42Z",
+      "side": 1,
+      "message": "data value type. (realize it\u0027s slightly confusing that we have both \"DataType\" and DataValue type)",
+      "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_457c92e2",
+        "filename": "repo/maintenance/changePropertyDataType.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-21T09:58:42Z",
+      "side": 1,
+      "message": ":)",
+      "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c55f2276",
+        "filename": "repo/tests/phpunit/includes/PropertyDataTypeChangerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-21T09:58:42Z",
+      "side": 1,
+      "message": "data value type",
+      "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e5626636",
+        "filename": "repo/tests/phpunit/includes/PropertyDataTypeChangerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-21T09:58:42Z",
+      "side": 1,
+      "message": ":D",
+      "revId": "015ef4821995312d028b1879ba0272dbf1e8d29f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
