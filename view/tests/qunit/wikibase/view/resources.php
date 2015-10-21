@@ -15,6 +15,25 @@ return call_user_func( function() {
 
 	$modules = array(
 
+		'wikibase.view.testController' => $moduleTemplate + array(
+			'scripts' => array(
+				'testController.js',
+			),
+			'dependencies' => array(
+				'wikibase.view.Controller',
+			),
+		),
+
+		'wikibase.view.ToolbarController.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ToolbarController.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.view.testController',
+				'wikibase.view.ToolbarController',
+			),
+		),
+
 		'wikibase.view.ViewFactory.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'ViewFactory.tests.js',

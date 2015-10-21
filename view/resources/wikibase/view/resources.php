@@ -22,6 +22,25 @@ return call_user_func( function() {
 				'wikibase'
 			)
 		),
+
+		'wikibase.view.Controller' => $moduleTemplate + array(
+			'scripts' => 'Controller.js',
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.view.__namespace',
+			)
+		),
+
+		'wikibase.view.ToolbarController' => $moduleTemplate + array(
+			'scripts' => 'ToolbarController.js',
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase.view.__namespace',
+				'wikibase.view.Controller',
+			)
+		),
+
+
 		'wikibase.view.ViewFactory' => $moduleTemplate + array(
 			'scripts' => array(
 				'ViewFactory.js'
