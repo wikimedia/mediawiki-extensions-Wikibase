@@ -28,14 +28,18 @@
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referans}}",
 	"wikibase-itembytitle-lookup-page": "Rûpel:",
 	"wikibase-itembytitle-submit": "Lêgerîn",
+	"wikibase-gotolinkedpage-lookup-site": "Malperrː",
 	"wikibase-itemdisambiguation-lookup-language": "Koda ziman:",
 	"wikibase-itemdisambiguation-submit": "Lêgerîn",
+	"wikibase-newentity-language": "Ziman:",
 	"wikibase-newentity-description": "Danasîn:",
 	"wikibase-newentity-submit": "Çêke",
 	"wikibase-setdescription-label": "Danasîn:",
 	"wikibase-modifyterm-language": "Koda ziman:",
+	"wikibase-dispatchstats-large-lag": "(zêde mezin e)",
 	"wikibase-listproperties-submit": "Bibîne",
 	"wikibase-entitieswithoutlabel-label-language": "Koda ziman:",
 	"wikibase-entitieswithoutlabel-label-type": "Cure:",
-	"wikibase-entitieswithoutlabel-label-alltypes": "hemû"
+	"wikibase-entitieswithoutlabel-label-alltypes": "hemû",
+	"wikibase-listdatatypes-url-head": "URL"
 }

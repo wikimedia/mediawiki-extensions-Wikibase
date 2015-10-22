@@ -114,6 +114,7 @@
 	"wikibase-newitem-site": "প্রথম সংযুক্ত পাতার সাইট",
 	"wikibase-newitem-page": "প্রথম সংযুক্ত পাতার নাম",
 	"wikibase-newitem-not-recognized-siteid": "প্রদান করা শনাক্তকারী সাইট স্বীকৃত নয়।",
+	"wikibase-newentity-language": "ভাষা:",
 	"wikibase-newentity-label": "লেবেল:",
 	"wikibase-newentity-description": "বিবরণ:",
 	"wikibase-newentity-submit": "তৈরি",

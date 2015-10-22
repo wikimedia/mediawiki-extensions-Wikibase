@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"George Animal"
+			"George Animal",
+			"Bikarhêner"
 		]
 	},
+	"wikibase-timedetails-time": "Dem",
 	"wikibase-sitelinks-wikipedia": "Wîkîpediya",
 	"wikibase-sitelinks-sitename-columnheading": "Ziman",
 	"wikibase-sitelinks-link-columnheading": "Rûpela girêdayî",

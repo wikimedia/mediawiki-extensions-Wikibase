@@ -309,6 +309,7 @@
 	"apihelp-wbcreateredirect-param-from": "リダイレクトを作成する実体ID",
 	"apihelp-wbcreateredirect-param-to": "リダイレクト先の実体ID",
 	"apihelp-wbgetclaims-description": "Wikibaseの主張を取得",
+	"apihelp-wbgetentities-param-redirects": "転送を解決するかどうか。\n\"no\" が設定された場合、転送は削除された実体のように扱われます。",
 	"apihelp-wbmergeitems-description": "複数の項目を統合する。",
 	"apihelp-wbmergeitems-param-fromid": "統合元の ID",
 	"apihelp-wbmergeitems-param-toid": "統合先の ID",

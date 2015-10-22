@@ -222,6 +222,7 @@
 	"wikibase-listproperties-datatype": "데이터 종류:",
 	"wikibase-listproperties-all": "모든 데이터 종류들",
 	"wikibase-listproperties-submit": "찾기",
+	"wikibase-listproperties-invalid-datatype": "\"$1\"은 올바른 데이터 유형이 아닙니다.",
 	"special-entitieswithoutdescription": "설명이 없는 개체",
 	"wikibase-entitieswithoutdescription-legend": "설명이 없는 개체 목록 얻기",
 	"special-entitieswithoutlabel": "레이블이 없는 항목",

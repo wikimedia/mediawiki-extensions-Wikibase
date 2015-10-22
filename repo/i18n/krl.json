@@ -4,5 +4,6 @@
 			"Likopiän tyttö"
 		]
 	},
-	"wikibase-add": "Lisyä"
+	"wikibase-add": "Lisyä",
+	"wikibase-statementview-rank-normal": "Tavallini arvo"
 }
