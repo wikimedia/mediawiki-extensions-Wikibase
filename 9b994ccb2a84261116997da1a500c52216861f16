@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_e366d04d",
+        "filename": "repo/maintenance/changePropertyDataType.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-10-22T21:26:41Z",
+      "side": 1,
+      "message": "How about instead: Please note: You probably don\u0027t want to use this. Add a new property and then delete the old one instead. Using this will likely break consumers of your data. As statements with the changed property will appear to have changed without there being an edit to the entity containing the statement. And derived information based on the old type will disappear and derived information based on the new type will appear.",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
