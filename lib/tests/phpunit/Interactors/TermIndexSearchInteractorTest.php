@@ -19,7 +19,7 @@ use Wikibase\Test\MockTermIndex;
  * @covers Wikibase\Lib\Interactors\TermIndexSearchInteractor
  *
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseLib
  * @group WikibaseInteractor
  *
  * @licence GNU GPL v2+

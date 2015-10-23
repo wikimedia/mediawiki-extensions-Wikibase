@@ -8,6 +8,9 @@ use Wikibase\Lib\Serialization\SerializationModifier;
 /**
  * @author Adam Shorland
  *
+ * @group Wikibase
+ * @group WikibaseLib
+ *
  * @covers Wikibase\Lib\Serialization\SerializationModifier
  */
 class SerializationModifierTest extends PHPUnit_Framework_TestCase {

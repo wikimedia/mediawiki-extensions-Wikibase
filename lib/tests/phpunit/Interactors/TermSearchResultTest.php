@@ -12,7 +12,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @covers Wikibase\Lib\Interactors\TermSearchResult
  *
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
