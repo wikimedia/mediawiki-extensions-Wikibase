@@ -54,7 +54,7 @@
 	"wikibase-error-invalid-entity-id": "প্রবেশ করানো আইডিটি সিস্টেমের অজানা। দয়া করে একটি বৈধ ভুক্তি আইডি ব্যবহার করুন।",
 	"unconnectedpages": "পাতাসমূহ আইটেমসমূহের সাথে সংযুক্ত হয়নি",
 	"wikibase-unconnectedpages-format-row": "(এই পাতায় $1টি {{PLURAL:$1|আন্তঃউইকি সংযোগ}} রয়েছে)",
-	"wikibase-unconnectedpages-submit": "যাও",
+	"wikibase-unconnectedpages-submit": "পাতা দেখাও",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} আইটেম আইডি",
 	"wikibase-pageinfo-entity-id-none": "কোনটিই নয়",
 	"wikibase-otherprojects": "অন্যান্য প্রকল্প",
