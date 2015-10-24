@@ -218,9 +218,10 @@ class EntityTermsView {
 			'td',
 			$languageCode,
 			$this->templateFactory->render( 'wikibase-entitytermsforlanguageview-language',
-				$title === null
+				htmlspecialchars( $title === null
 					? '#'
-					: $title->getLocalURL( array( 'setlang' => $languageCode ) ),
+					: $title->getLocalURL( array( 'setlang' => $languageCode ) )
+				),
 				htmlspecialchars( $this->languageNameLookup->getName( $languageCode, $this->languageCode ) )
 			),
 			$this->templateFactory->render( 'wikibase-labelview',
