@@ -6,8 +6,11 @@
 	},
 	"wikibase-edit": "Igliwat",
 	"wikibase-add": "dugngi",
+	"wikibase-label-empty": "Waray label nga gin-define",
+	"wikibase-description-empty": "Waray description nga gin-define",
 	"wikibase-statements": "Mga pamulong",
 	"wikibase-sitelinks-special": "Iba nga mga sityo",
+	"wikibase-aliases-empty": "Waray alyas nga gin-define",
 	"wikibase-statementview-rank-normal": "Normal nga ranggo",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|binasaran|pinanbasaran}}"
 }

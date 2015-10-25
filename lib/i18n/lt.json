@@ -125,7 +125,7 @@
 	"wikibase-entity-summary-wbsetclaimvalue": "{{PLURAL:$1|Nustatyta priekaišto reikšmė|Nustatytos priekaištų reikšmės}}",
 	"wikibase-entity-summary-wbremoveclaims": "{{PLURAL:$1|Pašalintas priekaištas|Pašalinti priekaištai}}",
 	"wikibase-entity-summary-special-create-item": "Sukurtas [$2] įrašas su {{PLURAL:$1|reikšme|reikšmėmis}}",
-	"wikibase-entity-summary-wbcreateclaim-create": "Sukurtas priekaištas",
+	"wikibase-entity-summary-wbcreateclaim-create": "Sukurta paraiška",
 	"wikibase-entity-summary-wbremoveclaims-remove": "{{PLURAL:$1|Pašalintas priekaištas|Pašalinti priekaištai}}",
 	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Pakeistas priekaištas|Pakeisti priekaištai}}",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Sukurtas priekaištas|Sukurti priekaištai}}",
