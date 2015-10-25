@@ -827,32 +827,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Puts user-specific and other vars that we don't want stuck
-	 * in parser cache (e.g. copyright message)
-	 *
-	 * @param OutputPage $out
-	 * @param string &$html
-	 *
-	 * @return bool
-	 */
-	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
-		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-
-		if ( !$namespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
-			return true;
-		}
-
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$hookHandler = new OutputPageJsConfigHookHandler( $settings );
-
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-
-		$hookHandler->handle( $out, $isExperimental );
-
-		return true;
-	}
-
-	/**
 	 * Handler for the ContentModelCanBeUsedOn hook, used to prevent pages of inappropriate type
 	 * to be placed in an entity namespace.
 	 *

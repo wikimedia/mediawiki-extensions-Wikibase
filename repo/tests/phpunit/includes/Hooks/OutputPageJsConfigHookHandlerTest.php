@@ -7,8 +7,8 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
-use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler
@@ -21,23 +21,24 @@ use Wikibase\SettingsArray;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch
  */
 class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 
 	/**
-	 * @dataProvider handleProvider
+	 * @dataProvider doOutputPageBeforeHtmlRegisterConfigProvider
 	 */
-	public function testHandle( array $expected, Title $title, SettingsArray $settings, $experimental,
-		$message
-	) {
-		$hookHandler = new OutputPageJsConfigHookHandler( $settings );
+	public function testDoOutputPageBeforeHtmlRegisterConfig( array $expected, Title $title, $experimental, $message ) {
+		$entityNamespaceLookup = new EntityNamespaceLookup( array( $title->getNamespace() ) );
+
+		$hookHandler = new OutputPageJsConfigHookHandler( $entityNamespaceLookup, 'https://creativecommons.org', 'CC-0', array() );
 
 		$context = new RequestContext();
 		$context->setTitle( $title );
 
 		$output = $context->getOutput();
 
-		$hookHandler->handle( $output, $experimental );
+		$hookHandler->doOutputPageBeforeHtmlRegisterConfig( $output, $experimental );
 
 		$configVars = $output->getJsConfigVars();
 
@@ -45,9 +46,7 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 		$this->assertEquals( $expected, array_keys( $configVars ), $message );
 	}
 
-	public function handleProvider() {
-		$settings = $this->getSettings();
-
+	public function doOutputPageBeforeHtmlRegisterConfigProvider() {
 		$expected = array(
 			'wbUserIsBlocked',
 			'wbUserCanEdit',
@@ -60,20 +59,8 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 		$title = $this->getTitleForId( $entityId );
 
 		return array(
-			array( $expected, $title, $settings, true, 'config vars added to OutputPage' )
+			array( $expected, $title, true, 'config vars added to OutputPage' )
 		);
-	}
-
-	/**
-	 * @return SettingsArray
-	 */
-	private function getSettings() {
-		$settings = new SettingsArray();
-		$settings->setSetting( 'dataRightsUrl', 'https://creativecommons.org' );
-		$settings->setSetting( 'dataRightsText', 'CC-0' );
-		$settings->setSetting( 'badgeItems', array() );
-
-		return $settings;
 	}
 
 	/**
