@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 
 use DataTypes\DataTypeFactory;
-use Language;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -29,14 +28,6 @@ use Wikibase\Store\BufferingTermLookup;
  * @author Adam Shorland
  */
 class SpecialListPropertiesTest extends SpecialPageTestBase {
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setMwGlobals( array(
-			'wgContLang' => Language::factory( 'qqx' )
-		) );
-	}
 
 	private function getDataTypeFactory() {
 		$dataTypeFactory = new DataTypeFactory( array(
@@ -120,7 +111,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	public function testExecute() {
 		// This also tests that there is no fatal error, that the restriction handling is working
 		// and doesn't block. That is, the default should let the user execute the page.
-		list( $output, ) = $this->executeSpecialPage( '' );
+		list( $output, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertInternalType( 'string', $output );
 		$this->assertContains( 'wikibase-listproperties-summary', $output );
@@ -131,7 +122,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 
 	public function testOffsetAndLimit() {
 		$request = new \FauxRequest( array( 'limit' => '1', 'offset' => '1' ) );
-		list( $output, ) = $this->executeSpecialPage( '', $request );
+		list( $output, ) = $this->executeSpecialPage( '', $request, 'qqx' );
 
 		$this->assertNotContains( 'P123', $output );
 		$this->assertContains( 'P456', $output );
@@ -139,13 +130,13 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute_empty() {
-		list( $output, ) = $this->executeSpecialPage( 'quantity' );
+		list( $output, ) = $this->executeSpecialPage( 'quantity', null, 'qqx' );
 
 		$this->assertContains( 'specialpage-empty', $output );
 	}
 
 	public function testExecute_error() {
-		list( $output, ) = $this->executeSpecialPage( 'test<>' );
+		list( $output, ) = $this->executeSpecialPage( 'test<>', null, 'qqx' );
 
 		$this->assertContains( 'wikibase-listproperties-invalid-datatype', $output );
 		$this->assertContains( 'test&lt;&gt;', $output );
