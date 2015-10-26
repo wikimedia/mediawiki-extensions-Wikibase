@@ -37,24 +37,6 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				toolbarcontroller.registerEventHandler(
 					event.data.toolbar.type,
 					event.data.toolbar.id,
-					'referenceviewafterstopediting',
-					function( event, toolbarcontroller ) {
-						// Destroy the snakview toolbars:
-						var $referenceviewNode = $( event.target );
-						$.each(
-							$referenceviewNode.find( '.wikibase-snakview' ),
-							function( i, snakviewNode ) {
-								toolbarcontroller.destroyToolbar(
-									$( snakviewNode ).data( 'removetoolbar' )
-								);
-							}
-						);
-					}
-				);
-
-				toolbarcontroller.registerEventHandler(
-					event.data.toolbar.type,
-					event.data.toolbar.id,
 					'referenceviewdisable listviewitemremoved',
 					function( event ) {
 						var $referenceview = event.type.indexOf( 'referenceview' ) !== -1
