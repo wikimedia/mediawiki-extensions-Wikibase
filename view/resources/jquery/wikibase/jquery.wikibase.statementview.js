@@ -328,9 +328,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 				$newLi
 				.on( lia.prefixedEvent( 'afterstopediting' ), function( event, dropValue ) {
 					if ( dropValue ) {
-						liInstance.destroy();
-						$newLi.remove();
-						self._drawReferencesCounter();
+						self._referencesListview.removeItem( $newLi );
 					} else {
 						var newReferenceWithHash = liInstance.value();
 
