@@ -21,6 +21,9 @@ QUnit.module( 'jquery.wikibase.edittoolbar', QUnit.newMwEnvironment( {
 					self._trigger( 'afterstopediting', null, [dropValue] );
 				}, 0 );
 			},
+			cancelEditing: function() {
+				return this.stopEditing( true );
+			},
 			setError: function() {
 				this._trigger( 'toggleerror' );
 			}
