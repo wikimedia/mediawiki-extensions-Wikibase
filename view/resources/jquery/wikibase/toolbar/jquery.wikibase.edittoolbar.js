@@ -63,6 +63,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	 * @type {string[]}
 	 */
 	_requiredMethods: [
+		'cancelEditing',
 		'startEditing',
 		'stopEditing',
 		'setError'
