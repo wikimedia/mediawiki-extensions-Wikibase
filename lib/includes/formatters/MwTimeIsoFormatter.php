@@ -75,13 +75,13 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @return string Formatted date
 	 */
 	private function getLocalizedDate( $isoTimestamp, $precision ) {
-		$dateFormat = $this->getDateFormat( $precision );
 		$localizedYear = $this->getLocalizedYear( $isoTimestamp, $precision );
 
-		if ( $dateFormat === 'Y' ) {
+		if ( $precision <= TimeValue::PRECISION_YEAR ) {
 			return $localizedYear;
 		}
 
+		$dateFormat = $this->getDateFormat( $precision );
 		$mwTimestamp = $this->getMwTimestamp( $isoTimestamp, $precision );
 		$mwYear = $this->language->sprintfDate( 'Y', $mwTimestamp );
 		$localizedDate = $this->language->sprintfDate( $dateFormat, $mwTimestamp );
@@ -102,17 +102,18 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	/**
 	 * @param int $precision
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string Date format string to be used by Language::sprintfDate
 	 */
 	private function getDateFormat( $precision ) {
-		if ( $precision <= TimeValue::PRECISION_YEAR ) {
-			return 'Y';
-		} elseif ( $precision === TimeValue::PRECISION_MONTH ) {
+		if ( $precision === TimeValue::PRECISION_MONTH ) {
 			$format = $this->language->getDateFormatString( 'monthonly', 'dmy' );
 			return sprintf( '%s Y', $this->getMonthFormat( $format ) );
-		} else {
+		} elseif ( $precision === TimeValue::PRECISION_DAY ) {
 			$format = $this->language->getDateFormatString( 'date', 'dmy' );
 			return sprintf( '%s %s Y', $this->getDayFormat( $format ), $this->getMonthFormat( $format ) );
+		} else {
+			throw new InvalidArgumentException( 'Unsupported precision' );
 		}
 	}
 
@@ -197,7 +198,6 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 	 * @param string $isoTimestamp
 	 * @param int $precision
 	 *
-	 * @throws InvalidArgumentException
 	 * @return string
 	 */
 	private function getLocalizedYear( $isoTimestamp, $precision ) {
@@ -205,8 +205,8 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		list( , $sign, $year ) = $matches;
 		$isBCE = $sign === '-';
 
-		$shift = 1e+0;
-		$unshift = 1e+0;
+		$shift = 1;
+		$unshift = 1;
 		$func = 'round';
 
 		switch ( $precision ) {
@@ -256,28 +256,16 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 				break;
 		}
 
-		if ( $shift !== 1e+0 || $unshift !== 1e+0 ) {
-			switch ( $func ) {
-				case 'ceil':
-					$shifted = ceil( $year / $shift ) * $unshift;
-					break;
-				case 'floor':
-					$shifted = floor( $year / $shift ) * $unshift;
-					break;
-				default:
-					$shifted = round( $year / $shift ) * $unshift;
-			}
-
-			// Year to small for precision, fall back to year
-			if ( $shifted == 0
-				&& ( $precision < TimeValue::PRECISION_YEAR
-					|| ( $isBCE && $precision === TimeValue::PRECISION_YEAR )
-				)
-			) {
-				$msg = null;
-			} else {
-				$year = sprintf( '%.0f', $shifted );
-			}
+		$shifted = $this->shiftNumber( $year, $func, $shift, $unshift );
+		if ( $shifted == 0
+			&& ( $precision < TimeValue::PRECISION_YEAR
+				|| ( $isBCE && $precision === TimeValue::PRECISION_YEAR )
+			)
+		) {
+			// Year to small for precision, fall back to year.
+			$msg = null;
+		} else {
+			$year = $shifted;
 		}
 
 		if ( $precision >= TimeValue::PRECISION_YEAR ) {
@@ -293,6 +281,33 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			'wikibase-time-precision-' . ( $isBCE ? 'BCE-' : '' ) . $msg,
 			$year
 		);
+	}
+
+	/**
+	 * @param string $number
+	 * @param string $function
+	 * @param float $shift
+	 * @param float $unshift
+	 *
+	 * @return string
+	 */
+	private function shiftNumber( $number, $function, $shift, $unshift ) {
+		if ( $shift == 1 && $unshift == 1 ) {
+			return $number;
+		}
+
+		switch ( $function ) {
+			case 'ceil':
+				$shifted = ceil( $number / $shift ) * $unshift;
+				break;
+			case 'floor':
+				$shifted = floor( $number / $shift ) * $unshift;
+				break;
+			default:
+				$shifted = round( $number / $shift ) * $unshift;
+		}
+
+		return sprintf( '%.0f', $shifted );
 	}
 
 	/**
