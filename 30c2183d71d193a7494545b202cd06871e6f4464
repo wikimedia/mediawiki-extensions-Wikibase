@@ -16,6 +16,24 @@
       "revId": "30c2183d71d193a7494545b202cd06871e6f4464",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_77f04cc4",
+        "filename": "repo/includes/DataUpdates/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-26T11:27:30Z",
+      "side": 1,
+      "message": "Thy *ARE* active updaters.\n\nI will not continue adding stuff to this patch to a point where it becomes unreviewable and unmergeable again. We can very, very easily rename classes in later patches. This can not be a reason to block such an obvious, simple patch.",
+      "parentUuid": "0ebaf39b_a67b38ea",
+      "revId": "30c2183d71d193a7494545b202cd06871e6f4464",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
