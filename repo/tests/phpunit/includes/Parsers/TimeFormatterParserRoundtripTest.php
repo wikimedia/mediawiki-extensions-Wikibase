@@ -147,7 +147,7 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 			),
 			array(
 				'+00000000001-01-14T00:00:00Z',
-				'14 January 1',
+				'14 January 0001',
 			),
 			array(
 				'+00000010000-01-01T00:00:00Z',
@@ -165,7 +165,7 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 			),
 			array(
 				'-00000000001-01-14T00:00:00Z',
-				'14 January 1 BCE',
+				'14 January 0001 BCE',
 			),
 			array(
 				'-00000010000-01-01T00:00:00Z',
