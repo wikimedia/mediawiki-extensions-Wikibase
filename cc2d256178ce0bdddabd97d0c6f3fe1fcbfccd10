@@ -16,6 +16,24 @@
       "revId": "cc2d256178ce0bdddabd97d0c6f3fe1fcbfccd10",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3cc63b72",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-10-26T08:54:57Z",
+      "side": 1,
+      "message": "You mean the `newItemOptionsFn`? That would then be `ViewFactory::_getStatementViewOptions( entityId, propertyId, value)`, correct?",
+      "parentUuid": "0ebaf39b_b8f102dc",
+      "revId": "cc2d256178ce0bdddabd97d0c6f3fe1fcbfccd10",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
