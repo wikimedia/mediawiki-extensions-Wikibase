@@ -280,7 +280,9 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			}
 		}
 
-		$year = str_pad( ltrim( $year, '0' ), 1, '0', STR_PAD_LEFT );
+		if ( $precision >= TimeValue::PRECISION_YEAR ) {
+			$year = str_pad( ltrim( $year, '0' ), 4, '0', STR_PAD_LEFT );
+		}
 
 		if ( empty( $msg ) ) {
 			// TODO: This needs a message.
