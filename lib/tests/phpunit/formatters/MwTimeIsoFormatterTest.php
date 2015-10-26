@@ -439,6 +439,10 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 				'-1-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10,
 				'1 BCE',
 			),
+			array(
+				'+2015-01-01T01:00:00Z', TimeValue::PRECISION_HOUR,
+				'+2015-01-01T01:00:00Z',
+			),
 
 			// Better than the raw ISO string
 			array(
