@@ -165,10 +165,8 @@
 		var entityId = 'Q1',
 			value = null,
 			claimsChanger = {},
-			referencesChanger = {},
 			entityChangersFactory = {
-				getClaimsChanger: function() { return claimsChanger; },
-				getReferencesChanger: function() { return referencesChanger; }
+				getClaimsChanger: function() { return claimsChanger; }
 			},
 			entityIdPlainFormatter = {},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory, null, entityIdPlainFormatter ),
@@ -206,8 +204,7 @@
 				claimsChanger: claimsChanger,
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				guidGenerator: result.guidGenerator, // Hack
-				qualifiersListItemAdapter: result.qualifiersListItemAdapter, // Hack
-				referencesChanger: referencesChanger
+				qualifiersListItemAdapter: result.qualifiersListItemAdapter // Hack
 			}
 		);
 
