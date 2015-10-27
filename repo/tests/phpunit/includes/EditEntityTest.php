@@ -4,6 +4,8 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use HashBagOStuff;
+use MediaWikiTestCase;
+use ObjectCache;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use ReflectionMethod;
 use RequestContext;
@@ -34,7 +36,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EditEntityTest extends \MediaWikiTestCase {
+class EditEntityTest extends MediaWikiTestCase {
 
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
@@ -640,6 +642,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		);
 
 		// make sure we have a fresh, working cache
+		ObjectCache::clear();
 		$this->setMwGlobals(
 			'wgMemc',
 			new HashBagOStuff()
