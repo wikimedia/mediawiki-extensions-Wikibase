@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_b94eaf3b",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-27T15:22:38Z",
+      "side": 1,
+      "message": "this is supposed to be an int (although intval is done so true would also work)\n\nimho, 1 in this case is most obvious as it ultimately gets passed to die().",
+      "parentUuid": "0ebaf39b_f45c2f84",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_94761300",
         "filename": "repo/maintenance/rebuildGeoData.php",
         "patchSetId": 9
@@ -82,6 +100,24 @@
       "writtenOn": "2015-10-27T11:22:14Z",
       "side": 1,
       "message": "Should this be a \"break\" with a label instead? Otherwise the last message in this method will not be outputted.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_795cb7f4",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-27T15:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_546c1b2d",
       "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -193,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_f99ae773",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-27T15:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_f4850fd4",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_b4731713",
         "filename": "repo/maintenance/rebuildGeoData.php",
         "patchSetId": 9
@@ -210,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_39addf98",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-27T15:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_b4731713",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_d429ebe1",
         "filename": "repo/maintenance/rebuildGeoData.php",
         "patchSetId": 9
@@ -221,6 +293,24 @@
       "writtenOn": "2015-10-27T11:22:14Z",
       "side": 1,
       "message": "A command line parameter for this would be good, so this script can be used to process items only (nut no properties), for example.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_790357c2",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-27T15:22:38Z",
+      "side": 1,
+      "message": "agree, but can be added later if really desired or needed.",
+      "parentUuid": "0ebaf39b_d429ebe1",
       "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
