@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_961db8c9",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-27T14:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_467cca1b",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_e67a9e1e",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 19
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-14T20:51:14Z",
       "side": 1,
       "message": "Unused variable.",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_761844d8",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-27T14:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_e67a9e1e",
       "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_1629c8e0",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-27T14:14:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_e685bea0",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c66bdaec",
         "filename": "client/includes/recentchanges/RecentChangeFactory.php",
         "patchSetId": 19
@@ -64,6 +118,24 @@
       "writtenOn": "2015-10-14T21:40:45Z",
       "side": 1,
       "message": "missing rc_log_type",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d61ed0bd",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-27T14:14:01Z",
+      "side": 1,
+      "message": "not sure that this is actually needed, but whatever...",
+      "parentUuid": "0ebaf39b_c66bdaec",
       "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
