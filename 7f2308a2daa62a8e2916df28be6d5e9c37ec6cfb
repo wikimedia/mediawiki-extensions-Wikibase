@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_346ac7eb",
+        "filename": "repo/includes/Hooks/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:35:27Z",
+      "side": 1,
+      "message": "Not part of this patch, but I wonder what the benefit is to have this here? This creates an object even if it is not needed later. Instead this line can simply be inlined in the code below, where it is used.",
+      "revId": "7f2308a2daa62a8e2916df28be6d5e9c37ec6cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
