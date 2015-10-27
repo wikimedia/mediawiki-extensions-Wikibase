@@ -113,6 +113,7 @@
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "Cangiate le badge pe [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "Cangiate collegamende e le badge pe [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "Luate 'u collegamende a [$2]",
+	"wikibase-entity-summary-wblinktitles-create": "Ccrejate sta entità pe collegà le pàggene",
 	"wikibase-entity-summary-wblinktitles-connect": "Aggiunde 'nu collegamende a 'na lènghe pe collegà le pàggene",
 	"wikibase-entity-summary-wbcreateclaim-create": "Ccrejate 'na richieste",
 	"wikibase-entity-summary-wbremoveclaims-remove": "Luate {{PLURAL:$1|richieste}}",

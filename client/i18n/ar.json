@@ -45,6 +45,7 @@
 	"wikibase-linkitem-not-loggedin-title": "يتوجب عليك تسجيل الدخول",
 	"wikibase-linkitem-not-loggedin": "لاستخدام هذه الميزة لا بد من تسجيل الدخول على هذه الويكي وعلى [$1 مستودع البيانات المركزي].",
 	"wikibase-linkitem-success-link": "تم ربط الصفحات بنجاح. يمكنك العثور على العنصر الذي يحتوي على الارتباطات على [ $1  مستودعنا المركزي للبيانات].",
+	"wikibase-limitreport-entities-accessed": "العناصر المحملة من ويكي بيانات",
 	"wikibase-property-notfound": "لم يتم العثور على الخاصية $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "إخفاء",
