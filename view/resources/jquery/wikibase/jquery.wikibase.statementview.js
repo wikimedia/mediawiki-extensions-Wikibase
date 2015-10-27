@@ -41,9 +41,6 @@
  *        Required to store the view's `Statement`.
  * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
  *        Required for dynamically rendering plain text references to `Entity`s.
- * @param {wikibase.entityChangers.ReferencesChanger} options.referencesChanger
- *        Required to store the `Reference`s gathered from the `referenceview`s aggregated by the
- *        `statementview`.
  * @param {Object} [options.predefined={ mainSnak: false }]
  *        Allows to predefine certain aspects of the `Statement` to be created from the view. If
  *        this option is omitted, an empty view is created. A common use-case is adding a value to a
@@ -98,7 +95,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		},
 		value: null,
 		claimsChanger: null,
-		referencesChanger: null,
 		entityIdPlainFormatter: null,
 		predefined: {
 			mainSnak: false
@@ -145,7 +141,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		if ( !this.options.buildReferenceListItemAdapter
 			|| !this.options.buildSnakView
 			|| !this.options.claimsChanger
-			|| !this.options.referencesChanger
 			|| !this.options.entityIdPlainFormatter
 			|| !this.options.guidGenerator
 			|| !this.options.qualifiersListItemAdapter
@@ -312,6 +307,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 		.on( 'listviewitemadded listviewitemremoved', function( event, value, $li ) {
 			if ( event.target === $listview[0] ) {
 				self._drawReferencesCounter();
+			}
+			if ( event.type === 'listviewitemremoved' ) {
+				self._trigger( 'afterremove' );
 			}
 		} )
 		.on( 'listviewenternewitem', function( event, $newLi ) {
@@ -571,29 +569,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} );
 
 		return references;
-	},
-
-	/**
-	 * Removes a `referenceview` from the view's list of `referenceview`s.
-	 *
-	 * @param {jQuery.wikibase.referenceview} referenceview
-	 */
-	remove: function( referenceview ) {
-		var self = this;
-
-		referenceview.disable();
-
-		this.options.referencesChanger.removeReference(
-			this.value().getClaim().getGuid(),
-			referenceview.value()
-		)
-		.done( function() {
-			self._referencesListview.removeItem( referenceview.element );
-			self._trigger( 'afterremove' );
-		} ).fail( function( error ) {
-			referenceview.enable();
-			referenceview.setError( error );
-		} );
 	},
 
 	/**

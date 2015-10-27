@@ -1,4 +1,4 @@
-( function( $ ) {
+( function( $, mw ) {
 	'use strict';
 
 /**
@@ -18,10 +18,6 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				options = {},
 				$container = $referenceview.find( '.wikibase-toolbar-container' );
 
-			if ( !referenceview.options.statementGuid ) {
-				return;
-			}
-
 			if ( !$container.length ) {
 				$container = $( '<div/>' ).appendTo(
 					$referenceview.find( '.wikibase-referenceview-heading' )
@@ -30,13 +26,40 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			options.$container = $container;
 
-			if ( !!referenceview.value() ) {
+			function removeFromListView() {
+				var $statementview = $referenceview.closest( ':wikibase-statementview' ),
+					statementview = $statementview.data( 'statementview' );
+
+				statementview._referencesListview.removeItem( $referenceview );
+			}
+
+			if ( !referenceview.options.statementGuid || !referenceview.value() ) {
+				var $statementview = $referenceview.closest( ':wikibase-statementview' ),
+					statementview = $statementview.data( 'statementview' );
+				if ( !statementview.isInEditMode() ) {
+					options.label = mw.msg( 'wikibase-cancel' );
+				}
+				$referenceview.removetoolbar( options )
+				.on( 'removetoolbarremove.removetoolbar', function( event ) {
+					removeFromListView();
+				} );
+
+				return;
+			}
+
+			if ( referenceview.value() && referenceview.options.statementGuid ) {
 				options.onRemove = function() {
-					var $statementview = $referenceview.closest( ':wikibase-statementview' ),
-						statementview = $statementview.data( 'statementview' );
-					if ( statementview ) {
-						statementview.remove( referenceview );
-					}
+					referenceview.disable();
+
+					referenceview.options.referencesChanger.removeReference(
+						referenceview.options.statementGuid,
+						referenceview.value()
+					)
+					.done( removeFromListView )
+					.fail( function( error ) {
+						referenceview.enable();
+						referenceview.setError( error );
+					} );
 				};
 			}
 
@@ -99,4 +122,4 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 	}
 } );
 
-}( jQuery ) );
+}( jQuery, mediaWiki ) );
