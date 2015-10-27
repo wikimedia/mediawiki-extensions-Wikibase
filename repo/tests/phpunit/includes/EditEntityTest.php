@@ -646,9 +646,6 @@ class EditEntityTest extends MediaWikiTestCase {
 			CACHE_ANYTHING
 		);
 
-		// make sure we have a fresh cache
-		ObjectCache::clear();
-
 		$user = $this->getUser( 'UserForTestAttemptSaveRateLimit' );
 		$this->setUserGroups( $user, $groups );
 
@@ -677,6 +674,9 @@ class EditEntityTest extends MediaWikiTestCase {
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
 		}
+
+		// Make sure nobody else has to work with our cache
+		ObjectCache::clear();
 	}
 
 	public function provideIsTokenOk() {
