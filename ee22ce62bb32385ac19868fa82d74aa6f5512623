@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_366f2cfb",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-27T14:33:04Z",
+      "side": 1,
+      "message": "It is, I got a php notice without it.",
+      "parentUuid": "0ebaf39b_d61ed0bd",
+      "revId": "ee22ce62bb32385ac19868fa82d74aa6f5512623",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_816e2cc3",
         "filename": "client/tests/phpunit/includes/recentchanges/RecentChangesFactoryTest.php",
         "patchSetId": 19
