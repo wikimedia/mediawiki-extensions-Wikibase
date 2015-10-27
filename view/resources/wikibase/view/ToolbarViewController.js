@@ -108,6 +108,29 @@ SELF.prototype.stopEditing = function( dropValue ) {
 	} );
 };
 
+/**
+ * Remove the value currently represented in the view
+ */
+SELF.prototype.remove = function() {
+	var self = this;
+
+	// FIXME: Currently done by the edittoolbar itself
+	// this._toolbar.disable();
+
+	this.setError();
+	this._view.disable();
+
+	// FIXME: Currently done by the edittoolbar itself
+	// this._toolbar.toggleActionMessage( mw.msg( 'wikibase-remove-inprogress' ) );
+	this._model.remove( this._view.value() ).done( function() {
+		self._toolbar.toggleActionMessage();
+		self._leaveEditMode();
+	} ).fail( function( error ) {
+		self._view.enable();
+		self.setError( error );
+	} );
+};
+
 SELF.prototype._leaveEditMode = function() {
 	this._view.enable();
 	this._view.stopEditing();

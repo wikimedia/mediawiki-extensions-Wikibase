@@ -47,22 +47,6 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				return;
 			}
 
-			if ( referenceview.value() && referenceview.options.statementGuid ) {
-				options.onRemove = function() {
-					referenceview.disable();
-
-					referenceview.options.referencesChanger.removeReference(
-						referenceview.options.statementGuid,
-						referenceview.value()
-					)
-					.done( removeFromListView )
-					.fail( function( error ) {
-						referenceview.enable();
-						referenceview.setError( error );
-					} );
-				};
-			}
-
 			options.getHelpMessage = function() {
 				return $.Deferred().resolve( referenceview.options.helpMessage ).promise();
 			};
@@ -73,6 +57,9 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 			var referencesChanger = referenceview.options.referencesChanger;
 			var controller = new wikibase.view.ToolbarViewController(
 				{
+					remove: function( reference ) {
+						return referencesChanger.removeReference( guid, reference );
+					},
 					save: function( reference ) {
 						return referencesChanger.setReference( guid, reference );
 					}
@@ -81,6 +68,12 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				referenceview
 			);
 			edittoolbar.setController( controller );
+			edittoolbar.option(
+				'onRemove',
+				function() {
+					return controller.remove();
+				}
+			);
 
 			$referenceview.on( 'keydown.edittoolbar', function( event ) {
 				if ( referenceview.option( 'disabled' ) ) {
