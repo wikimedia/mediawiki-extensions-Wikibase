@@ -36,50 +36,45 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		) );
 	}
 
-	private function getEntityTermsView( $languageCode = 'en', $called = null ) {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-
-		if ( $called === null ) {
-			$called = $this->any();
-		}
-
+	private function getEntityTermsView(
+		$editSectionCalls = 0,
+		$languageNameCalls = 0,
+		$languageCode = 'en'
+	) {
 		$editSectionGenerator = $this->getMock( 'Wikibase\View\EditSectionGenerator' );
-
-		$editSectionGenerator->expects( $called )
+		$editSectionGenerator->expects( $this->exactly( $editSectionCalls ) )
 			->method( 'getLabelDescriptionAliasesEditSection' )
-			->will( $this->returnValue( '~EDITSECTION~' ) );
+			->will( $this->returnValue( '<EDITSECTION>' ) );
+
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
+			->method( 'getName' )
+			->will( $this->returnValue( '<LANGUAGENAME>' ) );
 
 		return new EntityTermsView(
-			$templateFactory,
+			TemplateFactory::getDefaultInstance(),
 			$editSectionGenerator,
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
+			$languageNameLookup,
 			$languageCode
 		);
 	}
 
 	private function getFingerprint( $languageCode = 'en' ) {
 		$fingerprint = new Fingerprint();
-		$fingerprint->setLabel( $languageCode, 'Example label' );
-		$fingerprint->setDescription( $languageCode, 'This is an example description' );
-		$fingerprint->setAliasGroup(
-			$languageCode,
-			array(
-				'sample alias',
-				'specimen alias',
-			)
-		);
+		$fingerprint->setLabel( $languageCode, '<LABEL>' );
+		$fingerprint->setDescription( $languageCode, '<DESCRIPTION>' );
+		$fingerprint->setAliasGroup( $languageCode, array( '<ALIAS1>', '<ALIAS2>' ) );
 		return $fingerprint;
 	}
 
 	public function testGetHtml_containsDescriptionAndAliases() {
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 1 );
 		$fingerprint = $this->getFingerprint();
 		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
-		$this->assertContains( htmlspecialchars( $fingerprint->getDescription( 'en' )->getText() ), $html );
-		foreach ( $fingerprint->getAliasGroup( 'en' )->getAliases() as $alias ) {
-			$this->assertContains( htmlspecialchars( $alias ), $html );
-		}
+		$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
+		$this->assertContains( '&lt;ALIAS1&gt;', $html );
+		$this->assertContains( '&lt;ALIAS2&gt;', $html );
 	}
 
 	public function entityFingerprintProvider() {
@@ -96,18 +91,19 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$entityTermsView = $this->getEntityTermsView( $languageCode, $this->once() );
+		$entityTermsView = $this->getEntityTermsView( 1, 0, $languageCode );
 		$html = $entityTermsView->getHtml( $fingerprint, $entityId, '', new TextInjector() );
 
-		$this->assertContains( '~EDITSECTION~', $html );
+		$this->assertContains( '<EDITSECTION>', $html );
 	}
 
 	public function testGetHtml_valuesAreEscaped() {
-		$entityTermsView = $this->getEntityTermsView();
 		$fingerprint = new Fingerprint();
 		$fingerprint->setDescription( 'en', '<script>alert( "xss" );</script>' );
 		$fingerprint->setAliasGroup( 'en', array( '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ) );
-		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
+
+		$view = $this->getEntityTermsView( 1 );
+		$html = $view->getHtml( $fingerprint, null, '', new TextInjector() );
 
 		$this->assertContains( 'evil html', $html, 'make sure it works' );
 		$this->assertNotContains( 'href="#"', $html );
@@ -134,14 +130,14 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	 * @dataProvider emptyFingerprintProvider
 	 */
 	public function testGetHtml_isMarkedAsEmptyValue( Fingerprint $fingerprint, $expectedPlaceholder ) {
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 1 );
 		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
 		$this->assertContains( 'wb-empty', $html );
 	}
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 1 );
 		$html = $entityTermsView->getHtml( $this->getFingerprint(), null, '', new TextInjector() );
 
 		$this->assertNotContains( 'wb-empty', $html );
@@ -151,7 +147,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	 * @dataProvider emptyFingerprintProvider
 	 */
 	public function testGetHtml_containsIsEmptyPlaceholders( Fingerprint $fingerprint, $expectedPlaceholder ) {
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 1 );
 		$html = $entityTermsView->getHtml( $fingerprint, null, '', new TextInjector() );
 
 		$this->assertContains( $expectedPlaceholder, $html );
@@ -164,7 +160,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$fingerprint = $this->getFingerprint();
 		$html = $entityTermsView->getTitleHtml( $fingerprint, null );
 
-		$this->assertContains( htmlspecialchars( $fingerprint->getLabel( 'en' )->getText() ), $html );
+		$this->assertContains( '&lt;LABEL&gt;', $html );
 	}
 
 	/**
@@ -212,6 +208,25 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$html = $entityTermsView->getTitleHtml( $fingerprint, null );
 
 		$this->assertNotContains( 'wb-empty', $html );
+	}
+
+	public function testGetEntityTermsForLanguageListView() {
+		$title = $this->getMock( 'Title' );
+		$title->expects( $this->once() )
+			->method( 'getLocalURL' )
+			->will( $this->returnValue( '<LOCALURL>' ) );
+
+		$fingerprint = $this->getFingerprint();
+		$view = $this->getEntityTermsView( 0, 1 );
+		$html = $view->getEntityTermsForLanguageListView( $fingerprint, array( 'en' ), $title );
+
+		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
+		$this->assertContains( '&lt;LOCALURL&gt;', $html );
+		$this->assertContains( '&lt;LANGUAGENAME&gt;', $html );
+		$this->assertContains( '&lt;LABEL&gt;', $html );
+		$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
+		$this->assertContains( '&lt;ALIAS1&gt;', $html );
+		$this->assertContains( '&lt;ALIAS2&gt;', $html );
 	}
 
 }
