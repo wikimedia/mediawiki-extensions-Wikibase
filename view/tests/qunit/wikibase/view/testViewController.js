@@ -48,6 +48,14 @@ return {
 
 			assert.ok( true );
 		} );
+
+		QUnit.test( 'has non-abstract remove method', function( assert ) {
+			var controller = getInstance();
+
+			controller.remove();
+
+			assert.ok( true );
+		} );
 	}
 
 };

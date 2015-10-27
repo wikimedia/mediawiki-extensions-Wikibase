@@ -39,6 +39,11 @@ SELF.prototype.cancelEditing = util.abstractMember;
  */
 SELF.prototype.setError = util.abstractMember;
 
+/**
+ * Remove the value currently represented in the view
+ */
+SELF.prototype.remove = util.abstractMember;
+
 return SELF;
 
 } )( wikibase );

@@ -5,7 +5,11 @@ QUnit.module( 'wikibase.view.ToolbarViewController' );
 
 function initToolbarViewController() {
 	var controller = new wb.view.ToolbarViewController(
-		null,
+		{
+			remove: function() {
+				return $.Deferred();
+			}
+		},
 		{
 			disable: function() {},
 			enable: function() {},
@@ -26,7 +30,8 @@ function initToolbarViewController() {
 			isValid: function() {},
 			setError: function() {},
 			startEditing: function() {},
-			stopEditing: function() {}
+			stopEditing: function() {},
+			value: function() {}
 		}
 	);
 
