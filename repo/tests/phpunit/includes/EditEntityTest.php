@@ -3,7 +3,8 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
-use HashBagOStuff;
+use MediaWikiTestCase;
+use ObjectCache;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use ReflectionMethod;
 use RequestContext;
@@ -34,7 +35,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EditEntityTest extends \MediaWikiTestCase {
+class EditEntityTest extends MediaWikiTestCase {
 
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
@@ -639,11 +640,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 			)
 		);
 
-		// make sure we have a fresh, working cache
+		// make sure we have a working cache
 		$this->setMwGlobals(
-			'wgMemc',
-			new HashBagOStuff()
+			'wgMainCacheType',
+			CACHE_ANYTHING
 		);
+
+		// make sure we have a fresh cache
+		ObjectCache::clear();
 
 		$user = $this->getUser( 'UserForTestAttemptSaveRateLimit' );
 		$this->setUserGroups( $user, $groups );
