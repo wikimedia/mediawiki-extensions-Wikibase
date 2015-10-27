@@ -677,6 +677,9 @@ class EditEntityTest extends MediaWikiTestCase {
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
 		}
+
+		// make sure nobody else has to work with our cache
+		ObjectCache::clear();
 	}
 
 	public function provideIsTokenOk() {
