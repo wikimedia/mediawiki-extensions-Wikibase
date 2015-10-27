@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_54565b34",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-27T11:40:35Z",
+      "side": 1,
+      "message": "this is not ideal but most simple for now, imho",
+      "parentUuid": "0ebaf39b_94761300",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_546c1b2d",
         "filename": "repo/maintenance/rebuildGeoData.php",
         "patchSetId": 9
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_9480538f",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-27T11:40:35Z",
+      "side": 1,
+      "message": "I realize that but imho good enough for what we need now",
+      "parentUuid": "0ebaf39b_3467274c",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_d457ab59",
         "filename": "repo/maintenance/rebuildGeoData.php",
         "patchSetId": 9
@@ -98,6 +134,24 @@
       "writtenOn": "2015-10-27T11:22:14Z",
       "side": 1,
       "message": "There is no code in this script that does anything with the \"page_image\" page property. I think it\u0027s this line that does some magic. Please add a comment that makes this a bit more obvious.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3451673b",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-10-27T11:40:35Z",
+      "side": 1,
+      "message": "to make it simple and reuse maximum code, we rebuild all page props, including page_image",
+      "parentUuid": "0ebaf39b_d457ab59",
       "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
