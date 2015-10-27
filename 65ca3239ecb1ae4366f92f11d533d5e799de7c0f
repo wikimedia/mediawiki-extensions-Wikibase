@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_d4424bb0",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "Don\u0027t you think people will confuse this with a page id?",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f45c2f84",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "Matter of taste, but I find \"true\" instead of \"1\" more obvious. Should also talk about an \"entity id\".",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_94761300",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "I find the way this parameter is implemented a bit odd. The pager will always fetch all ids, right? But then they are skipped.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_546c1b2d",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "Should this be a \"break\" with a label instead? Otherwise the last message in this method will not be outputted.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3467274c",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "This will not work as expected across namespaces, partly because there is no filter for namespaces. The start-ids \"Q2\" and \"P2\" will both lead to the same result: Q1 and P1 will be skipped.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d457ab59",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "There is no code in this script that does anything with the \"page_image\" page property. I think it\u0027s this line that does some magic. Please add a comment that makes this a bit more obvious.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f4850fd4",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "I think this should be silent and not output anything.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b4731713",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "This check is redundant and does not speed the script up.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d429ebe1",
+        "filename": "repo/maintenance/rebuildGeoData.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-27T11:22:14Z",
+      "side": 1,
+      "message": "A command line parameter for this would be good, so this script can be used to process items only (nut no properties), for example.",
+      "revId": "65ca3239ecb1ae4366f92f11d533d5e799de7c0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
