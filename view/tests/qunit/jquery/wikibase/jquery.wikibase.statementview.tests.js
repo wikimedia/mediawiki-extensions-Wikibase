@@ -73,8 +73,7 @@ var createStatementview = function( options, $node ) {
 					return this.options.value;
 				};
 			}
-		),
-		referencesChanger: 'I am a ReferencesChanger'
+		)
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );
@@ -146,29 +145,6 @@ QUnit.test( 'isValid on new statementview is false', function( assert ) {
 		statementview = $statementview.data( 'statementview' );
 
 	assert.ok( statementview.isValid() === false, 'isValid should return false' );
-} );
-
-QUnit.test( 'remove', function( assert ) {
-	var referencesChanger = {
-			removeReference: sinon.spy( function() { return $.Deferred().resolve().promise(); } )
-		},
-		reference = new wb.datamodel.Reference(),
-		$statementview = createStatementview( {
-			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
-					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-					null,
-					'guid'
-				),
-				new wb.datamodel.ReferenceList( [ reference ] )
-			),
-			referencesChanger: referencesChanger
-		} ),
-		statementview = $statementview.data( 'statementview' ),
-		referenceslistview = statementview._referencesListview,
-		referenceview = referenceslistview.listItemAdapter().liInstance( $( referenceslistview.items()[0] ) );
-
-	statementview.remove( referenceview );
-	sinon.assert.calledWith( referencesChanger.removeReference, 'guid', reference );
 } );
 
 QUnit.test( 'Using the generic tooltip for new claims', 1, function( assert ) {
