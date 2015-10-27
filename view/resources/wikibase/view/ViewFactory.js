@@ -310,8 +310,7 @@
 					claimsChanger: this._entityChangersFactory.getClaimsChanger(),
 					entityIdPlainFormatter: this._entityIdPlainFormatter,
 					guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
-					qualifiersListItemAdapter: this.getListItemAdapterForSnakListView(),
-					referencesChanger: this._entityChangersFactory.getReferencesChanger()
+					qualifiersListItemAdapter: this.getListItemAdapterForSnakListView()
 				};
 			}, this )
 		} );
