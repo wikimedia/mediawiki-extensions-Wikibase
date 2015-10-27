@@ -16,6 +16,41 @@
       "revId": "7f2308a2daa62a8e2916df28be6d5e9c37ec6cfb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f9c74748",
+        "filename": "repo/includes/Hooks/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-27T15:30:29Z",
+      "side": 1,
+      "message": "I agree. Actually, the code from OutputPageJsConfigBuilder could simply be inlined here. It\u0027s not used anywhere else, it basically *is* the hook handler.",
+      "parentUuid": "0ebaf39b_346ac7eb",
+      "revId": "7f2308a2daa62a8e2916df28be6d5e9c37ec6cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d9ba83b5",
+        "filename": "repo/includes/Hooks/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-27T15:30:29Z",
+      "side": 1,
+      "message": "I think this is no longer used. WE should really get rid of WB_EXPERIMENTAL_FEATURES completely.",
+      "revId": "7f2308a2daa62a8e2916df28be6d5e9c37ec6cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
