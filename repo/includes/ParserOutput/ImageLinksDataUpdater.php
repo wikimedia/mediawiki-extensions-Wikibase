@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\PropertyDataTypeMatcher;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Mättig
  */
-class ImageLinksDataUpdate implements StatementDataUpdate {
+class ImageLinksDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * @var PropertyDataTypeMatcher

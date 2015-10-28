@@ -29,7 +29,7 @@ use Wikibase\Lib\Store\PropertyDataTypeMatcher;
  * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class GeoDataDataUpdate implements StatementDataUpdate {
+class GeoDataDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * @var PropertyDataTypeMatcher
@@ -63,7 +63,7 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 		array $globeUris
 	) {
 		if ( !class_exists( 'GeoData' ) ) {
-			throw new RuntimeException( 'GeoDataDataUpdate requires the GeoData extension '
+			throw new RuntimeException( 'GeoDataDataUpdater requires the GeoData extension '
 				. 'to be enabled' );
 		}
 

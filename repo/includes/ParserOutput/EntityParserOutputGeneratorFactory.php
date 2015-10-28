@@ -160,26 +160,26 @@ class EntityParserOutputGeneratorFactory {
 	}
 
 	/**
-	 * @return ParserOutputDataUpdate[]
+	 * @return ParserOutputDataUpdater[]
 	 */
 	private function getDataUpdates() {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
 
 		$dataUpdates = array(
-			new ReferencedEntitiesDataUpdate(
+			new ReferencedEntitiesDataUpdater(
 				$this->entityTitleLookup,
 				$this->externalEntityIdParser
 			),
-			new ExternalLinksDataUpdate( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdate( $propertyDataTypeMatcher )
+			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher )
 		);
 
 		if ( !empty( $this->preferredPageImagesProperties ) ) {
-			$dataUpdates[] = new PageImagesDataUpdate( $this->preferredPageImagesProperties );
+			$dataUpdates[] = new PageImagesDataUpdater( $this->preferredPageImagesProperties );
 		}
 
 		if ( class_exists( 'GeoData' ) ) {
-			$dataUpdates[] = new GeoDataDataUpdate(
+			$dataUpdates[] = new GeoDataDataUpdater(
 				$propertyDataTypeMatcher,
 				$this->preferredGeoDataProperties,
 				$this->globeUris

@@ -11,10 +11,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdate;
+use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdate
+ * @covers Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -23,7 +23,7 @@ use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdate;
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
+class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 
 	const UNIT_PREFIX = 'unit:';
 
@@ -38,7 +38,7 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 	/**
 	 * @param int $count
 	 *
-	 * @return ReferencedEntitiesDataUpdate
+	 * @return ReferencedEntitiesDataUpdater
 	 */
 	private function newInstance( $count = 0 ) {
 		$entityTitleLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityTitleLookup' )
@@ -57,11 +57,11 @@ class ReferencedEntitiesDataUpdateTest extends MediaWikiTestCase {
 			->method( 'parse' )
 			->will( $this->returnCallback( function( $id ) {
 				return new ItemId(
-					substr( $id, strlen( ReferencedEntitiesDataUpdateTest::UNIT_PREFIX ) )
+					substr( $id, strlen( ReferencedEntitiesDataUpdaterTest::UNIT_PREFIX ) )
 				);
 			} ) );
 
-		return new ReferencedEntitiesDataUpdate( $entityTitleLookup, $entityidParser );
+		return new ReferencedEntitiesDataUpdater( $entityTitleLookup, $entityidParser );
 	}
 
 	/**

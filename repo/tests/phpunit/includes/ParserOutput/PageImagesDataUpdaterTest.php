@@ -10,10 +10,10 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\ParserOutput\PageImagesDataUpdate;
+use Wikibase\Repo\ParserOutput\PageImagesDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\PageImagesDataUpdate
+ * @covers Wikibase\Repo\ParserOutput\PageImagesDataUpdater
  *
  * @since 0.5
  *
@@ -23,15 +23,15 @@ use Wikibase\Repo\ParserOutput\PageImagesDataUpdate;
  * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
-class PageImagesDataUpdateTest extends PHPUnit_Framework_TestCase {
+class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string[] $propertyIds
 	 *
-	 * @return PageImagesDataUpdate
+	 * @return PageImagesDataUpdater
 	 */
 	private function newInstance( array $propertyIds ) {
-		return new PageImagesDataUpdate( $propertyIds );
+		return new PageImagesDataUpdater( $propertyIds );
 	}
 
 	/**
@@ -58,7 +58,7 @@ class PageImagesDataUpdateTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructor( $propertyIds ) {
 		$instance = $this->newInstance( $propertyIds );
-		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\PageImagesDataUpdate', $instance );
+		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\PageImagesDataUpdater', $instance );
 	}
 
 	public function constructorArgumentsProvider() {
