@@ -117,7 +117,7 @@ return call_user_func( function() {
 		//
 		// Please note that $wgWBClientSettings overrides settings such as this one in the repo,
 		// if client is enabled on the same wiki.
-		'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION . '-' . $GLOBALS['wgDBname'],
+		'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-' . $GLOBALS['wgDBname'],
 
 		// The duration of the object cache, in seconds.
 		//

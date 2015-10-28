@@ -72,7 +72,7 @@ return call_user_func( function() {
 		// For Wikidata production, we set it to 'wikibase-shared/wikidata_1_25wmf24-wikidatawiki',
 		// which is 'wikibase_shared/' + deployment branch name + '-' + repo database name,
 		// and have it set in both $wgWBClientSettings and $wgWBRepoSettings.
-		'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION . '-' . $GLOBALS['wgDBname'],
+		'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-' . $GLOBALS['wgDBname'],
 
 		// The duration of the object cache, in seconds.
 		//
