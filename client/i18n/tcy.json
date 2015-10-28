@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"VASANTH S.N.",
-			"Vishwanatha Badikana"
+			"Vishwanatha Badikana",
+			"రహ్మానుద్దీన్"
 		]
 	},
 	"tooltip-t-wikibase": "ಕೊಂಡಿದ ಮೂಲಕ ಸಂಗ್ರಹಿಸಯಿನ ವಸ್ತುಲೆನ ಸಂಪರ್ಕ ಮಾಹಿತಿ",
+	"wikibase-comment-update": "{{WBREPONAME}} ಬಗೆ ಬದಲಾತ್ಂಡ್",
 	"wikibase-dataitem": "{{WBREPONAME}} ವಸ್ತು",
 	"wikibase-editlinks": "ಕೊಂಡಿಲೆನ್ ಸಂಪಾದನೆ ಮಲ್ಪುಲೆ",
 	"wikibase-editlinkstitle": "ಅಂತರ್ ಭಾಷಾ ಕೊಂಡಿಲೆನ್ ಸಂಪಾದಿಸಲೆ",

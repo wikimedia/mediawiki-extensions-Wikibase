@@ -5,11 +5,11 @@
 			"संतोष दहिवळ"
 		]
 	},
-	"specialpages-group-wikibase": "विकिबेस भंडार",
+	"specialpages-group-wikibase": "विकिबेस",
 	"wikibase-deletedentity-item": "वगळलेले कलम",
 	"wikibase-deletedentity-property": "वगळलेला गुणधर्म",
 	"wikibase-deletedentity-query": "वगळलेली पृच्छा",
-	"wikibase-error-unexpected": "अनपेक्षित त्रूटी घडली.",
+	"wikibase-error-unexpected": "त्रूटी:$1",
 	"wikibase-error-save-generic": "जतन करण्याच्या क्रियेत त्रूटी घडली व त्याकारणाने,आपले बदल पूर्ण करता आले नाहीत.",
 	"wikibase-error-remove-generic": "वगळण्याच्या क्रियेत त्रूटी घडली व त्याकारणाने,आपले बदल पूर्ण करता आले नाहीत.",
 	"wikibase-error-save-connection": "जतन करण्याच्या क्रियेत अनुबंध(कनेक्शन) त्रूटी घडली व त्याकारणाने,आपले बदल पूर्ण करता आले नाहीत.कृपया आपला आंतरजाल अनुबंध तपासा.",
@@ -68,7 +68,7 @@
 	"wikibase-item-summary-wbcreate-new": "नविन कलम तयार केली",
 	"wikibase-item-summary-wbeditentity": "नविन कलम तयार केली",
 	"wikibase-item-summary-wbeditentity-create": "नविन कलम तयार केली",
-	"wikibase-item-summary-wbeditentity-update": "कलम अद्ययावत केली",
+	"wikibase-item-summary-wbeditentity-update": "कलम बदलली",
 	"wikibase-item-summary-wbeditentity-override": "कलम हटविली",
 	"wikibase-item-summary-wblinktitles-create": "पाने जोडण्यास ही कलम तयार केली",
 	"wikibase-item-summary-wblinktitles-connect": "पाने जोडण्यासाठी भाषेचा दुवा जोडला"

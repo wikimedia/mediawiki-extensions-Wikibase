@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"VASANTH S.N."
+			"VASANTH S.N.",
+			"రహ్మానుద్దీన్"
 		]
 	},
 	"wikibase-edit": "ಸಂಪಾದನೆ ಮಲ್ಪುಲೆ",
 	"wikibase-add": "ಸೇರಿಸಾಲೆ",
+	"wikibase-label-empty": "ಲೇಬಲ್ ಉಲ್ಲೇಕ ಆತಿಜ್",
 	"wikibase-description-empty": "ನನಲಾ ಒವ್ವೇ ವಿವರಣೆದ ವ್ಯಾಖ್ಯಾನ ಮಲ್ತ್‍ದಿಜ್ಜಿ",
 	"wikibase-statements": "ಹೇಳಿಕೆಲು",
 	"wikibase-sitelinks-special": "ಬೇತೆ ತಾಣೊಲು",
