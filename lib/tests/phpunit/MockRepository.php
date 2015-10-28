@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use DatabaseBase;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\Entity;
