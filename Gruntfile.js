@@ -9,10 +9,14 @@ module.exports = function ( grunt ) {
 			options: {
 				jshintrc: true
 			},
-			all: '.'
+			all: [
+				'.',
+				'**/.',
+				'!node_modules/**'
+			]
 		},
 		jscs: {
-			all: '.'
+			all: '<%= jshint.all %>'
 		},
 		banana: {
 			options: {
