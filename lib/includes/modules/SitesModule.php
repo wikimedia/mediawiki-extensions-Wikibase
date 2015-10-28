@@ -23,10 +23,17 @@ class SitesModule extends ResourceLoaderModule {
 	private $worker;
 
 	public function __construct() {
+		// Do not use live caches during unit testing.
+		// Force accelerator cache in HHVM.
+		// @todo: inject cache type
+		$cacheType = defined( 'MW_PHPUNIT_TEST' )
+			? CACHE_NONE
+			: ( wfIsHHVM() ? CACHE_ACCEL : CACHE_ANYTHING );
+
 		$this->worker = new SitesModuleWorker(
 			Settings::singleton(),
 			SiteSQLStore::newInstance(),
-			wfGetCache( wfIsHHVM() ? CACHE_ACCEL : CACHE_ANYTHING )
+			wfGetCache( $cacheType )
 		);
 	}
 

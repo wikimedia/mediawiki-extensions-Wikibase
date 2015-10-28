@@ -336,10 +336,14 @@ class DirectSqlStore implements ClientStore {
 			$this->repoWiki
 		);
 
+		// Do not use live caches during unit testing.
+		// @todo: inject cache type
+		$cacheType = defined( 'MW_PHPUNIT_TEST' ) ? CACHE_NONE : $this->cacheType;
+
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
 			$rawLookup,
-			wfGetCache( $this->cacheType ),
+			wfGetCache( $cacheType ),
 			$this->cacheDuration,
 			$cacheKeyPrefix
 		);
