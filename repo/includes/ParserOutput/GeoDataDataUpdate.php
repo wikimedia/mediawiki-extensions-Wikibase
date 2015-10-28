@@ -7,11 +7,8 @@ use CoordinatesOutput;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use ParserOutput;
 use RuntimeException;
-use UnexpectedValueException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 
 /**

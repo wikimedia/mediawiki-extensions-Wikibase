@@ -1,12 +1,12 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use Coord;
 use CoordinatesOutput;
 use DataValues\DataValue;
-use DataValues\Geo\Values\LatLongValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use ParserOutput;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,7 +17,6 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Repo\ParserOutput\GeoDataDataUpdate;
 

@@ -8,7 +8,6 @@ use Wikibase\Change;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
