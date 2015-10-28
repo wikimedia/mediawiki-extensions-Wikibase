@@ -52,18 +52,18 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	 * @dataProvider processStatementProvider
 	 */
 	public function testProcessStatement( array $expected, array $statements, $message ) {
-		$dataUpdate = $this->newGeoDataDataUpdate(
+		$dataUpdater = $this->newGeoDataDataUpdate(
 			array( 'P625', 'P9000' )
 		);
 
 		foreach ( $statements as $statement ) {
-			$dataUpdate->processStatement( $statement );
+			$dataUpdater->processStatement( $statement );
 		}
 
 		$this->assertAttributeEquals(
 			$expected,
 			'coordinates',
-			$dataUpdate,
+			$dataUpdater,
 			$message
 		);
 	}
@@ -160,12 +160,12 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordPreferredStatement() {
-		$dataUpdate = $this->newGeoDataDataUpdate(
+		$dataUpdater = $this->newGeoDataDataUpdate(
 			array( 'P9000', 'P625' )
 		);
 
 		foreach ( $this->getStatements() as $statement ) {
-			$dataUpdate->processStatement( $statement );
+			$dataUpdater->processStatement( $statement );
 		}
 
 		$coords = $this->getCoords();
@@ -183,18 +183,18 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$parserOutput = new ParserOutput();
-		$dataUpdate->updateParserOutput( $parserOutput );
+		$dataUpdater->updateParserOutput( $parserOutput );
 
 		$this->assertEquals( $expected, $parserOutput->geoData );
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordNormalStatement() {
-		$dataUpdate = $this->newGeoDataDataUpdate(
+		$dataUpdater = $this->newGeoDataDataUpdate(
 			array( 'P625', 'P10' )
 		);
 
 		foreach ( $this->getStatements() as $statement ) {
-			$dataUpdate->processStatement( $statement );
+			$dataUpdater->processStatement( $statement );
 		}
 
 		$expected = new CoordinatesOutput();
@@ -211,18 +211,18 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$parserOutput = new ParserOutput();
-		$dataUpdate->updateParserOutput( $parserOutput );
+		$dataUpdater->updateParserOutput( $parserOutput );
 
 		$this->assertEquals( $expected, $parserOutput->geoData );
 	}
 
 	public function testUpdateParserOutput_noPrimaryCoord() {
-		$dataUpdate = $this->newGeoDataDataUpdate(
+		$dataUpdater = $this->newGeoDataDataUpdate(
 			array( 'P17', 'P404', 'P10', 'P20', 'P9000', 'P9001', 'P625' )
 		);
 
 		foreach ( $this->getStatements() as $statement ) {
-			$dataUpdate->processStatement( $statement );
+			$dataUpdater->processStatement( $statement );
 		}
 
 		$expected = new CoordinatesOutput();
@@ -232,7 +232,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$parserOutput = new ParserOutput();
-		$dataUpdate->updateParserOutput( $parserOutput );
+		$dataUpdater->updateParserOutput( $parserOutput );
 
 		$this->assertEquals( $expected, $parserOutput->geoData );
 	}
