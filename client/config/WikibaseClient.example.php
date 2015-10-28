@@ -56,7 +56,7 @@ $wgWBClientSettings['injectRecentChanges'] = true;
 $wgWBClientSettings['showExternalRecentChanges'] = true;
 
 // Make sure we use the same keys on repo and clients, so we can share cached objects.
-$wgWBClientSettings['sharedCacheKeyPrefix'] = $wgWBClientSettings['repoDatabase'] . ':WBL/' . WBL_VERSION;
+$wgWBClientSettings['sharedCacheKeyPrefix'] = $wgWBClientSettings['repoDatabase'] . ':WBL/' . rawurlencode( WBL_VERSION );
 
 // In order to access a remote repo using a different database server,
 // LBFactoryMulti must be used. In that case, enabled the block below.
