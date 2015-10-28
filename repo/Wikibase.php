@@ -141,6 +141,7 @@ call_user_func( function() {
 	};
 
 	// API module registration
+	$wgAPIModules['wbnutshell'] = 'Wikibase\Repo\Api\NutShell';
 	$wgAPIModules['wbgetentities'] = 'Wikibase\Repo\Api\GetEntities';
 	$wgAPIModules['wbsetlabel'] = 'Wikibase\Repo\Api\SetLabel';
 	$wgAPIModules['wbsetdescription'] = 'Wikibase\Repo\Api\SetDescription';
