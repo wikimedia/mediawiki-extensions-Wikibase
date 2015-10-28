@@ -23,10 +23,14 @@ class SitesModule extends ResourceLoaderModule {
 	private $worker;
 
 	public function __construct() {
+		$cacheType = defined( 'MW_PHPUNIT_TEST' )
+			? CACHE_NONE
+			: ( wfIsHHVM() ? CACHE_ACCEL : CACHE_ANYTHING );
+
 		$this->worker = new SitesModuleWorker(
 			Settings::singleton(),
 			SiteSQLStore::newInstance(),
-			wfGetCache( wfIsHHVM() ? CACHE_ACCEL : CACHE_ANYTHING )
+			wfGetCache( $cacheType )
 		);
 	}
 

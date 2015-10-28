@@ -397,7 +397,7 @@ class SqlStore implements Store {
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
 			$rawLookup,
-			wfGetCache( $this->cacheType ),
+			wfGetCache( defined( 'MW_PHPUNIT_TEST' ) ? CACHE_NONE : $this->cacheType ),
 			$this->cacheDuration,
 			$cacheKeyPrefix
 		);
