@@ -20,9 +20,9 @@ use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
-use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdate;
-use Wikibase\Repo\ParserOutput\ImageLinksDataUpdate;
-use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdate;
+use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
+use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
+use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -144,9 +144,9 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
 
 		$dataUpdates = array(
-			new ExternalLinksDataUpdate( $propertyDataTypeMatcher ),
-			new ImageLinksDataUpdate( $propertyDataTypeMatcher ),
-			new ReferencedEntitiesDataUpdate(
+			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
+			new ReferencedEntitiesDataUpdater(
 				$entityTitleLookup,
 				new BasicEntityIdParser()
 			)

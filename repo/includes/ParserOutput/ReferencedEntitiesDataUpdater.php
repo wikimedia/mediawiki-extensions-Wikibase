@@ -27,7 +27,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig
  */
-class ReferencedEntitiesDataUpdate implements StatementDataUpdate, SiteLinkDataUpdate {
+class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDataUpdater {
 
 	/**
 	 * @var EntityTitleLookup

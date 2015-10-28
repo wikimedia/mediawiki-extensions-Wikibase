@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-interface StatementDataUpdate extends ParserOutputDataUpdate {
+interface StatementDataUpdater extends ParserOutputDataUpdater {
 
 	/**
 	 * Extract some data or do processing on a Statement during parsing.

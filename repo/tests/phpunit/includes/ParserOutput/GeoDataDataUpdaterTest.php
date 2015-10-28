@@ -19,10 +19,10 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Store\PropertyDataTypeMatcher;
-use Wikibase\Repo\ParserOutput\GeoDataDataUpdate;
+use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\GeoDataDataUpdate;
+ * @covers Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -31,7 +31,7 @@ use Wikibase\Repo\ParserOutput\GeoDataDataUpdate;
  * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class GeoDataDataUpdateTest extends \MediaWikiTestCase {
+class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 	private function willSkipTests() {
 		if ( !class_exists( 'GeoData' ) ) {
@@ -238,7 +238,7 @@ class GeoDataDataUpdateTest extends \MediaWikiTestCase {
 	}
 
 	private function newGeoDataDataUpdate( array $preferredProperties ) {
-		return new GeoDataDataUpdate(
+		return new GeoDataDataUpdater(
 			new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() ),
 			$preferredProperties,
 			array(

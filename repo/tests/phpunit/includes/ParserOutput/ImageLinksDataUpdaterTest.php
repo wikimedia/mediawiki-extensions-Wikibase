@@ -7,10 +7,10 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\ParserOutput\ImageLinksDataUpdate;
+use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\ImageLinksDataUpdate
+ * @covers Wikibase\Repo\ParserOutput\ImageLinksDataUpdater
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -18,10 +18,10 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdate;
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class ImageLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
+class ImageLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return ImageLinksDataUpdate
+	 * @return ImageLinksDataUpdater
 	 */
 	private function newInstance() {
 		$matcher = $this->getMockBuilder( 'Wikibase\Lib\Store\PropertyDataTypeMatcher' )
@@ -33,7 +33,7 @@ class ImageLinksDataUpdateTest extends PHPUnit_Framework_TestCase {
 				return $id->getSerialization() === 'P1';
 			} ) );
 
-		return new ImageLinksDataUpdate( $matcher );
+		return new ImageLinksDataUpdater( $matcher );
 	}
 
 	/**

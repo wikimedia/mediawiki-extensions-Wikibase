@@ -18,7 +18,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class PageImagesDataUpdate implements StatementDataUpdate {
+class PageImagesDataUpdater implements StatementDataUpdater {
 
 	/**
 	 * @var int[] Hash table of image property id strings pointing to priorities (smaller numbers
@@ -49,7 +49,7 @@ class PageImagesDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
-	 * @see StatementDataUpdate::processStatement
+	 * @see StatementDataUpdater::processStatement
 	 *
 	 * @param Statement $statement
 	 */
@@ -172,7 +172,7 @@ class PageImagesDataUpdate implements StatementDataUpdate {
 	}
 
 	/**
-	 * @see ParserOutputDataUpdate::updateParserOutput
+	 * @see ParserOutputDataUpdater::updateParserOutput
 	 *
 	 * @param ParserOutput $parserOutput
 	 */

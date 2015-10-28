@@ -25,35 +25,35 @@ class EntityParserOutputDataUpdater {
 	private $parserOutput;
 
 	/**
-	 * @var ParserOutputDataUpdate[]
+	 * @var ParserOutputDataUpdater[]
 	 */
 	private $dataUpdates;
 
 	/**
-	 * @var StatementDataUpdate[]
+	 * @var StatementDataUpdater[]
 	 */
 	private $statementDataUpdates = array();
 
 	/**
-	 * @var SiteLinkDataUpdate[]
+	 * @var SiteLinkDataUpdater[]
 	 */
 	private $siteLinkDataUpdates = array();
 
 	/**
 	 * @param ParserOutput $parserOutput
-	 * @param ParserOutputDataUpdate[] $dataUpdates
+	 * @param ParserOutputDataUpdater[] $dataUpdates
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( ParserOutput $parserOutput, array $dataUpdates ) {
 		foreach ( $dataUpdates as $dataUpdate ) {
-			if ( $dataUpdate instanceof StatementDataUpdate ) {
+			if ( $dataUpdate instanceof StatementDataUpdater ) {
 				$this->statementDataUpdates[] = $dataUpdate;
-			} elseif ( $dataUpdate instanceof SiteLinkDataUpdate ) {
+			} elseif ( $dataUpdate instanceof SiteLinkDataUpdater ) {
 				$this->siteLinkDataUpdates[] = $dataUpdate;
 			} else {
 				throw new InvalidArgumentException( 'Each $dataUpdates element must be a '
-					. 'StatementDataUpdate, SiteLinkDataUpdate or both' );
+					. 'StatementDataUpdater, SiteLinkDataUpdater or both' );
 			}
 		}
 
