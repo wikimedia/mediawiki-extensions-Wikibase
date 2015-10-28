@@ -27,38 +27,38 @@ class EntityParserOutputDataUpdater {
 	/**
 	 * @var ParserOutputDataUpdater[]
 	 */
-	private $dataUpdates;
+	private $dataUpdaters;
 
 	/**
 	 * @var StatementDataUpdater[]
 	 */
-	private $statementDataUpdates = array();
+	private $statementDataUpdaters = array();
 
 	/**
 	 * @var SiteLinkDataUpdater[]
 	 */
-	private $siteLinkDataUpdates = array();
+	private $siteLinkDataUpdaters = array();
 
 	/**
 	 * @param ParserOutput $parserOutput
-	 * @param ParserOutputDataUpdater[] $dataUpdates
+	 * @param ParserOutputDataUpdater[] $dataUpdaters
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( ParserOutput $parserOutput, array $dataUpdates ) {
-		foreach ( $dataUpdates as $dataUpdate ) {
-			if ( $dataUpdate instanceof StatementDataUpdater ) {
-				$this->statementDataUpdates[] = $dataUpdate;
-			} elseif ( $dataUpdate instanceof SiteLinkDataUpdater ) {
-				$this->siteLinkDataUpdates[] = $dataUpdate;
+	public function __construct( ParserOutput $parserOutput, array $dataUpdaters ) {
+		foreach ( $dataUpdaters as $dataUpdater ) {
+			if ( $dataUpdater instanceof StatementDataUpdater ) {
+				$this->statementDataUpdaters[] = $dataUpdater;
+			} elseif ( $dataUpdater instanceof SiteLinkDataUpdater ) {
+				$this->siteLinkDataUpdaters[] = $dataUpdater;
 			} else {
-				throw new InvalidArgumentException( 'Each $dataUpdates element must be a '
+				throw new InvalidArgumentException( 'Each $dataUpdaters element must be a '
 					. 'StatementDataUpdater, SiteLinkDataUpdater or both' );
 			}
 		}
 
 		$this->parserOutput = $parserOutput;
-		$this->dataUpdates = $dataUpdates;
+		$this->dataUpdaters = $dataUpdaters;
 	}
 
 	/**
@@ -78,13 +78,13 @@ class EntityParserOutputDataUpdater {
 	 * @param StatementListProvider $entity
 	 */
 	private function processStatementListProvider( StatementListProvider $entity ) {
-		if ( empty( $this->statementDataUpdates ) ) {
+		if ( empty( $this->statementDataUpdaters ) ) {
 			return;
 		}
 
 		foreach ( $entity->getStatements() as $statement ) {
-			foreach ( $this->statementDataUpdates as $dataUpdate ) {
-				$dataUpdate->processStatement( $statement );
+			foreach ( $this->statementDataUpdaters as $dataUpdater ) {
+				$dataUpdater->processStatement( $statement );
 			}
 		}
 	}
@@ -93,20 +93,20 @@ class EntityParserOutputDataUpdater {
 	 * @param Item $item
 	 */
 	private function processItem( Item $item ) {
-		if ( empty( $this->siteLinkDataUpdates ) ) {
+		if ( empty( $this->siteLinkDataUpdaters ) ) {
 			return;
 		}
 
 		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			foreach ( $this->siteLinkDataUpdates as $dataUpdate ) {
-				$dataUpdate->processSiteLink( $siteLink );
+			foreach ( $this->siteLinkDataUpdaters as $dataUpdater ) {
+				$dataUpdater->processSiteLink( $siteLink );
 			}
 		}
 	}
 
 	public function finish() {
-		foreach ( $this->dataUpdates as $dataUpdate ) {
-			$dataUpdate->updateParserOutput( $this->parserOutput );
+		foreach ( $this->dataUpdaters as $dataUpdater ) {
+			$dataUpdater->updateParserOutput( $this->parserOutput );
 		}
 	}
 
