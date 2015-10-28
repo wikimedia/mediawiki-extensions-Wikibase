@@ -143,7 +143,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
 
-		$dataUpdates = array(
+		$dataUpdaters = array(
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ReferencedEntitiesDataUpdater(
@@ -160,7 +160,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$entityDataFormatProvider,
-			$dataUpdates,
+			$dataUpdaters,
 			'en'
 		);
 	}
