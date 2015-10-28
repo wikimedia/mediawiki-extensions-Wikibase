@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
@@ -40,14 +41,14 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$siteLinkDataUpdate->expects( $this->once() )
 			->method( 'updateParserOutput' );
 
-		$instance = new EntityParserOutputDataUpdater( array(
+		$instance = new EntityParserOutputDataUpdater( $parserOutput, array(
 			$statementDataUpdate,
 			$siteLinkDataUpdate,
 		) );
 		foreach ( $entities as $entity ) {
 			$instance->processEntity( $entity );
 		}
-		$instance->updateParserOutput( $parserOutput );
+		$instance->finish();
 	}
 
 	public function entitiesProvider() {
@@ -72,7 +73,7 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGivenInvalidDataUpdate_constructorThrowsException( array $argument ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new EntityParserOutputDataUpdater( $argument );
+		new EntityParserOutputDataUpdater( new ParserOutput(), $argument );
 	}
 
 	public function invalidConstructorArgumentProvider() {

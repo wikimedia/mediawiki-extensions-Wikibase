@@ -76,9 +76,9 @@ class EntityParserOutputGenerator {
 	private $entityDataFormatProvider;
 
 	/**
-	 * @var EntityParserOutputDataUpdater
+	 * @var ParserOutputDataUpdate[]
 	 */
-	private $parserOutputDataUpdater;
+	private $dataUpdates;
 
 	/**
 	 * @var string
@@ -93,7 +93,7 @@ class EntityParserOutputGenerator {
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
-		EntityParserOutputDataUpdater $parserOutputDataUpdater,
+		array $dataUpdates,
 		$languageCode
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -104,7 +104,7 @@ class EntityParserOutputGenerator {
 		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
-		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
+		$this->dataUpdates = $dataUpdates;
 		$this->languageCode = $languageCode;
 	}
 
@@ -142,8 +142,9 @@ class EntityParserOutputGenerator {
 
 		$entity = $entityRevision->getEntity();
 
-		$this->parserOutputDataUpdater->processEntity( $entity );
-		$this->parserOutputDataUpdater->updateParserOutput( $parserOutput );
+		$dataUpdater = new EntityParserOutputDataUpdater( $parserOutput, $this->dataUpdates );
+		$dataUpdater->processEntity( $entity );
+		$dataUpdater->finish();
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
