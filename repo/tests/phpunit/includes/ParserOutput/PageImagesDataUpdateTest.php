@@ -81,9 +81,15 @@ class PageImagesDataUpdateTest extends PHPUnit_Framework_TestCase {
 		$parserOutput = $this->getMockBuilder( 'ParserOutput' )
 			->disableOriginalConstructor()
 			->getMock();
-		$parserOutput->expects( $this->once() )
-			->method( 'setProperty' )
-			->with( 'page_image', $expected );
+
+		if ( $expected !== null ) {
+			$parserOutput->expects( $this->once() )
+				->method( 'setProperty' )
+				->with( 'page_image', $expected );
+		} else {
+			$parserOutput->expects( $this->never() )
+				->method( 'setProperty' );
+		}
 
 		$instance = $this->newInstance( $propertyIds );
 
