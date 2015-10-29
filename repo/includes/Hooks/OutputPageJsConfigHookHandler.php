@@ -4,20 +4,22 @@ namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
 use Wikibase\OutputPageJsConfigBuilder;
-use Wikibase\SettingsArray;
+use Wikibase\Repo\EntityNamespaceLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Marius Hoch
  */
 class OutputPageJsConfigHookHandler {
 
 	/**
-	 * @var SettingsArray
+	 * @var EntityNamespaceLookup
 	 */
-	private $settings;
+	private $entityNamespaceLookup;
 
 	/**
 	 * @var OutputPageJsConfigBuilder
@@ -25,20 +27,85 @@ class OutputPageJsConfigHookHandler {
 	private $outputPageConfigBuilder;
 
 	/**
-	 * @todo: don't pass around SettingsArray, just take specific constructor params.
-	 *
-	 * @param SettingsArray $settings
+	 * @var string
 	 */
-	public function __construct( SettingsArray $settings ) {
-		$this->settings = $settings;
+	private $dataRightsUrl;
+
+	/**
+	 * @var string
+	 */
+	private $dataRightsText;
+
+	/**
+	 * @var string[]
+	 */
+	private $badgeItems;
+
+	/**
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
+	 * @param string $dataRightsUrl
+	 * @param string $dataRightsText
+	 * @param string[] $badgeItems
+	 */
+	public function __construct( EntityNamespaceLookup $entityNamespaceLookup, $dataRightsUrl, $dataRightsText, array $badgeItems ) {
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->outputPageConfigBuilder = new OutputPageJsConfigBuilder();
+		$this->dataRightsUrl = $dataRightsUrl;
+		$this->dataRightsText = $dataRightsText;
+		$this->badgeItems = $badgeItems;
+	}
+
+	/**
+	 * @return self
+	 */
+	private static function newFromGlobalState() {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
+
+		return new self(
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' ),
+			$settings->getSetting( 'badgeItems' )
+		);
+	}
+
+	/**
+	 * Puts user-specific and other vars that we don't want stuck
+	 * in parser cache (e.g. copyright message)
+	 *
+	 * @param OutputPage $out
+	 * @param string &$html
+	 *
+	 * @return bool
+	 */
+	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
+		$instance = self::newFromGlobalState();
+		return $instance->doOutputPageBeforeHtmlRegisterConfig( $out, $html );
+	}
+
+	/**
+	 * @param OutputPage $out
+	 * @param string &$html
+	 *
+	 * @return bool
+	 */
+	public function doOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
+		if ( !$this->entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
+			return true;
+		}
+
+		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
+		$this->handle( $out, $isExperimental );
+
+		return true;
 	}
 
 	/**
 	 * @param OutputPage &$out
 	 * @param boolean $isExperimental
 	 */
-	public function handle( OutputPage $out, $isExperimental ) {
+	private function handle( OutputPage $out, $isExperimental ) {
 		$outputConfigVars = $this->buildConfigVars( $out, $isExperimental );
 
 		$out->addJsConfigVars( $outputConfigVars );
@@ -51,19 +118,13 @@ class OutputPageJsConfigHookHandler {
 	 * @return array
 	 */
 	private function buildConfigVars( OutputPage $out, $isExperimental ) {
-		$rightsUrl = $this->settings->getSetting( 'dataRightsUrl' );
-		$rightsText = $this->settings->getSetting( 'dataRightsText' );
-		$badgeItems = $this->settings->getSetting( 'badgeItems' );
-
-		$configVars = $this->outputPageConfigBuilder->build(
+		return $this->outputPageConfigBuilder->build(
 			$out,
-			$rightsUrl,
-			$rightsText,
-			$badgeItems,
+			$this->dataRightsUrl,
+			$this->dataRightsText,
+			$this->badgeItems,
 			$isExperimental
 		);
-
-		return $configVars;
 	}
 
 }
