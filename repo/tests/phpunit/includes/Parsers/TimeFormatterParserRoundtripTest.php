@@ -24,6 +24,20 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  */
 class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 
+	private function newTimeParserFactory( ParserOptions $options = null ) {
+		$monthNameProvider = $this->getMock( 'Wikibase\Repo\Parsers\MonthNameProvider' );
+		$monthNameProvider->expects( $this->any() )
+			->method( 'getMonthNameReplacements' )
+			->will( $this->returnValue( array(
+				'8月' => 'August',
+				'agosto' => 'August',
+				'Augusti' => 'August',
+				'Avgust' => 'August',
+			) ) );
+
+		return new TimeParserFactory( $options, $monthNameProvider );
+	}
+
 	public function isoTimestampProvider() {
 		return array(
 			// Going up the precision chain
@@ -60,7 +74,7 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testFormatterParserRoundtrip( TimeValue $expected ) {
 		$formatter = new MwTimeIsoFormatter();
-		$factory = new TimeParserFactory();
+		$factory = $this->newTimeParserFactory();
 		$parser = $factory->getTimeParser();
 
 		$formatted = $formatter->format( $expected );
@@ -99,7 +113,7 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider formattedTimeProvider
 	 */
 	public function testParserFormatterRoundtrip( $expected ) {
-		$factory = new TimeParserFactory();
+		$factory = $this->newTimeParserFactory();
 		$parser = $factory->getTimeParser();
 		$formatter = new MwTimeIsoFormatter();
 
@@ -124,7 +138,7 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 			IsoTimestampParser::OPT_PRECISION => $timeValue->getPrecision(),
 			IsoTimestampParser::OPT_CALENDAR => $timeValue->getCalendarModel(),
 		) );
-		$factory = new TimeParserFactory( $parserOptions );
+		$factory = $this->newTimeParserFactory( $parserOptions );
 		$parser = $factory->getTimeParser();
 
 		$this->assertSame( $formatted, $formatter->format( $timeValue ) );
