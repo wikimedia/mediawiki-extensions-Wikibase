@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_13f3046a",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-10-29T11:56:53Z",
+      "side": 1,
+      "message": "The change from injecting the updaters to constructing them here should  be in a separate patch. I think I suggested this, but looking at the code, I\u0027m no longer sure it was a good idea.",
+      "revId": "00488869553b96e0e29909f0d0e8740393738ee1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
