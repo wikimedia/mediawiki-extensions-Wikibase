@@ -4,7 +4,10 @@
 			"Hugo.arg"
 		]
 	},
+	"wikibase-edit": "taisītė",
+	"wikibase-add": "prėdietė",
 	"wikibase-label-empty": "Žīmies nie",
 	"wikibase-description-empty": "Aprašīms nie ožpėldīts",
-	"wikibase-sitelinks-special": "Kėtė tėnklapē"
+	"wikibase-sitelinks-special": "Kėtė tėnklapē",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|šaltėnis|šaltėnē|šaltėniu}}"
 }

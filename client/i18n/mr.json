@@ -59,7 +59,7 @@
 	"unconnectedpages-summary": "हे पान (संलग्नीकरणास आधारभूत असणाऱ्या नामविश्वातील)संलग्न नसलेल्या डाटाकलमांची यादी करते.ही यादी उतरत्या पान-ओळखणीनुसार(descending page ID) पृथक केल्या गेली आहे,जेणेकरुन नविनतम पाने यादीत वर आहेत.",
 	"wikibase-unconnectedpages-format-row": "(या पानावरील {{PLURAL:$1|आंतरभाषिक दुवा|आंतरभाषिक दुवे}} $1)",
 	"wikibase-unconnectedpages-submit": "पाने दाखवा",
-	"pageswithbadges": "बिल्ल्यासहित (बॅजेस) असलेली पाने",
+	"pageswithbadges": "बिल्ला (बॅजेस) असलेली पाने",
 	"pageswithbadges-summary": "या पानात, बिल्ले असणाऱ्या पानांची यादी आहे(उदा.-चांगला लेख किंवा विशेष लेख). ही यादी उतरत्या पान-ओळखणीनुसार(descending page ID) पृथक केल्या गेली आहे,जेणेकरुन नविनतम पाने यादीत वर आहेत.",
 	"wikibase-pageswithbadges-invalid-id": "$1 ही एक वैध कलम -ओळखण नाही",
 	"wikibase-pageswithbadges-legend": "दिलेल्या बिल्ल्यासह असलेल्या पानांची यादी",
@@ -70,5 +70,5 @@
 	"wikibase-property-render-error": "$1 गुणधर्म देण्यास अयशस्वी:$2",
 	"wikibase-otherprojects": "इतर प्रकल्प",
 	"wikibase-otherprojects-beta-message": "इतर प्रकल्प कडपट्टी(साईडबार)",
-	"wikibase-otherprojects-beta-description": "हे कडपट्टीस(साईडबार) \"{{int:wikibase-otherprojects}}\" विभाग जोडते,ज्यायोगे, {{WBREPONAME}}वर आधारीत दुसऱ्या विकिमिडिया प्रकल्पांशी दुवे दिल्या जातात."
+	"wikibase-otherprojects-beta-description": "हे कडपट्टीस (साईडबार) \"{{int:wikibase-otherprojects}}\" विभाग जोडते,ज्यायोगे, {{WBREPONAME}}वर आधारीत दुसऱ्या विकिमिडिया प्रकल्पांशी दुवे दिल्या जातात."
 }

@@ -4,8 +4,10 @@
 			"Hugo.arg"
 		]
 	},
+	"tooltip-t-wikibase": "Nūruoda i doumenū sklada īraša",
 	"wikibase-after-page-move-queued": "[$1 Vikidatas īrašos], sojongts so ton poslapio, tūjaus bus atnaujints autuomatėškā.",
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}} īrašos], katros sosėjis so tuo straipsnio, patsā atsėnaujėna. Bat tas dielē kuokiū tās kliūtiū galiejė ė nenutiktė.",
+	"wikibase-comment-update": "{{WBREPONAME}} žīms ī pamainīts",
 	"wikibase-dataitem": "{{WBREPONAME}} īrašos",
 	"wikibase-editlinks": "Keistė nūruodas",
 	"wikibase-editlinkstitle": "Keistė terpkalbėnės nūruodas",
@@ -19,6 +21,7 @@
 	"wikibase-linkitem-success-link": "Poslapē bova poikē sojongtė. Tamsta galat rastō īraša, katram sudietas nūoruodas mūsa [$1 centrėnė doumenū skladuo].",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Kavuotė",
+	"wikibase-rc-hide-wikidata-show": "Ruodītė",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} pakeitėms",
 	"wikibase-replicationnote": "Toriekėt galvuo, kū gal praētė kelets mėnotiu pakuol keitėmā pataps regėmė visūsė wiki.",
