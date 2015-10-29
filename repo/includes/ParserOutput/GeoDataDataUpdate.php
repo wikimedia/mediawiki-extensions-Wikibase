@@ -55,6 +55,7 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher
 	 * @param string[] $preferredPropertiesIds
 	 * @param string[] $globeUris
+	 *
 	 * @throws RuntimeException
 	 */
 	public function __construct(
@@ -163,7 +164,7 @@ class GeoDataDataUpdate implements StatementDataUpdate {
 
 	/**
 	 * @param CoordinatesOutput $coordinatesOutput
-	 * @param string $key
+	 * @param string $primaryCoordKey
 	 */
 	private function addPrimaryCoordinate(
 		CoordinatesOutput $coordinatesOutput,

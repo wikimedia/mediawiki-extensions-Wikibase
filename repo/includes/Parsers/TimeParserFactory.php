@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Parsers;
 
-use Language;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\DispatchingValueParser;
 use ValueParsers\EraParser;
@@ -19,6 +18,8 @@ use ValueParsers\YearMonthDayTimeParser;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Thiemo Mättig
+ *
+ * @todo move me to DataValues-time
  */
 class TimeParserFactory {
 
@@ -28,12 +29,23 @@ class TimeParserFactory {
 	private $options;
 
 	/**
-	 * @param ParserOptions|null $options
+	 * @var MonthNameProvider
 	 */
-	public function __construct( ParserOptions $options = null ) {
+	private $monthNameProvider;
+
+	/**
+	 * @param ParserOptions|null $options
+	 * @param MonthNameProvider|null $monthNameProvider
+	 */
+	public function __construct(
+		ParserOptions $options = null,
+		MonthNameProvider $monthNameProvider = null
+	) {
 		$this->options = $options ?: new ParserOptions();
+		$this->monthNameProvider = $monthNameProvider ?: new MediaWikiMonthNameProvider();
 
 		$this->options->defaultOption( ValueParser::OPT_LANG, 'en' );
+
 	}
 
 	/**
@@ -81,36 +93,10 @@ class TimeParserFactory {
 		$replacements = array();
 
 		if ( $languageCode !== $baseLanguageCode ) {
-			$replacements = $this->getMwMonthNameReplacements( $languageCode, $baseLanguageCode );
+			$replacements = $this->monthNameProvider->getMonthNameReplacements( $languageCode, $baseLanguageCode );
 		}
 
 		return new MonthNameUnlocalizer( $replacements );
-	}
-
-	/**
-	 * Creates replacements for the MonthNameUnlocalizer using information retrieved via MediaWiki's
-	 * Language object. Takes full month names, genitive names and abbreviations into account.
-	 *
-	 * @param string $languageCode
-	 * @param string $baseLanguageCode
-	 *
-	 * @return string[]
-	 */
-	private function getMwMonthNameReplacements( $languageCode, $baseLanguageCode ) {
-		$language = Language::factory( $languageCode );
-		$baseLanguage = Language::factory( $baseLanguageCode );
-
-		$replacements = array();
-
-		for ( $i = 1; $i <= 12; $i++ ) {
-			$canonical = $baseLanguage->getMonthName( $i );
-
-			$replacements[$language->getMonthName( $i )] = $canonical;
-			$replacements[$language->getMonthNameGen( $i )] = $canonical;
-			$replacements[$language->getMonthAbbreviation( $i )] = $canonical;
-		}
-
-		return $replacements;
 	}
 
 }

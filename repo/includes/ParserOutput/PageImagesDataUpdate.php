@@ -177,9 +177,13 @@ class PageImagesDataUpdate implements StatementDataUpdate {
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		if ( $this->bestFileName !== null ) {
-			// This property name is the only "soft dependency" on the PageImages extension.
-			$parserOutput->setProperty( 'page_image', $this->bestFileName );
+		// This page property's name is the only "soft dependency" on the PageImages extension.
+		$propertyName = 'page_image';
+
+		if ( $this->bestFileName === null ) {
+			$parserOutput->unsetProperty( $propertyName );
+		} else {
+			$parserOutput->setProperty( $propertyName, $this->bestFileName );
 		}
 	}
 
