@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_1376a401",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-29T12:26:33Z",
+      "side": 1,
+      "message": "Good catch, done.",
+      "parentUuid": "0ebaf39b_5956930a",
+      "revId": "b0607dfe49f390b899bdefe954840dc11dda559f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_39687fb7",
         "filename": "client/includes/recentchanges/RecentChangeFactory.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-27T14:54:25Z",
       "side": 1,
       "message": "This still re-generates the comment for every target page, even if all but one of them would get the same comment, which would also be the same as the prepared comment. Can\u0027t we check *here* that the affected page is the target page, and otherwise bail out? That info could also be calculated by the SiteLinkCommentGenerator.\n\nPathological case: Q183 is used on 10000 pages on ruwiki. Now Q183 gets a new listling to xywiki. This should not cause us to re-generate the comment 10000 times. We should re-use the comment from prepareChangeAttributes() for all pages except the one that is directly connected to Q183.",
+      "revId": "b0607dfe49f390b899bdefe954840dc11dda559f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_132ea4a0",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-29T12:26:33Z",
+      "side": 1,
+      "message": "Addressed by adding SiteLinkCommentGenerator::needsTargetSpecificSummary",
+      "parentUuid": "0ebaf39b_39687fb7",
       "revId": "b0607dfe49f390b899bdefe954840dc11dda559f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
