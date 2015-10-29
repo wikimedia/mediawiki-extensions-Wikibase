@@ -51,6 +51,24 @@
       "revId": "7f2308a2daa62a8e2916df28be6d5e9c37ec6cfb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d8234bb3",
+        "filename": "repo/includes/Hooks/OutputPageJsConfigHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-29T09:48:19Z",
+      "side": 1,
+      "message": "Agreed, I also thought about that, but then decided that\u0027s for another patch. Might do that today.",
+      "parentUuid": "0ebaf39b_d9ba83b5",
+      "revId": "7f2308a2daa62a8e2916df28be6d5e9c37ec6cfb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
