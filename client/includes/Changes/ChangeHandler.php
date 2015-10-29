@@ -5,8 +5,6 @@ namespace Wikibase\Client\Changes;
 use Exception;
 use Hooks;
 use InvalidArgumentException;
-use Language;
-use Message;
 use MWException;
 use SiteStore;
 use Title;
@@ -15,9 +13,6 @@ use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\EntityChange;
-use Wikibase\ItemChange;
-use Wikibase\SiteLinkCommentCreator;
-use Wikimedia\Assert\Assert;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -77,19 +72,9 @@ class ChangeHandler {
 	private $changeListTransformer;
 
 	/**
-	 * @var Language
-	 */
-	private $language;
-
-	/**
 	 * @var SiteStore
 	 */
 	private $siteStore;
-
-	/**
-	 * @var string
-	 */
-	private $localSiteId;
 
 	/**
 	 * @var string
@@ -106,7 +91,6 @@ class ChangeHandler {
 	 * @param TitleFactory $titleFactory
 	 * @param PageUpdater $updater
 	 * @param ChangeListTransformer $changeListTransformer
-	 * @param Language $language
 	 * @param SiteStore $siteStore
 	 * @param string $localSiteId
 	 * @param string $repoId
@@ -118,16 +102,10 @@ class ChangeHandler {
 		TitleFactory $titleFactory,
 		PageUpdater $updater,
 		ChangeListTransformer $changeListTransformer,
-		Language $language,
 		SiteStore $siteStore,
-		$localSiteId,
 		$repoId,
 		$injectRecentChanges = true
 	) {
-		if ( !is_string( $localSiteId ) ) {
-			throw new InvalidArgumentException( '$localSiteId must be a string' );
-		}
-
 		if ( !is_bool( $injectRecentChanges ) ) {
 			throw new InvalidArgumentException( '$injectRecentChanges must be a bool' );
 		}
@@ -136,9 +114,7 @@ class ChangeHandler {
 		$this->titleFactory = $titleFactory;
 		$this->updater = $updater;
 		$this->changeListTransformer = $changeListTransformer;
-		$this->language = $language;
 		$this->siteStore = $siteStore;
-		$this->localSiteId = $localSiteId;
 		$this->repoId = $repoId;
 		$this->injectRecentChanges = $injectRecentChanges;
 	}
@@ -276,14 +252,8 @@ class ChangeHandler {
 				break;
 
 			case self::RC_ENTRY_ACTION:
-				$rcAttribs = $this->getRCAttributes( $change );
-
-				if ( $rcAttribs !== false && $this->injectRecentChanges ) {
-					//FIXME: The same change may be reported to several target pages;
-					//       The comment we generate should be adapted to the role that page
-					//       plays in the change, e.g. when a sitelink changes from one page to another,
-					//       the link was effectively removed from one and added to the other page.
-					$this->updater->injectRCRecords( $titlesToUpdate, $rcAttribs );
+				if ( $this->injectRecentChanges ) {
+					$this->updater->injectRCRecords( $titlesToUpdate, $change );
 				}
 
 				break;
@@ -332,129 +302,6 @@ class ChangeHandler {
 		}
 
 		return $change->getId();
-	}
-
-	/**
-	 * Constructs RC attributes for the given change
-	 *
-	 * @see ExternalRecentChange::buildAttributes
-	 *
-	 * @param EntityChange $change The Change that caused the update
-	 *
-	 * @return array[]|bool an array of RC attributes,
-	 *         as understood by ExternalRecentChange::buildAttributes.
-	 */
-	private function getRCAttributes( EntityChange $change ) {
-		$rcinfo = $change->getMetadata();
-
-		//@todo: add getFields() to the interface, or provide getters!
-		$fields = $change->getFields();
-		$fields['entity_type'] = $change->getEntityId()->getEntityType();
-
-		if ( isset( $fields['info']['changes'] ) ) {
-			$changesForComment = $fields['info']['changes'];
-		} else {
-			$changesForComment = array( $change );
-		}
-
-		unset( $fields['info'] );
-		$changeParams = array_merge( $fields, $rcinfo );
-
-		if ( !isset( $changeParams['site_id'] ) ) {
-			$changeParams['site_id'] = $this->repoId;
-		}
-
-		$comment = $this->getEditCommentMulti( $changesForComment );
-
-		// Use keys known to ExternalRecentChange::buildAttributes.
-		// FIXME: Simplify the way this is passed around.
-		// FIXME: Move all this into a factory for RecentChange objects.
-		// FIXME: ExternalRecentChange could be converted to such a factory.
-		return array(
-			'wikibase-repo-change' => $changeParams,
-			'comment' => $comment
-		);
-	}
-
-	/**
-	 * Returns a human readable comment representing the given changes.
-	 *
-	 * @param EntityChange[] $changes
-	 *
-	 * @throws MWException
-	 * @return string
-	 */
-	private function getEditCommentMulti( array $changes ) {
-		$comments = array();
-		$c = 0;
-
-		foreach ( $changes as $change ) {
-			$c++;
-			$comments[] = $this->getEditComment( $change );
-		}
-
-		if ( $c === 0 ) {
-			return '';
-		} elseif ( $c === 1 ) {
-			return reset( $comments );
-		} else {
-			//@todo: handle overly long lists nicely!
-			return $this->language->semicolonList( $comments );
-		}
-	}
-
-	/**
-	 * Returns a human readable comment representing the change.
-	 *
-	 * @since 0.4
-	 *
-	 * @param EntityChange $change the change to get a comment for
-	 *
-	 * @throws MWException
-	 * @return string
-	 */
-	public function getEditComment( EntityChange $change ) {
-		$siteLinkDiff = $change instanceof ItemChange
-			? $change->getSiteLinkDiff()
-			: null;
-
-		$editComment = '';
-
-		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
-			$action = $change->getAction();
-			$commentCreator = new SiteLinkCommentCreator( $this->language, $this->siteStore, $this->localSiteId );
-			$siteLinkComment = $commentCreator->getEditComment( $siteLinkDiff, $action );
-			$editComment = $siteLinkComment === null ? '' : $siteLinkComment;
-		}
-
-		if ( $editComment === '' ) {
-			$editComment = $change->getComment();
-		}
-
-		if ( $editComment === '' ) {
-			// If there is no comment, use something generic. This shouldn't happen.
-			wfWarn( 'Failed to generate edit comment for EntityChange' );
-			$editComment = $this->msg( 'wikibase-comment-update' )->text();
-		}
-
-		Assert::postcondition( is_string( $editComment ), '$editComment must be a string' );
-		return $editComment;
-	}
-
-	/**
-	 * @param string $key
-	 *
-	 * @return Message
-	 * @throws MWException
-	 */
-	private function msg( $key ) {
-		$params = func_get_args();
-		array_shift( $params );
-		if ( isset( $params[0] ) && is_array( $params[0] ) ) {
-			$params = $params[0];
-		}
-
-		return wfMessage( $key, $params )->inLanguage( $this->language );
 	}
 
 }

@@ -6,7 +6,9 @@ use Job;
 use JobQueueGroup;
 use RefreshLinksJob;
 use Title;
-use Wikibase\Client\RecentChanges\ExternalRecentChange;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\EntityChange;
 
 /**
  * Service object for triggering different kinds of page updates
@@ -20,6 +22,36 @@ use Wikibase\Client\RecentChanges\ExternalRecentChange;
  * @author Daniel Kinzler
  */
 class WikiPageUpdater implements PageUpdater {
+
+	/**
+	 * @var JobQueueGroup
+	 */
+	private $jobQueueGroup;
+
+	/**
+	 * @var RecentChangeFactory
+	 */
+	private $recentChangeFactory;
+
+	/**
+	 * @var RecentChangesDuplicateDetector|null
+	 */
+	private $recentChangesDuplicateDetector;
+
+	/**
+	 * @param JobQueueGroup $jobQueueGroup
+	 * @param RecentChangeFactory $recentChangeFactory
+	 * @param RecentChangesDuplicateDetector|null $recentChangesDuplicateDetector
+	 */
+	public function __construct(
+		JobQueueGroup $jobQueueGroup,
+		RecentChangeFactory $recentChangeFactory,
+		RecentChangesDuplicateDetector $recentChangesDuplicateDetector  = null
+	) {
+		$this->jobQueueGroup = $jobQueueGroup;
+		$this->recentChangeFactory = $recentChangeFactory;
+		$this->recentChangesDuplicateDetector = $recentChangesDuplicateDetector;
+	}
 
 	/**
 	 * Invalidates local cached of the given pages.
@@ -66,13 +98,13 @@ class WikiPageUpdater implements PageUpdater {
 
 			$job = new RefreshLinksJob(
 				$title,
-				Job::newRootJobParams( //XXX: the right thing?
+				Job::newRootJobParams(
 					$title->getPrefixedDBkey()
 				)
 			);
 
-			JobQueueGroup::singleton()->push( $job );
-			JobQueueGroup::singleton()->deduplicateRootJob( $job );
+			$this->jobQueueGroup->push( $job );
+			$this->jobQueueGroup->deduplicateRootJob( $job );
 		}
 	}
 
@@ -80,18 +112,25 @@ class WikiPageUpdater implements PageUpdater {
 	 * Injects an RC entry into the recentchanges, using the the given title and attribs
 	 *
 	 * @param Title[] $titles
-	 * @param array $attribs
+	 * @param EntityChange $change
 	 */
-	public function injectRCRecords( array $titles, array $attribs ) {
+	public function injectRCRecords( array $titles, EntityChange $change ) {
+		$rcAttribs = $this->recentChangeFactory->prepareChangeAttributes( $change );
+
+		// TODO: do this via the job queue, in batches, see T107722
 		foreach ( $titles as $title ) {
 			if ( !$title->exists() ) {
 				continue;
 			}
 
-			$rc = ExternalRecentChange::newFromAttribs( $attribs, $title );
+			$rc = $this->recentChangeFactory->newRecentChange( $change, $title, $rcAttribs );
 
-			wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
-			$rc->save();
+			if ( $this->recentChangesDuplicateDetector && $this->recentChangesDuplicateDetector->changeExists( $rc )  ) {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": skipping duplicate RC entry for " . $title->getFullText() );
+			} else {
+				wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
+				$rc->save();
+			}
 		}
 	}
 
