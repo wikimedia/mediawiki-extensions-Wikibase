@@ -108,7 +108,8 @@ call_user_func( function() {
 	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\ClientHooks::onParserFirstCallInit';
 	$wgHooks['MagicWordwgVariableIDs'][] = '\Wikibase\ClientHooks::onMagicWordwgVariableIDs';
 	$wgHooks['ParserGetVariableValueSwitch'][] = '\Wikibase\ClientHooks::onParserGetVariableValueSwitch';
-	$wgHooks['SkinTemplateOutputPageBeforeExec'][] = '\Wikibase\ClientHooks::onSkinTemplateOutputPageBeforeExec';
+	$wgHooks['SkinTemplateOutputPageBeforeExec'][] =
+		'\Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler::onSkinTemplateOutputPageBeforeExec';
 	$wgHooks['SpecialMovepageAfterMove'][] = '\Wikibase\Client\Hooks\MovePageNotice::onSpecialMovepageAfterMove';
 	$wgHooks['SpecialWatchlistQuery'][] = '\Wikibase\ClientHooks::onSpecialWatchlistQuery';
 	$wgHooks['SpecialRecentChangesQuery'][] = '\Wikibase\ClientHooks::onSpecialRecentChangesQuery';
