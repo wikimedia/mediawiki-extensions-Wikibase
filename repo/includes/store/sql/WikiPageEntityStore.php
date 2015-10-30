@@ -202,13 +202,13 @@ class WikiPageEntityStore implements EntityStore {
 			}
 		}
 
-		// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clearPreparedEdit
-		//       may cause the old content to be loaded from the database again. This may be
-		//       necessary, because EntityContent is mutable, so the cached object might have changed.
-		//
-		//       The relevant test case is ItemContentTest::testRepeatedSave
-		//
-		//       TODO: might be able to further optimize handling of prepared edit in WikiPage.
+		/**
+		 * @note Make sure we start saving from a clean slate. Calling WikiPage::clearPreparedEdit
+		 * may cause the old content to be loaded from the database again. This may be necessary,
+		 * because EntityContent is mutable, so the cached object might have changed.
+		 *
+		 * @todo Might be able to further optimize handling of prepared edit in WikiPage.
+		 */
 
 		$page->clear();
 		$page->clearPreparedEdit();

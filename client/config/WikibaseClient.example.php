@@ -32,12 +32,14 @@ $wgWBClientSettings['repoUrl'] = "http://repo.example.org";
 // and if you do not have $wgArticlePath set anywhere, MediaWiki has a default for it.
 $wgWBClientSettings['repoArticlePath'] = "/wiki/$1";
 
-// Assuming your wiki is setup with such script path as "http://repo.example.org/w/api.php"
-// This should be the same as the $wgScriptPath setting if you have it set in your repo
-// If $wgScriptPath is not set, then MediaWiki assumes a default.
-//
-// If your client and repo are setup in the same way, then the below setting is optional
-// and will default to what you have $wgScriptPath set in the client.
+/**
+ * Assuming your wiki is setup with such script path as "http://repo.example.org/w/api.php". This
+ * should be the same as the $wgScriptPath setting if you have it set in your repo. If $wgScriptPath
+ * is not set, then MediaWiki assumes a default.
+ *
+ * If your client and repo are setup in the same way, then the below setting is optional and will
+ * default to what you have $wgScriptPath set in the client.
+ */
 $wgWBClientSettings['repoScriptPath'] = "/w";
 
 // The global site ID by which this wiki is known on the repo.
@@ -91,17 +93,19 @@ if ( false ) {
 			'repowiki' => 'repo',
 		),
 
-		// Map host names to IP addresses to bypass DNS.
-		//
-		// NOTE: Even if all sections run on the same MySQL server (typical for a test setup),
-		// they must use different IP addresses, and MySQL must listen on all of them.
-		// The easiest way to do this is to set bind-address = 0.0.0.0 in the MySQL
-		// configuration. Beware that this makes MySQL listen on you ethernet port too.
-		// Safer alternatives include setting up mysql-proxy or mysqld_multi.
-		//
-		// For this setup to work a valid user must be set up for each of the addresses you use,
-		// that is grant access to the wikiuser for each of them. Failure to do so will make the
-		// MySQL server refuse access.
+		/**
+		 * Map host names to IP addresses to bypass DNS.
+		 *
+		 * @note Even if all sections run on the same MySQL server (typical for a test setup), they
+		 * must use different IP addresses, and MySQL must listen on all of them. The easiest way to
+		 * do this is to set bind-address = 0.0.0.0 in the MySQL configuration. Beware that this
+		 * makes MySQL listen on you ethernet port too. Safer alternatives include setting up
+		 * mysql-proxy or mysqld_multi.
+		 *
+		 * For this setup to work a valid user must be set up for each of the addresses you use,
+		 * that is grant access to the wikiuser for each of them. Failure to do so will make the
+		 * MySQL server refuse access.
+		 */
 		'hostsByName' => array(
 			'localhost' => '127.0.0.1:3306',
 			'local1' => '127.0.2.1',

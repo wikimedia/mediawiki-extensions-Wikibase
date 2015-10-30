@@ -62,11 +62,13 @@ class OutputPageJsConfigBuilder {
 	private function getUserConfigVars( Title $title, User $user ) {
 		$configVars = array();
 
-		// This is used in wikibase.ui.entityViewInit.js to double check if a user
-		// can edit, and if so, initializes relevant javascript.
-		//
-		// @todo: remove these variables if the javascript no longer really
-		// needs them. This check involves database lookup, which is not nice.
+		/**
+		 * This is used in wikibase.ui.entityViewInit.js to double check if a user can edit, and if
+		 * so, initializes relevant javascript.
+		 *
+		 * @todo Remove these variables if the javascript no longer really needs them. This check
+		 * involves database lookup, which is not nice.
+		 */
 		$configVars['wbUserIsBlocked'] = $user->isBlockedFrom( $title, true );
 
 		// tell JS whether the user can edit

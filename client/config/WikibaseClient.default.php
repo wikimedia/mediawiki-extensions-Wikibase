@@ -56,29 +56,37 @@ return call_user_func( function() {
 		// Enable in case wbc_entity_usage does not exist or is not yet populated.
 		'useLegacyUsageIndex' => false,
 
-		// Enable in case wb_changes_subscription does not exist (on the repo) or is not yet populated.
-		//
-		// @note: if Wikibase Repo and Client are enabled on the same wiki, then this only needs
-		// to be set in the repo or can be set the same in both. (repo settings override client settings)
+		/**
+		 * Enable in case wb_changes_subscription does not exist (on the repo) or is not yet
+		 * populated.
+		 *
+		 * @note If Wikibase Repo and Client are enabled on the same wiki, then this only needs to
+		 * be set in the repo or can be set the same in both (repo settings override client
+		 * settings).
+		 */
 		'useLegacyChangesSubscription' => false,
 
-		// Prefix to use for cache keys that should be shared among a Wikibase Repo instance
-		// and all its clients. This is for things like caching entity blobs in memcached.
-		//
-		// The default here assumes Wikibase Repo + Client installed together on the same wiki.
-		// For a multiwiki / wikifarm setup, to configure shared caches between clients and repo,
-		// this needs to be set to the same value in both client and repo wiki settings.
-		//
-		// For Wikidata production, we set it to 'wikibase-shared/wikidata_1_25wmf24-wikidatawiki',
-		// which is 'wikibase_shared/' + deployment branch name + '-' + repo database name,
-		// and have it set in both $wgWBClientSettings and $wgWBRepoSettings.
+		/**
+		 * Prefix to use for cache keys that should be shared among a Wikibase Repo instance and all
+		 * its clients. This is for things like caching entity blobs in memcached.
+		 *
+		 * The default here assumes Wikibase Repo + Client installed together on the same wiki. For
+		 * a multiwiki / wikifarm setup, to configure shared caches between clients and repo, this
+		 * needs to be set to the same value in both client and repo wiki settings.
+		 *
+		 * For Wikidata production, we set it to 'wikibase-shared/wikidata_1_25wmf24-wikidatawiki',
+		 * which is 'wikibase_shared/' + deployment branch name + '-' + repo database name, and have
+		 * it set in both $wgWBClientSettings and $wgWBRepoSettings.
+		 */
 		'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION . '-' . $GLOBALS['wgDBname'],
 
-		// The duration of the object cache, in seconds.
-		//
-		// As with sharedCacheKeyPrefix, this is both client and repo setting. On a multiwiki
-		// setup, this should be set to the same value in both the repo and clients.
-		// Also note that the setting value in $wgWBClientSettings overrides the one here.
+		/**
+		 * The duration of the object cache, in seconds.
+		 *
+		 * As with sharedCacheKeyPrefix, this is both client and repo setting. On a multiwiki setup,
+		 * this should be set to the same value in both the repo and clients. Also note that the
+		 * setting value in $wgWBClientSettings overrides the one here.
+		 */
 		'sharedCacheDuration' => 60 * 60,
 
 		// The type of object cache to use. Use CACHE_XXX constants.
