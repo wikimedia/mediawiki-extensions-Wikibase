@@ -10,7 +10,7 @@ use ParserOutput;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-interface ParserOutputDataUpdate {
+interface ParserOutputDataUpdater {
 
 	/**
 	 * Update extension data, properties or other data in ParserOutput.

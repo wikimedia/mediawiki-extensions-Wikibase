@@ -10,7 +10,7 @@ use Wikibase\DataModel\SiteLink;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-interface SiteLinkDataUpdate extends ParserOutputDataUpdate {
+interface SiteLinkDataUpdater extends ParserOutputDataUpdater {
 
 	/**
 	 * Extract some data or do processing on a SiteLink during parsing.

@@ -76,7 +76,7 @@ class EntityParserOutputGenerator {
 	private $entityDataFormatProvider;
 
 	/**
-	 * @var ParserOutputDataUpdate[]
+	 * @var ParserOutputDataUpdater[]
 	 */
 	private $dataUpdates;
 
@@ -193,7 +193,7 @@ class EntityParserOutputGenerator {
 	 * @return EntityInfo
 	 */
 	private function getEntityInfo( ParserOutput $parserOutput ) {
-		// set in ReferencedEntitiesDataUpdate
+		// set in ReferencedEntitiesDataUpdater
 		$entityIds = $parserOutput->getExtensionData( 'referenced-entities' );
 
 		if ( !is_array( $entityIds ) ) {

@@ -29,13 +29,13 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$statementDataUpdate = $this->getMock( 'Wikibase\Repo\ParserOutput\StatementDataUpdate' );
+		$statementDataUpdate = $this->getMock( 'Wikibase\Repo\ParserOutput\StatementDataUpdater' );
 		$statementDataUpdate->expects( $this->exactly( $statements ) )
 			->method( 'processStatement' );
 		$statementDataUpdate->expects( $this->once() )
 			->method( 'updateParserOutput' );
 
-		$siteLinkDataUpdate = $this->getMock( 'Wikibase\Repo\ParserOutput\SiteLinkDataUpdate' );
+		$siteLinkDataUpdate = $this->getMock( 'Wikibase\Repo\ParserOutput\SiteLinkDataUpdater' );
 		$siteLinkDataUpdate->expects( $this->exactly( $siteLinks ) )
 			->method( 'processSiteLink' );
 		$siteLinkDataUpdate->expects( $this->once() )
@@ -80,7 +80,7 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		return array(
 			array( array( null ) ),
 			array( array( 'notAnObject' ) ),
-			array( array( $this->getMock( 'Wikibase\Repo\ParserOutput\ParserOutputDataUpdate' ) ) ),
+			array( array( $this->getMock( 'Wikibase\Repo\ParserOutput\ParserOutputDataUpdater' ) ) ),
 		);
 	}
 
