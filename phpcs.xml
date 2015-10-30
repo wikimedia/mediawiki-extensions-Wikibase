@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
-<!--
-	For now this is mostly a subset of MediaWiki core's rule set, see
-	https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml
--->
-<ruleset name="MediaWiki">
+<ruleset name="Wikibase">
+	<!-- See https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml -->
+	<rule ref="vendor/mediawiki/mediawiki-codesniffer/MediaWiki" />
+
+	<rule ref="Generic.Classes.DuplicateClassName.Found">
+		<exclude-pattern>DataAccess*Scribunto*Scribunto_LuaWikibaseLibraryTestCase\.php</exclude-pattern>
+	</rule>
 
 	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
 	<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />
@@ -49,6 +51,28 @@
 	<rule ref="Generic.PHP.LowerCaseKeyword" />
 	<rule ref="Generic.PHP.NoSilencedErrors" />
 	<rule ref="Generic.PHP.SAPIUsage" />
+
+	<!-- FIXME: This is part of the MediaWiki rule set and should be fixed. -->
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed">
+		<severity>0</severity>
+	</rule>
+
+	<!-- FIXME: All these disabled MediaWiki rules indicate errors that should be fixed. -->
+	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.EmptyComment">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.SingleSpaceBeforeSingleLineComment">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.WhiteSpace.SpaceyParenthesis.SpaceBeforeOpeningParenthesis">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.WhiteSpace.SpaceyParenthesis.SingleSpaceAfterOpenParenthesis">
+		<severity>0</severity>
+	</rule>
+	<rule ref="MediaWiki.WhiteSpace.SpaceyParenthesis.SingleSpaceBeforeCloseParenthesis">
+		<severity>0</severity>
+	</rule>
 
 	<rule ref="PSR1" />
 	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
