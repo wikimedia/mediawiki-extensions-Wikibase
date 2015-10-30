@@ -99,7 +99,12 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		$statements = $item->getStatements()->toArray();
 		$obtainedStatements = null;
 
-		while ( $statement = array_shift( $statements ) ) {
+		while ( true ) {
+			$statement = array_shift( $statements );
+			if ( !$statement ) {
+				break;
+			}
+
 			$this->makeTheRequest( array( $statement->getGuid() ) );
 
 			/** @var Item $obtainedItem */

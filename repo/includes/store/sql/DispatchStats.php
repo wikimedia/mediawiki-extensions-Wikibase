@@ -86,7 +86,7 @@ class DispatchStats {
 
 		$this->clientStates = array();
 
-		while ( ( $row = $res->fetchObject() ) !== false ) {
+		foreach ( $res as $row ) {
 			if ( $this->changeStats ) {
 				// time between last dispatch and now
 				$row->chd_untouched = max( 0, $now

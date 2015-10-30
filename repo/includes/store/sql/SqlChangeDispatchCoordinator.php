@@ -410,9 +410,9 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		// Limit the list to $randomness items. Candidates will be picked
 		// from the resulting list at random.
 
-		$res = $db->select(
+		$candidates = $db->selectFieldValues(
 			$this->stateTable,
-			array( 'chd_site' ),
+			'chd_site',
 			array( '( chd_lock is NULL ' . // not locked or...
 					' OR chd_touched < ' . $db->addQuotes( $staleLockTime ) . ' ) ', // ...the lock is old
 				'( chd_touched < ' . $db->addQuotes( $freshDispatchTime ) . // and wasn't touched too recently or...
@@ -427,11 +427,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			)
 		);
 
-		$candidates = array();
-		while ( $row = $res->fetchRow() ) {
-			$candidates[] = $row['chd_site'];
-		}
-
 		return $candidates;
 	}
 
@@ -442,19 +437,14 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	public function initState() {
 		$db = $this->getRepoMaster();
 
-		$res = $db->select( $this->stateTable,
-			array( 'chd_site' ),
+		$trackedSiteIds = $db->selectFieldValues(
+			$this->stateTable,
+			'chd_site',
 			array(),
-			__METHOD__ );
+			__METHOD__
+		);
 
-		$tracked = array();
-
-		while ( $row = $res->fetchRow() ) {
-			$k = $row[ 'chd_site' ];
-			$tracked[$k] = $k;
-		}
-
-		$untracked = array_diff_key( $this->clientWikis, $tracked );
+		$untracked = array_diff_key( $this->clientWikis, array_flip( $trackedSiteIds ) );
 
 		foreach ( $untracked as $siteID => $wikiDB ) {
 			$state = array(

@@ -103,31 +103,36 @@ class ImportProperties extends Maintenance {
 		$currentProperties = array();
 		$count = 0;
 		$ok = true;
-		while ( $link = fgetcsv( $file, 0, "\t" ) ) {
-			if ( $link[0] !== $current ) {
-				if ( !empty( $currentProperties ) ) {
-					$ok = $this->createProperty( $currentProperties );
-
-					if ( !$ok && !$this->ignoreErrors ) {
-						break;
-					}
-				}
-
-				$count++;
-				if ( ( $this->skip !== 0 ) && ( $this->skip > $count ) ) {
-					continue;
-				}
-				if ( ( $this->only !== 0 ) && ( $this->only !== $count ) ) {
-					if ( $this->only < $count ) {
-						break;
-					}
-					continue;
-				}
-
-				$current = $link[0];
-				$this->maybePrint( "Processing `$current`" );
-				$currentProperties = array( $languageCode => $current );
+		while ( true ) {
+			$link = fgetcsv( $file, 0, "\t" );
+			if ( !$link ) {
+				break;
+			} elseif ( $link[0] === $current ) {
+				continue;
 			}
+
+			if ( !empty( $currentProperties ) ) {
+				$ok = $this->createProperty( $currentProperties );
+
+				if ( !$ok && !$this->ignoreErrors ) {
+					break;
+				}
+			}
+
+			$count++;
+			if ( ( $this->skip !== 0 ) && ( $this->skip > $count ) ) {
+				continue;
+			}
+			if ( ( $this->only !== 0 ) && ( $this->only !== $count ) ) {
+				if ( $this->only < $count ) {
+					break;
+				}
+				continue;
+			}
+
+			$current = $link[0];
+			$this->maybePrint( "Processing `$current`" );
+			$currentProperties = array( $languageCode => $current );
 		}
 
 		if ( !$ok && !$this->ignoreErrors ) {
