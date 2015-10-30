@@ -185,11 +185,16 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 		var snakList = new wb.datamodel.SnakList();
 
-		$.each( this.$listview.data( 'listview' ).value(), function() {
-			snakList.merge( this.value() );
+		$.each( this.$listview.data( 'listview' ).value(), function( i, snaklistview ) {
+			var value = snaklistview.value();
+			if ( !value ) {
+				snakList = null;
+			} else if ( snakList ) {
+				snakList.merge( value );
+			}
 		} );
 
-		if ( this.options.value || snakList.length ) {
+		if ( snakList && ( this.options.value || snakList.length ) ) {
 			return new wb.datamodel.Reference(
 				snakList,
 				this.options.value ? this.options.value.getHash() : undefined
@@ -257,46 +262,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 */
 	isInEditMode: function() {
 		return this._isInEditMode;
-	},
-
-	/**
-	 * Returns whether the widget (all its `snaklistview`s) is currently valid.
-	 *
-	 * @since 0.5
-	 *
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		if ( !this._isInEditMode ) {
-			return true;
-		}
-
-		var isValid = true;
-
-		$.each( this.$listview.data( 'listview' ).value(), function() {
-			isValid = this.isValid();
-			return isValid;
-		} );
-
-		return isValid;
-	},
-
-	/**
-	 * Returns whether the widget's current value matches the value it has been initialized with by
-	 * checking the `Reference`'s `Snak`s.
-	 *
-	 * @since 0.5
-	 *
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		var currentReference = this.value(),
-			currentSnakList = currentReference
-				? currentReference.getSnaks()
-				: new wb.datamodel.SnakList();
-		return currentSnakList.equals(
-			this.options.value ? this.options.value.getSnaks() : new wb.datamodel.SnakList()
-		);
 	},
 
 	/**
