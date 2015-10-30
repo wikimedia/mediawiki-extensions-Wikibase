@@ -116,17 +116,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.toolbarcontroller.definitions.edittoolbar.statementview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/edittoolbar/statementview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.edittoolbar',
-				'jquery.wikibase.statementview',
-				'jquery.wikibase.toolbarcontroller',
-			),
-		),
-
 		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview-snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/removetoolbar/referenceview-snakview.js',
