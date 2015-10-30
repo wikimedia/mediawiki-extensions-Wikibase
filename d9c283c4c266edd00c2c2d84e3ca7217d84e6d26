@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_35d625c8",
+        "filename": "repo/includes/api/NutShell.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-30T10:55:47Z",
+      "side": 1,
+      "message": "The check above should be in this method.",
+      "revId": "d9c283c4c266edd00c2c2d84e3ca7217d84e6d26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d5dea9de",
+        "filename": "repo/includes/api/NutShell.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-30T10:55:47Z",
+      "side": 1,
+      "message": "The full array is (currently) not needed in this method.",
+      "revId": "d9c283c4c266edd00c2c2d84e3ca7217d84e6d26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f5dbadeb",
+        "filename": "repo/includes/api/NutShell.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-10-30T10:55:47Z",
+      "side": 1,
+      "message": "This should use a MediaWiki core service function so we do not have to duplicate this knowledge. If possible.",
+      "revId": "d9c283c4c266edd00c2c2d84e3ca7217d84e6d26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
