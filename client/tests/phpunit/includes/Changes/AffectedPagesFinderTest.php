@@ -332,7 +332,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array(
 				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
 			),
-			array( EntityUsage::SITELINK_USAGE  ),
+			array( EntityUsage::SITELINK_USAGE ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate( ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),

@@ -138,7 +138,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$change->setField( 'time', wfTimestampNow() );
 
 		$store = new SqlChangeStore( wfGetLB() );
-		$store->saveChange( $change );#
+		$store->saveChange( $change );
 		$expected = array(
 			'change_id' => (string)$change->getId(),
 			'change_type' => 'wikibase-item~add',

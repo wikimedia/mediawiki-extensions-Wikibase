@@ -243,7 +243,7 @@ class SpecialPagesWithBadges extends QueryPage {
 	 * @return array
 	 */
 	public function linkParameters() {
-		return array( 'badge' => $this->badgeId->getSerialization()  );
+		return array( 'badge' => $this->badgeId->getSerialization() );
 	}
 
 	/**

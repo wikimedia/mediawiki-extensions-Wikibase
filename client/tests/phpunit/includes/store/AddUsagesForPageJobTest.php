@@ -102,11 +102,11 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 
 		$title = Title::makeTitle( NS_MAIN, 'Bar' );
 
-		$expected = array (
+		$expected = array(
 			'type' => 'wikibase-addUsagesForPage',
 			'namespace' => NS_MAIN,
 			'title' => 'Bar',
-			'params' => array (
+			'params' => array(
 				'pageId' => 18,
 				'usages' => array( $usage->asArray() )
 			),

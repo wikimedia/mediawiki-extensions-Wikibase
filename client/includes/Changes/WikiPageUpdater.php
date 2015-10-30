@@ -125,7 +125,9 @@ class WikiPageUpdater implements PageUpdater {
 
 			$rc = $this->recentChangeFactory->newRecentChange( $change, $title, $rcAttribs );
 
-			if ( $this->recentChangesDuplicateDetector && $this->recentChangesDuplicateDetector->changeExists( $rc )  ) {
+			if ( $this->recentChangesDuplicateDetector
+				&& $this->recentChangesDuplicateDetector->changeExists( $rc )
+			) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": skipping duplicate RC entry for " . $title->getFullText() );
 			} else {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": saving RC entry for " . $title->getFullText() );
