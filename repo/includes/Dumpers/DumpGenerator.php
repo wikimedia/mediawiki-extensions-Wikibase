@@ -264,7 +264,12 @@ abstract class DumpGenerator {
 		$this->preDump();
 
 		// Iterate over batches of IDs, maintaining the current position of the pager in the $position variable.
-		while ( $ids = $idPager->fetchIds( $this->batchSize ) ) {
+		while ( true ) {
+			$ids = $idPager->fetchIds( $this->batchSize );
+			if ( !$ids ) {
+				break;
+			}
+
 			$this->dumpEntities( $ids, $dumpCount );
 
 			$this->progressReporter->reportMessage( 'Processed ' . $dumpCount . ' entities.' );
