@@ -49,7 +49,7 @@
 		"squizlabs/php_codesniffer": "~2.1"
 	},
 	"conflict": {
-		"mediawiki/mediawiki": "<1.23"
+		"mediawiki/mediawiki": "<1.25"
 	},
 	"autoload": {
 		"classmap": [
