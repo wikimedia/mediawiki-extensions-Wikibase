@@ -40,24 +40,15 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				};
 			}
 
-			var controller;
-			var bridge = {
-				cancelEditing: function() { return controller.cancelEditing.apply( controller, arguments ); },
-				element: $referenceview,
-				getHelpMessage: function() {
-					return $.Deferred().resolve( referenceview.options.helpMessage ).promise();
-				},
-				startEditing: function() { return controller.startEditing.apply( controller, arguments ); },
-				stopEditing: function() { return controller.stopEditing.apply( controller, arguments ); },
-				setError: function() { return controller.setError.apply( controller, arguments ); }
-			};
-			options.interactionWidget = bridge;
+			options.getHelpMessage = function() {
+				return $.Deferred().resolve( referenceview.options.helpMessage ).promise();
+			},
 
-			$referenceview.edittoolbar( options );
+			var edittoolbar = $referenceview.edittoolbar( options ).data( 'edittoolbar' );
 
 			var guid = referenceview.options.statementGuid;
 			var referencesChanger = referenceview.options.referencesChanger;
-			controller = new wikibase.view.ToolbarController(
+			var controller = new wikibase.view.ToolbarController(
 				{
 					save: function( reference ) {
 						return referencesChanger.setReference( guid, reference );
@@ -66,6 +57,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				$referenceview.data( 'edittoolbar' ),
 				referenceview
 			);
+			edittoolbar.setController( controller );
 
 			$referenceview.on( 'keydown.edittoolbar', function( event ) {
 				if ( referenceview.option( 'disabled' ) ) {
