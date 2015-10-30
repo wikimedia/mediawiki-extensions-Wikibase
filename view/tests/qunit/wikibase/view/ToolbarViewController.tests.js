@@ -24,7 +24,7 @@ function initToolbarViewController() {
 			},
 			toggleActionMessage: function() {},
 			toEditMode: function() {},
-			toNonEditMode: function() {}
+			toNonEditMode: function() {},
 		},
 		{
 			disable: function() {},

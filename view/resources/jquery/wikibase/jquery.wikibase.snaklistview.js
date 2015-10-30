@@ -267,48 +267,26 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * committed).
 	 *
 	 * @param {wikibase.datamodel.SnakList} [snakList]
-	 * @return {wikibase.datamodel.SnakList|undefined}
+	 * @return {wikibase.datamodel.SnakList|undefined|null}
 	 */
 	value: function( snakList ) {
 		if ( snakList !== undefined ) {
 			return this.option( 'value', snakList );
 		}
 
+		var valid = true;
 		var snaks = [];
 
 		this._listview.value().forEach( function( snakview ) {
 			var snak = snakview.snak();
-			if ( snak ) {
+			if ( !snak ) {
+				valid = false;
+			} else {
 				snaks.push( snak );
 			}
 		} );
 
-		return new wb.datamodel.SnakList( snaks );
-	},
-
-	/**
-	 * Returns whether all of the `snaklistview`'s `Snak`s are currently valid.
-	 *
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		if ( !this._isInEditMode ) {
-			return true;
-		}
-
-		return this._listview.value().every( function( snakview ) {
-			return snakview.isValid() && snakview.snak() !== null;
-		} );
-	},
-
-	/**
-	 * Returns whether the current `Snak`s are the same than the ones the `snaklistview` was
-	 * initialized with.
-	 *
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		return this.options.value.equals( this.value() );
+		return valid ? new wb.datamodel.SnakList( snaks ) : null;
 	},
 
 	/**

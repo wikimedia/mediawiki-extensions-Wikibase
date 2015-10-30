@@ -22,7 +22,6 @@
  * @param {Object} options
  * @param {wikibase.datamodel.StatementList} [options.value]
  *        The list of `Statement`s to be displayed by this view.
- * @param {wikibase.entityChangers.StatementsChanger} options.statementsChanger
  * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
  */
 /**
@@ -66,7 +65,6 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			$listview: '.wikibase-statementlistview-listview'
 		},
 		value: null,
-		statementsChanger: null,
 		listItemAdapter: null
 	},
 
@@ -83,8 +81,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.statementsChanger
-			|| !this.options.listItemAdapter
+		if ( !this.options.listItemAdapter
 			|| ( this.options.value && !( this.options.value instanceof wb.datamodel.StatementList ) )
 		) {
 			throw new Error( 'Required option not specified properly' );
@@ -118,7 +115,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			}
 		} )
 		.on( toggleErrorEvent, function( event, error ) {
-			self._trigger( 'toggleerror' );
+			self._trigger( 'toggleerror', null, [error] );
 		} );
 	},
 
@@ -191,22 +188,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @return {jQuery} return.done.$statementview
 	 */
 	enterNewItem: function() {
-		var self = this,
-			lia = this._listview.listItemAdapter(),
-			afterStopEditingEvent = lia.prefixedEvent( 'afterstopediting.' + self.widgetName );
-
-		return this._listview.enterNewItem().done( function( $statementview ) {
-			var statementview = lia.liInstance( $statementview );
-
-			$statementview
-			.addClass( 'wb-new' )
-			.one( afterStopEditingEvent, function( event, dropValue ) {
-				$statementview.removeClass( 'wb-new' );
-				self._trigger( 'afterstopediting', null, [dropValue] );
-			} );
-
-			statementview.startEditing();
-		} );
+		return this._listview.enterNewItem();
 	},
 
 	/**
@@ -215,28 +197,6 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @param {jQuery.wikibase.statementview} statementview
 	 */
 	remove: function( statementview ) {
-		var self = this,
-			statement = statementview.option( 'value' );
-
-		if ( statement && statement.getClaim().getGuid() ) {
-			statementview.disable();
-			this.options.statementsChanger.remove( statement )
-			.done( function() {
-				self._removeStatementview( statementview );
-			} ).fail( function( error ) {
-				statementview.enable();
-				statementview.setError( error );
-			} );
-		} else {
-			this._removeStatementview( statementview );
-		}
-	},
-
-	/**
-	 * @param {jQuery.wikibase.statementview} statementview
-	 * @private
-	 */
-	_removeStatementview: function( statementview ) {
 		this._listview.removeItem( statementview.element );
 		this._trigger( 'afterremove' );
 	},

@@ -183,11 +183,7 @@
 				new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ) )
 			] ),
 			entityId = 'entityId',
-			statementsChanger = {},
-			entityChangersFactory = {
-				getStatementsChanger: function() { return statementsChanger; }
-			},
-			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
+			viewFactory = new ViewFactory(),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
@@ -202,7 +198,6 @@
 				$dom,
 				{
 					value: value,
-					statementsChanger: statementsChanger,
 					listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
 				}
 			)
@@ -216,11 +211,7 @@
 		assert.expect( 1 );
 		var value = new wb.datamodel.StatementList(),
 			entityId = 'entityId',
-			statementsChanger = {},
-			entityChangersFactory = {
-				getStatementsChanger: function() { return statementsChanger; }
-			},
-			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
+			viewFactory = new ViewFactory(),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
@@ -243,15 +234,17 @@
 		assert.expect( 2 );
 		var entityId = 'Q1',
 			value = null,
-			statementsChanger = {},
-			entityChangersFactory = {
-				getStatementsChanger: function() { return statementsChanger; }
-			},
 			entityIdPlainFormatter = {},
-			viewFactory = new ViewFactory( null, null, entityChangersFactory, null, entityIdPlainFormatter ),
+			viewFactory = new ViewFactory(
+				null,
+				null,
+				null,
+				null,
+				entityIdPlainFormatter
+			),
 			ListItemAdapter = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ),
 			dom = null,
-			statement = {};
+			statement = null;
 
 		sinon.stub( viewFactory, '_getView' );
 
@@ -286,7 +279,6 @@
 
 				buildReferenceListItemAdapter: sinon.match.instanceOf( Function ),
 				buildSnakView: sinon.match.instanceOf( Function ),
-				statementsChanger: statementsChanger,
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				guidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator ),
 				qualifiersListItemAdapter: sinon.match.instanceOf( ListItemAdapter )
@@ -305,7 +297,11 @@
 			entityChangersFactory = {
 				getStatementsChanger: function() { return {}; }
 			},
-			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
+			viewFactory = new ViewFactory(
+				null,
+				null,
+				entityChangersFactory
+			),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			dom = {};
 
@@ -337,7 +333,11 @@
 			entityChangersFactory = {
 				getStatementsChanger: function() { return {}; }
 			},
-			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
+			viewFactory = new ViewFactory(
+				null,
+				null,
+				entityChangersFactory
+			),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			dom = {};
 
@@ -429,10 +429,6 @@
 		var contentLanguages = {},
 			value = null,
 			dataTypeStore = {},
-			statementsChanger = {},
-			entityChangersFactory = {
-				getStatementsChanger: function() { return statementsChanger; }
-			},
 			entityIdHtmlFormatter = {},
 			entityIdPlainFormatter = {},
 			entityStore = {},
@@ -444,7 +440,7 @@
 			viewFactory = new ViewFactory(
 				contentLanguages,
 				dataTypeStore,
-				entityChangersFactory,
+				null,
 				entityIdHtmlFormatter,
 				entityIdPlainFormatter,
 				entityStore,
@@ -508,10 +504,6 @@
 		var contentLanguages = {},
 			value = null,
 			dataTypeStore = {},
-			statementsChanger = {},
-			entityChangersFactory = {
-				getStatementsChanger: function() { return statementsChanger; }
-			},
 			entityIdHtmlFormatter = {},
 			entityIdPlainFormatter = {},
 			entityStore = {},
@@ -523,7 +515,7 @@
 			viewFactory = new ViewFactory(
 				contentLanguages,
 				dataTypeStore,
-				entityChangersFactory,
+				null,
 				entityIdHtmlFormatter,
 				entityIdPlainFormatter,
 				entityStore,

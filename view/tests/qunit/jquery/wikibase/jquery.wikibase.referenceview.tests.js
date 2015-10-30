@@ -51,7 +51,7 @@
 	} ) );
 
 	QUnit.test( 'Initialize and destroy', function( assert ) {
-		assert.expect( 7 );
+		assert.expect( 5 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -64,18 +64,6 @@
 			referenceview.value(),
 			null,
 			'Referenceview contains no reference.'
-		);
-
-		assert.strictEqual(
-			referenceview.isValid(),
-			true,
-			'Referenceview is valid.'
-		);
-
-		assert.strictEqual(
-			referenceview.isInitialValue(),
-			true,
-			'Referenceview holds initial value.'
 		);
 
 		assert.strictEqual(
@@ -114,7 +102,7 @@
 	} );
 
 	QUnit.test( 'allows to enter new item', function( assert ) {
-		assert.expect( 3 );
+		assert.expect( 2 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -129,18 +117,13 @@
 		assert.strictEqual(
 			referenceview.value(),
 			null,
-			'Referenceview contains no reference.'
+			'Referenceview contains no valid reference.'
 		);
 
-		assert.strictEqual(
-			referenceview.isValid(),
-			false,
-			'Referenceview is invalid.'
-		);
 	} );
 
 	QUnit.test( 'allows to stop editing', function( assert ) {
-		assert.expect( 3 );
+		assert.expect( 2 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -157,28 +140,6 @@
 			referenceview.value(),
 			null,
 			'Referenceview contains no reference.'
-		);
-
-		assert.strictEqual(
-			referenceview.isValid(),
-			true,
-			'Referenceview is valid.'
-		);
-	} );
-
-	QUnit.test( 'recognizes initial value', function( assert ) {
-		assert.expect( 1 );
-		var $node = createReferenceview( {
-				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
-					new wb.datamodel.PropertyNoValueSnak( 'P1' )
-				] ) )
-			} ),
-			referenceview = $node.data( 'referenceview' );
-
-		assert.strictEqual(
-			referenceview.isInitialValue(),
-			true,
-			'Referenceview has initial value.'
 		);
 	} );
 
