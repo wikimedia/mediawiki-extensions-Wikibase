@@ -26,7 +26,11 @@ var statementviewListItemAdapter = wb.tests.getMockListItemAdapter(
  */
 var createStatementlistview = function( options, $node ) {
 	options = $.extend( {
-		statementsChanger: 'I am a StatementsChanger',
+		getAdder: function() {
+			return {
+				destroy: function() {}
+			};
+		},
 		listItemAdapter: statementviewListItemAdapter,
 		value: new wb.datamodel.StatementList()
 	}, options || {} );
@@ -180,7 +184,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 } );
 
 QUnit.test( 'enterNewItem', function( assert ) {
-	assert.expect( 4 );
+	assert.expect( 2 );
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );
 
@@ -196,30 +200,6 @@ QUnit.test( 'enterNewItem', function( assert ) {
 		statementlistview.$listview.data( 'listview' ).items().length,
 		1,
 		'Increased number of items after calling enterNewItem().'
-	);
-
-	var statementlistviewListview = statementlistview.$listview.data( 'listview' ),
-		statementlistviewListviewLia = statementlistviewListview.listItemAdapter(),
-		$statementview = statementlistviewListview.items().first(),
-		statementview = statementlistviewListviewLia.liInstance( $statementview );
-
-	// Hack statementview to return a value for mocking "saving" action:
-	statementview.value = function() {
-		return new wb.datamodel.Statement(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		);
-	};
-
-	assert.ok(
-		$statementview.hasClass( 'wb-new' ),
-		'Verified statementview widget being pending.'
-	);
-
-	statementview._trigger( 'afterstopediting', null, [false] );
-
-	assert.ok(
-		!statementlistview.$listview.data( 'listview' ).items().eq( 0 ).hasClass( 'wb-new' ),
-		'Verified new statementgroupview not being pending after saving.'
 	);
 } );
 

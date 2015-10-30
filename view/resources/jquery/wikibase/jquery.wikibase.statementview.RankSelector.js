@@ -323,14 +323,11 @@
 			if ( $menu && $menu.data( this.widgetName ) === this ) {
 				$menu.hide();
 			}
-			return PARENT.prototype.stopEditing.call( this, dropValue );
-		},
 
-		/**
-		 * @inheritdoc
-		 */
-		_save: function() {
-			return $.Deferred().resolve().promise();
+			var deferred = $.Deferred();
+			this._trigger( 'stopediting', null, [dropValue] );
+			this._afterStopEditing( dropValue );
+			return deferred.resolve( dropValue ).promise();
 		},
 
 		/**
@@ -338,21 +335,8 @@
 		 */
 		isEmpty: function() {
 			return false;
-		},
-
-		/**
-		 * @inheritdoc
-		 */
-		isValid: function() {
-			return true;
-		},
-
-		/**
-		 * @inheritdoc
-		 */
-		isInitialValue: function() {
-			return this._rank === this.options.value;
 		}
+
 	} );
 
 }( mediaWiki, wikibase, jQuery, util ) );
