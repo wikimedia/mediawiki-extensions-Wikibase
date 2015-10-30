@@ -248,14 +248,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @param string $subPage
 	 */
 	protected function prepareArguments( $subPage ) {
-		$request = $this->getRequest();
-		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
-
-		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
-		$this->label = $request->getVal( 'label', '' );
-		$this->description = $request->getVal( 'description', '' );
-		$aliasesText = $request->getVal( 'aliases', '' );
-		$this->aliases = $aliasesText === '' ? array() : explode( '|', $aliasesText );
+		$this->extractInput( $subPage );
 
 		// Parse the 'id' parameter and throw an exception if the entity cannot be loaded
 		parent::prepareArguments( $subPage );
@@ -274,6 +267,29 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			if ( $entity instanceof FingerprintProvider ) {
 				$this->setFingerprintFields( $entity->getFingerprint() );
 			}
+		}
+	}
+
+	/**
+	 * @param string $subPage
+	 */
+	private function extractInput( $subPage ) {
+		$request = $this->getRequest();
+
+		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
+		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
+
+		$label = $request->getVal( 'label', '' );
+		$this->label = $this->stringNormalizer->trimToNFC( $label );
+
+		$description = $request->getVal( 'description', '' );
+		$this->description = $this->stringNormalizer->trimToNFC( $description );
+
+		$aliases = $request->getVal( 'aliases', '' );
+		$aliases = $this->stringNormalizer->trimToNFC( $aliases );
+		$this->aliases = $aliases === '' ? array() : explode( '|', $aliases );
+		foreach ( $this->aliases as &$alias ) {
+			$alias = $this->stringNormalizer->trimToNFC( $alias );
 		}
 	}
 
