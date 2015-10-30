@@ -109,7 +109,7 @@ class DispatchingSnakFormatter implements SnakFormatter {
 	public function formatSnak( Snak $snak ) {
 		$snakType = $snak->getType();
 
-		if ( isset(  $this->formattersBySnakType[$snakType] ) ) {
+		if ( isset( $this->formattersBySnakType[$snakType] ) ) {
 			$formatter = $this->formattersBySnakType[$snakType];
 			return $formatter->formatSnak( $snak );
 		}

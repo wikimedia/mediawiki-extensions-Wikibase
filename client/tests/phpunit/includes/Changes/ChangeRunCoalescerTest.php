@@ -221,7 +221,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 			$this->assertDiffsEqual( $expectedValue, $actual[$key], $currentPath );
 		}
 
-		$extraKeys = array_diff( array_keys( $actual), array_keys( $expected ) );
+		$extraKeys = array_diff( array_keys( $actual ), array_keys( $expected ) );
 		$this->assertEquals( array(), $extraKeys, $path . " extra keys" );
 	}
 

@@ -135,7 +135,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 
 		$change = $this->newChange( $changeData );
 
-		$this->assertEquals( $expected, $detector->changeExists( $change  ), 'changeExists()' );
+		$this->assertEquals( $expected, $detector->changeExists( $change ), 'changeExists()' );
 	}
 
 	private function newChange( array $changeData ) {

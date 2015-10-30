@@ -25,25 +25,10 @@
 
 	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
 
-	<!-- FIXME: This is part of the MediaWiki rule set and should be fixed. -->
-	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed">
-		<severity>0</severity>
-	</rule>
-
-	<!-- FIXME: All these disabled MediaWiki rules indicate errors that should be fixed. -->
 	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.EmptyComment">
 		<severity>0</severity>
 	</rule>
 	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.SingleSpaceBeforeSingleLineComment">
-		<severity>0</severity>
-	</rule>
-	<rule ref="MediaWiki.WhiteSpace.SpaceyParenthesis.SpaceBeforeOpeningParenthesis">
-		<severity>0</severity>
-	</rule>
-	<rule ref="MediaWiki.WhiteSpace.SpaceyParenthesis.SingleSpaceAfterOpenParenthesis">
-		<severity>0</severity>
-	</rule>
-	<rule ref="MediaWiki.WhiteSpace.SpaceyParenthesis.SingleSpaceBeforeCloseParenthesis">
 		<severity>0</severity>
 	</rule>
 

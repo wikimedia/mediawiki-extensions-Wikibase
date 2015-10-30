@@ -259,8 +259,8 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 				'user_text' => 'Cat',
 				'bot' => 0,
 				'comment' => strval( $comment ),
- 			)
-	  	);
+			)
+		);
 	}
 
 	/**
