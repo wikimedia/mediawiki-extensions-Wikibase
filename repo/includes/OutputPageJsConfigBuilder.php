@@ -32,11 +32,10 @@ class OutputPageJsConfigBuilder {
 	 * @param string $rightsUrl
 	 * @param string $rightsText
 	 * @param string[] $badgeItems
-	 * @param boolean $isExperimental
 	 *
 	 * @return array
 	 */
-	public function build( OutputPage $out, $rightsUrl, $rightsText, array $badgeItems, $isExperimental ) {
+	public function build( OutputPage $out, $rightsUrl, $rightsText, array $badgeItems ) {
 		$user = $out->getUser();
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
@@ -48,7 +47,8 @@ class OutputPageJsConfigBuilder {
 		$configVars = array_merge( $userConfigVars, $copyrightConfig );
 
 		$configVars['wbBadgeItems'] = $badgeItems;
-		$configVars['wbExperimentalFeatures'] = $isExperimental;
+		// For b/c, remove after verifying that no one uses this anymore
+		$configVars['wbExperimentalFeatures'] = false;
 
 		return $configVars;
 	}

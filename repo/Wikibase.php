@@ -39,8 +39,7 @@ if ( defined( 'WB_VERSION' ) ) {
 	return 1;
 }
 
-define( 'WB_VERSION', '0.5 alpha'
-	. ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ? '/experimental' : '' ) );
+define( 'WB_VERSION', '0.5 alpha' );
 
 if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) { // Needs to be 1.26c because version_compare() works in confusing ways.
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.26 or above.\n" );
@@ -255,9 +254,4 @@ call_user_func( function() {
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
 	);
-
-	if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-		include_once __DIR__ . '/config/Wikibase.experimental.php';
-	}
-
 } );

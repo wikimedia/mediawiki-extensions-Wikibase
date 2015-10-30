@@ -50,7 +50,7 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 				'Q12' => 'wb-badge-goodarticle',
 				'Q42' => 'wb-badge-featuredarticle'
 			),
-			'wbExperimentalFeatures' => true
+			'wbExperimentalFeatures' => false
 		);
 
 		$this->assertEquals( $expected, $configVars );

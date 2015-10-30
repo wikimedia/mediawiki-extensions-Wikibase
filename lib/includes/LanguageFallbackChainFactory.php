@@ -52,23 +52,14 @@ class LanguageFallbackChainFactory {
 	/**
 	 * @var bool
 	 */
-	private $isExperimentalMode;
-
-	/**
-	 * @var bool
-	 */
 	public $anonymousPageViewCached;
 
 	/**
-	 * @param bool $isExperimentalMode
 	 * @param bool $anonymousPageViewCached Whether full page outputs are cached for anons, so some
 	 *                                      fine-grained fallbacks shouldn't be used for them.
 	 */
-	public function __construct( $isExperimentalMode = null, $anonymousPageViewCached = false ) {
+	public function __construct( $anonymousPageViewCached = false ) {
 		// @fixme fix instantiation of factory in various lib classes
-		$this->isExperimentalMode = is_bool( $isExperimentalMode ) ? $isExperimentalMode
-			: defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-
 		$this->anonymousPageViewCached = $anonymousPageViewCached;
 	}
 
@@ -344,6 +335,7 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromContextForPageView( IContextSource $context ) {
+		// XXX: Unused? Remove?
 		return $this->newFromUserAndLanguageCodeForPageView(
 			$context->getUser(),
 			$context->getLanguage()->getCode()
@@ -357,19 +349,8 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromUserAndLanguageCodeForPageView( User $user, $languageCode ) {
-		if ( $this->isExperimentalMode ) {
-			// The generated chain should yield a cacheable result
-			if ( $this->anonymousPageViewCached && $user->isAnon() ) {
-				// Anonymous users share the same Squid cache, which is splitted by URL.
-				// That means we can't do anything except for what completely depends
-				// by URL such as &uselang=.
-				return $this->newFromLanguageCode( $languageCode );
-			}
-
-			return $this->newFromUserAndLanguageCode( $user, $languageCode );
-		} else {
-			return $this->newFromLanguageCode( $languageCode, self::FALLBACK_SELF );
-		}
+		// XXX: Unused? Remove?
+		return $this->newFromLanguageCode( $languageCode, self::FALLBACK_SELF );
 	}
 
 }

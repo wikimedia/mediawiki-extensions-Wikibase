@@ -73,13 +73,4 @@ $wgWBLibDefaultSettings = array(
 	)
 );
 
-// experimental stuff
-if ( defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES ) {
-	// experimental data types
-	$wgWBLibDefaultSettings['dataTypes'] = array_merge(
-		$wgWBLibDefaultSettings['dataTypes'],
-		array() //'multilingual-text'
-	);
-}
-
 return $wgWBLibDefaultSettings;

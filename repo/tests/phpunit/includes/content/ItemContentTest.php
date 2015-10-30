@@ -232,19 +232,8 @@ class ItemContentTest extends EntityContentTest {
 		return $cases;
 	}
 
-	private function handlerSupportsRedirects() {
-		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-		return $handler->supportsRedirects();
-	}
-
 	public function diffProvider() {
 		$cases = parent::diffProvider();
-
-		if ( !$this->handlerSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			return $cases;
-		}
 
 		$q10 = new ItemId( 'Q10' );
 		$empty = $this->newEmpty( $q10 );
@@ -298,12 +287,6 @@ class ItemContentTest extends EntityContentTest {
 	public function patchedCopyProvider() {
 		$cases = parent::patchedCopyProvider();
 
-		if ( !$this->handlerSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			return $cases;
-		}
-
 		$q10 = new ItemId( 'Q10' );
 		$empty = $this->newEmpty( $q10 );
 
@@ -353,12 +336,6 @@ class ItemContentTest extends EntityContentTest {
 	public function copyProvider() {
 		$cases = parent::copyProvider();
 
-		if ( !$this->handlerSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			return $cases;
-		}
-
 		$redir = $this->newRedirect( new ItemId( 'Q5' ), new ItemId( 'Q7' ) );
 
 		$cases['redirect'] = array( $redir );
@@ -368,12 +345,6 @@ class ItemContentTest extends EntityContentTest {
 
 	public function equalsProvider() {
 		$cases = parent::equalsProvider();
-
-		if ( !$this->handlerSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			return $cases;
-		}
 
 		$redir = $this->newRedirect( new ItemId( 'Q5' ), new ItemId( 'Q7' ) );
 
@@ -388,12 +359,6 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	public function testGetParserOutput_redirect() {
-		if ( !$this->handlerSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$this->markTestSkipped( 'Redirects not yet supported.' );
-		}
-
 		$content = $this->newRedirect( new ItemId( 'Q5' ), new ItemId( 'Q123' ) );
 
 		$title = Title::newFromText( 'Foo' );
@@ -412,24 +377,13 @@ class ItemContentTest extends EntityContentTest {
 
 		$cases = array();
 		$cases['entity id'] = array( $this->newEmpty( $q11 ), $q11 );
-
-		if ( $this->handlerSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$cases['redirect id'] = array( $this->newRedirect( $q11, $q12 ), $q11 );
-		}
+		$cases['redirect id'] = array( $this->newRedirect( $q11, $q12 ), $q11 );
 
 		return $cases;
 	}
 
 	public function entityRedirectProvider() {
 		$cases = parent::entityRedirectProvider();
-
-		if ( !$this->handlerSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			return $cases;
-		}
 
 		$cases['redirect'] = array(
 			$this->newRedirect( new ItemId( 'Q11' ), new ItemId( 'Q12' ) ),

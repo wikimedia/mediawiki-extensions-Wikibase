@@ -637,10 +637,7 @@ class WikibaseRepo {
 			// Squid.
 			$anonymousPageViewCached = $wgUseSquid;
 
-			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory(
-				defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES,
-				$anonymousPageViewCached
-			);
+			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory( $anonymousPageViewCached );
 		}
 
 		return $this->languageFallbackChainFactory;

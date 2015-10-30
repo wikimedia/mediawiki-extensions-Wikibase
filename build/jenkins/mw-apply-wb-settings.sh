@@ -3,7 +3,6 @@
 function usage {
   echo "usage: $0 -r <repo|client> -e <true|false> -b <true|false>"
   echo "       -r specify if the settings are for repo or client"
-  echo "       -e specify if experimental features should be on or off"
   echo "       -b specify if the settings are for a build or not"
   exit 1
 }
@@ -12,7 +11,6 @@ while getopts r:e:b: opt
 do
    case $opt in
        r) REPO="$OPTARG";;
-       e) EXPERIMENTAL=$OPTARG;;
        b) BUILD=$OPTARG;;
    esac
 done
@@ -51,10 +49,6 @@ function apply_repo_settings {
   fi
 }
 
-function apply_experimental_settings {
-  echo "define( 'WB_EXPERIMENTAL_FEATURES', $EXPERIMENTAL );" >> LocalSettings.php
-}
-
 cd $WORKSPACE/src
 
 if [ "$(tail -n1 LocalSettings.php)" = "?>" ]
@@ -65,8 +59,6 @@ if [ -v PHPTAGS ]
 then
   echo '<?php' >> LocalSettings.php
 fi
-
-apply_experimental_settings
 
 if [ "$REPO" = "repo" ]
 then
