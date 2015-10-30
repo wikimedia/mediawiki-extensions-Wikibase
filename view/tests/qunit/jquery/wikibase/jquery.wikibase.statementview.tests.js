@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function( $, mw, wb, dv, QUnit, sinon ) {
+( function( $, mw, wb, dv, QUnit ) {
 'use strict';
 
 QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
@@ -36,9 +36,6 @@ var createStatementview = function( options, $node ) {
 					};
 					this.startEditing = function() {
 					};
-					this.isValid = function() {
-						return true;
-					};
 					this.enterNewItem = function() {
 					};
 				}
@@ -48,12 +45,6 @@ var createStatementview = function( options, $node ) {
 			var _value = value;
 			return {
 				destroy: function() {},
-				isInitialValue: function() {
-					return true;
-				},
-				isValid: function() {
-					return true;
-				},
 				option: function() {},
 				snak: function() {
 					return _value;
@@ -64,7 +55,6 @@ var createStatementview = function( options, $node ) {
 				stopEditing: function() {}
 			};
 		},
-		statementsChanger: 'I am a StatementsChanger',
 		entityIdPlainFormatter: {
 			format: function( entityId ) {
 				return $.Deferred().resolve( entityId ).promise();
@@ -134,7 +124,7 @@ QUnit.test( 'Create & destroy with value', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isValid', function( assert ) {
+QUnit.test( 'value after startEditing with value', function( assert ) {
 	assert.expect( 1 );
 	var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
@@ -150,19 +140,25 @@ QUnit.test( 'isValid', function( assert ) {
 	QUnit.stop();
 	statementview.startEditing().done( function() {
 		QUnit.start();
-		assert.ok( statementview.isValid(), 'isValid should return true' );
+		assert.ok( statementview.value(), 'value() should return a value' );
 	} );
 } );
 
-QUnit.test( 'isValid on new statementview is false', function( assert ) {
+QUnit.test( 'value after startEditing on new statementview', function( assert ) {
 	assert.expect( 1 );
-	var $statementview = createStatementview(),
+	var $statementview = createStatementview( {
+			guidGenerator: {
+				newGuid: function() {
+					return 'guid';
+				}
+			}
+		} ),
 		statementview = $statementview.data( 'statementview' );
 
 	QUnit.stop();
 	statementview.startEditing().done( function() {
 		QUnit.start();
-		assert.ok( !statementview.isValid(), 'isValid should return false' );
+		assert.strictEqual( statementview.value(), null, 'value should return null' );
 	} );
 } );
 
@@ -210,50 +206,26 @@ QUnit.test( 'value with empty reference', function( assert ) {
 	statementview.startEditing().done( function() {
 		QUnit.start();
 		statementview._referencesListview.enterNewItem();
-		assert.ok( statementview.value(), 'value should return a value' );
+		assert.strictEqual( statementview.value(), null, 'value should not return a value' );
 	} );
 } );
 
-QUnit.test( 'performs correct statementsChanger call', function( assert ) {
-	assert.expect( 3 );
-	var guid = 'GUID',
-		snak = new wb.datamodel.PropertyNoValueSnak( 'P1' ),
-		setStatement = sinon.spy( function() {
-			return $.Deferred().resolve().promise();
-		} ),
-		$statementview = createStatementview( {
-			statementsChanger: {
-				save: setStatement
-			},
-			guidGenerator: {
-				newGuid: function() { return guid; }
-			}
-		} ),
+QUnit.test( 'wb-new', function( assert ) {
+	assert.expect( 2 );
+	var $statementview = createStatementview(),
 		statementview = $statementview.data( 'statementview' );
 
-	QUnit.stop();
-	statementview.startEditing().then( function() {
-		QUnit.start();
-		assert.ok( statementview.isInEditMode(), 'should be in edit mode after starting editing' );
+	assert.ok( $statementview.hasClass( 'wb-new' ) );
 
-		// Change main snak
-		statementview._mainSnakSnakView.snak = function() {
-			return snak;
-		};
-		statementview._mainSnakSnakView.isInitialValue = function() {
-			return false;
-		};
+	statementview.value( new wb.datamodel.Statement( new wb.datamodel.Claim(
+			new wb.datamodel.PropertyNoValueSnak( 'P1' ),
+			null,
+			'guid'
+		),
+		new wb.datamodel.ReferenceList( [ ] )
+	) );
 
-		QUnit.stop();
-		return statementview.stopEditing( false );
-	} ).then( function() {
-		QUnit.start();
-		assert.ok( !statementview.isInEditMode(), 'should not be in edit mode after stopping editing' );
-		sinon.assert.calledWith(
-			setStatement,
-			new wb.datamodel.Statement( new wb.datamodel.Claim( snak, null, guid ) )
-		);
-	} );
+	assert.ok( !$statementview.hasClass( 'wb-new' ) );
 } );
 
-}( jQuery, mediaWiki, wikibase, dataValues, QUnit, sinon ) );
+}( jQuery, mediaWiki, wikibase, dataValues, QUnit ) );

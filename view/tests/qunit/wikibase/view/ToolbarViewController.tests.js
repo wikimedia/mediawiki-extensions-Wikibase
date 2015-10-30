@@ -6,6 +6,9 @@ QUnit.module( 'wikibase.view.ToolbarViewController' );
 function initToolbarViewController() {
 	var controller = new wb.view.ToolbarViewController(
 		{
+			save: function() {
+				return $.Deferred();
+			},
 			remove: function() {
 				return $.Deferred();
 			}
@@ -15,11 +18,13 @@ function initToolbarViewController() {
 			enable: function() {},
 			getButton: function() {
 				return {
+					enable: function() {},
 					disable: function() {}
 				};
 			},
 			toEditMode: function() {},
-			toNonEditMode: function() {}
+			toNonEditMode: function() {},
+			toggleActionMessage: function() {}
 		},
 		{
 			disable: function() {},
@@ -32,7 +37,8 @@ function initToolbarViewController() {
 			startEditing: function() {},
 			stopEditing: function() {},
 			value: function() {}
-		}
+		},
+		function() {}
 	);
 
 	return controller;

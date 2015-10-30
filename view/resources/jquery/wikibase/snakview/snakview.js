@@ -402,46 +402,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	},
 
 	/**
-	 * Returns whether the `snakview`'s `Snak` is valid in its current state.
-	 *
-	 * @since 0.4
-	 *
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		return this._isValid;
-	},
-
-	/**
-	 * Returns whether the current value matches the one the `snakview` was initialized with by
-	 * comparing the (deserialized) `Snak` objects of that stages.
-	 *
-	 * @since 0.5
-	 *
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		var currentSnak = this.snak(),
-			initialSnak;
-
-		if ( this.options.value instanceof wb.datamodel.Snak ) {
-			initialSnak = this.options.value;
-		} else {
-			var snakDeserializer = new wb.serialization.SnakDeserializer();
-			try {
-				initialSnak = snakDeserializer.deserialize( this.options.value );
-			} catch ( e ) {
-				initialSnak = null;
-			}
-		}
-
-		if ( !initialSnak && !currentSnak ) {
-			return true;
-		}
-		return currentSnak && currentSnak.equals( initialSnak );
-	},
-
-	/**
 	 * @return {boolean}
 	 */
 	isInEditMode: function() {
@@ -542,6 +502,10 @@ $.widget( 'wikibase.snakview', PARENT, {
 		if ( snak !== undefined ) {
 			this.value( snak || {} );
 			return;
+		}
+
+		if ( !this._isValid ) {
+			return null;
 		}
 
 		var value = this.value();
