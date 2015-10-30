@@ -26,7 +26,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					return;
 				}
 
-				statementview.startEditing().done( function() {
+				statementview._controller.startEditing().done( function() {
 					var listview = statementview._referencesListview,
 						lia = listview.listItemAdapter();
 

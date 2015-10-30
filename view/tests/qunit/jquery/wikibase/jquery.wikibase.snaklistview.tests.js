@@ -91,7 +91,7 @@
 	} ) );
 
 	QUnit.test( 'Initialize and destroy', function( assert ) {
-		assert.expect( 8 );
+		assert.expect( 6 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -104,18 +104,6 @@
 			snaklistview.value().length,
 			0,
 			'Snaklistview contains no snaks.'
-		);
-
-		assert.strictEqual(
-			snaklistview.isValid(),
-			true,
-			'Snaklistview is valid.'
-		);
-
-		assert.strictEqual(
-			snaklistview.isInitialValue(),
-			true,
-			'Snaklistview holds initial value.'
 		);
 
 		assert.strictEqual(
@@ -242,69 +230,6 @@
 		);
 	} );
 
-	QUnit.test( 'isInitialValue()', function( assert ) {
-		assert.expect( 7 );
-		var $node = createSnaklistview(),
-			snaklistview = $node.data( 'snaklistview' );
-
-		assert.strictEqual(
-			snaklistview.isInitialValue(),
-			true,
-			'Empty snak list has initial value.'
-		);
-
-		snaklistview = setValueKeepingInitial( snaklistview, snakLists[0] );
-
-		assert.strictEqual(
-			snaklistview.isInitialValue(),
-			false,
-			'snaklistview does not have the initial value after setting a value.'
-		);
-
-		snaklistview = setValueKeepingInitial( snaklistview, new wb.datamodel.SnakList() );
-
-		assert.ok(
-			snaklistview.isInitialValue(),
-			'snaklistview has initial value again after resetting to an empty snak list.'
-		);
-
-		snaklistview.destroy();
-		$node.remove();
-
-		$node = createSnaklistview( snakLists[0] );
-		snaklistview = $node.data( 'snaklistview' );
-
-		assert.strictEqual(
-			snaklistview.isInitialValue(),
-			true,
-			'Snak list initialized with a snak list has initial value.'
-		);
-
-		snaklistview = setValueKeepingInitial( snaklistview, snakLists[1] );
-
-		assert.strictEqual(
-			snaklistview.isInitialValue(),
-			false,
-			'snaklistview does not have the initial value after overwriting its value.'
-		);
-
-		snaklistview = setValueKeepingInitial( snaklistview, new wb.datamodel.SnakList() );
-
-		assert.ok(
-			!snaklistview.isInitialValue(),
-			'snaklistview does not have the initial value after setting value to an empty snak list.'
-		);
-
-		snaklistview = setValueKeepingInitial(
-			snaklistview, new wb.datamodel.SnakList( snakLists[0].toArray() )
-		);
-
-		assert.ok(
-			snaklistview.isInitialValue(),
-			'snaklistview has initial value again after setting to a copy of the initial snak list.'
-		);
-	} );
-
 	QUnit.test( 'Basic start and stop editing', 6, function( assert ) {
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
@@ -428,7 +353,7 @@
 		);
 
 		assert.strictEqual(
-			snaklistview.isInitialValue(),
+			snaklistview.value().equals( snakLists[0] ),
 			true,
 			'Snaklistview still features initial value.'
 		);
@@ -440,7 +365,7 @@
 	} );
 
 	QUnit.test( 'enterNewItem()', function( assert ) {
-		assert.expect( 5 );
+		assert.expect( 4 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -469,13 +394,9 @@
 			'Verified snaklistview being in edit mode.'
 		);
 
-		assert.ok(
-			snaklistview.isInitialValue(),
-			'Snaklistview still features its initial value ignoring pending empty value.'
-		);
-
-		assert.ok(
-			!snaklistview.isValid(),
+		assert.strictEqual(
+			snaklistview.value(),
+			null,
 			'Snaklistview is not valid due to pending value.'
 		);
 	} );
@@ -519,8 +440,9 @@
 			'Left edit mode.'
 		);
 
-		assert.ok(
-			snaklistview.isInitialValue(),
+		assert.strictEqual(
+			snaklistview.value().length,
+			0,
 			'Verified reset to initial value.'
 		);
 
@@ -538,7 +460,7 @@
 		);
 
 		assert.ok(
-			snaklistview.isInitialValue(),
+			snaklistview.value().equals( snakLists[0] ),
 			'Verified reset to initial value.'
 		);
 
@@ -554,7 +476,7 @@
 		);
 
 		assert.ok(
-			snaklistview.isInitialValue(),
+			snaklistview.value().equals( snakLists[0] ),
 			'Verified reset to initial value.'
 		);
 
@@ -562,7 +484,7 @@
 	} );
 
 	QUnit.test( 'Stopping edit mode retaining value', function( assert ) {
-		assert.expect( 9 );
+		assert.expect( 7 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -582,7 +504,7 @@
 		);
 
 		assert.ok(
-			!snaklistview.isInitialValue(),
+			snaklistview.value().equals( snakLists[0] ),
 			'Snaklistview\'s value changed.'
 		);
 
@@ -602,11 +524,6 @@
 		);
 
 		assert.ok(
-			!snaklistview.isInitialValue(),
-			'Snaklistview\'s value changed.'
-		);
-
-		assert.ok(
 			snakLists[1].equals( snaklistview.value() ),
 			'Verified new value.'
 		);
@@ -620,11 +537,6 @@
 		assert.ok(
 			!snaklistview.isInEditMode(),
 			'Left edit mode.'
-		);
-
-		assert.ok(
-			snaklistview.isInitialValue(),
-			'Snaklistview\'s value is the initial value.'
 		);
 
 		assert.strictEqual(

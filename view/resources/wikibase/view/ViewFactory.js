@@ -365,8 +365,7 @@
 						return guidMatch ? getStatementForGuid( guidMatch[ 1 ] ) : null;
 					},
 					propertyId
-				),
-				statementsChanger: this._entityChangersFactory.getStatementsChanger()
+				)
 			}
 		);
 	};
@@ -375,46 +374,53 @@
 	 * Construct a `ListItemAdapter` for `statementview`s
 	 *
 	 * @param {string} entityId
-	 * @param {Function} getValueForDom A function returning a `wikibase.datamodel.Statement` for a given DOM element
+	 * @param {Function} getValueForDom A function returning a `wikibase.datamodel.Statement` or `null`
+	 *                                  for a given DOM element
 	 * @param {string|null} [propertyId] Optionally a property all statements are or should be on
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
 	 **/
 	SELF.prototype.getListItemAdapterForStatementView = function( entityId, getValueForDom, propertyId ) {
-		return new $.wikibase.listview.ListItemAdapter( {
+		var listItemAdapter = new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementview,
 			getNewItem: $.proxy( function( value, dom ) {
-				var currentPropertyId = value ? value.getClaim().getMainSnak().getPropertyId() : propertyId;
 				value = value || getValueForDom( dom );
-				return this._getView(
-					'statementview',
-					$( dom ),
-					{
-						value: value,
-						locked: {
-							mainSnak: {
-								property: Boolean( currentPropertyId )
-							}
-						},
-						predefined: {
-							mainSnak: {
-								property: currentPropertyId || undefined
-							}
-						},
-
-						buildReferenceListItemAdapter: $.proxy( this.getListItemAdapterForReferenceView, this ),
-						buildSnakView: $.proxy(
-							this.getSnakView,
-							this,
-							false
-						),
-						entityIdPlainFormatter: this._entityIdPlainFormatter,
-						guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
-						qualifiersListItemAdapter: this.getListItemAdapterForSnakListView(),
-						statementsChanger: this._entityChangersFactory.getStatementsChanger()
-					}
-				);
+				var view = this.getStatementView( entityId, propertyId, value, $( dom ) );
+				return view;
 			}, this )
 		} );
+		return listItemAdapter;
+	};
+
+	SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) {
+		var currentPropertyId = value ? value.getClaim().getMainSnak().getPropertyId() : propertyId;
+		var view = this._getView(
+			'statementview',
+			$dom,
+			{
+				value: value, // FIXME: remove
+				locked: {
+					mainSnak: {
+						property: Boolean( currentPropertyId )
+					}
+				},
+				predefined: {
+					mainSnak: {
+						property: currentPropertyId || undefined
+					}
+				},
+
+				buildReferenceListItemAdapter: $.proxy( this.getListItemAdapterForReferenceView, this ),
+				buildSnakView: $.proxy(
+					this.getSnakView,
+					this,
+					false
+				),
+				entityIdPlainFormatter: this._entityIdPlainFormatter,
+				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
+				qualifiersListItemAdapter: this.getListItemAdapterForSnakListView()
+			}
+		);
+		return view;
 	};
 
 	/**
