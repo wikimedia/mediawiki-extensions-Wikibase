@@ -23,7 +23,6 @@
 					'referenceview-snakview'
 				],
 				edittoolbar: [
-					'statementview',
 					'entitytermsview',
 					'sitelinkgroupview'
 				],
@@ -329,7 +328,7 @@
 	 * @param {jQuery} $entityview
 	 */
 	function attachCopyrightTooltip( $entityview ) {
-		$entityview.on( 'edittoolbarafterstartediting', function( event ) {
+		$entityview.on( 'edittoolbarafterstartediting statementviewafterstartediting', function( event ) {
 			var $target = $( event.target ),
 				gravity = 'sw';
 

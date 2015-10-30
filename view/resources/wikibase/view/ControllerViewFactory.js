@@ -12,6 +12,33 @@ var SELF = util.inherit(
 	}
 );
 
+SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) {
+	var controller;
+	var statementview = PARENT.prototype.getStatementView.apply( this, arguments );
+
+	var removeFromListView = function( statementview ) {
+		var $statementlistview = statementview.element.closest( ':wikibase-statementlistview' ),
+			statementlistview = $statementlistview.data( 'statementlistview' );
+		if ( statementlistview ) {
+			statementlistview.remove( statementview );
+		}
+	};
+
+	var statementsChanger = this._entityChangersFactory.getStatementsChanger();
+	controller = statementview._controller = this._getController(
+		this._toolbarFactory.getToolbarContainer( statementview.element ),
+		statementview,
+		statementsChanger,
+		removeFromListView.bind( null, statementview ),
+		value
+	);
+
+	if ( !value ) {
+		controller.startEditing().done( $.proxy( statementview, 'focus' ) );
+	}
+	return statementview;
+};
+
 SELF.prototype._getController = function( $container, view, model, onRemove, value ) {
 	var edittoolbar = this._toolbarFactory.getEditToolbar(
 		{
