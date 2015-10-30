@@ -30,15 +30,11 @@
  *
  * @param {Object} options
  * @param {wikibase.datamodel.Statement|null} [options.value=null]
- *        The `Statement` displayed by the view. May be set initially only and gets updated
- *        automatically if changes to the `Statement` are saved.
- *        If `null`, the view will be switched to edit mode initially.
+ *        The `Statement` displayed by the view.
  * @param {Function} options.buildReferenceListItemAdapter
  * @param {Function} options.buildSnakView
  * @param {wikibase.utilities.ClaimGuidGenerator} options.guidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
- * @param {wikibase.entityChangers.StatementsChanger} options.statementsChanger
- *        Required to store the view's `Statement`.
  * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
  *        Required for dynamically rendering plain text references to `Entity`s.
  * @param {Object} [options.predefined={ mainSnak: false }]
@@ -92,7 +88,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 			$references: '.wikibase-statementview-references'
 		},
 		value: null,
-		statementsChanger: null,
 		entityIdPlainFormatter: null,
 		predefined: {
 			mainSnak: false
@@ -151,7 +146,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_create: function() {
 		if ( !this.options.buildReferenceListItemAdapter
 			|| !this.options.buildSnakView
-			|| !this.options.statementsChanger
 			|| !this.options.entityIdPlainFormatter
 			|| !this.options.guidGenerator
 			|| !this.options.qualifiersListItemAdapter
@@ -167,6 +161,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} else {
 			this._createReferencesToggler();
 		}
+		this.element.toggleClass( 'wb-new', this.options.value === null );
 	},
 
 	/**
@@ -489,35 +484,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		if ( !this.isInEditMode() ) {
-			mw.log.warn( 'statementview::isInitialValue should only be called in edit mode' );
-			return true;
-		}
-
-		if ( this.options.value ) {
-			if ( !this._rankSelector.isInitialValue() ) {
-				return false;
-			}
-
-			var qualifiers = this._getQualifiers();
-			if ( !qualifiers.equals( this.options.value.getClaim().getQualifiers() ) ) {
-				return false;
-			}
-
-			var references = this._getReferences();
-			if ( !references.equals( this.options.value.getReferences() ) ) {
-				return false;
-			}
-		}
-
-		return this._mainSnakSnakView.isInitialValue();
-	},
-
-	/**
 	 * Instantiates a `Statement` with the `statementview`'s current value.
 	 *
 	 * @private
@@ -532,16 +498,23 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 
 		var mainSnak = this._mainSnakSnakView.snak();
-
 		if ( !mainSnak ) {
 			return null;
 		}
 
 		var qualifiers = this._getQualifiers();
+		if ( !qualifiers ) {
+			return null;
+		}
+
+		var references = this._getReferences();
+		if ( !references ) {
+			return null;
+		}
 
 		return new wb.datamodel.Statement(
 			new wb.datamodel.Claim( mainSnak, qualifiers, guid ),
-			this._getReferences(),
+			references,
 			this._rankSelector.value()
 		);
 	},
@@ -549,7 +522,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @private
 	 *
-	 * @return {wikibase.datamodel.SnakList}
+	 * @return {wikibase.datamodel.SnakList|null}
 	 */
 	_getQualifiers: function() {
 		var qualifiers = new wb.datamodel.SnakList();
@@ -559,7 +532,11 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 			// Combine qualifiers grouped by property to a single SnakList:
 			for ( var i = 0; i < snaklistviews.length; i++ ) {
-				qualifiers.merge( snaklistviews[i].value() );
+				var value = snaklistviews[i].value();
+				if ( !value ) {
+					return null;
+				}
+				qualifiers.merge( value );
 			}
 		}
 
@@ -571,14 +548,18 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @private
 	 *
-	 * @return {wikibase.datamodel.ReferenceList}
+	 * @return {wikibase.datamodel.ReferenceList|null}
 	 */
 	_getReferences: function() {
-		return new wb.datamodel.ReferenceList(
+		var valid = true;
+		var references = new wb.datamodel.ReferenceList(
 			$.map( this._referencesListview.value(), function( referenceview ) {
-				return referenceview.value();
+				var value = referenceview.value();
+				valid = valid && value !== null;
+				return value;
 			} )
 		);
+		return valid ? references : null;
 	},
 
 	/**
@@ -587,9 +568,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 *
 	 * @return {wikibase.datamodel.Statement|null}
 	 */
-	value: function() {
+	value: function( newValue ) {
+		if ( typeof newValue !== 'undefined' ) {
+			return this.option( 'value', newValue );
+		}
 		if ( this.isInEditMode() ) {
-			var guid = this.options.value ? this.options.value.getClaim().getGuid() : null;
+			var guid = this.options.value ? this.options.value.getClaim().getGuid() : this.options.guidGenerator.newGuid();
 			return this._instantiateStatement( guid );
 		} else {
 			return this.options.value;
@@ -659,6 +643,16 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 	},
 
+	stopEditing: function( dropValue ) {
+		var deferred = $.Deferred();
+
+		this._trigger( 'stopediting', null, [dropValue] );
+
+		this._afterStopEditing( dropValue );
+
+		return deferred.resolve( dropValue ).promise();
+	},
+
 	/**
 	 * @inheritdoc
 	 * @protected
@@ -724,36 +718,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 	/**
 	 * @inheritdoc
-	 * @private
-	 *
-	 * @return {Object} jQuery.Promise
-	 * @return {Function} return.done
-	 * @return {wikibase.datamodel.Statement} return.done.statement The saved statement.
-	 * @return {Function} return.fail
-	 * @return {wikibase.api.RepoApiError} return.fail.error
-	 *
-	 * @throws {Error} if unable to instantiate a `Statement` from the current view state.
-	 */
-	_save: function() {
-		var self = this,
-			guid = this.options.value
-				? this.options.value.getClaim().getGuid()
-				: this.options.guidGenerator.newGuid(),
-			statement = this._instantiateStatement( guid );
-
-		if ( !statement ) {
-			throw new Error( 'Unable to instantiate Statement' );
-		}
-
-		return this.options.statementsChanger.save( statement )
-		.done( function( savedStatement ) {
-			// Update model of represented Statement:
-			self.options.value = savedStatement;
-		} );
-	},
-
-	/**
-	 * @inheritdoc
 	 */
 	isEmpty: function() {
 		return false;
@@ -762,49 +726,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isValid
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		if ( !this.isInEditMode() ) {
-			mw.log.warn( 'statementview::isValid should only be called in edit mode' );
-			return true;
-		}
-
-		return this._mainSnakSnakView.isValid()
-			// Main snak must be valid and serializable, which fails when the snaktype is missing.
-			&& this._mainSnakSnakView.snak()
-			&& this._rankSelector.isValid()
-			&& ( !this._qualifiers || this._listViewIsValid( this._qualifiers ) )
-			&& ( !this._referencesListview || this._listViewIsValid( this._referencesListview ) );
-	},
-
-	/**
-	 * @param {jQuery.wikibase.listview} listview
-	 * @return {boolean}
-	 */
-	_listViewIsValid: function( listview ) {
-		var isValid = true;
-
-		$.each( listview.value(), function ( key, view ) {
-			isValid = view.isValid();
-			return isValid;
-		} );
-
-		return isValid;
-	},
-
-	/**
 	 * @inheritdoc
 	 * @protected
-	 *
-	 * @throws {Error} when tyring to set `value` option.
 	 */
 	_setOption: function( key, value ) {
-		if ( key === 'value' ) {
-			throw new Error( 'Can not set value after initialization' );
-		}
-
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'disabled' ) {
@@ -820,6 +745,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 			if ( this._referencesListview ) {
 				this._referencesListview.option( key, value );
 			}
+		}
+		if ( key === 'value' ) {
+			this.element.toggleClass( 'wb-new', value === null );
 		}
 
 		return response;
