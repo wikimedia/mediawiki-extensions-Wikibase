@@ -27,9 +27,6 @@
 
 	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
 
-	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.EmptyComment">
-		<severity>0</severity>
-	</rule>
 	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.SingleSpaceBeforeSingleLineComment">
 		<severity>0</severity>
 	</rule>

@@ -332,15 +332,18 @@ class BulkSubscriptionUpdater {
 			$conditions[] = 'cs_entity_id > ' . $dbr->addQuotes( $fromEntityId );
 		}
 
-		// NOTE: below, we query and iterate all rows we want to delete in the current batch.
-		// That is rather ugly, but appears to be the best solution, because:
-		//
-		// - Deletions must be paged to avoid lock retention.
-		// - DELETE does not support LIMIT, so we need to know a range (min/max) of IDs.
-		// - GROUP BY does not support LIMIT, so we cannot use aggregate functions to get the min/max IDs.
-		//
-		// Thus, using SELECT ... LIMIT seems to be the only reliable way to get the min/max range
-		// needed for batched deletion.
+		/**
+		 * @note Below, we query and iterate all rows we want to delete in the current batch. That
+		 * is rather ugly, but appears to be the best solution, because:
+		 *
+		 * - Deletions must be paged to avoid lock retention.
+		 * - DELETE does not support LIMIT, so we need to know a range (min/max) of IDs.
+		 * - GROUP BY does not support LIMIT, so we cannot use aggregate functions to get the
+		 *   min/max IDs.
+		 *
+		 * Thus, using SELECT ... LIMIT seems to be the only reliable way to get the min/max range
+		 * needed for batched deletion.
+		 */
 
 		$res = $dbr->select(
 			'wb_changes_subscription',
