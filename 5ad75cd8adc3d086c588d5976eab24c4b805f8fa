@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_d1f23696",
+        "filename": "repo/includes/Parsers/MediaWikiMonthNameProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-10-31T01:05:54Z",
+      "side": 1,
+      "message": "s/object/class/ (because there can be more than one instance)",
+      "revId": "5ad75cd8adc3d086c588d5976eab24c4b805f8fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
