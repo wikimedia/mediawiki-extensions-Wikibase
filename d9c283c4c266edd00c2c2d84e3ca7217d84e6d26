@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_c29c9f72",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-01T22:36:24Z",
+      "side": 1,
+      "message": "Please use a callback to inject services.",
+      "revId": "d9c283c4c266edd00c2c2d84e3ca7217d84e6d26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_22b25bf9",
+        "filename": "repo/includes/api/NutShell.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-01T22:36:24Z",
+      "side": 1,
+      "message": "Please use proper injection for new API modules. Callbacks are now supported for registering API modules.",
+      "revId": "d9c283c4c266edd00c2c2d84e3ca7217d84e6d26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_35d625c8",
         "filename": "repo/includes/api/NutShell.php",
         "patchSetId": 1
