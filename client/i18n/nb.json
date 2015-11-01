@@ -12,6 +12,7 @@
 	"apihelp-query+pageterms-description": "Hent termer assosiert med en side via et assosiert data element.",
 	"apihelp-query+pageterms-example-simple": "Hent alle termer assosiert med siden «London», på brukerens språk.",
 	"apihelp-query+pageterms-example-label-en": "Hent etiketter og kallenavn assosiert med siden «London», på engelsk.",
+	"apihelp-query+pageterms-example-item": "Hent etiketter og alias fra elementet Q84.",
 	"apihelp-query+pageterms-param-terms": "Type termer som hentes, f.eks. «description». Hvis det ikke spesifiseres, så vil alle typer bli returnert.",
 	"apihelp-query+wikibase-description": "Få informasjon om Wikibase-klienten og det tilknyttede Wikibase-sentrallageret.",
 	"apihelp-query+wikibase-example": "Få URL-sti og annen informasjon om Wikibase-klienten og sentrallageret.",
