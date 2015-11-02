@@ -2,8 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
-use Language;
-use ParserOptions;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\HashUsageAccumulator;

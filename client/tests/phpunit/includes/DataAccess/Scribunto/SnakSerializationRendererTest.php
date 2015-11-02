@@ -8,7 +8,6 @@ use DataValues\StringValue;
 use Language;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer;
-use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
