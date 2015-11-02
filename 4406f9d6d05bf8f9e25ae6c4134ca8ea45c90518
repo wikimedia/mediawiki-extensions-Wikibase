@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_73402439",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-11-02T20:15:18Z",
+      "side": 1,
+      "message": "I think this it\u0027s harmful to do this actually. So yeah, please inline",
+      "parentUuid": "0ebaf39b_eec42c46",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_b31e9fbc",
         "filename": "client/includes/SiteLinkCommentCreator.php",
         "patchSetId": 7
