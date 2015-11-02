@@ -34,6 +34,24 @@
       "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f0808ac6",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetLabelDescriptionAliasesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-02T19:48:53Z",
+      "side": 1,
+      "message": "I also think we should apply unicode normalization - if we normalize, we should fully normalize.\n\nBut I agree that if we apply uicode normalization, we should also test for that. Though we probably don\u0027t do that anywhere else either.",
+      "parentUuid": "0ebaf39b_5dc73416",
+      "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
