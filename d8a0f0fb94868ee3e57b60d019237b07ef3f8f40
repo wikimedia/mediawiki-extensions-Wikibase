@@ -51,6 +51,24 @@
       "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d36c70cd",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-11-02T20:17:44Z",
+      "side": 1,
+      "message": "A better solution is not relying on global state and having the test inject the cache as it sees fit",
+      "parentUuid": "0ebaf39b_2e19e488",
+      "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
