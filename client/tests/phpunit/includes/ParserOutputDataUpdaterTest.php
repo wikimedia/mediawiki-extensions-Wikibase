@@ -150,7 +150,7 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 		$parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
 		$property = $parserOutput->getProperty( 'wikibase_item' );
 
-		$this->assertEquals( false, $property );
+		$this->assertFalse( $property );
 	}
 
 	/**

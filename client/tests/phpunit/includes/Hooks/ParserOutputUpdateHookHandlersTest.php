@@ -343,7 +343,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
-		$this->assertSame( false, $parserOutput->getProperty( 'wikibase_item' ) );
+		$this->assertFalse( $parserOutput->getProperty( 'wikibase_item' ) );
 
 		$this->assertEmpty( $parserOutput->getLanguageLinks() );
 		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
