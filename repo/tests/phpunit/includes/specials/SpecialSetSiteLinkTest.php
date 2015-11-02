@@ -170,7 +170,11 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$matchers['id']['attributes']['value'] = self::$itemId;
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing one subpage value" );
+			$this->assertTag(
+				$matcher,
+				$output,
+				"Failed to match html output with tag '{$key}' passing one subpage value"
+			);
 		}
 	}
 
@@ -209,7 +213,11 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$matchers['badges']['children']['only']['attributes']['selected'] = '';
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
+			$this->assertTag(
+				$matcher,
+				$output,
+				"Failed to match html output with tag '{$key}' passing two subpage values"
+			);
 		}
 	}
 
@@ -229,18 +237,30 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$matchers['badges']['children']['only']['attributes']['selected'] = '';
 
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}' passing two subpage values" );
+			$this->assertTag(
+				$matcher,
+				$output,
+				"Failed to match html output with tag '{$key}' passing two subpage values"
+			);
 		}
 	}
 
 	public function testExecuteRedirect() {
 		list( $output, ) = $this->executeSpecialPage( self::$redirectId  . '/dewiki', null, 'qqx' );
 
-		$this->assertRegExp( '@<p class="error">\(wikibase-wikibaserepopage-unresolved-redirect: .*?\)</p>@', $output, "Expected error message" );
+		$this->assertRegExp(
+			'@<p class="error">\(wikibase-wikibaserepopage-unresolved-redirect: .*?\)</p>@',
+			$output,
+			'Expected error message'
+		);
 	}
 
 	public function testExecutePostPreserveSiteLinkWhenNothingEntered() {
-		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => '' ), true );
+		$request = new FauxRequest( array(
+			'id' => self::$itemId,
+			'site' => 'dewiki',
+			'page' => '',
+		), true );
 
 		list( $output, ) = $this->executeSpecialPage( '', $request );
 
@@ -257,7 +277,11 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	public function testExecutePostModifySiteLink() {
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => 'Wikipedia' ), true );
+		$request = new FauxRequest( array(
+			'id' => self::$itemId,
+			'site' => 'dewiki',
+			'page' => 'Wikipedia',
+		), true );
 
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
@@ -276,7 +300,12 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	public function testExecutePostRemoveSiteLink() {
 		$lookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-		$request = new FauxRequest( array( 'id' => self::$itemId, 'site' => 'dewiki', 'page' => '', 'remove' => true ), true );
+		$request = new FauxRequest( array(
+			'id' => self::$itemId,
+			'site' => 'dewiki',
+			'page' => '',
+			'remove' => true,
+		), true );
 
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;

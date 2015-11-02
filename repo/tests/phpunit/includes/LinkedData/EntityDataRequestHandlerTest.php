@@ -190,11 +190,18 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @param string $subpage The subpage to request (or '')
 	 * @param array  $params  Request parameters
 	 * @param array  $headers  Request headers
-	 * @param string $expRegExp   Regex to match the output against.
-	 * @param int    $expCode     Expected HTTP status code
-	 * @param array  $expHeaders  Expected HTTP response headers
+	 * @param string $expectedOutput Regex to match the output against.
+	 * @param int $expectedStatusCode Expected HTTP status code.
+	 * @param string[] $expectedHeaders Expected HTTP response headers.
 	 */
-	public function testHandleRequest( $subpage, array $params, array $headers, $expRegExp, $expCode = 200, array $expHeaders = array() ) {
+	public function testHandleRequest(
+		$subpage,
+		array $params,
+		array $headers,
+		$expectedOutput,
+		$expectedStatusCode = 200,
+		array $expectedHeaders = array()
+	) {
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();
 
@@ -216,10 +223,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$text = ob_get_contents();
 			ob_end_clean();
 
-			$this->assertEquals( $expCode, $response->getStatusCode(), "status code" );
-			$this->assertRegExp( $expRegExp, $text, "output" );
+			$this->assertEquals( $expectedStatusCode, $response->getStatusCode(), 'status code' );
+			$this->assertRegExp( $expectedOutput, $text, 'output' );
 
-			foreach ( $expHeaders as $name => $exp ) {
+			foreach ( $expectedHeaders as $name => $exp ) {
 				$value = $response->getheader( $name );
 				$this->assertNotNull( $value, "header: $name" );
 				$this->assertInternalType( 'string', $value, "header: $name" );
@@ -227,8 +234,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			}
 		} catch ( HttpError $e ) {
 			ob_end_clean();
-			$this->assertEquals( $expCode, $e->getStatusCode(), "status code" );
-			$this->assertRegExp( $expRegExp, $e->getHTML(), "error output" );
+			$this->assertEquals( $expectedStatusCode, $e->getStatusCode(), 'status code' );
+			$this->assertRegExp( $expectedOutput, $e->getHTML(), 'error output' );
 		}
 	}
 

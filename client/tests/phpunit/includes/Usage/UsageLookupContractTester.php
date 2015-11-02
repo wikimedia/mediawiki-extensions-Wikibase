@@ -84,38 +84,42 @@ class UsageLookupContractTester {
 		$this->putUsages( 23, array( $u3s, $u3l, $u4l ), '20150102030405' );
 		$this->putUsages( 42, array( $u4l, $u4t ), '20150102030405' );
 
-		Assert::assertEmpty(
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q6 ) ) )
-		);
+		$pages = $this->lookup->getPagesUsing( array( $q6 ) );
+		Assert::assertEmpty( iterator_to_array( $pages ) );
 
+		$pages = $this->lookup->getPagesUsing( array( $q3 ) );
 		$this->assertSamePageEntityUsages(
 			array( 23 => new PageEntityUsages( 23, array( $u3s, $u3l ) ) ),
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q3 ) ) ),
+			iterator_to_array( $pages ),
 			'Pages using Q3'
 		);
 
+		$pages = $this->lookup->getPagesUsing(
+			array( $q4, $q3 ),
+			array( EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'de' ) )
+		);
 		$this->assertSamePageEntityUsages(
 			array(
 				23 => new PageEntityUsages( 23, array( $u3l, $u4l ) ),
 				42 => new PageEntityUsages( 42, array( $u4l ) ),
 			),
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q4, $q3 ),
-				array( EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'de' ) ) ) ),
+			iterator_to_array( $pages ),
 			'Pages using "label" on Q4 or Q3'
 		);
 
-		Assert::assertEmpty(
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q3 ), array( EntityUsage::ALL_USAGE ) ) ),
-			'Pages using "all" on Q3'
-		);
+		$pages = $this->lookup->getPagesUsing( array( $q3 ), array( EntityUsage::ALL_USAGE ) );
+		Assert::assertEmpty( iterator_to_array( $pages ), 'Pages using "all" on Q3' );
 
-		Assert::assertEmpty(
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q4 ), array( EntityUsage::SITELINK_USAGE ) ) ),
-			'Pages using "sitelinks" on Q4'
-		);
+		$pages = $this->lookup->getPagesUsing( array( $q4 ), array( EntityUsage::SITELINK_USAGE ) );
+		Assert::assertEmpty( iterator_to_array( $pages ), 'Pages using "sitelinks" on Q4' );
 
-		Assert::assertCount( 2,
-			iterator_to_array( $this->lookup->getPagesUsing( array( $q3, $q4 ), array( EntityUsage::TITLE_USAGE, EntityUsage::SITELINK_USAGE ) ) ),
+		$pages = $this->lookup->getPagesUsing(
+			array( $q3, $q4 ),
+			array( EntityUsage::TITLE_USAGE, EntityUsage::SITELINK_USAGE )
+		);
+		Assert::assertCount(
+			2,
+			iterator_to_array( $pages ),
 			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
 
