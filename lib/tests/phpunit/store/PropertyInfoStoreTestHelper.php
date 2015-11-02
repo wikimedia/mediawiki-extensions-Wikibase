@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoStore;
 
@@ -16,11 +17,11 @@ use Wikibase\PropertyInfoStore;
 class PropertyInfoStoreTestHelper {
 
 	/**
-	 * @var \PHPUnit_Framework_TestCase
+	 * @var PHPUnit_Framework_TestCase
 	 */
 	protected $test;
 
-	public function __construct( \PHPUnit_Framework_TestCase $testCase, $storeBuilder ) {
+	public function __construct( PHPUnit_Framework_TestCase $testCase, $storeBuilder ) {
 		$this->test = $testCase;
 		$this->storeBuilder = $storeBuilder;
 	}
@@ -62,7 +63,7 @@ class PropertyInfoStoreTestHelper {
 		$table->setPropertyInfo( $id, $info );
 		$res = $table->getPropertyInfo( $id );
 
-		$this->test->assertEquals( $info, $res );
+		$this->test->assertSame( $info, $res );
 	}
 
 	public function testGetPropertyInfo() {
@@ -77,12 +78,24 @@ class PropertyInfoStoreTestHelper {
 		$table->setPropertyInfo( $p23, $info23 );
 
 		$this->test->assertNull( $table->getPropertyInfo( $p42 ), "not set yet, should be null" );
-		$this->test->assertEquals( $info23, $table->getPropertyInfo( $p23 ), "should return what was set" );
+		$this->test->assertSame(
+			$info23,
+			$table->getPropertyInfo( $p23 ),
+			'should return what was set'
+		);
 
 		$table->setPropertyInfo( $p42, $info42 );
 
-		$this->test->assertEquals( $info42, $table->getPropertyInfo( $p42 ), "should return what was set" );
-		$this->test->assertEquals( $info23, $table->getPropertyInfo( $p23 ), "should return what was set" );
+		$this->test->assertSame(
+			$info42,
+			$table->getPropertyInfo( $p42 ),
+			'should return what was set'
+		);
+		$this->test->assertSame(
+			$info23,
+			$table->getPropertyInfo( $p23 ),
+			'should return what was set'
+		);
 	}
 
 	public function testGetPropertyInfoForDataType() {
@@ -92,23 +105,39 @@ class PropertyInfoStoreTestHelper {
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' );
 
-		$this->test->assertEquals( array(), $table->getPropertyInfoForDataType( 'commonsMedia' ), "should initially be empty" );
+		$this->test->assertSame(
+			array(),
+			$table->getPropertyInfoForDataType( 'commonsMedia' ),
+			'should initially be empty'
+		);
 
 		$table->setPropertyInfo( $p23, $info23 );
-		$this->test->assertEquals( array(), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after adding one property" );
+		$this->test->assertSame(
+			array(),
+			$table->getPropertyInfoForDataType( 'commonsMedia' ),
+			'after adding one property'
+		);
 
 		$table->setPropertyInfo( $p42, $info42 );
-		$this->test->assertEquals(
+		$this->test->assertSame(
 			array( 42 => $info42 ),
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after adding the second property'
 		);
 
 		$table->removePropertyInfo( $p23 );
-		$this->test->assertEquals( array( 42 => $info42 ), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after removing one property" );
+		$this->test->assertSame(
+			array( 42 => $info42 ),
+			$table->getPropertyInfoForDataType( 'commonsMedia' ),
+			'after removing one property'
+		);
 
 		$table->removePropertyInfo( $p42 );
-		$this->test->assertEquals( array(), $table->getPropertyInfoForDataType( 'commonsMedia' ), "after removing the second property" );
+		$this->test->assertSame(
+			array(),
+			$table->getPropertyInfoForDataType( 'commonsMedia' ),
+			'after removing the second property'
+		);
 	}
 
 	public function testGetAllPropertyInfo() {
@@ -118,16 +147,32 @@ class PropertyInfoStoreTestHelper {
 		$info23 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string' );
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
 
-		$this->test->assertEquals( array(), $table->getAllPropertyInfo(), "should initially be empty" );
+		$this->test->assertSame(
+			array(),
+			$table->getAllPropertyInfo(),
+			'should initially be empty'
+		);
 
 		$table->setPropertyInfo( $p23, $info23 );
-		$this->test->assertEquals( array( 23 => $info23 ), $table->getAllPropertyInfo(), "after adding one property" );
+		$this->test->assertSame(
+			array( 23 => $info23 ),
+			$table->getAllPropertyInfo(),
+			'after adding one property'
+		);
 
 		$table->setPropertyInfo( $p42, $info42 );
-		$this->test->assertEquals( array( 23 => $info23, 42 => $info42 ), $table->getAllPropertyInfo(), "after adding the second property" );
+		$this->test->assertSame(
+			array( 23 => $info23, 42 => $info42 ),
+			$table->getAllPropertyInfo(),
+			'after adding the second property'
+		);
 
 		$table->removePropertyInfo( $p23 );
-		$this->test->assertEquals( array( 42 => $info42 ), $table->getAllPropertyInfo(), "after removing one property" );
+		$this->test->assertSame(
+			array( 42 => $info42 ),
+			$table->getAllPropertyInfo(),
+			'after removing one property'
+		);
 	}
 
 	public function testRemovePropertyInfo() {
@@ -152,7 +197,11 @@ class PropertyInfoStoreTestHelper {
 		$table1->setPropertyInfo( $p23, $info23 );
 
 		$table2 = $this->newPropertyInfoStore();
-		$this->test->assertEquals( $info23, $table2->getPropertyInfo( $p23 ), "should return persisted info" );
+		$this->test->assertSame(
+			$info23,
+			$table2->getPropertyInfo( $p23 ),
+			'should return persisted info'
+		);
 	}
 
 }

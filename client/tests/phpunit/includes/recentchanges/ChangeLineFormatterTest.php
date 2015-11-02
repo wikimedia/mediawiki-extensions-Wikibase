@@ -243,7 +243,12 @@ class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
 		);
 	}
 
-	protected function getEditSiteLinkRecentChange( $comment, $commentHtml = null, $legacyComment = null, $compositeLegacyComment = null ) {
+	protected function getEditSiteLinkRecentChange(
+		$comment,
+		$commentHtml = null,
+		$legacyComment = null,
+		$compositeLegacyComment = null
+	) {
 		$params = array(
 			'wikibase-repo-change' => array(
 				'id' => 4,
