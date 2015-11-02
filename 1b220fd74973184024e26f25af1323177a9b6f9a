@@ -16,6 +16,24 @@
       "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7850060e",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetLabelDescriptionAliasesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-02T13:16:29Z",
+      "side": 1,
+      "message": "because we should be consistent with how this is handled in the api (and thus in the JS ui)",
+      "parentUuid": "0ebaf39b_5dc73416",
+      "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
