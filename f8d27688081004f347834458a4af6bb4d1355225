@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_5d3974ee",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T12:30:48Z",
+      "side": 1,
+      "message": "Please use a $cacheType variable and add a comment why this is here.",
+      "revId": "f8d27688081004f347834458a4af6bb4d1355225",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7d3c78df",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T12:30:48Z",
+      "side": 1,
+      "message": "Please add a comment why this is here.",
+      "revId": "f8d27688081004f347834458a4af6bb4d1355225",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1d3f7cd4",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T12:30:48Z",
+      "side": 1,
+      "message": "Please use a $cacheType variable and add a comment why this is here.",
+      "revId": "f8d27688081004f347834458a4af6bb4d1355225",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
