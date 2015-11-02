@@ -159,13 +159,9 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordPreferredStatement() {
-		$updater = $this->newGeoDataDataUpdater(
+		$updater = $this->getUpdaterWithStatements(
 			array( 'P9000', 'P625' )
 		);
-
-		foreach ( $this->getStatements() as $statement ) {
-			$updater->processStatement( $statement );
-		}
 
 		$coords = $this->getCoords();
 
@@ -188,13 +184,9 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateParserOutput_withPrimaryCoordNormalStatement() {
-		$updater = $this->newGeoDataDataUpdater(
+		$updater = $this->getUpdaterWithStatements(
 			array( 'P625', 'P10' )
 		);
-
-		foreach ( $this->getStatements() as $statement ) {
-			$updater->processStatement( $statement );
-		}
 
 		$expected = new CoordinatesOutput();
 		$coords = $this->getCoords();
@@ -216,14 +208,6 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	public function testUpdateParserOutput_noPrimaryCoord() {
-		$updater = $this->newGeoDataDataUpdater(
-			array( 'P17', 'P404', 'P10', 'P20', 'P9000', 'P9001', 'P625' )
-		);
-
-		foreach ( $this->getStatements() as $statement ) {
-			$updater->processStatement( $statement );
-		}
-
 		$expected = new CoordinatesOutput();
 
 		foreach ( $this->getCoords() as $coord ) {
@@ -231,9 +215,41 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		}
 
 		$parserOutput = new ParserOutput();
+
+		$updater = $this->getUpdaterWithStatements(
+			array( 'P17', 'P404', 'P10', 'P20', 'P9000', 'P9001', 'P625' )
+		);
+
 		$updater->updateParserOutput( $parserOutput );
 
 		$this->assertEquals( $expected, $parserOutput->geoData );
+	}
+
+	public function testUpdateParserOutput_withExistingCoordinates() {
+		$coordinatesOutput = new CoordinatesOutput();
+
+		$coord = new Coord( 39.0987, -70.0051 );
+		$coord->primary = true;
+
+		$coordinatesOutput->addPrimary( $coord );
+
+		$parserOutput = new ParserOutput();
+		$parserOutput->geoData = $coordinatesOutput;
+
+		$updater = $this->getUpdaterWithStatements( array( 'P625', 'P10' ) );
+		$updater->updateParserOutput( $parserOutput );
+
+		$this->assertEquals( $coord, $parserOutput->geoData->getPrimary() );
+	}
+
+	private function getUpdaterWithStatements( array $preferredProperties ) {
+		$updater = $this->newGeoDataDataUpdater( $preferredProperties );
+
+		foreach ( $this->getStatements() as $statement ) {
+			$updater->processStatement( $statement );
+		}
+
+		return $updater;
 	}
 
 	/**
