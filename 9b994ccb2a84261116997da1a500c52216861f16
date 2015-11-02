@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_739ca470",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T21:15:12Z",
+      "side": 1,
+      "message": "Yeah... testing stuff in Maintenance scripts is very, very ugly.",
+      "parentUuid": "0ebaf39b_50f956bf",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_38e7eea8",
         "filename": "repo/includes/PropertyDataTypeChanger.php",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2015-11-02T15:14:05Z",
       "side": 1,
       "message": "Please split lines that exceed 100 characters.",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d3b1d0f4",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_38e7eea8",
       "revId": "9b994ccb2a84261116997da1a500c52216861f16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_33a2aca4",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_389e0e0b",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_901a6e1a",
         "filename": "repo/includes/PropertyDataTypeChanger.php",
         "patchSetId": 4
@@ -82,6 +136,24 @@
       "writtenOn": "2015-11-02T19:23:58Z",
       "side": 1,
       "message": "not at all important, but I would say \"New and old DataType must have...\"",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9397d84a",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_901a6e1a",
       "revId": "9b994ccb2a84261116997da1a500c52216861f16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -123,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_934118ae",
+        "filename": "repo/maintenance/changePropertyDataType.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T21:15:12Z",
+      "side": 1,
+      "message": "Adopted a slightly changed version of Jan\u0027s comment.",
+      "parentUuid": "0ebaf39b_58bc2268",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_d8afb225",
         "filename": "repo/maintenance/changePropertyDataType.php",
         "patchSetId": 4
@@ -134,6 +224,24 @@
       "writtenOn": "2015-11-02T15:14:05Z",
       "side": 1,
       "message": "I find the term \"data type id\" confusing. In the context of this script it sounds like a data type can have an entity id that describes it. We usually use the term \"data type\" and describe it as \"data type identifier\".\n\nI suggest \"new-data-type\".",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f38e542a",
+        "filename": "repo/maintenance/changePropertyDataType.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T21:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_d8afb225",
       "revId": "9b994ccb2a84261116997da1a500c52216861f16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
