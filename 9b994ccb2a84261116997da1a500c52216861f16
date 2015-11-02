@@ -71,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_901a6e1a",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-02T19:23:58Z",
+      "side": 1,
+      "message": "not at all important, but I would say \"New and old DataType must have...\"",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_e366d04d",
         "filename": "repo/maintenance/changePropertyDataType.php",
         "patchSetId": 4
