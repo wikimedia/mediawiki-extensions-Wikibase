@@ -100,14 +100,21 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			$usages
 		);
 
-		$itemId = $wikibaseLuaBindings->getEntityId( 'Rome' );
-		$this->assertEquals( 'Q33', $itemId );
+		$id = $wikibaseLuaBindings->getEntityId( 'Rome' );
+		$this->assertSame( 'Q33', $id );
 
-		$this->assertTrue( $this->hasUsage( $usages->getUsages(), new ItemId( $itemId ), EntityUsage::TITLE_USAGE ), 'title usage' );
-		$this->assertFalse( $this->hasUsage( $usages->getUsages(), new ItemId( $itemId ), EntityUsage::SITELINK_USAGE ), 'sitelink usage' );
+		$itemId = new ItemId( $id );
+		$this->assertTrue(
+			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::TITLE_USAGE ),
+			'title usage'
+		);
+		$this->assertFalse(
+			$this->hasUsage( $usages->getUsages(), $itemId, EntityUsage::SITELINK_USAGE ),
+			'sitelink usage'
+		);
 
-		$itemId = $wikibaseLuaBindings->getEntityId( 'Barcelona' );
-		$this->assertSame( null, $itemId );
+		$id = $wikibaseLuaBindings->getEntityId( 'Barcelona' );
+		$this->assertNull( $id );
 	}
 
 	public function getLabelProvider() {

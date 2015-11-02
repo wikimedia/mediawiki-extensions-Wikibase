@@ -448,8 +448,16 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		foreach ( $expected as $key => $expectedUsages ) {
 			$actualUsages = $actual[$key];
 
-			$this->assertEquals( $expectedUsages->getPageId(), $actualUsages->getPageId(), $message . "[Page $key] " . 'Page ID mismatches!' );
-			$this->assertEquals( $expectedUsages->getUsages(), $actualUsages->getUsages(), $message . "[Page $key] " . 'Usages:' );
+			$this->assertEquals(
+				$expectedUsages->getPageId(),
+				$actualUsages->getPageId(),
+				$message . "[Page $key] " . 'Page ID mismatches!'
+			);
+			$this->assertEquals(
+				$expectedUsages->getUsages(),
+				$actualUsages->getUsages(),
+				$message . "[Page $key] " . 'Usages:'
+			);
 		}
 
 		$this->assertEmpty( array_slice( $actual, count( $expected ) ), $message . 'Extra entries found!' );

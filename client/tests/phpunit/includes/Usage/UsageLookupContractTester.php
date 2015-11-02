@@ -140,8 +140,16 @@ class UsageLookupContractTester {
 			Assert::assertArrayHasKey( $key, $actual, 'Page ID' );
 			$actualUsages = $actual[$key];
 
-			Assert::assertEquals( $expectedUsages->getPageId(), $actualUsages->getPageId(), $message . "[Page $key] " . 'Page ID mismatches!' );
-			Assert::assertEquals( $expectedUsages->getUsages(), $actualUsages->getUsages(), $message . "[Page $key] " . 'Usages:' );
+			Assert::assertEquals(
+				$expectedUsages->getPageId(),
+				$actualUsages->getPageId(),
+				$message . "[Page $key] " . 'Page ID mismatches!'
+			);
+			Assert::assertEquals(
+				$expectedUsages->getUsages(),
+				$actualUsages->getUsages(),
+				$message . "[Page $key] " . 'Usages:'
+			);
 		}
 
 		Assert::assertEmpty( array_slice( $actual, count( $expected ) ), $message . 'Extra entries found!' );

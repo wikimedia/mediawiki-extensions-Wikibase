@@ -41,7 +41,10 @@ class StringLengthValidatorTest extends \PHPUnit_Framework_TestCase {
 		if ( !$expected ) {
 			$errors = $result->getErrors();
 			$this->assertCount( 1, $errors, $message );
-			$this->assertTrue( in_array( $errors[0]->getCode(), array( 'too-long', 'too-short' ) ), $message . "\n" . $errors[0]->getCode() );
+			$this->assertTrue(
+				in_array( $errors[0]->getCode(), array( 'too-long', 'too-short' ) ),
+				$message . "\n" . $errors[0]->getCode()
+			);
 
 			$localizer = new ValidatorErrorLocalizer();
 			$msg = $localizer->getErrorMessage( $errors[0] );

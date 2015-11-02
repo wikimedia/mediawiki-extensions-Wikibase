@@ -9,8 +9,10 @@ namespace Wikibase\Rdf;
  * as a hash that just evicts old values when a collision occurs.
  *
  * The idea for this implementation was taken mainly from from blog posts:
- * - "The Invertible Bloom Filter" by Mike James http://www.i-programmer.info/programming/theory/4641-the-invertible-bloom-filter.html
- * - "The Opposite of a Bloom Filter" by Jeff Hodges http://www.somethingsimilar.com/2012/05/21/the-opposite-of-a-bloom-filter/
+ * - "The Invertible Bloom Filter" by Mike James
+ *   http://www.i-programmer.info/programming/theory/4641-the-invertible-bloom-filter.html
+ * - "The Opposite of a Bloom Filter" by Jeff Hodges
+ *   http://www.somethingsimilar.com/2012/05/21/the-opposite-of-a-bloom-filter/
  *
  * The implementation of alreadySeen() works as follows:
  *

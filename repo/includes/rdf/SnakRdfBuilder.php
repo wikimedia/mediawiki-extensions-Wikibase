@@ -47,7 +47,11 @@ class SnakRdfBuilder {
 	 * @param DataValueRdfBuilder $valueBuilder
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 */
-	public function __construct( RdfVocabulary $vocabulary, DataValueRdfBuilder $valueBuilder, PropertyDataTypeLookup $propertyLookup ) {
+	public function __construct(
+		RdfVocabulary $vocabulary,
+		DataValueRdfBuilder $valueBuilder,
+		PropertyDataTypeLookup $propertyLookup
+	) {
 		$this->vocabulary = $vocabulary;
 		$this->valueBuilder = $valueBuilder;
 		$this->propertyLookup = $propertyLookup;

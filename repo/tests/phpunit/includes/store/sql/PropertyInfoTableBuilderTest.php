@@ -128,10 +128,17 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 	private function assertTableHasProperties( array $properties, PropertyInfoTable $table ) {
 		foreach ( $properties as $propId => $expected ) {
 			$info = $table->getPropertyInfo( new PropertyId( $propId ) );
-			$this->assertEquals( $expected[PropertyInfoStore::KEY_DATA_TYPE], $info[PropertyInfoStore::KEY_DATA_TYPE], "Property $propId" );
+			$this->assertEquals(
+				$expected[PropertyInfoStore::KEY_DATA_TYPE],
+				$info[PropertyInfoStore::KEY_DATA_TYPE],
+				"Property $propId"
+			);
 
 			if ( isset( $expected[PropertyInfoStore::KEY_FORMATTER_URL] ) ) {
-				$this->assertEquals( $expected[PropertyInfoStore::KEY_FORMATTER_URL], $info[PropertyInfoStore::KEY_FORMATTER_URL] );
+				$this->assertEquals(
+					$expected[PropertyInfoStore::KEY_FORMATTER_URL],
+					$info[PropertyInfoStore::KEY_FORMATTER_URL]
+				);
 			} else {
 				$this->assertArrayNotHasKey( PropertyInfoStore::KEY_FORMATTER_URL, $info );
 			}
