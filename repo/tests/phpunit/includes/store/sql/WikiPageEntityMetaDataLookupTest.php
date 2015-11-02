@@ -88,7 +88,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				$entityRevision ->getRevisionId() * 2 // Doesn't exist
 			);
 
-		$this->assertSame( false, $result );
+		$this->assertFalse( $result );
 	}
 
 	public function testLoadRevisionInformationById_notFound() {
@@ -98,7 +98,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 				823487354
 			);
 
-		$this->assertSame( false, $result );
+		$this->assertFalse( $result );
 	}
 
 	public function testLoadRevisionInformation() {
