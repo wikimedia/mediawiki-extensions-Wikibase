@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_f34177ac",
+        "filename": "repo/tests/phpunit/includes/Hooks/OutputPageJsConfigHookHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T16:58:11Z",
+      "side": 1,
+      "message": "assertFalse please.",
+      "revId": "8e87f8adad8b1921fffd4f906f6211860cf07f01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
