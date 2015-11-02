@@ -6,15 +6,15 @@
 			"రహ్మానుద్దీన్"
 		]
 	},
-	"tooltip-t-wikibase": "ಕೊಂಡಿದ ಮೂಲಕ ಸಂಗ್ರಹಿಸಯಿನ ವಸ್ತುಲೆನ ಸಂಪರ್ಕ ಮಾಹಿತಿ",
+	"tooltip-t-wikibase": "ಸಂಪರ್ಕೊ ಮಾಹಿತಿ ಸಂಗ್ರಹೊ ಮಲ್ಪುನ ಬಾಗೊದ ಕೊಂಡಿ",
 	"wikibase-comment-update": "{{WBREPONAME}} ಬಗೆ ಬದಲಾತ್ಂಡ್",
-	"wikibase-dataitem": "{{WBREPONAME}} ವಸ್ತು",
-	"wikibase-editlinks": "ಕೊಂಡಿಲೆನ್ ಸಂಪಾದನೆ ಮಲ್ಪುಲೆ",
-	"wikibase-editlinkstitle": "ಅಂತರ್ ಬಾಸಾ ಕೊಂಡಿಲೆನ್ ಸಂಪಾದಿಸಲೆ",
-	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-dataitem": "{{WBREPONAME}}ಅಂಸೊ",
+	"wikibase-editlinks": "ಕೊಂಡಿಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
+	"wikibase-editlinkstitle": "ಅಂತರ್ ಬಾಸೆದ ಕೊಂಡಿಲೆನ್ ಸಂಪೊಲಿಪುಲೆ",
+	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ದೆಂಗಾಲೆ",
-	"wikibase-rc-hide-wikidata-show": "ತೊಜಾವು",
+	"wikibase-rc-hide-wikidata-show": "ತೋಜಾವು",
 	"wikibase-rc-wikibase-edit-letter": "ಡಿ",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ಸಂಪಾದನೆ",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ಸಂಪದನೆ",
 	"wikibase-otherprojects": "ಬೇತೆ ಯೋಜನೆಲು"
 }
