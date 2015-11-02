@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ebaf39b_9d328c04",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T15:14:05Z",
+      "side": 1,
+      "message": "Why a separate class? Do you think this will ever be needed outside of the maintenance script? Personally, I think the existence of this class will create the false impression that it\u0027s ok to use this service whenever somebody feels like. Do we want that?\n\nFurthermore, what this class actually does is very, very simple. Why not inline these few lines into the maintenance script?",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_38e7eea8",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T15:14:05Z",
+      "side": 1,
+      "message": "Please split lines that exceed 100 characters.",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_389e0e0b",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T15:14:05Z",
+      "side": 1,
+      "message": "\"Changed\"?\n\nAlso, \"DataType\" looks like it refers to a class name. I suggest \"data type\".",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_e366d04d",
         "filename": "repo/maintenance/changePropertyDataType.php",
         "patchSetId": 4
@@ -13,6 +64,58 @@
       "writtenOn": "2015-10-22T21:26:41Z",
       "side": 1,
       "message": "How about instead: Please note: You probably don\u0027t want to use this. Add a new property and then delete the old one instead. Using this will likely break consumers of your data. As statements with the changed property will appear to have changed without there being an edit to the entity containing the statement. And derived information based on the old type will disappear and derived information based on the new type will appear.",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_58bc2268",
+        "filename": "repo/maintenance/changePropertyDataType.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T15:14:05Z",
+      "side": 1,
+      "message": "I do have the same issue. \"Dangerous\" tries to create fear but does not contain any information. Better explain why it is dangerous and what the user should consider before running this script.",
+      "parentUuid": "0ebaf39b_e366d04d",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d8afb225",
+        "filename": "repo/maintenance/changePropertyDataType.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T15:14:05Z",
+      "side": 1,
+      "message": "I find the term \"data type id\" confusing. In the context of this script it sounds like a data type can have an entity id that describes it. We usually use the term \"data type\" and describe it as \"data type identifier\".\n\nI suggest \"new-data-type\".",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_98a5ba45",
+        "filename": "repo/maintenance/changePropertyDataType.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T15:14:05Z",
+      "side": 1,
+      "message": "Looks suspicious but is ok. There is no constant for that.",
       "revId": "9b994ccb2a84261116997da1a500c52216861f16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
