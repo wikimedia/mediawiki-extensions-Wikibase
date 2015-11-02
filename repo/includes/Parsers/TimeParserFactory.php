@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Parsers;
 
+use Language;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\DispatchingValueParser;
 use ValueParsers\EraParser;
@@ -18,11 +19,12 @@ use ValueParsers\YearMonthDayTimeParser;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Thiemo Mättig
- *
- * @todo move me to DataValues-time
  */
 class TimeParserFactory {
 
+	/**
+	 * Default, canonical language code. In the MediaWiki world this is always English.
+	 */
 	const CANONICAL_LANGUAGE_CODE = 'en';
 
 	/**
@@ -47,7 +49,10 @@ class TimeParserFactory {
 		$this->monthNameProvider = $monthNameProvider ?: new MediaWikiMonthNameProvider();
 
 		$this->options->defaultOption( ValueParser::OPT_LANG, self::CANONICAL_LANGUAGE_CODE );
-
+		$this->options->defaultOption(
+			YearTimeParser::OPT_DIGIT_GROUP_SEPARATOR,
+			$this->getDigitGroupSeparator()
+		);
 	}
 
 	/**
@@ -101,6 +106,18 @@ class TimeParserFactory {
 		}
 
 		return new MonthNameUnlocalizer( $replacements );
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getDigitGroupSeparator() {
+		$languageCode = $this->options->getOption( ValueParser::OPT_LANG );
+		$language = Language::factory( $languageCode );
+		$separatorMap = $language->separatorTransformTable();
+		$canonical = YearTimeParser::CANONICAL_DIGIT_GROUP_SEPARATOR;
+
+		return isset( $separatorMap[$canonical] ) ? $separatorMap[$canonical] : $canonical;
 	}
 
 }

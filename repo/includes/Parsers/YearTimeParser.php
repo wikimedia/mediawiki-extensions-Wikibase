@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Parsers;
 
 use DataValues\TimeValue;
-use Language;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\EraParser;
 use ValueParsers\IsoTimestampParser;
@@ -17,6 +16,7 @@ use ValueParsers\ValueParser;
  *
  * @licence GNU GPL v2+
  * @author Adam Shorland
+ * @author Thiemo Mättig
  *
  * @todo move me to DataValues-time
  */
@@ -25,14 +25,20 @@ class YearTimeParser extends StringValueParser {
 	const FORMAT_NAME = 'year';
 
 	/**
+	 * Option to allow parsing of years with localized digit group separators. For example, the
+	 * English year -10,000 (with a comma) is written as -10.000 (with a dot) in German.
+	 */
+	const OPT_DIGIT_GROUP_SEPARATOR = 'digitGroupSeparator';
+
+	/**
+	 * Default, canonical digit group separator, as in the year -10,000.
+	 */
+	const CANONICAL_DIGIT_GROUP_SEPARATOR = ',';
+
+	/**
 	 * @var ValueParser
 	 */
 	private $eraParser;
-
-	/**
-	 * @var Language
-	 */
-	private $lang;
 
 	/**
 	 * @var ValueParser
@@ -46,7 +52,11 @@ class YearTimeParser extends StringValueParser {
 	public function __construct( ValueParser $eraParser = null, ParserOptions $options = null ) {
 		parent::__construct( $options );
 
-		$this->lang = Language::factory( $this->getOption( ValueParser::OPT_LANG ) );
+		$this->defaultOption(
+			self::OPT_DIGIT_GROUP_SEPARATOR,
+			self::CANONICAL_DIGIT_GROUP_SEPARATOR
+		);
+
 		$this->eraParser = $eraParser ?: new EraParser( $this->options );
 		$this->isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser( $this->options ),
@@ -67,17 +77,13 @@ class YearTimeParser extends StringValueParser {
 
 		// Negative dates usually don't have a month, assume non-digits are thousands separators
 		if ( $sign === '-' ) {
-			$separatorMap = $this->lang->separatorTransformTable();
-
-			if ( is_array( $separatorMap ) && array_key_exists( ',', $separatorMap ) ) {
-				$separator = $separatorMap[','];
-			} else {
-				$separator = ',';
-			}
-
+			$separator = $this->getOption( self::OPT_DIGIT_GROUP_SEPARATOR );
 			// Always accept ISO (e.g. "1 000 BC") as well as programming style (e.g. "-1_000")
-			$year = preg_replace( '/(?<=\d)[' . preg_quote( $separator, '/' ) . '\s_](?=\d)/', '',
-				$year );
+			$year = preg_replace(
+				'/(?<=\d)[' . preg_quote( $separator, '/' ) . '\s_](?=\d)/',
+				'',
+				$year
+			);
 		}
 
 		if ( !preg_match( '/^\d+$/', $year ) ) {
