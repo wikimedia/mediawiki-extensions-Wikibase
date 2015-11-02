@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_eec42c46",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T18:16:14Z",
+      "side": 1,
+      "message": "I do not find this helpful. Better inline it.",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b31e9fbc",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T18:16:14Z",
+      "side": 1,
+      "message": "What if it\u0027s equal to both? Wouldn\u0027t that show the unlink message? Is such an edit tested?",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_6e927c50",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T18:16:14Z",
+      "side": 1,
+      "message": "I find a straight if ( !( $change instanceof ItemChange) ) { return null; } much easier to read than this indirection.",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4eb698d9",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T18:16:14Z",
+      "side": 1,
+      "message": "These two lines look suspicious. This either *extracts* something from the variable $change or builds an array that *contains* the *same* variable. This may be intended, but when looking at this file I can not tell if it\u0027s correct.",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ee7e6c13",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentCreatorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T18:16:14Z",
+      "side": 1,
+      "message": "The last 3 tests cases should be done with the title \"Japan\", as far as I can tell, not with \"Bar\". I may be wrong.",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_8e79f02b",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentCreatorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T18:16:14Z",
+      "side": 1,
+      "message": "These two messages are inconsistent. It should either be \"linked\" and \"unlinked\", or \"link\" and \"unlink\".",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4ea9b88c",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangeFactoryTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T18:16:14Z",
+      "side": 1,
+      "message": "Since this is a mock anyway, you do not need to replicate the full original behavior. Simply return something like $ns . \u0027:\u0027 . $title and do assertions for that.",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_0eaf4092",
+        "filename": "client/tests/phpunit/includes/recentchanges/RecentChangeFactoryTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T18:16:14Z",
+      "side": 1,
+      "message": "Very long variable names with underscores. :-( Is this really helpful?",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
