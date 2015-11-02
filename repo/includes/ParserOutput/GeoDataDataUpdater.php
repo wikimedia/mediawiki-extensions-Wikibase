@@ -99,22 +99,29 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 	 * @param ParserOutput $parserOutput
 	 */
 	public function updateParserOutput( ParserOutput $parserOutput ) {
-		$coordinatesOutput = isset( $parserOutput->geoData ) ?: new CoordinatesOutput();
+		$coordinatesOutput = $this->getCoordinatesOutput( $parserOutput );
+		$primaryCoordKey = $this->findPrimaryCoordinateKey();
 
-		if ( $coordinatesOutput->getPrimary() === false ) {
-			$primaryCoordKey = $this->findPrimaryCoordinateKey();
-
-			if ( $primaryCoordKey !== null ) {
-				$this->addPrimaryCoordinate(
-					$coordinatesOutput,
-					$primaryCoordKey
-				);
-			}
+		if ( $coordinatesOutput->getPrimary() === false && $primaryCoordKey !== null ) {
+			$this->addPrimaryCoordinate( $coordinatesOutput, $primaryCoordKey );
 		}
 
 		$this->addSecondaryCoordinates( $coordinatesOutput, $primaryCoordKey );
 
 		$parserOutput->geoData = $coordinatesOutput;
+	}
+
+	/**
+	 * @param ParserOutput
+	 *
+	 * @return CoordinatesOutput
+	 */
+	private function getCoordinatesOutput( ParserOutput $parserOutput ) {
+		if ( isset( $parserOutput->geoData ) ) {
+			return $parserOutput->geoData;
+		}
+
+		return new CoordinatesOutput();
 	}
 
 	/**
