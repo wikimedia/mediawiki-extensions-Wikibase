@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_30a5c243",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T20:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_eec42c46",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_b31e9fbc",
         "filename": "client/includes/SiteLinkCommentCreator.php",
         "patchSetId": 7
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_d3f9d0e5",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T20:44:29Z",
+      "side": 1,
+      "message": "Yeah, such an edit should never occur. Even in case a namespace name changed, and the site link got updated due to that, getOldValue and getNewValue will be distinct (as they both hold the old name).",
+      "parentUuid": "0ebaf39b_10e0bec6",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_6e927c50",
         "filename": "client/includes/recentchanges/RecentChangeFactory.php",
         "patchSetId": 7
@@ -83,6 +119,24 @@
       "writtenOn": "2015-11-02T18:16:14Z",
       "side": 1,
       "message": "I find a straight if ( !( $change instanceof ItemChange) ) { return null; } much easier to read than this indirection.",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_731fc40d",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T20:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_6e927c50",
       "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -141,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_f3c17459",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentCreatorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T20:44:29Z",
+      "side": 1,
+      "message": "that covers this better, indeed.",
+      "parentUuid": "0ebaf39b_ee7e6c13",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_8e79f02b",
         "filename": "client/tests/phpunit/includes/SiteLinkCommentCreatorTest.php",
         "patchSetId": 7
@@ -170,6 +242,24 @@
       "side": 1,
       "message": "Yea, but these message keys are already there, and have been for years. If we change them now, the TWN people will be after us with pitchforks.",
       "parentUuid": "0ebaf39b_8e79f02b",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_33f4ecb8",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentCreatorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-02T20:44:29Z",
+      "side": 1,
+      "message": "If we coordinate with them, we can rename the message.",
+      "parentUuid": "0ebaf39b_50d156fa",
       "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
