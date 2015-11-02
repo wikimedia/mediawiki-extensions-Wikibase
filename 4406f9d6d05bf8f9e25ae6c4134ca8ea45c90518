@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_10e0bec6",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-02T19:40:07Z",
+      "side": 1,
+      "message": "A diff where both the old and the new value are the same should not exist. But I don\u0027t think we really have safeguards against this.",
+      "parentUuid": "0ebaf39b_b31e9fbc",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_6e927c50",
         "filename": "client/includes/recentchanges/RecentChangeFactory.php",
         "patchSetId": 7
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_90cb4e4d",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-02T19:40:07Z",
+      "side": 1,
+      "message": "This is indeed correct (and not new core, merely moved). The change may be a composite change - in which case it contains the list of original changes in $fields[\u0027info\u0027][\u0027changes\u0027]. IF this is not the case, we build an array containing the original change, so in both cases we end up with a list of changes.",
+      "parentUuid": "0ebaf39b_4eb698d9",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_ee7e6c13",
         "filename": "client/tests/phpunit/includes/SiteLinkCommentCreatorTest.php",
         "patchSetId": 7
@@ -98,6 +134,24 @@
       "writtenOn": "2015-11-02T18:16:14Z",
       "side": 1,
       "message": "These two messages are inconsistent. It should either be \"linked\" and \"unlinked\", or \"link\" and \"unlink\".",
+      "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_50d156fa",
+        "filename": "client/tests/phpunit/includes/SiteLinkCommentCreatorTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-02T19:40:07Z",
+      "side": 1,
+      "message": "Yea, but these message keys are already there, and have been for years. If we change them now, the TWN people will be after us with pitchforks.",
+      "parentUuid": "0ebaf39b_8e79f02b",
       "revId": "4406f9d6d05bf8f9e25ae6c4134ca8ea45c90518",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
