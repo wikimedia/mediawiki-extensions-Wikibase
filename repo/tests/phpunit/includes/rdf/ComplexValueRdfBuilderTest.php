@@ -70,10 +70,13 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$vocabulary = $this->getTestData()->getVocabulary();
 		$valueWriter = $this->getTestData()->getNTriplesWriter();
 
-		$builder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $this->getTestData()->getMockRepository() );
+		$builder = new ComplexValueRdfBuilder(
+			$this->getTestData()->getVocabulary(),
+			$valueWriter,
+			$this->getTestData()->getMockRepository()
+		);
 		$builder->setEntityMentionListener( $mentionTracker );
 		$builder->setDedupeBag( $bag ?: new NullDedupeBag() );
 
@@ -110,6 +113,9 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideAddValue() {
+		$gregorian = RdfVocabulary::GREGORIAN_CALENDAR;
+		$julian = RdfVocabulary::JULIAN_CALENDAR;
+
 		// NOTE: data types must match $this->getTestData()->getMockRepository();
 
 		return array(
@@ -118,7 +124,8 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				'wikibase-item',
 				new EntityIdValue( new ItemId( 'Q42' ) ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P2> <http://acme.test/Q42> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P2> '
+						. '<http://acme.test/Q42> .',
 				),
 				array(),
 			),
@@ -127,7 +134,8 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				'commonsMedia',
 				new StringValue( 'Test.jpg' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P3> <http://commons.wikimedia.org/wiki/Special:FilePath/Test.jpg> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P3> '
+						. '<http://commons.wikimedia.org/wiki/Special:FilePath/Test.jpg> .',
 				),
 				array(),
 			),
@@ -141,11 +149,11 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				),
 				array(
 					'<http://acme.test/Q11> '
-					. '<http://acme.test/prop/statement/P4> "Point(12.25 -45.5)"^^'
-					. '<http://www.opengis.net/ont/geosparql#wktLiteral> .',
+						. '<http://acme.test/prop/statement/P4> "Point(12.25 -45.5)"^^'
+						. '<http://www.opengis.net/ont/geosparql#wktLiteral> .',
 					'<http://acme.test/Q11> '
-					. '<http://acme.test/prop/statement/value/P4> '
-					. '<http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> .',
+						. '<http://acme.test/prop/statement/value/P4> '
+						. '<http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> .',
 				),
 				array(
 					'<http://acme.test/value/7901049a90a3b6a6cbbae50dc76c2da9> '
@@ -170,7 +178,8 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				'monolingualtext',
 				new MonolingualTextValue( 'ru', 'Берлин' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P5> "\u0411\u0435\u0440\u043B\u0438\u043D"@ru .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P5> '
+						. '"\u0411\u0435\u0440\u043B\u0438\u043D"@ru .',
 				),
 				array(),
 			),
@@ -183,8 +192,10 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					new DecimalValue( '+0.00013' ),
 					new DecimalValue( '+0.00010' ) ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P6> "+0.00011"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P6> <http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P6> '
+						. '"+0.00011"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P6> '
+						. '<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> .',
 				),
 				array(
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
@@ -197,7 +208,8 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '<http://wikiba.se/ontology-beta#quantityLowerBound> "+0.00010"^^'
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
-						. '<http://wikiba.se/ontology-beta#quantityUnit> <http://www.wikidata.org/entity/Q199> .',
+						. '<http://wikiba.se/ontology-beta#quantityUnit> '
+						. '<http://www.wikidata.org/entity/Q199> .',
 					'<http://acme.test/value/ea39bdf723a70acd2e22d07dd0db7721> '
 						. '<http://wikiba.se/ontology-beta#quantityUpperBound> "+0.00013"^^'
 						. '<http://www.w3.org/2001/XMLSchema#decimal> .',
@@ -212,8 +224,10 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					new DecimalValue( '-2.3' ),
 					new DecimalValue( '-2.3' ) ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P6> "-2.3"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P6> <http://acme.test/value/9744b3301e3a9b3b5a31f6c6ba46dae0> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P6> '
+						. '"-2.3"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P6> '
+						. '<http://acme.test/value/9744b3301e3a9b3b5a31f6c6ba46dae0> .',
 				),
 				array(
 					'<http://acme.test/value/9744b3301e3a9b3b5a31f6c6ba46dae0> '
@@ -245,10 +259,12 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			'time' => array(
 				new PropertyId( 'P8' ),
 				'time',
-				new TimeValue( '+2015-03-03T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
+				new TimeValue( '+2015-03-03T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, $gregorian ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/7a453935e4288ff180c20a7304bab948> .'
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> '
+						. '"2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> '
+						. '<http://acme.test/value/7a453935e4288ff180c20a7304bab948> .'
 				),
 				array(
 					'<http://acme.test/value/7a453935e4288ff180c20a7304bab948> '
@@ -271,10 +287,12 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			'time-year' => array( // NOTE: may changed to use xsd:gYear
 				new PropertyId( 'P8' ),
 				'time',
-				new TimeValue( '+2015-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, RdfVocabulary::GREGORIAN_CALENDAR ),
+				new TimeValue( '+2015-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $gregorian ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> "2015-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/418aedfba643e02a5ba758952f8f7765> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> '
+						. '"2015-01-01T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> '
+						. '<http://acme.test/value/418aedfba643e02a5ba758952f8f7765> .',
 				),
 				array(
 					'<http://acme.test/value/418aedfba643e02a5ba758952f8f7765> '
@@ -297,10 +315,12 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			'time-margin' => array(
 				new PropertyId( 'P8' ),
 				'time',
-				new TimeValue( '+2015-03-03T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
+				new TimeValue( '+2015-03-03T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, $gregorian ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> "2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/8977346cbe7d0a6624ebd06fe27d749f> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> '
+						. '"2015-03-03T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> '
+						. '<http://acme.test/value/8977346cbe7d0a6624ebd06fe27d749f> .',
 				),
 				array(
 					'<http://acme.test/value/8977346cbe7d0a6624ebd06fe27d749f> '
@@ -327,22 +347,29 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				                 //       conversion would apply.
 				new PropertyId( 'P8' ),
 				'time',
-				new TimeValue( '-0044-03-15T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR ),
+				new TimeValue( '-0044-03-15T00:00:00Z', 0, 3, 3, TimeValue::PRECISION_DAY, $gregorian ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> "-0043-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> '
+						. '"-0043-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> '
+						. '<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> .',
 				),
 				array(
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#TimeValue> .',
+						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+						. '<http://wikiba.se/ontology-beta#TimeValue> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://wikiba.se/ontology-beta#timeCalendarModel> <http://www.wikidata.org/entity/Q1985727> .',
+						. '<http://wikiba.se/ontology-beta#timeCalendarModel> '
+						. '<http://www.wikidata.org/entity/Q1985727> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://wikiba.se/ontology-beta#timePrecision> "11"^^<http://www.w3.org/2001/XMLSchema#integer> .',
+						. '<http://wikiba.se/ontology-beta#timePrecision> '
+						. '"11"^^<http://www.w3.org/2001/XMLSchema#integer> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://wikiba.se/ontology-beta#timeValue> "-0043-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+						. '<http://wikiba.se/ontology-beta#timeValue> '
+						. '"-0043-03-15T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
 					'<http://acme.test/value/ef167a47c30f27b0c70e210b27257d50> '
-						. '<http://wikiba.se/ontology-beta#timeTimezone> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .',
+						. '<http://wikiba.se/ontology-beta#timeTimezone> '
+						. '"0"^^<http://www.w3.org/2001/XMLSchema#integer> .',
 				),
 			),
 			'time-julian' => array( // NOTE: Currently, giving a calendar other than gregorian
@@ -352,11 +379,13 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				                    //       gregorian an output as an XSD date.
 				new PropertyId( 'P8' ),
 				'time',
-				new TimeValue( '+1492-10-12T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::JULIAN_CALENDAR ),
+				new TimeValue( '+1492-10-12T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, $julian ),
 				array(
 					// Julian-to-Gregorian conversion applies.
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> "1492-10-21T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> <http://acme.test/value/23a636870974bab8f1771b34aa994936> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P8> '
+						. '"1492-10-21T00:00:00Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/value/P8> '
+						. '<http://acme.test/value/23a636870974bab8f1771b34aa994936> .',
 				),
 				array(
 					'<http://acme.test/value/23a636870974bab8f1771b34aa994936> '
@@ -381,7 +410,8 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				'url',
 				new StringValue( 'http://quux.test/xyzzy' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P9> <http://quux.test/xyzzy> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P9> '
+						. '<http://quux.test/xyzzy> .',
 				),
 				array(),
 			),
@@ -390,7 +420,8 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				'url',
 				new StringValue( 'mailto:xyzzy@quux.test' ),
 				array(
-					'<http://acme.test/Q11> <http://acme.test/prop/statement/P9> <mailto:xyzzy@quux.test> .',
+					'<http://acme.test/Q11> <http://acme.test/prop/statement/P9> '
+						. '<mailto:xyzzy@quux.test> .',
 				),
 				array(),
 			),
@@ -400,7 +431,13 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideAddValue
 	 */
-	public function testAddValue( PropertyId $propertyId, $dataType, DataValue $value, array $expectedTriples, array $expectedValueTriples ) {
+	public function testAddValue(
+		PropertyId $propertyId,
+		$dataType,
+		DataValue $value,
+		array $expectedTriples,
+		array $expectedValueTriples
+	) {
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 

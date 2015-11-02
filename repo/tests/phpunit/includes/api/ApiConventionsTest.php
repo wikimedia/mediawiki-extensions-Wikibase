@@ -57,7 +57,8 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	/**
 	 * This method is for the assertions in particular for getFinalDescription as defined in ApiBase
 	 *
-	 * @param string $moduleClass one of the modules in $GLOBALS['wgAPIModules'], only in this function for the error messages
+	 * @param string $moduleClass One of the modules in $GLOBALS['wgAPIModules'], only in this
+	 *  function for the error messages.
 	 * @param ApiBase $module is an instance of $moduleClass
 	 **/
 	private function assertGetFinalDescription( $moduleClass, ApiBase $module ) {
@@ -80,21 +81,28 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * This method is for the assertions for getFinalParamDescription as defined in ApiBase, depending on getFinalParams
+	 * This method is for the assertions for getFinalParamDescription as defined in ApiBase,
+	 * depending on getFinalParams.
 	 *
-	 * @param string $moduleClass one of the modules in $GLOBALS['wgAPIModules'], only in this function for the error messages
+	 * @param string $moduleClass One of the modules in $GLOBALS['wgAPIModules'], only in this
+	 *  function for the error messages.
 	 * @param ApiBase $module is an instance of $moduleClass
 	 **/
 	private function assertGetFinalParamDescription( $moduleClass, ApiBase $module ) {
-		$method = 'getFinalParamDescription';
-		$paramsArray = $module->getFinalParams();
+		$parameters = $module->getFinalParams();
 
-		if ( !empty( $paramsArray ) ) {
-			$paramDescArray = $module->$method();
-			$this->assertNotEmpty( $paramDescArray, 'the array returned by the method ' . $method . ' of module ' . $moduleClass . ' is empty' );
+		if ( !empty( $parameters ) ) {
+			$descriptions = $module->getFinalParamDescription();
+
+			$this->assertNotEmpty(
+				$descriptions,
+				'the array returned by the method getFinalParamDescription of module '
+				. $moduleClass . ' is empty'
+			);
 
 			// Comparing the keys of the arrays of getParamDescription and getParams
-			$arrayKeysMatch = !array_diff_key( $paramDescArray, $paramsArray ) && !array_diff_key( $paramsArray, $paramDescArray );
+			$arrayKeysMatch = !array_diff_key( $descriptions, $parameters )
+				&& !array_diff_key( $parameters, $descriptions );
 			$this->assertTrue( $arrayKeysMatch, 'keys different at ' . $moduleClass );
 		}
 	}
@@ -102,23 +110,36 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	/**
 	 * This method is for the assertions of getExamplesMessages/ getExamples as defined in ApiBase
 	 *
-	 * @param string $moduleClass one of the modules in $GLOBALS['wgAPIModules'], only in this function for the error messages
+	 * @param string $moduleClass One of the modules in $GLOBALS['wgAPIModules'], only in this
+	 *  function for the error messages.
 	 * @param ApiBase $module is an instance of $moduleClass
 	 **/
 	private function assertGetExamplesMessages( $moduleClass, ApiBase $module ) {
-		$method = 'getExamplesMessages';
-		$rMethod = new ReflectionMethod( $moduleClass, $method );
-		$rMethod->setAccessible( true );
-		$exArray = $rMethod->invoke( $module );
+		$method = new ReflectionMethod( $moduleClass, 'getExamplesMessages' );
+		$method->setAccessible( true );
+		$examples = $method->invoke( $module );
 
-		$this->assertNotEmpty( $exArray, 'there are no examples for ' . $moduleClass );
+		$this->assertNotEmpty( $examples, 'there are no examples for ' . $moduleClass );
 
-		foreach ( $exArray as $key => $value ) {
-			$this->assertRegExp( '/^action=\w/', $key, 'the key ' . $key . ' is not an url at ' . $moduleClass );
-			if ( is_string( $value ) ) {
-				$this->assertTrue( wfMessage( $value )->exists(), "message ($value) for $key doesn't exist" );
+		foreach ( $examples as $url => $example ) {
+			$this->assertRegExp(
+				'/^action=\w/',
+				$url,
+				'the key ' . $url . ' is not an url at ' . $moduleClass
+			);
+
+			if ( is_string( $example ) ) {
+				$this->assertTrue(
+					wfMessage( $example )->exists(),
+					"message ($example) for $url doesn't exist"
+				);
 			} else {
-				$this->assertInstanceOf( 'Message', $value, 'the value of the example for ' . $key . ' in ' . $moduleClass . ' is not a Message' );
+				$this->assertInstanceOf(
+					'Message',
+					$example,
+					'the value of the example for ' . $url . ' in ' . $moduleClass
+					. ' is not a Message'
+				);
 			}
 		}
 

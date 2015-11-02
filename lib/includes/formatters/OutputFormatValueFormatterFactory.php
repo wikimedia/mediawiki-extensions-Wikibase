@@ -58,7 +58,11 @@ class OutputFormatValueFormatterFactory {
 	 * @param Language $defaultLanguage
 	 * @param LanguageFallbackChainFactory $fallbackChainFactory
 	 */
-	public function __construct( array $factoryFunctions, Language $defaultLanguage, LanguageFallbackChainFactory $fallbackChainFactory ) {
+	public function __construct(
+		array $factoryFunctions,
+		Language $defaultLanguage,
+		LanguageFallbackChainFactory $fallbackChainFactory
+	) {
 		Assert::parameterElementType( 'callable', $factoryFunctions, '$factoryFunctions' );
 
 		$this->factoryFunctions = $factoryFunctions;
@@ -108,16 +112,18 @@ class OutputFormatValueFormatterFactory {
 			);
 		}
 
-		if ( !$options->hasOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ) ) {
+		$fallbackOption = FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN;
+		if ( !$options->hasOption( $fallbackOption ) ) {
 			$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;
 			$options->setOption(
-				FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN,
+				$fallbackOption,
 				$this->languageFallbackChainFactory->newFromLanguageCode( $lang, $fallbackMode )
 			);
 		}
 
-		if ( !( $options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ) instanceof LanguageFallbackChain ) ) {
-			throw new InvalidArgumentException( 'The value of OPT_LANGUAGE_FALLBACK_CHAIN must be an instance of LanguageFallbackChain.' );
+		if ( !( $options->getOption( $fallbackOption ) instanceof LanguageFallbackChain ) ) {
+			throw new InvalidArgumentException( 'The value of OPT_LANGUAGE_FALLBACK_CHAIN must be '
+				. 'an instance of LanguageFallbackChain.' );
 		}
 	}
 

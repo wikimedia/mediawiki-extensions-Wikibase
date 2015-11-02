@@ -38,14 +38,20 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 		$termLookup->prefetchTerms( $items, $types, $languages );
 
 		$this->assertEquals( 'New York City', $termLookup->getPrefetchedTerm( $q116, 'label', 'en' ) );
-		$this->assertFalse( $termLookup->getPrefetchedTerm( $q116, 'label', 'de' ), 'A term that was checked but not found should yield false' );
-		$this->assertNull( $termLookup->getPrefetchedTerm( $q116, 'description', 'en' ), 'A term that was never checked should yield null' );
+		$this->assertFalse(
+			$termLookup->getPrefetchedTerm( $q116, 'label', 'de' ),
+			'A term that was checked but not found should yield false'
+		);
+		$this->assertNull(
+			$termLookup->getPrefetchedTerm( $q116, 'description', 'en' ),
+			'A term that was never checked should yield null'
+		);
 	}
 
 	/**
-	 * Returns a TermIndex that expects a specific number of calls to getTermsOfEntity and getTermsOfEntities.
-	 * These calls will filter the result correctly by language, but ignore the term type or item id.
-	 * Terms in three languages are defined: en, de, and fr.
+	 * Returns a TermIndex that expects a specific number of calls to getTermsOfEntity and
+	 * getTermsOfEntities. These calls will filter the result correctly by language, but ignore the
+	 * term type or item id. Terms in three languages are defined: en, de, and fr.
 	 *
 	 * @param int $getTermsOfEntityCalls
 	 * @param int $getTermsOfEntitiesCalls
@@ -135,13 +141,15 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 		// This should trigger no more calls, since the label for 'en' is in the buffer
 		$this->assertEquals( 'Vienna', $lookup->getLabel( $q116, 'en' ) );
 
-		// This should trigger no more calls to the TermIndex, since the label for 'it' is in the buffer as a negative entry
+		// This should trigger no more calls to the TermIndex, since the label for 'it' is in the
+		// buffer as a negative entry.
 		$this->assertEquals( array(), $lookup->getLabels( $q116, array( 'it' ) ) );
 
 		// This should trigger one call to getTermsOfEntity
 		$this->assertEquals( 'Vienne', $lookup->getLabel( $q116, 'fr' ) );
 
-		// This should trigger no more calls to the TermIndex, since all languages are in the buffer now.
+		// This should trigger no more calls to the TermIndex, since all languages are in the buffer
+		// now.
 		$expected = array( 'de' => 'Wien', 'fr' => 'Vienne' );
 		$this->assertEquals( $expected, $lookup->getLabels( $q116, array( 'de', 'fr' ) ) );
 	}

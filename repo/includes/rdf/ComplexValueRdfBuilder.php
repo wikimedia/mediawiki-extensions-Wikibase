@@ -33,7 +33,11 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	 * @param RdfWriter $valueWriter
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 */
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $valueWriter, PropertyDataTypeLookup $propertyLookup ) {
+	public function __construct(
+		RdfVocabulary $vocabulary,
+		RdfWriter $valueWriter,
+		PropertyDataTypeLookup $propertyLookup
+	) {
 		parent::__construct( $vocabulary, $propertyLookup );
 
 		$this->dedupeBag = new NullDedupeBag();
@@ -63,7 +67,13 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	 * @param string $dataType Property data type
 	 * @param DataValue $value
 	 */
-	public function addValue( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value ) {
+	public function addValue(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		$value
+	) {
 		parent::addValue( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
 
 		switch ( $value->getType() ) {
@@ -102,7 +112,8 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 		}
 
 		$valueLName = $this->addExpandedValue( $value, $prefix, $fields );
-		$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )->is( RdfVocabulary::NS_VALUE, $valueLName );
+		$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )
+			->is( RdfVocabulary::NS_VALUE, $valueLName );
 	}
 
 	/**
@@ -129,7 +140,13 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 			$getter = "get" . $prop;
 			$data = $value->$getter();
 			if ( !is_null( $data ) ) {
-				$this->addValueToNode( $this->valueWriter, RdfVocabulary::NS_ONTOLOGY, $propLName, $type, $data );
+				$this->addValueToNode(
+					$this->valueWriter,
+					RdfVocabulary::NS_ONTOLOGY,
+					$propLName,
+					$type,
+					$data
+				);
 			}
 		}
 
