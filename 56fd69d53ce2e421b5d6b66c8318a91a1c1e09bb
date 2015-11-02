@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_5dbc1468",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T12:22:47Z",
+      "side": 1,
+      "message": "What\u0027s the use of this indirection? Is this a common abbreviation? I suggest to leave this out and use \"composer parallel-lint\" instead, or no dedicated script as suggested below.",
+      "revId": "56fd69d53ce2e421b5d6b66c8318a91a1c1e09bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7d6eb8ff",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T12:22:47Z",
+      "side": 1,
+      "message": "\"phplint\" is an other misleading abbreviation. I suggest to simply include the command in the \"test\" section and not invent abbreviations for it.",
+      "revId": "56fd69d53ce2e421b5d6b66c8318a91a1c1e09bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
