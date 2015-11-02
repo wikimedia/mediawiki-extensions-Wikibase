@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_13ac4b83",
+        "filename": "client/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-02T16:37:23Z",
+      "side": 1,
+      "message": "6 parameters for a private function? Ouch. :-(",
+      "revId": "73aa5393d8cc6abc8f92fa80be5f9e612b57894e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
