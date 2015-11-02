@@ -46,6 +46,7 @@
 		"diff/diff": "~2.0"
 	},
 	"require-dev": {
+		"jakub-onderka/php-parallel-lint": "0.9",
 		"mediawiki/mediawiki-codesniffer": "0.4.0"
 	},
 	"conflict": {
@@ -74,6 +75,7 @@
 	},
 	"scripts": {
 		"test": [
+			"parallel-lint . --exclude vendor",
 			"composer cs"
 		],
 		"cs": [
