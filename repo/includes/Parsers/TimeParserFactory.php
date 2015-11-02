@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Parsers;
 
+use Language;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\DispatchingValueParser;
 use ValueParsers\EraParser;
@@ -18,8 +19,6 @@ use ValueParsers\YearMonthDayTimeParser;
  * @licence GNU GPL v2+
  * @author Adam Shorland
  * @author Thiemo Mättig
- *
- * @todo move me to DataValues-time
  */
 class TimeParserFactory {
 
@@ -45,7 +44,10 @@ class TimeParserFactory {
 		$this->monthNameProvider = $monthNameProvider ?: new MediaWikiMonthNameProvider();
 
 		$this->options->defaultOption( ValueParser::OPT_LANG, 'en' );
-
+		$this->options->defaultOption(
+			YearTimeParser::OPT_DIGIT_GROUP_SEPARATOR,
+			$this->getDigitGroupSeparator()
+		);
 	}
 
 	/**
@@ -97,6 +99,20 @@ class TimeParserFactory {
 		}
 
 		return new MonthNameUnlocalizer( $replacements );
+	}
+
+	private function getDigitGroupSeparator() {
+		$languageCode = $this->options->getOption( ValueParser::OPT_LANG );
+		$language = Language::factory( $languageCode );
+		$separatorMap = $language->separatorTransformTable();
+
+		if ( is_array( $separatorMap )
+			&& array_key_exists( YearTimeParser::CANONICAL_DIGIT_GROUP_SEPARATOR, $separatorMap )
+		) {
+			return $separatorMap[YearTimeParser::CANONICAL_DIGIT_GROUP_SEPARATOR];
+		}
+
+		return YearTimeParser::CANONICAL_DIGIT_GROUP_SEPARATOR;
 	}
 
 }
