@@ -16,6 +16,24 @@
       "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2e19e488",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-02T18:53:45Z",
+      "side": 1,
+      "message": "I agree, that it\u0027s a bad idea, and I don\u0027t really have a better one.",
+      "parentUuid": "0ebaf39b_4ebc5868",
+      "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
