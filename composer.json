@@ -46,6 +46,7 @@
 		"diff/diff": "~2.0"
 	},
 	"require-dev": {
+		"jakub-onderka/php-parallel-lint": "0.9",
 		"mediawiki/mediawiki-codesniffer": "0.4.0"
 	},
 	"conflict": {
@@ -74,11 +75,12 @@
 	},
 	"scripts": {
 		"test": [
+			"composer parallel-lint . --exclude vendor",
 			"composer cs"
 		],
 		"cs": [
 			"composer phpcs"
 		],
-		"phpcs": "vendor/bin/phpcs -sp --standard=phpcs.xml --extensions=php --ignore=extensions/ValueView,vendor,.git ."
+		"phpcs": "vendor/bin/phpcs -sp --standard=phpcs.xml --extensions=php,php5,inc --ignore=extensions/ValueView,vendor,.git ."
 	}
 }
