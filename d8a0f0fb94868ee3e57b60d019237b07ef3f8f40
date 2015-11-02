@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_4ebc5868",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-11-02T18:42:02Z",
+      "side": 1,
+      "message": "Checking in code if it is under test is a bad idea, though I have no idea what the better solution is here.",
+      "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
