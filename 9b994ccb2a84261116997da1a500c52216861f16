@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_50f956bf",
+        "filename": "repo/includes/PropertyDataTypeChanger.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-02T19:20:41Z",
+      "side": 1,
+      "message": "A separate class separates the actual application logic from the code that handles command line arguments and reporting. It also allows us to test this properly (Maintenance scripts do not yet support proper dependency injection).",
+      "parentUuid": "0ebaf39b_9d328c04",
+      "revId": "9b994ccb2a84261116997da1a500c52216861f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_38e7eea8",
         "filename": "repo/includes/PropertyDataTypeChanger.php",
         "patchSetId": 4
