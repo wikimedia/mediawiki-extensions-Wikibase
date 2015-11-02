@@ -142,13 +142,19 @@ class SpecialUnconnectedPages extends QueryPage {
 				'value' => 'page_id',
 				'namespace' => 'page_namespace',
 				'title' => 'page_title',
-				'page_num_iwlinks' => '0', // placeholder, we'll get this from page_props in the future
+				// Placeholder, we'll get this from page_props in the future.
+				'page_num_iwlinks' => '0',
 			),
 			'conds' => $conds,
-			'options' => array(), // sorting is determined getOrderFields(), which returns array( 'value' ) per default.
+			// Sorting is determined getOrderFields(), which returns array( 'value' ) per default.
+			'options' => array(),
 			'join_conds' => array(
-				// TODO: also get explicit_langlink_count from page_props once that is populated. Could even filter or sort by it via pp_sortkey.
-				'page_props' => array( 'LEFT JOIN', array( 'page_id = pp_page', "pp_propname = 'wikibase_item'" ) ),
+				// TODO Also get explicit_langlink_count from page_props once that is populated.
+				// Could even filter or sort by it via pp_sortkey.
+				'page_props' => array(
+					'LEFT JOIN',
+					array( 'page_id = pp_page', "pp_propname = 'wikibase_item'" )
+				),
 			)
 		);
 	}

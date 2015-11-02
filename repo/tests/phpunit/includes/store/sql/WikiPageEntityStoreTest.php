@@ -538,8 +538,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store->deleteEntity( $entityId, 'testing', $user );
 
 		// check that it's gone
-		$this->assertFalse( $lookup->getLatestRevisionId( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER ), 'getLatestRevisionId()' );
-		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision()' );
+		$this->assertFalse(
+			$lookup->getLatestRevisionId( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER ),
+			'getLatestRevisionId'
+		);
+		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision' );
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();

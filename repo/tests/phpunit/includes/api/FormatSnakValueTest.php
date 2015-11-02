@@ -116,7 +116,8 @@ class FormatSnakValueTest extends ApiTestCase {
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				null,
-				'/^Q404' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\(' . preg_quote( $deletedItem, '/' ) . '\)<\/span>$/'
+				'/^Q404' . $wordSeparator . '<span class="wb-entity-undefinedinfo">\('
+					. preg_quote( $deletedItem, '/' ) . '\)<\/span>$/'
 			),
 			array(
 				new EntityIdValue( new ItemId( 'Q23' ) ),
@@ -130,7 +131,8 @@ class FormatSnakValueTest extends ApiTestCase {
 				'wikibase-item',
 				SnakFormatter::FORMAT_HTML,
 				array( 'lang' => 'de-ch' ), // fallback
-				'/^<a title="[^"]*Q23" href="[^"]+Q23" lang="en">George Washington<\/a><sup class="wb-language-fallback-indicator">[^<>]+<\/sup>$/'
+				'/^<a title="[^"]*Q23" href="[^"]+Q23" lang="en">George Washington<\/a>'
+					. '<sup class="wb-language-fallback-indicator">[^<>]+<\/sup>$/'
 			),
 
 			// @TODO: Test an existing Item id

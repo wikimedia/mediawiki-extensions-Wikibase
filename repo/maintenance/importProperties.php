@@ -12,11 +12,13 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * Maintenance script for importing properties in Wikidata.
  *
- * For using it with the included en-elements-properties.csv and fill the database with properties of chemical elements, use it thusly:
+ * For using it with the included en-elements-properties.csv and fill the database with properties
+ * of chemical elements, use it thusly:
  *
  * php importInterlang.php --verbose --ignore-errors en en-elements-properties.csv
  *
- * For now, this script is little more than a copy of importInterlang.php. Once we have more interesting properties, this will change.
+ * For now, this script is little more than a copy of importInterlang.php. Once we have more
+ * interesting properties, this will change.
  *
  * @since 0.1
  *
