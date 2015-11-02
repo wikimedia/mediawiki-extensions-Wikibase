@@ -19,12 +19,12 @@ interface MonthNameProvider {
 
 	/**
 	 * @param string $languageCode
-	 * @param string $baseLanguageCode
+	 * @param string $canonicalLanguageCode
 	 *
 	 * @return string[] Array mapping localized month names (possibly including full month names,
-	 * genitive names and abbreviations) to the same month names in a base language (usually
-	 * canonical English).
+	 * genitive names and abbreviations) to the same month names in a canonical language (usually
+	 * English).
 	 */
-	public function getMonthNameReplacements( $languageCode, $baseLanguageCode = 'en' );
+	public function getMonthNameReplacements( $languageCode, $canonicalLanguageCode = 'en' );
 
 }

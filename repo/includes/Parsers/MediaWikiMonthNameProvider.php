@@ -40,14 +40,14 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 * @see MonthNameProvider::getMonthNameReplacements
 	 *
 	 * @param string $languageCode
-	 * @param string $baseLanguageCode
+	 * @param string $canonicalLanguageCode
 	 *
 	 * @return string[] Array mapping localized month names (including full month names, genitive
-	 * names and abbreviations) to the same month names in canonical English.
+	 * names and abbreviations) to the same month names in a canonical language (usually English).
 	 */
-	public function getMonthNameReplacements( $languageCode, $baseLanguageCode = 'en' ) {
+	public function getMonthNameReplacements( $languageCode, $canonicalLanguageCode = 'en' ) {
 		$language = Language::factory( $languageCode );
-		$baseLanguage = Language::factory( $baseLanguageCode );
+		$baseLanguage = Language::factory( $canonicalLanguageCode );
 
 		$replacements = array();
 

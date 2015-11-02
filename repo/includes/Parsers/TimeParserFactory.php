@@ -23,6 +23,8 @@ use ValueParsers\YearMonthDayTimeParser;
  */
 class TimeParserFactory {
 
+	const CANONICAL_LANGUAGE_CODE = 'en';
+
 	/**
 	 * @var ParserOptions
 	 */
@@ -44,7 +46,7 @@ class TimeParserFactory {
 		$this->options = $options ?: new ParserOptions();
 		$this->monthNameProvider = $monthNameProvider ?: new MediaWikiMonthNameProvider();
 
-		$this->options->defaultOption( ValueParser::OPT_LANG, 'en' );
+		$this->options->defaultOption( ValueParser::OPT_LANG, self::CANONICAL_LANGUAGE_CODE );
 
 	}
 
@@ -88,12 +90,14 @@ class TimeParserFactory {
 	 */
 	public function getMonthNameUnlocalizer() {
 		$languageCode = $this->options->getOption( ValueParser::OPT_LANG );
-		$baseLanguageCode = 'en';
 
-		$replacements = array();
-
-		if ( $languageCode !== $baseLanguageCode ) {
-			$replacements = $this->monthNameProvider->getMonthNameReplacements( $languageCode, $baseLanguageCode );
+		if ( $languageCode === self::CANONICAL_LANGUAGE_CODE ) {
+			$replacements = array();
+		} else {
+			$replacements = $this->monthNameProvider->getMonthNameReplacements(
+				$languageCode,
+				self::CANONICAL_LANGUAGE_CODE
+			);
 		}
 
 		return new MonthNameUnlocalizer( $replacements );
