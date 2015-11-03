@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_056156a3",
+        "filename": "client/includes/recentchanges/RecentChangeFactory.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-03T11:29:32Z",
+      "side": 0,
+      "message": "Huh?",
+      "revId": "1a6ce6acb2436426906d2486f05bc9e2fc872196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
