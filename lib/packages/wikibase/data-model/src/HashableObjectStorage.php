@@ -6,6 +6,8 @@ use Hashable;
 use Wikibase\DataModel\Internal\MapValueHasher;
 
 /**
+ * @deprecated removal in 5.0 as per https://github.com/wmde/WikibaseDataModel/pull/498
+ *
  * Object storage for Hashable objects.
  *
  * Note that this implementation is based on SplObjectStorage and
