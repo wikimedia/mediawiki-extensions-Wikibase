@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_1a68d418",
+        "filename": "repo/includes/api/NutShell.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-11-03T18:10:26Z",
+      "side": 1,
+      "message": "This should by default be limited to the 10 highest ordered properties that exist on this item. With an api option to output more.",
+      "revId": "d9c283c4c266edd00c2c2d84e3ca7217d84e6d26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_f5dbadeb",
         "filename": "repo/includes/api/NutShell.php",
         "patchSetId": 1
