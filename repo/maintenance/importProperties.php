@@ -187,7 +187,7 @@ class ImportProperties extends Maintenance {
 		if ( is_null( $a ) ) {
 			$a = 'null';
 		} elseif ( is_bool( $a ) ) {
-			$a = $a ? "true\n": "false\n";
+			$a = $a ? 'true' : 'false';
 		} elseif ( !is_scalar( $a ) ) {
 			$a = print_r( $a, true );
 		}

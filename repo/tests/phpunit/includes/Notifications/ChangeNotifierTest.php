@@ -260,11 +260,11 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revisionId = 12345;
 
 		$oldContent = $this->makeItemContent( new ItemId( 'Q12' ) );
-		$parent = $this->makeRevision( $oldContent, $user, $revisionId-1, $timestamp );
+		$parent = $this->makeRevision( $oldContent, $user, $revisionId - 1, $timestamp );
 
 		$content = $this->makeItemContent( $oldContent->getEntityId() );
 		$content->getEntity()->setLabel( 'en', 'Foo' );
-		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId-1 );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
@@ -293,10 +293,10 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revisionId = 12345;
 
 		$oldContent = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
-		$parent = $this->makeRevision( $oldContent, $user, $revisionId-1, $timestamp );
+		$parent = $this->makeRevision( $oldContent, $user, $revisionId - 1, $timestamp );
 
 		$content = $this->makeItemRedirectContent( $oldContent->getEntityId(), new ItemId( 'Q19' ) );
-		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId-1 );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier( 0 );
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
@@ -316,10 +316,10 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revisionId = 12345;
 
 		$oldContent = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
-		$parent = $this->makeRevision( $oldContent, $user, $revisionId-1, $timestamp );
+		$parent = $this->makeRevision( $oldContent, $user, $revisionId - 1, $timestamp );
 
 		$content = $this->makeItemContent( $oldContent->getEntityId() );
-		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId-1 );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );
@@ -348,10 +348,10 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revisionId = 12345;
 
 		$oldContent = $this->makeItemContent( new ItemId( 'Q12' ) );
-		$parent = $this->makeRevision( $oldContent, $user, $revisionId-1, $timestamp );
+		$parent = $this->makeRevision( $oldContent, $user, $revisionId - 1, $timestamp );
 
 		$content = $this->makeItemRedirectContent( $oldContent->getEntityId(), new ItemId( 'Q19' ) );
-		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId-1 );
+		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier();
 		$change = $notifier->notifyOnPageModified( $revision, $parent );

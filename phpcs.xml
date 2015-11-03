@@ -65,4 +65,9 @@
 			<property name="spacing" value="1" />
 		</properties>
 	</rule>
+	<rule ref="Squiz.WhiteSpace.OperatorSpacing">
+		<properties>
+			<property name="ignoreNewlines" value="true" />
+		</properties>
+	</rule>
 </ruleset>

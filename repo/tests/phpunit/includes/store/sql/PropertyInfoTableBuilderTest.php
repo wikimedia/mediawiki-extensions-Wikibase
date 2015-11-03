@@ -92,7 +92,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$table->removePropertyInfo( $propId1 );
 
 		// rebuild from offset, with no effect ----
-		$builder->setFromId( $propId1->getNumericId() +1 );
+		$builder->setFromId( $propId1->getNumericId() + 1 );
 		$builder->setRebuildAll( false );
 
 		$builder->rebuildPropertyInfo();
@@ -101,7 +101,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$this->assertNull( $info, "rebuild missing from offset should have skipped this" );
 
 		// rebuild all from offset, with no effect ----
-		$builder->setFromId( $propId1->getNumericId() +1 );
+		$builder->setFromId( $propId1->getNumericId() + 1 );
 		$builder->setRebuildAll( false );
 
 		$builder->rebuildPropertyInfo();

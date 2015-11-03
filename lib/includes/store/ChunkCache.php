@@ -98,7 +98,7 @@ class ChunkCache implements ChunkAccess {
 		}
 
 		$low = 0;
-		$high = count( $this->entries ) -1;
+		$high = count( $this->entries ) - 1;
 
 		$bottom = $this->entries[$low];
 		$top = $this->entries[$high];
@@ -108,7 +108,7 @@ class ChunkCache implements ChunkAccess {
 		}
 
 		if ( $key >= $top['next'] ) {
-			return -$high -2;
+			return -$high - 2;
 		}
 
 		while ( $low <= $high ) {
@@ -120,16 +120,16 @@ class ChunkCache implements ChunkAccess {
 			$entry = $this->entries[$mid];
 
 			if ( $key < $entry['start'] ) {
-				$high = $mid -1;
+				$high = $mid - 1;
 			} elseif ( $key >= $entry['next'] ) {
-				$low = $mid +1;
+				$low = $mid + 1;
 			} else {
 				return $mid;
 			}
 		}
 
 		// not found
-		return -$low -1;
+		return -$low - 1;
 	}
 
 	/**
@@ -146,7 +146,7 @@ class ChunkCache implements ChunkAccess {
 		$remaining = $size;
 
 		while ( $remaining > 0 ) {
-			$maxPos = count( $this->entries ) -1;
+			$maxPos = count( $this->entries ) - 1;
 			$pos = $this->findEntryPosition( $start );
 
 			if ( $pos >= 0 ) {
@@ -159,7 +159,7 @@ class ChunkCache implements ChunkAccess {
 			} else {
 				// the desired start key is not cached
 
-				$ipos = -$pos -1; // insert position
+				$ipos = -$pos - 1; // insert position
 
 				if ( $ipos <= $maxPos && $maxPos >= 0 ) {
 					// we are inserting before an existing entry, so clip the size.
@@ -234,7 +234,7 @@ class ChunkCache implements ChunkAccess {
 
 		$last = end( $data );
 
-		$next = $this->source->getRecordId( $last ) +1;
+		$next = $this->source->getRecordId( $last ) + 1;
 
 		reset( $data );
 

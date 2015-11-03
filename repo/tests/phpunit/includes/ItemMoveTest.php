@@ -67,7 +67,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$this->itemTitle = $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $id );
 
 		$title = Title::newFromText( 'wbmovetest', $this->getDefaultWikitextNS() );
-		$this->page =  new WikiPage( $title );
+		$this->page = new WikiPage( $title );
 		$this->page->doEditContent( new WikitextContent( 'foobar' ), 'test' );
 	}
 

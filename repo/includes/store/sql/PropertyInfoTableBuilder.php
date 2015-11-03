@@ -153,7 +153,7 @@ class PropertyInfoTableBuilder {
 	public function rebuildPropertyInfo() {
 		$dbw = $this->propertyInfoTable->getWriteConnection();
 
-		$rowId = $this->fromId -1;
+		$rowId = $this->fromId - 1;
 
 		$total = 0;
 
@@ -215,7 +215,7 @@ class PropertyInfoTableBuilder {
 				$this->updatePropertyInfo( $id );
 
 				$rowId = $row->epp_entity_id;
-				$c+= 1;
+				$c++;
 			}
 
 			if ( $this->useTransactions ) {

@@ -103,7 +103,7 @@ class YearMonthTimeParser extends StringValueParser {
 				$month = trim( $a );
 			}
 
-			$parsed =  $this->parseYearMonth( $year, $month );
+			$parsed = $this->parseYearMonth( $year, $month );
 			if ( $parsed ) {
 				return $parsed;
 			}

@@ -61,7 +61,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 			$id = $usage->getEntityId();
 
 			$key = $id->getSerialization();
-			$ids[$key]= $id;
+			$ids[$key] = $id;
 		}
 
 		return $ids;
