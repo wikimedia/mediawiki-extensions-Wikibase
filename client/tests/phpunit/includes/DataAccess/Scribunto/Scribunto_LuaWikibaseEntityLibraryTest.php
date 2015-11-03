@@ -103,7 +103,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	}
 
 	private function newScribuntoLuaWikibaseLibrary() {
-		$title =  Title::newFromText( 'Whatever' );
+		$title = Title::newFromText( 'Whatever' );
 		$parser = new Parser();
 		$parser->startExternalParse( $title, new ParserOptions(), Parser::OT_HTML );
 

@@ -309,17 +309,17 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		//   page disconnected by edit
 		//   page disconnected by deletion
 
-		$linksEmpty =  array(
+		$linksEmpty = array(
 			'links' => array()
 		);
 
-		$linksDewikiDummy =  array(
+		$linksDewikiDummy = array(
 			'links' => array(
 				'dewiki' => array( 'name' => 'Dummy' )
 			)
 		);
 
-		$linksDewikiBummy =  array(
+		$linksDewikiBummy = array(
 			'links' => array(
 				'dewiki' => array( 'name' => 'Bummy' )
 			)

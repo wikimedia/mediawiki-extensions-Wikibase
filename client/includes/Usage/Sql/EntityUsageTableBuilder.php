@@ -152,7 +152,7 @@ class EntityUsageTableBuilder {
 		$count = $this->insertUsageBatch( $db, $entityPerPage );
 
 		// Update $fromPageId to become the first page ID of the next batch.
-		$fromPageId = max( array_keys( $entityPerPage ) ) +1;
+		$fromPageId = max( array_keys( $entityPerPage ) ) + 1;
 
 		$this->loadBalancer->reuseConnection( $db );
 

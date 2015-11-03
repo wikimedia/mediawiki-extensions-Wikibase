@@ -30,7 +30,7 @@ class GetEntitiesRedirectTest extends \ApiTestCase {
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$rev = $store->saveEntity( $entity, 'GetEntitiesRedirectTest', $GLOBALS['wgUser'], EDIT_NEW );
-		$id =  $rev->getEntity()->getId();
+		$id = $rev->getEntity()->getId();
 
 		return $id;
 	}
@@ -47,7 +47,7 @@ class GetEntitiesRedirectTest extends \ApiTestCase {
 	}
 
 	public function testResolveRedirect() {
-		$user =  $GLOBALS['wgUser'];
+		$user = $GLOBALS['wgUser'];
 
 		// NOTE: We test all cases in a single test function run, so we only have to
 		//       set up the entities in the database once.

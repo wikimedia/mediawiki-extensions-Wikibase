@@ -25,9 +25,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityChange extends DiffChange {
 
-	const UPDATE =  'update';
-	const ADD =     'add';
-	const REMOVE =  'remove';
+	const UPDATE = 'update';
+	const ADD = 'add';
+	const REMOVE = 'remove';
 	const RESTORE = 'restore';
 
 	/**

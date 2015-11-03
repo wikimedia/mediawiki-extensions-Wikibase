@@ -192,7 +192,7 @@ final class TestChanges {
 					'page_id' => 23,
 					'bot' => false,
 					'rev_id' => $rev,
-					'parent_id' => $rev -1,
+					'parent_id' => $rev - 1,
 					'user_text' => 'Some User',
 					'comment' => "/* $key:1| */ bla bla",
 				);
@@ -227,7 +227,7 @@ final class TestChanges {
 		$changes = self::getInstances();
 
 		// filter changes by key
-		if ( $changeFilter!== null ) {
+		if ( $changeFilter !== null ) {
 			$changes = array_intersect_key( $changes, array_flip( $changeFilter ) );
 		}
 

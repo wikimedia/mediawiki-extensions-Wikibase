@@ -42,7 +42,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	*/
 	public function testApiConventions( $moduleClass ) {
 		$params = array();
-		$user =  $GLOBALS['wgUser'];
+		$user = $GLOBALS['wgUser'];
 
 		$request = new FauxRequest( $params, true );
 		$main = new ApiMain( $request );

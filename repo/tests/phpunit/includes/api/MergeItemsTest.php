@@ -287,7 +287,9 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$this->entityModificationTestHelper->putEntity( $pre2, 'Q2' );
 
 		// -- do the request --------------------------------------------
-		$redirect = $expectRedirect ? new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ): null;
+		$redirect = $expectRedirect
+			? new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) )
+			: null;
 		$result = $this->callApiModule( $params, $redirect );
 
 		// -- check the result --------------------------------------------

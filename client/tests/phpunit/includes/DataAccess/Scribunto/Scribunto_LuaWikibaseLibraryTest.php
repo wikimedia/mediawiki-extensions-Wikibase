@@ -309,7 +309,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	 * @return Scribunto_LuaWikibaseLibrary
 	 */
 	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false ) {
-		$title =  Title::newFromText( 'Whatever' );
+		$title = Title::newFromText( 'Whatever' );
 		$parserOptions = new ParserOptions();
 
 		$parser = new Parser();

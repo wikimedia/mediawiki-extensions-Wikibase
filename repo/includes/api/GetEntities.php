@@ -170,7 +170,7 @@ class GetEntities extends ApiBase {
 		$ids = array();
 		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
 			$itemByTitleHelper = $this->getItemByTitleHelper();
-			list( $ids, $missingItems ) =  $itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
+			list( $ids, $missingItems ) = $itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
 			$this->addMissingItemsToResult( $missingItems );
 		}
 		return $ids;
@@ -291,7 +291,7 @@ class GetEntities extends ApiBase {
 	 *     1 => LanguageFallbackChain[] Keys are requested lang codes
 	 */
 	private function getLanguageCodesAndFallback( array $params ) {
-		$languageCodes = ( is_array( $params['languages'] )? $params['languages'] : array() );
+		$languageCodes = ( is_array( $params['languages'] ) ? $params['languages'] : array() );
 		$fallbackChains = array();
 
 		if ( $params['languagefallback'] ) {

@@ -177,7 +177,7 @@ class DispatchChanges extends Maintenance {
 		// Note that idle passes need to be counted to avoid processes staying alive
 		// for an indefinite time, potentially leading to a pile up when used with cron.
 		for ( $c = 0; $c < $maxPasses; ) {
-			if ( $t  > $maxTime ) {
+			if ( $t > $maxTime ) {
 				$this->trace( "Reached max time after $t seconds." );
 				// timed out
 				break;

@@ -89,12 +89,12 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideChangeOps() {
-		$snak =  $this->makeSnak( 'P5', 'test' );
+		$snak = $this->makeSnak( 'P5', 'test' );
 		$args = array();
 
 		// add a new claim
 		$item = $this->makeNewItemWithClaim( 'Q123', $snak );
-		$newSnak =  $this->makeSnak( 'P8', 'newSnak' );
+		$newSnak = $this->makeSnak( 'P8', 'newSnak' );
 		$guid = '';
 		$changeOp = $this->newChangeOpMainSnak( $guid, $newSnak );
 		$expected = $newSnak->getDataValue();
@@ -102,7 +102,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 		// update an existing claim with a new main snak value
 		$item = $this->makeNewItemWithClaim( 'Q234', $snak );
-		$newSnak =  $this->makeSnak( 'P5', 'changedSnak' );
+		$newSnak = $this->makeSnak( 'P5', 'changedSnak' );
 		$statements = $item->getStatements()->toArray();
 
 		$guid = $statements[0]->getGuid();
@@ -128,7 +128,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideInvalidApply() {
-		$snak =  $this->makeSnak( 'P11', 'test' );
+		$snak = $this->makeSnak( 'P11', 'test' );
 		$item = $this->makeNewItemWithClaim( 'Q777', $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
@@ -137,7 +137,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 		// apply change to the wrong item
 		$wrongItem = new Item( new ItemId( 'Q888' ) );
-		$newSnak =  $this->makeSnak( 'P12', 'newww' );
+		$newSnak = $this->makeSnak( 'P12', 'newww' );
 		$args['wrong entity'] = array( $wrongItem, $this->newChangeOpMainSnak( $guid, $newSnak ) );
 
 		// apply change to an unknown claim
@@ -145,7 +145,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$args['unknown claim'] = array( $item, $this->newChangeOpMainSnak( $wrongClaimId, $newSnak ) );
 
 		// update an existing claim with wrong main snak property
-		$newSnak =  $this->makeSnak( 'P13', 'changedSnak' );
+		$newSnak = $this->makeSnak( 'P13', 'changedSnak' );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
@@ -155,7 +155,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 		$args['wrong main snak property'] = array( $item, $changeOp );
 
 		// apply invalid main snak
-		$badSnak =  $this->makeSnak( 'P12', new NumberValue( 5 ) );
+		$badSnak = $this->makeSnak( 'P12', new NumberValue( 5 ) );
 		$args['bad value type'] = array( $wrongItem, $this->newChangeOpMainSnak( $guid, $badSnak ) );
 
 		// apply invalid main snak

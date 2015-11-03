@@ -304,7 +304,7 @@ class ChangeDispatcher {
 
 		while ( $batchSize < $this->batchSize && $chunksExamined < $this->maxChunks ) {
 			// get a chunk of changes
-			$chunk = $this->chunkedChangesAccess->loadChunk( $after+1, $chunkSize );
+			$chunk = $this->chunkedChangesAccess->loadChunk( $after + 1, $chunkSize );
 
 			if ( empty( $chunk ) ) {
 				break; // no more changes

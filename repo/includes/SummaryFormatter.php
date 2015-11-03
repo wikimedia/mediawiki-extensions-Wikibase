@@ -256,7 +256,7 @@ class SummaryFormatter {
 		$userSummary = $this->stringNormalizer->trimToNFC( $userSummary );
 
 		if ( $autoComment !== '' ) {
-			$mergedString .=  '/* ' . $autoComment . ' */ ';
+			$mergedString .= '/* ' . $autoComment . ' */ ';
 		}
 
 		if ( $autoSummary !== '' && $userSummary !== '' ) {

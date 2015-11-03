@@ -134,7 +134,7 @@ class ItemDisambiguation {
 	private function getIdHtml( EntityId $entityId = null ) {
 		$title = $this->titleLookup->getTitleForId( $entityId );
 
-		$idElement =  Html::element(
+		$idElement = Html::element(
 			'a',
 			array(
 				'title' => $title ? $title->getPrefixedText() : '',

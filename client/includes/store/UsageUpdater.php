@@ -110,7 +110,7 @@ class UsageUpdater {
 		$prunedUsages = $this->usageTracker->pruneStaleUsages( $pageId, $lastUpdatedBefore );
 
 		$prunedEntityIds = $this->getEntityIds( $prunedUsages );
-		$unusedIds =  $this->usageLookup->getUnusedEntities( $prunedEntityIds );
+		$unusedIds = $this->usageLookup->getUnusedEntities( $prunedEntityIds );
 
 		if ( !empty( $unusedIds ) ) {
 			// Unsubscribe from anything that was pruned and is otherwise unused.

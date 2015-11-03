@@ -119,7 +119,7 @@ class ChunkCacheTest extends \MediaWikiTestCase {
 		for ( $i = 0; $i < 100; $i++ ) {
 			$start = mt_rand( 0, 110 );
 			$length = mt_rand( 1, 20 );
-			$expected =  array_slice( $data, $start, $length );
+			$expected = array_slice( $data, $start, $length );
 			$info = "fuzz: start $start, len $length";
 
 			$chunk = $cache->loadChunk( $start, $length );

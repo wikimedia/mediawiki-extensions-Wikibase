@@ -54,7 +54,7 @@ class EntityExistsValidator implements ValueValidator {
 			throw new InvalidArgumentException( "Expected an EntityId object" );
 		}
 
-		$actualType =  $value->getEntityType();
+		$actualType = $value->getEntityType();
 
 		$errors = array();
 

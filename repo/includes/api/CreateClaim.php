@@ -170,7 +170,7 @@ class CreateClaim extends ModifyClaim {
 	protected function getExamplesMessages() {
 		return array(
 			'action=wbcreateclaim&entity=Q42&property=P9001&snaktype=novalue'
-				=>'apihelp-wbcreateclaim-example-1',
+				=> 'apihelp-wbcreateclaim-example-1',
 			'action=wbcreateclaim&entity=Q42&property=P9002&snaktype=value&value="itsastring"'
 				=> 'apihelp-wbcreateclaim-example-2',
 			'action=wbcreateclaim&entity=Q42&property=P9003&snaktype=value&value='
