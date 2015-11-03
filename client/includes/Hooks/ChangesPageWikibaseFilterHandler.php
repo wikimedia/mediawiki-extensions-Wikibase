@@ -71,7 +71,7 @@ class ChangesPageWikibaseFilterHandler {
 			return $filters;
 		}
 
-		$toggleDefault = $this->showWikibaseEditsByDefault( $user, $this->optionName );
+		$toggleDefault = $this->showWikibaseEditsByDefault( $user );
 		$filters = $this->addFilter( $filters, $toggleDefault );
 
 		return $filters;
