@@ -30,7 +30,6 @@ use Wikibase\Lib\AutoCommentFormatter;
 use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
-use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
