@@ -93,11 +93,11 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 
 	/**
 	 * @param int $revisionId
-	 * @param string $mode (ChangeLookup::FROM_SLAVE or ChangeLookup::FROM_MASTER)
+	 * @param string $mode One of the self::FROM_... constants.
 	 *
 	 * @return Change|null
 	 */
-	public function loadByRevisionId( $revisionId, $mode = ChangeLookup::FROM_SLAVE ) {
+	public function loadByRevisionId( $revisionId, $mode = self::FROM_SLAVE ) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 
 		$change = $this->loadChanges(
@@ -106,7 +106,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 				'LIMIT' => 1
 			),
 			__METHOD__,
-			$mode === ChangeLookup::FROM_MASTER ? DB_MASTER : DB_SLAVE
+			$mode === self::FROM_MASTER ? DB_MASTER : DB_SLAVE
 		);
 
 		if ( isset( $change[0] ) ) {
