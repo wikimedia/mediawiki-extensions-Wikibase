@@ -105,6 +105,24 @@
       "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ed4ae882",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-03T19:46:04Z",
+      "side": 1,
+      "message": "@Jonas how would you test something like Scribunto_LuaWikibaseLibraryTest completely isolated from global state?\n\nsometimes these tests are not as \u0027clean\u0027 or nice but imho, it would be quite scary not to have these",
+      "parentUuid": "0ebaf39b_6d7598f3",
+      "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
