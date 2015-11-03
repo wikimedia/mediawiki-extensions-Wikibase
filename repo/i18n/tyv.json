@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Agilight"
+			"Agilight",
+			"Монгуш Салим"
 		]
 	},
+	"wikibase-edit": "эдер",
+	"wikibase-add": "немээр",
 	"wikibase-entitieswithoutlabel-submit": "Диле"
 }

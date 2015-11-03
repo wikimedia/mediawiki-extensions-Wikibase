@@ -54,6 +54,7 @@
 	"wikibase-unconnectedpages-format-row": "(на старонцы $1 {{PLURAL:$1|міжмоўная спасылка|міжмоўныя спасылкі|міжмоўных спасылак}})",
 	"wikibase-unconnectedpages-submit": "Паказаць",
 	"pageswithbadges": "Старонкі з адзнакамі",
+	"pageswithbadges-summary": "Гэтая старонка ўтрымлівае сьпіс старонак з адзнакамі (напрыклад, абраныя і добрыя артыкулы). Сьпіс адсартаваны паводле памяншэньня ID старонак, таму новыя старонкі паказваюцца першымі.",
 	"wikibase-pageswithbadges-legend": "Сьпіс старонак з адзнакамі",
 	"wikibase-pageswithbadges-badge": "Адзнака:",
 	"wikibase-pageswithbadges-submit": "Паказаць старонкі",

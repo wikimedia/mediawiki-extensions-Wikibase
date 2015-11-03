@@ -460,6 +460,12 @@
 	"apihelp-wbsetaliases-example-4": "Desaniciar Foo de la llista d'alcuños n'inglés pa la entidá con ID Q1, y amestar Bar na mesma",
 	"apihelp-wbsetclaim-description": "Crea o anueva una declaración o afirmación entera.",
 	"apihelp-wbsetclaim-param-claim": "Serialización de declaración o afirmación",
+	"apihelp-wbsetclaim-param-index": "L'índiz dientro de la llista de declaraciónes de la entidá al que mover la declaración. Opcional. Ten procuru pa que cuando designes un índiz qu'especifica una posición que nun tea xunto a una declaración na que'l snak principal nun presenta la mesma propiedá, se mueva tol grupu de declaraciones nes que'l snak principal presenta la mesma propiedá. Cando nun s'indique, una declaración esistente siguirá nel sitiu mentanto que s'amestará una declaración nueva a la última na que'l snak principal presente la mesma propiedá.",
+	"apihelp-wbsetclaim-param-summary": "Resume de la edición.\nPrefixaráse con un comentariu xeneráu automáticamente. La llende de llonxitú del comentariu automáticu xunto col resume ye de 260 caráuteres. Ten en cuenta que tolo que pase d'esa llende va cortase.",
+	"apihelp-wbsetclaim-param-baserevid": "L'identificador numbéricu pa que la revisión base la edición.\nÚsase para detectar conflictos demientres el guardáu.",
+	"apihelp-wbsetclaim-param-bot": "Marcar esta edición como bot. Esta marca d'URL sólo se respetará si l'usuariu pertenez al grupu \"bot\".",
+	"apihelp-wbsetclaim-example-1": "Configurar l'afirmación col ID indicáu a la propiedá P1 con un valor de cadena de «City» (ciudá)",
+	"apihelp-wbsetclaim-example-2": "Configurar l'afirmación col ID dau a la propiedá P1 con un valor de cadena de «City» (ciudá) y mover l'afirmación a la posición superior dientro del subgrupu d'afirmaciones de la entidá que presenten la propiedá principal de snak P1. Amás, mueve tol subgrupu a la parte superior de tolos subgrupos añadíos por propiedá.",
 	"apihelp-wbsetlabel-param-language": "Llingua de la etiqueta",
 	"apihelp-wbsetlabel-param-value": "El valor de la etiqueta"
 }
