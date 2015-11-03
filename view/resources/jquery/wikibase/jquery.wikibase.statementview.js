@@ -132,6 +132,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_qualifiers: null,
 
 	/**
+	 * Reference to the `toggler` widget managing expanding/collapsing
+	 * @property {jQuery}
+	 * @private
+	 */
+	_$toggler: null,
+
+	/**
 	 * @inheritdoc
 	 * @protected
 	 *
@@ -348,13 +355,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 		);
 
 		// toggle for references section:
-		var $toggler = $( '<a/>' ).toggler( { $subject: this.$references } );
+		this._$toggler = $( '<a/>' ).toggler( { $subject: this.$references } );
 
 		if ( this.$refsHeading.text() ) {
-			$toggler.find( '.ui-toggler-label' ).text( this.$refsHeading.text() );
-			this.$refsHeading.html( $toggler );
+			this._$toggler.find( '.ui-toggler-label' ).text( this.$refsHeading.text() );
+			this.$refsHeading.html( this._$toggler );
 		} else {
-			this.$refsHeading.html( $toggler );
+			this.$refsHeading.html( this._$toggler );
 			this._drawReferencesCounter();
 		}
 	},
@@ -636,8 +643,30 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} );
 
 		this._mainSnakSnakView.startEditing();
+		this._startEditingReferences();
 
 		return deferred.promise();
+	},
+
+	/**
+	 * @protected
+	 */
+	_startEditingReferences: function() {
+		$.each( this._referencesListview.value(), function ( key, referenceView ) {
+			referenceView.startEditing();
+		} );
+
+		this._expandReferencesToggler();
+	},
+
+	/**
+	 * @protected
+	 */
+	_expandReferencesToggler: function() {
+		var toggler = this._$toggler.data( 'toggler' );
+		if ( toggler.isCollapsed() ) {
+			toggler.toggle();
+		}
 	},
 
 	/**
@@ -651,7 +680,19 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this._stopEditingQualifiers( dropValue );
 		this._rankSelector.stopEditing( dropValue );
 
+		this._stopEditingReferences( dropValue );
+
 		return PARENT.prototype._afterStopEditing.call( this, dropValue );
+	},
+
+	/**
+	 * @protected
+	 */
+	_stopEditingReferences: function() {
+		$.each( this._referencesListview.value(), function ( key, referenceView ) {
+			referenceView.stopEditing();
+		} );
+
 	},
 
 	/**
