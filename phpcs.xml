@@ -45,16 +45,21 @@
 
 	<rule ref="PSR2.Files" />
 
+	<rule ref="Squiz.Classes.DuplicateProperty" />
+	<rule ref="Squiz.Classes.SelfMemberReference" />
 	<!-- This sniff is included in PSR1 but needs an exception. -->
 	<rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
 		<exclude-pattern>DataAccess.Scribunto.Scribunto_LuaWikibase*Library</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
+	<rule ref="Squiz.Functions.FunctionDuplicateArgument" />
+	<rule ref="Squiz.Functions.GlobalFunction" />
 	<rule ref="Squiz.Scope" />
 	<rule ref="Squiz.Scope.MethodScope">
 		<!-- FIXME: This indicates an error in the QueryPage base class that should be fixed. -->
 		<exclude-pattern>SpecialUnconnectedPages\.php</exclude-pattern>
 	</rule>
+	<rule ref="Squiz.WhiteSpace.CastSpacing" />
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
 		<properties>
 			<property name="spacing" value="1" />
