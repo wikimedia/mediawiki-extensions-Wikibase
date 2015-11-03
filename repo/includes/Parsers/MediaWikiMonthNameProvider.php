@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Parsers;
 use Language;
 
 /**
- * A MonthNameProvider using MediaWiki's Language object.
+ * A MonthNameProvider using MediaWiki's localization infrastructure.
  *
  * @since 0.5
  *
@@ -15,7 +15,7 @@ use Language;
 class MediaWikiMonthNameProvider implements MonthNameProvider {
 
 	/**
-	 * @see getLocalizedMonthNames::getCanonicalMonthNames
+	 * @see MonthNameProvider::getLocalizedMonthNames
 	 *
 	 * @param string $languageCode
 	 *
