@@ -123,6 +123,24 @@
       "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_eb4ad082",
+        "filename": "client/includes/store/sql/DirectSqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-11-03T21:20:13Z",
+      "side": 1,
+      "message": "What is a VW software pattern??\n\nFirst Google hit: Volkswagen Test Rigging Follows a Long Auto Industry",
+      "parentUuid": "0ebaf39b_ed4ae882",
+      "revId": "d8a0f0fb94868ee3e57b60d019237b07ef3f8f40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
