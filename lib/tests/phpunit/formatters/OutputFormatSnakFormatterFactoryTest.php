@@ -7,6 +7,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use Language;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChainFactory;
@@ -31,26 +32,29 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		$self = $this;
 		$callbacks = array(
 			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $format === SnakFormatter::FORMAT_PLAIN ? $self->makeMockValueFormatter() : null;
+				return $format === SnakFormatter::FORMAT_PLAIN
+					? $self->makeMockValueFormatter()
+					: null;
 			},
 		);
-
-		$dataTypeFactory = new DataTypeFactory( array(
-			'string' => 'string'
-		) );
-
-		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
-		$dataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
-
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
 			$callbacks,
 			Language::factory( 'en' ),
 			new LanguageFallbackChainFactory()
 		);
 
-		return new OutputFormatSnakFormatterFactory( $valueFormatterFactory, $dataTypeLookup, $dataTypeFactory );
+		$dataTypeLookup = $this->getMock(
+			'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup'
+		);
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
+
+		return new OutputFormatSnakFormatterFactory(
+			$valueFormatterFactory,
+			$dataTypeLookup,
+			new DataTypeFactory( array( 'string' => 'string' ) )
+		);
 	}
 
 	public function makeMockValueFormatter() {
@@ -68,7 +72,6 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getSnakFormatterProvider() {
-
 		return array(
 			'plain' => array(
 				SnakFormatter::FORMAT_PLAIN,
@@ -117,11 +120,35 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getSnakFormatterProvider_options
 	 */
-	public function testGetSnakFormatter_options( $options, $expectedType ) {
+	public function testGetSnakFormatter_options( array $options, $expectedType ) {
 		$factory = $this->newOutputFormatSnakFormatterFactory();
-		$formatter = $factory->getSnakFormatter( SnakFormatter::FORMAT_WIKI, new FormatterOptions( $options ) );
+		$formatter = $factory->getSnakFormatter(
+			SnakFormatter::FORMAT_WIKI,
+			new FormatterOptions( $options )
+		);
 
 		$this->assertInstanceOf( $expectedType, $formatter );
+	}
+
+	public function testGetSnakFormatter_languageOption() {
+		$self = $this;
+		$callbacks = array(
+			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
+				$self->assertSame( 'de', $options->getOption( ValueFormatter::OPT_LANG ) );
+			},
+		);
+		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
+			$callbacks,
+			Language::factory( 'de' ),
+			new LanguageFallbackChainFactory()
+		);
+
+		$factory = new OutputFormatSnakFormatterFactory(
+			$valueFormatterFactory,
+			$this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' ),
+			new DataTypeFactory( array() )
+		);
+		$factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );
 	}
 
 }
