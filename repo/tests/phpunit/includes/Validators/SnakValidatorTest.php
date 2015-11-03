@@ -275,23 +275,23 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 
 	public function provideValidateDataValue() {
 		return array(
-			array( new StringValue( '123' ), 'numeric', 'p1', 'valid numeric value', true ),
-			array( new StringValue( '123' ), 'alphabetic', 'p2', 'invalid alphabetic value', false ),
-			array( new StringValue( 'abc' ), 'alphabetic', 'p2', 'valid alphabetic value', true ),
-			array( new StringValue( 'abc' ), 'numeric', 'p1', 'invalid numeric value', false ),
-			array( new StringValue( '01234567890123456789' ), 'numeric', 'p1', 'overly long numeric value', false ),
-			array( new UnknownValue( 'abc' ), 'alphabetic', 'p2', 'bad value type', false ),
-			array( new UnDeserializableValue( 'abc', 'string', 'error' ), 'numeric', 'p1', 'bad value', false ),
+			array( new StringValue( '123' ), 'numeric', 'valid numeric value', true ),
+			array( new StringValue( '123' ), 'alphabetic', 'invalid alphabetic value', false ),
+			array( new StringValue( 'abc' ), 'alphabetic', 'valid alphabetic value', true ),
+			array( new StringValue( 'abc' ), 'numeric', 'invalid numeric value', false ),
+			array( new StringValue( '01234567890123456789' ), 'numeric', 'overly long numeric value', false ),
+			array( new UnknownValue( 'abc' ), 'alphabetic', 'bad value type', false ),
+			array( new UnDeserializableValue( 'abc', 'string', 'error' ), 'numeric', 'bad value', false ),
 		);
 	}
 
 	/**
 	 * @dataProvider provideValidateDataValue
 	 */
-	public function testValidateDataValue( DataValue $dataValue, $dataTypeId, $propertyName, $description, $expectedValid = true ) {
+	public function testValidateDataValue( DataValue $dataValue, $dataTypeId, $description, $expectedValid = true ) {
 		$validator = $this->getSnakValidator();
 
-		$result = $validator->validateDataValue( $dataValue, $dataTypeId, $propertyName );
+		$result = $validator->validateDataValue( $dataValue, $dataTypeId );
 
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
