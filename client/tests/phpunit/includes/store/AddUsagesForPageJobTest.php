@@ -153,7 +153,7 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 		$touched = '20150101000000';
 		$usages = array( $usageQ5X );
 
-		$spec = AddUsagesForPageJob::newSpec( $title, $usages, $touched, 'es' );
+		$spec = AddUsagesForPageJob::newSpec( $title, $usages, $touched );
 
 		$expected = array(
 			'pageId' => $title->getArticleID(),
