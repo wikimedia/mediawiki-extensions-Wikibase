@@ -131,6 +131,16 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 */
 	_qualifiers: null,
 
+
+
+	/**
+	 * Reference to the `toggler` widget managing expanding/collapsing
+	 * @property {jQuery.ui.toggler}
+	 * @private
+	 */
+	_$toggler: null,
+
+
 	/**
 	 * @inheritdoc
 	 * @protected
@@ -348,13 +358,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 		);
 
 		// toggle for references section:
-		var $toggler = $( '<a/>' ).toggler( { $subject: this.$references } );
+		this._$toggler = $( '<a/>' ).toggler( { $subject: this.$references } );
 
 		if ( this.$refsHeading.text() ) {
-			$toggler.find( '.ui-toggler-label' ).text( this.$refsHeading.text() );
-			this.$refsHeading.html( $toggler );
+			this._$toggler.find( '.ui-toggler-label' ).text( this.$refsHeading.text() );
+			this.$refsHeading.html( this._$toggler );
 		} else {
-			this.$refsHeading.html( $toggler );
+			this.$refsHeading.html( this._$toggler );
 			this._drawReferencesCounter();
 		}
 	},
@@ -636,8 +646,30 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} );
 
 		this._mainSnakSnakView.startEditing();
+		this._startEditingOfReferences();
 
 		return deferred.promise();
+	},
+
+	/**
+	 * @protected
+	 */
+	_startEditingOfReferences: function() {
+		$.each( this._referencesListview.value(), function ( key, refernceView ) {
+			refernceView.startEditing();
+		});
+
+		this._expandReferencesToggler();
+	},
+
+	/**
+	 * @protected
+	 */
+	_expandReferencesToggler: function(){
+		var toggler = this._$toggler.data( 'toggler' );
+		if(toggler.isCollapsed()){
+			toggler.toggle();
+		}
 	},
 
 	/**
