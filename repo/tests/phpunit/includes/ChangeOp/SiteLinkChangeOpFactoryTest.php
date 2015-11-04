@@ -29,7 +29,7 @@ class SiteLinkChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRemoveSiteLinkOp() {
-		$op = $this->newChangeOpFactory()->newRemoveSiteLinkOp( 'enwiki', 'Foo' );
+		$op = $this->newChangeOpFactory()->newRemoveSiteLinkOp( 'enwiki' );
 		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
 	}
 
