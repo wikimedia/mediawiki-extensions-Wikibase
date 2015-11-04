@@ -1,5 +1,9 @@
 # ValueView release notes
 
+## 0.15.6 (2015-11-04)
+
+* Introduced `toggle` and `isCollapsed` methods on `jQuery.ui.toggler`.
+
 ## 0.15.5 (2015-09-09)
 
 * Fixed `jQuery.valueview.ExpertExtender.UnitSelector` test.
