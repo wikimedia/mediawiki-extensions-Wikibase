@@ -106,14 +106,12 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 		$argLists[] = array( $badges, $expected );
 
-
 		$badges = array(
 			new ItemId( 'Q149' )
 		);
 		$expected = array_values( $badges );
 
 		$argLists[] = array( $badges, $expected );
-
 
 		// removing from the middle of array
 		$badges = array(
