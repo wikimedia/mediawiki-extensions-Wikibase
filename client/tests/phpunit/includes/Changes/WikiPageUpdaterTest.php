@@ -2,8 +2,6 @@
 
 namespace Wikibase\Client\Tests\Changes;
 
-use Diff\Differ\MapDiffer;
-use Diff\DiffOp\AtomicDiffOp;
 use Job;
 use JobQueueGroup;
 use PHPUnit_Framework_Assert;
@@ -13,13 +11,6 @@ use Title;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Services\Diff\EntityDiffer;
-use Wikibase\DataModel\Services\Diff\ItemDiffer;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 
 /**
