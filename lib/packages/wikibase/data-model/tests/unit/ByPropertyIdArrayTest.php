@@ -8,6 +8,7 @@ use ReflectionClass;
 use ReflectionMethod;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\PropertyIdProvider;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -109,6 +110,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider listProvider
+	 * @param PropertyIdProvider[] $objects
 	 */
 	public function testGetIds( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );
@@ -131,6 +133,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider listProvider
+	 * @param PropertyIdProvider[] $objects
 	 */
 	public function testGetById( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );
@@ -162,6 +165,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider listProvider
+	 * @param PropertyIdProvider[] $objects
 	 */
 	public function testRemoveObject( array $objects ) {
 		$lastIndex = count( $objects ) - 1;
