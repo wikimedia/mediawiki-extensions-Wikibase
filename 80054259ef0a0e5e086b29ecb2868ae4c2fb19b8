@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_983cc18f",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-11-04T20:04:53Z",
+      "side": 1,
+      "message": "line breaks",
+      "revId": "80054259ef0a0e5e086b29ecb2868ae4c2fb19b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
