@@ -72,10 +72,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item2 = $this->getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
-
-		return $change->getSiteLinkDiff();
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
 	protected function getUnlinkDiff() {
@@ -85,10 +82,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item2 = $this->getNewItem();
 		$item2->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
 
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
-
-		return $change->getSiteLinkDiff();
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
 	protected function getLinkChangeDiff() {
@@ -98,10 +92,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item2 = $this->getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Tokyo' );
 
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
-
-		return $change->getSiteLinkDiff();
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
 	protected function getOldLinkChangeDiff() {
@@ -119,10 +110,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item2 = $this->getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan', array( new ItemId( 'Q17' ) ) );
 
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
-
-		return $change->getSiteLinkDiff();
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
 	protected function getAddLinkDiff() {
@@ -133,13 +121,21 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
 
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
-
-		return $change->getSiteLinkDiff();
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	protected function getAddMultipleLinksDiff() {
+	private function getAddSisterProjectLinkDiff() {
+		$item = $this->getNewItem();
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
+
+		$item2 = $this->getNewItem();
+		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
+		$item2->getSiteLinkList()->addNewSiteLink( 'enwiktionary', 'Japan' );
+
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+	}
+
+	private function getAddMultipleLinksDiff() {
 		$item = $this->getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
@@ -148,13 +144,10 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'frwiki', 'Japan' );
 
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
-
-		return $change->getSiteLinkDiff();
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	protected function getRemoveLinkDiff() {
+	private function getRemoveLinkDiff() {
 		$item = $this->getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
@@ -162,13 +155,10 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item2 = $this->getNewItem();
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
-		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
-
-		return $change->getSiteLinkDiff();
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
 	}
 
-	protected function getChangeLinkDiff() {
+	private function getChangeLinkDiff() {
 		$item = $this->getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Japan' );
@@ -177,13 +167,17 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item2->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 		$item2->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Tokyo' );
 
+		return $this->getSiteLinkDiffForUpdate( $item, $item2 );
+	}
+
+	private function getSiteLinkDiffForUpdate( Item $item, Item $item2 ) {
 		$changeFactory = TestChanges::getEntityChangeFactory();
 		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
 
 		return $change->getSiteLinkDiff();
 	}
 
-	protected function getDeleteDiff() {
+	private function getDeleteDiff() {
 		$item = $this->getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
@@ -193,7 +187,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		return $change->getSiteLinkDiff();
 	}
 
-	protected function getRestoreDiff() {
+	private function getRestoreDiff() {
 		$item = $this->getNewItem();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
@@ -203,7 +197,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		return $change->getSiteLinkDiff();
 	}
 
-	protected function getUpdates() {
+	private function getUpdates() {
 		$updates = array();
 
 		$updates[] = array(
@@ -234,6 +228,11 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$updates[] = array(
 			$this->getAddLinkDiff(),
 			'(wikibase-comment-sitelink-add: [[:de:Japan]])',
+		);
+
+		$updates[] = array(
+			$this->getAddSisterProjectLinkDiff(),
+			'(wikibase-comment-sitelink-add: enwiktionary:Japan)',
 		);
 
 		$updates[] = array(
