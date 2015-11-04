@@ -58,7 +58,8 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		$this->table = $table;
 		$this->readonly = $readonly;
-		$this->wiki = $wiki;
+
+		parent::__construct( $wiki );
 	}
 
 	/**
