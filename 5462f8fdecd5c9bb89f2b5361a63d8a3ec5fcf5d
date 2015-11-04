@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_87aea093",
+        "filename": "view/tests/qunit/wikibase/view/testViewController.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-11-04T15:56:28Z",
+      "side": 1,
+      "message": "Rather odd test, at least for someone that has not done a lot of JS lately",
+      "revId": "5462f8fdecd5c9bb89f2b5361a63d8a3ec5fcf5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
