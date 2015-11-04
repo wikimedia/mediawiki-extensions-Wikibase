@@ -247,18 +247,22 @@ class SiteLinkCommentCreator {
 	 * @return string wikitext interwiki link
 	 */
 	private function getSitelinkWikitext( $siteId, $pageTitle ) {
-		$interwikiId = $siteId;
-
 		// Try getting the interwiki id from the Site object of the link target
 		$site = $this->siteStore->getSite( $siteId );
+
 		if ( $site ) {
-			$iw_ids = $site->getInterwikiIds();
-			if ( isset( $iw_ids[0] ) ) {
-				$interwikiId = $iw_ids[0];
+			$interwikiIds = $site->getInterwikiIds();
+
+			if ( isset( $interwikiIds[0] ) ) {
+				$interwikiId = $interwikiIds[0];
+
+				return "[[:$interwikiId:$pageTitle]]";
 			}
 		}
 
-		return "[[:$interwikiId:$pageTitle]]";
+		// @todo: provide a mechanism to get the interwiki id for a sister project wiki.
+		// e.g. get "voy:it" for Italian Wikivoyage from English Wikipedia.
+		return "$siteId:$pageTitle";
 	}
 
 	/**
