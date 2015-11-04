@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_12e0b091",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-04T23:11:50Z",
+      "side": 1,
+      "message": "We have that, just above... but could be that the sites definitions we use in production aren\u0027t good enough. Still, I think the comment should be reworded.\n\nPlease also open a ticket for that problem.",
+      "revId": "982a9954f74663d7fa52d5cea2714287e94a761b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
