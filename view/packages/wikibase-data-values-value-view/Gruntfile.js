@@ -13,7 +13,9 @@ module.exports = function ( grunt ) {
 			},
 			all: [
 				'*.js',
-				'modules/**/*.js'
+				'src/**/*.js',
+				'lib/**/*.js',
+				'tests/**/*.js'
 			]
 		},
 		jscs: {
