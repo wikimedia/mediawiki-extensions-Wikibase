@@ -38,7 +38,6 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 
 		$rc = new RecentChange();
 		$rc->setAttribs( array(
-			'rc_this_oldid' => 12,
 			'rc_user' => 34,
 			'rc_user_text' => 'BlackMagicIsEvil',
 			'rc_timestamp' => $time,
