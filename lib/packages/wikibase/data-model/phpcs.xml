@@ -3,7 +3,7 @@
 	- https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml
 	- https://github.com/squizlabs/PHP_CodeSniffer/tree/master/CodeSniffer/Standards
 -->
-<ruleset name="MediaWiki">
+<ruleset name="WikibaseDataModel">
     <rule ref="Generic.Classes" />
     <rule ref="Generic.CodeAnalysis" />
     <rule ref="Generic.ControlStructures" />
