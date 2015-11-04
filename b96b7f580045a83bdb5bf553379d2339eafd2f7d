@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_12cbd075",
+        "filename": "repo/includes/ParserOutput/GeoDataDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-04T17:20:28Z",
+      "side": 0,
+      "message": "Whoops. This doesn\u0027t look right.",
+      "revId": "b96b7f580045a83bdb5bf553379d2339eafd2f7d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
