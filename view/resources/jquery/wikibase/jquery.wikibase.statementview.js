@@ -689,12 +689,16 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @protected
 	 */
 	_stopEditingReferences: function( dropValue ) {
-		$.each( this._referencesListview.value(), function ( key, referenceView ) {
-			if( !dropValue ){
-				referenceView.value( referenceView.value() );
+		var references = !dropValue && this.options.value.getReferences().toArray();
+
+		$.each( this._referencesListview.value(), function ( i, referenceView ) {
+			if ( !dropValue ) {
+				referenceView.value( references[ i ] );
 			}
 			referenceView.stopEditing();
 		} );
+
+		this._drawReferencesCounter();
 	},
 
 	/**
