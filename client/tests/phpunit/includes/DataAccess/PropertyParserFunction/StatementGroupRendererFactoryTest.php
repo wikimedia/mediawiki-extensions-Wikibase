@@ -7,7 +7,10 @@ use Parser;
 use ParserOptions;
 use Title;
 use User;
+use ValueFormatters\FormatterOptions;
+use ValueFormatters\ValueFormatter;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
+use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -32,7 +35,7 @@ use Wikibase\LanguageFallbackChainFactory;
 class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewRendererForInterfaceMessage() {
-		$parser = $this->getParser( 'zh', true, false, false, Parser::OT_HTML );
+		$parser = $this->getParser( 'zh', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -44,7 +47,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRenderer_contentConversionDisabled() {
-		$parser = $this->getParser( 'zh', false, true, false, Parser::OT_HTML );
+		$parser = $this->getParser( 'zh', false, true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -56,7 +59,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRenderer_titleConversionDisabled() {
-		$parser = $this->getParser( 'zh', false, false, true, Parser::OT_HTML );
+		$parser = $this->getParser( 'zh', false, false, true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -91,7 +94,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRenderer_forNonVariantLanguage() {
-		$parser = $this->getParser( 'en', true, false, false, Parser::OT_HTML );
+		$parser = $this->getParser( 'en', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -103,7 +106,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRender_forVariantLanguage() {
-		$parser = $this->getParser( 'zh', false, false, false, Parser::OT_HTML );
+		$parser = $this->getParser( 'zh' );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -115,7 +118,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRenderer_usageTracking() {
-		$parser = $this->getParser( 'en', true, false, false, Parser::OT_HTML );
+		$parser = $this->getParser( 'en', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -126,6 +129,32 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$usages = $usageAccumulator->getUsages();
 		$this->assertArrayHasKey( 'Q7#L.en', $usages );
 		$this->assertArrayHasKey( 'Q7#T', $usages );
+	}
+
+	public function testNewRendererFromParser_languageOption() {
+		$idResolver = $this->getMockBuilder( 'Wikibase\Client\DataAccess\PropertyIdResolver' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$formatterFactory = $this->getMockBuilder( 'Wikibase\Lib\OutputFormatSnakFormatterFactory' )
+			->disableOriginalConstructor()
+			->getMock();
+		$self = $this;
+		$formatterFactory->expects( $this->once() )
+			->method( 'getSnakFormatter' )
+			->will( $this->returnCallback( function( $format, FormatterOptions $options ) use ( $self )  {
+				$self->assertSame( 'de', $options->getOption( ValueFormatter::OPT_LANG ) );
+				return $self->getMock( 'Wikibase\Lib\SnakFormatter' );
+			} ) );
+
+		$factory = new StatementGroupRendererFactory(
+			$idResolver,
+			new SnaksFinder(),
+			new LanguageFallbackChainFactory(),
+			$formatterFactory,
+			$this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' )
+		);
+		$factory->newRendererFromParser( $this->getParser( 'de' ) );
 	}
 
 	private function getStatementGroupRendererFactory() {
@@ -216,8 +245,12 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		return $entityLookup;
 	}
 
-	private function getParser( $languageCode, $interfaceMessage, $disableContentConversion,
-		$disableTitleConversion, $outputType
+	private function getParser(
+		$languageCode = 'en',
+		$interfaceMessage = false,
+		$disableContentConversion = false,
+		$disableTitleConversion = false,
+		$outputType = Parser::OT_HTML
 	) {
 		$parserConfig = array( 'class' => 'Parser' );
 

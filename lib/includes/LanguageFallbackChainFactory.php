@@ -81,16 +81,14 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromLanguage( Language $language, $mode = self::FALLBACK_ALL ) {
-		if ( isset( $this->languageCache[$language->getCode()][$mode] ) ) {
-			return $this->languageCache[$language->getCode()][$mode];
+		$languageCode = $language->getCode();
+
+		if ( !isset( $this->languageCache[$languageCode][$mode] ) ) {
+			$chain = $this->buildFromLanguage( $language, $mode );
+			$this->languageCache[$languageCode][$mode] = new LanguageFallbackChain( $chain );
 		}
 
-		$chain = $this->buildFromLanguage( $language, $mode );
-		$languageFallbackChain = new LanguageFallbackChain( $chain );
-
-		$this->languageCache[$language->getCode()][$mode] = $languageFallbackChain;
-
-		return $languageFallbackChain;
+		return $this->languageCache[$languageCode][$mode];
 	}
 
 	/**
@@ -104,16 +102,12 @@ class LanguageFallbackChainFactory {
 	public function newFromLanguageCode( $languageCode, $mode = self::FALLBACK_ALL ) {
 		$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
 
-		if ( isset( $this->languageCache[$languageCode][$mode] ) ) {
-			return $this->languageCache[$languageCode][$mode];
+		if ( !isset( $this->languageCache[$languageCode][$mode] ) ) {
+			$chain = $this->buildFromLanguage( $languageCode, $mode );
+			$this->languageCache[$languageCode][$mode] = new LanguageFallbackChain( $chain );
 		}
 
-		$chain = $this->buildFromLanguage( $languageCode, $mode );
-		$languageFallbackChain = new LanguageFallbackChain( $chain );
-
-		$this->languageCache[$languageCode][$mode] = $languageFallbackChain;
-
-		return $languageFallbackChain;
+		return $this->languageCache[$languageCode][$mode];
 	}
 
 	/**
