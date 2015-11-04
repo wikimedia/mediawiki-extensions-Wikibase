@@ -97,9 +97,7 @@ class OutputFormatValueFormatterFactory {
 	 * @todo: this shouldn't be public at all. Perhaps factor it out into a helper class.
 	 */
 	public function applyLanguageDefaults( FormatterOptions $options ) {
-		if ( !$options->hasOption( ValueFormatter::OPT_LANG ) ) {
-			$options->setOption( ValueFormatter::OPT_LANG, $this->defaultLanguage->getCode() );
-		}
+		$options->defaultOption( ValueFormatter::OPT_LANG, $this->defaultLanguage->getCode() );
 
 		$lang = $options->getOption( ValueFormatter::OPT_LANG );
 		if ( !is_string( $lang ) ) {

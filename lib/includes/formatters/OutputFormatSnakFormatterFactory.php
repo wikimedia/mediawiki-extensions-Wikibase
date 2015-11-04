@@ -61,7 +61,6 @@ class OutputFormatSnakFormatterFactory {
 	 * @return SnakFormatter
 	 */
 	public function getSnakFormatter( $format, FormatterOptions $options ) {
-		$options->defaultOption( SnakFormatter::OPT_LANG, 'en' );
 		$options->defaultOption( SnakFormatter::OPT_ON_ERROR, SnakFormatter::ON_ERROR_WARN );
 
 		$this->valueFormatterFactory->applyLanguageDefaults( $options );
