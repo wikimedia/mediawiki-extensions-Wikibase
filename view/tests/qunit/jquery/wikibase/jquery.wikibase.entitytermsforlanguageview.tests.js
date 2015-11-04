@@ -39,19 +39,6 @@ var createEntitytermsforlanguageview = function( options, $node ) {
 		.addClass( 'test_entitytermsforlanguageview' )
 		.entitytermsforlanguageview( options );
 
-	var entitytermsforlanguageview
-		= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
-
-	entitytermsforlanguageview.$labelview.data( 'labelview' )._save
-		= entitytermsforlanguageview.$aliasesview.data( 'aliasesview' )._save
-		= function() {
-			return $.Deferred().resolve( {
-				entity: {
-					lastrevid: 'I am a revision id'
-				}
-			} ).promise();
-		};
-
 	return $entitytermsforlanguageview;
 };
 
