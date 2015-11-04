@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_e44f5a6c",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-04T13:01:23Z",
+      "side": 1,
+      "message": "empty line between these statements would have been nice.",
+      "revId": "b01a7cfce4346c6481fa9b73efcf831191569a1d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
