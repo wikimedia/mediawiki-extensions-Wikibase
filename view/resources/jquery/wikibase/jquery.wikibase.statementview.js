@@ -333,7 +333,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 				$newLi
 				.on( lia.prefixedEvent( 'afterstopediting' ), function( event, dropValue ) {
 					if ( dropValue ) {
-						self._referencesListview.removeItem( $newLi );
+						//self._referencesListview.removeItem( $newLi );
 					} else {
 						var newReferenceWithHash = liInstance.value();
 
@@ -688,11 +688,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_stopEditingReferences: function() {
+	_stopEditingReferences: function( dropValue ) {
 		$.each( this._referencesListview.value(), function ( key, referenceView ) {
+			if( !dropValue ){
+				referenceView.value( referenceView.value() );
+			}
 			referenceView.stopEditing();
 		} );
-
 	},
 
 	/**
