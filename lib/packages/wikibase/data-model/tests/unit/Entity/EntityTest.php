@@ -398,7 +398,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $entity->getId(), $instance->getId() );
 	}
 
-
 	/**
 	 * @dataProvider instanceProvider
 	 * @param Entity $entity

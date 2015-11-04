@@ -233,7 +233,6 @@ class ItemTest extends EntityTest {
 		$this->assertTrue( $item->getStatements()->isEmpty(), 'should be empty again' );
 	}
 
-
 	public function testEmptyItemReturnsEmptySiteLinkList() {
 		$item = new Item();
 		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
