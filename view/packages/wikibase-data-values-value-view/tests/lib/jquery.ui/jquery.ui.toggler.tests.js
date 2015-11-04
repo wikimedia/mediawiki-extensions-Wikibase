@@ -61,4 +61,22 @@
 		);
 	} );
 
+	QUnit.test( 'Toggle toggler', 2, function( assert ) {
+		var toggler = newTestToggler();
+
+		assert.equal(
+				toggler.isCollapsed(),
+				true,
+				'Toggler is initially collapsed'
+		);
+
+		toggler.toggle();
+
+		assert.equal(
+				toggler.isCollapsed(),
+				false,
+				'Toggler is expanded after toggle'
+		);
+	} );
+
 }( jQuery, QUnit ) );
