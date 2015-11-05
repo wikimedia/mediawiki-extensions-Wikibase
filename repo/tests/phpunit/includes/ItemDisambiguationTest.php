@@ -43,9 +43,13 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 	 * @return ItemDisambiguation
 	 */
 	private function newItemDisambiguation() {
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
 		return new ItemDisambiguation(
 			$this->getMockEntityTitleLookup(),
-			new LanguageNameLookup(),
+			$languageNameLookup,
 			'en'
 		);
 	}

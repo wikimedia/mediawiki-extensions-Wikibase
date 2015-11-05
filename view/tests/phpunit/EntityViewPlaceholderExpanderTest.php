@@ -59,6 +59,10 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
 
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
 		return new EntityViewPlaceholderExpander(
 			$templateFactory,
 			$title,
@@ -68,7 +72,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			$entityRevisionLookup,
 			$userLanguages,
 			new WikibaseContentLanguages(),
-			new LanguageNameLookup()
+			$languageNameLookup
 		);
 	}
 

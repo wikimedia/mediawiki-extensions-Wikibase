@@ -40,13 +40,17 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			->method( 'getLanguages' )
 			->will( $this->returnValue( array( 'en', 'es', 'ru' ) ) );
 
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
 		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
 			$userLanguageLookup,
 			$contentLanguages,
 			new BasicEntityIdParser(),
 			$this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' ),
-			new LanguageNameLookup(),
+			$languageNameLookup,
 			new EntityContentFactory( array() )
 		);
 

@@ -167,12 +167,16 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 	private function getSiteLinksView() {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
 		return new SiteLinksView(
 			$templateFactory,
 			$this->newSiteList(),
 			$this->getEditSectionGeneratorMock(),
 			$this->getEntityIdFormatterMock(),
-			new LanguageNameLookup(),
+			$languageNameLookup,
 			array(
 				'Q42' => 'wb-badge-featuredarticle',
 				'Q12' => 'wb-badge-goodarticle'

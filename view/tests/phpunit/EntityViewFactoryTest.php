@@ -6,9 +6,12 @@ use DataTypes\DataTypeFactory;
 use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\EntityViewFactory
@@ -32,18 +35,63 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Thiemo Mättig
  */
 class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
+
+	private function newEntityViewFactory(
+		EntityIdFormatterFactory $htmlFactory = null,
+		EntityIdFormatterFactory $plainFactory = null
+	) {
+		$templateFactory = new TemplateFactory( new TemplateRegistry() );
+
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
+		return new EntityViewFactory(
+			$htmlFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML ),
+			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
+			$this->getSnakFormatterFactory(),
+			$this->getSiteStore(),
+			new DataTypeFactory( array() ),
+			$templateFactory,
+			$languageNameLookup,
+			array(),
+			array(),
+			array()
+		);
+	}
+
+	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 */
+	public function testConstructorThrowsException(
+		EntityIdFormatterFactory $htmlFormatterFactory,
+		EntityIdFormatterFactory $plainFormatterFactory
+	) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->newEntityViewFactory( $htmlFormatterFactory, $plainFormatterFactory );
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		$htmlFactory = $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML );
+		$plainFactory = $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN );
+		$wikiFactory = $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_WIKI );
+
+		return array(
+			array( $wikiFactory, $plainFactory ),
+			array( $htmlFactory, $wikiFactory ),
+		);
+	}
 
 	/**
 	 * @dataProvider newEntityViewProvider
 	 */
 	public function testNewEntityView( $expectedClass, $entityType ) {
-		$entityViewFactory = $this->getEntityViewFactory();
-
 		$languageFallback = new LanguageFallbackChain( array() );
 
-		$entityView = $entityViewFactory->newEntityView(
+		$entityView = $this->newEntityViewFactory()->newEntityView(
 			$entityType,
 			'de',
 			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
@@ -62,35 +110,16 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewEntityView_withInvalidType() {
-		$entityViewFactory = $this->getEntityViewFactory();
-
 		$languageFallback = new LanguageFallbackChain( array() );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 
-		$entityViewFactory->newEntityView(
+		$this->newEntityViewFactory()->newEntityView(
 			'kittens',
 			'de',
 			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
 			$languageFallback,
 			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
-		);
-	}
-
-	private function getEntityViewFactory() {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-
-		return new EntityViewFactory(
-			$this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML ),
-			$this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
-			$this->getSnakFormatterFactory(),
-			$this->getSiteStore(),
-			new DataTypeFactory( array() ),
-			$templateFactory,
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
-			array(),
-			array(),
-			array()
 		);
 	}
 

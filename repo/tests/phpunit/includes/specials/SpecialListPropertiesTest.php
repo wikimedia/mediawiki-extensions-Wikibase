@@ -98,10 +98,14 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	protected function newSpecialPage() {
 		$specialPage = new SpecialListProperties();
 
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
 		$specialPage->initServices(
 			$this->getDataTypeFactory(),
 			$this->getPropertyInfoStore(),
-			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), new LanguageNameLookup() ),
+			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), $languageNameLookup ),
 			new LanguageFallbackChainFactory(),
 			$this->getEntityTitleLookup(),
 			$this->getBufferingTermLookup()
