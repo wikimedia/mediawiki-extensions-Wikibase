@@ -23,6 +23,7 @@ use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
@@ -149,7 +150,7 @@ final class WikibaseClient {
 	private $langLinkHandler = null;
 
 	/**
-	 * @var ParserOutputDataUpdater|null
+	 * @var ClientParserOutputDataUpdater|null
 	 */
 	private $parserOutputDataUpdater = null;
 
@@ -690,11 +691,11 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return ParserOutputDataUpdater
+	 * @return ClientParserOutputDataUpdater
 	 */
 	public function getParserOutputDataUpdater() {
 		if ( $this->parserOutputDataUpdater === null ) {
-			$this->parserOutputDataUpdater = new ParserOutputDataUpdater(
+			$this->parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getStore()->getSiteLinkLookup(),
 				$this->getStore()->getEntityLookup(),

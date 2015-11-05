@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client;
+namespace Wikibase\Client\ParserOutput;
 
 use InvalidArgumentException;
 use ParserOutput;
@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserOutputDataUpdater {
+class ClientParserOutputDataUpdater {
 
 	/**
 	 * @var OtherProjectsSidebarGeneratorFactory

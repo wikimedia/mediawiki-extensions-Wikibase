@@ -96,7 +96,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetParserOutputDataUpdaterType() {
 		$returnValue = $this->getWikibaseClient()->getParserOutputDataUpdater();
-		$this->assertInstanceOf( 'Wikibase\Client\ParserOutputDataUpdater', $returnValue );
+		$this->assertInstanceOf( 'Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater', $returnValue );
 	}
 
 	/**

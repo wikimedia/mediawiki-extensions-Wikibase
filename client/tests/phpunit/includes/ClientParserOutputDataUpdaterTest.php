@@ -2,11 +2,12 @@
 
 namespace Wikibase\Client\Tests;
 
+use MediaWikiLangTestCase;
 use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
-use Wikibase\Client\ParserOutputDataUpdater;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
@@ -15,7 +16,7 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Test\MockRepository;
 
 /**
- * @covers Wikibase\Client\ParserOutputDataUpdater
+ * @covers Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -25,7 +26,7 @@ use Wikibase\Test\MockRepository;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
+class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @var MockRepository|null
@@ -59,16 +60,16 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 	/**
 	 * @param string[] $otherProjects
 	 *
-	 * @return ParserOutputDataUpdater
+	 * @return ClientParserOutputDataUpdater
 	 */
-	private function getParserOutputDataUpdater( array $otherProjects = array() ) {
+	private function newInstance( array $otherProjects = array() ) {
 		$this->mockRepo = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
 			$this->mockRepo->putEntity( $item );
 		}
 
-		return new ParserOutputDataUpdater(
+		return new ClientParserOutputDataUpdater(
 			$this->getOtherProjectsSidebarGeneratorFactory( $otherProjects ),
 			$this->mockRepo,
 			$this->mockRepo,
@@ -120,9 +121,9 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 		$titleText = 'Foo sr';
 		$title = Title::newFromText( $titleText );
 
-		$parserOutputDataUpdater = $this->getParserOutputDataUpdater();
+		$instance = $this->newInstance();
 
-		$parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
+		$instance->updateItemIdProperty( $title, $parserOutput );
 		$property = $parserOutput->getProperty( 'wikibase_item' );
 
 		$itemId = $this->mockRepo->getItemIdForLink( 'srwiki', $titleText );
@@ -145,9 +146,9 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 		$titleText = 'Foo xx';
 		$title = Title::newFromText( $titleText );
 
-		$parserOutputDataUpdater = $this->getParserOutputDataUpdater();
+		$instance = $this->newInstance();
 
-		$parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );
+		$instance->updateItemIdProperty( $title, $parserOutput );
 		$property = $parserOutput->getProperty( 'wikibase_item' );
 
 		$this->assertFalse( $property );
@@ -160,9 +161,9 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 		$parserOutput = new ParserOutput();
 		$title = Title::newFromText( $titleText );
 
-		$parserOutputDataUpdater = $this->getParserOutputDataUpdater( $otherProjects );
+		$instance = $this->newInstance( $otherProjects );
 
-		$parserOutputDataUpdater->updateOtherProjectsLinksData( $title, $parserOutput );
+		$instance->updateOtherProjectsLinksData( $title, $parserOutput );
 		$extensionData = $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' );
 
 		$this->assertEquals( $expected, $extensionData );
@@ -198,9 +199,9 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 
 		$title = Title::newFromText( 'Talk:Foo sr' );
 
-		$parserOutputDataUpdater = $this->getParserOutputDataUpdater();
+		$instance = $this->newInstance();
 
-		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		$instance->updateBadgesProperty( $title, $parserOutput );
 		$this->assertTrue( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
 	}
 
@@ -210,9 +211,9 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 
 		$title = Title::newFromText( 'Foo sr' );
 
-		$parserOutputDataUpdater = $this->getParserOutputDataUpdater();
+		$instance = $this->newInstance();
 
-		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		$instance->updateBadgesProperty( $title, $parserOutput );
 		$this->assertFalse( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
 	}
 
@@ -232,7 +233,7 @@ class ParserOutputDataUpdaterTest extends \MediaWikiLangTestCase {
 			$mockRepoNoSiteLinks->putEntity( $itemNoSiteLinks );
 		}
 
-		$parserOutputDataUpdater = new ParserOutputDataUpdater(
+		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
 			$siteLinkLookup,
 			$mockRepoNoSiteLinks,
