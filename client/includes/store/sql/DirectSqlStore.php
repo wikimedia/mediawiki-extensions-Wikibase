@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use HashBagOStuff;
 use ObjectCache;
+use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Store\TitleFactory;
@@ -234,6 +235,15 @@ class DirectSqlStore implements ClientStore {
 		}
 
 		return $this->localConnectionManager;
+	}
+
+	/**
+	 * @return RecentChangesDuplicateDetector
+	 */
+	public function getRecentChangesDuplicateDetector() {
+		return new RecentChangesDuplicateDetector(
+			$this->getLocalConnectionManager()
+		);
 	}
 
 	/**
