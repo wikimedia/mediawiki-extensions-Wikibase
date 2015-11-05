@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnMove
+ * @covers Wikibase\Client\UpdateRepo\UpdateRepo
  *
  * @group WikibaseClient
  * @group Test

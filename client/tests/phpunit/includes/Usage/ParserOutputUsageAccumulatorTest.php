@@ -7,6 +7,7 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
  * @covers Wikibase\Client\Usage\ParserOutputUsageAccumulator
+ * @covers Wikibase\Client\Usage\UsageAccumulator
  *
  * @group Wikibase
  * @group WikibaseClient
