@@ -28,7 +28,7 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider doOutputPageBeforeHtmlRegisterConfigProvider
 	 */
-	public function testDoOutputPageBeforeHtmlRegisterConfig( array $expected, Title $title, $experimental, $message ) {
+	public function testDoOutputPageBeforeHtmlRegisterConfig( array $expected, Title $title, $message ) {
 		$entityNamespaceLookup = new EntityNamespaceLookup( array( $title->getNamespace() ) );
 
 		$hookHandler = new OutputPageJsConfigHookHandler( $entityNamespaceLookup, 'https://creativecommons.org', 'CC-0', array() );
@@ -38,11 +38,11 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 
 		$output = $context->getOutput();
 
-		$hookHandler->doOutputPageBeforeHtmlRegisterConfig( $output, $experimental );
+		$hookHandler->doOutputPageBeforeHtmlRegisterConfig( $output );
 
 		$configVars = $output->getJsConfigVars();
 
-		$this->assertEquals( $experimental, $configVars['wbExperimentalFeatures'], 'experimental' );
+		$this->assertEquals( false, $configVars['wbExperimentalFeatures'], 'experimental (b/c, always false)' );
 		$this->assertEquals( $expected, array_keys( $configVars ), $message );
 	}
 

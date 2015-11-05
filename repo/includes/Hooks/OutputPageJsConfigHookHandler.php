@@ -81,7 +81,7 @@ class OutputPageJsConfigHookHandler {
 	 */
 	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
 		$instance = self::newFromGlobalState();
-		return $instance->doOutputPageBeforeHtmlRegisterConfig( $out, $html );
+		return $instance->doOutputPageBeforeHtmlRegisterConfig( $out );
 	}
 
 	/**
@@ -90,40 +90,36 @@ class OutputPageJsConfigHookHandler {
 	 *
 	 * @return bool
 	 */
-	public function doOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
+	public function doOutputPageBeforeHtmlRegisterConfig( OutputPage $out ) {
 		if ( !$this->entityNamespaceLookup->isEntityNamespace( $out->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
-		$isExperimental = defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES;
-		$this->handle( $out, $isExperimental );
+		$this->handle( $out );
 
 		return true;
 	}
 
 	/**
 	 * @param OutputPage &$out
-	 * @param boolean $isExperimental
 	 */
-	private function handle( OutputPage $out, $isExperimental ) {
-		$outputConfigVars = $this->buildConfigVars( $out, $isExperimental );
+	private function handle( OutputPage $out ) {
+		$outputConfigVars = $this->buildConfigVars( $out );
 
 		$out->addJsConfigVars( $outputConfigVars );
 	}
 
 	/**
 	 * @param OutputPage $out
-	 * @param boolean $isExperimental
 	 *
 	 * @return array
 	 */
-	private function buildConfigVars( OutputPage $out, $isExperimental ) {
+	private function buildConfigVars( OutputPage $out ) {
 		return $this->outputPageConfigBuilder->build(
 			$out,
 			$this->dataRightsUrl,
 			$this->dataRightsText,
-			$this->badgeItems,
-			$isExperimental
+			$this->badgeItems
 		);
 	}
 

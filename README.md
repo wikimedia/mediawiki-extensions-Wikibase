@@ -36,13 +36,6 @@ This package contains three interrelated MediaWiki extensions:
 * WikibaseLib (in the subdirectory lib)
 * Wikibase Client (in the subdirectory client)
 
-In order to enable experimental features for the extensions, put the below line before the inclusion
-of the extensions in your LocalSettings.php file:
-
-```php
-define( 'WB_EXPERIMENTAL_FEATURES', true );
-```
-
 If you are running Wikibase with hhvm, you need to enable [zend compat](http://docs.hhvm.com/manual/en/configuration.zend.compat.php)
 in your php.ini:
 

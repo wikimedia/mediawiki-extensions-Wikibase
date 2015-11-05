@@ -356,9 +356,7 @@ final class WikibaseClient {
 	 */
 	public function getLanguageFallbackChainFactory() {
 		if ( $this->languageFallbackChainFactory === null ) {
-			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory(
-				defined( 'WB_EXPERIMENTAL_FEATURES' ) && WB_EXPERIMENTAL_FEATURES
-			);
+			$this->languageFallbackChainFactory = new LanguageFallbackChainFactory();
 		}
 
 		return $this->languageFallbackChainFactory;

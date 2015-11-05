@@ -55,11 +55,6 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		return $content;
 	}
 
-	private function itemSupportsRedirects() {
-		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-		return $handler->supportsRedirects();
-	}
-
 	/**
 	 * @param ItemId $id
 	 * @param ItemId $target
@@ -68,10 +63,6 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 * @return EntityContent
 	 */
 	protected function makeItemRedirectContent( ItemId $id, ItemId $target ) {
-		if ( !$this->itemSupportsRedirects() ) {
-			throw new RuntimeException( 'Redirects are not yet supported.' );
-		}
-
 		$title = Title::newFromText( $target->getSerialization() );
 		$redirect = new EntityRedirect( $id, $target );
 		$content = ItemContent::newFromRedirect( $redirect, $title );
@@ -137,12 +128,6 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	}
 
 	public function testNotifyOnPageDeleted_redirect() {
-		if ( !$this->itemSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$this->markTestSkipped( 'Redirects not yet supported.' );
-		}
-
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$timestamp = '20140523' . '174822';
 		$content = $this->makeItemRedirectContent( new ItemId( 'Q12' ), new ItemId( 'Q17' ) );
@@ -190,12 +175,6 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	}
 
 	public function testNotifyOnPageUndeleted_redirect() {
-		if ( !$this->itemSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$this->markTestSkipped( 'Redirects not yet supported.' );
-		}
-
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$user->setId( 17 );
 
@@ -235,12 +214,6 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	}
 
 	public function testNotifyOnPageCreated_redirect() {
-		if ( !$this->itemSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$this->markTestSkipped( 'Redirects not yet supported.' );
-		}
-
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$timestamp = '20140523' . '174822';
 		$revisionId = 12345;
@@ -282,12 +255,6 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	}
 
 	public function testNotifyOnPageModified_redirect() {
-		if ( !$this->itemSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$this->markTestSkipped( 'Redirects not yet supported.' );
-		}
-
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$timestamp = '20140523' . '174822';
 		$revisionId = 12345;
@@ -305,12 +272,6 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	}
 
 	public function testNotifyOnPageModified_from_redirect() {
-		if ( !$this->itemSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$this->markTestSkipped( 'Redirects not yet supported.' );
-		}
-
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$timestamp = '20140523' . '174822';
 		$revisionId = 12345;
@@ -337,12 +298,6 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	}
 
 	public function testNotifyOnPageModified_to_redirect() {
-		if ( !$this->itemSupportsRedirects() ) {
-			// As of 2014-06-30, redirects are still experimental.
-			// So do a feature check before trying to test redirects.
-			$this->markTestSkipped( 'Redirects not yet supported.' );
-		}
-
 		$user = $this->makeUser( 'ChangeNotifierTestUser' );
 		$timestamp = '20140523' . '174822';
 		$revisionId = 12345;
