@@ -69,6 +69,24 @@
       "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_af51323c",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetLabelDescriptionAliasesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-05T17:44:02Z",
+      "side": 1,
+      "message": "can you suggest how would we test for unicode normalization here, with the input coming from the faux/web request?\n\nI\u0027ve looked at different ways and not sure for stuff like incomplete bytes...\n\nthis is also getting into implementation details of StringNormalizer, though perhaps nice to test we do the integration right",
+      "parentUuid": "0ebaf39b_f0808ac6",
+      "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
