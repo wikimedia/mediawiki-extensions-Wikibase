@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Test;
 
 use PHPUnit_Framework_TestCase;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 
@@ -23,7 +24,7 @@ class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 		return new EntityIdHtmlLinkFormatterFactory(
 			$titleLookup,
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' )
+			new LanguageNameLookup()
 		);
 	}
 

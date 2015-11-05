@@ -6,9 +6,11 @@ use DataTypes\DataTypeFactory;
 use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\EntityViewFactory
@@ -34,6 +36,23 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
+
+	public function constructorThrowsException() {
+		$idFormatterFactory = $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_WIKI );
+		$this->setExpectedException( 'InvalidArgumentException' );
+		return new EntityViewFactory(
+			$idFormatterFactory,
+			$idFormatterFactory,
+			$this->getSnakFormatterFactory(),
+			$this->getSiteStore(),
+			new DataTypeFactory( array() ),
+			new TemplateFactory( new TemplateRegistry() ),
+			new LanguageNameLookup(),
+			array(),
+			array(),
+			array()
+		);
+	}
 
 	/**
 	 * @dataProvider newEntityViewProvider
@@ -87,7 +106,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getSiteStore(),
 			new DataTypeFactory( array() ),
 			$templateFactory,
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
+			new LanguageNameLookup(),
 			array(),
 			array(),
 			array()
