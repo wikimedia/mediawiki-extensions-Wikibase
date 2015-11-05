@@ -7,16 +7,28 @@
 			"An13sa"
 		]
 	},
+	"apihelp-query+pageterms-example-item": "Lortu Q84 elementuaren etiketak eta aliasak.",
+	"wikibase-comment-add": "{{WBREPONAME}} elementua sortu da.",
 	"wikibase-comment-update": "{{WBREPONAME}} elementua aldatua",
 	"wikibase-dataitem": "{{WBREPONAME}} itema",
 	"wikibase-editlinks": "Aldatu loturak",
 	"wikibase-editlinkstitle": "Aldatu hizkuntzen arteko loturak",
+	"wikibase-addlinkstitle": "Hizkuntzen arteko loturak gehitu",
+	"wikibase-linkitem-addlinks": "Gehitu loturak",
+	"wikibase-linkitem-title": "Orriarekin lotu",
+	"wikibase-linkitem-linkpage": "Orriarekin lotu",
 	"wikibase-linkitem-input-site": "Hizkuntza:",
+	"wikibase-linkitem-input-page": "Orria:",
+	"wikibase-linkitem-confirmitem-button": "Berretsi",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ezkutatu",
 	"wikibase-rc-hide-wikidata-show": "Erakutsi",
+	"wikibase-rc-show-wikidata-pref": "Erakutsi {{WBREPONAME}} edizioak azken aldaketetan",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Aldaketa hau {{WBREPONAME}}n egin da",
+	"wikibase-unconnectedpages-submit": "Erakutsi oŕriak",
 	"wikibase-pageswithbadges-submit": "Erakutsi oŕriak",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} elementu IDa",
+	"wikibase-pageinfo-entity-id-none": "Bat ere ez",
 	"wikibase-otherprojects": "Beste proiektuak"
 }
