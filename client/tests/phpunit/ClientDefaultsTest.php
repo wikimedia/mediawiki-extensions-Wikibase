@@ -25,7 +25,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION,
+					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ),
 				),
 				array( // $wg
 					'wgServer' => 'http://www.acme.com',
@@ -41,7 +41,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION,
+					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ),
 				)
 			),
 
@@ -62,7 +62,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mw_mywiki',
 					'repoDatabase' => null,
 					'changesDatabase' => null,
-					'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION . '-mw_mywiki',
+					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-mw_mywiki',
 				)
 			),
 
@@ -74,7 +74,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'foo:WBL/' . WBL_VERSION,
+					'sharedCacheKeyPrefix' => 'foo:WBL/' . rawurlencode( WBL_VERSION ),
 				),
 				array( // $wg
 					'wgServer' => 'http://www.acme.com',
@@ -90,7 +90,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'foo:WBL/' . WBL_VERSION,
+					'sharedCacheKeyPrefix' => 'foo:WBL/' . rawurlencode( WBL_VERSION ),
 				)
 			),
 
@@ -111,7 +111,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mw_mywiki',
 					'repoDatabase' => false,
 					'changesDatabase' => false,
-					'sharedCacheKeyPrefix' => 'wikibase_shared/' . WBL_VERSION . '-mw_mywiki',
+					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-mw_mywiki',
 				)
 			),
 
