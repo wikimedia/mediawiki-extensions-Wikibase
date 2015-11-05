@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\Client\UpdateRepo\UpdateRepoOnDelete
+ * @covers Wikibase\Client\UpdateRepo\UpdateRepo
  *
  * @group WikibaseClient
  * @group Test
