@@ -12,7 +12,7 @@ use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
-use Wikibase\Client\ParserOutputDataUpdater;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
@@ -165,7 +165,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			Language::factory( 'en' )
 		);
 
-		$parserOutputDataUpdater = new ParserOutputDataUpdater(
+		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 			$this->getOtherProjectsSidebarGeneratorFactory( $settings, $mockRepo ),
 			$mockRepo,
 			$mockRepo,

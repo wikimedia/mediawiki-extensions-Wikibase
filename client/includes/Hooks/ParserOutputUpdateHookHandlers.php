@@ -6,7 +6,7 @@ use Content;
 use ParserOutput;
 use StubUserLang;
 use Title;
-use Wikibase\Client\ParserOutputDataUpdater;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\InterwikiSorter;
 use Wikibase\LangLinkHandler;
@@ -34,7 +34,7 @@ class ParserOutputUpdateHookHandlers {
 	private $langLinkHandler;
 
 	/**
-	 * @var ParserOutputDataUpdater
+	 * @var ClientParserOutputDataUpdater
 	 */
 	private $parserOutputDataUpdater;
 
@@ -91,14 +91,14 @@ class ParserOutputUpdateHookHandlers {
 	/**
 	 * @param NamespaceChecker $namespaceChecker
 	 * @param LangLinkHandler $langLinkHandler
-	 * @param ParserOutputDataUpdater $parserOutputDataUpdater
+	 * @param ClientParserOutputDataUpdater $parserOutputDataUpdater
 	 * @param InterwikiSorter $sorter
 	 * @param boolean $alwaysSort
 	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandler $langLinkHandler,
-		ParserOutputDataUpdater $parserOutputDataUpdater,
+		ClientParserOutputDataUpdater $parserOutputDataUpdater,
 		InterwikiSorter $sorter,
 		$alwaysSort
 	) {
