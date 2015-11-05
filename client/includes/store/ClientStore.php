@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
@@ -24,6 +25,13 @@ use Wikibase\Store\EntityIdLookup;
  * @author Daniel Kinzler
  */
 interface ClientStore {
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return RecentChangesDuplicateDetector|null
+	 */
+	public function getRecentChangeDuplicateDetector();
 
 	/**
 	 * @since 0.4

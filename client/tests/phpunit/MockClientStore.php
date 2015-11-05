@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\NullSubscriptionManager;
 use Wikibase\Client\Usage\NullUsageTracker;
@@ -157,6 +158,15 @@ class MockClientStore implements ClientStore {
 	 */
 	public function getEntityRevisionLookup() {
 		return $this->getMockRepository();
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return RecentChangesDuplicateDetector|null
+	 */
+	public function getRecentChangeDuplicateDetector() {
+		return null;
 	}
 
 	/**

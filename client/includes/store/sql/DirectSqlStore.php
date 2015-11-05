@@ -237,6 +237,15 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
+	 * @return RecentChangesDuplicateDetector
+	 */
+	public function getRecentChangeDuplicateDetector() {
+		return new RecentChangesDuplicateDetector(
+			$this->getLocalConnectionManager()
+		);
+	}
+
+	/**
 	 * @see ClientStore::getUsageLookup
 	 *
 	 * @note: If the useLegacyUsageIndex option is set, this returns a SiteLinkUsageLookup.
