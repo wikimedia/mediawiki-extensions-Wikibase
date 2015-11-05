@@ -336,7 +336,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 			'sitelink update' => array(
-				'(wikibase-comment-sitelink-change: [[:dewiki:Dummy]], [[:dewiki:Bummy]])',
+				'(wikibase-comment-sitelink-change: dewiki:Dummy, dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksDewikiBummy ),
 				array(),
@@ -345,7 +345,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 			'sitelink added' => array(
-				'(wikibase-comment-sitelink-add: [[:dewiki:Bummy]])',
+				'(wikibase-comment-sitelink-add: dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksEmpty, $linksDewikiBummy ),
 				array(),
@@ -354,7 +354,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 			'sitelink removed' => array(
-				'(wikibase-comment-sitelink-remove: [[:dewiki:Dummy]])',
+				'(wikibase-comment-sitelink-remove: dewiki:Dummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksEmpty ),
 				array(),
