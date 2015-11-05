@@ -6,6 +6,7 @@ use Language;
 use MediaWikiLangTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TextInjector;
@@ -52,7 +53,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		return new EntityTermsView(
 			$templateFactory,
 			$editSectionGenerator,
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' ),
+			new LanguageNameLookup(),
 			$languageCode
 		);
 	}
