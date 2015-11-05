@@ -8,7 +8,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @covers Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseView
  *
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
