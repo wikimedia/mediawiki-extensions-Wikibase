@@ -105,6 +105,24 @@
       "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2c622dd5",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialSetLabelDescriptionAliasesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-05T19:17:48Z",
+      "side": 1,
+      "message": "Try \"A\\xC3\" as an alias value. The \\xC3 should get stripped, since it\u0027s an incomplete multi-byte character.\nTry \"A\\xCC\\x88B\", it should be turned into \"\\xC3\\84B\" by NFC normalization.",
+      "parentUuid": "0ebaf39b_af51323c",
+      "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
