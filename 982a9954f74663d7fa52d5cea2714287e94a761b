@@ -16,6 +16,24 @@
       "revId": "982a9954f74663d7fa52d5cea2714287e94a761b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b92504ab",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-05T11:24:28Z",
+      "side": 1,
+      "message": "i don\u0027t understand... we don\u0027t have interwiki ids for sister projects in the site_identifiers table nor a nice way to obtain and populate them.\n\nthey could go in the site identifiers table or we could have an on-the-fly mechanism instead of having / using site_identifiers.  I don\u0027t care which and when we have the mechanism then both are equally easy and then we choose which is more performant.\n\nI already included the phabricator ticket number here for this issue.",
+      "parentUuid": "0ebaf39b_12e0b091",
+      "revId": "982a9954f74663d7fa52d5cea2714287e94a761b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
