@@ -16,6 +16,24 @@
       "revId": "5462f8fdecd5c9bb89f2b5361a63d8a3ec5fcf5d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_be072acc",
+        "filename": "view/tests/qunit/wikibase/view/testViewController.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-05T08:19:35Z",
+      "side": 1,
+      "message": "Do you mean the idea or the implementation of this test?",
+      "parentUuid": "0ebaf39b_87aea093",
+      "revId": "5462f8fdecd5c9bb89f2b5361a63d8a3ec5fcf5d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
