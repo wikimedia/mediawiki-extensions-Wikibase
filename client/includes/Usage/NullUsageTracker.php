@@ -68,7 +68,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 * @return Iterator<PageEntityUsages>
 	 */
 	public function getPagesUsing( array $entities, array $aspects = array() ) {
-		return new ArrayIterator( array() );
+		return new ArrayIterator();
 	}
 
 }
