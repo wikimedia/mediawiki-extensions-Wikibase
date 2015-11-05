@@ -16,6 +16,24 @@
       "revId": "92d750978b0658a54472290069f1536896bba67e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ef8dead8",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-05T17:38:01Z",
+      "side": 0,
+      "message": "It *does* all the processing that\u0027s specific for an item. Again, nothing really wrong here.",
+      "parentUuid": "0ebaf39b_af7372ae",
+      "revId": "92d750978b0658a54472290069f1536896bba67e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
