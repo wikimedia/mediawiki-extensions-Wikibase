@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_af7372ae",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-11-05T16:30:14Z",
+      "side": 0,
+      "message": "Note how the name of this method used to be off, as it does not all the processing needed for an item, just part of it. This kind of mistake is almost automatically avoided if you only pass along the things actually needed.",
+      "revId": "92d750978b0658a54472290069f1536896bba67e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
