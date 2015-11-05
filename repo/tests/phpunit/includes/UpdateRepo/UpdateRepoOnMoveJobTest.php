@@ -13,6 +13,7 @@ use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob
+ * @covers Wikibase\Repo\UpdateRepo\UpdateRepoJob
  *
  * @group Wikibase
  * @group WikibaseRepo

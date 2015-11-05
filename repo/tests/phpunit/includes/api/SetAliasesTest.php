@@ -4,6 +4,7 @@ namespace Wikibase\Test\Repo\Api;
 
 /**
  * @covers Wikibase\Repo\Api\SetAliases
+ * @covers Wikibase\Repo\Api\ModifyEntity
  *
  * @group Database
  * @group medium

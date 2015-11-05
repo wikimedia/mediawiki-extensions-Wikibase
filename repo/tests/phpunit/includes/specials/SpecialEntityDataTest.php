@@ -21,6 +21,7 @@ use Wikibase\Repo\Specials\SpecialEntityData;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntityData
+ * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Database
  *

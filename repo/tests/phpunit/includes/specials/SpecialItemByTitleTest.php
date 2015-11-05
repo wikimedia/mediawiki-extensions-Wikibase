@@ -14,6 +14,7 @@ use Wikibase\Repo\Specials\SpecialItemByTitle;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialItemByTitle
+ * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group WikibaseRepo

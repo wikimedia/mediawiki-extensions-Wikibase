@@ -8,6 +8,8 @@ use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntitiesWithoutPage
+ * @covers Wikibase\Repo\Specials\SpecialWikibaseQueryPage
+ * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group WikibaseRepo
