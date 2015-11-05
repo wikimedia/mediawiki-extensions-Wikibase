@@ -42,7 +42,6 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 
 		$configVars = $output->getJsConfigVars();
 
-		$this->assertEquals( false, $configVars['wbExperimentalFeatures'], 'experimental (b/c, always false)' );
 		$this->assertEquals( $expected, array_keys( $configVars ), $message );
 	}
 
@@ -51,8 +50,7 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 			'wbUserIsBlocked',
 			'wbUserCanEdit',
 			'wbCopyright',
-			'wbBadgeItems',
-			'wbExperimentalFeatures'
+			'wbBadgeItems'
 		);
 
 		$entityId = new ItemId( 'Q4' );

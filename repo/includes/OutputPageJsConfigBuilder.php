@@ -47,8 +47,6 @@ class OutputPageJsConfigBuilder {
 		$configVars = array_merge( $userConfigVars, $copyrightConfig );
 
 		$configVars['wbBadgeItems'] = $badgeItems;
-		// For b/c, remove after verifying that no one uses this anymore
-		$configVars['wbExperimentalFeatures'] = false;
 
 		return $configVars;
 	}
