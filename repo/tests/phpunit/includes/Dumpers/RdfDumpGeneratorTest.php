@@ -19,6 +19,7 @@ use Wikibase\Test\Rdf\RdfBuilderTest;
 
 /**
  * @covers Wikibase\Dumpers\RdfDumpGenerator
+ * @covers Wikibase\Dumpers\DumpGenerator
  *
  * @group Wikibase
  * @group WikibaseRepo

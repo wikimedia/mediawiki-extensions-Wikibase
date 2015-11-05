@@ -10,6 +10,7 @@ use Wikibase\PropertyContent;
 
 /**
  * @covers Wikibase\PropertyContent
+ * @covers Wikibase\EntityContent
  *
  * @group Database
  * @group Wikibase

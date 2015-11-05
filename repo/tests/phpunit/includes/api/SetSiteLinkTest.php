@@ -8,6 +8,7 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Api\SetSiteLink
+ * @covers Wikibase\Repo\Api\ModifyEntity
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >

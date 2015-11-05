@@ -4,6 +4,8 @@ namespace Wikibase\Test\Repo\Api;
 
 /**
  * @covers Wikibase\Repo\Api\SetLabel
+ * @covers Wikibase\Repo\Api\ModifyTerm
+ * @covers Wikibase\Repo\Api\ModifyEntity
  *
  * @group Database
  * @group medium

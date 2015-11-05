@@ -19,6 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialRedirectEntity
+ * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group SpecialPage

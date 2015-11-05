@@ -6,6 +6,9 @@ use Wikibase\Repo\Specials\SpecialNewProperty;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialNewProperty
+ * @covers Wikibase\Repo\Specials\SpecialNewEntity
+ * @covers Wikibase\Repo\Specials\SpecialWikibaseRepoPage
+ * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group WikibaseRepo

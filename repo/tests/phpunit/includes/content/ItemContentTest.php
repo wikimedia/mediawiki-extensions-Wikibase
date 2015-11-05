@@ -23,6 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\ItemContent
+ * @covers Wikibase\EntityContent
  *
  * @group Wikibase
  * @group WikibaseItem

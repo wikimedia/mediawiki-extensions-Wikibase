@@ -16,6 +16,8 @@ use Wikibase\Store\BufferingTermLookup;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialListProperties
+ * @covers Wikibase\Repo\Specials\SpecialWikibaseQueryPage
+ * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Database
  * @group SpecialPage

@@ -12,6 +12,7 @@ use Wikibase\SettingsArray;
 
 /**
  * @covers Wikibase\Repo\Content\PropertyHandler
+ * @covers Wikibase\Repo\Content\EntityHandler
  *
  * @group Wikibase
  * @group WikibaseRepo

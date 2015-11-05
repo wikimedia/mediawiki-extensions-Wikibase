@@ -7,6 +7,7 @@ use Wikibase\Repo\Specials\SpecialListDatatypes;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialListDatatypes
+ * @covers Wikibase\Repo\Specials\SpecialWikibasePage
  *
  * @group Wikibase
  * @group WikibaseRepo

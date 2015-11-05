@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
 
 /**
- * @covers Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
+ * @covers Wikibase\Repo\ParserOutput\GeoDataDataUpdater
  *
  * @group Wikibase
  * @group WikibaseRepo
