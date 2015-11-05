@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_eaf63859",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-05T18:54:56Z",
+      "side": 1,
+      "message": "I tried and found that this can not run in certain PHP versions because the method is protected but must be public to be accessed this way. I reworked this in PS3.",
+      "parentUuid": "0ebaf39b_930d983b",
+      "revId": "1b220fd74973184024e26f25af1323177a9b6f9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_5dc73416",
         "filename": "repo/tests/phpunit/includes/specials/SpecialSetLabelDescriptionAliasesTest.php",
         "patchSetId": 2
