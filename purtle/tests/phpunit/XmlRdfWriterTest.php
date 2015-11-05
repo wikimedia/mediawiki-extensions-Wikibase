@@ -7,6 +7,7 @@ use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @covers Wikimedia\Purtle\XmlRdfWriter
+ * @covers Wikimedia\Purtle\RdfWriterBase
  *
  * @group Purtle
  * @group RdfWriter
