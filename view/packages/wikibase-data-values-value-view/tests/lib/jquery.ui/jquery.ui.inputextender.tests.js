@@ -216,6 +216,10 @@
 		} );
 	} );
 
+	/**
+	 * @param {QUnit.assert} assert
+	 * @param {jQuery.ui.inputextender[]} inputExtenders
+	 */
 	function assertCurrentlyVisibleExtensions( assert, inputExtenders ) {
 		var visibleExtenders = $.ui.inputextender.getInstancesWithVisibleExtensions();
 		assert.ok(
@@ -236,12 +240,13 @@
 	 * then, the others.
 	 * After each step, getInstancesWithVisibleExtensions() will be tested for its return value.
 	 *
-	 * @param assert
-	 * @param inactiveExtenders
+	 * @param {QUnit.assert} assert
+	 * @param {jQuery.ui.inputextender[]} inactiveExtenders
+	 * @param {jQuery.ui.inputextender[]} activeExtenders private
 	 * @return {Object} jQuery.Promise
 	 */
 	function testGetInstancesWithVisibleExtensions(
-		assert, inactiveExtenders, /* private */ activeExtenders
+		assert, inactiveExtenders, activeExtenders
 	) {
 		activeExtenders = activeExtenders || [];
 
