@@ -34,6 +34,24 @@
       "revId": "982a9954f74663d7fa52d5cea2714287e94a761b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_599de859",
+        "filename": "client/includes/SiteLinkCommentCreator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-05T13:29:27Z",
+      "side": 1,
+      "message": "But there is a way to access them, they\u0027re just not populated. Your comment doesn\u0027t correctly reflect the actual problem (data is incomplete, but would be accessible, if present). Or am I wrong here?",
+      "parentUuid": "0ebaf39b_b92504ab",
+      "revId": "982a9954f74663d7fa52d5cea2714287e94a761b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
