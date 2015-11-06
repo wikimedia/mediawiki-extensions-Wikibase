@@ -16,7 +16,9 @@
         <testsuite name="WikibaseTests">
             <directory>client/tests/phpunit</directory>
             <directory>lib/tests/phpunit</directory>
+            <directory>purtle/tests/phpunit</directory>
             <directory>repo/tests/phpunit</directory>
+            <directory>view/tests/phpunit</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -27,9 +29,12 @@
             <directory suffix=".php">lib/includes</directory>
             <directory suffix=".php">lib/maintenance</directory>
 
+            <directory suffix=".php">purtle/src</directory>
+
             <directory suffix=".php">repo/includes</directory>
             <directory suffix=".php">repo/maintenance</directory>
+
+            <directory suffix=".php">view/src</directory>
         </whitelist>
     </filter>
 </phpunit>
-
