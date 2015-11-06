@@ -81,7 +81,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	private function decodeResult( ResultWrapper $res ) {
 		$infos = array();
 
-		while ( ( $row = $res->fetchObject() ) !== false ) {
+		foreach ( $res as $row ) {
 			$info = $this->decodeBlob( $row->pi_info );
 
 			if ( $info === null ) {

@@ -82,12 +82,16 @@ class ItemsPerSiteBuilder {
 	public function rebuild( EntityIdPager $entityIdPager ) {
 		$this->report( 'Start rebuild...' );
 
-		$i = 0;
-		while ( $ids = $entityIdPager->fetchIds( $this->batchSize ) ) {
-			$i = $i + $this->rebuildSiteLinks( $ids );
+		$total = 0;
+		while ( true ) {
+			$ids = $entityIdPager->fetchIds( $this->batchSize );
+			if ( !$ids ) {
+				break;
+			}
 
-			$this->report( 'Processed ' . $i . ' entities.' );
-		}
+			$total += $this->rebuildSiteLinks( $ids );
+			$this->report( 'Processed ' . $total . ' entities.' );
+		};
 
 		$this->report( 'Rebuild done.' );
 	}
