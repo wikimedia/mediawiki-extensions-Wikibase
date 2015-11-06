@@ -31,6 +31,9 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					return;
 				}
 
+				$listview.closest( '.wikibase-statementview' )
+					.data( 'statementview' ).startEditing();
+
 				listview.enterNewItem().done( function( $referenceview ) {
 					var referenceview = lia.liInstance( $referenceview );
 					referenceview.focus();

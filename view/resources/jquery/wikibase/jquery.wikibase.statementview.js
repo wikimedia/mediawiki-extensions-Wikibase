@@ -786,7 +786,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return false;
 		}
 
-		if ( this._hasInvalidReferences() ) {
+		if ( this._referencesListview && this._hasInvalidReferences() ) {
 			return false;
 		}
 
