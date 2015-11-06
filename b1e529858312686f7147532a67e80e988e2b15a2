@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_01ee0aeb",
+        "filename": "view/tests/phpunit/EntityViewFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-06T14:19:38Z",
+      "side": 1,
+      "message": "Which of the parameters is invalid? Why do we expect the exception? Wouldn\u0027t we need to ccheck each invalid case separately?",
+      "revId": "b1e529858312686f7147532a67e80e988e2b15a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
