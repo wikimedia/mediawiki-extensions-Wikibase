@@ -307,7 +307,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			'add label' => array(
 				$fooFingerprint,
 				'$id',
-				new FauxRequest( array( 'language' => 'en', 'label' => 'FOO' ), true ),
+				new FauxRequest( array(
+					'language' => 'en',
+					'label' => "FOO\xE2\x80\x82",
+					'aliases' => "\xE2\x80\x82",
+				), true ),
 				array(),
 				$this->makeFingerprint(
 					array( 'de' => 'foo', 'en' => 'FOO' )
@@ -338,7 +342,10 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			'set aliases' => array(
 				$fooFingerprint,
 				'$id',
-				new FauxRequest( array( 'language' => 'de', 'aliases' => 'foo|bar' ), true ),
+				new FauxRequest( array(
+					'language' => 'de',
+					'aliases' => "foo\xE2\x80\x82|bar",
+				), true ),
 				array(),
 				$this->makeFingerprint(
 					array( 'de' => 'foo' ),
