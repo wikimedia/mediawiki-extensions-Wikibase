@@ -319,6 +319,11 @@ $.widget( 'wikibase.statementview', PARENT, {
 				self._trigger( 'afterremove' );
 			}
 		} )
+		.on( lia.prefixedEvent( 'change.' + this.widgetName ),
+			function( event ) {
+				event.stopPropagation();
+				self._trigger( 'change' );
+			} )
 		.on( 'listviewenternewitem', function( event, $newLi ) {
 			if ( event.target !== $listview[0] ) {
 				return;
@@ -787,6 +792,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return false;
 		}
 
+		if ( this._hasInvalidReferences() ) {
+			return false;
+		}
+
 		if ( this._qualifiers ) {
 			snaklistviews = this._qualifiers.value();
 
@@ -800,6 +809,21 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 
 		return this._instantiateStatement( null ) instanceof wb.datamodel.Statement;
+	},
+
+	/**
+	 * @return {boolean}
+	 */
+	_hasInvalidReferences: function() {
+		var isInvalid = false;
+		$.each( this._referencesListview.value(), function ( key, referenceView ) {
+			if ( !referenceView.isValid() ) {
+				isInvalid = true;
+				return;
+			}
+		} );
+
+		return isInvalid;
 	},
 
 	/**
