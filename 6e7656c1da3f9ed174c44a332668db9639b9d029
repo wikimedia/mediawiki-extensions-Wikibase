@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_bb1411ee",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-06T09:55:15Z",
+      "side": 1,
+      "message": "meh... old php versions :(\n\nthis is all getting to be a lot of code for one method.  can be in a follow up but maybe these should be split further, such as extractLabel, extractAliases...",
+      "revId": "6e7656c1da3f9ed174c44a332668db9639b9d029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
