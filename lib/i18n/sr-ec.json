@@ -4,7 +4,8 @@
 			"Milicevic01",
 			"TheStefan12345",
 			"Милан Јелисавчић",
-			"Rancher"
+			"Rancher",
+			"Сербијана"
 		]
 	},
 	"wikibase-lib-desc": "Садржи заједничке функционалности за Викибазу и проширења за клијента Викибазе",
@@ -16,10 +17,10 @@
 	"wikibase-error-save-generic": "Дошло је до грешке приликом чувања и због тога промене не могу бити сачуване.",
 	"wikibase-error-remove-generic": "Дошло је до грешке приликом покушаја да се изврши уклањање. Ваше измене нису сачуване.",
 	"wikibase-error-save-timeout": "Тренутно имамо техничких потешкоћа и због тога ваша измена није сачувана.",
-	"wikibase-error-remove-timeout": "Тренутно имамо техничких потешкоћа и због тога ваше брисање није извршено.",
+	"wikibase-error-remove-timeout": "Тренутно имамо техничких потешкоћа. Ваше брисање није извршено.",
 	"wikibase-error-autocomplete-response": "Одговор сервера: $1",
 	"wikibase-error-ui-no-external-page": "Наведени чланак није пронађен на одговарајућем сајту.",
-	"wikibase-error-ui-edit-conflict": "Дошло је до сукоба измена. Молимо учитајте и сачувајте поново страну.",
+	"wikibase-error-ui-edit-conflict": "Дошло је до сукоба измена. Сачувате измене на локалном нивоу, поново учитајте страницу и сачувајте их.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитерација)",
 	"wikibase-quantitydetails-amount": "Количина",
 	"wikibase-quantitydetails-unit": "Јединица",

@@ -4,7 +4,8 @@
 			"Milicevic01",
 			"Rancher",
 			"Милан Јелисавчић",
-			"Srdjan m"
+			"Srdjan m",
+			"Сербијана"
 		]
 	},
 	"wikibase-desc": "Складиште структуираних података",
@@ -137,7 +138,7 @@
 	"wikibase-setlabeldescriptionaliases-submit": "Поставите назив, опис и псеудониме",
 	"wikibase-modifyentity-id": "ИД:",
 	"wikibase-modifyterm-language": "Код језика:",
-	"wikibase-mergeitems-success": "$1 је успешно спојена у $3.",
+	"wikibase-mergeitems-success": "$1 је успешно спојена у $3 и преусмерена.",
 	"special-dispatchstats": "Статистика дневника отпрема",
 	"wikibase-dispatchstats-no-stats": "Тренутно нема расположивих статистика.",
 	"wikibase-dispatchstats-changes": "Статистика дневника промена",
