@@ -119,32 +119,43 @@ class MwTimeIsoParser extends StringValueParser {
 		foreach ( self::$precisionMsgKeys as $precision => $msgKeysGroup ) {
 			foreach ( $msgKeysGroup as $msgKey ) {
 				$msg = new Message( $msgKey );
-				//FIXME: Use the language passed in options!
-				//The only reason we are not currently doing this is due to the formatting not currently Localizing
-				//See the fix me in: MwTimeIsoFormatter::getMessage
+				// FIXME: Use the language passed in options! The only reason we are not currently
+				// doing this is due to the formatting not currently localizing. See the fix me in
+				// MwTimeIsoFormatter::getMessage.
 				// TODO: Check other translations?
-				//$msg->inLanguage( $this->lang );
 				$msg->inLanguage( 'en' );
 				$msgText = $msg->text();
 				$isBceMsg = $this->isBceMsg( $msgKey );
 
 				list( $start, $end ) = explode( '$1', $msgText, 2 );
-				if ( preg_match( '/^\s*' . preg_quote( $start ) . '(.+?)' . preg_quote( $end ) . '\s*$/i', $value, $matches ) ) {
+				if ( preg_match(
+					'/^\s*'
+						. preg_quote( $start, '/' ) . '(.+?)'
+						. preg_quote( $end, '/' ) . '\s*$/i',
+					$value,
+					$matches
+				) ) {
 					list( , $number ) = $matches;
 					return $this->parseNumber( $number, $precision, $isBceMsg );
 				}
 
 				// If the msg string ends with BCE also check for BC
-				if ( substr_compare( $end, 'BCE', - 3, 3 ) === 0 ) {
-					if ( preg_match( '/^\s*' . preg_quote( $start ) . '(.+?)' . preg_quote( substr( $end, 0, -1 ) ) . '\s*$/i', $value, $matches ) ) {
+				if ( substr_compare( $end, 'BCE', -3 ) === 0 ) {
+					if ( preg_match(
+						'/^\s*'
+							. preg_quote( $start, '/' ) . '(.+?)'
+							. preg_quote( substr( $end, 0, -1 ), '/' ) . '\s*$/i',
+						$value,
+						$matches
+					) ) {
 						list( , $number ) = $matches;
 						return $this->parseNumber( $number, $precision, $isBceMsg );
 					}
 
 				}
 			}
-
 		}
+
 		return false;
 	}
 
