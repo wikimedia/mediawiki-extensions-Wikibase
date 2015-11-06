@@ -6,8 +6,10 @@
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Adrian Heine
+ * @author Jonas Kress
  */
-$.wikibase.toolbarcontroller.definition( 'edittoolbar', {
+$.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 	id: 'referenceview',
 	selector: ':' + $.wikibase.referenceview.prototype.namespace
 		+ '-' + $.wikibase.referenceview.prototype.widgetName,
