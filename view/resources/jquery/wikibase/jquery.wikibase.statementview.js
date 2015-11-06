@@ -683,7 +683,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this._stopEditingQualifiers( dropValue );
 		this._rankSelector.stopEditing( dropValue );
 
-		this._stopEditingReferences( dropValue );
+		this._recreateReferences();
 
 		return PARENT.prototype._afterStopEditing.call( this, dropValue );
 	},
@@ -691,15 +691,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 	/**
 	 * @protected
 	 */
-	_stopEditingReferences: function( dropValue ) {
-		var references = !dropValue && this.options.value.getReferences().toArray();
-
-		$.each( this._referencesListview.value(), function ( i, referenceView ) {
-			if ( !dropValue ) {
-				referenceView.value( references[ i ] );
-			}
-			referenceView.stopEditing();
-		} );
+	_recreateReferences: function() {
+		this._referencesListview.option( 'value', this.options.value
+				? this.options.value.getReferences().toArray() : [] );
 
 		this._drawReferencesCounter();
 	},
