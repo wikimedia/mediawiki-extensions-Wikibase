@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_8651b03c",
+        "filename": "repo/tests/phpunit/includes/store/sql/SqlStoreTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-11-06T13:17:56Z",
+      "side": 1,
+      "message": "Unused.",
+      "revId": "a4665bc9955860ee73e205e90348898cfaeed758",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
