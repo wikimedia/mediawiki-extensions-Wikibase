@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_e1e41638",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-06T13:49:39Z",
+      "side": 1,
+      "message": "Spaces instead of tabs",
+      "revId": "4b930993d084c908dacbb9dd6d1237dc3722d237",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
