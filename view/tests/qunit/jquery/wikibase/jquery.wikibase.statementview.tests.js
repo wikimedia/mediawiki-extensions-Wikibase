@@ -33,7 +33,10 @@ var createStatementview = function( options, $node ) {
 				function() {
 					this.value = function() {
 						return this.options.value;
-					};
+					},
+					this.isValid = function() {
+						return true;
+					}
 				}
 			);
 		},
