@@ -94,15 +94,14 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.toolbarcontroller.definitions.edittoolbar.referenceview' => $moduleTemplate + array(
+		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview' => $moduleTemplate + array(
 			'scripts' => array(
-				'definitions/edittoolbar/referenceview.js',
+				'definitions/removetoolbar/referenceview.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.removetoolbar',
 				'jquery.wikibase.referenceview',
 				'jquery.wikibase.toolbarcontroller',
-				'wikibase.view.ToolbarViewController'
 			),
 		),
 

@@ -25,10 +25,10 @@
 				edittoolbar: [
 					'statementview',
 					'entitytermsview',
-					'referenceview',
 					'sitelinkgroupview'
 				],
 				removetoolbar: [
+	                'referenceview',
 					'statementview-snakview',
 					'referenceview-snakview',
 					'sitelinkgroupview-sitelinkview'
