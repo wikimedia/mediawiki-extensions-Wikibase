@@ -16,6 +16,24 @@
       "revId": "207290f69f91715504d8f263000f95539608a6fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_aa110ffe",
+        "filename": "Gruntfile.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1665
+      },
+      "writtenOn": "2015-11-07T19:22:21Z",
+      "side": 1,
+      "message": "Well\n\nIs \u0027**/*.json\u0027, is for doing sub folders and for running straight from where the files are in the upper level.\n\n \u0027*.json\u0027 can be removed from boilerplate as long as it has **/*.json.",
+      "parentUuid": "0ebaf39b_0a213b4b",
+      "revId": "207290f69f91715504d8f263000f95539608a6fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
