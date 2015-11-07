@@ -53,6 +53,7 @@
 	"version-wikibase": "Викибаза",
 	"wikibase-snakformatter-valuetype-mismatch": "Врста вредности „$1“ непоклапа се са врстом својства „$2“.",
 	"wikibase-entity-summary-wbsetitem": "Направљена нова ставка",
+	"wikibase-entity-summary-wbcreateredirect": "Преусмерено на $4",
 	"wikibase-entity-summary-wbsetreference": "Унета референца",
 	"wikibase-entity-summary-wbsetreference-add": "Додата референца за тврдњу",
 	"wikibase-entity-summary-wbsetreference-set": "Промењена референца за тврдњу:",
