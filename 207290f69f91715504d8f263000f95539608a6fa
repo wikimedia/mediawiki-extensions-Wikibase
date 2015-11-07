@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_0a213b4b",
+        "filename": "Gruntfile.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-11-07T19:20:02Z",
+      "side": 1,
+      "message": "Boilerplate has an additional \u0027*.json\u0027, why the difference?",
+      "revId": "207290f69f91715504d8f263000f95539608a6fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
