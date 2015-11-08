@@ -4,9 +4,11 @@
 			"Xabier Armendaritz",
 			"Subi",
 			"Sator",
-			"An13sa"
+			"An13sa",
+			"Theklan"
 		]
 	},
+	"tooltip-t-wikibase": "Datuen biltegi elementu batera lotuta",
 	"apihelp-query+pageterms-example-item": "Lortu Q84 elementuaren etiketak eta aliasak.",
 	"wikibase-comment-add": "{{WBREPONAME}} elementua sortu da.",
 	"wikibase-comment-update": "{{WBREPONAME}} elementua aldatua",
