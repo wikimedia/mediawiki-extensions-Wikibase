@@ -36,7 +36,9 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 			}
 			$referenceview.removetoolbar( options )
 			.on( 'removetoolbarremove.removetoolbar', function( event ) {
-				removeFromListView();
+				if ( event.target === $referenceview[0] ) {
+					removeFromListView();
+				}
 			} );
 
 		}
