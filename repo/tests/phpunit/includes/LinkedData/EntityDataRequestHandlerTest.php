@@ -18,6 +18,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\LinkedData\EntityDataRequestHandler
@@ -93,12 +94,17 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
+		// Note: We are testing with the actual RDF bindings. These should not change for well
+		// known data types. Mocking the bindings would be nice, but is complex and not needed.
+		$rdfBuilder = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
 		$service = new EntityDataSerializationService(
 			EntityDataSerializationServiceTest::URI_BASE,
 			EntityDataSerializationServiceTest::URI_DATA,
 			$mockRepository,
 			$titleLookup,
 			$propertyLookup,
+			$rdfBuilder,
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,

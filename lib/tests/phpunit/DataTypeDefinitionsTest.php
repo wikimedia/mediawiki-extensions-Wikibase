@@ -23,6 +23,7 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValidators',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooParser',
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooFormatter',
+				'rdf-builder-factory-callback' => 'DataTypeDefinitionsTest::getFooRdfBuilder',
 			),
 			'bar' => array(
 				'value-type' => 'BAR',
@@ -77,6 +78,14 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 				'bar' => 'DataTypeDefinitionsTest::getBarValidators',
 				'fuzz' => 'DataTypeDefinitionsTest::getFuzzValidators' ),
 			$defs->getValidatorFactoryCallbacks()
+		);
+	}
+
+	public function testGetRdfBuilderFactoryCallbacks() {
+		$defs = $this->getDataTypeDefinitions();
+		$this->assertEquals(
+			array( 'foo' => 'DataTypeDefinitionsTest::getFooRdfBuilder' ),
+			$defs->getRdfBuilderFactoryCallbacks()
 		);
 	}
 

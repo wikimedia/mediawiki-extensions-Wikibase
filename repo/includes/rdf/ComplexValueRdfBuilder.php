@@ -4,6 +4,7 @@ namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -31,10 +32,9 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param RdfWriter $valueWriter
-	 * @param PropertyDataTypeLookup $propertyLookup
 	 */
-	public function __construct( RdfVocabulary $vocabulary, RdfWriter $valueWriter, PropertyDataTypeLookup $propertyLookup ) {
-		parent::__construct( $vocabulary, $propertyLookup );
+	public function __construct( RdfVocabulary $vocabulary, RdfWriter $valueWriter ) {
+		parent::__construct( $vocabulary );
 
 		$this->dedupeBag = new NullDedupeBag();
 		$this->valueWriter = $valueWriter;
@@ -61,11 +61,18 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
-	 * @param DataValue $value
+	 * @param PropertyValueSnak $snak
 	 */
-	public function addValue( RdfWriter $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value ) {
-		parent::addValue( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+	public function addValue(
+		RdfWriter $writer,
+		$propertyValueNamespace,
+		$propertyValueLName,
+		$dataType,
+		PropertyValueSnak $snak
+	) {
+		parent::addValue( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $snak );
 
+		$value = $snak->getDataValue();
 		switch ( $value->getType() ) {
 			case 'time':
 				$prefix = 'time';
