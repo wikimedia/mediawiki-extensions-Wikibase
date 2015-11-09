@@ -6,6 +6,8 @@ use InvalidArgumentException;
 use ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
@@ -65,24 +67,20 @@ class EntityParserOutputDataUpdater {
 	 * @param EntityDocument $entity
 	 */
 	public function processEntity( EntityDocument $entity ) {
-		if ( $entity instanceof StatementListProvider ) {
-			$this->processStatementListProvider( $entity );
+		if ( $entity instanceof StatementListProvider && !empty( $this->statementDataUpdaters ) ) {
+			$this->processStatements( $entity->getStatements() );
 		}
 
-		if ( $entity instanceof Item ) {
-			$this->processItem( $entity );
+		if ( $entity instanceof Item && !empty( $this->siteLinkDataUpdaters ) ) {
+			$this->processSiteLinks( $entity->getSiteLinkList() );
 		}
 	}
 
 	/**
-	 * @param StatementListProvider $entity
+	 * @param StatementList $statements
 	 */
-	private function processStatementListProvider( StatementListProvider $entity ) {
-		if ( empty( $this->statementDataUpdaters ) ) {
-			return;
-		}
-
-		foreach ( $entity->getStatements() as $statement ) {
+	private function processStatements( StatementList $statements ) {
+		foreach ( $statements as $statement ) {
 			foreach ( $this->statementDataUpdaters as $updater ) {
 				$updater->processStatement( $statement );
 			}
@@ -90,14 +88,10 @@ class EntityParserOutputDataUpdater {
 	}
 
 	/**
-	 * @param Item $item
+	 * @param SiteLinkList $siteLinks
 	 */
-	private function processItem( Item $item ) {
-		if ( empty( $this->siteLinkDataUpdaters ) ) {
-			return;
-		}
-
-		foreach ( $item->getSiteLinkList() as $siteLink ) {
+	private function processSiteLinks( SiteLinkList $siteLinks ) {
+		foreach ( $siteLinks as $siteLink ) {
 			foreach ( $this->siteLinkDataUpdaters as $updater ) {
 				$updater->processSiteLink( $siteLink );
 			}
