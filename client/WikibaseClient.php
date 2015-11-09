@@ -36,6 +36,8 @@
  * @defgroup WikibaseClient Wikibase Client
  */
 
+// @codingStandardsIgnoreFile
+
 if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
@@ -111,14 +113,10 @@ call_user_func( function() {
 	$wgHooks['ParserGetVariableValueSwitch'][] = '\Wikibase\ClientHooks::onParserGetVariableValueSwitch';
 	$wgHooks['SkinTemplateOutputPageBeforeExec'][] = '\Wikibase\ClientHooks::onSkinTemplateOutputPageBeforeExec';
 	$wgHooks['SpecialMovepageAfterMove'][] = '\Wikibase\Client\Hooks\MovePageNotice::onSpecialMovepageAfterMove';
-	$wgHooks['SpecialWatchlistQuery'][] = '\Wikibase\ClientHooks::onSpecialWatchlistQuery';
-	$wgHooks['SpecialRecentChangesQuery'][] = '\Wikibase\ClientHooks::onSpecialRecentChangesQuery';
-	$wgHooks['SpecialRecentChangesFilters'][] = '\Wikibase\ClientHooks::onSpecialRecentChangesFilters';
 	$wgHooks['GetPreferences'][] = '\Wikibase\ClientHooks::onGetPreferences';
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\ClientHooks::onBeforePageDisplay';
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\ClientHooks::onBeforePageDisplayAddJsConfig';
 	$wgHooks['ScribuntoExternalLibraries'][] = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
-	$wgHooks['SpecialWatchlistFilters'][] = '\Wikibase\ClientHooks::onSpecialWatchlistFilters';
 	$wgHooks['InfoAction'][] = '\Wikibase\ClientHooks::onInfoAction';
 	$wgHooks['TitleMoveComplete'][] = '\Wikibase\Client\Hooks\UpdateRepoHookHandlers::onTitleMoveComplete';
 	$wgHooks['BaseTemplateAfterPortlet'][] = '\Wikibase\ClientHooks::onBaseTemplateAfterPortlet';
@@ -128,6 +126,11 @@ call_user_func( function() {
 	$wgHooks['ParserLimitReportFormat'][] = '\Wikibase\Client\Hooks\ParserLimitHookHandlers::onParserLimitReportFormat';
 	$wgHooks['ParserLimitReportPrepare'][] = '\Wikibase\Client\Hooks\ParserLimitHookHandlers::onParserLimitReportPrepare';
 	$wgHooks['FormatAutocomments'][] = '\Wikibase\ClientHooks::onFormat';
+
+	// recent changes / watchlist hooks
+	$wgHooks['ChangesListSpecialPageFilters'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageFilterHandler::onChangesListSpecialPageFilters';
+	$wgHooks['SpecialWatchlistQuery'][] = '\Wikibase\ClientHooks::onSpecialWatchlistQuery';
+	$wgHooks['SpecialRecentChangesQuery'][] = '\Wikibase\ClientHooks::onSpecialRecentChangesQuery';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
