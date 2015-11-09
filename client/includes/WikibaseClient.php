@@ -927,7 +927,8 @@ final class WikibaseClient {
 	private function getWikiPageUpdater() {
 		return new WikiPageUpdater(
 			JobQueueGroup::singleton(),
-			$this->getRecentChangeFactory()
+			$this->getRecentChangeFactory(),
+			$this->getStore()->getRecentChangesDuplicateDetector()
 		);
 	}
 
