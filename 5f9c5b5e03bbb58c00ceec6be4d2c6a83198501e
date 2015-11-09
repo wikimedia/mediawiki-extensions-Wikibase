@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_c5e9c911",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-09T23:28:06Z",
+      "side": 1,
+      "message": "done",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c52ea989",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-09T23:28:06Z",
+      "side": 1,
+      "message": "missing type hint for $array. Also a very generic variable name.",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_05460127",
+        "filename": "repo/includes/rdf/DispatchingValueSnakRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-09T23:28:06Z",
+      "side": 1,
+      "message": "Could just return $builder here in case it\u0027s not null, would make the function a little nicer, IMO",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_65ad7de7",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-09T23:28:06Z",
+      "side": 1,
+      "message": "empty line before comment would be nice",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a55e15eb",
+        "filename": "repo/includes/rdf/SimpleValueRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-09T23:28:06Z",
+      "side": 1,
+      "message": "Not your fault, but undeclared member",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c5454949",
+        "filename": "repo/includes/rdf/ValueSnakRdfBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-09T23:28:06Z",
+      "side": 1,
+      "message": "This matches the above function, except for the $mode. Might be worth to create a helper?",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_25dd4574",
+        "filename": "repo/maintenance/dumpRdf.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-09T23:28:06Z",
+      "side": 1,
+      "message": "string",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
