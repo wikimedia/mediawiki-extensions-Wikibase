@@ -16,6 +16,24 @@
       "revId": "b1e529858312686f7147532a67e80e988e2b15a2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1947577e",
+        "filename": "view/tests/phpunit/EntityViewFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-09T11:32:01Z",
+      "side": 1,
+      "message": "This was meant as the absolute minimal test that covers this code. But you are right, this should have a provider with the two cases that can trigger this exception.",
+      "parentUuid": "0ebaf39b_01ee0aeb",
+      "revId": "b1e529858312686f7147532a67e80e988e2b15a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
