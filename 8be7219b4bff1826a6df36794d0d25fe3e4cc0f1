@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_b9e64b3e",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-11-09T06:45:13Z",
+      "side": 1,
+      "message": "Are you saying that it is more important to save a function call here than to minimize binding?",
+      "parentUuid": "0ebaf39b_6fcc9a38",
+      "revId": "8be7219b4bff1826a6df36794d0d25fe3e4cc0f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_afedb28b",
         "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdater.php",
         "patchSetId": 1

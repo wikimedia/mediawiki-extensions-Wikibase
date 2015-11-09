@@ -34,6 +34,24 @@
       "revId": "92d750978b0658a54472290069f1536896bba67e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_19f677f7",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-11-09T06:45:13Z",
+      "side": 0,
+      "message": "Specific to an item yes, though not everything needed for an item",
+      "parentUuid": "0ebaf39b_ef8dead8",
+      "revId": "92d750978b0658a54472290069f1536896bba67e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
