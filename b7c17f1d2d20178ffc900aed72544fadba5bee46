@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_05d12127",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputDataUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-09T23:42:38Z",
+      "side": 1,
+      "message": "Could just use \u0026\u0026 $this-\u003estatement…",
+      "revId": "b7c17f1d2d20178ffc900aed72544fadba5bee46",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
