@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Rdf\ComplexValueRdfBuilder;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
@@ -102,11 +103,21 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		return $lines;
 	}
 
-	private function assertTriplesEqual( array $expectedTriples, RdfWriter $writer ) {
+	private function assertTriplesEqual( array $expectedTriples, RdfWriter $writer, $message = '' ) {
 		$actualTripels = $this->getDataFromWriter( $writer );
 		sort( $expectedTriples );
+		sort( $actualTripels );
 
-		$this->assertEquals( $expectedTriples, $actualTripels );
+		// Note: comparing $expected and $actual directly would show triples
+		// that are present in both but shifted in position. That makes the output
+		// hard to read. Calculating the $missing and $extra sets helps.
+		$extra = array_diff( $actualTripels, $expectedTriples );
+		$missing = array_diff( $expectedTriples, $actualTripels );
+
+		// Cute: $missing and $extra can be equal only if they are empty.
+		// Comparing them here directly looks a bit odd in code, but produces meaningful
+		// output, especially if the input was sorted.
+		$this->assertEquals( $missing, $extra, $message );
 	}
 
 	public function provideAddValue() {
@@ -401,11 +412,13 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideAddValue
 	 */
 	public function testAddValue( PropertyId $propertyId, $dataType, DataValue $value, array $expectedTriples, array $expectedValueTriples ) {
+		$snak = new PropertyValueSnak( $propertyId, $value );
+
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
 		$builder = $this->newBuilder();
-		$builder->addValue( $writer, RdfVocabulary::NSP_CLAIM_STATEMENT, $propertyId->getSerialization(), $dataType, $value );
+		$builder->addValue( $writer, RdfVocabulary::NSP_CLAIM_STATEMENT, $propertyId->getSerialization(), $dataType, $snak );
 
 		$this->assertTriplesEqual( $expectedTriples, $writer );
 
@@ -417,21 +430,23 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$propertyId = new PropertyId( 'P2' );
 		$dataType = 'wikibase-item';
 		$value = new EntityIdValue( new ItemId( 'Q42' ) );
+		$snak = new PropertyValueSnak( $propertyId, $value );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
 		$mentioned = array();
 		$builder = $this->newBuilder( $mentioned );
-		$builder->addValue( $writer, RdfVocabulary::NSP_CLAIM_STATEMENT, $propertyId->getSerialization(), $dataType, $value );
+		$builder->addValue( $writer, RdfVocabulary::NSP_CLAIM_STATEMENT, $propertyId->getSerialization(), $dataType, $snak );
 
 		$this->assertEquals( array( 'Q42' ), array_keys( $mentioned ) );
 	}
 
 	public function testAddValue_seen() {
 		$propertyId = new PropertyId( 'P8' );
-		$value = new TimeValue( '+2015-03-03T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR );
 		$dataType = 'time';
+		$value = new TimeValue( '+2015-03-03T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, RdfVocabulary::GREGORIAN_CALENDAR );
+		$snak = new PropertyValueSnak( $propertyId, $value );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
@@ -442,7 +457,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$seen->alreadySeen( $value->getHash(), 'V' );
 
 		$builder = $this->newBuilder( $mentioned, $seen );
-		$builder->addValue( $writer, RdfVocabulary::NSP_CLAIM_STATEMENT, $propertyId->getSerialization(), $dataType, $value );
+		$builder->addValue( $writer, RdfVocabulary::NSP_CLAIM_STATEMENT, $propertyId->getSerialization(), $dataType, $snak );
 
 		// since the value was already "seen", the value writer should be empty.
 		$this->assertTriplesEqual( array(), $builder->test_value_writer );
