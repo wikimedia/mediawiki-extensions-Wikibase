@@ -822,8 +822,8 @@ class WikibaseRepo {
 		$dataTypeFormatters = $this->dataTypeDefinitions->getFormatterFactoryCallbacks();
 
 		$callbacks = array_merge(
-			$this->applyKeyPrefixConstructorCallbacks( 'VT:', $valueTypeFormatters ),
-			$this->applyKeyPrefixConstructorCallbacks( 'PT:', $dataTypeFormatters )
+			$this->applyKeyPrefix( 'VT:', $valueTypeFormatters ),
+			$this->applyKeyPrefix( 'PT:', $dataTypeFormatters )
 		);
 
 		return $callbacks;
@@ -851,7 +851,7 @@ class WikibaseRepo {
 		//TODO: provide fallback mappings per data-type with "VT:" prefix.
 		$dataTypeRdfBuilders = $this->dataTypeDefinitions->getRdfBuilderFactoryCallbacks();
 
-		$callbacks = $this->applyKeyPrefixConstructorCallbacks( 'PT:', $dataTypeRdfBuilders );
+		$callbacks = $this->applyKeyPrefix( 'PT:', $dataTypeRdfBuilders );
 
 		return $callbacks;
 	}

@@ -15,15 +15,17 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Rdf\ComplexValueRdfBuilder;
+use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\ComplexValueRdfBuilder
+ * Test for integration of ValueSnakRdfBuilderFactory, DispatchingValueSnakRdfBuilder, and various
+ * handlers for different data types. Should allow confident transition from the old
+ * ComplexValueRdfBuilder.
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -60,7 +62,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @param EntityId[] &$mentioned receives the IDs of any mentioned entities.
 	 * @param DedupeBag|null $bag A list of value hashes that should be considered "already seen".
 	 *
-	 * @return ComplexValueRdfBuilder
+	 * @return ValueSnakRdfBuilder
 	 */
 	private function newBuilder( array &$mentioned = array(), DedupeBag $bag = null ) {
 		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
@@ -71,12 +73,16 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$vocabulary = $this->getTestData()->getVocabulary();
 		$valueWriter = $this->getTestData()->getNTriplesWriter();
 
-		$builder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $this->getTestData()->getMockRepository() );
-		$builder->setEntityMentionListener( $mentionTracker );
-		$builder->setDedupeBag( $bag ?: new NullDedupeBag() );
+		$valueSnakRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
+		$builder = $valueSnakRdfBuilderFactory->getComplexValueSnakRdfBuilder(
+			$this->getTestData()->getVocabulary(),
+			$valueWriter,
+			$mentionTracker,
+			$bag ?: new HashDedupeBag()
+		);
 
 		// HACK: glue on the value writer as a public field, so we can evaluate it later.
 		$builder->test_value_writer = $valueWriter;
@@ -144,7 +150,7 @@ class ComplexValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'globecoordinate' => array(
 				new PropertyId( 'P4' ),
-				'globecoordinate',
+				'globe-coordinate',
 				new GlobeCoordinateValue(
 					new LatLongValue( 12.25, -45.5 ),
 					0.025,
