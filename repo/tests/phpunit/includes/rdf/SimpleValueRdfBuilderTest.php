@@ -15,12 +15,16 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Rdf\ValueSnakRdfBuilder;
+use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\SimpleValueRdfBuilder;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers Wikibase\Rdf\SimpleValueRdfBuilder
+ * Test for integration of ValueSnakRdfBuilderFactory, DispatchingValueSnakRdfBuilder, and various
+ * handlers for different data types. Should allow confident transition from the old
+ * SimpleValueRdfBuilder.
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -56,7 +60,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param EntityId[] &$mentioned receives the IDs of any mentioned entities.
 	 *
-	 * @return SimpleValueRdfBuilder
+	 * @return ValueSnakRdfBuilder
 	 */
 	private function newBuilder( array &$mentioned = array() ) {
 		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
@@ -67,10 +71,14 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$vocabulary = $this->getTestData()->getVocabulary();
+		$valueSnakRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
-		$builder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
-		$builder->setEntityMentionListener( $mentionTracker );
+		$builder = $valueSnakRdfBuilderFactory->getSimpleValueSnakRdfBuilder(
+			$this->getTestData()->getVocabulary(),
+			$this->getTestData()->getNTriplesWriter(),
+			$mentionTracker,
+			new HashDedupeBag()
+		);
 
 		return $builder;
 	}
@@ -124,7 +132,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			),
 			'globecoordinate' => array(
 				new PropertyId( 'P4' ),
-				'globecoordinate',
+				'globe-coordinate',
 				new GlobeCoordinateValue(
 					new LatLongValue( 12.25, -45.5 ),
 					0.025,
