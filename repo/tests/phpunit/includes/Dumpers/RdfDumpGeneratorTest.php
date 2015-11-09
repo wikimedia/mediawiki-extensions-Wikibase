@@ -17,6 +17,7 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\Rdf\RdfBuilderTest;
+use Wikibase\Test\Rdf\RdfBuilderTestData;
 
 /**
  * @covers Wikibase\Dumpers\RdfDumpGenerator
@@ -61,6 +62,13 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		return $list;
 	}
 
+	private function getTestData() {
+		return new RdfBuilderTestData(
+			__DIR__ . "/../../data/rdf",
+			__DIR__ . "/../../data/rdf/RdfDumpGenerator"
+		);
+	}
+
 	/**
 	 * @param Entity[] $entities
 	 * @param EntityId[] $redirects
@@ -73,11 +81,8 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
-		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 
-		$dataTypeLookup->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
+		$dataTypeLookup = $this->getTestData()->getMockRepository();
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
@@ -144,7 +149,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @return string[]
 	 */
 	public function normalizeData( $data ) {
-		$dataSplit = explode( "\n", $data );
+		$dataSplit = explode( "\n", trim( $data ) );
 		sort( $dataSplit );
 		$dataSplit = array_map( 'trim', $dataSplit );
 		return $dataSplit;
@@ -158,11 +163,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @return string[]
 	 */
 	public function getSerializedData( $testName ) {
-		$filename = __DIR__ . "/../../data/rdf/dump_$testName.nt";
-		if ( !file_exists( $filename ) ) {
-			return array();
-		}
-		return $this->normalizeData( file_get_contents( $filename ) );
+		return $this->getTestData()->getNTriples( $testName );
 	}
 
 	/**
@@ -181,7 +182,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		$dumper->generateDump( $pager );
 		$dump = ob_get_clean();
 		$dump = $this->normalizeData( $dump );
-		$this->assertEquals( $this->getSerializedData( $dumpname ), $dump );
+		$this->assertTriplesEqual( $this->getSerializedData( $dumpname ), $dump );
 	}
 
 	public function loadDataProvider() {
@@ -213,7 +214,23 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		$dumper->generateDump( $pager );
 		$dump = ob_get_clean();
 		$dump = $this->normalizeData( $dump );
-		$this->assertEquals( $this->getSerializedData( $dumpname ), $dump );
+		$this->assertTriplesEqual( $this->getSerializedData( $dumpname ), $dump );
+	}
+
+	private function assertTriplesEqual( array $expectedTriples, array $actualTripels, $message = '' ) {
+		sort( $expectedTriples );
+		sort( $actualTripels );
+
+		// Note: comparing $expected and $actual directly would show triples
+		// that are present in both but shifted in position. That makes the output
+		// hard to read. Calculating the $missing and $extra sets helps.
+		$extra = array_diff( $actualTripels, $expectedTriples );
+		$missing = array_diff( $expectedTriples, $actualTripels );
+
+		// Cute: $missing and $extra can be equal only if they are empty.
+		// Comparing them here directly looks a bit odd in code, but produces meaningful
+		// output, especially if the input was sorted.
+		$this->assertEquals( $missing, $extra, $message );
 	}
 
 }
