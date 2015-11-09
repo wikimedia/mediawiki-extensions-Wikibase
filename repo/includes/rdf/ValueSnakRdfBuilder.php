@@ -3,6 +3,7 @@
 namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -14,7 +15,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-interface DataValueRdfBuilder {
+interface ValueSnakRdfBuilder {
 
 	/**
 	 * Adds specific value
@@ -23,14 +24,14 @@ interface DataValueRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
-	 * @param DataValue $value
+	 * @param PropertyValueSnak $snak
 	 */
 	public function addValue(
 		RdfWriter $writer,
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
-		$value
+		PropertyValueSnak $snak
 	);
 
 }

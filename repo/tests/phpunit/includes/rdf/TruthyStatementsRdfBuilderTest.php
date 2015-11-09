@@ -2,9 +2,12 @@
 
 namespace Wikibase\Test\Rdf;
 
-use Wikibase\Rdf\SimpleValueRdfBuilder;
+use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
+use Wikibase\Rdf\NullDedupeBag;
+use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\TruthyStatementRdfBuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Rdf\TruthyStatementRdfBuilder
@@ -47,7 +50,16 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$vocabulary = $this->getTestData()->getVocabulary();
 		$writer = $this->getTestData()->getNTriplesWriter();
 
-		$valueBuilder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
+		// Note: using the actual factory here makes this an integration test!
+		$dataValueRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
+		$valueBuilder = $dataValueRdfBuilderFactory->getSimpleValueSnakRdfBuilder(
+			$vocabulary,
+			$writer,
+			new NullEntityMentionListener(),
+			new NullDedupeBag()
+		);
+
 		$snakBuilder = new SnakRdfBuilder( $vocabulary, $valueBuilder, $this->getTestData()->getMockRepository() );
 
 		$builder = new TruthyStatementRdfBuilder(

@@ -188,7 +188,7 @@ class RdfBuilderTestData {
 		return array(
 			array( 2, 'wikibase-item' ),
 			array( 3, 'commonsMedia' ),
-			array( 4, 'globecoordinate' ),
+			array( 4, 'globe-coordinate' ),
 			array( 5, 'monolingualtext' ),
 			array( 6, 'quantity' ),
 			array( 7, 'string' ),

@@ -73,7 +73,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$valueBuilder = $this->getMock( 'Wikibase\Rdf\DataValueRdfBuilder' );
+		$valueBuilder = $this->getMock( 'Wikibase\Rdf\ValueSnakRdfBuilder' );
 
 		if ( $value ) {
 			$valueBuilder->expects( $this->once() )

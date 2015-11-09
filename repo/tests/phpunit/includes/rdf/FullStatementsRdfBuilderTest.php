@@ -3,14 +3,13 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Rdf\ComplexValueRdfBuilder;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\FullStatementRdfBuilder;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfProducer;
-use Wikibase\Rdf\SimpleValueRdfBuilder;
 use Wikibase\Rdf\SnakRdfBuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Rdf\FullStatementRdfBuilder
@@ -66,11 +65,25 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
+		// Note: using the actual factory here makes this an integration test!
+		$dataValueRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
 		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
 			$valueWriter = $writer->sub();
-			$statementValueBuilder = new ComplexValueRdfBuilder( $vocabulary, $valueWriter, $this->getTestData()->getMockRepository() );
+
+			$statementValueBuilder = $dataValueRdfBuilderFactory->getComplexValueSnakRdfBuilder(
+				$this->getTestData()->getVocabulary(),
+				$valueWriter,
+				$mentionTracker,
+				new HashDedupeBag()
+			);
 		} else {
-			$statementValueBuilder = new SimpleValueRdfBuilder( $vocabulary, $this->getTestData()->getMockRepository() );
+			$statementValueBuilder = $dataValueRdfBuilderFactory->getSimpleValueSnakRdfBuilder(
+				$this->getTestData()->getVocabulary(),
+				$writer,
+				$mentionTracker,
+				new HashDedupeBag()
+			);
 		}
 
 		$snakRdfBuilder = new SnakRdfBuilder( $vocabulary, $statementValueBuilder, $this->getTestData()->getMockRepository() );
@@ -79,7 +92,6 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		if ( $flavor & RdfProducer::PRODUCE_PROPERTIES ) {
 			$snakRdfBuilder->setEntityMentionListener( $mentionTracker );
-			$statementValueBuilder->setEntityMentionListener( $mentionTracker );
 		}
 
 		$statementBuilder->setProduceQualifiers( $flavor & RdfProducer::PRODUCE_QUALIFIERS );
@@ -114,7 +126,19 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$this->fail( 'Data set `' . $dataSetName . '` not found! Created file with the current data using the suffix .actual' );
 		}
 
-		$this->assertEquals( $correctData, $actualData, "Data set $dataSetName" );
+		sort( $correctData );
+		sort( $actualData );
+
+		// Note: comparing $expected and $actual directly would show triples
+		// that are present in both but shifted in position. That makes the output
+		// hard to read. Calculating the $missing and $extra sets helps.
+		$extra = array_diff( $actualData, $correctData );
+		$missing = array_diff( $correctData, $actualData );
+
+		// Cute: $missing and $extra can be equal only if they are empty.
+		// Comparing them here directly looks a bit odd in code, but produces meaningful
+		// output, especially if the input was sorted.
+		$this->assertEquals( $missing, $extra, "Data set $dataSetName" );
 	}
 
 	public function provideAddEntity() {
