@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SimpleValueRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
@@ -239,12 +240,13 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideAddValue
 	 */
 	public function testAddValue( PropertyId $propertyId, $dataType, DataValue $value, array $expectedTriples ) {
-		$writer = $this->getTestData()->getNTriplesWriter();
+		$snak = new PropertyValueSnak( $propertyId, $value );
 
+		$writer = $this->getTestData()->getNTriplesWriter();
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
 		$builder = $this->newBuilder();
-		$builder->addValue( $writer, RdfVocabulary::NSP_DIRECT_CLAIM, $propertyId->getSerialization(), $dataType, $value );
+		$builder->addValue( $writer, RdfVocabulary::NSP_DIRECT_CLAIM, $propertyId->getSerialization(), $dataType, $snak );
 
 		$this->assertTriplesEqual( $expectedTriples, $writer );
 	}
@@ -253,6 +255,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$propertyId = new PropertyId( 'P2' );
 		$dataType = 'wikibase-item';
 		$value = new EntityIdValue( new ItemId( 'Q42' ) );
+		$snak = new PropertyValueSnak( $propertyId, $value );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 
@@ -260,7 +263,7 @@ class SimpleValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$mentioned = array();
 		$builder = $this->newBuilder( $mentioned );
-		$builder->addValue( $writer, RdfVocabulary::NSP_DIRECT_CLAIM, $propertyId->getSerialization(), $dataType, $value );
+		$builder->addValue( $writer, RdfVocabulary::NSP_DIRECT_CLAIM, $propertyId->getSerialization(), $dataType, $snak );
 
 		$this->assertEquals( array( 'Q42' ), array_keys( $mentioned ) );
 	}

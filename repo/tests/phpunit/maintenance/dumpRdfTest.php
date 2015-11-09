@@ -29,6 +29,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DumpRdf;
 use Wikibase\Repo\Test\MockEntityPerPage;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\DumpRdf
@@ -124,11 +125,15 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			$mockEntityPerPage->addEntityPage( $testEntity->getId(), $key );
 		}
 
+		// Note: We are testing with the actual RDF bindings, so we can check for actual RDF output.
+		$rdfBuilder = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
 		$dumpScript->setServices(
 			$mockEntityPerPage,
 			new NullEntityPrefetcher(),
 			MockSiteStore::newFromTestSites(),
 			$this->getMockPropertyDataTypeLookup(),
+			$rdfBuilder,
 			$mockRepo,
 			'fooUri'
 		);
@@ -180,7 +185,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 				if ( $id->getSerialization() === 'P999' ) {
 					throw new PropertyDataTypeLookupException( $id );
 				}
-				return 'DtIdFor_' . $id->getSerialization();
+				return 'string';
 			} ) );
 		return $mockDataTypeLookup;
 	}
