@@ -16,6 +16,24 @@
       "revId": "10d2bc8ebe528c50eb4936be578bef000a7fe5f4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7f52f340",
+        "filename": "view/tests/phpunit/Module/TemplateModuleTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-09T16:58:22Z",
+      "side": 1,
+      "message": "There is a lot I considered here:\n* I\u0027m aware of this but do not think this is a reason to not have a test.\n* The code under test is very critical for our JavaScript view and should be covered.\n* The code uses global state which should not be part of this test.",
+      "parentUuid": "0ebaf39b_2486aee1",
+      "revId": "10d2bc8ebe528c50eb4936be578bef000a7fe5f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
