@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_2486aee1",
+        "filename": "view/tests/phpunit/Module/TemplateModuleTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2015-11-09T14:25:32Z",
+      "side": 1,
+      "message": "I appreciate the effort to add missing tests. However, to me this seems like it focuses a bit too much on the coverage %, which in itself should not be the goal. The assertion made in testGetScript is basically just a type check for the return type, at the cost of writing a test with mock building in it. The other test verifies \"return false\" which was unchanged since 2012. The value of that is also very dubious to me. For this I\u0027d expect a test with a bigger \"unit\" to be written.",
+      "revId": "10d2bc8ebe528c50eb4936be578bef000a7fe5f4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
