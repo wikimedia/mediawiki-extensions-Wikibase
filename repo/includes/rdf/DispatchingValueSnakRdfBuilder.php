@@ -8,7 +8,7 @@ use Wikimedia\Purtle\RdfWriter;
 
 /**
  * Dispatching implementation of ValueSnakRdfBuilder. This allows extensions to register
- * DataValueRdfBuilders for custom data types.
+ * ValueSnakRdfBuilders for custom data types.
  *
  * @since 0.5
  *
