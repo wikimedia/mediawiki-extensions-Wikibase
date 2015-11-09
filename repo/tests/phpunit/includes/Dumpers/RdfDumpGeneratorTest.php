@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\Rdf\RdfBuilderTest;
 
 /**
@@ -71,7 +72,11 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
-		$propertyLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+
+		$dataTypeLookup->expects( $this->any() )
+			->method( 'getDataTypeIdForProperty' )
+			->will( $this->returnValue( 'string' ) );
 
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
@@ -101,6 +106,9 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 			}
 		) );
 
+		// Note: we test against the actual RDF bindings here, so we get actual RDF.
+		$rdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
 			$out,
@@ -108,7 +116,8 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 			self::URI_DATA,
 			$this->getSiteList(),
 			$entityRevisionLookup,
-			$propertyLookup,
+			$dataTypeLookup,
+			$rdfBuilderFactory,
 			new NullEntityPrefetcher(),
 			array( 'test' => 'en-x-test' )
 		);
