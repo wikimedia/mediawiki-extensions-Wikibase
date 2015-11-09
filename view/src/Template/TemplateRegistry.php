@@ -24,8 +24,10 @@ class TemplateRegistry {
 	/**
 	 * @param string[] $templates
 	 */
-	public function __construct( array $templates = array() ) {
-		$this->addTemplates( $templates );
+	public function __construct( array $templates ) {
+		foreach ( $templates as $key => $snippet ) {
+			$this->templates[$key] = str_replace( "\t", '', $snippet );
+		}
 	}
 
 	/**
@@ -46,27 +48,6 @@ class TemplateRegistry {
 	 */
 	public function getTemplate( $key ) {
 		return $this->templates[$key];
-	}
-
-	/**
-	 * Adds multiple templates to the store.
-	 *
-	 * @param string[] $templates
-	 */
-	public function addTemplates( array $templates ) {
-		foreach ( $templates as $key => $snippet ) {
-			$this->addTemplate( $key, $snippet );
-		}
-	}
-
-	/**
-	 * Adds a single template to the store.
-	 *
-	 * @param string $key
-	 * @param string $snippet
-	 */
-	public function addTemplate( $key, $snippet ) {
-		$this->templates[$key] = str_replace( "\t", '', $snippet );
 	}
 
 }
