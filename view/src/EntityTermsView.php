@@ -68,7 +68,7 @@ class EntityTermsView {
 	 * @param string $termBoxHtml
 	 * @param TextInjector $textInjector
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function getHtml(
 		Fingerprint $fingerprint,
@@ -78,6 +78,9 @@ class EntityTermsView {
 	) {
 		$descriptions = $fingerprint->getDescriptions();
 		$aliasGroups = $fingerprint->getAliasGroups();
+		$marker = $textInjector->newMarker(
+			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
+		);
 
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
 			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
@@ -85,9 +88,7 @@ class EntityTermsView {
 			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
 			$this->getHtmlForAliases( $aliasGroups ),
 			$termBoxHtml,
-			$textInjector->newMarker(
-				'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
-			),
+			$marker,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $entityId )
 		);
 	}
@@ -96,7 +97,7 @@ class EntityTermsView {
 	 * @param Fingerprint $fingerprint
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function getTitleHtml(
 		Fingerprint $fingerprint,
@@ -128,7 +129,7 @@ class EntityTermsView {
 	/**
 	 * @param TermList $descriptions the list of descriptions to render
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getDescriptionText( TermList $descriptions ) {
 		if ( $descriptions->hasTermForLanguage( $this->languageCode ) ) {
@@ -142,7 +143,7 @@ class EntityTermsView {
 	/**
 	 * @param AliasGroupList $aliasGroups the list of alias groups to render
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForAliases( AliasGroupList $aliasGroups ) {
 		if ( $aliasGroups->hasGroupForLanguage( $this->languageCode ) ) {
@@ -168,7 +169,7 @@ class EntityTermsView {
 	 * @param string[] $languageCodes The languages the user requested to be shown
 	 * @param Title|null $title
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function getEntityTermsForLanguageListView(
 		Fingerprint $fingerprint,
@@ -199,17 +200,16 @@ class EntityTermsView {
 	 * @param string $languageCode
 	 * @param Title|null $title
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getEntityTermsForLanguageView(
 		Fingerprint $fingerprint,
 		$languageCode,
 		Title $title = null
 	) {
+		$languageName = $this->languageNameLookup->getName( $languageCode, $this->languageCode );
 		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
-		$aliasGroups = $fingerprint->getAliasGroups();
-
 		$hasLabel = $labels->hasTermForLanguage( $languageCode );
 		$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
 
@@ -222,7 +222,7 @@ class EntityTermsView {
 					? '#'
 					: $title->getLocalURL( array( 'setlang' => $languageCode ) )
 				),
-				htmlspecialchars( $this->languageNameLookup->getName( $languageCode, $this->languageCode ) )
+				htmlspecialchars( $languageName )
 			),
 			$this->templateFactory->render( 'wikibase-labelview',
 				$hasLabel ? '' : 'wb-empty',
@@ -241,7 +241,7 @@ class EntityTermsView {
 				'',
 				''
 			),
-			$this->getAliasesView( $aliasGroups, $languageCode ),
+			$this->getAliasesView( $fingerprint->getAliasGroups(), $languageCode ),
 			''
 		);
 	}
@@ -250,7 +250,7 @@ class EntityTermsView {
 	 * @param AliasGroupList $aliasGroups
 	 * @param string $languageCode
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getAliasesView( AliasGroupList $aliasGroups, $languageCode ) {
 		if ( !$aliasGroups->hasGroupForLanguage( $languageCode ) ) {
@@ -280,7 +280,7 @@ class EntityTermsView {
 	/**
 	 * @param EntityId|null $entityId
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getHtmlForLabelDescriptionAliasesEditSection( EntityId $entityId = null ) {
 		if ( $this->sectionEditLinkGenerator === null ) {
