@@ -317,6 +317,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			}
 			if ( event.type === 'listviewitemremoved' ) {
 				self._trigger( 'afterremove' );
+				self._trigger( 'change' );
 			}
 		} )
 		.on( lia.prefixedEvent( 'change.' + this.widgetName ),
