@@ -58,5 +58,6 @@
 	"wikibase-listdatatypes-wikibase-property-head": "ځانتيا",
 	"wikibase-listdatatypes-time-head": "وخت",
 	"wikibase-listdatatypes-url-head": "يو آر اېل",
-	"datatypes-type-url": "يو آر اېل"
+	"datatypes-type-url": "يو آر اېل",
+	"content-model-wikibase-item": "د ويکيبېز توکی"
 }
