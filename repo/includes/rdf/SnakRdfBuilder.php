@@ -33,7 +33,7 @@ class SnakRdfBuilder {
 	private $vocabulary;
 
 	/**
-	 * @var DataValueRdfBuilder
+	 * @var ValueSnakRdfBuilder
 	 */
 	private $valueBuilder;
 
@@ -43,11 +43,16 @@ class SnakRdfBuilder {
 	private $propertyLookup;
 
 	/**
+	 * @var string[] local data type cache per property id
+	 */
+	private $propertyTypes = array();
+
+	/**
 	 * @param RdfVocabulary $vocabulary
-	 * @param DataValueRdfBuilder $valueBuilder
+	 * @param ValueSnakRdfBuilder $valueBuilder
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 */
-	public function __construct( RdfVocabulary $vocabulary, DataValueRdfBuilder $valueBuilder, PropertyDataTypeLookup $propertyLookup ) {
+	public function __construct( RdfVocabulary $vocabulary, ValueSnakRdfBuilder $valueBuilder, PropertyDataTypeLookup $propertyLookup ) {
 		$this->vocabulary = $vocabulary;
 		$this->valueBuilder = $valueBuilder;
 		$this->propertyLookup = $propertyLookup;
@@ -83,7 +88,7 @@ class SnakRdfBuilder {
 		switch ( $snak->getType() ) {
 			case 'value':
 				/** @var PropertyValueSnak $snak */
-				$this->addSnakValue( $writer, $propertyId, $snak->getDataValue(), $propertyNamespace );
+				$this->addSnakValue( $writer, $snak, $propertyNamespace );
 				break;
 			case 'somevalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
@@ -106,32 +111,29 @@ class SnakRdfBuilder {
 	 * Adds the value of the given property to the RDF graph.
 	 *
 	 * @param RdfWriter $writer
-	 * @param PropertyId $propertyId
-	 * @param DataValue $value
+	 * @param PropertyValueSnak $snak
 	 * @param string $propertyNamespace The property namespace for this snak
 	 */
 	private function addSnakValue(
 		RdfWriter $writer,
-		PropertyId $propertyId,
-		DataValue $value,
+		PropertyValueSnak $snak,
 		$propertyNamespace
 	) {
+		$propertyId = $snak->getPropertyId();
 		$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
+		$propertyKey = $propertyId->getSerialization();
 
-		$typeId = $value->getType();
-		$dataType = null;
-
-		if ( $typeId === 'string' ) {
-			// We only care about the actual data type of strings, so we can save time but not asking
-			// for any other types
+		// cache data type for all properties we encounter
+		if ( !isset( $this->propertyTypes[$propertyKey] ) ) {
 			try {
-				$dataType = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
+				$this->propertyTypes[$propertyKey] = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
 			} catch ( PropertyDataTypeLookupException $e ) {
-				// keep "unknown"
+				$this->propertyTypes[$propertyKey] = "unknown";
 			}
 		}
 
-		$this->valueBuilder->addValue( $writer, $propertyNamespace, $propertyValueLName, $dataType, $value );
+		$dataType = $this->propertyTypes[$propertyKey];
+		$this->valueBuilder->addValue( $writer, $propertyNamespace, $propertyValueLName, $dataType, $snak );
 	}
 
 }

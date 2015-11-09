@@ -29,7 +29,7 @@ data type definition record. Each such record has the following fields:
 * validator-factory-callback (repo only): a callable that acts as a factory for the list of validators that should be used to check any user supplied values of the given data type. The callable will be called without any arguments, and must return a list of ValueValidator objects.
 * parser-factory-callback (repo only): a callable that acts as a factory for a ValueParser for this data type.
 * formatter-factory-callback (repo and client): (PLANNED) a callable that acts as a factory for ValueFormatters for use with this data type.
-* rdf-builder-factory-callback (repo only): (PLANNED) a callable that acts as a factory for DataValueRdfBuilder for use with this data type.
+* rdf-builder-factory-callback (repo only): (PLANNED) a callable that acts as a factory for ValueSnakRdfBuilder for use with this data type.
 
 Extensions that wish to register a data type should use the WikibaseRepoDataTypes
 resp. WikibaseClientDataTypes hooks to provide additional data type definitions.
