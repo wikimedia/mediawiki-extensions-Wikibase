@@ -13,6 +13,7 @@ use Wikibase\ItemChange;
 
 /**
  * @covers Wikibase\ItemChange
+ * @covers Wikibase\DiffChange
  *
  * @since 0.3
  *
