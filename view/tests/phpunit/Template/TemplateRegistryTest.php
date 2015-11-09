@@ -11,53 +11,38 @@ use Wikibase\View\Template\TemplateRegistry;
  * @group WikibaseView
  *
  * @licence GNU GPL v2+
- * @author H. Snater <mediawiki@snater.com>
+ * @author Thiemo Mättig
  */
 class TemplateRegistryTest extends \MediaWikiTestCase {
 
-	/**
-	 * @dataProvider providerAddTemplate
-	 */
-	public function testAddTemplate( $html ) {
-		$registry = new TemplateRegistry();
-		$registry->addTemplate( 'tmpl1', $html );
-
-		$this->assertEquals(
-			$registry->getTemplate( 'tmpl1' ),
-			$html
-		);
+	public function testCanConstructWithEmptyArray() {
+		$registry = new TemplateRegistry( array() );
+		$this->assertSame( array(), $registry->getTemplates() );
 	}
 
-	public function providerAddTemplate() {
-		return array(
-			array( '<div>$1</div>' )
-		);
+	public function testRemovesTabs() {
+		$registry = new TemplateRegistry( array( 'known' => "no\ttabs" ) );
+		$this->assertSame( 'notabs', $registry->getTemplate( 'known' ) );
 	}
 
-	/**
-	 * @dataProvider providerAddTemplates
-	 */
-	public function testAddTemplates( $data ) {
-		$registry = new TemplateRegistry();
-
-		$registry->addTemplates( $data );
-
-		$templates = $registry->getTemplates();
-		foreach ( $data as $key => $html ) {
-			$this->assertEquals(
-				$templates[$key],
-				$html
-			);
-		}
+	public function testGetTemplates() {
+		$registry = new TemplateRegistry( array( 'known' => 'html' ) );
+		$this->assertSame( array( 'known' => 'html' ), $registry->getTemplates() );
 	}
 
-	public function providerAddTemplates() {
-		return array(
-			array(
-				array( 'tmpl2' => '<div>$1</div>' ),
-				array( 'tmpl3' => '<div><div>$1</div></div>' )
-			)
-		);
+	public function testGetKnownTemplate() {
+		$registry = new TemplateRegistry( array( 'known' => 'html' ) );
+		$this->assertSame( 'html', $registry->getTemplate( 'known' ) );
+	}
+
+	public function testGetUnknownTemplate() {
+		$registry = new TemplateRegistry( array() );
+
+		\MediaWiki\suppressWarnings();
+		$html = $registry->getTemplate( 'unknown' );
+		\MediaWiki\restoreWarnings();
+
+		$this->assertNull( $html );
 	}
 
 }
