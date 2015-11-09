@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\ChangeRow;
 
 /**
@@ -15,54 +16,177 @@ use Wikibase\ChangeRow;
  * @group WikibaseChange
  *
  * @licence GNU GPL v2+
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Daniel Kinzler
- * @author Marius Hoch
+ * @author Thiemo Mättig
  */
-class ChangeRowTest extends \MediaWikiTestCase {
+class ChangeRowTest extends PHPUnit_Framework_TestCase {
 
-	public function changeProvider() {
-		return array(
-			array(
-				new ChangeRow(
-					array(
-						'user_id' => 1,
-						'time' => '20130101000000'
-					)
-				)
-			)
-		);
+	public function testAgeCalculation() {
+		$change = new ChangeRow( array( 'time' => date( 'YmdHis' ) ) );
+		$age = $change->getAge();
+		$this->assertInternalType( 'int', $age );
+		$this->assertGreaterThanOrEqual( 0, $age );
 	}
 
-	/**
-	 * @dataProvider changeProvider
-	 */
-	public function testGetAge( ChangeRow $changeRow ) {
-		// Don't assert on equalness because all previous code takes time!
-		$this->assertTrue(
-			// the time used is one above the minimum run time (4s) for the test,
-			// still the normal difference to observe would be 1s.
-			abs( ( time() - (int)wfTimestamp( TS_UNIX, '20130101000000' ) ) - $changeRow->getAge() ) <= 5
-		);
+	public function testCanNotCalculateAgeWithoutTime() {
+		$change = new ChangeRow();
+		$this->setExpectedException( 'MWException' );
+		$change->getAge();
 	}
 
-	/**
-	 * @dataProvider changeProvider
-	 */
-	public function testGetTime( ChangeRow $changeRow ) {
-		$this->assertEquals(
-			'20130101000000',
-			$changeRow->getTime()
-		);
+	public function testReturnsTime() {
+		$change = new ChangeRow( array( 'time' => '20130101000000' ) );
+		$this->assertSame( '20130101000000', $change->getTime() );
 	}
 
-	public function testGetObjectId() {
-		$change = new ChangeRow( array( 'object_id' => 'p100' ) );
+	public function testCanNotReturnTimeWithoutTime() {
+		$change = new ChangeRow();
+		$this->setExpectedException( 'MWException' );
+		$change->getTime();
+	}
 
-		$this->assertEquals(
-			'p100',
-			$change->getObjectId()
-		);
+	public function testIsNotEmpty() {
+		$change = new ChangeRow();
+		$this->assertFalse( $change->isEmpty() );
+	}
+
+	public function testGetTypeReturnsChange() {
+		$change = new ChangeRow();
+		$this->assertSame( 'change', $change->getType() );
+	}
+
+	public function testReturnsObjectId() {
+		$change = new ChangeRow( array( 'object_id' => 'Q1' ) );
+		$this->assertSame( 'Q1', $change->getObjectId() );
+	}
+
+	public function testCanNotReturnDefaultObjectId() {
+		$change = new ChangeRow();
+		$this->setExpectedException( 'MWException' );
+		$change->getObjectId();
+	}
+
+	public function testReturnsExistingField() {
+		$change = new ChangeRow( array( 'field' => 'value' ) );
+		$this->assertSame( 'value', $change->getField( 'field' ) );
+	}
+
+	public function testReturnsDefaultForUnknownField() {
+		$change = new ChangeRow();
+		$this->assertSame( 'default', $change->getField( 'field', 'default' ) );
+	}
+
+	public function testCanNotReturnFieldWithoutDefault() {
+		$change = new ChangeRow();
+		$this->setExpectedException( 'MWException' );
+		$change->getField( 'field' );
+	}
+
+	public function testGetFieldUnserializesInfo() {
+		$json = '{"field":"value"}';
+		$expected = array( 'field' => 'value' );
+		$change = new ChangeRow( array( 'info' => $json ) );
+		$this->assertSame( $expected, $change->getField( 'info' ) );
+	}
+
+	public function testReturnsFields() {
+		$change = new ChangeRow( array( 'field' => 'value' ) );
+		$this->assertSame( array( 'id' => null, 'field' => 'value' ), $change->getFields() );
+	}
+
+	public function testGetFieldsUnserializesInfo() {
+		$json = '{"field":"value"}';
+		$expected = array( 'field' => 'value' );
+		$change = new ChangeRow( array( 'info' => $json ) );
+		$this->assertSame( array( 'id' => null, 'info' => $expected ), $change->getFields() );
+	}
+
+	public function testSerializes() {
+		$info = array( 'field' => 'value' );
+		$expected = '{"field":"value"}';
+		$change = new ChangeRow();
+		$this->assertSame( $expected, $change->serializeInfo( $info ) );
+	}
+
+	public function testDoesNotSerializeObjects() {
+		$info = array( 'array' => array( 'object' => new ChangeRow() ) );
+		$change = new ChangeRow();
+		$this->setExpectedException( 'MWException' );
+		$change->serializeInfo( $info );
+	}
+
+	public function testUnserializesJson() {
+		$json = '{"field":"value"}';
+		$expected = array( 'field' => 'value' );
+		$change = new ChangeRow();
+		$this->assertSame( $expected, $change->unserializeInfo( $json ) );
+	}
+
+	public function testUnserializesPhpSerializations() {
+		$serialization = 'a:1:{s:5:"field";s:5:"value";}';
+		$expected = array( 'field' => 'value' );
+		$change = new ChangeRow();
+		$this->assertSame( $expected, $change->unserializeInfo( $serialization ) );
+	}
+
+	public function testCanNotUnserializeWithoutObjectId() {
+		$change = new ChangeRow();
+		$this->setExpectedException( 'MWException' );
+		$change->unserializeInfo( 's:5:"value";' );
+	}
+
+	public function testCanNotUnserializeNonArrays() {
+		$change = new ChangeRow( array( 'object_id' => 'Q1' ) );
+		$this->setExpectedException( 'PHPUnit_Framework_Error_Warning' );
+		$this->assertSame( array(), $change->unserializeInfo( 's:5:"value";' ) );
+	}
+
+	public function testSetsField() {
+		$change = new ChangeRow();
+		$change->setField( 'field', 'value' );
+		$this->assertSame( 'value', $change->getField( 'field' ) );
+	}
+
+	public function testSetsFields() {
+		$change = new ChangeRow();
+		$change->setFields( array( 'field' => 'value' ) );
+		$this->assertSame( 'value', $change->getField( 'field' ) );
+	}
+
+	public function testOverridesFieldsByDefault() {
+		$change = new ChangeRow( array( 'field' => 'old' ) );
+		$change->setFields( array( 'field' => 'new' ) );
+		$this->assertSame( 'new', $change->getField( 'field' ) );
+	}
+
+	public function testDoesNotOverrideFields() {
+		$change = new ChangeRow( array( 'field' => 'old' ) );
+		$change->setFields( array( 'field' => 'new' ), false );
+		$this->assertSame( 'old', $change->getField( 'field' ) );
+	}
+
+	public function testReturnsId() {
+		$change = new ChangeRow( array( 'id' => 1 ) );
+		$this->assertSame( 1, $change->getId() );
+	}
+
+	public function testDefaultIdIsNull() {
+		$change = new ChangeRow();
+		$this->assertNull( $change->getId() );
+	}
+
+	public function testHasKnownField() {
+		$change = new ChangeRow( array( 'key' => 'value' ) );
+		$this->assertTrue( $change->hasField( 'key' ) );
+	}
+
+	public function testDoesNotHaveUnknownField() {
+		$change = new ChangeRow();
+		$this->assertFalse( $change->hasField( 'unknown' ) );
+	}
+
+	public function testAlwaysHasIdField() {
+		$change = new ChangeRow();
+		$this->assertTrue( $change->hasField( 'id' ) );
 	}
 
 }
