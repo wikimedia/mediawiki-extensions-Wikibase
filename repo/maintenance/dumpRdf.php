@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -37,6 +38,11 @@ class DumpRdf extends DumpScript {
 	private $propertyDatatypeLookup;
 
 	/**
+	 * @var ValueSnakRdfBuilderFactory
+	 */
+	private $dataValueRdfBuilderFactory;
+
+	/**
 	 * @var string
 	 */
 	private $conceptBaseUri;
@@ -51,11 +57,21 @@ class DumpRdf extends DumpScript {
 		$this->addOption( 'format', "Set the dump format.", false, true );
 	}
 
+	/**
+	 * @param EntityPerPage $entityPerPage
+	 * @param EntityPrefetcher $entityPrefetcher
+	 * @param SiteStore $siteStore
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param ValueSnakRdfBuilderFactory $dataValueRdfBuilderFactory
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param $conceptBaseUri
+	 */
 	public function setServices(
 		EntityPerPage $entityPerPage,
 		EntityPrefetcher $entityPrefetcher,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
+		ValueSnakRdfBuilderFactory $dataValueRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		$conceptBaseUri
 	) {
@@ -63,6 +79,7 @@ class DumpRdf extends DumpScript {
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->siteStore = $siteStore;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
+		$this->dataValueRdfBuilderFactory = $dataValueRdfBuilderFactory;
 		$this->revisionLookup = $entityRevisionLookup;
 		$this->conceptBaseUri = $conceptBaseUri;
 		$this->hasHadServicesSet = true;
@@ -76,6 +93,7 @@ class DumpRdf extends DumpScript {
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getSiteStore(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
+				$wikibaseRepo->getDataValueRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 				$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' )
 			);
@@ -115,6 +133,7 @@ class DumpRdf extends DumpScript {
 			$this->siteStore->getSites(),
 			$this->revisionLookup,
 			$this->propertyDatatypeLookup,
+			$this->dataValueRdfBuilderFactory,
 			$this->entityPrefetcher,
 			$languageCodes
 		);

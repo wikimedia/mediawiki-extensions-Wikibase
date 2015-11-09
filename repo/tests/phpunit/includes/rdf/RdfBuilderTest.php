@@ -8,6 +8,7 @@ use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
@@ -49,10 +50,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$dedup = new HashDedupeBag();
 		}
 
+		// Note: using the actual factory here makes this an integration test!
+		$dataValueRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(
 			$this->getTestData()->getSiteList(),
 			$this->getTestData()->getVocabulary(),
+			$dataValueRdfBuilderFactory,
 			$this->getTestData()->getMockRepository(),
 			$produce,
 			$emitter,
@@ -129,7 +134,21 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 				RdfProducer::PRODUCE_FULL_VALUES );
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
-		$this->assertEquals( $correctData, $this->getDataFromBuilder( $builder ) );
+
+		$this->assertTriplesEqual( $correctData, $this->getDataFromBuilder( $builder ) );
+	}
+
+	private function assertTriplesEqual( $expected, $actual, $message = '' ) {
+		// Note: comparing $expected and $actual directly would show triples
+		// that are present in both but shifted in position. That makes the output
+		// hard to read. Calculating the $missing and $extra sets helps.
+		$extra = array_diff( $actual, $expected );
+		$missing = array_diff( $expected, $actual );
+
+		// Cute: $missing and $extra can be equal only if they are empty.
+		// Comparing them here directly looks a bit odd in code, but produces meaningful
+		// output, especially if the input was sorted.
+		$this->assertEquals( $missing, $extra, $message );
 	}
 
 	public function testAddEntityRedirect() {
@@ -140,7 +159,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntityRedirect( $q11, $q1 );
 
 		$correctData = array( '<http://acme.test/Q11> <http://www.w3.org/2002/07/owl#sameAs> <http://acme.test/Q1> .' );
-		$this->assertEquals( $correctData, $this->getDataFromBuilder( $builder ) );
+		$this->assertTriplesEqual( $correctData, $this->getDataFromBuilder( $builder ) );
 	}
 
 	public function getProduceOptions() {
@@ -174,14 +193,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
 		$builder->resolveMentionedEntities( $this->getTestData()->getMockRepository() );
 		$data = $this->getDataFromBuilder( $builder );
-		$this->assertEquals( $correctData, $data );
+		$this->assertTriplesEqual( $correctData, $data );
 	}
 
 	public function testDumpHeader() {
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_VERSION_INFO );
 		$builder->addDumpHeader( 1426110695 );
 		$data = $this->getDataFromBuilder( $builder );
-		$this->assertEquals( $this->getSerializedData( 'dumpheader' ), $data );
+		$this->assertTriplesEqual( $this->getSerializedData( 'dumpheader' ), $data );
 	}
 
 	public function testDeduplication() {
