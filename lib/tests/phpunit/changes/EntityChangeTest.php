@@ -14,6 +14,7 @@ use Wikibase\ItemContent;
 
 /**
  * @covers Wikibase\EntityChange
+ * @covers Wikibase\DiffChange
  *
  * @since 0.3
  *
