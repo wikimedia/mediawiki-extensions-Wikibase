@@ -125,7 +125,7 @@ class DataTypeDefinitions {
 	}
 
 	/**
-	 * @see DataValueRdfBuilderFactory
+	 * @see ValueSnakRdfBuilderFactory
 	 *
 	 * @return callable[]
 	 */

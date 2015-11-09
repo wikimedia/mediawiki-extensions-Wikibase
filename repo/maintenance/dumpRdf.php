@@ -93,7 +93,7 @@ class DumpRdf extends DumpScript {
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getSiteStore(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
-				$wikibaseRepo->getDataValueRdfBuilderFactory(),
+				$wikibaseRepo->getValueSnakRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 				$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' )
 			);
