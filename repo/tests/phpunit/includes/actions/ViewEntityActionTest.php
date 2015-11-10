@@ -80,8 +80,8 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$html = $this->executeViewAction( $page, $params );
 
-		$this->assertRegExp( '/diff-currentversion-title/', $html, 'is diff view' );
-		$this->assertNotRegExp( '/wikibase-edittoolbar-container/', $html, 'no edit toolbar' );
+		$this->assertContains( 'diff-currentversion-title', $html, 'is diff view' );
+		$this->assertNotContains( 'wikibase-edittoolbar-container', $html, 'no edit toolbar' );
 	}
 
 	public function testShowOldRevision_hasNoEditLinks() {
