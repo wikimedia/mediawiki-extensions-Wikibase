@@ -187,6 +187,24 @@
       "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_613c8a8f",
+        "filename": "repo/tests/phpunit/data/rdf/Q4_props.nt",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T19:34:45Z",
+      "side": 1,
+      "message": "No, the old test setup was wrog. It was using \"globecoordinate\" as a data type name. The actual data type name is \"globe-coordinate\", which is translated to GlobeCoordinate. \"globecoordinate\" is the value type name (yea, fun, isn\u0027t it?).",
+      "parentUuid": "0ebaf39b_3b21e84b",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
