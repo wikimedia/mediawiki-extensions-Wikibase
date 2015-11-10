@@ -5,10 +5,10 @@ namespace Wikibase\Client\Tests\Hooks;
 use FauxRequest;
 use FormOptions;
 use User;
-use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
+use Wikibase\Client\Hooks\ChangesListSpecialPageQueryHandler;
 
 /**
- * @covers Wikibase\Client\Hooks\SpecialWatchlistQueryHandler
+ * @covers Wikibase\Client\Hooks\ChangesListSpecialPageQueryHandler
  *
  * @group WikibaseClient
  * @group HookHandler
@@ -17,7 +17,7 @@ use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SpecialWatchlistQueryHandlerTest extends \PHPUnit_Framework_TestCase {
+class ChangesListSpecialPageQueryHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider addWikibaseConditionsProvider
@@ -30,15 +30,18 @@ class SpecialWatchlistQueryHandlerTest extends \PHPUnit_Framework_TestCase {
 		$hideWikibase,
 		$message
 	) {
-		$user = $this->getUser( $enhanced );
-
-		$database = $this->getDatabase();
-		$hookHandler = new SpecialWatchlistQueryHandler( $user, $database, $showExternalChanges );
+		$hookHandler = new ChangesListSpecialPageQueryHandler(
+			new FauxRequest(),
+			$this->getUser( $enhanced ),
+			$this->getDatabase(),
+			'Watchlist',
+			$showExternalChanges
+		);
 
 		$opts = new FormOptions();
 		$opts->add( 'hideWikibase', $hideWikibase );
 
-		$newConds = $hookHandler->addWikibaseConditions( new FauxRequest(), $conds, $opts );
+		$newConds = $hookHandler->addWikibaseConditions( $conds, $opts );
 
 		$this->assertEquals( $expected, $newConds, $message );
 	}
