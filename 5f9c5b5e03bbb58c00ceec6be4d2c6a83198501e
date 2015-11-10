@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_60b32bfe",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-11-10T02:35:56Z",
+      "side": 1,
+      "message": "It would be nice to have real description here.",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c52ea989",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
@@ -47,6 +64,24 @@
       "writtenOn": "2015-11-09T23:28:06Z",
       "side": 1,
       "message": "Could just return $builder here in case it\u0027s not null, would make the function a little nicer, IMO",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a0dda319",
+        "filename": "repo/includes/rdf/DispatchingValueSnakRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-11-10T02:35:56Z",
+      "side": 1,
+      "message": "+1 on this, just return $this-\u003evalueBuilders[\"PT:$dataTypeId\"]; above.",
+      "parentUuid": "0ebaf39b_05460127",
       "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
