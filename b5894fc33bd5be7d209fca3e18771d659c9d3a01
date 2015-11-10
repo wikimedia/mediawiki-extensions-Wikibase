@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_3b15684e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-10T15:50:11Z",
+      "side": 1,
+      "message": "This means \"string or null or undefined\". Is this intended? I think focusing on null and not supporting undefined is better.",
+      "revId": "b5894fc33bd5be7d209fca3e18771d659c9d3a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_580a9fd6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-10T15:50:11Z",
+      "side": 1,
+      "message": "This method does not support null at this point. But this method is removed at the end of this chain of patches.",
+      "revId": "b5894fc33bd5be7d209fca3e18771d659c9d3a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f68365ac",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-10T15:50:11Z",
+      "side": 1,
+      "message": "This creates a referenceview with no toolbar.",
+      "revId": "b5894fc33bd5be7d209fca3e18771d659c9d3a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_96bc6969",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-10T15:50:11Z",
+      "side": 1,
+      "message": "Could move this line down.",
+      "revId": "b5894fc33bd5be7d209fca3e18771d659c9d3a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_76b77585",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-10T15:50:11Z",
+      "side": 1,
+      "message": "Could move this line down.",
+      "revId": "b5894fc33bd5be7d209fca3e18771d659c9d3a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
