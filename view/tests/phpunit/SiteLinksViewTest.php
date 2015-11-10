@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\Template\TemplateFactory;
@@ -166,28 +165,21 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 	 */
 	private function getSiteLinksView() {
 		$templateFactory = TemplateFactory::getDefaultInstance();
+		$editSectionGenerator = $this->getMock( 'Wikibase\View\EditSectionGenerator' );
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 
 		return new SiteLinksView(
 			$templateFactory,
 			$this->newSiteList(),
-			$this->getEditSectionGeneratorMock(),
+			$editSectionGenerator,
 			$this->getEntityIdFormatterMock(),
-			new LanguageNameLookup(),
+			$languageNameLookup,
 			array(
 				'Q42' => 'wb-badge-featuredarticle',
 				'Q12' => 'wb-badge-goodarticle'
 			),
 			array( 'special group' )
 		);
-	}
-
-	/**
-	 * @return EditSectionGenerator
-	 */
-	private function getEditSectionGeneratorMock() {
-		$editSectionGenerator = $this->getMock( 'Wikibase\View\EditSectionGenerator' );
-
-		return $editSectionGenerator;
 	}
 
 	/**

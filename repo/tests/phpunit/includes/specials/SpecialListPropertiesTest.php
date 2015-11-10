@@ -7,7 +7,6 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
@@ -98,10 +97,14 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	protected function newSpecialPage() {
 		$specialPage = new SpecialListProperties();
 
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
 		$specialPage->initServices(
 			$this->getDataTypeFactory(),
 			$this->getPropertyInfoStore(),
-			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), new LanguageNameLookup() ),
+			new EntityIdHtmlLinkFormatterFactory( $this->getEntityTitleLookup(), $languageNameLookup ),
 			new LanguageFallbackChainFactory(),
 			$this->getEntityTitleLookup(),
 			$this->getBufferingTermLookup()
