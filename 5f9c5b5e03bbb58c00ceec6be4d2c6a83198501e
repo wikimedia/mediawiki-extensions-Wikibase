@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_211bf222",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_c5e9c911",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_7b00c0b5",
         "filename": "repo/WikibaseRepo.datatypes.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-10T08:49:06Z",
       "side": 1,
       "message": "Should these things happen in the factory method? Maybe the client can do it instead? I think it would be cleaner if it happened somewhere in getSimpleValueSnakRdfBuilder() and getComplexValueSnakRdfBuilder(), given we have special methods for them anyway.",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a1d6022b",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "In the near future, there will be different rdf builders for the different data types, and only some of them would take a tracker. And they will take them as a constructor argument. \n\nWe could make an EntityMentionSourece interface that defines a  setEntityMentionListener method, and then call it  from the factory if the builder implements this interface. But that seems overkill to me.",
+      "parentUuid": "0ebaf39b_7b00c0b5",
       "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_c1dbf652",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_60b32bfe",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c52ea989",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2015-11-09T23:28:06Z",
       "side": 1,
       "message": "missing type hint for $array. Also a very generic variable name.",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_61e00af8",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "Fixed the type hint. The name is as generic as the logic in the method: it can be applied to any array.",
+      "parentUuid": "0ebaf39b_c52ea989",
       "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_41e7060e",
+        "filename": "repo/includes/rdf/DispatchingValueSnakRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_a0dda319",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_65ad7de7",
         "filename": "repo/includes/rdf/RdfBuilder.php",
         "patchSetId": 5
@@ -116,6 +206,24 @@
       "writtenOn": "2015-11-09T23:28:06Z",
       "side": 1,
       "message": "empty line before comment would be nice",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c1c2165d",
+        "filename": "repo/includes/rdf/RdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_65ad7de7",
       "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_01c82e76",
+        "filename": "repo/includes/rdf/SimpleValueRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "In the context of our RDF code, \"vocabulary\" is a specific concept, as implemented by the RdfVocabulary class. I don\u0027t know how I could be more specific here.",
+      "parentUuid": "0ebaf39b_a55e15eb",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c5454949",
         "filename": "repo/includes/rdf/ValueSnakRdfBuilderFactory.php",
         "patchSetId": 5
@@ -156,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_61aeca97",
+        "filename": "repo/includes/rdf/ValueSnakRdfBuilderFactory.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "Yes, I thought about adding a private helper function, but for two lines of code, that seemed excessive.",
+      "parentUuid": "0ebaf39b_c5454949",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_25dd4574",
         "filename": "repo/maintenance/dumpRdf.php",
         "patchSetId": 5
@@ -167,6 +311,41 @@
       "writtenOn": "2015-11-09T23:28:06Z",
       "side": 1,
       "message": "string",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2198d27b",
+        "filename": "repo/maintenance/dumpRdf.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_25dd4574",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4195c641",
+        "filename": "repo/maintenance/dumpRdf.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-10T20:14:16Z",
+      "side": 1,
+      "message": "wrong method name, should be getValueSnakRdfBuilderFactory. Fixed now.",
       "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
