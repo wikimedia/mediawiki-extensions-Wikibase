@@ -214,7 +214,7 @@ class ItemDisambiguation {
 		$matchElement = $descriptionElement = Html::element(
 			'span',
 			array( 'class' => 'wb-itemlink-match' ),
-			wfMessage( 'wikibase-itemlink-userlang-wrapper' )->params( $language, $text )->parse()
+			wfMessage( 'wikibase-itemlink-userlang-wrapper' )->params( $language, $text )->text()
 		);
 
 		return $matchElement;
