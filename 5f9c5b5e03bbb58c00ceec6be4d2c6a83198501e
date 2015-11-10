@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_7b00c0b5",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-11-10T08:49:06Z",
+      "side": 1,
+      "message": "Should these things happen in the factory method? Maybe the client can do it instead? I think it would be cleaner if it happened somewhere in getSimpleValueSnakRdfBuilder() and getComplexValueSnakRdfBuilder(), given we have special methods for them anyway.",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_60b32bfe",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 5
@@ -150,6 +167,23 @@
       "writtenOn": "2015-11-09T23:28:06Z",
       "side": 1,
       "message": "string",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3b21e84b",
+        "filename": "repo/tests/phpunit/data/rdf/Q4_props.nt",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2015-11-10T08:49:06Z",
+      "side": 1,
+      "message": "Why we\u0027re changing the ontology type names? This is not something we should do lightly, and this requires also updating the ontology definitions.",
       "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
