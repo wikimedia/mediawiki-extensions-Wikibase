@@ -296,7 +296,7 @@ abstract class Entity implements \Comparable, FingerprintHolder, EntityDocument 
 	public function setAllAliases( array $aliasLists ) {
 		$this->getFingerprint()->setAliasGroups( new AliasGroupList() );
 
-		foreach( $aliasLists as $languageCode => $aliasList ) {
+		foreach ( $aliasLists as $languageCode => $aliasList ) {
 			$this->setAliases( $languageCode, $aliasList );
 		}
 	}

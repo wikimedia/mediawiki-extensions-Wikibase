@@ -160,7 +160,7 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 		$args = array();
 
-		foreach( $snakListArgs as $snakLists ) {
+		foreach ( $snakListArgs as $snakLists ) {
 			$args[] = array(
 				new Reference( $snakLists[0] ),
 				new Reference( $snakLists[1] ),
