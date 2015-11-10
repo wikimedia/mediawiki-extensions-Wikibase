@@ -95,7 +95,7 @@ class ChangesListSpecialPageFilterHandler {
 	 * @param array &$filters
 	 */
 	public function addFilterIfEnabled( array &$filters ) {
-		if ( $this->shouldAddFilter() ) {
+		if ( $this->supportsWikibaseChanges() ) {
 			$toggleDefault = $this->getShowWikibaseEditsByDefaultSetting();
 			$this->addFilter( $filters, $toggleDefault );
 		}
@@ -104,7 +104,7 @@ class ChangesListSpecialPageFilterHandler {
 	/**
 	 * @return boolean
 	 */
-	private function shouldAddFilter() {
+	private function supportsWikibaseChanges() {
 		return $this->showExternalChanges && !$this->isEnhancedChangesEnabled();
 	}
 
