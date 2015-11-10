@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_dbc0c981",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-10T15:32:04Z",
+      "side": 1,
+      "message": "With this patch this line is called instead of the one below.",
+      "revId": "4d51ef5c6885ca1a6c5306ae040bb755b6d00870",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
