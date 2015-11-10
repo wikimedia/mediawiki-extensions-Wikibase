@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_7bd2fd5e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-10T15:56:18Z",
+      "side": 0,
+      "message": "I found this confusing. Before this code called stopEditing for all snaks in the reference. But then removes all snaks and rebuilds the list.",
+      "revId": "b5894fc33bd5be7d209fca3e18771d659c9d3a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_bbdb9553",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-10T15:56:18Z",
+      "side": 0,
+      "message": "This recreates the list. The stopEditing above is pointless.",
+      "revId": "b5894fc33bd5be7d209fca3e18771d659c9d3a01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
