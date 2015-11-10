@@ -154,10 +154,6 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEmpty( $siteLinkStore->getSiteLinksForItem( new ItemId( 'Q123' ) ) );
 	}
 
-	/**
-	 * @covers HashSiteLinkLookup::getItemIdForSiteLink
-	 * @covers HashSiteLinkLookup::saveLinksOfItem
-	 */
 	public function testGetItemIdForSiteLink() {
 		$itemId = new ItemId( 'Q11' );
 		$siteLink = new SiteLink( 'eswiki', 'Cerveza' );
