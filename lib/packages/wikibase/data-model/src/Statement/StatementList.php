@@ -200,7 +200,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 		$snaks = array();
 
 		foreach ( $this->statements as $statement ) {
-			foreach( $statement->getAllSnaks() as $snak ) {
+			foreach ( $statement->getAllSnaks() as $snak ) {
 				$snaks[] = $snak;
 			}
 		}

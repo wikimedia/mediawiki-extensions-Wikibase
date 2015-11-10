@@ -78,7 +78,7 @@ class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 		$constructionDatas = $this->provideConstructionData();
 		$argLists = array();
 
-		foreach( $constructionDatas as $constructionData ){
+		foreach ( $constructionDatas as $constructionData ) {
 			$argLists[] = array( new StatementGuid( $constructionData[0], $constructionData[1] ) );
 		}
 

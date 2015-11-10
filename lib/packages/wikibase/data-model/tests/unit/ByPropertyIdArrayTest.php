@@ -224,7 +224,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		$indicesDestination = array();
 
 		$i = 0;
-		foreach( $objects as $object ) {
+		foreach ( $objects as $object ) {
 			$indicesSource[$i++] = $object;
 			$indicesDestination[$indexedArray->getFlatArrayIndexOfObject( $object )] = $object;
 		}
@@ -318,7 +318,7 @@ class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
 		// Not using $indexedArray->toFlatArray() here to test whether native array has been
 		// exchanged:
 		$reindexedArray = array();
-		foreach( $indexedArray as $o ) {
+		foreach ( $indexedArray as $o ) {
 			$reindexedArray[] = $o;
 		}
 
