@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_82f97980",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:03:11Z",
+      "side": 1,
+      "message": "The sanity check does not make sense here, it should be in the function.",
+      "revId": "c516c1485c7388d7b825c731fcd1ebfe90fcfcb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_42f3819c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:03:11Z",
+      "side": 1,
+      "message": "You should break the \"$.each\" loop with \"return false\" in this case.",
+      "revId": "c516c1485c7388d7b825c731fcd1ebfe90fcfcb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
