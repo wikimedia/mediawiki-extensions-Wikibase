@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_9f9f9606",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/addtoolbar/statementview-referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:13:34Z",
+      "side": 1,
+      "message": "This seems to be obsolete. From what I understand the statementview must already be in edit mode, otherwise there would not be an \"add reference\" button.\n\nIn manual testing I realize you can hit \"add reference\" to set the whole statementview to edit mode. I guass this is the line of code that does this.",
+      "revId": "53cd6c62735b2eb0f5faa23ef39c72ceb5deb74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c221b19e",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:13:34Z",
+      "side": 1,
+      "message": "In manual testing I never see \"cancel\".",
+      "revId": "53cd6c62735b2eb0f5faa23ef39c72ceb5deb74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1f8ba6c5",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:13:34Z",
+      "side": 1,
+      "message": "Before, this button could not exist on a referenceview with no GUID or no value. Now this is moved outside of the \"if\". Is this intentional?",
+      "revId": "53cd6c62735b2eb0f5faa23ef39c72ceb5deb74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

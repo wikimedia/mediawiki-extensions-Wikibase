@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_5f811ea3",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:13:34Z",
+      "side": 0,
+      "message": "I think this was here intentionally. This code makes it possible to create toolbars and buttons in static PHP and reuse that part of the DOM. I think this is currently not the case because we do not have a special page to edit references.",
+      "revId": "7d3f0995fc49e6b4c0e1f6f81b896acd49a40b80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
