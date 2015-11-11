@@ -53,7 +53,7 @@
 	"wikibase-error-invalid-entity-id": "Unešen ID nije poznat u sistemu. Koristite validan ID.",
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|međuwiki veza|međuwiki veze|međuwiki veza}} na stranici)",
-	"wikibase-unconnectedpages-submit": "OK",
+	"wikibase-unconnectedpages-submit": "Prikaži stranice",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} stavka ID",
 	"wikibase-pageinfo-entity-id-none": "Ništa",
 	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2",
