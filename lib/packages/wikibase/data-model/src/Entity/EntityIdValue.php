@@ -155,8 +155,7 @@ class EntityIdValue extends DataValueObject {
 				$data['entity-type'],
 				$data['numeric-id']
 			);
-		}
-		catch ( \InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException $ex ) {
 			throw new IllegalValueException( $ex->getMessage(), 0, $ex );
 		}
 

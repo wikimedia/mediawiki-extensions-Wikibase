@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Statement;
 
+use ArrayObject;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementByGuidMap;
@@ -116,12 +117,12 @@ class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
 		) );
 	}
 
-	public function testCanConstructWithStatementIterable() {
-		$statementList = new \ArrayObject( array(
+	public function testCanConstructWithStatementTraversable() {
+		$traversable = new ArrayObject( array(
 			$this->newStatement( 1, 'some guid' )
 		) );
 
-		$statementMap = new StatementByGuidMap( $statementList );
+		$statementMap = new StatementByGuidMap( $traversable );
 
 		$this->assertTrue( $statementMap->hasStatementWithGuid( 'some guid' ) );
 	}

@@ -2,6 +2,8 @@
 
 namespace Wikibase\DataModel;
 
+use ArrayObject;
+use Comparable;
 use Hashable;
 use InvalidArgumentException;
 use Traversable;
@@ -31,7 +33,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArray extends \ArrayObject implements \Hashable, \Comparable {
+abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 
 	/**
 	 * Maps element hashes to their offsets.

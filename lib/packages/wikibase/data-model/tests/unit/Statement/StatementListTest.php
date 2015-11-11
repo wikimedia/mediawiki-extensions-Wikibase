@@ -296,7 +296,7 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenTraversableWithNonStatements_constructorThrowsException() {
-		$traversable = new \ArrayObject( array(
+		$traversable = new ArrayObject( array(
 			$this->getStatementWithSnak( 1, 'foo' ),
 			new \stdClass(),
 			$this->getStatementWithSnak( 2, 'bar' ),

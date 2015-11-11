@@ -36,11 +36,11 @@ abstract class SnakObject implements Snak {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $propertyId ) {
-		if ( is_integer( $propertyId ) ) {
+		if ( is_int( $propertyId ) ) {
 			$propertyId = PropertyId::newFromNumber( $propertyId );
 		}
 
-		if ( !$propertyId instanceof EntityId ) {
+		if ( !( $propertyId instanceof EntityId ) ) {
 			throw new InvalidArgumentException( '$propertyId must be an instance of EntityId' );
 		}
 

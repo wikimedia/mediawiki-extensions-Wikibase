@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Internal;
 
+use ArrayObject;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Internal\MapValueHasher;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -40,7 +41,7 @@ class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( $hash, $hasher->hash( $map1 ) );
 
-		$map4 = new \ArrayObject( $map0 );
+		$map4 = new ArrayObject( $map0 );
 		$this->assertEquals( $hash, $hasher->hash( $map4 ) );
 
 		$map2 = $map0;

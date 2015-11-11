@@ -85,12 +85,11 @@ class Property extends Entity implements StatementListHolder {
 	public function setId( $id ) {
 		if ( $id === null || $id instanceof PropertyId ) {
 			$this->id = $id;
-		}
-		elseif ( is_integer( $id ) ) {
+		} elseif ( is_int( $id ) ) {
 			$this->id = PropertyId::newFromNumber( $id );
-		}
-		else {
-			throw new InvalidArgumentException( '$id must be an instance of PropertyId, an integer, or null' );
+		} else {
+			throw new InvalidArgumentException( '$id must be an instance of PropertyId, an integer,'
+				. ' or null' );
 		}
 	}
 
