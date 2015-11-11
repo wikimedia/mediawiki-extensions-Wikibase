@@ -92,17 +92,20 @@ QUnit.test( 'Create & destroy toolbar with initial content', function( assert ) 
 } );
 
 QUnit.test( 'Create & destroy with renderItemSeparators=true', function( assert ) {
-	var $button = $( '<span/>' ).toolbarbutton( {
-			$label: 'label'
+	var $button1 = $( '<span/>' ).toolbarbutton( {
+			$label: 'label1'
+		} ),
+		$button2 = $( '<span/>' ).toolbarbutton( {
+			$label: 'label2'
 		} ),
 		$toolbar = createTestToolbar( {
-			$content: $button,
+			$content: $.merge( $button1, $button2 ),
 			renderItemSeparators: true
 		} ),
 		toolbar = $toolbar.data( 'toolbar' );
 
 	assert.ok(
-		$toolbar.contents().length > 1,
+		$toolbar.contents().length > 2,
 		'Rendered toolbar with content additional to specified toolbar button.'
 	);
 

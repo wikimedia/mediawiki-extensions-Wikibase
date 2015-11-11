@@ -51,7 +51,7 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 			this.element.addClass( 'wikibase-toolbar-button-' + this.options.cssClassSuffix );
 		}
 
-		if ( !this.$link.contents().length ) {
+		if ( this.$link.contents().text() === '' ) {
 			this.$link.append( this._getLabel() );
 		}
 
