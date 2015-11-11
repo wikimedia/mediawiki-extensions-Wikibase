@@ -133,7 +133,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 		} );
 
 		if ( this.options.renderItemSeparators && this.options.$content.length ) {
-			$container.append( mw.wbTemplate( 'wikibase-toolbar-bracketed', $children ) );
+			$container.append( $children  );
 		} else {
 			$container.append( $children );
 		}
