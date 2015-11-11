@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_02510965",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 0,
+      "message": "Which code is now responsible for removing \"wb-error\"?",
+      "revId": "82205f475fa42d00189858134e12d8971fd40edd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_a28b5de7",
+        "filename": ".jshintrc",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 1,
+      "message": "Why not stick to the existing naming scheme with the appended *.tests.js? This would work for both classes and functions.",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_42706107",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 1,
+      "message": "This means consumers of this event do not know anymore *what* happened, only *that* something happened. I wonder if this is a good thing.",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_62fa4542",
+        "filename": "view/resources/jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 1,
+      "message": "The wording of this message is not correct any more, since it now accepts either or.",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3599e9c8",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 1,
+      "message": "What model? Please describe this parameter.",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_95fbf5dd",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 1,
+      "message": "This does have a default, most probably [dropValue\u003dfalse] from what I can see below.",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_35e00925",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 1,
+      "message": "Sure. It\u0027s called \"drop\", right? Or do you think this is the responsibility of the view?",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d5d88d81",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 1,
+      "message": "The fact that a parameter can be undefined is usually documented as \"@param string [name]\", for example. Square brackets mean optional, which means undefined.",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_75cd21bc",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T16:54:09Z",
+      "side": 1,
+      "message": "A Boolean object? Why not \"!!error\"?",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
