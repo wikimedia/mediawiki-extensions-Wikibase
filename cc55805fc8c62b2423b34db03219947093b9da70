@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_3ffd4a39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T14:11:52Z",
+      "side": 1,
+      "message": "Does this describe a broken or the expected behavior?",
+      "revId": "cc55805fc8c62b2423b34db03219947093b9da70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_fff6d259",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/removetoolbar/referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T14:11:52Z",
+      "side": 1,
+      "message": "I wonder why this event handler is added to the whole jQuery set, if only the first in the set should react on remove? When I read this code it looks like it will create individual remove buttons for all snaks, but all but the first button will be \"dead\" and not do anything because of the added \"if\".",
+      "revId": "cc55805fc8c62b2423b34db03219947093b9da70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
