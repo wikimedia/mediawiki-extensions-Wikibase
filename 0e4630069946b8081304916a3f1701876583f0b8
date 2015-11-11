@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_58ce1488",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T19:22:51Z",
+      "side": 1,
+      "message": "this screams for a factory method instead of using this constructor",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_18c89c76",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T19:22:51Z",
+      "side": 1,
+      "message": "type hint?",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_b8d39063",
         "filename": "repo/includes/api/QuerySearchEntities.php",
         "patchSetId": 10
