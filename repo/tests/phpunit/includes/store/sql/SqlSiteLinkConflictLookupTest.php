@@ -10,7 +10,7 @@ use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookupTest
+ * @covers Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup
  *
  * @group Wikibase
  * @group WikibaseRepo

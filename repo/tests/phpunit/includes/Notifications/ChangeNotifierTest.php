@@ -3,7 +3,6 @@
 namespace Wikibase\Tests\Repo;
 
 use Content;
-use ContentHandler;
 use Revision;
 use RuntimeException;
 use Title;

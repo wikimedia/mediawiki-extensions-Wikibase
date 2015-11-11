@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use ContentHandler;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
