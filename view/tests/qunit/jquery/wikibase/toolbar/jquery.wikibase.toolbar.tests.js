@@ -91,30 +91,6 @@ QUnit.test( 'Create & destroy toolbar with initial content', function( assert ) 
 	);
 } );
 
-QUnit.test( 'Create & destroy with renderItemSeparators=true', function( assert ) {
-	var $button = $( '<span/>' ).toolbarbutton( {
-			$label: 'label'
-		} ),
-		$toolbar = createTestToolbar( {
-			$content: $button,
-			renderItemSeparators: true
-		} ),
-		toolbar = $toolbar.data( 'toolbar' );
-
-	assert.ok(
-		$toolbar.contents().length > 1,
-		'Rendered toolbar with content additional to specified toolbar button.'
-	);
-
-	toolbar.destroy();
-
-	assert.strictEqual(
-		$toolbar.contents().length,
-		0,
-		'Emptied toolbar container when destroying the toolbar.'
-	);
-} );
-
 QUnit.test( 'Set content dynamically via option()', function( assert ) {
 	var $toolbar = createTestToolbar(),
 		toolbar = $toolbar.data( 'toolbar' ),
