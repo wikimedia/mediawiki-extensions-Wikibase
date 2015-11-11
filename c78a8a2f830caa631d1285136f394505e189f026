@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_15062524",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "We prefer to use bool over boolean",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b5b71984",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "We prefer to use bool over boolean",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7570c1d9",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "why public?",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d56badec",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "this needs to be static",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_350fa93d",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "We prefer to use bool over boolean",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_550c9d45",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "We prefer to use bool over boolean",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9809ec31",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "No need to return $filters here. Also this misses phpdoc.",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b8fab00b",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "We prefer to use bool over boolean",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d8ff64fb",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "We prefer to use bool over boolean",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_580b7426",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListSpecialPageFilterHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "assertSame",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f817c848",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListSpecialPageFilterHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:33:07Z",
+      "side": 1,
+      "message": "assertSame",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
