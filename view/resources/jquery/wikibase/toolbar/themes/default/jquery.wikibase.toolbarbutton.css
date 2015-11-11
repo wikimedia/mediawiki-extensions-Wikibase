@@ -31,3 +31,55 @@
 .wikibase-toolbarbutton.ui-state-disabled.oo-ui-buttonElement > .oo-ui-buttonElement-button {
 	cursor: default;
 }
+
+.wikibase-toolbar-button-edit a,
+.wikibase-toolbar-button-save a,
+.wikibase-toolbar-button-remove a,
+.wikibase-toolbar-button-cancel a,
+.wikibase-toolbar-button-add a {
+	/* common styles */
+	background-position: left;
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	font-size: small;
+	padding-left: 20px;
+	padding-right: 2px;
+}
+
+.rtl .wikibase-toolbar-button-edit a,
+.rtl .wikibase-toolbar-button-save a,
+.rtl .wikibase-toolbar-button-remove a,
+.rtl .wikibase-toolbar-button-cancel a,
+.rtl .wikibase-toolbar-button-add a {
+	/* common styles rtl */
+	background-position: right;
+	padding-left: 0;
+	padding-right: 20px;
+}
+
+.rtl .wikibase-toolbar-button-edit a,
+.wikibase-toolbar-button-edit a {
+	/* @embed */
+	background-image: url(images/icons/oojs-ui/edit-ltr.svg);
+	background-position: 0 40%;
+}
+
+.wikibase-toolbar-button-save a {
+	/* @embed */
+	background-image: url(images/icons/oojs-ui/check.svg);
+}
+
+.wikibase-toolbar-button-remove a {
+	/* @embed */
+	background-image: url(images/icons/oojs-ui/remove.svg);
+}
+
+.wikibase-toolbar-button-cancel a {
+	/* @embed */
+	background-image: url(images/icons/oojs-ui/close-ltr.svg);
+}
+
+.wikibase-toolbar-button-add a {
+	/* @embed */
+	background-image: url(images/icons/oojs-ui/add.svg);
+}
