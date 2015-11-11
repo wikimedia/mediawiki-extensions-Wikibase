@@ -33,6 +33,24 @@
       "revId": "cc55805fc8c62b2423b34db03219947093b9da70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1512a501",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/removetoolbar/referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-11-11T17:27:56Z",
+      "side": 1,
+      "message": "I didn\u0027t invent this style. In my opinion we should get rid of all the events in the future.",
+      "parentUuid": "0ebaf39b_fff6d259",
+      "revId": "cc55805fc8c62b2423b34db03219947093b9da70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
