@@ -96,7 +96,7 @@ QUnit.test( 'Create & destroy with renderItemSeparators=true', function( assert 
 			$label: 'label'
 		} ),
 		$toolbar = createTestToolbar( {
-			$content: $button,
+			$content: $.merge($button, $button),
 			renderItemSeparators: true
 		} ),
 		toolbar = $toolbar.data( 'toolbar' );
