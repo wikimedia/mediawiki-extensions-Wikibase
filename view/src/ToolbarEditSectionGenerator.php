@@ -121,13 +121,10 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 		}
 
 		return $this->templateFactory->render(
-			'wikibase-toolbar-bracketed',
-			$this->templateFactory->render(
-				'wikibase-toolbar-button',
-				'wikibase-toolbar-button-' . $cssClassSuffix,
-				$editUrl,
-				$buttonLabel
-			)
+			'wikibase-toolbar-button',
+			'wikibase-toolbar-button-' . $cssClassSuffix,
+			$editUrl,
+			$buttonLabel
 		);
 	}
 

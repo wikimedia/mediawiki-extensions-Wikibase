@@ -177,8 +177,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 		}
 
 		$subToolbar.toolbar( {
-			$content: $content,
-			renderItemSeparators: true
+			$content: $content
 		} );
 	},
 
@@ -363,7 +362,6 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 
 		this._$tooltipAnchor = $( '<span/>', {
 			'class': 'mw-help-field-hint',
-			style: 'display:inline-block;text-decoration:none;width:8px;', // TODO: Get rid of inline styles.
 			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
 		} ).toolbaritem();
 
