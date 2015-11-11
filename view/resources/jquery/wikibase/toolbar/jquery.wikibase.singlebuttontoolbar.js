@@ -33,7 +33,6 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	 * @see jQuery.wikibase.toolbar.options
 	 */
 	options: {
-		renderItemSeparators: true,
 		label: '',
 		eventName: 'action',
 		buttonCssClassSuffix: null
