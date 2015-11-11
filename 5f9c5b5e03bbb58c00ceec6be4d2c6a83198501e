@@ -265,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_b2041282",
+        "filename": "repo/includes/rdf/SimpleValueRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T00:55:24Z",
+      "side": 1,
+      "message": "Well, that\u0027s no reason to not declare the member. Undeclared members are public per default, we don\u0027t want that. Also this makes for poor tooling support.",
+      "parentUuid": "0ebaf39b_01c82e76",
+      "revId": "5f9c5b5e03bbb58c00ceec6be4d2c6a83198501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c5454949",
         "filename": "repo/includes/rdf/ValueSnakRdfBuilderFactory.php",
         "patchSetId": 5
