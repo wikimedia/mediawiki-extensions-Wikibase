@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_62dd6573",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:29:16Z",
+      "side": 1,
+      "message": "Multiple positions are for multiple images. This is only 1 image, so please remove the not needed \", center\".\n\nSame below.",
+      "revId": "50076e793fed0448ea2a7d2538df2464a440d252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_22e76d3d",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:29:16Z",
+      "side": 1,
+      "message": "All others do not have a height. Looks like a mistake.",
+      "revId": "50076e793fed0448ea2a7d2538df2464a440d252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e2d87581",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:29:16Z",
+      "side": 1,
+      "message": "Sooooo much repeated code. Please try to come up with a common class for all shared properties. Or simply do something like this:\n\n .wikibase-toolbar-button-add  a,\n .wikibase-toolbar-button-remove  a {\n   /* common styles */\n }",
+      "revId": "50076e793fed0448ea2a7d2538df2464a440d252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e23715aa",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbaritem.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:29:16Z",
+      "side": 1,
+      "message": "A \"tooltip\" that\u0027s 12px wide? This doesn\u0027t sound right. How could you read anything in a 12px wide window?",
+      "revId": "50076e793fed0448ea2a7d2538df2464a440d252",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
