@@ -8,7 +8,6 @@ use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\WikibaseContentLanguages;
@@ -59,6 +58,8 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
 
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+
 		return new EntityViewPlaceholderExpander(
 			$templateFactory,
 			$title,
@@ -68,7 +69,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			$entityRevisionLookup,
 			$userLanguages,
 			new WikibaseContentLanguages(),
-			new LanguageNameLookup()
+			$languageNameLookup
 		);
 	}
 

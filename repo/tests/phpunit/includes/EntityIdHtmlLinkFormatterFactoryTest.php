@@ -21,9 +21,13 @@ class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 	private function getFormatterFactory() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->never() )
+			->method( 'getName' );
+
 		return new EntityIdHtmlLinkFormatterFactory(
 			$titleLookup,
-			$this->getMock( 'Wikibase\Lib\LanguageNameLookup' )
+			$languageNameLookup
 		);
 	}
 

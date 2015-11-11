@@ -7,7 +7,6 @@ use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
@@ -31,11 +30,13 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 	 */
 	private function getMockEntityTitleLookup() {
 		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+
 		$entityIdFormatter->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( ItemId $id ) {
 				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
 			} ) );
+
 		return $entityIdFormatter;
 	}
 
@@ -43,9 +44,11 @@ class ItemDisambiguationTest extends \MediaWikiTestCase {
 	 * @return ItemDisambiguation
 	 */
 	private function newItemDisambiguation() {
+		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+
 		return new ItemDisambiguation(
 			$this->getMockEntityTitleLookup(),
-			new LanguageNameLookup(),
+			$languageNameLookup,
 			'en'
 		);
 	}
