@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_38e00025",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-11T18:54:51Z",
+      "side": 1,
+      "message": "I\u0027m not really happy with this. We should rather limit the search results to the user\u0027s current language and apply language fallback.",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_b8d39063",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-11T18:54:51Z",
+      "side": 1,
+      "message": "Either add a language parameter or use the wiki\u0027s content language here (which is the same as MobileFrontend uses).",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
