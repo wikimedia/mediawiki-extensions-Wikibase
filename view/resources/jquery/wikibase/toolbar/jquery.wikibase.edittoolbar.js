@@ -177,8 +177,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 		}
 
 		$subToolbar.toolbar( {
-			$content: $content,
-			renderItemSeparators: true
+			$content: $content
 		} );
 	},
 
