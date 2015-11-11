@@ -186,6 +186,57 @@
       "revId": "c78a8a2f830caa631d1285136f394505e189f026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d82684b5",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListSpecialPageFilterHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:34:22Z",
+      "side": 1,
+      "message": "assertSame",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_781bd873",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListSpecialPageFilterHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:34:22Z",
+      "side": 1,
+      "message": "assertSame",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_383560d8",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListSpecialPageFilterHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-11T18:34:22Z",
+      "side": 1,
+      "message": "hm... rather be explicit about what has been asked for? Could even throw/ fail the test if we ask for an unknown option.",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
