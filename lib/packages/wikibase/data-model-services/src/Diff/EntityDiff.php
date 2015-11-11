@@ -57,7 +57,7 @@ class EntityDiff extends Diff {
 			return;
 		}
 
-		if ( !$operations[$key] instanceof Diff ) {
+		if ( !( $operations[$key] instanceof Diff ) ) {
 			$warning = "Invalid substructure diff for key $key: " . get_class( $operations[$key] );
 
 			if ( function_exists( 'wfLogWarning' ) ) {
