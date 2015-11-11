@@ -16,11 +16,6 @@ var PARENT = $.wikibase.toolbaritem;
  * @option {jQuery} [$content]
  *         jQuery wrapped DOM elements, each featuring an instance of jQuery.wikibase.toolbaritem.
  *         Default: $()
- *
- * @option {boolean} [renderItemSeparators]
- *         Defines whether the toolbar should be displayed with separators "|" between each item. In
- *         that case everything will also be wrapped within "[" and "]".
- *         Default: false
  */
 $.widget( 'wikibase.toolbar', PARENT, {
 	/**
@@ -35,7 +30,6 @@ $.widget( 'wikibase.toolbar', PARENT, {
 		templateShortCuts: {},
 		$content: $(),
 		$container: null,
-		renderItemSeparators: false
 	},
 
 	/**
@@ -57,11 +51,6 @@ $.widget( 'wikibase.toolbar', PARENT, {
 	 * @see jQuery.wikibase.toolbaritem.destroy
 	 */
 	destroy: function() {
-		if ( this.options.renderItemSeparators ) {
-			// Re-render without separators to have them removed.
-			this.option( 'renderItemSeparators', false );
-		}
-
 		// Remove toolbar items managed by the widget:
 		$.each( this._getItems(), function() {
 			this.destroy();
@@ -107,8 +96,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 	},
 
 	draw: function() {
-		var self = this,
-			$container = this.getContainer(),
+		var $container = this.getContainer(),
 			$children = $();
 
 		$container.children().each( function() {
@@ -120,10 +108,6 @@ $.widget( 'wikibase.toolbar', PARENT, {
 		this.options.$content.each( function( i ) {
 			var $item = $( this );
 
-			if ( i !== 0 && self.options.renderItemSeparators ) {
-				$children = $children.add( $( document.createTextNode( '|' ) ) );
-			}
-
 			$children = $children.add( $item );
 
 			var item = $item.data( 'wikibase-toolbar-item' );
@@ -132,11 +116,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 			}
 		} );
 
-		if ( this.options.renderItemSeparators && this.options.$content.length ) {
-			$container.append( mw.wbTemplate( 'wikibase-toolbar-bracketed', $children ) );
-		} else {
-			$container.append( $children );
-		}
+		$container.append( $children );
 	},
 
 	/**
@@ -151,7 +131,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if ( key === '$content' || key === 'renderItemSeparators' ) {
+		if ( key === '$content' ) {
 			this.draw();
 		}
 
