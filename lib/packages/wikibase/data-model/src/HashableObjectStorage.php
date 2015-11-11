@@ -2,7 +2,9 @@
 
 namespace Wikibase\DataModel;
 
+use Comparable;
 use Hashable;
+use SplObjectStorage;
 use Wikibase\DataModel\Internal\MapValueHasher;
 
 /**
@@ -18,7 +20,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class HashableObjectStorage extends \SplObjectStorage implements \Comparable {
+class HashableObjectStorage extends SplObjectStorage implements Comparable {
 
 	/**
 	 * @since 0.2

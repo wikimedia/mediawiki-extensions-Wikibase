@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel;
 
+use ArrayObject;
 use OutOfBoundsException;
 use RuntimeException;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -40,7 +41,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
-class ByPropertyIdArray extends \ArrayObject {
+class ByPropertyIdArray extends ArrayObject {
 
 	/**
 	 * @var array[]|null
@@ -48,7 +49,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	private $byId = null;
 
 	/**
-	 * @see \ArrayObject::__construct
+	 * @see ArrayObject::__construct
 	 *
 	 * @param array|object $input
 	 */

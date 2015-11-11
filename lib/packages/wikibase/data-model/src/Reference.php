@@ -2,6 +2,10 @@
 
 namespace Wikibase\DataModel;
 
+use Comparable;
+use Countable;
+use Hashable;
+use Immutable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -15,7 +19,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Reference implements \Hashable, \Comparable, \Immutable, \Countable {
+class Reference implements Hashable, Comparable, Immutable, Countable {
 
 	/**
 	 * @var SnakList

@@ -2,6 +2,9 @@
 
 namespace Wikibase\DataModel\Entity;
 
+use Comparable;
+use Serializable;
+
 /**
  * @since 0.5
  * Constructor non-public since 1.0
@@ -10,7 +13,7 @@ namespace Wikibase\DataModel\Entity;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com
  */
-abstract class EntityId implements \Comparable, \Serializable {
+abstract class EntityId implements Comparable, Serializable {
 
 	protected $serialization;
 

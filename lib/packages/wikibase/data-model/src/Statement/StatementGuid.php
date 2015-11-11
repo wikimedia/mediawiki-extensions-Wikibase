@@ -29,7 +29,7 @@ class StatementGuid implements Comparable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $entityId, $guid ) {
-		if ( !$entityId instanceof EntityId ) {
+		if ( !( $entityId instanceof EntityId ) ) {
 			throw new InvalidArgumentException( '$entityId must be an instance of EntityId' );
 		}
 		if ( !is_string( $guid ) ) {
