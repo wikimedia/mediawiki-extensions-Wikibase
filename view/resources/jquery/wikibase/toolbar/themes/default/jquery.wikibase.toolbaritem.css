@@ -6,3 +6,10 @@
 .wikibase-toolbarlabel.ui-state-disabled {
 	color: grey;
 }
+
+.wikibase-toolbar-item .wikibase-wbtooltip {
+	display: inline-block;
+	margin-left: 5px;
+	text-decoration: none;
+	width: 12px;
+}
