@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_22bc4db1",
+        "filename": "view/resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:59:28Z",
+      "side": 1,
+      "message": "What motivated this? Where is this used? I can not find a usage in this patch. Where is this documented?",
+      "revId": "c653967b50313f5f88484b26bb46f17483f36473",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_62c9e554",
+        "filename": "view/resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:59:28Z",
+      "side": 1,
+      "message": "Here it says there are no parameters.",
+      "revId": "c653967b50313f5f88484b26bb46f17483f36473",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_02bfc9a8",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-11T15:59:28Z",
+      "side": 1,
+      "message": "This change is probably wrong because it creates a (wrong) mapping between the references before and after editing, not taking newly added and removed references into account.\n\nOnly a note. Already fixed in I7a81c79.",
+      "revId": "c653967b50313f5f88484b26bb46f17483f36473",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
