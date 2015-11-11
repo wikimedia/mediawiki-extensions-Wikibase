@@ -224,8 +224,6 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	public function testRedirectRequest() {
-
-		// -- set up params ---------------------------------
 		$params = array(
 			'fromid' => 'Q1',
 			'toid' => 'Q2',
@@ -242,9 +240,9 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		// -- do the request --------------------------------------------
 		$html = $this->executeSpecialEntityRedirect( $params );
 
-		// -- check the result --------------------------------------------
 		$this->assertNoError( $html );
-		$this->assertRegExp( '!\(wikibase-redirectentity-success: Q1, Q2\)!', $html, 'Expected success message' );
+		$this->assertContains( '(wikibase-redirectentity-success: Q1, Q2)', $html,
+			'Expected success message' );
 
 		// -- check the items --------------------------------------------
 		$actualFrom = $this->entityModificationTestHelper->getEntity( 'Q1', true );

@@ -164,10 +164,14 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
 		$html = $expander->renderTermBox( new ItemId( 'Q23' ), 0 );
 
-		$this->assertRegExp( '/Moskow/', $html );
+		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
+		$this->assertContains( 'Moskow', $html );
 
-		$this->assertRegExp( '/Moskau/', $html );
-		$this->assertRegExp( '/Hauptstadt/', $html );
+		$this->assertContains( 'wikibase-entitytermsforlanguageview-de', $html );
+		$this->assertContains( 'Moskau', $html );
+		$this->assertContains( 'Hauptstadt Russlands', $html );
+
+		$this->assertContains( 'wikibase-entitytermsforlanguageview-ru', $html );
 	}
 
 	public function testRenderTermBoxForDeleteRevision() {
