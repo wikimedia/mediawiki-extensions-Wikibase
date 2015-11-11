@@ -12,9 +12,6 @@ var PARENT = $.wikibase.toolbar;
  * @since 0.5
  * @extends jQuery.wikibase.toolbar
  *
- * @option {boolean} [renderItemSeparators]
- *         Default: true
- *
  * @option {string} [label]
  *         Default: ''
  *
@@ -33,7 +30,6 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	 * @see jQuery.wikibase.toolbar.options
 	 */
 	options: {
-		renderItemSeparators: true,
 		label: '',
 		eventName: 'action',
 		buttonCssClassSuffix: null
