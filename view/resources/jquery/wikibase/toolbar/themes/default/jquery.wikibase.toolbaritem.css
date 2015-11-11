@@ -6,3 +6,30 @@
 .wikibase-toolbarlabel.ui-state-disabled {
 	color: grey;
 }
+
+.wikibase-toolbar-item .wikibase-wbtooltip {
+	display: inline-block;
+	margin-left: 3px;
+	padding: 0;
+	text-decoration: none;
+	width: 11px;
+}
+
+.wikibase-toolbar-item  span.mw-collapsible-toggle {
+ 	text-indent: -9999px;
+}
+
+.wikibase-toolbar-item  span.mw-collapsible-toggle-expanded,
+.wikibase-toolbar-item  span.mw-collapsible-toggle {
+	/* @embed */
+	background-image: url(images/icons/oojs-ui/collapse.svg);
+	background-position: right;
+	background-repeat: no-repeat;
+	height: 24px;
+	width: 24px;
+}
+
+.wikibase-toolbar-item  span.mw-collapsible-toggle-collapsed {
+	/* @embed */
+	background-image: url(images/icons/oojs-ui/expand.svg);
+}
