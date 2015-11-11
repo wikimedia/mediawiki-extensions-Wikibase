@@ -26,14 +26,15 @@ function apply_client_settings {
     echo 'require_once __DIR__ . "/extensions/Wikidata/Wikidata.php";' >> LocalSettings.php
     echo 'require_once __DIR__ . "/extensions/Wikidata/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
   else
-    echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
-    echo 'require_once __DIR__ . "/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
+    echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
   fi
 }
 
 function apply_repo_settings {
   echo '$wgEnableWikibaseRepo = true;' >> LocalSettings.php
   echo '$wgEnableWikibaseClient = true;' >> LocalSettings.php
+  # $wgWikimediaJenkinsCI is only set later, so need to set it here, too
+  echo '$wgWikimediaJenkinsCI = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
   if [ $BUILD = true ]
@@ -42,10 +43,7 @@ function apply_repo_settings {
     echo 'require_once __DIR__ . "/extensions/Wikidata/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
     echo 'require_once __DIR__ . "/extensions/Wikidata/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
   else
-    echo 'require_once __DIR__ . "/extensions/Wikibase/repo/Wikibase.php";' >> LocalSettings.php
-    echo 'require_once __DIR__ . "/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
-    echo 'require_once __DIR__ . "/extensions/Wikibase/client/WikibaseClient.php";' >> LocalSettings.php
-    echo 'require_once __DIR__ . "/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
+    echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
   fi
 }
 
