@@ -68,7 +68,7 @@ class RemoveReferences extends ModifyClaim {
 
 		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
 
-		if ( ! ( $claim instanceof Statement ) ) {
+		if ( !( $claim instanceof Statement ) ) {
 			$this->errorReporter->dieError(
 				'The referenced claim is not a statement and thus cannot have references',
 				'not-statement'

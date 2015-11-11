@@ -155,7 +155,7 @@ class SetClaim extends ModifyClaim {
 				throw new IllegalValueException( 'Failed to get statement from Serialization' );
 			}
 			$claim = $this->statementDeserializer->deserialize( $serializedStatement );
-			if ( !$claim instanceof Statement ) {
+			if ( !( $claim instanceof Statement ) ) {
 				throw new IllegalValueException( 'Failed to get statement from Serialization' );
 			}
 			return $claim;

@@ -22,7 +22,7 @@ class ItemChange extends EntityChange {
 	public function getSiteLinkDiff() {
 		$diff = $this->getDiff();
 
-		if ( !$diff instanceof ItemDiff ) {
+		if ( !( $diff instanceof ItemDiff ) ) {
 			// This shouldn't happen, but we should be robust against corrupt, incomplete
 			// or obsolete instances in the database, etc.
 

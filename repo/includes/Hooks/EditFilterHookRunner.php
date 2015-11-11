@@ -47,7 +47,9 @@ class EditFilterHookRunner {
 		EntityContentFactory $entityContentFactory,
 		$context = null
 	) {
-		if ( $context !== null && !$context instanceof RequestContext && !$context instanceof DerivativeContext ) {
+		if ( $context !== null
+			&& !( $context instanceof RequestContext )
+			&& !( $context instanceof DerivativeContext ) ) {
 			throw new InvalidArgumentException( '$context must be an instance of RequestContext'
 				. ' or DerivativeContext' );
 		}

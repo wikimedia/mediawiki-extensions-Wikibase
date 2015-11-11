@@ -32,7 +32,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 		$store = $wikibaseClient->getStore();
 
-		if ( ! $store instanceof MockClientStore ) {
+		if ( !( $store instanceof MockClientStore ) ) {
 			$store = new MockClientStore( 'de' );
 			$wikibaseClient->overrideStore( $store );
 		}

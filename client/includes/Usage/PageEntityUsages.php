@@ -68,7 +68,7 @@ class PageEntityUsages {
 	 */
 	public function addUsages( array $usages ) {
 		foreach ( $usages as $usage ) {
-			if ( !$usage instanceof EntityUsage ) {
+			if ( !( $usage instanceof EntityUsage ) ) {
 				throw new InvalidArgumentException( '$usages must contain only EntityUsage objects' );
 			}
 

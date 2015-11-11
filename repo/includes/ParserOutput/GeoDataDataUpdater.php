@@ -215,13 +215,13 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 	private function extractMainSnakCoord( Statement $statement ) {
 		$snak = $statement->getMainSnak();
 
-		if ( !$snak instanceof PropertyValueSnak ) {
+		if ( !( $snak instanceof PropertyValueSnak ) ) {
 			return null;
 		}
 
 		$dataValue = $snak->getDataValue();
 
-		if ( !$dataValue instanceof GlobeCoordinateValue ) {
+		if ( !( $dataValue instanceof GlobeCoordinateValue ) ) {
 			// Property data type - value mismatch
 			return null;
 		}

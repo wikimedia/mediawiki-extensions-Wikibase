@@ -87,7 +87,7 @@ class StatementTransclusionInteractor {
 			return '';
 		}
 
-		if ( !$entity instanceof StatementListProvider ) {
+		if ( !( $entity instanceof StatementListProvider ) ) {
 			return '';
 		}
 

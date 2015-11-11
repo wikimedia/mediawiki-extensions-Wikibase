@@ -101,7 +101,7 @@ class PropertyHandler extends EntityHandler {
 	 * @return PropertyContent
 	 */
 	protected function newContent( Entity $property ) {
-		if ( ! $property instanceof Property ) {
+		if ( !( $property instanceof Property ) ) {
 			throw new InvalidArgumentException( '$property must be an instance of Property' );
 		}
 

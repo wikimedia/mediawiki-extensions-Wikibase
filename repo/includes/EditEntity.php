@@ -202,7 +202,10 @@ class EditEntity {
 		$this->errorType = 0;
 		$this->status = Status::newGood();
 
-		if ( $context !== null && !$context instanceof RequestContext && !$context instanceof DerivativeContext ) {
+		if ( $context !== null
+			&& !( $context instanceof RequestContext )
+			&& !( $context instanceof DerivativeContext )
+		) {
 			throw new InvalidArgumentException( '$context must be an instance of RequestContext'
 				 . ' or DerivativeContext' );
 		}
