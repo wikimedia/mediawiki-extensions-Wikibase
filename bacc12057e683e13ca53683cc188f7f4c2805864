@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_3fd6aac9",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-11T13:31:43Z",
+      "side": 1,
+      "message": "afterremove is a different event than change. AFAIK this trigger has nothing to do with what we are doing in the previous changes.",
+      "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
