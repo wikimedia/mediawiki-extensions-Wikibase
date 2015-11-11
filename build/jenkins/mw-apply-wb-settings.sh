@@ -15,6 +15,11 @@ do
    esac
 done
 
+if [ $BUILD = true ]; then
+  echo "-b true is not supported by this script anymore."
+  exit 1
+fi
+
 function apply_client_settings {
   echo "client"
   echo '$wgEnableWikibaseRepo = false;' >> LocalSettings.php
@@ -23,13 +28,7 @@ function apply_client_settings {
   echo '$wgWikimediaJenkinsCI = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = false;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
-  if [ $BUILD = true ]
-  then
-    echo 'require_once __DIR__ . "/extensions/Wikidata/Wikidata.php";' >> LocalSettings.php
-    echo 'require_once __DIR__ . "/extensions/Wikidata/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
-  else
-    echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
-  fi
+  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
 }
 
 function apply_repo_settings {
@@ -39,14 +38,7 @@ function apply_repo_settings {
   echo '$wgWikimediaJenkinsCI = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseRepo = true;' >> LocalSettings.php
   echo '$wmgUseWikibaseClient = true;' >> LocalSettings.php
-  if [ $BUILD = true ]
-  then
-    echo 'require_once __DIR__ . "/extensions/Wikidata/Wikidata.php";' >> LocalSettings.php
-    echo 'require_once __DIR__ . "/extensions/Wikidata/extensions/Wikibase/repo/ExampleSettings.php";' >> LocalSettings.php
-    echo 'require_once __DIR__ . "/extensions/Wikidata/extensions/Wikibase/client/ExampleSettings.php";' >> LocalSettings.php
-  else
-    echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
-  fi
+  echo 'require_once __DIR__ . "/extensions/Wikibase/Wikibase.php";' >> LocalSettings.php
 }
 
 cd $WORKSPACE/src
