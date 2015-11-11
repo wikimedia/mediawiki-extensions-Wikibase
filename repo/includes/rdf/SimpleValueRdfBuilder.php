@@ -2,7 +2,6 @@
 
 namespace Wikibase\Rdf;
 
-use DataValues\DataValue;
 use DataValues\DecimalValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
@@ -10,7 +9,6 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -34,6 +32,11 @@ class SimpleValueRdfBuilder implements ValueSnakRdfBuilder {
 	 * @var DateTimeValueCleaner
 	 */
 	private $dateCleaner;
+
+	/**
+	 * @var RdfVocabulary
+	 */
+	private $vocabulary;
 
 	/**
 	 * @param RdfVocabulary $vocabulary
