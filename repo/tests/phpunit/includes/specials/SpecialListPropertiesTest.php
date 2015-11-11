@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataTypes\DataTypeFactory;
+use Language;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -96,6 +97,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
 		$specialPage = new SpecialListProperties();
+		$specialPage->getContext()->setLanguage( Language::factory( 'en' ) );
 
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 		$languageNameLookup->expects( $this->never() )
