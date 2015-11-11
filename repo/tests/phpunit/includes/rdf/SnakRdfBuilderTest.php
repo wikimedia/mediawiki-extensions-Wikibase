@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Rdf;
 
-use DataValues\DataValue;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -130,8 +129,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					new PropertyId( 'P9' ),
 					new StringValue( 'http://acme.com' )
 				),
-				'url',
-				array()
+				'url'
 			),
 		);
 	}
