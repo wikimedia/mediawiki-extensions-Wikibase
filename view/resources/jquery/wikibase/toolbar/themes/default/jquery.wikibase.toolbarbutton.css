@@ -31,3 +31,48 @@
 .wikibase-toolbarbutton.ui-state-disabled.oo-ui-buttonElement > .oo-ui-buttonElement-button {
 	cursor: default;
 }
+
+.wikibase-toolbar-button-edit  a,
+.wikibase-toolbar-button-save  a,
+.wikibase-toolbar-button-remove  a,
+.wikibase-toolbar-button-cancel  a,
+.wikibase-toolbar-button-add  a {
+	/* common styles */
+	background-position: 2px -4px;
+	background-size: 20px 20px;
+	padding-left: 20px;
+	background-repeat: no-repeat;
+	font-size: 90%;
+}
+
+.rtl .wikibase-toolbar-button-edit  a,
+.rtl .wikibase-toolbar-button-save  a,
+.rtl .wikibase-toolbar-button-remove  a,
+.rtl .wikibase-toolbar-button-cancel  a,
+.rtl .wikibase-toolbar-button-add  a {
+	/* common styles rtl */
+	padding-left: 0px;
+	padding-right: 20px;
+
+}
+
+.wikibase-toolbar-button-edit  a{
+	background-image: /* @embed */ url(images/icons/oojs-ui/edit-ltr.svg);
+	background-position: 0px -2px;
+}
+
+.wikibase-toolbar-button-save  a{
+	background-image: /* @embed */ url(images/icons/oojs-ui/check.svg);
+}
+
+.wikibase-toolbar-button-remove  a{
+	background-image: /* @embed */ url(images/icons/oojs-ui/remove.svg);
+}
+
+.wikibase-toolbar-button-cancel  a{
+	background-image: /* @embed */ url(images/icons/oojs-ui/close-ltr.svg);
+}
+
+.wikibase-toolbar-button-add  a{
+	background-image: /* @embed */ url(images/icons/oojs-ui/add.svg);
+}
