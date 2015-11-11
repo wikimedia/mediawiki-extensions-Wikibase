@@ -53,7 +53,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $propertyNamespace
 	 * @param string $propertyValueLName
 	 * @param string $dataType
-	 * @param DataValue $value
+	 * @param Snak|null $snak
 	 * @param EntityId[] &$mentioned receives the IDs of any mentioned entities.
 	 *
 	 * @return SnakRdfBuilder
@@ -61,8 +61,8 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	private function newBuilder(
 		$propertyNamespace,
 		$propertyValueLName,
-		$dataType = null,
-		DataValue $value = null,
+		$dataType,
+		Snak $snak = null,
 		array &$mentioned = array()
 	) {
 		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
@@ -73,12 +73,12 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$valueBuilder = $this->getMock( 'Wikibase\Rdf\DataValueRdfBuilder' );
+		$valueBuilder = $this->getMock( 'Wikibase\Rdf\ValueSnakRdfBuilder' );
 
-		if ( $value ) {
+		if ( $snak instanceof PropertyValueSnak ) {
 			$valueBuilder->expects( $this->once() )
 				->method( 'addValue' )
-				->with( $this->anything(), $propertyNamespace, $propertyValueLName, $dataType, $value );
+				->with( $this->anything(), $propertyNamespace, $propertyValueLName, $dataType, $snak );
 		} else {
 			$valueBuilder->expects( $this->never() )
 				->method( 'addValue' );
@@ -123,14 +123,14 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 					new PropertyId( 'P2' ),
 					new EntityIdValue( new ItemId( 'Q42' ) )
 				),
-				null, // Currently, the data type is only looked up for string values
+				'wikibase-item',
 			),
 			'value snak with data type' => array(
 				new PropertyValueSnak(
 					new PropertyId( 'P9' ),
 					new StringValue( 'http://acme.com' )
 				),
-				'url', // Data type should be supplied at least for string values
+				'url',
 				array()
 			),
 		);
@@ -145,13 +145,12 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
 		$propertyId = $snak->getPropertyId();
-		$value = $snak instanceof PropertyValueSnak ? $snak->getDataValue() : null;
 
 		$builder = $this->newBuilder(
 			RdfVocabulary::NSP_DIRECT_CLAIM,
 			$propertyId->getSerialization(),
 			$dataType,
-			$value
+			$snak
 		);
 
 		// assertions are done by the mocks
@@ -167,7 +166,8 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$builder = $this->newBuilder(
 			RdfVocabulary::NSP_DIRECT_CLAIM,
-			$propertyId->getSerialization()
+			$propertyId->getSerialization(),
+			'wikibase-item'
 		);
 
 		$expectedTriples = array(
@@ -190,8 +190,8 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder = $this->newBuilder(
 			RdfVocabulary::NSP_DIRECT_CLAIM,
 			$propertyId->getSerialization(),
-			null,
-			$value,
+			'wikibase-item',
+			$snak,
 			$mentioned
 		);
 
