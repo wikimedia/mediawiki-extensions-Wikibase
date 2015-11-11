@@ -43,23 +43,12 @@ $.widget( 'wikibase.removetoolbar', PARENT, {
 			return $button;
 		}
 
-		$button.addClass( [
-			'oo-ui-widget',
-			'oo-ui-widget-enabled',
-			'oo-ui-buttonElement',
-			'oo-ui-buttonElement-frameless',
-			'oo-ui-iconElement',
-			'oo-ui-labelElement',
-			'oo-ui-buttonWidget'
-		].join( ' ' ) );
-
 		var $link = $button.children( 'a' );
 
 		$link
 		.attr( 'title', $link.text() )
 		.text( '' )
-		.addClass( 'oo-ui-buttonElement-button' )
-		.append( $( '<span/>' ).addClass( 'oo-ui-iconElement-icon oo-ui-icon-remove' ) );
+		.append( $( '<span/>' ) );
 
 		return $button;
 	}
