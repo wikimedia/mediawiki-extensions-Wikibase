@@ -439,54 +439,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Adds a toggle for showing/hiding Wikidata entries in recent changes
-	 *
-	 * @param SpecialRecentChanges $special
-	 * @param array &$filters
-	 *
-	 * @return bool
-	 */
-	public static function onSpecialRecentChangesFilters( SpecialRecentChanges $special, array &$filters ) {
-		$hookHandler = new ChangesPageWikibaseFilterHandler(
-			$special->getContext(),
-			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'showExternalRecentChanges' ),
-			'hidewikidata',
-			'rcshowwikidata',
-			'wikibase-rc-hide-wikidata'
-		);
-
-		// @fixme remove wikidata-specific stuff!
-		$filters = $hookHandler->addFilterIfEnabled( $filters );
-
-		return true;
-	}
-
-	/**
-	 * Modifies watchlist options to show a toggle for Wikibase changes
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialWatchlistFilters
-	 *
-	 * @since 0.4
-	 *
-	 * @param SpecialWatchlist $special
-	 * @param array $filters
-	 *
-	 * @return bool
-	 */
-	public static function onSpecialWatchlistFilters( $special, &$filters ) {
-		$hookHandler = new ChangesPageWikibaseFilterHandler(
-			$special->getContext(),
-			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'showExternalRecentChanges' ),
-			'hideWikibase',
-			'wlshowwikibase',
-			'wikibase-rc-hide-wikidata'
-		);
-
-		$filters = $hookHandler->addFilterIfEnabled( $filters );
-
-		return true;
-	}
-
-	/**
 	 * Adds a preference for showing or hiding Wikidata entries in recent changes
 	 *
 	 * @param User $user
