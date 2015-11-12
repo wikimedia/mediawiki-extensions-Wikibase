@@ -16,7 +16,6 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 	events: {
 		referenceviewafterstartediting: function( event ) {
 			var $referenceview = $( event.target ),
-				referenceview = $referenceview.data( 'referenceview' ),
 				options = {},
 				$container = $( '<div/>' ).appendTo(
 					$referenceview.find( '.wikibase-referenceview-heading' )
@@ -31,9 +30,6 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 				statementview._referencesListview.removeItem( $referenceview );
 			}
 
-			if ( ( !referenceview.options.statementGuid || !referenceview.value() ) && !statementview.isInEditMode() ) {
-				options.label = mw.msg( 'wikibase-cancel' );
-			}
 			$referenceview.removetoolbar( options )
 			.on( 'removetoolbarremove.removetoolbar', function( event ) {
 				if ( event.target === $referenceview[0] ) {

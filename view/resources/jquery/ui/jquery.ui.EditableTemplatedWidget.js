@@ -154,7 +154,8 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 
 	/**
 	 * @return {Object} jQuery.Promise
-	 *         No resolved parameters.
+	 *         Resolved parameters:
+	 *         - {*} [value] the data model object returned by save API call
 	 *         Rejected parameters:
 	 *         - {Error}
 	 */

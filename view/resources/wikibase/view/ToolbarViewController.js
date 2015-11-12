@@ -82,7 +82,7 @@ SELF.prototype._updateSaveButtonState = function() {
 /**
  * Stop editing
  *
- * @param {boolean} dropValue Whether the current value should be kept and
+ * @param {boolean} [dropValue=false] Whether the current value should be kept and
  * persisted or dropped
  */
 SELF.prototype.stopEditing = function( dropValue ) {
@@ -155,7 +155,7 @@ SELF.prototype.cancelEditing = function() {
 /**
  * Set or clear error
  *
- * @param {mixed|undefined} [error] The error or undefined, if error should be
+ * @param {mixed} [error] The error or undefined, if error should be
  * cleared
  */
 SELF.prototype.setError = function( error ) {
