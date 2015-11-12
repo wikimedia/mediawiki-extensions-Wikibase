@@ -33,6 +33,24 @@
       "revId": "9b036864b0c9562c4818e87453da12e742cc5fcc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4ce72f3c",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-11-12T17:59:24Z",
+      "side": 1,
+      "message": "Yes, I tested that in PS1. No those extensions don\u0027t have and don\u0027t need their own extra shell script. If an extension follows conventions then the normal Jenkins jobs does everything. Which is first set $wgWikimediaJenkinsCI and then require the extension entry point.",
+      "parentUuid": "0ebaf39b_c91a317e",
+      "revId": "9b036864b0c9562c4818e87453da12e742cc5fcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
