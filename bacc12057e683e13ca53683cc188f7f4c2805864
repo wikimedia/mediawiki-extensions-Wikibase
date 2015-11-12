@@ -34,6 +34,24 @@
       "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_265d3a1b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:50:27Z",
+      "side": 1,
+      "message": "itemview and propertyview currently capture statementviewafterremove. The change event should also be triggered on listviewitemadded, so if that\u0027s not the case anymore I think we made a mistake in a previous change and should fix it there.",
+      "parentUuid": "0ebaf39b_ffdfb2d9",
+      "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
