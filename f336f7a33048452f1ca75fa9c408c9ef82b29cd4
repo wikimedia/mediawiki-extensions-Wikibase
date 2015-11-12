@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_2461b501",
+        "filename": ".jshintrc",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:39:59Z",
+      "side": 1,
+      "message": "Because the `test*` files do not test anything, they just contain helper methods for testing an implementation against an interface. If the file would be called `ViewController.tests`, I\u0027d expect it to test `ViewController`, which is not the case.",
+      "parentUuid": "0ebaf39b_a28b5de7",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_42706107",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-11T16:54:09Z",
       "side": 1,
       "message": "This means consumers of this event do not know anymore *what* happened, only *that* something happened. I wonder if this is a good thing.",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a434c5f8",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:39:59Z",
+      "side": 1,
+      "message": "Thing is that the referenceview itself does not know anymore what error occurred. If consumers of this event need to know what error occurred, we would need to move notifying into the controller.",
+      "parentUuid": "0ebaf39b_42706107",
       "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_64156d4d",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:39:59Z",
+      "side": 1,
+      "message": "I don\u0027t think so. Since it\u0027s a bool and we don\u0027t typecheck, falsy values do work, too, but I don\u0027t think that needs to be part of the interface. I\u0027d prefer to not have this parameter at all, though.",
+      "parentUuid": "0ebaf39b_95fbf5dd",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_35e00925",
         "filename": "view/resources/wikibase/view/ToolbarViewController.js",
         "patchSetId": 11
@@ -98,6 +152,24 @@
       "writtenOn": "2015-11-11T16:54:09Z",
       "side": 1,
       "message": "Sure. It\u0027s called \"drop\", right? Or do you think this is the responsibility of the view?",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_240f753d",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:39:59Z",
+      "side": 1,
+      "message": "No, it\u0027s definitely not responsibility of the view. Thing is that we didn\u0027t do that in the referenceview, yet.",
+      "parentUuid": "0ebaf39b_35e00925",
       "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_440ce945",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:39:59Z",
+      "side": 1,
+      "message": "That\u0027s why it\u0027s in square brackets?",
+      "parentUuid": "0ebaf39b_d5d88d81",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_75cd21bc",
         "filename": "view/resources/wikibase/view/ToolbarViewController.js",
         "patchSetId": 11
@@ -132,6 +222,24 @@
       "writtenOn": "2015-11-11T16:54:09Z",
       "side": 1,
       "message": "A Boolean object? Why not \"!!error\"?",
+      "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_660ed239",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:39:59Z",
+      "side": 1,
+      "message": "That\u0027s not a Boolean object since it\u0027s missing the `new` keyword. `Boolean` without `new` returns a primitive.",
+      "parentUuid": "0ebaf39b_75cd21bc",
       "revId": "f336f7a33048452f1ca75fa9c408c9ef82b29cd4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
