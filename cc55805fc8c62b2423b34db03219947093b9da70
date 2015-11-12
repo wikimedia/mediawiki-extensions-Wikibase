@@ -51,6 +51,24 @@
       "revId": "cc55805fc8c62b2423b34db03219947093b9da70",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c452193f",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/removetoolbar/referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:24:37Z",
+      "side": 1,
+      "message": "Nope, that\u0027s not the case. `$referenceview` is only one referenceview, `$referenceview[0]` gives you the DOM element. That\u0027s what this is about.",
+      "parentUuid": "0ebaf39b_fff6d259",
+      "revId": "cc55805fc8c62b2423b34db03219947093b9da70",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
