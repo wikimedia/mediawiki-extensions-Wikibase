@@ -315,9 +315,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			if ( event.target === $listview[0] ) {
 				self._drawReferencesCounter();
 			}
-			if ( event.type === 'listviewitemremoved' ) {
-				self._trigger( 'change' );
-			}
+			self._trigger( 'change' );
 		} )
 		.on( lia.prefixedEvent( 'change.' + this.widgetName ),
 			function( event ) {
@@ -786,7 +784,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return false;
 		}
 
-		if ( this._referencesListview && this._hasInvalidReferences() ) {
+		if ( this._hasInvalidReferences() ) {
 			return false;
 		}
 
@@ -810,10 +808,15 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 */
 	_hasInvalidReferences: function() {
 		var isInvalid = false;
+
+		if ( !this._referencesListview ) {
+			return isInvalid;
+		}
+
 		$.each( this._referencesListview.value(), function ( key, referenceView ) {
 			if ( !referenceView.isValid() ) {
 				isInvalid = true;
-				return;
+				return false;
 			}
 		} );
 
