@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_640fad8e",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-12T11:51:58Z",
+      "side": 1,
+      "message": "i prefer boooooooooooooooooooolean but ok ;)",
+      "parentUuid": "0ebaf39b_15062524",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_b5b71984",
         "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
         "patchSetId": 4
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_e44b9dcb",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-12T11:51:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_7570c1d9",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_d56badec",
         "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
         "patchSetId": 4
@@ -64,6 +100,24 @@
       "writtenOn": "2015-11-11T18:33:07Z",
       "side": 1,
       "message": "this needs to be static",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_443f0921",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-12T11:51:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_d56badec",
       "revId": "c78a8a2f830caa631d1285136f394505e189f026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -115,6 +169,24 @@
       "writtenOn": "2015-11-11T18:33:07Z",
       "side": 1,
       "message": "No need to return $filters here. Also this misses phpdoc.",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_244215b3",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageFilterHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-12T11:51:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_9809ec31",
       "revId": "c78a8a2f830caa631d1285136f394505e189f026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -234,6 +306,24 @@
       "writtenOn": "2015-11-11T18:34:22Z",
       "side": 1,
       "message": "hm... rather be explicit about what has been asked for? Could even throw/ fail the test if we ask for an unknown option.",
+      "revId": "c78a8a2f830caa631d1285136f394505e189f026",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c481b9c9",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListSpecialPageFilterHandlerTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-12T11:51:58Z",
+      "side": 1,
+      "message": "i made this more consistent with how User::getOption works, which is return null for unknown option in this case.\n\nalso considerably reworked the tests to make it more clear what we are testing and added more test cases for different combinations of user preferences and request params.",
+      "parentUuid": "0ebaf39b_383560d8",
       "revId": "c78a8a2f830caa631d1285136f394505e189f026",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
