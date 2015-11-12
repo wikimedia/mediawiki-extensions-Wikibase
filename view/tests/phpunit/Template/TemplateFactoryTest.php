@@ -40,9 +40,21 @@ class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( '<PARAM>', $template->plain() );
 	}
 
-	public function testRender() {
-		$rendered = $this->newInstance()->render( 'basic', '<PARAM>' );
-		$this->assertSame( '<PARAM>', $rendered );
+	/**
+	 * @dataProvider renderParamsProvider
+	 */
+	public function testRender( $params, $expected ) {
+		$rendered = $this->newInstance()->render( 'basic', $params );
+		$this->assertSame( $expected, $rendered );
+	}
+
+	public function renderParamsProvider() {
+		return array(
+			array( '<PARAM>', '<PARAM>' ),
+			array( array(), '$1' ),
+			array( array( '<PARAM>' ), '<PARAM>' ),
+			array( array( '<PARAM>', 'ignored' ), '<PARAM>' ),
+		);
 	}
 
 }
