@@ -52,6 +52,24 @@
       "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4664eeae",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-11-12T11:00:04Z",
+      "side": 1,
+      "message": "We did an investigation and we think that the remove events are critical for remove buttons that trigger a api request which is not the case anymore for references. Cleanup is in the FINAL follow up patch.",
+      "parentUuid": "0ebaf39b_265d3a1b",
+      "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
