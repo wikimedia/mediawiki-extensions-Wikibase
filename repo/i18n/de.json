@@ -21,7 +21,8 @@
 			"Zolo",
 			"Sebastian Wallroth",
 			"Tiin",
-			"Yellowcard"
+			"Yellowcard",
+			"Lydia Pintscher (WMDE)"
 		]
 	},
 	"wikibase-desc": "Ermöglicht ein Repositorium strukturierter Daten",
@@ -34,7 +35,7 @@
 	"wikibase-cancel": "abbrechen",
 	"wikibase-add": "hinzufügen",
 	"wikibase-addqualifier": "Qualifikator hinzufügen",
-	"wikibase-addreference": "Einzelnachweis hinzufügen",
+	"wikibase-addreference": "Fundstelle hinzufügen",
 	"wikibase-save-inprogress": "Speichere …",
 	"wikibase-remove-inprogress": "Entferne …",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In weiteren Sprachen",
@@ -53,7 +54,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "Beschreibung auf $1 eingeben",
 	"wikibase-aliases-edit-placeholder": "Einige Aliasse eingeben",
 	"wikibase-aliases-edit-placeholder-language-aware": "Einige Aliasse auf $1 angeben",
-	"wikibase-diffview-reference": "Referenz",
+	"wikibase-diffview-reference": "Fundstelle",
 	"wikibase-diffview-rank": "Rang",
 	"wikibase-diffview-rank-preferred": "Vorrangig",
 	"wikibase-diffview-rank-normal": "Normaler Rang",

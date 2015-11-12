@@ -191,7 +191,7 @@
 	"wikibase-itemmerge-permissiondenied": "Ingen tilgang.",
 	"wikibase-itemmerge-failed-modify": "Klarte ikke å flette elementene, vennligst løs eventuelle konflikter først.",
 	"wikibase-itemmerge-no-such-entity": "Elementet ble ikke funnet.",
-	"wikibase-itemmerge-cant-load-entity-content": "Kunne ikke laste elementet.",
+	"wikibase-itemmerge-cant-load-entity-content": "Klarte ikke laste elementet.",
 	"wikibase-itemmerge-cant-merge-self": "Kan ikke flettet et element med seg selv.",
 	"wikibase-tokencheck-missingtoken": "Redigeringstoken kreves.",
 	"wikibase-tokencheck-mustposttoken": "Redigering er kun mulig med POST-forespørsler",

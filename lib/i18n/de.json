@@ -9,7 +9,8 @@
 			"TMg",
 			"Sebastian Wallroth",
 			"Flow",
-			"Yellowcard"
+			"Yellowcard",
+			"Lydia Pintscher (WMDE)"
 		]
 	},
 	"wikibase-lib-desc": "Stellt dem Repositorium strukturierter Daten gemeinsam nutzbare Funktionen bereit",
@@ -100,9 +101,9 @@
 	"wikibase-entity-summary-wbeditentity-create": "Ein neues Objekt erstellt",
 	"wikibase-entity-summary-wbeditentity-update": "Ein Objekt geändert",
 	"wikibase-entity-summary-wbeditentity-override": "Ein Objekt geleert",
-	"wikibase-entity-summary-wbsetreference": "Referenz festgelegt",
+	"wikibase-entity-summary-wbsetreference": "Fundstelle festgelegt",
 	"wikibase-entity-summary-wbsetreference-add": "Fundstelle der Aussage hinzugefügt",
-	"wikibase-entity-summary-wbsetreference-set": "Einzelnachweis der Aussage geändert",
+	"wikibase-entity-summary-wbsetreference-set": "Fundstelle der Aussage geändert",
 	"wikibase-entity-summary-wbsetlabel-add": "Bezeichnung für [$2] hinzugefügt",
 	"wikibase-entity-summary-wbsetlabel-set": "Bezeichnung für [$2] geändert",
 	"wikibase-entity-summary-wbsetlabel-remove": "Bezeichnung für [$2] entfernt",
@@ -134,7 +135,7 @@
 	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Aussage|Aussagen}} geändert",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Aussage|Aussagen}} erstellt",
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|Einen Qualifikator|$4 Qualifikatoren}} {{PLURAL:$3|einer Aussage|von Aussagen}} geändert",
-	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$4|Eine Referenz|$4 Referenzen}} {{PLURAL:$3|einer Aussage|von Aussagen}} geändert",
+	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$4|Eine Fundstelle|$4 Fundstellen}} {{PLURAL:$3|einer Aussage|von Aussagen}} geändert",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Den Rang der {{PLURAL:$3|Aussage|Aussagen}} geändert",
 	"wikibase-entity-summary-clientsitelink-update": "Seite von [$3] nach [$4] verschoben",
 	"wikibase-entity-summary-clientsitelink-remove": "Seite auf [$3] gelöscht",

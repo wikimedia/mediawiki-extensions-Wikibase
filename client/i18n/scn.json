@@ -62,6 +62,7 @@
 	"unconnectedpages": "Pàggini nun assuciati a suggetti",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|culligamentu|culligamenti}} di lingua ntâ pàggina)",
 	"wikibase-unconnectedpages-submit": "Vai",
+	"pageswithbadges": "Pàggini cu distintivi",
 	"wikibase-pageinfo-entity-id": "ID dû suggetttu supra a {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nuddu",
 	"wikibase-property-render-error": "Nun s'arriniscìu a rènniri lu valuri dâ prupità $1: $2",
