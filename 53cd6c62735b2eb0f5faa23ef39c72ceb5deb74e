@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_e6ec0229",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/addtoolbar/statementview-referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T10:03:48Z",
+      "side": 1,
+      "message": "Yes, that\u0027s what this is about.",
+      "parentUuid": "0ebaf39b_9f9f9606",
+      "revId": "53cd6c62735b2eb0f5faa23ef39c72ceb5deb74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_c221b19e",
         "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_c6fbfedc",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T10:03:48Z",
+      "side": 1,
+      "message": "Try adding a new statement and then add a reference.",
+      "parentUuid": "0ebaf39b_c221b19e",
+      "revId": "53cd6c62735b2eb0f5faa23ef39c72ceb5deb74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_1f8ba6c5",
         "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2015-11-11T15:13:34Z",
       "side": 1,
       "message": "Before, this button could not exist on a referenceview with no GUID or no value. Now this is moved outside of the \"if\". Is this intentional?",
+      "revId": "53cd6c62735b2eb0f5faa23ef39c72ceb5deb74e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_66e01226",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T10:03:48Z",
+      "side": 1,
+      "message": "That\u0027s not true, it only was present on referenceviews with no GUID or no value. Because a referenceview with a GUID and a value had an edit toolbar which had a remove button.",
+      "parentUuid": "0ebaf39b_1f8ba6c5",
       "revId": "53cd6c62735b2eb0f5faa23ef39c72ceb5deb74e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

@@ -16,6 +16,24 @@
       "revId": "7d3f0995fc49e6b4c0e1f6f81b896acd49a40b80",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a6f60af5",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/edittoolbar/referenceview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T10:03:48Z",
+      "side": 0,
+      "message": "It was, but it doesn\u0027t work with the »add reference« toolbar, because then the addtoolbar\u0027s toolbar container is used.",
+      "parentUuid": "0ebaf39b_5f811ea3",
+      "revId": "7d3f0995fc49e6b4c0e1f6f81b896acd49a40b80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
