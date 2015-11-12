@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_c6845e61",
+        "filename": "view/resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:59:09Z",
+      "side": 1,
+      "message": "This is the main part of this change. Without this, after saving, `options.value` is re-set to whatever `value()` returns. We usually let `value()` return the value currently present in the edit widgets, but we want to set it to what was saved. This makes sure that we get the normalization, sorting, whatever the backend performs on saving.",
+      "parentUuid": "0ebaf39b_22bc4db1",
+      "revId": "c653967b50313f5f88484b26bb46f17483f36473",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_62c9e554",
         "filename": "view/resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_068b5673",
+        "filename": "view/resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:59:09Z",
+      "side": 1,
+      "message": "Right, we need to add an optional resolved parameter.",
+      "parentUuid": "0ebaf39b_62c9e554",
+      "revId": "c653967b50313f5f88484b26bb46f17483f36473",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_02bfc9a8",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2015-11-11T15:59:28Z",
       "side": 1,
       "message": "This change is probably wrong because it creates a (wrong) mapping between the references before and after editing, not taking newly added and removed references into account.\n\nOnly a note. Already fixed in I7a81c79.",
+      "revId": "c653967b50313f5f88484b26bb46f17483f36473",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2693faa7",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-12T09:59:09Z",
+      "side": 1,
+      "message": "The mapping does not matter. All that matters is the count.",
+      "parentUuid": "0ebaf39b_02bfc9a8",
       "revId": "c653967b50313f5f88484b26bb46f17483f36473",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
