@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_e91b7583",
+        "filename": "Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-12T17:40:21Z",
+      "side": 1,
+      "message": "We usually compare type safe with 3 \u003d\u003d\u003d.",
+      "revId": "9b036864b0c9562c4818e87453da12e742cc5fcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c91a317e",
+        "filename": "build/jenkins/mw-apply-wb-settings.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-12T17:40:21Z",
+      "side": 1,
+      "message": "Are you sure this is necessary? Do the CirrusSearch and ParserFunctions extensions (I found similar code in these two extensions) do the same?",
+      "revId": "9b036864b0c9562c4818e87453da12e742cc5fcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
