@@ -8,6 +8,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -25,14 +26,21 @@ use Wikibase\Repo\Diff\ClaimDifference;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
-class ClaimDifferTest extends \MediaWikiTestCase {
+class ClaimDifferTest extends PHPUnit_Framework_TestCase {
 
 	public function diffClaimsProvider() {
 		$argLists = array();
 
 		$noValueForP42 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$noValueForP43 = new Statement( new PropertyNoValueSnak( 43 ) );
+
+		$argLists[] = array(
+			null,
+			null,
+			new ClaimDifference()
+		);
 
 		$argLists[] = array(
 			$noValueForP42,
@@ -91,6 +99,43 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 			)
 		);
 
+		$argLists[] = array(
+			$withReferences,
+			null,
+			new ClaimDifference(
+				new DiffOpChange( new PropertyNoValueSnak( 42 ), null ),
+				null,
+				new Diff( array(
+					new DiffOpRemove( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) )
+				), false ),
+				new DiffOpChange( 1, null )
+			)
+		);
+
+		$argLists[] = array(
+			null,
+			$withReferences,
+			new ClaimDifference(
+				new DiffOpChange( null, new PropertyNoValueSnak( 42 ) ),
+				null,
+				new Diff( array(
+					new DiffOpAdd( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) )
+				), false ),
+				new DiffOpChange( null, 1 )
+			)
+		);
+
+		$argLists[] = array(
+			null,
+			new Statement( new PropertyNoValueSnak( 42 ), null, new ReferenceList() ),
+			new ClaimDifference(
+				new DiffOpChange( null, new PropertyNoValueSnak( 42 ) ),
+				null,
+				null,
+				new DiffOpChange( null, 1 )
+			)
+		);
+
 		$noValueForP42Preferred = clone $noValueForP42;
 		$noValueForP42Preferred->setRank( Statement::RANK_PREFERRED );
 
@@ -111,7 +156,11 @@ class ClaimDifferTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider diffClaimsProvider
 	 */
-	public function testDiffClaims( Statement $oldStatement, Statement $newStatement, ClaimDifference $expected ) {
+	public function testDiffClaims(
+		Statement $oldStatement = null,
+		Statement $newStatement = null,
+		ClaimDifference $expected
+	) {
 		$differ = new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) );
 		$actual = $differ->diffClaims( $oldStatement, $newStatement );
 

@@ -5,8 +5,6 @@ namespace Wikibase\Repo\Diff;
 use Diff\Differ\Differ;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
-use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
@@ -17,6 +15,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Adam Shorland
+ * @author Thiemo Mättig
  */
 class ClaimDiffer {
 
@@ -36,19 +35,17 @@ class ClaimDiffer {
 	 *
 	 * @return ClaimDifference
 	 */
-	public function diffClaims( $oldStatement, $newStatement ) {
-		$mainSnakChange = $this->diffMainSnaks( $oldStatement, $newStatement );
-		$qualifierChanges = $this->diffQualifiers( $oldStatement, $newStatement );
-
-		if ( $oldStatement instanceof Statement || $newStatement instanceof Statement ) {
-			$rankChange = $this->diffRank( $oldStatement, $newStatement );
-			$referenceChanges = $this->diffReferences( $oldStatement, $newStatement );
-		} else {
-			$rankChange = null;
-			$referenceChanges = null;
+	public function diffClaims( Statement $oldStatement = null, Statement $newStatement = null ) {
+		if ( $oldStatement === $newStatement ) {
+			return new ClaimDifference();
 		}
 
-		return new ClaimDifference( $mainSnakChange, $qualifierChanges, $referenceChanges, $rankChange );
+		return new ClaimDifference(
+			$this->diffMainSnaks( $oldStatement, $newStatement ),
+			$this->diffQualifiers( $oldStatement, $newStatement ),
+			$this->diffReferences( $oldStatement, $newStatement ),
+			$this->diffRanks( $oldStatement, $newStatement )
+		);
 	}
 
 	/**
@@ -57,20 +54,18 @@ class ClaimDiffer {
 	 *
 	 * @return DiffOpChange|null
 	 */
-	private function diffMainSnaks( Statement $oldStatement = null, Statement $newStatement = null ) {
-		$oldStatementMainSnak = $oldStatement === null ? null : $oldStatement->getMainSnak();
-		$newStatementMainSnak = $newStatement === null ? null : $newStatement->getMainSnak();
+	private function diffMainSnaks(
+		Statement $oldStatement = null,
+		Statement $newStatement = null
+	) {
+		$oldSnak = $oldStatement === null ? null : $oldStatement->getMainSnak();
+		$newSnak = $newStatement === null ? null : $newStatement->getMainSnak();
 
-		if ( $oldStatementMainSnak === null && $newStatementMainSnak === null ) {
+		if ( $oldSnak !== null && $oldSnak->equals( $newSnak ) ) {
 			return null;
 		}
 
-		if ( ( $oldStatementMainSnak === null && $newStatementMainSnak !== null )
-			|| !$oldStatementMainSnak->equals( $newStatementMainSnak ) ) {
-			return new DiffOpChange( $oldStatementMainSnak, $newStatementMainSnak );
-		}
-
-		return null;
+		return new DiffOpChange( $oldSnak, $newSnak );
 	}
 
 	/**
@@ -79,20 +74,29 @@ class ClaimDiffer {
 	 *
 	 * @return Diff
 	 */
-	private function diffQualifiers( Statement $oldStatement = null, Statement $newStatement = null ) {
-		$oldQualifiers = $oldStatement === null ? new SnakList() : $oldStatement->getQualifiers();
-		$newQualifiers = $newStatement === null ? new SnakList() : $newStatement->getQualifiers();
-
-		if ( !$oldQualifiers->equals( $newQualifiers ) ) {
-			$diffOps = $this->listDiffer->doDiff(
-				iterator_to_array( $oldQualifiers ),
-				iterator_to_array( $newQualifiers )
-			);
-
-			return new Diff( $diffOps, false );
+	private function diffQualifiers(
+		Statement $oldStatement = null,
+		Statement $newStatement = null
+	) {
+		if ( $oldStatement !== null
+			&& $newStatement !== null
+			&& $oldStatement->getQualifiers()->equals( $newStatement->getQualifiers() )
+		) {
+			return null;
 		}
 
-		return null;
+		$oldQualifiers = $oldStatement === null
+			? array()
+			: iterator_to_array( $oldStatement->getQualifiers() );
+		$newQualifiers = $newStatement === null
+			? array()
+			: iterator_to_array( $newStatement->getQualifiers() );
+
+		if ( $oldQualifiers === $newQualifiers ) {
+			return null;
+		}
+
+		return new Diff( $this->listDiffer->doDiff( $oldQualifiers, $newQualifiers ), false );
 	}
 
 	/**
@@ -101,15 +105,15 @@ class ClaimDiffer {
 	 *
 	 * @return DiffOpChange|null
 	 */
-	private function diffRank( Statement $oldStatement = null, Statement $newStatement = null ) {
+	private function diffRanks( Statement $oldStatement = null, Statement $newStatement = null ) {
 		$oldRank = $oldStatement === null ? null : $oldStatement->getRank();
 		$newRank = $newStatement === null ? null : $newStatement->getRank();
 
-		if ( $oldRank !== $newRank ) {
-			return new DiffOpChange( $oldRank, $newRank );
+		if ( $oldRank === $newRank ) {
+			return null;
 		}
 
-		return null;
+		return new DiffOpChange( $oldRank, $newRank );
 	}
 
 	/**
@@ -118,20 +122,29 @@ class ClaimDiffer {
 	 *
 	 * @return Diff
 	 */
-	private function diffReferences( Statement $oldStatement = null, Statement $newStatement = null ) {
-		$oldReferences = $oldStatement === null ? new ReferenceList( array() ) : $oldStatement->getReferences();
-		$newReferences = $newStatement === null ? new ReferenceList( array() ) : $newStatement->getReferences();
-
-		if ( !$oldReferences->equals( $newReferences ) ) {
-			$diffOps = $this->listDiffer->doDiff(
-				iterator_to_array( $oldReferences ),
-				iterator_to_array( $newReferences )
-			);
-
-			return new Diff( $diffOps, false );
+	private function diffReferences(
+		Statement $oldStatement = null,
+		Statement $newStatement = null
+	) {
+		if ( $oldStatement !== null
+			&& $newStatement !== null
+			&& $oldStatement->getReferences()->equals( $newStatement->getReferences() )
+		) {
+			return null;
 		}
 
-		return null;
+		$oldReferences = $oldStatement === null
+			? array()
+			: iterator_to_array( $oldStatement->getReferences() );
+		$newReferences = $newStatement === null
+			? array()
+			: iterator_to_array( $newStatement->getReferences() );
+
+		if ( $oldReferences === $newReferences ) {
+			return null;
+		}
+
+		return new Diff( $this->listDiffer->doDiff( $oldReferences, $newReferences ), false );
 	}
 
 }
