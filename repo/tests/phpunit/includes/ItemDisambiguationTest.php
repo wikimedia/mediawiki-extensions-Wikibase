@@ -2,12 +2,11 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use MediaWikiTestCase;
-use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
@@ -20,185 +19,98 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @group Database
  *
  * @licence GNU GPL v2+
- * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Thiemo Mättig
  */
-class ItemDisambiguationTest extends \MediaWikiTestCase {
+class ItemDisambiguationTest extends MediaWikiTestCase {
 
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getMockEntityTitleLookup() {
-		$entityIdFormatter = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+	protected function setUp() {
+		parent::setUp();
 
-		$entityIdFormatter->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( ItemId $id ) {
-				return Title::makeTitle( NS_MAIN, $id->getSerialization() );
-			} ) );
-
-		return $entityIdFormatter;
+		$this->setMwGlobals( array(
+			'wgLang' => Language::factory( 'qqx' ),
+		) );
 	}
 
 	/**
 	 * @return ItemDisambiguation
 	 */
-	private function newItemDisambiguation() {
+	private function newInstance() {
+		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnValue( $this->getMock( 'Title' ) ) );
+
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->any() )
+			->method( 'getName' )
+			->will( $this->returnValue( '<LANG>' ) );
 
 		return new ItemDisambiguation(
-			$this->getMockEntityTitleLookup(),
+			$entityTitleLookup,
 			$languageNameLookup,
 			'en'
 		);
 	}
 
-	public function getHTMLProvider() {
-		$cases = array();
-		$matchers = array();
+	public function testNoResults() {
+		$html = $this->newInstance()->getHTML( array() );
 
-		// No results
-		$matchers['matches'] = array(
-			'tag' => 'ul',
-			'content' => '',
-			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
-		);
-		$cases['No Results'] = array( array(), $matchers );
-
-		// One label match in the display language
-		$matchers['matches'] = array(
-			'tag' => 'ul',
-			'children' => array( 'count' => 1 ),
-			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
-		);
-		$matchers['one'] = array(
-			'tag' => 'li',
-			'content' => 'regexp:/^Q1[^1]/s',
-		);
-		$matchers['one/label'] = array(
-			'tag' => 'span',
-			'content' => 'Foo',
-			'attributes' => array( 'class' => 'wb-itemlink-label' ),
-		);
-		$matchers['one/desc'] = array(
-			'tag' => 'span',
-			'content' => 'DisplayDescription',
-			'attributes' => array( 'class' => 'wb-itemlink-description' ),
-		);
-		$cases['One label match in the display language'] = array(
-			array(
-				new TermSearchResult(
-					new Term( 'en', 'Foo' ),
-					'label',
-					new ItemId( 'Q1' ),
-					new Term( 'en', 'Foo' ),
-					new Term( 'en', 'DisplayDescription' )
-				),
-			),
-			$matchers
-		);
-
-		// One alias match of another language
-		$matchers['matches'] = array(
-			'tag' => 'ul',
-			'children' => array( 'count' => 1 ),
-			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
-		);
-		$matchers['one'] = array(
-			'tag' => 'li',
-			'content' => 'regexp:/^Q1[^1]/s',
-		);
-		$matchers['one/label'] = array(
-			'tag' => 'span',
-			'content' => 'DisplayLabel',
-			'attributes' => array( 'class' => 'wb-itemlink-label' ),
-		);
-		$matchers['one/desc'] = array(
-			'tag' => 'span',
-			'content' => 'DisplayDescription',
-			'attributes' => array( 'class' => 'wb-itemlink-description' ),
-		);
-		$matchers['one/match'] = array(
-			'tag' => 'span',
-			'content' => 'regexp:/Foo/s',
-			'attributes' => array( 'class' => 'wb-itemlink-match' ),
-		);
-		$cases['One alias match of another language'] = array(
-			array(
-				new TermSearchResult(
-					new Term( 'de', 'Foo' ),
-					'alias',
-					new ItemId( 'Q1' ),
-					new Term( 'en', 'DisplayLabel' ),
-					new Term( 'en', 'DisplayDescription' )
-				),
-			),
-			$matchers
-		);
-
-		// Two Results - (1 - No Label in display Language, 2 - No Description)
-		unset( $matchers['one/label'] );
-		$matchers['matches'] = array(
-			'tag' => 'ul',
-			'children' => array( 'count' => 2 ),
-			'attributes' => array( 'class' => 'wikibase-disambiguation' ),
-		);
-		$matchers['one'] = array(
-			'tag' => 'li',
-			'content' => 'regexp:/^Q2[^1]/s',
-		);
-		$matchers['one/desc'] = array(
-			'tag' => 'span',
-			'content' => 'DisplayDescription',
-			'attributes' => array( 'class' => 'wb-itemlink-description' ),
-		);
-		$matchers['one/match'] = array(
-			'tag' => 'span',
-			'content' => 'regexp:/Foo/s',
-			'attributes' => array( 'class' => 'wb-itemlink-match' ),
-		);
-		$matchers['two'] = array(
-			'tag' => 'li',
-			'content' => 'regexp:/^Q3[^1]/s',
-		);
-		$matchers['two/match'] = array(
-			'tag' => 'span',
-			'content' => 'regexp:/Foo/s',
-			'attributes' => array( 'class' => 'wb-itemlink-match' ),
-		);
-		$cases['Two Results'] = array(
-			array(
-				new TermSearchResult(
-					new Term( 'de', 'Foo' ),
-					'label',
-					new ItemId( 'Q2' ),
-					null,
-					new Term( 'en', 'DisplayDescription' )
-				),
-				new TermSearchResult(
-					new Term( 'de', 'Foo' ),
-					'label',
-					new ItemId( 'Q3' ),
-					new Term( 'en', 'DisplayLabel' )
-				),
-			),
-			$matchers
-		);
-
-		return $cases;
+		$this->assertSame( '<ul class="wikibase-disambiguation"></ul>', $html );
 	}
 
-	/**
-	 * @dataProvider getHTMLProvider
-	 */
-	public function testGetHTML( array $searchResults, array $matchers ) {
-		$disambig = $this->newItemDisambiguation();
+	public function testOneResult() {
+		$searchResult = new TermSearchResult(
+			new Term( 'en', '<MATCH>' ),
+			'<TYPE>',
+			new ItemId( 'Q1' ),
+			new Term( 'en', '<LABEL>' ),
+			new Term( 'en', '<DESC>' )
+		);
+		$html = $this->newInstance()->getHTML( array( $searchResult ) );
 
-		$html = $disambig->getHTML( $searchResults );
+		$this->assertContains( '<ul class="wikibase-disambiguation">', $html );
+		$this->assertSame( 1, substr_count( $html, '<li ' ) );
 
-		foreach ( $matchers as $key => $matcher ) {
-			MediaWikiTestCase::assertTag( $matcher, $html, "Failed to match HTML output with tag '{$key}'" );
-		}
+		$this->assertContains( '>Q1</a>', $html );
+		$this->assertContains( '<span class="wb-itemlink-label">&lt;LABEL></span>', $html );
+		$this->assertContains( '<span class="wb-itemlink-description">&lt;DESC></span>', $html );
+		$this->assertContains( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH>)',
+			$html
+		);
+	}
+
+	public function testTwoResults() {
+		$searchResults = array(
+			new TermSearchResult(
+				new Term( 'de', '<MATCH1>' ),
+				'<TYPE1>',
+				new ItemId( 'Q1' ),
+				null,
+				new Term( 'en', '<DESC1>' )
+			),
+			new TermSearchResult(
+				new Term( 'de', '<MATCH2>' ),
+				'<TYPE2>',
+				new ItemId( 'Q2' ),
+				new Term( 'en', '<LABEL2>' )
+			),
+		);
+		$html = $this->newInstance()->getHTML( $searchResults );
+
+		$this->assertContains( '<ul class="wikibase-disambiguation">', $html );
+		$this->assertSame( 2, substr_count( $html, '<li ' ) );
+
+		$this->assertContains( '>Q1</a>', $html );
+		$this->assertContains( '<span class="wb-itemlink-description">&lt;DESC1></span>', $html );
+		$this->assertContains( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH1>)',
+			$html
+		);
+
+		$this->assertContains( '>Q2</a>', $html );
+		$this->assertContains( '<span class="wb-itemlink-label">&lt;LABEL2></span>', $html );
+		$this->assertContains( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH2>)',
+			$html
+		);
 	}
 
 }
