@@ -71,7 +71,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGivenNoPropertyIdId_noPropertyIdIsSet() {
 		$property = $this->deserializer->deserialize( array( 'datatype' => 'foo' ) );
-		$this->assertEquals( null, $property->getId() );
+		$this->assertNull( $property->getId() );
 	}
 
 	public function testGivenValidPropertyIdId_propertyIdIsSet() {

@@ -29,8 +29,8 @@
 		"serialization/serialization": "~3.2"
 	},
 	"require-dev": {
-		"squizlabs/php_codesniffer": "~2.1",
-		"phpmd/phpmd": "~2.1",
+		"squizlabs/php_codesniffer": "~2.3",
+		"phpmd/phpmd": "~2.3",
 		"data-values/common": "~0.2.2",
 		"data-values/geo": "~1.1",
 		"data-values/number": "~0.5.0",
