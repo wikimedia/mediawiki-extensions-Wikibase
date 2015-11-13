@@ -34,6 +34,9 @@ var createStatementview = function( options, $node ) {
 					this.value = function() {
 						return this.options.value;
 					};
+					this.isValid = function() {
+						return true;
+					};
 				}
 			);
 		},
