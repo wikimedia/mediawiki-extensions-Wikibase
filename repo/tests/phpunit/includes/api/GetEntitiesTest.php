@@ -121,9 +121,6 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		'json',
 		'php',
 		'xml',
-		'yaml',
-		'txt',
-		'dbg',
 	);
 
 	/**
