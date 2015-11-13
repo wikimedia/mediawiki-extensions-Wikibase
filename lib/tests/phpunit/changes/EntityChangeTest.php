@@ -9,6 +9,8 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityChange;
 use Wikibase\ItemContent;
 
@@ -288,6 +290,39 @@ class EntityChangeTest extends ChangeRowTest {
 		$timestamp = '20140523' . '174422';
 		$change->setTimestamp( $timestamp );
 		$this->assertEquals( $timestamp, $change->getTime() );
+	}
+
+	public function testArrayalizeObjects() {
+		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
+		$expected = array(
+			'mainsnak' => array(
+				'snaktype' => 'novalue',
+				'property' => 'P1',
+				'hash' => '2d7ef41c913ec99eb249645e154e77670090db68',
+			),
+			'type' => 'statement',
+			'rank' => 'normal',
+			'_claimclass_' => 'Wikibase\DataModel\Statement\Statement',
+		);
+
+		$change = new EntityChange();
+		$array = $change->arrayalizeObjects( $statement );
+		$this->assertSame( $expected, $array );
+	}
+
+	public function testObjectifyArrays() {
+		$data = array(
+			'mainsnak' => array(
+				'snaktype' => 'novalue',
+				'property' => 'P1',
+			),
+			'type' => 'statement',
+			'_claimclass_' => 'Wikibase\DataModel\Statement\Statement',
+		);
+
+		$change = new EntityChange();
+		$statement = $change->objectifyArrays( $data );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\Statement', $statement );
 	}
 
 }
