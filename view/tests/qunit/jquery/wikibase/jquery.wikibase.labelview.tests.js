@@ -22,14 +22,6 @@ var createLabelview = function( options, $node ) {
 		.addClass( 'test_labelview' )
 		.labelview( options );
 
-	$labelview.data( 'labelview' )._save = function() {
-		return $.Deferred().resolve( {
-			entity: {
-				lastrevid: 'I am a revision id'
-			}
-		} ).promise();
-	};
-
 	return $labelview;
 };
 
