@@ -508,6 +508,10 @@
 	"apihelp-wbsetqualifier-param-bot": "Marcar esta edición como bot. Esta marca d'URL sólo se respetará si l'usuariu pertenez al grupu \"bot\".",
 	"apihelp-wbsetqualifier-example-1": "Configurar el cualificador pa l'afirmación dada cola propiedá P1 al valor de cadena GdyjxP8I6XB3",
 	"apihelp-wbsetreference-description": "Crea una referencia o configura'l valor d'una esistente.",
+	"apihelp-wbsetreference-param-statement": "Un GUID qu'identifica la declaración pa la que va configurase la referencia",
+	"apihelp-wbsetreference-param-snaks": "Los snaks a los que configurar la referencia. L'oxetu JSON con IDs de propiedá qu'apunten a matrices que contienen los snaks pa esa propiedá",
+	"apihelp-wbsetreference-param-snaks-order": "L'orde de los snaks. Llista separada por comes d'IDs de propiedá",
+	"apihelp-wbsetreference-param-reference": "Una función hash de referencia que tien d'anovase. Opcional. Si nun se da, créyase una nueva referencia.",
 	"apihelp-wbsetsitelink-param-linktitle": "El títulu del artículu que se va enllazar. Si esti parámetru ye una cadena balera o nun s'establecen nin el títulu del enllaz nin les insinies , l'enllaz va desaniciase.",
 	"apihelp-wbsetsitelink-param-badges": "Los identificadores de los elementos que van establecese como insinies. Reemplazarán a los actuales. Si esti parámetru nun ta definíu, les insinies nun van camudase"
 }
