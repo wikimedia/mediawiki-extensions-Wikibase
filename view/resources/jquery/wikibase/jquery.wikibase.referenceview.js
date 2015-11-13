@@ -250,7 +250,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		this.disable();
 
 		if ( dropValue ) {
-			this._stopEditingReferenceSnaks( dropValue );
+			this._stopEditingReferenceSnaks();
 
 			this.enable();
 			this.element.removeClass( 'wb-edit' );
@@ -262,7 +262,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 			.done( function( savedReference ) {
 				self.options.value = savedReference;
 
-				self._stopEditingReferenceSnaks( dropValue );
+				self._stopEditingReferenceSnaks();
 
 				self.enable();
 
@@ -290,41 +290,18 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * @private
-	 *
-	 * @param {boolean} dropValue
 	 */
-	_stopEditingReferenceSnaks: function( dropValue ) {
+	_stopEditingReferenceSnaks: function() {
 		var listview = this.$listview.data( 'listview' );
 
-		$.each( listview.value(), function() {
-			this.stopEditing( dropValue );
-
-			if ( dropValue && !this.value() ) {
-				// Remove snaklistview from referenceview if no snakviews are left in that
-				// snaklistview:
-				listview.removeItem( this.element );
-			}
+		listview.items().each( function() {
+			listview.removeItem( $( this ) );
 		} );
-
-		this.clear();
 
 		if ( this.options.value ) {
 			$.each( this.options.value.getSnaks().getGroupedSnakLists(), function() {
 				listview.addItem( this );
 			} );
-		}
-	},
-
-	/**
-	 * Clears the widget's content.
-	 * @since 0.5
-	 */
-	clear: function() {
-		var listview = this.$listview.data( 'listview' ),
-			items = listview.items();
-
-		for ( var i = 0; i < items.length; i++ ) {
-			listview.removeItem( items.eq( i ) );
 		}
 	},
 
