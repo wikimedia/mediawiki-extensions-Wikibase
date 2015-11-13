@@ -499,6 +499,7 @@ class WikibaseRepo {
 			$this->getStore()->getTermIndex(),
 			$this->getLanguageFallbackChainFactory(),
 			$this->getBufferingTermLookup(),
+			$this->getTermsLanguages(),
 			$displayLanguageCode
 		);
 	}

@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndexEntry;
 use Wikibase\Test\MockTermIndex;
@@ -151,6 +152,25 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		return $mockFallbackChain;
 	}
 
+	private function getContentLanguages() {
+		$languageCodes = array( 'br', 'de', 'en', 'en-ca', 'en-gb', 'fr' );
+
+		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$contentLanguages->expects( $this->any() )
+			->method( 'getLanguages' )
+			->will( $this->returnCallback( function() use( $languageCodes ) {
+				return $languageCodes;
+			} ) );
+
+		$contentLanguages->expects( $this->any() )
+			->method( 'hasLanguage' )
+			->will( $this->returnCallback( function( $languageCode ) use ( $languageCodes ) {
+				return in_array( $languageCode, $languageCodes );
+			} ) );
+
+		return $contentLanguages;
+	}
+
 	/**
 	 * @param bool $caseSensitive
 	 * @param bool $prefixSearch
@@ -169,6 +189,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			$this->getMockTermIndex(),
 			$this->getMockLanguageFallbackChainFactory(),
 			$this->getMockBufferingTermLookup(),
+			$this->getContentLanguages(),
 			'pt'
 		);
 		if ( $caseSensitive !== null ) {
@@ -348,6 +369,18 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			array( 1, 1 ),
 			array( 5000, 5000 ),
 			array( 999999, 5000 ),
+		);
+	}
+
+	public function testSearchForEntities_withInvalidLanguageCode() {
+		$interactor = $this->newTermSearchInteractor();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$interactor->searchForEntities(
+			'kittens!!!!',
+			'<omg-invalid-lang>',
+			'item',
+			array( TermIndexEntry::TYPE_LABEL )
 		);
 	}
 
