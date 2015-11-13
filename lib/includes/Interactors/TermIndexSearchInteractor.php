@@ -2,9 +2,11 @@
 
 namespace Wikibase\Lib\Interactors;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndex;
@@ -42,6 +44,11 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	private $labelDescriptionLookup;
 
 	/**
+	 * @var ContentLanguages
+	 */
+	private $contentLanguages;
+
+	/**
 	 * @var string languageCode to use for display terms
 	 */
 	private $displayLanguageCode;
@@ -70,18 +77,21 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @param TermIndex $termIndex Used to search the terms
 	 * @param LanguageFallbackChainFactory $fallbackFactory
 	 * @param BufferingTermLookup $bufferingTermLookup Provides the displayTerms
+	 * @param ContentLanguages $contentLanguages
 	 * @param string $displayLanguageCode
 	 */
 	public function __construct(
 		TermIndex $termIndex,
 		LanguageFallbackChainFactory $fallbackFactory,
 		BufferingTermLookup $bufferingTermLookup,
+		ContentLanguages $contentLanguages,
 		$displayLanguageCode
 	) {
 		Assert::parameterType( 'string', $displayLanguageCode, '$displayLanguageCode' );
 		$this->termIndex = $termIndex;
 		$this->bufferingTermLookup = $bufferingTermLookup;
 		$this->languageFallbackChainFactory = $fallbackFactory;
+		$this->contentLanguages = $contentLanguages;
 		$this->displayLanguageCode = $displayLanguageCode;
 		$this->labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$this->bufferingTermLookup,
@@ -162,8 +172,13 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @param string[] $termTypes
 	 *
 	 * @returns TermSearchResult[]
+	 * @throws InvalidArgumentException
 	 */
 	public function searchForEntities( $text, $languageCode, $entityType, array $termTypes ) {
+		if ( !$this->contentLanguages->hasLanguage( $languageCode ) ) {
+			throw new InvalidArgumentException( '$languageCode is not valid.' );
+		}
+
 		$matchedTermIndexEntries = $this->getMatchingTermIndexEntries( $text, $languageCode, $entityType, $termTypes );
 		$entityIds = $this->getEntityIdsForTermIndexEntries( $matchedTermIndexEntries );
 

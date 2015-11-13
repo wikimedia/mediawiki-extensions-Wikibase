@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib\Interactors;
 
+use InvalidArgumentException;
+
 /**
  * Interface for searching for terms
  *
@@ -21,6 +23,7 @@ interface TermSearchInteractor {
 	 * @param string[] $termTypes Types of Term to return, array of Wikibase\TermIndexEntry::TYPE_*
 	 *
 	 * @returns TermSearchResult[]
+	 * @throws InvalidArgumentException
 	 */
 	public function searchForEntities( $text, $languageCode, $entityType, array $termTypes );
 
