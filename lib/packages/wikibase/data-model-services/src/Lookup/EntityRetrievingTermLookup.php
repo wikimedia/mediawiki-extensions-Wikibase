@@ -2,8 +2,8 @@
 
 namespace Wikibase\DataModel\Services\Lookup;
 
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 
 /**
@@ -127,7 +127,11 @@ class EntityRetrievingTermLookup implements TermLookup {
 	 * @return Fingerprint
 	 */
 	private function fetchFingerprint( EntityId $entityId, array $languages ) {
-		$entity = $this->entityLookup->getEntity( $entityId );
+		try {
+			$entity = $this->entityLookup->getEntity( $entityId );
+		} catch ( EntityLookupException $ex ) {
+			throw new TermLookupException( $entityId, $languages, 'The entity could not be loaded', $ex );
+		}
 
 		if ( $entity === null ) {
 			throw new TermLookupException( $entityId, $languages, 'The entity could not be loaded' );

@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\Lookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 
@@ -35,6 +36,13 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
 		$termLookup->getLabel( new ItemId( 'Q120' ), 'en' );
+	}
+
+	public function testGetLabel_entityLookupExceptionGetsHandled() {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
+		$termLookup->getLabel( new ItemId( 'Q503' ), 'en' );
 	}
 
 	public function getLabelsProvider() {
@@ -81,6 +89,13 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
 		$termLookup->getDescription( new ItemId( 'Q120' ), 'en' );
+	}
+
+	public function testGetDescription_entityLookupExceptionGetHandled() {
+		$termLookup = $this->getEntityRetrievingTermLookup();
+
+		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
+		$termLookup->getDescription( new ItemId( 'Q503' ), 'en' );
 	}
 
 	public function testGetDescription_nullOnNoDescription() {
@@ -136,6 +151,7 @@ class EntityRetrievingTermLookupTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function getEntityLookup() {
 		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addException( new EntityLookupException( new ItemId( 'Q503' ) ) );
 
 		$item = new Item( new ItemId( 'Q116' ) );
 
