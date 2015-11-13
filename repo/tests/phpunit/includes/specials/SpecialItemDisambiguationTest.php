@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
@@ -47,7 +48,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	 * @return TermIndexSearchInteractor
 	 */
 	private function getMockSearchInteractor() {
-		$returnResults = array(
+		$searchResults = array(
 			array(
 				'entityId' => new ItemId( 'Q2' ),
 				'matchedTermType' => 'label',
@@ -68,15 +69,31 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		$mock = $this->getMockBuilder( 'Wikibase\Lib\Interactors\TermIndexSearchInteractor' )
 			->disableOriginalConstructor()
 			->getMock();
+
 		$mock->expects( $this->any() )
 			->method( 'searchForEntities' )
-			->with(
-				$this->equalTo( 'Foo' ),
-				$this->equalTo( 'fr' ),
-				$this->equalTo( 'item' ),
-				$this->equalTo( array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ) )
-			)
-			->will( $this->returnValue( $returnResults ) );
+			->will( $this->returnCallback(
+				function( $text, $lang, $entityType, array $termTypes ) use ( $searchResults ) {
+					if ( $lang !== 'fr' ) {
+						throw new InvalidArgumentException( 'Not a valid language code' );
+					}
+
+					$expectedTermTypes = array(
+						TermIndexEntry::TYPE_LABEL,
+						TermIndexEntry::TYPE_ALIAS
+					);
+
+					if (
+						$text === 'Foo' &&
+						$entityType === 'item' &&
+						$termTypes === $expectedTermTypes
+					) {
+						return $searchResults;
+					}
+
+					return array();
+				}
+			) );
 
 		$mock->expects( $this->any() )
 			->method( 'setIsCaseSensitive' )
@@ -93,11 +110,31 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		return $mock;
 	}
 
+	private function getContentLanguages() {
+		$languageCodes = array( 'ar', 'de', 'en', 'fr' );
+
+		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
+		$contentLanguages->expects( $this->any() )
+			->method( 'getLanguages' )
+			->will( $this->returnCallback( function() use( $languageCodes ) {
+				return $languageCodes;
+			} ) );
+
+		$contentLanguages->expects( $this->any() )
+			->method( 'hasLanguage' )
+			->will( $this->returnCallback( function( $languageCode ) use ( $languageCodes ) {
+				return in_array( $languageCode, $languageCodes );
+			} ) );
+
+		return $contentLanguages;
+	}
+
 	protected function newSpecialPage() {
 		$page = new SpecialItemDisambiguation();
 		$page->initServices(
 			$this->getMockItemDisambiguation(),
-			$this->getMockSearchInteractor()
+			$this->getMockSearchInteractor(),
+			$this->getContentLanguages()
 		);
 		return $page;
 	}
@@ -151,6 +188,31 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		foreach ( $matchers as $key => $matcher ) {
 			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
 		}
+	}
+
+	/**
+	 * @dataProvider execute_withInvalidLanguageCodeProvider
+	 */
+	public function testExecute_withInvalidLanguageCode( $userLanguageCode, $searchLanguageCode ) {
+		$data = array(
+			'language' => $searchLanguageCode,
+			'label' => 'Foo'
+		);
+
+		list( $output, ) = $this->executeSpecialPage(
+			'',
+			new FauxRequest( $data ),
+			$userLanguageCode
+		);
+
+		$this->assertContains( 'wikibase-itemdisambiguation-invalid-langcode', $output );
+	}
+
+	public function execute_withInvalidLanguageCodeProvider() {
+		return array(
+			array( 'qqx', '<omg invalid language>' ),
+			array( 'qqx', 'ooooooooo' )
+		);
 	}
 
 }
