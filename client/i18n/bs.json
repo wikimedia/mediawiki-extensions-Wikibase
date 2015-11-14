@@ -22,7 +22,7 @@
 	"wikibase-comment-sitelink-change": "Jezična veza izmjenjena sa $1 u $2",
 	"wikibase-comment-sitelink-remove": "Jezična veza uklonjena: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|izmjena|izmjene}}",
-	"wikibase-dataitem": "{{WBREPONAME}} stavka",
+	"wikibase-dataitem": "Na {{WBREPONAME}}",
 	"wikibase-editlinks": "Uredi veze",
 	"wikibase-editlinkstitle": "Uredi međujezične veze",
 	"wikibase-addlinkstitle": "Dodaj međujezičke veze",
@@ -59,5 +59,5 @@
 	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2",
 	"wikibase-otherprojects": "Drugi projekti",
 	"wikibase-otherprojects-beta-message": "Drugi projekti na bočnoj traci",
-	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s linkovima na ostale Wikimedijine projekte na osnovi podataka s projekta Wikidata."
+	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s linkovima na ostale Wikimedijine projekte na osnovu podataka s projekta {{WBREPONAME}}."
 }
