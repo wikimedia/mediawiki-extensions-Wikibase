@@ -1,5 +1,8 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.1.1 (2015-11-15)
+* Made `EntityRetrievingTermLookup` handle `EntityLookupException` ([T118581](https://phabricator.wikimedia.org/T118581))
+
 ## Version 3.1.0 (2015-10-16)
 
 * Added `InMemoryEntityLookup::addException`
