@@ -4,6 +4,10 @@
 			"Hangmanwa7id"
 		]
 	},
+	"wikibase-comment-update": "Élément {{WBREPONAME}} changé",
+	"wikibase-dataitem": "Élément {{WBREPONAME}}",
+	"wikibase-editlinks": "Changer les liens",
+	"wikibase-editlinkstitle": "Changer les liens interlangue",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-otherprojects": "Autres projets"
 }

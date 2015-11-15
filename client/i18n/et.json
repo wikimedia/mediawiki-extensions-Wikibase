@@ -6,7 +6,7 @@
 	},
 	"wikibase-client-desc": "Vikibaasi-lisa klient",
 	"tooltip-t-wikibase": "Link andmehoidla seonduva üksuse juurde",
-	"apihelp-query+pageterms-description": "Leheküljega seotud termide hankimine seotud andmeüksusest.",
+	"apihelp-query+pageterms-description": "Leheküljega seotud termide hankimine seotud andmeüksusest. Vikibaasi olemileheküljel pöördutakse otse olemi termide poole.\nPane tähele, et hoidlavikis töötavad lehekülje termid ainult otse olemilehekülgedel, mitte üksusega ühendatud lehekülgedel. Seda võidakse tulevikus muuta.",
 	"apihelp-query+pageterms-example-simple": "Hangi kasutaja keeles kõik leheküljega \"London\" seotud termid.",
 	"apihelp-query+pageterms-example-label-en": "Hangi inglise keeles leheküljega \"London\" seotud sildid ja rööpkujud.",
 	"apihelp-query+pageterms-param-terms": "Millist tüüpi termid hankida, nt 'description' (kirjeldused). Kui määramata, tagastatakse kõik tüübid.",
