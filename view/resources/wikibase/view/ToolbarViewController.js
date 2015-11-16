@@ -12,9 +12,11 @@ wikibase.view.ToolbarViewController = ( function( wb, mw ) {
  * @extends wikibase.view.ViewController
  * @constructor
  *
- * @param {Object} model
+ * @param {Object} model A model-controller interaction object, consisting of a set of functions.
  * @param {Function} model.save A function taking a specific type of wikibase
  * datamodel objects and returning a Promise.
+ * @param {Function} model.remove A function taking a specific wikibase datamodel object and
+ * returning a Promise.
  * @param {jQuery.wikibase.edittoolbar} toolbar
  * @param {jQuery.ui.EditableTemplatedWidget} view
  */

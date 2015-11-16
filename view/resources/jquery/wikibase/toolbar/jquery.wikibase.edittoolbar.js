@@ -99,7 +99,8 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 			this.setController( this.options.interactionWidget );
 			if ( !this.options.getHelpMessage ) {
 				if ( !this.options.interactionWidget.getHelpMessage ) {
-					throw new Error( 'Interaction widget help message getter missing' );
+					throw new Error( 'Either getHelpMessage or interactionWidget.getHelpMessage '
+						+ 'option must be provided' );
 				}
 				this.options.getHelpMessage = $.proxy(
 					this.options.interactionWidget.getHelpMessage,
@@ -266,10 +267,8 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 			if ( isInteractionWidgetNode( event.target ) && error instanceof wb.api.RepoApiError ) {
 				var $anchor;
 
-				if ( error.action === 'save' ) {
-					$anchor = self.getButton( 'save' ).element;
-				} else if ( error.action === 'remove' ) {
-					$anchor = self.getButton( 'remove' ).element;
+				if ( error.action === 'save' || error.action === 'remove' ) {
+					$anchor = self.getButton( error.action ).element;
 				}
 
 				self.enable();
