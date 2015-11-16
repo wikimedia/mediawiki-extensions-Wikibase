@@ -27,7 +27,7 @@
 	"wikibase-error-autocomplete-connection": "Dotaz na API serveru se nezdařil. Zkuste to prosím později.",
 	"wikibase-error-autocomplete-response": "Odpověď serveru: $1",
 	"wikibase-error-ui-no-external-page": "Takový článek nebyl na příslušném webu nalezen.",
-	"wikibase-error-ui-edit-conflict": "Nastal editační konflikt. Prosím obnovte stránku a uložte ji znovu.",
+	"wikibase-error-ui-edit-conflict": "Došlo k editačnímu konfliktu. Prosím uložte si své změny, obnovte stránku a uložte je znovu.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterováno)",
 	"wikibase-quantitydetails-amount": "Množství",
 	"wikibase-quantitydetails-upperbound": "Horní mez",
