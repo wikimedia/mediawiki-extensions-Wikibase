@@ -3,6 +3,7 @@
 namespace Wikibase\Tests\Repo;
 
 use Language;
+use MediaWikiTestCase;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
@@ -19,7 +20,35 @@ use Wikibase\SettingsArray;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class WikibaseRepoTest extends \MediaWikiTestCase {
+class WikibaseRepoTest extends MediaWikiTestCase {
+
+	public function testGetDefaultValidatorBuilders_noReset() {
+		$first = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
+		$this->assertInstanceOf( 'Wikibase\Repo\ValidatorBuilders', $first );
+
+		$second = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
+		$this->assertSame( $first, $second );
+	}
+
+	public function testGetDefaultValidatorBuilders_withReset() {
+		$first = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
+		$second = $this->getWikibaseRepo()->getDefaultValidatorBuilders( 'reset' );
+		$this->assertNotSame( $first, $second );
+	}
+
+	public function testGetDefaultFormatterBuilders_noReset() {
+		$first = $this->getWikibaseRepo()->getDefaultFormatterBuilders();
+		$this->assertInstanceOf( 'Wikibase\Lib\WikibaseValueFormatterBuilders', $first );
+
+		$second = $this->getWikibaseRepo()->getDefaultFormatterBuilders();
+		$this->assertSame( $first, $second );
+	}
+
+	public function testGetDefaultFormatterBuilders_withReset() {
+		$first = $this->getWikibaseRepo()->getDefaultFormatterBuilders();
+		$second = $this->getWikibaseRepo()->getDefaultFormatterBuilders( 'reset' );
+		$this->assertNotSame( $first, $second );
+	}
 
 	public function testGetDataTypeFactoryReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getDataTypeFactory();
