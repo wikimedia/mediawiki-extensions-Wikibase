@@ -122,48 +122,66 @@ class SearchEntities extends ApiBase {
 		);
 
 		$entries = array();
+
 		foreach ( $searchResults as $match ) {
-			//TODO: use EntityInfoBuilder, EntityInfoTermLookup
-			$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
-			$entry = array(
-				'id' => $match->getEntityId()->getSerialization(),
-				'concepturi' => $this->conceptBaseUri . $match->getEntityId()->getSerialization(),
-				'url' => $title->getFullUrl(),
-				'title' => $title->getPrefixedText(),
-				'pageid' => $title->getArticleID()
-			);
-			$displayLabel = $match->getDisplayLabel();
-			if ( !is_null( $displayLabel ) ) {
-				$entry['label'] = $displayLabel->getText();
-			}
-			$displayDescription = $match->getDisplayDescription();
-			if ( !is_null( $displayDescription ) ) {
-				$entry['description'] = $displayDescription->getText();
-			}
-			$entry['match']['type'] = $match->getMatchedTermType();
-
-			//Special handling for 'entityId's as these are not actually Term objects
-			if ( $entry['match']['type'] === 'entityId' ) {
-				$entry['match']['text'] = $entry['id'];
-				$entry['aliases'] = array( $entry['id'] );
-			} else {
-				$matchedTerm = $match->getMatchedTerm();
-				$matchedTermText = $matchedTerm->getText();
-				$entry['match']['language'] = $matchedTerm->getLanguageCode();
-				$entry['match']['text'] = $matchedTermText;
-
-				/**
-				 * Add matched terms to the aliases key in the result to give some context for the matched Term
-				 * if the matched term is different to the alias.
-				 * XXX: This appears odd but is used in the UI / Entity suggesters
-				 */
-				if ( !array_key_exists( 'label', $entry ) || $matchedTermText != $entry['label'] ) {
-					$entry['aliases'] = array( $matchedTerm->getText() );
-				}
-			}
-			$entries[] = $entry;
+			$entries[] = $this->buildTermSearchMatchEntry( $match );
 		}
+
 		return $entries;
+	}
+
+	/**
+	 * @param TermSearchResult $match
+	 *
+	 * @return array
+	 */
+	private function buildTermSearchMatchEntry( $match ) {
+		// TODO: use EntityInfoBuilder, EntityInfoTermLookup
+		$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
+
+		$entry = array(
+			'id' => $match->getEntityId()->getSerialization(),
+			'concepturi' => $this->conceptBaseUri . $match->getEntityId()->getSerialization(),
+			'url' => $title->getFullUrl(),
+			'title' => $title->getPrefixedText(),
+			'pageid' => $title->getArticleID()
+		);
+
+		$displayLabel = $match->getDisplayLabel();
+
+		if ( !is_null( $displayLabel ) ) {
+			$entry['label'] = $displayLabel->getText();
+		}
+
+		$displayDescription = $match->getDisplayDescription();
+
+		if ( !is_null( $displayDescription ) ) {
+			$entry['description'] = $displayDescription->getText();
+		}
+
+		$entry['match']['type'] = $match->getMatchedTermType();
+
+		// Special handling for 'entityId's as these are not actually Term objects
+		if ( $entry['match']['type'] === 'entityId' ) {
+			$entry['match']['text'] = $entry['id'];
+			$entry['aliases'] = array( $entry['id'] );
+		} else {
+			$matchedTerm = $match->getMatchedTerm();
+			$matchedTermText = $matchedTerm->getText();
+			$entry['match']['language'] = $matchedTerm->getLanguageCode();
+			$entry['match']['text'] = $matchedTermText;
+
+			/**
+			 * Add matched terms to the aliases key in the result to give some context
+			 * for the matched Term if the matched term is different to the alias.
+			 * XXX: This appears odd but is used in the UI / Entity suggesters
+			 */
+			if ( !array_key_exists( 'label', $entry ) || $matchedTermText != $entry['label'] ) {
+				$entry['aliases'] = array( $matchedTerm->getText() );
+			}
+		}
+
+		return $entry;
 	}
 
 	/**
@@ -264,9 +282,12 @@ class SearchEntities extends ApiBase {
 	 */
 	protected function getExamplesMessages() {
 		return array(
-			'action=wbsearchentities&search=abc&language=en' => 'apihelp-wbsearchentities-example-1',
-			'action=wbsearchentities&search=abc&language=en&limit=50' => 'apihelp-wbsearchentities-example-2',
-			'action=wbsearchentities&search=alphabet&language=en&type=property' => 'apihelp-wbsearchentities-example-3',
+			'action=wbsearchentities&search=abc&language=en' =>
+				'apihelp-wbsearchentities-example-1',
+			'action=wbsearchentities&search=abc&language=en&limit=50' =>
+				'apihelp-wbsearchentities-example-2',
+			'action=wbsearchentities&search=alphabet&language=en&type=property' =>
+				'apihelp-wbsearchentities-example-3',
 		);
 	}
 
