@@ -137,28 +137,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param string $type
-	 * @param string $format
-	 * @param FormatterOptions $options
-	 *
-	 * @return mixed
-	 */
-	private function getFormatterForValueType( $type, $format, $options ) {
-		$builders = $this->newWikibaseValueFormatterBuilders(
-			$this->getTitleLookup()
-		);
-
-		$factories = $builders->getFormatterFactoryCallbacksByValueType();
-		$this->assertArrayHasKey( $type, $factories, 'value type ' . $type );
-
-		$factory = $factories[$type];
-		$formatter = call_user_func( $factory, $format, $options );
-
-		$this->assertInstanceOf( 'ValueFormatters\ValueFormatter', $formatter );
-		return $formatter;
-	}
-
-	/**
 	 * @dataProvider provideNewFormatter
 	 */
 	public function testNewFormatter(
@@ -330,141 +308,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideFormatterForValueType
-	 */
-	public function testFormatterForValueType(
-		$format,
-		FormatterOptions $options,
-		DataValue $value,
-		$expected
-	) {
-		$formatter = $this->getFormatterForValueType( $value->getType(), $format, $options );
-
-		$text = $formatter->format( $value );
-		$this->assertRegExp( $expected, $text );
-	}
-
-	public function provideFormatterForValueType() {
-		return array(
-			// string
-			'plain string' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
-				new StringValue( '{foo&bar}' ),
-				'@^\{foo&bar\}$@'
-			),
-
-			// bad
-			'bad value' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
-				new UnDeserializableValue( 'Foo/Bar', 'time', 'evil' ),
-				'@^.*invalid.*$@'
-			),
-
-			// globecoordinate
-			'plain coordinate' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
-				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
-				'@^55°45\'S, 37°15\'E$@'
-			),
-
-			'coordinate details' => array(
-				SnakFormatter::FORMAT_HTML_DIFF,
-				$this->newFormatterOptions(),
-				new GlobeCoordinateValue( new LatLongValue( -55.755786, 37.25633 ), 0.25 ),
-				'@^.*55° 45\', 37° 15\'.*$@'
-			),
-
-			// quantity
-			'localized quantity' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions( 'de' ),
-				QuantityValue::newFromNumber( '+123456.789' ),
-				'@^123\\.456,789$@'
-			),
-
-			'quantity details' => array(
-				SnakFormatter::FORMAT_HTML_DIFF,
-				$this->newFormatterOptions( 'de' ),
-				QuantityValue::newFromNumber( '+123456.789', 'foo' ),
-				'@^.*123\\.456,789.*foo.*$@'
-			),
-
-			// time
-			'a month in 1980' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions(),
-				new TimeValue(
-					'+1980-05-01T00:00:00Z',
-					0, 0, 0,
-					TimeValue::PRECISION_MONTH,
-					'http://www.wikidata.org/entity/Q1985727'
-				),
-				'/^May 1980$/'
-			),
-			'a gregorian day in 1520' => array(
-				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
-				new TimeValue(
-					'+1520-05-01T00:00:00Z',
-					0, 0, 0,
-					TimeValue::PRECISION_DAY,
-					'http://www.wikidata.org/entity/Q1985727'
-				),
-				'/^1 May 1520<sup class="wb-calendar-name">Gregorian<\/sup>$/'
-			),
-			'a julian day in 1980' => array(
-				SnakFormatter::FORMAT_HTML_DIFF,
-				$this->newFormatterOptions(),
-				new TimeValue(
-					'+1980-05-01T00:00:00Z',
-					0, 0, 0,
-					TimeValue::PRECISION_DAY,
-					'http://www.wikidata.org/entity/Q1985786'
-				),
-				'/^.*>1 May 1980<sup class="wb-calendar-name">Julian<\/sup>.*$/'
-			),
-
-			//wikibase-entityid
-			'plain item label (with language fallback)' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions( 'de-ch' ), // should fall back to 'de'
-				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'@^Name für Q5$@'
-			),
-			'widget item link (with entity lookup)' => array(
-				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
-				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'/^<a\b[^>]* href="[^"]*\bQ5">Label for Q5<\/a>.*$/',
-			),
-			'property link (with entity lookup)' => array(
-				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
-				new EntityIdValue( new PropertyId( 'P5' ) ),
-				'/^<a\b[^>]* href="[^"]*\bP5">Label for P5<\/a>.*$/',
-				'wikibase-property'
-			),
-
-			//monolingualtext
-			'plain text in english' => array(
-				SnakFormatter::FORMAT_PLAIN,
-				$this->newFormatterOptions( 'en' ),
-				new MonolingualTextValue( 'en', 'Hello World' ),
-				'/^Hello World$/'
-			),
-			'html text in german' => array(
-				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions( 'en' ),
-				new MonolingualTextValue( 'de', 'Hallo Welt' ),
-				'/^.*lang="de".*?>Hallo Welt<.*Deutsch.*$/'
-			)
-		);
-	}
-
-	/**
 	 * In case WikibaseValueFormatterBuilders doesn't have a EntityTitleLookup it returns
 	 * a formatter which doesn't link the entity id.
 	 *
@@ -551,32 +394,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@>Custom LabelDescriptionLookup<@'
 			),
-		);
-	}
-
-	public function testGetFormatterFactoryCallbacksByValueType() {
-		$builders = $this->newWikibaseValueFormatterBuilders();
-
-		// check for all the required types
-		$required = array(
-			'string',
-			'time',
-			'globecoordinate',
-			'wikibase-entityid',
-			'quantity',
-			'bad',
-			'monolingualtext',
-		);
-
-		$actual = array_keys( $builders->getFormatterFactoryCallbacksByValueType() );
-
-		sort( $required );
-		sort( $actual );
-
-		// check for all the required types, that is, the ones supported by the fallback format
-		$this->assertEquals(
-			$required,
-			$actual
 		);
 	}
 
