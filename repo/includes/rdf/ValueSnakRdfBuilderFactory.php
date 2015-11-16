@@ -2,7 +2,6 @@
 
 namespace Wikibase\Rdf;
 
-use DataValues\DataValue;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Purtle\RdfWriter;
 

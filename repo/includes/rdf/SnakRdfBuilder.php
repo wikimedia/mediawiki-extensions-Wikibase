@@ -2,9 +2,7 @@
 
 namespace Wikibase\Rdf;
 
-use DataValues\DataValue;
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;

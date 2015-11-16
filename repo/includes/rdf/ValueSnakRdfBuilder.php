@@ -2,7 +2,6 @@
 
 namespace Wikibase\Rdf;
 
-use DataValues\DataValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Purtle\RdfWriter;
 

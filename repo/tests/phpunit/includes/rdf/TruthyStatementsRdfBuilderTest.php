@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Rdf;
 
-use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\SnakRdfBuilder;
