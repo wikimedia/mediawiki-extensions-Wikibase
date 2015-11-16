@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_4ed95182",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-16T20:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_38e00025",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_3a8c5f3a",
         "filename": "repo/Wikibase.php",
         "patchSetId": 10
@@ -212,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_0efcb9d4",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-16T20:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_ba7fef10",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_da7c231e",
         "filename": "repo/includes/api/QuerySearchEntities.php",
         "patchSetId": 10
@@ -223,6 +259,24 @@
       "writtenOn": "2015-11-16T11:26:00Z",
       "side": 1,
       "message": "Paging is useless if we always ask the search engine for the full set of results. Emulating paging this way makes queries *more* expensive, instead of less. If we don\u0027t proper paging, let\u0027s simply not support paging, instead of pretending we do.\n\nPaging on a ranked result doesn\u0027t make sense to me anyway, since proper paging needs a total ordering on a unique key. And who looks on page 2 of googles search result?...",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_635b0e58",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-16T20:30:57Z",
+      "side": 1,
+      "message": "K, are we going to remove that from the \"normal\" search api as well? I\u0027d prefer if both modules differ as little as possible.",
+      "parentUuid": "0ebaf39b_da7c231e",
       "revId": "0e4630069946b8081304916a3f1701876583f0b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
