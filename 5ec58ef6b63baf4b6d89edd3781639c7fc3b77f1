@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_49de2b16",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-16T21:47:56Z",
+      "side": 1,
+      "message": "This depends on the user language… given the api help pages are cached AFAIR that might lead to strange results.\n\nAlso take a look at:\napi.php?action\u003dhelp\u0026modules\u003dquery%2Bwbsearch\u0026uselang\u003dfoo-bar\napi.php?action\u003dquery\u0026list\u003dwbsearch\u0026wbssearch\u003dabc\u0026uselang\u003dwhatthehell",
+      "revId": "5ec58ef6b63baf4b6d89edd3781639c7fc3b77f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
