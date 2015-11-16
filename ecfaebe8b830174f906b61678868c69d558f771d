@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_5ab7d3d3",
+        "filename": "lib/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-16T11:41:13Z",
+      "side": 1,
+      "message": "This is a pretty harsh failure mode, typically causing a Status 500.\nIt basically requires the caller to do the check first to avoid triggering this error. That\u0027s likely to duplicate for error checking.\n\nWe could alternatively throw a more descriptive exception. Then the caller could \"ask for forgiveness\" using a try/catch block, instead of \"asking for permission\".",
+      "revId": "ecfaebe8b830174f906b61678868c69d558f771d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5adcb34b",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-16T11:41:13Z",
+      "side": 1,
+      "message": "Why do we need to do this check here, if the interactor is already known to apply validation? This seems redundant.",
+      "revId": "ecfaebe8b830174f906b61678868c69d558f771d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
