@@ -1,0 +1,8 @@
+WIKIDATA_REPO_URL: "http://wikidata.beta.wmflabs.org/wiki/"
+WIKIDATA_REPO_API: "http://wikidata.beta.wmflabs.org/w/api.php"
+WB_REPO_USERNAME: "WikidataTester"
+ITEM_NAMESPACE: ""
+PROPERTY_NAMESPACE: "Property:"
+ITEM_ID_PREFIX: "Q"
+PROPERTY_ID_PREFIX: "P"
+LANGUAGE_CODE: "en"

@@ -1,0 +1,1 @@
+default: --format html --out report<%= ENV['TEST_ENV_NUMBER'] %>.html
