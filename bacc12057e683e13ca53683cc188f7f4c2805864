@@ -70,6 +70,24 @@
       "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_37679824",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-16T09:24:16Z",
+      "side": 1,
+      "message": "Again, I think it was bad to merge this as it is. If you remove an event, remove the code handling the event in the same change.",
+      "parentUuid": "0ebaf39b_4664eeae",
+      "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
