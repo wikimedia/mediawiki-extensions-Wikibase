@@ -106,6 +106,24 @@
       "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_da43c313",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-16T10:19:21Z",
+      "side": 1,
+      "message": "That stuff indeed is horrible. Some general hints:\n\n* `this._trigger( eventName )` actually triggers `this.widgetEventPrefix + eventName`\n* `$foo.on( fullEventName + \u0027.\u0027 + scope )` handles the event `fullEventName` as usual, but you can just write `$foo.off( \u0027.\u0027 + scope )` to get rid of all events you are listening to\n\nSo, in `$subview.on( \u0027subviewevent.thisview\u0027 )`, `subview` is where the event was triggered, `event` is the name of the event as triggered and `thisview` is the name of view handling the event.",
+      "parentUuid": "0ebaf39b_faa807da",
+      "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
