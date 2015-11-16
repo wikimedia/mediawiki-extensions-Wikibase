@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_3a00df6c",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-16T11:51:58Z",
+      "side": 1,
+      "message": "I think it\u0027s not so nice to be instantiating this here, as well as in SearchEntities (and maybe elsewhere?)",
+      "parentUuid": "0ebaf39b_7aa2d7a5",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9a9f8b62",
         "filename": "repo/includes/api/QuerySearchEntities.php",
         "patchSetId": 10
