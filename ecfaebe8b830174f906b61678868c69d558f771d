@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_9a49cbd5",
+        "filename": "lib/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-16T12:02:59Z",
+      "side": 1,
+      "message": "suppose we can leave it to the caller, at least for now",
+      "parentUuid": "0ebaf39b_5ab7d3d3",
+      "revId": "ecfaebe8b830174f906b61678868c69d558f771d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_5adcb34b",
         "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-16T11:41:13Z",
       "side": 1,
       "message": "Why do we need to do this check here, if the interactor is already known to apply validation? This seems redundant.",
+      "revId": "ecfaebe8b830174f906b61678868c69d558f771d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_da3f431f",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-16T12:02:59Z",
+      "side": 1,
+      "message": "i think the validation could just go here. it\u0027s needed because if the language code is invalid then we display an informative error message.\n\nNot sure it\u0027s so nice to introduce a new exception class for this and then just try / catch here?",
+      "parentUuid": "0ebaf39b_5adcb34b",
       "revId": "ecfaebe8b830174f906b61678868c69d558f771d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
