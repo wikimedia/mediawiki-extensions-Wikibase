@@ -89,50 +89,6 @@ class WikibaseValueFormatterBuilders {
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
-	/**
-	 * Returns an associative array mapping value types to factory functions.
-	 * This is for use with OutputFormatValueFormatterFactory and DispatchingValueFormatter,
-	 * to allow a fallback from data type based formatter selection to formatting based
-	 * only on the value type.
-	 *
-	 * @todo make formatters for value types configurable using a mechanism similar to the
-	 * one used for data types (see DataTypeDefinitions).
-	 *
-	 * @return callable[]
-	 */
-	public function getFormatterFactoryCallbacksByValueType() {
-		$self = $this; // yay PHP 5.3!
-		return array(
-				'string' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $format === SnakFormatter::FORMAT_PLAIN ? new StringFormatter( $options ) : null;
-				},
-
-				'bad' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $format === SnakFormatter::FORMAT_PLAIN ? new UnDeserializableValueFormatter( $options ) : null;
-				},
-
-				'globecoordinate' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $self->newGlobeCoordinateFormatter( $format, $options );
-				},
-
-				'quantity' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $self->newQuantityFormatter( $format, $options );
-				},
-
-				'time' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $self->newTimeFormatter( $format, $options );
-				},
-
-				'wikibase-entityid' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $self->newEntityIdFormatter( $format, $options );
-				},
-
-				'monolingualtext' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $self->newMonolingualFormatter( $format, $options );
-				},
-		);
-	}
-
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
 		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		return new EntityIdValueFormatter(

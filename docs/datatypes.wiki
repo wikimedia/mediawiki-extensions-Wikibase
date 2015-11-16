@@ -1,35 +1,53 @@
-This document describes the concept of data types as used by Wikibase.
+This document describes the concept of property data types as used by Wikibase.
+
 
 == Overview ==
-Data types in Wikibase are rather insubstantial: they are modelled by DataType objects,
+Property data types in Wikibase are rather insubstantial: they are modelled by DataType objects,
 but such objects do not define any functionality of themselves. They merely act as a type safe
 ID for the data type.
 
-Data types are used to declare which kinds of values can be associated with a Property in a
-Snak. For each data type, the following things are defined:
+Property data types are used to declare which kinds of values can be associated with a Property
+in a Snak. For each data type, the following things are defined:
 
-* the type of DataValue to use for values
-* a localized name and description of the data type
-* ValueValidators that impose constraints on the allowed values
-* A ValueParser for parsing user input
-* Formatters for rendering values of the given type to various target formats.
-* RDF mappings for representing values of the given type in RDF.
+* The type of DataValue to use for values (the "value type").
+* A localized name and description of the data type.
+* ValueValidators that impose constraints on the allowed values.
+* A ValueParser for parsing user input for a given type of property.
+* Formatters for rendering snaks and values of the given type to various target formats.
+* RDF mappings for representing snaks and values of the given type in RDF.
 
 
 == Data Type Definitions ==
-Data types are defined in the global $wgWBRepoDataTypes and $wgWBClientDataTypes arrays,
+Property data types are defined in the global $wgWBRepoDataTypes and $wgWBClientDataTypes arrays,
 respectively. These arrays are constructed at bootstrap time in Wikibase.php resp.
 WikibaseClient.php based on the information returned when including the files
 WikibaseLib.datatypes.php, Wikibase.datatypes.php, and WikibaseClient.datatypes.php,
 respectively.
 
-$wgWBRepoDataTypes and $wgWBClientDataTypes are associative arrays that map data type IDs to a
-data type definition record. Each such record has the following fields:
-* value-type (repo and client): the data value type ID identifying the low level value type to use for this data type. Logically, the value type defines the structure of the value, while the data type defines constraints on the value.
+$wgWBRepoDataTypes and $wgWBClientDataTypes are associative arrays that map property data types
+and value types to a set of constructor callbacks (aka factory methods).
+
+Property data types and value types are used as keys in the $wgWBRepoDataTypes and
+$wgWBClientDataTypes. They are distinguished by the prefixes "VT:" and "PT:". For instance,
+the string value type would use the key "VT:string", while the url data type would use the
+key "PT:url".
+
+Logically, the value type defines the structure of the value, while the property data
+type defines the interpretation of the value. Property data types may impose additional
+constraints on the values, or impact how they are rendered or exported.
+
+Each key is associated with a map that provides the following fields:
+* value-type (repo and client): the value type to use for this data type (not used for value type keys).
 * validator-factory-callback (repo only): a callable that acts as a factory for the list of validators that should be used to check any user supplied values of the given data type. The callable will be called without any arguments, and must return a list of ValueValidator objects.
 * parser-factory-callback (repo only): a callable that acts as a factory for a ValueParser for this data type.
-* formatter-factory-callback (repo and client): (PLANNED) a callable that acts as a factory for ValueFormatters for use with this data type.
+* formatter-factory-callback (repo and client): a callable that acts as a factory for ValueFormatters for use with this data type.
 * rdf-builder-factory-callback (repo only): a callable that acts as a factory for ValueSnakRdfBuilder for use with this data type.
+
+Since for each property data type the associated value type is know, this provides a convenient
+fallback mechanism: If a desired callback field isn't defined for a given property data type,
+we can fall back to using the callback that is defined for the value type. For example, if
+there is no formatter-factory-callback field associated with the PT:url key, we may use the
+one defined for VT:string, since the url property data type is based on the string value type.
 
 Extensions that wish to register a data type should use the WikibaseRepoDataTypes
 resp. WikibaseClientDataTypes hooks to provide additional data type definitions.
