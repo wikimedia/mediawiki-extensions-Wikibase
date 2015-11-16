@@ -102,18 +102,11 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	private function getMockTermIndex() {
-		return new MockTermIndex(
-			array()
-		);
-	}
-
 	private function newEntitySearchHelper( TermIndexSearchInteractor $searchInteractor ) {
 		return new EntitySearchHelper(
 			$this->getMockTitleLookup(),
 			new BasicEntityIdParser(),
 			$searchInteractor,
-			$this->getMockTermIndex(),
 			$this->getMockLabelDescriptionLookup()
 		);
 	}

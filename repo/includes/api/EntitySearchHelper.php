@@ -11,7 +11,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -38,11 +37,6 @@ class EntitySearchHelper {
 	private $termIndexSearchInteractor;
 
 	/**
-	 * @var TermIndex
-	 */
-	private $termIndex;
-
-	/**
 	 * @var LabelDescriptionLookup
 	 */
 	private $labelDescriptionLookup;
@@ -51,13 +45,11 @@ class EntitySearchHelper {
 		EntityTitleLookup $titleLookup,
 		EntityIdParser $idParser,
 		TermIndexSearchInteractor $termIndexSearchInteractor,
-		TermIndex $termIndex,
 		LabelDescriptionLookup $labelDescriptionLookup
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->idParser = $idParser;
 		$this->termIndexSearchInteractor = $termIndexSearchInteractor;
-		$this->termIndex = $termIndex;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 	}
 
