@@ -18,13 +18,16 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 
 	private function getDataTypeDefinitions() {
 		$definitions = array(
-			'foo' => array(
+			'VT:FOO' => array(
+				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooValueFormatter',
+				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooValueParser',
+			),
+			'PT:foo' => array(
 				'value-type' => 'FOO',
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValidators',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooParser',
-				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooFormatter',
 			),
-			'bar' => array(
+			'PT:bar' => array(
 				'value-type' => 'BAR',
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getBarFormatter',
 			)
@@ -45,38 +48,70 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 
 	public function testGetValidatorFactoryCallbacks() {
 		$defs = $this->getDataTypeDefinitions();
-		$this->assertEquals( array( 'foo' => 'DataTypeDefinitionsTest::getFooValidators' ), $defs->getValidatorFactoryCallbacks() );
+
+		$expected = array( 'foo' => 'DataTypeDefinitionsTest::getFooValidators' );
+		$this->assertEquals( $expected, $defs->getValidatorFactoryCallbacks() );
+
+		$expected = array( 'PT:foo' => 'DataTypeDefinitionsTest::getFooValidators' );
+		$this->assertEquals( $expected, $defs->getValidatorFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
 	}
 
 	public function testGetParserFactoryCallbacks() {
 		$defs = $this->getDataTypeDefinitions();
-		$this->assertEquals( array( 'foo' => 'DataTypeDefinitionsTest::getFooParser' ), $defs->getParserFactoryCallbacks() );
+
+		$expected = array( 'foo' => 'DataTypeDefinitionsTest::getFooParser' );
+		$this->assertEquals( $expected, $defs->getParserFactoryCallbacks() );
+
+		$expected = array(
+			'PT:foo' => 'DataTypeDefinitionsTest::getFooParser',
+			'VT:FOO' => 'DataTypeDefinitionsTest::getFooValueParser',
+		);
+		$this->assertEquals( $expected, $defs->getParserFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
+	}
+
+	public function testGetFormatterFactoryCallbacks() {
+		$defs = $this->getDataTypeDefinitions();
+
+		$expected = array(
+			'foo' => 'DataTypeDefinitionsTest::getFooValueFormatter',
+			'bar' => 'DataTypeDefinitionsTest::getBarFormatter',
+		);
+		$this->assertEquals( $expected, $defs->getFormatterFactoryCallbacks() );
+
+		$expected = array(
+			'VT:FOO' => 'DataTypeDefinitionsTest::getFooValueFormatter',
+			'PT:bar' => 'DataTypeDefinitionsTest::getBarFormatter',
+		);
+		$this->assertEquals( $expected, $defs->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
 	}
 
 	public function testRegisterDataTypes() {
 		$defs = $this->getDataTypeDefinitions();
 
 		$extraTypes = array(
-			'bar' => array(
+			'VT:FOO' => array(
+				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValueValidator',
+			),
+			'PT:bar' => array(
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getBarValidators',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getBarParser',
 			),
-			'fuzz' => array(
-				'value-type' => 'FUZZ',
-				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFuzzValidators',
-			)
+			'PT:fuzz' => array(
+				'value-type' => 'FOO',
+			),
 		);
 
 		$defs->registerDataTypes( $extraTypes );
 
 		$this->assertEquals( array( 'foo', 'bar', 'fuzz' ), $defs->getTypeIds() );
-		$this->assertEquals( array( 'foo' => 'FOO', 'bar' => 'BAR', 'fuzz' => 'FUZZ' ), $defs->getValueTypes() );
+		$this->assertEquals( array( 'foo' => 'FOO', 'bar' => 'BAR', 'fuzz' => 'FOO' ), $defs->getValueTypes() );
 
+		$actual = $defs->getValidatorFactoryCallbacks();
 		$this->assertEquals(
 			array( 'foo' => 'DataTypeDefinitionsTest::getFooValidators',
 				'bar' => 'DataTypeDefinitionsTest::getBarValidators',
-				'fuzz' => 'DataTypeDefinitionsTest::getFuzzValidators' ),
-			$defs->getValidatorFactoryCallbacks()
+				'fuzz' => 'DataTypeDefinitionsTest::getFooValueValidator' ),
+			$actual
 		);
 	}
 

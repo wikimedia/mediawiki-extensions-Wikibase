@@ -133,8 +133,8 @@ call_user_func( function() {
 	 * @var callable[] $wgValueParsers Defines parser factory callbacks by parser name (not data type name).
 	 * @deprecated use $wgWBRepoDataTypes instead.
 	 */
-	$wgValueParsers['wikibase-entityid'] = $wgWBRepoDataTypes['wikibase-item']['parser-factory-callback'];
-	$wgValueParsers['globecoordinate'] = $wgWBRepoDataTypes['globe-coordinate']['parser-factory-callback'];
+	$wgValueParsers['wikibase-entityid'] = $wgWBRepoDataTypes['VT:wikibase-entityId']['parser-factory-callback'];
+	$wgValueParsers['globecoordinate'] = $wgWBRepoDataTypes['VT:globecoordinate']['parser-factory-callback'];
 
 	// 'null' is not a datatype. Kept for backwards compatibility.
 	$wgValueParsers['null'] = function() {
