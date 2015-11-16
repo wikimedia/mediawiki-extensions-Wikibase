@@ -88,6 +88,24 @@
       "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_faa807da",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-16T09:59:09Z",
+      "side": 1,
+      "message": "As said, we read your comment and dug very deep into this but came to the conclusion that you are probably confusing something. We think that triggering an \"afterremove\" event when removing a reference was correct before simultaneous editing, where clicking \"remove\" did an actual API request, but is wrong now.\n\nI could not find any code listening for this event on the element where it is triggered. There are some mentions of \"afterremove\", but they all seem unrelated. If you can teach me how I can find and understand which _trigger() call triggers which on() event listener I would be extremely thankful. I\u0027m looking at this code for two years now and it drives me crazy. How should I know if \"self._trigger( \u0027afterremove\u0027 )\" will trigger an \"on( \u0027statementviewafterremove.\u0027 + this.widgetName )\" listener? What do all these prefixes and suffixes mean? Where do they come from? Why is there *no* dot between the prefix and the actual name of the event? Which tool or which method can I use to find all listeners for a specific event in a code base?\n\nThis event stuff is like firing bullets on moving targets. It\u0027s much safer to leave a possibly unused event listener in the code base than to remove it based on a most probably uninformed guess.",
+      "parentUuid": "0ebaf39b_37679824",
+      "revId": "bacc12057e683e13ca53683cc188f7f4c2805864",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
