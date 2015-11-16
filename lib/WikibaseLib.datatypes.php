@@ -15,13 +15,13 @@
  */
 
 return array(
-	'commonsMedia'      => array( 'value-type' => 'string' ),
-	'globe-coordinate'  => array( 'value-type' => 'globecoordinate' ),
-	'monolingualtext'   => array( 'value-type' => 'monolingualtext' ),
-	'quantity'          => array( 'value-type' => 'quantity' ),
-	'string'            => array( 'value-type' => 'string' ),
-	'time'              => array( 'value-type' => 'time' ),
-	'url'               => array( 'value-type' => 'string' ),
-	'wikibase-item'     => array( 'value-type' => 'wikibase-entityid' ),
-	'wikibase-property' => array( 'value-type' => 'wikibase-entityid' ),
+	'PT:commonsMedia'      => array( 'value-type' => 'string' ),
+	'PT:globe-coordinate'  => array( 'value-type' => 'globecoordinate' ),
+	'PT:monolingualtext'   => array( 'value-type' => 'monolingualtext' ),
+	'PT:quantity'          => array( 'value-type' => 'quantity' ),
+	'PT:string'            => array( 'value-type' => 'string' ),
+	'PT:time'              => array( 'value-type' => 'time' ),
+	'PT:url'               => array( 'value-type' => 'string' ),
+	'PT:wikibase-item'     => array( 'value-type' => 'wikibase-entityid' ),
+	'PT:wikibase-property' => array( 'value-type' => 'wikibase-entityid' ),
 );

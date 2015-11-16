@@ -24,10 +24,13 @@
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\StringFormatter;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
+use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\UnDeserializableValueFormatter;
 use Wikibase\Rdf\ComplexValueRdfBuilder;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
@@ -53,6 +56,9 @@ return call_user_func( function() {
 	// known data types, the WikibaseValueFormatterBuilders class.
 	// WikibaseValueFormatterBuilders should be used *only* here, program logic should use a
 	// OutputFormatValueFormatterFactory as returned by WikibaseRepo::getValueFormatterFactory().
+
+	// NOTE: Factory callbacks are registered below by value type (using the prefix "VT:") or by
+	// property data type (prefix "PT:").
 
 	$newEntityIdParser = function( ParserOptions $options ) {
 		$repo = WikibaseRepo::getDefaultInstance();
@@ -87,7 +93,12 @@ return call_user_func( function() {
 	};
 
 	return array(
-		'commonsMedia' => array(
+		'VT:bad' => array(
+			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				return $format === SnakFormatter::FORMAT_PLAIN ? new UnDeserializableValueFormatter( $options ) : null;
+			}
+		),
+		'PT:commonsMedia' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
@@ -99,7 +110,7 @@ return call_user_func( function() {
 			},
 			'rdf-builder-factory-callback' => $rdfBuilderContructor,
 		),
-		'globe-coordinate' => array(
+		'VT:globecoordinate' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildCoordinateValidators();
@@ -113,7 +124,7 @@ return call_user_func( function() {
 			},
 			'rdf-builder-factory-callback' => $rdfBuilderContructor,
 		),
-		'monolingualtext' => array(
+		'VT:monolingualtext' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildMonolingualTextValidators();
@@ -127,7 +138,7 @@ return call_user_func( function() {
 			},
 			'rdf-builder-factory-callback' => $rdfBuilderContructor,
 		),
-		'quantity' => array(
+		'VT:quantity' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildQuantityValidators();
@@ -143,18 +154,18 @@ return call_user_func( function() {
 			},
 			'rdf-builder-factory-callback' => $rdfBuilderContructor,
 		),
-		'string' => array(
+		'VT:string' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
 			},
 			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return null; // rely on formatter for string value type
+				return $format === SnakFormatter::FORMAT_PLAIN ? new StringFormatter( $options ) : null;
 			},
 			'rdf-builder-factory-callback' => $rdfBuilderContructor,
 		),
-		'time' => array(
+		'VT:time' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildTimeValidators();
@@ -169,7 +180,7 @@ return call_user_func( function() {
 			},
 			'rdf-builder-factory-callback' => $rdfBuilderContructor,
 		),
-		'url' => array(
+		'PT:url' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildUrlValidators();
@@ -181,22 +192,10 @@ return call_user_func( function() {
 			},
 			'rdf-builder-factory-callback' => $rdfBuilderContructor,
 		),
-		'wikibase-item' => array(
+		'VT:wikibase-entityid' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildItemValidators();
-			},
-			'parser-factory-callback' => $newEntityIdParser,
-			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
-				return $factory->newEntityIdFormatter( $format, $options );
-			},
-			'rdf-builder-factory-callback' => $rdfBuilderContructor,
-		),
-		'wikibase-property' => array(
-			'validator-factory-callback' => function() {
-				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				return $factory->buildPropertyValidators();
 			},
 			'parser-factory-callback' => $newEntityIdParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
