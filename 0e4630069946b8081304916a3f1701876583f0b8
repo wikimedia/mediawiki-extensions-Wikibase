@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_da950344",
+        "filename": "lib/includes/store/sql/TermSqlIndex.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-16T11:26:00Z",
+      "side": 1,
+      "message": "But TermSqlIndex shouldn\u0027t know about the user, or preferences, or fallback chains. I\u0027d suggest  to just fail if no language is given.",
+      "parentUuid": "0ebaf39b_38e00025",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3a8c5f3a",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-16T11:26:00Z",
+      "side": 1,
+      "message": "Register a callback and use proper injection.",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_58ce1488",
         "filename": "repo/includes/api/QuerySearchEntities.php",
         "patchSetId": 10
@@ -48,6 +83,41 @@
       "side": 1,
       "message": "A factory for this api module or for the EntitySearchHelper? What should that factory look like?",
       "parentUuid": "0ebaf39b_58ce1488",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_7aa2d7a5",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-16T11:26:00Z",
+      "side": 1,
+      "message": "Canonically, it would probably be something like $repo-\u003egetEntitySearchHelperFactory()-\u003egetEntitySearchHelper( $languageCode ); Adding a factory class seems like overkill, but would be needed because the language code is not known at init time.",
+      "parentUuid": "0ebaf39b_c4ee9986",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9a9f8b62",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-16T11:26:00Z",
+      "side": 1,
+      "message": "This workaround is no longer needed, it is now possible to use proper injection via the API module\u0027s constructor. Just register a callback instead of the class name in $wgAPIListModules.",
       "revId": "0e4630069946b8081304916a3f1701876583f0b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -100,6 +170,41 @@
       "writtenOn": "2015-11-11T18:54:51Z",
       "side": 1,
       "message": "Either add a language parameter or use the wiki\u0027s content language here (which is the same as MobileFrontend uses).",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ba7fef10",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-16T11:26:00Z",
+      "side": 1,
+      "message": "Why the content language? For entities, the content language is meaningless anyway. Searching should be done in the user language; The API has a standard mechanism for the output language. The search language should probably default to that. But perhaps there should be a way to override that, and use different languages for searching and display. SearchEntities supports this.",
+      "parentUuid": "0ebaf39b_b8d39063",
+      "revId": "0e4630069946b8081304916a3f1701876583f0b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_da7c231e",
+        "filename": "repo/includes/api/QuerySearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-16T11:26:00Z",
+      "side": 1,
+      "message": "Paging is useless if we always ask the search engine for the full set of results. Emulating paging this way makes queries *more* expensive, instead of less. If we don\u0027t proper paging, let\u0027s simply not support paging, instead of pretending we do.\n\nPaging on a ranked result doesn\u0027t make sense to me anyway, since proper paging needs a total ordering on a unique key. And who looks on page 2 of googles search result?...",
       "revId": "0e4630069946b8081304916a3f1701876583f0b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
