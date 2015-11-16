@@ -63,7 +63,6 @@ class SearchEntities extends ApiBase {
 			$repo->getEntityTitleLookup(),
 			$repo->getEntityIdParser(),
 			$repo->newTermSearchInteractor( $this->getLanguage()->getCode() ),
-			$repo->getStore()->getTermIndex(),
 			new LanguageFallbackLabelDescriptionLookup(
 				$repo->getTermLookup(),
 				$repo->getLanguageFallbackChainFactory()
