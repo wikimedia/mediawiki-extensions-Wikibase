@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_2fb734d5",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-17T14:17:52Z",
+      "side": 1,
+      "message": "I think this needs to be a little clearer, it\u0027s not obvious how they conflict.",
+      "revId": "d3c812619ecc5fd452edba179fb6e6f7f7a325e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
