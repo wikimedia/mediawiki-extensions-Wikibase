@@ -50,9 +50,9 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$writer = $this->getTestData()->getNTriplesWriter();
 
 		// Note: using the actual factory here makes this an integration test!
-		$dataValueRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
-		$valueBuilder = $dataValueRdfBuilderFactory->getSimpleValueSnakRdfBuilder(
+		$valueBuilder = $valueBuilderFactory->getSimpleValueSnakRdfBuilder(
 			$vocabulary,
 			$writer,
 			new NullEntityMentionListener(),

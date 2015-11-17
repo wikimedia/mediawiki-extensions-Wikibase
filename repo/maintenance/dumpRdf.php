@@ -40,7 +40,7 @@ class DumpRdf extends DumpScript {
 	/**
 	 * @var ValueSnakRdfBuilderFactory
 	 */
-	private $dataValueRdfBuilderFactory;
+	private $valueSnakRdfBuilderFactory;
 
 	/**
 	 * @var string
@@ -62,7 +62,7 @@ class DumpRdf extends DumpScript {
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param SiteStore $siteStore
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
-	 * @param ValueSnakRdfBuilderFactory $dataValueRdfBuilderFactory
+	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param string $conceptBaseUri
 	 */
@@ -71,7 +71,7 @@ class DumpRdf extends DumpScript {
 		EntityPrefetcher $entityPrefetcher,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		ValueSnakRdfBuilderFactory $dataValueRdfBuilderFactory,
+		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		$conceptBaseUri
 	) {
@@ -79,7 +79,7 @@ class DumpRdf extends DumpScript {
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->siteStore = $siteStore;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
-		$this->dataValueRdfBuilderFactory = $dataValueRdfBuilderFactory;
+		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->revisionLookup = $entityRevisionLookup;
 		$this->conceptBaseUri = $conceptBaseUri;
 		$this->hasHadServicesSet = true;
@@ -133,7 +133,7 @@ class DumpRdf extends DumpScript {
 			$this->siteStore->getSites(),
 			$this->revisionLookup,
 			$this->propertyDatatypeLookup,
-			$this->dataValueRdfBuilderFactory,
+			$this->valueSnakRdfBuilderFactory,
 			$this->entityPrefetcher,
 			$languageCodes
 		);
