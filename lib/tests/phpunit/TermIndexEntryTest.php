@@ -18,7 +18,7 @@ use Wikibase\TermIndexEntry;
  */
 class TermIndexEntryTest extends \MediaWikiTestCase {
 
-	public function provideContructor() {
+	public function provideConstructor() {
 		return array(
 			array( // #0
 				array(
@@ -47,7 +47,7 @@ class TermIndexEntryTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideContructor
+	 * @dataProvider provideConstructor
 	 */
 	public function testConstructor( $fields ) {
 		$term = new TermIndexEntry( $fields );
