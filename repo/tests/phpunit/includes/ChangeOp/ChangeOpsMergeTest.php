@@ -7,10 +7,12 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\ChangeOpsMerge;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -112,6 +114,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		return array(
 			array( $from, $to, array() ),
 			array( $from, $to, array( 'sitelink' ) ),
+			array( $from, $to, array( 'statement' ) ),
 			array( $from, $to, array( 'description' ) ),
 			array( $from, $to, array( 'description', 'sitelink' ) ),
 		);
@@ -290,28 +293,28 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			array( 'sitelink' ),
 		);
 
-		$claim = new Statement( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) );
-		$claim->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
+		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) );
+		$statement->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithStatement = new Item();
-		$itemWithStatement->getStatements()->addStatement( $claim );
-		$testCases['claimMerge'] = array(
+		$itemWithStatement->getStatements()->addStatement( $statement );
+		$testCases['statementMerge'] = array(
 			$itemWithStatement->copy(),
 			new Item(),
 			new Item(),
 			$itemWithStatement->copy()
 		);
 
-		$qualifiedClaim = new Statement(
+		$qualifiedStatement = new Statement(
 			new PropertyNoValueSnak( new PropertyId( 'P56' ) ),
 			new SnakList( array( new PropertyNoValueSnak( new PropertyId( 'P56' ) ) ) )
 		);
-		$qualifiedClaim->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
+		$qualifiedStatement->setGuid( 'Q111$D8404CDA-25E4-4334-AF13-A390BCD9C556' );
 
 		$itemWithQualifiedStatement = new Item();
-		$itemWithQualifiedStatement->getStatements()->addStatement( $qualifiedClaim );
+		$itemWithQualifiedStatement->getStatements()->addStatement( $qualifiedStatement );
 
-		$testCases['claimWithQualifierMerge'] = array(
+		$testCases['statementWithQualifierMerge'] = array(
 			$itemWithQualifiedStatement->copy(),
 			new Item(),
 			new Item(),
@@ -324,7 +327,13 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 		$anotherQualifiedStatement->setGuid( 'Q111$D8404CDA-25E4-4334-AF88-A3290BCD9C0F' );
 
+		$selfReferencingStatement = new Statement(
+			new PropertyValueSnak( new PropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q111' ) ) )
+		);
+		$selfReferencingStatement->setGuid( 'Q111$D74D43D7-BD8F-4240-A058-24C5171ABBFA' );
+
 		$bigItem = new Item();
+		$bigItem->setId( 111 );
 		$bigItem->getFingerprint()->setLabel( 'en', 'foo' );
 		$bigItem->getFingerprint()->setLabel( 'pt', 'ptfoo' );
 		$bigItem->getFingerprint()->setDescription( 'en', 'foo' );
@@ -333,6 +342,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$bigItem->getFingerprint()->setAliasGroup( 'de', array( 'defoo', 'debar' ) );
 		$bigItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
 		$bigItem->getStatements()->addStatement( $anotherQualifiedStatement );
+		$bigItem->getStatements()->addStatement( $selfReferencingStatement );
 
 		$testCases['itemMerge'] = array(
 			$bigItem->copy(),
@@ -341,36 +351,48 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$bigItem->copy(),
 		);
 
+		$referencingStatement = new Statement(
+			new PropertyValueSnak( new PropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q222' ) ) )
+		);
+		$referencingStatement->setGuid( 'Q111$949A4D27-0EBC-46A7-BF5F-AA2DD33C0443' );
+
 		$bigItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'bar' );
+		$bigItem->getStatements()->addStatement( $referencingStatement );
 
 		$smallerItem = new Item();
+		$smallerItem->setId( 222 );
 		$smallerItem->getFingerprint()->setLabel( 'en', 'toLabel' );
-		$smallerItem->getFingerprint()->setDescription( 'pl', 'toLabel' ); // FIXME: this is not a label
+		$smallerItem->getFingerprint()->setDescription( 'pl', 'toDescription' );
 		$smallerItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'toLink' );
 
 		$smallerMergedItem = new Item();
+		$smallerMergedItem->setId( 222 );
 		$smallerMergedItem->getFingerprint()->setDescription( 'pl', 'pldesc' );
 		$smallerMergedItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'bar' );
 
 		$bigMergedItem = new Item();
+		$bigMergedItem->setId( 111 );
 		$bigMergedItem->getFingerprint()->setLabel( 'en', 'toLabel' );
 		$bigMergedItem->getFingerprint()->setLabel( 'pt', 'ptfoo' );
 		$bigMergedItem->getFingerprint()->setDescription( 'en', 'foo' );
-		$bigMergedItem->getFingerprint()->setDescription( 'pl', 'toLabel' );
+		$bigMergedItem->getFingerprint()->setDescription( 'pl', 'toDescription' );
 		$bigMergedItem->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
 		$bigMergedItem->getFingerprint()->setAliasGroup( 'de', array( 'defoo', 'debar' ) );
 
 		$bigMergedItem->getSiteLinkList()->addNewSiteLink( 'dewiki', 'foo' );
 		$bigMergedItem->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'toLink' );
-		$bigMergedItem->setStatements( new StatementList( $anotherQualifiedStatement ) );
+		$bigMergedItem->setStatements(
+			new StatementList( $anotherQualifiedStatement, $selfReferencingStatement, $referencingStatement )
+		);
 
 		$testCases['ignoreConflictItemMerge'] = array(
 			$bigItem->copy(),
 			$smallerItem->copy(),
 			$smallerMergedItem->copy(),
 			$bigMergedItem->copy(),
-			array( 'description', 'sitelink' )
+			array( 'description', 'sitelink', 'statement' )
 		);
+
 		return $testCases;
 	}
 
@@ -462,6 +484,40 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 		$changeOps->apply();
 		$this->assertTrue( true ); // no exception thrown
+	}
+
+	public function testExceptionThrownWhenFromHasLink() {
+		$from = new Item( new ItemId( 'Q111' ) );
+		$from->getStatements()->addNewStatement(
+			new PropertyValueSnak( new PropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q222' ) ) )
+		);
+
+		$to = new Item( new ItemId( 'Q222' ) );
+
+		$changeOps = $this->makeChangeOpsMerge( $from, $to );
+
+		$this->setExpectedException(
+			'\Wikibase\ChangeOp\ChangeOpException',
+			'Conflicting statement for P42 linking to Q222'
+		);
+		$changeOps->apply();
+	}
+
+	public function testExceptionThrownWhenToHasLink() {
+		$from = new Item( new ItemId( 'Q111' ) );
+
+		$to = new Item( new ItemId( 'Q222' ) );
+		$to->getStatements()->addNewStatement(
+			new PropertyValueSnak( new PropertyId( 'P42' ), new EntityIdValue( new ItemId( 'Q111' ) ) )
+		);
+
+		$changeOps = $this->makeChangeOpsMerge( $from, $to );
+
+		$this->setExpectedException(
+			'\Wikibase\ChangeOp\ChangeOpException',
+			'Conflicting statement for P42 linking to Q111'
+		);
+		$changeOps->apply();
 	}
 
 }
