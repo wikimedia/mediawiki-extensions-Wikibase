@@ -23,6 +23,7 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValidators',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooParser',
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooFormatter',
+				'snak-formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooSnakFormatter',
 				'rdf-builder-factory-callback' => 'DataTypeDefinitionsTest::getFooRdfBuilder',
 			),
 			'bar' => array(
@@ -52,6 +53,20 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 	public function testGetParserFactoryCallbacks() {
 		$defs = $this->getDataTypeDefinitions();
 		$this->assertEquals( array( 'foo' => 'DataTypeDefinitionsTest::getFooParser' ), $defs->getParserFactoryCallbacks() );
+	}
+
+	public function testGetFormatterFactoryCallbacks() {
+		$defs = $this->getDataTypeDefinitions();
+		$expected = array(
+			'foo' => 'DataTypeDefinitionsTest::getFooFormatter',
+			'bar' => 'DataTypeDefinitionsTest::getBarFormatter'
+		);
+		$this->assertEquals( $expected, $defs->getFormatterFactoryCallbacks() );
+	}
+
+	public function testGetSnakFormatterFactoryCallbacks() {
+		$defs = $this->getDataTypeDefinitions();
+		$this->assertEquals( array( 'foo' => 'DataTypeDefinitionsTest::getFooSnakFormatter' ), $defs->getSnakFormatterFactoryCallbacks() );
 	}
 
 	public function testRegisterDataTypes() {
