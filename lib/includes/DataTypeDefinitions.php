@@ -242,6 +242,15 @@ class DataTypeDefinitions {
 	}
 
 	/**
+	 * @see OutputFormatSnakFormatterFactory
+	 *
+	 * @return callable[]
+	 */
+	public function getSnakFormatterFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'snak-formatter-factory-callback' );
+	}
+
+	/**
 	 * @see ValueSnakRdfBuilderFactory
 	 *
 	 * @param string $mode PREFIXED_MODE to request a callback map with "VT:" and "PT:" prefixes

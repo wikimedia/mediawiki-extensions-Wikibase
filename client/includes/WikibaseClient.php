@@ -571,6 +571,7 @@ final class WikibaseClient {
 	 */
 	private function newSnakFormatterFactory() {
 		$factory = new OutputFormatSnakFormatterFactory(
+			$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
 			$this->getValueFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()

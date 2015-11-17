@@ -27,6 +27,7 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 				'value-type' => 'FOO',
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValidators',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooParser',
+				'snak-formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooSnakFormatter',
 			),
 			'PT:bar' => array(
 				'value-type' => 'BAR',
