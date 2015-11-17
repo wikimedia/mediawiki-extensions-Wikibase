@@ -125,6 +125,15 @@ class DataTypeDefinitions {
 	}
 
 	/**
+	 * @see OutputFormatSnakFormatterFactory
+	 *
+	 * @return callable[]
+	 */
+	public function getSnakFormatterFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'snak-formatter-factory-callback' );
+	}
+
+	/**
 	 * @see DataValueRdfBuilderFactory
 	 *
 	 * @return callable[]

@@ -10,6 +10,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
@@ -28,9 +29,18 @@ use Wikibase\Lib\SnakFormatter;
  */
 class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 
-	private function newOutputFormatSnakFormatterFactory() {
+	private function newOutputFormatSnakFormatterFactory( $dataType = 'string' ) {
 		$self = $this;
-		$callbacks = array(
+
+		$snakFormatterCallbacks = array(
+			'commonsMedia' => function( $format, FormatterOptions $options ) use ( $self ) {
+				return $format === SnakFormatter::FORMAT_PLAIN
+					? $self->makeMockSnakFormatter( $format )
+					: null;
+			},
+		);
+
+		$valueFormatterCallbacks = array(
 			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
 				return $format === SnakFormatter::FORMAT_PLAIN
 					? $self->makeMockValueFormatter()
@@ -38,7 +48,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 			},
 		);
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
-			$callbacks,
+			$valueFormatterCallbacks,
 			Language::factory( 'en' ),
 			new LanguageFallbackChainFactory()
 		);
@@ -48,12 +58,13 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
-			->will( $this->returnValue( 'string' ) );
+			->will( $this->returnValue( $dataType ) );
 
 		return new OutputFormatSnakFormatterFactory(
+			$snakFormatterCallbacks,
 			$valueFormatterFactory,
 			$dataTypeLookup,
-			new DataTypeFactory( array( 'string' => 'string' ) )
+			new DataTypeFactory( array( 'string' => 'string', 'commonsMedia' => 'string' ) )
 		);
 	}
 
@@ -71,17 +82,55 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
+	public function makeMockSnakFormatter( $format  ) {
+		$mock = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+
+		$mock->expects( $this->any() )
+			->method( 'formatSnak' )
+			->will( $this->returnCallback(
+				function( Snak $snak) {
+					$s = $snak->getType() . '/' . $snak->getPropertyId();
+
+					if ( $snak instanceof PropertyValueSnak ) {
+						$s .= '=' . strval( $snak->getDataValue()->getValue() );
+					}
+
+					return $s;
+				}
+			) );
+
+		$mock->expects( $this->any() )
+			->method( 'getFormat' )
+			->will( $this->returnValue( $format ) );
+
+		return $mock;
+	}
+
 	public function getSnakFormatterProvider() {
 		return array(
-			'plain' => array(
+			'plain value' => array(
 				SnakFormatter::FORMAT_PLAIN,
+				'string',
 				new StringValue( 'foo' ),
 				'foo',
 			),
-			'html' => array(
+			'html value' => array(
 				SnakFormatter::FORMAT_HTML,
+				'string',
 				new StringValue( 'b<a>r' ),
 				'b&lt;a&gt;r',
+			),
+			'plain snak' => array(
+				SnakFormatter::FORMAT_PLAIN,
+				'commonsMedia', // the mock has a SnakFormatter for commonsMedia
+				new StringValue( 'foo.jpg' ),
+				'value/P5=foo.jpg',
+			),
+			'html snak' => array(
+				SnakFormatter::FORMAT_HTML,
+				'commonsMedia', // the mock has a SnakFormatter for commonsMedia
+				new StringValue( 'foo&bar.jpg' ),
+				'value/P5=foo&amp;bar.jpg',
 			),
 		);
 	}
@@ -89,8 +138,8 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getSnakFormatterProvider
 	 */
-	public function testGetSnakFormatter( $format, DataValue $value, $expected ) {
-		$factory = $this->newOutputFormatSnakFormatterFactory();
+	public function testGetSnakFormatter( $format, $dataType, DataValue $value, $expected ) {
+		$factory = $this->newOutputFormatSnakFormatterFactory( $dataType );
 		$formatter = $factory->getSnakFormatter( $format, new FormatterOptions() );
 
 		$this->assertInstanceOf( 'Wikibase\Lib\SnakFormatter', $formatter );
@@ -144,6 +193,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory(
+			array(),
 			$valueFormatterFactory,
 			$this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' ),
 			new DataTypeFactory( array() )
