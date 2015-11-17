@@ -238,7 +238,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
 			true,
 		);
-		$testCases['IgnoreConflictSitelinksMerge'] = array(
+		$testCases['ignoreConflictSitelinksMerge'] = array(
 			array( 'sitelinks' => array(
 				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainFrom' ),
 				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
@@ -252,7 +252,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			false,
 			'sitelink',
 		);
-		$testCases['claimMerge'] = array(
+		$testCases['statementMerge'] = array(
 			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
@@ -262,6 +262,23 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
 			true,
+		);
+		$testCases['ignoreConflictStatementMerge'] = array(
+			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
+					'value' => array( 'entity-type' => 'item', 'numeric-id' => 2 ), 'type' => 'wikibase-entityid' )
+				),
+				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
+			array(),
+			array(),
+			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
+				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
+					'value' => array( 'entity-type' => 'item', 'numeric-id' => 2 ), 'type' => 'wikibase-entityid' )
+				),
+				'type' => 'statement', 'rank' => 'normal' ) ) )
+			),
+			true,
+			'statement',
 		);
 
 		return $testCases;
@@ -445,6 +462,24 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
 				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo2' ) ) ),
 			),
+			array(
+				array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
+					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
+						'value' => array( 'entity-type' => 'item', 'numeric-id' => 2 ), 'type' => 'wikibase-entityid' )
+					),
+					'type' => 'statement', 'rank' => 'normal' ) ) )
+				),
+				array(),
+			),
+			array(
+				array(),
+				array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
+					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
+						'value' => array( 'entity-type' => 'item', 'numeric-id' => 1 ), 'type' => 'wikibase-entityid' )
+					),
+					'type' => 'statement', 'rank' => 'normal' ) ) )
+				),
+			)
 		);
 	}
 
