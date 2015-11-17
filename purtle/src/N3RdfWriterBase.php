@@ -33,10 +33,6 @@ abstract class N3RdfWriterBase extends RdfWriterBase {
 		}
 	}
 
-	protected function writeShorthand( $shorthand ) {
-		$this->write( $shorthand );
-	}
-
 	protected function writeIRI( $iri, $trustIRI = false ) {
 		if ( !$trustIRI ) {
 			$iri = $this->quoter->escapeIRI( $iri );
