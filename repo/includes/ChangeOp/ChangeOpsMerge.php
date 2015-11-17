@@ -9,9 +9,12 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Validators\CompositeEntityValidator;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -66,7 +69,7 @@ class ChangeOpsMerge {
 	 */
 	private $siteLookup;
 
-	public static $conflictTypes = array( 'description', 'sitelink' );
+	public static $conflictTypes = array( 'description', 'sitelink', 'statement' );
 
 	/**
 	 * @param Item $fromItem
@@ -181,10 +184,8 @@ class ChangeOpsMerge {
 			) {
 				$this->fromChangeOps->add( $this->getFingerprintChangeOpFactory()->newRemoveDescriptionOp( $langCode ) );
 				$this->toChangeOps->add( $this->getFingerprintChangeOpFactory()->newSetDescriptionOp( $langCode, $desc ) );
-			} else {
-				if ( !in_array( 'description', $this->ignoreConflicts ) ) {
-					throw new ChangeOpException( "Conflicting descriptions for language {$langCode}" );
-				}
+			} elseif ( !in_array( 'description', $this->ignoreConflicts ) ) {
+				throw new ChangeOpException( "Conflicting descriptions for language {$langCode}" );
 			}
 		}
 	}
@@ -259,7 +260,13 @@ class ChangeOpsMerge {
 	}
 
 	private function generateStatementsChangeOps() {
+		foreach ( $this->toItem->getStatements()->toArray() as $toStatement ) {
+			$this->checkIsLink( $toStatement, $this->fromItem->getId() );
+		}
+
 		foreach ( $this->fromItem->getStatements()->toArray() as $fromStatement ) {
+			$this->checkIsLink( $fromStatement, $this->toItem->getId() );
+
 			$this->fromChangeOps->add( $this->getStatementChangeOpFactory()->newRemoveStatementOp( $fromStatement->getGuid() ) );
 
 			$toStatement = clone $fromStatement;
@@ -271,6 +278,32 @@ class ChangeOpsMerge {
 			} else {
 				$this->toChangeOps->add( $this->getStatementChangeOpFactory()->newSetStatementOp( $toStatement ) );
 			}
+		}
+	}
+
+	/**
+	 * Checks if the statement's main snak is a link to the given item id
+	 *
+	 * @param Statement $statement
+	 * @param ItemId $itemId
+	 *
+	 * @throws ChangeOpException
+	 */
+	private function checkIsLink( Statement $statement, ItemId $itemId ) {
+		$snak = $statement->getMainSnak();
+
+		if ( !( $snak instanceof PropertyValueSnak ) ) {
+			return;
+		}
+
+		$dataValue = $snak->getDataValue();
+
+		if ( !( $dataValue instanceof EntityIdValue ) ) {
+			return;
+		}
+
+		if ( $dataValue->getEntityId()->equals( $itemId ) && !in_array( 'statement', $this->ignoreConflicts ) ) {
+			throw new ChangeOpException( "Conflicting statement for {$statement->getPropertyId()}" );
 		}
 	}
 
