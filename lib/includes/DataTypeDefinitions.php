@@ -116,7 +116,7 @@ class DataTypeDefinitions {
 	}
 
 	/**
-	 * @see OutputFormattValueFormatterFactory
+	 * @see OutputFormatValueFormatterFactory
 	 *
 	 * @return callable[]
 	 */
