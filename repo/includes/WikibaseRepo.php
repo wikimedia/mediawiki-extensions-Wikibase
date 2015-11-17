@@ -212,7 +212,7 @@ class WikibaseRepo {
 	/**
 	 * @var ValueSnakRdfBuilderFactory
 	 */
-	private $dataValueRdfBuilderFactory;
+	private $valueSnakRdfBuilderFactory;
 
 	/**
 	 * Returns the default instance constructed using newInstance().
@@ -857,13 +857,13 @@ class WikibaseRepo {
 	 * @return ValueSnakRdfBuilderFactory
 	 */
 	public function getValueSnakRdfBuilderFactory() {
-		if ( $this->dataValueRdfBuilderFactory === null ) {
-			$this->dataValueRdfBuilderFactory = new ValueSnakRdfBuilderFactory(
+		if ( $this->valueSnakRdfBuilderFactory === null ) {
+			$this->valueSnakRdfBuilderFactory = new ValueSnakRdfBuilderFactory(
 				$this->getRdfBuilderFactoryCallbacksByType()
 			);
 		}
 
-		return $this->dataValueRdfBuilderFactory;
+		return $this->valueSnakRdfBuilderFactory;
 	}
 
 	/**

@@ -66,19 +66,19 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			} ) );
 
 		// Note: using the actual factory here makes this an integration test!
-		$dataValueRdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
+		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
 		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
 			$valueWriter = $writer->sub();
 
-			$statementValueBuilder = $dataValueRdfBuilderFactory->getComplexValueSnakRdfBuilder(
+			$statementValueBuilder = $valueBuilderFactory->getComplexValueSnakRdfBuilder(
 				$this->getTestData()->getVocabulary(),
 				$valueWriter,
 				$mentionTracker,
 				new HashDedupeBag()
 			);
 		} else {
-			$statementValueBuilder = $dataValueRdfBuilderFactory->getSimpleValueSnakRdfBuilder(
+			$statementValueBuilder = $valueBuilderFactory->getSimpleValueSnakRdfBuilder(
 				$this->getTestData()->getVocabulary(),
 				$writer,
 				$mentionTracker,
