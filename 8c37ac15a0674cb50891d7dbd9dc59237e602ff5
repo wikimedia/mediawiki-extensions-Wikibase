@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_e56e1bc4",
+        "filename": "repo/includes/rdf/Values/ObjectValueRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "The \"object\" here is RDF terminology: a triple consists of a subject URI, a predicate URI, and an object URI (or a literal value).\n\nI\u0027ll try to come up with a better name. I can also add a type check, but this code is performance critical, and every check costs milliseconds...",
+      "parentUuid": "0ebaf39b_28be55d2",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_9428b797",
         "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
         "patchSetId": 8
@@ -47,6 +65,24 @@
       "writtenOn": "2015-11-17T15:56:51Z",
       "side": 1,
       "message": "Prefer single quotes, please.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_059fafba",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "Does it really matter?",
+      "parentUuid": "0ebaf39b_9428b797",
       "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_25a43304",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "There is nothing problematic about leading or trailing whitespace in n-triples notation. It\u0027s *insignificant* as per the spec, and should thus be ignored during comparison.",
+      "parentUuid": "0ebaf39b_3421cbac",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_ef091c30",
         "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
         "patchSetId": 8
@@ -81,6 +135,24 @@
       "writtenOn": "2015-11-17T15:56:51Z",
       "side": 1,
       "message": "Now this sort() is obsolete, because everything is sorted again in the new assert method below.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a5afc3dd",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "Only if you assume that all data coming from normalizeData() will be handled via the assertTriplesEqual() method, and never in any other way.\n\nI find it useful to enforce assumptions, such as ordering, whenever they are made. The performance impact should be minimal, since the data set is small and the code only runs a few times.",
+      "parentUuid": "0ebaf39b_ef091c30",
       "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_c57f5762",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "True, but each such string represents a triple. Based on that knowledge, we could apply additional normalization, such as removing the space before the final \".\" on each line, or removing whitespace between subject and predicate uri.",
+      "parentUuid": "0ebaf39b_af0b2425",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_cf04581a",
         "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
         "patchSetId": 8
@@ -115,6 +205,24 @@
       "writtenOn": "2015-11-17T15:56:51Z",
       "side": 1,
       "message": "This is not true. Both arrays are sorted just one line above. The \"shifted in position\" case is impossible at this point.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_85e07f26",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "No, this is about extra elements, not order. For example, if we expect A,D,F, but we get A,B,D,F, we want to see this as +B (\"B is extra\"), not as -D,+B,-F,+D,+F, which is what we would see if we used assertEquals directly on the input arrays.",
+      "parentUuid": "0ebaf39b_cf04581a",
       "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_45ea8706",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "The new code relies on the correct data type for selecting the rdf mapping. The value in this test is actually an EntityIdValue. Returning \"string\" from the PropertyDataTypeLookup is wrong, but with the old code, this had no effect, because the old code relies on the value type mostly, and uses the data type only for string values.",
+      "parentUuid": "0ebaf39b_af39e4cc",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_af956444",
         "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
         "patchSetId": 8
@@ -149,6 +275,24 @@
       "writtenOn": "2015-11-17T15:56:51Z",
       "side": 1,
       "message": "Why was it possible to use a null bag before, but is not any more?",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c5cd17be",
+        "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "NullDedupeBag still works here. No idea why I changed that. Copy\u0026paste, perhaps.",
+      "parentUuid": "0ebaf39b_af956444",
       "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -172,6 +316,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_a5c4a395",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/CommonsMediaRdfBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "It signifies the end of an RDF triple. It\u0027s part of the n-triples notation. Without the dot, this is not a valid n-triples document.",
+      "parentUuid": "0ebaf39b_6f9f6c63",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_0f8cb039",
         "filename": "repo/tests/phpunit/includes/rdf/Values/ComplexValueRdfHelperTest.php",
         "patchSetId": 8
@@ -183,6 +345,24 @@
       "writtenOn": "2015-11-17T15:56:51Z",
       "side": 1,
       "message": "Please prefer assertSame whenever possible. Not critical, just a general hint.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_05332fc1",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/ComplexValueRdfHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-17T17:58:54Z",
+      "side": 1,
+      "message": "For strings that always feels a bit odd to me. Perhaps from my Java days... comparing strings for identity is generally *not* what you want. But PHP semantics are different...",
+      "parentUuid": "0ebaf39b_0f8cb039",
       "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
