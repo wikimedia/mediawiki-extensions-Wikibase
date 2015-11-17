@@ -768,6 +768,7 @@ class WikibaseRepo {
 	 */
 	protected function newSnakFormatterFactory() {
 		$factory = new OutputFormatSnakFormatterFactory(
+			$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
 			$this->getValueFormatterFactory(),
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
@@ -883,6 +884,7 @@ class WikibaseRepo {
 
 		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
+			array(), // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
 			$valueFormatterFactory,
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()

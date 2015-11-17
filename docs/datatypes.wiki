@@ -41,6 +41,7 @@ Each key is associated with a map that provides the following fields:
 * validator-factory-callback (repo only): a callable that acts as a factory for the list of validators that should be used to check any user supplied values of the given data type. The callable will be called without any arguments, and must return a list of ValueValidator objects.
 * parser-factory-callback (repo only): a callable that acts as a factory for a ValueParser for this data type.
 * formatter-factory-callback (repo and client): a callable that acts as a factory for ValueFormatters for use with this data type.
+* snak-formatter-factory-callback (repo and client): a callable that acts as a factory for SnakFormatters for use with this data type. If not defined, a SnakFormatter is created from the ValueFormatter for the given data type.
 * rdf-builder-factory-callback (repo only): a callable that acts as a factory for ValueSnakRdfBuilder for use with this data type.
 
 Since for each property data type the associated value type is known, this provides a convenient
