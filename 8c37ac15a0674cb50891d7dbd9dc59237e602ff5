@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_b45e1b47",
+        "filename": "repo/includes/rdf/Values/ObjectValueRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "Typo.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_28be55d2",
+        "filename": "repo/includes/rdf/Values/ObjectValueRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "I find it confusing that this method talks about a URI. The class is called \"Object\" builder. Nothing in this class guarantees this is a URI.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9428b797",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "Prefer single quotes, please.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_3421cbac",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "This trim() should not be here. If a test file contains problematic RDF, this should be fixed. If a generator generates problematic RFD, this should be fixed.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ef091c30",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "Now this sort() is obsolete, because everything is sorted again in the new assert method below.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_af0b2425",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "This is not really about \"triples\" but about arrays of strings. That\u0027s all.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_cf04581a",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "This is not true. Both arrays are sorted just one line above. The \"shifted in position\" case is impossible at this point.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_af39e4cc",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "What\u0027s the motivation for this change?",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_af956444",
+        "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "Why was it possible to use a null bag before, but is not any more?",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_6f9f6c63",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/CommonsMediaRdfBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "What does the dot at the end do?",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_0f8cb039",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/ComplexValueRdfHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-17T15:56:51Z",
+      "side": 1,
+      "message": "Please prefer assertSame whenever possible. Not critical, just a general hint.",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
