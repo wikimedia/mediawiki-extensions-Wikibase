@@ -108,7 +108,8 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 		}
 
 		$valueLName = $this->addExpandedValue( $value, $prefix, $fields );
-		$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )->is( RdfVocabulary::NS_VALUE, $valueLName );
+		$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )
+			->is( RdfVocabulary::NS_VALUE, $valueLName );
 	}
 
 	/**
@@ -135,7 +136,13 @@ class ComplexValueRdfBuilder extends SimpleValueRdfBuilder {
 			$getter = "get" . $prop;
 			$data = $value->$getter();
 			if ( !is_null( $data ) ) {
-				$this->addValueToNode( $this->valueWriter, RdfVocabulary::NS_ONTOLOGY, $propLName, $type, $data );
+				$this->addValueToNode(
+					$this->valueWriter,
+					RdfVocabulary::NS_ONTOLOGY,
+					$propLName,
+					$type,
+					$data
+				);
 			}
 		}
 

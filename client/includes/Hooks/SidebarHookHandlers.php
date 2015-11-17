@@ -119,9 +119,19 @@ class SidebarHookHandlers {
 	 *
 	 * @return bool
 	 */
-	public static function onSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title, OutputPage $output = null ) {
+	public static function onSkinTemplateGetLanguageLink(
+		array &$languageLink,
+		Title $languageLinkTitle,
+		Title $title,
+		OutputPage $output = null
+	) {
 		$handler = self::getInstance();
-		return $handler->doSkinTemplateGetLanguageLink( $languageLink, $languageLinkTitle, $title, $output );
+		return $handler->doSkinTemplateGetLanguageLink(
+			$languageLink,
+			$languageLinkTitle,
+			$title,
+			$output
+		);
 	}
 
 	/**
@@ -203,7 +213,12 @@ class SidebarHookHandlers {
 	 *
 	 * @return bool
 	 */
-	public function doSkinTemplateGetLanguageLink( &$languageLink, Title $languageLinkTitle, Title $title, OutputPage $output = null ) {
+	public function doSkinTemplateGetLanguageLink(
+		array &$languageLink,
+		Title $languageLinkTitle,
+		Title $title,
+		OutputPage $output = null
+	) {
 		if ( !$output ) {
 			// This would happen for versions of core that do not have change Ic479e2fa5cc applied.
 			wfWarn( __METHOD__ . ': SkinTemplateGetLanguageLink hook called without OutputPage object!' );
