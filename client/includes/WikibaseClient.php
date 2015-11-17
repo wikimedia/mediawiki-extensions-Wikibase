@@ -176,8 +176,8 @@ final class WikibaseClient {
 
 	/**
 	 * Returns the default WikibaseValueFormatterBuilders instance.
-	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
-	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
+	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
+	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
 	 * @since 0.5
 	 *
@@ -189,8 +189,7 @@ final class WikibaseClient {
 		static $builders;
 
 		if ( $builders === null || $reset === 'reset' ) {
-			$wikibaseRepo = self::getDefaultInstance();
-			$builders = $wikibaseRepo->newWikibaseValueFormatterBuilders();
+			$builders = self::getDefaultInstance()->newWikibaseValueFormatterBuilders();
 		}
 
 		return $builders;
@@ -200,7 +199,7 @@ final class WikibaseClient {
 	 * Returns a low level factory object for creating formatters for well known data types.
 	 *
 	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
-	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
+	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
