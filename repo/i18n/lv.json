@@ -49,6 +49,7 @@
 	"wikibase-disambiguation-title": "\"$1\" nozīmju atdalīšana",
 	"wikibase-aliases-empty": "Nav norādīti citi nosaukumi.",
 	"wikibase-propertypage-datatype": "Datu tips",
+	"wikibase-statementview-rank-normal": "Normāls rangs",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|atsauces|atsauce|atsauces}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|$1 atsauces vēl nav saglabātas|$1 atsauce vēl nav saglabāta|$1 atsauces vēl nav saglabātas}}",
 	"wikibase-snakview-property-input-placeholder": "īpašība",
