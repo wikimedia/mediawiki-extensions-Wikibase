@@ -1,9 +1,4 @@
-( function( wb ) {
-	'use strict';
-
-	/**
-	 * @ignore
-	 */
-	wb.serialization.tests = {};
-
-}( wikibase ) );
+/**
+ * @ignore
+ */
+wikibase.serialization.tests = wikibase.serialization.tests || {};
