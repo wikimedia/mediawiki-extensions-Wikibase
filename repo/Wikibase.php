@@ -195,6 +195,7 @@ call_user_func( function() {
 	// Jobs
 	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob';
 	$wgJobClasses['UpdateRepoOnDelete'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob';
+	$wgJobClasses['ClientChangeNotification'] = 'Wikibase\Repo\Job\ClientChangeNotificationJob';
 
 	// Hooks
 	$wgHooks['BeforePageDisplay'][] = 'Wikibase\RepoHooks::onBeforePageDisplay';
