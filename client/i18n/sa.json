@@ -6,6 +6,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "सूचनाकोषस्य वस्तूनां परिसन्धिः",
+	"wikibase-comment-update": "{{WBREPONAME}} वस्तु परिवर्तितम्",
 	"wikibase-dataitem": "{{WBREPONAME}} वस्तु",
 	"wikibase-editlinks": "भाषापरिसन्धिः सम्पाद्यताम्",
 	"wikibase-editlinkstitle": "भाषापरिसन्धिः सम्पाद्यताम्",
@@ -15,6 +16,7 @@
 	"wikibase-linkitem-input-site": "भाषा :",
 	"wikibase-linkitem-input-page": "पृष्ठम् :",
 	"wikibase-linkitem-confirmitem-button": "दृढीकरोतु",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "गोप्यताम्",
 	"wikibase-rc-hide-wikidata-show": "दृश्यताम्",
 	"wikibase-rc-wikibase-edit-letter": "डेटा",

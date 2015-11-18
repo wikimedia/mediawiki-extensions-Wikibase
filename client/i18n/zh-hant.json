@@ -13,7 +13,8 @@
 			"乌拉跨氪",
 			"LNDDYL",
 			"Cwlin0416",
-			"MoonYaksha"
+			"MoonYaksha",
+			"EagerLin"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
@@ -52,7 +53,7 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "隱藏",
 	"wikibase-rc-hide-wikidata-show": "顯示",
-	"wikibase-rc-show-wikidata-pref": "顯示 {{WBREPONAME}} 的編輯於近期變更中",
+	"wikibase-rc-show-wikidata-pref": "顯示 {{WBREPONAME}} 的編輯於最近更改中",
 	"wikibase-rc-wikibase-edit-letter": "數",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 編輯",
 	"wikibase-replicationnote": "請注意，此動作的變更需要花費數分鐘方可於所有 Wiki 檢視。",

@@ -208,7 +208,7 @@
 	"wikibase-itemmerge-no-such-entity": "查無項目。",
 	"wikibase-itemmerge-cant-load-entity-content": "讀取項目失敗。",
 	"wikibase-itemmerge-cant-merge-self": "無法合併項目至自己。",
-	"wikibase-tokencheck-missingtoken": "需要編輯密鑰。",
+	"wikibase-tokencheck-missingtoken": "需要編輯權杖。",
 	"wikibase-tokencheck-mustposttoken": "只可使用 POST 請求進行編輯。",
 	"wikibase-tokencheck-badtoken": "錯誤的編輯密鑰 (您的連線階段可能已過期)。",
 	"special-dispatchstats": "更改發佈統計",
