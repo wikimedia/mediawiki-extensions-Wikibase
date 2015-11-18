@@ -26,15 +26,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 	}
 
 	private function getCoordinator() {
-		$clientWikis = array(
-			'dewiki' => 'dewikidb',
-			'enwiki' => 'enwikidb',
-			'nlwiki' => 'nlwikidb',
-			'ruwiki' => 'ruwikidb',
-			'zhwiki' => 'zhwikidb',
-		);
-
-		$coordinator = new SqlChangeDispatchCoordinator( false, $clientWikis );
+		$coordinator = new SqlChangeDispatchCoordinator( false );
 
 		$coordinator->setBatchSize( 3 );
 		$coordinator->setRandomness( 3 );
@@ -51,15 +43,15 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 			return wfTimestamp( TS_UNIX, '20140303000000' );
 		} );
 
-		$coordinator->setIsClientLockUsedOverride( function( $wikiDB, $lockName ) {
-			return $wikiDB === 'zhwikidb';
+		$coordinator->setIsClientLockUsedOverride( function( $db, $lockName ) {
+			return $lockName === 'WikiBase.dispatchChanges.zhwiki';
 		} );
 
-		$coordinator->setEngageClientLockOverride( function( $wikiDB ) {
-			return $wikiDB !== 'zhwikidb';
+		$coordinator->setEngageClientLockOverride( function( $db, $lockName ) {
+			return $lockName !== 'WikiBase.dispatchChanges.zhwiki';
 		} );
 
-		$coordinator->setReleaseClientLockOverride( function( $wikiDB ) {
+		$coordinator->setReleaseClientLockOverride( function( $db, $lockName ) {
 			return true;
 		} );
 
@@ -103,7 +95,15 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 	public function testInitState() {
 		$coordinator = $this->getCoordinator();
 
-		$coordinator->initState();
+		$clientWikis = array(
+			'dewiki' => 'dewikidb',
+			'enwiki' => 'enwikidb',
+			'nlwiki' => 'nlwikidb',
+			'ruwiki' => 'ruwikidb',
+			'zhwiki' => 'zhwikidb',
+		);
+
+		$coordinator->initState( $clientWikis );
 
 		$rows = $this->fetchChangesDispatchRows();
 
@@ -183,7 +183,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 				'chd_db' => 'dewikidb',
 				'chd_seen' => '0',
 				'chd_touched' => '20140303000000',
-				'chd_lock' => "dewikidb.WikiBase.dispatchChanges",
+				'chd_lock' => "WikiBase.dispatchChanges.dewiki",
 				'chd_disabled' => '0',
 			),
 			array(
@@ -204,7 +204,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 				'chd_db' => 'dewikidb',
 				'chd_seen' => '0',
 				'chd_touched' => '20140101000055',
-				'chd_lock' => "dewikidb.WikiBase.dispatchChanges",
+				'chd_lock' => "WikiBase.dispatchChanges.dewiki",
 				'chd_disabled' => '0',
 			),
 			array(
@@ -224,7 +224,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 			'chd_db' => 'dewikidb',
 			'chd_seen' => 23,
 			'chd_touched' => '20140101000055',
-			'chd_lock' => "dewiki.WikiBase.dispatchChanges",
+			'chd_lock' => "WikiBase.dispatchChanges.dewiki",
 			'chd_disabled' => '0',
 		);
 
@@ -378,7 +378,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 					'chd_db' => 'nlwikidb',
 					'chd_seen' => '7',
 					'chd_touched' => '20140303000000',
-					'chd_lock' => 'nlwikidb.WikiBase.dispatchChanges',
+					'chd_lock' => 'WikiBase.dispatchChanges.nlwiki',
 				)
 			),
 			'locked or disabled' => array(
@@ -392,7 +392,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 					'chd_db' => 'dewikidb',
 					'chd_seen' => '0',
 					'chd_touched' => '20140303000000',
-					'chd_lock' => 'dewikidb.WikiBase.dispatchChanges',
+					'chd_lock' => 'WikiBase.dispatchChanges.dewiki',
 				)
 			),
 			'broken lock' => array(
@@ -402,7 +402,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 					'chd_db' => 'enwikidb',
 					'chd_seen' => '0',
 					'chd_touched' => '20140303000000',
-					'chd_lock' => 'enwikidb.WikiBase.dispatchChanges',
+					'chd_lock' => 'WikiBase.dispatchChanges.enwiki',
 				)
 			),
 			'no pending changed' => array(
