@@ -63,14 +63,14 @@ class ComplexValueRdfHelperTest extends \PHPUnit_Framework_TestCase {
 			'<http://www/Q2> <http://acme/statement/value/testing> <http://acme/value/e93b68fef814eb52e813bb72e6867432> .'
 		);
 
-		$triples = explode( "\n", trim( $snakWriter->drain() ) );
+		$triples = explode( "\n", rtrim( $snakWriter->drain(), "\n" ) );
 		$this->assertEquals( $expected, $triples );
 
 		// check the triples written to the value writer
 		$expected = array( '<http://acme/value/e93b68fef814eb52e813bb72e6867432> '
 			. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 			. '<http://acme/onto/StringValue> .' );
-		$triples = explode( "\n", trim( $valueWriter->drain() ) );
+		$triples = explode( "\n", rtrim( $valueWriter->drain(), "\n" ) );
 		$this->assertEquals( $expected, $triples );
 	}
 

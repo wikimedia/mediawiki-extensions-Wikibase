@@ -101,16 +101,16 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	private function getDataFromWriter( RdfWriter $writer ) {
 		$ntriples = $writer->drain();
 
-		$lines = explode( "\n", trim( $ntriples ) );
+		$lines = explode( "\n", rtrim( $ntriples, "\n" ) );
 		sort( $lines );
 		return $lines;
 	}
 
 	private function assertTriplesEqual( array $expectedTriples, RdfWriter $writer ) {
-		$actualTripels = $this->getDataFromWriter( $writer );
+		$actualTriples = $this->getDataFromWriter( $writer );
 		sort( $expectedTriples );
 
-		$this->assertEquals( $expectedTriples, $actualTripels );
+		$this->assertEquals( $expectedTriples, $actualTriples );
 	}
 
 	public function provideAddSnakValue() {

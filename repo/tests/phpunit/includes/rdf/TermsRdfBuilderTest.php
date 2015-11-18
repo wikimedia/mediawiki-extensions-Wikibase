@@ -69,7 +69,7 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		// HACK: $builder->test_writer is glued on by newBuilder().
 		$ntriples = $builder->test_writer->drain();
 
-		$lines = explode( "\n", trim( $ntriples ) );
+		$lines = explode( "\n", rtrim( $ntriples, "\n" ) );
 		sort( $lines );
 		return $lines;
 	}
