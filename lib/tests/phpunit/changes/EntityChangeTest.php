@@ -157,13 +157,13 @@ class EntityChangeTest extends ChangeRowTest {
 	 * @since 0.4
 	 */
 	public function testToString( EntityChange $entityChange ) {
-		$s = "$entityChange"; // magically calls __toString()
+		$string = $entityChange->__toString();
 
-		$id = $entityChange->getEntityId()->getSerialization();
+		$id = strtolower( $entityChange->getEntityId()->getSerialization() );
 		$type = $entityChange->getType();
 
-		$this->assertTrue( stripos( $s, $id ) !== false, "missing entity ID $id" );
-		$this->assertTrue( stripos( $s, $type ) !== false, "missing type $type" );
+		$this->assertContains( "'object_id' => '$id'", $string, "missing entity ID $id" );
+		$this->assertContains( "'type' => '$type'", $string, "missing type $type" );
 	}
 
 	public function testGetComment() {
