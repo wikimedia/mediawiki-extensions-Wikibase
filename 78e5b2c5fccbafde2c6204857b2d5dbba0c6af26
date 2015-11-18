@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_8125cc58",
+        "filename": "repo/includes/rdf/Values/ObjectUriRdfBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:52Z",
+      "side": 1,
+      "message": "I\u0027m aware the strval() was added because of my comment, but it\u0027s pointless and does nothing but possibly wasting time. trim() already casts to string if needed.",
+      "revId": "78e5b2c5fccbafde2c6204857b2d5dbba0c6af26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_8c08a32c",
+        "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/refs.nt",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:52Z",
+      "side": 1,
+      "message": "This *looks* like an actual bugfix that could be split to a separate patch. Preferably in a chain *before* this patch.",
+      "revId": "78e5b2c5fccbafde2c6204857b2d5dbba0c6af26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_2c0f3735",
+        "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/refs.nt",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:52Z",
+      "side": 1,
+      "message": "This *looks* like an actual bugfix that could be split to a separate patch. Preferably in a chain *before* this patch.",
+      "revId": "78e5b2c5fccbafde2c6204857b2d5dbba0c6af26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_410b542e",
+        "filename": "repo/tests/phpunit/includes/rdf/ComplexValueRdfBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:52Z",
+      "side": 1,
+      "message": "This is an actual bugfix (you told me) that should be split to a separate patch, if possible. Preferably in a chain *before* this patch.",
+      "revId": "78e5b2c5fccbafde2c6204857b2d5dbba0c6af26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e1092835",
+        "filename": "repo/tests/phpunit/includes/rdf/SimpleValueRdfBuilderTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:52Z",
+      "side": 1,
+      "message": "This is an actual bugfix (you told me) that should be split to a separate patch, if possible. Preferably in a chain *before* this patch.",
+      "revId": "78e5b2c5fccbafde2c6204857b2d5dbba0c6af26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
