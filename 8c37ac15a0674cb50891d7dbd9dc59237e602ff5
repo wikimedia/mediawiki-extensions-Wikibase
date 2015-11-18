@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_a15a50f7",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:24Z",
+      "side": 1,
+      "message": "No, not at all. But we might enable the \"Squiz.Strings.DoubleQuoteUsage\" PHPCS sniff some day. We already did that in a few smaller libraries.",
+      "parentUuid": "0ebaf39b_059fafba",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_3421cbac",
         "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
         "patchSetId": 8
@@ -124,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_a1d7b027",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:24Z",
+      "side": 1,
+      "message": "trim() is greedy and trims horizontal (space, tab) as well as vertical (newline) whitespace. It\u0027s hard to tell which (or both) is the intention here. This should be as specific as possible, namely rtrim( $data, \"\\n\" ). I believe that all other whitespace differences should make the tests fail, even if this whitespace is technically irrelevant in RDF. Our code should not output superfluous whitespace, because this will do nothing but possibly wasting space in the dump.",
+      "parentUuid": "0ebaf39b_25a43304",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_ef091c30",
         "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
         "patchSetId": 8
@@ -153,6 +189,23 @@
       "side": 1,
       "message": "Only if you assume that all data coming from normalizeData() will be handled via the assertTriplesEqual() method, and never in any other way.\n\nI find it useful to enforce assumptions, such as ordering, whenever they are made. The performance impact should be minimal, since the data set is small and the code only runs a few times.",
       "parentUuid": "0ebaf39b_ef091c30",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_41cd9488",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:24Z",
+      "side": 1,
+      "message": "All tests run just fine without this trim(). This should either be removed or moved *after* the sort(). Otherwise lines that start with whitespace will be wrongly sorted to the top.",
       "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -229,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_01c79c68",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:24Z",
+      "side": 1,
+      "message": "Why should assertEquals do that? As said, the arrays are sorted. assertEquals will show +B just fine. The only difference is that it will show some context (without any \"+\" or \"-\"). Your implementation does not show any context. This can be a good thing, because the output is shorter, or a bad thing, because what\u0027s reported as \"expected\" and \"actual\" is not really what the test expected and how the output actually looks.\n\nStraight assertEquals:\n\n--- Expected\n+++ Actual\n@@ @@\n     55 \u003d\u003e \u0027\u003chttp://acme.test/value/aad6b...lue\u003e .\u0027\n-    56 \u003d\u003e \u0027\u003chttp://acme.test/value/ba4fa68a0979e66…\n+    56 \u003d\u003e \u0027\u003chttp://acme.test/value/ba4fa68a0979e66…\n     57 \u003d\u003e \u0027\u003chttp://acme.test/value/ba4fa...ger\u003e .\u0027\n\nWith the two array_diffs:\n\n--- Expected\n+++ Actual\n@@ @@\n Array (\n-    56 \u003d\u003e \u0027\u003chttp://acme.test/value/ba4fa68a0979e66…\n+    56 \u003d\u003e \u0027\u003chttp://acme.test/value/ba4fa68a0979e66…\n )",
+      "parentUuid": "0ebaf39b_85e07f26",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_af39e4cc",
         "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
         "patchSetId": 8
@@ -258,6 +329,24 @@
       "side": 1,
       "message": "The new code relies on the correct data type for selecting the rdf mapping. The value in this test is actually an EntityIdValue. Returning \"string\" from the PropertyDataTypeLookup is wrong, but with the old code, this had no effect, because the old code relies on the value type mostly, and uses the data type only for string values.",
       "parentUuid": "0ebaf39b_af39e4cc",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_21474024",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:24Z",
+      "side": 1,
+      "message": "I was under the wrong impression that the new code succeeds with the old \"string\" mock, but I was wrong. Thanks for the explanation.",
+      "parentUuid": "0ebaf39b_45ea8706",
       "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -363,6 +452,24 @@
       "side": 1,
       "message": "For strings that always feels a bit odd to me. Perhaps from my Java days... comparing strings for identity is generally *not* what you want. But PHP semantics are different...",
       "parentUuid": "0ebaf39b_0f8cb039",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a17d70e6",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/ComplexValueRdfHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-18T11:26:24Z",
+      "side": 1,
+      "message": "Yea, I know. Fascinating bit of knowledge: $this-\u003eassertTrue( 1 \u003d\u003d \u00271b\u0027 ) succeeds but $this-\u003eassertEquals( 1, \u00271b\u0027 ) fails because there is special handling for that in \\PHPUnit_Framework_Comparator_Scalar::assertEquals().",
+      "parentUuid": "0ebaf39b_05332fc1",
       "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
