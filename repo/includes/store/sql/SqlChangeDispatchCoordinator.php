@@ -9,6 +9,7 @@ use MWException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Store\ChangeDispatchCoordinator;
+use Wikimedia\Assert\Assert;
 
 /**
  * SQL based implementation of ChangeDispatchCoordinator;
@@ -41,7 +42,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $releaseClientLockOverride = null;
 
 	/**
-	 * @var callable Override for !$db->lockIsFree
+	 * @var callable Override for $db->lockIsFree
 	 */
 	private $isClientLockUsedOverride = null;
 
@@ -90,23 +91,24 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	private $messageReporter;
 
 	/**
-	 * @var string The logical name of the repository's database
+	 * @var string|false The logical name of the repository's database
 	 */
 	private $repoDB;
 
 	/**
-	 * @var string[] Logical names of local client wiki databases, provided as a mapping of
-	 *             global site ID to database name for each client wiki.
+	 * @var string The repo's global wiki ID
 	 */
-	private $clientWikis;
+	private $repoSiteId;
 
 	/**
-	 * @param string $repoDB
-	 * @param string[] $clientWikis Mapping of site IDs to database names.
+	 * @param string|false $repoDB
+	 * @param string $repoSiteId The repo's global wiki ID
 	 */
-	public function __construct( $repoDB, array $clientWikis ) {
+	public function __construct( $repoDB, $repoSiteId ) {
+		Assert::parameterType( 'string|boolean', $repoDB, '$repoDB' );
+
 		$this->repoDB = $repoDB;
-		$this->clientWikis = $clientWikis;
+		$this->repoSiteId = $repoSiteId;
 
 		$this->messageReporter = new NullMessageReporter();
 	}
@@ -284,15 +286,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @param  string|bool $wikiDB: the logical name of the client wiki's database.
-	 *
-	 * @return LoadBalancer $wikiDB's database load balancer.
-	 */
-	private function getClientLB( $wikiDB ) {
-		return wfGetLB( $wikiDB );
-	}
-
-	/**
 	 * @return DatabaseBase A connection to the repo's master database
 	 */
 	private function getRepoMaster() {
@@ -300,27 +293,10 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @param  string|bool $wikiDB: the logical name of the client wiki's database.
-	 *
-	 * @return DatabaseBase A connection to $wikiDB's master database
-	 */
-	private function getClientMaster( $wikiDB ) {
-		return $this->getClientLB( $wikiDB )->getConnection( DB_MASTER, array(), $wikiDB );
-	}
-
-	/**
 	 * @param DatabaseBase $db: the repo database connection to release for re-use.
 	 */
 	private function releaseRepoMaster( DatabaseBase $db ) {
 		$this->getRepoLB()->reuseConnection( $db );
-	}
-
-	/**
-	 * @param  string|bool  $wikiDB: the logical name of the client wiki's database.
-	 * @param DatabaseBase $db: the client database connection to release for re-use.
-	 */
-	private function releaseClientMaster( $wikiDB, DatabaseBase $db ) {
-		$this->getClientLB( $wikiDB )->reuseConnection( $db );
 	}
 
 	/**
@@ -433,8 +409,13 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * Initializes the dispatch table by injecting dummy records for all target wikis
 	 * that are in the configuration but not yet in the dispatch table.
+	 *
+	 * @param string[] $clientWikiDBs Associative array mapping client wiki IDs to
+	 * client wiki (logical) database names.
+	 *
+	 * @throws \DBUnexpectedError
 	 */
-	public function initState() {
+	public function initState( $clientWikiDBs ) {
 		$db = $this->getRepoMaster();
 
 		$trackedSiteIds = $db->selectFieldValues(
@@ -444,7 +425,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			__METHOD__
 		);
 
-		$untracked = array_diff_key( $this->clientWikis, array_flip( $trackedSiteIds ) );
+		$untracked = array_diff_key( $clientWikiDBs, array_flip( $trackedSiteIds ) );
 
 		foreach ( $untracked as $siteID => $wikiDB ) {
 			$state = array(
@@ -483,13 +464,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @see selectClient()
 	 */
 	public function lockClient( $siteID ) {
-		if ( !isset( $this->clientWikis[ $siteID ] ) ) {
-			throw new MWException( "Wiki not configured: $siteID; "
-					."consider removing it from the " . $this->stateTable );
-		}
-
-		$wikiDB = $this->clientWikis[ $siteID ];
-
 		$this->trace( "Trying $siteID" );
 
 		// start transaction
@@ -519,9 +493,11 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				$state = get_object_vars( $state );
 			}
 
+			$lock = $this->getClientLockName( $siteID );
+
 			if ( $state['chd_lock'] !== null ) {
 				// bail out if another dispatcher instance is holding a lock for that wiki
-				if ( $this->isClientLockUsed( $wikiDB, $state['chd_lock'] ) ) {
+				if ( $this->isClientLockUsed( $db, $lock ) ) {
 					$this->trace( "$siteID is already being handled by another process."
 								. " (lock: " . $state['chd_lock'] . ")" );
 
@@ -531,23 +507,23 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				}
 			}
 
-			$lock = $this->getClientLock( $wikiDB );
+			$ok = $this->engageClientLock( $db, $lock );
 
-			if ( $lock === false ) {
+			if ( !$ok ) {
 				// This really shouldn't happen, since we already checked if another process has a lock.
 				// The write lock we are holding on the wb_changes_dispatch table should be preventing
 				// any race conditions.
 				// However, another process may still hold the lock if it grabbed it without locking
 				// wb_changes_dispatch, or if it didn't record the lock in wb_changes_dispatch.
 
-				$this->trace( "Warning: Failed to acquire lock on $wikiDB for site $siteID!" );
+				$this->trace( "Warning: Failed to acquire lock $lock for site $siteID!" );
 
 				$db->rollback( __METHOD__ );
 				$this->releaseRepoMaster( $db );
 				return false;
 			}
 
-			$this->trace( "Locked client $siteID" );
+			$this->trace( "Locked client $siteID with $lock" );
 
 			$state['chd_lock'] = $lock;
 			$state['chd_touched'] = wfTimestamp( TS_MW, $this->now() ); // XXX: use DB time
@@ -568,7 +544,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$db->commit( __METHOD__ );
 		$this->releaseRepoMaster( $db );
 
-		$this->trace( "Locked $wikiDB for site $siteID at {$state['chd_seen']}." );
+		$this->trace( "Locked site $siteID at {$state['chd_seen']}." );
 
 		unset( $state['chd_disabled'] ); // don't mess with this.
 
@@ -594,7 +570,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$db->begin( __METHOD__ );
 
 		try {
-			$this->releaseClientLock( $wikiDB, $state['chd_lock'] );
+			$this->releaseClientLock( $db, $state['chd_lock'] );
 
 			$state['chd_lock'] = null;
 			$state['chd_touched'] = wfTimestamp( TS_MW, $this->now() );
@@ -622,12 +598,15 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * Determines the name of the global lock that should be used to lock the given client.
 	 *
-	 * @param string $wikiDB: The logical database name of the wiki to lock
+	 * @param string $siteID: The site ID of the wiki to lock
 	 *
 	 * @return string the lock name to use.
 	 */
-	private function getClientLockName( $wikiDB ) {
-		return "$wikiDB.WikiBase.dispatchChanges";
+	private function getClientLockName( $siteID ) {
+		// NOTE: Lock names are global, not scoped per database. To avoid clashes,
+		// we need to include both the ID of the repo and the ID of the client.
+		$name = "Wikibase.{$this->repoSiteId}.dispatchChanges.$siteID";
+		return str_replace( ' ', '_', $name );
 	}
 
 	/**
@@ -635,49 +614,17 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * The lock is acquired on the client wiki's master DB.
 	 *
-	 * @param string       $wikiDB The logical database name of the wiki for which to grab a lock.
-	 * @param string|null  $lockName  The name of the lock to acquire. If not given, getClientLockName()
-	 *                     will be used to generate an appropriate name.
-	 *
-	 * @return string|bool The lock name if the lock was acquired, false otherwise.
-	 */
-	private function getClientLock( $wikiDB, $lockName = null ) {
-		$this->trace( "Trying to get client lock for $wikiDB" );
-
-		if ( $lockName === null ) {
-			$lockName = $this->getClientLockName( $wikiDB );
-			$this->trace( "Lock name not defined for $wikiDB. Got lock name $lockName." );
-		}
-
-		$this->trace( "Trying to get client master for $wikiDB" );
-		$ok = $this->engageClientLock( $wikiDB, $lockName );
-
-		$msg = $ok ? "Set lock for $wikiDB" : "Failed to set lock for $wikiDB";
-		$this->trace( $msg );
-
-		return $ok ? $lockName : false;
-	}
-
-	/**
-	 * Tries to acquire a global lock on the given client wiki.
-	 *
-	 * The lock is acquired on the client wiki's master DB.
-	 *
-	 * @param string  $wikiDB The logical database name of the wiki for which to release the lock.
+	 * @param DatabaseBase $db The database connection to work on.
 	 * @param string  $lock  The name of the lock to release.
 	 *
 	 * @return bool whether the lock was released successfully.
 	 */
-	private function engageClientLock( $wikiDB, $lock ) {
+	private function engageClientLock( DatabaseBase $db, $lock ) {
 		if ( isset( $this->engageClientLockOverride ) ) {
-			return call_user_func( $this->engageClientLockOverride, $wikiDB, $lock );
+			return call_user_func( $this->engageClientLockOverride, $db, $lock );
 		}
 
-		$db = $this->getClientMaster( $wikiDB );
-		$ok = $db->lock( $lock, __METHOD__ );
-		$this->releaseClientMaster( $wikiDB, $db );
-
-		return $ok;
+		return $db->lock( $lock, __METHOD__ );
 	}
 
 	/**
@@ -685,21 +632,17 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * The lock is released on the client wiki's master DB.
 	 *
-	 * @param string  $wikiDB The logical database name of the wiki for which to release the lock.
+	 * @param DatabaseBase $db The database connection to work on.
 	 * @param string  $lock  The name of the lock to release.
 	 *
 	 * @return bool whether the lock was released successfully.
 	 */
-	private function releaseClientLock( $wikiDB, $lock ) {
+	private function releaseClientLock( DatabaseBase $db, $lock ) {
 		if ( isset( $this->releaseClientLockOverride ) ) {
-			return call_user_func( $this->releaseClientLockOverride, $wikiDB, $lock );
+			return call_user_func( $this->releaseClientLockOverride, $db, $lock );
 		}
 
-		$db = $this->getClientMaster( $wikiDB );
-		$ok = $db->unlock( $lock, __METHOD__ );
-		$this->releaseClientMaster( $wikiDB, $db );
-
-		return $ok;
+		return $db->unlock( $lock, __METHOD__ );
 	}
 
 	/**
@@ -707,21 +650,17 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * The lock is checked on the client wiki's master DB.
 	 *
-	 * @param string  $wikiDB The logical database name of the wiki for which to check the lock.
+	 * @param DatabaseBase $db The database connection to work on.
 	 * @param string  $lock  The name of the lock to check.
 	 *
 	 * @return bool true if the given lock is currently held by another process, false otherwise.
 	 */
-	private function isClientLockUsed( $wikiDB, $lock ) {
+	private function isClientLockUsed( DatabaseBase $db, $lock ) {
 		if ( isset( $this->isClientLockUsedOverride ) ) {
-			return call_user_func( $this->isClientLockUsedOverride, $wikiDB, $lock );
+			return call_user_func( $this->isClientLockUsedOverride, $db, $lock );
 		}
 
-		$db = $this->getClientMaster( $wikiDB );
-		$free = $db->lockIsFree( $lock, __METHOD__ );
-		$this->releaseClientMaster( $wikiDB, $db );
-
-		return !$free;
+		return $db->lockIsFree( $lock, __METHOD__ );
 	}
 
 	private function warn( $message ) {
