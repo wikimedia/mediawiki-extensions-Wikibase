@@ -9,6 +9,7 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
 use Wikibase\Rdf\Values\GlobeCoordinateRdfBuilder;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -23,6 +24,17 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @author Daniel Kinzler
  */
 class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	public function provideAddValue() {
 		$value = new GlobeCoordinateValue(
@@ -106,8 +118,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$snak
 		);
 
-		$triples = trim( $snakWriter->drain() );
-		$this->assertEquals( join( "\n", $expected ), $triples );
+		$this->helper->assertNTriplesEquals( $expected, $snakWriter->drain() );
 	}
 
 }

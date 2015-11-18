@@ -89,16 +89,16 @@ class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
-		$actualData = $writer->drain();
+		$actual = $writer->drain();
 		$expected = $this->getTestData()->getNTriples( $dataSetName );
 
 		if ( $expected === null ) {
-			$this->getTestData()->putTestData( $dataSetName, $actualData, '.actual' );
+			$this->getTestData()->putTestData( $dataSetName, $actual, '.actual' );
 			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
 				. " the suffix .actual" );
 		}
 
-		$this->helper->assertNTriplesEquals( $expected, $actualData, "Data set $dataSetName" );
+		$this->helper->assertNTriplesEquals( $expected, $actual, "Data set $dataSetName" );
 	}
 
 	public function provideAddEntity() {
