@@ -144,15 +144,17 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * Brings data to normalized form - sorted array of lines
 	 *
-	 * @param string $data
+	 * @param string|string[] $data
 	 *
 	 * @return string[]
 	 */
 	public function normalizeData( $data ) {
-		$dataSplit = explode( "\n", trim( $data ) );
-		sort( $dataSplit );
-		$dataSplit = array_map( 'trim', $dataSplit );
-		return $dataSplit;
+		if ( is_string( $data ) ) {
+			$data = explode( "\n", rtrim( $data, "\n" ) );
+		}
+
+		sort( $data );
+		return $data;
 	}
 
 	/**
@@ -181,7 +183,6 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		ob_start();
 		$dumper->generateDump( $pager );
 		$dump = ob_get_clean();
-		$dump = $this->normalizeData( $dump );
 		$this->assertTriplesEqual( $this->getSerializedData( $dumpname ), $dump );
 	}
 
@@ -213,19 +214,20 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		ob_start();
 		$dumper->generateDump( $pager );
 		$dump = ob_get_clean();
-		$dump = $this->normalizeData( $dump );
 		$this->assertTriplesEqual( $this->getSerializedData( $dumpname ), $dump );
 	}
 
-	private function assertTriplesEqual( array $expectedTriples, array $actualTripels, $message = '' ) {
-		sort( $expectedTriples );
-		sort( $actualTripels );
+	/**
+	 * @param string|string[] $expectedTriples
+	 * @param string|string[] $actualTriples
+	 * @param string $message
+	 */
+	private function assertTriplesEqual( $expectedTriples, $actualTriples, $message = '' ) {
+		$expectedTriples = $this->normalizeData( $expectedTriples );
+		$actualTriples = $this->normalizeData( $actualTriples );
 
-		// Note: comparing $expected and $actual directly would show triples
-		// that are present in both but shifted in position. That makes the output
-		// hard to read. Calculating the $missing and $extra sets helps.
-		$extra = array_diff( $actualTripels, $expectedTriples );
-		$missing = array_diff( $expectedTriples, $actualTripels );
+		$extra = array_diff( $actualTriples, $expectedTriples );
+		$missing = array_diff( $expectedTriples, $actualTriples );
 
 		// Cute: $missing and $extra can be equal only if they are empty.
 		// Comparing them here directly looks a bit odd in code, but produces meaningful

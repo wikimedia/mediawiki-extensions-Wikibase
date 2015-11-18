@@ -101,7 +101,7 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$snak
 		);
 
-		$triples = trim( $snakWriter->drain() );
+		$triples = rtrim( $snakWriter->drain(), "\n" );
 		$this->assertEquals( join( "\n", $expected ), $triples );
 	}
 

@@ -45,7 +45,7 @@ class ObjectUriRdfBuilder implements ValueSnakRdfBuilder {
 	 * @return string the object URI
 	 */
 	protected function getValueUri( DataValue $value ) {
-		return trim( strval( $value->getValue() ) );
+		return trim( $value->getValue() );
 	}
 
 }
