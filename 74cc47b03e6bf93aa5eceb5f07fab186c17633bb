@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_e1fe08ab",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-18T09:55:58Z",
+      "side": 1,
+      "message": "Please add a space",
+      "revId": "74cc47b03e6bf93aa5eceb5f07fab186c17633bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_41f034d6",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-18T09:55:58Z",
+      "side": 1,
+      "message": "Please add a space",
+      "revId": "74cc47b03e6bf93aa5eceb5f07fab186c17633bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
