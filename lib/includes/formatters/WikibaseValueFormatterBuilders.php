@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use DataValues\Geo\Formatters\GeoCoordinateFormatter;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
+use InvalidArgumentException;
 use Language;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
@@ -104,11 +105,11 @@ class WikibaseValueFormatterBuilders {
 		$self = $this; // yay PHP 5.3!
 		return array(
 				'string' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $format === SnakFormatter::FORMAT_PLAIN ? new StringFormatter( $options ) : null;
+					return $self->newStringFormatter( $format, $options );
 				},
 
 				'bad' => function( $format, FormatterOptions $options ) use ( $self ) {
-					return $format === SnakFormatter::FORMAT_PLAIN ? new UnDeserializableValueFormatter( $options ) : null;
+					return $self->escapeValueFormatter( $format, new UnDeserializableValueFormatter( $options ) );
 				},
 
 				'globecoordinate' => function( $format, FormatterOptions $options ) use ( $self ) {
@@ -142,31 +143,32 @@ class WikibaseValueFormatterBuilders {
 
 	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
-	 * @param FormatterOptions $options
 	 *
-	 * @return ValueFormatter|null
+	 * @return bool True if $format is one of the SnakFormatter::FORMAT_HTML_XXX formats.
 	 */
-	public function newEntityIdFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-			return $this->newPlainEntityIdFormatter( $options );
-		} elseif ( $format === SnakFormatter::FORMAT_HTML ) {
-			if ( !$this->entityTitleLookup ) {
-				return new EscapingValueFormatter(
-					$this->newPlainEntityIdFormatter( $options ),
-					'htmlspecialchars'
-				);
-			} else {
-				$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-				return new EntityIdValueFormatter(
-					new EntityIdHtmlLinkFormatter(
-						$labelDescriptionLookup,
-						$this->entityTitleLookup,
-						$this->languageNameLookup
-					)
-				);
-			}
+	private function isHtmlFormat( $format ) {
+		return $format === SnakFormatter::FORMAT_HTML
+			|| $format === SnakFormatter::FORMAT_HTML_DIFF
+			|| $format === SnakFormatter::FORMAT_HTML_WIDGET;
+	}
+
+	/**
+	 * Wraps the given formatter in an EscapingValueFormatter if necessary.
+	 *
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param ValueFormatter $formatter The plain text formatter to wrap.
+	 *
+	 * @return ValueFormatter
+	 */
+	private function escapeValueFormatter( $format, ValueFormatter $formatter ) {
+		if ( $this->isHtmlFormat( $format ) ) {
+			return new EscapingValueFormatter( $formatter, 'htmlspecialchars' );
+		} elseif( $format === SnakFormatter::FORMAT_WIKI ) {
+			return new EscapingValueFormatter( $formatter, 'wfEscapeWikiText' );
+		} else if( $format === SnakFormatter::FORMAT_PLAIN ) {
+			return $formatter;
 		} else {
-			return null;
+			throw new InvalidArgumentException( 'Unsupported output format: ' . $format );
 		}
 	}
 
@@ -176,17 +178,47 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return ValueFormatter|null
 	 */
+	public function newEntityIdFormatter( $format, FormatterOptions $options ) {
+		if ( $this->isHtmlFormat( $format ) && $this->entityTitleLookup ) {
+			$labelDescriptionLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
+
+			return new EntityIdValueFormatter(
+				new EntityIdHtmlLinkFormatter(
+					$labelDescriptionLookup,
+					$this->entityTitleLookup,
+					$this->languageNameLookup
+				)
+			);
+		}
+
+		$plainFormatter = $this->newPlainEntityIdFormatter( $options );
+		return $this->escapeValueFormatter( $format, $plainFormatter );
+	}
+
+	/**
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param FormatterOptions $options
+	 *
+	 * @return ValueFormatter|null
+	 */
+	public function newStringFormatter( $format, FormatterOptions $options ) {
+		return $this->escapeValueFormatter( $format, new StringFormatter( $options ) );
+	}
+
+	/**
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param FormatterOptions $options
+	 *
+	 * @return ValueFormatter|null
+	 */
 	public function newUrlFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-			return new StringFormatter( $options );
-		} elseif ( $format === SnakFormatter::FORMAT_WIKI ) {
+		if ( $format === SnakFormatter::FORMAT_WIKI ) {
 			// use the string formatter without escaping!
 			return new StringFormatter( $options );
-		} elseif ( $format === SnakFormatter::FORMAT_HTML ) {
-			// use the string formatter without escaping!
+		} elseif ( $this->isHtmlFormat( $format ) ) {
 			return new HtmlUrlFormatter( $options );
 		} else {
-			return null;
+			return $this->escapeValueFormatter( $format, new StringFormatter( $options ) );
 		}
 	}
 
@@ -197,15 +229,11 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter|null
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-			return new StringFormatter( $options );
-		} elseif ( $format === SnakFormatter::FORMAT_WIKI ) {
-			//TODO: wikitext image link (inline? thumbnail? caption?...)
-			return null;
-		} elseif ( $format === SnakFormatter::FORMAT_HTML ) {
+		//TODO: for FORMAT_WIKI, wikitext image link (inline? thumbnail? caption?...)
+		if ( $this->isHtmlFormat( $format ) ) {
 			return new CommonsLinkFormatter( $options );
 		} else {
-			return null;
+			return $this->escapeValueFormatter( $format, new StringFormatter( $options ) );
 		}
 	}
 
@@ -216,20 +244,23 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter|null
 	 */
 	public function newTimeFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-			return new MwTimeIsoFormatter( $options );
-		} elseif ( $format === SnakFormatter::FORMAT_HTML ) {
-			return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
-		} elseif ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
+		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
 			return new TimeDetailsFormatter(
 				$options,
 				new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) )
 			);
+		} elseif ( $this->isHtmlFormat( $format ) ) {
+			return new HtmlTimeFormatter( $options, new MwTimeIsoFormatter( $options ) );
 		} else {
-			return null;
+			return $this->escapeValueFormatter( $format, new MwTimeIsoFormatter( $options ) );
 		}
 	}
 
+	/**
+	 * @param FormatterOptions $options
+	 *
+	 * @return MediaWikiNumberLocalizer
+	 */
 	private function getNumberLocalizer( FormatterOptions $options ) {
 		$language = Language::factory( $options->getOption( ValueFormatter::OPT_LANG ) );
 		return new MediaWikiNumberLocalizer( $language );
@@ -252,20 +283,19 @@ class WikibaseValueFormatterBuilders {
 	 * @return QuantityFormatter|null
 	 */
 	public function newQuantityFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-			$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
-			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
-			return new QuantityFormatter( $options, $decimalFormatter, $vocabularyUriFormatter );
-		} elseif ( $format === SnakFormatter::FORMAT_HTML ) {
-			$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
-			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
-			return new QuantityHtmlFormatter( $options, $decimalFormatter, $vocabularyUriFormatter );
-		} elseif ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
+		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
 			$localizer = $this->getNumberLocalizer( $options );
 			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
 			return new QuantityDetailsFormatter( $localizer, $vocabularyUriFormatter, $options );
+		} elseif ( $this->isHtmlFormat( $format ) ) {
+			$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
+			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
+			return new QuantityHtmlFormatter( $options, $decimalFormatter, $vocabularyUriFormatter );
 		} else {
-			return null;
+			$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
+			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
+			$plainFormatter = new QuantityFormatter( $options, $decimalFormatter, $vocabularyUriFormatter );
+			return $this->escapeValueFormatter( $format, $plainFormatter );
 		}
 	}
 
@@ -276,18 +306,17 @@ class WikibaseValueFormatterBuilders {
 	 * @return GlobeCoordinateFormatter|null
 	 */
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
+		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
+			return new GlobeCoordinateDetailsFormatter( $options );
+		} else {
 			$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
 			$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, array(
 				GeoCoordinateFormatter::OPT_SPACE_LATLONG
 			) );
 			$options->setOption( GeoCoordinateFormatter::OPT_DIRECTIONAL, true );
 
-			return new GlobeCoordinateFormatter( $options );
-		} elseif ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
-			return new GlobeCoordinateDetailsFormatter( $options );
-		} else {
-			return null;
+			$plainFormatter = new GlobeCoordinateFormatter( $options );
+			return $this->escapeValueFormatter( $format, $plainFormatter );
 		}
 	}
 
@@ -298,12 +327,10 @@ class WikibaseValueFormatterBuilders {
 	 * @return MonolingualHtmlFormatter
 	 */
 	public function newMonolingualFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
-			return new MonolingualTextFormatter( $options );
-		} elseif ( $format === SnakFormatter::FORMAT_HTML ) {
+		if ( $this->isHtmlFormat( $format ) ) {
 			return new MonolingualHtmlFormatter( $options, $this->languageNameLookup );
 		} else {
-			return null;
+			return $this->escapeValueFormatter( $format, new MonolingualTextFormatter( $options ) );
 		}
 	}
 

@@ -129,7 +129,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			$this->getTitleLookup()
 		);
 
-		$factory = array( $builders, 'new' . $type . 'Formatter' );
+		$factory = array( $builders, 'new' . ucfirst( $type ) . 'Formatter' );
 		$formatter = call_user_func( $factory, $format, $options );
 
 		$this->assertInstanceOf( 'ValueFormatters\ValueFormatter', $formatter );
@@ -156,6 +156,64 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 		$this->assertInstanceOf( 'ValueFormatters\ValueFormatter', $formatter );
 		return $formatter;
+	}
+
+	public function testFormatterForValueType_formats() {
+		$formats = array(
+			SnakFormatter::FORMAT_PLAIN,
+			SnakFormatter::FORMAT_WIKI,
+			SnakFormatter::FORMAT_HTML,
+			SnakFormatter::FORMAT_HTML_DIFF,
+			SnakFormatter::FORMAT_HTML_WIDGET
+		);
+
+		$types = array(
+			'string',
+			'wikibase-entityid',
+			'monolingualtext',
+			'time',
+			'globecoordinate',
+			'quantity',
+		);
+
+		$options = new FormatterOptions();
+
+		foreach ( $formats as $format ) {
+			foreach ( $types as $type ) {
+				// getFormatterForDataType asserts that a valid formatter is returned
+				$this->getFormatterForValueType( $type, $format, $options );
+			}
+		}
+	}
+
+	public function testNewFormatter_formats() {
+		$formats = array(
+			SnakFormatter::FORMAT_PLAIN,
+			SnakFormatter::FORMAT_WIKI,
+			SnakFormatter::FORMAT_HTML,
+			SnakFormatter::FORMAT_HTML_DIFF,
+			SnakFormatter::FORMAT_HTML_WIDGET
+		);
+
+		$types = array(
+			'String',
+			'Url',
+			'CommonsMedia',
+			'EntityId',
+			'Monolingual',
+			'Time',
+			'GlobeCoordinate',
+			'Quantity',
+		);
+
+		$options = new FormatterOptions();
+
+		foreach ( $formats as $format ) {
+			foreach ( $types as $type ) {
+				// getFormatterForDataType asserts that a valid formatter is returned
+				$this->getFormatterForDataType( $type, $format, $options );
+			}
+		}
 	}
 
 	/**
@@ -352,6 +410,34 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				$this->newFormatterOptions(),
 				new StringValue( '{foo&bar}' ),
 				'@^\{foo&bar\}$@'
+			),
+
+			'wikitext escape' => array(
+				SnakFormatter::FORMAT_WIKI,
+				$this->newFormatterOptions(),
+				new StringValue( '[[foo]]' ),
+				'@^&#91;&#91;foo&#93;&#93;$@'
+			),
+
+			'html escape' => array(
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new StringValue( '<foo>' ),
+				'@^&lt;foo&gt;$@'
+			),
+
+			'html details escape' => array(
+				SnakFormatter::FORMAT_HTML_DIFF,
+				$this->newFormatterOptions(),
+				new StringValue( '<foo>' ),
+				'@^&lt;foo&gt;$@'
+			),
+
+			'html widget escape' => array(
+				SnakFormatter::FORMAT_HTML_WIDGET,
+				$this->newFormatterOptions(),
+				new StringValue( '<foo>' ),
+				'@^&lt;foo&gt;$@'
 			),
 
 			// bad
@@ -568,7 +654,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			'monolingualtext',
 		);
 
-		$actual = array_keys( $builders->getFormatterFactoryCallbacksByValueType() );
+		$callbacksByType = $builders->getFormatterFactoryCallbacksByValueType();
+		$this->assertNotContains( null, $callbacksByType, 'Callback must not be null' );
+
+		$actual = array_keys( $callbacksByType );
 
 		sort( $required );
 		sort( $actual );

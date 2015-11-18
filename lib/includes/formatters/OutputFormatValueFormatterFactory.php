@@ -138,163 +138,9 @@ class OutputFormatValueFormatterFactory {
 	public function getValueFormatter( $format, FormatterOptions $options ) {
 		$this->applyLanguageDefaults( $options );
 
-		switch ( $format ) {
-			case SnakFormatter::FORMAT_PLAIN:
-				$formatters = $this->getPlainTextFormatters( $options );
-				break;
-			case SnakFormatter::FORMAT_WIKI:
-				$formatters = $this->getWikiTextFormatters( $options );
-				break;
-			case SnakFormatter::FORMAT_HTML:
-				$formatters = $this->getHtmlFormatters( $options );
-				break;
-			case SnakFormatter::FORMAT_HTML_WIDGET:
-				$formatters = $this->getWidgetFormatters( $options );
-				break;
-			case SnakFormatter::FORMAT_HTML_DIFF:
-				$formatters = $this->getDiffFormatters( $options );
-				break;
-			default:
-				throw new InvalidArgumentException( 'Unsupported format: ' . $format );
-		}
+		$formatters = $this->buildDefinedFormatters( $format, $options );
 
 		return new DispatchingValueFormatter( $formatters );
-	}
-
-	/**
-	 * Returns a full set of formatters for generating plain text output.
-	 *
-	 * @param FormatterOptions $options
-	 * @param string[] $skip A list of types to be skipped. Useful when the caller already has
-	 *        formatters for some types.
-	 *
-	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
-	 */
-	private function getPlainTextFormatters( FormatterOptions $options, array $skip = array() ) {
-		return $this->buildDefinedFormatters(
-			SnakFormatter::FORMAT_PLAIN,
-			$options,
-			$skip
-		);
-	}
-
-	/**
-	 * Returns a full set of formatters for generating wikitext output.
-	 * If there are formatters defined for plain text that are not defined for wikitext,
-	 * the plain text formatters are used with the appropriate escaping applied.
-	 *
-	 * @param FormatterOptions $options
-	 * @param string[] $skip A list of types to be skipped. Useful when the caller already has
-	 *        formatters for some types.
-	 *
-	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
-	 */
-	private function getWikiTextFormatters( FormatterOptions $options, array $skip = array() ) {
-		$wikiFormatters = $this->buildDefinedFormatters(
-			SnakFormatter::FORMAT_WIKI,
-			$options,
-			$skip
-		);
-		$plainFormatters = $this->getPlainTextFormatters(
-			$options, array_merge( $skip, array_keys( $wikiFormatters ) )
-		);
-
-		$wikiFormatters = array_merge(
-			$wikiFormatters,
-			$this->makeEscapingFormatters( $plainFormatters, 'wfEscapeWikiText' )
-		);
-
-		return $wikiFormatters;
-	}
-
-	/**
-	 * Returns a full set of formatters for generating HTML output.
-	 * If there are formatters defined for plain text that are not defined for HTML,
-	 * the plain text formatters are used with the appropriate escaping applied.
-	 *
-	 * @param FormatterOptions $options
-	 * @param string[] $skip A list of types to be skipped. Useful when the caller already has
-	 *        formatters for some types.
-	 *
-	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
-	 */
-	private function getHtmlFormatters( FormatterOptions $options, array $skip = array() ) {
-		$htmlFormatters = $this->buildDefinedFormatters(
-			SnakFormatter::FORMAT_HTML,
-			$options,
-			$skip
-		);
-		$plainFormatters = $this->getPlainTextFormatters(
-			$options,
-			array_merge( $skip, array_keys( $htmlFormatters ) )
-		);
-
-		$htmlFormatters = array_merge(
-			$htmlFormatters,
-			$this->makeEscapingFormatters( $plainFormatters, 'htmlspecialchars' )
-		);
-
-		return $htmlFormatters;
-	}
-
-	/**
-	 * Returns a full set of formatters for generating HTML widgets.
-	 * If there are formatters defined for HTML that are not defined for widgets,
-	 * the HTML formatters are used.
-	 *
-	 * @param FormatterOptions $options
-	 * @param string[] $skip A list of types to be skipped. Useful when the caller already has
-	 *        formatters for some types.
-	 *
-	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
-	 */
-	private function getWidgetFormatters( FormatterOptions $options, array $skip = array() ) {
-		$widgetFormatters = $this->buildDefinedFormatters(
-			SnakFormatter::FORMAT_HTML_WIDGET,
-			$options,
-			$skip
-		);
-		$htmlFormatters = $this->getHtmlFormatters(
-			$options,
-			array_merge( $skip, array_keys( $widgetFormatters ) )
-		);
-
-		$widgetFormatters = array_merge(
-			$widgetFormatters,
-			$htmlFormatters
-		);
-
-		return $widgetFormatters;
-	}
-
-	/**
-	 * Returns a full set of formatters for generating HTML for use in diffs.
-	 * If there are formatters defined for HTML that are not defined for diffs,
-	 * the HTML formatters are used.
-	 *
-	 * @param FormatterOptions $options
-	 * @param string[] $skip A list of types to be skipped. Useful when the caller already has
-	 *        formatters for some types.
-	 *
-	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
-	 */
-	private function getDiffFormatters( FormatterOptions $options, array $skip = array() ) {
-		$diffFormatters = $this->buildDefinedFormatters(
-			SnakFormatter::FORMAT_HTML_DIFF,
-			$options,
-			$skip
-		);
-		$htmlFormatters = $this->getHtmlFormatters(
-			$options,
-			array_merge( $skip, array_keys( $diffFormatters ) )
-		);
-
-		$diffFormatters = array_merge(
-			$diffFormatters,
-			$htmlFormatters
-		);
-
-		return $diffFormatters;
 	}
 
 	/**
@@ -305,19 +151,13 @@ class OutputFormatValueFormatterFactory {
 	 *
 	 * @param string $format One of the SnakFormatter::FORMAT_... constants.
 	 * @param FormatterOptions $options
-	 * @param string[] $skip A list of types to be skipped. Useful when the caller already
-	 *        has formatters for some types.
 	 *
 	 * @return ValueFormatter[] A map from prefixed type IDs to ValueFormatter instances.
 	 */
-	private function buildDefinedFormatters( $format, FormatterOptions $options, array $skip = array() ) {
+	private function buildDefinedFormatters( $format, FormatterOptions $options ) {
 		$formatters = array();
 
 		foreach ( $this->factoryFunctions as $type => $func ) {
-			if ( $skip && in_array( $type, $skip ) ) {
-				continue;
-			}
-
 			$formatter = call_user_func( $func, $format, $options );
 
 			if ( $formatter ) {
@@ -326,26 +166,6 @@ class OutputFormatValueFormatterFactory {
 		}
 
 		return $formatters;
-	}
-
-	/**
-	 * Wrap each entry in a list of formatters in an EscapingValueFormatter.
-	 * This is useful to apply escaping to the output of a set of formatters,
-	 * allowing them to be used for a different format.
-	 *
-	 * @param ValueFormatter[] $formatters
-	 * @param string $escape The escape callback, e.g. 'htmlspecialchars' or 'wfEscapeWikitext'.
-	 *
-	 * @return ValueFormatter[]
-	 */
-	private function makeEscapingFormatters( array $formatters, $escape ) {
-		$escapingFormatters = array();
-
-		foreach ( $formatters as $key => $formatter ) {
-			$escapingFormatters[$key] = new EscapingValueFormatter( $formatter, $escape );
-		}
-
-		return $escapingFormatters;
 	}
 
 }

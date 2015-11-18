@@ -106,19 +106,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 				null,
 				'/^{foo&bar}$/'
 			),
-			'wiki escape' => array(
-				SnakFormatter::FORMAT_WIKI,
-				new StringValue( '{foo&bar}' ),
-				null,
-				'/^&#123;foo&#38;bar&#125;$/'
-			),
-			'html escape' => array(
-				SnakFormatter::FORMAT_HTML,
-				new StringValue( '{foo&bar}' ),
-				null,
-				'/^{foo&amp;bar}$/'
-			),
-			'no wiki escape for url' => array(
+			'wikitext url' => array(
 				SnakFormatter::FORMAT_WIKI,
 				new StringValue( 'http://acme.com/?foo&bar' ),
 				'url',
