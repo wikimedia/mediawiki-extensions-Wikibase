@@ -43,7 +43,7 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
 
 		$expected = array( '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/wiki/Special:FilePath/Bunny.jpg> .' );
-		$triples = explode( "\n", trim( $writer->drain() ) );
+		$triples = explode( "\n", rtrim( $writer->drain(), "\n" ) );
 		$this->assertEquals( $expected, $triples );
 	}
 

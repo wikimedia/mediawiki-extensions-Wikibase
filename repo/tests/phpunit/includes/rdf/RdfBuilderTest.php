@@ -112,10 +112,9 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	private function getDataFromBuilder( RdfBuilder $builder ) {
 		$data = $builder->getRDF();
-		$dataSplit = explode( "\n", trim( $data ) );
-		sort( $dataSplit );
-		$dataSplit = array_map( 'trim', $dataSplit );
-		return $dataSplit;
+		$data = explode( "\n", rtrim( $data, "\n" ) );
+		sort( $data );
+		return $data;
 	}
 
 	/**

@@ -96,10 +96,9 @@ class RdfBuilderTestData {
 			return null;
 		}
 
-		$data = trim( file_get_contents( $filename ) );
-		$data = explode( "\n", $data );
+		$data = file_get_contents( $filename );
+		$data = explode( "\n", rtrim( $data, "\n" ) );
 		sort( $data );
-		$data = array_map( 'trim', $data );
 		return $data;
 	}
 
