@@ -45,8 +45,11 @@ interface ChangeDispatchCoordinator {
 	/**
 	 * Initializes the dispatch table by injecting dummy records for all target wikis
 	 * that are in the configuration but not yet in the dispatch table.
+	 *
+	 * @param string[] $clientWikiDBs Associative array mapping client wiki IDs to
+	 * client wiki (logical) database names.
 	 */
-	public function initState();
+	public function initState( $clientWikiDBs );
 
 	/**
 	 * Attempt to lock the given target wiki. If it can't be locked because
