@@ -170,9 +170,7 @@ return call_user_func( function() {
 				return $factory->buildStringValidators();
 			},
 			'parser-factory-callback' => $newStringParser,
-			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return null; // rely on formatter for string value type
-			},
+			//'formatter-factory-callback' =>  // rely on formatter for string value type
 			'rdf-builder-factory-callback' => function (
 				$mode,
 				RdfVocabulary $vocab,
