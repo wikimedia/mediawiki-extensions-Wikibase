@@ -5,20 +5,11 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-/* FIXME: We can remove the following two blocks and delete the image 30 days after the outdated
-tipsy styles in shared.css are removed and we want to remove the blue color from our tooltips. */
-.wikibase-wbtooltip-tip .tipsy-inner {
-	background-color: #d6f3ff;
-	border-color: #5dc9f4;
+/* FIXME: Remove when core's jquery.tipsy.css is fixed. */
+.wikibase-wbtooltip-tip.tipsy-nw .tipsy-arrow,
+.wikibase-wbtooltip-tip.tipsy-ne .tipsy-arrow {
+	top: 0;
 }
-.wikibase-wbtooltip-tip .tipsy-arrow {
-	/* @embed */
-	background-image: url(images/tipsy.png);
-	/* FIXME: Remove 30 days after the outdated tipsy-arrow style in shared.css is removed */
-	height: 6px;
-}
-
-/***** ERROR TOOLTIP *****/
 
 .wikibase-wbtooltip-tip.wb-error .tipsy-arrow {
 	/* @embed */
@@ -32,5 +23,3 @@ tipsy styles in shared.css are removed and we want to remove the blue color from
 	background: #FFDFC9;
 	border-color: #B27631;
 }
-
-/***** /ERROR TOOLTIP *****/

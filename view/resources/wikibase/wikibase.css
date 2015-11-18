@@ -43,10 +43,6 @@ h1 .wikibase-title .wikibase-title-id:before {
 	color: inherit;
 }
 
-.wb-entitypage .wikibase-wbtooltip-tip .tipsy-arrow {
-	display: none;
-}
-
 /* Messages displayed while some action is performed (e.g. an API call) */
 .wb-actionmsg {
 	font-style: italic;
