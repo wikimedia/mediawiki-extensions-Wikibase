@@ -182,7 +182,8 @@ return call_user_func( function() {
 			},
 			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return $format === SnakFormatter::FORMAT_PLAIN ? new StringFormatter( $options ) : null;
+				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				return $factory->newStringFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
 				$mode,
