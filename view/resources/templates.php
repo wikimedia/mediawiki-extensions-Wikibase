@@ -38,6 +38,7 @@ HTML;
 </span>
 HTML;
 
+// TODO: Add class="mw-headline".
 	$templates['wb-section-heading'] =
 <<<HTML
 <h2 class="wb-section-heading section-heading $3" dir="auto"><span id="$2">$1</span></h2>
