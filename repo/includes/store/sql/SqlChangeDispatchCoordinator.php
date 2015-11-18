@@ -309,18 +309,18 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @param DatabaseBase $db: the repo database connection to release for re-use.
+	 * @param DatabaseBase $db: close the repo database connection.
 	 */
 	private function releaseRepoMaster( DatabaseBase $db ) {
-		$this->getRepoLB()->reuseConnection( $db );
+		$this->getRepoLB()->closeConnection( $db );
 	}
 
 	/**
 	 * @param  string|bool  $wikiDB: the logical name of the client wiki's database.
-	 * @param DatabaseBase $db: the client database connection to release for re-use.
+	 * @param DatabaseBase $db: close the client database connection.
 	 */
 	private function releaseClientMaster( $wikiDB, DatabaseBase $db ) {
-		$this->getClientLB( $wikiDB )->reuseConnection( $db );
+		$this->getClientLB( $wikiDB )->closeConnection( $db );
 	}
 
 	/**
