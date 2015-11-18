@@ -58,9 +58,7 @@ return call_user_func( function() {
 			},
 		),
 		'string' => array(
-			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return null; // rely on formatter for string value type
-			},
+			//'formatter-factory-callback' => // rely on formatter for string value type
 		),
 		'time' => array(
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
