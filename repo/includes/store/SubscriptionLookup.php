@@ -26,4 +26,13 @@ interface SubscriptionLookup {
 	 */
 	public function getSubscriptions( $siteId, array $entityIds );
 
+	/**
+	 * Get a list of subscriber wikis for the given EntityIDs
+	 *
+	 * @param EntityId[] $entityIds
+	 *
+	 * @return string[] Site IDs
+	 */
+	public function getSubscribers( array $entityIds );
+
 }

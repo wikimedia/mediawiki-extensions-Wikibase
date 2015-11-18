@@ -60,6 +60,13 @@ class SiteLinkSubscriptionLookup implements SubscriptionLookup {
 	}
 
 	/**
+	 * @see SubscriptionLookup::getSubscribers
+	 */
+	public function getSubscribers( array $entityIds ) {
+		return array();
+	}
+
+	/**
 	 * @param EntityId[] $entityIds
 	 *
 	 * @return ItemId[] The ItemIds from EntityId[], keyed by numeric id.

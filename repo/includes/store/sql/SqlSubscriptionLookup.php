@@ -24,10 +24,17 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	private $dbLoadBalancer;
 
 	/**
-	 * @param LoadBalancer $dbLoadBalancer
+	 * @var int
 	 */
-	public function __construct( LoadBalancer $dbLoadBalancer ) {
+	private $dbMode;
+
+	/**
+	 * @param LoadBalancer $dbLoadBalancer
+	 * @param int $dbMode Default is DB_SLAVE
+	 */
+	public function __construct( LoadBalancer $dbLoadBalancer, $dbMode = DB_SLAVE ) {
 		$this->dbLoadBalancer = $dbLoadBalancer;
+		$this->dbMode = $dbMode;
 	}
 
 	/**
@@ -37,17 +44,17 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 * @param EntityId[] $entityIds The entities we are interested in, or null for "any".
 	 *
 	 * @return EntityId[] a list of entity IDs the client wiki is subscribed to.
-	 *         The result is limited to entity ids also present in $entityIds, if given.
+	 *		 The result is limited to entity ids also present in $entityIds, if given.
 	 */
 	public function getSubscriptions( $siteId, array $entityIds ) {
 		if ( empty( $entityIds ) ) {
 			return array();
 		}
 
-		$dbr = $this->dbLoadBalancer->getConnection( DB_SLAVE );
+		$dbr = $this->dbLoadBalancer->getConnection( $this->dbMode );
 
 		// NOTE: non-Item ids are ignored, since only items can be subscribed to
-		//       via sitelinks.
+		// via sitelinks.
 		$entityIds = $this->reIndexEntityIds( $entityIds );
 		$subscribedIds = $this->querySubscriptions( $dbr, $siteId, array_keys( $entityIds ) );
 
@@ -60,6 +67,74 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 		$this->dbLoadBalancer->reuseConnection( $dbr );
 
 		return $linkedEntityIds;
+	}
+
+	/**
+	 * @param EntityId[] $entityIds
+	 *
+	 * @return string[] Site IDs
+	 */
+	public function getSubscribers( array $entityIds ) {
+		if ( !empty( $entityIds ) ) {
+			$rows = $this->getSubscriberRows( $this->convertEntityIdsToStrings( $entityIds ) );
+
+			if ( $rows ) {
+				return $this->convertRowsToSiteIds( $rows );
+			}
+		}
+
+		return array();
+	}
+
+	/**
+	 * @param EntityId[] $entityIds
+	 *
+	 * @return string[]
+	 */
+	private function convertEntityIdsToStrings( array $entityIds ) {
+		return array_map(
+			function( $entityId ) {
+				return $entityId->getSerialization();
+			},
+			$entityIds
+		);
+	}
+
+	/**
+	 * @param string[] $entityIds
+	 *
+	 * @return ResultWrapper|bool
+	 */
+	private function getSubscriberRows( array $entityIds ) {
+		$db = $this->dbLoadBalancer->getConnection( $this->dbMode );
+
+		$rows = $db->select(
+			'wb_changes_subscription',
+			'cs_subscriber_id',
+			array(
+				'cs_entity_id' => $entityIds
+			),
+			__METHOD__
+		);
+
+		$this->dbLoadBalancer->reuseConnection( $db );
+
+		return $rows;
+	}
+
+	/**
+	 * @param ResultWrapper $rows
+	 *
+	 * @return string[]
+	 */
+	private function convertRowsToSiteIds( ResultWrapper $rows ) {
+		$siteIds = array();
+
+		foreach ( $rows as $row ) {
+			$siteIds[] = $row->cs_subscriber_id;
+		}
+
+		return $siteIds;
 	}
 
 	/**

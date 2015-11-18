@@ -80,6 +80,7 @@ use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
+use Wikibase\Repo\Notifications\ClientChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -93,6 +94,7 @@ use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
+use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
@@ -1055,6 +1057,13 @@ class WikibaseRepo {
 				$this->getStore()->getChangeStore()
 			);
 		}
+
+		$transmitters[] = new ClientChangeTransmitter(
+			new SqlSubscriptionLookup( wfGetLB(), DB_MASTER ),
+			$this->getStore()->getChangeLookup(),
+			$this->getEntityTitleLookup(),
+			$this->getEntityIdParser()
+		);
 
 		return $transmitters;
 	}
