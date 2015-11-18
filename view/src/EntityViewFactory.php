@@ -154,9 +154,8 @@ class EntityViewFactory {
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	 ) {
-
 		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
-		$statementGroupListView = $this->newStatementGroupListView(
+		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
 			$fallbackChain,
 			$labelDescriptionLookup,
@@ -182,7 +181,7 @@ class EntityViewFactory {
 				return new ItemView(
 					$this->templateFactory,
 					$entityTermsView,
-					$statementGroupListView,
+					$statementSectionsView,
 					$language,
 					$siteLinksView,
 					$this->siteLinkGroups
@@ -191,7 +190,7 @@ class EntityViewFactory {
 				return new PropertyView(
 					$this->templateFactory,
 					$entityTermsView,
-					$statementGroupListView,
+					$statementSectionsView,
 					$this->dataTypeFactory,
 					$language
 				);
@@ -206,9 +205,9 @@ class EntityViewFactory {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
-	 * @return StatementGroupListView
+	 * @return StatementSectionsView
 	 */
-	private function newStatementGroupListView(
+	private function newStatementSectionsView(
 		$languageCode,
 		LanguageFallbackChain $fallbackChain,
 		LabelDescriptionLookup $labelDescriptionLookup,
@@ -227,12 +226,14 @@ class EntityViewFactory {
 			$snakHtmlGenerator
 		);
 
-		return new StatementGroupListView(
+		$statementGroupListView = new StatementGroupListView(
 			$this->templateFactory,
 			$propertyIdFormatter,
 			$editSectionGenerator,
 			$claimHtmlGenerator
 		);
+
+		return new StatementSectionsView( $this->templateFactory, $statementGroupListView );
 	}
 
 	/**

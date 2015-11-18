@@ -35,24 +35,20 @@ class PropertyView extends EntityView {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
-	 * @param StatementGroupListView $statementGroupListView
+	 * @param StatementSectionsView $statementSectionsView
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param Language $language
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
-		StatementGroupListView $statementGroupListView,
+		StatementSectionsView $statementSectionsView,
 		DataTypeFactory $dataTypeFactory,
 		Language $language
 	) {
 		parent::__construct( $templateFactory, $entityTermsView, $language );
 
-		// TODO: Inject.
-		$this->statementSectionsView = new StatementSectionsView(
-			$this->templateFactory,
-			$statementGroupListView
-		);
+		$this->statementSectionsView = $statementSectionsView;
 		$this->dataTypeFactory = $dataTypeFactory;
 	}
 

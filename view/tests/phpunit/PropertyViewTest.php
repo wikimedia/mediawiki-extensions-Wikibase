@@ -78,7 +78,7 @@ class PropertyViewTest extends EntityViewTest {
 			$this->getMockBuilder( 'Wikibase\View\EntityTermsView' )
 				->disableOriginalConstructor()
 				->getMock(),
-			$this->getMockBuilder( 'Wikibase\View\StatementGroupListView' )
+			$this->getMockBuilder( 'Wikibase\View\StatementSectionsView' )
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getDataTypeFactory(),
