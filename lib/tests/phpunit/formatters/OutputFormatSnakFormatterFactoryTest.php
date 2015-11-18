@@ -7,6 +7,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use Language;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -32,9 +33,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		$self = $this;
 		$callbacks = array(
 			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $format === SnakFormatter::FORMAT_PLAIN
-					? $self->makeMockValueFormatter()
-					: null;
+				return $self->makeMockValueFormatter( $format );
 			},
 		);
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
@@ -57,14 +56,14 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function makeMockValueFormatter() {
+	public function makeMockValueFormatter( $format ) {
 		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
 
 		$mock->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback(
-				function( DataValue $value ) {
-					return strval( $value->getValue() );
+				function( DataValue $value ) use ( $format ) {
+					return strval( $value->getValue() ) . ' (' . $format . ')';
 				}
 			) );
 
@@ -76,12 +75,12 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 			'plain' => array(
 				SnakFormatter::FORMAT_PLAIN,
 				new StringValue( 'foo' ),
-				'foo',
+				'foo (text/plain)',
 			),
 			'html' => array(
 				SnakFormatter::FORMAT_HTML,
-				new StringValue( 'b<a>r' ),
-				'b&lt;a&gt;r',
+				new StringValue( 'foo' ),
+				'foo (text/html)',
 			),
 		);
 	}
@@ -135,6 +134,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		$callbacks = array(
 			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
 				$self->assertSame( 'de', $options->getOption( ValueFormatter::OPT_LANG ) );
+				return new StringFormatter( $options );
 			},
 		);
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
