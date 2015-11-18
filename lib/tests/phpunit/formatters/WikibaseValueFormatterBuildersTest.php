@@ -118,18 +118,18 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param string $type
+	 * @param string $functionName The factory function to call
 	 * @param string $format
 	 * @param FormatterOptions $options
 	 *
 	 * @return mixed
 	 */
-	private function getFormatterForDataType( $type, $format, $options ) {
+	private function callFactoryFunction( $functionName, $format, $options ) {
 		$builders = $this->newWikibaseValueFormatterBuilders(
 			$this->getTitleLookup()
 		);
 
-		$factory = array( $builders, 'new' . $type . 'Formatter' );
+		$factory = array( $builders, $functionName );
 		$formatter = call_user_func( $factory, $format, $options );
 
 		$this->assertInstanceOf( 'ValueFormatters\ValueFormatter', $formatter );
@@ -137,16 +137,76 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
+	public function testFormatterForValueType_formats() {
+		$formats = array(
+			SnakFormatter::FORMAT_PLAIN,
+			SnakFormatter::FORMAT_WIKI,
+			SnakFormatter::FORMAT_HTML,
+			SnakFormatter::FORMAT_HTML_DIFF,
+			SnakFormatter::FORMAT_HTML_WIDGET
+		);
+
+		$valueTypes = array(
+			'string',
+			'wikibase-entityid',
+			'monolingualtext',
+			'time',
+			'globecoordinate',
+			'quantity',
+		);
+
+		$options = new FormatterOptions();
+
+		foreach ( $formats as $format ) {
+			foreach ( $valueTypes as $type ) {
+				// getFormatterForValueType asserts that a valid formatter is returned
+				$this->getFormatterForValueType( $type, $format, $options );
+			}
+		}
+	}
+
+	public function testNewFormatter_formats() {
+		$formats = array(
+			SnakFormatter::FORMAT_PLAIN,
+			SnakFormatter::FORMAT_WIKI,
+			SnakFormatter::FORMAT_HTML,
+			SnakFormatter::FORMAT_HTML_DIFF,
+			SnakFormatter::FORMAT_HTML_WIDGET
+		);
+
+		// Note: these are not actual data-type IDs,
+		$functionNames = array(
+			'newStringFormatter',
+			'newUrlFormatter',
+			'newCommonsMediaFormatter',
+			'newEntityIdFormatter',
+			'newMonolingualFormatter',
+			'newTimeFormatter',
+			'newGlobeCoordinateFormatter',
+			'newQuantityFormatter',
+		);
+
+		$options = new FormatterOptions();
+
+		foreach ( $formats as $format ) {
+			foreach ( $functionNames as $function ) {
+				// callFactoryFunction asserts that a valid formatter is returned
+				$this->callFactoryFunction( $function, $format, $options );
+			}
+		}
+	}
+
 	 * @dataProvider provideNewFormatter
 	 */
 	public function testNewFormatter(
-		$type,
+		$formatterName,
 		$format,
 		FormatterOptions $options,
 		DataValue $value,
 		$expected
 	) {
-		$formatter = $this->getFormatterForDataType( $type, $format, $options );
+		$functionName = 'new' . ucfirst( $formatterName ) . 'Formatter';
+		$formatter = $this->callFactoryFunction( $functionName, $format, $options );
 
 		$text = $formatter->format( $value );
 		$this->assertRegExp( $expected, $text );
@@ -154,6 +214,38 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 	public function provideNewFormatter() {
 		return array(
+			// String
+			'plain string' => array(
+				'String',
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions(),
+				new StringValue( 'foo bar' ),
+				'@^foo bar$@'
+			),
+			'wikitext string' => array(
+				'String',
+				SnakFormatter::FORMAT_WIKI,
+				$this->newFormatterOptions(),
+				new StringValue( 'foo[bar]' ),
+				'@^foo&#91;bar&#93;$@'
+			),
+			'html string' => array(
+				'String',
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new StringValue( 'foo<bar>' ),
+				'@^foo&lt;bar&gt;$@'
+			),
+
+			// UnDeserializableValue
+			'plain bad value' => array(
+				'UnDeserializableValue',
+				SnakFormatter::FORMAT_PLAIN,
+				$this->newFormatterOptions(),
+				new UnDeserializableValue( 'foo bar', 'xyzzy', 'broken' ),
+				'@invalid@'
+			),
+
 			// Url
 			'plain url' => array(
 				'Url',
@@ -308,19 +400,47 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
+			'wikitext escape' => array(
+				SnakFormatter::FORMAT_WIKI,
+				$this->newFormatterOptions(),
+				new StringValue( '[[foo]]' ),
+				'@^&#91;&#91;foo&#93;&#93;$@'
+			),
+
+			'html escape' => array(
+				SnakFormatter::FORMAT_HTML,
+				$this->newFormatterOptions(),
+				new StringValue( '<foo>' ),
+				'@^&lt;foo&gt;$@'
+			),
+
+			'html details escape' => array(
+				SnakFormatter::FORMAT_HTML_DIFF,
+				$this->newFormatterOptions(),
+				new StringValue( '<foo>' ),
+				'@^&lt;foo&gt;$@'
+			),
+
+			'html widget escape' => array(
+				SnakFormatter::FORMAT_HTML_WIDGET,
+				$this->newFormatterOptions(),
+				new StringValue( '<foo>' ),
+				'@^&lt;foo&gt;$@'
+			),
+
 	 * In case WikibaseValueFormatterBuilders doesn't have a EntityTitleLookup it returns
 	 * a formatter which doesn't link the entity id.
 	 *
 	 * @dataProvider provideNewFormatter_noTitleLookup
 	 */
 	public function testNewFormatter_noTitleLookup(
-		$name,
+		$functionName,
 		$format,
 		FormatterOptions $options,
 		DataValue $value,
 		$expected
 	) {
-		$formatter = $this->getFormatterForDataType( $name, $format, $options );
+		$formatter = $this->callFactoryFunction( $functionName, $format, $options );
 
 		$text = $formatter->format( $value );
 		$this->assertRegExp( $expected, $text );
@@ -329,14 +449,14 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	public function provideNewFormatter_noTitleLookup() {
 		return array(
 			'plain item label' => array(
-				'EntityId',
+				'newEntityIdFormatter',
 				SnakFormatter::FORMAT_PLAIN,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@^Label for Q5$@'
 			),
 			'item link' => array(
-				'EntityId',
+				'newEntityIdFormatter',
 				SnakFormatter::FORMAT_HTML,
 				$this->newFormatterOptions(),
 				new EntityIdValue( new ItemId( 'Q5' ) ),
@@ -349,12 +469,12 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * @dataProvider provideNewFormatter_LabelDescriptionLookupOption
 	 */
 	public function testNewFormatter_LabelDescriptionLookupOption(
-		$name,
+		$functionName,
 		FormatterOptions $options,
 		DataValue $value,
 		$expected
 	) {
-		$formatter = $this->getFormatterForDataType( $name, SnakFormatter::FORMAT_HTML, $options );
+		$formatter = $this->callFactoryFunction( $functionName, SnakFormatter::FORMAT_HTML, $options );
 
 		$text = $formatter->format( $value );
 		$this->assertRegExp( $expected, $text );
@@ -371,7 +491,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 		return array(
 			'language option' => array(
-				'EntityId',
+				'newEntityIdFormatter',
 				new FormatterOptions( array(
 					ValueFormatter::OPT_LANG => 'de',
 				) ),
@@ -379,7 +499,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'@>Name für Q5<@'
 			),
 			'fallback option' => array(
-				'EntityId',
+				'newEntityIdFormatter',
 				new FormatterOptions( array(
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $fallbackChain,
 				) ),
@@ -387,7 +507,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				'@>Name für Q5<@'
 			),
 			'LabelDescriptionLookup option' => array(
-				'EntityId',
+				'newEntityIdFormatter',
 				new FormatterOptions( array(
 					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup,
 				) ),

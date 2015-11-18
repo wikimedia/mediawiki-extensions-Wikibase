@@ -41,7 +41,8 @@ return call_user_func( function() {
 	return array(
 		'VT:bad' => array(
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return $format === SnakFormatter::FORMAT_PLAIN ? new UnDeserializableValueFormatter( $options ) : null;
+				$factory = WikibaseClient::getDefaultFormatterBuilders();
+				return $factory->newUnDeserializableValueFormatter( $format, $options );
 			}
 		),
 		'VT:globecoordinate' => array(
@@ -64,7 +65,8 @@ return call_user_func( function() {
 		),
 		'VT:string' => array(
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return $format === SnakFormatter::FORMAT_PLAIN ? new StringFormatter( $options ) : null;
+				$factory = WikibaseClient::getDefaultFormatterBuilders();
+				return $factory->newStringFormatter( $format, $options );
 			},
 		),
 		'PT:url' => array(

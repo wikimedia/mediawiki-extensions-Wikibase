@@ -82,7 +82,8 @@ return call_user_func( function() {
 	return array(
 		'VT:bad' => array(
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return $format === SnakFormatter::FORMAT_PLAIN ? new UnDeserializableValueFormatter( $options ) : null;
+				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				return $factory->newUnDeserializableValueFormatter( $format, $options );
 			}
 		),
 		'PT:commonsMedia' => array(
@@ -182,7 +183,8 @@ return call_user_func( function() {
 			},
 			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				return $format === SnakFormatter::FORMAT_PLAIN ? new StringFormatter( $options ) : null;
+				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				return $factory->newStringFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
 				$mode,
