@@ -16,9 +16,14 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\View\ClaimHtmlGenerator;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\StatementGroupListView
+ *
+ * @uses Wikibase\View\Template\Template
+ * @uses Wikibase\View\Template\TemplateFactory
+ * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
  * @group WikibaseView
@@ -37,12 +42,6 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 		) );
 	}
 
-	/**
-	 * @uses Wikibase\View\EditSectionGenerator
-	 * @uses Wikibase\View\Template\Template
-	 * @uses Wikibase\View\Template\TemplateFactory
-	 * @uses Wikibase\View\Template\TemplateRegistry
-	 */
 	public function testGetHtml() {
 		$propertyId = new PropertyId( 'P77' );
 		$statements = $this->makeStatements( $propertyId );
@@ -53,10 +52,12 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 
 		$html = $statementGroupListView->getHtml( $statements );
 
-		$this->assertContains( '<ID>', $html );
+		$this->assertContains( 'id="P77', $html );
+		$this->assertContains( '<PROPERTY><ID></PROPERTY>', $html );
 		foreach ( $statements as $statement ) {
 			$this->assertContains( $statement->getGuid(), $html );
 		}
+		$this->assertContains( '<TOOLBAR></TOOLBAR>', $html );
 	}
 
 	/**
@@ -117,7 +118,12 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 * @return StatementGroupListView
 	 */
 	private function newStatementGroupListView( EntityIdFormatter $propertyIdFormatter ) {
-		$templateFactory = TemplateFactory::getDefaultInstance();
+		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
+			'wikibase-statementgrouplistview' => '<SGLIST>$1</SGLIST>',
+			'wikibase-listview' => '<LIST>$1</LIST>',
+			'wikibase-statementgroupview' => '<SGROUP id="$3"><PROPERTY>$1</PROPERTY>$2</SGROUP>',
+			'wikibase-statementlistview' => '<SLIST>$1<TOOLBAR>$2</TOOLBAR></SLIST>',
+		) ) );
 
 		return new StatementGroupListView(
 			$templateFactory,
@@ -138,7 +144,7 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 		$claimHtmlGenerator->expects( $this->any() )
 			->method( 'getHtmlForClaim' )
 			->will( $this->returnCallback( function( Statement $statement, $editSectionHtml = null ) {
-				return $statement->getGuid();
+				return $statement->getGuid() . "\n";
 			} ) );
 
 		return $claimHtmlGenerator;

@@ -21,9 +21,9 @@ use Wikibase\View\Template\TemplateFactory;
 class ItemView extends EntityView {
 
 	/**
-	 * @var StatementGroupListView
+	 * @var StatementSectionsView
 	 */
-	private $statementGroupListView;
+	private $statementSectionsView;
 
 	/**
 	 * @var string[]
@@ -55,7 +55,11 @@ class ItemView extends EntityView {
 	) {
 		parent::__construct( $templateFactory, $entityTermsView, $language );
 
-		$this->statementGroupListView = $statementGroupListView;
+		// TODO: Inject.
+		$this->statementSectionsView = new StatementSectionsView(
+			$this->templateFactory,
+			$statementGroupListView
+		);
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->siteLinksView = $siteLinksView;
 	}
@@ -71,9 +75,10 @@ class ItemView extends EntityView {
 		}
 
 		$html = parent::getMainHtml( $entityRevision );
-		$html .= $this->statementGroupListView->getHtml(
-			$item->getStatements()->toArray()
-		);
+		// TODO: Group statements into sections.
+		$html .= $this->statementSectionsView->getHtml( array(
+			'statements' => $item->getStatements(),
+		) );
 
 		return $html;
 	}

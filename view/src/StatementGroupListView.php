@@ -71,33 +71,10 @@ class StatementGroupListView {
 			$statementsHtml .= $this->getHtmlForStatementGroupView( $statements );
 		}
 
-		$html = $this->templateFactory->render(
+		return $this->templateFactory->render(
 			'wikibase-statementgrouplistview',
 			$this->templateFactory->render( 'wikibase-listview', $statementsHtml )
 		);
-
-		// TODO: Add link to SpecialPage that allows adding a new statement.
-		$sectionHeading = $this->getHtmlForSectionHeading( 'wikibase-statements' );
-
-		return $sectionHeading . $html;
-	}
-
-	/**
-	 * Returns the HTML for the heading of the statements section
-	 *
-	 * @param string $heading message key of the heading
-	 *
-	 * @return string
-	 */
-	private function getHtmlForSectionHeading( $heading ) {
-		$html = $this->templateFactory->render(
-			'wb-section-heading',
-			wfMessage( $heading )->escaped(),
-			'claims', // ID - TODO: should not be added if output page is not the entity's page
-			$heading
-		);
-
-		return $html;
 	}
 
 	/**
