@@ -64,17 +64,39 @@ class DispatchChanges extends Maintenance {
 	}
 
 	/**
+	 * @param SettingsArray $settings
+	 *
+	 * @return string[] A mapping of client wiki site IDs to logical database names.
+	 */
+	private function getClientWikis( SettingsArray $settings ) {
+		$clientWikis = $settings->getSetting( 'localClientDatabases' );
+
+		// make sure we have a mapping from siteId to database name in clientWikis:
+		foreach ( $clientWikis as $siteID => $dbName ) {
+			if ( is_int( $siteID ) ) {
+				unset( $clientWikis[$siteID] );
+				$clientWikis[$dbName] = $dbName;
+			}
+		}
+
+		return $clientWikis;
+	}
+
+	/**
 	 * Initializes members from command line options and configuration settings.
 	 *
+	 * @param string[] $clientWikis A mapping of client wiki site IDs to logical database names.
 	 * @param ChangeLookup $changeLookup
 	 * @param SettingsArray $settings
 	 *
 	 * @return ChangeDispatcher
-	 * @throws MWException
 	 */
-	private function newChangeDispatcher( ChangeLookup $changeLookup, SettingsArray $settings ) {
+	private function newChangeDispatcher(
+		array $clientWikis,
+		ChangeLookup $changeLookup,
+		SettingsArray $settings
+	) {
 		$repoDB = $settings->getSetting( 'changesDatabase' );
-		$clientWikis = $settings->getSetting( 'localClientDatabases' );
 		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
 		$batchCacheFactor = $settings->getSetting( 'dispatchBatchCacheFactor' );
 		$subscriptionLookupMode = $settings->getSetting( 'subscriptionLookupMode' );
@@ -90,19 +112,6 @@ class DispatchChanges extends Maintenance {
 		$cacheChunkSize = $batchSize * $batchChunkFactor;
 		$cacheSize = $cacheChunkSize * $batchCacheFactor;
 		$changesCache = new ChunkCache( $changeLookup, $cacheChunkSize, $cacheSize );
-
-		// make sure we have a mapping from siteId to database name in clientWikis:
-		foreach ( $clientWikis as $siteID => $dbName ) {
-			if ( is_int( $siteID ) ) {
-				unset( $clientWikis[$siteID] );
-				$clientWikis[$dbName] = $dbName;
-			}
-		}
-
-		if ( empty( $clientWikis ) ) {
-			throw new MWException( "No client wikis configured! Please set \$wgWBRepoSettings['localClientDatabases']." );
-		}
-
 		$reporter = new ObservableMessageReporter();
 
 		$self = $this; // PHP 5.3...
@@ -112,7 +121,7 @@ class DispatchChanges extends Maintenance {
 			}
 		);
 
-		$coordinator = new SqlChangeDispatchCoordinator( $repoDB, $clientWikis );
+		$coordinator = new SqlChangeDispatchCoordinator( $repoDB );
 		$coordinator->setMessageReporter( $reporter );
 		$coordinator->setBatchSize( $batchSize );
 		$coordinator->setDispatchInterval( $dispatchInterval );
@@ -158,12 +167,19 @@ class DispatchChanges extends Maintenance {
 		$delay = (int)$this->getOption( 'idle-delay', 10 );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$clientWikis = $this->getClientWikis( $wikibaseRepo->getSettings() );
+
+		if ( empty( $clientWikis ) ) {
+			throw new MWException( "No client wikis configured! Please set \$wgWBRepoSettings['localClientDatabases']." );
+		}
+
 		$dispatcher = $this->newChangeDispatcher(
+			$clientWikis,
 			$wikibaseRepo->getStore()->getChangeLookup(),
 			$wikibaseRepo->getSettings()
 		);
 
-		$dispatcher->getDispatchCoordinator()->initState();
+		$dispatcher->getDispatchCoordinator()->initState( $clientWikis );
 
 		$passes = $maxPasses === PHP_INT_MAX ? "unlimited" : $maxPasses;
 		$time = $maxTime === PHP_INT_MAX ? "unlimited" : $maxTime;
