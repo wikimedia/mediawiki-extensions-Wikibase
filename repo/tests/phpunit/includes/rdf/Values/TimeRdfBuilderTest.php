@@ -9,6 +9,7 @@ use Wikibase\Rdf\JulianDateTimeValueCleaner;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
 use Wikibase\Rdf\Values\TimeRdfBuilder;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -23,6 +24,17 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @author Daniel Kinzler
  */
 class TimeRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	public function provideAddValue() {
 		$value = new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_GREGORIAN );
@@ -138,8 +150,7 @@ class TimeRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$snak
 		);
 
-		$triples = trim( $snakWriter->drain() );
-		$this->assertEquals( join( "\n", $expected ), $triples );
+		$this->helper->assertNTriplesEquals( $expected, $snakWriter->drain() );
 	}
 
 }
