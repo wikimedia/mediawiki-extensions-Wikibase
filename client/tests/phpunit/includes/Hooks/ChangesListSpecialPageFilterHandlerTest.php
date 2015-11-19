@@ -78,12 +78,13 @@ class ChangesListSpecialPageFilterHandlerTest extends \PHPUnit_Framework_TestCas
 	}
 
 	/**
-	 * @dataProvider filterAddedWhenNotUsingEnhancedChangesProvider
+	 * @dataProvider filter_withoutShowWikibaseEditsByDefaultPreference
 	 */
-	public function testFilterAddedWhenNotUsingEnhancedChanges_notShowWikibaseEditsByDefault(
+	public function testFilter_withoutShowWikibaseEditsByDefaultPreference(
 		array $requestParams,
 		array $userPreferences,
 		$expectedFilterName,
+		$expectedToggleDefault,
 		$specialPageName
 	) {
 		$hookHandler = new ChangesListSpecialPageFilterHandler(
@@ -99,46 +100,72 @@ class ChangesListSpecialPageFilterHandlerTest extends \PHPUnit_Framework_TestCas
 		$expected = array(
 			$expectedFilterName => array(
 				'msg' => 'wikibase-rc-hide-wikidata',
-				'default' => true
+				'default' => $expectedToggleDefault
 			)
 		);
 
 		$this->assertSame( $expected, $filters );
 	}
 
-	public function filterAddedWhenNotUsingEnhancedChangesProvider() {
+	public function filter_withoutShowWikibaseEditsByDefaultPreference() {
 		return array(
 			array(
 				array(),
 				array( 'usenewrc' => 0 ),
 				'hideWikibase',
+				true,
 				'Watchlist'
 			),
 			array(
 				array( 'enhanced' => 0 ),
 				array( 'usenewrc' => 1 ),
 				'hidewikidata',
+				true,
 				'RecentChanges'
 			),
 			array(
 				array(),
 				array( 'usenewrc' => 0 ),
 				'hidewikidata',
+				true,
 				'RecentChangesLinked'
+			),
+			array(
+				array( 'action' => 'submit', 'hideWikibase' => 0 ),
+				array( 'usenewrc' => 0 ),
+				'hideWikibase',
+				false,
+				'Watchlist'
+			),
+			array(
+				array( 'action' => 'submit', 'hideWikibase' => 1 ),
+				array( 'usenewrc' => 0 ),
+				'hideWikibase',
+				true,
+				'Watchlist'
+			),
+			array(
+				array( 'action' => 'submit' ),
+				array( 'usenewrc' => 0 ),
+				'hideWikibase',
+				false,
+				'Watchlist'
 			)
 		);
 	}
 
 	/**
-	 * @dataProvider filterAddedInNonEnhanced_withPrefToShowWikibaseEditsByDefaultProvider
+	 * @dataProvider filter_withShowWikibaseEditsByDefaultPreference
 	 */
-	public function testFilterAddedInNonEnhanced_withPrefToShowWikibaseEditsByDefault(
+	public function testFilter_withShowWikibaseEditsByDefaultPreference(
+		array $requestParams,
 		array $userPreferences,
 		$expectedFilterName,
+		$expectedToggleDefault,
 		$specialPageName
 	) {
 		$hookHandler = new ChangesListSpecialPageFilterHandler(
-			$this->getRequest( array() ),
+			$this->getRequest( $requestParams ),
 			$this->getUser( $userPreferences ),
 			$specialPageName,
 			true
@@ -150,24 +177,49 @@ class ChangesListSpecialPageFilterHandlerTest extends \PHPUnit_Framework_TestCas
 		$expected = array(
 			$expectedFilterName => array(
 				'msg' => 'wikibase-rc-hide-wikidata',
-				'default' => false
+				'default' => $expectedToggleDefault
 			)
 		);
 
 		$this->assertSame( $expected, $filters );
 	}
 
-	public function filterAddedInNonEnhanced_withPrefToShowWikibaseEditsByDefaultProvider() {
+	public function filter_withShowWikibaseEditsByDefaultPreference() {
 		return array(
 			array(
+				array(),
 				array( 'wlshowwikibase' => 1, 'usenewrc' => 0 ),
 				'hideWikibase',
+				false,
 				'Watchlist'
 			),
 			array(
+				array( 'enhanced' => 0 ),
+				array( 'rcshowwikidata' => 1, 'usenewrc' => 1 ),
+				'hidewikidata',
+				false,
+				'RecentChanges'
+			),
+			array(
+				array(),
 				array( 'rcshowwikidata' => 1, 'usenewrc' => 0 ),
 				'hidewikidata',
-				'RecentChanges'
+				false,
+				'RecentChangesLinked'
+			),
+			array(
+				array( 'action' => 'submit', 'hideWikibase' => 0 ),
+				array( 'wlshowwikibase' => 1, 'usenewrc' => 0 ),
+				'hideWikibase',
+				false,
+				'Watchlist'
+			),
+			array(
+				array( 'action' => 'submit' ),
+				array( 'wlshowwikibase' => 1, 'usenewrc' => 0 ),
+				'hideWikibase',
+				false,
+				'Watchlist'
 			)
 		);
 	}

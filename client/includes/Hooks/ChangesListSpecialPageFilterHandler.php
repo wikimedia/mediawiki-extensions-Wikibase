@@ -96,10 +96,12 @@ class ChangesListSpecialPageFilterHandler {
 	 */
 	public function addFilterIfEnabled( array &$filters ) {
 		if ( $this->shouldAddFilter() ) {
-			// if preference enabled, then Wikibase edits are included by default and
-			// the toggle default value needs to be the inverse to hide them, and vice versa.
-			$toggleDefault = !$this->hasShowWikibaseEditsPrefEnabled();
-			$this->addFilter( $filters, $toggleDefault );
+			$filterName = $this->getFilterName();
+
+			$filters[$filterName] = array(
+				'msg' => 'wikibase-rc-hide-wikidata',
+				'default' => $this->getToggleDefault()
+			);
 		}
 	}
 
@@ -111,16 +113,16 @@ class ChangesListSpecialPageFilterHandler {
 	}
 
 	/**
-	 * @param array &$filters
-	 * @param bool $toggleDefault
+	 * @return bool
 	 */
-	private function addFilter( array &$filters, $toggleDefault ) {
-		$filterName = $this->getFilterName();
+	private function getToggleDefault() {
+		if ( $this->request->getVal( 'action' ) === 'submit' ) {
+			return $this->request->getBool( $this->getFilterName() );
+		}
 
-		$filters[$filterName] = array(
-			'msg' => 'wikibase-rc-hide-wikidata',
-			'default' => $toggleDefault
-		);
+		// if preference enabled, then Wikibase edits are included by default and
+		// the toggle default value needs to be the inverse to hide them, and vice versa.
+		return !$this->hasShowWikibaseEditsPrefEnabled();
 	}
 
 	/**
