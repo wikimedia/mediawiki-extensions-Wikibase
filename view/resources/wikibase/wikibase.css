@@ -210,7 +210,7 @@ div.wikibase-statementview-mainsnak .wikibase-snakview-property-container {
 }
 
 div.wikibase-snakview {
-	padding: 10px;
+	padding: 10px 5px 5px 10px;
 }
 
 div.wikibase-snakview .wikibase-snakview-value-container {
@@ -226,15 +226,11 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementlistview > .wikibase-toolbar-wrapper {
-	background-color: #F8F8F8;
+	background-color: #E8E8E8;
 	display: block;
 	float: left;
 	position: relative;
 	width: 100%;
-}
-
-.wikibase-statementlistview > .wikibase-toolbar-wrapper {
-	border-top: 1px dashed #AAA;
 }
 
 .wikibase-statementlistview.wb-new > .wikibase-toolbar-wrapper {
@@ -366,12 +362,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	padding-left: 17em;
 }
 
-.wikibase-statementview-qualifiers .wikibase-snaklistview:first-child {
-	border-top: 1px dotted #D8D8D8;
-}
-.wikibase-statementview-qualifiers .wikibase-snaklistview {
-	border-bottom: 1px dotted #D8D8D8;
-}
+
 .wb-edit .wikibase-statementview-qualifiers .wikibase-snaklistview {
 	border-color: #C0DAE5;
 }
@@ -417,8 +408,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 .wikibase-statementview-qualifiers .wikibase-snaklistview .wikibase-snaklistview-listview .wikibase-snakview {
 	position: relative;
 	line-height: 1.2;
-	margin: .2em 0 .4em;
-	min-height: 1.8em;
+	min-height: 1.5em;
 	padding-top: 4px;
 	padding-bottom: 2px;
 }
@@ -449,11 +439,11 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 /* Container for a single statement */
 .wikibase-statementview {
-	border-bottom: 1px dashed #AAA;
+	border-bottom: 1px solid #E8E8E8;
 	float: left;
 	width: 100%;
 	position: relative;
-	padding-bottom: 1em;
+	padding-bottom: 0.5em;
 }
 
 .wikibase-statementview:last-child {
@@ -495,14 +485,14 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	position: relative;
 	background: #F8F8F8;
 	overflow: hidden;
-	margin-bottom: 10px;
-	min-height: 3.2em;
+	margin-bottom: 5px;
 }
 
 .wikibase-referenceview .wikibase-referenceview-heading {
 	min-height: 1.5em;
 	padding: 5px;
 	background-color: #F0F0F0;
+	display: none;
 }
 
 .wikibase-referenceview .wikibase-referenceview-heading .wikibase-toolbar-container {
@@ -515,6 +505,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-referenceview.wb-edit > .wikibase-referenceview-heading {
 	background-color: #C0DAE5;
+	display: block;
 }
 
 .wikibase-referenceview.wb-error {
@@ -525,9 +516,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	background-color: #E5C8B5;
 }
 
-.wikibase-referenceview .wikibase-snaklistview {
-	border-top: 1px dotted #D8D8D8;
-}
+
 .wikibase-referenceview .wikibase-snaklistview:nth-child(2) {
 	border-top: none;
 }
