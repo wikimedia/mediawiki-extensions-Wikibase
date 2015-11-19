@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Language;
 use MediaWikiTestCase;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -58,6 +59,8 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 
 	public function statementListsProvider() {
 		$empty = new StatementList();
+		$statements = new StatementList();
+		$statements->addNewStatement( new PropertyNoValueSnak( 1 ) );
 
 		return array(
 			array(
@@ -73,9 +76,14 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 				array( 'statements' => $empty, 'identifiers' => $empty ),
 				'<HEADING id="claims" class="wikibase-statements">'
 				. '(wikibase-statementsection-statements)</HEADING><LIST>'
-				. '<HEADING id="identifiers" class="wikibase-statements'
-				. ' wikibase-statements-identifiers">'
-				. '(wikibase-statementsection-identifiers)</HEADING><LIST>'
+			),
+			array(
+				array( 'statements' => $empty, 'P1' => $statements ),
+				'<HEADING id="claims" class="wikibase-statements">'
+				. '(wikibase-statementsection-statements)</HEADING><LIST>'
+				. '<HEADING id="P1" class="wikibase-statements'
+				. ' wikibase-statements-P1">'
+				. '(wikibase-statementsection-p1)</HEADING><LIST>'
 			),
 		);
 	}

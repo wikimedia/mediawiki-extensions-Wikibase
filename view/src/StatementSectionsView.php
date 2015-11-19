@@ -48,6 +48,10 @@ class StatementSectionsView {
 				);
 			}
 
+			if ( $key !== 'statements' && $statements->isEmpty() ) {
+				continue;
+			}
+
 			$html .= $this->getHtmlForSectionHeading( $key );
 			$html .= $this->statementListView->getHtml( $statements->toArray() );
 		}
@@ -66,7 +70,7 @@ class StatementSectionsView {
 		 * wikibase-statementsection-statements
 		 * wikibase-statementsection-identifiers
 		 */
-		$msg = wfMessage( 'wikibase-statementsection-' . $key );
+		$msg = wfMessage( 'wikibase-statementsection-' . strtolower( $key ) );
 		$className = 'wikibase-statements';
 
 		if ( $key === 'statements' ) {
@@ -80,7 +84,6 @@ class StatementSectionsView {
 		return $this->templateFactory->render(
 			'wb-section-heading',
 			$msg->escaped(),
-			// TODO: ID should not be added if output page is not the entity's page.
 			$id,
 			$className
 		);
