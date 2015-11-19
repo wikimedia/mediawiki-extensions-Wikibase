@@ -21,18 +21,25 @@ class TemplateRegistryTest extends \MediaWikiTestCase {
 	}
 
 	public function testRemovesTabs() {
-		$registry = new TemplateRegistry( array( 'known' => "no\ttabs" ) );
-		$this->assertSame( 'notabs', $registry->getTemplate( 'known' ) );
+		$registry = new TemplateRegistry( array( 'key' => "no\ttabs" ) );
+		$this->assertSame( 'notabs', $registry->getTemplate( 'key' ) );
+	}
+
+	public function testRemovesComments() {
+		$registry = new TemplateRegistry( array(
+			'key' => "no<!--[if IE]>IE<![endif]-->comments<!-- <div>\n</div> -->",
+		) );
+		$this->assertSame( 'nocomments', $registry->getTemplate( 'key' ) );
 	}
 
 	public function testGetTemplates() {
-		$registry = new TemplateRegistry( array( 'known' => 'html' ) );
-		$this->assertSame( array( 'known' => 'html' ), $registry->getTemplates() );
+		$registry = new TemplateRegistry( array( 'key' => 'html' ) );
+		$this->assertSame( array( 'key' => 'html' ), $registry->getTemplates() );
 	}
 
 	public function testGetKnownTemplate() {
-		$registry = new TemplateRegistry( array( 'known' => 'html' ) );
-		$this->assertSame( 'html', $registry->getTemplate( 'known' ) );
+		$registry = new TemplateRegistry( array( 'key' => 'html' ) );
+		$this->assertSame( 'html', $registry->getTemplate( 'key' ) );
 	}
 
 	public function testGetUnknownTemplate() {
