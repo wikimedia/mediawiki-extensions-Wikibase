@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_234dfdc7",
+        "filename": "repo/includes/rdf/Values/ObjectUriRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "hey, I added the strval because you complained that there is no guarantee that this is a string ;)",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a3d00dcd",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "No, this is not the same thing. The other code produces far superior output in the case of failure.\n\nI\u0027m all for using normalizeData() here instead of sort(). But the logic of using $extra and $missing arrays should be kept. They make it a *lot* easier to understand failures. Add a line in the middle of the expected data to trigger a failure, and compare the output with the old and the new code.",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_63d215d5",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "why trim only the right side?",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e3eda58a",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t trim every line any more.",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_83e4e9a4",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTestData.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t trim every line any more.",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a3e7ada6",
+        "filename": "repo/tests/phpunit/includes/rdf/SiteLinksRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "I guess the \"normalize triples\" and \"compare triples\" logic should go into a helper class, this is annoying...",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_63f9b54a",
+        "filename": "repo/tests/phpunit/includes/rdf/SnakRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "Would be nice to use the \"missing vs extra\" logic for all triple assertions. Perhaps in a new helper class.",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_03f8f944",
+        "filename": "repo/tests/phpunit/includes/rdf/TruthyStatementsRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "This no longer trims each line.",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c39181fc",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/CommonsMediaRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-19T13:33:50Z",
+      "side": 1,
+      "message": "again... why only trim the end of the string, and not the start, too?",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
