@@ -2,15 +2,17 @@
 
 namespace Wikibase\Test;
 
+use Language;
 use MediaWikiTestCase;
 use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\Template\TemplateRegistry;
 
 /**
  * @covers Wikibase\View\SiteLinksView
@@ -25,153 +27,129 @@ use Wikibase\View\Template\TemplateFactory;
  * @licence GNU GPL v2+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 class SiteLinksViewTest extends MediaWikiTestCase {
 
-	/**
-	 * @dataProvider getHtmlProvider
-	 */
-	public function testGetHtml( Item $item, array $groups, $expectedValue ) {
-		$siteLinksView = $this->getSiteLinksView();
+	protected function setUp() {
+		parent::setUp();
 
-		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups );
-		$this->assertInternalType( 'string', $value );
-		$this->assertTag( $expectedValue, $value, $value . ' did not match ' . var_export( $expectedValue, true ) );
+		$this->setMwGlobals( array(
+			'wgLang' => Language::factory( 'qqx' ),
+		) );
+	}
 
+	public function testNoGroups() {
+		$html = $this->newInstance()->getHtml( array(), null, array() );
+
+		$this->assertSame( '', $html );
+	}
+
+	public function testEmptyGroup() {
+		$html = $this->newInstance()->getHtml( array(), null, array( 'wikipedia' ) );
+
+		$this->assertSame(
+			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
+			. '<GROUP data="wikipedia" class="">'
+			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)</h3>'
+			. '</GROUP>',
+			$html
+		);
+	}
+
+	public function testWikipediaGroup() {
+		$siteLinks = array(
+			new SiteLink( 'enwiki', 'Title' ),
+		);
+		$html = $this->newInstance()->getHtml( $siteLinks, null, array( 'wikipedia' ) );
+
+		$this->assertSame(
+			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
+			. '<GROUP data="wikipedia" class="">'
+			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)</h3>'
+			. '<LINK id="enwiki" lang="en" title="&lt;LANG&gt;">'
+			. 'enwiki: <PAGE href="#enwiki" lang="en" dir="auto">Title</PAGE>'
+			. '</LINK>'
+			. '</GROUP>',
+			$html
+		);
+	}
+
+	public function testSpecialGroup() {
+		$siteLinks = array(
+			new SiteLink( 'specialwiki', 'Title' ),
+		);
+		$html = $this->newInstance()->getHtml( $siteLinks, null, array( 'special' ) );
+
+		$this->assertSame(
+			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
+			. '<GROUP data="special" class="">'
+			. '<h3 id="sitelinks-special">(wikibase-sitelinks-special)</h3>'
+			. '<LINK id="specialwiki" lang="en" title="(wikibase-sitelinks-sitename-specialwiki)">'
+			. 'specialwiki: <PAGE href="#specialwiki" lang="en" dir="auto">Title</PAGE>'
+			. '</LINK>'
+			. '</GROUP>',
+			$html
+		);
+	}
+
+	public function testTwoSiteLinks() {
+		$siteLinks = array(
+			new SiteLink( 'enwiki', 'Title' ),
+			new SiteLink( 'dewiki', 'Titel' ),
+		);
+		$html = $this->newInstance()->getHtml( $siteLinks, null, array( 'wikipedia' ) );
+
+		$this->assertSame( 2, substr_count( $html, '<LINK' ) );
+		$this->assertContains( 'mw-collapsible', $html );
+	}
+
+	public function testBadges() {
+		$featured = new ItemId( 'Q42' );
+		$good = new ItemId( 'Q12' );
+		$siteLinks = array(
+			new SiteLink( 'enwiki', 'Title', array( $featured ) ),
+			new SiteLink( 'dewiki', 'Titel', array( $featured, $good ) ),
+		);
+		$html = $this->newInstance()->getHtml( $siteLinks, null, array( 'wikipedia' ) );
+
+		$this->assertSame( 3, substr_count( $html, '<BADGE' ) );
 		$this->assertContains(
-			'<h2 class="wb-section-heading section-heading wikibase-sitelinks" dir="auto">'
-				. '<span class="mw-headline" id="sitelinks"',
-			$value,
-			'Html should contain section heading'
+			'<BADGE class="Q42 wb-badge-featuredarticle" id="Q42">Featured article</BADGE>',
+			$html
 		);
-	}
-
-	public function getHtmlProvider() {
-		$testCases = array();
-
-		$item = new Item( new ItemId( 'Q1' ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'test' );
-
-		$testCases[] = array(
-			$item,
-			array( 'wikipedia' ),
-			array(
-				'tag' => 'div',
-				'attributes' => array(
-					'data-wb-sitelinks-group' => 'wikipedia'
-				),
-				'descendant' => array(
-					'tag' => 'span',
-					'class' => 'wikibase-sitelinkview-link-enwiki',
-					'content' => 'test'
-				)
-			)
+		$this->assertContains(
+			'<BADGE class="Q12 wb-badge-goodarticle" id="Q12">Q12</BADGE>',
+			$html
 		);
-
-		$item = new Item( new ItemId( 'Q1' ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'specialwiki', 'test' );
-
-		$testCases[] = array(
-			$item,
-			array( 'special' ),
-			array(
-				'tag' => 'div',
-				'attributes' => array(
-					'data-wb-sitelinks-group' => 'special'
-				),
-			)
-		);
-
-		$item = new Item( new ItemId( 'Q1' ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'en test', array( new ItemId( 'Q42' ) ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'de test', array( new ItemId( 'Q42' ), new ItemId( 'Q12' ) ) );
-
-		$testCases[] = array(
-			$item,
-			array( 'wikipedia' ),
-			array(
-				'tag' => 'div',
-				'descendant' => array(
-					'tag' => 'span',
-					'attributes' => array(
-						'class' => 'wb-badge wb-badge-Q42 wb-badge-featuredarticle',
-						'title' => 'Featured article'
-					)
-				)
-			)
-		);
-
-		$testCases[] = array(
-			$item,
-			array( 'wikipedia' ),
-			array(
-				'tag' => 'div',
-				'descendant' => array(
-					'tag' => 'span',
-					'attributes' => array(
-						'class' => 'wb-badge wb-badge-Q12 wb-badge-goodarticle',
-						'title' => 'Q12'
-					)
-				)
-			)
-		);
-
-		return $testCases;
-	}
-
-	/**
-	 * @dataProvider getEmptyHtmlProvider
-	 */
-	public function testGetEmptyHtml( Item $item, array $groups ) {
-		$siteLinksView = $this->getSiteLinksView();
-
-		$value = $siteLinksView->getHtml( $item->getSiteLinks(), $item->getId(), $groups );
-		$this->assertInternalType( 'string', $value );
-		$this->assertEquals( '', $value );
-	}
-
-	public function getEmptyHtmlProvider() {
-		$item = new Item( new ItemId( 'Q1' ) );
-
-		$testCases = array();
-
-		$testCases[] = array(
-			$item,
-			array(),
-		);
-
-		$item = new Item( new ItemId( 'Q1' ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'test' );
-
-		$testCases[] = array(
-			$item,
-			array()
-		);
-
-		$newItem = new Item();
-
-		// item with no id, as happens with new items
-		$testCases[] = array(
-			$newItem,
-			array()
-		);
-
-		return $testCases;
 	}
 
 	/**
 	 * @return SiteLinksView
 	 */
-	private function getSiteLinksView() {
-		$templateFactory = TemplateFactory::getDefaultInstance();
-		$editSectionGenerator = $this->getMock( 'Wikibase\View\EditSectionGenerator' );
+	private function newInstance() {
+		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
+			'wb-section-heading' => '<h2 id="$2" class="$3">$1</h2>',
+			'wikibase-sitelinkgrouplistview' => '$1',
+			'wikibase-listview' => '$1',
+			'wikibase-sitelinkgroupview' => '<GROUP data="$5" class="$7"><h3 id="$1">$2$3</h3>$6$4</GROUP>',
+			'wikibase-sitelinklistview' => '$1',
+			'wikibase-sitelinkview' => '<LINK id="$1" lang="$2" title="$5">$4: $6</LINK>',
+			'wikibase-sitelinkview-pagename' => '<PAGE href="$1" lang="$4" dir="$5">$2</PAGE>$3',
+			'wikibase-badgeselector' => '$1',
+			'wb-badge' => '<BADGE class="$1" id="$3">$2</BADGE>',
+		) ) );
+
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup->expects( $this->any() )
+			->method( 'getName' )
+			->will( $this->returnValue( '<LANG>' ) );
 
 		return new SiteLinksView(
 			$templateFactory,
 			$this->newSiteList(),
-			$editSectionGenerator,
-			$this->getEntityIdFormatterMock(),
+			$this->getMock( 'Wikibase\View\EditSectionGenerator' ),
+			$this->newEntityIdFormatter(),
 			$languageNameLookup,
 			array(
 				'Q42' => 'wb-badge-featuredarticle',
@@ -185,28 +163,34 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 	 * @return SiteList
 	 */
 	private function newSiteList() {
-		$dummySite = new Site();
-		$dummySite->setGlobalId( 'enwiki' );
-		$dummySite->setGroup( 'wikipedia' );
+		$enWiki = new Site();
+		$enWiki->setGlobalId( 'enwiki' );
+		$enWiki->setLinkPath( '#enwiki' );
+		$enWiki->setLanguageCode( 'en' );
+		$enWiki->setGroup( 'wikipedia' );
 
-		$dummySite2 = new Site();
-		$dummySite2->setGlobalId( 'specialwiki' );
-		$dummySite2->setGroup( 'special group' );
+		$specialWiki = new Site();
+		$specialWiki->setGlobalId( 'specialwiki' );
+		$specialWiki->setLinkPath( '#specialwiki' );
+		$specialWiki->setLanguageCode( 'en' );
+		$specialWiki->setGroup( 'special group' );
 
-		$dummySite3 = new Site();
-		$dummySite3->setGlobalId( 'dewiki' );
-		$dummySite3->setGroup( 'wikipedia' );
+		$deWiki = new Site();
+		$deWiki->setGlobalId( 'dewiki' );
+		$deWiki->setLinkPath( '#dewiki' );
+		$deWiki->setLanguageCode( 'de' );
+		$deWiki->setGroup( 'wikipedia' );
 
-		return new SiteList( array( $dummySite, $dummySite2, $dummySite3 ) );
+		return new SiteList( array( $enWiki, $specialWiki, $deWiki ) );
 	}
 
 	/**
 	 * @return EntityIdFormatter
 	 */
-	private function getEntityIdFormatterMock() {
-		$entityIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+	private function newEntityIdFormatter() {
+		$formatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 
-		$entityIdFormatter->expects( $this->any() )
+		$formatter->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q42' ) {
@@ -216,7 +200,7 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 				return $id->getSerialization();
 			} ) );
 
-		return $entityIdFormatter;
+		return $formatter;
 	}
 
 }
