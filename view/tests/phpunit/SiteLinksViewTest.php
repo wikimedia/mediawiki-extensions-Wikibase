@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -41,7 +40,7 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 
 		$this->assertContains(
 			'<h2 class="wb-section-heading section-heading wikibase-sitelinks" dir="auto">'
-				. '<span id="sitelinks"',
+				. '<span class="mw-headline" id="sitelinks"',
 			$value,
 			'Html should contain section heading'
 		);
