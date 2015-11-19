@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_037b19ec",
+        "filename": "tests/browser/features/support/env.rb",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-19T13:32:51Z",
+      "side": 1,
+      "message": "My local config.yml (which got replaced by these lines and the new lines in environments.yml) currently looks like this:\n\nWIKIDATA_REPO_URL: \"http://localhost/repowiki/index.php/\"\nWIKIDATA_REPO_API: \"http://localhost/repowiki/api.php\"\n\nThis will not work with this gsub... code.",
+      "revId": "bf6a39d0ecaa171782b1f302633b7adeb7bc78cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
