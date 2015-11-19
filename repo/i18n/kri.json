@@ -3,5 +3,7 @@
 		"authors": [
 			"Protostar"
 		]
-	}
+	},
+	"wikibase-edit": "èdit",
+	"wikibase-add": "add"
 }

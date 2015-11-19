@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Protostar"
+		]
+	},
+	"tooltip-t-wikibase": "Link go kònnèkto data repòsitòry aitèm",
+	"wikibase-editlinks": "Èdit linkdèm",
+	"wikibase-editlinkstitle": "Èdit intertòk linkdèm",
+	"wikibase-rc-hide-wikidata-hide": "Haid",
+	"wikibase-rc-hide-wikidata-show": "Show"
+}

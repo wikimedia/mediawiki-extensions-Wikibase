@@ -42,7 +42,8 @@
 			"Pathe",
 			"Wladek92",
 			"Ash Crow",
-			"Orlodrim"
+			"Orlodrim",
+			"Guillom"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -483,6 +484,14 @@
 	"apihelp-wbsearchentities-example-1": "Rechercher « abc » en anglais, avec un type et une limite par défaut",
 	"apihelp-wbsearchentities-example-2": "Rechercher « abc » en anglais avec une limite de 50",
 	"apihelp-wbsearchentities-example-3": "Rechercher « alphabet » en anglais pour le type propriété",
+	"apihelp-query+wbsearch-param-search": "Rechercher ce texte.",
+	"apihelp-query+wbsearch-param-language": "Rechercher dans cette langue.",
+	"apihelp-query+wbsearch-param-strictlanguage": "S’il faut désactiver la langue de secours",
+	"apihelp-query+wbsearch-param-type": "Rechercher ce type d’entité.",
+	"apihelp-query+wbsearch-param-limit": "Nombre maximal de résultats",
+	"apihelp-query+wbsearch-example-1": "Rechercher « abc » en anglais, avec un type et une limite par défaut",
+	"apihelp-query+wbsearch-example-2": "Rechercher « abc » en anglais avec une limite de 50",
+	"apihelp-query+wbsearch-example-3": "Rechercher « alphabet » en anglais pour le type propriété",
 	"apihelp-wbsetaliases-description": "Fixe l’alias d’une entité Wikibase.",
 	"apihelp-wbsetaliases-param-id": "L’identifiant de l’entité, incluant le préfixe.\nUtiliser soit 'id' soit 'site' et 'title' ensemble.",
 	"apihelp-wbsetaliases-param-site": "Un identifiant pour le site sur lequel réside la page.\nÀ utiliser avec 'title' pour faire un lien de site complet.",

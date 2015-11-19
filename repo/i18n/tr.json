@@ -17,7 +17,8 @@
 			"Stultiwikia",
 			"Tpt",
 			"McAang",
-			"Nemo bis"
+			"Nemo bis",
+			"HakanIST"
 		]
 	},
 	"wikibase-desc": "Yapılandırılmış veri deposu",
@@ -192,6 +193,9 @@
 	"apihelp-wbsearchentities-param-continue": "Bir aramaya devam etmek için nereye ofsetlenecek",
 	"apihelp-wbsearchentities-example-1": "\"abc\"yi İngilizce dil içinde tip ve limit varsayılanlarıyla ara",
 	"apihelp-wbsearchentities-example-2": "\"\"İngilizce dil 50 sınırı ile abc için arama",
+	"apihelp-query+wbsearch-param-language": "Bu dilde arama.",
+	"apihelp-query+wbsearch-param-type": "Bu tür varlık ara.",
+	"apihelp-query+wbsearch-param-limit": "Azami sonuç sayısı",
 	"apihelp-wbsetclaimvalue-description": "Ayarlar Wikibase bir iddia değerini.",
 	"apihelp-wbsetclaimvalue-param-claim": "Bir GUID iddia belirlenmesi",
 	"apihelp-wbsetclaimvalue-param-snaktype": "Bu yılan türü",
