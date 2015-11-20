@@ -313,6 +313,8 @@
 	"apihelp-wbmergeitems-description": "複数の項目を統合する。",
 	"apihelp-wbmergeitems-param-fromid": "統合元の ID",
 	"apihelp-wbmergeitems-param-toid": "統合先の ID",
+	"apihelp-query+wbsearch-param-search": "このテキストを検索する。",
+	"apihelp-query+wbsearch-param-language": "この言語で検索する。",
 	"apihelp-wbsetlabel-param-language": "ラベルの言語",
 	"apihelp-wbsetlabel-param-value": "値の言語"
 }

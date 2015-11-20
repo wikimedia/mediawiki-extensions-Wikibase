@@ -8,7 +8,8 @@
 			"Revi",
 			"IRTC1015",
 			"관인생략",
-			"Hwangjy9"
+			"Hwangjy9",
+			"Bluemersen"
 		]
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",
@@ -44,7 +45,7 @@
 	"wikibase-linkitem-not-loggedin": "이 기능을 사용하려면 이 위키와 [$1 중앙 데이터 저장소]에 로그인해야 합니다.",
 	"wikibase-linkitem-success-link": "문서를 성공적으로 링크했습니다. [$1 중앙 데이터 저장소]에 링크를 포함하는 항목을 찾을 수 있습니다.",
 	"wikibase-property-notfound": "$1 속성이 없습니다.",
-	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}을(를) $1",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "숨기기",
 	"wikibase-rc-hide-wikidata-show": "보이기",
 	"wikibase-rc-show-wikidata-pref": "최근 바뀜에서 {{WBREPONAME}} 편집 보기",

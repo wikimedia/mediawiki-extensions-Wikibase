@@ -484,6 +484,7 @@
 	"apihelp-wbsearchentities-example-1": "Rechercher « abc » en anglais, avec un type et une limite par défaut",
 	"apihelp-wbsearchentities-example-2": "Rechercher « abc » en anglais avec une limite de 50",
 	"apihelp-wbsearchentities-example-3": "Rechercher « alphabet » en anglais pour le type propriété",
+	"apihelp-query+wbsearch-description": "Recherche des entités en utilisant les libellés et les alias.\nCela peut être utilisé comme générateur pour d’autres requêtes.\nRenvoie le terme correspondant à afficher.",
 	"apihelp-query+wbsearch-param-search": "Rechercher ce texte.",
 	"apihelp-query+wbsearch-param-language": "Rechercher dans cette langue.",
 	"apihelp-query+wbsearch-param-strictlanguage": "S’il faut désactiver la langue de secours",

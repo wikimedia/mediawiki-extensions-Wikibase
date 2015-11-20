@@ -57,6 +57,7 @@
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" ez da hizkuntza kode erabilgarria.",
 	"wikibase-restoreold": "leheneratu",
 	"apihelp-wbsearchentities-param-language": "Bilatu hizkuntza honetan.",
+	"apihelp-query+wbsearch-param-language": "Bilatu hizkuntza honetan.",
 	"apihelp-wbsetdescription-param-language": "Deskribapenaren hizkuntza",
 	"apihelp-wbsetlabel-param-language": "Etiketaren hizkuntza"
 }

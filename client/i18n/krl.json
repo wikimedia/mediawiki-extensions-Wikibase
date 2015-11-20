@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Likopiän tyttö"
+			"Likopiän tyttö",
+			"Mashoi7"
 		]
 	},
+	"wikibase-rc-hide-wikidata-hide": "Peitä",
 	"wikibase-rc-hide-wikidata-show": "Näytä",
 	"wikibase-rc-wikibase-edit-letter": "D"
 }

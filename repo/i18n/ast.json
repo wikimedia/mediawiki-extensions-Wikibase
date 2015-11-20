@@ -521,6 +521,7 @@
 	"apihelp-wbsetreference-param-snaks": "Los snaks a los que configurar la referencia. L'oxetu JSON con IDs de propiedá qu'apunten a matrices que contienen los snaks pa esa propiedá",
 	"apihelp-wbsetreference-param-snaks-order": "L'orde de los snaks. Llista separada por comes d'IDs de propiedá",
 	"apihelp-wbsetreference-param-reference": "Una función hash de referencia que tien d'anovase. Opcional. Si nun se da, créyase una nueva referencia.",
+	"apihelp-wbsetreference-param-index": "Índiz, dientro de la llista de referencies de la declaración, onde mover la referencia. Opcional. Si nun se da, una referencia esistente siguirá nel so llugar mentanto qu'una referencia nueva añadiráse.",
 	"apihelp-wbsetreference-param-summary": "Resume de la edición.\nPrefixaráse con un comentariu xeneráu automáticamente. La llende de llonxitú del comentariu automáticu xunto col resume ye de 260 caráuteres. Ten en cuenta que tolo que pase d'esa llende va cortase.",
 	"apihelp-wbsetreference-param-baserevid": "L'identificador numbéricu pa que la revisión base la edición.\nÚsase pa detectar conflictos demientres el guardáu.",
 	"apihelp-wbsetreference-param-bot": "Marcar esta edición como bot. Esta marca d'URL sólo se respetará si l'usuariu pertenez al grupu \"bot\".",
@@ -532,6 +533,10 @@
 	"apihelp-wbsetsitelink-param-site": "Un identificador pal sitiu web onde ta asitiada la páxina.\nUsa xunto con 'title' pa facer un enllace completu.",
 	"apihelp-wbsetsitelink-param-title": "Títulu de la páxina a asociar.\nÚsalu xunto con 'site' pa facer un enllaz completu del sitiu.",
 	"apihelp-wbsetsitelink-param-baserevid": "L'identificador numbéricu pa que la revisión base la edición.\nÚsase pa detectar conflictos demientres el guardáu.",
+	"apihelp-wbsetsitelink-param-summary": "Resume de la edición.\nPrefixaráse con un comentariu xeneráu automáticamente. La llende de llonxitú del comentariu automáticu xunto col resume ye de 260 caráuteres. Ten en cuenta que tolo que pase d'esa llende va cortase.",
+	"apihelp-wbsetsitelink-param-bot": "Marcar esta edición como bot. Esta marca d'URL sólo se respetará si l'usuariu pertenez al grupu \"bot\".",
+	"apihelp-wbsetsitelink-param-linksite": "L'identificador del sitiu onde s'alcuentra l'artículu a enllazar",
 	"apihelp-wbsetsitelink-param-linktitle": "El títulu del artículu que se va enllazar. Si esti parámetru ye una cadena balera o nun s'establecen nin el títulu del enllaz nin les insinies , l'enllaz va desaniciase.",
-	"apihelp-wbsetsitelink-param-badges": "Los identificadores de los elementos que van establecese como insinies. Reemplazarán a los actuales. Si esti parámetru nun ta definíu, les insinies nun van camudase"
+	"apihelp-wbsetsitelink-param-badges": "Los identificadores de los elementos que van establecese como insinies. Reemplazarán a los actuales. Si esti parámetru nun ta definíu, les insinies nun van camudase",
+	"apihelp-wbsetsitelink-example-1": "Añade un enllaz de sitiu «Hydrogen» pa la páxina n'inglés con identificador «Q42», si nun esiste l'enllaz de sitiu"
 }

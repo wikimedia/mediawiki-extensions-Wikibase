@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Likopiän tyttö"
+			"Likopiän tyttö",
+			"Mashoi7"
 		]
 	},
+	"wikibase-edit": "kohentele",
 	"wikibase-add": "Lisyä",
 	"wikibase-statementview-rank-normal": "Tavallini arvo"
 }

@@ -8,5 +8,8 @@
 	"wikibase-error-unexpected": "Greška: $1",
 	"wikibase-sitelinks-wikipedia": "Wikipedija",
 	"wikibase-sitelinks-sitename-columnheading": "Jezik",
-	"wikibase-sitelinks-link-columnheading": "Povezana stranica"
+	"wikibase-sitelinks-link-columnheading": "Povezana stranica",
+	"wikibase-entity-summary-wbsetitem": "Stvorena nova stavka",
+	"wikibase-entity-summary-wbmergeitems-from": "Spojena stavka od $3",
+	"wikibase-entity-summary-wbmergeitems-to": "Spojena stavka u $3"
 }
