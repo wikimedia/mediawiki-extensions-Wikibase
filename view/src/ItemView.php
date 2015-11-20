@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -71,10 +72,10 @@ class ItemView extends EntityView {
 		}
 
 		$html = parent::getMainHtml( $entityRevision );
-		// TODO: Group statements into sections.
-		$html .= $this->statementSectionsView->getHtml( array(
-			'statements' => $item->getStatements(),
-		) );
+		// TODO: Group statements into actual sections, including an identifiers section.
+		$grouper = new NullStatementGrouper();
+		$statementLists = $grouper->groupStatements( $item->getStatements() );
+		$html .= $this->statementSectionsView->getHtml( $statementLists );
 
 		return $html;
 	}
