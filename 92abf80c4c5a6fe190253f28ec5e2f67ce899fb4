@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_9a50c7da",
+        "filename": "view/src/Template/TemplateRegistry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-11-20T09:43:20Z",
+      "side": 1,
+      "message": "Should the regex be non-greedy?",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "92abf80c4c5a6fe190253f28ec5e2f67ce899fb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
