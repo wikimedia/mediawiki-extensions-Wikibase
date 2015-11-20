@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_6783f757",
+        "filename": "lib/includes/PropertyInfoFormatterUrlLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-20T16:32:07Z",
+      "side": 1,
+      "message": "0.5",
+      "revId": "cb95d875fb421e8accc73fc8ac59c2dea932b063",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_07b31b4d",
         "filename": "lib/includes/PropertyInfoFormatterUrlLookup.php",
         "patchSetId": 3
@@ -30,6 +47,23 @@
       "writtenOn": "2015-11-20T16:30:09Z",
       "side": 1,
       "message": "I suggest to keep this as close together as possible and therefore *not* use an interface. Just implement this class and start using it. Preferably do that in the same patch so it becomes obvious what this is supposed to do and where it will be used.\n\nAll this can\u0027t go to DataModelServices anyway. So what\u0027s the benefit of having the interface there, if everything else is still in lib?",
+      "revId": "cb95d875fb421e8accc73fc8ac59c2dea932b063",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_87862b69",
+        "filename": "lib/tests/phpunit/PropertyInfoFormatterUrlLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-20T16:32:07Z",
+      "side": 1,
+      "message": "That\u0027s the interface.",
       "revId": "cb95d875fb421e8accc73fc8ac59c2dea932b063",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
