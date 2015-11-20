@@ -2,6 +2,7 @@
 
 namespace Wikimedia\Purtle\Tests;
 
+use PHPUnit_Framework_TestCase;
 use Wikimedia\Purtle\N3Quoter;
 
 /**
@@ -12,15 +13,30 @@ use Wikimedia\Purtle\N3Quoter;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class N3QuoterTest extends \PHPUnit_Framework_TestCase {
+class N3QuoterTest extends PHPUnit_Framework_TestCase {
 
 	public function provideEscapeIRI() {
 		return array(
-			array( 'http://acme.com/test.php?x=y&foo=bar#part', 'http://acme.com/test.php?x=y&foo=bar#part' ),
-			array( 'http://acme.com/"evil stuff"', 'http://acme.com/%22evil%20stuff%22' ),
-			array( 'http://acme.com/<wacky stuff>', 'http://acme.com/%3Cwacky%20stuff%3E' ),
-			array( 'http://acme.com\\back\\slash', 'http://acme.com%5Cback%5Cslash' ),
-			array( 'http://acme.com/~`!@#$%^&*()-_=+[]{}|:;\'",.<>/?', 'http://acme.com/~%60!@#$%%5E&*()-_=+[]%7B%7D%7C:;\'%22,.%3C%3E/?' ),
+			array(
+				'http://acme.com/test.php?x=y&foo=bar#part',
+				'http://acme.com/test.php?x=y&foo=bar#part'
+			),
+			array(
+				'http://acme.com/"evil stuff"',
+				'http://acme.com/%22evil%20stuff%22'
+			),
+			array(
+				'http://acme.com/<wacky stuff>',
+				'http://acme.com/%3Cwacky%20stuff%3E'
+			),
+			array(
+				'http://acme.com\\back\\slash',
+				'http://acme.com%5Cback%5Cslash'
+			),
+			array(
+				'http://acme.com/~`!@#$%^&*()-_=+[]{}|:;\'",.<>/?',
+				'http://acme.com/~%60!@#$%%5E&*()-_=+[]%7B%7D%7C:;\'%22,.%3C%3E/?'
+			),
 		);
 	}
 

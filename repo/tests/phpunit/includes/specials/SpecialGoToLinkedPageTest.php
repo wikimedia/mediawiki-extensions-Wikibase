@@ -5,8 +5,8 @@ namespace Wikibase\Test;
 use FauxResponse;
 use Site;
 use SiteStore;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -133,13 +133,21 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	}
 
 	public function requestWithoutRedirectProvider() {
-		$cases = array();
-		$cases['empty'] = array( '', null, '', '', '' );
-		$cases['invalidItemID'] = array( 'enwiki/invalid', null, 'enwiki', 'invalid', '(wikibase-gotolinkedpage-error-item-id-invalid)' );
-		$cases['notFound'] = array( 'enwiki/Q42', null, 'enwiki', 'Q42', '(wikibase-gotolinkedpage-error-item-not-found)' );
-		$cases['notFound2'] = array( 'XXwiki/Q23', null, 'XXwiki', 'Q23', '(wikibase-gotolinkedpage-error-page-not-found)' );
-
-		return $cases;
+		return array(
+			'empty' => array( '', null, '', '', '' ),
+			'invalidItemID' => array(
+				'enwiki/invalid', null, 'enwiki', 'invalid',
+				'(wikibase-gotolinkedpage-error-item-id-invalid)'
+			),
+			'notFound' => array(
+				'enwiki/Q42', null, 'enwiki', 'Q42',
+				'(wikibase-gotolinkedpage-error-item-not-found)'
+			),
+			'notFound2' => array(
+				'XXwiki/Q23', null, 'XXwiki', 'Q23',
+				'(wikibase-gotolinkedpage-error-page-not-found)'
+			),
+		);
 	}
 
 	/**
