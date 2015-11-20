@@ -18,20 +18,22 @@ class PropertySetStatementFilter implements StatementFilter {
 	private $propertyIds;
 
 	/**
-	 * @param string[] $propertyIds
+	 * @param string[]|string $propertyIds One or more property id serializations.
 	 */
-	public function __construct( array $propertyIds ) {
-		$this->propertyIds = array_flip( $propertyIds );
+	public function __construct( $propertyIds ) {
+		$this->propertyIds = (array)$propertyIds;
 	}
 
 	/**
+	 * @see StatementFilter::isMatch
+	 *
 	 * @param Statement $statement
 	 *
 	 * @return bool
 	 */
-	public function statementMatchesFilter( Statement $statement ) {
+	public function isMatch( Statement $statement ) {
 		$id = $statement->getPropertyId()->getSerialization();
-		return array_key_exists( $id, $this->propertyIds );
+		return in_array( $id, $this->propertyIds );
 	}
 
 }

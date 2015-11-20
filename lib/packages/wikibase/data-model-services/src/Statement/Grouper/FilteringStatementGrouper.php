@@ -73,7 +73,7 @@ class FilteringStatementGrouper implements StatementGrouper {
 	 */
 	private function getKey( Statement $statement ) {
 		foreach ( $this->filters as $key => $filter ) {
-			if ( $filter->statementMatchesFilter( $statement ) ) {
+			if ( $filter->isMatch( $statement ) ) {
 				return $key;
 			}
 		}

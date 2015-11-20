@@ -13,11 +13,13 @@ use Wikibase\DataModel\Statement\Statement;
 class NullStatementFilter implements StatementFilter {
 
 	/**
+	 * @see StatementFilter::isMatch
+	 *
 	 * @param Statement $statement
 	 *
 	 * @return bool
 	 */
-	public function statementMatchesFilter( Statement $statement ) {
+	public function isMatch( Statement $statement ) {
 		return true;
 	}
 

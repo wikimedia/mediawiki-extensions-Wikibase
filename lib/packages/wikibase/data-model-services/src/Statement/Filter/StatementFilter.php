@@ -17,6 +17,6 @@ interface StatementFilter {
 	 *
 	 * @return bool
 	 */
-	public function statementMatchesFilter( Statement $statement );
+	public function isMatch( Statement $statement );
 
 }

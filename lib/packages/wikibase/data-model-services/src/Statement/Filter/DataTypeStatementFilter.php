@@ -26,19 +26,21 @@ class DataTypeStatementFilter implements StatementFilter {
 
 	/**
 	 * @param PropertyDataTypeLookup $dataTypeLookup
-	 * @param string[] $dataTypes
+	 * @param string[]|string $dataTypes One or more data type identifiers.
 	 */
-	public function __construct( PropertyDataTypeLookup $dataTypeLookup, array $dataTypes ) {
+	public function __construct( PropertyDataTypeLookup $dataTypeLookup, $dataTypes ) {
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->dataTypes = array_flip( $dataTypes );
+		$this->dataTypes = (array)$dataTypes;
 	}
 
 	/**
+	 * @see StatementFilter::isMatch
+	 *
 	 * @param Statement $statement
 	 *
 	 * @return bool
 	 */
-	public function statementMatchesFilter( Statement $statement ) {
+	public function isMatch( Statement $statement ) {
 		$id = $statement->getPropertyId();
 
 		try {
@@ -47,7 +49,7 @@ class DataTypeStatementFilter implements StatementFilter {
 			return false;
 		}
 
-		return array_key_exists( $dataType, $this->dataTypes );
+		return in_array( $dataType, $this->dataTypes );
 	}
 
 }
