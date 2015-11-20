@@ -22,6 +22,24 @@
       "revId": "92abf80c4c5a6fe190253f28ec5e2f67ce899fb4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9af447bb",
+        "filename": "view/src/Template/TemplateRegistry.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-20T10:19:08Z",
+      "side": 1,
+      "message": "It is, look at the U. ;-) This is covered by the test. Would fail if greedy.",
+      "parentUuid": "0ebaf39b_9a50c7da",
+      "revId": "92abf80c4c5a6fe190253f28ec5e2f67ce899fb4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
