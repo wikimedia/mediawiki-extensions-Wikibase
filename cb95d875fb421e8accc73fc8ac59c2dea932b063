@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_fd7a1ab8",
+        "filename": "lib/includes/PropertyInfoFormatterUrlLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-20T20:37:43Z",
+      "side": 1,
+      "message": "I\u0027m trying to use \"property data type\" explicitly, to avoid confusion with the \"data value type\" (aka value type).",
+      "parentUuid": "0ebaf39b_47a913db",
+      "revId": "cb95d875fb421e8accc73fc8ac59c2dea932b063",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_6783f757",
         "filename": "lib/includes/PropertyInfoFormatterUrlLookup.php",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_7d35caf2",
+        "filename": "lib/includes/PropertyInfoFormatterUrlLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-20T20:37:43Z",
+      "side": 1,
+      "message": "I was following the example of how PropertyDataTypeLookup is implemented by PropertyInfoDataTypelLookup. We also have EntityRetrievingDataTypelLookup, InMemoryDataTypelLookup, and InProcessCachingDataTypelLookup. It seems likely to me that we will need additional implementations of PropertyFormatterUrlLookup too. \n\nAlso, not using an interface would mean that the formatters are coupled with  PropertyInfoStore. Not horrible (because that is an interface), but not very nice either.",
+      "parentUuid": "0ebaf39b_07b31b4d",
+      "revId": "cb95d875fb421e8accc73fc8ac59c2dea932b063",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_87862b69",
         "filename": "lib/tests/phpunit/PropertyInfoFormatterUrlLookupTest.php",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2015-11-20T16:32:07Z",
       "side": 1,
       "message": "That\u0027s the interface.",
+      "revId": "cb95d875fb421e8accc73fc8ac59c2dea932b063",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9d38beec",
+        "filename": "lib/tests/phpunit/PropertyInfoFormatterUrlLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-20T20:37:43Z",
+      "side": 1,
+      "message": "oops",
+      "parentUuid": "0ebaf39b_87862b69",
       "revId": "cb95d875fb421e8accc73fc8ac59c2dea932b063",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
