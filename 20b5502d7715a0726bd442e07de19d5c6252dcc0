@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_faf8e348",
+        "filename": "lib/includes/formatters/EscapingSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-20T11:48:40Z",
+      "side": 1,
+      "message": "getFormat below is part of the interface and must return something.",
+      "parentUuid": "0ebaf39b_1ae137fb",
+      "revId": "20b5502d7715a0726bd442e07de19d5c6252dcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_5ad7af28",
         "filename": "lib/includes/formatters/EscapingSnakFormatter.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
         "endLine": 38,
         "endChar": 53
       },
+      "revId": "20b5502d7715a0726bd442e07de19d5c6252dcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5a91eff9",
+        "filename": "lib/includes/formatters/EscapingSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-20T11:48:40Z",
+      "side": 1,
+      "message": "Not possible, because some strings and arrays like array( $this, \u0027method\u0027 ) are also valid callbacks. Assert uses is_callable, which allows all this. The type hint is much more restricted.",
+      "parentUuid": "0ebaf39b_5ad7af28",
       "revId": "20b5502d7715a0726bd442e07de19d5c6252dcc0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
