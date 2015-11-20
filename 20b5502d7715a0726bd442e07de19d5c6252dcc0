@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_1ae137fb",
+        "filename": "lib/includes/formatters/EscapingSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-11-20T10:07:21Z",
+      "side": 1,
+      "message": "What is the purpose of $format? Seems to be never used...",
+      "revId": "20b5502d7715a0726bd442e07de19d5c6252dcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5ad7af28",
+        "filename": "lib/includes/formatters/EscapingSnakFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-11-20T10:07:21Z",
+      "side": 1,
+      "message": "Callable type hint?",
+      "range": {
+        "startLine": 38,
+        "startChar": 52,
+        "endLine": 38,
+        "endChar": 53
+      },
+      "revId": "20b5502d7715a0726bd442e07de19d5c6252dcc0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
