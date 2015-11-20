@@ -7,6 +7,7 @@ use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -65,10 +66,10 @@ class PropertyView extends EntityView {
 		$html = parent::getMainHtml( $entityRevision );
 		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 
-		// TODO: Group statements into sections.
-		$html .= $this->statementSectionsView->getHtml( array(
-			'statements' => $property->getStatements(),
-		) );
+		// TODO: Group statements into actual sections, including an identifiers section.
+		$grouper = new NullStatementGrouper();
+		$statementLists = $grouper->groupStatements( $property->getStatements() );
+		$html .= $this->statementSectionsView->getHtml( $statementLists );
 
 		$footer = wfMessage( 'wikibase-property-footer' );
 
