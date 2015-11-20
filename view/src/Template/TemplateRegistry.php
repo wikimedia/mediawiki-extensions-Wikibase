@@ -26,7 +26,9 @@ class TemplateRegistry {
 	 */
 	public function __construct( array $templates ) {
 		foreach ( $templates as $key => $snippet ) {
-			$this->templates[$key] = str_replace( "\t", '', $snippet );
+			$this->templates[$key] = str_replace( "\t", '',
+				preg_replace( '/<!--.*-->/Us', '', $snippet )
+			);
 		}
 	}
 
