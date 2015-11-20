@@ -359,7 +359,8 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a statement key' );
 
 		if ( isset( $resultArray['claim']['qualifiers'] ) ) {
-			$this->assertArrayHasKey( 'qualifiers-order', $resultArray['claim'], '"qualifiers-order" key is set when returning qualifiers' );
+			$this->assertArrayHasKey( 'qualifiers-order', $resultArray['claim'],
+				'"qualifiers-order" key is set when returning qualifiers' );
 		}
 	}
 

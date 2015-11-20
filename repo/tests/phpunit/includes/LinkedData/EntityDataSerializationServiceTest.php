@@ -186,8 +186,10 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				array(), // incoming
 				null, // flavor
 				array( // output regex
-					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> *<http://acme\.test/Q42> *\.!s',
-					'label' => '!<http://acme\.test/Q42> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label42"@en *\.!s',
+					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> '
+						. '*<http://acme\.test/Q42> *\.!s',
+					'label' => '!<http://acme\.test/Q42> '
+						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label42"@en *\.!s',
 				),
 				array(),
 				'application/n-triples', // expected mime
@@ -200,24 +202,24 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				array(), // incoming
 				'full', // flavor
 				array( // output regex
-					'data about' => '!<http://data\.acme\.test/Q42> *'
-						. '<http://schema\.org/about> *'
-						. '<http://acme\.test/Q42> *\.!s',
-					'label Q42' => '!<http://acme\.test/Q42> *'
-						. '<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label42"@en *\.!s',
-					'label Q23' => '!<http://acme\.test/Q23> *'
-						. '<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
-					'label P5' => '!<http://acme\.test/P5> *'
-						. '<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label5"@en *\.!s',
-					'item-ref Q2233' => '!<http://acme\.test/statement/Q42-DEADBEEF> *'
-						. '<http://acme\.test/prop/statement/P5> *'
-						. '<http://acme\.test/Q2233> *\.!s',
-					'redirect Q2233' => '!<http://acme\.test/Q2233> *'
-						. '<http://www\.w3\.org/2002/07/owl#sameAs> *'
-						. '<http://acme\.test/Q23> *\.!s',
+					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> '
+						. '*<http://acme\.test/Q42> *\.!s',
+					'label Q42' => '!<http://acme\.test/Q42> '
+						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label42"@en *\.!s',
+					'label Q23' => '!<http://acme\.test/Q23> '
+						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
+					'label P5' => '!<http://acme\.test/P5> '
+						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label5"@en *\.!s',
+					'item-ref Q2233' => '!<http://acme\.test/statement/Q42-DEADBEEF> '
+						. '*<http://acme\.test/prop/statement/P5> *<http://acme\.test/Q2233> *\.!s',
+					'redirect Q2233' => '!<http://acme\.test/Q2233> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
 				),
 				array(
-					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
 				),
 				'application/n-triples', // expected mime
 			),
@@ -229,10 +231,16 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				array( $q2233, $q222333 ), // incoming
 				null, // flavor
 				array( // output regex
-					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
-					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
-					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
-					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> '
+						. '*<http://acme\.test/Q23> *\.!s',
+					'label Q23' => '!<http://acme\.test/Q23> '
+						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
+					'redirect Q2233' => '!<http://acme\.test/Q2233> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
 				),
 				array(),
 				'application/n-triples', // expected mime
@@ -245,12 +253,18 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				array( $q2233, $q222333 ), // incoming
 				'dump', // flavor
 				array( // output regex
-					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'redirect Q2233' => '!<http://acme\.test/Q2233> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
 				),
 				array(
-					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
-					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
-					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> '
+						. '*<http://acme\.test/Q23> *\.!s',
+					'label Q23' => '!<http://acme\.test/Q23> '
+						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
 				),
 				'application/n-triples', // expected mime
 			),
@@ -262,10 +276,16 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				array( $q2233, $q222333 ), // incoming
 				null, // flavor
 				array( // output regex
-					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
-					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
-					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
-					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> '
+						. '*<http://acme\.test/Q23> *\.!s',
+					'label Q23' => '!<http://acme\.test/Q23> '
+						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
+					'redirect Q2233' => '!<http://acme\.test/Q2233> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
 				),
 				array(
 				),
@@ -279,12 +299,18 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				array( $q2233, $q222333 ), // incoming
 				'dump', // flavor
 				array( // output regex
-					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> *<http://acme\.test/Q23> *\.!s',
-					'label Q23' => '!<http://acme\.test/Q23> *<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
+					'data about' => '!<http://data\.acme\.test/Q23> *<http://schema\.org/about> '
+						. '*<http://acme\.test/Q23> *\.!s',
+					'label Q23' => '!<http://acme\.test/Q23> '
+						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label23"@en *\.!s',
 				),
 				array(
-					'redirect Q2233' => '!<http://acme\.test/Q2233> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
-					'redirect Q222333' => '!<http://acme\.test/Q222333> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q23> *\.!s',
+					'redirect Q2233' => '!<http://acme\.test/Q2233> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
+					'redirect Q222333' => '!<http://acme\.test/Q222333> '
+						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
+						. '*<http://acme\.test/Q23> *\.!s',
 				),
 				'application/n-triples', // expected mime
 			),
@@ -305,7 +331,13 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		$expectedMimeType
 	) {
 		$service = $this->newService();
-		list( $data, $mimeType ) = $service->getSerializedData( $format, $entityRev, $followedRedirect, $incomingRedirects, $flavor );
+		list( $data, $mimeType ) = $service->getSerializedData(
+			$format,
+			$entityRev,
+			$followedRedirect,
+			$incomingRedirects,
+			$flavor
+		);
 
 		$this->assertEquals( $expectedMimeType, $mimeType );
 
