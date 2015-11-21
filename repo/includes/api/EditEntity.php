@@ -797,6 +797,14 @@ class EditEntity extends ModifyEntity {
 			'action=wbeditentity&clear=true&id=Q42&data={'
 				. '"labels":{"en":{"language":"en","value":"en-value"}}}'
 				=> 'apihelp-wbeditentity-example-5',
+			// Adding term
+			'action=wbeditentity&id=Q42&data=' .
+			'{"labels":[{"language":"no","value":"Bar","add":""}]}'
+			=> 'apihelp-wbeditentity-example-11',
+			// Removing term
+			'action=wbeditentity&id=Q42&data=' .
+			'{"labels":[{"language":"en","value":"Foo","remove":""}]}'
+			=> 'apihelp-wbeditentity-example-12',
 			// Setting stuff
 			'action=wbeditentity&id=Q42&data={'
 				. '"sitelinks":{"nowiki":{"site":"nowiki","title":"København"}}}'
