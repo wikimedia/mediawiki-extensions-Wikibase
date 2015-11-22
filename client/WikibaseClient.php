@@ -99,7 +99,6 @@ call_user_func( function() {
 	// Hooks
 	$wgHooks['UnitTestsList'][] = '\Wikibase\ClientHooks::registerUnitTests';
 	$wgHooks['BaseTemplateToolbox'][] = '\Wikibase\ClientHooks::onBaseTemplateToolbox';
-	$wgHooks['OldChangesListRecentChangesLine'][] = '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 	$wgHooks['OutputPageParserOutput'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onOutputPageParserOutput';
 	$wgHooks['SkinTemplateGetLanguageLink'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onSkinTemplateGetLanguageLink';
 	$wgHooks['ContentAlterParserOutput'][] = '\Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers::onContentAlterParserOutput';
@@ -129,6 +128,7 @@ call_user_func( function() {
 	// recent changes / watchlist hooks
 	$wgHooks['ChangesListSpecialPageFilters'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHooksHandler::onChangesListSpecialPageFilters';
 	$wgHooks['ChangesListSpecialPageQuery'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHooksHandler::onChangesListSpecialPageQuery';
+	$wgHooks['OldChangesListRecentChangesLine'][] = '\Wikibase\Client\Hooks\OldChangesListHookHandler::onOldChangesListRecentChangesLine';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';

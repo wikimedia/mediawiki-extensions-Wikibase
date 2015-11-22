@@ -21,6 +21,8 @@ use Wikimedia\Assert\Assert;
  */
 class RecentChangeFactory {
 
+	const SRC_WIKIBASE = 'wb';
+
 	/**
 	 * @var Language
 	 */
@@ -125,7 +127,7 @@ class RecentChangeFactory {
 			'rc_timestamp' => $time,
 			'rc_log_type' => null,
 			'rc_log_action' => '',
-			'rc_source' => 'wb',
+			'rc_source' => self::SRC_WIKIBASE,
 			'rc_deleted' => false,
 		);
 	}
