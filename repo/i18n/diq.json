@@ -93,5 +93,6 @@
 	"content-model-wikibase-property": "Wikibase xısusiyet",
 	"content-model-wikibase-query": "Wikibase pers",
 	"right-item-merge": "objan yew ke",
-	"right-property-create": "Xısusiyeti vıraze"
+	"right-property-create": "Xısusiyeti vıraze",
+	"apihelp-query+wbsearch-param-search": "Ena nuşter cı geyre"
 }

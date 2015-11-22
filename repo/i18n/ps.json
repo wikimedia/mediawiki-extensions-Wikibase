@@ -59,5 +59,6 @@
 	"wikibase-listdatatypes-time-head": "وخت",
 	"wikibase-listdatatypes-url-head": "يو آر اېل",
 	"datatypes-type-url": "يو آر اېل",
-	"content-model-wikibase-item": "د ويکيبېز توکی"
+	"content-model-wikibase-item": "د ويکيبېز توکی",
+	"apihelp-query+wbsearch-param-search": "دغه متن پلټل."
 }

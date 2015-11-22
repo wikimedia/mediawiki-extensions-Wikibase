@@ -9,6 +9,10 @@
 	"wikibase-sitelinks-wikipedia": "Wikipedija",
 	"wikibase-sitelinks-sitename-columnheading": "Jezik",
 	"wikibase-sitelinks-link-columnheading": "Povezana stranica",
+	"wikibase-snakview-snaktypeselector-somevalue": "nepoznata vrijednost",
+	"wikibase-snakview-snaktypeselector-novalue": "nema vrijednosti",
+	"wikibase-snakformatter-valuetype-mismatch": "Vrsta vrijednosti \"$1\" ne odgovara vrsti svojstva \"$2\".",
+	"wikibase-snakformatter-property-not-found": "Svojstvo $1 nije pronađeno, nemoguće je odrediti vrstu podataka.",
 	"wikibase-entity-summary-wbsetitem": "Stvorena nova stavka",
 	"wikibase-entity-summary-wbmergeitems-from": "Spojena stavka od $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Spojena stavka u $3"

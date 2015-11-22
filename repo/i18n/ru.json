@@ -20,7 +20,8 @@
 			"Oashnic",
 			"Batumski brodyaga",
 			"Чаховіч Уладзіслаў",
-			"Mariya"
+			"Mariya",
+			"Frhdkazan"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -347,6 +348,7 @@
 	"apihelp-wbsearchentities-param-limit": "Максимальное количество результатов",
 	"apihelp-wbsearchentities-example-1": "Искать «abc» на английском языке, со значениями по умолчанию для типа и ограничений",
 	"apihelp-wbsearchentities-example-2": "Искать «abc» на английском языке с ограничением в 50 результатов",
+	"apihelp-query+wbsearch-param-search": "Искать данный текст.",
 	"apihelp-wbsetaliases-example-1": "Установить Foo и Bar в качестве синонимов на английском языке для сущности с ID Q1",
 	"apihelp-wbsetaliases-example-2": "Добавить Foo и Bar в список синонимов на английском языке для сущности с ID Q1",
 	"apihelp-wbsetaliases-example-3": "Удалить Foo и Bar из списка синонимов на английском языке для сущности с ID Q1",
