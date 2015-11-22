@@ -21,10 +21,8 @@ use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
-use Wikibase\Client\Hooks\SpecialWatchlistQueryHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
-use Wikibase\Client\RecentChanges\RecentChangesFilterOptions;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
@@ -88,33 +86,6 @@ final class ClientHooks {
 		if ( $engine == 'lua' && $allowDataTransclusion === true ) {
 			$extraLibraries['mw.wikibase'] = 'Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary';
 			$extraLibraries['mw.wikibase.entity'] = 'Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary';
-		}
-
-		return true;
-	}
-
-	/**
-	 * Hook for modifying the query for fetching recent changes
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialRecentChangesQuery
-	 *
-	 * @since 0.2
-	 *
-	 * @param array &$conds
-	 * @param string[] &$tables
-	 * @param array &$join_conds
-	 * @param FormOptions $opts
-	 * @param array &$query_options
-	 * @param string[] &$fields
-	 *
-	 * @return bool
-	 */
-	public static function onSpecialRecentChangesQuery( array &$conds, array &$tables,
-		array &$join_conds, FormOptions $opts, array &$query_options, array &$fields
-	) {
-		$rcFilterOpts = new RecentChangesFilterOptions( $opts );
-
-		if ( $rcFilterOpts->showWikibaseEdits() === false ) {
-			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
 
 		return true;
@@ -211,38 +182,6 @@ final class ClientHooks {
 		if ( is_string( $formattedComment ) ) {
 			$comment = $formatter->wrapAutoComment( $pre, $formattedComment, $post );
 		}
-	}
-
-	/**
-	 * Modifies watchlist query to include external changes
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialWatchlistQuery
-	 *
-	 * @since 0.2
-	 *
-	 * @param array &$conds
-	 * @param array &$tables
-	 * @param array &$join_conds
-	 * @param array &$fields
-	 * @param FormOptions|array|null $opts MediaWiki 1.22 used an array and MobileFrontend still does.
-	 *
-	 * @return bool
-	 */
-	public static function onSpecialWatchlistQuery(
-		array &$conds,
-		array &$tables,
-		array &$join_conds,
-		array &$fields,
-		$opts = null
-	) {
-		$db = wfGetDB( DB_SLAVE );
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		$showExternalChanges = $settings->getSetting( 'showExternalRecentChanges' );
-
-		$handler = new SpecialWatchlistQueryHandler( $GLOBALS['wgUser'], $db, $showExternalChanges );
-
-		$conds = $handler->addWikibaseConditions( $GLOBALS['wgRequest'], $conds, $opts );
-
-		return true;
 	}
 
 	/**
