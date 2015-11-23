@@ -214,13 +214,9 @@ class ValidatorBuilders {
 		$timeStringValidators = array();
 		$timeStringValidators[] = new TypeValidator( 'string' );
 
-		// down to the second
-		//$maxPrecision = TimeValue::PRECISION_SECOND;
-		//$isoDataPattern = '!^[-+]\d{1,16}-(0\d|1[012])-([012]\d|3[01])T([01]\d|2[0123]):[0-5]\d:([0-5]\d|6[012])Z$!';
-
 		// down to the day
 		$maxPrecision = TimeValue::PRECISION_DAY;
-		$isoDataPattern = '!^[-+]\d{1,16}-(0\d|1[012])-([012]\d|3[01])T00:00:00Z$!';
+		$isoDataPattern = '/T00:00:00Z$/';
 
 		$timeStringValidators[] = new RegexValidator( $isoDataPattern );
 
