@@ -71,3 +71,5 @@
 <http://acme.test/value/1e09d673624819aacd170165aae555a1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#QuantityValue> .
 <http://acme.test/value/aad6b70bccf9875ba61d31c767b7f652> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#GlobecoordinateValue> .
 <http://acme.test/value/ba4fa68a0979e663277b08d93f93705c> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#TimeValue> .
+<http://wikiba.se/ontology-beta#Dump> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
+<http://wikiba.se/ontology-beta#Dump> <http://www.w3.org/2002/07/owl#imports> <http://wikiba.se/ontology-1.0.owl> .
