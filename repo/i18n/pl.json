@@ -311,6 +311,7 @@
 	"apihelp-wbsearchentities-param-language": "Wyszukaj w tym języku.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Czy wyłączyć język pomocniczy",
 	"apihelp-wbsearchentities-param-limit": "Maksymalna liczba wyników",
+	"apihelp-query+wbsearch-param-language": "Wyszukaj w tym języku.",
 	"apihelp-query+wbsearch-param-limit": "Maksymalna liczba wyników",
 	"apihelp-wbsetaliases-param-language": "Język, w którym ustawić aliasy",
 	"apihelp-wbsetclaimvalue-description": "Ustawia wartość stwierdzenia Wikibase.",

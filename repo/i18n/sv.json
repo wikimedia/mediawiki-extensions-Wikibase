@@ -441,6 +441,8 @@
 	"apihelp-wbsearchentities-example-1": "Sök efter \"abc\" på engelska, med standardvärden för typ och begränsning",
 	"apihelp-wbsearchentities-example-2": "Sök efter \"abc\" på Engelska med en gräns på 50",
 	"apihelp-wbsearchentities-example-3": "Sök efter \"alphabet\" på engelska, för typen egenskap",
+	"apihelp-query+wbsearch-param-search": "Sök efter denna text.",
+	"apihelp-query+wbsearch-param-language": "Sök på detta språk.",
 	"apihelp-wbsetaliases-description": "Anger alias för en Wikibase-entitet.",
 	"apihelp-wbsetaliases-param-id": "Identifieraren för entiteten, inklusive prefixet.\nAnvänd antingen 'id' eller 'site' och 'title' tillsammans.",
 	"apihelp-wbsetaliases-param-site": "En identifierare för webbplatsen på vilken sidan finns.\nAnvänds tillsammans med 'titel' för att göra en komplett webbplatslänk.",
