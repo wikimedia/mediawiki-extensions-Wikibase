@@ -34,6 +34,24 @@
       "revId": "e47404bb8520c47a60b4eca71ab5f36bcb224079",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_a36314a6",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHooksHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-23T18:07:18Z",
+      "side": 1,
+      "message": "The options should probably stay separate. I see no problem with using the same filter name for both. That would actually be less code in the path, not more...\n\nBut fine if you want to keep it separate. I would just like to get rid of the inconsistency, especially since one name says \"wikidata\", and the other one has CamelCase....",
+      "parentUuid": "0ebaf39b_1d84c35d",
+      "revId": "e47404bb8520c47a60b4eca71ab5f36bcb224079",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
