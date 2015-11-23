@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_a24d52c9",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHooksHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-23T11:49:09Z",
+      "side": 1,
+      "message": "why are we using different filter names?",
+      "revId": "e47404bb8520c47a60b4eca71ab5f36bcb224079",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
