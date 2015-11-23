@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_d56a7fb0",
+        "filename": "client/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-23T19:23:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_00aeace2",
+      "revId": "73aa5393d8cc6abc8f92fa80be5f9e612b57894e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_40834457",
         "filename": "client/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-19T17:39:10Z",
       "side": 1,
       "message": "instantiating this means loading all the sites to get the site group of the current site, if languageLinkSiteGroup is not set.\n\nwe set this explicitly in production to avoid that possibility, so maybe not a big issue, but might be better to have the isWikibaseEnabled (for the namespace) check before instantiating the hook handler.\n\nmy suggestion is not ideal, but think that\u0027s better in this case than to avoid any such logic in onSkinTemplateOutputPageBeforeExec",
+      "revId": "73aa5393d8cc6abc8f92fa80be5f9e612b57894e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_956407e3",
+        "filename": "client/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-23T19:23:00Z",
+      "side": 1,
+      "message": "Changed to do the namespace check in static scope... that should be faster (although it\u0027s quite ugly to do that).",
+      "parentUuid": "0ebaf39b_40834457",
       "revId": "73aa5393d8cc6abc8f92fa80be5f9e612b57894e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
