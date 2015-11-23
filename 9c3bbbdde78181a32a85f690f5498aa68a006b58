@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_355e7bed",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-23T19:42:38Z",
+      "side": 1,
+      "message": "Are you sure you want clear\u003dtrue here?",
+      "revId": "9c3bbbdde78181a32a85f690f5498aa68a006b58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d554bfcb",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-11-23T19:42:38Z",
+      "side": 1,
+      "message": "Are you sure you want clear\u003dtrue here?",
+      "revId": "9c3bbbdde78181a32a85f690f5498aa68a006b58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
