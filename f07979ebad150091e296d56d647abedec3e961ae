@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_c243a6b4",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-23T11:20:21Z",
+      "side": 1,
+      "message": "It\u0027s far superior for the case of a couple of lines missing (or added). If the line just changes a little, but doesn\u0027t change position when sorting, plain old assertEquals works fine. If the line changes position, or lines are added or removed, the output becomes unusable.",
+      "parentUuid": "0ebaf39b_87014bbb",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_63d215d5",
         "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
         "patchSetId": 2
