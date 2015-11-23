@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_87014bbb",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-23T07:37:23Z",
+      "side": 1,
+      "message": "What does \"far superior\" mean? I tested that and compared the two outputs and found that the \"cleaner\" approach is not worth the trouble but can instead add confusion. It seems you did not read my comment:\nhttps://gerrit.wikimedia.org/r/#/c/252026/8/repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+      "parentUuid": "0ebaf39b_a3d00dcd",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_63d215d5",
         "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
         "patchSetId": 2
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_27f09fd5",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-23T07:37:23Z",
+      "side": 1,
+      "message": "Because explode() does not ignore the last newline in a text file. This, but *only* this should be trimmed. Everything else should make the test fail.",
+      "parentUuid": "0ebaf39b_63d215d5",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_e3eda58a",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
         "patchSetId": 2
@@ -64,6 +100,24 @@
       "writtenOn": "2015-11-19T13:33:50Z",
       "side": 1,
       "message": "This doesn\u0027t trim every line any more.",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c7fe63ab",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-23T07:37:23Z",
+      "side": 1,
+      "message": "And why should it? The tests succeed just fine without suppressing such errors.",
+      "parentUuid": "0ebaf39b_e3eda58a",
       "revId": "f07979ebad150091e296d56d647abedec3e961ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_e7f927c2",
+        "filename": "repo/tests/phpunit/includes/rdf/SiteLinksRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-23T07:37:23Z",
+      "side": 1,
+      "message": "Yes, it is, but not introduced in this patch and therefore can not be a reason for a -1.",
+      "parentUuid": "0ebaf39b_a3e7ada6",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_63f9b54a",
         "filename": "repo/tests/phpunit/includes/rdf/SnakRdfBuilderTest.php",
         "patchSetId": 2
@@ -115,6 +187,24 @@
       "writtenOn": "2015-11-19T13:33:50Z",
       "side": 1,
       "message": "Would be nice to use the \"missing vs extra\" logic for all triple assertions. Perhaps in a new helper class.",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_87286b33",
+        "filename": "repo/tests/phpunit/includes/rdf/SnakRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-23T07:37:23Z",
+      "side": 1,
+      "message": "Again, they are both sorted. assertEquals works just fine. Any \"extra\" logic is superfluous.",
+      "parentUuid": "0ebaf39b_63f9b54a",
       "revId": "f07979ebad150091e296d56d647abedec3e961ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
