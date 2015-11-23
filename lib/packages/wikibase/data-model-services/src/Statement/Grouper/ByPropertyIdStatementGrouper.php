@@ -15,7 +15,7 @@ class ByPropertyIdStatementGrouper implements StatementGrouper {
 	/**
 	 * @param StatementList $statements
 	 *
-	 * @return StatementList[] An associative array, mapping statement group identifiers to
+	 * @return StatementList[] An associative array, mapping property id serializations to
 	 *  StatementList objects.
 	 */
 	public function groupStatements( StatementList $statements ) {

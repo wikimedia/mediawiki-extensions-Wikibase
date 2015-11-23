@@ -28,6 +28,11 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 		return $filter;
 	}
 
+	public function testConstructorThrowsException() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new FilteringStatementGrouper( array( 'filter' ) );
+	}
+
 	public function testDefaultGroupIsAlwaysThere() {
 		$grouper = new FilteringStatementGrouper( array() );
 		$groups = $grouper->groupStatements( new StatementList() );

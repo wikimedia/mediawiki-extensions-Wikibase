@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Statement\Grouper;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Services\Statement\Filter\StatementFilter;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -30,32 +31,48 @@ class FilteringStatementGrouper implements StatementGrouper {
 	private $defaultGroupIdentifier = 'statements';
 
 	/**
+	 * @see \Wikibase\DataModel\Services\Statement\Filter\StatementFilter
+	 *
 	 * @param array $filters An associative array, mapping statement group identifiers to either
-	 *  filters, or to null for the default group.
+	 *  StatementFilter objects, or to null for the default group.
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $filters ) {
 		$this->setFilters( $filters );
 	}
 
+	/**
+	 * @param array $filters
+	 *
+	 * @throws InvalidArgumentException
+	 */
 	private function setFilters( array $filters ) {
 		foreach ( $filters as $key => $filter ) {
-			$this->groups[$key] = new StatementList();
+			$this->initializeGroup( $key );
 
 			if ( $filter === null ) {
 				$this->defaultGroupIdentifier = $key;
-			} else {
+			} elseif ( $filter instanceof StatementFilter ) {
 				$this->filters[$key] = $filter;
+			} else {
+				throw new InvalidArgumentException( '$filter must be a StatementFilter or null' );
 			}
 		}
 
-		$this->groups[$this->defaultGroupIdentifier] = new StatementList();
+		$this->initializeGroup( $this->defaultGroupIdentifier );
+	}
+
+	private function initializeGroup( $key ) {
+		$this->groups[$key] = new StatementList();
 	}
 
 	/**
 	 * @param StatementList $statements
 	 *
 	 * @return StatementList[] An associative array, mapping statement group identifiers to
-	 *  StatementList objects.
+	 *  StatementList objects. All identifiers given in the constructor are guaranteed to be in the
+	 *  result.
 	 */
 	public function groupStatements( StatementList $statements ) {
 		foreach ( $statements->toArray() as $statement ) {

@@ -15,8 +15,8 @@ class NullStatementGrouper implements StatementGrouper {
 	/**
 	 * @param StatementList $statements
 	 *
-	 * @return StatementList[] An associative array, mapping statement group identifiers to
-	 *  StatementList objects.
+	 * @return StatementList[] An associative array, mapping the default group identifier
+	 *  "statements" to the unmodified StatementList object.
 	 */
 	public function groupStatements( StatementList $statements ) {
 		return array( 'statements' => $statements );
