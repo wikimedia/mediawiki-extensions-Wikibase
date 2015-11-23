@@ -42,11 +42,6 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$path = $this->getExpectedOutputFile( $datasetName );
 
-		// Create test data file if it doesn't exist.
-		//if ( !file_exists( $path ) ) {
-		//	file_put_contents( $path . '.actual', join( "\n", $actual ) );
-		//}
-
 		$expected = file( $path );
 
 		$expected = $this->normalizeLines( $expected );
