@@ -16,6 +16,24 @@
       "revId": "e47404bb8520c47a60b4eca71ab5f36bcb224079",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1d84c35d",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHooksHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-23T13:39:00Z",
+      "side": 1,
+      "message": "we could perhaps change this one, but changing the option name (below) is more complicated.\n\ni would like such change to be done separately from this patch",
+      "parentUuid": "0ebaf39b_a24d52c9",
+      "revId": "e47404bb8520c47a60b4eca71ab5f36bcb224079",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
