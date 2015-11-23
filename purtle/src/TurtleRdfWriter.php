@@ -82,11 +82,6 @@ class TurtleRdfWriter extends N3RdfWriterBase {
 		}
 	}
 
-// 	protected function writeValue( $value, $typeBase = null, $typeLocal = null  ) {
-// 		//TODO: shorthand form for xsd:integer|decimal|double|boolean
-// 		parent::writeValue( $value, $typeBase, $typeLocal );
-// 	}
-
 	/**
 	 * @param string $role
 	 * @param BNodeLabeler $labeler
