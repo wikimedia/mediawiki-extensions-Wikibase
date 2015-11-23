@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_82304ee6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2015-11-23T09:06:34Z",
+      "side": 1,
+      "message": "Might have explicited wfSuppressWarnings/wfRestoreWarnings for ease of search.",
+      "revId": "5394e71223ef57f4ad87a161b677d0477e384bf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
