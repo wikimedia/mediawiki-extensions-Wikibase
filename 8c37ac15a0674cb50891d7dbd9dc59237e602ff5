@@ -300,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_42301653",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-23T11:18:12Z",
+      "side": 1,
+      "message": "Try what happens if you add or remove a line, instead of modifying it.\n\nI started out with using plain assertEquals. I only added the more complex code while trying to debug RDF output. With plain assertEquals, it was just impossibel to see what was going on.",
+      "parentUuid": "0ebaf39b_01c79c68",
+      "revId": "8c37ac15a0674cb50891d7dbd9dc59237e602ff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_af39e4cc",
         "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
         "patchSetId": 8
