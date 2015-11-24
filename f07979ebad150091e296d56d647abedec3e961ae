@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_64e19f96",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-24T09:01:44Z",
+      "side": 1,
+      "message": "So will we reimplement this in every test that calls assertEquals on arrays? What about fixing assertEquals instead?",
+      "parentUuid": "0ebaf39b_c243a6b4",
+      "revId": "f07979ebad150091e296d56d647abedec3e961ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_63d215d5",
         "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
         "patchSetId": 2
