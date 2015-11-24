@@ -16,6 +16,24 @@
       "revId": "f8aa01858342a8159c3849ab76f6b5ffbf83bedb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c2e158fc",
+        "filename": "client/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-24T20:42:54Z",
+      "side": 1,
+      "message": "\"SidebarLinks\" sounds confusing to me.  what this stuff here does is more specific and is done on every (uncached in varnish) page view.\n\nI don\u0027t think this should be necessarily be grouped with other \"sidebar links\" stuff which might be done on parse and involve different services.",
+      "parentUuid": "0ebaf39b_0229b035",
+      "revId": "f8aa01858342a8159c3849ab76f6b5ffbf83bedb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
