@@ -33,6 +33,23 @@
       "revId": "4459044eee30e7afcbf0b8c4879bdd175472333a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_da22a64f",
+        "filename": "lib/tests/phpunit/PropertyInfoSnakUrlExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-24T15:56:03Z",
+      "side": 1,
+      "message": "Why are the data types set here? As far as I can tell they are not used in these tests.",
+      "revId": "4459044eee30e7afcbf0b8c4879bdd175472333a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
