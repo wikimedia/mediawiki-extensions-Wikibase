@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_9a9aeebb",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-24T15:41:32Z",
+      "side": 1,
+      "message": "Use the term \"identifier\" please. Avoid \"ID\" please.",
+      "revId": "b77817b9829cd5493dabe4882ffd32d49861ce42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_1aeefe1f",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-24T15:41:32Z",
+      "side": 1,
+      "message": "In HTML5 you should use \u003ca\u003e…\u003c/a\u003e with no href\u003d\"…\" in this case. There is no need for a meaningless \u003cspan\u003e any more in HTML5. So the whole if…else can just be removed.",
+      "revId": "b77817b9829cd5493dabe4882ffd32d49861ce42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
