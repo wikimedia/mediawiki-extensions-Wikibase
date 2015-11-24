@@ -46,7 +46,7 @@
 	"unconnectedpages": "Stranice koje nisu povezane sa stavkama",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|međujezička veza|međujezičkih veza}} na stranici)",
 	"wikibase-unconnectedpages-submit": "Prikaži stranice",
-	"pageswithbadges": "Stranice s značkama",
+	"pageswithbadges": "Stranice sa značkama",
 	"wikibase-pageinfo-entity-id": "ID stavke na Vikipodacima",
 	"wikibase-pageinfo-entity-id-none": "Nema",
 	"wikibase-otherprojects": "Ostali projekti",

@@ -22,7 +22,8 @@
 			"Sebastian Wallroth",
 			"Tiin",
 			"Yellowcard",
-			"Lydia Pintscher (WMDE)"
+			"Lydia Pintscher (WMDE)",
+			"Twagner"
 		]
 	},
 	"wikibase-desc": "Ermöglicht ein Repositorium strukturierter Daten",
@@ -418,6 +419,11 @@
 	"apihelp-wbsearchentities-param-strictlanguage": "Ob der Sprach-Fallback deaktiviert werden soll",
 	"apihelp-wbsearchentities-param-type": "Sucht nach diesem Objekttyp.",
 	"apihelp-wbsearchentities-param-limit": "Maximale Anzahl der Ergebnisse",
+	"apihelp-query+wbsearch-param-search": "Sucht nach diesem Text.",
+	"apihelp-query+wbsearch-param-language": "Sucht in dieser Sprache.",
+	"apihelp-query+wbsearch-param-type": "Sucht nach diesem Objekttyp.",
+	"apihelp-query+wbsearch-param-limit": "Maximale Anzahl der Ergebnisse",
+	"apihelp-query+wbsearch-example-2": "Sucht nach „abc“ in englischer Sprache mit maximal 50",
 	"apihelp-wbsetaliases-description": "Legt die Aliasse für ein Wikibase-Objekt fest.",
 	"apihelp-wbsetaliases-param-id": "Die Kennung für das Objekt, einschließlich des Präfixes.\nVerwendet entweder „Kennung“ oder „Website“ und „Titel“ zusammen.",
 	"apihelp-wbsetaliases-param-site": "Die Kennung für die Website, auf der die Seite liegt.\nIst zusammen mit „Titel“ zu verwenden, um einen vollständigen Websitelink zu erzeugen.",

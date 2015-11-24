@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Giromin Cangiaxo"
+		]
+	},
+	"tooltip-t-wikibase": "Colegamento a l'elemento connesso de l'archivvio dæti",
+	"wikibase-comment-update": "Elemento {{WBREPONAME}} modificou",
+	"wikibase-dataitem": "Elemento {{WBREPONAME}}",
+	"wikibase-editlinks": "Modiffica colegamenti",
+	"wikibase-editlinkstitle": "Modiffica collegamenti interlenguisteghi",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Ascondi",
+	"wikibase-rc-hide-wikidata-show": "Fanni vedde",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Modiffica effettuâ insce {{WBREPONAME}}",
+	"wikibase-otherprojects": "Atri progetti"
+}
