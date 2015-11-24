@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_0229b035",
+        "filename": "client/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-24T20:40:05Z",
+      "side": 1,
+      "message": "I\u0027d prefer the handler class to be named after it\u0027s purpose, not after the hook it handlers. The idea is that the handler class could handle several hooks to implement a single feature.\n\nI suggest \"SidebarLinksHookHandler\" or some such.",
+      "revId": "f8aa01858342a8159c3849ab76f6b5ffbf83bedb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
