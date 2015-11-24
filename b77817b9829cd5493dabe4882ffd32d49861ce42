@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_df3cd52f",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-24T19:53:58Z",
+      "side": 1,
+      "message": "I don\u0027t see how \"identifier\" is any more specific than \"ID\".\n\"ExternalIdentifier\" is better, but HtmlExternalIdentifierSnakFormatter is quiet a mouthful...",
+      "parentUuid": "0ebaf39b_9a9aeebb",
+      "revId": "b77817b9829cd5493dabe4882ffd32d49861ce42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_1aeefe1f",
         "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-24T15:41:32Z",
       "side": 1,
       "message": "In HTML5 you should use \u003ca\u003e…\u003c/a\u003e with no href\u003d\"…\" in this case. There is no need for a meaningless \u003cspan\u003e any more in HTML5. So the whole if…else can just be removed.",
+      "revId": "b77817b9829cd5493dabe4882ffd32d49861ce42",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9f3e5d23",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-24T19:53:58Z",
+      "side": 1,
+      "message": "I\u0027m afraid such a plain \u003ca\u003e tag will still look like a link, depending on CSS... Is this done elsewhere in MediaWiki?\n\nThe span is not meaningless btw, it\u0027s here to do exactly what it was designed for: associate a class with a bit of text.",
+      "parentUuid": "0ebaf39b_1aeefe1f",
       "revId": "b77817b9829cd5493dabe4882ffd32d49861ce42",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
