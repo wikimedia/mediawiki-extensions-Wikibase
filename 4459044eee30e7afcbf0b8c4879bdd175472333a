@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_daf706f1",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-24T15:51:45Z",
+      "side": 1,
+      "message": "How is a \"data value type id\" relevant for a class that gets a snak and returns a URL? I think this describes a private implementation detail which is not relevant for a user of this class.",
+      "revId": "4459044eee30e7afcbf0b8c4879bdd175472333a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_dace26b9",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-24T15:51:45Z",
+      "side": 1,
+      "message": "Key for what? Property info? The key for that is a static \"info\", isn\u0027t it? Why is this configurable? Why doesn\u0027t it have a default?\n\nThis feels like exposing an implementation detail of the PropertyInfoStore. The source from where it gets the actual info about the data type.\n\nOr let me ask the question this way: If all this class cares about is the data type, why doesn\u0027t it use a DataTypeLookup?\n\nHm. I realize this is not about data types, but about something else, that happens to use the same \"PropertyInfoStore\". But again, passing in the key as a parameter means you are exposing internal knowledge. Why should a caller of a \"PropertyInfoSnakUrlExpander\" be able to pass in, for example, \"type\" as a key and mess up everything that\u0027s going on here? Instead this class should know which keys it should use to actually be able to format URLs.\n\nPlease limit this somehow, either by introducing an other service or by limiting the keys you can pass in here.\n\nPlease, at least, add an expressive description, actually listing these keys.",
+      "revId": "4459044eee30e7afcbf0b8c4879bdd175472333a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
