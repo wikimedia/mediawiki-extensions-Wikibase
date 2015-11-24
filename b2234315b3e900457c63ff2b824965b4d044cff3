@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_df429562",
+        "filename": "lib/tests/phpunit/PropertyInfoSnakUrlExpanderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-24T20:14:42Z",
+      "side": 1,
+      "message": "Wikibase\\Lib\\PropertyInfoSnakUrlExpander ?",
+      "revId": "b2234315b3e900457c63ff2b824965b4d044cff3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
