@@ -104,6 +104,24 @@
       "revId": "4459044eee30e7afcbf0b8c4879bdd175472333a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_9fa73d4d",
+        "filename": "lib/tests/phpunit/PropertyInfoSnakUrlExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-24T20:10:26Z",
+      "side": 1,
+      "message": "Oh, and MockPropertyInfoStore actually requires the type field to be set. Otherwise it says \"Missing required info field: type\". Not sure that\u0027s a good thing, but we probably shouldn\u0027t change it here.",
+      "parentUuid": "0ebaf39b_1fdb4d55",
+      "revId": "4459044eee30e7afcbf0b8c4879bdd175472333a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
