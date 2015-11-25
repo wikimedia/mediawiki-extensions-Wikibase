@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementFilter;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -26,7 +27,7 @@ use Wikibase\StatementRankSerializer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Adam Shorland
  */
-class GetClaims extends ApiBase {
+class GetClaims extends ApiBase implements StatementFilter {
 
 	/**
 	 * @var StatementGuidValidator
@@ -128,26 +129,14 @@ class GetClaims extends ApiBase {
 		}
 
 		if ( $guid === null ) {
-			return $this->getMatchingStatements( $entity->getStatements() );
+			return $entity->getStatements()->filter( $this );
 		}
 
 		$statement = $entity->getStatements()->getFirstStatementWithGuid( $guid );
 		return $statement === null ? array() : array( $statement );
 	}
 
-	private function getMatchingStatements( StatementList $statementList ) {
-		$statements = array();
-
-		foreach ( $statementList->toArray() as $statement ) {
-			if ( $this->statementMatchesFilters( $statement ) ) {
-				$statements[] = $statement;
-			}
-		}
-
-		return $statements;
-	}
-
-	private function statementMatchesFilters( Statement $statement ) {
+	public function statementMatches( Statement $statement ) {
 		return $this->rankMatchesFilter( $statement->getRank() )
 			&& $this->propertyMatchesFilter( $statement->getPropertyId() );
 	}
