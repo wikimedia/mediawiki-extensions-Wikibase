@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_197b62ec",
+        "filename": "view/resources/jquery/wikibase/toolbar/jquery.wikibase.edittoolbar.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-25T19:06:06Z",
+      "side": 0,
+      "message": "Yay for getting rid of inline styles!",
+      "revId": "b83e36473817fdafd3d5f91756f474cc520c7ef4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_995e727a",
+        "filename": "view/resources/jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-25T19:06:06Z",
+      "side": 0,
+      "message": "Finally getting rid of those class names.",
+      "revId": "b83e36473817fdafd3d5f91756f474cc520c7ef4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_1952826a",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbarbutton.css",
+        "patchSetId": 21
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-25T19:06:06Z",
+      "side": 1,
+      "message": "missing space between a{",
+      "revId": "1fae92eeffd772135decd7d998aadd39621397df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_99cd1237",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-25T19:06:06Z",
+      "side": 1,
+      "message": "Please add this span into the link. I expect that I can also click the icon to enter edit mode.",
+      "revId": "1fae92eeffd772135decd7d998aadd39621397df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_39dc26e5",
+        "filename": "view/tests/qunit/jquery/wikibase/toolbar/jquery.wikibase.toolbar.tests.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-25T19:06:06Z",
+      "side": 1,
+      "message": "O_o what is this supposed to do? I really don\u0027t get it. At least add a comment explaining this please.",
+      "revId": "1fae92eeffd772135decd7d998aadd39621397df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
