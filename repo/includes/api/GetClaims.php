@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -127,62 +126,22 @@ class GetClaims extends ApiBase {
 			return array();
 		}
 
+		$statements = $entity->getStatements();
+
 		if ( $guid === null ) {
-			return $this->getMatchingStatements( $entity->getStatements() );
+			return $statements->filter( $this->newRequestParamsBasedFilter() )->toArray();
 		}
 
-		$statement = $entity->getStatements()->getFirstStatementWithGuid( $guid );
+		$statement = $statements->getFirstStatementWithGuid( $guid );
 		return $statement === null ? array() : array( $statement );
 	}
 
-	private function getMatchingStatements( StatementList $statementList ) {
-		$statements = array();
-
-		foreach ( $statementList->toArray() as $statement ) {
-			if ( $this->statementMatchesFilters( $statement ) ) {
-				$statements[] = $statement;
-			}
-		}
-
-		return $statements;
-	}
-
-	private function statementMatchesFilters( Statement $statement ) {
-		return $this->rankMatchesFilter( $statement->getRank() )
-			&& $this->propertyMatchesFilter( $statement->getPropertyId() );
-	}
-
-	private function rankMatchesFilter( $rank ) {
-		if ( $rank === null ) {
-			return true;
-		}
-		$params = $this->extractRequestParams();
-
-		if ( isset( $params['rank'] ) ) {
-			$statementRankSerializer = new StatementRankSerializer();
-			$unserializedRank = $statementRankSerializer->deserialize( $params['rank'] );
-			$matchFilter = $rank === $unserializedRank;
-			return $matchFilter;
-		}
-
-		return true;
-	}
-
-	private function propertyMatchesFilter( EntityId $propertyId ) {
-		$params = $this->extractRequestParams();
-
-		if ( isset( $params['property'] ) ) {
-			try {
-				$parsedProperty = $this->idParser->parse( $params['property'] );
-			} catch ( EntityIdParsingException $e ) {
-				$this->errorReporter->dieException( $e, 'param-invalid' );
-			}
-
-			/** @var EntityId $parsedProperty */
-			return $propertyId->equals( $parsedProperty );
-		}
-
-		return true;
+	private function newRequestParamsBasedFilter() {
+		return new GetClaimsStatementFilter(
+			$this->idParser,
+			$this->errorReporter,
+			$this->extractRequestParams()
+		);
 	}
 
 	/**
