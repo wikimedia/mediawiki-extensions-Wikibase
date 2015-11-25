@@ -12,16 +12,12 @@
  * @since 0.5
  * @extends jQuery.ui.TemplatedWidget
  *
- * @option {Object[]} value
- *         Object representing the widget's value.
- *         Structure: [
- *           {
- *             language: <{string]>,
- *             label: <{wikibase.datamodel.Term}>,
- *             description: <{wikibase.datamodel.Term}>,
- *             aliases: <{wikibase.datamodel.MultiTerm}>
- *           }[, ...]
- *         ]
+ * @option {Fingerprint} value
+ *         The `Fingerprint` displayed by the view. May be set initially only and gets updated
+ *         automatically if changes to the `Statement` are saved.
+ *
+ * @option {string[]} userLanguages
+ *         A list of languages for which terms should be displayed initially.
  *
  * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
  *
@@ -58,7 +54,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			$header: '.wikibase-entitytermsforlanguagelistview-header',
 			$listview: '.wikibase-entitytermsforlanguagelistview-listview'
 		},
-		value: [],
+		value: null,
+		userLanguages: [],
 		entityChangersFactory: null
 	},
 
@@ -71,7 +68,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !$.isArray( this.options.value )
+		if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
+			|| !$.isArray( this.options.userLanguages )
 			|| !this.options.entityChangersFactory
 		) {
 			throw new Error( 'Required option(s) missing' );
@@ -126,11 +124,11 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			} );
 		} );
 
-		var mismatch = scrapedLanguages.length !== this.options.value.length;
+		var mismatch = scrapedLanguages.length !== this.options.userLanguages.length;
 
 		if ( !mismatch ) {
 			for ( i = 0; i < scrapedLanguages.length; i++ ) {
-				if ( scrapedLanguages[i] !== this.options.value[i].language ) {
+				if ( scrapedLanguages[i] !== this.options.userLanguages[i] ) {
 					mismatch = true;
 					break;
 				}
@@ -178,18 +176,26 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		.listview( {
 			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 				listItemWidget: listItemWidget,
-				newItemOptionsFn: function( value ) {
+				newItemOptionsFn: function( language ) {
 					return {
-						value: value,
+						value: {
+							language: language,
+							label: self.options.value.getLabelFor( language )
+								|| new wb.datamodel.Term( language, '' ),
+							description: self.options.value.getDescriptionFor( language )
+								|| new wb.datamodel.Term( language, '' ),
+							aliases: self.options.value.getAliasesFor( language )
+								|| new wb.datamodel.MultiTerm( language, [] )
+						},
 						entityChangersFactory: self.options.entityChangersFactory,
 						helpMessage: mw.msg(
 							'wikibase-entitytermsforlanguageview-input-help-message',
-							wb.getLanguageNameByCode( value.language )
+							wb.getLanguageNameByCode( language )
 						)
 					};
 				}
 			} ),
-			value: self.options.value || null,
+			value: self.options.userLanguages || null,
 			listItemNodeName: 'TR'
 		} );
 	},
@@ -230,16 +236,13 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			currentValue.push( entitytermsforlanguageview.value() );
 		} );
 
-		if ( currentValue.length !== this.options.value.length ) {
-			return false;
-		}
-
-		// TODO: Implement and use Fingerprint in DataModelJavaScript component
 		for ( var i = 0; i < currentValue.length; i++ ) {
-			if ( currentValue[i].language !== this.options.value[i].language
-				|| !currentValue[i].label.equals( this.options.value[i].label )
-				|| !currentValue[i].description.equals( this.options.value[i].description )
-				|| !currentValue[i].aliases.equals( this.options.value[i].aliases )
+			if ( !currentValue[i].label.equals( this.options.value.getLabelFor( currentValue[i].language )
+					|| new wb.datamodel.Term( currentValue[i].language, '' ) )
+				|| !currentValue[i].description.equals( this.options.value.getDescriptionFor( currentValue[i].language )
+					|| new wb.datamodel.Term( currentValue[i].language, '' ) )
+				|| !currentValue[i].aliases.equals( this.options.value.getAliasesFor( currentValue[i].language )
+					|| new wb.datamodel.MultiTerm( currentValue[i].language, [] ) )
 			) {
 				return false;
 			}
@@ -429,25 +432,28 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	},
 
 	/**
-	 * @param {Object[]} [value]
-	 * @return {Object[]|*}
+	 * @param {Fingerprint} [value]
+	 * @return {Fingerprint|*}
 	 */
 	value: function( value ) {
 		if ( value !== undefined ) {
 			return this.option( 'value', value );
 		}
 
-		var listview = this.$listview.data( 'listview' ),
+		// do a deep clone of Fingerprint
+		var fingerprint = $.extend( true, {}, this.options.value ),
+			listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
 
-		value = [];
-
+		// this only adds all terms visible in the ui to the Fingerprint, all other languages get ignored
 		listview.items().each( function() {
-			var entitytermsforlanguageview = lia.liInstance( $( this ) );
-			value.push( entitytermsforlanguageview.value() );
+			var entityTerms = lia.liInstance( $( this )).value();
+			fingerprint.setLabel( entityTerms.language, entityTerms.label );
+			fingerprint.setDescription( entityTerms.language, entityTerms.description );
+			fingerprint.setAliases( entityTerms.language, entityTerms.aliases );
 		} );
 
-		return value;
+		return fingerprint;
 	},
 
 	/**

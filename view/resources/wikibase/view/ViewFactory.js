@@ -170,26 +170,12 @@
 	 * @return {jQuery.wikibase.entitytermsview} The constructed entity terms view
 	 **/
 	SELF.prototype.getEntityTermsView = function( fingerprint, $dom ) {
-		var value = $.map(
-				this._userLanguages,
-				function( language ) {
-					return {
-						language: language,
-						label: fingerprint.getLabelFor( language )
-							|| new wb.datamodel.Term( language, '' ),
-						description: fingerprint.getDescriptionFor( language )
-							|| new wb.datamodel.Term( language, '' ),
-						aliases: fingerprint.getAliasesFor( language )
-							|| new wb.datamodel.MultiTerm( language, [] )
-					};
-				}
-			);
-
 		return this._getView(
 			'entitytermsview',
 			$dom,
 			{
-				value: value,
+				value: fingerprint,
+				userLanguages: this._userLanguages,
 				entityChangersFactory: this._entityChangersFactory,
 				helpMessage: this._messageProvider.getMessage( 'wikibase-entitytermsview-input-help-message' )
 			}
