@@ -125,3 +125,7 @@
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-aliases input:focus {
 	border-color: #0b0080;
 }
+
+.wikibase-entitytermsview-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-more {
+	padding: 0.4em;
+}
