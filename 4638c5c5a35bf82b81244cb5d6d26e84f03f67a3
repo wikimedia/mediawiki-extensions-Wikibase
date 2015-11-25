@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_c619658a",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHooksHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-11-25T18:31:20Z",
+      "side": 1,
+      "message": "Is there a reason to remember the instance? Creation should be cheap here and these arguments might at least from the appearance of the the function be different.",
+      "revId": "4638c5c5a35bf82b81244cb5d6d26e84f03f67a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_59479a22",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHooksHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2015-11-25T18:31:20Z",
+      "side": 1,
+      "message": "created https://phabricator.wikimedia.org/T119640 use rc_source instead of rc_type to filter out wikidata recent changes",
+      "revId": "4638c5c5a35bf82b81244cb5d6d26e84f03f67a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
