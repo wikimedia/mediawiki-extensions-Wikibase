@@ -61,6 +61,11 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	},
 
 	/**
+	 * @type {jQuery}
+	 */
+	$entitytermsforlanguagelistviewMore: null,
+
+	/**
 	 * @type {boolean}
 	 */
 	_isInEditMode: false,
@@ -96,6 +101,10 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			if ( listview ) {
 				listview.destroy();
 			}
+		}
+
+		if ( this.$entitytermsforlanguagelistviewMore ) {
+			this.$entitytermsforlanguagelistviewMore.remove();
 		}
 
 		this.element.removeClass( 'wikibase-entitytermsforlanguagelistview' );
@@ -189,21 +198,119 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 				}
 			} ),
 			value: $.map( self.options.userLanguages, function( language ) {
-				return self._valueForLanguage( language );
+				return self._getValueForLanguage( language );
 			} ),
 			listItemNodeName: 'TR'
 		} );
+
+		if ( !this.element.find( '.wikibase-entitytermsforlanguagelistview-more' ).length ) {
+			this._createEntitytermsforlanguagelistviewMore();
+		}
 	},
 
-	_valueForLanguage: function( language ) {
+	/**
+	 * Creates a button which allows the user to show terms in all languages available.
+	 * @private
+	 */
+	_createEntitytermsforlanguagelistviewMore: function() {
+		var self = this,
+			listview = this.$listview.data( 'listview' ),
+			lia = listview.listItemAdapter(),
+			languages = this._getAdditionalLanguages(),
+			itemsPerLanguage = {};
+
+		if ( $.isEmptyObject( languages ) ) {
+			return;
+		}
+
+		this.$entitytermsforlanguagelistviewMore = $( '<div/>' )
+		.addClass( 'wikibase-entitytermsforlanguagelistview-more' )
+		.append(
+			$( '<a/>' )
+			.attr( 'href', '#' )
+			.text( mw.msg( 'wikibase-entitytermsforlanguagelistview-more' ) )
+			.click( function( event ) {
+				var $this = $( this ),
+					expanded = $.isEmptyObject( itemsPerLanguage ),
+					lang;
+
+				event.preventDefault();
+
+				if ( expanded ) {
+					for ( lang in languages ) {
+						var $li = listview.addItem( self._getValueForLanguage( lang ) );
+						if ( self._isInEditMode ) {
+							lia.liInstance( $li ).startEditing();
+						}
+						itemsPerLanguage[lang] = $li;
+					}
+				} else {
+					var top = $this.offset().top;
+					for ( lang in languages ) {
+						listview.removeItem( itemsPerLanguage[lang] );
+						delete itemsPerLanguage[lang];
+					}
+					self._scrollUp( $this, top );
+				}
+
+				$this.text( mw.msg(
+					'wikibase-entitytermsforlanguagelistview-' + ( expanded ? 'less' : 'more' )
+				) );
+			} )
+		);
+
+		this.element.after( this.$entitytermsforlanguagelistviewMore );
+	},
+
+	/**
+	 * @return {Object} Map of additional language codes in this fingerprint.
+	 * @private
+	 */
+	_getAdditionalLanguages: function() {
+		var fingerprint = this.options.value,
+			languages = {};
+
+		fingerprint.getLabels().each( function( lang ) {
+			languages[lang] = lang;
+		} );
+		fingerprint.getDescriptions().each( function( lang ) {
+			languages[lang] = lang;
+		} );
+		fingerprint.getAliases().each( function( lang ) {
+			languages[lang] = lang;
+		} );
+
+		$.each( this.options.userLanguages, function() {
+			delete languages[this];
+		} );
+
+		return languages;
+	},
+
+	/**
+	 * @param {jQuery} $this
+	 * @param {int} previousTop
+	 * @private
+	 */
+	_scrollUp: function( $this, previousTop ) {
+		if ( $this.offset().top < $( window ).scrollTop() ) {
+			// This does not only keep the toggler visible, it also updates all sticknodes.
+			window.scrollBy( 0, $this.offset().top - previousTop );
+		}
+	},
+
+	/**
+	 * @return {Object}
+	 * @private
+	 */
+	_getValueForLanguage: function( lang ) {
+		var fingerprint = this.options.value;
+
 		return {
-			language: language,
-			label: this.options.value.getLabelFor( language )
-				|| new wb.datamodel.Term( language, '' ),
-			description: this.options.value.getDescriptionFor( language )
-				|| new wb.datamodel.Term( language, '' ),
-			aliases: this.options.value.getAliasesFor( language )
-				|| new wb.datamodel.MultiTerm( language, [] )
+			language: lang,
+			label: fingerprint.getLabelFor( lang ) || new wb.datamodel.Term( lang, '' ),
+			description: fingerprint.getDescriptionFor( lang ) || new wb.datamodel.Term( lang, '' ),
+			aliases: fingerprint.getAliasesFor( lang ) || new wb.datamodel.MultiTerm( lang, [] )
 		};
 	},
 
@@ -246,7 +353,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		} );
 
 		for ( var i = 0; i < currentValue.length; i++ ) {
-			value = this._valueForLanguage( currentValue[i].language );
+			value = this._getValueForLanguage( currentValue[i].language );
 
 			if ( !currentValue[i].label.equals( value.label )
 				|| !currentValue[i].description.equals( value.description )
