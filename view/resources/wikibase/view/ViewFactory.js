@@ -189,7 +189,8 @@
 			'entitytermsview',
 			$dom,
 			{
-				value: value,
+				value: fingerprint,
+				userLanguages: this._userLanguages,
 				entityChangersFactory: this._entityChangersFactory,
 				helpMessage: this._messageProvider.getMessage( 'wikibase-entitytermsview-input-help-message' )
 			}
