@@ -6,24 +6,36 @@
 'use strict';
 
 /**
+ *  @returns {Fingerprint}
+ */
+function createFingerprint() {
+	return new wb.datamodel.Fingerprint(
+		new wb.datamodel.TermMap( {
+			de: new wb.datamodel.Term( 'de', 'de-label' ),
+			en: new wb.datamodel.Term( 'en', 'en-label' ),
+			fa: new wb.datamodel.Term( 'fa', 'fa-label' )
+		} ),
+		new wb.datamodel.TermMap( {
+			de: new wb.datamodel.Term( 'de', 'de-description' ),
+			en: new wb.datamodel.Term( 'en', 'en-description' ),
+			fa: new wb.datamodel.Term( 'fa', 'fa-description' )
+		} ),
+		new wb.datamodel.MultiTermMap( {
+			de: new wb.datamodel.MultiTerm( 'de', [] ),
+			en: new wb.datamodel.MultiTerm( 'en', [] ),
+			fa: new wb.datamodel.MultiTerm( 'fa', [] )
+		} )
+	);
+}
+
+/**
  * @param {Object} [options]
  * @return {jQuery}
  */
-var createEntitytermsview = function( options ) {
+function createEntitytermsview( options ) {
 	options = $.extend( {
-		value: [
-			{
-				language: 'de',
-				label: new wb.datamodel.Term( 'de', 'de-label' ),
-				description: new wb.datamodel.Term( 'de', 'de-description' ),
-				aliases: new wb.datamodel.MultiTerm( 'de', [] )
-			}, {
-				language: 'en',
-				label: new wb.datamodel.Term( 'en', 'en-label' ),
-				description: new wb.datamodel.Term( 'en', 'en-description' ),
-				aliases: new wb.datamodel.MultiTerm( 'en', [] )
-			}
-		],
+		value: createFingerprint(),
+		userLanguages: [ 'de', 'en' ],
 		entityChangersFactory: {
 			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
 			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
@@ -35,7 +47,7 @@ var createEntitytermsview = function( options ) {
 		.appendTo( 'body' )
 		.addClass( 'test_entitytermsview' )
 		.entitytermsview( options );
-};
+}
 
 QUnit.module( 'jquery.wikibase.entitytermsview', QUnit.newMwEnvironment( {
 	teardown: function() {
@@ -95,10 +107,8 @@ QUnit.test( 'value()', function( assert ) {
 	var $entitytermsview = createEntitytermsview(),
 		entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
-	// TODO: Enhance test as soon as SiteLinkList is implemented in DataModelJavaScript
-	assert.equal(
-		entitytermsview.value().length,
-		2,
+	assert.ok(
+		entitytermsview.value().equals( createFingerprint() ),
 		'Retrieved value.'
 	);
 
