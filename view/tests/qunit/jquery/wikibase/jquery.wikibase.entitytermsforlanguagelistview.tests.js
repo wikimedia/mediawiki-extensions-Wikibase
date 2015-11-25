@@ -6,36 +6,48 @@
 'use strict';
 
 /**
+ *  @returns {Fingerprint}
+ */
+function createFingerprint() {
+	return new wb.datamodel.Fingerprint(
+		new wb.datamodel.TermMap( {
+			de: new wb.datamodel.Term( 'de', 'de-label' ),
+			en: new wb.datamodel.Term( 'en', 'en-label' ),
+			fa: new wb.datamodel.Term( 'fa', 'fa-label' )
+		} ),
+		new wb.datamodel.TermMap( {
+			de: new wb.datamodel.Term( 'de', 'de-description' ),
+			en: new wb.datamodel.Term( 'en', 'en-description' ),
+			fa: new wb.datamodel.Term( 'fa', 'fa-description' )
+		} ),
+		new wb.datamodel.MultiTermMap( {
+			de: new wb.datamodel.MultiTerm( 'de', [] ),
+			en: new wb.datamodel.MultiTerm( 'en', [] ),
+			fa: new wb.datamodel.MultiTerm( 'fa', [] )
+		} )
+	);
+}
+
+/**
  * @param {Object} [options]
  * @return {jQuery}
  */
-var createEntitytermsforlanguagelistview = function( options ) {
+function createEntitytermsforlanguagelistview( options ) {
 	options = $.extend( {
 		entityChangersFactory: {
 			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
 			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
 			getLabelsChanger: function() { return 'I am a LabelsChanger'; }
 		},
-		value: [
-			{
-				language: 'de',
-				label: new wb.datamodel.Term( 'de', 'de-label' ),
-				description: new wb.datamodel.Term( 'de', 'de-description' ),
-				aliases: new wb.datamodel.MultiTerm( 'de', [] )
-			}, {
-				language: 'en',
-				label: new wb.datamodel.Term( 'en', 'en-label' ),
-				description: new wb.datamodel.Term( 'en', 'en-description' ),
-				aliases: new wb.datamodel.MultiTerm( 'en', [] )
-			}
-		]
+		value: createFingerprint(),
+		userLanguages: [ 'de', 'en' ]
 	}, options || {} );
 
 	return $( '<table/>' )
 		.appendTo( 'body' )
 		.addClass( 'test_entitytermsforlanguagelistview' )
 		.entitytermsforlanguagelistview( options );
-};
+}
 
 QUnit.module( 'jquery.wikibase.entitytermsforlanguagelistview', QUnit.newMwEnvironment( {
 	teardown: function() {
@@ -81,7 +93,8 @@ QUnit.test( 'Create & destroy', function( assert ) {
 QUnit.test( 'isInitialValue()', function( assert ) {
 	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 		entitytermsforlanguagelistview
-			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
+			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' ),
+		listview = entitytermsforlanguagelistview.$listview.data( 'listview' );
 
 	entitytermsforlanguagelistview.startEditing();
 
@@ -90,19 +103,26 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 		'Verified isInitialValue() returning true.'
 	);
 
-	var $item = entitytermsforlanguagelistview.$listview.data( 'listview' ).addItem( {
+	var $item = listview.addItem( 'fa' );
+
+	assert.ok(
+		entitytermsforlanguagelistview.isInitialValue(),
+		'Verified isInitialValue() returning true when adding a language.'
+	);
+
+	listview.listItemAdapter().liInstance( $item ).value( {
 		language: 'fa',
-		label: new wb.datamodel.Term( 'fa', 'fa-label' ),
-		description: new wb.datamodel.Term( 'fa', 'fa-description' ),
+		label: new wb.datamodel.Term( 'fa', 'changed-term' ),
+		description: new wb.datamodel.Term( 'fa', 'changed-description' ),
 		aliases: new wb.datamodel.MultiTerm( 'fa', [] )
 	} );
 
 	assert.ok(
 		!entitytermsforlanguagelistview.isInitialValue(),
-		'Verified isInitialValue() returning false after changing value.'
+		'Verified isInitialValue() returning false after changing the value.'
 	);
 
-	entitytermsforlanguagelistview.$listview.data( 'listview' ).removeItem( $item );
+	listview.removeItem( $item );
 
 	assert.ok(
 		entitytermsforlanguagelistview.isInitialValue(),
@@ -137,11 +157,8 @@ QUnit.test( 'value()', function( assert ) {
 		entitytermsforlanguagelistview
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-	// TODO: Enhance test as soon as SiteLinkList is implemented in DataModelJavaScript and used
-	// as value object.
-	assert.equal(
-		entitytermsforlanguagelistview.value().length,
-		2,
+	assert.ok(
+		entitytermsforlanguagelistview.value().equals( createFingerprint() ),
 		'Retrieved value.'
 	);
 

@@ -525,7 +525,8 @@
 		viewFactory.getEntityTermsView( fingerprint, $dom );
 
 		sinon.assert.calledWith( $.wikibase.entitytermsview, sinon.match( {
-			value: [],
+			value: fingerprint,
+			userLanguages: userLanguages,
 			entityChangersFactory: entityChangersFactory,
 			helpMessage: message
 		} ) );
