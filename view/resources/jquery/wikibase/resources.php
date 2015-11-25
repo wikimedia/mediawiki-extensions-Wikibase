@@ -195,6 +195,8 @@ return call_user_func( function() {
 				'wikibase-entitytermsforlanguagelistview-description',
 				'wikibase-entitytermsforlanguagelistview-label',
 				'wikibase-entitytermsforlanguagelistview-language',
+				'wikibase-entitytermsforlanguagelistview-less',
+				'wikibase-entitytermsforlanguagelistview-more',
 				'wikibase-entitytermsforlanguageview-input-help-message',
 			),
 		),
