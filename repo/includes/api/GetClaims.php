@@ -27,7 +27,7 @@ use Wikibase\StatementRankSerializer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Adam Shorland
  */
-class GetClaims extends ApiBase implements StatementFilter {
+class GetClaims extends ApiBase {
 
 	/**
 	 * @var StatementGuidValidator
@@ -129,49 +129,19 @@ class GetClaims extends ApiBase implements StatementFilter {
 		}
 
 		if ( $guid === null ) {
-			return $entity->getStatements()->filter( $this );
+			return $entity->getStatements()->filter( $this->newRequestParamsBasedFilter() );
 		}
 
 		$statement = $entity->getStatements()->getFirstStatementWithGuid( $guid );
 		return $statement === null ? array() : array( $statement );
 	}
 
-	public function statementMatches( Statement $statement ) {
-		return $this->rankMatchesFilter( $statement->getRank() )
-			&& $this->propertyMatchesFilter( $statement->getPropertyId() );
-	}
-
-	private function rankMatchesFilter( $rank ) {
-		if ( $rank === null ) {
-			return true;
-		}
-		$params = $this->extractRequestParams();
-
-		if ( isset( $params['rank'] ) ) {
-			$statementRankSerializer = new StatementRankSerializer();
-			$unserializedRank = $statementRankSerializer->deserialize( $params['rank'] );
-			$matchFilter = $rank === $unserializedRank;
-			return $matchFilter;
-		}
-
-		return true;
-	}
-
-	private function propertyMatchesFilter( EntityId $propertyId ) {
-		$params = $this->extractRequestParams();
-
-		if ( isset( $params['property'] ) ) {
-			try {
-				$parsedProperty = $this->idParser->parse( $params['property'] );
-			} catch ( EntityIdParsingException $e ) {
-				$this->errorReporter->dieException( $e, 'param-invalid' );
-			}
-
-			/** @var EntityId $parsedProperty */
-			return $propertyId->equals( $parsedProperty );
-		}
-
-		return true;
+	private function newRequestParamsBasedFilter() {
+		return new GetClaimsStatementFilter(
+			$this->idParser,
+			$this->errorReporter,
+			$this->extractRequestParams()
+		);
 	}
 
 	/**
