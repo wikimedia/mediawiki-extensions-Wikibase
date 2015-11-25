@@ -1,6 +1,7 @@
 /**
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 ( function( mw, $ ) {
 	'use strict';

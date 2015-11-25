@@ -1,6 +1,7 @@
 /**
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 ( function( mw, wb, $ ) {
 	'use strict';
@@ -60,6 +61,11 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	},
 
 	/**
+	 * @type {jQuery}
+	 */
+	$entitytermsforlanguagelistviewMore: null,
+
+	/**
 	 * @type {boolean}
 	 */
 	_isInEditMode: false,
@@ -95,6 +101,10 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			if ( listview ) {
 				listview.destroy();
 			}
+		}
+
+		if ( this.$entitytermsforlanguagelistviewMore ) {
+			this.$entitytermsforlanguagelistviewMore.remove();
 		}
 
 		this.element.removeClass( 'wikibase-entitytermsforlanguagelistview' );
@@ -197,6 +207,68 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			} ),
 			value: self.options.userLanguages || null,
 			listItemNodeName: 'TR'
+		} );
+
+		if ( !this.element
+				.find( '.wikibase-entitytermsforlanguagelistview-more' )
+				.length
+		) {
+			this._createEntitytermsforlanguagelistviewMore();
+		}
+	},
+
+	/**
+	 * Creates a button which allows the user to show terms in all languages available.
+	 * @private
+	 */
+	_createEntitytermsforlanguagelistviewMore: function() {
+		var self = this,
+			languages = this._additionalLanguages(),
+			itemsPerLanguage = {},
+			expanded = false;
+
+		this.$entitytermsforlanguagelistviewMore = $( '<div/>' )
+			.addClass( 'wikibase-entitytermsforlanguagelistview-more' )
+			.text( mw.msg( 'wikibase-entitytermsforlanguagelistview-more', languages.length ) )
+			.click( function() {
+				expanded = !expanded;
+
+				if ( expanded ) {
+					for ( var i in languages ) {
+						itemsPerLanguage[languages[i]] = self.$listview.data( 'listview' ).addItem( languages[i] );
+					}
+
+					$( this ).text( mw.msg( 'wikibase-entitytermsforlanguagelistview-less' ) );
+				} else {
+					// TODO scroll back to top
+					for ( var i in languages ) {
+						self.$listview.data( 'listview' ).removeItem( itemsPerLanguage[languages[i]] );
+					}
+
+					$( this ).text( mw.msg( 'wikibase-entitytermsforlanguagelistview-more', languages.length ) );
+				}
+			} );
+
+		this.element.after(
+			this.$entitytermsforlanguagelistviewMore
+		);
+	},
+
+	/**
+	 * Returns a list of additional languages in this fingerprint.
+	 * @return {string[]}
+	 * @private
+	 */
+	_additionalLanguages: function() {
+		var self = this,
+			languages = $.merge(
+				this.options.value.getLabels().getKeys(),
+				this.options.value.getDescriptions().getKeys(),
+				this.options.value.getAliases().getKeys()
+			);
+
+		return $.grep( languages, function( lang ) {
+			return $.inArray( lang, self.options.userLanguages ) < 0;
 		} );
 	},
 
