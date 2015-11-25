@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_06ee9d86",
+        "filename": "lib/includes/formatters/OutputFormatSnakFormatterFactory.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-25T16:58:10Z",
+      "side": 1,
+      "message": "No longer needed with I04e6db75 merged.",
+      "revId": "f16cbf0eba61efa0012bf70940df13c8e5a1d8e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
