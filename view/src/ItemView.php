@@ -40,7 +40,7 @@ class ItemView extends EntityView {
 	 *
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
-	 * @param StatementGroupListView $statementGroupListView
+	 * @param StatementSectionsView $statementSectionsView
 	 * @param Language $language
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
@@ -48,18 +48,14 @@ class ItemView extends EntityView {
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
-		StatementGroupListView $statementGroupListView,
+		StatementSectionsView $statementSectionsView,
 		Language $language,
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups
 	) {
 		parent::__construct( $templateFactory, $entityTermsView, $language );
 
-		// TODO: Inject.
-		$this->statementSectionsView = new StatementSectionsView(
-			$this->templateFactory,
-			$statementGroupListView
-		);
+		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->siteLinksView = $siteLinksView;
 	}
