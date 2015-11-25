@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_713dd8b7",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-25T08:48:12Z",
+      "side": 1,
+      "message": "$snak-\u003egetDataValue()",
+      "revId": "5c4e3e6a8bb3ddd3866d1eb30ade237ebd314d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f170e8a4",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-11-25T08:48:12Z",
+      "side": 1,
+      "message": "I know that was not decided by this change, but I\u0027m quite sad about the amount of inflexibility introduced into Wikibase here. This is another case of Wikibase not being flexible enough to allow Wikidata to handle their requirements in a clean fashion.",
+      "revId": "5c4e3e6a8bb3ddd3866d1eb30ade237ebd314d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
