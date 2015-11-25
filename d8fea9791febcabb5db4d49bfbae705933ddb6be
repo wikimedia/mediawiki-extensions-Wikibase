@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_91c3ac8c",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-25T09:34:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_7e538e1a",
+      "revId": "d8fea9791febcabb5db4d49bfbae705933ddb6be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_b1059015",
         "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-25T08:24:37Z",
       "side": 1,
       "message": "I would expect the check for ignored conflicts to come earlier, probably before the iteration over the statements.",
+      "revId": "d8fea9791febcabb5db4d49bfbae705933ddb6be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_31c20089",
+        "filename": "repo/includes/ChangeOp/ChangeOpsMerge.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-11-25T09:34:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_b1059015",
       "revId": "d8fea9791febcabb5db4d49bfbae705933ddb6be",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
