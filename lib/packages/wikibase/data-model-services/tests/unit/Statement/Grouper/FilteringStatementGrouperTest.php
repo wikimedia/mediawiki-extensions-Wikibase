@@ -17,10 +17,10 @@ use Wikibase\DataModel\Statement\StatementList;
 class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 
 	private function newStatementFilter( $propertyId ) {
-		$filter = $this->getMock( 'Wikibase\DataModel\Services\Statement\Filter\StatementFilter' );
+		$filter = $this->getMock( 'Wikibase\DataModel\Statement\StatementFilter' );
 
 		$filter->expects( $this->any() )
-			->method( 'isMatch' )
+			->method( 'statementMatches' )
 			->will( $this->returnCallback( function( Statement $statement ) use ( $propertyId ) {
 				return $statement->getPropertyId()->getSerialization() === $propertyId;
 			} ) );
@@ -30,7 +30,7 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 
 	public function testConstructorThrowsException() {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new FilteringStatementGrouper( array( 'filter' ) );
+		new FilteringStatementGrouper( array( 'default1' => null, 'default2' => null) );
 	}
 
 	public function testDefaultGroupIsAlwaysThere() {
@@ -103,6 +103,10 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 			'p3' => new StatementList(),
 			'statements' => new StatementList(),
 		);
+		$this->assertEquals( $expected, $groups );
+
+		//test for idempotence
+		$groups = $grouper->groupStatements( $statements );
 		$this->assertEquals( $expected, $groups );
 	}
 

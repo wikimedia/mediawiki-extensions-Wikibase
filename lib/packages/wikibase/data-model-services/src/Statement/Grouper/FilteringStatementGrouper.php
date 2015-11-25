@@ -3,8 +3,8 @@
 namespace Wikibase\DataModel\Services\Statement\Grouper;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Services\Statement\Filter\StatementFilter;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementFilter;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
@@ -16,55 +16,56 @@ use Wikibase\DataModel\Statement\StatementList;
 class FilteringStatementGrouper implements StatementGrouper {
 
 	/**
-	 * @var StatementList[]
-	 */
-	private $groups = array();
-
-	/**
 	 * @var StatementFilter[] An associative array, mapping statement group identifiers to filters.
 	 */
 	private $filters = array();
 
 	/**
-	 * @var string
+	 * @var string[] Array of group keys
 	 */
-	private $defaultGroupIdentifier = 'statements';
+	private $groupKeys = array();
 
 	/**
-	 * @see \Wikibase\DataModel\Services\Statement\Filter\StatementFilter
+	 * @var string
+	 */
+	private $defaultGroupIdentifier = null;
+
+	/**
 	 *
-	 * @param array $filters An associative array, mapping statement group identifiers to either
-	 *  StatementFilter objects, or to null for the default group.
+	 * @see StatementFilter
+	 *
+	 * @param array $filters
+	 *        	An associative array, mapping statement group identifiers to either
+	 *        	StatementFilter objects, or to null for the default group.
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $filters ) {
-		$this->setFilters( $filters );
+
+		foreach ( $filters as $key => $filter ) {
+			$this->addFilter( $filter, $key );
+			$this->groupKeys[] = $key;
+		}
+
+		if ( $this->defaultGroupIdentifier === null ) {
+			$this->defaultGroupIdentifier = 'statements';
+			$this->groupKeys[] = $this->defaultGroupIdentifier;
+		}
 	}
 
 	/**
-	 * @param array $filters
-	 *
-	 * @throws InvalidArgumentException
+	 * @param StatementFilter|null $filter
+	 * @param string $key
 	 */
-	private function setFilters( array $filters ) {
-		foreach ( $filters as $key => $filter ) {
-			$this->initializeGroup( $key );
-
-			if ( $filter === null ) {
-				$this->defaultGroupIdentifier = $key;
-			} elseif ( $filter instanceof StatementFilter ) {
-				$this->filters[$key] = $filter;
-			} else {
-				throw new InvalidArgumentException( '$filter must be a StatementFilter or null' );
+	private function addFilter( StatementFilter $filter = null, $key ) {
+		if ( $filter === null ) {
+			if ( $this->defaultGroupIdentifier !== null ) {
+				throw new InvalidArgumentException( 'You must only define one default group' );
 			}
+			$this->defaultGroupIdentifier = $key;
+		} elseif ( $filter instanceof StatementFilter ) {
+			$this->filters[$key] = $filter;
 		}
-
-		$this->initializeGroup( $this->defaultGroupIdentifier );
-	}
-
-	private function initializeGroup( $key ) {
-		$this->groups[$key] = new StatementList();
 	}
 
 	/**
@@ -75,12 +76,23 @@ class FilteringStatementGrouper implements StatementGrouper {
 	 *  result.
 	 */
 	public function groupStatements( StatementList $statements ) {
+		$groups = $this->getEmptyGroups();
+
 		foreach ( $statements->toArray() as $statement ) {
 			$key = $this->getKey( $statement );
-			$this->groups[$key]->addStatement( $statement );
+			$groups[$key]->addStatement( $statement );
 		}
 
-		return $this->groups;
+		return $groups;
+	}
+
+	private function getEmptyGroups() {
+		$groups = array();
+
+		foreach ( $this->groupKeys as $key ) {
+			$groups[$key] = new StatementList();
+		}
+		return $groups;
 	}
 
 	/**
@@ -90,7 +102,7 @@ class FilteringStatementGrouper implements StatementGrouper {
 	 */
 	private function getKey( Statement $statement ) {
 		foreach ( $this->filters as $key => $filter ) {
-			if ( $filter->isMatch( $statement ) ) {
+			if ( $filter->statementMatches( $statement ) ) {
 				return $key;
 			}
 		}

@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Statement\Filter;
 
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementFilter;
 
 /**
  * @since 3.2
@@ -25,13 +26,13 @@ class PropertySetStatementFilter implements StatementFilter {
 	}
 
 	/**
-	 * @see StatementFilter::isMatch
+	 * @see StatementFilter::statementMatches
 	 *
 	 * @param Statement $statement
 	 *
 	 * @return bool
 	 */
-	public function isMatch( Statement $statement ) {
+	public function statementMatches( Statement $statement ) {
 		$id = $statement->getPropertyId()->getSerialization();
 		return in_array( $id, $this->propertyIds );
 	}

@@ -18,7 +18,7 @@ class NullStatementFilterTest extends PHPUnit_Framework_TestCase {
 	public function testIsMatch() {
 		$filter = new NullStatementFilter();
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
-		$this->assertTrue( $filter->isMatch( $statement ) );
+		$this->assertTrue( $filter->statementMatches( $statement ) );
 	}
 
 }

@@ -20,7 +20,7 @@ class PropertySetStatementFilterTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testIsMatch( Statement $statement, $propertyIds, $expected ) {
 		$filter = new PropertySetStatementFilter( $propertyIds );
-		$this->assertSame( $expected, $filter->isMatch( $statement ) );
+		$this->assertSame( $expected, $filter->statementMatches( $statement ) );
 	}
 
 	public function statementProvider() {

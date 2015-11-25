@@ -42,7 +42,7 @@ class DataTypeStatementFilterTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testIsMatch( Statement $statement, $dataTypes, $expected ) {
 		$filter = new DataTypeStatementFilter( $this->getDataTypeLookup(), $dataTypes );
-		$this->assertSame( $expected, $filter->isMatch( $statement ) );
+		$this->assertSame( $expected, $filter->statementMatches( $statement ) );
 	}
 
 	public function statementProvider() {
