@@ -66,7 +66,7 @@
 	"wikibase-description-input-help-message": "Введите краткое описание для этой сущности на следующем языке: $1.",
 	"wikibase-entitytermsview-input-help-message": "Введите метку этой сущности, краткое описание и альтернативные названия для каждого языка.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Введите метку сущности, краткое описание и альтернативные названия на языке «$1».",
-	"wikibase-statements": "Утверждения",
+	"wikibase-statementsection-statements": "Утверждения",
 	"wikibase-sitelinks": "Список ссылок на сайты",
 	"wikibase-sitelinkgroupview-input-help-message": "Добавьте ссылку на внешний сайт, указав адрес сайта и страницы на этом сайте; исправьте или удалите существующие ссылки на сайт.",
 	"wikibase-sitelinks-empty": "Страницы по этой ссылке не существует.",

@@ -42,7 +42,7 @@
 	"wikibase-alias-edit-placeholder": "पर्याय जोडा",
 	"wikibase-label-input-help-message": "$1 मध्ये या अस्तित्वाची खूणचिठ्ठी(label of this entity) टाका.",
 	"wikibase-description-input-help-message": "$1 मध्ये या अस्तित्वाचे(entity) थोडक्यात वर्णन टाका.",
-	"wikibase-statements": "विधाने",
+	"wikibase-statementsection-statements": "विधाने",
 	"wikibase-sitelinks-empty": "या कलमास कोणतेही पान जोडले नाही.",
 	"wikibase-sitelinks-input-help-message": "या कलमाशी संबंधित पानास दुवा स्थापा.",
 	"wikibase-sitelinks-special": "इतर संकेतस्थळे",
@@ -135,5 +135,6 @@
 	"content-model-wikibase-property": "विकिबेस गुणधर्म",
 	"content-model-wikibase-query": "विकिबेस पृच्छा",
 	"right-property-create": "गुणधर्म तयार करा",
-	"action-property-create": "गुणधर्म तयार करा"
+	"action-property-create": "गुणधर्म तयार करा",
+	"apihelp-query+wbsearch-param-search": "या मजकूरासाठी शोधा."
 }

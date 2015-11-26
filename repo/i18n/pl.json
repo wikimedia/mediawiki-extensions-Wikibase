@@ -63,7 +63,7 @@
 	"wikibase-description-input-help-message": "Podaj krótki opis tej encji w języku: $1.",
 	"wikibase-entitytermsview-input-help-message": "Wpisz etykietę tej encji, krótki opis i alternatywne nazwy dla każdego języka.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Wpisz etykietę tej encji, krótki opis i aliasy w $1.",
-	"wikibase-statements": "Deklaracje",
+	"wikibase-statementsection-statements": "Deklaracje",
 	"wikibase-sitelinks": "Lista stron powiązanych z tym elementem",
 	"wikibase-sitelinkgroupview-input-help-message": "Dodaj link do strony, określając stronę i podstronę, edytując lub usuwając istniejące linki.",
 	"wikibase-sitelinks-empty": "Brak strony powiązanej z tym elementem.",

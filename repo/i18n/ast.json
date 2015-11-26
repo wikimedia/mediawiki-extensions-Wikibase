@@ -52,7 +52,7 @@
 	"wikibase-description-input-help-message": "Escriba una descripción curtia d'esta entidá en $1.",
 	"wikibase-entitytermsview-input-help-message": "Escribi una etiqueta d'esta entidá, una descripción curtia y alcuños por llingua.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Escribi la etiqueta d'esta entidá, una descripción curtia y alcuños en $1",
-	"wikibase-statements": "Declaraciones",
+	"wikibase-statementsection-statements": "Declaraciones",
 	"wikibase-sitelinks": "Enllaces a sitios",
 	"wikibase-sitelinkgroupview-input-help-message": "Amestar un enllaz a un sitiu proporcionando un sitiu web y una páxina d'esi sitiu, editar o desaniciar enllaces esistentes a sitios web.",
 	"wikibase-sitelinks-empty": "Inda nun hai nenguna páxina enllazada con esti elementu.",

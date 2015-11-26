@@ -29,7 +29,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "sartu deskribapen bat $1-n",
 	"wikibase-diffview-label": "etiketa",
 	"wikibase-diffview-description": "deskribapena",
-	"wikibase-statements": "Adierazpenak",
+	"wikibase-statementsection-statements": "Adierazpenak",
 	"wikibase-sitelinks-special": "Beste guneak",
 	"wikibase-remove": "kendu",
 	"wikibase-propertyedittool-counter-entrieslabel": "{{PLURAL:$1|entry|sarrera}}",

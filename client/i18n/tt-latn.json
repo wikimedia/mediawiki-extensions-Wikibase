@@ -4,10 +4,14 @@
 			"Frhdkazan"
 		]
 	},
+	"tooltip-t-wikibase": "Bäyle mäğlümatlar saqlağıçı elementına sıltama",
 	"wikibase-comment-update": "{{WBREPONAME}} elementı üzgärde",
 	"wikibase-dataitem": "{{WBREPONAME}} elementı",
+	"wikibase-editlinks": "Sıltama bäyläneşlärne üzgärtü",
+	"wikibase-editlinkstitle": "İnterwiki bäyläneşlärne üzgärtü",
 	"wikibase-rc-hide-wikidata-hide": "Yäşerü",
 	"wikibase-rc-hide-wikidata-show": "Kürsätü",
+	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} üzgärtmäse",
 	"wikibase-otherprojects": "Başqa proyektlar"
 }

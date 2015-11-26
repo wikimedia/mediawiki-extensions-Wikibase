@@ -46,7 +46,7 @@
 	"wikibase-description-input-help-message": "Унесите кратак опис на језику: $1.",
 	"wikibase-entitytermsview-input-help-message": "Унесите назив овог ентитета, кратак опис и алтернативне називе, према језику.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Унесите назив овог ентитета, кратак опис и алтернативне називе у $1.",
-	"wikibase-statements": "Изјаве",
+	"wikibase-statementsection-statements": "Изјаве",
 	"wikibase-sitelinks": "Списак страна повезаних са овом ставком",
 	"wikibase-sitelinks-empty": "Ниједна страница није повезана са овом ставком.",
 	"wikibase-sitelinks-input-help-message": "Поставите везу према страници која се односи на ову ставку.",

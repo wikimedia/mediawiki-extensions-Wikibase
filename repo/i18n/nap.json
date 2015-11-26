@@ -52,7 +52,7 @@
 	"wikibase-description-input-help-message": "Miette na descriziona curta curta pe' st'entià dint'a $1.",
 	"wikibase-entitytermsview-input-help-message": "Miette l'etichetta 'e st'entità, na descrizione picerilla e l'aliasse dint'a ll'ati lengue.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Miette l'etichetta 'e st'entità, na breve descrizione curta curta e l'aliasse dint'a $1.",
-	"wikibase-statements": "Dichiaraziune",
+	"wikibase-statementsection-statements": "Dichiaraziune",
 	"wikibase-sitelinks": "Collegamiente a 'u site",
 	"wikibase-sitelinkgroupview-input-help-message": "Azzecca nu collegamento a 'o sito specificanno nu sito e na paggena 'e sito, cagna o leva cullegamente a 'e site ch'esisteno già",
 	"wikibase-sitelinks-empty": "Nisciuna paggena spuntasse a sta voce ancora.",

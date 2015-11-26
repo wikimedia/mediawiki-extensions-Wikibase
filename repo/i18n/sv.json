@@ -60,7 +60,7 @@
 	"wikibase-description-input-help-message": "Ange en kort beskrivning för denna entitet på $1.",
 	"wikibase-entitytermsview-input-help-message": "Ange en etikett för detta objekt, en kort beskrivning och alias per språk.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Ange etiketten för denna entitet, en kort beskrivning och alias på $1.",
-	"wikibase-statements": "Uttalanden",
+	"wikibase-statementsection-statements": "Uttalanden",
 	"wikibase-sitelinks": "Webbplatslänkar",
 	"wikibase-sitelinkgroupview-input-help-message": "Lägg till en webbplatslänk genom att ange en webbplats och en sida på den webbplatsen, redigera eller ta bort existerande webbplatslänkar.",
 	"wikibase-sitelinks-empty": "Inga sidor är länkade till detta objekt.",

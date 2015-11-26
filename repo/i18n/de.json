@@ -23,7 +23,8 @@
 			"Tiin",
 			"Yellowcard",
 			"Lydia Pintscher (WMDE)",
-			"Twagner"
+			"Twagner",
+			"MGChecker"
 		]
 	},
 	"wikibase-desc": "Ermöglicht ein Repositorium strukturierter Daten",
@@ -72,7 +73,7 @@
 	"wikibase-description-input-help-message": "Gib eine kurze Beschreibung für dieses Objekt in $1 an.",
 	"wikibase-entitytermsview-input-help-message": "Gib eine Bezeichnung für dieses Objekt, eine kurze Beschreibung und Aliasse pro Sprache ein.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Gib die Bezeichnung für dieses Objekt, eine kurze Beschreibung und Aliasse auf $1 ein.",
-	"wikibase-statements": "Aussagen",
+	"wikibase-statementsection-statements": "Aussagen",
 	"wikibase-sitelinks": "Websitelinks",
 	"wikibase-sitelinkgroupview-input-help-message": "Ergänzt einen Websitelink durch die Angabe einer Website und einer Seite dieser Website, bearbeitet oder entfernt vorhandene Websitelinks.",
 	"wikibase-sitelinks-empty": "Keine Seite ist mit diesem Datenobjekt verknüpft.",
@@ -421,6 +422,7 @@
 	"apihelp-wbsearchentities-param-limit": "Maximale Anzahl der Ergebnisse",
 	"apihelp-query+wbsearch-param-search": "Sucht nach diesem Text.",
 	"apihelp-query+wbsearch-param-language": "Sucht in dieser Sprache.",
+	"apihelp-query+wbsearch-param-strictlanguage": "Ob der Sprach-Fallback deaktiviert werden soll",
 	"apihelp-query+wbsearch-param-type": "Sucht nach diesem Objekttyp.",
 	"apihelp-query+wbsearch-param-limit": "Maximale Anzahl der Ergebnisse",
 	"apihelp-query+wbsearch-example-2": "Sucht nach „abc“ in englischer Sprache mit maximal 50",

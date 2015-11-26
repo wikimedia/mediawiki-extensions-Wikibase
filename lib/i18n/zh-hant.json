@@ -148,13 +148,13 @@
 	"wikibase-item-summary-wbcreate-new": "已建立新項目",
 	"wikibase-item-summary-wbeditentity": "已建立新項目",
 	"wikibase-item-summary-wbeditentity-create": "已建立新項目",
-	"wikibase-item-summary-wbeditentity-update": "已更改項目",
+	"wikibase-item-summary-wbeditentity-update": "已變更項目",
 	"wikibase-item-summary-wbeditentity-override": "已清除項目",
 	"wikibase-item-summary-wblinktitles-create": "已建立此項目以連接頁面",
 	"wikibase-item-summary-wblinktitles-connect": "已加入語言連結以連接頁面",
 	"wikibase-property-summary-wbcreate-new": "已建立新屬性",
 	"wikibase-property-summary-wbeditentity-create": "已建立新屬性",
-	"wikibase-property-summary-wbeditentity-update": "已更改屬性",
+	"wikibase-property-summary-wbeditentity-update": "屬性已變更",
 	"wikibase-property-summary-wbeditentity-override": "已清空屬性",
 	"wikibase-property-summary-special-create-property": "已建立含{{PLURAL:$1|數值}}的 [$2] 屬性"
 }

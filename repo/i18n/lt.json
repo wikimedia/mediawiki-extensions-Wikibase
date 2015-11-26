@@ -56,7 +56,7 @@
 	"wikibase-description-input-help-message": "Įveskite trumpą šios esybės aprašymą $1 kalba.",
 	"wikibase-entitytermsview-input-help-message": "Įveskite šios esybės žymą, trumpą aprašymą ir slapyvardžius kiekvienai kalbai.",
 	"wikibase-entitytermsforlanguageview-input-help-message": "Įveskite šios esybės žymą, trumpą aprašymą ir slapyvardžius $1 kalba.",
-	"wikibase-statements": "Faktinė informacija",
+	"wikibase-statementsection-statements": "Faktinė informacija",
 	"wikibase-sitelinks": "Svetainių nuorodos",
 	"wikibase-sitelinkgroupview-input-help-message": "Pridėti svetainės nuorodą, nurodant svetainę ir tos svetainės puslapį, redaguoti ar šalinti egsiztuojančias svetainių nuorodas.",
 	"wikibase-sitelinks-empty": "Nėra puslapių, susijusių su šiuo įrašu.",

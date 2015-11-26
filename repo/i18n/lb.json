@@ -39,7 +39,7 @@
 	"wikibase-alias-edit-placeholder": "Alias aginn",
 	"wikibase-label-input-help-message": "Gitt d'Etikett vun dëser EEnheet op $1 an.",
 	"wikibase-description-input-help-message": "Gitt eng kuerz Beschreiwung fir dës Eenheet op $1",
-	"wikibase-statements": "Declaratiounen",
+	"wikibase-statementsection-statements": "Declaratiounen",
 	"wikibase-sitelinks": "Linke vum Site",
 	"wikibase-sitelinks-empty": "Et ass keng Säit mat dësem Element verlinkt.",
 	"wikibase-sitelinks-input-help-message": "Setzt e Link op eng Säit déi mat dësem Element verbonn sinn.",
