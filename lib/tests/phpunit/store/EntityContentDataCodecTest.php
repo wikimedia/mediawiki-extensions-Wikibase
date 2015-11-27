@@ -25,12 +25,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
  */
 class EntityContentDataCodecTest extends \MediaWikiTestCase {
 
-	/**
-	 * @var EntityContentDataCodec
-	 */
-	private $codec;
-
-	protected function setUp() {
+	protected function getCodec( $maxBlobSize = 0 ) {
 		parent::setUp();
 
 		$idParser = new BasicEntityIdParser();
@@ -38,11 +33,14 @@ class EntityContentDataCodecTest extends \MediaWikiTestCase {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer( array() ), $idParser );
 
-		$this->codec = new EntityContentDataCodec(
+		$codec = new EntityContentDataCodec(
 			$idParser,
 			$serializerFactory->newEntitySerializer(),
-			$deserializerFactory->newEntityDeserializer()
+			$deserializerFactory->newEntityDeserializer(),
+			$maxBlobSize
 		);
+
+		return $codec;
 	}
 
 	public function entityIdProvider() {
@@ -58,7 +56,7 @@ class EntityContentDataCodecTest extends \MediaWikiTestCase {
 	 * @dataProvider entityIdProvider
 	 */
 	public function testEntityIdDecoding( $data, EntityId $id ) {
-		$entity = $this->codec->decodeEntity( $data, CONTENT_FORMAT_JSON );
+		$entity = $this->getCodec()->decodeEntity( $data, CONTENT_FORMAT_JSON );
 		$this->assertEquals( $id, $entity->getId() );
 	}
 
@@ -82,11 +80,27 @@ class EntityContentDataCodecTest extends \MediaWikiTestCase {
 	 * @dataProvider entityProvider
 	 */
 	public function testEncodeAndDecodeEntity( Entity $entity, $format ) {
-		$blob = $this->codec->encodeEntity( $entity, $format );
+		$blob = $this->getCodec()->encodeEntity( $entity, $format );
 		$this->assertType( 'string', $blob );
 
-		$actual = $this->codec->decodeEntity( $blob, $format );
+		$actual = $this->getCodec()->decodeEntity( $blob, $format );
 		$this->assertTrue( $entity->equals( $actual ), 'round trip' );
+	}
+
+	public function testEncodeBigEntity() {
+		$entity = new Item( new ItemId( 'Q1' ) );
+
+		$this->setExpectedException( 'MWContentSerializationException' );
+		$this->getCodec( 6 )->encodeEntity( $entity, CONTENT_FORMAT_JSON );
+	}
+
+	public function testDecodeBigEntity() {
+		$entity = new Item( new ItemId( 'Q1' ) );
+
+		$blob = $this->getCodec()->encodeEntity( $entity, CONTENT_FORMAT_JSON );
+
+		$this->setExpectedException( 'MWContentSerializationException' );
+		$this->getCodec( 6 )->decodeEntity( $blob, CONTENT_FORMAT_JSON );
 	}
 
 	public function redirectProvider() {
@@ -105,28 +119,28 @@ class EntityContentDataCodecTest extends \MediaWikiTestCase {
 	 * @dataProvider redirectProvider
 	 */
 	public function testEncodeAndDecodeRedirect( EntityRedirect $redirect, $format ) {
-		$blob = $this->codec->encodeRedirect( $redirect, $format );
+		$blob = $this->getCodec()->encodeRedirect( $redirect, $format );
 		$this->assertType( 'string', $blob );
 
-		$actual = $this->codec->decodeRedirect( $blob, $format );
+		$actual = $this->getCodec()->decodeRedirect( $blob, $format );
 		$this->assertTrue( $redirect->equals( $actual ), 'round trip' );
 	}
 
 	public function testGetDefaultFormat_isJson() {
-		$defaultFormat = $this->codec->getDefaultFormat();
+		$defaultFormat = $this->getCodec()->getDefaultFormat();
 		$this->assertEquals( CONTENT_FORMAT_JSON, $defaultFormat );
 	}
 
 	public function testGetSupportedFormats() {
-		$supportedFormats = $this->codec->getSupportedFormats();
+		$supportedFormats = $this->getCodec()->getSupportedFormats();
 		$this->assertType( 'array', $supportedFormats );
 		$this->assertNotEmpty( $supportedFormats );
 		$this->assertContainsOnly( 'string', $supportedFormats );
 	}
 
 	public function testGetSupportedFormats_containsDefaultFormat() {
-		$supportedFormats = $this->codec->getSupportedFormats();
-		$this->assertContains( $this->codec->getDefaultFormat(), $supportedFormats );
+		$supportedFormats = $this->getCodec()->getSupportedFormats();
+		$this->assertContains( $this->getCodec()->getDefaultFormat(), $supportedFormats );
 	}
 
 }

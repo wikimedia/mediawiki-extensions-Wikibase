@@ -756,7 +756,8 @@ final class WikibaseClient {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
 			$forbiddenSerializer,
-			$this->getInternalEntityDeserializer()
+			$this->getInternalEntityDeserializer(),
+			$this->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 	}
 

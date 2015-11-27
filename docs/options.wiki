@@ -37,6 +37,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
               'commonsMedia',
           )
 </poem>
+;maxSerializedEntitySize: The maximum serialized size of entities, in KB. Loading and storing will fail if this size is exceeded. This is intended as a hard limit that prevents very large chunks of data being stored or processed due to abuse or erroneous code. Defaults to MediaWiki core's $wgMaxArticleSize setting.
 
 == Repository Settings ==
 

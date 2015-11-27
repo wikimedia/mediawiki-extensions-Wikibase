@@ -1109,7 +1109,8 @@ class WikibaseRepo {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
 			$this->getInternalEntitySerializer(),
-			$this->getInternalEntityDeserializer()
+			$this->getInternalEntityDeserializer(),
+			$this->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 	}
 

@@ -70,7 +70,9 @@ $wgWBLibDefaultSettings = array(
 		'url',
 		'wikibase-item',
 		'wikibase-property',
-	)
+	),
+
+	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],
 );
 
 return $wgWBLibDefaultSettings;
