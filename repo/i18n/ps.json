@@ -36,6 +36,8 @@
 	"wikibase-gotolinkedpage-submit": "ورځه",
 	"wikibase-itemdisambiguation-lookup-language": "د ژبې کوډ:",
 	"wikibase-itemdisambiguation-submit": "پلټل",
+	"wikibase-newentity-language": "ژبه:",
+	"wikibase-newentity-label": "نښکه:",
 	"wikibase-newentity-description": "څرگندونه:",
 	"wikibase-newentity-submit": "جوړول",
 	"wikibase-setdescription-label": "څرگندونه:",
@@ -60,5 +62,8 @@
 	"wikibase-listdatatypes-url-head": "يو آر اېل",
 	"datatypes-type-url": "يو آر اېل",
 	"content-model-wikibase-item": "د ويکيبېز توکی",
-	"apihelp-query+wbsearch-param-search": "دغه متن پلټل."
+	"apihelp-query+wbsearch-param-search": "دغه متن پلټل.",
+	"apihelp-query+wbsearch-param-language": "په دې ژبه کې پلټل.",
+	"apihelp-wbsetdescription-param-language": "د څرگندونې ژبه",
+	"apihelp-wbsetlabel-param-language": "د نښکې ژبه"
 }

@@ -13,6 +13,7 @@
 	"apihelp-query+pageterms-description": "Ruft Begriffe im Zusammenhang mit einer Seite über ein damit verbundenes Datenelement ab. Auf einer Wikibase-Objektseite werden die Objektbegriffe direkt verwendet.\nWarnung: Auf einem Repositoriums-Wiki funktionieren Seitenbegriffe nur auf Objektseiten und nicht auf Seiten, die mit einem Objekt verbunden sind. Dies könnte sich in Zukunft ändern.",
 	"apihelp-query+pageterms-example-simple": "Ruft alle Begriffe im Zusammenhang mit der Seite „London“ in der Benutzersprache ab.",
 	"apihelp-query+pageterms-example-label-en": "Ruft Bezeichnungen und Aliasse im Zusammenhang mit der Seite „London“ in Englisch ab.",
+	"apihelp-query+pageterms-example-item": "Ruft Bezeichnungen und Aliasse des Objektes Q84 auf.",
 	"apihelp-query+pageterms-param-terms": "Die Art der Begriffe, die abgerufen werden soll, z.&nbsp;B. „Beschreibung“. Wenn es nicht festgelegt wird, werden alle Arten zurückgegeben.",
 	"apihelp-query+wikibase-description": "Bezieht Informationen über den Wikibase-Client und das verknüpfte Wikibase-Repositorium.",
 	"apihelp-query+wikibase-example": "Bezieht den URL-Pfad und weitere Informationen über den Wikibase-Client und das Repositorium.",

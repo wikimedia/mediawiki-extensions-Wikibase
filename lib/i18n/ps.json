@@ -7,6 +7,7 @@
 	"specialpages-group-wikibase": "ويکي بېز",
 	"wikibase-deletedentity-item": "ړنگ شوی توکی",
 	"wikibase-quantitydetails-amount": "د پيسو کچه",
+	"wikibase-quantitydetails-unit": "يوون",
 	"wikibase-timedetails-time": "وخت",
 	"wikibase-timedetails-isotime": "وخت ټاپه",
 	"wikibase-timedetails-timezone": "وخت سيمه",
@@ -21,5 +22,8 @@
 	"wikibase-tooltip-error-details": "تفصيلات",
 	"wikibase-validator-no-such-entity": "$1 و نه موندل شو",
 	"datatypes-type-wikibase-item": "توکی",
-	"datatypes-type-wikibase-property": "ځانتيا"
+	"datatypes-type-wikibase-property": "ځانتيا",
+	"wikibase-time-precision-annum": "$1 عيسوي کالونه",
+	"wikibase-time-precision-millennium": "$1. زرۍ",
+	"wikibase-time-precision-century": "$1. پېړۍ"
 }
