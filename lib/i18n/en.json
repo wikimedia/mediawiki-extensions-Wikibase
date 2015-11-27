@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jeroen De Dauw",
-			"Adam Shorland"
+			"Adam Shorland",
+			"Purodha Blissenbach"
 		]
 	},
 	"wikibase-lib-desc": "Holds common functionality for the Wikibase and Wikibase Client extensions",

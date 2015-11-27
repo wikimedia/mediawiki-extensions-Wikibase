@@ -10,7 +10,8 @@
 			"Michał Łazowik",
 			"Adam Shorland",
 			"Bene*",
-			"Lucie-Aimée Kaffee"
+			"Lucie-Aimée Kaffee",
+			"Purodha Blissenbach"
 		]
 	},
 	"wikibase-desc": "Structured data repository",
@@ -288,7 +289,7 @@
 	"wikibase-redirectentity-submit": "Redirect",
 	"special-mylanguagefallbackchain": "My language fallback chain",
 	"wikibase-mylanguagefallbackchain-text": "The language fallback chain used to display entity labels for you is shown below.",
-	"wikibase-mylanguagefallbackchain-babel": "You can edit it by putting <nowiki>{{#babel: }}</nowiki> on {{GENDER:$1|your}} [[Special:MyPage|user page]].",
+	"wikibase-mylanguagefallbackchain-babel": "You can edit it by putting <nowiki>{{#babel: }}</nowiki> on your [[Special:MyPage|user page]].",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 - $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, converted from $3 - $4",
 	"wikibase-api-common-item": "Common item detected.",
@@ -386,7 +387,7 @@
 	"apihelp-wbcreateclaim-description": "Creates Wikibase claims.",
 	"apihelp-wbcreateclaim-param-baserevid": "The numeric identifier for the revision to base the modification on.\nThis is used for detecting conflicts during save.",
 	"apihelp-wbcreateclaim-param-bot": "Mark this edit as bot. This URL flag will only be respected if the user belongs to the group \"bot\".",
-	"apihelp-wbcreateclaim-param-entity": "ID of the entity you are adding the claim to",
+	"apihelp-wbcreateclaim-param-entity": "ID of the entity the claim is added to",
 	"apihelp-wbcreateclaim-param-property": "ID of the snaks property",
 	"apihelp-wbcreateclaim-param-value": "Value of the snak when creating a claim with a snak that has a value",
 	"apihelp-wbcreateclaim-param-snaktype": "The type of the snak",
@@ -409,7 +410,7 @@
 	"apihelp-wbeditentity-param-bot": "Mark this edit as bot. This URL flag will only be respected if the user belongs to the group \"bot\".",
 	"apihelp-wbeditentity-param-data": "The serialized object that is used as the data source.\nA newly created entity will be assigned an 'id'.",
 	"apihelp-wbeditentity-param-clear": "If set, the complete entity is emptied before proceeding.\nThe entity will not be saved before it is filled with the \"data\", possibly with parts excluded.",
-	"apihelp-wbeditentity-param-new": "If set, a new entity will be created.\nSet this to the type of the entity you want to create.",
+	"apihelp-wbeditentity-param-new": "If set, a new entity will be created.\nSet this to the type of the entity to be created.\nIt is not allowed to have this set when <kbd>id</kbd> is also set.",
 	"apihelp-wbeditentity-example-1": "Create a new empty item, return full entity structure",
 	"apihelp-wbeditentity-example-2": "Create a new item and set labels for de and en",
 	"apihelp-wbeditentity-example-3": "Create a new property containing the json data, return full entity structure",
