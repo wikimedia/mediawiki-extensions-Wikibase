@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jeroen De Dauw",
-			"Adam Shorland"
+			"Adam Shorland",
+			"Purodha Blissenbach"
 		]
 	},
 	"wikibase-lib-desc": "Holds common functionality for the Wikibase and Wikibase Client extensions",
@@ -11,12 +12,12 @@
 	"wikibase-deletedentity-property": "Deleted property",
 	"wikibase-deletedentity-query": "Deleted query",
 	"wikibase-error-unexpected": "Error: $1.",
-	"wikibase-error-save-generic": "An error occurred while saving. Your changes could not be completed.",
-	"wikibase-error-remove-generic": "An error occurred while trying to perform remove. Your changes could not be completed.",
-	"wikibase-error-save-connection": "A connection error has occurred while saving. Your changes could not be completed. Please check your Internet connection.",
-	"wikibase-error-remove-connection": "A connection error occurred while trying to perform remove. Your changes could not be completed. Please check your Internet connection.",
-	"wikibase-error-save-timeout": "We are experiencing technical difficulties. Your \"save\" could not be completed.",
-	"wikibase-error-remove-timeout": "We are experiencing technical difficulties. Your \"remove\" could not be completed.",
+	"wikibase-error-save-generic": "An error occurred while saving. Your changes {{GENDER:|could not}} be completed.",
+	"wikibase-error-remove-generic": "An error occurred while trying to perform remove. Your changes {{GENDER:|could not}} be completed.",
+	"wikibase-error-save-connection": "A connection error has occurred while saving. Your changes {{GENDER:|could not}} be completed. Please check your Internet connection.",
+	"wikibase-error-remove-connection": "A connection error occurred while trying to perform remove. Your changes {{GENDER:|could not}} be completed. Please check your Internet connection.",
+	"wikibase-error-save-timeout": "We are experiencing technical difficulties. Your \"save\" {{GENDER:|could not}} be completed.",
+	"wikibase-error-remove-timeout": "We are experiencing technical difficulties. Your \"remove\" {{GENDER:|could not}} be completed.",
 	"wikibase-error-autocomplete-connection": "Could not query site API. Please try again later.",
 	"wikibase-error-autocomplete-response": "Server responded: $1",
 	"wikibase-error-ui-no-external-page": "The specified article could not be found on the corresponding site.",
