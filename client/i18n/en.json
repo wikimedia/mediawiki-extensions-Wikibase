@@ -7,6 +7,7 @@
 			"Marius Hoch",
 			"Jeblad",
 			"Matěj Suchánek"
+			"Purodha Bissenbach"
 		]
 	},
 	"wikibase-client-desc": "Client for the Wikibase extension",
@@ -55,15 +56,15 @@
 	"wikibase-editlinkstitle": "Edit interlanguage links",
 	"wikibase-addlinkstitle": "Add interlanguage links",
 	"wikibase-linkitem-addlinks": "Add links",
-	"wikibase-linkitem-alreadylinked": "The page you wanted to link with is already attached to an [$1 item] on the central data repository which links to $2 on this site. Items can only have one page per site attached. Please choose a different page to link with.",
+	"wikibase-linkitem-alreadylinked": "The page you {{GENDER:|wanted to link with}} is already attached to an [$1 item] on the central data repository which links to $2 on this site. Items can only have one page per site attached. Please choose a different page to link with.",
 	"wikibase-linkitem-close": "Close dialog and reload page",
 	"wikibase-linkitem-failure": "An unknown error occurred while trying to link the given page.",
 	"wikibase-linkitem-title": "Link with page",
 	"wikibase-linkitem-linkpage": "Link with page",
-	"wikibase-linkitem-selectlink": "Please select a site and a page that you want to link to this page.",
+	"wikibase-linkitem-selectlink": "Please select a site and a page that you {{GENDER:|want to link}} to this page.",
 	"wikibase-linkitem-input-site": "Language:",
 	"wikibase-linkitem-input-page": "Page:",
-	"wikibase-linkitem-confirmitem-text": "The page you have chosen is already associated to an [$1 item on our central data repository]. Please confirm that the {{PLURAL:$2|page|pages}} shown below {{PLURAL:$2|is|are}} the {{PLURAL:$2|one|ones}} that you want to link to this page.",
+	"wikibase-linkitem-confirmitem-text": "The page you {{GENDER:|have chosen}} is already associated to an [$1 item on our central data repository]. Please confirm that the {{PLURAL:$2|page|pages}} shown below {{PLURAL:$2|is|are}} the {{PLURAL:$2|one|ones}} that you {{GENDER:|want to link}} to this page.",
 	"wikibase-linkitem-confirmitem-button": "Confirm",
 	"wikibase-linkitem-not-loggedin-title": "You need to be logged in",
 	"wikibase-linkitem-not-loggedin": "You need to be logged in on this wiki and in the [$1 central data repository] to use this feature.",
