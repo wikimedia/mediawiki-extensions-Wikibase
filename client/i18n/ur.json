@@ -3,7 +3,8 @@
 		"authors": [
 			"Noor2020",
 			"Obaid Raza",
-			"عثمان خان شاہ"
+			"عثمان خان شاہ",
+			"Muhammad Shuaib"
 		]
 	},
 	"tooltip-t-wikibase": "متعلقہ ڈیٹا سے منسلک کریں",
@@ -19,9 +20,9 @@
 	"wikibase-linkitem-addlinks": "روابط شامل کریں",
 	"wikibase-linkitem-close": "بند کر کے صفحہ تازہ کریں",
 	"wikibase-linkitem-failure": "دیئے گئے صفحہ سے منسلک کرنے کی کوشش کے دوران ایک نامعلوم خامی پیش آگئی۔",
-	"wikibase-linkitem-title": "صفحہ کے ساتھ جوڑیں کریں",
-	"wikibase-linkitem-linkpage": "صفحہ کے ساتھ جوڑیں",
-	"wikibase-linkitem-selectlink": "برائے مہربانی ویکیپیڈیا منتخب کریں جس کے ساتھ آپ صفحہ کا ربط کرنا چائتے ہیں۔",
+	"wikibase-linkitem-title": "صفحہ سے مربوط کریں",
+	"wikibase-linkitem-linkpage": "صفحہ سے مربوط کریں",
+	"wikibase-linkitem-selectlink": "اس صفحہ کو آپ جس سائٹ اور صفحہ سے مربوط کرنا چاہتے ہیں، براہ مہربانی اسے درج کریں۔",
 	"wikibase-linkitem-input-site": "زبان:",
 	"wikibase-linkitem-input-page": "صفحہ:",
 	"wikibase-linkitem-confirmitem-button": "تصدیق",

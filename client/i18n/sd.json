@@ -6,9 +6,9 @@
 			"Aursani"
 		]
 	},
-	"tooltip-t-wikibase": "جُڙيل اعدادي ذخيري جي وَٿَ ڏانهن ڳنڍڻو",
-	"wikibase-comment-update": "{{WBREPONAME}} شيءِ تبديل ٿي",
-	"wikibase-dataitem": "{{WBREPONAME}} وَٿَ",
+	"tooltip-t-wikibase": "جُڙيل اعدادي ذخيري ڏانهن ڳنڍڻو",
+	"wikibase-comment-update": "{{WBREPONAME}} اسم تبديل ٿيو",
+	"wikibase-dataitem": "{{WBREPONAME}} اسم",
 	"wikibase-editlinks": "ڳنڍڻن کي سنواريو",
 	"wikibase-editlinkstitle": "بين‌الزباني ڳنڍڻا سنواريو",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
