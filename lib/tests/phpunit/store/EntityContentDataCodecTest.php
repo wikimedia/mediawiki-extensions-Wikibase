@@ -4,6 +4,7 @@ namespace Wikibase\Store\Test;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
+use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -23,15 +24,13 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityContentDataCodecTest extends \MediaWikiTestCase {
+class EntityContentDataCodecTest extends MediaWikiTestCase {
 
-	protected function getCodec( $maxBlobSize = 0 ) {
-		parent::setUp();
-
+	private function getCodec( $maxBlobSize = 0 ) {
 		$idParser = new BasicEntityIdParser();
 
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
-		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer( array() ), $idParser );
+		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer(), $idParser );
 
 		$codec = new EntityContentDataCodec(
 			$idParser,
