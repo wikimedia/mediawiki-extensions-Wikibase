@@ -3,8 +3,6 @@
 namespace Wikibase\Test\Rdf;
 
 use DataValues\MonolingualTextValue;
-use DataValues\StringValue;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\Values\MonolingualTextRdfBuilder;
 use Wikimedia\Purtle\NTriplesRdfWriter;

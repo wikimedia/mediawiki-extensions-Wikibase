@@ -3,8 +3,6 @@
 namespace Wikibase\Test\Rdf;
 
 use DataValues\TimeValue;
-use DataValues\StringValue;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Client\Specials;
 
 use HTMLForm;

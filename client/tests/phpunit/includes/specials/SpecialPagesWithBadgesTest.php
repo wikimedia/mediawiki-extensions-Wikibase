@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Client\Tests\Specials;
 
 use Wikibase\Client\Specials\SpecialPagesWithBadges;

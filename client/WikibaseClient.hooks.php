@@ -5,7 +5,6 @@ namespace Wikibase;
 use Action;
 use BaseTemplate;
 use ChangesList;
-use FormOptions;
 use IContextSource;
 use Message;
 use OutputPage;

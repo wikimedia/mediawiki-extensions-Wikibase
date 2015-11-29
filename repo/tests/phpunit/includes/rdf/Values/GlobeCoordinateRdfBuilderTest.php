@@ -4,8 +4,6 @@ namespace Wikibase\Test\Rdf;
 
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\GlobeCoordinateValue;
-use DataValues\StringValue;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;

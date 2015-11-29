@@ -2,7 +2,6 @@
 
 namespace Wikibase\Rdf\Values;
 
-use DataValues\DataValue;
 use DataValues\QuantityValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Rdf\ValueSnakRdfBuilder;

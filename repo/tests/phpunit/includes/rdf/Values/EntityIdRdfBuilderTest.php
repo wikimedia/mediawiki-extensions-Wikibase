@@ -2,10 +2,8 @@
 
 namespace Wikibase\Test\Rdf;
 
-use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfVocabulary;

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Test\Repo\Api;
 
 use Title;
@@ -14,7 +13,6 @@ use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
-use Wikibase\Test\MockTermIndex;
 
 /**
  * @covers Wikibase\Repo\Api\EntitySearchHelper

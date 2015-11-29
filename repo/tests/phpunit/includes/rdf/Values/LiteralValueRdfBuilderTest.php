@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Rdf;
 
 use DataValues\StringValue;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\Values\LiteralValueRdfBuilder;
 use Wikimedia\Purtle\NTriplesRdfWriter;

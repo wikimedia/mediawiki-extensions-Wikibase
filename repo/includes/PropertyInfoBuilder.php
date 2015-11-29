@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase;
 
 use DataValues\StringValue;
