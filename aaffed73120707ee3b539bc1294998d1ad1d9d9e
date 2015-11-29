@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_41131106",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-29T11:29:06Z",
+      "side": 1,
+      "message": "Personally I do not believe that adding purely technical syntax does make you an author of these English messages.",
+      "revId": "aaffed73120707ee3b539bc1294998d1ad1d9d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_e1e32501",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-29T11:29:06Z",
+      "side": 1,
+      "message": "Duplicate \"not\".",
+      "revId": "aaffed73120707ee3b539bc1294998d1ad1d9d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_c1de2143",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-29T11:29:06Z",
+      "side": 1,
+      "message": "Duplicate \"not\".",
+      "revId": "aaffed73120707ee3b539bc1294998d1ad1d9d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_21de1d45",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-29T11:29:06Z",
+      "side": 1,
+      "message": "Duplicate \"not\".",
+      "revId": "aaffed73120707ee3b539bc1294998d1ad1d9d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_01d9995b",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-29T11:29:06Z",
+      "side": 1,
+      "message": "Duplicate \"not\".",
+      "revId": "aaffed73120707ee3b539bc1294998d1ad1d9d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_611095f8",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-11-29T11:29:06Z",
+      "side": 1,
+      "message": "Duplicate \"not\".",
+      "revId": "aaffed73120707ee3b539bc1294998d1ad1d9d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
