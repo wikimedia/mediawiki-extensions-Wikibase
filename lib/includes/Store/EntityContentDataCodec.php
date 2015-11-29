@@ -58,7 +58,8 @@ class EntityContentDataCodec {
 	 * @param Serializer $entitySerializer A service capable of serializing EntityDocument objects.
 	 * @param Deserializer $entityDeserializer A service capable of deserializing EntityDocument
 	 *  objects.
-	 * @param int $maxBlobSize The maximum size of a blob to allow during serialization/deserialization, in bytes.
+	 * @param int $maxBlobSize The maximum size of a blob to allow during
+	 *  serialization/deserialization, in bytes. Set to 0 to disable the check.
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -140,7 +141,8 @@ class EntityContentDataCodec {
 	 * @see EntityHandler::serializeContent()
 	 *
 	 * @param EntityDocument $entity
-	 * @param string|null $format The desired serialization format.
+	 * @param string|null $format The desired serialization format. One of the CONTENT_FORMAT_...
+	 *  constants or null for the default.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException
@@ -168,7 +170,8 @@ class EntityContentDataCodec {
 	 * @see EntityHandler::serializeContent()
 	 *
 	 * @param EntityRedirect $redirect
-	 * @param string|null $format The desired serialization format.
+	 * @param string|null $format The desired serialization format. One of the CONTENT_FORMAT_...
+	 *  constants or null for the default.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException
@@ -227,7 +230,8 @@ class EntityContentDataCodec {
 	 * @see EntityHandler::unserializeContent()
 	 *
 	 * @param string $blob
-	 * @param string|null $format The serialization format of $blob.
+	 * @param string|null $format The serialization format of the data blob. One of the
+	 *  CONTENT_FORMAT_... constants or null for the default.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException
@@ -265,7 +269,8 @@ class EntityContentDataCodec {
 	 * @see EntityHandler::unserializeContent()
 	 *
 	 * @param string $blob
-	 * @param string|null $format The serialization format of $blob.
+	 * @param string|null $format The serialization format of the data blob. One of the
+	 *  CONTENT_FORMAT_... constants or null for the default.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException If the array could not be decoded.
