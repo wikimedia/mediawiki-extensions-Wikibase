@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_a1cbed4c",
+        "filename": "lib/tests/phpunit/store/EntityContentDataCodecTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-11-29T14:26:38Z",
+      "side": 1,
+      "message": "this test uses an entityProvider (and the variable is $entity). Since encode and decode entity work with entities, then I think it\u0027s better not to put such restriction here.  better would be to include a test case with another entity type :)",
+      "revId": "89bc007a5b057093490b37db791b4ca56dccb586",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
