@@ -57,7 +57,8 @@ class EntityContentDataCodec {
 	 * @param EntityIdParser $entityIdParser
 	 * @param Serializer $entitySerializer
 	 * @param Deserializer $entityDeserializer
-	 * @param int $maxBlobSize The maximum size of a blob to allow during serialization/deserialization, in bytes.
+	 * @param int $maxBlobSize The maximum size of a blob to allow during
+	 *  serialization/deserialization, in bytes. Set to 0 to disable the check.
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -139,13 +140,14 @@ class EntityContentDataCodec {
 	 * @see EntityHandler::serializeContent()
 	 *
 	 * @param Entity $entity
-	 * @param string|null $format The desired serialization format.
+	 * @param string|null $format The desired serialization format. One of the CONTENT_FORMAT_...
+	 *  constants or null for the default.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException
 	 * @return string A blob representing the given Entity.
 	 */
-	public function encodeEntity( Entity $entity, $format ) {
+	public function encodeEntity( Entity $entity, $format = null ) {
 		try {
 			$data = $this->entitySerializer->serialize( $entity );
 			$blob = $this->encodeEntityContentData( $data, $format );
@@ -167,13 +169,14 @@ class EntityContentDataCodec {
 	 * @see EntityHandler::serializeContent()
 	 *
 	 * @param EntityRedirect $redirect
-	 * @param string|null $format The desired serialization format.
+	 * @param string|null $format The desired serialization format. One of the CONTENT_FORMAT_...
+	 *  constants or null for the default.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException
 	 * @return string A blob representing the given Entity.
 	 */
-	public function encodeRedirect( EntityRedirect $redirect, $format ) {
+	public function encodeRedirect( EntityRedirect $redirect, $format = null ) {
 		// TODO: Use proper Serializer
 		$data = array(
 			'entity' => $redirect->getEntityId()->getSerialization(),
@@ -225,13 +228,14 @@ class EntityContentDataCodec {
 	 * @see EntityHandler::unserializeContent()
 	 *
 	 * @param string $blob
-	 * @param string|null $format The serialization format of $blob.
+	 * @param string|null $format The serialization format of the data blob. One of the
+	 *  CONTENT_FORMAT_... constants or null for the default.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException
 	 * @return Entity|null The Entity represented by $blob, or null if $blob represents a redirect.
 	 */
-	public function decodeEntity( $blob, $format ) {
+	public function decodeEntity( $blob, $format = null ) {
 		if ( $this->maxBlobSize > 0 && strlen( $blob ) > $this->maxBlobSize ) {
 			throw new MWContentSerializationException( 'Blob too big for deserialization!' );
 		}
@@ -257,14 +261,15 @@ class EntityContentDataCodec {
 	 * @see EntityHandler::unserializeContent()
 	 *
 	 * @param string $blob
-	 * @param string|null $format The serialization format of $blob.
+	 * @param string|null $format The serialization format of the data blob. One of the
+	 *  CONTENT_FORMAT_... constants or null for the default.
 	 *
 	 * @throws InvalidArgumentException If the format is not supported.
 	 * @throws MWContentSerializationException If the array could not be decoded.
 	 * @return EntityRedirect|null The EntityRedirect represented by $blob,
 	 *         or null if $blob does not represent a redirect.
 	 */
-	public function decodeRedirect( $blob, $format ) {
+	public function decodeRedirect( $blob, $format = null ) {
 		$data = $this->decodeEntityContentData( $blob, $format );
 
 		$targetId = $this->extractEntityId( $data, 'redirect' );
