@@ -4,8 +4,7 @@ namespace Wikibase\Store\Test;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
-use Wikibase\DataModel\Entity\Entity;
-use Wikibase\DataModel\Entity\EntityId;
+use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -23,15 +22,13 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class EntityContentDataCodecTest extends \MediaWikiTestCase {
+class EntityContentDataCodecTest extends MediaWikiTestCase {
 
-	protected function getCodec( $maxBlobSize = 0 ) {
-		parent::setUp();
-
+	private function getCodec( $maxBlobSize = 0 ) {
 		$idParser = new BasicEntityIdParser();
 
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
-		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer( array() ), $idParser );
+		$deserializerFactory = new DeserializerFactory( new DataValueDeserializer(), $idParser );
 
 		$codec = new EntityContentDataCodec(
 			$idParser,
@@ -55,7 +52,7 @@ class EntityContentDataCodecTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider entityIdProvider
 	 */
-	public function testEntityIdDecoding( $data, EntityId $id ) {
+	public function testEntityIdDecoding( $data, ItemId $id ) {
 		$entity = $this->getCodec()->decodeEntity( $data, CONTENT_FORMAT_JSON );
 		$this->assertEquals( $id, $entity->getId() );
 	}
@@ -79,7 +76,7 @@ class EntityContentDataCodecTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider entityProvider
 	 */
-	public function testEncodeAndDecodeEntity( Entity $entity, $format ) {
+	public function testEncodeAndDecodeEntity( Item $entity, $format ) {
 		$blob = $this->getCodec()->encodeEntity( $entity, $format );
 		$this->assertType( 'string', $blob );
 
