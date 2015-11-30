@@ -10,7 +10,8 @@
 			"WTM",
 			"Alan ffm",
 			"Peter Bowman",
-			"Tar Lócesilion"
+			"Tar Lócesilion",
+			"The Polish"
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
@@ -45,6 +46,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Musisz być zalogowany.",
 	"wikibase-linkitem-not-loggedin": "Aby użyć tej funkcji musisz być zalogowany na tej wiki oraz [$1 centralnym repozytorium danych].",
 	"wikibase-linkitem-success-link": "Strony zostały pomyślnie powiązane. Element zawierający linki możesz znaleźć w naszym [$1 centralnym repozytorium danych].",
+	"wikibase-limitreport-entities-accessed": "Liczba pobranych elementów Wikibase",
 	"wikibase-property-notfound": "Właściwość $1 nie została znaleziona.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ukryj",

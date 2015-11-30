@@ -337,7 +337,7 @@
 	"apihelp-wbmergeitems-param-toid": "Идентификатор для слияния в",
 	"apihelp-wbmergeitems-example-1": "Объединяет данные из Q42 в Q222",
 	"apihelp-wbmergeitems-example-2": "Объединяет данные из Q555 в Q3",
-	"apihelp-wbmergeitems-example-3": "Объединяет данные из Q66 в Q99, игнорируя любые конфликтующие описания",
+	"apihelp-wbmergeitems-example-3": "Объединяет данные из Q66 в Q99, игнорируя любые конфликтующие ссылки",
 	"apihelp-wbparsevalue-description": "Анализирует значения, используя ValueParser.",
 	"apihelp-wbparsevalue-param-parser": "Идентификатор ValueParser для использования. <span class=\"apihelp-deprecated\"> \tУстаревший</span>. Вместо него следует использовать параметр типа данных.",
 	"apihelp-wbparsevalue-param-values": "Значения для разбора",

@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Caoimhin",
-			"GunChleoc"
+			"GunChleoc",
+			"Akerbeltz"
 		]
 	},
 	"wikibase-edit": "deasaich",
-	"wikibase-add": "cuir ris"
+	"wikibase-add": "cuir ris",
+	"wikibase-sitelinks-special": "Làraichean eile"
 }
