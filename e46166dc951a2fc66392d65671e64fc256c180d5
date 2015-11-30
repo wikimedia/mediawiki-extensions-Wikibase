@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_15b473ce",
+        "filename": "repo/includes/Hooks/BuildDocumentParseHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:32:32Z",
+      "side": 1,
+      "message": "I would prefer to group hook handers by their intent, and name the handler classes accordingly. I don\u0027t think having one class per hook is a good approach. Since the handler functions for the BuildDocumentParse and the MappingConfigHookHandler hooks share crucial knowledge (namely, what the extra fields are called and how they are structured), they should be handled by the same class. The fact that they both rely on the same information (a WikibaseFieldsDefinition object) is another strong indicator for this.",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_35e097c7",
+        "filename": "repo/includes/Hooks/BuildDocumentParseHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:32:32Z",
+      "side": 1,
+      "message": "Should the WikibaseFieldsDefinition perhaps come from WikibaseRepo? It\u0027S all hard coded now, but it may well depend on configuration...",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_95ce235e",
+        "filename": "repo/includes/Hooks/BuildDocumentParseHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:32:32Z",
+      "side": 1,
+      "message": "Looks like the \"field definition\" is really a data mapper",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_55bd0bad",
+        "filename": "repo/includes/Hooks/MappingConfigHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:32:32Z",
+      "side": 1,
+      "message": "Please merge with BuildDocumentParseHookHandler (see comment there).",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d5f7bb88",
+        "filename": "repo/includes/Search/Fields/Field.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:32:32Z",
+      "side": 1,
+      "message": "Are the classes in this package specific to Cirrus/Elastic?",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_35073787",
+        "filename": "repo/includes/Search/Fields/Field.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:32:32Z",
+      "side": 1,
+      "message": "This seems overly generic. IndexField or even SearchIndexField would be more informative.",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_75d12ffb",
+        "filename": "repo/includes/Search/Fields/Field.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:32:32Z",
+      "side": 1,
+      "message": "How is this structured? What does it represent? Mapping of what to what? Is this specific to Elastic?\n\nAlso, it seems like this really returns a field declaration, not really a mapping, does it?",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f5fc3f6f",
+        "filename": "repo/includes/Search/Fields/Field.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:32:32Z",
+      "side": 1,
+      "message": "The important bit is that the actual data must match the declaration returned by getMapping, right?\n\nBtw, for symmetry, perhaps this method should be called mapData?",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
