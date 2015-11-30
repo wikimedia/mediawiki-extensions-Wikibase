@@ -243,6 +243,10 @@ call_user_func( function() {
 	$wgHooks['SkinMinervaDefaultModules'][] = 'Wikibase\RepoHooks::onSkinMinervaDefaultModules';
 	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
 
+	// CirrusSearch hooks
+	$wgHooks['CirrusSearchMappingConfig'][] = 'Wikibase\Repo\Hooks\MappingConfigHookHandler::onCirrusSearchMappingConfig';
+	$wgHooks['CirrusSearchBuildDocumentParse'][] = 'Wikibase\Repo\Hooks\BuildDocumentParseHookHandler::onCirrusSearchBuildDocumentParse';
+
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
 
