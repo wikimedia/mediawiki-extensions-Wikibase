@@ -40,11 +40,6 @@ class ChangesListSpecialPageHooksHandler {
 	private $showExternalChanges;
 
 	/**
-	 * @var ChangesListSpecialPageHooksHandler
-	 */
-	private static $instance = null;
-
-	/**
 	 * @param WebRequest $request
 	 * @param User $user
 	 * @param string $pageName
@@ -85,23 +80,6 @@ class ChangesListSpecialPageHooksHandler {
 	}
 
 	/**
-	 * @param IContextSource $context
-	 * @param string $specialPageName
-	 *
-	 * @return ChangesListSpecialPageHooksHandler
-	 */
-	private static function getInstance(
-		IContextSource $context,
-		$specialPageName
-	) {
-		if ( self::$instance === null ) {
-			self::$instance = self::newFromGlobalState( $context, $specialPageName );
-		}
-
-		return self::$instance;
-	}
-
-	/**
 	 * Modifies recent changes and watchlist options to show a toggle for Wikibase changes
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ChangesListSpecialPageFilters
 	 *
@@ -114,7 +92,7 @@ class ChangesListSpecialPageHooksHandler {
 		ChangesListSpecialPage $specialPage,
 		array &$filters
 	) {
-		$hookHandler = self::getInstance(
+		$hookHandler = self::newFromGlobalState(
 			$specialPage->getContext(),
 			$specialPage->getName()
 		);
