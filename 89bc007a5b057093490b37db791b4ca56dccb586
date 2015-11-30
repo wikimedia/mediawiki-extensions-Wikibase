@@ -34,6 +34,24 @@
       "revId": "89bc007a5b057093490b37db791b4ca56dccb586",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_55ebcba0",
+        "filename": "lib/tests/phpunit/store/EntityContentDataCodecTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-11-30T18:35:44Z",
+      "side": 1,
+      "message": "Yes, it\u0027s rather a mistake that the test entities are all items. We should probably also test this with other entity types.",
+      "parentUuid": "0ebaf39b_e1fc856f",
+      "revId": "89bc007a5b057093490b37db791b4ca56dccb586",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
