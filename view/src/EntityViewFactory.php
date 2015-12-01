@@ -37,6 +37,11 @@ class EntityViewFactory {
 	private $plainTextIdFormatterFactory;
 
 	/**
+	 * @var StatementGrouperFactory
+	 */
+	private $statementGrouperFactory;
+
+	/**
 	 * @var SiteStore
 	 */
 	private $siteStore;
@@ -75,6 +80,7 @@ class EntityViewFactory {
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
+	 * @param StatementGrouperFactory $statementGrouperFactory
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
@@ -83,12 +89,12 @@ class EntityViewFactory {
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
 	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		EntityIdFormatterFactory $htmlIdFormatterFactory,
 		EntityIdFormatterFactory $plainTextIdFormatterFactory,
 		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
+		StatementGrouperFactory $statementGrouperFactory,
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
@@ -106,6 +112,7 @@ class EntityViewFactory {
 		$this->htmlIdFormatterFactory = $htmlIdFormatterFactory;
 		$this->plainTextIdFormatterFactory = $plainTextIdFormatterFactory;
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
+		$this->statementGrouperFactory = $statementGrouperFactory;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->templateFactory = $templateFactory;
@@ -181,6 +188,7 @@ class EntityViewFactory {
 				return new ItemView(
 					$this->templateFactory,
 					$entityTermsView,
+					$this->statementGrouperFactory->getStatementGrouper( $entityType ),
 					$statementSectionsView,
 					$language,
 					$siteLinksView,
@@ -190,6 +198,7 @@ class EntityViewFactory {
 				return new PropertyView(
 					$this->templateFactory,
 					$entityTermsView,
+					$this->statementGrouperFactory->getStatementGrouper( $entityType ),
 					$statementSectionsView,
 					$this->dataTypeFactory,
 					$language

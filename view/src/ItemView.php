@@ -5,7 +5,7 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
+use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -20,6 +20,11 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Werner
  */
 class ItemView extends EntityView {
+
+	/**
+	 * @var StatementGrouper
+	 */
+	private $statementGrouper;
 
 	/**
 	 * @var StatementSectionsView
@@ -44,11 +49,13 @@ class ItemView extends EntityView {
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param Language $language
 	 * @param SiteLinksView $siteLinksView
+	 * @param StatementGrouper $statementGrouper
 	 * @param string[] $siteLinkGroups
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
+		StatementGrouper $statementGrouper,
 		StatementSectionsView $statementSectionsView,
 		Language $language,
 		SiteLinksView $siteLinksView,
@@ -56,6 +63,7 @@ class ItemView extends EntityView {
 	) {
 		parent::__construct( $templateFactory, $entityTermsView, $language );
 
+		$this->statementGrouper = $statementGrouper;
 		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->siteLinksView = $siteLinksView;
@@ -72,9 +80,7 @@ class ItemView extends EntityView {
 		}
 
 		$html = parent::getMainHtml( $entityRevision );
-		// TODO: Group statements into actual sections, including an identifiers section.
-		$grouper = new NullStatementGrouper();
-		$statementLists = $grouper->groupStatements( $item->getStatements() );
+		$statementLists = $this->statementGrouper->groupStatements( $item->getStatements() );
 		$html .= $this->statementSectionsView->getHtml( $statementLists );
 
 		return $html;
