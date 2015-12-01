@@ -52,6 +52,24 @@
       "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ab63c308",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-01T12:49:24Z",
+      "side": 1,
+      "message": "The idea is to avoid building data structures, and apply filtering on the fly. Iterating and filtering a second time (or third, or forth) just seems simpler to implement. The performance impact should be minimal.\n\nMy approach however assumes that we would hard code which sections exist, and what filters they use. If we want this to be configurable, the grouping approach is probably easier.\n\nNote however that inside the section view, another level of grouping (by property ID) is applied. This is somewhat confusing, it would be nice to use the same mechanism on both levels.",
+      "parentUuid": "0ebaf39b_0b13efb9",
+      "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
