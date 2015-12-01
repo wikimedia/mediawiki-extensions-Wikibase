@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -29,7 +30,7 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider getAddStatementToGroupSectionProvider
 	 */
-	public function testGetAddStatementToGroupSection( $propertyId, $entityId ) {
+	public function testGetAddStatementToGroupSection( $propertyId, EntityId $entityId ) {
 		$generator = $this->newToolbarEditSectionGenerator();
 
 		$this->assertEquals(
@@ -47,13 +48,14 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider getLabelDescriptionAliasesEditSectionProvider
 	 */
-	public function testGetLabelDescriptionAliasesEditSection( $languageCode, $entityId, $expectedMatch ) {
+	public function testGetLabelDescriptionAliasesEditSection(
+		$languageCode,
+		EntityId $entityId,
+		$expected
+	) {
 		$generator = $this->newToolbarEditSectionGenerator();
-
-		$this->assertRegExp(
-			$expectedMatch,
-			$generator->getLabelDescriptionAliasesEditSection( $languageCode, $entityId )
-		);
+		$html = $generator->getLabelDescriptionAliasesEditSection( $languageCode, $entityId );
+		$this->assertContains( $expected, $html );
 	}
 
 	public function getLabelDescriptionAliasesEditSectionProvider() {
@@ -61,7 +63,7 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 			array(
 				'en',
 				new PropertyId( 'P1' ),
-				'/Special:SetLabelDescriptionAliases\/P1\/en/'
+				'Special:SetLabelDescriptionAliases/P1/en'
 			)
 		);
 	}
@@ -69,15 +71,15 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider getSiteLinksEditSectionProvider
 	 */
-	public function testGetSiteLinksEditSection( $entityId, $expectedMatch ) {
+	public function testGetSiteLinksEditSection( EntityId $entityId, $expected ) {
 		$generator = $this->newToolbarEditSectionGenerator();
-
-		$this->assertRegExp( $expectedMatch, $generator->getSiteLinksEditSection( $entityId ) );
+		$html = $generator->getSiteLinksEditSection( $entityId );
+		$this->assertContains( $expected, $html );
 	}
 
 	public function getSiteLinksEditSectionProvider() {
 		return array(
-			array( new PropertyId( 'P1' ), '/Special:SetSiteLink\/P1/' )
+			array( new PropertyId( 'P1' ), 'Special:SetSiteLink/P1' )
 		);
 	}
 
