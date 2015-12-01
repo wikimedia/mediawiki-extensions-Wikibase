@@ -223,12 +223,27 @@
 	 * @return {jQuery.wikibase.statementgrouplistview} The constructed statementgrouplistview
 	 **/
 	SELF.prototype.getStatementGroupListView = function( entity, $dom ) {
+		var statementGroupSet = entity.getStatements();
 		return this._getView(
 			'statementgrouplistview',
 			$dom,
 			{
-				value: entity.getStatements(),
-				listItemAdapter: this.getListItemAdapterForStatementGroupView( entity.getId() )
+				listItemAdapter: this.getListItemAdapterForStatementGroupView(
+					entity.getId(),
+					function( guid ) {
+						var res = null;
+						statementGroupSet.each( function() {
+							this.getItemContainer().each( function() {
+								if ( this.getClaim().getGuid() === guid ) {
+									res = this;
+								}
+								return res === null;
+							} );
+							return res === null;
+						} );
+						return res;
+					}
+				)
 			}
 		);
 	};
@@ -237,16 +252,17 @@
 	 * Construct a `ListItemAdapter` for `statementgroupview`s
 	 *
 	 * @param {string} entityId
+	 * @param {Function} getStatementForGuid A function returning a `wikibase.datamodel.Statement` for a given GUID
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
 	 **/
-	SELF.prototype.getListItemAdapterForStatementGroupView = function( entityId ) {
+	SELF.prototype.getListItemAdapterForStatementGroupView = function( entityId, getStatementForGuid ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementgroupview,
 			newItemOptionsFn: $.proxy( function( value ) {
 				return {
 					value: value,
 					entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-					buildStatementListView: $.proxy( this.getStatementListView, this, entityId, value && value.getKey() )
+					buildStatementListView: $.proxy( this.getStatementListView, this, entityId, value && value.getKey(), getStatementForGuid )
 				};
 			}, this )
 		} );
@@ -258,17 +274,26 @@
 	 * @param {wikibase.datamodel.EntityId} entityId
 	 * @param {wikibase.datamodel.EntityId|null} propertyId Optionally specifies a property
 	 *                                                      all statements should be on or are on
+	 * @param {Function} getStatementForGuid A function returning a `wikibase.datamodel.Statement` for a given GUID
 	 * @param {wikibase.datamodel.StatementList} value
 	 * @param {jQuery} $dom
 	 * @return {jQuery.wikibase.statementgroupview} The constructed statementlistview
 	 **/
-	SELF.prototype.getStatementListView = function( entityId, propertyId, value, $dom ) {
+	SELF.prototype.getStatementListView = function( entityId, propertyId, getStatementForGuid, value, $dom ) {
+		propertyId = propertyId || $dom.closest( '.wikibase-statementgroupview' ).attr( 'id' );
 		var view = this._getView(
 			'statementlistview',
 			$dom,
 			{
-				value: value,
-				listItemAdapter: this.getListItemAdapterForStatementView( entityId, propertyId ),
+				value: value.length === 0 ? null : value,
+				listItemAdapter: this.getListItemAdapterForStatementView(
+					entityId,
+					function( dom ) {
+						var guid = dom.className.match( /wikibase-statement-([^ ]+)/ )[ 1 ];
+						return getStatementForGuid( guid );
+					},
+					propertyId
+				),
 				claimsChanger: this._entityChangersFactory.getClaimsChanger()
 			}
 		);
@@ -280,38 +305,44 @@
 	 * Construct a `ListItemAdapter` for `statementview`s
 	 *
 	 * @param {string} entityId
+	 * @param {Function} getValueForDom A function returning a `wikibase.datamodel.Statement` for a given DOM element
 	 * @param {string|null} [propertyId] Optionally a property all statements are or should be on
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
 	 **/
-	SELF.prototype.getListItemAdapterForStatementView = function( entityId, propertyId ) {
+	SELF.prototype.getListItemAdapterForStatementView = function( entityId, getValueForDom, propertyId ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementview,
-			newItemOptionsFn: $.proxy( function( value ) {
+			getNewItem: $.proxy( function( value, dom ) {
 				var currentPropertyId = value ? value.getClaim().getMainSnak().getPropertyId() : propertyId;
-				return {
-					value: value,
-					locked: {
-						mainSnak: {
-							property: Boolean( currentPropertyId )
-						}
-					},
-					predefined: {
-						mainSnak: {
-							property: currentPropertyId || undefined
-						}
-					},
+				value = value || getValueForDom( dom );
+				return this._getView(
+					'statementview',
+					$( dom ),
+					{
+						value: value,
+						locked: {
+							mainSnak: {
+								property: Boolean( currentPropertyId )
+							}
+						},
+						predefined: {
+							mainSnak: {
+								property: currentPropertyId || undefined
+							}
+						},
 
-					buildReferenceListItemAdapter: $.proxy( this.getListItemAdapterForReferenceView, this ),
-					buildSnakView: $.proxy(
-						this.getSnakView,
-						this,
-						':' + $.wikibase.statementview.prototype.widgetFullName.toLowerCase()
-					),
-					claimsChanger: this._entityChangersFactory.getClaimsChanger(),
-					entityIdPlainFormatter: this._entityIdPlainFormatter,
-					guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
-					qualifiersListItemAdapter: this.getListItemAdapterForSnakListView()
-				};
+						buildReferenceListItemAdapter: $.proxy( this.getListItemAdapterForReferenceView, this ),
+						buildSnakView: $.proxy(
+							this.getSnakView,
+							this,
+							':' + $.wikibase.statementview.prototype.widgetFullName.toLowerCase()
+						),
+						claimsChanger: this._entityChangersFactory.getClaimsChanger(),
+						entityIdPlainFormatter: this._entityIdPlainFormatter,
+						guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
+						qualifiersListItemAdapter: this.getListItemAdapterForSnakListView()
+					}
+				);
 			}, this )
 		} );
 	};
