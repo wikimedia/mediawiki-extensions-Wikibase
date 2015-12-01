@@ -20,7 +20,7 @@
  *
  * @param {Object} options
  * @param {jquery.wikibase.listview.ListItemAdapter} options.listItemAdapter
- * @param {wikibase.datamodel.StatementGroupSet} options.value
+ * @param {wikibase.datamodel.StatementGroupSet} [options.value]
  *        The `Statements` to be displayed by this view.
  */
 $.widget( 'wikibase.statementgrouplistview', PARENT, {
@@ -52,7 +52,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 	 */
 	_create: function() {
 		if ( !this.options.listItemAdapter
-			|| !( this.options.value instanceof wb.datamodel.StatementGroupSet )
+			|| ( this.options.value && !( this.options.value instanceof wb.datamodel.StatementGroupSet ) )
 		) {
 			throw new Error( 'Required option not specified properly' );
 		}
@@ -97,7 +97,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 
 		$listview.listview( {
 			listItemAdapter: this.options.listItemAdapter,
-			value: this._statementGroupSetToStatementGroups( this.options.value )
+			value: this.options.value ? this._statementGroupSetToStatementGroups( this.options.value ) : null
 		} );
 
 		return $listview.data( 'listview' );

@@ -443,4 +443,17 @@
 		} );
 	} );
 
+	QUnit.test( 'reuse items', function( assert ) {
+		var $node = $( document.createElement( 'span' ) );
+		$node.append( document.createElement( 'span' ) ).append( document.createElement( 'span' ) );
+		var listview = $node.listview( {
+			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
+				listItemWidget: $.wikibasetest.valuewidget,
+				newItemOptionsFn: function () {}
+			} ),
+			listItemNodeName: 'span'
+		} ).data( 'listview' );
+		assert.equal( listview.value().length, 2 );
+	} );
+
 } )( jQuery, QUnit );

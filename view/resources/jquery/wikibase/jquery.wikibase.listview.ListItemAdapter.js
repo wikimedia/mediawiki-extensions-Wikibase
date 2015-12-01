@@ -25,13 +25,22 @@
 	 * @param {Function} options.listItemWidget
 	 *        The constructor of the jQuery widget which should represent items in a `listview`.
 	 *        The widget is required to feature `value`, `destroy` and `option` methods.
-	 * @param {Function} options.newItemOptionsFn
+	 * @param {Function} [options.newItemOptionsFn]
 	 *        A function called when the related `listview` is instantiating a new list item. The
 	 *        function has to return an `Object` which will then be used as `options` object for a
 	 *        new widget (which is specified in the `listItemWidget` option).
 	 *        The new new list item's value is given as the function's first parameter, if an empty
 	 *        list item should be created, the value will be `null`. The function's context is the
 	 *        `ListItemAdapter` instance.
+	 *        Either `newItemOptionsFn` or `getNewItem` has to be passed.
+	 * @param {Function} [options.getNewItem]
+	 *        A function called when the related `listview` is instantiating a new list item. The
+	 *        function has to return an instance of `options.listItemWidget`.
+	 *        The new new list item's value is given as the function's first parameter, if an empty
+	 *        list item should be created, the value will be `null`. The function's context is the
+	 *        `ListItemAdapter` instance. The second parameter is the DOM element the list item widget
+	 *        should be initialized on.
+	 *        Either `newItemOptionsFn` or `getNewItem` has to be passed.
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 * @throws {Error} if the widget specified in the `listItemWidget` option does not feature a
@@ -56,10 +65,20 @@
 				'For a new ListItemAdapter, the list item prototype needs "destroy" and "option" methods'
 			);
 		}
-		if ( !$.isFunction( options.newItemOptionsFn ) ) {
+		if ( !$.isFunction( options.newItemOptionsFn ) && !$.isFunction( options.getNewItem ) ) {
 			throw new Error(
-				'For a new ListItemAdapter, the "newItemOptionsFn" option is required'
+				'For a new ListItemAdapter, the "newItemOptionsFn" or the "getNewItem" option has to be passed'
 			);
+		}
+
+		if ( !options.getNewItem ) {
+			var self = this;
+			options.getNewItem = function( value, subjectDom ) {
+				return new options.listItemWidget(
+					options.newItemOptionsFn.call( self, value === undefined ? null : value ),
+					subjectDom
+				);
+			};
 		}
 
 		this._options = options;
@@ -101,12 +120,7 @@
 		 * @return {jQuery.Widget}
 		 */
 		newListItem: function( $subject, value ) {
-			return new this._options.listItemWidget(
-				this._options.newItemOptionsFn.call( this, value === undefined ? null : value ),
-				// give DOM element, otherwise .data() will be assigned to jQuery object and can't
-				// be accessed via $.fn.data() which is checking for the data of the DOM element.
-				$subject[0]
-			);
+			return this._options.getNewItem( value, $subject[0] );
 		}
 	} );
 
