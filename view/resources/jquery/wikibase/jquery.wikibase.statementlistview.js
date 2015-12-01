@@ -20,9 +20,8 @@
  * @constructor
  *
  * @param {Object} options
- * @param {wikibase.datamodel.StatementList} options.value
- *        The list of `Statement`s to be displayed by this view. If null, the view will initialize
- *        with edit mode being started.
+ * @param {wikibase.datamodel.StatementList} [options.value]
+ *        The list of `Statement`s to be displayed by this view.
  * @param {wikibase.entityChangers.ClaimsChanger} options.claimsChanger
  * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
 /**
@@ -85,7 +84,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	_create: function() {
 		if ( !this.options.claimsChanger
 			|| !this.options.listItemAdapter
-			|| !( this.options.value instanceof wb.datamodel.StatementList )
+			|| ( this.options.value && !( this.options.value instanceof wb.datamodel.StatementList ) )
 		) {
 			throw new Error( 'Required option not specified properly' );
 		}
@@ -139,7 +138,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	_createListView: function() {
 		this.$listview.listview( {
 			listItemAdapter: this.options.listItemAdapter,
-			value: this.options.value.toArray()
+			value: this.options.value ? this.options.value.toArray() : null
 		} );
 
 		this._listview = this.$listview.data( 'listview' );
