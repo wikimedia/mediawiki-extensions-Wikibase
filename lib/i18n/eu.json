@@ -12,5 +12,6 @@
 	"wikibase-globedetails-latitude": "Latitudea",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Hizkuntza",
-	"wikibase-tooltip-error-details": "Xehetasunak"
+	"wikibase-tooltip-error-details": "Xehetasunak",
+	"wikibase-time-precision-Gannum": "$1 mila milioi urte K.o."
 }

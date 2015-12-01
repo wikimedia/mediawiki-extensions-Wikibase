@@ -137,6 +137,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Опис:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Псеудоними:",
 	"wikibase-setlabeldescriptionaliases-submit": "Поставите назив, опис и псеудониме",
+	"wikibase-setsitelink-badges": "Значке:",
 	"wikibase-modifyentity-id": "ИД:",
 	"wikibase-modifyterm-language": "Код језика:",
 	"wikibase-mergeitems-success": "$1 је успешно спојена у $3 и преусмерена.",
