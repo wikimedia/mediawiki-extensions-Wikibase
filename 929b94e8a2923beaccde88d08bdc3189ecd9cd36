@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_31c5040e",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T16:56:21Z",
+      "side": 1,
+      "message": "i realize we do have some tests below that test the different output formats and so maybe it\u0027s enough to just assert we have a ValueFormatter instance, but i think it would be nice to assert more specifically which formatter class these are. (especially since we return the formatter object here)",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_5192f84f",
         "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
         "patchSetId": 4
