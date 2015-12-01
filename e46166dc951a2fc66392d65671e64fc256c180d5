@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_ebde9b42",
+        "filename": "repo/includes/Hooks/BuildDocumentParseHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T13:17:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_15b473ce",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_35e097c7",
         "filename": "repo/includes/Hooks/BuildDocumentParseHookHandler.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-11-30T18:32:32Z",
       "side": 1,
       "message": "Should the WikibaseFieldsDefinition perhaps come from WikibaseRepo? It\u0027S all hard coded now, but it may well depend on configuration...",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_cbe957e2",
+        "filename": "repo/includes/Hooks/BuildDocumentParseHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T13:17:07Z",
+      "side": 1,
+      "message": "when it gets more complex, then sure.\n\nfor labels, it will take WikibaseContentLanguages but then that has not dependencies and is still rather simple to construct.",
+      "parentUuid": "0ebaf39b_35e097c7",
       "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_8befdfe3",
+        "filename": "repo/includes/Hooks/MappingConfigHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T13:17:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebaf39b_55bd0bad",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_d5f7bb88",
         "filename": "repo/includes/Search/Fields/Field.php",
         "patchSetId": 2
@@ -81,6 +135,24 @@
       "writtenOn": "2015-11-30T18:32:32Z",
       "side": 1,
       "message": "Are the classes in this package specific to Cirrus/Elastic?",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_4bac879d",
+        "filename": "repo/includes/Search/Fields/Field.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T13:17:07Z",
+      "side": 1,
+      "message": "this is somewhat specific to elastic.\n\ni don\u0027t know where to put this code... i don\u0027t want it to really depend on repo and the cirrus parts also be optional dependency.\n\nthe necessary dependencies are data model (and in some places, elastica)",
+      "parentUuid": "0ebaf39b_d5f7bb88",
       "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
