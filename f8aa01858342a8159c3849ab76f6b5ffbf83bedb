@@ -34,6 +34,24 @@
       "revId": "f8aa01858342a8159c3849ab76f6b5ffbf83bedb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_d1e908e2",
+        "filename": "client/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T16:33:55Z",
+      "side": 1,
+      "message": "i can\u0027t think another suggestion for naming.  i just don\u0027t want stuff that happens on parse to be mixed with stuff that happens on render, and to be cautious about what services are instantiated on page view via the hook handler. (e.g. to not load all site objects when they are not needed)",
+      "parentUuid": "0ebaf39b_c2e158fc",
+      "revId": "f8aa01858342a8159c3849ab76f6b5ffbf83bedb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
