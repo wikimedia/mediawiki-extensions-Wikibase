@@ -5,10 +5,14 @@ namespace Wikibase\Store\Test;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -41,18 +45,20 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 	}
 
 	public function entityIdProvider() {
+		$p1 = new PropertyId( 'P1' );
 		$q11 = new ItemId( 'Q11' );
 
 		return array(
-			'new style' => array( json_encode( array( 'entity' => 'Q11' ) ), $q11 ),
-			'old style' => array( json_encode( array( 'entity' => array( 'item', 11 ) ) ), $q11 ),
+			'PropertyId' => array( '{ "entity": "P1", "datatype": "string" }', $p1 ),
+			'new style' => array( '{ "entity": "Q11" }', $q11 ),
+			'old style' => array( '{ "entity": ["item", 11] }', $q11 ),
 		);
 	}
 
 	/**
 	 * @dataProvider entityIdProvider
 	 */
-	public function testEntityIdDecoding( $data, ItemId $id ) {
+	public function testEntityIdDecoding( $data, EntityId $id ) {
 		$entity = $this->getCodec()->decodeEntity( $data, CONTENT_FORMAT_JSON );
 		$this->assertEquals( $id, $entity->getId() );
 	}
@@ -64,6 +70,8 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 		$simple->setLabel( 'en', 'Test' );
 
 		return array(
+			'Property' => array( Property::newFromType( 'string' ), null ),
+
 			'empty' => array( $empty, null ),
 			'empty json' => array( $empty, CONTENT_FORMAT_JSON ),
 
@@ -76,12 +84,12 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider entityProvider
 	 */
-	public function testEncodeAndDecodeEntity( Item $entity, $format ) {
+	public function testEncodeAndDecodeEntity( EntityDocument $entity, $format ) {
 		$blob = $this->getCodec()->encodeEntity( $entity, $format );
 		$this->assertType( 'string', $blob );
 
 		$actual = $this->getCodec()->decodeEntity( $blob, $format );
-		$this->assertTrue( $entity->equals( $actual ), 'round trip' );
+		$this->assertEquals( $entity, $actual, 'round trip' );
 	}
 
 	public function testEncodeBigEntity() {
