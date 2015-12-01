@@ -95,7 +95,6 @@
 		viewFactory.getStatementGroupListView( entity, $dom );
 
 		sinon.assert.calledWith( $.wikibase.statementgrouplistview, sinon.match( {
-			value: entity.getStatements(),
 			listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
 		} ) );
 
@@ -136,6 +135,40 @@
 	} );
 
 	QUnit.test( 'getStatementListView passes correct options to views', function( assert ) {
+		var value = new wb.datamodel.StatementList( [
+				new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ) )
+			] ),
+			entityId = 'entityId',
+			claimsChanger = {},
+			entityChangersFactory = {
+				getClaimsChanger: function() { return claimsChanger; }
+			},
+			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
+			$dom = $( '<div/>' );
+
+		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
+		sinon.stub( viewFactory, '_getView' );
+
+		viewFactory.getStatementListView( entityId, null, function () {}, value, $dom );
+
+		sinon.assert.calledWith(
+			viewFactory._getView,
+			sinon.match(
+				'statementlistview',
+				$dom,
+				{
+					value: value,
+					claimsChanger: claimsChanger,
+					listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
+				}
+			)
+		);
+
+		viewFactory._getView.restore();
+		$.wikibase.listview.ListItemAdapter.restore();
+	} );
+
+	QUnit.test( 'getStatementListView passes null for an empty StatementList', function( assert ) {
 		var value = new wb.datamodel.StatementList(),
 			entityId = 'entityId',
 			claimsChanger = {},
@@ -145,20 +178,20 @@
 			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
 			$dom = $( '<div/>' );
 
+		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
 		$dom.statementlistview = sinon.stub( $.wikibase, 'statementlistview' );
 
-		viewFactory.getStatementListView( entityId, null, value, $dom );
+		viewFactory.getStatementListView( entityId, null, function () {}, value, $dom );
 
 		sinon.assert.calledWith(
 			$.wikibase.statementlistview,
 			sinon.match( {
-				value: value,
-				claimsChanger: claimsChanger,
-				listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
+				value: null
 			} )
 		);
 
 		$.wikibase.statementlistview.restore();
+		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to ListItemAdapter', function( assert ) {
@@ -170,24 +203,30 @@
 			},
 			entityIdPlainFormatter = {},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory, null, entityIdPlainFormatter ),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+			ListItemAdapter = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ),
+			dom = null,
+			statement = {};
 
-		viewFactory.getListItemAdapterForStatementView( entityId, null );
+		sinon.stub( viewFactory, '_getView' );
+
+		viewFactory.getListItemAdapterForStatementView( entityId, null, function () { return statement; } );
 
 		sinon.assert.calledWith(
 			ListItemAdapter,
 			sinon.match( {
 				listItemWidget: $.wikibase.statementview,
-				newItemOptionsFn: sinon.match.func
+				getNewItem: sinon.match.func
 			} )
 		);
 
-		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+		ListItemAdapter.args[0][0].getNewItem( value, dom );
 
-		assert.deepEqual(
-			result,
-			{
-				value: value,
+		sinon.assert.calledWith(
+			viewFactory._getView,
+			'statementview',
+			sinon.match.instanceOf( $ ),
+			sinon.match( {
+				value: statement,
 				predefined: {
 					mainSnak: {
 						property: undefined
@@ -199,21 +238,17 @@
 					}
 				},
 
-				buildReferenceListItemAdapter: result.buildReferenceListItemAdapter, // Hack
-				buildSnakView: result.buildSnakView, // Hack
+				buildReferenceListItemAdapter: sinon.match.instanceOf( Function ),
+				buildSnakView: sinon.match.instanceOf( Function ),
 				claimsChanger: claimsChanger,
 				entityIdPlainFormatter: entityIdPlainFormatter,
-				guidGenerator: result.guidGenerator, // Hack
-				qualifiersListItemAdapter: result.qualifiersListItemAdapter // Hack
-			}
+				guidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator ),
+				qualifiersListItemAdapter: sinon.match.instanceOf( ListItemAdapter )
+			} )
 		);
 
-		assert.ok( result.guidGenerator instanceof wb.utilities.ClaimGuidGenerator );
-		assert.ok( result.buildReferenceListItemAdapter instanceof Function );
-		assert.ok( result.buildSnakView instanceof Function );
-		assert.ok( result.qualifiersListItemAdapter instanceof ListItemAdapter );
-
 		$.wikibase.listview.ListItemAdapter.restore();
+		viewFactory._getView.restore();
 	} );
 
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for pre-set property id', function( assert ) {
@@ -225,16 +260,27 @@
 				getReferencesChanger: function() { return {}; }
 			},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
+			dom = {};
 
-		viewFactory.getListItemAdapterForStatementView( entityId, propertyId );
+		sinon.stub( viewFactory, '_getView' );
 
-		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+		viewFactory.getListItemAdapterForStatementView( entityId, propertyId, function () {} );
 
-		assert.equal( result.predefined.mainSnak.property, propertyId );
-		assert.equal( result.locked.mainSnak.property, true );
+		ListItemAdapter.args[0][0].getNewItem( value, dom );
+
+		sinon.assert.calledWith(
+			viewFactory._getView,
+			'statementview',
+			sinon.match.instanceOf( $ ),
+			sinon.match( {
+				predefined: { mainSnak: { property: propertyId } },
+				locked: { mainSnak: { property: true } }
+			} )
+		);
 
 		$.wikibase.listview.ListItemAdapter.restore();
+		viewFactory._getView.restore();
 	} );
 
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', function( assert ) {
@@ -246,16 +292,27 @@
 				getReferencesChanger: function() { return {}; }
 			},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
-			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
+			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
+			dom = {};
 
-		viewFactory.getListItemAdapterForStatementView( entityId, null );
+		sinon.stub( viewFactory, '_getView' );
 
-		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+		viewFactory.getListItemAdapterForStatementView( entityId, null, function () {} );
 
-		assert.equal( result.predefined.mainSnak.property, propertyId );
-		assert.equal( result.locked.mainSnak.property, true );
+		ListItemAdapter.args[0][0].getNewItem( value, dom );
+
+		sinon.assert.calledWith(
+			viewFactory._getView,
+			'statementview',
+			sinon.match.instanceOf( $ ),
+			sinon.match( {
+				predefined: { mainSnak: { property: propertyId } },
+				locked: { mainSnak: { property: true } }
+			} )
+		);
 
 		$.wikibase.listview.ListItemAdapter.restore();
+		viewFactory._getView.restore();
 	} );
 
 	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function( assert ) {
