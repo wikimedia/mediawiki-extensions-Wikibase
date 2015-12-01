@@ -88,6 +88,24 @@
       "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_dcb59fea",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-01T17:48:08Z",
+      "side": 1,
+      "message": "\u003e Why should we hardcode configuration that\u0027s specific to wikidata.org, and not a generic Wikibase concept?\n\nBecause I don\u0027t see that it\u0027s specific to wikidata. Not any more specific than SiteLinks or References.\n\nIn the end, it\u0027s a question of balancing flexibility vs overhead. Making something configurable is always more difficult than hardcoding it. In this case, I would personally go for hardcoding two sections. But I\u0027m not going to block this story on that question. Having this configurable isn\u0027t bad - I just don\u0027t see a pressing need right now. But since we committed to that investment, fine, let\u0027s get it done.",
+      "parentUuid": "0ebaf39b_ab118360",
+      "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
