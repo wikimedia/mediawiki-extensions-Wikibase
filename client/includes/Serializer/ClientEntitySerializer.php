@@ -45,6 +45,11 @@ class ClientEntitySerializer implements Serializer {
 	 */
 	private $fallbackChains;
 
+	/**
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param string[] $filterLangCodes
+	 * @param LanguageFallbackChain[] $fallbackChains
+	 */
 	public function __construct(
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $filterLangCodes,
