@@ -70,6 +70,24 @@
       "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_ab118360",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-01T13:04:54Z",
+      "side": 1,
+      "message": "\u003e filtering a second time (or third, or forth) just seems simpler to implement.\n\nAgain, how is this \"simpler\"? When the first section contains all non-deprecated identifiers, and the second section contains all time values that have at least one reference, how would the filter for the third section look? Something like NOT( OR( filter1, filter2 ) )? What\u0027s the benefit of that?\n\n\u003e My approach however assumes that we would hard code which sections exist\n\nI do not understand. Why should we hardcode configuration that\u0027s specific to wikidata.org, and not a generic Wikibase concept? I find this sooo obvious, I assumed we all agree on this. Why should every Wikibase based repository be enforced to have a special section for identifiers, but disallowed to have other sections for other data types they introduced?\n\n\u003e it would be nice to use the same mechanism on both levels.\n\nGuess what ByPropertyIdStatementGrouper is for. :-(",
+      "parentUuid": "0ebaf39b_ab63c308",
+      "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
