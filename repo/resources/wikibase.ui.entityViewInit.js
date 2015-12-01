@@ -148,7 +148,7 @@
 					'wikibase-anonymouseditwarning',
 					mw.msg( 'wikibase-entity-' + entityType )
 				);
-				mw.notify( message, { autoHide: false, type: 'warn' } );
+				mw.notify( message, { autoHide: false, type: 'warn', tag: 'wikibase-anonymouseditwarning' } );
 			}
 		} );
 	}
