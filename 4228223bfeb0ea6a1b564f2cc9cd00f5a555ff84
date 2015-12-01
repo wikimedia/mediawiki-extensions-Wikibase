@@ -34,6 +34,24 @@
       "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_0b13efb9",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-01T11:59:41Z",
+      "side": 1,
+      "message": "I also do not understand what Daniel wants. How would that work? What if the first group contains, for example, all non-deprecated identifier statements? How would the filter for the *second* group look like? Do we need to apply the exact same filter a second time, just inverted? Why? What\u0027s wrong with the grouping concept?",
+      "parentUuid": "0ebaf39b_8875a5f6",
+      "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
