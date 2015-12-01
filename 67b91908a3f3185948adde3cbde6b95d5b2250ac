@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_fc1e6361",
+        "filename": "docs/datatypes.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T17:14:31Z",
+      "side": 1,
+      "message": "is known",
+      "revId": "67b91908a3f3185948adde3cbde6b95d5b2250ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
