@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_1189e026",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T16:46:07Z",
+      "side": 1,
+      "message": "also, a matter of taste, but i would switch the order of the arguments, with ValueFormatter object first.",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_71a05c9b",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T16:46:07Z",
+      "side": 1,
+      "message": "escapingValueFormatter?",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_51b998c5",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T16:46:07Z",
+      "side": 1,
+      "message": "it is a bit strange to apply ucfirst when the provider already has them starting with uppercase",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_5192f84f",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-01T16:46:07Z",
+      "side": 1,
+      "message": "huh, this is not using getFormatterForDataType?",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
