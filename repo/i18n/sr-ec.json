@@ -111,7 +111,7 @@
 	"wikibase-newproperty-fieldset": "Прављење новог својства",
 	"wikibase-newproperty-datatype": "Врста податка:",
 	"wikibase-newproperty-invalid-datatype": "Назначена је неважећа врста податка.",
-	"special-newitem": "Прављење нове ставке",
+	"special-newitem": "Нова ставка",
 	"wikibase-newitem-summary": "Обавезно проверите [[Special:ItemByTitle|да ли ставка већ постоји]]!<br />Требало би да додате [[Help:Label|назив]] и [[Help:Description|опис]] за све нове ставке.",
 	"wikibase-newitem-fieldset": "Прављење нове ставке",
 	"wikibase-newitem-site": "Сајт прве повезане странице",
