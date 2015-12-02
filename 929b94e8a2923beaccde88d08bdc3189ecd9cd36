@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0ebaf39b_a8109ef8",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-02T16:55:59Z",
+      "side": 1,
+      "message": "Yea, but all the other methods in this class have the format first.",
+      "parentUuid": "0ebaf39b_1189e026",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_71a05c9b",
         "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-01T16:46:07Z",
       "side": 1,
       "message": "escapingValueFormatter?",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_48d9e25a",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-02T16:55:59Z",
+      "side": 1,
+      "message": "That\u0027s not a verb... how about wrapValueFormatter? Or wrapValueFormatterInEscapingValueFormatterIfNeeded?",
+      "parentUuid": "0ebaf39b_71a05c9b",
       "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
