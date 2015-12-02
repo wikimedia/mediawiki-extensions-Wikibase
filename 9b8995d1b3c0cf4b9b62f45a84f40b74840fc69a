@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_c5593b91",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.toolbaritem.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-02T15:41:21Z",
+      "side": 0,
+      "message": "I don\u0027t think removing space here is an improvement. Lets spend those two pixels.",
+      "revId": "9b8995d1b3c0cf4b9b62f45a84f40b74840fc69a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
