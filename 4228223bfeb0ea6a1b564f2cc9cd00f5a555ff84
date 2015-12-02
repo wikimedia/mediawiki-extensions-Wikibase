@@ -106,6 +106,24 @@
       "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_0f6f74fa",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-02T08:46:03Z",
+      "side": 1,
+      "message": "I see that one can argue about SiteLinks being wikidata.org specific (and many people actually did). But how are references specific? I do not understand. This deeply confuses me. More and more comments you wrote recently tell me that we two have a deep, fundamental disagreement on absolutely critical concepts. Here, in https://github.com/wmde/WikibaseDataModelServices/pull/91#discussion_r46144648 , and the worst example probably being what we still discuss in T95425, where it even turned out that *everybody* agrees with me, except you. How is this possible? I really think we need to solve this before making any other fundamental change to any critical code base.",
+      "parentUuid": "0ebaf39b_dcb59fea",
+      "revId": "4228223bfeb0ea6a1b564f2cc9cd00f5a555ff84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
