@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_92d4ebee",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-02T11:13:43Z",
+      "side": 1,
+      "message": "I\u0027d move at least the implementation to WikibaseRepo. Also, I wonder why you use a hand-crafted spec format instead of directly passing instances, or callbacks.\n\n$wgWBRepoSettings[\u0027buildSectionsStatementGrouper\u0027] \u003d function ( $wikibaseRepo ) {\n  return new FilteringStatementGrouper( array(\n    \u0027other\u0027 \u003d\u003e null,\n    \u0027identifiers\u0027 \u003d\u003e new StatementEntityTypeFilter(\n      \u0027item\u0027,\n      new DataTypeStatementFilter(\n        $wikibaseRepo-\u003egetPropertyDataTypeLookup(),\n        \u0027identifier\u0027\n      )\n    ),\n    \u0027constraints\u0027 \u003d\u003e new StatementEntityTypeFilter(\n      \u0027property\u0027,\n      new PropertySetStatementFilter(\n        array( \u0027P111\u0027 )\n      )\n    )\n  ) );\n};\n\n// …\n\nWikibaseRepo::getEntityParserOutputGeneratorFactory() {\n  // …\n  $sectionsStatementGrouper \u003d $this-\u003esettings-\u003egetSetting( \u0027buildSectionsStatementGrouper\u0027 )( $this );\n  // …\n}\n\nThis factory wouldn\u0027t be necessary, then.",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_92a62ba7",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-02T11:13:43Z",
+      "side": 1,
+      "message": "Typo",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ebaf39b_f29d275c",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-02T11:13:43Z",
+      "side": 1,
+      "message": "Typo",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
