@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ebaf39b_a3a3df95",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-02T18:32:41Z",
+      "side": 1,
+      "message": "inconsistent indent",
+      "revId": "29c841222460d888e5db5c98c8a63eb647712ff1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
