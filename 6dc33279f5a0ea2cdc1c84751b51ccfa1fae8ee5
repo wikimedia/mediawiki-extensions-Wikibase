@@ -88,6 +88,24 @@
       "revId": "6dc33279f5a0ea2cdc1c84751b51ccfa1fae8ee5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_8e321f05",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-12-03T14:11:59Z",
+      "side": 1,
+      "message": "OK, I see. Lydia wants that heading to DISAPPEAR, so I would propose you to simply show that heading when your gadget is activated. Would that be a solution for you?",
+      "parentUuid": "ceb37bc7_8e79bf2c",
+      "revId": "6dc33279f5a0ea2cdc1c84751b51ccfa1fae8ee5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
