@@ -52,6 +52,24 @@
       "revId": "6dc33279f5a0ea2cdc1c84751b51ccfa1fae8ee5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_eedddb74",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-12-03T11:36:25Z",
+      "side": 1,
+      "message": "You could execute addCopyLinks when statement enters edit mode.",
+      "parentUuid": "ceb37bc7_4e9f47ba",
+      "revId": "6dc33279f5a0ea2cdc1c84751b51ccfa1fae8ee5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
