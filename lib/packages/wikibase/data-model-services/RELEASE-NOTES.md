@@ -1,6 +1,18 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.2.0 (2015-12-03)
+
+* Added `StatementGrouper` interface and the most basic implementations:
+  * `NullStatementGrouper`
+  * `ByPropertyIdStatementGrouper`
+  * `FilteringStatementGrouper`
+* Added `StatementFilter` implementations for use in `FilteringStatementGrouper`:
+  * `NullStatementFilter`
+  * `DataTypeStatementFilter`
+  * `PropertySetStatementFilter`
+
 ## Version 3.1.1 (2015-11-15)
+
 * Made `EntityRetrievingTermLookup` handle `EntityLookupException` ([T118581](https://phabricator.wikimedia.org/T118581))
 
 ## Version 3.1.0 (2015-10-16)
