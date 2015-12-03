@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Language;
 use SiteStore;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
@@ -155,6 +156,10 @@ class EntityViewFactory {
 		EditSectionGenerator $editSectionGenerator
 	 ) {
 		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
+
+		// TODO: Group statements into actual sections, including an identifiers section.
+		$statementGrouper = new NullStatementGrouper();
+
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
 			$fallbackChain,
@@ -181,6 +186,7 @@ class EntityViewFactory {
 				return new ItemView(
 					$this->templateFactory,
 					$entityTermsView,
+					$statementGrouper,
 					$statementSectionsView,
 					$language,
 					$siteLinksView,
@@ -190,6 +196,7 @@ class EntityViewFactory {
 				return new PropertyView(
 					$this->templateFactory,
 					$entityTermsView,
+					$statementGrouper,
 					$statementSectionsView,
 					$this->dataTypeFactory,
 					$language
