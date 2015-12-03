@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ceb37bc7_ae4e03c3",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T13:45:33Z",
+      "side": 1,
+      "message": "Yea, this is a bit annoying - the \"data types\" in the provider should be lower case, but they are still not really data type IDs. They correspond to the method names.",
+      "parentUuid": "0ebaf39b_51b998c5",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_31c5040e",
         "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
         "patchSetId": 4
@@ -106,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ceb37bc7_ee54fb58",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T13:45:33Z",
+      "side": 1,
+      "message": "I see no way for this function to know what concrete class to expect. It would need to get that info from the caller. If we do that, it would be simpler for the caller to just check the type after it gets the formatter object.",
+      "parentUuid": "0ebaf39b_31c5040e",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_5192f84f",
         "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
         "patchSetId": 4
@@ -117,6 +153,24 @@
       "writtenOn": "2015-12-01T16:46:07Z",
       "side": 1,
       "message": "huh, this is not using getFormatterForDataType?",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_ce57b75b",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T13:45:33Z",
+      "side": 1,
+      "message": "No, because $type is a value type, not a data type.",
+      "parentUuid": "0ebaf39b_5192f84f",
       "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
