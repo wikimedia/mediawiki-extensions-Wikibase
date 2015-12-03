@@ -412,6 +412,8 @@
 	"apihelp-wbeditentity-example-8": "Creates a new claim on the item for the property P56 and a value of \"ExampleString\"",
 	"apihelp-wbeditentity-example-9": "Removes the claims from the item with the GUIDs Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F and Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X",
 	"apihelp-wbeditentity-example-10": "Sets the claim with the GUID to the value of the claim",
+	"apihelp-wbeditentity-example-11": "Adds a label without overwriting it if it already exists",
+	"apihelp-wbeditentity-example-12": "Removes a label",
 	"apihelp-wbformatvalue-description": "Formats DataValues.",
 	"apihelp-wbformatvalue-param-generate": "The desired output format to generate.",
 	"apihelp-wbformatvalue-param-datatype": "The value's data type. This is distinct from the value's type",
