@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase;
 use SiteList;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\StatementGrouperFactory;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
@@ -52,6 +53,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$htmlFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML ),
 			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
+			new StatementGrouperFactory(),
 			$this->getSiteStore(),
 			new DataTypeFactory( array() ),
 			$templateFactory,

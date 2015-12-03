@@ -1366,6 +1366,7 @@ class WikibaseRepo {
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
+			new StatementGrouperFactory(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			$templateFactory,
