@@ -70,6 +70,24 @@
       "revId": "6dc33279f5a0ea2cdc1c84751b51ccfa1fae8ee5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_8e79bf2c",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 9
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-03T12:51:54Z",
+      "side": 1,
+      "message": "I don\u0027t think people want to enter edit mode when they want to copy a reference... They are already complaining that removing a reference is too slow because the whole statement view needs to switch to edit mode.",
+      "parentUuid": "ceb37bc7_eedddb74",
+      "revId": "6dc33279f5a0ea2cdc1c84751b51ccfa1fae8ee5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
