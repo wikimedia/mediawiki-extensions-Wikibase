@@ -228,6 +228,23 @@
       "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_ceab371a",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-03T13:58:49Z",
+      "side": 1,
+      "message": "$dataTypes as $dataType to be more clear?",
+      "revId": "929b94e8a2923beaccde88d08bdc3189ecd9cd36",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
