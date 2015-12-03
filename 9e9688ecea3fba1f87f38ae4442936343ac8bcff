@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb37bc7_aea28339",
+        "filename": "repo/includes/Search/Elastic/Fields/Field.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T14:02:24Z",
+      "side": 1,
+      "message": "This seems overly generic. IndexField or even SearchIndexField would be more informative.",
+      "revId": "9e9688ecea3fba1f87f38ae4442936343ac8bcff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_4e674723",
+        "filename": "repo/includes/Search/Elastic/Fields/Field.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T14:02:24Z",
+      "side": 1,
+      "message": "How is this structured? What does it represent? Mapping of what to what? Is this specific to Elastic?\n\nAlso, it seems like this really returns a field declaration, not really a mapping, does it?",
+      "revId": "9e9688ecea3fba1f87f38ae4442936343ac8bcff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_6e6c8b06",
+        "filename": "repo/includes/Search/Elastic/Fields/Field.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T14:02:24Z",
+      "side": 1,
+      "message": "The important bit is that the actual data must match the declaration returned by getMapping, right?\n\nBtw, for symmetry, perhaps this method should be called mapData?",
+      "revId": "9e9688ecea3fba1f87f38ae4442936343ac8bcff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
