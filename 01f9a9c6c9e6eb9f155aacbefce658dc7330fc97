@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb37bc7_bc4e39c3",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T17:35:42Z",
+      "side": 1,
+      "message": "Would be nicer if the StatementSectionsView would contain the grouper, and do the grouping internally. Less stuff to inject here, and the idea of grouping wouldn\u0027t bleed all over the code...",
+      "revId": "01f9a9c6c9e6eb9f155aacbefce658dc7330fc97",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
