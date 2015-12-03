@@ -7,10 +7,10 @@ use InvalidArgumentException;
 use Language;
 use SiteStore;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\StatementGrouperFactory;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -36,6 +36,11 @@ class EntityViewFactory {
 	 * @var EntityIdFormatterFactory
 	 */
 	private $plainTextIdFormatterFactory;
+
+	/**
+	 * @var StatementGrouperFactory
+	 */
+	private $statementGrouperFactory;
 
 	/**
 	 * @var SiteStore
@@ -76,6 +81,7 @@ class EntityViewFactory {
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
+	 * @param StatementGrouperFactory $statementGrouperFactory,
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
@@ -90,6 +96,7 @@ class EntityViewFactory {
 		EntityIdFormatterFactory $htmlIdFormatterFactory,
 		EntityIdFormatterFactory $plainTextIdFormatterFactory,
 		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
+		StatementGrouperFactory $statementGrouperFactory,
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
@@ -107,6 +114,7 @@ class EntityViewFactory {
 		$this->htmlIdFormatterFactory = $htmlIdFormatterFactory;
 		$this->plainTextIdFormatterFactory = $plainTextIdFormatterFactory;
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
+		$this->statementGrouperFactory = $statementGrouperFactory;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->templateFactory = $templateFactory;
@@ -157,8 +165,7 @@ class EntityViewFactory {
 	 ) {
 		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
 
-		// TODO: Group statements into actual sections, including an identifiers section.
-		$statementGrouper = new NullStatementGrouper();
+		$statementGrouper = $this->statementGrouperFactory->getStatementGrouper( $entityType );
 
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
