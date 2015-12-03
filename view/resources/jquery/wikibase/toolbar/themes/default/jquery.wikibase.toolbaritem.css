@@ -15,12 +15,17 @@
 	width: 11px;
 }
 
-.wikibase-toolbar-item  span.mw-collapsible-toggle {
-	text-indent: -9999px;
+.wikibase-toolbar-item .mw-collapsible-toggle {
+	background-position: right;
+	background-repeat: no-repeat;
+	height: 24px;
+	overflow: hidden;
+	text-indent: 24px;
+	width: 24px;
 }
 
-.wikibase-toolbar-item  span.mw-collapsible-toggle-expanded,
-.wikibase-toolbar-item  span.mw-collapsible-toggle {
+.wikibase-toolbar-item .mw-collapsible-toggle,
+.wikibase-toolbar-item .mw-collapsible-toggle-expanded {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
@@ -29,13 +34,9 @@
 	background-image: -webkit-linear-gradient(transparent, transparent), url(images/icons/oojs-ui/collapse.svg);
 	/* @embed */
 	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/collapse.svg);
-	background-position: right;
-	background-repeat: no-repeat;
-	height: 24px;
-	width: 24px;
 }
 
-.wikibase-toolbar-item  span.mw-collapsible-toggle-collapsed {
+.wikibase-toolbar-item .mw-collapsible-toggle-collapsed {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */

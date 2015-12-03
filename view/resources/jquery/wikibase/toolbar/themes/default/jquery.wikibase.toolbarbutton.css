@@ -38,7 +38,7 @@
 	padding: 0;
 }
 
-.wikibase-toolbar-button span.wb-icon {
+.wikibase-toolbar-button .wb-icon {
 	background-position: center;
 	background-size: 20px 20px;
 	width: 20px;
@@ -48,15 +48,16 @@
 	opacity: 0.7;
 }
 
-.wikibase-toolbar-button:hover > a > span.wb-icon {
+.wikibase-toolbar-button a:hover .wb-icon {
 	opacity: 0.9;
 }
 
-.wikibase-toolbar-button.ui-state-disabled span.wb-icon {
+.wikibase-toolbar-button.ui-state-disabled .wb-icon,
+.wikibase-toolbar-button.ui-state-disabled a:hover .wb-icon{
 	opacity: 0.5;
 }
 
-.wikibase-toolbar-button-edit span.wb-icon {
+.wikibase-toolbar-button-edit .wb-icon {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
@@ -68,7 +69,7 @@
 	background-position: 0 40%;
 }
 
-.wikibase-toolbar-button-save span.wb-icon {
+.wikibase-toolbar-button-save .wb-icon {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
@@ -79,7 +80,7 @@
 	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/check.svg);
 }
 
-.wikibase-toolbar-button-remove span.wb-icon {
+.wikibase-toolbar-button-remove .wb-icon {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
@@ -90,7 +91,7 @@
 	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/remove.svg);
 }
 
-.wikibase-toolbar-button-cancel span.wb-icon {
+.wikibase-toolbar-button-cancel .wb-icon {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
@@ -101,7 +102,7 @@
 	background-image: linear-gradient(transparent, transparent), url(images/icons/oojs-ui/close-ltr.svg);
 }
 
-.wikibase-toolbar-button-add span.wb-icon {
+.wikibase-toolbar-button-add .wb-icon {
 	/* SVG support using a transparent gradient to guarantee cross-browser
 	 * compatibility (browsers able to understand gradient syntax support also SVG).
 	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
