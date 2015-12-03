@@ -207,6 +207,24 @@
       "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_cecc9769",
+        "filename": "repo/includes/Search/Fields/Field.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-03T14:51:57Z",
+      "side": 1,
+      "message": "maybe getFieldData and getMappingForField?\n\nthough think having \"Field\" in the method names is somewhat redundant to the interface / class names.\n\nMapping is a specific thing in ElasticSearch (it\u0027s the overall schema of the document)\n \nthen Cirrus has the concept of \"PageData\" and these are essentially page data fields. I think labels etc. are also page data.",
+      "parentUuid": "0ebaf39b_f5fc3f6f",
+      "revId": "e46166dc951a2fc66392d65671e64fc256c180d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
