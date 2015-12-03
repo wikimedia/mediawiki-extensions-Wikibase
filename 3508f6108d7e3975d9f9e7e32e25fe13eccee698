@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ceb37bc7_11e16efb",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-03T15:06:39Z",
+      "side": 1,
+      "message": "What do these \"StatementEntityTypeFilter\" do? I assume this is a misunderstanding and not needed.",
+      "parentUuid": "0ebaf39b_92d4ebee",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_92a62ba7",
         "filename": "view/src/StatementGrouperFactory.php",
         "patchSetId": 1
@@ -30,6 +48,23 @@
       "writtenOn": "2015-12-02T11:13:43Z",
       "side": 1,
       "message": "Typo",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_b112e2ff",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-03T15:06:39Z",
+      "side": 1,
+      "message": "What \"seconds\"?",
       "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
