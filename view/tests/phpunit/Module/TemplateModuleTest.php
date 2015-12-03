@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\View\Template\Test;
+namespace Wikibase\View\Tests\Module;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\View\Module\TemplateModule;
