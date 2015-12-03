@@ -21,9 +21,9 @@ class FilteringStatementGrouper implements StatementGrouper {
 	private $filters = array();
 
 	/**
-	 * @var string[] Array of group keys
+	 * @var string[]
 	 */
-	private $groupKeys = array();
+	private $groupIdentifiers = array();
 
 	/**
 	 * @var string
@@ -31,40 +31,53 @@ class FilteringStatementGrouper implements StatementGrouper {
 	private $defaultGroupIdentifier = null;
 
 	/**
-	 *
 	 * @see StatementFilter
 	 *
-	 * @param array $filters
-	 *        	An associative array, mapping statement group identifiers to either
-	 *        	StatementFilter objects, or to null for the default group.
+	 * @param array $filters An associative array, mapping statement group identifiers to either
+	 *  StatementFilter objects, or to null for the default group.
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $filters ) {
-
 		foreach ( $filters as $key => $filter ) {
-			$this->addFilter( $filter, $key );
-			$this->groupKeys[] = $key;
+			if ( $filter instanceof StatementFilter ) {
+				$this->filters[$key] = $filter;
+			} elseif ( $filter === null ) {
+				$this->setDefaultGroupIdentifier( $key );
+			} else {
+				throw new InvalidArgumentException( '$filter must be a StatementFilter or null' );
+			}
+
+			$this->setGroupIdentifier( $key );
 		}
 
-		if ( $this->defaultGroupIdentifier === null ) {
-			$this->defaultGroupIdentifier = 'statements';
-			$this->groupKeys[] = $this->defaultGroupIdentifier;
-		}
+		$this->initializeDefaultGroup();
 	}
 
 	/**
-	 * @param StatementFilter|null $filter
 	 * @param string $key
 	 */
-	private function addFilter( StatementFilter $filter = null, $key ) {
-		if ( $filter === null ) {
-			if ( $this->defaultGroupIdentifier !== null ) {
-				throw new InvalidArgumentException( 'You must only define one default group' );
-			}
-			$this->defaultGroupIdentifier = $key;
-		} elseif ( $filter instanceof StatementFilter ) {
-			$this->filters[$key] = $filter;
+	private function setGroupIdentifier( $key ) {
+		$this->groupIdentifiers[$key] = $key;
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	private function setDefaultGroupIdentifier( $key ) {
+		if ( $this->defaultGroupIdentifier !== null ) {
+			throw new InvalidArgumentException( 'You must only define one default group' );
+		}
+
+		$this->defaultGroupIdentifier = $key;
+	}
+
+	private function initializeDefaultGroup() {
+		if ( $this->defaultGroupIdentifier === null ) {
+			$this->defaultGroupIdentifier = 'statements';
+			$this->setGroupIdentifier( $this->defaultGroupIdentifier );
 		}
 	}
 
@@ -86,12 +99,16 @@ class FilteringStatementGrouper implements StatementGrouper {
 		return $groups;
 	}
 
+	/**
+	 * @return StatementList[]
+	 */
 	private function getEmptyGroups() {
 		$groups = array();
 
-		foreach ( $this->groupKeys as $key ) {
+		foreach ( $this->groupIdentifiers as $key ) {
 			$groups[$key] = new StatementList();
 		}
+
 		return $groups;
 	}
 

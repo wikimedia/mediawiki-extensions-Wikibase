@@ -16,7 +16,7 @@ use Wikibase\DataModel\Statement\StatementList;
  */
 class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 
-	private function newStatementFilter( $propertyId ) {
+	private function newStatementFilter( $propertyId = 'P1' ) {
 		$filter = $this->getMock( 'Wikibase\DataModel\Statement\StatementFilter' );
 
 		$filter->expects( $this->any() )
@@ -30,7 +30,12 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 
 	public function testConstructorThrowsException() {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		new FilteringStatementGrouper( array( 'default1' => null, 'default2' => null) );
+		new FilteringStatementGrouper( array( 'invalid' ) );
+	}
+
+	public function testDoesNotAcceptTwoDefaults() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new FilteringStatementGrouper( array( 'default1' => null, 'default2' => null ) );
 	}
 
 	public function testDefaultGroupIsAlwaysThere() {
@@ -52,7 +57,7 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 
 	public function testAllGroupsAreAlwaysThere() {
 		$grouper = new FilteringStatementGrouper( array(
-			'p1' => $this->newStatementFilter( 'P1' ),
+			'p1' => $this->newStatementFilter(),
 		) );
 		$groups = $grouper->groupStatements( new StatementList() );
 
@@ -64,7 +69,7 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 		$statements->addNewStatement( new PropertyNoValueSnak( 1 ) );
 
 		$grouper = new FilteringStatementGrouper( array(
-			'p1' => $this->newStatementFilter( 'P1' ),
+			'p1' => $this->newStatementFilter(),
 		) );
 		$groups = $grouper->groupStatements( $statements );
 
@@ -77,11 +82,25 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 
 		$grouper = new FilteringStatementGrouper( array(
 			'statements' => null,
-			'p1' => $this->newStatementFilter( 'P1' ),
+			'p1' => $this->newStatementFilter(),
 		) );
 		$groups = $grouper->groupStatements( $statements );
 
 		$this->assertSame( array( 'statements', 'p1' ), array_keys( $groups ) );
+	}
+
+	public function testCanRepurposeDefaultGroup() {
+		$statements = new StatementList();
+		$statements->addNewStatement( new PropertyNoValueSnak( 1 ) );
+
+		$grouper = new FilteringStatementGrouper( array(
+			'statements' => $this->newStatementFilter(),
+		) );
+		$groups = $grouper->groupStatements( $statements );
+
+		$this->assertCount( 1, $groups );
+		$this->assertArrayHasKey( 'statements', $groups );
+		$this->assertCount( 1, $groups['statements'] );
 	}
 
 	public function testGroupStatements() {
@@ -95,7 +114,6 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 			'p2' => $this->newStatementFilter( 'P2' ),
 			'p3' => $this->newStatementFilter( 'P3' ),
 		) );
-		$groups = $grouper->groupStatements( $statements );
 
 		$expected = array(
 			'p1' => new StatementList( $statement1, $statement3 ),
@@ -103,11 +121,12 @@ class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {
 			'p3' => new StatementList(),
 			'statements' => new StatementList(),
 		);
-		$this->assertEquals( $expected, $groups );
 
-		//test for idempotence
 		$groups = $grouper->groupStatements( $statements );
-		$this->assertEquals( $expected, $groups );
+		$this->assertEquals( $expected, $groups, 'first call' );
+
+		$groups = $grouper->groupStatements( $statements );
+		$this->assertEquals( $expected, $groups, 'second call' );
 	}
 
 }

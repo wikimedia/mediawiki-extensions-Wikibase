@@ -14,8 +14,6 @@ use Wikibase\DataModel\Statement\StatementFilter;
 class NullStatementFilter implements StatementFilter {
 
 	/**
-	 * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-	 *
 	 * @see StatementFilter::statementMatches
 	 *
 	 * @param Statement $statement
