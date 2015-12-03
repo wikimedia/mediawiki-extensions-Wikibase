@@ -357,6 +357,8 @@
 	"apihelp-wbeditentity-example-8": "Crèa n'asserzione nova ncopp'a l'item p' 'a pruprietà P56 e nu valore 'e \"ExampleString\"",
 	"apihelp-wbeditentity-example-9": "Lèva 'e richiame 'a ll'elemento ch' 'e GUIDs Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F e Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X",
 	"apihelp-wbeditentity-example-10": "Miette 'asserzione c' 'o GUID addò 'o valore d' 'asserziona",
+	"apihelp-wbeditentity-example-11": "Azzecca n'etichetta senza 'a scrivere ncoppa si esiste",
+	"apihelp-wbeditentity-example-12": "Lèva n'etichetta",
 	"apihelp-wbformatvalue-description": "Furmato DataValues.",
 	"apihelp-wbformatvalue-param-generate": "'O furmato asciuta a se generà.",
 	"apihelp-wbformatvalue-param-datatype": "'E valure 'e tipe 'e data. Chesto è differente d' 'o tipo 'e valore",

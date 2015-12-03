@@ -10,6 +10,8 @@
 	"wikibase-dataitem": "{{WBREPONAME}} hāng-bo̍k",
 	"wikibase-editlinks": "改連結",
 	"wikibase-editlinkstitle": "改其他話語的連接",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "開",
 	"wikibase-rc-wikibase-edit-letter": "量",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 編輯"
 }
