@@ -66,7 +66,7 @@ class SearchEntities extends ApiBase {
 			new LanguageFallbackLabelDescriptionLookup(
 				$repo->getTermLookup(),
 				$repo->getLanguageFallbackChainFactory()
-					->newFromLanguageCode( $this->getLanguage()->getCode() )
+					->newFromLanguage( $this->getLanguage() )
 			)
 		);
 
