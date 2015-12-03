@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ceb37bc7_71c8ea25",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T15:51:01Z",
+      "side": 1,
+      "message": "The structure doesn\u0027t quite work, we need one grouper per entity type. But I see your point: we don\u0027t really need a factory class if we put factory functions into the config. This could work, but goes against current best practice: \n* configuration should be serializable, so it can (in theory / in the future) be stored in JSON files or the database.\n* our Settings object will invoke and resolve any runnables it encounters. We use this mechanism to initialize default values lazily, to avoid issues with the initialization order. Actually, this would not be a problem when we change the structure so that there is one factory function per entity type.\n* the code that you ask to be in the config would be untested.",
+      "parentUuid": "ceb37bc7_11e16efb",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_92a62ba7",
         "filename": "view/src/StatementGrouperFactory.php",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2015-12-03T15:06:39Z",
       "side": 1,
       "message": "What \"seconds\"?",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_11872ede",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-03T15:51:01Z",
+      "side": 1,
+      "message": "\"sections\", sorry - i was in a rush, it seems :)",
+      "parentUuid": "ceb37bc7_b112e2ff",
       "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
