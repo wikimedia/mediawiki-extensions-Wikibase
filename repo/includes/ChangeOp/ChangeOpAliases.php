@@ -106,8 +106,6 @@ class ChangeOpAliases extends ChangeOpBase {
 
 		$this->updateFingerprint( $fingerprint );
 		$entity->setFingerprint( $fingerprint );
-
-		return true;
 	}
 
 	/**

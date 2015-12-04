@@ -68,7 +68,7 @@ class ChangeOpStatementRankTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider changeOpProvider
 	 */
 	public function testApplyStatementRank( Item $item, ChangeOpStatementRank $changeOp, $expectedRank ) {
-		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
+		$changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );

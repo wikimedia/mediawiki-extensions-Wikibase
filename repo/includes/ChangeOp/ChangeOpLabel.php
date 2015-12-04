@@ -76,8 +76,6 @@ class ChangeOpLabel extends ChangeOpBase {
 	 *
 	 * @param Entity $entity
 	 * @param Summary $summary
-	 *
-	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$fingerprint = $entity->getFingerprint();
@@ -95,8 +93,6 @@ class ChangeOpLabel extends ChangeOpBase {
 
 		$this->updateFingerprint( $fingerprint );
 		$entity->setFingerprint( $fingerprint );
-
-		return true;
 	}
 
 	/**

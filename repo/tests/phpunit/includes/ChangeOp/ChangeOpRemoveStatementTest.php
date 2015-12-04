@@ -64,7 +64,7 @@ class ChangeOpRemoveStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider changeOpProvider
 	 */
 	public function testApplyAddNewClaim( Item $item, ChangeOpRemoveStatement $changeOp, DataValue $expected = null ) {
-		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
+		$changeOp->apply( $item );
 		$this->assertNotEmpty( $changeOp->getGuid() );
 		$statements = $item->getStatements();
 		$this->assertEquals( $expected, $statements->getFirstStatementWithGuid( $changeOp->getGuid() ) );

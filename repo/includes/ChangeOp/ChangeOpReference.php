@@ -121,8 +121,6 @@ class ChangeOpReference extends ChangeOpBase {
 
 		$statement->setReferences( $references );
 		$entity->setStatements( $statements );
-
-		return true;
 	}
 
 	/**

@@ -93,8 +93,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		}
 
 		$entity->setStatements( $statements );
-
-		return true;
 	}
 
 	/**

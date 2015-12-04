@@ -82,8 +82,6 @@ class ChangeOpStatementRank extends ChangeOpBase {
 		}
 
 		$entity->setStatements( $statements );
-
-		return true;
 	}
 
 	/**

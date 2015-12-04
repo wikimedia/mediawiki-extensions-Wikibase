@@ -95,8 +95,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 
 		$statement->setQualifiers( $qualifiers );
 		$entity->setStatements( $statements );
-
-		return true;
 	}
 
 	/**
