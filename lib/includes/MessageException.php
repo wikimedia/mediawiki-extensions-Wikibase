@@ -5,8 +5,6 @@ namespace Wikibase\Lib;
 use Exception;
 
 /**
- * Should be moved to core!
- *
  * @since 0.5
  *
  * @licence GNU GPL v2+
