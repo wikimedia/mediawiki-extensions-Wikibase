@@ -20,7 +20,7 @@ class MessageException extends Exception {
 	protected $key;
 
 	/**
-	 * var array
+	 * @var array
 	 */
 	protected $params;
 

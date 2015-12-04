@@ -228,7 +228,7 @@ class EntityModificationTestHelper {
 	/**
 	 * Asserts that the revision with the given ID has a summary matching $regex
 	 *
-	 * @param string $regex|array The regex to match, or an array to build a regex from
+	 * @param string|string[] $regex The regex to match, or an array to build a regex from
 	 * @param int $revid
 	 * @param string $message
 	 */

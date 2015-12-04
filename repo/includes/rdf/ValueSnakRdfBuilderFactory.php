@@ -22,7 +22,7 @@ class ValueSnakRdfBuilderFactory {
 	private $factoryCallbacks;
 
 	/**
-	 * @param callable[] factory callback functions as returned by
+	 * @param callable[] $factoryCallbacks Factory callback functions as returned by
 	 *        DataTypeDefinitions::getRdfBuilderFactoryCallbacks(). Callbacks will be invoked
 	 *        with the signature ($mode, RdfVocabulary, EntityMentionListener) and must
 	 *        return a ValueSnakRdfBuilder (or null).

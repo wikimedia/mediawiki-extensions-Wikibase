@@ -264,13 +264,11 @@ abstract class ModifyEntity extends ApiBase {
 	}
 
 	/**
-	 * Returns the ID of the entity connected to $title on $site, or
-	 * throws a usage exception if no such entity is found.
-	 *
 	 * @param string $site
 	 * @param string $title
 	 *
-	 * @return EntityId
+	 * @throws UsageException If no such entity is found.
+	 * @return EntityId The ID of the entity connected to $title on $site.
 	 */
 	protected function getEntityIdFromSiteTitleCombination( $site, $title ) {
 		// FIXME: Normalization missing, see T47282.
