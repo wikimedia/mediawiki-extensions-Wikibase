@@ -55,6 +55,42 @@
     },
     {
       "key": {
+        "uuid": "ceb37bc7_e57f3110",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-04T08:46:17Z",
+      "side": 1,
+      "message": "We don\u0027t need one grouper per entity type per se, see above comment regarding StatementEntityTypeFilter.\n\nIn general, I see different stages of configuration. This type of configuration is something I\u0027d expect to actually be packaged in an extension, something like `WikidataWikibaseSetup` or just `Wikidata`. It would depend on more packages and specify all kinds of stuff like formatters, entity types, etc. It would basically contain a lot of WikibaseRepo code. Since we don\u0027t have that yet, I\u0027m ok with putting that ›configuration‹ in WikibaseRepo code. WikibaseRepo is just not that flexible yet. WikibaseView on the other hand should be ridiculously flexible, though, from my point of view. That\u0027s why I wouldn\u0027t want this factory or hand-crafted spec in WikibaseView. I could live with it being in WikibaseRepo, but I would consider it as a temporary solution until we actually support other repo setups.",
+      "parentUuid": "ceb37bc7_71c8ea25",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_458b9d20",
+        "filename": "view/src/StatementGrouperFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-04T08:46:17Z",
+      "side": 1,
+      "message": "They would throw away every statement that\u0027s not on the passed entity type.",
+      "parentUuid": "ceb37bc7_11e16efb",
+      "revId": "3508f6108d7e3975d9f9e7e32e25fe13eccee698",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_92a62ba7",
         "filename": "view/src/StatementGrouperFactory.php",
         "patchSetId": 1
