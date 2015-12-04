@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb37bc7_45b4fde4",
+        "filename": "repo/includes/Hooks/CirrusSearchHookHandlers.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 2638
+      },
+      "writtenOn": "2015-12-04T08:56:16Z",
+      "side": 1,
+      "message": "nitpick: would it be possible to throw an error if the property already exists?",
+      "revId": "95e8f82b70b2d6741d62a548780249dd9b98e362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
