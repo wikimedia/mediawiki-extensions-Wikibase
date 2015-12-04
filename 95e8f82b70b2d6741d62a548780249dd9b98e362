@@ -16,6 +16,24 @@
       "revId": "95e8f82b70b2d6741d62a548780249dd9b98e362",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb37bc7_6500216e",
+        "filename": "repo/includes/Hooks/CirrusSearchHookHandlers.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-04T09:09:57Z",
+      "side": 1,
+      "message": "yes, good idea... i can add this",
+      "parentUuid": "ceb37bc7_45b4fde4",
+      "revId": "95e8f82b70b2d6741d62a548780249dd9b98e362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
