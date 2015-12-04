@@ -51,11 +51,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\DataModel\Entity\EntityIdParser', $returnValue );
 	}
 
-	public function testNewTermSearchInteractor() {
-		$interactor = $this->getWikibaseClient()->newTermSearchInteractor( 'en' );
-		$this->assertInstanceOf( 'Wikibase\Lib\Interactors\TermIndexSearchInteractor', $interactor );
-	}
-
 	public function testGetPropertyDataTypeLookupReturnType() {
 		$returnValue = $this->getWikibaseClient()->getPropertyDataTypeLookup();
 		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup', $returnValue );
