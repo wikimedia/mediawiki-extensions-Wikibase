@@ -219,7 +219,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		if ( count( $this->aliases ) !== 0 ) {
 			$entity->setAliases( $contentLanguageCode, $this->aliases );
 		}
-		return \Status::newGood();
+		return Status::newGood();
 	}
 
 	/**

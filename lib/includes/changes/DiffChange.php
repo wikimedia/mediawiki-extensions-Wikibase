@@ -88,7 +88,7 @@ abstract class DiffChange extends ChangeRow {
 	 */
 	public function serializeInfo( array $info ) {
 		if ( isset( $info['diff'] ) && $info['diff'] instanceof DiffOp ) {
-			/* @var \Diff\DiffOp $op */
+			/** @var DiffOp $op */
 			$op = $info['diff'];
 			$info['diff'] = $op->toArray( array( $this, 'arrayalizeObjects' ) );
 		}

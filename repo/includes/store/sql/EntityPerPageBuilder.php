@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\SQL;
 
+use ResultWrapper;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -190,7 +191,7 @@ class EntityPerPageBuilder {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \ResultWrapper $pages
+	 * @param ResultWrapper $pages
 	 *
 	 * @return int
 	 */

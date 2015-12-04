@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\RecentChanges;
 use ChangesList;
 use DerivativeContext;
 use Language;
+use MediaWikiLangTestCase;
 use RecentChange;
 use RequestContext;
 use Title;
@@ -25,7 +26,7 @@ use Wikibase\Client\WikibaseClient;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ChangeLineFormatterTest extends \MediaWikiLangTestCase {
+class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 	protected $repoLinker;
 

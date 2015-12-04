@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Maintenance;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
@@ -18,7 +19,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CreateBlacklistedItems extends \Maintenance {
+class CreateBlacklistedItems extends Maintenance {
 
 	public function __construct() {
 		$this->mDescription = 'Created blacklisted items';

@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use Exception;
+use MWException;
 use Status;
 
 /**
@@ -10,7 +11,7 @@ use Status;
  *
  * @author Daniel Kinzler
  */
-class StorageException extends \MWException {
+class StorageException extends MWException {
 
 	/**
 	 * @var Status|null

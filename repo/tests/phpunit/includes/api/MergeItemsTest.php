@@ -5,6 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 use Language;
 use Status;
 use TestSites;
+use UsageException;
 use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -447,7 +448,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		try {
 			$this->callApiModule( $params );
 			$this->fail( 'Expected UsageException!' );
-		} catch ( \UsageException $ex ) {
+		} catch ( UsageException $ex ) {
 			$this->apiModuleTestHelper->assertUsageException( $expected, $ex );
 		}
 	}
@@ -503,7 +504,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		try {
 			$this->callApiModule( $params );
 			$this->fail( 'Expected UsageException!' );
-		} catch ( \UsageException $ex ) {
+		} catch ( UsageException $ex ) {
 			$this->apiModuleTestHelper->assertUsageException( $expected, $ex );
 		}
 	}
@@ -518,7 +519,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		try {
 			$this->callApiModule( $params );
 			$this->fail( 'Expected UsageException!' );
-		} catch ( \UsageException $ex ) {
+		} catch ( UsageException $ex ) {
 			$this->apiModuleTestHelper->assertUsageException( 'no-such-entity', $ex );
 		}
 	}

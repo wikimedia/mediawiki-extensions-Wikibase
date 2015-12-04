@@ -210,13 +210,13 @@ class EntityDataRequestHandler {
 		// If there is no ID, fail
 		if ( $id === null || $id === '' ) {
 			//TODO: different error message?
-			throw new \HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
+			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
 		}
 
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
-			throw new \HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
+			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
 		}
 
 		//XXX: allow for logged in users only?
@@ -275,7 +275,7 @@ class EntityDataRequestHandler {
 		$canonicalFormat = $this->entityDataFormatProvider->getFormatName( $format );
 
 		if ( $canonicalFormat === null ) {
-			throw new \HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
+			throw new HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
 		}
 
 		return $canonicalFormat;
@@ -335,7 +335,7 @@ class EntityDataRequestHandler {
 
 		if ( $format === null ) {
 			$mimeTypes = implode( ', ', $this->entityDataFormatProvider->getSupportedMimeTypes() );
-			throw new \HttpError( 406, wfMessage( 'wikibase-entitydata-not-acceptable' )->params( $mimeTypes ) );
+			throw new HttpError( 406, wfMessage( 'wikibase-entitydata-not-acceptable' )->params( $mimeTypes ) );
 		}
 
 		$format = $this->getCanonicalFormat( $format );
@@ -392,7 +392,7 @@ class EntityDataRequestHandler {
 		} catch ( StorageException $ex ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load $prefixedId: $ex (revision $revision)" );
 			$msg = wfMessage( 'wikibase-entitydata-storage-error' );
-			throw new \HttpError( 500, $msg->params( $prefixedId, $revision ) );
+			throw new HttpError( 500, $msg->params( $prefixedId, $revision ) );
 		}
 
 		return array( $entityRevision, $redirectRevision );

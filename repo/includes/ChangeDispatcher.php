@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo;
 
+use MWException;
 use Wikibase\Change;
 use Wikibase\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityId;
@@ -212,7 +213,7 @@ class ChangeDispatcher {
 	 * * chd_touched:  timestamp giving the last time that client wiki was updated
 	 * * chd_lock:     the name of a global lock currently active for that client wiki
 	 *
-	 * @throws \MWException if no available client wiki could be found.
+	 * @throws MWException if no available client wiki could be found.
 	 *
 	 * @see releaseWiki()
 	 */

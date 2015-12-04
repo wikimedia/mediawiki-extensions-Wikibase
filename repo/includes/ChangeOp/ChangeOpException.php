@@ -2,6 +2,8 @@
 
 namespace Wikibase\ChangeOp;
 
+use RuntimeException;
+
 /**
  * Exception thrown during an invalid change operation.
  *
@@ -9,6 +11,6 @@ namespace Wikibase\ChangeOp;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ChangeOpException extends \RuntimeException {
+class ChangeOpException extends RuntimeException {
 
 }

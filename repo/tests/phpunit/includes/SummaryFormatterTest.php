@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\DataValue;
 use Language;
+use MediaWikiLangTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -28,7 +29,7 @@ use Wikibase\SummaryFormatter;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class SummaryFormatterTest extends \MediaWikiLangTestCase {
+class SummaryFormatterTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param EntityIdValue|EntityId $id

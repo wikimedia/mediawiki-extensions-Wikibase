@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use ArrayObject;
 use Closure;
 use OutOfBoundsException;
 
@@ -32,7 +33,7 @@ use OutOfBoundsException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SettingsArray extends \ArrayObject {
+class SettingsArray extends ArrayObject {
 
 	/**
 	 * Gets the value of the specified setting.

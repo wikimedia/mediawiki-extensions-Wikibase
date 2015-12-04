@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -22,7 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  * @group medium
  */
-class GetEntitiesRedirectTest extends \ApiTestCase {
+class GetEntitiesRedirectTest extends ApiTestCase {
 
 	private function createEntity( $label ) {
 		$entity = new Item();

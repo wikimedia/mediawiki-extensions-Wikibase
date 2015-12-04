@@ -382,7 +382,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @param int $flags
 	 * @param bool $baseRevId
 	 *
-	 * @return \Status
+	 * @return Status
 	 */
 	protected function saveEntity(
 		WikiPageEntityStore $store,

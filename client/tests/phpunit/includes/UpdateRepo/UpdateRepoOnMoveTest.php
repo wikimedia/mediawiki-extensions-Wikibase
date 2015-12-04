@@ -4,6 +4,8 @@ namespace Wikibase\Client\Tests\UpdateRepo;
 
 use JobQueueGroup;
 use JobSpecification;
+use Title;
+use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -37,10 +39,10 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'repoDB' => 'wikidata',
 			'siteLinkLookup' => $siteLinkLookupMock,
-			'user' => \User::newFromName( 'RandomUserWhichDoesntExist' ),
+			'user' => User::newFromName( 'RandomUserWhichDoesntExist' ),
 			'siteId' => 'whatever',
-			'oldTitle' => \Title::newFromText( 'ThisOneDoesntExist' ),
-			'newTitle' => \Title::newFromText( 'Bar' )
+			'oldTitle' => Title::newFromText( 'ThisOneDoesntExist' ),
+			'newTitle' => Title::newFromText( 'Bar' )
 		);
 	}
 
