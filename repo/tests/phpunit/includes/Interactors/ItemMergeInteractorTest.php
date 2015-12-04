@@ -7,6 +7,7 @@ use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -130,11 +131,19 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 				$summaryFormatter,
 				$user,
 				$this->getMockEditFilterHookRunner(),
-				$this->mockRepository
+				$this->mockRepository,
+				$this->getMockEntityTitleLookup()
 			)
 		);
 
 		return $interactor;
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getMockEntityTitleLookup() {
+		return $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 	}
 
 	public function mergeProvider() {

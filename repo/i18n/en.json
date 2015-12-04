@@ -328,7 +328,7 @@
 	"wikibase-api-param-illegal": "An illegal set of parameters have been used",
 	"wikibase-api-permissiondenied": "You do not have the permissions needed to carry out this action",
 	"wikibase-api-wrong-class": "Wrong class type detected",
-	"wikibase-api-target-not-empty": "The redirect can only be created on top of an empty entity.",
+	"wikibase-api-target-not-empty": "The redirect can only be created on top of an empty or deleted entity.",
 	"wikibase-api-target-is-redirect": "The redirect's target must not be a redirect too.",
 	"wikibase-api-target-is-incompatible": "Attempt to redirect to an entity of a different type.",
 	"wikibase-api-cant-redirect": "Can't create redirect (possibly because redirects between this kind of entity are not supported at all).",

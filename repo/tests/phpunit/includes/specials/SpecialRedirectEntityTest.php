@@ -10,6 +10,7 @@ use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
@@ -81,6 +82,13 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getMockEntityTitleLookup() {
+		return $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+	}
+
+	/**
 	 * @param SpecialRedirectEntity $page
 	 * @param User $user
 	 */
@@ -121,7 +129,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				$wikibaseRepo->getSummaryFormatter(),
 				$user,
 				$this->getMockEditFilterHookRunner(),
-				$this->mockRepository
+				$this->mockRepository,
+				$this->getMockEntityTitleLookup()
 			)
 		);
 	}
