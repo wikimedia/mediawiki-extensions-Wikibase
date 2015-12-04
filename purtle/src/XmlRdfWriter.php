@@ -182,7 +182,12 @@ class XmlRdfWriter extends RdfWriterBase {
 		$attr = empty( $language ) ? array() : array( 'xml:lang' => $language );
 
 		$this->write( "\t\t" );
-		$this->tag( $this->currentPredicate[0], $this->currentPredicate[1], $attr, $this->escape( $text ) );
+		$this->tag(
+			$this->currentPredicate[0],
+			$this->currentPredicate[1],
+			$attr,
+			$this->escape( $text )
+		);
 		$this->write( "\n" );
 	}
 
@@ -190,7 +195,12 @@ class XmlRdfWriter extends RdfWriterBase {
 		$attr = $this->getTargetAttributes( 'datatype', $typeBase, $typeLocal );
 
 		$this->write( "\t\t" );
-		$this->tag( $this->currentPredicate[0], $this->currentPredicate[1], $attr, $this->escape( $literal ) );
+		$this->tag(
+			$this->currentPredicate[0],
+			$this->currentPredicate[1],
+			$attr,
+			$this->escape( $literal )
+		);
 		$this->write( "\n" );
 	}
 

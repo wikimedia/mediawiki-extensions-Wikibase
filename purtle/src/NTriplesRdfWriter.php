@@ -10,7 +10,11 @@ namespace Wikimedia\Purtle;
  */
 class NTriplesRdfWriter extends N3RdfWriterBase {
 
-	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null, N3Quoter $quoter = null ) {
+	public function __construct(
+		$role = parent::DOCUMENT_ROLE,
+		BNodeLabeler $labeler = null,
+		N3Quoter $quoter = null
+	) {
 		parent::__construct( $role, $labeler, $quoter );
 
 		//NOTE: The RDF 1.1 spec of N-Triples allows full UTF-8, so escaping would not be required.

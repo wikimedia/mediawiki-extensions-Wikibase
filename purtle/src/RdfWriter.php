@@ -166,7 +166,8 @@ interface RdfWriter {
 	 * writer itself.
 	 *
 	 * @note: calling drain() on sub-writers results in undefined behavior!
-	 * @note: using sub-writers after finish() has been called on this writer results in undefined behavior!
+	 * @note: using sub-writers after finish() has been called on this writer
+	 *        results in undefined behavior!
 	 *
 	 * @return RdfWriter
 	 */
