@@ -4,8 +4,10 @@ namespace Wikibase\Client\Usage\Sql;
 
 use ArrayIterator;
 use DatabaseBase;
+use DBUnexpectedError;
 use InvalidArgumentException;
 use Iterator;
+use MWException;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\EntityId;
@@ -96,8 +98,8 @@ class EntityUsageTable {
 	 * @param EntityUsage[] $usages
 	 *
 	 * @return int[] affected row ids
-	 * @throws \DBUnexpectedError
-	 * @throws \MWException
+	 * @throws DBUnexpectedError
+	 * @throws MWException
 	 */
 	private function getAffectedRowIds( $pageId, array $usages ) {
 		$usageConditions = array();

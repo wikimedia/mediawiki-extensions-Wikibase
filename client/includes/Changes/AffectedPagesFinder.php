@@ -105,7 +105,7 @@ class AffectedPagesFinder {
 			return $this->filterUpdates( $usages );
 		}
 
-		return new \ArrayIterator();
+		return new ArrayIterator();
 	}
 
 	/**

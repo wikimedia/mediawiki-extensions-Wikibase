@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use HistoryAction;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -12,7 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class HistoryEntityAction extends \HistoryAction {
+class HistoryEntityAction extends HistoryAction {
 
 	/**
 	 * @var LanguageFallbackChain

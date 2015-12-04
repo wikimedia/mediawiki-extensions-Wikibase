@@ -186,13 +186,13 @@ class TermSearchKeyBuilder {
 	 *
 	 * @since 0.4
 	 *
-	 * @param \DatabaseBase $dbw the database connection to use
+	 * @param DatabaseBase $dbw the database connection to use
 	 * @param int $rowId the row to update
 	 * @param string $text the term's text
 	 *
 	 * @return string|bool the search key, or false if no search key could be calculated.
 	 */
-	protected function updateSearchKey( \DatabaseBase $dbw, $rowId, $text ) {
+	protected function updateSearchKey( DatabaseBase $dbw, $rowId, $text ) {
 		$key = $this->table->getSearchKey( $text );
 
 		if ( $key === '' ) {

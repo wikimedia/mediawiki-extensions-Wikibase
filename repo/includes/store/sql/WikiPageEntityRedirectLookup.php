@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store\SQL;
 
 use LoadBalancer;
+use MWException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
@@ -68,7 +69,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 		try {
 			$dbr = $this->loadBalancer->getConnection( DB_SLAVE );
-		} catch ( \MWException $ex ) {
+		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $targetId, null, $ex );
 		}
 
@@ -90,7 +91,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 		try {
 			$this->loadBalancer->reuseConnection( $dbr );
-		} catch ( \MWException $ex ) {
+		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $targetId, null, $ex );
 		}
 
@@ -132,7 +133,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 		try {
 			$db = $this->loadBalancer->getConnection( $forUpdate );
-		} catch ( \MWException $ex ) {
+		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
 
@@ -152,7 +153,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 
 		try {
 			$this->loadBalancer->reuseConnection( $db );
-		} catch ( \MWException $ex ) {
+		} catch ( MWException $ex ) {
 			throw new EntityRedirectLookupException( $entityId, null, $ex );
 		}
 

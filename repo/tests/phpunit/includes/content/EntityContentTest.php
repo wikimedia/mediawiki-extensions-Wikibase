@@ -173,7 +173,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	 * @dataProvider providePageProperties
 	 */
 	public function testPageProperties( EntityContent $content, array $expectedProps ) {
-		$title = \Title::newFromText( 'Foo' );
+		$title = Title::newFromText( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title, null, null, false );
 
 		foreach ( $expectedProps as $name => $expected ) {

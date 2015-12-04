@@ -35,7 +35,8 @@ class Template extends Message {
 
 	/**
 	 * Fetch a template from the template store.
-	 * @see \Message.fetchMessage()
+	 *
+	 * @see Message.fetchMessage
 	 *
 	 * @return string template
 	 */

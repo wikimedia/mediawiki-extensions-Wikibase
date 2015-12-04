@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MWException;
 use User;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -343,7 +344,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 			if ( $expectedError !== false ) {
 				$this->fail( "expected error: " . $expectedError );
 			}
-		} catch ( \MWException $ex ) {
+		} catch ( MWException $ex ) {
 			if ( $expectedError !== false ) {
 				$this->assertInstanceOf( $expectedError, $ex );
 			} else {

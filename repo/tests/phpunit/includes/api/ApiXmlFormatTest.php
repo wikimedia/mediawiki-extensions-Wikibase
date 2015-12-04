@@ -3,6 +3,8 @@
 namespace Wikibase\Test\Repo\Api;
 
 use ApiBase;
+use DOMDocument;
+use DOMXPath;
 use Wikibase\Repo\Api\SetSiteLink;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Test\MockSiteStore;
@@ -292,10 +294,10 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 	 * @return string
 	 */
 	private function removePageInfoAttributes( $xml, $entityId = null ) {
-		$dom = new \DOMDocument( '1.0', 'UTF-8' );
+		$dom = new DOMDocument( '1.0', 'UTF-8' );
 		$dom->loadXML( $xml );
 
-		$xpath = new \DOMXPath( $dom );
+		$xpath = new DOMXPath( $dom );
 		if ( $entityId !== null ) {
 			$element = $xpath->query( "//*[@id='$entityId']" )->item( 0 );
 		} else {

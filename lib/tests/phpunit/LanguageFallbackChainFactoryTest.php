@@ -51,7 +51,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = array() ) {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
-		$chain = $factory->newFromLanguage( \Language::factory( $lang ), $mode )->getFallbackChain();
+		$chain = $factory->newFromLanguage( Language::factory( $lang ), $mode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
 
@@ -212,13 +212,13 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 
 	public function testNewFromContext() {
 		$factory = new LanguageFallbackChainFactory();
-		$languageFallbackChain = $factory->newFromContext( \RequestContext::getMain() );
+		$languageFallbackChain = $factory->newFromContext( RequestContext::getMain() );
 		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
 	}
 
 	public function testNewFromContextAndLanguageCode() {
 		$factory = new LanguageFallbackChainFactory();
-		$languageFallbackChain = $factory->newFromContextAndLanguageCode( \RequestContext::getMain(), 'en' );
+		$languageFallbackChain = $factory->newFromContextAndLanguageCode( RequestContext::getMain(), 'en' );
 		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
 	}
 
@@ -232,7 +232,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		}
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
-		$anon = new \User();
+		$anon = new User();
 		$chain = $factory->newFromUserAndLanguageCode( $anon, $lang )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}

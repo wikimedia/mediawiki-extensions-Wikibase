@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Api;
 
 use ApiMain;
 use ApiQuery;
+use ApiTestContext;
 use FauxRequest;
 use User;
 use Wikibase\ApiClientInfo;
@@ -26,14 +27,14 @@ use Wikibase\SettingsArray;
 class ApiClientInfoTest extends \MediaWikiTestCase {
 
 	/**
-	 * @var \ApiTestContext
+	 * @var ApiTestContext
 	 */
 	protected $apiContext;
 
 	protected function setUp() {
 		parent::setUp();
 
-		$this->apiContext = new \ApiTestContext();
+		$this->apiContext = new ApiTestContext();
 	}
 
 	/**
