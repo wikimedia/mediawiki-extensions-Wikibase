@@ -70,7 +70,6 @@ class MockEntityPerPage implements EntityPerPage {
 	) {
 		/** @var EntityId[] $entityIds */
 		$entityIds = $this->pageIdToEntityId;
-		asort( $entityIds );
 		$entityIds = array_values( $entityIds );
 
 		// Act on $entityType
