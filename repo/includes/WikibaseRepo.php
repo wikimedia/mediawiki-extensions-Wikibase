@@ -61,7 +61,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Repo\Api\ApiHelperFactory;

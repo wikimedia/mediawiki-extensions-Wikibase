@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Interactors;
+namespace Wikibase\Repo\Interactors;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;

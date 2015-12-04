@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Interactors;
+namespace Wikibase\Repo\Interactors;
 
 /**
  * Interface for searching for terms

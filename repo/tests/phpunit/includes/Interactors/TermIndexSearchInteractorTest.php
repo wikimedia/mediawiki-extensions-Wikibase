@@ -9,17 +9,17 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
-use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
+use Wikibase\Repo\Interactors\TermSearchResult;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndexEntry;
 use Wikibase\Test\MockTermIndex;
 
 /**
- * @covers Wikibase\Lib\Interactors\TermIndexSearchInteractor
+ * @covers Wikibase\Repo\Interactors\TermIndexSearchInteractor
  *
  * @group Wikibase
- * @group WikibaseLib
+ * @group WikibaseRepo
  * @group WikibaseInteractor
  *
  * @licence GNU GPL v2+
