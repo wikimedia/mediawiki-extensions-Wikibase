@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb37bc7_681c787d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-04T12:23:34Z",
+      "side": 1,
+      "message": "I think it\u0027s clearer to map userLanguages to the value object you generate in newItemOptionsFn instead.",
+      "revId": "70e858183f292c5472f835d79c7897845a1fcbd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
