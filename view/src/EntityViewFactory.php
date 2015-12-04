@@ -165,9 +165,8 @@ class EntityViewFactory {
 	 ) {
 		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
 
-		$statementGrouper = $this->statementGrouperFactory->getStatementGrouper( $entityType );
-
 		$statementSectionsView = $this->newStatementSectionsView(
+			$entityType,
 			$languageCode,
 			$fallbackChain,
 			$labelDescriptionLookup,
@@ -193,7 +192,6 @@ class EntityViewFactory {
 				return new ItemView(
 					$this->templateFactory,
 					$entityTermsView,
-					$statementGrouper,
 					$statementSectionsView,
 					$language,
 					$siteLinksView,
@@ -203,7 +201,6 @@ class EntityViewFactory {
 				return new PropertyView(
 					$this->templateFactory,
 					$entityTermsView,
-					$statementGrouper,
 					$statementSectionsView,
 					$this->dataTypeFactory,
 					$language
@@ -214,6 +211,7 @@ class EntityViewFactory {
 	}
 
 	/**
+	 * @param string $entityType
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
@@ -222,32 +220,37 @@ class EntityViewFactory {
 	 * @return StatementSectionsView
 	 */
 	private function newStatementSectionsView(
+		$entityType,
 		$languageCode,
 		LanguageFallbackChain $fallbackChain,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup );
-
+		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
+			$languageCode,
+			$fallbackChain,
+			$labelDescriptionLookup
+		);
+		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
+			$labelDescriptionLookup
+		);
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
-			$this->htmlSnakFormatterFactory->getSnakFormatter( $languageCode, $fallbackChain, $labelDescriptionLookup ),
+			$snakFormatter,
 			$propertyIdFormatter
 		);
-
-		$claimHtmlGenerator = new ClaimHtmlGenerator(
-			$this->templateFactory,
-			$snakHtmlGenerator
-		);
-
 		$statementGroupListView = new StatementGroupListView(
 			$this->templateFactory,
 			$propertyIdFormatter,
 			$editSectionGenerator,
-			$claimHtmlGenerator
+			new ClaimHtmlGenerator( $this->templateFactory, $snakHtmlGenerator )
 		);
 
-		return new StatementSectionsView( $this->templateFactory, $statementGroupListView );
+		return new StatementSectionsView(
+			$this->templateFactory,
+			$this->statementGrouperFactory->getStatementGrouper( $entityType ),
+			$statementGroupListView
+		);
 	}
 
 	/**
