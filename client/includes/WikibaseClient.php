@@ -293,20 +293,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @param string $displayLanguageCode
-	 *
-	 * @return TermIndexSearchInteractor
-	 */
-	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return new TermIndexSearchInteractor(
-			$this->getStore()->getTermIndex(),
-			$this->getLanguageFallbackChainFactory(),
-			$this->getBufferingTermLookup(),
-			$displayLanguageCode
-		);
-	}
-
-	/**
 	 * @since 0.4
 	 *
 	 * @return PropertyDataTypeLookup
