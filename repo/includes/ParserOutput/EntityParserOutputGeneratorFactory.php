@@ -124,18 +124,18 @@ class EntityParserOutputGeneratorFactory {
 	 * @return EntityParserOutputGenerator
 	 */
 	public function getEntityParserOutputGenerator( ParserOptions $options ) {
-		$languageCode = $options->getUserLang();
+		$language = $options->getUserLangObj();
 
 		return new EntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
 			$this->entityInfoBuilderFactory,
-			$this->getLanguageFallbackChain( $languageCode ),
+			$this->getLanguageFallbackChain( $language ),
 			$this->templateFactory,
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
-			$languageCode
+			$language->getCode()
 		);
 	}
 
@@ -147,15 +147,15 @@ class EntityParserOutputGeneratorFactory {
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param Language $language
 	 *
 	 * @return LanguageFallbackChain
 	 */
-	private function getLanguageFallbackChain( $languageCode ) {
+	private function getLanguageFallbackChain( $language ) {
 		// Language fallback must depend ONLY on the target language,
 		// so we don't confuse the parser cache with user specific HTML.
-		return $this->languageFallbackChainFactory->newFromLanguageCode(
-			$languageCode
+		return $this->languageFallbackChainFactory->newFromLanguage(
+			$language
 		);
 	}
 
