@@ -94,7 +94,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$entityView = $this->newEntityViewFactory()->newEntityView(
 			$entityType,
-			'de',
+			Language::factory( 'de' ),
 			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
 			$languageFallback,
 			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
@@ -117,7 +117,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$this->newEntityViewFactory()->newEntityView(
 			'kittens',
-			'de',
+			Language::factory( 'de' ),
 			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
 			$languageFallback,
 			$this->getMock( 'Wikibase\View\EditSectionGenerator' )

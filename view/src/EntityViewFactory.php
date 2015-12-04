@@ -148,7 +148,7 @@ class EntityViewFactory {
 	 * Creates an EntityView suitable for rendering the entity.
 	 *
 	 * @param string $entityType
-	 * @param string $languageCode
+	 * @param Language $language
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -158,24 +158,21 @@ class EntityViewFactory {
 	 */
 	public function newEntityView(
 		$entityType,
-		$languageCode,
+		Language $language,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	 ) {
-		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
+		$entityTermsView = $this->newEntityTermsView( $language, $editSectionGenerator );
 
 		$statementGrouper = $this->statementGrouperFactory->getStatementGrouper( $entityType );
 
 		$statementSectionsView = $this->newStatementSectionsView(
-			$languageCode,
+			$language,
 			$fallbackChain,
 			$labelDescriptionLookup,
 			$editSectionGenerator
 		);
-
-		// @fixme all that seems needed in EntityView is language code and dir.
-		$language = Language::factory( $languageCode );
 
 		// @fixme support more entity types
 		switch ( $entityType ) {
@@ -214,7 +211,7 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -222,7 +219,7 @@ class EntityViewFactory {
 	 * @return StatementSectionsView
 	 */
 	private function newStatementSectionsView(
-		$languageCode,
+		Language $language,
 		LanguageFallbackChain $fallbackChain,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EditSectionGenerator $editSectionGenerator
@@ -231,7 +228,7 @@ class EntityViewFactory {
 
 		$snakHtmlGenerator = new SnakHtmlGenerator(
 			$this->templateFactory,
-			$this->htmlSnakFormatterFactory->getSnakFormatter( $languageCode, $fallbackChain, $labelDescriptionLookup ),
+			$this->htmlSnakFormatterFactory->getSnakFormatter( $language->getCode(), $fallbackChain, $labelDescriptionLookup ),
 			$propertyIdFormatter
 		);
 
@@ -251,17 +248,17 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param Language $language
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return EntityTermsView
 	 */
-	private function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
+	private function newEntityTermsView( Language $language, EditSectionGenerator $editSectionGenerator ) {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$editSectionGenerator,
 			$this->languageNameLookup,
-			$languageCode
+			$language->getCode()
 		);
 	}
 

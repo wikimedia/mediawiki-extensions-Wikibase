@@ -81,9 +81,9 @@ class EntityParserOutputGenerator {
 	private $dataUpdaters;
 
 	/**
-	 * @var string
+	 * @var Language
 	 */
-	private $languageCode;
+	private $language;
 
 	/**
 	 * @param EntityViewFactory $entityViewFactory
@@ -94,7 +94,7 @@ class EntityParserOutputGenerator {
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param ParserOutputDataUpdater[] $dataUpdaters
-	 * @param string $languageCode
+	 * @param Language $languageCode
 	 */
 	public function __construct(
 		EntityViewFactory $entityViewFactory,
@@ -105,7 +105,7 @@ class EntityParserOutputGenerator {
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
-		$languageCode
+		Language $language
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
@@ -115,7 +115,7 @@ class EntityParserOutputGenerator {
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
-		$this->languageCode = $languageCode;
+		$this->language = $language;
 	}
 
 	/**
@@ -144,7 +144,7 @@ class EntityParserOutputGenerator {
 		// @note: SIDE EFFECT: the call to $options->getUserLang() effectively splits
 		// the parser cache. It gets reported to the ParserOutput which is registered
 		// as a watcher to $options above.
-		if ( $options->getUserLang() !== $this->languageCode ) {
+		if ( $options->getUserLang() !== $this->language->getCode() ) {
 			// The language requested by $parserOptions is different from what
 			// this generator was configured for. This indicates an inconsistency.
 			throw new InvalidArgumentException( 'Unexpected user language in ParserOptions' );
@@ -297,7 +297,7 @@ class EntityParserOutputGenerator {
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entityRevision->getEntity()->getType(),
-			$this->languageCode,
+			$this->language,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
 			$editSectionGenerator

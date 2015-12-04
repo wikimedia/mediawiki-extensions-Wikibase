@@ -135,7 +135,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->templateFactory,
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
-			$language->getCode()
+			$language
 		);
 	}
 
