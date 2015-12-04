@@ -384,12 +384,12 @@ abstract class EntityHandler extends ContentHandler {
 	 * @see ContentHandler::unserializeContent
 	 *
 	 * @param string $blob
-	 * @param string $format
+	 * @param string|null $format
 	 *
 	 * @throws MWContentSerializationException
 	 * @return EntityContent
 	 */
-	public function unserializeContent( $blob, $format = CONTENT_FORMAT_JSON ) {
+	public function unserializeContent( $blob, $format = null ) {
 		$redirect = $this->contentCodec->decodeRedirect( $blob, $format );
 
 		if ( $redirect ) {

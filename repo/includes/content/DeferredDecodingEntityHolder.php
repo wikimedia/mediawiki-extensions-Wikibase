@@ -50,7 +50,8 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 	/**
 	 * @param EntityContentDataCodec $codec
 	 * @param string $blob
-	 * @param string $contentFormat Serialization format to decode the blob, typically CONTENT_FORMAT_JSON.
+	 * @param string|null $contentFormat Serialization format to decode the blob, typically
+	 *  CONTENT_FORMAT_JSON.
 	 * @param string $entityType
 	 * @param EntityId|null $entityId
 	 *
@@ -59,7 +60,7 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 	public function __construct(
 		EntityContentDataCodec $codec,
 		$blob,
-		$contentFormat,
+		$contentFormat = null,
 		$entityType,
 		EntityId $entityId = null
 	) {
@@ -67,8 +68,8 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 			throw new InvalidArgumentException( '$blob must be a string' );
 		}
 
-		if ( !is_string( $contentFormat ) ) {
-			throw new InvalidArgumentException( '$contentFormat must be a string' );
+		if ( $contentFormat !== null && !is_string( $contentFormat ) ) {
+			throw new InvalidArgumentException( '$contentFormat must be a string or null' );
 		}
 
 		if ( !is_string( $entityType ) ) {
