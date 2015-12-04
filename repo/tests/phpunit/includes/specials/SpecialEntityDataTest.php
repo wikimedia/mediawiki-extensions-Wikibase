@@ -9,6 +9,7 @@ use HttpError;
 use OutputPage;
 use SiteList;
 use SpecialPage;
+use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;

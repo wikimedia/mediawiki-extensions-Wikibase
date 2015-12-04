@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialNewItem;
 
 /**
