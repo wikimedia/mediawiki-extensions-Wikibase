@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use FauxResponse;
+use SpecialPageTestBase;
 use TestSites;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;

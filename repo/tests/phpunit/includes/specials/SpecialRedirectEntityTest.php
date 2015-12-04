@@ -6,6 +6,7 @@ use Exception;
 use FauxRequest;
 use PHPUnit_Framework_Error;
 use RawMessage;
+use SpecialPageTestBase;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityId;

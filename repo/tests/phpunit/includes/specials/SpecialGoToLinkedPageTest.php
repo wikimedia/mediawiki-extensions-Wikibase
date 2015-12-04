@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use FauxResponse;
 use Site;
 use SiteStore;
+use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
