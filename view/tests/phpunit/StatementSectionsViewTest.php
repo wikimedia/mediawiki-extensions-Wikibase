@@ -33,10 +33,17 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 		) );
 	}
 
-	private function newInstance() {
+	private function newInstance( array $statementLists = array() ) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
 			'wb-section-heading' => '<HEADING id="$2" class="$3">$1</HEADING>',
 		) ) );
+
+		$statementGrouper = $this->getMock(
+			'Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper'
+		);
+		$statementGrouper->expects( $this->any() )
+			->method( 'groupStatements' )
+			->will( $this->returnValue( $statementLists ) );
 
 		$statementListView = $this->getMockBuilder( 'Wikibase\View\StatementGroupListView' )
 			->disableOriginalConstructor()
@@ -45,15 +52,19 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 			->method( 'getHtml' )
 			->will( $this->returnValue( '<LIST>' ) );
 
-		return new StatementSectionsView( $templateFactory, $statementListView );
+		return new StatementSectionsView(
+			$templateFactory,
+			$statementGrouper,
+			$statementListView
+		);
 	}
 
 	/**
 	 * @dataProvider statementListsProvider
 	 */
 	public function testGetHtml( array $statementLists, $expected ) {
-		$view = $this->newInstance();
-		$html = $view->getHtml( $statementLists );
+		$view = $this->newInstance( $statementLists );
+		$html = $view->getHtml( new StatementList() );
 		$this->assertSame( $expected, $html );
 	}
 
@@ -89,15 +100,15 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider invalidConstructorArgumentProvider
+	 * @dataProvider invalidArrayProvider
 	 */
 	public function testGivenInvalidArray_getHtmlFails( $array ) {
-		$view = $this->newInstance();
+		$view = $this->newInstance( $array );
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$view->getHtml( $array );
+		$view->getHtml( new StatementList() );
 	}
 
-	public function invalidConstructorArgumentProvider() {
+	public function invalidArrayProvider() {
 		return array(
 			array( array( 'statements' => array() ) ),
 			array( array( array() ) ),

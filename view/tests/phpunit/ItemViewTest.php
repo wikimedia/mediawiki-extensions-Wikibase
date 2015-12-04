@@ -56,7 +56,6 @@ class ItemViewTest extends EntityViewTest {
 			$this->getMockBuilder( 'Wikibase\View\EntityTermsView' )
 				->disableOriginalConstructor()
 				->getMock(),
-			new NullStatementGrouper(),
 			$this->getMockBuilder( 'Wikibase\View\StatementSectionsView' )
 				->disableOriginalConstructor()
 				->getMock(),
