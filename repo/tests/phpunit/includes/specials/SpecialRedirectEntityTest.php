@@ -11,6 +11,7 @@ use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckException;
@@ -82,6 +83,26 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	}
 
 	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getMockEntityTitleLookup() {
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+
+		$testCase = $this;
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForID' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
+				$title = $testCase->getMock( 'Title' );
+				$title->expects( $testCase->any() )
+					->method( 'isDeleted' )
+					->will( $testCase->returnValue( false ) );
+				return $title;
+			} ) );
+
+		return $titleLookup;
+	}
+
+	/**
 	 * @param SpecialRedirectEntity $page
 	 * @param User $user
 	 */
@@ -122,7 +143,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				$wikibaseRepo->getSummaryFormatter(),
 				$user,
 				$this->getMockEditFilterHookRunner(),
-				$this->mockRepository
+				$this->mockRepository,
+				$this->getMockEntityTitleLookup()
 			)
 		);
 	}

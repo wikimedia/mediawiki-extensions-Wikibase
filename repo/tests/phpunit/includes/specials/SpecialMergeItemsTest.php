@@ -168,11 +168,32 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$summaryFormatter,
 						$user,
 						$this->getMockEditFilterHookRunner(),
-						$this->mockRepository
+						$this->mockRepository,
+						$this->getMockEntityTitleLookup()
 				),
 				$this->getEntityTitleLookup()
 			)
 		);
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getMockEntityTitleLookup() {
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+
+		$testCase = $this;
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForID' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
+				$title = $testCase->getMock( 'Title' );
+				$title->expects( $testCase->any() )
+					->method( 'isDeleted' )
+					->will( $testCase->returnValue( false ) );
+				return $title;
+			} ) );
+
+		return $titleLookup;
 	}
 
 	private function executeSpecialMergeItems( $params, User $user = null ) {
