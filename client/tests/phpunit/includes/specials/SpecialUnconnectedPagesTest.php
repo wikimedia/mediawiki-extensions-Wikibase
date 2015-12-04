@@ -2,10 +2,10 @@
 
 namespace Wikibase\Client\Tests\Specials;
 
+use SpecialPageTestBase;
 use Title;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\NamespaceChecker;
-use Wikibase\Test\SpecialPageTestBase;
 
 /**
  * @covers Wikibase\Client\Specials\SpecialUnconnectedPages

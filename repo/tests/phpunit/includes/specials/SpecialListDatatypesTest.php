@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Language;
+use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialListDatatypes;
 
 /**

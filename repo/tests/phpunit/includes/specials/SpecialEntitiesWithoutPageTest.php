@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialEntitiesWithoutPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
