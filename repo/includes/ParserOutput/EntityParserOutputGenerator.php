@@ -112,7 +112,6 @@ class EntityParserOutputGenerator {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
-		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
