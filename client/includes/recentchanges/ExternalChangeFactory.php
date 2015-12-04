@@ -92,7 +92,7 @@ class ExternalChangeFactory {
 	}
 
 	/**
-	 * @param array Content of rc_params
+	 * @param array $rc_params
 	 *
 	 * @throws UnexpectedValueException
 	 * @return array
