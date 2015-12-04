@@ -470,7 +470,8 @@ class WikibaseRepo {
 			$this->getSummaryFormatter(),
 			$user,
 			$this->newEditFilterHookRunner( $context ),
-			$this->getStore()->getEntityRedirectLookup()
+			$this->getStore()->getEntityRedirectLookup(),
+			$this->getEntityTitleLookup()
 		);
 	}
 
