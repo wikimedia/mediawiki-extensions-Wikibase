@@ -48,7 +48,7 @@ $.widget( 'wikibase.removetoolbar', PARENT, {
 		$link
 		.attr( 'title', $link.text() )
 		.text( '' )
-		.append( $( '<span/>' ) );
+		.append( $( '<span class="wb-icon"/>' ) );
 
 		return $button;
 	}
