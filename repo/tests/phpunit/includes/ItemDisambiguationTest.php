@@ -7,7 +7,7 @@ use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Repo\Interactors\TermSearchResult;
 
 /**
  * @covers Wikibase\ItemDisambiguation

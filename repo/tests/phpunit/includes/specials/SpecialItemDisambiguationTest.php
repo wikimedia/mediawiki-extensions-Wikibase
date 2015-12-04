@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndexEntry;
 
@@ -66,7 +66,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				),
 			),
 		);
-		$mock = $this->getMockBuilder( 'Wikibase\Lib\Interactors\TermIndexSearchInteractor' )
+		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\TermIndexSearchInteractor' )
 			->disableOriginalConstructor()
 			->getMock();
 
