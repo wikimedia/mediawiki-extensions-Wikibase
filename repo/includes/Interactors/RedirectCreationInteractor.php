@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -26,6 +27,11 @@ use Wikibase\SummaryFormatter;
  * @author Addshore
  */
 class RedirectCreationInteractor {
+
+	/**
+	 * @var EntityTitleLookup
+	 */
+	private $entityTitleLookup;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -70,6 +76,7 @@ class RedirectCreationInteractor {
 	 * @param User $user
 	 * @param EditFilterHookRunner $editFilterHookRunner
 	 * @param EntityRedirectLookup $entityRedirectLookup
+	 * @param EntityTitleLookup $entityTitleLookup
 	 */
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
@@ -78,7 +85,8 @@ class RedirectCreationInteractor {
 		SummaryFormatter $summaryFormatter,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
-		EntityRedirectLookup $entityRedirectLookup
+		EntityRedirectLookup $entityRedirectLookup,
+		EntityTitleLookup $entityTitleLookup
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityStore = $entityStore;
@@ -87,6 +95,7 @@ class RedirectCreationInteractor {
 		$this->user = $user;
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->entityRedirectLookup = $entityRedirectLookup;
+		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
 	/**
@@ -108,7 +117,7 @@ class RedirectCreationInteractor {
 		$this->checkPermissions( $fromId );
 
 		$this->checkExistsNoRedirect( $toId );
-		$this->checkEmpty( $fromId );
+		$this->checkCanCreateRedirect( $fromId );
 
 		$summary = new Summary( 'wbcreateredirect' );
 		$summary->addAutoCommentArgs( $fromId->getSerialization(), $toId->getSerialization() );
@@ -160,25 +169,28 @@ class RedirectCreationInteractor {
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function checkEmpty( EntityId $entityId ) {
+	private function checkCanCreateRedirect( EntityId $entityId ) {
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER );
 
 			if ( !$revision ) {
-				throw new RedirectCreationException(
-					"Entity $entityId not found",
-					'no-such-entity'
-				);
+				$title = $this->entityTitleLookup->getTitleForId( $entityId );
+				if ( !$title || !$title->isDeleted() ) {
+					throw new RedirectCreationException(
+						"Couldn't get Title for $entityId or Title is not deleted",
+						'no-such-entity'
+					);
+				}
+			} else {
+				$entity = $revision->getEntity();
+				if ( !$entity->isEmpty() ) {
+					throw new RedirectCreationException(
+						"Can't create redirect on non empty item $entityId",
+						'origin-not-empty'
+					);
+				}
 			}
 
-			$entity = $revision->getEntity();
-
-			if ( !$entity->isEmpty() ) {
-				throw new RedirectCreationException(
-					"Entity $entityId is not empty",
-					'origin-not-empty'
-				);
-			}
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			// Nothing to do. It's ok to override a redirect with a redirect.
 		} catch ( StorageException $ex ) {
@@ -237,9 +249,14 @@ class RedirectCreationInteractor {
 	 */
 	private function saveRedirect( EntityRedirect $redirect, Summary $summary, $bot ) {
 		$summary = $this->summaryFormatter->formatSummary( $summary );
-		$flags = EDIT_UPDATE;
+		$flags = 0;
 		if ( $bot ) {
 			$flags = $flags | EDIT_FORCE_BOT;
+		}
+		if ( $this->entityTitleLookup->getTitleForId( $redirect->getEntityId() )->isDeleted() ) {
+			$flags = $flags | EDIT_NEW;
+		} else {
+			$flags = $flags | EDIT_UPDATE;
 		}
 
 		$hookStatus = $this->editFilterHookRunner->run( $redirect, $this->user, $summary );
