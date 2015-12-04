@@ -199,8 +199,9 @@ class EntityContentDataCodec {
 			throw new InvalidArgumentException( '$blob must be a string' );
 		}
 
+		$format = $this->sanitizeFormat( $format );
 		\MediaWiki\suppressWarnings();
-		switch ( $this->sanitizeFormat( $format ) ) {
+		switch ( $format ) {
 			case CONTENT_FORMAT_JSON:
 				$data = json_decode( $blob, true );
 				break;
