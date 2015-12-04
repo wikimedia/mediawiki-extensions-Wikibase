@@ -164,7 +164,12 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @returns TermSearchResult[]
 	 */
 	public function searchForEntities( $text, $languageCode, $entityType, array $termTypes ) {
-		$matchedTermIndexEntries = $this->getMatchingTermIndexEntries( $text, $languageCode, $entityType, $termTypes );
+		$matchedTermIndexEntries = $this->getMatchingTermIndexEntries(
+			$text,
+			$languageCode,
+			$entityType,
+			$termTypes
+		);
 		$entityIds = $this->getEntityIdsForTermIndexEntries( $matchedTermIndexEntries );
 
 		$this->preFetchLabelsAndDescriptionsForDisplay( $entityIds );
@@ -179,7 +184,12 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	private function getMatchingTermIndexEntries( $text, $languageCode, $entityType, array $termTypes ) {
+	private function getMatchingTermIndexEntries(
+		$text,
+		$languageCode,
+		$entityType,
+		array $termTypes
+	) {
 		$languageCodes = array( $languageCode );
 		$matchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
 			$this->makeTermIndexEntryTemplates(
@@ -215,13 +225,19 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 
 			// Remove any IndexEntries that are already have an match for
 			foreach ( $fallbackMatchedTermIndexEntries as $key => $termIndexEntry ) {
-				if ( in_array( $termIndexEntry->getEntityId()->getSerialization(), $matchedEntityIdSerializations ) ) {
+				if ( in_array(
+					$termIndexEntry->getEntityId()->getSerialization(),
+					$matchedEntityIdSerializations
+				) ) {
 					unset( $fallbackMatchedTermIndexEntries[$key] );
 				}
 			}
 
 			// Matches in the main language will always be first
-			$matchedTermIndexEntries = array_merge( $matchedTermIndexEntries, $fallbackMatchedTermIndexEntries );
+			$matchedTermIndexEntries = array_merge(
+				$matchedTermIndexEntries,
+				$fallbackMatchedTermIndexEntries
+			);
 			if ( count( $matchedTermIndexEntries ) > $this->limit ) {
 				array_slice( $matchedTermIndexEntries, 0, $this->limit, true );
 			}

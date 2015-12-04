@@ -96,7 +96,8 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
 				$descriptions = array();
 				foreach ( $languageCodes as $languageCode ) {
-					$descriptions[$languageCode] = 'description-' . $languageCode . '-' . $entityId->getSerialization();
+					$descriptions[$languageCode] =
+						'description-' . $languageCode . '-' . $entityId->getSerialization();
 				}
 				return $descriptions;
 			}
