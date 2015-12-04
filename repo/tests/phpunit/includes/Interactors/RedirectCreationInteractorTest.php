@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationException;
@@ -141,16 +142,38 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 			$summaryFormatter,
 			$user,
 			$this->getMockEditFilterHookRunner( $efHookCalls, $efHookStatus ),
-			$this->mockRepository
+			$this->mockRepository,
+			$this->getMockEntityTitleLookup()
 		);
 
 		return $interactor;
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getMockEntityTitleLookup() {
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+
+		$testCase = $this;
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForID' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
+				$title = $testCase->getMock( 'Title' );
+				$title->expects( $this->any() )
+					->method( 'isDeleted' )
+					->will( $this->returnValue( $id->getSerialization() === 'Q666' ) );
+				return $title;
+			} ) );
+
+		return $titleLookup;
 	}
 
 	public function createRedirectProvider_success() {
 		return array(
 			'redirect empty entity' => array( new ItemId( 'Q11' ), new ItemId( 'Q12' ) ),
 			'update redirect' => array( new ItemId( 'Q22' ), new ItemId( 'Q11' ) ),
+			'over deleted item' => array( new ItemId( 'Q666' ), new ItemId( 'Q11' ) ),
 		);
 	}
 
@@ -177,7 +200,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 			'target is a redirect' => array( new ItemId( 'Q11' ), new ItemId( 'Q22' ), 'target-is-redirect' ),
 			'target is incompatible' => array( new ItemId( 'Q11' ), new PropertyId( 'P11' ), 'target-is-incompatible' ),
 
-			'source not empty' => array( new ItemId( 'Q12' ), new ItemId( 'Q11' ), 'origin-not-empty' ),
+			'source not empty' => array( new ItemId( 'Q12' ), new ItemId( 'Q11' ), 'target-not-empty' ),
 			'can\'t redirect' => array( new PropertyId( 'P11' ), new PropertyId( 'P12' ), 'cant-redirect' ),
 			'can\'t redirect EditFilter' => array( new ItemId( 'Q11' ), new ItemId( 'Q12' ), 'cant-redirect', Status::newFatal( 'EF' ) ),
 		);
