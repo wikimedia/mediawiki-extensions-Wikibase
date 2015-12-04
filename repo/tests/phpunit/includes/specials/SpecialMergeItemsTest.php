@@ -10,6 +10,7 @@ use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -149,10 +150,31 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$summaryFormatter,
 						$user,
 						$this->getMockEditFilterHookRunner(),
-						$this->mockRepository
+						$this->mockRepository,
+						$this->getMockEntityTitleLookup()
 				)
 			)
 		);
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getMockEntityTitleLookup() {
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+
+		$testCase = $this;
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForID' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
+				$title = $testCase->getMock( 'Title' );
+				$title->expects( $this->any() )
+					->method( 'isDeleted' )
+					->will( $this->returnValue( $id->getSerialization() === 'Q666' ) );
+				return $title;
+			} ) );
+
+		return $titleLookup;
 	}
 
 	private function executeSpecialMergeItems( $params, User $user = null ) {

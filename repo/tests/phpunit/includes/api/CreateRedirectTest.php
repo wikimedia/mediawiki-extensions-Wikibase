@@ -9,12 +9,14 @@ use RequestContext;
 use Status;
 use UsageException;
 use User;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateRedirect;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
@@ -132,11 +134,32 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 				$wikibaseRepo->getSummaryFormatter(),
 				$user,
 				$this->getMockEditFilterHookRunner(),
-				$this->mockRepository
+				$this->mockRepository,
+				$this->getMockEntityTitleLookup()
 			)
 		);
 
 		return $module;
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getMockEntityTitleLookup() {
+		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+
+		$testCase = $this;
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForID' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
+				$title = $testCase->getMock( 'Title' );
+				$title->expects( $this->any() )
+					->method( 'isDeleted' )
+					->will( $this->returnValue( $id->getSerialization() === 'Q666' ) );
+				return $title;
+			} ) );
+
+		return $titleLookup;
 	}
 
 	private function callApiModule( $params, User $user = null ) {
