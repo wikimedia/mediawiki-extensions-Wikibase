@@ -753,7 +753,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		list( $result, , ) = $this->doApiRequestWithToken( $setupParams );
 		$params['baserevid'] = $result['entity']['lastrevid'];
 		$setupParams['data'] = '{"descriptions":{"en":{"language":"en","value":"ClearFromBadRevidDesc2"}}}';
-		list( , , ) = $this->doApiRequestWithToken( $setupParams );
+		$this->doApiRequestWithToken( $setupParams );
 
 		$expectedException = array( 'type' => 'UsageException', 'code' => 'editconflict' );
 		$this->doTestQueryExceptions( $params, $expectedException );
