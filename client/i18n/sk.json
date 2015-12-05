@@ -5,7 +5,8 @@
 			"KuboF",
 			"Teslaton",
 			"Sudo77(new)",
-			"TomášPolonec"
+			"TomášPolonec",
+			"Kusavica"
 		]
 	},
 	"wikibase-client-desc": "Klient pre rozšírenie Wikibase",
@@ -47,7 +48,7 @@
 	"wikibase-watchlist-show-changes-pref": "Zobraziť úpravy Wikiúdajov v sledovaných stránkach",
 	"unconnectedpages": "Stránky bez prepojení",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|medzijazykový odkaz|medzijazykové odkazy|medzijazykových odkazov}})",
-	"wikibase-unconnectedpages-submit": "Vykonať",
+	"wikibase-unconnectedpages-submit": "Zobraziť stránky",
 	"wikibase-pageinfo-entity-id": "ID položky Wikiúdajov",
 	"wikibase-pageinfo-entity-id-none": "Žiadne",
 	"wikibase-otherprojects": "Iné projekty",

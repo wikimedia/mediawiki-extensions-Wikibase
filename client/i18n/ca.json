@@ -13,7 +13,8 @@
 			"Vriullop",
 			"Àlex",
 			"Macofe",
-			"Joan manel"
+			"Joan manel",
+			"Jaumeortola"
 		]
 	},
 	"wikibase-client-desc": "Client per l'extensió Wikibase",
@@ -22,7 +23,7 @@
 	"apihelp-query+pageterms-example-simple": "Aconsegueix tots els termes associats amb la pàgina 'London', en la llengua de l'usuari.",
 	"apihelp-query+pageterms-example-label-en": "Aconsegueix etiquetes i àlies associats amb la pàgina 'London', en anglès.",
 	"apihelp-query+pageterms-param-terms": "Els tipus de termes que s'obtindran. P. ex., 'etiqueta', 'descripció', 'àlies'.",
-	"wikibase-after-page-move": "També podeu [$1 actualitzar] l'element associat de {{WBREPONAME}} per tal de mantenir els enllaços d'idioma a la pàgina que s'ha desplaçat.",
+	"wikibase-after-page-move": "També podeu [$1 actualitzar] l'element associat de {{WBREPONAME}} per a mantenir els enllaços d'idioma en la pàgina que s'ha desplaçat.",
 	"wikibase-after-page-move-queued": "L'[$1 element de {{WBREPONAME}}] associat a aquesta pàgina s'actualitzarà automàticament. Tingueu en compte que això potser no és immediat.",
 	"wikibase-after-page-delete-queued": "L'[$1 element de {{WBREPONAME}}] associat amb aquesta pàgina s'actualitzarà automàticament aviat.",
 	"wikibase-comment-add": "S’ha creat un element a {{WBREPONAME}}.",
@@ -38,6 +39,7 @@
 	"wikibase-dataitem": "Element a {{WBREPONAME}}",
 	"wikibase-editlinks": "Modifica els enllaços",
 	"wikibase-editlinkstitle": "Modifica enllaços interlingües",
+	"wikibase-addlinkstitle": "Afegeix enllaços interlingües",
 	"wikibase-linkitem-addlinks": "Afegeix enllaços",
 	"wikibase-linkitem-alreadylinked": "La pàgina amb la que voleu enllaçar ja està definida en un [$1 element] del repositori central de dades que enllaça a $2 en aquest lloc. Els elements només poden estar relacionats amb una pàgina per lloc. Escolliu una pàgina diferent per enllaçar-hi.",
 	"wikibase-linkitem-close": "Tanca la caixa de diàleg i recarrega la pàgina",
@@ -67,6 +69,7 @@
 	"unconnectedpages": "Pàgines no connectades",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|enllaç entre llengües|enllaços entre llengües}} a la pàgina)",
 	"wikibase-unconnectedpages-submit": "Mostra les pàgines",
+	"wikibase-pageswithbadges-submit": "Mostra les pàgines",
 	"wikibase-pageinfo-entity-id": "ID de l'element de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Cap",
 	"wikibase-property-render-error": "No s'ha pogut representar la propietat $1: $2",

@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mjbmr"
+			"Mjbmr",
+			"Ahmed-Najib-Biabani-Ibrahimkhel"
 		]
 	},
-	"wikibase-edit": "ویرایش"
+	"wikibase-edit": "ویرایش",
+	"wikibase-add": "افزودن"
 }

@@ -364,6 +364,8 @@
 	"apihelp-wbeditentity-example-8": "יצירת טענה חדשה לפריט למאפיין P56 וערך של \"ExampleString\"",
 	"apihelp-wbeditentity-example-9": "הסרת הטענות מפריט שה־GUID־ים שלהן הם Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F ו־Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X",
 	"apihelp-wbeditentity-example-10": "הגדרת טענה עם ה־GUID לערך של הטענה",
+	"apihelp-wbeditentity-example-11": "הוספת תווית בלי לדרוס אותה אם היא כבר קיימת",
+	"apihelp-wbeditentity-example-12": "הסרת תווית",
 	"apihelp-wbformatvalue-description": "עיצוב DataValues.",
 	"apihelp-wbformatvalue-param-generate": "תסדיר הפלט המבוקש.",
 	"apihelp-wbformatvalue-param-datatype": "סוג הנתונים של הערך. זה שונה מסוג הערך",

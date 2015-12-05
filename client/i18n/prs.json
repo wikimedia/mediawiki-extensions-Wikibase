@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mjbmr"
+			"Mjbmr",
+			"Ahmed-Najib-Biabani-Ibrahimkhel"
 		]
 	},
 	"tooltip-t-wikibase": "پیوند به آیتم مخزن داده متصل",
 	"wikibase-dataitem": "آیتم {{WBREPONAME}}",
 	"wikibase-editlinks": "ویرایش پیوندها",
-	"wikibase-editlinkstitle": "ویرایش پیوندهای بین زبانی"
+	"wikibase-editlinkstitle": "ویرایش پیوندهای بین زبانی",
+	"wikibase-rc-hide-wikidata-show": "نشان دادن"
 }

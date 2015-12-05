@@ -2,12 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Gitartha.bordoloi",
-			"IKHazarika"
+			"IKHazarika",
+			"Dibya Dutta"
 		]
 	},
 	"tooltip-t-wikibase": "সংযোজিত তথ্যভঁৰালৰ আইটেমলৈ লিংক",
 	"wikibase-after-page-move": "স্থানান্তৰিত পৃষ্ঠাৰ ভাষা সংযোগসমূহ ঠিকে ৰাখিবলৈ আপুনি সংশ্লিষ্ট {{WBREPONAME}} ভুক্তি [$1 নবীকৰণ] কৰিব পাৰে।",
 	"wikibase-after-page-move-queued": "এই পৃষ্ঠাৰ লগত সংযুক্ত [$1 ৱিকিডে'টা ভুক্তি] সোনকালেই স্বয়ংক্ৰিয়ভাৱে নবীকৰণ কৰা হ'ব।",
+	"wikibase-after-page-delete": "ভাষা সংযোগসমূহ ঠিকে ৰাখিবলৈ আপুনি সংশ্লিষ্ট [$1 {{WBREPONAME}} ভুক্তি]ৰ পৰা এই পৃষ্ঠালৈ সংযোগ আঁতৰাব পাৰে।",
 	"wikibase-comment-update": "{{WBREPONAME}} আইটেম সলোৱা হৈছে",
 	"wikibase-dataitem": "{{WBREPONAME}} আইটেম",
 	"wikibase-editlinks": "আন্তঃৱিকি লিংক সম্পাদনা কৰক",

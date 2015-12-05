@@ -351,6 +351,8 @@
 	"apihelp-wbcreateredirect-param-to": "ID entità a cui puntare il redirect",
 	"apihelp-wbcreateredirect-param-bot": "Contrassegna questa modifica come bot. Questo flag di URL sarà rispettato solo se l'utente appartiene al gruppo \"bot\".",
 	"apihelp-wbcreateredirect-example-1": "Trasforma Q11 in un redirect a Q12",
+	"apihelp-wbeditentity-example-11": "Aggiunge un'etichetta senza sovrascrivere se già presente",
+	"apihelp-wbeditentity-example-12": "Rimuovi un'etichetta",
 	"apihelp-wbparsevalue-param-values": "I valori da analizzare",
 	"apihelp-wbremoveclaims-description": "Rimuove asserzioni Wikibase.",
 	"apihelp-wbremovequalifiers-description": "Rimuove un qualificatore da un'asserzione.",

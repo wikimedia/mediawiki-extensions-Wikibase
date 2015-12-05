@@ -398,6 +398,8 @@
 	"apihelp-wbeditentity-example-8": "Crée une nouvelle déclaration sur l’élément pour la propriété P56 et une valeur de « ChaineExemple »",
 	"apihelp-wbeditentity-example-9": "Supprime les déclarations pour l’élément avec les GUIDs Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F et Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X",
 	"apihelp-wbeditentity-example-10": "Fixe la déclaration avec le GUID à la valeur de la déclaration",
+	"apihelp-wbeditentity-example-11": "Ajoute un libellé sans l’écraser s’il existe déjà",
+	"apihelp-wbeditentity-example-12": "Supprime un libellé",
 	"apihelp-wbformatvalue-description": "Met en forme DataValues.",
 	"apihelp-wbformatvalue-param-generate": "Le format de sortie souhaité à générer.",
 	"apihelp-wbformatvalue-param-datatype": "Le type de donnée de la valeur. C’est distinct du type de la valeur",

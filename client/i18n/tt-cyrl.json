@@ -9,7 +9,7 @@
 	},
 	"tooltip-t-wikibase": "Үзара бәйләнгән мәгълүматләр репозиториясе элементларына сылтама",
 	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элементы үзгәртелде",
-	"wikibase-dataitem": "{{WBREPONAME}} мәгълүмат элементы",
+	"wikibase-dataitem": "{{WBREPONAME}} элементы",
 	"wikibase-editlinks": "Сылтамалар өстәү",
 	"wikibase-editlinkstitle": "Башка телләргә сылтамалар өстәү",
 	"wikibase-linkitem-addlinks": "Сылтамалар өстәү",
@@ -30,5 +30,7 @@
 	"wikibase-watchlist-show-changes-pref": "{{WBREPONAME}} булган үзгәртүләрне күзәтү исемлегендә карау",
 	"wikibase-unconnectedpages-submit": "Битләрне күрсәтү",
 	"wikibase-pageinfo-entity-id-none": "Юк",
-	"wikibase-otherprojects": "Башка проектларда"
+	"wikibase-otherprojects": "Башка проектларда",
+	"wikibase-otherprojects-beta-message": "Башка проектлар өлгесе",
+	"wikibase-otherprojects-beta-description": "Ян өлгегә «{{int:wikibase-otherprojects}}» өлешен куя, ул исә {{WBREPONAME}} мәгълүматларына таянып, Викимедиа Фондының башка проекларына илтүче сылтамалар бирә."
 }

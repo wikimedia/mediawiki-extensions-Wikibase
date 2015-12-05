@@ -7,7 +7,8 @@
 			"Pofka",
 			"Vogone",
 			"Albertas",
-			"Salpusnis"
+			"Salpusnis",
+			"Zygimantus"
 		]
 	},
 	"wikibase-desc": "Struktūruotų duomenų talpykla",
@@ -361,6 +362,7 @@
 	"apihelp-wbeditentity-example-8": "Sukuria naują priekaištą įrašui su savybe P56 ir reikšme \"PavyzdinėEilutė\"",
 	"apihelp-wbeditentity-example-9": "Pašalina priekaištą iš įrašo su GUID reikšmėmis Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F ir Q42$GH678DSA-01PQ-28XC-HJ90-DDFD9990126X",
 	"apihelp-wbeditentity-example-10": "Nustato priekaištą su GUID į ieškinio vertę",
+	"apihelp-wbeditentity-example-12": "Pašalina etiketę",
 	"apihelp-wbformatvalue-description": "Formatuoja duomenų reikšmes.",
 	"apihelp-wbformatvalue-param-generate": "Norimas rezultato formatas, kurį sugeneruoti.",
 	"apihelp-wbformatvalue-param-datatype": "Reikšmės duomenų tipas. Tai skiriasi nuo reikšmės tipo",
