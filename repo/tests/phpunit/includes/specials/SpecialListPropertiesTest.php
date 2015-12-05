@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataTypes\DataTypeFactory;
 use Language;
+use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;

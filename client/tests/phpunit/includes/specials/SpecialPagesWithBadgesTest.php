@@ -2,12 +2,12 @@
 
 namespace Wikibase\Client\Tests\Specials;
 
+use SpecialPageTestBase;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Test\SpecialPageTestBase;
 
 /**
  * @covers Wikibase\Client\Specials\SpecialPagesWithBadges

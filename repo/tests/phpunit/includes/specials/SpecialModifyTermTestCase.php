@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use FauxRequest;
+use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityContent;
 use Wikibase\Repo\WikibaseRepo;

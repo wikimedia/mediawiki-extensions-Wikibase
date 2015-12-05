@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DataValues\DataValue;
 use Language;
 use SiteStore;
+use SpecialPageTestBase;
 use Status;
 use TestSites;
 use Title;

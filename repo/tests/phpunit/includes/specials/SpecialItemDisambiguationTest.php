@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use InvalidArgumentException;
+use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
