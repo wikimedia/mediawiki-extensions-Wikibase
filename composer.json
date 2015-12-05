@@ -69,6 +69,7 @@
 		],
 		"psr-4": {
 			"Wikibase\\View\\": "view/src",
+			"Wikibase\\View\\Tests\\": "view/tests/phpunit",
 			"Wikimedia\\Purtle\\": "purtle/src",
 			"Wikimedia\\Purtle\\Tests\\": "purtle/tests/phpunit"
 		}

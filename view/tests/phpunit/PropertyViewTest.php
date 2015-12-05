@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\View\Tests;
 
 use DataTypes\DataTypeFactory;
 use Language;

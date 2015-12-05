@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\View\Tests;
 
 use MediaWikiLangTestCase;
 use Wikibase\DataModel\Entity\Entity;
