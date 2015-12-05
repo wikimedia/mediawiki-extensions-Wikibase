@@ -95,7 +95,6 @@ class ChangeOpStatement extends ChangeOpBase {
 	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
-	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( $this->statement->getGuid() === null ) {
@@ -111,8 +110,6 @@ class ChangeOpStatement extends ChangeOpBase {
 		}
 
 		$this->applyClaimToEntity( $entity, $summary );
-
-		return true;
 	}
 
 	/**

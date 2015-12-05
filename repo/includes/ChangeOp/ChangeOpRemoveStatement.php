@@ -56,7 +56,6 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeOpException
-	 * @return bool
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListHolder ) ) {
@@ -75,8 +74,6 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 
 		$removedSnak = $statement->getMainSnak();
 		$this->updateSummary( $summary, 'remove', '', $this->getSummaryArgs( $removedSnak ) );
-
-		return true;
 	}
 
 	/**

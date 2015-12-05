@@ -78,14 +78,11 @@ class ChangeOps implements ChangeOp {
 	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
-	 * @return bool Deprecated, do not rely on this value.
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		foreach ( $this->changeOps as $changeOp ) {
 			$changeOp->apply( $entity, $summary );
 		}
-
-		return true;
 	}
 
 	/**

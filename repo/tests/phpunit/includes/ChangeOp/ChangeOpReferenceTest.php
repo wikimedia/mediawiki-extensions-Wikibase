@@ -97,7 +97,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider changeOpAddProvider
 	 */
 	public function testApplyAddNewReference( Item $item, ChangeOpReference $changeOp, $referenceHash ) {
-		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
+		$changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
@@ -148,7 +148,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		Reference $newReference,
 		$expectedIndex
 	) {
-		$this->assertTrue( $changeOp->apply( $item ), 'Applying the ChangeOp did not return true' );
+		$changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
@@ -208,7 +208,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider changeOpSetProvider
 	 */
 	public function testApplySetReference( Item $item, ChangeOpReference $changeOp, $referenceHash ) {
-		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
+		$changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );

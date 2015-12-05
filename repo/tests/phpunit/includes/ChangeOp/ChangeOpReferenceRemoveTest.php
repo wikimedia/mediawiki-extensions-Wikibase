@@ -79,7 +79,7 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider changeOpRemoveProvider
 	 */
 	public function testApplyRemoveReference( Item $item, ChangeOpReferenceRemove $changeOp, $referenceHash ) {
-		$this->assertTrue( $changeOp->apply( $item ), "Applying the ChangeOp did not return true" );
+		$changeOp->apply( $item );
 		$statements = $item->getStatements()->toArray();
 		$this->assertCount( 1, $statements, 'More than one claim returned on item...' );
 		/** @var Statement $statement */
