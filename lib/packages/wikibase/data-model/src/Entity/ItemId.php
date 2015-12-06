@@ -8,7 +8,7 @@ use InvalidArgumentException;
  * @since 0.5
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemId extends EntityId {
 
