@@ -96,7 +96,7 @@ class EntityIdValue extends DataValueObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @return EntityIdValue
+	 * @return self
 	 */
 	public function getValue() {
 		return $this;
@@ -116,7 +116,7 @@ class EntityIdValue extends DataValueObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @return EntityId
+	 * @return array
 	 */
 	public function getArrayValue() {
 		return array(
