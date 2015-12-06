@@ -31,7 +31,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		parent::setUp();
 
 		foreach ( array( 'P1', 'Q1', 'Q20', 'Q21', 'Q22' ) as $pageName ) {
-			$this->insertPage( $pageName );
+			$this->insertPage( $pageName, '{ "type": "item", "id": "Q1" }' );
 		}
 	}
 
