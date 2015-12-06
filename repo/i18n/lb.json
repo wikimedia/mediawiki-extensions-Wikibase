@@ -225,6 +225,7 @@
 	"action-property-create": "Eegeschaften uleeën",
 	"apihelp-wbcreateredirect-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
 	"apihelp-wbeditentity-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
+	"apihelp-wbeditentity-example-12": "Hëlt eng Etikett ewech",
 	"apihelp-wblinktitles-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
 	"apihelp-wbmergeitems-param-summary": "Resumé fir d'Ännerung.\nEng automatesch generéiert Bemierkung gëtt virdru gesat. D'Limite vun der Längt vun der automatescher Bemierkung zesumme mam Resumé ass 260 Zeechen. Denkt drun datt alles wat iwwer déi Limite erausgeet automatesch ofgeschnidde gëtt.",
 	"apihelp-wbmergeitems-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
