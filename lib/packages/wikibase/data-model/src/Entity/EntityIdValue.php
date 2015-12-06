@@ -135,7 +135,7 @@ class EntityIdValue extends DataValueObject {
 	 * @param mixed $data
 	 *
 	 * @throws IllegalValueException
-	 * @return DataValue
+	 * @return self
 	 */
 	public static function newFromArray( $data ) {
 		if ( !is_array( $data ) ) {
