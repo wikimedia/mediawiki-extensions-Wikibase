@@ -62,5 +62,4 @@ If you want to only have one or the other, then set `$wgEnableWikibaseRepo = fal
 These extensions are part of the [Wikibase software](http://wikiba.se/) created by the Wikidata team
 for the [Wikidata project](https://meta.wikimedia.org/wiki/Wikidata).
 
-The Wikidata project uses the Wikibase software on its [wikidata.org website]
-(https://www.wikidata.org).
+The Wikidata project uses the Wikibase software on its [wikidata.org website](https://www.wikidata.org).
