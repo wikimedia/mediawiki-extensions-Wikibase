@@ -18,6 +18,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
@@ -1309,12 +1310,14 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
+		$statementGrouperBuilder = new StatementGrouperBuilder( $this->settings->getSetting( 'statementGroups' ) );
 		$templateFactory = TemplateFactory::getDefaultInstance();
+
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
-			new StatementGrouperFactory(),
+			$statementGrouperBuilder->getStatementGrouper(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			$templateFactory,
