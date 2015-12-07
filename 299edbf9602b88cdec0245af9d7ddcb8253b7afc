@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aeb807a7_533e0728",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-07T20:34:52Z",
+      "side": 1,
+      "message": "Indeed, reverted back.",
+      "parentUuid": "aeb807a7_fcc90d56",
+      "revId": "299edbf9602b88cdec0245af9d7ddcb8253b7afc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_5c00596d",
         "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-07T16:50:46Z",
       "side": 1,
       "message": "What does this line do? Looks like dead code to me.",
+      "revId": "299edbf9602b88cdec0245af9d7ddcb8253b7afc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_f3429bb1",
+        "filename": "repo/includes/Dumpers/JsonDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-07T20:34:52Z",
+      "side": 1,
+      "message": "Yeah… I initially had this sorted in a different way… now it doesn\u0027t make any sense. Removed.",
+      "parentUuid": "aeb807a7_5c00596d",
       "revId": "299edbf9602b88cdec0245af9d7ddcb8253b7afc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "aeb807a7_331033ad",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-07T20:34:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb807a7_fcf02d90",
+      "revId": "299edbf9602b88cdec0245af9d7ddcb8253b7afc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_9ced71b7",
         "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-12-07T16:50:46Z",
       "side": 1,
       "message": "I believe this is a mistake. \"Deserialization error\" does not sound like a \"lookup exception\".",
+      "revId": "299edbf9602b88cdec0245af9d7ddcb8253b7afc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_f3293be3",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-07T20:34:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb807a7_9ced71b7",
       "revId": "299edbf9602b88cdec0245af9d7ddcb8253b7afc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
