@@ -50,6 +50,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 			$connection
 		);
 
+		$this->assertSame( 1, $document->get( 'label_count' ), 'label_count' );
 		$this->assertSame( 1, $document->get( 'sitelink_count' ), 'sitelink_count' );
 		$this->assertSame( 1, $document->get( 'statement_count' ), 'statement_count' );
 	}
@@ -70,7 +71,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 		CirrusSearchHookHandlers::onCirrusSearchMappingConfig( $config, $mappingConfigBuilder );
 
 		$this->assertSame(
-			array( 'sitelink_count', 'statement_count' ),
+			array( 'label_count', 'sitelink_count', 'statement_count' ),
 			array_keys( $config['page']['properties'] )
 		);
 	}
@@ -84,6 +85,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 		$hookHandlers = new CirrusSearchHookHandlers( $fieldDefinitions );
 		$hookHandlers->indexExtraFields( $document, $content );
 
+		$this->assertSame( 1, $document->get( 'label_count' ), 'label_count' );
 		$this->assertSame( 1, $document->get( 'sitelink_count' ), 'sitelink_count' );
 		$this->assertSame( 1, $document->get( 'statement_count' ), 'statement_count' );
 	}
@@ -103,6 +105,9 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 		$expected = array(
 			'page' => array(
 				'properties' => array(
+					'label_count' => array(
+						'type' => 'integer'
+					),
 					'sitelink_count' => array(
 						'type' => 'integer'
 					),
@@ -143,6 +148,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 
 	private function getContent() {
 		$item = new Item();
+		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
 		$item->getStatements()->addNewStatement(
 			new PropertyNoValueSnak( new PropertyId( 'P1' ) )

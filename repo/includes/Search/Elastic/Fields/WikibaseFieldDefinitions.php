@@ -9,6 +9,7 @@ class WikibaseFieldDefinitions {
 	 */
 	public function getFields() {
 		$fields = array(
+			'label_count' => new LabelCountField(),
 			'sitelink_count' => new SiteLinkCountField(),
 			'statement_count' => new StatementCountField()
 		);
