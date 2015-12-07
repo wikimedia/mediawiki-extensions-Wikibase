@@ -2,35 +2,35 @@
   "comments": [
     {
       "key": {
-        "uuid": "0ebaf39b_b57b4b23",
+        "uuid": "aeb807a7_896c5007",
         "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 6
       },
-      "lineNbr": 416,
+      "lineNbr": 636,
       "author": {
-        "id": 50
+        "id": 640
       },
-      "writtenOn": "2015-11-23T20:44:23Z",
-      "side": 1,
-      "message": "fully qualified class name :S",
-      "revId": "ceedf2f195c1fc828780b9135e5ff35f5d664332",
+      "writtenOn": "2015-12-07T22:43:31Z",
+      "side": 0,
+      "message": "This patch makes this wrong.",
+      "revId": "e56a1e72f2e77070207290e9722d03438c4f07fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
     },
     {
       "key": {
-        "uuid": "aeb807a7_e984ecb7",
+        "uuid": "aeb807a7_c9a2483b",
         "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
         "patchSetId": 6
       },
-      "lineNbr": 663,
+      "lineNbr": 669,
       "author": {
         "id": 640
       },
       "writtenOn": "2015-12-07T22:43:31Z",
-      "side": 1,
-      "message": "This inverts the return value from what it is supposed to be?",
-      "revId": "ceedf2f195c1fc828780b9135e5ff35f5d664332",
+      "side": 0,
+      "message": "acquired",
+      "revId": "e56a1e72f2e77070207290e9722d03438c4f07fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
     }
