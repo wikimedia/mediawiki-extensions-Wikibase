@@ -53,12 +53,14 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
@@ -1362,7 +1364,10 @@ class WikibaseRepo {
 
 	private function getMonolingualTextLanguages() {
 		if ( $this->monolingualTextLanguages === null ) {
-			$this->monolingualTextLanguages = new WikibaseContentLanguages();
+			$this->monolingualTextLanguages = new UnionContentLanguages(
+				new WikibaseContentLanguages(),
+				new StaticContentLanguages( array( 'und', 'mis', 'mul', 'zxx' ) )
+			);
 		}
 		return $this->monolingualTextLanguages;
 	}
