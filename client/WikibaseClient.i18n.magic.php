@@ -31,6 +31,11 @@ $magicWords['arz'] = array(
 	'wbreponame' => array( 0, 'اسم_ريبو_وب' ),
 );
 
+/** Czech (čeština) */
+$magicWords['cs'] = array(
+	'property' => array( 0, 'vlastnost' ),
+);
+
 /** German (Deutsch) */
 $magicWords['de'] = array(
 	'noexternallanglinks' => array( 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ),
