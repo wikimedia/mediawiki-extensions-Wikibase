@@ -13,8 +13,8 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
@@ -124,7 +124,7 @@ class JsonDumpGenerator extends DumpGenerator {
 	/**
 	 * @param EntityId $entityId
 	 *
-	 * @throws StorageException
+	 * @throws EntityLookupException
 	 *
 	 * @return string|null
 	 */
@@ -133,12 +133,16 @@ class JsonDumpGenerator extends DumpGenerator {
 			$entity = $this->entityLookup->getEntity( $entityId );
 
 			if ( !$entity ) {
-				throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
+				throw new EntityLookupException( $entityId, 'Entity not found: ' . $entityId->getSerialization() );
 			}
 		} catch ( MWContentSerializationException $ex ) {
-			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
+			throw new EntityLookupException( $entityId, 'Deserialization error for ' . $entityId->getSerialization(), $ex );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {
+			// Redirects aren't supposed to be in the JSON dumps
 			return null;
+		} catch ( EntityLookupException $ex ) {
+			// Keep subtypes intact
+			throw $ex;
 		}
 
 		$data = $this->entitySerializer->serialize( $entity );
