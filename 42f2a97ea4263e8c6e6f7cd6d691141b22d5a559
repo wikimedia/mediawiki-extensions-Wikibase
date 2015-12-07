@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_738c6b3b",
+        "filename": "repo/includes/DispatchingEntityTypeStatementGrouper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-12-07T20:23:40Z",
+      "side": 1,
+      "message": "I would whether rename method to getGuessedStatementGrouper or check all statements for having the same entity type.\n\nBTW: https://en.wikipedia.org/wiki/Grouper",
+      "revId": "42f2a97ea4263e8c6e6f7cd6d691141b22d5a559",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_d3bc37b4",
+        "filename": "repo/includes/StatementGrouperBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-12-07T20:23:40Z",
+      "side": 1,
+      "message": "Mh, I would assume that specs array and PropertyDataTypeLookup object live in different realms and therefore they are unwilling to share the same method.",
+      "revId": "42f2a97ea4263e8c6e6f7cd6d691141b22d5a559",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_13cacf4a",
+        "filename": "repo/includes/StatementGrouperBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-12-07T20:23:40Z",
+      "side": 1,
+      "message": "Maybe leave a message in a bottle saying: \nIf you start adding your own filters here and there are more then five already extract this part of code and injected it.",
+      "revId": "42f2a97ea4263e8c6e6f7cd6d691141b22d5a559",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
