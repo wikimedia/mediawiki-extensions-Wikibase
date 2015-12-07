@@ -18,6 +18,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
@@ -1310,11 +1311,18 @@ class WikibaseRepo {
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
 		$templateFactory = TemplateFactory::getDefaultInstance();
+		$dataTypeLookup = $this->getPropertyDataTypeLookup();
+
+		$statementGrouperBuilder = new StatementGrouperBuilder(
+			$this->settings->getSetting( 'statementSections' ),
+			$dataTypeLookup
+		);
+
 		$entityViewFactory = new EntityViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
-			new StatementGrouperFactory(),
+			$statementGrouperBuilder->getStatementGrouper(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			$templateFactory,
@@ -1335,7 +1343,7 @@ class WikibaseRepo {
 			$this->getLanguageFallbackChainFactory(),
 			$templateFactory,
 			$entityDataFormatProvider,
-			$this->getPropertyDataTypeLookup(),
+			$dataTypeLookup,
 			$this->getLocalEntityUriParser(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),

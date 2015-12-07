@@ -27,6 +27,9 @@ return call_user_func( function() {
 
 		'entityNamespaces' => array(),
 
+		// See StatementGrouperBuilder for an example.
+		'statementSections' => array(),
+
 		// Define constraints for multilingual terms (such as labels, descriptions and aliases).
 		'multilang-limits' => array(
 			'length' => 250, // length constraint
