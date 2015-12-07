@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_3627c661",
+        "filename": "client/maintenance/updateSubscriptions.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-12-07T12:09:10Z",
+      "side": 1,
+      "message": "Personally I would not split strings when line length can be solved by simply stacking the function call.\n\n\t\t$this-\u003eaddOption(\n\t\t\t\u0027purge\u0027,\n\t\t\t\u0027Purge subscriptions first. If not given, subscriptions are only added, not removed.\u0027,\n\t\t\tfalse,\n\t\t\tfalse\n\t\t);\n\nEspecially as we a striving for readability not just trying to hit a magic number!",
+      "revId": "1a648ef72c53c4567a4d3746d93851ad0b025e8d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
