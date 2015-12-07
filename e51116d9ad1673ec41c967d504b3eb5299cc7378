@@ -34,6 +34,24 @@
       "revId": "e51116d9ad1673ec41c967d504b3eb5299cc7378",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_30cd8935",
+        "filename": "repo/tests/phpunit/includes/LinkedData/EntityDataSerializationServiceTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-12-07T19:07:13Z",
+      "side": 1,
+      "message": "\"Split lines longer that 130 characters\"\n\nThese lines are not longer than 130 chars",
+      "parentUuid": "aeb807a7_41b71682",
+      "revId": "e51116d9ad1673ec41c967d504b3eb5299cc7378",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
