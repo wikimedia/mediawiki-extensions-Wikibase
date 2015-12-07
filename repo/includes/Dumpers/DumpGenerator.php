@@ -4,6 +4,7 @@ namespace Wikibase\Dumpers;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
@@ -312,6 +313,8 @@ abstract class DumpGenerator {
 				if ( $this->limit && $dumpCount >= $this->limit ) {
 					break;
 				}
+			} catch ( EntityLookupException $ex ) {
+				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
 			} catch ( StorageException $ex ) {
 				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
 			}
@@ -323,6 +326,7 @@ abstract class DumpGenerator {
 	 *
 	 * @param EntityId $entityId
 	 *
+	 * @throws EntityLookupException
 	 * @throws StorageException
 	 * @return string|null
 	 */

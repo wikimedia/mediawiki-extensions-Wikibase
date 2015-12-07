@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Dumpers;
 
+use Exception;
 use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use MWContentSerializationException;
@@ -16,6 +17,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -196,7 +198,8 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider idProvider
 	 */
 	public function testGenerateDump_HandlesMWContentSerializationException( array $ids ) {
-		$jsonDumper = $this->getJsonDumperWithExceptionHandler( $ids );
+		$ex = new MWContentSerializationException( 'cannot deserialize!' );
+		$jsonDumper = $this->getJsonDumperWithExceptionHandler( $ids, $ex );
 		$pager = $this->makeIdPager( $ids );
 
 		ob_start();
@@ -207,8 +210,24 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( array(), $data );
 	}
 
-	private function getJsonDumperWithExceptionHandler( array $ids ) {
-		$entityLookup = $this->getEntityLookupThrowsMWContentSerializationException();
+	/**
+	 * @dataProvider idProvider
+	 */
+	public function testGenerateDump_HandlesEntityLookupException( array $ids ) {
+		$ex = new EntityLookupException( new ItemId( 'Q2' ), 'Whatever' );
+		$jsonDumper = $this->getJsonDumperWithExceptionHandler( $ids, $ex );
+		$pager = $this->makeIdPager( $ids );
+
+		ob_start();
+		$jsonDumper->generateDump( $pager );
+		$json = ob_get_clean();
+
+		$data = json_decode( $json, true );
+		$this->assertEquals( array(), $data );
+	}
+
+	private function getJsonDumperWithExceptionHandler( array $ids, Exception $ex ) {
+		$entityLookup = $this->getEntityLookupThrows( $ex );
 		$out = fopen( 'php://output', 'w' );
 		$serializer = $this->serializerFactory->newEntitySerializer();
 
@@ -247,12 +266,12 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return EntityLookup
 	 */
-	private function getEntityLookupThrowsMWContentSerializationException() {
+	private function getEntityLookupThrows( Exception $ex ) {
 		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnCallback( function( EntityId $id ) {
-				throw new MWContentSerializationException( 'cannot deserialize!' );
+			->will( $this->returnCallback( function( EntityId $id ) use ( $ex ) {
+				throw $ex;
 			} ) );
 
 		return $entityLookup;
