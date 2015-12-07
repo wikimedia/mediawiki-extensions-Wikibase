@@ -7,11 +7,12 @@ use MWContentSerializationException;
 use MWException;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\HashDedupeBag;
@@ -91,6 +92,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 *
 	 * @param EntityId $entityId
 	 *
+	 * @throws EntityLookupException
 	 * @throws StorageException
 	 * @return string|null RDF
 	 */
@@ -99,7 +101,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $entityId );
 
 			if ( !$entityRevision ) {
-				throw new StorageException( 'Entity not found: ' . $entityId->getSerialization() );
+				throw new EntityLookupException( $entityId, 'Entity not found: ' . $entityId->getSerialization() );
 			}
 
 			$this->rdfBuilder->addEntityRevisionInfo(
