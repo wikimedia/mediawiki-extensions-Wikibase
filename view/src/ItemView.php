@@ -5,7 +5,6 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;

@@ -9,7 +9,6 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use DataValues\UnDeserializableValue;
 use Language;
 use MediaWikiTestCase;
 use Title;
