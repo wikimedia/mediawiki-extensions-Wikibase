@@ -7,7 +7,6 @@ use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;

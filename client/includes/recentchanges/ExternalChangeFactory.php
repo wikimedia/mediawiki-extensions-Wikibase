@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\RecentChanges;
 
-use Content;
 use InvalidArgumentException;
 use Language;
 use RecentChange;
