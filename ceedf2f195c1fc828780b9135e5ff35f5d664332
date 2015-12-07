@@ -33,6 +33,24 @@
       "revId": "ceedf2f195c1fc828780b9135e5ff35f5d664332",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_8449976c",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-07T22:45:00Z",
+      "side": 1,
+      "message": "eeeek!",
+      "parentUuid": "aeb807a7_e984ecb7",
+      "revId": "ceedf2f195c1fc828780b9135e5ff35f5d664332",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
