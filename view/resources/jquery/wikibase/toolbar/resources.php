@@ -111,11 +111,16 @@ return call_user_func( function() {
 			'scripts' => array(
 				'jquery.wikibase.toolbarbutton.js',
 			),
-			'styles' => array(
-				'themes/default/jquery.wikibase.toolbarbutton.css',
-			),
 			'dependencies' => array(
 				'jquery.wikibase.toolbaritem',
+				'jquery.wikibase.toolbarbutton.styles',
+			),
+		),
+
+		'jquery.wikibase.toolbarbutton.styles' => $moduleTemplate + array(
+			'position' => 'top',
+			'styles' => array(
+				'themes/default/jquery.wikibase.toolbarbutton.css',
 			),
 		),
 
