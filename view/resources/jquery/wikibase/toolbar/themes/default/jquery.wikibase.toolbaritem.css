@@ -12,7 +12,7 @@
 	margin-left: 3px;
 	padding: 0;
 	text-decoration: none;
-	width: 11px;
+	min-width: 11px;
 }
 
 .wikibase-toolbar-item .mw-collapsible-toggle {
