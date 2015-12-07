@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_01559e52",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-12-07T15:55:52Z",
+      "side": 1,
+      "message": "This whole message should be rephrased:\n\n The ID of the entity the claim is added to\n\nThis makes GENDER not needed.",
+      "revId": "e445cc85198ab80226770ded4681fae3f470615b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_81c8ae26",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2015-12-07T15:55:52Z",
+      "side": 1,
+      "message": "Should be rephrased to not require GENDER:\n\n If set, a new entity will be created.\\nSet this to the type of the entity to be created.\\nIt is not allowed to have this set when \u003ckbd\u003eid\u003c/kbd\u003e is also set.",
+      "revId": "e445cc85198ab80226770ded4681fae3f470615b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
