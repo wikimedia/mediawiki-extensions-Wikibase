@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_f5703b09",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHooksHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-08T12:10:07Z",
+      "side": 1,
+      "message": "Needs quoting!",
+      "revId": "b492854cf7de10a6a015f1098d977ccf9c562c33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_3587b3de",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListSpecialPageHooksHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-08T12:10:07Z",
+      "side": 1,
+      "message": "wb needs quotes!",
+      "revId": "b492854cf7de10a6a015f1098d977ccf9c562c33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_558ca7ff",
+        "filename": "client/tests/phpunit/includes/Hooks/ChangesListSpecialPageHooksHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-08T12:10:07Z",
+      "side": 1,
+      "message": "wb needs quotes!",
+      "revId": "b492854cf7de10a6a015f1098d977ccf9c562c33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
