@@ -2,10 +2,11 @@
 
 namespace Wikibase\Lib\Test;
 
-use Wikibase\Lib\WikibaseContentLanguages;
+use MediaWikiTestCase;
+use Wikibase\Lib\MediaWikiContentLanguages;
 
 /**
- * @covers Wikibase\Lib\WikibaseContentLanguages
+ * @covers Wikibase\Lib\MediaWikiContentLanguages
  *
  * @group WikibaseLib
  * @group Wikibase
@@ -13,10 +14,10 @@ use Wikibase\Lib\WikibaseContentLanguages;
  * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
-class WikibaseContentLanguagesTest extends \MediaWikiTestCase {
+class MediaWikiContentLanguagesTest extends MediaWikiTestCase {
 
 	public function testGetLanguages() {
-		$wbContentLanguages = new WikibaseContentLanguages();
+		$wbContentLanguages = new MediaWikiContentLanguages();
 		$result = $wbContentLanguages->getLanguages();
 
 		$this->assertInternalType( 'array', $result );

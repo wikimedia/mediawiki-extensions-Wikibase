@@ -10,7 +10,7 @@ use Language;
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
  */
-class WikibaseContentLanguages implements ContentLanguages {
+class MediaWikiContentLanguages implements ContentLanguages {
 
 	/**
 	 * @var string[]|null Array of language codes => language names.

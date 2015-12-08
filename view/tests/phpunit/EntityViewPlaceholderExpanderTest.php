@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\WikibaseContentLanguages;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -68,7 +68,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			$idParser,
 			$entityRevisionLookup,
 			$userLanguages,
-			new WikibaseContentLanguages(),
+			new MediaWikiContentLanguages(),
 			$languageNameLookup
 		);
 	}

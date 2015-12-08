@@ -59,7 +59,7 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\WikibaseContentLanguages;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
@@ -927,10 +927,10 @@ final class WikibaseClient {
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
 	 *
-	 * @return WikibaseContentLanguages
+	 * @return MediaWikiContentLanguages
 	 */
 	public function getTermsLanguages() {
-		return new WikibaseContentLanguages();
+		return new MediaWikiContentLanguages();
 	}
 
 	/**

@@ -10,7 +10,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Repo\Interactors\TermSearchResult;
-use Wikibase\Lib\WikibaseContentLanguages;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 
@@ -56,7 +56,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		parent::__construct( 'ItemDisambiguation', '', true );
 
 		// @todo inject this
-		$this->contentLanguages = new WikibaseContentLanguages();
+		$this->contentLanguages = new MediaWikiContentLanguages();
 
 		// @todo make this configurable
 		$this->limit = 100;
