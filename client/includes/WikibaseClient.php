@@ -670,10 +670,11 @@ final class WikibaseClient {
 		global $wgLang;
 		StubObject::unstub( $wgLang );
 
+		$labelDescriptionLookupFactory = $this->getLanguageFallbackLabelDescriptionLookupFactory();
 		$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
 
 		return new LanguageLinkBadgeDisplay(
-			$this->getEntityLookup(),
+			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $wgLang ),
 			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
 			$wgLang
 		);
