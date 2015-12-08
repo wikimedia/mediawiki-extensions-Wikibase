@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hosseinblue"
+		]
+	},
+	"wikibase-edit": "دۀسکاری",
+	"wikibase-add": "اضافۀکردن",
+	"wikibase-label-empty": "هیچ نام مستعاری تعریف نشده است",
+	"wikibase-description-empty": "توضیحاتی تعریف نشده است.",
+	"wikibase-sitelinks-special": "سایتۀلئ تر",
+	"wikibase-aliases-empty": "هیچ نام مستعاری تعریف نشده است",
+	"wikibase-statementview-rank-normal": "رتبه معمولی",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|منبع|منابع}}"
+}
