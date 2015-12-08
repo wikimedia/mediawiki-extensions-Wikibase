@@ -118,7 +118,11 @@ class ItemMergeInteractor {
 	 * @throws ItemMergeException if the permission check fails
 	 */
 	private function checkPermission( EntityId $entityId, $permission ) {
-		$status = $this->permissionChecker->getPermissionStatusForEntityId( $this->user, $permission, $entityId );
+		$status = $this->permissionChecker->getPermissionStatusForEntityId(
+			$this->user,
+			$permission,
+			$entityId
+		);
 
 		if ( !$status->isOK() ) {
 			// XXX: This is silly, we really want to pass the Status object to the API error handler.
@@ -128,7 +132,8 @@ class ItemMergeInteractor {
 	}
 
 	/**
-	 * Merges the content of the first item into the second and creates a redirect if the first item is empty after the merge.
+	 * Merges the content of the first item into the second and creates a redirect if the first item
+	 * is empty after the merge.
 	 *
 	 * @param ItemId $fromId
 	 * @param ItemId $toId
@@ -136,13 +141,19 @@ class ItemMergeInteractor {
 	 * @param string|null $summary
 	 * @param bool $bot Mark the edit as bot edit
 	 *
-	 * @return array A list of exactly two EntityRevision objects and a boolean. The first EntityRevision
-	 * object represents the modified source item, the second one represents the modified target item.
-	 * The boolean indicates whether the redirect was successful.
+	 * @return array A list of exactly two EntityRevision objects and a boolean. The first
+	 *  EntityRevision object represents the modified source item, the second one represents the
+	 *  modified target item. The boolean indicates whether the redirect was successful.
 	 *
 	 * @throws ItemMergeException
 	 */
-	public function mergeItems( ItemId $fromId, ItemId $toId, array $ignoreConflicts = array(), $summary = null, $bot = false ) {
+	public function mergeItems(
+		ItemId $fromId,
+		ItemId $toId,
+		array $ignoreConflicts = array(),
+		$summary = null,
+		$bot = false
+	) {
 		$this->checkPermissions( $fromId );
 		$this->checkPermissions( $toId );
 
@@ -202,7 +213,10 @@ class ItemMergeInteractor {
 	 */
 	private function loadEntity( ItemId $itemId ) {
 		try {
-			$revision = $this->entityRevisionLookup->getEntityRevision( $itemId, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$revision = $this->entityRevisionLookup->getEntityRevision(
+				$itemId,
+				EntityRevisionLookup::LATEST_FROM_MASTER
+			);
 
 			if ( !$revision ) {
 				throw new ItemMergeException(
@@ -256,8 +270,8 @@ class ItemMergeInteractor {
 	 * @param string|null $summary
 	 * @param bool $bot
 	 *
-	 * @return array A list of exactly two EntityRevision objects.
-	 * The first one represents the modified source item, the second one represents the modified target item.
+	 * @return array A list of exactly two EntityRevision objects. The first one represents the
+	 *  modified source item, the second one represents the modified target item.
 	 */
 	private function attemptSaveMerge( Item $fromItem, Item $toItem, $summary, $bot ) {
 		$toSummary = $this->getSummary( 'to', $toItem->getId(), $summary );

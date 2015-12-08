@@ -261,7 +261,8 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return EntityContent|null
 	 */
 	public function makeRedirectContent( Title $title, $text = '' ) {
-		throw new MWException( 'EntityContent does not support plain title based redirects. Use makeEntityRedirectContent() instead.' );
+		throw new MWException( 'EntityContent does not support plain title based redirects.'
+			. ' Use makeEntityRedirectContent() instead.' );
 	}
 
 	/**
@@ -374,7 +375,8 @@ abstract class EntityHandler extends ContentHandler {
 			$redirect = $content->getEntityRedirect();
 			return $this->contentCodec->encodeRedirect( $redirect, $format );
 		} else {
-			//TODO: if we have an un-decoded Entity in a DeferredDecodingEntityHolder, just re-use the encoded form.
+			// TODO: If we have an un-decoded Entity in a DeferredDecodingEntityHolder, just re-use
+			// the encoded form.
 			$entity = $content->getEntity();
 			return $this->contentCodec->encodeEntity( $entity, $format );
 		}
@@ -401,7 +403,12 @@ abstract class EntityHandler extends ContentHandler {
 
 			return $this->makeEntityRedirectContent( $redirect );
 		} else {
-			$holder = new DeferredDecodingEntityHolder( $this->contentCodec, $blob, $format, $this->getEntityType() );
+			$holder = new DeferredDecodingEntityHolder(
+				$this->contentCodec,
+				$blob,
+				$format,
+				$this->getEntityType()
+			);
 			$entityContent = $this->makeEntityContent( $holder );
 
 			return $entityContent;
