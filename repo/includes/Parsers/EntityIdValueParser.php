@@ -4,10 +4,9 @@ namespace Wikibase\Repo\Parsers;
 
 use ValueParsers\ParseException;
 use ValueParsers\StringValueParser;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityIdValue;
 
 /**
  * Parser that parses entity id strings into EntityIdValue objects.
@@ -43,8 +42,8 @@ class EntityIdValueParser extends StringValueParser {
 	 *
 	 * @param string $value
 	 *
-	 * @return EntityId
 	 * @throws ParseException
+	 * @return EntityIdValue
 	 */
 	protected function stringParse( $value ) {
 		try {
