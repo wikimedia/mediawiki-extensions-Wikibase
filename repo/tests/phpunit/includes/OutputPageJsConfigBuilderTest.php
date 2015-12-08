@@ -32,8 +32,7 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 			array(
 				'Q12' => 'wb-badge-goodarticle',
 				'Q42' => 'wb-badge-featuredarticle'
-			),
-			true
+			)
 		);
 
 		$expected = array(
