@@ -23,7 +23,7 @@ use ValueParsers\ValueParser;
  */
 class YearMonthTimeParser extends StringValueParser {
 
-	const FORMAT_NAME = 'yearmonth';
+	const FORMAT_NAME = 'year-month';
 
 	/**
 	 * @var int[]

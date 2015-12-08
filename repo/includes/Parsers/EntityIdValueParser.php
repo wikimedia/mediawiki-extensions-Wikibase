@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  */
 class EntityIdValueParser extends StringValueParser {
 
-	const FORMAT_NAME = 'entity-id';
+	const FORMAT_NAME = 'entity-id-value';
 
 	/**
 	 * @var EntityIdParser
