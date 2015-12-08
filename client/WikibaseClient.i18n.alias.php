@@ -33,6 +33,12 @@ $specialPageAliases['bgn'] = array(
 	'UnconnectedPages' => array( 'وسل_نه_بوته_ئین_تاکدیمان' ),
 );
 
+/** Czech (čeština) */
+$specialPageAliases['cs'] = array(
+	'UnconnectedPages' => array( 'Nepropojené_stránky' ),
+	'PagesWithBadges' => array( 'Stránky_s_odznaky' ),
+);
+
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
 	'UnconnectedPages' => array( 'Nicht_verbundene_Seiten' ),

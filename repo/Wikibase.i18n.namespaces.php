@@ -64,6 +64,20 @@ $namespaceNames['be-tarask'] = array(
 	WB_NS_QUERY_TALK => 'Абмеркаваньне_запыту',
 );
 
+$namespaceNames['cs'] = array(
+	WB_NS_DATA      => 'Data',           // legacy
+	WB_NS_DATA_TALK => 'Diskuse k datům', // legacy
+
+	WB_NS_ITEM      => 'Položka',
+	WB_NS_ITEM_TALK => 'Diskuse k položce',
+
+	WB_NS_PROPERTY      => 'Vlastnost',
+	WB_NS_PROPERTY_TALK => 'Diskuse k vlastnosti',
+
+	WB_NS_QUERY      => 'Dotaz',
+	WB_NS_QUERY_TALK => 'Diskuse k dotazu',
+);
+
 $namespaceNames['de'] = array(
 	WB_NS_DATA      => 'Daten',           // legacy
 	WB_NS_DATA_TALK => 'Datendiskussion', // legacy
