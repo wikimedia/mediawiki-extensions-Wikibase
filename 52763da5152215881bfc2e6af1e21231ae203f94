@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_b52f2385",
+        "filename": "lib/includes/StaticContentLanguages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T09:56:59Z",
+      "side": 1,
+      "message": "A \"map\" suggests this is an associative array, e.g. array( \u0027de-at\u0027 \u003d\u003e \u0027de\u0027 ). But I assume this is not the case. Please rename to $languageCodes.",
+      "revId": "52763da5152215881bfc2e6af1e21231ae203f94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_3553331c",
+        "filename": "lib/includes/UnionContentLanguages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T09:56:59Z",
+      "side": 1,
+      "message": "As before, this is probably not a map.",
+      "revId": "52763da5152215881bfc2e6af1e21231ae203f94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_f53cbbbe",
+        "filename": "lib/includes/UnionContentLanguages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T09:56:59Z",
+      "side": 1,
+      "message": "Why the deferred approach? Why not do this in the constructor? Why not do this simple array_merge right away, without this class?",
+      "revId": "52763da5152215881bfc2e6af1e21231ae203f94",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
