@@ -103,7 +103,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 		$parser = $this->getParser();
 		$frame = $this->getFromFrame( $itemId->getSerialization() );
-		$result = $runner->runPropertyParserFunction( $parser, $frame, array( 'Cat', $this->getMock( 'PPNode' ) ) );
+		$runner->runPropertyParserFunction( $parser, $frame, array( 'Cat', $this->getMock( 'PPNode' ) ) );
 
 		// Still 0 as the entity has been loaded before
 		$this->assertSame( 0, $parser->mExpensiveFunctionCount );
