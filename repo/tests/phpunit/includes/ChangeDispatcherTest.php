@@ -275,7 +275,14 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideGetPendingChanges
 	 */
-	public function testGetPendingChanges( $siteId, $afterId, $batchSize, $batchChunkFactor, array $expectedChanges, $expectedSeen ) {
+	public function testGetPendingChanges(
+		$siteId,
+		$afterId,
+		$batchSize,
+		$batchChunkFactor,
+		array $expectedChanges,
+		$expectedSeen
+	) {
 		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
 
 		$dispatcher = $this->getChangeDispatcher( $coordinator );
