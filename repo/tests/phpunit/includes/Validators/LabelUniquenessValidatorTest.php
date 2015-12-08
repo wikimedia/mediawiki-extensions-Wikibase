@@ -111,11 +111,11 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 			new AliasGroupList()
 		);
 
-		$dupeAliasFingerprint = new Fingerprint(
-			new TermList( array( new Term( 'de', 'good' ) ) ),
-			new TermList(),
-			new AliasGroupList( array( new AliasGroup( 'de', array( 'DUPE' ) ) ) )
-		);
+//		$dupeAliasFingerprint = new Fingerprint(
+//			new TermList( array( new Term( 'de', 'good' ) ) ),
+//			new TermList(),
+//			new AliasGroupList( array( new AliasGroup( 'de', array( 'DUPE' ) ) ) )
+//		);
 
 		return array(
 			'conflicting label' => array( $dupeLabelFingerprint, 'label-conflict' ),
