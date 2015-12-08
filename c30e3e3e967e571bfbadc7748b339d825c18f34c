@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_1c473724",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T16:00:50Z",
+      "side": 1,
+      "message": "Note that we currently use the number of sitelinks and the number of labels. We use the maximum of these two, not a sum or something. See TermSqlIndex::getWeight(). This turned out to be the most useful metric for what we want: Items that are visible and therefor relevant the most, either because they are linked a lot, or because they got so much attention that they have a lot of labels (but no sitelinks, which is the case in e.g. gender items like Q6581072).",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_3c447b1c",
+        "filename": "repo/includes/Hooks/CirrusSearchHookHandlers.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T16:00:50Z",
+      "side": 1,
+      "message": "This is not really \"global state\".",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_fc64a3b0",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T16:00:50Z",
+      "side": 1,
+      "message": "To what does \"Field\" refer to? Doesn\u0027t this have a namespace? Is this a mistake and means \"SearchIndexField\"?",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_7c599300",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T16:00:50Z",
+      "side": 1,
+      "message": "I wonder why this needs a class (!) and is not configuration? Or why is this not simply a part of the CirrusSearchHookHandlers class? What does this additional class give us? It\u0027s all in the same part of the code repository anyway, in WikibaseRepo.",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
