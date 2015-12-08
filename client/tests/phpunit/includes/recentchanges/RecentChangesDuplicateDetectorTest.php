@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\RecentChanges;
 
 use RecentChange;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 
@@ -35,7 +36,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_title' => 'Test',
 				'rc_comment' => 'Testing',
 				'rc_type' => RC_EXTERNAL,
-				'rc_source' => 'wb',
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 11,
 				'rc_this_oldid' => 12,
 				'rc_params' => array(
@@ -54,7 +55,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_title' => 'Test',
 				'rc_comment' => 'Kittens', // ignored
 				'rc_type' => RC_EXTERNAL,
-				'rc_source' => 'wb',
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 1111, // ignored
 				'rc_this_oldid' => 1112, // ignored
 				'rc_params' => array(
@@ -73,7 +74,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_title' => 'Test',
 				'rc_comment' => 'Testing',
 				'rc_type' => RC_EXTERNAL,
-				'rc_source' => 'wb',
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 11,
 				'rc_this_oldid' => 12,
 				'rc_params' => array(
@@ -92,7 +93,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_title' => 'Test',
 				'rc_comment' => 'Testing',
 				'rc_type' => RC_EXTERNAL,
-				'rc_source' => 'wb',
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 11,
 				'rc_this_oldid' => 12,
 				'rc_params' => array(
@@ -111,7 +112,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				'rc_title' => 'Kittens',
 				'rc_comment' => 'Testing',
 				'rc_type' => RC_EXTERNAL,
-				'rc_source' => 'wb',
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 				'rc_last_oldid' => 11,
 				'rc_this_oldid' => 12,
 				'rc_params' => array(
@@ -158,7 +159,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 			'rc_this_oldid' => 0,
 			'rc_last_oldid' => 0,
 			'rc_type' => RC_EXTERNAL,
-			'rc_source' => 'wb',
+			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_patrolled' => false,
 			'rc_ip' => '127.0.0.1',
 			'rc_old_len' => 0,
@@ -190,7 +191,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 			'rc_title' => 'Test',
 			'rc_comment' => 'Testing',
 			'rc_type' => RC_EXTERNAL,
-			'rc_source' => 'wb',
+			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_last_oldid' => 11,
 			'rc_this_oldid' => 12,
 			'rc_params' => array(
@@ -211,7 +212,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 			'rc_title' => 'Test',
 			'rc_comment' => 'Testing',
 			'rc_type' => RC_EXTERNAL,
-			'rc_source' => 'wb',
+			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_last_oldid' => 11,
 			'rc_this_oldid' => 12,
 			'rc_params' => array(

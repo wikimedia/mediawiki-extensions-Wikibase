@@ -164,7 +164,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'rc_timestamp' => $metadata['time'],
 			'rc_log_action' => '',
 			'rc_log_type' => null,
-			'rc_source' => 'wb',
+			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_deleted' => false,
 		);
 
@@ -187,7 +187,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'rc_timestamp' => '20150606050505',
 			'rc_log_action' => '',
 			'rc_log_type' => null,
-			'rc_source' => 'wb',
+			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_deleted' => false,
 		);
 

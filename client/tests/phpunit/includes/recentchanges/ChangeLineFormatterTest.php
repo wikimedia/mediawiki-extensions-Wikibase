@@ -12,6 +12,7 @@ use Title;
 use User;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 
@@ -433,7 +434,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'rc_this_oldid' => $title->getLatestRevID(),
 			'rc_last_oldid' => $title->getLatestRevID(),
 			'rc_type' => RC_EXTERNAL,
-			'rc_source' => 'wb',
+			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_patrolled' => true,
 			'rc_ip' => '127.0.0.1',
 			'rc_old_len' => 123,
