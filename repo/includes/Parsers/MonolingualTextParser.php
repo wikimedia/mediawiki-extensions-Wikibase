@@ -18,7 +18,7 @@ use ValueParsers\StringValueParser;
  */
 class MonolingualTextParser extends StringValueParser {
 
-	const FORMAT_NAME = 'monolingualtext';
+	const FORMAT_NAME = 'monolingual-text';
 
 	/**
 	 * @see StringValueParser::stringParse

@@ -19,7 +19,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
  */
 class EntityIdValueParser extends StringValueParser {
 
-	const FORMAT_NAME = 'entity-id';
+	const FORMAT_NAME = 'entity-id-value';
 
 	/**
 	 * @var EntityIdParser
