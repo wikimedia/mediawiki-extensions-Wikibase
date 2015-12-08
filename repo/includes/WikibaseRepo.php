@@ -59,7 +59,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\WikibaseContentLanguages;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Repo\Interactors\TermIndexSearchInteractor;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
@@ -1362,7 +1362,7 @@ class WikibaseRepo {
 
 	private function getMonolingualTextLanguages() {
 		if ( $this->monolingualTextLanguages === null ) {
-			$this->monolingualTextLanguages = new WikibaseContentLanguages();
+			$this->monolingualTextLanguages = new MediaWikiContentLanguages();
 		}
 		return $this->monolingualTextLanguages;
 	}
@@ -1373,7 +1373,7 @@ class WikibaseRepo {
 	 * @return ContentLanguages
 	 */
 	public function getTermsLanguages() {
-		return new WikibaseContentLanguages();
+		return new MediaWikiContentLanguages();
 	}
 
 	private function getHtmlSnakFormatterFactory() {
