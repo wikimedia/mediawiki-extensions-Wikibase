@@ -129,9 +129,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 	public function testInjectJob() {
 		$updateRepo = $this->getNewUpdateRepoOnDelete();
 
-		$jobQueueGroupMock = $this->getJobQueueGroupMock( true );
-
-		$updateRepo->injectJob( $jobQueueGroupMock );
+		$updateRepo->injectJob( $this->getJobQueueGroupMock() );
 	}
 
 }
