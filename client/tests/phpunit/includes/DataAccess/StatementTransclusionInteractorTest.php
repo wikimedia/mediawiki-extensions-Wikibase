@@ -105,18 +105,6 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param EntityUsage[] $expected
-	 * @param EntityUsage[] $actual
-	 * @param string $message
-	 */
-	private function assertSameUsages( array $expected, array $actual, $message = '' ) {
-		$expected = $this->getUsageStrings( $expected );
-		$actual = $this->getUsageStrings( $actual );
-
-		$this->assertEquals( $expected, $actual, $message );
-	}
-
-	/**
 	 * @param EntityUsage[] $usages
 	 *
 	 * @return string[]
