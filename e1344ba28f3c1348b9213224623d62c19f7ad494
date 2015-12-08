@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb807a7_baedd0b6",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2015-12-08T09:06:51Z",
+      "side": 1,
+      "message": "nasty nesting",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
