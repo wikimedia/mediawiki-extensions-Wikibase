@@ -98,7 +98,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 				false
 			),
 			array(
-				array( 'rc_type != 5' ),
+				array( 'rc_source != wb' ),
 				array( 'usenewrc' => 0 ),
 				true
 			)
@@ -118,7 +118,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$conds = array();
 		$hookHandler->addWikibaseConditions( $conds, $opts );
 
-		$this->assertEquals( array( 'rc_type != 5' ), $conds );
+		$this->assertEquals( array( 'rc_source != wb' ), $conds );
 	}
 
 	/**

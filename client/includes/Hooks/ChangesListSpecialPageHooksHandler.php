@@ -8,6 +8,7 @@ use IContextSource;
 use RequestContext;
 use User;
 use WebRequest;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Assert\Assert;
 
@@ -184,7 +185,7 @@ class ChangesListSpecialPageHooksHandler {
 		// do not include wikibase changes for activated enhanced watchlist
 		// since we do not support that format yet
 		if ( $this->shouldHideWikibaseChanges( $opts ) ) {
-			$conds[] = 'rc_type != ' . RC_EXTERNAL;
+			$conds[] = 'rc_source != ' . RecentChangeFactory::SRC_WIKIBASE;
 		}
 
 		return $conds;
