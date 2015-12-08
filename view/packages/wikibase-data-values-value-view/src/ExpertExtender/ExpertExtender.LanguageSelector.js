@@ -107,9 +107,8 @@
 				this.$selector.languagesuggester( {
 					source: $.map( this._labels, function( label, code ) {
 						return { code: code, label: label };
-					} ),
-					change: this._onValueChange
-				} );
+					} )
+				} ).on( 'change', this._onValueChange );
 			} else {
 				this.$selector.on( 'eachchange', this._onValueChange );
 			}
@@ -128,7 +127,7 @@
 				// FIXME: This is obviously an access violation, and it's probably not a good idea
 				// to track this through the suggester given the current design.
 				this.$selector.data( 'languagesuggester' )._selectedValue = value;
-				value = this._labels[ value ];
+				value = this._labels[ value ] || value;
 			}
 			this.$selector.val( value );
 		},

@@ -1,5 +1,10 @@
 # ValueView release notes
 
+## 0.15.7 (dev)
+
+* Fixed `jQuery.ui.languagesuggester::getSelectedValue` to return `null` when the user changed the input's value and not yet selected a value.
+* Fixed `jQuery.valueview.ExpertExtender.LanguageSelector` to fall back on the language code when there's no label available.
+
 ## 0.15.6 (2015-11-04)
 
 * Introduced `toggle` and `isCollapsed` methods on `jQuery.ui.toggler`.

@@ -27,6 +27,10 @@ $.widget( 'ui.languagesuggester', PARENT, {
 		var self = this,
 			retVal = PARENT.prototype._initMenu.apply( this, arguments );
 
+		this.element.on( 'languagesuggesterchange', function () {
+			self._selectedValue = null;
+		} );
+
 		$( retVal )
 		.on( 'selected.languagesuggester', function( event, item ) {
 			self._selectedValue = item.getValue();

@@ -74,11 +74,11 @@
 	} );
 
 	QUnit.test( 'returns correct value after initialization', function( assert ) {
-		assert.expect( 1 );
+		assert.expect( 2 );
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
 				getAll: function() { return [ 'en' ]; },
-				getName: function( code ) { return code; }
+				getName: function( code ) { return code === 'en' ? 'en label' : null; }
 			},
 			messageProvider,
 			function() {
@@ -98,6 +98,95 @@
 		}
 
 		assert.equal( languageSelector.getValue(), 'en' );
+		assert.equal( languageSelector.$selector.val(), 'en label en' );
+	} );
+
+	QUnit.test( 'returns correct value after changing it', function( assert ) {
+		assert.expect( 2 );
+		var languageSelector = new ExpertExtender.LanguageSelector(
+			{
+				getAll: function() { return [ 'en', 'fr' ]; },
+				getName: function( code ) { return code === 'en' || code === 'fr' ? code + ' label' : null; }
+			},
+			messageProvider,
+			function() {
+				return 'en';
+			}
+		);
+		var $extender = $( '<div />' );
+
+		languageSelector.init( $extender );
+
+		if ( languageSelector.onInitialShow ) {
+			languageSelector.onInitialShow();
+		}
+
+		if ( languageSelector.draw ) {
+			languageSelector.draw();
+		}
+
+		languageSelector.$selector.val( 'fr' ).trigger( 'keydown' );
+
+		assert.equal( languageSelector.getValue(), 'fr' );
+		assert.equal( languageSelector.$selector.val(), 'fr' );
+	} );
+
+	QUnit.test( 'returns correct value after initialization for value not in ContentLanguages', function( assert ) {
+		assert.expect( 2 );
+		var languageSelector = new ExpertExtender.LanguageSelector(
+			{
+				getAll: function() { return [ 'en' ]; },
+				getName: function( code ) { return code === 'en' ? 'label' : null; }
+			},
+			messageProvider,
+			function() {
+				return 'ar';
+			}
+		);
+		var $extender = $( '<div />' );
+
+		languageSelector.init( $extender );
+
+		if ( languageSelector.onInitialShow ) {
+			languageSelector.onInitialShow();
+		}
+
+		if ( languageSelector.draw ) {
+			languageSelector.draw();
+		}
+
+		assert.equal( languageSelector.getValue(), 'ar' );
+		assert.equal( languageSelector.$selector.val(), 'ar' );
+	} );
+
+	QUnit.test( 'returns correct value after changing it to a value not in ContentLanguages', function( assert ) {
+		assert.expect( 2 );
+		var languageSelector = new ExpertExtender.LanguageSelector(
+			{
+				getAll: function() { return [ 'en', 'ar' ]; },
+				getName: function( code ) { return code === 'en' || code === 'ar' ? code + ' label' : null; }
+			},
+			messageProvider,
+			function() {
+				return 'en';
+			}
+		);
+		var $extender = $( '<div />' );
+
+		languageSelector.init( $extender );
+
+		if ( languageSelector.onInitialShow ) {
+			languageSelector.onInitialShow();
+		}
+
+		if ( languageSelector.draw ) {
+			languageSelector.draw();
+		}
+
+		languageSelector.$selector.val( 'fr' ).trigger( 'keydown' );
+
+		assert.equal( languageSelector.getValue(), 'fr' );
+		assert.equal( languageSelector.$selector.val(), 'fr' );
 	} );
 
 } )(
