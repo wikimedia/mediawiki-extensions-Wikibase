@@ -47,7 +47,12 @@ class OutputPageJsConfigHookHandler {
 	 * @param string $dataRightsText
 	 * @param string[] $badgeItems
 	 */
-	public function __construct( EntityNamespaceLookup $entityNamespaceLookup, $dataRightsUrl, $dataRightsText, array $badgeItems ) {
+	public function __construct(
+		EntityNamespaceLookup $entityNamespaceLookup,
+		$dataRightsUrl,
+		$dataRightsText,
+		array $badgeItems
+	) {
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->outputPageConfigBuilder = new OutputPageJsConfigBuilder();
 		$this->dataRightsUrl = $dataRightsUrl;

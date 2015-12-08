@@ -35,7 +35,11 @@ class ChangeNotifier {
 	 * @param ChangeTransmitter[] $changeTransmitters
 	 */
 	public function __construct( EntityChangeFactory $changeFactory, array $changeTransmitters ) {
-		Assert::parameterElementType( 'Wikibase\Repo\Notifications\ChangeTransmitter', $changeTransmitters, '$changeTransmitters' );
+		Assert::parameterElementType(
+			'Wikibase\Repo\Notifications\ChangeTransmitter',
+			$changeTransmitters,
+			'$changeTransmitters'
+		);
 
 		$this->changeFactory = $changeFactory;
 		$this->changeTransmitters = $changeTransmitters;

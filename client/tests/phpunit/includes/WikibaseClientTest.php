@@ -103,10 +103,15 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'languageLinkSiteGroup', 'wikipedia' );
 
-		$wikibaseClient = new WikibaseClient( $settings, Language::factory( 'en' ), new DataTypeDefinitions(), $this->getSiteStore() );
+		$wikibaseClient = new WikibaseClient(
+			$settings,
+			Language::factory( 'en' ),
+			new DataTypeDefinitions(),
+			$this->getSiteStore()
+		);
 
-		$returnValue = $wikibaseClient->getLangLinkHandler();
-		$this->assertInstanceOf( 'Wikibase\LangLinkHandler', $returnValue );
+		$handler = $wikibaseClient->getLangLinkHandler();
+		$this->assertInstanceOf( 'Wikibase\LangLinkHandler', $handler );
 	}
 
 	public function testGetParserOutputDataUpdaterType() {

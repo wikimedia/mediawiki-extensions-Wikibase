@@ -168,14 +168,16 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @return EntityRdfBuilder
 	 */
 	private function newFullStatementRdfBuilder() {
-		$statementValueBuilder = $this->newSnakBuilder( $this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ? 'full' : 'simple' );
+		$snakBuilder = $this->newSnakBuilder(
+			$this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ? 'full' : 'simple'
+		);
 
-		$statementBuilder = new FullStatementRdfBuilder( $this->vocabulary, $this->writer, $statementValueBuilder );
-		$statementBuilder->setDedupeBag( $this->dedupBag );
-		$statementBuilder->setProduceQualifiers( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) );
-		$statementBuilder->setProduceReferences( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) );
+		$builder = new FullStatementRdfBuilder( $this->vocabulary, $this->writer, $snakBuilder );
+		$builder->setDedupeBag( $this->dedupBag );
+		$builder->setProduceQualifiers( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) );
+		$builder->setProduceReferences( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) );
 
-		return $statementBuilder;
+		return $builder;
 	}
 
 	/**

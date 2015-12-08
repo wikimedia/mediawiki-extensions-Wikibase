@@ -128,19 +128,21 @@ abstract class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
-	 * Loads the revisions specified by the web request and returns them as a 3 element array wrapped in a Status object.
-	 * If any error arises, it will be reported using the status object.
+	 * Loads the revisions specified by the web request and returns them as a three element array
+	 * wrapped in a Status object. If any error arises, it will be reported using the status object.
 	 *
 	 * @since 0.1
 	 *
-	 * @return Status a Status object containing an array with three revisions, ($olderRevision, $newerRevision, $latestRevision)
+	 * @return Status A Status object containing an array with three revisions, array(
+	 * $olderRevision, $newerRevision, $latestRevision ).
 	 * @throws MWException if the page's latest revision cannot be loaded
 	 */
 	protected function loadRevisions() {
 		$latestRevId = $this->getTitle()->getLatestRevID();
 
 		if ( $latestRevId === 0 ) {
-			return Status::newFatal( 'missing-article', $this->getTitle()->getPrefixedText(), '' ); //XXX: better message
+			// XXX: Better message
+			return Status::newFatal( 'missing-article', $this->getTitle()->getPrefixedText(), '' );
 		}
 
 		$latestRevision = Revision::newFromId( $latestRevId );

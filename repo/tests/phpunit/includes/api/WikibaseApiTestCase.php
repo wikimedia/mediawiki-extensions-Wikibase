@@ -199,9 +199,12 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * Arrays with a flat structure are associative and assign values to meaningful keys.
 	 *
 	 * @param array $data the input array.
-	 * @param string $keyField the name of the field in each entry that shall be used as the key in the flat structure
-	 * @param string $valueField the name of the field in each entry that shall be used as the value in the flat structure
-	 * @param bool $multiValue whether the value in the flat structure shall be an indexed array of values instead of a single value.
+	 * @param string $keyField The name of the field in each entry that shall be used as the key in
+	 *  the flat structure.
+	 * @param string $valueField The name of the field in each entry that shall be used as the value
+	 *  in the flat structure.
+	 * @param bool $multiValue Whether the value in the flat structure shall be an indexed array of
+	 *  values instead of a single value.
 	 * @param array $into optional aggregator.
 	 *
 	 * @return array The flat version of $data.
