@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "aeb807a7_ba095036",
+        "filename": "repo/includes/StatementGrouperBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T09:42:05Z",
+      "side": 1,
+      "message": "I see the words, but what do they mean? What \"method\"? This is the constructor. I\u0027m passing in everything that\u0027s needed to construct the grouper. We do this in like a thousand other classes. How is this different?",
+      "parentUuid": "aeb807a7_fa57c85a",
+      "revId": "42f2a97ea4263e8c6e6f7cd6d691141b22d5a559",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_13cacf4a",
         "filename": "repo/includes/StatementGrouperBuilder.php",
         "patchSetId": 3
