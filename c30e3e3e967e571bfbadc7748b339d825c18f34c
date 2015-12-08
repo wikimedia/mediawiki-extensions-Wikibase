@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aeb807a7_1cf5f7c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-08T16:07:53Z",
+      "side": 1,
+      "message": "see my follow up patch :)",
+      "parentUuid": "aeb807a7_1c473724",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_3c447b1c",
         "filename": "repo/includes/Hooks/CirrusSearchHookHandlers.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-08T16:00:50Z",
       "side": 1,
       "message": "This is not really \"global state\".",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_fcfb43b8",
+        "filename": "repo/includes/Hooks/CirrusSearchHookHandlers.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-08T16:07:53Z",
+      "side": 1,
+      "message": "when we add labels, etc., then we will need MediaWikiContentLanguages here",
+      "parentUuid": "aeb807a7_3c447b1c",
       "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "aeb807a7_3c19db27",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-08T16:07:53Z",
+      "side": 1,
+      "message": "oops, will fix",
+      "parentUuid": "aeb807a7_fc64a3b0",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_7c599300",
         "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2015-12-08T16:00:50Z",
       "side": 1,
       "message": "I wonder why this needs a class (!) and is not configuration? Or why is this not simply a part of the CirrusSearchHookHandlers class? What does this additional class give us? It\u0027s all in the same part of the code repository anyway, in WikibaseRepo.",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_1c1c1718",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-08T16:07:53Z",
+      "side": 1,
+      "message": "there fields are pretty simple, but Labels and other stuff is not so simple so it helps to have the split into their own class and have consistent interface.",
+      "parentUuid": "aeb807a7_7c599300",
       "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
