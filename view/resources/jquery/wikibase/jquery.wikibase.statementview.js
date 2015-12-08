@@ -461,11 +461,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 			);
 		}
 
-		if ( this.isInEditMode() || this.options.value ) {
-			this._createReferencesListview(
-				this.options.value ? this.options.value.getReferences().toArray() : []
-			);
-		}
+		this._createReferencesListview(
+			this.options.value ? this.options.value.getReferences().toArray() : []
+		);
 
 		return $.Deferred().resolve().promise();
 	},
