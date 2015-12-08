@@ -1098,21 +1098,25 @@ class ResultBuilder {
 		$value = $status->getValue();
 
 		if ( isset( $value['revision'] ) ) {
-			$revision = $value['revision'];
+			$revisionId = $this->getRevisionId( $value['revision'] );
 
-			if ( $revision instanceof Revision ) {
-				$revisionId = $revision->getId();
-			} elseif ( $revision instanceof EntityRevision ) {
-				$revisionId = $revision->getRevisionId();
-			}
-
-			$this->setValue( $path, 'lastrevid', empty( $revisionId ) ? 0 : $revisionId );
+			$this->setValue( $path, 'lastrevid', $revisionId );
 
 			if ( $oldRevId && $oldRevId === $revisionId ) {
 				// like core's ApiEditPage
 				$this->setValue( $path, 'nochange', true );
 			}
 		}
+	}
+
+	private function getRevisionId( $revision ) {
+		if ( $revision instanceof Revision ) {
+			$revisionId = $revision->getId();
+		} elseif ( $revision instanceof EntityRevision ) {
+			$revisionId = $revision->getRevisionId();
+		}
+
+		return empty( $revisionId ) ? 0 : $revisionId;
 	}
 
 }
