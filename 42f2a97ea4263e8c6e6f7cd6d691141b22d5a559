@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aeb807a7_5a15b49b",
+        "filename": "repo/includes/DispatchingEntityTypeStatementGrouper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T09:26:03Z",
+      "side": 1,
+      "message": "I want this to be an implementation detail. We can rework the code later to take all statements into account if this turns out to be an issue.",
+      "parentUuid": "aeb807a7_738c6b3b",
+      "revId": "42f2a97ea4263e8c6e6f7cd6d691141b22d5a559",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_d3bc37b4",
         "filename": "repo/includes/StatementGrouperBuilder.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "aeb807a7_fa2908e3",
+        "filename": "repo/includes/StatementGrouperBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T09:26:03Z",
+      "side": 1,
+      "message": "I\u0027m sorry? I don\u0027t get this comment.",
+      "parentUuid": "aeb807a7_d3bc37b4",
+      "revId": "42f2a97ea4263e8c6e6f7cd6d691141b22d5a559",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_13cacf4a",
         "filename": "repo/includes/StatementGrouperBuilder.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2015-12-07T20:23:40Z",
       "side": 1,
       "message": "Maybe leave a message in a bottle saying: \nIf you start adding your own filters here and there are more then five already extract this part of code and injected it.",
+      "revId": "42f2a97ea4263e8c6e6f7cd6d691141b22d5a559",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb807a7_ba2390ff",
+        "filename": "repo/includes/StatementGrouperBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-08T09:26:03Z",
+      "side": 1,
+      "message": "I agree that we should add a comment here. But how would an injection work?",
+      "parentUuid": "aeb807a7_13cacf4a",
       "revId": "42f2a97ea4263e8c6e6f7cd6d691141b22d5a559",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
