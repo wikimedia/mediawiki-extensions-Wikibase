@@ -30,11 +30,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityContentFactoryTest extends \MediaWikiTestCase {
 
-	private function supportsRedirects() {
-		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-		return $handler->supportsRedirects();
-	}
-
 	/**
 	 * @dataProvider contentModelsProvider
 	 */
