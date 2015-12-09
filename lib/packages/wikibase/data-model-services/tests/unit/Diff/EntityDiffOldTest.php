@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataModel\Services\Tests\Diff;
 
+use RuntimeException;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -24,7 +25,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 			case Property::ENTITY_TYPE:
 				return Property::newFromType( 'string' );
 			default:
-				throw new \RuntimeException( "unknown entity type: $entityType" );
+				throw new RuntimeException( "unknown entity type: $entityType" );
 		}
 	}
 
