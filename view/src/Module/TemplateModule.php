@@ -54,4 +54,18 @@ EOT;
 		return false; // always use getScript() to acquire JavaScript (even in debug mode)
 	}
 
+	/**
+	 * @see ResourceLoaderModule::getDefinitionSummary
+	 *
+	 * @param ResourceLoaderContext $context
+	 *
+	 * @return array
+	 */
+	public function getDefinitionSummary( ResourceLoaderContext $context ) {
+		$summary = parent::getDefinitionSummary( $context );
+		$summary['mtime'] = (string)filemtime( __DIR__ . '/../../resources/templates.php' );
+
+		return $summary;
+	}
+
 }
