@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_fb96f396",
+        "filename": "repo/includes/DispatchingEntityTypeStatementGrouper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-09T11:23:48Z",
+      "side": 1,
+      "message": "Just use Assert::parameterElementType()",
+      "revId": "ec68bc859628dec49ac466fcd888d369e972f3c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_5bedc721",
+        "filename": "repo/includes/DispatchingEntityTypeStatementGrouper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-09T11:23:48Z",
+      "side": 1,
+      "message": "Is there any guarantee that a StatementList only contains statements for a single Entity? What happens if that assumption is broken?",
+      "revId": "ec68bc859628dec49ac466fcd888d369e972f3c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
