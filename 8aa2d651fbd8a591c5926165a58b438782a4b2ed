@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_9291d954",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-09T23:17:03Z",
+      "side": 1,
+      "message": "how about link to the specific section?\n\nhttp://docs.hhvm.com/hhvm/configuration/INI-settings#feature-flags\n\n(and thanks for fixing the broken link)",
+      "revId": "8aa2d651fbd8a591c5926165a58b438782a4b2ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
