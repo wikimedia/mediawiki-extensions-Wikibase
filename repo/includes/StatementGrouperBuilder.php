@@ -105,12 +105,15 @@ class StatementGrouperBuilder {
 		switch ( $spec['type'] ) {
 			case null:
 				return new NullStatementFilter();
-			case 'dataType':
+			case DataTypeStatementFilter::FILTER_TYPE:
 				$this->requireField( $spec, 'dataTypes' );
 				return new DataTypeStatementFilter( $this->dataTypeLookup, $spec['dataTypes'] );
-			case 'propertySet':
+			case PropertySetStatementFilter::FILTER_TYPE:
 				$this->requireField( $spec, 'propertyIds' );
 				return new PropertySetStatementFilter( $spec['propertyIds'] );
+			// Be aware that this switch statement is a possible violation of the open-closed
+			// principle. When the number of filters grows, please try to extract this in a way that
+			// it can be injected.
 		}
 
 		throw new InvalidArgumentException( 'Unknown filter type: ' . $spec['type'] );
