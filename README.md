@@ -18,7 +18,7 @@ These extensions allow for the creation, maintenance, dissemination, and usage o
 in MediaWiki.
 
 The repo is the extension for the repository. It allows the creation and maintenance of structured
-data. This is being used on [wikidata.org](https://www.wikidata.org)  .
+data. This is being used on [wikidata.org](https://www.wikidata.org).
 
 The client is the extension for the client. It allows several MediaWiki instances to use data provided
 by a Wikidata instance. Usually, you would not use them in a single wiki. This is being used on the
@@ -36,7 +36,7 @@ This package contains three interrelated MediaWiki extensions:
 * WikibaseLib (in the subdirectory lib)
 * Wikibase Client (in the subdirectory client)
 
-If you are running Wikibase with hhvm, you need to enable [zend compat](http://docs.hhvm.com/manual/en/configuration.zend.compat.php)
+If you are running Wikibase with hhvm, you need to enable [zend compat](http://docs.hhvm.com/hhvm/configuration/INI-settings#feature-flags)
 in your php.ini:
 
 ```
@@ -60,6 +60,6 @@ If you want to only have one or the other, then set `$wgEnableWikibaseRepo = fal
 ## The Wikibase software
 
 These extensions are part of the [Wikibase software](http://wikiba.se/) created by the Wikidata team
-for the [Wikidata project](https://meta.wikimedia.org/wiki/Wikidata).
+for the [Wikidata project](https://meta.wikimedia.org/wiki/Special:MyLanguage/Wikidata).
 
-The Wikidata project uses the Wikibase software on its [wikidata.org website](https://www.wikidata.org).
+The Wikidata project uses the Wikibase software on [its website](https://www.wikidata.org).
