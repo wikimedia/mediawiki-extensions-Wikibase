@@ -157,6 +157,24 @@
       "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_bb587b5a",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-09T13:23:21Z",
+      "side": 1,
+      "message": "@thiemo we need to put all the terms (not just label count) into elastic so they can be searched, can do exact matches and display them properly in search.  please, let\u0027s not put all such code into this class.\n\nprobably also things like identifiers would be nice.",
+      "parentUuid": "8ead036b_5b4e279d",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
