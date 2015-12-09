@@ -10,6 +10,7 @@
 	var SUBJECT = wikibase.entityChangers.ReferencesChanger;
 
 	QUnit.test( 'is a function', function( assert ) {
+		assert.expect( 1 );
 		assert.equal(
 			typeof SUBJECT,
 			'function',
@@ -18,10 +19,12 @@
 	} );
 
 	QUnit.test( 'is a constructor', function( assert ) {
+		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'removeReference performs correct API call', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			removeReferences: sinon.spy( function() {
 				return $.Deferred().promise();
@@ -43,6 +46,7 @@
 	} );
 
 	QUnit.test( 'removeReference correctly handles API response', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			removeReferences: sinon.spy( function() {
 				return $.Deferred().resolve( {
@@ -77,6 +81,7 @@
 	} );
 
 	QUnit.test( 'removeReference correctly handles API failures', function( assert ) {
+		assert.expect( 2 );
 		var api = {
 			removeReferences: sinon.spy( function() {
 				return $.Deferred()
@@ -115,6 +120,7 @@
 	} );
 
 	QUnit.test( 'setReference performs correct API call', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			setReference: sinon.spy( function() {
 				return $.Deferred().promise();
@@ -137,6 +143,7 @@
 	} );
 
 	QUnit.test( 'setReference correctly handles API response', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			setReference: sinon.spy( function() {
 				return $.Deferred().resolve( {
@@ -170,6 +177,7 @@
 	} );
 
 	QUnit.test( 'setReference correctly handles API failures', function( assert ) {
+		assert.expect( 2 );
 		var api = {
 			setReference: sinon.spy( function() {
 				return $.Deferred()

@@ -53,6 +53,7 @@
 	} ) );
 
 	QUnit.test( 'Initialize and destroy', function( assert ) {
+		assert.expect( 7 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -99,6 +100,7 @@
 	} );
 
 	QUnit.test( 'is initialized with a value', function( assert ) {
+		assert.expect( 1 );
 		var $node = createReferenceview( {
 				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
 					new wb.datamodel.PropertyNoValueSnak( 'P1' )
@@ -114,6 +116,7 @@
 	} );
 
 	QUnit.test( 'allows to enter new item', function( assert ) {
+		assert.expect( 3 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -139,6 +142,7 @@
 	} );
 
 	QUnit.test( 'allows to stop editing', function( assert ) {
+		assert.expect( 3 );
 		var $node = createReferenceview(),
 			referenceview = $node.data( 'referenceview' );
 
@@ -165,6 +169,7 @@
 	} );
 
 	QUnit.test( 'recognizes initial value', function( assert ) {
+		assert.expect( 1 );
 		var $node = createReferenceview( {
 				value: new wb.datamodel.Reference( new wb.datamodel.SnakList( [
 					new wb.datamodel.PropertyNoValueSnak( 'P1' )

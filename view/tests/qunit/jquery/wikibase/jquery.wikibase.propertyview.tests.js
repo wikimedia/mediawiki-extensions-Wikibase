@@ -42,6 +42,7 @@ QUnit.module( 'jquery.wikibase.propertyview', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 3 );
 	assert.throws(
 		function() {
 			createPropertyview( { value: null } );

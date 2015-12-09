@@ -44,6 +44,7 @@ QUnit.module( 'jquery.wikibase.aliasesview', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 3 );
 	assert.throws(
 		function() {
 			createAliasesview( { value: null } );
@@ -68,6 +69,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 } );
 
 QUnit.test( 'Instantiating tagadata widget on startEditing()', function( assert ) {
+	assert.expect( 1 );
 	var $aliasesview = createAliasesview(),
 		aliasesview = $aliasesview.data( 'aliasesview' );
 
@@ -200,6 +202,7 @@ QUnit.test( 'startEditing() & stopEditing()', 6, function( assert ) {
 } );
 
 QUnit.test( 'isInitialValue()', function( assert ) {
+	assert.expect( 3 );
 	var $aliasesview = createAliasesview(),
 		aliasesview = $aliasesview.data( 'aliasesview' );
 
@@ -226,6 +229,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 } );
 
 QUnit.test( 'setError()', function( assert ) {
+	assert.expect( 1 );
 	var $aliasesview = createAliasesview(),
 		aliasesview = $aliasesview.data( 'aliasesview' );
 
@@ -241,6 +245,7 @@ QUnit.test( 'setError()', function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 3 );
 	var $aliasesview = createAliasesview(),
 		aliasesview = $aliasesview.data( 'aliasesview' ),
 		newValue = null;

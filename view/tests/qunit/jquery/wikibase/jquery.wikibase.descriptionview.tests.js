@@ -43,6 +43,7 @@ QUnit.module( 'jquery.wikibase.descriptionview', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 3 );
 	assert.throws(
 		function() {
 			createDescriptionview( { value: null } );
@@ -103,6 +104,7 @@ QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
 } );
 
 QUnit.test( 'isInitialValue()', function( assert ) {
+	assert.expect( 3 );
 	var $descriptionview = createDescriptionview(),
 		descriptionview = $descriptionview.data( 'descriptionview' );
 
@@ -129,6 +131,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 } );
 
 QUnit.test( 'setError()', function( assert ) {
+	assert.expect( 1 );
 	var $descriptionview = createDescriptionview(),
 		descriptionview = $descriptionview.data( 'descriptionview' );
 
@@ -144,6 +147,7 @@ QUnit.test( 'setError()', function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 3 );
 	var $descriptionview = createDescriptionview(),
 		descriptionview = $descriptionview.data( 'descriptionview' ),
 		newValue = null;

@@ -31,6 +31,7 @@ QUnit.module( 'jquery.wikibase.toolbarbutton', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 2 );
 	var $button = createTestButton(),
 		button = $button.data( 'toolbarbutton' );
 

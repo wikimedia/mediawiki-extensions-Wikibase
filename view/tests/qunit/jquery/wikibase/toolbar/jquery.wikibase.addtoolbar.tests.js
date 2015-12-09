@@ -31,6 +31,7 @@ function createAddtoolbar( options ) {
 }
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 2 );
 	var $addtoolbar = createAddtoolbar(),
 		addtoolbar = $addtoolbar.data( 'addtoolbar' );
 

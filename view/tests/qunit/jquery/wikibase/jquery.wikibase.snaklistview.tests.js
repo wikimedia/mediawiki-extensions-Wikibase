@@ -117,6 +117,7 @@
 	} ) );
 
 	QUnit.test( 'Initialize and destroy', function( assert ) {
+		assert.expect( 8 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -173,6 +174,7 @@
 	} );
 
 	QUnit.test( 'Setting and getting value while not in edit mode', function( assert ) {
+		assert.expect( 5 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -211,6 +213,7 @@
 	} );
 
 	QUnit.test( 'Setting value while in edit mode', function( assert ) {
+		assert.expect( 8 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -266,6 +269,7 @@
 	} );
 
 	QUnit.test( 'isInitialValue()', function( assert ) {
+		assert.expect( 7 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -462,6 +466,7 @@
 	} );
 
 	QUnit.test( 'enterNewItem()', function( assert ) {
+		assert.expect( 5 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -502,6 +507,7 @@
 	} );
 
 	QUnit.test( 'cancelEditing()', function( assert ) {
+		assert.expect( 1 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -520,6 +526,7 @@
 	} );
 
 	QUnit.test( 'Stopping edit mode dropping value', function( assert ) {
+		assert.expect( 6 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -581,6 +588,7 @@
 	} );
 
 	QUnit.test( 'Stopping edit mode retaining value', function( assert ) {
+		assert.expect( 9 );
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -655,6 +663,7 @@
 	} );
 
 	QUnit.test( 'Dis- and enabling', function( assert ) {
+		assert.expect( 5 );
 		var $node = createSnaklistview( snakLists[0] ),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -727,6 +736,7 @@
 	} );
 
 	QUnit.test( 'move()', function( assert ) {
+		assert.expect( 31 );
 		var snakList = new wb.datamodel.SnakList( snakSet );
 
 		/**
@@ -805,6 +815,7 @@
 	} );
 
 	QUnit.test( 'moveUp() and moveDown()', function( assert ) {
+		assert.expect( 14 );
 		var snakList = new wb.datamodel.SnakList( snakSet ),
 			$node,
 			snaklistview;
@@ -852,6 +863,7 @@
 	} );
 
 	QUnit.test( 'singleProperty option', function( assert ) {
+		assert.expect( 10 );
 		var $node = createSnaklistview( snakLists[0], { singleProperty: true } ),
 			snaklistview = $node.data( 'snaklistview' );
 

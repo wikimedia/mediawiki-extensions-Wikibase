@@ -29,6 +29,7 @@
 	} );
 
 	QUnit.test( 'Create', function( assert ) {
+		assert.expect( 1 );
 		var $pageSuggester = newTestPageSuggester();
 
 		assert.ok(

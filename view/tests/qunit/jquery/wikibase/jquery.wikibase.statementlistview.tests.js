@@ -54,6 +54,7 @@ QUnit.module( 'jquery.wikibase.statementlistview', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 3 );
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );
 
@@ -85,6 +86,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 4 );
 	var statementList1 = new wb.datamodel.StatementList( [new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		)] ),
@@ -133,6 +135,7 @@ QUnit.test( 'value()', function( assert ) {
 } );
 
 QUnit.test( 'isEmpty()', function( assert ) {
+	assert.expect( 4 );
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );
 
@@ -177,6 +180,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 } );
 
 QUnit.test( 'enterNewItem', function( assert ) {
+	assert.expect( 4 );
 	var $statementlistview = createStatementlistview(),
 		statementlistview = $statementlistview.data( 'statementlistview' );
 

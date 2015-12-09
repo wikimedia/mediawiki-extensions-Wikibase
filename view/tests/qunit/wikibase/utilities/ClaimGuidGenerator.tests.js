@@ -8,6 +8,7 @@
 QUnit.module( 'wikibase.utilities.ClaimGuidGenerator' );
 
 QUnit.test( 'Validate GUID layout', function( assert ) {
+	assert.expect( 1 );
 	var generator = new wb.utilities.ClaimGuidGenerator( 'q79' );
 
 	assert.ok(

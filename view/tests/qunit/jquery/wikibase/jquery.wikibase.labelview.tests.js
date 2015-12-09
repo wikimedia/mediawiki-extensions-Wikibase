@@ -41,6 +41,7 @@ QUnit.module( 'jquery.wikibase.labelview', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 3 );
 	assert.throws(
 		function() {
 			createLabelview( { value: null } );
@@ -105,6 +106,7 @@ QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
 } );
 
 QUnit.test( 'isInitialValue()', function( assert ) {
+	assert.expect( 3 );
 	var $labelview = createLabelview(),
 		labelview = $labelview.data( 'labelview' );
 
@@ -131,6 +133,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 } );
 
 QUnit.test( 'setError()', function( assert ) {
+	assert.expect( 1 );
 	var $labelview = createLabelview(),
 		labelview = $labelview.data( 'labelview' );
 
@@ -146,6 +149,7 @@ QUnit.test( 'setError()', function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 3 );
 	var $labelview = createLabelview(),
 		labelview = $labelview.data( 'labelview' ),
 		newValue = null;
