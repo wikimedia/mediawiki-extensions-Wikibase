@@ -63,28 +63,6 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	}
 
 	/**
-	 * @param SiteLink $a
-	 * @param SiteLink $b
-	 *
-	 * @return int
-	 */
-	public function compareSiteLinks( SiteLink $a, SiteLink $b ) {
-		$siteComp = strcmp( $a->getSiteId(), $b->getSiteId() );
-
-		if ( $siteComp !== 0 ) {
-			return $siteComp;
-		}
-
-		$pageComp = strcmp( $a->getPageName(), $b->getPageName() );
-
-		if ( $pageComp !== 0 ) {
-			return $pageComp;
-		}
-
-		return 0;
-	}
-
-	/**
 	 * @see SiteLinkStore::saveLinksOfItem
 	 *
 	 * @since 0.1
@@ -98,8 +76,8 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 		$newLinks = $item->getSiteLinkList()->toArray();
 		$oldLinks = $this->getSiteLinksForItem( $item->getId() );
 
-		$linksToInsert = array_udiff( $newLinks, $oldLinks, array( $this, 'compareSiteLinks' ) );
-		$linksToDelete = array_udiff( $oldLinks, $newLinks, array( $this, 'compareSiteLinks' ) );
+		$linksToInsert = $this->diffSiteLinks( $newLinks, $oldLinks );
+		$linksToDelete = $this->diffSiteLinks( $oldLinks, $newLinks );
 
 		if ( !$linksToInsert && !$linksToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": links did not change, returning." );
@@ -124,6 +102,28 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 		$this->releaseConnection( $dbw );
 
 		return $ok;
+	}
+
+	private function diffSiteLinks( array $firstList, array $secondList ) {
+		return array_udiff(
+			$firstList,
+			$secondList,
+			function( SiteLink $a, SiteLink $b ) {
+				$siteComp = strcmp( $a->getSiteId(), $b->getSiteId() );
+
+				if ( $siteComp !== 0 ) {
+					return $siteComp;
+				}
+
+				$pageComp = strcmp( $a->getPageName(), $b->getPageName() );
+
+				if ( $pageComp !== 0 ) {
+					return $pageComp;
+				}
+
+				return 0;
+			}
+		);
 	}
 
 	/**
