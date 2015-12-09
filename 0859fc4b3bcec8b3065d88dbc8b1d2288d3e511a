@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_2144551c",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-12-09T18:32:14Z",
+      "side": 1,
+      "message": "Some terrible CP there",
+      "parentUuid": "8ead036b_61fc8dd6",
+      "revId": "0859fc4b3bcec8b3065d88dbc8b1d2288d3e511a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_81d4294d",
         "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-09T18:30:02Z",
       "side": 1,
       "message": "I see no test using Q666 and checking that it gets treated properly",
+      "revId": "0859fc4b3bcec8b3065d88dbc8b1d2288d3e511a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_61424d15",
+        "filename": "repo/tests/phpunit/includes/Interactors/ItemMergeInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2015-12-09T18:32:14Z",
+      "side": 1,
+      "message": "See https://gerrit.wikimedia.org/r/#/c/257003/2/repo/tests/phpunit/includes/Interactors/RedirectCreationInteractorTest.php\n\nThis has nothing to do with merges.\nI could remove this isDeleted!",
+      "parentUuid": "8ead036b_81d4294d",
       "revId": "0859fc4b3bcec8b3065d88dbc8b1d2288d3e511a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
