@@ -4,6 +4,8 @@ namespace Tests\Wikibase\DataModel;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use SplFileInfo;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -66,7 +68,7 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 		/**
 		 * @var SplFileInfo $fileInfo
 		 */
-		foreach ( new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $dir ) ) as $fileInfo ) {
+		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $dir ) ) as $fileInfo ) {
 			if ( $fileInfo->getExtension() === 'json' ) {
 				$argumentLists[] = array(
 					$fileInfo->getFilename(),
