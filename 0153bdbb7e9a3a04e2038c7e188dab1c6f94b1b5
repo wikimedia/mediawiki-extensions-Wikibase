@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_1b48af8b",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T13:24:08Z",
+      "side": 1,
+      "message": "Same question as in https://gerrit.wikimedia.org/r/#/c/256023/11/repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php : Why does this need a class and is not configuration? Or why is this not simply a part of the CirrusSearchHookHandlers class where it is used? What does this additional class give us?",
+      "revId": "0153bdbb7e9a3a04e2038c7e188dab1c6f94b1b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
