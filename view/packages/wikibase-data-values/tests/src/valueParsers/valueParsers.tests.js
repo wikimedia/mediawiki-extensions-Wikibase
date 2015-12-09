@@ -91,7 +91,7 @@
 		 *
 		 * @since 0.1
 		 *
-		 * @param {QUnit} assert
+		 * @param {QUnit.assert} assert
 		 */
 		testParse: function( assert ) {
 			var parseArguments = this.getParseArguments(),

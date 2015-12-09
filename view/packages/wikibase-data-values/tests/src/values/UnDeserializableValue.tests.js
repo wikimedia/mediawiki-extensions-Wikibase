@@ -44,7 +44,7 @@ define( [
 		 *
 		 * @since 0.1
 		 *
-		 * @param {Function} assert
+		 * @param {QUnit.assert} assert
 		 */
 		testGetStructure: function( assert ) {
 			var instances = this.getInstances(),

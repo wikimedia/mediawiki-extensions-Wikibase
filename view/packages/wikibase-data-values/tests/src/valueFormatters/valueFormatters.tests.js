@@ -84,7 +84,7 @@
 		 * Tests the format method.
 		 * @since 0.1
 		 *
-		 * @param {Function} assert
+		 * @param {QUnit.assert} assert
 		 */
 		testFormat: function( assert ) {
 			var formatArguments = this.getFormatArguments(),

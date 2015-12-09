@@ -63,7 +63,7 @@ define( [
 		 *
 		 * @since 0.7
 		 *
-		 * @param {QUnit} assert
+		 * @param {QUnit.assert} assert
 		 */
 		testConstructorThrowsException: function( assert ) {
 			var invalidTimestamps = [
@@ -103,7 +103,7 @@ define( [
 		 *
 		 * @since 0.7
 		 *
-		 * @param {QUnit} assert
+		 * @param {QUnit.assert} assert
 		 */
 		testNotEquals: function( assert ) {
 			var timeValue1 = new dv.TimeValue( '2015-12-30T00:00:00Z' ),
@@ -120,7 +120,7 @@ define( [
 		 *
 		 * @since 0.7
 		 *
-		 * @param {QUnit} assert
+		 * @param {QUnit.assert} assert
 		 */
 		testPad: function( assert ) {
 			var testCases = {
