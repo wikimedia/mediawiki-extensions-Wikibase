@@ -108,11 +108,18 @@ class ValidatorBuilders {
 	}
 
 	/**
-	 * @param string $entityType
+	 * @return ValueValidator[]
+	 */
+	public function buildEntityValidators() {
+		return $this->getEntityValidators();
+	}
+
+	/**
+	 * @param string|null $entityType
 	 *
 	 * @return ValueValidator[]
 	 */
-	private function getEntityValidators( $entityType ) {
+	private function getEntityValidators( $entityType = null ) {
 		$validators = array();
 
 		//NOTE: The DataValue in question is going to be an instance of EntityId!
