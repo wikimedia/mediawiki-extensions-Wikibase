@@ -243,7 +243,7 @@ return call_user_func( function() {
 		'VT:wikibase-entityid' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				return $factory->buildItemValidators();
+				return $factory->buildEntityValidators();
 			},
 			'parser-factory-callback' => $newEntityIdParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
@@ -260,6 +260,18 @@ return call_user_func( function() {
 				return new EntityIdRdfBuilder( $vocab, $tracker );
 			},
 		),
+		'PT:wikibase-item' => array(
+			'validator-factory-callback' => function() {
+				$factory = WikibaseRepo::getDefaultValidatorBuilders();
+				return $factory->buildItemValidators();
+			},
+		),
+		'PT:wikibase-property' => array(
+			'validator-factory-callback' => function() {
+				$factory = WikibaseRepo::getDefaultValidatorBuilders();
+				return $factory->buildPropertyValidators();
+			},
+		)
 	);
 
 } );

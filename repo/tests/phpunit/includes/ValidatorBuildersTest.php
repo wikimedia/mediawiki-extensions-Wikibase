@@ -72,8 +72,15 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'wikibase-item', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
 			array( 'wikibase-item', new EntityIdValue( new PropertyId( 'p8' ) ), false, 'not an item' ),
 
+			// wikibase-property
 			array( 'wikibase-property', new EntityIdValue( new PropertyId( 'p8' ) ), true, 'existing entity' ),
 			array( 'wikibase-property', new EntityIdValue( new ItemId( 'q8' ) ), false, 'not a property' ),
+
+			// generic wikibase entity
+			array( 'wikibase-entity', new EntityIdValue( new PropertyId( 'p8' ) ), true, 'existing entity' ),
+			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'q8' ) ), true, 'existing entity' ),
+			array( 'wikibase-entity', new EntityIdValue( new ItemId( 'q3' ) ), false, 'missing entity' ),
+			array( 'wikibase-entity', new StringValue( 'q8' ), false, 'Expected EntityId, StringValue supplied' ),
 
 			//commonsMedia
 			array( 'commonsMedia', 'Foo.jpg', false, 'StringValue expected, string supplied' ),
@@ -269,6 +276,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			'string'            => array( $builders, 'buildStringValidators' ),
 			'time'              => array( $builders, 'buildTimeValidators' ),
 			'url'               => array( $builders, 'buildUrlValidators' ),
+			'wikibase-entity'   => array( $builders, 'buildEntityValidators' ),
 			'wikibase-item'     => array( $builders, 'buildItemValidators' ),
 			'wikibase-property' => array( $builders, 'buildPropertyValidators' ),
 		);
