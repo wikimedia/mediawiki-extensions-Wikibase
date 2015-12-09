@@ -17,15 +17,8 @@ use Wikibase\View\Module\TemplateModule;
 class TemplateModuleTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetScript() {
-		$context = $this->getMockBuilder( 'ResourceLoaderContext' )
-			->disableOriginalConstructor()
-			->getMock();
-		$context->expects( $this->any() )
-			->method( 'getLanguage' )
-			->will( $this->returnValue( 'en' ) );
-
 		$instance = new TemplateModule();
-		$script = $instance->getScript( $context );
+		$script = $instance->getScript( $this->getResourceLoaderContext() );
 		$this->assertInternalType( 'string', $script );
 		$this->assertContains( 'wbTemplates', $script );
 		$this->assertContains( 'set( {', $script );
@@ -34,6 +27,36 @@ class TemplateModuleTest extends PHPUnit_Framework_TestCase {
 	public function testSupportsURLLoading() {
 		$instance = new TemplateModule();
 		$this->assertFalse( $instance->supportsURLLoading() );
+	}
+
+	public function testGetDefinitionSummary() {
+		$context = $this->getResourceLoaderContext();
+		$file = __DIR__ . '/../../../resources/templates.php';
+
+		$instance = new TemplateModule();
+		$oldSummary = $instance->getDefinitionSummary( $context );
+		$this->assertInternalType( 'array', $oldSummary );
+		$this->assertInternalType( 'string', $oldSummary['mtime'] );
+
+		if ( !is_writable( $file ) || !touch( $file, mt_rand( 0, time() ) ) ) {
+			$this->markTestSkipped( "Can't test the modified hash, if we can't touch the file" );
+		}
+
+		clearstatcache( $file );
+		$newSummary = $instance->getDefinitionSummary( $context );
+
+		$this->assertNotEquals( $oldSummary['mtime'], $newSummary['mtime'] );
+	}
+
+	private function getResourceLoaderContext() {
+		$context = $this->getMockBuilder( 'ResourceLoaderContext' )
+			->disableOriginalConstructor()
+			->getMock();
+		$context->expects( $this->any() )
+			->method( 'getLanguage' )
+			->will( $this->returnValue( 'en' ) );
+
+		return $context;
 	}
 
 }
