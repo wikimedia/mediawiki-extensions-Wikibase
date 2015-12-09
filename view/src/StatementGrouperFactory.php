@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo;
+namespace Wikibase\View;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -38,7 +38,7 @@ use Wikibase\DataModel\Statement\StatementFilter;
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */
-class StatementGrouperBuilder {
+class StatementGrouperFactory {
 
 	/**
 	 * @var array[]
@@ -60,19 +60,16 @@ class StatementGrouperBuilder {
 	}
 
 	/**
-	 * @throws InvalidArgumentException
+	 * @param $entityType
+	 *
 	 * @return StatementGrouper
 	 */
-	public function getStatementGrouper() {
-		$groupers = array();
-
-		foreach ( $this->specifications as $entityType => $filterSpecs ) {
-			$groupers[$entityType] = $filterSpecs === null
-				? new NullStatementGrouper()
-				: $this->newFilteringStatementGrouper( $filterSpecs );
+	public function getStatementGrouper( $entityType ) {
+		if ( !isset( $this->specifications[$entityType] ) ) {
+			return new NullStatementGrouper();
 		}
 
-		return new DispatchingEntityTypeStatementGrouper( $groupers );
+		return $this->newFilteringStatementGrouper( $this->specifications[$entityType] );
 	}
 
 	/**

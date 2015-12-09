@@ -27,7 +27,7 @@ return call_user_func( function() {
 
 		'entityNamespaces' => array(),
 
-		// See StatementGrouperBuilder for an example.
+		// See StatementGrouperFactory for an example.
 		'statementSections' => array(),
 
 		// Define constraints for multilingual terms (such as labels, descriptions and aliases).

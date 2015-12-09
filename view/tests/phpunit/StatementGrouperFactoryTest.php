@@ -5,22 +5,22 @@ namespace Wikibase\Test;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Repo\StatementGrouperBuilder;
+use Wikibase\View\StatementGrouperFactory;
 
 /**
- * @covers Wikibase\Repo\StatementGrouperBuilder
+ * @covers Wikibase\View\StatementGrouperBuilder
  *
  * @group Wikibase
  *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
-class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
+class StatementGrouperFactoryTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param array[] $specifications
 	 *
-	 * @return StatementGrouperBuilder
+	 * @return StatementGrouperFactory
 	 */
 	private function newInstance( array $specifications ) {
 		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
@@ -29,7 +29,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( true ) );
 
-		return new StatementGrouperBuilder( $specifications, $lookup );
+		return new StatementGrouperFactory( $specifications, $lookup );
 	}
 
 	/**
@@ -43,8 +43,8 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 
 	public function testAcceptsEmptyArray() {
 		$builder = $this->newInstance( array() );
-		$grouper = $builder->getStatementGrouper();
-		$this->assertInstanceOf( 'Wikibase\Repo\DispatchingEntityTypeStatementGrouper', $grouper );
+		$grouper = $builder->getStatementGrouper( 'item' );
+		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper', $grouper );
 	}
 
 	public function testAcceptsNullGrouper() {
@@ -53,7 +53,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 		$builder = $this->newInstance( array(
 			'item' => null,
 		) );
-		$grouper = $builder->getStatementGrouper();
+		$grouper = $builder->getStatementGrouper( 'item' );
 		$groups = $grouper->groupStatements( $statements );
 
 		$this->assertSame( array( 'statements' => $statements ), $groups );
@@ -67,7 +67,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 				'default' => null,
 			)
 		) );
-		$grouper = $builder->getStatementGrouper();
+		$grouper = $builder->getStatementGrouper( 'item' );
 		$groups = $grouper->groupStatements( $statements );
 
 		$this->assertEquals( array( 'default' => $statements ), $groups );
@@ -81,7 +81,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 				'custom' => array( 'type' => null ),
 			)
 		) );
-		$grouper = $builder->getStatementGrouper();
+		$grouper = $builder->getStatementGrouper( 'item' );
 		$groups = $grouper->groupStatements( $statements );
 
 		$this->assertEquals( array(
@@ -97,7 +97,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 			)
 		) );
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$builder->getStatementGrouper();
+		$builder->getStatementGrouper( 'item' );
 	}
 
 	public function testDataTypeFilter() {
@@ -108,7 +108,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 				'custom' => array( 'type' => 'dataType', 'dataTypes' => array( 'string' ) ),
 			)
 		) );
-		$grouper = $builder->getStatementGrouper();
+		$grouper = $builder->getStatementGrouper( 'item' );
 		$groups = $grouper->groupStatements( $statements );
 
 		$this->assertEquals( array(
@@ -124,7 +124,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 			)
 		) );
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$builder->getStatementGrouper();
+		$builder->getStatementGrouper( 'item' );
 	}
 
 	public function testPropertySetFilter() {
@@ -135,7 +135,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 				'custom' => array( 'type' => 'propertySet', 'propertyIds' => array( 'P1' ) ),
 			)
 		) );
-		$grouper = $builder->getStatementGrouper();
+		$grouper = $builder->getStatementGrouper( 'item' );
 		$groups = $grouper->groupStatements( $statements );
 
 		$this->assertEquals( array(
@@ -151,7 +151,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 			)
 		) );
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$builder->getStatementGrouper();
+		$builder->getStatementGrouper( 'item' );
 	}
 
 }
