@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_7baa0384",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-09T11:33:09Z",
+      "side": 1,
+      "message": "Splitting these into separate classes is probably overkill - the code that is now in these classes could just be in separate functions here. But it\u0027s not a problem.",
+      "revId": "0a1074417005b90e5b4889b3fd1d6b6a39e50bb5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
