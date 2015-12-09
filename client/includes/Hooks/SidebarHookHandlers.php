@@ -70,26 +70,14 @@ class SidebarHookHandlers {
 	}
 
 	public static function newFromGlobalState() {
-		global $wgLang;
-		StubUserLang::unstub( $wgLang );
-
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
 		$settings = $wikibaseClient->getSettings();
-
-		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
-
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
 
-		$badgeDisplay = new LanguageLinkBadgeDisplay(
-			$entityLookup,
-			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
-			$wgLang
-		);
-
 		return new SidebarHookHandlers(
-			$namespaceChecker,
-			$badgeDisplay,
+			$wikibaseClient->getNamespaceChecker(),
+			$wikibaseClient->getLanguageLinkBadgeDisplay(),
 			$wikibaseClient->getOtherProjectsSidebarGeneratorFactory(),
 			$settings->getSetting( 'otherProjectsLinksBeta' ),
 			$settings->getSetting( 'otherProjectsLinksByDefault' )

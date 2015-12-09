@@ -11,6 +11,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -27,49 +28,32 @@ use Wikibase\Test\MockRepository;
  */
 class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 
-	private function getItems() {
-		$items = array();
-
-		$item = new Item( new ItemId( 'Q1' ) );
-		$links = $item->getSiteLinkList();
-		$links->addNewSiteLink( 'dewiki', 'Georg Friedrich Haendel' );
-		$links->addNewSiteLink( 'nlwiki', 'Georg Friedrich Haendel' );
-		$links->addNewSiteLink( 'enwiki', 'George Frideric Handel', array( new ItemId( 'Q3' ), new ItemId( 'Q2' ) ) );
-		$items[] = $item;
-
-		$item = new Item( new ItemId( 'Q21' ) );
-		$links = $item->getSiteLinkList();
-		$links->addNewSiteLink( 'dewiki', 'Benutzer:Testbenutzer' );
-		$links->addNewSiteLink( 'enwiki', 'User:Testuser', array( new ItemId( 'Q3' ), new ItemId( 'Q4' ) ) );
-		$items[] = $item;
-
-		$item = new Item( new ItemId( 'Q3' ) );
-		$item->setLabel( 'en', 'Good article' );
-		$item->setLabel( 'de', 'Lesenswerter Artikel' );
-		$items[] = $item;
-
-		$item = new Item( new ItemId( 'Q4' ) );
-		$item->setLabel( 'en', 'Featured article' );
-		$item->setLabel( 'de', 'Exzellenter Artikel' );
-		$items[] = $item;
-
-		return $items;
-	}
-
 	/**
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	private function getLanguageLinkBadgeDisplay() {
-		$entityLookup = new MockRepository();
+		$labelLookup = $this->getMockBuilder(
+				'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup'
+			)
+			->disableOriginalConstructor()
+			->getMock();
 
-		foreach ( $this->getItems() as $item ) {
-			$entityLookup->putEntity( $item );
-		}
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnCallback( function( $entityId ) {
+				if ( $entityId->getSerialization() === 'Q3' ) {
+					return new Term( 'de', 'Lesenswerter Artikel' );
+				} elseif ( $entityId->getSerialization() === 'Q4' ) {
+					return new Term( 'de', 'Exzellenter Artikel' );
+				}
+
+				return null;
+			} ) );
 
 		$badgeClassNames = array( 'Q4' => 'foo', 'Q3' => 'bar' );
 
 		return new LanguageLinkBadgeDisplay(
-			$entityLookup,
+			$labelLookup,
 			$badgeClassNames,
 			Language::factory( 'de' )
 		);

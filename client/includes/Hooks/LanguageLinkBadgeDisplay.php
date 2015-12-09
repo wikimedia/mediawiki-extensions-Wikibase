@@ -8,7 +8,8 @@ use ParserOutput;
 use Sanitizer;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -24,9 +25,9 @@ use Wikibase\DataModel\SiteLink;
 class LanguageLinkBadgeDisplay {
 
 	/**
-	 * @var EntityLookup
+	 * @var LabelDescriptionLookup;
 	 */
-	protected $entityLookup;
+	protected $labelDescriptionLookup;
 
 	/**
 	 * @var array
@@ -39,12 +40,16 @@ class LanguageLinkBadgeDisplay {
 	protected $language;
 
 	/**
-	 * @param EntityLookup $entityLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param array $badgeClassNames
 	 * @param Language $language
 	 */
-	public function __construct( EntityLookup $entityLookup, array $badgeClassNames, Language $language ) {
-		$this->entityLookup = $entityLookup;
+	public function __construct(
+		LabelDescriptionLookup $labelDescriptionLookup,
+		array $badgeClassNames,
+		Language $language
+	) {
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->badgeClassNames = $badgeClassNames;
 		$this->language = $language;
 	}
@@ -119,19 +124,19 @@ class LanguageLinkBadgeDisplay {
 	 * added to the link's title attribute, so the can be effectively ignored
 	 * on this client wiki.
 	 *
-	 * @param ItemId[] $badges
+	 * @param ItemId[] $badgesIds
 	 *
 	 * @return array An associative array with the keys 'class' and 'itemtitle' with assigned
 	 * string values. These fields correspond to the fields in the description array for language
 	 * links used by the SkinTemplateGetLanguageLink hook and expected by the applyBadges()
 	 * function.
 	 */
-	private function getBadgeInfo( array $badges ) {
+	private function getBadgeInfo( array $badgeIds ) {
 		$classes = array();
 		$labels = array();
 
-		foreach ( $badges as $badge ) {
-			$badgeSerialization = $badge->getSerialization();
+		foreach ( $badgeIds as $badgeId ) {
+			$badgeSerialization = $badgeId->getSerialization();
 			$classes[] = 'badge-' . Sanitizer::escapeClass( $badgeSerialization );
 
 			// nicer classes for well known badges
@@ -140,7 +145,7 @@ class LanguageLinkBadgeDisplay {
 				$classes[] = Sanitizer::escapeClass( $this->badgeClassNames[$badgeSerialization] );
 
 				// add label (but only if this badge is well known on this wiki)
-				$label = $this->getLabel( $badge );
+				$label = $this->getLabel( $badgeId );
 
 				if ( $label !== null ) {
 					$labels[] = $label;
@@ -159,21 +164,22 @@ class LanguageLinkBadgeDisplay {
 	/**
 	 * Returns the label for the given badge.
 	 *
-	 * @param ItemId $badge
+	 * @param ItemId $badgeId
 	 *
 	 * @return string|null
 	 */
-	private function getLabel( ItemId $badge ) {
-		$entity = $this->entityLookup->getEntity( $badge );
-		if ( !$entity ) {
+	private function getLabel( ItemId $badgeId ) {
+		try {
+			$term = $this->labelDescriptionLookup->getLabel( $badgeId );
+		} catch ( LabelDescriptionLookupException $ex ) {
 			return null;
 		}
 
-		$title = $entity->getLabel( $this->language->getCode() );
-		if ( !$title ) {
-			return null;
+		if ( $term !== null ) {
+			return $term->getText();
 		}
-		return $title;
+
+		return null;
 	}
 
 }
