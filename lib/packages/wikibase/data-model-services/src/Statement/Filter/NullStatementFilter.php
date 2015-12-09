@@ -13,6 +13,8 @@ use Wikibase\DataModel\Statement\StatementFilter;
  */
 class NullStatementFilter implements StatementFilter {
 
+	const FILTER_TYPE = 'null';
+
 	/**
 	 * @see StatementFilter::statementMatches
 	 *

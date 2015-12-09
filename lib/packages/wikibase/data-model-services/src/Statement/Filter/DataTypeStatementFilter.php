@@ -15,6 +15,8 @@ use Wikibase\DataModel\Statement\StatementFilter;
  */
 class DataTypeStatementFilter implements StatementFilter {
 
+	const FILTER_TYPE = 'dataType';
+
 	/**
 	 * @var PropertyDataTypeLookup
 	 */
