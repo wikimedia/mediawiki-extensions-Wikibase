@@ -173,6 +173,10 @@ class EntityParserOutputGenerator {
 				$this->getEntityInfo( $parserOutput ),
 				$options->getEditSection()
 			);
+		} else {
+			// If we don't have HTML, the ParserOutput in question
+			// shouldn't be cacheable.
+			$parserOutput->updateCacheExpiry( 0 );
 		}
 
 		//@todo: record sitelinks as iwlinks
