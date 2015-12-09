@@ -51,6 +51,10 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 			this.element.addClass( 'wikibase-toolbar-button-' + this.options.cssClassSuffix );
 		}
 
+		if ( !this.$link.contents().length ) {
+			// FIXME: Remove this in January 2016.
+			this.$link.append( $( '<span class="wb-icon"></span>' ) );
+		}
 		if ( this.$link.contents().text() === '' ) {
 			this.$link.append( this._getLabel() );
 		}
