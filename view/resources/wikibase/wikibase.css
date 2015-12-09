@@ -481,8 +481,8 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 /***** REFERENCES *****/
 
-.wikibase-statementview-reference-heading {
-	padding-top: 0.5em;
+.wikibase-statementview-references-heading {
+	margin-top: 0.5em;
 }
 
 .wikibase-statementview-references-heading, .wikibase-statementview-references {
