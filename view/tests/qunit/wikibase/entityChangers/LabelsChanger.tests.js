@@ -10,6 +10,7 @@
 	var SUBJECT = wikibase.entityChangers.LabelsChanger;
 
 	QUnit.test( 'is a function', function( assert ) {
+		assert.expect( 1 );
 		assert.equal(
 			typeof SUBJECT,
 			'function',
@@ -18,10 +19,12 @@
 	} );
 
 	QUnit.test( 'is a constructor', function( assert ) {
+		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'setLabel performs correct API call', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			setLabel: sinon.spy( function() {
 				return $.Deferred().promise();
@@ -39,6 +42,7 @@
 	} );
 
 	QUnit.test( 'setLabel correctly handles API response', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			setLabel: sinon.spy( function() {
 				return $.Deferred().resolve( {
@@ -72,6 +76,7 @@
 	} );
 
 	QUnit.test( 'setLabel correctly handles API failures', function( assert ) {
+		assert.expect( 2 );
 		var api = {
 			setLabel: sinon.spy( function() {
 				return $.Deferred().reject( 'errorCode', { error: { code: 'errorCode' } } ).promise();

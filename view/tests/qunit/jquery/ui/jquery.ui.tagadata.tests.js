@@ -36,6 +36,7 @@ QUnit.module( 'jquery.ui.tagadata', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 2 );
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
@@ -53,6 +54,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 } );
 
 QUnit.test( 'Widget interaction', function( assert ) {
+	assert.expect( 6 );
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
@@ -95,6 +97,7 @@ QUnit.test( 'Widget interaction', function( assert ) {
 } );
 
 QUnit.test( 'removeTag()', function( assert ) {
+	assert.expect( 2 );
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
@@ -140,6 +143,7 @@ QUnit.test( 'removeAll()', 1, function( assert ) {
 } );
 
 QUnit.test( 'disable(), enable()', function( assert ) {
+	assert.expect( 2 );
 	var $tagadata = createTagadata(),
 		tagadata = $tagadata.data( 'tagadata' );
 
@@ -159,6 +163,7 @@ QUnit.test( 'disable(), enable()', function( assert ) {
 } );
 
 QUnit.test( 'hasConflict()', function( assert ) {
+	assert.expect( 5 );
 	var $tagadata = createTagadata( { animate: false } ),
 		tagadata = $tagadata.data( 'tagadata' );
 

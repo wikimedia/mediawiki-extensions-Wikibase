@@ -32,6 +32,7 @@
 	} );
 
 	QUnit.test( 'widget definition', function( assert ) {
+		assert.expect( 3 );
 		assert.ok(
 			$.isFunction( StatementGroupLabelScrollWidget ),
 			'"jQuery.wikibase.statementgrouplabelscroll" (widget definition) is defined'
@@ -50,6 +51,7 @@
 	} );
 
 	QUnit.test( 'widget instantiation and destruction', function( assert ) {
+		assert.expect( 3 );
 		var $testNode = newTestNode().statementgrouplabelscroll(),
 			instance = $testNode.data( 'statementgrouplabelscroll' );
 

@@ -51,6 +51,7 @@
 	} ) );
 
 	QUnit.test( 'Create', function( assert ) {
+		assert.expect( 1 );
 		var $entitySelector = newTestEntitySelector();
 
 		assert.ok(
@@ -109,6 +110,7 @@
 	} );
 
 	QUnit.test( 'Item constructor', function( assert ) {
+		assert.expect( 2 );
 		var item = new $.wikibase.entityselector.Item( 'label', 'value', entityStubs[0] );
 
 		assert.ok(

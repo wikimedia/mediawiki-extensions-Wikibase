@@ -17,6 +17,7 @@ QUnit.module( 'jquery.util.getDirectionality', {
 } );
 
 QUnit.test( 'Basic tests', function( assert ) {
+	assert.expect( $.uls && $.uls.data ? 1 : 3 );
 	var $html = $( 'html' );
 
 	if ( $.uls && $.uls.data ) {

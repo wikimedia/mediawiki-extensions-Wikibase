@@ -50,6 +50,7 @@ QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 2 );
 	var testSets = [
 		[
 			'<div><span>$1</span></div>',

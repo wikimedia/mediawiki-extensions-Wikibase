@@ -31,6 +31,7 @@ function createSinglebuttontoolbar( options ) {
 }
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 2 );
 	var $singlebuttontoolbar = createSinglebuttontoolbar(),
 		singlebuttontoolbar = $singlebuttontoolbar.data( 'singlebuttontoolbar' );
 

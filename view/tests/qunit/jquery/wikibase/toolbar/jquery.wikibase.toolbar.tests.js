@@ -31,6 +31,7 @@ function createTestToolbar( options ) {
 }
 
 QUnit.test( 'Create & destroy empty toolbar', function( assert ) {
+	assert.expect( 3 );
 	var $toolbar = createTestToolbar(),
 		toolbar = $toolbar.data( 'toolbar' );
 
@@ -54,6 +55,7 @@ QUnit.test( 'Create & destroy empty toolbar', function( assert ) {
 } );
 
 QUnit.test( 'Create & destroy toolbar with initial content', function( assert ) {
+	assert.expect( 4 );
 	var $container = $( '<span/>' ),
 		$button = $( '<span/>' ).toolbarbutton( {
 			$label: 'label'
@@ -92,6 +94,7 @@ QUnit.test( 'Create & destroy toolbar with initial content', function( assert ) 
 } );
 
 QUnit.test( 'Set content dynamically via option()', function( assert ) {
+	assert.expect( 2 );
 	var $toolbar = createTestToolbar(),
 		toolbar = $toolbar.data( 'toolbar' ),
 		$button = $( '<span/>' ).toolbarbutton( {

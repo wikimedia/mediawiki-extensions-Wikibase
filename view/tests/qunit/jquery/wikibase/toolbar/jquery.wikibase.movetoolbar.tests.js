@@ -77,6 +77,7 @@ function createListViewWithMovetoolbar( listviewValue ) {
 }
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 6 );
 	var items = ['a', 'b', 'c'],
 		$listview = createListViewWithMovetoolbar( items ),
 		listview = $listview.data( 'listview' ),

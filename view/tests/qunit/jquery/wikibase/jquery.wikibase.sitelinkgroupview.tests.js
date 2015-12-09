@@ -81,6 +81,7 @@ QUnit.module( 'jquery.wikibase.sitelinkgroupview', QUnit.newWbEnvironment( {
 } ) );
 
 QUnit.test( 'Create and destroy', function( assert ) {
+	assert.expect( 3 );
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 		$sitelinkgroupview = createSitelinkgroupview( {
 			value: { group: 'group1', siteLinks: [siteLink] }
@@ -238,6 +239,7 @@ QUnit.test( 'setError()', 1, function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 2 );
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 		value = { group: 'group1', siteLinks: [siteLink] },
 		$sitelinkgroupview = createSitelinkgroupview( {

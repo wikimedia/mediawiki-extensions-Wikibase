@@ -81,6 +81,7 @@ QUnit.module( 'jquery.wikibase.sitelinklistview', QUnit.newWbEnvironment( {
 } ) );
 
 QUnit.test( 'Create and destroy', function( assert ) {
+	assert.expect( 2 );
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -98,6 +99,7 @@ QUnit.test( 'Create and destroy', function( assert ) {
 } );
 
 QUnit.test( 'Create and destroy with initial value', function( assert ) {
+	assert.expect( 2 );
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 		$sitelinklistview = createSitelinklistview( {
 			value: [siteLink]
@@ -118,6 +120,7 @@ QUnit.test( 'Create and destroy with initial value', function( assert ) {
 } );
 
 QUnit.test( 'isFull()', function( assert ) {
+	assert.expect( 2 );
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
@@ -141,6 +144,7 @@ QUnit.test( 'isFull()', function( assert ) {
 } );
 
 QUnit.test( 'isValid()', function( assert ) {
+	assert.expect( 1 );
 	var $sitelinklistview = createSitelinklistview( {
 			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
 		} ),
@@ -153,6 +157,7 @@ QUnit.test( 'isValid()', function( assert ) {
 } );
 
 QUnit.test( 'isValid() with invalid sitelinkview', function( assert ) {
+	assert.expect( 1 );
 	var $sitelinklistview = createSitelinklistview( {
 			value: []
 		} ),
@@ -174,6 +179,7 @@ QUnit.test( 'isValid() with invalid sitelinkview', function( assert ) {
 } );
 
 QUnit.test( 'isInitialValue()', function( assert ) {
+	assert.expect( 3 );
 	var $sitelinklistview = createSitelinklistview( {
 			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
 		} ),
@@ -324,6 +330,7 @@ QUnit.test( 'setError()', 1, function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 2 );
 	var value = [new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' )],
 		$sitelinklistview = createSitelinklistview( {
 			value: value
@@ -380,6 +387,7 @@ QUnit.test( 'enterNewItem()', 2, function( assert ) {
 } );
 
 QUnit.test( 'remove empty sitelinkview when hitting backspace', function( assert ) {
+	assert.expect( 2 );
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 

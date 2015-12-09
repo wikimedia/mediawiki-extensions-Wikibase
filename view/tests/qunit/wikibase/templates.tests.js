@@ -14,6 +14,7 @@
 	QUnit.module( 'templates', QUnit.newMwEnvironment() );
 
 	QUnit.test( 'mw.wbTemplate()', function( assert ) {
+		assert.expect( 74 );
 
 		assert.equal(
 			typeof mw.wbTemplates,
