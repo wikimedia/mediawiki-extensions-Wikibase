@@ -24,6 +24,7 @@
 	QUnit.module( 'wikibase.ValueViewBuilder' );
 
 	QUnit.test( 'initValueView returns a ValueView', function( assert ) {
+		assert.expect( 1 );
 		var vvAndDom = getValueViewAndDom(),
 			valueView = vvAndDom.vv,
 			$dom = vvAndDom.$dom;
@@ -36,6 +37,7 @@
 	} );
 
 	QUnit.test( 'initValueView passes stores', function( assert ) {
+		assert.expect( 1 );
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			expertStore = {},
@@ -60,6 +62,7 @@
 	} );
 
 	QUnit.test( 'initValueView passes language', function( assert ) {
+		assert.expect( 1 );
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom;
 
@@ -79,6 +82,7 @@
 	} );
 
 	QUnit.test( 'initValueView passes messageProvider', function( assert ) {
+		assert.expect( 1 );
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			messageProvider = {};
@@ -99,6 +103,7 @@
 	} );
 
 	QUnit.test( 'initValueView passes dataValue', function( assert ) {
+		assert.expect( 1 );
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			dataValueType = {},
@@ -117,6 +122,7 @@
 	} );
 
 	QUnit.test( 'initValueView infers types from dataType', function( assert ) {
+		assert.expect( 1 );
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			dataTypeDataValueType = {},

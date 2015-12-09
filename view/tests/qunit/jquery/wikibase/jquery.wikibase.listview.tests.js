@@ -77,6 +77,7 @@
 	} ) );
 
 	QUnit.test( 'Initialize and destroy', function( assert ) {
+		assert.expect( 18 );
 
 		/**
 		 * Runs assertions testing initialization and destruction of a listview widget initialized
@@ -135,6 +136,7 @@
 	} );
 
 	QUnit.test( 'value()', function( assert ) {
+		assert.expect( 4 );
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = [
@@ -174,6 +176,7 @@
 	} );
 
 	QUnit.test( 'addItem() and removeItem()', function( assert ) {
+		assert.expect( 9 );
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = ['a', 'b', 'c'],
@@ -223,6 +226,7 @@
 	} );
 
 	QUnit.test( 'enterNewItem()', function( assert ) {
+		assert.expect( 10 );
 		var $node = createListview(),
 			listview = $node.data( 'listview' ),
 			values = ['a', 'b', 'c'];
@@ -299,6 +303,7 @@
 	} );
 
 	QUnit.test( 'listItemNodeName option', function( assert ) {
+		assert.expect( 2 );
 		var $node = createListview( ['a', 'b', 'c'], { listItemNodeName: 'SPAN' } ),
 			listview = $node.data( 'listview' );
 
@@ -319,6 +324,7 @@
 	} );
 
 	QUnit.test( 'indexOf()', function( assert ) {
+		assert.expect( 3 );
 		var $node = createListview( ['a', 'b', 'c'] ),
 			listview = $node.data( 'listview' );
 
@@ -402,6 +408,7 @@
 	} );
 
 	QUnit.test( 'moveUp() and moveDown()', function( assert ) {
+		assert.expect( 8 );
 		var values = ['a', 'b', 'c', 'd'];
 
 		/**

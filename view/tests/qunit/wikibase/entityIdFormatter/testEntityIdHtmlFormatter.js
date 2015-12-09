@@ -9,6 +9,7 @@
 
 		constructorTests: function( constructor, getInstance ) {
 			QUnit.test( 'Constructor', function( assert ) {
+				assert.expect( 2 );
 				var instance = getInstance();
 
 				assert.ok(
@@ -25,6 +26,7 @@
 
 		formatTests: function( getInstance ) {
 			QUnit.test( 'format returns some non-empty string', function( assert ) {
+				assert.expect( 2 );
 				var instance = getInstance();
 				var done = assert.async();
 
@@ -35,6 +37,7 @@
 				} );
 			} );
 			QUnit.test( 'format correctly escapes ampersands in the entity id', function( assert ) {
+				assert.expect( 1 );
 				var instance = getInstance();
 				var done = assert.async();
 
@@ -44,6 +47,7 @@
 				} );
 			} );
 			QUnit.test( 'format correctly escapes HTML in the entity id', function( assert ) {
+				assert.expect( 1 );
 				var instance = getInstance();
 				var done = assert.async();
 

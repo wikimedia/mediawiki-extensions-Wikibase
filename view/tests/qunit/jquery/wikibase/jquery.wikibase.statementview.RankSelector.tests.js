@@ -32,6 +32,7 @@
 	} ) );
 
 	QUnit.test( 'Instantiation', function( assert ) {
+		assert.expect( 1 );
 		var rankSelector = createTestRankSelector( { value: wb.datamodel.Statement.RANK.DEPRECATED } );
 
 		assert.equal(
@@ -42,6 +43,7 @@
 	} );
 
 	QUnit.test( 'Set and get rank via value()', function( assert ) {
+		assert.expect( 3 );
 		var rankSelector = createTestRankSelector();
 
 		rankSelector.value( wb.datamodel.Statement.RANK.DEPRECATED );
@@ -70,6 +72,7 @@
 	} );
 
 	QUnit.test( 'Set and get rank via option()', function( assert ) {
+		assert.expect( 3 );
 		var rankSelector = createTestRankSelector();
 
 		rankSelector.option( 'value', wb.datamodel.Statement.RANK.DEPRECATED );
@@ -98,6 +101,7 @@
 	} );
 
 	QUnit.test( 'Multiple rank selectors', function ( assert ) {
+		assert.expect( 7 );
 		var rankSelector1 = createTestRankSelector( { value: wb.datamodel.Statement.RANK.DEPRECATED } );
 
 		assert.equal(

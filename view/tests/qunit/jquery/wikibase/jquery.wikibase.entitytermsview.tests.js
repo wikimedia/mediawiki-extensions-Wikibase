@@ -53,6 +53,7 @@ QUnit.module( 'jquery.wikibase.entitytermsview', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 3 );
 	assert.throws(
 		function() {
 			createEntitytermsview( { value: null } );
@@ -77,6 +78,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 } );
 
 QUnit.test( 'setError()', function( assert ) {
+	assert.expect( 1 );
 	var $entitytermsview = createEntitytermsview(),
 		entitytermsview = $entitytermsview.data( 'entitytermsview' );
 
@@ -92,6 +94,7 @@ QUnit.test( 'setError()', function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 2 );
 	var $entitytermsview = createEntitytermsview(),
 		entitytermsview = $entitytermsview.data( 'entitytermsview' );
 

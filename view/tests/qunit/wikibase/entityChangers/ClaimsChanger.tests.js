@@ -10,6 +10,7 @@
 	var SUBJECT = wikibase.entityChangers.ClaimsChanger;
 
 	QUnit.test( 'is a function', function( assert ) {
+		assert.expect( 1 );
 		assert.equal(
 			typeof SUBJECT,
 			'function',
@@ -18,10 +19,12 @@
 	} );
 
 	QUnit.test( 'is a constructor', function( assert ) {
+		assert.expect( 1 );
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
 	QUnit.test( 'removeStatement performs correct API call', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			removeClaim: sinon.spy( function() {
 				return $.Deferred().promise();
@@ -44,6 +47,7 @@
 	} );
 
 	QUnit.test( 'removeStatement correctly handles API response', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			removeClaim: sinon.spy( function() {
 				return $.Deferred().resolve( {
@@ -81,6 +85,7 @@
 	} );
 
 	QUnit.test( 'removeStatement correctly handles API failures', function( assert ) {
+		assert.expect( 2 );
 		var api = {
 			removeClaim: sinon.spy( function() {
 				return $.Deferred()
@@ -122,6 +127,7 @@
 	} );
 
 	QUnit.test( 'setClaim performs correct API call', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			setClaim: sinon.spy( function() {
 				return $.Deferred().promise();
@@ -143,6 +149,7 @@
 	} );
 
 	QUnit.test( 'setClaim correctly handles API response', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			setClaim: sinon.spy( function() {
 				return $.Deferred().resolve( {
@@ -180,6 +187,7 @@
 	} );
 
 	QUnit.test( 'setClaim correctly handles API failures', function( assert ) {
+		assert.expect( 2 );
 		var api = {
 			setClaim: sinon.spy( function() {
 				return $.Deferred()
@@ -221,6 +229,7 @@
 	} );
 
 	QUnit.test( 'setStatement performs correct API call', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			setClaim: sinon.spy( function() {
 				return $.Deferred().promise();
@@ -246,6 +255,7 @@
 	} );
 
 	QUnit.test( 'setStatement correctly handles API response', function( assert ) {
+		assert.expect( 1 );
 		var api = {
 			setClaim: sinon.spy( function() {
 				return $.Deferred().resolve( {
@@ -290,6 +300,7 @@
 	} );
 
 	QUnit.test( 'setStatement correctly handles API failures', function( assert ) {
+		assert.expect( 2 );
 		var api = {
 			setClaim: sinon.spy( function() {
 				return $.Deferred()

@@ -59,6 +59,7 @@ QUnit.module( 'jquery.wikibase.entitytermsforlanguageview', QUnit.newMwEnvironme
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 3 );
 	assert.throws(
 		function() {
 			createEntitytermsforlanguageview( { value: null } );
@@ -198,6 +199,7 @@ QUnit.test( 'startEditing() & stopEditing()', 6, function( assert ) {
 } );
 
 QUnit.test( 'isInitialValue()', function( assert ) {
+	assert.expect( 3 );
 	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
 		entitytermsforlanguageview
 			= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
@@ -225,6 +227,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 } );
 
 QUnit.test( 'setError()', function( assert ) {
+	assert.expect( 1 );
 	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
 		entitytermsforlanguageview
 			= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
@@ -241,6 +244,7 @@ QUnit.test( 'setError()', function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 8 );
 	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
 		entitytermsforlanguageview
 			= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' ),

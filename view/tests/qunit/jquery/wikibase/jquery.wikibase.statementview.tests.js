@@ -87,6 +87,7 @@ var createStatementview = function( options, $node ) {
 };
 
 QUnit.test( 'Create & destroy without value', function( assert ) {
+	assert.expect( 2 );
 	var $statementview = createStatementview(),
 		statementview = $statementview.data( 'statementview' );
 
@@ -104,6 +105,7 @@ QUnit.test( 'Create & destroy without value', function( assert ) {
 } );
 
 QUnit.test( 'Create & destroy with value', function( assert ) {
+	assert.expect( 2 );
 	var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
@@ -129,6 +131,7 @@ QUnit.test( 'Create & destroy with value', function( assert ) {
 } );
 
 QUnit.test( 'isValid', function( assert ) {
+	assert.expect( 1 );
 	var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
@@ -144,6 +147,7 @@ QUnit.test( 'isValid', function( assert ) {
 } );
 
 QUnit.test( 'isValid on new statementview is false', function( assert ) {
+	assert.expect( 1 );
 	var $statementview = createStatementview(),
 		statementview = $statementview.data( 'statementview' );
 
@@ -178,6 +182,7 @@ QUnit.test( 'Using tooltip specific for existing claims', 1, function( assert ) 
 } );
 
 QUnit.test( 'value with empty reference', function( assert ) {
+	assert.expect( 1 );
 	var $statementview = createStatementview( {
 			value: new wb.datamodel.Statement( new wb.datamodel.Claim(
 					new wb.datamodel.PropertyNoValueSnak( 'P1' ),
@@ -195,6 +200,7 @@ QUnit.test( 'value with empty reference', function( assert ) {
 } );
 
 QUnit.test( 'performs correct claimsChanger call', function( assert ) {
+	assert.expect( 2 );
 	var guid = 'GUID',
 		snak = new wb.datamodel.PropertyNoValueSnak( 'P1' ),
 		setStatement = sinon.spy( function() {

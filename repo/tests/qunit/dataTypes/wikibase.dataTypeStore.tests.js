@@ -10,6 +10,7 @@
 	QUnit.module( 'wikibase.dataTypeStore' );
 
 	QUnit.test( 'instance check', function( assert ) {
+		assert.expect( 1 );
 		assert.ok(
 			dataTypeStore instanceof dataTypes.DataTypeStore,
 			'wikibase.dataTypeStore is a DataTypeStore.'

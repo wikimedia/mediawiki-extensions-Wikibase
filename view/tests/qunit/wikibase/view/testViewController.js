@@ -9,6 +9,7 @@ return {
 
 	constructorTests: function( constructor, getInstance ) {
 		QUnit.test( 'implements wb.view.ViewController', function( assert ) {
+			assert.expect( 2 );
 			var controller = getInstance();
 
 			assert.ok( controller instanceof constructor );
@@ -18,6 +19,7 @@ return {
 
 	methodTests: function( getInstance ) {
 		QUnit.test( 'has non-abstract startEditing method', function( assert ) {
+			assert.expect( 1 );
 			var controller = getInstance();
 
 			controller.startEditing();
@@ -26,6 +28,7 @@ return {
 		} );
 
 		QUnit.test( 'has non-abstract stopEditing method', function( assert ) {
+			assert.expect( 1 );
 			var controller = getInstance();
 
 			controller.stopEditing();
@@ -34,6 +37,7 @@ return {
 		} );
 
 		QUnit.test( 'has non-abstract cancelEditing method', function( assert ) {
+			assert.expect( 1 );
 			var controller = getInstance();
 
 			controller.cancelEditing();
@@ -42,6 +46,7 @@ return {
 		} );
 
 		QUnit.test( 'has non-abstract setError method', function( assert ) {
+			assert.expect( 1 );
 			var controller = getInstance();
 
 			controller.setError();
@@ -50,6 +55,7 @@ return {
 		} );
 
 		QUnit.test( 'has non-abstract remove method', function( assert ) {
+			assert.expect( 1 );
 			var controller = getInstance();
 
 			controller.remove();

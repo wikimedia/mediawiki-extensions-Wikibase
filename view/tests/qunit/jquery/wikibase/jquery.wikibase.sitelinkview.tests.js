@@ -68,6 +68,7 @@
 	} ) );
 
 	QUnit.test( 'Create and destroy', function( assert ) {
+		assert.expect( 2 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -85,6 +86,7 @@
 	} );
 
 	QUnit.test( 'Create and destroy with initial value', function( assert ) {
+		assert.expect( 2 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink
@@ -190,6 +192,7 @@
 	} );
 
 	QUnit.test( 'value()', function( assert ) {
+		assert.expect( 2 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -214,6 +217,7 @@
 	} );
 
 	QUnit.test( 'isEmpty()', function( assert ) {
+		assert.expect( 6 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
@@ -267,6 +271,7 @@
 	} );
 
 	QUnit.test( 'isValid()', function( assert ) {
+		assert.expect( 4 );
 		var $sitelinkview = createSitelinkview(),
 			sitelinkview = $sitelinkview.data( 'sitelinkview' );
 
@@ -304,6 +309,7 @@
 	} );
 
 	QUnit.test( 'isInitialValue()', function( assert ) {
+		assert.expect( 3 );
 		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 			$sitelinkview = createSitelinkview( {
 				value: siteLink

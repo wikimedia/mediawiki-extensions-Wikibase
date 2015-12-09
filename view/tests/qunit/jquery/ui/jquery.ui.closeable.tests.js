@@ -31,6 +31,7 @@ QUnit.module( 'jquery.ui.closeable', QUnit.newMwEnvironment( {
 } ) );
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 2 );
 	var $closeable = createCloseable(),
 		closeable = $closeable.data( 'closeable' );
 
@@ -48,6 +49,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 } );
 
 QUnit.test( 'Close when clicking "close" anchor', function( assert ) {
+	assert.expect( 2 );
 	var $closeable = createCloseable( {
 			$content: $( '<span>test</span>' )
 		} ),

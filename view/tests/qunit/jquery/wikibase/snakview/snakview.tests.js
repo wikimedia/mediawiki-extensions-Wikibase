@@ -58,6 +58,7 @@ var createSnakview = function( options, $node ) {
 };
 
 QUnit.test( 'Create & destroy', function( assert ) {
+	assert.expect( 6 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -109,6 +110,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 } );
 
 QUnit.test( 'value()', function( assert ) {
+	assert.expect( 7 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -173,6 +175,7 @@ QUnit.test( 'value()', function( assert ) {
 } );
 
 QUnit.test( 'snak()', function( assert ) {
+	assert.expect( 5 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -213,6 +216,7 @@ QUnit.test( 'snak()', function( assert ) {
 } );
 
 QUnit.test( 'propertyId()', function( assert ) {
+	assert.expect( 5 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -255,6 +259,7 @@ QUnit.test( 'propertyId()', function( assert ) {
 } );
 
 QUnit.test( 'snakType()', function( assert ) {
+	assert.expect( 5 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
@@ -297,6 +302,7 @@ QUnit.test( 'snakType()', function( assert ) {
 } );
 
 QUnit.test( 'isInitialValue()', function( assert ) {
+	assert.expect( 7 );
 	var $snakview = createSnakview(),
 		snakview = $snakview.data( 'snakview' );
 
