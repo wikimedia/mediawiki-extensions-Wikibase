@@ -1,7 +1,7 @@
 <?php
 
-
 namespace Tests\Wikibase\DataModel\Serializers;
+
 use Wikibase\DataModel\Serializers\AliasGroupSerializer;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupFallback;
