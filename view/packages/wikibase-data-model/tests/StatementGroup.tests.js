@@ -20,6 +20,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var statementGroup = new wb.datamodel.StatementGroup( testSets[i][0], testSets[i][1] );
 

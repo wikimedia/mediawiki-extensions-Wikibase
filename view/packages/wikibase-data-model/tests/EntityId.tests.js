@@ -18,6 +18,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor and getters', function( assert ) {
+	assert.expect( 12 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var entityId = new wb.datamodel.EntityId( testSets[i][0], testSets[i][1] );
 
@@ -58,6 +59,7 @@ QUnit.test( 'Constructor and getters', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 4 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var entityId1 = new wb.datamodel.EntityId( testSets[i][0], testSets[i][1] );
 
@@ -81,6 +83,7 @@ QUnit.test( 'equals()', function( assert ) {
 } );
 
 QUnit.test( 'toJSON() & newFromJSON()', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var entityId = new wb.datamodel.EntityId( testSets[i][0], testSets[i][1] ),
 			json = entityId.toJSON();

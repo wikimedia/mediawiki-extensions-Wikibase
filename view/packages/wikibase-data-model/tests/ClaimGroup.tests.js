@@ -18,6 +18,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var claimGroup = new wb.datamodel.ClaimGroup( testSets[i][0], testSets[i][1] );
 

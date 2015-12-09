@@ -46,6 +46,7 @@ function createMap( map ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 7 );
 	assert.ok(
 		createMap() instanceof wb.datamodel.Map,
 		'Instantiated empty Map.'
@@ -93,6 +94,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'each()', function( assert ) {
+	assert.expect( 1 );
 	var items = getTestItems( 2 ),
 		map = createMap( items ),
 		expectedKeys = [];
@@ -113,6 +115,7 @@ QUnit.test( 'each()', function( assert ) {
 } );
 
 QUnit.test( 'getKeys()', function( assert ) {
+	assert.expect( 4 );
 	var items = getTestItems( 3 ),
 		map = createMap( items ),
 		keys = map.getKeys(),
@@ -136,10 +139,11 @@ QUnit.test( 'getKeys()', function( assert ) {
 } );
 
 QUnit.test( 'getItemByKey()', function( assert ) {
+	assert.expect( 4 );
 	var items = getTestItems( 3 ),
 		map = createMap( items );
 
-	for( var i = 0; i < items.length; i++ ) {
+	for( var i = 0; i < map.length; i++ ) {
 		assert.ok(
 			map.getItemByKey( items[i].getKey() ).equals( items[i] ),
 			'Retrieved item by key ' + items[i].getKey() + '.'
@@ -154,6 +158,7 @@ QUnit.test( 'getItemByKey()', function( assert ) {
 } );
 
 QUnit.test( 'removeItemByKey() & length attribute', function( assert ) {
+	assert.expect( 6 );
 	var items = getTestItems( 2 ),
 		map = createMap( items );
 
@@ -201,10 +206,11 @@ QUnit.test( 'removeItemByKey() & length attribute', function( assert ) {
 } );
 
 QUnit.test( 'hasItemForKey()', function( assert ) {
+	assert.expect( 4 );
 	var items = getTestItems( 3 ),
 		map = createMap( items );
 
-	for( var i = 0; i < items.length; i++ ) {
+	for( var i = 0; i < map.length; i++ ) {
 		assert.ok(
 			map.hasItemForKey( items[i].getKey() ),
 			'Verified returning TRUE for key ' + items[i].getKey() + '.'
@@ -218,6 +224,7 @@ QUnit.test( 'hasItemForKey()', function( assert ) {
 } );
 
 QUnit.test( 'setItem() & length attribute', function( assert ) {
+	assert.expect( 6 );
 	var items = getTestItems( 2 ),
 		map = createMap( items ),
 		newItem0 = getTestItems( 1 )[0],
@@ -264,6 +271,7 @@ QUnit.test( 'setItem() & length attribute', function( assert ) {
 } );
 
 QUnit.test( 'addItem()', function( assert ) {
+	assert.expect( 2 );
 	var items = getTestItems( 2 ),
 		map = createMap( items ),
 		item = getTestItems( 3 )[2];
@@ -284,6 +292,7 @@ QUnit.test( 'addItem()', function( assert ) {
 } );
 
 QUnit.test( 'removeItem()', function( assert ) {
+	assert.expect( 4 );
 	var items = getTestItems( 2 ),
 		map = createMap( items );
 
@@ -315,6 +324,7 @@ QUnit.test( 'removeItem()', function( assert ) {
 } );
 
 QUnit.test( 'isEmpty()', function( assert ) {
+	assert.expect( 3 );
 	var map = createMap(),
 		item = getTestItems( 1 )[0];
 
@@ -339,6 +349,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 3 );
 	var items = getTestItems( 2 ),
 		map = createMap( items );
 
@@ -364,6 +375,7 @@ QUnit.test( 'equals()', function( assert ) {
 } );
 
 QUnit.test( 'hasItem()', function( assert ) {
+	assert.expect( 3 );
 	var items = getTestItems( 2 ),
 		map = createMap( items );
 

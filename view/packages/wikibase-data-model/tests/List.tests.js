@@ -30,6 +30,7 @@ function getTestItems( n ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 5 );
 	assert.ok(
 		( new wb.datamodel.List( TestItem ) ) instanceof wb.datamodel.List,
 		'Instantiated empty List.'
@@ -64,6 +65,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'each()', function( assert ) {
+	assert.expect( 2 );
 	var items = getTestItems( 2 ),
 		list = new wb.datamodel.List( TestItem, items );
 
@@ -76,6 +78,7 @@ QUnit.test( 'each()', function( assert ) {
 } );
 
 QUnit.test( 'hasItem()', function( assert ) {
+	assert.expect( 2 );
 	var items = getTestItems( 3 ),
 		list = new wb.datamodel.List( TestItem, items );
 
@@ -91,6 +94,7 @@ QUnit.test( 'hasItem()', function( assert ) {
 } );
 
 QUnit.test( 'addItem() & length attribute', function( assert ) {
+	assert.expect( 3 );
 	var items = getTestItems( 3 ),
 		newItems = getTestItems( 1 ),
 		list = new wb.datamodel.List( TestItem, items );
@@ -116,6 +120,7 @@ QUnit.test( 'addItem() & length attribute', function( assert ) {
 } );
 
 QUnit.test( 'removeItem()', function( assert ) {
+	assert.expect( 4 );
 	var items = getTestItems( 3 ),
 		unsetItems = getTestItems( 1 ),
 		list = new wb.datamodel.List( TestItem, items );
@@ -148,6 +153,7 @@ QUnit.test( 'removeItem()', function( assert ) {
 } );
 
 QUnit.test( 'isEmpty()', function( assert ) {
+	assert.expect( 3 );
 	var items = getTestItems( 1 ),
 		list = new wb.datamodel.List( TestItem );
 
@@ -172,6 +178,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 2 );
 	var items = getTestItems( 3 ),
 		list = new wb.datamodel.List( TestItem, items );
 
@@ -189,6 +196,7 @@ QUnit.test( 'equals()', function( assert ) {
 } );
 
 QUnit.test( 'indexOf()', function( assert ) {
+	assert.expect( 1 );
 	var items = getTestItems( 3 ),
 		list = new wb.datamodel.List( TestItem, items );
 

@@ -8,6 +8,7 @@
 QUnit.module( 'wikibase.datamodel.Statement' );
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 7 );
 	var argumentLists = [
 		{
 			claim: new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) )
@@ -52,6 +53,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'Rank evaluation on instantiation', function( assert ) {
+	assert.expect( 2 );
 	var statement = new wb.datamodel.Statement(
 		new wb.datamodel.Claim(
 			new wb.datamodel.PropertyNoValueSnak( 'P1' )
@@ -80,6 +82,7 @@ QUnit.test( 'Rank evaluation on instantiation', function( assert ) {
 } );
 
 QUnit.test( 'setRank() & getRank()', function( assert ) {
+	assert.expect( 3 );
 	var statement = new wb.datamodel.Statement(
 		new wb.datamodel.Claim(
 			new wb.datamodel.PropertyNoValueSnak( 'P1' )
@@ -112,6 +115,7 @@ QUnit.test( 'setRank() & getRank()', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 26 );
 	var statements = [
 		new wb.datamodel.Statement(
 			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )

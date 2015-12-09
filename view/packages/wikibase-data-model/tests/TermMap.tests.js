@@ -20,6 +20,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 3 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
 			( new wb.datamodel.TermMap( testSets[i] ) ) instanceof wb.datamodel.TermMap,

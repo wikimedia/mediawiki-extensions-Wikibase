@@ -42,6 +42,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var item = new wb.datamodel.Item(
 			testSets[i][0], testSets[i][1], testSets[i][2], testSets[i][3]
@@ -54,6 +55,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'isEmpty()', function( assert ) {
+	assert.expect( 4 );
 	assert.ok(
 		( new wb.datamodel.Item(
 			'Q1',
@@ -118,6 +120,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 4 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var item1 = new wb.datamodel.Item(
 			testSets[i][0], testSets[i][1], testSets[i][2], testSets[i][3]

@@ -25,6 +25,7 @@ function constructSnak( SnakConstructor, params ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 15 );
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		var SnakConstructor = testSets[i][0],
@@ -51,6 +52,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 35 );
 
 	for( var i = 0; i < testSets.length; i++ ) {
 		var snak1 = constructSnak( testSets[i][0], testSets[i][1] );
