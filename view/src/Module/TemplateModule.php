@@ -54,4 +54,25 @@ EOT;
 		return false; // always use getScript() to acquire JavaScript (even in debug mode)
 	}
 
+	/**
+	 * @see ResourceLoaderModule::getModifiedHash
+	 *
+	 * @param ResourceLoaderContext $context
+	 *
+	 * @return string
+	 */
+	public function getModifiedHash( ResourceLoaderContext $context ) {
+		return (string)filemtime( __DIR__ . '/../../resources/templates.php' );
+	}
+
+	/**
+	 * @see ResourceLoaderModule::getModifiedTime
+	 *
+	 * @param ResourceLoaderContext $context
+	 *
+	 * @return int
+	 */
+	public function getModifiedTime( ResourceLoaderContext $context ) {
+		return $this->getHashMtime( $context );
+	}
 }
