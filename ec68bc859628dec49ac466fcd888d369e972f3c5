@@ -51,6 +51,24 @@
       "revId": "ec68bc859628dec49ac466fcd888d369e972f3c5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_1b866f19",
+        "filename": "repo/includes/DispatchingEntityTypeStatementGrouper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-09T14:06:03Z",
+      "side": 1,
+      "message": "Nope. In my initial suggestion the StatementFilter was responsible for filtering out statements that are on the wrong entity(type). My main point was that we can push this functionality (different grouping by entitytype) into StatementGrouper implementations. That means we can use the StatementGrouper interface and implement a wide variety of behaviours on just this interface without having a factory around it. Reminds me of PSR-6 (see https://blog.ircmaxell.com/2014/10/an-open-letter-to-php-fig.html and https://blog.ircmaxell.com/2014/10/a-followup-to-open-letter-to-php-fig.html).",
+      "parentUuid": "8ead036b_5bedc721",
+      "revId": "ec68bc859628dec49ac466fcd888d369e972f3c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
