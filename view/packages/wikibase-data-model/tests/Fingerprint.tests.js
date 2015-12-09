@@ -30,6 +30,7 @@ var testSets = [
 
 QUnit.test( 'Constructor (positive)', function( assert ) {
 	assert.expect( 26 );
+	var i, fingerprint;
 
 	/**
 	 * @param {Object} assert
@@ -72,8 +73,8 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 		}
 	}
 
-	for( var i = 0; i < testSets.length; i++ ) {
-		var fingerprint = new wb.datamodel.Fingerprint(
+	for( i = 0; i < testSets.length; i++ ) {
+		fingerprint = new wb.datamodel.Fingerprint(
 			testSets[i][0], testSets[i][1], testSets[i][2]
 		);
 
