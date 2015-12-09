@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_f50cc247",
+        "filename": "lib/includes/UnionContentLanguages.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-09T08:08:17Z",
+      "side": 1,
+      "message": "As I wrote in the ticket I wanted to use set operation names.",
+      "parentUuid": "aeb807a7_b9bddd65",
+      "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_59b2a193",
         "filename": "lib/includes/UnionContentLanguages.php",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2015-12-08T15:34:35Z",
       "side": 1,
       "message": "Are there tests for a code being present in both? If not, please add.",
+      "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_9509ce36",
+        "filename": "lib/includes/UnionContentLanguages.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-09T08:08:17Z",
+      "side": 1,
+      "message": "There are.",
+      "parentUuid": "aeb807a7_59b2a193",
       "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_b52f2a9c",
+        "filename": "lib/tests/phpunit/UnionContentLanguagesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-09T08:08:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb807a7_797685d7",
+      "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_f9811593",
         "filename": "lib/tests/phpunit/UnionContentLanguagesTest.php",
         "patchSetId": 4
@@ -81,6 +135,24 @@
       "writtenOn": "2015-12-08T15:34:35Z",
       "side": 1,
       "message": "Not needed with the assertSame bellow.",
+      "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_551cb67c",
+        "filename": "lib/tests/phpunit/UnionContentLanguagesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-09T08:08:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb807a7_f9811593",
       "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_15163e5b",
+        "filename": "lib/tests/phpunit/UnionContentLanguagesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-09T08:08:17Z",
+      "side": 1,
+      "message": "I think it makes it a bit less obvious what happens here.",
+      "parentUuid": "aeb807a7_1962e906",
+      "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_b93abde2",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 4
@@ -115,6 +205,24 @@
       "writtenOn": "2015-12-08T15:34:35Z",
       "side": 1,
       "message": "This is what you could to instead:\n\n$mw \u003d new WikibaseContentLanguages();\n$union \u003d new StaticContentLanguages( $mw-\u003egetLanguages() + array( \u0027und\u0027, \u0027mis\u0027, \u0027mul\u0027, \u0027zxx\u0027 ) );",
+      "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_d50f463a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2015-12-09T08:08:17Z",
+      "side": 1,
+      "message": "We couldn\u0027t do that easily in configuration, though, and it does a lot of computation that might be unnecessary if this is not used in the end.",
+      "parentUuid": "aeb807a7_b93abde2",
       "revId": "44add9c398101b3419a6a24ffc638d7bb81a7574",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
