@@ -9,7 +9,7 @@ define( 'PURTLE_VERSION', '0.1-dev' );
 
 // Include the composer autoloader if it is present.
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
-	include_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 
 if ( defined( 'MEDIAWIKI' ) ) {
