@@ -139,6 +139,24 @@
       "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_5b4e279d",
+        "filename": "repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T13:19:41Z",
+      "side": 1,
+      "message": "When I look at https://gerrit.wikimedia.org/r/#/c/257291/1/repo/includes/Search/Elastic/Fields/WikibaseFieldDefinitions.php it does not look more complicated. The question is still the same: Why does this need a whole class?",
+      "parentUuid": "aeb807a7_1c1c1718",
+      "revId": "c30e3e3e967e571bfbadc7748b339d825c18f34c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
