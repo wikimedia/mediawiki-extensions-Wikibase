@@ -33,6 +33,24 @@
       "revId": "ec68bc859628dec49ac466fcd888d369e972f3c5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_bba2bb39",
+        "filename": "repo/includes/DispatchingEntityTypeStatementGrouper.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T13:14:13Z",
+      "side": 1,
+      "message": "It picks the first it can find in the StatementList. This is tested. This is an implementation detail of the builder, it\u0027s good enough(TM) for now and can easily be refactored later, if it turns out to be an issue.",
+      "parentUuid": "8ead036b_5bedc721",
+      "revId": "ec68bc859628dec49ac466fcd888d369e972f3c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
