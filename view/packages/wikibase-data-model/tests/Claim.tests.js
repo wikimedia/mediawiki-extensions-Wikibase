@@ -8,6 +8,7 @@
 QUnit.module( 'wikibase.datamodel.Claim' );
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 7 );
 	var argumentLists = [
 		{
 			mainSnak: new wb.datamodel.PropertyNoValueSnak( 'p1' )
@@ -51,6 +52,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'setMainSnak() & getMainSnak()', function( assert ) {
+	assert.expect( 1 );
 	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
 		snak = new wb.datamodel.PropertyNoValueSnak( 'p2' );
 
@@ -63,6 +65,7 @@ QUnit.test( 'setMainSnak() & getMainSnak()', function( assert ) {
 } );
 
 QUnit.test( 'setQualifiers() & getQualifiers()', function( assert ) {
+	assert.expect( 2 );
 	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
 		qualifiers = new wb.datamodel.SnakList( [
 			new wb.datamodel.PropertyNoValueSnak( 'p10' ),
@@ -87,6 +90,7 @@ QUnit.test( 'setQualifiers() & getQualifiers()', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 17 );
 	var claims = [
 		new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
 		new wb.datamodel.Claim( new wb.datamodel.PropertySomeValueSnak( 'p1' ) ),

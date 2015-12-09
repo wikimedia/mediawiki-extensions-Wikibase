@@ -10,6 +10,7 @@
 	QUnit.module( 'wikibase.datamodel.Reference' );
 
 	QUnit.test( 'constructor, getSnaks()', function( assert ) {
+		assert.expect( 7 );
 		var snakLists = [
 			new wb.datamodel.SnakList( [] ),
 			new wb.datamodel.SnakList( [new wb.datamodel.PropertyNoValueSnak( 'P1' )] ),
@@ -43,6 +44,7 @@
 	} );
 
 	QUnit.test( 'getHash()', function( assert ) {
+		assert.expect( 2 );
 		var hash = 'hash12390213';
 
 		assert.equal(
@@ -59,6 +61,7 @@
 	} );
 
 	QUnit.test( 'equals()', function( assert ) {
+		assert.expect( 9 );
 		var references = [
 			new wb.datamodel.Reference(),
 			new wb.datamodel.Reference(

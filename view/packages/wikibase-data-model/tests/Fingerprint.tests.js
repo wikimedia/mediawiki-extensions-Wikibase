@@ -29,6 +29,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor (positive)', function( assert ) {
+	assert.expect( 26 );
 
 	/**
 	 * @param {Object} assert
@@ -94,6 +95,7 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 } );
 
 QUnit.test( 'Constructor (negative)', function( assert ) {
+	assert.expect( 3 );
 	var negativeTestSets = [
 		['string', new wb.datamodel.TermMap(), new wb.datamodel.MultiTermMap()],
 		[new wb.datamodel.TermMap(), 'string', new wb.datamodel.MultiTermMap()],
@@ -123,6 +125,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 } );
 
 QUnit.test( 'setLabel()', function( assert ) {
+	assert.expect( 3 );
 	var fingerprint = new wb.datamodel.Fingerprint(),
 		label = new wb.datamodel.Term( 'de', 'de-label' );
 
@@ -147,6 +150,7 @@ QUnit.test( 'setLabel()', function( assert ) {
 } );
 
 QUnit.test( 'removeLabel()', function( assert ) {
+	assert.expect( 3 );
 	var label = new wb.datamodel.Term( 'de', 'de-label' ),
 		fingerprint = new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( { de: label } ) );
 
@@ -171,6 +175,7 @@ QUnit.test( 'removeLabel()', function( assert ) {
 } );
 
 QUnit.test( 'removeLabelFor()', function( assert ) {
+	assert.expect( 2 );
 	var label = new wb.datamodel.Term( 'de', 'de-label' ),
 		fingerprint = new wb.datamodel.Fingerprint( new wb.datamodel.TermMap( { de: label } ) );
 
@@ -188,6 +193,7 @@ QUnit.test( 'removeLabelFor()', function( assert ) {
 } );
 
 QUnit.test( 'setDescription()', function( assert ) {
+	assert.expect( 3 );
 	var fingerprint = new wb.datamodel.Fingerprint(),
 		description = new wb.datamodel.Term( 'de', 'de-description' );
 
@@ -212,6 +218,7 @@ QUnit.test( 'setDescription()', function( assert ) {
 } );
 
 QUnit.test( 'removeDescription()', function( assert ) {
+	assert.expect( 3 );
 	var description = new wb.datamodel.Term( 'de', 'de-description' ),
 		fingerprint = new wb.datamodel.Fingerprint(
 			null,
@@ -239,6 +246,7 @@ QUnit.test( 'removeDescription()', function( assert ) {
 } );
 
 QUnit.test( 'removeDescriptionFor()', function( assert ) {
+	assert.expect( 2 );
 	var description = new wb.datamodel.Term( 'de', 'de-description' ),
 		fingerprint = new wb.datamodel.Fingerprint(
 			null,
@@ -259,6 +267,7 @@ QUnit.test( 'removeDescriptionFor()', function( assert ) {
 } );
 
 QUnit.test( 'setAliases()', function( assert ) {
+	assert.expect( 6 );
 	var fingerprint = new wb.datamodel.Fingerprint(),
 		deAliases = new wb.datamodel.MultiTerm( 'de', ['de-alias'] ),
 		enAliases = new wb.datamodel.MultiTerm( 'en', ['en-alias'] ),
@@ -304,6 +313,7 @@ QUnit.test( 'setAliases()', function( assert ) {
 } );
 
 QUnit.test( 'removeAliases()', function( assert ) {
+	assert.expect( 3 );
 	var aliases = new wb.datamodel.MultiTerm( 'de', ['de-alias'] ),
 		fingerprint = new wb.datamodel.Fingerprint(
 			null,
@@ -332,6 +342,7 @@ QUnit.test( 'removeAliases()', function( assert ) {
 } );
 
 QUnit.test( 'removeAliasesFor()', function( assert ) {
+	assert.expect( 2 );
 	var aliases = new wb.datamodel.MultiTerm( 'de', ['de-alias'] ),
 		fingerprint = new wb.datamodel.Fingerprint(
 			null,
@@ -353,6 +364,7 @@ QUnit.test( 'removeAliasesFor()', function( assert ) {
 } );
 
 QUnit.test( 'isEmpty()', function( assert ) {
+	assert.expect( 4 );
 	assert.ok(
 		( new wb.datamodel.Fingerprint(
 			new wb.datamodel.TermMap(),
@@ -393,6 +405,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 4 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var fingerprint1 = new wb.datamodel.Fingerprint(
 			testSets[i][0], testSets[i][1], testSets[i][2]

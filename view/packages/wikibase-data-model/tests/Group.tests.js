@@ -128,6 +128,7 @@ function createGroup( key, container ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 6 );
 	assert.ok(
 		createGroup( 'key', new TestContainer() ) instanceof wb.datamodel.Group,
 		'Instantiated empty Group.'
@@ -168,6 +169,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'setItemContainer() & getItemContainer()', function( assert ) {
+	assert.expect( 6 );
 	var container = getTestContainer( 'key', 1 ),
 		group = createGroup( 'key', container ),
 		newContainer = getTestContainer( 'key', 3 );
@@ -210,6 +212,7 @@ QUnit.test( 'setItemContainer() & getItemContainer()', function( assert ) {
 } );
 
 QUnit.test( 'addItem() & hasItem()', function( assert ) {
+	assert.expect( 3 );
 	var container = getTestContainer( 'key', 1 ),
 		group = createGroup( 'key', container ),
 		newItem = getTestItems( 'key', 2 )[1];
@@ -235,6 +238,7 @@ QUnit.test( 'addItem() & hasItem()', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 2 );
 	var group = createGroup( 'key', getTestContainer( 'key', 1 ) );
 
 	assert.ok(

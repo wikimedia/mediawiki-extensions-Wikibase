@@ -21,6 +21,7 @@ var testSets = {
 };
 
 QUnit.test( 'Constructor (positive)', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.positive.length; i++ ) {
 		var testSet = testSets.positive[i];
 		assert.ok(
@@ -31,6 +32,7 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 } );
 
 QUnit.test( 'Constructor (negative)', function( assert ) {
+	assert.expect( 4 );
 	function instantiateObject( languageCode, text ) {
 		return function() {
 			return new wb.datamodel.Term( languageCode, text );
@@ -47,6 +49,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 4 );
 	for( var i = 0; i < testSets.positive.length; i++ ) {
 		var term1 = new wb.datamodel.Term( testSets.positive[i][0], testSets.positive[i][1] );
 

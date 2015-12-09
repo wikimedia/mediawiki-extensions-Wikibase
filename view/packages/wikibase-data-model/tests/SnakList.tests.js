@@ -43,6 +43,7 @@ function snakOrder( snakList ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 6 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var snakList = new wb.datamodel.SnakList( testSets[i] );
 
@@ -60,6 +61,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'getFilteredSnakList()', function( assert ) {
+	assert.expect( 16 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var snakList = new wb.datamodel.SnakList( testSets[i] );
 
@@ -101,6 +103,7 @@ QUnit.test( 'getFilteredSnakList()', function( assert ) {
 } );
 
 QUnit.test( 'merge()', function( assert ) {
+	assert.expect( 6 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var snakList = new wb.datamodel.SnakList(),
 			newSnak = new wb.datamodel.PropertyNoValueSnak( 'P10' );
@@ -125,6 +128,7 @@ QUnit.test( 'merge()', function( assert ) {
 } );
 
 QUnit.test( 'getValidMoveIndices()', function( assert ) {
+	assert.expect( 8 );
 	var snaks = testSets[2],
 		snakList = new wb.datamodel.SnakList( snaks );
 
@@ -163,6 +167,7 @@ QUnit.test( 'getValidMoveIndices()', function( assert ) {
 } );
 
 QUnit.test( 'move()', function( assert ) {
+	assert.expect( 30 );
 	var snaks = testSets[2],
 		snakList;
 
@@ -236,6 +241,7 @@ QUnit.test( 'move()', function( assert ) {
 } );
 
 QUnit.test( 'moveUp() and moveDown()', function( assert ) {
+	assert.expect( 14 );
 	var snaks = testSets[2],
 		snakList;
 

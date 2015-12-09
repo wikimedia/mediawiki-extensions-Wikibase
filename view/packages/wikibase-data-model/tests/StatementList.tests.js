@@ -23,6 +23,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		assert.ok(
 			( new wb.datamodel.StatementList( testSets[i] ) ) instanceof wb.datamodel.StatementList,
@@ -32,6 +33,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'getPropertyIds()', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var expectedPropertyIds = [];
 

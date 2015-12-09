@@ -8,6 +8,7 @@
 QUnit.module( 'wikibase.datamodel.SiteLink' );
 
 QUnit.test( 'Basic tests', function( assert ) {
+	assert.expect( 2 );
 	var siteLink = new wb.datamodel.SiteLink( 'test-id', 'test-name' );
 
 	assert.equal(
@@ -24,6 +25,7 @@ QUnit.test( 'Basic tests', function( assert ) {
 } );
 
 QUnit.test( 'Badges', function( assert ) {
+	assert.expect( 4 );
 	var siteLink = new wb.datamodel.SiteLink( 'test-id', 'test-page' ),
 		badges = ['Q123', 'Q456'];
 
@@ -59,6 +61,7 @@ QUnit.test( 'Badges', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 72 );
 	var testSet = [
 		['siteId', 'pageName', []],
 		['anotherSiteId', 'pageName', []],
