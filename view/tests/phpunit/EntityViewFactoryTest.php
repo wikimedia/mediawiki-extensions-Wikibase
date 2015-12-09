@@ -5,11 +5,11 @@ namespace Wikibase\View\Tests;
 use DataTypes\DataTypeFactory;
 use PHPUnit_Framework_TestCase;
 use SiteList;
-use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\EntityViewFactory;
+use Wikibase\View\StatementGrouperFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 
@@ -45,6 +45,8 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( array() ) );
 
+		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
@@ -53,7 +55,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$htmlFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML ),
 			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
-			new NullStatementGrouper(),
+			new StatementGrouperFactory( array(), $dataTypeLookup ),
 			$this->getSiteStore(),
 			new DataTypeFactory( array() ),
 			$templateFactory,

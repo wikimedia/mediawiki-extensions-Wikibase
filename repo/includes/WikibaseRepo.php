@@ -98,6 +98,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\View\EntityViewFactory;
+use Wikibase\View\StatementGrouperFactory;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -1313,7 +1314,7 @@ class WikibaseRepo {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$dataTypeLookup = $this->getPropertyDataTypeLookup();
 
-		$statementGrouperBuilder = new StatementGrouperBuilder(
+		$statementGrouperFactory = new StatementGrouperFactory(
 			$this->settings->getSetting( 'statementSections' ),
 			$dataTypeLookup
 		);
@@ -1322,7 +1323,7 @@ class WikibaseRepo {
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
-			$statementGrouperBuilder->getStatementGrouper(),
+			$statementGrouperFactory,
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			$templateFactory,

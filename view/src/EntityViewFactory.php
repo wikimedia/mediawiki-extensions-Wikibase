@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use Language;
 use SiteStore;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
@@ -38,9 +37,9 @@ class EntityViewFactory {
 	private $plainTextIdFormatterFactory;
 
 	/**
-	 * @var StatementGrouper
+	 * @var StatementGrouperFactory
 	 */
-	private $statementGrouper;
+	private $statementGrouperFactory;
 
 	/**
 	 * @var SiteStore
@@ -81,7 +80,7 @@ class EntityViewFactory {
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
-	 * @param StatementGrouper $statementGrouper
+	 * @param StatementGrouperFactory $statementGrouperFactory
 	 * @param SiteStore $siteStore
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
@@ -96,7 +95,7 @@ class EntityViewFactory {
 		EntityIdFormatterFactory $htmlIdFormatterFactory,
 		EntityIdFormatterFactory $plainTextIdFormatterFactory,
 		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
-		StatementGrouper $statementGrouper,
+		StatementGrouperFactory $statementGrouperFactory,
 		SiteStore $siteStore,
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
@@ -114,7 +113,7 @@ class EntityViewFactory {
 		$this->htmlIdFormatterFactory = $htmlIdFormatterFactory;
 		$this->plainTextIdFormatterFactory = $plainTextIdFormatterFactory;
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
-		$this->statementGrouper = $statementGrouper;
+		$this->statementGrouperFactory = $statementGrouperFactory;
 		$this->siteStore = $siteStore;
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->templateFactory = $templateFactory;
@@ -175,6 +174,8 @@ class EntityViewFactory {
 		// @fixme all that seems needed in EntityView is language code and dir.
 		$language = Language::factory( $languageCode );
 
+		$statementGrouper = $this->statementGrouperFactory->getStatementGrouper( $entityType );
+
 		// @fixme support more entity types
 		switch ( $entityType ) {
 			case 'item':
@@ -191,7 +192,7 @@ class EntityViewFactory {
 				return new ItemView(
 					$this->templateFactory,
 					$entityTermsView,
-					$this->statementGrouper,
+					$statementGrouper,
 					$statementSectionsView,
 					$language,
 					$siteLinksView,
@@ -201,7 +202,7 @@ class EntityViewFactory {
 				return new PropertyView(
 					$this->templateFactory,
 					$entityTermsView,
-					$this->statementGrouper,
+					$statementGrouper,
 					$statementSectionsView,
 					$this->dataTypeFactory,
 					$language
