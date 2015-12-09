@@ -108,6 +108,13 @@ class ValidatorBuilders {
 	}
 
 	/**
+	 * @return ValueValidator[]
+	 */
+	public function buildEntityValidators() {
+		return new TypeValidator( 'Wikibase\DataModel\Entity\EntityIdValue' );
+	}
+
+	/**
 	 * @param string $entityType
 	 *
 	 * @return ValueValidator[]
