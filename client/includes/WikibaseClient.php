@@ -295,6 +295,8 @@ final class WikibaseClient {
 	/**
 	 * @param string $displayLanguageCode
 	 *
+	 * XXX: This is not used by client itself but is used by ArticlePlaceholder!
+	 *
 	 * @return TermIndexSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
