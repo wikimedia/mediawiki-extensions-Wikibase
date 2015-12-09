@@ -115,6 +115,20 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 	}
 
+	public function testGetParserOutput_dontGenerateHtml() {
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
+
+		$item = $this->newItem();
+		$timestamp = wfTimestamp( TS_MW );
+		$revision = new EntityRevision( $item, 13044, $timestamp );
+
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, $this->getParserOptions(), false );
+
+		$this->assertSame( '', $parserOutput->getText() );
+		// ParserOutput without HTML must not end up in the cache.
+		$this->assertFalse( $parserOutput->isCacheable() );
+	}
+
 	public function testTitleText_ItemHasNolabel() {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
