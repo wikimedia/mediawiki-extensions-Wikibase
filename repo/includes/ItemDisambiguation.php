@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Repo\Interactors\TermSearchResult;
+use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
