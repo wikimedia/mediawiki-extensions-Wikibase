@@ -2,6 +2,142 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ead036b_e3eac5d6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.ListItemAdapter.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T16:57:21Z",
+      "side": 1,
+      "message": "We could even mark this as deprecated.",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_230bfdda",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.ListItemAdapter.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T16:57:21Z",
+      "side": 1,
+      "message": "\"new new\"?",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_43271960",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.ListItemAdapter.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T16:57:21Z",
+      "side": 1,
+      "message": "Is it possible to add a type check here? The object returned here should be of the same type as this._options.listItemWidget.",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_23b8dde1",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T16:57:21Z",
+      "side": 1,
+      "message": "What the ...? This looks very, very suspicious. Like it\u0027s an endless loop. Where is this length decreased?",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_43bdd9d0",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T16:57:21Z",
+      "side": 1,
+      "message": "Why is a series of \"null\" items added?",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_a3bfeda6",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T16:57:21Z",
+      "side": 1,
+      "message": "\"Optionally\"? So the doc line should be [propertyId]?",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_e3cc0569",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T16:57:21Z",
+      "side": 1,
+      "message": "This is not *the* DOM of the page but a specific node, right? So \"node\" or \"element\" or something like that would be better, in my opinion.",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_c3a5499c",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-09T16:57:21Z",
+      "side": 1,
+      "message": "I would prefer /\\bwikibase-statement-(\\w+\\b)/.\n\nOr a data attribute.",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb807a7_baedd0b6",
         "filename": "view/resources/wikibase/view/ViewFactory.js",
         "patchSetId": 4
