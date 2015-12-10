@@ -33,7 +33,7 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 	var i, fingerprint;
 
 	/**
-	 * @param {Object} assert
+	 * @param {QUnit.assert} assert
 	 * @param {string} term
 	 * @param {wikibase.datamodel.Map} map
 	 */

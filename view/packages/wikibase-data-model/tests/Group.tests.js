@@ -8,6 +8,7 @@
 QUnit.module( 'wikibase.datamodel.Group' );
 
 /**
+ * @class TestItem
  * @constructor
  * @param {*} key
  * @param {*} value
@@ -29,6 +30,7 @@ $.extend( TestItem.prototype, {
 } );
 
 /**
+ * @class TestContainer
  * @constructor
  * @param {TestItem[]} items
  */
