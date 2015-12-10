@@ -8,6 +8,11 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
+### 2.0 (dev)
+
+#### Breaking changes
+* Term and MultiTerm do not accept empty language codes any more.
+
 ### 1.0.2 (2015-05-28)
 
 #### Enhancements
