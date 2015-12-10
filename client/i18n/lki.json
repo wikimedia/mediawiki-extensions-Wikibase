@@ -1,18 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hosseinblue"
+			"Hosseinblue",
+			"Arash71",
+			"Lakzon"
 		]
 	},
 	"tooltip-t-wikibase": "پیوۀند وۀآیتم چۀسبیا/متصل و ژیرۀ/مخزن داده",
+	"apihelp-query+pageterms-param-terms": "نوع اصطلاح‌ها برای دریافت مانند «توضیحات». اگر مشخص نشده باشد، همهٔ نوع‌ها بازگشت داده می‌شود.",
 	"wikibase-comment-update": "مورد {{WBREPONAME}} تغییر کرد",
 	"wikibase-dataitem": "{{WBREPONAME}} آیتم",
-	"wikibase-editlinks": "دۀسکاری پیوۀندۀل",
+	"wikibase-editlinks": "دةسکاری پیوةندةل",
 	"wikibase-editlinkstitle": "دۀسکاری پیوندۀل میان‌ویکی",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ئآشاردن-پنهان کردن",
 	"wikibase-rc-hide-wikidata-show": "نیشان دائن",
 	"wikibase-rc-wikibase-edit-letter": "د",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دۀسکاری",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} دةسکاری",
 	"wikibase-otherprojects": "پروژۀلئ تر"
 }

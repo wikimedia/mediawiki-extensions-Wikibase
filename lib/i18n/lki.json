@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hosseinblue"
+			"Hosseinblue",
+			"Lakzon"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "ویکی پدیا"
+	"wikibase-sitelinks-wikipedia": "ویکی پدیا",
+	"wikibase-entity-summary-wbsetdescription-add": "توضیحات [$2] افزوده شد",
+	"wikibase-entity-summary-wbsetdescription-set": "تغییر توضیحات [$2]",
+	"wikibase-entity-summary-wbsetdescription-remove": "حذف توضیحات [$2]",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "[$2] برچسب، شرح و نام‌های مستعار تغییر یافت"
 }
