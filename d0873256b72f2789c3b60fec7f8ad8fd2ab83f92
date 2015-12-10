@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_e85a9921",
+        "filename": "lib/includes/formatters/OutputFormatSnakFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-10T16:25:32Z",
+      "side": 1,
+      "message": "You just changed the order, and it\u0027s still wrong. ;-)))",
+      "revId": "d0873256b72f2789c3b60fec7f8ad8fd2ab83f92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_0864d5e0",
+        "filename": "lib/includes/formatters/OutputFormatSnakFormatterFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-10T16:25:32Z",
+      "side": 1,
+      "message": "Not true any more because of the patch before this.",
+      "revId": "d0873256b72f2789c3b60fec7f8ad8fd2ab83f92",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
