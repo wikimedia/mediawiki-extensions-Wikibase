@@ -111,6 +111,9 @@ class StatementGrouperBuilder {
 			case 'propertySet':
 				$this->requireField( $spec, 'propertyIds' );
 				return new PropertySetStatementFilter( $spec['propertyIds'] );
+			// Be aware that this switch statement is a possible violation of the open-closed
+			// principle. When the number of filters grows, please try to extract this in a way that
+			// it can be injected.
 		}
 
 		throw new InvalidArgumentException( 'Unknown filter type: ' . $spec['type'] );
