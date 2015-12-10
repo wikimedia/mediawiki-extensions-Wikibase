@@ -36,7 +36,7 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 				throw new InvalidArgumentException( 'Every element in $terms must be an instance of Term' );
 			}
 
-			$this->terms[$term->getLanguageCode()] = $term;
+			$this->setTerm( $term );
 		}
 	}
 
@@ -116,7 +116,12 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 	}
 
 	public function setTerm( Term $term ) {
-		$this->terms[$term->getLanguageCode()] = $term;
+		if ( $term->getText() === '' ) {
+			unset( $this->terms[$term->getLanguageCode()] );
+		}
+		else {
+			$this->terms[$term->getLanguageCode()] = $term;
+		}
 	}
 
 	/**
