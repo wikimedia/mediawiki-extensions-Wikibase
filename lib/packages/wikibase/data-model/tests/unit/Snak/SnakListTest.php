@@ -281,9 +281,9 @@ class SnakListTest extends HashArrayTest {
 		$this->assertEquals( $expected, $orderedSnakList );
 
 		if ( $orderedSnakList->equals( $initialSnakList ) ) {
-			$this->assertTrue( $initialSnakList->getHash() === $snakList->getHash() );
+			$this->assertSame( $initialSnakList->getHash(), $snakList->getHash() );
 		} else {
-			$this->assertFalse( $initialSnakList->getHash() === $snakList->getHash() );
+			$this->assertNotSame( $initialSnakList->getHash(), $snakList->getHash() );
 		}
 	}
 

@@ -368,7 +368,7 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue( $entity->equals( $copy ) );
 		$this->assertEquals( $entity->getId(), $copy->getId() );
 
-		$this->assertFalse( $entity === $copy );
+		$this->assertNotSame( $entity, $copy );
 	}
 
 	public function testCopyRetainsLabels() {
