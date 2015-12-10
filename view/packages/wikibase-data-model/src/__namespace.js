@@ -1,8 +1,4 @@
-( function( wb ) {
-	'use strict';
-
-	/**
-	 * @ignore
-	 */
-	wb.datamodel = {};
-}( wikibase ) );
+/**
+ * @ignore
+ */
+wikibase.datamodel = wikibase.datamodel || {};
