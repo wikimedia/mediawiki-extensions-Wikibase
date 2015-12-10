@@ -41,11 +41,11 @@ $.extend( SELF.prototype, {
 	/**
 	 * @param {string} languageCode
 	 *
-	 * @throws {Error} when the language code is not a string.
+	 * @throws {Error} when the language code is not a string or empty.
 	 */
 	setLanguageCode: function( languageCode ) {
-		if( typeof languageCode !== 'string' ) {
-			throw new Error( 'Language code has to be a string' );
+		if( typeof languageCode !== 'string' || languageCode === '' ) {
+			throw new Error( 'Language code has to be a non-empty string' );
 		}
 		this._languageCode = languageCode;
 	},
