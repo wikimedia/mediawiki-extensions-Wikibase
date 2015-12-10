@@ -16,7 +16,8 @@ var testSets = {
 		[undefined, ''],
 		['', undefined],
 		['de', 1],
-		[1, '']
+		[1, ''],
+		['', 'foo']
 	]
 };
 
