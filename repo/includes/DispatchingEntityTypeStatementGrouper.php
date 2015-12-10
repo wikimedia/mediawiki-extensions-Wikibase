@@ -55,7 +55,7 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 	 * @return StatementList[]
 	 */
 	public function groupStatements( StatementList $statements ) {
-		return $this->getStatementGrouper( $statements )->groupStatements( $statements );
+		return $this->guessStatementGrouper( $statements )->groupStatements( $statements );
 	}
 
 	/**
@@ -63,13 +63,15 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 	 *
 	 * @return StatementGrouper
 	 */
-	private function getStatementGrouper( StatementList $statements ) {
+	private function guessStatementGrouper( StatementList $statements ) {
 		foreach ( $statements->toArray() as $statement ) {
 			$entityType = $this->getEntityType( $statement );
 
 			if ( array_key_exists( $entityType, $this->statementGroupers ) ) {
 				return $this->statementGroupers[$entityType];
 			}
+
+			// FIXME: Check all statements and fail if they don't share the same entity type?
 		}
 
 		return new NullStatementGrouper();
@@ -84,6 +86,7 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 		try {
 			$guid = $this->guidParser->parse( $statement->getGuid() );
 		} catch ( StatementGuidParsingException $ex ) {
+			// FIXME: Fail when there is a statement with no GUID?
 			return null;
 		}
 
