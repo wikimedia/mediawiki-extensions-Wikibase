@@ -106,12 +106,13 @@ class HashArrayWithDuplicatesTest extends HashArrayTest {
 
 		$newHash = $array->getHash();
 
-		$this->assertFalse( $hash === $newHash, 'Hash should not be the same after adding an element' );
+		$this->assertNotSame( $hash, $newHash, 'Hash should not be the same after adding an element' );
 
 		$array->addElement( $element );
 
-		$this->assertFalse(
-			$newHash === $array->getHash(),
+		$this->assertNotSame(
+			$newHash,
+			$array->getHash(),
 			'Hash should not be the same after adding an existing element again'
 		);
 	}

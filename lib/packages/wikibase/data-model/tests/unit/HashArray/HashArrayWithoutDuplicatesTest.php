@@ -99,16 +99,19 @@ class HashArrayWithoutDuplicatesTest extends HashArrayTest {
 	public function testGetHash( HashArray $array ) {
 		$hash = $array->getHash();
 
-		$this->assertEquals( $hash, $array->getHash() );
+		$this->assertSame( $hash, $array->getHash() );
 
 		$elements = $this->elementInstancesProvider();
 		$element = array_shift( $elements );
 		$element = $element[0][0];
 
-		$hasElement = $array->hasElement( $element );
 		$array->addElement( $element );
 
-		$this->assertTrue( ( $hash === $array->getHash() ) === $hasElement );
+		if ( $array->hasElement( $element ) ) {
+			$this->assertSame( $hash, $array->getHash() );
+		} else {
+			$this->assertNotSame( $hash, $array->getHash() );
+		}
 	}
 
 	/**
