@@ -3,6 +3,8 @@ language: php
 php:
 - 5.3
 
+sudo: false
+
 env:
 - RUNJOB=jshint
 
