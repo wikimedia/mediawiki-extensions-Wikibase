@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_08eb75dc",
+        "filename": "lib/includes/formatters/EscapingSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-10T16:34:34Z",
+      "side": 1,
+      "message": "Must not be HTML. Will fix in a follow up.",
+      "revId": "f5f37c02e5d197d7d9d668f7b0b79bfb9fe1d0a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
