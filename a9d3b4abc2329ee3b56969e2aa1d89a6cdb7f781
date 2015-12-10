@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_bd906547",
+        "filename": "lib/includes/UnionContentLanguages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-10T15:02:28Z",
+      "side": 1,
+      "message": "Array keys are not relevant here. Duplicates are most probably also not relevant. But I agree that a \"union\" should avoid duplicates.",
+      "parentUuid": "8ead036b_9a4ecf9a",
+      "revId": "a9d3b4abc2329ee3b56969e2aa1d89a6cdb7f781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_3a26bbca",
         "filename": "lib/tests/phpunit/UnionContentLanguagesTest.php",
         "patchSetId": 5
