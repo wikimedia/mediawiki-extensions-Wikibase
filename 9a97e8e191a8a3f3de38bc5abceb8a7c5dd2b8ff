@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_7dd3cd61",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-10T16:36:00Z",
+      "side": 1,
+      "message": "for extra safety, this could check whether the format is known at all, to make sure we don\u0027t run into problems here if we were to introduce a new format.",
+      "revId": "9a97e8e191a8a3f3de38bc5abceb8a7c5dd2b8ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
