@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_9ab80f76",
+        "filename": "lib/includes/UnionContentLanguages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-10T13:39:09Z",
+      "side": 1,
+      "message": "Why set to null explicitly?",
+      "revId": "a9d3b4abc2329ee3b56969e2aa1d89a6cdb7f781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_9a4ecf9a",
+        "filename": "lib/includes/UnionContentLanguages.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-10T13:39:09Z",
+      "side": 1,
+      "message": "you need:\narray_unique( array_merge( $this-\u003eb-\u003egetLanguages(), $this-\u003ea-\u003egetLanguages() ) );",
+      "revId": "a9d3b4abc2329ee3b56969e2aa1d89a6cdb7f781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_3a26bbca",
+        "filename": "lib/tests/phpunit/UnionContentLanguagesTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-10T13:39:09Z",
+      "side": 1,
+      "message": "These tests are insufficient, see my comment in UnionContentLanguages which point out bugs that should have been found here. The first language in both lists shouldn\u0027t match.",
+      "revId": "a9d3b4abc2329ee3b56969e2aa1d89a6cdb7f781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_fa2fc39a",
+        "filename": "lib/tests/phpunit/UnionContentLanguagesTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-10T13:39:09Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "a9d3b4abc2329ee3b56969e2aa1d89a6cdb7f781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_7a1bd382",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-10T13:39:09Z",
+      "side": 1,
+      "message": "maybe add a comment where this comes from?",
+      "revId": "a9d3b4abc2329ee3b56969e2aa1d89a6cdb7f781",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
