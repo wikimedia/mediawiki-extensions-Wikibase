@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_6aa9b6db",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T15:29:10Z",
+      "side": 1,
+      "message": "Not sure about this. I liked the brighter background color. But I will not oppose if PM says this is ok.",
+      "revId": "2b2cba2305d760aed808515c9dc4886f4ccb012b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_4a615acf",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T15:29:10Z",
+      "side": 1,
+      "message": "This border is not visible because it has the same color as the background.",
+      "revId": "2b2cba2305d760aed808515c9dc4886f4ccb012b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_aa700ea4",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 10
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T15:29:10Z",
+      "side": 1,
+      "message": "I do not like this detail. I think this is to narrow. This creates the situation where the collapsed \"1 reference\" toggle and the \"add reference\" button is much, much closer to the line below, almost touching it.",
+      "revId": "2b2cba2305d760aed808515c9dc4886f4ccb012b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
