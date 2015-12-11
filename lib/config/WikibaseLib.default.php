@@ -68,6 +68,7 @@ $wgWBLibDefaultSettings = array(
 		'string',
 		'time',
 		'url',
+		'external-id',
 		'wikibase-item',
 		'wikibase-property',
 	),

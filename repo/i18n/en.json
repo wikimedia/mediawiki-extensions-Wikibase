@@ -360,6 +360,8 @@
 	"wikibase-listdatatypes-time-body": "Literal data field for a point in time. Given as a date and time with some precision and boundaries. The time is saved internally in the specified calendar model.\n* time – explicit value for point in time, represented as a timestamp resembling ISO 8601, e.g. +2013-01-01T00:00:00Z. The year is always signed and padded to have between 4 and 16 digits.\n* timezone – explicit value as a signed integer. Timezone information as an offset from UTC in minutes.\n* before – explicit integer value for how many units after the given time it could be. The unit is given by the precision.\n* after – explicit integer value for how many units before the given time it could be. The unit is given by the precision.\n* precision – explicit value encoded in a shortint. The numbers have the following meaning: 0 - billion years, 1 - hundred million years, ..., 6 - millennium, 7 - century, 8 - decade, 9 - year, 10 - month, 11 - day, 12 - hour, 13 - minute, 14 - second.\n* calendarmodel – explicit value given as a URI. It identifies the calendar model of the timestamp.",
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-url-body": "Literal data field for a URL. URLs are restricted to the protocols also supported for external links in wikitext.",
+	"wikibase-listdatatypes-external-id-head": "External identifier",
+	"wikibase-listdatatypes-external-id-body": "Literal data field for an external identifier. External identifiers may automatically be linked to an authoritative resource for display.",
 	"wikibase-concept-uri": "Concept URI",
 	"wikibase-concept-uri-tooltip": "URI that identifies the concept described by this item",
 	"wikibase-add-badges": "Add badges",
