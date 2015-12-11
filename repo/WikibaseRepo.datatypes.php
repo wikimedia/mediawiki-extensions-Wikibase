@@ -239,6 +239,19 @@ return call_user_func( function() {
 				return new ObjectUriRdfBuilder();
 			},
 		),
+		'PT:id' => array(
+			'validator-factory-callback' => function() {
+				$factory = WikibaseRepo::getDefaultValidatorBuilders();
+				return $factory->buildStringValidators();
+			},
+			'parser-factory-callback' => $newStringParser,
+			// NOTE: for 'formatter-factory-callback', we fall back to plain text formatting
+			'snak-formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseRepo::getDefaultSnakFormatterBuilders();
+				return $factory->newExternalIdentifierFormatter( $format, $options );
+			},
+			// TODO: RDF mapping using canonical URI patterns
+		),
 		'VT:wikibase-entityid' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();

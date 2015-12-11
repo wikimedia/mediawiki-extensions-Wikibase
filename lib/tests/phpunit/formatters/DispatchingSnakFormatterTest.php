@@ -62,6 +62,44 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @dataProvider constructorProvider
+	 */
+	public function testConstructor( $format, array $formattersBySnakType, array $formattersByDataType ) {
+		$dataTypeLookup = $this->getDataTypeLookup();
+
+		new DispatchingSnakFormatter(
+			$format,
+			$dataTypeLookup,
+			$formattersBySnakType,
+			$formattersByDataType
+		);
+
+		// we are just checking that the constructor did not throw an exception
+		$this->assertTrue( true );
+	}
+
+	public function constructorProvider() {
+		$formatter = new MessageSnakFormatter(
+			'novalue',
+			wfMessage( 'wikibase-snakview-snaktypeselector-novalue' ),
+			SnakFormatter::FORMAT_HTML_DIFF
+		);
+
+		return array(
+			'plain constructor call' => array(
+				SnakFormatter::FORMAT_HTML_DIFF,
+				array( 'novalue' => $formatter ),
+				array( 'string' => $formatter ),
+			),
+			'constructor call with formatters for base format ID' => array(
+				SnakFormatter::FORMAT_HTML,
+				array( 'novalue' => $formatter ),
+				array( 'string' => $formatter ),
+			),
+		);
+	}
+
+	/**
 	 * @dataProvider constructorErrorsProvider
 	 */
 	public function testConstructorErrors( $format, array $formattersBySnakType, array $formattersByDataType ) {

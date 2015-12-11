@@ -56,6 +56,8 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 		// 'wikibase-listdatatypes-string-body'
 		// 'wikibase-listdatatypes-url-head'
 		// 'wikibase-listdatatypes-url-body'
+		// 'wikibase-listdatatypes-external-id-head'
+		// 'wikibase-listdatatypes-external-id-body'
 
 		foreach ( $this->getDataTypeIds() as $dataTypeId ) {
 			$this->getOutput()->addHTML( $this->getHtmlForDataTypeId( $dataTypeId ) );
