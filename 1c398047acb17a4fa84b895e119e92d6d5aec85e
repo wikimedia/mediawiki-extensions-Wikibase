@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_0af282cd",
+        "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T16:11:24Z",
+      "side": 1,
+      "message": "This looks like it should have a library function somewhere. Is there no existing wf… function we can use?",
+      "revId": "1c398047acb17a4fa84b895e119e92d6d5aec85e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_eaf4c6bb",
+        "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T16:11:24Z",
+      "side": 1,
+      "message": "Still wrong. :-(",
+      "revId": "1c398047acb17a4fa84b895e119e92d6d5aec85e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_4ae87add",
+        "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T16:11:24Z",
+      "side": 1,
+      "message": "Still wrong. :-(",
+      "revId": "1c398047acb17a4fa84b895e119e92d6d5aec85e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
