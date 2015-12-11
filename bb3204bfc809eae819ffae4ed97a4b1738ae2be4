@@ -282,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_afb82075",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:49:03Z",
+      "side": 1,
+      "message": "Without a href it does not really have much more semantics than a \u003cspan\u003e. An \u003ca\u003e is supposed to act like a \u003cspan\u003e. At the same time it tells you it\u0027s a placeholder for something that\u0027s usually a link.\n\nI agree this should be tested with our CSS. So it must not be done in this patch.",
+      "parentUuid": "8ead036b_cf69dc1e",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_4f9c0c60",
         "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
         "patchSetId": 8
@@ -457,6 +475,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_cfbd5c65",
+        "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:49:03Z",
+      "side": 1,
+      "message": "It says HTML below.",
+      "parentUuid": "8ead036b_4f55ec51",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_2fc6704f",
         "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
         "patchSetId": 8
@@ -486,6 +522,23 @@
       "side": 1,
       "message": "hm, right... do we have a nice function for this somewhere?",
       "parentUuid": "8ead036b_2fc6704f",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_6fb22894",
+        "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:49:03Z",
+      "side": 1,
+      "message": "Ouch. Must be wikitext.",
       "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
