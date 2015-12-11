@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ead036b_af8ca03b",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "A formatter for itself?",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_6f86a81a",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "What is \"some resource\"?",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_2f80b0f8",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "Either \"property id\" or \"PropertyId\".",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_0f77f436",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "No need for the newlines.",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_2febd0dc",
         "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
         "patchSetId": 8
@@ -13,6 +81,108 @@
       "writtenOn": "2015-12-11T14:00:52Z",
       "side": 1,
       "message": "should this be $snak-\u003egetDataValue?",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_cf90fc48",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "Or \"@return string HTML\". Done.",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_6f954835",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "I really do not like all these full qualified class names burried in strings.",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_2f9f5057",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "I think I said that before. Please use an \u003ca\u003e element with no href. This is valid HTML5.",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_4f9c0c60",
+        "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "An other formatter for itself? These sentences do not make much sense. Copy paste mistakes?",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_efa85876",
+        "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "\"Some\" how?",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_cfb79cd2",
+        "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "One line please.",
       "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -36,6 +206,40 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_4fc3ac3d",
+        "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "@return string HTML",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_2fc6704f",
+        "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "How do you know the URL does not need escaping? I know, for example, that square brackets in the URL need special syntax when used in Wikitext. Please add a test for that.",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_6fb8e8e2",
         "filename": "lib/tests/phpunit/formatters/HtmlIdValueSnakFormatterTest.php",
         "patchSetId": 8
@@ -47,6 +251,41 @@
       "writtenOn": "2015-12-11T14:08:40Z",
       "side": 1,
       "message": "should this be $formatterUrlLookup?",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_0fbdb4ad",
+        "filename": "lib/tests/phpunit/formatters/HtmlIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "It\u0027s not a lookup but an $expander.",
+      "parentUuid": "8ead036b_6fb8e8e2",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_afd9002e",
+        "filename": "lib/tests/phpunit/formatters/HtmlIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d",
       "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +320,24 @@
       "writtenOn": "2015-12-11T14:08:40Z",
       "side": 1,
       "message": "$formatterUrlLookup",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_6fe308d5",
+        "filename": "lib/tests/phpunit/formatters/WikitextIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:28:33Z",
+      "side": 1,
+      "message": "$expander",
+      "parentUuid": "8ead036b_8fbd24d4",
       "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
