@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_6a221652",
+        "filename": "lib/includes/store/FieldPropertyInfoProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T16:06:55Z",
+      "side": 1,
+      "message": "But this is not an interface.",
+      "revId": "e5227db3b130ad052ed8d38861e28791809a95aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_2a1c1e18",
+        "filename": "lib/includes/store/FieldPropertyInfoProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T16:06:55Z",
+      "side": 1,
+      "message": "I like non-inverted logic more. ;-)",
+      "revId": "e5227db3b130ad052ed8d38861e28791809a95aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
