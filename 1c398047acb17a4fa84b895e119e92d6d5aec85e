@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_08e147fb",
+        "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T20:43:03Z",
+      "side": 1,
+      "message": "I could not find any. And the use case is somewhat special. Usually, configurable URLs are used in HTML, not in wikitext.",
+      "parentUuid": "8ead036b_0af282cd",
+      "revId": "1c398047acb17a4fa84b895e119e92d6d5aec85e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_eaf4c6bb",
         "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
         "patchSetId": 13
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_28e68314",
+        "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T20:43:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ead036b_eaf4c6bb",
+      "revId": "1c398047acb17a4fa84b895e119e92d6d5aec85e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_4ae87add",
         "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
         "patchSetId": 13
@@ -47,6 +83,24 @@
       "writtenOn": "2015-12-11T16:11:24Z",
       "side": 1,
       "message": "Still wrong. :-(",
+      "revId": "1c398047acb17a4fa84b895e119e92d6d5aec85e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_68c31b62",
+        "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T20:43:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ead036b_4ae87add",
       "revId": "1c398047acb17a4fa84b895e119e92d6d5aec85e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
