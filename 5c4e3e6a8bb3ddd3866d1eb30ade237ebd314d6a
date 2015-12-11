@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ead036b_4f6bac82",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T13:45:56Z",
+      "side": 1,
+      "message": "I still think this $propertyInfoKey does not belong here. This should be an implementation detail of the PropertyInfoStore passed in here. PropertyInfoTable should have a constructor argument for that and only return the information from this field, not an arbitrary array. This requires a major redesign of the PropertyInfoStore interface and therefore should not be done in this patch. Probably in a patch before this, or later.",
+      "revId": "5c4e3e6a8bb3ddd3866d1eb30ade237ebd314d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_713dd8b7",
         "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
         "patchSetId": 9
@@ -19,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_cf38fc9d",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T13:45:56Z",
+      "side": 1,
+      "message": "Is this aware of a character set?",
+      "revId": "5c4e3e6a8bb3ddd3866d1eb30ade237ebd314d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_f170e8a4",
         "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
         "patchSetId": 9
@@ -30,6 +64,24 @@
       "writtenOn": "2015-11-25T08:48:12Z",
       "side": 1,
       "message": "I know that was not decided by this change, but I\u0027m quite sad about the amount of inflexibility introduced into Wikibase here. This is another case of Wikibase not being flexible enough to allow Wikidata to handle their requirements in a clean fashion.",
+      "revId": "5c4e3e6a8bb3ddd3866d1eb30ade237ebd314d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_6f3d488a",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T13:45:56Z",
+      "side": 1,
+      "message": "What exactly are you referring to?",
+      "parentUuid": "0ebaf39b_f170e8a4",
       "revId": "5c4e3e6a8bb3ddd3866d1eb30ade237ebd314d6a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
