@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_8f9a0465",
+        "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T14:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ead036b_2febd0dc",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_cf90fc48",
         "filename": "lib/includes/formatters/HtmlIdValueSnakFormatter.php",
         "patchSetId": 8
@@ -206,6 +224,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_0fa614a8",
+        "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T14:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ead036b_eff4d8bb",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_4fc3ac3d",
         "filename": "lib/includes/formatters/WikitextIdValueSnakFormatter.php",
         "patchSetId": 8
@@ -275,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_8fb1a4de",
+        "filename": "lib/tests/phpunit/formatters/HtmlIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T14:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ead036b_6fb8e8e2",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_afd9002e",
         "filename": "lib/tests/phpunit/formatters/HtmlIdValueSnakFormatterTest.php",
         "patchSetId": 8
@@ -309,6 +363,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_8fe8c4b0",
+        "filename": "lib/tests/phpunit/formatters/WikitextIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T14:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ead036b_4fcf2c83",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_8fbd24d4",
         "filename": "lib/tests/phpunit/formatters/WikitextIdValueSnakFormatterTest.php",
         "patchSetId": 8
@@ -337,6 +409,24 @@
       "writtenOn": "2015-12-11T14:28:33Z",
       "side": 1,
       "message": "$expander",
+      "parentUuid": "8ead036b_8fbd24d4",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_2fcd1063",
+        "filename": "lib/tests/phpunit/formatters/WikitextIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T14:30:45Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "8ead036b_8fbd24d4",
       "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
