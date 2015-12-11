@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_2fac3032",
+        "filename": "lib/includes/formatters/WikitextExternalIdentifierFormatter.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T14:49:27Z",
+      "side": 1,
+      "message": "Wikitext.",
+      "revId": "304e206eb772b43e5871b3c517991637752d9574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
