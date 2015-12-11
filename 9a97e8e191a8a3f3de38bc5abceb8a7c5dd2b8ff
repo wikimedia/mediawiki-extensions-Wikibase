@@ -16,6 +16,23 @@
       "revId": "9a97e8e191a8a3f3de38bc5abceb8a7c5dd2b8ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_54190326",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T09:50:11Z",
+      "side": 1,
+      "message": "$vocabularyUriFormatter \u003d $this-\u003egetVocabularyUriFormatter( $options ); appears the same for all cases.\n\nsuggest we not duplicate this in each block here.",
+      "revId": "9a97e8e191a8a3f3de38bc5abceb8a7c5dd2b8ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
