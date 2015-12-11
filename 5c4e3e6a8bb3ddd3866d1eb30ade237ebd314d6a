@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_6f222852",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-11T13:55:16Z",
+      "side": 1,
+      "message": "no, it encodes bytes.",
+      "parentUuid": "8ead036b_cf38fc9d",
+      "revId": "5c4e3e6a8bb3ddd3866d1eb30ade237ebd314d6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ebaf39b_f170e8a4",
         "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
         "patchSetId": 9
