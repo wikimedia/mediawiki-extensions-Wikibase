@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_4e7d07e4",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T23:25:57Z",
+      "side": 1,
+      "message": "seems unused",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_6e8243cf",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T23:25:57Z",
+      "side": 1,
+      "message": "many of these seem unused",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_8e23ffff",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T23:25:57Z",
+      "side": 1,
+      "message": "what are these tests using the database for?",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_2e8c4bff",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T23:25:57Z",
+      "side": 1,
+      "message": "this is the repo!",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_ce70170a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T23:25:57Z",
+      "side": 1,
+      "message": "repo! :)",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_ee6dd32e",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T23:25:57Z",
+      "side": 1,
+      "message": "repo! :)",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
