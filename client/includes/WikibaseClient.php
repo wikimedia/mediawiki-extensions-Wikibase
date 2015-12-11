@@ -60,6 +60,7 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\NamespaceChecker;
@@ -209,6 +210,48 @@ final class WikibaseClient {
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			new LanguageNameLookup(),
 			$this->getRepoEntityUriParser()
+		);
+	}
+
+	/**
+	 * Returns the default WikibaseSnakFormatterBuilders instance.
+	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
+	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $reset Flag: Pass "reset" to reset the default instance
+	 *
+	 * @return WikibaseSnakFormatterBuilders
+	 */
+	public static function getDefaultSnakFormatterBuilders( $reset = 'noreset' ) {
+		static $builders;
+
+		if ( $builders === null || $reset === 'reset' ) {
+			$builders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
+				self::getDefaultFormatterBuilders()
+			);
+		}
+
+		return $builders;
+	}
+
+	/**
+	 * Returns a low level factory object for creating formatters for well known data types.
+	 *
+	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
+	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
+	 *
+	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
+	 *
+	 * @return WikibaseSnakFormatterBuilders
+	 */
+	private function newWikibaseSnakFormatterBuilders( WikibaseValueFormatterBuilders $valueFormatterBuilders ) {
+		return new WikibaseSnakFormatterBuilders(
+			$valueFormatterBuilders,
+			$this->getStore()->getPropertyInfoStore(),
+			$this->getPropertyDataTypeLookup(),
+			$this->getDataTypeFactory()
 		);
 	}
 

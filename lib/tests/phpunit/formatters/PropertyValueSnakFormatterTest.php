@@ -7,6 +7,8 @@ use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\StringFormatter;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -91,7 +93,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider formatSnakProvider
 	 */
 	public function testFormatSnak(
-		$snak, $dataType, $valueType, $targetFormat, $formatters,
+		$snak, $dataType, $valueType, $targetFormat, ValueFormatter $formatter,
 		$expected, $expectedException = null
 	) {
 		if ( $expectedException !== null ) {
@@ -108,7 +110,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 		$formatter = new PropertyValueSnakFormatter(
 			$targetFormat,
 			$options,
-			new DispatchingValueFormatter( $formatters ),
+			$formatter,
 			$typeLookup,
 			$typeFactory
 		);
@@ -134,13 +136,15 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 			'PT:commonsMedia' => $this->getMockFormatter( 'PT:commonsMedia' )
 		);
 
+		$dispatchingFormatter = new DispatchingValueFormatter( $formatters );
+
 		return array(
 			'match PT' => array(
 				new PropertyValueSnak( 17, new StringValue( 'Foo.jpg' ) ),
 				'commonsMedia',
 				'string',
 				SnakFormatter::FORMAT_PLAIN,
-				$formatters,
+				$dispatchingFormatter,
 				'/^PT:commonsMedia$/'
 			),
 
@@ -149,8 +153,17 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'someStuff',
 				'string',
 				SnakFormatter::FORMAT_WIKI,
-				$formatters,
+				$dispatchingFormatter,
 				'/^VT:string$/'
+			),
+
+			'use plain value formatter' => array(
+				new PropertyValueSnak( 33, new StringValue( 'something' ) ),
+				'url',
+				'string',
+				SnakFormatter::FORMAT_WIKI,
+				new StringFormatter(),
+				'/^something$/'
 			),
 
 			'UnDeserializableValue, fail' => array(
@@ -160,7 +173,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'globe-coordinate',
 				'globecoordinate',
 				SnakFormatter::FORMAT_HTML,
-				$formatters,
+				$dispatchingFormatter,
 				null,
 				'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
 			),
@@ -170,7 +183,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'url',
 				'iri', // url expects an iri, but will get a string
 				SnakFormatter::FORMAT_WIKI,
-				$formatters,
+				$dispatchingFormatter,
 				null,
 				'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
 			),
@@ -180,7 +193,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				'', // triggers an exception from the mock PropertyDataTypeLookup
 				'xxx', // should not be used
 				SnakFormatter::FORMAT_HTML,
-				$formatters,
+				$dispatchingFormatter,
 				null,
 				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
 			),
