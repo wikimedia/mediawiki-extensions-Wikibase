@@ -33,6 +33,57 @@
       "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_6fb8e8e2",
+        "filename": "lib/tests/phpunit/formatters/HtmlIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T14:08:40Z",
+      "side": 1,
+      "message": "should this be $formatterUrlLookup?",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_4fcf2c83",
+        "filename": "lib/tests/phpunit/formatters/WikitextIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T14:08:40Z",
+      "side": 1,
+      "message": "what do these tests use the database for?  would be nice if we didn\u0027t need this, but meh...",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_8fbd24d4",
+        "filename": "lib/tests/phpunit/formatters/WikitextIdValueSnakFormatterTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T14:08:40Z",
+      "side": 1,
+      "message": "$formatterUrlLookup",
+      "revId": "bb3204bfc809eae819ffae4ed97a4b1738ae2be4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
