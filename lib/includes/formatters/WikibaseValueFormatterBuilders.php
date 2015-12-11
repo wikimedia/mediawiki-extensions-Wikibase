@@ -16,7 +16,10 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
+use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
+use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\PropertyInfoStore;
 
 /**
  * Low level factory for ValueFormatters for well known data types.
@@ -192,7 +195,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 * @param FormatterOptions $options
 	 *
-	 * @return ValueFormatter
+	 * @return ValueFormatter|null
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
 		//TODO: for FORMAT_WIKI, wikitext image link (inline? thumbnail? caption?...)
