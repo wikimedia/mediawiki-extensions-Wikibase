@@ -136,35 +136,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		return $formatter;
 	}
 
-	/**
-	public function testFormatterForValueType_formats() {
-		$formats = array(
-			SnakFormatter::FORMAT_PLAIN,
-			SnakFormatter::FORMAT_WIKI,
-			SnakFormatter::FORMAT_HTML,
-			SnakFormatter::FORMAT_HTML_DIFF,
-			SnakFormatter::FORMAT_HTML_WIDGET
-		);
-
-		$valueTypes = array(
-			'string',
-			'wikibase-entityid',
-			'monolingualtext',
-			'time',
-			'globecoordinate',
-			'quantity',
-		);
-
-		$options = new FormatterOptions();
-
-		foreach ( $formats as $format ) {
-			foreach ( $valueTypes as $type ) {
-				// getFormatterForValueType asserts that a valid formatter is returned
-				$this->getFormatterForValueType( $type, $format, $options );
-			}
-		}
-	}
-
 	public function testNewFormatter_formats() {
 		$formats = array(
 			SnakFormatter::FORMAT_PLAIN,
@@ -174,7 +145,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			SnakFormatter::FORMAT_HTML_WIDGET
 		);
 
-		// Note: these are not actual data-type IDs,
 		$functionNames = array(
 			'newStringFormatter',
 			'newUrlFormatter',
@@ -196,6 +166,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		}
 	}
 
+	/**
 	 * @dataProvider provideNewFormatter
 	 */
 	public function testNewFormatter(
@@ -400,34 +371,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
-			'wikitext escape' => array(
-				SnakFormatter::FORMAT_WIKI,
-				$this->newFormatterOptions(),
-				new StringValue( '[[foo]]' ),
-				'@^&#91;&#91;foo&#93;&#93;$@'
-			),
-
-			'html escape' => array(
-				SnakFormatter::FORMAT_HTML,
-				$this->newFormatterOptions(),
-				new StringValue( '<foo>' ),
-				'@^&lt;foo&gt;$@'
-			),
-
-			'html details escape' => array(
-				SnakFormatter::FORMAT_HTML_DIFF,
-				$this->newFormatterOptions(),
-				new StringValue( '<foo>' ),
-				'@^&lt;foo&gt;$@'
-			),
-
-			'html widget escape' => array(
-				SnakFormatter::FORMAT_HTML_WIDGET,
-				$this->newFormatterOptions(),
-				new StringValue( '<foo>' ),
-				'@^&lt;foo&gt;$@'
-			),
-
 	 * In case WikibaseValueFormatterBuilders doesn't have a EntityTitleLookup it returns
 	 * a formatter which doesn't link the entity id.
 	 *

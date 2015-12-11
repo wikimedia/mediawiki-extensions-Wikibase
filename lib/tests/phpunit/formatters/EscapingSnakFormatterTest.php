@@ -6,7 +6,6 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EscapingSnakFormatter;
-use Wikibase\Lib\PropertyValueSnakFormatter;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -25,7 +24,7 @@ class EscapingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param string $output
 	 *
-	 * @return PropertyValueSnakFormatter
+	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter( $output ) {
 		$formatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
@@ -50,7 +49,7 @@ class EscapingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 
 		$p1 = new PropertyId( 'P77' );
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'DUMMY' ) );
-		$this->assertEquals( '&lt;foo&gt;', $formatter->formatSnak( $snak ) );
+		$this->assertSame( '&lt;foo&gt;', $formatter->formatSnak( $snak ) );
 	}
 
 	public function testGetFormat() {
@@ -60,7 +59,7 @@ class EscapingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			'htmlspecialchars'
 		);
 
-		$this->assertEquals( 'text/whatever', $formatter->getFormat() );
+		$this->assertSame( 'text/whatever', $formatter->getFormat() );
 	}
 
 }

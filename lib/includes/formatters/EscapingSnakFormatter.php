@@ -33,7 +33,7 @@ class EscapingSnakFormatter implements SnakFormatter {
 	/**
 	 * @param string $format
 	 * @param SnakFormatter $formatter
-	 * @param callable $escapeCallback A callable taking plain text and returning escaped HTML
+	 * @param callable $escapeCallback A callable taking plain text and returning escaped text.
 	 */
 	public function __construct( $format, SnakFormatter $formatter, $escapeCallback ) {
 		Assert::parameterType( 'string', $format, '$format' );
