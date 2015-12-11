@@ -78,11 +78,23 @@ class DispatchingSnakFormatter implements SnakFormatter {
 				throw new InvalidArgumentException( 'formatter array must contain instances of SnakFormatter.' );
 			}
 
-			if ( $formatter->getFormat() !== $format ) {
+			//strip MIME parameters from the format identifier before comparing
+			if ( $this->getBaseFormat( $formatter->getFormat() ) !== $this->getBaseFormat( $format ) ) {
 				throw new InvalidArgumentException( 'The formatter supplied for ' . $type
 					. ' produces ' . $formatter->getFormat() . ', but we expect ' . $format . '.' );
 			}
 		}
+	}
+
+	/**
+	 * Strips MIME parameters
+	 *
+	 * @param $format
+	 *
+	 * @return mixed
+	 */
+	private function getBaseFormat( $format ) {
+		return preg_replace( '/ *;.*$/', '', $format );
 	}
 
 	/**
