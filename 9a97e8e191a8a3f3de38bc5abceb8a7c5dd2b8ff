@@ -33,6 +33,23 @@
       "revId": "9a97e8e191a8a3f3de38bc5abceb8a7c5dd2b8ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ead036b_94e69b12",
+        "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T09:56:58Z",
+      "side": 1,
+      "message": "why is this all commented out like this?",
+      "revId": "9a97e8e191a8a3f3de38bc5abceb8a7c5dd2b8ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
