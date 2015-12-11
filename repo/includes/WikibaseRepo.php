@@ -38,6 +38,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
+use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
@@ -319,6 +320,48 @@ class WikibaseRepo {
 			new LanguageNameLookup(),
 			$this->getLocalEntityUriParser(),
 			$this->getEntityTitleLookup()
+		);
+	}
+
+	/**
+	 * Returns the default WikibaseSnakFormatterBuilders instance.
+	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
+	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
+	 *
+	 * @since 0.5
+	 *
+	 * @param string $reset Flag: Pass "reset" to reset the default instance
+	 *
+	 * @return WikibaseSnakFormatterBuilders
+	 */
+	public static function getDefaultSnakFormatterBuilders( $reset = 'noreset' ) {
+		static $builders;
+
+		if ( $builders === null || $reset === 'reset' ) {
+			$builders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
+				self::getDefaultFormatterBuilders()
+			);
+		}
+
+		return $builders;
+	}
+
+	/**
+	 * Returns a low level factory object for creating formatters for well known data types.
+	 *
+	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
+	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
+	 *
+	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
+	 *
+	 * @return WikibaseSnakFormatterBuilders
+	 */
+	private function newWikibaseSnakFormatterBuilders( WikibaseValueFormatterBuilders $valueFormatterBuilders ) {
+		return new WikibaseSnakFormatterBuilders(
+			$valueFormatterBuilders,
+			$this->getStore()->getPropertyInfoStore(),
+			$this->getPropertyDataTypeLookup(),
+			$this->getDataTypeFactory()
 		);
 	}
 
