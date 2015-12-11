@@ -19,9 +19,14 @@ interface PropertyInfoStore {
 	const KEY_DATA_TYPE = 'type';
 
 	/**
-	 * Key to use in the info array for the property's formatter URL
+	 * Key to use in the info array for the property's formatter URL pattern
 	 */
 	const KEY_FORMATTER_URL = 'formatterURL';
+
+	/**
+	 * Key to use in the info array for the property's canonical URI pattern
+	 */
+	const KEY_CANONICAL_URI = 'canonicalURI';
 
 	/**
 	 * Returns the property info for the given property ID.

@@ -9,7 +9,7 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers Wikibase\Rdf\Values\ObjectValueRdfBuilder
+ * @covers Wikibase\Rdf\Values\ObjectUriRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class ObjectValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class ObjectUriRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddValue() {
 		$builder = new ObjectUriRdfBuilder();
