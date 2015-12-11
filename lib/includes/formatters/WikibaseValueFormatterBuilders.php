@@ -98,14 +98,33 @@ class WikibaseValueFormatterBuilders {
 	}
 
 	/**
+	 * @param string $format One of the SnakFormatter::FORMAT_... constants.
+	 *
+	 * @throws InvalidArgumentException
+	 * @return string Either SnakFormatter::FORMAT_HTML, ...WIKI or ...PLAIN.
+	 */
+	private function getBaseFormat( $format ) {
+		switch ( $format ) {
+			case SnakFormatter::FORMAT_HTML:
+			case SnakFormatter::FORMAT_HTML_DIFF:
+			case SnakFormatter::FORMAT_HTML_WIDGET:
+				return SnakFormatter::FORMAT_HTML;
+			case SnakFormatter::FORMAT_WIKI:
+			case SnakFormatter::FORMAT_PLAIN:
+				return $format;
+		}
+
+		throw new InvalidArgumentException( 'Unsupported output format: ' . $format );
+	}
+
+	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 *
+	 * @throws InvalidArgumentException
 	 * @return bool True if $format is one of the SnakFormatter::FORMAT_HTML_XXX formats.
 	 */
 	private function isHtmlFormat( $format ) {
-		return $format === SnakFormatter::FORMAT_HTML
-			|| $format === SnakFormatter::FORMAT_HTML_DIFF
-			|| $format === SnakFormatter::FORMAT_HTML_WIDGET;
+		return $this->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML;
 	}
 
 	/**
@@ -117,14 +136,13 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	private function escapeValueFormatter( $format, ValueFormatter $formatter ) {
-		if ( $this->isHtmlFormat( $format ) ) {
-			return new EscapingValueFormatter( $formatter, 'htmlspecialchars' );
-		} elseif ( $format === SnakFormatter::FORMAT_WIKI ) {
-			return new EscapingValueFormatter( $formatter, 'wfEscapeWikiText' );
-		} elseif ( $format === SnakFormatter::FORMAT_PLAIN ) {
-			return $formatter;
-		} else {
-			throw new InvalidArgumentException( 'Unsupported output format: ' . $format );
+		switch ( $this->getBaseFormat( $format ) ) {
+			case SnakFormatter::FORMAT_HTML:
+				return new EscapingValueFormatter( $formatter, 'htmlspecialchars' );
+			case SnakFormatter::FORMAT_WIKI:
+				return new EscapingValueFormatter( $formatter, 'wfEscapeWikiText' );
+			default:
+				return $formatter;
 		}
 	}
 
@@ -178,13 +196,14 @@ class WikibaseValueFormatterBuilders {
 	 * @return ValueFormatter
 	 */
 	public function newUrlFormatter( $format, FormatterOptions $options ) {
-		if ( $format === SnakFormatter::FORMAT_WIKI ) {
-			// use the string formatter without escaping!
-			return new StringFormatter( $options );
-		} elseif ( $this->isHtmlFormat( $format ) ) {
-			return new HtmlUrlFormatter( $options );
-		} else {
-			return $this->escapeValueFormatter( $format, new StringFormatter( $options ) );
+		switch ( $this->getBaseFormat( $format ) ) {
+			case SnakFormatter::FORMAT_HTML:
+				return new HtmlUrlFormatter( $options );
+			case SnakFormatter::FORMAT_WIKI:
+				// Use the string formatter without escaping!
+				return new StringFormatter( $options );
+			default:
+				return $this->escapeValueFormatter( $format, new StringFormatter( $options ) );
 		}
 	}
 
@@ -199,7 +218,7 @@ class WikibaseValueFormatterBuilders {
 		if ( $this->isHtmlFormat( $format ) ) {
 			return new CommonsLinkFormatter( $options );
 		} else {
-			return $this->escapeValueFormatter( $format, new StringFormatter( $options ) );
+			return $this->newStringFormatter( $format, $options );
 		}
 	}
 
@@ -249,17 +268,16 @@ class WikibaseValueFormatterBuilders {
 	 * @return QuantityFormatter
 	 */
 	public function newQuantityFormatter( $format, FormatterOptions $options ) {
+		$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
+
 		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
 			$localizer = $this->getNumberLocalizer( $options );
-			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
 			return new QuantityDetailsFormatter( $localizer, $vocabularyUriFormatter, $options );
 		} elseif ( $this->isHtmlFormat( $format ) ) {
 			$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
-			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
 			return new QuantityHtmlFormatter( $options, $decimalFormatter, $vocabularyUriFormatter );
 		} else {
 			$decimalFormatter = new DecimalFormatter( $options, $this->getNumberLocalizer( $options ) );
-			$vocabularyUriFormatter = $this->getVocabularyUriFormatter( $options );
 			$plainFormatter = new QuantityFormatter( $options, $decimalFormatter, $vocabularyUriFormatter );
 			return $this->escapeValueFormatter( $format, $plainFormatter );
 		}
