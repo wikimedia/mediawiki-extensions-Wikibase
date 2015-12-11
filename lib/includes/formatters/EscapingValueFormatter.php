@@ -26,7 +26,7 @@ class EscapingValueFormatter implements ValueFormatter {
 
 	/**
 	 * @param ValueFormatter $formatter
-	 * @param callable $escapeCallback A callable taking plain text and returning escaped HTML
+	 * @param callable $escapeCallback A callable taking plain text and returning escaped text.
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( ValueFormatter $formatter, $escapeCallback ) {
@@ -39,13 +39,11 @@ class EscapingValueFormatter implements ValueFormatter {
 	}
 
 	/**
-	 * Formats a value.
-	 *
 	 * @since 0.1
 	 *
-	 * @param mixed $value The value to format
+	 * @param mixed $value
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	public function format( $value ) {
 		$text = $this->formatter->format( $value );

@@ -23,14 +23,14 @@ use Wikimedia\Assert\Assert;
 class OutputFormatSnakFormatterFactory {
 
 	/**
+	 * @var callable[]
+	 */
+	private $snakFormatterConstructorCallbacks;
+
+	/**
 	 * @var OutputFormatValueFormatterFactory
 	 */
 	private $valueFormatterFactory;
-
-	/**
-	 * @var DataTypeFactory
-	 */
-	private $dataTypeFactory;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -38,9 +38,9 @@ class OutputFormatSnakFormatterFactory {
 	private $propertyDataTypeLookup;
 
 	/**
-	 * @var callable[]
+	 * @var DataTypeFactory
 	 */
-	private $snakFormatterConstructorCallbacks;
+	private $dataTypeFactory;
 
 	/**
 	 * @param callable[] $snakFormatterConstructorCallbacks An associative array mapping property
@@ -63,10 +63,10 @@ class OutputFormatSnakFormatterFactory {
 			'$snakFormatterConstructorCallbacks'
 		);
 
+		$this->snakFormatterConstructorCallbacks = $snakFormatterConstructorCallbacks;
 		$this->valueFormatterFactory = $valueFormatterFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
-		$this->snakFormatterConstructorCallbacks = $snakFormatterConstructorCallbacks;
 	}
 
 	/**
@@ -168,8 +168,6 @@ class OutputFormatSnakFormatterFactory {
 
 			$formatters[$key] = $instance;
 		}
-
-		//FIXME: format fallback via escaping, as implemented in OutputFormatValueFormatterFactory!
 
 		return $formatters;
 	}
