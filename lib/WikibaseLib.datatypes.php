@@ -22,6 +22,7 @@ return array(
 	'PT:string'            => array( 'value-type' => 'string' ),
 	'PT:time'              => array( 'value-type' => 'time' ),
 	'PT:url'               => array( 'value-type' => 'string' ),
+	'PT:external-id'       => array( 'value-type' => 'string' ),
 	'PT:wikibase-item'     => array( 'value-type' => 'wikibase-entityid' ),
 	'PT:wikibase-property' => array( 'value-type' => 'wikibase-entityid' ),
 );
