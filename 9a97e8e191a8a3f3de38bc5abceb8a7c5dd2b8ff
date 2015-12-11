@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8ead036b_74951f35",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-11T10:29:09Z",
+      "side": 1,
+      "message": "i realize this issue is not new, though",
+      "parentUuid": "8ead036b_54190326",
+      "revId": "9a97e8e191a8a3f3de38bc5abceb8a7c5dd2b8ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_94e69b12",
         "filename": "lib/tests/phpunit/formatters/WikibaseValueFormatterBuildersTest.php",
         "patchSetId": 9
