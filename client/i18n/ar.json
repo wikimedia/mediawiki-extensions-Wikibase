@@ -11,7 +11,8 @@
 			"Tarawneh",
 			"زكريا",
 			"محمد أحمد عبد الفتاح",
-			"Hiba Alshawi"
+			"Hiba Alshawi",
+			"Hosseinblue"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
@@ -63,7 +64,7 @@
 	"pageswithbadges": "الصفحات التي تحوي على باجات",
 	"pageswithbadges-summary": "هذه الصفحة تعرض الصفحات بباجات (كمثال مقالة جيدة أو مقالة مختارة). القائمة مرتبة حسب رقم الصفحة تنازليا، بحيث أن الصفحات الأجدد تعرض أولا.",
 	"wikibase-pageswithbadges-legend": "قائمة الصفحات مع باج معين",
-	"wikibase-pageswithbadges-badge": "باج",
+	"wikibase-pageswithbadges-badge": "درجه:",
 	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
 	"wikibase-otherprojects": "مشاريع أخرى",

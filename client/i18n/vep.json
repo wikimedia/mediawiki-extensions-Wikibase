@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Игорь Бродский"
+		]
+	},
+	"wikibase-comment-update": "{{WBREPONAME}}-element om toižetadud",
+	"wikibase-dataitem": "{{WBREPONAME}}-element",
+	"wikibase-editlinks": "Redaktiruida kosketused",
+	"wikibase-editlinkstitle": "Redaktiruida kelidenkeskeižid kosketusid",
+	"wikibase-rc-hide-wikidata-show": "Ozutada",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-redakcii"
+}
