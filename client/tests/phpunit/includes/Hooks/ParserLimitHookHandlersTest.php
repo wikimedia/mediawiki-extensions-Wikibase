@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
 use ParserOutput;
+use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Hooks\ParserLimitHookHandlers;
 
 /**
@@ -16,7 +17,7 @@ use Wikibase\Client\Hooks\ParserLimitHookHandlers;
  * @license GNU GPL v2+
  * @author Marius Hoch
  */
-class ParserLimitHookHandlersTest extends \PHPUnit_Framework_TestCase {
+class ParserLimitHookHandlersTest extends PHPUnit_Framework_TestCase {
 
 	public function testDoParserLimitReportPrepare() {
 		$restrictedEntityLookup = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup' )
@@ -47,14 +48,14 @@ class ParserLimitHookHandlersTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider doParserLimitReportFormatProvider
 	 */
-	public function testDoParserLimitReportFormat( $expected, Language $language, $isHTML, $localize ) {
+	public function testDoParserLimitReportFormat( $expected, $isHTML, $localize ) {
 		$restrictedEntityLookup = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$handler = new ParserLimitHookHandlers(
 			$restrictedEntityLookup,
-			$language
+			Language::factory( 'qqx' )
 		);
 
 		$value = 123;
@@ -72,35 +73,27 @@ class ParserLimitHookHandlersTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function doParserLimitReportFormatProvider() {
-		$languageRu = Language::factory( 'ru' );
-		$languageEn = Language::factory( 'en' );
-		$labelRu = wfMessage( 'wikibase-limitreport-entities-accessed' )->inLanguage( $languageRu )->text();
-		$labelEn = wfMessage( 'wikibase-limitreport-entities-accessed' )->inLanguage( $languageEn )->text();
-		$colonSeparatorRu = wfMessage( 'colon-separator' )->inLanguage( $languageRu )->text();
-		$colonSeparatorEn = wfMessage( 'colon-separator' )->inLanguage( $languageEn )->text();
+		$labelEn = wfMessage( 'wikibase-limitreport-entities-accessed' )->inLanguage( 'en' )->text();
+		$colonSeparatorEn = wfMessage( 'colon-separator' )->inLanguage( 'en' )->text();
 
 		return array(
-			'Russian, html' => array(
-				'<tr><th>' . $labelRu . '</th><td>123</td></tr>',
-				$languageRu,
+			'Localized (qqx), HTML' => array(
+				'<tr><th>(wikibase-limitreport-entities-accessed)</th><td>123</td></tr>',
 				true,
 				true
 			),
-			'Non-localized (English), html' => array(
+			'Non-localized (English), HTML' => array(
 				'<tr><th>' . $labelEn . '</th><td>123</td></tr>',
-				$languageRu,
 				true,
 				false
 			),
-			'Russian, non-html' => array(
-				$labelRu . $colonSeparatorRu . 123,
-				$languageRu,
+			'Localized (qqx), non-HTML' => array(
+				'(wikibase-limitreport-entities-accessed)(colon-separator)123',
 				false,
 				true
 			),
-			'Non-localized (English), non-html' => array(
-				$labelRu . $colonSeparatorEn . 123,
-				$languageRu,
+			'Non-localized (English), non-HTML' => array(
+				$labelEn . $colonSeparatorEn . 123,
 				false,
 				false
 			)
