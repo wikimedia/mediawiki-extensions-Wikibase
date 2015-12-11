@@ -16,7 +16,10 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
 use Wikibase\Formatters\MonolingualTextFormatter;
+use Wikibase\Lib\Formatters\HtmlExternalIdentifierFormatter;
+use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\PropertyInfoStore;
 
 /**
  * Low level factory for ValueFormatters for well known data types.
@@ -193,6 +196,34 @@ class WikibaseValueFormatterBuilders {
 	 * @param FormatterOptions $options
 	 *
 	 * @return ValueFormatter
+	 */
+	public function newExternalIdentifierSnakFormatter( $format, FormatterOptions $options ) {
+		if ( $format === SnakFormatter::FORMAT_PLAIN ) {
+			return new PropertyValueSnakFormatter(
+				$format,
+				$options,
+				new StringFormatter( $options ),
+				$this->dataTypeLookup, $this->dataTypeFactory
+			);
+		}
+
+		$urlProvider = new FieldPropertyInfoProvider(
+			$this->propertyInfoStore,
+			PropertyInfoStore::KEY_FORMATTER_URL
+		);
+		$urlExpander = new PropertyInfoSnakUrlExpander( $urlProvider );
+		if ( $format === SnakFormatter::FORMAT_WIKI ) {
+			return new WikitextExternalIdentifierFormatter( $urlExpander );
+		} else {
+			return new HtmlExternalIdentifierFormatter( $urlExpander );
+		}
+	}
+
+	/**
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param FormatterOptions $options
+	 *
+	 * @return ValueFormatter|null
 	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
 		//TODO: for FORMAT_WIKI, wikitext image link (inline? thumbnail? caption?...)
