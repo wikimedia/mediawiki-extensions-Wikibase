@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_9463fb3a",
+        "filename": "client/tests/phpunit/includes/Hooks/ParserLimitHookHandlersTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-11T11:20:11Z",
+      "side": 1,
+      "message": "Copy past mistake, fixed in I51bf973.",
+      "revId": "fbdd8a80203b7876d42e3934c21d7a7bf946440b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
