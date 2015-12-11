@@ -39,6 +39,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
+use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
@@ -1253,13 +1254,19 @@ class WikibaseRepo {
 	 * @return PropertyInfoBuilder
 	 */
 	public function newPropertyInfoBuilder() {
-		$formatterUrlProperty = $this->getSettings()->getSetting( 'formatterUrlProperty' );
+		$propertyIdMap = array();
 
+		$formatterUrlProperty = $this->getSettings()->getSetting( 'formatterUrlProperty' );
 		if ( $formatterUrlProperty !== null ) {
-			$formatterUrlProperty = new PropertyId( $formatterUrlProperty );
+			$propertyIdMap[PropertyInfoStore::KEY_FORMATTER_URL] = new PropertyId( $formatterUrlProperty );
 		}
 
-		return new PropertyInfoBuilder( $formatterUrlProperty );
+		$canonicalUriProperty = $this->getSettings()->getSetting( 'canonicalUriProperty' );
+		if ( $canonicalUriProperty !== null ) {
+			$propertyIdMap[PropertyInfoStore::KEY_CANONICAL_URI] = new PropertyId( $canonicalUriProperty );
+		}
+
+		return new PropertyInfoBuilder( $propertyIdMap );
 	}
 
 	private function getLegacyFormatDetectorCallback() {

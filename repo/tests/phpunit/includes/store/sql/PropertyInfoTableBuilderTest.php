@@ -75,7 +75,9 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityLookup = $wikibaseRepo->getEntityLookup( 'uncached' );
 
-		$propertyInfoBuilder = new PropertyInfoBuilder( new PropertyId( 'P1630' ) );
+		$propertyInfoBuilder = new PropertyInfoBuilder( array(
+			PropertyInfoStore::KEY_FORMATTER_URL => new PropertyId( 'P1630' )
+		) );
 		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder );
 		$builder->setBatchSize( 3 );
 

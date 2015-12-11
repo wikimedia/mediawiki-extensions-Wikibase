@@ -91,8 +91,11 @@ return call_user_func( function() {
 			return $uri;
 		},
 
-		// Property used as formatter to link identifiers
+		// Property used as formatter to link identifiers in the UI
 		'formatterUrlProperty' => null,
+
+		// Property used as formatter to link identifiers in JSON/RDF
+		'canonicalUriProperty' => null,
 
 		/**
 		 * Determines how subscription lookup is handled. Possible values:

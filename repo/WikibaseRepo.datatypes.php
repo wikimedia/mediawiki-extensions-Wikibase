@@ -253,8 +253,8 @@ return call_user_func( function() {
 			'parser-factory-callback' => $newStringParser,
 			// NOTE: for 'formatter-factory-callback', we fall back to plain text formatting
 			'snak-formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
-				return $factory->newExternalIdentifierSnakFormatter( $format, $options );
+				$factory = WikibaseRepo::getDefaultSnakFormatterBuilders();
+				return $factory->newExternalIdentifierFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
 				$mode,
