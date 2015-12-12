@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Jforrester <jforrester@wikimedia.org>
+Code-Review+1: Thiemo Mättig (WMDE) <thiemo.maettig@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Sat, 12 Dec 2015 01:59:15 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/258045
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
