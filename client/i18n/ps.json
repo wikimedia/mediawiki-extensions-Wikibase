@@ -25,6 +25,7 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "پټول",
 	"wikibase-rc-hide-wikidata-show": "ښکاره کول",
+	"wikibase-rc-show-wikidata-pref": "په وروستي بدلونونو کې د {{WBREPONAME}} سمونونه ښکاره کول",
 	"wikibase-rc-wikibase-edit-letter": "اومتوک",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون",
 	"unconnectedpages": "توکو سره ناتړلي مخونه",
