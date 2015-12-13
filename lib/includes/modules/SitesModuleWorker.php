@@ -196,15 +196,16 @@ class SitesModuleWorker {
 	}
 
 	/**
-	 * This returns a hash which should change whenever either a relevant setting
+	 * This returns our additions to the default definition summary.
+	 * We add a hash which should change whenever either a relevant setting
 	 * or the list of sites changes. Because computing this list is quite heavy and
 	 * it barely changes, cache that hash for a short bit.
 	 *
-	 * @see ResourceLoaderModule::getModifiedHash
+	 * @see ResourceLoaderModule::getDefinitionSummary
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public function getModifiedHash() {
+	public function getDefinitionSummary() {
 		$cacheKey = wfMemcKey( 'wikibase-sites-module-modified-hash' );
 		$hash = $this->cache->get( $cacheKey );
 
@@ -213,7 +214,9 @@ class SitesModuleWorker {
 			$this->cache->set( $cacheKey, $hash, self::SITES_HASH_CACHE_DURATION );
 		}
 
-		return $hash;
+		return array(
+			'dataHash' => $hash
+		);
 	}
 
 }
