@@ -46,25 +46,16 @@ class SitesModule extends ResourceLoaderModule {
 	}
 
 	/**
-	 * @see ResourceLoaderModule::getModifiedHash
+	 * @see ResourceLoaderModule::getDefinitionSummary
 	 *
 	 * @param ResourceLoaderContext $context
 	 *
 	 * @return string
 	 */
-	public function getModifiedHash( ResourceLoaderContext $context ) {
-		return $this->worker->getModifiedHash();
-	}
-
-	/**
-	 * @see ResourceLoaderModule::getModifiedTime
-	 *
-	 * @param ResourceLoaderContext $context
-	 *
-	 * @return int
-	 */
-	public function getModifiedTime( ResourceLoaderContext $context ) {
-		return $this->getHashMtime( $context );
+	public function getDefinitionSummary( ResourceLoaderContext $context ) {
+		// Appending arrays using + is the right thing to do here: All keys
+		// are named and we want the first one to overwrite the second one.
+		return $this->worker->getDefinitionSummary() + parent::getDefinitionSummary( $context );
 	}
 
 }
