@@ -78,8 +78,21 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 		$testHelper->setUp();
 	}
 
+	private static function unMock() {
+		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
+
+		if ( self::$oldAllowArbitraryDataAccess !== null ) {
+			$wikibaseClient->getSettings()->setSetting(
+				'allowArbitraryDataAccess',
+				self::$oldAllowArbitraryDataAccess
+			);
+		}
+	}
+
 	/**
-	 * Set up stuff we need to have in place even before Scribunto does its stuff
+	 * Set up stuff we need to have in place even before Scribunto does its stuff.
+	 * And remove that again after suite is done, so that other test won't get
+	 * affected.
 	 *
 	 * @param string $className
 	 *
@@ -88,7 +101,11 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 	public static function suite( $className ) {
 		self::doMock();
 
-		return parent::suite( $className );
+		$res = parent::suite( $className );
+
+		self::unMock();
+
+		return $res;
 	}
 
 	protected function setUp() {
@@ -109,14 +126,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 	protected function tearDown() {
 		parent::tearDown();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
-
-		if ( self::$oldAllowArbitraryDataAccess !== null ) {
-			$wikibaseClient->getSettings()->setSetting(
-				'allowArbitraryDataAccess',
-				self::$oldAllowArbitraryDataAccess
-			);
-		}
+		self::unMock();
 	}
 
 	/**
