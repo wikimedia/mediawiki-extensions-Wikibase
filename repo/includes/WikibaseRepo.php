@@ -18,7 +18,6 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
