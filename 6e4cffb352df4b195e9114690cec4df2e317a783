@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_d3a2f6a3",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T15:04:53Z",
+      "side": 0,
+      "message": "we do want to trim every line!",
+      "revId": "6e4cffb352df4b195e9114690cec4df2e317a783",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_3396ea50",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTestData.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T15:04:53Z",
+      "side": 0,
+      "message": "we do want to trim every line!",
+      "revId": "6e4cffb352df4b195e9114690cec4df2e317a783",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
