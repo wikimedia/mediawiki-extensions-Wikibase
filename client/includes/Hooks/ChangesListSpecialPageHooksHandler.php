@@ -175,8 +175,8 @@ class ChangesListSpecialPageHooksHandler {
 	}
 
 	/**
-	 * @param array $conds
-	 * @param FormOptions
+	 * @param array &$conds
+	 * @param FormOptions $opts
 	 *
 	 * @return array
 	 */

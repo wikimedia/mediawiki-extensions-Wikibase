@@ -92,9 +92,9 @@ class ChangeHandler {
 	 * @param PageUpdater $updater
 	 * @param ChangeListTransformer $changeListTransformer
 	 * @param SiteStore $siteStore
-	 * @param string $localSiteId
 	 * @param string $repoId
 	 * @param bool $injectRecentChanges
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(

@@ -91,7 +91,6 @@ class OutputPageJsConfigHookHandler {
 
 	/**
 	 * @param OutputPage $out
-	 * @param string &$html
 	 *
 	 * @return bool
 	 */

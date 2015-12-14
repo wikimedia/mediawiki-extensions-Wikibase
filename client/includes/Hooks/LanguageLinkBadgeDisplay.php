@@ -124,7 +124,7 @@ class LanguageLinkBadgeDisplay {
 	 * added to the link's title attribute, so the can be effectively ignored
 	 * on this client wiki.
 	 *
-	 * @param ItemId[] $badgesIds
+	 * @param ItemId[] $badgeIds
 	 *
 	 * @return array An associative array with the keys 'class' and 'itemtitle' with assigned
 	 * string values. These fields correspond to the fields in the description array for language
