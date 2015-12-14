@@ -148,7 +148,7 @@ class EntityViewFactory {
 	 * Creates an EntityView suitable for rendering the entity.
 	 *
 	 * @param string $entityType
-	 * @param string $languageCode
+	 * @param Language $language
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -158,23 +158,20 @@ class EntityViewFactory {
 	 */
 	public function newEntityView(
 		$entityType,
-		$languageCode,
+		Language $language,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	 ) {
-		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
+		$entityTermsView = $this->newEntityTermsView( $language, $editSectionGenerator );
 
 		$statementSectionsView = $this->newStatementSectionsView(
 			$entityType,
-			$languageCode,
+			$language,
 			$fallbackChain,
 			$labelDescriptionLookup,
 			$editSectionGenerator
 		);
-
-		// @fixme all that seems needed in EntityView is language code and dir.
-		$language = Language::factory( $languageCode );
 
 		// @fixme support more entity types
 		switch ( $entityType ) {
@@ -212,7 +209,7 @@ class EntityViewFactory {
 
 	/**
 	 * @param string $entityType
-	 * @param string $languageCode
+	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -221,13 +218,13 @@ class EntityViewFactory {
 	 */
 	private function newStatementSectionsView(
 		$entityType,
-		$languageCode,
+		Language $language,
 		LanguageFallbackChain $fallbackChain,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EditSectionGenerator $editSectionGenerator
 	) {
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
-			$languageCode,
+			$language->getCode(),
 			$fallbackChain,
 			$labelDescriptionLookup
 		);
@@ -254,17 +251,17 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param Language $language
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return EntityTermsView
 	 */
-	private function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
+	private function newEntityTermsView( Language $language, EditSectionGenerator $editSectionGenerator ) {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$editSectionGenerator,
 			$this->languageNameLookup,
-			$languageCode
+			$language->getCode()
 		);
 	}
 
