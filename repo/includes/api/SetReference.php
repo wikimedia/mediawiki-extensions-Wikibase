@@ -84,7 +84,7 @@ class SetReference extends ModifyClaim {
 		}
 
 		if ( isset( $params['snaks-order' ] ) ) {
-			$snaksOrder = $this->getArrayFromParam( $params['snaks-order'] );
+			$snaksOrder = $this->getArrayFromParam( $params['snaks-order'], 'snaks-order' );
 		} else {
 			$snaksOrder = array();
 		}
@@ -92,7 +92,7 @@ class SetReference extends ModifyClaim {
 		$deserializer = $this->deserializerFactory->newSnakListDeserializer();
 		/** @var SnakList $snakList */
 		try {
-			$snakList = $deserializer->deserialize( $this->getArrayFromParam( $params['snaks'] ) );
+			$snakList = $deserializer->deserialize( $this->getArrayFromParam( $params['snaks'], 'snaks' ) );
 		} catch ( DeserializationException $e ) {
 			$this->errorReporter->dieError(
 				'Failed to get reference from reference Serialization ' . $e->getMessage(),
@@ -137,14 +137,18 @@ class SetReference extends ModifyClaim {
 
 	/**
 	 * @param string $arrayParam
+	 * @param string $parameter
 	 *
 	 * @return array
 	 */
-	private function getArrayFromParam( $arrayParam ) {
+	private function getArrayFromParam( $arrayParam, $parameter ) {
 		$rawArray = json_decode( $arrayParam, true );
 
 		if ( !is_array( $rawArray ) || !count( $rawArray ) ) {
-			$this->errorReporter->dieError( 'No array or invalid JSON given', 'invalid-json' );
+			$this->errorReporter->dieError(
+				'No array or invalid JSON given for parameter: ' . $parameter,
+				'invalid-json'
+			);
 		}
 
 		return $rawArray;
