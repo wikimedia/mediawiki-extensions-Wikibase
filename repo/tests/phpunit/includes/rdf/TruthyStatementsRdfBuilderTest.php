@@ -19,28 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	 * @var RdfBuilderTestData|null
-	 */
-	private $testData = null;
-
-	/**
-	 * Initialize repository data
-	 *
-	 * @return RdfBuilderTestData
-	 */
-	private function getTestData() {
-		if ( $this->testData === null ) {
-			$this->testData = new RdfBuilderTestData(
-				__DIR__ . "/../../data/rdf",
-				__DIR__ . "/../../data/rdf/TruthyStatementRdfBuilder"
-			);
-		}
-
-		return $this->testData;
-	}
+class TruthyStatementRdfBuilderTest extends RdfTestBase {
 
 	/**
 	 * @return TruthyStatementRdfBuilder
@@ -76,16 +55,12 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Extract text test data from RDF builder
 	 * @param TruthyStatementRdfBuilder $builder
-	 * @return string[] ntriples lines, sorted
+	 * @return string ntriples
 	 */
 	private function getDataFromBuilder( TruthyStatementRdfBuilder $builder ) {
 		// HACK: $builder->test_writer is glued on by newBuilder().
 		$ntriples = $builder->test_writer->drain();
-
-		$lines = explode( "\n", trim( $ntriples ) );
-		sort( $lines );
-		$lines = array_map( 'trim', $lines );
-		return $lines;
+		return $ntriples;
 	}
 
 	private function assertOrCreateNTriples( $dataSetName, TruthyStatementRdfBuilder $builder ) {
@@ -97,7 +72,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$this->fail( 'Data set `' . $dataSetName . '` not found! Created file with the current data using the suffix .actual' );
 		}
 
-		$this->assertEquals( $correctData, $actualData, "Data set $dataSetName" );
+		$this->assertNTriplesEquals( $correctData, $actualData, "Data set $dataSetName" );
 	}
 
 	public function provideAddEntity() {
