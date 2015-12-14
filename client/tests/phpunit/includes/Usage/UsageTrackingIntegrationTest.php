@@ -7,13 +7,7 @@ use MediaWikiTestCase;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 use WikitextContent;
 
@@ -39,16 +33,34 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $templateTitle;
 
-	public function setUp() {
+	/**
+	 * @var bool
+	 */
+	private $oldAllowDataTransclusion;
+
+	protected function setUp() {
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( 'Integration test requires repo and client extension to be active on the same wiki.' );
 		}
 
 		parent::setUp();
 
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
+		$settings->setSetting( 'allowDataTransclusion', true );
+
 		$ns = $this->getDefaultWikitextNS();
 		$this->articleTitle = Title::makeTitle( $ns, 'UsageTrackingIntegrationTest_Article' );
 		$this->templateTitle = Title::makeTitle( NS_TEMPLATE, 'UsageTrackingIntegrationTest_Template' );
+	}
+
+	protected function tearDown() {
+		parent::tearDown();
+
+		WikibaseClient::getDefaultInstance()->getSettings()->setSetting(
+			'allowDataTransclusion',
+			$this->oldAllowDataTransclusion
+		);
 	}
 
 	private function runJobs() {
@@ -84,47 +96,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$title->resetArticleID( false );
 	}
 
-	private function createItem( ItemId $id, $label ) {
-		$item = new Item( $id );
-		$item->getFingerprint()->setLabel( 'en', $label );
-
-		$this->saveEntity( $item );
-	}
-
-	private function createProperty( PropertyId $id, $label, $type ) {
-		$property = new Property( $id, null, $type );
-		$property->getFingerprint()->setLabel( 'en', $label );
-
-		$this->saveEntity( $property );
-	}
-
-	private function saveEntity( EntityDocument $entity ) {
-		global $wgUser;
-
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-
-		try {
-			$store->deleteEntity( $entity->getId(), 'CLEANUP', $wgUser );
-		} catch ( StorageException $ex ) {
-			// never mind
-		}
-
-		$store->saveEntity( $entity, 'TEST', $wgUser, EDIT_NEW );
-	}
-
-	private function setUpEntities() {
-		$this->createItem( new ItemId( 'Q11' ), 'Eleven' );
-		$this->createItem( new ItemId( 'Q22' ), 'TwentyTwo' );
-		$this->createItem( new ItemId( 'Q33' ), 'ThirtyThree' );
-
-		$this->createProperty( new PropertyId( 'P1' ), 'PropOne', 'string' );
-		$this->createProperty( new PropertyId( 'P2' ), 'PropTwo', 'string' );
-		$this->createProperty( new PropertyId( 'P3' ), 'PropThree', 'string' );
-	}
-
 	public function testUpdateUsageOnCreation() {
-		$this->setUpEntities();
-
 		// Create a new page that uses Q11.
 		$text = "Just some text\n";
 		$text .= "using a property: {{#property:P1|from=Q11}}\n";
