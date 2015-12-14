@@ -16,6 +16,40 @@
       "revId": "e66dcabd03db3a7ee45d8ca991354590fa30d134",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_13d2ce2c",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T14:58:17Z",
+      "side": 1,
+      "message": "this is wrong, as noted in a previous patch set.",
+      "revId": "e66dcabd03db3a7ee45d8ca991354590fa30d134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_73bd42d1",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T14:58:17Z",
+      "side": 1,
+      "message": "Now the same array key is defined twice. The test you added is for checking the optional url field, so the key should be something like \"include entity url in result\" or some such.",
+      "revId": "e66dcabd03db3a7ee45d8ca991354590fa30d134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
