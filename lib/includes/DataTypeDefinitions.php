@@ -147,7 +147,7 @@ class DataTypeDefinitions {
 	 * given in the original property data type definition provided to the constructor.
 	 * The keys in this array are plain property data type IDs without a prefix.
 	 */
-	private function resolveValueTypeFallback( $callbackMap ) {
+	private function resolveValueTypeFallback( array $callbackMap ) {
 		$resolved = array();
 
 		foreach ( $this->getValueTypes() as $propertyType => $valueType ) {
@@ -173,9 +173,9 @@ class DataTypeDefinitions {
 	 * @param array $callbackMap
 	 * @param string $mode PREFIXED_MODE or RESOLVED_MODE
 	 *
-	 * return array A version of $callbackMap with $mode applied.
+	 * @return array A version of $callbackMap with $mode applied.
 	 */
-	private function applyMode( $callbackMap, $mode ) {
+	private function applyMode( array $callbackMap, $mode ) {
 		if ( $mode === self::RESOLVED_MODE ) {
 			return $this->resolveValueTypeFallback( $callbackMap );
 		} else {
