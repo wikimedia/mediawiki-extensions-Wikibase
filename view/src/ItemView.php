@@ -5,7 +5,6 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -20,11 +19,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Werner
  */
 class ItemView extends EntityView {
-
-	/**
-	 * @var StatementGrouper
-	 */
-	private $statementGrouper;
 
 	/**
 	 * @var StatementSectionsView
@@ -46,7 +40,6 @@ class ItemView extends EntityView {
 	 *
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
-	 * @param StatementGrouper $statementGrouper
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param Language $language
 	 * @param SiteLinksView $siteLinksView
@@ -55,7 +48,6 @@ class ItemView extends EntityView {
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
-		StatementGrouper $statementGrouper,
 		StatementSectionsView $statementSectionsView,
 		Language $language,
 		SiteLinksView $siteLinksView,
@@ -63,7 +55,6 @@ class ItemView extends EntityView {
 	) {
 		parent::__construct( $templateFactory, $entityTermsView, $language );
 
-		$this->statementGrouper = $statementGrouper;
 		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinksView = $siteLinksView;
 		$this->siteLinkGroups = $siteLinkGroups;
@@ -80,8 +71,7 @@ class ItemView extends EntityView {
 		}
 
 		$html = parent::getMainHtml( $entityRevision );
-		$statementLists = $this->statementGrouper->groupStatements( $item->getStatements() );
-		$html .= $this->statementSectionsView->getHtml( $statementLists );
+		$html .= $this->statementSectionsView->getHtml( $item->getStatements() );
 
 		return $html;
 	}

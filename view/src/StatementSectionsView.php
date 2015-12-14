@@ -3,6 +3,7 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -20,25 +21,33 @@ class StatementSectionsView {
 	private $templateFactory;
 
 	/**
+	 * @var StatementGrouper
+	 */
+	private $statementGrouper;
+
+	/**
 	 * @var StatementGroupListView
 	 */
 	private $statementListView;
 
 	public function __construct(
 		TemplateFactory $templateFactory,
+		StatementGrouper $statementGrouper,
 		StatementGroupListView $statementListView
 	) {
 		$this->templateFactory = $templateFactory;
+		$this->statementGrouper = $statementGrouper;
 		$this->statementListView = $statementListView;
 	}
 
 	/**
-	 * @param StatementList[] $statementLists
+	 * @param StatementList $statementList
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	public function getHtml( array $statementLists ) {
+	public function getHtml( StatementList $statementList ) {
+		$statementLists = $this->statementGrouper->groupStatements( $statementList );
 		$html = '';
 
 		foreach ( $statementLists as $key => $statements ) {
