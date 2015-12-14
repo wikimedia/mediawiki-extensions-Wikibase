@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_781c407d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T10:44:34Z",
+      "side": 1,
+      "message": "Because we used to not track usage of non-existing entities. We changed that behavior at some point.",
+      "parentUuid": "6eaa8f54_f87a70b8",
+      "revId": "8a53fea97b5aae116068ad35049c2d0a05119fe8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_58b70482",
         "filename": "client/tests/phpunit/includes/Usage/UsageTrackingIntegrationTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-14T10:32:41Z",
       "side": 1,
       "message": "This line is to long.",
+      "revId": "8a53fea97b5aae116068ad35049c2d0a05119fe8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9821fcae",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackingIntegrationTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T10:44:34Z",
+      "side": 1,
+      "message": "Strangely, the code sniffer doesn\u0027t complain?...",
+      "parentUuid": "6eaa8f54_58b70482",
       "revId": "8a53fea97b5aae116068ad35049c2d0a05119fe8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
