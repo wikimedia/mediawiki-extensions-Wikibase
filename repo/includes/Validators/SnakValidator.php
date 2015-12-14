@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;
+use OutOfBoundsException;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
@@ -179,10 +180,21 @@ class SnakValidator implements ValueValidator {
 	 * @return Result
 	 */
 	public function validateDataValue( DataValue $dataValue, $dataTypeId ) {
-		$dataValueType = $this->dataTypeFactory->getType( $dataTypeId )->getDataValueType();
+		try {
+			$dataValueType = $this->dataTypeFactory->getType( $dataTypeId )->getDataValueType();
+		} catch ( OutOfBoundsException $ex ) {
+			return Result::newError( array(
+				Error::newError(
+					'Bad data type: ' . $dataTypeId,
+					null,
+					'bad-data-type',
+					array( $dataTypeId )
+				),
+			) );
+		}
 
 		if ( $dataValue instanceof UnDeserializableValue ) {
-			$result = Result::newError( array(
+			return Result::newError( array(
 				Error::newError(
 					'Bad snak value: ' . $dataValue->getReason(),
 					null,
@@ -191,7 +203,7 @@ class SnakValidator implements ValueValidator {
 				),
 			) );
 		} elseif ( $dataValueType != $dataValue->getType() ) {
-			$result = Result::newError( array(
+			return Result::newError( array(
 				Error::newError(
 					'Bad value type: ' . $dataValue->getType() . ', expected ' . $dataValueType,
 					null,
@@ -199,9 +211,9 @@ class SnakValidator implements ValueValidator {
 					array( $dataValue->getType(), $dataValueType )
 				),
 			) );
-		} else {
-			$result = Result::newSuccess();
 		}
+
+		$result = Result::newSuccess();
 
 		//XXX: DataTypeValidatorFactory should expose only one validator, which would be a CompositeValidator
 		foreach ( $this->validatorFactory->getValidators( $dataTypeId ) as $validator ) {
