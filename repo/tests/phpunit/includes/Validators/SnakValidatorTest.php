@@ -8,6 +8,7 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
 use PHPUnit_Framework_TestCase;
+use ValueValidators\Error;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -61,12 +62,14 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 			'alphabetic' => 'string'
 		) );
 
-		$p1 = new PropertyId( 'p1' );
-		$p2 = new PropertyId( 'p2' );
+		$p1 = new PropertyId( 'P1' );
+		$p2 = new PropertyId( 'P2' );
+		$p4 = new PropertyId( 'P4' );
 
 		$this->propertyDataTypeLookup = new InMemoryDataTypeLookup();
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p1, 'numeric' );
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p2, 'alphabetic' );
+		$this->propertyDataTypeLookup->setDataTypeForProperty( $p4, 'fiddlediddle' );
 
 		$this->validatorFactory = $this->getMock( 'Wikibase\Repo\DataTypeValidatorFactory' );
 		$this->validatorFactory->expects( $this->any() )
@@ -226,38 +229,96 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideValidate() {
-		$p1 = new PropertyId( 'p1' ); // numeric
-		$p2 = new PropertyId( 'p2' ); // alphabetic
-		$p3 = new PropertyId( 'p3' ); // bad
+		$p1 = new PropertyId( 'P1' ); // numeric
+		$p2 = new PropertyId( 'P2' ); // alphabetic
+		$p3 = new PropertyId( 'P3' ); // bad
+		$p4 = new PropertyId( 'P4' ); // property with bad data type
 
 		$cases = array();
 
 		$snak = new PropertyNoValueSnak( $p1 );
-		$cases[] = array( $snak, 'PropertyNoValueSnak', true );
+		$cases[] = array( $snak, 'PropertyNoValueSnak' );
 
 		$snak = new PropertySomeValueSnak( $p2 );
-		$cases[] = array( $snak, 'PropertySomeValueSnak', true );
+		$cases[] = array( $snak, 'PropertySomeValueSnak' );
 
 		$snak = new PropertyValueSnak( $p1, new StringValue( '123' ) );
-		$cases[] = array( $snak, 'valid numeric value', true );
-
-		$snak = new PropertyValueSnak( $p2, new StringValue( '123' ) );
-		$cases[] = array( $snak, 'invalid alphabetic value', false );
+		$cases[] = array( $snak, 'valid numeric value' );
 
 		$snak = new PropertyValueSnak( $p2, new StringValue( 'abc' ) );
-		$cases[] = array( $snak, 'valid alphabetic value', true );
+		$cases[] = array( $snak, 'valid alphabetic value' );
+
+		$snak = new PropertyValueSnak( $p2, new StringValue( '123' ) );
+		$cases[] = array(
+			$snak,
+			'invalid alphabetic value',
+			Error::newError(
+				'doesn\'t match /^[A-Z]+$/i',
+				null,
+				'invalid',
+				array()
+			)
+		);
 
 		$snak = new PropertyValueSnak( $p1, new StringValue( 'abc' ) );
-		$cases[] = array( $snak, 'invalid numeric value', false );
+		$cases[] = array(
+			$snak,
+			'invalid numeric value',
+			Error::newError(
+				'doesn\'t match /^\d+$/',
+				null,
+				'invalid',
+				array()
+			)
+		);
 
-		$snak = new PropertyValueSnak( $p1, new UnDeserializableValue( 'abc', 'string', 'error' ) );
-		$cases[] = array( $snak, 'bad value', false );
+		$snak = new PropertyValueSnak( $p1, new UnDeserializableValue( 'abc', 'string', 'ooops' ) );
+		$cases[] = array(
+			$snak,
+			'bad value',
+			Error::newError(
+				'Bad snak value: ooops',
+				null,
+				'bad-value',
+				array( 'ooops' )
+			)
+		);
 
 		$snak = new PropertyValueSnak( $p1, new UnknownValue( 'abc' ) );
-		$cases[] = array( $snak, 'wrong value type', false );
+		$cases[] = array(
+			$snak,
+			'wrong value type',
+			Error::newError(
+				'Bad value type: unknown, expected string',
+				null,
+				'bad-value-type',
+				array( 'unknown', 'string' )
+			)
+		);
 
 		$snak = new PropertyValueSnak( $p3, new StringValue( 'abc' ) );
-		$cases[] = array( $snak, 'bad property', false );
+		$cases[] = array(
+			$snak,
+			'bad property',
+			Error::newError(
+				'Property P3 not found!',
+				null,
+				'no-such-property',
+				array( 'P3' )
+			)
+		);
+
+		$snak = new PropertyValueSnak( $p4, new StringValue( 'abc' ) );
+		$cases[] = array(
+			$snak,
+			'bad data type',
+			Error::newError(
+				'Bad data type: fiddlediddle',
+				null,
+				'bad-data-type',
+				array( 'fiddlediddle' )
+			)
+		);
 
 		return $cases;
 	}
@@ -265,12 +326,18 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideValidate
 	 */
-	public function testValidate( Snak $snak, $description, $expectedValid = true ) {
+	public function testValidate( Snak $snak, $description, $expectedError = null ) {
 		$validator = $this->getSnakValidator();
 
 		$result = $validator->validate( $snak );
 
-		$this->assertEquals( $expectedValid, $result->isValid(), $description );
+		if ( $expectedError === null ) {
+			$this->assertTrue( $result->isValid(), $description . ': isValid' );
+		} else {
+			$resultErrors = $result->getErrors();
+			$firstError = reset( $resultErrors );
+			$this->assertEquals( $expectedError, $firstError, $description );
+		}
 	}
 
 	public function provideValidateDataValue() {
