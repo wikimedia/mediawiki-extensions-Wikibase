@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_133deeb8",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T14:00:00Z",
+      "side": 0,
+      "message": "Please do not do such changes to code that does not need to change in your patch.\n\nSame in the localization files.",
+      "revId": "876c7d088a91206128b41e68bbd5b9bcc3668278",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

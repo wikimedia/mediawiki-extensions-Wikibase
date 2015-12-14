@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_7358e235",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T14:00:00Z",
+      "side": 1,
+      "message": "What this change does is not about \"URL\".",
+      "revId": "8015e4d286c4165a48d9bce7828783954fd15340",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_5353661a",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T14:00:00Z",
+      "side": 1,
+      "message": "Uh, wait. A property called \"url\" does add a \"concepturi\" value to the output, but not the value that\u0027s actually called \"url\"?",
+      "revId": "8015e4d286c4165a48d9bce7828783954fd15340",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
