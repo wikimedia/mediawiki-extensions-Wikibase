@@ -8,6 +8,7 @@ use WebRequest;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Repo\WikibaseRepo;

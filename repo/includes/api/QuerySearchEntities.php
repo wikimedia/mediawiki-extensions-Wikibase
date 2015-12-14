@@ -6,6 +6,7 @@ use ApiPageSet;
 use ApiQuery;
 use ApiQueryGeneratorBase;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -131,6 +132,11 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		$resultPageSet->populateFromTitles( $titles );
 	}
 
+	/**
+	 * @param array $params
+	 *
+	 * @return TermSearchResult[]
+	 */
 	private function getSearchResults( array $params ) {
 		return $this->entitySearchHelper->getRankedSearchResults(
 			$params['search'],

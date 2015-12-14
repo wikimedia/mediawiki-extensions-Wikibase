@@ -131,14 +131,15 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	public function addStatements( EntityId $entityId, StatementList $statementList ) {
 		$bestList = array();
 
-		// FIXME: getBestStatementPerProperty() is expensive, share the result with TruthyStatementRdfBuilder!
+		// FIXME: This is expensive, share the result with TruthyStatementRdfBuilder!
 		foreach ( $statementList->getPropertyIds() as $propertyId ) {
-			foreach ( $statementList->getByPropertyId( $propertyId )->getBestStatements() as $statement ) {
+			$bestStatements = $statementList->getByPropertyId( $propertyId )->getBestStatements();
+			foreach ( $bestStatements->toArray() as $statement ) {
 				$bestList[$statement->getGuid()] = true;
 			}
 		}
 
-		foreach ( $statementList as $statement ) {
+		foreach ( $statementList->toArray() as $statement ) {
 			$this->addStatement( $entityId, $statement, isset( $bestList[$statement->getGuid()] ) );
 		}
 	}
