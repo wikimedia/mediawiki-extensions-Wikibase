@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_98901c48",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T09:47:44Z",
+      "side": 1,
+      "message": "@return array",
+      "revId": "21b4232d3a22cfc942545be60225cb618b93919f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_d8a5349c",
+        "filename": "lib/includes/modules/SitesModuleWorker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T09:47:44Z",
+      "side": 1,
+      "message": "Is there no named constant for this?",
+      "revId": "21b4232d3a22cfc942545be60225cb618b93919f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
