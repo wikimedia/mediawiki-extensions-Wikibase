@@ -34,6 +34,40 @@
       "revId": "3b6dc24a89ea1b3f2b57481f3cc04e2b04cb819c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_53592700",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-14T12:00:56Z",
+      "side": 1,
+      "message": "I think this should be \"External identifier\" (lowercase \"i\"), to be consistent with the casing of the other data types (e.g. \"Monolingual text\")",
+      "revId": "3b6dc24a89ea1b3f2b57481f3cc04e2b04cb819c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_3354abc9",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-14T12:00:56Z",
+      "side": 1,
+      "message": "maybe we should mention that these can get linked using the formatterUrlProperty setting? (although i realize the last bits to actually do the formatting are not all implemented yet)",
+      "revId": "3b6dc24a89ea1b3f2b57481f3cc04e2b04cb819c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
