@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_5995c534",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T17:58:13Z",
+      "side": 0,
+      "message": "Why did you removed this length check? I think you can use this.options.userLanguages.length as the expected length.",
+      "revId": "e30afe3bbb40441e808b3b4c9e1e186c0deaa2f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

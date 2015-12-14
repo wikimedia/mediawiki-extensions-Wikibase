@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_19474d24",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T17:58:13Z",
+      "side": 1,
+      "message": "What happens if this is empty? I think this should be allowed, and there should be a test for this. Can be done in a later patch.",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9901fdbb",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T17:58:13Z",
+      "side": 1,
+      "message": "This may fail when the array of languages is empty. There should be a check and a test if it\u0027s not allowed to be empty.",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_79420115",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T17:58:13Z",
+      "side": 1,
+      "message": "I wonder why the star is here. I\u0027m aware this is not touched in this patch.",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_d9c1b584",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T17:58:13Z",
+      "side": 1,
+      "message": "What happens when you add an existing language, but the label is slightly different? Does this count as an edit? This is currently not tested.",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b98b9971",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entitytermsview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T17:58:13Z",
+      "side": 1,
+      "message": "We use @return without s.",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
