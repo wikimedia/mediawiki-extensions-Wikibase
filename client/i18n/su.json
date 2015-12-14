@@ -4,6 +4,8 @@
 			"Kandar"
 		]
 	},
+	"tooltip-t-wikibase": "Tutumbu ka item gudang data anu nyambung",
+	"wikibase-dataitem": "Item {{WBREPONAME}}",
 	"wikibase-editlinks": "Édit tutumbu",
 	"wikibase-editlinkstitle": "Édit tutumbu antarbasa",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

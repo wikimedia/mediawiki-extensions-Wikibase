@@ -39,7 +39,7 @@
 	"wikibase-linkitem-linkpage": "پیوند ئة وةڵگة",
 	"wikibase-linkitem-selectlink": "لطفاً وب‌گاه و صفحه‌ای که می‌خواهید به این صفحه پیوند دهید را انتخاب کنید.",
 	"wikibase-linkitem-input-site": ":زوون",
-	"wikibase-linkitem-input-page": ":وةڵگة",
+	"wikibase-linkitem-input-page": ":پەڕە/وةڵگة",
 	"wikibase-linkitem-confirmitem-text": "این صفحه که انتخاب کرده‌اید از قبل به [$1 یک آیتم روی مخزن مرکزی داده ما] مرتبط است. لطفاً تأیید کنید که {{PLURAL:$2|صفحهٔ|صفحه‌های}} زیر همان‌هایی {{PLURAL:$2|هست|هستند}} که شما خواهان پیونددادن به {{PLURAL:$2|آن|آن‌ها}} بودید.",
 	"wikibase-linkitem-confirmitem-button": "گرتئ ئؤر-تأیید",
 	"wikibase-linkitem-not-loggedin-title": "باید باینإ سیستم.",
