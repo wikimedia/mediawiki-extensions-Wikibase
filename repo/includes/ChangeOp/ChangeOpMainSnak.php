@@ -152,7 +152,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * @param Entity $entity
 	 *
 	 * @throws ChangeOpException
-	 *
 	 * @return Result
 	 */
 	public function validate( Entity $entity ) {

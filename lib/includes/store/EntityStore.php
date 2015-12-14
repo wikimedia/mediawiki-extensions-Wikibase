@@ -63,7 +63,6 @@ interface EntityStore {
 	 * @see WikiPage::doEditContent
 	 *
 	 * @return EntityRevision
-	 *
 	 * @throws StorageException
 	 * @throws PermissionsError
 	 */
@@ -84,7 +83,6 @@ interface EntityStore {
 	 * @see WikiPage::doEditContent
 	 *
 	 * @return int The new revision ID
-	 *
 	 * @throws StorageException
 	 * @throws PermissionsError
 	 */

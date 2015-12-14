@@ -93,7 +93,6 @@ class ChangeOps implements ChangeOp {
 	 * @param Entity $entity
 	 *
 	 * @throws ChangeOpException
-	 *
 	 * @return Result
 	 */
 	public function validate( Entity $entity ) {

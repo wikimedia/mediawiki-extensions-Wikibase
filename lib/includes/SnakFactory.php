@@ -32,7 +32,6 @@ class SnakFactory {
 	 * @param DataValue $value
 	 *
 	 * @return Snak
-	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function newSnak( PropertyId $propertyId, $snakType, DataValue $value = null ) {

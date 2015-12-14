@@ -295,7 +295,6 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @param int $flags
 	 *
 	 * @throws RuntimeException
-	 *
 	 * @return Entity|EntityRedirect
 	 */
 	private function createTestContentRevision( $item, $id, User $user, $flags ) {

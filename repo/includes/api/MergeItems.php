@@ -94,7 +94,6 @@ class MergeItems extends ApiBase {
 	 * @param string $name
 	 *
 	 * @return ItemId
-	 *
 	 * @throws UsageException if the given parameter is not a valiue ItemId
 	 * @throws LogicException
 	 */

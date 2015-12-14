@@ -126,7 +126,6 @@ class SummaryFormatter {
 	 * @param Summary $summary
 	 *
 	 * @throws MWException
-	 *
 	 * @return string The auto summary arguments comma-separated
 	 */
 	public function formatAutoSummary( Summary $summary ) {

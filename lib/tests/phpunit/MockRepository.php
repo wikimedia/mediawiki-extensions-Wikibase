@@ -107,7 +107,6 @@ class MockRepository implements
 	 * @param EntityId $entityId
 	 *
 	 * @return EntityDocument|null
-	 *
 	 * @throws StorageException
 	 */
 	public function getEntity( EntityId $entityId ) {
@@ -488,7 +487,6 @@ class MockRepository implements
 	 * @see WikiPage::doEditContent
 	 *
 	 * @return EntityRevision
-	 *
 	 * @throws StorageException
 	 */
 	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevisionId = false ) {

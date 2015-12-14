@@ -103,8 +103,8 @@ class DateTimeValueCleaner {
 	 * Parse date value and fix weird numbers there.
 	 *
 	 * @param string $dateValue
-	 * @throws IllegalValueException
 	 *
+	 * @throws IllegalValueException
 	 * @return array Parsed value in parts: $minus, $y, $m, $d, $time
 	 */
 	protected function parseDateValue( $dateValue ) {

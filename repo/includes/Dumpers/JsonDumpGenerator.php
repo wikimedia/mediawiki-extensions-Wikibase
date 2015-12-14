@@ -127,7 +127,6 @@ class JsonDumpGenerator extends DumpGenerator {
 	 *
 	 * @throws EntityLookupException
 	 * @throws StorageException
-	 *
 	 * @return string|null
 	 */
 	protected function generateDumpForEntityId( EntityId $entityId ) {
