@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_59b2a593",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:27:18Z",
+      "side": 1,
+      "message": "Indeed, I should enhance this message. However, it isn\u0027t about *all* languages but only about those that have a label/description/alias set but I guess \"all\" is still more appropriate.",
+      "parentUuid": "6eaa8f54_b9b719d3",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_99b25de3",
         "filename": "repo/i18n/en.json",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-14T18:05:13Z",
       "side": 1,
       "message": "I think \"less\" is not the best word for this. What about \"fewer\" or something like \"collapse\"?",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_d9a53545",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:27:18Z",
+      "side": 1,
+      "message": "We could also say \"show all languages\" vs \"show your languages\"",
+      "parentUuid": "6eaa8f54_99b25de3",
       "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_b9539942",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:27:18Z",
+      "side": 1,
+      "message": "We need to add \"cursor: pointer;\" to the css then. However, I wonder if this should just be a \u003cspan\u003e with some styling attached. We aren\u0027t consistent here as we have edit buttons with \u003ca href\u003d\"#\"\u003e and the toggle of the entityterms box is a \u003cspan\u003e element.",
+      "parentUuid": "6eaa8f54_79b1a1db",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_79e8c1af",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
         "patchSetId": 6
@@ -98,6 +152,24 @@
       "writtenOn": "2015-12-14T18:05:13Z",
       "side": 1,
       "message": "String arrays should usually not be iterated like this. PHPStorm and other tools complain.",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_794d219b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:27:18Z",
+      "side": 1,
+      "message": "My PHPStorm doesn\u0027t complain \u003do How would you iterate through this array? I think $.each is worse performance wise.",
+      "parentUuid": "6eaa8f54_79e8c1af",
       "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_99357df6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:27:18Z",
+      "side": 1,
+      "message": "I\u0027m sure we can improve this piece of code. If I click on the button to hide the additional languages, I don\u0027t want to stick at the bottom of the page but want to scroll up again. We can also scroll to the top border of the $listview element or sth like this but I found it more intuitive to just scroll to the top of the page. Do you have a better suggestion?",
+      "parentUuid": "6eaa8f54_59e385d4",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_19cd0d63",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
         "patchSetId": 6
@@ -132,6 +222,24 @@
       "writtenOn": "2015-12-14T18:05:13Z",
       "side": 1,
       "message": "String arrays should usually not be iterated like this. PHPStorm and other tools complain.",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b93ab9e2",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:27:18Z",
+      "side": 1,
+      "message": "See above",
+      "parentUuid": "6eaa8f54_19cd0d63",
       "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
