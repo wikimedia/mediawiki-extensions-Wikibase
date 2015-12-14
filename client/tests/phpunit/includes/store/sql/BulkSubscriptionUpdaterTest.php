@@ -24,7 +24,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
  */
 class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyChangesSubscription' ) ) {
 			$this->markTestSkipped( 'Skipping test for BulkSubscriptionUpdater, '
 				. 'because the useLegacyChangesSubscription option is set.' );

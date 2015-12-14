@@ -359,8 +359,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		);
 	}
 
-	public function setup() {
-		parent::setup();
+	protected function setUp() {
+		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();

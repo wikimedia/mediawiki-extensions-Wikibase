@@ -26,13 +26,13 @@ class RepoHooksTest extends \MediaWikiTestCase {
 
 	private $saveAllowImport = false;
 
-	public function setup() {
-		parent::setup();
+	protected function setUp() {
+		parent::setUp();
 
 		$this->saveAllowImport = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'allowEntityImport' );
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $this->saveAllowImport );
 
 		parent::tearDown();

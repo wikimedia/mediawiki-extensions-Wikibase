@@ -22,7 +22,7 @@ use Wikibase\Store\Sql\SqlSubscriptionLookup;
  */
 class SqlSubscriptionLookupTest extends MediaWikiTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wb_changes_subscription';

@@ -19,7 +19,7 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
  */
 class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'recentchanges';
