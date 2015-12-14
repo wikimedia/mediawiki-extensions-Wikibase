@@ -189,6 +189,14 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			new Term( 'fr', 'ADisplayLabel' )
 		);
 
+		$q444Match = new TermSearchResult(
+			new Term( 'en-ca', 'BlahMatch' ),
+			'alias',
+			new ItemId( 'Q444' ),
+			new Term( 'it', 'BlahDisplay' )
+		);
+
+
 		$q111Result = array(
 			'id' => 'Q111',
 			'concepturi' => 'concept:Q111',
@@ -234,6 +242,23 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				'text' => 'AMatchedTerm',
 			),
 		);
+
+		$q444Result = array(
+			'id' => 'Q444',
+			'concepturi' => 'concept:Q444',
+			'url' => 'http://fullTitleUrl',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'label' => 'BlahDisplay',
+			'aliases' => array( 'BlahMatch' ),
+			'match' => array(
+				'type' => 'alias',
+				'language' => 'en-ca',
+				'text' => 'BlahMatch',
+				'props' => 'url',
+			),
+		);
+
 
 		return array(
 			'No exact match' => array(
@@ -299,3 +324,5 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	}
 
 }
+
+
