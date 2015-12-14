@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\Rdf\SiteLinksRdfBuilder;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -19,9 +20,20 @@ use Wikimedia\Purtle\RdfWriter;
 class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	/**
 	 * @var RdfBuilderTestData|null
 	 */
 	private $testData = null;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	/**
 	 * Initialize repository data
@@ -58,29 +70,17 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		return $builder;
 	}
 
-	/**
-	 * Extract text test data from RDF builder
-	 * @param RdfWriter $writer
-	 * @return string[] ntriples lines, sorted
-	 */
-	private function getDataFromWriter( RdfWriter $writer ) {
-		$ntriples = $writer->drain();
-
-		$lines = explode( "\n", trim( $ntriples ) );
-		sort( $lines );
-		return $lines;
-	}
-
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
-		$actualData = $this->getDataFromWriter( $writer );
+		$actualData = $writer->drain();
 		$correctData = $this->getTestData()->getNTriples( $dataSetName );
 
 		if ( $correctData === null ) {
 			$this->getTestData()->putTestData( $dataSetName, $actualData, '.actual' );
-			$this->fail( 'Data set `' . $dataSetName . '` not found! Created file with the current data using the suffix .actual' );
+			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
+				. " the suffix .actual" );
 		}
 
-		$this->assertEquals( $correctData, $actualData, "Data set $dataSetName" );
+		$this->helper->assertNTriplesEquals( $correctData, $actualData, "Data set $dataSetName" );
 	}
 
 	public function provideAddEntity() {
@@ -97,8 +97,7 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$builder = $this->newBuilder( $writer, $sites );
-		$builder->addEntity( $entity );
+		$this->newBuilder( $writer, $sites )->addEntity( $entity );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
@@ -110,8 +109,7 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$builder = $this->newBuilder( $writer, $sites );
-		$builder->addSiteLinks( $entity );
+		$this->newBuilder( $writer, $sites )->addSiteLinks( $entity );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}

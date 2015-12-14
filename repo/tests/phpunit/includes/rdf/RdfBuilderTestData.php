@@ -111,7 +111,7 @@ class RdfBuilderTestData {
 	 *       not be used while testing.
 	 *
 	 * @param string $dataSetName
-	 * @param string[] $lines
+	 * @param string[]|string $lines
 	 * @param string $suffix File name suffix
 	 *
 	 * @return bool|int the number of bytes that were written to the file, or

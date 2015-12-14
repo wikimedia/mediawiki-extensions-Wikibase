@@ -9,6 +9,7 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\SnakRdfBuilder;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -26,9 +27,20 @@ use Wikimedia\Purtle\RdfWriter;
 class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	/**
 	 * @var RdfBuilderTestData|null
 	 */
 	private $testData = null;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	/**
 	 * Initialize repository data
@@ -105,41 +117,17 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		return $statementBuilder;
 	}
 
-	/**
-	 * Extract text test data from RDF builder
-	 * @param RdfWriter $writer
-	 * @return string[] ntriples lines, sorted
-	 */
-	private function getDataFromWriter( RdfWriter $writer ) {
-		$ntriples = $writer->drain();
-
-		$lines = explode( "\n", trim( $ntriples ) );
-		sort( $lines );
-		return $lines;
-	}
-
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
-		$actualData = $this->getDataFromWriter( $writer );
+		$actualData = $writer->drain();
 		$correctData = $this->getTestData()->getNTriples( $dataSetName );
 
 		if ( $correctData === null ) {
 			$this->getTestData()->putTestData( $dataSetName, $actualData, '.actual' );
-			$this->fail( 'Data set `' . $dataSetName . '` not found! Created file with the current data using the suffix .actual' );
+			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
+				. " the suffix .actual" );
 		}
 
-		sort( $correctData );
-		sort( $actualData );
-
-		// Note: comparing $expected and $actual directly would show triples
-		// that are present in both but shifted in position. That makes the output
-		// hard to read. Calculating the $missing and $extra sets helps.
-		$extra = array_diff( $actualData, $correctData );
-		$missing = array_diff( $correctData, $actualData );
-
-		// Cute: $missing and $extra can be equal only if they are empty.
-		// Comparing them here directly looks a bit odd in code, but produces meaningful
-		// output, especially if the input was sorted.
-		$this->assertEquals( $missing, $extra, "Data set $dataSetName" );
+		$this->helper->assertNTriplesEquals( $correctData, $actualData, "Data set $dataSetName" );
 	}
 
 	public function provideAddEntity() {
@@ -166,8 +154,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$mentioned = array();
-		$builder = $this->newBuilder( $writer, $flavor, $mentioned );
-		$builder->addEntity( $entity );
+		$this->newBuilder( $writer, $flavor, $mentioned )->addEntity( $entity );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 		$this->assertEquals( $expectedMentions, array_keys( $mentioned ), 'Entities mentioned' );
@@ -193,8 +180,8 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$mentioned = array();
-		$builder = $this->newBuilder( $writer, RdfProducer::PRODUCE_ALL, $mentioned, $dedupe );
-		$builder->addEntity( $entity );
+		$this->newBuilder( $writer, RdfProducer::PRODUCE_ALL, $mentioned, $dedupe )
+			->addEntity( $entity );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
@@ -212,8 +199,8 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$builder = $this->newBuilder( $writer, RdfProducer::PRODUCE_ALL );
-		$builder->addStatements( $entity->getId(), $entity->getStatements() );
+		$this->newBuilder( $writer, RdfProducer::PRODUCE_ALL )
+			->addStatements( $entity->getId(), $entity->getStatements() );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}

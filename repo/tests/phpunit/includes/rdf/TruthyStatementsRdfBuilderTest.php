@@ -2,10 +2,12 @@
 
 namespace Wikibase\Test\Rdf;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\TruthyStatementRdfBuilder;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -19,13 +21,25 @@ use Wikimedia\Purtle\RdfWriter;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Stas Malyshev
+ * @author Thiemo Mättig
  */
-class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
 
 	/**
 	 * @var RdfBuilderTestData|null
 	 */
 	private $testData = null;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	/**
 	 * Initialize repository data
@@ -61,41 +75,30 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			new NullDedupeBag()
 		);
 
-		$snakBuilder = new SnakRdfBuilder( $vocabulary, $valueBuilder, $this->getTestData()->getMockRepository() );
+		$snakBuilder = new SnakRdfBuilder(
+			$vocabulary,
+			$valueBuilder,
+			$this->getTestData()->getMockRepository()
+		);
 
-		$builder = new TruthyStatementRdfBuilder(
+		return new TruthyStatementRdfBuilder(
 			$vocabulary,
 			$writer,
 			$snakBuilder
 		);
-
-		return $builder;
-	}
-
-	/**
-	 * Extract text test data from RDF builder
-	 * @param RdfWriter $writer
-	 * @return string[] ntriples lines, sorted
-	 */
-	private function getDataFromWriter( RdfWriter $writer ) {
-		$ntriples = $writer->drain();
-
-		$lines = explode( "\n", trim( $ntriples ) );
-		sort( $lines );
-		$lines = array_map( 'trim', $lines );
-		return $lines;
 	}
 
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
-		$actualData = $this->getDataFromWriter( $writer );
+		$actualData = $writer->drain();
 		$correctData = $this->getTestData()->getNTriples( $dataSetName );
 
 		if ( $correctData === null ) {
 			$this->getTestData()->putTestData( $dataSetName, $actualData, '.actual' );
-			$this->fail( 'Data set `' . $dataSetName . '` not found! Created file with the current data using the suffix .actual' );
+			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
+				. " the suffix .actual" );
 		}
 
-		$this->assertEquals( $correctData, $actualData, "Data set $dataSetName" );
+		$this->helper->assertNTriplesEquals( $correctData, $actualData, "Data set $dataSetName" );
 	}
 
 	public function provideAddEntity() {
@@ -111,8 +114,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$builder = $this->newBuilder( $writer );
-		$builder->addEntity( $entity );
+		$this->newBuilder( $writer )->addEntity( $entity );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
@@ -124,8 +126,7 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$builder = $this->newBuilder( $writer );
-		$builder->addStatements( $entity->getId(), $entity->getStatements() );
+		$this->newBuilder( $writer )->addStatements( $entity->getId(), $entity->getStatements() );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
