@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_13e16e29",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-12-14T14:25:20Z",
+      "side": 1,
+      "message": "And what happens when someone adds other properties? And then doesn\u0027t put url as the first one in their query?",
+      "revId": "bb4645b6ff65c1698e433f07fd1d79ab1a1e23ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
