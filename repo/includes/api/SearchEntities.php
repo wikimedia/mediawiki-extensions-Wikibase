@@ -119,7 +119,8 @@ class SearchEntities extends ApiBase {
 			$params['language'],
 			$params['type'],
 			$params['continue'] + $params['limit'] + 1,
-			$params['strictlanguage']
+			$params['strictlanguage'],
+			$params['url']
 		);
 
 		$entries = array();
@@ -143,10 +144,17 @@ class SearchEntities extends ApiBase {
 		$entry = array(
 			'id' => $match->getEntityId()->getSerialization(),
 			'concepturi' => $this->conceptBaseUri . $match->getEntityId()->getSerialization(),
-			'url' => $title->getFullUrl(),
 			'title' => $title->getPrefixedText(),
 			'pageid' => $title->getArticleID()
 		);
+
+		if ( !is_null( $params['props'] ) ) {
+			$prop = array_flip( $params['props'] );
+
+			if ( $prop[0] === 'url' ) {
+				$entry['url'] = $title->getFullUrl();
+			}
+		}
 
 		$displayLabel = $match->getDisplayLabel();
 
@@ -181,7 +189,6 @@ class SearchEntities extends ApiBase {
 				$entry['aliases'] = array( $matchedTerm->getText() );
 			}
 		}
-
 		return $entry;
 	}
 
@@ -275,6 +282,10 @@ class SearchEntities extends ApiBase {
 				self::PARAM_TYPE => 'integer',
 				self::PARAM_REQUIRED => false,
 			),
+			'props' => array(
+				self::PARAM_TYPE => array( 'url' ),
+				self::PARAM_REQUIRED => false,
+			),
 		);
 	}
 
@@ -289,6 +300,9 @@ class SearchEntities extends ApiBase {
 				'apihelp-wbsearchentities-example-2',
 			'action=wbsearchentities&search=alphabet&language=en&type=property' =>
 				'apihelp-wbsearchentities-example-3',
+			'action=wbsearchentities&search=alphabet&language=en&props=url' =>
+				'apihelp-wbsearchentities-example-4',
+
 		);
 	}
 
