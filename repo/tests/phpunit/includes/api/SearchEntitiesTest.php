@@ -192,7 +192,6 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q111Result = array(
 			'id' => 'Q111',
 			'concepturi' => 'concept:Q111',
-			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'ptLabel',
@@ -207,7 +206,6 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q222Result = array(
 			'id' => 'Q222',
 			'concepturi' => 'concept:Q222',
-			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'FooHeHe',
@@ -221,6 +219,20 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$q333Result = array(
+			'id' => 'Q333',
+			'concepturi' => 'concept:Q333',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'label' => 'ADisplayLabel',
+			'aliases' => array( 'AMatchedTerm' ),
+			'match' => array(
+				'type' => 'alias',
+				'language' => 'de',
+				'text' => 'AMatchedTerm',
+			),
+		);
+
+		$resultWithUrl = array(
 			'id' => 'Q333',
 			'concepturi' => 'concept:Q333',
 			'url' => 'http://fullTitleUrl',
@@ -260,6 +272,11 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				array( 'limit' => 1, 'continue' => 1 ),
 				array( $q222Match, $q333Match ),
 				array( $q333Result ),
+			),
+			'Multiple Results (include-entity-url)' => array(
+				array('prop' => 'url' ),
+				array( $q333Match ),
+				array( $resultWithUrl ),
 			),
 		);
 	}
