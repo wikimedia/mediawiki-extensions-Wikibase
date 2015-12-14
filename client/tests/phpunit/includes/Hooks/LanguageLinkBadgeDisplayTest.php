@@ -3,9 +3,9 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
-use MediaWikiTestCase;
 use OutputPage;
 use ParserOutput;
+use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -21,12 +21,11 @@ use Wikibase\DataModel\Term\Term;
  *
  * @group WikibaseClient
  * @group Wikibase
- * @group Database
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class LanguageLinkBadgeDisplayTest extends MediaWikiTestCase {
+class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return LanguageLinkBadgeDisplay
