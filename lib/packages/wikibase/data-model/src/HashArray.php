@@ -28,7 +28,6 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * the first such element.
  *
  * @since 0.1
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
