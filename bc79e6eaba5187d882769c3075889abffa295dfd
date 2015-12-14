@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_b9b719d3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T18:05:13Z",
+      "side": 1,
+      "message": "Isn\u0027t this about *all* languages?",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_99b25de3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T18:05:13Z",
+      "side": 1,
+      "message": "I think \"less\" is not the best word for this. What about \"fewer\" or something like \"collapse\"?",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b905d97e",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T18:05:13Z",
+      "side": 1,
+      "message": "Either the key should be changed from \"more\" to \"all\", or the description should not talk about all. The code currently does not show *all* languages.",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_19c66d4f",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T18:05:13Z",
+      "side": 1,
+      "message": "I think this should be \"all\". Same for the message key.",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_79b1a1db",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T18:05:13Z",
+      "side": 1,
+      "message": "Please avoid dead href\u003d\"#\". In HTML5 it\u0027s allowed to have an \u003ca\u003e with no href.",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_79e8c1af",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T18:05:13Z",
+      "side": 1,
+      "message": "String arrays should usually not be iterated like this. PHPStorm and other tools complain.",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_59e385d4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T18:05:13Z",
+      "side": 1,
+      "message": "Uh, what? Two animations? And how do you know the term box is \"above the fold\"?",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_19cd0d63",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T18:05:13Z",
+      "side": 1,
+      "message": "String arrays should usually not be iterated like this. PHPStorm and other tools complain.",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
