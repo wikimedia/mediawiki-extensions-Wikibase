@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6eaa8f54_f3e7f239",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-12-14T14:26:46Z",
+      "side": 1,
+      "message": "URL is a property, not a param",
+      "revId": "bb4645b6ff65c1698e433f07fd1d79ab1a1e23ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_13e16e29",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 8
