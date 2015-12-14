@@ -24,13 +24,10 @@
 
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\StringFormatter;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\UnDeserializableValueFormatter;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;

@@ -23,10 +23,7 @@
  */
 
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\StringFormatter;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\SnakFormatter;
-use Wikibase\Lib\UnDeserializableValueFormatter;
 
 return call_user_func( function() {
 	// NOTE: 'formatter-factory-callback' callbacks act as glue between the high level interface

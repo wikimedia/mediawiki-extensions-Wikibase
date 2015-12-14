@@ -18,10 +18,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
-use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Client\Hooks\SidebarHookHandlers

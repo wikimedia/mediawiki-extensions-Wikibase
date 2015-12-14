@@ -5,7 +5,6 @@ namespace Wikibase\Client\Hooks;
 use OutputPage;
 use ParserOutput;
 use Skin;
-use StubUserLang;
 use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\NamespaceChecker;

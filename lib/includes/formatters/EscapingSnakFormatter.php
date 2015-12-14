@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib;
 
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Snak\Snak;
 use Wikimedia\Assert\Assert;
 
