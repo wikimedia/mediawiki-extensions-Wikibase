@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_58d38461",
+        "filename": "lib/tests/phpunit/SitesModuleWorkerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-14T09:13:43Z",
+      "side": 1,
+      "message": "think this should be $summary",
+      "revId": "c02c40716186908489558c820f95473298db3b61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
