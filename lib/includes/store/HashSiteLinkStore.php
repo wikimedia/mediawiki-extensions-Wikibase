@@ -57,6 +57,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 		$links = array();
 
 		foreach ( $this->linksByItemId as $prefixedId => $siteLinks ) {
+			/** @var SiteLink $siteLink */
 			foreach ( $siteLinks as $siteLink ) {
 				$itemId = new ItemId( $prefixedId );
 

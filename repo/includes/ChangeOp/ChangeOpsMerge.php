@@ -7,7 +7,6 @@ use Site;
 use SiteLookup;
 use ValueValidators\Error;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;

@@ -408,15 +408,15 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	public function resolveMentionedEntities( EntityLookup $entityLookup ) {
 		$hasRedirect = false;
 
-		foreach ( $this->entitiesResolved as $key => $value ) {
+		foreach ( $this->entitiesResolved as $id ) {
 			// $value is true if the entity has already been resolved,
 			// or an EntityId to resolve.
-			if ( !( $value instanceof EntityId ) ) {
+			if ( !( $id instanceof EntityId ) ) {
 				continue;
 			}
 
 			try {
-				$entity = $entityLookup->getEntity( $value );
+				$entity = $entityLookup->getEntity( $id );
 
 				if ( !$entity ) {
 					continue;
@@ -426,7 +426,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			} catch ( RevisionedUnresolvedRedirectException $ex ) {
 				// NOTE: this may add more entries to the end of entitiesResolved
 				$target = $ex->getRedirectTargetId();
-				$this->addEntityRedirect( $value, $target );
+				$this->addEntityRedirect( $id, $target );
 				$hasRedirect = true;
 			}
 		}
