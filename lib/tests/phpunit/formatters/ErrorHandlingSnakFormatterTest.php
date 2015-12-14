@@ -7,6 +7,7 @@ use DataValues\UnDeserializableValue;
 use Exception;
 use Language;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
+use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -117,6 +118,11 @@ class ErrorHandlingSnakFormatterTest extends \MediaWikiTestCase {
 				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
 				new PropertyDataTypeLookupException( new PropertyId( 'P1' ) ),
 				$valueFormatter
+			),
+			'FormattingException' => array(
+				'<span class="error wb-format-error">(wikibase-snakformatter-formatting-exception: TEST)</span>',
+				new PropertyValueSnak( $p1, new StringValue( 'foo' ) ),
+				new FormattingException( 'TEST' ),
 			),
 		);
 	}
