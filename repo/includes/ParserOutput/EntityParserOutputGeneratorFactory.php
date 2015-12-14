@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use Language;
 use ParserOptions;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -151,7 +152,7 @@ class EntityParserOutputGeneratorFactory {
 	 *
 	 * @return LanguageFallbackChain
 	 */
-	private function getLanguageFallbackChain( $language ) {
+	private function getLanguageFallbackChain( Language $language ) {
 		// Language fallback must depend ONLY on the target language,
 		// so we don't confuse the parser cache with user specific HTML.
 		return $this->languageFallbackChainFactory->newFromLanguage(
