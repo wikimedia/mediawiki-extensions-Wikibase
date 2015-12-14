@@ -77,10 +77,14 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 				);
 			}
 		} catch ( PropertyDataTypeLookupException $ex ) {
-			// @todo: PropertyDataTypeLookupException should be wrapped in a FormatterException
 			$warningText = $this->formatWarning(
 				'wikibase-snakformatter-property-not-found',
 				$snak->getPropertyId()->getSerialization()
+			);
+		} catch ( FormattingException $ex ) {
+			$warningText = $this->formatWarning(
+				'wikibase-snakformatter-formatting-exception',
+				$ex->getMessage() // this is unlocalized/technical!
 			);
 		}
 

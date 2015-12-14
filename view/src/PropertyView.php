@@ -3,9 +3,11 @@
 namespace Wikibase\View;
 
 use DataTypes\DataTypeFactory;
+use Html;
 use InvalidArgumentException;
 use Language;
 use Wikibase\DataModel\Entity\EntityDocument;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
@@ -89,16 +91,25 @@ class PropertyView extends EntityView {
 	 * @return string HTML
 	 */
 	private function getHtmlForDataType( $propertyType ) {
-		$dataType = $this->dataTypeFactory->getType( $propertyType );
 
-		return $this->templateFactory->render( 'wb-section-heading',
+		$html = $this->templateFactory->render( 'wb-section-heading',
 			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
 			'datatype',
 			'wikibase-propertypage-datatype'
-		)
-		. $this->templateFactory->render( 'wikibase-propertyview-datatype',
-			htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
 		);
+
+		try {
+			$dataType = $this->dataTypeFactory->getType( $propertyType );
+			$html .= $this->templateFactory->render( 'wikibase-propertyview-datatype',
+				htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
+			);
+		} catch ( OutOfBoundsException $ex ) {
+			$html .= Html::rawElement( 'span', array( 'class' => 'error' ),
+				wfMessage( 'wikibase-propertypage-bad-datatype', $propertyType )->parse()
+			);
+		}
+
+		return $html;
 	}
 
 	/**

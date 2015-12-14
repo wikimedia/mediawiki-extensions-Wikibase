@@ -7,6 +7,7 @@ use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;
 use Message;
+use OutOfBoundsException;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
@@ -105,9 +106,9 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 			$propertyType = $this->typeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
 			$expectedDataValueType = $this->getDataValueTypeForPropertyDataType( $propertyType );
 		} catch ( PropertyDataTypeLookupException $ex ) {
-			// @todo: wrap PropertyDataTypeLookupException in a FormatterException,
-			// handle that exception in ErrorHandlingSnakFormatter
 			throw $ex;
+		} catch ( OutOfBoundsException $ex ) {
+			throw new FormattingException( $ex->getMessage(), 0, $ex );
 		}
 
 		$this->checkValueType( $value, $expectedDataValueType );
