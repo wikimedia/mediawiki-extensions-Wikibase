@@ -346,7 +346,6 @@ abstract class EntityHandler extends ContentHandler {
 	 * @param string $id String representation the entity ID
 	 *
 	 * @return EntityId
-	 *
 	 * @throws InvalidArgumentException
 	 */
 	abstract public function makeEntityId( $id );

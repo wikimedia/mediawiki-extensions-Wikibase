@@ -184,7 +184,6 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
 	 * @throws MWContentSerializationException
-	 *
 	 * @return string The blob
 	 */
 	private function loadEntityBlob( $row ) {

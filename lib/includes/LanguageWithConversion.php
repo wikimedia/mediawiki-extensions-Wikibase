@@ -45,7 +45,6 @@ class LanguageWithConversion {
 	 * @param string $code Language code
 	 *
 	 * @return string Validated and normalized code.
-	 *
 	 * @throws MWException on invalid code
 	 */
 	public static function validateLanguageCode( $code ) {

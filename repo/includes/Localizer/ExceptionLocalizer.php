@@ -23,7 +23,6 @@ interface ExceptionLocalizer {
 	 * @param Exception $ex
 	 *
 	 * @throws InvalidArgumentException If localization of the given exception is not supported.
-	 *
 	 * @return Message
 	 */
 	public function getExceptionMessage( Exception $ex );

@@ -255,7 +255,6 @@ class TermIndexEntry {
 
 	/**
 	 * @return Term
-	 *
 	 * @throws MWException
 	 */
 	public function getTerm() {

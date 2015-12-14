@@ -104,7 +104,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param string $rawId
 	 *
 	 * @return EntityId
-	 *
 	 * @throws UserInputException
 	 */
 	protected function parseEntityId( $rawId ) {
@@ -129,7 +128,6 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param string $rawId
 	 *
 	 * @return ItemId
-	 *
 	 * @throws UserInputException
 	 */
 	protected function parseItemId( $rawId ) {

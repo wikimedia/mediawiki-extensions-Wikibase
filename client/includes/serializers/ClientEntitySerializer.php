@@ -64,7 +64,6 @@ class ClientEntitySerializer implements Serializer {
 	 * @param EntityDocument $entity
 	 *
 	 * @throws SerializationException
-	 *
 	 * @return array
 	 */
 	public function serialize( $entity ) {

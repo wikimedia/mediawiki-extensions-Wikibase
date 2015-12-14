@@ -105,7 +105,6 @@ class PopulateSitesTable extends Maintenance {
 	 * @param string $url
 	 *
 	 * @throws MWException
-	 *
 	 * @return string
 	 */
 	protected function getSiteMatrixData( $url ) {

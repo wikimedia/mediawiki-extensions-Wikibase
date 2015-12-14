@@ -51,7 +51,6 @@ class EntityLoadingHelper {
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
-	 *
 	 * @return EntityRevision
 	 */
 	public function loadEntityRevision(

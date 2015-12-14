@@ -55,7 +55,6 @@ class ChangeNotifier {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
-	 *
 	 * @return EntityChange|null
 	 */
 	public function notifyOnPageDeleted( EntityContent $content, User $user, $timestamp ) {
@@ -115,7 +114,6 @@ class ChangeNotifier {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
-	 *
 	 * @return EntityChange|null
 	 */
 	public function notifyOnPageCreated( Revision $revision ) {
@@ -147,7 +145,6 @@ class ChangeNotifier {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
-	 *
 	 * @return EntityChange|null
 	 */
 	public function notifyOnPageModified( Revision $current, Revision $parent ) {

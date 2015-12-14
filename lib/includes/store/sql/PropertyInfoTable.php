@@ -102,7 +102,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return array|null
-	 *
 	 * @throws InvalidArgumentException
 	 * @throws DBError
 	 */
@@ -137,7 +136,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 * @param string $dataType
 	 *
 	 * @return array[]
-	 *
 	 * @throws DBError
 	 */
 	public function getPropertyInfoForDataType( $dataType ) {
@@ -161,7 +159,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 * @see PropertyInfoStore::getAllPropertyInfo
 	 *
 	 * @return array[]
-	 *
 	 * @throws DBError
 	 */
 	public function getAllPropertyInfo() {

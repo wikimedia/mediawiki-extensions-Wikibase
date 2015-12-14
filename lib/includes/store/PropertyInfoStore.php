@@ -32,7 +32,6 @@ interface PropertyInfoStore {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return array|null
-	 *
 	 * @throws StorageException
 	 * @throws DBError
 	 */
@@ -47,7 +46,6 @@ interface PropertyInfoStore {
 	 * @param string $dataType
 	 *
 	 * @return array[] An associative array mapping property IDs to info arrays.
-	 *
 	 * @throws StorageException
 	 * @throws DBError
 	 */
@@ -61,7 +59,6 @@ interface PropertyInfoStore {
 	 *        Also, it is not guaranteed that the info arrays will contain all well known fields.
 	 *
 	 * @return array[] An associative array mapping property IDs to info arrays.
-	 *
 	 * @throws StorageException
 	 * @throws DBError
 	 */
@@ -86,7 +83,6 @@ interface PropertyInfoStore {
 	 * @param PropertyId $propertyId
 	 *
 	 * @return bool true iff something was deleted
-	 *
 	 * @throws StorageException
 	 * @throws DBError
 	 */
