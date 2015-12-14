@@ -125,7 +125,7 @@ class SearchEntities extends ApiBase {
 		$entries = array();
 
 		foreach ( $searchResults as $match ) {
-			$entries[] = $this->buildTermSearchMatchEntry( $match );
+			$entries[] = $this->buildTermSearchMatchEntry( $match, $params['prop'] );
 		}
 
 		return $entries;
@@ -133,20 +133,24 @@ class SearchEntities extends ApiBase {
 
 	/**
 	 * @param TermSearchResult $match
+	 * @param array $prop
 	 *
 	 * @return array
 	 */
-	private function buildTermSearchMatchEntry( $match ) {
+	private function buildTermSearchMatchEntry( $match, $prop ) {
 		// TODO: use EntityInfoBuilder, EntityInfoTermLookup
 		$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
 
 		$entry = array(
 			'id' => $match->getEntityId()->getSerialization(),
 			'concepturi' => $this->conceptBaseUri . $match->getEntityId()->getSerialization(),
-			'url' => $title->getFullUrl(),
 			'title' => $title->getPrefixedText(),
 			'pageid' => $title->getArticleID()
 		);
+
+		if ( in_array( 'url', $prop ) ) {
+			$entry['url'] = $title->getFullUrl();
+		}
 
 		$displayLabel = $match->getDisplayLabel();
 
@@ -181,7 +185,6 @@ class SearchEntities extends ApiBase {
 				$entry['aliases'] = array( $matchedTerm->getText() );
 			}
 		}
-
 		return $entry;
 	}
 
@@ -275,6 +278,9 @@ class SearchEntities extends ApiBase {
 				self::PARAM_TYPE => 'integer',
 				self::PARAM_REQUIRED => false,
 			),
+			'prop' => array(
+				self::PARAM_TYPE => array( 'url' ),
+				ApiBase::PARAM_ISMULTI => true,			),
 		);
 	}
 
@@ -289,6 +295,9 @@ class SearchEntities extends ApiBase {
 				'apihelp-wbsearchentities-example-2',
 			'action=wbsearchentities&search=alphabet&language=en&type=property' =>
 				'apihelp-wbsearchentities-example-3',
+			'action=wbsearchentities&search=alphabet&language=en&prop=url' =>
+				'apihelp-wbsearchentities-example-4',
+
 		);
 	}
 

@@ -526,9 +526,11 @@
 	"apihelp-wbsearchentities-param-type": "{{doc-apihelp-param|wbsearchentities|type}}",
 	"apihelp-wbsearchentities-param-limit": "{{doc-apihelp-param|wbsearchentities|limit}}",
 	"apihelp-wbsearchentities-param-continue": "{{doc-apihelp-param|wbsearchentities|continue}}",
+	"apihelp-wbsearchentities-param-prop": "{{doc-apihelp-param|wbsearchentities|prop}}",
 	"apihelp-wbsearchentities-example-1": "{{doc-apihelp-example|wbsearchentities}}",
 	"apihelp-wbsearchentities-example-2": "{{doc-apihelp-example|wbsearchentities}}",
 	"apihelp-wbsearchentities-example-3": "{{doc-apihelp-example|wbsearchentities}}",
+	"apihelp-wbsearchentities-example-4": "{{doc-apihelp-example|wbsearchentities}}",
 	"apihelp-query+wbsearch-description": "{{doc-apihelp-description|query+wbsearch}}",
 	"apihelp-query+wbsearch-param-search": "{{doc-apihelp-param|query+wbsearch|search}}",
 	"apihelp-query+wbsearch-param-language": "{{doc-apihelp-param|query+wbsearch|language}}",
@@ -633,3 +635,5 @@
 	"apihelp-wbsetsitelink-example-7": "{{doc-apihelp-example|wbsetsitelink}}",
 	"apihelp-wbsetsitelink-example-8": "{{doc-apihelp-example|wbsetsitelink}}"
 }
+
+
