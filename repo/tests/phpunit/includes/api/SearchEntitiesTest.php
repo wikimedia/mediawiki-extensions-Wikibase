@@ -189,10 +189,16 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			new Term( 'fr', 'ADisplayLabel' )
 		);
 
+		$q444Match = new TermSearchResult(
+			new Term( 'en-ca', 'BlahMatch' ),
+			'alias',
+			new ItemId( 'Q444' ),
+			new Term( 'it', 'BlahDisplay' )
+		);
+
 		$q111Result = array(
 			'id' => 'Q111',
 			'concepturi' => 'concept:Q111',
-			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'ptLabel',
@@ -207,7 +213,6 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q222Result = array(
 			'id' => 'Q222',
 			'concepturi' => 'concept:Q222',
-			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'FooHeHe',
@@ -223,7 +228,6 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		$q333Result = array(
 			'id' => 'Q333',
 			'concepturi' => 'concept:Q333',
-			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'ADisplayLabel',
@@ -232,6 +236,21 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				'type' => 'alias',
 				'language' => 'de',
 				'text' => 'AMatchedTerm',
+			),
+		);
+
+		$q444Result = array(
+			'id' => 'Q444',
+			'concepturi' => 'concept:Q444',
+			'title' => 'Prefixed:Title',
+			'pageid' => 42,
+			'label' => 'BlahDisplay',
+			'aliases' => array( 'BlahMatch' ),
+			'match' => array(
+				'type' => 'alias',
+				'language' => 'en-ca',
+				'text' => 'BlahMatch',
+				'props' => array( 'url' ),
 			),
 		);
 
@@ -260,6 +279,11 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				array( 'limit' => 1, 'continue' => 1 ),
 				array( $q222Match, $q333Match ),
 				array( $q333Result ),
+			),
+			'Multiple Results (include-entity-url)' => array(
+				array( 'limit' => 1, 'continue' => 1 ),
+				array( $q444Match ),
+				array( $q444Result ),
 			),
 		);
 	}
