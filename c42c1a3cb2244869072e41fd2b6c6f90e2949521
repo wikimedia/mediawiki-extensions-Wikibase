@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_b9c87926",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:26:55Z",
+      "side": 1,
+      "message": "I have no idea what this should do if the userLanguages option is empty.. Just do nothing? I\u0027m not sure that we should allow this to be empty as the user always has at least one user language (the one he is browsing the wiki). Either way we should add a test though.",
+      "parentUuid": "6eaa8f54_9901fdbb",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_79420115",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
         "patchSetId": 6
@@ -47,6 +65,24 @@
       "writtenOn": "2015-12-14T17:58:13Z",
       "side": 1,
       "message": "I wonder why the star is here. I\u0027m aware this is not touched in this patch.",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_19d74dc6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:26:55Z",
+      "side": 1,
+      "message": "No idea :)",
+      "parentUuid": "6eaa8f54_79420115",
       "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_19fe6d36",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:26:55Z",
+      "side": 1,
+      "message": "While that shouldn\u0027t happen when using this widget (items added are always derived from the fingerprint object) I can still add a test case for this.",
+      "parentUuid": "6eaa8f54_d9c1b584",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_b98b9971",
         "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entitytermsview.tests.js",
         "patchSetId": 6
@@ -81,6 +135,24 @@
       "writtenOn": "2015-12-14T17:58:13Z",
       "side": 1,
       "message": "We use @return without s.",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9991fdfd",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entitytermsview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2015-12-14T18:26:55Z",
+      "side": 1,
+      "message": "True",
+      "parentUuid": "6eaa8f54_b98b9971",
       "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
