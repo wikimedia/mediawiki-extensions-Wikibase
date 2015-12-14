@@ -16,6 +16,8 @@ use Wikibase\StatementRankSerializer;
  */
 class GetClaimsStatementFilter implements StatementFilter {
 
+	const FILTER_TYPE = 'getClaims';
+
 	/**
 	 * @var ApiErrorReporter
 	 */
