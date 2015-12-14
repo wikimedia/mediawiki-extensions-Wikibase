@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_1333aff4",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T11:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_4e7d07e4",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_6e8243cf",
         "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-11T23:25:57Z",
       "side": 1,
       "message": "many of these seem unused",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b32f3b85",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T11:28:24Z",
+      "side": 1,
+      "message": "used in line 79",
+      "parentUuid": "6eaa8f54_6e8243cf",
       "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_d32c3792",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T11:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_8e23ffff",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_2e8c4bff",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2015-12-11T23:25:57Z",
       "side": 1,
       "message": "this is the repo!",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_53584735",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T11:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_2e8c4bff",
       "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_f33cd3be",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T11:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_ce70170a",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_ee6dd32e",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 8
@@ -98,6 +188,24 @@
       "writtenOn": "2015-12-11T23:25:57Z",
       "side": 1,
       "message": "repo! :)",
+      "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_133acfc0",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T11:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_ee6dd32e",
       "revId": "1be76e296040bca4c66272f96a8e2eef15c46830",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
