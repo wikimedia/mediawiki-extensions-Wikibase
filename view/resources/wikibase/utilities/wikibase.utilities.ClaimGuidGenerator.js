@@ -31,7 +31,7 @@ $.extend( wb.utilities.ClaimGuidGenerator.prototype, {
 	/**
 	 * Returns a new GUID for the entity id specified in the constructor.
 	 *
-	 * @returns {string} GUID
+	 * @return {string} GUID
 	 */
 	newGuid: function() {
 		return this._entityId + '$' + this._baseGenerator.newGuid();

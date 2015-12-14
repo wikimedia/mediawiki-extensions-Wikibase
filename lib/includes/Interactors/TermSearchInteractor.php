@@ -20,7 +20,7 @@ interface TermSearchInteractor {
 	 * @param string $entityType Type of Entity to return
 	 * @param string[] $termTypes Types of Term to return, array of Wikibase\TermIndexEntry::TYPE_*
 	 *
-	 * @returns TermSearchResult[]
+	 * @return TermSearchResult[]
 	 */
 	public function searchForEntities( $text, $languageCode, $entityType, array $termTypes );
 

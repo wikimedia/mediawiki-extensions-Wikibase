@@ -161,7 +161,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @param string $entityType
 	 * @param string[] $termTypes
 	 *
-	 * @returns TermSearchResult[]
+	 * @return TermSearchResult[]
 	 */
 	public function searchForEntities( $text, $languageCode, $entityType, array $termTypes ) {
 		$matchedTermIndexEntries = $this->getMatchingTermIndexEntries(
@@ -249,7 +249,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	/**
 	 * @param TermIndexEntry[] $termIndexEntries
 	 *
-	 * @returns array[]
+	 * @return array[]
 	 * @see TermSearchInteractor interface for return format
 	 */
 	private function getSearchResults( array $termIndexEntries ) {
@@ -292,7 +292,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	/**
 	 * @param TermIndexEntry $termIndexEntry
 	 *
-	 * @returns TermSearchResult
+	 * @return TermSearchResult
 	 */
 	private function convertToSearchResult( TermIndexEntry $termIndexEntry ) {
 		$entityId = $termIndexEntry->getEntityId();
@@ -354,7 +354,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @param string[] $languageCodes
 	 * @param string[] $termTypes
 	 *
-	 * @returns TermIndexEntry[]
+	 * @return TermIndexEntry[]
 	 */
 	private function makeTermIndexEntryTemplates( $text, array $languageCodes, array $termTypes ) {
 		$terms = array();
