@@ -68,6 +68,24 @@
       "revId": "3b6dc24a89ea1b3f2b57481f3cc04e2b04cb819c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_13e88fdc",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T12:26:20Z",
+      "side": 1,
+      "message": "The documentation here is shown to wiki users. Information about configuration variables is probably not helpful in that context. It would be helpful to tell them how to actually define URL patterns using statements on properties, but we don\u0027t have a mechanism for injecting the required information here. Perhaps we can put a better message into wikimedia-messages.",
+      "parentUuid": "6eaa8f54_3354abc9",
+      "revId": "3b6dc24a89ea1b3f2b57481f3cc04e2b04cb819c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
