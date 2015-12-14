@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_9391df54",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T12:33:07Z",
+      "side": 1,
+      "message": "remove the two blank lines, they make the style check fail.",
+      "revId": "198b6a9fcff9dc3ddab7b52892b9f74e4fed1422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_538b6720",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T12:33:07Z",
+      "side": 1,
+      "message": "remove extra blank line, the style checker complains about this.",
+      "revId": "198b6a9fcff9dc3ddab7b52892b9f74e4fed1422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_d39f5761",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T12:33:07Z",
+      "side": 1,
+      "message": "remove this, since the url field is no longer expected per default. same for $q222Result and $q111Result",
+      "revId": "198b6a9fcff9dc3ddab7b52892b9f74e4fed1422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_f398537e",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T12:33:07Z",
+      "side": 1,
+      "message": "This doesn\u0027t go into the expected result, but into the query, see below.",
+      "revId": "198b6a9fcff9dc3ddab7b52892b9f74e4fed1422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_f37ff30f",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T12:33:07Z",
+      "side": 1,
+      "message": "remove extra blank line, the style checker complains about this.",
+      "revId": "198b6a9fcff9dc3ddab7b52892b9f74e4fed1422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_d3c8b779",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T12:33:07Z",
+      "side": 1,
+      "message": "You need to add a line here that uses the new $q444Match and $q444Result.",
+      "revId": "198b6a9fcff9dc3ddab7b52892b9f74e4fed1422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_3386eb19",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T12:33:07Z",
+      "side": 1,
+      "message": "remove the two blank lines, they make the style check fail.",
+      "revId": "198b6a9fcff9dc3ddab7b52892b9f74e4fed1422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
