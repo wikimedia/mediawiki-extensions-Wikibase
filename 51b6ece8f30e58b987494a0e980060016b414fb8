@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_968b0c1b",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T16:35:33Z",
+      "side": 1,
+      "message": "You probably want to pass $params[\u0027props\u0027] as the second parameter here",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_769a1068",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T16:35:33Z",
+      "side": 1,
+      "message": "You probably want to declare $props as the second parameter here.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_b6dc084d",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 10
@@ -30,6 +64,24 @@
       "writtenOn": "2015-12-14T16:30:59Z",
       "side": 1,
       "message": "How can $match be an array? It\u0027s declared to be a TermSearchResult above.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_f6a5a09b",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T16:35:33Z",
+      "side": 1,
+      "message": "I\u0027m afraid there\u0027s some fundamental confusion here. $props should come from the request, while $match comes from the internal database search. $props should control how $match (and other information) is placed in $entry.",
+      "parentUuid": "6eaa8f54_b6dc084d",
       "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
