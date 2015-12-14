@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_f8e03027",
+        "filename": "lib/includes/formatters/HtmlExternalIdentifierFormatter.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T08:56:46Z",
+      "side": 1,
+      "message": "As discussed. This should be a \u003cspan\u003e for now, but I would like to play around with \u003ca\u003e without href\u003d\"...\".",
+      "revId": "d01dbb6dcfd9dcd31c2d0d010ee9512418c560a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_d890d49a",
+        "filename": "lib/tests/phpunit/formatters/HtmlExternalIdentifierFormatterTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T08:56:46Z",
+      "side": 1,
+      "message": "Duplicate code now asks for a newInstance() method.",
+      "revId": "d01dbb6dcfd9dcd31c2d0d010ee9512418c560a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_98f25c02",
+        "filename": "lib/tests/phpunit/formatters/WikitextExternalIdentifierFormatterTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T08:56:46Z",
+      "side": 1,
+      "message": "Duplicate code now asks for a newInstance() method.",
+      "revId": "d01dbb6dcfd9dcd31c2d0d010ee9512418c560a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
