@@ -1008,7 +1008,7 @@ class ResultBuilder {
 			return $array;
 		} );
 		$array = $this->modifier->modifyUsingCallback( $array, 'snaks', function ( $array ) {
-			foreach ( $array as $propertyIdGroup => &$snakGroup ) {
+			foreach ( $array as &$snakGroup ) {
 				if ( is_array( $snakGroup ) ) {
 					ApiResult::setArrayType( $array, 'array' );
 					ApiResult::setIndexedTagName( $snakGroup, 'snak' );
