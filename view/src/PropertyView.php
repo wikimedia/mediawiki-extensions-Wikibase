@@ -4,8 +4,10 @@ namespace Wikibase\View;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
+use Html;
 use InvalidArgumentException;
 use Language;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
@@ -63,7 +65,14 @@ class PropertyView extends EntityView {
 		}
 
 		$html = parent::getMainHtml( $entityRevision );
-		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
+
+		try {
+			$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
+		} catch ( OutOfBoundsException $ex ) {
+			$html .= Html::rawElement( 'span', array( 'class' => 'error' ),
+				wfMessage( 'wikibase-propertypage-bad-datatype', $property->getDataTypeId() )->parse()
+			);
+		}
 
 		$html .= $this->statementSectionsView->getHtml( $property->getStatements() );
 
