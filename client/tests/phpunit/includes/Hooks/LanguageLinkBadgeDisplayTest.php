@@ -3,16 +3,16 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
+use MediaWikiTestCase;
 use OutputPage;
 use ParserOutput;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
@@ -26,7 +26,7 @@ use Wikibase\Test\MockRepository;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
+class LanguageLinkBadgeDisplayTest extends MediaWikiTestCase {
 
 	/**
 	 * @return LanguageLinkBadgeDisplay
@@ -40,7 +40,7 @@ class LanguageLinkBadgeDisplayTest extends \MediaWikiTestCase {
 
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnCallback( function( $entityId ) {
+			->will( $this->returnCallback( function( EntityId $entityId ) {
 				if ( $entityId->getSerialization() === 'Q3' ) {
 					return new Term( 'de', 'Lesenswerter Artikel' );
 				} elseif ( $entityId->getSerialization() === 'Q4' ) {
