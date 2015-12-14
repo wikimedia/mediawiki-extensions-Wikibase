@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_56b834e2",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "This calls the method getRankedSearchResults in the class EntitySearchHelper with an additional parameter that does not exist over there. I do not think it is needed over there.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b6dc084d",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "How can $match be an array? It\u0027s declared to be a TermSearchResult above.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_36e818dd",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "Most other API modules with a similar parameter call this \"prop\" without \"s\".",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_f6f120c9",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "Please add ApiBase::PARAM_ISMULTI \u003d\u003e true.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_d6f424bc",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "REQUIRED is false by default. This line can be omitted.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_968c6c3c",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "You do not need this additional object. Simply reuse the existing $q333Match. All you need is a new description of the expected result, which is what your $q444Result below already does.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_768bf020",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "This should probably have a better name, e.g. $resultWithUrl.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_3696d850",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "The \"url\" is expected to be present in this result.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b6aac880",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "This does not belong here. This array is the *result*, as the variable name says. It is not the input but the output.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_f6c84079",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T16:30:59Z",
+      "side": 1,
+      "message": "This test should not contain the \"limit\" and \"continue\" parameters but the new parameter you introduced.",
+      "revId": "51b6ece8f30e58b987494a0e980060016b414fb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
