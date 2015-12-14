@@ -6,6 +6,7 @@ use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
+use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -76,13 +77,20 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	 * @return DataTypeFactory
 	 */
 	private function getMockDataTypeFactory( $dataType, $valueType ) {
+		if ( $valueType !== '' ) {
+			$getValueTypeIdForPropertyResult = $this->returnValue( new DataType( $dataType, $valueType ) );
+		} else {
+			$getValueTypeIdForPropertyResult = $this->throwException(
+				new OutOfBoundsException( 'unknown datatype '. $dataType ) );
+		}
+
 		$typeFactory = $this->getMockBuilder( 'DataTypes\DataTypeFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$typeFactory->expects( $this->any() )
 			->method( 'getType' )
-			->will( $this->returnValue( new DataType( $dataType, $valueType ) ) );
+			->will( $getValueTypeIdForPropertyResult );
 
 		return $typeFactory;
 	}
@@ -183,6 +191,16 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				$formatters,
 				null,
 				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
+			),
+
+			'data type not found, fail' => array(
+				new PropertyValueSnak( 7, new StringValue( 'dummy' ) ),
+				'url',
+				'', // triggers an exception from the mock PropertyDataTypeLookup
+				SnakFormatter::FORMAT_HTML,
+				$formatters,
+				null,
+				'ValueFormatters\FormattingException'
 			),
 		);
 	}
