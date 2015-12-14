@@ -155,7 +155,7 @@ class EntitySearchHelper {
 	 *
 	 * @return TermSearchResult[]
 	 */
-	private function mergeSearchResults( $searchResults, $newSearchResults, $limit ) {
+	private function mergeSearchResults( array $searchResults, array $newSearchResults, $limit ) {
 		$searchResultEntityIdSerializations = array_keys( $searchResults );
 
 		foreach ( $newSearchResults as $searchResultToAdd ) {
