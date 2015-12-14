@@ -36,7 +36,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	 */
 	private $redirectItemIds = array();
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		if ( $this->itemId === null ) {

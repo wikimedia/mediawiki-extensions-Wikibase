@@ -23,7 +23,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
  */
 class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
 			$this->markTestSkipped( 'Skipping test for EntityUsageTableBuilder, because the useLegacyUsageIndex option is set.' );
 		}

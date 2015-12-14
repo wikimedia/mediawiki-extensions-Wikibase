@@ -39,7 +39,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $templateTitle;
 
-	public function setUp() {
+	protected function setUp() {
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( 'Integration test requires repo and client extension to be active on the same wiki.' );
 		}

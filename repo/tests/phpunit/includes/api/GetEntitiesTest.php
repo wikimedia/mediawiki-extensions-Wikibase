@@ -24,8 +24,8 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	private static $hasSetup;
 	private static $usedHandles = array( 'StringProp', 'Berlin', 'London', 'Oslo', 'Guangzhou', 'Empty' );
 
-	public function setup() {
-		parent::setup();
+	protected function setUp() {
+		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {
 			$this->initTestEntities( self::$usedHandles );

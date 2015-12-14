@@ -42,7 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class DumpRdfTest extends MediaWikiLangTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->setMwGlobals( array(

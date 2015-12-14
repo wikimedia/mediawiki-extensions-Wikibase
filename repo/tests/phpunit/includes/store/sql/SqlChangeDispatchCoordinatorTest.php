@@ -18,7 +18,7 @@ use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
  */
 class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wb_changes';
