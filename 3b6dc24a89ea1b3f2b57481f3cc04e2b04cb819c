@@ -16,6 +16,24 @@
       "revId": "3b6dc24a89ea1b3f2b57481f3cc04e2b04cb819c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_53fcc7d5",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-14T11:39:04Z",
+      "side": 1,
+      "message": "you are right... strange that PHPStorm doesn\u0027t pick that up.",
+      "parentUuid": "6eaa8f54_93f23f02",
+      "revId": "3b6dc24a89ea1b3f2b57481f3cc04e2b04cb819c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
