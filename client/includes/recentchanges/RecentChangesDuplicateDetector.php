@@ -29,8 +29,9 @@ class RecentChangesDuplicateDetector {
 	 *
 	 * @since 0.4
 	 *
-	 * @throws MWException
+	 * @param RecentChange $change
 	 *
+	 * @throws MWException
 	 * @return bool
 	 */
 	public function changeExists( RecentChange $change ) {

@@ -112,7 +112,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 	}
 
 	/**
-	 * @param ParserOutput
+	 * @param ParserOutput $parserOutput
 	 *
 	 * @return CoordinatesOutput
 	 */

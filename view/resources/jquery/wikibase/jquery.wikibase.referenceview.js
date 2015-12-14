@@ -16,7 +16,7 @@
  *
  * @param {Object} options
  * @param {wikibase.datamodel.Reference|null} options.value
- * @param {jQuery.wikibase.listview.ListItemAdapater} options.listItemAdapter
+ * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
  * @param {wikibase.entityChangers.ReferencesChanger} options.referencesChanger
  *        Required for saving the `Reference` represented by the widget instance.
  * @param {string|null} [options.statementGuid]
