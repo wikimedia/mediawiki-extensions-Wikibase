@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_473ddc89",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-12-14T23:31:05Z",
+      "side": 1,
+      "message": "No, it\u0027s not. This array should only be added to, never removed from or overwritten. Each subclass is responsible for extending the version hash with things it varies on. Subclasses should never reject or replace those properties.\n\nUse:\n\n public function getDefinitionSummary( ResourceLoaderContext ) {\n   $summary \u003d parent::getDefinitionSummary( $context );\n   $summary[] \u003d array( .. );\n   return $summary;\n }\n\nSee ResourceLoaderFileModule and ResourceLoaderWikiModule, for example.\n\nThis avoids key conflicts since most classes create arrays here with generic array indexes that are not expected to be unique beyond the class itself.",
+      "revId": "00a0157c96b51f0f714e36201c2b3a3bd21be7bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_42af0a92",
+        "filename": "lib/includes/modules/SitesModuleWorker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2015-12-14T23:31:05Z",
+      "side": 1,
+      "message": "This doesn\u0027t necessarily have to be renamed as it still only returns one data point. If you expect to add more here, changing it to an array makes sense though.\n\nHowever, naming it \"getDefinitionSummary\" may be confusing as it makes it look like a module subclass, in which case it is forgetting to call the parent class\u0027 method and append data, which is conventional.",
+      "revId": "00a0157c96b51f0f714e36201c2b3a3bd21be7bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
