@@ -138,7 +138,6 @@ class Claims extends ArrayObject {
 	 * @param string $guid
 	 *
 	 * @return bool
-	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function offsetExists( $guid ) {
@@ -153,7 +152,6 @@ class Claims extends ArrayObject {
 	 * @param string $guid
 	 *
 	 * @return Statement
-	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function offsetGet( $guid ) {
