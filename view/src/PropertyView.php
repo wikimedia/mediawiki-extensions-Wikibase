@@ -4,8 +4,10 @@ namespace Wikibase\View;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
+use Html;
 use InvalidArgumentException;
 use Language;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
@@ -63,8 +65,7 @@ class PropertyView extends EntityView {
 		}
 
 		$html = parent::getMainHtml( $entityRevision );
-		$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
-
+		$html .= $this->getHtmlForDataType( $property->getDataTypeId() );
 		$html .= $this->statementSectionsView->getHtml( $property->getStatements() );
 
 		$footer = wfMessage( 'wikibase-property-footer' );
@@ -76,26 +77,32 @@ class PropertyView extends EntityView {
 		return $html;
 	}
 
-	private function getDataType( Property $property ) {
-		return $this->dataTypeFactory->getType( $property->getDataTypeId() );
-	}
-
 	/**
 	 * Builds and returns the HTML representing a property entity's data type information.
 	 *
-	 * @param DataType $dataType the data type to render
+	 * @param string $dataTypeId the data type to render
 	 *
 	 * @return string
 	 */
-	private function getHtmlForDataType( DataType $dataType ) {
-		return $this->templateFactory->render( 'wb-section-heading',
+	private function getHtmlForDataType( $dataTypeId ) {
+		$html = $this->templateFactory->render( 'wb-section-heading',
 			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
 			'datatype',
 			'wikibase-propertypage-datatype'
-		)
-		. $this->templateFactory->render( 'wikibase-propertyview-datatype',
-			htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
 		);
+
+		try {
+			$dataType = $this->dataTypeFactory->getType( $dataTypeId );
+			$html .= $this->templateFactory->render( 'wikibase-propertyview-datatype',
+				htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
+			);
+		} catch ( OutOfBoundsException $ex ) {
+			$html .= Html::rawElement( 'span', array( 'class' => 'error' ),
+				wfMessage( 'wikibase-propertypage-bad-datatype', $dataTypeId )->parse()
+			);
+		}
+
+		return $html;
 	}
 
 }
