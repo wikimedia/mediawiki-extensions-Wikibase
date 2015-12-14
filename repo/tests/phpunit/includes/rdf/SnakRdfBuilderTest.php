@@ -12,7 +12,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SnakRdfBuilder;
-use Wikimedia\Purtle\RdfWriter;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 
 /**
  * @covers Wikibase\Rdf\SnakRdfBuilder
@@ -28,9 +28,20 @@ use Wikimedia\Purtle\RdfWriter;
 class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	/**
 	 * @var RdfBuilderTestData|null
 	 */
 	private $testData = null;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	/**
 	 * Initialize repository data
@@ -89,28 +100,6 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$builder->setEntityMentionListener( $mentionTracker );
 
 		return $builder;
-	}
-
-	/**
-	 * Extract text test data from RDF builder
-	 *
-	 * @param RdfWriter $writer
-	 *
-	 * @return string[] ntriples lines, sorted
-	 */
-	private function getDataFromWriter( RdfWriter $writer ) {
-		$ntriples = $writer->drain();
-
-		$lines = explode( "\n", trim( $ntriples ) );
-		sort( $lines );
-		return $lines;
-	}
-
-	private function assertTriplesEqual( array $expectedTriples, RdfWriter $writer ) {
-		$actualTripels = $this->getDataFromWriter( $writer );
-		sort( $expectedTriples );
-
-		$this->assertEquals( $expectedTriples, $actualTripels );
 	}
 
 	public function provideAddSnakValue() {
@@ -173,7 +162,8 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$builder->addSnak( $writer, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
-		$this->assertTriplesEqual( $expectedTriples, $writer );
+
+		$this->helper->assertNTriplesEquals( $expectedTriples, $writer->drain() );
 	}
 
 	public function testAddSnakValue_mention() {
