@@ -4,6 +4,8 @@
 
 * Added `ItemIdParser`
 * Added `ReferenceList::isEmpty`
+* Added `ReferencedStatementFilter::FILTER_TYPE` constant
+* `SnakRole` enum is not an interface any more but a private class
 
 ## Version 4.3.0 (2015-09-02)
 
