@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_f3fdb339",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-12-14T13:13:59Z",
+      "side": 1,
+      "message": "This won\u0027t work anyway, props is an array\n\nHave a look how other API modules do it, such as https://github.com/wikimedia/mediawiki/blob/master/includes/api/ApiQueryWatchlist.php#L65-L87",
+      "revId": "bf3f999123bb4b818ca001d28e042572f610d7bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
