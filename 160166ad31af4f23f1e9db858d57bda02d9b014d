@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_d3bf56a6",
+        "filename": "repo/includes/rdf/Values/ObjectUriRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T15:09:30Z",
+      "side": 1,
+      "message": "It\u0027s pointless and does nothing but possibly wasting time.",
+      "parentUuid": "6eaa8f54_53afe691",
+      "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_73b462e5",
         "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-14T15:04:53Z",
       "side": 1,
       "message": "what is the specific reason for this change?",
+      "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b3b73ad3",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-14T15:09:30Z",
+      "side": 1,
+      "message": "Same reason as in all these instances.",
+      "parentUuid": "6eaa8f54_73b462e5",
       "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
