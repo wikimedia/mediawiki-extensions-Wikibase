@@ -175,7 +175,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			TemplateFactory::getDefaultInstance(),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			'en'
+			Language::factory( 'en' )
 		);
 	}
 
