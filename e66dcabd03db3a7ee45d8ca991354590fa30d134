@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_13fe4e36",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 2212
+      },
+      "writtenOn": "2015-12-14T15:35:58Z",
+      "side": 1,
+      "message": "How can I fix this?",
+      "parentUuid": "6eaa8f54_13d2ce2c",
+      "revId": "e66dcabd03db3a7ee45d8ca991354590fa30d134",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_73bd42d1",
         "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
         "patchSetId": 9
