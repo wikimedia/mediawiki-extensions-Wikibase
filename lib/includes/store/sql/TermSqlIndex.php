@@ -576,7 +576,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		);
 
 		$returnTermIndexEntries = array();
-		foreach ( $matchingTermIndexEntries as $key => $indexEntry ) {
+		foreach ( $matchingTermIndexEntries as $indexEntry ) {
 			$entityIdSerilization = $indexEntry->getEntityId()->getSerialization();
 			if ( !array_key_exists( $entityIdSerilization, $returnTermIndexEntries ) ) {
 				$returnTermIndexEntries[$entityIdSerilization] = $indexEntry;

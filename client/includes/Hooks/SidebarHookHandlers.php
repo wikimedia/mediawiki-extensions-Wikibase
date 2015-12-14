@@ -72,7 +72,6 @@ class SidebarHookHandlers {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$settings = $wikibaseClient->getSettings();
-		$badgeClassNames = $settings->getSetting( 'badgeClassNames' );
 
 		return new SidebarHookHandlers(
 			$wikibaseClient->getNamespaceChecker(),
