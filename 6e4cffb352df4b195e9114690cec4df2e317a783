@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_9258ef36",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T13:37:44Z",
+      "side": 0,
+      "message": "So? Still no reason to allow all kinds of weird whitespace in basically random places. Why does this trim the *beginning* of the line? Why doesn\u0027t it normalize the whitespace *between* the three values?\n\nThis array_map is simply unnecessary. I removed it and nothing bad happens. All tests run just fine. It does nothing but making the code harder to understand and to maintain.",
+      "parentUuid": "6eaa8f54_3ffea436",
+      "revId": "6e4cffb352df4b195e9114690cec4df2e317a783",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_3396ea50",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTestData.php",
         "patchSetId": 3

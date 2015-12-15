@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_122ddf8b",
+        "filename": "repo/includes/rdf/Values/ObjectUriRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T13:37:44Z",
+      "side": 1,
+      "message": "Yes, and trim() will happily cast anything to string. The additional string casting does not add anything to that.",
+      "parentUuid": "6eaa8f54_bfea9471",
+      "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_73b462e5",
         "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
         "patchSetId": 3
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Which is?",
       "parentUuid": "6eaa8f54_b3b73ad3",
+      "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_523a77c1",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T13:37:44Z",
+      "side": 1,
+      "message": "This code should only do what\u0027s necessary to make the test pass. Nothing more. If that\u0027s not reason enough, I do not know. You are often arguing with premature optimization and \"we do not need this\". So I really wonder why we are discussing this simple change for a month now.",
+      "parentUuid": "6eaa8f54_dfef5081",
       "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
