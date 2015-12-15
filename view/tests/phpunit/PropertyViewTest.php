@@ -8,8 +8,6 @@ use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\PropertyView;
 use Wikibase\View\Template\TemplateFactory;
@@ -33,31 +31,24 @@ class PropertyViewTest extends EntityViewTest {
 
 	/**
 	 * @param EntityId $id
-	 * @param Statement[] $statements
 	 *
-	 * @return Entity
+	 * @return Property
 	 */
-	protected function makeEntity( EntityId $id, array $statements = array() ) {
+	protected function makeEntity( EntityId $id ) {
 		$property = Property::newFromType( 'string' );
 		$property->setId( $id );
 
 		$property->setLabel( 'en', "label:$id" );
 		$property->setDescription( 'en', "description:$id" );
 
-		$property->setStatements( new StatementList( $statements ) );
-
 		return $property;
 	}
 
 	/**
-	 * Generates a suitable entity ID based on $n.
-	 *
-	 * @param int|string $n
-	 *
-	 * @return EntityId
+	 * @return PropertyId
 	 */
-	protected function makeEntityId( $n ) {
-		return new PropertyId( "P$n" );
+	protected function getEntityId() {
+		return new PropertyId( "P1" );
 	}
 
 	/**
@@ -72,7 +63,17 @@ class PropertyViewTest extends EntityViewTest {
 		$entityData['datatype'] = $entity->getDataTypeId();
 	}
 
-	public function provideTestGetHtml() {
+	/**
+	 * @return DataTypeFactory
+	 */
+	private function getDataTypeFactory() {
+		return new DataTypeFactory( array( 'string' => 'string' ) );
+	}
+
+	/**
+	 * @return PropertyView
+	 */
+	protected function newEntityView() {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$propertyView = new PropertyView(
 			$templateFactory,
@@ -83,20 +84,43 @@ class PropertyViewTest extends EntityViewTest {
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getDataTypeFactory(),
-			Language::factory( 'en' )
+			Language::factory( 'qqx' )
 		);
-
-		return array(
-			array(
-				$propertyView,
-				$this->newEntityRevisionForStatements( array() ),
-				'/wb-property/'
-			)
-		);
+		return $propertyView;
 	}
 
-	private function getDataTypeFactory() {
-		return new DataTypeFactory( array( 'type' => 'datavalue', 'string' => 'string' ) );
+	public function provideTestGetHtml() {
+		$id = $this->getEntityId();
+		$property = $this->makeEntity( $id );
+
+		// FIXME: add statements
+		$statements = array();
+		$property->setStatements( new StatementList( $statements ) );
+
+		$cases = parent::provideTestGetHtml();
+		$cases[] = array(
+			$this->newEntityRevision( $property ),
+			array(
+				'CSS class' => '!class="wikibase-entityview wb-property"!',
+				'data type heading' => '!class="wb-section-heading section-heading wikibase-propertypage-datatype".*\(wikibase-propertypage-datatype\)!',
+				'data type' => '!class="wikibase-propertyview-datatype-value".*\(datatypes-type-string\)!',
+				// FIXME: make sure statements are shown
+				// FIXME: make sure the termbox is shown
+				'footer' => '!\(wikibase-property-footer\)!',
+			)
+		);
+
+		$propertyWithBadType = Property::newFromType( 'YaddaYadda' );
+		$propertyWithBadType->setId( $id );
+
+		$cases[] = array(
+			$this->newEntityRevision( $propertyWithBadType ),
+			array(
+				'bad data type error' => '!\(wikibase-propertypage-bad-datatype: YaddaYadda\)!',
+			)
+		);
+
+		return $cases;
 	}
 
 }

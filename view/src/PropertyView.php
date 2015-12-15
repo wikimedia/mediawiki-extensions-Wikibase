@@ -69,14 +69,15 @@ class PropertyView extends EntityView {
 		try {
 			$html .= $this->getHtmlForDataType( $this->getDataType( $property ) );
 		} catch ( OutOfBoundsException $ex ) {
-			$html .= Html::rawElement( 'span', array( 'class' => 'error' ),
-				wfMessage( 'wikibase-propertypage-bad-datatype', $property->getDataTypeId() )->parse()
-			);
+			$msg = wfMessage( 'wikibase-propertypage-bad-datatype', $property->getDataTypeId() );
+			$msg = $msg->inLanguage( $this->language );
+
+			$html .= Html::rawElement( 'span', array( 'class' => 'error' ), $msg->parse() );
 		}
 
 		$html .= $this->statementSectionsView->getHtml( $property->getStatements() );
 
-		$footer = wfMessage( 'wikibase-property-footer' );
+		$footer = wfMessage( 'wikibase-property-footer' )->inLanguage( $this->language );
 
 		if ( !$footer->isBlank() ) {
 			$html .= "\n" . $footer->parse();
@@ -98,7 +99,7 @@ class PropertyView extends EntityView {
 	 */
 	private function getHtmlForDataType( DataType $dataType ) {
 		return $this->templateFactory->render( 'wb-section-heading',
-			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
+			wfMessage( 'wikibase-propertypage-datatype' )->inLanguage( $this->language )->escaped(),
 			'datatype',
 			'wikibase-propertypage-datatype'
 		)
