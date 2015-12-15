@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_5ff12091",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T11:42:59Z",
+      "side": 1,
+      "message": "Are you sure? I thought PARAM_ISMULTI would cause it to be an empty array per default, not null.",
+      "parentUuid": "6eaa8f54_9f21d89c",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_bf2294a0",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 13
@@ -81,6 +99,24 @@
       "writtenOn": "2015-12-15T09:42:10Z",
       "side": 1,
       "message": "I suggest to write \"array $prop \u003d null\" here.",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_ffed6cb5",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T11:42:59Z",
+      "side": 1,
+      "message": "I\u0027d prefer to normalize earlier, and not make the code in this function handle api parameters defaults manually.",
+      "parentUuid": "6eaa8f54_df2750b0",
       "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
