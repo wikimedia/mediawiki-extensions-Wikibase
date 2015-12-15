@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_1fd408ec",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T11:39:35Z",
+      "side": 1,
+      "message": "The fact that we need to add four more parameters to the constructor indicates that something is going wrong here. It looks like we need a EntityParserOutputDataUpdaterFactory.",
+      "revId": "c8f6690455e33ac454b17d40954d876d8d5564bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_7ffadc74",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T11:39:35Z",
+      "side": 1,
+      "message": "This method should be extracted into an EntityParserOutputDataUpdaterFactory, which is injected via the constructor. That way, EntityParserOutputGenerator would not need to drag in all the dependencies for all the updates.",
+      "revId": "c8f6690455e33ac454b17d40954d876d8d5564bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
