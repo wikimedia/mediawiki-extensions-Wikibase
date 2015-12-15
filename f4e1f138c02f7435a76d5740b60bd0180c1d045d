@@ -104,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_93c8ff26",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T17:23:00Z",
+      "side": 1,
+      "message": "since we have explicit implementations for formatting external IDs as wikitext as well as HTML, no generic escaping mechanism is currently used. I adopted this method from WikibaseValueFormatterBuilders for future reference. I fear if we drop it, we might end up with an ad-hoc solution when escaping is needed for the next kind of snak formatter we add here.",
+      "parentUuid": "6eaa8f54_53b127db",
+      "revId": "f4e1f138c02f7435a76d5740b60bd0180c1d045d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_b3a89b75",
         "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
         "patchSetId": 12
@@ -115,6 +133,24 @@
       "writtenOn": "2015-12-14T12:44:24Z",
       "side": 1,
       "message": "@throws InvalidArgumentException",
+      "revId": "f4e1f138c02f7435a76d5740b60bd0180c1d045d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_33cd8b35",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T17:23:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_b3a89b75",
       "revId": "f4e1f138c02f7435a76d5740b60bd0180c1d045d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
