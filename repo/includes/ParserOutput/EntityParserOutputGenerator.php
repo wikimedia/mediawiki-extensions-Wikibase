@@ -230,6 +230,11 @@ class EntityParserOutputGenerator {
 	private function getEntityParserOutputDataUpdater( ParserOutput $parserOutput ) {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->propertyDataTypeLookup );
 
+		/**
+		 * @fixme Each updater should get the ParserOutput as its first constructor parameter. Thats
+		 * the reason why this array is constructed here and not in the factory.
+		 * @see ParserOutputDataUpdater
+		 */
 		$updaters = array(
 			new ReferencedEntitiesDataUpdater(
 				$this->entityTitleLookup,

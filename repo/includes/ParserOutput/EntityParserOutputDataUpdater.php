@@ -13,6 +13,10 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 /**
  * @todo have ItemParserOutputDataUpdater, etc. instead.
  *
+ * @fixme The split between EntityParserOutputDataUpdater and EntityParserOutputGenerator is
+ * arbitrary. Which concerns belong where, and how is that reflected by the names?
+ * @see https://gerrit.wikimedia.org/r/#/c/243613/15/repo/includes/EntityParserOutputGenerator.php
+ *
  * @since 0.5
  *
  * @license GPL-2.0+
