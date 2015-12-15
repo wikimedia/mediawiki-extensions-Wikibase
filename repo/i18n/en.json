@@ -576,7 +576,7 @@
 	"apihelp-wbsetreference-description": "Creates a reference or sets the value of an existing one.",
 	"apihelp-wbsetreference-param-statement": "A GUID identifying the statement for which a reference is being set",
 	"apihelp-wbsetreference-param-snaks": "The snaks to set the reference to. JSON object with property IDs pointing to arrays containing the snaks for that property",
-	"apihelp-wbsetreference-param-snaks-order": "The order of the snaks. Comma-separated list of property IDs",
+	"apihelp-wbsetreference-param-snaks-order": "The order of the snaks. JSON array of property ID strings",
 	"apihelp-wbsetreference-param-reference": "A hash of the reference that should be updated. Optional. When not provided, a new reference is created",
 	"apihelp-wbsetreference-param-index": "The index within the statement's list of references where to move the reference to. Optional. When not provided, an existing reference will stay in place while a new reference will be appended.",
 	"apihelp-wbsetreference-param-summary": "Summary for the edit.\nWill be prepended by an automatically generated comment. The length limit of the autocomment together with the summary is 260 characters. Be aware that everything above that limit will be cut off.",
