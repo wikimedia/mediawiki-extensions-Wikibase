@@ -26,7 +26,7 @@ class SerializationModifier {
 	 *  Callback accepts 1 parameter which is the element to touch
 	 *  Callback should return the altered element
 	 *
-	 * @returns array the altered array
+	 * @return array the altered array
 	 */
 	public function modifyUsingCallback( array $array, $path, $callback ) {
 		$elementsToTouch = $this->getElementsMatchingPath(

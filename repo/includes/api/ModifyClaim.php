@@ -108,7 +108,7 @@ abstract class ModifyClaim extends ApiBase {
 	 * @param Entity $entity
 	 * @param Summary $summary
 	 *
-	 * @returns Status
+	 * @return Status
 	 */
 	public function saveChanges( Entity $entity, Summary $summary ) {
 		return $this->attemptSaveEntity(

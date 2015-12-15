@@ -86,9 +86,10 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 	/**
 	 * @param Reference[] $references references to be created with
-	 * @returns Statement the statement of the item
+	 *
+	 * @return Statement
 	 */
-	private function getNewItemWithStatementAndReference( array $references = array() ) {
+	private function getNewStatement( array $references = array() ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		// Create a new empty item
 		$item = new Item();
@@ -110,7 +111,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	public function testRequests() {
 		$reference = new Reference( array( new PropertySomeValueSnak( 100 ) ) );
 		$referenceHash = $reference->getHash();
-		$statement = $this->getNewItemWithStatementAndReference( array( $reference ) );
+		$statement = $this->getNewStatement( array( $reference ) );
 		$guid = $statement->getGuid();
 
 		// Replace the reference with this new one
@@ -158,7 +159,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 	public function testRequestWithInvalidProperty() {
 		$reference = new Reference( array( new PropertySomeValueSnak( 100 ) ) );
-		$statement = $this->getNewItemWithStatementAndReference( array( $reference ) );
+		$statement = $this->getNewStatement( array( $reference ) );
 		$guid = $statement->getGuid();
 
 		$this->makeInvalidRequest(
@@ -177,7 +178,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[1] ) ) ) ),
 			new Reference( new SnakList( array( new PropertySomeValueSnak( self::$propertyIds[2] ) ) ) ),
 		);
-		$statement = $this->getNewItemWithStatementAndReference( $references );
+		$statement = $this->getNewStatement( $references );
 
 		$this->makeValidRequest(
 			$statement->getGuid(),
