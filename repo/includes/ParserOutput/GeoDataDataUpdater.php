@@ -7,9 +7,9 @@ use CoordinatesOutput;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use ParserOutput;
 use RuntimeException;
+use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Lib\Store\PropertyDataTypeMatcher;
 
 /**
  * Extracts and stashes coordinates from Statement main snaks and

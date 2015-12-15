@@ -18,6 +18,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
@@ -1344,7 +1345,9 @@ class WikibaseRepo {
 			$this->getLanguageFallbackChainFactory(),
 			$templateFactory,
 			$entityDataFormatProvider,
-			$dataTypeLookup,
+			// FIXME: Should this be done for all usages of this lookup, or is the impact of
+			// CachingPropertyInfoStore enough?
+			new InProcessCachingDataTypeLookup( $dataTypeLookup ),
 			$this->getLocalEntityUriParser(),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
