@@ -29,7 +29,7 @@ class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 		$statementGuid = new StatementGuid( $entityId, $guid );
 
 		$this->assertEquals( $expected, $statementGuid->getSerialization() );
-		$this->assertEquals( $entityId, $statementGuid->getEntityId());
+		$this->assertEquals( $entityId, $statementGuid->getEntityId() );
 	}
 
 	public function provideConstructionData() {

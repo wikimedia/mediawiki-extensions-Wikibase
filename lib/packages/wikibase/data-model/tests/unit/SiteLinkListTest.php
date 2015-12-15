@@ -245,7 +245,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$list->addNewSiteLink( 'enwiki', 'cats' );
 		$list->addNewSiteLink( 'dewiki', 'katzen', array( new ItemId( 'Q1' ) ) );
 
-		$this->assertTrue( $list->equals( new SiteLinkList( array (
+		$this->assertTrue( $list->equals( new SiteLinkList( array(
 			new SiteLink( 'enwiki', 'cats' ),
 			new SiteLink( 'dewiki', 'katzen', array( new ItemId( 'Q1' ) ) ),
 		) ) ) );
@@ -257,7 +257,7 @@ class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
 		$list->addSiteLink( new SiteLink( 'enwiki', 'cats' ) );
 		$list->addSiteLink( new SiteLink( 'dewiki', 'katzen' ) );
 
-		$this->assertTrue( $list->equals( new SiteLinkList( array (
+		$this->assertTrue( $list->equals( new SiteLinkList( array(
 			new SiteLink( 'enwiki', 'cats' ),
 			new SiteLink( 'dewiki', 'katzen' ),
 		) ) ) );
