@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_ab00126e",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:23:37Z",
+      "side": 1,
+      "message": "Err, DispatchingSnakFormatter, not PropertyValueSnakFormatter, sorry.",
+      "parentUuid": "6eaa8f54_4bcf1e83",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_306493e1",
         "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
         "patchSetId": 13
