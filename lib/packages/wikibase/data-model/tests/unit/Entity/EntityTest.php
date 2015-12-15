@@ -218,8 +218,8 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 				$entity->setAliases( $langCode, $aliases );
 			}
 		}
-		$entity->setAliases( 'zh', array( 'wind', 'air', '', 'fire') );
-		$entity->setAliases( 'zu', array( '', '') );
+		$entity->setAliases( 'zh', array( 'wind', 'air', '', 'fire' ) );
+		$entity->setAliases( 'zu', array( '', '' ) );
 
 		foreach ( $aliasesLists as $langCode => $aliasesList ) {
 			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );

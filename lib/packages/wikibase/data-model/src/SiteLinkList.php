@@ -123,7 +123,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 */
 	public function getBySiteId( $siteId ) {
 		if ( !$this->hasLinkWithSiteId( $siteId ) ) {
-			throw new OutOfBoundsException( 'SiteLink with siteId "' . $siteId . '" not found'  );
+			throw new OutOfBoundsException( 'SiteLink with siteId "' . $siteId . '" not found' );
 		}
 
 		return $this->siteLinks[$siteId];
