@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_90b78781",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T17:18:57Z",
+      "side": 1,
+      "message": "Trailing whitespace.\n\nYou can tell most decent editors to make whitespace visible, and to automatically trim trailing whitespace.",
+      "revId": "8a6eecdd94742f1373fa70055e4f022d79c9549c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
