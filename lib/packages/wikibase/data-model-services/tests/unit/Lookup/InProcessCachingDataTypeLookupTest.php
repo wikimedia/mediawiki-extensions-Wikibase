@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\DataModel\Services\Tests\Lookup;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;

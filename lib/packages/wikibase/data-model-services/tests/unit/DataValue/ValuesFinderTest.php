@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\DataModel\Services\Tests\DataValue;
 
 use DataValues\BooleanValue;
 use DataValues\DataValue;
