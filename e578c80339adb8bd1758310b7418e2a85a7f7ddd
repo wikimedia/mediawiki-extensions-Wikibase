@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_2bf502c8",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "It means that this is the instance that would typically be used, but other instances may exist. I can\u0027t think of a reason to use multiple such instances except for testing, though.\n\nWhat would you want to say instead? \"an\" instance? \"the\" instance?",
+      "parentUuid": "6eaa8f54_b51cf57d",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_153069fb",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-15T16:17:36Z",
       "side": 1,
       "message": "Huh? If there is only 1 use for this, why is it not a private thing in that class?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_ebfe0aab",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "Because that is not a class - it\u0027s a plain array in bootstrap code, which should not trigger any classes to be loaded when it is parsed, because that happens on *every* request.\n\nThis mechanism isn\u0027t very pretty, but it\u0027s the best I could come up with under the given constraints. It\u0027s what we already do for ValueFormatters with getDefaultFormatterBuilders().",
+      "parentUuid": "6eaa8f54_153069fb",
       "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_8b9af664",
+        "filename": "lib/WikibaseLib.datatypes.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "6eaa8f54_f5090d35",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_15070921",
         "filename": "lib/config/WikibaseLib.default.php",
         "patchSetId": 13
@@ -64,6 +118,24 @@
       "writtenOn": "2015-12-15T16:17:36Z",
       "side": 1,
       "message": "Wait. Why is it \"id\" in one file but \"identifier\" in the other?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_ab281233",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "Ooops, my bad!",
+      "parentUuid": "6eaa8f54_15070921",
       "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_4bcf1e83",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "This format is only used locally in this class, when comparing the format given in the constructor to the format of each of the formatters given to the constructor.\n\nWithout this conversion, all formatters used by a PropertyValueSnakFormatter that targets FORMAT_HTML_DIFF would themselves need to target FORMAT_HTML_DIFF explicitly. With this method, that requirement is relaxed, so that a PropertyValueSnakFormatter that targets FORMAT_HTML_DIFF would also accept FORMAT_HTML formatters, and vice versa. \n\nBasically, this allows us to use the same formatter instance for all variant of HTML if we want, instead of being forced to create a separate instance for each variant of HTML, just to satisfy the check in PropertyValueSnakFormatter.",
+      "parentUuid": "6eaa8f54_503a6fc1",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_306493e1",
         "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
         "patchSetId": 13
@@ -98,6 +188,24 @@
       "writtenOn": "2015-12-15T16:17:36Z",
       "side": 1,
       "message": "Nobody will see this. Is there even a @warning tag? Which doc generator is aware of this?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_8bb436e6",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "Doxygen, which is what Wikimedia uses. See https://www.stack.nl/~dimitri/doxygen/manual/commands.html\n\nI agree that it is easy to overlook this, so I tried to put this warning in all the relevant places. What else can I do?",
+      "parentUuid": "6eaa8f54_306493e1",
       "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_eba28aa3",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "It is duplicate code. But abstracting this out seems overkill.",
+      "parentUuid": "6eaa8f54_b07083a4",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_b09f23b9",
         "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 13
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_8b8bd61f",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_b09f23b9",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_105b9727",
         "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
         "patchSetId": 13
@@ -149,6 +293,24 @@
       "writtenOn": "2015-12-15T16:17:36Z",
       "side": 1,
       "message": "Rebase mistake?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_4b7dde16",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T18:21:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_105b9727",
       "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
