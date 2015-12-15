@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ead036b_edd636c8",
+        "filename": "repo/includes/api/ApiErrorReporter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2015-12-15T09:57:40Z",
+      "side": 1,
+      "message": "Here $message is not used furthermore. A change of $message has no impact. A copy of the original message object is not necessary.",
+      "revId": "f48fede74cefe309cb32e6e77a5a1085e64dc44b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
