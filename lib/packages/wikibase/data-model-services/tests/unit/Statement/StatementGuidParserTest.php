@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Tests\Claim;
+namespace Wikibase\DataModel\Services\Tests\Statement;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Statement\StatementGuid;
