@@ -31,11 +31,21 @@ return call_user_func( function() {
 		'languageLinkSiteGroup' => null,
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
-		// default for repo items in main namespace
-		'repoNamespaces' => array(
-			'wikibase-item' => '',
-			'wikibase-property' => 'Property'
-		),
+		'repoNamespaces' => function ( SettingsArray $settings ) {
+			if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
+				// automatically match entityNamespaces from the repo settings.
+				$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+				$namespaces = $repo->getSettings()->getSetting( 'entityNamespaces' );
+				$namespaces = array_map( 'MWNamespace::getCanonicalName', $namespaces );
+				return $namespaces;
+			} else {
+				// default for repo items in main namespace
+				return array(
+					'wikibase-item' => '',
+					'wikibase-property' => 'Property'
+				);
+			}
+		},
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinksByDefault' => false,
