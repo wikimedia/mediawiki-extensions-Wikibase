@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_bfea9471",
+        "filename": "repo/includes/rdf/Values/ObjectUriRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T12:26:37Z",
+      "side": 1,
+      "message": "Why is it pointless? We know nothing about what getValue() returns. Could be anything.",
+      "parentUuid": "6eaa8f54_d3bf56a6",
+      "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_73b462e5",
         "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Same reason as in all these instances.",
       "parentUuid": "6eaa8f54_73b462e5",
+      "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_dfef5081",
+        "filename": "repo/tests/phpunit/includes/rdf/FullStatementsRdfBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T12:26:37Z",
+      "side": 1,
+      "message": "Which is?",
+      "parentUuid": "6eaa8f54_b3b73ad3",
       "revId": "160166ad31af4f23f1e9db858d57bda02d9b014d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

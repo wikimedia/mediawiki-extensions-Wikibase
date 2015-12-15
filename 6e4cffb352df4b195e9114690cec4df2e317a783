@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_3ffea436",
+        "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-15T12:26:37Z",
+      "side": 0,
+      "message": "Because n-triples syntax allows it. It\u0027s still valid and equivalent.  Just like changing the order, or having blank lines at the end (or anywhere in between).\n\nIf we want to test that there is no extra whitespace, we should do that in a separate test, and it would be a test for the RDF writer. It\u0027s compeltely unrelated to what we are testing here (the RDF mapping). In production, we would typically not even use the same output format.",
+      "parentUuid": "6eaa8f54_339caa5f",
+      "revId": "6e4cffb352df4b195e9114690cec4df2e317a783",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_3396ea50",
         "filename": "repo/tests/phpunit/includes/rdf/RdfBuilderTestData.php",
         "patchSetId": 3
