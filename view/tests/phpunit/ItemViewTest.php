@@ -2,6 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
+use Language;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,29 +28,26 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class ItemViewTest extends EntityViewTest {
 
-	protected function makeEntity( EntityId $id, array $statements = array() ) {
+	protected function makeEntity( EntityId $id ) {
 		$item = new Item( $id );
 
 		$item->setLabel( 'en', "label:$id" );
 		$item->setDescription( 'en', "description:$id" );
 
-		$item->setStatements( new StatementList( $statements ) );
-
 		return $item;
 	}
 
 	/**
-	 * Generates a suitable entity ID based on $n.
-	 *
-	 * @param int|string $n
-	 *
 	 * @return EntityId
 	 */
-	protected function makeEntityId( $n ) {
-		return new ItemId( "Q$n" );
+	protected function getEntityId() {
+		return new ItemId( "Q1" );
 	}
 
-	public function provideTestGetHtml() {
+	/**
+	 * @return ItemView
+	 */
+	protected function newEntityView() {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$itemView = new ItemView(
 			$templateFactory,
@@ -59,20 +57,35 @@ class ItemViewTest extends EntityViewTest {
 			$this->getMockBuilder( 'Wikibase\View\StatementSectionsView' )
 				->disableOriginalConstructor()
 				->getMock(),
-			$this->getMock( 'Language' ),
+			Language::factory( 'qqx' ),
 			$this->getMockBuilder( 'Wikibase\View\SiteLinksView' )
 				->disableOriginalConstructor()
 				->getMock(),
 			array()
 		);
+		return $itemView;
+	}
 
-		return array(
+	public function provideTestGetHtml() {
+		$id = $this->getEntityId();
+		$item = $this->makeEntity( $id );
+
+		// FIXME: add statements
+		$statements = array();
+		$item->setStatements( new StatementList( $statements ) );
+
+		$cases = parent::provideTestGetHtml();
+		$cases[] = array(
+			$this->newEntityRevision( $item ),
 			array(
-				$itemView,
-				$this->newEntityRevisionForStatements( array() ),
-				'/wb-item/'
+				'CSS class' => '!class="wikibase-entityview wb-item"!', // FIXME: where?!
+				// FIXME: make sure statements are shown
+				// FIXME: make sure the termbox is shown
+				// FIXME: make sure sitelinks are shown
 			)
 		);
+
+		return $cases;
 	}
 
 }
