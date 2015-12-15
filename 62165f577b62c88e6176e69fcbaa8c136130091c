@@ -36,6 +36,74 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_9f21d89c",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T09:42:10Z",
+      "side": 1,
+      "message": "This is an optional parameter (as it should be) and \"null\" when not submitted by the user.",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_bf2294a0",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T09:42:10Z",
+      "side": 1,
+      "message": "This is only a comment.",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_df2750b0",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T09:42:10Z",
+      "side": 1,
+      "message": "I suggest to write \"array $prop \u003d null\" here.",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_3f36a4e5",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T09:42:10Z",
+      "side": 1,
+      "message": "if ( $prop !\u003d\u003d null \u0026\u0026 in_array( \u0027url\u0027, $prop ) ) {",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_5cd4cebe",
         "filename": "repo/includes/api/SearchEntities.php",
         "patchSetId": 13
