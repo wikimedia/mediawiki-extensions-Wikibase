@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use DataValues\DataValue;
 use DataValues\DataValueObject;
 use DataValues\IllegalValueException;
 use InvalidArgumentException;

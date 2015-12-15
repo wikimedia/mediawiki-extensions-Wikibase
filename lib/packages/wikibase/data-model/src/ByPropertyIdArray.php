@@ -132,8 +132,8 @@ class ByPropertyIdArray extends ArrayObject {
 	 * @since 0.5
 	 *
 	 * @param object $object
-	 * @return bool|int
 	 *
+	 * @return bool|int
 	 * @throws RuntimeException
 	 */
 	public function getFlatArrayIndexOfObject( $object ) {
@@ -154,7 +154,6 @@ class ByPropertyIdArray extends ArrayObject {
 	 * @since 0.5
 	 *
 	 * @return object[]
-	 *
 	 * @throws RuntimeException
 	 */
 	public function toFlatArray() {
