@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_7ccd0a34",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T08:46:09Z",
+      "side": 1,
+      "message": "Not a big issue, but please avoid such changes that are unrelated to what you want to do.",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9cd246d4",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T08:46:09Z",
+      "side": 1,
+      "message": "Not a big issue, but please avoid such changes that are unrelated to what you want to do.",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_5cd4cebe",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T08:46:09Z",
+      "side": 1,
+      "message": "PHPCS issue: There is a newline missing here.",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_1cde56df",
+        "filename": "repo/tests/phpunit/includes/api/SearchEntitiesTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T08:46:09Z",
+      "side": 1,
+      "message": "PHPCS issue: A space is missing in array( \u0027prop\u0027.",
+      "revId": "62165f577b62c88e6176e69fcbaa8c136130091c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

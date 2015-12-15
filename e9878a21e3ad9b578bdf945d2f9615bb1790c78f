@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_3cd792c6",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T08:46:09Z",
+      "side": 0,
+      "message": "As I said before, please do not do such changes in unrelated code.",
+      "revId": "e9878a21e3ad9b578bdf945d2f9615bb1790c78f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
