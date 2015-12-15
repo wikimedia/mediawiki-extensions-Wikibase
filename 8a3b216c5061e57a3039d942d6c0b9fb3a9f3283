@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_921b0f82",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-15T17:16:06Z",
+      "side": 1,
+      "message": "English should be capitalized",
+      "revId": "8a3b216c5061e57a3039d942d6c0b9fb3a9f3283",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
