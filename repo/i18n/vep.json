@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Игорь Бродский"
+			"Игорь Бродский",
+			"Sebranik"
 		]
 	},
 	"wikibase-edit": "redaktiruida",
-	"wikibase-add": "ližata"
+	"wikibase-add": "ližata",
+	"wikibase-listproperties-submit": "Ectä"
 }
