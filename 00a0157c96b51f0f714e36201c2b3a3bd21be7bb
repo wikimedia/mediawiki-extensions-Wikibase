@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_12d4ffeb",
+        "filename": "lib/includes/modules/SitesModule.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-15T14:03:22Z",
+      "side": 1,
+      "message": "Changed as suggested by Krinkle",
+      "parentUuid": "6eaa8f54_a84edd70",
+      "revId": "00a0157c96b51f0f714e36201c2b3a3bd21be7bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_42af0a92",
         "filename": "lib/includes/modules/SitesModuleWorker.php",
         "patchSetId": 3
