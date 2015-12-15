@@ -3,9 +3,8 @@
 namespace Wikibase\View\Tests;
 
 use MediaWikiLangTestCase;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\EntityRevision;
 use Wikibase\View\EntityView;
 
@@ -22,36 +21,31 @@ use Wikibase\View\EntityView;
 abstract class EntityViewTest extends MediaWikiLangTestCase {
 
 	/**
-	 * @param EntityId $id
-	 * @param Statement[] $statements
-	 *
-	 * @return Entity
+	 * @return EntityView
 	 */
-	abstract protected function makeEntity( EntityId $id, array $statements = array() );
+	abstract protected function newEntityView();
 
 	/**
-	 * Generates a prefixed entity ID based on a numeric ID.
+	 * @param EntityId $id
 	 *
-	 * @param int|string $numericId
-	 *
+	 * @return EntityDocument
+	 */
+	abstract protected function makeEntity( EntityId $id );
+
+	/**
 	 * @return EntityId
 	 */
-	abstract protected function makeEntityId( $numericId );
+	abstract protected function getEntityId();
 
 	/**
-	 * @param Statement[] $statements
+	 * @param EntityDocument $entity
+	 * @param int $revId
+	 * @param string $timestamp
 	 *
 	 * @return EntityRevision
 	 */
-	protected function newEntityRevisionForStatements( array $statements ) {
-		static $revId = 1234;
-		$revId++;
-
-		$entity = $this->makeEntity( $this->makeEntityId( $revId ), $statements );
-
-		$timestamp = wfTimestamp( TS_MW );
+	protected function makeEntityRevision( EntityDocument $entity, $revId = 1234, $timestamp = '20131212' ) {
 		$revision = new EntityRevision( $entity, $revId, $timestamp );
-
 		return $revision;
 	}
 
@@ -59,18 +53,29 @@ abstract class EntityViewTest extends MediaWikiLangTestCase {
 	 * @dataProvider provideTestGetHtml
 	 */
 	public function testGetHtml(
-		EntityView $view,
 		EntityRevision $entityRevision,
-		$regexp
+		array $expectedPatterns
 	) {
+		$view = $this->newEntityView();
 		$output = $view->getHtml( $entityRevision );
-		$this->assertRegexp( $regexp, $output );
 
-		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
-		$this->assertRegExp( '/id="wb-[a-z]+-' . $entityId . '"/', $output );
-		$this->assertContains( '<div id="toc"></div>', $output );
+		foreach ( $expectedPatterns as $name => $pattern ) {
+			$this->assertRegExp( $pattern, $output, $name );
+		}
 	}
 
-	abstract public function provideTestGetHtml();
+	public function provideTestGetHtml() {
+		$id = $this->getEntityId();
+
+		return array(
+			array(
+				$this->makeEntityRevision( $this->makeEntity( $id ) ),
+				array(
+					'entity ID in DOM' => '!id="wb-[a-z]+-' . $id->getSerialization() . '"!',
+					'TOC' => '!<div id="toc"></div>!',
+				)
+			),
+		);
+	}
 
 }
