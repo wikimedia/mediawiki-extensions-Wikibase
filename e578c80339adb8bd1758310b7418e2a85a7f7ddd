@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_b51cf57d",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "What does \"default\" actually mean in the context of this client\u0027s top level factory?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_153069fb",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "Huh? If there is only 1 use for this, why is it not a private thing in that class?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_f5090d35",
+        "filename": "lib/WikibaseLib.datatypes.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "Originally I expected this to be \"identifier\", because we talked about this so much for so long and always called it identifiers. But you are right, \"identifier\" is ambiguous.\n\nTL;DR: +2 for this line.",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_15070921",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "Wait. Why is it \"id\" in one file but \"identifier\" in the other?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_503a6fc1",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "Uh. Recently I introduced this in https://gerrit.wikimedia.org/r/#/c/258432/2/lib/includes/formatters/WikibaseValueFormatterBuilders.php but it was way more strict. Not sure I like this to be so relaxed. This doesn\u0027t look right. Why is there no other change to this file? Only the comparison is more relaxed. But where is this format used? Shouldn\u0027t the base format be used instead?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_306493e1",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "Nobody will see this. Is there even a @warning tag? Which doc generator is aware of this?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b07083a4",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "This looks like duplicate code, see https://gerrit.wikimedia.org/r/#/c/258432/2/lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b09f23b9",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "Rebase mistake?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_105b9727",
+        "filename": "lib/includes/formatters/WikibaseValueFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-15T16:17:36Z",
+      "side": 1,
+      "message": "Rebase mistake?",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
