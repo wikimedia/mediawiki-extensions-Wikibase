@@ -47,7 +47,7 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 	public function provideFormats() {
 		return array(
 			// N3 (currently falls through to turtle)
-			array( 'n3', 'n3', 'n3', 'text/n3' ),
+			array( 'N3', 'n3', 'n3', 'text/n3' ),
 			array( 'text/n3', 'n3', 'n3', 'text/n3' ),
 			array( 'text/rdf+n3', 'n3', 'n3', 'text/n3' ),
 
