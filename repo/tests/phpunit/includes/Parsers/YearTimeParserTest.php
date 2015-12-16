@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
+use ValueParsers\ParserOptions;
 use ValueParsers\Test\StringValueParserTest;
 use Wikibase\Repo\Parsers\YearTimeParser;
 
@@ -91,6 +92,8 @@ class YearTimeParserTest extends StringValueParserTest {
 				array( '-1000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, $julian ),
 			'-1 000 000' =>
 				array( '-1000000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1M, $julian ),
+			'-19_000' =>
+				array( '-19000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR1K, $julian ),
 			// Digit grouping in the Indian numbering system
 			'-1,99,999' =>
 				array( '-199999-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, $julian ),
@@ -108,6 +111,14 @@ class YearTimeParserTest extends StringValueParserTest {
 		}
 
 		return $argLists;
+	}
+
+	public function testDigitGroupSeparatorOption() {
+		$options = new ParserOptions();
+		$options->setOption( YearTimeParser::OPT_DIGIT_GROUP_SEPARATOR, '.' );
+		$parser = new YearTimeParser( null, $options );
+		$timeValue = $parser->parse( '-19.000' );
+		$this->assertSame( '-19000-00-00T00:00:00Z', $timeValue->getTime() );
 	}
 
 	/**
@@ -133,11 +144,15 @@ class YearTimeParserTest extends StringValueParserTest {
 			'+100 BCE',
 			'+100BCE',
 
-			// Invalid thousands separator
+			// Non-default and invalid thousands separators
+			'-,999',
+			'-999,',
+			'-19.000',
 			'-1/000/000',
 
 			// Positive years are unlikely to have thousands separators, it's more likely a date
 			'1 000 000',
+			'19_000',
 			'1,99,999',
 		);
 
