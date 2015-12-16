@@ -159,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_2328c280",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T16:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_b8e4e1a4",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_d8a0bd40",
         "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
         "patchSetId": 13
@@ -170,6 +188,24 @@
       "writtenOn": "2015-12-16T16:27:18Z",
       "side": 1,
       "message": "Do not describe what the code does, describe *why* it does that.",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_43305ee5",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T16:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_d8a0bd40",
       "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -193,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_c353ee18",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T16:43:57Z",
+      "side": 1,
+      "message": "not really...",
+      "parentUuid": "6eaa8f54_f81c997e",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_d8443d71",
         "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
         "patchSetId": 13
@@ -204,6 +258,24 @@
       "writtenOn": "2015-12-16T16:27:18Z",
       "side": 1,
       "message": "Not a good comment.",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_632d5a8b",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T16:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_d8443d71",
       "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -227,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_034a665f",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T16:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_9826c5c8",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_78298999",
         "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
         "patchSetId": 13
@@ -238,6 +328,24 @@
       "writtenOn": "2015-12-16T16:27:18Z",
       "side": 1,
       "message": "string. Add \"base format with MIME parameters stripped\" or something. Done.",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_234f6270",
+        "filename": "lib/includes/formatters/DispatchingSnakFormatter.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T16:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_78298999",
       "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -378,6 +486,24 @@
       "writtenOn": "2015-12-16T16:27:18Z",
       "side": 1,
       "message": "This could do the same switch as in the other class, see my comment above.",
+      "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_237682a0",
+        "filename": "lib/includes/formatters/WikibaseSnakFormatterBuilders.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T16:43:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_7810a95b",
       "revId": "e578c80339adb8bd1758310b7418e2a85a7f7ddd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
