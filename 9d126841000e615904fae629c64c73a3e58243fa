@@ -51,6 +51,42 @@
       "revId": "9d126841000e615904fae629c64c73a3e58243fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_2391a24a",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T17:32:13Z",
+      "side": 1,
+      "message": "I thought so too, but when I tested it, that failed. Didn\u0027t investigate further.",
+      "parentUuid": "6eaa8f54_4fa645a9",
+      "revId": "9d126841000e615904fae629c64c73a3e58243fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_43a93e77",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T17:32:13Z",
+      "side": 1,
+      "message": "I\u0027m not sure we should split them more: when we move code between client and repo, should configuration break? Should the person who configures the extension care about where which config option is used?",
+      "parentUuid": "6eaa8f54_83473622",
+      "revId": "9d126841000e615904fae629c64c73a3e58243fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
