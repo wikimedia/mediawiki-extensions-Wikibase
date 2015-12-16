@@ -24,8 +24,9 @@ class ImageLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 * @return ImageLinksDataUpdater
 	 */
 	private function newInstance() {
-		$matcher = $this->getMockBuilder( 'Wikibase\Lib\Store\PropertyDataTypeMatcher' )
-			->disableOriginalConstructor()
+		$matcher = $this->getMockBuilder(
+			'Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher'
+		)->disableOriginalConstructor()
 			->getMock();
 		$matcher->expects( $this->any() )
 			->method( 'isMatchingDataType' )
