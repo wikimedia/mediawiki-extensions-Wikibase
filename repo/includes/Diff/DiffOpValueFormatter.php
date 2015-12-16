@@ -13,6 +13,7 @@ use Html;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class DiffOpValueFormatter {
 
@@ -69,61 +70,42 @@ class DiffOpValueFormatter {
 	}
 
 	/**
-	 * Generates HTML for an change diffOp
-	 *
 	 * @return string HTML
 	 */
-	private function generateChangeOpHtml() {
-		$html = Html::openElement( 'tr' );
-		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
+	private function generateDeletedCells() {
+		$html = Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
 			Html::rawElement( 'div', array(),
 				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->generateValueHtml( $this->oldValues ) ) ) );
-		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
-		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-			Html::rawElement( 'div', array(),
-				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->generateValueHtml( $this->newValues ) ) ) );
-		$html .= Html::closeElement( 'tr' );
-
-		return $html;
-	}
-
-	/**
-	 * Generates HTML for an add diffOp
-	 *
-	 * @return string HTML
-	 */
-	private function generateAddOpHtml() {
-		$html = Html::openElement( 'tr' );
-		$html .= Html::rawElement( 'td', array( 'colspan' => '2' ), '&nbsp;' );
-		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
-		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-			Html::rawElement( 'div', array(),
-				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->generateValueHtml( $this->newValues ) )
+					$this->generateValueHtml( $this->oldValues )
+				)
 			)
 		);
-		$html .= Html::closeElement( 'tr' );
 
 		return $html;
 	}
 
 	/**
-	 * Generates HTML for an remove diffOp
-	 *
 	 * @return string HTML
 	 */
-	private function generateRemoveOpHtml() {
-		$html = Html::openElement( 'tr' );
-		$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
-		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
+	private function generateAddedCells() {
+		$html = Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
+		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
 			Html::rawElement( 'div', array(),
-				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
-					$this->generateValueHtml( $this->oldValues ) ) ) );
-		$html .= Html::rawElement( 'td', array( 'colspan' => '2' ), '&nbsp;' );
-		$html .= Html::closeElement( 'tr' );
+				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
+					$this->generateValueHtml( $this->newValues )
+				)
+			)
+		);
+
+		return $html;
+	}
+
+	/**
+	 * @return string HTML
+	 */
+	private function generateEmptyCells() {
+		$html = Html::rawElement( 'td', array( 'colspan' => '2' ), '&nbsp;' );
 
 		return $html;
 	}
@@ -157,14 +139,21 @@ class DiffOpValueFormatter {
 	 */
 	public function generateHtml() {
 		$html = $this->generateHeaderHtml();
+		$html .= Html::openElement( 'tr' );
 
-		if ( $this->oldValues !== null && $this->newValues !== null ) {
-			$html .= $this->generateChangeOpHtml();
-		} elseif ( $this->newValues !== null ) {
-			$html .= $this->generateAddOpHtml();
-		} elseif ( $this->oldValues !== null ) {
-			$html .= $this->generateRemoveOpHtml();
+		if ( $this->oldValues === null ) {
+			$html .= $this->generateEmptyCells();
+		} else {
+			$html .= $this->generateDeletedCells();
 		}
+
+		if ( $this->newValues === null ) {
+			$html .= $this->generateEmptyCells();
+		} else {
+			$html .= $this->generateAddedCells();
+		}
+
+		$html .= Html::closeElement( 'tr' );
 
 		return $html;
 	}
