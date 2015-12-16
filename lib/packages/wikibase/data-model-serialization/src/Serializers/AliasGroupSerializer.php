@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\DataModel\Serializers;
+
 use Serializers\Exceptions\UnsupportedObjectException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -14,11 +15,10 @@ use Wikibase\DataModel\Term\AliasGroupFallback;
  */
 class AliasGroupSerializer implements Serializer {
 
-
 	/**
 	 * @param AliasGroup $object
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public function serialize( $object ) {
 		$this->assertIsSerializerFor( $object );
@@ -37,7 +37,7 @@ class AliasGroupSerializer implements Serializer {
 	/**
 	 * @param AliasGroup $aliasGroup
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	private function getSerialized( AliasGroup $aliasGroup ) {
 		$serialization = array();

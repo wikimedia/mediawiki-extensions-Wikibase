@@ -37,7 +37,7 @@ class AliasGroupListSerializer implements Serializer {
 	/**
 	 * @param AliasGroupList $object
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	public function serialize( $object ) {
 		$this->assertIsSerializerFor( $object );
@@ -56,7 +56,7 @@ class AliasGroupListSerializer implements Serializer {
 	/**
 	 * @param AliasGroupList $aliasGroupList
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	private function getSerialized( AliasGroupList $aliasGroupList ) {
 		$serialization = array();

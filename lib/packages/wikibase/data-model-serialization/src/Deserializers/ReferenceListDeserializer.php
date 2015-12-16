@@ -29,7 +29,7 @@ class ReferenceListDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @throws DeserializationException
 	 * @return ReferenceList
@@ -41,7 +41,7 @@ class ReferenceListDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @return ReferenceList
 	 */

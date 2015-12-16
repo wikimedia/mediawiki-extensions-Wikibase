@@ -18,7 +18,7 @@ class TermSerializer implements Serializer {
 	/**
 	 * @param Term $object
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function serialize( $object ) {
 		$this->assertIsSerializerFor( $object );
@@ -37,7 +37,7 @@ class TermSerializer implements Serializer {
 	/**
 	 * @param Term $term
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function getSerialized( Term $term ) {
 		$result = array(

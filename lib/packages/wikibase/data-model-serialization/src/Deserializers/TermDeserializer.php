@@ -17,7 +17,7 @@ use Wikibase\DataModel\Term\Term;
 class TermDeserializer implements Deserializer {
 
 	/**
-	 * @param mixed $serialization
+	 * @param string[] $serialization
 	 *
 	 * @return Term
 	 * @throws DeserializationException
@@ -28,16 +28,18 @@ class TermDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param array $serialization
+	 * @param string[] $serialization
 	 *
 	 * @return Term
 	 */
-	private function getDeserialized( $serialization ) {
+	private function getDeserialized( array $serialization ) {
 		return new Term( $serialization['language'], $serialization['value'] );
 	}
 
 	/**
-	 * @param array $serialization
+	 * @param string[] $serialization
+	 *
+	 * @throws DeserializationException
 	 */
 	private function assertCanDeserialize( $serialization ) {
 		if ( !is_array( $serialization ) ) {
@@ -49,23 +51,25 @@ class TermDeserializer implements Deserializer {
 		// Do not deserialize term fallbacks
 		$this->assertNotAttribute( $serialization, 'source' );
 
-		$this->assertAttributeInternalType( $serialization, 'language', 'string' );
-		$this->assertAttributeInternalType( $serialization, 'value', 'string' );
+		$this->assertAttributeIsString( $serialization, 'language' );
+		$this->assertAttributeIsString( $serialization, 'value' );
 	}
 
-	private function assertAttributeInternalType( array $array, $attributeName, $internalType ) {
-		if ( gettype( $array[$attributeName] ) !== $internalType ) {
+	private function assertAttributeIsString( array $array, $attributeName ) {
+		if ( !is_string( $array[$attributeName] ) ) {
 			throw new InvalidAttributeException(
 				$attributeName,
 				$array[$attributeName],
-				"The internal type of attribute '$attributeName' needs to be '$internalType'"
+				"The internal type of attribute '$attributeName' needs to be 'string'"
 			);
 		}
 	}
 
 	/**
-	 * @param array $serialization
+	 * @param string[] $serialization
 	 * @param string $attribute
+	 *
+	 * @throws MissingAttributeException
 	 */
 	private function requireAttribute( $serialization, $attribute ) {
 		if ( !is_array( $serialization ) || !array_key_exists( $attribute, $serialization ) ) {
@@ -74,8 +78,10 @@ class TermDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param array $array
+	 * @param string[] $array
 	 * @param string $key
+	 *
+	 * @throws InvalidAttributeException
 	 */
 	private function assertNotAttribute( array $array, $key ) {
 		if ( array_key_exists( $key, $array ) ) {

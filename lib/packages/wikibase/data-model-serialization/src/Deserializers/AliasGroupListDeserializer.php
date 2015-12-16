@@ -21,7 +21,7 @@ class AliasGroupListDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @throws DeserializationException
 	 * @return AliasGroupList
@@ -32,11 +32,11 @@ class AliasGroupListDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @return AliasGroupList
 	 */
-	private function getDeserialized( $serialization ) {
+	private function getDeserialized( array $serialization ) {
 		$aliasGroupList = new AliasGroupList();
 
 		foreach ( $serialization as $languageCode => $aliasGroupSerialization ) {
@@ -66,7 +66,7 @@ class AliasGroupListDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @throws DeserializationException
 	 */

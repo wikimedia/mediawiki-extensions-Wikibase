@@ -39,7 +39,7 @@ class TermListSerializer implements Serializer {
 	 *
 	 * @param TermList $object
 	 *
-	 * @return array
+	 * @return array[]
 	 * @throws SerializationException
 	 */
 	public function serialize( $object ) {
@@ -59,7 +59,7 @@ class TermListSerializer implements Serializer {
 	/**
 	 * @param TermList $termList
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	private function getSerialized( TermList $termList ) {
 		$serialization = array();

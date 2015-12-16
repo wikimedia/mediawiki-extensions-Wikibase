@@ -52,7 +52,7 @@ class StatementListSerializer implements DispatchableSerializer {
 	 * @param StatementList $object
 	 *
 	 * @throws SerializationException
-	 * @return array
+	 * @return array[]
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {

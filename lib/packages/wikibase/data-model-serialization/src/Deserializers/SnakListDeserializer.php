@@ -30,7 +30,7 @@ class SnakListDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @throws DeserializationException
 	 * @return SnakList
@@ -63,7 +63,7 @@ class SnakListDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param array[] $serialization
 	 *
 	 * @throws DeserializationException
 	 */

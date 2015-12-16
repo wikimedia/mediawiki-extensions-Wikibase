@@ -31,7 +31,7 @@ class TermListDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @throws DeserializationException
 	 * @return TermList
@@ -42,11 +42,11 @@ class TermListDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @return TermList
 	 */
-	private function getDeserialized( $serialization ) {
+	private function getDeserialized( array $serialization ) {
 		$termList = new TermList();
 
 		foreach ( $serialization as $termSerialization ) {
@@ -57,7 +57,7 @@ class TermListDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @throws DeserializationException
 	 */
@@ -86,15 +86,11 @@ class TermListDeserializer implements Deserializer {
 	}
 
 	private function assertAttributeIsArray( array $array, $attributeName ) {
-		$this->assertAttributeInternalType( $array, $attributeName, 'array' );
-	}
-
-	private function assertAttributeInternalType( array $array, $attributeName, $internalType ) {
-		if ( gettype( $array[$attributeName] ) !== $internalType ) {
+		if ( !is_array( $array[$attributeName] ) ) {
 			throw new InvalidAttributeException(
 				$attributeName,
 				$array[$attributeName],
-				"The internal type of attribute '$attributeName' needs to be '$internalType'"
+				"The internal type of attribute '$attributeName' needs to be 'array'"
 			);
 		}
 	}
