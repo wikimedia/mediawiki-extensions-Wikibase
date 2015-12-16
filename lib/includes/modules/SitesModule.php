@@ -46,25 +46,16 @@ class SitesModule extends ResourceLoaderModule {
 	}
 
 	/**
-	 * @see ResourceLoaderModule::getModifiedHash
+	 * @see ResourceLoaderModule::getDefinitionSummary
 	 *
 	 * @param ResourceLoaderContext $context
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public function getModifiedHash( ResourceLoaderContext $context ) {
-		return $this->worker->getModifiedHash();
-	}
-
-	/**
-	 * @see ResourceLoaderModule::getModifiedTime
-	 *
-	 * @param ResourceLoaderContext $context
-	 *
-	 * @return int
-	 */
-	public function getModifiedTime( ResourceLoaderContext $context ) {
-		return $this->getHashMtime( $context );
+	public function getDefinitionSummary( ResourceLoaderContext $context ) {
+		$summary = parent::getDefinitionSummary( $context );
+		$summary[] = $this->worker->getDefinitionSummary();
+		return $summary;
 	}
 
 }

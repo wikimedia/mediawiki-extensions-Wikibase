@@ -102,21 +102,25 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider getModifiedHashProvider
+	 * @dataProvider getDefinitionSummaryProvider
 	 */
-	public function testGetModifiedHash( array $workerLists ) {
+	public function testGetDefinitionSummary( array $workerLists ) {
 		$results = array();
+
+		// Verify the dataHash
 
 		/** @var SitesModuleWorker[] $workers */
 		foreach ( $workerLists as $name => $workers ) {
 			foreach ( $workers as $worker ) {
-				$value = $worker->getModifiedHash();
+				$summary = $worker->getDefinitionSummary();
+				$this->assertCount( 1, $summary );
+				$hash = $summary['dataHash'];
 				if ( isset( $results[ $name ] ) ) {
 					$this->assertEquals(
-						$results[ $name ], $value, 'getModifiedHash should return the same value for equivalent settings'
+						$results[ $name ], $hash, 'getDefinitionSummary should return the same data hash for equivalent settings'
 					);
 				} else {
-					$results[ $name ] = $value;
+					$results[ $name ] = $hash;
 				}
 			}
 		}
@@ -125,7 +129,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 		$this->assertEmpty( $collidingValues, 'Different settings lead to same hash' );
 	}
 
-	public function getModifiedHashProvider() {
+	public function getDefinitionSummaryProvider() {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( 'siteid' );
 		$site->setGroup( 'allowedgroup' );
@@ -163,20 +167,20 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetModifiedHash_caching() {
+	public function testGetDefinitionSummary_caching() {
 		$cacheKey = wfMemcKey( 'wikibase-sites-module-modified-hash' );
 		$cache = new HashBagOStuff();
 		$worker = $this->newSitesModuleWorker( array(), array( 'foo' ), array(), $cache );
 
 		// Make sure whatever hash is computed ends up in the cache
-		$hash = $worker->getModifiedHash();
-		$this->assertSame( $hash, $cache->get( $cacheKey ) );
+		$summary = $worker->getDefinitionSummary();
+		$this->assertSame( $summary['dataHash'], $cache->get( $cacheKey ) );
 
 		$cache->set( $cacheKey, 'cache all the things!' );
 
 		// Verify that cached results are returned
-		$hash = $worker->getModifiedHash();
-		$this->assertSame( 'cache all the things!', $hash );
+		$summary = $worker->getDefinitionSummary();
+		$this->assertSame( 'cache all the things!', $summary['dataHash'] );
 	}
 
 }
