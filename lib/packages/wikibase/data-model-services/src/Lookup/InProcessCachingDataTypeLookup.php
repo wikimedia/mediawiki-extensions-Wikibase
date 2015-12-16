@@ -35,7 +35,7 @@ class InProcessCachingDataTypeLookup implements PropertyDataTypeLookup {
 		$serializedId = $propertyId->getSerialization();
 
 		if ( !array_key_exists( $serializedId, $this->propertyIds ) ) {
-			$this->propertyIds[$serializedId] = $this->lookup->getDataTypeIdFOrProperty( $propertyId );
+			$this->propertyIds[$serializedId] = $this->lookup->getDataTypeIdForProperty( $propertyId );
 		}
 
 		return $this->propertyIds[$serializedId];
