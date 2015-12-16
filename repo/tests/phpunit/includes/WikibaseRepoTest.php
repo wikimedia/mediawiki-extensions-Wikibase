@@ -22,7 +22,7 @@ use Wikibase\SettingsArray;
  */
 class WikibaseRepoTest extends MediaWikiTestCase {
 
-	public function testGetDefaultValidatorBuilders_noReset() {
+	public function testGetDefaultValidatorBuilders() {
 		$first = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
 		$this->assertInstanceOf( 'Wikibase\Repo\ValidatorBuilders', $first );
 
@@ -30,24 +30,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertSame( $first, $second );
 	}
 
-	public function testGetDefaultValidatorBuilders_withReset() {
-		$first = $this->getWikibaseRepo()->getDefaultValidatorBuilders();
-		$second = $this->getWikibaseRepo()->getDefaultValidatorBuilders( 'reset' );
-		$this->assertNotSame( $first, $second );
-	}
-
-	public function testGetDefaultFormatterBuilders_noReset() {
-		$first = $this->getWikibaseRepo()->getDefaultFormatterBuilders();
+	public function testGetDefaultValueFormatterBuilders() {
+		$first = $this->getWikibaseRepo()->getDefaultValueFormatterBuilders();
 		$this->assertInstanceOf( 'Wikibase\Lib\WikibaseValueFormatterBuilders', $first );
 
-		$second = $this->getWikibaseRepo()->getDefaultFormatterBuilders();
+		$second = $this->getWikibaseRepo()->getDefaultValueFormatterBuilders();
 		$this->assertSame( $first, $second );
-	}
-
-	public function testGetDefaultFormatterBuilders_withReset() {
-		$first = $this->getWikibaseRepo()->getDefaultFormatterBuilders();
-		$second = $this->getWikibaseRepo()->getDefaultFormatterBuilders( 'reset' );
-		$this->assertNotSame( $first, $second );
 	}
 
 	public function testGetDataTypeFactoryReturnType() {

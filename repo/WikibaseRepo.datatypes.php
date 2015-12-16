@@ -79,7 +79,7 @@ return call_user_func( function() {
 	return array(
 		'VT:bad' => array(
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newUnDeserializableValueFormatter( $format, $options );
 			}
 		),
@@ -90,7 +90,7 @@ return call_user_func( function() {
 			},
 			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newCommonsMediaFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
@@ -112,7 +112,7 @@ return call_user_func( function() {
 				return new GlobeCoordinateParser( $options );
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newGlobeCoordinateFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
@@ -135,7 +135,7 @@ return call_user_func( function() {
 				return new MonolingualTextParser( $options );
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newMonolingualFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
@@ -159,7 +159,7 @@ return call_user_func( function() {
 				return new QuantityParser( $options, $unlocalizer );
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newQuantityFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
@@ -180,7 +180,7 @@ return call_user_func( function() {
 			},
 			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newStringFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
@@ -203,7 +203,7 @@ return call_user_func( function() {
 				return $factory->getTimeParser();
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newTimeFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
@@ -226,7 +226,7 @@ return call_user_func( function() {
 			},
 			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newUrlFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
@@ -259,7 +259,7 @@ return call_user_func( function() {
 			},
 			'parser-factory-callback' => $newEntityIdParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
-				$factory = WikibaseRepo::getDefaultFormatterBuilders();
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
