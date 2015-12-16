@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_a39cb260",
+        "filename": "lib/tests/phpunit/formatters/WikibaseSnakFormatterBuildersTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-16T17:32:17Z",
+      "side": 1,
+      "message": "One underscore only, e.g. testGivenThis_thatHappens, not two.",
+      "revId": "79e49636d797dd031dcda50c4f8638338aa73dca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
