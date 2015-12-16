@@ -562,7 +562,7 @@
 	"apihelp-wbsetreference-description": "Crée une référence ou initialise la valeur d'une référence existante.",
 	"apihelp-wbsetreference-param-statement": "Un GUID identifiant l’énoncé pour lequel une référence a été fixée",
 	"apihelp-wbsetreference-param-snaks": "Les snaks pour lesquels ont définit la référence. Objet JSON avec des Id de propriété qui pointent vers des tableaux contenant les snaks pour cette propriété",
-	"apihelp-wbsetreference-param-snaks-order": "L'ordre des snaks. Liste d'ID de propriété séparés par des virgules",
+	"apihelp-wbsetreference-param-snaks-order": "L'ordre des snaks. Tableau JSON de chaînes d’ID de propriété",
 	"apihelp-wbsetreference-param-reference": "Une valeur de hachage associée à la référence qui doit être mise à jour. Facultatif. Si elle n'est pas fournie, une nouvelle référence est créée",
 	"apihelp-wbsetreference-param-index": "L'indice à l'intérieur de la liste de références de la déclaration où il faut pour déplacer la référence. Facultatif. Lorsqu'il n'est pas fourni, une référence qui  existe restera au même endroit alors qu'une nouvelle référence sera ajoutée à la liste.",
 	"apihelp-wbsetreference-param-summary": "Résumé de la modification.\nSera préfixé par un commentaire généré automatiquement. La taille limite du commentaire automatique ajouté au résumé est de 260 caractères pour l'ensemble. Notez bien que tout ce qui est au-delà de cette limite sera tronqué.",

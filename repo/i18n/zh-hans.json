@@ -515,7 +515,7 @@
 	"apihelp-wbsetqualifier-example-1": "设置属性P1指定声称的限定符为字符串值GdyjxP8I6XB3",
 	"apihelp-wbsetreference-description": "创建一个参考文献或设置现有参考文献的值。",
 	"apihelp-wbsetreference-param-statement": "识别用于已在设置中的参考资料的声明的GUID",
-	"apihelp-wbsetreference-param-snaks-order": "snak的方向。逗号分隔的属性ID列表",
+	"apihelp-wbsetreference-param-snaks-order": "snak的方向。属性ID字符串的JSON阵列",
 	"apihelp-wbsetreference-param-summary": "编辑摘要。\n将按照自动生成的评论。自动评论与摘要的长度限制是260个字符。需要小心任何超出上述限定的东西将被裁剪掉。",
 	"apihelp-wbsetreference-param-bot": "将此编辑标记为机器人编辑。此URL标记将只在用户属于“bot”用户组时受尊重。",
 	"apihelp-wbsetreference-example-1": "为GUID为Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF的声称创建新的参考",

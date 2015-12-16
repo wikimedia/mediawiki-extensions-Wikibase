@@ -71,6 +71,7 @@
 	"datatypes-type-wikibase-item": "Предмет",
 	"datatypes-type-wikibase-property": "Својство",
 	"datatypes-type-commonsMedia": "Податотека од Ризницата",
+	"datatypes-type-external-id": "Надворешна назнака",
 	"version-wikibase": "Викибаза",
 	"wikibase-time-precision-Gannum": "$1 {{PLURAL:$1|милијарда|милијадри}} години н.е.",
 	"wikibase-time-precision-Mannum": "$1 {{PLURAL:$1|милион|милиони}} години н.е.",

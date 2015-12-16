@@ -528,7 +528,7 @@
 	"apihelp-wbsetreference-description": "יצירת הפניה למקור או הגדרת ערך של אחת קיימת.",
 	"apihelp-wbsetreference-param-statement": "GUID שמזהה את הקביעה שעבורה מוגדרת הפניה מקור",
 	"apihelp-wbsetreference-param-snaks": "הסנאקים שאליהם תוגדר ההפניה למקור. עצם JSON עם מזהי מאפיינים שמצביעים למערכים שמכילים את הסנאקים עבור המאפיין",
-	"apihelp-wbsetreference-param-snaks-order": "סדר הסנאקים. רשימה מופרדת בפסיקים של מזהי מאפיינים",
+	"apihelp-wbsetreference-param-snaks-order": "סדר הסנאקים. מערך JSON של של מחרוזות מזהים",
 	"apihelp-wbsetreference-param-reference": "גיבוב של הפניה למקור שצריך לעדכן. לא חובה. כשזה לא מסופק, תיווצר הפניה חדשה למקור",
 	"apihelp-wbsetreference-param-index": "האינדקס בתור רשימת ההפניות למקור של הטענה שאליו תועבר ההפניה למקור. לא חובה. כשזה לא מסופק, הפניה קיימת למקור תישאר במקום בזמן שתתווסף הפניה חדשה למקור.",
 	"apihelp-wbsetreference-param-summary": "תקציר העריכה.\nלתחילתו תצורף הערה שמיוצרת אוטומטית. מגבלת האורך של ההערה האוטומטית יחד עם תקציר העריכה היא 260 תווים. יש לשים לב לכך שכל דבר מעבר לכך ייחתך.",
