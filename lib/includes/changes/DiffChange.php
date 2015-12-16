@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
+use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 
 /**
  * Class for changes that can be represented as a Diff.
@@ -109,7 +110,7 @@ abstract class DiffChange extends ChangeRow {
 		static $factory = null;
 
 		if ( $factory == null ) {
-			$factory = new WikibaseDiffOpFactory( array( $this, 'objectifyArrays' ) );
+			$factory = new EntityTypeAwareDiffOpFactory( array( $this, 'objectifyArrays' ) );
 		}
 
 		$info = parent::unserializeInfo( $str );
