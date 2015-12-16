@@ -33,6 +33,24 @@
       "revId": "9d126841000e615904fae629c64c73a3e58243fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_83473622",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-16T16:52:12Z",
+      "side": 1,
+      "message": "The settings object currently works like that. Both settings are merged in that case. But I think we already tried to split these and should continue to do so.",
+      "parentUuid": "6eaa8f54_4fa645a9",
+      "revId": "9d126841000e615904fae629c64c73a3e58243fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
