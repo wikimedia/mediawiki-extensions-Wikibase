@@ -13,9 +13,6 @@ if ( !is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
 
 $classLoader = require __DIR__ . '/../vendor/autoload.php';
 
-$classLoader->addClassMap( array(
-	'Tests\Wikibase\DataModel\Serializers\SerializerBaseTest' => __DIR__ . '/unit/Serializers/SerializerBaseTest.php',
-	'Tests\Wikibase\DataModel\Deserializers\DeserializerBaseTest' => __DIR__ . '/unit/Deserializers/DeserializerBaseTest.php'
-) );
+$classLoader->addPsr4( 'Tests\\Wikibase\\DataModel\\', __DIR__ . '/unit' );
 
 unset( $classLoader );
