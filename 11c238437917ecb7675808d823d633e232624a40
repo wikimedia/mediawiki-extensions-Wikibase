@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_bd861317",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 15
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-16T14:16:17Z",
+      "side": 1,
+      "message": "\"and return URL\" is not a sentence and not really an explanation of what happens here.",
+      "revId": "11c238437917ecb7675808d823d633e232624a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_dd8bcf1e",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 15
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-16T14:16:17Z",
+      "side": 1,
+      "message": "Please remove.",
+      "revId": "11c238437917ecb7675808d823d633e232624a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_7d809bf9",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 15
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-16T14:16:17Z",
+      "side": 1,
+      "message": "Please remove.",
+      "revId": "11c238437917ecb7675808d823d633e232624a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9d7d571a",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-16T14:16:17Z",
+      "side": 1,
+      "message": "As before, this can be null and crashs.",
+      "revId": "11c238437917ecb7675808d823d633e232624a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_5d77df35",
+        "filename": "repo/includes/api/SearchEntities.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-16T14:16:17Z",
+      "side": 0,
+      "message": "As said before, please revert this change.",
+      "revId": "2e8f30d2ab6d0fc6453dd0bfd0e35681ec443eee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
