@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_bd161359",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T15:09:48Z",
+      "side": 1,
+      "message": "i get this wrong *every* time \u003e_\u003c",
+      "parentUuid": "6eaa8f54_6fc6a150",
+      "revId": "594c90b475f91b6f045bd0d2eee9fdd42fa7b8fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_afe339d3",
         "filename": "lib/i18n/en.json",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-16T02:52:55Z",
       "side": 1,
       "message": "maybe say \"Formatting error\" instead of \"failed\".\n\nfor external-identifiers \"undeployed\", there is fallback to string formatting (and the item renders now)\n\nI wouldn\u0027t consider that total failure of formatting, but rather an error.",
+      "revId": "594c90b475f91b6f045bd0d2eee9fdd42fa7b8fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_b805c115",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T15:09:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_afe339d3",
       "revId": "594c90b475f91b6f045bd0d2eee9fdd42fa7b8fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
