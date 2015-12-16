@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_18dad578",
+        "filename": "repo/includes/Diff/DiffOpValueFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T15:22:41Z",
+      "side": 1,
+      "message": "\"column\" is misleading here, this generates a table cell, not a column.",
+      "revId": "2433e7f9f1da68d0d1857801e93d0a0961ea64e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_d8d3dd5f",
+        "filename": "repo/includes/Diff/DiffOpValueFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T15:22:41Z",
+      "side": 1,
+      "message": "\"column\" is misleading here, this generates a table field, not a column.",
+      "revId": "2433e7f9f1da68d0d1857801e93d0a0961ea64e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_1839759f",
+        "filename": "repo/includes/Diff/DiffOpValueFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2015-12-16T15:22:41Z",
+      "side": 1,
+      "message": "\"cell\", as above.",
+      "revId": "2433e7f9f1da68d0d1857801e93d0a0961ea64e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
