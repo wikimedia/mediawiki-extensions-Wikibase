@@ -120,6 +120,17 @@ $namespaceNames['it'] = array(
 	WB_NS_QUERY_TALK => 'Discussioni_query',
 );
 
+$namespaceNames['nl'] = array(
+	WB_NS_ITEM      => 'Item',
+	WB_NS_ITEM_TALK => 'Overleg_item',
+
+	WB_NS_PROPERTY      => 'Eigenschap',
+	WB_NS_PROPERTY_TALK => 'Overleg_eigenschap',
+
+	WB_NS_QUERY      => 'Zoekopdracht',
+	WB_NS_QUERY_TALK => 'Overleg_zoekopdracht',
+);
+
 $namespaceNames['ru'] = array(
 	WB_NS_DATA      => 'Данные',            // legacy
 	WB_NS_DATA_TALK => 'Обсуждение_данных', // legacy

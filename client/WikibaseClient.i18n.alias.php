@@ -98,6 +98,7 @@ $specialPageAliases['mk'] = array(
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = array(
 	'UnconnectedPages' => array( 'OngekoppeldePaginas', 'OngekoppeldePagina\'s' ),
+	'PagesWithBadges' => array( 'PaginasMetBadges', 'Pagina\'sMetBadges' ),
 );
 
 /** Portuguese (português) */
