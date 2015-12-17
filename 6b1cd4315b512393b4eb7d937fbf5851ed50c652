@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_86f2dfdd",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:47:04Z",
+      "side": 1,
+      "message": "Typo in \"has\".",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_86197f29",
+        "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:47:04Z",
+      "side": 1,
+      "message": "Space missing.",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_46138705",
+        "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:47:04Z",
+      "side": 1,
+      "message": "\"from the mock DataTypeFactory\".",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_86e89fde",
+        "filename": "repo/includes/Validators/SnakValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:47:04Z",
+      "side": 1,
+      "message": "With this addition, the same code is now repeated 3 times, and the method is way to big. Should be split/refactored in a later patch. Please do not do this in this patch, it\u0027s much easier to review as it is now.",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_c6e69713",
+        "filename": "repo/includes/Validators/SnakValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:47:04Z",
+      "side": 1,
+      "message": "Was this a bug?",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_06c4af67",
+        "filename": "repo/includes/specials/SpecialNewProperty.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:47:04Z",
+      "side": 1,
+      "message": "Ouch, this is a bugfix. Shouldn\u0027t this be in a separate patch?",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_c6bd37d3",
+        "filename": "repo/tests/phpunit/includes/Validators/SnakValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:47:04Z",
+      "side": 1,
+      "message": "$description should be used here.",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_06ab4f87",
+        "filename": "view/src/PropertyView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:47:04Z",
+      "side": 1,
+      "message": "I would not wrap the whole getHtmlForDataType() into the try-catch. This will also suppress the section heading. Please refactor this so that the HTML is the same, and only the data type label is replaced with the red error message.\n\nThis also misses a test.",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
