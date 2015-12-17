@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_86965f4e",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "Whoops.",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_669fa356",
+        "filename": "view/src/PropertyView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "The error message should be here, instead of the label. As suggested in the previous patch.",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_e6b2b3e3",
+        "filename": "view/tests/phpunit/EntityViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "Why these specific defaults?",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_66cd6362",
+        "filename": "view/tests/phpunit/EntityViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "I\u0027m trying to avoid assertRegExp as much as I\u0027m trying to avoid assertTag. Unfortunately you decided to allow *more* regular expressions here, even if most of them are not really regular expressions and can be modeled  as simple assertContains.",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_c6b1b7dd",
+        "filename": "view/tests/phpunit/EntityViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "\"provideTest\" is probably a mistake.",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_a6fa7b71",
+        "filename": "view/tests/phpunit/EntityViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "How is it possible that we do not know what the ID is? I think this must be moved to the subclasses. Can use assertContains then.",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_86cadf48",
+        "filename": "view/tests/phpunit/EntityViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "assertContains",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_66f48384",
+        "filename": "view/tests/phpunit/ItemViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "assertContains",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_26ee8bb2",
+        "filename": "view/tests/phpunit/PropertyViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "assertContains",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_a6391b40",
+        "filename": "view/tests/phpunit/PropertyViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "Why the \".*\"? Why are these two sub-patterns in one assertion if it\u0027s not at all relevant what\u0027s between the two?",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_c63e9726",
+        "filename": "view/tests/phpunit/PropertyViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_664323b7",
+        "filename": "view/tests/phpunit/PropertyViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T13:59:52Z",
+      "side": 1,
+      "message": "assertContains",
+      "revId": "aa3b377e8fa931f163a355e812f32ee9ccd2b0bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
