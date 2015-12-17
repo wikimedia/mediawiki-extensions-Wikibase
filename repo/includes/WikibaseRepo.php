@@ -217,7 +217,6 @@ class WikibaseRepo {
 	private $valueSnakRdfBuilderFactory;
 
 	/**
-	 * Returns the default instance constructed using newInstance().
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @since 0.4
@@ -243,20 +242,17 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Returns the default ValidatorBuilders instance.
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getDataTypeValidatorFactory() instead!
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $reset Flag: Pass "reset" to reset the default instance
-	 *
 	 * @return ValidatorBuilders
 	 */
-	public static function getDefaultValidatorBuilders( $reset = 'noreset' ) {
+	public static function getDefaultValidatorBuilders() {
 		static $builders;
 
-		if ( $builders === null || $reset === 'reset' ) {
+		if ( $builders === null ) {
 			$wikibaseRepo = self::getDefaultInstance();
 			$builders = $wikibaseRepo->newValidatorBuilders();
 		}
@@ -284,20 +280,17 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Returns the default WikibaseValueFormatterBuilders instance.
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $reset Flag: Pass "reset" to reset the default instance
-	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	public static function getDefaultFormatterBuilders( $reset = 'noreset' ) {
+	public static function getDefaultValueFormatterBuilders() {
 		static $builders;
 
-		if ( $builders === null || $reset === 'reset' ) {
+		if ( $builders === null ) {
 			$wikibaseRepo = self::getDefaultInstance();
 			$builders = $wikibaseRepo->newWikibaseValueFormatterBuilders();
 		}
@@ -308,7 +301,7 @@ class WikibaseRepo {
 	/**
 	 * Returns a low level factory object for creating formatters for well known data types.
 	 *
-	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
+	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
 	 * @return WikibaseValueFormatterBuilders
@@ -324,22 +317,19 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Returns the default WikibaseSnakFormatterBuilders instance.
 	 * @warning This is for use with bootstrap code in WikibaseRepo.datatypes.php only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $reset Flag: Pass "reset" to reset the default instance
-	 *
 	 * @return WikibaseSnakFormatterBuilders
 	 */
-	public static function getDefaultSnakFormatterBuilders( $reset = 'noreset' ) {
+	public static function getDefaultSnakFormatterBuilders() {
 		static $builders;
 
-		if ( $builders === null || $reset === 'reset' ) {
+		if ( $builders === null ) {
 			$builders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
-				self::getDefaultFormatterBuilders()
+				self::getDefaultValueFormatterBuilders()
 			);
 		}
 
@@ -349,7 +339,7 @@ class WikibaseRepo {
 	/**
 	 * Returns a low level factory object for creating formatters for well known data types.
 	 *
-	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
+	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
 	 * Program logic should use WikibaseRepo::getSnakFormatterFactory() instead!
 	 *
 	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders

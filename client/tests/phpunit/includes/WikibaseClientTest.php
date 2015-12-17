@@ -27,18 +27,12 @@ use Wikibase\Test\MockSiteStore;
  */
 class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 
-	public function testGetDefaultFormatterBuilders_noReset() {
-		$first = WikibaseClient::getDefaultFormatterBuilders();
+	public function testGetDefaultValueFormatterBuilders() {
+		$first = WikibaseClient::getDefaultValueFormatterBuilders();
 		$this->assertInstanceOf( 'Wikibase\Lib\WikibaseValueFormatterBuilders', $first );
 
-		$second = WikibaseClient::getDefaultFormatterBuilders();
+		$second = WikibaseClient::getDefaultValueFormatterBuilders();
 		$this->assertSame( $first, $second );
-	}
-
-	public function testGetDefaultFormatterBuilders_withReset() {
-		$first = WikibaseClient::getDefaultFormatterBuilders();
-		$second = WikibaseClient::getDefaultFormatterBuilders( 'reset' );
-		$this->assertNotSame( $first, $second );
 	}
 
 	public function testGetDataTypeFactoryReturnType() {

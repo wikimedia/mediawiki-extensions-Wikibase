@@ -176,20 +176,17 @@ final class WikibaseClient {
 	private $termLookup = null;
 
 	/**
-	 * Returns the default WikibaseValueFormatterBuilders instance.
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $reset Flag: Pass "reset" to reset the default instance
-	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	public static function getDefaultFormatterBuilders( $reset = 'noreset' ) {
+	public static function getDefaultValueFormatterBuilders() {
 		static $builders;
 
-		if ( $builders === null || $reset === 'reset' ) {
+		if ( $builders === null ) {
 			$builders = self::getDefaultInstance()->newWikibaseValueFormatterBuilders();
 		}
 
@@ -199,7 +196,7 @@ final class WikibaseClient {
 	/**
 	 * Returns a low level factory object for creating formatters for well known data types.
 	 *
-	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
+	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
 	 * @return WikibaseValueFormatterBuilders
@@ -214,22 +211,19 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns the default WikibaseSnakFormatterBuilders instance.
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $reset Flag: Pass "reset" to reset the default instance
-	 *
 	 * @return WikibaseSnakFormatterBuilders
 	 */
-	public static function getDefaultSnakFormatterBuilders( $reset = 'noreset' ) {
+	public static function getDefaultSnakFormatterBuilders() {
 		static $builders;
 
-		if ( $builders === null || $reset === 'reset' ) {
+		if ( $builders === null ) {
 			$builders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
-				self::getDefaultFormatterBuilders()
+				self::getDefaultValueFormatterBuilders()
 			);
 		}
 
@@ -239,7 +233,7 @@ final class WikibaseClient {
 	/**
 	 * Returns a low level factory object for creating formatters for well known data types.
 	 *
-	 * @warning This is for use with getDefaultFormatterBuilders() during bootstrap only!
+	 * @warning This is for use with getDefaultValueFormatterBuilders() during bootstrap only!
 	 * Program logic should use WikibaseClient::getSnakFormatterFactory() instead!
 	 *
 	 * @param WikibaseValueFormatterBuilders $valueFormatterBuilders
@@ -499,7 +493,6 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * Returns the default instance constructed using newInstance().
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @since 0.4
