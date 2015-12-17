@@ -344,13 +344,14 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} );
 
 		// Collapse references if there is at least one.
-		this.$references.toggleClass(
-			'wikibase-initially-hidden',
-			this._referencesListview.items().length > 0
-		);
+		var visible = this._referencesListview.items().length === 0;
+		this.$references.toggleClass( 'wikibase-initially-hidden', !visible );
 
 		// toggle for references section:
-		this._$toggler = $( '<a/>' ).toggler( { $subject: this.$references } );
+		this._$toggler = $( '<a/>' ).toggler( {
+			$subject: this.$references,
+			visible: visible
+		} );
 
 		if ( this.$refsHeading.text() ) {
 			this._$toggler.find( '.ui-toggler-label' ).text( this.$refsHeading.text() );
