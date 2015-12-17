@@ -3,7 +3,8 @@
 		"authors": [
 			"Fryed-peach",
 			"Shirayuki",
-			"Sujiniku"
+			"Sujiniku",
+			"Otokoume"
 		]
 	},
 	"wikibase-lib-desc": "ウィキベースとウィキベースクライアント拡張機能で共通の機能を保持する",
@@ -72,6 +73,7 @@
 	"datatypes-type-wikibase-item": "項目",
 	"datatypes-type-wikibase-property": "プロパティ",
 	"datatypes-type-commonsMedia": "コモンズのメディアファイル",
+	"datatypes-type-external-id": "外部識別子",
 	"version-wikibase": "ウィキベース",
 	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "値の型「$1」が特性の型「$2」と一致しません。",

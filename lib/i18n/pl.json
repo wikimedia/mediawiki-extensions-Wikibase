@@ -79,6 +79,7 @@
 	"datatypes-type-wikibase-item": "Element",
 	"datatypes-type-wikibase-property": "Właściwość",
 	"datatypes-type-commonsMedia": "Plik multimedialny na Commons",
+	"datatypes-type-external-id": "Identyfikator zewnętrzny",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 mld lat C#",
 	"wikibase-time-precision-Mannum": "1 mln lat CE",

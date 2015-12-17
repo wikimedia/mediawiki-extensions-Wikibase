@@ -11,7 +11,8 @@
 			"朝彦",
 			"赤城。",
 			"Sujiniku",
-			"2nd-player"
+			"2nd-player",
+			"Otokoume"
 		]
 	},
 	"wikibase-desc": "構造化データのリポジトリ",
@@ -292,6 +293,7 @@
 	"wikibase-listdatatypes-time-body": "時刻のリテラルデータ。何らかの精度と境界を持った時刻として指定されます。内部では時刻は常に先発グレゴリオ暦の形式で保存されていますが、他の形式も入力時および出力時に使うことができます。\n* time – ある時点を表す明示の値。ISO8601 に従って表現され、例えば 2013-01-01T00:00:00Z です。年は常に署名され、1から16の間の数字が埋めこまれます。\n* timezone – 符号付き整数で表される明示の値。UTC からのオフセットを分で指定したタイムゾーン情報。\n* before – 指定された時刻から現在になるまで単位時間で何個分経ったか表す明示の整数値。単位は precision で与えられます。\n* after – 指定された時刻になるまで現在から単位時間で何個分かかるのか表す明示の整数値。単位は precision で与えられます。\n* precision – shortint 型の明示の値。数には以下の意味があります: 0 - 10億年、1 - 1億年、...、6 - 千年、7 - 1世紀、8 - 10年、9 - 1年、10 - 月、11 - 日、12 - 時間、13 - 分、14 - 秒。\n* calendarmodel – URI として指定される明示の値。時刻を表示するのに使うべき暦法を示します。",
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-url-body": "URL のリテラルデータ。URL は、ウィキテキスト内の外部リンクでも対応しているプロトコルに限定されます。",
+	"wikibase-listdatatypes-external-id-head": "外部識別子",
 	"wikibase-concept-uri": "概念 URI",
 	"wikibase-add-badges": "バッジを追加",
 	"datatypes-type-url": "URL",

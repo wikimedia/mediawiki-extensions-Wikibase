@@ -285,6 +285,7 @@
 	"wikibase-listdatatypes-string-head": "Łańcuch",
 	"wikibase-listdatatypes-time-head": "Czas",
 	"wikibase-listdatatypes-url-head": "URL",
+	"wikibase-listdatatypes-external-id-head": "Identyfikator zewnętrzny",
 	"wikibase-concept-uri": "Koncept URI",
 	"wikibase-add-badges": "dodaj odznaczenia",
 	"datatypes-type-url": "URL",

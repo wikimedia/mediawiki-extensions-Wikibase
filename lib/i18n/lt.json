@@ -74,6 +74,7 @@
 	"datatypes-type-wikibase-item": "Įrašas",
 	"datatypes-type-wikibase-property": "Savybė",
 	"datatypes-type-commonsMedia": "Vikitekos byla",
+	"datatypes-type-external-id": "Išorinis identifikatorius",
 	"version-wikibase": "Vikibazė",
 	"wikibase-time-precision-Gannum": "$1 milijardų metų po Kristaus",
 	"wikibase-time-precision-Mannum": "$1 milijonų metų po Kristaus",
