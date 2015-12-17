@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_6b976c94",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-17T09:22:49Z",
+      "side": 1,
+      "message": "Uh, can we alphabetically sort this please?",
+      "revId": "31ca68cbd4298c9530849efdaa8ad040b22bbec6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
