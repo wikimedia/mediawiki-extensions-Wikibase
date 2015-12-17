@@ -324,6 +324,10 @@ $specialPageAliases['nl'] = array(
 	'EntitiesWithoutLabel' => array( 'EntiteitenZonderLabel' ),
 	'EntitiesWithoutDescription' => array( 'EntiteitenZonderBeschrijving' ),
 	'ItemsWithoutSitelinks' => array( 'ItemsZonderSitekoppelingen' ),
+	'GoToLinkedPage' => array( 'NaarGekoppeldePaginaGaan' ),
+	'ListProperties' => array( 'EigenschappenWeergeven' ),
+	'SetLabelDescriptionAliases' => array( 'LabelbeschrijvingsaliassenInstellen' ),
+	'RedirectEntity' => array( 'EntiteitDoorverwijzen', 'ItemDoorverwijzen' ),
 );
 
 /** Polish (polski) */
