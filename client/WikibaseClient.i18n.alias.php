@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Aliases for the special pages of the Wikibase extension.
+ * Aliases for the special pages of the Wikibase Client extension.
  *
  * @since 0.1
  *
@@ -14,10 +14,9 @@ $specialPageAliases = array();
 
 /** English (English) */
 $specialPageAliases['en'] = array(
-	'UnconnectedPages' => array( 'UnconnectedPages', 'WithoutConnection', 'WithoutSitelinks' ),
 	'PagesWithBadges' => array( 'PagesWithBadges', 'QueryBadges' ),
+	'UnconnectedPages' => array( 'UnconnectedPages', 'WithoutConnection', 'WithoutSitelinks' ),
 );
-
 /** Arabic (العربية) */
 $specialPageAliases['ar'] = array(
 	'UnconnectedPages' => array( 'صفحات_غير_متصلة', 'بدون_اتصال', 'بدون_وصلات_موقع' ),
@@ -35,8 +34,8 @@ $specialPageAliases['bgn'] = array(
 
 /** Czech (čeština) */
 $specialPageAliases['cs'] = array(
-	'UnconnectedPages' => array( 'Nepropojené_stránky' ),
 	'PagesWithBadges' => array( 'Stránky_s_odznaky' ),
+	'UnconnectedPages' => array( 'Nepropojené_stránky' ),
 );
 
 /** German (Deutsch) */
@@ -71,8 +70,8 @@ $specialPageAliases['he'] = array(
 
 /** Italian (italiano) */
 $specialPageAliases['it'] = array(
-	'UnconnectedPages' => array( 'PagineNonConnesse' ),
 	'PagesWithBadges' => array( 'PagineConDistintivi' ),
+	'UnconnectedPages' => array( 'PagineNonConnesse' ),
 );
 
 /** Japanese (日本語) */
