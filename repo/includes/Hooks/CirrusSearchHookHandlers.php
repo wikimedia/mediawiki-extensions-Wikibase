@@ -64,20 +64,16 @@ class CirrusSearchHookHandlers {
 	}
 
 	/**
-	 * @return BuildDocumentParserHookHandler
+	 * @return self
 	 */
 	public static function newFromGlobalState() {
-		return new self(
-			new WikibaseFieldDefinitions()
-		);
+		return new self( new WikibaseFieldDefinitions() );
 	}
 
 	/**
 	 * @param WikibaseFieldDefinitions $fieldDefinitions
 	 */
-	public function __construct(
-		WikibaseFieldDefinitions $fieldDefinitions
-	) {
+	public function __construct( WikibaseFieldDefinitions $fieldDefinitions ) {
 		$this->fieldDefinitions = $fieldDefinitions;
 	}
 
