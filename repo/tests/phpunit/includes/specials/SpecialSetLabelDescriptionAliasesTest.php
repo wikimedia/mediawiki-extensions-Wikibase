@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use FauxResponse;
+use Language;
 use Status;
 use ValueValidators\Result;
 use WebRequest;
@@ -37,10 +38,19 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
 
 	private static $languageCodes = array( 'en', 'de', 'de-ch', 'ii', 'zh' );
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->setMwGlobals( array(
+			'wgContLang' => Language::factory( 'qqx' ),
+		) );
+	}
 
 	/**
 	 * @see SpecialPageTestBase::newSpecialPage()
@@ -163,7 +173,9 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		$fake->expects( $this->any() )
 			->method( 'hasLanguage' )
-			->will( $this->returnValue( true ) );
+			->will( $this->returnCallback( function( $languageCode ) {
+				return preg_match( '/^\w+$/', $languageCode );
+			} ) );
 
 		return $fake;
 	}
@@ -198,8 +210,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	}
 
 	public function executeProvider() {
-		global $wgLang;
-
 		$formMatchers['id'] = array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -214,7 +224,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				'id' => 'wikibase-setlabeldescriptionaliases-language',
 				'class' => 'wb-input',
 				'name' => 'language',
-				'value' => $wgLang->getCode(), // Default user language
+				'value' => 'en',
 			),
 		);
 		$formMatchers['submit'] = array(
@@ -236,7 +246,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$withIdMatchers['language']['attributes'] = array(
 			'type' => 'hidden',
 			'name' => 'language',
-			'value' => $wgLang->getCode(), // Default user language
+			'value' => 'qqx',
 		);
 		$withIdMatchers['label'] = array(
 			'tag' => 'input',
@@ -373,8 +383,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->mockRepository->putEntity( $inputEntity );
 		$id = $inputEntity->getId();
 
-		$this->newSpecialPage();
-
 		$subpage = str_replace( '$id', $id->getSerialization(), $subpage );
 		list( $output, $response ) = $this->executeSpecialPage( $subpage, $request );
 
@@ -394,6 +402,16 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 			$this->assetFingerprintEquals( $expectedFingerprint, $actualFingerprint );
 		}
+	}
+
+	public function testLanguageCodeEscaping() {
+		$request = new FauxRequest( array( 'language' => '<sup>' ), true );
+		list( $output, ) = $this->executeSpecialPage( null, $request );
+
+		$this->assertContains( '(wikibase-wikibaserepopage-invalid-langcode: &lt;sup&gt;)',
+			$output );
+		$this->assertNotContains( '<sup>', $output, 'never unescaped' );
+		$this->assertNotContains( '&amp;', $output, 'no double escaping' );
 	}
 
 	private function assetFingerprintEquals( Fingerprint $expected, Fingerprint $actual, $message = 'Fingerprint mismatches' ) {
