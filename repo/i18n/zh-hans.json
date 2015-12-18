@@ -329,6 +329,7 @@
 	"wikibase-listdatatypes-time-body": "用于一个时间点的文字数据字段。给出一个拥有一定精度和边界的日期和时间。时间以指定的日历模型保存在内部。\n* 时刻（time） – 时间点的确定值，表现为类似ISO 8601标准的时间戳，例如+2013-01-01T00:00:00Z。年份总是用4~16位数来标记并保存。\n* 时区（timezone） – 有符号整数确定值。时区信息是以分为单位以国际标准时间（UTC）为基准的一个偏移量。\n* 早于（before） – 表示它发生时可能晚于给定时间多少单位的整数确定值。单位由精度给定。\n* 晚于（after） – 表示它发生时可能早于给定时间多少单位的整数确定值。单位由精度给定。\n* 精度（precision） – 编码为短整数的确定值。数字含义如下：0 - 十亿年，1 - 亿年，...，6 - 千年，7 - 世纪，8 - 十年，9 - 年，10 - 月，11 - 天，12 - 小时，13 - 分，14 - 秒。\n* 日历模型（calendarmodel） – 由一个URI给定的确定值。它可识别时间戳的日历模型。",
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-url-body": "一个URL的文本数据字段。协议中限制使用的URL支持以外部链接的方式写在维基文本中。",
+	"wikibase-listdatatypes-external-id-head": "外部标识符",
 	"wikibase-concept-uri": "概念URI",
 	"wikibase-concept-uri-tooltip": "识别此项描述概念的URI",
 	"wikibase-add-badges": "添加徽章",

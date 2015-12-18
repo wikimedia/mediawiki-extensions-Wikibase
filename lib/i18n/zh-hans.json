@@ -80,6 +80,7 @@
 	"datatypes-type-wikibase-item": "项",
 	"datatypes-type-wikibase-property": "属性",
 	"datatypes-type-commonsMedia": "共享资源媒体文件",
+	"datatypes-type-external-id": "外部标识符",
 	"version-wikibase": "维基数据库",
 	"wikibase-time-precision-Gannum": "公元$1十亿年",
 	"wikibase-time-precision-Mannum": "公元$1百万年",
