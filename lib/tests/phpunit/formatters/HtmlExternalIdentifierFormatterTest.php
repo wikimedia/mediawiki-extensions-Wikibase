@@ -3,8 +3,6 @@
 namespace Wikibase\Lib\Formatters\Test;
 
 use DataValues\StringValue;
-use DataValues\UnDeserializableValue;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;

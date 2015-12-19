@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\StorageException;
 
 /**

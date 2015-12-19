@@ -2,9 +2,6 @@
 
 namespace Wikibase\Lib\Formatters;
 
-use DataValues\UnDeserializableValue;
-use ValueFormatters\FormattingException;
-use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
