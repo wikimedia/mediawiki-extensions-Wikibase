@@ -87,6 +87,41 @@
       "revId": "9d126841000e615904fae629c64c73a3e58243fa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_8a1c101a",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-19T18:52:08Z",
+      "side": 1,
+      "message": "Repo for example uses a SettingsArray object instantiated with only $wgWBRepoSettings (which also contains the lib settings).",
+      "parentUuid": "6eaa8f54_2391a24a",
+      "revId": "9d126841000e615904fae629c64c73a3e58243fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_2a2e3c3f",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-19T18:52:08Z",
+      "side": 1,
+      "message": "Yikes, this could be something completely different.\n\nIt might be that this is good enough, not sure.",
+      "revId": "9d126841000e615904fae629c64c73a3e58243fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
