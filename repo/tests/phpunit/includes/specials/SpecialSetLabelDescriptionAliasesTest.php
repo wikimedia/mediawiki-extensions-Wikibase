@@ -37,6 +37,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
 
@@ -163,7 +164,9 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		$fake->expects( $this->any() )
 			->method( 'hasLanguage' )
-			->will( $this->returnValue( true ) );
+			->will( $this->returnCallback( function( $languageCode ) {
+				return preg_match( '/^\w+$/', $languageCode );
+			} ) );
 
 		return $fake;
 	}
@@ -353,7 +356,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 					array( 'de' => array( 'foo', 'bar' ) )
 				),
 			),
-
 		);
 	}
 
@@ -372,8 +374,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		$this->mockRepository->putEntity( $inputEntity );
 		$id = $inputEntity->getId();
-
-		$this->newSpecialPage();
 
 		$subpage = str_replace( '$id', $id->getSerialization(), $subpage );
 		list( $output, $response ) = $this->executeSpecialPage( $subpage, $request );
@@ -394,6 +394,16 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 			$this->assetFingerprintEquals( $expectedFingerprint, $actualFingerprint );
 		}
+	}
+
+	public function testLanguageCodeEscaping() {
+		$request = new FauxRequest( array( 'language' => '<sup>' ), true );
+		list( $output, ) = $this->executeSpecialPage( null, $request );
+
+		$this->assertContains( '<p class="error">', $output );
+		$this->assertContains( '&lt;sup&gt;', $output );
+		$this->assertNotContains( '<sup>', $output, 'never unescaped' );
+		$this->assertNotContains( '&amp;lt;', $output, 'no double escaping' );
 	}
 
 	private function assetFingerprintEquals( Fingerprint $expected, Fingerprint $actual, $message = 'Fingerprint mismatches' ) {
