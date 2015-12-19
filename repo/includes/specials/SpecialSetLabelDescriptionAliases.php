@@ -256,9 +256,9 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		if ( $this->languageCode === '' ) {
 			$this->languageCode = $this->getLanguage()->getCode();
 		} elseif ( !$this->isValidLanguageCode( $this->languageCode ) ) {
-			$msg = $this->msg( 'wikibase-wikibaserepopage-invalid-langcode',
-				htmlspecialchars( $this->languageCode )
-			);
+			$msg = $this->msg( 'wikibase-wikibaserepopage-invalid-langcode' )
+				->plaintextParams( $this->languageCode );
+
 			$this->showErrorHTML( $msg->parse() );
 			$this->languageCode = null;
 		}
