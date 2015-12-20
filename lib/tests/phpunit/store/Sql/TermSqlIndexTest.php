@@ -17,7 +17,7 @@ use Wikibase\TermSqlIndex;
  * @covers Wikibase\TermSqlIndex
  *
  * @group Wikibase
- * @group WikibaseRepo
+ * @group WikibaseLib
  * @group WikibaseStore
  * @group Database
  *
@@ -31,6 +31,11 @@ class TermSqlIndexTest extends TermIndexTest {
 	protected function setUp() {
 		parent::setUp();
 
+		if ( !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( "Skipping because a local wb_terms table"
+				. " is not available on a WikibaseClient only instance." );
+		}
+
 		$this->tablesUsed[] = 'wb_terms';
 	}
 
@@ -39,7 +44,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	 */
 	public function getTermIndex() {
 		$normalizer = new StringNormalizer();
-		return new TermSqlIndex( $normalizer );
+		return new TermSqlIndex( $normalizer, 500 );
 	}
 
 	public function termProvider() {
