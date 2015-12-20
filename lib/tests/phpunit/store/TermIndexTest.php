@@ -500,25 +500,13 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	}
 
 	private function getTermConflictEntities() {
-		$deFooBar1 = new Item( new ItemId( 'Q1' ) );
-		$deFooBar1->setLabel( 'de', 'Foo' );
-		$deFooBar1->setDescription( 'de', 'Bar' );
-
-		$deBarFoo2 = new Item( new ItemId( 'Q2' ) );
-		$deBarFoo2->setLabel( 'de', 'Bar' );
-		$deBarFoo2->setDescription( 'de', 'Foo' );
-
-		$enFooBar3 = new Item( new ItemId( 'Q3' ) );
-		$enFooBar3->setLabel( 'en', 'Foo' );
-		$enFooBar3->setDescription( 'en', 'Bar' );
-
-		$enBarFoo4 = new Item( new ItemId( 'Q4' ) );
-		$enBarFoo4->setLabel( 'en', 'Bar' );
-		$enBarFoo4->setDescription( 'en', 'Foo' );
-
-		$deFooQuux5 = new Item( new ItemId( 'Q5' ) );
-		$deFooQuux5->setLabel( 'de', 'Foo' );
-		$deFooQuux5->setDescription( 'de', 'Quux' );
+		$entities = array(
+			$this->makeTermConflictItem( 'Q1', 'de', 'Foo', 'Bar' ),
+			$this->makeTermConflictItem( 'Q2', 'de', 'Bar', 'Foo' ),
+			$this->makeTermConflictItem( 'Q3', 'en', 'Foo', 'Bar' ),
+			$this->makeTermConflictItem( 'Q4', 'en', 'Bar', 'Foo' ),
+			$this->makeTermConflictItem( 'Q5', 'de', 'Foo', 'Quux' )
+		);
 
 		$deFooBarP6 = Property::newFromType( 'string' );
 		$deFooBarP6->setId( new PropertyId( 'P6' ) );
@@ -526,16 +514,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$deFooBarP6->setAliases( 'de', array( 'AFoo' ) );
 		$deFooBarP6->setDescription( 'de', 'Bar' );
 
-		$entities = array(
-			$deFooBar1,
-			$deBarFoo2,
-			$enFooBar3,
-			$enBarFoo4,
-			$deFooQuux5,
-			$deFooBarP6,
-		);
+		$entities[] = $deFooBarP6;
 
 		return $entities;
+	}
+
+	private function makeTermConflictItem( $id, $languageCode, $label, $description ) {
+		$item = new Item( new ItemId( $id ) );
+		$item->setLabel( $languageCode, $label );
+		$item->setDescription( $languageCode, $description );
+
+		return $item;
 	}
 
 	public function labelConflictProvider() {
