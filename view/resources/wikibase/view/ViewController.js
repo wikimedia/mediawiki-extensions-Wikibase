@@ -1,4 +1,4 @@
-wikibase.view.ViewController = ( function( wb ) {
+wikibase.view.ViewController = ( function() {
 'use strict';
 
 /**
@@ -46,4 +46,4 @@ SELF.prototype.remove = util.abstractMember;
 
 return SELF;
 
-} )( wikibase );
+} )();

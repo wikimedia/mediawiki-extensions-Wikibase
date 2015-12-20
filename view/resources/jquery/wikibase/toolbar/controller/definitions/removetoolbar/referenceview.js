@@ -1,4 +1,4 @@
-( function( $, mw ) {
+( function( $ ) {
 	'use strict';
 
 /**
@@ -41,4 +41,4 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 	}
 } );
 
-}( jQuery, mediaWiki ) );
+}( jQuery ) );
