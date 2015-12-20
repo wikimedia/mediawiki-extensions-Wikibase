@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Lloffiwr",
-			"Ham II"
+			"Ham II",
+			"Diafol"
 		]
 	},
+	"tooltip-t-wikibase": "Cysylltu i eitem ystorfa gysylltiedig",
 	"wikibase-after-page-move": "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar {{WBREPONAME}} er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.",
 	"wikibase-comment-linked": "Cysylltwyd eitem {{WBREPONAME}} â'r dudalen hon.",
 	"wikibase-comment-update": "Newidiwyd yr eitem {{WBREPONAME}}.",
