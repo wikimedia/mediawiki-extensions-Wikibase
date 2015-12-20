@@ -8,11 +8,15 @@ use DataValues\DataValue;
 use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use LogicException;
 use UsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\TypedValueFormatter;
 use Wikibase\Repo\WikibaseRepo;
@@ -25,6 +29,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Adam Shorland
+ * @author Marius Hoch
  */
 class FormatSnakValue extends ApiBase {
 
@@ -32,6 +37,11 @@ class FormatSnakValue extends ApiBase {
 	 * @var OutputFormatValueFormatterFactory
 	 */
 	private $valueFormatterFactory;
+
+	/**
+	 * @var OutputFormatSnakFormatterFactory
+	 */
+	private $snakFormatterFactory;
 
 	/**
 	 * @var DataValueFactory
@@ -58,6 +68,7 @@ class FormatSnakValue extends ApiBase {
 
 		$this->setServices(
 			$wikibaseRepo->getValueFormatterFactory(),
+			$wikibaseRepo->getSnakFormatterFactory(),
 			$wikibaseRepo->getDataValueFactory(),
 			$apiHelperFactory->getErrorReporter( $this )
 		);
@@ -65,10 +76,12 @@ class FormatSnakValue extends ApiBase {
 
 	public function setServices(
 		OutputFormatValueFormatterFactory $valueFormatterFactory,
+		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		DataValueFactory $dataValueFactory,
 		ApiErrorReporter $apiErrorReporter
 	) {
 		$this->valueFormatterFactory = $valueFormatterFactory;
+		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->dataValueFactory = $dataValueFactory;
 		$this->errorReporter = $apiErrorReporter;
 	}
@@ -80,18 +93,27 @@ class FormatSnakValue extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
+		$this->requireMaxOneParameter( $params, 'property', 'datatype' );
 
 		$value = $this->decodeDataValue( $params['datavalue'] );
 		$dataTypeId = $this->getDataTypeId( $params );
 
-		$formatter = $this->getFormatter();
+		$valueFormatter = $this->getValueFormatter();
 
-		if ( $formatter instanceof TypedValueFormatter ) {
+		$snak = null;
+		if ( isset( $params['property'] ) ) {
+			$snak = $this->decodeSnak( $params['property'], $value );
+		}
+
+		if ( $snak ) {
+			$snakFormatter = $this->getSnakFormatter();
+			$formattedValue = $snakFormatter->formatSnak( $snak );
+		} elseif ( $valueFormatter instanceof TypedValueFormatter ) {
 			// use data type id, if we can
-			$formattedValue = $formatter->formatValue( $value, $dataTypeId );
+			$formattedValue = $valueFormatter->formatValue( $value, $dataTypeId );
 		} else {
 			// rely on value type
-			$formattedValue = $formatter->format( $value );
+			$formattedValue = $valueFormatter->format( $value );
 		}
 
 		$this->getResult()->addValue(
@@ -105,7 +127,7 @@ class FormatSnakValue extends ApiBase {
 	 * @throws LogicException
 	 * @return ValueFormatter
 	 */
-	private function getFormatter() {
+	private function getValueFormatter() {
 		$params = $this->extractRequestParams();
 
 		$options = $this->getOptionsObject( $params['options'] );
@@ -120,6 +142,35 @@ class FormatSnakValue extends ApiBase {
 		}
 
 		return $formatter;
+	}
+
+	/**
+	 * @throws LogicException
+	 * @return SnakFormatter
+	 */
+	private function getSnakFormatter() {
+		$params = $this->extractRequestParams();
+
+		$options = $this->getOptionsObject( $params['options'] );
+		$formatter = $this->snakFormatterFactory->getSnakFormatter( $params['generate'], $options );
+
+		return $formatter;
+	}
+
+	/**
+	 * @param string $propertyIdSerialization
+	 * @param DataValue $dataValue
+	 *
+	 * @return PropertyValueSnak
+	 */
+	private function decodeSnak( $propertyIdSerialization, DataValue $dataValue ) {
+		try {
+			$propertyId = new PropertyId( $propertyIdSerialization );
+		} catch ( InvalidArgumentException $ex ) {
+			$this->errorReporter->dieException( $ex, 'badpropertyid' );
+		}
+
+		return new PropertyValueSnak( $propertyId, $dataValue );
 	}
 
 	/**
@@ -201,6 +252,10 @@ class FormatSnakValue extends ApiBase {
 			),
 			'datatype' => array(
 				self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds(),
+				self::PARAM_REQUIRED => false,
+			),
+			'property' => array(
+				self::PARAM_TYPE => 'text',
 				self::PARAM_REQUIRED => false,
 			),
 			'options' => array(
