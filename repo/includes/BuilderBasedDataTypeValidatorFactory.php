@@ -9,8 +9,6 @@ use Wikimedia\Assert\Assert;
 /**
  * A factory providing ValueValidators based on factory callbacks.
  *
- * @todo: unit tests!
- *
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class BuilderBasedDataTypeValidatorFactory implements DataTypeValidatorFactory {
