@@ -4,6 +4,7 @@ namespace Wikibase\Tests\Repo;
 
 use Language;
 use MediaWikiTestCase;
+use RequestContext;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
@@ -38,6 +39,14 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertSame( $first, $second );
 	}
 
+	public function testGetDefaultSnakFormatterBuilders() {
+		$first = $this->getWikibaseRepo()->getDefaultSnakFormatterBuilders();
+		$this->assertInstanceOf( 'Wikibase\Lib\WikibaseSnakFormatterBuilders', $first );
+
+		$second = $this->getWikibaseRepo()->getDefaultSnakFormatterBuilders();
+		$this->assertSame( $first, $second );
+	}
+
 	public function testGetDataTypeFactoryReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getDataTypeFactory();
 		$this->assertInstanceOf( 'DataTypes\DataTypeFactory', $returnValue );
@@ -58,6 +67,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Repo\Content\EntityContentFactory', $returnValue );
 	}
 
+	public function testGetEntityStoreWatcherReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getEntityStoreWatcher();
+		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityStoreWatcher', $returnValue );
+	}
+
 	public function testGetEntityTitleLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityTitleLookup();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityTitleLookup', $returnValue );
@@ -71,6 +85,20 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetEntityRevisionLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityRevisionLookup();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityRevisionLookup', $returnValue );
+	}
+
+	public function testNewRedirectCreationInteractorReturnType() {
+		$user = $this->getMockBuilder( 'User' )
+			->disableOriginalConstructor()
+			->getMock();
+		$context = new RequestContext();
+		$returnValue = $this->getWikibaseRepo()->newRedirectCreationInteractor( $user, $context );
+		$this->assertInstanceOf( 'Wikibase\Repo\Interactors\RedirectCreationInteractor', $returnValue );
+	}
+
+	public function testNewTermSearchInteractorReturnType() {
+		$returnValue = $this->getWikibaseRepo()->newTermSearchInteractor( '' );
+		$this->assertInstanceOf( 'Wikibase\Lib\Interactors\TermIndexSearchInteractor', $returnValue );
 	}
 
 	public function testGetEntityStoreReturnType() {
@@ -186,6 +214,26 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
+	public function testGetInternalStatementSerializer() {
+		$serializer = $this->getWikibaseRepo()->getInternalStatementSerializer();
+		$this->assertInstanceOf( 'Serializers\Serializer', $serializer );
+	}
+
+	public function testGetEntityDeserializer() {
+		$deserializer = $this->getWikibaseRepo()->getEntityDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testGetStatementDeserializer() {
+		$deserializer = $this->getWikibaseRepo()->getStatementDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testGetInternalStatementDeserializer() {
+		$deserializer = $this->getWikibaseRepo()->getInternalStatementDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
 	public function testGetEntityChangeFactory() {
 		$factory = $this->getWikibaseRepo()->getEntityChangeFactory();
 		$this->assertInstanceOf( 'Wikibase\Lib\Changes\EntityChangeFactory', $factory );
@@ -243,14 +291,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetApiHelperFactory() {
-		$mockContext = $this->getMock( 'RequestContext' );
-		$factory = $this->getWikibaseRepo()->getApiHelperFactory( $mockContext );
+		$factory = $this->getWikibaseRepo()->getApiHelperFactory( new RequestContext() );
 		$this->assertInstanceOf( 'Wikibase\Repo\Api\ApiHelperFactory', $factory );
 	}
 
 	public function testNewEditEntityFactory() {
-		$mockContext = $this->getMock( 'RequestContext' );
-		$factory = $this->getWikibaseRepo()->newEditEntityFactory( $mockContext );
+		$factory = $this->getWikibaseRepo()->newEditEntityFactory( new RequestContext() );
 		$this->assertInstanceOf( 'Wikibase\EditEntityFactory', $factory );
 	}
 
