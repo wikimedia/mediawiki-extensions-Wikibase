@@ -62,7 +62,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 *
 	 * @return Summary
 	 */
-	protected function setValue( $entity, $languageCode, $value ) {
+	protected function setValue( Entity $entity, $languageCode, $value ) {
 		$summary = new Summary( 'wbsetaliases' );
 
 		if ( $value === '' ) {
