@@ -9,6 +9,7 @@ use Status;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -201,11 +202,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::getFormElements()
 	 *
-	 * @param Entity|null $entity
+	 * @param EntityDocument|null $entity
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function getFormElements( Entity $entity = null ) {
+	protected function getFormElements( EntityDocument $entity = null ) {
 		if ( $this->page === null ) {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}

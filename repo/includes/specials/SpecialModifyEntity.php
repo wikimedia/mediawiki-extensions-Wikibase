@@ -8,6 +8,7 @@ use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
@@ -145,9 +146,9 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Building the HTML form for modifying an entity.
 	 *
-	 * @param Entity|null $entity
+	 * @param EntityDocument|null $entity
 	 */
-	private function setForm( Entity $entity = null ) {
+	private function setForm( EntityDocument $entity = null ) {
 		$this->addCopyrightText();
 
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
@@ -215,11 +216,11 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity|null $entity
+	 * @param EntityDocument|null $entity
 	 *
 	 * @return string HTML
 	 */
-	protected function getFormElements( Entity $entity = null ) {
+	protected function getFormElements( EntityDocument $entity = null ) {
 		$id = 'wb-modifyentity-id';
 
 		return Html::label(
