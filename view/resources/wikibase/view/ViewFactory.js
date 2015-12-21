@@ -263,7 +263,7 @@
 	 * @return {jQuery.wikibase.statementgroupview} The constructed statementlistview
 	 **/
 	SELF.prototype.getStatementListView = function( entityId, propertyId, value, $dom ) {
-		var view = this._getView(
+		return this._getView(
 			'statementlistview',
 			$dom,
 			{
@@ -272,8 +272,6 @@
 				claimsChanger: this._entityChangersFactory.getClaimsChanger()
 			}
 		);
-
-		return view;
 	};
 
 	/**
