@@ -2,7 +2,6 @@
 
 namespace Wikibase\View;
 
-use Message;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -35,20 +34,21 @@ class EntityTermsView {
 	private $sectionEditLinkGenerator;
 
 	/**
-	 * @var string
-	 */
-	private $languageCode;
-
-	/**
 	 * @var LanguageNameLookup
 	 */
 	private $languageNameLookup;
 
 	/**
+	 * @var string Language of the terms in the title and header section.
+	 */
+	private $languageCode;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param EditSectionGenerator|null $sectionEditLinkGenerator
 	 * @param LanguageNameLookup $languageNameLookup
-	 * @param string $languageCode
+	 * @param string $languageCode Desired language of the label, description and aliases in the
+	 *  title and header section. Not necessarily identical to the interface language.
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -56,10 +56,10 @@ class EntityTermsView {
 		LanguageNameLookup $languageNameLookup,
 		$languageCode
 	) {
-		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
-		$this->languageCode = $languageCode;
 		$this->templateFactory = $templateFactory;
+		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->languageCode = $languageCode;
 	}
 
 	/**
@@ -187,10 +187,10 @@ class EntityTermsView {
 		}
 
 		return $this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview',
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-language' ),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-label' ),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-description' ),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' ),
+			wfMessage( 'wikibase-entitytermsforlanguagelistview-language' ),
+			wfMessage( 'wikibase-entitytermsforlanguagelistview-label' ),
+			wfMessage( 'wikibase-entitytermsforlanguagelistview-description' ),
+			wfMessage( 'wikibase-entitytermsforlanguagelistview-aliases' ),
 			$entityTermsForLanguageViewsHtml
 		);
 	}
@@ -207,7 +207,9 @@ class EntityTermsView {
 		$languageCode,
 		Title $title = null
 	) {
-		$languageName = $this->languageNameLookup->getName( $languageCode, $this->languageCode );
+		global $wgLang;
+
+		$languageName = $this->languageNameLookup->getName( $languageCode, $wgLang->getCode() );
 		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
 		$hasLabel = $labels->hasTermForLanguage( $languageCode );
@@ -228,7 +230,7 @@ class EntityTermsView {
 				$hasLabel ? '' : 'wb-empty',
 				htmlspecialchars( $hasLabel
 					? $labels->getByLanguage( $languageCode )->getText()
-					: $this->msg( 'wikibase-label-empty' )->text()
+					: wfMessage( 'wikibase-label-empty' )->text()
 				),
 				''
 			),
@@ -236,7 +238,7 @@ class EntityTermsView {
 				$hasDescription ? '' : 'wb-empty',
 				htmlspecialchars( $hasDescription
 					? $descriptions->getByLanguage( $languageCode )->getText()
-					: $this->msg( 'wikibase-description-empty' )->text()
+					: wfMessage( 'wikibase-description-empty' )->text()
 				),
 				'',
 				''
@@ -291,15 +293,6 @@ class EntityTermsView {
 			$this->languageCode,
 			$entityId
 		);
-	}
-
-	/**
-	 * @param string $key
-	 *
-	 * @return Message
-	 */
-	private function msg( $key ) {
-		return wfMessage( $key )->inLanguage( $this->languageCode );
 	}
 
 }
