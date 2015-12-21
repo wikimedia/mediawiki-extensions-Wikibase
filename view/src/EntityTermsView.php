@@ -35,7 +35,7 @@ class EntityTermsView {
 	private $sectionEditLinkGenerator;
 
 	/**
-	 * @var string
+	 * @var string Language of the terms in the title and header section.
 	 */
 	private $languageCode;
 
@@ -48,7 +48,8 @@ class EntityTermsView {
 	 * @param TemplateFactory $templateFactory
 	 * @param EditSectionGenerator|null $sectionEditLinkGenerator
 	 * @param LanguageNameLookup $languageNameLookup
-	 * @param string $languageCode
+	 * @param string $languageCode Desired language of the label, description and aliases in the
+	 *  title and header section. Not necessarily identical to the interface language.
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -207,7 +208,9 @@ class EntityTermsView {
 		$languageCode,
 		Title $title = null
 	) {
-		$languageName = $this->languageNameLookup->getName( $languageCode, $this->languageCode );
+		global $wgLang;
+
+		$languageName = $this->languageNameLookup->getName( $languageCode, $wgLang->getCode() );
 		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
 		$hasLabel = $labels->hasTermForLanguage( $languageCode );
@@ -299,7 +302,7 @@ class EntityTermsView {
 	 * @return Message
 	 */
 	private function msg( $key ) {
-		return wfMessage( $key )->inLanguage( $this->languageCode );
+		return wfMessage( $key );
 	}
 
 }
