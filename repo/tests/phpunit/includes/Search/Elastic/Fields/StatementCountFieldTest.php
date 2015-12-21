@@ -2,11 +2,11 @@
 
 namespace Wikibase\Test;
 
-use DataValues\StringValue;
+use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Repo\Search\Elastic\Fields\StatementCountField;
 
 /**
@@ -19,7 +19,7 @@ use Wikibase\Repo\Search\Elastic\Fields\StatementCountField;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class StatementCountFieldTest extends \PHPUnit_Framework_TestCase {
+class StatementCountFieldTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetMapping() {
 		$statementCountField = new StatementCountField();
@@ -31,18 +31,23 @@ class StatementCountFieldTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $expected, $statementCountField->getMapping() );
 	}
 
-	public function testGetFieldData() {
+	/**
+	 * @dataProvider getFieldDataProvider
+	 */
+	public function testGetFieldData( $expected, EntityDocument $entity ) {
 		$statementCountField = new StatementCountField();
 
-		$statements = new StatementList();
-		$statements->addNewStatement(
-			new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'o_O' ) )
-		);
+		$this->assertSame( $expected, $statementCountField->getFieldData( $entity ) );
+	}
 
+	public function getFieldDataProvider() {
 		$item = new Item();
-		$item->setStatements( $statements );
+		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 1 ) );
 
-		$this->assertSame( 1, $statementCountField->getFieldData( $item ) );
+		return array(
+			array( 1, $item ),
+			array( 0, Property::newFromType( 'string' ) )
+		);
 	}
 
 }
