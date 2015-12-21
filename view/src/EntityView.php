@@ -4,7 +4,6 @@ namespace Wikibase\View;
 
 use InvalidArgumentException;
 use Language;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
@@ -23,6 +22,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Werner
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 abstract class EntityView {
 
@@ -92,7 +92,8 @@ abstract class EntityView {
 
 		$entityId = $entity->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 
-		$html = $this->templateFactory->render( 'wikibase-entityview',
+		$html = $this->templateFactory->render(
+			'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
 			$this->language->getCode(),
@@ -116,12 +117,10 @@ abstract class EntityView {
 	 */
 	public function getTitleHtml( EntityRevision $entityRevision ) {
 		$entity = $entityRevision->getEntity();
+		$id = $entity->getId();
 
 		if ( $entity instanceof FingerprintProvider ) {
-			return $this->entityTermsView->getTitleHtml(
-				$entity->getFingerprint(),
-				$entity->getId()
-			);
+			return $this->entityTermsView->getTitleHtml( $entity->getFingerprint(), $id );
 		}
 
 		return '';
@@ -137,11 +136,17 @@ abstract class EntityView {
 	 */
 	protected function getMainHtml( EntityRevision $entityRevision ) {
 		$entity = $entityRevision->getEntity();
+		$id = $entity->getId();
+		$html = '';
 
-		$html = $this->getHtmlForFingerprint(
-			$entity,
-			$this->getHtmlForTermBox( $entityRevision )
-		);
+		if ( $entity instanceof FingerprintProvider ) {
+			$html .= $this->entityTermsView->getHtml(
+				$entity->getFingerprint(),
+				$id,
+				$this->getHtmlForTermBox( $entityRevision ),
+				$this->textInjector
+			);
+		}
 
 		$html .= $this->templateFactory->render( 'wikibase-toc' );
 
@@ -157,23 +162,6 @@ abstract class EntityView {
 	 */
 	protected function getSideHtml( EntityRevision $entityRevision ) {
 		return '';
-	}
-
-	/**
-	 * Builds and returns the HTML for the entity's fingerprint.
-	 *
-	 * @param Entity $entity
-	 * @param string $termBoxHtml
-	 *
-	 * @return string
-	 */
-	private function getHtmlForFingerprint( Entity $entity, $termBoxHtml ) {
-		return $this->entityTermsView->getHtml(
-			$entity->getFingerprint(),
-			$entity->getId(),
-			$termBoxHtml,
-			$this->textInjector
-		);
 	}
 
 	/**
