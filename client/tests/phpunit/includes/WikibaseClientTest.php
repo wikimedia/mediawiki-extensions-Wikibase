@@ -35,6 +35,14 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $first, $second );
 	}
 
+	public function testGetDefaultSnakFormatterBuilders() {
+		$first = WikibaseClient::getDefaultSnakFormatterBuilders();
+		$this->assertInstanceOf( 'Wikibase\Lib\WikibaseSnakFormatterBuilders', $first );
+
+		$second = WikibaseClient::getDefaultSnakFormatterBuilders();
+		$this->assertSame( $first, $second );
+	}
+
 	public function testGetDataTypeFactoryReturnType() {
 		$returnValue = $this->getWikibaseClient()->getDataTypeFactory();
 		$this->assertInstanceOf( 'DataTypes\DataTypeFactory', $returnValue );
