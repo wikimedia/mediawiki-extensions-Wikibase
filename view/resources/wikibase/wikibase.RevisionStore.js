@@ -74,6 +74,13 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * Saves the base revision id
+	 */
+	setBaseRevision: function( rev ) {
+		this._revisions.baseRevision = rev;
+	},
+
+	/**
 	 * Saves the label revision id.
 	 */
 	setLabelRevision: function( rev ) {

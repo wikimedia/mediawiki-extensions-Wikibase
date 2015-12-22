@@ -48,7 +48,7 @@
 
 			this._api.setDescription(
 				this._entity.getId(),
-				this._revisionStore.getDescriptionRevision(),
+				this._revisionStore.getBaseRevision(),
 				description.getText(),
 				language
 			)
@@ -56,7 +56,7 @@
 				var savedDescription = result.entity.descriptions[language].value;
 
 				// Update revision store:
-				self._revisionStore.setDescriptionRevision( result.entity.lastrevid );
+				self._revisionStore.setBaseRevision( result.entity.lastrevid );
 
 				// FIXME: Maybe check API's return value?
 
