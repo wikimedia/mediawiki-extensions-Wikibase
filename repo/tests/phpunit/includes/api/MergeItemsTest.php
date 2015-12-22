@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Api;
 
 use Language;
+use RequestContext;
 use Status;
 use TestSites;
 use UsageException;
@@ -135,8 +136,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			Language::factory( 'en' )
 		);
 
-		$mockContext = $this->getMock( 'RequestContext' );
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mockContext );
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( new RequestContext() );
 
 		$resultBuilder = $apiHelperFactory->getResultBuilder( $module );
 

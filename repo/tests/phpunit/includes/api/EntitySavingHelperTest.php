@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use RequestContext;
 use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -60,29 +61,24 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
-	private function getMockContext() {
-		return $this->getMock( 'RequestContext' );
-	}
-
-	private function getMockUser() {
-		return $this->getMockBuilder( 'User' )
+	private function newContext() {
+		$user = $this->getMockBuilder( 'User' )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$context = new RequestContext();
+		$context->setUser( $user );
+		return $context;
 	}
 
 	public function testAttemptSave() {
-		$mockContext = $this->getMockContext();
-		$mockContext->expects( $this->once() )
-			->method( 'getUser' )
-			->will( $this->returnValue( $this->getMockUser() ) );
-
 		$mockApiBase = $this->getMockApiBase();
 		$mockApiBase->expects( $this->once() )
 			->method( 'isWriteMode' )
 			->will( $this->returnValue( true ) );
 		$mockApiBase->expects( $this->atLeastOnce() )
 			->method( 'getContext' )
-			->will( $this->returnValue( $mockContext ) );
+			->will( $this->returnValue( $this->newContext() ) );
 		$mockApiBase->expects( $this->atLeastOnce() )
 			->method( 'extractRequestParams' )
 			->will( $this->returnValue( array() ) );
