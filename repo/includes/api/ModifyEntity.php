@@ -56,7 +56,7 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @var SiteLinkLookup
 	 */
-	protected $siteLinkLookup;
+	private $siteLinkLookup;
 
 	/**
 	 * @var EntityTitleLookup
@@ -162,7 +162,7 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @see EntitySavingHelper::attemptSaveEntity
 	 */
-	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
+	private function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
 		return $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $flags );
 	}
 
@@ -171,13 +171,6 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function getTitleLookup() {
 		return $this->titleLookup;
-	}
-
-	/**
-	 * @return EntityStore
-	 */
-	protected function getEntityStore() {
-		return $this->entityStore;
 	}
 
 	/**
@@ -253,7 +246,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @throws UsageException
 	 * @return EntityId
 	 */
-	protected function getEntityIdFromString( $id ) {
+	private function getEntityIdFromString( $id ) {
 		try {
 			return $this->idParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
@@ -270,7 +263,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @throws UsageException If no such entity is found.
 	 * @return EntityId The ID of the entity connected to $title on $site.
 	 */
-	protected function getEntityIdFromSiteTitleCombination( $site, $title ) {
+	private function getEntityIdFromSiteTitleCombination( $site, $title ) {
 		// FIXME: Normalization missing, see T47282.
 		$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
 
@@ -352,7 +345,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity $entity
+	 * @param Entity &$entity
 	 * @param array $params
 	 * @param int $baseRevId
 	 *
@@ -423,7 +416,7 @@ abstract class ModifyEntity extends ApiBase {
 
 			// HACK: We need to assign an ID early, for things like the ClaimIdGenerator.
 			if ( $entity->getId() === null ) {
-				$this->getEntityStore()->assignFreshId( $entity );
+				$this->entityStore->assignFreshId( $entity );
 			}
 		} else {
 			$entity = $entityRev->getEntity();
@@ -494,7 +487,7 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @param bool $entityIsNew
 	 */
-	protected function addFlags( $entityIsNew ) {
+	private function addFlags( $entityIsNew ) {
 		// if the entity is not up for creation, set the EDIT_UPDATE flags
 		if ( !$entityIsNew && ( $this->flags & EDIT_NEW ) === 0 ) {
 			$this->flags |= EDIT_UPDATE;
@@ -504,7 +497,7 @@ abstract class ModifyEntity extends ApiBase {
 		$this->flags |= ( $this->getUser()->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 	}
 
-	protected function addToOutput( Entity $entity, Status $status, $oldRevId = null ) {
+	private function addToOutput( EntityDocument $entity, Status $status, $oldRevId = null ) {
 		$this->getResultBuilder()->addBasicEntityInformation( $entity->getId(), 'entity' );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity', $oldRevId );
 
@@ -536,11 +529,9 @@ abstract class ModifyEntity extends ApiBase {
 	 * Get allowed params for the identification of the entity
 	 * Lookup through an id is common for all entities
 	 *
-	 * @since 0.1
-	 *
 	 * @return array[]
 	 */
-	protected function getAllowedParamsForId() {
+	private function getAllowedParamsForId() {
 		return array(
 			'id' => array(
 				self::PARAM_TYPE => 'string',
@@ -552,11 +543,9 @@ abstract class ModifyEntity extends ApiBase {
 	 * Get allowed params for the identification by a sitelink pair
 	 * Lookup through the sitelink object is not used in every subclasses
 	 *
-	 * @since 0.1
-	 *
 	 * @return array[]
 	 */
-	protected function getAllowedParamsForSiteLink() {
+	private function getAllowedParamsForSiteLink() {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		return array(
@@ -572,11 +561,9 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * Get allowed params for the entity in general
 	 *
-	 * @since 0.1
-	 *
 	 * @return array
 	 */
-	protected function getAllowedParamsForEntity() {
+	private function getAllowedParamsForEntity() {
 		return array(
 			'baserevid' => array(
 				self::PARAM_TYPE => 'integer',
