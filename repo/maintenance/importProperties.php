@@ -9,6 +9,10 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\WikibaseRepo;
 
+$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
+
+require_once $basePath . '/maintenance/Maintenance.php';
+
 /**
  * Maintenance script for importing properties in Wikidata.
  *
@@ -26,11 +30,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
-
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
-
-require_once $basePath . '/maintenance/Maintenance.php';
-
 class ImportProperties extends Maintenance {
 
 	/**

@@ -13,7 +13,6 @@ use Wikibase\ChunkCache;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-
 class ChunkCacheTest extends \MediaWikiTestCase {
 
 	protected static function getTestData() {

@@ -6,6 +6,12 @@ use Parser;
 use PPFrame;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 
+/**
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
+ */
 class ParserFunctionRegistrant {
 
 	/**
