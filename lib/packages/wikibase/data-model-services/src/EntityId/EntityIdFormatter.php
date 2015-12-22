@@ -14,11 +14,9 @@ use Wikibase\DataModel\Entity\EntityId;
 interface EntityIdFormatter {
 
 	/**
-	 * Format an EntityId
-	 *
 	 * @param EntityId $value
 	 *
-	 * @return string
+	 * @return string Either plain text, wikitext or HTML.
 	 */
 	public function formatEntityId( EntityId $value );
 

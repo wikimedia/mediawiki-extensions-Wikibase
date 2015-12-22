@@ -14,11 +14,11 @@ use Wikibase\DataModel\Entity\EntityId;
 class PlainEntityIdFormatter implements EntityIdFormatter {
 
 	/**
-	 * @since 1.1
+	 * @see EntityIdFormatter::formatEntityId
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string Plain text
 	 */
 	public function formatEntityId( EntityId $entityId ) {
 		return $entityId->getSerialization();

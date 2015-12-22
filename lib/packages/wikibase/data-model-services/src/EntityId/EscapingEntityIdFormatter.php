@@ -42,9 +42,11 @@ class EscapingEntityIdFormatter implements EntityIdFormatter {
 	}
 
 	/**
+	 * @see EntityIdFormatter::formatEntityId
+	 *
 	 * @param EntityId $value
 	 *
-	 * @return string
+	 * @return string Either wikitext or HTML, depending on the $escapeCallback provided.
 	 */
 	public function formatEntityId( EntityId $value ) {
 		$text = $this->formatter->formatEntityId( $value );
