@@ -52,7 +52,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function formatEntityId( EntityId $entityId ) {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );

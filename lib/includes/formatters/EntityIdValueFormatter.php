@@ -8,6 +8,8 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 
 /**
+ * A simple wrapper that forwards formatting of an EntityIdValue object to an EntityIdFormatter.
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -38,7 +40,8 @@ class EntityIdValueFormatter implements ValueFormatter {
 	 * @param EntityIdValue $value
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string Text
+	 * @return string Either plain text, wikitext or HTML, depending on the EntityIdFormatter
+	 *  provided.
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityIdValue ) ) {

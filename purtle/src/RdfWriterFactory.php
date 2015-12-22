@@ -5,8 +5,6 @@ namespace Wikimedia\Purtle;
 use InvalidArgumentException;
 
 /**
- * Factory for RdfWriters
- *
  * @since 0.5
  *
  * @licence GNU GPL v2+

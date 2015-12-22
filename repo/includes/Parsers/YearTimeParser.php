@@ -12,6 +12,11 @@ use ValueParsers\StringValueParser;
 use ValueParsers\ValueParser;
 
 /**
+ * A straight parser that accepts various strings representing a year, and only a year. Accepts
+ * years before common era as well as optional thousands separators. Should be called after
+ * YearMonthTimeParser when you want to accept both formats, because strings like "1 999" may either
+ * represent a month and a year or a year with digit grouping.
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+

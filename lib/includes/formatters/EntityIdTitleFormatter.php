@@ -33,7 +33,7 @@ class EntityIdTitleFormatter implements EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string Plain text
 	 */
 	public function formatEntityId( EntityId $entityId ) {
 		$title = $this->titleLookup->getTitleForId( $entityId );

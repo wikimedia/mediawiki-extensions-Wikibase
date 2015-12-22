@@ -12,6 +12,8 @@ use ValueFormatters\ValueFormatterBase;
 /**
  * Formatter for rendering the details of a TimeValue (most useful for diffs) in HTML.
  *
+ * @see Wikibase\Lib\HtmlTimeFormatter
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+
