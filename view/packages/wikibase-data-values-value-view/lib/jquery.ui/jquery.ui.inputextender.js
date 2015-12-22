@@ -344,7 +344,8 @@ $.widget( 'ui.inputextender', {
 		}
 
 		if ( !$extension ) {
-			this._$extension = $extension = this._buildExtension();
+			$extension = this._buildExtension();
+			this._$extension = $extension;
 			$extension.appendTo( $( 'body' ) );
 
 			if ( $.isFunction( this.options.initCallback ) ) {

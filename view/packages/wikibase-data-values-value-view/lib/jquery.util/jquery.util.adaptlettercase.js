@@ -1,6 +1,6 @@
 jQuery.util = jQuery.util || {};
 
-jQuery.util.adaptlettercase = ( function( $ ) {
+jQuery.util.adaptlettercase = ( function() {
 	'use strict';
 
 	/**
@@ -38,4 +38,4 @@ jQuery.util.adaptlettercase = ( function( $ ) {
 		}
 	};
 
-} )( jQuery );
+} )();
