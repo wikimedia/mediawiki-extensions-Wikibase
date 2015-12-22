@@ -5,6 +5,9 @@ namespace Wikibase\DataModel\Services\Statement\Grouper;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
+ * An unconditional statement grouper that always returns a single group, containing the original,
+ * unmodified list of statements, and nothing else.
+ *
  * @since 3.2
  *
  * @licence GNU GPL v2+

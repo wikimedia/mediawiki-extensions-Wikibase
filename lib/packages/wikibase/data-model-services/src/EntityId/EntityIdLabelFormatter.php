@@ -34,7 +34,7 @@ class EntityIdLabelFormatter implements EntityIdFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string Plain text
 	 */
 	public function formatEntityId( EntityId $entityId ) {
 		$term = $this->lookupEntityLabel( $entityId );
