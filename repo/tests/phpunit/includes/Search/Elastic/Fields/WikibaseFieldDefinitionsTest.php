@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
 
 /**
@@ -14,7 +15,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class WikibaseFieldDefinitionsTest extends \PHPUnit_Framework_TestCase {
+class WikibaseFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetFields() {
 		$wikibaseFieldDefinitions = new WikibaseFieldDefinitions();

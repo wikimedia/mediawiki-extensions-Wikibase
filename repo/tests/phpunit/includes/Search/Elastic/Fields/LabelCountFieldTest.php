@@ -2,7 +2,10 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
 
 /**
@@ -15,7 +18,7 @@ use Wikibase\Repo\Search\Elastic\Fields\LabelCountField;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class LabelCountFieldTest extends \PHPUnit_Framework_TestCase {
+class LabelCountFieldTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetMapping() {
 		$labelCountField = new LabelCountField();
@@ -27,13 +30,23 @@ class LabelCountFieldTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame( $expected, $labelCountField->getMapping() );
 	}
 
-	public function testGetFieldData() {
+	/**
+	 * @dataProvider getFieldDataProvider
+	 */
+	public function testGetFieldData( $expected, EntityDocument $entity ) {
 		$labelCountField = new LabelCountField();
 
+		$this->assertSame( $expected, $labelCountField->getFieldData( $entity ) );
+	}
+
+	public function getFieldDataProvider() {
 		$item = new Item();
 		$item->getFingerprint()->setLabel( 'es', 'Gato' );
 
-		$this->assertSame( 1, $labelCountField->getFieldData( $item ) );
+		return array(
+			array( 1, $item ),
+			array( 0, Property::newFromType( 'string' ) )
+		);
 	}
 
 }
