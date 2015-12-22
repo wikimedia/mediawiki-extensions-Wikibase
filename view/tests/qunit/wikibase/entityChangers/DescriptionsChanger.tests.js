@@ -29,7 +29,7 @@
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function() { return 0; } },
+			{ getBaseRevision: function() { return 0; } },
 			new wb.datamodel.Item( 'Q1' )
 		);
 
@@ -55,7 +55,7 @@
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function() { return 0; }, setDescriptionRevision: function() {} },
+			{ getBaseRevision: function() { return 0; }, setBaseRevision: function() {} },
 			new wb.datamodel.Item( 'Q1' )
 		);
 
@@ -79,7 +79,7 @@
 		};
 		var descriptionsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function() { return 0; }, setDescriptionRevision: function() {} },
+			{ getBaseRevision: function() { return 0; }, setBaseRevision: function() {} },
 			new wb.datamodel.Item( 'Q1' )
 		);
 

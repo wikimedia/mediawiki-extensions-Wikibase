@@ -48,7 +48,7 @@
 
 			this._api.setLabel(
 				this._entity.getId(),
-				this._revisionStore.getLabelRevision(),
+				this._revisionStore.getBaseRevision(),
 				label.getText(),
 				language
 			)
@@ -56,7 +56,7 @@
 				var savedLabel = result.entity.labels[language].value;
 
 				// Update revision store:
-				self._revisionStore.setLabelRevision( result.entity.lastrevid );
+				self._revisionStore.setBaseRevision( result.entity.lastrevid );
 
 				// FIXME: Maybe check API's return value?
 
