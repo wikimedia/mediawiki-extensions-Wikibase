@@ -15,6 +15,13 @@ use Wikibase\Repo\WikibaseRepo;
 
 require_once __DIR__ . '/dumpEntities.php';
 
+/**
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
+ * @author Daniel Kinzler
+ * @author Adam Shorland
+ */
 class DumpJson extends DumpScript {
 
 	/**

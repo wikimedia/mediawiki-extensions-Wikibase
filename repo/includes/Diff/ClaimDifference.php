@@ -8,6 +8,7 @@ use Diff\DiffOp\DiffOpChange;
 
 /**
  * Represents the difference between two Statement objects.
+ * @fixme Contains references and rank? It's a StatementDifference!
  *
  * @since 0.4
  *
@@ -15,7 +16,6 @@ use Diff\DiffOp\DiffOpChange;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Mättig
  */
-// FIXME: Contains references and rank? It's a StatementDifference!
 class ClaimDifference implements Comparable {
 
 	/**
