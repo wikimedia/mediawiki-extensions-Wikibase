@@ -73,6 +73,7 @@
 	"datatypes-type-wikibase-item": "Elemento",
 	"datatypes-type-wikibase-property": "Propiedade",
 	"datatypes-type-commonsMedia": "Ficheiro multimedia de Commons",
+	"datatypes-type-external-id": "Identificador externo",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 mil millóns de anos EC",
 	"wikibase-time-precision-Mannum": "$1 millóns de anos EC",
