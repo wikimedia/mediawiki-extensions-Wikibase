@@ -86,7 +86,7 @@ return call_user_func( function() {
 		'PT:commonsMedia' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				return $factory->buildStringValidators();
+				return $factory->buildMediaValidators();
 			},
 			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
