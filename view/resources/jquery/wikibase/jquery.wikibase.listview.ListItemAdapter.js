@@ -29,18 +29,18 @@
 	 *        A function called when the related `listview` is instantiating a new list item. The
 	 *        function has to return an `Object` which will then be used as `options` object for a
 	 *        new widget (which is specified in the `listItemWidget` option).
-	 *        The new new list item's value is given as the function's first parameter, if an empty
+	 *        The new list item's value is given as the function's first parameter, if an empty
 	 *        list item should be created, the value will be `null`. The function's context is the
 	 *        `ListItemAdapter` instance.
-	 *        Either `newItemOptionsFn` or `getNewItem` has to be passed.
+	 *        Either the `newItemOptionsFn` or the `getNewItem` option has to be passed.
 	 * @param {Function} [options.getNewItem]
 	 *        A function called when the related `listview` is instantiating a new list item. The
 	 *        function has to return an instance of `options.listItemWidget`.
-	 *        The new new list item's value is given as the function's first parameter, if an empty
+	 *        The new list item's value is given as the function's first parameter, if an empty
 	 *        list item should be created, the value will be `null`. The function's context is the
 	 *        `ListItemAdapter` instance. The second parameter is the DOM element the list item widget
 	 *        should be initialized on.
-	 *        Either `newItemOptionsFn` or `getNewItem` has to be passed.
+	 *        Either the `newItemOptionsFn` or the `getNewItem` option has to be passed.
 	 *
 	 * @throws {Error} if a required option is not specified properly.
 	 * @throws {Error} if the widget specified in the `listItemWidget` option does not feature a
@@ -120,7 +120,11 @@
 		 * @return {jQuery.Widget}
 		 */
 		newListItem: function( $subject, value ) {
-			return this._options.getNewItem( value, $subject[0] );
+			var item = this._options.getNewItem( value, $subject[0] );
+			if ( !( item instanceof $.Widget ) ) {
+				throw new Error( 'The "getNewItem" option must return a jQuery.Widget' );
+			}
+			return item;
 		}
 	} );
 
