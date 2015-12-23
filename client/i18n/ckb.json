@@ -40,7 +40,8 @@
 	"wikibase-rc-wikibase-edit-title": "دەستکاریی {{WBREPONAME}}",
 	"wikibase-replicationnote": "تکایە ئاگادار بن چەند خولەک دەگرێ ھەتا گۆڕانکارییەکان لە ھەموو ویکییەکاندا دەربکەوێ.",
 	"wikibase-watchlist-show-changes-pref": "دەستکارییەکانی {{WBREPONAME}} لە پێرستی چاودێرییەکەت نیشان بدە",
-	"wikibase-unconnectedpages-submit": "بڕۆ",
+	"wikibase-unconnectedpages-submit": "پەڕەکان نیشان بدە",
+	"wikibase-pageswithbadges-submit": "پەڕەکان نیشان بدە",
 	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "ھیچ",
 	"wikibase-otherprojects": "پرۆژەکانی تر"
