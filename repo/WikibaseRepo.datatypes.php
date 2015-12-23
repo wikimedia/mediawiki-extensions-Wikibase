@@ -86,7 +86,12 @@ return call_user_func( function() {
 		'PT:commonsMedia' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				return $factory->buildMediaValidators();
+				// Don't go for commons during unit tests. This sucks.
+				if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+					return $factory->buildMediaValidators();
+				} else {
+					return $factory->buildStringValidators();
+				}
 			},
 			'parser-factory-callback' => $newStringParser,
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
