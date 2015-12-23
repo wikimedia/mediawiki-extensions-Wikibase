@@ -218,7 +218,7 @@
 	/**
 	 * Construct a suitable view for the list of statement groups for the given entity on the given DOM element
 	 *
-	 * @param {wikibase.datamodel.Entity} entity
+	 * @param {wikibase.datamodel.Item|wikibase.datamodel.Property} entity
 	 * @param {jQuery} $dom
 	 * @return {jQuery.wikibase.statementgrouplistview} The constructed statementgrouplistview
 	 **/
@@ -233,7 +233,8 @@
 					function( guid ) {
 						var res = null;
 						statementGroupSet.each( function() {
-							this.getItemContainer().each( function() {
+							// FIXME: This accesses a private property to avoid cloning.
+							this._groupableCollection.each( function() {
 								if ( this.getClaim().getGuid() === guid ) {
 									res = this;
 								}
@@ -281,6 +282,7 @@
 	 **/
 	SELF.prototype.getStatementListView = function( entityId, propertyId, getStatementForGuid, value, $dom ) {
 		propertyId = propertyId || $dom.closest( '.wikibase-statementgroupview' ).attr( 'id' );
+
 		return this._getView(
 			'statementlistview',
 			$dom,
@@ -289,7 +291,7 @@
 				listItemAdapter: this.getListItemAdapterForStatementView(
 					entityId,
 					function( dom ) {
-						var guidMatch = dom.className.match( /wikibase-statement-([^ ]+)/ );
+						var guidMatch = dom.className.match( /wikibase-statement-(\S+)/ );
 						return guidMatch ? getStatementForGuid( guidMatch[ 1 ] ) : null;
 					},
 					propertyId

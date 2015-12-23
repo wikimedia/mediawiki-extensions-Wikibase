@@ -165,13 +165,13 @@ $.widget( 'wikibase.listview', PARENT, {
 		var i, items = this.option( 'value' );
 
 		if ( items === null ) {
-			this._initFromDom();
-			return;
-		}
-
-		// initialize view for each of the list item values:
-		for ( i in items ) {
-			this.addItem( items[i] );
+			for ( i = this._reusedItems.length; i--; ) {
+				this.addItem( null );
+			}
+		} else {
+			for ( i in items ) {
+				this.addItem( items[i] );
+			}
 		}
 	},
 
@@ -340,12 +340,6 @@ $.widget( 'wikibase.listview', PARENT, {
 		this._lia.newListItem( $newLi, liValue );
 
 		return $newLi;
-	},
-
-	_initFromDom: function() {
-		while ( this._reusedItems.length > 0 ) {
-			this.addItem( null );
-		}
 	},
 
 	/**
