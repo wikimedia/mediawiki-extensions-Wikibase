@@ -11,6 +11,7 @@ use Wikimedia\Purtle\RdfWriterFactory;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class RdfWriterFactoryTest extends \MediaWikiTestCase {
 
@@ -33,6 +34,12 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testGivenInvalidFormat_getWriterThrowsException() {
+		$factory = new RdfWriterFactory();
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$factory->getWriter( 'invalid' );
+	}
+
 	public function testGetFormatName() {
 		$factory = new RdfWriterFactory();
 
@@ -42,6 +49,11 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 			// the canonical name should just stay
 			$this->assertEquals( $format, $actual );
 		}
+	}
+
+	public function testGivenInvalidFormat_getFormatNameReturnsFalse() {
+		$factory = new RdfWriterFactory();
+		$this->assertFalse( $factory->getFormatName( 'invalid' ) );
 	}
 
 	public function provideFormats() {
@@ -98,6 +110,12 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testGivenInvalidFormat_getMimeTypesThrowsException() {
+		$factory = new RdfWriterFactory();
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$factory->getMimeTypes( 'invalid' );
+	}
+
 	public function testGetFileExtensions() {
 		$factory = new RdfWriterFactory();
 
@@ -106,6 +124,12 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 
 			$this->assertInternalType( 'string', $extension );
 		}
+	}
+
+	public function testGivenInvalidFormat_getFileExtensionsThrowsException() {
+		$factory = new RdfWriterFactory();
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$factory->getFileExtension( 'invalid' );
 	}
 
 }
