@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_7b3719ac",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T09:19:57Z",
+      "side": 1,
+      "message": "I could reword this a bit, but it would still say \"Entity\" because this is how the class is called and what it does. This did not changed with this patch.",
+      "parentUuid": "6eaa8f54_bb59112f",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_5ba01df1",
         "filename": "view/src/EntityView.php",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_9bebf508",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T09:19:57Z",
+      "side": 1,
+      "message": "I rearranged this because it *is* needed. Otherwise I would not have touched this. See below.",
+      "parentUuid": "6eaa8f54_fb5f8912",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_db640de4",
         "filename": "view/src/EntityView.php",
         "patchSetId": 1
@@ -64,6 +100,24 @@
       "writtenOn": "2015-12-23T09:07:07Z",
       "side": 1,
       "message": "we don\u0027t need $id if the entity is not a FingerprintProvider.\n\ni would put that inside the if block, and (it\u0027s a matter of taste) I would directly use $entity-\u003egetId() below instead of setting the local $id variable.",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_fbdc6979",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T09:19:57Z",
+      "side": 1,
+      "message": "This would constantly trigger warnings in code analysis tools like PHPStorm. You see, inside the if block the object is a FingerprintProvider. There is no getId method on a FingerprintProvider.\n\ngetId is cheap.\n\nSame above.",
+      "parentUuid": "6eaa8f54_db640de4",
       "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
