@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_41ad8ce6",
+        "filename": "lib/includes/formatters/EntityIdValueFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T15:57:42Z",
+      "side": 1,
+      "message": "Don\u0027t think this comment is very helpful… but it also doesn\u0027t harm.",
+      "revId": "2f7d903291ecdeb01c15a7e996dc7d11dea5a58d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
