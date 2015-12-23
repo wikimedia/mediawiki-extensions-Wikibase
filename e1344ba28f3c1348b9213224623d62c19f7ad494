@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_5b0c9e45",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T09:00:46Z",
+      "side": 1,
+      "message": "Ok, the shift() critical for this is in the same file, a few lines above.",
+      "parentUuid": "8ead036b_23b8dde1",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_43bdd9d0",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
         "patchSetId": 4
@@ -87,6 +105,41 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_1b062624",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T09:00:46Z",
+      "side": 1,
+      "message": "Because it does not know which value belongs to each DOM node at this point. That\u0027s why the \"search statement GUID\" code is there in the ViewFactory.",
+      "parentUuid": "8ead036b_43bdd9d0",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_8fe734df",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T09:00:46Z",
+      "side": 1,
+      "message": "I\u0027m worried about the performance of this. This iterates all statements in all statement groups, and does this in a nested loop for all statementviews in all statementgroupviews. Note that getItemContainer does cloning!",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ead036b_a3bfeda6",
         "filename": "view/resources/wikibase/view/ViewFactory.js",
         "patchSetId": 4
@@ -98,6 +151,24 @@
       "writtenOn": "2015-12-09T16:57:21Z",
       "side": 1,
       "message": "\"Optionally\"? So the doc line should be [propertyId]?",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_8fe89478",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T09:00:46Z",
+      "side": 1,
+      "message": "I see, brackets would be misleading because the parameter must be there, but can be a \"falsy\" value.",
+      "parentUuid": "8ead036b_a3bfeda6",
       "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +203,24 @@
       "writtenOn": "2015-12-09T16:57:21Z",
       "side": 1,
       "message": "I would prefer /\\bwikibase-statement-(\\w+\\b)/.\n\nOr a data attribute.",
+      "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_bb1d927a",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T09:00:46Z",
+      "side": 1,
+      "message": "Oh, \\w does not work, because it contains $ and dashes.",
+      "parentUuid": "8ead036b_c3a5499c",
       "revId": "e1344ba28f3c1348b9213224623d62c19f7ad494",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
