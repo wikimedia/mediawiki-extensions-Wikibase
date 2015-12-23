@@ -3,6 +3,11 @@
 	<!-- See https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml -->
 	<rule ref="vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.SingleSpaceBeforeSingleLineComment" />
+
+		<!-- FIXME: Temporary disabled because of performance reasons. -->
+		<exclude name="Generic.Functions.CallTimePassByReference" />
+		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables" />
+		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace" />
 	</rule>
 
 	<rule ref="Generic.Classes.DuplicateClassName.Found">
