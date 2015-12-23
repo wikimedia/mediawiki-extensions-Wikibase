@@ -48,8 +48,8 @@ class ChangePruner {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $batchSize, $keepSeconds, $graceSeconds, $ignoreDispatch ) {
-		if ( !is_int( $batchSize ) || $batchSize < 0 ) {
-			throw new InvalidArgumentException( '$batchSize must be a non-negative integer' );
+		if ( !is_int( $batchSize ) || $batchSize <= 0 ) {
+			throw new InvalidArgumentException( '$batchSize must be a positive integer' );
 		}
 
 		if ( !is_int( $keepSeconds ) || $keepSeconds < 0 ) {
@@ -120,7 +120,12 @@ class ChangePruner {
 			}
 		}
 
-		return $this->limitCutoffTimestamp( wfTimestamp( TS_MW, $until ) );
+		$limitedTimestamp = $this->limitCutoffTimestamp( wfTimestamp( TS_MW, $until ) );
+
+		// Add one second just to make sure we delete at least one second worth of data
+		// as sometimes there are more edits in a single second than $this->batchSize
+		// (the peak on Wikidata is almost 550).
+		return wfTimestamp( TS_MW, wfTimestamp( TS_UNIX, $limitedTimestamp ) + 1 );
 	}
 
 	/**
@@ -139,7 +144,7 @@ class ChangePruner {
 			array( 'change_time < ' . $dbr->addQuotes( $until ) ),
 			__METHOD__,
 			array(
-				'OFFSET' => $this->batchSize,
+				'OFFSET' => $this->batchSize - 1,
 				'ORDER BY' => 'change_time ASC',
 			)
 		);
