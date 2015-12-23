@@ -7,6 +7,10 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 
 /**
+ * A container for all labels, all descriptions and all aliases (in all languages) of entities that
+ * support all three term types. Should not be used for entity types that only support one or two of
+ * these term types.
+ *
  * @since 0.7.3
  *
  * @licence GNU GPL v2+
