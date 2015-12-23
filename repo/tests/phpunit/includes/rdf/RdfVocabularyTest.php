@@ -13,6 +13,10 @@ use Wikibase\Rdf\RdfVocabulary;
 /**
  * @covers Wikibase\Rdf\RdfVocabulary
  *
+ * @group Wikibase
+ * @group WikibaseRepo
+ * @group WikibaseRdf
+ *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
