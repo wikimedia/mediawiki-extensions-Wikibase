@@ -78,7 +78,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {*}
+	 * @return {wikibase.datamodel.GroupableCollection}
 	 */
 	getItemContainer: function() {
 		// Do not allow altering the encapsulated container.
@@ -86,7 +86,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {*} groupableCollection
+	 * @param {wikibase.datamodel.GroupableCollection} groupableCollection
 	 *
 	 * @throws {Error} when passed GroupableCollection instance contains an item whose key does not
 	 *         match the key registered with the Group instance.
@@ -108,7 +108,7 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {*} groupableCollection
+	 * @param {wikibase.datamodel.GroupableCollection} groupableCollection
 	 * @return {string}
 	 * @private
 	 */
