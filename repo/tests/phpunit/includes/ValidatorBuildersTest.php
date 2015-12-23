@@ -30,7 +30,7 @@ use Wikibase\Repo\ValidatorBuilders;
  */
 class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
-	protected function newValidatorBuilders() {
+	private function newValidatorBuilders() {
 		$entityIdParser = new BasicEntityIdParser();
 
 		$q8 = new Item( new ItemId( 'Q8' ) );
@@ -54,10 +54,26 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			$entityIdParser,
 			$urlSchemes,
 			'http://qudt.org/vocab/',
-			$contentLanguages
+			$contentLanguages,
+			$this->getCachingCommonsMediaFileNameLookup()
 		);
 
 		return $builders;
+	}
+
+	private function getCachingCommonsMediaFileNameLookup() {
+		$fileNameLookup = $this->getMockBuilder( 'Wikibase\Repo\CachingCommonsMediaFileNameLookup' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fileNameLookup->expects( $this->any() )
+			->method( 'lookupFileName' )
+			->with( $this->isType( 'string' ) )
+			->will( $this->returnCallback( function( $fileName ) {
+				return strpos( $fileName, 'NOT-FOUND' ) === false ? $fileName : null;
+			} ) );
+
+		return $fileNameLookup;
 	}
 
 	public function provideDataTypeValidation() {
@@ -103,6 +119,7 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 			array( 'commonsMedia', new StringValue( 'Äöü.jpg' ), true, 'Unicode support' ),
 			array( 'commonsMedia', new StringValue( ' Foo.jpg' ), false, 'media name with leading space' ),
 			array( 'commonsMedia', new StringValue( 'Foo.jpg ' ), false, 'media name with trailing space' ),
+			array( 'commonsMedia', new StringValue( 'Foo-NOT-FOUND.jpg' ), false, 'file not found' ),
 
 			//string
 			array( 'string', 'Foo', false, 'StringValue expected, string supplied' ),
