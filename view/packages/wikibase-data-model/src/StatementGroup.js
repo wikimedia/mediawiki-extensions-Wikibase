@@ -13,12 +13,13 @@ var PARENT = wb.datamodel.Group;
  *
  * @constructor
  *
+ * @param {string} propertyId
  * @param {wikibase.datamodel.StatementList} [statementList=new wikibase.datamodel.StatementList()]
  */
 wb.datamodel.StatementGroup = util.inherit(
 	'WbDataModelStatementGroup',
 	PARENT,
-	function( propertyId, statementList ) {
+	function WbDataModelStatementGroup( propertyId, statementList ) {
 		PARENT.call( this, propertyId, wb.datamodel.StatementList, 'getPropertyIds', statementList );
 	}
 );
