@@ -7,9 +7,11 @@ use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
+use HashBagOStuff;
 use Hooks;
 use IContextSource;
 use Language;
+use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
@@ -67,6 +69,7 @@ use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Repo\Api\ApiHelperFactory;
+use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
@@ -217,6 +220,11 @@ class WikibaseRepo {
 	private $valueSnakRdfBuilderFactory;
 
 	/**
+	 * @var CachingCommonsMediaFileNameLookup|null
+	 */
+	private $cachingCommonsMediaFileNameLookup = null;
+
+	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @since 0.4
@@ -275,7 +283,8 @@ class WikibaseRepo {
 			$this->getEntityIdParser(),
 			$urlSchemes,
 			$this->getVocabularyBaseUri(),
-			$this->getMonolingualTextLanguages()
+			$this->getMonolingualTextLanguages(),
+			$this->getCachingCommonsMediaFileNameLookup()
 		);
 	}
 
@@ -1419,6 +1428,20 @@ class WikibaseRepo {
 	 */
 	public function getTermsLanguages() {
 		return new MediaWikiContentLanguages();
+	}
+
+	/**
+	 * @return CachingCommonsMediaFileNameLookup
+	 */
+	public function getCachingCommonsMediaFileNameLookup() {
+		if ( $this->cachingCommonsMediaFileNameLookup === null ) {
+			$this->cachingCommonsMediaFileNameLookup = new CachingCommonsMediaFileNameLookup(
+				new MediaWikiPageNameNormalizer( 'https://commons.wikimedia.org/w/api.php' ),
+				new HashBagOStuff()
+			);
+		}
+
+		return $this->cachingCommonsMediaFileNameLookup;
 	}
 
 	private function getHtmlSnakFormatterFactory() {

@@ -362,4 +362,9 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Rdf\ValueSnakRdfBuilderFactory', $factory );
 	}
 
+	public function testGetCachingCommonsMediaFileNameLookup() {
+		$lookup = $this->getWikibaseRepo()->getCachingCommonsMediaFileNameLookup();
+		$this->assertInstanceOf( 'Wikibase\Repo\CachingCommonsMediaFileNameLookup', $lookup );
+	}
+
 }
