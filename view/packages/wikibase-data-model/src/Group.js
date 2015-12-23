@@ -29,9 +29,6 @@ var SELF = wb.datamodel.Group = function WbDataModelGroup(
 	if( !$.isFunction( GroupableCollectionConstructor ) ) {
 		throw new Error( 'Item container constructor needs to be a Function' );
 	}
-	if( !( ( new GroupableCollectionConstructor() ) instanceof wb.datamodel.GroupableCollection ) ) {
-		throw new Error( 'Item container constructor needs to implement GroupableCollection' );
-	}
 	if( !$.isFunction(
 		GroupableCollectionConstructor.prototype[groupableCollectionGetKeysFunctionName]
 	) ) {
@@ -40,7 +37,6 @@ var SELF = wb.datamodel.Group = function WbDataModelGroup(
 	}
 
 	this._key = key;
-	this._GroupableCollectionConstructor = GroupableCollectionConstructor;
 	this._groupableCollectionGetKeysFunctionName = groupableCollectionGetKeysFunctionName;
 	this.setItemContainer( groupableCollection || new GroupableCollectionConstructor() );
 };
@@ -51,12 +47,6 @@ $.extend( SELF.prototype, {
 	 * @private
 	 */
 	_key: null,
-
-	/**
-	 * @property {Function}
-	 * @private
-	 */
-	_GroupableCollectionConstructor: null,
 
 	/**
 	 * @property {string}
@@ -81,8 +71,7 @@ $.extend( SELF.prototype, {
 	 * @return {wikibase.datamodel.GroupableCollection}
 	 */
 	getItemContainer: function() {
-		// Do not allow altering the encapsulated container.
-		return new this._GroupableCollectionConstructor( this._groupableCollection.toArray() );
+		return this._groupableCollection;
 	},
 
 	/**
@@ -92,6 +81,10 @@ $.extend( SELF.prototype, {
 	 *         match the key registered with the Group instance.
 	 */
 	setItemContainer: function( groupableCollection ) {
+		if( !( groupableCollection instanceof wb.datamodel.GroupableCollection ) ) {
+			throw new Error( 'groupableCollection must be a GroupableCollection' );
+		}
+
 		var keys = this._getItemContainerKeys( groupableCollection );
 
 		for( var i = 0; i < keys.length; i++ ) {
@@ -101,10 +94,7 @@ $.extend( SELF.prototype, {
 			}
 		}
 
-		// Clone the container to prevent manipulation of the items using the original container.
-		this._groupableCollection = new this._GroupableCollectionConstructor(
-			groupableCollection.toArray()
-		);
+		this._groupableCollection = groupableCollection;
 	},
 
 	/**
