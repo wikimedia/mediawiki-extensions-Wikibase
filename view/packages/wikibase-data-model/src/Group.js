@@ -162,7 +162,7 @@ $.extend( SELF.prototype, {
 		return group === this
 			|| group instanceof SELF
 				&& this._key === group.getKey()
-				&& this._groupableCollection.equals( group.getItemContainer() );
+				&& this._groupableCollection.equals( group._groupableCollection );
 	}
 
 } );
