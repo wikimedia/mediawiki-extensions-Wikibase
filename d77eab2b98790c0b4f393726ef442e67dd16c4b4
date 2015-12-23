@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_9e520369",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "\"Sucks\" why? Please avoid such comments. Better describe the actual reason.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_be4d7fc9",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "Two dots.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_7e95c7e5",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "The only public method is called \"normalize\", but the class name suggests a \"lookup\". One is misleading. Either it\u0027s a lookup, then the method should be called \"exists\". Or it\u0027s a normalizer.\n\nFrom what I see it should be the \"exists\" approach.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_5ec48b11",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "No need for the brackets.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_7ec70716",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "Could shorten out on if ( $fileName \u003d\u003d\u003d \u0027\u0027 ) { return null; }",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_ded71bc3",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "Please factor this block (starting at line 56) out into $this-\u003enormalizeFileName( $fileName );\n\nAnd do not call it \"page name\", because it\u0027s not.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_1e9cd311",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "As far as I can see the string result is never used. What the callers want to know is a boolean \"exists\" information.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_fed217d2",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "fileName",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9ee1a399",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "The caching aspect is not relevant here.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_3ee8af76",
+        "filename": "repo/includes/Validators/CommonsMediaExistsValidator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "This is a bit weird, because it allows to call the method with a string, but this is not documented. We typically do if ( !( $value instanceof StringValue ) ) { throw …; } as the first line.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_fef9b74b",
+        "filename": "repo/includes/Validators/CommonsMediaExistsValidator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T14:55:26Z",
+      "side": 1,
+      "message": "Why is it called a *lookup* when it does normalization?",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
