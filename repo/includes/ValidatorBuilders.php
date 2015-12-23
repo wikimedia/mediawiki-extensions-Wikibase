@@ -9,7 +9,9 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Validators\AlternativeValidator;
+use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataFieldValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
@@ -73,24 +75,32 @@ class ValidatorBuilders {
 	private $contentLanguages;
 
 	/**
+	 * @var CachingCommonsMediaFileNameLookup
+	 */
+	private $cachingCommonsMediaFileNameLookup;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
 	 * @param string $vocabularyBaseUri The base URI for vocabulary concepts.
 	 * @param ContentLanguages $contentLanguages
+	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
 	 */
 	public function __construct(
 		EntityLookup $lookup,
 		EntityIdParser $idParser,
 		array $urlSchemes,
 		$vocabularyBaseUri,
-		ContentLanguages $contentLanguages
+		ContentLanguages $contentLanguages,
+		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
 	) {
 		$this->entityLookup = $lookup;
 		$this->entityIdParser = $idParser;
 		$this->urlSchemes = $urlSchemes;
 		$this->vocabularyBaseUri = $vocabularyBaseUri;
 		$this->contentLanguages = $contentLanguages;
+		$this->cachingCommonsMediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
 	}
 
 	/**
@@ -157,9 +167,7 @@ class ValidatorBuilders {
 		$validators[] = new RegexValidator( '@[#/:\\\\]@u', true ); // no nasty chars
 		// Must contain a non-empty file name and a non-empty, character-only file extension.
 		$validators[] = new RegexValidator( '/.\.\w+$/u' );
-		//TODO: add a validator that checks the rules that MediaWiki imposes on filenames for uploads.
-		//      $wgLegalTitleChars and $wgIllegalFileChars define this, but we need these for the *target* wiki.
-		//TODO: add a validator that uses a foreign DB query to check whether the file actually exists on commons.
+		$validators[] = new CommonsMediaExistsValidator( $this->cachingCommonsMediaFileNameLookup );
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators ) //Note: each validator is fatal
