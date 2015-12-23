@@ -226,7 +226,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					'class' => 'plainlinks',
 					'href' => 'http://www.wikidata.org/wiki/User_talk:Cat'
 				),
-				'content' => 'Talk'
+				'content' => 'talk'
 			),
 			'edit-usercontribs' => array(
 				'tag' => 'a',
@@ -339,7 +339,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					'class' => 'plainlinks',
 					'href' => 'http://www.wikidata.org/wiki/User_talk:Cat'
 				),
-				'content' => 'Talk'
+				'content' => 'talk'
 			),
 			'delete-contribs' => array(
 				'tag' => 'a',
