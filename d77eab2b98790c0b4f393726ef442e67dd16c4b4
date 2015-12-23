@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_a1eb2008",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "I removed that part... this is not especially nice but I came up with a slightly nicer solution.",
+      "parentUuid": "6eaa8f54_9e520369",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_be4d7fc9",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-23T14:55:26Z",
       "side": 1,
       "message": "Two dots.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_61d52847",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_be4d7fc9",
       "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_01f1d4d9",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "Renamed the method to `lookupFileName`, as I want to use this for validation and later on also for normalization.",
+      "parentUuid": "6eaa8f54_7e95c7e5",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_5ec48b11",
         "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2015-12-23T14:55:26Z",
       "side": 1,
       "message": "No need for the brackets.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_a1ffa0a6",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_5ec48b11",
       "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_61d8c858",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "We have a StringLengthValidator in front of this which will make sure this is never going to happen in the real world.",
+      "parentUuid": "6eaa8f54_7ec70716",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_ded71bc3",
         "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2015-12-23T14:55:26Z",
       "side": 1,
       "message": "Please factor this block (starting at line 56) out into $this-\u003enormalizeFileName( $fileName );\n\nAnd do not call it \"page name\", because it\u0027s not.",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_019b1469",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_ded71bc3",
       "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_2123b055",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "It\u0027s not used right now, but I want to make use of it for file name normalization in a follow up.",
+      "parentUuid": "6eaa8f54_1e9cd311",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_fed217d2",
         "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2015-12-23T14:55:26Z",
       "side": 1,
       "message": "fileName",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_812ce446",
+        "filename": "repo/includes/CachingCommonsMediaFileNameLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_fed217d2",
       "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_61da0823",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "Renamed.",
+      "parentUuid": "6eaa8f54_9ee1a399",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_3ee8af76",
         "filename": "repo/includes/Validators/CommonsMediaExistsValidator.php",
         "patchSetId": 3
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_413d8c28",
+        "filename": "repo/includes/Validators/CommonsMediaExistsValidator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "It is supposed to support both… changed the documentation to reflect that now. Also using Wikimedia\\Assert\\Assert now.",
+      "parentUuid": "6eaa8f54_3ee8af76",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_fef9b74b",
         "filename": "repo/includes/Validators/CommonsMediaExistsValidator.php",
         "patchSetId": 3
@@ -183,6 +363,24 @@
       "writtenOn": "2015-12-23T14:55:26Z",
       "side": 1,
       "message": "Why is it called a *lookup* when it does normalization?",
+      "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_41e7ccdf",
+        "filename": "repo/includes/Validators/CommonsMediaExistsValidator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T17:44:00Z",
+      "side": 1,
+      "message": "Changed, see other file.",
+      "parentUuid": "6eaa8f54_fef9b74b",
       "revId": "d77eab2b98790c0b4f393726ef442e67dd16c4b4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
