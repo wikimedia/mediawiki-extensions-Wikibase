@@ -121,6 +121,24 @@
       "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9b51b5df",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-23T09:25:47Z",
+      "side": 1,
+      "message": "even inside the if block, $entity is still also instanceof EntityDocument.\n\nseems like the code analysis tools are somewhat naive :/",
+      "parentUuid": "6eaa8f54_fbdc6979",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
