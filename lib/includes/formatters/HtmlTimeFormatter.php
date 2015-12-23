@@ -9,6 +9,14 @@ use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 
 /**
+ * A value formatter that creates a basic, single-line HTML representation of a TimeValue's date,
+ * time and calendar model. The calendar model is added in superscript when needed, either because
+ * it's not obvious (e.g. a date in 1800 could be Julian or Gregorian) or because it's different
+ * from what the parsers would detect (where 1582 and before is Julian, and 1583 and later is
+ * Gregorian).
+ *
+ * @see Wikibase\Lib\TimeDetailsFormatter
+ *
  * @since 0.5
  *
  * @license GNU GPL v2+
@@ -30,9 +38,13 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param FormatterOptions|null $options
-	 * @param ValueFormatter $dateTimeFormatter
+	 * @param ValueFormatter $dateTimeFormatter A value formatter that accepts TimeValue objects and
+	 *  returns the formatted date and time, but not the calendar model. Must return HTML.
 	 */
-	public function __construct( FormatterOptions $options = null, ValueFormatter $dateTimeFormatter ) {
+	public function __construct(
+		FormatterOptions $options = null,
+		ValueFormatter $dateTimeFormatter
+	) {
 		parent::__construct( $options );
 
 		$this->dateTimeFormatter = $dateTimeFormatter;

@@ -20,7 +20,7 @@ class EntityIdLinkFormatter extends EntityIdTitleFormatter {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return string
+	 * @return string Wikitext
 	 */
 	public function formatEntityId( EntityId $entityId ) {
 		$title = parent::formatEntityId( $entityId );
