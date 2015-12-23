@@ -402,7 +402,8 @@ class ByPropertyIdArray extends ArrayObject {
 	 * the end of its "property group" or - if no objects featuring the same property exist - to the
 	 * absolute end of the array.
 	 * Specifying an index outside a "property group" will place the new object at the specified
-	 * index with the existing "property group" objects being shifted towards the new new object.
+	 * index with the existing "property group" objects being shifted towards the new object.
+	 *
 	 * @since 0.5
 	 *
 	 * @param object $object

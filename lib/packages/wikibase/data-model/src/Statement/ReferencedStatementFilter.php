@@ -3,6 +3,9 @@
 namespace Wikibase\DataModel\Statement;
 
 /**
+ * A filter that only accepts statements with one or more references, and rejects all unreferenced
+ * statements.
+ *
  * @since 4.1
  *
  * @licence GNU GPL v2+
