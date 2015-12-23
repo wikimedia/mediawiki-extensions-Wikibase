@@ -63,7 +63,7 @@ method EntityContent::getOnSaveValidators() to be applied during
 saving.
 
 '''NOTE:''' hard constraints must always consider the full Entity, and
-compare it to the actual current state of the dta model, as stored in
+compare it to the actual current state of the data model, as stored in
 the database.
 
 Currently, the following hard global constraints are enforced for the
