@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_bb59112f",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-23T09:07:07Z",
+      "side": 1,
+      "message": "do you want to update the docs accordingly?",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_5ba01df1",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-23T09:07:07Z",
+      "side": 1,
+      "message": "and here?",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_fb5f8912",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-23T09:07:07Z",
+      "side": 1,
+      "message": "no need to set $id if $entity is not a FingerprintProvider",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_db640de4",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2015-12-23T09:07:07Z",
+      "side": 1,
+      "message": "we don\u0027t need $id if the entity is not a FingerprintProvider.\n\ni would put that inside the if block, and (it\u0027s a matter of taste) I would directly use $entity-\u003egetId() below instead of setting the local $id variable.",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
