@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_4157cc05",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T15:49:33Z",
+      "side": 1,
+      "message": "commons media uses the generic string validators here",
+      "revId": "ea8c1a5634823fcc102feda973f5701744d1823a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

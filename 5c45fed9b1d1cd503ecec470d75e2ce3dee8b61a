@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_a147a04f",
+        "filename": "repo/includes/ValidatorBuilders.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-23T15:49:33Z",
+      "side": 0,
+      "message": "commons media used to use the media validators",
+      "revId": "5c45fed9b1d1cd503ecec470d75e2ce3dee8b61a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
