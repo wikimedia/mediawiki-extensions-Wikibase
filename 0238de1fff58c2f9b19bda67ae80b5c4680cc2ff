@@ -175,6 +175,24 @@
       "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_1b72a5e2",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-23T11:07:10Z",
+      "side": 1,
+      "message": "I\u0027m talking about PHPStorm. I would call its analysis strict. Code with feature detection based on instanceof is odd anyway and should be avoided. I find the way the code is arranged now well readable. Only one aspect of the object is used at a time, even if it may include multiple interfaces. Having the two lines \"$entity-\u003egetFingerprint()\" and \"$entity-\u003egetId()\" creates the impression that either EntityDocument or FingerprintProvider does have both methods, but this is not true.",
+      "parentUuid": "6eaa8f54_9b51b5df",
+      "revId": "0238de1fff58c2f9b19bda67ae80b5c4680cc2ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
