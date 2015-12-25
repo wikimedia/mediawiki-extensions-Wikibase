@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_4740375b",
+        "filename": "lib/tests/phpunit/LanguageNameLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2015-12-25T22:30:26Z",
+      "side": 1,
+      "message": "The check for the name in isLoaded is case-sensitive, in the depending change, you named the extension CLDR, not cldr :) You should use CLDR or cldr, but the same case in both use cases.",
+      "revId": "d548607b8eb22ee69279f316cfef8f4b26f97603",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
