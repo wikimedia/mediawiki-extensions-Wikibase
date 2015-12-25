@@ -48,7 +48,7 @@ class LanguageNameLookupTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider getNameProvider
 	 */
 	public function testGetName( $lang, $in, $expected ) {
-		if ( $in !== null && !defined( 'CLDR_VERSION' ) ) {
+		if ( $in !== null && !\ExtensionRegistry::getInstance()->isLoaded( 'CLDR' ) ) {
 			$this->markTestSkipped( 'CLDR extension required for full language name support' );
 		}
 
