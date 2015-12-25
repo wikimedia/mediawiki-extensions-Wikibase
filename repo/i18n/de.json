@@ -481,5 +481,6 @@
 	"apihelp-wbsetsitelink-param-title": "Titel der zuzuordnenden Seite.\nIst zusammen mit „Website“ zu verwenden, um einen vollständigen Websitelink zu erzeugen.",
 	"apihelp-wbsetsitelink-param-baserevid": "Die numerische Kennung für die Version, auf der die Änderung basiert.\nSie wird verwendet, um Konflikte während des Speicherns zu erkennen.",
 	"apihelp-wbsetsitelink-param-summary": "Zusammenfassung für die Bearbeitung. \nEs wird ein automatisch generierter Kommentar vorangestellt. Die maximale Länge des automatischen Kommentars und der Zusammenfassung darf 260 Zeichen nicht überschreiten. Alles über dieser Begrenzung wird abgeschnitten.",
-	"apihelp-wbsetsitelink-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „Bot“ angehört."
+	"apihelp-wbsetsitelink-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „Bot“ angehört.",
+	"apihelp-wbsetsitelink-example-4": "Entfernt den deutschen Websitelink von dem Objekt"
 }

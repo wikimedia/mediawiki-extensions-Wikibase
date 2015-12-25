@@ -37,7 +37,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "статия",
 	"wikibase-description-input-help-message": "Въведете кратко описание на $1.",
 	"wikibase-entitytermsview-input-help-message": "Въведете етикет на обекта, кратко описание и псевдоними за съответния език.",
-	"wikibase-statements": "Изявления",
+	"wikibase-statementsection-statements": "Изявления",
 	"wikibase-sitelinks": "Списък на страниците, свързани с този обект",
 	"wikibase-sitelinks-empty": "За този обект все още липсват междуезикови препратки.",
 	"wikibase-sitelinks-special": "Други сайтове",

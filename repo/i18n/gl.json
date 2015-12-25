@@ -310,6 +310,7 @@
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-url-body": "Campo de datos literal para un enderezo URL. Os enderezos URL están restrinxidos aos protocolos tamén soportados polas ligazóns externas en texto wiki.",
 	"wikibase-listdatatypes-external-id-head": "Identificador externo",
+	"wikibase-listdatatypes-external-id-body": "Campo de dato literal para un identificador externo. Os identificadores externos poden ser  vinculados automaticamente a un recurso autorizado para a súa visualización.",
 	"wikibase-concept-uri": "URI do concepto",
 	"wikibase-concept-uri-tooltip": "URI que identifica o concepto descrito por este artigo",
 	"wikibase-add-badges": "Engadir distintivos",
