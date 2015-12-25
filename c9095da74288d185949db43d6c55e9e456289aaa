@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_27c2db39",
+        "filename": "lib/tests/phpunit/LanguageNameLookupTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 890
+      },
+      "writtenOn": "2015-12-25T20:57:47Z",
+      "side": 1,
+      "message": "ehh, no, please don\u0027t do that :) You should use only one system (the ExtensionRegistration):\n!\\ExtensionRegistry::getInstance()-\u003eisLoaded( \u0027cldr\u0027 )\n\nWikibase is splitted into several logical \"namespaces\", so you need to provide the fully qualified path to a class (for MediaWiki classes usually \\ClassName) or add them with the \"code word\" use :) See http://php.net/manual/de/language.namespaces.php for more information :) (That\u0027s what jenkins said in the test).",
+      "revId": "c9095da74288d185949db43d6c55e9e456289aaa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
