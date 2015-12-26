@@ -529,6 +529,7 @@
 	"apihelp-wbsetreference-param-bot": "将此编辑标记为机器人编辑。此URL标记将只在用户属于“bot”用户组时受尊重。",
 	"apihelp-wbsetreference-example-1": "为GUID为Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF的声称创建新的参考",
 	"apihelp-wbsetreference-example-2": "为GUID为Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF的声称设置参考，它的哈希值为1eb8793c002b1d9820c833d234a1b54c8e94187e",
+	"apihelp-wbsetreference-example-3": "为带有GUID Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF的声称添加新的参考文献，并将新参考文献插入至参考文献列表的顶部而不是附加在底部。",
 	"apihelp-wbsetsitelink-description": "将wiki上的一个条目与一个Wikibase项结合，或移除一个已结合的条目。",
 	"apihelp-wbsetsitelink-param-id": "用于实体的标识符，包括前缀。\n同时使用“id”或“site”和“title”。",
 	"apihelp-wbsetsitelink-param-site": "存在对应页面的网站的标识符。\n与“title”一起使用以制作一个完整网站链接。",
