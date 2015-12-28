@@ -7,6 +7,10 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
+ * Immutable value object for a statement id. A statement id consists of the entity id serialization
+ * of the entity it belongs to (e.g. "Q1") and a randomly generated global unique identifier (GUID),
+ * separated by a dollar sign.
+ *
  * @since 3.0
  *
  * @licence GNU GPL v2+
@@ -19,7 +23,14 @@ class StatementGuid implements Comparable {
 	 */
 	const SEPARATOR = '$';
 
+	/**
+	 * @var EntityId
+	 */
 	private $entityId;
+
+	/**
+	 * @var string
+	 */
 	private $serialization;
 
 	/**
@@ -65,7 +76,7 @@ class StatementGuid implements Comparable {
 		}
 
 		return $target instanceof self
-		&& $target->serialization === $this->serialization;
+			&& $target->serialization === $this->serialization;
 	}
 
 	public function __toString() {
