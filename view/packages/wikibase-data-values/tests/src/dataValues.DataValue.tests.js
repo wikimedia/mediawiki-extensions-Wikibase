@@ -19,7 +19,7 @@ define( [
 	 * @abstract
 	 * @since 0.1
 	 */
-	var SELF = dv.tests.DataValueTest = function() {};
+	var SELF = dv.tests.DataValueTest = function DvTestsDataValueTest() {};
 
 	$.extend( SELF.prototype, {
 		/**
