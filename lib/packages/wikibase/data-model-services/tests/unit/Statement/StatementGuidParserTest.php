@@ -3,9 +3,9 @@
 namespace Wikibase\DataModel\Services\Tests\Statement;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
  * @covers Wikibase\DataModel\Services\Statement\StatementGuidParser
@@ -33,6 +33,8 @@ class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
 			array( new StatementGuid( new ItemId( 'q42' ), 'D8404CDA-25E4-4334-AF13-A3290BCD9C0N' ) ),
 			array( new StatementGuid( new ItemId( 'Q1234567' ), 'D4FDE516-F20C-4154-ADCE-7C5B609DFDFF' ) ),
 			array( new StatementGuid( new ItemId( 'Q1' ), 'foo' ) ),
+			array( new StatementGuid( new ItemId( 'Q1' ), '$' ) ),
+			array( new StatementGuid( new ItemId( 'Q1' ), '' ) ),
 		);
 	}
 
@@ -54,6 +56,7 @@ class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
 			array( 'q0' ),
 			array( '1p' ),
 			array( 'Q0$5627445f-43cb-ed6d-3adb-760e85bd17ee' ),
+			array( 'Q1' ),
 		);
 	}
 
