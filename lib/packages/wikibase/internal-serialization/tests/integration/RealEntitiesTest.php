@@ -3,6 +3,8 @@
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
 use Deserializers\Deserializer;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use SplFileInfo;
 
 /**
@@ -45,7 +47,7 @@ class RealEntitiesTest extends \PHPUnit_Framework_TestCase {
 		/**
 		 * @var SplFileInfo $fileInfo
 		 */
-		foreach ( new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $dir ) ) as $fileInfo ) {
+		foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $dir ) ) as $fileInfo ) {
 			if ( $fileInfo->getExtension() === 'json' ) {
 				$argumentLists[] = array(
 					$fileInfo->getFilename(),
