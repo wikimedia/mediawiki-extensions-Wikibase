@@ -28,17 +28,14 @@
     <rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
     <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
 
-    <rule ref="Generic.Metrics.NestingLevel">
-        <properties>
-            <property name="nestingLevel" value="3" />
-            <property name="absoluteNestingLevel" value="3" />
-        </properties>
-    </rule>
-
     <rule ref="Generic.Metrics.CyclomaticComplexity">
         <properties>
             <property name="complexity" value="10" />
-            <property name="absoluteComplexity" value="10" />
+        </properties>
+    </rule>
+    <rule ref="Generic.Metrics.NestingLevel">
+        <properties>
+            <property name="nestingLevel" value="3" />
         </properties>
     </rule>
 
@@ -79,9 +76,8 @@
     <rule ref="Squiz.Functions.GlobalFunction" />
     <rule ref="Squiz.Scope" />
 
-    <rule ref="Squiz.Strings.DoubleQuoteUsage" />
-    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
-        <severity>0</severity>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage">
+        <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
     </rule>
 
     <rule ref="Squiz.WhiteSpace.CastSpacing" />
