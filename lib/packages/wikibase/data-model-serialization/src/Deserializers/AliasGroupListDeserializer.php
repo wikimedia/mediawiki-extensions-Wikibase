@@ -67,6 +67,8 @@ class AliasGroupListDeserializer implements Deserializer {
 
 	/**
 	 * @param array $serialization
+	 *
+	 * @throws DeserializationException
 	 */
 	private function assertCanDeserialize( $serialization ) {
 		if ( !is_array( $serialization ) ) {
