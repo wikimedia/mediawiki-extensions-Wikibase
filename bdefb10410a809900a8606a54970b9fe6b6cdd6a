@@ -16,6 +16,24 @@
       "revId": "bdefb10410a809900a8606a54970b9fe6b6cdd6a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_e96492e3",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1440,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2015-12-28T10:36:43Z",
+      "side": 1,
+      "message": "I want a bot to be able to apply eg. file moves from commons immediately to Wikidata, this might interfere with that (although it seems fairly unlikely). The main cause is that I don\u0027t think that caching will help us here really, because why would the same file name being validated twice in a short period?",
+      "parentUuid": "6eaa8f54_e93d72b9",
+      "revId": "bdefb10410a809900a8606a54970b9fe6b6cdd6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
