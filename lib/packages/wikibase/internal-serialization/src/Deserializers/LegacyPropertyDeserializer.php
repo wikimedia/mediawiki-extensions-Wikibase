@@ -53,7 +53,6 @@ class LegacyPropertyDeserializer implements Deserializer {
 	 * @param array $serialization
 	 *
 	 * @return PropertyId|null
-	 *
 	 * @throws InvalidAttributeException
 	 */
 	private function getPropertyId( array $serialization ) {
@@ -78,7 +77,6 @@ class LegacyPropertyDeserializer implements Deserializer {
 	 * @param array $serialization
 	 *
 	 * @return string
-	 *
 	 * @throws MissingAttributeException
 	 * @throws InvalidAttributeException
 	 */
