@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Jnanaranjan Sahu",
-			"Psubhashish"
+			"Psubhashish",
+			"MKar"
 		]
 	},
 	"tooltip-t-wikibase": "ଡାଟା ଭଣ୍ଡାରଙ୍କୁ ଯୋଡିବା ପାଇଁ ଲିଙ୍କ",
 	"wikibase-comment-update": "{{WBREPONAME}} ଜିନିଷ ବଦଳାଯାଇଥିବା",
 	"wikibase-dataitem": "{{WBREPONAME}} ଜିନିଷ",
-	"wikibase-editlinks": "ଲିଙ୍କଗୁଡିକୁ ବଦଳାଇବେ",
-	"wikibase-editlinkstitle": "ଭାଷା ମଧ୍ୟରେ ଥିବା ଲିଙ୍କଗୁଡିକୁ ବଦଳାଇବେ",
+	"wikibase-editlinks": "ଲିଙ୍କଗୁଡ଼ିକୁ ବଦଳାଇବେ",
+	"wikibase-editlinkstitle": "ଭାଷା ମଧ୍ୟରେ ଥିବା ଲିଙ୍କଗୁଡ଼ିକୁ ବଦଳାଇବେ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ଲୁଚାଇବେ",
 	"wikibase-rc-hide-wikidata-show": "ଦେଖିବେ",

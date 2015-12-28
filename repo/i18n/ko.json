@@ -276,6 +276,7 @@
 	"wikibase-listdatatypes-time-body": "시간 값에 대한 리터럴 데이터 필드입니다. 약간의 정밀도와 경계로 된 시간으로 주어집니다. 내부에서는 시간이 항상 선발 그레고리력 형식으로 저장되어 있지만 다른 형식도 입력 및 출력 시에 사용할 수 있습니다.\n* time – 어느 시점을 나타내는 명시적인 값으로 ISO 8601 형식과 닮은 타임스탬프(예시: +2013-01-01T00:00:00Z)로 표현됩니다. 연도는 항상 부호가 붙으며 1자리에서 16자리 사이가 되도록 앞에 0이 붙습니다.\n* timezone – 부호가 있는 정수로 명시적인 값입니다. UTC로부터의 오프셋을 분에 지정된 시간대 정보입니다.\n* before – 지정된 시간부터 현재까지 단위 시간에 얼마나 많은 분이 걸리는지 나타내는 명시적인 정수 값입니다. 단위는 precision으로 주어집니다.\n* after – 지정된 시간까지 현재에서 단위 시간에 얼마나 많은 분이 걸리는지 나타내는 명시적인 정수 값입니다. 단위는 precision으로 주어집니다.\n* precision – shortint 형식의 명시적인 값입니다. 수는 다음과 같은 의미가 있습니다: 0 - 10억 년, 1 - 1억 년, ..., 6 - 천 년, 7 - 1세기, 8 - 10년, 9 - 1년, 10 - 월, 11 - 일, 12 - 시, 13 - 분, 14 - 초.\n* calendarmodel – URI로 지정된 명시적인 값입니다. 시간을 표시하는데 사용되어야 하는 역법을 식별합니다.",
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-url-body": "URL에 대한 리터럴 데이터 필드입니다. URL은 또한 위키텍스트의 바깥 링크에 대해 지원되는 프로토콜로 제한됩니다.",
+	"wikibase-listdatatypes-external-id-head": "외부 식별자",
 	"wikibase-concept-uri": "개념 URI",
 	"wikibase-add-badges": "배지 추가",
 	"datatypes-type-url": "URL",
