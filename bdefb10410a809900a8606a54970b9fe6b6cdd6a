@@ -34,6 +34,24 @@
       "revId": "bdefb10410a809900a8606a54970b9fe6b6cdd6a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_4941260d",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1440,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2015-12-28T11:10:13Z",
+      "side": 1,
+      "message": "Depends. When users start typing, short file names like \"a\", \"b\", and so on are probably validated every day.\n\nWhen a user adds a series of images with similar file names, e.g. \"Coats of arms of X.svg\", prefixes like \"Coats\", \"Coats of arms\", and so on are probably validated a few dozen times in a short period.\n\nCurrently all this can not happen because we have a regex validator that checks for a file extension.\n\nFor performance reasons it\u0027s probably a good idea to make this regex validator more specific. There is a TODO for this in our code.",
+      "parentUuid": "6eaa8f54_e96492e3",
+      "revId": "bdefb10410a809900a8606a54970b9fe6b6cdd6a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
