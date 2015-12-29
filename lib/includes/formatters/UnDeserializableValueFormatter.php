@@ -3,7 +3,6 @@
 namespace Wikibase\Lib;
 
 use DataValues\DataValue;
-use Message;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
 
@@ -17,7 +16,7 @@ use ValueFormatters\ValueFormatterBase;
  */
 class UnDeserializableValueFormatter extends ValueFormatterBase {
 
-	const MESSAGE = 'message';
+	const OPT_MESSAGE_KEY = 'unDeserializableMessage';
 
 	/**
 	 * @param FormatterOptions|null $options
@@ -25,7 +24,7 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	public function __construct( FormatterOptions $options = null ) {
 		parent::__construct( $options );
 
-		$this->defaultOption( self::MESSAGE, new Message( 'wikibase-undeserializable-value' ) );
+		$this->defaultOption( self::OPT_MESSAGE_KEY, 'wikibase-undeserializable-value' );
 	}
 
 	/**
@@ -38,13 +37,10 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	 * @return string
 	 */
 	public function format( $dataValue ) {
-		$langCode = $this->options->getOption( self::OPT_LANG );
+		$languageCode = $this->options->getOption( self::OPT_LANG );
+		$messageKey = $this->options->getOption( self::OPT_MESSAGE_KEY );
 
-		/** @var Message $msg */
-		$msg = $this->options->getOption( self::MESSAGE );
-		$msg = $msg->inLanguage( $langCode );
-
-		return $msg->text();
+		return wfMessage( $messageKey )->inLanguage( $languageCode )->text();
 	}
 
 }
