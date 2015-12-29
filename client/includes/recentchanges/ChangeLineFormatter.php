@@ -295,7 +295,7 @@ class ChangeLineFormatter {
 		$link = $this->repoLinker->getPageUrl( "Special:Contributions/$userName" );
 
 		if ( $text === null ) {
-			$text = wfMessage( 'contribslink' );
+			$text = wfMessage( 'contribslink' )->text();
 		}
 
 		return $this->repoLinker->formatLink( $link, $text );

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\LinkedData;
 
 use HttpError;
+use Message;
 use OutputPage;
 use SquidUpdate;
 use WebRequest;
@@ -210,13 +211,13 @@ class EntityDataRequestHandler {
 		// If there is no ID, fail
 		if ( $id === null || $id === '' ) {
 			//TODO: different error message?
-			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
+			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id', $id ) );
 		}
 
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
 		} catch ( EntityIdParsingException $ex ) {
-			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id' )->params( $id ) );
+			throw new HttpError( 400, wfMessage( 'wikibase-entitydata-bad-id', $id ) );
 		}
 
 		//XXX: allow for logged in users only?
@@ -275,7 +276,8 @@ class EntityDataRequestHandler {
 		$canonicalFormat = $this->entityDataFormatProvider->getFormatName( $format );
 
 		if ( $canonicalFormat === null ) {
-			throw new HttpError( 415, wfMessage( 'wikibase-entitydata-unsupported-format' )->params( $format ) );
+			$msg = wfMessage( 'wikibase-entitydata-unsupported-format', $format );
+			throw new HttpError( 415, $msg );
 		}
 
 		return $canonicalFormat;
@@ -335,7 +337,8 @@ class EntityDataRequestHandler {
 
 		if ( $format === null ) {
 			$mimeTypes = implode( ', ', $this->entityDataFormatProvider->getSupportedMimeTypes() );
-			throw new HttpError( 406, wfMessage( 'wikibase-entitydata-not-acceptable' )->params( $mimeTypes ) );
+			$msg = wfMessage( 'wikibase-entitydata-not-acceptable', $mimeTypes );
+			throw new HttpError( 406, $msg );
 		}
 
 		$format = $this->getCanonicalFormat( $format );
@@ -368,7 +371,8 @@ class EntityDataRequestHandler {
 
 			if ( $entityRevision === null ) {
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": entity not found: $prefixedId" );
-				throw new HttpError( 404, wfMessage( 'wikibase-entitydata-not-found' )->params( $prefixedId ) );
+				$msg = wfMessage( 'wikibase-entitydata-not-found', $prefixedId );
+				throw new HttpError( 404, $msg );
 			}
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$redirectRevision = new RedirectRevision(
@@ -382,17 +386,17 @@ class EntityDataRequestHandler {
 			} else {
 				// The requested revision is a redirect
 				wfDebugLog( __CLASS__, __FUNCTION__ . ": revision $revision of $prefixedId is a redirect: $ex" );
-				$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
-				throw new HttpError( 400, $msg->params( $prefixedId, $revision ) );
+				$msg = wfMessage( 'wikibase-entitydata-bad-revision', $prefixedId, $revision );
+				throw new HttpError( 400, $msg );
 			}
 		} catch ( BadRevisionException $ex ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": could not load revision $revision or $prefixedId: $ex" );
-			$msg = wfMessage( 'wikibase-entitydata-bad-revision' );
-			throw new HttpError( 404, $msg->params( $prefixedId, $revision ) );
+			$msg = wfMessage( 'wikibase-entitydata-bad-revision', $prefixedId, $revision );
+			throw new HttpError( 404, $msg );
 		} catch ( StorageException $ex ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load $prefixedId: $ex (revision $revision)" );
-			$msg = wfMessage( 'wikibase-entitydata-storage-error' );
-			throw new HttpError( 500, $msg->params( $prefixedId, $revision ) );
+			$msg = wfMessage( 'wikibase-entitydata-storage-error', $prefixedId, $revision );
+			throw new HttpError( 500, $msg );
 		}
 
 		return array( $entityRevision, $redirectRevision );
