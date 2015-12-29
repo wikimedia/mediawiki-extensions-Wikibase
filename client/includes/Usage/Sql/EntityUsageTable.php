@@ -8,6 +8,7 @@ use DBUnexpectedError;
 use InvalidArgumentException;
 use Iterator;
 use MWException;
+use Traversable;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\DataModel\Entity\EntityId;
@@ -271,11 +272,11 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * @param array|Iterator $rows
+	 * @param Traversable $rows
 	 *
 	 * @return EntityUsage[]
 	 */
-	private function convertRowsToUsages( $rows ) {
+	private function convertRowsToUsages( Traversable $rows ) {
 		$usages = array();
 
 		foreach ( $rows as $object ) {
@@ -375,11 +376,11 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * @param array|Iterator $rows
+	 * @param Traversable $rows
 	 *
 	 * @return PageEntityUsages[]
 	 */
-	private function foldRowsIntoPageEntityUsages( $rows ) {
+	private function foldRowsIntoPageEntityUsages( Traversable $rows ) {
 		$usagesPerPage = array();
 
 		foreach ( $rows as $row ) {
