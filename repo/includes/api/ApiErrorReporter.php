@@ -54,29 +54,6 @@ class ApiErrorReporter {
 	}
 
 	/**
-	 * @note This is a workaround for the fact that Message caches the message text and
-	 * doesn't reset it when the language changes. This can be removed once
-	 * https://gerrit.wikimedia.org/r/125388 or an equivalent is merged.
-	 *
-	 * @param Message $message
-	 * @param Language|string $language
-	 *
-	 * @return Message
-	 */
-	private function forceMessageLanguage( Message $message, $language ) {
-		if ( is_string( $language ) ) {
-			$language = Language::factory( $language );
-		}
-
-		if ( $message->getLanguage()->getCode() !== $language->getCode() ) {
-			// Create a new message object to bypass any caching issues
-			$message = new Message( $message->getKey(), $message->getParams(), $language );
-		}
-
-		return $message;
-	}
-
-	/**
 	 * Reports any warnings in the Status object on the warnings section
 	 * of the result.
 	 *
@@ -222,7 +199,7 @@ class ApiErrorReporter {
 	 * @throws LogicException
 	 */
 	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
-		$description = $this->forceMessageLanguage( $message, 'en' )->useDatabase( false )->plain();
+		$description = $message->inLanguage( 'en' )->useDatabase( false )->plain();
 
 		$this->addMessageToResult( $message, $extradata );
 
@@ -257,7 +234,7 @@ class ApiErrorReporter {
 		if ( $message->exists() ) {
 			$this->addMessageToResult( $message, $extradata );
 
-			$text = $this->forceMessageLanguage( $message, 'en' )->useDatabase( false )->plain();
+			$text = $message->inLanguage( 'en' )->useDatabase( false )->plain();
 
 			if ( $description == '' ) {
 				$description = $text;
@@ -439,7 +416,7 @@ class ApiErrorReporter {
 		ApiResult::setValue( $row, 'parameters', $params );
 		ApiResult::setIndexedTagName( $row['parameters'], 'parameter' );
 
-		$html = $this->forceMessageLanguage( $message, $this->language )->useDatabase( true )->parse();
+		$html = $message->inLanguage( $this->language )->useDatabase( true )->parse();
 		ApiResult::setValue( $row, 'html', $html );
 		$row[ApiResult::META_BC_SUBELEMENTS][] = 'html';
 
