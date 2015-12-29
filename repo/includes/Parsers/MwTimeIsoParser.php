@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Parsers;
 
 use DataValues\TimeValue;
 use Language;
-use Message;
 use RuntimeException;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\IsoTimestampParser;
@@ -118,13 +117,11 @@ class MwTimeIsoParser extends StringValueParser {
 	private function reconvertOutputString( $value ) {
 		foreach ( self::$precisionMsgKeys as $precision => $msgKeysGroup ) {
 			foreach ( $msgKeysGroup as $msgKey ) {
-				$msg = new Message( $msgKey );
 				// FIXME: Use the language passed in options! The only reason we are not currently
 				// doing this is due to the formatting not currently localizing. See the fix me in
 				// MwTimeIsoFormatter::getMessage.
 				// TODO: Check other translations?
-				$msg->inLanguage( 'en' );
-				$msgText = $msg->text();
+				$msgText = wfMessage( $msgKey )->inLanguage( 'en' )->text();
 				$isBceMsg = $this->isBceMsg( $msgKey );
 
 				list( $start, $end ) = explode( '$1', $msgText, 2 );

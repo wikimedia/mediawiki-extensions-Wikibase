@@ -51,11 +51,11 @@ class MonolingualHtmlFormatter extends ValueFormatterBase {
 		$languageCode = $value->getLanguageCode();
 		$languageName = $this->languageNameLookup->getName( $languageCode, $userLanguage );
 
-		$msg = wfMessage( 'wikibase-monolingualtext' )->params(
+		return wfMessage( 'wikibase-monolingualtext',
 			wfEscapeWikiText( $text ),
 			wfEscapeWikiText( $languageCode ),
-			wfEscapeWikiText( $languageName ) );
-		return $msg->parse();
+			wfEscapeWikiText( $languageName )
+		)->parse();
 	}
 
 }

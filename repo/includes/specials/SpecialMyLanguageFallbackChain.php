@@ -117,13 +117,18 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 
 			if ( $sourceLanguage ) {
 				$sourceLanguageName = Language::fetchLanguageName( $sourceLanguage->getCode(), $inLanguage );
-				$msgHtml = wfMessage( 'wikibase-mylanguagefallbackchain-converted-item' )->params(
-					$language->getHtmlCode(), $languageName,
-					$sourceLanguage->getHtmlCode(), $sourceLanguageName
+				$msgHtml = wfMessage(
+					'wikibase-mylanguagefallbackchain-converted-item',
+					$language->getHtmlCode(),
+					$languageName,
+					$sourceLanguage->getHtmlCode(),
+					$sourceLanguageName
 				)->parse();
 			} else {
-				$msgHtml = wfMessage( 'wikibase-mylanguagefallbackchain-verbatim-item' )->params(
-					$language->getHtmlCode(), $languageName
+				$msgHtml = wfMessage(
+					'wikibase-mylanguagefallbackchain-verbatim-item',
+					$language->getHtmlCode(),
+					$languageName
 				)->parse();
 			}
 

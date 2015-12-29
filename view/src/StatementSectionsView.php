@@ -79,7 +79,7 @@ class StatementSectionsView {
 		 * wikibase-statementsection-statements
 		 * wikibase-statementsection-identifiers
 		 */
-		$msg = wfMessage( 'wikibase-statementsection-' . strtolower( $key ) );
+		$messageKey = 'wikibase-statementsection-' . strtolower( $key );
 		$className = 'wikibase-statements';
 
 		if ( $key === 'statements' ) {
@@ -92,7 +92,7 @@ class StatementSectionsView {
 		// TODO: Add link to SpecialPage that allows adding a new statement.
 		return $this->templateFactory->render(
 			'wb-section-heading',
-			$msg->escaped(),
+			wfMessage( $messageKey )->escaped(),
 			$id,
 			$className
 		);
