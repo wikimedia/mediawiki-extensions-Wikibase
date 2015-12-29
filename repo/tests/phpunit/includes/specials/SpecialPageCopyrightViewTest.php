@@ -44,9 +44,11 @@ class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 	}
 
 	public function getHtmlProvider() {
-		$message = new Message(
+		$message = wfMessage(
 			'wikibase-shortcopyrightwarning',
-			array( 'wikibase-submit', 'copyrightpage', 'copyrightlink' )
+			'wikibase-submit',
+			'copyrightpage',
+			'copyrightlink'
 		);
 
 		return array(

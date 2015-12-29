@@ -39,11 +39,11 @@ class ParseExceptionLocalizer implements ExceptionLocalizer {
 			// wikibase-parse-error-entity-id
 			// wikibase-parse-error-quantity
 			// wikibase-parse-error-time
-			$msg = new Message( 'wikibase-parse-error-' . $expectedFormat );
+			$msg = wfMessage( 'wikibase-parse-error-' . $expectedFormat );
 		}
 
 		if ( !( $msg instanceof Message ) || !$msg->exists() ) {
-			$msg = new Message( 'wikibase-parse-error' );
+			$msg = wfMessage( 'wikibase-parse-error' );
 		}
 
 		return $msg;

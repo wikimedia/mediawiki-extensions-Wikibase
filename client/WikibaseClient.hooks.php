@@ -6,7 +6,6 @@ use Action;
 use BaseTemplate;
 use ChangesList;
 use IContextSource;
-use Message;
 use OutputPage;
 use Parser;
 use QuickTemplate;
@@ -438,7 +437,7 @@ final class ClientHooks {
 			$settings = $wikibaseClient->getSettings();
 			$repoSiteName = $settings->getSetting( 'repoSiteName' );
 
-			$message = new Message( $repoSiteName );
+			$message = wfMessage( $repoSiteName );
 
 			if ( $message->exists() ) {
 				$lang = $parser->getTargetLanguage();
