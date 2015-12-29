@@ -55,6 +55,8 @@ class VocabularyUriFormatter implements ValueFormatter {
 	}
 
 	/**
+	 * @see ValueFormatter::format
+	 *
 	 * @param string $conceptUri
 	 *
 	 * @throws InvalidArgumentException

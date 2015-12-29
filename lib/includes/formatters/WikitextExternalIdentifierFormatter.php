@@ -41,6 +41,8 @@ class WikitextExternalIdentifierFormatter implements SnakFormatter {
 	}
 
 	/**
+	 * @see SnakFormatter::format
+	 *
 	 * Formats the given Snak as an wikitext link to an authoritative resource.
 	 * The URL of that link is determined using a SnakUrlExpander.
 	 * If the snak could not be expanded into a URL, the identifier is returned as simple text.

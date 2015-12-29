@@ -19,7 +19,7 @@ use Wikimedia\Assert\Assert;
 class DispatchingSnakFormatter implements SnakFormatter {
 
 	/**
-	 * @var string
+	 * @var string One of the SnakFormatter::FORMAT_... constants.
 	 */
 	private $format;
 
@@ -73,6 +73,12 @@ class DispatchingSnakFormatter implements SnakFormatter {
 		$this->formattersByDataType = $formattersByDataType;
 	}
 
+	/**
+	 * @param string $format MIME type
+	 * @param SnakFormatter[] $formatters
+	 *
+	 * @throws InvalidArgumentException
+	 */
 	private function assertFormatterArray( $format, array $formatters ) {
 		foreach ( $formatters as $type => $formatter ) {
 			if ( !is_string( $type ) ) {
@@ -114,6 +120,8 @@ class DispatchingSnakFormatter implements SnakFormatter {
 	}
 
 	/**
+	 * @see SnakFormatter::formatSnak
+	 *
 	 * Formats the given Snak by finding an appropriate formatter among the ones supplied
 	 * to the constructor, and applying it.
 	 *
@@ -149,7 +157,7 @@ class DispatchingSnakFormatter implements SnakFormatter {
 	/**
 	 * @see SnakFormatter::getFormat
 	 *
-	 * @return string
+	 * @return string One of the SnakFormatter::FORMAT_... constants.
 	 */
 	public function getFormat() {
 		return $this->format;

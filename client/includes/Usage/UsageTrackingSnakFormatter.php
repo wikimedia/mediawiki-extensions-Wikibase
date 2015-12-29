@@ -47,11 +47,11 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 	}
 
 	/**
-	 * Formats a snak.
+	 * @see SnakFormatter::formatSnak
 	 *
 	 * @param Snak $snak
 	 *
-	 * @return string
+	 * @return string Either plain text, wikitext or HTML, depending on the $snakFormatter provided.
 	 */
 	public function formatSnak( Snak $snak ) {
 		if ( $snak instanceof PropertyValueSnak ) {
@@ -80,12 +80,7 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 	 * Returns the format ID of the format this formatter generates.
 	 * This uses the FORMAT_XXX constants defined in OutputFormatSnakFormatterFactory.
 	 *
-	 * @see SnakFormatter::FORMAT_PLAIN
-	 * @see SnakFormatter::FORMAT_WIKI
-	 * @see SnakFormatter::FORMAT_HTML
-	 * @see SnakFormatter::FORMAT_HTML_WIDGET
-	 *
-	 * @return string
+	 * @return string One of the SnakFormatter::FORMAT_... constants.
 	 */
 	public function getFormat() {
 		return $this->snakFormatter->getFormat();

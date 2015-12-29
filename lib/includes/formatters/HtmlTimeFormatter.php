@@ -53,8 +53,6 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	/**
 	 * @see ValueFormatter::format
 	 *
-	 * @since 0.5
-	 *
 	 * @param TimeValue $value
 	 *
 	 * @throws InvalidArgumentException
