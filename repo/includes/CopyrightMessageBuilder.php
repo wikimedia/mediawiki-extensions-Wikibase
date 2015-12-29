@@ -28,31 +28,29 @@ class CopyrightMessageBuilder {
 		$renderedSaveMessage = $this->renderSaveMessage( $language, $saveMessageKey );
 		$renderedCopyrightPageMessage = $this->renderCopyrightPageMessage();
 
-		$rightsWarningMessage = new Message(
+		return wfMessage(
 			'wikibase-shortcopyrightwarning',
-			array( $renderedSaveMessage, $renderedCopyrightPageMessage, "[$rightsUrl $rightsText]" )
+			$renderedSaveMessage,
+			$renderedCopyrightPageMessage,
+			"[$rightsUrl $rightsText]"
 		);
-
-		return $rightsWarningMessage;
 	}
 
 	/**
 	 * @param Language $language
-	 * @param string $saveMessageKey
+	 * @param string $key
 	 *
-	 * @return string
+	 * @return string Plain text
 	 */
-	private function renderSaveMessage( Language $language, $saveMessageKey ) {
-		$saveMessage = new Message( $saveMessageKey );
-		return $saveMessage->inLanguage( $language )->text();
+	private function renderSaveMessage( Language $language, $key ) {
+		return wfMessage( $key )->inLanguage( $language )->text();
 	}
 
 	/**
-	 * @return string
+	 * @return string Plain text
 	 */
 	private function renderCopyrightPageMessage() {
-		$copyrightPageMessage = new Message( 'copyrightpage' );
-		return $copyrightPageMessage->inContentLanguage()->text();
+		return wfMessage( 'copyrightpage' )->inContentLanguage()->text();
 	}
 
 }

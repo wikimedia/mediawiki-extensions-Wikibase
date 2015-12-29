@@ -21,7 +21,7 @@ class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getHtmlProvider
 	 */
-	public function testGetHtml( $expected, $message, $languageCode ) {
+	public function testGetHtml( $expected, Message $message, $languageCode ) {
 		$lang = Language::factory( $languageCode );
 
 		$specialPageCopyrightView = new SpecialPageCopyrightView(
@@ -44,15 +44,15 @@ class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
 	}
 
 	public function getHtmlProvider() {
-		$message = new Message(
-			'wikibase-shortcopyrightwarning',
-			array( 'wikibase-submit', 'copyrightpage', 'copyrightlink' )
-		);
-
 		return array(
 			array(
 				'<div>(wikibase-shortcopyrightwarning: wikibase-submit, copyrightpage, copyrightlink)</div>',
-				$message,
+				wfMessage(
+					'wikibase-shortcopyrightwarning',
+					'wikibase-submit',
+					'copyrightpage',
+					'copyrightlink'
+				),
 				'qqx'
 			)
 		);
