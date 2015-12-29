@@ -82,7 +82,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 * @param string[] $aspects Which aspects to consider (if omitted, all aspects are considered).
 	 * Use the EntityUsage::XXX_USAGE constants to represent aspects.
 	 *
-	 * @return Iterator<PageEntityUsages>
+	 * @return Iterator of PageEntityUsages
 	 * @throws UsageTrackerException
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {

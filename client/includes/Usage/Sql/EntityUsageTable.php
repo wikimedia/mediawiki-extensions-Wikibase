@@ -347,7 +347,7 @@ class EntityUsageTable {
 	 * @param EntityId[] $entityIds
 	 * @param string[] $aspects
 	 *
-	 * @return Iterator<PageEntityUsages> An iterator over entity usages grouped by page
+	 * @return Iterator An iterator over PageEntityUsages grouped by page.
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
 		if ( empty( $entityIds ) ) {

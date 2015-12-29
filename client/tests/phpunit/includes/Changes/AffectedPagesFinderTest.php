@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Changes;
 use ArrayIterator;
 use DataValues\DataValue;
 use DataValues\StringValue;
+use Iterator;
 use Title;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Store\TitleFactory;
@@ -558,7 +559,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PageEntityUsages[]|Iterator<PageEntityUsages> $usagesPerPage
+	 * @param PageEntityUsages[]|Iterator $usagesPerPage An array or iterator of PageEntityUsages.
 	 *
 	 * @return PageEntityUsages[]
 	 */
