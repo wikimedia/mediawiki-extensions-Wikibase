@@ -26,7 +26,7 @@ class TestValidator implements ValueValidator {
 	}
 
 	/**
-	 * @param mixed $value
+	 * @param string|DataValue $value
 	 *
 	 * @return Result
 	 */

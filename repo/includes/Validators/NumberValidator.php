@@ -15,7 +15,7 @@ class NumberValidator implements ValueValidator {
 	/**
 	 * @see ValueValidator::validate()
 	 *
-	 * @param mixed $value The value to validate
+	 * @param int|float $value The value to validate
 	 *
 	 * @return Result
 	 */
