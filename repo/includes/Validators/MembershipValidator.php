@@ -16,7 +16,7 @@ use ValueValidators\ValueValidator;
 class MembershipValidator implements ValueValidator {
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $allowed;
 
@@ -31,7 +31,7 @@ class MembershipValidator implements ValueValidator {
 	private $normalizer;
 
 	/**
-	 * @param array $allowed The allowed values
+	 * @param string[] $allowed The allowed values
 	 * @param string $errorCode Code to use in Errors; should indicate what kind of value would have been allowed.
 	 * @param callable|string|null $normalizer An optional function to normalize the value before
 	 *                        comparing it to the list of allowed values, e.g. 'strtolower'.
