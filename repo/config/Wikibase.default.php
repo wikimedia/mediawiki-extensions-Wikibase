@@ -94,16 +94,6 @@ return call_user_func( function() {
 		// Property used as formatter to link identifiers
 		'formatterUrlProperty' => null,
 
-		/**
-		 * Determines how subscription lookup is handled. Possible values:
-		 *
-		 * - 'sitelinks': Use only sitelinks to determine which wiki is subscribed to which entity.
-		 *   Use this mode if the wb_changes_subscription table does not exist.
-		 * - 'subscriptions': use explicit subscriptions in the wb_changes_subscription table.
-		 * - 'subscriptions+sitelinks': use a combination of both.
-		 */
-		'subscriptionLookupMode' => 'subscriptions',
-
 		'allowEntityImport' => false,
 
 		/**

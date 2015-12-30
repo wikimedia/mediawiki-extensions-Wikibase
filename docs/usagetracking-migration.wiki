@@ -23,18 +23,12 @@ Deployment of the new usage tracking scheme can be done in three steps:
 == Create subscription table on the repo ==
 
 To set up the subscription tracking table wb_changes_subscription on the repo:
-* Deploy the schema change and set subscriptionLookupMode = 'subscriptions+sitelinks'.
-** If subscriptionLookupMode is 'subscriptions' or 'subscriptions+sitelinks', update.php will create the table automatically.
-** If subscriptionLookupMode is 'sitelinks', apply repo/sql/changes_subscription.sql manually.
+* Deploy the schema change by running update.php.
 * Run repo/maintenance/populateChangesSubscription.php to initialize the wb_changes_subscription table based on repowiki.wb_items_per_site.
 
 NOTE: If any clients already have usage tracking enabled, then updateSubscriptions.php can also be
 run and subscription tracking enabled for each of them at this point. See the instructions in section
 ''Start tracking client subscriptions based on entity usage'' below.
-
-NOTE: Once ''all'' clients have usage tracking ''and'' subscription tracking enabled (see
-instructions below), subscriptionLookupMode should be set to 'subscriptions'. As long as some
-clients do not have subscription tracking enabled, use subscriptionLookupMode = 'subscriptions+sitelinks'.
 
 
 == Start tracking entity usage on the client wikis ==
@@ -43,7 +37,6 @@ To enable usage tracking on a client wiki:
 * Deploy the schema change by running update.php.
 * Run client/maintenance/populateEntityUsage.php to initialize the wbc_entity_usage table based on repowiki.wb_items_per_site.
 * If desired, enable arbitrary access by setting allowArbitraryDataAccess = true
-** Caveat: as long as subscriptionLookupMode is 'sitelinks' on the repo, pages using items that are not connected to any page on the local wiki via a sitelink will not get purged automatically when the item is edited.
 
 
 == Start tracking client subscriptions based on entity usage ==
@@ -54,7 +47,6 @@ To enable such subscription tracking based on entity usage:
 * Make sure the repo has the wb_changes_subscription table set up, see above.
 * Run client/maintenance/updateSubscriptions.php to put entries into repowiki.wb_changes_subscription based on the client wiki's wbc_entity_usage table.
 * If desired, enable arbitrary access by setting allowArbitraryDataAccess = true
-** Caveat: as long as subscriptionLookupMode is 'sitelinks' on the repo, pages using items that are not connected to any page on the local wiki via a sitelink will not get purged automatically when the item is edited.
 
 
 == Start using subscriptions for dispatching ==
