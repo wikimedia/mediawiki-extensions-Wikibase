@@ -7,6 +7,7 @@ use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\TruthyStatementRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @covers Wikibase\Rdf\TruthyStatementRdfBuilder
@@ -43,11 +44,12 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param RdfWriter $writer
+	 *
 	 * @return TruthyStatementRdfBuilder
 	 */
-	private function newBuilder() {
+	private function newBuilder( RdfWriter $writer ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
-		$writer = $this->getTestData()->getNTriplesWriter();
 
 		// Note: using the actual factory here makes this an integration test!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
@@ -67,20 +69,16 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$snakBuilder
 		);
 
-		// HACK: stick the writer into a public field, for use by getDataFromBuilder()
-		$builder->test_writer = $writer;
-
 		return $builder;
 	}
 
 	/**
 	 * Extract text test data from RDF builder
-	 * @param TruthyStatementRdfBuilder $builder
+	 * @param RdfWriter $writer
 	 * @return string[] ntriples lines, sorted
 	 */
-	private function getDataFromBuilder( TruthyStatementRdfBuilder $builder ) {
-		// HACK: $builder->test_writer is glued on by newBuilder().
-		$ntriples = $builder->test_writer->drain();
+	private function getDataFromWriter( RdfWriter $writer ) {
+		$ntriples = $writer->drain();
 
 		$lines = explode( "\n", trim( $ntriples ) );
 		sort( $lines );
@@ -88,8 +86,8 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		return $lines;
 	}
 
-	private function assertOrCreateNTriples( $dataSetName, TruthyStatementRdfBuilder $builder ) {
-		$actualData = $this->getDataFromBuilder( $builder );
+	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
+		$actualData = $this->getDataFromWriter( $writer );
 		$correctData = $this->getTestData()->getNTriples( $dataSetName );
 
 		if ( $correctData === null ) {
@@ -112,10 +110,11 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntity( $entityName, $dataSetName ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder();
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer );
 		$builder->addEntity( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 	/**
@@ -124,10 +123,11 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddStatements( $entityName, $dataSetName ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder();
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer );
 		$builder->addStatements( $entity->getId(), $entity->getStatements() );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 }

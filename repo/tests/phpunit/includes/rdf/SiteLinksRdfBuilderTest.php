@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\Rdf\SiteLinksRdfBuilder;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @covers Wikibase\Rdf\SiteLinksRdfBuilder
@@ -39,14 +40,13 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param RdfWriter $writer
 	 * @param string[]|null $sites
 	 *
 	 * @return SiteLinksRdfBuilder
 	 */
-	private function newBuilder( array $sites = null ) {
+	private function newBuilder( RdfWriter $writer, array $sites = null ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
-
-		$writer = $this->getTestData()->getNTriplesWriter();
 
 		$builder = new SiteLinksRdfBuilder(
 			$vocabulary,
@@ -55,28 +55,24 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$sites
 		);
 
-		// HACK: stick the writer into a public field, for use by getDataFromBuilder()
-		$builder->test_writer = $writer;
-
 		return $builder;
 	}
 
 	/**
 	 * Extract text test data from RDF builder
-	 * @param SiteLinksRdfBuilder $builder
+	 * @param RdfWriter $writer
 	 * @return string[] ntriples lines, sorted
 	 */
-	private function getDataFromBuilder( SiteLinksRdfBuilder $builder ) {
-		// HACK: $builder->test_writer is glued on by newBuilder().
-		$ntriples = $builder->test_writer->drain();
+	private function getDataFromWriter( RdfWriter $writer ) {
+		$ntriples = $writer->drain();
 
 		$lines = explode( "\n", trim( $ntriples ) );
 		sort( $lines );
 		return $lines;
 	}
 
-	private function assertOrCreateNTriples( $dataSetName, SiteLinksRdfBuilder $builder ) {
-		$actualData = $this->getDataFromBuilder( $builder );
+	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
+		$actualData = $this->getDataFromWriter( $writer );
 		$correctData = $this->getTestData()->getNTriples( $dataSetName );
 
 		if ( $correctData === null ) {
@@ -100,10 +96,11 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntity( $entityName, $dataSetName, array $sites = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder( $sites );
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer, $sites );
 		$builder->addEntity( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 	/**
@@ -112,10 +109,11 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddSiteLinks( $entityName, $dataSetName, array $sites = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder( $sites );
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer, $sites );
 		$builder->addSiteLinks( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 }
