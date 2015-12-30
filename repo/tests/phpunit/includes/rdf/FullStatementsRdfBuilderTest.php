@@ -10,6 +10,7 @@ use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @covers Wikibase\Rdf\FullStatementRdfBuilder
@@ -46,16 +47,20 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param RdfWriter $writer
 	 * @param int $flavor Bitmap for the output flavor, use RdfProducer::PRODUCE_XXX constants.
 	 * @param EntityId[] &$mentioned Receives any entity IDs being mentioned.
 	 * @param DedupeBag $dedupe A bag of reference hashes that should be considered "already seen".
 	 *
 	 * @return FullStatementRdfBuilder
 	 */
-	private function newBuilder( $flavor, array &$mentioned = array(), DedupeBag $dedupe = null ) {
+	private function newBuilder(
+		RdfWriter $writer,
+		$flavor,
+		array &$mentioned = array(),
+		DedupeBag $dedupe = null
+	) {
 		$vocabulary = $this->getTestData()->getVocabulary();
-
-		$writer = $this->getTestData()->getNTriplesWriter();
 
 		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
 		$mentionTracker->expects( $this->any() )
@@ -97,28 +102,24 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$statementBuilder->setProduceQualifiers( $flavor & RdfProducer::PRODUCE_QUALIFIERS );
 		$statementBuilder->setProduceReferences( $flavor & RdfProducer::PRODUCE_REFERENCES );
 
-		// HACK: stick the writer into a public field, for use by getDataFromBuilder()
-		$statementBuilder->test_writer = $writer;
-
 		return $statementBuilder;
 	}
 
 	/**
 	 * Extract text test data from RDF builder
-	 * @param FullStatementRdfBuilder $builder
+	 * @param RdfWriter $writer
 	 * @return string[] ntriples lines, sorted
 	 */
-	private function getDataFromBuilder( FullStatementRdfBuilder $builder ) {
-		// HACK: $builder->test_writer is glued on by newBuilder().
-		$ntriples = $builder->test_writer->drain();
+	private function getDataFromWriter( RdfWriter $writer ) {
+		$ntriples = $writer->drain();
 
 		$lines = explode( "\n", trim( $ntriples ) );
 		sort( $lines );
 		return $lines;
 	}
 
-	private function assertOrCreateNTriples( $dataSetName, FullStatementRdfBuilder $builder ) {
-		$actualData = $this->getDataFromBuilder( $builder );
+	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
+		$actualData = $this->getDataFromWriter( $writer );
 		$correctData = $this->getTestData()->getNTriples( $dataSetName );
 
 		if ( $correctData === null ) {
@@ -163,11 +164,12 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntity( $entityName, $flavor, $dataSetName, array $expectedMentions ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
+		$writer = $this->getTestData()->getNTriplesWriter();
 		$mentioned = array();
-		$builder = $this->newBuilder( $flavor, $mentioned );
+		$builder = $this->newBuilder( $writer, $flavor, $mentioned );
 		$builder->addEntity( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 		$this->assertEquals( $expectedMentions, array_keys( $mentioned ), 'Entities mentioned' );
 	}
 
@@ -189,11 +191,12 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$dedupe->alreadySeen( $hash, 'R' );
 		}
 
+		$writer = $this->getTestData()->getNTriplesWriter();
 		$mentioned = array();
-		$builder = $this->newBuilder( RdfProducer::PRODUCE_ALL, $mentioned, $dedupe );
+		$builder = $this->newBuilder( $writer, RdfProducer::PRODUCE_ALL, $mentioned, $dedupe );
 		$builder->addEntity( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 	public function provideAddStatements() {
@@ -208,10 +211,11 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddStatements( $entityName, $dataSetName ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder( RdfProducer::PRODUCE_ALL );
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer, RdfProducer::PRODUCE_ALL );
 		$builder->addStatements( $entity->getId(), $entity->getStatements() );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 }

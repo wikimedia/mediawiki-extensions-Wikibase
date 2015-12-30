@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\Rdf\TermsRdfBuilder;
+use Wikimedia\Purtle\RdfWriter;
 
 /**
  * @covers Wikibase\Rdf\TermsRdfBuilder
@@ -39,14 +40,13 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param RdfWriter $writer
 	 * @param string[]|null $languages
 	 *
 	 * @return TermsRdfBuilder
 	 */
-	private function newBuilder( array $languages = null ) {
+	private function newBuilder( RdfWriter $writer, array $languages = null ) {
 		$vocabulary = $this->getTestData()->getVocabulary();
-
-		$writer = $this->getTestData()->getNTriplesWriter();
 
 		$builder = new TermsRdfBuilder(
 			$vocabulary,
@@ -54,28 +54,24 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$languages
 		);
 
-		// HACK: stick the writer into a public field, for use by getDataFromBuilder()
-		$builder->test_writer = $writer;
-
 		return $builder;
 	}
 
 	/**
 	 * Extract text test data from RDF builder
-	 * @param TermsRdfBuilder $builder
+	 * @param RdfWriter $writer
 	 * @return string[] ntriples lines, sorted
 	 */
-	private function getDataFromBuilder( TermsRdfBuilder $builder ) {
-		// HACK: $builder->test_writer is glued on by newBuilder().
-		$ntriples = $builder->test_writer->drain();
+	private function getDataFromWriter( RdfWriter $writer ) {
+		$ntriples = $writer->drain();
 
 		$lines = explode( "\n", trim( $ntriples ) );
 		sort( $lines );
 		return $lines;
 	}
 
-	private function assertOrCreateNTriples( $dataSetName, TermsRdfBuilder $builder ) {
-		$actualData = $this->getDataFromBuilder( $builder );
+	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
+		$actualData = $this->getDataFromWriter( $writer );
 		$correctData = $this->getTestData()->getNTriples( $dataSetName );
 
 		if ( $correctData === null ) {
@@ -99,10 +95,11 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddEntity( $entityName, $dataSetName, array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder( $languages );
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer, $languages );
 		$builder->addEntity( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 	public function provideAddLabels() {
@@ -118,10 +115,11 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddLabels( $entityName, $dataSetName, array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder( $languages );
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer, $languages );
 		$builder->addLabels( $entity->getId(), $entity->getFingerprint()->getLabels() );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 	public function provideAddDescriptions() {
@@ -137,10 +135,11 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddDescriptions( $entityName, $dataSetName, array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder( $languages );
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer, $languages );
 		$builder->addDescriptions( $entity->getId(), $entity->getFingerprint()->getDescriptions() );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 	public function provideAddAliases() {
@@ -156,10 +155,11 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddAliases( $entityName, $dataSetName, array $languages = null ) {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
-		$builder = $this->newBuilder( $languages );
+		$writer = $this->getTestData()->getNTriplesWriter();
+		$builder = $this->newBuilder( $writer, $languages );
 		$builder->addAliases( $entity->getId(), $entity->getFingerprint()->getAliasGroups() );
 
-		$this->assertOrCreateNTriples( $dataSetName, $builder );
+		$this->assertOrCreateNTriples( $dataSetName, $writer );
 	}
 
 }
