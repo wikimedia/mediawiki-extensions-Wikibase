@@ -39,10 +39,6 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 	private $lookupTester;
 
 	protected function setUp() {
-		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
-			$this->markTestSkipped( 'Skipping test for SqlUsageTracker, because the useLegacyUsageIndex option is set.' );
-		}
-
 		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
 		$this->tablesUsed[] = 'page';
 

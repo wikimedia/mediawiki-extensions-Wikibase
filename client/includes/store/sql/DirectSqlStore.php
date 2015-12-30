@@ -95,11 +95,6 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @var bool
 	 */
-	private $useLegacyUsageIndex;
-
-	/**
-	 * @var bool
-	 */
 	private $useLegacyChangesSubscription;
 
 	/**
@@ -185,7 +180,6 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$this->useLegacyUsageIndex = $settings->getSetting( 'useLegacyUsageIndex' );
 		$this->useLegacyChangesSubscription = $settings->getSetting( 'useLegacyChangesSubscription' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->changeHandlerClasses = $settings->getSetting( 'changeHandlers' );
@@ -249,21 +243,11 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see ClientStore::getUsageLookup
 	 *
-	 * @note: If the useLegacyUsageIndex option is set, this returns a SiteLinkUsageLookup.
-	 *
 	 * @return UsageLookup
 	 */
 	public function getUsageLookup() {
 		if ( $this->usageLookup === null ) {
-			if ( $this->useLegacyUsageIndex ) {
-				$this->usageLookup = new SiteLinkUsageLookup(
-					$this->siteId,
-					$this->getSiteLinkLookup(),
-					new TitleFactory()
-				);
-			} else {
-				$this->usageLookup = $this->getUsageTracker();
-			}
+			$this->usageLookup = $this->getUsageTracker();
 		}
 
 		return $this->usageLookup;
@@ -272,18 +256,12 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @see ClientStore::getUsageTracker
 	 *
-	 * @note: If the useLegacyUsageIndex option is set, this returns a NullUsageTracker!
-	 *
-	 * @return UsageTracker
+	 * @return SqlUsageTracker
 	 */
 	public function getUsageTracker() {
 		if ( $this->usageTracker === null ) {
-			if ( $this->useLegacyUsageIndex ) {
-				$this->usageTracker = new NullUsageTracker();
-			} else {
-				$connectionManager = $this->getLocalConnectionManager();
-				$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager );
-			}
+			$connectionManager = $this->getLocalConnectionManager();
+			$this->usageTracker = new SqlUsageTracker( $this->entityIdParser, $connectionManager );
 		}
 
 		return $this->usageTracker;

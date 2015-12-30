@@ -26,10 +26,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
-			$this->markTestSkipped( 'Skipping test for EntityUsageTable, because the useLegacyUsageIndex option is set.' );
-		}
-
 		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
 	}
 

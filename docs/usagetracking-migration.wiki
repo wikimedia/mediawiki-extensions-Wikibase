@@ -11,7 +11,6 @@ ID for the repo and respective client wiki):
 
 For deferred deployment of schema changes, usage of the new tables can be disabled using the appropriate feature switches:
 * To not use repowiki.wb_changes_subscription, set useLegacyChangesSubscription = true on the client, and subscriptionLookupMode = 'sitelinks' on the repo.
-* To not use clientwiki.wbc_entity_usage, set useLegacyUsageIndex = true on the client wiki.
 
 Maintenance scripts are used to populate the new database tables used for usage tracking and subscription management:
 * repo/maintenance/populateChangesSubscription.php populates wb_changes_subscription table based on repowiki.wb_items_per_site.
@@ -42,11 +41,8 @@ clients do not have subscription tracking enabled, use subscriptionLookupMode = 
 == Start tracking entity usage on the client wikis ==
 
 To enable usage tracking on a client wiki:
-* Deploy the schema change and set useLegacyUsageIndex = false.
-** If useLegacyUsageIndex is false, update.php will create the table automatically.
-** If useLegacyUsageIndex is true, apply client/sql/entity_usage.sql manually.
+* Deploy the schema change by running update.php.
 * Run client/maintenance/populateEntityUsage.php to initialize the wbc_entity_usage table based on repowiki.wb_items_per_site.
-* Enable usage tracking by setting useLegacyUsageIndex = false.
 * If desired, enable arbitrary access by setting allowArbitraryDataAccess = true
 ** Caveat: as long as subscriptionLookupMode is 'sitelinks' on the repo, pages using items that are not connected to any page on the local wiki via a sitelink will not get purged automatically when the item is edited.
 

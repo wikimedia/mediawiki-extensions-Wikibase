@@ -53,8 +53,6 @@ return call_user_func( function() {
 		// in the parser functions and via Lua.
 		// Allows users to split the ParserCache by user language.
 		'allowDataAccessInUserLanguage' => false,
-		// Enable in case wbc_entity_usage does not exist or is not yet populated.
-		'useLegacyUsageIndex' => false,
 
 		/**
 		 * Enable in case wb_changes_subscription does not exist (on the repo) or is not yet

@@ -24,10 +24,6 @@ use Wikibase\Lib\Reporting\MessageReporter;
 class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 
 	protected function setUp() {
-		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
-			$this->markTestSkipped( 'Skipping test for EntityUsageTableBuilder, because the useLegacyUsageIndex option is set.' );
-		}
-
 		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
 		$this->tablesUsed[] = 'page_props';
 
