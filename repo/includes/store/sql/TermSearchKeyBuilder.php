@@ -127,7 +127,7 @@ class TermSearchKeyBuilder {
 			// as that would cause the site to be rendered read only.
 			wfWaitForSlaves();
 
-			$dbw->begin();
+			$dbw->begin( __METHOD__ );
 
 			$terms = $dbw->select(
 				$this->table->getTableName(),
@@ -164,7 +164,7 @@ class TermSearchKeyBuilder {
 				$rowId = $row->term_row_id;
 			}
 
-			$dbw->commit();
+			$dbw->commit( __METHOD__ );
 
 			$this->report( "Updated $c search keys (skipped $cError), up to row $rowId." );
 			$total += $c;
