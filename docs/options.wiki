@@ -60,12 +60,11 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;urlSchemes: Which URL schemes should be allowed in URL data values. The default is array( 'http', 'https' ). Other supported schemes are 'ftp' and 'mailto'. Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding 'mailto' will work, while adding 'gopher' will do nothing.
 ;formatterUrlProperty: Property to be used on properties that defines a formatter URL which is used to link identifiers. The placeholder <code>$1</code> will be replaced by the identifier. Example: <code>https://www.wikidata.org/entity/$1</code>
 ;transformLegacyFormatOnExport: Whether entity revisions stored in a legacy format should be converted on the fly while exporting. Enabled per default.
-;subscriptionLookupMode: how the repo determines which clients need to be notified about changes to which entity (see also the useLegacyChangesSubscription setting in the client). Possible values:
+;subscriptionLookupMode: how the repo determines which clients need to be notified about changes to which entity. Possible values:
 :;<code>'sitelinks'</code>: Use only sitelinks from the wb_items_per_site table to track subscriptions (legacy mode).
 :;<code>'subscriptions'</code>: Use explicit subscription tracking via the wb_changes_subscription table.
 :;<code>'subscriptions+sitelinks'</code>: Use information from both tables (compatibility mode).
 : Default is <code>'subscriptions'</code>.
-: If the repo is configured to act as it's own client, the subscriptionLookupMode repo setting must match the useLegacyChangesSubscription client setting.
 ;allowEntityImport: allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
 
 == Client Settings ==
@@ -118,4 +117,3 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 :;<code>'CachingSqlStore'</code>: No direct access to the repo's database. Use cache information received from change notifications. '''Warning:''' dies is currently dysfunctional.
 :;<code>null</code>: Automatic, use <code>'DirectSqlStore'</code> if <code>repoDatabase</code> is set, <code>'CachingSqlStore'</code> if not.
 : '''Caveat:''' should always be <code>null</code> at the moment, because some code relies on the <code>repoDatabase</code> setting to determine whether the local cache tables should be used.
-;useLegacyChangesSubscription: whether the sitelinks table should be used to emulate notification subscriptions. Should be set to true if the appropriate database schema change has not been deployed to the repository database yet. See also the subscriptionLookupMode repo setting.

@@ -93,11 +93,6 @@ class DirectSqlStore implements ClientStore {
 	private $cacheDuration;
 
 	/**
-	 * @var bool
-	 */
-	private $useLegacyChangesSubscription;
-
-	/**
 	 * @var EntityLookup|null
 	 */
 	private $entityRevisionLookup = null;
@@ -180,7 +175,6 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$this->useLegacyChangesSubscription = $settings->getSetting( 'useLegacyChangesSubscription' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->changeHandlerClasses = $settings->getSetting( 'changeHandlers' );
 	}
@@ -192,12 +186,8 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getSubscriptionManager() {
 		if ( $this->subscriptionManager === null ) {
-			if ( $this->useLegacyChangesSubscription ) {
-				$this->subscriptionManager = new NullSubscriptionManager();
-			} else {
-				$connectionManager = $this->getRepoConnectionManager();
-				$this->subscriptionManager = new SqlSubscriptionManager( $connectionManager );
-			}
+			$connectionManager = $this->getRepoConnectionManager();
+			$this->subscriptionManager = new SqlSubscriptionManager( $connectionManager );
 		}
 
 		return $this->subscriptionManager;

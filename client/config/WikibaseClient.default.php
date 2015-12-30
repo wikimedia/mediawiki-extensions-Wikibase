@@ -55,16 +55,6 @@ return call_user_func( function() {
 		'allowDataAccessInUserLanguage' => false,
 
 		/**
-		 * Enable in case wb_changes_subscription does not exist (on the repo) or is not yet
-		 * populated.
-		 *
-		 * @note If Wikibase Repo and Client are enabled on the same wiki, then this only needs to
-		 * be set in the repo or can be set the same in both (repo settings override client
-		 * settings).
-		 */
-		'useLegacyChangesSubscription' => false,
-
-		/**
 		 * Prefix to use for cache keys that should be shared among a Wikibase Repo instance and all
 		 * its clients. This is for things like caching entity blobs in memcached.
 		 *

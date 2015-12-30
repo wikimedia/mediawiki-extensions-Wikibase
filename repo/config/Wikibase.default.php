@@ -101,9 +101,6 @@ return call_user_func( function() {
 		 *   Use this mode if the wb_changes_subscription table does not exist.
 		 * - 'subscriptions': use explicit subscriptions in the wb_changes_subscription table.
 		 * - 'subscriptions+sitelinks': use a combination of both.
-		 *
-		 * @note If Wikibase Repo and Client are enabled on the same wiki, this setting needs to
-		 * match the useLegacyChangesSubscription value in the client settings.
 		 */
 		'subscriptionLookupMode' => 'subscriptions',
 
