@@ -180,7 +180,7 @@ class PropertyInfoTableBuilder {
 			wfWaitForSlaves();
 
 			if ( $this->useTransactions ) {
-				$dbw->begin();
+				$dbw->begin( __METHOD__ );
 			}
 
 			//FIXME: use an EntityIdPager from EntityPerPage
@@ -219,7 +219,7 @@ class PropertyInfoTableBuilder {
 			}
 
 			if ( $this->useTransactions ) {
-				$dbw->commit();
+				$dbw->commit( __METHOD__ );
 			}
 
 			$this->reportMessage( "Updated $c properties, up to ID $rowId." );
