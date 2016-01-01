@@ -306,6 +306,7 @@
 	"wikibase-listdatatypes-string-head": "Cadena",
 	"wikibase-listdatatypes-time-head": "Hora",
 	"wikibase-listdatatypes-url-head": "URL",
+	"wikibase-listdatatypes-external-id-head": "Identificador externo",
 	"wikibase-concept-uri-tooltip": "URI que identifica el concepto descrito por este artículo",
 	"wikibase-add-badges": "Añadir insignias",
 	"datatypes-type-url": "URL",
