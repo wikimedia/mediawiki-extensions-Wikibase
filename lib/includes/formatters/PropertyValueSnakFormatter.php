@@ -26,7 +26,7 @@ use Wikibase\DataModel\Snak\Snak;
 class PropertyValueSnakFormatter implements SnakFormatter {
 
 	/**
-	 * @var string
+	 * @var string One of the SnakFormatter::FORMAT_... constants.
 	 */
 	private $format;
 
@@ -79,8 +79,10 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	}
 
 	/**
+	 * @see SnakFormatter::formatSnak
+	 *
 	 * Formats the given Snak by looking up its property type and calling the
-	 * SnakValueFormatter supplied to the constructor.
+	 * ValueFormatter supplied to the constructor.
 	 *
 	 * @param Snak $snak
 	 *
@@ -88,7 +90,8 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	 * @throws InvalidArgumentException
 	 * @throws MismatchingDataValueTypeException
 	 * @throws FormattingException
-	 * @return string
+	 * @return string Either plain text, wikitext or HTML, depending on the $valueFormatter
+	 *  provided.
 	 */
 	public function formatSnak( Snak $snak ) {
 		if ( !( $snak instanceof PropertyValueSnak ) ) {
@@ -168,7 +171,8 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	 * @param string $dataTypeId
 	 *
 	 * @throws FormattingException
-	 * @return string
+	 * @return string Either plain text, wikitext or HTML, depending on the $valueFormatter
+	 *  provided.
 	 */
 	private function formatValue( DataValue $value, $dataTypeId = null ) {
 		if ( !$this->isUnDeserializableValue( $value ) ) {
@@ -187,7 +191,7 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	/**
 	 * @see SnakFormatter::getFormat
 	 *
-	 * @return string
+	 * @return string One of the SnakFormatter::FORMAT_... constants.
 	 */
 	public function getFormat() {
 		return $this->format;

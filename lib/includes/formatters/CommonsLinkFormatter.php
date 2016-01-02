@@ -10,7 +10,8 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
 /**
- * Formats a StringValue as an HTML link.
+ * Formats the StringValue from a "commonsMedia" snak as an HTML link pointing to the file
+ * description page on Wikimedia Commons.
  *
  * @since 0.5
  *

@@ -45,10 +45,10 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	}
 
 	/**
+	 * @see ValueFormatter::format
+	 *
 	 * Generates HTML representing the details of a TimeValue,
 	 * as an itemized list.
-	 *
-	 * @since 0.5
 	 *
 	 * @param TimeValue $value
 	 *

@@ -40,10 +40,10 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	}
 
 	/**
+	 * @see ValueFormatter::format
+	 *
 	 * Generates HTML representing the details of a GlobeCoordinateValue,
 	 * as an itemized list.
-	 *
-	 * @since 0.5
 	 *
 	 * @param GlobeCoordinateValue $value
 	 *

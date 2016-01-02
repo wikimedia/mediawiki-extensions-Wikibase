@@ -55,14 +55,13 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 	}
 
 	/**
-	 * Formats the given Snak by looking up its property type and calling the
-	 * SnakValueFormatter supplied to the constructor.
+	 * @see SnakFormatter::formatSnak
 	 *
 	 * @param Snak $snak
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws FormattingException
-	 * @return string Text in the format indicated by getFormat()
+	 * @return string Either plain text, wikitext or HTML, depending on the $snakFormatter provided.
 	 */
 	public function formatSnak( Snak $snak ) {
 		try {
@@ -138,7 +137,7 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 	/**
 	 * @see SnakFormatter::getFormat
 	 *
-	 * @return string
+	 * @return string One of the SnakFormatter::FORMAT_... constants.
 	 */
 	public function getFormat() {
 		return $this->snakFormatter->getFormat();

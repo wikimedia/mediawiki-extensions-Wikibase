@@ -44,8 +44,6 @@ interface SnakFormatter {
 	const ON_ERROR_FAIL = 'fail';
 
 	/**
-	 * Formats a snak.
-	 *
 	 * @param Snak $snak
 	 *
 	 * @return string
@@ -56,12 +54,7 @@ interface SnakFormatter {
 	 * Returns the format ID of the format this formatter generates.
 	 * This uses the FORMAT_XXX constants defined in OutputFormatSnakFormatterFactory.
 	 *
-	 * @see SnakFormatter::FORMAT_PLAIN
-	 * @see SnakFormatter::FORMAT_WIKI
-	 * @see SnakFormatter::FORMAT_HTML
-	 * @see SnakFormatter::FORMAT_HTML_WIDGET
-	 *
-	 * @return string
+	 * @return string One of the self::FORMAT_... constants.
 	 */
 	public function getFormat();
 

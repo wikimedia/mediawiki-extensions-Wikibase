@@ -7,7 +7,10 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatterBase;
 
 /**
- * Formatter for UnDeserializableValue
+ * A ValueFormatter for UnDeserializableValue objects. It acts as a fallback when neither the
+ * property type nor the value type are known. It does not show any information from the value, but
+ * the message "The value is invalid and cannot be displayed" instead. The message can be changed
+ * via an option.
  *
  * @since 0.5
  *
@@ -28,13 +31,11 @@ class UnDeserializableValueFormatter extends ValueFormatterBase {
 	}
 
 	/**
-	 * Formats an UnDeserializableValue
-	 *
-	 * @since 0.5
+	 * @see ValueFormatter::format
 	 *
 	 * @param DataValue $dataValue Unused in this implementation.
 	 *
-	 * @return string
+	 * @return string Unescaped message text.
 	 */
 	public function format( $dataValue ) {
 		$languageCode = $this->options->getOption( self::OPT_LANG );

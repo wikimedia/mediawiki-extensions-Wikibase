@@ -9,7 +9,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 
 /**
- * Formats a StringValue as an HTML link.
+ * Formats the StringValue from a "url" snak as an HTML link pointing to that URL.
  *
  * @since 0.5
  *
@@ -35,9 +35,9 @@ class HtmlUrlFormatter implements ValueFormatter {
 	}
 
 	/**
-	 * Formats the given URL as an HTML link
+	 * @see ValueFormatter::format
 	 *
-	 * @since 0.5
+	 * Formats the given URL as an HTML link
 	 *
 	 * @param StringValue $value The URL to turn into a link
 	 *

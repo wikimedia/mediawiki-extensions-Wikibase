@@ -25,12 +25,12 @@ class EscapingSnakFormatter implements SnakFormatter {
 	private $escapeCallback;
 
 	/**
-	 * @var string
+	 * @var string One of the SnakFormatter::FORMAT_... constants.
 	 */
 	private $format;
 
 	/**
-	 * @param string $format
+	 * @param string $format One of the SnakFormatter::FORMAT_... constants.
 	 * @param SnakFormatter $formatter
 	 * @param callable $escapeCallback A callable taking plain text and returning escaped text.
 	 */
@@ -48,7 +48,7 @@ class EscapingSnakFormatter implements SnakFormatter {
 	 *
 	 * @param Snak $snak
 	 *
-	 * @return string
+	 * @return string Either wikitext or HTML, depending on the $escapeCallback provided.
 	 */
 	public function formatSnak( Snak $snak ) {
 		$text = $this->formatter->formatSnak( $snak );
@@ -59,7 +59,7 @@ class EscapingSnakFormatter implements SnakFormatter {
 	/**
 	 * @see SnakFormatter::getFormat
 	 *
-	 * @return string
+	 * @return string One of the SnakFormatter::FORMAT_... constants.
 	 */
 	public function getFormat() {
 		return $this->format;

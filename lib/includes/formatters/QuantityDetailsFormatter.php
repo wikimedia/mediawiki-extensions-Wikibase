@@ -72,10 +72,10 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	}
 
 	/**
+	 * @see ValueFormatter::format
+	 *
 	 * Generates HTML representing the details of a QuantityValue,
 	 * as an itemized list.
-	 *
-	 * @since 0.5
 	 *
 	 * @param QuantityValue $value
 	 *
