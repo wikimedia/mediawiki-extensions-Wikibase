@@ -9,7 +9,7 @@ define( 'VALUEVIEW_VERSION', '0.15.6' );
 
 // Include the composer autoloader if it is present.
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
-	include_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 
 if ( defined( 'MEDIAWIKI' ) ) {

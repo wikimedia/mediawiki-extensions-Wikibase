@@ -34,12 +34,12 @@ $wgMessagesDirs['ValueView'] = __DIR__ . '/i18n';
  * @since 0.1
  *
  * @param array &$testModules
- * @param \ResourceLoader &$resourceLoader
+ * @param ResourceLoader &$resourceLoader
  * @return boolean
  */
 $wgHooks['ResourceLoaderTestModules'][] = function(
 	array &$testModules,
-	\ResourceLoader &$resourceLoader
+	ResourceLoader &$resourceLoader
 ) {
 	$testModules['qunit'] = array_merge(
 		$testModules['qunit'],
