@@ -212,7 +212,7 @@ class SetSiteLink extends ModifyEntity {
 		return array(
 			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen'
 			=> 'apihelp-wbsetsitelink-example-1',
-			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen&summary=World%20domination%20will%20be%20mine%20soon!'
+			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen&summary=Loves%20Oxygen'
 			=> 'apihelp-wbsetsitelink-example-2',
 			'action=wbsetsitelink&site=enwiki&title=Hydrogen&linksite=dewiki&linktitle=Wasserstoff'
 			=> 'apihelp-wbsetsitelink-example-3',
