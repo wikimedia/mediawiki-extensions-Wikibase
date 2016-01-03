@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_ad84465f",
+        "filename": "client/includes/ParserOutput/ClientParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-03T20:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_b78b39e7",
+      "revId": "28300258e5653245da9589ff2dcf3d01f161e5e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_776dc12c",
         "filename": "client/tests/phpunit/includes/ClientParserOutputDataUpdaterTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-01-03T15:15:37Z",
       "side": 1,
       "message": "not happy about further use of MockRepository.\n\n(we have HashSiteLinkStore now, though I see that ClientParserOutputDataUpdater still needs EntityLookup and also uses MockRepository for that. and don\u0027t consider refactoring in scope of this patch :/)",
+      "revId": "28300258e5653245da9589ff2dcf3d01f161e5e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_0dbeba13",
+        "filename": "client/tests/phpunit/includes/ClientParserOutputDataUpdaterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-03T20:13:15Z",
+      "side": 1,
+      "message": "Yeah, sadly the badges are not queryable, thus we need to get the fully entities in ClientParserOutputDataUpdater",
+      "parentUuid": "6eaa8f54_776dc12c",
       "revId": "28300258e5653245da9589ff2dcf3d01f161e5e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
