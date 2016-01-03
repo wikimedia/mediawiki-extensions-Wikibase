@@ -141,6 +141,23 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_f2c21f5c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-01-03T17:47:53Z",
+      "side": 1,
+      "message": "Please reduce nesting",
+      "revId": "bc79e6eaba5187d882769c3075889abffa295dfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_79e8c1af",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
         "patchSetId": 6
