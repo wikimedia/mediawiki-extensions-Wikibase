@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_b78b39e7",
+        "filename": "client/includes/ParserOutput/ClientParserOutputDataUpdater.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-01-03T15:15:37Z",
+      "side": 1,
+      "message": "while it might be nice to have two different error messages for these conditions, I think they should just be combined instead of all the copy and paste here.\n\nif ( !$item || !$item-\u003egetSiteLinkList()-\u003ehasLinkWithSiteId( $this-\u003esiteId ) ) {\n  wfLogWarning( ... );\n  return;\n}",
+      "revId": "28300258e5653245da9589ff2dcf3d01f161e5e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_776dc12c",
+        "filename": "client/tests/phpunit/includes/ClientParserOutputDataUpdaterTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-01-03T15:15:37Z",
+      "side": 1,
+      "message": "not happy about further use of MockRepository.\n\n(we have HashSiteLinkStore now, though I see that ClientParserOutputDataUpdater still needs EntityLookup and also uses MockRepository for that. and don\u0027t consider refactoring in scope of this patch :/)",
+      "revId": "28300258e5653245da9589ff2dcf3d01f161e5e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
