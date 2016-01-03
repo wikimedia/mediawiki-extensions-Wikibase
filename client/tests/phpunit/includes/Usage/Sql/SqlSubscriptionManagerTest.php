@@ -27,11 +27,6 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 				. 'because the repo-side table wb_changes_subscription is not available.' );
 		}
 
-		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyChangesSubscription' ) ) {
-			$this->markTestSkipped( 'Skipping test for SqlSubscriptionManager, '
-				. 'because the useLegacyChangesSubscription option is set.' );
-		}
-
 		$this->tablesUsed[] = 'wb_changes_subscription';
 
 		parent::setUp();
