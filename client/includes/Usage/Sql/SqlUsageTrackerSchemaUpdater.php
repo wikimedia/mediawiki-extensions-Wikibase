@@ -35,10 +35,6 @@ class SqlUsageTrackerSchemaUpdater {
 	 * @return bool
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
-		if ( WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'useLegacyUsageIndex' ) ) {
-			return true;
-		}
-
 		$usageTrackerSchemaUpdater = new self( $dbUpdater );
 		$usageTrackerSchemaUpdater->doSchemaUpdate();
 
