@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Cheers!",
-			"Minh Nguyen"
+			"Minh Nguyen",
+			"Quenhitran"
 		]
 	},
 	"wikibase-client-desc": "Trình khách của phần mở rộng Wikibase",
@@ -54,7 +55,7 @@
 	"wikibase-error-invalid-entity-id": "ID nhập vào không có trên hệ thống. Xin vui lòng sử dụng ID đã được cấp.",
 	"wikibase-error-exceeded-entity-access-limit": "Đã truy cập quá nhiều thực thể {{WBREPONAME}}.",
 	"unconnectedpages": "Trang không kết nối với khoản mục",
-	"unconnectedpages-summary": "Danh sách này có các trang không có khoản mục dữ liệu được liên kết (trong các không gian tên hỗ trợ khoản mục được kết nối). Danh sách được sắp xếp theo số trang trở xuống, cho nên các trang mới hơn được liệt kê trước.The list is sorted by descending page ID, so that newer pages are listed first.",
+	"unconnectedpages-summary": "Danh sách này có các trang không có khoản mục dữ liệu được liên kết (trong các không gian tên hỗ trợ khoản mục được kết nối). Danh sách được sắp xếp theo mã ID của trang giảm dần, vì thế các trang mới hơn sẽ được liệt kê trước.",
 	"wikibase-unconnectedpages-format-row": "($1 liên kết ngôn ngữ trên trang)",
 	"wikibase-unconnectedpages-submit": "Xem các trang",
 	"pageswithbadges": "Trang có phù hiệu",

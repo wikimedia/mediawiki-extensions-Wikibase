@@ -1,9 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"AryanSogd"
+			"AryanSogd",
+			"Ibrahim"
 		]
 	},
+	"wikibase-edit": "вироиш",
+	"wikibase-add": "илова",
+	"wikibase-label-empty": "Ҳеҷ барчасбе таъриф нашудааст",
+	"wikibase-description-empty": "Ҳеҷ шарҳе таъриф нашудааст",
 	"wikibase-sitelinks": "пайвандҳои вебгоҳ",
-	"wikibase-sitelinkgroupview-input-help-message": "Илова кардани пайванди сомона аз тарафи муайян дар як макон ва дар як саҳифа, ки сомонаи таҳрир ё тоза кардани пайвандҳои сомона мавҷуд аст."
+	"wikibase-sitelinkgroupview-input-help-message": "Илова кардани пайванди сомона аз тарафи муайян дар як макон ва дар як саҳифа, ки сомонаи таҳрир ё тоза кардани пайвандҳои сомона мавҷуд аст.",
+	"wikibase-sitelinks-special": "Дигар сомонаҳо",
+	"wikibase-aliases-empty": "Бидуни номи мустаъори таърифшуда",
+	"wikibase-statementview-rank-normal": "Рутбаи оддӣ"
 }

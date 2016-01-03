@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"V6rg"
+			"V6rg",
+			"شیخ"
 		]
 	},
 	"wikibase-edit": "دچينواچين",
-	"wikibase-add": "بچربؤن"
+	"wikibase-add": "بچربؤن",
+	"wikibase-sitelinks-special": "باخي ساىتؤن"
 }
