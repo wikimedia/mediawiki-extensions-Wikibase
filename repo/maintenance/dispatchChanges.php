@@ -8,15 +8,11 @@ use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\ChangeLookup;
-use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\DualSubscriptionLookup;
-use Wikibase\Store\SiteLinkSubscriptionLookup;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
-use Wikibase\Store\SubscriptionLookup;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -77,7 +73,6 @@ class DispatchChanges extends Maintenance {
 		$clientWikis = $settings->getSetting( 'localClientDatabases' );
 		$batchChunkFactor = $settings->getSetting( 'dispatchBatchChunkFactor' );
 		$batchCacheFactor = $settings->getSetting( 'dispatchBatchCacheFactor' );
-		$subscriptionLookupMode = $settings->getSetting( 'subscriptionLookupMode' );
 
 		$batchSize = (int)$this->getOption( 'batch-size', 1000 );
 		$maxChunks = (int)$this->getOption( 'max-chunks', 15 );
@@ -120,7 +115,7 @@ class DispatchChanges extends Maintenance {
 		$coordinator->setRandomness( $randomness );
 
 		$notificationSender = new JobQueueChangeNotificationSender( $repoDB, $clientWikis );
-		$subscriptionLookup = $this->getSubscriptionLookup( $repoDB, $subscriptionLookupMode );
+		$subscriptionLookup = new SqlSubscriptionLookup( wfGetLB() );
 
 		$dispatcher = new ChangeDispatcher(
 			$coordinator,
@@ -215,39 +210,6 @@ class DispatchChanges extends Maintenance {
 		}
 
 		$this->log( "Done, exiting after $c passes and $t seconds." );
-	}
-
-	/**
-	 * @param string|bool $repoDB
-	 * @param string $subscriptionLookupMode
-	 *
-	 * @return SubscriptionLookup
-	 */
-	private function getSubscriptionLookup( $repoDB, $subscriptionLookupMode ) {
-		$lookup = null;
-		$siteLinkSubscriptionLookup = null;
-		$sqlSubscriptionLookup = null;
-
-		if ( $subscriptionLookupMode === 'sitelinks'
-			|| $subscriptionLookupMode === 'subscriptions+sitelinks'
-		) {
-			$this->log( "Using sitelinks to target notifications." );
-			$siteLinkTable = new SiteLinkTable( 'wb_items_per_site', true, $repoDB );
-			$lookup = $siteLinkSubscriptionLookup = new SiteLinkSubscriptionLookup( $siteLinkTable );
-		}
-
-		if ( $subscriptionLookupMode === 'subscriptions'
-			|| $subscriptionLookupMode === 'subscriptions+sitelinks'
-		) {
-			$this->log( "Using subscriptions to target notifications." );
-			$lookup = $sqlSubscriptionLookup = new SqlSubscriptionLookup( wfGetLB() );
-		}
-
-		if ( $siteLinkSubscriptionLookup && $sqlSubscriptionLookup ) {
-			$lookup = new DualSubscriptionLookup( $siteLinkSubscriptionLookup, $sqlSubscriptionLookup );
-		}
-
-		return $lookup;
 	}
 
 	/**

@@ -25,13 +25,6 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 	const TABLE_NAME = 'wb_changes_subscription';
 
 	protected function setUp() {
-		$mode = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'subscriptionLookupMode' );
-
-		if ( $mode !== 'subscriptions' && $mode !== 'subscriptions+sitelinks' ) {
-			$this->markTestSkipped( 'Skipping test for ChangesSubscriptionTableBuilder, '
-				. 'because usage of the wb_changes_subscription table is disabled.' );
-		}
-
 		$this->tablesUsed[] = self::TABLE_NAME;
 		$this->tablesUsed[] = 'wb_items_per_site';
 
