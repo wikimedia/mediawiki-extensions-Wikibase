@@ -157,7 +157,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				'name' => 'label',
 			) );
 		$matchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'button',
 			'attributes' => array(
 				'id' => 'wb-itembytitle-submit',
 				'type' => 'submit',
@@ -187,7 +187,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( $sub, $request, $languageCode );
 		foreach ( $matchers as $key => $matcher ) {
-			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" );
+			$this->assertTag( $matcher, $output, "Failed to match html output with tag '{$key}''" ."\n\n$output" );
 		}
 	}
 

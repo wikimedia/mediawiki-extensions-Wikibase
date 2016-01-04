@@ -58,7 +58,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			) );
 
 		$matchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'button',
 			'attributes' => array(
 				'id' => 'wikibase-entitieswithoutpage-submit',
 				'type' => 'submit',
