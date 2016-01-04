@@ -157,7 +157,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				'name' => 'label',
 			) );
 		$matchers['submit'] = array(
-			'tag' => 'input',
+			'tag' => 'button',
 			'attributes' => array(
 				'id' => 'wb-itembytitle-submit',
 				'type' => 'submit',
