@@ -34,7 +34,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private $type = null;
 
 	/**
-	 * @var string
+	 * @var string One of the TermIndexEntry::TYPE_... constants.
 	 */
 	private $termType;
 
@@ -58,6 +58,14 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 */
 	private $termsLanguages;
 
+	/**
+	 * @param string $name
+	 * @param string $termType One of the TermIndexEntry::TYPE_... constants.
+	 * @param string $legendMsg
+	 * @param EntityPerPage $entityPerPage
+	 * @param EntityFactory $entityFactory
+	 * @param ContentLanguages $termsLanguages
+	 */
 	public function __construct(
 		$name,
 		$termType,
