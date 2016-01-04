@@ -23,6 +23,21 @@ class ChangePrunerTest extends MediaWikiTestCase {
 
 	public $messages = array();
 
+	public function testConstructorWithInvalidBatchSize() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new ChangePruner( 0, 0, 0, false );
+	}
+
+	public function testConstructorWithInvalidKeepSeconds() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new ChangePruner( 1, -1, 0, false );
+	}
+
+	public function testConstructorWithInvalidGraceSeconds() {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new ChangePruner( 1, 0, -1, false );
+	}
+
 	public function testPrune() {
 		$pruner = new ChangePruner( 1, 1, 1, false );
 
@@ -42,8 +57,9 @@ class ChangePrunerTest extends MediaWikiTestCase {
 
 		$this->assertEquals( 6, count( $this->messages ), 'pruner has reported 6 messages' );
 
-		$this->assertContains( 'pruning entries older than 2015-01-01T00:03:00Z', $this->messages[0] );
+		$this->assertContains( 'pruning entries older than 2015-01-01T00:00:06Z', $this->messages[0] );
 		$this->assertContains( '1 rows pruned', $this->messages[1] );
+		$this->assertContains( 'pruning entries older than 2015-01-01T00:03:01Z', $this->messages[2] );
 		$this->assertContains( '1 rows pruned', $this->messages[3] );
 		$this->assertContains( '0 rows pruned', $this->messages[5] );
 
