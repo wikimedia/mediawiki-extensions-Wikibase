@@ -232,6 +232,7 @@
 	"apihelp-wbmergeitems-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
 	"apihelp-wbmergeitems-example-1": "Fusionéiert Date vun Q42 an Q222",
 	"apihelp-wbmergeitems-example-2": "Fusionéiert Date vun Q555 an Q3",
+	"apihelp-wbremovereferences-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
 	"apihelp-wbsearchentities-param-search": "No dësem Text sichen.",
 	"apihelp-wbsearchentities-param-language": "An dëser Sprooch sichen.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Ob Ersatzsproochen ausgeschalt solle ginn",
