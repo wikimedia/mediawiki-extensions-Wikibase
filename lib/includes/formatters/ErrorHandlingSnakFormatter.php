@@ -61,7 +61,7 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws FormattingException
-	 * @return string Either plain text, wikitext or HTML, depending on the $snakFormatter provided.
+	 * @return string Either plain text, wikitext or HTML, depending on the SnakFormatter provided.
 	 */
 	public function formatSnak( Snak $snak ) {
 		try {

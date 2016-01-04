@@ -51,7 +51,7 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 	 *
 	 * @param Snak $snak
 	 *
-	 * @return string Either plain text, wikitext or HTML, depending on the $snakFormatter provided.
+	 * @return string Either plain text, wikitext or HTML, depending on the SnakFormatter provided.
 	 */
 	public function formatSnak( Snak $snak ) {
 		if ( $snak instanceof PropertyValueSnak ) {

@@ -4,15 +4,23 @@ namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Snak\Snak;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Assert\ParameterTypeException;
 
 /**
  * EscapingSnakFormatter wraps another SnakFormatter and
  * applies a transformation (escaping) to that formatter's output.
  *
+ * @since 0.5
+ *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
 class EscapingSnakFormatter implements SnakFormatter {
+
+	/**
+	 * @var string One of the SnakFormatter::FORMAT_... constants.
+	 */
+	private $format;
 
 	/**
 	 * @var SnakFormatter
@@ -25,14 +33,11 @@ class EscapingSnakFormatter implements SnakFormatter {
 	private $escapeCallback;
 
 	/**
-	 * @var string One of the SnakFormatter::FORMAT_... constants.
-	 */
-	private $format;
-
-	/**
 	 * @param string $format One of the SnakFormatter::FORMAT_... constants.
-	 * @param SnakFormatter $formatter
+	 * @param SnakFormatter $formatter A formatter returning plain text.
 	 * @param callable $escapeCallback A callable taking plain text and returning escaped text.
+	 *
+	 * @throws ParameterTypeException
 	 */
 	public function __construct( $format, SnakFormatter $formatter, $escapeCallback ) {
 		Assert::parameterType( 'string', $format, '$format' );
@@ -48,7 +53,7 @@ class EscapingSnakFormatter implements SnakFormatter {
 	 *
 	 * @param Snak $snak
 	 *
-	 * @return string Either wikitext or HTML, depending on the $escapeCallback provided.
+	 * @return string Typically wikitext or HTML, depending on the $escapeCallback provided.
 	 */
 	public function formatSnak( Snak $snak ) {
 		$text = $this->formatter->formatSnak( $snak );

@@ -9,6 +9,8 @@ use ValueFormatters\ValueFormatter;
  * EscapingValueFormatter wraps another ValueFormatter and
  * applies a transformation (escaping) to that formatter's output.
  *
+ * @since 0.5
+ *
  * @license GPL 2+
  * @author Daniel Kinzler
  */
@@ -25,8 +27,9 @@ class EscapingValueFormatter implements ValueFormatter {
 	private $escapeCallback;
 
 	/**
-	 * @param ValueFormatter $formatter
+	 * @param ValueFormatter $formatter A formatter returning plain text.
 	 * @param callable $escapeCallback A callable taking plain text and returning escaped text.
+	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( ValueFormatter $formatter, $escapeCallback ) {
@@ -39,11 +42,11 @@ class EscapingValueFormatter implements ValueFormatter {
 	}
 
 	/**
-	 * @since 0.1
+	 * @see ValueFormatter::format
 	 *
 	 * @param mixed $value
 	 *
-	 * @return string
+	 * @return string Typically wikitext or HTML, depending on the $escapeCallback provided.
 	 */
 	public function format( $value ) {
 		$text = $this->formatter->format( $value );
