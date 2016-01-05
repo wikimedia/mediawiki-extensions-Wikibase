@@ -9,7 +9,9 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Validators\AlternativeValidator;
+use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataFieldValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
@@ -73,24 +75,32 @@ class ValidatorBuilders {
 	private $contentLanguages;
 
 	/**
+	 * @var CachingCommonsMediaFileNameLookup
+	 */
+	private $mediaFileNameLookup;
+
+	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
 	 * @param string $vocabularyBaseUri The base URI for vocabulary concepts.
 	 * @param ContentLanguages $contentLanguages
+	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
 	 */
 	public function __construct(
 		EntityLookup $lookup,
 		EntityIdParser $idParser,
 		array $urlSchemes,
 		$vocabularyBaseUri,
-		ContentLanguages $contentLanguages
+		ContentLanguages $contentLanguages,
+		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
 	) {
 		$this->entityLookup = $lookup;
 		$this->entityIdParser = $idParser;
 		$this->urlSchemes = $urlSchemes;
 		$this->vocabularyBaseUri = $vocabularyBaseUri;
 		$this->contentLanguages = $contentLanguages;
+		$this->mediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
 	}
 
 	/**
@@ -147,9 +157,11 @@ class ValidatorBuilders {
 	}
 
 	/**
+	 * @param string $checkExistence Either 'checkExistence' or 'doNotCheckExistence'
+	 *
 	 * @return ValueValidator[]
 	 */
-	public function buildMediaValidators() {
+	public function buildMediaValidators( $checkExistence = 'checkExistence' ) {
 		// oi_archive_name is max 255 bytes, which include a timestamp and an exclamation mark,
 		// so restrict file name to 240 bytes (see UploadBase::getTitle).
 		$validators = $this->getCommonStringValidators( 240 );
@@ -158,9 +170,10 @@ class ValidatorBuilders {
 		// $wgLegalTitleChars as well as $wgIllegalFileChars). File name extensions with digits
 		// (e.g. ".jp2") are possible, as well as two characters (e.g. ".ai").
 		$validators[] = new RegexValidator( '/^[^#\/:[\\\\\]{|}]+\.\w{2,}$/u' );
-		//TODO: add a validator that checks the rules that MediaWiki imposes on filenames for uploads.
-		//      $wgLegalTitleChars and $wgIllegalFileChars define this, but we need these for the *target* wiki.
-		//TODO: add a validator that uses a foreign DB query to check whether the file actually exists on commons.
+
+		if ( $checkExistence === 'checkExistence' ) {
+			$validators[] = new CommonsMediaExistsValidator( $this->mediaFileNameLookup );
+		}
 
 		$topValidator = new DataValueValidator(
 			new CompositeValidator( $validators ) //Note: each validator is fatal
