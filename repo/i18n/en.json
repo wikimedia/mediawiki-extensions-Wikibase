@@ -424,6 +424,7 @@
 	"apihelp-wbformatvalue-param-datatype": "The value's data type. This is distinct from the value's type",
 	"apihelp-wbformatvalue-param-datavalue": "The data to format. This has to be the JSON serialization of a DataValue object.",
 	"apihelp-wbformatvalue-param-options": "The options the formatter should use. Provided as a JSON object.",
+	"apihelp-wbformatvalue-param-property": "Property id the data value belongs to, should be used instead of the datatype parameter.",
 	"apihelp-wbformatvalue-example-1": "Format a simple string value.",
 	"apihelp-wbformatvalue-example-2": "Format a string value as a URL in HTML.",
 	"apihelp-wbgetclaims-description": "Gets Wikibase claims.",
