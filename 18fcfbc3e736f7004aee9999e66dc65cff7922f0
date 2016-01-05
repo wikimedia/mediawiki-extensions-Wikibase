@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_be03080f",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-05T12:23:44Z",
+      "side": 1,
+      "message": "Dead code. Fixed in I4911ef3.",
+      "revId": "18fcfbc3e736f7004aee9999e66dc65cff7922f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
