@@ -217,7 +217,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 		$this->assertFalse( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
 	}
 
-	public function testUpdateBadgesProperty_inconsistentSiteLinkLookup() {
+	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupEmptySiteLinkList() {
 		$parserOutput = new ParserOutput();
 
 		$title = Title::newFromText( 'Foo sr' );
@@ -237,6 +237,32 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
 			$siteLinkLookup,
 			$mockRepoNoSiteLinks,
+			'srwiki'
+		);
+
+		// Suppress warnings as this is supposed to throw one.
+		\MediaWiki\suppressWarnings();
+		$parserOutputDataUpdater->updateBadgesProperty( $title, $parserOutput );
+		\MediaWiki\restoreWarnings();
+
+		// Stuff didn't blow up
+		$this->assertTrue( true );
+	}
+
+	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupNoSuchEntity() {
+		$parserOutput = new ParserOutput();
+
+		$title = Title::newFromText( 'Foo sr' );
+
+		$siteLinkLookup = new MockRepository();
+		foreach ( $this->getItems() as $item ) {
+			$siteLinkLookup->putEntity( $item );
+		}
+
+		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
+			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
+			$siteLinkLookup,
+			new MockRepository(),
 			'srwiki'
 		);
 
