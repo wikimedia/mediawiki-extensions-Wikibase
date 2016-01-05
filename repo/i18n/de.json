@@ -128,6 +128,7 @@
 	"wikibase-validator-label-conflict": "Die Eigenschaft $3 hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.",
 	"wikibase-validator-label-with-description-conflict": "Das Datenobjekt $3 hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist, verwendet den gleichen Beschreibungstext.",
 	"wikibase-validator-label-no-entityid": "Die Bezeichnung darf keine gültige Objektkennung sein.",
+	"wikibase-validator-no-such-media": "Die Datei „$1“ ist nicht auf [https://commons.wikimedia.org/ Wikimedia Commons] vorhanden.",
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ ist keine gültige Objektkennung.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Der Sprachcode „$1“ ist unbekannt. Bitte nutze einen gültigen Sprachcode, wie bspw. „de“.",
 	"wikibase-wikibaserepopage-invalid-id": "Die Kennung „$1“ ist unbekannt. Bitte nutze eine gültige Objektkennung.",

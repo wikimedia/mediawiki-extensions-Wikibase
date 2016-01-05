@@ -15,5 +15,6 @@
 	"wikibase-rc-hide-wikidata": "$1 Vicidata",
 	"wikibase-rc-hide-wikidata-hide": "Celare",
 	"wikibase-rc-hide-wikidata-show": "Monstrare",
-	"wikibase-rc-wikibase-edit-title": "Recensio apud Wikidata facta"
+	"wikibase-rc-wikibase-edit-title": "Recensio apud Wikidata facta",
+	"wikibase-watchlist-show-changes-pref": "Mutationes apud {{WBREPONAME}} factas, siquae paginas observandas afficiant, in earum indice ostendere"
 }
