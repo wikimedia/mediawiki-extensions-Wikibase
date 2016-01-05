@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Test\Repo\Validators;
+namespace Wikibase\Test\Repo;
 
 use HashBagOStuff;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 
 /**
- * @covers Wikibase\Repo\Validators\CachingCommonsMediaFileNameLookupTest
+ * @covers Wikibase\Repo\CachingCommonsMediaFileNameLookup
  *
  * @license GPL 2+
  *
