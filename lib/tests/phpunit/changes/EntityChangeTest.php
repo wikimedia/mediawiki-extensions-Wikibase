@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
 use RecentChange;
 use Revision;
 use stdClass;
@@ -281,6 +283,27 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
 	}
 
+	public function testGivenEntityChangeWithoutObjectId_setRevisionInfoSetsObjectId() {
+		$content = $this->getMockBuilder( 'Wikibase\ItemContent' )
+			->disableOriginalConstructor()
+			->getMock();
+		$content->expects( $this->once() )
+			->method( 'getEntityId' )
+			->will( $this->returnValue( new ItemId( 'Q1' ) ) );
+
+		$revision = $this->getMockBuilder( 'Revision' )
+			->disableOriginalConstructor()
+			->getMock();
+		$revision->expects( $this->once() )
+			->method( 'getContent' )
+			->will( $this->returnValue( $content ) );
+
+		$change = new EntityChange( array( 'info' => array(), 'type' => '~' ) );
+		$this->assertFalse( $change->hasField( 'object_id' ), 'precondition' );
+		$change->setRevisionInfo( $revision );
+		$this->assertSame( 'q1', $change->getObjectId() );
+	}
+
 	public function testSetTimestamp() {
 		$q7 = new ItemId( 'Q7' );
 
@@ -292,7 +315,29 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertEquals( $timestamp, $change->getTime() );
 	}
 
-	public function testArrayalizeObjects() {
+	public function testHasDiff() {
+		$change = new EntityChange( array( 'info' => array() ) );
+		$this->assertFalse( $change->hasDiff() );
+
+		$change->setDiff( new Diff() );
+		$this->assertTrue( $change->hasDiff() );
+	}
+
+	public function testIsEmpty() {
+		$change = new EntityChange();
+		$this->assertTrue( $change->isEmpty() );
+
+		$change->setDiff( new Diff( array( new DiffOpAdd( '' ) ) ) );
+		$this->assertFalse( $change->isEmpty() );
+	}
+
+	public function testSerializeAndUnserializeInfo() {
+		$info = array( 'diff' => new DiffOpAdd( '' ) );
+		$change = new EntityChange();
+		$this->assertEquals( $info, $change->unserializeInfo( $change->serializeInfo( $info ) ) );
+	}
+
+	public function testGivenStatement_arrayalizeObjectsReturnsSerialization() {
 		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
 		$expected = array(
 			'mainsnak' => array(
@@ -315,7 +360,13 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertSame( $expected, $array );
 	}
 
-	public function testObjectifyArrays() {
+	public function testGivenNonStatement_arrayalizeObjectsReturnsOriginal() {
+		$data = 'foo';
+		$change = new EntityChange();
+		$this->assertSame( $data, $change->arrayalizeObjects( $data ) );
+	}
+
+	public function testGivenStatementSerialization_objectifyArraysReturnsStatement() {
 		$data = array(
 			'mainsnak' => array(
 				'snaktype' => 'novalue',
@@ -328,6 +379,12 @@ class EntityChangeTest extends ChangeRowTest {
 		$change = new EntityChange();
 		$statement = $change->objectifyArrays( $data );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\Statement', $statement );
+	}
+
+	public function testGivenNonStatementSerialization_objectifyArraysReturnsOriginal() {
+		$data = array( 'foo' );
+		$change = new EntityChange();
+		$this->assertSame( $data, $change->objectifyArrays( $data ) );
 	}
 
 }
