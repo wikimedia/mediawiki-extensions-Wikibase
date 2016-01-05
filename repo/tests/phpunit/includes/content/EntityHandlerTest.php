@@ -18,6 +18,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
+use WikitextContent;
 
 /**
  * @covers Wikibase\Repo\Content\EntityHandler
@@ -138,6 +139,13 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertTrue( $specialPageName === null || is_string( $specialPageName ) );
 	}
 
+	public function testGivenNonEntityContent_serializeContentThrowsException() {
+		$handler = $this->getHandler();
+		$content = new WikitextContent( '' );
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$handler->serializeContent( $content );
+	}
+
 	/**
 	 * @dataProvider contentProvider
 	 * @param EntityContent $content
@@ -162,6 +170,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertFalse( $handler->canBeUsedOn( Title::makeTitle( NS_MEDIAWIKI, "Foo" ) ),
 							'It should be impossible to create an entity outside the respective entity namespace!'
 						);
+	}
+
+	public function testIsParserCacheSupported() {
+		$this->assertTrue( $this->getHandler()->isParserCacheSupported() );
 	}
 
 	public function testGetPageLanguage() {
@@ -421,6 +433,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
+	public function testGetLegacyExportFormatDetector() {
+		$detector = $this->getHandler()->getLegacyExportFormatDetector();
+		$this->assertInternalType( 'callable', $detector );
+	}
+
 	public function forCreationParamProvider() {
 		return array(
 			array( true ),
@@ -441,6 +458,11 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		foreach ( $validators as $validator ) {
 			$this->assertInstanceOf( 'Wikibase\Repo\Validators\EntityValidator', $validator );
 		}
+	}
+
+	public function testGetValidationErrorLocalizer() {
+		$localizer = $this->getHandler()->getValidationErrorLocalizer();
+		$this->assertInstanceOf( 'Wikibase\Repo\Validators\ValidatorErrorLocalizer', $localizer );
 	}
 
 	public function testMakeParserOptions() {
