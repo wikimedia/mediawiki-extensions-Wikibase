@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_c8464280",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2016-01-05T22:45:36Z",
+      "side": 1,
+      "message": "Why remove empty lines? I suppose they were there on purpose.",
+      "revId": "d4daa5072a39a845fb6d5ae01149b1adce1bdf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
