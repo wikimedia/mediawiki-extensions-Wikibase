@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_7e5a7086",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2016-01-05T15:14:54Z",
+      "side": 1,
+      "message": "I think this is \"the statement\"",
+      "revId": "002dc1c37929f97d03f82880564b28a563960549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9e572c5b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2016-01-05T15:14:54Z",
+      "side": 1,
+      "message": "1) The articles are all wrong here and in the other two messages... it should be to \"to the\", not \"to\"; \"if the\" or \"if said\", not \"if\"; \"on the entity\", not \"on entity\".\n2) \"article\" is incorrect, we don\u0027t know whether the client page is an article. \"(article)\" is also incorrect, the entity is definitely not an article.",
+      "revId": "002dc1c37929f97d03f82880564b28a563960549",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
