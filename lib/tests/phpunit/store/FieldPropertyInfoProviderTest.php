@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Lib\Tests\Store;
+namespace Wikibase\Lib\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\FieldPropertyInfoProvider;
 
 /**
- * @covers Wikibase\Lib\Store\FieldPropertyInfoProvider
+ * @covers Wikibase\Lib\FieldPropertyInfoProvider
  *
  * @group Wikibase
  * @group WikibaseLib
