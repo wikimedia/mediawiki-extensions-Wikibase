@@ -393,13 +393,7 @@ abstract class EntityHandler extends ContentHandler {
 	public function unserializeContent( $blob, $format = null ) {
 		$redirect = $this->contentCodec->decodeRedirect( $blob, $format );
 
-		if ( $redirect ) {
-			if ( $redirect === null ) {
-				throw new MWContentSerializationException(
-					'The serialized data contains neither an Entity nor an EntityRedirect!'
-				);
-			}
-
+		if ( $redirect !== null ) {
 			return $this->makeEntityRedirectContent( $redirect );
 		} else {
 			$holder = new DeferredDecodingEntityHolder(
