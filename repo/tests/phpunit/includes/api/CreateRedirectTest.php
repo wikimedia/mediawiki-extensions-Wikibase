@@ -191,7 +191,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 			'target is a redirect' => array( 'Q11', 'Q22', 'target-is-redirect' ),
 			'target is incompatible' => array( 'Q11', 'P11', 'target-is-incompatible' ),
 
-			'source not empty' => array( 'Q12', 'Q11', 'target-not-empty' ),
+			'source not empty' => array( 'Q12', 'Q11', 'origin-not-empty' ),
 			'can\'t redirect' => array( 'P11', 'P12', 'cant-redirect' ),
 		);
 	}
