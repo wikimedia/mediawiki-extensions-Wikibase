@@ -30,6 +30,24 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 */
+	public function testConstructorThrowsException( array $dataTypes, $languageCode ) {
+		$this->setExpectedException( 'MWException' );
+		new DataTypeSelector( $dataTypes, $languageCode );
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		return array(
+			array( array(), null ),
+			array( array(), false ),
+			array( array( null ), '' ),
+			array( array( false ), '' ),
+			array( array( '' ), '' ),
+		);
+	}
+
+	/**
 	 * @dataProvider getHtmlProvider
 	 */
 	public function testGetHtml( array $dataTypes, $selectedTypeId, $expected ) {
