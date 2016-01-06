@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_438d55d7",
+        "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-06T00:16:31Z",
+      "side": 1,
+      "message": "NonStatement?",
+      "revId": "9489aff8249bf59919a57151a15cb69b4cf60660",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
