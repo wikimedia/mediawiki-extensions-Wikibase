@@ -117,6 +117,7 @@
 	"wikibase-validator-label-conflict": "Štítek „$1“ pro jazykový kód $2 již má vlastnost $3.",
 	"wikibase-validator-label-with-description-conflict": "Štítek „$1“ se stejným popisem pro jazykový kód $2 již má položka $3.",
 	"wikibase-validator-label-no-entityid": "Štítek nesmí být platným identifikátorem entity.",
+	"wikibase-validator-no-such-media": "Soubor „$1“ na [https://commons.wikimedia.org/ Wikimedia Commons] neexistuje.",
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ není platný identifikátor položky",
 	"wikibase-wikibaserepopage-invalid-langcode": "Neznámý kód jazyka „$1“. Použijte kód jazyka, který systém zná, například „en“.",
 	"wikibase-wikibaserepopage-invalid-id": "Systém nezná zadané ID „$1“. Prosím, zadejte platné ID entity.",

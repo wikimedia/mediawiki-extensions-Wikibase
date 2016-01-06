@@ -21,7 +21,8 @@
 			"Batumski brodyaga",
 			"Чаховіч Уладзіслаў",
 			"Mariya",
-			"Frhdkazan"
+			"Frhdkazan",
+			"Ядерный Трамвай"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -120,6 +121,7 @@
 	"wikibase-validator-label-conflict": "У свойства $3 уже есть название «$1», связанное с кодом языка «$2».",
 	"wikibase-validator-label-with-description-conflict": "У элемента $3 уже есть название «$1», связанное с кодом языка «$2» и использующее в качестве описания тот же самый текст.",
 	"wikibase-validator-label-no-entityid": "Метка не должна совпадать с действительным идентификатором сущности.",
+	"wikibase-validator-no-such-media": "Файла «$1» на [https://commons.wikimedia.org/ Викискладе] не существует.",
 	"wikibase-wikibaserepopage-not-itemid": "«$1» — некорректный идентификатор элемента.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Неизвестный код языка «$1». Пожалуйста, используйте один из известных системе языковых кодов, например «ru».",
 	"wikibase-wikibaserepopage-invalid-id": "Системе неизвестен идентификатор «$1». Пожалуйста, используйте один из существующих идентификаторов.",

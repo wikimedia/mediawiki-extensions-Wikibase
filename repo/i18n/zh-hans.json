@@ -127,6 +127,7 @@
 	"wikibase-validator-label-conflict": "属性$3已经关联语言代码$2的标签“$1”。",
 	"wikibase-validator-label-with-description-conflict": "项$3已经关联语言代码$2的标签“$1”，使用同一描述文本。",
 	"wikibase-validator-label-no-entityid": "该标签不是有效的实体ID。",
+	"wikibase-validator-no-such-media": "文件“$1”在[https://commons.wikimedia.org/ 维基共享资源]不存在。",
 	"wikibase-itemlink": "$1$2",
 	"wikibase-itemlink-id-wrapper": "（$1）",
 	"wikibase-itemlink-userlang-wrapper": "（$1：$2）",
