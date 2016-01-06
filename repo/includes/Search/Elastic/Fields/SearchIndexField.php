@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Search\Elastic\Fields;
 use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
- * Each field is intended to be by CirrusSearch as an
+ * Each field is intended to be used by CirrusSearch as an
  * additional property of a page.
  *
  * The data returned by the field must match the field
