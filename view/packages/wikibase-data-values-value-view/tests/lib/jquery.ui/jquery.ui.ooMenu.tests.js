@@ -46,6 +46,7 @@
 	} );
 
 	QUnit.test( 'Create', function( assert ) {
+		assert.expect( 7 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -99,6 +100,7 @@
 	} );
 
 	QUnit.test( 'hasVisibleItems()', function( assert ) {
+		assert.expect( 9 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -160,6 +162,7 @@
 	} );
 
 	QUnit.test( 'Update items using option()', function( assert ) {
+		assert.expect( 3 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -191,6 +194,7 @@
 	} );
 
 	QUnit.test( 'Update items using option() with custom items present', function( assert ) {
+		assert.expect( 3 );
 		var $menu = newTestMenu( { customItems: customMenuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
@@ -222,6 +226,7 @@
 	} );
 
 	QUnit.test( 'Update custom items using option()', function( assert ) {
+		assert.expect( 3 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -253,6 +258,7 @@
 	} );
 
 	QUnit.test( 'Update custom items using option() with items present', function( assert ) {
+		assert.expect( 3 );
 		var $menu = newTestMenu( { customItems: customMenuItems } ),
 			menu = $menu.data( 'ooMenu' );
 
@@ -284,6 +290,7 @@
 	} );
 
 	QUnit.test( 'Setting "maxItems" option triggering scale()', function( assert ) {
+		assert.expect( 2 );
 		var $menu = newTestMenu( {
 				items: menuItems,
 				maxItems: menuItems.length - 1
@@ -309,6 +316,7 @@
 	} );
 
 	QUnit.test( '"manipulateLabel" option', function( assert ) {
+		assert.expect( 2 );
 		var $menu = newTestMenu( {
 				items: menuItems.slice( 0, 2 ),
 				manipulateLabel: function( label ) {
@@ -325,6 +333,7 @@
 	} );
 
 	QUnit.test( 'prev() & getActiveItem()', function( assert ) {
+		assert.expect( 3 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -359,6 +368,7 @@
 	} );
 
 	QUnit.test( 'next() & getActiveItem()', function( assert ) {
+		assert.expect( 3 );
 		var $menu = newTestMenu(),
 			menu = $menu.data( 'ooMenu' );
 
@@ -545,6 +555,7 @@
 	} );
 
 	QUnit.test( 'Item constructor', function( assert ) {
+		assert.expect( 2 );
 		var item = new $.ui.ooMenu.Item( 'label' );
 
 		assert.ok(
@@ -561,6 +572,7 @@
 	} );
 
 	QUnit.test( 'CustomItem constructor', function( assert ) {
+		assert.expect( 24 );
 		var testSets = [
 			['label'],
 			[$( '<div>label</div>' )],

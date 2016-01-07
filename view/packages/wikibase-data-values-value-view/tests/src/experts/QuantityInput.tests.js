@@ -21,6 +21,7 @@
 	}
 
 	QUnit.test( 'valueCharacteristics', function( assert ) {
+		assert.expect( 4 );
 		var expert = newExpert(),
 			characteristics = expert.valueCharacteristics();
 
@@ -46,6 +47,7 @@
 	} );
 
 	QUnit.test( 'valueCharacteristics( \'text/plain\' )', function( assert ) {
+		assert.expect( 2 );
 		var expert = newExpert(),
 			characteristics = expert.valueCharacteristics( 'text/plain' );
 

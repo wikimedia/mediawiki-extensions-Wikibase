@@ -22,6 +22,7 @@
 	);
 
 	QUnit.test( 'supports custom values', function( assert ) {
+		assert.expect( 1 );
 		var getUpstreamValue = function() {
 			return {
 				custom: true,
@@ -45,6 +46,7 @@
 	} );
 
 	QUnit.asyncTest( 'supports switching away from custom values', function( assert ) {
+		assert.expect( 2 );
 		var onValueChange = sinon.spy();
 		var upstreamValue = {
 			custom: true,

@@ -9,6 +9,7 @@
 	QUnit.module( 'jquery.util.adaptlettercase' );
 
 	QUnit.test( 'Basic tests', function( assert ) {
+		assert.expect( 6 );
 
 		assert.equal(
 			$.util.adaptlettercase( 'abc', 'AbC' ),

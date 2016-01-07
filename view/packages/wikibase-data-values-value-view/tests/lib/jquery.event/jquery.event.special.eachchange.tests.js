@@ -40,6 +40,7 @@
 	QUnit.test(
 		'Initialization',
 		function( assert ) {
+			assert.expect( 5 );
 			var $input = $( '<input/>', { 'class': 'test_eachchange', type: 'text' } ),
 				$inputNoType = $( '<input/>', { 'class': 'test_eachchange' } ),
 				$textarea = $( '<textarea/>', { 'class': 'test_eachchange' } ),
@@ -104,6 +105,7 @@
 	} );
 
 	QUnit.test( 'Triggering with a namespace assigned', function( assert ) {
+		assert.expect( 2 );
 		var $subject = generateInputElement();
 
 		$subject.on( 'eachchange.somenamespace', iIncr );
@@ -128,6 +130,7 @@
 
 	QUnit.test( 'Triggering with the event assigned twice with the same namespace',
 		function( assert ) {
+			assert.expect( 2 );
 			var $subject = generateInputElement();
 
 			$subject.on( 'eachchange.somenamespace', iIncr );
@@ -153,6 +156,7 @@
 	);
 
 	QUnit.test( 'Triggering using a native browser event', function( assert ) {
+		assert.expect( 1 );
 		var $subject = generateInputElement();
 
 		$subject.on( 'eachchange', iIncr );
@@ -167,6 +171,7 @@
 	} );
 
 	QUnit.test( 'Triggering on a set of two input elements', function( assert ) {
+		assert.expect( 1 );
 		var $subject = generateInputElement().add( generateInputElement() );
 
 		$subject.on( 'eachchange', iIncr );

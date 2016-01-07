@@ -22,6 +22,7 @@
 	);
 
 	QUnit.test( 'init calls child', function( assert ) {
+		assert.expect( 2 );
 		var $container = $( '<div />' );
 		var child = {
 			init: sinon.spy()

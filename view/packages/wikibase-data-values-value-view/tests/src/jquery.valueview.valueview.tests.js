@@ -41,6 +41,7 @@
 	};
 
 	QUnit.test( 'Constructor', function( assert ) {
+		assert.expect( 2 );
 		initVv();
 
 		assert.ok(
@@ -52,6 +53,7 @@
 	} );
 
 	QUnit.test( 'destroy', function( assert ) {
+		assert.expect( 1 );
 		initVv();
 
 		vvInst.destroy();
@@ -60,6 +62,7 @@
 	} );
 
 	QUnit.test( 'destroy with expert', function( assert ) {
+		assert.expect( 1 );
 		initVv( { withExpert: true } );
 
 		vvInst.destroy();
@@ -68,6 +71,7 @@
 	} );
 
 	QUnit.test( 'startEditing', function( assert ) {
+		assert.expect( 1 );
 		initVv();
 
 		vvInst.startEditing();
@@ -76,6 +80,7 @@
 	} );
 
 	QUnit.test( 'stopEditing without startEditing', function( assert ) {
+		assert.expect( 3 );
 		initVv();
 		assert.ok( !vvInst.isInEditMode() );
 
@@ -86,6 +91,7 @@
 	} );
 
 	QUnit.test( 'stopEditing after startEditing', function( assert ) {
+		assert.expect( 4 );
 		initVv();
 
 		vvInst.startEditing();
@@ -99,6 +105,7 @@
 	} );
 
 	QUnit.test( 'cancelEditing without startEditing', function( assert ) {
+		assert.expect( 3 );
 		initVv();
 		assert.ok( !vvInst.isInEditMode() );
 
@@ -109,6 +116,7 @@
 	} );
 
 	QUnit.test( 'cancelEditing after startEditing', function( assert ) {
+		assert.expect( 4 );
 		initVv();
 
 		vvInst.startEditing();
@@ -122,6 +130,7 @@
 	} );
 
 	QUnit.test( 'getFormattedValue with DOM', function( assert ) {
+		assert.expect( 3 );
 		var vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
@@ -157,6 +166,7 @@
 	} );
 
 	QUnit.test( 'getFormattedValue without DOM', function( assert ) {
+		assert.expect( 3 );
 		var vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );

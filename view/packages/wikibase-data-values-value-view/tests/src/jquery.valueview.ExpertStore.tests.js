@@ -61,6 +61,7 @@
 	QUnit.module( 'jquery.valueview.ExpertStore' );
 
 	QUnit.test( 'Constructor', function( assert ) {
+		assert.expect( 1 );
 		var expertStore = new vv.ExpertStore();
 
 		assert.ok(
@@ -70,6 +71,7 @@
 	} );
 
 	QUnit.test( 'registerDataTypeExpert(): Error handling', function( assert ) {
+		assert.expect( 2 );
 		var expertStore = new vv.ExpertStore();
 
 		assert.throws(
@@ -90,6 +92,7 @@
 	} );
 
 	QUnit.test( 'registerDataValueExpert(): Error handling', function( assert ) {
+		assert.expect( 2 );
 		var expertStore = new vv.ExpertStore();
 
 		assert.throws(
@@ -110,6 +113,7 @@
 	} );
 
 	QUnit.test( 'Return default expert constructor on getExpert()', function( assert ) {
+		assert.expect( 5 );
 		var expertStore = new vv.ExpertStore( MockExpertForUnsupportedValue );
 
 		assert.equal(
@@ -220,6 +224,7 @@
 	 *        constructor and an Expert constructor which is expected to be registered for it.
 	 */
 	function expertStoreRegistrationTest( assert, toRegister, toExpect  ) {
+		assert.expect( toRegister.length + toExpect.length );
 		var expertStore = new vv.ExpertStore();
 
 		// Register experts as per definition:

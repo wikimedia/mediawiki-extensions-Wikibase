@@ -9,6 +9,7 @@
 	QUnit.module( 'jquery.util.getscrollbarwidth' );
 
 	QUnit.test( 'Get scrollbar width', function( assert ) {
+		assert.expect( 1 );
 
 		assert.ok(
 			$.util.getscrollbarwidth() > 0,

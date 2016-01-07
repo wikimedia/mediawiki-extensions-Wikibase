@@ -21,6 +21,7 @@
 	} );
 
 	QUnit.test( 'Adapt letter case', function( assert ) {
+		assert.expect( 4 );
 		var $input = createTestInput();
 
 		assert.equal(
@@ -50,6 +51,7 @@
 	} );
 
 	QUnit.test( 'selectText()', function( assert ) {
+		assert.expect( 2 );
 		var $input = createTestInput().val( '0123456789' );
 
 		assert.equal(

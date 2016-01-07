@@ -53,6 +53,7 @@
 	} );
 
 	QUnit.test( 'Create', function( assert ) {
+		assert.expect( 1 );
 		var $suggester = newTestSuggester();
 
 		assert.ok(

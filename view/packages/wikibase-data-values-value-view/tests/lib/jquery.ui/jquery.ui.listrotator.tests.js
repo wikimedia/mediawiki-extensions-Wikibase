@@ -92,6 +92,7 @@
 	} );
 
 	QUnit.test( 'autoActive()', function( assert ) {
+		assert.expect( 1 );
 		assert.ok(
 			newTestListrotator().autoActive(),
 			'Listrotator uses "auto" initially'

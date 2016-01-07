@@ -31,6 +31,7 @@
 	);
 
 	QUnit.test( 'calendarhint is hidden if it should not be shown', function( assert ) {
+		assert.expect( 1 );
 		var calendarHint = new ExpertExtender.CalendarHint(
 			new HashMessageProvider( {
 				'valueview-expertextender-calendarhint-gregorian': 'MSG1',
@@ -52,6 +53,7 @@
 	} );
 
 	QUnit.test( 'calendarhint is visible if it should be shown', function( assert ) {
+		assert.expect( 1 );
 		var calendarHint = new ExpertExtender.CalendarHint(
 			new HashMessageProvider( {
 				'valueview-expertextender-calendarhint-gregorian': 'MSG1',
@@ -73,6 +75,7 @@
 	} );
 
 	QUnit.test( 'switch switches the calendar model', function( assert ) {
+		assert.expect( 3 );
 		var setSpy = sinon.spy();
 		var timeValue = new TimeValue( '1901-01-01T00:00:00Z' );
 		var calendarHint = new ExpertExtender.CalendarHint(
@@ -101,6 +104,7 @@
 	} );
 
 	QUnit.test( 'switch twice switches the calendar model back', function( assert ) {
+		assert.expect( 4 );
 		var setSpy = sinon.spy();
 		var timeValue = new TimeValue( '1901-01-01T00:00:00Z' );
 		var calendarHint = new ExpertExtender.CalendarHint(

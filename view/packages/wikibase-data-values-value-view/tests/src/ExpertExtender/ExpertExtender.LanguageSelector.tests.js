@@ -39,6 +39,7 @@
 	);
 
 	QUnit.test( 'value does not change if upstream value changes', function( assert ) {
+		assert.expect( 2 );
 		var upstreamValue = 'en';
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
@@ -73,6 +74,7 @@
 	} );
 
 	QUnit.test( 'returns correct value after initialization', function( assert ) {
+		assert.expect( 1 );
 		var languageSelector = new ExpertExtender.LanguageSelector(
 			{
 				getAll: function() { return [ 'en' ]; },

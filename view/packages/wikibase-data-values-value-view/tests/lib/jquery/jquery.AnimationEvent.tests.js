@@ -34,14 +34,17 @@
 	}
 
 	QUnit.test( 'construction without "new"', function( assert ) {
+		assert.expect( 5 );
 		assertSuccessfulConstruction( assert, AnimationEvent( 'nopurpose' ), 'nopurpose' );
 	} );
 
 	QUnit.test( 'construction with "new"', function( assert ) {
+		assert.expect( 5 );
 		assertSuccessfulConstruction( assert, new AnimationEvent( 'foo' ), 'foo' );
 	} );
 
 	QUnit.test( 'construction with custom fields given', function( assert ) {
+		assert.expect( 7 );
 		var fields = {
 			someCustomField1: 'foo',
 			someCustomField2: {}
@@ -61,6 +64,7 @@
 	} );
 
 	QUnit.test( 'animationOptions()', AnimationEvent.ANIMATION_STEPS.length + 2, function( assert ) {
+		assert.expect( 9 );
 		var event = AnimationEvent( 'animationpurpose' );
 		var predefined = {
 			easing: 'swing',
@@ -90,6 +94,8 @@
 	} );
 
 	QUnit.test( 'ANIMATION_STEPS', function( assert ) {
+		assert.expect( 2 );
+
 		assert.ok(
 			$.isArray( AnimationEvent.ANIMATION_STEPS ),
 			'Is an array.'

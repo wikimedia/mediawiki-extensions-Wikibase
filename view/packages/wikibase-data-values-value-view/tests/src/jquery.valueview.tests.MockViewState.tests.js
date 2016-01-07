@@ -19,6 +19,7 @@
 	 */
 	function buildMemberTestFn( memberName ) {
 		return function( params, assert ) {
+			assert.expect( 1 );
 			var viewState = new MockViewState( params.constructorArg );
 
 			assert.strictEqual(
@@ -80,6 +81,7 @@
 		}
 	] )
 		.test( 'constructor', function( params, assert ) {
+			assert.expect( 2 );
 			var viewState = new MockViewState( params.constructorArg );
 
 			assert.ok(
@@ -96,6 +98,7 @@
 		.test( 'isDisabled', buildMemberTestFn( 'isDisabled' ) )
 		.test( 'value', buildMemberTestFn( 'value' ) )
 		.test( 'option', function( params, assert ) {
+			assert.expect( 2 );
 			var viewState = new MockViewState( params.constructorArg );
 
 			assert.strictEqual(
@@ -113,6 +116,7 @@
 		} );
 
 	QUnit.test( 'Changing state after construction', function( assert ) {
+		assert.expect( 2 );
 		var state = {},
 			viewState = new MockViewState( state );
 

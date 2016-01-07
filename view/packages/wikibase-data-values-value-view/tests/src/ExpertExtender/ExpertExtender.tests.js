@@ -15,6 +15,7 @@
 	}
 
 	QUnit.test( 'Constructor', function( assert ) {
+		assert.expect( 2 );
 		var expertExtender = new ExpertExtender( $( '<input/>' ), [] );
 
 		assert.ok(
@@ -26,6 +27,7 @@
 	} );
 
 	QUnit.test( 'destroy cleans up properties', function( assert ) {
+		assert.expect( 1 );
 		var expertExtender = new ExpertExtender( $( '<input/>' ), [] );
 
 		expertExtender.destroy();
@@ -34,6 +36,7 @@
 	} );
 
 	QUnit.test( 'destroy calls extensions', function( assert ) {
+		assert.expect( 1 );
 		var destroy = sinon.spy(),
 			expertExtender = new ExpertExtender( $( '<input/>' ), [ {
 				destroy: destroy
@@ -45,6 +48,7 @@
 	} );
 
 	QUnit.asyncTest( 'init calls extensions', function( assert ) {
+		assert.expect( 3 );
 		var $input = $( '<input/>' ).appendTo( 'body' ),
 			init = sinon.spy(),
 			onInitialShow = sinon.spy(),

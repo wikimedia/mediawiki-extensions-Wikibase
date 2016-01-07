@@ -8,6 +8,7 @@
 	QUnit.module( 'util.Notifier' );
 
 	QUnit.test( 'Construction of Notifier instances', function( assert ) {
+		assert.expect( 4 );
 		var n;
 
 		assert.ok(
@@ -34,6 +35,7 @@
 	} );
 
 	QUnit.test( 'Notifier.prototype.hasListenerFor', function( assert ) {
+		assert.expect( 6 );
 		var notificationKeys = [ 'foo', 'bar123', 'xxx' ],
 			notificationMap = {};
 

@@ -23,6 +23,7 @@
 	QUnit.module( 'jquery.focusAt' );
 
 	QUnit.test( 'plugin initialization', function( assert ) {
+		assert.expect( 1 );
 		assert.ok(
 			$.isFunction( $.fn.focusAt ),
 			'"jQuery.focusAt" is available'
@@ -56,6 +57,7 @@
 	var elemsCases = QUnit.cases( elemsCasesData );
 
 	elemsCases.test( 'Focusing with valid parameter', function( params, assert ) {
+		assert.expect( 10 );
 		var $dom = getDomInsertionTestViewport(),
 			positions = [ 0, 1, 4, 9, 9999, 'start', 'end', -1, -3, -9999 ];
 
@@ -71,6 +73,7 @@
 	} );
 
 	elemsCases.test( 'Focusing with invalid parameter', function( params, assert ) {
+		assert.expect( 5 );
 		var positions = [ null, undefined, 'foo', [], {} ];
 
 		$.each( positions, function( i, pos ) {
@@ -84,6 +87,7 @@
 	} );
 
 	elemsCases.test( 'Focusing element, not in DOM yet', function( params, assert ) {
+		assert.expect( 2 );
 		var $dom = getDomInsertionTestViewport(),
 			elem = params.elem;
 
@@ -131,9 +135,11 @@
 		// Check if focussing actually works
 		elem.focus();
 		if ( !elem.is( ':focus' ) ) {
+			assert.expect( 1 );
 			assert.ok( 'Could not test because focussing does not work.' );
 			return;
 		}
+		assert.expect( 3 );
 		elem.blur();
 		assert.ok( !elem.is( ':focus' ) );
 

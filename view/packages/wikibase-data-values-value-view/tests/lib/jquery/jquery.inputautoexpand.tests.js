@@ -66,6 +66,7 @@
 	} );
 
 	QUnit.test( 'Initialize plugin', function( assert ) {
+		assert.expect( 3 );
 		var $input = newTestInputAutoExpand(),
 			$textarea = newTestTextareaAutoExpand(),
 			$div = $( '<div/>' ).addClass( 'test_inputautoexpand' ).appendTo( 'body' );
@@ -92,6 +93,7 @@
 	} );
 
 	QUnit.test( 'Applying plugin to input boxes', function( assert ) {
+		assert.expect( 4 );
 		var $input = newTestInputAutoExpand(),
 			initialWidth = Math.ceil( $input.width() ),
 			previousWidth,
@@ -147,6 +149,7 @@
 	} );
 
 	QUnit.test( 'Applying horizontally growing plugin to textareas', function( assert ) {
+		assert.expect( 3 );
 		var $textarea = newTestTextareaAutoExpand().inputautoexpand(),
 			initialWidth = Math.ceil( $textarea.width() ),
 			previousWidth,
@@ -185,6 +188,7 @@
 	} );
 
 	QUnit.test( 'Applying vertically growing plugin to textareas', function( assert ) {
+		assert.expect( 3 );
 		var $textarea = newTestTextareaAutoExpand();
 
 		// Init plugin before measuring the initial height since the plugin will shrink the textarea
@@ -230,6 +234,7 @@
 	} );
 
 	QUnit.test( 'Applying horizontally and vertically growing plugin to textareas', function( assert ) {
+		assert.expect( 6 );
 		var $textarea = newTestTextareaAutoExpand(),
 			MAXIMUM_WIDTH = 150;
 

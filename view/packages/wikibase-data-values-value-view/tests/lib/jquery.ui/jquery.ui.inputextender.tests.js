@@ -116,6 +116,7 @@
 	} );
 
 	QUnit.test( 'Initialization on focused input', function( assert ) {
+		assert.expect( 1 );
 		var $input = $( '<input/>' ).appendTo( $( 'body' ) ).focus();
 		if ( !$input.is( ':focus' ) ) {
 			assert.ok( true, 'Could not test since focussing does not work.' );
@@ -288,6 +289,7 @@
 	}
 
 	QUnit.test( '$.ui.inputextender.getInstancesWithVisibleExtensions', function( assert ) {
+		assert.expect( 21 );
 		var instances = $.ui.inputextender.getInstancesWithVisibleExtensions();
 
 		assert.ok(

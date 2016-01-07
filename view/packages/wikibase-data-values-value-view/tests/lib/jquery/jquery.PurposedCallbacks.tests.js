@@ -9,6 +9,7 @@
 	QUnit.module( 'jquery.PurposedCallbacks' );
 
 	QUnit.test( 'construction', function( assert ) {
+		assert.expect( 1 );
 		var pc = PurposedCallbacks();
 
 		assert.ok(
@@ -18,6 +19,7 @@
 	} );
 
 	QUnit.test( 'facade()', function( assert ) {
+		assert.expect( 2 );
 		var pc = PurposedCallbacks();
 
 		assert.ok(
@@ -32,6 +34,7 @@
 	} );
 
 	QUnit.test( 'puposes() on instance without predefined purposes', function( assert ) {
+		assert.expect( 4 );
 		var pcf = PurposedCallbacks().facade();
 
 		assert.ok(
@@ -64,6 +67,7 @@
 	} );
 
 	QUnit.test( 'purposes() on instance with predefined purposes', function( assert ) {
+		assert.expect( 3 );
 		var purposes = [ 'foo', 'bar' ];
 		var pcf = PurposedCallbacks( purposes ).facade();
 
@@ -88,6 +92,7 @@
 	} );
 
 	QUnit.test( 'chainable members', function( assert ) {
+		assert.expect( 4 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
@@ -112,6 +117,7 @@
 	} );
 
 	QUnit.test( 'add() callback of unknown purpose', function( assert ) {
+		assert.expect( 1 );
 		var pcf = PurposedCallbacks( [ 'bar' ] ).facade();
 		assert.throws(
 			function() {
@@ -122,6 +128,7 @@
 	} );
 
 	QUnit.test( 'fire()', function( assert ) {
+		assert.expect( 4 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
@@ -185,6 +192,7 @@
 	var fn4 = function() { this.push( 4 ); };
 
 	QUnit.test( 'add() verified by fireWith()', function( assert ) {
+		assert.expect( 2 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
@@ -212,6 +220,7 @@
 	} );
 
 	QUnit.test( 'remove() verified by fireWith()', function( assert ) {
+		assert.expect( 2 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
@@ -242,6 +251,7 @@
 	} );
 
 	QUnit.test( 'has()', function( assert ) {
+		assert.expect( 4 );
 		var pc = PurposedCallbacks();
 		var pcf = pc.facade();
 
@@ -267,6 +277,7 @@
 	} );
 
 	QUnit.test( 'has() on instance with predefined purposes', function( assert ) {
+		assert.expect( 4 );
 		var pc = PurposedCallbacks( [ 'foo' ] );
 		var pcf = pc.facade();
 

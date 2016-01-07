@@ -8,6 +8,7 @@
 QUnit.module( 'util.highlightSubstring' );
 
 QUnit.test( 'Highlight with default options', function( assert ) {
+	assert.expect( 7 );
 	var testCases = [
 		['', '', ''],
 		['abc', 'abc', '<span class="highlight">abc</span>'],
@@ -32,6 +33,7 @@ QUnit.test( 'Highlight with default options', function( assert ) {
 } );
 
 QUnit.test( 'Highlight (caseSensitive === true)', function( assert ) {
+	assert.expect( 4 );
 	var testCases = [
 		['abcdef', 'abc', '<span class="highlight">abc</span>def'],
 		['Abcdef', 'abc', 'Abcdef'],
@@ -54,6 +56,7 @@ QUnit.test( 'Highlight (caseSensitive === true)', function( assert ) {
 } );
 
 QUnit.test( 'Highlight (withinString === true)', function( assert ) {
+	assert.expect( 2 );
 	var testCases = [
 		['abc', 'abc', '<span class="highlight">abc</span>'],
 		['abcdef', 'abc', '<span class="highlight">abc</span>def']
@@ -74,6 +77,7 @@ QUnit.test( 'Highlight (withinString === true)', function( assert ) {
 } );
 
 QUnit.test( 'Highlight (wrapperNodeName, wrapperNodeClass)', function( assert ) {
+	assert.expect( 3 );
 	var testCases = [
 		['abcdef', 'a', '<div class="highlight">a</div>bcdef', {
 			wrapperNodeName: 'div'

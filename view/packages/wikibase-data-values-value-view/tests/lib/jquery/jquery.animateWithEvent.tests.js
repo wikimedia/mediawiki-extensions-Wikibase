@@ -9,6 +9,7 @@
 	QUnit.module( 'jquery.animateWithEvent' );
 
 	QUnit.test( 'special start callback execution before options.start', function( assert ) {
+		assert.expect( 3 );
 		var optionsStartCallbackDone = 0;
 		var specialStartCallbackDone = 0;
 
@@ -43,6 +44,7 @@
 	} );
 
 	QUnit.test( 'special start callback', function( assert ) {
+		assert.expect( 2 );
 		var $elem = $( '<div/>' );
 
 		QUnit.stop();
@@ -99,6 +101,7 @@
 	} );
 
 	QUnit.test( 'On jQuery set of multiple elements', function( assert ) {
+		assert.expect( 2 );
 		var $elems = $( '<div/>' ).add( $( '<span/> ' ) ).add( $( '<div/> ' ) );
 		var $confirmedElems = $();
 		var animationEventInstances = [];
@@ -134,6 +137,7 @@
 	} );
 
 	QUnit.test( 'Error cases', function( assert ) {
+		assert.expect( 2 );
 		assert.throws(
 			function() {
 				$( '<div/>' ).animateWithEvent(
