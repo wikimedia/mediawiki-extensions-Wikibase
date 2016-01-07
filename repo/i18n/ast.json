@@ -560,5 +560,9 @@
 	"apihelp-wbsetsitelink-example-1": "Añade un enllaz de sitiu «Hydrogen» pa la páxina n'inglés con identificador «Q42», si nun esiste l'enllaz de sitiu",
 	"apihelp-wbsetsitelink-example-2": "Amiesta un enllaz de sitiu «Hydrogen» pa la páxina n'inglés con ID «Q42», si l'enllaz de sitiu nun existe, con un resume d'edición \"World domination will be mine soon!\"",
 	"apihelp-wbsetsitelink-example-3": "Amiesta un enllaz de sitiu «Wasserstoff» pa la páxina n'alemán nel elementu col enllaz a la páxina n'inglés a «Hydrogen», si l'enllaz al sitiu nun existe",
-	"apihelp-wbsetsitelink-example-4": "Desanicia l'enllaz al sitiu n'alemán del elementu"
+	"apihelp-wbsetsitelink-example-4": "Desanicia l'enllaz al sitiu n'alemán del elementu",
+	"apihelp-wbsetsitelink-example-5": "Amiesta un enllaz de sitiu «Wodór» pa la páxina en polacu nel elementu col enllaz a la páxina n'inglés a «Hydrogen» con una insinia qu'apunta al elementu con ID «Q149»",
+	"apihelp-wbsetsitelink-example-6": "Camudar les insinies del enllaz a la páxina en polacu del elementu con ID «Q42» a dos insinies qu'apunten a los elementos «Q2» y «Q149» ensin apurrir el títulu del enllaz",
+	"apihelp-wbsetsitelink-example-7": "Camudar l'enllaz a la páxina en polacu del elementu con ID «Q42» ensin camudar les insinies",
+	"apihelp-wbsetsitelink-example-8": "Camudar l'enllaz a la páxina en polacu del elementu con ID «Q42» y quitar toles sos insinies"
 }
