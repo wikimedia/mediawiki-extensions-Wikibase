@@ -53,17 +53,19 @@ use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
@@ -1416,7 +1418,11 @@ class WikibaseRepo {
 
 	private function getMonolingualTextLanguages() {
 		if ( $this->monolingualTextLanguages === null ) {
-			$this->monolingualTextLanguages = new MediaWikiContentLanguages();
+			$this->monolingualTextLanguages = new UnionContentLanguages(
+				new MediaWikiContentLanguages(),
+				// Special ISO 639-2 codes
+				new StaticContentLanguages( array( 'und', 'mis', 'mul', 'zxx' ) )
+			);
 		}
 		return $this->monolingualTextLanguages;
 	}
