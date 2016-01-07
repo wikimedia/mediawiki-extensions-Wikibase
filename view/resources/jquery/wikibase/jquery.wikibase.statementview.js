@@ -236,13 +236,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		// Group qualifiers by property id:
 		if ( qualifiers && qualifiers.length ) {
-			var propertyIds = qualifiers.getPropertyOrder();
-
-			groupedQualifierSnaks = [];
-
-			for ( var i = 0; i < propertyIds.length; i++ ) {
-				groupedQualifierSnaks.push( qualifiers.getFilteredSnakList( propertyIds[i] ) );
-			}
+			groupedQualifierSnaks = qualifiers.getGroupedSnakLists();
 		}
 
 		// Using the property id, qualifier snaks are split into groups of snaklistviews. These
