@@ -519,7 +519,18 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. TermTestHelper::makeOverlyLongString() . '"}}}'
 				),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
-			//@todo add check for bug T54731 once fixed
+			'missing language in labels (T54731)' => array(
+				'p' => array(
+					'site' => 'enwiki',
+					'title' => 'Berlin',
+					'data' => '{"labels":{"de":{"site":"pt","title":"TestString"}}}'
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'missing-language',
+					'message' => '\'language\' was not found in the label or description json for de'
+				) )
+			),
 			'removing invalid claim fails' => array(
 				'p' => array(
 					'site' => 'enwiki',
