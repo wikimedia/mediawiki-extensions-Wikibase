@@ -13,6 +13,7 @@ define( [
 	QUnit.module( 'globeCoordinate.Formatter.js' );
 
 	QUnit.test( 'Formatting', function( assert ) {
+		assert.expect( 8 );
 		var decimalTexts = {
 				'1, 1': new GlobeCoordinate( { latitude: 1, longitude: 1, precision: 1 } ),
 				'-10, -1.5': new GlobeCoordinate( { latitude: -10, longitude: -1.5, precision: 0.1 } ),
@@ -51,6 +52,7 @@ define( [
 	} );
 
 	QUnit.test( 'precisionText()', function( assert ) {
+		assert.expect( 4 );
 		var precisions = {
 				1: '±1°',
 				0.016666666666666666: 'to an arcminute',

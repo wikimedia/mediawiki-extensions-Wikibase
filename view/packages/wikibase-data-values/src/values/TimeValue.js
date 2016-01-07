@@ -1,6 +1,28 @@
 ( function( dv, util, $ ) {
 	'use strict';
 
+/**
+ * @ignore
+ *
+ * @param {number|string} number
+ * @param {number} digits
+ * @return {string}
+ */
+function pad( number, digits ) {
+	if( typeof number !== 'string' ) {
+		number = String( number );
+	}
+
+	// Strip sign characters.
+	number = number.replace( /^[-+]/, '' );
+
+	if ( number.length >= digits ) {
+		return number;
+	}
+
+	return new Array( digits - number.length + 1 ).join( '0' ) + number;
+}
+
 var PARENT = dv.DataValue;
 
 /**
@@ -329,28 +351,6 @@ SELF.getPrecisionById = function( id ) {
 
 	return null;
 };
-
-/**
- * @ignore
- *
- * @param {number|string} number
- * @param {number} digits
- * @return {string}
- */
-function pad( number, digits ) {
-	if( typeof number !== 'string' ) {
-		number = String( number );
-	}
-
-	// Strip sign characters.
-	number = number.replace( /^[-+]/, '' );
-
-	if ( number.length >= digits ) {
-		return number;
-	}
-
-	return new Array( digits - number.length + 1 ).join( '0' ) + number;
-}
 
 dv.registerDataValue( SELF );
 

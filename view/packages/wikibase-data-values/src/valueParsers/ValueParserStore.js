@@ -2,6 +2,19 @@
 	'use strict';
 
 /**
+ * @ignore
+ *
+ * @param {Function} Parser
+ *
+ * @throws {Error} if the provided argument is not a valueParsers.ValueParser constructor.
+ */
+function assertIsValueParserConstructor( Parser ) {
+	if( !( $.isFunction( Parser ) && Parser.prototype instanceof vp.ValueParser ) ) {
+		throw new Error( 'Invalid ValueParser constructor' );
+	}
+}
+
+/**
  * Store managing ValueParser instances.
  * @class valueParsers.ValueParserStore
  * @since 0.1
@@ -114,18 +127,5 @@ $.extend( SELF.prototype, {
 		return parser || this._DefaultParser;
 	}
 } );
-
-/**
- * @ignore
- *
- * @param {Function} Parser
- *
- * @throws {Error} if the provided argument is not a valueParsers.ValueParser constructor.
- */
-function assertIsValueParserConstructor( Parser ) {
-	if( !( $.isFunction( Parser ) && Parser.prototype instanceof vp.ValueParser ) ) {
-		throw new Error( 'Invalid ValueParser constructor' );
-	}
-}
 
 }( jQuery, valueParsers ) );
