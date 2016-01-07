@@ -121,7 +121,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		parent::execute( $subPage );
 
 		$output = $this->getOutput();
-		$output->setSquidMaxage( static::CACHE_TTL_IN_SECONDS );
+		$output->setCdnMaxage( static::CACHE_TTL_IN_SECONDS );
 
 		$this->prepareArguments( $subPage );
 		$this->showForm();
