@@ -34,6 +34,24 @@
       "revId": "d4daa5072a39a845fb6d5ae01149b1adce1bdf28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_2c204095",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-07T08:44:31Z",
+      "side": 1,
+      "message": "No, we did this on purpose. Please do not include unrelated changes in otherwise trivial patches like this one.",
+      "parentUuid": "6eaa8f54_4831f2ff",
+      "revId": "d4daa5072a39a845fb6d5ae01149b1adce1bdf28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
