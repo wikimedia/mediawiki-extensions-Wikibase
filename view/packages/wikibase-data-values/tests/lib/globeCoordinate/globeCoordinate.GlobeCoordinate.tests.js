@@ -14,6 +14,7 @@ define( [
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
 	QUnit.test( 'Basic checks', function( assert ) {
+		assert.expect( 12 );
 		var c;
 
 		assert.throws(
@@ -94,6 +95,7 @@ define( [
 	} );
 
 	QUnit.test( 'Strict (in)equality', function( assert ) {
+		assert.expect( 121 );
 		var gcDefs = [
 				{ latitude: 0, longitude: 0, precision: 1 },
 				{ latitude: -3, longitude: 2, precision: 1 },
@@ -135,6 +137,7 @@ define( [
 	} );
 
 	QUnit.test( 'Loose equality', function( assert ) {
+		assert.expect( 7 );
 		var gcDefs = [
 				{ latitude: 0, longitude: 0, precision: 1 },
 				{ latitude: 0.01, longitude: 0, precision: 1 },
@@ -157,6 +160,7 @@ define( [
 	} );
 
 	QUnit.test( 'Loose inequality', function( assert ) {
+		assert.expect( 4 );
 		var c1 = new globeCoordinate.GlobeCoordinate(
 				{ latitude: 0, longitude: 0, precision: 1 / 3600 }
 			),

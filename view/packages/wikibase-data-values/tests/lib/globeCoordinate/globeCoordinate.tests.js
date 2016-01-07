@@ -163,6 +163,7 @@ define( [
 	QUnit.module( 'globeCoordinate.js' );
 
 	QUnit.test( 'Applying precision', function( assert ) {
+		assert.expect( 70 );
 
 		$.each( precisions, function( precision, expected ) {
 			$.each( values, function( i, value ) {
@@ -179,6 +180,7 @@ define( [
 	} );
 
 	QUnit.test( 'Converting to degree', function( assert ) {
+		assert.expect( 70 );
 
 		$.each( precisions, function( precision, expected ) {
 			$.each( values, function( i, value ) {
@@ -199,6 +201,7 @@ define( [
 	} );
 
 	QUnit.test( 'iso6709()', function( assert ) {
+		assert.expect( 10 );
 
 		$.each( iso6709representations, function( iso6709string, gcDef ) {
 			assert.equal(
