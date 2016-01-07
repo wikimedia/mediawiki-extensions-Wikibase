@@ -20,26 +20,25 @@ wb.datamodel.SnakList = util.inherit( 'WbDataModelSnakList', PARENT, function( s
 	PARENT.call( this, wikibase.datamodel.Snak, snaks );
 }, {
 	/**
-	 * Returns a SnakList with the snaks featuring a specific property id. If the property id
-	 * parameter is omitted, a copy of the whole SnakList object is returned.
+	 * Returns a SnakList with the snaks featuring a specific property id.
 	 *
-	 * @param {string|null} [propertyId=null]
+	 * @param {string} propertyId
 	 * @return {wikibase.datamodel.SnakList}
 	 */
 	getFilteredSnakList: function( propertyId ) {
 		if( !propertyId ) {
-			return new wb.datamodel.SnakList( $.merge( [], this._items ) );
+			throw new Error( 'Can not filter with no propertyId.' );
 		}
 
-		var filteredQualifiers = new wb.datamodel.SnakList();
+		var filteredSnakList = new wb.datamodel.SnakList();
 
 		this.each( function( i, snak ) {
 			if( snak.getPropertyId() === propertyId ) {
-				filteredQualifiers.addItem( snak );
+				filteredSnakList.addItem( snak );
 			}
 		} );
 
-		return filteredQualifiers;
+		return filteredSnakList;
 	},
 
 	/**

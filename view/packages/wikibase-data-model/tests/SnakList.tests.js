@@ -61,24 +61,22 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'getFilteredSnakList()', function( assert ) {
-	assert.expect( 16 );
+	assert.expect( 11 );
+	assert.throws(
+		function() {
+			var snakList = new wb.datamodel.SnakList( [] );
+			snakList.getFilteredSnakList();
+		},
+		'getFilteredSnakList() throws an error when called with null.'
+	);
+
 	for( var i = 0; i < testSets.length; i++ ) {
 		var snakList = new wb.datamodel.SnakList( testSets[i] );
-
-		assert.ok(
-			snakList.getFilteredSnakList() instanceof wb.datamodel.SnakList,
-			'Returned SnakList object when issuing getFilteredSnakList() without parameter.'
-		);
 
 		assert.strictEqual(
 			snakList.getFilteredSnakList( 'P9999' ).length,
 			0,
 			'No filtered SnakList returned for an empty SnakList.'
-		);
-
-		assert.ok(
-			snakList.getFilteredSnakList().equals( new wb.datamodel.SnakList( snakList.toArray() ) ),
-			'Returning SnakList clone when issuing getFilteredSnakList() without parameter.'
 		);
 
 		var groupedSnakLists = {},
