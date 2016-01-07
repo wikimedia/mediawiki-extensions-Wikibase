@@ -39,6 +39,7 @@ var testSets = [
 ];
 
 QUnit.test( 'deserialize()', function( assert ) {
+	assert.expect( 3 );
 	var referenceListDeserializer = new wb.serialization.ReferenceListDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

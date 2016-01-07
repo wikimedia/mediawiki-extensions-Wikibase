@@ -28,6 +28,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var mockEntity = new wb.serialization.tests.MockEntity( testSets[i][0], testSets[i][1] );
 		assert.ok(
@@ -38,6 +39,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'isEmpty()', function( assert ) {
+	assert.expect( 2 );
 	assert.ok(
 		( new wb.serialization.tests.MockEntity(
 			'i am an id',
@@ -64,6 +66,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 } );
 
 QUnit.test( 'equals()', function( assert ) {
+	assert.expect( 4 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var property1 = new wb.serialization.tests.MockEntity( testSets[i][0], testSets[i][1] );
 

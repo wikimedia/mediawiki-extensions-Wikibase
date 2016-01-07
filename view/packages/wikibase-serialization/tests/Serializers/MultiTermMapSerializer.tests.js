@@ -33,6 +33,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 3 );
 	var multiTermMapSerializer = new wb.serialization.MultiTermMapSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

@@ -15,6 +15,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 1 );
 	var termSerializer = new wb.serialization.TermSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

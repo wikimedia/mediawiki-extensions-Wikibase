@@ -30,6 +30,7 @@ var testSets = [
 ];
 
 QUnit.test( 'deserialize()', function( assert ) {
+	assert.expect( 2 );
 	var fingerprintDeserializer = new wb.serialization.FingerprintDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

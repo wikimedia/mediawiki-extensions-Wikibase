@@ -35,6 +35,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 3 );
 	var snakSerializer = new wb.serialization.SnakSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

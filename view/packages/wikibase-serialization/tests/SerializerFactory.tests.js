@@ -9,6 +9,7 @@
 QUnit.module( 'wikibase.serialization.SerializerFactory' );
 
 QUnit.test( 'registerSerializer(), newSerializerFor()', function( assert ) {
+	assert.expect( 6 );
 	var serializerFactory = new wb.serialization.SerializerFactory();
 
 	var testSets = [

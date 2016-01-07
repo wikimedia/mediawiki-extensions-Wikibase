@@ -8,6 +8,7 @@
 QUnit.module( 'wikibase.serialization.Serializer' );
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 1 );
 	var SomeSerializer = util.inherit( 'WbTestSerializer', wb.serialization.Serializer, {} ),
 		someSerializer = new SomeSerializer();
 

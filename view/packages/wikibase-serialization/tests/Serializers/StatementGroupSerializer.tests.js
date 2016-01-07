@@ -31,6 +31,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 2 );
 	var statementGroupSerializer = new wb.serialization.StatementGroupSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

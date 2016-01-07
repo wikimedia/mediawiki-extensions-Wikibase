@@ -108,6 +108,7 @@ var testSets = [
 ];
 
 QUnit.test( 'deserialize()', function( assert ) {
+	assert.expect( 2 );
 	var entityDeserializer = new wb.serialization.EntityDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
@@ -119,6 +120,7 @@ QUnit.test( 'deserialize()', function( assert ) {
 } );
 
 QUnit.test( 'registerStrategy()', function( assert ) {
+	assert.expect( 2 );
 	var entityDeserializer = new wb.serialization.EntityDeserializer();
 
 	var mockEntitySerialization = $.extend( true, {

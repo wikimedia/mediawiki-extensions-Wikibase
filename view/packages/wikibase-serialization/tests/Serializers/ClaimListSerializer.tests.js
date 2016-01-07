@@ -28,6 +28,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 2 );
 	var claimListSerializer = new wb.serialization.ClaimListSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

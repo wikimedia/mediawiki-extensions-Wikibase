@@ -14,6 +14,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor', function( assert ) {
+	assert.expect( 1 );
 	assert.ok(
 		( new wb.serialization.StrategyProvider() ) instanceof wb.serialization.StrategyProvider,
 		'Instantiated StrategyProvider.'
@@ -21,6 +22,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'registerStrategy() & getStrategyFor()', function( assert ) {
+	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
 		var strategyProvider = new wb.serialization.StrategyProvider();
 
