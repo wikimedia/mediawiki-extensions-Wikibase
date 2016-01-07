@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use Coord;
-use CoordinatesOutput;
 use DataValues\DataValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
+use GeoData\Coord;
+use GeoData\CoordinatesOutput;
 use ParserOutput;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -33,7 +33,7 @@ use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
 class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 	private function willSkipTests() {
-		if ( !class_exists( 'GeoData' ) ) {
+		if ( !class_exists( 'GeoData\GeoData' ) ) {
 			return true;
 		}
 		return false;

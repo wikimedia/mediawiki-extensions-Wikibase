@@ -179,7 +179,7 @@ class EntityParserOutputGeneratorFactory {
 			$updaters[] = new PageImagesDataUpdater( $this->preferredPageImagesProperties );
 		}
 
-		if ( class_exists( 'GeoData' ) ) {
+		if ( class_exists( 'GeoData\GeoData' ) ) {
 			$updaters[] = new GeoDataDataUpdater(
 				$propertyDataTypeMatcher,
 				$this->preferredGeoDataProperties,
