@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Store\Sql;
 use DatabaseUpdater;
 use MWException;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Schema updater for the wb_changes_subscription table.

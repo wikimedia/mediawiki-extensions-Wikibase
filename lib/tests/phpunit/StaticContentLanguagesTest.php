@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Test;
 
-use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\StaticContentLanguages;
 
 /**
