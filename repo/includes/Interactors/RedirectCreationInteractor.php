@@ -176,7 +176,7 @@ class RedirectCreationInteractor {
 			if ( !$entity->isEmpty() ) {
 				throw new RedirectCreationException(
 					"Entity $entityId is not empty",
-					'target-not-empty'
+					'origin-not-empty'
 				);
 			}
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
