@@ -2,6 +2,19 @@
 	'use strict';
 
 /**
+ * @ignore
+ *
+ * @param {Function} Formatter
+ *
+ * @throws {Error} if the provided argument is not a valueFormatters.ValueFormatter constructor.
+ */
+function assertIsValueFormatterConstructor( Formatter ) {
+	if( !( $.isFunction( Formatter ) && Formatter.prototype instanceof vf.ValueFormatter ) ) {
+		throw new Error( 'Invalid ValueFormatter constructor' );
+	}
+}
+
+/**
  * Store managing ValueFormatter instances.
  * @class valueFormatters.ValueFormatterStore
  * @since 0.1
@@ -115,18 +128,5 @@ $.extend( SELF.prototype, {
 		return formatter || this._DefaultFormatter;
 	}
 } );
-
-/**
- * @ignore
- *
- * @param {Function} Formatter
- *
- * @throws {Error} if the provided argument is not a valueFormatters.ValueFormatter constructor.
- */
-function assertIsValueFormatterConstructor( Formatter ) {
-	if( !( $.isFunction( Formatter ) && Formatter.prototype instanceof vf.ValueFormatter ) ) {
-		throw new Error( 'Invalid ValueFormatter constructor' );
-	}
-}
 
 }( jQuery, valueFormatters ) );
