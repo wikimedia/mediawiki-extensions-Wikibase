@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_16ad4fe7",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 3065
+      },
+      "writtenOn": "2016-01-08T13:39:54Z",
+      "side": 1,
+      "message": "\"apihelp-wbsetsitelink-example-1\": \"Add a sitelink leading to English article \\\"Hydrogen\\\" on entity with id \\\"Q42\\\", if sitelink does not exist",
+      "revId": "31882bb2b134f8e7581f22b13c8cd7c75b5ef1bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_76bb6323",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 3065
+      },
+      "writtenOn": "2016-01-08T13:39:54Z",
+      "side": 1,
+      "message": "\"apihelp-wbsetsitelink-example-2\": \"Add a sitelink for English article \"Hydrogen\\\" on entity with id \\\"Q42\\\", if sitelink does not exist. Also add ummary \\\"World domination will be mine soon!\\\"\"",
+      "revId": "31882bb2b134f8e7581f22b13c8cd7c75b5ef1bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_56f507e9",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 3065
+      },
+      "writtenOn": "2016-01-08T13:39:54Z",
+      "side": 1,
+      "message": "\"apihelp-wbsetsitelink-example-3\": \"Add a sitelink, to German article \\\"Wasserstoff\\\", to Engl\nish article \\\"Hydrogen\\\", if sitelink does not exist\"",
+      "revId": "31882bb2b134f8e7581f22b13c8cd7c75b5ef1bf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
