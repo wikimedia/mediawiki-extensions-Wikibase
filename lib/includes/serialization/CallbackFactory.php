@@ -33,7 +33,7 @@ class CallbackFactory {
 	 * Get callable to index array with the given tag name
 	 *
 	 * @param string $type
-	 * @param string $kvpKeyName
+	 * @param string|null $kvpKeyName
 	 *
 	 * @return callable
 	 */

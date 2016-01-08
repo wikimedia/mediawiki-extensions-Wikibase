@@ -220,7 +220,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * Changes wgUser and resets any associated state
 	 *
 	 * @param User $user the desired user
-	 * @param array $session optional session data
+	 * @param array|null $session optional session data
 	 */
 	protected function setUser( User $user, array $session = null ) {
 		global $wgUser;

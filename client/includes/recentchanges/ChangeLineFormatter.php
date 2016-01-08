@@ -285,7 +285,7 @@ class ChangeLineFormatter {
 
 	/**
 	 * @param string $userName
-	 * @param string $text
+	 * @param string|null $text
 	 *
 	 * @return string HTML
 	 */

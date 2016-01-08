@@ -70,7 +70,7 @@ class DataUpdateHookHandlers {
 	 * @param User &$user
 	 * @param string $reason
 	 * @param int $id id of the article that was deleted
-	 * @param Content $content
+	 * @param Content|null $content
 	 * @param LogEntry $logEntry
 	 */
 	public static function onArticleDeleteComplete(

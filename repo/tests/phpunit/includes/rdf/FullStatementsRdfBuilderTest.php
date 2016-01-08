@@ -50,7 +50,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @param RdfWriter $writer
 	 * @param int $flavor Bitmap for the output flavor, use RdfProducer::PRODUCE_XXX constants.
 	 * @param EntityId[] &$mentioned Receives any entity IDs being mentioned.
-	 * @param DedupeBag $dedupe A bag of reference hashes that should be considered "already seen".
+	 * @param DedupeBag|null $dedupe A bag of reference hashes that should be considered "already seen".
 	 *
 	 * @return FullStatementRdfBuilder
 	 */

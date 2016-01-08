@@ -24,7 +24,7 @@ interface TypedValueFormatter {
 	 * @todo: make $dataTypeId mandatory.
 	 *
 	 * @param DataValue $value
-	 * @param string    $dataTypeId
+	 * @param string|null $dataTypeId
 	 *
 	 * @throws FormattingException
 	 * @return string

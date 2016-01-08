@@ -289,7 +289,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 	/**
 	 * @param string $xml
-	 * @param string $entityId
+	 * @param string|null $entityId
 	 *
 	 * @return string
 	 */

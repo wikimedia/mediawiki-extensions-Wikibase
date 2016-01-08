@@ -378,9 +378,9 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @param WikiPageEntityStore $store
 	 * @param Entity $entity
 	 * @param string $summary
-	 * @param User $user
+	 * @param User|null $user
 	 * @param int $flags
-	 * @param bool $baseRevId
+	 * @param int|bool $baseRevId
 	 *
 	 * @return Status
 	 */

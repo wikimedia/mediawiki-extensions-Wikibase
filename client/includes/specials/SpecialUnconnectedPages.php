@@ -95,8 +95,8 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @since 0.4
 	 *
 	 * @param DatabaseBase $dbr
-	 * @param Title $title
-	 * @param NamespaceChecker $checker
+	 * @param Title|null $title
+	 * @param NamespaceChecker|null $checker
 	 *
 	 * @return string[]
 	 */

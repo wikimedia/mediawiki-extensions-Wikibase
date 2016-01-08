@@ -99,7 +99,7 @@ abstract class RdfWriterBase implements RdfWriter {
 
 	/**
 	 * @param string $role The writer's role, use the XXX_ROLE constants.
-	 * @param BNodeLabeler $labeler
+	 * @param BNodeLabeler|null $labeler
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -385,7 +385,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @see RdfWriter::say()
 	 *
 	 * @param string $base A QName prefix.
-	 * @param string $local A QName suffix.
+	 * @param string|null $local A QName suffix.
 	 *
 	 * @return RdfWriter $this
 	 */
@@ -440,7 +440,7 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @see RdfWriter::value()
 	 *
 	 * @param string $value the value encoded as a string
-	 * @param string $typeBase The data type's QName prefix if $typeLocal is given,
+	 * @param string|null $typeBase The data type's QName prefix if $typeLocal is given,
 	 *        or an IRI or shorthand if $typeLocal is null.
 	 * @param string|null $typeLocal The data type's  QName suffix,
 	 *        or null if $typeBase is an IRI or shorthand.

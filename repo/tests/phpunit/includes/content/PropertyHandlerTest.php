@@ -90,7 +90,7 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	}
 
 	/**
-	 * @param SettingsArray $settings
+	 * @param SettingsArray|null $settings
 	 *
 	 * @return PropertyHandler
 	 */

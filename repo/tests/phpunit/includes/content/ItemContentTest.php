@@ -47,7 +47,7 @@ class ItemContentTest extends EntityContentTest {
 	}
 
 	/**
-	 * @param EntityId $itemId
+	 * @param EntityId|null $itemId
 	 *
 	 * @return ItemContent
 	 */

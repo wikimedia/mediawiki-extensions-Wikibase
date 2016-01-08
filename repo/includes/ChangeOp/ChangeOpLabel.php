@@ -75,7 +75,7 @@ class ChangeOpLabel extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 *
 	 * @param Entity $entity
-	 * @param Summary $summary
+	 * @param Summary|null $summary
 	 */
 	public function apply( Entity $entity, Summary $summary = null ) {
 		$fingerprint = $entity->getFingerprint();

@@ -82,7 +82,7 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 	 * @since 0.4
 	 *
 	 * @param ReferenceList $references
-	 * @param Summary $summary
+	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
 	 */

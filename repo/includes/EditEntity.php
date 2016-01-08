@@ -485,8 +485,8 @@ class EditEntity {
 	 * Check if no edits were made by other users since the given revision.
 	 * This makes the assumption that revision ids are monotonically increasing.
 	 *
-	 * @param User $user
-	 * @param EntityId $entityId
+	 * @param User|null $user
+	 * @param EntityId|null $entityId
 	 * @param int|bool $lastRevId
 	 *
 	 * @return bool

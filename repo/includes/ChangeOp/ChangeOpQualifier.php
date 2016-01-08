@@ -101,7 +101,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 * @since 0.4
 	 *
 	 * @param SnakList $qualifiers
-	 * @param Summary $summary
+	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
 	 */
@@ -118,7 +118,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 * @since 0.4
 	 *
 	 * @param SnakList $qualifiers
-	 * @param Summary $summary
+	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
 	 */

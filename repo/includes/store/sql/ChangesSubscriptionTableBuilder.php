@@ -114,7 +114,7 @@ class ChangesSubscriptionTableBuilder {
 	/**
 	 * Fill the subscription table with rows based on entries in wb_items_per_site.
 	 *
-	 * @param ItemId $startItem The item to start with.
+	 * @param ItemId|null $startItem The item to start with.
 	 */
 	public function fillSubscriptionTable( ItemId $startItem = null ) {
 		$continuation = $startItem === null ? null : array( $startItem->getNumericId(), 0 );

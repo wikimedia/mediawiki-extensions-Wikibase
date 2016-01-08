@@ -27,7 +27,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Title $title
-	 * @param array $expectedUsages
+	 * @param EntityUsage[]|null $expectedUsages
 	 * @param string|null $touched
 	 * @param bool $prune whether pruneUsagesForPage() should be used
 	 * @param bool $add whether addUsagesForPage() should be used

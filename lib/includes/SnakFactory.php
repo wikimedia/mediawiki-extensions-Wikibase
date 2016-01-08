@@ -29,7 +29,7 @@ class SnakFactory {
 	 *
 	 * @param PropertyId $propertyId
 	 * @param string $snakType
-	 * @param DataValue $value
+	 * @param DataValue|null $value
 	 *
 	 * @return Snak
 	 * @throws InvalidArgumentException

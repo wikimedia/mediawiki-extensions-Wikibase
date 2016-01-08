@@ -153,10 +153,10 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param bool $caseSensitive
-	 * @param bool $prefixSearch
-	 * @param int $limit
-	 * @param bool $useFallback
+	 * @param bool|null $caseSensitive
+	 * @param bool|null $prefixSearch
+	 * @param int|null $limit
+	 * @param bool|null $useFallback
 	 *
 	 * @return TermIndexSearchInteractor
 	 */

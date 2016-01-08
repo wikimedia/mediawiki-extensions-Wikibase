@@ -290,7 +290,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 * @param Revision $latestRevision
 	 * @param Revision $newerRevision
 	 * @param Revision $olderRevision
-	 * @param EntityContent $expected
+	 * @param EntityContent|null $expected
 	 * @param string $message
 	 */
 	public function testGetUndoContent(

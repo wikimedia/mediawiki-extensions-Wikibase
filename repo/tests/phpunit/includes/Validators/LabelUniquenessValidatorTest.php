@@ -154,7 +154,7 @@ class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider validFingerprintProvider
 	 *
 	 * @param Fingerprint $fingerprint
-	 * @param EntityId|null $entityId
+	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 */
 	public function testValidateFingerprint(

@@ -30,7 +30,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 * @param Site[] $sites
 	 * @param string[] $groups
 	 * @param string[] $specialGroups
-	 * @param BagOStuff $cache
+	 * @param BagOStuff|null $cache
 	 *
 	 * @return SitesModuleWorker
 	 */

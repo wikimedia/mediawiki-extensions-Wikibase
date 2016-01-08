@@ -88,7 +88,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param Entity|null $entity
 	 *
 	 * @return EntityContent
 	 */
@@ -132,7 +132,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	/**
-	 * @param SettingsArray $settings
+	 * @param SettingsArray|null $settings
 	 *
 	 * @return ItemHandler
 	 */

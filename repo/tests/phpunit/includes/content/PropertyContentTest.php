@@ -31,7 +31,7 @@ class PropertyContentTest extends EntityContentTest {
 	}
 
 	/**
-	 * @param EntityId $propertyId
+	 * @param EntityId|null $propertyId
 	 *
 	 * @return PropertyContent
 	 */

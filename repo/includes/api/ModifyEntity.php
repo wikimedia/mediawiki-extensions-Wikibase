@@ -361,7 +361,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @param ChangeOp $changeOp
 	 * @param Entity $entity
-	 * @param Summary $summary The summary object to update with information about the change.
+	 * @param Summary|null $summary The summary object to update with information about the change.
 	 *
 	 * @throws UsageException
 	 */

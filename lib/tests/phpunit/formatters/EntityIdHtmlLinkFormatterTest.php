@@ -27,7 +27,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 	/**
-	 * @param Term $term
+	 * @param Term|null $term
 	 *
 	 * @return LabelDescriptionLookup
 	 */

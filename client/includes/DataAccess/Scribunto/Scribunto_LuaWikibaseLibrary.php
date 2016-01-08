@@ -308,7 +308,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $pageTitle
+	 * @param string|null $pageTitle
 	 *
 	 * @return array
 	 */

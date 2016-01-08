@@ -283,7 +283,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @param string $requestLabel A label to identify requests that are made in errors.
 	 * @param int|null $index
 	 * @param int|null $baserevid
-	 * @param string $error
+	 * @param string|null $error
 	 */
 	private function makeRequest(
 		$statement,
