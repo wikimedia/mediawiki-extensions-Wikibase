@@ -2,7 +2,9 @@
 
 namespace Wikibase\Test\Interactors;
 
+use HashSiteStore;
 use Status;
+use TestSites;
 use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -15,7 +17,6 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Repo\Interactors\ItemMergeInteractor
@@ -113,7 +114,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		$changeOpsFactory = new MergeChangeOpsFactory(
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getChangeOpFactoryProvider(),
-			MockSiteStore::newFromTestSites()
+			new HashSiteStore( TestSites::getSites() )
 		);
 
 		$interactor = new ItemMergeInteractor(

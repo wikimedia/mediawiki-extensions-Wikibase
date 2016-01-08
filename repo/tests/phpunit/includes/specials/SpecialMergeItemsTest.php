@@ -3,10 +3,12 @@
 namespace Wikibase\Test;
 
 use Exception;
+use HashSiteStore;
 use PHPUnit_Framework_Error;
 use RawMessage;
 use SpecialPageTestBase;
 use Status;
+use TestSites;
 use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -106,7 +108,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$changeOpsFactory = new MergeChangeOpsFactory(
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getChangeOpFactoryProvider(),
-			MockSiteStore::newFromTestSites()
+			new HashSiteStore( TestSites::getSites() )
 		);
 
 		$exceptionLocalizer = $this->getMock( 'Wikibase\Repo\Localizer\ExceptionLocalizer' );

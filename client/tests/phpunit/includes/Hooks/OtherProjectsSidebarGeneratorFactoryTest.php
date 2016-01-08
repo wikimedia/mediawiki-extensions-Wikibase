@@ -2,10 +2,11 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use HashSiteStore;
+use TestSites;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory
@@ -27,7 +28,7 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 		) );
 
 		$siteLinkLookup = new MockRepository();
-		$siteStore = MockSiteStore::newFromTestSites();
+		$siteStore = new HashSiteStore( TestSites::getSites() );
 
 		$factory = new OtherProjectsSidebarGeneratorFactory(
 			$settings,

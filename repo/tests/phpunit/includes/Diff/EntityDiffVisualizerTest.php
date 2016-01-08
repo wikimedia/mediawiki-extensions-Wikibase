@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
+use HashSiteStore;
 use IContextSource;
 use Language;
 use MediaWikiTestCase;
@@ -124,7 +125,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 			$this->getMockContext(),
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
-			new MockSiteStore( array( $enwiki ) ),
+			new HashSiteStore( array( $enwiki ) ),
 			$this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' )
 		);
 	}

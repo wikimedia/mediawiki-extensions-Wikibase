@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use HashSiteStore;
 use Language;
 use MediaWikiSite;
 use MediaWikiTestCase;
@@ -27,7 +28,6 @@ use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers
@@ -65,7 +65,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	 * @return SiteStore
 	 */
 	private function getSiteStore() {
-		$siteStore = new MockSiteStore( array(
+		$siteStore = new HashSiteStore( array(
 			$this->newSite( 'wikidatawiki', 'wikidata', 'en' ),
 			$this->newSite( 'commonswiki', 'commons', 'en' ),
 			$this->newSite( 'enwiki', 'wikipedia', 'en' ),

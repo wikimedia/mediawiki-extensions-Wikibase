@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\DataValue;
+use HashSiteStore;
 use Language;
 use SiteStore;
 use SpecialPageTestBase;
@@ -109,7 +110,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	 * @return SiteStore
 	 */
 	protected function getSiteStore() {
-		return new MockSiteStore( TestSites::getSites() );
+		return new HashSiteStore( TestSites::getSites() );
 	}
 
 	/**

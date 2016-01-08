@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests;
 
+use HashSiteStore;
 use Site;
 use Wikibase\Client\OtherProjectsSitesGenerator;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Client\OtherProjectsSitesGenerator
@@ -91,7 +91,7 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return MockSiteStore
+	 * @return HashSiteStore
 	 */
 	private function getSiteStoreMock() {
 		$sites = array();
@@ -148,7 +148,7 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 		$site->setLanguageCode( 'en' );
 		$sites[] = $site;
 
-		return new MockSiteStore( $sites );
+		return new HashSiteStore( $sites );
 	}
 
 }

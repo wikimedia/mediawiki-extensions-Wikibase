@@ -2,14 +2,15 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use HashSiteStore;
 use MediaWikiSite;
 use SiteStore;
 use Title;
+use TestSites;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Client\Hooks\OtherProjectsSidebarGenerator
@@ -87,7 +88,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	 * @return SiteStore
 	 */
 	private function getSiteStore() {
-		$siteStore = MockSiteStore::newFromTestSites();
+		$siteStore = new HashSiteStore( TestSites::getSites() );
 
 		$site = new MediaWikiSite();
 		$site->setGlobalId( 'enwikiquote' );

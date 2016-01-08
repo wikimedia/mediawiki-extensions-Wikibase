@@ -2,8 +2,10 @@
 
 namespace Wikibase\Client\Tests;
 
+use HashSiteStore;
 use ParserOutput;
 use Site;
+use TestSites;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
@@ -13,7 +15,6 @@ use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
 use Wikibase\Test\MockRepository;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\LangLinkHandler
@@ -77,7 +78,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$this->mockRepo->putEntity( $item );
 		}
 
-		$siteStore = MockSiteStore::newFromTestSites();
+		$siteStore = new HashSiteStore( TestSites::getSites() );
 
 		return new LangLinkHandler(
 			$this->getLanguageLinkBadgeDisplay(),

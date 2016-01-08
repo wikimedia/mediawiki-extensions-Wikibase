@@ -6,7 +6,9 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use HashSiteStore;
 use PHPUnit_Framework_TestCase;
+use TestSites;
 use Wikibase\Repo\Diff\DiffView;
 
 /**
@@ -88,7 +90,7 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	 * @return DiffView
 	 */
 	private function getDiffView( array $path, Diff $diff ) {
-		$siteStore = MockSiteStore::newFromTestSites();
+		$siteStore = new HashSiteStore( TestSites::getSites() );
 
 		$entityIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
 		$entityIdFormatter->expects( $this->any() )
