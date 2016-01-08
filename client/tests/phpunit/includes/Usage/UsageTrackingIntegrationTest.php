@@ -67,7 +67,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$runner = new JobRunner();
 
 		$runner->run( array(
-			'type'     => false,
+			'type'     => 'refreshLinks',
 			'maxJobs'  => false,
 			'maxTime'  => false,
 			'throttle' => false,
