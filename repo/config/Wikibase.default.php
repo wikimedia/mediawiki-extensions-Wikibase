@@ -27,8 +27,16 @@ return call_user_func( function() {
 
 		'entityNamespaces' => array(),
 
-		// See StatementGrouperBuilder for an example.
-		'statementSections' => array(),
+		// See StatementGrouperBuilder for more examples.
+		'statementSections' => array(
+			'item' => array(
+				'statements' => null,
+				'identifiers' => array(
+					'type' => 'dataType',
+					'dataTypes' => array( 'external-id' ),
+				),
+			),
+		),
 
 		// Define constraints for multilingual terms (such as labels, descriptions and aliases).
 		'multilang-limits' => array(
