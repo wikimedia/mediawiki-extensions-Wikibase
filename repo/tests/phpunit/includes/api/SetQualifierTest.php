@@ -55,7 +55,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 *
 	 * @return Snak
 	 */
-	public function getTestSnak( $type, $data = null ) {
+	private function getTestSnak( $type, $data ) {
 		static $snaks = array();
 
 		if ( !isset( $snaks[$type] ) ) {
@@ -141,7 +141,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideChangeRequests
 	 */
-	public function testChangeRequests( $snakType, $data = null ) {
+	public function testChangeRequests( $snakType, $data ) {
 		$item = $this->getTestItem();
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
