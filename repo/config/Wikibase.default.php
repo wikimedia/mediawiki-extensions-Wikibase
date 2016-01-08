@@ -41,6 +41,10 @@ return call_user_func( function() {
 		// Items allowed to be used as badges pointing to their CSS class names
 		'badgeItems' => array(),
 
+		// List of globe-coordinate property id strings, in order of preference, to consider for
+		// primary coordinates when extracting coordinates from an entity for the GeoData extension.
+		'preferredGeoDataProperties' => array(),
+
 		// List of image property id strings, in order of preference, that should be considered for
 		// the "page_image" page property.
 		'preferredPageImagesProperties' => array(),
@@ -139,12 +143,6 @@ return call_user_func( function() {
 				'de-formal'   => 'de-x-formal',
 				'nl-informal' => 'nl-x-informal',
 		),
-
-		// List of globe-coordinate properties (listed by id string), in order of preference,
-		// to consider for primary coordinates when extracting coordinates from an Entity
-		// for the GeoData extension.
-		// e.g. array( 'P625', 'P1259' )
-		'preferredGeoDataProperties' => array(),
 
 		// Mapping of globe uris to names, as recognized and used by GeoData extension
 		// when indexing and querying for coordinates.
