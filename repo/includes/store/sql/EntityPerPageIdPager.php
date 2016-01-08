@@ -31,14 +31,14 @@ class EntityPerPageIdPager implements EntityIdPager {
 	private $position = null;
 
 	/**
-	 * @var mixed
+	 * @var string
 	 */
 	private $redirectMode;
 
 	/**
 	 * @param EntityPerPage $entityPerPage
 	 * @param null|string $entityType The desired entity type, or null for any type.
-	 * @param mixed $redirectMode A EntityPerPage::XXX_REDIRECTS constant (default is NO_REDIRECTS).
+	 * @param string $redirectMode A EntityPerPage::XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 */
 	public function __construct( EntityPerPage $entityPerPage, $entityType = null, $redirectMode = EntityPerPage::NO_REDIRECTS ) {
 		$this->entityPerPage = $entityPerPage;
