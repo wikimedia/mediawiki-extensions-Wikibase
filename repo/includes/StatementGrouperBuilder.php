@@ -25,7 +25,7 @@ use Wikibase\DataModel\Statement\StatementFilter;
  *         ),
  *         'identifiers' => array(
  *             'type' => 'dataType',
- *             'dataTypes' => array( 'identifier' ),
+ *             'dataTypes' => array( 'external-id' ),
  *         ),
  *     ),
  *     'property' => array(
