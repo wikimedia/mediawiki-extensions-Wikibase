@@ -3,10 +3,11 @@
 		"authors": [
 			"Spiritia",
 			"DCLXVI",
-			"Termininja"
+			"Termininja",
+			"Vodnokon4e"
 		]
 	},
-	"wikibase-error-unexpected": "Възникна неочаквана грешка.",
+	"wikibase-error-unexpected": "Грешка: $1.",
 	"wikibase-error-save-generic": "Промените не могат да бъдат завършени, поради възникнала грешка при опита за съхраняване.",
 	"wikibase-error-remove-generic": "Промените не могат да бъдат завършени, поради възникнала грешка при опита за изтриване.",
 	"wikibase-error-save-connection": "Промените не могат да бъдат завършени, поради възникнал проблем с интернет връзката при опита за съхраняване. Проверете интернет връзката си.",

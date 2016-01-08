@@ -7,7 +7,8 @@
 			"DCLXVI",
 			"StanProg",
 			"Macofe",
-			"Termininja"
+			"Termininja",
+			"Vodnokon4e"
 		]
 	},
 	"wikibase-desc": "Хранилище на структурирани данни",
@@ -34,7 +35,7 @@
 	"wikibase-diffview-rank-normal": "Нормален ранг",
 	"wikibase-diffview-rank-deprecated": "Непрепоръчителен ранг",
 	"wikibase-sitelink-site-edit-placeholder": "сайт",
-	"wikibase-sitelink-page-edit-placeholder": "статия",
+	"wikibase-sitelink-page-edit-placeholder": "страница",
 	"wikibase-description-input-help-message": "Въведете кратко описание на $1.",
 	"wikibase-entitytermsview-input-help-message": "Въведете етикет на обекта, кратко описание и псевдоними за съответния език.",
 	"wikibase-statementsection-statements": "Изявления",
