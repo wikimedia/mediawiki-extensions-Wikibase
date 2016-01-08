@@ -5,6 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use HashSiteStore;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -24,7 +25,6 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Repo\Api\ResultBuilder;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Repo\Api\ResultBuilder
@@ -80,7 +80,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$result,
 			$mockEntityTitleLookup,
 			$serializerFactory,
-			new MockSiteStore(),
+			new HashSiteStore(),
 			$mockPropertyDataTypeLookup,
 			$addMetaData
 		);

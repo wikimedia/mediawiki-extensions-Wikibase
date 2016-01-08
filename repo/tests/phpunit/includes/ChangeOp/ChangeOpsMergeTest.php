@@ -2,7 +2,9 @@
 
 namespace Wikibase\Test;
 
+use HashSiteStore;
 use MediaWikiTestCase;
+use TestSites;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
@@ -53,7 +55,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$siteLookup = null
 	) {
 		if ( $siteLookup === null ) {
-			$siteLookup = MockSiteStore::newFromTestSites();
+			$siteLookup = new HashSiteStore( TestSites::getSites() );
 		}
 		// A validator which makes sure that no site link is for page 'DUPE'
 		$siteLinkUniquenessValidator = $this->getMock( 'Wikibase\Repo\Validators\EntityValidator' );
@@ -412,7 +414,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$enwiki->expects( $this->exactly( 2 ) )
 			->method( 'normalizePageName' )
 			->will( $this->returnValue( 'Foo' ) );
-		$mockSiteStore = MockSiteStore::newFromTestSites();
+		$mockSiteStore = new HashSiteStore( TestSites::getSites() );
 		$mockSiteStore->saveSite( $enwiki );
 
 		$changeOps = $this->makeChangeOpsMerge(
@@ -440,7 +442,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$from,
 			$to,
 			array(),
-			new MockSiteStore()
+			new HashSiteStore()
 		);
 
 		$this->setExpectedException(

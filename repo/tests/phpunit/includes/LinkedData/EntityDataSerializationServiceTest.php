@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\Serializers\DataValueSerializer;
+use HashSiteStore;
 use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -113,7 +114,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			new SiteList(),
 			new EntityDataFormatProvider(),
 			$serializerFactory,
-			new MockSiteStore()
+			new HashSiteStore()
 		);
 
 		return $service;

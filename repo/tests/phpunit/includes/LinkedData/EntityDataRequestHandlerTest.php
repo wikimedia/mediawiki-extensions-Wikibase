@@ -6,6 +6,7 @@ use DataValues\Serializers\DataValueSerializer;
 use DerivativeContext;
 use FauxRequest;
 use FauxResponse;
+use HashSiteStore;
 use HttpError;
 use OutputPage;
 use RequestContext;
@@ -108,7 +109,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			new MockSiteStore()
+			new HashSiteStore()
 		);
 
 		$entityDataFormatProvider->setFormatWhiteList(

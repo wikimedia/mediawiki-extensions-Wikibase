@@ -2,7 +2,9 @@
 
 namespace Wikibase\Test;
 
+use HashSiteStore;
 use PHPUnit_Framework_TestCase;
+use TestSites;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Item;
@@ -32,6 +34,8 @@ class MergeChangeOpsFactoryTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
+		$siteStore = new HashSiteStore( TestSites::getSites() );
+
 		$changeOpFactoryProvider = new ChangeOpFactoryProvider(
 			$constraintProvider,
 			$mockProvider->getMockGuidGenerator(),
@@ -39,13 +43,13 @@ class MergeChangeOpsFactoryTest extends PHPUnit_Framework_TestCase {
 			$mockProvider->getMockGuidParser( $toItemId ),
 			$mockProvider->getMockSnakValidator(),
 			$mockProvider->getMockTermValidatorFactory(),
-			MockSiteStore::newFromTestSites()
+			$siteStore
 		);
 
 		return new MergeChangeOpsFactory(
 			$constraintProvider,
 			$changeOpFactoryProvider,
-			MockSiteStore::newFromTestSites()
+			$siteStore
 		);
 	}
 

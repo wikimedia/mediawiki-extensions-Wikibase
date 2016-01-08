@@ -5,9 +5,10 @@ namespace Wikibase\Test\Repo\Api;
 use ApiBase;
 use DOMDocument;
 use DOMXPath;
+use HashSiteStore;
+use TestSites;
 use Wikibase\Repo\Api\SetSiteLink;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @group API
@@ -161,7 +162,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetSiteLink', 'wbsetsitelink', $params, true );
-		$siteTargetProvider = new SiteLinkTargetProvider( MockSiteStore::newFromTestSites(), array() );
+		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( TestSites::getSites() ), array() );
 		$module->setServices( $siteTargetProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );

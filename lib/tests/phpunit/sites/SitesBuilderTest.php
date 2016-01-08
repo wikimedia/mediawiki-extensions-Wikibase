@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use HashSiteStore;
 use MediaWikiSite;
 use PHPUnit_Framework_TestCase;
 use SiteList;
@@ -21,7 +22,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider buildSitesProvider
 	 */
 	public function testBuildSites( array $sites, $group, $wikiId, array $expected ) {
-		$store = new MockSiteStore();
+		$store = new HashSiteStore();
 
 		$validGroups = array( 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
 			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' );

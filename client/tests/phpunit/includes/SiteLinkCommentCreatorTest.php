@@ -4,13 +4,14 @@ namespace Wikibase\Client\Tests;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
+use HashSiteStore;
 use Language;
+use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
-use Wikibase\Test\MockSiteStore;
 use Wikibase\Test\TestChanges;
 
 /**
@@ -29,7 +30,8 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getEditCommentProvider
 	 */
 	public function testGetEditComment( Diff $siteLinkDiff, $action, $expected ) {
-		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), MockSiteStore::newFromTestSites(), 'enwiki' );
+		$siteStore = new HashSiteStore( TestSites::getSites() );
+		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), $siteStore, 'enwiki' );
 		$comment = $commentCreator->getEditComment( $siteLinkDiff, $action, $this->getTitle( 'A fancy page' ) );
 
 		$this->assertEquals( $expected, $comment );
@@ -67,7 +69,8 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider needsTargetSpecificSummaryProvider
 	 */
 	public function testNeedsTargetSpecificSummary( $expected, Diff $siteLinkDiff, Title $title ) {
-		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), MockSiteStore::newFromTestSites(), 'enwiki' );
+		$siteStore = new HashSiteStore( TestSites::getSites() );
+		$commentCreator = new SiteLinkCommentCreator( Language::factory( 'qqx' ), $siteStore, 'enwiki' );
 		$res = $commentCreator->needsTargetSpecificSummary( $siteLinkDiff, $title );
 
 		$this->assertSame( $expected, $res );

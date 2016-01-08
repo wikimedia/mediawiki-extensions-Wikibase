@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use HashSiteStore;
+use TestSites;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -52,7 +54,7 @@ class ChangeOpFactoryProviderTest extends \PHPUnit_Framework_TestCase {
 			$this->mockProvider->getMockGuidParser( $entityId ),
 			$this->mockProvider->getMockSnakValidator(),
 			$this->mockProvider->getMockTermValidatorFactory(),
-			MockSiteStore::newFromTestSites()
+			new HashSiteStore( TestSites::getSites() )
 		);
 	}
 

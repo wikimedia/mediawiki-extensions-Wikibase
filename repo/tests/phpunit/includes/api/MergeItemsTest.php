@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use HashSiteStore;
 use Language;
 use RequestContext;
 use Status;
@@ -24,7 +25,6 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
 use Wikibase\Test\MockRepository;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Repo\Api\MergeItems
@@ -147,7 +147,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			$wikibaseRepo->getStatementGuidParser(),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
-			new MockSiteStore( TestSites::getSites() )
+			new HashSiteStore( TestSites::getSites() )
 		);
 
 		$module->setServices(

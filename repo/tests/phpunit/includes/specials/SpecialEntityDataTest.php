@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DataValues\Serializers\DataValueSerializer;
 use FauxRequest;
 use FauxResponse;
+use HashSiteStore;
 use HttpError;
 use OutputPage;
 use SiteList;
@@ -88,7 +89,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			new MockSiteStore()
+			new HashSiteStore()
 		);
 
 		$formats = array( 'json', 'rdfxml', 'ntriples' );

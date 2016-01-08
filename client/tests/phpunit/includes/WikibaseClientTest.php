@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests;
 
+use HashSiteStore;
 use Language;
 use Site;
 use SiteStore;
@@ -9,7 +10,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\SettingsArray;
-use Wikibase\Test\MockSiteStore;
 
 /**
  * @covers Wikibase\Client\WikibaseClient
@@ -166,7 +166,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteStore
 	 */
 	private function getSiteStore() {
-		$siteStore = new MockSiteStore();
+		$siteStore = new HashSiteStore();
 
 		$site = new Site();
 		$site->setGlobalId( 'enwiki' );
@@ -299,7 +299,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function getWikibaseClient() {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$sites = new MockSiteStore( array() );
+		$sites = new HashSiteStore( array() );
 		$dataTypeDefinitions = new DataTypeDefinitions();
 		return new WikibaseClient( $settings, Language::factory( 'en' ), $dataTypeDefinitions, $sites );
 	}
