@@ -111,7 +111,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			->will( $this->returnCallback( function(
 				$entityType,
 				array $labels,
-				array $descriptions = null,
+				array $descriptions,
 				EntityId $ignoreEntityId = null
 			) use ( $self ) {
 				$errors = array();
@@ -406,9 +406,9 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->assertNotContains( '&amp;lt;', $output, 'no double escaping' );
 	}
 
-	private function assetFingerprintEquals( Fingerprint $expected, Fingerprint $actual, $message = 'Fingerprint mismatches' ) {
+	private function assetFingerprintEquals( Fingerprint $expected, Fingerprint $actual ) {
 		// TODO: Compare serializations.
-		$this->assertTrue( $expected->equals( $actual ), $message );
+		$this->assertTrue( $expected->equals( $actual ), 'Fingerprint mismatches' );
 	}
 
 }

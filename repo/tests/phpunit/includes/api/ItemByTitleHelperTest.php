@@ -54,9 +54,10 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param mixed $itemId
+	 *
 	 * @return SiteLinkLookup
 	 */
-	public function getSiteLinkLookupMock( $itemId = null ) {
+	private function getSiteLinkLookupMock( $itemId ) {
 		$siteLinkLookupMock = $this->getMockBuilder( '\Wikibase\Lib\Store\SiteLinkLookup' )
 			->disableOriginalConstructor()
 			->getMock();
