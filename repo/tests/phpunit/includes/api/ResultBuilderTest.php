@@ -67,7 +67,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
-				return 'DtIdFor_' . $id->getSerialization();
+				return "DtIdFor_$id";
 			} ) );
 
 		$serializerFactory = new SerializerFactory(

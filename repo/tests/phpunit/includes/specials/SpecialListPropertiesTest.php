@@ -75,7 +75,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$lookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
-				return array( 'en' => 'Property with label ' . $id->getSerialization() );
+				return array( 'en' => "Property with label $id" );
 			} ) );
 		return $lookup;
 	}

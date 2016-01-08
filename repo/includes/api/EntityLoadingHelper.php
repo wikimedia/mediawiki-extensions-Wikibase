@@ -62,8 +62,9 @@ class EntityLoadingHelper {
 
 			if ( !$revision ) {
 				$this->errorReporter->dieError(
-					'Entity ' . $entityId->getSerialization() . ' not found',
-					'cant-load-entity-content' );
+					"Entity $entityId not found",
+					'cant-load-entity-content'
+				);
 			}
 
 			return $revision;

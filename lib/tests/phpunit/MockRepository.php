@@ -504,7 +504,7 @@ class MockRepository implements
 
 		if ( $baseRevisionId !== false && !$this->hasEntity( $entityId ) ) {
 			//TODO: find correct message key to use with status??
-			throw new StorageException( 'No base revision found for ' . $entityId->getSerialization() );
+			throw new StorageException( "No base revision found for $entityId" );
 		}
 
 		if ( $baseRevisionId !== false && $this->getEntityRevision( $entityId )->getRevisionId() !== $baseRevisionId ) {

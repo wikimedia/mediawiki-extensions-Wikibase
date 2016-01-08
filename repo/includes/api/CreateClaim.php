@@ -66,7 +66,7 @@ class CreateClaim extends ModifyClaim {
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {
 			$this->errorReporter->dieError(
-				$propertyId->getSerialization() . ' does not appear to be a property ID',
+				"$propertyId does not appear to be a property ID",
 				'param-illegal'
 			);
 		}

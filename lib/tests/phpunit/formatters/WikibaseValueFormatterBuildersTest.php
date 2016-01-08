@@ -60,9 +60,9 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			->will( $this->returnCallback( function ( EntityId $id, $language ) {
 				switch ( $language ) {
 					case 'de':
-						return 'Name für ' . $id->getSerialization();
+						return "Name für $id";
 					default:
-						return 'Label for ' . $id->getSerialization();
+						return "Label for $id";
 				}
 			} ) );
 
@@ -70,8 +70,8 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return array(
-					'de' => 'Name für ' . $id->getSerialization(),
-					'en' => 'Label for ' . $id->getSerialization(),
+					'de' => "Name für $id",
+					'en' => "Label for $id",
 				);
 			} ) );
 

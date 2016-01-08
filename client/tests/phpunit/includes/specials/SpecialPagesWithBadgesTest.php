@@ -31,7 +31,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( ItemId $id ) {
-				return new Term( 'en', 'Label of ' . $id->getSerialization() );
+				return new Term( 'en', "Label of $id" );
 			} ) );
 
 		return $labelLookup;

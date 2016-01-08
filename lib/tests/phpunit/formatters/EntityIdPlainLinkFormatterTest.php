@@ -51,9 +51,9 @@ class EntityIdPlainLinkFormatterTest extends PHPUnit_Framework_TestCase {
 	public function getTitleForId( EntityId $entityId ) {
 		switch ( $entityId->getEntityType() ) {
 			case Item::ENTITY_TYPE:
-				return Title::makeTitle( NS_MAIN, 'ITEM-TEST--' . $entityId->getSerialization() );
+				return Title::makeTitle( NS_MAIN, "ITEM-TEST--$entityId" );
 			case Property::ENTITY_TYPE:
-				return Title::makeTitle( NS_MAIN, 'PROPERTY-TEST--' . $entityId->getSerialization() );
+				return Title::makeTitle( NS_MAIN, "PROPERTY-TEST--$entityId" );
 			default:
 				throw new LogicException( "oops!" );
 		}

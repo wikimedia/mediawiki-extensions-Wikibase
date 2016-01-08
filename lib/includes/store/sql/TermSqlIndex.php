@@ -263,7 +263,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		$uniqueKeyFields = array( 'term_entity_type', 'term_entity_id', 'term_language', 'term_type', 'term_text' );
 
-		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting terms for ' . $entityId->getSerialization() );
+		wfDebugLog( __CLASS__, __FUNCTION__ . ": deleting terms for $entityId" );
 
 		$success = true;
 		foreach ( $terms as $term ) {

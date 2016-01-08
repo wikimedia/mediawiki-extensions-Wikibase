@@ -308,11 +308,11 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		);
 	}
 
-	private function assertRedirectWorks( $expectedFrom, $fromId, $toId ) {
+	private function assertRedirectWorks( $expectedFrom, ItemId $fromId, ItemId $toId ) {
 		if ( empty( $expectedFrom ) ) {
 			try {
 				$this->testHelper->getEntity( $fromId );
-				$this->fail( 'getEntity( ' . $fromId->getSerialization() . ' ) did not throw an UnresolvedRedirectException' );
+				$this->fail( "getEntity( $fromId ) did not throw an UnresolvedRedirectException" );
 			} catch ( RevisionedUnresolvedRedirectException $ex ) {
 				$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
 			}

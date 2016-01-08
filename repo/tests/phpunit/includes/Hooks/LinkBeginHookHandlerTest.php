@@ -261,7 +261,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 					return array();
 				}
 
-				throw new StorageException( 'No such entity: ' . $id->getSerialization() );
+				throw new StorageException( "No such entity: $id" );
 			} ) );
 
 		$termLookup->expects( $this->any() )
@@ -275,7 +275,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 					return array();
 				}
 
-				throw new StorageException( 'No such entity: ' . $id->getSerialization() );
+				throw new StorageException( "No such entity: $id" );
 			} ) );
 
 		return $termLookup;
