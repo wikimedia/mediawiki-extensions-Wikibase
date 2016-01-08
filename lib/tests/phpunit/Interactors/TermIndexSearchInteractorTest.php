@@ -86,7 +86,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
 				$labels = array();
 				foreach ( $languageCodes as $languageCode ) {
-					$labels[$languageCode] = 'label-' . $languageCode . '-' . $entityId->getSerialization();
+					$labels[$languageCode] = "label-$languageCode-$entityId";
 				}
 				return $labels;
 			}
@@ -96,8 +96,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
 				$descriptions = array();
 				foreach ( $languageCodes as $languageCode ) {
-					$descriptions[$languageCode] =
-						'description-' . $languageCode . '-' . $entityId->getSerialization();
+					$descriptions[$languageCode] = "description-$languageCode-$entityId";
 				}
 				return $descriptions;
 			}
@@ -106,7 +105,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getExpectedDisplayTerm( EntityId $entityId, $termType ) {
-		return new TermFallback( 'pt', $termType . '-pt-' . $entityId->getSerialization(), 'pt', 'pt' );
+		return new TermFallback( 'pt', "$termType-pt-$entityId", 'pt', 'pt' );
 	}
 
 	/**

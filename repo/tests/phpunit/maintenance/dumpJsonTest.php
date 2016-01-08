@@ -161,7 +161,7 @@ class DumpJsonTest extends MediaWikiTestCase {
 				if ( $id->getSerialization() === 'P999' ) {
 					throw new PropertyDataTypeLookupException( $id );
 				}
-				return 'DtIdFor_' . $id->getSerialization();
+				return "DtIdFor_$id";
 			} ) );
 		return $mockDataTypeLookup;
 	}

@@ -134,10 +134,10 @@ class JsonDumpGenerator extends DumpGenerator {
 			$entity = $this->entityLookup->getEntity( $entityId );
 
 			if ( !$entity ) {
-				throw new EntityLookupException( $entityId, 'Entity not found: ' . $entityId->getSerialization() );
+				throw new EntityLookupException( $entityId, "Entity not found: $entityId" );
 			}
 		} catch ( MWContentSerializationException $ex ) {
-			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
+			throw new StorageException( "Deserialization error for $entityId" );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {
 			// Redirects aren't supposed to be in the JSON dumps
 			return null;

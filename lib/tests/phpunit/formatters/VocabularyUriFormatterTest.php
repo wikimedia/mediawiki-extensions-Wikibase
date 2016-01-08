@@ -46,7 +46,7 @@ class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
 				if ( $id->getSerialization() === 'Q112233' ) {
 					throw new LabelDescriptionLookupException( $id, 'No such label!' );
 				}
-				return new Term( 'en', 'LABEL:' . $id->getSerialization() );
+				return new Term( 'en', "LABEL:$id" );
 			} ) );
 
 		$idParser = new BasicEntityIdParser();

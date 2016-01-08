@@ -130,10 +130,8 @@ class ClientParserOutputDataUpdater {
 
 		if ( !$item || !$item->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
 			// Probably some sort of race condition or data inconsistency, better log a warning
-			wfLogWarning(
-				'According to a SiteLinkLookup ' . $itemId->getSerialization() .
-				' is linked to ' . $this->siteId . ' while it is not or it does not exist.'
-			);
+			wfLogWarning( "According to a SiteLinkLookup $itemId is linked to " . $this->siteId
+				. ' while it is not or it does not exist.' );
 
 			return;
 		}

@@ -348,8 +348,7 @@ class EditEntity {
 				$this->baseRev = $this->entityRevisionLookup->getEntityRevision( $id, $baseRevId );
 
 				if ( $this->baseRev === null ) {
-					throw new MWException( 'Base revision ID not found: rev ' . $baseRevId
-						. ' of ' . $id->getSerialization() );
+					throw new MWException( "Base revision ID not found: rev $baseRevId of $id" );
 				}
 			}
 		}

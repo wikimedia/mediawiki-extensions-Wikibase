@@ -95,7 +95,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			throw new InvalidArgumentException( 'Unsupported entity type ' . $id->getEntityType() );
 		}
 
-		$entity->setLabel( 'en', 'label:' . $id->getSerialization() );
+		$entity->setLabel( 'en', "label:$id" );
 
 		return $entity;
 	}
@@ -329,10 +329,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$deserializer = $this->deserializerFactory->newEntityDeserializer();
 		$actualEntity = $deserializer->deserialize( $data );
 
-		$this->assertTrue(
-			$expectedEntity->equals( $actualEntity ),
-			'Round trip failed for ' . $id->getSerialization()
-		);
+		$this->assertTrue( $expectedEntity->equals( $actualEntity ), "Round trip failed for $id" );
 	}
 
 	public function typeFilterProvider() {

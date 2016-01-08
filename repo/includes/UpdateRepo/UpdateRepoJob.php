@@ -124,7 +124,7 @@ abstract class UpdateRepoJob extends Job {
 		} catch ( StorageException $ex ) {
 			wfDebugLog(
 				'UpdateRepo',
-				__FUNCTION__ . ": EntityRevision couldn't be loaded for " . $itemId->getSerialization() . ": " . $ex->getMessage()
+				__FUNCTION__ . ": EntityRevision couldn't be loaded for $itemId: " . $ex->getMessage()
 			);
 
 			return null;
@@ -134,10 +134,7 @@ abstract class UpdateRepoJob extends Job {
 			return $entityRevision->getEntity();
 		}
 
-		wfDebugLog(
-			'UpdateRepo',
-			__FUNCTION__ . ": EntityRevision not found for " . $itemId->getSerialization()
-		);
+		wfDebugLog( 'UpdateRepo', __FUNCTION__ . ": EntityRevision not found for $itemId" );
 		return null;
 	}
 
@@ -165,8 +162,8 @@ abstract class UpdateRepoJob extends Job {
 		);
 
 		if ( !$status->isOK() ) {
-			wfDebugLog( 'UpdateRepo', __FUNCTION__ . ': attemptSave for '
-				. $itemId->getSerialization() . ' failed: ' . $status->getMessage()->text() );
+			wfDebugLog( 'UpdateRepo', __FUNCTION__ . ": attemptSave for $itemId failed: "
+				. $status->getMessage()->text() );
 		}
 
 		return $status->isOK();

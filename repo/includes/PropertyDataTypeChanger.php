@@ -67,7 +67,7 @@ class PropertyDataTypeChanger {
 		);
 
 		if ( $entityRevision === null ) {
-			throw new StorageException( "Could not load property: " . $propertyId->getSerialization() );
+			throw new StorageException( "Could not load property: $propertyId" );
 		}
 
 		/* @var $property Property */

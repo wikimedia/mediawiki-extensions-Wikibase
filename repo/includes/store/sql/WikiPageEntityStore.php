@@ -280,9 +280,7 @@ class WikiPageEntityStore implements EntityStore {
 		$ok = $page->doDeleteArticle( $reason, false, 0, true, $error, $user );
 
 		if ( !$ok ) {
-			throw new StorageException(
-				'Failed to delete ' . $entityId->getSerialization(). ': ' . $error
-			);
+			throw new StorageException( "Failed to delete $entityId: $error" );
 		}
 
 		$this->dispatcher->dispatch( 'entityDeleted', $entityId );

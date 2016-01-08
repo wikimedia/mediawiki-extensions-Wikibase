@@ -366,7 +366,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$matchedTerms = $lookup->getMatchingTerms( array( $abc ), array( TermIndexEntry::TYPE_LABEL ), Item::ENTITY_TYPE );
 		foreach ( $matchedTerms as $matchedTerm ) {
 			if ( $matchedTerm->getEntityId() === $id ) {
-				$this->fail( 'Failed to delete term or entity: ' . $id->getSerialization() );
+				$this->fail( "Failed to delete term or entity: $id" );
 			}
 		}
 	}

@@ -164,7 +164,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 
 		try {
 			$this->mockRepository->getEntity( $fromId );
-			$this->fail( 'getEntity( ' . $fromId->getSerialization() . ' ) did not throw an UnresolvedRedirectException' );
+			$this->fail( "getEntity( $fromId ) did not throw an UnresolvedRedirectException" );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( $toId->getSerialization(), $ex->getRedirectTargetId()->getSerialization() );
 		}

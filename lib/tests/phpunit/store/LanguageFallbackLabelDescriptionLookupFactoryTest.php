@@ -25,13 +25,13 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framewo
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				return $id->getSerialization() . '\'s label';
+				return "$id's label";
 			} ) );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				return array( 'en' => $id->getSerialization() . '\'s label' );
+				return array( 'en' => "$id's label" );
 			} ) );
 
 		return $termLookup;
