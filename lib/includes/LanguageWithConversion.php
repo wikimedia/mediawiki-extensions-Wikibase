@@ -13,16 +13,45 @@ use MWException;
  */
 class LanguageWithConversion {
 
-	static protected $objectCache = array();
+	/**
+	 * @var array[]
+	 */
+	static private $objectCache = array();
 
-	protected $language;
-	protected $languageCode;
-	protected $sourceLanguage;
-	protected $sourceLanguageCode;
-	protected $parentLanguage;
+	/**
+	 * @var Language|null
+	 */
+	private $language;
 
-	protected $translateCache = array();
-	protected $translatePool = array();
+	/**
+	 * @var string
+	 */
+	private $languageCode;
+
+	/**
+	 * @var Language|null
+	 */
+	private $sourceLanguage;
+
+	/**
+	 * @var string|null
+	 */
+	private $sourceLanguageCode;
+
+	/**
+	 * @var Language|null
+	 */
+	private $parentLanguage;
+
+	/**
+	 * @var string[]
+	 */
+	private $translateCache = array();
+
+	/**
+	 * @var bool[]
+	 */
+	private $translatePool = array();
 
 	/**
 	 * @param null|Language $language
@@ -31,7 +60,13 @@ class LanguageWithConversion {
 	 * @param null|string $sourceLanguageCode
 	 * @param null|Language $parentLanguage
 	 */
-	protected function __construct( $language, $languageCode, $sourceLanguage, $sourceLanguageCode, $parentLanguage ) {
+	private function __construct(
+		Language $language = null,
+		$languageCode,
+		Language $sourceLanguage = null,
+		$sourceLanguageCode = null,
+		Language $parentLanguage = null
+	) {
 		$this->language = $language;
 		$this->languageCode = $languageCode;
 		$this->sourceLanguage = $sourceLanguage;
@@ -142,7 +177,7 @@ class LanguageWithConversion {
 	/**
 	 * Get the code of the source language defined.
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function getSourceLanguageCode() {
 		return $this->sourceLanguageCode;
@@ -244,7 +279,7 @@ class LanguageWithConversion {
 	/**
 	 * Really execute translation.
 	 */
-	protected function executeTranslate() {
+	private function executeTranslate() {
 		if ( $this->parentLanguage && count( $this->translatePool ) ) {
 			$pieces = array_keys( $this->translatePool );
 			$block = implode( "\0", $pieces );
