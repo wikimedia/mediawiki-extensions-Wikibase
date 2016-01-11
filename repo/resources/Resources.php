@@ -61,7 +61,8 @@ return call_user_func( function() {
 
 		'wikibase.ui.entityViewInit' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
+				'wikibase.EntityInitializer.js',
+				'wikibase.ui.entityViewInit.js',
 			),
 			'dependencies' => array(
 				'mediawiki.page.watch.ajax',
@@ -82,7 +83,10 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.statementview-snakview',
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
+				'json',
+				'wikibase',
 				'wikibase.api.getLocationAgnosticMwApi',
+				'wikibase.datamodel.Entity',
 				'wikibase.datamodel.EntityId',
 				'wikibase.dataTypeStore',
 				'wikibase.entityChangers.EntityChangersFactory',
@@ -92,10 +96,10 @@ return call_user_func( function() {
 				'wikibase.entityIdFormatter.CachingEntityIdPlainFormatter',
 				'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter',
 				'wikibase.entityIdFormatter.DataValueBasedEntityIdPlainFormatter',
-				'wikibase.EntityInitializer',
 				'wikibase.parsers.getStore',
 				'wikibase.api.RepoApi',
 				'wikibase.RevisionStore',
+				'wikibase.serialization.EntityDeserializer',
 				'wikibase.serialization.EntityDeserializer',
 				'wikibase.sites',
 				'wikibase.store.ApiEntityStore',
@@ -111,18 +115,6 @@ return call_user_func( function() {
 				'wikibase-entity-item',
 				'wikibase-entity-property',
 			)
-		),
-
-		'wikibase.EntityInitializer' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.EntityInitializer.js',
-			),
-			'dependencies' => array(
-				'json',
-				'wikibase',
-				'wikibase.datamodel.Entity',
-				'wikibase.serialization.EntityDeserializer',
-			),
 		),
 
 		'wikibase.ui.entitysearch' => $moduleTemplate + array(
