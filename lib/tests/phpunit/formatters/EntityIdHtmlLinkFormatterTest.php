@@ -96,7 +96,7 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function getFormatter( $hasLabel, $exists, $term = null ) {
+	private function getFormatter( $hasLabel, $exists, Term $term = null ) {
 		if ( $hasLabel ) {
 			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
 		} else {
@@ -195,7 +195,7 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider formatProvider_fallback
 	 */
-	public function testFormat_fallback( $expectedRegex, $term ) {
+	public function testFormat_fallback( $expectedRegex, Term $term ) {
 		$entityIdHtmlLinkFormatter = $this->getFormatter( true, true, $term );
 
 		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q42' ) );

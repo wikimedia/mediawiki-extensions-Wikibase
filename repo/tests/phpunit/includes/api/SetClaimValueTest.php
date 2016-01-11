@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test\Repo\Api;
 
-use DataValues\DataValue;
 use DataValues\StringValue;
 use FormatJson;
 use Revision;
@@ -208,15 +207,9 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		);
 	}
 
-	private function getExpectedSummary( Statement $oldStatement, DataValue $value = null ) {
+	private function getExpectedSummary( Statement $oldStatement, StringValue $value ) {
 		$oldSnak = $oldStatement->getMainSnak();
 		$property = $this->getEntityIdFormatter()->formatEntityId( $oldSnak->getPropertyId() );
-
-		//NOTE: new snak is always a PropertyValueSnak
-
-		if ( $value === null ) {
-			$value = $oldSnak->getDataValue();
-		}
 
 		$value = $this->getPropertyValueFormatter()->format( $value );
 		return '/* wbsetclaimvalue:1| */ ' . $property . ': ' . $value;

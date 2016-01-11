@@ -184,18 +184,14 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getSnaksFinder() {
-		$snakListFinder = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\SnaksFinder'
-			)
-			->disableOriginalConstructor()
-			->getMock();
+		$snakListFinder = $this->getMock( 'Wikibase\Client\DataAccess\SnaksFinder' );
 
 		$snakListFinder->expects( $this->any() )
 			->method( 'findSnaks' )
 			->will( $this->returnCallback( function(
 				StatementListProvider $statementListProvider,
 				PropertyId $propertyId,
-				$acceptableRanks = null
+				array $acceptableRanks = null
 			) {
 				return array(
 					new PropertyValueSnak( $propertyId, new EntityIdValue( new ItemId( 'Q7' ) ) )

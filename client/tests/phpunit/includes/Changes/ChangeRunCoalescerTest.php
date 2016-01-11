@@ -181,21 +181,15 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		return $differ->diffEntities( $oldEntity, $newEntity );
 	}
 
-	private function assertChangeEquals( Change $expected, Change $actual, $message = null ) {
-		if ( $message ) {
-			$message .= ': ';
-		} else {
-			$message = 'change.';
-		}
+	private function assertChangeEquals( Change $expected, Change $actual ) {
+		$this->assertEquals( get_class( $expected ), get_class( $actual ), 'change.class' );
 
-		$this->assertEquals( get_class( $expected ), get_class( $actual ), $message . 'class' );
-
-		$this->assertEquals( $expected->getObjectId(), $actual->getObjectId(), $message . 'ObjectId' );
-		$this->assertEquals( $expected->getTime(), $actual->getTime(), $message . 'Time' );
-		$this->assertEquals( $expected->getType(), $actual->getType(), $message . 'Type' );
+		$this->assertEquals( $expected->getObjectId(), $actual->getObjectId(), 'change.ObjectId' );
+		$this->assertEquals( $expected->getTime(), $actual->getTime(), 'change.Time' );
+		$this->assertEquals( $expected->getType(), $actual->getType(), 'change.Type' );
 
 		if ( $expected instanceof EntityChange && $actual instanceof EntityChange ) {
-			$this->assertEquals( $expected->getAction(), $actual->getAction(), $message . 'Action' );
+			$this->assertEquals( $expected->getAction(), $actual->getAction(), 'change.Action' );
 			$this->assertArrayEquals( $expected->getMetadata(), $actual->getMetadata(), false, true );
 		}
 
