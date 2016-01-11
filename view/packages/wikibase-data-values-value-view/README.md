@@ -25,7 +25,9 @@ Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 ### jQuery.valueview.ViewState
 
-`jQuery.valueview.ViewState` acts as a *Facade* linking `Expert`s and `jQuery.valueview`. `ViewState` allows `Expert`s to observe certain aspects of `jQuery.valueview` and enables `Expert`s to update the linked `jQuery.valueview` instance.
+`jQuery.valueview.ViewState` acts as a *Facade* linking `Expert`s and `jQuery.valueview`.
+`ViewState` allows `Expert`s to observe certain aspects of `jQuery.valueview` and enables `Expert`s
+to update the linked `jQuery.valueview` instance.
 
 ## Usage
 
@@ -34,7 +36,9 @@ For the usage examples, it is assumed the following packages are installed:
 * [DataValues JavaScript](https://github.com/wmde/DataValuesJavascript)
 * [DataTypes](https://github.com/wmde/DataTypes)
 
-When using `jQuery.valueview` for handling a `DataValue`, a `jQuery.valueview.ExpertStore` with knowledge about an `Expert` dedicated to the `DataValue`'s type is required and can be set up as follows:
+When using `jQuery.valueview` for handling a `DataValue`, a `jQuery.valueview.ExpertStore` with
+knowledge about an `Expert` dedicated to the `DataValue`'s type is required and can be set up as
+follows:
 
 ```javascript
 var dv = dataValues,
@@ -58,7 +62,8 @@ console.log(
 
 ```
 
-Now, the `jQuery.valueview.ExpertStore` can be injected into a new `jQuery.valueview` instance enabling it to edit "string" `DataValue`s.
+Now, the `jQuery.valueview.ExpertStore` can be injected into a new `jQuery.valueview` instance
+enabling it to edit "string" `DataValue`s.
 
 ```javascript
 var $subject = $( '<div/>' ).appendTo( $( 'body' ).empty() );
@@ -80,25 +85,35 @@ $subject.valueview( {
 var valueView = $subject.data( 'valueview' );
 ```
 
-Having created a `jQuery.valueview` displaying *text*, the widget's member functions may be used for interaction, for example:
+Having created a `jQuery.valueview` displaying *text*, the widget's member functions may be used for
+interaction, for example:
 * Emptying the view: `valueView.value( null );`
 * Allowing the user to edit the value: `valueView.startEditing();`
 * Stopping the user from editing the value: `valueView.stopEditing();`
 * Returning the current value: `valueView.value();`
 
-Setting a `jQuery.valueview` instance's value to a `DataValue` it cannot handle because no suitable `Expert` can be determined from the `ExpertStore` will result in an error notification being displayed. Calling `.value()` will still return the value but the user can neither see nor edit the value.
+Setting a `jQuery.valueview` instance's value to a `DataValue` it cannot handle because no suitable
+`Expert` can be determined from the `ExpertStore` will result in an error notification being
+displayed. Calling `.value()` will still return the value but the user can neither see nor edit the
+value.
 
 ## Architecture
 
-`jQuery.valueview` heavily depends on `ValueFormatter`s and `ValueParser`s defined via the [DataValues JavaScript](https://github.com/wmde/DataValuesJavascript) library. `ValueFormatter`s are used to convert `DataValue` instances to DOM elements, and `ValueParser`s are used to convert plain strings (which may be accompanied by some options) to `DataValue` instances.
-Since `Expert`s only are used for editing values, they are constructed when starting edit mode and destroyed after leaving edit mode. `Expert`s have the following lifecycle:
-* `_init()`: Load parsed, formatted and raw (text) values from the `jQuery.valueview` instance linked via `jQuery.valueview.ViewState` and initialize DOM.
+`jQuery.valueview` heavily depends on `ValueFormatter`s and `ValueParser`s defined via the
+[DataValues JavaScript](https://github.com/wmde/DataValuesJavascript) library. `ValueFormatter`s are
+used to convert `DataValue` instances to DOM elements, and `ValueParser`s are used to convert plain
+strings (which may be accompanied by some options) to `DataValue` instances.
+Since `Expert`s only are used for editing values, they are constructed when starting edit mode and
+destroyed after leaving edit mode. `Expert`s have the following lifecycle:
+* `_init()`: Load parsed, formatted and raw (text) values from the `jQuery.valueview` instance
+  linked via `jQuery.valueview.ViewState` and initialize DOM.
 * Edit loop
 	* (User edits)
 	* `Expert` calls `viewNotifier.notify( 'change' )` and triggers parsing and formatting.
 	* `rawValue()`: Return the current raw (text) value.
 	* (optional) `preview.showSpinner()`: Replace preview with a loading spinner.
-	* `draw()`: (Re-)draw non-editable parts of the `Expert` using the (new) parsed and formatted value 		from the `jQuery.valueview` instance (via `jQuery.valueview.ViewState`)
+	* `draw()`: (Re-)draw non-editable parts of the `Expert` using the (new) parsed and formatted
+	  value from the `jQuery.valueview` instance (via `jQuery.valueview.ViewState`)
 * `destroy()`: Destroy DOM.
 
 Other methods an `Expert` needs to provide:
