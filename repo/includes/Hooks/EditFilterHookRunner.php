@@ -6,7 +6,7 @@ use DerivativeContext;
 use Hooks;
 use IContextSource;
 use InvalidArgumentException;
-use RequestContext;
+use MutableContext;
 use RuntimeException;
 use Status;
 use Title;
@@ -38,26 +38,20 @@ class EditFilterHookRunner {
 	private $entityContentFactory;
 
 	/**
-	 * @var RequestContext|DerivativeContext
+	 * @var IContextSource
 	 */
 	private $context;
 
+	/**
+	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityContentFactory $entityContentFactory
+	 * @param IContextSource $context
+	 */
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		EntityContentFactory $entityContentFactory,
-		$context = null
+		IContextSource $context
 	) {
-		if ( $context !== null
-			&& !( $context instanceof RequestContext )
-			&& !( $context instanceof DerivativeContext ) ) {
-			throw new InvalidArgumentException( '$context must be an instance of RequestContext'
-				. ' or DerivativeContext' );
-		}
-
-		if ( $context === null ) {
-			$context = RequestContext::getMain();
-		}
-
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->context = $context;
@@ -117,7 +111,7 @@ class EditFilterHookRunner {
 	 * @param EntityId|null $entityId
 	 * @param string $entityType
 	 *
-	 * @return IContextSource
+	 * @return MutableContext
 	 */
 	private function getContextForEditFilter( EntityId $entityId = null, $entityType ) {
 		if ( $entityId !== null ) {
@@ -137,6 +131,12 @@ class EditFilterHookRunner {
 			// namespace IDs for Property entities.
 			$namespace = $this->titleLookup->getNamespaceForType( $entityType );
 			$title = Title::makeTitle( $namespace, 'New' . ucfirst( $entityType ) );
+		}
+
+		if ( !( $context instanceof MutableContext ) ) {
+			wfLogWarning( '$context is not an instanceof MutableContext.' );
+
+			$context = new DerivativeContext( $context );
 		}
 
 		$context->setTitle( $title );
