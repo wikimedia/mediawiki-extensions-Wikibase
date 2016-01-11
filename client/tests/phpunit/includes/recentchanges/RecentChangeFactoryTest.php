@@ -41,11 +41,11 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @param string $action
 	 * @param EntityId $entityId
 	 * @param Diff $diff
-	 * @param array|null $fields
+	 * @param array $fields
 	 *
 	 * @return EntityChange
 	 */
-	private function newEntityChange( $action, EntityId $entityId, Diff $diff, array $fields = null ) {
+	private function newEntityChange( $action, EntityId $entityId, Diff $diff, array $fields ) {
 		/** @var EntityChange $instance  */
 		$instance = new ItemChange( $fields );
 

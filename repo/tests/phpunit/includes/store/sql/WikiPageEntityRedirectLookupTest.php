@@ -180,13 +180,13 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 		$this->assertSame( array(), $res );
 	}
 
-	private function getWikiPageEntityRedirectLookup( LoadBalancer $loadBalancer = null ) {
+	private function getWikiPageEntityRedirectLookup() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new WikiPageEntityRedirectLookup(
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->getEntityIdLookup(),
-			$loadBalancer ?: wfGetLB()
+			wfGetLB()
 		);
 	}
 

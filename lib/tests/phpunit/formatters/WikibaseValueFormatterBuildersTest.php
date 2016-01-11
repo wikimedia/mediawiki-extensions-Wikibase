@@ -48,11 +48,11 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityTitleLookup|null $entityTitleLookup
+	 * @param EntityTitleLookup $entityTitleLookup
 	 *
 	 * @return WikibaseValueFormatterBuilders
 	 */
-	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup = null ) {
+	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup ) {
 		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
 
 		$termLookup->expects( $this->any() )

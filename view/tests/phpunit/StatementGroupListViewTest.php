@@ -94,20 +94,16 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param Snak $mainSnak
-	 * @param string|null $guid
 	 *
 	 * @return Statement
 	 */
-	private function makeStatement( Snak $mainSnak, $guid = null ) {
+	private function makeStatement( Snak $mainSnak ) {
 		static $guidCounter = 0;
 
-		if ( $guid === null ) {
-			$guidCounter++;
-			$guid = 'EntityViewTest$' . $guidCounter;
-		}
+		$guidCounter++;
 
 		$statement = new Statement( $mainSnak );
-		$statement->setGuid( $guid );
+		$statement->setGuid( 'EntityViewTest$' . $guidCounter );
 
 		return $statement;
 	}

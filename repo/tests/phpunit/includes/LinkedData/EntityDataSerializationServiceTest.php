@@ -77,11 +77,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		return $mockRepo;
 	}
 
-	private function newService( EntityLookup $entityLookup = null ) {
-		if ( !$entityLookup ) {
-			$entityLookup = $this->getMockRepository();
-		}
-
+	private function newService() {
 		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
@@ -107,7 +103,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 		$service = new EntityDataSerializationService(
 			self::URI_BASE,
 			self::URI_DATA,
-			$entityLookup,
+			$this->getMockRepository(),
 			$titleLookup,
 			$dataTypeLookup,
 			$rdfBuilder,
