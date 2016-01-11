@@ -27,6 +27,7 @@
 		"data-values/data-values": "~0.1|~1.0"
 	},
 	"require-dev": {
+		"ockcyp/covers-validator": "~0.2.0",
 		"squizlabs/php_codesniffer": "~2.3",
 		"phpmd/phpmd": "~2.3"
 	},
@@ -46,7 +47,8 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
-			"phpunit"
+			"phpunit",
+			"vendor/bin/covers-validator"
 		],
 		"cs": [
 			"composer phpcs",
