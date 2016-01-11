@@ -5,6 +5,7 @@ namespace Wikibase\Test\Rdf;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\Values\ObjectUriRdfBuilder;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -19,6 +20,17 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @author Daniel Kinzler
  */
 class ObjectUriRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	public function testAddValue() {
 		$builder = new ObjectUriRdfBuilder();
@@ -36,9 +48,8 @@ class ObjectUriRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
 
-		$expected = array( '<http://www/Q1> <http://acme/testing> <http://en.wikipedia.org/wiki/Wikidata> .' );
-		$triples = explode( "\n", trim( $writer->drain() ) );
-		$this->assertEquals( $expected, $triples );
+		$expected = '<http://www/Q1> <http://acme/testing> <http://en.wikipedia.org/wiki/Wikidata> .';
+		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
 	}
 
 }

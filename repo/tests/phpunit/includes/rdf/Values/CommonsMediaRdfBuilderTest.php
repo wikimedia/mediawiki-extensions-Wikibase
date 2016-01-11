@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\CommonsMediaRdfBuilder;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -20,6 +21,17 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @author Daniel Kinzler
  */
 class CommonsMediaRdfBuilderTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	public function testAddValue() {
 		$vocab = new RdfVocabulary( 'http://test/item/', 'http://test/data/' );
@@ -39,9 +51,8 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
 
-		$expected = array( '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/wiki/Special:FilePath/Bunny.jpg> .' );
-		$triples = explode( "\n", trim( $writer->drain() ) );
-		$this->assertEquals( $expected, $triples );
+		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/wiki/Special:FilePath/Bunny.jpg> .';
+		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
 	}
 
 }

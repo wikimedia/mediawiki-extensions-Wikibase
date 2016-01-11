@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
@@ -19,6 +20,17 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
  * @author Daniel Kinzler
  */
 class ComplexValueRdfHelperTest extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	public function testAttachValueNode() {
 		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
@@ -58,15 +70,13 @@ class ComplexValueRdfHelperTest extends \PHPUnit_Framework_TestCase {
 			'<http://www/Q2> <http://acme/statement/value/testing> <http://acme/value/e93b68fef814eb52e813bb72e6867432> .'
 		);
 
-		$triples = explode( "\n", trim( $snakWriter->drain() ) );
-		$this->assertEquals( $expected, $triples );
+		$this->helper->assertNTriplesEquals( $expected, $snakWriter->drain() );
 
 		// check the triples written to the value writer
-		$expected = array( '<http://acme/value/e93b68fef814eb52e813bb72e6867432> '
+		$expected = '<http://acme/value/e93b68fef814eb52e813bb72e6867432> '
 			. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
-			. '<http://acme/onto/StringValue> .' );
-		$triples = explode( "\n", trim( $valueWriter->drain() ) );
-		$this->assertEquals( $expected, $triples );
+			. '<http://acme/onto/StringValue> .';
+		$this->helper->assertNTriplesEquals( $expected, $valueWriter->drain() );
 	}
 
 }

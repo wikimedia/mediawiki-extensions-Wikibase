@@ -5,6 +5,7 @@ namespace Wikibase\Test\Rdf;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\Values\LiteralValueRdfBuilder;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -20,6 +21,17 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  */
 class LiteralValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
+
 	public function provideAddValue() {
 		$p11 = new PropertyId( 'P11' );
 		$stringSnak = new PropertyValueSnak( $p11, new StringValue( 'Hello World' ) );
@@ -29,17 +41,17 @@ class LiteralValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			'plain string' => array(
 				null, null,
 				$stringSnak,
-				array( '<http://www/Q1> <http://acme/testing> "Hello World" .' )
+				'<http://www/Q1> <http://acme/testing> "Hello World" .'
 			),
 			'xsd decimal' => array(
 				null, 'decimal',
 				$numberSnak,
-				array( '<http://www/Q1> <http://acme/testing> "15"^^<http://www.w3.org/2001/XMLSchema#decimal> .' )
+				'<http://www/Q1> <http://acme/testing> "15"^^<http://www.w3.org/2001/XMLSchema#decimal> .'
 			),
 			'wd id' => array(
 				'xx', 'id',
 				$stringSnak,
-				array( '<http://www/Q1> <http://acme/testing> "Hello World"^^<http://xx/id> .' )
+				'<http://www/Q1> <http://acme/testing> "Hello World"^^<http://xx/id> .'
 			),
 		);
 	}
@@ -50,7 +62,7 @@ class LiteralValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testAddValue(
 		$typeBase, $typeLocal,
 		PropertyValueSnak $snak,
-		array $expected
+		$expected
 	) {
 		$builder = new LiteralValueRdfBuilder( $typeBase, $typeLocal );
 
@@ -64,8 +76,7 @@ class LiteralValueRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
 
-		$triples = explode( "\n", trim( $writer->drain() ) );
-		$this->assertEquals( $expected, $triples );
+		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
 	}
 
 }
