@@ -2,10 +2,12 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Hooks;
 use Site;
 use SiteStore;
 use Title;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -64,7 +66,59 @@ class OtherProjectsSidebarGenerator {
 	 * group and global ids.
 	 */
 	public function buildProjectLinkSidebar( Title $title ) {
-		return $this->buildSidebarFromSiteLinks( $this->getSiteLinks( $title ) );
+		$itemId = $this->getItemId( $title );
+		if ( !$itemId ) {
+			return array();
+		}
+
+		$sidebar = $this->buildSidebarFromSiteLinks( $this->getSiteLinks( $itemId ) );
+		$sidebar = $this->runHook( $itemId, $sidebar );
+
+		return $sidebar;
+	}
+
+	/**
+	 * @param ItemId $title
+	 * @param array $sidebar
+	 *
+	 * @return array
+	 */
+	private function runHook( ItemId $itemId, array $sidebar ) {
+		$newSidebar = $sidebar;
+
+		Hooks::run( 'WikibaseClientOtherProjectsSidebar', array( $itemId, &$newSidebar ) );
+
+		if ( $newSidebar === $sidebar ) {
+			return $sidebar;
+		}
+
+		if ( !is_array( $newSidebar ) || !$this->isValidSidebar( $newSidebar ) ) {
+			wfLogWarning( 'Other projects sidebar data invalid after hook run.' );
+			return $sidebar;
+		}
+
+		return $newSidebar;
+	}
+
+	/**
+	 * @param array $sidebar
+	 * @return bool
+	 */
+	private function isValidSidebar( array $sidebar ) {
+		// Make sure all required array keys are set and are string.
+		foreach ( $sidebar as $perSite ) {
+			if ( !isset( $perSite['msg'] )
+				|| !isset( $perSite['class'] )
+				|| !isset( $perSite['href'] )
+				|| !is_string( $perSite['msg'] )
+				|| !is_string( $perSite['class'] )
+				|| !is_string( $perSite['href'] )
+			) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -117,19 +171,22 @@ class OtherProjectsSidebarGenerator {
 	}
 
 	/**
-	 * @param Title $title
+	 * @param ItemId $itemId
 	 *
 	 * @return SiteLink[]
 	 */
-	private function getSiteLinks( Title $title ) {
-		$siteLink = new SiteLink( $this->localSiteId, $title->getFullText() );
-		$itemId = $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
-
-		if ( $itemId === null ) {
-			return array();
-		}
-
+	private function getSiteLinks( ItemId $itemId ) {
 		return $this->siteLinkLookup->getSiteLinksForItem( $itemId );
+	}
+
+	/**
+	 * @param Title $title
+	 *
+	 * @return Item|null
+	 */
+	private function getItemId( Title $title ) {
+		$siteLink = new SiteLink( $this->localSiteId, $title->getFullText() );
+		return $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
 	}
 
 	/**
