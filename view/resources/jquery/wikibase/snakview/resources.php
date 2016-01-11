@@ -2,6 +2,7 @@
 /**
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Thiemo Mättig
  *
  * @codeCoverageIgnoreStart
  */
@@ -14,8 +15,7 @@ return call_user_func( function() {
 		'remoteExtPath' => '..' . $remoteExtPath[0],
 	);
 
-	$modules = array(
-
+	return array(
 		'jquery.wikibase.snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'snakview.js',
@@ -31,9 +31,6 @@ return call_user_func( function() {
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.entityselector',
 				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.variations.NoValue',
-				'jquery.wikibase.snakview.variations.SomeValue',
-				'jquery.wikibase.snakview.variations.Value',
 				'jquery.wikibase.snakview.ViewState',
 				'mediawiki.legacy.shared',
 				'mw.config.values.wbRepo',
@@ -53,64 +50,22 @@ return call_user_func( function() {
 		'jquery.wikibase.snakview.variations' => $moduleTemplate + array(
 			'scripts' => array(
 				'snakview.variations.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.snakview.variations.Variation',
-				'util.inherit',
-			),
-		),
-
-		'jquery.wikibase.snakview.variations.Variation' => $moduleTemplate + array(
-			'scripts' => array(
 				'snakview.variations.Variation.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-			),
-		),
-
-		'jquery.wikibase.snakview.variations.NoValue' => $moduleTemplate + array(
-			'scripts' => array(
 				'snakview.variations.NoValue.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.variations.Variation',
-				'wikibase.datamodel',
-			),
-			'messages' => array(
-				'wikibase-snakview-variations-novalue-label',
-			),
-		),
-
-		'jquery.wikibase.snakview.variations.SomeValue' => $moduleTemplate + array(
-			'scripts' => array(
 				'snakview.variations.SomeValue.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.variations.Variation',
-				'wikibase.datamodel',
-			),
-			'messages' => array(
-				'wikibase-snakview-variations-somevalue-label',
-			),
-		),
-
-		'jquery.wikibase.snakview.variations.Value' => $moduleTemplate + array(
-			'scripts' => array(
 				'snakview.variations.Value.js',
 			),
 			'dependencies' => array(
 				'dataValues',
-				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.variations.Variation',
+				'util.inherit',
 				'wikibase.datamodel',
 			),
 			'messages' => array(
 				'wikibase-snakview-variation-datavaluetypemismatch',
 				'wikibase-snakview-variation-datavaluetypemismatch-details',
 				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
+				'wikibase-snakview-variations-novalue-label',
+				'wikibase-snakview-variations-somevalue-label',
 			),
 		),
 
@@ -119,8 +74,5 @@ return call_user_func( function() {
 				'snakview.ViewState.js',
 			),
 		),
-
 	);
-
-	return $modules;
 } );
