@@ -1,4 +1,4 @@
-jQuery.fn.focusAt = ( function( $ ) {
+jQuery.fn.focusAt = ( function() {
 	'use strict';
 
 	/**
@@ -108,4 +108,4 @@ jQuery.fn.focusAt = ( function( $ ) {
 
 	return focusAt;
 
-}( jQuery ) );
+}() );
