@@ -25,7 +25,7 @@ class HashableObjectStorage extends SplObjectStorage implements Comparable {
 	/**
 	 * @since 0.2
 	 *
-	 * @param array $objects
+	 * @param Hashable[]|null $objects
 	 */
 	public function __construct( array $objects = null ) {
 		if ( $objects !== null ) {

@@ -49,7 +49,10 @@ class PropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testGivenInvalidConstructorArguments_constructorThrowsException( $propertyId, DataValue $dataValue ) {
+	public function testGivenInvalidConstructorArguments_constructorThrowsException(
+		$propertyId,
+		DataValue $dataValue
+	) {
 		new PropertyValueSnak( $propertyId, $dataValue );
 	}
 
