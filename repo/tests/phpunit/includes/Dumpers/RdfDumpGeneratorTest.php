@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\Rdf\RdfBuilderTest;
 use Wikibase\Test\Rdf\RdfBuilderTestData;
@@ -34,6 +35,17 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
+
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	/**
 	 * @return SiteList
@@ -142,31 +154,6 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Brings data to normalized form - sorted array of lines
-	 *
-	 * @param string $data
-	 *
-	 * @return string[]
-	 */
-	public function normalizeData( $data ) {
-		$dataSplit = explode( "\n", trim( $data ) );
-		sort( $dataSplit );
-		$dataSplit = array_map( 'trim', $dataSplit );
-		return $dataSplit;
-	}
-
-	/**
-	 * Load serialized ntriples
-	 *
-	 * @param string $testName
-	 *
-	 * @return string[]
-	 */
-	public function getSerializedData( $testName ) {
-		return $this->getTestData()->getNTriples( $testName );
-	}
-
-	/**
 	 * @dataProvider idProvider
 	 */
 	public function testGenerateDump( array $ids, $dumpname ) {
@@ -180,9 +167,9 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		ob_start();
 		$dumper->generateDump( $pager );
-		$dump = ob_get_clean();
-		$dump = $this->normalizeData( $dump );
-		$this->assertTriplesEqual( $this->getSerializedData( $dumpname ), $dump );
+		$actual = ob_get_clean();
+		$expected = $this->getTestData()->getNTriples( $dumpname );
+		$this->helper->assertNTriplesEquals( $expected, $actual );
 	}
 
 	public function loadDataProvider() {
@@ -212,25 +199,9 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		ob_start();
 		$dumper->generateDump( $pager );
-		$dump = ob_get_clean();
-		$dump = $this->normalizeData( $dump );
-		$this->assertTriplesEqual( $this->getSerializedData( $dumpname ), $dump );
-	}
-
-	private function assertTriplesEqual( array $expectedTriples, array $actualTripels, $message = '' ) {
-		sort( $expectedTriples );
-		sort( $actualTripels );
-
-		// Note: comparing $expected and $actual directly would show triples
-		// that are present in both but shifted in position. That makes the output
-		// hard to read. Calculating the $missing and $extra sets helps.
-		$extra = array_diff( $actualTripels, $expectedTriples );
-		$missing = array_diff( $expectedTriples, $actualTripels );
-
-		// Cute: $missing and $extra can be equal only if they are empty.
-		// Comparing them here directly looks a bit odd in code, but produces meaningful
-		// output, especially if the input was sorted.
-		$this->assertEquals( $missing, $extra, $message );
+		$actual = ob_get_clean();
+		$expected = $this->getTestData()->getNTriples( $dumpname );
+		$this->helper->assertNTriplesEquals( $expected, $actual );
 	}
 
 }
