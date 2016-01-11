@@ -11,11 +11,15 @@ use UsageException;
 use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -123,6 +127,18 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getEntityTitleLookup() {
+		$contentModelMappings = array(
+			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
+			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
+		);
+
+		return new EntityContentFactory( $contentModelMappings );
+	}
+
+	/**
 	 * @param MergeItems $module
 	 * @param EntityRedirect|null $expectedRedirect
 	 */
@@ -161,7 +177,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 				$this->getPermissionCheckers(),
 				$wikibaseRepo->getSummaryFormatter(),
 				$module->getUser(),
-				$this->getMockRedirectCreationInteractor( $expectedRedirect )
+				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
+				$this->getEntityTitleLookup()
 			)
 		);
 	}

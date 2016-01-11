@@ -12,7 +12,11 @@ use TestSites;
 use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\MessageException;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -98,6 +102,18 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getEntityTitleLookup() {
+		$contentModelMappings = array(
+			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
+			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
+		);
+
+		return new EntityContentFactory( $contentModelMappings );
+	}
+
+	/**
 	 * @param SpecialMergeItems $page
 	 * @param User $user
 	 */
@@ -153,7 +169,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 						$user,
 						$this->getMockEditFilterHookRunner(),
 						$this->mockRepository
-				)
+				),
+				$this->getEntityTitleLookup()
 			)
 		);
 	}
