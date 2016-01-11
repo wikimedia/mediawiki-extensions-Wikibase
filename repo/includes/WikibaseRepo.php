@@ -12,6 +12,7 @@ use Hooks;
 use IContextSource;
 use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
+use RequestContext;
 use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
@@ -520,11 +521,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource|null $context
+	 * @param IContextSource $context
 	 *
 	 * @return EditFilterHookRunner
 	 */
-	private function newEditFilterHookRunner( IContextSource $context = null ) {
+	private function newEditFilterHookRunner( IContextSource $context ) {
 		return new EditFilterHookRunner(
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),
@@ -1296,11 +1297,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource|null $context
+	 * @param IContextSource $context
 	 *
 	 * @return ApiHelperFactory
 	 */
-	public function getApiHelperFactory( IContextSource $context = null ) {
+	public function getApiHelperFactory( IContextSource $context ) {
 		return new ApiHelperFactory(
 			$this->getEntityTitleLookup(),
 			$this->getExceptionLocalizer(),
@@ -1319,6 +1320,10 @@ class WikibaseRepo {
 	 * @return EditEntityFactory
 	 */
 	public function newEditEntityFactory( IContextSource $context = null ) {
+		if ( $context === null ) {
+			$context = RequestContext::getMain();
+		}
+
 		return new EditEntityFactory(
 			$this->getEntityTitleLookup(),
 			$this->getEntityRevisionLookup( 'uncached' ),
