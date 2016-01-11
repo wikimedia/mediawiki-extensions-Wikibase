@@ -98,7 +98,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param User $user
+	 * @param User|null $user
 	 *
 	 * @return ItemMergeInteractor
 	 */

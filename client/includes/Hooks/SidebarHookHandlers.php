@@ -101,7 +101,7 @@ class SidebarHookHandlers {
 	 * @param array &$languageLink
 	 * @param Title $languageLinkTitle
 	 * @param Title $title
-	 * @param OutputPage $output
+	 * @param OutputPage|null $output
 	 *
 	 * @return bool
 	 */

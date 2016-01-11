@@ -77,7 +77,7 @@ class ChangeOpQualifierRemove extends ChangeOpBase {
 
 	/**
 	 * @param SnakList $qualifiers
-	 * @param Summary $summary
+	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
 	 */

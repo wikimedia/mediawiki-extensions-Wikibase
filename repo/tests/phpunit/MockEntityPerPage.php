@@ -57,7 +57,7 @@ class MockEntityPerPage implements EntityPerPage {
 	 *
 	 * @param null|string $entityType The entity type to look for.
 	 * @param int $limit The maximum number of IDs to return.
-	 * @param EntityId $after Only return entities with IDs greater than this.
+	 * @param EntityId|null $after Only return entities with IDs greater than this.
 	 * @param mixed $redirects A XXX_REDIRECTS constant (default is NO_REDIRECTS).
 	 *
 	 * @return EntityId[]

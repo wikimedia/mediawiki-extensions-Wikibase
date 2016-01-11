@@ -211,7 +211,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see EntityContent::isCountable
 	 *
-	 * @param bool $hasLinks
+	 * @param bool|null $hasLinks
 	 *
 	 * @return bool True if this is not a redirect and the item is not empty.
 	 */

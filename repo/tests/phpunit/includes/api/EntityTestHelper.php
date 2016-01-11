@@ -341,7 +341,7 @@ class EntityTestHelper {
 	 *
 	 * @param string $handle
 	 * @param string $id
-	 * @param array $entity
+	 * @param array|null $entity
 	 */
 	public static function registerEntity( $handle, $id, array $entity = null ) {
 		self::$activeHandles[ $handle ] = $id;

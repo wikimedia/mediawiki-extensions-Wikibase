@@ -137,7 +137,7 @@ interface RdfWriter {
 	 * Should fail if called at an inappropriate time in the output sequence.
 	 *
 	 * @param string $value the value encoded as a string
-	 * @param string $typeBase The data type's QName prefix if $typeLocal is given,
+	 * @param string|null $typeBase The data type's QName prefix if $typeLocal is given,
 	 *        or an IRI or shorthand if $typeLocal is null.
 	 * @param string|null $typeLocal The data type's  QName suffix,
 	 *        or null if $typeBase is an IRI or shorthand.

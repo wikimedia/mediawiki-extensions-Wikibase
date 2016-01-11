@@ -74,7 +74,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	abstract protected function getDummyId();
 
 	/**
-	 * @param EntityId $entityId
+	 * @param EntityId|null $entityId
 	 *
 	 * @return EntityContent
 	 */
@@ -330,7 +330,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	 *
 	 * @param EntityContent $base
 	 * @param EntityContentDiff $patch
-	 * @param EntityContent $expected
+	 * @param EntityContent|null $expected
 	 */
 	public function testGetPatchedCopy( EntityContent $base, EntityContentDiff $patch, EntityContent $expected = null ) {
 		if ( $expected === null ) {

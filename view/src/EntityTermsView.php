@@ -95,7 +95,7 @@ class EntityTermsView {
 
 	/**
 	 * @param Fingerprint $fingerprint
-	 * @param EntityId $entityId
+	 * @param EntityId|null $entityId
 	 *
 	 * @return string HTML
 	 */

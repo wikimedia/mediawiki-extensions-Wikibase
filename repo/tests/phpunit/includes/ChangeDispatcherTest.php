@@ -169,7 +169,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 * @param int $changeId
 	 * @param EntityId $entityId
 	 * @param string $time
-	 * @param Diff $siteLinkDiff
+	 * @param Diff|null $siteLinkDiff
 	 *
 	 * @return Change
 	 */

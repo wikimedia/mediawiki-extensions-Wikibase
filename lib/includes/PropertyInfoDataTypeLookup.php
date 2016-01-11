@@ -30,7 +30,7 @@ class PropertyInfoDataTypeLookup implements PropertyDataTypeLookup {
 
 	/**
 	 * @param PropertyInfoStore $infoStore
-	 * @param PropertyDataTypeLookup $fallbackLookup
+	 * @param PropertyDataTypeLookup|null $fallbackLookup
 	 */
 	public function __construct( PropertyInfoStore $infoStore, PropertyDataTypeLookup $fallbackLookup = null ) {
 		$this->infoStore = $infoStore;

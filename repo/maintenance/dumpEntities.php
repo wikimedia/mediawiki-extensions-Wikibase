@@ -188,7 +188,7 @@ abstract class DumpScript extends Maintenance {
 
 	/**
 	 * @param null|string $entityType
-	 * @param ExceptionHandler $exceptionReporter
+	 * @param ExceptionHandler|null $exceptionReporter
 	 *
 	 * @return EntityIdPager a stream of EntityId objects
 	 */
@@ -225,7 +225,7 @@ abstract class DumpScript extends Maintenance {
 
 	/**
 	 * @param string $listFile
-	 * @param ExceptionHandler $exceptionReporter
+	 * @param ExceptionHandler|null $exceptionReporter
 	 *
 	 * @throws MWException
 	 * @return EntityIdPager

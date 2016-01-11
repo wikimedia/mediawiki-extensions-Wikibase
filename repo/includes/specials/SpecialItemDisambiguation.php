@@ -67,7 +67,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * services.
 	 *
 	 * @param ItemDisambiguation $itemDisambiguation
-	 * @param TermIndexSearchInteractor|null $searchInteractor
+	 * @param TermIndexSearchInteractor $searchInteractor
 	 * @param ContentLanguages $contentLanguages
 	 */
 	public function initServices(

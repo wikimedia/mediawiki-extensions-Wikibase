@@ -128,7 +128,7 @@ class EditEntityTest extends MediaWikiTestCase {
 	 * @param EntityTitleLookup $titleLookup
 	 * @param User|null $user
 	 * @param bool $baseRevId
-	 * @param EditFilterHookRunner $editFilterHookRunner
+	 * @param EditFilterHookRunner|null $editFilterHookRunner
 	 *
 	 * @param null|array $permissions map of actions to bool, indicating which actions are allowed.
 	 *

@@ -145,7 +145,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * Building the HTML form for modifying an entity.
 	 *
-	 * @param Entity $entity
+	 * @param Entity|null $entity
 	 */
 	private function setForm( Entity $entity = null ) {
 		$this->addCopyrightText();
@@ -215,7 +215,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param Entity|null $entity
 	 *
 	 * @return string HTML
 	 */
@@ -272,7 +272,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @param ChangeOp $changeOp
 	 * @param Entity $entity
-	 * @param Summary $summary The summary object to update with information about the change.
+	 * @param Summary|null $summary The summary object to update with information about the change.
 	 *
 	 * @throws ChangeOpException
 	 */

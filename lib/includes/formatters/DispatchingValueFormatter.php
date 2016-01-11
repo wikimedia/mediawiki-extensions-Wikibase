@@ -65,7 +65,7 @@ class DispatchingValueFormatter extends ValueFormatterBase implements TypedValue
 	 * @see TypedValueFormatter::formatValue
 	 *
 	 * @param DataValue $value
-	 * @param string    $dataTypeId
+	 * @param string|null $dataTypeId
 	 *
 	 * @throws FormattingException
 	 * @return string

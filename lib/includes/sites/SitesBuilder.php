@@ -38,8 +38,8 @@ class SitesBuilder {
 
 	/**
 	 * @param Site[] $sites
-	 * @param string $siteGroup
-	 * @param string $wikiId
+	 * @param string|null $siteGroup
+	 * @param string|null $wikiId
 	 */
 	public function buildStore( array $sites, $siteGroup = null, $wikiId = null ) {
 		if ( $siteGroup === null && is_string( $wikiId ) ) {

@@ -23,7 +23,7 @@ class ApiModuleTestHelper {
 	 *        Will be called with two parameters, the ApiMain instance and $name.
 	 * @param string $name
 	 * @param array $params Request parameter. The 'token' parameter will be supplied automatically.
-	 * @param User $user Defaults to the global user object
+	 * @param User|null $user Defaults to the global user object
 	 *
 	 * @return ApiBase
 	 */

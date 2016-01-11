@@ -97,7 +97,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param array $params
-	 * @param User $user
+	 * @param User|null $user
 	 *
 	 * @return CreateRedirect
 	 */

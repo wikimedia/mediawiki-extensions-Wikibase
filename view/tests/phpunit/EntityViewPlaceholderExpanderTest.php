@@ -74,7 +74,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param Item $item
+	 * @param Item|null $item
 	 * @param int $revId
 	 *
 	 * @return EntityRevisionLookup

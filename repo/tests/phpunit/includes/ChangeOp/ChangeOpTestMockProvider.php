@@ -491,7 +491,7 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
-	 * @param array $returnValue
+	 * @param array|null $returnValue
 	 *
 	 * @return SiteLinkConflictLookup
 	 */

@@ -168,7 +168,7 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	 * Calls the TypedValueFormatter passed to the constructor.
 	 *
 	 * @param DataValue $value
-	 * @param string $dataTypeId
+	 * @param string|null $dataTypeId
 	 *
 	 * @throws FormattingException
 	 * @return string Either plain text, wikitext or HTML, depending on the $valueFormatter

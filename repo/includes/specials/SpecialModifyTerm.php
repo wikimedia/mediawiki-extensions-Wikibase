@@ -182,7 +182,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::getFormElements()
 	 *
-	 * @param Entity $entity
+	 * @param Entity|null $entity
 	 *
 	 * @return string
 	 */

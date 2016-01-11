@@ -178,7 +178,7 @@ class StatementModificationHelper {
 	 *
 	 * @param ChangeOp $changeOp
 	 * @param Entity $entity
-	 * @param Summary $summary The summary object to update with information about the change.
+	 * @param Summary|null $summary The summary object to update with information about the change.
 	 */
 	public function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
 		try {
