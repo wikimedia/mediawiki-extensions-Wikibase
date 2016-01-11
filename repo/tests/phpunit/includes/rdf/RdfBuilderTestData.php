@@ -87,8 +87,7 @@ class RdfBuilderTestData {
 	 * Load serialized ntriples.
 	 *
 	 * @param string $dataSetName
-	 * @return string[]|null ntriples lines, sorted, or null if
-	 *         no data file was found with the given name.
+	 * @return string|null N-Triples, or null if no data file was found with the given name.
 	 */
 	public function getNTriples( $dataSetName ) {
 		$filename = "{$this->dataDir}/$dataSetName.nt";
@@ -96,11 +95,7 @@ class RdfBuilderTestData {
 			return null;
 		}
 
-		$data = trim( file_get_contents( $filename ) );
-		$data = explode( "\n", $data );
-		sort( $data );
-		$data = array_map( 'trim', $data );
-		return $data;
+		return file_get_contents( $filename );
 	}
 
 	/**

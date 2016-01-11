@@ -71,15 +71,15 @@ class TermsRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
 		$actualData = $writer->drain();
-		$correctData = $this->getTestData()->getNTriples( $dataSetName );
+		$expected = $this->getTestData()->getNTriples( $dataSetName );
 
-		if ( $correctData === null ) {
+		if ( $expected === null ) {
 			$this->getTestData()->putTestData( $dataSetName, $actualData, '.actual' );
 			$this->fail( "Data set $dataSetName not found! Created file with the current data using"
 				. " the suffix .actual" );
 		}
 
-		$this->helper->assertNTriplesEquals( $correctData, $actualData, "Data set $dataSetName" );
+		$this->helper->assertNTriplesEquals( $expected, $actualData, "Data set $dataSetName" );
 	}
 
 	public function provideAddEntity() {
