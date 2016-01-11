@@ -139,7 +139,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider resolveRedirectsProvider
 	 */
-	public function testResolveRedirects( array $ids, array $expected = null ) {
+	public function testResolveRedirects( array $ids, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->resolveRedirects();
@@ -253,7 +253,12 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider collectTermsProvider
 	 */
-	public function testCollectTerms( array $ids, array $types = null, array $languages = null, array $expected = null ) {
+	public function testCollectTerms(
+		array $ids,
+		array $types = null,
+		array $languages = null,
+		array $expected
+	) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->collectTerms( $types, $languages );
@@ -327,7 +332,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider collectDataTypesProvider
 	 */
-	public function testCollectDataTypes( array $ids, array $expected = null ) {
+	public function testCollectDataTypes( array $ids, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->collectDataTypes();
@@ -384,7 +389,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider removeMissingAndRedirectsProvider
 	 */
-	public function testRemoveMissingAndRedirects( array $ids, array $expected = null ) {
+	public function testRemoveMissingAndRedirects( array $ids, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->removeMissing( 'remove-redirects' );
@@ -437,7 +442,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider removeMissingButKeepRedirects
 	 */
-	public function testRemoveMissingButKeepRedirects( array $ids, array $expected = null ) {
+	public function testRemoveMissingButKeepRedirects( array $ids, array $expected ) {
 		$builder = $this->newEntityInfoBuilder( $ids );
 
 		$builder->removeMissing();
