@@ -119,7 +119,13 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws StorageException
 	 * @return EntityRevision
 	 */
-	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevId = false ) {
+	public function saveEntity(
+		EntityDocument $entity,
+		$summary,
+		User $user,
+		$flags = 0,
+		$baseRevId = false
+	) {
 		if ( $entity->getId() === null ) {
 			if ( ( $flags & EDIT_NEW ) !== EDIT_NEW ) {
 				throw new StorageException( Status::newFatal( 'edit-gone-missing' ) );
@@ -131,7 +137,11 @@ class WikiPageEntityStore implements EntityStore {
 		$content = $this->contentFactory->newFromEntity( $entity );
 		$revision = $this->saveEntityContent( $content, $summary, $user, $flags, $baseRevId );
 
-		$entityRevision = new EntityRevision( $entity, $revision->getId(), $revision->getTimestamp() );
+		$entityRevision = new EntityRevision(
+			$entity,
+			$revision->getId(),
+			$revision->getTimestamp()
+		);
 
 		$this->dispatcher->dispatch( 'entityUpdated', $entityRevision );
 
@@ -151,7 +161,13 @@ class WikiPageEntityStore implements EntityStore {
 	 * @throws StorageException
 	 * @return int The new revision ID
 	 */
-	public function saveRedirect( EntityRedirect $redirect, $summary, User $user, $flags = 0, $baseRevId = false ) {
+	public function saveRedirect(
+		EntityRedirect $redirect,
+		$summary,
+		User $user,
+		$flags = 0,
+		$baseRevId = false
+	) {
 		$content = $this->contentFactory->newFromRedirect( $redirect );
 
 		if ( !$content ) {
@@ -264,7 +280,9 @@ class WikiPageEntityStore implements EntityStore {
 		$ok = $page->doDeleteArticle( $reason, false, 0, true, $error, $user );
 
 		if ( !$ok ) {
-			throw new StorageException( 'Faield to delete ' . $entityId->getSerialization(). ': ' . $error );
+			throw new StorageException(
+				'Failed to delete ' . $entityId->getSerialization(). ': ' . $error
+			);
 		}
 
 		$this->dispatcher->dispatch( 'entityDeleted', $entityId );
