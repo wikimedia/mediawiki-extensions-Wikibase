@@ -8,6 +8,7 @@ use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
@@ -24,7 +25,21 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
  */
 class RdfBuilderTest extends \MediaWikiTestCase {
 
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	/**
+	 * @var RdfBuilderTestData
+	 */
 	private $testData;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
 
 	/**
 	 * Initialize repository data
@@ -79,17 +94,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		return $this->getTestData()->getEntity( $idString );
 	}
 
-	/**
-	 * Load serialized ntriples
-	 *
-	 * @param string $testName
-	 *
-	 * @return string[]|null
-	 */
-	public function getSerializedData( $testName ) {
-		return $this->getTestData()->getNTriples( $testName );
-	}
-
 	public function getRdfTests() {
 		$rdfTests = array(
 			array( 'Q1', 'Q1_simple' ),
@@ -106,24 +110,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Extract text test data from RDF builder
-	 * @param RdfBuilder $builder
-	 * @return string[] ntriples lines
-	 */
-	private function getDataFromBuilder( RdfBuilder $builder ) {
-		$data = $builder->getRDF();
-		$dataSplit = explode( "\n", trim( $data ) );
-		sort( $dataSplit );
-		$dataSplit = array_map( 'trim', $dataSplit );
-		return $dataSplit;
-	}
-
-	/**
 	 * @dataProvider getRdfTests
 	 */
 	public function testRdfBuild( $entityName, $dataSetName ) {
 		$entity = $this->getEntityData( $entityName );
-		$correctData = $this->getSerializedData( $dataSetName );
+		$expected = $this->getTestData()->getNTriples( $dataSetName );
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
 				RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
@@ -135,20 +126,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
 
-		$this->assertTriplesEqual( $correctData, $this->getDataFromBuilder( $builder ) );
-	}
-
-	private function assertTriplesEqual( $expected, $actual, $message = '' ) {
-		// Note: comparing $expected and $actual directly would show triples
-		// that are present in both but shifted in position. That makes the output
-		// hard to read. Calculating the $missing and $extra sets helps.
-		$extra = array_diff( $actual, $expected );
-		$missing = array_diff( $expected, $actual );
-
-		// Cute: $missing and $extra can be equal only if they are empty.
-		// Comparing them here directly looks a bit odd in code, but produces meaningful
-		// output, especially if the input was sorted.
-		$this->assertEquals( $missing, $extra, $message );
+		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
 	}
 
 	public function testAddEntityRedirect() {
@@ -158,8 +136,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$q11 = new ItemId( 'Q11' );
 		$builder->addEntityRedirect( $q11, $q1 );
 
-		$correctData = array( '<http://acme.test/Q11> <http://www.w3.org/2002/07/owl#sameAs> <http://acme.test/Q1> .' );
-		$this->assertTriplesEqual( $correctData, $this->getDataFromBuilder( $builder ) );
+		$expected = '<http://acme.test/Q11> <http://www.w3.org/2002/07/owl#sameAs> <http://acme.test/Q1> .';
+		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
 	}
 
 	public function getProduceOptions() {
@@ -186,21 +164,20 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	public function testRdfOptions( $entityName, $produceOption, $dataSetName ) {
 		$entity = $this->getEntityData( $entityName );
-		$correctData = $this->getSerializedData( $dataSetName );
+		$expected = $this->getTestData()->getNTriples( $dataSetName );
 
 		$builder = $this->newRdfBuilder( $produceOption );
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2013-10-04T03:31:05Z" );
 		$builder->resolveMentionedEntities( $this->getTestData()->getMockRepository() );
-		$data = $this->getDataFromBuilder( $builder );
-		$this->assertTriplesEqual( $correctData, $data );
+		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
 	}
 
 	public function testDumpHeader() {
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_VERSION_INFO );
 		$builder->addDumpHeader( 1426110695 );
-		$data = $this->getDataFromBuilder( $builder );
-		$this->assertTriplesEqual( $this->getSerializedData( 'dumpheader' ), $data );
+		$expected = $this->getTestData()->getNTriples( 'dumpheader' );
+		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
 	}
 
 	public function testDeduplication() {
@@ -208,16 +185,14 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
 		$builder->addEntity( $this->getEntityData( 'Q7' ) );
-		$data1 = $this->getDataFromBuilder( $builder );
+		$data1 = $builder->getRDF();
 
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, $bag );
 		$builder->addEntity( $this->getEntityData( 'Q9' ) );
-		$data2 = $this->getDataFromBuilder( $builder );
+		$data2 = $builder->getRDF();
 
-		$data = array_merge( $data1, $data2 );
-		sort( $data );
-
-		$this->assertArrayEquals( $this->getSerializedData( 'Q7_Q9_dedup' ), $data );
+		$expected = $this->getTestData()->getNTriples( 'Q7_Q9_dedup' );
+		$this->helper->assertNTriplesEquals( $expected, $data1 . $data2 );
 	}
 
 }

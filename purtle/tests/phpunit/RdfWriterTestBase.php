@@ -2,6 +2,7 @@
 
 namespace Wikimedia\Purtle\Tests;
 
+use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -13,42 +14,18 @@ use Wikimedia\Purtle\RdfWriter;
  */
 abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
+	/**
+	 * @var NTriplesRdfTestHelper
+	 */
+	private $helper;
+
+	protected function setUp() {
+		parent::setUp();
+
+		$this->helper = new NTriplesRdfTestHelper();
+	}
+
 	abstract protected function getFileSuffix();
-
-	protected function getExpectedOutputFile( $datasetName ) {
-		$path = __DIR__ . '/../data/' . $datasetName . '.' . $this->getFileSuffix();
-		return $path;
-	}
-
-	private function normalizeLines( array $lines ) {
-		$normalized = array();
-
-		foreach ( $lines as $s ) {
-			$s = trim( $s, "\r\n" );
-
-			if ( $s !== '' ) {
-				$normalized[] = $s;
-			}
-		}
-
-		return $normalized;
-	}
-
-	protected function assertOutputLines( $datasetName, $actual ) {
-		if ( is_string( $actual ) ) {
-			$actual = trim( $actual, "\r\n" );
-			$actual = explode( "\n", $actual );
-		}
-
-		$path = $this->getExpectedOutputFile( $datasetName );
-
-		$expected = file( $path );
-
-		$expected = $this->normalizeLines( $expected );
-		$actual = $this->normalizeLines( $actual );
-
-		$this->assertEquals( $expected, $actual, 'Result mismatches data in ' . $path );
-	}
 
 	/**
 	 * @return RdfWriter
@@ -122,7 +99,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$rdf2 = $writer->drain();
 		$this->assertNotEmpty( $rdf2 );
 
-		$this->assertOutputLines( 'Predicates', $rdf1 . "\n" . $rdf2 );
+		$this->assertOutputLines( 'Predicates', $rdf1 . $rdf2 );
 	}
 
 	public function testPredicates_sub() {
@@ -179,7 +156,7 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 		$rdf2 = $writer->drain();
 		$this->assertNotEmpty( $rdf2 );
 
-		$this->assertOutputLines( 'Predicates', $rdf1 . "\n" . $rdf2 );
+		$this->assertOutputLines( 'Predicates', $rdf1 . $rdf2 );
 	}
 
 	public function testValues() {
@@ -332,6 +309,20 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 
 		$rdf = $writer->drain();
 		$this->assertOutputLines( 'NumberedBlankNode', $rdf );
+	}
+
+	/**
+	 * @param string $datasetName
+	 * @param string[]|string $actual
+	 */
+	private function assertOutputLines( $datasetName, $actual ) {
+		$path = __DIR__ . '/../data/' . $datasetName . '.' . $this->getFileSuffix();
+
+		$this->helper->assertNTriplesEquals(
+			file_get_contents( $path ),
+			$actual,
+			"Result mismatches data in $path"
+		);
 	}
 
 	//FIXME: test quoting/escapes!
