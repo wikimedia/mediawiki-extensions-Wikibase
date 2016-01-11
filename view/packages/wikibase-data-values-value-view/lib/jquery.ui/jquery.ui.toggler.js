@@ -2,16 +2,22 @@
 	'use strict';
 
 /**
+ * @property {string} iconClass='ui-icon-triangle-1-'
+ * @ignore
+ */
+var iconClass = 'ui-icon-triangle-1-';
+
+/**
  * Whether page is rendered in rtl context. This, however, depends on the css class "rtl"
  * being assigned to the body element.
- * @property {boolean} [isRtl=false]
+ * @property {boolean} isRtl=false
  * @ignore
  */
 var isRtl = false;
 
 /**
  * Whether the user client supports CSS3 transformation.
- * @property {boolean} [browserSupportsTransform=false]
+ * @property {boolean} browserSupportsTransform=false
  * @ignore
  */
 var browserSupportsTransform = false;
@@ -44,6 +50,8 @@ $( document ).ready( function() {
  * @param {Object} options
  * @param {jQuery} options.$subject
  *        The node whose visibility shall be toggled.
+ * @param {boolean} [options.visible]
+ *        The initial state.
  */
 /**
  * @event animation
@@ -59,7 +67,8 @@ $.widget( 'ui.toggler', {
 	 * @protected
 	 */
 	options: {
-		$subject: null
+		$subject: null,
+		visible: null
 	},
 
 	/**
@@ -95,13 +104,18 @@ $.widget( 'ui.toggler', {
 		.text( this.element.text() )
 		.addClass( this.widgetBaseClass + '-label' );
 
+		var visible = this.options.visible === null
+			? this._isSubjectVisible()
+			: this.options.visible;
+
 		this.element
 		.text( '' )
-		.addClass( this.widgetBaseClass + ' ' + this.widgetBaseClass + '-toggle '
-			+ 'ui-state-default' );
+		.addClass( this.widgetBaseClass + ' ' + this.widgetBaseClass + '-toggle ui-state-default'
+			+ ( visible ? '' : ' ' + this.widgetBaseClass + '-toggle-collapsed' ) );
 
 		this.$toggleIcon = $( '<span/>' )
-		.addClass( this.widgetBaseClass + '-icon ui-icon' );
+		.addClass( this.widgetBaseClass + '-icon ui-icon ' + iconClass
+			+ ( visible ? 's' : ( isRtl ? 'w' : 'e' ) ) );
 
 		this.element
 		.on( 'click.' + this.widgetName, function( event ) {
@@ -116,9 +130,6 @@ $.widget( 'ui.toggler', {
 		} )
 		.append( this.$toggleIcon )
 		.append( $toggleLabel );
-
-		// Consider content being invisible initially:
-		this._reflectVisibilityOnToggleIcon();
 	},
 
 	/**
@@ -163,6 +174,16 @@ $.widget( 'ui.toggler', {
 	},
 
 	/**
+	 * @private
+	 *
+	 * @return {boolean}
+	 */
+	_isSubjectVisible: function() {
+		// Don't use is( ':visible' ) which would be misleading if element not yet in DOM!
+		return this.options.$subject.css( 'display' ) !== 'none';
+	},
+
+	/**
 	 * Reflects the toggler's subject visibility in the toggler's icon.
 	 * @private
 	 *
@@ -170,10 +191,7 @@ $.widget( 'ui.toggler', {
 	 * @return {boolean} Whether the subject is toggled to be visible.
 	 */
 	_reflectVisibilityOnToggleIcon: function( inverted ) {
-		var iconClass = 'ui-icon-triangle-1-',
-			dir = ( isRtl === undefined ? $( 'body' ).hasClass( 'rtl' ) : isRtl ) ? 'w' : 'e',
-		// Don't use is( ':visible' ) which would be misleading if element not yet in DOM!
-			visible = this.options.$subject.css( 'display' ) !== 'none';
+		var visible = this._isSubjectVisible();
 		if ( inverted ) {
 			visible = !visible;
 		}
@@ -182,7 +200,7 @@ $.widget( 'ui.toggler', {
 			+ this.widgetBaseClass + '-icon3dtrans' );
 		// Add classes displaying rotated icon. If CSS3 transform is available, use it:
 		if ( !browserSupportsTransform || !$.speed().duration ) {
-			this.$toggleIcon.addClass( iconClass + ( visible ? 's' : dir ) );
+			this.$toggleIcon.addClass( iconClass + ( visible ? 's' : ( isRtl ? 'w' : 'e' ) ) );
 		} else {
 			this.$toggleIcon.addClass( iconClass + 's '
 				+ this.widgetBaseClass + '-icon3dtrans' );
