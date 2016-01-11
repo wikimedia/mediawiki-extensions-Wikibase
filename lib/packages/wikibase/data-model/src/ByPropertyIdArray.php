@@ -51,7 +51,7 @@ class ByPropertyIdArray extends ArrayObject {
 	/**
 	 * @see ArrayObject::__construct
 	 *
-	 * @param array|object $input
+	 * @param array|object|null $input
 	 */
 	public function __construct( $input = null ) {
 		parent::__construct( (array)$input );
@@ -121,7 +121,7 @@ class ByPropertyIdArray extends ArrayObject {
 		$this->assertIndexIsBuild();
 
 		if ( !( array_key_exists( $propertyId->getSerialization(), $this->byId ) ) ) {
-			throw new OutOfBoundsException( 'Object with propertyId "' . $propertyId->getSerialization() . '" not found' );
+			throw new OutOfBoundsException( "Object with propertyId \"$propertyId\" not found" );
 		}
 
 		return $this->byId[$propertyId->getSerialization()];
@@ -407,7 +407,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 * @since 0.5
 	 *
 	 * @param object $object
-	 * @param int $index Absolute index where to place the new object.
+	 * @param int|null $index Absolute index where to place the new object.
 	 *
 	 * @throws RuntimeException
 	 */
@@ -441,7 +441,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 * Adds an object to an existing property group at the specified absolute index.
 	 *
 	 * @param object $object
-	 * @param int $index
+	 * @param int|null $index
 	 *
 	 * @throws OutOfBoundsException
 	 */

@@ -36,7 +36,12 @@ class AliasGroupFallback extends AliasGroup {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $requestedLanguageCode, array $aliases, $actualLanguageCode, $sourceLanguageCode ) {
+	public function __construct(
+		$requestedLanguageCode,
+		array $aliases,
+		$actualLanguageCode,
+		$sourceLanguageCode
+	) {
 		parent::__construct( $requestedLanguageCode, $aliases );
 
 		if ( !is_string( $actualLanguageCode ) || $actualLanguageCode === '' ) {
