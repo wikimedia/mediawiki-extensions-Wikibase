@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Interactors;
 
 use User;
+use WatchedItem;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -66,6 +68,11 @@ class ItemMergeInteractor {
 	private $interactorRedirect;
 
 	/**
+	 * @var EntityTitleLookup
+	 */
+	private $entityTitleLookup;
+
+	/**
 	 * @param MergeChangeOpsFactory $changeOpFactory
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityStore $entityStore
@@ -73,6 +80,7 @@ class ItemMergeInteractor {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param User $user
 	 * @param RedirectCreationInteractor $interactorRedirect
+	 * @param EntityTitleLookup $entityTitleLookup
 	 */
 	public function __construct(
 		MergeChangeOpsFactory $changeOpFactory,
@@ -81,7 +89,8 @@ class ItemMergeInteractor {
 		EntityPermissionChecker $permissionChecker,
 		SummaryFormatter $summaryFormatter,
 		User $user,
-		RedirectCreationInteractor $interactorRedirect
+		RedirectCreationInteractor $interactorRedirect,
+		EntityTitleLookup $entityTitleLookup
 	) {
 
 		$this->changeOpFactory = $changeOpFactory;
@@ -91,6 +100,7 @@ class ItemMergeInteractor {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->user = $user;
 		$this->interactorRedirect = $interactorRedirect;
+		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
 	/**
@@ -182,6 +192,7 @@ class ItemMergeInteractor {
 		}
 
 		$result = $this->attemptSaveMerge( $fromItem, $toItem, $summary, $bot );
+		$this->updateWatchlistEntries( $fromId, $toId );
 
 		$redirected = false;
 
@@ -303,6 +314,17 @@ class ItemMergeInteractor {
 		} catch ( StorageException $ex ) {
 			throw new ItemMergeException( $ex->getMessage(), 'failed-save', $ex );
 		}
+	}
+
+	/**
+	 * @param ItemId $fromId
+	 * @param ItemId $toId
+	 */
+	private function updateWatchlistEntries( ItemId $fromId, ItemId $toId ) {
+		$fromTitle = $this->entityTitleLookup->getTitleForId( $fromId );
+		$toTitle = $this->entityTitleLookup->getTitleForId( $toId );
+
+		WatchedItem::duplicateEntries( $fromTitle, $toTitle );
 	}
 
 }
