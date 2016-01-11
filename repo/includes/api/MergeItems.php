@@ -65,15 +65,7 @@ class MergeItems extends ApiBase {
 			$wikibaseRepo->getEntityIdParser(),
 			$apiHelperFactory->getErrorReporter( $this ),
 			$apiHelperFactory->getResultBuilder( $this ),
-			new ItemMergeInteractor(
-				$wikibaseRepo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
-				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-				$wikibaseRepo->getEntityStore(),
-				$wikibaseRepo->getEntityPermissionChecker(),
-				$wikibaseRepo->getSummaryFormatter(),
-				$this->getUser(),
-				$wikibaseRepo->newRedirectCreationInteractor( $this->getUser(), $this->getContext() )
-			)
+			$wikibaseRepo->newItemMergeInteractor( $this->getContext() )
 		);
 	}
 

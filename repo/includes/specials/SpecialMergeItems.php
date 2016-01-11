@@ -59,15 +59,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 			new TokenCheckInteractor(
 				$this->getUser()
 			),
-			new ItemMergeInteractor(
-				$wikibaseRepo->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
-				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-				$wikibaseRepo->getEntityStore(),
-				$wikibaseRepo->getEntityPermissionChecker(),
-				$wikibaseRepo->getSummaryFormatter(),
-				$this->getUser(),
-				$wikibaseRepo->newRedirectCreationInteractor( $this->getUser(), $this->getContext() )
-			)
+			$wikibaseRepo->newItemMergeInteractor( $this->getContext() )
 		);
 	}
 
