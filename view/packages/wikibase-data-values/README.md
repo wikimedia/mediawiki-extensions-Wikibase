@@ -11,6 +11,13 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.8.0 (2016-01-07)
+
+#### Breaking changes
+* `valueParsers.StringParser.parse` now resolves empty strings to `null`.
+* Renamed string `id`s for the 0 to 6 `dataValues.TimeValue.PRECISIONS` to be identical to the PHP
+constants in DataValues Time.
+
 ### 0.7.0 (2015-06-03)
 
 #### Breaking changes
@@ -90,7 +97,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 * Fixed valueParsers ResourceLoader module definition template.
 
-### 0.3 (2014-01-30)
+### 0.3.0 (2014-01-30)
 
 #### Breaking changes
 
@@ -98,7 +105,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 * Renamed "valueParsers.factory" Resource Loader module to "valueParsers.ValueParserFactory"
 * Removed ValueView dependency from "mw.ext.valueFormatters" module and "mw.ext.valueParsers" module.
 
-### 0.2 (2014-01-24)
+### 0.2.0 (2014-01-24)
 
 #### Breaking changes
 
@@ -113,6 +120,6 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 * #16 Have the tests run on TravisCI using PhantomJS
 * #18 Provided QUnit test runner using requireJS
 
-### 0.1 (2013-12-23)
+### 0.1.0 (2013-12-23)
 
 Initial release.
