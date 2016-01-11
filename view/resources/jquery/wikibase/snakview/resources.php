@@ -2,6 +2,7 @@
 /**
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Thiemo Mättig
  *
  * @codeCoverageIgnoreStart
  */
@@ -9,118 +10,49 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
-		'localBasePath' => __DIR__,
-		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
-
-	$modules = array(
-
-		'jquery.wikibase.snakview' => $moduleTemplate + array(
+	return array(
+		'jquery.wikibase.snakview' => array(
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => '..' . $remoteExtPath[0],
 			'scripts' => array(
 				'snakview.js',
 				'snakview.SnakTypeSelector.js',
+				'snakview.variations.js',
+				'snakview.variations.NoValue.js',
+				'snakview.variations.SomeValue.js',
+				'snakview.variations.Value.js',
+				'snakview.variations.Variation.js',
+				'snakview.ViewState.js',
 			),
 			'styles' => array(
 				'themes/default/snakview.SnakTypeSelector.css',
 			),
 			'dependencies' => array(
+				'dataValues',
 				'dataValues.DataValue',
 				'jquery.event.special.eachchange',
 				'jquery.ui.position',
 				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.entityselector',
-				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.variations.NoValue',
-				'jquery.wikibase.snakview.variations.SomeValue',
-				'jquery.wikibase.snakview.variations.Value',
-				'jquery.wikibase.snakview.ViewState',
 				'mediawiki.legacy.shared',
 				'mw.config.values.wbRepo',
+				'util.inherit',
 				'wikibase.datamodel',
 				'wikibase.serialization.SnakDeserializer',
 				'wikibase.serialization.SnakSerializer',
 			),
 			'messages' => array(
-				'wikibase-snakview-property-input-placeholder',
 				'wikibase-snakview-choosesnaktype',
-				'wikibase-snakview-snaktypeselector-value',
+				'wikibase-snakview-property-input-placeholder',
+				'wikibase-snakview-snaktypeselector-novalue',
 				'wikibase-snakview-snaktypeselector-somevalue',
-				'wikibase-snakview-snaktypeselector-novalue'
-			),
-		),
-
-		'jquery.wikibase.snakview.variations' => $moduleTemplate + array(
-			'scripts' => array(
-				'snakview.variations.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.snakview.variations.Variation',
-				'util.inherit',
-			),
-		),
-
-		'jquery.wikibase.snakview.variations.Variation' => $moduleTemplate + array(
-			'scripts' => array(
-				'snakview.variations.Variation.js',
-			),
-			'dependencies' => array(
-				'util.inherit',
-			),
-		),
-
-		'jquery.wikibase.snakview.variations.NoValue' => $moduleTemplate + array(
-			'scripts' => array(
-				'snakview.variations.NoValue.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.variations.Variation',
-				'wikibase.datamodel',
-			),
-			'messages' => array(
-				'wikibase-snakview-variations-novalue-label',
-			),
-		),
-
-		'jquery.wikibase.snakview.variations.SomeValue' => $moduleTemplate + array(
-			'scripts' => array(
-				'snakview.variations.SomeValue.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.variations.Variation',
-				'wikibase.datamodel',
-			),
-			'messages' => array(
-				'wikibase-snakview-variations-somevalue-label',
-			),
-		),
-
-		'jquery.wikibase.snakview.variations.Value' => $moduleTemplate + array(
-			'scripts' => array(
-				'snakview.variations.Value.js',
-			),
-			'dependencies' => array(
-				'dataValues',
-				'jquery.wikibase.snakview.variations',
-				'jquery.wikibase.snakview.variations.Variation',
-				'wikibase.datamodel',
-			),
-			'messages' => array(
+				'wikibase-snakview-snaktypeselector-value',
 				'wikibase-snakview-variation-datavaluetypemismatch',
 				'wikibase-snakview-variation-datavaluetypemismatch-details',
 				'wikibase-snakview-variation-nonewvaluefordeletedproperty',
+				'wikibase-snakview-variations-novalue-label',
+				'wikibase-snakview-variations-somevalue-label',
 			),
 		),
-
-		'jquery.wikibase.snakview.ViewState' => $moduleTemplate + array(
-			'scripts' => array(
-				'snakview.ViewState.js',
-			),
-		),
-
 	);
-
-	return $modules;
 } );
