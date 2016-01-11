@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use HistoryAction;
+use MWContentSerializationException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -53,7 +54,11 @@ class HistoryEntityAction extends HistoryAction {
 	 * @return EntityContent|null
 	 */
 	protected function getContent() {
-		return $this->getArticle()->getPage()->getContent();
+		try {
+			return $this->getArticle()->getPage()->getContent();
+		} catch ( MWContentSerializationException $ex ) {
+			return null;
+		}
 	}
 
 	/**
@@ -65,7 +70,7 @@ class HistoryEntityAction extends HistoryAction {
 		$content = $this->getContent();
 
 		if ( !$content ) {
-			// page does not exist
+			// Page does not exist or the entity or redirect can not be deserialized.
 			return parent::getPageTitle();
 		}
 
