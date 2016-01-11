@@ -2,10 +2,12 @@
 
 namespace Wikibase\Test\Interactors;
 
+use ContentHandler;
 use HashSiteStore;
 use Status;
 use TestSites;
 use User;
+use WatchedItem;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -98,6 +100,22 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getEntityTitleLookup() {
+		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+
+		$mock->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				$contentHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+				return $contentHandler->getTitleForId( $id );
+			} ) );
+
+		return $mock;
+	}
+
+	/**
 	 * @param User|null $user
 	 *
 	 * @return ItemMergeInteractor
@@ -132,7 +150,8 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 				$user,
 				$this->getMockEditFilterHookRunner(),
 				$this->mockRepository
-			)
+			),
+			$this->getEntityTitleLookup()
 		);
 
 		return $interactor;
@@ -294,6 +313,9 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			$ignoreConflicts = explode( '|', $ignoreConflicts );
 		}
 
+		$watchedItem = $this->getWatchedItemForId( $fromId );
+		$watchedItem->addWatch();
+
 		$interactor->mergeItems( $fromId, $toId, $ignoreConflicts, 'CustomSummary' );
 
 		$actualTo = $this->testHelper->getEntity( $toId );
@@ -307,6 +329,8 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			$toRevId,
 			'summary for target item'
 		);
+
+		$this->assertItemMergedIntoIsWatched( $toId );
 	}
 
 	private function assertRedirectWorks( $expectedFrom, $fromId, $toId ) {
@@ -322,6 +346,18 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			$actualFrom = $this->testHelper->getEntity( $fromId );
 			$this->testHelper->assertEntityEquals( $expectedFrom, $actualFrom, 'modified source item' );
 		}
+	}
+
+	private function assertItemMergedIntoIsWatched( ItemId $toId ) {
+		$watchedItem = $this->getWatchedItemForId( $toId );
+		$this->assertTrue( $watchedItem->isWatched(), 'Item merged into is being watched' );
+	}
+
+	private function getWatchedItemForId( ItemId $itemId ) {
+		return WatchedItem::fromUserTitle(
+			User::newFromName( 'UTSysop' ),
+			$this->getEntityTitleLookup()->getTitleForId( $itemId )
+		);
 	}
 
 	public function mergeFailureProvider() {
