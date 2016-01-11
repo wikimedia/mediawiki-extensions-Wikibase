@@ -53,17 +53,10 @@ return call_user_func( function() {
 				'mediawiki.notify'
 			),
 		),
-		'wikibase.client.PageConnector' => $moduleTemplate + array(
-			'scripts' => array(
-				'wikibase.client.PageConnector.js'
-			),
-			'dependencies' => array(
-				'wikibase.sites'
-			),
-		),
 		'jquery.wikibase.linkitem' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.wikibase/jquery.wikibase.linkitem.js'
+				'jquery.wikibase/jquery.wikibase.linkitem.js',
+				'wikibase.client.PageConnector.js',
 			),
 			'styles' => array(
 				'jquery.wikibase/jquery.wikibase.linkitem.css'
@@ -82,7 +75,6 @@ return call_user_func( function() {
 				'wikibase.sites',
 				'wikibase.api.RepoApi',
 				'wikibase.api.RepoApiError',
-				'wikibase.client.PageConnector'
 			),
 			'messages' => array(
 				'wikibase-error-unexpected',
