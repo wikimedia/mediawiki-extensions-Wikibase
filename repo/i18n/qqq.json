@@ -40,7 +40,8 @@
 			"Umherirrender",
 			"Macofe",
 			"Legoktm",
-			"JadeMaveric"
+			"JadeMaveric",
+			"Beeyan"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=https://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]] in the Wikidata glossary.\n\n\"Structured\" refers to \"data\", not to \"repository\".",
@@ -425,7 +426,7 @@
 	"apihelp-wbcreateclaim-example-4": "{{doc-apihelp-example|wbcreateclaim}}",
 	"apihelp-wbcreateredirect-description": "{{doc-apihelp-description|wbcreateredirect}}",
 	"apihelp-wbcreateredirect-param-from": "{{doc-apihelp-param|wbcreateclaim|from}}",
-	"apihelp-wbcreateredirect-param-to": "{{doc-apihelp-param|wbcreateclaim|to}}",
+	"apihelp-wbcreateredirect-param-to": "{{doc-apihelp-param|wbcreateclaim|to}}\n\nfor Indonesian: \nThe Entity ID that will be the redirect target (proper English)",
 	"apihelp-wbcreateredirect-param-bot": "{{doc-apihelp-param|wbcreateclaim|bot}}",
 	"apihelp-wbcreateredirect-example-1": "{{doc-apihelp-example|wbcreateredirect}}",
 	"apihelp-wbeditentity-description": "{{doc-apihelp-description|wbeditentity}}",
