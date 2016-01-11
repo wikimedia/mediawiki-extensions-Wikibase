@@ -38,10 +38,18 @@ May be used to define additional data types. See also the WikibaseRepoDataTypes 
 &$dataTypeDefinitions: the array of data type definitions, as defined by WikibaseClient.datatypes.php.
   Hook handlers may add additional definitions. See the datatypes.wiki file for details.
 
-'WikibaseHandleChanges': Callend by ChangeHandler::handleChange() to allow pre-processing
+'WikibaseHandleChanges': Called by ChangeHandler::handleChange() to allow pre-processing
 of changes.
 $changes: A list of Change objects
 
-'WikibaseHandleChange': Callend by ChangeHandler::handleChange() to allow alternative
+'WikibaseHandleChange': Called by ChangeHandler::handleChange() to allow alternative
 processing of changes.
 $change: A Change object
+
+'WikibaseClientOtherProjectsSidebar' Called by OtherProjectsSidebarGenerator to allow altering
+the other projects sidebar. Only called in case the page we're on is linked with an item.
+$itemId: Id of the item the page is linked with.
+&$newSidedbar: Array containing the sidebar definition. The array consits of arrays indexed by
+site groups containing arrays indexed by site id. These arrays represent the link to the given
+site. They contain the keys "msg", "href" and "class" which contain the respective attributes
+for the link that is going to be created.
