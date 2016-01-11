@@ -85,6 +85,187 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @dataProvider projectLinkSidebarHookProvider
+	 */
+	public function testBuildProjectLinkSidebar_hook(
+			/* callable */ $handler,
+			array $siteIdsToOutput,
+			array $result,
+			$suppressErrors = false
+		) {
+		$this->setMwGlobals( 'wgHooks', array( 'WikibaseClientOtherProjectsSidebar' => array( $handler ) ) );
+
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$this->getSiteLinkLookup(),
+			$this->getSiteStore(),
+			$siteIdsToOutput
+		);
+
+		if ( $suppressErrors ) {
+			\MediaWiki\suppressWarnings();
+		}
+		$this->assertEquals(
+			$result,
+			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+		);
+
+		if ( $suppressErrors ) {
+			\MediaWiki\restoreWarnings();
+		}
+	}
+
+	public function projectLinkSidebarHookProvider() {
+		$wiktionaryLink = array(
+			'msg' => 'wikibase-otherprojects-wiktionary',
+			'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
+			'href' => 'https://en.wiktionary.org/wiki/Nyan_Cat',
+			'hreflang' => 'en'
+		);
+		$wikiquoteLink = array(
+			'msg' => 'wikibase-otherprojects-wikiquote',
+			'class' => 'wb-otherproject-link wb-otherproject-wikiquote',
+			'href' => 'https://en.wikiquote.org/wiki/Nyan_Cat',
+			'hreflang' => 'en'
+		);
+		$wikipediaLink = array(
+			'msg' => 'wikibase-otherprojects-wikipedia',
+			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
+			'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
+			'hreflang' => 'en'
+		);
+		$changedWikipedaLink = array(
+			'msg' => 'wikibase-otherprojects-wikipedia',
+			'class' => 'wb-otherproject-link wb-otherproject-wikipedia',
+			'href' => 'https://en.wikipedia.org/wiki/Cat',
+			'hreflang' => 'en'
+		);
+		$self = $this; // PHP 5.3 :(
+
+		return array(
+			'Noop hook, gets the right data' => array(
+				function( ItemId $itemId, array &$sidebar ) use ( $wikipediaLink, $wikiquoteLink, $wiktionaryLink, $self ) {
+					$self->assertSame(
+						array(
+							'wikiquote' => array( 'enwikiquote' => $wikiquoteLink ),
+							'wikipedia' => array( 'enwiki' => $wikipediaLink ),
+							'wiktionary' => array( 'enwiktionary' => $wiktionaryLink )
+						),
+						$sidebar
+					);
+					$self->assertSame( 'Q123', $itemId->getSerialization() );
+				},
+				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
+				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink )
+			),
+			'Hook changes enwiki link' => array(
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+					$sidebar['wikipedia']['enwiki']['href'] = $changedWikipedaLink['href'];
+				},
+				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
+				array( $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink )
+			),
+			'Hook inserts enwiki link' => array(
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink, $self ) {
+					$self->assertFalse(
+						isset( $sidebar['wikipedia'] ),
+						'No Wikipedia link present yet'
+					);
+
+					$sidebar['wikipedia']['enwiki'] = $changedWikipedaLink;
+				},
+				array( 'enwiktionary', 'enwikiquote' ),
+				array( $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink )
+			),
+			'Invalid hook #1, original data is being used' => array(
+				function( ItemId $itemId, array &$sidebar ) {
+					$sidebar = null;
+				},
+				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
+				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
+				true
+			),
+			'Invalid hook #2, original data is being used' => array(
+				function( ItemId $itemId, array &$sidebar ) {
+					$sidebar[0]['msg'] = array();
+				},
+				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
+				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
+				true
+			),
+			'Invalid hook #3, original data is being used' => array(
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+					$sidebar['wikipedia']['enwiki']['href'] = 1.2;
+				},
+				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
+				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
+				true
+			),
+			'Invalid hook #4, original data is being used' => array(
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+					$sidebar['wikipedia'][] = $changedWikipedaLink;
+				},
+				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
+				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
+				true
+			),
+		);
+	}
+
+	public function testBuildProjectLinkSidebar_hookNotCalledIfPageNotConnected() {
+		$self = $this; // We all love PHP 5.3
+
+		$handler = function() use ( $self ) {
+			$self->assertTrue( false, "Should not get called." );
+		};
+
+		$this->setMwGlobals( 'wgHooks', array( 'WikibaseClientOtherProjectsSidebar' => array( $handler ) ) );
+
+		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+		$lookup->expects( $this->any() )
+				->method( 'getItemIdForSiteLink' )
+				->will( $this->returnValue( null ) );
+
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$lookup,
+			$this->getSiteStore(),
+			array( 'enwiki' )
+		);
+
+		$this->assertSame(
+			array(),
+			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+		);
+	}
+
+	public function testBuildProjectLinkSidebar_hookCalledWithEmptySidebar() {
+		$self = $this; // We all love PHP 5.3
+		$called = false;
+
+		$handler = function( ItemId $itemId, $sidebar ) use ( $self, &$called ) {
+			$self->assertSame( 'Q123', $itemId->getSerialization() );
+			$self->assertSame( array(), $sidebar );
+			$called = true;
+		};
+
+		$this->setMwGlobals( 'wgHooks', array( 'WikibaseClientOtherProjectsSidebar' => array( $handler ) ) );
+
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$this->getSiteLinkLookup(),
+			$this->getSiteStore(),
+			array( 'unknown-site' )
+		);
+
+		$this->assertSame(
+			array(),
+			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+		);
+		$this->assertTrue( $called, 'Hook needs to be called' );
+	}
+
+	/**
 	 * @return SiteStore
 	 */
 	private function getSiteStore() {
