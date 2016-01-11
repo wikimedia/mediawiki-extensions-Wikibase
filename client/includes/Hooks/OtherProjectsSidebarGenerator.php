@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Hooks;
 use Site;
 use SiteStore;
 use Title;
@@ -64,7 +65,52 @@ class OtherProjectsSidebarGenerator {
 	 * group and global ids.
 	 */
 	public function buildProjectLinkSidebar( Title $title ) {
-		return $this->buildSidebarFromSiteLinks( $this->getSiteLinks( $title ) );
+		$sidebar = $this->buildSidebarFromSiteLinks( $this->getSiteLinks( $title ) );
+		$sidebar = $this->runHook( $sidebar );
+
+		return $sidebar;
+	}
+
+	/**
+	 * @param array $sidebar
+	 *
+	 * @return array
+	 */
+	private function runHook( array $sidebar ) {
+		$newSidebar = $sidebar;
+		Hooks::run( 'WikibaseClientOtherProjectsSidebar', array( &$newSidebar ) );
+
+		if ( $newSidebar === $sidebar ) {
+			return $sidebar;
+		}
+
+		if ( !is_array( $newSidebar ) || !$this->isValidSidebar( $newSidebar ) ) {
+			wfLogWarning( 'Other projects sidebar data invalid after hook run.' );
+			return $sidebar;
+		}
+
+		return $newSidebar;
+	}
+
+	/**
+	 * @param array $sidebar
+	 * @return bool
+	 */
+	private function isValidSidebar( array $sidebar ) {
+		// Make sure all required array keys are set and are string.
+		foreach ( $sidebar as $perSite ) {
+			if ( !isset( $perSite['msg'] )
+				|| !isset( $perSite['class'] )
+				|| !isset( $perSite['href'] )
+				|| !is_string( $perSite['msg'] )
+				|| !is_string( $perSite['class'] )
+				|| !is_string( $perSite['href'] )
+			) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
