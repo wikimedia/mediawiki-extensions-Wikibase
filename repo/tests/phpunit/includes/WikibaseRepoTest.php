@@ -300,6 +300,16 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\EditEntityFactory', $factory );
 	}
 
+	public function testNewEditEntityFactory_withoutContextParam() {
+		$factory = $this->getWikibaseRepo()->newEditEntityFactory();
+		$this->assertInstanceOf( 'Wikibase\EditEntityFactory', $factory );
+	}
+
+	public function testNewItemMergeInteractor() {
+		$interactor = $this->getWikibaseRepo()->newItemMergeInteractor( new RequestContext() );
+		$this->assertInstanceOf( 'Wikibase\Repo\Interactors\ItemMergeInteractor', $interactor );
+	}
+
 	public function testGetTermLookup() {
 		$service = $this->getWikibaseRepo()->getTermLookup();
 		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\TermLookup', $service );

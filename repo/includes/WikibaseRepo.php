@@ -77,6 +77,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
@@ -1331,6 +1332,25 @@ class WikibaseRepo {
 			$this->getEntityPermissionChecker(),
 			$this->newEditFilterHookRunner( $context ),
 			$context
+		);
+	}
+
+	/**
+	 * @param IContextSource $context
+	 *
+	 * @return ItemMergeInteractor
+	 */
+	public function newItemMergeInteractor( IContextSource $context ) {
+		$user = $context->getUser();
+
+		return new ItemMergeInteractor(
+			$this->getChangeOpFactoryProvider()->getMergeChangeOpFactory(),
+			$this->getEntityRevisionLookup( 'uncached' ),
+			$this->getEntityStore(),
+			$this->getEntityPermissionChecker(),
+			$this->getSummaryFormatter(),
+			$user,
+			$this->newRedirectCreationInteractor( $user, $context )
 		);
 	}
 
