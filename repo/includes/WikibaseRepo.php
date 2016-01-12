@@ -1350,7 +1350,8 @@ class WikibaseRepo {
 			$this->getEntityPermissionChecker(),
 			$this->getSummaryFormatter(),
 			$user,
-			$this->newRedirectCreationInteractor( $user, $context )
+			$this->newRedirectCreationInteractor( $user, $context ),
+			$this->getEntityTitleLookup()
 		);
 	}
 
