@@ -216,7 +216,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityId[] $entityIds
 	 * @param string[] $aspects
 	 *
-	 * @return Iterator<PageEntityUsages> An iterator over entity usages grouped by page
+	 * @return Iterator An iterator over PageEntityUsages grouped by page.
 	 * @throws UsageTrackerException
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = array() ) {

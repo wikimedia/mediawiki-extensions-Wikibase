@@ -178,7 +178,7 @@ class AffectedPagesFinder {
 	 *
 	 * @param EntityChange $change
 	 *
-	 * @return Iterator<PageEntityUsages>
+	 * @return Iterator of PageEntityUsages
 	 */
 	private function getAffectedPages( EntityChange $change ) {
 		$entityId = $change->getEntityId();
@@ -276,9 +276,9 @@ class AffectedPagesFinder {
 	 * Filters updates based on namespace. This removes duplicates, non-existing pages, and pages from
 	 * namespaces that are not considered "enabled" by the namespace checker.
 	 *
-	 * @param PageEntityUsages[]|Iterator<PageEntityUsages> $updates
+	 * @param PageEntityUsages[]|Iterator $usages An array or iterator of PageEntityUsages.
 	 *
-	 * @return Iterator<PageEntityUsages>
+	 * @return Iterator of PageEntityUsages
 	 */
 	private function filterUpdates( $usages ) {
 		$titlesToUpdate = array();
