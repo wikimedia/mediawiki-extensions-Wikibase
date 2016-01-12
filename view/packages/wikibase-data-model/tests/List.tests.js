@@ -77,6 +77,24 @@ QUnit.test( 'each()', function( assert ) {
 	} );
 } );
 
+QUnit.test( 'toArray()', function( assert ) {
+	assert.expect( 2 );
+	var item = new TestItem(),
+		list = new wb.datamodel.List( TestItem, [item] ),
+		actual = list.toArray();
+
+	assert.ok(
+		actual.length === 1 && actual[0] === item,
+		'toArray() returns original items.'
+	);
+
+	assert.strictEqual(
+		list.toArray(),
+		actual,
+		'toArray() does not clone.'
+	);
+} );
+
 QUnit.test( 'hasItem()', function( assert ) {
 	assert.expect( 2 );
 	var items = getTestItems( 3 ),

@@ -15,7 +15,7 @@ var SELF = wb.datamodel.GroupableCollection = function WbDataModelGroupableColle
 
 $.extend( SELF.prototype, {
 	/**
-	 * Returns a copy of the collection items as list.
+	 * Returns the collection items as list.
 	 * @abstract
 	 *
 	 * @return {*[]}
