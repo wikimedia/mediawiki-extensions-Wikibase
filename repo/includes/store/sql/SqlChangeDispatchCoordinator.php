@@ -599,7 +599,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * Determines the name of the global lock that should be used to lock the given client.
 	 *
-	 * @param string $siteID: The site ID of the wiki to lock
+	 * @param string $siteID The site ID of the wiki to lock
 	 *
 	 * @return string the lock name to use.
 	 */
