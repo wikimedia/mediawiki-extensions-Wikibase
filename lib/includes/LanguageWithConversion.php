@@ -101,8 +101,8 @@ class LanguageWithConversion {
 	/**
 	 * Get a LanguageWithConversion object.
 	 *
-	 * @param $language Language|string: Language (code) for this object
-	 * @param $sourceLanguage null|Language|string:
+	 * @param Language|string $language Language (code) for this object
+	 * @param Language|string|null $sourceLanguage
 	 *          Source language (code) if this is a converted language, or null
 	 *
 	 * @throws MWException
@@ -225,7 +225,7 @@ class LanguageWithConversion {
 	/**
 	 * Translate data after fetching them.
 	 *
-	 * @param $text String: Data to transform
+	 * @param string $text Data to transform
 	 * @return String: Result
 	 */
 	public function translate( $text ) {

@@ -73,7 +73,7 @@ interface ChangeDispatchCoordinator {
 	 * Its structure must be the one returned by selectClient(), with the chd_seen and
 	 * field updated to reflect any dispatch activity.
 	 *
-	 * @param array $state  : associative array representing the client wiki's state after the
+	 * @param array $state Associative array representing the client wiki's state after the
 	 *                      update pass.
 	 *
 	 * @throws Exception

@@ -17,8 +17,8 @@ interface ChangeNotificationSender {
 	/**
 	 * Notifies the client wiki of the given changes.
 	 *
-	 * @param string   $siteID:  The client wiki's global site identifier, as used by sitelinks.
-	 * @param Change[] $changes: The list of changes to post to the wiki.
+	 * @param string $siteID The client wiki's global site identifier, as used by sitelinks.
+	 * @param Change[] $changes The list of changes to post to the wiki.
 	 */
 	public function sendNotification( $siteID, array $changes );
 

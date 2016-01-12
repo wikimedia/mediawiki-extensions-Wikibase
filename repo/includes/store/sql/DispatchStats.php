@@ -33,7 +33,7 @@ class DispatchStats {
 	 * Loads the current dispatch status from the database and calculates statistics.
 	 * Before this method is called, the behavior of the getters is undefined.
 	 *
-	 * @param int|string $now: Timestamp to consider the current time. Mostly useful for testing.
+	 * @param int|string $now Timestamp to consider the current time. Mostly useful for testing.
 	 *
 	 * @return int the number of client wikis.
 	 */

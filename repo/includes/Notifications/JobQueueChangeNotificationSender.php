@@ -38,8 +38,8 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 	/**
 	 * @see ChangeNotificationSender::sendNotification
 	 *
-	 * @param string   $siteID:  The client wiki's global site identifier, as used by sitelinks.
-	 * @param Change[] $changes: The list of changes to post to the wiki.
+	 * @param string $siteID The client wiki's global site identifier, as used by sitelinks.
+	 * @param Change[] $changes The list of changes to post to the wiki.
 	 */
 	public function sendNotification( $siteID, array $changes ) {
 		if ( empty( $changes ) ) {
