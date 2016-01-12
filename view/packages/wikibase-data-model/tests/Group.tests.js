@@ -176,9 +176,10 @@ QUnit.test( 'setItemContainer() & getItemContainer()', function( assert ) {
 		group = createGroup( 'key', container ),
 		newContainer = getTestContainer( 'key', 3 );
 
-	assert.ok(
-		group.getItemContainer() !== container,
-		'Not returning original container.'
+	assert.strictEqual(
+		container,
+		group.getItemContainer(),
+		'getItemContainer() does not clone.'
 	);
 
 	assert.ok(
