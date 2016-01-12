@@ -278,8 +278,8 @@ class ChangeDispatcher {
 	 * collect the changes for the next batch. The number of requests needed can be adjusted
 	 * using $this->batchChunkFactor (via the 'dispatchBatchChunkFactor' setting).
 	 *
-	 * @param string $siteID:    The client wiki's global site identifier, as used by sitelinks.
-	 * @param int $after:  The last change ID processed by a previous run. All changes returned
+	 * @param string $siteID The client wiki's global site identifier, as used by sitelinks.
+	 * @param int $after The last change ID processed by a previous run. All changes returned
 	 *                     will have an ID greater than $after.
 	 *
 	 * @return array( $batch, $seen ), where $batch is a list of Change objects, and $seen
@@ -365,9 +365,9 @@ class ChangeDispatcher {
 	 * Currently, we keep EntityChanges for entities the client wiki is subscribed to, or
 	 * that modify a sitelink to the client wiki.
 	 *
-	 * @param string   $siteID : The client wiki's global site identifier, as used by sitelinks.
-	 * @param Change[] $changes: The list of changes to filter.
-	 * @param int      $limit:   The max number of changes to return
+	 * @param string $siteID The client wiki's global site identifier, as used by sitelinks.
+	 * @param Change[] $changes The list of changes to filter.
+	 * @param int $limit The max number of changes to return
 	 *
 	 * @return array( $batch, $seen ), where $batch is the filtered list of Change objects,
 	 *         and $seen if the ID of the last change considered for the batch

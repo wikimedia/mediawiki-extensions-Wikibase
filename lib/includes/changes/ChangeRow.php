@@ -88,7 +88,7 @@ class ChangeRow implements Change {
 	 * @since 0.4
 	 *
 	 * @param string $name Field name
-	 * @param $default mixed: Default value to return when none is found
+	 * @param mixed $default Default value to return when none is found
 	 * (default: null)
 	 *
 	 * @throws MWException
