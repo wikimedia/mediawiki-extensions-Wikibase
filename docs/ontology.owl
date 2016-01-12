@@ -98,6 +98,10 @@
     <rdfs:subClassOf rdf:resource="&wikibase;Value"/>
   </owl:Class>
 
+  <owl:Class rdf:about="&wikibase;GeoAutoPrecision">
+     <rdfs:label>GeoAutoPrecision</rdfs:label>
+     <rdfs:comment>This coordinate value uses automatic precision since the user did not specify one.</rdfs:comment>
+  </owl:Class>
 
   <!--
   ///////////////////////////////////////////////////////////////////////////////////////
