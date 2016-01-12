@@ -8,10 +8,18 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
-### 2.0 (dev)
+### 2.0.0 (2016-01-12)
 
 #### Breaking changes
-* Term and MultiTerm do not accept empty language codes any more.
+* `Term` and `MultiTerm` do not accept empty language codes any more.
+* Removed cloning from the following methods:
+  * `GroupableCollection.toArray` and `List.toArray`
+  * `Group.getItemContainer` and `setItemContainer`
+* Removed `propertyId` parameter from `Claim.getQualifiers`.
+* `SnakList.getFilteredSnakList` can not be called with `null` any more.
+
+#### Other changes
+* Fixed possible performance issues due to cloning in `Group.equals` and the `List`, `Map`and `Set` constructors.
 
 ### 1.0.2 (2015-05-28)
 
@@ -23,7 +31,7 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 ### 1.0.1 (2014-11-05)
 * Using DataValues JavaScript 0.6.x.
 
-### 1.0 (2014-11-05)
+### 1.0.0 (2014-11-05)
 
 #### Breaking changes
 * Removed wikibase.datamodel.Reference.setSnaks(). Generate new Reference objects when interacting with the API to reflect hash changes performed in the back-end.
