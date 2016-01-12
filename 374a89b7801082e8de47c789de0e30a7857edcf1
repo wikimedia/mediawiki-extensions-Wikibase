@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_8799f823",
+        "filename": "repo/includes/store/sql/WikiPageEntityStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-12T09:41:01Z",
+      "side": 1,
+      "message": "Also fixed in I8d30941, which is now in a conflicting state. :-(",
+      "revId": "374a89b7801082e8de47c789de0e30a7857edcf1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
