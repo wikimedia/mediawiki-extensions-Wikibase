@@ -19,7 +19,6 @@ return call_user_func( function() {
 				'getStore.js',
 			),
 			'dependencies' => array(
-				'dataValues',
 				'dataValues.values',
 				'util.inherit',
 				'valueParsers.parsers',
