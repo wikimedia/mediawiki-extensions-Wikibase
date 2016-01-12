@@ -90,7 +90,7 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	 * @throws InvalidArgumentException
 	 * @throws MismatchingDataValueTypeException
 	 * @throws FormattingException
-	 * @return string Either plain text, wikitext or HTML, depending on the $valueFormatter
+	 * @return string Either plain text, wikitext or HTML, depending on the ValueFormatter
 	 *  provided.
 	 */
 	public function formatSnak( Snak $snak ) {
@@ -171,7 +171,7 @@ class PropertyValueSnakFormatter implements SnakFormatter {
 	 * @param string|null $dataTypeId
 	 *
 	 * @throws FormattingException
-	 * @return string Either plain text, wikitext or HTML, depending on the $valueFormatter
+	 * @return string Either plain text, wikitext or HTML, depending on the ValueFormatter
 	 *  provided.
 	 */
 	private function formatValue( DataValue $value, $dataTypeId = null ) {
