@@ -41,16 +41,17 @@ var SELF = wb.datamodel.Set = util.inherit(
 		this._ItemConstructor = ItemConstructor;
 		this._itemKeyFunctionName = itemKeyFunctionName;
 		this._items = {};
-		this.length = 0;
 
 		for( var i = 0; i < items.length; i++ ) {
 			this._assertIsItem( items[i] );
 
-			if( this._items[this.getItemKey( items[i] )] ) {
+			var key = this.getItemKey( items[i] );
+
+			if( this._items[key] ) {
 				throw new Error( 'There may only be one item per item key' );
 			}
 
-			this.setItem( items[i] );
+			this._items[key] = items[i];
 		}
 	},
 {

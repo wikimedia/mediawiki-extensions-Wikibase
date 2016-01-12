@@ -52,11 +52,18 @@ QUnit.test( 'Constructor', function( assert ) {
 		'Instantiated empty Set.'
 	);
 
-	var set = createSet( getTestItems( 2 ) );
+	var items = getTestItems( 2 ),
+		set = createSet( items );
 
 	assert.ok(
 		set instanceof wb.datamodel.Set,
 		'Instantiated filled Set.'
+	);
+
+	assert.notStrictEqual(
+		items,
+		set._items,
+		'Constructor does clone.'
 	);
 
 	assert.equal(
