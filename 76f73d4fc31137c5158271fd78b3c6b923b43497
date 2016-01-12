@@ -33,6 +33,24 @@
       "revId": "76f73d4fc31137c5158271fd78b3c6b923b43497",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9cfaa7d8",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-01-12T22:51:47Z",
+      "side": 1,
+      "message": "i could add a comment.\n\ni thought about splitting up the implementations to help make code like these more clear when we need just one of the interfaces, but maybe that\u0027s not high priority",
+      "parentUuid": "6eaa8f54_9c08672c",
+      "revId": "76f73d4fc31137c5158271fd78b3c6b923b43497",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
