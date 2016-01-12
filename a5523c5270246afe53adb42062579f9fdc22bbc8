@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_6157045c",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-12T22:25:17Z",
+      "side": 1,
+      "message": "Why not private?",
+      "revId": "a5523c5270246afe53adb42062579f9fdc22bbc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_21dcace4",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-12T22:25:17Z",
+      "side": 1,
+      "message": "Comparing using \u003d\u003d\u003d can save us a function call... let\u0027s think about our poor xdebug users.",
+      "revId": "a5523c5270246afe53adb42062579f9fdc22bbc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_81cb2020",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-12T22:25:17Z",
+      "side": 1,
+      "message": "single quotes preferred",
+      "revId": "a5523c5270246afe53adb42062579f9fdc22bbc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_e1f1b466",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/GlobeCoordinateRdfBuilderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-12T22:25:17Z",
+      "side": 1,
+      "message": "single quotes preferred",
+      "revId": "a5523c5270246afe53adb42062579f9fdc22bbc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
