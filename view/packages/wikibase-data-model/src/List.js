@@ -71,7 +71,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	 * @inheritdoc
 	 */
 	toArray: function() {
-		return this._items.slice();
+		return this._items;
 	},
 
 	/**
