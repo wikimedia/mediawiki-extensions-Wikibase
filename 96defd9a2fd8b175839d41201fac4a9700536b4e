@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_a113bcb7",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-12T22:16:40Z",
+      "side": 1,
+      "message": "Could be more explicit here",
+      "revId": "96defd9a2fd8b175839d41201fac4a9700536b4e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
