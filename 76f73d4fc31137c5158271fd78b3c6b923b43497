@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_3c113357",
+        "filename": "repo/tests/phpunit/includes/api/MergeItemsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-12T22:47:53Z",
+      "side": 1,
+      "message": "Same as in SpecialMergeItemsTest.php",
+      "revId": "76f73d4fc31137c5158271fd78b3c6b923b43497",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9c08672c",
+        "filename": "repo/tests/phpunit/includes/specials/SpecialMergeItemsTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-12T22:47:53Z",
+      "side": 1,
+      "message": "Although it is correct, it looks like a mistake initially. Could be more concrete here (especially given this is a private method).",
+      "revId": "76f73d4fc31137c5158271fd78b3c6b923b43497",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
