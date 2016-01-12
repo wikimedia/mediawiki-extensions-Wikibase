@@ -5,7 +5,8 @@
 			"Mitzev",
 			"Spiritia",
 			"StanProg",
-			"Borislav"
+			"Borislav",
+			"Vodnokon4e"
 		]
 	},
 	"tooltip-t-wikibase": "Препратка към свързаният обект от хранилището за данни",
@@ -23,6 +24,8 @@
 	"wikibase-editlinkstitle": "Редактиране на междуезиковите препратки",
 	"wikibase-linkitem-addlinks": "Добавяне на препратки",
 	"wikibase-linkitem-failure": "При опита за свързване с дадената страница възникна неизвестна грешка.",
+	"wikibase-linkitem-title": "Свържи със страница",
+	"wikibase-linkitem-linkpage": "Свържи със страница",
 	"wikibase-linkitem-selectlink": "Изберете сайта и страницата от него, която искате да свърже с тази.",
 	"wikibase-linkitem-input-site": "Език:",
 	"wikibase-linkitem-input-page": "Страница:",
@@ -37,6 +40,9 @@
 	"wikibase-rc-wikibase-edit-title": "Редакция от {{WBREPONAME}}",
 	"wikibase-replicationnote": "Може да отнеме няколко минути, докато промените се отразят във всички уикита.",
 	"wikibase-watchlist-show-changes-pref": "Показване на редакции от {{WBREPONAME}} в списъка ми за наблюдение",
+	"wikibase-unconnectedpages-submit": "Показване на страниците",
+	"wikibase-pageswithbadges-submit": "Показване на страниците",
 	"wikibase-pageinfo-entity-id": "ID на обекта в {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-id-none": "Няма",
 	"wikibase-otherprojects": "Други проекти"
 }
