@@ -1,6 +1,6 @@
 <?php
 
-define( 'WIKIBASE_DATAMODEL_JAVASCRIPT_VERSION', '1.0.2-dev' );
+define( 'WIKIBASE_DATAMODEL_JAVASCRIPT_VERSION', '2.0.0' );
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {
