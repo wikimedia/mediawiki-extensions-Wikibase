@@ -76,20 +76,8 @@ $.extend( SELF.prototype, {
 	/**
 	 * @return {wikibase.datamodel.SnakList}
 	 */
-	getQualifiers: function( propertyId ) {
-		if( !propertyId ) {
-			return this._qualifiers;
-		}
-
-		var filteredQualifiers = new wb.datamodel.SnakList();
-
-		this._qualifiers.each( function( i, snak ) {
-			if( snak.getPropertyId() === propertyId ) {
-				filteredQualifiers.addItem( snak );
-			}
-		} );
-
-		return filteredQualifiers;
+	getQualifiers: function() {
+		return this._qualifiers;
 	},
 
 	/**

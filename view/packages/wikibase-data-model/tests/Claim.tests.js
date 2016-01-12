@@ -65,7 +65,7 @@ QUnit.test( 'setMainSnak() & getMainSnak()', function( assert ) {
 } );
 
 QUnit.test( 'setQualifiers() & getQualifiers()', function( assert ) {
-	assert.expect( 2 );
+	assert.expect( 1 );
 	var claim = new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'p1' ) ),
 		qualifiers = new wb.datamodel.SnakList( [
 			new wb.datamodel.PropertyNoValueSnak( 'p10' ),
@@ -75,17 +75,10 @@ QUnit.test( 'setQualifiers() & getQualifiers()', function( assert ) {
 
 	claim.setQualifiers( qualifiers );
 
-	assert.ok(
-		claim.getQualifiers().equals( qualifiers ),
+	assert.strictEqual(
+		claim.getQualifiers(),
+		qualifiers,
 		'Verified qualifiers being set.'
-	);
-
-	assert.ok(
-		claim.getQualifiers( 'p10' ).equals( new wb.datamodel.SnakList( [
-			new wb.datamodel.PropertyNoValueSnak( 'p10' ),
-			new wb.datamodel.PropertySomeValueSnak( 'p10' )
-		] ) ),
-		'Altered qualifiers.'
 	);
 } );
 
