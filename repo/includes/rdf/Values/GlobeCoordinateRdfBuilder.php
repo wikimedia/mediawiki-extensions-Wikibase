@@ -95,8 +95,9 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoLongitude' )
 			->value( $value->getLongitude(), 'xsd', 'decimal' );
 
+		// Disallow nulls in precision, see T123392
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoPrecision' )
-			->value( $value->getPrecision(), 'xsd', 'decimal' );
+			->value( $value->getPrecision() ?: "0", 'xsd', 'decimal' );
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoGlobe' )
 			->is( trim( $value->getGlobe() ) );
