@@ -95,11 +95,25 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoLongitude' )
 			->value( $value->getLongitude(), 'xsd', 'decimal' );
 
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoPrecision' )
-			->value( $value->getPrecision(), 'xsd', 'decimal' );
+		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoPrecision' );
+		$this->sayMaybeDecimal( $valueWriter, $value->getPrecision() );
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'geoGlobe' )
 			->is( trim( $value->getGlobe() ) );
+	}
+
+	/**
+	 * Write a decimal value or blank node if the value is null
+	 * See: T123392
+	 * @param RdfWriter $writer
+	 * @param float|null $value
+	 */
+	protected function sayMaybeDecimal( RdfWriter $writer, $value ) {
+		if ( !is_null( $value ) ) {
+			$writer->value( $value, 'xsd', 'decimal' );
+		} else {
+			$writer->is( "_", $writer->blank() );
+		}
 	}
 
 }
