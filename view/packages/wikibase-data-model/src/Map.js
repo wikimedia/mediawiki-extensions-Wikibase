@@ -26,13 +26,13 @@ var SELF = wb.datamodel.Map = function WbDataModelMap( ItemConstructor, map ) {
 	}
 
 	this._ItemConstructor = ItemConstructor;
+	this._items = {};
 
 	for( var key in map ) {
 		this._assertIsItem( map[key] );
 		this.length++;
+		this._items[key] = map[key];
 	}
-
-	this._items = map;
 };
 
 $.extend( SELF.prototype, {

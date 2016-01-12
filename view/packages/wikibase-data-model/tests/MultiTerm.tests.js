@@ -25,7 +25,7 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 } );
 
 QUnit.test( 'Constructor (negative)', function( assert ) {
-	assert.expect( 4 );
+	assert.expect( 5 );
 	var negativeTestSets = [
 		[undefined, []],
 		['', undefined],
