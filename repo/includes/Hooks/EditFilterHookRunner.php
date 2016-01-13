@@ -38,7 +38,7 @@ class EditFilterHookRunner {
 	private $entityContentFactory;
 
 	/**
-	 * @var IContextSource
+	 * @var MutableContext
 	 */
 	private $context;
 
@@ -52,6 +52,12 @@ class EditFilterHookRunner {
 		EntityContentFactory $entityContentFactory,
 		IContextSource $context
 	) {
+		if ( !( $context instanceof MutableContext ) ) {
+			wfLogWarning( '$context is not an instanceof MutableContext.' );
+
+			$context = new DerivativeContext( $context );
+		}
+
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->context = $context;
@@ -131,12 +137,6 @@ class EditFilterHookRunner {
 			// namespace IDs for Property entities.
 			$namespace = $this->titleLookup->getNamespaceForType( $entityType );
 			$title = Title::makeTitle( $namespace, 'New' . ucfirst( $entityType ) );
-		}
-
-		if ( !( $context instanceof MutableContext ) ) {
-			wfLogWarning( '$context is not an instanceof MutableContext.' );
-
-			$context = new DerivativeContext( $context );
 		}
 
 		$context->setTitle( $title );
