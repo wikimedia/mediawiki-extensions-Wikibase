@@ -77,6 +77,18 @@ return call_user_func( function() {
 		 */
 		'sharedCacheDuration' => 60 * 60,
 
+		/**
+		 * List of data types (by data type id) not enabled on the wiki.
+		 * This setting is intended to aid with deployment of new data types
+		 * or on new Wikibase installs without items and properties yet.
+		 *
+		 * This setting should be consistent with the corresponding setting on the repo.
+		 *
+		 * WARNING: Disabling a data type after it is in use is dangerous
+		 * and might break items.
+		 */
+		'disabledDataTypes' => array(),
+
 		// The type of object cache to use. Use CACHE_XXX constants.
 		// This is both a repo and client setting, and should be set to the same value in
 		// repo and clients for multiwiki setups.
