@@ -33,7 +33,7 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 } );
 
 QUnit.test( 'Constructor (negative)', function( assert ) {
-	assert.expect( 4 );
+	assert.expect( 5 );
 	function instantiateObject( languageCode, text ) {
 		return function() {
 			return new wb.datamodel.Term( languageCode, text );

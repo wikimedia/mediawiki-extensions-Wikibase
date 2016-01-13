@@ -51,6 +51,7 @@ var SELF = wb.datamodel.Set = util.inherit(
 				throw new Error( 'There may only be one item per item key' );
 			}
 
+			this.length++;
 			this._items[key] = items[i];
 		}
 	},

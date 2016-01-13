@@ -30,7 +30,7 @@ function getTestItems( n ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
-	assert.expect( 5 );
+	assert.expect( 6 );
 	assert.ok(
 		( new wb.datamodel.List( TestItem ) ) instanceof wb.datamodel.List,
 		'Instantiated empty List.'
@@ -44,10 +44,10 @@ QUnit.test( 'Constructor', function( assert ) {
 		'Instantiated filled List.'
 	);
 
-	assert.strictEqual(
+	assert.notStrictEqual(
 		items,
 		list._items,
-		'Constructor does not clone.'
+		'Constructor does clone.'
 	);
 
 	assert.equal(

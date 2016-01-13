@@ -46,7 +46,7 @@ function createSet( items ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
-	assert.expect( 7 );
+	assert.expect( 8 );
 	assert.ok(
 		createSet() instanceof wb.datamodel.Set,
 		'Instantiated empty Set.'

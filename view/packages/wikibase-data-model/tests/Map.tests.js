@@ -46,7 +46,7 @@ function createMap( map ) {
 }
 
 QUnit.test( 'Constructor', function( assert ) {
-	assert.expect( 7 );
+	assert.expect( 8 );
 	assert.ok(
 		createMap() instanceof wb.datamodel.Map,
 		'Instantiated empty Map.'
@@ -60,10 +60,10 @@ QUnit.test( 'Constructor', function( assert ) {
 		'Instantiated filled Map.'
 	);
 
-	assert.strictEqual(
+	assert.notStrictEqual(
 		items,
 		map._items,
-		'Constructor does not clone.'
+		'Constructor does clone.'
 	);
 
 	assert.equal(

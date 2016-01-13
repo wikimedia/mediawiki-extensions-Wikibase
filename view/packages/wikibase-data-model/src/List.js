@@ -37,7 +37,7 @@ var SELF = wb.datamodel.List = util.inherit(
 			this._assertIsItem( items[i] );
 		}
 
-		this._items = items;
+		this._items = items.slice();
 		this.length = items.length;
 	},
 {

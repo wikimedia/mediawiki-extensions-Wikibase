@@ -171,7 +171,7 @@ QUnit.test( 'Constructor', function( assert ) {
 } );
 
 QUnit.test( 'setItemContainer() & getItemContainer()', function( assert ) {
-	assert.expect( 6 );
+	assert.expect( 4 );
 	var container = getTestContainer( 'key', 1 ),
 		group = createGroup( 'key', container ),
 		newContainer = getTestContainer( 'key', 3 );
@@ -187,22 +187,11 @@ QUnit.test( 'setItemContainer() & getItemContainer()', function( assert ) {
 		'Verified returned container matching returned container.'
 	);
 
-	container.addItem( getTestItems( 'key', 2 )[1] );
-
-	assert.ok(
-		!group.getItemContainer().equals( container ),
-		'Group container does not match original container manipulated after Group instantiation.'
-	);
-
-	assert.ok(
-		!group.getItemContainer().equals( newContainer ),
-		'Verified returned container not matching not yet set new container.'
-	);
-
 	group.setItemContainer( newContainer );
 
-	assert.ok(
-		group.getItemContainer().equals( newContainer ),
+	assert.strictEqual(
+		newContainer,
+		group.getItemContainer(),
 		'Set new container.'
 	);
 
