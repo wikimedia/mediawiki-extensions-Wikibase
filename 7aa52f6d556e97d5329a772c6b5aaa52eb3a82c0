@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_e6f225cd",
+        "filename": "repo/includes/Hooks/EditFilterHookRunner.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-13T08:43:06Z",
+      "side": 1,
+      "message": "But this must be MutableContext too.",
+      "revId": "7aa52f6d556e97d5329a772c6b5aaa52eb3a82c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
