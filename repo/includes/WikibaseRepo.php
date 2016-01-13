@@ -12,6 +12,7 @@ use Hooks;
 use IContextSource;
 use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
+use MutableContext;
 use RequestContext;
 use Serializers\Serializer;
 use SiteSQLStore;
@@ -510,11 +511,11 @@ class WikibaseRepo {
 	 * @since 0.5
 	 *
 	 * @param User $user
-	 * @param IContextSource $context
+	 * @param MutableContext $context
 	 *
 	 * @return RedirectCreationInteractor
 	 */
-	public function newRedirectCreationInteractor( User $user, IContextSource $context ) {
+	public function newRedirectCreationInteractor( User $user, MutableContext $context ) {
 		return new RedirectCreationInteractor(
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->getEntityStore(),
@@ -527,11 +528,11 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @param IContextSource $context
+	 * @param MutableContext $context
 	 *
 	 * @return EditFilterHookRunner
 	 */
-	private function newEditFilterHookRunner( IContextSource $context ) {
+	private function newEditFilterHookRunner( MutableContext $context ) {
 		return new EditFilterHookRunner(
 			$this->getEntityTitleLookup(),
 			$this->getEntityContentFactory(),

@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
-use DerivativeContext;
 use Hooks;
-use IContextSource;
 use InvalidArgumentException;
 use MutableContext;
 use RuntimeException;
@@ -38,19 +36,19 @@ class EditFilterHookRunner {
 	private $entityContentFactory;
 
 	/**
-	 * @var IContextSource
+	 * @var MutableContext
 	 */
 	private $context;
 
 	/**
 	 * @param EntityTitleLookup $titleLookup
 	 * @param EntityContentFactory $entityContentFactory
-	 * @param IContextSource $context
+	 * @param MutableContext $context
 	 */
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		EntityContentFactory $entityContentFactory,
-		IContextSource $context
+		MutableContext $context
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->entityContentFactory = $entityContentFactory;
@@ -131,12 +129,6 @@ class EditFilterHookRunner {
 			// namespace IDs for Property entities.
 			$namespace = $this->titleLookup->getNamespaceForType( $entityType );
 			$title = Title::makeTitle( $namespace, 'New' . ucfirst( $entityType ) );
-		}
-
-		if ( !( $context instanceof MutableContext ) ) {
-			wfLogWarning( '$context is not an instanceof MutableContext.' );
-
-			$context = new DerivativeContext( $context );
 		}
 
 		$context->setTitle( $title );
