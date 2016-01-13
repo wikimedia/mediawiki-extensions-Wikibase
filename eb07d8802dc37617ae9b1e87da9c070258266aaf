@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_c9029a0c",
+        "filename": "repo/includes/Validators/NumberValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-01-13T10:45:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure here. I think the type hint should specify which types the method correctly works with. From my point of view, a `NumberValidator` correctly works by checking whether something is a number or not. Given that, the `NumberValidator` works correctly with `mixed`, because it successfully checks any value for if it\u0027s a number or not and returns the correct result.",
+      "revId": "eb07d8802dc37617ae9b1e87da9c070258266aaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_69036610",
+        "filename": "repo/tests/phpunit/includes/Validators/TestValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-01-13T10:45:41Z",
+      "side": 1,
+      "message": "I think that\u0027s right, since `preg_match` works with strings only.",
+      "revId": "eb07d8802dc37617ae9b1e87da9c070258266aaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
