@@ -16,8 +16,8 @@ use Wikibase\Lib\DataTypeDefinitions;
  */
 class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 
-	private function getDataTypeDefinitions() {
-		$definitions = array(
+	private function getDefinitions() {
+		return array(
 			'VT:FOO' => array(
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooValueFormatter',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooValueParser',
@@ -34,8 +34,10 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getBarFormatter',
 			)
 		);
+	}
 
-		return new DataTypeDefinitions( $definitions );
+	private function getDataTypeDefinitions() {
+		return new DataTypeDefinitions( $this->getDefinitions() );
 	}
 
 	public function testTypeIds() {
@@ -126,6 +128,23 @@ class DataTypeDefinitionsTest extends \MediaWikiTestCase {
 		$this->assertEquals(
 			array( 'VT:FOO' => 'DataTypeDefinitionsTest::getFooRdfBuilder' ),
 			$defs->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+		);
+	}
+
+	public function testDataTypeDefinitions_onlySomeDataTypesEnabled() {
+		$definitions = $this->getDefinitions();
+		$defs = new DataTypeDefinitions( $definitions, array( 'bar' ) );
+
+		$this->assertSame(
+			array( 'foo' ),
+			$defs->getTypeIds(),
+			'data type ids'
+		);
+
+		$this->assertSame(
+			array( 'VT:FOO' => 'DataTypeDefinitionsTest::getFooValueFormatter' ),
+			$defs->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+			'formatter factory callbacks, prefixed mode'
 		);
 	}
 

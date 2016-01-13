@@ -53,9 +53,16 @@ class DataTypeDefinitions {
 	 * (with the prefix "PT:") and value types (with the prefix "VT:") to data type definitions.
 	 * Each data type definitions are associative arrays, refer to the class level documentation
 	 * for details.
+	 * @param string[] $disabledDataTypes Array of disabled data types.
 	 */
-	public function __construct( $dataTypeDefinitions = array() ) {
-		Assert::parameterElementType( 'array', $dataTypeDefinitions, '$dataTypeDefinitions' );
+	public function __construct(
+		array $dataTypeDefinitions = array(),
+		array $disabledDataTypes = array()
+	) {
+		$dataTypeDefinitions = $this->filterDisabledDataTypes(
+			$dataTypeDefinitions,
+			$disabledDataTypes
+		);
 
 		$this->registerDataTypes( $dataTypeDefinitions );
 	}
@@ -74,7 +81,11 @@ class DataTypeDefinitions {
 		Assert::parameterElementType( 'array', $dataTypeDefinitions, '$dataTypeDefinitions' );
 
 		foreach ( $dataTypeDefinitions as $id => $def ) {
-			Assert::parameter( strpos( $id, ':' ), "\$dataTypeDefinitions[$id]", 'Key must start with a prefix like "PT:" or "VT:".' );
+			Assert::parameter(
+				strpos( $id, ':' ),
+				"\$dataTypeDefinitions[$id]",
+				'Key must start with a prefix like "PT:" or "VT:".'
+			);
 
 			if ( isset( $this->dataTypeDefinitions[$id] ) ) {
 				$this->dataTypeDefinitions[$id] = array_merge(
@@ -85,6 +96,24 @@ class DataTypeDefinitions {
 				$this->dataTypeDefinitions[$id] = $dataTypeDefinitions[$id];
 			}
 		}
+	}
+
+	/**
+	 * @param array[] $dataTypeDefinitions Associative array of data types and definitions.
+	 * @param string[] $disabledTypes List of disabled data types
+	 *
+	 * @return array[] Filtered data type definitions
+	 */
+	private function filterDisabledDataTypes( array $dataTypeDefinitions, array $disabledTypes ) {
+		foreach ( $dataTypeDefinitions as $id => $def ) {
+			if ( 0 === strpos( $id, 'PT' ) ) {
+				if ( in_array( substr( $id, 3 ), $disabledTypes ) ) {
+					unset( $dataTypeDefinitions[$id] );
+				}
+			}
+		}
+
+		return $dataTypeDefinitions;
 	}
 
 	/**
