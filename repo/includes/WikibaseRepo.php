@@ -241,9 +241,14 @@ class WikibaseRepo {
 		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
 
 		if ( $instance === null ) {
+			$settings = new SettingsArray( $wgWBRepoSettings );
+
 			$instance = new self(
-				new SettingsArray( $wgWBRepoSettings ),
-				new DataTypeDefinitions( $dataTypeDefinitions ),
+				$settings,
+				new DataTypeDefinitions(
+					$dataTypeDefinitions,
+					$settings->getSetting( 'disabledDataTypes' )
+				),
 				$wgContLang
 			);
 		}
