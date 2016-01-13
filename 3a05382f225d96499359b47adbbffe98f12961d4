@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_e64ea53c",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-13T08:02:09Z",
+      "side": 1,
+      "message": "yoda conditions :)",
+      "revId": "3a05382f225d96499359b47adbbffe98f12961d4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
