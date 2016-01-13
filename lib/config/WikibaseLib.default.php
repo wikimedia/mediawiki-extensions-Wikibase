@@ -60,19 +60,6 @@ $wgWBLibDefaultSettings = array(
 		'wikibase-query~restore' => 'Wikibase\EntityChange',
 	),
 
-	'dataTypes' => array(
-		'commonsMedia',
-		'globe-coordinate',
-		'quantity',
-		'monolingualtext',
-		'string',
-		'time',
-		'url',
-		'external-id',
-		'wikibase-item',
-		'wikibase-property',
-	),
-
 	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],
 );
 
