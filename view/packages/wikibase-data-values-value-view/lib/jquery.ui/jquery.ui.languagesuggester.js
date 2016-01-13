@@ -33,9 +33,9 @@ $.widget( 'ui.languagesuggester', PARENT, {
 
 		$( retVal )
 		.on( 'selected.languagesuggester', function( event, item ) {
+			self._trigger( 'change' );
 			self._selectedValue = item.getValue();
 			self.element.val( item.getLabel() );
-			self._trigger( 'change' );
 		} );
 
 		return retVal;
