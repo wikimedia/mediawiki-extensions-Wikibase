@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_332ba194",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-01-13T05:42:01Z",
+      "side": 1,
+      "message": "in getSiteLinks, we obtain the ItemId for the connected item.\n\npretty sure we will need to have that for whatever the hook needs to do, so can you please make that available to the hook?",
+      "revId": "e8576c73dad909a66573eaa96a4c81ddf1006c66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
