@@ -16,6 +16,24 @@
       "revId": "4e5d79ef50c306494a7c044653f3ad21015e8e1c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_7f4b1888",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-01-13T19:20:30Z",
+      "side": 1,
+      "message": "Omitting it is not a good idea because then we won\u0027t be able to easily find all those (e.g. to fix with a bot) - searches for something not existing are usually slow. \n\nRDF has not type of \"null\" or \"undefined\". It has blank node, but blank nodes do not have identity, which means one again can not search for entities with this. \n\nWhat \"null means unknown and 0 means very precise\" is based on? https://www.mediawiki.org/wiki/Wikibase/DataModel/JSON does not have anything on that, in fact nothing mentions null and 0 are valid values. \nWhich is definitive docs on this?",
+      "parentUuid": "6eaa8f54_a6666d4c",
+      "revId": "4e5d79ef50c306494a7c044653f3ad21015e8e1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
