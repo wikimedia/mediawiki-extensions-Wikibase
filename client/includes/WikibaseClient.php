@@ -485,10 +485,15 @@ final class WikibaseClient {
 		$dataTypeDefinitions = $wgWBClientDataTypes;
 		Hooks::run( 'WikibaseClientDataTypes', array( &$dataTypeDefinitions ) );
 
+		$settings = new SettingsArray( $wgWBClientSettings );
+
 		return new self(
-			new SettingsArray( $wgWBClientSettings ),
+			$settings,
 			$wgContLang,
-			new DataTypeDefinitions( $dataTypeDefinitions )
+			new DataTypeDefinitions(
+				$dataTypeDefinitions,
+				$settings->getSetting( 'disabledDataTypes' )
+			)
 		);
 	}
 

@@ -123,6 +123,18 @@ return call_user_func( function() {
 		// repo and clients for multiwiki setups.
 		'sharedCacheType' => $GLOBALS['wgMainCacheType'],
 
+		/**
+		 * List of data types (by data type id) not enabled on the wiki.
+		 * This setting is intended to aid with deployment of new data types
+		 * or on new Wikibase installs without items and properties yet.
+		 *
+		 * This setting should be consistent with the corresponding setting on the client.
+		 *
+		 * WARNING: Disabling a data type after it is in use is dangerous
+		 * and might break items.
+		 */
+		'disabledDataTypes' => array(),
+
 		// Special non-canonical languages and their BCP 47 mappings
 		// Based on: https://meta.wikimedia.org/wiki/Special_language_codes
 		'canonicalLanguageCodes' => array(
