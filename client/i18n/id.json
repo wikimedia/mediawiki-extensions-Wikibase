@@ -4,7 +4,8 @@
 			"Iwan Novirion",
 			"Kenrick95",
 			"Snidata",
-			"MF-Warburg"
+			"MF-Warburg",
+			"Beeyan"
 		]
 	},
 	"wikibase-client-desc": "Klien untuk ekstensi Wikibase",
@@ -44,6 +45,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Anda harus masuk log",
 	"wikibase-linkitem-not-loggedin": "Anda harus masuk log pada wiki ini dan pada [$1 pusat penyimpanan data] untuk menggunakan fitur ini.",
 	"wikibase-linkitem-success-link": "Halaman telah berhasil ditautkan. Anda dapat menemukan item berisi tautan tersebut pada [$1 pusat penyimpanan data] kami.",
+	"wikibase-limitreport-entities-accessed": "Jumlah entitas Wikibase yang termuat",
 	"wikibase-property-notfound": "Properti $1 tidak ditemukan.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sembunyikan",

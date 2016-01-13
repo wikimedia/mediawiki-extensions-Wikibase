@@ -3,11 +3,12 @@
 		"authors": [
 			"Farras",
 			"Iwan Novirion",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Beeyan"
 		]
 	},
 	"wikibase-lib-desc": "Menangani fungsi umum untuk Wikibase dan ekstensi klien Wikibase",
-	"specialpages-group-wikibase": "Penyimpanan Wikibase",
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-error-unexpected": "Terjadi kesalahan tak terduga.",
 	"wikibase-error-save-generic": "Masalah terjadi saat mencoba untuk melakukan Simpan dan karenanya perubahan Anda tidak dapat diselesaikan.",
 	"wikibase-error-remove-generic": "Masalah terjadi saat mencoba untuk melakukan Hapus dan karenanya perubahan Anda tidak dapat diselesaikan.",
