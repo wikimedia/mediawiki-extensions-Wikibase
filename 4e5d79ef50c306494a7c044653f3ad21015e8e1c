@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_a6666d4c",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-13T09:49:09Z",
+      "side": 1,
+      "message": "But null and 0 do mean different things. Null means \"unknown\". 0 means \"very precise\".\n\nThis should either change type (from \"decimal\" to \"null\" or \"undefined\", if this is possible) or be wrapped in an if() to omit this line completely.",
+      "revId": "4e5d79ef50c306494a7c044653f3ad21015e8e1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
