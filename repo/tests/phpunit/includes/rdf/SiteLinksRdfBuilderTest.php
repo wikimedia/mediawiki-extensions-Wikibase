@@ -43,8 +43,8 @@ class SiteLinksRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	private function getTestData() {
 		if ( $this->testData === null ) {
 			$this->testData = new RdfBuilderTestData(
-				__DIR__ . "/../../data/rdf",
-				__DIR__ . "/../../data/rdf/SiteLinksRdfBuilder"
+				__DIR__ . '/../../data/rdf/entities',
+				__DIR__ . '/../../data/rdf/SiteLinksRdfBuilder'
 			);
 		}
 

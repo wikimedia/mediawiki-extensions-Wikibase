@@ -64,7 +64,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	private function getTestData() {
 		return new RdfBuilderTestData(
-			__DIR__ . '/../../data/rdf',
+			__DIR__ . '/../../data/rdf/entities',
 			__DIR__ . '/../../data/rdf/RdfDumpGenerator'
 		);
 	}
