@@ -9,7 +9,6 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
-use Iterator;
 use Title;
 use Traversable;
 use UnexpectedValueException;
@@ -98,7 +97,7 @@ class AffectedPagesFinder {
 	 *
 	 * @param Change $change
 	 *
-	 * @return Iterator of PageEntityUsage
+	 * @return ArrayIterator of PageEntityUsage
 	 */
 	public function getAffectedUsagesByPage( Change $change ) {
 		if ( $change instanceof EntityChange ) {
@@ -179,7 +178,7 @@ class AffectedPagesFinder {
 	 *
 	 * @param EntityChange $change
 	 *
-	 * @return Iterator of PageEntityUsages
+	 * @return Traversable of PageEntityUsages
 	 */
 	private function getAffectedPages( EntityChange $change ) {
 		$entityId = $change->getEntityId();
@@ -279,7 +278,7 @@ class AffectedPagesFinder {
 	 *
 	 * @param Traversable $usages A traversable of PageEntityUsages.
 	 *
-	 * @return Iterator of PageEntityUsages
+	 * @return ArrayIterator of PageEntityUsages
 	 */
 	private function filterUpdates( Traversable $usages ) {
 		$titlesToUpdate = array();

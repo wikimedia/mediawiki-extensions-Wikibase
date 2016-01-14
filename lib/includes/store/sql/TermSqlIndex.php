@@ -5,7 +5,6 @@ namespace Wikibase;
 use DatabaseBase;
 use DBAccessBase;
 use InvalidArgumentException;
-use Iterator;
 use MWException;
 use Traversable;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -907,7 +906,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * @param string[]|array[] $textsByLanguage A list of texts, or a list of lists of texts (keyed
-	 * by language on the top level).
+	 *  by language on the top level).
 	 * @param string[] $types
 	 *
 	 * @throws InvalidArgumentException
