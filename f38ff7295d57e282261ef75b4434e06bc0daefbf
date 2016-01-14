@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_d141dcac",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-01-14T19:00:20Z",
+      "side": 1,
+      "message": "Original value as stated in the database is useless for RDF users. They would need something to work with set of coordinates, and \"null\" is not going to work for them - they\u0027d have to write additional parsing code to weed out these nulls, as no geo-data system is going to accept the value of \"null\". In fact, this value is explicitly treated as broken by the PHP code (try editing such coordinate - you\u0027ll get 1/3600). So we need to give the users something useful there, not \"what is in the database\" - RDF is not meant to be a database dump.",
+      "parentUuid": "6eaa8f54_c31a721b",
+      "revId": "f38ff7295d57e282261ef75b4434e06bc0daefbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_8310faf8",
         "filename": "repo/tests/phpunit/includes/rdf/Values/GlobeCoordinateRdfBuilderTest.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2016-01-14T08:40:12Z",
       "side": 1,
       "message": "Why should this be 0.00027777777777778 when the original data states 0?",
+      "revId": "f38ff7295d57e282261ef75b4434e06bc0daefbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_511decc5",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/GlobeCoordinateRdfBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-01-14T19:00:20Z",
+      "side": 1,
+      "message": "Original data does not state 0. It states null. And, you were not ok with 0 either as I remember?",
+      "parentUuid": "6eaa8f54_8310faf8",
       "revId": "f38ff7295d57e282261ef75b4434e06bc0daefbf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
