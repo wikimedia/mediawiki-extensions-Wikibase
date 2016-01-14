@@ -9,6 +9,7 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EditEntityFactory;
@@ -128,11 +129,11 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return bool
 	 */
-	private function isAllowedToChangeTerms( Entity $entity ) {
+	private function isAllowedToChangeTerms( EntityDocument $entity ) {
 		$action = $entity->getType() . '-term';
 
 		if ( !$this->getUser()->isAllowed( $action ) ) {
@@ -146,11 +147,11 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::getFormElements
 	 *
-	 * @param Entity|null $entity
+	 * @param EntityDocument|null $entity
 	 *
 	 * @return string HTML
 	 */
-	protected function getFormElements( Entity $entity = null ) {
+	protected function getFormElements( EntityDocument $entity = null ) {
 		if ( $entity !== null && $this->languageCode !== null ) {
 			$languageName = Language::fetchLanguageName(
 				$this->languageCode, $this->getLanguage()->getCode()
