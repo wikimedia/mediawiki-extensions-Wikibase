@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_c31a721b",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-14T08:40:12Z",
+      "side": 1,
+      "message": "I don\u0027t think the formatters pragmatic default can be used here. Users of this RDF dump do not expect a formatted value here. They expect the original value as stated in the database. Which is \"null\" or \"undefined\". Not \"1 second\". This is still misleading, even with the additional \"auto\" hint.\n\nI still think this must be omitted. At least set it to 0.",
+      "revId": "f38ff7295d57e282261ef75b4434e06bc0daefbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_8310faf8",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/GlobeCoordinateRdfBuilderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-14T08:40:12Z",
+      "side": 1,
+      "message": "Why should this be 0.00027777777777778 when the original data states 0?",
+      "revId": "f38ff7295d57e282261ef75b4434e06bc0daefbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
