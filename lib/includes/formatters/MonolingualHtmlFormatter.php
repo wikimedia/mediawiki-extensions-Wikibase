@@ -45,11 +45,9 @@ class MonolingualHtmlFormatter extends ValueFormatterBase {
 			throw new InvalidArgumentException( 'Data value type mismatch. Expected a MonolingualTextValue.' );
 		}
 
-		$userLanguage = $this->getOption( ValueFormatter::OPT_LANG );
-
 		$text = $value->getText();
 		$languageCode = $value->getLanguageCode();
-		$languageName = $this->languageNameLookup->getName( $languageCode, $userLanguage );
+		$languageName = $this->languageNameLookup->getName( $languageCode );
 
 		$msg = wfMessage( 'wikibase-monolingualtext' )->params(
 			wfEscapeWikiText( $text ),

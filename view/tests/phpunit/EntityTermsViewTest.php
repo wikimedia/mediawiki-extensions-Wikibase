@@ -49,8 +49,8 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
 			->method( 'getName' )
-			->will( $this->returnCallback( function( $languageCode, $inLanguage = null ) {
-				return "<LANGUAGENAME-$languageCode-IN-$inLanguage>";
+			->will( $this->returnCallback( function( $languageCode ) {
+				return "<LANGUAGENAME-$languageCode>";
 			} ) );
 
 		return new EntityTermsView(
@@ -232,7 +232,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 
 		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
 		$this->assertContains( '&lt;LOCALURL&gt;', $html );
-		$this->assertContains( '&lt;LANGUAGENAME-en-IN-qqx&gt;', $html );
+		$this->assertContains( '&lt;LANGUAGENAME-en&gt;', $html );
 		$this->assertContains( '&lt;LABEL&gt;', $html );
 		$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
 		$this->assertContains( '&lt;ALIAS1&gt;', $html );
