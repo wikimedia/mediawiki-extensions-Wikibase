@@ -122,16 +122,6 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		return $entityId->getSerialization() . $separator . $undefinedInfo;
 	}
 
-	/**
-	 * @param string $languageCode
-	 * @param string $inLanguage
-	 *
-	 * @return string
-	 */
-	private function getLanguageName( $languageCode, $inLanguage ) {
-		return $this->languageNameLookup->getName( $languageCode, $inLanguage );
-	}
-
 	private function getHtmlForFallbackIndicator( TermFallback $term ) {
 		$requestedLanguage = $term->getLanguageCode();
 		$actualLanguage = $term->getActualLanguageCode();
@@ -148,8 +138,8 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			return '';
 		}
 
-		$sourceLanguageName = $this->getLanguageName( $sourceLanguage, $requestedLanguage );
-		$actualLanguageName = $this->getLanguageName( $actualLanguage, $requestedLanguage );
+		$sourceLanguageName = $this->languageNameLookup->getName( $sourceLanguage );
+		$actualLanguageName = $this->languageNameLookup->getName( $actualLanguage );
 
 		// Generate indicator text
 		if ( $isInSourceLanguage ) {

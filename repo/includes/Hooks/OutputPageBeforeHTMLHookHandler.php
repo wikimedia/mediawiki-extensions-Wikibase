@@ -91,6 +91,8 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @return OutputPageBeforeHTMLHookHandler
 	 */
 	public static function newFromGlobalState() {
+		global $wgLang;
+
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
@@ -101,7 +103,7 @@ class OutputPageBeforeHTMLHookHandler {
 			$wikibaseRepo->getTermsLanguages(),
 			$entityIdParser,
 			$wikibaseRepo->getEntityRevisionLookup(),
-			new LanguageNameLookup(),
+			new LanguageNameLookup( $wgLang->getCode() ),
 			$entityContentFactory
 		);
 	}

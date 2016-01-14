@@ -52,8 +52,8 @@ class LanguageNameLookupTest extends PHPUnit_Framework_TestCase {
 			$this->markTestSkipped( 'CLDR extension required for full language name support' );
 		}
 
-		$languageNameLookup = new LanguageNameLookup();
-		$name = $languageNameLookup->getName( $lang, $in );
+		$languageNameLookup = new LanguageNameLookup( $in );
+		$name = $languageNameLookup->getName( $lang );
 		$this->assertSame( $expected, $name );
 	}
 
