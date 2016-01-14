@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_ac2c03ab",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2016-01-14T21:05:16Z",
+      "side": 1,
+      "message": "0 is more likely more wrong than 1/3600.\n\nNothing except defined things like the equator have absolute precision. Related here is the future changes for auto precision handling on quantities: https://phabricator.wikimedia.org/T115269 . A consumer of RDF data should have a way to know the guessed precision we work with. We already decided for dates and quantities that conversion is added to the output so a consumer that needs these would not need the code to come up with that guess.",
+      "parentUuid": "6eaa8f54_d141dcac",
+      "revId": "f38ff7295d57e282261ef75b4434e06bc0daefbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_8310faf8",
         "filename": "repo/tests/phpunit/includes/rdf/Values/GlobeCoordinateRdfBuilderTest.php",
         "patchSetId": 8
