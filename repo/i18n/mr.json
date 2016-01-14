@@ -83,6 +83,7 @@
 	"wikibase-entityselector-more": "अधिक",
 	"wikibase-anonymouseditwarning": "ईशारा:आपण सनोंद-प्रवेशित नाहीत.आपला अंकपत्ता याच्या संपादनाच्या इतिहासात नोंदला जाईल.",
 	"wikibase-move-error": "माहिती(डाटा) नामविश्वात असलेली पाने आपण (दुसरीकडे) स्थानांतरीत करू शकत नाही व त्यात आपण (इतर) पाने स्थानांतरीत करू शकत नाही.",
+	"wikibase-validator-no-such-media": "[https://commons.wikimedia.org/ विकिमिडिया कॉमन्सवर] \"$1\" ही संचिका अस्तित्वात नाही.",
 	"special-itembytitle": "शीर्षकानुसार कलम",
 	"wikibase-itembytitle-lookup-fieldset": "कलमांना संकेतस्थळ व शीर्षकांनुसार शोधा",
 	"wikibase-itembytitle-lookup-site": "संकेतस्थळ:",
