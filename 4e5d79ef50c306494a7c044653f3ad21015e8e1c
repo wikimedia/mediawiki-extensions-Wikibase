@@ -34,6 +34,24 @@
       "revId": "4e5d79ef50c306494a7c044653f3ad21015e8e1c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_6315bee8",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-14T08:40:03Z",
+      "side": 1,
+      "message": "Not sure what you want to hear. \"Null\" is \"no precision\", \"undefined\", \"unspecified\", \"unknown\". The number 0 literally means 0 degrees. What else could it mean?",
+      "parentUuid": "6eaa8f54_7f4b1888",
+      "revId": "4e5d79ef50c306494a7c044653f3ad21015e8e1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
