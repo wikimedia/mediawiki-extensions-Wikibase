@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_bcdaf0ea",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-15T15:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_86f2dfdd",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_86197f29",
         "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_1cd0e4ca",
+        "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-15T15:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_86197f29",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_46138705",
         "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2015-12-17T13:47:04Z",
       "side": 1,
       "message": "\"from the mock DataTypeFactory\".",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_dcd56cbb",
+        "filename": "lib/tests/phpunit/formatters/PropertyValueSnakFormatterTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-15T15:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_46138705",
       "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_9cdb74ed",
+        "filename": "repo/includes/Validators/SnakValidator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-15T15:55:52Z",
+      "side": 1,
+      "message": "Not really. But it was plointles to run the validators for an UnDeserializableValue. The control flow is easier to follow now.",
+      "parentUuid": "6eaa8f54_c6e69713",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_06c4af67",
         "filename": "repo/includes/specials/SpecialNewProperty.php",
         "patchSetId": 5
@@ -98,6 +170,24 @@
       "writtenOn": "2015-12-17T13:47:04Z",
       "side": 1,
       "message": "Ouch, this is a bugfix. Shouldn\u0027t this be in a separate patch?",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_5cf17c64",
+        "filename": "repo/includes/specials/SpecialNewProperty.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-15T15:55:52Z",
+      "side": 1,
+      "message": "Could be. But it fits the description of this change: handle non-existing data types gracefully (instead of dying with an exception). No I\u0027d keep it in unless there is a good reason to split it out.",
+      "parentUuid": "6eaa8f54_06c4af67",
       "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_1ce784a8",
+        "filename": "repo/tests/phpunit/includes/Validators/SnakValidatorTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-15T15:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_c6bd37d3",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_06ab4f87",
         "filename": "view/src/PropertyView.php",
         "patchSetId": 5
@@ -132,6 +240,24 @@
       "writtenOn": "2015-12-17T13:47:04Z",
       "side": 1,
       "message": "I would not wrap the whole getHtmlForDataType() into the try-catch. This will also suppress the section heading. Please refactor this so that the HTML is the same, and only the data type label is replaced with the red error message.\n\nThis also misses a test.",
+      "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9cf29463",
+        "filename": "view/src/PropertyView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-15T15:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_06ab4f87",
       "revId": "6b1cd4315b512393b4eb7d937fbf5851ed50c652",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
