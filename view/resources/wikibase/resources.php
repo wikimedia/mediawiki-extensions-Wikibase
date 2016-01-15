@@ -57,6 +57,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.PageImage' => $moduleTemplate + array(
+				'scripts' => array(
+						'../lib/smartcrop.js',
+						'wikibase.PageImage.js',
+				),
+				'dependencies' => array(
+						'wikibase'
+			)
+		),
 		'wikibase.templates' => $moduleTemplate + array(
 			'class' => 'Wikibase\View\Module\TemplateModule',
 			'scripts' => 'templates.js',
