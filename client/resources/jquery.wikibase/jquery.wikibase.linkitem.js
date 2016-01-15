@@ -136,7 +136,7 @@ $.widget( 'wikibase.linkitem', {
 		var userLogin = this._linkRepoTitle( 'Special:UserLogin' );
 		$( '<div>' )
 		.dialog( {
-			title: mw.msg( 'wikibase-linkitem-not-loggedin-title' ),
+			title: mw.message( 'wikibase-linkitem-not-loggedin-title' ).escaped(),
 			width: 400,
 			height: 200,
 			resizable: true
