@@ -176,7 +176,7 @@ $.widget( 'wikibase.linkitem', {
 				this.element.show();
 				this._trigger( 'dialogclose' );
 			}, this ) )
-			.append( $( '<p>' ) .text( mw.message( 'wikibase-linkitem-selectlink' ).escaped() ) )
+			.append( $( '<p>' ).text( mw.msg( 'wikibase-linkitem-selectlink' ) ) )
 			.append( this._createSiteLinkForm() );
 
 		this.$goButton = $( '#wbclient-linkItem-goButton' );
