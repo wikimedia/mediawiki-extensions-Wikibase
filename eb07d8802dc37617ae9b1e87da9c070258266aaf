@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_69def845",
+        "filename": "repo/includes/Validators/NumberValidator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-01-15T07:22:16Z",
+      "side": 1,
+      "message": "Agree",
+      "parentUuid": "6eaa8f54_c9029a0c",
+      "revId": "eb07d8802dc37617ae9b1e87da9c070258266aaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_69036610",
         "filename": "repo/tests/phpunit/includes/Validators/TestValidator.php",
         "patchSetId": 1
