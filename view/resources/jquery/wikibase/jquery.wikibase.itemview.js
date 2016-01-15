@@ -42,6 +42,12 @@ $.widget( 'wikibase.itemview', PARENT, {
 	_create: function() {
 		this._createEntityview();
 
+		var pageImage = new wikibase.PageImage();
+
+		pageImage.getPageImage().done(function( element ){
+			$('.wikibase-title').append( element );
+		});
+
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element );
 		if ( this.$statements.length === 0 ) {
 			this.$statements = $( '<div/>' ).appendTo( this.element );
