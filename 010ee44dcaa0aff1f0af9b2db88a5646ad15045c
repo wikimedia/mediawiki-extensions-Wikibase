@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_ff1b7a70",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2016-01-15T17:25:15Z",
+      "side": 1,
+      "message": "Why is it \"unknown\" here and \"bad\" in lib?",
+      "revId": "010ee44dcaa0aff1f0af9b2db88a5646ad15045c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
