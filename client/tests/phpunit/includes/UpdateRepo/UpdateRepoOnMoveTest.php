@@ -78,7 +78,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	 * @return JobQueueGroup
 	 */
 	private function getJobQueueGroupMock() {
-		$jobQueueGroupMock = $this->getMockBuilder( '\JobQueueGroup' )
+		$jobQueueGroupMock = $this->getMockBuilder( 'JobQueueGroup' )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -93,7 +93,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 
 		// Use JobQueueRedis over here, as mocking abstract classes sucks
 		// and it doesn't matter anyway
-		$jobQueue = $this->getMockBuilder( '\JobQueueRedis' )
+		$jobQueue = $this->getMockBuilder( 'JobQueueRedis' )
 			->disableOriginalConstructor()
 			->getMock();
 

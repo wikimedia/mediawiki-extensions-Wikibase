@@ -45,7 +45,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getResultBuilder( ApiResult $result, $addMetaData = false ) {
-		$mockTitle = $this->getMockBuilder( '\Title' )
+		$mockTitle = $this->getMockBuilder( 'Title' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mockTitle->expects( $this->any() )
@@ -58,12 +58,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'MockPrefixedText' ) );
 
-		$mockEntityTitleLookup = $this->getMock( '\Wikibase\Lib\Store\EntityTitleLookup' );
+		$mockEntityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$mockEntityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $mockTitle ) );
 
-		$mockPropertyDataTypeLookup = $this->getMock( '\Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$mockPropertyDataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $id ) {

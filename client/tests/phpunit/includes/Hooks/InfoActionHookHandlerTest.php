@@ -79,7 +79,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return InfoActionHookHandler
 	 */
 	private function newHookHandler( $enabled, $entityId ) {
-		$namespaceChecker = $this->getMockBuilder( '\Wikibase\NamespaceChecker' )
+		$namespaceChecker = $this->getMockBuilder( 'Wikibase\NamespaceChecker' )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -87,7 +87,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'isWikibaseEnabled' )
 			->will( $this->returnValue( $enabled ) );
 
-		$repoLinker = $this->getMockBuilder( '\Wikibase\Client\RepoLinker' )
+		$repoLinker = $this->getMockBuilder( 'Wikibase\Client\RepoLinker' )
 			->disableOriginalConstructor()
 			->getMock();
 

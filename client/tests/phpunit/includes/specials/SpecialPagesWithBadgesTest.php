@@ -46,7 +46,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 			new ItemId( 'Q456' )
 		);
 
-		$labelDescriptionLookupFactory = $this->getMockBuilder( '\Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory' )
+		$labelDescriptionLookupFactory = $this->getMockBuilder( 'Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 		$labelDescriptionLookupFactory->expects( $this->once() )

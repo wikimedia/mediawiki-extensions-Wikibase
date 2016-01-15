@@ -20,7 +20,7 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 * Extremely simple test making sure this isn't going to blow up.
 	 */
 	public function testDoSchemaUpdate() {
-		$store = $this->getMock( '\Wikibase\Store' );
+		$store = $this->getMock( 'Wikibase\Store' );
 
 		$db = $this->getMockBuilder( 'DatabaseMysql' )
 			->disableOriginalConstructor()

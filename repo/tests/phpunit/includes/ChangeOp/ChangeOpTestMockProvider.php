@@ -158,7 +158,7 @@ class ChangeOpTestMockProvider {
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getMockPropertyDataTypeLookup() {
-		$mock = $this->getMock( '\Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( PHPUnit_Framework_TestCase::returnValue( 'string' ) );

@@ -60,7 +60,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 * @return Title|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	public function getMockTitle() {
-		$mock = $this->getMockBuilder( '\Title' )
+		$mock = $this->getMockBuilder( 'Title' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )

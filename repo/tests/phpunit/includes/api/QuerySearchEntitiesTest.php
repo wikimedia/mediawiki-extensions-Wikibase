@@ -69,7 +69,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	 * @return Title|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	public function getMockTitle() {
-		$mock = $this->getMockBuilder( '\Title' )
+		$mock = $this->getMockBuilder( 'Title' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -115,7 +115,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	 * @return ApiPageSet|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockApiPageSet( array $expected ) {
-		$mock = $this->getMockBuilder( '\ApiPageSet' )
+		$mock = $this->getMockBuilder( 'ApiPageSet' )
 			->disableOriginalConstructor()
 			->getMock();
 

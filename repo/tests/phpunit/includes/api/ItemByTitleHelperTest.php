@@ -25,7 +25,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	public function getSiteStoreMock() {
 		$dummySite = new MediaWikiSite();
 
-		$siteStoreMock = $this->getMockBuilder( '\SiteStore' )
+		$siteStoreMock = $this->getMockBuilder( 'SiteStore' )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -58,7 +58,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookupMock( $itemId ) {
-		$siteLinkLookupMock = $this->getMockBuilder( '\Wikibase\Lib\Store\SiteLinkLookup' )
+		$siteLinkLookupMock = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkLookup' )
 			->disableOriginalConstructor()
 			->getMock();
 

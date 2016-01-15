@@ -17,7 +17,7 @@ use Wikibase\Lib\Serialization\CallbackFactory;
 class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 
 	private function getPropertyDataTypeLookup() {
-		$mock = $this->getMock( '\Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
 
 		$mock->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )

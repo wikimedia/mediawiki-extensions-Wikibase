@@ -40,7 +40,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 		array $specialGroups = array(),
 		BagOStuff $cache = null
 	) {
-		$siteStore = $this->getMock( '\SiteStore' );
+		$siteStore = $this->getMock( 'SiteStore' );
 		$siteStore->expects( $this->any() )
 			->method( 'getSites' )
 			->will( $this->returnValue( new SiteList( $sites ) ) );

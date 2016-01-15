@@ -179,7 +179,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 	 */
 	private function getMockPropertyDataTypeLookup() {
 		$mockDataTypeLookup = $this->getMock(
-			'\Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup'
+			'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup'
 		);
 		$mockDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )

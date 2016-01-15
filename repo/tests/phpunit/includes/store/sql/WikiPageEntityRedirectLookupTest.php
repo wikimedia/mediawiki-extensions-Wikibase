@@ -119,7 +119,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	}
 
 	private function getMockEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( '\Wikibase\Lib\Store\EntityTitleLookup' );
+		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )

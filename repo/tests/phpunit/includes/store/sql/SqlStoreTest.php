@@ -26,7 +26,7 @@ class SqlStoreTest extends MediaWikiTestCase {
 			$contentCodec,
 			$this->getMock( 'Wikibase\DataModel\Entity\EntityIdParser' ),
 			$this->getMock( 'Wikibase\Store\EntityIdLookup' ),
-			$this->getMock( '\Wikibase\Lib\Store\EntityTitleLookup' )
+			$this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' )
 		);
 	}
 
