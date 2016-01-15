@@ -4,6 +4,40 @@
 	var PARENT = vv.experts.StringValue;
 
 	/**
+	 * @ignore
+	 *
+	 * @return {Object[]} [{ value: <{number}>, label: <{string}>}, ...]
+	 */
+	function getPrecisionValues() {
+		var precisionValues = [],
+			dayPrecision = TimeValue.getPrecisionById( 'DAY' );
+		$.each( TimeValue.PRECISIONS, function( precisionValue, precision ) {
+			if ( precisionValue <= dayPrecision ) {
+				// TODO: Remove this check as soon as time values are supported.
+				precisionValues.unshift( { value: precisionValue, label: precision.text } );
+			}
+		} );
+		return precisionValues;
+	}
+
+	/**
+	 * @ignore
+	 *
+	 * @param {util.MessageProvider} messageProvider
+	 * @return {Object[]} [{ value: <{string}>, label: <{string}>}, ...]
+	 */
+	function getCalendarValues( messageProvider ) {
+		var calendarValues = [];
+		$.each( TimeValue.CALENDARS, function( key, uri ) {
+			var label = messageProvider.getMessage(
+				'valueview-expert-timevalue-calendar-' + key.toLowerCase()
+			) || key.toLowerCase();
+			calendarValues.push( { value: uri, label: label } );
+		} );
+		return calendarValues;
+	}
+
+	/**
 	 * `Valueview` expert handling input of `Time` values.
 	 * @class jQuery.valueview.experts.TimeInput
 	 * @extends jQuery.valueview.experts.StringValue
@@ -151,39 +185,5 @@
 			return options;
 		}
 	} );
-
-	/**
-	 * @ignore
-	 *
-	 * @return {Object[]} [{ value: <{number}>, label: <{string}>}, ...]
-	 */
-	function getPrecisionValues() {
-		var precisionValues = [],
-			dayPrecision = TimeValue.getPrecisionById( 'DAY' );
-		$.each( TimeValue.PRECISIONS, function( precisionValue, precision ) {
-			if ( precisionValue <= dayPrecision ) {
-				// TODO: Remove this check as soon as time values are supported.
-				precisionValues.unshift( { value: precisionValue, label: precision.text } );
-			}
-		} );
-		return precisionValues;
-	}
-
-	/**
-	 * @ignore
-	 *
-	 * @param {util.MessageProvider} messageProvider
-	 * @return {Object[]} [{ value: <{string}>, label: <{string}>}, ...]
-	 */
-	function getCalendarValues( messageProvider ) {
-		var calendarValues = [];
-		$.each( TimeValue.CALENDARS, function( key, uri ) {
-			var label = messageProvider.getMessage(
-				'valueview-expert-timevalue-calendar-' + key.toLowerCase()
-			) || key.toLowerCase();
-			calendarValues.push( { value: uri, label: label } );
-		} );
-		return calendarValues;
-	}
 
 }( jQuery, jQuery.valueview, dataValues.TimeValue ) );

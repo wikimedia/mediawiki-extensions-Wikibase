@@ -15,6 +15,82 @@
 	 */
 	var inputEvent = null;
 
+	var triggeredHandlers = [];
+
+	/**
+	 * Checks whether a handler with a given event id has already been triggered.
+	 * @ignore
+	 *
+	 * @param {string} eventId
+	 * @param {number} index Numeric index within the list of handlers attached with the same
+	 *        event id.
+	 */
+	function alreadyTriggered( eventId, index ) {
+		for ( var i = 0; i < triggeredHandlers.length; i++ ) {
+			if ( eventId === triggeredHandlers[i].id && index === triggeredHandlers[i].index ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Returns the value of a jQuery element or null if the element does not feature retrieving its
+	 * value via .val().
+	 * @ignore
+	 *
+	 * @param {jQuery} $elem
+	 * @return {*}
+	 */
+	function getValue( $elem ) {
+		// If the native element does not feature getting its value, an error is caused in the
+		// jQuery mechanism trying to retrieve the value.
+		try {
+			return $elem.val();
+		} catch ( e ) {
+			return null;
+		}
+	}
+
+	/**
+	 * Assigns a namespace to a string of one or more event names separated by a space character.
+	 * @ignore
+	 *
+	 * @param {string} eventNames
+	 * @param {string} namespace
+	 * @return {string}
+	 */
+	function assignNamespace( eventNames, namespace ) {
+		var names = eventNames.split( ' ' ),
+			namespacedNames = [];
+
+		for ( var i = 0; i < names.length; i++ ) {
+			namespacedNames.push( names[i] + '.' + namespace );
+		}
+
+		return namespacedNames.join( ' ' );
+	}
+
+	/**
+	 * Returns a string of on or more event names to be used for detecting any instant changes of an
+	 * input box. This should be just 'input' in recent browsers.
+	 * @ignore
+	 *
+	 * @return {string}
+	 */
+	function getInputEvent() {
+		// IE (at least <= version 9) does not trigger input event when pressing backspace
+		// (version <= 8 does not support input event at all anyway)
+		if ( $.client.profile().name === 'msie' && $.client.profile().versionNumber >= 9 ) {
+			return 'input keyup';
+		}
+
+		var fallbackEvents = 'keyup keydown blur cut paste mousedown mouseup mouseout',
+			$input = $( '<input/>' ),
+			supported = 'oninput' in $input[0];
+		return ( supported ) ? 'input' : fallbackEvents;
+	}
+
 	/**
 	 * eachchange jQuery event
 	 *
@@ -141,81 +217,5 @@
 			return event;
 		}
 	};
-
-	var triggeredHandlers = [];
-
-	/**
-	 * Checks whether a handler with a given event id has already been triggered.
-	 * @ignore
-	 *
-	 * @param {string} eventId
-	 * @param {number} index Numeric index within the list of handlers attached with the same
-	 *        event id.
-	 */
-	function alreadyTriggered( eventId, index ) {
-		for ( var i = 0; i < triggeredHandlers.length; i++ ) {
-			if ( eventId === triggeredHandlers[i].id && index === triggeredHandlers[i].index ) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Returns the value of a jQuery element or null if the element does not feature retrieving its
-	 * value via .val().
-	 * @ignore
-	 *
-	 * @param {jQuery} $elem
-	 * @return {*}
-	 */
-	function getValue( $elem ) {
-		// If the native element does not feature getting its value, an error is caused in the
-		// jQuery mechanism trying to retrieve the value.
-		try {
-			return $elem.val();
-		} catch ( e ) {
-			return null;
-		}
-	}
-
-	/**
-	 * Assigns a namespace to a string of one or more event names separated by a space character.
-	 * @ignore
-	 *
-	 * @param {string} eventNames
-	 * @param {string} namespace
-	 * @return {string}
-	 */
-	function assignNamespace( eventNames, namespace ) {
-		var names = eventNames.split( ' ' ),
-			namespacedNames = [];
-
-		for ( var i = 0; i < names.length; i++ ) {
-			namespacedNames.push( names[i] + '.' + namespace );
-		}
-
-		return namespacedNames.join( ' ' );
-	}
-
-	/**
-	 * Returns a string of on or more event names to be used for detecting any instant changes of an
-	 * input box. This should be just 'input' in recent browsers.
-	 * @ignore
-	 *
-	 * @return {string}
-	 */
-	function getInputEvent() {
-		// IE (at least <= version 9) does not trigger input event when pressing backspace
-		// (version <= 8 does not support input event at all anyway)
-		if ( $.client.profile().name === 'msie' && $.client.profile().versionNumber >= 9 ) {
-			return 'input keyup';
-		}
-
-		var fallbackEvents = 'keyup keydown blur cut paste mousedown mouseup mouseout',
-			$input = $( '<input/>' ),
-			supported = 'oninput' in $input[0];
-		return ( supported ) ? 'input' : fallbackEvents;
-	}
 
 }( jQuery ) );

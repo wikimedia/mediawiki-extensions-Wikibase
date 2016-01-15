@@ -1,6 +1,11 @@
 # ValueView
 
-ValueView introduces the <code>jQuery.valueview</code> widget which may be used to display and edit data values (`DataValue` objects defined in the [DataValues](https://github.com/DataValues/DataValues) library and supported via the [DataValues JavaScript](https://github.com/wmde/DataValuesJavascript) package). The `jQuery.valueview` widget and its resources may be extended to support custom `DataValue` implementations.
+ValueView introduces the <code>jQuery.valueview</code> widget which may be used to display and edit
+data values (`DataValue` objects defined in the
+[DataValues](https://github.com/DataValues/DataValues) library and supported via the
+[DataValues JavaScript](https://github.com/wmde/DataValuesJavascript) package). The
+`jQuery.valueview` widget and its resources may be extended to support custom `DataValue`
+implementations.
 
 
 Recent changes can be found in the [release notes](RELEASE-NOTES.md).
@@ -9,19 +14,31 @@ Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 ### jQuery.valueview
 
-`jQuery.valueview` may be used to display and edit data values. While the widget's original constructor is located at `jQuery.valueview.valueview`, the widget should be instantiated via its bridge `jQuery.valueview`.
+`jQuery.valueview` may be used to display and edit data values. While the widget's original
+constructor is located at `jQuery.valueview.valueview`, the widget should be instantiated via its
+bridge `jQuery.valueview`.
 
 ### jQuery.valueview.Expert
 
-`jQuery.valueview.Expert`s are widgets that deal with editing `DataValue`s. An `Expert` provides the functionality to edit a specific `DataValue` (e.g. `StringValue`) or a `DataValue` suitable for a certain `DataType` (e.g. the `url` `DataType` which uses the `StringValue` for representation; see also [DataTypes](https://github.com/wmde/DataTypes) library). `jQuery.valueview.Expert` is the base constructor for such `Expert`s.
+`jQuery.valueview.Expert`s are widgets that deal with editing `DataValue`s. An `Expert` provides the
+functionality to edit a specific `DataValue` (e.g. `StringValue`) or a `DataValue` suitable for a
+certain `DataType` (e.g. the `url` `DataType` which uses the `StringValue` for representation; see
+also [DataTypes](https://github.com/wmde/DataTypes) library). `jQuery.valueview.Expert` is the base
+constructor for such `Expert`s.
 
 ### jQuery.valueview.ExpertExtender
 
-`jQuery.valueview.ExpertExtender` may be used to provide additional information and/or input elements while interacting with the `Expert`. The `ExpertExtender` may, for example, be used to provide a preview of how the parsed value will be displayed after saving (see `jQuery.ExpertExtender.Preview`). Options provided by the `ValueParser` corresponding to the `DataValue` being edited may be set using `jQuery.valueview.ExpertExtender.*` input elements added to the `ExpertExtender` instance.
+`jQuery.valueview.ExpertExtender` may be used to provide additional information and/or input
+elements while interacting with the `Expert`. The `ExpertExtender` may, for example, be used to
+provide a preview of how the parsed value will be displayed after saving (see
+`jQuery.ExpertExtender.Preview`). Options provided by the `ValueParser` corresponding to the
+`DataValue` being edited may be set using `jQuery.valueview.ExpertExtender.*` input elements added
+to the `ExpertExtender` instance.
 
 ### jQuery.valueview.ExpertStore
 
-`Expert`s are managed by `jQuery.valueview.ExpertStore` instance which provides its `Expert`s to `jQuery.valueview`.
+`Expert`s are managed by `jQuery.valueview.ExpertStore` instance which provides its `Expert`s to
+`jQuery.valueview`.
 
 ### jQuery.valueview.ViewState
 

@@ -2,6 +2,111 @@
 	'use strict';
 
 /**
+ * Rulers used for measuring the input content.
+ * @property {jQuery}
+ * @ignore
+ */
+var $rulerX, $rulerY;
+
+/**
+ * Initializes the rulers used for measuring the input content.
+ * @ignore
+ */
+function initRulers() {
+	if ( !$rulerX ) {
+		$rulerX = $( '<div/>' )
+			.css( {
+				width: 'auto',
+				whiteSpace: 'nowrap',
+				position: 'absolute',
+				top: '-9999px',
+				left: '-9999px',
+				visibility: 'hidden',
+				display: 'none'
+			} );
+	}
+
+	if ( !$rulerX.closest( 'body' ).length ) {
+		$rulerX.appendTo( 'body' );
+	}
+
+	if ( !$rulerY ) {
+		$rulerY = $( '<textarea style="min-height: 0!important; height: 0!important;"/>' )
+			.attr( 'tabindex', '-1' )
+			.css( {
+				position: 'absolute',
+				top: '-9999px',
+				left: '-9999px',
+				right: 'auto',
+				bottom: 'auto'
+			} );
+	}
+
+	if ( !$rulerY.closest( 'body' ).length ) {
+		$rulerY.appendTo( 'body' );
+	}
+}
+
+/**
+ * Destroys the rulers.
+ * @ignore
+ */
+function destroyRulers() {
+	if ( $rulerX ) {
+		$rulerX.remove();
+		$rulerX = null;
+	}
+	if ( $rulerY ) {
+		$rulerY.remove();
+		$rulerY.remove();
+	}
+}
+
+/**
+ * Copy styles that affect spacing from one element to another.
+ * @ignore
+ *
+ * @param {jQuery} $from
+ * @param {jQuery} $to
+ */
+function copySpaceAffectingStyles( $from, $to ) {
+	var stylesToCopy = [
+		'fontFamily',
+		'fontSize',
+		'fontWeight',
+		'fontStyle',
+		'letterSpacing',
+		'lineHeight',
+		'textTransform',
+		'wordSpacing',
+		'textIndent',
+		'overflowY',
+		'wordWrap'
+	];
+
+	for ( var i = 0; i < stylesToCopy.length; i++ ) {
+		$to.css( stylesToCopy[i], $from.css( stylesToCopy[i] ) );
+	}
+
+	// styles not being influenced by copying styles
+	$to.css( {
+		overflow: 'hidden',
+		overflowY: 'hidden'
+	} );
+}
+
+/**
+ * Escapes HTML entities.
+ * @ignore
+ *
+ * @param {string} text
+ * @return {string}
+ */
+function escaped( text ) {
+	return $( '<div/>' ).text( text ).html();
+}
+
+/**
  * Makes input or textarea elements automatically expand/contract their size according to their
  * input value while typing. Vertical resizing will of course work for textareas only.
  * The input/textarea element the plugin is initialized on needs to be in the DOM in order to be
@@ -361,110 +466,5 @@ $.extend( $.AutoExpandInput.prototype, {
 		}
 	}
 } );
-
-/**
- * Rulers used for measuring the input content.
- * @property {jQuery}
- * @ignore
- */
-var $rulerX, $rulerY;
-
-/**
- * Initializes the rulers used for measuring the input content.
- * @ignore
- */
-function initRulers() {
-	if ( !$rulerX ) {
-		$rulerX = $( '<div/>' )
-			.css( {
-				width: 'auto',
-				whiteSpace: 'nowrap',
-				position: 'absolute',
-				top: '-9999px',
-				left: '-9999px',
-				visibility: 'hidden',
-				display: 'none'
-			} );
-	}
-
-	if ( !$rulerX.closest( 'body' ).length ) {
-		$rulerX.appendTo( 'body' );
-	}
-
-	if ( !$rulerY ) {
-		$rulerY = $( '<textarea style="min-height: 0!important; height: 0!important;"/>' )
-			.attr( 'tabindex', '-1' )
-			.css( {
-				position: 'absolute',
-				top: '-9999px',
-				left: '-9999px',
-				right: 'auto',
-				bottom: 'auto'
-			} );
-	}
-
-	if ( !$rulerY.closest( 'body' ).length ) {
-		$rulerY.appendTo( 'body' );
-	}
-}
-
-/**
- * Destroys the rulers.
- * @ignore
- */
-function destroyRulers() {
-	if ( $rulerX ) {
-		$rulerX.remove();
-		$rulerX = null;
-	}
-	if ( $rulerY ) {
-		$rulerY.remove();
-		$rulerY.remove();
-	}
-}
-
-/**
- * Copy styles that affect spacing from one element to another.
- * @ignore
- *
- * @param {jQuery} $from
- * @param {jQuery} $to
- */
-function copySpaceAffectingStyles( $from, $to ) {
-	var stylesToCopy = [
-		'fontFamily',
-		'fontSize',
-		'fontWeight',
-		'fontStyle',
-		'letterSpacing',
-		'lineHeight',
-		'textTransform',
-		'wordSpacing',
-		'textIndent',
-		'overflowY',
-		'wordWrap'
-	];
-
-	for ( var i = 0; i < stylesToCopy.length; i++ ) {
-		$to.css( stylesToCopy[i], $from.css( stylesToCopy[i] ) );
-	}
-
-	// styles not being influenced by copying styles
-	$to.css( {
-		overflow: 'hidden',
-		overflowY: 'hidden'
-	} );
-}
-
-/**
- * Escapes HTML entities.
- * @ignore
- *
- * @param {string} text
- * @return {string}
- */
-function escaped( text ) {
-	return $( '<div/>' ).text( text ).html();
-}
 
 }( jQuery ) );

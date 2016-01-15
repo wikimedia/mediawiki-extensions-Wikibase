@@ -3,6 +3,71 @@
 
 	var PARENT = vv.experts.StringValue;
 
+	var PRECISIONS = [
+		10,
+		1,
+		0.1,
+		0.01,
+		0.001,
+		0.0001,
+		0.00001,
+		0.000001,
+		1 / 60,
+		1 / 3600,
+		1 / 36000,
+		1 / 360000,
+		1 / 3600000
+	];
+
+	/**
+	 * Rounds a given precision for being able to use it as internal "constant".
+	 * @ignore
+	 *
+	 * @param {number} precision
+	 * @return {number}
+	 */
+	function roundPrecision( precision ) {
+		return parseFloat( precision.toPrecision( 6 ) );
+	}
+
+	/**
+	 * Returns the original precision level for an unrounded precision.
+	 * @ignore
+	 *
+	 * @param {number} precision
+	 * @return {number|null}
+	 */
+	function getPrecisionSetting( precision ) {
+		var actualPrecision = null,
+			roundedPrecision = roundPrecision( precision );
+
+		$.each( PRECISIONS, function( i, precision ) {
+			if ( roundPrecision( precision ) === roundedPrecision ) {
+				actualPrecision = roundedPrecision;
+				return false;
+			}
+		} );
+
+		return actualPrecision;
+	}
+
+	/**
+	 * @ignore
+	 *
+	 * @return {Object[]}
+	 */
+	function getPrecisionValues() {
+		var precisionValues = [];
+		$.each( PRECISIONS, function( i, precision ) {
+			var label = Formatter.PRECISIONTEXT( precision );
+			precisionValues.unshift( {
+				value: roundPrecision( precision ),
+				label: label
+			} );
+		} );
+		return precisionValues;
+	}
+
 	/**
 	 * `Valueview` expert handling input of `GlobeCoordinate` values.
 	 * @class jQuery.valueview.experts.GlobeCoordinateValue
@@ -117,70 +182,5 @@
 			PARENT.prototype.destroy.call( this );
 		}
 	} );
-
-	/**
-	 * Rounds a given precision for being able to use it as internal "constant".
-	 * @ignore
-	 *
-	 * @param {number} precision
-	 * @return {number}
-	 */
-	function roundPrecision( precision ) {
-		return parseFloat( precision.toPrecision( 6 ) );
-	}
-
-	/**
-	 * Returns the original precision level for an unrounded precision.
-	 * @ignore
-	 *
-	 * @param {number} precision
-	 * @return {number|null}
-	 */
-	function getPrecisionSetting( precision ) {
-		var actualPrecision = null,
-			roundedPrecision = roundPrecision( precision );
-
-		$.each( PRECISIONS, function( i, precision ) {
-			if ( roundPrecision( precision ) === roundedPrecision ) {
-				actualPrecision = roundedPrecision;
-				return false;
-			}
-		} );
-
-		return actualPrecision;
-	}
-
-	/**
-	 * @ignore
-	 *
-	 * @return {Object[]}
-	 */
-	function getPrecisionValues() {
-		var precisionValues = [];
-		$.each( PRECISIONS, function( i, precision ) {
-			var label = Formatter.PRECISIONTEXT( precision );
-			precisionValues.unshift( {
-				value: roundPrecision( precision ),
-				label: label
-			} );
-		} );
-		return precisionValues;
-	}
-
-	var PRECISIONS = [
-		10,
-		1,
-		0.1,
-		0.01,
-		0.001,
-		0.0001,
-		0.00001,
-		0.000001,
-		1 / 60,
-		1 / 3600,
-		1 / 36000,
-		1 / 360000,
-		1 / 3600000
-	];
 
 }( jQuery, jQuery.valueview, globeCoordinate.Formatter ) );

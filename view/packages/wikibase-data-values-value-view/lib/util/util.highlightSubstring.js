@@ -4,6 +4,17 @@ this.util = this.util || {};
 	'use strict';
 
 /**
+ * Escapes a string to be used in a regular expression.
+ * @ignore
+ *
+ * @param {string} value
+ * @return {string}
+ */
+function escapeRegex( value ) {
+	return value.replace( /[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&' );
+}
+
+/**
  * "Highlights" matching characters in a string using HTML.
  *
  *     @example
@@ -84,16 +95,5 @@ util.highlightSubstring = function( substring, string, options ) {
 
 	return string;
 };
-
-/**
- * Escapes a string to be used in a regular expression.
- * @ignore
- *
- * @param {string} value
- * @return {string}
- */
-function escapeRegex( value ) {
-	return value.replace( /[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&' );
-}
 
 } )( util );

@@ -2,6 +2,72 @@ jQuery.fn.focusAt = ( function() {
 	'use strict';
 
 	/**
+	 * Calculates the position within a string relative to a string's start (0). Can take a position
+	 * relative to the strings start (positive number) or relative to the strings end (negative
+	 * number).
+	 * @ignore
+	 *
+	 * @param {number} relativePosition
+	 * @param {number} totalLength
+	 * @return {number}
+	 */
+	function calculateAbsolutePosition( relativePosition, totalLength ) {
+		if ( relativePosition < 0 ) {
+			relativePosition = totalLength + relativePosition;
+			return relativePosition < 0 ? 0 : relativePosition;
+		} else {
+			return relativePosition > totalLength ? totalLength : relativePosition;
+		}
+	}
+
+	/**
+	 * Helper which will normalize a given position or throw an error if it is an invalid one.
+	 * @ignore
+	 *
+	 * @param {number|string} position Either a number specifying the position or one of the strings
+	 *        "start" and "end".
+	 * @param {jQuery} $forElem
+	 * @return {number}
+	 *
+	 * @throws {Error} if position is not specified properly.
+	 */
+	function normalizePosition( position, $forElem ) {
+		var textLength = $forElem.val().length;
+
+		if ( typeof position === 'number' ) {
+			return calculateAbsolutePosition( position, textLength );
+		} else if ( position === 'end' ) {
+			return textLength; // behind last character
+		} else if ( position === 'start' ) {
+			return 0;
+		}
+		throw new Error( 'Focus Position has to be a number or string "start" or "end"' );
+	}
+
+	/**
+	 * Will set the caret to a given position within an input box.
+	 * (see http://stackoverflow.com/questions/512528/set-cursor-position-in-html-textbox)
+	 * @ignore
+	 *
+	 * @param {HTMLElement} elem
+	 * @param {number} caretPos
+	 */
+	function setCaretPosition( elem, caretPos ) {
+		var range;
+
+		if ( elem.createTextRange ) {
+			range = elem.createTextRange();
+			range.move( 'character', caretPos );
+			range.select();
+		} else {
+			elem.focus();
+			if ( elem.selectionStart !== undefined ) {
+				elem.setSelectionRange( caretPos, caretPos );
+			}
+		}
+	}
+
+	/**
 	 * `jQuery.focusAt` introduces a `focusAt` function to jQuery instances. This allows to focus an
 	 * element and set the caret to a certain position within the input element.
 	 *
@@ -39,72 +105,6 @@ jQuery.fn.focusAt = ( function() {
 		}
 		return this;
 	};
-
-	/**
-	 * Helper which will normalize a given position or throw an error if it is an invalid one.
-	 * @ignore
-	 *
-	 * @param {number|string} position Either a number specifying the position or one of the strings
-	 *        "start" and "end".
-	 * @param {jQuery} $forElem
-	 * @return {number}
-	 *
-	 * @throws {Error} if position is not specified properly.
-	 */
-	function normalizePosition( position, $forElem ) {
-		var textLength = $forElem.val().length;
-
-		if ( typeof position === 'number' ) {
-			return calculateAbsolutePosition( position, textLength );
-		} else if ( position === 'end' ) {
-			return textLength; // behind last character
-		} else if ( position === 'start' ) {
-			return 0;
-		}
-		throw new Error( 'Focus Position has to be a number or string "start" or "end"' );
-	}
-
-	/**
-	 * Calculates the position within a string relative to a string's start (0). Can take a position
-	 * relative to the strings start (positive number) or relative to the strings end (negative
-	 * number).
-	 * @ignore
-	 *
-	 * @param {number} relativePosition
-	 * @param {number} totalLength
-	 * @return {number}
-	 */
-	function calculateAbsolutePosition( relativePosition, totalLength ) {
-		if ( relativePosition < 0 ) {
-			relativePosition = totalLength + relativePosition;
-			return relativePosition < 0 ? 0 : relativePosition;
-		} else {
-			return relativePosition > totalLength ? totalLength : relativePosition;
-		}
-	}
-
-	/**
-	 * Will set the caret to a given position within an input box.
-	 * (see http://stackoverflow.com/questions/512528/set-cursor-position-in-html-textbox)
-	 * @ignore
-	 *
-	 * @param {HTMLElement} elem
-	 * @param {number} caretPos
-	 */
-	function setCaretPosition( elem, caretPos ) {
-		var range;
-
-		if ( elem.createTextRange ) {
-			range = elem.createTextRange();
-			range.move( 'character', caretPos );
-			range.select();
-		} else {
-			elem.focus();
-			if ( elem.selectionStart !== undefined ) {
-				elem.setSelectionRange( caretPos, caretPos );
-			}
-		}
-	}
 
 	return focusAt;
 

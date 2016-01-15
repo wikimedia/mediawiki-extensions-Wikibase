@@ -4,6 +4,18 @@ jQuery.valueview = jQuery.valueview || {};
 	'use strict';
 
 	/**
+	 * @ignore
+	 *
+	 * @param {Function} Expert
+	 * @throws {Error} if the provided argument is not a `jQuery.valueview.Expert` constructor.
+	 */
+	function assertIsExpertConstructor( Expert ) {
+		if ( !( $.isFunction( Expert ) && Expert.prototype instanceof $.valueview.Expert ) ) {
+			throw new Error( 'Invalid jQuery.valueview.Expert constructor' );
+		}
+	}
+
+	/**
 	 * Store managing `jQuery.valueview.Expert` instances.
 	 * @class jQuery.valueview.ExpertStore
 	 * @since 0.1
@@ -118,17 +130,5 @@ jQuery.valueview = jQuery.valueview || {};
 			return expert || this._DefaultExpert;
 		}
 	} );
-
-	/**
-	 * @ignore
-	 *
-	 * @param {Function} Expert
-	 * @throws {Error} if the provided argument is not a `jQuery.valueview.Expert` constructor.
-	 */
-	function assertIsExpertConstructor( Expert ) {
-		if ( !( $.isFunction( Expert ) && Expert.prototype instanceof $.valueview.Expert ) ) {
-			throw new Error( 'Invalid jQuery.valueview.Expert constructor' );
-		}
-	}
 
 }( jQuery ) );

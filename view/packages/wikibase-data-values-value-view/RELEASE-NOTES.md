@@ -1,9 +1,13 @@
 # ValueView release notes
 
-## 0.15.7 (dev)
+## 0.15.7 (2016-01-15)
 
-* Fixed `jQuery.ui.languagesuggester::getSelectedValue` to return `null` when the user changed the input's value and not yet selected a value.
-* Fixed `jQuery.valueview.ExpertExtender.LanguageSelector` to fall back on the language code when there's no label available.
+* Addded optional `visible` option to `jQuery.ui.toggler`.
+* Fixed `jQuery.ui.languagesuggester` not propagating updates.
+* Fixed `jQuery.ui.languagesuggester::getSelectedValue` to return `null` when the user changed the
+  input's value and not yet selected a value.
+* Fixed `jQuery.valueview.ExpertExtender.LanguageSelector` to fall back on the language code when
+  there's no label available.
 
 ## 0.15.6 (2015-11-04)
 
@@ -15,7 +19,8 @@
 
 ## 0.15.4 (2015-09-09)
 
-* `jQuery.valueview.experts.QuantityInput` extracts an optional `.wb-unit` node from the formatted value and passes it to the UnitSelector.
+* `jQuery.valueview.experts.QuantityInput` extracts an optional `.wb-unit` node from the formatted
+  value and passes it to the UnitSelector.
 * Both QuantityInput and UnitSelector use a different format in the `getUpstreamValue` callback.
 * `jQuery.ui.unitsuggester` now supports a `defaultSelectedUrl` option.
 
@@ -28,9 +33,11 @@
 ### Enhancements
 
 * `jQuery.valueview.expert.valueCharacteristics` gets the output format passed in.
-* `jQuery.valueview.experts.QuantityInput` explicitely asks `QuantityFormatter` to not apply rounding and units in plain text format.
+* `jQuery.valueview.experts.QuantityInput` explicitely asks `QuantityFormatter` to not apply
+  rounding and units in plain text format.
 * `jQuery.valueview.valueview` passes a `vocabularyLookupApiUrl` option to all experts.
-* `jQuery.valueview.experts.QuantityInput` and `jQuery.valueview.ExpertExtender.UnitSelector` now pass a `vocabularyLookupApiUrl` option to `jQuery.ui.unitsuggester`.
+* `jQuery.valueview.experts.QuantityInput` and `jQuery.valueview.ExpertExtender.UnitSelector` now
+  pass a `vocabularyLookupApiUrl` option to `jQuery.ui.unitsuggester`.
 * `jQuery.ui.unitsuggester` uses the `concepturi` from `wbsearchentities` results, if available.
 
 ## 0.15.1 (2015-08-20)
@@ -49,7 +56,9 @@
 ### Breaking changes
 
 * Removed deprecated constant `ValueView_VERSION`, use `VALUEVIEW_VERSION` instead.
-* Removed `jQuery.valueview.disable`, `jQuery.valueview.enable` and `jQuery.valueview.isDisabled`. These function were used to mock native `jQuery.Widget` functionality while adding a full `draw` cycle on top. `jQuery.valueview.draw` does not consider the state anymore.
+* Removed `jQuery.valueview.disable`, `jQuery.valueview.enable` and `jQuery.valueview.isDisabled`.
+  These function were used to mock native `jQuery.Widget` functionality while adding a full `draw`
+  cycle on top. `jQuery.valueview.draw` does not consider the state anymore.
 
 ### Enhancements
 
@@ -62,7 +71,8 @@
 
 ## 0.14.5 (2015-06-11)
 
-* Fixed `jQuery.valueview.ExpertExtender.CalendarHint` test broken due to DataValues JavaScript dependency update.
+* Fixed `jQuery.valueview.ExpertExtender.CalendarHint` test broken due to DataValues JavaScript
+  dependency update.
 
 ## 0.14.4 (2015-06-10)
 
@@ -111,14 +121,18 @@
 
 ### Breaking changes
 
-* `jQuery.valueview.ExpertExtender.LanguageSelector` constructor requires `utils.ContentLanguages` now.
+* `jQuery.valueview.ExpertExtender.LanguageSelector` constructor requires `utils.ContentLanguages`
+  now.
 
 ## 0.11.0 (2015-01-21)
 
-* `jQuery.ui.toggler`: Added parameter to `animation` event determining whether the toggler's subject will be visible or hidden.
-* `jQuery.ui.toggler`: Added `refresh` function to be able to reflect visibility changes to the toggler's subject that have been applied externally.
+* `jQuery.ui.toggler`: Added parameter to `animation` event determining whether the toggler's
+  subject will be visible or hidden.
+* `jQuery.ui.toggler`: Added `refresh` function to be able to reflect visibility changes to the
+  toggler's subject that have been applied externally.
 * `jQuery.ui.toggler`: Changed `_reflectVisibilityOnToggleIcon` to be private.
-* Dropped `javascript:void(0)` placeholders from `$.ui.toggler`, `$.ui.listrotator` and `$.ui.CalendarHint`.
+* Dropped `javascript:void(0)` placeholders from `$.ui.toggler`, `$.ui.listrotator` and
+  `$.ui.CalendarHint`.
 
 ### Bugfixes
 
@@ -142,21 +156,26 @@
 
 ### Breaking changes
 
-* `util.highlightSubstring`: Replaced `caseInsensitive` option with `caseSensitive` option defaulting to `false`.
+* `util.highlightSubstring`: Replaced `caseInsensitive` option with `caseSensitive` option
+  defaulting to `false`.
 * `$.ui.suggester`: Moved protected `_minTermLength` member to `options`.
 
 ### Enhancements
 
-* `$.ui.suggester`: Fixed input element being refocused when selecting a suggestion via keyboard input.
+* `$.ui.suggester`: Fixed input element being refocused when selecting a suggestion via keyboard
+  input.
 
 ## 0.8.1 (2014-11-07)
 
 ### Enhancements
 
-* `$.ui.ooMenu.CustomItem`: Added `setVisibility`, `setAction` and `setCssClass` functions. Visibility may be set to a static (boolean) value.
-* `$.valueview.draw` (`$.valueview.valueview.draw`), `$.valueview.drawContent` (`$.valueview.valueview.drawContent`) and `$.valueview.Expert.draw` return jQuery promises.
+* `$.ui.ooMenu.CustomItem`: Added `setVisibility`, `setAction` and `setCssClass` functions.
+  Visibility may be set to a static (boolean) value.
+* `$.valueview.draw` (`$.valueview.valueview.draw`), `$.valueview.drawContent`
+  (`$.valueview.valueview.drawContent`) and `$.valueview.Expert.draw` return jQuery promises.
 * `$.valueview.draw` (`$.valueview.valueview.draw`) triggers `afterdraw` event.
-* `$.valueview.startEditing` (`$.valueview.valueview.startEditing`) triggers `afterstartediting` event.
+* `$.valueview.startEditing` (`$.valueview.valueview.startEditing`) triggers `afterstartediting`
+  event.
 * `$.valueview.stopEditing` (`$.valueview.valueview.stopEditing`) triggers `afterstopediting` event.
 * Fixed precision auto-detection of `$.valueview.experts.GlobeCoordinateInput`.
 
@@ -164,9 +183,11 @@
 
 ### Enhancements
 
-* $.ui.suggester: Hitting the backspace or delete key if the input is empty already does not trigger search anymore.
+* $.ui.suggester: Hitting the backspace or delete key if the input is empty already does not trigger
+  search anymore.
 * $.ui.suggester: Refocus input element after selecting a suggestion via mouse click.
-* $.ui.suggester: Added "confineMinWidthTo" option for specifying an element, the suggestion list's minimum width shall be confined to.
+* $.ui.suggester: Added "confineMinWidthTo" option for specifying an element, the suggestion list's
+  minimum width shall be confined to.
 
 ### Breaking changes
 
@@ -184,7 +205,8 @@
 
 * Updated DataValues JavaScript dependency to version 0.6.
 * Renamed jQuery.ui.suggestCommons to jQuery.ui.commonssuggester.
-* When pressing ESC on a suggester enhanced input element while the suggester menu is visible, the key event's propagation is stopped.
+* When pressing ESC on a suggester enhanced input element while the suggester menu is visible, the
+  key event's propagation is stopped.
 
 ### Bugfixes
 
@@ -208,7 +230,8 @@
 
 ## 0.6.7 (2014-07-23)
 
-* Fix bug 68386, black colored text on blue background in jquery.ui.suggester when hovered via keydown.
+* Fix bug 68386, black colored text on blue background in jquery.ui.suggester when hovered via
+  keydown.
 
 ## 0.6.6 (2014-07-18)
 
@@ -225,7 +248,8 @@
 ## 0.6.4 (2014-07-02)
 
 * Changed MonolingualText option from "lang" to "valuelang".
-* Added setLink() function to jQuery.ui.ooMenu.CustomItem prototype allowing dynamic updates of the link target.
+* Added setLink() function to jQuery.ui.ooMenu.CustomItem prototype allowing dynamic updates of the
+  link target.
 * Removed default "javascript:void(0);" link target of jQuery.ui.ooMenu.CustomItem instances.
 * Reordered GlobeCoordinate precisions.
 
@@ -248,7 +272,8 @@
 
 ## 0.6.0 (2014-06-04)
 
-* Re-created jQuery.ui.suggester widget removing dependencies on jQuery.ui.autocomplete and jQuery.ui.menu
+* Re-created jQuery.ui.suggester widget removing dependencies on jQuery.ui.autocomplete and
+  jQuery.ui.menu.
 * Implemented jQuery.util.highlightMatchingCharacters
 * Implemented jQuery.ui.ooMenu
 * Implemented jQuery.ui.suggestCommons
@@ -260,7 +285,8 @@
 
 ## 0.5.1 (2014-04-01)
 
-* Change TimeInput::valueCharacteristics() to not returning precision or calendarmodel if set to auto
+* Change TimeInput::valueCharacteristics() to not returning precision or calendarmodel if set to
+  auto.
 * Change TimeInput::draw() to update the rotators' values if they are in auto mode
 * Change GlobeCoordinateInput::draw() to update the precision rotator value if it is in auto mode
 
@@ -273,10 +299,12 @@
 * Renamed jQuery.valueView option "valueFormatterProvider" to "formatterStore".
 * Renamed jQuery valueView option "valueParserProvider" to "parserStore".
 * Updated DataValues JavaScript dependency to version 0.5.
-* Removed setting default formatter provider/store and parser provider/store of jQuery.valueView in mw.ext.valueView since no defaults are provided by DataValues JavaScript as of version 0.5.0.
+* Removed setting default formatter provider/store and parser provider/store of jQuery.valueView in
+  mw.ext.valueView since no defaults are provided by DataValues JavaScript as of version 0.5.0.
 * Removed mw.ext.valueView module.
 * Fixed ValueView to again support setting value to null
-* jQuery.valueview expects the rejected promise that may be returned by ValueParser's parse() and ValueFormatter's format() to feature a single parameter only.
+* jQuery.valueview expects the rejected promise that may be returned by ValueParser's parse() and
+  ValueFormatter's format() to feature a single parameter only.
 
 ## 0.4.2 (2014-03-27)
 
@@ -322,13 +350,15 @@
 ### Breaking changes
 
 * Changed ExpertFactory mechanisms to comply with ValueFormatterFactory and ValueParserFactory:
- * Removed generic registerExpert() method. registerDataTypeExpert() and registerDataValueExpert() should be used to register experts.
+ * Removed generic registerExpert() method. registerDataTypeExpert() and registerDataValueExpert()
+   should be used to register experts.
  * Removed additional unused and obsolete functions:
   * getCoveredDataValueTypes()
   * getCoveredDataTypes()
   * hasExpertFor()
   * newExpert()
-* Removed CommonsMediaType and UrlType expert registrations from mw.ext.valueView.js since these are supposed to be registered in Wikibase where the corresponding data types are instantiated.
+* Removed CommonsMediaType and UrlType expert registrations from mw.ext.valueView.js since these are
+  supposed to be registered in Wikibase where the corresponding data types are instantiated.
 * Replaced jQuery.valueview.valueview's "on" option with "dataTypeId" and "dataValueType" options.
 
 ## 0.2.1 (2014-01-30)

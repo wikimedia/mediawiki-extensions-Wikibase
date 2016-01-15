@@ -2,6 +2,40 @@
 	'use strict';
 
 /**
+ * Flips a complete position specification to be used by jQuery.ui.position (1.8).
+ * @ignore
+ *
+ * @param {Object} position
+ * @return {Object}
+ */
+function flipPosition( position ) {
+	function flipOrientation( orientation ) {
+		if ( /right/i.test( orientation ) ) {
+			return orientation.replace( /right/i, 'left' );
+		} else {
+			return orientation.replace( /left/i, 'right' );
+		}
+	}
+
+	function flipHorizontalOffset( offset ) {
+		var offsets = offset.split( ' ' ),
+			hOffset = parseInt( offsets[0], 10 );
+
+		hOffset = ( hOffset <= 0 ) ? Math.abs( hOffset ) : hOffset * -1;
+		return hOffset + ' ' + offsets[1];
+	}
+
+	position.my = flipOrientation( position.my );
+	position.at = flipOrientation( position.at );
+
+	if ( position.offset ) {
+		position.offset = flipHorizontalOffset( position.offset );
+	}
+
+	return position;
+}
+
+/**
  * Enhances an input box by retrieving a list of suggestions that are displayed in a list below the
  * input box.
  * (uses `jQuery.ui.ooMenu`, `jQuery.ui.position`)
@@ -708,39 +742,5 @@ $.widget( 'ui.suggester', {
 	}
 
 } );
-
-/**
- * Flips a complete position specification to be used by jQuery.ui.position (1.8).
- * @ignore
- *
- * @param {Object} position
- * @return {Object}
- */
-function flipPosition( position ) {
-	function flipOrientation( orientation ) {
-		if ( /right/i.test( orientation ) ) {
-			return orientation.replace( /right/i, 'left' );
-		} else {
-			return orientation.replace( /left/i, 'right' );
-		}
-	}
-
-	function flipHorizontalOffset( offset ) {
-		var offsets = offset.split( ' ' ),
-			hOffset = parseInt( offsets[0], 10 );
-
-		hOffset = ( hOffset <= 0 ) ? Math.abs( hOffset ) : hOffset * -1;
-		return hOffset + ' ' + offsets[1];
-	}
-
-	position.my = flipOrientation( position.my );
-	position.at = flipOrientation( position.at );
-
-	if ( position.offset ) {
-		position.offset = flipHorizontalOffset( position.offset );
-	}
-
-	return position;
-}
 
 } )( jQuery );
