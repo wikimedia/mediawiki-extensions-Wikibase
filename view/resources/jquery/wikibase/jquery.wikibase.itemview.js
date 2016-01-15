@@ -51,6 +51,23 @@ $.widget( 'wikibase.itemview', PARENT, {
 		if ( this.$siteLinks.length === 0 ) {
 			this.$siteLinks = $( '<div/>' ).appendTo( this.element );
 		}
+
+		this._createPageImage();
+	},
+
+	/**
+	 * @inheritdoc
+	 * @protected
+	 */
+	_createPageImage: function() {
+
+		var size = $( '.wikibase-entityview-side' ).outerWidth();
+		var pageImage = new wb.PageImage( size, size );
+
+		pageImage.getPageImage().done(function( element ){
+			$( '.wikibase-entityview-side' ).prepand( $( '<div/>' ).append( element ) );
+		});
+
 	},
 
 	/**
