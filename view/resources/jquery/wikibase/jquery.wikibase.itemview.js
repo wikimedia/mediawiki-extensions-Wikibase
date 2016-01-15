@@ -51,6 +51,28 @@ $.widget( 'wikibase.itemview', PARENT, {
 		if ( this.$siteLinks.length === 0 ) {
 			this.$siteLinks = $( '<div/>' ).appendTo( this.element );
 		}
+
+		this._createPageImage();
+	},
+
+	/**
+	 * @inheritdoc
+	 * @protected
+	 */
+	_createPageImage: function() {
+
+//		var size = $( '.wikibase-entityview-side' ).outerWidth(),
+//			pageImage = new wb.PageImage( size, size );
+//
+//		var div =  $( '<div/>' ).addClass( 'pageImage' );
+//		var div =  $( '<div/>' ).addClass( 'pageImage' );
+//
+//		$( '.wikibase-entityview-side' ).prepand( div );
+//
+//		pageImage.getPageImage().done(function( element ){
+//			div.append( element );
+//		});
+
 	},
 
 	/**
