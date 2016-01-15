@@ -83,7 +83,11 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 
 		if ( $row ) {
 			/** @var EntityRedirect $redirect */
-			list( $entityRevision, $redirect ) = $this->loadEntity( $row );
+			try {
+				list( $entityRevision, $redirect ) = $this->loadEntity( $row );
+			} catch ( MWContentSerializationException $ex ) {
+				throw new StorageException( 'Failed to unserialize the content object.', 0, $ex );
+			}
 
 			if ( $redirect !== null ) {
 				throw new RevisionedUnresolvedRedirectException(

@@ -2,13 +2,15 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
+use MWContentSerializationException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -87,6 +89,31 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		}
 
 		return $revision;
+	}
+
+	public function testGetEntityRevision_MWContentSerializationException() {
+		$entityContentDataCodec = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityContentDataCodec' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$entityContentDataCodec->expects( $this->once() )
+			->method( 'decodeEntity' )
+			->will( $this->throwException( new MWContentSerializationException() ) );
+
+		// Needed to fill the database.
+		$this->newEntityRevisionLookup( $this->getTestRevisions(), array() );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			$entityContentDataCodec,
+			new WikiPageEntityMetaDataLookup( new BasicEntityIdParser() ),
+			false
+		);
+
+		$this->setExpectedException(
+			'Wikibase\Lib\Store\StorageException',
+			'Failed to unserialize the content object.'
+		);
+		$lookup->getEntityRevision( new ItemId( 'Q42' ) );
 	}
 
 }
