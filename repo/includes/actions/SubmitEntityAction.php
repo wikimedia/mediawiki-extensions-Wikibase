@@ -27,6 +27,10 @@ class SubmitEntityAction extends EditEntityAction {
 		return 'submit';
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * Show the entity using parent::show(), unless an undo operation is requested.
 	 * In that case $this->undo(); is called to perform the action after a permission check.
