@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_892334ff",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-15T09:09:18Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be changed as well (if possible)? It\u0027s directly being passed on to newEditFilterHookRunner. If we can\u0027t change it, we need a way to make sure the instance is mutable, by either using DerivativeContext or by falling back to the main RequestContext.",
+      "revId": "4e688af35a72ceede5a3cbbe8ec2fedb829f8a8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_a91e30bc",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1328,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-15T09:09:18Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "4e688af35a72ceede5a3cbbe8ec2fedb829f8a8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
