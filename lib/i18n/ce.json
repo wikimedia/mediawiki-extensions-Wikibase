@@ -45,6 +45,7 @@
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|шо|шераш}}",
 	"wikibase-time-precision-millennium": "$1 бӀешараш",
 	"wikibase-time-precision-century": "$1 {{PLURAL:$1||бӀешо|бӀешараш}}",
+	"wikibase-snakformatter-property-not-found": "Билгало $1 цакарий, лело хаамийн тайпа билгалдаккха цало.",
 	"wikibase-entity-summary-wbsetitem": "Керла элемент кхоьллина",
 	"wikibase-entity-summary-wbcreateredirect": "ДӀасхьажорг $4 тӀе",
 	"wikibase-entity-summary-wbsetreference": "Хьостан тӀе хьажорг билгалйина",
