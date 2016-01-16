@@ -25,10 +25,6 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider entitiesProvider
 	 */
 	public function testUpdateParserOutput( array $entities, $statements, $siteLinks ) {
-		$parserOutput = $this->getMockBuilder( 'ParserOutput' )
-			->disableOriginalConstructor()
-			->getMock();
-
 		$statementDataUpdater = $this->getMock( 'Wikibase\Repo\ParserOutput\StatementDataUpdater' );
 		$statementDataUpdater->expects( $this->exactly( $statements ) )
 			->method( 'processStatement' );
@@ -41,7 +37,7 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$siteLinkDataUpdater->expects( $this->once() )
 			->method( 'updateParserOutput' );
 
-		$instance = new EntityParserOutputDataUpdater( $parserOutput, array(
+		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), array(
 			$statementDataUpdater,
 			$siteLinkDataUpdater,
 		) );
@@ -82,6 +78,14 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 			array( array( 'notAnObject' ) ),
 			array( array( $this->getMock( 'Wikibase\Repo\ParserOutput\ParserOutputDataUpdater' ) ) ),
 		);
+	}
+
+	public function testProcessEntityDoesNotTriggerGetters() {
+		$entity = $this->getMock( 'Wikibase\DataModel\Entity\Item' );
+		$entity->expects( $this->never() )->method( 'getStatements' );
+		$entity->expects( $this->never() )->method( 'getSiteLinkList' );
+		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), array() );
+		$instance->processEntity( $entity );
 	}
 
 }
