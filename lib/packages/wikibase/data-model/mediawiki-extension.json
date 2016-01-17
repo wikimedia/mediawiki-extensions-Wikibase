@@ -1,0 +1,12 @@
+{
+	"name": "Wikibase DataModel",
+	"version": "5.0.0 alpha",
+	"author": [
+		"[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]",
+		"Thiemo Mättig"
+	],
+	"url": "https://github.com/wmde/WikibaseDataModel",
+	"description": "The canonical PHP implementation of the Data Model at the heart of the Wikibase software.",
+	"license-name": "GPL-2.0+",
+	"type": "wikibase"
+}

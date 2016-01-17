@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 5.0.0 (alpha)
+
+* Removed `WIKIBASE_DATAMODEL_VERSION` constant.
+
 ## Version 4.4.0 (2016-01-20)
 
 * Added `ItemIdParser`
