@@ -1,15 +1,5 @@
 <?php
 
-if ( defined( 'MEDIAWIKI' ) ) {
-	$GLOBALS['wgExtensionCredits']['wikibase']['WikibaseInternalSerialization'] = array(
-		'path' => __DIR__,
-		'name' => 'Wikibase Internal Serialization',
-		'version' => '2.0',
-		'author' => array(
-			'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
-		),
-		'url' => 'https://github.com/wmde/WikibaseInternalSerialization',
-		'description' => 'Serializers and deserializers for the data access layer of Wikibase Repository',
-		'license-name' => 'GPL-2.0+'
-	);
+if ( defined( 'MEDIAWIKI' ) && function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'WikibaseInternalSerialization', __DIR__ . '/mediawiki-extension.json' );
 }
