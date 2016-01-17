@@ -79,7 +79,8 @@ call_user_func( function() {
 			'The Wikidata team', // TODO: link?
 		),
 		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase_Client',
-		'descriptionmsg' => 'wikibase-client-desc'
+		'descriptionmsg' => 'wikibase-client-desc',
+		'license-name' => 'GPL-2.0+' 
 	);
 
 	$wgWBClientDataTypes = require ( __DIR__ . '/../lib/WikibaseLib.datatypes.php' );

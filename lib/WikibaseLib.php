@@ -63,7 +63,8 @@ call_user_func( function() {
 			'The Wikidata team', // TODO: link?
 		),
 		'url' => 'https://www.mediawiki.org/wiki/Extension:WikibaseLib',
-		'descriptionmsg' => 'wikibase-lib-desc'
+		'descriptionmsg' => 'wikibase-lib-desc',
+		'license-name' => 'GPL-2.0+'
 	);
 
 	define( 'SUMMARY_MAX_LENGTH', 250 );

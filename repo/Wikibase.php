@@ -102,7 +102,8 @@ call_user_func( function() {
 			'The Wikidata team',
 		),
 		'url' => 'https://www.mediawiki.org/wiki/Extension:Wikibase',
-		'descriptionmsg' => 'wikibase-desc'
+		'descriptionmsg' => 'wikibase-desc',
+		'license-name' => 'GPL-2.0+'
 	);
 
 	// constants
