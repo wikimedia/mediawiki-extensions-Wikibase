@@ -8,7 +8,8 @@
 			"Arystanbek",
 			"Meelo",
 			"McAang",
-			"Stultiwikia"
+			"Stultiwikia",
+			"Sayginer"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase veri deposu",
@@ -28,7 +29,7 @@
 	"wikibase-parse-error-quantity": "Miktar değeri hatalı biçimlendirilmiş.",
 	"wikibase-sitelinks-wikipedia": "Vikipedi",
 	"wikibase-sitelinks-sitename-columnheading": "Dil",
-	"wikibase-sitelinks-link-columnheading": "Bağlantılı madde",
+	"wikibase-sitelinks-link-columnheading": "Bağlantılı sayfa",
 	"wikibase-snakview-snaktypeselector-novalue": "değer yok",
 	"wikibase-tooltip-error-details": "Ayrıntılar",
 	"wikibase-undeserializable-value": "Değer geçersiz ve görüntülenemiyor.",

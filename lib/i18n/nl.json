@@ -8,7 +8,8 @@
 			"Southparkfan",
 			"Sjoerddebruin",
 			"Macofe",
-			"Robin0van0der0vliet"
+			"Robin0van0der0vliet",
+			"Robin van der Vliet"
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
@@ -71,6 +72,7 @@
 	"datatypes-type-wikibase-item": "Item",
 	"datatypes-type-wikibase-property": "Eigenschap",
 	"datatypes-type-commonsMedia": "Mediabestand van Commons",
+	"datatypes-type-external-id": "Externe identificatiecode",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 miljard jaar g.j.",
 	"wikibase-time-precision-Mannum": "$1 miljoen g.j.",
@@ -89,6 +91,8 @@
 	"wikibase-entity-summary-wbcreateredirect": "Doorverwezen naar $4",
 	"wikibase-entity-summary-wbeditentity": "Nieuwe entiteit aangemaakt",
 	"wikibase-entity-summary-wbeditentity-create": "Nieuwe entiteit aangemaakt",
+	"wikibase-entity-summary-wbeditentity-update": "Een entiteit gewijzigd",
+	"wikibase-entity-summary-wbeditentity-override": "Een entiteit geleegd",
 	"wikibase-entity-summary-wbsetreference": "Referentie instellen",
 	"wikibase-entity-summary-wbsetreference-add": "Referentie toegevoegd aan claim",
 	"wikibase-entity-summary-wbsetreference-set": "Referentie van claim gewijzigd",
@@ -102,6 +106,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] verwijderd",
+	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Label, beschrijving en aliassen gewijzigd voor [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Koppeling toegevoegd voor [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Koppeling met badges toegevoegd aan [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "Koppeling naar [$2] gewijzigd",
