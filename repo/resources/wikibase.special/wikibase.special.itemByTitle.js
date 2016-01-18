@@ -6,7 +6,7 @@
  * @licence GNU GPL v2+
  * @author Jens Ohlig
  */
-( function( $, mw, OO, wb, undefined ) {
+( function( $, mw, OO, wb ) {
 	'use strict';
 
 	$( document ).ready( function() {
