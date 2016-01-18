@@ -231,28 +231,38 @@ class WikibaseRepo {
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
+	 * @return WikibaseRepo
+	 */
+	private static function newInstance() {
+		global $wgWBRepoDataTypes, $wgWBRepoSettings, $wgContLang;
+
+		$dataTypeDefinitions = $wgWBRepoDataTypes;
+		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
+
+		$settings = new SettingsArray( $wgWBRepoSettings );
+
+		return new self(
+			$settings,
+			new DataTypeDefinitions(
+				$dataTypeDefinitions,
+				$settings->getSetting( 'disabledDataTypes' )
+			),
+			$wgContLang
+		);
+	}
+
+	/**
+	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
+	 *
 	 * @since 0.4
 	 *
 	 * @return WikibaseRepo
 	 */
 	public static function getDefaultInstance() {
-		global $wgWBRepoDataTypes, $wgWBRepoSettings, $wgContLang;
 		static $instance = null;
 
-		$dataTypeDefinitions = $wgWBRepoDataTypes;
-		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
-
 		if ( $instance === null ) {
-			$settings = new SettingsArray( $wgWBRepoSettings );
-
-			$instance = new self(
-				$settings,
-				new DataTypeDefinitions(
-					$dataTypeDefinitions,
-					$settings->getSetting( 'disabledDataTypes' )
-				),
-				$wgContLang
-			);
+			$instance = self::newInstance();
 		}
 
 		return $instance;
