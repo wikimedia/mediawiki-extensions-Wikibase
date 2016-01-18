@@ -3,6 +3,7 @@
 ## 0.15.8 (2016-01-27)
 
 * Added compatibility with DataValues JavaScript 0.8.0.
+* Fixed `jQuery.valueview.experts.GlobeCoordinateInput` failing when precision is null.
 
 ## 0.15.7 (2016-01-15)
 

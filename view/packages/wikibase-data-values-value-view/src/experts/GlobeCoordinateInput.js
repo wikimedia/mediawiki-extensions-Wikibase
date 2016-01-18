@@ -106,6 +106,9 @@
 					return value;
 				}
 				value = value.getValue().getPrecision();
+				if ( value === null ) {
+					return null;
+				}
 				return getPrecisionSetting( value ) || {
 					custom: true,
 					value: value,
