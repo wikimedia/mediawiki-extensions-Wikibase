@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_e324335c",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-18T22:41:13Z",
+      "side": 1,
+      "message": "This still is a IContextSource (and also still is in the follow-up)",
+      "revId": "e23e3ee5d572547585b241387eb42b62370d65ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
