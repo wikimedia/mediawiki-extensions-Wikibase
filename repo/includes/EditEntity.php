@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use DerivativeContext;
 use Html;
+use IContextSource;
 use InvalidArgumentException;
 use MWException;
 use ReadOnlyError;
@@ -93,7 +93,7 @@ class EditEntity {
 	private $title = null;
 
 	/**
-	 * @var RequestContext|DerivativeContext
+	 * @var IContextSource
 	 */
 	private $context;
 
@@ -170,7 +170,7 @@ class EditEntity {
 	 *        This will detect "late" edit conflicts, i.e. someone squeezing in an edit
 	 *        just before the actual database transaction for saving beings.
 	 *        The empty string and 0 are both treated as `false`, disabling conflict checks.
-	 * @param RequestContext|DerivativeContext|null $context the context to use while processing
+	 * @param IContextSource|null $context the context to use while processing
 	 *        the edit; defaults to RequestContext::getMain().
 	 *
 	 * @throws InvalidArgumentException
@@ -184,7 +184,7 @@ class EditEntity {
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
 		$baseRevId = false,
-		$context = null
+		IContextSource $context = null
 	) {
 		$this->newEntity = $newEntity;
 
@@ -201,14 +201,6 @@ class EditEntity {
 
 		$this->errorType = 0;
 		$this->status = Status::newGood();
-
-		if ( $context !== null
-			&& !( $context instanceof RequestContext )
-			&& !( $context instanceof DerivativeContext )
-		) {
-			throw new InvalidArgumentException( '$context must be an instance of RequestContext'
-				 . ' or DerivativeContext' );
-		}
 
 		if ( $context === null ) {
 			$context = RequestContext::getMain();
