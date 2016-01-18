@@ -5,6 +5,21 @@ var MODULE = wb.serialization,
 	PARENT = MODULE.Deserializer;
 
 /**
+ * @param {Object[]} serializedSnaks
+ * @param {wikibase.datamodel.SnakList} snakList
+ * @return {wikibase.datamodel.SnakList}
+ */
+function addSerializedSnaksToSnakList( serializedSnaks, snakList ) {
+	var snakDeserializer = new MODULE.SnakDeserializer();
+
+	for( var i = 0; i < serializedSnaks.length; i++ ) {
+		snakList.addItem( snakDeserializer.deserialize( serializedSnaks[i] ) );
+	}
+
+	return snakList;
+}
+
+/**
  * @class wikibase.serialization.SnakListDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
@@ -62,20 +77,5 @@ MODULE.SnakListDeserializer = util.inherit( 'WbSnakListDeserializer', PARENT, {
 		return snakList;
 	}
 } );
-
-/**
- * @param {Object[]} serializedSnaks
- * @param {wikibase.datamodel.SnakList} snakList
- * @return {wikibase.datamodel.SnakList}
- */
-function addSerializedSnaksToSnakList( serializedSnaks, snakList ) {
-	var snakDeserializer = new MODULE.SnakDeserializer();
-
-	for( var i = 0; i < serializedSnaks.length; i++ ) {
-		snakList.addItem( snakDeserializer.deserialize( serializedSnaks[i] ) );
-	}
-
-	return snakList;
-}
 
 }( wikibase, util, jQuery ) );
