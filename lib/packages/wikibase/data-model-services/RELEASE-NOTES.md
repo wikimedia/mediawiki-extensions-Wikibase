@@ -1,5 +1,9 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.3.0 (dev)
+
+* Added `FILTER_TYPE` constant to `DataTypeStatementFilter`, `NullStatementFilter` and `PropertySetStatementFilter`.
+
 ## Version 3.2.0 (2015-12-03)
 
 * Added `StatementGrouper` interface and the most basic implementations:
