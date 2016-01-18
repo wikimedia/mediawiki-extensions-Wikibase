@@ -239,7 +239,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-statementlistview > .wikibase-toolbar-wrapper .wikibase-toolbar-container {
 	position: static;
-	line-height: 3em;
+	line-height: 2em;
 	float: right;
 }
 
