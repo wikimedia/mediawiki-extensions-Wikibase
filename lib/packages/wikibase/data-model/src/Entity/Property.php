@@ -33,7 +33,7 @@ class Property extends Entity implements StatementListHolder {
 	private $fingerprint;
 
 	/**
-	 * @var string
+	 * @var string The data type of the property.
 	 */
 	private $dataTypeId;
 
@@ -47,7 +47,8 @@ class Property extends Entity implements StatementListHolder {
 	 *
 	 * @param PropertyId|null $id
 	 * @param Fingerprint|null $fingerprint
-	 * @param string $dataTypeId
+	 * @param string $dataTypeId The data type of the property. Not to be confused with the data
+	 *  value type.
 	 * @param StatementList|null $statements Since 1.1
 	 */
 	public function __construct(
@@ -144,13 +145,14 @@ class Property extends Entity implements StatementListHolder {
 	/**
 	 * @since 0.4
 	 *
-	 * @param string $dataTypeId
+	 * @param string $dataTypeId The data type of the property. Not to be confused with the data
+	 *  value type.
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function setDataTypeId( $dataTypeId ) {
 		if ( !is_string( $dataTypeId ) ) {
-			throw new InvalidArgumentException( '$dataTypeId must be a string; got ' . gettype( $dataTypeId ) );
+			throw new InvalidArgumentException( '$dataTypeId must be a string' );
 		}
 
 		$this->dataTypeId = $dataTypeId;
@@ -159,7 +161,8 @@ class Property extends Entity implements StatementListHolder {
 	/**
 	 * @since 0.4
 	 *
-	 * @return string
+	 * @return string Returns the data type of the property (property type). Not to be confused with
+	 *  the data value type.
 	 */
 	public function getDataTypeId() {
 		return $this->dataTypeId;
@@ -179,7 +182,8 @@ class Property extends Entity implements StatementListHolder {
 	/**
 	 * @since 0.3
 	 *
-	 * @param string $dataTypeId
+	 * @param string $dataTypeId The data type of the property. Not to be confused with the data
+	 *  value type.
 	 *
 	 * @return Property
 	 */
