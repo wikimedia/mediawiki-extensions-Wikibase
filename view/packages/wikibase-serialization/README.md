@@ -21,6 +21,10 @@ version 2.0 of this package:
 
 ## Release notes
 
+### 2.0.4 (2016-01-18)
+
+* Added compatibility with DataModel JavaScript 2.0.0.
+
 ### 2.0.3 (2015-06-03)
 
 * Updated to DataValues JavaScript 0.7.0.
@@ -36,7 +40,7 @@ version 2.0 of this package:
 ### 2.0.1 (2014-11-05)
 * Fixed the required DataModel JavaScript version.
 
-### 2.0 (2014-11-05)
+### 2.0.0 (2014-11-05)
 
 * Removed <code>wikibase.serialization.entities</code> ResourceLoader module; use <code>wikibase.serialization.EntityDeserializer</code> instead.
 * Removed options from Serializer/Deserializer as it was never used and there is no intention to use options.
