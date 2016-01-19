@@ -16,6 +16,24 @@
       "revId": "e23e3ee5d572547585b241387eb42b62370d65ba",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_792c74aa",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-19T08:32:28Z",
+      "side": 1,
+      "message": "Erm, what!? Sure it is. What do you expect? This can\u0027t be anything else because the context is used in more than a single place here.",
+      "parentUuid": "6eaa8f54_e324335c",
+      "revId": "e23e3ee5d572547585b241387eb42b62370d65ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
