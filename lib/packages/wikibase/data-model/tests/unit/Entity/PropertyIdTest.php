@@ -84,10 +84,27 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( '["property","P1"]', $id->serialize() );
 	}
 
-	public function testUnserialize() {
+	/**
+	 * @dataProvider serializationProvider
+	 */
+	public function testUnserialize( $json, $expected ) {
 		$id = new PropertyId( 'P1' );
-		$id->unserialize( '["property","P2"]' );
-		$this->assertSame( 'P2', $id->getSerialization() );
+		$id->unserialize( $json );
+		$this->assertSame( $expected, $id->getSerialization() );
+	}
+
+	public function serializationProvider() {
+		return array(
+			array( '["property","P2"]', 'P2' ),
+
+			// All these cases are kind of an injection vector and allow constructing invalid ids.
+			array( '["string","P2"]', 'P2' ),
+			array( '["","string"]', 'string' ),
+			array( '["",""]', '' ),
+			array( '["",2]', 2 ),
+			array( '["",null]', null ),
+			array( '', null ),
+		);
 	}
 
 	/**
