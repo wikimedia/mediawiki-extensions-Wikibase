@@ -25,7 +25,7 @@ interface EntityDocument {
 	public function getId();
 
 	/**
-	 * Returns a type identifier for the entity.
+	 * Returns a type identifier for the entity, e.g. "item" or "property".
 	 *
 	 * @since 0.8.2
 	 *

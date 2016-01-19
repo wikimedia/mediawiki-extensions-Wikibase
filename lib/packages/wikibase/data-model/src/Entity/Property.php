@@ -170,7 +170,7 @@ class Property extends Entity implements StatementListHolder {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return string Returns the entity type "property".
 	 */
 	public function getType() {
 		return self::ENTITY_TYPE;

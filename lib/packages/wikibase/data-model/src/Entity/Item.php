@@ -251,7 +251,7 @@ class Item extends Entity implements StatementListHolder {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return string Returns the entity type "item".
 	 */
 	public function getType() {
 		return self::ENTITY_TYPE;
