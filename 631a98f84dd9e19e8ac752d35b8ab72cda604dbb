@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_fbc93329",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-19T23:24:08Z",
+      "side": 1,
+      "message": "!\u003d\u003d",
+      "revId": "631a98f84dd9e19e8ac752d35b8ab72cda604dbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_9bccbf39",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-19T23:24:08Z",
+      "side": 1,
+      "message": "$point \u003d \"\u003c$globe\u003e $point\"; would be more consistent, also I think that\u0027s slightly faster than concat with .",
+      "revId": "631a98f84dd9e19e8ac752d35b8ab72cda604dbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_7bd543b9",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-19T23:24:08Z",
+      "side": 1,
+      "message": "an empty line after this would probably aid readability",
+      "revId": "631a98f84dd9e19e8ac752d35b8ab72cda604dbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_bbcf3b2b",
+        "filename": "repo/tests/phpunit/includes/rdf/Values/GlobeCoordinateRdfBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-19T23:24:08Z",
+      "side": 1,
+      "message": "Single quotes",
+      "revId": "631a98f84dd9e19e8ac752d35b8ab72cda604dbb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
