@@ -2,9 +2,9 @@
 
 namespace Wikibase\View;
 
-use InvalidArgumentException;
 use Language;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
@@ -98,7 +98,7 @@ abstract class EntityView {
 			$this->language->getCode(),
 			$this->language->getDir(),
 			$this->getMainHtml( $entityRevision ),
-			$this->getSideHtml( $entityRevision )
+			$this->getSideHtml( $entity )
 		);
 
 		return $html;
@@ -132,65 +132,56 @@ abstract class EntityView {
 	 *
 	 * @param EntityRevision $entityRevision
 	 *
-	 * @throws InvalidArgumentException
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision ) {
-		$entity = $entityRevision->getEntity();
-
-		$html = $this->getHtmlForFingerprint(
-			$entity,
-			$this->getHtmlForTermBox( $entityRevision )
-		);
-
-		$html .= $this->templateFactory->render( 'wikibase-toc' );
-
-		return $html;
-	}
+	abstract protected function getMainHtml( EntityRevision $entityRevision );
 
 	/**
 	 * Builds and Returns HTML to put into the sidebar of the entity's HTML structure.
 	 *
-	 * @param EntityRevision $entityRevision
+	 * @param EntityDocument $entity
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	protected function getSideHtml( EntityRevision $entityRevision ) {
-		return '';
-	}
+	abstract protected function getSideHtml( EntityDocument $entity );
 
 	/**
 	 * Builds and returns the HTML for the entity's fingerprint.
 	 *
-	 * @param Entity $entity
-	 * @param string $termBoxHtml
+	 * @param EntityRevision $entityRevision
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	private function getHtmlForFingerprint( Entity $entity, $termBoxHtml ) {
-		return $this->entityTermsView->getHtml(
-			$entity->getFingerprint(),
-			$entity->getId(),
-			$termBoxHtml,
-			$this->textInjector
-		);
+	protected function getHtmlForFingerprint( EntityRevision $entityRevision ) {
+		$entity = $entityRevision->getEntity();
+		$id = $entity->getId();
+
+		if ( $entity instanceof FingerprintProvider ) {
+			return $this->entityTermsView->getHtml(
+				$entity->getFingerprint(),
+				$id,
+				$this->getHtmlForTermBox( $id, $entityRevision->getRevisionId() ),
+				$this->textInjector
+			);
+		}
+
+		return '';
 	}
 
 	/**
-	 * @param EntityRevision $entityRevision
+	 * @param EntityId $entityId
+	 * @param string $revisionId
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
-	private function getHtmlForTermBox( EntityRevision $entityRevision ) {
-		$entityId = $entityRevision->getEntity()->getId();
-
+	private function getHtmlForTermBox( EntityId $entityId = null, $revisionId ) {
 		if ( $entityId !== null ) {
 			// Placeholder for a termbox for the present item.
 			// EntityViewPlaceholderExpander must know about the parameters used here.
 			return $this->textInjector->newMarker(
 				'termbox',
 				$entityId->getSerialization(),
-				$entityRevision->getRevisionId()
+				$revisionId
 			);
 		}
 

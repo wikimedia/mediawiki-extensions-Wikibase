@@ -4,6 +4,7 @@ namespace Wikibase\View;
 
 use InvalidArgumentException;
 use Language;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
@@ -62,6 +63,11 @@ class ItemView extends EntityView {
 
 	/**
 	 * @see EntityView::getMainHtml
+	 *
+	 * @param EntityRevision $entityRevision
+	 *
+	 * @throws InvalidArgumentException
+	 * @return string HTML
 	 */
 	protected function getMainHtml( EntityRevision $entityRevision ) {
 		$item = $entityRevision->getEntity();
@@ -70,18 +76,22 @@ class ItemView extends EntityView {
 			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
 		}
 
-		$html = parent::getMainHtml( $entityRevision );
-		$html .= $this->statementSectionsView->getHtml( $item->getStatements() );
+		$html = $this->getHtmlForFingerprint( $entityRevision )
+			. $this->templateFactory->render( 'wikibase-toc' )
+			. $this->statementSectionsView->getHtml( $item->getStatements() );
 
 		return $html;
 	}
 
 	/**
 	 * @see EntityView::getSideHtml
+	 *
+	 * @param EntityDocument $entity
+	 *
+	 * @return string HTML
 	 */
-	protected function getSideHtml( EntityRevision $entityRevision ) {
-		$item = $entityRevision->getEntity();
-		return $this->getHtmlForSiteLinks( $item );
+	protected function getSideHtml( EntityDocument $entity ) {
+		return $this->getHtmlForSiteLinks( $entity );
 	}
 
 	/**
@@ -91,7 +101,7 @@ class ItemView extends EntityView {
 	 *
 	 * @param Item $item the entity to render
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	protected function getHtmlForSiteLinks( Item $item ) {
 		return $this->siteLinksView->getHtml(

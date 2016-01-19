@@ -37,10 +37,6 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
-	private static $html = '<html>Nyan data!!!</html>';
-	private static $placeholders = array( 'key' => 'value' );
-	private static $configVars = array( 'foo' => 'bar' );
-
 	public function testGetParserOutput() {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
@@ -50,23 +46,16 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, $this->getParserOptions() );
 
-		$this->assertEquals(
-			self::$html,
-			$parserOutput->getText(),
-			'html text'
-		);
+		$this->assertSame( '<TITLE>', $parserOutput->getTitleText(), 'title text' );
+		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
 
-		$this->assertEquals(
-			self::$placeholders,
+		$this->assertSame(
+			'<PLACEHOLDERS>',
 			$parserOutput->getExtensionData( 'wikibase-view-chunks' ),
 			'view chunks'
 		);
 
-		$this->assertEquals(
-			self::$configVars,
-			$parserOutput->getJsConfigVars(),
-			'config vars'
-		);
+		$this->assertSame( array( '<JS>' ), $parserOutput->getJsConfigVars(), 'config vars' );
 
 		$this->assertEquals(
 			'kitten item',
@@ -223,16 +212,25 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->getMock();
 
 		$entityView = $this->getMockBuilder( 'Wikibase\View\EntityView' )
+			->setMethods( array(
+				'getTitleHtml',
+				'getHtml',
+				'getPlaceholders',
+			) )
 			->disableOriginalConstructor()
-			->getMock();
+			->getMockForAbstractClass();
+
+		$entityView->expects( $this->any() )
+			->method( 'getTitleHtml' )
+			->will( $this->returnValue( '<TITLE>' ) );
 
 		$entityView->expects( $this->any() )
 			->method( 'getHtml' )
-			->will( $this->returnValue( '<html>Nyan data!!!</html>' ) );
+			->will( $this->returnValue( '<HTML>' ) );
 
 		$entityView->expects( $this->any() )
 			->method( 'getPlaceholders' )
-			->will( $this->returnValue( array( 'key' => 'value' ) ) );
+			->will( $this->returnValue( '<PLACEHOLDERS>' ) );
 
 		$entityViewFactory->expects( $this->any() )
 			->method( 'newEntityView' )
@@ -248,7 +246,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$configBuilder->expects( $this->any() )
 			->method( 'build' )
-			->will( $this->returnValue( self::$configVars ) );
+			->will( $this->returnValue( array( '<JS>' ) ) );
 
 		return $configBuilder;
 	}
