@@ -581,11 +581,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => array(
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'data' => '{"lables":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}'
+					'data' => '{"labels":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}'
 				),
 				'e' => array( 'exception' => array(
 					'type' => 'UsageException',
-					'code' => 'not-recognized'
+					'code' => 'not-recognized-language'
 				) ) ),
 			// @todo the error codes in the overly long string tests make no sense
 			// and should be corrected...
@@ -593,7 +593,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => array(
 					'site' => 'enwiki',
 					'title' => 'Berlin',
-					'data' => '{"lables":{"en":{"language":"en","value":"'
+					'data' => '{"labels":{"en":{"language":"en","value":"'
 						. TermTestHelper::makeOverlyLongString() . '"}}}'
 				),
 				'e' => array( 'exception' => array( 'type' => 'UsageException' ) ) ),
