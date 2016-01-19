@@ -15,8 +15,7 @@
  * @licence GNU GPL v2+
  */
 
-$wgWBLibDefaultSettings = array(
-
+return array(
 	// whether changes get recorded to wb_changes
 	'useChangesTable' => true,
 
@@ -62,5 +61,3 @@ $wgWBLibDefaultSettings = array(
 
 	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],
 );
-
-return $wgWBLibDefaultSettings;
