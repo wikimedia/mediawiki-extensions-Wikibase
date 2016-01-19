@@ -51,11 +51,6 @@ ul.tagadata li.tagadata-choice .tagadata-label input {
 	outline: none;
 }
 
-ul.tagadata li.tagadata-choice-empty,
-ul.tagadata li.tagadata-choice-active {
-	background: none white !important;
-}
-
 ul.tagadata li.tagadata-choice-empty .tagadata-close {
 	display: none;
 }
