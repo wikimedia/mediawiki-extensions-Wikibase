@@ -16,32 +16,48 @@ use Language;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Thiemo Mättig
  */
 class LanguageNameLookup {
 
 	/**
-	 * @since 0.5
-	 *
+	 * @var string|null
+	 */
+	private $inLanguage = null;
+
+	/**
+	 * @param string|null $inLanguage Language code of the language in which to return the language
+	 *  names. Use null for autonyms (returns each language name in it's own language).
+	 */
+	public function __construct( $inLanguage = null ) {
+		if ( $inLanguage !== null ) {
+			$this->inLanguage = $this->normalize( $inLanguage );
+		}
+	}
+
+	/**
 	 * @param string $languageCode
-	 * @param string|null $inLanguage Code of language in which to return the name (null for autonyms)
 	 *
 	 * @return string
 	 */
-	public function getName( $languageCode, $inLanguage = null ) {
-		$languageCode = str_replace( '_', '-', $languageCode );
+	public function getName( $languageCode ) {
+		$languageCode = $this->normalize( $languageCode );
+		$name = Language::fetchLanguageName( $languageCode, $this->inLanguage );
 
-		if ( isset( $inLanguage ) ) {
-			$inLanguage = str_replace( '_', '-', $inLanguage );
-			$languageName = Language::fetchLanguageName( $languageCode, $inLanguage );
-		} else {
-			$languageName = Language::fetchLanguageName( $languageCode );
+		if ( $name === '' ) {
+			return $languageCode;
 		}
 
-		if ( $languageName === '' ) {
-			$languageName = $languageCode;
-		}
+		return $name;
+	}
 
-		return $languageName;
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	private function normalize( $languageCode ) {
+		return str_replace( '_', '-', $languageCode );
 	}
 
 }

@@ -335,10 +335,12 @@ class WikibaseRepo {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders() {
+		global $wgLang;
+
 		return new WikibaseValueFormatterBuilders(
 			$this->getDefaultLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
-			new LanguageNameLookup(),
+			new LanguageNameLookup( $wgLang->getCode() ),
 			$this->getLocalEntityUriParser(),
 			$this->getEntityTitleLookup()
 		);
@@ -1387,9 +1389,11 @@ class WikibaseRepo {
 	 * @return EntityIdHtmlLinkFormatterFactory
 	 */
 	public function getEntityIdHtmlLinkFormatterFactory() {
+		global $wgLang;
+
 		return new EntityIdHtmlLinkFormatterFactory(
 			$this->getEntityTitleLookup(),
-			new LanguageNameLookup()
+			new LanguageNameLookup( $wgLang->getCode() )
 		);
 	}
 
@@ -1397,6 +1401,8 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
+		global $wgLang;
+
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$dataTypeLookup = $this->getPropertyDataTypeLookup();
 
@@ -1413,7 +1419,7 @@ class WikibaseRepo {
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			$templateFactory,
-			new LanguageNameLookup(),
+			new LanguageNameLookup( $wgLang->getCode() ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' )

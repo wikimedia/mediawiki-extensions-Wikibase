@@ -89,7 +89,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			new EntityIdHtmlLinkFormatter(
 				$labelDescriptionLookup,
 				$wikibaseRepo->getEntityTitleLookup(),
-				new LanguageNameLookup()
+				new LanguageNameLookup( $languageCode )
 			)
 		);
 	}

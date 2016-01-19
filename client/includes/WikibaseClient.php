@@ -202,10 +202,12 @@ final class WikibaseClient {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders() {
+		global $wgLang;
+
 		return new WikibaseValueFormatterBuilders(
 			$this->contentLanguage,
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
-			new LanguageNameLookup(),
+			new LanguageNameLookup( $wgLang->getCode() ),
 			$this->getRepoEntityUriParser()
 		);
 	}

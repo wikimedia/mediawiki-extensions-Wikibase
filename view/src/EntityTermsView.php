@@ -208,9 +208,7 @@ class EntityTermsView {
 		$languageCode,
 		Title $title = null
 	) {
-		global $wgLang;
-
-		$languageName = $this->languageNameLookup->getName( $languageCode, $wgLang->getCode() );
+		$languageName = $this->languageNameLookup->getName( $languageCode );
 		$labels = $fingerprint->getLabels();
 		$descriptions = $fingerprint->getDescriptions();
 		$hasLabel = $labels->hasTermForLanguage( $languageCode );
