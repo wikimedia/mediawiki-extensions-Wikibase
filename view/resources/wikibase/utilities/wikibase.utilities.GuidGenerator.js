@@ -7,6 +7,7 @@
 
 /**
  * Generator for a Globally Unique IDentifier.
+ *
  * @abstract
  * @constructor
  * @since 0.4

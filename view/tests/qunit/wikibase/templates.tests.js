@@ -1,5 +1,6 @@
 /**
  * QUnit tests for the template engine.
+ *
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1

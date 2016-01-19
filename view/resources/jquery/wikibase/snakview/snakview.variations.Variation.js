@@ -12,6 +12,7 @@
 	/**
 	 * Abstract base for all kinds of `Variation`s to be used by `jQuery.wikibase.snakview` to
 	 * represent the different types of `wikibase.datamodel.Snak` objects.
+	 *
 	 * @see wikibase.datamodel.Snak
 	 * @class jQuery.wikibase.snakview.variations.Variation
 	 * @abstract
@@ -129,6 +130,7 @@
 		/**
 		 * Returns an object that offers information about the related `snakview`'s current state as
 		 * well as allows updating the `snakview` instance.
+		 *
 		 * @see jQuery.wikibase.snakview
 		 *
 		 * @return {jQuery.wikibase.snakview.ViewState}
@@ -143,6 +145,7 @@
 		 * bound to the `Variation`. Equivalent to what
 		 * `wikibase.serialization.SnakSerializer.serialize()` returns, just without the fields
 		 * `snaktype` and `property`.
+		 *
 		 * @see wikibase.serialization.SnakSerializer
 		 *
 		 * @param {Object} [value]
@@ -166,6 +169,7 @@
 		 * `viewState().property()` and `viewState().snakType()`, if necessary. A missing field
 		 * implies that the aspect of the `Snak` was not defined yet. Then, the view should display
 		 * a useful message or, in edit-mode, show empty input forms for user interaction.
+		 *
 		 * @protected
 		 *
 		 * @param {Object} value Incomplete `Snak` serialization.

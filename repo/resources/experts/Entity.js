@@ -62,6 +62,7 @@
 
 		/**
 		 * Initializes a `jQuery.wikibase.entityselector` instance on the `Expert`'s input element.
+		 *
 		 * @abstract
 		 * @protected
 		 *

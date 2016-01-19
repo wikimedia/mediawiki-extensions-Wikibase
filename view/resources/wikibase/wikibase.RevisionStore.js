@@ -1,5 +1,6 @@
 /**
  * JavaScript storing revision ids about different sections.
+ *
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @licence GNU GPL v2+
@@ -10,6 +11,7 @@
 
 /**
  * Offers access to stored revision ids
+ *
  * @constructor
  * @since 0.1
  */

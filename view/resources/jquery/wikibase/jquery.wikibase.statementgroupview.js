@@ -195,6 +195,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 
 	/**
 	 * Adds a new, pending `statementview` to the encapsulated `statementlistview`.
+	 *
 	 * @see jQuery.wikibase.statementlistview.enterNewItem
 	 *
 	 * @return {Object} jQuery.Promise

@@ -772,6 +772,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 
 	/**
 	 * Adds a pending `sitelinkview` to the `sitelinklistview`.
+	 *
 	 * @see jQuery.wikibase.listview.enterNewItem
 	 *
 	 * @return {Object} jQuery.Promise

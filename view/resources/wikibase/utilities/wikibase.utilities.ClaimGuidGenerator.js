@@ -9,6 +9,7 @@
 
 /**
  * Claim GUID generator.
+ *
  * @since 0.4
  * @param {string} entityId Prefixed entity id
  */

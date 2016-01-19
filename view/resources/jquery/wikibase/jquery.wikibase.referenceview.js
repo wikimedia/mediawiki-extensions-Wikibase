@@ -104,6 +104,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Attaches event listeners needed during edit mode.
+	 *
 	 * @private
 	 */
 	_attachEditModeEventHandlers: function() {
@@ -145,6 +146,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Detaches the event handlers needed during edit mode.
+	 *
 	 * @private
 	 */
 	_detachEditModeEventHandlers: function() {
@@ -164,6 +166,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * Will update the `wb-reference-<hash>` CSS class on the widget's root element to a given
 	 * `Reference`'s hash. If `null` is given or if the `Reference` has no hash, `wb-reference-new`
 	 * will be added as class.
+	 *
 	 * @private
 	 *
 	 * @param {wikibase.datamodel.Reference|null} reference
@@ -212,6 +215,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Starts the widget's edit mode.
+	 *
 	 * @since 0.5
 	 */
 	startEditing: function() {
@@ -234,6 +238,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Stops the widget's edit mode.
+	 *
 	 * @since 0.5
 	 */
 	stopEditing: function() {
@@ -271,6 +276,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Returns whether the widget is currently in edit mode.
+	 *
 	 * @since 0.5
 	 *
 	 * @return {boolean}
@@ -281,6 +287,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Returns whether the widget (all its `snaklistview`s) is currently valid.
+	 *
 	 * @since 0.5
 	 *
 	 * @return {boolean}
@@ -299,6 +306,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	/**
 	 * Returns whether the widget's current value matches the value it has been initialized with by
 	 * checking the `Reference`'s `Snak`s.
+	 *
 	 * @since 0.5
 	 *
 	 * @return {boolean}
@@ -315,6 +323,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 	/**
 	 * Adds a pending `snaklistview` to the widget.
+	 *
 	 * @see jQuery.wikibase.listview.enterNewItem
 	 * @since 0.5
 	 *

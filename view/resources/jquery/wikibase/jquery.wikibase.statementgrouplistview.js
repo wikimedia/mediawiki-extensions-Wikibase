@@ -119,6 +119,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 	 * Triggers adding a new `statementgroupview` to the `statementgrouplistview`. This involves
 	 * triggering the corresponding process for the new pending `statementgroupview` by instantly
 	 * triggering the `enterNewItem()` function of the `statementgroupview`.
+	 *
 	 * @see jQuery.wikibase.statementgroupview.enterNewItem
 	 * @see jQuery.wikibase.listview.enterNewItem
 	 *

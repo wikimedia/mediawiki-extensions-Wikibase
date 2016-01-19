@@ -507,6 +507,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 	/**
 	 * Instantiates a `Statement` with the `statementview`'s current value.
+	 *
 	 * @private
 	 *
 	 * @param {string} guid
@@ -536,6 +537,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 	/**
 	 * Adds a `Reference` and renders it in the view.
+	 *
 	 * @private
 	 *
 	 * @param {wikibase.datamodel.Reference} reference
@@ -546,6 +548,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 	/**
 	 * Returns all `Reference`s currently specified in the view (including all pending changes).
+	 *
 	 * @private
 	 *
 	 * @return {wikibase.datamodel.Reference[]}
@@ -585,6 +588,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 	/**
 	 * Updates the visual `Reference`s counter.
+	 *
 	 * @private
 	 */
 	_drawReferencesCounter: function() {

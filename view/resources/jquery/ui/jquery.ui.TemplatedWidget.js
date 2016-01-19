@@ -68,6 +68,7 @@
 		 * basic template DOM is created and template short-cuts can be used. The function should
 		 * be overridden only to perform DOM manipulation/creation while initializing should be
 		 * performed in `_init`.
+		 *
 		 * @see jQuery.Widget._create
 		 * @protected
 		 *
@@ -94,6 +95,7 @@
 		 * `_init`. With the `TemplatedWidget`'s base `_init` implementation triggering the "init"
 		 * event, inheriting widgets should call parent's `_init` as last action for other
 		 * components listening to the "init" event can be sure the widget in fully initialized.
+		 *
 		 * @see jQuery.Widget._init
 		 * @protected
 		 */
@@ -127,6 +129,7 @@
 		/**
 		 * Creates the short-cuts to DOM nodes within the template's DOM structure as specified in
 		 * the `templateShortCuts` option.
+		 *
 		 * @private
 		 *
 		 * @throws {Error} if no DOM node is found using a specified selector.
@@ -200,6 +203,7 @@
 		 * Clone of jQuery.Widget._trigger with the difference that `$.triggerHandler()` instead of
 		 * `$.trigger()` is used to trigger the event on `this.element` if `encapsulate` option is
 		 * `true`.
+		 *
 		 * @see jQuery.Widget._trigger
 		 * @protected
 		 *

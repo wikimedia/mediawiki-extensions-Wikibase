@@ -7,6 +7,7 @@
 
 /**
  * PageConnector connects two articles easily.
+ *
  * @constructor
  * @since 0.5
  *
@@ -60,6 +61,7 @@ $.extend( wb.PageConnector.prototype, {
 	/**
 	 * Gets a list of pages that will also be linked with the first page. This may visualize
 	 * potential side effects of a merge to users.
+	 *
 	 * @since 0.5
 	 *
 	 * @return {jQuery.promise}
@@ -146,6 +148,7 @@ $.extend( wb.PageConnector.prototype, {
 	/**
 	 * Links the two articles by either creating a new item, updating an existing one or merging two
 	 * existing ones.
+	 *
 	 * @since 0.5
 	 *
 	 * @return {jQuery.Promise}

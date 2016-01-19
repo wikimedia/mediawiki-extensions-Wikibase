@@ -132,6 +132,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 	/**
 	 * Creates the `listview` widget managing the `statementview` widgets.
+	 *
 	 * @since 0.5
 	 * @private
 	 */
@@ -181,6 +182,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 	/**
 	 * Adds a new, pending `statementview` to the `statementlistview`.
+	 *
 	 * @see jQuery.wikibase.listview.enterNewItem
 	 *
 	 * @return {Object} jQuery.Promise

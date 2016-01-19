@@ -13,6 +13,7 @@
 	 *  of values but sticking with this pattern might be possible by providing a function the
 	 *  `listview` determining the kind of a value and choosing the right strategy to deal with the
 	 *  value accordingly.
+	 *
 	 * @see jQuery.wikibase.listview
 	 * @class jQuery.wikibase.listview.ListItemAdapter
 	 * @since 0.4

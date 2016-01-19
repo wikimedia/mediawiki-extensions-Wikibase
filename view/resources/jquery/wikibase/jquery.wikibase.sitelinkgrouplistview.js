@@ -9,6 +9,7 @@
  * Scrapes site links from static HTML in order to be sure the order in the static HTML matches the
  * order set on the widget initialized on the HTML structure since that widget is not supposed to
  * re-render the HTML for performance reasons.
+ *
  * @ignore
  *
  * @param {jQuery} $siteLinks
@@ -50,6 +51,7 @@ function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 
 /**
  * Maps site links of a `wikibase.datamodel.SiteLinkSet` to their Wikibase site groups.
+ *
  * @ignore
  *
  * @param {wikibase.datamodel.SiteLinkSet} siteLinkSet

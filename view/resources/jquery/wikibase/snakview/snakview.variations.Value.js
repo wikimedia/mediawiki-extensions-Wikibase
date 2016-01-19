@@ -257,6 +257,7 @@
 
 		/**
 		 * Attaches event handlers to the `valueview` widget's element.
+		 *
 		 * @private
 		 */
 		_attachEventHandlers: function() {
@@ -317,6 +318,7 @@
 
 		/**
 		 * Removes event handlers from the `valueview` widget's element.
+		 *
 		 * @private
 		 */
 		_removeEventHandlers: function() {

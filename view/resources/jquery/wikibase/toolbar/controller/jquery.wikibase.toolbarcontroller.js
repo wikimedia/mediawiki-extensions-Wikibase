@@ -63,6 +63,7 @@
 
 		/**
 		 * Registers an event handler.
+		 *
 		 * @since 0.5
 		 *
 		 * @param {string} toolbarType
@@ -97,6 +98,7 @@
 
 		/**
 		 * Destroys a toolbar.
+		 *
 		 * @since 0.5
 		 *
 		 * @param {jQuery.wikibase.toolbar} toolbar

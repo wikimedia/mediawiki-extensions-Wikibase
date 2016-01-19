@@ -9,6 +9,7 @@
 
 	/**
 	 * Returns a DOM object within a HTML page suitable for testing the widget on.
+	 *
 	 * @return {jQuery}
 	 * @throws {Error} If the test runs in a non-browser environment or on a unsuitable HTML page.
 	 */
