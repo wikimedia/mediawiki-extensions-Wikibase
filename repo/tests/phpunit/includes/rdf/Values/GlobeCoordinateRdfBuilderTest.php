@@ -40,10 +40,19 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$value = new GlobeCoordinateValue(
 			new LatLongValue( 12.25, -45.5 ),
 			0.025,
-			'https://www.wikidata.org/entity/Q2'
+			'http://www.wikidata.org/entity/Q2'
 		);
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
+
+		// Mare Tranquillitatis
+		$value_moon = new GlobeCoordinateValue(
+				new LatLongValue( 8.5, 31.4 ),
+				0.1,
+				'http://www.wikidata.org/entity/Q405'
+		);
+
+		$snak_moon = new PropertyValueSnak( new PropertyId( 'P7' ), $value_moon );
 
 		$data = array(
 			'simple' => array(
@@ -62,22 +71,29 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '"Point(12.25 -45.5)"^^<http://acme/geo/wktLiteral> .',
 					'<http://www/Q1> '
 						. '<http://acme/statement/value/P7> '
-						. '<http://acme/value/7901049a90a3b6a6cbbae50dc76c2da9> .',
-					'<http://acme/value/7901049a90a3b6a6cbbae50dc76c2da9> '
+						. '<http://acme/value/d396dfb27235918ab6969509c5e87a48> .',
+					'<http://acme/value/d396dfb27235918ab6969509c5e87a48> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://acme/onto/GlobecoordinateValue> .',
-					'<http://acme/value/7901049a90a3b6a6cbbae50dc76c2da9> '
+					'<http://acme/value/d396dfb27235918ab6969509c5e87a48> '
 						. '<http://acme/onto/geoLatitude> '
 						. '"12.25"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme/value/7901049a90a3b6a6cbbae50dc76c2da9> '
+					'<http://acme/value/d396dfb27235918ab6969509c5e87a48> '
 						. '<http://acme/onto/geoLongitude> '
 						. '"-45.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme/value/7901049a90a3b6a6cbbae50dc76c2da9> '
+					'<http://acme/value/d396dfb27235918ab6969509c5e87a48> '
 						. '<http://acme/onto/geoPrecision> '
 						. '"0.025"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme/value/7901049a90a3b6a6cbbae50dc76c2da9> '
+					'<http://acme/value/d396dfb27235918ab6969509c5e87a48> '
 						. '<http://acme/onto/geoGlobe> '
-						. '<https://www.wikidata.org/entity/Q2> .',
+						. '<http://www.wikidata.org/entity/Q2> .',
+				)
+			),
+			'moon' => array(
+				$snak_moon,
+				false,
+				array(
+					'<http://www/Q1> <http://acme/statement/P7> "<http://www.wikidata.org/entity/Q405> Point(8.5 31.4)"^^<http://acme/geo/wktLiteral> .',
 				)
 			),
 		);
@@ -85,7 +101,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$value2 = new GlobeCoordinateValue(
 			new LatLongValue( 12.25, -45.5 ),
 			null,
-			'https://www.wikidata.org/entity/Q2'
+			'http://www.wikidata.org/entity/Q2'
 		);
 
 		$snak2 = new PropertyValueSnak( new PropertyId( 'P7' ), $value2 );
@@ -99,25 +115,25 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '"Point(12.25 -45.5)"^^<http://acme/geo/wktLiteral> .',
 					'<http://www/Q1> '
 						. '<http://acme/statement/value/P7> '
-						. '<http://acme/value/f888aaaedee96a5fd1389877f736a242> .',
-					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+						. '<http://acme/value/79451c61ee7a21407115df912637c022> .',
+					'<http://acme/value/79451c61ee7a21407115df912637c022> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://acme/onto/GlobecoordinateValue> .',
-					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+					'<http://acme/value/79451c61ee7a21407115df912637c022> '
 						. '<http://acme/onto/geoLatitude> '
 						. '"12.25"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+					'<http://acme/value/79451c61ee7a21407115df912637c022> '
 						. '<http://acme/onto/geoLongitude> '
 						. '"-45.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+					'<http://acme/value/79451c61ee7a21407115df912637c022> '
 						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
 						. '<http://acme/onto/GeoAutoPrecision> .',
-					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+					'<http://acme/value/79451c61ee7a21407115df912637c022> '
 						. '<http://acme/onto/geoPrecision> '
 						. '"0.00027777777777778"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
-					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+					'<http://acme/value/79451c61ee7a21407115df912637c022> '
 						. '<http://acme/onto/geoGlobe> '
-						. '<https://www.wikidata.org/entity/Q2> .',
+						. '<http://www.wikidata.org/entity/Q2> .',
 				)
 		);
 
