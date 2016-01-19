@@ -30,6 +30,10 @@ class SpecialNewProperty extends SpecialNewEntity {
 		parent::__construct( 'NewProperty', 'property-create' );
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialNewEntity::prepareArguments
 	 */

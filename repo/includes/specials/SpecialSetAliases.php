@@ -22,6 +22,10 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		parent::__construct( 'SetAliases' );
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialSetEntity::getPostedValue()
 	 *

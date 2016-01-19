@@ -70,6 +70,10 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialWikibaseRepoPage::setSpecialWikibaseRepoPageServices
 	 *

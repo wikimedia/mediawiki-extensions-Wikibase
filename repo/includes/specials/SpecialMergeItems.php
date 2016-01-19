@@ -63,6 +63,10 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		);
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	public function initServices(
 		EntityIdParser $idParser,
 		ExceptionLocalizer $exceptionLocalizer,

@@ -33,6 +33,10 @@ class SpecialNewItem extends SpecialNewEntity {
 		parent::__construct( 'NewItem' );
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialNewEntity::prepareArguments
 	 */

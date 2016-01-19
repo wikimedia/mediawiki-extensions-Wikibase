@@ -22,6 +22,10 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		parent::__construct( 'SetLabel' );
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialSetEntity::getPostedValue()
 	 *
