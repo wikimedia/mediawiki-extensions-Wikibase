@@ -92,11 +92,18 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => array( 'new' => 'property', 'data' => '{"datatype":"string"}' ),
 				'e' => array( 'type' => 'property' ) ),
 			'new property with data' => array( // this is our current example in the api doc
-				'p' => array( 'new' => 'property', 'data' => '{"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},'.
-				'"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},"datatype":"string"}' ),
+				'p' => array(
+					'new' => 'property',
+					'data' => '{"labels":{"en-gb":{"language":"en-gb","value":"Propertylabel"}},'
+						. '"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},'
+						. '"datatype":"string"}'
+				),
 				'e' => array( 'type' => 'property' ) ),
 			'add a sitelink..' => array( // make sure if we pass in a valid id it is accepted
-				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!","badges":["%Q42%","%Q149%"]}}}' ),
+				'p' => array(
+					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki",'
+						. '"title":"TestPage!","badges":["%Q42%","%Q149%"]}}}'
+				),
 				'e' => array(
 					'sitelinks' => array(
 						array(
@@ -136,7 +143,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 			),
 			'remove a sitelink..' => array(
 				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
-				'e' => array( 'labels' => array( 'en' => 'A Label' ), 'descriptions' => array( 'en' => 'DESC' ) ) ),
+				'e' => array(
+					'labels' => array( 'en' => 'A Label' ),
+					'descriptions' => array( 'en' => 'DESC' ) )
+				),
 			'remove a label..' => array(
 				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":""}}}' ),
 				'e' => array( 'descriptions' => array( 'en' => 'DESC' ) ) ),
@@ -144,7 +154,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => array( 'data' => '{"descriptions":{"en":{"language":"en","value":""}}}' ),
 				'e' => array( 'type' => 'item' ) ),
 			'clear an item with some new value' => array(
-				'p' => array( 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}', 'clear' => '' ),
+				'p' => array(
+					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"page"}}}',
+					'clear' => ''
+				),
 				'e' => array(
 					'type' => 'item',
 					'sitelinks' => array(
@@ -195,7 +208,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 				)
 			),
 			'unset a sitelink using the other sitelink' => array(
-				'p' => array( 'site' => 'svwiki', 'title' => 'FOO', 'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}' ),
+				'p' => array(
+					'site' => 'svwiki',
+					'title' => 'FOO',
+					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":""}}}'
+				),
 				'e' => array(
 					'type' => 'item',
 					'sitelinks' => array(
@@ -208,7 +225,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 				)
 			),
 			'set badges for a existing sitelink, title intact' => array(
-				'p' => array( 'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q149%","%Q42%"]}}}' ),
+				'p' => array(
+					'data' => '{"sitelinks":{"svwiki":{"site":"svwiki","badges":["%Q149%","%Q42%"]}}}'
+				),
 				'e' => array(
 					'type' => 'item',
 					'sitelinks' => array(
@@ -263,7 +282,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 								'mainsnak' => array(
 									'snaktype' => 'value',
 									'property' => '%P56%',
-									'datavalue' => array( 'value' => 'diffstring', 'type' => 'string' ),
+									'datavalue' => array(
+										'value' => 'diffstring',
+										'type' => 'string'
+									),
 								),
 								'type' => 'statement',
 								'rank' => 'normal',
@@ -404,7 +426,13 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
 		$this->assertResultHasEntityType( $result );
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
-		$this->assertArrayHasKey( 'id', $result['entity'], "Missing 'id' section in entity in response." );
+
+		$this->assertArrayHasKey(
+			'id',
+			$result['entity'],
+			"Missing 'id' section in entity in response."
+		);
+
 		$this->assertEntityEquals( $expected, $result['entity'] );
 
 		// -- check null edits ---------------------------------------------
@@ -417,10 +445,19 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->assertEntityEquals( $expected, $dbEntity, false );
 
 		// -- check the edit summary --------------------------------------------
-		if ( !array_key_exists( 'warning', $expected ) || $expected['warning'] != 'edit-no-change' ) {
-			$this->assertRevisionSummary( array( 'wbeditentity' ), $result['entity']['lastrevid'] );
+		if ( !array_key_exists( 'warning', $expected )
+			|| $expected['warning'] != 'edit-no-change'
+		) {
+			$this->assertRevisionSummary(
+				array( 'wbeditentity' ),
+				$result['entity']['lastrevid']
+			);
+
 			if ( array_key_exists( 'summary', $params ) ) {
-				$this->assertRevisionSummary( '/' . $params['summary'] . '/', $result['entity']['lastrevid'] );
+				$this->assertRevisionSummary(
+					'/' . $params['summary'] . '/',
+					$result['entity']['lastrevid']
+				);
 			}
 		}
 	}
@@ -433,76 +470,125 @@ class EditEntityTest extends WikibaseApiTestCase {
 		return array(
 			'no entity id given' => array(
 				'p' => array( 'id' => '', 'data' => '{}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'no-such-entity-id'
+				) ) ),
 			'invalid id' => array(
 				'p' => array( 'id' => 'abcde', 'data' => '{}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'no-such-entity-id'
+				) ) ),
 			'invalid explicit id' => array(
 				'p' => array( 'id' => '1234', 'data' => '{}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-id' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'no-such-entity-id'
+				) ) ),
 			'non existent sitelink' => array(
 				'p' => array( 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'no-such-entity-link' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'no-such-entity-link'
+				) ) ),
 			'missing site (also bad title)' => array(
 				'p' => array( 'title' => 'abcde', 'data' => '{}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'param-missing'
+				) ) ),
 			'cant have id and new' => array(
 				'p' => array( 'id' => 'q666', 'new' => 'item', 'data' => '{}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'param-missing' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'param-missing'
+				) ) ),
 			'when clearing must also have data!' => array(
 				'p' => array( 'site' => 'enwiki', 'new' => 'Berlin', 'clear' => '' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'nodata' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'nodata'
+				) ) ),
 			'bad site' => array(
 				'p' => array( 'site' => 'abcde', 'data' => '{}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'unknown_site' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'unknown_site'
+				) ) ),
 			'no data provided' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin' ),
 				'e' => array( 'exception' => array(
 					'type' => 'UsageException',
-					'code' => 'nodata' //see 'no$1' in ApiBase::$messageMap
+					'code' => 'nodata' // see 'no$1' in ApiBase::$messageMap
 				) )
 			),
 			'malformed json' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '{{{}' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'invalid-json' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'invalid-json'
+				) ) ),
 			'must be a json object (json_decode s this an an int)' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '1234' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-array' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'not-recognized-array'
+				) ) ),
 			'must be a json object (json_decode s this an an indexed array)' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '[ "xyz" ]' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-string' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'not-recognized-string'
+					) ) ),
 			'must be a json object (json_decode s this an a string)' => array(
 				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '"string"' ),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-array' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'not-recognized-array'
+				) ) ),
 			'inconsistent site in json' => array(
 				'p' => array(
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"ptwiki":{"site":"svwiki","title":"TestPage!"}}}'
 				),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'inconsistent-site' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'inconsistent-site'
+				) ) ),
 			'inconsistent lang in json' => array(
 				'p' => array(
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"labels":{"de":{"language":"pt","value":"TestPage!"}}}'
 				),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'inconsistent-language' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'inconsistent-language'
+				) ) ),
 			'inconsistent unknown site in json' => array(
 				'p' => array(
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"sitelinks":{"BLUB":{"site":"BLUB","title":"TestPage!"}}}'
 				),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized-site' ) ) ),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'not-recognized-site'
+				) ) ),
 			'inconsistent unknown languages' => array(
 				'p' => array(
 					'site' => 'enwiki',
 					'title' => 'Berlin',
 					'data' => '{"lables":{"BLUB":{"language":"BLUB","value":"ImaLabel"}}}'
 				),
-				'e' => array( 'exception' => array( 'type' => 'UsageException', 'code' => 'not-recognized' ) ) ),
-			//@todo the error codes in the overly long string tests make no sense and should be corrected...
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'not-recognized'
+				) ) ),
+			// @todo the error codes in the overly long string tests make no sense
+			// and should be corrected...
 			'overly long label' => array(
 				'p' => array(
 					'site' => 'enwiki',
@@ -639,7 +725,8 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => 'UsageException',
 					'code' => 'param-invalid',
-					'message' => 'Invalid field used in call: "type", must match type associated with id'
+					'message' => 'Invalid field used in call: "type", '
+						. 'must match type associated with id'
 				) )
 			),
 			'bad main snak replacement' => array(
@@ -650,7 +737,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 								'mainsnak' => array(
 									'snaktype' => 'value',
 									'property' => '%P72%',
-									'datavalue' => array( 'value' => 'anotherstring', 'type' => 'string' ),
+									'datavalue' => array(
+										'value' => 'anotherstring',
+										'type' => 'string'
+									),
 								),
 								'type' => 'statement',
 								'rank' => 'normal' ),
