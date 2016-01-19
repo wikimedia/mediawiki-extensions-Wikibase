@@ -93,6 +93,10 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialModifyEntity::prepareArguments()
 	 *

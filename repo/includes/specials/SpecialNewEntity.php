@@ -85,6 +85,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *

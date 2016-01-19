@@ -22,6 +22,10 @@ class SpecialSetDescription extends SpecialModifyTerm {
 		parent::__construct( 'SetDescription' );
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialSetEntity::getPostedValue()
 	 *

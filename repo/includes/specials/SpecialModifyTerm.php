@@ -67,6 +67,10 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
 	}
 
+	public function doesWrites() {
+		return true;
+	}
+
 	/**
 	 * @see SpecialModifyEntity::prepareArguments()
 	 *
