@@ -69,7 +69,7 @@ the database.
 Currently, the following hard global constraints are enforced for the
 standard entity types:
 
-* The lables of Properties (but not Items) must be unique per language.
+* The labels of Properties (but not Items) must be unique per language.
 * Site links are unique, that is, only one Item can contain a given sitelink.
 * Any Item can only contain one SiteLink for any given site.
 
