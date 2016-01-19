@@ -28,7 +28,7 @@
 	"wikibase-comment-restore": "已取消刪除關聯的 {{WBREPONAME}} 項目，語言連結已還原。",
 	"wikibase-comment-update": "已變更 {{WBREPONAME}} 項目",
 	"wikibase-comment-sitelink-add": "已新增語言連結：$1",
-	"wikibase-comment-sitelink-change": "已更改語言連結從 $1 成 $2",
+	"wikibase-comment-sitelink-change": "語言連結已從 $1 變更至 $2",
 	"wikibase-comment-sitelink-remove": "已刪除語言連結：$1",
 	"wikibase-comment-multi": "$1 次{{PLURAL:$1|變更|變更}}",
 	"wikibase-dataitem": "{{WBREPONAME}} 項目",
