@@ -12,6 +12,9 @@ use InvalidArgumentException;
  */
 class ItemId extends EntityId {
 
+	/**
+	 * @since 0.5
+	 */
 	const PATTERN = '/^Q[1-9]\d*$/i';
 
 	/**
