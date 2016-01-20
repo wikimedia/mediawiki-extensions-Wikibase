@@ -54,11 +54,42 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFormatError() {
-		$formatter = new GlobeCoordinateDetailsFormatter( new FormatterOptions() );
+		$formatter = new GlobeCoordinateDetailsFormatter();
 		$value = new NumberValue( 23 );
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$formatter->format( $value );
+	}
+
+	public function testEscaping() {
+		$value = $this->getMock(
+			'DataValues\Geo\Values\GlobeCoordinateValue',
+			array( 'getLatitude', 'getLongitude', 'getPrecision' ),
+			array( new LatLongValue( 0, 0 ), null, '<GLOBE>' )
+		);
+		$value->expects( $this->any() )
+			->method( 'getLatitude' )
+			->will( $this->returnValue( '<LAT>' ) );
+		$value->expects( $this->any() )
+			->method( 'getLongitude' )
+			->will( $this->returnValue( '<LONG>' ) );
+		$value->expects( $this->any() )
+			->method( 'getPrecision' )
+			->will( $this->returnValue( '<PRECISION>' ) );
+
+		$formatter = new GlobeCoordinateDetailsFormatter();
+		$formatted = $formatter->format( $value );
+
+		$this->assertContains( '&lt;LAT&gt;', $formatted );
+		$this->assertContains( '&lt;LONG&gt;', $formatted );
+		$this->assertContains( '&lt;PRECISION&gt;', $formatted );
+		$this->assertContains( '&lt;GLOBE&gt;', $formatted );
+
+		$this->assertNotContains( '<LAT>', $formatted, 'never unescaped' );
+		$this->assertNotContains( '<LONG>', $formatted, 'never unescaped' );
+		$this->assertNotContains( '<PRECISION>', $formatted, 'never unescaped' );
+		$this->assertNotContains( '<GLOBE>', $formatted, 'never unescaped' );
+		$this->assertNotContains( '&amp;', $formatted, 'no double escaping' );
 	}
 
 }
