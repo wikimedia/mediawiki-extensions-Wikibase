@@ -80,11 +80,8 @@ return call_user_func( function() {
 		'transformLegacyFormatOnExport' => true,
 
 		'conceptBaseUri' => function() {
-			$uri = $GLOBALS['wgServer'];
-			$uri = preg_replace( '!^//!', 'http://', $uri );
-			$uri = $uri . '/entity/';
-
-			return $uri;
+			$uri = preg_replace( '!^//!', 'http://', $GLOBALS['wgServer'] );
+			return $uri . '/entity/';
 		},
 
 		// Property used as formatter to link identifiers
