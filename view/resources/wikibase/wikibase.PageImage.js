@@ -43,6 +43,7 @@ var mw = mw || {};
 	SELF.prototype._thumbnailSize = 400;
 	SELF.prototype._minScale = 1;
 	SELF.prototype._crossOriginXmlUrl = 'https://upload.wikimedia.org/crossdomain.xml';
+	SELF.prototype._referenceUrl = 'https://commons.wikimedia.org/wiki/File:';
 
 	/**
 	 * Returns the page image as DOM element
@@ -57,7 +58,7 @@ var mw = mw || {};
 			self._loadImage( url ).done(
 				function( image ) {
 					self._getSmartCrop( image ).done(function( crop ) {
-						deferred.resolve(self._getMaskedImage( image, crop, referenceUrl ));
+						deferred.resolve(self._getMaskedImage( image, crop ), referenceUrl);
 					});
 				});
 		} );
@@ -101,13 +102,9 @@ var mw = mw || {};
 	/**
 	 * @private
 	 **/
-	SELF.prototype._getMaskedImage = function( image, crop, ref ) {
+	SELF.prototype._getMaskedImage = function( image, crop ) {
 
 		var canvas = $('<canvas/>')[0], ctx = canvas.getContext('2d');
-
-		if( ref ){
-			$( canvas ).data( 'ref', ref );
-		}
 
 		canvas.width = this._width;
 		canvas.height = this._height;
@@ -135,7 +132,7 @@ var mw = mw || {};
 				var page = data.query.pages[Object.keys( data.query.pages )[0]];
 				if( page.thumbnail ){
 					deferred.resolve( page.thumbnail.source,
-							page.pageprops.page_image );// jshint ignore:line
+							self._referenceUrl + page.pageprops.page_image );// jshint ignore:line
 				}
 
 			});
