@@ -1,10 +1,12 @@
 # Wikibase DataModel release notes
 
-## Version 4.4.0 (dev)
+## Version 4.4.0 (2016-01-20)
 
 * Added `ItemIdParser`
 * Added `ReferenceList::isEmpty`
 * Added `ReferencedStatementFilter::FILTER_TYPE` constant
+* Added `EntityRedirect::__toString`
+* Deprecated `HashableObjectStorage`
 * `SnakRole` enum is not an interface any more but a private class
 
 ## Version 4.3.0 (2015-09-02)
