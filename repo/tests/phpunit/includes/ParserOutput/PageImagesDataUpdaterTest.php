@@ -131,6 +131,8 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 			'Property not found' => array( $statements, array( 'P9999' ), null ),
 			'Not a property id' => array( $statements, array( 'Q1' ), null ),
 			'Invalid id' => array( $statements, array( 'invalid' ), null ),
+
+			// Configuration
 			'Ignore misconfiguration' => array( $statements, array( 'P1', 'P2', 'P1' ), '1.jpg' ),
 			'Ignore keys' => array( $statements, array( 2 => 'P1', 1 => 'P2' ), '1.jpg' ),
 
@@ -144,8 +146,10 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 			'Increasing order' => array( $statements, array( 'P1', 'P2', 'P3' ), '1.jpg' ),
 			'Decreasing order' => array( $statements, array( 'P3', 'P2', 'P1' ), '3a.jpg' ),
 
+			// Ranks
 			'Skip deprecated' => array( $statements, array( 'P4' ), 'Four_2.jpg' ),
 			'Prefer preferred' => array( $statements, array( 'P5' ), '5c.jpg' ),
+			'Rank does not overrule priority' => array( $statements, array( 'P1', 'P5' ), '1.jpg' ),
 		);
 	}
 
