@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_349d95b4",
+        "filename": "lib/includes/formatters/GlobeCoordinateDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-20T20:03:06Z",
+      "side": 1,
+      "message": "Kind of redundant",
+      "revId": "f0d69b739bdd57bd332da98263b9bc1ed11ef6ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
