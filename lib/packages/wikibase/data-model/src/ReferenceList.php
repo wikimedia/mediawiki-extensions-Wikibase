@@ -217,10 +217,10 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 *
 	 * @since 2.1
 	 *
-	 * @param string $data
+	 * @param string $serialized
 	 */
-	public function unserialize( $data ) {
-		$this->__construct( unserialize( $data ) );
+	public function unserialize( $serialized ) {
+		$this->references = unserialize( $serialized );
 	}
 
 	/**

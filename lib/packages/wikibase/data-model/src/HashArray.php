@@ -454,10 +454,10 @@ abstract class HashArray extends ArrayObject implements Hashable, Comparable {
 	/**
 	 * @see Serializable::unserialize
 	 *
-	 * @param string $serialization
+	 * @param string $serialized
 	 */
-	public function unserialize( $serialization ) {
-		$serializationData = unserialize( $serialization );
+	public function unserialize( $serialized ) {
+		$serializationData = unserialize( $serialized );
 
 		foreach ( $serializationData['data'] as $offset => $value ) {
 			// Just set the element, bypassing checks and offset resolving,
