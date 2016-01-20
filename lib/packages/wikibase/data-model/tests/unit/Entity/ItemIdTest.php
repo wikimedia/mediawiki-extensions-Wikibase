@@ -84,10 +84,27 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( '["item","Q1"]', $id->serialize() );
 	}
 
-	public function testUnserialize() {
+	/**
+	 * @dataProvider serializationProvider
+	 */
+	public function testUnserialize( $json, $expected ) {
 		$id = new ItemId( 'Q1' );
-		$id->unserialize( '["item","Q2"]' );
-		$this->assertSame( 'Q2', $id->getSerialization() );
+		$id->unserialize( $json );
+		$this->assertSame( $expected, $id->getSerialization() );
+	}
+
+	public function serializationProvider() {
+		return array(
+			array( '["item","Q2"]', 'Q2' ),
+
+			// All these cases are kind of an injection vector and allow constructing invalid ids.
+			array( '["string","Q2"]', 'Q2' ),
+			array( '["","string"]', 'string' ),
+			array( '["",""]', '' ),
+			array( '["",2]', 2 ),
+			array( '["",null]', null ),
+			array( '', null ),
+		);
 	}
 
 	/**
