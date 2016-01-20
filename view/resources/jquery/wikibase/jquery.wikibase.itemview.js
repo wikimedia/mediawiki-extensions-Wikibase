@@ -60,19 +60,14 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_createPageImage: function() {
+		var size = $( '.wikibase-entityview-side' ).outerWidth(),
+			pageImage = new wb.PageImage( size, size );
 
-//		var size = $( '.wikibase-entityview-side' ).outerWidth(),
-//			pageImage = new wb.PageImage( size, size );
-//
-//		var div =  $( '<div/>' ).addClass( 'pageImage' );
-//		var div =  $( '<div/>' ).addClass( 'pageImage' );
-//
-//		$( '.wikibase-entityview-side' ).prepand( div );
-//
-//		pageImage.getPageImage().done(function( element ){
-//			div.append( element );
-//		});
-
+		pageImage.getPageImage().done(function( element, url ){
+			$( '.wikibase-pageImage a.info' ).attr( 'href', url);
+			$( '.wikibase-pageImage' ).append( element );
+			$( '.wikibase-pageImage' ).show();
+		});
 	},
 
 	/**

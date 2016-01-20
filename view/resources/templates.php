@@ -322,5 +322,12 @@ HTML;
 </div>
 HTML;
 
+	$templates['wikibase-pageimage'] =
+<<<HTML
+<div class="wikibase-pageImage">
+	<div class="info"><a href=""><span class="wb-icon"></span></a></div>
+</div>
+HTML;
+
 	return $templates;
 } );

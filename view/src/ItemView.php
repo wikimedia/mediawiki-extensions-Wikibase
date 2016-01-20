@@ -81,7 +81,8 @@ class ItemView extends EntityView {
 	 */
 	protected function getSideHtml( EntityRevision $entityRevision ) {
 		$item = $entityRevision->getEntity();
-		return $this->getHtmlForSiteLinks( $item );
+		return	$this->getHtmlForPageImage($item)
+				.$this->getHtmlForSiteLinks( $item );
 	}
 
 	/**
@@ -99,6 +100,15 @@ class ItemView extends EntityView {
 			$item->getId(),
 			$this->siteLinkGroups
 		);
+	}
+
+	/**
+	 * Builds and returns the HTML representing a WikibaseEntity's page image.
+	 *
+	 * @return string
+	 */
+	protected function getHtmlForPageImage() {
+		return $this->templateFactory->render( 'wikibase-pageimage' );
 	}
 
 }
