@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_4f0f578d",
+        "filename": "client/includes/Hooks/ChangesListSpecialPageHooksHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-20T23:23:28Z",
+      "side": 1,
+      "message": "The string with quotes could be cached as a member.",
+      "revId": "0320d18da873150d4e4050469a4e90b242480eea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
