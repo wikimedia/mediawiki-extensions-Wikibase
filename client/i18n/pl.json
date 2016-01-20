@@ -11,13 +11,15 @@
 			"Alan ffm",
 			"Peter Bowman",
 			"Tar Lócesilion",
-			"The Polish"
+			"The Polish",
+			"Rzuwig"
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
 	"tooltip-t-wikibase": "Link do powiązanego elementu w repozytorium danych",
 	"wikibase-after-page-move": "Możesz także [$1 zaktualizować] powiązany element Wikidanych w celu zachowania linków do innych wersji językowych na przeniesionej stronie.",
 	"wikibase-after-page-move-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie automatycznie zaktualizowany. Może nie stać się to jednak natychmiast.",
+	"wikibase-after-page-delete-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie automatycznie zaktualizowany. Może nie stać się to jednak natychmiast.",
 	"wikibase-comment-add": "Utworzono element Wikidanych.",
 	"wikibase-comment-remove": "Powiązany element Wikidanych skasowany. Linki do innych wersji językowych usunięte.",
 	"wikibase-comment-linked": "Z tą stroną powiązano element Wikidanych.",
