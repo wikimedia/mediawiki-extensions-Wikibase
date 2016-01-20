@@ -45,7 +45,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
 
-		return array(
+		$data = array(
 			'simple' => array(
 				$snak,
 				false,
@@ -81,6 +81,47 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 		);
+
+		$value2 = new GlobeCoordinateValue(
+			new LatLongValue( 12.25, -45.5 ),
+			null,
+			'https://www.wikidata.org/entity/Q2'
+		);
+
+		$snak2 = new PropertyValueSnak( new PropertyId( 'P7' ), $value2 );
+
+		$data["complex2"] = array(
+				$snak2,
+				true,
+				array(
+					'<http://www/Q1> '
+						. '<http://acme/statement/P7> '
+						. '"Point(12.25 -45.5)"^^<http://acme/geo/wktLiteral> .',
+					'<http://www/Q1> '
+						. '<http://acme/statement/value/P7> '
+						. '<http://acme/value/f888aaaedee96a5fd1389877f736a242> .',
+					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+						. '<http://acme/onto/GlobecoordinateValue> .',
+					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+						. '<http://acme/onto/geoLatitude> '
+						. '"12.25"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+						. '<http://acme/onto/geoLongitude> '
+						. '"-45.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+						. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+						. '<http://acme/onto/GeoAutoPrecision> .',
+					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+						. '<http://acme/onto/geoPrecision> '
+						. '"0.00027777777777778"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/f888aaaedee96a5fd1389877f736a242> '
+						. '<http://acme/onto/geoGlobe> '
+						. '<https://www.wikidata.org/entity/Q2> .',
+				)
+		);
+
+		return $data;
 	}
 
 	/**
