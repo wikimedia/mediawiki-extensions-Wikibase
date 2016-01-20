@@ -70,10 +70,8 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 			}
 		}
 
-		if ( $this->itemSupportsRedirect() ) {
-			foreach ( $entityRedirects as $entityRedir ) {
-				self::storeTestRedirect( $entityRedir );
-			}
+		foreach ( $entityRedirects as $entityRedir ) {
+			self::storeTestRedirect( $entityRedir );
 		}
 
 		return new WikiPageEntityRevisionLookup(
