@@ -50,6 +50,7 @@ class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 			array( 'http', 'http://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
 			array( 'https', 'https://acme.com' ),
 			array( 'https', 'https://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
+			array( 'https', 'https://ko.wikipedia.org/wiki/전_(요리)' ),
 			array( 'ftp', 'ftp://acme.com' ),
 			array( 'ftp', 'ftp://foo:bar@acme.com/stuff/thingy.php?foo=bar#part' ),
 			array( 'irc', 'irc://chat.freenode.net/gimp' ),
