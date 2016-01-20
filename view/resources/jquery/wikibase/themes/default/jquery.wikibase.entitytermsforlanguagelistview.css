@@ -3,6 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 .wikibase-entitytermsforlanguagelistview {
+	background: #FFF;
 	border: 1px solid #C9C9C9;
 	border-spacing: 0;
 	display: table;
