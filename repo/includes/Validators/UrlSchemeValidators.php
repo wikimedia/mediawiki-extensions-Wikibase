@@ -44,16 +44,16 @@ class UrlSchemeValidators {
 			case 'svn':
 			case 'telnet':
 			case 'worldwind':
-				$regex = '!^' . preg_quote( $scheme, '!' ) . '://(' . Parser::EXT_LINK_URL_CLASS . ')+$!i';
+				$regex = '!^' . preg_quote( $scheme, '!' ) . '://(' . Parser::EXT_LINK_URL_CLASS . ')+$!ui';
 				break;
 
 			case 'mailto':
-				$regex = '!^mailto:(' . Parser::EXT_LINK_URL_CLASS . ')+@(' . Parser::EXT_LINK_URL_CLASS . ')+$!i';
+				$regex = '!^mailto:(' . Parser::EXT_LINK_URL_CLASS . ')+@(' . Parser::EXT_LINK_URL_CLASS . ')+$!ui';
 				break;
 
 			case '*':
 			case 'any':
-				$regex = '!^([a-z][a-z\d+.-]*):(' . Parser::EXT_LINK_URL_CLASS . ')+$!i';
+				$regex = '!^([a-z][a-z\d+.-]*):(' . Parser::EXT_LINK_URL_CLASS . ')+$!ui';
 				break;
 
 			default:
