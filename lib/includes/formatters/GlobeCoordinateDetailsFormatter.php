@@ -81,7 +81,7 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 
 	/**
 	 * @param string $fieldName
-	 * @param string $valueHtml
+	 * @param string $valueHtml HTML
 	 *
 	 * @return string HTML for the label/value pair
 	 */
@@ -90,7 +90,7 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 
 		$html .= Html::element( 'th', array( 'class' => 'wb-globe-' . $fieldName ),
 			$this->getFieldLabel( $fieldName )->text() );
-		$html .= Html::element( 'td', array( 'class' => 'wb-globe-' . $fieldName ),
+		$html .= Html::rawElement( 'td', array( 'class' => 'wb-globe-' . $fieldName ),
 			$valueHtml );
 
 		$html .= Html::closeElement( 'tr' );
