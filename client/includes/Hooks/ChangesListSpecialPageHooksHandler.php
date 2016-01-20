@@ -5,9 +5,12 @@ namespace Wikibase\Client\Hooks;
 use ChangesListSpecialPage;
 use FormOptions;
 use IContextSource;
+use LoadBalancer;
+use LBFactory;
 use RequestContext;
 use User;
 use WebRequest;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Assert\Assert;
 
@@ -30,6 +33,11 @@ class ChangesListSpecialPageHooksHandler {
 	private $user;
 
 	/**
+	 * @var LoadBalancer
+	 */
+	private $loadBalancer;
+
+	/**
 	 * @var string
 	 */
 	private $pageName;
@@ -47,17 +55,20 @@ class ChangesListSpecialPageHooksHandler {
 	/**
 	 * @param WebRequest $request
 	 * @param User $user
+	 * @param LoadBalancer $loadBalancer
 	 * @param string $pageName
 	 * @param bool $showExternalChanges
 	 */
 	public function __construct(
 		WebRequest $request,
 		User $user,
+		LoadBalancer $loadBalancer,
 		$pageName,
 		$showExternalChanges
 	) {
 		$this->request = $request;
 		$this->user = $user;
+		$this->loadBalancer = $loadBalancer;
 		$this->pageName = $pageName;
 		$this->showExternalChanges = $showExternalChanges;
 	}
@@ -79,6 +90,7 @@ class ChangesListSpecialPageHooksHandler {
 		return new self(
 			$context->getRequest(),
 			$context->getUser(),
+			LBFactory::singleton()->getMainLB(),
 			$specialPageName,
 			$settings->getSetting( 'showExternalRecentChanges' )
 		);
@@ -184,7 +196,9 @@ class ChangesListSpecialPageHooksHandler {
 		// do not include wikibase changes for activated enhanced watchlist
 		// since we do not support that format yet
 		if ( $this->shouldHideWikibaseChanges( $opts ) ) {
-			$conds[] = 'rc_type != ' . RC_EXTERNAL;
+			$dbr = $this->loadBalancer->getConnection( DB_SLAVE );
+			$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
+			$this->loadBalancer->reuseConnection( $dbr );
 		}
 
 		return $conds;

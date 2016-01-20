@@ -77,6 +77,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$hookHandler = new ChangesListSpecialPageHooksHandler(
 			$this->getRequest( array() ),
 			$this->getUser( $userOptions ),
+			$this->getLoadBalancer(),
 			'Watchlist',
 			true
 		);
@@ -98,7 +99,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 				false
 			),
 			array(
-				array( 'rc_type != 5' ),
+				array( "rc_source != 'wb'" ),
 				array( 'usenewrc' => 0 ),
 				true
 			)
@@ -109,6 +110,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$hookHandler = new ChangesListSpecialPageHooksHandler(
 			$this->getRequest( array() ),
 			$this->getUser( array( 'usenewrc' => 1 ) ),
+			$this->getLoadBalancer(),
 			'Watchlist',
 			true
 		);
@@ -118,7 +120,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$conds = array();
 		$hookHandler->addWikibaseConditions( $conds, $opts );
 
-		$this->assertEquals( array( 'rc_type != 5' ), $conds );
+		$this->assertEquals( array( "rc_source != 'wb'" ), $conds );
 	}
 
 	/**
@@ -133,6 +135,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$hookHandler = new ChangesListSpecialPageHooksHandler(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
+			$this->getLoadBalancer(),
 			$pageName,
 			true
 		);
@@ -197,6 +200,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$hookHandler = new ChangesListSpecialPageHooksHandler(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
+			$this->getLoadBalancer(),
 			$specialPageName,
 			true
 		);
@@ -274,6 +278,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$hookHandler = new ChangesListSpecialPageHooksHandler(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
+			$this->getLoadBalancer(),
 			$specialPageName,
 			true
 		);
@@ -338,6 +343,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$hookHandler = new ChangesListSpecialPageHooksHandler(
 			$this->getRequest( array() ),
 			$this->getUser( array( 'usenewrc' => 0 ) ),
+			$this->getLoadBalancer(),
 			$specialPageName,
 			false
 		);
@@ -378,6 +384,28 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 			} ) );
 
 		return $user;
+	}
+
+	private function getLoadBalancer() {
+		$databaseBase = $this->getMockBuilder( 'IDatabase' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$databaseBase->expects( $this->any() )
+			->method( 'addQuotes' )
+			->will( $this->returnCallback( function( $input ) {
+				return "'$input'";
+			} ) );
+
+		$loadBalancer = $this->getMockBuilder( 'LoadBalancer' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$loadBalancer->expects( $this->any() )
+			->method( 'getConnection' )
+			->will( $this->returnValue( $databaseBase ) );
+
+		return $loadBalancer;
 	}
 
 }
