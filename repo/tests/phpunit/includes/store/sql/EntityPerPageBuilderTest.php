@@ -83,14 +83,6 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return bool
-	 */
-	private function itemSupportsRedirect() {
-		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-		return $handler->supportsRedirects();
-	}
-
-	/**
 	 * @return Item[]
 	 */
 	private function addItems() {
@@ -113,20 +105,18 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 			$items[] = $rev->getEntity();
 		}
 
-		if ( $this->itemSupportsRedirect() ) {
-			// add another berlin (so we have a valid id), then turn it into a redirect
-			$item = new Item();
-			$item->setLabel( 'en', $prefix . 'Berlin2' );
-			$rev = $store->saveEntity( $item, "added an item", $user, EDIT_NEW );
-			$items[] = $rev->getEntity();
+		// add another berlin (so we have a valid id), then turn it into a redirect
+		$item = new Item();
+		$item->setLabel( 'en', $prefix . 'Berlin2' );
+		$rev = $store->saveEntity( $item, "added an item", $user, EDIT_NEW );
+		$items[] = $rev->getEntity();
 
-			$items = array_reverse( $items );
-			$berlin2 = $items[0]->getId();
-			$berlin1 = $items[1]->getId();
-			$redirect = new EntityRedirect( $berlin2, $berlin1 );
+		$items = array_reverse( $items );
+		$berlin2 = $items[0]->getId();
+		$berlin1 = $items[1]->getId();
+		$redirect = new EntityRedirect( $berlin2, $berlin1 );
 
-			$store->saveRedirect( $redirect, "created redirect", $user, EDIT_UPDATE );
-		}
+		$store->saveRedirect( $redirect, "created redirect", $user, EDIT_UPDATE );
 
 		return $items;
 	}
