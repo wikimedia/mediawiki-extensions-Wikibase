@@ -71,4 +71,13 @@ class EntityRedirect {
 			&& $this->targetId->equals( $that->targetId );
 	}
 
+	/**
+	 * @since 4.4
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return $this->entityId . '->' . $this->targetId;
+	}
+
 }

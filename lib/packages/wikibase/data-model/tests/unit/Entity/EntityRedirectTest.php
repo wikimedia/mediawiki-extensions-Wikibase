@@ -77,4 +77,9 @@ class EntityRedirectTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
+	public function testToString() {
+		$redirect = new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) );
+		$this->assertSame( 'Q1->Q2', $redirect->__toString() );
+	}
+
 }
