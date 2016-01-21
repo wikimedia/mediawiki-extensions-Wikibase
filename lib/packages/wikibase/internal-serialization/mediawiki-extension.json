@@ -1,0 +1,12 @@
+{
+	"name": "Wikibase Internal Serialization",
+	"author": [
+		"[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]"
+	],
+	"url": "https://github.com/wmde/WikibaseInternalSerialization",
+	"description": "Serializers and deserializers for the data access layer of Wikibase Repository",
+	"version": "2.0",
+	"license-name": "GPL-2.0+",
+	"type": "wikibase",
+	"manifest_version": 1
+}
