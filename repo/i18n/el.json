@@ -8,7 +8,8 @@
 			"Indoril",
 			"Evropi",
 			"Macofe",
-			"Glavkos"
+			"Glavkos",
+			"Badseed"
 		]
 	},
 	"wikibase-desc": "Αποθετήριο δομημένων δεδομένων",
@@ -153,11 +154,11 @@
 	"wikibase-setdescription-introfull": "Ορίζετε την περιγραφή στα $2 για το [[$1]].",
 	"wikibase-setdescription-label": "Περιγραφή:",
 	"wikibase-setdescription-submit": "Προσθέστε μια περιγραφή",
-	"wikibase-setaliases-introfull": "Ορίζετε τα αλλώνυμα στα $2 για το [[$1]]. Πολλαπλά αλλώνυμα είναι διαχωρισμένα με τον χαρακτήρα πίπας (<code>|</code>).",
+	"wikibase-setaliases-introfull": "Ορίζετε τα αλλώνυμα στα $2 για το [[$1]]. Πολλαπλά αλλώνυμα διαχωρίζονται με τον χαρακτήρα καθέτου (<code>|</code>).",
 	"wikibase-setaliases-label": "Αλλώνυμα:",
 	"wikibase-setaliases-submit": "Ορίστε αλλώνυμα",
 	"special-setlabeldescriptionaliases": "Ορίστε ετικέτα, περιγραφή και αλλώνυμα",
-	"wikibase-setlabeldescriptionaliases-introfull": "Ορίζετε ετικέτα, περιγραφή και αλλώνυμα στα $2 για το [[$1]]. Πολλαπλά αλλώνυμα είναι διαχωρισμένα με τον χαρακτήρα πίπας (<code>|</code>).",
+	"wikibase-setlabeldescriptionaliases-introfull": "Ορίζετε ετικέτα, περιγραφή και αλλώνυμα στα $2 για το [[$1]]. Πολλαπλά αλλώνυμα διαχωρίζονται με τον χαρακτήρα καθέτου (<code>|</code>).",
 	"wikibase-setlabeldescriptionaliases-label-label": "Ετικέτα:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Περιγραφή:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Αλλώνυμα:",
