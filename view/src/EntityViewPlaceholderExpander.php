@@ -195,7 +195,7 @@ class EntityViewPlaceholderExpander {
 	 * Dispatch the expansion of placeholders based on the name.
 	 *
 	 * @note This encodes knowledge about which placeholders are used by EntityView with what
-	 *       intended meaning.
+	 * intended meaning.
 	 *
 	 * @param string $name
 	 * @param array $args
@@ -211,21 +211,33 @@ class EntityViewPlaceholderExpander {
 					isset( $args[1] ) ? (int)$args[1] : 0
 				);
 			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
-				return
-					!$this->user->isAnon()
-						&& $this->user->getBoolOption(
-							'wikibase-entitytermsview-showEntitytermslistview'
-						)
-					|| $this->user->isAnon()
-						&& isset( $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] )
-						&& $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] === 'true'
-					? '' : 'wikibase-initially-collapsed';
-
+				return $this->isInitiallyCollapsed() ? 'wikibase-initially-collapsed' : '';
 			default:
 				wfWarn( "Unknown placeholder: $name" );
 				return '(((' . htmlspecialchars( $name ) . ')))';
 		}
 	}
+
+	/**
+	 * Checks if is initially collapsed for current user
+	 * @return bool
+	 */
+	 private function isInitiallyCollapsed() {
+
+		if ( $this->user->isAnon()
+				&& ( isset( $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] )
+				&& $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] === 'false' ) ) {
+			return true;
+		}
+
+		if ( !$this->user->isAnon()
+				&& isset( $this->user->mOptions[ 'wikibase-entitytermsview-showEntitytermslistview' ] )
+				&& !$this->user->getBoolOption( 'wikibase-entitytermsview-showEntitytermslistview' ) ) {
+			return true;
+		}
+
+		return false;
+	 }
 
 	/**
 	 * Generates HTML of the term box, to be injected into the entity page.
