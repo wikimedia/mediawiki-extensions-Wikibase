@@ -211,21 +211,24 @@ class EntityViewPlaceholderExpander {
 					isset( $args[1] ) ? (int)$args[1] : 0
 				);
 			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
-				return
-					!$this->user->isAnon()
-						&& $this->user->getBoolOption(
-							'wikibase-entitytermsview-showEntitytermslistview'
-						)
-					|| $this->user->isAnon()
-						&& isset( $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] )
-						&& $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] === 'true'
-					? '' : 'wikibase-initially-collapsed';
-
+				return $this->isInitiallyCollapsed() ? 'wikibase-initially-collapsed' : '';
 			default:
 				wfWarn( "Unknown placeholder: $name" );
 				return '(((' . htmlspecialchars( $name ) . ')))';
 		}
 	}
+
+	/**
+	 * @return bool If the terms list should be initially collapsed for the current user.
+	 */
+	 private function isInitiallyCollapsed() {
+		if ( $this->user->isAnon() ) {
+			return isset( $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] )
+				&& $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] === 'false';
+		} else {
+			return !$this->user->getBoolOption( 'wikibase-entitytermsview-showEntitytermslistview' );
+		}
+	 }
 
 	/**
 	 * Generates HTML of the term box, to be injected into the entity page.
