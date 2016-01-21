@@ -124,6 +124,12 @@ call_user_func( function() {
 	$wgAvailableRights[] = 'item-redirect';
 	$wgAvailableRights[] = 'property-create';
 
+	$wgGrantPermissions['edit-page']['item-term'];
+	$wgGrantPermissions['edit-page']['item-redirect'];
+	$wgGrantPermissions['edit-page']['item-merge'];
+	$wgGrantPermissions['edit-page']['property-term'];
+	$wgGrantPermissions['createeditmovepage']['property-create'];
+
 	// i18n
 	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
 	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
