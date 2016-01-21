@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_f89ccb6e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-01-21T13:05:38Z",
+      "side": 1,
+      "message": "I don\u0027t think this is necessary, toggler already does the right thing. Even if not, this has to use this.$entitytermsforlanguagelistviewContainer and shouldn\u0027t use the class name which is an implementation detail from my point of view.",
+      "revId": "5e5281dae95eb58683d948741c2630b80aa2a434",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_189c476f",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-01-21T13:05:38Z",
+      "side": 1,
+      "message": "This does not change behavior for logged in users, does it?",
+      "revId": "5e5281dae95eb58683d948741c2630b80aa2a434",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
