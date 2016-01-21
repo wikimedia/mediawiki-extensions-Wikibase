@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_3297e44c",
+        "filename": "client/tests/phpunit/includes/Hooks/OtherProjectsSidebarGeneratorTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-01-21T01:01:15Z",
+      "side": 1,
+      "message": "$self",
+      "revId": "f95b30434aaba1bcab536930419dc72ec198db01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
