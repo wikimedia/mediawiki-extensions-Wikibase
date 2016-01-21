@@ -79,8 +79,9 @@ if ( !defined( 'PURTLE_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgGroupPermissions, $wgExtensionMessagesFiles, $wgMessagesDirs;
-	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks, $wgAvailableRights;
+	global $wgExtensionCredits, $wgGroupPermissions, $wgGrantPermissions, $wgAvailableRights;
+	global $wgExtensionMessagesFiles, $wgMessagesDirs;
+	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
 	global $wgWBRepoDataTypes;
 
@@ -123,6 +124,12 @@ call_user_func( function() {
 	$wgAvailableRights[] = 'item-merge';
 	$wgAvailableRights[] = 'item-redirect';
 	$wgAvailableRights[] = 'property-create';
+
+	$wgGrantPermissions['editpage']['item-term'] = true;
+	$wgGrantPermissions['editpage']['item-redirect'] = true;
+	$wgGrantPermissions['editpage']['item-merge'] = true;
+	$wgGrantPermissions['editpage']['property-term'] = true;
+	$wgGrantPermissions['createeditmovepage']['property-create'] = true;
 
 	// i18n
 	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
