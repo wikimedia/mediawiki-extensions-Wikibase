@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_63b10cf3",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-01-21T16:45:21Z",
+      "side": 1,
+      "message": "This changes the state of the toggler\u0027s blue triangle",
+      "parentUuid": "6eaa8f54_f89ccb6e",
+      "revId": "5e5281dae95eb58683d948741c2630b80aa2a434",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_189c476f",
         "filename": "view/src/EntityViewPlaceholderExpander.php",
         "patchSetId": 3
