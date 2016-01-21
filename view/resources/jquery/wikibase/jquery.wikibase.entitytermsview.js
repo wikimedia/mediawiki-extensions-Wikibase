@@ -231,7 +231,9 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			.text( mw.msg( 'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler' ) )
 			.toggler( {
 				$subject: this.$entitytermsforlanguagelistviewContainer,
-				duration: 'fast'
+				duration: 'fast',
+				visible: !$( '.wikibase-entitytermsview-entitytermsforlanguagelistview' )
+							.hasClass( 'wikibase-initially-collapsed' )
 			} )
 			.on( 'toggleranimation.' + this.widgetName, function( event, params ) {
 				if ( mw.user.isAnon() ) {
