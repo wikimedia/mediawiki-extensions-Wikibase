@@ -188,10 +188,10 @@ class EntityTermsView {
 		}
 
 		return $this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview',
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-language' ),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-label' ),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-description' ),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' ),
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-language' )->text(),
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-label' )->text(),
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-description' )->text(),
+			$this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' )->text(),
 			$entityTermsForLanguageViewsHtml
 		);
 	}
