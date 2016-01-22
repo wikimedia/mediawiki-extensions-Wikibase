@@ -16,6 +16,24 @@
       "revId": "62a264938c46400678fce6d8ceab90374e71463e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_0e6cf897",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-01-22T09:17:07Z",
+      "side": 1,
+      "message": "Are you sure? Because I checked that and it seems not set \u003d\u003d false instead of null",
+      "parentUuid": "6eaa8f54_0e45d817",
+      "revId": "62a264938c46400678fce6d8ceab90374e71463e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
