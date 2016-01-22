@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_4707331b",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2016-01-22T17:50:48Z",
+      "side": 1,
+      "message": "These messages currently allow HTML. For backward compatibility you may want to change escaped() to text().",
+      "revId": "515e34bc50d44306b7edae4418dfe234da9a0d58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
