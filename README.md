@@ -26,8 +26,6 @@ Wikipedias.
 
 The lib bundles common code that is used by both the client and the repo.
 
-Note that in each of the directories you will also find `README.md` notes for each of the extensions.
-
 ## Install
 
 This package contains three interrelated MediaWiki extensions:
