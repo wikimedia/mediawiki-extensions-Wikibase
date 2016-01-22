@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_0e45d817",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-01-22T09:08:53Z",
+      "side": 1,
+      "message": "Instead of accessing a private property of a core class, you could also do `$this-\u003euser-\u003egetOption( ... ) \u003d\u003d\u003d false`",
+      "revId": "62a264938c46400678fce6d8ceab90374e71463e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
