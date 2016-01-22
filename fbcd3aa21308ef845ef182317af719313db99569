@@ -16,6 +16,24 @@
       "revId": "fbcd3aa21308ef845ef182317af719313db99569",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_8e922855",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 562
+      },
+      "writtenOn": "2016-01-22T10:24:13Z",
+      "side": 1,
+      "message": "Yes, only $1 to $4.",
+      "parentUuid": "6eaa8f54_4eb190f2",
+      "revId": "fbcd3aa21308ef845ef182317af719313db99569",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
