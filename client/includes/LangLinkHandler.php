@@ -115,7 +115,7 @@ class LangLinkHandler {
 				$links = iterator_to_array( $item->getSiteLinkList() );
 				$links = $this->indexLinksBySiteId( $links );
 			} else {
-				wfWarn( __METHOD__ . ": Could not load item " . $itemId->getSerialization()
+				wfLogWarning( __METHOD__ . ": Could not load item " . $itemId->getSerialization()
 					. " for " . $title->getFullText() );
 			}
 		}
