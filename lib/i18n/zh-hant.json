@@ -55,7 +55,7 @@
 	"wikibase-sitelinks-link-columnheading": "已連結的頁面",
 	"wikibase-snakview-snaktypeselector-somevalue": "未知數值",
 	"wikibase-snakview-snaktypeselector-novalue": "無數值",
-	"wikibase-tooltip-error-details": "詳細資訊",
+	"wikibase-tooltip-error-details": "詳細資料",
 	"wikibase-undeserializable-value": "此數值無效，無法顯示。",
 	"wikibase-validator-invalid": "無效的數值",
 	"wikibase-validator-missing-field": "缺少必填欄位 \"$1\"",
