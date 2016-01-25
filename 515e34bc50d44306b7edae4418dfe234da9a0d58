@@ -16,6 +16,24 @@
       "revId": "515e34bc50d44306b7edae4418dfe234da9a0d58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_c78f9577",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-25T11:07:48Z",
+      "side": 1,
+      "message": "These are table headers, meant to be plain text. Allowing HTML or wikitext in here is wrong and was a bug.",
+      "parentUuid": "6eaa8f54_4707331b",
+      "revId": "515e34bc50d44306b7edae4418dfe234da9a0d58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
