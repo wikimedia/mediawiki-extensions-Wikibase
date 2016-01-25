@@ -16,6 +16,24 @@
       "revId": "c992b1f4fd3efa5b053151fb292dbef6c775e9ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_e74171ae",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-25T12:56:01Z",
+      "side": 1,
+      "message": "If the user is anonymous,\nand the cookie is set,\nand it is set to \"false\",\nthen the box is collapsed.\n\nIf the cookie is missing, which is the default, the box is expanded.",
+      "parentUuid": "6eaa8f54_c7e9d5a8",
+      "revId": "c992b1f4fd3efa5b053151fb292dbef6c775e9ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
