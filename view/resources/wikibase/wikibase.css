@@ -664,22 +664,46 @@ table.diff table.wb-details td {
 /********** PAGE IMAGE **********/
 
 .wikibase-pageImage {
-	display: none;
+	//display: none;
 	border: 1px solid #C9C9C9;
 	position: relative;
 	width: 100%;
 	margin: 0 2em 2em 0;
+	height: 300px;
 }
 
 .wikibase-pageImage .help {
 	position: absolute;
-	top: 5px;
-	right: 0;
+	top: 10px;
+	right: 5px;
 }
 
 .wikibase-pageImage .help .wikibase-wbtooltip {
 	text-decoration: none;
 	display: block;
+}
+
+.wikibase-pageImage .info {
+	position: absolute;
+	bottom: 0;
+	right: 5px;
+}
+
+.wikibase-pageImage .info .wb-icon {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	background-size: 24px 24px;
+	background-position: center;
+	background-repeat: no-repeat;
+	/* SVG support using a transparent gradient to guarantee cross-browser
+	 * compatibility (browsers able to understand gradient syntax support also SVG).
+	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
+	background-image: url(../jquery/wikibase/toolbar/themes/default/images/icons/oojs-ui/info.png);
+	/* @embed */
+	background-image: -webkit-linear-gradient(transparent, transparent), url(../jquery/wikibase/toolbar/themes/default/images/icons/oojs-ui/info.png);
+	/* @embed */
+	background-image: linear-gradient(transparent, transparent), url(../jquery/wikibase/toolbar/themes/default/images/icons/oojs-ui/info.png);
 }
 
 /********** /PAGEIMAGE **********/
