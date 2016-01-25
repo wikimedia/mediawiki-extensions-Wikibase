@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use ContentHandler;
 use RuntimeException;
 use User;
 use Wikibase\DataModel\Entity\EntityRedirect;

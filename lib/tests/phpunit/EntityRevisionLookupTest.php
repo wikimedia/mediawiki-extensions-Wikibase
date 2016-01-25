@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use ContentHandler;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
