@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_3de31a9e",
+        "filename": "repo/includes/Interactors/RedirectCreationInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-25T18:13:27Z",
+      "side": 1,
+      "message": "This should be EDIT_UPDATE if the page exists and EDIT_CREATE of it was deleted (and thus does not exist)",
+      "revId": "8a2cd6fb206d76224090a797d9e0eff4afccad3c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
