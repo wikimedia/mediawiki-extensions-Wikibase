@@ -328,6 +328,7 @@ HTML;
 	<div class="help">
 		<span class="mw-help-field-hint wikibase-toolbar-item wikibase-wbtooltip" title="$1">&nbsp;</span>
 	</div>
+	<div class="info"><a href="$2"><span class="wb-icon"></span></a></div>
 </div>
 HTML;
 
