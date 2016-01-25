@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_b845d849",
+        "filename": "view/tests/phpunit/EntityTermsViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2016-01-25T18:37:17Z",
+      "side": 1,
+      "message": "Maybe also assertNotContains \"\u0027\u0027RAW\u0027\u0027\"?",
+      "revId": "a0462aa8d0016d498625fe2e1461a43977b320a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
