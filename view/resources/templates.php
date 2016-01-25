@@ -322,5 +322,14 @@ HTML;
 </div>
 HTML;
 
+	$templates['wikibase-pageimage'] =
+<<<HTML
+<div class="wikibase-pageImage">
+	<div class="help">
+		<span class="mw-help-field-hint wikibase-toolbar-item wikibase-wbtooltip" title="$1">&nbsp;</span>
+	</div>
+</div>
+HTML;
+
 	return $templates;
 } );
