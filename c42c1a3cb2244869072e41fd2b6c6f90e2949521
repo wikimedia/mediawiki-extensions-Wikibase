@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_e7d09125",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-25T12:11:26Z",
+      "side": 1,
+      "message": "I expected a response here.",
+      "parentUuid": "6eaa8f54_19474d24",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_9901fdbb",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
         "patchSetId": 6
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "I have no idea what this should do if the userLanguages option is empty.. Just do nothing? I\u0027m not sure that we should allow this to be empty as the user always has at least one user language (the one he is browsing the wiki). Either way we should add a test though.",
       "parentUuid": "6eaa8f54_9901fdbb",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_67a4a1b6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-25T12:11:26Z",
+      "side": 1,
+      "message": "So where is this test we talked about?",
+      "parentUuid": "6eaa8f54_b9c87926",
       "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -118,6 +154,24 @@
       "side": 1,
       "message": "While that shouldn\u0027t happen when using this widget (items added are always derived from the fingerprint object) I can still add a test case for this.",
       "parentUuid": "6eaa8f54_d9c1b584",
+      "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_47bc05d6",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-25T12:11:26Z",
+      "side": 1,
+      "message": "I expected you to add a test when you wrote this. Should I do it? You have to tell me.",
+      "parentUuid": "6eaa8f54_19fe6d36",
       "revId": "c42c1a3cb2244869072e41fd2b6c6f90e2949521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
