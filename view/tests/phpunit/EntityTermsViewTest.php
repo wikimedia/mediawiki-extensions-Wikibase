@@ -4,6 +4,7 @@ namespace Wikibase\View\Tests;
 
 use Language;
 use MediaWikiLangTestCase;
+use MessageCache;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\View\EntityTermsView;
@@ -240,9 +241,21 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
 	}
 
+	public function testGetEntityTermsForLanguageListView_isEscaped() {
+		MessageCache::singleton()->enable();
+		$this->setMwGlobals( 'wgLang', Language::factory( 'en' ) );
+		$this->insertPage( 'MediaWiki:wikibase-entitytermsforlanguagelistview-language', "''RAW''" );
+
+		$view = $this->getEntityTermsView();
+		$html = $view->getEntityTermsForLanguageListView( new Fingerprint(), array() );
+
+		$this->assertContains( '&#039;&#039;RAW&#039;&#039;', $html );
+		$this->assertNotContains( "'RAW'", $html );
+	}
+
 	public function testGetEntityTermsForLanguageListView_isMarkedAsEmpty() {
 		$view = $this->getEntityTermsView( 0, 1 );
-		$html = $view->getEntityTermsForLanguageListView( new Fingerprint(), array( 'en' ), null );
+		$html = $view->getEntityTermsForLanguageListView( new Fingerprint(), array( 'en' ) );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '(wikibase-label-empty)', $html );
