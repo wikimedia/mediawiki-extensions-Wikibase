@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_4741650d",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-25T17:09:07Z",
+      "side": 1,
+      "message": "Are we sure $globe is always a URI? Are we sure that URI never contains a \"\u003e\" character? Can $globe be null here, for old/broken data?",
+      "revId": "cc8974d40c2b5ab3aee3610a6cc5556607780461",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_2786a9e1",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-25T17:09:07Z",
+      "side": 1,
+      "message": "Please be more specific / provide a section number and spec version.  I don\u0027t even know where to look, that document is huge...\n\nI found https://www.w3.org/2011/02/GeoSPARQL.pdf Req 4. But that says that ALL wktLiteral values need to start with a URI for the reference system. We treat this as optional...",
+      "revId": "cc8974d40c2b5ab3aee3610a6cc5556607780461",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
