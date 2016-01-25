@@ -660,3 +660,25 @@ table.diff table.wb-details td {
 	border: none;
 }
 /***** /DIFF VIEW *****/
+
+/********** PAGE IMAGE **********/
+
+.wikibase-pageImage {
+	display: none;
+	border: 1px solid #C9C9C9;
+	position: relative;
+	width: 100%;
+}
+
+.wikibase-pageImage .help {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.wikibase-pageImage .help .wikibase-wbtooltip {
+	text-decoration: none;
+	display: block;
+}
+
+/********** /PAGEIMAGE **********/
