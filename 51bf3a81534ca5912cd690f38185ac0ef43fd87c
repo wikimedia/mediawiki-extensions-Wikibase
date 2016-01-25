@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_c74c7546",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-25T11:49:55Z",
+      "side": 1,
+      "message": "Options are always strings. This should be \u00271\u0027.",
+      "revId": "51bf3a81534ca5912cd690f38185ac0ef43fd87c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_875e7deb",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-25T11:49:55Z",
+      "side": 1,
+      "message": "Unnecessary complexity.\n\nif ( $this-\u003euser-\u003eisAnon() ) {\n return …;\n} else {\n return !$this-\u003euser-\u003egetBoolOption( \u0027wikibase-entitytermsview-showEntitytermslistview\u0027 );\n}",
+      "revId": "51bf3a81534ca5912cd690f38185ac0ef43fd87c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
