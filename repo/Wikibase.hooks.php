@@ -356,6 +356,7 @@ final class RepoHooks {
 				'label-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview',
 				'help-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview-help',
 				'section' => 'rendering/advancedrendering',
+				'default' => '1',
 			);
 		} elseif ( $user->getBoolOption( 'wikibase-entitytermsview-showEntitytermslistview' ) ) {
 			// Clear setting after uninstalling Babel extension.
