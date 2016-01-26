@@ -63,12 +63,22 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @type {jQuery}
 	 */
+	$listview: null,
+
+	/**
+	 * @type {jQuery}
+	 */
 	$entitytermsforlanguagelistviewMore: null,
 
 	/**
 	 * @type {boolean}
 	 */
 	_isInEditMode: false,
+
+	/**
+	 * @type {Object}
+	 */
+	_moreLanguagesItemsPerLanguage: {},
 
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
@@ -216,57 +226,93 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @private
 	 */
 	_createEntitytermsforlanguagelistviewMore: function() {
-		var self = this,
-			listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
-			languages = this._getAdditionalLanguages(),
-			itemsPerLanguage = {};
-
-		if ( $.isEmptyObject( languages ) ) {
+		if ( $.isEmptyObject( this._getAdditionalLanguages() ) ) {
 			return;
 		}
 
+		var moreLanguagesButton = $( '<a/>' ).attr( 'href', '#' )
+			.click( $.proxy( this._onMoreLanguagesButtonClicked, this ) );
+
 		this.$entitytermsforlanguagelistviewMore = $( '<div/>' )
 		.addClass( 'wikibase-entitytermsforlanguagelistview-more' )
-		.append(
-			$( '<a/>' )
-			.attr( 'href', '#' )
-			.text( mw.msg( 'wikibase-entitytermsforlanguagelistview-more' ) )
-			.click( function() {
-				var $this = $( this ),
-					expanded = $.isEmptyObject( itemsPerLanguage ),
-					lang;
+		.append( moreLanguagesButton );
 
-				if ( expanded ) {
-					for ( lang in languages ) {
-						var $li = listview.addItem( self._getValueForLanguage( lang ) );
-						if ( self._isInEditMode ) {
-							lia.liInstance( $li ).startEditing();
-						}
-						itemsPerLanguage[lang] = $li;
-					}
-				} else {
-					var top = $this.offset().top;
-					for ( lang in languages ) {
-						listview.removeItem( itemsPerLanguage[lang] );
-						delete itemsPerLanguage[lang];
-					}
-					self._scrollUp( $this, top );
-				}
-
-				$this.text( mw.msg(
-					'wikibase-entitytermsforlanguagelistview-' + ( expanded ? 'less' : 'more' )
-				) );
-
-				return false;
-			} )
-		);
-
+		this._toggleMoreLanguageButtonLabel();
 		this.element.after( this.$entitytermsforlanguagelistviewMore );
 	},
 
 	/**
+	 * Click handler for more languages button
+	 *
+	 * @private
+	 */
+	_onMoreLanguagesButtonClicked: function ( event ) {
+		var $button = $( event.target );
+
+		if ( !this._isMoreLanguagesExpanded() ) {
+			this._addMoreLanguages();
+		} else {
+			this._removeMoreLanguages();
+			this._scrollUp( $button, $button.offset().top );
+		}
+
+		this._toggleMoreLanguageButtonLabel();
+		return false;
+	},
+
+	_isMoreLanguagesExpanded: function () {
+		return !$.isEmptyObject( this._moreLanguagesItemsPerLanguage );
+	},
+
+	/**
+	 * Remove 'more' languages to listview
+	 *
+	 * @private
+	 */
+	_removeMoreLanguages: function() {
+		var itemsPerLanguage = this._moreLanguagesItemsPerLanguage,
+			listview = this.$listview.data( 'listview' );
+
+		for ( var lang in this._getAdditionalLanguages() ) {
+			listview.removeItem( itemsPerLanguage[lang] );
+			delete itemsPerLanguage[lang];
+		}
+	},
+
+	/**
+	 * Add 'more' languages to listview
+	 *
+	 * @private
+	 */
+	_addMoreLanguages: function() {
+		var listview = this.$listview.data( 'listview' ),
+			lia = listview.listItemAdapter();
+
+		for ( var lang in this._getAdditionalLanguages() ) {
+			var $li = listview.addItem( this._getValueForLanguage( lang ) );
+			if ( this._isInEditMode ) {
+				lia.liInstance( $li ).startEditing();
+			}
+			this._moreLanguagesItemsPerLanguage[lang] = $li;
+		}
+	},
+
+	/**
+	 * Toggle more language button text ( more/less )
+	 *
+	 * @private
+	 */
+	_toggleMoreLanguageButtonLabel: function() {
+		this.$entitytermsforlanguagelistviewMore
+		.find( 'a' ).text( mw.msg(
+				'wikibase-entitytermsforlanguagelistview-'
+					+ ( this._isMoreLanguagesExpanded() ? 'less' : 'more' )
+		) );
+	},
+
+	/**
 	 * @return {Object} Map of additional language codes in this fingerprint.
+	 *
 	 * @private
 	 */
 	_getAdditionalLanguages: function() {
