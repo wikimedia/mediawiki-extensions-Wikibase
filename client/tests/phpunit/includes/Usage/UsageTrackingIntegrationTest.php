@@ -131,7 +131,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		// Assume the state created by testUpdateUsageOnCreation().
 		// Change page content to use the template instead of {{#property}} directly.
 		$text = "Just some text\n";
-		$text .= "using a template: {{" . $this->templateTitle->getFullText() . "}}\n";
+		$text .= "using a template: {{" . $this->templateTitle->getPrefixedText() . "}}\n";
 		$this->updatePage( $this->articleTitle, $text );
 
 		// Check that Q22, used via the template, is now tracked.

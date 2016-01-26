@@ -191,7 +191,7 @@ class OtherProjectsSidebarGenerator {
 	 * @return Item|null
 	 */
 	private function getItemId( Title $title ) {
-		$siteLink = new SiteLink( $this->localSiteId, $title->getFullText() );
+		$siteLink = new SiteLink( $this->localSiteId, $title->getPrefixedText() );
 		return $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
 	}
 

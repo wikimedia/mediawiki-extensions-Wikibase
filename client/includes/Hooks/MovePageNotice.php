@@ -114,7 +114,7 @@ class MovePageNotice {
 		$entityId = $this->siteLinkLookup->getItemIdForSiteLink(
 			new SiteLink(
 				$this->siteId,
-				$title->getFullText()
+				$title->getPrefixedText()
 			)
 		);
 

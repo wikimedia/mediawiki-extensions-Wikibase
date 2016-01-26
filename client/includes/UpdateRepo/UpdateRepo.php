@@ -88,14 +88,14 @@ abstract class UpdateRepo {
 			$this->entityId = $this->siteLinkLookup->getItemIdForSiteLink(
 				new SiteLink(
 					$this->siteId,
-					$this->title->getFullText()
+					$this->title->getPrefixedText()
 				)
 			);
 
 			if ( $this->entityId === null ) {
 				wfDebugLog(
 					'UpdateRepo',
-					"Couldn't find an item for {$this->title->getFullText()}"
+					"Couldn't find an item for {$this->title->getPrefixedText()}"
 				);
 			}
 		}

@@ -153,7 +153,7 @@ class ClientParserOutputDataUpdater {
 	private function getItemIdForTitle( Title $title ) {
 		return $this->siteLinkLookup->getItemIdForLink(
 			$this->siteId,
-			$title->getFullText()
+			$title->getPrefixedText()
 		);
 	}
 

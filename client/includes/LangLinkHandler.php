@@ -101,7 +101,7 @@ class LangLinkHandler {
 
 		$itemId = $this->siteLinkLookup->getItemIdForLink(
 			$this->siteId,
-			$title->getFullText()
+			$title->getPrefixedText()
 		);
 
 		if ( $itemId !== null ) {
@@ -116,7 +116,7 @@ class LangLinkHandler {
 				$links = $this->indexLinksBySiteId( $links );
 			} else {
 				wfLogWarning( __METHOD__ . ": Could not load item " . $itemId->getSerialization()
-					. " for " . $title->getFullText() );
+					. " for " . $title->getPrefixedText() );
 			}
 		}
 
