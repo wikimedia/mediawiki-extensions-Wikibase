@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_22268e12",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-01-26T14:18:02Z",
+      "side": 1,
+      "message": "I decided to go for this solution since I see no valid use case where we want the userLanguages to be empty. Can be changed later if necessary.",
+      "revId": "5c0166ee257ec1114903156ef1e682e9385cd596",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
