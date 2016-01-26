@@ -116,8 +116,8 @@ class SiteLinkCommentCreator {
 			return false;
 		}
 
-		return $title->getFullText() === $diffOp->getOldValue() ||
-			$title->getFullText() === $diffOp->getNewValue();
+		return $title->getPrefixedText() === $diffOp->getOldValue() ||
+			$title->getPrefixedText() === $diffOp->getNewValue();
 	}
 
 	/**
@@ -267,9 +267,9 @@ class SiteLinkCommentCreator {
 		} elseif ( $diffOp instanceof DiffOpRemove ) {
 			$params['message'] = 'wikibase-comment-unlink';
 		} elseif ( $diffOp instanceof DiffOpChange ) {
-			if ( $title && $title->getFullText() === $diffOp->getOldValue() ) {
+			if ( $title && $title->getPrefixedText() === $diffOp->getOldValue() ) {
 				$params['message'] = 'wikibase-comment-unlink';
-			} elseif ( $title && $title->getFullText() === $diffOp->getNewValue() ) {
+			} elseif ( $title && $title->getPrefixedText() === $diffOp->getNewValue() ) {
 				$params['message'] = 'wikibase-comment-linked';
 			} else {
 				$params['message'] = 'wikibase-comment-sitelink-change';

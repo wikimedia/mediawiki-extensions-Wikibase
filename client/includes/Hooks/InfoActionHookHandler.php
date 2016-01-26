@@ -71,7 +71,7 @@ class InfoActionHookHandler {
 	 */
 	private function getPageInfoRow( IContextSource $context, Title $title ) {
 		$entityId = $this->siteLinkLookup->getItemIdForSiteLink(
-			new SiteLink( $this->siteId, $title->getFullText() )
+			new SiteLink( $this->siteId, $title->getPrefixedText() )
 		);
 
 		$row = $entityId ? $this->getItemPageInfo( $context, $entityId )

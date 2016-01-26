@@ -90,7 +90,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		// XXX: This assumes NS_MAIN. Getting namespace names right nicely is hard, they depend on the lang.
 		$title->expects( $this->any() )
-			->method( 'getFullText' )
+			->method( 'getPrefixedText' )
 			->will( $this->returnValue( $text ) );
 
 		$title->expects( $this->any() )

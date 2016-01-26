@@ -130,7 +130,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( NS_MAIN ) );
 
 		$title->expects( $this->any() )
-			->method( 'getFullText' )
+			->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'Cat' ) );
 
 		$context = new RequestContext();
