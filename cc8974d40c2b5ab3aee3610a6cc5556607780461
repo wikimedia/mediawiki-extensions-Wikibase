@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_dc1443f0",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-01-26T02:06:16Z",
+      "side": 1,
+      "message": "Good point, updated. We can assume it\u0027s URI, but should handle empty and \u003e.",
+      "parentUuid": "6eaa8f54_4741650d",
+      "revId": "cc8974d40c2b5ab3aee3610a6cc5556607780461",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_2786a9e1",
         "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-01-25T17:09:07Z",
       "side": 1,
       "message": "Please be more specific / provide a section number and spec version.  I don\u0027t even know where to look, that document is huge...\n\nI found https://www.w3.org/2011/02/GeoSPARQL.pdf Req 4. But that says that ALL wktLiteral values need to start with a URI for the reference system. We treat this as optional...",
+      "revId": "cc8974d40c2b5ab3aee3610a6cc5556607780461",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_fc11fffc",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-01-26T02:06:16Z",
+      "side": 1,
+      "message": "It\u0027s in https://portal.opengeospatial.org/files/?artifact_id\u003d47664 linked from http://www.opengeospatial.org/standards/geosparql, section 8.5.1 says:\n\nAll RDFS Literals of type geo:wktLiteral shall consist of an optional URI\nidentifying the coordinate reference system followed by Simple Features Well Known\nText (WKT) describing a geometric value. \n\nSo it looks like it is optional, and examples there confirm that. On your link it seems to be older version.",
+      "parentUuid": "6eaa8f54_2786a9e1",
       "revId": "cc8974d40c2b5ab3aee3610a6cc5556607780461",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
