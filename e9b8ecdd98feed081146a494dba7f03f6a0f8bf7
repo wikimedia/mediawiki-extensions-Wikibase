@@ -33,6 +33,24 @@
       "revId": "e9b8ecdd98feed081146a494dba7f03f6a0f8bf7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_7c3c2a8f",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-01-26T18:24:25Z",
+      "side": 1,
+      "message": "We do, but it\u0027s in different context (it\u0027s a string, not IRI) and in different module, and is a massive overkill for this - we only need to quote \u003e, the rest will be taken care of by string encoder.",
+      "parentUuid": "6eaa8f54_8700b4b6",
+      "revId": "e9b8ecdd98feed081146a494dba7f03f6a0f8bf7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
