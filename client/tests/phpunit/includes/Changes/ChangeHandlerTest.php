@@ -382,7 +382,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 
 	public function provideHandleChange() {
 		$changes = TestChanges::getChanges();
-		$userEmmy2 = Title::newFromText( 'User:Emmy2' )->getFullText();
+		$userEmmy2 = Title::newFromText( 'User:Emmy2' )->getPrefixedText();
 
 		$empty = array(
 			'purgeParserCache' => array(),
