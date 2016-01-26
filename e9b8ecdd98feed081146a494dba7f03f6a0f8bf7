@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_e763a8a5",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-26T09:24:02Z",
+      "side": 1,
+      "message": "empty line before that if would be nice",
+      "revId": "e9b8ecdd98feed081146a494dba7f03f6a0f8bf7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_8700b4b6",
+        "filename": "repo/includes/rdf/Values/GlobeCoordinateRdfBuilder.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-01-26T09:24:02Z",
+      "side": 1,
+      "message": "Order of arguments is wrong here.\n\nAlso… Is this really the right thing to do (only escaping \u0027\u003e\u0027)? Don\u0027t we have any other functionality for correctly escaping/ encoding URIs?",
+      "revId": "e9b8ecdd98feed081146a494dba7f03f6a0f8bf7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
