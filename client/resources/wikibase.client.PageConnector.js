@@ -335,7 +335,6 @@ $.extend( wb.PageConnector.prototype, {
 			secondSite = wb.sites.getSite( secondSiteId );
 
 		// Labels (page titles)
-		// FIXME: Remove this after bug T59564 has been solved!
 		entityData.labels[ firstSite.getLanguageCode() ] = {
 			language: firstSite.getLanguageCode(),
 			value: firstPageName
