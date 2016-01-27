@@ -83,7 +83,6 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.statementview-snakview',
 				'jquery.wikibase.wbtooltip',
 				'jquery.cookie',
-				'json',
 				'wikibase',
 				'wikibase.api.getLocationAgnosticMwApi',
 				'wikibase.datamodel.Entity',
