@@ -141,8 +141,8 @@ class DispatchingSnakFormatter implements SnakFormatter {
 
 		$dataType = $this->getSnakDataType( $snak );
 
-		if ( isset( $this->formattersByDataType[$dataType] ) ) {
-			$formatter = $this->formattersByDataType[$dataType];
+		if ( isset( $this->formattersByDataType["PT:$dataType"] ) ) {
+			$formatter = $this->formattersByDataType["PT:$dataType"];
 			return $formatter->formatSnak( $snak );
 		}
 

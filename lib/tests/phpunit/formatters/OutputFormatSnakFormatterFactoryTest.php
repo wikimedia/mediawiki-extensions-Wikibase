@@ -34,7 +34,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		$self = $this;
 
 		$snakFormatterCallbacks = array(
-			'commonsMedia' => function( $format, FormatterOptions $options ) use ( $self ) {
+			'PT:commonsMedia' => function( $format, FormatterOptions $options ) use ( $self ) {
 				return $self->makeMockSnakFormatter( $format );
 			},
 		);

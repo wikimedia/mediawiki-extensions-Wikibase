@@ -198,7 +198,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$formattersByDataType = array(
-			'string' => $this->makeSnakFormatter( 'STRING VALUE' ),
+			'PT:string' => $this->makeSnakFormatter( 'STRING VALUE' ),
 			'*' => $this->makeSnakFormatter( 'OTHER VALUE' ),
 		);
 
