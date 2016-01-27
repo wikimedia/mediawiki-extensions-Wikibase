@@ -322,12 +322,14 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isEmpty
+	 * @return {boolean}
 	 */
 	isEmpty: function() {
 		return !this.$listview.data( 'listview' ).items().length;
 	},
 
 	/**
+	 * @see jQuery.ui.EditableTemplatedWidget.isValid
 	 * @return {boolean}
 	 */
 	isValid: function() {
@@ -355,33 +357,21 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
+	 * @return {boolean}
 	 */
 	isInitialValue: function() {
-		var currentValue = this.value();
+		var listview = this.$listview.data( 'listview' ),
+			lia = listview.listItemAdapter(),
+			isInitialValue = true;
 
-		if ( currentValue.length !== this.options.value.length ) {
-			return false;
-		}
+		// Ignore empty values.
+		listview.nonEmptyItems().each( function() {
+			var sitelinkview = lia.liInstance( $( this ) );
+			isInitialValue = sitelinkview.isInitialValue();
+			return isInitialValue;
+		} );
 
-		// TODO: Use SiteLinkList.equals() as soon as implemented in DataModelJavaScript
-		for ( var i = 0; i < currentValue.length; i++ ) {
-			if ( currentValue[i] === null ) {
-				// Ignore empty values.
-				continue;
-			}
-			var found = false;
-			for ( var j = 0; j < this.options.value.length; j++ ) {
-				if ( currentValue[i].equals( this.options.value[j] ) ) {
-					found = true;
-					break;
-				}
-			}
-			if ( !found ) {
-				return false;
-			}
-		}
-
-		return true;
+		return isInitialValue;
 	},
 
 	/**
