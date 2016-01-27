@@ -19,6 +19,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 1 );
 	var siteLinkSerializer = new wb.serialization.SiteLinkSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

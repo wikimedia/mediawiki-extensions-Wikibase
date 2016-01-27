@@ -44,6 +44,7 @@ var testSets = [
 ];
 
 QUnit.test( 'deserialize()', function( assert ) {
+	assert.expect( 2 );
 	var statementDeserializer = new wb.serialization.StatementDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

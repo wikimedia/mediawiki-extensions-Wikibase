@@ -61,6 +61,7 @@ var testSets = [
 ];
 
 QUnit.test( 'deserialize()', function( assert ) {
+	assert.expect( 1 );
 	var entityDeserializer = new wb.serialization.EntityDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

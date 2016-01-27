@@ -61,6 +61,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 2 );
 	var propertySerializer = new wb.serialization.PropertySerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

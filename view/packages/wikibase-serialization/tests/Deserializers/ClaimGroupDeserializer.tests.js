@@ -27,6 +27,7 @@ var testSets = [
 ];
 
 QUnit.test( 'deserialize()', function( assert ) {
+	assert.expect( 2 );
 	var claimGroupDeserializer = new wb.serialization.ClaimGroupDeserializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

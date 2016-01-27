@@ -109,6 +109,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 2 );
 	var entitySerializer = new wb.serialization.EntitySerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {
@@ -121,6 +122,7 @@ QUnit.test( 'serialize()', function( assert ) {
 } );
 
 QUnit.test( 'registerStrategy()', function( assert ) {
+	assert.expect( 2 );
 	var entitySerializer = new wb.serialization.EntitySerializer(),
 		mockEntity = new wb.serialization.tests.MockEntity( 'i am an id', defaults[0].fingerprint );
 

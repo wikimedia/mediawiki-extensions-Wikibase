@@ -48,6 +48,7 @@ var testSets = [
 ];
 
 QUnit.test( 'serialize()', function( assert ) {
+	assert.expect( 2 );
 	var claimGroupSetSerializer = new wb.serialization.ClaimGroupSetSerializer();
 
 	for( var i = 0; i < testSets.length; i++ ) {

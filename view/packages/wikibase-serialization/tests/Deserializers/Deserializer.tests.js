@@ -8,6 +8,7 @@
 QUnit.module( 'wikibase.serialization.Deserializer' );
 
 QUnit.test( 'deserialize()', function( assert ) {
+	assert.expect( 1 );
 	var SomeDeserializer = util.inherit( 'WbTestDeserializer', wb.serialization.Deserializer, {} ),
 		someDeserializer = new SomeDeserializer();
 
