@@ -81,18 +81,17 @@ QUnit.test( 'Create & destroy', function( assert ) {
 
 QUnit.test( 'isInitialValue()', function( assert ) {
 	assert.expect( 3 );
-	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
-		entitytermsforlanguagelistview
-			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
+	var view = createEntitytermsforlanguagelistview().data( 'entitytermsforlanguagelistview' ),
+		listview = view.$listview.data( 'listview' );
 
-	entitytermsforlanguagelistview.startEditing();
+	view.startEditing();
 
 	assert.ok(
-		entitytermsforlanguagelistview.isInitialValue(),
+		view.isInitialValue(),
 		'Verified isInitialValue() returning true.'
 	);
 
-	var $item = entitytermsforlanguagelistview.$listview.data( 'listview' ).addItem( {
+	var $item = listview.addItem( {
 		language: 'fa',
 		label: new wb.datamodel.Term( 'fa', 'fa-label' ),
 		description: new wb.datamodel.Term( 'fa', 'fa-description' ),
@@ -100,14 +99,14 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 	} );
 
 	assert.ok(
-		!entitytermsforlanguagelistview.isInitialValue(),
-		'Verified isInitialValue() returning false after changing value.'
+		view.isInitialValue(),
+		'Verified isInitialValue() still returning false after adding another unchanged value.'
 	);
 
-	entitytermsforlanguagelistview.$listview.data( 'listview' ).removeItem( $item );
+	listview.removeItem( $item );
 
 	assert.ok(
-		entitytermsforlanguagelistview.isInitialValue(),
+		view.isInitialValue(),
 		'Verified isInitialValue() returning true after resetting to initial value.'
 	);
 } );
