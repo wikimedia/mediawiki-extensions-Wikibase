@@ -45,7 +45,7 @@
 	"wikibase-alias-edit-placeholder": "angiv et alias",
 	"wikibase-label-input-help-message": "Angiv titlen på dette datasæt på $1.",
 	"wikibase-description-input-help-message": "Angiv en kort beskrivelse på $1.",
-	"wikibase-statements": "Udsagn",
+	"wikibase-statementsection-statements": "Udsagn",
 	"wikibase-sitelinks": "Liste over sider, der er knyttet til dette emne",
 	"wikibase-sitelinks-empty": "Der er endnu ingen webstedshenvisninger for dette emne.",
 	"wikibase-sitelinks-input-help-message": "Angiv en henvisning til en side der er relateret til dette emne",

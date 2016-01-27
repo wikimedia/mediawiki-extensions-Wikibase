@@ -21,7 +21,8 @@
 			"Weft",
 			"Brunoperel",
 			"Orlodrim",
-			"Zolo"
+			"Zolo",
+			"Wladek92"
 		]
 	},
 	"wikibase-lib-desc": "Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client",
@@ -94,13 +95,13 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 milliards d’années EC",
 	"wikibase-time-precision-Mannum": "$1 millions d’années EC",
-	"wikibase-time-precision-annum": "$1 années EC",
+	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 année|$1 années}} EC",
 	"wikibase-time-precision-millennium": "$1. millénaire",
 	"wikibase-time-precision-century": "$1. siècle",
 	"wikibase-time-precision-10annum": "$1s",
 	"wikibase-time-precision-BCE-Gannum": "$1 milliard d’années AEC",
 	"wikibase-time-precision-BCE-Mannum": "$1 millions d’années AEC",
-	"wikibase-time-precision-BCE-annum": "$1 ans AEC",
+	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 année|$1 années}}  AEC",
 	"wikibase-time-precision-BCE-millennium": "$1. millénaires A.C.",
 	"wikibase-time-precision-BCE-century": "$1. siècles A.C.",
 	"wikibase-time-precision-BCE-10annum": "$1s A.C.",

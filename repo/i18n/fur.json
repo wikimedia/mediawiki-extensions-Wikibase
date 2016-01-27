@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tocaibon"
+		]
+	},
+	"wikibase-edit": "Cambie",
+	"wikibase-add": "Zonte",
+	"wikibase-label-empty": "Nissune etichete definide",
+	"wikibase-description-empty": "Nissune descrizion definide",
+	"wikibase-sitelinks-special": "Altris sîts",
+	"wikibase-aliases-empty": "Nissun alias definît",
+	"wikibase-statementview-rank-normal": "Classificât come normâl",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|riferiment|riferiments}}"
+}

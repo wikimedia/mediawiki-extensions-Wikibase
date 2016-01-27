@@ -189,7 +189,7 @@
 	"wikibase-setdescription-label": "Descripción:",
 	"wikibase-setdescription-submit": "Establecer la descripción",
 	"special-setaliases": "Establecer alias",
-	"wikibase-setaliases-introfull": "Estás estableciendo los alias en $2 para [[$1]]. Los diferentes alias se separan con un caracter barra vertical (<code>|</code>).",
+	"wikibase-setaliases-introfull": "Estás estableciendo los alias en $2 para [[$1]]. Los diferentes alias se separan con un carácter barra vertical (<code>|</code>).",
 	"wikibase-setaliases-intro": "Este formulario permite definir los alias de una entidad. Necesitas proporcionar el ID de la entidad (por ejemplo, Q23) el código de un idioma (por ejemplo, \"gl\") y los alias a definir. Los diferentes alias se separan por una pleca <code>|</code>.",
 	"wikibase-setaliases-label": "Alias:",
 	"wikibase-setaliases-submit": "Establecer alias",

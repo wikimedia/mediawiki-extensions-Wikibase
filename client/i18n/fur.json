@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tocaibon"
+		]
+	},
+	"tooltip-t-wikibase": "Leam cul element colegât al dipuesit di dâts",
+	"wikibase-comment-update": "Element {{WBREPONAME}} cambiât",
+	"wikibase-dataitem": "Element {{WBREPONAME}}",
+	"wikibase-editlinks": "Modifiche i leams",
+	"wikibase-editlinkstitle": "Modifiche i leams cun altris lenghis",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Plate",
+	"wikibase-rc-hide-wikidata-show": "Mostre",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Modifiche fate su {{WBREPONAME}}",
+	"wikibase-otherprojects": "Altris progjets"
+}

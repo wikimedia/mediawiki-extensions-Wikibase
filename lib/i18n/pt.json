@@ -84,7 +84,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "em  $1  bilhões de anos da EC",
 	"wikibase-time-precision-Mannum": "em $1 milhões de anos da EC",
-	"wikibase-time-precision-annum": "em $1 anos da EC",
+	"wikibase-time-precision-annum": "em {{PLURAL:$1|$1 ano|$1 anos}} da EC",
 	"wikibase-time-precision-millennium": "$1. milénio",
 	"wikibase-time-precision-century": "$1. século",
 	"wikibase-time-precision-10annum": "$1s",

@@ -43,7 +43,8 @@
 			"Wladek92",
 			"Ash Crow",
 			"Orlodrim",
-			"Guillom"
+			"Guillom",
+			"Thibaut120094"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -79,7 +80,7 @@
 	"wikibase-diffview-rank": "rang",
 	"wikibase-diffview-rank-preferred": "Rang privilégié",
 	"wikibase-diffview-rank-normal": "Rang normal",
-	"wikibase-diffview-rank-deprecated": "Rang déprécié",
+	"wikibase-diffview-rank-deprecated": "Rang obsolète",
 	"wikibase-diffview-qualifier": "qualificateur",
 	"wikibase-diffview-label": "libellé",
 	"wikibase-diffview-alias": "alias",

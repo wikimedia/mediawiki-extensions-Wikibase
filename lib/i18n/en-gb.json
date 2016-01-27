@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tom29739"
+		]
+	},
+	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 year|$1 years}} CE"
+}
