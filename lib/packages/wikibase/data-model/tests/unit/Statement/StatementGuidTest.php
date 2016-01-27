@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @group ClaimGuidTest
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class StatementGuidTest extends \PHPUnit_Framework_TestCase {
 

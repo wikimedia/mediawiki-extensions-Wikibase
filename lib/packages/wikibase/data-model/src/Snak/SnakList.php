@@ -13,7 +13,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class SnakList extends HashArray {
 

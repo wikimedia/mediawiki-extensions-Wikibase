@@ -25,7 +25,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @since 3.1
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class DerivedPropertyValueSnak extends PropertyValueSnak {
 

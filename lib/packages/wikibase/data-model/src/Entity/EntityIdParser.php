@@ -8,7 +8,7 @@ namespace Wikibase\DataModel\Entity;
  * @since 4.2
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 interface EntityIdParser {
 
