@@ -21,6 +21,10 @@ version 2.0 of this package:
 
 ## Release notes
 
+### 2.0.6 (2016-01-27)
+
+* Added compatibility with DataValues JavaScript 0.8.0.
+
 ### 2.0.5 (2016-01-27)
 
 * Tests are now compatible with QUnit's requireExpects enabled.
