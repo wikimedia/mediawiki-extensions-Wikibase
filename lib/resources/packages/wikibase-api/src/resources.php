@@ -60,7 +60,6 @@ return call_user_func( function() {
 				'RepoApi.js',
 			),
 			'dependencies' => array(
-				'json',
 				'wikibase.api.__namespace',
 			),
 		),

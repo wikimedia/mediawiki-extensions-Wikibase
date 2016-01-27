@@ -6,6 +6,11 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 1.0.5 (2016-01-27)
+
+* Added compatibility with DataValues JavaScript 0.8.0.
+* Removed compatibility for Internet Explorer 8 by removing the json polyfill.
+
 ### 1.0.4 (2015-09-30)
 
 * Use mw.ForeignApi for remote API endpoints (T50389)
