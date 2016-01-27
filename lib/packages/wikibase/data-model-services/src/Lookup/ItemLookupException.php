@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @since 2.0
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class ItemLookupException extends EntityLookupException {
 

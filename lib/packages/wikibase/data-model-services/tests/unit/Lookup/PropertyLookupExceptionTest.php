@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyLookupException;
  * @covers Wikibase\DataModel\Services\Lookup\PropertyLookupException
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class PropertyLookupExceptionTest extends \PHPUnit_Framework_TestCase {
 

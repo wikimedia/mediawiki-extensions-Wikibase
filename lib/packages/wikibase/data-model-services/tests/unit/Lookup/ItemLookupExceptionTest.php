@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\ItemLookupException;
  * @covers Wikibase\DataModel\Services\Lookup\ItemLookupException
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class ItemLookupExceptionTest extends \PHPUnit_Framework_TestCase {
 

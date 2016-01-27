@@ -8,7 +8,7 @@ use RuntimeException;
  * @since 1.0
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class StatementGuidParsingException extends RuntimeException {
 

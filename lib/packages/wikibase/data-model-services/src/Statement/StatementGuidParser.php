@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
  * @since 1.0
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class StatementGuidParser {
 

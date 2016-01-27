@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Statement\V4GuidGenerator;
  * @covers Wikibase\DataModel\Services\Statement\V4GuidGenerator
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class V4GuidGeneratorTest extends \PHPUnit_Framework_TestCase {
 

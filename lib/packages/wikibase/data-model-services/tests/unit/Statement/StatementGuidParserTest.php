@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @covers Wikibase\DataModel\Services\Statement\StatementGuidParser
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {
 

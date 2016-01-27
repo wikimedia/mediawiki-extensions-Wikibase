@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\Term;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
- * @author Adam Shorland
+ * @author Addshore
  */
 class LanguageLabelDescriptionLookup implements LabelDescriptionLookup {
 

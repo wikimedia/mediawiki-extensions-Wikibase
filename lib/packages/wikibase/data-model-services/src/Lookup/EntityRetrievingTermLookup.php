@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\FingerprintProvider;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class EntityRetrievingTermLookup implements TermLookup {
 
