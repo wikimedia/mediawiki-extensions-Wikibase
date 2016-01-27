@@ -75,7 +75,7 @@ class SetQualifier extends ModifyClaim {
 		$changeOp = $this->getChangeOp();
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$status = $this->saveChanges( $entity, $summary );
+		$status = $this->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addStatement( $statement );

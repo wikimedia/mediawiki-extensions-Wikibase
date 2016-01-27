@@ -101,7 +101,7 @@ class SetClaim extends ModifyClaim {
 
 		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
-		$status = $this->saveChanges( $entity, $summary );
+		$status = $this->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->getResultBuilder()->markSuccess();
 		$this->getResultBuilder()->addStatement( $claim );
