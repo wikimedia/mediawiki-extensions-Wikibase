@@ -21,6 +21,10 @@ version 2.0 of this package:
 
 ## Release notes
 
+### 2.0.5 (2016-01-27)
+
+* Tests are now compatible with QUnit's requireExpects enabled.
+
 ### 2.0.4 (2016-01-18)
 
 * Added compatibility with DataModel JavaScript 2.0.0.
