@@ -31,18 +31,19 @@
 			_options: null,
 
 			/**
-			 * Returns a ValueFormatter instance for the given DataType id and output type
+			 * Returns a ValueFormatter instance for the given DataType ID or Property ID and output type.
 			 *
 			 * @param {string|null} dataTypeId
+			 * @param {string|null} propertyId
 			 * @param {string} outputType
 			 * @return {valueFormatters.ValueFormatter}
 			 */
-			getFormatter: function( dataTypeId, outputType ) {
+			getFormatter: function( dataTypeId, propertyId, outputType ) {
 				var options = this._options;
 				if ( dataTypeId === 'quantity' && outputType === 'text/plain' ) {
 					options = $.extend( { applyRounding: false, applyUnit: false }, options );
 				}
-				return new wb.formatters.ApiValueFormatter( this._apiCaller, options, dataTypeId, outputType );
+				return new wb.formatters.ApiValueFormatter( this._apiCaller, options, dataTypeId, propertyId, outputType );
 			}
 		}
 	);

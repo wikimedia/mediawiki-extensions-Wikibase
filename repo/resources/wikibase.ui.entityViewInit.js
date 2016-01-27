@@ -106,8 +106,8 @@
 				userLanguages[0]
 			),
 			parserStore = getParserStore( repoApi ),
-			htmlDataValueEntityIdFormatter = formatterFactory.getFormatter( null, 'text/html' ),
-			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, 'text/plain' ),
+			htmlDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/html' ),
+			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
 			viewFactory = new wikibase.view.ViewFactory(
 				contentLanguages,

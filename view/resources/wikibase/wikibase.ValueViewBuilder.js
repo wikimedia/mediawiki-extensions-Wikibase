@@ -51,12 +51,13 @@
 		 * @param {jQuery} $valueViewDom
 		 * @param {dataTypes.DataType|null} dataType
 		 * @param {dataValues.DataValue|null} dataValue
+		 * @param {string|null} propertyId
 		 *
 		 * @return {jQuery.valueview}
 		 */
-		initValueView: function( $valueViewDom, dataType, dataValue ) {
+		initValueView: function( $valueViewDom, dataType, dataValue, propertyId ) {
 			var valueView,
-				valueViewOptions = this._getOptions( dataType, dataValue );
+				valueViewOptions = this._getOptions( dataType, dataValue, propertyId );
 
 			// TODO: Use something like an 'editview' and just change its data type rather than
 			// initializing this over and over again and doing the checks.
@@ -69,14 +70,15 @@
 		/**
 		 * @param {dataTypes.DataType|null} dataType
 		 * @param {dataValues.DataValue|null} dataValue
+		 * @param {string|null} propertyId
 		 *
 		 * @return {Object}
 		 */
-		_getOptions: function( dataType, dataValue ) {
+		_getOptions: function( dataType, dataValue, propertyId ) {
 			var dataTypeId = dataType && dataType.getId();
 			var valueViewOptions = $.extend( {}, this._baseOptions, {
-				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, 'text/html' ),
-				plaintextFormatter: this._formatterFactory.getFormatter( dataTypeId, 'text/plain' ),
+				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/html' ),
+				plaintextFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/plain' ),
 				value: dataValue
 			} );
 
