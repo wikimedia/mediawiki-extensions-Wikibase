@@ -183,19 +183,19 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 	var $sitelinklistview = createSitelinklistview( {
 			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
 		} ),
-		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
+		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' ),
+		listview = sitelinklistview.$listview.data( 'listview' );
 
 	assert.ok(
 		sitelinklistview.isInitialValue(),
 		'Verified isInitialValue() returning TRUE.'
 	);
 
-	var listview = sitelinklistview.$listview.data( 'listview' ),
-		$sitelinkview = listview.addItem( new wb.datamodel.SiteLink( 'aawiki', 'aawiki-page' ) );
+	var $sitelinkview = listview.addItem( new wb.datamodel.SiteLink( 'aawiki', 'aawiki-page' ) );
 
 	assert.ok(
-		!sitelinklistview.isInitialValue(),
-		'FALSE after adding another value.'
+		sitelinklistview.isInitialValue(),
+		'Verified isInitialValue() still returning false after adding another unchanged value'
 	);
 
 	listview.removeItem( $sitelinkview );
