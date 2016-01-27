@@ -58,6 +58,14 @@ wb.parsers.getStore = function( api ) {
 		'url'
 	);
 
+	parserStore.registerDataTypeParser(
+		util.inherit(
+			ApiBasedValueParser,
+			{ API_VALUE_PARSER_ID: 'external-id' }
+		),
+		'external-id'
+	);
+
 	return parserStore;
 };
 

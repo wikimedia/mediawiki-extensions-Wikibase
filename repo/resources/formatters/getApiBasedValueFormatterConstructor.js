@@ -34,6 +34,7 @@
 			 * @param {dataValues.DataValue} dataValue
 			 * @param {string} [dataTypeId]
 			 * @param {string} [outputType] The output's preferred MIME type
+			 * @param {string} [propertyId]
 			 * @return {jQuery.Promise}
 			 *         Resolved parameters:
 			 *         - {string} Formatted DataValue.
@@ -41,7 +42,7 @@
 			 *         Rejected parameters:
 			 *         - {string} HTML error message.
 			 */
-			format: function( dataValue, dataTypeId, outputType ) {
+			format: function( dataValue, dataTypeId, outputType, propertyId ) {
 				var deferred = $.Deferred();
 
 				// Since dataTypeId and outputType are optional parameters to this function as well as
