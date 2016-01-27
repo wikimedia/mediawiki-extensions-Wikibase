@@ -31,13 +31,13 @@
 	word-wrap: break-word;
 }
 
-.wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview {
-	margin-top: 1em;
+.wikibase-entitytermsview .wikibase-entitytermsview-heading {
+	margin-bottom: 1em;
 }
 
 .wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-toggler {
 	display: inline-block;
-	margin-top: 0.5em;
+	margin-top: 0;
 }
 
 .wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview-configure {
