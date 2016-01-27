@@ -70,7 +70,7 @@
 			htmlFormatter = {},
 			plaintextFormatter = {},
 			formatterFactory = {
-				getFormatter: function( _, outputType ) {
+				getFormatter: function( dataTypeId, propertyId, outputType ) {
 					return outputType === 'text/html' ? htmlFormatter : plaintextFormatter;
 				}
 			};
@@ -173,6 +173,26 @@
 			dataTypeId: dataTypeId,
 			dataValueType: dataTypeDataValueType
 		} ) );
+	} );
+
+	QUnit.test( 'initValueView passes dataTypeId & propertyId', function( assert ) {
+		assert.expect( 1 );
+		var vvAndDom = getValueViewAndDom(),
+			$dom = vvAndDom.$dom,
+			getFormatter = sinon.spy(),
+			dataType = {
+				getId: function() { return 'datatype id'; },
+				getDataValueType: function() { return 'datavaluetype id'; }
+			};
+
+		var valueViewBuilder = new wb.ValueViewBuilder(
+			null,
+			{ getFormatter: getFormatter }
+		);
+
+		valueViewBuilder.initValueView( $dom, dataType, null, 'property id' );
+
+		sinon.assert.calledWith( getFormatter, sinon.match( 'datatype id', 'property id' ) );
 	} );
 
 }( wikibase, sinon, QUnit ) );
