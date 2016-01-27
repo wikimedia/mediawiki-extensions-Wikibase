@@ -131,8 +131,8 @@ $.widget( 'wikibase.listview', PARENT, {
 		if ( key === 'listItemAdapter' ) {
 			throw new Error( 'Can not change the ListItemAdapter after initialization' );
 		} else if ( key === 'value' ) {
-			this.items().each( function( i, node ) {
-				var $node = $( node );
+			this.items().each( function() {
+				var $node = $( this );
 				self._lia.liInstance( $node ).destroy();
 				$node.remove();
 			} );

@@ -69,8 +69,8 @@ function createListViewWithMovetoolbar( listviewValue ) {
 	var $listview = createListview( listviewValue ),
 		listview = $listview.data( 'listview' );
 
-	listview.items().each( function( i, itemNode ) {
-		$( itemNode ).movetoolbar( { listView: listview } );
+	listview.items().each( function() {
+		$( this ).movetoolbar( { listView: listview } );
 	} );
 
 	return $listview;
