@@ -20,15 +20,17 @@
 	 * @param {wikibase.api.FormatValueCaller} formatValueCaller
 	 * @param {Object} additionalOptions
 	 * @param {string|null} dataTypeId
+	 * @param {string|null} propertyId
 	 * @param {string} outputType
 	 */
 	wb.formatters.ApiValueFormatter = util.inherit(
 		'WbApiValueFormatter',
 		PARENT,
-		function( formatValueCaller, additionalOptions, dataTypeId, outputType ) {
+		function( formatValueCaller, additionalOptions, dataTypeId, propertyId, outputType ) {
 			this._formatValueCaller = formatValueCaller;
 			this._options = additionalOptions;
 			this._dataTypeId = dataTypeId;
+			this._propertyId = propertyId;
 			this._outputType = outputType;
 		},
 		{
@@ -41,6 +43,11 @@
 			 * @var {string|null}
 			 */
 			_dataTypeId: null,
+
+			/**
+			 * @var {string|null}
+			 */
+			_propertyId: null,
 
 			/**
 			 * @var {Object}
@@ -67,7 +74,9 @@
 			format: function( dataValue ) {
 				var deferred = $.Deferred();
 
-				this._formatValueCaller.formatValue( dataValue, this._dataTypeId, this._outputType, this._options )
+				this._formatValueCaller.formatValue(
+					dataValue, this._dataTypeId, this._outputType, this._propertyId, this._options
+				)
 				.done( function( formattedValue ) {
 					deferred.resolve( formattedValue, dataValue );
 				} )
