@@ -451,6 +451,7 @@
 	} );
 
 	QUnit.test( 'reuse items', function( assert ) {
+		assert.expect( 1 );
 		var $node = $( document.createElement( 'span' ) );
 		$node.append( document.createElement( 'span' ) ).append( document.createElement( 'span' ) );
 		var listview = $node.listview( {
