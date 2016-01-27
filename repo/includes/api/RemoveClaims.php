@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -22,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class RemoveClaims extends ModifyClaim {
+class RemoveClaims extends ApiBase {
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -33,6 +35,31 @@ class RemoveClaims extends ModifyClaim {
 	 * @var ApiErrorReporter
 	 */
 	private $errorReporter;
+
+	/**
+	 * @var StatementModificationHelper
+	 */
+	private $modificationHelper;
+
+	/**
+	 * @var StatementGuidParser
+	 */
+	private $guidParser;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -48,6 +75,18 @@ class RemoveClaims extends ModifyClaim {
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 	}
 
 	/**

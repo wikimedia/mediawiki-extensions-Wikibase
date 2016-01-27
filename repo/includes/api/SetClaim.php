@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
@@ -14,6 +15,7 @@ use UsageException;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -30,7 +32,7 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Addshore
  */
-class SetClaim extends ModifyClaim {
+class SetClaim extends ApiBase {
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -48,6 +50,31 @@ class SetClaim extends ModifyClaim {
 	private $statementDeserializer;
 
 	/**
+	 * @var StatementModificationHelper
+	 */
+	private $modificationHelper;
+
+	/**
+	 * @var StatementGuidParser
+	 */
+	private $guidParser;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
+
+	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -62,6 +89,18 @@ class SetClaim extends ModifyClaim {
 		$this->statementDeserializer = $wikibaseRepo->getStatementDeserializer();
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 	}
 
 	/**

@@ -2,12 +2,14 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
@@ -21,7 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class SetReference extends ModifyClaim {
+class SetReference extends ApiBase {
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -37,6 +39,31 @@ class SetReference extends ModifyClaim {
 	 * @var DeserializerFactory
 	 */
 	private $deserializerFactory;
+
+	/**
+	 * @var StatementModificationHelper
+	 */
+	private $modificationHelper;
+
+	/**
+	 * @var StatementGuidParser
+	 */
+	private $guidParser;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -56,6 +83,18 @@ class SetReference extends ModifyClaim {
 			$wikibaseRepo->getDataValueDeserializer(),
 			$wikibaseRepo->getEntityIdParser()
 		);
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 	}
 
 	/**
