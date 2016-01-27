@@ -295,8 +295,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		var listview = this.$listview.data( 'listview' ),
 			snaks = [];
 
-		$.each( listview.items(), function( i, item ) {
-			var liInstance = listview.listItemAdapter().liInstance( $( item ) ),
+		listview.items().each( function() {
+			var liInstance = listview.listItemAdapter().liInstance( $( this ) ),
 				snak = liInstance.snak();
 			if ( snak ) {
 				snaks.push( snak );
@@ -315,8 +315,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		var listview = this.$listview.data( 'listview' ),
 			isValid = true;
 
-		$.each( listview.items(), function( i, item ) {
-			var snakview = listview.listItemAdapter().liInstance( $( item ) );
+		listview.items().each( function() {
+			var snakview = listview.listItemAdapter().liInstance( $( this ) );
 			isValid = snakview.isValid() && snakview.snak();
 			return isValid === true;
 		} );
@@ -472,8 +472,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		var self = this,
 			$snakview = null;
 
-		this._listview.items().each( function( i, itemNode ) {
-			var $itemNode = $( itemNode );
+		this._listview.items().each( function() {
+			var $itemNode = $( this );
 
 			if ( self._listview.listItemAdapter().liInstance( $itemNode ).snak().equals( snak ) ) {
 				$snakview = $itemNode;
