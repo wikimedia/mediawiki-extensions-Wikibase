@@ -242,7 +242,7 @@ return call_user_func( function() {
 				return new ObjectUriRdfBuilder();
 			},
 		),
-		'PT:id' => array(
+		'PT:external-id' => array(
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
 				return $factory->buildStringValidators();
