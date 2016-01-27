@@ -4,13 +4,10 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use Status;
 use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * Base class for modifying claims.
@@ -40,17 +37,17 @@ abstract class ModifyClaim extends ApiBase {
 	/**
 	 * @var ResultBuilder
 	 */
-	private $resultBuilder;
+	protected $resultBuilder;
 
 	/**
 	 * @var EntityLoadingHelper
 	 */
-	private $entityLoadingHelper;
+	protected $entityLoadingHelper;
 
 	/**
 	 * @var EntitySavingHelper
 	 */
-	private $entitySavingHelper;
+	protected $entitySavingHelper;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -76,49 +73,6 @@ abstract class ModifyClaim extends ApiBase {
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
-	}
-
-	/**
-	 * @see EntitySavingHelper::attemptSaveEntity
-	 */
-	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
-		return $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $flags );
-	}
-
-	/**
-	 * @return ResultBuilder
-	 */
-	protected function getResultBuilder() {
-		return $this->resultBuilder;
-	}
-
-	/**
-	 * @see EntitySavingHelper::loadEntityRevision
-	 */
-	protected function loadEntityRevision(
-		EntityId $entityId,
-		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
-	) {
-		return $this->entityLoadingHelper->loadEntityRevision( $entityId, $revId );
-	}
-
-	/**
-	 * @see ApiBase::getAllowedParams
-	 */
-	protected function getAllowedParams() {
-		return array_merge(
-			parent::getAllowedParams(),
-			array(
-				'summary' => array(
-					self::PARAM_TYPE => 'string',
-				),
-				'token' => null,
-				'baserevid' => array(
-					self::PARAM_TYPE => 'integer',
-				),
-				'bot' => false,
-			)
-		);
 	}
 
 }
