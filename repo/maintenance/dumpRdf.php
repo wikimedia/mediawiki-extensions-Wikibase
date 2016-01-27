@@ -20,7 +20,7 @@ require_once __DIR__ . '/dumpEntities.php';
  *
  * @licence GNU GPL v2+
  * @author Stas Malyshev
- * @author Adam Shorland
+ * @author Addshore
  */
 class DumpRdf extends DumpScript {
 

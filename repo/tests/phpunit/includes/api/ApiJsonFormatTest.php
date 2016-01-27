@@ -14,7 +14,7 @@ use ApiBase;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class ApiJsonFormatTest extends ApiFormatTestCase {
 

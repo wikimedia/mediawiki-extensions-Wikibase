@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Addshore
  */
 class StatementRankSerializer implements Serializer, Deserializer {
 

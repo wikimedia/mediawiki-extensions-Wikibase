@@ -20,7 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Mättig
- * @author Adam Shorland
+ * @author Addshore
  */
 class SearchEntities extends ApiBase {
 

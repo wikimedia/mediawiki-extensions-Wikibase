@@ -39,7 +39,7 @@ use Wikibase\Summary;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Adam Shorland
+ * @author Addshore
  * @author Michał Łazowik
  */
 class EditEntity extends ModifyEntity {

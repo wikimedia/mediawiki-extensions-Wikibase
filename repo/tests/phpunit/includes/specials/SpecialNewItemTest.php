@@ -22,7 +22,7 @@ use Wikibase\Repo\Specials\SpecialNewItem;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Addshore
  */
 class SpecialNewItemTest extends SpecialPageTestBase {
 

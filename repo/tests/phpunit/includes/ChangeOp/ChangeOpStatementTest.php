@@ -33,7 +33,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @group ChangeOpStatement
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Daniel Kinzler
  */
 class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {

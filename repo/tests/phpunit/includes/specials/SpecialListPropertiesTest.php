@@ -28,7 +28,7 @@ use Wikibase\Store\BufferingTermLookup;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class SpecialListPropertiesTest extends SpecialPageTestBase {
 

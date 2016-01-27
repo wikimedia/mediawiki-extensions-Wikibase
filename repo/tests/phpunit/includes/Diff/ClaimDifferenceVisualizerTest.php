@@ -27,7 +27,7 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
  * @group Database
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 

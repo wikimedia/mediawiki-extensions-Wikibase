@@ -12,7 +12,7 @@ use Wikibase\Lib\AutoCommentFormatter;
  * @group Wikibase
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Jonas Kress
  */
 class AutoCommentFormatterTest extends \MediaWikiTestCase {

@@ -26,7 +26,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  */
 class DiffView extends ContextSource {

@@ -32,7 +32,7 @@ use Wikibase\Summary;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  * @author Daniel Kinzler
  */
 class StatementModificationHelper {

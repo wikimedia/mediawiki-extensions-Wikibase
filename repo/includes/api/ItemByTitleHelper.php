@@ -16,7 +16,7 @@ use Wikibase\StringNormalizer;
  * @since 0.4
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
- * @author Adam Shorland
+ * @author Addshore
  */
 class ItemByTitleHelper {
 

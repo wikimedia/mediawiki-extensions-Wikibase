@@ -20,7 +20,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class ApiXmlFormatTest extends ApiFormatTestCase {
 

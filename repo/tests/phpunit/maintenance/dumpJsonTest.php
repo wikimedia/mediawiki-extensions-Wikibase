@@ -37,7 +37,7 @@ use Wikibase\Repo\Test\MockEntityPerPage;
  * @group Wikibase
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class DumpJsonTest extends MediaWikiTestCase {
 

@@ -16,7 +16,7 @@ use Wikibase\DataModel\SerializerFactory;
  * @author Daniel Werner
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class ParserOutputJsConfigBuilder {
 

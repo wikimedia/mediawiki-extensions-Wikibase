@@ -25,7 +25,7 @@ use Wikibase\Lib\SnakFormatter;
  * @author John Erling Blad
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Adam Shorland
+ * @author Addshore
  */
 class SummaryFormatter {
 

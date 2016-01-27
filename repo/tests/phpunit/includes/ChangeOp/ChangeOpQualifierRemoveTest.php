@@ -18,7 +18,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @group ChangeOp
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class ChangeOpQualifierRemoveTest extends \PHPUnit_Framework_TestCase {
 

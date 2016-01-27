@@ -35,7 +35,7 @@ use Wikibase\Repo\Api\ResultBuilder;
  * @group WikibaseRepo
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  */
 class ResultBuilderTest extends \PHPUnit_Framework_TestCase {

@@ -13,7 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Addshore
  * @author Michał Łazowik
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Marius Hoch < hoo@online.de >

@@ -21,7 +21,7 @@ use Wikibase\Summary;
  *
  * @since 0.4
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author H. Snater < mediawiki@snater.com >
  * @author Thiemo Mättig
  * @author Bene* < benestar.wikimedia@gmail.com >

@@ -36,7 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class SetReferenceTest extends WikibaseApiTestCase {
 

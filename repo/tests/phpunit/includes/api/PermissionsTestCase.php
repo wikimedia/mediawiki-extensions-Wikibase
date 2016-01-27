@@ -10,7 +10,7 @@ use Wikibase\Test\PermissionsHelper;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
- * @author Adam Shorland
+ * @author Addshore
  */
 class PermissionsTestCase extends WikibaseApiTestCase {
 

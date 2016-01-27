@@ -27,7 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
- * @author Adam Shorland
+ * @author Addshore
  */
 class BotEditTest extends WikibaseApiTestCase {
 
