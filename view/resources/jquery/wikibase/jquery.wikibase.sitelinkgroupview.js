@@ -301,6 +301,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isValid
+	 * @return {boolean}
 	 */
 	isValid: function() {
 		return this.$sitelinklistview.data( 'sitelinklistview' ).isValid();
@@ -308,6 +309,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
+	 * @return {boolean}
 	 */
 	isInitialValue: function() {
 		return this.$sitelinklistview.data( 'sitelinklistview' ).isInitialValue();

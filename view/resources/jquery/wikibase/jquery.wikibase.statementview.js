@@ -464,6 +464,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
+	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
 	 * @return {boolean}
 	 */
 	isInitialValue: function() {
@@ -771,6 +772,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
+	 * @see jQuery.ui.EditableTemplatedWidget.isValid
 	 * @return {boolean}
 	 */
 	isValid: function() {
