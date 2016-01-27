@@ -210,8 +210,9 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			isValid = true;
 
 		listview.items().each( function() {
-			isValid = lia.liInstance( $( this ) ).isValid();
-			return isValid === true;
+			var entitytermsforlanguageview = lia.liInstance( $( this ) );
+			isValid = entitytermsforlanguageview.isValid();
+			return isValid;
 		} );
 
 		return isValid;
@@ -342,7 +343,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			lia = listview.listItemAdapter();
 
 		listview.items().each( function() {
-			lia.liInstance( $( this ) ).startEditing();
+			var entitytermsforlanguageview = lia.liInstance( $( this ) );
+			entitytermsforlanguageview.startEditing();
 		} );
 	},
 
@@ -424,7 +426,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			lia = listview.listItemAdapter();
 
 		listview.items().each( function() {
-			lia.liInstance( $( this ) ).removeError();
+			var entitytermsforlanguageview = lia.liInstance( $( this ) );
+			entitytermsforlanguageview.removeError();
 		} );
 	},
 

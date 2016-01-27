@@ -159,7 +159,8 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			statementList = new wb.datamodel.StatementList();
 
 			this._listview.items().each( function() {
-				var statement = lia.liInstance( $( this ) ).value();
+				var statementview = lia.liInstance( $( this ) ),
+					statement = statementview.value();
 				if ( statement ) {
 					statementList.addItem( statement );
 				}

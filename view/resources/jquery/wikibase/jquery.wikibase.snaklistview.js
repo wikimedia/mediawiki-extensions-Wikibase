@@ -313,12 +313,13 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 */
 	isValid: function() {
 		var listview = this.$listview.data( 'listview' ),
+			lia = listview.listItemAdapter(),
 			isValid = true;
 
 		$.each( listview.items(), function( i, item ) {
-			var snakview = listview.listItemAdapter().liInstance( $( item ) );
+			var snakview = lia.liInstance( $( item ) );
 			isValid = snakview.isValid() && snakview.snak();
-			return isValid === true;
+			return isValid;
 		} );
 
 		return isValid;
