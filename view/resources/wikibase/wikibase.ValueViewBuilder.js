@@ -46,12 +46,13 @@
 		 * @param {jQuery} $valueViewDom
 		 * @param {dataTypes.DataType} dataType
 		 * @param {dataValues.DataValue} dataValue
+		 * @param {string} propertyId
 		 *
 		 * @return {jQuery.valueview}
 		 */
-		initValueView: function( $valueViewDom, dataType, dataValue ) {
+		initValueView: function( $valueViewDom, dataType, dataValue, propertyId ) {
 			var valueView,
-				valueViewOptions = this._getOptions( dataType, dataValue );
+				valueViewOptions = this._getOptions( dataType, dataValue, propertyId );
 
 			// TODO: Use something like an 'editview' and just change its data type rather than
 			// initializing this over and over again and doing the checks.
@@ -61,9 +62,10 @@
 			return valueView;
 		},
 
-		_getOptions: function( dataType, dataValue ) {
+		_getOptions: function( dataType, dataValue, propertyId ) {
 			var valueViewOptions = $.extend( {}, this._baseOptions, {
-				value: dataValue
+				value: dataValue,
+				propertyId: propertyId
 			} );
 
 			if ( !dataType || ( dataValue && dataValue.getType() === 'undeserializable' ) ) {

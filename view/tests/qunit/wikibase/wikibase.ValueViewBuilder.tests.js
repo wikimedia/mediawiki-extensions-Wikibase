@@ -142,4 +142,18 @@
 		} ) );
 	} );
 
+	QUnit.test( 'initValueView passes propertyId', function( assert ) {
+		assert.expect( 1 );
+		var vvAndDom = getValueViewAndDom(),
+			$dom = vvAndDom.$dom;
+
+		var valueViewBuilder = new wb.ValueViewBuilder();
+
+		valueViewBuilder.initValueView( $dom, null, null, 'property id' );
+
+		sinon.assert.calledWith( $dom.valueview, sinon.match( {
+			propertyId: 'property id'
+		} ) );
+	} );
+
 }( wikibase, sinon, QUnit ) );
