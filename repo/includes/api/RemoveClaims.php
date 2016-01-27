@@ -59,9 +59,12 @@ class RemoveClaims extends ModifyClaim {
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
 		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->loadEntityRevision( $entityId, (int)$params['baserevid'] );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
+				$entityId,
+				(int)$params['baserevid']
+			);
 		} else {
-			$entityRevision = $this->loadEntityRevision( $entityId );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
 
@@ -80,10 +83,10 @@ class RemoveClaims extends ModifyClaim {
 			$this->errorReporter->dieException( $e, 'failed-save' );
 		}
 
-		$status = $this->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->setList( null, 'claims', $params['claim'], 'claim' );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->setList( null, 'claims', $params['claim'], 'claim' );
 	}
 
 	/**
@@ -184,6 +187,14 @@ class RemoveClaims extends ModifyClaim {
 					self::PARAM_ISMULTI => true,
 					self::PARAM_REQUIRED => true,
 				),
+				'summary' => array(
+					self::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					self::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);

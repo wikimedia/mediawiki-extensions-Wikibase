@@ -57,9 +57,12 @@ class CreateClaim extends ModifyClaim {
 
 		$entityId = $this->modificationHelper->getEntityIdFromString( $params['entity'] );
 		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->loadEntityRevision( $entityId, (int)$params['baserevid'] );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
+				$entityId,
+				(int)$params['baserevid']
+			);
 		} else {
-			$entityRevision = $this->loadEntityRevision( $entityId );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
 
@@ -82,10 +85,10 @@ class CreateClaim extends ModifyClaim {
 
 		$statement = $entity->getStatements()->getFirstStatementWithGuid( $changeOp->getStatementGuid() );
 
-		$status = $this->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addStatement( $statement );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->addStatement( $statement );
 	}
 
 	/**
@@ -159,6 +162,14 @@ class CreateClaim extends ModifyClaim {
 					self::PARAM_TYPE => 'text',
 					self::PARAM_REQUIRED => false,
 				),
+				'summary' => array(
+					self::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					self::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);

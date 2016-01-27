@@ -58,9 +58,12 @@ class SetQualifier extends ModifyClaim {
 
 		$entityId = $this->guidParser->parse( $params['claim'] )->getEntityId();
 		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->loadEntityRevision( $entityId, (int)$params['baserevid'] );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
+				$entityId,
+				(int)$params['baserevid']
+			);
 		} else {
-			$entityRevision = $this->loadEntityRevision( $entityId );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
 
@@ -75,10 +78,10 @@ class SetQualifier extends ModifyClaim {
 		$changeOp = $this->getChangeOp();
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$status = $this->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
-		$this->getResultBuilder()->addStatement( $statement );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->addStatement( $statement );
 	}
 
 	/**
@@ -192,6 +195,14 @@ class SetQualifier extends ModifyClaim {
 					self::PARAM_TYPE => 'string',
 					self::PARAM_REQUIRED => false,
 				),
+				'summary' => array(
+					self::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					self::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);

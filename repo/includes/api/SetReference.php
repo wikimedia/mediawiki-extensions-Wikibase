@@ -69,9 +69,12 @@ class SetReference extends ModifyClaim {
 
 		$entityId = $this->guidParser->parse( $params['statement'] )->getEntityId();
 		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->loadEntityRevision( $entityId, (int)$params['baserevid'] );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
+				$entityId,
+				(int)$params['baserevid']
+			);
 		} else {
-			$entityRevision = $this->loadEntityRevision( $entityId );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
 
@@ -106,11 +109,10 @@ class SetReference extends ModifyClaim {
 		$changeOp = $this->getChangeOp( $newReference );
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$status = $this->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
-		$resultBuilder = $this->getResultBuilder();
-		$resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$resultBuilder->markSuccess();
-		$resultBuilder->addReference( $newReference );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
+		$this->resultBuilder->addReference( $newReference );
 	}
 
 	/**
@@ -208,6 +210,14 @@ class SetReference extends ModifyClaim {
 				'index' => array(
 					self::PARAM_TYPE => 'integer',
 				),
+				'summary' => array(
+					self::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					self::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);
