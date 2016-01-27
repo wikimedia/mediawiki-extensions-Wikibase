@@ -50,6 +50,19 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		/** @var GlobeCoordinateValue $value */
 		$value = $snak->getDataValue();
 		$point = "Point({$value->getLatitude()} {$value->getLongitude()})";
+		$globe = $value->getGlobe();
+
+		if ( $globe && $globe !== GlobeCoordinateValue::GLOBE_EARTH ) {
+			$globe = str_replace( '>', '%3E', $globe );
+			// Add coordinate system according to http://www.opengeospatial.org/standards/geosparql
+			// Per https://portal.opengeospatial.org/files/?artifact_id=47664 sec 8.5.1
+			//    All RDFS Literals of type geo:wktLiteral shall consist of an optional URI
+			//    identifying the coordinate reference system followed by Simple Features Well Known
+			//   Text (WKT) describing a geometric value.
+			// Example: "<http://www.opengis.net/def/crs/EPSG/0/4326> Point(33.95 -83.38)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>
+			$point = "<$globe> $point";
+		}
+
 		$writer->say( $propertyValueNamespace, $propertyValueLName )
 			->value( $point, RdfVocabulary::NS_GEO, "wktLiteral" );
 
