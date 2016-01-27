@@ -70,6 +70,14 @@
 			);
 		}
 
+		var externalIdType = dataTypeStore.getDataType( 'external-id' );
+		if ( externalIdType ) {
+			formatterStore.registerDataTypeFormatter(
+				ApiBasedValueFormatter,
+				externalIdType.getId()
+			);
+		}
+
 		return formatterStore;
 	};
 

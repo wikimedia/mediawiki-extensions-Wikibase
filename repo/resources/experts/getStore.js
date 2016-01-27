@@ -46,8 +46,8 @@ MODULE.getStore = function( dataTypeStore ) {
 		monolingualtext: vv.experts.MonolingualText,
 		url: vv.experts.StringValue,
 		'wikibase-item': wb.experts.Item,
-		'wikibase-property': wb.experts.Property
-
+		'wikibase-property': wb.experts.Property,
+		'external-id': vv.experts.StringValue
 	};
 
 	for ( var dataTypeId in dataTypeIdToExpertConstructor ) {
