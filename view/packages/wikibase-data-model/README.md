@@ -8,6 +8,10 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
+### 2.0.1 (2016-01-27)
+
+* Added compatibility with DataValues JavaScript 0.8.0.
+
 ### 2.0.0 (2016-01-12)
 
 #### Breaking changes
