@@ -354,6 +354,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	},
 
 	/**
+	 * @see jQuery.ui.EditableTemplatedWidget.isValid
 	 * @return {boolean}
 	 */
 	isValid: function() {
@@ -361,6 +362,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	},
 
 	/**
+	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
 	 * @return {boolean}
 	 */
 	isInitialValue: function() {
