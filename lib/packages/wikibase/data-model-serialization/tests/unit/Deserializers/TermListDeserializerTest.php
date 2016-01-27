@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\TermList;
  * @covers Wikibase\DataModel\Deserializers\TermListDeserializer
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class TermListDeserializerTest extends DeserializerBaseTest {
 

@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\Snak;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
- * @author Adam Shorland
+ * @author Addshore
  */
 class SnakSerializer implements DispatchableSerializer {
 

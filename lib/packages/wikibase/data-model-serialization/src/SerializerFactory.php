@@ -28,7 +28,7 @@ use Wikibase\DataModel\Serializers\TypedSnakSerializer;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class SerializerFactory {
 

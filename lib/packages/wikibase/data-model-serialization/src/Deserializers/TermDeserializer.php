@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\Term;
  * Package private
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class TermDeserializer implements Deserializer {
 

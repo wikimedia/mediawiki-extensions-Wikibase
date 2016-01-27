@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @covers Wikibase\DataModel\Serializers\AliasGroupListSerializer
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class AliasGroupListSerializerTest extends \PHPUnit_Framework_TestCase {

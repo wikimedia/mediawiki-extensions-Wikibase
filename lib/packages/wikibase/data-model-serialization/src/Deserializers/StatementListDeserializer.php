@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementList;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class StatementListDeserializer implements Deserializer {
 

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\TermList;
  * Package private
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class TermListDeserializer implements Deserializer {

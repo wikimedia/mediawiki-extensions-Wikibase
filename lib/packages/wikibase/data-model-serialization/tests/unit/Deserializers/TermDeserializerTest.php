@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\Term;
  * @covers Wikibase\DataModel\Deserializers\TermDeserializer
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class TermDeserializerTest extends DeserializerBaseTest {
 

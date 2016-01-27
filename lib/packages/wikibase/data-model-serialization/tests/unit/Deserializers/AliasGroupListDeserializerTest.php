@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @covers Wikibase\DataModel\Deserializers\AliasGroupListDeserializer
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class AliasGroupListDeserializerTest extends DeserializerBaseTest {

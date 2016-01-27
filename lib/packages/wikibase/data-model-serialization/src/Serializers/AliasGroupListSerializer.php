@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * Package private
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class AliasGroupListSerializer implements Serializer {

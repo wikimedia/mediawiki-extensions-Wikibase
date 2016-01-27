@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\SnakList;
  *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
- * @author Adam Shorland
+ * @author Addshore
  */
 class SnakListDeserializer implements Deserializer {
 
