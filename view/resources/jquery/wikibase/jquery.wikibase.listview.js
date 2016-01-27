@@ -216,7 +216,8 @@ $.widget( 'wikibase.listview', PARENT, {
 	nonEmptyItems: function() {
 		var lia = this._lia;
 		return this.items().filter( function( i ) {
-			return !!lia.liInstance( $( this ) ).value();
+			var item = lia.liInstance( $( this ) );
+			return !!item.value();
 		} );
 	},
 
