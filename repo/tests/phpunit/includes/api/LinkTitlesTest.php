@@ -7,7 +7,7 @@ namespace Wikibase\Test\Repo\Api;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  *
  * @group API
  * @group Wikibase

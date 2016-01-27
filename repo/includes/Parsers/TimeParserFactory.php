@@ -17,7 +17,7 @@ use ValueParsers\YearMonthDayTimeParser;
  * @since 0.5
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  */
 class TimeParserFactory {

@@ -20,7 +20,7 @@ use Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks;
  *        ^---- needed because we rely on Title objects internally
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 

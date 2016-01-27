@@ -34,7 +34,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL 2+
  * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Addshore
  */
 class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 

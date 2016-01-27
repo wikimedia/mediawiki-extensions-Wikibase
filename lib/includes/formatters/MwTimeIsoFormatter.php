@@ -15,7 +15,7 @@ use ValueFormatters\ValueFormatterBase;
  *
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  *
  * @todo move me to DataValues-time

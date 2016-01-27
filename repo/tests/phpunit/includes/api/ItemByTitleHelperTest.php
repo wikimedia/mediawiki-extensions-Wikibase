@@ -18,7 +18,7 @@ use Wikibase\StringNormalizer;
  *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
- * @author Adam Shorland
+ * @author Addshore
  */
 class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 

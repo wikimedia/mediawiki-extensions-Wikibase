@@ -28,7 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Addshore
  * @author Marius Hoch
  */
 class FormatSnakValue extends ApiBase {

@@ -17,7 +17,7 @@ namespace Wikibase\Test\Repo\Api;
  * @group BreakingTheSlownessBarrier
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class SetAliasesTest extends ModifyTermTestCase {
 

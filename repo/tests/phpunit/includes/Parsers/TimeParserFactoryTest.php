@@ -17,7 +17,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  * @group TimeParsers
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  */
 class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {

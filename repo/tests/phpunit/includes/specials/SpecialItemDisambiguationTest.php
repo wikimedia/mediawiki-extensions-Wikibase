@@ -26,7 +26,7 @@ use Wikibase\TermIndexEntry;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  */
 class SpecialItemDisambiguationTest extends SpecialPageTestBase {

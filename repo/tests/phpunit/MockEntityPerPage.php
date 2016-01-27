@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
- * @author Adam Shorland
+ * @author Addshore
  */
 class MockEntityPerPage implements EntityPerPage {
 

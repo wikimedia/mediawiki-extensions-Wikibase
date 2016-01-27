@@ -15,7 +15,7 @@ use Wikibase\Repo\Parsers\YearMonthTimeParser;
  * @group TimeParsers
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class YearMonthTimeParserTest extends StringValueParserTest {
 

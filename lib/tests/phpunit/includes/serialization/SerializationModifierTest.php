@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Serialization\SerializationModifier;
 
 /**
- * @author Adam Shorland
+ * @author Addshore
  *
  * @group Wikibase
  * @group WikibaseLib

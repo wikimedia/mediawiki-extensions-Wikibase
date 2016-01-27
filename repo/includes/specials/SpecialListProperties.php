@@ -22,7 +22,7 @@ use Wikibase\View\EntityIdFormatterFactory;
  * @since 0.5
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class SpecialListProperties extends SpecialWikibaseQueryPage {
 

@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Michał Łazowik
- * @author Adam Shorland
+ * @author Addshore
  */
 class SetSiteLink extends ModifyEntity {
 

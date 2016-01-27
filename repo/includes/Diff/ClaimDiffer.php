@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
  *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  */
 class ClaimDiffer {

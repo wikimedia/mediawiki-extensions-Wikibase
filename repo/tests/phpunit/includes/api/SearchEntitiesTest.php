@@ -27,7 +27,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @group medium
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Daniel Kinzler
  */
 class SearchEntitiesTest extends PHPUnit_Framework_TestCase {

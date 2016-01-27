@@ -23,7 +23,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @since 0.5
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Daniel Kinzler
  */
 class ChangeOpsMerge {

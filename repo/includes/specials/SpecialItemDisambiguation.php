@@ -23,7 +23,7 @@ use Wikibase\TermIndexEntry;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Addshore
  */
 class SpecialItemDisambiguation extends SpecialWikibasePage {
 

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
  * @since 0.5
- * @author Adam Shorland
+ * @author Addshore
  */
 class CallbackFactory {
 

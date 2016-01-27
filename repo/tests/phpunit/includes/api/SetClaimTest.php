@@ -37,7 +37,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
- * @author Adam Shorland
+ * @author Addshore
  */
 class SetClaimTest extends WikibaseApiTestCase {
 

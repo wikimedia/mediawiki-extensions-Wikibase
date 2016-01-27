@@ -41,7 +41,7 @@ use Wikibase\Test\MockRepository;
  * @group Database
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Lucie-Aimée Kaffee
  */
 class MergeItemsTest extends \MediaWikiTestCase {

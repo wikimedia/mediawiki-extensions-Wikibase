@@ -9,7 +9,7 @@ use Wikimedia\Assert\Assert;
 /**
  * @since 0.5
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class TermSearchResult {
 

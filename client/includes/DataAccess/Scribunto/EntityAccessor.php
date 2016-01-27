@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  * @author Marius Hoch < hoo@online.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
- * @author Adam Shorland
+ * @author Addshore
  */
 class EntityAccessor {
 

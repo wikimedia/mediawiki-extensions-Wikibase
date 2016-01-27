@@ -8,7 +8,7 @@ namespace Wikibase\Test\Repo\Api;
  * Test cases are generated using the data provided in the various static arrays below.
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  *
  * @group API
  * @group Wikibase

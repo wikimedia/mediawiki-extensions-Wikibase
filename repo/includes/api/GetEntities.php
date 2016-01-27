@@ -25,7 +25,7 @@ use Wikibase\StringNormalizer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  * @author Michał Łazowik
- * @author Adam Shorland
+ * @author Addshore
  */
 class GetEntities extends ApiBase {
 

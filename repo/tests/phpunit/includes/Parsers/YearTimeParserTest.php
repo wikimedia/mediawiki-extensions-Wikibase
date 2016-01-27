@@ -16,7 +16,7 @@ use Wikibase\Repo\Parsers\YearTimeParser;
  * @group TimeParsers
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  */
 class YearTimeParserTest extends StringValueParserTest {

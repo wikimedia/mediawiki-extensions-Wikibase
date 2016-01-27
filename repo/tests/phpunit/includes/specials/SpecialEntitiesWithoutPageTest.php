@@ -23,7 +23,7 @@ use Wikibase\TermIndexEntry;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
- * @author Adam Shorland
+ * @author Addshore
  * @author Thiemo Mättig
  */
 class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {

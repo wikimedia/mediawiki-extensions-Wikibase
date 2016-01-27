@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 

@@ -28,7 +28,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @group Database
  *
  * @licence GNU GPL v2+
- * @author Adam Shorland
+ * @author Addshore
  */
 class ChangeOpsMergeTest extends MediaWikiTestCase {
 

@@ -21,7 +21,7 @@ use Wikibase\Repo\Specials\SpecialNewProperty;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class SpecialNewPropertyTest extends SpecialPageTestBase {
 

@@ -23,7 +23,7 @@ use Wikibase\StatementRankSerializer;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  */
 class GetClaims extends ApiBase {
 

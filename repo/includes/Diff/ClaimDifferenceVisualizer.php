@@ -20,7 +20,7 @@ use Wikibase\StatementRankSerializer;
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Adam Shorland
+ * @author Addshore
  * @author Daniel Kinzler
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  * @author Thiemo Mättig

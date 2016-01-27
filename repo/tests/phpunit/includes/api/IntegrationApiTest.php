@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  * @group medium
  *
- * @author Adam Shorland
+ * @author Addshore
  */
 class IntegrationApiTest extends ApiTestCase {
 
