@@ -91,7 +91,15 @@ class SnakListTest extends HashArrayTest {
 			array( $id1 ),
 			array( new PropertyNoValueSnak( $id1 ) ),
 			array( new PropertyValueSnak( $id1, new StringValue( 'a' ) ) ),
+			array( array( null ) ),
+			array( array( $id1 ) ),
+			array( array( new SnakList() ) ),
 		);
+	}
+
+	public function testGivenAssociativeArray_constructorPreservesArrayKeys() {
+		$snakList = new SnakList( array( 'key' => new PropertyNoValueSnak( 1 ) ) );
+		$this->assertSame( array( 'key' ), array_keys( iterator_to_array( $snakList ) ) );
 	}
 
 	/**
