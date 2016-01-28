@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_b275ddca",
+        "filename": "lib/i18n/qqq.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-01-28T11:58:42Z",
+      "side": 1,
+      "message": "\"when a snak\" (not \"when the a snak\")",
+      "revId": "779d8273b5d1b4ed2db93d191d7f5437f09fdbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
