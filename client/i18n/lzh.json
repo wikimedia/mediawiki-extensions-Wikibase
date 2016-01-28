@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"StephDC",
-			"Davidzdh"
+			"Davidzdh",
+			"飞舞回堂前"
 		]
 	},
+	"wikibase-editlinks": "纂鏈",
 	"wikibase-editlinkstitle": "修跨語鏈",
 	"wikibase-rc-hide-wikidata-hide": "隱",
 	"wikibase-rc-hide-wikidata-show": "示",

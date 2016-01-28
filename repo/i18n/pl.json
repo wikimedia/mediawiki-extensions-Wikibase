@@ -38,6 +38,8 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Opis",
 	"wikibase-entitytermsforlanguagelistview-label": "Etykieta",
 	"wikibase-entitytermsforlanguagelistview-language": "Język",
+	"wikibase-entitytermsforlanguagelistview-more": "Więcej języków",
+	"wikibase-entitytermsforlanguagelistview-less": "Mniej języków",
 	"wikibase-label-empty": "Etykieta nie została podana",
 	"wikibase-label-edit-placeholder": "podaj etykietę",
 	"wikibase-label-edit-placeholder-language-aware": "podaj etykietę w $1",
