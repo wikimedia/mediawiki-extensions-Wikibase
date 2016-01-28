@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_35ea379d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-28T14:52:07Z",
+      "side": 1,
+      "message": "@return. Fixed in I63fe344.",
+      "revId": "4928333e3ebee8f1c3406757116ddd4bf7450b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_15edbbb4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-01-28T14:52:07Z",
+      "side": 1,
+      "message": "This is a rebase mistake I did. Fixed in I63fe344.",
+      "revId": "4928333e3ebee8f1c3406757116ddd4bf7450b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
