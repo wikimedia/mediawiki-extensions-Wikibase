@@ -154,19 +154,18 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 */
 	value: function( statementList ) {
 		if ( statementList === undefined ) {
-			var lia = this._listview.listItemAdapter();
-
-			statementList = new wb.datamodel.StatementList();
+			var statements = [],
+				lia = this._listview.listItemAdapter();
 
 			this._listview.items().each( function() {
 				var statementview = lia.liInstance( $( this ) ),
 					statement = statementview.value();
 				if ( statement ) {
-					statementList.addItem( statement );
+					statements.push( statement );
 				}
 			} );
 
-			return statementList;
+			return new wb.datamodel.StatementList( statements );
 		}
 
 		this.option( 'value', statementList );
