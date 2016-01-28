@@ -224,7 +224,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @private
 	 */
 	_createEntitytermsforlanguagelistviewMore: function() {
-		if ( $.isEmptyObject( this._getAdditionalLanguages() ) ) {
+		if ( !this._hasMoreLanguages() ) {
 			return;
 		}
 
@@ -241,7 +241,29 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	},
 
 	/**
-	 * Click handler for more languages button
+	 * Checks whether there are more languages to display
+	 *
+	 * @private
+	 */
+	_hasMoreLanguages: function() {
+		var fingerprint = this.options.value,
+			minLength = this.options.userLanguages.length;
+
+		if ( fingerprint.getLabels().length > minLength
+			|| fingerprint.getDescriptions().length > minLength
+			|| fingerprint.getAliases().length > minLength ) {
+			return true;
+		}
+
+		if ( !$.isEmptyObject( this._getAdditionalLanguages() ) ) {
+			return true;
+		}
+
+		return false;
+	},
+
+	/**
+	 * Click handler for more languages button.
 	 *
 	 * @private
 	 */
