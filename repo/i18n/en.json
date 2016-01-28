@@ -370,6 +370,7 @@
 	"content-model-wikibase-item": "Wikibase item",
 	"content-model-wikibase-property": "Wikibase property",
 	"content-model-wikibase-query": "Wikibase query",
+	"listdatatypes-helppage": "Help:Datatypes",
 	"right-item-term": "Change item terms (labels, descriptions, aliases)",
 	"right-item-merge": "Merge items",
 	"right-item-redirect": "Create item redirects",
