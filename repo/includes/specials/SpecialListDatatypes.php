@@ -32,6 +32,8 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
+		$this->addHelpLink( '//www.wikidata.org/wiki/Special:MyLanguage/Help:Data_type', true );
+
 		$this->getOutput()->addHTML( $this->msg( 'wikibase-listdatatypes-intro' ) );
 		$this->getOutput()->addHTML( Html::openElement( 'dl' ) );
 
