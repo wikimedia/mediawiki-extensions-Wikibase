@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_e8ee0286",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-28T17:10:34Z",
+      "side": 1,
+      "message": "At least in theory, this should point to wikiba.se, not wikidata.org. But there isn\u0027t anything there yet...\nAlso, a default should be provided for the message key \u0027listdatatypes-helppage\u0027.",
+      "revId": "cd9f2eb34f3efb61a63d3a140c369018961e4e22",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
