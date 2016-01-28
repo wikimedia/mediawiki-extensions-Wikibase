@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_e81a82cf",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-28T17:05:20Z",
+      "side": 0,
+      "message": "Why was this removed? This is still correct, and it\u0027s important to understand the semantics of this method.",
+      "revId": "d0e10f6dd819b2b9ebe7164f647d909b25d67e18",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
