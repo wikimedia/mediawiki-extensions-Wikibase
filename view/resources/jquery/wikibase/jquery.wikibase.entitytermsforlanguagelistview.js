@@ -1,6 +1,7 @@
 /**
  * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 ( function( mw, wb, $ ) {
 	'use strict';
@@ -12,16 +13,10 @@
  * @since 0.5
  * @extends jQuery.ui.TemplatedWidget
  *
- * @option {Object[]} value
- *         Object representing the widget's value.
- *         Structure: [
- *           {
- *             language: <{string]>,
- *             label: <{wikibase.datamodel.Term}>,
- *             description: <{wikibase.datamodel.Term}>,
- *             aliases: <{wikibase.datamodel.MultiTerm}>
- *           }[, ...]
- *         ]
+ * @option {Fingerprint} value
+ *
+ * @option {string[]} userLanguages
+ *         A list of languages for which terms should be displayed initially.
  *
  * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
  *
@@ -58,7 +53,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			$header: '.wikibase-entitytermsforlanguagelistview-header',
 			$listview: '.wikibase-entitytermsforlanguagelistview-listview'
 		},
-		value: [],
+		value: null,
+		userLanguages: [],
 		entityChangersFactory: null
 	},
 
@@ -71,7 +67,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !$.isArray( this.options.value )
+		if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
+			|| !$.isArray( this.options.userLanguages )
 			|| !this.options.entityChangersFactory
 		) {
 			throw new Error( 'Required option(s) missing' );
@@ -126,11 +123,11 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			} );
 		} );
 
-		var mismatch = scrapedLanguages.length !== this.options.value.length;
+		var mismatch = scrapedLanguages.length !== this.options.userLanguages.length;
 
 		if ( !mismatch ) {
 			for ( i = 0; i < scrapedLanguages.length; i++ ) {
-				if ( scrapedLanguages[i] !== this.options.value[i].language ) {
+				if ( scrapedLanguages[i] !== this.options.userLanguages[i] ) {
 					mismatch = true;
 					break;
 				}
@@ -189,9 +186,27 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 					};
 				}
 			} ),
-			value: self.options.value || null,
+			value: $.map( this.options.userLanguages, function( lang ) {
+				return self._getValueForLanguage( lang );
+			} ),
 			listItemNodeName: 'TR'
 		} );
+	},
+
+	/**
+	 * @param {string} lang
+	 * @returns {Object}
+	 * @private
+	 */
+	_getValueForLanguage: function( lang ) {
+		var fingerprint = this.options.value;
+
+		return {
+			language: lang,
+			label: fingerprint.getLabelFor( lang ) || new wb.datamodel.Term( lang, '' ),
+			description: fingerprint.getDescriptionFor( lang ) || new wb.datamodel.Term( lang, '' ),
+			aliases: fingerprint.getAliasesFor( lang ) || new wb.datamodel.MultiTerm( lang, [] )
+		};
 	},
 
 	/**
@@ -226,6 +241,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			lia = listview.listItemAdapter(),
 			isInitialValue = true;
 
+		// FIXME: Use equals when fixed in data model.
 		listview.items().each( function() {
 			var entitytermsforlanguageview = lia.liInstance( $( this ) );
 			isInitialValue = entitytermsforlanguageview.isInitialValue();
@@ -418,8 +434,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	},
 
 	/**
-	 * @param {Object[]} [value]
-	 * @return {Object[]|*}
+	 * @param {Fingerprint} [value]
+	 * @return {Fingerprint|*}
 	 */
 	value: function( value ) {
 		if ( value !== undefined ) {
@@ -429,11 +445,20 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
 
-		value = [];
+		// Clones the current Fingerprint.
+		// FIXME: This accesses the private _items property since there is no copy or clone.
+		value = new wb.datamodel.Fingerprint(
+			new wb.datamodel.TermMap( this.options.value.getLabels()._items ),
+			new wb.datamodel.TermMap( this.options.value.getDescriptions()._items ),
+			new wb.datamodel.MultiTermMap( this.options.value.getAliases()._items )
+		);
 
+		// this only adds all terms visible in the ui to the Fingerprint, all other languages get ignored
 		listview.items().each( function() {
-			var entitytermsforlanguageview = lia.liInstance( $( this ) );
-			value.push( entitytermsforlanguageview.value() );
+			var terms = lia.liInstance( $( this ) ).value();
+			value.setLabel( terms.language, terms.label );
+			value.setDescription( terms.language, terms.description );
+			value.setAliases( terms.language, terms.aliases );
 		} );
 
 		return value;
