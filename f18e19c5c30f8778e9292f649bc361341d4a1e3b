@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_68e7720e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-01-28T16:44:13Z",
+      "side": 1,
+      "message": "Missing dot at end of sentence.",
+      "revId": "f18e19c5c30f8778e9292f649bc361341d4a1e3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_e8db6252",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-01-28T16:44:13Z",
+      "side": 1,
+      "message": "missing space before {\n\nI\u0027d also prefer to have \") {\" in its own line for readability. Not sure what our style guide says.",
+      "revId": "f18e19c5c30f8778e9292f649bc361341d4a1e3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_e82cc247",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-01-28T16:44:13Z",
+      "side": 1,
+      "message": "missing space before {\n\nYou can just do return !$.isEmptyObject(...);",
+      "revId": "f18e19c5c30f8778e9292f649bc361341d4a1e3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
