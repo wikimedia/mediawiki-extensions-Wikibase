@@ -171,9 +171,11 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 
 		// Fully encapsulate child widgets by suppressing their events:
 		this.element
-		.on( prefix + 'change.' + this.widgetName, function( event ) {
+		.on( prefix + 'change.' + this.widgetName, function( event, lang ) {
 			event.stopPropagation();
-			self._trigger( 'change' );
+			if ( lang === self.options.userLanguages[0] ) {
+				self._trigger( 'change' );
+			}
 		} )
 		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
 			event.stopPropagation();

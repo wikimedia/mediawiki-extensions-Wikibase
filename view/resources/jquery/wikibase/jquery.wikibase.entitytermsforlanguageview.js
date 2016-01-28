@@ -28,6 +28,7 @@
  *
  * @event change
  *        - {jQuery.Event}
+ *        - {string} Language code the change was made in.
  *
  * @event afterstartediting
  *       - {jQuery.Event}
@@ -165,7 +166,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 			self['$' + widgetName]
 			.on( widgetName + 'change', function( event ) {
 				event.stopPropagation();
-				self._trigger( 'change' );
+				self._trigger( 'change', null, [self.options.value.language] );
 			} )
 			.on( widgetName + 'toggleerror.' + self.widgetName, function( event, error ) {
 				event.stopPropagation();
