@@ -106,7 +106,7 @@ class SetReference extends ModifyClaim {
 		$changeOp = $this->getChangeOp( $newReference );
 		$this->modificationHelper->applyChangeOp( $changeOp, $entity, $summary );
 
-		$status = $this->saveChanges( $entity, $summary );
+		$status = $this->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
 		$resultBuilder = $this->getResultBuilder();
 		$resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$resultBuilder->markSuccess();

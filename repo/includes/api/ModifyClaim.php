@@ -103,22 +103,6 @@ abstract class ModifyClaim extends ApiBase {
 	}
 
 	/**
-	 * @since 0.4
-	 *
-	 * @param Entity $entity
-	 * @param Summary $summary
-	 *
-	 * @return Status
-	 */
-	public function saveChanges( Entity $entity, Summary $summary ) {
-		return $this->attemptSaveEntity(
-			$entity,
-			$summary,
-			EDIT_UPDATE
-		);
-	}
-
-	/**
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
