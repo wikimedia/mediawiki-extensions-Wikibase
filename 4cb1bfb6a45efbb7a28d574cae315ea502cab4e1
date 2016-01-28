@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_0b2fd886",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-28T17:35:30Z",
+      "side": 1,
+      "message": "This is a Message object, not a string. Is that intentional?\nWhen Message is converted to a string implicitly, it will be treated as wikitext, and not converted to HTML. Template parameters are expected to be HTML.",
+      "revId": "4cb1bfb6a45efbb7a28d574cae315ea502cab4e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_cb48e068",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-01-28T17:35:30Z",
+      "side": 1,
+      "message": "Should probably be $helpText-\u003eparse()",
+      "revId": "4cb1bfb6a45efbb7a28d574cae315ea502cab4e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
