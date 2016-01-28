@@ -338,6 +338,12 @@
 			return;
 		}
 
+		// This is copied from startup.js in MediaWiki core.
+		var mwPerformance = window.performance && performance.mark ? performance : {
+			mark: function() {}
+		};
+		mwPerformance.mark( 'wbInitStart' );
+
 		var $entityview = $( '.wikibase-entityview' );
 		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
 		var canEdit = !mw.config.get( 'wbUserIsBlocked' ) && mw.config.get( 'wbUserCanEdit' )
@@ -354,6 +360,8 @@
 				attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );
 				attachWatchLinkUpdater( $entityview, viewName );
 			}
+
+			mwPerformance.mark( 'wbInitEnd' );
 		} );
 
 		if ( canEdit ) {
