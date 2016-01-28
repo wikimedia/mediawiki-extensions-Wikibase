@@ -43,8 +43,8 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 						listview = $snaklistviewNode.data( 'snaklistview' )._listview,
 						lia = listview.listItemAdapter();
 
-					$.each( listview.items(), function( i, item ) {
-						var snakview = lia.liInstance( $( item ) );
+					listview.items().each( function() {
+						var snakview = lia.liInstance( $( this ) );
 						toolbarcontroller.destroyToolbar(
 							snakview.element.data( 'removetoolbar' )
 						);
@@ -63,8 +63,8 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 						$statementview = $snaklistviewNode.closest( ':wikibase-statementview' ),
 						statementview = $statementview.data( 'statementview' );
 
-					$.each( listview.items(), function( i, node ) {
-						var $snakview = $( node ),
+					listview.items().each( function() {
+						var $snakview = $( this ),
 							snakview = lia.liInstance( $snakview ),
 							removeToolbar = $snakview.data( 'removetoolbar' );
 
