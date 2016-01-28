@@ -61,12 +61,22 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	/**
 	 * @type {jQuery}
 	 */
+	$listview: null,
+
+	/**
+	 * @type {jQuery}
+	 */
 	$entitytermsforlanguagelistviewMore: null,
 
 	/**
 	 * @type {boolean}
 	 */
 	_isInEditMode: false,
+
+	/**
+	 * @type {Object} Map of language codes pointing to list items (in the form of jQuery nodes).
+	 */
+	_moreLanguagesItems: {},
 
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
@@ -214,53 +224,91 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @private
 	 */
 	_createEntitytermsforlanguagelistviewMore: function() {
-		var self = this,
-			listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
-			languages = this._getAdditionalLanguages(),
-			itemsPerLanguage = {};
-
-		if ( $.isEmptyObject( languages ) ) {
+		if ( $.isEmptyObject( this._getAdditionalLanguages() ) ) {
 			return;
 		}
 
-		this.$entitytermsforlanguagelistviewMore = $( '<div/>' )
-		.addClass( 'wikibase-entitytermsforlanguagelistview-more' )
-		.append(
-			$( '<a/>' )
+		var $moreLanguagesButton = $( '<a/>' )
 			.attr( 'href', '#' )
-			.text( mw.msg( 'wikibase-entitytermsforlanguagelistview-more' ) )
-			.click( function() {
-				var $this = $( this ),
-					expanded = $.isEmptyObject( itemsPerLanguage ),
-					lang;
+			.click( $.proxy( this._onMoreLanguagesButtonClicked, this ) );
+		this._toggleMoreLanguagesButton( $moreLanguagesButton );
 
-				if ( expanded ) {
-					for ( lang in languages ) {
-						var $li = listview.addItem( self._getValueForLanguage( lang ) );
-						if ( self._isInEditMode ) {
-							lia.liInstance( $li ).startEditing();
-						}
-						itemsPerLanguage[lang] = $li;
-					}
-				} else {
-					var top = $this.offset().top;
-					for ( lang in languages ) {
-						listview.removeItem( itemsPerLanguage[lang] );
-						delete itemsPerLanguage[lang];
-					}
-					self._scrollUp( $this, top );
-				}
-
-				$this.text( mw.msg(
-					'wikibase-entitytermsforlanguagelistview-' + ( expanded ? 'less' : 'more' )
-				) );
-
-				return false;
-			} )
-		);
+		this.$entitytermsforlanguagelistviewMore = $( '<div/>' )
+			.addClass( 'wikibase-entitytermsforlanguagelistview-more' )
+			.append( $moreLanguagesButton );
 
 		this.element.after( this.$entitytermsforlanguagelistviewMore );
+	},
+
+	/**
+	 * Click handler for more languages button
+	 *
+	 * @private
+	 */
+	_onMoreLanguagesButtonClicked: function( event ) {
+		var $button = $( event.target );
+
+		if ( !this._isMoreLanguagesExpanded() ) {
+			this._addMoreLanguages();
+		} else {
+			var previousTop = $button.offset().top;
+			this._removeMoreLanguages();
+			this._scrollUp( $button, previousTop );
+		}
+
+		this._toggleMoreLanguagesButton( $button );
+		return false;
+	},
+
+	/**
+	 * Toggle more language button text between the "wikibase-entitytermsforlanguagelistview-less"
+	 * and "wikibase-entitytermsforlanguagelistview-more" messages.
+	 *
+	 * @param {jQuery} $button
+	 * @private
+	 */
+	_toggleMoreLanguagesButton: function( $button ) {
+		$button.text( mw.msg(
+			'wikibase-entitytermsforlanguagelistview-'
+				+ ( this._isMoreLanguagesExpanded() ? 'less' : 'more' )
+		) );
+	},
+
+	_isMoreLanguagesExpanded: function() {
+		return !$.isEmptyObject( this._moreLanguagesItems );
+	},
+
+	/**
+	 * Add 'more' languages to listview
+	 *
+	 * @private
+	 */
+	_addMoreLanguages: function() {
+		var listview = this.$listview.data( 'listview' ),
+			lia = listview.listItemAdapter();
+
+		for ( var lang in this._getAdditionalLanguages() ) {
+			var $item = listview.addItem( this._getValueForLanguage( lang ) );
+			if ( this._isInEditMode ) {
+				lia.liInstance( $item ).startEditing();
+			}
+			this._moreLanguagesItems[lang] = $item;
+		}
+	},
+
+	/**
+	 * Remove 'more' languages from listview
+	 *
+	 * @private
+	 */
+	_removeMoreLanguages: function() {
+		var listview = this.$listview.data( 'listview' );
+
+		$.each( this._moreLanguagesItems, function() {
+			listview.removeItem( this );
+		} );
+
+		this._moreLanguagesItems = {};
 	},
 
 	/**
