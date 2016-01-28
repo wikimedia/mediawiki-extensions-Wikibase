@@ -17,6 +17,12 @@ var SELF = MODULE.WikibaseContentLanguages = util.inherit(
 	PARENT,
 	function() {
 		this._languageMap = mw.config.get( 'wgULSLanguages' );
+		this._languageCodes = $.map( this._languageMap, function( val, key ) {
+			return key;
+		} );
+		this._languageCodes = $.grep( this._languageCodes, function( code ) {
+			return [ 'de-formal', 'nl-informal', 'tokipona' ].indexOf( code ) === -1;
+		} );
 	}
 );
 
@@ -37,12 +43,6 @@ $.extend( SELF.prototype, {
 	 * @inheritdoc
 	 */
 	getAll: function() {
-		// Cache language codes
-		if ( !this._languageCodes && this._languageMap ) {
-			this._languageCodes = $.map( this._languageMap, function( val, key ) {
-				return key;
-			} );
-		}
 		return this._languageCodes;
 	},
 

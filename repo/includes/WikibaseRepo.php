@@ -48,6 +48,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\DifferenceContentLanguages;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
@@ -1465,10 +1466,17 @@ class WikibaseRepo {
 
 	private function getMonolingualTextLanguages() {
 		if ( $this->monolingualTextLanguages === null ) {
-			$this->monolingualTextLanguages = new UnionContentLanguages(
-				new MediaWikiContentLanguages(),
-				// Special ISO 639-2 codes
-				new StaticContentLanguages( array( 'und', 'mis', 'mul', 'zxx' ) )
+			$this->monolingualTextLanguages = new DifferenceContentLanguages(
+				new UnionContentLanguages(
+					new MediaWikiContentLanguages(),
+					// Special ISO 639-2 codes
+					new StaticContentLanguages( array( 'und', 'mis', 'mul', 'zxx' ) )
+				),
+				new StaticContentLanguages( array(
+					// MediaWiki language codes we don't want for monolingual text values
+					'tokipona', 'simple', 'roa-rup', 'bat-smg', 'be-x-old', 'fiu-vro',
+					'zh-min-nan', 'zh-yue', 'zh-classical', 'de-formal', 'nl-informal'
+				) )
 			);
 		}
 		return $this->monolingualTextLanguages;
