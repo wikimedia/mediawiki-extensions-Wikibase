@@ -396,6 +396,7 @@
 	"wikibase-concept-uri-tooltip": "Text for the canonical concept link in toolbox on entity pages.",
 	"wikibase-pageimage-helptext": "Help message giving information about where data for page image has been retrieved from",
 	"datatypes-type-url": "Unused at this time.\n{{Identical|URL}}",
+	"listdatatypes-helppage": "The link used on Special:ListDatatypes. Just translate \"Datatypes\", and '''leave the \"Help:\" namespace exactly as it is'''.",
 	"content-model-wikibase-item": "The name for Wikibase item content model, used when describing what type of content a page contains.",
 	"content-model-wikibase-property": "The name for Wikibase property content model, used when describing what type of content a page contains.",
 	"content-model-wikibase-query": "The name for Wikibase query content model, used when describing what type of content a page contains.",
