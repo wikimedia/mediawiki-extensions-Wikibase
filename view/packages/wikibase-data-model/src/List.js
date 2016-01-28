@@ -102,7 +102,7 @@ var SELF = wb.datamodel.List = util.inherit(
 	/**
 	 * @inheritdoc
 	 *
-	 * @throws {Error} when trying to remove a claim which is not registered.
+	 * @throws {Error} when trying to remove an item which is not registered.
 	 */
 	removeItem: function( item ) {
 		this._assertIsItem( item );
@@ -114,7 +114,7 @@ var SELF = wb.datamodel.List = util.inherit(
 				return;
 			}
 		}
-		throw new Error( 'Trying to remove a non-existing claim' );
+		throw new Error( 'Trying to remove a non-existing item' );
 	},
 
 	/**
