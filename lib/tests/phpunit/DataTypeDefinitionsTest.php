@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\DataTypeDefinitions;
 
 /**
@@ -14,7 +15,7 @@ use Wikibase\Lib\DataTypeDefinitions;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class DataTypeDefinitionsTest extends \MediaWikiTestCase {
+class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 
 	private function getDefinitions() {
 		return array(

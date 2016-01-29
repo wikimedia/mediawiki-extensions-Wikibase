@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\StaticContentLanguages;
 
 /**
@@ -13,7 +14,7 @@ use Wikibase\Lib\StaticContentLanguages;
  * @license GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-class StaticContentLanguagesTest extends \MediaWikiTestCase {
+class StaticContentLanguagesTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideTestGetLanguages
