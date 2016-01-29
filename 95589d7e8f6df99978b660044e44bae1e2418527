@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_9a122f00",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-01-29T10:14:31Z",
+      "side": 1,
+      "message": "This is just a refactor right?\nI would have preferred this to be in another patch then...",
+      "revId": "95589d7e8f6df99978b660044e44bae1e2418527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
