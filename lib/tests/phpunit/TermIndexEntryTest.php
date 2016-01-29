@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\TermIndexEntry;
@@ -16,7 +17,7 @@ use Wikibase\TermIndexEntry;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  */
-class TermIndexEntryTest extends \MediaWikiTestCase {
+class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 
 	public function provideConstructor() {
 		return array(

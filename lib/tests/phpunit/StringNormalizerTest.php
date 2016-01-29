@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\StringNormalizer;
 
 /**
@@ -14,7 +15,7 @@ use Wikibase\StringNormalizer;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class StringNormalizerTest extends \MediaWikiTestCase {
+class StringNormalizerTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider providerTrimBadChars
