@@ -12,11 +12,11 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\SnakFactory;
 use Wikibase\Test\MockClientStore;
 use Wikibase\Test\MockRepository;
 
@@ -54,7 +54,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$stringProperty = $this->getTestProperty( new PropertyId( 'P342' ), 'string', 'LuaTestStringProperty' );
 		$itemProperty = $this->getTestProperty( new PropertyId( 'P456' ), 'wikibase-item', 'LuaTestItemProperty' );
 
-		$stringSnak = $this->getTestSnak(
+		$stringSnak = new PropertyValueSnak(
 			$stringProperty->getId(),
 			new StringValue( 'Lua :)' )
 		);
@@ -62,15 +62,15 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$statement1 = $this->getTestStatement( $stringSnak );
 		$statement1->setRank( Statement::RANK_PREFERRED );
 
-		$qualifierSnak1 = $this->getTestSnak(
+		$qualifierSnak1 = new PropertyValueSnak(
 			new PropertyId( 'P342' ),
 			new StringValue( 'A qualifier Snak' )
 		);
-		$qualifierSnak2 = $this->getTestSnak(
+		$qualifierSnak2 = new PropertyValueSnak(
 			new PropertyId( 'P342' ),
 			new StringValue( 'Moar qualifiers' )
 		);
-		$referenceSnak = $this->getTestSnak(
+		$referenceSnak = new PropertyValueSnak(
 			new PropertyId( 'P342' ),
 			new StringValue( 'A reference' )
 		);
@@ -85,7 +85,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$this->siteLinkLookup->putEntity( $stringProperty );
 		$this->siteLinkLookup->putEntity( $itemProperty );
 
-		$stringSnak2 = $this->getTestSnak(
+		$stringSnak2 = new PropertyValueSnak(
 			$stringProperty->getId(),
 			new StringValue( 'Lua is clearly superior to the parser function' )
 		);
@@ -93,7 +93,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$statement2 = $this->getTestStatement( $stringSnak2 );
 		$statement2->setRank( Statement::RANK_NORMAL );
 
-		$itemSnak = $this->getTestSnak(
+		$itemSnak = new PropertyValueSnak(
 			$itemProperty->getId(),
 			new EntityIdValue( new ItemId( 'Q885588' ) )
 		);
@@ -164,19 +164,6 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$this->siteLinkLookup->putEntity( $item );
 
 		return $item;
-	}
-
-	/**
-	 * @param PropertyId $propertyId
-	 * @param DataValue $value
-	 *
-	 * @return Snak
-	 */
-	private function getTestSnak( PropertyId $propertyId, DataValue $value ) {
-		$snakFactory = new SnakFactory();
-		$snak = $snakFactory->newSnak( $propertyId, 'value', $value );
-
-		return $snak;
 	}
 
 	/**
