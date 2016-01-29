@@ -360,26 +360,19 @@
 			$entityview
 			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event ) {
 				var $entitytermsview = $( event.target ),
-					entitytermsview = $entitytermsview.data( 'entitytermsview' );
+					entitytermsview = $entitytermsview.data( 'entitytermsview' ),
+					fingerprint = entitytermsview.value(),
+					label = fingerprint.getLabelFor( mw.config.get( 'wgUserLanguage' ) ),
+					isEmpty = !label || label.getText() === '';
 
-				$.each( entitytermsview.value(), function() {
-					if ( this.language !== mw.config.get( 'wgUserLanguage' ) ) {
-						return true;
-					}
+				$( 'title' ).text(
+					mw.msg( 'pagetitle', isEmpty ? mw.config.get( 'wgTitle' ) : label.getText() )
+				);
 
-					var label = this.label.getText();
-
-					$( 'title' ).text(
-						mw.msg( 'pagetitle', label !== '' ? label : mw.config.get( 'wgTitle' ) )
-					);
-
-					$( 'h1' ).find( '.wikibase-title' )
-						.toggleClass( 'wb-empty', label === '' )
-						.find( '.wikibase-title-label' )
-						.text( label !== '' ? label : mw.msg( 'wikibase-label-empty' ) );
-
-					return false;
-				} );
+				$( 'h1' ).find( '.wikibase-title' )
+					.toggleClass( 'wb-empty', isEmpty )
+					.find( '.wikibase-title-label' )
+					.text( isEmpty ? mw.msg( 'wikibase-label-empty' ) : label.getText() );
 			} );
 
 			attachCopyrightTooltip( $entityview );
