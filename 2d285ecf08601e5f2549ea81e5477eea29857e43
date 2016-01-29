@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_7d464d56",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-01-29T13:42:53Z",
+      "side": 1,
+      "message": "maybe this list should be in config, especially if we think this list of languages might change in the future?",
+      "revId": "2d285ecf08601e5f2549ea81e5477eea29857e43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
