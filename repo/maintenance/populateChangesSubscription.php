@@ -23,7 +23,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Populate the wb_changes_subscription table based on entries in wb_items_per_site.';
+		$this->addDescription( 'Populate the wb_changes_subscription table based on entries in wb_items_per_site.' );
 
 		$this->addOption( 'start-item', "The item ID to start from.", false, true );
 		$this->addOption( 'verbose', 'Report more detailed script progress.' );

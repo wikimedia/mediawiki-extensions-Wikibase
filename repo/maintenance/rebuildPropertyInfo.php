@@ -23,7 +23,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Rebuild the property info table.';
+		$this->addDescription( 'Rebuild the property info table.' );
 
 		$this->addOption( 'rebuild-all', "Update property info for all properties (per default, only missing entries are created)" );
 		$this->addOption( 'start-row', "The ID of the first row to update (useful for continuing aborted runs)", false, true );

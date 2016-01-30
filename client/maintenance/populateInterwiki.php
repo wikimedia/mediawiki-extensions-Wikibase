@@ -34,7 +34,7 @@ class PopulateInterwiki extends Maintenance {
 	private $cache;
 
 	public function __construct() {
-		$this->mDescription = <<<TEXT
+		$this->addDescription( <<<TEXT
 This script will populate the interwiki table, pulling in interwiki links that are used on Wikipedia
 or another MediaWiki wiki.
 
@@ -44,7 +44,8 @@ without the --force option.
 --source parameter is the url for the source wiki api, such as "https://en.wikipedia.org/w/api.php"
 from which the script fetches the interwiki data and uses here to populate this wiki's interwiki
 database table.
-TEXT;
+TEXT
+		);
 
 		$this->addOption( 'source', 'Source wiki for interwiki table, such as '
 			. 'https://en.wikipedia.org/w/api.php', false, true );

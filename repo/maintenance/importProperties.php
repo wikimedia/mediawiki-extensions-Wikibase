@@ -63,7 +63,7 @@ class ImportProperties extends Maintenance {
 	private $store;
 
 	public function __construct() {
-		$this->mDescription = "Import properties in Wikidata.";
+		$this->addDescription( "Import properties in Wikidata." );
 
 		$this->addOption( 'skip', "Skip number of entries in the import file" );
 		$this->addOption( 'only', "Only import the specific entry from the import file" );

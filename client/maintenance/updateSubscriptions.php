@@ -26,8 +26,8 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class UpdateSubscriptions extends Maintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Updates the repo\'s wb_changes_subscription table based on entries'
-			. ' in wbc_entity_usage.';
+		$this->addDescription( 'Updates the repo\'s wb_changes_subscription table based on entries'
+			. ' in wbc_entity_usage.' );
 
 		$this->addOption( 'start-item', "The entity ID to start from.", false, true );
 		$this->addOption(

@@ -26,7 +26,7 @@ class RebuildItemsPerSite extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Rebuild the items_per_site table';
+		$this->addDescription( 'Rebuild the items_per_site table' );
 
 		$this->addOption( 'batch-size', "Number of rows to update per batch (100 by default)", false, true );
 	}

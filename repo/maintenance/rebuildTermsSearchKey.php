@@ -23,7 +23,7 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Rebuild the search key of the TermSQLCache';
+		$this->addDescription( 'Rebuild the search key of the TermSQLCache' );
 
 		$this->addOption( 'only-missing', "Update only missing keys (per default, all keys are updated)" );
 		$this->addOption( 'start-row', "The ID of the first row to update (useful for continuing aborted runs)", false, true );

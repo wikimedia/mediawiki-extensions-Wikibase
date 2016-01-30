@@ -39,7 +39,7 @@ class PopulateSitesTable extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Populate the sites table from another wiki that runs the SiteMatrix extension';
+		$this->addDescription( 'Populate the sites table from another wiki that runs the SiteMatrix extension' );
 
 		$this->addOption( 'strip-protocols', "Strip http/https from URLs to make them protocol relative." );
 		$this->addOption( 'force-protocol', "Force a specific protocol for all URLs (like http/https).", false, true );

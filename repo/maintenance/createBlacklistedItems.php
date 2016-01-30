@@ -22,7 +22,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class CreateBlacklistedItems extends Maintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Created blacklisted items';
+		$this->addDescription( 'Created blacklisted items' );
 
 		parent::__construct();
 	}

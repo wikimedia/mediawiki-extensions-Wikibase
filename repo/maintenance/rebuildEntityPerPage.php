@@ -25,7 +25,7 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Rebuild the entites_per_page table';
+		$this->addDescription( 'Rebuild the entites_per_page table' );
 
 		$this->addOption( 'rebuild-all', "Rebuild the entire table (per default, only missing entries are rebuild)" );
 		$this->addOption( 'batch-size', "Number of rows to update per batch (100 by default)", false, true );
