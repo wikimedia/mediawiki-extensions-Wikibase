@@ -43,7 +43,7 @@ abstract class DumpScript extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Generate a JSON dump from entities in the repository.';
+		$this->addDescription( 'Generate a JSON dump from entities in the repository.' );
 
 		$this->addOption( 'list-file', "A file containing one entity ID per line.", false, true );
 		$this->addOption( 'entity-type', "Only dump this kind of entity, e.g. `item` or `property`.", false, true );

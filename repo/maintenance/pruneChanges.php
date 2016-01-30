@@ -18,7 +18,7 @@ class PruneChanges extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Prune the Wikibase changes table to a maximum number of entries";
+		$this->addDescription( "Prune the Wikibase changes table to a maximum number of entries" );
 
 		$this->addOption( 'number-of-days', 'Keep changes at least N days (deprecated).', false, true, 'n' );
 		$this->addOption( 'keep-days', 'Keep changes at least N days.', false, true, 'd' );
