@@ -8,7 +8,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Repo\SnakConstructionService;
-use Wikibase\SnakFactory;
 
 /**
  * @covers Wikibase\Repo\SnakConstructionService
@@ -23,7 +22,6 @@ use Wikibase\SnakFactory;
 class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 
 	public function newSnakConstructionService() {
-		$snakFactory = new SnakFactory();
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeFactory = new DataTypeFactory( array( 'string' => 'string' ) );
 		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( array(
@@ -33,7 +31,6 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'p1' ), 'string' );
 
 		$service = new SnakConstructionService(
-			$snakFactory,
 			$dataTypeLookup,
 			$dataTypeFactory,
 			$dataValueFactory
