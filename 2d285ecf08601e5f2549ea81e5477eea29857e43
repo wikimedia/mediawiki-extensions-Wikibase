@@ -33,6 +33,23 @@
       "revId": "2d285ecf08601e5f2549ea81e5477eea29857e43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_c5151b4f",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-01T10:21:56Z",
+      "side": 1,
+      "message": "I am not sure if we want to spread languages codes all over the code base.",
+      "revId": "2d285ecf08601e5f2549ea81e5477eea29857e43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
