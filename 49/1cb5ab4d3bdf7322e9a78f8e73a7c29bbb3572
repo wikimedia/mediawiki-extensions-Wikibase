@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+1: Siebrand <siebrand@kitano.nl>
+Code-Review+2: Daniel Kinzler <daniel.kinzler@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 01 Feb 2016 13:56:38 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/257003
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
