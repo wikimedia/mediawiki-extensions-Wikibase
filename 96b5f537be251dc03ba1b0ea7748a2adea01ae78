@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_2dd2d5d3",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-01T14:01:12Z",
+      "side": 1,
+      "message": "plain() means no processing - the system message is treated as raw html and assumed to be safe. The message is however editable on-wiki.\n\nRaw HTML system messages should generally be avoided. We have quite a few, but I\u0027d really like to reduce that number, not add to it. Why not use parse()?",
+      "revId": "96b5f537be251dc03ba1b0ea7748a2adea01ae78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
