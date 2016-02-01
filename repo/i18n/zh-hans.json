@@ -301,7 +301,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2，更改自$3 - $4",
 	"wikibase-api-unresolved-redirect": "提供的实体ID指向重定向，在此文本中不支持。",
 	"wikibase-api-no-such-sitelink": "尝试编辑徽章时无法找到至“$1”的网站链接。",
-	"wikibase-api-target-not-empty": "重定向只能创建空实体的顶部。",
+	"wikibase-api-target-not-empty": "重定向只能在空的或已删除的实体顶部创建。",
 	"wikibase-api-target-is-redirect": "重定向目标必须不是重定向。",
 	"wikibase-api-target-is-incompatible": "尝试重定向到不同类型的实体。",
 	"wikibase-api-cant-redirect": "不能创建重定向（可能是因为此类实体之间的重定向尚不完全支持）。",

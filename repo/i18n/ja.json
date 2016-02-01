@@ -34,6 +34,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "説明",
 	"wikibase-entitytermsforlanguagelistview-label": "ラベル",
 	"wikibase-entitytermsforlanguagelistview-language": "言語",
+	"wikibase-entitytermsforlanguagelistview-more": "その他の言語",
 	"wikibase-label-empty": "ラベルは設定されていません",
 	"wikibase-label-edit-placeholder": "ラベルを入力",
 	"wikibase-label-edit-placeholder-language-aware": "ラベルを $1 で入力",

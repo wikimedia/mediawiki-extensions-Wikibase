@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sembuk"
+			"Sembuk",
+			"Munkhzaya.E"
 		]
 	},
-	"wikibase-edit": "засварлах"
+	"wikibase-edit": "засварлах",
+	"wikibase-entitytermsforlanguagelistview-more": "Бусад хэлээр",
+	"wikibase-entitytermsforlanguagelistview-less": "Цөөн хэлээр"
 }

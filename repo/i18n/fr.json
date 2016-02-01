@@ -319,7 +319,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, traduit depuis $3 - $4",
 	"wikibase-api-unresolved-redirect": "L'identifiant de l'entité fait référence à une redirection, ce qui n'est pas pris en charge dans ce contexte.",
 	"wikibase-api-no-such-sitelink": "Impossible de trouver un lien de site vers '$1' en essayant de modifier les badges.",
-	"wikibase-api-target-not-empty": "La redirection ne peut être créée qu’en haut d’une entité vide.",
+	"wikibase-api-target-not-empty": "La redirection ne peut être créée qu’au-dessus d’une entité vide ou supprimée.",
 	"wikibase-api-target-is-redirect": "La cible d’une redirection ne doit pas également être une redirection.",
 	"wikibase-api-target-is-incompatible": "Tentative pour rediriger vers une entité d’un type différent.",
 	"wikibase-api-cant-redirect": "Impossible de créer la redirection (peut-être parce que les redirections entre cette sorte d’entité ne sont pas du tout permises).",
