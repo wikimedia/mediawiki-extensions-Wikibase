@@ -8,6 +8,7 @@ use Status;
 use TestSites;
 use User;
 use WatchedItem;
+use WatchedItemStore;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -335,8 +336,21 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			$ignoreConflicts = explode( '|', $ignoreConflicts );
 		}
 
-		$watchedItem = $this->getWatchedItemForId( $fromId );
-		$watchedItem->addWatch();
+		if( class_exists( 'WatchedItemStore' ) ) {
+			$store = WatchedItemStore::getDefaultInstance();
+			$store->addWatch(
+				User::newFromName( 'UTSysop' ),
+				$this->getEntityTitleLookup()->getTitleForId( $fromId )->getSubjectPage()
+			);
+			$store->addWatch(
+				User::newFromName( 'UTSysop' ),
+				$this->getEntityTitleLookup()->getTitleForId( $fromId )->getTalkPage()
+			);
+		} else {
+			$watchedItem = $this->getWatchedItemForId( $fromId );
+			$watchedItem->addWatch();
+		}
+
 
 		$interactor->mergeItems( $fromId, $toId, $ignoreConflicts, 'CustomSummary' );
 
@@ -371,8 +385,19 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	}
 
 	private function assertItemMergedIntoIsWatched( ItemId $toId ) {
-		$watchedItem = $this->getWatchedItemForId( $toId );
-		$this->assertTrue( $watchedItem->isWatched(), 'Item merged into is being watched' );
+		if( class_exists( 'WatchedItemStore' ) ) {
+			$isWatched = WatchedItemStore::getDefaultInstance()->isWatched(
+				User::newFromName( 'UTSysop' ),
+				$this->getEntityTitleLookup()->getTitleForId( $toId )
+			);
+		} else{
+			$isWatched = $this->getWatchedItemForId( $toId )->isWatched();
+		}
+
+		$this->assertTrue(
+			$isWatched,
+			'Item merged into is being watched'
+		);
 	}
 
 	private function getWatchedItemForId( ItemId $itemId ) {
