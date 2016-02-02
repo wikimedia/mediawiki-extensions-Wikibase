@@ -16,6 +16,24 @@
       "revId": "95589d7e8f6df99978b660044e44bae1e2418527",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_4d8bd11b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-02T19:48:49Z",
+      "side": 1,
+      "message": "It\u0027s true that I could have split this patch in 2 or possibly 3: One that fixes the bug, one for performance and one for refactoring. What you are pointing at here is mostly refactoring and some minor performance bits. Separating this feels weird. I believe this is not what we should do in general. Boyscout rule: always leave the code in a better shape than you found it. That\u0027s what I did here.\n\nAt the same time I tried hard to minimize the diff. I always do this since about a year now.",
+      "parentUuid": "6eaa8f54_9a122f00",
+      "revId": "95589d7e8f6df99978b660044e44bae1e2418527",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
