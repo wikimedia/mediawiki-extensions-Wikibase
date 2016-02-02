@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eaa8f54_22809cf8",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-02T08:45:10Z",
+      "side": 1,
+      "message": "Can you drop the `window` here?",
+      "revId": "b4e1b73158768e22d31f4bdf07813435aa620dac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
