@@ -369,6 +369,7 @@
 	"wikibase-concept-uri": "Concept URI",
 	"wikibase-concept-uri-tooltip": "URI that identifies the concept described by this item",
 	"wikibase-add-badges": "Add badges",
+	"wikibase-pageimage-helptext" : "This image is taken from the statements of this item. You can adjust the image by changing the statement.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase item",
 	"content-model-wikibase-property": "Wikibase property",
