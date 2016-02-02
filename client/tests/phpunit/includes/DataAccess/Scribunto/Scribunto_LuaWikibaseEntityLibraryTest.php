@@ -22,6 +22,11 @@ use Wikibase\Client\WikibaseClient;
  */
 class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibraryTestCase {
 
+	/**
+	 * @var bool
+	 */
+	private $oldAllowDataAccessInUserLanguage;
+
 	protected static $moduleName = 'LuaWikibaseEntityLibraryTests';
 
 	protected function getTestModules() {
@@ -42,6 +47,13 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		parent::tearDown();
 
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
+	}
+
+	public function allowDataAccessInUserLanguageProvider() {
+		return array(
+			array( true ),
+			array( false ),
+		);
 	}
 
 	public function testConstructor() {
@@ -65,32 +77,56 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		);
 	}
 
-	public function testGetGlobalSiteId() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+	/**
+	 * @dataProvider allowDataAccessInUserLanguageProvider
+	 */
+	public function testGetGlobalSiteId( $allowDataAccessInUserLanguage ) {
+		$cacheSplit = false;
+		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+
 		$expected = array(
 			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
 		);
+
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
+		$this->assertFalse( $cacheSplit );
 	}
 
-	public function testFormatPropertyValues() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+	/**
+	 * @dataProvider allowDataAccessInUserLanguageProvider
+	 */
+	public function testFormatPropertyValues( $allowDataAccessInUserLanguage ) {
+		$cacheSplit = false;
+		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
+
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+
 		$this->assertSame(
 			array( '' ),
 			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'P65536', array() )
 		);
+
+		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
 	public function testFormatPropertyValues_noPropertyId() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+
 		$this->assertSame(
 			array( '' ),
 			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'father', array() )
 		);
 	}
 
-	public function testFormatPropertyValues_usage() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+	/**
+	 * @dataProvider allowDataAccessInUserLanguageProvider
+	 */
+	public function testFormatPropertyValues_usage( $allowDataAccessInUserLanguage ) {
+		$cacheSplit = false;
+		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
+
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 
 		$this->assertSame(
 			array( 'Q885588' ),
@@ -98,14 +134,39 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		);
 
 		$usages = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
-		$this->assertArrayHasKey( 'Q885588#L.de', $usages );
 		$this->assertArrayHasKey( 'Q885588#T', $usages );
+
+		if ( $allowDataAccessInUserLanguage ) {
+			global $wgUser;
+
+			$userLang = $wgUser->getOption( 'language' );
+
+			$this->assertArrayHasKey( 'Q885588#L.' . $userLang, $usages );
+		} else {
+			$this->assertArrayHasKey( 'Q885588#L.de', $usages );
+		}
+
+		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
-	private function newScribuntoLuaWikibaseLibrary() {
+	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false ) {
 		$title = Title::newFromText( 'Whatever' );
+		$parserOptions = new ParserOptions();
+
 		$parser = new Parser();
-		$parser->startExternalParse( $title, new ParserOptions(), Parser::OT_HTML );
+		$parser->startExternalParse(
+			$title,
+			$parserOptions,
+			Parser::OT_HTML
+		);
+
+		$self = $this; // PHP 5.3 ...
+		$parserOptions->registerWatcher(
+			function( $optionName ) use ( $self, &$cacheSplit ) {
+				$self->assertSame( 'userlang', $optionName );
+				$cacheSplit = true;
+			}
+		);
 
 		$engine = Scribunto::newDefaultEngine( array(
 			'parser' => $parser,
