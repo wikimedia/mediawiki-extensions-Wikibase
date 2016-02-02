@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_caea47d7",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-02T17:35:59Z",
+      "side": 1,
+      "message": "Why did you do this? Now I have to manually rebase my patch if I would merge this :P",
+      "range": {
+        "startLine": 229,
+        "startChar": 38,
+        "endLine": 229,
+        "endChar": 44
+      },
+      "revId": "de71192c7e9c737ae0a5d85627290b8ba32fdd68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
