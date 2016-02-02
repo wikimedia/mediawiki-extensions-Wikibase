@@ -337,6 +337,7 @@
 	"wikibase-concept-uri": "Konzept-URI",
 	"wikibase-concept-uri-tooltip": "URI, die das von diesem Objekt beschriebene Konzept identifiziert.",
 	"wikibase-add-badges": "Auszeichnungen hinzufügen",
+	"wikibase-pageimage-helptext": "Dieses Bild wurde von den Aussagen dieses Objekts abgerufen. Du kannst das Bild anpassen, indem du die Aussage änderst.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase-Datenobjekt",
 	"content-model-wikibase-property": "Wikibase-Eigenschaft",

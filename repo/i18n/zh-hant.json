@@ -37,6 +37,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "描述",
 	"wikibase-entitytermsforlanguagelistview-label": "標籤",
 	"wikibase-entitytermsforlanguagelistview-language": "語言",
+	"wikibase-entitytermsforlanguagelistview-more": "更多語言",
 	"wikibase-label-empty": "尚未定義標籤",
 	"wikibase-label-edit-placeholder": "輸入標籤",
 	"wikibase-label-edit-placeholder-language-aware": "使用 $1 輸入標籤",
