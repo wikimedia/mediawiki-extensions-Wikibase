@@ -3,6 +3,7 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
+use Language;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
 use ValueFormatters\FormatterOptions;
@@ -40,18 +41,16 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	private function newImplementation() {
-		// For the language we need $wgContLang, not parser target language or anything else.
-		// See Scribunto_LuaLanguageLibrary::getContLangCode().
-		global $wgContLang;
+		$lang = $this->getLanguage();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$languageFallbackChain = $wikibaseClient->getLanguageFallbackChainFactory()->newFromLanguage(
-			$wgContLang,
+			$lang,
 			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		);
 
-		$formatterOptions = new FormatterOptions( array( SnakFormatter::OPT_LANG => $wgContLang->getCode() ) );
+		$formatterOptions = new FormatterOptions( array( SnakFormatter::OPT_LANG => $lang->getCode() ) );
 
 		$snakFormatter = new UsageTrackingSnakFormatter(
 			$wikibaseClient->getSnakFormatterFactory()->getSnakFormatter(
@@ -70,7 +69,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		);
 
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
-			$wgContLang,
+			$lang,
 			$propertyIdResolver,
 			new SnaksFinder(),
 			$snakFormatter,
@@ -82,6 +81,51 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getEntityIdParser(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
+	}
+
+	/**
+	 * Returns the language to use. If we are on a multilingual wiki
+	 * (allowDataAccessInUserLanguage is true) this will be the user's interface
+	 * language, otherwise it will be the content language.
+	 * In a perfect world, this would equal Parser::getTargetLanguage.
+	 *
+	 * This doesn't split the ParserCache by language yet, please see
+	 * self::splitParserCacheIfMultilingual for that.
+	 *
+	 * This can probably be removed after T114640 has been implemented.
+	 *
+	 * @return Language
+	 */
+	private function getLanguage() {
+		global $wgContLang;
+
+		if ( $this->allowDataAccessInUserLanguage() ) {
+			// Can't use ParserOptions::getUserLang as that already splits the ParserCache
+			$userLang = $this->getParserOptions()->getUser()->getOption( 'language' );
+
+			return Language::factory( $userLang );
+		}
+
+		return $wgContLang;
+	}
+
+	/**
+	 * Splits the page's ParserCache in case we're on a multilingual wiki
+	 */
+	private function splitParserCacheIfMultilingual() {
+		if ( $this->allowDataAccessInUserLanguage() ) {
+			// ParserOptions::getUserLang splits the ParserCache
+			$this->getParserOptions()->getUserLang();
+		}
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function allowDataAccessInUserLanguage() {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+
+		return $settings->getSetting( 'allowDataAccessInUserLanguage' );
 	}
 
 	/**
@@ -144,6 +188,8 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'formatPropertyValues', 1, $propertyLabelOrId, 'string' );
 		$this->checkTypeOptional( 'formatPropertyValues', 2, $acceptableRanks, 'table', null );
 		try {
+			$this->splitParserCacheIfMultilingual();
+
 			return array(
 				$this->getImplementation()->formatPropertyValues(
 					$entityId,

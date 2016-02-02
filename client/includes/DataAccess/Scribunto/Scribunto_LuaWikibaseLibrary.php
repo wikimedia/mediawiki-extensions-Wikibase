@@ -149,6 +149,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * This doesn't split the ParserCache by language yet, please see
 	 * self::splitParserCacheIfMultilingual for that.
 	 *
+	 * This can probably be removed after T114640 has been implemented.
+	 *
 	 * @return Language
 	 */
 	private function getLanguage() {
