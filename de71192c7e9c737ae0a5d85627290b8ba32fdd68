@@ -22,6 +22,24 @@
       "revId": "de71192c7e9c737ae0a5d85627290b8ba32fdd68",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_0a95bf35",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-02T17:52:04Z",
+      "side": 1,
+      "message": "Perhaps because $.isEmptyObject doesn\u0027t work for arrays...",
+      "parentUuid": "4ea78b8a_caea47d7",
+      "revId": "de71192c7e9c737ae0a5d85627290b8ba32fdd68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
