@@ -13,20 +13,21 @@ function createFingerprint() {
 		new wb.datamodel.TermMap( {
 			de: new wb.datamodel.Term( 'de', 'de-label' ),
 			en: new wb.datamodel.Term( 'en', 'en-label' ),
-			fa: new wb.datamodel.Term( 'fa', 'fa-label' ),
-			it: new wb.datamodel.Term( 'it', 'it-label' )
+			it: new wb.datamodel.Term( 'it', 'it-label' ),
+			fa: new wb.datamodel.Term( 'fa', 'fa-label' )
 		} ),
 		new wb.datamodel.TermMap( {
 			de: new wb.datamodel.Term( 'de', 'de-description' ),
 			en: new wb.datamodel.Term( 'en', 'en-description' ),
+			it: new wb.datamodel.Term( 'it', 'it-description' ),
 			fa: new wb.datamodel.Term( 'fa', 'fa-description' ),
-			it: new wb.datamodel.Term( 'it', 'it-description' )
+			nl: new wb.datamodel.Term( 'nl', 'nl-description' )
 		} ),
 		new wb.datamodel.MultiTermMap( {
 			de: new wb.datamodel.MultiTerm( 'de', [] ),
 			en: new wb.datamodel.MultiTerm( 'en', [] ),
-			fa: new wb.datamodel.MultiTerm( 'fa', [] ),
-			it: new wb.datamodel.MultiTerm( 'it', [] )
+			it: new wb.datamodel.MultiTerm( 'it', [] ),
+			fa: new wb.datamodel.MultiTerm( 'fa', [] )
 		} )
 	);
 }
@@ -167,6 +168,33 @@ QUnit.test( 'value()', function( assert ) {
 		},
 		'Throwing error when trying to set a new value.'
 	);
+} );
+
+QUnit.test( '_getAdditionalLanguages()', function( assert ) {
+	assert.expect( 1 );
+	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
+		entitytermsforlanguagelistview
+			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
+
+	// should be sorted alphabetically, ie. 'fa' before 'it'
+	assert.deepEqual( entitytermsforlanguagelistview._getAdditionalLanguages(), [ 'fa', 'it', 'nl' ] );
+} );
+
+QUnit.test( '_hasAdditionalLanguages()', function( assert ) {
+	assert.expect( 2 );
+	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
+		entitytermsforlanguagelistview
+			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
+
+	assert.ok( entitytermsforlanguagelistview._hasAdditionalLanguages() );
+
+	$entitytermsforlanguagelistview = createEntitytermsforlanguagelistview( {
+		userLanguages: [ 'de', 'en', 'fa', 'it', 'nl' ]
+	} );
+	entitytermsforlanguagelistview
+		= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
+
+	assert.ok( !entitytermsforlanguagelistview._hasAdditionalLanguages() );
 } );
 
 }( jQuery, wikibase, QUnit ) );
