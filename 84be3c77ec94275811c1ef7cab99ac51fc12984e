@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_ea7703ce",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.itemview.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-02-02T18:37:58Z",
+      "side": 1,
+      "message": "prepend? instead of prepand?",
+      "revId": "84be3c77ec94275811c1ef7cab99ac51fc12984e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
