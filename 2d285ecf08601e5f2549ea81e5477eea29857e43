@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_8298706e",
+        "filename": "lib/tests/phpunit/DifferenceContentLanguagesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-02T08:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eaa8f54_dd43c113",
+      "revId": "2d285ecf08601e5f2549ea81e5477eea29857e43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_7d464d56",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6eaa8f54_c28e682a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-02T08:55:31Z",
+      "side": 1,
+      "message": "I agree, but I would like to work a bit more on this topic before doing that.",
+      "parentUuid": "6eaa8f54_7d464d56",
+      "revId": "2d285ecf08601e5f2549ea81e5477eea29857e43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_c5151b4f",
         "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2016-02-01T10:21:56Z",
       "side": 1,
       "message": "I am not sure if we want to spread languages codes all over the code base.",
+      "revId": "2d285ecf08601e5f2549ea81e5477eea29857e43",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eaa8f54_c2b508cc",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-02T08:55:31Z",
+      "side": 1,
+      "message": "We don\u0027t want to. This will be fixed with T124758. I\u0027ll add comments here and in WikibaseRepo about that.",
+      "parentUuid": "6eaa8f54_c5151b4f",
       "revId": "2d285ecf08601e5f2549ea81e5477eea29857e43",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
