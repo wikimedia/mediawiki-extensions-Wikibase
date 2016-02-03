@@ -35,7 +35,7 @@ use Wikibase\LanguageFallbackChainFactory;
 class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewRendererForInterfaceMessage() {
-		$parser = $this->getParser( 'zh', true );
+		$parser = $this->getParser( 'zh', 'es', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -47,7 +47,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRenderer_contentConversionDisabled() {
-		$parser = $this->getParser( 'zh', false, true );
+		$parser = $this->getParser( 'zh', 'es', false, true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -59,7 +59,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRenderer_titleConversionDisabled() {
-		$parser = $this->getParser( 'zh', false, false, true );
+		$parser = $this->getParser( 'zh', 'es', false, false, true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -74,7 +74,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider newRenderer_forParserFormatProvider
 	 */
 	public function testNewRenderer_forParserFormat( $languageCode, $format ) {
-		$parser = $this->getParser( $languageCode, false, false, false, $format );
+		$parser = $this->getParser( $languageCode, 'es', false, false, false, $format );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -94,7 +94,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewRenderer_forNonVariantLanguage() {
-		$parser = $this->getParser( 'en', true );
+		$parser = $this->getParser( 'en', 'es', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
@@ -117,21 +117,31 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewRenderer_usageTracking() {
-		$parser = $this->getParser( 'en', true );
+	/**
+	 * @dataProvider allowDataAccessInUserLanguageProvider
+	 */
+	public function testNewRenderer_usageTracking( $allowDataAccessInUserLanguage ) {
+		$parser = $this->getParser( 'en', 'es', true );
 
-		$rendererFactory = $this->getStatementGroupRendererFactory();
+		$rendererFactory = $this->getStatementGroupRendererFactory( $allowDataAccessInUserLanguage );
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
 		$this->assertEquals( "Kittens!", $renderer->render( new ItemId( 'Q1' ), 'P1' ) );
 
 		$usages = $usageAccumulator->getUsages();
-		$this->assertArrayHasKey( 'Q7#L.en', $usages );
+		if ( $allowDataAccessInUserLanguage ) {
+			$this->assertArrayHasKey( 'Q7#L.es', $usages );
+		} else {
+			$this->assertArrayHasKey( 'Q7#L.en', $usages );
+		}
 		$this->assertArrayHasKey( 'Q7#T', $usages );
 	}
 
-	public function testNewRendererFromParser_languageOption() {
+	/**
+	 * @dataProvider allowDataAccessInUserLanguageProvider
+	 */
+	public function testNewRendererFromParser_languageOption( $allowDataAccessInUserLanguage ) {
 		$idResolver = $this->getMockBuilder( 'Wikibase\Client\DataAccess\PropertyIdResolver' )
 			->disableOriginalConstructor()
 			->getMock();
@@ -142,28 +152,42 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$self = $this;
 		$formatterFactory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
-			->will( $this->returnCallback( function( $format, FormatterOptions $options ) use ( $self )  {
-				$self->assertSame( 'de', $options->getOption( ValueFormatter::OPT_LANG ) );
-				return $self->getMock( 'Wikibase\Lib\SnakFormatter' );
-			} ) );
+			->will( $this->returnCallback(
+				function( $format, FormatterOptions $options ) use ( $self, $allowDataAccessInUserLanguage )  {
+					$self->assertSame(
+						$allowDataAccessInUserLanguage ? 'es' : 'de',
+						$options->getOption( ValueFormatter::OPT_LANG )
+					);
+					return $self->getMock( 'Wikibase\Lib\SnakFormatter' );
+				}
+			) );
 
 		$factory = new StatementGroupRendererFactory(
 			$idResolver,
 			new SnaksFinder(),
 			new LanguageFallbackChainFactory(),
 			$formatterFactory,
-			$this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' )
+			$this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' ),
+			$allowDataAccessInUserLanguage
 		);
-		$factory->newRendererFromParser( $this->getParser( 'de' ) );
+		$factory->newRendererFromParser( $this->getParser( 'de', 'es' ) );
 	}
 
-	private function getStatementGroupRendererFactory() {
+	public function allowDataAccessInUserLanguageProvider() {
+		return array(
+			array( true ),
+			array( false ),
+		);
+	}
+
+	private function getStatementGroupRendererFactory( $allowDataAccessInUserLanguage = false ) {
 		return new StatementGroupRendererFactory(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
-			$this->getEntityLookup()
+			$this->getEntityLookup(),
+			$allowDataAccessInUserLanguage
 		);
 	}
 
@@ -243,6 +267,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function getParser(
 		$languageCode = 'en',
+		$userLanguageCode = 'es',
 		$interfaceMessage = false,
 		$disableContentConversion = false,
 		$disableTitleConversion = false,
@@ -252,6 +277,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$parserOptions = $this->getParserOptions(
 			$languageCode,
+			$userLanguageCode,
 			$interfaceMessage,
 			$disableContentConversion,
 			$disableTitleConversion
@@ -265,12 +291,13 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		return $parser;
 	}
 
-	private function getParserOptions( $languageCode, $interfaceMessage, $disableContentConversion,
-		$disableTitleConversion
+	private function getParserOptions( $languageCode, $userLanguageCode, $interfaceMessage,
+		$disableContentConversion, $disableTitleConversion
 	) {
 		$language = Language::factory( $languageCode );
+		$userLanguage = Language::factory( $userLanguageCode );
 
-		$parserOptions = new ParserOptions( User::newFromId( 0 ), $languageCode );
+		$parserOptions = new ParserOptions( User::newFromId( 0 ), $userLanguage );
 		$parserOptions->setTargetLanguage( $language );
 		$parserOptions->setInterfaceMessage( $interfaceMessage );
 		$parserOptions->disableContentConversion( $disableContentConversion );

@@ -59,24 +59,32 @@ class StatementGroupRendererFactory {
 	private $entityLookup;
 
 	/**
+	 * @var bool
+	 */
+	private $allowDataAccessInUserLanguage;
+
+	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 * @param EntityLookup $entityLookup
+	 * @param bool $allowDataAccessInUserLanguage
 	 */
 	public function __construct(
 		PropertyIdResolver $propertyIdResolver,
 		SnaksFinder $snaksFinder,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
-		EntityLookup $entityLookup
+		EntityLookup $entityLookup,
+		$allowDataAccessInUserLanguage
 	) {
 		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->entityLookup = $entityLookup;
+		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
 	}
 
 	/**
@@ -87,7 +95,12 @@ class StatementGroupRendererFactory {
 	public function newRendererFromParser( Parser $parser ) {
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput() );
 
-		if ( $this->useVariants( $parser ) ) {
+		if ( $this->allowDataAccessInUserLanguage ) {
+			// Use the user's language.
+			// Note: This splits the parser cache.
+			$targetLanguage = $parser->getOptions()->getUserLangObj();
+			return $this->newLanguageAwareRenderer( $targetLanguage, $usageAccumulator );
+		} elseif ( $this->useVariants( $parser ) ) {
 			$variants = $parser->getConverterLanguage()->getVariants();
 			return $this->newVariantsAwareRenderer( $variants, $usageAccumulator );
 		} else {

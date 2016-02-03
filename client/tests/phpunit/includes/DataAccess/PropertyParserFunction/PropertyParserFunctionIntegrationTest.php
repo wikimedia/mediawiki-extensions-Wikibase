@@ -7,6 +7,7 @@ use MediaWikiTestCase;
 use Parser;
 use ParserOptions;
 use Title;
+use User;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Test\MockClientStore;
@@ -47,12 +48,24 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 
 		$setupHelper = new WikibaseDataAccessTestItemSetUpHelper( $store );
 		$setupHelper->setUp();
+
+		$this->oldAllowDataAccessInUserLanguage = $wikibaseClient->getSettings()->getSetting( 'allowDataAccessInUserLanguage' );
+		$this->setAllowDataAccessInUserLanguage( false );
 	}
 
 	protected function tearDown() {
 		parent::tearDown();
 
+		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );
 		WikibaseClient::getDefaultInstance( 'reset' );
+	}
+
+	/**
+	 * @param bool $value
+	 */
+	private function setAllowDataAccessInUserLanguage( $value ) {
+		$settings = WikibaseClient::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'allowDataAccessInUserLanguage', $value );
 	}
 
 	public function testPropertyParserFunction_byPropertyLabel() {
@@ -105,7 +118,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	 */
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
 		$parserConfig = array( 'class' => 'Parser' );
-		$popt = new ParserOptions();
+		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 
 		$parser = new Parser( $parserConfig );
 		$pout = $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
