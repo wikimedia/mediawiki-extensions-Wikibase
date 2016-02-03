@@ -153,15 +153,10 @@ $.widget( 'wikibase.snakview', PARENT, {
 		// Re-render on previously generated DOM should be avoided. However, when regenerating the
 		// whole snakview, every component needs to be drawn.
 		var propertyIsEmpty = !this.$property.contents().length,
-			snakTypeSelectorIsEmpty = !this.$snakTypeSelector.contents().length,
 			snakValueIsEmpty = !this.$snakValue.contents().length;
 
 		if ( propertyIsEmpty && this.options.drawProperty ) {
 			this.drawProperty();
-		}
-
-		if ( snakTypeSelectorIsEmpty ) {
-			this.drawSnakTypeSelector();
 		}
 
 		if ( snakValueIsEmpty ) {
