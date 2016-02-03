@@ -328,6 +328,7 @@
 	"wikibase-concept-uri": "URI del concetto",
 	"wikibase-concept-uri-tooltip": "URI che identifica il concetto descritto da questo elemento",
 	"wikibase-add-badges": "Aggiungi distintivo",
+	"wikibase-pageimage-helptext": "Questa immagine è stata presa dalle dichiarazioni di questo elemento. Puoi regolare l'immagine cambiando la dichiarazione.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Elemento Wikibase",
 	"content-model-wikibase-property": "Proprietà Wikibase",

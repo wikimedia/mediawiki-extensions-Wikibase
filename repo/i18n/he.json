@@ -321,6 +321,7 @@
 	"wikibase-concept-uri": "כתובת URI לרעיון",
 	"wikibase-concept-uri-tooltip": "כתובת URI שמזהה את הרעיון שהפריט הזה מתאר",
 	"wikibase-add-badges": "הוספת סמלים",
+	"wikibase-pageimage-helptext": "התמונה לקוחה מתוך הקביעות על הפריט הזה. באפשרותך לשנות את התמונה באמצעות שינוי הקביעה.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "פריט Wikibase",
 	"content-model-wikibase-property": "מאפיין Wikibase",

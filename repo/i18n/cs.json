@@ -319,6 +319,7 @@
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-external-id-head": "Externí identifikátor",
 	"wikibase-add-badges": "Přidat odznaky",
+	"wikibase-pageimage-helptext": "Tento obrázek je získán z tvrzení o této položce. Změnou daného tvrzení ho můžete změnit.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Položka Wikibase",
 	"content-model-wikibase-property": "Vlastnost Wikibase",
