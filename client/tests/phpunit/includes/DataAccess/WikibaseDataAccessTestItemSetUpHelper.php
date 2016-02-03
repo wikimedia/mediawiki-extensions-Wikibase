@@ -93,13 +93,21 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$statement2 = $this->getTestStatement( $stringSnak2 );
 		$statement2->setRank( Statement::RANK_NORMAL );
 
-		$itemSnak = new PropertyValueSnak(
+		$itemSnak1 = new PropertyValueSnak(
 			$itemProperty->getId(),
 			new EntityIdValue( new ItemId( 'Q885588' ) )
 		);
 
-		$statement3 = $this->getTestStatement( $itemSnak );
+		$itemSnak2 = new PropertyValueSnak(
+			$itemProperty->getId(),
+			new EntityIdValue( new ItemId( 'Q32487' ) )
+		);
+
+		$statement3 = $this->getTestStatement( $itemSnak1 );
 		$statement3->setRank( Statement::RANK_NORMAL );
+
+		$statement4 = $this->getTestStatement( $itemSnak2 );
+		$statement4->setRank( Statement::RANK_NORMAL );
 
 		$siteLinks = array( $siteLink );
 		$siteLinks[] = new SiteLink(
@@ -117,7 +125,7 @@ class WikibaseDataAccessTestItemSetUpHelper {
 		$this->createTestItem( new ItemId( 'Q32488' ), array(), array( $statement1, $statement3 ), array() );
 
 		// Create another test item to test arbitrary access
-		$this->createTestItem( new ItemId( 'Q199024' ), array( 'de' => 'Arbitrary access \o/' ) );
+		$this->createTestItem( new ItemId( 'Q199024' ), array( 'de' => 'Arbitrary access \o/' ), array( $statement4 ) );
 
 		$this->createTestItem( new ItemId( 'Q885588' ), array( 'ku-latn' => 'Pisîk' ) );
 	}

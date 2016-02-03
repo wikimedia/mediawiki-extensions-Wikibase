@@ -882,7 +882,8 @@ final class WikibaseClient {
 			new SnaksFinder(),
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
-			$entityLookup
+			$entityLookup,
+			$this->getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	}
 
