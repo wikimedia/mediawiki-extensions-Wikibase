@@ -274,6 +274,7 @@ class SearchEntities extends ApiBase {
 			'continue' => array(
 				self::PARAM_TYPE => 'integer',
 				self::PARAM_REQUIRED => false,
+				self::PARAM_DFLT => 0
 			),
 		);
 	}
