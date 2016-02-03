@@ -17,7 +17,7 @@ $.widget( 'ui.languagesuggester', PARENT, {
 	 * @property {*}
 	 * @protected
 	 */
-	_selectedValue: null,
+	_selectedItem: null,
 
 	/**
 	 * @inheritdoc
@@ -27,14 +27,21 @@ $.widget( 'ui.languagesuggester', PARENT, {
 		var self = this,
 			retVal = PARENT.prototype._initMenu.apply( this, arguments );
 
-		this.element.on( 'languagesuggesterchange', function () {
-			self._selectedValue = null;
+		this.element.on( 'languagesuggesterchange', function ( e, data ) {
+			var curVal = self.element.val();
+			if ( data.item ) {
+				self._selectedItem = data.item;
+			} else if (
+				self._selectedItem && curVal !== self._selectedItem.getLabel() &&
+				curVal !== self._selectedItem.getValue()
+			) {
+				self._selectedItem = null;
+			}
 		} );
 
 		$( retVal )
 		.on( 'selected.languagesuggester', function( event, item ) {
-			self._trigger( 'change' );
-			self._selectedValue = item.getValue();
+			self._trigger( 'change', null, { item: item } );
 			self.element.val( item.getLabel() );
 		} );
 
@@ -106,7 +113,16 @@ $.widget( 'ui.languagesuggester', PARENT, {
 	 * @return {*}
 	 */
 	getSelectedValue: function() {
-		return this._selectedValue;
+		return this._selectedItem && this._selectedItem.getValue();
+	},
+
+	/**
+	 * @param {string} value The language code
+	 * @param {string} label The label
+	 */
+	setSelectedValue: function( value, label ) {
+		this._selectedItem = this._createMenuItemFromSuggestion( { label: label, code: value } );
+		this.element.val( label );
 	}
 } );
 

@@ -108,7 +108,7 @@
 					source: $.map( this._labels, function( label, code ) {
 						return { code: code, label: label };
 					} )
-				} ).on( 'change', this._onValueChange );
+				} ).on( 'languagesuggesterchange', this._onValueChange );
 			} else {
 				this.$selector.on( 'eachchange', this._onValueChange );
 			}
@@ -123,13 +123,10 @@
 		onInitialShow: function() {
 			var value = this._getUpstreamValue();
 			if ( this._labels ) {
-				// Necessary for mapping to the language code if the language is not changed.
-				// FIXME: This is obviously an access violation, and it's probably not a good idea
-				// to track this through the suggester given the current design.
-				this.$selector.data( 'languagesuggester' )._selectedValue = value;
-				value = this._labels[ value ] || value;
+				this.$selector.data( 'languagesuggester' ).setSelectedValue( value, this._labels[ value ] || value );
+			} else {
+				this.$selector.val( value );
 			}
-			this.$selector.val( value );
 		},
 
 		/**

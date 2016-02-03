@@ -1,5 +1,9 @@
 # ValueView release notes
 
+## 0.15.9 (2016-02-03)
+
+* Correctly detect a changed language code when editing a `MonolingualTextValue`
+
 ## 0.15.8 (2016-01-27)
 
 * Added compatibility with DataValues JavaScript 0.8.0.
