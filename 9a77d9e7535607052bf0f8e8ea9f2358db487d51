@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_7fae61e6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-04T14:22:51Z",
+      "side": 1,
+      "message": "It probably this way because we only needed the change event for updating the title section.",
+      "revId": "9a77d9e7535607052bf0f8e8ea9f2358db487d51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_5fa925db",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-04T14:22:51Z",
+      "side": 1,
+      "message": "!",
+      "revId": "9a77d9e7535607052bf0f8e8ea9f2358db487d51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
