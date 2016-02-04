@@ -170,23 +170,25 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( '_getAdditionalLanguages()', function( assert ) {
+QUnit.test( '_getMoreLanguages()', function( assert ) {
 	assert.expect( 1 );
 	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 		entitytermsforlanguagelistview
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-	// should be sorted alphabetically, ie. 'fa' before 'it'
-	assert.deepEqual( entitytermsforlanguagelistview._getAdditionalLanguages(), [ 'fa', 'it', 'nl' ] );
+	assert.deepEqual(
+		entitytermsforlanguagelistview._getMoreLanguages(),
+		{ fa: 'fa', it: 'it', nl: 'nl' }
+	);
 } );
 
-QUnit.test( '_hasAdditionalLanguages()', function( assert ) {
+QUnit.test( '_hasMoreLanguages()', function( assert ) {
 	assert.expect( 2 );
 	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),
 		entitytermsforlanguagelistview
 			= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-	assert.ok( entitytermsforlanguagelistview._hasAdditionalLanguages() );
+	assert.ok( entitytermsforlanguagelistview._hasMoreLanguages() );
 
 	$entitytermsforlanguagelistview = createEntitytermsforlanguagelistview( {
 		userLanguages: [ 'de', 'en', 'fa', 'it', 'nl' ]
@@ -194,7 +196,7 @@ QUnit.test( '_hasAdditionalLanguages()', function( assert ) {
 	entitytermsforlanguagelistview
 		= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
 
-	assert.ok( !entitytermsforlanguagelistview._hasAdditionalLanguages() );
+	assert.ok( !entitytermsforlanguagelistview._hasMoreLanguages() );
 } );
 
 }( jQuery, wikibase, QUnit ) );
