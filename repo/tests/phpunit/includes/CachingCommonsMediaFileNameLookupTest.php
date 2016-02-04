@@ -80,11 +80,10 @@ class CachingCommonsMediaFileNameLookupTest extends \PHPUnit_Framework_TestCase 
 			->disableOriginalConstructor()
 			->getMock();
 
-		$self = $this; // We all love PHP 5.3
 		$fileNameLookup->expects( $matcher )
 			->method( 'normalizePageName' )
-			->will( $this->returnCallback( function( $fileName, $apiUrl ) use ( $self ) {
-				$self->assertSame( 'https://commons.wikimedia.org/w/api.php', $apiUrl );
+			->will( $this->returnCallback( function( $fileName, $apiUrl ) {
+				$this->assertSame( 'https://commons.wikimedia.org/w/api.php', $apiUrl );
 
 				if ( strpos( $fileName, 'NOT-FOUND' ) !== false ) {
 					return false;

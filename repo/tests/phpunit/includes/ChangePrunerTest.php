@@ -93,10 +93,9 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	private function newMessageReporter() {
 		$reporter = new ObservableMessageReporter();
 
-		$self = $this; // evil PHP 5.3 ;)
 		$reporter->registerReporterCallback(
-			function ( $message ) use ( $self ) {
-				$self->messages[] = $message;
+			function ( $message ) {
+				$this->messages[] = $message;
 			}
 		);
 
