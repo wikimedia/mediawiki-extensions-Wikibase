@@ -12,7 +12,8 @@
 			"Macofe",
 			"JasterTDC",
 			"Gustronico",
-			"Littledogboy"
+			"Littledogboy",
+			"YoViajo"
 		]
 	},
 	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
@@ -97,6 +98,7 @@
 	"wikibase-time-precision-BCE-10annum": "$1s AEC",
 	"wikibase-snakformatter-valuetype-mismatch": "El tipo de valor \"$1\" no coincide con el tipo de propiedad \"$2\".",
 	"wikibase-snakformatter-property-not-found": "No se encuentra la propiedad $1. No se puede determinar el tipo de datos que utilizar.",
+	"wikibase-snakformatter-formatting-exception": "Error de formato: $1.",
 	"wikibase-entity-summary-wbsetitem": "Se creó un nuevo elemento",
 	"wikibase-entity-summary-wbcreate-new": "Se creó una entidad nueva",
 	"wikibase-entity-summary-wbcreateredirect": "Redirigido a $4",

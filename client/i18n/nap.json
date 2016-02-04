@@ -70,7 +70,7 @@
 	"wikibase-pageswithbadges-invalid-id": "$1 nun è n'id valido 'e ll'item",
 	"wikibase-pageswithbadges-legend": "Elenco 'e paggene cu na distinziona data",
 	"wikibase-pageswithbadges-badge": "Distinziona:",
-	"wikibase-pageswithbadges-submit": "Mmusta pagene",
+	"wikibase-pageswithbadges-submit": "Mmusta paggene",
 	"wikibase-pageinfo-entity-id": "Elemento {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nisciuno",
 	"wikibase-property-render-error": "Errore pe' tramente ca se faceva 'o rendering d' 'a proprietà $1: $2",

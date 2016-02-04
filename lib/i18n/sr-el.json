@@ -44,6 +44,7 @@
 	"version-wikibase": "Vikibaza",
 	"wikibase-snakformatter-valuetype-mismatch": "Vrsta vrednosti „$1“ nepoklapa se sa vrstom svojstva „$2“.",
 	"wikibase-entity-summary-wbsetitem": "Napravljena nova stavka",
+	"wikibase-entity-summary-wbcreateredirect": "Preusmereno na $4",
 	"wikibase-entity-summary-wbsetreference": "Uneta referenca",
 	"wikibase-entity-summary-wbsetreference-add": "Dodata referenca za tvrdnju",
 	"wikibase-entity-summary-wbsetreference-set": "Promenjena referenca za tvrdnju:",

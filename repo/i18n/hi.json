@@ -8,7 +8,8 @@
 			"Wikiuser13",
 			"రహ్మానుద్దీన్",
 			"NehalDaveND",
-			"Sfic"
+			"Sfic",
+			"Upendradutt93"
 		]
 	},
 	"wikibase-entity-item": "वस्तु",
@@ -25,6 +26,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "विवरण",
 	"wikibase-entitytermsforlanguagelistview-label": "लेबल",
 	"wikibase-entitytermsforlanguagelistview-language": "भाषा",
+	"wikibase-entitytermsforlanguagelistview-less": "कम भाषाएँ",
 	"wikibase-label-empty": "कोई नामपत्र परिभाषित नहीं",
 	"wikibase-label-edit-placeholder": "लेबल् दर्ज करें",
 	"wikibase-label-edit-placeholder-language-aware": "$1 में एक लेबल दर्ज करें",
