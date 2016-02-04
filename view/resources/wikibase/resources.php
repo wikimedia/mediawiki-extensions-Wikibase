@@ -72,6 +72,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.ValueFormatterFactory' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.ValueFormatterFactory.js',
+			),
+			'dependencies' => array(
+				'util.inherit',
+				'wikibase',
+			),
+		),
+
 	);
 
 	return $modules;

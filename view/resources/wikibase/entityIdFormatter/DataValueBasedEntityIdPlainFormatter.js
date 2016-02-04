@@ -21,7 +21,7 @@
 				var deferred = $.Deferred(),
 					self = this;
 				this._parser.parse( entityId ).done( function( parsed ) {
-					return self._formatter.format( parsed, null, 'text/plain' ).done( function( response ) {
+					return self._formatter.format( parsed ).done( function( response ) {
 						deferred.resolve( response );
 					} ).fail( function() {
 						deferred.resolve( entityId );
