@@ -34,7 +34,8 @@
 		generateDom: function() { return $( '<div/>' ); },
 		vvArgs: {
 			expertStore: new vv.ExpertStore(),
-			formatterStore: new vf.ValueFormatterStore( vf.NullFormatter ),
+			htmlFormatter: new vf.NullFormatter(),
+			plaintextFormatter: new vf.NullFormatter(),
 			parserStore: new vp.ValueParserStore( vp.NullParser ),
 			language: 'en'
 		}
@@ -130,11 +131,12 @@
 	} );
 
 	QUnit.test( 'getFormattedValue with DOM', function( assert ) {
-		assert.expect( 3 );
+		assert.expect( 4 );
 		var vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
-		sinon.spy( vvArgs.formatterStore, 'getFormatter' );
+		sinon.spy( vvArgs.htmlFormatter, 'format' );
+		sinon.spy( vvArgs.plaintextFormatter, 'format' );
 		sinon.spy( vvArgs.parserStore, 'getParser' );
 		initVv( {
 			generateDom: function() {
@@ -148,10 +150,12 @@
 		vvInst.draw()
 		.done( function() {
 			assert.equal( vvInst.getFormattedValue(), 'FORMATTED VALUE' );
-			sinon.assert.notCalled( vvArgs.formatterStore.getFormatter );
+			sinon.assert.notCalled( vvArgs.htmlFormatter.format );
+			sinon.assert.notCalled( vvArgs.plaintextFormatter.format );
 			sinon.assert.notCalled( vvArgs.parserStore.getParser );
 
-			vvArgs.formatterStore.getFormatter.restore();
+			vvArgs.htmlFormatter.format.restore();
+			vvArgs.plaintextFormatter.format.restore();
 			vvArgs.parserStore.getParser.restore();
 		} )
 		.fail( function() {
@@ -166,11 +170,12 @@
 	} );
 
 	QUnit.test( 'getFormattedValue without DOM', function( assert ) {
-		assert.expect( 3 );
+		assert.expect( 4 );
 		var vvArgs = $.extend( {
 			value: stringValue
 		}, initVv.defaultOpts.vvArgs );
-		sinon.spy( vvArgs.formatterStore, 'getFormatter' );
+		sinon.spy( vvArgs.htmlFormatter, 'format' );
+		sinon.spy( vvArgs.plaintextFormatter, 'format' );
 		sinon.spy( vvArgs.parserStore, 'getParser' );
 		initVv( {
 			vvArgs: vvArgs
@@ -181,10 +186,12 @@
 		vvInst.draw()
 		.done( function() {
 			assert.equal( vvInst.getFormattedValue(), 'STRING VALUE' );
-			sinon.assert.calledOnce( vvArgs.formatterStore.getFormatter );
+			sinon.assert.calledOnce( vvArgs.htmlFormatter.format );
+			sinon.assert.notCalled( vvArgs.plaintextFormatter.format );
 			sinon.assert.notCalled( vvArgs.parserStore.getParser );
 
-			vvArgs.formatterStore.getFormatter.restore();
+			vvArgs.htmlFormatter.format.restore();
+			vvArgs.plaintextFormatter.format.restore();
 			vvArgs.parserStore.getParser.restore();
 		} )
 		.fail( function() {

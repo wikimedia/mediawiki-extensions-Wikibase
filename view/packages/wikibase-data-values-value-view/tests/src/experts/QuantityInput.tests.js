@@ -21,7 +21,7 @@
 	}
 
 	QUnit.test( 'valueCharacteristics', function( assert ) {
-		assert.expect( 4 );
+		assert.expect( 2 );
 		var expert = newExpert(),
 			characteristics = expert.valueCharacteristics();
 
@@ -33,32 +33,6 @@
 		assert.ok(
 			characteristics.unit === null || typeof characteristics.unit === 'string',
 			'unit is null or a string'
-		);
-
-		assert.ok(
-			!characteristics.hasOwnProperty( 'applyUnit' ),
-			'applyUnit does not exist'
-		);
-
-		assert.ok(
-			!characteristics.hasOwnProperty( 'applyRounding' ),
-			'applyRounding does not exist'
-		);
-	} );
-
-	QUnit.test( 'valueCharacteristics( \'text/plain\' )', function( assert ) {
-		assert.expect( 2 );
-		var expert = newExpert(),
-			characteristics = expert.valueCharacteristics( 'text/plain' );
-
-		assert.ok(
-			characteristics.applyUnit === false,
-			'applyUnit is false'
-		);
-
-		assert.ok(
-			characteristics.applyRounding === false,
-			'applyRounding is false'
 		);
 	} );
 

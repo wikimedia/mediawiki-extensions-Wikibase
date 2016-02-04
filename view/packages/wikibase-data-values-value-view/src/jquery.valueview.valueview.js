@@ -42,30 +42,29 @@ function expertProxy( fnName ) {
  *        data types the given store has `Experts` registered for.
  * @param {valueParsers.ValueParserStore} options.parserStore
  *        Store providing the parsers values may be parsed with.
- * @param {valueFormatters.ValueFormatterStore} options.formatterStore
- *        Store providing the formatters values may be formatted with.
+ * @param {valueFormatters.ValueFormatter} options.plaintextFormatter
+ *        A ValueFormatter instance returning plain text
+ * @param {valueFormatters.ValueFormatter} options.htmlFormatter
+ *        A ValueFormatter instance returning html
  * @param {string} options.language
- *        Language code of the language the `valueview` shall interact with parsers and
- *        formatters.
+ *        Language code of the language the `valueview` shall interact with parsers
  * @param {string|null} [options.vocabularyLookupApiUrl=null]
  * @param {string|null} [options.dataTypeId=null]
- *        If set, an expert (`jQuery.valueview.Expert`), a parser (`valueParsers.ValueParser`) and a
- *        formatter (`valueFormatters.ValueFormatter`) will be determined from the provided
- *        factories according to the specified data type id.
+ *        If set, an expert (`jQuery.valueview.Expert`) and a parser (`valueParsers.ValueParser`)
+ *        will be determined from the provided stores according to the specified data type id.
  *        When setting the `valueview`'s value to a data value that is not valid against the data
  *        type referenced by the data type id, a note that the value is not suitable for the
  *        widget's current definition will be displayed.
- *        If the `dataTypeId` option is `null`, expert, parser and formatter will be determined
+ *        If the `dataTypeId` option is `null`, expert and parser will be determined
  *        using the `dataValueType` option.
  * @param {string|null} [options.dataValueType=null]
- *        If set while the `dataTypeId` option is `null`, a parser (`valueParsers.ValueParser`) and
- *        a formatter (`valueFormatters.ValueFormatter`) will be determined from the provided
- *        factories according to the specified data value type.
+ *        If set while the `dataTypeId` option is `null`, a parser (`valueParsers.ValueParser`)
+ *        will be determined from the provided store according to the specified data value type.
  *        When setting the `valueview`'s value to a data value that is not valid against the data
  *        value referenced by the data value type, a note that the value is not suitable for the
  *        widget's current definition will be displayed.
- *        If the `dataValueType` option as well as the `dataTypeId` option is `null`, expert, parser
- *        and formatter will be determined using the widget's current value.
+ *        If the `dataValueType` option as well as the `dataTypeId` option is `null`, expert and parser
+ *        will be determined using the widget's current value.
  *        Consequently, if the value itself is `null`, the widget will not be able to offer any
  *        input for new values.
  * @param {dataValues.DataValue|null} [options.value=null]
@@ -178,7 +177,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	options: {
 		expertStore: null,
 		parserStore: null,
-		formatterStore: null,
+		htmlFormatter: null,
+		plaintextFormatter: null,
 		dataTypeId: null,
 		dataValueType: null,
 		value: null,
@@ -199,7 +199,8 @@ $.widget( 'valueview.valueview', PARENT, {
 	_create: function() {
 		if ( !this.options.expertStore
 			|| !this.options.parserStore
-			|| !this.options.formatterStore
+			|| !this.options.htmlFormatter
+			|| !this.options.plaintextFormatter
 			|| typeof this.options.language !== 'string'
 		) {
 			throw new Error( 'Required option(s) not defined properly' );
@@ -649,7 +650,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Will take the current raw value of the `valueview`'s `Expert` and parse and format it using
-	 * the `valueParserProvider` and `valueFormatterProvider` injected via the options.
+	 * the `valueParserStore`, `plaintextFormatter` and `htmlFormatter` injected via the options.
 	 * @private
 	 */
 	_updateValue: function() {
@@ -730,7 +731,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			clearTimeout( this._parseTimer );
 		}
 
-		var valueParser = this._instantiateParser( this.valueCharacteristics( 'text/plain' ) );
+		var valueParser = this._instantiateParser( expert.valueCharacteristics() );
 
 		self.__lastUpdateValue = rawValue;
 		this._parseTimer = setTimeout( function() {
@@ -820,11 +821,9 @@ $.widget( 'valueview.valueview', PARENT, {
 	 */
 	_formatValue: function( dataValue ) {
 		var self = this,
-			deferred = $.Deferred(),
-			valueFormatter = this._instantiateFormatter( this.valueCharacteristics() ),
-			dataTypeId = this.options.dataTypeId || null;
+			deferred = $.Deferred();
 
-		valueFormatter.format( dataValue, dataTypeId, 'text/html' )
+		this.options.htmlFormatter.format( dataValue )
 			.done( function( formattedValue, formattedDataValue ) {
 				if ( dataValue === formattedDataValue ) {
 					deferred.resolve( formattedValue );
@@ -857,9 +856,6 @@ $.widget( 'valueview.valueview', PARENT, {
 	_updateTextValue: function() {
 		var self = this,
 			deferred = $.Deferred(),
-			format = 'text/plain',
-			valueFormatter,
-			dataTypeId = this.options.dataTypeId || null,
 			dataValue = this._value;
 
 		if ( !dataValue ) {
@@ -868,9 +864,7 @@ $.widget( 'valueview.valueview', PARENT, {
 			return deferred.promise();
 		}
 
-		valueFormatter = this._instantiateFormatter( this.valueCharacteristics( format ) );
-
-		valueFormatter.format( dataValue, dataTypeId, format )
+		this.options.plaintextFormatter.format( dataValue )
 			.done( function( formattedValue, formattedDataValue ) {
 				if ( dataValue === formattedDataValue ) {
 					self._textValue = formattedValue;
@@ -885,36 +879,6 @@ $.widget( 'valueview.valueview', PARENT, {
 			} );
 
 		return deferred.promise();
-	},
-
-	/**
-	 * @private
-	 *
-	 * @param {Object} [additionalFormatterOptions]
-	 * @return {valueFormatters.ValueFormatter}
-	 *
-	 * @throws {Error} if no formatter store being an instance of
-	 *         `valueFormatters.ValueFormatterStore` is set in the options.
-	 */
-	_instantiateFormatter: function( additionalFormatterOptions ) {
-		if ( !( this.options.formatterStore instanceof vf.ValueFormatterStore ) ) {
-			throw new Error( 'No value formatter store in valueview\'s options specified' );
-		}
-
-		var Formatter = this.options.formatterStore.getFormatter(
-			this._determineDataValueType(),
-			this.options.dataTypeId
-		);
-
-		var formatterOptions = $.extend(
-			{
-				lang: this.options.language
-			},
-			Formatter.prototype.getOptions(),
-			additionalFormatterOptions || {}
-		);
-
-		return new Formatter( formatterOptions );
 	},
 
 	/**
@@ -985,23 +949,8 @@ $.widget( 'valueview.valueview', PARENT, {
 				}
 			}
 		} );
-	},
-
-	/**
-	 * @see jQuery.valueview.Expert.valueCharacteristics
-	 *
-	 * @param {string} [format='text/html']
-	 * @return {Object}
-	 */
-	valueCharacteristics: function( format ) {
-		if ( this._expert ) {
-			return this._expert.valueCharacteristics( format );
-		}
-		if ( this._expertConstructor ) {
-			return this._expertConstructor.prototype.valueCharacteristics( format );
-		}
-		return {};
 	}
+
 } );
 
 // We have to override this here because $.widget sets it no matter what's in

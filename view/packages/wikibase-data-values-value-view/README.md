@@ -85,17 +85,17 @@ enabling it to edit "string" `DataValue`s.
 ```javascript
 var $subject = $( '<div/>' ).appendTo( $( 'body' ).empty() );
 
-// In addition to the Expert store, ValueParser and ValueFormatter stores need to be provided. These
-// feature the same mechanisms as the Expert store. For this example, we just initialize them with
-// the "string" Parser/Formatter as default Parser/Formatter.
-var parsers = new valueParsers.ValueParserStore( valueParsers.StringParser ),
-	formatters = new valueFormatters.ValueFormatterStore( valueFormatters.StringFormatter );
+// In addition to the Expert store, a ValueParser store and two ValueFormatters need to be provided. The parser store
+// features the same mechanisms as the Expert store. For this example, we just initialize the parser store with
+// the "string" parser as default. The formatters will format a string as it is.
+var parsers = new valueParsers.ValueParserStore( valueParsers.StringParser );
 
 $subject.valueview( {
   expertStore: experts,
   parserStore: parsers,
-  formatterStore: formatters,
-  language: 'en', // language code transmitted to Parser and Formatter
+  plaintextFormatter: new valueFormatters.StringFormatter(),
+  htmlFormatter: new valueFormatters.StringFormatter(),
+  language: 'en', // language code transmitted to Parser
   value: new dv.StringValue( 'text' )
 } );
 
