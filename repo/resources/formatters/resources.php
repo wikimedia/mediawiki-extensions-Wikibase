@@ -16,9 +16,9 @@ return call_user_func( function() {
 
 	return array(
 
-		'wikibase.formatters.getApiBasedValueFormatterConstructor' => $moduleTemplate + array(
+		'wikibase.formatters.ApiValueFormatter' => $moduleTemplate + array(
 			'scripts' => array(
-				'getApiBasedValueFormatterConstructor.js',
+				'ApiValueFormatter.js',
 			),
 			'dependencies' => array(
 				'wikibase',
@@ -27,17 +27,14 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.formatters.getStore' => $moduleTemplate + array(
+		'wikibase.formatters.ApiValueFormatterFactory' => $moduleTemplate + array(
 			'scripts' => array(
-				'getStore.js',
+				'ApiValueFormatterFactory.js',
 			),
 			'dependencies' => array(
-				'dataValues.values',
-				'valueFormatters.formatters',
-				'valueFormatters.ValueFormatterStore',
 				'wikibase.api.FormatValueCaller',
-				'wikibase.datamodel',
-				'wikibase.formatters.getApiBasedValueFormatterConstructor',
+				'wikibase.formatters.ApiValueFormatter',
+				'wikibase.ValueFormatterFactory'
 			),
 		),
 

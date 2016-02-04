@@ -29,7 +29,7 @@
 	 *        Required for dynamically gathering `Entity`/`Property` information.
 	 * @param {jQuery.valueview.ExpertStore} expertStore
 	 *        Required by the `ValueView` for constructing `expert`s for different value types.
-	 * @param {valueFormatters.ValueFormatterStore} formatterStore
+	 * @param {wikibase.ValueFormatterFactory} formatterFactory
 	 *        Required by the `ValueView` for formatting entered values.
 	 * @param {util.MessageProvider} messageProvider
 	 *        Required by the `ValueView` for showing the user interface in the correct language.
@@ -48,7 +48,7 @@
 		entityIdPlainFormatter,
 		entityStore,
 		expertStore,
-		formatterStore,
+		formatterFactory,
 		messageProvider,
 		parserStore,
 		userLanguages,
@@ -61,7 +61,7 @@
 		this._entityIdPlainFormatter = entityIdPlainFormatter;
 		this._entityStore = entityStore;
 		this._expertStore = expertStore;
-		this._formatterStore = formatterStore;
+		this._formatterFactory = formatterFactory;
 		this._messageProvider = messageProvider;
 		this._parserStore = parserStore;
 		// Maybe make userLanguages an argument to getEntityView instead of to the constructor
@@ -112,10 +112,10 @@
 	SELF.prototype._expertStore = null;
 
 	/**
-	 * @property {valueFormatters.ValueFormatterStore}
+	 * @property {wikibsae.ValueFormatterFactory}
 	 * @private
 	 **/
-	SELF.prototype._formatterStore = null;
+	SELF.prototype._formatterFactory = null;
 
 	/**
 	 * @property {util.MessageProvider}
@@ -441,7 +441,7 @@
 	SELF.prototype._getValueViewBuilder = function() {
 		return new wb.ValueViewBuilder(
 			this._expertStore,
-			this._formatterStore,
+			this._formatterFactory,
 			this._parserStore,
 			this._userLanguages && this._userLanguages[0],
 			this._messageProvider,
