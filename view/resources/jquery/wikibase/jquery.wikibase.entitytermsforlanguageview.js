@@ -166,6 +166,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 			self['$' + widgetName]
 			.on( widgetName + 'change', function( event ) {
 				event.stopPropagation();
+				// The only event handler for this is in entitytermsforlanguagelistview.
 				self._trigger( 'change', null, [self.options.value.language] );
 			} )
 			.on( widgetName + 'toggleerror.' + self.widgetName, function( event, error ) {

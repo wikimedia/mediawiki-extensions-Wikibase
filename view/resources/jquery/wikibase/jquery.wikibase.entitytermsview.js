@@ -24,6 +24,7 @@
  *
  * @event change
  *        - {jQuery.Event}
+ *        - {string} Language code the change was made in.
  *
  * @event afterstartediting
  *       - {jQuery.Event}
@@ -99,10 +100,8 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		.on(
 			this.widgetEventPrefix + 'change.' + this.widgetName + ' ' +
 			this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
-			function() {
-				var lang = self.options.userLanguages[0];
-
-				if ( !lang ) {
+			function( event, lang ) {
+				if ( lang !== self.options.userLanguages[0] ) {
 					return;
 				}
 
@@ -316,9 +315,12 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			prefix = $.wikibase.entitytermsforlanguagelistview.prototype.widgetEventPrefix;
 
 		this.$entitytermsforlanguagelistview
-		.on( prefix + 'change.' + this.widgetName, function( event ) {
+		.on( prefix + 'change.' + this.widgetName, function( event, lang ) {
 			event.stopPropagation();
-			self._trigger( 'change' );
+			// Event handlers for this are in the entitytermsview toolbar controller (for enabling
+			// the save button), in entityViewInit (for updating the title) and in this file (for
+			// updating description and aliases).
+			self._trigger( 'change', null, [lang] );
 		} )
 		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
 			event.stopPropagation();
