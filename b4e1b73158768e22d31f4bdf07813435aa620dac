@@ -34,6 +34,24 @@
       "revId": "b4e1b73158768e22d31f4bdf07813435aa620dac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d94c55e7",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-04T08:52:08Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "4ea78b8a_b9de3913",
+      "revId": "b4e1b73158768e22d31f4bdf07813435aa620dac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
