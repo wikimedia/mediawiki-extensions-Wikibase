@@ -46,8 +46,10 @@
  * @param {dataTypes.DataTypeStore} options.dataTypeStore
  *        Required to retrieve and evaluate a proper `dataTypes.DataType` object when interacting on
  *        a "value" `Variation`.
- * @param {boolean} [options.drawProperty=true]
- *        The `Property` part of the `snakview` is not rendered when `drawProperty` is false.
+ * @param {string} [options.encapsulatedBy]
+ *        If the `snakview`s DOM node has a parent that is selectable by the provided CSS selector,
+ *        the `Property` part of the `snakview` is not (re-)rendered when initializing the
+ *        `snakview` unless the `snakview`s whole DOM structure is empty.
  */
 /**
  * @event afterstartediting
@@ -97,7 +99,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 		entityStore: null,
 		valueViewBuilder: null,
 		dataTypeStore: null,
-		drawProperty: true
+		encapsulatedBy: null
 	},
 
 	/**
@@ -156,7 +158,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 			snakTypeSelectorIsEmpty = !this.$snakTypeSelector.contents().length,
 			snakValueIsEmpty = !this.$snakValue.contents().length;
 
-		if ( propertyIsEmpty && this.options.drawProperty ) {
+		if ( propertyIsEmpty && !this._isEncapsulated() ) {
 			this.drawProperty();
 		}
 
@@ -173,6 +175,18 @@ $.widget( 'wikibase.snakview', PARENT, {
 			// This clearly implies draw() since it requires visual changes!
 			this.startEditing();
 		}
+	},
+
+	/**
+	 * @private
+	 *
+	 * @return {boolean}
+	 */
+	_isEncapsulated: function() {
+		return !!(
+			this.options.encapsulatedBy
+			&& this.element.closest( this.options.encapsulatedBy ).length
+		);
 	},
 
 	/**
@@ -710,7 +724,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 			propertyId = this.value().property;
 
 		if ( this.options.locked.property
-			&& ( this.$property.contents().length || this.options.drawProperty )
+			&& ( this.$property.contents().length || this._isEncapsulated() )
 		) {
 			return deferred.resolve().promise();
 		}

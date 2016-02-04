@@ -321,7 +321,7 @@
 						buildSnakView: $.proxy(
 							this.getSnakView,
 							this,
-							false
+							':' + $.wikibase.statementview.prototype.widgetFullName.toLowerCase()
 						),
 						claimsChanger: this._entityChangersFactory.getClaimsChanger(),
 						entityIdPlainFormatter: this._entityIdPlainFormatter,
@@ -382,7 +382,7 @@
 			listItemWidget: $.wikibase.snakview,
 			newItemOptionsFn: $.proxy( function( value ) {
 				return this._getSnakViewOptions(
-					true,
+					null,
 					{
 						locked: {
 							// Do not allow changing the property when editing existing an snak.
@@ -401,26 +401,26 @@
 	/**
 	 * Construct a suitable view for the given snak on the given DOM element
 	 *
-	 * @param {boolean} drawProperty Whether the snakview should draw its property
+	 * @param {string|null} encapsulatedBy A jQuery selector for getting the encapsulating view
 	 * @param {Object} options An object with keys `locked` and `autoStartEditing`
 	 * @param {wikibase.datamodel.Snak|null} snak
 	 * @param {jQuery} $dom
 	 * @return {jQuery.wikibase.snakview} The constructed snakview
 	 */
-	SELF.prototype.getSnakView = function( drawProperty, options, snak, $dom ) {
+	SELF.prototype.getSnakView = function( encapsulatedBy, options, snak, $dom ) {
 		return this._getView(
 			'snakview',
 			$dom,
-			this._getSnakViewOptions( drawProperty, options, snak )
+			this._getSnakViewOptions( encapsulatedBy, options, snak )
 		);
 	};
 
 	/**
-	 * @param {boolean} drawProperty Whether the snakview should draw its property
+	 * @param {string|null} encapsulatedBy A jQuery selector for getting the encapsulating view
 	 * @param {Object} options An object with keys `locked` and `autoStartEditing`
 	 * @param {wikibase.datamodel.Snak|null} snak
 	 */
-	SELF.prototype._getSnakViewOptions = function( drawProperty, options, snak ) {
+	SELF.prototype._getSnakViewOptions = function( encapsulatedBy, options, snak ) {
 		return {
 			value: snak || undefined,
 			locked: options.locked,
@@ -430,7 +430,7 @@
 			entityIdPlainFormatter: this._entityIdPlainFormatter,
 			entityStore: this._entityStore,
 			valueViewBuilder: this._getValueViewBuilder(),
-			drawProperty: drawProperty
+			encapsulatedBy: encapsulatedBy
 		};
 	};
 

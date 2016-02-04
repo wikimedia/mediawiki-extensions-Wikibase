@@ -477,7 +477,7 @@
 				},
 				autoStartEditing: undefined,
 				dataTypeStore: dataTypeStore,
-				drawProperty: true,
+				encapsulatedBy: null,
 				entityIdHtmlFormatter: entityIdHtmlFormatter,
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				entityStore: entityStore,
@@ -531,6 +531,7 @@
 				parserStore,
 				userLanguages
 			),
+			encapsulatedBy = 'encapsulatedBy',
 			options = {},
 			$dom = $( '<div/>' );
 
@@ -538,7 +539,7 @@
 
 		sinon.spy( wb, 'ValueViewBuilder' );
 
-		viewFactory.getSnakView( false, options, value, $dom );
+		viewFactory.getSnakView( encapsulatedBy, options, value, $dom );
 
 		sinon.assert.calledWith(
 			$.wikibase.snakview,
@@ -551,7 +552,7 @@
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				entityStore: entityStore,
 				valueViewBuilder: wb.ValueViewBuilder.returnValues[0],
-				drawProperty: false
+				encapsulatedBy: encapsulatedBy
 			} )
 		);
 
