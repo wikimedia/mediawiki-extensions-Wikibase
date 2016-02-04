@@ -59,9 +59,12 @@ class RemoveReferences extends ModifyClaim {
 		$guid = $params['statement'];
 		$entityId = $this->guidParser->parse( $guid )->getEntityId();
 		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->loadEntityRevision( $entityId, (int)$params['baserevid'] );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
+				$entityId,
+				(int)$params['baserevid']
+			);
 		} else {
-			$entityRevision = $this->loadEntityRevision( $entityId );
+			$entityRevision = $this->entityLoadingHelper->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
 		$summary = $this->modificationHelper->createSummary( $params, $this );
@@ -86,9 +89,9 @@ class RemoveReferences extends ModifyClaim {
 			$this->errorReporter->dieException( $e, 'failed-save' );
 		}
 
-		$status = $this->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
-		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
-		$this->getResultBuilder()->markSuccess();
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
+		$this->resultBuilder->markSuccess();
 	}
 
 	/**
@@ -167,6 +170,14 @@ class RemoveReferences extends ModifyClaim {
 					self::PARAM_REQUIRED => true,
 					self::PARAM_ISMULTI => true,
 				),
+				'summary' => array(
+					self::PARAM_TYPE => 'string',
+				),
+				'token' => null,
+				'baserevid' => array(
+					self::PARAM_TYPE => 'integer',
+				),
+				'bot' => false,
 			),
 			parent::getAllowedParams()
 		);
