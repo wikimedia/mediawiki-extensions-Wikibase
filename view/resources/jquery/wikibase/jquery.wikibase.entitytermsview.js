@@ -97,40 +97,41 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 
 		this.element
 		.on(
-			this.widgetEventPrefix + 'change.' + this.widgetName + ' ' +
-			this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
+			this.widgetEventPrefix + 'change.' + this.widgetName
+				+ ' ' + this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
 			function() {
-				var lang = self.options.userLanguages[0];
-
-				if ( !lang ) {
+				if ( self.options.userLanguages.length === 0 ) {
+					// if no user languages have been specified, do nothing
 					return;
 				}
 
 				var fingerprint = self.value(),
-					description = fingerprint.getDescriptionFor( lang ),
-					aliases = fingerprint.getAliasesFor( lang ),
-					isDescriptionEmpty = !description || description.getText() === '',
-					isAliasesEmpty = !aliases || aliases.isEmpty();
+					language = self.options.userLanguages[0],
+					description = fingerprint.getDescriptionFor( language ) || new wb.datamodel.Term( language, '' ),
+					aliases = fingerprint.getAliasesFor( language ) || new wb.datamodel.MultiTerm( language, [] );
 
 				self.$headingDescription
-					.toggleClass( 'wb-empty', isDescriptionEmpty )
-					.text( isDescriptionEmpty
+					.toggleClass( 'wb-empty', description.getText() === '' )
+					.text( description.getText() === ''
 						? mw.msg( 'wikibase-description-empty' )
 						: description.getText()
-					);
+				);
 
 				var $ul = self.$headingAliases
-					.toggleClass( 'wb-empty', isAliasesEmpty )
-					.children( 'ul' );
+					.toggleClass( 'wb-empty', aliases.isEmpty() )
+					.children( 'ul' )
+					.text( aliases.isEmpty()
+						? mw.msg( 'wikibase-aliases-empty' )
+						: ''
+				);
 
-				if ( isAliasesEmpty ) {
-					$ul.text( mw.msg( 'wikibase-aliases-empty' ) );
-				} else {
-					$ul.empty();
-					$.each( aliases.getTexts(), function( i, text ) {
-						$ul.append( mw.wbTemplate( 'wikibase-entitytermsview-aliases-alias', text ) );
-					} );
-				}
+				$.each( aliases.getTexts(), function( i, text ) {
+					$ul.append(
+						mw.wbTemplate( 'wikibase-entitytermsview-aliases-alias',
+							text
+						)
+					);
+				} );
 			}
 		);
 
