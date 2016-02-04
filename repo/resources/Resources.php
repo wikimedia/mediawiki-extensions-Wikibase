@@ -90,7 +90,7 @@ return call_user_func( function() {
 				'wikibase.dataTypeStore',
 				'wikibase.entityChangers.EntityChangersFactory',
 				'wikibase.experts.getStore',
-				'wikibase.formatters.getStore',
+				'wikibase.formatters.ApiValueFormatterFactory',
 				'wikibase.entityIdFormatter.CachingEntityIdHtmlFormatter',
 				'wikibase.entityIdFormatter.CachingEntityIdPlainFormatter',
 				'wikibase.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter',

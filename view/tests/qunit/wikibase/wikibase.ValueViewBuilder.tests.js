@@ -29,7 +29,10 @@
 			valueView = vvAndDom.vv,
 			$dom = vvAndDom.$dom;
 
-		var valueViewBuilder = new wb.ValueViewBuilder();
+		var valueViewBuilder = new wb.ValueViewBuilder(
+			null,
+			{ getFormatter: function() {} }
+		);
 
 		var returnValue = valueViewBuilder.initValueView( $dom );
 
@@ -41,12 +44,12 @@
 		var vvAndDom = getValueViewAndDom(),
 			$dom = vvAndDom.$dom,
 			expertStore = {},
-			formatterStore = {},
+			formatterFactory = { getFormatter: function() {} },
 			parserStore = {};
 
 		var valueViewBuilder = new wb.ValueViewBuilder(
 			expertStore,
-			formatterStore,
+			formatterFactory,
 			parserStore,
 			null,
 			null
@@ -56,8 +59,32 @@
 
 		sinon.assert.calledWith( $dom.valueview, sinon.match( {
 			expertStore: expertStore,
-			formatterStore: formatterStore,
 			parserStore: parserStore
+		} ) );
+	} );
+
+	QUnit.test( 'initValueView passes formatters', function( assert ) {
+		assert.expect( 1 );
+		var vvAndDom = getValueViewAndDom(),
+			$dom = vvAndDom.$dom,
+			htmlFormatter = {},
+			plaintextFormatter = {},
+			formatterFactory = {
+				getFormatter: function( _, outputType ) {
+					return outputType === 'text/html' ? htmlFormatter : plaintextFormatter;
+				}
+			};
+
+		var valueViewBuilder = new wb.ValueViewBuilder(
+			null,
+			formatterFactory
+		);
+
+		valueViewBuilder.initValueView( $dom );
+
+		sinon.assert.calledWith( $dom.valueview, sinon.match( {
+			plaintextFormatter: plaintextFormatter,
+			htmlFormatter: htmlFormatter
 		} ) );
 	} );
 
@@ -68,7 +95,7 @@
 
 		var valueViewBuilder = new wb.ValueViewBuilder(
 			null,
-			null,
+			{ getFormatter: function() {} },
 			null,
 			'de',
 			null
@@ -89,7 +116,7 @@
 
 		var valueViewBuilder = new wb.ValueViewBuilder(
 			null,
-			null,
+			{ getFormatter: function() {} },
 			null,
 			null,
 			messageProvider
@@ -111,7 +138,10 @@
 				getType: sinon.spy( function() { return dataValueType; } )
 			};
 
-		var valueViewBuilder = new wb.ValueViewBuilder();
+		var valueViewBuilder = new wb.ValueViewBuilder(
+			null,
+			{ getFormatter: function() {} }
+		);
 
 		valueViewBuilder.initValueView( $dom, null, dataValue );
 
@@ -132,7 +162,10 @@
 				getDataValueType: sinon.spy( function() { return dataTypeDataValueType; } )
 			};
 
-		var valueViewBuilder = new wb.ValueViewBuilder();
+		var valueViewBuilder = new wb.ValueViewBuilder(
+			null,
+			{ getFormatter: function() {} }
+		);
 
 		valueViewBuilder.initValueView( $dom, dataType );
 
