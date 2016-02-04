@@ -66,7 +66,7 @@ abstract class ModifyClaim extends ApiBase {
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
 		$this->modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getSnakFactory(),
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getStatementGuidValidator(),
 			$apiHelperFactory->getErrorReporter( $this )

@@ -121,9 +121,9 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\EntityLookup', $returnValue );
 	}
 
-	public function testGetSnakConstructionServiceReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getSnakConstructionService();
-		$this->assertInstanceOf( 'Wikibase\Repo\SnakConstructionService', $returnValue );
+	public function testGetSnakFactoryReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getSnakFactory();
+		$this->assertInstanceOf( 'Wikibase\Repo\SnakFactory', $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {

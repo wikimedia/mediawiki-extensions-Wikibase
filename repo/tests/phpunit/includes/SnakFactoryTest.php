@@ -5,12 +5,13 @@ namespace Wikibase\Lib\Test;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\Repo\SnakConstructionService;
+use Wikibase\Repo\SnakFactory;
 
 /**
- * @covers Wikibase\Repo\SnakConstructionService
+ * @covers Wikibase\Repo\SnakFactory
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -19,9 +20,9 @@ use Wikibase\Repo\SnakConstructionService;
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
+class SnakFactoryTest extends PHPUnit_Framework_TestCase {
 
-	public function newSnakConstructionService() {
+	public function newInstance() {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeFactory = new DataTypeFactory( array( 'string' => 'string' ) );
 		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( array(
@@ -30,7 +31,7 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'p1' ), 'string' );
 
-		$service = new SnakConstructionService(
+		$service = new SnakFactory(
 			$dataTypeLookup,
 			$dataTypeFactory,
 			$dataValueFactory
@@ -42,7 +43,13 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider newSnakProvider
 	 */
-	public function testNewSnak( $propertyId, $snakType, $rawValue, $expectedSnakClass, $expectedException = null ) {
+	public function testNewSnak(
+		$propertyId,
+		$snakType,
+		$rawValue,
+		$expectedSnakClass,
+		$expectedException = null
+	) {
 		if ( is_int( $propertyId ) ) {
 			$propertyId = PropertyId::newFromNumber( $propertyId );
 		}
@@ -51,7 +58,7 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 			$this->setExpectedException( $expectedException );
 		}
 
-		$service = $this->newSnakConstructionService();
+		$service = $this->newInstance();
 
 		$snak = $service->newSnak( $propertyId, $snakType, $rawValue );
 

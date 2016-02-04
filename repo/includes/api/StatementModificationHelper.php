@@ -21,7 +21,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Repo\SnakConstructionService;
+use Wikibase\Repo\SnakFactory;
 use Wikibase\Summary;
 
 /**
@@ -38,9 +38,9 @@ use Wikibase\Summary;
 class StatementModificationHelper {
 
 	/**
-	 * @var SnakConstructionService
+	 * @var SnakFactory
 	 */
-	private $snakConstructionService;
+	private $snakFactory;
 
 	/**
 	 * @var EntityIdParser
@@ -55,18 +55,18 @@ class StatementModificationHelper {
 	/**
 	 * @var ApiErrorReporter
 	 *
-	 * @param SnakConstructionService $snakConstructionService
+	 * @param SnakFactory $snakFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param StatementGuidValidator $guidValidator
 	 * @param ApiErrorReporter $errorReporter
 	 */
 	public function __construct(
-		SnakConstructionService $snakConstructionService,
+		SnakFactory $snakFactory,
 		EntityIdParser $entityIdParser,
 		StatementGuidValidator $guidValidator,
 		ApiErrorReporter $errorReporter
 	) {
-		$this->snakConstructionService = $snakConstructionService;
+		$this->snakFactory = $snakFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->guidValidator = $guidValidator;
 		$this->errorReporter = $errorReporter;
@@ -123,7 +123,7 @@ class StatementModificationHelper {
 		}
 
 		try {
-			$snak = $this->snakConstructionService->newSnak( $propertyId, $params['snaktype'], $valueData );
+			$snak = $this->snakFactory->newSnak( $propertyId, $params['snaktype'], $valueData );
 			return $snak;
 		} catch ( InvalidArgumentException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-snak' );
