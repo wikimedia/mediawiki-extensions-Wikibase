@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_1958ad8b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T09:19:09Z",
+      "side": 1,
+      "message": "Why so complicated?\n\n return $.isEmptyObject( this._getAdditionalLanguages() );",
+      "revId": "30824318303a16e87130296d7cb5b94781b7a48d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
