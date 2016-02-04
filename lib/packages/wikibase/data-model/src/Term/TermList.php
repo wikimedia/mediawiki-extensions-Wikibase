@@ -13,6 +13,7 @@ use Traversable;
 /**
  * Unordered list of Term objects.
  * If multiple terms with the same language code are provided, only the last one will be retained.
+ * Empty terms are skipped and treated as non-existing.
  *
  * @since 0.7.3
  *
@@ -115,6 +116,11 @@ class TermList implements Countable, IteratorAggregate, Comparable {
 		}
 	}
 
+	/**
+	 * Replaces non-empty or removes empty terms.
+	 *
+	 * @param Term $term
+	 */
 	public function setTerm( Term $term ) {
 		if ( $term->getText() === '' ) {
 			unset( $this->terms[$term->getLanguageCode()] );

@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 5.0.0 (alpha)
+## Version 5.0.0 (2016-02-15)
 
 * Removed `Claims` class (deprecated since 1.0)
 * Removed `getClaims` and `setClaims` methods from `Entity`, `Item` and `Property` (deprecated since 1.0)
@@ -16,9 +16,11 @@
     * Added `getIterator` method
 * Removed `ReferenceList::removeDuplicates`
 * `ReferenceList::addReference` now throws an `InvalidArgumentException` for negative indices
-* `EntityDocument` now implements `Comparable`
-    * Added `equals` method
-* Added `copy` to `EntityDocument`
+* Added `EntityDocument::equals`, and `EntityDocument` now implements `Comparable`
+* Added `EntityDocument::copy`
+* Fixed `Property::clear` not clearing statements
+* `TermList` now skips and removes empty terms
+* Deprecated `ByPropertyIdArray`
 
 ## Version 4.4.0 (2016-01-20)
 
