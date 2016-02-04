@@ -479,10 +479,16 @@ final class WikibaseClient {
 	 * Returns a new instance constructed from global settings.
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
+	 * @throws MWException
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
 		global $wgContLang, $wgWBClientSettings, $wgWBClientDataTypes;
+
+		if ( !is_array( $wgWBClientDataTypes ) ) {
+			throw new MWException( '$wgWBClientDataTypes must be an array. Maybe you forgot to '
+				. 'require WikibaseClient.php in your LocalSettings.php?' );
+		}
 
 		$dataTypeDefinitions = $wgWBClientDataTypes;
 		Hooks::run( 'WikibaseClientDataTypes', array( &$dataTypeDefinitions ) );
