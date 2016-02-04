@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_bfb7f9d2",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T15:35:07Z",
+      "side": 1,
+      "message": "This description also does not help to understand what \"a\" and \"b\" mean.",
+      "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_5facc584",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T15:35:07Z",
+      "side": 1,
+      "message": "Licence? Since?",
+      "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9fb23de3",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T15:35:07Z",
+      "side": 1,
+      "message": "It\u0027s not clear what \"a\" and \"b\" mean. Which is subtracted from which? Better use names like \"all\" and \"excluded\".",
+      "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9fd9dd2e",
+        "filename": "lib/tests/phpunit/DifferenceContentLanguagesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T15:35:07Z",
+      "side": 1,
+      "message": "What\u0027s the benefit of this? You can use StaticContentLanguages. This is an extremely simple value object.",
+      "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_7fe8a1af",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T15:35:07Z",
+      "side": 1,
+      "message": "Alphabetical order, possibly?",
+      "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_1fcded62",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T15:35:07Z",
+      "side": 1,
+      "message": "Why did this moved to the constructor?",
+      "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
