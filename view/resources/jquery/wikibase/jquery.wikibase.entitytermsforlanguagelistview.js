@@ -226,7 +226,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @private
 	 */
 	_createEntitytermsforlanguagelistviewMore: function() {
-		if ( !this._hasAdditionalLanguages() ) {
+		if ( !this._hasMoreLanguages() ) {
 			return;
 		}
 
@@ -243,11 +243,10 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	},
 
 	/**
-	 * Checks whether there are more languages to display.
-	 *
+	 * @return {boolean} If there are more languages to display.
 	 * @private
 	 */
-	_hasAdditionalLanguages: function() {
+	_hasMoreLanguages: function() {
 		var fingerprint = this.options.value,
 			minLength = this.options.userLanguages.length;
 
@@ -258,7 +257,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			return true;
 		}
 
-		return this._getAdditionalLanguages().length > 0;
+		return !$.isEmptyObject( this._getMoreLanguages() );
 	},
 
 	/**
@@ -295,12 +294,16 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		) );
 	},
 
+	/**
+	 * @return {boolean}
+	 * @private
+	 */
 	_isMoreLanguagesExpanded: function() {
 		return !$.isEmptyObject( this._moreLanguagesItems );
 	},
 
 	/**
-	 * Add 'more' languages to listview
+	 * Add terms in "more" languages to the list view, ordered by language code.
 	 *
 	 * @private
 	 */
@@ -309,7 +312,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			lia = listview.listItemAdapter(),
 			self = this;
 
-		$.each( this._getAdditionalLanguages(), function() {
+		$.each( Object.keys( this._getMoreLanguages() ).sort(), function() {
 			var $item = listview.addItem( self._getValueForLanguage( this ) );
 			if ( self._isInEditMode ) {
 				lia.liInstance( $item ).startEditing();
@@ -319,7 +322,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	},
 
 	/**
-	 * Remove 'more' languages from listview
+	 * Remove terms in "more" languages from the list view.
 	 *
 	 * @private
 	 */
@@ -334,10 +337,10 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	},
 
 	/**
-	 * @return {Object} List of additional language codes in this fingerprint.
+	 * @return {Object} Unsorted map of "more" language codes in this fingerprint.
 	 * @private
 	 */
-	_getAdditionalLanguages: function() {
+	_getMoreLanguages: function() {
 		var fingerprint = this.options.value,
 			languages = {};
 
@@ -355,7 +358,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			delete languages[this];
 		} );
 
-		return Object.keys( languages ).sort();
+		return languages;
 	},
 
 	/**
