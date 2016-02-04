@@ -366,11 +366,15 @@
 
 		if ( canEdit ) {
 			$entityview
-			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event ) {
+			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event, lang ) {
+				if ( lang !== mw.config.get( 'wgUserLanguage' ) ) {
+					return;
+				}
+
 				var $entitytermsview = $( event.target ),
 					entitytermsview = $entitytermsview.data( 'entitytermsview' ),
 					fingerprint = entitytermsview.value(),
-					label = fingerprint.getLabelFor( mw.config.get( 'wgUserLanguage' ) ),
+					label = fingerprint.getLabelFor( lang ),
 					isEmpty = !label || label.getText() === '';
 
 				$( 'title' ).text(

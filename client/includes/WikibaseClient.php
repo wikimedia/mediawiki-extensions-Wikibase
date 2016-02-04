@@ -494,7 +494,7 @@ final class WikibaseClient {
 			$wgContLang,
 			new DataTypeDefinitions(
 				$dataTypeDefinitions,
-				$settings->getSetting( 'disabledDataTypes' )
+				$settings->hasSetting( 'disabledDataTypes' ) ? $settings->getSetting( 'disabledDataTypes' ) : array()
 			)
 		);
 	}

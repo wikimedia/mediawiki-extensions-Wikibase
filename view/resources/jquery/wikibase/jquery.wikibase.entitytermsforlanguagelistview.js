@@ -22,6 +22,7 @@
  *
  * @event change
  *        - {jQuery.Event}
+ *        - {string} Language code the change was made in.
  *
  * @event afterstartediting
  *       - {jQuery.Event}
@@ -173,9 +174,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		this.element
 		.on( prefix + 'change.' + this.widgetName, function( event, lang ) {
 			event.stopPropagation();
-			if ( lang === self.options.userLanguages[0] ) {
-				self._trigger( 'change' );
-			}
+			// The only event handler for this is in entitytermsview.
+			self._trigger( 'change', null, [lang] );
 		} )
 		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
 			event.stopPropagation();
