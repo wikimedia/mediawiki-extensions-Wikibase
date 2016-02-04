@@ -5,6 +5,7 @@ namespace Wikibase;
 use Exception;
 use Maintenance;
 use MWException;
+use RequestContext;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\ChangeLookup;
@@ -176,12 +177,15 @@ class DispatchChanges extends Maintenance {
 
 		$dispatcher->getDispatchCoordinator()->initState( $clientWikis );
 
+		$stats = RequestContext::getMain()->getStats();
+		$stats->increment( 'wikibase.repo.dispatchChanges.start' );
+
 		$passes = $maxPasses === PHP_INT_MAX ? "unlimited" : $maxPasses;
 		$time = $maxTime === PHP_INT_MAX ? "unlimited" : $maxTime;
 
 		$this->log( "Starting loop for $passes passes or $time seconds" );
 
-		$startTime = time();
+		$startTime = microtime();
 		$t = 0;
 
 		// Run passes in a loop, sleeping when idle.
@@ -194,6 +198,7 @@ class DispatchChanges extends Maintenance {
 				break;
 			}
 
+			$runStartTime = microtime();
 			$c++;
 
 			try {
@@ -201,8 +206,10 @@ class DispatchChanges extends Maintenance {
 				$wikiState = $dispatcher->selectClient();
 
 				if ( $wikiState ) {
-					$dispatcher->dispatchTo( $wikiState );
+					$dispatchedChanges = $dispatcher->dispatchTo( $wikiState );
+					$stats->updateCount( 'wikibase.repo.dispatchChanges.changes', $dispatchedChanges );
 				} else {
+					$stats->increment( 'wikibase.repo.dispatchChanges.noclient' );
 					// Try again later, unless we have already reached the limit.
 					if ( $c < $maxPasses ) {
 						$this->trace( "Idle: No client wiki found in need of dispatching. "
@@ -214,6 +221,7 @@ class DispatchChanges extends Maintenance {
 					}
 				}
 			} catch ( Exception $ex ) {
+				$stats->increment( 'wikibase.repo.dispatchChanges.exception' );
 				if ( $c < $maxPasses ) {
 					$this->log( "ERROR: $ex; sleeping for {$delay} seconds" );
 					sleep( $delay );
@@ -222,8 +230,12 @@ class DispatchChanges extends Maintenance {
 				}
 			}
 
-			$t = ( time() - $startTime );
+			$t = ( microtime() - $startTime );
+			$stats->timing( 'wikibase.repo.dispatchChanges.pass-time', ( microtime() - $runStartTime ) / 1000 );
 		}
+
+		$stats->timing( 'wikibase.repo.dispatchChanges.execute-time', $t * 1000 );
+		$stats->updateCount( 'wikibase.repo.dispatchChanges.passes', $c );
 
 		$this->log( "Done, exiting after $c passes and $t seconds." );
 	}
