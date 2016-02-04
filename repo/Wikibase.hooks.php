@@ -882,7 +882,8 @@ final class RepoHooks {
 	 * @param array &$data
 	 */
 	public static function onAPIQuerySiteInfoGeneralInfo( ApiQuerySiteinfo $api, array &$data ) {
-		$dataTypes = WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypes();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$dataTypes = $wikibaseRepo->getDataTypeFactory()->getTypes();
 		$propertyTypes = array();
 
 		foreach ( $dataTypes as $id => $type ) {
@@ -890,6 +891,10 @@ final class RepoHooks {
 		}
 
 		$data['wikibase-propertytypes'] = $propertyTypes;
+
+		if ( $wikibaseRepo->getSettings()->hasSetting( 'sparqlEndpoint' ) ) {
+			$data['wikibase-sparql'] = $wikibaseRepo->getSettings()->getSetting( 'sparqlEndpoint' );
+		}
 	}
 
 	/**
