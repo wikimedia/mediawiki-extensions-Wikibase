@@ -23,13 +23,15 @@ use Wikibase\DataModel\Snak\Snak;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class SnakConstructionService {
+class SnakFactory {
 
 	private $dataTypeLookup;
 	private $dataTypeFactory;
 	private $dataValueFactory;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param DataValueFactory $dataValueFactory
