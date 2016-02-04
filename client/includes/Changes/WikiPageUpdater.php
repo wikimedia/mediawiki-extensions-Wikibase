@@ -4,6 +4,7 @@ namespace Wikibase\Client\Changes;
 
 use Job;
 use JobQueueGroup;
+use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use RefreshLinksJob;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -39,18 +40,32 @@ class WikiPageUpdater implements PageUpdater {
 	private $recentChangesDuplicateDetector;
 
 	/**
+	 * @var StatsdDataFactoryInterface|null
+	 */
+	private $stats;
+
+	/**
 	 * @param JobQueueGroup $jobQueueGroup
 	 * @param RecentChangeFactory $recentChangeFactory
 	 * @param RecentChangesDuplicateDetector|null $recentChangesDuplicateDetector
+	 * @param StatsdDataFactoryInterface|null $stats
 	 */
 	public function __construct(
 		JobQueueGroup $jobQueueGroup,
 		RecentChangeFactory $recentChangeFactory,
-		RecentChangesDuplicateDetector $recentChangesDuplicateDetector  = null
+		RecentChangesDuplicateDetector $recentChangesDuplicateDetector  = null,
+		StatsdDataFactoryInterface $stats = null
 	) {
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->recentChangeFactory = $recentChangeFactory;
 		$this->recentChangesDuplicateDetector = $recentChangesDuplicateDetector;
+		$this->stats = $stats;
+	}
+
+	private function incrementStats( $updateType, $delta ) {
+		if ( $this->stats ) {
+			$this->stats->updateCount( 'wikibase.client.pageupdates.' . $updateType, $delta );
+		}
 	}
 
 	/**
@@ -66,6 +81,7 @@ class WikiPageUpdater implements PageUpdater {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $title->getText() );
 			$title->invalidateCache();
 		}
+		$this->incrementStats( 'ParserCache', count( $titles ) );
 	}
 
 	/**
@@ -81,6 +97,7 @@ class WikiPageUpdater implements PageUpdater {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging web cache for " . $title->getText() );
 			$title->purgeSquid();
 		}
+		$this->incrementStats( 'WebCache', count( $titles ) );
 	}
 
 	/**
@@ -106,6 +123,7 @@ class WikiPageUpdater implements PageUpdater {
 			$this->jobQueueGroup->push( $job );
 			$this->jobQueueGroup->deduplicateRootJob( $job );
 		}
+		$this->incrementStats( 'RefreshLinksJob', count( $titles ) );
 	}
 
 	/**
@@ -134,6 +152,7 @@ class WikiPageUpdater implements PageUpdater {
 				$rc->save();
 			}
 		}
+		$this->incrementStats( 'InjectRCRecords', count( $titles ) );
 	}
 
 }
