@@ -261,6 +261,7 @@ class ApiErrorReporter {
 	 * @throws LogicException
 	 */
 	private function throwUsageException( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
+		$this->apiModule->getStats()->increment( 'wikibase.repo.api.errors.total' );
 		$this->apiModule->getMain()->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 
 		throw new LogicException( 'UsageException not thrown' );
