@@ -10,44 +10,24 @@
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
- *
- * @param {Object} options
  */
-var SELF = vf.ValueFormatter = function VpValueFormatter( options ) {
-	this._options = $.extend( {}, options || {} );
+var SELF = vf.ValueFormatter = function VpValueFormatter() {
 };
 
 /**
  * @class valueFormatters.ValueFormatter
  */
 $.extend( SELF.prototype, {
-	/**
-	 * Formatter options.
-	 * @property {Object}
-	 * @private
-	 */
-	_options: null,
-
-	/**
-	 * Returns the formatter's options as set in the constructor.
-	 *
-	 * @return {Object}
-	 */
-	getOptions: function() {
-		return $.extend( {}, this._options );
-	},
 
 	/**
 	 * Formats a value. Will return a jQuery.Promise which will be resolved if formatting is
 	 * successful or rejected if it fails. There are various reasons why formatting could fail, e.g.
-	 * the formatter is using the API and the API cannot be reached. In case of success, the
+	 * the formatter is using an API and the API cannot be reached. In case of success, the
 	 * callbacks will be passed a dataValues.DataValue object. In case of failure, the callback's
 	 * parameter will be an error object of some sort (not implemented yet!).
 	 * @abstract
 	 *
 	 * @param {dataValues.DataValue} dataValue
-	 * @param {string} [dataTypeId]
-	 * @param {string} [outputType] The output's preferred MIME type
 	 * @return {Object} jQuery.Promise
 	 * @return {Function} return.done
 	 * @return {string|null} return.done.formatted Formatted DataValue.
