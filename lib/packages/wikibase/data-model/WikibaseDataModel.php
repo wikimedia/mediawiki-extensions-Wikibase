@@ -7,17 +7,8 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( defined( 'WIKIBASE_DATAMODEL_VERSION' ) ) {
-	// Do not initialize more than once.
-	return 1;
-}
-
-define( 'WIKIBASE_DATAMODEL_VERSION', '4.4.0' );
-
-if ( defined( 'MEDIAWIKI' ) ) {
-	call_user_func( function() {
-		require_once __DIR__ . '/WikibaseDataModel.mw.php';
-	} );
+if ( defined( 'MEDIAWIKI' ) && function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'WikibaseDataModel', __DIR__ . '/mediawiki-extension.json' );
 }
 
 // Aliases introduced in 3.0.0
