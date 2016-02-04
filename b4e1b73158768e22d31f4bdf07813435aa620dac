@@ -16,6 +16,24 @@
       "revId": "b4e1b73158768e22d31f4bdf07813435aa620dac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_b9de3913",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T08:33:30Z",
+      "side": 1,
+      "message": "As said this is a 1:1 copy from core.",
+      "parentUuid": "6eaa8f54_22809cf8",
+      "revId": "b4e1b73158768e22d31f4bdf07813435aa620dac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
