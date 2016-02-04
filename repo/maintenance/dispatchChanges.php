@@ -5,6 +5,7 @@ namespace Wikibase;
 use Exception;
 use Maintenance;
 use MWException;
+use RequestContext;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\ChangeLookup;
@@ -177,6 +178,9 @@ class DispatchChanges extends Maintenance {
 
 		$dispatcher->getDispatchCoordinator()->initState( $clientWikis );
 
+		$stats = RequestContext::getMain()->getStats();
+		$stats->increment( 'wikibase.repo.dispatchChanges.start' );
+
 		$passes = $maxPasses === PHP_INT_MAX ? "unlimited" : $maxPasses;
 		$time = $maxTime === PHP_INT_MAX ? "unlimited" : $maxTime;
 
@@ -202,8 +206,10 @@ class DispatchChanges extends Maintenance {
 				$wikiState = $dispatcher->selectClient();
 
 				if ( $wikiState ) {
-					$dispatcher->dispatchTo( $wikiState );
+					$dispatchedChanges = $dispatcher->dispatchTo( $wikiState );
+					$stats->updateCount( 'wikibase.repo.dispatchChanges.changes', $dispatchedChanges );
 				} else {
+					$stats->increment( 'wikibase.repo.dispatchChanges.noclient' );
 					// Try again later, unless we have already reached the limit.
 					if ( $c < $maxPasses ) {
 						$this->trace( "Idle: No client wiki found in need of dispatching. "
@@ -215,6 +221,7 @@ class DispatchChanges extends Maintenance {
 					}
 				}
 			} catch ( Exception $ex ) {
+				$stats->increment( 'wikibase.repo.dispatchChanges.exception' );
 				if ( $c < $maxPasses ) {
 					$this->log( "ERROR: $ex; sleeping for {$delay} seconds" );
 					sleep( $delay );
@@ -225,6 +232,9 @@ class DispatchChanges extends Maintenance {
 
 			$t = ( time() - $startTime );
 		}
+
+		$stats->updateCount( 'wikibase.repo.dispatchChanges.passes', $c );
+		$stats->timing( 'wikibase.repo.dispatchChanges.time', $t );
 
 		$this->log( "Done, exiting after $c passes and $t seconds." );
 	}
