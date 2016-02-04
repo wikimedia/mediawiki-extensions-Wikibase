@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
@@ -18,7 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class CreateClaim extends ModifyClaim {
+class CreateClaim extends ApiBase {
 
 	/**
 	 * @var StatementChangeOpFactory
@@ -29,6 +30,26 @@ class CreateClaim extends ModifyClaim {
 	 * @var ApiErrorReporter
 	 */
 	private $errorReporter;
+
+	/**
+	 * @var StatementModificationHelper
+	 */
+	private $modificationHelper;
+
+	/**
+	 * @var ResultBuilder
+	 */
+	private $resultBuilder;
+
+	/**
+	 * @var EntityLoadingHelper
+	 */
+	private $entityLoadingHelper;
+
+	/**
+	 * @var EntitySavingHelper
+	 */
+	private $entitySavingHelper;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -44,6 +65,17 @@ class CreateClaim extends ModifyClaim {
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
+
+		$this->modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $this )
+		);
+
+		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
+		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
+		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 	}
 
 	/**
