@@ -49,7 +49,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 *
 	 * @return bool Always false because we do not want to build RSS/Atom feeds for this page.
 	 */
-	function isSyndicated() {
+	public function isSyndicated() {
 		return false;
 	}
 
@@ -126,7 +126,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 *
 	 * @return array[]
 	 */
-	function getQueryInfo() {
+	public function getQueryInfo() {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$conds = $this->buildConditionals( $dbr );
@@ -167,7 +167,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 *
 	 * @return ResultWrapper
 	 */
-	function reallyDoQuery( $limit, $offset = false ) {
+	public function reallyDoQuery( $limit, $offset = false ) {
 		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
 			return new FakeResultWrapper( array() );
 		}
@@ -183,7 +183,8 @@ class SpecialUnconnectedPages extends QueryPage {
 	 *
 	 * @return string
 	 */
-	function formatResult( $skin, $result ) {
+	public function formatResult( $skin, $result ) {
+		// FIXME: This should use a TitleFactory.
 		$title = Title::newFromID( $result->value );
 		$out = Linker::linkKnown( $title );
 
