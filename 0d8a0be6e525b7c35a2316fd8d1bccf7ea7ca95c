@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_f94ef1c3",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T09:48:48Z",
+      "side": 1,
+      "message": "The term \"more\" is everywhere, in the message keys, on the button. This should have been changed in the other direction.",
+      "revId": "0d8a0be6e525b7c35a2316fd8d1bccf7ea7ca95c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_19d74dc6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T09:48:48Z",
+      "side": 1,
+      "message": "This change means the possibly expensive sort is done here, for no reason. This makes all the effort we put into I63fe344 and I2e5573e kind of pointless again.",
+      "revId": "0d8a0be6e525b7c35a2316fd8d1bccf7ea7ca95c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_b9c87926",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T09:48:48Z",
+      "side": 1,
+      "message": "Not actually wrong, because an Array is an Object, but we usually use {string[]}.",
+      "revId": "0d8a0be6e525b7c35a2316fd8d1bccf7ea7ca95c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
