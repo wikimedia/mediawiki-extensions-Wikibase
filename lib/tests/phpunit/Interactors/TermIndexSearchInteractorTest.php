@@ -113,14 +113,13 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @return LanguageFallbackChainFactory
 	 */
 	private function getMockLanguageFallbackChainFactory() {
-		$testCase = $this;
 		$mockFactory = $this->getMockBuilder( 'Wikibase\LanguageFallbackChainFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 		$mockFactory->expects( $this->any() )
 			->method( 'newFromLanguageCode' )
-			->will( $this->returnCallback( function( $langCode ) use ( $testCase ) {
-				return $testCase->getMockLanguageFallbackChainFromLanguage( $langCode );
+			->will( $this->returnCallback( function( $langCode ) {
+				return $this->getMockLanguageFallbackChainFromLanguage( $langCode );
 			} ) );
 		return $mockFactory;
 	}

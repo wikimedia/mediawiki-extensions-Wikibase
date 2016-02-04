@@ -66,12 +66,11 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 	}
 
 	private function newOutputFormatValueFormatterFactory() {
-		$self = $this;
 		$factoryCallbacks = array(
-			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
+			'VT:string' => function( $format, FormatterOptions $options ) {
 				return new StringFormatter();
 			},
-			'PT:url' => function( $format, FormatterOptions $options ) use ( $self ) {
+			'PT:url' => function( $format, FormatterOptions $options ) {
 				return new StringFormatter();
 			},
 		);
