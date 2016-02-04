@@ -173,9 +173,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		this.element
 		.on( prefix + 'change.' + this.widgetName, function( event, lang ) {
 			event.stopPropagation();
-			if ( lang === self.options.userLanguages[0] ) {
-				self._trigger( 'change' );
-			}
+			self._trigger( 'change' );
 		} )
 		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
 			event.stopPropagation();
@@ -423,6 +421,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			lia = listview.listItemAdapter(),
 			isInitialValue = true;
 
+		//$.merge( listview, this._moreLanguagesItems ).items().each( function() {
 		listview.items().each( function() {
 			var entitytermsforlanguageview = lia.liInstance( $( this ) );
 			isInitialValue = entitytermsforlanguageview.isInitialValue();
