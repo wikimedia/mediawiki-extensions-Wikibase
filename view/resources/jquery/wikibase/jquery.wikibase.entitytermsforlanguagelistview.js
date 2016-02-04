@@ -173,9 +173,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		this.element
 		.on( prefix + 'change.' + this.widgetName, function( event, lang ) {
 			event.stopPropagation();
-			if ( lang === self.options.userLanguages[0] ) {
-				self._trigger( 'change' );
-			}
+			self._trigger( 'change' );
 		} )
 		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
 			event.stopPropagation();
