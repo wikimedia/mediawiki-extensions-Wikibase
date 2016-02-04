@@ -58,6 +58,7 @@
 
 			"lib/includes/",
 			"lib/WikibaseLib.hooks.php",
+			"lib/maintenance/",
 			"lib/tests/phpunit/",
 
 			"repo/includes/",
