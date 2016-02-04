@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_caa55545",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-04T18:15:19Z",
+      "side": 1,
+      "message": "There is an ! missing here. Ouch. Should be fixed in If731e27.",
+      "revId": "fb67fac6d5eec57735993479dd685cd4375ea42d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
