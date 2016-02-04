@@ -165,14 +165,13 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	private function getMockEntityTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
-		$testCase = $this;
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
-				$title = $testCase->getMock( 'Title' );
-				$title->expects( $testCase->any() )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				$title = $this->getMock( 'Title' );
+				$title->expects( $this->any() )
 					->method( 'isDeleted' )
-					->will( $testCase->returnValue( false ) );
+					->will( $this->returnValue( false ) );
 				return $title;
 			} ) );
 

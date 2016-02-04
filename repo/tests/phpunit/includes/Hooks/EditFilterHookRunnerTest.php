@@ -154,8 +154,6 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			array( 'EditFilterMergedContent' => array() )
 		);
 
-		$testCase = $this;
-
 		$hooks['EditFilterMergedContent'][] =
 			function(
 				IContextSource $context,
@@ -164,16 +162,16 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 				$summary,
 				User $user,
 				$minoredit
-			) use ( $testCase, $expected, $inputStatus )
+			) use ( $expected, $inputStatus )
 			{
-				$testCase->assertEquals( $expected['title'], $context->getTitle()->getFullText() );
-				$testCase->assertSame( $context->getTitle(), $context->getWikiPage()->getTitle() );
-				$testCase->assertEquals( $expected['namespace'], $context->getTitle()->getNamespace() );
-				$testCase->assertEquals( ItemContent::newEmpty(), $content );
-				$testCase->assertTrue( $status->isGood() );
-				$testCase->assertTrue( is_string( $summary ) );
-				$testCase->assertEquals( 'EditFilterHookRunnerTestUser', $user->getName() );
-				$testCase->assertTrue( is_bool( $minoredit ) );
+				$this->assertEquals( $expected['title'], $context->getTitle()->getFullText() );
+				$this->assertSame( $context->getTitle(), $context->getWikiPage()->getTitle() );
+				$this->assertEquals( $expected['namespace'], $context->getTitle()->getNamespace() );
+				$this->assertEquals( ItemContent::newEmpty(), $content );
+				$this->assertTrue( $status->isGood() );
+				$this->assertTrue( is_string( $summary ) );
+				$this->assertEquals( 'EditFilterHookRunnerTestUser', $user->getName() );
+				$this->assertTrue( is_bool( $minoredit ) );
 
 				//Change the status
 				$status->merge( $inputStatus );
