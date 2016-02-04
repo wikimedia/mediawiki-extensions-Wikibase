@@ -362,4 +362,40 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedList, $list->getWithLanguages( array( 'en', 'nl' ) ) );
 	}
 
+	public function testGivenEmptyTerms_constructorOnlyAddsNonEmptyTerms() {
+		$list = new TermList( array(
+			new Term( 'en', 'foo' ),
+			new Term( 'de', '' ),
+			new Term( 'nl', 'baz' ),
+			new Term( 'fr', '' ),
+		) );
+
+		$this->assertEquals(
+			array(
+				'en' => new Term( 'en', 'foo' ),
+				'nl' => new Term( 'nl', 'baz' ),
+			),
+			iterator_to_array( $list )
+		);
+	}
+
+	public function testGivenEmptyTerm_setTermDoesNotAddIt() {
+		$list = new TermList();
+		$list->setTerm( new Term( 'en', '' ) );
+
+		$this->assertEquals( new TermList(), $list );
+	}
+
+	public function testGivenEmptyTerm_setTermRemovesExistingOne() {
+		$list = new TermList();
+		$list->setTerm( new Term( 'en', 'foo' ) );
+		$list->setTerm( new Term( 'de', 'bar' ) );
+		$list->setTerm( new Term( 'en', '' ) );
+
+		$this->assertEquals(
+			new TermList( array( new Term( 'de', 'bar' ) ) ),
+			$list
+		);
+	}
+
 }
