@@ -31,17 +31,15 @@ use Wikibase\Lib\SnakFormatter;
 class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function newOutputFormatSnakFormatterFactory( $dataType = 'string' ) {
-		$self = $this;
-
 		$snakFormatterCallbacks = array(
-			'PT:commonsMedia' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->makeMockSnakFormatter( $format );
+			'PT:commonsMedia' => function( $format, FormatterOptions $options ) {
+				return $this->makeMockSnakFormatter( $format );
 			},
 		);
 
 		$valueFormatterCallbacks = array(
-			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
-				return $self->makeMockValueFormatter( $format );
+			'VT:string' => function( $format, FormatterOptions $options ) {
+				return $this->makeMockValueFormatter( $format );
 			},
 		);
 		$valueFormatterFactory = new OutputFormatValueFormatterFactory(
@@ -177,10 +175,9 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetSnakFormatter_languageOption() {
-		$self = $this;
 		$callbacks = array(
-			'VT:string' => function( $format, FormatterOptions $options ) use ( $self ) {
-				$self->assertSame( 'de', $options->getOption( ValueFormatter::OPT_LANG ) );
+			'VT:string' => function( $format, FormatterOptions $options ) {
+				$this->assertSame( 'de', $options->getOption( ValueFormatter::OPT_LANG ) );
 				return new StringFormatter( $options );
 			},
 		);
