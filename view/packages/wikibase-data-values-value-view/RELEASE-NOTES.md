@@ -4,6 +4,8 @@
 
 * Changed `ValueView` to take two `ValueFormatter` instances instead of a
   `ValueFormatterStore`
+* Changed `Expert::valueCharacteristics` definition so that it does not have to be
+  statically callable anymore
 
 ## 0.15.9 (2016-02-03)
 

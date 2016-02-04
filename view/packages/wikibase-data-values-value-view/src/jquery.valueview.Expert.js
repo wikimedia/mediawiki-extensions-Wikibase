@@ -235,13 +235,9 @@ jQuery.valueview = jQuery.valueview || {};
 			this._options = null;
 		},
 
-		// TODO: This should actually move out of here together with all the advanced input features
-		//  of certain experts (time/coordinate).
 		/**
 		 * Returns an object with characteristics specified for the value. The object can be used
 		 * as parser options definition.
-		 *
-		 * This method should allow to be called statically, i. e. without a useful `this` context.
 		 *
 		 * @return {Object}
 		 */

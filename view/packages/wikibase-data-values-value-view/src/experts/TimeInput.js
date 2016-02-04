@@ -172,8 +172,8 @@
 		 */
 		valueCharacteristics: function() {
 			var options = {},
-				precision = this.precisionRotator && this.precisionRotator.getValue() || null,
-				calendarUri = this.calendarRotator && this.calendarRotator.getValue() || null;
+				precision = this.precisionRotator.getValue() || null,
+				calendarUri = this.calendarRotator.getValue() || null;
 
 			if ( precision !== null ) {
 				options.precision = precision;

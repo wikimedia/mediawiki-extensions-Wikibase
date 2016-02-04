@@ -93,20 +93,6 @@ function testExpert( testDefinition ) {
 		} );
 	}
 
-	QUnit.test( 'valueCharacteristics static invocation', function( assert ) {
-		assert.expect( 1 );
-		assert.equal(
-			typeof Expert.prototype.valueCharacteristics(), 'object',
-			'valueCharacteristics returns an object if called statically' );
-	} );
-
-	expertCasesTestAndCleanup( 'valueCharacteristics non-static invocation', function( args, assert ) {
-		assert.expect( 1 );
-		assert.equal(
-			typeof args.expert.valueCharacteristics(), 'object',
-			'valueCharacteristics returns an object if called on an instance' );
-	} );
-
 	expertCasesTestAndCleanup( 'constructor', function( args, assert ) {
 		assert.expect( 3 );
 		assert.ok(

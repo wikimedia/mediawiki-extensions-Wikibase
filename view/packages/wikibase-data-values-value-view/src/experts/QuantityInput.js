@@ -56,7 +56,7 @@
 		 */
 		valueCharacteristics: function() {
 			var options = {
-				unit: this._unitSelector && this._unitSelector.getConceptUri() || null
+				unit: this._unitSelector.getConceptUri()
 			};
 
 			return options;

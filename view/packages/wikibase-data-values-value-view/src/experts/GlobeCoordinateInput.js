@@ -162,10 +162,6 @@
 		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
-			if ( !this.precisionRotator ) { // happens when called statically
-				return {};
-			}
-
 			var options = {},
 				precision = this.precisionRotator.getValue();
 
