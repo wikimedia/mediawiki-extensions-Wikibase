@@ -99,12 +99,10 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this_ = $this;
-
 		$badgeDisplay->expects( $this->any() )
 			->method( 'attachBadgesToOutput' )
-			->will( $this->returnCallback( function ( array $siteLinks, ParserOutput $parserOutput ) use ( $this_ ) {
-				$badges = $this_->linksToBadges( $siteLinks );
+			->will( $this->returnCallback( function ( array $siteLinks, ParserOutput $parserOutput ) {
+				$badges = $this->linksToBadges( $siteLinks );
 				$parserOutput->setExtensionData( 'wikibase_badges', $badges );
 			} ) );
 
