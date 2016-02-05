@@ -850,32 +850,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Handler for the ContentHandlerForModelID hook, implemented to create EntityHandler
-	 * instances that have knowledge of the necessary services.
-	 *
-	 * @param string $modelId
-	 * @param ContentHandler|null $handler
-	 *
-	 * @return bool
-	 */
-	public static function onContentHandlerForModelID( $modelId, &$handler ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		// FIXME: a mechanism for registering additional entity types needs to be put in place.
-		switch ( $modelId ) {
-			case CONTENT_MODEL_WIKIBASE_ITEM:
-				$handler = $wikibaseRepo->newItemHandler();
-				return false;
-
-			case CONTENT_MODEL_WIKIBASE_PROPERTY:
-				$handler = $wikibaseRepo->newPropertyHandler();
-				return false;
-
-			default:
-				return true;
-		}
-	}
-
-	/**
 	 * Adds a list of data value types to the action=query&meta=siteinfo API.
 	 *
 	 * @param ApiQuerySiteinfo $api

@@ -83,7 +83,7 @@ call_user_func( function() {
 	global $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
-	global $wgWBRepoDataTypes;
+	global $wgWBRepoDataTypes, $wgContentHandlers;
 
 	$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
 
@@ -110,6 +110,16 @@ call_user_func( function() {
 	// constants
 	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
+
+	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = function() {
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		return $wikibaseRepo->newItemHandler();
+	};
+
+	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = function() {
+		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+		return $wikibaseRepo->newPropertyHandler();
+	};
 
 	// rights
 	// names should be according to other naming scheme
@@ -243,7 +253,6 @@ call_user_func( function() {
 	$wgHooks['ContentModelCanBeUsedOn'][] = 'Wikibase\RepoHooks::onContentModelCanBeUsedOn';
 	$wgHooks['OutputPageBeforeHTML'][] = 'Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler::onOutputPageBeforeHTML';
 	$wgHooks['OutputPageBeforeHTML'][] = 'Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler::onOutputPageBeforeHtmlRegisterConfig';
-	$wgHooks['ContentHandlerForModelID'][] = 'Wikibase\RepoHooks::onContentHandlerForModelID';
 	$wgHooks['APIQuerySiteInfoGeneralInfo'][] = 'Wikibase\RepoHooks::onAPIQuerySiteInfoGeneralInfo';
 	$wgHooks['APIQuerySiteInfoStatisticsInfo'][] = 'Wikibase\RepoHooks::onAPIQuerySiteInfoStatisticsInfo';
 	$wgHooks['ImportHandleRevisionXMLTag'][] = 'Wikibase\RepoHooks::onImportHandleRevisionXMLTag';
