@@ -427,6 +427,7 @@
 	"apihelp-wbparsevalue-param-values": "Die zu parsenden Werte",
 	"apihelp-wbparsevalue-example-1": "Parst eine reine Zeichenfolge in ein StringValue-Objekt.",
 	"apihelp-wbremoveclaims-description": "Entfernt Wikibase-Behauptungen.",
+	"apihelp-wbremoveclaims-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur akzeptiert, falls der Benutzer der Gruppe „Bot“ angehört.",
 	"apihelp-wbremovequalifiers-description": "Entfernt einen Qualifikator von einer Behauptung.",
 	"apihelp-wbremovequalifiers-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur akzeptiert, falls der Benutzer der Gruppe „Bot“ angehört.",
 	"apihelp-wbremovereferences-description": "Entfernt eine oder mehrere Referenzen der gleichen Aussage.",

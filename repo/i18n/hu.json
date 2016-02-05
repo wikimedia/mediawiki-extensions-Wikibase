@@ -11,11 +11,12 @@
 			"Einstein2",
 			"Csega",
 			"Dj",
-			"Macofe"
+			"Macofe",
+			"Máté"
 		]
 	},
 	"wikibase-desc": "Strukturált adattár",
-	"wikibase-entity-item": "tétel",
+	"wikibase-entity-item": "elem",
 	"wikibase-entity-property": "tulajdonság",
 	"wikibase-entity-query": "lekérdezés",
 	"wikibase-edit": "szerkesztés",

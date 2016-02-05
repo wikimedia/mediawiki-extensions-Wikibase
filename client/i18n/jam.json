@@ -9,6 +9,9 @@
 	"wikibase-dataitem": "{{WBREPONAME}} aitem",
 	"wikibase-editlinks": "Edit lingk",
 	"wikibase-editlinkstitle": "Edit intalanguij lingk",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Shuo",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit",
+	"wikibase-otherprojects": "Adaels prajek"
 }

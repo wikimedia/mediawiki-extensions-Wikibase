@@ -50,7 +50,7 @@
 	"wikibase-error-invalid-entity-id": "მითითებული ID სისტემისთვის უცნობია. გთხოვთ, გამოიყენოთ მოქმედი ID.",
 	"unconnectedpages": "ელემენტებთან დაუკავშირებელი გვერდები",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|ენათშორისი ბმული}} გვერდზე)",
-	"wikibase-unconnectedpages-submit": "მიდი",
+	"wikibase-unconnectedpages-submit": "გვერდების ჩვენება",
 	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} ელემენტის ID",
 	"wikibase-pageinfo-entity-id-none": "არაფერი",
 	"wikibase-otherprojects": "სხვა პროექტები",

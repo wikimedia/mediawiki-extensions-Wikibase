@@ -22,7 +22,7 @@
 	"wikibase-linkitem-input-site": "ژبه:",
 	"wikibase-linkitem-input-page": "مخ:",
 	"wikibase-linkitem-confirmitem-button": "تاييدول",
-	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "پټول",
 	"wikibase-rc-hide-wikidata-show": "ښکاره کول",
 	"wikibase-rc-show-wikidata-pref": "په وروستي بدلونونو کې د {{WBREPONAME}} سمونونه ښکاره کول",

@@ -5,7 +5,8 @@
 			"JulesWinnfield-hu",
 			"Tacsipacsi",
 			"Grin",
-			"Dj"
+			"Dj",
+			"Máté"
 		]
 	},
 	"wikibase-lib-desc": "A Wikibase és a Wikibase kliens kiterjesztések közös funkcióit tartalmazza",
@@ -45,8 +46,9 @@
 	"wikibase-tooltip-error-details": "Részletek",
 	"wikibase-undeserializable-value": "Az érték érvénytelen és nem jeleníthető meg.",
 	"wikibase-validator-invalid": "Érvénytelen érték",
-	"datatypes-type-wikibase-item": "Tétel",
-	"datatypes-type-commonsMedia": "Commons médiafájl",
+	"datatypes-type-wikibase-item": "Elem",
+	"datatypes-type-wikibase-property": "Tulajdonság",
+	"datatypes-type-commonsMedia": "Commons-médiafájl",
 	"wikibase-entity-summary-wbsetitem": "Fogalom létrehozása",
 	"wikibase-entity-summary-wbcreateredirect": "Átirányítás ide: $4",
 	"wikibase-entity-summary-wbsetreference": "Forráshivatkozás hozzáadása",
