@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\UnionContentLanguages;
 
 /**
@@ -28,10 +29,10 @@ class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestGetLanguages() {
-		$empty = $this->getMockContentLanguages( array() );
-		$one = $this->getMockContentLanguages( array( 'one' ) );
-		$two = $this->getMockContentLanguages( array( 'one', 'two' ) );
-		$otherTwo = $this->getMockContentLanguages( array( 'three', 'four' ) );
+		$empty = new StaticContentLanguages( array() );
+		$one = new StaticContentLanguages( array( 'one' ) );
+		$two = new StaticContentLanguages( array( 'one', 'two' ) );
+		$otherTwo = new StaticContentLanguages( array( 'three', 'four' ) );
 
 		return array(
 			array( $empty, $empty, array() ),
@@ -54,10 +55,10 @@ class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestHasLanguage() {
-		$empty = $this->getMockContentLanguages( array() );
-		$one = $this->getMockContentLanguages( array( 'one' ) );
-		$two = $this->getMockContentLanguages( array( 'one', 'two' ) );
-		$otherTwo = $this->getMockContentLanguages( array( 'three', 'four' ) );
+		$empty = new StaticContentLanguages( array() );
+		$one = new StaticContentLanguages( array( 'one' ) );
+		$two = new StaticContentLanguages( array( 'one', 'two' ) );
+		$otherTwo = new StaticContentLanguages( array( 'three', 'four' ) );
 
 		return array(
 			array( $empty, $empty, 'one', false ),
@@ -71,14 +72,6 @@ class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {
 			array( $two, $otherTwo, 'three', true ),
 			array( $two, $otherTwo, 'four', true ),
 		);
-	}
-
-	private function getMockContentLanguages( $languages ) {
-		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$contentLanguages->expects( $this->any() )
-			->method( 'getLanguages' )
-			->will( $this->returnValue( $languages ) );
-		return $contentLanguages;
 	}
 
 }
