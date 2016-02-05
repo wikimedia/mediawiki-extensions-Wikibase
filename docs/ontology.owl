@@ -177,6 +177,13 @@
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
 
+  <owl:NamedIndividual rdf:about="&wikibase;ExternalId">
+      <rdfs:label>WikibaseExternalId</rdfs:label>
+      <rdfs:comment>Type for referring to ID defined by external authority.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+
   <!--
   ///////////////////////////////////////////////////////////////////////////////////////
   //
