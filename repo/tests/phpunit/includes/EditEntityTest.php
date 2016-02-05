@@ -11,7 +11,6 @@ use RequestContext;
 use Status;
 use Title;
 use User;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -124,7 +123,7 @@ class EditEntityTest extends MediaWikiTestCase {
 
 	/**
 	 * @param MockRepository $mockRepository
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param EntityTitleLookup $titleLookup
 	 * @param User|null $user
 	 * @param bool $baseRevId
@@ -136,7 +135,7 @@ class EditEntityTest extends MediaWikiTestCase {
 	 */
 	private function makeEditEntity(
 		MockRepository $mockRepository,
-		Entity $entity,
+		EntityDocument $entity,
 		EntityTitleLookup $titleLookup,
 		User $user = null,
 		$baseRevId = false,
