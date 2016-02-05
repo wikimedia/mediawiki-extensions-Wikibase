@@ -7,6 +7,9 @@ use Language;
 /**
  * Provide languages supported as content languages based on MediaWiki's Language class.
  *
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
  */

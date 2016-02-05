@@ -5,6 +5,9 @@ namespace Wikibase\Lib;
 /**
  * Provide languages supported as content languages based on a list
  *
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class StaticContentLanguages implements ContentLanguages {
