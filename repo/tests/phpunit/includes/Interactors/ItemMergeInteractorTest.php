@@ -7,7 +7,6 @@ use HashSiteStore;
 use Status;
 use TestSites;
 use User;
-use WatchedItem;
 use WatchedItemStore;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -336,20 +335,15 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			$ignoreConflicts = explode( '|', $ignoreConflicts );
 		}
 
-		if ( class_exists( 'WatchedItemStore' ) ) {
-			$store = WatchedItemStore::getDefaultInstance();
-			$store->addWatch(
-				User::newFromName( 'UTSysop' ),
-				$this->getEntityTitleLookup()->getTitleForId( $fromId )->getSubjectPage()
-			);
-			$store->addWatch(
-				User::newFromName( 'UTSysop' ),
-				$this->getEntityTitleLookup()->getTitleForId( $fromId )->getTalkPage()
-			);
-		} else {
-			$watchedItem = $this->getWatchedItemForId( $fromId );
-			$watchedItem->addWatch();
-		}
+		$store = WatchedItemStore::getDefaultInstance();
+		$store->addWatch(
+			User::newFromName( 'UTSysop' ),
+			$this->getEntityTitleLookup()->getTitleForId( $fromId )->getSubjectPage()
+		);
+		$store->addWatch(
+			User::newFromName( 'UTSysop' ),
+			$this->getEntityTitleLookup()->getTitleForId( $fromId )->getTalkPage()
+		);
 
 		$interactor->mergeItems( $fromId, $toId, $ignoreConflicts, 'CustomSummary' );
 
@@ -384,25 +378,14 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	}
 
 	private function assertItemMergedIntoIsWatched( ItemId $toId ) {
-		if ( class_exists( 'WatchedItemStore' ) ) {
-			$isWatched = WatchedItemStore::getDefaultInstance()->isWatched(
-				User::newFromName( 'UTSysop' ),
-				$this->getEntityTitleLookup()->getTitleForId( $toId )
-			);
-		} else {
-			$isWatched = $this->getWatchedItemForId( $toId )->isWatched();
-		}
+		$isWatched = WatchedItemStore::getDefaultInstance()->isWatched(
+			User::newFromName( 'UTSysop' ),
+			$this->getEntityTitleLookup()->getTitleForId( $toId )
+		);
 
 		$this->assertTrue(
 			$isWatched,
 			'Item merged into is being watched'
-		);
-	}
-
-	private function getWatchedItemForId( ItemId $itemId ) {
-		return WatchedItem::fromUserTitle(
-			User::newFromName( 'UTSysop' ),
-			$this->getEntityTitleLookup()->getTitleForId( $itemId )
 		);
 	}
 
