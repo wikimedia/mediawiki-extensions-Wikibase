@@ -8,7 +8,6 @@ use Revision;
 use UsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -107,8 +106,8 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 			foreach ( $item->getStatements()->toArray() as $statement ) {
 				$value = new StringValue( 'Kittens.png' );
 				$argLists[] = array(
-					'entity' => $item,
-					'claimGuid' => $statement->getGuid(),
+					'itemId' => $item->getId(),
+					'guid' => $statement->getGuid(),
 					'value' => $value->getArrayValue(),
 					'expectedSummary' => $this->getExpectedSummary( $statement, $value )
 				);
@@ -120,11 +119,12 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function doTestValidRequest( Entity $entity, $guid, $value, $expectedSummary ) {
+	public function doTestValidRequest( ItemId $itemId, $guid, $value, $expectedSummary ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityLookup = $wikibaseRepo->getEntityLookup();
-		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
-		$claimCount = count( $obtainedEntity->getClaims() );
+		/** @var Item $obtainedEntity */
+		$obtainedEntity = $entityLookup->getEntity( $itemId );
+		$statementCount = $obtainedEntity->getStatements()->count();
 
 		$params = array(
 			'action' => 'wbsetclaimvalue',
@@ -144,15 +144,19 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$this->assertEquals( $value, $claim['mainsnak']['datavalue']['value'] );
 
 		/** @var StatementListProvider $obtainedEntity */
-		$obtainedEntity = $entityLookup->getEntity( $entity->getId() );
+		$obtainedEntity = $entityLookup->getEntity( $itemId );
 
-		$page = new WikiPage( $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $entity->getId() ) );
+		$page = new WikiPage( $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $itemId ) );
 		$generatedSummary = $page->getRevision()->getComment( Revision::RAW );
 		$this->assertEquals( $expectedSummary, $generatedSummary, 'Summary mismatch' );
 
 		$statements = $obtainedEntity->getStatements();
 
-		$this->assertEquals( $claimCount, $statements->count(), 'Claim count should not change after doing a setclaimvalue request' );
+		$this->assertSame(
+			$statementCount,
+			$statements->count(),
+			'Statement count should not change after doing a setclaimvalue request'
+		);
 
 		$obtainedClaim = $statements->getFirstStatementWithGuid( $guid );
 

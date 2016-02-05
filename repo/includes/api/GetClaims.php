@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -102,8 +103,8 @@ class GetClaims extends ApiBase {
 		);
 		$entity = $entityRevision->getEntity();
 
-		$claims = $this->getClaims( $entity, $guid );
-		$this->resultBuilder->addStatements( $claims, null, $params['props'] );
+		$statements = $this->getStatements( $entity, $guid );
+		$this->resultBuilder->addStatements( $statements, null, $params['props'] );
 	}
 
 	private function validateParameters( array $params ) {
@@ -119,21 +120,21 @@ class GetClaims extends ApiBase {
 	 * @param EntityDocument $entity
 	 * @param string|null $guid
 	 *
-	 * @return Statement[]
+	 * @return StatementList
 	 */
-	private function getClaims( EntityDocument $entity, $guid = null ) {
+	private function getStatements( EntityDocument $entity, $guid = null ) {
 		if ( !( $entity instanceof StatementListProvider ) ) {
-			return array();
+			return new StatementList();
 		}
 
 		$statements = $entity->getStatements();
 
 		if ( $guid === null ) {
-			return $statements->filter( $this->newRequestParamsBasedFilter() )->toArray();
+			return $statements->filter( $this->newRequestParamsBasedFilter() );
 		}
 
 		$statement = $statements->getFirstStatementWithGuid( $guid );
-		return $statement === null ? array() : array( $statement );
+		return new StatementList( $statement === null ? array() : $statement );
 	}
 
 	private function newRequestParamsBasedFilter() {
