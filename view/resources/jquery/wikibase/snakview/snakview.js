@@ -705,7 +705,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 			propertyId = this.value().property;
 
 		if ( this.options.locked.property
-			&& ( this.$property.contents().length || this.options.drawProperty )
+			&& ( this.$property.contents().length || !this.options.drawProperty )
 		) {
 			return deferred.resolve().promise();
 		}
