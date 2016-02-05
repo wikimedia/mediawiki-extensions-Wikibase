@@ -10,12 +10,12 @@ namespace Wikibase\Lib;
 class UnionContentLanguages implements ContentLanguages {
 
 	/**
-	 * @var ContentLanguages $a
+	 * @var ContentLanguages
 	 */
 	private $a;
 
 	/**
-	 * @var ContentLanguages $b
+	 * @var ContentLanguages
 	 */
 	private $b;
 

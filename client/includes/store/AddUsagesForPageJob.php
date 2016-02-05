@@ -39,7 +39,7 @@ class AddUsagesForPageJob extends Job {
 	private $usageUpdater;
 
 	/**
-	 * @var EntityIdParser $idParser
+	 * @var EntityIdParser
 	 */
 	private $idParser;
 
