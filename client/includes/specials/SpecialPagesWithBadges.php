@@ -212,6 +212,7 @@ class SpecialPagesWithBadges extends QueryPage {
 	 * @return string
 	 */
 	public function formatResult( $skin, $result ) {
+		// FIXME: This should use a TitleFactory.
 		$title = Title::newFromID( $result->value );
 		$out = Linker::linkKnown( $title );
 
