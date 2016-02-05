@@ -74,6 +74,8 @@ return array(
 		return $GLOBALS['wgRightsText'];
 	},
 
+	'sparqlEndpoint' => null,
+
 	'transformLegacyFormatOnExport' => true,
 
 	'conceptBaseUri' => function() {
