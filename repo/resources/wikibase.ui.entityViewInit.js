@@ -6,6 +6,7 @@
  */
 ( function( $, mw, wb, dataTypeStore, getExpertsStore, getFormatterStore, getParserStore, performance ) {
 	'use strict';
+	wb._performanceMark = new wikibase.performance.Mark();
 
 	/**
 	 * @param {jQuery} $entityview
@@ -122,7 +123,8 @@
 				},
 				parserStore,
 				userLanguages,
-				repoApiUrl
+				repoApiUrl,
+				wb._performanceMark
 			);
 
 		var entityView = viewFactory.getEntityView( entity, $entityview );
@@ -333,16 +335,23 @@
 		} );
 	}
 
+	function displayPerformanceNotification() {
+		if ( mw.config.get( 'debug' ) === false && location.hash !== '#performance' ) {
+			return;
+		}
+
+		mw.loader.using( ['wikibase.performance.Statistic'] ).done( function() {
+			var stat = new wikibase.performance.Statistic( wb._performanceMark.getAllMarks() );
+			mw.notify( stat.getHtml(), { autoHide: false, type: 'warn' } );
+		} );
+	}
+
 	mw.hook( 'wikipage.content' ).add( function() {
 		if ( mw.config.get( 'wbEntity' ) === null ) {
 			return;
 		}
 
-		// This is copied from startup.js in MediaWiki core.
-		var mwPerformance = window.performance && performance.mark ? performance : {
-			mark: function() {}
-		};
-		mwPerformance.mark( 'wbInitStart' );
+		wb._performanceMark.addStart( 'wbInit' );
 
 		var $entityview = $( '.wikibase-entityview' );
 		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
@@ -361,7 +370,7 @@
 				attachWatchLinkUpdater( $entityview, viewName );
 			}
 
-			mwPerformance.mark( 'wbInitEnd' );
+			wb._performanceMark.addEnd( 'wbInit' );
 		} );
 
 		if ( canEdit ) {
@@ -389,6 +398,8 @@
 
 			attachCopyrightTooltip( $entityview );
 		}
+
+		displayPerformanceNotification();
 	} );
 
 } )(
