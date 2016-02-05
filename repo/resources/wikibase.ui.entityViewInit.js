@@ -337,12 +337,7 @@
 		if ( mw.config.get( 'wbEntity' ) === null ) {
 			return;
 		}
-
-		// This is copied from startup.js in MediaWiki core.
-		var mwPerformance = window.performance && performance.mark ? performance : {
-			mark: function() {}
-		};
-		mwPerformance.mark( 'wbInitStart' );
+		wikibase.performance.Mark( 'wbInitStart' );
 
 		var $entityview = $( '.wikibase-entityview' );
 		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
@@ -361,7 +356,7 @@
 				attachWatchLinkUpdater( $entityview, viewName );
 			}
 
-			mwPerformance.mark( 'wbInitEnd' );
+			wikibase.performance.Mark( 'wbInitEnd' );
 		} );
 
 		if ( canEdit ) {
