@@ -4,16 +4,11 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseBase;
 use DatabaseUpdater;
-use HashBagOStuff;
 use MWException;
 use Wikibase\Store;
 use Wikibase\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
-use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -190,22 +185,15 @@ class DatabaseSchemaUpdater {
 			}
 		);
 
-		$table = new PropertyInfoTable( false );
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
-		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
-
-		$wikiPageEntityLookup = new WikiPageEntityRevisionLookup(
-			$contentCodec,
-			new WikiPageEntityMetaDataLookup( $wikibaseRepo->getEntityIdParser() ),
-			false
+		$builder = new PropertyInfoTableBuilder(
+			new PropertyInfoTable( false ),
+			$wikibaseRepo->getEntityLookup(),
+			$wikibaseRepo->newPropertyInfoBuilder(),
+			$wikibaseRepo->getStore()->getPropertyInfoStore()
 		);
 
-		$cachingEntityLookup = new CachingEntityRevisionLookup( $wikiPageEntityLookup, new HashBagOStuff() );
-		$entityLookup = new RevisionBasedEntityLookup( $cachingEntityLookup );
-
-		$builder = new PropertyInfoTableBuilder( $table, $entityLookup, $propertyInfoBuilder );
 		$builder->setReporter( $reporter );
 		$builder->setUseTransactions( false );
 
