@@ -6,19 +6,22 @@ namespace Wikibase\Lib;
  * Provide languages supported as content languages by removing values in one ContentLanguages
  * from another ContentLanguages
  *
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class DifferenceContentLanguages implements ContentLanguages {
 
 	/**
-	 * @var ContentLanguages $a
+	 * @var ContentLanguages
 	 */
-	private $a;
+	private $all;
 
 	/**
-	 * @var ContentLanguages $b
+	 * @var ContentLanguages
 	 */
-	private $b;
+	private $excluded;
 
 	/**
 	 * @var string[]|null Array of language codes
@@ -26,12 +29,12 @@ class DifferenceContentLanguages implements ContentLanguages {
 	private $languageCodes = null;
 
 	/**
-	 * @param ContentLanguages $a
-	 * @param ContentLanguages $b
+	 * @param ContentLanguages $all
+	 * @param ContentLanguages $excluded
 	 */
-	public function __construct( ContentLanguages $a, ContentLanguages $b ) {
-		$this->a = $a;
-		$this->b = $b;
+	public function __construct( ContentLanguages $all, ContentLanguages $excluded ) {
+		$this->all = $all;
+		$this->excluded = $excluded;
 	}
 
 	/**
@@ -55,7 +58,9 @@ class DifferenceContentLanguages implements ContentLanguages {
 	 */
 	private function getLanguageCodes() {
 		if ( $this->languageCodes === null ) {
-			$this->languageCodes = array_values( array_diff( $this->a->getLanguages(), $this->b->getLanguages() ) );
+			$this->languageCodes = array_values(
+				array_diff( $this->all->getLanguages(), $this->excluded->getLanguages() )
+			);
 		}
 
 		return $this->languageCodes;
