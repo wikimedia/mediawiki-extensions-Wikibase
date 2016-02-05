@@ -1,6 +1,9 @@
 <?php
+
 /**
- * @license GNU GPL v2+
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @codeCoverageIgnoreStart

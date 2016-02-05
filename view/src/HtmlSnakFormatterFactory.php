@@ -8,7 +8,10 @@ use Wikibase\Lib\SnakFormatter;
 
 /**
  * A factory constructing SnakFormatters that output HTML.
+ *
  * @since 0.5
+ *
+ * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 interface HtmlSnakFormatterFactory {

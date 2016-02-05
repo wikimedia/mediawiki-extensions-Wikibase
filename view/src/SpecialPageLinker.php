@@ -5,6 +5,9 @@ namespace Wikibase\View;
 /**
  * A service returning a URL for a specific special page with optional parameters.
  *
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 interface SpecialPageLinker {

@@ -3,7 +3,9 @@
 namespace Wikibase\View\Template;
 
 /**
- * @license GNU GPL v2+
+ * @since 0.5
+ *
+ * @licence GNU GPL v2+
  * @author Adrian Lang < adrian.lang@wikimedia.de >
  * @author Thiemo Mättig
  */
