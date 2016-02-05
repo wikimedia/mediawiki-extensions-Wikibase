@@ -11,7 +11,7 @@ use RequestContext;
 use Status;
 use Title;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
@@ -53,7 +53,7 @@ class EditEntity {
 	/**
 	 * The modified entity we are trying to save
 	 *
-	 * @var Entity|null
+	 * @var EntityDocument|null
 	 */
 	private $newEntity = null;
 
@@ -161,7 +161,7 @@ class EditEntity {
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
-	 * @param Entity $newEntity the new entity object
+	 * @param EntityDocument $newEntity the new entity object
 	 * @param User $user the user performing the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner
 	 * @param int|bool $baseRevId the base revision ID for conflict checking.
@@ -180,7 +180,7 @@ class EditEntity {
 		EntityRevisionLookup $entityLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
-		Entity $newEntity,
+		EntityDocument $newEntity,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
 		$baseRevId = false,
@@ -220,7 +220,7 @@ class EditEntity {
 	 * Returns the new entity object to be saved. May be different from the entity supplied
 	 * to the constructor in case the entity was patched to resolve edit conflicts.
 	 *
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	public function getNewEntity() {
 		return $this->newEntity;
@@ -434,12 +434,12 @@ class EditEntity {
 		if ( $patch->isEmpty() ) {
 			// we didn't technically fix anything, but if there is nothing to change,
 			// so just keep the current content as it is.
-			$this->newEntity = $latestRev->getEntity()->copy();
+			$this->newEntity = unserialize( serialize( $latestRev->getEntity() ) );
 			return true;
 		}
 
 		// apply the patch( base -> new ) to the latest revision.
-		$patchedLatest = $latestRev->getEntity()->copy();
+		$patchedLatest = unserialize( serialize( $latestRev->getEntity() ) );
 		$entityPatcher->patchEntity( $patchedLatest, $patch );
 
 		// detect conflicts against latest revision

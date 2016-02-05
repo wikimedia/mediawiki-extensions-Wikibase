@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use IContextSource;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -75,7 +75,7 @@ class EditEntityFactory {
 
 	/**
 	 * @param User $user the user performing the edit
-	 * @param Entity $entity the new entity object
+	 * @param EntityDocument $entity the new entity object
 	 * @param int|bool $baseRevId the base revision ID for conflict checking.
 	 *        Defaults to false, disabling conflict checks.
 	 *        `true` can be used to set the base revision to the latest revision:
@@ -85,7 +85,7 @@ class EditEntityFactory {
 	 *
 	 * @return EditEntity
 	 */
-	public function newEditEntity( User $user, Entity $entity, $baseRevId = false ) {
+	public function newEditEntity( User $user, EntityDocument $entity, $baseRevId = false ) {
 		return new EditEntity(
 			$this->titleLookup,
 			$this->entityRevisionLookup,
