@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_f146fd53",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-05T12:19:52Z",
+      "side": 1,
+      "message": "The initialization is not needed.",
+      "revId": "1984d0dd26fc665919caee12d856f0479e365a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9158e936",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-05T12:19:52Z",
+      "side": 1,
+      "message": "|null",
+      "revId": "1984d0dd26fc665919caee12d856f0479e365a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_716a0db3",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-05T12:19:52Z",
+      "side": 1,
+      "message": "This is never called without the 2nd parameter.",
+      "revId": "1984d0dd26fc665919caee12d856f0479e365a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d1a42107",
+        "filename": "client/includes/Changes/WikiPageUpdater.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-05T12:19:52Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this mention \"purge\"?",
+      "revId": "1984d0dd26fc665919caee12d856f0479e365a33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
