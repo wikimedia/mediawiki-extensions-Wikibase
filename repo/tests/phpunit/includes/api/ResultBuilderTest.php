@@ -18,6 +18,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -1038,7 +1039,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
-		$resultBuilder->addStatements( array( $statement ), $path );
+		$resultBuilder->addStatements( new StatementList( $statement ), $path );
 
 		$data = $result->getResultData();
 
@@ -1085,7 +1086,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$props = array();
 
 		$resultBuilder = $this->getResultBuilder( $result );
-		$resultBuilder->addStatements( array( $statement ), $path, $props );
+		$resultBuilder->addStatements( new StatementList( $statement ), $path, $props );
 
 		$data = $result->getResultData();
 

@@ -23,6 +23,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -562,9 +563,9 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 */
-	private function buildResult( Entity $entity ) {
+	private function buildResult( EntityDocument $entity ) {
 		$builder = $this->getResultBuilder();
 
 		if ( $entity instanceof FingerprintProvider ) {
@@ -579,7 +580,9 @@ class EditEntity extends ModifyEntity {
 			$builder->addSiteLinkList( $entity->getSiteLinkList(), 'entity' );
 		}
 
-		$builder->addStatements( $entity->getClaims(), 'entity' );
+		if ( $entity instanceof StatementListProvider ) {
+			$builder->addStatements( $entity->getStatements(), 'entity' );
+		}
 	}
 
 	/**

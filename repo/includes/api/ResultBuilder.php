@@ -812,14 +812,14 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Statement[] $statements the labels to set in the result
+	 * @param StatementList $statements the labels to set in the result
 	 * @param array|string $path where the data is located
 	 * @param array|string $props a list of fields to include, or "all"
 	 */
-	public function addStatements( array $statements, $path, $props = 'all' ) {
+	public function addStatements( StatementList $statements, $path, $props = 'all' ) {
 		$serializer = $this->serializerFactory->newStatementListSerializer();
 
-		$values = $serializer->serialize( new StatementList( $statements ) );
+		$values = $serializer->serialize( $statements );
 
 		if ( is_array( $props ) && !in_array( 'references', $props ) ) {
 			$values = $this->modifier->modifyUsingCallback(
