@@ -39,6 +39,7 @@
 	 *        Required for showing the user interface in the correct language and for showing terms
 	 *        in all languages requested by the user.
 	 * @param {string|null} [vocabularyLookupApiUrl=null]
+	 * @param {Object} performanceMark
 	 */
 	var SELF = MODULE.ViewFactory = function ViewFactory(
 		contentLanguages,
@@ -52,7 +53,8 @@
 		messageProvider,
 		parserStore,
 		userLanguages,
-		vocabularyLookupApiUrl
+		vocabularyLookupApiUrl,
+		performanceMark
 	) {
 		this._contentLanguages = contentLanguages;
 		this._dataTypeStore = dataTypeStore;
