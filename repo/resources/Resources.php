@@ -105,7 +105,8 @@ return call_user_func( function() {
 				'wikibase.store.CachingEntityStore',
 				'wikibase.store.CombiningEntityStore',
 				'wikibase.view.ViewFactory',
-				'wikibase.WikibaseContentLanguages'
+				'wikibase.WikibaseContentLanguages',
+				'wikibase.performance.Mark',
 			),
 			'messages' => array(
 				'pagetitle',
@@ -158,6 +159,7 @@ return call_user_func( function() {
 		$modules,
 		include __DIR__ . '/experts/resources.php',
 		include __DIR__ . '/formatters/resources.php',
-		include __DIR__ . '/parsers/resources.php'
+		include __DIR__ . '/parsers/resources.php',
+		include __DIR__ . '/performance/resources.php'
 	);
 } );
