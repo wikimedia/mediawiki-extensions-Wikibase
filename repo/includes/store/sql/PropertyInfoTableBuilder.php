@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Reporting\MessageReporter;
+use Wikibase\PropertyInfoStore;
 
 /**
  * Utility class for rebuilding the wb_property_info table.
@@ -32,6 +33,11 @@ class PropertyInfoTableBuilder {
 	 * @var PropertyInfoBuilder
 	 */
 	private $propertyInfoBuilder;
+
+	/**
+	 * @var PropertyInfoStore
+	 */
+	private $propertyInfoStore;
 
 	/**
 	 * @var MessageReporter|null
@@ -68,15 +74,18 @@ class PropertyInfoTableBuilder {
 	 * @param PropertyInfoTable $propertyInfoTable
 	 * @param EntityLookup $entityLookup
 	 * @param PropertyInfoBuilder $propertyInfoBuilder
+	 * @param PropertyInfoStore $propertyInfoStore PropertyInfoTable or caching instance.
 	 */
 	public function __construct(
 		PropertyInfoTable $propertyInfoTable,
 		EntityLookup $entityLookup,
-		PropertyInfoBuilder $propertyInfoBuilder
+		PropertyInfoBuilder $propertyInfoBuilder,
+		PropertyInfoStore $propertyInfoStore
 	) {
 		$this->propertyInfoTable = $propertyInfoTable;
 		$this->entityLookup = $entityLookup;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
+		$this->propertyInfoStore = $propertyInfoStore;
 	}
 
 	/**
@@ -254,7 +263,8 @@ class PropertyInfoTableBuilder {
 
 		$info = $this->propertyInfoBuilder->buildPropertyInfo( $property );
 
-		$this->propertyInfoTable->setPropertyInfo(
+		// update PropertyInfoStore, which might have caching that needs invalidation.
+		$this->propertyInfoStore->setPropertyInfo(
 			$property->getId(),
 			$info
 		);
