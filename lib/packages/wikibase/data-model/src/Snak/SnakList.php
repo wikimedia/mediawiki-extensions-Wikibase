@@ -29,8 +29,6 @@ class SnakList extends HashArray {
 	}
 
 	/**
-	 * @see Snaks::hasSnakHash
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $snakHash
@@ -42,8 +40,6 @@ class SnakList extends HashArray {
 	}
 
 	/**
-	 * @see Snaks::removeSnakHash
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $snakHash
@@ -53,8 +49,6 @@ class SnakList extends HashArray {
 	}
 
 	/**
-	 * @see Snaks::addSnak
-	 *
 	 * @since 0.1
 	 *
 	 * @param Snak $snak
@@ -66,8 +60,6 @@ class SnakList extends HashArray {
 	}
 
 	/**
-	 * @see Snaks::hasSnak
-	 *
 	 * @since 0.1
 	 *
 	 * @param Snak $snak
@@ -79,8 +71,6 @@ class SnakList extends HashArray {
 	}
 
 	/**
-	 * @see Snaks::removeSnak
-	 *
 	 * @since 0.1
 	 *
 	 * @param Snak $snak
@@ -90,8 +80,6 @@ class SnakList extends HashArray {
 	}
 
 	/**
-	 * @see Snaks::getSnak
-	 *
 	 * @since 0.1
 	 *
 	 * @param string $snakHash
