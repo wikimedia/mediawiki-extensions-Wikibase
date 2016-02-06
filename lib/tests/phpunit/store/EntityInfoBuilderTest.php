@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -31,7 +31,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return Entity[]
+	 * @return EntityDocument[]
 	 */
 	protected function getKnownEntities() {
 		$q1 = new Item( new ItemId( 'Q1' ) );

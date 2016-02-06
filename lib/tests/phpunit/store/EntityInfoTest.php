@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\GenericEntityInfoBuilder;
 class EntityInfoTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @param Entity[] $entities
+	 * @param EntityDocument[] $entities
 	 *
 	 * @return EntityInfo
 	 */
