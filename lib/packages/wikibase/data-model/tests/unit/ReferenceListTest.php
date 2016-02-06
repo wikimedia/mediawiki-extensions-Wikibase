@@ -372,41 +372,4 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse( $references->isEmpty() );
 	}
 
-	public function testGivenNonEmptyListWithForwardedIterator_isNotEmpty() {
-		$references = new ReferenceList();
-		$references->addNewReference( new PropertyNoValueSnak( 1 ) );
-		$references->next();
-
-		$this->assertFalse( $references->valid(), 'post condition' );
-		$this->assertFalse( $references->isEmpty() );
-		$this->assertFalse( $references->valid(), 'pre condition' );
-	}
-
-	public function testRemoveDuplicates_noDuplicatesPresent() {
-		$list = new ReferenceList();
-
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 1 ) ) ) );
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) );
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 3 ) ) ) );
-
-		$list->removeDuplicates();
-
-		$this->assertEquals( 3, count( $list ) );
-	}
-
-	public function testRemoveDuplicates_duplicatesGetRemoved() {
-		$list = new ReferenceList();
-
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 1 ) ) ) );
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) );
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 3 ) ) ) );
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 1 ) ) ) );
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 2 ) ) ) );
-		$list->attach( new Reference( array( new PropertyNoValueSnak( 4 ) ) ) );
-
-		$list->removeDuplicates();
-
-		$this->assertEquals( 4, count( $list ) );
-	}
-
 }
