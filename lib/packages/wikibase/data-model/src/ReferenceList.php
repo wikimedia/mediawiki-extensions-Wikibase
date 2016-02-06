@@ -255,29 +255,6 @@ class ReferenceList extends SplObjectStorage implements Comparable {
 	}
 
 	/**
-	 * Removes duplicates bases on hash value.
-	 *
-	 * @since 0.2
-	 */
-	public function removeDuplicates() {
-		$knownHashes = array();
-
-		/**
-		 * @var Hashable $hashable
-		 */
-		foreach ( iterator_to_array( $this ) as $hashable ) {
-			$hash = $hashable->getHash();
-
-			if ( in_array( $hash, $knownHashes ) ) {
-				$this->detach( $hashable );
-			}
-			else {
-				$knownHashes[] = $hash;
-			}
-		}
-	}
-
-	/**
 	 * The hash is purely valuer based. Order of the elements in the array is not held into account.
 	 *
 	 * @since 0.3
