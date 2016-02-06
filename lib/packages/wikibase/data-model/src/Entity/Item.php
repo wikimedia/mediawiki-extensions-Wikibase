@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Entity;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use Wikibase\DataModel\Claim\Claims;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\Statement;
@@ -308,15 +307,6 @@ class Item extends Entity implements StatementListHolder {
 	 */
 	public function getClaims() {
 		return $this->statements->toArray();
-	}
-
-	/**
-	 * @deprecated since 1.0, use setStatements instead
-	 *
-	 * @param Claims $claims
-	 */
-	public function setClaims( Claims $claims ) {
-		$this->statements = new StatementList( iterator_to_array( $claims ) );
 	}
 
 	/**
