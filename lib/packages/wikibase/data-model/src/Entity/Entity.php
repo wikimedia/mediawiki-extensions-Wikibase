@@ -314,16 +314,6 @@ abstract class Entity implements Comparable, FingerprintHolder, EntityDocument {
 	}
 
 	/**
-	 * @since 0.3
-	 * @deprecated since 1.0, use getStatements()->toArray() instead.
-	 *
-	 * @return Statement[]
-	 */
-	public function getClaims() {
-		return array();
-	}
-
-	/**
 	 * Removes all content from the Entity.
 	 * The id is not part of the content.
 	 *

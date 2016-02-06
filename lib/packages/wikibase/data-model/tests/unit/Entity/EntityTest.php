@@ -398,16 +398,6 @@ abstract class EntityTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $entity->getId(), $instance->getId() );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 * @param Entity $entity
-	 */
-	public function testGetClaims( Entity $entity ) {
-		$claims = $entity->getClaims();
-
-		$this->assertInternalType( 'array', $claims );
-	}
-
 	public function testWhenNoStuffIsSet_getFingerprintReturnsEmptyFingerprint() {
 		$entity = $this->getNewEmpty();
 
