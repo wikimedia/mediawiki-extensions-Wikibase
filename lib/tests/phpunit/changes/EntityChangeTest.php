@@ -7,7 +7,7 @@ use Diff\DiffOp\DiffOpAdd;
 use RecentChange;
 use Revision;
 use stdClass;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -63,13 +63,13 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$entities = array_filter(
 			TestChanges::getEntities(),
-			function( Entity $entity ) use ( $entityClass ) {
+			function( EntityDocument $entity ) use ( $entityClass ) {
 				return is_a( $entity, $entityClass );
 			}
 		);
 
 		$cases = array_map(
-			function( Entity $entity ) {
+			function( EntityDocument $entity ) {
 				return array( $entity );
 			},
 			$entities

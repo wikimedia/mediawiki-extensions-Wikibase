@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChangeRow;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -277,6 +278,9 @@ final class TestChanges {
 		return $diffs;
 	}
 
+	/**
+	 * @return EntityDocument[]
+	 */
 	public static function getEntities() {
 		$entityList = array();
 
