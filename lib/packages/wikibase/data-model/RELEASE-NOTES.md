@@ -2,7 +2,7 @@
 
 ## Version 5.0.0 (alpha)
 
-* Removed `WIKIBASE_DATAMODEL_VERSION` constant.
+* Removed `Claims` class (deprecated since 1.0)
 
 ## Version 4.4.0 (2016-01-20)
 
