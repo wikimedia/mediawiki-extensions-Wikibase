@@ -14,10 +14,10 @@ use OutOfBoundsException;
 use UsageException;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\WikibaseRepo;
@@ -110,20 +110,21 @@ class SetClaim extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
-		$claim = $this->getClaimFromParams( $params );
-		$guid = $claim->getGuid();
+		$statement = $this->getStatementFromParams( $params );
+		$guid = $statement->getGuid();
 
 		if ( $guid === null ) {
 			$this->errorReporter->dieError( 'GUID must be set when setting a claim', 'invalid-claim' );
 		}
 
 		try {
-			$claimGuid = $this->guidParser->parse( $guid );
+			$statementGuid = $this->guidParser->parse( $guid );
 		} catch ( StatementGuidParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-claim' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
-		$entityId = $claimGuid->getEntityId();
+		$entityId = $statementGuid->getEntityId();
 		if ( isset( $params['baserevid'] ) ) {
 			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
 				$entityId,
@@ -134,10 +135,15 @@ class SetClaim extends ApiBase {
 		}
 		$entity = $entityRevision->getEntity();
 
-		$summary = $this->getSummary( $params, $claim, $entity );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			$this->errorReporter->dieError( 'The given entity cannot contain statements', 'not-supported' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		}
+
+		$summary = $this->getSummary( $params, $statement, $entity->getStatements() );
 
 		$changeop = $this->statementChangeOpFactory->newSetStatementOp(
-			$claim,
+			$statement,
 			isset( $params['index'] ) ? $params['index'] : null
 		);
 
@@ -146,31 +152,27 @@ class SetClaim extends ApiBase {
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
-		$this->resultBuilder->addStatement( $claim );
+		$this->resultBuilder->addStatement( $statement );
 	}
 
 	/**
 	 * @param array $params
 	 * @param Statement $statement
-	 * @param Entity $entity
+	 * @param StatementList $statementList
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Summary
 	 *
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
-	private function getSummary( array $params, Statement $statement, Entity $entity ) {
-		if ( !( $entity instanceof StatementListProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
-		}
-
+	private function getSummary( array $params, Statement $statement, StatementList $statementList ) {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
 		$summary = $claimSummaryBuilder->buildClaimSummary(
-			$entity->getStatements()->getFirstStatementWithGuid( $statement->getGuid() ),
+			$statementList->getFirstStatementWithGuid( $statement->getGuid() ),
 			$statement
 		);
 
@@ -189,18 +191,17 @@ class SetClaim extends ApiBase {
 	 * @throws LogicException
 	 * @return Statement
 	 */
-	private function getClaimFromParams( array $params ) {
-
+	private function getStatementFromParams( array $params ) {
 		try {
 			$serializedStatement = json_decode( $params['claim'], true );
 			if ( !is_array( $serializedStatement ) ) {
 				throw new IllegalValueException( 'Failed to get statement from Serialization' );
 			}
-			$claim = $this->statementDeserializer->deserialize( $serializedStatement );
-			if ( !( $claim instanceof Statement ) ) {
+			$statement = $this->statementDeserializer->deserialize( $serializedStatement );
+			if ( !( $statement instanceof Statement ) ) {
 				throw new IllegalValueException( 'Failed to get statement from Serialization' );
 			}
-			return $claim;
+			return $statement;
 		} catch ( InvalidArgumentException $invalidArgumentException ) {
 			$this->errorReporter->dieError(
 				'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(),
