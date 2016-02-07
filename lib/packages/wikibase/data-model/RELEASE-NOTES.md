@@ -4,6 +4,7 @@
 
 * Removed `Claims` class (deprecated since 1.0)
 * Removed `Entity::getClaims` (deprecated since 1.0)
+* Removed `ReferenceList::removeDuplicates`
 * Removed `HashableObjectStorage`
 
 ## Version 4.4.0 (2016-01-20)
