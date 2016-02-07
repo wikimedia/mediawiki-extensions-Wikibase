@@ -7,7 +7,7 @@ use RuntimeException;
 use SiteStore;
 use Status;
 use Title;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntityFactory;
@@ -15,8 +15,8 @@ use Wikibase\EntityRevision;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
@@ -198,7 +198,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	/**
 	 * Saves the entity using the given summary.
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Summary $summary
 	 * @param string $token
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
@@ -207,7 +207,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @return Status
 	 */
 	protected function saveEntity(
-		Entity $entity,
+		EntityDocument $entity,
 		Summary $summary,
 		$token,
 		$flags = EDIT_UPDATE,

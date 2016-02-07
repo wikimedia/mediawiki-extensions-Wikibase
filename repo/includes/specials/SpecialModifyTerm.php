@@ -8,7 +8,6 @@ use Language;
 use PermissionsError;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -126,6 +125,10 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return false;
 		}
 
+		if ( !( $this->entityRevision->getEntity() instanceof FingerprintProvider ) ) {
+			return false;
+		}
+
 		try {
 			$this->checkTermChangePermissions( $this->entityRevision->getEntity() );
 		} catch ( PermissionsError $e ) {
@@ -149,11 +152,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Summary|bool
 	 */
-	protected function modifyEntity( Entity $entity ) {
+	protected function modifyEntity( EntityDocument $entity ) {
 		try {
 			$summary = $this->setValue( $entity, $this->languageCode, $this->value );
 		} catch ( ChangeOpException $e ) {
@@ -305,12 +308,11 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 * @param string $value
-	 *
 	 * @return Summary
 	 */
-	abstract protected function setValue( Entity $entity, $languageCode, $value );
+	abstract protected function setValue( EntityDocument $entity, $languageCode, $value );
 
 }

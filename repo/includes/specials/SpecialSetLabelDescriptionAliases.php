@@ -3,14 +3,15 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use InvalidArgumentException;
 use Language;
 use SiteStore;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintHolder;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -332,11 +333,15 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::modifyEntity
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Summary|bool
 	 */
-	protected function modifyEntity( Entity $entity ) {
+	protected function modifyEntity( EntityDocument $entity ) {
+		if ( !( $entity instanceof FingerprintHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
+		}
+
 		$changeOps = $this->getChangeOps( $entity->getFingerprint() );
 
 		$summary = false;

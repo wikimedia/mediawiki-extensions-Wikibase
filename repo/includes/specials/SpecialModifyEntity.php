@@ -7,7 +7,6 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\CopyrightMessageBuilder;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\UserInputException;
@@ -263,11 +262,11 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Summary|bool
 	 */
-	abstract protected function modifyEntity( Entity $entity );
+	abstract protected function modifyEntity( EntityDocument $entity );
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.
@@ -276,12 +275,12 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @since 0.5
 	 *
 	 * @param ChangeOp $changeOp
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Summary|null $summary The summary object to update with information about the change.
 	 *
 	 * @throws ChangeOpException
 	 */
-	protected function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
 		$result = $changeOp->validate( $entity );
 
 		if ( !$result->isValid() ) {
