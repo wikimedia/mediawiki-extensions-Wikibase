@@ -5,5 +5,11 @@
 		]
 	},
 	"wikibase-edit": "edit",
-	"wikibase-sitelinks-special": "Adaels sait‎"
+	"wikibase-add": "ad",
+	"wikibase-label-empty": "No liebl no difain‎",
+	"wikibase-description-empty": "No diskripshan no difain‎",
+	"wikibase-sitelinks-special": "Adaels sait‎",
+	"wikibase-aliases-empty": "No ielias no difain‎",
+	"wikibase-statementview-rank-normal": "Naamal rangk‎",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|refrans|refransdem}}‎"
 }

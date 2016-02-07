@@ -5,7 +5,10 @@
 			"Mashoi7"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} on muutettu",
+	"wikibase-editlinks": "Kohenna linkit",
 	"wikibase-rc-hide-wikidata-hide": "Peitä",
 	"wikibase-rc-hide-wikidata-show": "Näytä",
-	"wikibase-rc-wikibase-edit-letter": "D"
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-otherprojects": "Muut projektat"
 }

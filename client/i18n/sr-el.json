@@ -7,6 +7,7 @@
 	},
 	"wikibase-client-desc": "Klijent za proširenje Vikibaza",
 	"tooltip-t-wikibase": "Veza ka stavki na Vikipodacima",
+	"wikibase-after-page-move": "Možete takođe [$1 ažurirati] pridružene stavke na Vikipodacima radi održavanja jezičkih veza na premeštenoj stranici.",
 	"wikibase-after-page-move-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se uskoro automatski ažurirati.",
 	"wikibase-after-page-delete-queued": "[$1 Stavka Vikipodataka] povezana sa ovom stranicom će se uskoro automatski ažurirati.",
 	"wikibase-comment-update": "Izmenjena stavka na Vikipodacima",

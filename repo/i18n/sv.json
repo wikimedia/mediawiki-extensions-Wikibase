@@ -281,7 +281,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, konverterade från $3 - $4",
 	"wikibase-api-unresolved-redirect": "Angiven entitets-ID hänvisar till en omdirigering, som inte stöds i detta sammanhang.",
 	"wikibase-api-no-such-sitelink": "Kunde inte hitta en wepplatslänk till '$1' när du försökte redigera märken.",
-	"wikibase-api-target-not-empty": "Omdirigeringen kan enbart skapas ovanpå en tom entitet.",
+	"wikibase-api-target-not-empty": "Omdirigeringen kan enbart skapas ovanpå en tom eller raderad entitet.",
 	"wikibase-api-target-is-redirect": "Omdirigeringens mål får i sin tur inte vara en omdirigering.",
 	"wikibase-api-target-is-incompatible": "Försök att omdirigera till en entitet av en annan typ.",
 	"wikibase-api-cant-redirect": "Kan inte skapa omdirigering (möjligen eftersom omdirigeringar mellan entiteter av denna typ inte stöds alls).",
