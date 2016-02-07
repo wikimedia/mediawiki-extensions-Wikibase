@@ -121,14 +121,12 @@ class PageTermsTest extends \MediaWikiTestCase {
 			$termObjectsByEntityId[$key] = $this->makeTermsFromGroups( $entityId, $termGroups );
 		}
 
-		$self = $this;
-
 		$termIndex = $this->getMock( 'Wikibase\TermIndex' );
 		$termIndex->expects( $this->any() )
 			->method( 'getTermsOfEntities' )
 			->will( $this->returnCallback(
-				function( array $entityIds, array $termTypes = null, array $languagesCodes = null ) use ( $termObjectsByEntityId, $self ) {
-					return $self->getTermsOfEntities( $termObjectsByEntityId, $entityIds, $termTypes, $languagesCodes );
+				function( array $entityIds, array $termTypes = null, array $languagesCodes = null ) use ( $termObjectsByEntityId ) {
+					return $this->getTermsOfEntities( $termObjectsByEntityId, $entityIds, $termTypes, $languagesCodes );
 				}
 			) );
 
