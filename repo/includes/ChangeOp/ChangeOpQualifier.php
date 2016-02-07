@@ -4,7 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\StatementListHolder;
@@ -73,7 +73,7 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 * - a new qualifier gets added when $snakHash is empty and $snak is set
 	 * - the qualifier gets set to $snak when $snakHash and $snak are set
 	 */
-	public function apply( Entity $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListHolder ) ) {
 			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
 		}
@@ -151,12 +151,12 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws ChangeOpException
 	 * @return Result
 	 */
-	public function validate( Entity $entity ) {
+	public function validate( EntityDocument $entity ) {
 		return $this->snakValidator->validate( $this->snak );
 	}
 

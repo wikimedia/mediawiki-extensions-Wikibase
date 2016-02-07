@@ -4,7 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
@@ -95,7 +95,7 @@ class ChangeOpReference extends ChangeOpBase {
 	 * - a new reference gets added when $referenceHash is empty and $reference is set
 	 * - the reference gets set to $reference when $referenceHash and $reference are set
 	 */
-	public function apply( Entity $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListHolder ) ) {
 			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
 		}
@@ -187,12 +187,12 @@ class ChangeOpReference extends ChangeOpBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws ChangeOpException
 	 * @return Result
 	 */
-	public function validate( Entity $entity ) {
+	public function validate( EntityDocument $entity ) {
 		return $this->snakValidator->validateReference( $this->reference );
 	}
 

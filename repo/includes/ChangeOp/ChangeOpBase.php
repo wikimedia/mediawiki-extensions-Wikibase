@@ -4,7 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Summary;
 
 /**
@@ -41,12 +41,12 @@ abstract class ChangeOpBase implements ChangeOp {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws ChangeOpException
 	 * @return Result
 	 */
-	public function validate( Entity $entity ) {
+	public function validate( EntityDocument $entity ) {
 		return Result::newSuccess();
 	}
 

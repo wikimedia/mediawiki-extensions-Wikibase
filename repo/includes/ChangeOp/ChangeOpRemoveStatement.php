@@ -4,7 +4,7 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\Summary;
@@ -51,13 +51,13 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	/**
 	 * @see ChangeOp::apply
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeOpException
 	 */
-	public function apply( Entity $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof StatementListHolder ) ) {
 			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
 		}
@@ -91,12 +91,12 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws ChangeOpException
 	 * @return Result
 	 */
-	public function validate( Entity $entity ) {
+	public function validate( EntityDocument $entity ) {
 		//TODO: move validation logic from apply() here.
 		return parent::validate( $entity );
 	}

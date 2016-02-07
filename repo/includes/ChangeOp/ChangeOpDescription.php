@@ -4,8 +4,9 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintHolder;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 
@@ -74,7 +75,11 @@ class ChangeOpDescription extends ChangeOpBase {
 	/**
 	 * @see ChangeOp::apply()
 	 */
-	public function apply( Entity $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, Summary $summary = null ) {
+		if ( !( $entity instanceof FingerprintHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
+		}
+
 		$fingerprint = $entity->getFingerprint();
 
 		if ( $fingerprint->getDescriptions()->hasTermForLanguage( $this->languageCode ) ) {
@@ -99,11 +104,15 @@ class ChangeOpDescription extends ChangeOpBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Result
 	 */
-	public function validate( Entity $entity ) {
+	public function validate( EntityDocument $entity ) {
+		if ( !( $entity instanceof FingerprintHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
+		}
+
 		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getDescriptionValidator();
 		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );

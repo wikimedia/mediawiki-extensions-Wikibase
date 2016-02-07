@@ -3,7 +3,7 @@
 namespace Wikibase\ChangeOp;
 
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Summary;
 
 /**
@@ -25,22 +25,22 @@ interface ChangeOp {
 	 * Validates the current ChangeOp. This indicates whether this ChangeOp is valid
 	 * with respect to the given entity.
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Result
 	 */
-	public function validate( Entity $entity );
+	public function validate( EntityDocument $entity );
 
 	/**
 	 * Applies the change represented by this ChangeOp to the given Entity.
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
 	 */
-	public function apply( Entity $entity, Summary $summary = null );
+	public function apply( EntityDocument $entity, Summary $summary = null );
 
 }
