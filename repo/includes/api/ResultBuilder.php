@@ -6,7 +6,7 @@ use ApiResult;
 use Revision;
 use SiteStore;
 use Status;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\SerializerFactory;
@@ -324,7 +324,7 @@ class ResultBuilder {
 	/**
 	 * @see ResultBuilder::addEntityRevision
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param array|string $props
 	 * @param string[]|null $filterSiteIds
 	 * @param string[] $filterLangCodes
@@ -333,7 +333,7 @@ class ResultBuilder {
 	 * @return array
 	 */
 	private function getEntityArray(
-		Entity $entity,
+		EntityDocument $entity,
 		$props,
 		array $filterSiteIds = null,
 		array $filterLangCodes,

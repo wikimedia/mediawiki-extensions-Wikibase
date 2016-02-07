@@ -14,10 +14,10 @@ use OutOfBoundsException;
 use UsageException;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\WikibaseRepo;
@@ -121,6 +121,7 @@ class SetClaim extends ApiBase {
 			$claimGuid = $this->guidParser->parse( $guid );
 		} catch ( StatementGuidParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-claim' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
 		$entityId = $claimGuid->getEntityId();
@@ -134,7 +135,11 @@ class SetClaim extends ApiBase {
 		}
 		$entity = $entityRevision->getEntity();
 
-		$summary = $this->getSummary( $params, $claim, $entity );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			throw new LogicException( 'The entity the statement belongs to does not support statements' );
+		}
+
+		$summary = $this->getSummary( $params, $claim, $entity->getStatements() );
 
 		$changeop = $this->statementChangeOpFactory->newSetStatementOp(
 			$claim,
@@ -152,25 +157,21 @@ class SetClaim extends ApiBase {
 	/**
 	 * @param array $params
 	 * @param Statement $statement
-	 * @param Entity $entity
+	 * @param StatementList $statementList
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Summary
 	 *
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
-	private function getSummary( array $params, Statement $statement, Entity $entity ) {
-		if ( !( $entity instanceof StatementListProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
-		}
-
+	private function getSummary( array $params, Statement $statement, StatementList $statementList ) {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
 		$summary = $claimSummaryBuilder->buildClaimSummary(
-			$entity->getStatements()->getFirstStatementWithGuid( $statement->getGuid() ),
+			$statementList->getFirstStatementWithGuid( $statement->getGuid() ),
 			$statement
 		);
 
@@ -190,7 +191,6 @@ class SetClaim extends ApiBase {
 	 * @return Statement
 	 */
 	private function getClaimFromParams( array $params ) {
-
 		try {
 			$serializedStatement = json_decode( $params['claim'], true );
 			if ( !is_array( $serializedStatement ) ) {
