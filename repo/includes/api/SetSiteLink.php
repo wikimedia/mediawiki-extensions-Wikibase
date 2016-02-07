@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiMain;
 use Wikibase\ChangeOp\ChangeOpSiteLink;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Repo\WikibaseRepo;
@@ -96,7 +96,7 @@ class SetSiteLink extends ModifyEntity {
 			$this->errorReporter->dieError(
 				'The content on the found page is not of correct type',
 				'wrong-class'
-				 );
+			);
 		}
 
 		return $entityRev;
@@ -105,7 +105,7 @@ class SetSiteLink extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 */
-	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
 		if ( !( $entity instanceof Item ) ) {
 			$this->errorReporter->dieError( "The given entity is not an item", "not-item" );
 		}

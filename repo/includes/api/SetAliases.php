@@ -8,8 +8,8 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -99,16 +99,13 @@ class SetAliases extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::createEntity
-	 */
-	protected function createEntity( $entityType ) {
-		$this->errorReporter->dieError( 'Could not find an existing entity', 'no-such-entity' );
-	}
-
-	/**
 	 * @see ModifyEntity::modifyEntity
 	 */
-	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
+		if ( !( $entity instanceof FingerprintProvider ) ) {
+			$this->errorReporter->dieError( 'The given entity does not contain aliases', 'no-aliases' );
+		}
+
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 

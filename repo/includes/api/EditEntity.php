@@ -16,15 +16,15 @@ use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -86,6 +86,11 @@ class EditEntity extends ModifyEntity {
 	private $statementDeserializer;
 
 	/**
+	 * @var EntityFactory
+	 */
+	private $entityFactory;
+
+	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -104,6 +109,7 @@ class EditEntity extends ModifyEntity {
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->statementDeserializer = $wikibaseRepo->getStatementDeserializer();
+		$this->entityFactory = $wikibaseRepo->getEntityFactory();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -168,14 +174,13 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	protected function createEntity( $entityType ) {
 		$this->flags |= EDIT_NEW;
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 
 		try {
-			return $entityFactory->newEmpty( $entityType );
+			return $this->entityFactory->newEmpty( $entityType );
 		} catch ( InvalidArgumentException $ex ) {
 			$this->errorReporter->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
 		}
@@ -218,7 +223,7 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 */
-	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
 		$this->validateDataParameter( $params );
 		$data = json_decode( $params['data'], true );
 		$this->validateDataProperties( $data, $entity, $baseRevId );
@@ -239,7 +244,8 @@ class EditEntity extends ModifyEntity {
 					);
 				}
 			}
-			$entity->clear();
+
+			$entity = $this->clearEntity( $entity );
 		}
 
 		// if we create a new property, make sure we set the datatype
@@ -257,6 +263,24 @@ class EditEntity extends ModifyEntity {
 
 		$this->buildResult( $entity );
 		return $this->getSummary( $params );
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return EntityDocument
+	 */
+	private function clearEntity( EntityDocument $entity ) {
+		$newEntity = $this->entityFactory->newEmpty( $entity->getType() );
+		$newEntity->setId( $entity->getId() );
+
+		// FIXME how to avoid special case handling here?
+		if ( $entity instanceof Property ) {
+			/** @var Property $newEntity */
+			$newEntity->setDataTypeId( $entity->getDataTypeId() );
+		}
+
+		return $newEntity;
 	}
 
 	/**
@@ -771,7 +795,7 @@ class EditEntity extends ModifyEntity {
 					self::PARAM_DFLT => false
 				),
 				'new' => array(
-					self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getEntityFactory()->getEntityTypes(),
+					self::PARAM_TYPE => $this->entityFactory->getEntityTypes(),
 				),
 			)
 		);
