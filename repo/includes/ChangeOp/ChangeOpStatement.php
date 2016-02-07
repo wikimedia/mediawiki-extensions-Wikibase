@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use OutOfBoundsException;
 use ValueValidators\Result;
 use Wikibase\DataModel\ByPropertyIdArray;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
@@ -91,12 +91,16 @@ class ChangeOpStatement extends ChangeOpBase {
 	/**
 	 * @see ChangeOp::apply
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 *
 	 * @throws ChangeOpException
 	 */
-	public function apply( Entity $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, Summary $summary = null ) {
+		if ( !( $entity instanceof StatementListHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
+		}
+
 		if ( $this->statement->getGuid() === null ) {
 			$this->statement->setGuid( $this->guidGenerator->newGuid( $entity->getId() ) );
 		}
@@ -109,23 +113,19 @@ class ChangeOpStatement extends ChangeOpBase {
 			throw new ChangeOpException( "Claim GUID invalid for given entity" );
 		}
 
-		$this->applyClaimToEntity( $entity, $summary );
+		$this->applyStatementToEntity( $entity, $summary );
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param StatementListHolder $statementListHolder
 	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function applyClaimToEntity( Entity $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof StatementListHolder ) ) {
-			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
-		}
-
-		$statements = $this->removeStatement( $entity->getStatements()->toArray(), $summary );
+	private function applyStatementToEntity( StatementListHolder $statementListHolder, Summary $summary = null ) {
+		$statements = $this->removeStatement( $statementListHolder->getStatements()->toArray(), $summary );
 		$statements = $this->addStatement( $statements );
-		$entity->setStatements( new StatementList( $statements ) );
+		$statementListHolder->setStatements( new StatementList( $statements ) );
 	}
 
 	/**
@@ -214,12 +214,12 @@ class ChangeOpStatement extends ChangeOpBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @throws ChangeOpException
 	 * @return Result
 	 */
-	public function validate( Entity $entity ) {
+	public function validate( EntityDocument $entity ) {
 		return $this->snakValidator->validateClaimSnaks( $this->statement );
 	}
 

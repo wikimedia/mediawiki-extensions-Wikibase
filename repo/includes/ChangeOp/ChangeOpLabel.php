@@ -4,8 +4,9 @@ namespace Wikibase\ChangeOp;
 
 use InvalidArgumentException;
 use ValueValidators\Result;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintHolder;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 
@@ -74,10 +75,14 @@ class ChangeOpLabel extends ChangeOpBase {
 	/**
 	 * @see ChangeOp::apply()
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 */
-	public function apply( Entity $entity, Summary $summary = null ) {
+	public function apply( EntityDocument $entity, Summary $summary = null ) {
+		if ( !( $entity instanceof FingerprintHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
+		}
+
 		$fingerprint = $entity->getFingerprint();
 
 		if ( $fingerprint->getLabels()->hasTermForLanguage( $this->languageCode ) ) {
@@ -102,11 +107,15 @@ class ChangeOpLabel extends ChangeOpBase {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Result
 	 */
-	public function validate( Entity $entity ) {
+	public function validate( EntityDocument $entity ) {
+		if ( !( $entity instanceof FingerprintHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
+		}
+
 		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getLabelValidator( $entity->getType() );
 		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
