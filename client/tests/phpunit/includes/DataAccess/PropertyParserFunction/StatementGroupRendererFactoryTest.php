@@ -149,15 +149,16 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$formatterFactory = $this->getMockBuilder( 'Wikibase\Lib\OutputFormatSnakFormatterFactory' )
 			->disableOriginalConstructor()
 			->getMock();
+		$self = $this;
 		$formatterFactory->expects( $this->once() )
 			->method( 'getSnakFormatter' )
 			->will( $this->returnCallback(
-				function( $format, FormatterOptions $options ) use ( $allowDataAccessInUserLanguage )  {
-					$this->assertSame(
+				function( $format, FormatterOptions $options ) use ( $self, $allowDataAccessInUserLanguage )  {
+					$self->assertSame(
 						$allowDataAccessInUserLanguage ? 'es' : 'de',
 						$options->getOption( ValueFormatter::OPT_LANG )
 					);
-					return $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+					return $self->getMock( 'Wikibase\Lib\SnakFormatter' );
 				}
 			) );
 

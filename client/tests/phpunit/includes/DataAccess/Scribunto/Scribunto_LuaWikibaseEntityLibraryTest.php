@@ -160,9 +160,10 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 			Parser::OT_HTML
 		);
 
+		$self = $this; // PHP 5.3 ...
 		$parserOptions->registerWatcher(
-			function( $optionName ) use ( &$cacheSplit ) {
-				$this->assertSame( 'userlang', $optionName );
+			function( $optionName ) use ( $self, &$cacheSplit ) {
+				$self->assertSame( 'userlang', $optionName );
 				$cacheSplit = true;
 			}
 		);
