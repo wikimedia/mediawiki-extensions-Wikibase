@@ -3,7 +3,7 @@
 ## Version 5.0.0 (alpha)
 
 * Removed `Claims` class (deprecated since 1.0)
-* Removed `Entity::getClaims` (deprecated since 1.0)
+* Removed `getClaims` and `setClaims` from `Entity`, `Item` and `Property` (deprecated since 1.0)
 * Removed `ReferenceList::removeDuplicates`
 * Removed `HashableObjectStorage`
 
