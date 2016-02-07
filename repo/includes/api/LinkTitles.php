@@ -7,7 +7,7 @@ use ApiMain;
 use Site;
 use SiteList;
 use Status;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
@@ -86,7 +86,7 @@ class LinkTitles extends ApiBase {
 	/**
 	 * @see EntitySavingHelper::attemptSaveEntity
 	 */
-	protected function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
+	protected function attemptSaveEntity( EntityDocument $entity, $summary, $flags = 0 ) {
 		return $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $flags );
 	}
 
