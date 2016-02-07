@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
 use Status;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataTypeSelector;
 use Wikibase\Repo\WikibaseRepo;
@@ -64,12 +64,12 @@ class SpecialNewProperty extends SpecialNewEntity {
 	/**
 	 * @see SpecialNewEntity::modifyEntity
 	 *
-	 * @param Entity $property
+	 * @param EntityDocument $property
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	protected function modifyEntity( Entity &$property ) {
+	protected function modifyEntity( EntityDocument &$property ) {
 		$status = parent::modifyEntity( $property );
 
 		if ( $this->dataType !== '' ) {
