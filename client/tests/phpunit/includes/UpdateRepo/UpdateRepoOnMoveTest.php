@@ -82,12 +82,11 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$self = $this; // PHP 5.3 compat
 		$jobQueueGroupMock->expects( $this->once() )
 			->method( 'push' )
 			->will(
-				$this->returnCallback( function( JobSpecification $job ) use( $self ) {
-					$self->verifyJob( $job );
+				$this->returnCallback( function( JobSpecification $job ) {
+					$this->verifyJob( $job );
 				} )
 			);
 
