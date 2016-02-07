@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_a2782ec0",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-02-07T16:19:32Z",
+      "side": 1,
+      "message": "Are there no longer any users of this that use something from Entity that is not in EntityDocument?\n\nI remember looking at this class so many times and not being able to get rid of Entity do to users of it still depending on it. (I think its not a good idea to change the type hint in such a way stuff will break if you actually do pass in something that is an EntityDocument but not an Entity.)",
+      "revId": "099854f5f4a31fab84366c4c8e4b457a9b5c6a7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
