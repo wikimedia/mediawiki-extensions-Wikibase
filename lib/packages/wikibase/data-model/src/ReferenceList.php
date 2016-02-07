@@ -266,8 +266,6 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate {
 	/**
 	 * @see Countable::count
 	 *
-	 * @since 5.0
-	 *
 	 * @return int
 	 */
 	public function count() {
