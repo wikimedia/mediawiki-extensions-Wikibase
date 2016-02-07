@@ -10,12 +10,11 @@ use UsageException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\Snak;
@@ -177,10 +176,10 @@ class StatementModificationHelper {
 	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
 	 *
 	 * @param ChangeOp $changeOp
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Summary|null $summary The summary object to update with information about the change.
 	 */
-	public function applyChangeOp( ChangeOp $changeOp, Entity $entity, Summary $summary = null ) {
+	public function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
 		try {
 			$result = $changeOp->validate( $entity );
 
