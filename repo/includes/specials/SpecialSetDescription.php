@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Summary;
 
@@ -58,13 +58,13 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 * @param string $value
 	 *
 	 * @return Summary
 	 */
-	protected function setValue( Entity $entity, $languageCode, $value ) {
+	protected function setValue( EntityDocument $entity, $languageCode, $value ) {
 		$value = $value === '' ? null : $value;
 		$summary = new Summary( 'wbsetdescription' );
 
