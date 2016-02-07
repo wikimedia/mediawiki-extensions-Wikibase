@@ -311,18 +311,6 @@ class Item implements EntityDocument, FingerprintHolder, StatementListHolder,
 	}
 
 	/**
-	 * Removes all content from the Item.
-	 * The id is not part of the content.
-	 *
-	 * @since 0.1
-	 */
-	public function clear() {
-		$this->fingerprint = new Fingerprint();
-		$this->siteLinks = new SiteLinkList();
-		$this->statements = new StatementList();
-	}
-
-	/**
 	 * @since 1.0
 	 *
 	 * @return StatementList
