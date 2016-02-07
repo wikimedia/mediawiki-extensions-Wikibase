@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Status;
 use User;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -321,7 +320,7 @@ class MockRepository implements
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	public function removeEntity( EntityId $entityId ) {
 		try {
@@ -368,7 +367,7 @@ class MockRepository implements
 	 *
 	 * @param EntityId[] $entityIds
 	 *
-	 * @return Entity|null[]
+	 * @return EntityDocument|null[]
 	 */
 	public function getEntities( array $entityIds ) {
 		$entities = array();
