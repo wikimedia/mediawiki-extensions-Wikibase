@@ -16,12 +16,11 @@ use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -168,7 +167,7 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	protected function createEntity( $entityType ) {
 		$this->flags |= EDIT_NEW;
@@ -218,7 +217,7 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 */
-	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
 		$this->validateDataParameter( $params );
 		$data = json_decode( $params['data'], true );
 		$this->validateDataProperties( $data, $entity, $baseRevId );
@@ -239,7 +238,8 @@ class EditEntity extends ModifyEntity {
 					);
 				}
 			}
-			$entity->clear();
+
+			$entity = $this->clearEntity( $entity );
 		}
 
 		// if we create a new property, make sure we set the datatype
@@ -257,6 +257,24 @@ class EditEntity extends ModifyEntity {
 
 		$this->buildResult( $entity );
 		return $this->getSummary( $params );
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return EntityDocument
+	 */
+	private function clearEntity( EntityDocument $entity ) {
+		$newEntity = $this->createEntity( $entity->getType() );
+		$newEntity->setId( $entity->getId() );
+
+		// FIXME how to avoid special case handling here?
+		if ( $entity instanceof Property ) {
+			/** @var Property $newEntity */
+			$newEntity->setDataTypeId( $entity->getDataTypeId() );
+		}
+
+		return $newEntity;
 	}
 
 	/**

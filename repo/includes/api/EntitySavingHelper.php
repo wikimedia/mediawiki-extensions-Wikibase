@@ -6,7 +6,7 @@ use ApiBase;
 use LogicException;
 use Status;
 use UsageException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EditEntity as EditEntityHandler;
 use Wikibase\EditEntityFactory;
 use Wikibase\Summary;
@@ -67,7 +67,7 @@ class EntitySavingHelper {
 	 * warnings, they will automatically be included in the API call's output (again, via
 	 * handleStatus()).
 	 *
-	 * @param Entity $entity The entity to save
+	 * @param EntityDocument $entity The entity to save
 	 * @param string|Summary $summary The edit summary
 	 * @param int $flags The edit flags (see WikiPage::doEditContent)
 	 *
@@ -75,7 +75,7 @@ class EntitySavingHelper {
 	 * @return Status the status of the save operation, as returned by EditEntityHandler::attemptSave()
 	 * @see  EditEntityHandler::attemptSave()
 	 */
-	public function attemptSaveEntity( Entity $entity, $summary, $flags = 0 ) {
+	public function attemptSaveEntity( EntityDocument $entity, $summary, $flags = 0 ) {
 		if ( !$this->apiBase->isWriteMode() ) {
 			// sanity/safety check
 			throw new LogicException(

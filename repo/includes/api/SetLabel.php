@@ -3,9 +3,11 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -41,7 +43,11 @@ class SetLabel extends ModifyTerm {
 	/**
 	 * @see ModifyEntity::modifyEntity
 	 */
-	protected function modifyEntity( Entity &$entity, array $params, $baseRevId ) {
+	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
+		if ( !( $entity instanceof FingerprintProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		}
+
 		$summary = $this->createSummary( $params );
 		$language = $params['language'];
 
