@@ -24,14 +24,13 @@ use ValueValidators\Result;
 use Wikibase\Content\DeferredCopyEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\FingerprintSearchTextGenerator;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
@@ -123,7 +122,7 @@ abstract class EntityContent extends AbstractContent {
 	 * for greater clarity and type hinting.
 	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	abstract public function getEntity();
 
@@ -326,8 +325,7 @@ abstract class EntityContent extends AbstractContent {
 			return '';
 		}
 
-		$searchTextGenerator = new FingerprintSearchTextGenerator();
-		$text = $searchTextGenerator->generate( $this->getEntity()->getFingerprint() );
+		$text = $this->createTextForSearchIndex();
 
 		if ( !Hooks::run( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
 			return '';
@@ -335,6 +333,11 @@ abstract class EntityContent extends AbstractContent {
 
 		return $text;
 	}
+
+	/**
+	 * @return string
+	 */
+	abstract protected function createTextForSearchIndex();
 
 	/**
 	 * @return string Returns the string representation of the redirect
@@ -423,13 +426,19 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getRedirectText();
 		}
 
-		/* @var Language $language */
-		$language = $GLOBALS['wgLang'];
-		$fingerprint = $this->getEntity()->getFingerprint();
-		$description = $fingerprint->hasDescription( $language->getCode() )
-			? $fingerprint->getDescription( $language->getCode() )->getText() : '';
-		return substr( $description, 0, $maxLength );
+		/* @var Language $wgLang */
+		global $wgLang;
+
+		$text = $this->createTextForSummary( $wgLang->getCode() );
+		return substr( $text, 0, $maxLength );
 	}
+
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	abstract protected function createTextForSummary( $languageCode );
 
 	/**
 	 * Returns an array structure for the redirect represented by this EntityContent, if any.
@@ -525,7 +534,7 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	private function makeEmptyEntity() {
 		/** @var EntityHandler $handler */
