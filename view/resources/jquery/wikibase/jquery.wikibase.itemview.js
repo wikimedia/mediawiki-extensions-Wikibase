@@ -73,6 +73,8 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_initStatements: function() {
+		wb.performance.Mark.addStart( 'Statements' );
+
 		this.options.buildStatementGroupListView( this.options.value, this.$statements );
 
 		// This is here to be sure there is never a duplicate id:
@@ -80,13 +82,19 @@ $.widget( 'wikibase.itemview', PARENT, {
 		.prev( '.wb-section-heading' )
 		.first()
 		.attr( 'id', 'claims' );
+
+		wb.performance.Mark.addEnd( 'Statements' );
 	},
 
 	/**
 	 * @protected
 	 */
 	_initSiteLinks: function() {
+		wb.performance.Mark.addStart( 'SiteLinks' );
+
 		this.options.buildSitelinkGroupListView( this.options.value.getSiteLinks(), this.$siteLinks );
+
+		wb.performance.Mark.addEnd( 'SiteLinks' );
 	},
 
 	/**
