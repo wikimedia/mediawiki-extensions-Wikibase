@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Repo\FingerprintSearchTextGenerator;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -148,6 +149,33 @@ class PropertyContent extends EntityContent {
 		return !$this->isRedirect()
 			&& !$this->getProperty()->isEmpty()
 			&& $this->getProperty()->getStatements()->isEmpty();
+	}
+
+	/**
+	 * @see EntityContent::createTextForSearchIndex
+	 *
+	 * @return string
+	 */
+	protected function createTextForSearchIndex() {
+		$searchTextGenerator = new FingerprintSearchTextGenerator();
+		return $searchTextGenerator->generate( $this->getProperty()->getFingerprint() );
+	}
+
+	/**
+	 * @see EntityContent::createTextForSummary
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	protected function createTextForSummary( $languageCode ) {
+		$fingerprint = $this->getProperty()->getFingerprint();
+
+		if ( !$fingerprint->hasDescription( $languageCode ) ) {
+			return '';
+		}
+
+		return $fingerprint->getDescription( $languageCode )->getText();
 	}
 
 }

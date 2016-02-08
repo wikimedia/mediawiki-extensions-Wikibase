@@ -19,6 +19,7 @@ use User;
 use Wikibase\Content\DeferredDecodingEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -201,7 +202,7 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.5
 	 *
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	abstract public function makeEmptyEntity();
 

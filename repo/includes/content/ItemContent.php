@@ -11,6 +11,7 @@ use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\Repo\FingerprintSearchTextGenerator;
 use Wikibase\Repo\ItemSearchTextGenerator;
 
 /**
@@ -286,6 +287,33 @@ class ItemContent extends EntityContent {
 		}
 
 		return $status;
+	}
+
+	/**
+	 * @see EntityContent::createTextForSearchIndex
+	 *
+	 * @return string
+	 */
+	protected function createTextForSearchIndex() {
+		$searchTextGenerator = new FingerprintSearchTextGenerator();
+		return $searchTextGenerator->generate( $this->getItem()->getFingerprint() );
+	}
+
+	/**
+	 * @see EntityContent::createTextForSummary
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	protected function createTextForSummary( $languageCode ) {
+		$fingerprint = $this->getItem()->getFingerprint();
+
+		if ( !$fingerprint->hasDescription( $languageCode ) ) {
+			return '';
+		}
+
+		return $fingerprint->getDescription( $languageCode )->getText();
 	}
 
 }
