@@ -300,28 +300,23 @@ class Item extends Entity implements StatementListHolder {
 	}
 
 	/**
-	 * @see Comparable::equals
-	 *
-	 * Two items are considered equal if they are of the same
-	 * type and have the same value. The value does not include
-	 * the id, so entities with the same value but different id
-	 * are considered equal.
+	 * @see EntityDocument::equals
 	 *
 	 * @since 0.1
 	 *
-	 * @param mixed $target
+	 * @param EntityDocument $entity
 	 *
 	 * @return bool
 	 */
-	public function equals( $target ) {
-		if ( $this === $target ) {
+	public function equals( EntityDocument $entity ) {
+		if ( $this === $entity ) {
 			return true;
 		}
 
-		return $target instanceof self
-			&& $this->fingerprint->equals( $target->fingerprint )
-			&& $this->siteLinks->equals( $target->siteLinks )
-			&& $this->statements->equals( $target->statements );
+		return $entity instanceof self
+		       && $this->fingerprint->equals( $entity->fingerprint )
+		       && $this->siteLinks->equals( $entity->siteLinks )
+		       && $this->statements->equals( $entity->statements );
 	}
 
 }

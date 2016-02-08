@@ -9,6 +9,8 @@
 * Removed `ReferenceList::removeDuplicates`
 * `ReferenceList` no longer derives from `SplObjectStorage`, though still implements `Countable`
 * Removed `HashableObjectStorage`
+* Added `EntityDocument::equals`
+* `Entity` no longer implements `Comparable`
 
 #### Other changes
 
