@@ -22,6 +22,24 @@
       "revId": "ce0e375db0a3f2ebb3edd86d7453b2e1eb0443d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_4899587f",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-08T12:34:39Z",
+      "side": 1,
+      "message": "...or the caller of the constructor. Then we wouldn\u0027t need this class at all. \nDo we really need this class just to wrap this one line?",
+      "parentUuid": "4ea78b8a_25a3e540",
+      "revId": "ce0e375db0a3f2ebb3edd86d7453b2e1eb0443d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
