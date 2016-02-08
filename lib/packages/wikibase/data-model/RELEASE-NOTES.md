@@ -9,11 +9,11 @@
 * Removed `ReferenceList::removeDuplicates`
 * `ReferenceList` no longer derives from `SplObjectStorage`, though still implements `Countable`
 * Removed `HashableObjectStorage`
-* Added `EntityDocument::equals`
 * `Entity` no longer implements `Comparable`
 
 #### Other changes
 
+* Added `EntityDocument::equals`
 * `ReferenceList` now implements `IteratorAggregate` and has a `toArray` method
 
 ## Version 4.4.0 (2016-01-20)
