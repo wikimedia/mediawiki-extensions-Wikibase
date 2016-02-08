@@ -4,7 +4,7 @@ namespace Wikibase;
 
 use OutOfBoundsException;
 use RuntimeException;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 
 /**
  * Factory for Entity objects.
@@ -83,7 +83,7 @@ class EntityFactory {
 	 * @param String $entityType The type of the desired new entity.
 	 *
 	 * @throws RuntimeException
-	 * @return Entity The new Entity object.
+	 * @return EntityDocument The new Entity object.
 	 */
 	public function newEmpty( $entityType ) {
 		$class = $this->getEntityClass( $entityType );

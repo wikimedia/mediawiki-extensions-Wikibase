@@ -7,7 +7,6 @@ use WatchedItem;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -16,8 +15,8 @@ use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -286,15 +285,15 @@ class ItemMergeInteractor {
 	 */
 	private function attemptSaveMerge( Item $fromItem, Item $toItem, $summary, $bot ) {
 		$toSummary = $this->getSummary( 'to', $toItem->getId(), $summary );
-		$fromRev = $this->saveEntity( $fromItem, $toSummary, $bot );
+		$fromRev = $this->saveItem( $fromItem, $toSummary, $bot );
 
 		$fromSummary = $this->getSummary( 'from', $fromItem->getId(), $summary );
-		$toRev = $this->saveEntity( $toItem, $fromSummary, $bot );
+		$toRev = $this->saveItem( $toItem, $fromSummary, $bot );
 
 		return array( $fromRev, $toRev );
 	}
 
-	private function saveEntity( Entity $entity, Summary $summary, $bot ) {
+	private function saveItem( Item $item, Summary $summary, $bot ) {
 		// Given we already check all constraints in ChangeOpsMerge, it's
 		// fine to ignore them here. This is also needed to not run into
 		// the constraints we're supposed to ignore (see ChangeOpsMerge::removeConflictsWithEntity
@@ -306,7 +305,7 @@ class ItemMergeInteractor {
 
 		try {
 			return $this->entityStore->saveEntity(
-				$entity,
+				$item,
 				$this->summaryFormatter->formatSummary( $summary ),
 				$this->user,
 				$flags

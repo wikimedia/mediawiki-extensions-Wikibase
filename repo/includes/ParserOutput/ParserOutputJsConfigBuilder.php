@@ -4,7 +4,7 @@ namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\Serializers\DataValueSerializer;
 use FormatJson;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\SerializerFactory;
 
 /**
@@ -34,11 +34,11 @@ class ParserOutputJsConfigBuilder {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return array
 	 */
-	public function build( Entity $entity ) {
+	public function build( EntityDocument $entity ) {
 		$entityId = $entity->getId();
 
 		if ( !$entityId ) {
@@ -56,11 +56,11 @@ class ParserOutputJsConfigBuilder {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return string
 	 */
-	private function getSerializedEntity( Entity $entity ) {
+	private function getSerializedEntity( EntityDocument $entity ) {
 		$serializer = $this->serializerFactory->newEntitySerializer();
 
 		$serialization = $serializer->serialize( $entity );
