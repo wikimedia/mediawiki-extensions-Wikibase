@@ -27,10 +27,21 @@ return call_user_func( function() {
 		'wikibase.performance.Mark' => $moduleTemplate + array(
 			'scripts' => array(
 				'Mark.js',
+				'PerformanceMark.js',
 			),
 			'dependencies' => array(
 				'wikibase.performance.__namespace',
 			),
 		),
+		'wikibase.performance.Statistic' => $moduleTemplate + array(
+				'scripts' => array(
+						'Statistic.js',
+				),
+				'dependencies' => array(
+						'wikibase.performance.__namespace',
+						'wikibase.performance.Mark',
+				),
+		),
+
 	);
 } );

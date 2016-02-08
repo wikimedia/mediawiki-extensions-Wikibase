@@ -102,6 +102,8 @@ $.widget( 'wikibase.entityview', PARENT, {
 	 * @protected
 	 */
 	_initEntityTerms: function() {
+		wb.performance.Mark.addStart( 'EntityTerms' );
+
 		var $entityTerms = $( '.wikibase-entitytermsview', this.element );
 
 		if ( !$entityTerms.length ) {
@@ -112,6 +114,8 @@ $.widget( 'wikibase.entityview', PARENT, {
 			this.options.value.getFingerprint(),
 			$entityTerms
 		);
+
+		wb.performance.Mark.addEnd( 'EntityTerms' );
 	},
 
 	/**

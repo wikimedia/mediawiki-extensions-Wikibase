@@ -333,11 +333,22 @@
 		} );
 	}
 
+	function displayPerformanceNotifcation() {
+		if( mw.config.get( 'debug' ) == false ){
+			return;
+		}
+
+		mw.loader.using( ['wikibase.performance.Statistic'] ).done( function() {
+			var stat = new wikibase.performance.Statistic( wikibase.performance.Mark.getAllMarks() );
+			mw.notify( stat.getHtml() , { autoHide: false, type: 'warn' } );
+		} );
+	}
+
 	mw.hook( 'wikipage.content' ).add( function() {
 		if ( mw.config.get( 'wbEntity' ) === null ) {
 			return;
 		}
-		wikibase.performance.Mark( 'wbInitStart' );
+		wikibase.performance.Mark.addStart( 'wbInit' );
 
 		var $entityview = $( '.wikibase-entityview' );
 		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
@@ -356,7 +367,7 @@
 				attachWatchLinkUpdater( $entityview, viewName );
 			}
 
-			wikibase.performance.Mark( 'wbInitEnd' );
+			wikibase.performance.Mark.addEnd( 'wbInit' );
 		} );
 
 		if ( canEdit ) {
@@ -383,9 +394,9 @@
 			} );
 
 			attachCopyrightTooltip( $entityview );
+			displayPerformanceNotifcation()
 		}
 	} );
-
 } )(
 	jQuery,
 	mediaWiki,

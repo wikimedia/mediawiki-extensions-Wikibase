@@ -106,7 +106,7 @@ return call_user_func( function() {
 				'wikibase.store.CombiningEntityStore',
 				'wikibase.view.ViewFactory',
 				'wikibase.WikibaseContentLanguages',
-				'wikibase.performance.Mark'
+				'wikibase.performance.Mark',
 			),
 			'messages' => array(
 				'pagetitle',

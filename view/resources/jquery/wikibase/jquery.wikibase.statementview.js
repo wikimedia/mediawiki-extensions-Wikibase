@@ -167,6 +167,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @param {number} rank
 	 */
 	_createRankSelector: function( rank ) {
+		wb.performance.Mark.addStart( '-RankSelector' );
+
 		if ( this._rankSelector ) {
 			return;
 		}
@@ -187,6 +189,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 				self._trigger( 'change' );
 			}
 		} );
+
+		wb.performance.Mark.addEnd( '-RankSelector' );
 	},
 
 	/**
@@ -195,6 +199,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @param {wikibase.datamodel.Snak|null} [snak=null]
 	 */
 	_createMainSnak: function( snak ) {
+		wb.performance.Mark.addStart( '-MainSnak' );
+
 		if ( this.$mainSnak.data( 'snakview' ) ) {
 			this._mainSnakSnakView = this.$mainSnak.data( 'snakview' );
 			return;
@@ -219,6 +225,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			snak,
 			this.$mainSnak
 		);
+		wb.performance.Mark.addEnd( '-MainSnak' );
 	},
 
 	/**
@@ -227,6 +234,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @param {wikibase.datamodel.SnakList|null} [qualifiers=null]
 	 */
 	_createQualifiersListview: function( qualifiers ) {
+		wb.performance.Mark.addStart( '-Qualifiers' );
+
 		if ( this._qualifiers ) {
 			return;
 		}
@@ -276,6 +285,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} );
 
 		this._qualifiers = $qualifiers.data( 'listview' );
+
+		wb.performance.Mark.addEnd( '-Qualifiers' );
 	},
 
 	/**
@@ -284,6 +295,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @param {wikibase.datamodel.Reference[]} [references]
 	 */
 	_createReferencesListview: function( references ) {
+		wb.performance.Mark.addStart( '-References' );
+
 		var self = this;
 
 		var $listview = this.$references.children();
@@ -360,6 +373,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 			this.$refsHeading.html( this._$toggler );
 			this._drawReferencesCounter();
 		}
+
+		wb.performance.Mark.addEnd( '-References' );
 	},
 
 	/**
