@@ -33,6 +33,40 @@
       "revId": "13616e3944c068ee011130dd7a577b8849921839",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e8aa8481",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-08T12:33:36Z",
+      "side": 1,
+      "message": "The reason for expluding each of those should be documented somewhere. de-format is pretty obvious, but e.g. zh-yue less so.",
+      "revId": "13616e3944c068ee011130dd7a577b8849921839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_88af5091",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-08T12:33:36Z",
+      "side": 1,
+      "message": "We is this list not the same as the one given in PHP in getMonolingualTextLanguages() ?",
+      "revId": "13616e3944c068ee011130dd7a577b8849921839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
