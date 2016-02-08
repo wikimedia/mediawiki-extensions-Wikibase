@@ -2,8 +2,6 @@
 
 namespace Wikibase\DataModel\Entity;
 
-use Comparable;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\FingerprintHolder;
@@ -19,7 +17,7 @@ use Wikibase\DataModel\Term\TermList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class Entity implements Comparable, FingerprintHolder, EntityDocument {
+abstract class Entity implements FingerprintHolder, EntityDocument {
 
 	/**
 	 * Sets the value for the label in a certain value.

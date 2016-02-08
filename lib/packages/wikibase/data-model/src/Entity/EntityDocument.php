@@ -52,4 +52,16 @@ interface EntityDocument {
 	 */
 	public function isEmpty();
 
+	/**
+	 * Two entities are considered equal if they are of the same
+	 * type and have the same value. The value does not include
+	 * the id, so entities with the same value but different id
+	 * are considered equal.
+	 *
+	 * @param EntityDocument $entity
+	 *
+	 * @return bool
+	 */
+	public function equals( EntityDocument $entity );
+
 }
