@@ -24,11 +24,12 @@ use ValueValidators\Result;
 use Wikibase\Content\DeferredCopyEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
@@ -123,7 +124,7 @@ abstract class EntityContent extends AbstractContent {
 	 * for greater clarity and type hinting.
 	 *
 	 * @throws MWException when it's a redirect (targets will never be resolved)
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	abstract public function getEntity();
 
@@ -326,8 +327,13 @@ abstract class EntityContent extends AbstractContent {
 			return '';
 		}
 
-		$searchTextGenerator = new FingerprintSearchTextGenerator();
-		$text = $searchTextGenerator->generate( $this->getEntity()->getFingerprint() );
+		$text = '';
+		$entity = $this->getEntity();
+
+		if ( $entity instanceof FingerprintProvider ) {
+			$searchTextGenerator = new FingerprintSearchTextGenerator();
+			$text = $searchTextGenerator->generate( $entity->getFingerprint() );
+		}
 
 		if ( !Hooks::run( 'WikibaseTextForSearchIndex', array( $this, &$text ) ) ) {
 			return '';
@@ -423,12 +429,21 @@ abstract class EntityContent extends AbstractContent {
 			return $this->getRedirectText();
 		}
 
-		/* @var Language $language */
-		$language = $GLOBALS['wgLang'];
-		$fingerprint = $this->getEntity()->getFingerprint();
-		$description = $fingerprint->hasDescription( $language->getCode() )
-			? $fingerprint->getDescription( $language->getCode() )->getText() : '';
-		return substr( $description, 0, $maxLength );
+		global $wgLang;
+		$entity = $this->getEntity();
+
+		// TODO use DescriptionProvider
+		if ( $entity instanceof FingerprintProvider ) {
+			$fingerprint = $entity->getFingerprint();
+			$languageCode = $wgLang->getCode();
+
+			if ( $fingerprint->hasDescription( $languageCode ) ) {
+				$description = $fingerprint->getDescription( $languageCode )->getText();
+				return substr( $description, 0, $maxLength );
+			}
+		}
+
+		return '';
 	}
 
 	/**
@@ -525,7 +540,7 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	private function makeEmptyEntity() {
 		/** @var EntityHandler $handler */
