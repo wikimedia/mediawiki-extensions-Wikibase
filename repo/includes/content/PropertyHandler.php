@@ -3,13 +3,11 @@
 namespace Wikibase\Repo\Content;
 
 use DataUpdate;
-use InvalidArgumentException;
 use Title;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\PropertyContent;
@@ -88,24 +86,6 @@ class PropertyHandler extends EntityHandler {
 
 		$this->infoStore = $infoStore;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
-	}
-
-	/**
-	 * @see EntityHandler::newContent
-	 *
-	 * @since 0.5
-	 *
-	 * @param Entity $property An Property object
-	 *
-	 * @throws InvalidArgumentException
-	 * @return PropertyContent
-	 */
-	protected function newContent( Entity $property ) {
-		if ( !( $property instanceof Property ) ) {
-			throw new InvalidArgumentException( '$property must be an instance of Property' );
-		}
-
-		return PropertyContent::newFromProperty( $property );
 	}
 
 	/**
