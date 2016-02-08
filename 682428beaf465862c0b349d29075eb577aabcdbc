@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_a88c8c00",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-02-08T13:46:05Z",
+      "side": 1,
+      "message": "This is not needed. The changes are guaranteed to me made",
+      "revId": "682428beaf465862c0b349d29075eb577aabcdbc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
