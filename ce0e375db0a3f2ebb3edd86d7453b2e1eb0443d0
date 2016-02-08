@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_25a3e540",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-08T10:13:21Z",
+      "side": 1,
+      "message": "I wouldn\u0027t do the diffing in the getter. I would prefer the diffing to happen in the constructor.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 14
+      },
+      "revId": "ce0e375db0a3f2ebb3edd86d7453b2e1eb0443d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
