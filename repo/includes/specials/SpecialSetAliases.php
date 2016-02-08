@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\DataModel\Entity\Entity;
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Summary;
 
 /**
@@ -60,13 +62,17 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 * @param string $value
 	 *
 	 * @return Summary
 	 */
-	protected function setValue( Entity $entity, $languageCode, $value ) {
+	protected function setValue( EntityDocument $entity, $languageCode, $value ) {
+		if ( !( $entity instanceof FingerprintProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		}
+
 		$summary = new Summary( 'wbsetaliases' );
 
 		if ( $value === '' ) {

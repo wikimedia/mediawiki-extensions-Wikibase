@@ -8,7 +8,6 @@ use OutOfBoundsException;
 use Status;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -171,11 +170,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * @see SpecialModifyEntity::modifyEntity()
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return Summary|bool The summary or false
 	 */
-	protected function modifyEntity( Entity $entity ) {
+	protected function modifyEntity( EntityDocument $entity ) {
 		try {
 			$status = $this->setSiteLink( $entity, $this->site, $this->page, $this->badges, $summary );
 		} catch ( ChangeOpException $e ) {
@@ -424,7 +423,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * Setting the sitepage of the entity.
 	 *
-	 * @param Item $item
+	 * @param EntityDocument $item
 	 * @param string $siteId
 	 * @param string $pageName
 	 * @param string[] $badgeIds
@@ -432,7 +431,11 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 *
 	 * @return Status
 	 */
-	private function setSiteLink( Item $item, $siteId, $pageName, $badgeIds, &$summary ) {
+	private function setSiteLink( EntityDocument $item, $siteId, $pageName, $badgeIds, &$summary ) {
+		if ( !( $item instanceof Item ) ) {
+			throw new InvalidArgumentException( '$entity must be an Item' );
+		}
+
 		$status = Status::newGood();
 		$site = $this->siteStore->getSite( $siteId );
 
