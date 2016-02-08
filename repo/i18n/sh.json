@@ -3,13 +3,14 @@
 		"authors": [
 			"Kolega2357",
 			"OC Ripper",
-			"Macofe"
+			"Macofe",
+			"Conquistador"
 		]
 	},
 	"wikibase-desc": "Strukturirano skladište podataka",
 	"wikibase-edit": "uredi",
 	"wikibase-save": "snimi",
-	"wikibase-cancel": "odustani",
+	"wikibase-cancel": "otkaži",
 	"wikibase-add": "dodaj",
 	"wikibase-addreference": "dodaj izvor",
 	"wikibase-save-inprogress": "Snima se…",
@@ -23,7 +24,7 @@
 	"wikibase-alias-edit-placeholder": "Unesite neki pseudonim",
 	"wikibase-label-input-help-message": "Unesite naslov ovog skupa podataka na $1.",
 	"wikibase-description-input-help-message": "Unesite kratak opis na $1.",
-	"wikibase-statements": "Iskazi",
+	"wikibase-statementsection-statements": "Iskazi",
 	"wikibase-sitelinks-empty": "Trenutno još nema sajt-stranica za ovu stavku.",
 	"wikibase-sitelinks-input-help-message": "Unesite link prema stranici koja pripada ovoj stavki.",
 	"wikibase-sitelinks-special": "Drugi sajtovi",
