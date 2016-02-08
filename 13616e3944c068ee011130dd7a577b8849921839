@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_8548998d",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-08T10:29:32Z",
+      "side": 1,
+      "message": "DifferenceContentLanguages name is irritating for me. \nSubsetOfContentLanguages\nDifferentiatedContentLaguages\n\nMaybe some native speaker should comment on this.",
+      "revId": "13616e3944c068ee011130dd7a577b8849921839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e56ced07",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-08T10:29:32Z",
+      "side": 1,
+      "message": "I wouldn\u0027t do the diffing in the getter. I would prefer the diffing to happen in the constructor.",
+      "revId": "13616e3944c068ee011130dd7a577b8849921839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
