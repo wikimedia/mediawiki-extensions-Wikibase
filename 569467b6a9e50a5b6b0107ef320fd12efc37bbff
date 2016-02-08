@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_254f65c2",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-08T09:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_7fe8a1af",
+      "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_1fcded62",
         "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
         "patchSetId": 2
@@ -98,6 +116,24 @@
       "writtenOn": "2016-02-04T15:35:07Z",
       "side": 1,
       "message": "Why did this moved to the constructor?",
+      "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_0552696a",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-08T09:45:47Z",
+      "side": 1,
+      "message": "I moved it back. Initially I wanted to filter for getName, too, but we should not do that.",
+      "parentUuid": "4ea78b8a_1fcded62",
       "revId": "569467b6a9e50a5b6b0107ef320fd12efc37bbff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
