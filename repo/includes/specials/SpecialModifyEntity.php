@@ -3,15 +3,24 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
+use SiteStore;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\EditEntityFactory;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\MessageException;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikibase\SummaryFormatter;
 
 /**
  * Abstract special page for modifying Wikibase entity.
@@ -22,6 +31,11 @@ use Wikibase\Summary;
  * @author Daniel Kinzler
  */
 abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
+
+	/**
+	 * @var EntityRevisionLookup
+	 */
+	private $entityRevisionLookup;
 
 	/**
 	 * @since 0.5
@@ -49,10 +63,44 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	public function __construct( $title, $restriction = 'edit' ) {
 		parent::__construct( $title, $restriction );
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
 
 		$this->rightsUrl = $settings->getSetting( 'dataRightsUrl' );
 		$this->rightsText = $settings->getSetting( 'dataRightsText' );
+
+		$this->setSpecialModifyEntityServices(
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
+		);
+	}
+
+	/**
+	 * Override services (for testing).
+	 *
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param SiteStore $siteStore
+	 * @param EditEntityFactory $editEntityFactory
+	 */
+	public function setSpecialModifyEntityServices(
+		SummaryFormatter $summaryFormatter,
+		EntityRevisionLookup $entityRevisionLookup,
+		EntityTitleLookup $entityTitleLookup,
+		SiteStore $siteStore,
+		EditEntityFactory $editEntityFactory
+	) {
+		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->setSpecialWikibaseRepoPageServices(
+			$summaryFormatter,
+			$entityTitleLookup,
+			$siteStore,
+			$editEntityFactory
+		);
 	}
 
 	public function doesWrites() {
@@ -129,6 +177,46 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 		$entityId = $this->parseEntityId( $idString );
 		$this->entityRevision = $this->loadEntity( $entityId );
+	}
+
+	/**
+	 * Loads the entity for this entity id.
+	 *
+	 * @since 0.5
+	 *
+	 * @param EntityId $id
+	 * @param int|string $revisionId
+	 *
+	 * @throws MessageException
+	 * @throws UserInputException
+	 * @return EntityRevision
+	 */
+	protected function loadEntity( EntityId $id, $revisionId = EntityRevisionLookup::LATEST_FROM_MASTER ) {
+		try {
+			$entity = $this->entityRevisionLookup->getEntityRevision( $id, $revisionId );
+
+			if ( $entity === null ) {
+				throw new UserInputException(
+					'wikibase-wikibaserepopage-invalid-id',
+					array( $id->getSerialization() ),
+					'Entity id is unknown'
+				);
+			}
+		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			throw new UserInputException(
+				'wikibase-wikibaserepopage-unresolved-redirect',
+				array( $id->getSerialization() ),
+				'Entity id refers to a redirect'
+			);
+		} catch ( StorageException $ex ) {
+			throw new MessageException(
+				'wikibase-wikibaserepopage-storage-exception',
+				array( $id->getSerialization(), $ex->getMessage() ),
+				'Entity could not be loaded'
+			);
+		}
+
+		return $entity;
 	}
 
 	/**
@@ -281,7 +369,10 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @throws ChangeOpException
 	 */
 	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
-		$result = $changeOp->validate( $entity );
+		// NOTE: always validate modification against the current revision!
+		// TODO: this should be re-engineered, see T126231
+		$currentEntityRevision = $this->entityRevisionLookup->getEntityRevision( $entity->getId() );
+		$result = $changeOp->validate( $currentEntityRevision->getEntity() );
 
 		if ( !$result->isValid() ) {
 			throw new ChangeOpValidationException( $result );

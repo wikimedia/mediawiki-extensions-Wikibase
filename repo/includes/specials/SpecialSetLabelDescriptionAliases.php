@@ -95,7 +95,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		ContentLanguages $termsLanguages,
 		EditEntityFactory $editEntityFactory
 	) {
-		$this->setSpecialWikibaseRepoPageServices(
+		$this->setSpecialModifyEntityServices(
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$entityTitleLookup,
