@@ -106,7 +106,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
-	 * @property {jQuery.wikibase.snakview}
+	 * @property {jQuery.wikibase.snakview|null}
 	 * @private
 	 */
 	_mainSnakSnakView: null,
@@ -189,17 +189,25 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} );
 	},
 
+	_getMainSnakSnakView: function() {
+		if ( !this._mainSnakSnakView ) {
+			this._createMainSnak();
+		}
+		return this._mainSnakSnakView;
+	},
+
 	/**
 	 * @private
-	 *
-	 * @param {wikibase.datamodel.Snak|null} [snak=null]
 	 */
-	_createMainSnak: function( snak ) {
+	_createMainSnak: function() {
 		if ( this.$mainSnak.data( 'snakview' ) ) {
 			this._mainSnakSnakView = this.$mainSnak.data( 'snakview' );
 			return;
 		}
 
+		var snak = this.options.value
+			? this.options.value.getClaim().getMainSnak()
+			: this.options.predefined.mainSnak || null;
 		var self = this;
 
 		this.$mainSnak
@@ -395,8 +403,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this._rankSelector.destroy();
 		this.$rankSelector.off( '.' + this.widgetName );
 
-		this._mainSnakSnakView.destroy();
-		this.$mainSnak.off( '.' + this.widgetName );
+		if ( this._mainSnakSnakView ) {
+			this._mainSnakSnakView.destroy();
+			this.$mainSnak.off( '.' + this.widgetName );
+		}
 
 		this._destroyQualifiersListView();
 		this._destroyReferencesListview();
@@ -439,10 +449,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 			: wb.datamodel.Statement.RANK.NORMAL
 		);
 
-		this._createMainSnak( this.options.value
-				? this.options.value.getClaim().getMainSnak()
-				: this.options.predefined.mainSnak || null
-		);
+		if ( this.$mainSnak.is( ':empty' ) ) {
+			this._createMainSnak();
+		}
 
 		if ( this.isInEditMode()
 			|| this.options.value
@@ -503,7 +512,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			}
 		}
 
-		return this._mainSnakSnakView.isInitialValue();
+		return this._getMainSnakSnakView().isInitialValue();
 	},
 
 	/**
@@ -515,7 +524,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {wikibase.datamodel.Statement|null}
 	 */
 	_instantiateStatement: function( guid ) {
-		var mainSnak = this._mainSnakSnakView.snak();
+		var mainSnak = this._getMainSnakSnakView().snak();
 
 		if ( !mainSnak ) {
 			return null;
@@ -641,7 +650,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			.fail( deferred.reject );
 		} );
 
-		this._mainSnakSnakView.startEditing();
+		this._getMainSnakSnakView().startEditing();
 		this._startEditingReferences();
 
 		return deferred.promise();
@@ -836,7 +845,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'disabled' ) {
-			this._mainSnakSnakView.option( key, value );
+			this._getMainSnakSnakView().option( key, value );
 			if ( this._qualifiers ) {
 				this._qualifiers.option( key, value );
 			}
@@ -851,7 +860,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @inheritdoc
 	 */
 	focus: function() {
-		this._mainSnakSnakView.focus();
+		this._getMainSnakSnakView().focus();
 	}
 } );
 
