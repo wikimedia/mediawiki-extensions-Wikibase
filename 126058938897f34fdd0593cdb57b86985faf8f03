@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_da1c1c6d",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-09T21:02:40Z",
+      "side": 1,
+      "message": "$itemId ;)",
+      "revId": "126058938897f34fdd0593cdb57b86985faf8f03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
