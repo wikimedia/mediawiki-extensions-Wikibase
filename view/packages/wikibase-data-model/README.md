@@ -8,6 +8,10 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
+### 3.0.0 (alpha)
+
+* Removed cloning from `MultiTerm.getTexts`.
+
 ### 2.0.1 (2016-01-27)
 
 * Added compatibility with DataValues JavaScript 0.8.0.
