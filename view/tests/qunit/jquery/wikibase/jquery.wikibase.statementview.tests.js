@@ -34,6 +34,8 @@ var createStatementview = function( options, $node ) {
 					this.value = function() {
 						return this.options.value;
 					};
+					this.startEditing = function() {
+					};
 					this.isValid = function() {
 						return true;
 					};
@@ -143,7 +145,11 @@ QUnit.test( 'isValid', function( assert ) {
 		} ),
 		statementview = $statementview.data( 'statementview' );
 
-	assert.ok( statementview.isValid(), 'isValid should return true' );
+	QUnit.stop();
+	statementview.startEditing().done( function() {
+		QUnit.start();
+		assert.ok( statementview.isValid(), 'isValid should return true' );
+	} );
 } );
 
 QUnit.test( 'isValid on new statementview is false', function( assert ) {
@@ -151,7 +157,11 @@ QUnit.test( 'isValid on new statementview is false', function( assert ) {
 	var $statementview = createStatementview(),
 		statementview = $statementview.data( 'statementview' );
 
-	assert.ok( statementview.isValid() === false, 'isValid should return false' );
+	QUnit.stop();
+	statementview.startEditing().done( function() {
+		QUnit.start();
+		assert.ok( !statementview.isValid(), 'isValid should return false' );
+	} );
 } );
 
 QUnit.test( 'Using the generic tooltip for new claims', 1, function( assert ) {
@@ -194,13 +204,16 @@ QUnit.test( 'value with empty reference', function( assert ) {
 		} ),
 		statementview = $statementview.data( 'statementview' );
 
-	statementview._addReference( null );
-
-	assert.ok( statementview.value(), 'value should return a value' );
+	QUnit.stop();
+	statementview.startEditing().done( function() {
+		QUnit.start();
+		statementview._addReference( null );
+		assert.ok( statementview.value(), 'value should return a value' );
+	} );
 } );
 
 QUnit.test( 'performs correct claimsChanger call', function( assert ) {
-	assert.expect( 2 );
+	assert.expect( 3 );
 	var guid = 'GUID',
 		snak = new wb.datamodel.PropertyNoValueSnak( 'P1' ),
 		setStatement = sinon.spy( function() {
@@ -236,6 +249,7 @@ QUnit.test( 'performs correct claimsChanger call', function( assert ) {
 		return statementview.stopEditing( false );
 	} ).then( function() {
 		QUnit.start();
+		assert.ok( !statementview.isInEditMode(), 'should not be in edit mode after stopping editing' );
 		sinon.assert.calledWith(
 			setStatement,
 			new wb.datamodel.Statement( new wb.datamodel.Claim( snak, null, guid ) )

@@ -112,21 +112,21 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_mainSnakSnakView: null,
 
 	/**
-	 * @property {jQuery.wikibase.statementview.RankSelector}
+	 * @property {jQuery.wikibase.statementview.RankSelector|null}
 	 * @private
 	 */
 	_rankSelector: null,
 
 	/**
 	 * Shortcut to the `listview` managing the `referenceview`s.
-	 * @property {jQuery.wikibase.listview}
+	 * @property {jQuery.wikibase.listview|null}
 	 * @private
 	 */
 	_referencesListview: null,
 
 	/**
 	 * Reference to the `listview` widget managing the qualifier `snaklistview`s.
-	 * @property {jQuery.wikibase.listview}
+	 * @property {jQuery.wikibase.listview|null}
 	 * @private
 	 */
 	_qualifiers: null,
@@ -155,9 +155,14 @@ $.widget( 'wikibase.statementview', PARENT, {
 			throw new Error( 'Required option not specified properly' );
 		}
 
+		var isEmpty = this.element.is( ':empty' );
 		PARENT.prototype._create.call( this );
 
-		this.draw();
+		if ( isEmpty ) {
+			this.draw();
+		} else {
+			this._createReferencesToggler();
+		}
 	},
 
 	/**
@@ -187,13 +192,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 				self._trigger( 'change' );
 			}
 		} );
-	},
-
-	_getMainSnakSnakView: function() {
-		if ( !this._mainSnakSnakView ) {
-			this._createMainSnak();
-		}
-		return this._mainSnakSnakView;
 	},
 
 	/**
@@ -294,7 +292,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_createReferencesListview: function( references ) {
 		var self = this;
 
-		var $listview = this.$references.children();
+		var $listview = this.$references.children( '.wikibase-listview' );
 		if ( !$listview.length ) {
 			$listview = $( '<div/>' ).prependTo( this.$references );
 		} else if ( $listview.data( 'listview' ) ) {
@@ -351,14 +349,27 @@ $.widget( 'wikibase.statementview', PARENT, {
 			}
 		} );
 
-		// Collapse references if there is at least one.
-		var visible = this._referencesListview.items().length === 0;
-		this.$references.toggleClass( 'wikibase-initially-collapsed', !visible );
+		this._createReferencesToggler();
+	},
+
+	_createReferencesToggler: function() {
+		if ( this._$toggler ) {
+			return;
+		}
+
+		var expanded;
+
+		if ( this._referencesListview ) {
+			expanded = this._referencesListview.items().length === 0;
+			this.$references.toggleClass( 'wikibase-initially-collapsed', !expanded );
+		} else {
+			expanded = !this.$references.hasClass( 'wikibase-initially-collapsed' );
+		}
 
 		// toggle for references section:
 		this._$toggler = $( '<a/>' ).toggler( {
 			$subject: this.$references,
-			visible: visible
+			visible: expanded
 		} );
 
 		if ( this.$refsHeading.text() ) {
@@ -400,16 +411,24 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @inheritdoc
 	 */
 	destroy: function() {
-		this._rankSelector.destroy();
-		this.$rankSelector.off( '.' + this.widgetName );
+		if ( this._rankSelector ) {
+			this._rankSelector.destroy();
+			this.$rankSelector.off( '.' + this.widgetName );
+			this._rankSelector = null;
+		}
 
 		if ( this._mainSnakSnakView ) {
 			this._mainSnakSnakView.destroy();
 			this.$mainSnak.off( '.' + this.widgetName );
+			this._mainSnakSnakView = null;
 		}
 
-		this._destroyQualifiersListView();
-		this._destroyReferencesListview();
+		if ( this._qualifiers ) {
+			this._destroyQualifiersListView();
+		}
+		if ( this._referencesListview ) {
+			this._destroyReferencesListview();
+		}
 
 		PARENT.prototype.destroy.call( this );
 	},
@@ -418,26 +437,22 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @private
 	 */
 	_destroyQualifiersListView: function() {
-		if ( this._qualifiers ) {
-			this._qualifiers.destroy();
-			this.$qualifiers
-				.off( '.' + this.widgetName )
-				.empty();
-			this._qualifiers = null;
-		}
+		this._qualifiers.destroy();
+		this.$qualifiers
+			.off( '.' + this.widgetName )
+			.empty();
+		this._qualifiers = null;
 	},
 
 	/**
 	 * @private
 	 */
 	_destroyReferencesListview: function() {
-		if ( this._referencesListview ) {
-			this._referencesListview.destroy();
-			this.$references
-				.off( '.' + this.widgetName )
-				.empty();
-			this._referencesListview = null;
-		}
+		this._referencesListview.destroy();
+		this.$references
+			.off( '.' + this.widgetName )
+			.empty();
+		this._referencesListview = null;
 	},
 
 	/**
@@ -448,23 +463,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 			? this.options.value.getRank()
 			: wb.datamodel.Statement.RANK.NORMAL
 		);
-
-		if ( this.$mainSnak.is( ':empty' ) ) {
-			this._createMainSnak();
-		}
-
-		if ( this.isInEditMode()
-			|| this.options.value
-				&& this.options.value.getClaim().getQualifiers().length
-				&& !this.$qualifiers.children().length
-		) {
-			this._createQualifiersListview(
-				this.options.value
-					? this.options.value.getClaim().getQualifiers()
-					: new wb.datamodel.SnakList()
-			);
-		}
-
+		this._createMainSnak();
+		this._createQualifiersListview(
+			this.options.value
+				? this.options.value.getClaim().getQualifiers()
+				: new wb.datamodel.SnakList()
+		);
 		this._createReferencesListview(
 			this.options.value ? this.options.value.getReferences().toArray() : []
 		);
@@ -480,7 +484,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var i;
 
 		if ( this.options.value ) {
-			if ( !this._rankSelector.isInitialValue() ) {
+			if ( this._rankSelector && !this._rankSelector.isInitialValue() ) {
 				return false;
 			}
 
@@ -512,7 +516,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			}
 		}
 
-		return this._getMainSnakSnakView().isInitialValue();
+		return this._mainSnakSnakView.isInitialValue();
 	},
 
 	/**
@@ -524,7 +528,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {wikibase.datamodel.Statement|null}
 	 */
 	_instantiateStatement: function( guid ) {
-		var mainSnak = this._getMainSnakSnakView().snak();
+		var mainSnak = this._mainSnakSnakView.snak();
 
 		if ( !mainSnak ) {
 			return null;
@@ -541,7 +545,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 		return new wb.datamodel.Statement(
 			new wb.datamodel.Claim( mainSnak, qualifiers, guid ),
 			new wb.datamodel.ReferenceList( this._getReferences() ),
-			this._rankSelector.value()
+			this._rankSelector ? this._rankSelector.value() : ( this.options.value
+				? this.options.value.getRank()
+				: wb.datamodel.Statement.RANK.NORMAL )
 		);
 	},
 
@@ -669,9 +675,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @protected
 	 */
 	_afterStopEditing: function( dropValue ) {
-		if ( this._mainSnakSnakView ) {
-			this._mainSnakSnakView.stopEditing( dropValue );
-		}
+		this._mainSnakSnakView.stopEditing( dropValue );
 		this._stopEditingQualifiers( dropValue );
 		this._rankSelector.stopEditing( dropValue );
 
@@ -699,18 +703,16 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var snaklistviews,
 			i;
 
-		if ( this._qualifiers ) {
-			snaklistviews = this._qualifiers.value();
+		snaklistviews = this._qualifiers.value();
 
-			if ( snaklistviews.length ) {
-				for ( i = 0; i < snaklistviews.length; i++ ) {
-					snaklistviews[i].stopEditing( dropValue );
+		if ( snaklistviews.length ) {
+			for ( i = 0; i < snaklistviews.length; i++ ) {
+				snaklistviews[i].stopEditing( dropValue );
 
-					if ( dropValue && !snaklistviews[i].value() ) {
-						// Remove snaklistview from qualifier listview if no snakviews are left in
-						// that snaklistview:
-						this._qualifiers.removeItem( snaklistviews[i].element );
-					}
+				if ( dropValue && !snaklistviews[i].value() ) {
+					// Remove snaklistview from qualifier listview if no snakviews are left in
+					// that snaklistview:
+					this._qualifiers.removeItem( snaklistviews[i].element );
 				}
 			}
 		}
@@ -722,10 +724,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		var qualifiers = this.options.value ? this.options.value.getClaim().getQualifiers() : [];
 
-		if ( qualifiers.length > 0 ) {
-			// Refill the qualifier listview with the initial (or new initial) qualifiers:
-			this._createQualifiersListview( qualifiers );
-		}
+		// Refill the qualifier listview with the initial (or new initial) qualifiers:
+		this._createQualifiersListview( qualifiers );
 	},
 
 	/**
@@ -832,12 +832,18 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
 		if ( key === 'disabled' ) {
-			this._getMainSnakSnakView().option( key, value );
+			if ( this._mainSnakSnakView ) {
+				this._mainSnakSnakView.option( key, value );
+			}
 			if ( this._qualifiers ) {
 				this._qualifiers.option( key, value );
 			}
-			this._rankSelector.option( key, value );
-			this._referencesListview.option( key, value );
+			if ( this._rankSelector ) {
+				this._rankSelector.option( key, value );
+			}
+			if ( this._referencesListview ) {
+				this._referencesListview.option( key, value );
+			}
 		}
 
 		return response;
