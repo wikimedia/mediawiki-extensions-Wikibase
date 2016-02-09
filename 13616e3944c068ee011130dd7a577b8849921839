@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_09fd9bd1",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-09T08:32:23Z",
+      "side": 1,
+      "message": "That would be bad performance-wise, since we often construct ContentLanguages without ending up using them.",
+      "parentUuid": "4ea78b8a_e56ced07",
+      "revId": "13616e3944c068ee011130dd7a577b8849921839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_e8aa8481",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_69ebef09",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-09T08:32:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_e8aa8481",
+      "revId": "13616e3944c068ee011130dd7a577b8849921839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_88af5091",
         "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2016-02-08T12:33:36Z",
       "side": 1,
       "message": "We is this list not the same as the one given in PHP in getMonolingualTextLanguages() ?",
+      "revId": "13616e3944c068ee011130dd7a577b8849921839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_c9dea370",
+        "filename": "repo/resources/wikibase.WikibaseContentLanguages.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-09T08:32:23Z",
+      "side": 1,
+      "message": "Because in PHP we use `Language::fetchLanguageNames( \u0027mw\u0027 )`, which are ~416, while in JS we use a dataset that is populated from `Language::fetchLanguageNames( \u0027mwfile\u0027 )`, which are ~391.",
+      "parentUuid": "4ea78b8a_88af5091",
       "revId": "13616e3944c068ee011130dd7a577b8849921839",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
