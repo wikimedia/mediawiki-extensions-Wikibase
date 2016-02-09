@@ -9,17 +9,12 @@
  */
 $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 	id: 'statementview-referenceview',
-	selector: '.wikibase-statementview-references',
+	selector: '.wikibase-statementview',
 	events: {
-		listviewcreate: function( event, toolbarController ) {
-			var $listview = $( event.target ),
-				listview = $listview.data( 'listview' ),
-				lia = listview.listItemAdapter(),
-				$node = $listview.parent();
-
-			if ( !$node.hasClass( 'wikibase-statementview-references' ) ) {
-				return;
-			}
+		statementviewcreate: function( event, toolbarController ) {
+			var $statementview = $( event.target ),
+				statementview = $statementview.data( 'statementview' ),
+				$node = statementview.$references;
 
 			$node
 			.addtoolbar( {
@@ -31,18 +26,20 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					return;
 				}
 
-				$listview.closest( '.wikibase-statementview' )
-					.data( 'statementview' ).startEditing();
+				statementview.startEditing().done( function() {
+					var listview = statementview._referencesListview,
+						lia = listview.listItemAdapter();
 
-				listview.enterNewItem().done( function( $referenceview ) {
-					var referenceview = lia.liInstance( $referenceview );
-					referenceview.focus();
-				} );
+					listview.enterNewItem().done( function( $referenceview ) {
+						var referenceview = lia.liInstance( $referenceview );
+						referenceview.focus();
+					} );
 
-				// Re-focus "add" button after having added or having cancelled adding a reference:
-				var eventName = lia.prefixedEvent( 'afterstopediting.addtoolbar' );
-				$listview.one( eventName, function( event ) {
-					$node.data( 'addtoolbar' ).focus();
+					// Re-focus "add" button after having added or having cancelled adding a reference:
+					var eventName = lia.prefixedEvent( 'afterstopediting.addtoolbar' );
+					listview.element.one( eventName, function( event ) {
+						$node.data( 'addtoolbar' ).focus();
+					} );
 				} );
 
 				toolbarController.registerEventHandler(
@@ -66,13 +63,13 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 			toolbarController.registerEventHandler(
 				event.data.toolbar.type,
 				event.data.toolbar.id,
-				'listviewdisable',
+				'statementviewdisable',
 				function( event ) {
-					if ( event.target !== $listview.get( 0 ) ) {
+					if ( event.target !== $statementview.get( 0 ) ) {
 						return;
 					}
 					$node.data( 'addtoolbar' )[
-						listview.option( 'disabled' )
+						statementview.option( 'disabled' )
 							? 'disable'
 							: 'enable'
 					]();
