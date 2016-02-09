@@ -237,6 +237,7 @@ class Property extends Entity implements StatementListHolder {
 	 */
 	public function clear() {
 		$this->fingerprint = new Fingerprint();
+		$this->statements = new StatementList();
 	}
 
 	/**
