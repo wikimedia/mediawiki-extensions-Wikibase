@@ -1,2 +1,2 @@
-<http://data.acme.test/Q9> <http://wikiba.se/ontology-beta#rdf-claims> "testclaims" .
-<http://data.acme.test/Q9> <http://wikiba.se/ontology-beta#rdf-sitelinks> "testsitelinks" .
+<http://data.acme.test/Q9> <http://wikiba.se/ontology#rdf-claims> "testclaims" .
+<http://data.acme.test/Q9> <http://wikiba.se/ontology#rdf-sitelinks> "testsitelinks" .
