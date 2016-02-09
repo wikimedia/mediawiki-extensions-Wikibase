@@ -192,14 +192,11 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddReferenceAtNegativeIndex() {
-		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
-		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
-		$reference3 = new Reference( array( new PropertyNoValueSnak( 3 ) ) );
-
-		$references = new ReferenceList( array( $reference1, $reference2 ) );
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$referenceList = new ReferenceList();
 
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$references->addReference( $reference3, -1 );
+		$referenceList->addReference( $reference, -1 );
 	}
 
 	public function testGivenEmptyReference_addReferenceDoesNotAdd() {
@@ -237,6 +234,16 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		foreach ( $array as $reference ) {
 			$this->assertEquals( $i++, $array->indexOf( $reference ) );
 		}
+	}
+
+	public function testIndexOf_falseForMissingReferences() {
+		$referenceList = new ReferenceList();
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+
+		$referenceList->addNewReference( new PropertyNoValueSnak( 1 ) );
+
+		$this->assertFalse( $referenceList->indexOf( new Reference() ) );
+		$this->assertFalse( $referenceList->indexOf( $reference ) );
 	}
 
 	/**
