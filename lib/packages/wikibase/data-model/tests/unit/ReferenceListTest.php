@@ -191,6 +191,17 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSameReferenceOrder( $expectedList, $references );
 	}
 
+	public function testAddReferenceAtNegativeIndex() {
+		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
+		$reference3 = new Reference( array( new PropertyNoValueSnak( 3 ) ) );
+
+		$references = new ReferenceList( array( $reference1, $reference2 ) );
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$references->addReference( $reference3, -1 );
+	}
+
 	public function testGivenEmptyReference_addReferenceDoesNotAdd() {
 		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
 		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );

@@ -5,8 +5,9 @@
 * Removed `Claims` class (deprecated since 1.0)
 * Removed `getClaims` and `setClaims` from `Entity`, `Item` and `Property` (deprecated since 1.0)
 * Removed `ReferenceList::removeDuplicates`
-* `ReferenceList` no longer derives from `SplObjectStorage`, though still implements `Countable`
-    * `ReferenceList` now implements `IteratorAggregate` and has a `toArray` method
+* `ReferenceList` no longer derives from `SplObjectStorage`, though still implements `Countable` and `Traversable`
+    * `ReferenceList` now implements `IteratorAggregate`
+* `ReferenceList::addReference` now throws an `InvalidArgumentException` for negative indices
 * Removed `HashableObjectStorage`
 * `Entity` no longer implements `Comparable`
 * Added `EntityDocument::equals`
