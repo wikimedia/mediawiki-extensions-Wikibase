@@ -130,8 +130,7 @@ class RdfVocabulary {
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
 				'owl' => 'http://www.w3.org/2002/07/owl#',
-				// TODO: drop beta once we have stable ontology
-				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI . "-beta#",
+				self::NS_ONTOLOGY => self::ONTOLOGY_BASE_URI
 				// nodes
 				self::NS_DATA => $this->dataUri,
 				self::NS_ENTITY => $this->baseUri,
