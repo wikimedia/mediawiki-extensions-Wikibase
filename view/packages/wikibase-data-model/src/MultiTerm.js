@@ -54,7 +54,7 @@ $.extend( SELF.prototype, {
 	 * @return {string[]}
 	 */
 	getTexts: function() {
-		return $.merge( [], this._texts );
+		return this._texts;
 	},
 
 	/**
@@ -83,14 +83,12 @@ $.extend( SELF.prototype, {
 			return false;
 		}
 
-		var otherTexts = multiTerm.getTexts();
-
-		if( this._texts.length !== otherTexts.length ) {
+		if( this._texts.length !== multiTerm._texts.length ) {
 			return false;
 		}
 
 		for( var i = 0; i < this._texts.length; i++ ) {
-			if( $.inArray( this._texts[i], otherTexts ) === -1 ) {
+			if( $.inArray( this._texts[i], multiTerm._texts ) === -1 ) {
 				return false;
 			}
 		}
