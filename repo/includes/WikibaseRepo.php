@@ -48,6 +48,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\DifferenceContentLanguages;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
@@ -1460,10 +1461,37 @@ class WikibaseRepo {
 
 	private function getMonolingualTextLanguages() {
 		if ( $this->monolingualTextLanguages === null ) {
-			$this->monolingualTextLanguages = new UnionContentLanguages(
-				new MediaWikiContentLanguages(),
-				// Special ISO 639-2 codes
-				new StaticContentLanguages( array( 'und', 'mis', 'mul', 'zxx' ) )
+			// This has to be a superset of the language codes returned by
+			// wikibase.WikibaseContentLanguages.
+			// We don't want to have language codes in the suggester that are not
+			// supported by the backend. The other way round is currently acceptable,
+			// but will be fixed in T124758.
+			$this->monolingualTextLanguages = new DifferenceContentLanguages(
+				new UnionContentLanguages(
+					new MediaWikiContentLanguages(),
+					// Special ISO 639-2 codes
+					new StaticContentLanguages( array( 'und', 'mis', 'mul', 'zxx' ) )
+				),
+
+				// MediaWiki language codes we don't want for monolingual text values
+				new StaticContentLanguages( array(
+					// Language codes that are not even well-formed BCP 47 language codes
+					'simple',
+					'tokipona',
+
+					// Deprecated language codes with an alternative in MediaWiki
+					'bat-smg', // => sgs
+					'be-x-old', // => be-tarask
+					'fiu-vro', // => vro
+					'roa-rup', // => rup
+					'zh-classical', // => lzh
+					'zh-min-nan', // => nan
+					'zh-yue', // => yue
+
+					// Language codes we don't want for semantic reasons
+					'de-formal',
+					'nl-informal',
+				) )
 			);
 		}
 		return $this->monolingualTextLanguages;
