@@ -159,8 +159,8 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 
 		$actualOut = file_get_contents( $outFileName );
 		$actualOut = preg_replace(
-			'/<http:\/\/wikiba.se\/ontology-beta#Dump> <http:\/\/schema.org\/dateModified> "[^"]+"/',
-			"<http://wikiba.se/ontology-beta#Dump> <http://schema.org/dateModified> \"2015-01-01T00:00:00Z\"",
+			'/<http:\/\/wikiba.se\/ontology#Dump> <http:\/\/schema.org\/dateModified> "[^"]+"/',
+			"<http://wikiba.se/ontology#Dump> <http://schema.org/dateModified> \"2015-01-01T00:00:00Z\"",
 			$actualOut
 		);
 
