@@ -18,7 +18,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				$container = $statementlistview.children( '.wikibase-toolbar-wrapper' )
 					.children( '.wikibase-toolbar-container' );
 
-			if ( !statementlistview.value().length ) {
+			if ( statementlistview.isEmpty() ) {
 				return;
 			}
 
@@ -27,10 +27,6 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				$container = $( '<div/>' ).appendTo(
 					mw.wbTemplate( 'wikibase-toolbar-wrapper', '' ).appendTo( $statementlistview )
 				);
-			}
-
-			if ( !statementlistview.value() ) {
-				return;
 			}
 
 			$statementlistview.addtoolbar( {

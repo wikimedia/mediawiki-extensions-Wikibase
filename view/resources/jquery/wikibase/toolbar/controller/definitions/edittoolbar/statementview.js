@@ -26,7 +26,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 
 			options.$container = $container;
 
-			if ( !!statementview.value() ) {
+			if ( statementview.option( 'value' ) ) {
 				options.onRemove = function() {
 					var $statementlistview
 							= $statementview.closest( ':wikibase-statementlistview' ),
