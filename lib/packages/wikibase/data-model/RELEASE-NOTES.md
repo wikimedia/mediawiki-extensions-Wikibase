@@ -2,19 +2,14 @@
 
 ## Version 5.0.0 (alpha)
 
-#### Breaking changes
-
 * Removed `Claims` class (deprecated since 1.0)
 * Removed `getClaims` and `setClaims` from `Entity`, `Item` and `Property` (deprecated since 1.0)
 * Removed `ReferenceList::removeDuplicates`
 * `ReferenceList` no longer derives from `SplObjectStorage`, though still implements `Countable`
+    * `ReferenceList` now implements `IteratorAggregate` and has a `toArray` method
 * Removed `HashableObjectStorage`
 * `Entity` no longer implements `Comparable`
-
-#### Other changes
-
 * Added `EntityDocument::equals`
-* `ReferenceList` now implements `IteratorAggregate` and has a `toArray` method
 
 ## Version 4.4.0 (2016-01-20)
 
