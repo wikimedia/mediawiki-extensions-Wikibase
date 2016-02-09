@@ -4,11 +4,19 @@
 
 * Removed `Claims` class (deprecated since 1.0)
 * Removed `getClaims` and `setClaims` from `Entity`, `Item` and `Property` (deprecated since 1.0)
+* Removed `HashableObjectStorage` class (deprecated since 4.4)
 * Removed `ReferenceList::removeDuplicates`
-* `ReferenceList` no longer derives from `SplObjectStorage`, though still implements `Countable` and `Traversable`
-    * `ReferenceList` now implements `IteratorAggregate`
+* `ReferenceList` no longer derives from `SplObjectStorage`
+    * Removed `attach`, `detach`, `contains`, `addAll`, `removeAll`,
+      `removeAllExcept`, `getInfo`, `setInfo` and `getHash`
+* `ReferenceList` no longer implements `Iterator`
+    * Removed `current`, `key`, `next`, `rewind` and `valid`
+* `ReferenceList` no longer implements `ArrayAccess`
+    * Removed `offsetExists`, `offsetGet`, `offsetSet` and `offsetUnset`
+* `ReferenceList` still implements `Countable`, `Traversable` and `Serializable`
+* `ReferenceList` now implements `IteratorAggregate`
+    * Method `getIterator` was added
 * `ReferenceList::addReference` now throws an `InvalidArgumentException` for negative indices
-* Removed `HashableObjectStorage`
 * `Entity` no longer implements `Comparable`
 * Added `EntityDocument::equals`
 
