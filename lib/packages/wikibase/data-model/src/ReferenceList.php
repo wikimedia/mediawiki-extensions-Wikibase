@@ -126,7 +126,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate {
 	 */
 	public function indexOf( Reference $reference ) {
 		foreach ( $this->references as $index => $ref ) {
-			if ( $ref->equals( $reference ) ) {
+			if ( $ref === $reference ) {
 				return $index;
 			}
 		}
@@ -281,15 +281,6 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate {
 	 */
 	public function getIterator() {
 		return new ArrayIterator( $this->references );
-	}
-
-	/**
-	 * @since 5.0
-	 *
-	 * @return Reference[]
-	 */
-	public function toArray() {
-		return $this->references;
 	}
 
 }
