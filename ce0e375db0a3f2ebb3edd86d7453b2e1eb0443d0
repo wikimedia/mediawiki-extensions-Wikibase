@@ -40,6 +40,24 @@
       "revId": "ce0e375db0a3f2ebb3edd86d7453b2e1eb0443d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_49f39307",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-09T08:25:26Z",
+      "side": 1,
+      "message": "@Jonas: That would be bad performance-wise\n@Daniel: Bad performance-wise \u0026 readability-wise\n\n$languages \u003d new StaticContentLanguages(\n  array_values( array_diff(\n    ( new WhateverContentLanguages() )-\u003egetLanguageCodes(),\n    array( \u0027nay\u0027, \u0027nope\u0027, \u0027no\u0027 )\n  ) )\n);\n\nvs\n\n$languages \u003d new DifferenceContentLanguages(\n  new WhateverContentLanguages(),\n  new StaticContentLanguages( array( \u0027nay\u0027, \u0027nope\u0027, \u0027no\u0027 ) )\n)",
+      "parentUuid": "4ea78b8a_4899587f",
+      "revId": "ce0e375db0a3f2ebb3edd86d7453b2e1eb0443d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
