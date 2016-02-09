@@ -8,6 +8,7 @@ use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\View\Template\TemplateFactory;
@@ -34,11 +35,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			->method( 'getUserSpecifiedLanguages' )
 			->will( $this->returnValue( array( 'de', 'es', 'ru' ) ) );
 
-		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$contentLanguages->expects( $this->once() )
-			->method( 'getLanguages' )
-			->will( $this->returnValue( array( 'en', 'es', 'ru' ) ) );
-
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
@@ -46,7 +42,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
 			$userLanguageLookup,
-			$contentLanguages,
+			new StaticContentLanguages( array( 'en', 'es', 'ru' ) ),
 			new BasicEntityIdParser(),
 			$this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' ),
 			$languageNameLookup,

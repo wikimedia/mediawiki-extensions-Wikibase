@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndexEntry;
 
@@ -113,22 +114,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	}
 
 	private function getContentLanguages() {
-		$languageCodes = array( 'ar', 'de', 'en', 'fr' );
-
-		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$contentLanguages->expects( $this->any() )
-			->method( 'getLanguages' )
-			->will( $this->returnCallback( function() use( $languageCodes ) {
-				return $languageCodes;
-			} ) );
-
-		$contentLanguages->expects( $this->any() )
-			->method( 'hasLanguage' )
-			->will( $this->returnCallback( function( $languageCode ) use ( $languageCodes ) {
-				return in_array( $languageCode, $languageCodes );
-			} ) );
-
-		return $contentLanguages;
+		return new StaticContentLanguages( array( 'ar', 'de', 'en', 'fr' ) );
 	}
 
 	protected function newSpecialPage() {

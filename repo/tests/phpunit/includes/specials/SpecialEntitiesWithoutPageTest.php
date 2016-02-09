@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxRequest;
 use SpecialPageTestBase;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialEntitiesWithoutPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
@@ -31,22 +32,13 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	protected function newSpecialPage() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$termsLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$termsLanguages->expects( $this->never() )
-			->method( 'getLanguages' );
-		$termsLanguages->expects( $this->any() )
-			->method( 'hasLanguage' )
-			->will( $this->returnCallback( function( $code ) {
-				return $code === 'acceptedlanguage';
-			} ) );
-
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
 			TermIndexEntry::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
 			$wikibaseRepo->getStore()->newEntityPerPage(),
 			$wikibaseRepo->getEntityFactory(),
-			$termsLanguages
+			new StaticContentLanguages( array( 'acceptedlanguage' ) )
 		);
 	}
 

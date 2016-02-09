@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\ValidatorBuilders;
 
 /**
@@ -44,17 +45,12 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 
 		$urlSchemes = array( 'http', 'https', 'ftp', 'mailto' );
 
-		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$contentLanguages->expects( $this->any() )
-			->method( 'getLanguages' )
-			->will( $this->returnValue( array( 'contentlanguage' ) ) );
-
 		$builders = new ValidatorBuilders(
 			$entityLookup,
 			$entityIdParser,
 			$urlSchemes,
 			'http://qudt.org/vocab/',
-			$contentLanguages,
+			new StaticContentLanguages( array( 'contentlanguage' ) ),
 			$this->getCachingCommonsMediaFileNameLookup()
 		);
 

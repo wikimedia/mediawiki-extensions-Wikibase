@@ -19,6 +19,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -59,11 +60,6 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
 		);
 
-		$termsLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$termsLanguages->expects( $this->any() )
-			->method( 'getLanguages' )
-			->will( $this->returnValue( array( 'de', $langCode, 'es', 'ja' ) ) );
-
 		return new EntityAccessor(
 			new BasicEntityIdParser(),
 			$entityLookup ?: new MockRepository(),
@@ -71,7 +67,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			$propertyDataTypeLookup,
 			$fallbackChain,
 			$language,
-			$termsLanguages
+			new StaticContentLanguages( array( 'de', $langCode, 'es', 'ja' ) )
 		);
 	}
 

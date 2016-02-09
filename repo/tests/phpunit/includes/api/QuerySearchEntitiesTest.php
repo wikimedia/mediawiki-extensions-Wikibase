@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\QuerySearchEntities;
@@ -55,14 +56,12 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return ContentLanguages|\PHPUnit_Framework_MockObject_MockObject
+	 * @return ContentLanguages
 	 */
-	private function getMockContentLanguages() {
-		$contentLanguages = $this->getMock( 'Wikibase\Lib\ContentLanguages' );
-		$contentLanguages->expects( $this->any() )->method( 'getLanguages' )
-			->will( $this->returnValue( array( 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' ) ) );
-
-		return $contentLanguages;
+	private function getContentLanguages() {
+		return new StaticContentLanguages(
+			array( 'de', 'de-ch', 'en', 'ii', 'nn', 'ru', 'zh-cn' )
+		);
 	}
 
 	/**
@@ -154,7 +153,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 		$api->setServices(
 			$this->getMockEntitySearchHelper( $params, $matches ),
 			$this->getMockTitleLookup(),
-			$this->getMockContentLanguages(),
+			$this->getContentLanguages(),
 			array( 'item', 'property' )
 		);
 
