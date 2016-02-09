@@ -112,6 +112,8 @@
   ///////////////////////////////////////////////////////////////////////////////////////
   -->
 
+  <!-- Individual statement ranks -->
+
   <owl:NamedIndividual rdf:about="&wikibase;DeprecatedRank">
       <rdfs:label>DeprecatedRank</rdfs:label>
       <rdfs:comment>Deprecated statement rank.</rdfs:comment>
@@ -129,6 +131,8 @@
       <rdfs:comment>Preferred statement rank.</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;Rank"/>
   </owl:NamedIndividual>
+
+  <!-- Individual property types supported by Wikibase -->
 
   <owl:NamedIndividual rdf:about="&wikibase;CommonsMedia">
       <rdfs:label>CommonsMedia</rdfs:label>
@@ -181,6 +185,14 @@
   <owl:NamedIndividual rdf:about="&wikibase;WikibaseEntityid">
       <rdfs:label>WikibaseEntityid</rdfs:label>
       <rdfs:comment>Type for referring to another Wikibase entity.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <!-- Individual property types supported by known Wikibase extensions -->
+
+  <owl:NamedIndividual rdf:about="&wikibase;Math">
+      <rdfs:label>Mathematial expression</rdfs:label>
+      <rdfs:comment>Type for mathematical expressions as supported by the Math extension.</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
 
