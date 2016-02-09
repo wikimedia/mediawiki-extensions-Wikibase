@@ -361,12 +361,15 @@ abstract class ModifyEntity extends ApiBase {
 	 * @param ChangeOp $changeOp
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary The summary object to update with information about the change.
-	 *
-	 * @throws UsageException
 	 */
 	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
 		try {
-			$result = $changeOp->validate( $entity );
+			// NOTE: always validate modification against the current revision, if it exists!
+			// TODO: this should be re-engineered, see T126231
+			$currentEntityRevision = $this->revisionLookup->getEntityRevision( $entity->getId() );
+			$currentEntity = $currentEntityRevision ? $currentEntityRevision->getEntity() : $entity;
+			$result = $changeOp->validate( $currentEntity );
+			## $result = $changeOp->validate( $entity );
 
 			if ( !$result->isValid() ) {
 				throw new ChangeOpValidationException( $result );
