@@ -110,10 +110,9 @@ class DispatchChanges extends Maintenance {
 		$changesCache = new ChunkCache( $changeLookup, $cacheChunkSize, $cacheSize );
 		$reporter = new ObservableMessageReporter();
 
-		$self = $this; // PHP 5.3...
 		$reporter->registerReporterCallback(
-			function ( $message ) use ( $self ) {
-				$self->log( $message );
+			function ( $message ) {
+				$this->log( $message );
 			}
 		);
 
