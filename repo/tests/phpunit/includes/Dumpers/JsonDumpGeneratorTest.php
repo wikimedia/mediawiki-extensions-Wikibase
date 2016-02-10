@@ -175,13 +175,12 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	public function makeIdPager( array $ids, $entityType = null ) {
 		$pager = $this->getMock( 'Wikibase\Repo\Store\EntityIdPager' );
 
-		$self = $this;
 		$offset = 0;
 
 		$pager->expects( $this->any() )
 			->method( 'fetchIds' )
-			->will( $this->returnCallback( function( $limit ) use ( $ids, $entityType, &$offset, $self ) {
-				return $self->listEntities( $ids, $entityType, $limit, $offset );
+			->will( $this->returnCallback( function( $limit ) use ( $ids, $entityType, &$offset ) {
+				return $this->listEntities( $ids, $entityType, $limit, $offset );
 			} ) );
 
 		return $pager;

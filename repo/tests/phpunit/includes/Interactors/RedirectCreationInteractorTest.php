@@ -155,14 +155,13 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	private function getMockEntityTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 
-		$testCase = $this;
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
-				$title = $testCase->getMock( 'Title' );
-				$title->expects( $testCase->any() )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				$title = $this->getMock( 'Title' );
+				$title->expects( $this->any() )
 					->method( 'isDeleted' )
-					->will( $testCase->returnValue( $id->getSerialization() === 'Q666' ) );
+					->will( $this->returnValue( $id->getSerialization() === 'Q666' ) );
 				return $title;
 			} ) );
 

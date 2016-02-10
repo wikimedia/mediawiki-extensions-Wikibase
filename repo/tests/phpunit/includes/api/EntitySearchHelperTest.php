@@ -31,13 +31,12 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private function getMockTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
-		$testCase = $this;
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) use ( $testCase ) {
+			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q111' ) {
-					return $testCase->getMockTitle( true );
+					return $this->getMockTitle( true );
 				} else {
-					return $testCase->getMockTitle( false );
+					return $this->getMockTitle( false );
 				}
 			} ) );
 		return $titleLookup;

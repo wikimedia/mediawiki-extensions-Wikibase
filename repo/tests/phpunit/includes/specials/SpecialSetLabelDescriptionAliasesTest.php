@@ -106,7 +106,6 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 			->disableOriginalConstructor()
 			->getMock();
 
-		$self = $this;
 		$detector->expects( $this->any() )
 			->method( 'detectLabelDescriptionConflicts' )
 			->will( $this->returnCallback( function(
@@ -114,11 +113,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				array $labels,
 				array $descriptions,
 				EntityId $ignoreEntityId = null
-			) use ( $self ) {
+			) {
 				$errors = array();
 
-				$errors = array_merge( $errors, $self->detectDupes( $labels ) );
-				$errors = array_merge( $errors, $self->detectDupes( $descriptions ) );
+				$errors = array_merge( $errors, $this->detectDupes( $labels ) );
+				$errors = array_merge( $errors, $this->detectDupes( $descriptions ) );
 
 				$result = empty( $errors ) ? Result::newSuccess() : Result::newError( $errors );
 				return $result;
