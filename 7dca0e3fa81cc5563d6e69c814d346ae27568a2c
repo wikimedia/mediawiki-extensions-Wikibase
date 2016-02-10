@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_32a8f01c",
+        "filename": "lib/tests/phpunit/changes/ItemChangeTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T10:14:58Z",
+      "side": 1,
+      "message": "This comment does not add anything now. Please remove.",
+      "revId": "7dca0e3fa81cc5563d6e69c814d346ae27568a2c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
