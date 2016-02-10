@@ -14,22 +14,18 @@ class XmlRdfWriter extends RdfWriterBase {
 
 	public function __construct( $role = parent::DOCUMENT_ROLE, BNodeLabeler $labeler = null ) {
 		parent::__construct( $role, $labeler );
-		// Unfortunately, this is a bit ugly since PHP 5.3 can't call array($this, 'foo') directly
-		// Also due to PHP 5.3 scope issues, used functions need to be public.
-		// TODO: seek better solution (or move to PHP 5.4+)
-		$self = $this;
-		$this->transitionTable[self::STATE_START][self::STATE_DOCUMENT] = function() use ( $self ) {
-			$self->beginDocument();
+
+		$this->transitionTable[self::STATE_START][self::STATE_DOCUMENT] = function() {
+			$this->beginDocument();
 		};
-		array( $this, 'beginDocument' );
-		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_FINISH] = function() use ( $self ) {
-			$self->finishDocument();
+		$this->transitionTable[self::STATE_DOCUMENT][self::STATE_FINISH] = function() {
+			$this->finishDocument();
 		};
-		$this->transitionTable[self::STATE_OBJECT][self::STATE_DOCUMENT] = function() use ( $self ) {
-			$self->finishSubject();
+		$this->transitionTable[self::STATE_OBJECT][self::STATE_DOCUMENT] = function() {
+			$this->finishSubject();
 		};
-		$this->transitionTable[self::STATE_OBJECT][self::STATE_SUBJECT] = function() use ( $self ) {
-			$self->finishSubject();
+		$this->transitionTable[self::STATE_OBJECT][self::STATE_SUBJECT] = function() {
+			$this->finishSubject();
 		};
 	}
 
@@ -118,15 +114,14 @@ class XmlRdfWriter extends RdfWriterBase {
 	/**
 	 * Emit a document header.
 	 */
-	public function beginDocument() {
+	private function beginDocument() {
 		$this->write( "<?xml version=\"1.0\"?>\n" );
 
 		// define a callback for generating namespace attributes
-		$self = $this;
-		$namespaceAttrCallback = function() use ( $self ) {
+		$namespaceAttrCallback = function() {
 			$attr = '';
 
-			$namespaces = $self->getPrefixes();
+			$namespaces = $this->getPrefixes();
 			foreach ( $namespaces as $ns => $uri ) {
 				$escapedUri = htmlspecialchars( $uri, ENT_QUOTES );
 				$nss = $ns === '' ? '' : ":$ns";
@@ -151,7 +146,7 @@ class XmlRdfWriter extends RdfWriterBase {
 	/**
 	 * Emit the root element
 	 */
-	public function finishSubject() {
+	private function finishSubject() {
 		$this->write( "\t" );
 		$this->close( 'rdf', 'Description' );
 		$this->write( "\n" );
@@ -160,7 +155,7 @@ class XmlRdfWriter extends RdfWriterBase {
 	/**
 	 * Write document footer
 	 */
-	public function finishDocument() {
+	private function finishDocument() {
 		// close document element
 		$this->close( 'rdf', 'RDF' );
 		$this->write( "\n" );

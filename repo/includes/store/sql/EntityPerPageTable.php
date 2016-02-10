@@ -99,9 +99,8 @@ class EntityPerPageTable implements EntityPerPage {
 
 		$dbw = wfGetDB( DB_MASTER );
 
-		$thisTable = $this;
 		$ok = $dbw->deadlockLoop(
-			function ( DatabaseBase $dbw, array $values, array $conflictConds ) use ( $thisTable ) {
+			function ( DatabaseBase $dbw, array $values, array $conflictConds ) {
 				if ( $conflictConds ) {
 					$where = $dbw->makeList( $conflictConds, LIST_OR );
 					$dbw->delete(
