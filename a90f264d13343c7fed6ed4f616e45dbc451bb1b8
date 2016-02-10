@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "4ea78b8a_c0dd0619",
+        "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "{string|null} or possibly {string|undefined}. Probably not [dataTypeId] because this would make the 4th parameter the 3rd.",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_fb4c7345",
+        "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "I do not understand what the benefit of this thin wrapper around FormatValueCaller.formatValue is?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_a0da4a1f",
+        "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "{string|null}",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_3bdd2b74",
+        "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "Hurray for the fact that you killed the crazy parameter swapping. Now there are always 4 parameters, but they can be null. Two problems:\n* It seems this is not documented everywhere.\n* Can we get rid of the crazy initialization code in formatValue now? Or are there still callers with swapped parameters?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_d2c07c31",
         "filename": "repo/resources/formatters/ApiFormatterFactory.js",
         "patchSetId": 3
@@ -19,6 +87,109 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_9ba0dff2",
+        "filename": "repo/resources/formatters/ApiFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "This is correct, because this file was \"getStore.js\" before.",
+      "parentUuid": "4ea78b8a_d2c07c31",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_209ada75",
+        "filename": "repo/resources/formatters/ApiFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "I would prefer ApiValueFormatterFactory. You see, an \"ApiFormatter\" formats APIs?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_80b38efc",
+        "filename": "repo/resources/formatters/ApiFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "This means code specific for QuantityInput (living in ValueView) now lives in unrelated code called ApiFormatterFactory (living in repo)?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e0c04231",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "What is the \"null\" for?\n\nHow is this a specific \"EntityId\" formatter? The parameter \"wb.datamodel.EntityId.TYPE\" is lost in the new code.",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_7b208396",
+        "filename": "view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "Does this mean the implementation of the two\n* DataValueBasedEntityIdHtmlFormatter\n* DataValueBasedEntityIdPlainFormatter\n\nis now 100% identical?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_1b370fe2",
+        "filename": "view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "Does this mean the implementation of the two\n* DataValueBasedEntityIdHtmlFormatter\n* DataValueBasedEntityIdPlainFormatter\n\nis now 100% identical?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_9201a473",
         "filename": "view/resources/wikibase/wikibase.ValueFormatterFactory.js",
         "patchSetId": 3
@@ -30,6 +201,57 @@
       "writtenOn": "2016-02-10T09:45:43Z",
       "side": 1,
       "message": "license?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_a08d6a38",
+        "filename": "view/resources/wikibase/wikibase.ValueFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "What is a \"data type id\"? Can we please try to stick to the much more specific terms \"property type\" and \"value type\"?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e05cc250",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "{dataTypes.DataType|null} dataType",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_405ef649",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:41:56Z",
+      "side": 1,
+      "message": "Documentation please? Especially \"{dataTypes.DataType|null} dataType\".",
       "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
