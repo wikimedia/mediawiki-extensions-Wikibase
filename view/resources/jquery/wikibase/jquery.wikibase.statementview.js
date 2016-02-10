@@ -625,35 +625,22 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @inheritdoc
 	 */
 	startEditing: function() {
-		var self = this,
-			deferred = $.Deferred();
+		var self = this;
 
-		this.$mainSnak.one( 'snakviewafterstartediting', function() {
-			PARENT.prototype.startEditing.call( self ).done( function() {
-				var snaklistviews,
-					i;
-
-				self._rankSelector.startEditing();
-
-				if ( self._qualifiers ) {
-					snaklistviews = self._qualifiers.value();
-
-					if ( snaklistviews.length ) {
-						for ( i = 0; i < snaklistviews.length; i++ ) {
-							snaklistviews[i].startEditing();
-						}
-					}
-				}
-
-				deferred.resolve();
-			} )
-			.fail( deferred.reject );
+		// We need to initialize the main snak before calling PARENT::startEditing,
+		// since that triggers 'afterstartediting' which tries to set focus into
+		// the main snak
+		this._createMainSnak();
+		this._mainSnakSnakView.startEditing().then( function() {
+			// PARENT::startEditing calls this.draw
+			return PARENT.prototype.startEditing.call( self )
+		} ).then( function() {
+			self._rankSelector.startEditing();
+			$.each( self._qualifiers.value(), function ( key, snaklistView ) {
+				snaklistView.startEditing();
+			} );
+			self._startEditingReferences();
 		} );
-
-		this._getMainSnakSnakView().startEditing();
-		this._startEditingReferences();
-
-		return deferred.promise();
 	},
 
 	/**
@@ -860,7 +847,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @inheritdoc
 	 */
 	focus: function() {
-		this._getMainSnakSnakView().focus();
+		this._mainSnakSnakView.focus();
 	}
 } );
 
