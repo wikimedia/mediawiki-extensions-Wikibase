@@ -20,7 +20,7 @@ use Wikimedia\Assert\Assert;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ChangesListSpecialPageHooksHandler {
+class ChangesListSpecialPageHookHandlers {
 
 	/**
 	 * @var WebRequest
@@ -48,7 +48,7 @@ class ChangesListSpecialPageHooksHandler {
 	private $showExternalChanges;
 
 	/**
-	 * @var ChangesListSpecialPageHooksHandler
+	 * @var ChangesListSpecialPageHookHandlers
 	 */
 	private static $instance = null;
 
@@ -77,7 +77,7 @@ class ChangesListSpecialPageHooksHandler {
 	 * @param IContextSource $context
 	 * @param string $specialPageName
 	 *
-	 * @return ChangesListSpecialPageHooksHandler
+	 * @return ChangesListSpecialPageHookHandlers
 	 */
 	private static function newFromGlobalState(
 		IContextSource $context,
@@ -100,7 +100,7 @@ class ChangesListSpecialPageHooksHandler {
 	 * @param IContextSource $context
 	 * @param string $specialPageName
 	 *
-	 * @return ChangesListSpecialPageHooksHandler
+	 * @return ChangesListSpecialPageHookHandlers
 	 */
 	private static function getInstance(
 		IContextSource $context,
