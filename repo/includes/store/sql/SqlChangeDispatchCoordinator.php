@@ -536,10 +536,9 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				array( 'chd_site' => $state['chd_site'] ),
 				__METHOD__
 			);
-		} catch ( Exception $ex ) {
+		} finally {
 			$db->rollback( __METHOD__ );
 			$this->releaseRepoMaster( $db );
-			throw $ex;
 		}
 
 		$db->commit( __METHOD__ );
@@ -584,10 +583,9 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 				array( 'chd_site' => $state['chd_site'] ),
 				__METHOD__
 			);
-		} catch ( Exception $ex ) {
+		} finally {
 			$db->rollback( __METHOD__ );
 			$this->releaseRepoMaster( $db );
-			throw $ex;
 		}
 
 		$db->commit( __METHOD__ );
