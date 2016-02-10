@@ -5,16 +5,19 @@ namespace Wikibase\Client\Tests\Hooks;
 use FauxRequest;
 use FormOptions;
 use SpecialPageFactory;
-use Wikibase\Client\Hooks\ChangesListSpecialPageHooksHandler;
+use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 
 /**
- * @covers Wikibase\Client\Hooks\ChangesListSpecialPageHooksHandler
+ * @covers Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers
  *
  * @group WikibaseClientHooks
  * @group WikibaseClient
  * @group Wikibase
+ *
+ * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase {
+class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase {
 
 	public function testOnChangesListSpecialPageFilters() {
 		$user = $this->getUser(
@@ -28,7 +31,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 
 		$filters = array();
 
-		ChangesListSpecialPageHooksHandler::onChangesListSpecialPageFilters(
+		ChangesListSpecialPageHookHandlers::onChangesListSpecialPageFilters(
 			$specialPage,
 			$filters
 		);
@@ -52,7 +55,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 
 		$opts = new FormOptions();
 
-		ChangesListSpecialPageHooksHandler::onChangesListSpecialPageQuery(
+		ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery(
 			'RecentChanges',
 			$tables,
 			$fields,
@@ -74,10 +77,9 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		array $userOptions,
 		$optionDefault
 	) {
-		$hookHandler = new ChangesListSpecialPageHooksHandler(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( array() ),
 			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
 			'Watchlist',
 			true
 		);
@@ -99,7 +101,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 				false
 			),
 			array(
-				array( "rc_source != 'wb'" ),
+				array( 'rc_type != 5' ),
 				array( 'usenewrc' => 0 ),
 				true
 			)
@@ -107,10 +109,9 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 	}
 
 	public function testAddWikibaseConditions_wikibaseChangesDisabled() {
-		$hookHandler = new ChangesListSpecialPageHooksHandler(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( array() ),
 			$this->getUser( array( 'usenewrc' => 1 ) ),
-			$this->getLoadBalancer(),
 			'Watchlist',
 			true
 		);
@@ -120,7 +121,7 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$conds = array();
 		$hookHandler->addWikibaseConditions( $conds, $opts );
 
-		$this->assertEquals( array( "rc_source != 'wb'" ), $conds );
+		$this->assertEquals( array( 'rc_type != 5' ), $conds );
 	}
 
 	/**
@@ -132,10 +133,9 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$pageName,
 		$message
 	) {
-		$hookHandler = new ChangesListSpecialPageHooksHandler(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
 			$pageName,
 			true
 		);
@@ -197,10 +197,9 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$expectedToggleDefault,
 		$specialPageName
 	) {
-		$hookHandler = new ChangesListSpecialPageHooksHandler(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
 			$specialPageName,
 			true
 		);
@@ -275,10 +274,9 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 		$expectedToggleDefault,
 		$specialPageName
 	) {
-		$hookHandler = new ChangesListSpecialPageHooksHandler(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( $requestParams ),
 			$this->getUser( $userOptions ),
-			$this->getLoadBalancer(),
 			$specialPageName,
 			true
 		);
@@ -340,10 +338,9 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 	 * @dataProvider filterNotAddedWhenExternalRecentChangesDisabledProvider() {
 	 */
 	public function testFilterNotAddedWhenExternalRecentChangesDisabled( $specialPageName ) {
-		$hookHandler = new ChangesListSpecialPageHooksHandler(
+		$hookHandler = new ChangesListSpecialPageHookHandlers(
 			$this->getRequest( array() ),
 			$this->getUser( array( 'usenewrc' => 0 ) ),
-			$this->getLoadBalancer(),
 			$specialPageName,
 			false
 		);
@@ -384,28 +381,6 @@ class ChangesListSpecialPageHooksHandlerTest extends \PHPUnit_Framework_TestCase
 			} ) );
 
 		return $user;
-	}
-
-	private function getLoadBalancer() {
-		$databaseBase = $this->getMockBuilder( 'IDatabase' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$databaseBase->expects( $this->any() )
-			->method( 'addQuotes' )
-			->will( $this->returnCallback( function( $input ) {
-				return "'$input'";
-			} ) );
-
-		$loadBalancer = $this->getMockBuilder( 'LoadBalancer' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$loadBalancer->expects( $this->any() )
-			->method( 'getConnection' )
-			->will( $this->returnValue( $databaseBase ) );
-
-		return $loadBalancer;
 	}
 
 }

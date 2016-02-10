@@ -5,12 +5,9 @@ namespace Wikibase\Client\Hooks;
 use ChangesListSpecialPage;
 use FormOptions;
 use IContextSource;
-use LoadBalancer;
-use LBFactory;
 use RequestContext;
 use User;
 use WebRequest;
-use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Assert\Assert;
 
@@ -20,7 +17,7 @@ use Wikimedia\Assert\Assert;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ChangesListSpecialPageHooksHandler {
+class ChangesListSpecialPageHookHandlers {
 
 	/**
 	 * @var WebRequest
@@ -33,11 +30,6 @@ class ChangesListSpecialPageHooksHandler {
 	private $user;
 
 	/**
-	 * @var LoadBalancer
-	 */
-	private $loadBalancer;
-
-	/**
 	 * @var string
 	 */
 	private $pageName;
@@ -48,27 +40,24 @@ class ChangesListSpecialPageHooksHandler {
 	private $showExternalChanges;
 
 	/**
-	 * @var ChangesListSpecialPageHooksHandler
+	 * @var ChangesListSpecialPageHookHandlers
 	 */
 	private static $instance = null;
 
 	/**
 	 * @param WebRequest $request
 	 * @param User $user
-	 * @param LoadBalancer $loadBalancer
 	 * @param string $pageName
 	 * @param bool $showExternalChanges
 	 */
 	public function __construct(
 		WebRequest $request,
 		User $user,
-		LoadBalancer $loadBalancer,
 		$pageName,
 		$showExternalChanges
 	) {
 		$this->request = $request;
 		$this->user = $user;
-		$this->loadBalancer = $loadBalancer;
 		$this->pageName = $pageName;
 		$this->showExternalChanges = $showExternalChanges;
 	}
@@ -77,7 +66,7 @@ class ChangesListSpecialPageHooksHandler {
 	 * @param IContextSource $context
 	 * @param string $specialPageName
 	 *
-	 * @return ChangesListSpecialPageHooksHandler
+	 * @return ChangesListSpecialPageHookHandlers
 	 */
 	private static function newFromGlobalState(
 		IContextSource $context,
@@ -90,7 +79,6 @@ class ChangesListSpecialPageHooksHandler {
 		return new self(
 			$context->getRequest(),
 			$context->getUser(),
-			LBFactory::singleton()->getMainLB(),
 			$specialPageName,
 			$settings->getSetting( 'showExternalRecentChanges' )
 		);
@@ -100,7 +88,7 @@ class ChangesListSpecialPageHooksHandler {
 	 * @param IContextSource $context
 	 * @param string $specialPageName
 	 *
-	 * @return ChangesListSpecialPageHooksHandler
+	 * @return ChangesListSpecialPageHookHandlers
 	 */
 	private static function getInstance(
 		IContextSource $context,
@@ -187,8 +175,8 @@ class ChangesListSpecialPageHooksHandler {
 	}
 
 	/**
-	 * @param array &$conds
-	 * @param FormOptions $opts
+	 * @param array $conds
+	 * @param FormOptions
 	 *
 	 * @return array
 	 */
@@ -196,9 +184,7 @@ class ChangesListSpecialPageHooksHandler {
 		// do not include wikibase changes for activated enhanced watchlist
 		// since we do not support that format yet
 		if ( $this->shouldHideWikibaseChanges( $opts ) ) {
-			$dbr = $this->loadBalancer->getConnection( DB_SLAVE );
-			$conds[] = 'rc_source != ' . $dbr->addQuotes( RecentChangeFactory::SRC_WIKIBASE );
-			$this->loadBalancer->reuseConnection( $dbr );
+			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
 
 		return $conds;
