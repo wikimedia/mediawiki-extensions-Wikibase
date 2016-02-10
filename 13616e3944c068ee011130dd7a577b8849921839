@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_323230f0",
+        "filename": "lib/includes/DifferenceContentLanguages.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T08:20:22Z",
+      "side": 1,
+      "message": "This *is* caching.\n\nif ( isNotCached ) {\n    cache;\n}\nreturnCache;",
+      "parentUuid": "4ea78b8a_29bf37cf",
+      "revId": "13616e3944c068ee011130dd7a577b8849921839",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_e8aa8481",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 3
