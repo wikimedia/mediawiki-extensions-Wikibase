@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_d2c07c31",
+        "filename": "repo/resources/formatters/ApiFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-10T09:45:43Z",
+      "side": 1,
+      "message": "Ghostwriter?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9201a473",
+        "filename": "view/resources/wikibase/wikibase.ValueFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-10T09:45:43Z",
+      "side": 1,
+      "message": "license?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
