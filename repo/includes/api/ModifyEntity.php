@@ -162,6 +162,10 @@ abstract class ModifyEntity extends ApiBase {
 	 * @see EntitySavingHelper::attemptSaveEntity
 	 */
 	private function attemptSaveEntity( EntityDocument $entity, $summary, $flags = 0 ) {
+		// TODO: we should pass the revision ID of the current revision loaded by
+		// applyChangeOp() to the storage layer, to avoid race conditions for
+		// concurrent edits.
+		// TODO: this should be re-engineered, see T126231
 		return $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $flags );
 	}
 
@@ -361,12 +365,15 @@ abstract class ModifyEntity extends ApiBase {
 	 * @param ChangeOp $changeOp
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary The summary object to update with information about the change.
-	 *
-	 * @throws UsageException
 	 */
 	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
 		try {
-			$result = $changeOp->validate( $entity );
+			// NOTE: always validate modification against the current revision, if it exists!
+			// TODO: this should be re-engineered, see T126231
+			// TODO: attemptSaveEntity() should somehow get the ID of the current revision.
+			$currentEntityRevision = $this->revisionLookup->getEntityRevision( $entity->getId() );
+			$currentEntity = $currentEntityRevision ? $currentEntityRevision->getEntity() : $entity;
+			$result = $changeOp->validate( $currentEntity );
 
 			if ( !$result->isValid() ) {
 				throw new ChangeOpValidationException( $result );
