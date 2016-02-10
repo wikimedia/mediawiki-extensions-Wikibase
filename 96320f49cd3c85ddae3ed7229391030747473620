@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_724c28a0",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-10T10:19:39Z",
+      "side": 1,
+      "message": "You don\u0027t want to rollback all the time",
+      "revId": "96320f49cd3c85ddae3ed7229391030747473620",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_1263740b",
+        "filename": "repo/includes/store/sql/SqlChangeDispatchCoordinator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-10T10:19:39Z",
+      "side": 1,
+      "message": "You don\u0027t want to rollback all the time",
+      "revId": "96320f49cd3c85ddae3ed7229391030747473620",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
