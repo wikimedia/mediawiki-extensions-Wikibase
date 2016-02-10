@@ -27,7 +27,7 @@
   // Classes
   //
   ///////////////////////////////////////////////////////////////////////////////////////
-   -->
+  -->
 
   <owl:Class rdf:about="&wikibase;Dump">
     <rdfs:label>Dump</rdfs:label>
@@ -50,7 +50,6 @@
       <rdfs:comment>Wikibase property.</rdfs:comment>
       <rdfs:subClassOf rdf:resource="&wikibase;Entity"/>
   </owl:Class>
-
 
   <owl:Class rdf:about="&wikibase;Statement">
     <rdfs:label>Statement</rdfs:label>
@@ -87,11 +86,13 @@
     <rdfs:comment>Wikibase extended value representing quantity.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="&wikibase;Value"/>
   </owl:Class>
+
   <owl:Class rdf:about="&wikibase;TimeValue">
     <rdfs:label>TimeValue</rdfs:label>
     <rdfs:comment>Wikibase extended value representing time.</rdfs:comment>
     <rdfs:subClassOf rdf:resource="&wikibase;Value"/>
   </owl:Class>
+
   <owl:Class rdf:about="&wikibase;GlobecoordinateValue">
     <rdfs:label>GlobecoordinateValue</rdfs:label>
     <rdfs:comment>Wikibase extended value representing geographic coordinate.</rdfs:comment>
@@ -109,29 +110,35 @@
   // Individuals
   //
   ///////////////////////////////////////////////////////////////////////////////////////
-   -->
+  -->
 
   <owl:NamedIndividual rdf:about="&wikibase;DeprecatedRank">
       <rdfs:label>DeprecatedRank</rdfs:label>
-      <rdfs:comment>Deprecated rank.</rdfs:comment>
+      <rdfs:comment>Deprecated statement rank.</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;Rank"/>
   </owl:NamedIndividual>
 
   <owl:NamedIndividual rdf:about="&wikibase;NormalRank">
       <rdfs:label>NormalRank</rdfs:label>
-      <rdfs:comment>Normal rank.</rdfs:comment>
+      <rdfs:comment>Normal statement rank.</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;Rank"/>
   </owl:NamedIndividual>
 
   <owl:NamedIndividual rdf:about="&wikibase;PreferredRank">
       <rdfs:label>PreferredRank</rdfs:label>
-      <rdfs:comment>Preferred rank.</rdfs:comment>
+      <rdfs:comment>Preferred statement rank.</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;Rank"/>
   </owl:NamedIndividual>
 
   <owl:NamedIndividual rdf:about="&wikibase;CommonsMedia">
       <rdfs:label>CommonsMedia</rdfs:label>
       <rdfs:comment>Wikimedia Commons reference type.</rdfs:comment>
+      <rdf:type rdf:resource="&wikibase;PropertyType"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="&wikibase;ExternalId">
+      <rdfs:label>WikibaseExternalId</rdfs:label>
+      <rdfs:comment>Type for referring to ID defined by external authority.</rdfs:comment>
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
 
@@ -177,20 +184,13 @@
       <rdf:type rdf:resource="&wikibase;PropertyType"/>
   </owl:NamedIndividual>
 
-  <owl:NamedIndividual rdf:about="&wikibase;ExternalId">
-      <rdfs:label>WikibaseExternalId</rdfs:label>
-      <rdfs:comment>Type for referring to ID defined by external authority.</rdfs:comment>
-      <rdf:type rdf:resource="&wikibase;PropertyType"/>
-  </owl:NamedIndividual>
-
-
   <!--
   ///////////////////////////////////////////////////////////////////////////////////////
   //
   // Properties
   //
   ///////////////////////////////////////////////////////////////////////////////////////
-   -->
+  -->
 
   <owl:ObjectProperty rdf:about="&wikibase;rank">
       <rdfs:label>rank</rdfs:label>
