@@ -127,10 +127,9 @@ class ItemChangeTest extends EntityChangeTest {
 			\MediaWiki\restoreWarnings();
 
 			return $cases;
-		} catch ( Exception $ex ) {
+		} finally {
 			$wgDevelopmentWarnings = true;
 			\MediaWiki\restoreWarnings();
-			throw $ex;
 		}
 	}
 
@@ -153,16 +152,8 @@ class ItemChangeTest extends EntityChangeTest {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 			$this->assertInstanceOf( 'Diff\Diff', $siteLinkDiff,
 				"getSiteLinkDiff must return a Diff" );
-		} catch ( Exception $ex ) {
-			// PHP 5.3 doesn't have `finally`, so we use a hacky emulation
-			$exception = $ex;
-		}
-
-		// this is our make-shift `finally` section.
-		\MediaWiki\restoreWarnings();
-
-		if ( $exception ) {
-			throw $exception;
+		} finally {
+			\MediaWiki\restoreWarnings();
 		}
 	}
 
