@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_4695ae41",
+        "filename": "lib/tests/phpunit/changes/ItemChangeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T16:58:09Z",
+      "side": 1,
+      "message": "These two lines are not needed any more.",
+      "revId": "a2fb9d2d7fa86c6cb7932f3710832a69f316e3bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_a68d8238",
+        "filename": "lib/tests/phpunit/changes/ItemChangeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T16:58:09Z",
+      "side": 1,
+      "message": "I think this line should be moved outside of the try-finally.",
+      "revId": "a2fb9d2d7fa86c6cb7932f3710832a69f316e3bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_868ac61a",
+        "filename": "lib/tests/phpunit/changes/ItemChangeTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T16:58:09Z",
+      "side": 1,
+      "message": "Dead variable now.",
+      "revId": "a2fb9d2d7fa86c6cb7932f3710832a69f316e3bc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
