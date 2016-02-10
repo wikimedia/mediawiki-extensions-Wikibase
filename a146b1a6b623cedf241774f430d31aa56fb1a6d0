@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_5287ac14",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T09:58:51Z",
+      "side": 1,
+      "message": "Hm. Seems we do not have a good naming scheme for these.\n* Classes containing multiple handlers are all called \"…HookHandlers\".\n* One is called \"…HooksHandler\". I will fix this.\n* Both \"…\\Hooks\\…HookHandler\" and \"…\\Hooks\\…(?\u003c!Hook)Handler\" occur 4 times in our code base.\n\nI guess this is fine because \"Hook\" is in the namespace.",
+      "revId": "a146b1a6b623cedf241774f430d31aa56fb1a6d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_b204e081",
+        "filename": "client/includes/Hooks/SkinTemplateOutputPageBeforeExecHandler.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T09:58:51Z",
+      "side": 1,
+      "message": "I wonder if this should use !$hasLangLinks.",
+      "revId": "a146b1a6b623cedf241774f430d31aa56fb1a6d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_92b3e4e7",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T09:58:51Z",
+      "side": 0,
+      "message": "Why does this mention a \"list\"? Was this a mistake?",
+      "revId": "357679d5b61050837a1069a9aeee7c624014d862",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
