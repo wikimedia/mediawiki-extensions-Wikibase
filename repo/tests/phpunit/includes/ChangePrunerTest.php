@@ -21,7 +21,7 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
  */
 class ChangePrunerTest extends MediaWikiTestCase {
 
-	public $messages = array();
+	private $messages = array();
 
 	public function testConstructorWithInvalidBatchSize() {
 		$this->setExpectedException( 'InvalidArgumentException' );

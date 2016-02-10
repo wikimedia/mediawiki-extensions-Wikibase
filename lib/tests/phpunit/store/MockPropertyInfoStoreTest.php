@@ -22,7 +22,7 @@ class MockPropertyInfoStoreTest extends \MediaWikiTestCase {
 	/**
 	 * @var PropertyInfoStoreTestHelper
 	 */
-	public $helper;
+	private $helper;
 
 	public function __construct( $name = null, $data = array(), $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );

@@ -42,17 +42,17 @@ class LanguageFallbackChainFactory {
 	/**
 	 * @var array[]
 	 */
-	public $languageCache;
+	private $languageCache;
 
 	/**
 	 * @var array[]
 	 */
-	public $userLanguageCache;
+	private $userLanguageCache;
 
 	/**
 	 * @var bool
 	 */
-	public $anonymousPageViewCached;
+	private $anonymousPageViewCached;
 
 	/**
 	 * @param bool $anonymousPageViewCached Whether full page outputs are cached for anons, so some

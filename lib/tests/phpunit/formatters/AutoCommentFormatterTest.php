@@ -20,7 +20,7 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	/**
 	 * @var Language
 	 */
-	public $language;
+	private $language;
 
 	/**
 	 * @var string LEFT-TO-RIGHT MARK, commonly abbreviated LRM from Language.php
