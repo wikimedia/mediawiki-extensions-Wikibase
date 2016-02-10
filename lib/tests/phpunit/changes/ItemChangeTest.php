@@ -122,16 +122,12 @@ class ItemChangeTest extends EntityChangeTest {
 			$change->setDiff( $diff );
 
 			$cases['atomic-sitelink-diff'] = array( $change );
-
+		} finally {
 			$wgDevelopmentWarnings = true;
 			\MediaWiki\restoreWarnings();
-
-			return $cases;
-		} catch ( Exception $ex ) {
-			$wgDevelopmentWarnings = true;
-			\MediaWiki\restoreWarnings();
-			throw $ex;
 		}
+
+		return $cases;
 	}
 
 	/**
@@ -147,22 +143,13 @@ class ItemChangeTest extends EntityChangeTest {
 
 		// Also suppress notices that may be triggered by wfLogWarning
 		\MediaWiki\suppressWarnings();
-		$exception = null;
 
 		try {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 			$this->assertInstanceOf( 'Diff\Diff', $siteLinkDiff,
 				"getSiteLinkDiff must return a Diff" );
-		} catch ( Exception $ex ) {
-			// PHP 5.3 doesn't have `finally`, so we use a hacky emulation
-			$exception = $ex;
-		}
-
-		// this is our make-shift `finally` section.
-		\MediaWiki\restoreWarnings();
-
-		if ( $exception ) {
-			throw $exception;
+		} finally {
+			\MediaWiki\restoreWarnings();
 		}
 	}
 
