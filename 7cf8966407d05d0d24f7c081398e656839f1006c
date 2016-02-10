@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4ea78b8a_a1b9ec79",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 183
+      },
+      "writtenOn": "2016-02-10T18:39:15Z",
+      "side": 1,
+      "message": "How does that label relate to Mathematial Expression used here https://www.wikidata.org/wiki/Special:ListProperties?datatype\u003dmath\n?",
+      "revId": "7cf8966407d05d0d24f7c081398e656839f1006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_15635e0b",
         "filename": "docs/ontology.owl",
         "patchSetId": 2
@@ -13,6 +30,23 @@
       "writtenOn": "2016-02-10T13:16:31Z",
       "side": 1,
       "message": "I would perfere to wait for I15fbeec282868b4267a3e3d15740f2c3ff37ea48",
+      "revId": "7cf8966407d05d0d24f7c081398e656839f1006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_61b3f496",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 183
+      },
+      "writtenOn": "2016-02-10T18:39:15Z",
+      "side": 1,
+      "message": "I would love to read here\n\"Type for mathematical expressions in MathML.\"",
       "revId": "7cf8966407d05d0d24f7c081398e656839f1006c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
