@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_fb75532d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-10T15:56:59Z",
+      "side": 1,
+      "message": "We worked hard to get rid of this, and now it\u0027s back, with no alternative, because EntityDocument::copy does not exist. Multiple people would have set a -1 because of this, but can\u0027t because it is already merged. So what now?",
+      "revId": "65f0082bbb2592243de9300c2c392f5a89fbfbe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
