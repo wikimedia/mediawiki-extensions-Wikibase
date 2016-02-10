@@ -1,0 +1,12 @@
+{
+	"name": "Wikibase DataModel JavaScript",
+	"author": [
+		"[http://www.snater.com H. Snater]"
+	],
+	"url": "https://github.com/wmde/WikibaseDataModelJavascript",
+	"description": "Javascript implementation of the Wikibase data model",
+	"version": "2.0.0",
+	"type": "wikibase",
+	"license-name": "GPL-2.0+",
+	"manifest_version": 1
+}
