@@ -290,10 +290,16 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 	/**
 	 * Starts the widget's edit mode.
+	 *
+	 * @return {Object} jQuery.Promise
+	 * @return {Function} return.done
+	 * @return {Function} return.fail
 	 */
 	startEditing: function() {
+		var deferred = $.Deferred();
+
 		if ( this.isInEditMode() ) {
-			return;
+			return deferred.resolve().promise();
 		}
 
 		var self = this;
@@ -303,13 +309,16 @@ $.widget( 'wikibase.snakview', PARENT, {
 		if ( this._variation ) {
 			$( this._variation ).one( 'afterstartediting', function() {
 				self._trigger( 'afterstartediting' );
+				deferred.resolve();
 			} );
 			this.draw();
 			this._variation.startEditing();
 		} else {
 			this.draw();
 			this._trigger( 'afterstartediting' );
+			deferred.resolve();
 		}
+		return deferred.promise();
 	},
 
 	/**

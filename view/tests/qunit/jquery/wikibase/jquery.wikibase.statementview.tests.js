@@ -55,7 +55,7 @@ var createStatementview = function( options, $node ) {
 					return _value;
 				},
 				startEditing: function() {
-					$dom.trigger( 'snakviewafterstartediting' );
+					return $.Deferred().resolve().promise();
 				},
 				stopEditing: function() {}
 			};
