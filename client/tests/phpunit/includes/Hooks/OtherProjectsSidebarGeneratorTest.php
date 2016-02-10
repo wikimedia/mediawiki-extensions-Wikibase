@@ -140,12 +140,11 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'href' => 'https://en.wikipedia.org/wiki/Cat',
 			'hreflang' => 'en'
 		);
-		$self = $this; // PHP 5.3 :(
 
 		return array(
 			'Noop hook, gets the right data' => array(
-				function( ItemId $itemId, array &$sidebar ) use ( $wikipediaLink, $wikiquoteLink, $wiktionaryLink, $self ) {
-					$self->assertSame(
+				function( ItemId $itemId, array &$sidebar ) use ( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ) {
+					$this->assertSame(
 						array(
 							'wikiquote' => array( 'enwikiquote' => $wikiquoteLink ),
 							'wikipedia' => array( 'enwiki' => $wikipediaLink ),
@@ -153,7 +152,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 						),
 						$sidebar
 					);
-					$self->assertSame( 'Q123', $itemId->getSerialization() );
+					$this->assertSame( 'Q123', $itemId->getSerialization() );
 				},
 				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
 				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink )
@@ -166,8 +165,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 				array( $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink )
 			),
 			'Hook inserts enwiki link' => array(
-				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink, $self ) {
-					$self->assertFalse(
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+					$this->assertFalse(
 						isset( $sidebar['wikipedia'] ),
 						'No Wikipedia link present yet'
 					);
@@ -213,10 +212,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function testBuildProjectLinkSidebar_hookNotCalledIfPageNotConnected() {
-		$self = $this; // We all love PHP 5.3
-
-		$handler = function() use ( $self ) {
-			$self->assertTrue( false, "Should not get called." );
+		$handler = function() {
+			$this->assertTrue( false, "Should not get called." );
 		};
 
 		$this->setMwGlobals( 'wgHooks', array( 'WikibaseClientOtherProjectsSidebar' => array( $handler ) ) );
@@ -240,12 +237,11 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function testBuildProjectLinkSidebar_hookCalledWithEmptySidebar() {
-		$self = $this; // We all love PHP 5.3
 		$called = false;
 
-		$handler = function( ItemId $itemId, $sidebar ) use ( $self, &$called ) {
-			$self->assertSame( 'Q123', $itemId->getSerialization() );
-			$self->assertSame( array(), $sidebar );
+		$handler = function( ItemId $itemId, $sidebar ) use ( &$called ) {
+			$this->assertSame( 'Q123', $itemId->getSerialization() );
+			$this->assertSame( array(), $sidebar );
 			$called = true;
 		};
 
