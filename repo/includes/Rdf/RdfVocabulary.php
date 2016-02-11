@@ -3,6 +3,7 @@
 namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
@@ -106,17 +107,30 @@ class RdfVocabulary {
 	/**
 	 * @var string[]
 	 */
+	private $dataTypeUris;
+
+	/**
+	 * @var string[]
+	 */
 	private static $canonicalLanguageCodeCache = array();
 
 	/**
 	 * @param string $baseUri Base URI for entity concept URIs.
 	 * @param string $dataUri Base URI for entity description URIs.
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
+	 * @param string[] $dataTypeUris Mapping of property data type IDs to their URIs,
+	 *                 if different from the default mapping.
 	 */
-	public function __construct( $baseUri, $dataUri, array $canonicalLanguageCodes = array() ) {
+	public function __construct(
+		$baseUri,
+		$dataUri,
+		array $canonicalLanguageCodes = array(),
+		array $dataTypeUris = array()
+	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
+		$this->dataTypeUris = $dataTypeUris;
 
 		if ( substr( $this->baseUri, -7 ) === 'entity/' ) {
 			$topUri = substr( $this->baseUri, 0, -7 );
@@ -167,6 +181,22 @@ class RdfVocabulary {
 	}
 
 	/**
+	 * Returns the base URI for a given namespace (aka prefix).
+	 *
+	 * @param string $ns The namespace name
+	 *
+	 * @throws OutOfBoundsException if $ns is not a known namespace
+	 * @return string the URI for the given namespace
+	 */
+	public function getNamespaceURI( $ns ) {
+		if ( !isset( $this->namespaces[$ns] ) ) {
+			throw new OutOfBoundsException();
+		}
+
+		return $this->namespaces[$ns];
+	}
+
+	/**
 	 * Returns a local name for the given entity using the given prefix.
 	 *
 	 * @param EntityId $entityId
@@ -201,14 +231,22 @@ class RdfVocabulary {
 	}
 
 	/**
-	 * Get Wikibase property name for ontology
+	 * Get Wikibase property data type Uri for ontology
 	 *
 	 * @param Property $prop
 	 *
 	 * @return string
 	 */
-	public function getDataTypeName( Property $prop ) {
-		return preg_replace( '/\W+/', '', ucwords( strtr( $prop->getDataTypeId(), '-', ' ' ) ) );
+	public function getDataTypeURI( Property $prop ) {
+		$type = $prop->getDataTypeId();
+
+		if ( !isset( $this->dataTypeUris[$type] ) ) {
+			// if the requested type has no URI in $this->dataTypeUris, add a generic one
+			$name = preg_replace( '/\W+/', '', ucwords( strtr( $type, '-', ' ' ) ) );
+			$this->dataTypeUris[$type] = $this->namespaces[self::NS_ONTOLOGY] . $name;
+		}
+
+		return $this->dataTypeUris[$type];
 	}
 
 	/**

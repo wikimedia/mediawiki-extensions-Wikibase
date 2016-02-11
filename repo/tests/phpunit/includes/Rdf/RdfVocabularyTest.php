@@ -23,7 +23,12 @@ use Wikibase\Rdf\RdfVocabulary;
 class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
-		return new RdfVocabulary( '<BASE>', '<DATA>', array( 'German' => 'de' ) );
+		return new RdfVocabulary(
+			'<BASE>',
+			'<DATA>',
+			array( 'German' => 'de' ),
+			array( 'acme' => 'http://acme.test/vocab/ACME' )
+		);
 	}
 
 	public function testGetCanonicalLanguageCode_withNonStandardCode() {
@@ -41,10 +46,19 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( 'http://commons.wikimedia.org/wiki/Special:FilePath/%21', $actual );
 	}
 
-	public function testGetDataTypeName() {
+	public function testGetDataTypeURI() {
 		$property = Property::newFromType( 'some-type' );
-		$actual = $this->newInstance()->getDataTypeName( $property );
-		$this->assertSame( 'SomeType', $actual );
+		$vocab = $this->newInstance();
+
+		// test generic uri construction
+		$actual = $vocab->getDataTypeURI( $property );
+		$expected = $vocab->getNamespaceURI( RdfVocabulary::NS_ONTOLOGY ) . 'SomeType';
+		$this->assertSame( $expected, $actual );
+
+		// test a type for which we have explicitly defined a uri
+		$property = Property::newFromType( 'acme' );
+		$actual = $vocab->getDataTypeURI( $property );
+		$this->assertSame( 'http://acme.test/vocab/ACME', $actual );
 	}
 
 	public function testGetEntityLName() {
@@ -64,6 +78,21 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 		$this->assertContainsOnly( 'string', $actual );
 		$this->assertContains( '<BASE>', $actual );
 		$this->assertContains( '<DATA>', $actual );
+	}
+
+	public function testGetNamespaceURI() {
+		$vocab = $this->newInstance();
+		$all = $vocab->getNamespaces();
+
+		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( RdfVocabulary::NS_DATA ) );
+		$this->assertEquals( '<BASE>', $vocab->getNamespaceURI( RdfVocabulary::NS_ENTITY ) );
+
+		foreach ( $all as $ns => $uri ) {
+			$this->assertEquals( $uri, $vocab->getNamespaceURI( $ns ) );
+		}
+
+		$this->setExpectedException( 'OutOfBoundsException' );
+		$vocab->getNamespaceURI( 'NonExistingNamespaceForGetNamespaceUriTest' );
 	}
 
 	public function testGetOntologyURI() {
