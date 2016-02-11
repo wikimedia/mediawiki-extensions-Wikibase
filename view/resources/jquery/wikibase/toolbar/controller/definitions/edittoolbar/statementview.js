@@ -94,7 +94,7 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				statementview = $statementview.data( 'statementview' ),
 				edittoolbar = $statementview.data( 'edittoolbar' ),
 				btnSave = edittoolbar.getButton( 'save' ),
-				enable = statementview.isValid() && !statementview.isInitialValue();
+				enable = statementview.isInEditMode() && statementview.isValid() && !statementview.isInitialValue();
 
 			btnSave[enable ? 'enable' : 'disable']();
 		},
