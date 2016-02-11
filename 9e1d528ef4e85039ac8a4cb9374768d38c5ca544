@@ -105,6 +105,23 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_9e19a380",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:06:06Z",
+      "side": 1,
+      "message": "I wonder what the benefit of this explicit class is. It does not have any methods. It\u0027s a simple value object. Simple value objects in JavaScript can be constructed when needed, e.g.\n\ntotals[markName] \u003d {\n    name: markName,\n    duration: 0,\n    durations: []\n};",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_98b3fafc",
         "filename": "repo/resources/performance/Mark.js",
         "patchSetId": 14
@@ -225,6 +242,40 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_981a1a7d",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:06:06Z",
+      "side": 1,
+      "message": "I assume this is an \"s\" to much.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_78171e57",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:06:06Z",
+      "side": 1,
+      "message": "This comment does not add anything that\u0027s not in the method name.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_d88f3225",
         "filename": "repo/resources/performance/Statistic.js",
         "patchSetId": 14
@@ -259,6 +310,40 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_580ca245",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:06:06Z",
+      "side": 1,
+      "message": "Two colons in a row? What\u0027s the meaning?",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f80a2e28",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:06:06Z",
+      "side": 1,
+      "message": "Should be MinAvgMax, not MinMaxAvg.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_988a1a1b",
         "filename": "repo/resources/performance/Statistic.js",
         "patchSetId": 14
@@ -270,6 +355,23 @@
       "writtenOn": "2016-02-11T10:31:37Z",
       "side": 1,
       "message": "I\u0027m pretty that\u0027s not how this should be formatted.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d82092aa",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:06:06Z",
+      "side": 1,
+      "message": "\"duration\" should be \"ms\" if it contains milliseconds.",
       "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -304,6 +406,40 @@
       "writtenOn": "2016-02-11T10:31:37Z",
       "side": 1,
       "message": "Param doc is missing",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_18062a24",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:06:06Z",
+      "side": 1,
+      "message": "max can be initialized with 0. min could be initialized with -1 or NaN or null or something, this needs a special case in the loop below.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_7eff07fd",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:06:06Z",
+      "side": 1,
+      "message": "Could this run into a division by zero case?",
       "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
