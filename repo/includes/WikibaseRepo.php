@@ -907,7 +907,8 @@ class WikibaseRepo {
 			$this->rdfVocabulary = new RdfVocabulary(
 				$settings->getSetting( 'conceptBaseUri' ),
 				$entityDataTitle->getCanonicalURL() . '/',
-				$languageCodes
+				$languageCodes,
+				$this->dataTypeDefinitions->getRdfTypeUris()
 			);
 		}
 
