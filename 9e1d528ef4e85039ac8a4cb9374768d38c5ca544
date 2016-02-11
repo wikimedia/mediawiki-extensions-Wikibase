@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_f8f54eb6",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Whitespace error",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_18f14ac8",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Whitespace error",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_18c86a76",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "It\u0027s not actually an array.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f8cc6e8e",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "This method seems somewhat off here, since it does not have anything to do with the current instance and few with this class at all.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d8c2d25c",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Drop window prefix",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_98b3fafc",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Please don\u0027t directly access properties",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_389a0676",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Please don\u0027t directly access properties",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d8a9728e",
+        "filename": "repo/resources/performance/PerformanceMark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "?",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f8a30ea6",
+        "filename": "repo/resources/performance/PerformanceMark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "There is no such thing in JS",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_189f0a64",
+        "filename": "repo/resources/performance/PerformanceMark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "The name does not really say what\u0027s the difference compared to `durations`",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_b88d9638",
+        "filename": "repo/resources/performance/PerformanceMark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "There is no such thing in JS",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d88f3225",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Either get durationTotal from _getMinAverageMax as well or directly calc average from durationTotal.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d8909250",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Did we already drop IE8? Would be the first place to use Array.prototype.map.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_988a1a1b",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "I\u0027m pretty that\u0027s not how this should be formatted.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f87a2e1e",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "That\u0027s wrong",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_587ca21b",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Param doc is missing",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9899ba73",
+        "filename": "repo/resources/performance/resources.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Indentation too deep",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_38a0c68c",
+        "filename": "repo/resources/performance/resources.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Indentation too deep",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f8a9ce78",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d8b652d7",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T10:31:37Z",
+      "side": 1,
+      "message": "Why not in non-debug mode? The stats would be interesting there, too.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
