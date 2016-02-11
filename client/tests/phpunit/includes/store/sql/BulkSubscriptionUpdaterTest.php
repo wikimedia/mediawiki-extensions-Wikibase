@@ -6,7 +6,6 @@ use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\DataAccess;
 
-use DataValues\DataValue;
 use DataValues\StringValue;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdValue;
