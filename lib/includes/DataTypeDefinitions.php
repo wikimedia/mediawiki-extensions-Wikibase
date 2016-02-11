@@ -223,6 +223,17 @@ class DataTypeDefinitions {
 	}
 
 	/**
+	 * @return string[] An associative array mapping property data types to types URIs for use in RDF.
+	 *         Note that these are not intended for use as RDF literal types.
+	 */
+	public function getRdfTypeUris() {
+		return $this->getFilteredByPrefix(
+			$this->getMapForDefinitionField( 'rdf-uri' ),
+			'PT:'
+		);
+	}
+
+	/**
 	 * @see BuilderBasedDataTypeValidatorFactory
 	 *
 	 * @param string $mode PREFIXED_MODE to request a callback map with "VT:" and "PT:" prefixes

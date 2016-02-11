@@ -376,7 +376,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 		if ( $entity instanceof Property ) {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
-				->is( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getDataTypeName( $entity ) );
+				->is( $this->vocabulary->getDataTypeURI( $entity ) );
+
 			$id = $entity->getId()->getSerialization();
 			$this->writePropertyPredicates( $id, $this->propertyIsLink( $entity ) );
 			$this->writeNovalueClass( $id );
