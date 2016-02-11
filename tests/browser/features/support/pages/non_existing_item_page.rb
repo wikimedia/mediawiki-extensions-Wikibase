@@ -11,6 +11,5 @@ class NonExistingItemPage
   page_url ENV['WIKIDATA_REPO_URL'] + ENV['ITEM_NAMESPACE'] + ENV['ITEM_ID_PREFIX'] + 'xy'
 
   h1(:first_heading, id: 'firstHeading')
-  link(:special_log_link, css: 'div#mw-content-text > div > p > span > a:nth-child(1)')
-  link(:special_create_new_item_link, css: 'div#mw-content-text > div > p > a:nth-child(2)')
+  link(:special_log_link, css: '.noarticletext a:nth-child(1)')
 end
