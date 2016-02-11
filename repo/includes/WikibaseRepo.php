@@ -17,6 +17,7 @@ use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
 use StubObject;
+use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -71,6 +72,7 @@ use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
@@ -222,6 +224,11 @@ class WikibaseRepo {
 	 * @var ValueSnakRdfBuilderFactory
 	 */
 	private $valueSnakRdfBuilderFactory;
+
+	/**
+	 * @var RdfVocabulary
+	 */
+	private $rdfVocabulary;
 
 	/**
 	 * @var CachingCommonsMediaFileNameLookup|null
@@ -873,6 +880,32 @@ class WikibaseRepo {
 		}
 
 		return $this->valueSnakRdfBuilderFactory;
+	}
+
+	/**
+	 * @return RdfVocabulary
+	 */
+	public function getRdfVocabulary() {
+		global $wgDummyLanguageCodes;
+
+		if ( $this->rdfVocabulary === null ) {
+			$settings = $this->getSettings();
+
+			$languageCodes = array_merge(
+				$wgDummyLanguageCodes,
+				$settings->getSetting( 'canonicalLanguageCodes' )
+			);
+
+			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
+
+			$this->rdfVocabulary = new RdfVocabulary(
+				$settings->getSetting( 'conceptBaseUri' ),
+				$entityDataTitle->getCanonicalURL() . '/',
+				$languageCodes
+			);
+		}
+
+		return $this->rdfVocabulary;
 	}
 
 	/**

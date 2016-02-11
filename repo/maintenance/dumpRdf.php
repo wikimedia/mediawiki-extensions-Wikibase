@@ -3,12 +3,12 @@
 namespace Wikibase;
 
 use SiteStore;
-use Title;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
@@ -50,9 +50,9 @@ class DumpRdf extends DumpScript {
 	private $valueSnakRdfBuilderFactory;
 
 	/**
-	 * @var string
+	 * @var RdfVocabulary
 	 */
-	private $conceptBaseUri;
+	private $rdfVocabulary;
 
 	/**
 	 * @var bool
@@ -71,7 +71,7 @@ class DumpRdf extends DumpScript {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param string $conceptBaseUri
+	 * @param RdfVocabulary $rdfVocabulary
 	 */
 	public function setServices(
 		EntityPerPage $entityPerPage,
@@ -80,7 +80,7 @@ class DumpRdf extends DumpScript {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
-		$conceptBaseUri
+		RdfVocabulary $rdfVocabulary
 	) {
 		parent::setDumpEntitiesServices( $entityPerPage );
 		$this->entityPrefetcher = $entityPrefetcher;
@@ -88,7 +88,7 @@ class DumpRdf extends DumpScript {
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->revisionLookup = $entityRevisionLookup;
-		$this->conceptBaseUri = $conceptBaseUri;
+		$this->rdfVocabulary = $rdfVocabulary;
 		$this->hasHadServicesSet = true;
 	}
 
@@ -102,7 +102,7 @@ class DumpRdf extends DumpScript {
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$wikibaseRepo->getValueSnakRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
-				$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' )
+				$wikibaseRepo->getRdfVocabulary()
 			);
 		}
 		parent::execute();
@@ -125,24 +125,15 @@ class DumpRdf extends DumpScript {
 	 * @return DumpGenerator
 	 */
 	protected function createDumper( $output ) {
-		$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
-
-		$languageCodes = array_merge(
-				$GLOBALS['wgDummyLanguageCodes'],
-				WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'canonicalLanguageCodes' )
-		);
-
 		return RdfDumpGenerator::createDumpGenerator(
 			$this->getOption( 'format', 'ttl' ),
 			$output,
-			$this->conceptBaseUri,
-			$entityDataTitle->getCanonicalURL() . '/',
 			$this->siteStore->getSites(),
 			$this->revisionLookup,
 			$this->propertyDatatypeLookup,
 			$this->valueSnakRdfBuilderFactory,
 			$this->entityPrefetcher,
-			$languageCodes
+			$this->rdfVocabulary
 		);
 	}
 

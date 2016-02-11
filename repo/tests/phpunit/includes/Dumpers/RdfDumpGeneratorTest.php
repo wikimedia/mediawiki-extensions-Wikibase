@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\Rdf\RdfBuilderTest;
@@ -130,14 +131,16 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
 			$out,
-			self::URI_BASE,
-			self::URI_DATA,
 			$this->getSiteList(),
 			$entityRevisionLookup,
 			$dataTypeLookup,
 			$rdfBuilderFactory,
 			new NullEntityPrefetcher(),
-			array( 'test' => 'en-x-test' )
+			new RdfVocabulary(
+				self::URI_BASE,
+				self::URI_DATA,
+				array( 'test' => 'en-x-test' )
+			)
 		);
 	}
 

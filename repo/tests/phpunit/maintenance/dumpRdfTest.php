@@ -30,6 +30,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DumpRdf;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Test\MockEntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -43,15 +44,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 class DumpRdfTest extends MediaWikiLangTestCase {
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setMwGlobals( array(
-			'wgCanonicalServer' => 'http://dump.rdf.test',
-			'wgArticlePath' => '/DumpRdfTest/$1',
-		) );
-	}
 
 	public function testScript() {
 		$dumpScript = new DumpRdf();
@@ -137,7 +129,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$rdfBuilder,
 			$mockRepo,
-			'fooUri'
+			new RdfVocabulary( 'fooUri/', 'acme/EntityData/' )
 		);
 
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpRdfTest" );

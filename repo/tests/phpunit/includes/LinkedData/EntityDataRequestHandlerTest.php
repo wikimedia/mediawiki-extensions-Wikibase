@@ -15,6 +15,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -100,8 +101,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$rdfBuilder = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
 		$service = new EntityDataSerializationService(
-			EntityDataSerializationServiceTest::URI_BASE,
-			EntityDataSerializationServiceTest::URI_DATA,
 			$mockRepository,
 			$titleLookup,
 			$propertyLookup,
@@ -109,7 +108,11 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			new HashSiteStore()
+			new HashSiteStore(),
+			new RdfVocabulary(
+				EntityDataSerializationServiceTest::URI_BASE,
+				EntityDataSerializationServiceTest::URI_DATA
+			)
 		);
 
 		$entityDataFormatProvider->setFormatWhiteList(
