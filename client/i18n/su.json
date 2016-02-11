@@ -9,7 +9,9 @@
 	"wikibase-editlinks": "Édit tutumbu",
 	"wikibase-editlinkstitle": "Édit tutumbu antarbasa",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Sumputkeun",
 	"wikibase-rc-hide-wikidata-show": "Témbongkeun",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Éditan {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Éditan {{WBREPONAME}}",
+	"wikibase-otherprojects": "Proyék lian"
 }

@@ -7,6 +7,9 @@
 	"wikibase-edit": "édit",
 	"wikibase-add": "tambah",
 	"wikibase-sitelinks-special": "Loka lianna",
+	"wikibase-aliases-empty": "Alias teu ditangtukeun",
+	"wikibase-statementview-rank-normal": "Urutan normal",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|rujukan}}",
 	"wikibase-setsitelink-submit": "Atur tutumbu loka",
 	"wikibase-setsitelink-remove-failed": "Tutumbu loka teu bisa disingkahkeun."
 }

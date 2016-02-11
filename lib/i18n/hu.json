@@ -49,6 +49,7 @@
 	"datatypes-type-wikibase-item": "Elem",
 	"datatypes-type-wikibase-property": "Tulajdonság",
 	"datatypes-type-commonsMedia": "Commons-médiafájl",
+	"datatypes-type-external-id": "Külső azonosító",
 	"wikibase-entity-summary-wbsetitem": "Fogalom létrehozása",
 	"wikibase-entity-summary-wbcreateredirect": "Átirányítás ide: $4",
 	"wikibase-entity-summary-wbsetreference": "Forráshivatkozás hozzáadása",
