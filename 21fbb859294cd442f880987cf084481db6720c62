@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_5e71eba5",
+        "filename": "client/tests/phpunit/includes/store/sql/BulkSubscriptionUpdaterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T12:14:10Z",
+      "side": 1,
+      "message": "This is the reason why my regex does not find these. ;-)",
+      "revId": "21fbb859294cd442f880987cf084481db6720c62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
