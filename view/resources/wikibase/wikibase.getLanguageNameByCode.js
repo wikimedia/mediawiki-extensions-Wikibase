@@ -5,8 +5,9 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-( function ( wb, mw, $ ) {
+( function ( wb, $ ) {
 	'use strict';
 
 	/**
@@ -44,9 +45,9 @@
 	 * @return {string}
 	 */
 	wb.getLanguageNameByCode = function( langCode ) {
-		var ulsLanguages = mw.config.get( 'wgULSLanguages' );
+		var ulsLanguages = $.fn.uls && $.fn.uls.defaults.languages;
 		return ulsLanguages && Object.prototype.hasOwnProperty.call( ulsLanguages, langCode )
 			&& ulsLanguages[ langCode ] || getNativeLanguageName( langCode );
 	};
 
-} )( wikibase, mediaWiki, jQuery );
+} )( wikibase, jQuery );
