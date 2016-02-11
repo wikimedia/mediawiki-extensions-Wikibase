@@ -12,11 +12,40 @@ use Wikimedia\Purtle\UnicodeEscaper;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class UnicodeEscaperTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideEscapeString() {
 		return array(
+			'control characters' => array(
+				"\x00...\x08\x0B\x0C\x0E...\x19",
+				'\u0000...\u0008\u000B\u000C\u000E...\u0019'
+			),
+			'whitespace' => array(
+				" \t\n\r",
+				' \t\n\r'
+			),
+			'non-special ASCII characters' => array(
+				'!#$%&\'()*+,-./0...9:;<=>?@A...Z[\\]^_`a...z{|}~',
+				'!#$%&\'()*+,-./0...9:;<=>?@A...Z[\\]^_`a...z{|}~'
+			),
+			'double quote' => array(
+				'"',
+				'\"'
+			),
+			'4-digit hex below U+10000' => array(
+				"\x7F...\xEF\xBF\xBF",
+				'\u007F...\uFFFF'
+			),
+			'8-digit hex below U+110000' => array(
+				"\xF0\x90\x80\x80...\xF4\x8F\xBF\xBF",
+				'\U00010000...\U0010FFFF'
+			),
+			'ignore U+110000 and above' => array(
+				"\xF4\x8F\xBF\xC0",
+				''
+			),
 			array(
 				"Hello World",
 				'Hello World'
@@ -50,8 +79,7 @@ class UnicodeEscaperTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testEscapeString( $input, $expected ) {
 		$escaper = new UnicodeEscaper();
-
-		$this->assertEquals( $expected, $escaper->escapeString( $input ) );
+		$this->assertSame( $expected, $escaper->escapeString( $input ) );
 	}
 
 }

@@ -2,6 +2,7 @@
 
 namespace Wikimedia\Purtle\Tests;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -11,8 +12,9 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
-abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
+abstract class RdfWriterTestBase extends PHPUnit_Framework_TestCase{
 
 	/**
 	 * @var NTriplesRdfTestHelper
@@ -31,6 +33,12 @@ abstract class RdfWriterTestBase extends \PHPUnit_Framework_TestCase{
 	 * @return RdfWriter
 	 */
 	abstract protected function newWriter();
+
+	public function testGetMimeType() {
+		$mimeType = $this->newWriter()->getMimeType();
+		$this->assertInternalType( 'string', $mimeType );
+		$this->assertRegExp( '/^\w+\/[\w-]+(\+xml)?(; charset=UTF-8)?$/', $mimeType );
+	}
 
 	public function testTriples() {
 		$writer = $this->newWriter();

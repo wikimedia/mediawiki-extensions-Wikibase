@@ -2,6 +2,7 @@
 
 namespace Wikimedia\Purtle\Tests;
 
+use PHPUnit_Framework_TestCase;
 use Wikimedia\Purtle\BNodeLabeler;
 
 /**
@@ -11,8 +12,27 @@ use Wikimedia\Purtle\BNodeLabeler;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
-class BNodeLabelerTest extends \PHPUnit_Framework_TestCase {
+class BNodeLabelerTest extends PHPUnit_Framework_TestCase {
+
+	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 */
+	public function testInvalidConstructorArguments( $prefix, $start ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new BNodeLabeler( $prefix, $start );
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		return array(
+			array( null, 1 ),
+			array( 1, 1 ),
+			array( 'prefix', null ),
+			array( 'prefix', 0 ),
+			array( 'prefix', '1' ),
+		);
+	}
 
 	public function testGetLabel() {
 		$labeler = new BNodeLabeler( 'test', 2 );

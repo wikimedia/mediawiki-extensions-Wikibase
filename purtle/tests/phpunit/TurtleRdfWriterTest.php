@@ -15,6 +15,7 @@ use Wikimedia\Purtle\TurtleRdfWriter;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class TurtleRdfWriterTest extends RdfWriterTestBase {
 
@@ -27,6 +28,13 @@ class TurtleRdfWriterTest extends RdfWriterTestBase {
 	 */
 	protected function newWriter() {
 		return new TurtleRdfWriter();
+	}
+
+	public function testTrustIRIs() {
+		$writer = new TurtleRdfWriter();
+		$this->assertTrue( $writer->getTrustIRIs(), 'initialy enabled' );
+		$writer->setTrustIRIs( false );
+		$this->assertFalse( $writer->getTrustIRIs(), 'disabled' );
 	}
 
 }
