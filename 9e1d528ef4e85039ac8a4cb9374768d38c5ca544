@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_98e8da78",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-11T11:40:10Z",
+      "side": 1,
+      "message": "They share the knowledge of MARK_END/MARK_START and window.performance",
+      "parentUuid": "4ea78b8a_f8cc6e8e",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_d8c2d25c",
         "filename": "repo/resources/performance/Mark.js",
         "patchSetId": 14
@@ -98,6 +116,24 @@
       "writtenOn": "2016-02-11T10:31:37Z",
       "side": 1,
       "message": "Please don\u0027t directly access properties",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_78e5de9e",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-11T11:40:10Z",
+      "side": 1,
+      "message": "Why?",
+      "parentUuid": "4ea78b8a_98b3fafc",
       "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -336,6 +372,24 @@
       "writtenOn": "2016-02-11T10:31:37Z",
       "side": 1,
       "message": "Why not in non-debug mode? The stats would be interesting there, too.",
+      "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_58a8221d",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-11T11:40:10Z",
+      "side": 1,
+      "message": "Sure, I am not sure what other flag to use here.\nWe could also use location.hash.\nWhat do you propose?",
+      "parentUuid": "4ea78b8a_d8b652d7",
       "revId": "9e1d528ef4e85039ac8a4cb9374768d38c5ca544",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
