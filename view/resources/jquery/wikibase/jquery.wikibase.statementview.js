@@ -353,7 +353,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		// Collapse references if there is at least one.
 		var visible = this._referencesListview.items().length === 0;
-		this.$references.toggleClass( 'wikibase-initially-hidden', !visible );
+		this.$references.toggleClass( 'wikibase-initially-collapsed', !visible );
 
 		// toggle for references section:
 		this._$toggler = $( '<a/>' ).toggler( {
