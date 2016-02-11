@@ -13,10 +13,10 @@
 		// Better might be to turn this into a LanguageNameLookup service and set language
 		// name in getEntityTermsView in ViewFactory. Then, all places that need language name
 		// would then have it.
-		if ( $.uls !== undefined ) {
+		if ( $.fn.uls ) {
 			assert.strictEqual(
 				wb.getLanguageNameByCode( 'de' ),
-				mw.config.get( 'wgULSLanguages' ).de,
+				$.fn.uls.defaults.languages.de,
 				'getLanguageNameByCode() returns language name.'
 			);
 		} else {
