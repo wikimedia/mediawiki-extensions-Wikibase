@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_1d813c92",
+        "filename": "repo/resources/formatters/getStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 0,
+      "message": "Did that in https://github.com/wmde/DataValuesJavascript/pull/93.",
+      "parentUuid": "4ea78b8a_7b41630d",
+      "revId": "5e6c0a3a475cf0b44aa1de4cffd3558135b750b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_40c2763a",
         "filename": "repo/resources/formatters/getStore.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-10T15:41:56Z",
       "side": 0,
       "message": "I was wondering where all this knowledge is now? I can\u0027t find it. I assume this is simply not needed any more. Simply call the API with the property type, and if the API does not know it, it will tell the frontend. The frontend does not need a property type registry.",
+      "revId": "5e6c0a3a475cf0b44aa1de4cffd3558135b750b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9d752ccb",
+        "filename": "repo/resources/formatters/getStore.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 0,
+      "message": "Exactly.",
+      "parentUuid": "4ea78b8a_40c2763a",
       "revId": "5e6c0a3a475cf0b44aa1de4cffd3558135b750b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

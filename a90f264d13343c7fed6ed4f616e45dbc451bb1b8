@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_9d9f6c06",
+        "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_c0dd0619",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_fb4c7345",
         "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-10T15:41:56Z",
       "side": 1,
       "message": "I do not understand what the benefit of this thin wrapper around FormatValueCaller.formatValue is?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_bdb9087a",
+        "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "It implements the ValueFormatter interface.",
+      "parentUuid": "4ea78b8a_fb4c7345",
       "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_3d8678bf",
+        "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_a0da4a1f",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_3bdd2b74",
         "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2016-02-10T15:41:56Z",
       "side": 1,
       "message": "Hurray for the fact that you killed the crazy parameter swapping. Now there are always 4 parameters, but they can be null. Two problems:\n* It seems this is not documented everywhere.\n* Can we get rid of the crazy initialization code in formatValue now? Or are there still callers with swapped parameters?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9db68c84",
+        "filename": "repo/resources/formatters/ApiBasedValueFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "This is the only caller of FormatValueCaller::formatValue. We could definitely simplify that, I\u0027d for example remove the usage of DataTypeStore.",
+      "parentUuid": "4ea78b8a_3bdd2b74",
       "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -122,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_3dad182f",
+        "filename": "repo/resources/formatters/ApiFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "I\u0027ll rename both: ApiValueFormatter, ApiValueFormatterFactory.",
+      "parentUuid": "4ea78b8a_209ada75",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_80b38efc",
         "filename": "repo/resources/formatters/ApiFormatterFactory.js",
         "patchSetId": 3
@@ -133,6 +223,24 @@
       "writtenOn": "2016-02-10T15:41:56Z",
       "side": 1,
       "message": "This means code specific for QuantityInput (living in ValueView) now lives in unrelated code called ApiFormatterFactory (living in repo)?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_7d72b0e3",
+        "filename": "repo/resources/formatters/ApiFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "No, this code is specific to repo\u0027s wbformatvalue. QuantityInput in ValueView does not know anything about the intricacies of formatting quantity values using our API endpoint.",
+      "parentUuid": "4ea78b8a_80b38efc",
       "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -156,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_fd330008",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "`null` is for the data type. Since this formatter is able to and has to format both property and item ids, it wouldn\u0027t make sense to pass a data type here.",
+      "parentUuid": "4ea78b8a_e0c04231",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_7b208396",
         "filename": "view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js",
         "patchSetId": 3
@@ -173,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_dd2084aa",
+        "filename": "view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "No, the html formatter escapes if it has to format itself.",
+      "parentUuid": "4ea78b8a_7b208396",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_1b370fe2",
         "filename": "view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js",
         "patchSetId": 3
@@ -184,6 +328,24 @@
       "writtenOn": "2016-02-10T15:41:56Z",
       "side": 1,
       "message": "Does this mean the implementation of the two\n* DataValueBasedEntityIdHtmlFormatter\n* DataValueBasedEntityIdPlainFormatter\n\nis now 100% identical?",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_7d171057",
+        "filename": "view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "No, in failure cases this formatter passes the entityId unescaped.",
+      "parentUuid": "4ea78b8a_1b370fe2",
       "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -224,6 +386,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_5d0c9445",
+        "filename": "view/resources/wikibase/wikibase.ValueFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "It\u0027s actually called datatype, see https://www.wikidata.org/wiki/Special:ListDatatypes",
+      "parentUuid": "4ea78b8a_a08d6a38",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_e05cc250",
         "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
         "patchSetId": 3
@@ -241,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_d82652b5",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_e05cc250",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_405ef649",
         "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
         "patchSetId": 3
@@ -252,6 +450,24 @@
       "writtenOn": "2016-02-10T15:41:56Z",
       "side": 1,
       "message": "Documentation please? Especially \"{dataTypes.DataType|null} dataType\".",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_781dde65",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-11T08:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_405ef649",
       "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
