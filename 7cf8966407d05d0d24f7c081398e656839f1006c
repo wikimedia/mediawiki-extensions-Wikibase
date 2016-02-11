@@ -50,6 +50,24 @@
       "revId": "7cf8966407d05d0d24f7c081398e656839f1006c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_5d6d742c",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-11T07:51:32Z",
+      "side": 1,
+      "message": "It\u0027s *is* not MathML. At the moment it *is* TeX.",
+      "parentUuid": "4ea78b8a_61b3f496",
+      "revId": "7cf8966407d05d0d24f7c081398e656839f1006c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
