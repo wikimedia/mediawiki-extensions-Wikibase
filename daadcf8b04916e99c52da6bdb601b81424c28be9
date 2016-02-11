@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_32ad3ee8",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-02-11T19:50:39Z",
+      "side": 1,
+      "message": "I wonder if it won\u0027t be better to have this function to just accept $type? It doesn\u0027t really need to know it comes from property.",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
