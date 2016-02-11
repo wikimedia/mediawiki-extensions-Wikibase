@@ -10,6 +10,7 @@ use Wikibase\TermIndexEntry;
 
 /**
  * @covers Wikibase\Store\BufferingTermLookup
+ * @covers Wikibase\Lib\Store\EntityTermLookupBase
  *
  * @group Wikibase
  * @group WikibaseLib
