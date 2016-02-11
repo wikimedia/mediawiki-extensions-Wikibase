@@ -4,6 +4,7 @@ namespace Wikibase\DataModel\Tests;
 
 use Hashable;
 use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
@@ -21,7 +22,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Mättig
  */
-class ReferenceListTest extends \PHPUnit_Framework_TestCase {
+class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 	public function instanceProvider() {
 		$instances = array();
@@ -84,9 +85,20 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetIterator_isTraversable() {
+		$references = new ReferenceList();
+		$references->addNewReference( new PropertyNoValueSnak( 1 ) );
+		$iterator = $references->getIterator();
+
+		$this->assertInstanceOf( 'Traversable', $iterator );
+		$this->assertCount( 1, $iterator );
+		foreach ( $references as $reference ) {
+			$this->assertInstanceOf( 'Wikibase\DataModel\Reference', $reference );
+		}
+	}
+
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $array
 	 */
 	public function testHasReferenceBeforeRemoveButNotAfter( ReferenceList $array ) {
 		if ( $array->count() === 0 ) {
@@ -120,7 +132,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $array
 	 */
 	public function testRemoveReference( ReferenceList $array ) {
 		$elementCount = count( $array );
@@ -225,7 +236,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $array
 	 */
 	public function testIndexOf( ReferenceList $array ) {
 		$this->assertFalse( $array->indexOf( new Reference() ) );
@@ -248,7 +258,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $array
 	 */
 	public function testEquals( ReferenceList $array ) {
 		$this->assertTrue( $array->equals( $array ) );
@@ -257,24 +266,21 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $array
 	 */
-	public function testGetHashReturnsString( ReferenceList $array ) {
+	public function testGetValueHashReturnsString( ReferenceList $array ) {
 		$this->assertInternalType( 'string', $array->getValueHash() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $array
 	 */
-	public function testGetHashValueIsTheSameForClone( ReferenceList $array ) {
+	public function testGetValueHashIsTheSameForClone( ReferenceList $array ) {
 		$copy = unserialize( serialize( $array ) );
 		$this->assertEquals( $array->getValueHash(), $copy->getValueHash() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $references
 	 */
 	public function testHasReferenceHash( ReferenceList $references ) {
 		$this->assertFalse( $references->hasReferenceHash( '~=[,,_,,]:3' ) );
@@ -289,7 +295,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $references
 	 */
 	public function testGetReference( ReferenceList $references ) {
 		$this->assertNull( $references->getReference( '~=[,,_,,]:3' ) );
@@ -304,7 +309,6 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param ReferenceList $references
 	 */
 	public function testRemoveReferenceHash( ReferenceList $references ) {
 		$references->removeReferenceHash( '~=[,,_,,]:3' );
@@ -362,6 +366,11 @@ class ReferenceListTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( 'InvalidArgumentException' );
 		$references->addNewReference( new PropertyNoValueSnak( 1 ), null );
+	}
+
+	public function testSerializationStability() {
+		$references = new ReferenceList();
+		$this->assertSame( 'a:0:{}', $references->serialize() );
 	}
 
 	public function testSerializeRoundtrip() {
