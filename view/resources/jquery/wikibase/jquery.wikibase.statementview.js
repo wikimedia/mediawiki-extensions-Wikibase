@@ -481,36 +481,22 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {boolean}
 	 */
 	isInitialValue: function() {
-		var i;
+		if ( !this.isInEditMode() ) {
+			mw.log.warn( "statementview::isInitialValue should only be called in edit mode" );
+			return true;
+		}
 
 		if ( this.options.value ) {
-			if ( this._rankSelector && !this._rankSelector.isInitialValue() ) {
+			if ( !this._rankSelector.isInitialValue() ) {
 				return false;
 			}
 
-			var snaklistviews = this._qualifiers ? this._qualifiers.value() : [],
-				qualifiers = new wb.datamodel.SnakList();
-
-			// Generate a SnakList object featuring all current qualifier snaks to be able to
-			// compare it to the SnakList object the claimview has been initialized with:
-			for ( i = 0; i < snaklistviews.length; i++ ) {
-				qualifiers.merge( snaklistviews[i].value() );
-			}
-
+			var qualifiers = this._getQualifiers();
 			if ( !qualifiers.equals( this.options.value.getClaim().getQualifiers() ) ) {
 				return false;
 			}
 
-			var referenceviews = this._referencesListview ? this._referencesListview.value() : [],
-				references = new wb.datamodel.ReferenceList();
-
-			for ( i = 0; i < referenceviews.length; i++ ) {
-				var reference = referenceviews[i].value();
-				if ( reference ) {
-					references.addItem( reference );
-				}
-			}
-
+			var references = this._getReferences();
 			if ( !references.equals( this.options.value.getReferences() ) ) {
 				return false;
 			}
@@ -528,26 +514,23 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {wikibase.datamodel.Statement|null}
 	 */
 	_instantiateStatement: function( guid ) {
+		if ( !this.isInEditMode() ) {
+			mw.log.warn( "statementview::_instantiateStatement should only be called in edit mode" );
+			return null;
+		}
+
 		var mainSnak = this._mainSnakSnakView.snak();
 
 		if ( !mainSnak ) {
 			return null;
 		}
 
-		var qualifiers = new wb.datamodel.SnakList(),
-			snaklistviews = this._qualifiers ? this._qualifiers.value() : [];
-
-		// Combine qualifiers grouped by property to a single SnakList:
-		for ( var i = 0; i < snaklistviews.length; i++ ) {
-			qualifiers.merge( snaklistviews[i].value() );
-		}
+		var qualifiers = this._getQualifiers();
 
 		return new wb.datamodel.Statement(
 			new wb.datamodel.Claim( mainSnak, qualifiers, guid ),
-			new wb.datamodel.ReferenceList( this._getReferences() ),
-			this._rankSelector ? this._rankSelector.value() : ( this.options.value
-				? this.options.value.getRank()
-				: wb.datamodel.Statement.RANK.NORMAL )
+			this._getReferences(),
+			this._rankSelector.value()
 		);
 	},
 
@@ -563,32 +546,35 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
+	 * @private
+	 *
+	 * @return {wikibase.datamodel.SnakList}
+	 */
+	_getQualifiers: function() {
+		var qualifiers = new wb.datamodel.SnakList(),
+			snaklistviews = this._qualifiers.value();
+
+		// Combine qualifiers grouped by property to a single SnakList:
+		for ( var i = 0; i < snaklistviews.length; i++ ) {
+			qualifiers.merge( snaklistviews[i].value() );
+		}
+
+		return qualifiers;
+	},
+
+	/**
 	 * Returns all `Reference`s currently specified in the view (including all pending changes).
 	 *
 	 * @private
 	 *
-	 * @return {wikibase.datamodel.Reference[]}
+	 * @return {wikibase.datamodel.ReferenceList}
 	 */
 	_getReferences: function() {
-		var references = [];
-
-		// If the statement is pending (not yet stored), the listview widget for the references is
-		// not defined.
-		if ( !this._referencesListview ) {
-			return references;
-		}
-
-		var lia = this._referencesListview.listItemAdapter();
-
-		$.each( this._referencesListview.items(), function( i, item ) {
-			var referenceview = lia.liInstance( $( item ) ),
-				reference = referenceview ? referenceview.value() : null;
-			if ( reference ) {
-				references.push( reference );
-			}
-		} );
-
-		return references;
+		return new wb.datamodel.ReferenceList(
+			$.map( this._referencesListview.value(), function( referenceview ) {
+				return referenceview.value();
+			} )
+		);
 	},
 
 	/**
@@ -772,44 +758,26 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
-		var snaklistviews,
-			i;
-
-		if ( this._mainSnakSnakView && !this._mainSnakSnakView.isValid() ) {
-			return false;
+		if ( !this.isInEditMode() ) {
+			mw.log.warn( "statementview::isValid should only be called in edit mode" );
+			return true;
 		}
 
-		if ( this._hasInvalidReferences() ) {
-			return false;
-		}
-
-		if ( this._qualifiers ) {
-			snaklistviews = this._qualifiers.value();
-
-			if ( snaklistviews.length ) {
-				for ( i = 0; i < snaklistviews.length; i++ ) {
-					if ( !snaklistviews[i].isValid() ) {
-						return false;
-					}
-				}
-			}
-		}
-
-		return this._instantiateStatement( null ) instanceof wb.datamodel.Statement;
+		return this._mainSnakSnakView.isValid() &&
+			this._listViewIsValid( this._qualifiers ) &&
+			this._listViewIsValid( this._referencesListview ) &&
+			this._instantiateStatement( null ) instanceof wb.datamodel.Statement;
 	},
 
 	/**
+	 * @param {jQuery.wikibase.listview} listview
 	 * @return {boolean}
 	 */
-	_hasInvalidReferences: function() {
+	_listViewIsValid: function( listview ) {
 		var isInvalid = false;
 
-		if ( !this._referencesListview ) {
-			return isInvalid;
-		}
-
-		$.each( this._referencesListview.value(), function ( key, referenceView ) {
-			if ( !referenceView.isValid() ) {
+		$.each( listview.value(), function ( key, view ) {
+			if ( !view.isValid() ) {
 				isInvalid = true;
 				return false;
 			}
