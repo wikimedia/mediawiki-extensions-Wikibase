@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Api;
 
+use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -13,6 +14,7 @@ use Wikibase\StatementRankSerializer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
+ * @author Thiemo Mättig
  */
 class GetClaimsStatementFilter implements StatementFilter {
 
@@ -29,11 +31,20 @@ class GetClaimsStatementFilter implements StatementFilter {
 	private $idParser;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $requestParams;
 
-	public function __construct( EntityIdParser $idParser, ApiErrorReporter $errorReporter, array $requestParams ) {
+	/**
+	 * @param EntityIdParser $idParser
+	 * @param ApiErrorReporter $errorReporter
+	 * @param string[] $requestParams
+	 */
+	public function __construct(
+		EntityIdParser $idParser,
+		ApiErrorReporter $errorReporter,
+		array $requestParams
+	) {
 		$this->idParser = $idParser;
 		$this->errorReporter = $errorReporter;
 		$this->requestParams = $requestParams;
@@ -42,22 +53,27 @@ class GetClaimsStatementFilter implements StatementFilter {
 	/**
 	 * @param Statement $statement
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function statementMatches( Statement $statement ) {
 		return $this->rankMatchesFilter( $statement->getRank() )
 			&& $this->propertyMatchesFilter( $statement->getPropertyId() );
 	}
 
+	/**
+	 * @param int $rank
+	 *
+	 * @return bool
+	 */
 	private function rankMatchesFilter( $rank ) {
-		if ( $rank === null ) {
-			return true;
-		}
-
 		if ( isset( $this->requestParams['rank'] ) ) {
-			$statementRankSerializer = new StatementRankSerializer();
-			$unserializedRank = $statementRankSerializer->deserialize( $this->requestParams['rank'] );
-			return $rank === $unserializedRank;
+			try {
+				$serializer = new StatementRankSerializer();
+				$deserializedRank = $serializer->deserialize( $this->requestParams['rank'] );
+				return $rank === $deserializedRank;
+			} catch ( DeserializationException $ex ) {
+				$this->errorReporter->dieException( $ex, 'param-invalid' );
+			}
 		}
 
 		return true;
@@ -67,12 +83,10 @@ class GetClaimsStatementFilter implements StatementFilter {
 		if ( isset( $this->requestParams['property'] ) ) {
 			try {
 				$parsedProperty = $this->idParser->parse( $this->requestParams['property'] );
-			} catch ( EntityIdParsingException $e ) {
-				$this->errorReporter->dieException( $e, 'param-invalid' );
+				return $propertyId->equals( $parsedProperty );
+			} catch ( EntityIdParsingException $ex ) {
+				$this->errorReporter->dieException( $ex, 'param-invalid' );
 			}
-
-			/** @var EntityId $parsedProperty */
-			return $propertyId->equals( $parsedProperty );
 		}
 
 		return true;

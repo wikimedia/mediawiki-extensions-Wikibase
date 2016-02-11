@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\Serializers\DataValueSerializer;
-use Wikibase\DataModel\Entity\PropertyId;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -17,24 +17,41 @@ use Wikibase\StatementRankSerializer;
  *
  * @licence GNU GPL v2+
  * @author Addshore
+ * @author Thiemo Mättig
  */
-class StatementRankSerializerTest extends \PHPUnit_Framework_TestCase {
+class StatementRankSerializerTest extends PHPUnit_Framework_TestCase {
 
 	public function rankProvider() {
-		$ranks = array(
-			Statement::RANK_NORMAL,
-			Statement::RANK_PREFERRED,
-			Statement::RANK_DEPRECATED,
+		return array(
+			array( Statement::RANK_DEPRECATED, 'deprecated' ),
+			array( Statement::RANK_NORMAL, 'normal' ),
+			array( Statement::RANK_PREFERRED, 'preferred' ),
 		);
-
-		return $this->arrayWrap( $ranks );
 	}
 
 	/**
 	 * @dataProvider rankProvider
 	 */
-	public function testRankSerialization( $rank ) {
-		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( 'P42' ) ) );
+	public function testSerialize( $rank, $expected ) {
+		$serializer = new StatementRankSerializer();
+		$serialization = $serializer->serialize( $rank );
+		$this->assertSame( $expected, $serialization );
+	}
+
+	/**
+	 * @dataProvider rankProvider
+	 */
+	public function testDeserialize( $expected, $serialization ) {
+		$serializer = new StatementRankSerializer();
+		$deserialization = $serializer->deserialize( $serialization );
+		$this->assertSame( $expected, $deserialization );
+	}
+
+	/**
+	 * @dataProvider rankProvider
+	 */
+	public function testSerializerFactoryRoundtrip( $rank ) {
+		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
 		$statement->setRank( $rank );
 
 		$factory = new SerializerFactory( new DataValueSerializer() );
@@ -44,26 +61,29 @@ class StatementRankSerializerTest extends \PHPUnit_Framework_TestCase {
 
 		$rankSerializer = new StatementRankSerializer();
 
-		$this->assertEquals(
+		$this->assertSame(
 			$rank,
 			$rankSerializer->deserialize( $serialization['rank'] ),
-			'Roundtrip between rank serialization and unserialization 1'
+			'reference serialization can be deserialized'
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$serialization['rank'],
 			$rankSerializer->serialize( $rank ),
-			'Roundtrip between rank serialization and unserialization 2'
+			'serialization is identical to reference'
 		);
 	}
 
-	protected function arrayWrap( array $elements ) {
-		return array_map(
-			function ( $element ) {
-				return array( $element );
-			},
-			$elements
-		);
+	public function testGivenInvalidRank_serializationFails() {
+		$serializer = new StatementRankSerializer();
+		$this->setExpectedException( 'Serializers\Exceptions\SerializationException' );
+		$serializer->serialize( -1 );
+	}
+
+	public function testGivenInvalidSerialization_deserializeFails() {
+		$serializer = new StatementRankSerializer();
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$serializer->deserialize( 'invalid' );
 	}
 
 }

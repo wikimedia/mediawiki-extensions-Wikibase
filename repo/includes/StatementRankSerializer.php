@@ -3,6 +3,8 @@
 namespace Wikibase;
 
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
+use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Statement\Statement;
 
@@ -15,6 +17,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Addshore
+ * @author Thiemo Mättig
  */
 class StatementRankSerializer implements Serializer, Deserializer {
 
@@ -41,21 +44,32 @@ class StatementRankSerializer implements Serializer, Deserializer {
 	 *
 	 * @param string $serializedRank
 	 *
-	 * @return integer
+	 * @throws DeserializationException
+	 * @return int
 	 */
 	public function deserialize( $serializedRank ) {
 		$ranks = array_flip( self::$rankMap );
+
+		if ( !array_key_exists( $serializedRank, $ranks ) ) {
+			throw new DeserializationException( 'Invalid rank serialization' );
+		}
+
 		return $ranks[$serializedRank];
 	}
 
 	/**
 	 * Serializes the rank.
 	 *
-	 * @param integer $rank
+	 * @param int $rank
 	 *
+	 * @throws SerializationException
 	 * @return string
 	 */
 	public function serialize( $rank ) {
+		if ( !array_key_exists( $rank, self::$rankMap ) ) {
+			throw new SerializationException( 'Invalid rank' );
+		}
+
 		return self::$rankMap[$rank];
 	}
 
