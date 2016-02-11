@@ -14,6 +14,7 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class NTriplesRdfWriterTest extends RdfWriterTestBase {
 

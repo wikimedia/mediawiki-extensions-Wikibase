@@ -29,4 +29,11 @@ class TurtleRdfWriterTest extends RdfWriterTestBase {
 		return new TurtleRdfWriter();
 	}
 
+	public function testTrustIRIs() {
+		$writer = new TurtleRdfWriter();
+		$this->assertTrue( $writer->getTrustIRIs(), 'initialy enabled' );
+		$writer->setTrustIRIs( false );
+		$this->assertFalse( $writer->getTrustIRIs(), 'disabled' );
+	}
+
 }
