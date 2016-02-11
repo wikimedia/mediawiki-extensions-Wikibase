@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Usage\Sql;
 
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
