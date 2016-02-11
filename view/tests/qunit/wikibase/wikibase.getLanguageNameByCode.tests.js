@@ -16,7 +16,7 @@
 		if ( $.uls !== undefined ) {
 			assert.strictEqual(
 				wb.getLanguageNameByCode( 'de' ),
-				mw.config.get( 'wgULSLanguages' ).de,
+				$.fn.uls.defaults.languages.de,
 				'getLanguageNameByCode() returns language name.'
 			);
 		} else {
