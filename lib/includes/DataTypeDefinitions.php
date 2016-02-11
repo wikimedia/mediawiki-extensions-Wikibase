@@ -46,7 +46,7 @@ class DataTypeDefinitions {
 	/**
 	 * @var array[]
 	 */
-	private $dataTypeDefinitions = array();
+	private $dataTypeDefinitions = [];
 
 	/**
 	 * @param array[] $dataTypeDefinitions An associative array mapping property data type ids
@@ -56,8 +56,8 @@ class DataTypeDefinitions {
 	 * @param string[] $disabledDataTypes Array of disabled data types.
 	 */
 	public function __construct(
-		array $dataTypeDefinitions = array(),
-		array $disabledDataTypes = array()
+		array $dataTypeDefinitions = [],
+		array $disabledDataTypes = []
 	) {
 		$dataTypeDefinitions = $this->filterDisabledDataTypes(
 			$dataTypeDefinitions,
@@ -124,7 +124,7 @@ class DataTypeDefinitions {
 	 *         with keys that match the prefix $prefix, with that prefix removed.
 	 */
 	private function getFilteredByPrefix( $map, $prefix ) {
-		$filtered = array();
+		$filtered = [];
 
 		foreach ( $map as $key => $value ) {
 			$ofs = strlen( $prefix );
@@ -153,7 +153,7 @@ class DataTypeDefinitions {
 	 * constructor.
 	 */
 	private function getMapForDefinitionField( $field ) {
-		$fieldValues = array();
+		$fieldValues = [];
 
 		foreach ( $this->dataTypeDefinitions as $id => $def ) {
 			if ( isset( $def[$field] ) ) {
@@ -177,7 +177,7 @@ class DataTypeDefinitions {
 	 * The keys in this array are plain property data type IDs without a prefix.
 	 */
 	private function resolveValueTypeFallback( array $callbackMap ) {
-		$resolved = array();
+		$resolved = [];
 
 		foreach ( $this->getValueTypes() as $propertyType => $valueType ) {
 			$vtKey = "VT:$valueType";
@@ -218,6 +218,19 @@ class DataTypeDefinitions {
 	public function getValueTypes() {
 		return $this->getFilteredByPrefix(
 			$this->getMapForDefinitionField( 'value-type' ),
+			'PT:'
+		);
+	}
+
+	/**
+	 * @return string[] An associative array mapping some property data types to types URIs for
+	 *         use in RDF. This does not have to cover all known property data types. For those
+	 *         that od not explicitly define a URI, RdfVocabulary will generate one.
+	 *         Note that property data type URIs are not intended to be used as RDF literal types.
+	 */
+	public function getRdfTypeUris() {
+		return $this->getFilteredByPrefix(
+			$this->getMapForDefinitionField( 'rdf-uri' ),
 			'PT:'
 		);
 	}

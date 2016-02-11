@@ -3,6 +3,7 @@
 namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
+use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
@@ -71,22 +72,22 @@ class RdfVocabulary {
 	const ONE_ENTITY = 'http://www.wikidata.org/entity/Q199';
 	// Ranks
 	const WIKIBASE_RANK_BEST = 'BestRank';
-	public static $rankMap = array(
+	public static $rankMap = [
 		Statement::RANK_DEPRECATED => 'DeprecatedRank',
 		Statement::RANK_NORMAL => 'NormalRank',
 		Statement::RANK_PREFERRED => 'PreferredRank',
-	);
+	];
 	// Value properties
-	public static $claimToValue = array(
+	public static $claimToValue = [
 			self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE,
 			self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE,
 			self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE,
-	);
+	];
 
 	/**
 	 * @var string[] Mapping of namespace names to URIs.
 	 */
-	private $namespaces = array();
+	private $namespaces = [];
 
 	/**
 	 * @var string
@@ -106,17 +107,30 @@ class RdfVocabulary {
 	/**
 	 * @var string[]
 	 */
-	private static $canonicalLanguageCodeCache = array();
+	private $dataTypeUris;
+
+	/**
+	 * @var string[]
+	 */
+	private static $canonicalLanguageCodeCache = [];
 
 	/**
 	 * @param string $baseUri Base URI for entity concept URIs.
 	 * @param string $dataUri Base URI for entity description URIs.
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
+	 * @param string[] $dataTypeUris Mapping of property data type IDs to their URIs,
+	 *                 if different from the default mapping.
 	 */
-	public function __construct( $baseUri, $dataUri, array $canonicalLanguageCodes = array() ) {
+	public function __construct(
+		$baseUri,
+		$dataUri,
+		array $canonicalLanguageCodes = [],
+		array $dataTypeUris = []
+	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
+		$this->dataTypeUris = $dataTypeUris;
 
 		if ( substr( $this->baseUri, -7 ) === 'entity/' ) {
 			$topUri = substr( $this->baseUri, 0, -7 );
@@ -125,7 +139,7 @@ class RdfVocabulary {
 		}
 		$propUri = $topUri."prop/";
 
-		$this->namespaces = array(
+		$this->namespaces = [
 				'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
 				'rdfs' => 'http://www.w3.org/2000/01/rdf-schema#',
 				'xsd' => 'http://www.w3.org/2001/XMLSchema#',
@@ -154,7 +168,7 @@ class RdfVocabulary {
 				self::NS_CC => self::CC_URI,
 				self::NS_GEO => self::GEO_URI,
 				self::NS_PROV => self::PROV_URI,
-		);
+		];
 	}
 
 	/**
@@ -164,6 +178,22 @@ class RdfVocabulary {
 	 */
 	public function getNamespaces() {
 		return $this->namespaces;
+	}
+
+	/**
+	 * Returns the base URI for a given namespace (aka prefix).
+	 *
+	 * @param string $ns The namespace name
+	 *
+	 * @throws OutOfBoundsException if $ns is not a known namespace
+	 * @return string the URI for the given namespace
+	 */
+	public function getNamespaceURI( $ns ) {
+		if ( !isset( $this->namespaces[$ns] ) ) {
+			throw new OutOfBoundsException();
+		}
+
+		return $this->namespaces[$ns];
 	}
 
 	/**
@@ -201,14 +231,22 @@ class RdfVocabulary {
 	}
 
 	/**
-	 * Get Wikibase property name for ontology
+	 * Get Wikibase property data type Uri for ontology
 	 *
 	 * @param Property $prop
 	 *
 	 * @return string
 	 */
-	public function getDataTypeName( Property $prop ) {
-		return preg_replace( '/\W+/', '', ucwords( strtr( $prop->getDataTypeId(), '-', ' ' ) ) );
+	public function getDataTypeURI( Property $prop ) {
+		$type = $prop->getDataTypeId();
+
+		if ( !isset( $this->dataTypeUris[$type] ) ) {
+			// if the requested type has no URI in $this->dataTypeUris, add a generic one
+			$name = preg_replace( '/\W+/', '', ucwords( strtr( $type, '-', ' ' ) ) );
+			$this->dataTypeUris[$type] = $this->namespaces[self::NS_ONTOLOGY] . $name;
+		}
+
+		return $this->dataTypeUris[$type];
 	}
 
 	/**

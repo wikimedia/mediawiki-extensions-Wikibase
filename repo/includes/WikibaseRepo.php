@@ -250,7 +250,7 @@ class WikibaseRepo {
 		}
 
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
-		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
+		Hooks::run( 'WikibaseRepoDataTypes', [ &$dataTypeDefinitions ] );
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
 
@@ -481,10 +481,10 @@ class WikibaseRepo {
 	 */
 	public function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
-		$changeClasses = array(
+		$changeClasses = [
 			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
 			// Other types of entities will use EntityChange
-		);
+		];
 
 		return new EntityChangeFactory(
 			$this->getEntityFactory(),
@@ -907,7 +907,8 @@ class WikibaseRepo {
 			$this->rdfVocabulary = new RdfVocabulary(
 				$settings->getSetting( 'conceptBaseUri' ),
 				$entityDataTitle->getCanonicalURL() . '/',
-				$languageCodes
+				$languageCodes,
+				$this->dataTypeDefinitions->getRdfTypeUris()
 			);
 		}
 
@@ -934,12 +935,12 @@ class WikibaseRepo {
 	 * @return ExceptionLocalizer[]
 	 */
 	private function getExceptionLocalizers( ValueFormatter $formatter ) {
-		return array(
+		return [
 			'MessageException' => new MessageExceptionLocalizer(),
 			'ParseException' => new ParseExceptionLocalizer(),
 			'ChangeOpValidationException' => new ChangeOpValidationExceptionLocalizer( $formatter ),
 			'Exception' => new GenericExceptionLocalizer()
-		);
+		];
 	}
 
 	/**
@@ -983,7 +984,7 @@ class WikibaseRepo {
 
 		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-			array(), // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
+			[], // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
 			$valueFormatterFactory,
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
@@ -1095,7 +1096,7 @@ class WikibaseRepo {
 	 * @return ChangeTransmitter[]
 	 */
 	private function getChangeTransmitters() {
-		$transmitters = array();
+		$transmitters = [];
 
 		$transmitters[] = new HookChangeTransmitter( 'WikibaseChangeNotification' );
 
@@ -1127,12 +1128,12 @@ class WikibaseRepo {
 	 */
 	public function getContentModelMappings() {
 		// @TODO: We should have smth. like this for namespaces too
-		$map = array(
+		$map = [
 			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
 			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
-		);
+		];
 
-		Hooks::run( 'WikibaseContentModelMapping', array( &$map ) );
+		Hooks::run( 'WikibaseContentModelMapping', [ &$map ] );
 
 		return $map;
 	}
@@ -1141,10 +1142,10 @@ class WikibaseRepo {
 	 * @return EntityFactory
 	 */
 	public function getEntityFactory() {
-		$entityClasses = array(
+		$entityClasses = [
 			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
 			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
-		);
+		];
 
 		//TODO: provide a hook or registry for adding more.
 
@@ -1229,7 +1230,7 @@ class WikibaseRepo {
 	 * @return Deserializer
 	 */
 	public function getDataValueDeserializer() {
-		return new DataValueDeserializer( array(
+		return new DataValueDeserializer( [
 			'boolean' => 'DataValues\BooleanValue',
 			'number' => 'DataValues\NumberValue',
 			'string' => 'DataValues\StringValue',
@@ -1240,7 +1241,7 @@ class WikibaseRepo {
 			'quantity' => 'DataValues\QuantityValue',
 			'time' => 'DataValues\TimeValue',
 			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
-		) );
+		] );
 	}
 
 	/**
@@ -1509,11 +1510,11 @@ class WikibaseRepo {
 				new UnionContentLanguages(
 					new MediaWikiContentLanguages(),
 					// Special ISO 639-2 codes
-					new StaticContentLanguages( array( 'und', 'mis', 'mul', 'zxx' ) )
+					new StaticContentLanguages( [ 'und', 'mis', 'mul', 'zxx' ] )
 				),
 
 				// MediaWiki language codes we don't want for monolingual text values
-				new StaticContentLanguages( array(
+				new StaticContentLanguages( [
 					// Language codes that are not even well-formed BCP 47 language codes
 					'simple',
 					'tokipona',
@@ -1530,7 +1531,7 @@ class WikibaseRepo {
 					// Language codes we don't want for semantic reasons
 					'de-formal',
 					'nl-informal',
-				) )
+				] )
 			);
 		}
 		return $this->monolingualTextLanguages;

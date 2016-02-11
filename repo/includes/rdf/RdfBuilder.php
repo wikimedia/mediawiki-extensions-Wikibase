@@ -36,7 +36,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 *
 	 * @var bool[]
 	 */
-	private $entitiesResolved = array();
+	private $entitiesResolved = [];
 
 	/**
 	 * What the serializer would produce?
@@ -65,7 +65,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * Rdf builders to appyl when building rdf for an entity.
 	 * @var EntityRdfBuilder[]
 	 */
-	private $builders = array();
+	private $builders = [];
 
 	/**
 	 * @var RdfVocabulary
@@ -358,7 +358,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	private function propertyIsLink( Property $property ) {
 		// For now, it's very simple but can be more complex later
-		return in_array( $property->getDataTypeId(), array( 'wikibase-item', 'wikibase-property', 'url', 'commonsMedia' ) );
+		return in_array( $property->getDataTypeId(), [ 'wikibase-item', 'wikibase-property', 'url', 'commonsMedia' ] );
 	}
 
 	/**
@@ -376,7 +376,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 		if ( $entity instanceof Property ) {
 			$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'propertyType' )
-				->is( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getDataTypeName( $entity ) );
+				->is( $this->vocabulary->getDataTypeURI( $entity ) );
+
 			$id = $entity->getId()->getSerialization();
 			$this->writePropertyPredicates( $id, $this->propertyIsLink( $entity ) );
 			$this->writeNovalueClass( $id );
