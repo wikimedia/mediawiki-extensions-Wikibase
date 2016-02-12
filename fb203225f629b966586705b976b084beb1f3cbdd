@@ -16,6 +16,24 @@
       "revId": "fb203225f629b966586705b976b084beb1f3cbdd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_0881f2fc",
+        "filename": "client/includes/UpdateRepo/UpdateRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T10:36:56Z",
+      "side": 1,
+      "message": "True that… I think the reason I initially went with \"hiding\" the ugly CentralAuth bindings in this class is that Wikibase is not really the right place for these things… and core doesn\u0027t have mechanisms for that.\nThe more I think about this, the more I think we should just throw away all of this validation stuff and just assume users are the same.",
+      "parentUuid": "4ea78b8a_888de238",
+      "revId": "fb203225f629b966586705b976b084beb1f3cbdd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
