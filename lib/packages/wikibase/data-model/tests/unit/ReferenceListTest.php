@@ -246,14 +246,15 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testIndexOf_falseForMissingReferences() {
-		$referenceList = new ReferenceList();
-		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+	public function testIndexOf_checksForIdentity() {
+		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference2 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$referenceList = new ReferenceList( array( $reference1 ) );
 
-		$referenceList->addNewReference( new PropertyNoValueSnak( 1 ) );
-
-		$this->assertFalse( $referenceList->indexOf( new Reference() ) );
-		$this->assertFalse( $referenceList->indexOf( $reference ) );
+		$this->assertNotSame( $reference1, $reference2, 'post condition' );
+		$this->assertTrue( $reference1->equals( $reference2 ), 'post condition' );
+		$this->assertSame( 0, $referenceList->indexOf( $reference1 ), 'identity' );
+		$this->assertFalse( $referenceList->indexOf( $reference2 ), 'not equality' );
 	}
 
 	/**

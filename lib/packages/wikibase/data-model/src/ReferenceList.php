@@ -110,7 +110,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 *
 	 * @param Reference $reference
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasReference( Reference $reference ) {
 		return $this->hasReferenceHash( $reference->getHash() );
@@ -123,7 +123,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 *
 	 * @param Reference $reference
 	 *
-	 * @return int|boolean
+	 * @return int|bool
 	 */
 	public function indexOf( Reference $reference ) {
 		foreach ( $this->references as $index => $ref ) {
@@ -153,7 +153,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 *
 	 * @param string $referenceHash
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasReferenceHash( $referenceHash ) {
 		return $this->getReference( $referenceHash ) !== null;
