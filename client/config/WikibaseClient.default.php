@@ -297,5 +297,9 @@ return call_user_func( function() {
 		return $otherProjectsSitesProvider->getOtherProjectsSiteIds( $settings->getSetting( 'siteLinkGroups' ) );
 	};
 
+	$defaults['repoUserValidationMethod'] = function( SettingsArray $settings ) {
+		return class_exists( 'CentralAuthUser' ) ? 'centralauth' : 'assumeSame';
+	};
+
 	return $defaults;
 } );

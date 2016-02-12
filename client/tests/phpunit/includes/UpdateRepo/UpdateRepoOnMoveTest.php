@@ -49,24 +49,32 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Get a new object which thinks we're both the repo and client
 	 *
+	 * @param bool $cache Whether to cache the instance/ use a cached instance
+	 * @param string $userValidationMethod
+	 *
 	 * @return UpdateRepoOnMove
 	 */
-	private function getNewUpdateRepoOnMove() {
-		static $updateRepo = null;
+	private function getNewUpdateRepoOnMove( $cache = true, $userValidationMethod = 'assumeSame' ) {
+		static $updateRepoCached = null;
 
-		if ( !$updateRepo ) {
-			$moveData = $this->getFakeMoveData();
+		if ( $updateRepoCached && $cache ) {
+			return $updateRepoCached;
+		}
 
-			$updateRepo = new UpdateRepoOnMove(
-				$moveData['repoDB'],
-				// Nobody knows why we need to clone over here, but it's not working
-				// without... PHP is fun!
-				clone $moveData['siteLinkLookup'],
-				$moveData['user'],
-				$moveData['siteId'],
-				$moveData['oldTitle'],
-				$moveData['newTitle']
-			);
+		$moveData = $this->getFakeMoveData();
+
+		$updateRepo = new UpdateRepoOnMove(
+			$moveData['repoDB'],
+			$moveData['siteLinkLookup'],
+			$moveData['user'],
+			$moveData['siteId'],
+			$moveData['oldTitle'],
+			$moveData['newTitle'],
+			$userValidationMethod
+		);
+
+		if ( $cache ) {
+			$updateRepoCached = $updateRepo;
 		}
 
 		return $updateRepo;
@@ -108,10 +116,20 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 		return $jobQueueGroupMock;
 	}
 
-	public function testUserIsValidOnRepo() {
-		$updateRepo = $this->getNewUpdateRepoOnMove();
+	/**
+	 * @dataProvider userIsValidOnRepoProvider
+	 */
+	public function testUserIsValidOnRepo( $expected, $userValidationMethod ) {
+		$updateRepo = $this->getNewUpdateRepoOnMove( false, $userValidationMethod );
 
-		$this->assertFalse( $updateRepo->userIsValidOnRepo() );
+		$this->assertSame( $expected, $updateRepo->userIsValidOnRepo() );
+	}
+
+	public function userIsValidOnRepoProvider() {
+		return array(
+			array( true, 'assumeSame' ),
+			array( false, 'centralauth' )
+		);
 	}
 
 	/**

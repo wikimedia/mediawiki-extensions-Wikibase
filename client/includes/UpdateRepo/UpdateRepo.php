@@ -12,6 +12,7 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikimedia\Assert\Assert;
 
 /**
  * Provides logic to update the repo after certain changes have been
@@ -58,24 +59,39 @@ abstract class UpdateRepo {
 	private $entityId = false;
 
 	/**
+	 * @var string
+	 */
+	private $userValidationMethod;
+
+	/**
 	 * @param string $repoDB Database name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param User $user
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $title Title in the client that has been changed
+	 * @param string $userValidationMethod Value of the "repoUserValidationMethod" setting
 	 */
 	public function __construct(
 		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
 		User $user,
 		$siteId,
-		Title $title
+		Title $title,
+		$userValidationMethod
 	) {
 		$this->repoDB = $repoDB;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->user = $user;
 		$this->siteId = $siteId;
 		$this->title = $title;
+
+		Assert::parameter(
+			in_array( $userValidationMethod, array( 'centralauth', 'assumeSame' ) ),
+			'$userValidationMethod',
+			"Unkown value $userValidationMethod"
+		);
+
+		$this->userValidationMethod = $userValidationMethod;
 	}
 
 	/**
@@ -105,11 +121,27 @@ abstract class UpdateRepo {
 
 	/**
 	 * Find out whether the user also exists on the repo and belongs to the
-	 * same global account (uses CentralAuth).
+	 * same global account.
 	 *
 	 * @return bool
 	 */
 	public function userIsValidOnRepo() {
+		if ( $this->userValidationMethod === 'centralauth' ) {
+			return $this->userIsValidOnRepoCentralAuth();
+		} elseif ( $this->userValidationMethod === 'assumeSame' ) {
+			return true;
+		} else {
+			throw new RuntimeException( 'Unexpected $this->userValidationMethod value: ' . $this->userValidationMethod );
+		}
+	}
+
+	/**
+	 * Find out whether the user also exists on the repo and belongs to the
+	 * same global account (uses CentralAuth).
+	 *
+	 * @return bool
+	 */
+	public function userIsValidOnRepoCentralAuth() {
 		if ( !class_exists( 'CentralAuthUser' ) ) {
 			// We can't do anything without CentralAuth as there's no way to verify that
 			// the local user equals the repo one with the same name

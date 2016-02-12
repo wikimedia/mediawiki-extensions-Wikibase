@@ -46,23 +46,31 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param bool $cache Whether to cache the instance/ use a cached instance
+	 * @param string $userValidationMethod
+	 *
 	 * @return UpdateRepoOnDelete
 	 */
-	private function getNewUpdateRepoOnDelete() {
-		static $updateRepo = null;
+	private function getNewUpdateRepoOnDelete( $cache = true, $userValidationMethod = 'assumeSame' ) {
+		static $updateRepoCached = null;
 
-		if ( !$updateRepo ) {
-			$data = $this->getFakeData();
+		if ( $updateRepoCached && $cache ) {
+			return $updateRepoCached;
+		}
 
-			$updateRepo = new UpdateRepoOnDelete(
-				$data['repoDB'],
-				// Nobody knows why we need to clone over here, but it's not working
-				// without... PHP is fun!
-				clone $data['siteLinkLookup'],
-				$data['user'],
-				$data['siteId'],
-				$data['title']
-			);
+		$data = $this->getFakeData();
+
+		$updateRepo = new UpdateRepoOnDelete(
+			$data['repoDB'],
+			$data['siteLinkLookup'],
+			$data['user'],
+			$data['siteId'],
+			$data['title'],
+			$userValidationMethod
+		);
+
+		if ( $cache ) {
+			$updateRepoCached = $updateRepo;
 		}
 
 		return $updateRepo;
@@ -100,10 +108,20 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 		return $jobQueueGroupMock;
 	}
 
-	public function testUserIsValidOnRepo() {
-		$updateRepo = $this->getNewUpdateRepoOnDelete();
+	/**
+	 * @dataProvider userIsValidOnRepoProvider
+	 */
+	public function testUserIsValidOnRepo( $expected, $userValidationMethod ) {
+		$updateRepo = $this->getNewUpdateRepoOnDelete( false, $userValidationMethod );
 
-		$this->assertFalse( $updateRepo->userIsValidOnRepo() );
+		$this->assertSame( $expected, $updateRepo->userIsValidOnRepo() );
+	}
+
+	public function userIsValidOnRepoProvider() {
+		return array(
+			array( true, 'assumeSame' ),
+			array( false, 'centralauth' )
+		);
 	}
 
 	/**

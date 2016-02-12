@@ -59,6 +59,11 @@ class UpdateRepoHookHandlers {
 	private $propagateChangesToRepo;
 
 	/**
+	 * @var string
+	 */
+	private $userValidationMethod;
+
+	/**
 	 * @return UpdateRepoHookHandlers|boolean
 	 */
 	private static function newFromGlobalState() {
@@ -83,7 +88,8 @@ class UpdateRepoHookHandlers {
 			$siteLinkLookup,
 			$settings->getSetting( 'repoDatabase' ),
 			$settings->getSetting( 'siteGlobalID' ),
-			$settings->getSetting( 'propagateChangesToRepo' )
+			$settings->getSetting( 'propagateChangesToRepo' ),
+			$settings->getSetting( 'repoUserValidationMethod' )
 		);
 	}
 
@@ -154,6 +160,7 @@ class UpdateRepoHookHandlers {
 	 * @param string $repoDatabase
 	 * @param string $siteGlobalID
 	 * @param bool $propagateChangesToRepo
+	 * @param string $userValidationMethod
 	 */
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
@@ -161,7 +168,8 @@ class UpdateRepoHookHandlers {
 		SiteLinkLookup $siteLinkLookup,
 		$repoDatabase,
 		$siteGlobalID,
-		$propagateChangesToRepo
+		$propagateChangesToRepo,
+		$userValidationMethod
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->jobQueueGroup = $jobQueueGroup;
@@ -170,6 +178,7 @@ class UpdateRepoHookHandlers {
 		$this->repoDatabase = $repoDatabase;
 		$this->siteGlobalID = $siteGlobalID;
 		$this->propagateChangesToRepo = $propagateChangesToRepo;
+		$this->userValidationMethod = $userValidationMethod;
 	}
 
 	/**
@@ -209,7 +218,8 @@ class UpdateRepoHookHandlers {
 			$this->siteLinkLookup,
 			$user,
 			$this->siteGlobalID,
-			$title
+			$title,
+			$this->userValidationMethod
 		);
 
 		if ( !$this->shouldBePushed( $updateRepo ) ) {
@@ -254,7 +264,8 @@ class UpdateRepoHookHandlers {
 			$user,
 			$this->siteGlobalID,
 			$oldTitle,
-			$newTitle
+			$newTitle,
+			$this->userValidationMethod
 		);
 
 		if ( !$this->shouldBePushed( $updateRepo ) ) {

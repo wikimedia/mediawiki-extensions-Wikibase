@@ -28,15 +28,17 @@ class UpdateRepoOnMove extends UpdateRepo {
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $oldTitle
 	 * @param Title $newTitle
+	 * @param string $userValidationMethod Value of the "repoUserValidationMethod" setting
 	 */
 	public function __construct(
 		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
 		User $user, $siteId,
 		Title $oldTitle,
-		Title $newTitle
+		Title $newTitle,
+		$userValidationMethod
 	) {
-		parent::__construct( $repoDB, $siteLinkLookup, $user, $siteId, $oldTitle );
+		parent::__construct( $repoDB, $siteLinkLookup, $user, $siteId, $oldTitle, $userValidationMethod );
 		$this->newTitle = $newTitle;
 	}
 

@@ -93,6 +93,7 @@ Default:
               'wikibase-property' => 'Property'
           )
 </poem>
+;repoUserValidationMethod: Method used to validate that a user on the repo is the same as on client. Used when propagating changes to repo (see the "propagateChangesToRepo" setting below). Possible values: "centralauth" (uses CentralAuth) and "assumeSame" (just assumes that the users are the same). Defaults to "centralauth" if CentralAuth is available, "assumeSame" otherwise.
 ;allowDataTransclusion: switch to enable data transclusion features like the <nowiki>{{#property}}</nowiki> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <tt>true</tt>.
 ;allowArbitraryDataAccess: switch to allow accessing arbitrary items from the <tt>wikibase</tt> Scribunto module and the via the parser functions (instead of just the item which is linked to the current page). Defaults to <tt>true</tt>.
 ;allowDataAccessInUserLanguage: switch to allow accessing data in the user's language rather than the content language from the <tt>wikibase</tt> Scribunto module and the via the parser functions. Useful for multilingual wikis: Allows users to split the ParserCache by user language. Defaults to <tt>false</tt>.
