@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4ea78b8a_fe71ac0b",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2016-02-12T15:13:37Z",
+      "side": 1,
+      "message": "This error message has punctuation, where for example \"wikibase-api-no-common-item\"\u0027s doesn\u0027t In similar use cases, the same rules should be applied for punctuation. Complete and correct punctuation is preferred.",
+      "revId": "9b1d1b05474ce0e27f0caacc0a7b7ab96fc36e0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_9eb678d6",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 2
