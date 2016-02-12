@@ -33,6 +33,24 @@
       "revId": "f63f157bd1e7f57a3242a119c0c218be650e3408",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_de14f046",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-12T14:20:02Z",
+      "side": 1,
+      "message": "I first thought this would indicate an invalid state of the database but in fact we one can pass any entity id as part of the GUID to the api so this should perhaps also invoke $this-\u003eerrorReporter-\u003edieException",
+      "parentUuid": "4ea78b8a_bb0a6627",
+      "revId": "f63f157bd1e7f57a3242a119c0c218be650e3408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
