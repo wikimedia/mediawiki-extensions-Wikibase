@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_db05e217",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T14:15:34Z",
+      "side": 1,
+      "message": "Would be nice if PHP had something like the NORETURN macro (or at least the tooling)",
+      "revId": "f63f157bd1e7f57a3242a119c0c218be650e3408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_bb0a6627",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T14:15:34Z",
+      "side": 1,
+      "message": "Why is this a logic exception? Nothing is even supposed to prevent this, so I doubt this is a logic exception",
+      "revId": "f63f157bd1e7f57a3242a119c0c218be650e3408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
