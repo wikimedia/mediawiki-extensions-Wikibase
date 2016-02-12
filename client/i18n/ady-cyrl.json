@@ -9,15 +9,15 @@
 			"Inyzh"
 		]
 	},
-	"tooltip-t-wikibase": "ЕхьылIагъэу хъарзынэщым и элементгорэм гъэзэгъэ зэпыщ",
-	"wikibase-comment-update": "{{WBREPONAME}} зэхъокIыгъэ",
+	"tooltip-t-wikibase": "ЕхьылӀагъэу хъарзынэщым и элементгорэм гъэзэгъэ зэпыщ",
+	"wikibase-comment-update": "{{WBREPONAME}} зэхъокӀыгъэ",
 	"wikibase-dataitem": "{{WBREPONAME}} зыгор",
-	"wikibase-editlinks": "Зэпыщэмэ яIаз",
-	"wikibase-editlinkstitle": "Бзэзэпыщэмэ яIаз",
+	"wikibase-editlinks": "Зэпыщэмэ яӀаз",
+	"wikibase-editlinkstitle": "Бзэзэпыщэмэ яӀаз",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Гъэбылъ",
 	"wikibase-rc-hide-wikidata-show": "Къэгъэлъагъу",
 	"wikibase-rc-wikibase-edit-letter": "Д",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} и еIэзэныгъэ",
-	"wikibase-otherprojects": "Нэмыкӏ проектхэр"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} и еӀэзэныгъэ",
+	"wikibase-otherprojects": "НэмыкӀ проектхэр"
 }

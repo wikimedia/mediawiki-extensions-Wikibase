@@ -5,15 +5,16 @@
 			"TheRossatron",
 			"SmartNart12",
 			"GR44 Luc",
-			"Highlander45temp"
+			"Highlander45temp",
+			"Amire80"
 		]
 	},
-	"wikibase-edit": "еIаз",
+	"wikibase-edit": "еӀаз",
 	"wikibase-add": "хэгъахъу",
-	"wikibase-label-empty": "ЦIэ пари фэусыгъэп",
-	"wikibase-description-empty": "ГурыIоныгъэ пари итхагъэп",
-	"wikibase-statements": "ЕплъыкIэхэр",
-	"wikibase-sitelinks-special": "НэмыкI сайтхэр",
+	"wikibase-label-empty": "ЦӀэ пари фэусыгъэп",
+	"wikibase-description-empty": "ГурыӀоныгъэ пари итхагъэп",
+	"wikibase-statementsection-statements": "ЕплъыкӀэхэр",
+	"wikibase-sitelinks-special": "НэмыкӀ сайтхэр",
 	"wikibase-aliases-empty": "Синонимхэр гъэнэфагъэхэп",
 	"wikibase-statementview-rank-normal": "Ранг нормал",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|лъапсэ|лъапсэхэр}}"
