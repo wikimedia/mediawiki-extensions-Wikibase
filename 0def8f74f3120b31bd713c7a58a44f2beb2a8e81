@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_1ea8481c",
+        "filename": "repo/includes/specials/SpecialNewEntity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T15:28:53Z",
+      "side": 1,
+      "message": "This seems conceptually flawed to me… I don\u0027t think we should do that. Maybe rename the class?\n\nAlso this is not a page itself, but an abstract base class.",
+      "revId": "0def8f74f3120b31bd713c7a58a44f2beb2a8e81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
