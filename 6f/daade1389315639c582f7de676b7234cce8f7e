@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review-1: Physikerwelt <wiki@physikerwelt.de>
+Code-Review+2: Smalyshev <smalyshev@wikimedia.org>
+Submitted-by: jenkins-bot
+Submitted-at: Fri, 12 Feb 2016 00:51:17 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/269386
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
