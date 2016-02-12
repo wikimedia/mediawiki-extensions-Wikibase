@@ -4,9 +4,9 @@ namespace Wikibase\DataModel\Tests\Entity;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
@@ -366,6 +366,73 @@ class ItemTest extends EntityTest {
 	public function testNotEquals( Item $firstItem, Item $secondItem ) {
 		$this->assertFalse( $firstItem->equals( $secondItem ) );
 		$this->assertFalse( $secondItem->equals( $firstItem ) );
+	}
+
+	public function cloneProvider() {
+		$item = new Item( new ItemId( 'Q1' ) );
+		$item->setLabel( 'en', 'original' );
+		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 1 ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Original' );
+
+		return array(
+			'copy' => array( $item, $item->copy() ),
+			'native clone' => array( $item, clone $item ),
+		);
+	}
+
+	/**
+	 * @dataProvider cloneProvider
+	 */
+	public function testCloneIsEqualButNotIdentical( Item $original, Item $clone ) {
+		$this->assertNotSame( $original, $clone );
+		$this->assertTrue( $original->equals( $clone ) );
+		$this->assertSame(
+			$original->getId(),
+			$clone->getId(),
+			'id is immutable and must not be cloned'
+		);
+
+		// The clone must not reference the same mutable objects
+		$this->assertNotSame( $original->getFingerprint(), $clone->getFingerprint() );
+		$this->assertNotSame( $original->getStatements(), $clone->getStatements() );
+		$this->assertNotSame(
+			$original->getStatements()->getFirstStatementWithGuid( null ),
+			$clone->getStatements()->getFirstStatementWithGuid( null )
+		);
+		$this->assertNotSame( $original->getSiteLinkList(), $clone->getSiteLinkList() );
+		$this->assertSame(
+			$original->getSiteLinkList()->getBySiteId( 'enwiki' ),
+			$clone->getSiteLinkList()->getBySiteId( 'enwiki' ),
+			'SiteLink is immutable and must not be cloned'
+		);
+	}
+
+	/**
+	 * @dataProvider cloneProvider
+	 */
+	public function testOriginalDoesNotChangeWithClone( Item $original, Item $clone ) {
+		$originalStatement = $original->getStatements()->getFirstStatementWithGuid( null );
+		$clonedStatement = $clone->getStatements()->getFirstStatementWithGuid( null );
+
+		$clone->setLabel( 'en', 'clone' );
+		$clone->setDescription( 'en', 'clone' );
+		$clone->setAliases( 'en', array( 'clone' ) );
+		$clonedStatement->setGuid( 'clone' );
+		$clonedStatement->setMainSnak( new PropertySomeValueSnak( 666 ) );
+		$clonedStatement->setRank( Statement::RANK_DEPRECATED );
+		$clonedStatement->getQualifiers()->addSnak( new PropertyNoValueSnak( 1 ) );
+		$clonedStatement->getReferences()->addNewReference( new PropertyNoValueSnak( 1 ) );
+		$clone->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
+
+		$this->assertSame( 'original', $original->getFingerprint()->getLabel( 'en' )->getText() );
+		$this->assertFalse( $original->getFingerprint()->hasDescription( 'en' ) );
+		$this->assertFalse( $original->getFingerprint()->hasAliasGroup( 'en' ) );
+		$this->assertNull( $originalStatement->getGuid() );
+		$this->assertSame( 'novalue', $originalStatement->getMainSnak()->getType() );
+		$this->assertSame( Statement::RANK_NORMAL, $originalStatement->getRank() );
+		$this->assertTrue( $originalStatement->getQualifiers()->isEmpty() );
+		$this->assertTrue( $originalStatement->getReferences()->isEmpty() );
+		$this->assertFalse( $original->getSiteLinkList()->isEmpty() );
 	}
 
 }

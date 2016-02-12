@@ -2,6 +2,7 @@
 
 ## Version 5.1 (dev)
 
+* `Item::copy` and `Property::copy` do not clone immutable objects any more, saving time and memory
 * Deprecated `FingerprintHolder` and `StatementListHolder`
 
 ## Version 5.0.2 (2016-02-23)

@@ -278,4 +278,17 @@ class Fingerprint implements Comparable, LabelsProvider, DescriptionsProvider, A
 		$this->aliasGroups = $groups;
 	}
 
+	/**
+	 * @see http://php.net/manual/en/language.oop5.cloning.php
+	 *
+	 * @since 5.1
+	 */
+	public function __clone() {
+		// TermList is mutable, but Term is not. No deeper cloning necesarry.
+		$this->labels = clone $this->labels;
+		$this->descriptions = clone $this->descriptions;
+		// AliasGroupList is mutable, but AliasGroup is not. No deeper cloning necesarry.
+		$this->aliasGroups = clone $this->aliasGroups;
+	}
+
 }

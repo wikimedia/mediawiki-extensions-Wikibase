@@ -325,4 +325,15 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 		return $statementList;
 	}
 
+	/**
+	 * @see http://php.net/manual/en/language.oop5.cloning.php
+	 *
+	 * @since 5.1
+	 */
+	public function __clone() {
+		foreach ( $this->statements as &$statement ) {
+			$statement = clone $statement;
+		}
+	}
+
 }
