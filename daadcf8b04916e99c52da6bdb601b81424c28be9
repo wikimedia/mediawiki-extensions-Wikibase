@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "4ea78b8a_79295635",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-12T16:15:39Z",
+      "side": 1,
+      "message": "string[]",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_19186222",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-12T16:15:39Z",
+      "side": 1,
+      "message": "What\u0027s a \"data type\" in this context? A property type or a value type?",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_19e7020f",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-12T16:15:39Z",
+      "side": 1,
+      "message": "Please stick to strict camel case, as in other methods in our code base (and even in this patch): getDataTypeUri.\n\nI also suggest to avoid the vague word \"data\". Use \"PropertyType\" or \"ValueType\".",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_32ad3ee8",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 1
