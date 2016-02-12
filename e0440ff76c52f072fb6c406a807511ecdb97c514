@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_f9d2262b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-12T16:28:37Z",
+      "side": 1,
+      "message": "Ticket?",
+      "revId": "e0440ff76c52f072fb6c406a807511ecdb97c514",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f999c680",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-12T16:28:37Z",
+      "side": 1,
+      "message": "This looks like this patch could be split in 2 or even 3, moving the injection around, one step at a time. But after seeing the whole change I don\u0027t think this is worth it.",
+      "revId": "e0440ff76c52f072fb6c406a807511ecdb97c514",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9990d24f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-12T16:28:37Z",
+      "side": 1,
+      "message": "Totally nitpicking, but should be documented as …|null because of the lazy initialization.",
+      "revId": "e0440ff76c52f072fb6c406a807511ecdb97c514",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
