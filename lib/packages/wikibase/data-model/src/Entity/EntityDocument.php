@@ -68,4 +68,15 @@ interface EntityDocument extends Comparable {
 	 */
 	public function equals( $target );
 
+	/**
+	 * Returns a deep clone of the entity. The clone must be equal in all details, including the id.
+	 * Since EntityDocuments are not immutable (at least the id can be set) the method is not
+	 * allowed to return $this.
+	 *
+	 * @since 5.0
+	 *
+	 * @return self
+	 */
+	public function copy();
+
 }
