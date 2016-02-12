@@ -6,8 +6,8 @@ use Comparable;
 use InvalidArgumentException;
 
 /**
- * Minimal interface for all objects that represent an entity.
- * All entities have an EntityId and an entity type.
+ * Minimal interface for all objects that represent an entity. All entities have an entity type and
+ * an EntityId.
  *
  * @since 0.8.2
  *
@@ -16,15 +16,6 @@ use InvalidArgumentException;
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 interface EntityDocument extends Comparable {
-
-	/**
-	 * Returns the id of the entity or null if it does not have one.
-	 *
-	 * @since 0.8.2
-	 *
-	 * @return EntityId|null
-	 */
-	public function getId();
 
 	/**
 	 * Returns a type identifier for the entity, e.g. "item" or "property".
@@ -36,6 +27,15 @@ interface EntityDocument extends Comparable {
 	public function getType();
 
 	/**
+	 * Returns the id of the entity or null if it does not have one.
+	 *
+	 * @since 0.8.2
+	 *
+	 * @return EntityId|null
+	 */
+	public function getId();
+
+	/**
 	 * Sets the id of the entity. A specific derivative of EntityId is always supported.
 	 *
 	 * @since 3.0
@@ -45,8 +45,7 @@ interface EntityDocument extends Comparable {
 	public function setId( $id );
 
 	/**
-	 * Returns true if the entity has no content.
-	 * Having an id set does not count as having content.
+	 * Returns true if the entity has no content. Having an id set does not count as having content.
 	 *
 	 * @since 4.3
 	 *
@@ -57,10 +56,11 @@ interface EntityDocument extends Comparable {
 	/**
 	 * @see Comparable::equals
 	 *
-	 * Two entities are considered equal if they are of the same
-	 * type and have the same value. The value does not include
-	 * the id, so entities with the same value but different id
-	 * are considered equal.
+	 * Two entities are considered equal if they are of the same type and have the same value. The
+	 * value does not include the id, so entities with the same value but different id are
+	 * considered equal.
+	 *
+	 * @since 5.0
 	 *
 	 * @param mixed $target
 	 *
