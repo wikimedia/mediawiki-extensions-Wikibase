@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_9e0518c7",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T14:55:22Z",
+      "side": 1,
+      "message": "rather \"can not contain\"? This error message gives the user the impression that the problem is that there aren\u0027t any lables set",
+      "revId": "5ab7bde27ebcef387455feb03e17f77b44d7a754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_3e0c24f0",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T14:55:22Z",
+      "side": 1,
+      "message": "rather \"can not contain\"? This error message gives the user the impression that the problem is that there aren\u0027t any descriptions set",
+      "revId": "5ab7bde27ebcef387455feb03e17f77b44d7a754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_5e0fa0e4",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T14:55:22Z",
+      "side": 1,
+      "message": "rather \"can not contain\"? This error message gives the user the impression that the problem is that there aren\u0027t any aliases set",
+      "revId": "5ab7bde27ebcef387455feb03e17f77b44d7a754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_be16d4f4",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T14:55:22Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "5ab7bde27ebcef387455feb03e17f77b44d7a754",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
