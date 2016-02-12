@@ -194,19 +194,19 @@ class Property extends Entity implements StatementListHolder {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityDocument $entity
+	 * @param mixed $target
 	 *
 	 * @return bool
 	 */
-	public function equals( EntityDocument $entity ) {
-		if ( $this === $entity ) {
+	public function equals( $target ) {
+		if ( $this === $target ) {
 			return true;
 		}
 
-		return $entity instanceof self
-		       && $this->dataTypeId === $entity->dataTypeId
-		       && $this->fingerprint->equals( $entity->fingerprint )
-		       && $this->statements->equals( $entity->statements );
+		return $target instanceof self
+			&& $this->dataTypeId === $target->dataTypeId
+			&& $this->fingerprint->equals( $target->fingerprint )
+			&& $this->statements->equals( $target->statements );
 	}
 
 	/**

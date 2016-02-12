@@ -17,8 +17,7 @@
     * Added `getIterator` method.
 * Removed `ReferenceList::removeDuplicates`.
 * `ReferenceList::addReference` now throws an `InvalidArgumentException` for negative indices.
-* `Entity` no longer implements `Comparable`
-* Added `EntityDocument::equals`
+* `EntityDocument` now implements `Comparable`.
 
 ## Version 4.4.0 (2016-01-20)
 
