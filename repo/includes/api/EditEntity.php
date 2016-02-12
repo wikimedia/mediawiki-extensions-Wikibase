@@ -22,7 +22,9 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\DataModel\Term\FingerprintHolder;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -313,16 +315,25 @@ class EditEntity extends ModifyEntity {
 		//       for more efficient validation!
 
 		if ( array_key_exists( 'labels', $data ) ) {
+			if ( !( $entity instanceof FingerprintHolder ) ) {
+				$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-recognized' );
+			}
 			$this->assertArray( $data['labels'], 'List of labels must be an array' );
 			$changeOps->add( $this->getLabelChangeOps( $data['labels'] ) );
 		}
 
 		if ( array_key_exists( 'descriptions', $data ) ) {
+			if ( !( $entity instanceof FingerprintHolder ) ) {
+				$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-recognized' );
+			}
 			$this->assertArray( $data['descriptions'], 'List of descriptions must be an array' );
 			$changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'] ) );
 		}
 
 		if ( array_key_exists( 'aliases', $data ) ) {
+			if ( !( $entity instanceof FingerprintHolder ) ) {
+				$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-recognized' );
+			}
 			$this->assertArray( $data['aliases'], 'List of aliases must be an array' );
 			$changeOps->add( $this->getAliasesChangeOps( $data['aliases'] ) );
 		}
@@ -336,6 +347,9 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( array_key_exists( 'claims', $data ) ) {
+			if ( !( $entity instanceof StatementListHolder ) ) {
+				$this->errorReporter->dieError( 'The given entity cannot contain statements', 'not-recognized' );
+			}
 			$this->assertArray( $data['claims'], 'List of claims must be an array' );
 			$changeOps->add( $this->getClaimsChangeOps( $data['claims'] ) );
 		}
