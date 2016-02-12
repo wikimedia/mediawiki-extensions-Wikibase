@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_9ec2f85b",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T14:57:06Z",
+      "side": 1,
+      "message": "It can not contain them, the problem is not that it doesn\u0027t",
+      "revId": "565974d99825f5a76e5dd861a0b523f63261e0a3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
