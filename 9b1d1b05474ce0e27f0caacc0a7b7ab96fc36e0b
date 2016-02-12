@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_39119eb1",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-12T16:57:26Z",
+      "side": 1,
+      "message": "While it is desirable to have consistent punctuation, that issue goes beyond what this patch does.",
+      "parentUuid": "4ea78b8a_fe71ac0b",
+      "revId": "9b1d1b05474ce0e27f0caacc0a7b7ab96fc36e0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_9eb678d6",
         "filename": "repo/includes/api/EditEntity.php",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Not recognized still doesn\u0027t really fit, I think. We very well know what the user wants, but it\u0027s not supported on the given entity.",
       "parentUuid": "4ea78b8a_5e3d6028",
+      "revId": "9b1d1b05474ce0e27f0caacc0a7b7ab96fc36e0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_196dc22d",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-12T16:57:26Z",
+      "side": 1,
+      "message": "I also don\u0027t think that not-recognized is a good error code here but do we want to do a breaking change to the api output here?\n\nI think most importantly we should be consistent in this method and use the same error code within one api module. Then we can think about replacing the not-recognized code with the not-supported one. That however should also happen for the sitelinks key.",
+      "parentUuid": "4ea78b8a_de1f10b9",
       "revId": "9b1d1b05474ce0e27f0caacc0a7b7ab96fc36e0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
