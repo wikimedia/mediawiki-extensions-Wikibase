@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_c84d1ae2",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-12T11:10:55Z",
+      "side": 1,
+      "message": "This is going to be mostly 0 and from time to time 1 (at least in production). If you want to record useful data, you need to use microtime",
+      "revId": "5d3104de9a334ae74f3cd58aa0fe5e0b8d372b0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
