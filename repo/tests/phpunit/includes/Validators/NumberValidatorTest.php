@@ -64,4 +64,9 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $params, $errors[0]->getParameters(), 'error parameters' );
 	}
 
+	public function testSetOptions() {
+		$validator = new NumberValidator();
+		$validator->setOptions( array() );
+	}
+
 }

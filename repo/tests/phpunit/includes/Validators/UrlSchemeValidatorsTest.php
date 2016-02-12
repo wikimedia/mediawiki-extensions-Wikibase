@@ -106,7 +106,7 @@ class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 		$localizer = new ValidatorErrorLocalizer();
 
 		$errors = $result->getErrors();
-		$this->assertGreaterThanOrEqual( 1, $errors );
+		$this->assertCount( 1, $errors );
 
 		foreach ( $errors as $error ) {
 			$msg = $localizer->getErrorMessage( $error );
