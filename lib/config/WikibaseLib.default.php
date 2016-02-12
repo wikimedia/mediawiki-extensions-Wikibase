@@ -19,11 +19,6 @@ return array(
 	// whether changes get recorded to wb_changes
 	'useChangesTable' => true,
 
-	'entityPrefixes' => array(
-		'q' => 'item',
-		'p' => 'property',
-	),
-
 	'siteLinkGroups' => array(
 		'wikipedia',
 	),
