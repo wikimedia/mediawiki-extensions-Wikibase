@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_1496e797",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-12T17:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_79295635",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_19186222",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-12T16:15:39Z",
       "side": 1,
       "message": "What\u0027s a \"data type\" in this context? A property type or a value type?",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d4b84f27",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-12T17:51:10Z",
+      "side": 1,
+      "message": "A property type. I know we want to move away from \"data type\", but that term is all over out external interfaces. See below.",
+      "parentUuid": "4ea78b8a_19186222",
       "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_3481a34f",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-12T17:51:10Z",
+      "side": 1,
+      "message": "It\u0027s called dataType in RDF. We\u0027d have to change our RDF ontology. The method name should be consistent with that.\n\nAs to the upper-case URI: that\u0027s for consistency with other methods in this class, getCommonsURI, getOntologyURI, etc. If you want to change that, change them all.",
+      "parentUuid": "4ea78b8a_19e7020f",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_32ad3ee8",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2016-02-11T19:50:39Z",
       "side": 1,
       "message": "I wonder if it won\u0027t be better to have this function to just accept $type? It doesn\u0027t really need to know it comes from property.",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f49a2bbc",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-12T17:51:10Z",
+      "side": 1,
+      "message": "Yes, i wondered about that too. but it\u0027s a separate concern.",
+      "parentUuid": "4ea78b8a_32ad3ee8",
       "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
