@@ -300,12 +300,7 @@ class Item extends Entity implements StatementListHolder {
 	}
 
 	/**
-	 * @see Comparable::equals
-	 *
-	 * Two items are considered equal if they are of the same
-	 * type and have the same value. The value does not include
-	 * the id, so entities with the same value but different id
-	 * are considered equal.
+	 * @see EntityDocument::equals
 	 *
 	 * @since 0.1
 	 *

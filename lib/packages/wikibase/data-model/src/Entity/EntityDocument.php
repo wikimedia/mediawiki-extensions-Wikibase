@@ -54,4 +54,18 @@ interface EntityDocument extends Comparable {
 	 */
 	public function isEmpty();
 
+	/**
+	 * @see Comparable::equals
+	 *
+	 * Two entities are considered equal if they are of the same
+	 * type and have the same value. The value does not include
+	 * the id, so entities with the same value but different id
+	 * are considered equal.
+	 *
+	 * @param mixed $target
+	 *
+	 * @return bool
+	 */
+	public function equals( $target );
+
 }
