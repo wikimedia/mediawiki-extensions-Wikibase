@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
-use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;

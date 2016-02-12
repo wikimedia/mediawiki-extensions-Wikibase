@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Validators\TermValidatorFactory;
