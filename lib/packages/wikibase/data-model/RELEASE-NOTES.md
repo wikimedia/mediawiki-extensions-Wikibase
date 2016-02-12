@@ -2,22 +2,23 @@
 
 ## Version 5.0.0 (alpha)
 
-* Removed `Claims` class (deprecated since 1.0).
-* Removed `getClaims` and `setClaims` methods from `Entity`, `Item` and `Property` (deprecated since
-  1.0).
-* Removed `HashableObjectStorage` class (deprecated since 4.4).
-* `ReferenceList` no longer derives from `SplObjectStorage`.
+* Removed `Claims` class (deprecated since 1.0)
+* Removed `getClaims` and `setClaims` methods from `Entity`, `Item` and `Property` (deprecated since 1.0)
+* Removed `HashableObjectStorage` class (deprecated since 4.4)
+* `ReferenceList` no longer derives from `SplObjectStorage`
     * Removed `addAll`, `attach`, `contains`, `detach`, `getHash`, `getInfo`, `removeAll`,
-      `removeAllExcept` and `setInfo` methods.
-* `ReferenceList` no longer implements `ArrayAccess`.
-    * Removed `offsetExists`, `offsetGet`, `offsetSet` and `offsetUnset` methods.
-* `ReferenceList` no longer implements `Iterator`.
-    * Removed `current`, `key`, `next`, `rewind` and `valid` methods.
-* `ReferenceList` now implements `IteratorAggregate`.
-    * Added `getIterator` method.
-* Removed `ReferenceList::removeDuplicates`.
-* `ReferenceList::addReference` now throws an `InvalidArgumentException` for negative indices.
-* `EntityDocument` now implements `Comparable`.
+      `removeAllExcept` and `setInfo` methods
+* `ReferenceList` no longer implements `ArrayAccess`
+    * Removed `offsetExists`, `offsetGet`, `offsetSet` and `offsetUnset` methods
+* `ReferenceList` no longer implements `Iterator`
+    * Removed `current`, `key`, `next`, `rewind` and `valid` methods
+* `ReferenceList` now implements `IteratorAggregate`
+    * Added `getIterator` method
+* Removed `ReferenceList::removeDuplicates`
+* `ReferenceList::addReference` now throws an `InvalidArgumentException` for negative indices
+* `EntityDocument` now implements `Comparable`
+    * Added `equals` method
+* Added `copy` to `EntityDocument`
 
 ## Version 4.4.0 (2016-01-20)
 
