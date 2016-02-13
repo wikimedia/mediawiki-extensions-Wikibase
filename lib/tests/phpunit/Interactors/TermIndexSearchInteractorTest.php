@@ -16,7 +16,7 @@ use Wikibase\TermIndexEntry;
 use Wikibase\Test\MockTermIndex;
 
 /**
- * @covers Wikibase\Lib\Interactors\TermIndexSearchInteractor
+ * @covers Wikibase\Lib\Interactors\TermIndexSearchinteractor
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -152,19 +152,17 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param bool|null $caseSensitive
-	 * @param bool|null $prefixSearch
-	 * @param int|null $limit
-	 * @param bool|null $useFallback
+	 * @param array $params [ $caseSensitive, $prefixSearch, $limit, $useFallback ]
 	 *
 	 * @return TermIndexSearchInteractor
+	 *
 	 */
-	private function newTermSearchInteractor(
-		$caseSensitive = null,
-		$prefixSearch = null,
-		$limit = null,
-		$useFallback = null
-	) {
+	private function newTermSearchInteractor( array $params = [] ) {
+		$caseSensitive = isset( $params[0] ) ? $params[0] : null;
+		$prefixSearch = isset( $params[1] ) ? $params[1] : null;
+		$limit = isset( $params[2] ) ? $params[2] : null;
+		$useFallback = isset( $params[3] ) ? $params[3] : null;
+
 		$interactor = new TermIndexSearchInteractor(
 			$this->getMockTermIndex(),
 			$this->getMockLanguageFallbackChainFactory(),
@@ -192,14 +190,17 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 			TermIndexEntry::TYPE_DESCRIPTION,
 			TermIndexEntry::TYPE_ALIAS
 		);
+
+		// interactor params: [ $caseSensitive, $prefixSearch, $limit, $useFallback ]
+
 		return array(
 			'No Results' => array(
-				$this->newTermSearchInteractor( false, false, 5000 ),
+				array( false, false, 5000 ),
 				array( 'ABCDEFGHI123', 'br', 'item', $allTermTypes ),
 				array(),
 			),
 			'Q111 Foo en Label match exactly' => array(
-				$this->newTermSearchInteractor( false, false, 5000 ),
+				array( false, false, 5000 ),
 				array( 'Foo', 'en', 'item', array( TermIndexEntry::TYPE_LABEL ) ),
 				array(
 					array(
@@ -210,7 +211,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				),
 			),
 			'Q111&Q333 Foo en Label match prefix search' => array(
-				$this->newTermSearchInteractor( false, true, 5000 ),
+				array( false, true, 5000 ),
 				array( 'Foo', 'en', 'item', array( TermIndexEntry::TYPE_LABEL ) ),
 				array(
 					array(
@@ -226,7 +227,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				),
 			),
 			'Q111&Q333 Foo en Label match prefix search LIMIT 1' => array(
-				$this->newTermSearchInteractor( false, true, 1 ),
+				array( false, true, 1 ),
 				array( 'Foo', 'en', 'item', array( TermIndexEntry::TYPE_LABEL ) ),
 				array(
 					array(
@@ -237,7 +238,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				),
 			),
 			'Q111 Foo en-ca Label fallback to en' => array(
-				$this->newTermSearchInteractor( false, false, 5000 ),
+				array( false, false, 5000 ),
 				array( 'Foo', 'en-ca', 'item', array( TermIndexEntry::TYPE_LABEL ) ),
 				array(
 					array(
@@ -248,7 +249,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				),
 			),
 			'Q111 Foo en all term types match case insensitive' => array(
-				$this->newTermSearchInteractor( false, false, 5000 ),
+				array( false, false, 5000 ),
 				array( 'Foo', 'en', 'item', $allTermTypes ),
 				array(
 					array(
@@ -259,7 +260,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				),
 			),
 			'Q111 Foo en aliases match case sensitive' => array(
-				$this->newTermSearchInteractor( true, false, 5000 ),
+				array( true, false, 5000 ),
 				array( 'Foo', 'en', 'item', $allTermTypes ),
 				array(
 					array(
@@ -270,7 +271,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				),
 			),
 			'Q555 Ta en-ca with fallback aliases only' => array(
-				$this->newTermSearchInteractor( false, true, 5000 ),
+				array( false, true, 5000 ),
 				array( 'Ta', 'en-ca', 'item', $allTermTypes ),
 				array(
 					array(
@@ -281,7 +282,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				),
 			),
 			'P22&P44 La en-ca with fallback all terms' => array(
-				$this->newTermSearchInteractor( true, true, 5000 ),
+				array( true, true, 5000 ),
 				array( 'La', 'en-ca', 'property', $allTermTypes ),
 				array(
 					array(
@@ -302,15 +303,17 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideSearchForEntitiesTest
 	 *
-	 * @param TermIndexSearchInteractor $interactor
+	 * @param array $interactorParams [ $caseSensitive, $prefixSearch, $limit, $useFallback ]
 	 * @param array $params
 	 * @param array[] $expectedTermsDetails each element has a 'term', 'termtype' and a 'entityId' key
 	 */
 	public function testSearchForEntities_returnsExpectedResults(
-		TermIndexSearchInteractor $interactor,
+		array $interactorParams,
 		array $params,
 		array $expectedTermsDetails
 	) {
+		$interactor = $this->newTermSearchInteractor( $interactorParams );
+
 		// $interactor->searchForEntities() call
 		$results = call_user_func_array( array( $interactor, 'searchForEntities' ), $params );
 
