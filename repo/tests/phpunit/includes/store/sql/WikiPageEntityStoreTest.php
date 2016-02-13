@@ -76,7 +76,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		return $this->entityIdParser;
 	}
 
-	private function getSimpleEntities() {
+	public function simpleEntityParameterProvider() {
 		$item = new Item();
 		$item->setLabel( 'en', 'Item' );
 		$item->setDescription( 'en', 'Item description' );
@@ -86,17 +86,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$property->setDescription( 'en', 'Property description' );
 
 		return array(
-			$item,
-			$property
-		);
-	}
-
-	public function simpleEntityParameterProvider() {
-		return array_map(
-			function ( $entity ) {
-				return array( $entity );
-			},
-			$this->getSimpleEntities()
+			array( $item ),
+			array( $property ),
 		);
 	}
 
