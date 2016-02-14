@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_fff8bfe3",
+        "filename": ".jscsrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T11:27:02Z",
+      "side": 1,
+      "message": "Maybe sort this alphabetically?",
+      "revId": "ebc21a4050ec27b7a8eb98df6507db9dee1f2b35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
