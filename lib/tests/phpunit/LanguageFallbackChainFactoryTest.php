@@ -71,7 +71,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_OTHERS, array() ),
 
-			array( 'zh-classical', LanguageFallbackChainFactory::FALLBACK_SELF, array( 'lzh' ) ),
+			array( 'zh-classical', LanguageFallbackChainFactory::FALLBACK_SELF, array( 'lzh', 'zh-hant' ) ),
 
 			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'de-formal', 'de', 'en' ) ),
 			// Repeated to test caching
