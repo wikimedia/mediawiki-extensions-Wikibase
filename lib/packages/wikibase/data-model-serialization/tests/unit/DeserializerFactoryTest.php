@@ -36,6 +36,25 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		) );
 	}
 
+	public function testNewItemDeserializer() {
+		$this->assertDeserializesWithoutException(
+			$this->buildDeserializerFactory()->newItemDeserializer(),
+			array(
+				'type' => 'item'
+			)
+		);
+	}
+
+	public function testNewPropertyDeserializer() {
+		$this->assertDeserializesWithoutException(
+			$this->buildDeserializerFactory()->newPropertyDeserializer(),
+			array(
+				'type' => 'property',
+				'datatype' => 'string'
+			)
+		);
+	}
+
 	public function testNewSiteLinkDeserializer() {
 		$this->assertDeserializesWithoutException(
 			$this->buildDeserializerFactory()->newSiteLinkDeserializer(),

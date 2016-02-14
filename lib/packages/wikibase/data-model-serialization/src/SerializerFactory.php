@@ -100,19 +100,41 @@ class SerializerFactory {
 	 */
 	public function newEntitySerializer() {
 		return new DispatchingSerializer( array(
-			new ItemSerializer(
-				$this->newTermListSerializer(),
-				$this->newAliasGroupListSerializer(),
-				$this->newStatementListSerializer(),
-				$this->newSiteLinkSerializer(),
-				$this->shouldUseObjectsForMaps()
-			),
-			new PropertySerializer(
-				$this->newTermListSerializer(),
-				$this->newAliasGroupListSerializer(),
-				$this->newStatementListSerializer()
-			)
+			$this->newItemSerializer(),
+			$this->newPropertySerializer()
 		) );
+	}
+
+	/**
+	 * Returns a Serializer that can serialize Item objects.
+	 *
+	 * @since 2.1
+	 *
+	 * @return Serializer
+	 */
+	public function newItemSerializer() {
+		return new ItemSerializer(
+			$this->newTermListSerializer(),
+			$this->newAliasGroupListSerializer(),
+			$this->newStatementListSerializer(),
+			$this->newSiteLinkSerializer(),
+			$this->shouldUseObjectsForMaps()
+		);
+	}
+
+	/**
+	 * Returns a Serializer that can serialize Property objects.
+	 *
+	 * @since 2.1
+	 *
+	 * @return Serializer
+	 */
+	public function newPropertySerializer() {
+		return new PropertySerializer(
+			$this->newTermListSerializer(),
+			$this->newAliasGroupListSerializer(),
+			$this->newStatementListSerializer()
+		);
 	}
 
 	/**

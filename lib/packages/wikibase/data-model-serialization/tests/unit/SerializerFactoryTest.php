@@ -47,6 +47,20 @@ class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testNewItemSerializer() {
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newItemSerializer(),
+			new Item()
+		);
+	}
+
+	public function testNewPropertySerializer() {
+		$this->assertSerializesWithoutException(
+			$this->buildSerializerFactory()->newPropertySerializer(),
+			Property::newFromType( 'string' )
+		);
+	}
+
 	public function testNewSiteLinkSerializer() {
 		$this->assertSerializesWithoutException(
 			$this->buildSerializerFactory()->newSiteLinkSerializer(),
