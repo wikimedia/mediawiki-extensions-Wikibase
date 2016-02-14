@@ -78,39 +78,37 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 	}
 
 	public function atomicClaimDifferenceProvider() {
-		$claimDifferenceObjects = array();
 		$changeOp = new DiffOpChange( "old", "new" );
 		$diff = new Diff( array( $changeOp ) );
 
-		$claimDifferenceObjects[] = new ClaimDifference( $changeOp );
-		$claimDifferenceObjects[] = new ClaimDifference( null, $diff );
-		$claimDifferenceObjects[] = new ClaimDifference( null, null, $diff );
-		$claimDifferenceObjects[] = new ClaimDifference( null, null, null, $changeOp );
-
-		return $this->arrayWrap( $claimDifferenceObjects );
+		return array(
+			array( new ClaimDifference( $changeOp ) ),
+			array( new ClaimDifference( null, $diff ) ),
+			array( new ClaimDifference( null, null, $diff ) ),
+			array( new ClaimDifference( null, null, null, $changeOp ) ),
+		);
 	}
 
 	public function nonAtomicClaimDifferenceProvider() {
-		$claimDifferenceObjects = array();
 		$changeOp = new DiffOpChange( "old", "new" );
 		$diff = new Diff( array( $changeOp ) );
 
-		$claimDifferenceObjects[] = new ClaimDifference();
-		$claimDifferenceObjects[] = new ClaimDifference( $changeOp, $diff, null, null );
-		$claimDifferenceObjects[] = new ClaimDifference( $changeOp, null, $diff, null );
-		$claimDifferenceObjects[] = new ClaimDifference( $changeOp, null, null, $changeOp );
-		$claimDifferenceObjects[] = new ClaimDifference( $changeOp, $diff, $diff, null );
-		$claimDifferenceObjects[] = new ClaimDifference( $changeOp, $diff, null, $changeOp );
-		$claimDifferenceObjects[] = new ClaimDifference( $changeOp, null, $diff, $changeOp );
-		$claimDifferenceObjects[] = new ClaimDifference( $changeOp, $diff, $diff, $changeOp );
-		$claimDifferenceObjects[] = new ClaimDifference( null, null, $diff, $changeOp );
-		$claimDifferenceObjects[] = new ClaimDifference( null, $diff, null, $changeOp );
-		$claimDifferenceObjects[] = new ClaimDifference( null, $diff, $diff, null );
-		$claimDifferenceObjects[] = new ClaimDifference( null, $diff, $diff, $changeOp );
-		$claimDifferenceObjects[] = new ClaimDifference( null, new Diff(), null, null );
-		$claimDifferenceObjects[] = new ClaimDifference( null, new Diff(), null, null );
-
-		return $this->arrayWrap( $claimDifferenceObjects );
+		return array(
+			array( new ClaimDifference() ),
+			array( new ClaimDifference( $changeOp, $diff, null, null ) ),
+			array( new ClaimDifference( $changeOp, null, $diff, null ) ),
+			array( new ClaimDifference( $changeOp, null, null, $changeOp ) ),
+			array( new ClaimDifference( $changeOp, $diff, $diff, null ) ),
+			array( new ClaimDifference( $changeOp, $diff, null, $changeOp ) ),
+			array( new ClaimDifference( $changeOp, null, $diff, $changeOp ) ),
+			array( new ClaimDifference( $changeOp, $diff, $diff, $changeOp ) ),
+			array( new ClaimDifference( null, null, $diff, $changeOp ) ),
+			array( new ClaimDifference( null, $diff, null, $changeOp ) ),
+			array( new ClaimDifference( null, $diff, $diff, null ) ),
+			array( new ClaimDifference( null, $diff, $diff, $changeOp ) ),
+			array( new ClaimDifference( null, new Diff(), null, null ) ),
+			array( new ClaimDifference( null, new Diff(), null, null ) ),
+		);
 	}
 
 	/**
