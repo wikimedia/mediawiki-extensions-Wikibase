@@ -47,4 +47,9 @@ class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
+	public function testSetOptions() {
+		$validator = new NotEntityIdValidator( new BasicEntityIdParser(), '' );
+		$validator->setOptions( array() );
+	}
+
 }

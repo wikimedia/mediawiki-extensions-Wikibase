@@ -54,4 +54,9 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testSetOptions() {
+		$validator = new UrlValidator( array() );
+		$validator->setOptions( array() );
+	}
+
 }

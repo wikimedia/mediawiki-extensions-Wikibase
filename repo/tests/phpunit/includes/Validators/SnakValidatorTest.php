@@ -363,4 +363,9 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expectedValid, $result->isValid(), $description );
 	}
 
+	public function testSetOptions() {
+		$validator = $this->getSnakValidator();
+		$validator->setOptions( array() );
+	}
+
 }
