@@ -120,11 +120,11 @@ class PageEntityUsages {
 	}
 
 	/**
-	 * @param PageEntityUsages $other
+	 * @param self $other
 	 *
 	 * @return bool
 	 */
-	public function equals( PageEntityUsages $other ) {
+	public function equals( self $other ) {
 		if ( !$other->getPageId() === $this->getPageId() ) {
 			return false;
 		} elseif ( array_keys( $other->getUsages() ) != array_keys( $this->getUsages() ) ) {

@@ -68,7 +68,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 				->method( 'subscribe' )
 				->with( 'testwiki', $this->callback(
 					function ( $actualSubscribe ) use ( $subscribe ) {
-						return UsageUpdaterTest::arraysHaveSameContent( $actualSubscribe, $subscribe );
+						return self::arraysHaveSameContent( $actualSubscribe, $subscribe );
 					}
 				) );
 		}
@@ -125,7 +125,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getUnusedEntities' )
 			->with( $this->callback(
 				function( array $actualEntities ) use ( $prunedEntityIds ) {
-					return UsageUpdaterTest::arraysHaveSameContent( $prunedEntityIds, $actualEntities );
+					return self::arraysHaveSameContent( $prunedEntityIds, $actualEntities );
 				}
 			) )
 			->will( $this->returnValue( $unused ) );
@@ -143,7 +143,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 				->method( 'unsubscribe' )
 				->with( 'testwiki', $this->callback(
 					function ( $actualUnsubscribe ) use ( $unused ) {
-						return UsageUpdaterTest::arraysHaveSameContent( $unused, $actualUnsubscribe );
+						return self::arraysHaveSameContent( $unused, $actualUnsubscribe );
 					}
 				) );
 		}

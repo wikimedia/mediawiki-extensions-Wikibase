@@ -10,6 +10,7 @@ use MWException;
  * Used for items in language fallback chain.
  *
  * @licence GNU GPL v2+
+ * @author Liangent
  */
 class LanguageWithConversion {
 
@@ -106,7 +107,7 @@ class LanguageWithConversion {
 	 *          Source language (code) if this is a converted language, or null
 	 *
 	 * @throws MWException
-	 * @return LanguageWithConversion
+	 * @return self
 	 */
 	public static function factory( $language, $sourceLanguage = null ) {
 		if ( is_string( $language ) ) {

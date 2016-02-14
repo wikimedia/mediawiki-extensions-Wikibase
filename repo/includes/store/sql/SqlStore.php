@@ -290,7 +290,7 @@ class SqlStore implements Store {
 
 	/**
 	 * @see Store::getEntityLookup
-	 * @see SqlStore::getEntityRevisionLookup
+	 * @see getEntityRevisionLookup
 	 *
 	 * The EntityLookup returned by this method will resolve redirects.
 	 *
