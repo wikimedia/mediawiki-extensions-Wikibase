@@ -59,7 +59,7 @@ class UpdateRepoHookHandlers {
 	private $propagateChangesToRepo;
 
 	/**
-	 * @return UpdateRepoHookHandlers|boolean
+	 * @return self|null
 	 */
 	private static function newFromGlobalState() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
@@ -72,12 +72,12 @@ class UpdateRepoHookHandlers {
 
 		if ( !$jobQueueGroup ) {
 			wfLogWarning( "Failed to acquire a JobQueueGroup for $repoDB" );
-			return true;
+			return null;
 		}
 
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 
-		return new UpdateRepoHookHandlers(
+		return new self(
 			$namespaceChecker,
 			$jobQueueGroup,
 			$siteLinkLookup,
