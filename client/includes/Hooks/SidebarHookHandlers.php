@@ -53,12 +53,12 @@ class SidebarHookHandlers {
 	private $otherProjectsLinksDefault;
 
 	/**
-	 * @var SidebarHookHandlers|null
+	 * @var self|null
 	 */
 	private static $instance = null;
 
 	/**
-	 * @return SidebarHookHandlers
+	 * @return self
 	 */
 	private static function getInstance() {
 		if ( self::$instance === null ) {
@@ -73,7 +73,7 @@ class SidebarHookHandlers {
 
 		$settings = $wikibaseClient->getSettings();
 
-		return new SidebarHookHandlers(
+		return new self(
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLanguageLinkBadgeDisplay(),
 			$wikibaseClient->getOtherProjectsSidebarGeneratorFactory(),

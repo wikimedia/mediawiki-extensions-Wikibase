@@ -239,7 +239,7 @@ class WikibaseRepo {
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @throws MWException
-	 * @return WikibaseRepo
+	 * @return self
 	 */
 	private static function newInstance() {
 		global $wgWBRepoDataTypes, $wgWBRepoSettings, $wgContLang;
@@ -269,7 +269,7 @@ class WikibaseRepo {
 	 *
 	 * @since 0.4
 	 *
-	 * @return WikibaseRepo
+	 * @return self
 	 */
 	public static function getDefaultInstance() {
 		static $instance = null;

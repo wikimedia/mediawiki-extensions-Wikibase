@@ -57,7 +57,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 			->method( 'parse' )
 			->will( $this->returnCallback( function( $id ) {
 				return new ItemId(
-					substr( $id, strlen( ReferencedEntitiesDataUpdaterTest::UNIT_PREFIX ) )
+					substr( $id, strlen( self::UNIT_PREFIX ) )
 				);
 			} ) );
 

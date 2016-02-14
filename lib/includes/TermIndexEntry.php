@@ -231,12 +231,12 @@ class TermIndexEntry {
 	 * Useful for sorting lists of terms for comparison.
 	 * This comparison DOES NOT use termWeight
 	 *
-	 * @param TermIndexEntry $a
-	 * @param TermIndexEntry $b
+	 * @param self $a
+	 * @param self $b
 	 *
 	 * @return int Returns 1 if $a is greater than $b, -1 if $b is greater than $a, and 0 otherwise.
 	 */
-	public static function compare( TermIndexEntry $a, TermIndexEntry $b ) {
+	public static function compare( self $a, self $b ) {
 		$fieldNames = self::$fieldNames;
 		unset( $fieldNames[array_search( 'termWeight', $fieldNames )] );
 

@@ -12,7 +12,7 @@ namespace Wikibase\View\Template;
 class TemplateFactory {
 
 	/**
-	 * @var TemplateFactory
+	 * @var self
 	 */
 	private static $instance;
 
