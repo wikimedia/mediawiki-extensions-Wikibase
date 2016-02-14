@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_7f0b6f2d",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T14:42:52Z",
+      "side": 1,
+      "message": "My suggestion would leave newTermSearchInteractor untouched.",
+      "parentUuid": "4ea78b8a_3f03b7c3",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_5f38f39a",
         "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
         "patchSetId": 2
@@ -153,6 +171,24 @@
       "side": 1,
       "message": "but newSearchTermInteractor supports four. If any of the entries in the array are optional, the code becomes a but more messy.",
       "parentUuid": "4ea78b8a_5f38f39a",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_df0ce347",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T14:42:52Z",
+      "side": 1,
+      "message": "The 4th is never used and can be removed, as far as I can see.",
+      "parentUuid": "4ea78b8a_7f004faf",
       "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
