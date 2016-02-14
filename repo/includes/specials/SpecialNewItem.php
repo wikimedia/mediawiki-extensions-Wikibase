@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use InvalidArgumentException;
 use Status;
 use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 
 /**
@@ -59,12 +60,12 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @see SpecialNewEntity::modifyEntity
 	 *
-	 * @param Entity $item
+	 * @param EntityDocument $item
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
-	protected function modifyEntity( Entity &$item ) {
+	protected function modifyEntity( EntityDocument &$item ) {
 		$status = parent::modifyEntity( $item );
 
 		if ( $this->site !== null && $this->page !== null ) {

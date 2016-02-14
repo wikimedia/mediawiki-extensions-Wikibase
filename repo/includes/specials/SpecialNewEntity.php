@@ -2,17 +2,19 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
+use InvalidArgumentException;
 use Language;
 use Status;
 use Wikibase\CopyrightMessageBuilder;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\FingerprintHolder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
 /**
- * Page for creating new Wikibase entities.
+ * Page for creating new Wikibase entities that contain a Fingerprint.
  *
  * @since 0.1
  * @licence GNU GPL v2+
@@ -199,7 +201,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @since 0.1
 	 *
-	 * @return Entity Created entity of correct subtype
+	 * @return EntityDocument Created entity of correct subtype
 	 */
 	abstract protected function createEntity();
 
@@ -208,21 +210,22 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity &$entity
+	 * @param EntityDocument &$entity
 	 *
 	 * @return Status
 	 */
-	protected function modifyEntity( Entity &$entity ) {
+	protected function modifyEntity( EntityDocument &$entity ) {
+		if ( !( $entity instanceof FingerprintHolder ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
+		}
+
 		$contentLanguageCode = $this->contentLanguage->getCode();
-		if ( $this->label !== '' ) {
-			$entity->setLabel( $contentLanguageCode, $this->label );
-		}
-		if ( $this->description !== '' ) {
-			$entity->setDescription( $contentLanguageCode, $this->description );
-		}
-		if ( count( $this->aliases ) !== 0 ) {
-			$entity->setAliases( $contentLanguageCode, $this->aliases );
-		}
+		$fingerprint = $entity->getFingerprint();
+
+		$fingerprint->setLabel( $contentLanguageCode, $this->label );
+		$fingerprint->setDescription( $contentLanguageCode, $this->description );
+		$fingerprint->setAliasGroup( $contentLanguageCode, $this->aliases );
+
 		return Status::newGood();
 	}
 
