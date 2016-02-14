@@ -7,12 +7,14 @@ use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
+use Deserializers\DispatchingDeserializer;
 use HashBagOStuff;
 use Hooks;
 use IContextSource;
 use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use RequestContext;
+use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
@@ -52,6 +54,7 @@ use Wikibase\Lib\DifferenceContentLanguages;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
@@ -214,6 +217,11 @@ class WikibaseRepo {
 	private $dataTypeDefinitions;
 
 	/**
+	 * @var EntityTypeDefinitions
+	 */
+	private $entityTypeDefinitions;
+
+	/**
 	 * @var Language
 	 */
 	private $defaultLanguage;
@@ -234,10 +242,13 @@ class WikibaseRepo {
 	 * @return WikibaseRepo
 	 */
 	private static function newInstance() {
-		global $wgWBRepoDataTypes, $wgWBRepoSettings, $wgContLang;
+		global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgWBRepoSettings, $wgContLang;
 
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
 		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
+
+		$entityTypeDefinitions = $wgWBRepoEntityTypes;
+		Hooks::run( 'WikibaseRepoEntityTypes', array( &$entityTypeDefinitions ) );
 
 		$settings = new SettingsArray( $wgWBRepoSettings );
 
@@ -247,6 +258,7 @@ class WikibaseRepo {
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
 			),
+			new EntityTypeDefinitions( $entityTypeDefinitions ),
 			$wgContLang
 		);
 	}
@@ -390,15 +402,18 @@ class WikibaseRepo {
 	 *
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param Language|null $defaultLanguage
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
+		EntityTypeDefinitions $entityTypeDefinitions,
 		Language $defaultLanguage = null
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
+		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->defaultLanguage = $defaultLanguage;
 	}
 
@@ -1128,14 +1143,22 @@ class WikibaseRepo {
 	 * @return Deserializer
 	 */
 	public function getInternalEntityDeserializer() {
-		return $this->getInternalDeserializerFactory()->newEntityDeserializer();
+		return $this->getInternalDeserializerFactory()->newEntityDeserializer( $this->getEntityDeserializer() );
 	}
 
 	/**
 	 * @return Serializer
 	 */
 	public function getInternalEntitySerializer() {
-		return $this->getInternalSerializerFactory()->newEntitySerializer();
+		$serializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+		$serializerFactory = $this->getInternalSerializerFactory();
+		$serializers = array();
+
+		foreach ( $serializerFactoryCallbacks as $callback ) {
+			$serializers[] = call_user_func( $callback, $serializerFactory );
+		}
+
+		return new DispatchingSerializer( $serializers );
 	}
 
 	/**
@@ -1176,7 +1199,15 @@ class WikibaseRepo {
 	 * @return Deserializer
 	 */
 	public function getEntityDeserializer() {
-		return $this->getDeserializerFactory()->newEntityDeserializer();
+		$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+		$deserializerFactory = $this->getDeserializerFactory();
+		$deserializers = array();
+
+		foreach ( $deserializerFactoryCallbacks as $callback ) {
+			$deserializers[] = call_user_func( $callback, $deserializerFactory );
+		}
+
+		return new DispatchingDeserializer( $deserializers );
 	}
 
 	/**
