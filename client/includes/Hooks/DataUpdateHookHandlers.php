@@ -57,6 +57,10 @@ class DataUpdateHookHandlers {
 	 * @param LinksUpdate $linksUpdate
 	 */
 	public static function onLinksUpdateComplete( LinksUpdate $linksUpdate ) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true; // don't track using during testing
+		}
+
 		$handler = self::newFromGlobalState();
 		$handler->doLinksUpdateComplete( $linksUpdate );
 	}
@@ -81,6 +85,10 @@ class DataUpdateHookHandlers {
 		Content $content = null,
 		LogEntry $logEntry
 	) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true; // don't track using during testing
+		}
+
 		$title = $wikiPage->getTitle();
 
 		$handler = self::newFromGlobalState();
@@ -106,6 +114,10 @@ class DataUpdateHookHandlers {
 		ParserOptions $pops,
 		$revId
 	) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true; // don't track using during testing
+		}
+
 		$handler = self::newFromGlobalState();
 		$handler->doParserCacheSaveComplete( $pout, $title );
 	}

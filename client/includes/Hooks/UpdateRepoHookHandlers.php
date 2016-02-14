@@ -110,6 +110,10 @@ class UpdateRepoHookHandlers {
 		$redirectId,
 		$reason
 	) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true; // don't track using during testing
+		}
+
 		$handler = self::newFromGlobalState();
 
 		if ( $handler ) {
@@ -140,6 +144,10 @@ class UpdateRepoHookHandlers {
 		Content $content = null,
 		LogEntry $logEntry
 	) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true; // don't track using during testing
+		}
+
 		$handler = self::newFromGlobalState();
 
 		if ( $handler ) {
