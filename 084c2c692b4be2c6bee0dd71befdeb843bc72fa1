@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_aa152742",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-02-14T15:12:56Z",
+      "side": 1,
+      "message": "what if thisWikiIsTheRepo? still not possible during testing?",
+      "revId": "084c2c692b4be2c6bee0dd71befdeb843bc72fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
