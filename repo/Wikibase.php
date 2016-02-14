@@ -83,17 +83,7 @@ call_user_func( function() {
 	global $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
-	global $wgWBRepoDataTypes, $wgContentHandlers;
-
-	$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
-
-	$repoDatatypes = require __DIR__ . '/WikibaseRepo.datatypes.php';
-
-	// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
-	foreach ( $repoDatatypes as $type => $repoDef ) {
-		$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : array();
-		$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
-	}
+	global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgContentHandlers;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
@@ -106,6 +96,27 @@ call_user_func( function() {
 		'descriptionmsg' => 'wikibase-desc',
 		'license-name' => 'GPL-2.0+'
 	);
+
+	// Registry and definition of data types
+	$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
+
+	$repoDataTypes = require __DIR__ . '/WikibaseRepo.datatypes.php';
+
+	// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
+	foreach ( $repoDataTypes as $type => $repoDef ) {
+		$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : array();
+		$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
+	}
+
+	// Registry and definition of entity types
+	$wgWBRepoEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
+	$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
+
+	// merge WikbiaseRepo.entities.php into $wgWBRepoEntities
+	foreach ( $repoEntityTypes as $type => $repoDef ) {
+		$baseDef = isset( $wgWBRepoEntityTypes[$type] ) ? $wgWBRepoEntityTypes[$type] : array();
+		$wgWBRepoEntityTypes[$type] = array_merge( $baseDef, $repoDef );
+	}
 
 	// constants
 	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
