@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_1fd35b62",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T11:37:20Z",
+      "side": 1,
+      "message": "No. This was correct before.",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_bfc9e7af",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T11:37:20Z",
+      "side": 1,
+      "message": "Please remove this empty line.",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9fbe6bf9",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T11:37:20Z",
+      "side": 1,
+      "message": "This line of documentation is not helpful at this place. It\u0027s unclear to which line of code it belongs to.",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_3f35f7a3",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T11:37:20Z",
+      "side": 1,
+      "message": "Better use an array key here:\n\n\u0027params\u0027 \u003d\u003e array( false, false, 5000 ),",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_5f38f39a",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T11:37:20Z",
+      "side": 1,
+      "message": "I suggest to expand the array here, and not in the method. It looks like it always contains exactly 3 elements. So this can simply be:\n\n$this-\u003enewTermSearchInteractor( $interactorParams[0], $interactorParams[1], $interactorParams[2] );\n\nOr even:\n\n$this-\u003enewTermSearchInteractor( $interactorParams[\u0027caseSensitive\u0027], $interactorParams[\u0027prefixSearch\u0027], $interactorParams[\u0027limit\u0027] );",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
