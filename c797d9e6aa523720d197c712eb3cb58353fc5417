@@ -88,6 +88,42 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_3f03b7c3",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-14T12:03:27Z",
+      "side": 1,
+      "message": "I was trying to avoid that, to keep the code mostly as it was before.",
+      "parentUuid": "4ea78b8a_3f35f7a3",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_ff0c3ff2",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-14T12:03:27Z",
+      "side": 1,
+      "message": "Currently yes. But I\u0027m not sure it will stay that way.\nThis patch is a quick fix to a PHPUnit bug. I was trying to *avoid* any refactoring in the test case.",
+      "parentUuid": "4ea78b8a_1f427b13",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_5f38f39a",
         "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
         "patchSetId": 2
@@ -99,6 +135,24 @@
       "writtenOn": "2016-02-14T11:37:20Z",
       "side": 1,
       "message": "I suggest to expand the array here, and not in the method. It looks like it always contains exactly 3 elements. So this can simply be:\n\n$this-\u003enewTermSearchInteractor( $interactorParams[0], $interactorParams[1], $interactorParams[2] );\n\nOr even:\n\n$this-\u003enewTermSearchInteractor( $interactorParams[\u0027caseSensitive\u0027], $interactorParams[\u0027prefixSearch\u0027], $interactorParams[\u0027limit\u0027] );",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_7f004faf",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-14T12:03:27Z",
+      "side": 1,
+      "message": "but newSearchTermInteractor supports four. If any of the entries in the array are optional, the code becomes a but more messy.",
+      "parentUuid": "4ea78b8a_5f38f39a",
       "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
