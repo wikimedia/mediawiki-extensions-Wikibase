@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_1f427b13",
+        "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-14T11:40:16Z",
+      "side": 1,
+      "message": "This should have been \u0027interactorParams\u0027.\n\nOr even simpler: Simply ditch the arrays and use 3 named parameters. All test cases use exactly 3 parameters, as far as I can see.",
+      "parentUuid": "4ea78b8a_3f35f7a3",
+      "revId": "c797d9e6aa523720d197c712eb3cb58353fc5417",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_5f38f39a",
         "filename": "lib/tests/phpunit/Interactors/TermIndexSearchInteractorTest.php",
         "patchSetId": 2
