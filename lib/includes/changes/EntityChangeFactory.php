@@ -8,6 +8,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintHolder;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 
@@ -124,12 +126,16 @@ class EntityChangeFactory {
 			$id = $newEntity->getId();
 		}
 
-		// HACK: don't include statements diff, since those are unused and not helpful
+		// HACK: don't include non-sitelink diffs, since those are unused and not helpful
 		// performance-wise to the dispatcher and change handling.
 		// For a better solution, see T113468.
 		if ( $oldEntity instanceof StatementListHolder ) {
 			$oldEntity->setStatements( new StatementList() );
 			$newEntity->setStatements( new StatementList() );
+		}
+		if ( $oldEntity instanceof FingerprintHolder ) {
+			$oldEntity->setFingerprint( new Fingerprint() );
+			$newEntity->setFingerprint( new Fingerprint() );
 		}
 
 		$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
