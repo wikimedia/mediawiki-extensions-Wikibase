@@ -24,7 +24,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
 
-		$store = new DirectSqlStore( $contentCodec, $idParser, 'DirectStoreSqlTestDummyRepoId', 'en' );
+		$store = new DirectSqlStore( $contentCodec, $idParser, wfWikiID(), 'en' );
 
 		return $store;
 	}
@@ -32,7 +32,11 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetters
 	 */
-	public function testGetters( $getter, $expectedType ) {
+	public function testGetters( $getter, $expectedType, $needsLocalRepo = false ) {
+		if ( $needsLocalRepo && !defined( 'WB_VERSION' ) ) {
+			$this->markTestSkipped( $getter . ' needs the repository extension to be active.' );
+		}
+
 		$store = $this->newStore();
 
 		$this->assertTrue( method_exists( $store, $getter ), "Method $getter" );
@@ -51,7 +55,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			array( 'getPropertyInfoStore', 'Wikibase\PropertyInfoStore' ),
 			array( 'getUsageTracker', 'Wikibase\Client\Usage\UsageTracker' ),
 			array( 'getUsageLookup', 'Wikibase\Client\Usage\UsageLookup' ),
-			array( 'getSubscriptionManager', 'Wikibase\Client\Usage\SubscriptionManager' ),
+			array( 'getSubscriptionManager', 'Wikibase\Client\Usage\SubscriptionManager', true ),
 			array( 'getEntityIdLookup', 'Wikibase\Store\EntityIdLookup' ),
 			array( 'getEntityPrefetcher', 'Wikibase\DataModel\Services\Entity\EntityPrefetcher' ),
 			array( 'getChangeLookup', 'Wikibase\Lib\Store\ChangeLookup' ),
