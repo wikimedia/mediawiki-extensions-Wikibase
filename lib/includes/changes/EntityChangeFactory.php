@@ -8,6 +8,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\FingerprintHolder;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
 
@@ -130,6 +133,20 @@ class EntityChangeFactory {
 		if ( $oldEntity instanceof StatementListHolder ) {
 			$oldEntity->setStatements( new StatementList() );
 			$newEntity->setStatements( new StatementList() );
+		}
+
+		// Also don't include description and alias diffs.
+		if ( $oldEntity instanceof FingerprintHolder ) {
+			$oldFingerprint = $oldEntity->getFingerprint();
+			$newFingerprint = $newEntity->getFingerprint();
+
+			$oldFingerprint->setDescriptions( new TermList( [] ) );
+			$oldFingerprint->setAliasGroups( new AliasGroupList( [] ) );
+			$newFingerprint->setDescriptions( new TermList( [] ) );
+			$newFingerprint->setAliasGroups( new AliasGroupList( [] ) );
+
+			$oldEntity->setFingerprint( $oldFingerprint );
+			$newEntity->setFingerprint( $newFingerprint );
 		}
 
 		$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
