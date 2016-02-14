@@ -105,6 +105,24 @@
       "revId": "9b1d1b05474ce0e27f0caacc0a7b7ab96fc36e0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_3fa737bc",
+        "filename": "repo/includes/api/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-14T12:17:01Z",
+      "side": 1,
+      "message": "Ok… but then we should do the switch to another error code in a follow up (and announce it). While it is a breaking API change, the impact should still be very low.",
+      "parentUuid": "4ea78b8a_196dc22d",
+      "revId": "9b1d1b05474ce0e27f0caacc0a7b7ab96fc36e0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
