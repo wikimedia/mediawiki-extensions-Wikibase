@@ -253,11 +253,11 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function ( EntityId $id ) {
-				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITH_LABEL ) {
+				if ( $id->getSerialization() == self::ITEM_WITH_LABEL ) {
 					return array( 'en' => 'linkbegin-label' );
 				}
 
-				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITHOUT_LABEL ) {
+				if ( $id->getSerialization() == self::ITEM_WITHOUT_LABEL ) {
 					return array();
 				}
 
@@ -267,11 +267,11 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$termLookup->expects( $this->any() )
 			->method( 'getDescriptions' )
 			->will( $this->returnCallback( function ( EntityId $id ) {
-				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITH_LABEL ) {
+				if ( $id->getSerialization() == self::ITEM_WITH_LABEL ) {
 					return array( 'en' => 'linkbegin-description' );
 				}
 
-				if ( $id->getSerialization() == LinkBeginHookHandlerTest::ITEM_WITHOUT_LABEL ) {
+				if ( $id->getSerialization() == self::ITEM_WITHOUT_LABEL ) {
 					return array();
 				}
 

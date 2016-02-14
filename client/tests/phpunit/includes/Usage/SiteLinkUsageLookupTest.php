@@ -75,14 +75,14 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 			->will( $this->returnCallback( function( $text ) {
 				$title = Title::newFromText( $text );
 				$title->resetArticleID(
-					substr( $text, strlen( SiteLinkUsageLookupTest::PAGE_NAME_PREFIX ) )
+					substr( $text, strlen( self::PAGE_NAME_PREFIX ) )
 				);
 				return $title;
 			} ) );
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
 			->will( $this->returnCallback( function( $pageId ) {
-				$title = Title::newFromText( SiteLinkUsageLookupTest::PAGE_NAME_PREFIX . $pageId );
+				$title = Title::newFromText( self::PAGE_NAME_PREFIX . $pageId );
 				$title->resetArticleID( $pageId );
 				return $title;
 			} ) );

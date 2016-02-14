@@ -88,7 +88,7 @@ class OutputPageBeforeHTMLHookHandler {
 	}
 
 	/**
-	 * @return OutputPageBeforeHTMLHookHandler
+	 * @return self
 	 */
 	public static function newFromGlobalState() {
 		global $wgLang;
