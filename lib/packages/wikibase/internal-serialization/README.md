@@ -106,6 +106,10 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
+### 2.2.0 (dev)
+
+* `DeserializerFactory` constructor now optionally takes a `DispatchableDeserializer` as third argument
+
 ### 2.1.0 (2016-02-18)
 
 * Added compatibility with Wikibase DataModel 5.x

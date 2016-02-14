@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Wikibase\InternalSerialization;
 
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
@@ -9,6 +10,7 @@ use Wikibase\InternalSerialization\DeserializerFactory;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -21,8 +23,24 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->factory = TestFactoryBuilder::newDeserializerFactory( $this );
 	}
 
-	public function testGetEntityDeserializerReturnsDeserializer() {
+	public function testNewEntityDeserializerReturnsDeserializer() {
 		$deserializer = $this->factory->newEntityDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testNewStatementDeserializerReturnsDeserializer() {
+		$deserializer = $this->factory->newStatementDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testConstructWithCustomEntityDeserializer() {
+		$factory = new DeserializerFactory(
+			$this->getMock( 'Deserializers\Deserializer' ),
+			new BasicEntityIdParser(),
+			$this->getMock( 'Deserializers\DispatchableDeserializer' )
+		);
+
+		$deserializer = $factory->newEntityDeserializer();
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
