@@ -27,7 +27,7 @@ class HookChangeTransmitterTest extends \MediaWikiTestCase {
 
 		$called = false;
 		$wgHooks['HookChangeTransmitterTest'][] = function( $actualChange ) use ( $change, &$called ) {
-			HookChangeTransmitterTest::assertEquals( $change, $actualChange );
+			self::assertEquals( $change, $actualChange );
 			$called = true;
 		};
 

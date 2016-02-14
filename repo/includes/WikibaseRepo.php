@@ -73,7 +73,6 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
@@ -231,7 +230,7 @@ class WikibaseRepo {
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
-	 * @return WikibaseRepo
+	 * @return self
 	 */
 	private static function newInstance() {
 		global $wgWBRepoDataTypes, $wgWBRepoSettings, $wgContLang;
@@ -256,7 +255,7 @@ class WikibaseRepo {
 	 *
 	 * @since 0.4
 	 *
-	 * @return WikibaseRepo
+	 * @return self
 	 */
 	public static function getDefaultInstance() {
 		static $instance = null;

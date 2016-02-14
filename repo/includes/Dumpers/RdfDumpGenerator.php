@@ -165,7 +165,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
 	 *
-	 * @return RdfDumpGenerator
+	 * @return self
 	 * @throws MWException
 	 */
 	public static function createDumpGenerator(
@@ -199,7 +199,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			new HashDedupeBag()
 		);
 
-		return new RdfDumpGenerator( $output, $entityRevisionLookup, $rdfBuilder, $entityPrefetcher );
+		return new self( $output, $entityRevisionLookup, $rdfBuilder, $entityPrefetcher );
 	}
 
 }

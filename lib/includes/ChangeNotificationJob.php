@@ -34,7 +34,7 @@ class ChangeNotificationJob extends Job {
 	 * @param string      $repo The name of the repository the changes come from (default: "").
 	 * @param array|bool  $params extra job parameters, see Job::__construct (default: false).
 	 *
-	 * @return ChangeNotificationJob
+	 * @return self
 	 */
 	public static function newFromChanges( array $changes, $repo = '', $params = false ) {
 		static $dummyTitle = null;
@@ -60,7 +60,7 @@ class ChangeNotificationJob extends Job {
 		$params['repo'] = $repo;
 		$params['changeIds'] = $changeIds;
 
-		return new ChangeNotificationJob( $dummyTitle, $params );
+		return new self( $dummyTitle, $params );
 	}
 
 	/**
