@@ -16,6 +16,24 @@
       "revId": "1189689fb6e10b935ad068a5a60948e14007d3f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_5c7b1623",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/addtoolbar/statementview-referenceview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-15T22:09:26Z",
+      "side": 1,
+      "message": "Not mine, I just tried to keep the diff small.",
+      "parentUuid": "4ea78b8a_5a7b1e23",
+      "revId": "1189689fb6e10b935ad068a5a60948e14007d3f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
