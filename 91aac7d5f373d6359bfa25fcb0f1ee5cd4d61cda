@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_6bec0e21",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-15T16:25:49Z",
+      "side": 1,
+      "message": "This helps PHPStorm to realize that $statementGuid is always set when the code reaches the line below.",
+      "parentUuid": "4ea78b8a_8b5aaa20",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_cbaf42dd",
         "filename": "repo/includes/api/SetClaim.php",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2016-02-15T16:21:41Z",
       "side": 1,
       "message": "At this point, we do not need to check for the setter. There is never a statement set in this file.",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_2bd61655",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-15T16:25:49Z",
+      "side": 1,
+      "message": "The ChangeOp checks for the setter and throws an Exception otherwise. While we don\u0027t use the setter here, it is required later in the process. I think it is nicer to have the standard \"not-supported\" message here than some InvalidArgumentException message in the api output. (That\u0027s only relevant if there is an Entity that does not allow modifying statements...)",
+      "parentUuid": "4ea78b8a_cbaf42dd",
       "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
