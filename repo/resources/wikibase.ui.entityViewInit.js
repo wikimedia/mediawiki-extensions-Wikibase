@@ -367,7 +367,7 @@
 		if ( canEdit ) {
 			$entityview
 			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event, lang ) {
-				if ( lang !== mw.config.get( 'wgUserLanguage' ) ) {
+				if ( typeof lang === 'string' && lang !== mw.config.get( 'wgUserLanguage' ) ) {
 					return;
 				}
 
