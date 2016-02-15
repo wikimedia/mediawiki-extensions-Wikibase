@@ -9,6 +9,8 @@ namespace Wikibase\Rdf;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ *
+ * @codeCoverageIgnore
  */
 class NullDedupeBag implements DedupeBag {
 

@@ -10,6 +10,8 @@ namespace Wikibase\Lib\Reporting;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ *
+ * @codeCoverageIgnore
  */
 class NullMessageReporter implements MessageReporter {
 
