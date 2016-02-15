@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_cb60a2ce",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:21:41Z",
+      "side": 1,
+      "message": "While you are changing this signature anyway, can you make it private and remove the not needed \"\u003d 0\" please? Thanks. Or simply inline the whole line.",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_8b5aaa20",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:21:41Z",
+      "side": 1,
+      "message": "This line does not give us much. The code dies anyway.",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_cbaf42dd",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:21:41Z",
+      "side": 1,
+      "message": "At this point, we do not need to check for the setter. There is never a statement set in this file.",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
