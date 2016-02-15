@@ -101,9 +101,10 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			this.widgetEventPrefix + 'change.' + this.widgetName + ' ' +
 			this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
 			function( event, lang ) {
-				if ( lang !== self.options.userLanguages[0] ) {
+				if ( typeof lang === 'string' && lang !== self.options.userLanguages[0] ) {
 					return;
 				}
+				lang = self.options.userLanguages[0];
 
 				var fingerprint = self.value(),
 					description = fingerprint.getDescriptionFor( lang ),
