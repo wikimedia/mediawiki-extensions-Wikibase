@@ -34,6 +34,24 @@
       "revId": "ebc21a4050ec27b7a8eb98df6507db9dee1f2b35",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_ed41f60e",
+        "filename": ".jscsrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T13:21:14Z",
+      "side": 1,
+      "message": "I mean case-insensitive. But doesn\u0027t matter much.",
+      "parentUuid": "4ea78b8a_0a6c7bcb",
+      "revId": "ebc21a4050ec27b7a8eb98df6507db9dee1f2b35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
