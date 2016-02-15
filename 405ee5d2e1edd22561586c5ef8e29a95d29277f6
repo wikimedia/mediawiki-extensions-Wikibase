@@ -16,6 +16,40 @@
       "revId": "405ee5d2e1edd22561586c5ef8e29a95d29277f6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_702f199d",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:00:23Z",
+      "side": 1,
+      "message": "Both classes can be instantiated without the first constructor parameter.",
+      "revId": "405ee5d2e1edd22561586c5ef8e29a95d29277f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_3021a1ac",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:00:23Z",
+      "side": 1,
+      "message": "These two setters don\u0027t do anything. Entities must guarantee that getters don\u0027t return copies.",
+      "revId": "405ee5d2e1edd22561586c5ef8e29a95d29277f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
