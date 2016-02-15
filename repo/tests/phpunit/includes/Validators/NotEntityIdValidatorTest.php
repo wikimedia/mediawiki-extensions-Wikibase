@@ -18,6 +18,21 @@ use Wikibase\Repo\Validators\NotEntityIdValidator;
  */
 class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @dataProvider invalidConstructorArgumentProvider
+	 */
+	public function testInvalidConstructorArgument( $errorCode ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new NotEntityIdValidator( new BasicEntityIdParser(), $errorCode );
+	}
+
+	public function invalidConstructorArgumentProvider() {
+		return array(
+			array( null ),
+			array( 1 ),
+		);
+	}
+
 	public function provideValidate() {
 		return array(
 			'empty' => array( '', 'label-no-entityid', null, null ),
@@ -45,11 +60,6 @@ class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {
 			$this->assertCount( 1, $errors, 'Number of errors:' );
 			$this->assertEquals( $expectedCode, $errors[0]->getCode(), 'Error code:' );
 		}
-	}
-
-	public function testSetOptions() {
-		$validator = new NotEntityIdValidator( new BasicEntityIdParser(), '' );
-		$validator->setOptions( array() );
 	}
 
 }

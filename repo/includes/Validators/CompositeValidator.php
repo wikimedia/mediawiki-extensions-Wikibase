@@ -63,6 +63,8 @@ class CompositeValidator implements ValueValidator {
 	 * @see ValueValidator::setOptions()
 	 *
 	 * @param array $options
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function setOptions( array $options ) {
 		// Do nothing. This method shouldn't even be in the interface.

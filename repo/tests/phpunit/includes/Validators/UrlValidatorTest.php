@@ -20,11 +20,33 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  */
 class UrlValidatorTest extends \MediaWikiTestCase {
 
+	/**
+	 * @dataProvider invalidConstructorArgumentProvider
+	 */
+	public function testInvalidConstructorArgument( array $validators ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new UrlValidator( $validators );
+	}
+
+	public function invalidConstructorArgumentProvider() {
+		return array(
+			array( array( new RegexValidator( '/.*/' ) ) ),
+			array( array( 'scheme' => '/.*/' ) ),
+		);
+	}
+
+	public function testGivenNonString_validateFails() {
+		$validator = new UrlValidator( array() );
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$validator->validate( null );
+	}
+
 	public function provideValidate() {
 		$yes = new RegexValidator( '/.*/', false, 'oops' );
 		$no  = new RegexValidator( '/.*/', true, 'bad-url' );
 
 		return array(
+			'no scheme' => array( array(), '', 'bad-url' ),
 			'empty' => array( array(), 'http://acme.com', 'bad-url-scheme' ),
 			'valid' => array( array( 'http' => $yes ), 'http://acme.com', null ),
 			'invalid' => array( array( 'http' => $no ), 'http://acme.com', 'bad-url' ),
@@ -52,11 +74,6 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 			$msg = $localizer->getErrorMessage( $errors[0] );
 			$this->assertTrue( $msg->exists(), 'message: ' . $msg );
 		}
-	}
-
-	public function testSetOptions() {
-		$validator = new UrlValidator( array() );
-		$validator->setOptions( array() );
 	}
 
 }

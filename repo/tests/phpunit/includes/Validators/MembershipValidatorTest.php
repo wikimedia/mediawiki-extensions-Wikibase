@@ -17,6 +17,23 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  */
 class MembershipValidatorTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @dataProvider invalidConstructorArgumentsProvider
+	 */
+	public function testInvalidConstructorArgument( $errorCode, $normalizer ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new MembershipValidator( array(), $errorCode, $normalizer );
+	}
+
+	public function invalidConstructorArgumentsProvider() {
+		return array(
+			array( null, null ),
+			array( 1, null ),
+			array( '', true ),
+			array( '', '' ),
+		);
+	}
+
 	public function provideValidate() {
 		return array(
 			'contained' => array( array( 'apple', 'pear' ), null, 'apple', true ),
@@ -44,11 +61,6 @@ class MembershipValidatorTest extends \PHPUnit_Framework_TestCase {
 			$msg = $localizer->getErrorMessage( $errors[0] );
 			$this->assertTrue( $msg->exists(), $msg );
 		}
-	}
-
-	public function testSetOptions() {
-		$validator = new MembershipValidator( array() );
-		$validator->setOptions( array() );
 	}
 
 }

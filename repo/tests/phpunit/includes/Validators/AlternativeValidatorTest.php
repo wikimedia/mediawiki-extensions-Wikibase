@@ -53,9 +53,4 @@ class AlternativeValidatorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testSetOptions() {
-		$validator = new AlternativeValidator( array() );
-		$validator->setOptions( array() );
-	}
-
 }

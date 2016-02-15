@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Validators;
 
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -41,10 +42,12 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideValidate() {
+		$itemId = new ItemId( 'Q8' );
+
 		return array(
-			"existing entity" => array( new ItemId( 'Q8' ), null ),
-			"is an item" => array( new ItemId( 'Q8' ), Item::ENTITY_TYPE ),
-			"is a property" => array( new PropertyId( 'P8' ), Property::ENTITY_TYPE ),
+			'existing entity' => array( new EntityIdValue( $itemId ), null ),
+			'is an item' => array( $itemId, Item::ENTITY_TYPE ),
+			'is a property' => array( new PropertyId( 'P8' ), Property::ENTITY_TYPE ),
 		);
 	}
 
@@ -99,11 +102,6 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = new EntityExistsValidator( $this->getEntityLookup(), $type );
 		$validator->validate( $value );
-	}
-
-	public function testSetOptions() {
-		$validator = new EntityExistsValidator( $this->getEntityLookup() );
-		$validator->setOptions( array() );
 	}
 
 }
