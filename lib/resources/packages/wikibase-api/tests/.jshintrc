@@ -59,6 +59,7 @@
 		"QUnit",
 		"sinon",
 		"util",
-		"wikibase"
+		"wikibase",
+		"JSON"
 	]
 }

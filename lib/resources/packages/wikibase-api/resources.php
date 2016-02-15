@@ -12,6 +12,6 @@ return call_user_func( function() {
 
 	$wgResourceModules = array_merge(
 		$wgResourceModules,
-		include( __DIR__ . '/src/resources.php' )
+		include ( __DIR__ . '/src/resources.php' )
 	);
 } );

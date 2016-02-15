@@ -57,6 +57,7 @@
 		"jQuery",
 		"mediaWiki",
 		"util",
-		"wikibase"
+		"wikibase",
+		"JSON"
 	]
 }
