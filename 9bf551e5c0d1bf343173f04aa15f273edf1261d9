@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_0be6ba13",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:50:13Z",
+      "side": 1,
+      "message": "Similar to below. I would arrange this code in a way that subclasses can override this method (instead of the protected one below) and make use of parent::getTextForSearchIndex() calls.",
+      "revId": "9bf551e5c0d1bf343173f04aa15f273edf1261d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_eb231e52",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:50:13Z",
+      "side": 1,
+      "message": "I would go with a simple if ( instanceof FingerprintProvider ) here. The additional protected method does not give us much. Other entity types can easily override getTextForSummary. They do not need an other protected method they can override. This makes the interface of this class to complicated.",
+      "revId": "9bf551e5c0d1bf343173f04aa15f273edf1261d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
