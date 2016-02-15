@@ -238,7 +238,7 @@ class Item extends Entity implements StatementListHolder {
 	/**
 	 * @deprecated since 2.5, use new Item() instead.
 	 *
-	 * @return Item
+	 * @return self
 	 */
 	public static function newEmpty() {
 		return new self();

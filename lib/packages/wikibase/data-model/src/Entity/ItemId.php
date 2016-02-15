@@ -75,7 +75,7 @@ class ItemId extends EntityId {
 	 *
 	 * @param int|float|string $numericId
 	 *
-	 * @return ItemId
+	 * @return self
 	 * @throws InvalidArgumentException
 	 */
 	public static function newFromNumber( $numericId ) {
