@@ -212,6 +212,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 *
 	 * @param EntityDocument &$entity
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
 	protected function modifyEntity( EntityDocument &$entity ) {
@@ -219,12 +220,16 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
 		}
 
-		$contentLanguageCode = $this->contentLanguage->getCode();
 		$fingerprint = $entity->getFingerprint();
+		$languageCode = $this->contentLanguage->getCode();
 
-		$fingerprint->setLabel( $contentLanguageCode, $this->label );
-		$fingerprint->setDescription( $contentLanguageCode, $this->description );
-		$fingerprint->setAliasGroup( $contentLanguageCode, $this->aliases );
+		if ( $this->label !== '' ) {
+			$fingerprint->setLabel( $languageCode, $this->label );
+		}
+		if ( $this->description !== '' ) {
+			$fingerprint->setDescription( $languageCode, $this->description );
+		}
+		$fingerprint->setAliasGroup( $languageCode, $this->aliases );
 
 		return Status::newGood();
 	}
