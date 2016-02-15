@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_ad39becc",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-02-15T15:55:22Z",
+      "side": 1,
+      "message": "\\o/ new array syntax",
+      "revId": "405ee5d2e1edd22561586c5ef8e29a95d29277f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
