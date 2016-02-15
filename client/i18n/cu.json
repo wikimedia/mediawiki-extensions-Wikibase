@@ -8,9 +8,11 @@
 	"wikibase-editlinks": "исправи съвѧꙁи",
 	"wikibase-editlinkstitle": "мєждоуѩꙁꙑчьнъ съвѧꙁии исправлѥниѥ",
 	"wikibase-linkitem-input-site": "ѩꙁꙑкъ :",
+	"wikibase-linkitem-input-page": "страница :",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "съкрꙑтиѥ",
 	"wikibase-rc-hide-wikidata-show": "каꙁаниѥ",
 	"wikibase-rc-wikibase-edit-letter": "в҃с",
-	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} мѣна"
+	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} мѣна",
+	"wikibase-pageinfo-entity-id-none": "нѣстъ"
 }

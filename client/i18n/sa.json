@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"NehalDaveND",
-			"Shubha"
+			"Shubha",
+			"రహ్మానుద్దీన్"
 		]
 	},
 	"tooltip-t-wikibase": "सूचनाकोषस्य वस्तूनां परिसन्धिः",
@@ -16,7 +17,7 @@
 	"wikibase-linkitem-input-site": "भाषा :",
 	"wikibase-linkitem-input-page": "पृष्ठम् :",
 	"wikibase-linkitem-confirmitem-button": "दृढीकरोतु",
-	"wikibase-rc-hide-wikidata": "विकिडेटा $1",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "गोप्यताम्",
 	"wikibase-rc-hide-wikidata-show": "दृश्यताम्",
 	"wikibase-rc-wikibase-edit-letter": "डेटा",
