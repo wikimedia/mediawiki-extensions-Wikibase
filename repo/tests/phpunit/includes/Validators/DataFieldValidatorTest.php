@@ -19,6 +19,22 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  */
 class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @dataProvider invalidConstructorArgumentProvider
+	 */
+	public function testInvalidConstructorArgument( $field ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new DataFieldValidator( $field, new StringLengthValidator( 0, 0 ) );
+	}
+
+	public function invalidConstructorArgumentProvider() {
+		return array(
+			array( null ),
+			array( 1.0 ),
+			array( array() ),
+		);
+	}
+
 	public function provideValidate() {
 		$validator = new StringLengthValidator( 1, 10 );
 
