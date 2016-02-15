@@ -101,13 +101,15 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			this.widgetEventPrefix + 'change.' + this.widgetName + ' ' +
 			this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
 			function( event, lang ) {
-				if ( lang !== self.options.userLanguages[0] ) {
+				var firstLanguage = self.options.userLanguages[0];
+
+				if ( typeof lang === 'string' && lang !== firstLanguage ) {
 					return;
 				}
 
 				var fingerprint = self.value(),
-					description = fingerprint.getDescriptionFor( lang ),
-					aliases = fingerprint.getAliasesFor( lang ),
+					description = fingerprint.getDescriptionFor( firstLanguage ),
+					aliases = fingerprint.getAliasesFor( firstLanguage ),
 					isDescriptionEmpty = !description || description.getText() === '',
 					isAliasesEmpty = !aliases || aliases.isEmpty();
 
