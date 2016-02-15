@@ -91,23 +91,15 @@ class ItemSerializerTest extends SerializerBaseTest {
 
 	public function serializableProvider() {
 		return array(
-			array(
-				new Item()
-			),
+			array( new Item() ),
 		);
 	}
 
 	public function nonSerializableProvider() {
 		return array(
-			array(
-				5
-			),
-			array(
-				array()
-			),
-			array(
-				Property::newFromType( '' )
-			),
+			array( 5 ),
+			array( array() ),
+			array( Property::newFromType( 'string' ) ),
 		);
 	}
 

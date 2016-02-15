@@ -118,23 +118,23 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			),
 		);
 
-		$property = new Property( new PropertyId( 'P42' ), null, '' );
+		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
 		$provider[] = array(
 			$property,
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'id' => 'P42'
 			)
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getFingerprint()->setLabel( 'en', 'foo' );
 		$provider[] = array(
 			$property,
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'labels' => array(
 					'en' => array(
 						'lang' => 'en',
@@ -144,13 +144,13 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getFingerprint()->setDescription( 'en', 'foo' );
 		$provider[] = array(
 			$property,
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'descriptions' => array(
 					'en' => array(
 						'lang' => 'en',
@@ -160,13 +160,13 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
 		$provider[] = array(
 			$property,
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'aliases' => array(
 					'en' => array(
 						'lang' => 'en',
@@ -176,13 +176,13 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
 		$provider[] = array(
 			$property,
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'claims' => array(
 					'P42' => array(
 						array(
@@ -198,13 +198,13 @@ class PropertyDeserializerTest extends DeserializerBaseTest {
 			)
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
 		$provider[] = array(
 			$property,
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'claims' => array(
 					'P42' => array(
 						array(
