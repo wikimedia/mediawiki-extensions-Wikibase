@@ -2,7 +2,7 @@
  * @licence GNU GPL v2+
  *
  * @author Adrian Lang <adrian.lang@wikimedia.de>
- * @author: H. Snater < mediawiki@snater.com >
+ * @author H. Snater < mediawiki@snater.com >
  */
 ( function( $, mw, wb ) {
 	'use strict';

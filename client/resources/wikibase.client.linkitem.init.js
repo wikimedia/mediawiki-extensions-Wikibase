@@ -4,7 +4,7 @@
  * @since 0.4
  *
  * @licence GNU GPL v2+
- * @author: Marius Hoch < hoo@online.de >
+ * @author Marius Hoch < hoo@online.de >
  */
 ( function( mw, $ ) {
 	'use strict';

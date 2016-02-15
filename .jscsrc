@@ -12,7 +12,19 @@
 	"requireVarDeclFirst": null,
 	"jsDoc": {
 		// what we don't yet follow is commented out
-		//"checkAnnotations": "jsduck5",
+		"checkAnnotations": {
+			"preset": "jsduck5",
+			"extra": {
+				"TODO:": "some",
+				"licence": "some",
+				"license": "some",
+				"note:": "some",
+				"option": "some",
+				"see": "some",
+				"todo": "some",
+				"triggers": "some"
+			}
+		},
 		"checkParamNames": true,
 		"requireParamTypes": true,
 		"checkRedundantParams": true,
