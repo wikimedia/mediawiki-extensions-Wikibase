@@ -367,14 +367,16 @@
 		if ( canEdit ) {
 			$entityview
 			.on( 'entitytermsviewchange entitytermsviewafterstopediting', function( event, lang ) {
-				if ( lang !== mw.config.get( 'wgUserLanguage' ) ) {
+				var userLanguage = mw.config.get( 'wgUserLanguage' );
+
+				if ( typeof lang === 'string' && lang !== userLanguage ) {
 					return;
 				}
 
 				var $entitytermsview = $( event.target ),
 					entitytermsview = $entitytermsview.data( 'entitytermsview' ),
 					fingerprint = entitytermsview.value(),
-					label = fingerprint.getLabelFor( lang ),
+					label = fingerprint.getLabelFor( userLanguage ),
 					isEmpty = !label || label.getText() === '';
 
 				$( 'title' ).text(
