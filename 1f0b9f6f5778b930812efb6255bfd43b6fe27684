@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_9a10b654",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T09:36:20Z",
+      "side": 1,
+      "message": "I reverted all changes to comments. I also tried self::newItemHandler, but PHPStorm does not recognize this. I think you are right, better keep this for clarity.",
+      "parentUuid": "4ea78b8a_9f4d0b42",
+      "revId": "1f0b9f6f5778b930812efb6255bfd43b6fe27684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_3f5c17f4",
         "filename": "repo/includes/content/ItemContent.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-14T11:54:16Z",
       "side": 1,
       "message": "Should be consistent with the other functions you alter in here… either self or static, both are probably ok (static is more precise, but might not have good tooling support?), but we should choose one.\n\nThat also applies to other classes in this change set.",
+      "revId": "1f0b9f6f5778b930812efb6255bfd43b6fe27684",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_da062e20",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T09:36:20Z",
+      "side": 1,
+      "message": "I rechecked all files but could not find the same mistake again. Can you please point me to what you mean?",
+      "parentUuid": "4ea78b8a_3f5c17f4",
       "revId": "1f0b9f6f5778b930812efb6255bfd43b6fe27684",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
