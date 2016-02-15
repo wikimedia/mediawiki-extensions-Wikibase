@@ -117,7 +117,10 @@ class AliasGroupListDeserializer implements Deserializer {
 		}
 	}
 
-	private function assertRequestedAndActualLanguageMatch( array $serialization, $requestedLanguage ) {
+	private function assertRequestedAndActualLanguageMatch(
+		array $serialization,
+		$requestedLanguage
+	) {
 		if ( $serialization['language'] !== $requestedLanguage ) {
 			throw new DeserializationException(
 				'Deserialization of a value of the attribute language (actual)'

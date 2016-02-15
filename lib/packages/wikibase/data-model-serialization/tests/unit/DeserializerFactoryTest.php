@@ -18,7 +18,10 @@ class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new DeserializerFactory( new DataValueDeserializer(), new BasicEntityIdParser() );
 	}
 
-	private function assertDeserializesWithoutException( Deserializer $deserializer, $serialization ) {
+	private function assertDeserializesWithoutException(
+		Deserializer $deserializer,
+		$serialization
+	) {
 		$deserializer->deserialize( $serialization );
 		$this->assertTrue( true, 'No exception occurred during deserialization' );
 	}

@@ -38,7 +38,10 @@ class SnakDeserializer implements DispatchableDeserializer {
 	 * @param Deserializer $dataValueDeserializer
 	 * @param Deserializer $entityIdDeserializer
 	 */
-	public function __construct( Deserializer $dataValueDeserializer, Deserializer $entityIdDeserializer ) {
+	public function __construct(
+		Deserializer $dataValueDeserializer,
+		Deserializer $entityIdDeserializer
+	) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->entityIdDeserializer = $entityIdDeserializer;
 	}
