@@ -66,7 +66,7 @@ class StatementGuid implements Comparable {
 	}
 
 	/**
-	 * @param StatementGuid $target
+	 * @param mixed $target
 	 *
 	 * @return bool
 	 */

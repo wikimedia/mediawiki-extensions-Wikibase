@@ -56,7 +56,7 @@ class EntityRedirect {
 	}
 
 	/**
-	 * @param EntityRedirect $that
+	 * @param mixed $that
 	 *
 	 * @return bool
 	 */

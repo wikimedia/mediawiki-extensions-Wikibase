@@ -75,7 +75,7 @@ class PropertyId extends EntityId {
 	 *
 	 * @param int|float|string $numericId
 	 *
-	 * @return PropertyId
+	 * @return self
 	 * @throws InvalidArgumentException
 	 */
 	public static function newFromNumber( $numericId ) {

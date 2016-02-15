@@ -22,7 +22,7 @@ class Fingerprint implements Comparable, LabelsProvider, DescriptionsProvider, A
 	/**
 	 * @deprecated since 2.5, use new Fingerprint() instead.
 	 *
-	 * @return Fingerprint
+	 * @return self
 	 */
 	public static function newEmpty() {
 		return new self();

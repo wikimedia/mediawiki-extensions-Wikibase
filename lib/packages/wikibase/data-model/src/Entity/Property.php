@@ -183,7 +183,7 @@ class Property extends Entity implements StatementListHolder {
 	 * @param string $dataTypeId The data type of the property. Not to be confused with the data
 	 *  value type.
 	 *
-	 * @return Property
+	 * @return self
 	 */
 	public static function newFromType( $dataTypeId ) {
 		return new self( null, null, $dataTypeId );

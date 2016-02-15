@@ -91,7 +91,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	 *
 	 * @param string[] $languageCodes
 	 *
-	 * @return AliasGroupList
+	 * @return self
 	 */
 	public function getWithLanguages( array $languageCodes ) {
 		return new self( array_intersect_key( $this->groups, array_flip( $languageCodes ) ) );
