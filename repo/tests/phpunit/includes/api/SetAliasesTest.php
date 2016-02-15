@@ -174,7 +174,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'exception' => array(
 					'type' => 'UsageException',
 					'code' => 'no-such-entity-id',
-					'message' => 'Could not find such an entity id'
+					'message' => 'Could not find such an entity ID.'
 				) )
 			),
 			array( //5
