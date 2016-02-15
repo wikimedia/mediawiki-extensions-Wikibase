@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_5a7b1e23",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/definitions/addtoolbar/statementview-referenceview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-15T11:36:13Z",
+      "side": 1,
+      "message": "$node is bad variable name.",
+      "revId": "1189689fb6e10b935ad068a5a60948e14007d3f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
