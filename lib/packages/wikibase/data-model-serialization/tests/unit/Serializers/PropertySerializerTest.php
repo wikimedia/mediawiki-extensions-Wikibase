@@ -114,13 +114,13 @@ class PropertySerializerTest extends SerializerBaseTest {
 			),
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->setId( 42 );
 		$provider[] = array(
 			array(
 				'type' => 'property',
 				'id' => 'P42',
-				'datatype' => '',
+				'datatype' => 'string',
 				'claims' => array(),
 				'labels' => array(),
 				'descriptions' => array(),
@@ -129,12 +129,12 @@ class PropertySerializerTest extends SerializerBaseTest {
 			$property
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getFingerprint()->setLabel( 'en', 'foo' );
 		$provider[] = array(
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'claims' => array(),
 				'labels' => array(
 					'en' => array(
@@ -148,12 +148,12 @@ class PropertySerializerTest extends SerializerBaseTest {
 			$property
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getFingerprint()->setDescription( 'en', 'foo' );
 		$provider[] = array(
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'claims' => array(),
 				'labels' => array(),
 				'descriptions' => array(
@@ -167,12 +167,12 @@ class PropertySerializerTest extends SerializerBaseTest {
 			$property
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getFingerprint()->setAliasGroup( 'en', array( 'foo', 'bar' ) );
 		$provider[] = array(
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'claims' => array(),
 				'labels' => array(),
 				'descriptions' => array(),
@@ -186,12 +186,12 @@ class PropertySerializerTest extends SerializerBaseTest {
 			$property
 		);
 
-		$property = Property::newFromType( '' );
+		$property = Property::newFromType( 'string' );
 		$property->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'test' );
 		$provider[] = array(
 			array(
 				'type' => 'property',
-				'datatype' => '',
+				'datatype' => 'string',
 				'claims' => array(
 					'P42' => array(
 						array(
