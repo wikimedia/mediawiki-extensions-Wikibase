@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_0bd31a62",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:29:55Z",
+      "side": 1,
+      "message": "I see. Ok.",
+      "parentUuid": "4ea78b8a_6bec0e21",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_cbaf42dd",
         "filename": "repo/includes/api/SetClaim.php",
         "patchSetId": 5
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "The ChangeOp checks for the setter and throws an Exception otherwise. While we don\u0027t use the setter here, it is required later in the process. I think it is nicer to have the standard \"not-supported\" message here than some InvalidArgumentException message in the api output. (That\u0027s only relevant if there is an Entity that does not allow modifying statements...)",
       "parentUuid": "4ea78b8a_cbaf42dd",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_cbc42297",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-15T16:29:55Z",
+      "side": 1,
+      "message": "Yea, the ChangeOp contains an instanceof StatementListHolder. I would argue that this is internal knowledge of the ChangeOp. We can catch the InvalidArgumentException below, where apply() is called, and turn it into a more useful error message.",
+      "parentUuid": "4ea78b8a_2bd61655",
       "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
