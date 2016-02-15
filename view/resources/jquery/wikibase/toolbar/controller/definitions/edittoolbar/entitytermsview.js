@@ -68,8 +68,9 @@ $.wikibase.toolbarcontroller.definition( 'edittoolbar', {
 				showEntitytermslistviewValue = mw.user.isAnon()
 					? $.cookie( 'wikibase-entitytermsview-showEntitytermslistview' )
 					: mw.user.options.get( 'wikibase-entitytermsview-showEntitytermslistview' ),
-				showEntitytermslistview = showEntitytermslistviewValue === 'true'
-					|| showEntitytermslistviewValue === '1';
+				showEntitytermslistview = ( showEntitytermslistviewValue === 'true'
+					|| showEntitytermslistviewValue === '1'
+					|| showEntitytermslistviewValue === null );
 
 			if ( entitytermsview.$entitytermsforlanguagelistviewContainer.is( ':visible' )
 				&& !showEntitytermslistview
