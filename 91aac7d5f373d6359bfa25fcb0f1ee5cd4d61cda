@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_1106e0d1",
+        "filename": "repo/includes/api/LinkTitles.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-16T15:48:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_cb60a2ce",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_8b5aaa20",
         "filename": "repo/includes/api/SetClaim.php",
         "patchSetId": 5
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "Yea, the ChangeOp contains an instanceof StatementListHolder. I would argue that this is internal knowledge of the ChangeOp. We can catch the InvalidArgumentException below, where apply() is called, and turn it into a more useful error message.",
       "parentUuid": "4ea78b8a_2bd61655",
+      "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_b1234c53",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-16T15:48:25Z",
+      "side": 1,
+      "message": "This is the general question whether to ask first or catch later. I prefer to ask first in this case since we have to do a check anyways and I don\u0027t see a reason to duplicate the lines below.\n\nHowever, I wonder whether the ChangeOp actually needs the setStatements method or if the operations on StatementList are enough for its operations.",
+      "parentUuid": "4ea78b8a_cbc42297",
       "revId": "91aac7d5f373d6359bfa25fcb0f1ee5cd4d61cda",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
