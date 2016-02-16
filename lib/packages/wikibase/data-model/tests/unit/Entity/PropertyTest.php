@@ -18,7 +18,6 @@ use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\DataModel\Entity\Property
- * @covers Wikibase\DataModel\Entity\Entity
  *
  * @group Wikibase
  * @group WikibaseProperty
