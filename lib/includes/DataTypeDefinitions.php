@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib;
 
-use Wikimedia\Assert\Assert;
+use InvalidArgumentException;
 
 /**
  * Service that manages property data type definition. This is a registry that provides access to
@@ -44,9 +44,9 @@ class DataTypeDefinitions {
 	const RESOLVED_MODE = 'resolved';
 
 	/**
-	 * @var array[]
+	 * @var DefinitionsMap
 	 */
-	private $dataTypeDefinitions = array();
+	private $dataTypeDefinitions;
 
 	/**
 	 * @param array[] $dataTypeDefinitions An associative array mapping property data type ids
@@ -64,38 +64,13 @@ class DataTypeDefinitions {
 			$disabledDataTypes
 		);
 
-		$this->registerDataTypes( $dataTypeDefinitions );
-	}
-
-	/**
-	 * Adds data type definitions. The new definitions are merged with the existing definitions.
-	 * If a data type in $dataTypeDefinitions was already defined, the old definition is not
-	 * replaced but the definitions are merged.
-	 *
-	 * @param array[] $dataTypeDefinitions An associative array mapping property data type ids
-	 * (with the prefix "PT:") and value types (with the prefix "VT:") to data type definitions.
-	 * Each data type definitions are associative arrays, refer to the class level documentation
-	 * for details.
-	 */
-	public function registerDataTypes( array $dataTypeDefinitions ) {
-		Assert::parameterElementType( 'array', $dataTypeDefinitions, '$dataTypeDefinitions' );
-
 		foreach ( $dataTypeDefinitions as $id => $def ) {
-			Assert::parameter(
-				strpos( $id, ':' ),
-				"\$dataTypeDefinitions[$id]",
-				'Key must start with a prefix like "PT:" or "VT:".'
-			);
-
-			if ( isset( $this->dataTypeDefinitions[$id] ) ) {
-				$this->dataTypeDefinitions[$id] = array_merge(
-					$this->dataTypeDefinitions[$id],
-					$dataTypeDefinitions[$id]
-				);
-			} else {
-				$this->dataTypeDefinitions[$id] = $dataTypeDefinitions[$id];
+			if ( 0 !== strpos( $id, 'PT:' ) && 0 !== strpos( $id, 'VT:' ) ) {
+				throw new InvalidArgumentException( 'Definition keys must start with either "PT:" or "VT:".' );
 			}
 		}
+
+		$this->dataTypeDefinitions = new DefinitionsMap( $dataTypeDefinitions );
 	}
 
 	/**
@@ -123,13 +98,13 @@ class DataTypeDefinitions {
 	 * @return array A filtered version of $map that only contains the entries
 	 *         with keys that match the prefix $prefix, with that prefix removed.
 	 */
-	private function getFilteredByPrefix( $map, $prefix ) {
+	private function getFilteredByPrefix( array $map, $prefix ) {
 		$filtered = array();
+		$offset = strlen( $prefix );
 
 		foreach ( $map as $key => $value ) {
-			$ofs = strlen( $prefix );
 			if ( strpos( $key, $prefix ) === 0 ) {
-				$key = substr( $key, $ofs );
+				$key = substr( $key, $offset );
 				$filtered[$key] = $value;
 			}
 		}
@@ -141,27 +116,12 @@ class DataTypeDefinitions {
 	 * @return string[] a list of all registered property data types.
 	 */
 	public function getTypeIds() {
-		$ptDefinitions = $this->getFilteredByPrefix( $this->dataTypeDefinitions, 'PT:' );
-		return array_keys( $ptDefinitions );
-	}
+		$propertyDataTypeDefinitions = $this->getFilteredByPrefix(
+			$this->dataTypeDefinitions->toArray(),
+			'PT:'
+		);
 
-	/**
-	 * @param string $field
-	 *
-	 * @return array An associative array mapping type IDs (with "VT:" or "PT:" prefixes) to the
-	 * value of $field given in the original property data type definition provided to the
-	 * constructor.
-	 */
-	private function getMapForDefinitionField( $field ) {
-		$fieldValues = array();
-
-		foreach ( $this->dataTypeDefinitions as $id => $def ) {
-			if ( isset( $def[$field] ) ) {
-				$fieldValues[$id] = $def[$field];
-			}
-		}
-
-		return $fieldValues;
+		return array_keys( $propertyDataTypeDefinitions );
 	}
 
 	/**
@@ -184,9 +144,9 @@ class DataTypeDefinitions {
 			$ptKey = "PT:$propertyType";
 
 			if ( isset( $callbackMap[$ptKey] ) ) {
-				$resolved[ $propertyType ] = $callbackMap[$ptKey];
+				$resolved[$propertyType] = $callbackMap[$ptKey];
 			} elseif ( isset( $callbackMap[$vtKey] ) ) {
-				$resolved[ $propertyType ] = $callbackMap[$vtKey];
+				$resolved[$propertyType] = $callbackMap[$vtKey];
 			}
 		}
 
@@ -217,7 +177,7 @@ class DataTypeDefinitions {
 	 */
 	public function getValueTypes() {
 		return $this->getFilteredByPrefix(
-			$this->getMapForDefinitionField( 'value-type' ),
+			$this->dataTypeDefinitions->getMapForDefinitionField( 'value-type' ),
 			'PT:'
 		);
 	}
@@ -233,7 +193,7 @@ class DataTypeDefinitions {
 	 */
 	public function getValidatorFactoryCallbacks( $mode = self::RESOLVED_MODE ) {
 		return $this->applyMode(
-			$this->getMapForDefinitionField( 'validator-factory-callback' ),
+			$this->dataTypeDefinitions->getMapForDefinitionField( 'validator-factory-callback' ),
 			$mode
 		);
 	}
@@ -249,7 +209,7 @@ class DataTypeDefinitions {
 	 */
 	public function getParserFactoryCallbacks( $mode = self::RESOLVED_MODE ) {
 		return $this->applyMode(
-			$this->getMapForDefinitionField( 'parser-factory-callback' ),
+			$this->dataTypeDefinitions->getMapForDefinitionField( 'parser-factory-callback' ),
 			$mode
 		);
 	}
@@ -265,7 +225,7 @@ class DataTypeDefinitions {
 	 */
 	public function getFormatterFactoryCallbacks( $mode = self::RESOLVED_MODE ) {
 		return $this->applyMode(
-			$this->getMapForDefinitionField( 'formatter-factory-callback' ),
+			$this->dataTypeDefinitions->getMapForDefinitionField( 'formatter-factory-callback' ),
 			$mode
 		);
 	}
@@ -276,7 +236,7 @@ class DataTypeDefinitions {
 	 * @return callable[]
 	 */
 	public function getSnakFormatterFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'snak-formatter-factory-callback' );
+		return $this->dataTypeDefinitions->getMapForDefinitionField( 'snak-formatter-factory-callback' );
 	}
 
 	/**
@@ -290,7 +250,7 @@ class DataTypeDefinitions {
 	 */
 	public function getRdfBuilderFactoryCallbacks( $mode = self::RESOLVED_MODE ) {
 		return $this->applyMode(
-			$this->getMapForDefinitionField( 'rdf-builder-factory-callback' ),
+			$this->dataTypeDefinitions->getMapForDefinitionField( 'rdf-builder-factory-callback' ),
 			$mode
 		);
 	}
