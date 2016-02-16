@@ -5,6 +5,8 @@ namespace Wikibase\Client;
 use DataTypes\DataTypeFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
+use Deserializers\DispatchingDeserializer;
 use Exception;
 use Hooks;
 use JobQueueGroup;
@@ -52,6 +54,7 @@ use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -171,6 +174,11 @@ final class WikibaseClient {
 	private $dataTypeDefinitions;
 
 	/**
+	 * @var EntityTypeDefinitions
+	 */
+	private $entityTypeDefinitions;
+
+	/**
 	 * @var TermLookup|null
 	 */
 	private $termLookup = null;
@@ -261,12 +269,14 @@ final class WikibaseClient {
 		SettingsArray $settings,
 		Language $contentLanguage,
 		DataTypeDefinitions $dataTypeDefinitions,
+		EntityTypeDefinitions $entityTypeDefinitions,
 		SiteStore $siteStore = null
 	) {
 		$this->settings = $settings;
 		$this->contentLanguage = $contentLanguage;
 		$this->siteStore = $siteStore;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
+		$this->entityTypeDefinitions = $entityTypeDefinitions;
 	}
 
 	/**
@@ -482,10 +492,13 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgContLang, $wgWBClientSettings, $wgWBClientDataTypes;
+		global $wgContLang, $wgWBClientSettings, $wgWBClientDataTypes, $wgWBClientEntityTypes;
 
 		$dataTypeDefinitions = $wgWBClientDataTypes;
 		Hooks::run( 'WikibaseClientDataTypes', array( &$dataTypeDefinitions ) );
+
+		$entityTypeDefinitions = $wgWBClientEntityTypes;
+		Hooks::run( 'WikibaseClientEntityTypes', array( &$entityTypeDefinitions ) );
 
 		$settings = new SettingsArray( $wgWBClientSettings );
 
@@ -495,7 +508,8 @@ final class WikibaseClient {
 			new DataTypeDefinitions(
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
-			)
+			),
+			new EntityTypeDefinitions( $entityTypeDefinitions )
 		);
 	}
 
@@ -787,7 +801,7 @@ final class WikibaseClient {
 	 * @return Deserializer
 	 */
 	public function getInternalEntityDeserializer() {
-		return $this->getInternalDeserializerFactory()->newEntityDeserializer();
+		return $this->getInternalDeserializerFactory()->newEntityDeserializer( $this->getEntityDeserializer() );
 	}
 
 	/**
@@ -1004,6 +1018,21 @@ final class WikibaseClient {
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
+	}
+
+	/**
+	 * @return DispatchableDeserializer
+	 */
+	public function getEntityDeserializer() {
+		$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+		$deserializerFactory = $this->getDeserializerFactory();
+		$deserializers = array();
+
+		foreach ( $deserializerFactoryCallbacks as $callback ) {
+			$deserializers[] = call_user_func( $callback, $deserializerFactory );
+		}
+
+		return new DispatchingDeserializer( $deserializers );
 	}
 
 	/**
