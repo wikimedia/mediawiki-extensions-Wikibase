@@ -56,6 +56,7 @@ use Wikibase\Lib\DifferenceContentLanguages;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
@@ -111,8 +112,8 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\ViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -220,6 +221,11 @@ class WikibaseRepo {
 	private $dataTypeDefinitions;
 
 	/**
+	 * @var EntityTypeDefinitions
+	 */
+	private $entityTypeDefinitions;
+
+	/**
 	 * @var Language
 	 */
 	private $defaultLanguage;
@@ -246,7 +252,7 @@ class WikibaseRepo {
 	 * @return self
 	 */
 	private static function newInstance() {
-		global $wgWBRepoDataTypes, $wgWBRepoSettings, $wgContLang;
+		global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgWBRepoSettings, $wgContLang;
 
 		if ( !is_array( $wgWBRepoDataTypes ) ) {
 			throw new MWException( '$wgWBRepoDataTypes must be an array. Maybe you forgot to '
@@ -256,6 +262,9 @@ class WikibaseRepo {
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
 		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
 
+		$entityTypeDefinitions = $wgWBRepoEntityTypes;
+		Hooks::run( 'WikibaseRepoEntityTypes', array( &$entityTypeDefinitions ) );
+
 		$settings = new SettingsArray( $wgWBRepoSettings );
 
 		return new self(
@@ -264,6 +273,7 @@ class WikibaseRepo {
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
 			),
+			new EntityTypeDefinitions( $entityTypeDefinitions ),
 			$wgContLang
 		);
 	}
@@ -407,15 +417,18 @@ class WikibaseRepo {
 	 *
 	 * @param SettingsArray $settings
 	 * @param DataTypeDefinitions $dataTypeDefinitions
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param Language|null $defaultLanguage
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
+		EntityTypeDefinitions $entityTypeDefinitions,
 		Language $defaultLanguage = null
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
+		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->defaultLanguage = $defaultLanguage;
 	}
 
@@ -1198,10 +1211,11 @@ class WikibaseRepo {
 	/**
 	 * @return InternalDeserializerFactory
 	 */
-	public function getInternalDeserializerFactory() {
+	private function getInternalDeserializerFactory() {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
-			$this->getEntityIdParser()
+			$this->getEntityIdParser(),
+			$this->getEntityDeserializer()
 		);
 	}
 
