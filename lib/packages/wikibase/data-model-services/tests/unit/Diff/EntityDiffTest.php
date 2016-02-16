@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\Internal\StatementListDiffer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -18,7 +19,22 @@ use Wikibase\DataModel\Statement\StatementList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityDiffTest extends \PHPUnit_Framework_TestCase {
+class EntityDiffTest extends PHPUnit_Framework_TestCase {
+
+	/**
+	 * @dataProvider newForTypeProvider
+	 */
+	public function testNewForType( $entityType, $expected ) {
+		$diff = EntityDiff::newForType( $entityType );
+		$this->assertInstanceOf( $expected, $diff );
+	}
+
+	public function newForTypeProvider() {
+		return array(
+			array( 'item', 'Wikibase\DataModel\Services\Diff\ItemDiff' ),
+			array( 'anything', 'Wikibase\DataModel\Services\Diff\EntityDiff' ),
+		);
+	}
 
 	public function isEmptyProvider() {
 		$argLists = array();
@@ -149,6 +165,11 @@ class EntityDiffTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertInstanceOf( 'Diff\Diff', $diff );
 		$this->assertTrue( $diff->isAssociative() );
+	}
+
+	public function testGetType() {
+		$diff = new EntityDiff();
+		$this->assertSame( 'diff/entity', $diff->getType() );
 	}
 
 }

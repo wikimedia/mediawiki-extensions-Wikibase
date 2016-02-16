@@ -11,6 +11,8 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
+ *
+ * @codeCoverageIgnore
  */
 class NullEntityPrefetcher implements EntityPrefetcher {
 
