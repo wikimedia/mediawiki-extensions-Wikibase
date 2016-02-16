@@ -62,38 +62,6 @@ class ItemTest extends EntityTest {
 		$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
 	}
 
-	public function itemProvider() {
-		$items = array();
-
-		$items[] = new Item();
-
-		$item = new Item();
-		$item->setDescription( 'en', 'foo' );
-		$items[] = $item;
-
-		$item = new Item();
-		$item->setDescription( 'en', 'foo' );
-		$item->setDescription( 'de', 'foo' );
-		$item->setLabel( 'en', 'foo' );
-		$item->setAliases( 'de', array( 'bar', 'baz' ) );
-		$items[] = $item;
-
-		/** @var Item $item */
-		$item = $item->copy();
-		$item->getStatements()->addNewStatement(
-			new PropertyNoValueSnak( new PropertyId( 'P42' ) )
-		);
-		$items[] = $item;
-
-		$argLists = array();
-
-		foreach ( $items as $item ) {
-			$argLists[] = array( $item );
-		}
-
-		return $argLists;
-	}
-
 	public function testGetSiteLinkWithNonSetSiteId() {
 		$item = new Item();
 
