@@ -17,5 +17,6 @@
 	"wikibase-rc-hide-wikidata-show": "Monstrare",
 	"wikibase-rc-show-wikidata-pref": "Recensiones apud {{WBREPONAME}} factas in nuper mutatorum indice ostendere",
 	"wikibase-rc-wikibase-edit-title": "Recensio apud Wikidata facta",
-	"wikibase-watchlist-show-changes-pref": "Mutationes apud {{WBREPONAME}} factas, siquae paginas observandas afficiant, in earum indice ostendere"
+	"wikibase-watchlist-show-changes-pref": "Mutationes apud {{WBREPONAME}} factas, siquae paginas observandas afficiant, in earum indice ostendere",
+	"wikibase-otherprojects": "Inceptis aliis"
 }

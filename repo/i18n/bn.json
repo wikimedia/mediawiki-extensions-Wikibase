@@ -97,6 +97,8 @@
 	"wikibase-itembytitle-error-site": "দয়া করে একটি বিদ্যমান সাইট শনাক্তকারী ব্যবহার করুন, উদা. বাংলা উইকিপিডিয়ার জন্য \"bnwiki\"।",
 	"wikibase-itembytitle-error-item": "প্রদত্ত পাতার সাথে সংযুক্ত আইটেম পাওয়া যায়নি।",
 	"wikibase-itembytitle-create": "এছাড়াও আপনি [$1 একটি আইটেম তৈরি] করতে পারেন।",
+	"special-gotolinkedpage": "সংযুক্ত পাতায় যান",
+	"wikibase-gotolinkedpage-lookup-fieldset": "সাইট ও আইটেম অনুযায়ী সংযুক্ত পাতায় যান",
 	"wikibase-gotolinkedpage-lookup-site": "সাইট:",
 	"wikibase-gotolinkedpage-lookup-item": "আইটেম আইডি:",
 	"wikibase-gotolinkedpage-submit": "চলো",

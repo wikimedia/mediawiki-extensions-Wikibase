@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kolega2357",
-			"OC Ripper"
+			"OC Ripper",
+			"Conquistador"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
@@ -16,5 +17,6 @@
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} uređivanje",
-	"wikibase-otherprojects": "Drugi projekti"
+	"wikibase-otherprojects": "Drugi projekti",
+	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata"
 }
