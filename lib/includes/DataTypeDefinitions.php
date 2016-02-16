@@ -55,10 +55,7 @@ class DataTypeDefinitions {
 	 * for details.
 	 * @param string[] $disabledDataTypes Array of disabled data types.
 	 */
-	public function __construct(
-		array $dataTypeDefinitions = array(),
-		array $disabledDataTypes = array()
-	) {
+	public function __construct( array $dataTypeDefinitions, array $disabledDataTypes = array() ) {
 		$dataTypeDefinitions = $this->filterDisabledDataTypes(
 			$dataTypeDefinitions,
 			$disabledDataTypes

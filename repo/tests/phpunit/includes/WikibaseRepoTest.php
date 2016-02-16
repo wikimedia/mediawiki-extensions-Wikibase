@@ -6,6 +6,7 @@ use Language;
 use MediaWikiTestCase;
 use RequestContext;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 
@@ -285,9 +286,14 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo() {
-		$lang = Language::factory( 'qqx' );
+		$language = Language::factory( 'qqx' );
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		return new WikibaseRepo( $settings, new DataTypeDefinitions(), $lang );
+		return new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( array() ),
+			new EntityTypeDefinitions( array() ),
+			$language
+		);
 	}
 
 	public function testGetApiHelperFactory() {

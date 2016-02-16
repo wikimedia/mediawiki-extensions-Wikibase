@@ -22,28 +22,28 @@ use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\Client\Changes\WikiPageUpdater;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
-use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
-use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
-use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
+use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
+use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\DirectSqlStore;
@@ -53,17 +53,18 @@ use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\NamespaceChecker;
 use Wikibase\SettingsArray;
 use Wikibase\SiteLinkCommentCreator;
@@ -172,6 +173,11 @@ final class WikibaseClient {
 	private $dataTypeDefinitions;
 
 	/**
+	 * @var EntityTypeDefinitions
+	 */
+	private $entityTypeDefinitions;
+
+	/**
 	 * @var TermLookup|null
 	 */
 	private $termLookup = null;
@@ -256,18 +262,21 @@ final class WikibaseClient {
 	 * @param SettingsArray $settings
 	 * @param Language $contentLanguage
 	 * @param DataTypeDefinitions $dataTypeDefinitions
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @param SiteStore|null $siteStore
 	 */
 	public function __construct(
 		SettingsArray $settings,
 		Language $contentLanguage,
 		DataTypeDefinitions $dataTypeDefinitions,
+		EntityTypeDefinitions $entityTypeDefinitions,
 		SiteStore $siteStore = null
 	) {
 		$this->settings = $settings;
 		$this->contentLanguage = $contentLanguage;
-		$this->siteStore = $siteStore;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
+		$this->entityTypeDefinitions = $entityTypeDefinitions;
+		$this->siteStore = $siteStore;
 	}
 
 	/**
@@ -484,15 +493,18 @@ final class WikibaseClient {
 	 * @return WikibaseClient
 	 */
 	private static function newInstance() {
-		global $wgContLang, $wgWBClientSettings, $wgWBClientDataTypes;
+		global $wgContLang, $wgWBClientSettings, $wgWBClientDataTypes, $wgWBClientEntityTypes;
 
-		if ( !is_array( $wgWBClientDataTypes ) ) {
-			throw new MWException( '$wgWBClientDataTypes must be an array. Maybe you forgot to '
-				. 'require WikibaseClient.php in your LocalSettings.php?' );
+		if ( !is_array( $wgWBClientDataTypes ) || !is_array( $wgWBClientEntityTypes ) ) {
+			throw new MWException( '$wgWBClientDataTypes and $wgWBClientEntityTypes must be arrays. '
+				. 'Maybe you forgot to require WikibaseClient.php in your LocalSettings.php?' );
 		}
 
 		$dataTypeDefinitions = $wgWBClientDataTypes;
 		Hooks::run( 'WikibaseClientDataTypes', array( &$dataTypeDefinitions ) );
+
+		$entityTypeDefinitions = $wgWBClientEntityTypes;
+		Hooks::run( 'WikibaseClientEntityTypes', array( &$entityTypeDefinitions ) );
 
 		$settings = new SettingsArray( $wgWBClientSettings );
 
@@ -502,7 +514,8 @@ final class WikibaseClient {
 			new DataTypeDefinitions(
 				$dataTypeDefinitions,
 				$settings->getSetting( 'disabledDataTypes' )
-			)
+			),
+			new EntityTypeDefinitions( $entityTypeDefinitions )
 		);
 	}
 

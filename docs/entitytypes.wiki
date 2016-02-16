@@ -1,3 +1,5 @@
+== Abstract ==
+
 Entities as defined by Wikibase have a unique identifier and a type. As Wikibase is an extension of
 MediaWiki, every entity object is stored on its own page in a given namespace that can hold entities
 of one type.
@@ -14,6 +16,8 @@ The actual content of an entity can be anything. However, Wikibase defines some 
 including labels, descriptions, aliases and statements. If an entity holds one of these structures,
 it has to implement the corresponding provider interface (eg. LabelsProvider).
 
+== Entity type definitions ==
+
 To support an entity type, additionally to defining the entity itself, the following services need
 to be implemented and registered:
 
@@ -23,3 +27,27 @@ to be implemented and registered:
 * MediaWiki bindings are needed by defining a content class extending EntityContent and a handler
   class extending EntityHandler. Furthermore, the handler has to be globally registered in
   $wgContentHandlers. It is used to create instances of the content class.
+
+Entity types are defined in the global $wgWBRepoEntityTypes and $wgWBClientEntityTypes arrays,
+respectively. These arrays are constructed at bootstrap time in Wikibase.php and
+WikibaseClient.php based on the information returned when including the WikibaseLib.entitytypes.php
+file.
+
+These globals are associative arrays mapping entity type identifiers to a set of callbacks that
+act as factory methods. The structure of this set is defined as follows, where each string key is
+associated with a function having the dedicated signature:
+
+; serializer-factory-callback (repo and client):
+: a callable that returns a DispatchableSerializer instance, with the first and only argument being
+  a SerialierFactory
+; deserializer-factory-callback (repo and client):
+: a callable that returns a DispatchableDeserializer instance, with the first and only argument
+  being a DeserializerFactory
+
+Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes respectively
+WikibaseClientEntityTypes hooks to provide additional entity type definitions.
+
+== Programmatic Access ==
+
+Information about entity types can be accessed programmatically using the appropriate service
+objects. The entity type definitions themselves are wrapped by the EntityTypeDefinitions class.

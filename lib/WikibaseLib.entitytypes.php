@@ -8,6 +8,8 @@
  * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
  * objects or loading classes here!
  *
+ * @see docs/entiytypes.wiki
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
