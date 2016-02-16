@@ -21,20 +21,8 @@ class TermDeserializerTest extends DeserializerBaseTest {
 		return new TermDeserializer();
 	}
 
-	/**
-	 * @return array[] things that are deserialized by the deserializer
-	 */
 	public function deserializableProvider() {
-		return array(
-			array(
-				'language' => 'en',
-				'value' => 'FooBar',
-			),
-			array(
-				'language' => 'en-gb',
-				'value' => 'Kittens, Kittens and Unicorns',
-			),
-		);
+		return array( array() );
 	}
 
 	/**
@@ -42,19 +30,26 @@ class TermDeserializerTest extends DeserializerBaseTest {
 	 */
 	public function nonDeserializableProvider() {
 		return array(
-			array(
+			'must be an array' => array( new \stdClass() ),
+			'must contain language' => array( array(
+				'value' => 'FooBar',
+			) ),
+			'must contain value' => array( array(
+				'language' => 'de',
+			) ),
+			'language must be string' => array( array(
 				'language' => 123,
 				'value' => 'FooBar',
-			),
-			array(
+			) ),
+			'value must be string' => array( array(
 				'language' => 'de',
 				'value' => 999,
-			),
-			array(
+			) ),
+			'must not contain source' => array( array(
 				'language' => 'fr',
 				'value' => 'Fr to DE hehe',
 				'source' => 'de',
-			),
+			) ),
 		);
 	}
 

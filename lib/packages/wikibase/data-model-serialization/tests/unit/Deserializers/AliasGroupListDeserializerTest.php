@@ -23,21 +23,8 @@ class AliasGroupListDeserializerTest extends DeserializerBaseTest {
 		return new AliasGroupListDeserializer();
 	}
 
-	/**
-	 * @return array[] things that are deserialized by the deserializer
-	 */
 	public function deserializableProvider() {
-		return array(
-			array( 'en' => array() ),
-			array( 'de' => array(
-				array( 'language' => 'de', 'value' => 'One' ),
-				array( 'language' => 'de', 'value' => 'Pony' ),
-			) ),
-			array(
-				'de' => array( array( 'language' => 'de', 'value' => 'foo' ) ),
-				'en' => array( array( 'language' => 'en', 'value' => 'bar' ) ),
-			),
-		);
+		return array( array() );
 	}
 
 	/**
@@ -45,12 +32,27 @@ class AliasGroupListDeserializerTest extends DeserializerBaseTest {
 	 */
 	public function nonDeserializableProvider() {
 		return array(
-			array( 'en' => array(
-				array( 'language' => 'de', 'value' => 'Evil language' )
+			'must be an array' => array( new \stdClass() ),
+			'must be an array of arrays' => array( array(
+				'en' => new \stdClass(),
 			) ),
-			array( 'en' => array( 'A' ), 'de' => array( 'B' ) ),
-			array( 'en' => array(
-				array( 'language' => 'en', 'value' => 'Evil language', 'source' => 'fallback' )
+			'array key must match' => array( array(
+				'en' => array( array( 'language' => 'de', 'value' => 'Evil language' ) ),
+			) ),
+			'must be an array of arrays of arrays' => array( array(
+				'en' => array( 'A' ),
+				'de' => array( 'B' ),
+			) ),
+			'must contain language' => array( array(
+				'en' => array( array( 'value' => 'foo' ) ),
+			) ),
+			'must contain value' => array( array(
+				'en' => array( array( 'language' => 'en' ) ),
+			) ),
+			'must not contain source' => array( array(
+				'en' => array(
+					array( 'language' => 'en', 'value' => 'Evil language', 'source' => 'fallback' ),
+				),
 			) ),
 		);
 	}

@@ -36,67 +36,7 @@ class StatementListDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function deserializableProvider() {
-		return array(
-			array(
-				array()
-			),
-			array(
-				array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
-								'snaktype' => 'novalue',
-								'property' => 'P42'
-							),
-							'type' => 'statement',
-							'rank' => 'normal'
-						)
-					)
-				)
-			),
-			array(
-				array(
-					'P42' => array(
-						array(
-							'mainsnak' => array(
-								'snaktype' => 'novalue',
-								'property' => 'P42'
-							),
-							'type' => 'statement',
-							'rank' => 'normal'
-						),
-						array(
-							'mainsnak' => array(
-								'snaktype' => 'novalue',
-								'property' => 'P42'
-							),
-							'type' => 'statement',
-							'rank' => 'normal'
-						)
-					)
-				)
-			),
-			array(
-				array(
-					array(
-						'mainsnak' => array(
-							'snaktype' => 'novalue',
-							'property' => 'P42'
-						),
-						'type' => 'statement',
-						'rank' => 'normal'
-					),
-					array(
-						'mainsnak' => array(
-							'snaktype' => 'novalue',
-							'property' => 'P42'
-						),
-						'type' => 'statement',
-						'rank' => 'normal'
-					)
-				)
-			),
-		);
+		return array( array() );
 	}
 
 	public function nonDeserializableProvider() {

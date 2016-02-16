@@ -29,47 +29,7 @@ class SnakListDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function deserializableProvider() {
-		return array(
-			array(
-				array()
-			),
-			array(
-				array(
-					'P42' => array(
-						array(
-							'snaktype' => 'novalue',
-							'property' => 'P42'
-						)
-					)
-				)
-			),
-			array(
-				array(
-					'P42' => array(
-						array(
-							'snaktype' => 'novalue',
-							'property' => 'P42'
-						),
-						array(
-							'snaktype' => 'novalue',
-							'property' => 'P42'
-						)
-					)
-				)
-			),
-			array(
-				array(
-					array(
-						'snaktype' => 'novalue',
-						'property' => 'P42'
-					),
-					array(
-						'snaktype' => 'novalue',
-						'property' => 'P42'
-					)
-				)
-			),
-		);
+		return array( array() );
 	}
 
 	public function nonDeserializableProvider() {

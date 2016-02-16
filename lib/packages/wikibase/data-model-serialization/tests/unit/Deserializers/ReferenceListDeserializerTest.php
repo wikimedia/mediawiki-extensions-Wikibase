@@ -29,31 +29,7 @@ class ReferenceListDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function deserializableProvider() {
-		return array(
-			array(
-				array()
-			),
-			array(
-				array(
-					array(
-						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => array()
-					)
-				)
-			),
-			array(
-				array(
-					array(
-						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => array()
-					),
-					array(
-						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
-						'snaks' => array()
-					),
-				)
-			),
-		);
+		return array( array() );
 	}
 
 	public function nonDeserializableProvider() {

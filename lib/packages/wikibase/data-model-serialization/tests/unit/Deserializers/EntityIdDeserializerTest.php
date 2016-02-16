@@ -3,8 +3,8 @@
 namespace Tests\Wikibase\DataModel\Deserializers;
 
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers Wikibase\DataModel\Deserializers\EntityIdDeserializer
@@ -25,11 +25,7 @@ class EntityIdDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function deserializableProvider() {
-		return array(
-			array(
-				'Q42'
-			),
-		);
+		return array( array() );
 	}
 
 	public function nonDeserializableProvider() {
