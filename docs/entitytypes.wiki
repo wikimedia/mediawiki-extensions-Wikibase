@@ -1,0 +1,4 @@
+This document describes the concept of entity types as used by Wikibase.
+
+
+TODO: Insert some smart sentences here
