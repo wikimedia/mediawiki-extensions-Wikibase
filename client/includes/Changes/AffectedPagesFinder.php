@@ -121,8 +121,8 @@ class AffectedPagesFinder {
 
 		if ( $remainingDiffOps === 0 ) {
 			// HACK: assume an empty diff implies that some "other" aspect of the entity was changed.
-			// This is needed since EntityChangeFactory::newFromUpdate suppresses statement diffs for
-			// performance reasons.
+			// This is needed since EntityChangeFactory::newFromUpdate suppresses statement, description
+			// and alias diffs for performance reasons.
 			// For a better solution, see T113468.
 			$aspects[] = EntityUsage::OTHER_USAGE;
 			return $aspects;
@@ -150,6 +150,7 @@ class AffectedPagesFinder {
 				$remainingDiffOps -= count( $labelAspects );
 			}
 		}
+		// FIXME: EntityChange suppresses various kinds of diffs (see above). T113468.
 
 		if ( $remainingDiffOps > 0 ) {
 			$aspects[] = EntityUsage::OTHER_USAGE;
