@@ -767,6 +767,16 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => 'UsageException',
 					'code' => 'modification-failed' ) ) ),
+			'properties cannot have sitelinks' => array(
+				'p' => array(
+					'id' => '%P56%',
+					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki","title":"TestPage!"}}}',
+				),
+				'e' => array( 'exception' => array(
+					'type' => 'UsageException',
+					'code' => 'not-supported',
+					'message' => 'Non Items cannot have sitelinks'
+				) ) ),
 		);
 	}
 
