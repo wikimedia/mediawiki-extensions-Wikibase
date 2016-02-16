@@ -1,9 +1,11 @@
 # Wikibase DataModel Serialization release notes
 
-## 2.1.0 (dev)
+## 2.1.0 (2016-02-16)
 
 * Added `newItemSerializer` and `newPropertySerializer` to `SerializerFactory`
 * Added `newItemDeserializer` and `newPropertyDeserializer` to `DeserializerFactory`
+* Added compatibility with Wikibase DataModel 5.x
+* Added compatibility with DataValues Common 0.3
 
 ## 2.0.0 (2015-08-30)
 
