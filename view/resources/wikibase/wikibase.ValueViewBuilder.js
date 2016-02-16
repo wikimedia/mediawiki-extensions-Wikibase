@@ -9,7 +9,7 @@
 	 * @constructor
 	 *
 	 * @param {jQuery.valueview.ExpertStore} expertStore
-	 * @param {valueFormatters.ValueFormatterStore} formatterStore
+	 * @param {wikibase.ValueFormatterFactory} formatterFactory
 	 * @param {valueParsers.ValueParserStore} parserStore
 	 * @param {string} language
 	 * @param {util.MessageProvider} messageProvider
@@ -18,7 +18,7 @@
 	 */
 	var SELF = wb.ValueViewBuilder = function WbValueViewBuilder(
 		expertStore,
-		formatterStore,
+		formatterFactory,
 		parserStore,
 		language,
 		messageProvider,
@@ -27,25 +27,30 @@
 	) {
 		this._baseOptions = {
 			expertStore: expertStore,
-			formatterStore: formatterStore,
 			parserStore: parserStore,
 			language: language,
 			messageProvider: messageProvider,
 			contentLanguages: contentLanguages,
 			vocabularyLookupApiUrl: vocabularyLookupApiUrl || null
 		};
+		this._formatterFactory = formatterFactory;
 	};
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @type {Object}
+		 * @var {Object}
 		 */
 		_baseOptions: null,
 
 		/**
+		 * @var {wikibase.ValueFormatterFactory}
+		 */
+		_formatterFactory: null,
+
+		/**
 		 * @param {jQuery} $valueViewDom
-		 * @param {dataTypes.DataType} dataType
-		 * @param {dataValues.DataValue} dataValue
+		 * @param {dataTypes.DataType|null} dataType
+		 * @param {dataValues.DataValue|null} dataValue
 		 *
 		 * @return {jQuery.valueview}
 		 */
@@ -61,8 +66,17 @@
 			return valueView;
 		},
 
+		/**
+		 * @param {dataTypes.DataType|null} dataType
+		 * @param {dataValues.DataValue|null} dataValue
+		 *
+		 * @return {Object}
+		 */
 		_getOptions: function( dataType, dataValue ) {
+			var dataTypeId = dataType && dataType.getId();
 			var valueViewOptions = $.extend( {}, this._baseOptions, {
+				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, 'text/html' ),
+				plaintextFormatter: this._formatterFactory.getFormatter( dataTypeId, 'text/plain' ),
 				value: dataValue
 			} );
 
