@@ -578,4 +578,67 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( $fingerprint, $newFingerprint );
 	}
 
+	public function testGetLabels() {
+		$property = Property::newFromType( 'string' );
+		$property->setLabel( 'en', 'foo' );
+
+		$this->assertEquals(
+			new TermList( array(
+				new Term( 'en', 'foo' )
+			) ),
+			$property->getLabels()
+		);
+	}
+
+	public function testGetDescriptions() {
+		$property = Property::newFromType( 'string' );
+		$property->setDescription( 'en', 'foo bar' );
+
+		$this->assertEquals(
+			new TermList( array(
+				new Term( 'en', 'foo bar' )
+			) ),
+			$property->getDescriptions()
+		);
+	}
+
+	public function testGetAliasGroups() {
+		$property = Property::newFromType( 'string' );
+		$property->setAliases( 'en', array( 'foo', 'bar' ) );
+
+		$this->assertEquals(
+			new AliasGroupList( array(
+				new AliasGroup( 'en', array( 'foo', 'bar' ) )
+			) ),
+			$property->getAliasGroups()
+		);
+	}
+
+	public function testGetLabels_sameListAsFingerprint() {
+		$property = Property::newFromType( 'string' );
+
+		$this->assertSame(
+			$property->getFingerprint()->getLabels(),
+			$property->getLabels()
+		);
+	}
+
+	public function testGetDescriptions_sameListAsFingerprint() {
+		$property = Property::newFromType( 'string' );
+
+		$this->assertSame(
+			$property->getFingerprint()->getDescriptions(),
+			$property->getDescriptions()
+		);
+	}
+
+	public function testGetAliasGroups_sameListAsFingerprint() {
+		$property = Property::newFromType( 'string' );
+
+		$this->assertSame(
+			$property->getFingerprint()->getAliasGroups(),
+			$property->getAliasGroups()
+		);
+	}
+
 }
