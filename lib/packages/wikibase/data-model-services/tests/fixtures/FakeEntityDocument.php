@@ -51,4 +51,28 @@ class FakeEntityDocument implements EntityDocument {
 		return true;
 	}
 
+	/**
+	 * @see EntityDocument::equals
+	 *
+	 * @since 3.3
+	 *
+	 * @param mixed $target
+	 *
+	 * @return bool Always true.
+	 */
+	public function equals( $target ) {
+		return true;
+	}
+
+	/**
+	 * @see EntityDocument::copy
+	 *
+	 * @since 3.3
+	 *
+	 * @return self
+	 */
+	public function copy() {
+		return new self( $this->id );
+	}
+
 }
