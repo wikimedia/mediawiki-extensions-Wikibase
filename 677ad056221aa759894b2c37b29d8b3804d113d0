@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_7fafdade",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T21:52:33Z",
+      "side": 1,
+      "message": "That\u0027s right, but I\u0027m actually getting rid of the getter again, since it\u0027s not necessary.",
+      "parentUuid": "4ea78b8a_5649aed1",
+      "revId": "677ad056221aa759894b2c37b29d8b3804d113d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_7672aa11",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_1fbee613",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T21:52:33Z",
+      "side": 1,
+      "message": "Right. startEditing should draw everything or something\u0027s really wrong.",
+      "parentUuid": "4ea78b8a_7672aa11",
+      "revId": "677ad056221aa759894b2c37b29d8b3804d113d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_36251204",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2016-02-16T15:03:19Z",
       "side": 1,
       "message": "Can use this inside the loop, if the key is not needed anyway.",
+      "revId": "677ad056221aa759894b2c37b29d8b3804d113d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_3fb96229",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T21:52:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_36251204",
       "revId": "677ad056221aa759894b2c37b29d8b3804d113d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
