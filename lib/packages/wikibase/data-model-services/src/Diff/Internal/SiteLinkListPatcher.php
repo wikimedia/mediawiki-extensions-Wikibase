@@ -7,7 +7,6 @@ use Diff\Patcher\ListPatcher;
 use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 
 /**
@@ -75,10 +74,7 @@ class SiteLinkListPatcher {
 	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ) {
 		$linksInDiffFormat = array();
 
-		/**
-		 * @var SiteLink $siteLink
-		 */
-		foreach ( $siteLinks as $siteLink ) {
+		foreach ( $siteLinks->toArray() as $siteLink ) {
 			$linksInDiffFormat[$siteLink->getSiteId()] = array(
 				'name' => $siteLink->getPageName(),
 				'badges' => array_map(

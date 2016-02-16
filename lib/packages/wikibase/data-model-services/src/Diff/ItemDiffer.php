@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\Internal\StatementListDiffer;
-use Wikibase\DataModel\SiteLink;
+use Wikibase\DataModel\SiteLinkList;
 
 /**
  * @since 1.0
@@ -79,19 +79,16 @@ class ItemDiffer implements EntityDifferStrategy {
 		$array['aliases'] = $item->getFingerprint()->getAliasGroups()->toTextArray();
 		$array['label'] = $item->getFingerprint()->getLabels()->toTextArray();
 		$array['description'] = $item->getFingerprint()->getDescriptions()->toTextArray();
-		$array['links'] = $this->getLinksInDiffFormat( $item );
+		$array['links'] = $this->getSiteLinksInDiffFormat( $item->getSiteLinkList() );
 
 		return $array;
 	}
 
-	private function getLinksInDiffFormat( Item $item ) {
-		$links = array();
+	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ) {
+		$linksInDiffFormat = array();
 
-		/**
-		 * @var SiteLink $siteLink
-		 */
-		foreach ( $item->getSiteLinkList() as $siteLink ) {
-			$links[$siteLink->getSiteId()] = array(
+		foreach ( $siteLinks->toArray() as $siteLink ) {
+			$linksInDiffFormat[$siteLink->getSiteId()] = array(
 				'name' => $siteLink->getPageName(),
 				'badges' => array_map(
 					function( ItemId $id ) {
@@ -102,7 +99,7 @@ class ItemDiffer implements EntityDifferStrategy {
 			);
 		}
 
-		return $links;
+		return $linksInDiffFormat;
 	}
 
 	/**
