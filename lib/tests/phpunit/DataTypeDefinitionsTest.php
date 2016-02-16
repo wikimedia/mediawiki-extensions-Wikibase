@@ -90,8 +90,8 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $defs->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ) );
 	}
 
-	public function testRegisterDataTypes() {
-		$defs = $this->getDataTypeDefinitions();
+	public function testAdditinoalDataTypes() {
+		$definitions = $this->getDefinitions();
 
 		$extraTypes = array(
 			'VT:FOO' => array(
@@ -106,7 +106,7 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$defs->registerDataTypes( $extraTypes );
+		$defs = new DataTypeDefinitions( array_merge_recursive( $definitions, $extraTypes ) );
 
 		$this->assertEquals( array( 'foo', 'bar', 'fuzz' ), $defs->getTypeIds() );
 		$this->assertEquals( array( 'foo' => 'FOO', 'bar' => 'BAR', 'fuzz' => 'FOO' ), $defs->getValueTypes() );
