@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_c5b3aa94",
+        "filename": "repo/resources/formatters/ApiValueFormatter.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T09:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_9eff58fc",
+      "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_5e09e02d",
         "filename": "repo/resources/formatters/ApiValueFormatter.js",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-12T14:35:56Z",
       "side": 1,
       "message": "@var",
+      "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_e5b6e684",
+        "filename": "repo/resources/formatters/ApiValueFormatter.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T09:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_5e09e02d",
       "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_85adb230",
+        "filename": "repo/resources/formatters/ApiValueFormatter.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T09:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_fe0f6c31",
+      "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_1e0b6827",
         "filename": "repo/resources/formatters/ApiValueFormatter.js",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2016-02-12T14:35:56Z",
       "side": 1,
       "message": "@var",
+      "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_a5a8ee1d",
+        "filename": "repo/resources/formatters/ApiValueFormatter.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T09:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_1e0b6827",
       "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_45a7ba4c",
+        "filename": "repo/resources/formatters/ApiValueFormatterFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T09:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_be3014e6",
+      "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_5e57a005",
         "filename": "view/resources/wikibase/wikibase.ValueFormatterFactory.js",
         "patchSetId": 4
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_65a2f63c",
+        "filename": "view/resources/wikibase/wikibase.ValueFormatterFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T09:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_5e57a005",
+      "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_fe3d2cb9",
         "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
         "patchSetId": 4
@@ -115,6 +223,24 @@
       "writtenOn": "2016-02-12T14:35:56Z",
       "side": 1,
       "message": "additional \"formatterFactory\" doesn\u0027t add any value",
+      "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_0569c2f5",
+        "filename": "view/resources/wikibase/wikibase.ValueViewBuilder.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-16T09:13:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_fe3d2cb9",
       "revId": "0a9d97d98b3ae3d632c42fabf1be6c8c3da62d4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
