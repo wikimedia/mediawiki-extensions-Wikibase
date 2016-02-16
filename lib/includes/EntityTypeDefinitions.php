@@ -34,7 +34,7 @@ class EntityTypeDefinitions {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $entityTypeDefinitions ) {
+	public function __construct( array $entityTypeDefinitions = array() ) {
 		foreach ( $entityTypeDefinitions as $id => $def ) {
 			if ( !is_string( $id ) || !is_array( $def ) ) {
 				throw new InvalidArgumentException( '$entityTypeDefinitions must be a map from string to arrays' );

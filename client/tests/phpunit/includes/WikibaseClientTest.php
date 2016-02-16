@@ -9,6 +9,7 @@ use SiteStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\SettingsArray;
 
 /**
@@ -298,10 +299,13 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseClient
 	 */
 	private function getWikibaseClient() {
-		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$sites = new HashSiteStore( array() );
-		$dataTypeDefinitions = new DataTypeDefinitions();
-		return new WikibaseClient( $settings, Language::factory( 'en' ), $dataTypeDefinitions, $sites );
+		return new WikibaseClient(
+			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
+			Language::factory( 'en' ),
+			new DataTypeDefinitions(),
+			new EntityTypeDefinitions(),
+			new HashSiteStore()
+		);
 	}
 
 }

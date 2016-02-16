@@ -10,6 +10,11 @@ May be used to define additional data types. See also the WikibaseClientDataType
 &$dataTypeDefinitions: the array of data type definitions, as defined by WikibaseRepo.datatypes.php.
   Hook handlers may add additional definitions. See the datatypes.wiki file for details.
 
+'WikibaseRepoEntityTypes': Called when constructing the top level WikibaseRepo factory;
+May be used to define additional entity types. See also the WikibaseClientEntityTypes hook.
+&$entityTypeDefinitions: the array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
+  Hook handlers may add additional definitions. See the entitytypes.wiki file for details.
+
 'WikibaseTextForSearchIndex': Called by EntityContent::getTextForSearchIndex() to allow
 extra text to be passed to the search engine for indexing. If the hook function returns
 false, no text at all will be passed to the search index.
@@ -37,6 +42,11 @@ $change: the Change object representing the change
 May be used to define additional data types. See also the WikibaseRepoDataTypes hook.
 &$dataTypeDefinitions: the array of data type definitions, as defined by WikibaseClient.datatypes.php.
   Hook handlers may add additional definitions. See the datatypes.wiki file for details.
+
+'WikibaseClientEntityTypes': Called when constructing the top level WikibaseClient factory;
+May be used to define additional entity types. See also the WikibaseRepoEntityTypes hook.
+&$entityTypeDefinitions: the array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
+  Hook handlers may add additional definitions. See the entitytypes.wiki file for details.
 
 'WikibaseHandleChanges': Called by ChangeHandler::handleChange() to allow pre-processing
 of changes.
