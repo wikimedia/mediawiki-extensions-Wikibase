@@ -1,0 +1,25 @@
+Entities as defined by Wikibase have a unique identifier and a type. As Wikibase is an extension of
+MediaWiki, every entity object is stored on its own page in a given namespace that can hold entities
+of one type.
+
+The EntityDocument interface describes this construct and adds some methods around it that allow
+getting the type, getting and setting the id, creating a copy and checking if an entity has content
+and whether two entities are equal. It is important that the identifier does not count as content
+and neither affects emptiness nor equality.
+
+All entities must implement this interface. The two entity types 'item' and 'property' are defined
+in Wikibase by default. They can be enabled by defining their namespace.
+
+The actual content of an entity can be anything. However, Wikibase defines some basic structures
+including labels, descriptions, aliases and statements. If an entity holds one of these structures,
+it has to implement the corresponding provider interface (eg. LabelsProvider).
+
+To support an entity type, additionally to defining the entity itself, the following services need
+to be implemented and registered:
+
+* Serializers and Deserializers must be defined to convert the entity into native data structures
+  that can be (de-)serialized as json. These classes have to implement the DispatchableSerializer
+  respectively the DispatchableDeserializer interfaces from the serialization compoment.
+* MediaWiki bindings are needed by defining a content class extending EntityContent and a handler
+  class extending EntityHandler. Furthermore, the handler has to be globally registered in
+  $wgContentHandlers. It is used to create instances of the content class.
