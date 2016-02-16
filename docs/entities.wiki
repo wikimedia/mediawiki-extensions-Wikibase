@@ -1,0 +1,4 @@
+TODO
+* abstract definition of entity
+* entity types defined by Wikibase
+* extension mechanism to register more entity types
