@@ -31,7 +31,7 @@ class FakeEntityDocument implements EntityDocument {
 	}
 
 	/**
-	 * @return string
+	 * @return string Returns the entity type of the provided EntityId.
 	 */
 	public function getType() {
 		return $this->id->getEntityType();
