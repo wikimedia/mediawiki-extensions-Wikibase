@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_5438bccf",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T13:50:45Z",
+      "side": 1,
+      "message": "This would still break our current grafana dashboard.",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d44b4c61",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T13:50:45Z",
+      "side": 1,
+      "message": "Not a useful information",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_f4776899",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T13:50:45Z",
+      "side": 1,
+      "message": "Whitespace instead of tab",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_749938c6",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T13:50:45Z",
+      "side": 1,
+      "message": "`PerformanceMark` seems quite useless to me, it\u0027s used as a plain object, so it could just as well be one.",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_d4882c78",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T13:50:45Z",
+      "side": 1,
+      "message": "I think that name is wrong. Wikipedia says »A statistic (singular) is a single measure of some attribute of a sample«.",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_94a71408",
+        "filename": "repo/resources/performance/Statistic.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T13:50:45Z",
+      "side": 1,
+      "message": "You can also just do `Math.max.apply(null, [1,5,10])`.",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_54b51c2e",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T13:50:45Z",
+      "side": 1,
+      "message": "I still don\u0027t get why this should only work in debug mode. And I don\u0027t particularly like the hash thing. How about just having an explicit query parameter?",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_14bb2424",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T13:50:45Z",
+      "side": 1,
+      "message": "This type is in Wikibase Repo and cannot be used in View.",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
