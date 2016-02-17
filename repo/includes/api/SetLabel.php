@@ -53,7 +53,7 @@ class SetLabel extends ModifyTerm {
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
 		if ( !( $entity instanceof FingerprintProvider ) ) {
-			$this->errorReporter->dieError( 'The given entity does not contain labels', 'no-labels' );
+			$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-supported' );
 		}
 
 		$summary = $this->createSummary( $params );

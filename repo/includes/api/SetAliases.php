@@ -103,7 +103,7 @@ class SetAliases extends ModifyEntity {
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
 		if ( !( $entity instanceof FingerprintProvider ) ) {
-			$this->errorReporter->dieError( 'The given entity does not contain aliases', 'no-aliases' );
+			$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
 		}
 
 		$summary = $this->createSummary( $params );
