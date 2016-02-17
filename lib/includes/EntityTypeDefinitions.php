@@ -65,4 +65,11 @@ class EntityTypeDefinitions {
 		return $this->entityTypeDefinitions->getMapForDefinitionField( 'change-factory-callback' );
 	}
 
+	/**
+	 * @return string[]
+	 */
+	public function getContentModelMapping() {
+		return $this->entityTypeDefinitions->getMapForDefinitionField( 'content-model' );
+	}
+
 }

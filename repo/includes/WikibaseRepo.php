@@ -1097,11 +1097,7 @@ class WikibaseRepo {
 	 * @return array
 	 */
 	public function getContentModelMappings() {
-		// @TODO: We should have smth. like this for namespaces too
-		$map = array(
-			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
-		);
+		$map = $this->entityTypeDefinitions->getContentModelMapping();
 
 		Hooks::run( 'WikibaseContentModelMapping', array( &$map ) );
 
