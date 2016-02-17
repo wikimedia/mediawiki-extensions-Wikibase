@@ -5,10 +5,12 @@ namespace Wikibase\Repo\ParserOutput;
 use InvalidArgumentException;
 use ParserOptions;
 use ParserOutput;
+use RuntimeException;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -21,10 +23,15 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\ViewFactory;
 use Wikibase\View\EmptyEditSectionGenerator;
-use Wikibase\View\EntityViewFactory;
+use Wikibase\View\EntityView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
+use Wikibase\View\RepoViewFactory;
+use Wikimedia\Assert\Assert;
+use Wikimedia\Assert\PostconditionException;
 
 /**
  * Creates the parser output for an entity.
@@ -39,6 +46,11 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityParserOutputGenerator {
+
+	/**
+	 * @var ViewFactory
+	 */
+	private $viewFactory;
 
 	/**
 	 * @var EntityViewFactory
@@ -86,6 +98,7 @@ class EntityParserOutputGenerator {
 	private $languageCode;
 
 	/**
+	 * @param ViewFactory $viewFactory
 	 * @param EntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -97,6 +110,7 @@ class EntityParserOutputGenerator {
 	 * @param string $languageCode
 	 */
 	public function __construct(
+		ViewFactory $viewFactory,
 		EntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
@@ -107,6 +121,7 @@ class EntityParserOutputGenerator {
 		array $dataUpdaters,
 		$languageCode
 	) {
+		$this->viewFactory = $viewFactory;
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -131,6 +146,7 @@ class EntityParserOutputGenerator {
 	 * @param bool $generateHtml
 	 *
 	 * @throws InvalidArgumentException
+	 * @throws RuntimeException
 	 * @return ParserOutput
 	 */
 	public function getParserOutput(
@@ -299,8 +315,9 @@ class EntityParserOutputGenerator {
 			$this->templateFactory
 		) : new EmptyEditSectionGenerator();
 
-		$entityView = $this->entityViewFactory->newEntityView(
+		$entityView = $this->entityViewFactory->getEntityView(
 			$entityRevision->getEntity()->getType(),
+			$this->viewFactory,
 			$this->languageCode,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
