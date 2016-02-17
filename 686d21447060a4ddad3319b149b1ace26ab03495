@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_f492084e",
+        "filename": "repo/includes/api/ModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-17T14:10:47Z",
+      "side": 0,
+      "message": "This is what dieException does. Why did you removed this?",
+      "revId": "686d21447060a4ddad3319b149b1ace26ab03495",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
