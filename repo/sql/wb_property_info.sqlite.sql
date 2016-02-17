@@ -7,4 +7,3 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_property_info (
 ) /*$wgDBTableOptions*/;
 
 CREATE INDEX IF NOT EXISTS /*i*/pi_type ON /*_*/wb_property_info (pi_type);
-
