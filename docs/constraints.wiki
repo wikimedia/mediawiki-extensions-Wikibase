@@ -72,4 +72,3 @@ standard entity types:
 * The labels of Properties (but not Items) must be unique per language.
 * Site links are unique, that is, only one Item can contain a given sitelink.
 * Any Item can only contain one SiteLink for any given site.
-

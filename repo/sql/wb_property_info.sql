@@ -7,4 +7,3 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_property_info (
   PRIMARY KEY ( pi_property_id ),
   INDEX pi_type ( pi_type )
 ) /*$wgDBTableOptions*/;
-
