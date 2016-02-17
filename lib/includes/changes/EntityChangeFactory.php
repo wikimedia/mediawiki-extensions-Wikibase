@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityChange;
+use Wikimedia\Assert\Assert;
 
 /**
  * Factory for EntityChange objects
@@ -36,15 +37,17 @@ class EntityChangeFactory {
 
 	/**
 	 * @param EntityDiffer $entityDiffer
-	 * @param string[] $changeClasses Maps entity type IDs to subclasses of EntityChange.
+	 * @param callable[] $changeFactoryCallbacks Maps entity type IDs to callbacks returning instances of EntityChange.
 	 * Entity types not mapped explicitly are assumed to use EntityChange itself.
 	 */
 	public function __construct(
 		EntityDiffer $entityDiffer,
-		array $changeClasses = array()
+		array $changeFactoryCallbacks = array()
 	) {
+		Assert::parameterElementType( 'callable', $changeFactoryCallbacks, '$changeFactoryCallbacks' );
+
+		$this->changeFactoryCallbacks = $changeFactoryCallbacks;
 		$this->entityDiffer = $entityDiffer;
-		$this->changeClasses = $changeClasses;
 	}
 
 	/**
@@ -59,29 +62,31 @@ class EntityChangeFactory {
 	public function newForEntity( $action, EntityId $entityId, array $fields = array() ) {
 		$entityType = $entityId->getEntityType();
 
-		if ( isset( $this->changeClasses[ $entityType ] ) ) {
-			$class = $this->changeClasses[$entityType];
+		if ( isset( $this->changeFactoryCallbacks[$entityType ] ) ) {
+			$entityChange = call_user_func( $this->changeFactoryCallbacks[$entityType], $fields );
+
+			Assert::postcondition(
+				$entityChange instanceof EntityChange,
+				'Callback must return an instance of EntityChange'
+			);
 		} else {
-			$class = EntityChange::class;
+			$entityChange = new EntityChange( $fields );
 		}
 
-		/** @var EntityChange $instance  */
-		$instance = new $class( $fields );
-
-		if ( !$instance->hasField( 'object_id' ) ) {
-			$instance->setField( 'object_id', $entityId->getSerialization() );
+		if ( !$entityChange->hasField( 'object_id' ) ) {
+			$entityChange->setField( 'object_id', $entityId->getSerialization() );
 		}
 
-		if ( !$instance->hasField( 'info' ) ) {
-			$instance->setField( 'info', array() );
+		if ( !$entityChange->hasField( 'info' ) ) {
+			$entityChange->setField( 'info', array() );
 		}
 
 		// Note: the change type determines how the client will
 		// instantiate and handle the change
 		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
-		$instance->setField( 'type', $type );
+		$entityChange->setField( 'type', $type );
 
-		return $instance;
+		return $entityChange;
 	}
 
 	/**

@@ -909,15 +909,9 @@ final class WikibaseClient {
 	 * @return EntityChangeFactory
 	 */
 	public function getEntityChangeFactory() {
-		//TODO: take this from a setting or registry.
-		$changeClasses = array(
-			Item::ENTITY_TYPE => ItemChange::class,
-			// Other types of entities will use EntityChange
-		);
-
 		return new EntityChangeFactory(
 			new EntityDiffer(),
-			$changeClasses
+			$this->entityTypeDefinitions->getChangeFactoryCallbacks()
 		);
 	}
 
