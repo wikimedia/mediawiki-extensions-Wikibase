@@ -282,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_93888ded",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-17T10:43:14Z",
+      "side": 1,
+      "message": "This sentence seems to mix entity type and data type. I\u0027m more confused than ever.",
+      "parentUuid": "4ea78b8a_fd330008",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_7b208396",
         "filename": "view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.js",
         "patchSetId": 3
@@ -398,6 +416,24 @@
       "side": 1,
       "message": "It\u0027s actually called datatype, see https://www.wikidata.org/wiki/Special:ListDatatypes",
       "parentUuid": "4ea78b8a_a08d6a38",
+      "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_53721511",
+        "filename": "view/resources/wikibase/wikibase.ValueFormatterFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-17T10:43:14Z",
+      "side": 1,
+      "message": "Yes, and we are trying to slowly change this to the much more specific terms \"property type\" and \"value type\".",
+      "parentUuid": "4ea78b8a_5d0c9445",
       "revId": "a90f264d13343c7fed6ed4f616e45dbc451bb1b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
