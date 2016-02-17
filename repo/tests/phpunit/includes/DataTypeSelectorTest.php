@@ -18,13 +18,34 @@ use Wikibase\DataTypeSelector;
 class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * @param string $propertyType
+	 *
+	 * @return DataType
+	 */
+	private function newDataType( $propertyType ) {
+		$dataType = $this->getMockBuilder( 'DataTypes\DataType' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$dataType->expects( $this->any() )
+			->method( 'getId' )
+			->will( $this->returnValue( $propertyType ) );
+
+		$dataType->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( '(datatypes-type-' . $propertyType . ')' ) );
+
+		return $dataType;
+	}
+
+	/**
 	 * @param DataType[]|null $dataTypes
 	 *
 	 * @return DataTypeSelector
 	 */
 	private function newInstance( array $dataTypes = null ) {
 		return new DataTypeSelector(
-			$dataTypes !== null ? $dataTypes : array( new DataType( '<PT>', '<VT>' ) ),
+			$dataTypes !== null ? $dataTypes : array( $this->newDataType( '<PT>' ) ),
 			'qqx'
 		);
 	}
@@ -65,14 +86,14 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 				. '</select>'
 			),
 			array(
-				array( new DataType( '<PT>', '<VT>' ) ),
+				array( $this->newDataType( '<PT>' ) ),
 				'',
 				'<select name="&lt;NAME&gt;" id="&lt;ID&gt;" class="wb-select">'
 				. '<option value="&lt;PT&gt;">(datatypes-type-&lt;PT>)</option>'
 				. '</select>'
 			),
 			array(
-				array( new DataType( 'PT1', 'VT1' ), new DataType( 'PT2', 'VT2' ) ),
+				array( $this->newDataType( 'PT1' ), $this->newDataType( 'PT2' ) ),
 				'PT2',
 				'<select name="&lt;NAME&gt;" id="&lt;ID&gt;" class="wb-select">'
 				. '<option value="PT1">(datatypes-type-PT1)</option>'
@@ -89,7 +110,7 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider testGetOptionsHtmlProvider
+	 * @dataProvider getOptionsHtmlProvider
 	 */
 	public function testGetOptionsHtml( $selectedTypeId, $expected ) {
 		$selector = $this->newInstance();
@@ -97,7 +118,7 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( $expected, $html );
 	}
 
-	public function testGetOptionsHtmlProvider() {
+	public function getOptionsHtmlProvider() {
 		return array(
 			array(
 				'',
