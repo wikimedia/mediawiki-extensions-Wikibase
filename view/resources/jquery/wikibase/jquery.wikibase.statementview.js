@@ -777,10 +777,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var isValid = true;
 
 		$.each( listview.value(), function ( key, view ) {
-			if ( !view.isValid() ) {
-				isValid = false;
-				return false;
-			}
+			isValid = view.isValid();
+			return isValid;
 		} );
 
 		return isValid;
