@@ -12,6 +12,7 @@ use Hooks;
 use IContextSource;
 use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
+use MWException;
 use RequestContext;
 use Serializers\Serializer;
 use SiteSQLStore;
@@ -231,10 +232,16 @@ class WikibaseRepo {
 	/**
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
+	 * @throws MWException
 	 * @return WikibaseRepo
 	 */
 	private static function newInstance() {
 		global $wgWBRepoDataTypes, $wgWBRepoSettings, $wgContLang;
+
+		if ( !is_array( $wgWBRepoDataTypes ) ) {
+			throw new MWException( '$wgWBRepoDataTypes must be an array. Maybe you forgot to '
+				. 'require Wikibase.php in your LocalSettings.php?' );
+		}
 
 		$dataTypeDefinitions = $wgWBRepoDataTypes;
 		Hooks::run( 'WikibaseRepoDataTypes', array( &$dataTypeDefinitions ) );
