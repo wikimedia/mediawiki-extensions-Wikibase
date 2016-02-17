@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_d365a542",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-17T11:42:24Z",
+      "side": 1,
+      "message": "Just isEmpty.",
+      "revId": "441b364d32bd4b4ec4982e95276937617972db0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_8e54e602",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-17T11:42:24Z",
+      "side": 1,
+      "message": "expanded",
+      "range": {
+        "startLine": 360,
+        "startChar": 6,
+        "endLine": 360,
+        "endChar": 13
+      },
+      "revId": "441b364d32bd4b4ec4982e95276937617972db0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
