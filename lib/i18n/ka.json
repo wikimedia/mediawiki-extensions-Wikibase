@@ -3,7 +3,8 @@
 		"authors": [
 			"David1010",
 			"Tokoko",
-			"MIKHEIL"
+			"MIKHEIL",
+			"BRUTE"
 		]
 	},
 	"wikibase-lib-desc": "ვიკიბაზისა და ვიკიბაზის კლიენტის გაფართოებების საერთო ფუნქციები",
@@ -21,10 +22,12 @@
 	"wikibase-error-ui-no-external-page": "შესაბამის საიტზე მითითებული სტატიის მოძებნა ვერ მოხერხდა.",
 	"wikibase-error-ui-edit-conflict": "რედაქტირების კონფლიქტი. გადატვირთეთ და თავიდან შეინახეთ.",
 	"wikibase-quantitydetails-amount": "თანხა",
+	"wikibase-quantitydetails-unit": "ერთეული",
 	"wikibase-timedetails-time": "დრო",
 	"wikibase-timedetails-isotime": "დროის ბეჭედი",
 	"wikibase-timedetails-timezone": "სასაათო სარტყელი",
 	"wikibase-timedetails-calendar": "კალენდარი",
+	"wikibase-timedetails-precision": "სიზუსტე",
 	"wikibase-timedetails-before": "მანამდე",
 	"wikibase-timedetails-after": "შემდეგ",
 	"wikibase-globedetails-longitude": "გრძედი",
@@ -37,7 +40,13 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "უცნობი მნიშვნელობა",
 	"wikibase-snakview-snaktypeselector-novalue": "მნიშვნელობა არ არის მითითებული",
 	"wikibase-tooltip-error-details": "დეტალები",
+	"wikibase-validator-invalid": "არასწორი მნიშვნელობა",
+	"wikibase-validator-missing-field": "აკლია აუცილებელი ველი \"$1\"",
+	"wikibase-validator-bad-type": "$2 $1-ის ნაცვლად",
+	"wikibase-validator-too-long": "არ უნდა იყოს $1 სიმბოლოზე გრძელი.",
+	"wikibase-validator-too-short": "უნდა იყოს $1 სიმბოლოზე გრძელი.",
 	"wikibase-validator-no-such-entity": "$1 არ მოიძებნა",
+	"wikibase-validator-no-validators": "აკრძალულია",
 	"datatypes-type-wikibase-item": "ელემენტი",
 	"datatypes-type-wikibase-property": "თვისება",
 	"datatypes-type-commonsMedia": "მედიაფაილი ვიკისაწყობში",

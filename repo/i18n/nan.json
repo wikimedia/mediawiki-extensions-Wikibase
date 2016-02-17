@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ianbu"
+			"Ianbu",
+			"Luuva"
 		]
 	},
-	"wikibase-edit": "siu-kái"
+	"wikibase-edit": "siu-kái",
+	"wikibase-add": "ka-thiam",
+	"wikibase-sitelinks-special": "Kî-tha ê chām"
 }
