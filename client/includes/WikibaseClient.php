@@ -796,14 +796,7 @@ final class WikibaseClient {
 	 * @return EntityFactory
 	 */
 	public function getEntityFactory() {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => Item::class,
-			Property::ENTITY_TYPE => Property::class,
-		);
-
-		//TODO: provide a hook or registry for adding more.
-
-		return new EntityFactory( $entityClasses );
+		return new EntityFactory( $this->entityTypeDefinitions->getEntityFactoryCallbacks() );
 	}
 
 	/**
