@@ -94,6 +94,7 @@ use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
+use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -109,6 +110,7 @@ use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1446,7 +1448,7 @@ class WikibaseRepo {
 			$dataTypeLookup
 		);
 
-		$entityViewFactory = new EntityViewFactory(
+		$viewFactory = new ViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
@@ -1465,7 +1467,7 @@ class WikibaseRepo {
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		return new EntityParserOutputGeneratorFactory(
-			$entityViewFactory,
+			new DispatchingEntityViewFactory( $viewFactory ),
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
 			$this->getLanguageFallbackChainFactory(),

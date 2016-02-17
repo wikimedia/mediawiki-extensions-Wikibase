@@ -19,7 +19,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
-use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
@@ -38,7 +37,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
 class EntityParserOutputGenerator {
 
 	/**
-	 * @var EntityViewFactory
+	 * @var DispatchingEntityViewFactory
 	 */
 	private $entityViewFactory;
 
@@ -83,7 +82,7 @@ class EntityParserOutputGenerator {
 	private $languageCode;
 
 	/**
-	 * @param EntityViewFactory $entityViewFactory
+	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
@@ -94,7 +93,7 @@ class EntityParserOutputGenerator {
 	 * @param string $languageCode
 	 */
 	public function __construct(
-		EntityViewFactory $entityViewFactory,
+		DispatchingEntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,

@@ -12,7 +12,6 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
-use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -29,7 +28,7 @@ class EntityParserOutputGeneratorFactory {
 	private $templateFactory;
 
 	/**
-	 * @var EntityViewFactory
+	 * @var DispatchingEntityViewFactory
 	 */
 	private $entityViewFactory;
 
@@ -79,7 +78,7 @@ class EntityParserOutputGeneratorFactory {
 	private $globeUris;
 
 	/**
-	 * @param EntityViewFactory $entityViewFactory
+	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
@@ -92,7 +91,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param string[] $globeUris Mapping of globe uris to string names.
 	 */
 	public function __construct(
-		EntityViewFactory $entityViewFactory,
+		DispatchingEntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
