@@ -56,9 +56,19 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGivenNonArray_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( null );
+	}
+
 	public function testGivenNonArrayLabels_exceptionIsThrown() {
 		$this->expectDeserializationException();
 		$this->deserializer->deserialize( array( 'label' => null ) );
+	}
+
+	public function testGivenInvalidTermSerialization_exceptionIsThrown() {
+		$this->expectDeserializationException();
+		$this->deserializer->deserialize( array( 'label' => array( null ) ) );
 	}
 
 	private function expectDeserializationException() {
