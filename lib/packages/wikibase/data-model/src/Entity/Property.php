@@ -251,4 +251,15 @@ class Property extends Entity implements StatementListHolder {
 		$this->statements = $statements;
 	}
 
+	/**
+	 * @see EntityDocument::copy
+	 *
+	 * @since 0.1
+	 *
+	 * @return self
+	 */
+	public function copy() {
+		return unserialize( serialize( $this ) );
+	}
+
 }
