@@ -14,13 +14,19 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
+ * This is a basic factory to create views for DataModel objects. It contains all dependencies of
+ * the views besides request-specific options. Those are required in the parameters.
+ *
+ * @see ViewFactory for a wrapper around this containing request-specific parameters
+ *
  * @since 0.5
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Mättig
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityViewFactory {
+class BasicViewFactory {
 
 	/**
 	 * @var HtmlSnakFormatterFactory
@@ -145,73 +151,91 @@ class EntityViewFactory {
 	}
 
 	/**
-	 * Creates an EntityView suitable for rendering the entity.
+	 * Creates an ItemView suitable for rendering the item.
 	 *
-	 * @param string $entityType
 	 * @param string $languageCode
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
-	 * @throws InvalidArgumentException
-	 * @return EntityView
+	 * @return ItemView
 	 */
-	public function newEntityView(
-		$entityType,
+	public function newItemView(
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
-	 ) {
+	) {
 		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
 
 		$statementSectionsView = $this->newStatementSectionsView(
-			$entityType,
 			$languageCode,
-			$fallbackChain,
 			$labelDescriptionLookup,
+			$fallbackChain,
 			$editSectionGenerator
 		);
 
-		// @fixme all that seems needed in EntityView is language code and dir.
+		// @fixme all that seems needed in ItemView is language code and dir.
 		$language = Language::factory( $languageCode );
 
-		// @fixme support more entity types
-		switch ( $entityType ) {
-			case 'item':
-				$siteLinksView = new SiteLinksView(
-					$this->templateFactory,
-					$this->siteStore->getSites(),
-					$editSectionGenerator,
-					$this->plainTextIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup ),
-					$this->languageNameLookup,
-					$this->badgeItems,
-					$this->specialSiteLinkGroups
-				);
+		$siteLinksView = new SiteLinksView(
+			$this->templateFactory,
+			$this->siteStore->getSites(),
+			$editSectionGenerator,
+			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup ),
+			$this->languageNameLookup,
+			$this->badgeItems,
+			$this->specialSiteLinkGroups
+		);
 
-				return new ItemView(
-					$this->templateFactory,
-					$entityTermsView,
-					$statementSectionsView,
-					$language,
-					$siteLinksView,
-					$this->siteLinkGroups
-				);
-			case 'property':
-				return new PropertyView(
-					$this->templateFactory,
-					$entityTermsView,
-					$statementSectionsView,
-					$this->dataTypeFactory,
-					$language
-				);
-		}
-
-		throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );
+		return new ItemView(
+			$this->templateFactory,
+			$entityTermsView,
+			$statementSectionsView,
+			$language,
+			$siteLinksView,
+			$this->siteLinkGroups
+		);
 	}
 
 	/**
-	 * @param string $entityType
+	 * Creates an PropertyView suitable for rendering the property.
+	 *
+	 * @param string $languageCode
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param EditSectionGenerator $editSectionGenerator
+	 *
+	 * @return PropertyView
+	 */
+	public function newPropertyView(
+		$languageCode,
+		LabelDescriptionLookup $labelDescriptionLookup,
+		LanguageFallbackChain $fallbackChain,
+		EditSectionGenerator $editSectionGenerator
+	) {
+		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
+
+		$statementSectionsView = $this->newStatementSectionsView(
+			$languageCode,
+			$labelDescriptionLookup,
+			$fallbackChain,
+			$editSectionGenerator
+		);
+
+		// @fixme all that seems needed in PropertyView is language code and dir.
+		$language = Language::factory( $languageCode );
+
+		return new PropertyView(
+			$this->templateFactory,
+			$entityTermsView,
+			$statementSectionsView,
+			$this->dataTypeFactory,
+			$language
+		);
+	}
+
+	/**
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
@@ -219,11 +243,10 @@ class EntityViewFactory {
 	 *
 	 * @return StatementSectionsView
 	 */
-	private function newStatementSectionsView(
-		$entityType,
+	public function newStatementSectionsView(
 		$languageCode,
-		LanguageFallbackChain $fallbackChain,
 		LabelDescriptionLookup $labelDescriptionLookup,
+		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
@@ -259,7 +282,7 @@ class EntityViewFactory {
 	 *
 	 * @return EntityTermsView
 	 */
-	private function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
+	public function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$editSectionGenerator,

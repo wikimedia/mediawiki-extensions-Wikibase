@@ -8,13 +8,13 @@ use SiteList;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\View\BasicViewFactory;
 use Wikibase\View\EntityIdFormatterFactory;
-use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 
 /**
- * @covers Wikibase\View\EntityViewFactory
+ * @covers Wikibase\View\BasicViewFactory
  *
  * @uses Wikibase\View\ClaimHtmlGenerator
  * @uses Wikibase\View\EditSectionGenerator
@@ -36,10 +36,11 @@ use Wikibase\View\Template\TemplateRegistry;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Mättig
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
+class BasicViewFactoryTest extends PHPUnit_Framework_TestCase {
 
-	private function newEntityViewFactory(
+	private function newBasicViewFactory(
 		EntityIdFormatterFactory $htmlFactory = null,
 		EntityIdFormatterFactory $plainFactory = null
 	) {
@@ -49,7 +50,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 
-		return new EntityViewFactory(
+		return new BasicViewFactory(
 			$htmlFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML ),
 			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
@@ -72,7 +73,7 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		EntityIdFormatterFactory $plainFormatterFactory
 	) {
 		$this->setExpectedException( 'InvalidArgumentException' );
-		$this->newEntityViewFactory( $htmlFormatterFactory, $plainFormatterFactory );
+		$this->newBasicViewFactory( $htmlFormatterFactory, $plainFormatterFactory );
 	}
 
 	public function invalidConstructorArgumentsProvider() {
@@ -86,42 +87,52 @@ class EntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider newEntityViewProvider
-	 */
-	public function testNewEntityView( $expectedClass, $entityType ) {
+	public function testNewItemView() {
 		$languageFallback = new LanguageFallbackChain( array() );
 
-		$entityView = $this->newEntityViewFactory()->newEntityView(
-			$entityType,
+		$itemView = $this->newBasicViewFactory()->newItemView(
 			'de',
 			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
 			$languageFallback,
 			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
 		);
 
-		$this->assertInstanceOf( $expectedClass, $entityView );
+		$this->assertInstanceOf( 'Wikibase\View\ItemView', $itemView );
 	}
 
-	public function newEntityViewProvider() {
-		return array(
-			array( 'Wikibase\View\ItemView', 'item' ),
-			array( 'Wikibase\View\PropertyView', 'property' )
-		);
-	}
-
-	public function testNewEntityView_withInvalidType() {
+	public function testNewPropertyView() {
 		$languageFallback = new LanguageFallbackChain( array() );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
-
-		$this->newEntityViewFactory()->newEntityView(
-			'kittens',
+		$propertyView = $this->newBasicViewFactory()->newPropertyView(
 			'de',
 			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
 			$languageFallback,
 			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
 		);
+
+		$this->assertInstanceOf( 'Wikibase\View\PropertyView', $propertyView );
+	}
+
+	public function testNewStatementSectionsView() {
+		$languageFallback = new LanguageFallbackChain( array() );
+
+		$statementSectionsView = $this->newBasicViewFactory()->newStatementSectionsView(
+			'de',
+			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
+			$languageFallback,
+			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
+		);
+
+		$this->assertInstanceOf( 'Wikibase\View\StatementSectionsView', $statementSectionsView );
+	}
+
+	public function testNewEntityTermsView() {
+		$entityTermsView = $this->newBasicViewFactory()->newEntityTermsView(
+			'de',
+			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
+		);
+
+		$this->assertInstanceOf( 'Wikibase\View\EntityTermsView', $entityTermsView );
 	}
 
 	private function getEntityIdFormatterFactory( $format ) {

@@ -6,12 +6,14 @@ use DataValues\StringValue;
 use Language;
 use MediaWikiTestCase;
 use ParserOptions;
+use RuntimeException;
 use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -24,6 +26,7 @@ use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewFactory;
 
 /**
  * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
@@ -118,6 +121,19 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$this->assertFalse( $parserOutput->isCacheable() );
 	}
 
+	/**
+	 * @expectedException RuntimeException
+	 */
+	public function testGetParserOutput_noViewThrowsException() {
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
+
+		$property = Property::newFromType( 'string' );
+		$timestamp = wfTimestamp( TS_MW );
+		$revision = new EntityRevision( $property, 13044, $timestamp );
+
+		$entityParserOutputGenerator->getParserOutput( $revision, $this->getParserOptions() );
+	}
+
 	public function testTitleText_ItemHasNolabel() {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
@@ -146,6 +162,13 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
 
+		$entityViewFactoryCallbacks = array(
+			Item::ENTITY_TYPE => function( ViewFactory $viewFactory ) {
+				$this->assertEquals( 'item-view', $viewFactory->newItemView() );
+				return $this->getEntityView();
+			}
+		);
+
 		$dataUpdaters = array(
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
@@ -156,16 +179,29 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 
 		return new EntityParserOutputGenerator(
-			$this->getEntityViewFactory(),
+			$this->getBasicViewFactory(),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
 			new SqlEntityInfoBuilderFactory(),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$entityDataFormatProvider,
+			$entityViewFactoryCallbacks,
 			$dataUpdaters,
 			'en'
 		);
+	}
+
+	private function getBasicViewFactory() {
+		$basicViewFactory = $this->getMockBuilder( 'Wikibase\View\BasicViewFactory' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$basicViewFactory->expects( $this->any() )
+			->method( 'newItemView' )
+			->will( $this->returnValue( 'item-view' ) );
+
+		return $basicViewFactory;
 	}
 
 	private function newLanguageFallbackChain() {
@@ -206,11 +242,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		return $item;
 	}
 
-	private function getEntityViewFactory() {
-		$entityViewFactory = $this->getMockBuilder( 'Wikibase\View\EntityViewFactory' )
-			->disableOriginalConstructor()
-			->getMock();
-
+	private function getEntityView() {
 		$entityView = $this->getMockBuilder( 'Wikibase\View\EntityView' )
 			->setMethods( array(
 				'getTitleHtml',
@@ -232,11 +264,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->method( 'getPlaceholders' )
 			->will( $this->returnValue( '<PLACEHOLDERS>' ) );
 
-		$entityViewFactory->expects( $this->any() )
-			->method( 'newEntityView' )
-			->will( $this->returnValue( $entityView ) );
-
-		return $entityViewFactory;
+		return $entityView;
 	}
 
 	private function getConfigBuilderMock() {
