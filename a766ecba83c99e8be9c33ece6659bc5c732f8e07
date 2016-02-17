@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_9403940f",
+        "filename": "repo/tests/phpunit/includes/DataTypeSelectorTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-02-17T13:21:55Z",
+      "side": 1,
+      "message": "does this set the function back to what it was before? (e.g. the one in DataTypes.mw.php if DataTypes is loaded as an extension)",
+      "revId": "a766ecba83c99e8be9c33ece6659bc5c732f8e07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
