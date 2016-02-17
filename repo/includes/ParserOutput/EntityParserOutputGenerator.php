@@ -22,9 +22,9 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
-use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
+use Wikibase\View\ViewFactory;
 
 /**
  * Creates the parser output for an entity.
@@ -39,6 +39,11 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityParserOutputGenerator {
+
+	/**
+	 * @var ViewFactory
+	 */
+	private $viewFactory;
 
 	/**
 	 * @var EntityViewFactory
@@ -86,6 +91,7 @@ class EntityParserOutputGenerator {
 	private $languageCode;
 
 	/**
+	 * @param ViewFactory $viewFactory
 	 * @param EntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -97,6 +103,7 @@ class EntityParserOutputGenerator {
 	 * @param string $languageCode
 	 */
 	public function __construct(
+		ViewFactory $viewFactory,
 		EntityViewFactory $entityViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
@@ -107,6 +114,7 @@ class EntityParserOutputGenerator {
 		array $dataUpdaters,
 		$languageCode
 	) {
+		$this->viewFactory = $viewFactory;
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -301,6 +309,7 @@ class EntityParserOutputGenerator {
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entityRevision->getEntity()->getType(),
+			$this->viewFactory,
 			$this->languageCode,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
