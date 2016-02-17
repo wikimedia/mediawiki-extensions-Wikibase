@@ -102,4 +102,11 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'content-handler-factory-callback' );
 	}
 
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'entity-factory-callback' );
+	}
+
 }

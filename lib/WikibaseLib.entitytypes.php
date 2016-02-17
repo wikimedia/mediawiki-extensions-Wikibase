@@ -18,6 +18,8 @@
  */
 
 use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 
 return array(
@@ -27,7 +29,10 @@ return array(
 		},
 		'deserializer-factory-callback' => function( DeserializerFactory $deserializerFactory ) {
 			return $deserializerFactory->newItemDeserializer();
-		}
+		},
+		'entity-factory-callback' => function() {
+			return new Item();
+		},
 	),
 	'property' => array(
 		'serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -35,6 +40,9 @@ return array(
 		},
 		'deserializer-factory-callback' => function( DeserializerFactory $deserializerFactory ) {
 			return $deserializerFactory->newPropertyDeserializer();
+		},
+		'entity-factory-callback' => function() {
+			return Property::newFromType( '' );
 		}
 	)
 );
