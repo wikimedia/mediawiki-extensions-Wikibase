@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_ee66b34d",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.variations.Value.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-17T21:58:40Z",
+      "side": 1,
+      "message": "missing space :\u0027(",
+      "revId": "80c0b1e48aa486dc0031d55a18a5385fef20c091",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
