@@ -182,6 +182,14 @@
 					}
 
 					var dataType = _getDataType( fetchedProperty );
+					if ( fetchedProperty && !dataType ) {
+						mw.log.warn(
+							'Found property ' + fetchedProperty.getId() + ' in entityStore but couldn\'t find ' +
+							'the datatype "' + fetchedProperty.getDataTypeId() + '" in dataTypeStore. ' +
+							'This is a bug or a configuration issue.'
+						);
+						return;
+					}
 
 					// If the new value's type is not the data value type used by the Snak's
 					// property data type, something is very wrong. Display warning!
