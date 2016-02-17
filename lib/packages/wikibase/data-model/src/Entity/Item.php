@@ -319,4 +319,15 @@ class Item extends Entity implements StatementListHolder {
 			&& $this->statements->equals( $target->statements );
 	}
 
+	/**
+	 * @see EntityDocument::copy
+	 *
+	 * @since 0.1
+	 *
+	 * @return self
+	 */
+	public function copy() {
+		return unserialize( serialize( $this ) );
+	}
+
 }
