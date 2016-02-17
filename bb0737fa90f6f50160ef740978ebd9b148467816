@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_9dcc17c2",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-02-17T18:09:31Z",
+      "side": 1,
+      "message": "whyalllowercase?",
+      "revId": "bb0737fa90f6f50160ef740978ebd9b148467816",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
