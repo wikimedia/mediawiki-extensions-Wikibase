@@ -2,15 +2,15 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use InvalidArgumentException;
+use OutOfBoundsException;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityView;
-use Wikibase\View\ViewFactory;
+use Wikimedia\Assert\Assert;
 
 /**
- * A factory to create EntityView implementations based on entity type.
+ * A factory to create EntityView implementations by entity type based on callbacks.
  *
  * @since 0.5
  *
@@ -20,15 +20,17 @@ use Wikibase\View\ViewFactory;
 class DispatchingEntityViewFactory {
 
 	/**
-	 * @var ViewFactory
+	 * @var callable[]
 	 */
-	private $viewFactory;
+	private $entityViewFactoryCallbacks;
 
 	/**
-	 * @param ViewFactory $viewFactory
+	 * @param callable[] $entityViewFactoryCallbacks
 	 */
-	public function __construct( ViewFactory $viewFactory ) {
-		$this->viewFactory = $viewFactory;
+	public function __construct( array $entityViewFactoryCallbacks ) {
+		Assert::parameterElementType( 'callable', $entityViewFactoryCallbacks, '$entityViewFactoryCallbacks' );
+
+		$this->entityViewFactoryCallbacks = $entityViewFactoryCallbacks;
 	}
 
 	/**
@@ -40,7 +42,7 @@ class DispatchingEntityViewFactory {
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws OutOfBoundsException
 	 * @return EntityView
 	 */
 	public function newEntityView(
@@ -50,24 +52,24 @@ class DispatchingEntityViewFactory {
 		LanguageFallbackChain $languageFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		switch ( $entityType ) {
-			case 'item':
-				return $this->viewFactory->newItemView(
-					$languageCode,
-					$labelDescriptionLookup,
-					$languageFallbackChain,
-					$editSectionGenerator
-				);
-			case 'property':
-				return $this->viewFactory->newPropertyView(
-					$languageCode,
-					$labelDescriptionLookup,
-					$languageFallbackChain,
-					$editSectionGenerator
-				);
-			default:
-				throw new InvalidArgumentException( 'No EntityView for entity type: ' . $entityType );
+		if ( !isset( $this->entityViewFactoryCallbacks[$entityType] ) ) {
+			throw new OutOfBoundsException( "No EntityView is registered for entity type '$entityType'" );
 		}
+
+		$entityView = call_user_func(
+			$this->entityViewFactoryCallbacks[$entityType],
+			$languageCode,
+			$labelDescriptionLookup,
+			$languageFallbackChain,
+			$editSectionGenerator
+		);
+
+		Assert::postcondition(
+			$entityView instanceof EntityView,
+			'Callback must return an instance of EntityView'
+		);
+
+		return $entityView;
 	}
 
 }

@@ -35,6 +35,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -46,6 +47,7 @@ use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -108,9 +110,9 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\View\EntityViewFactory;
-use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\ViewFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1438,48 +1440,83 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
-		global $wgLang;
+		$viewFactory = $this->getViewFactory();
 
-		$templateFactory = TemplateFactory::getDefaultInstance();
-		$dataTypeLookup = $this->getPropertyDataTypeLookup();
+		$entityDataFormatProvider = new EntityDataFormatProvider();
+		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
+		$entityDataFormatProvider->setFormatWhiteList( $formats );
+
+		// TODO move this to WikibaseRepo.entitytypes.php or EntityHandler resp. EntityContent
+		$entityViewFactoryCallbacks = array(
+			Item::ENTITY_TYPE => function(
+				$languageCode,
+				LabelDescriptionLookup $labelDescriptionLookup,
+				LanguageFallbackChain $fallbackChain,
+				EditSectionGenerator $editSectionGenerator
+			) use ( $viewFactory ) {
+				return $viewFactory->newItemView(
+					$languageCode,
+					$labelDescriptionLookup,
+					$fallbackChain,
+					$editSectionGenerator
+				);
+			},
+			Property::ENTITY_TYPE => function(
+				$languageCode,
+				LabelDescriptionLookup $labelDescriptionLookup,
+				LanguageFallbackChain $fallbackChain,
+				EditSectionGenerator $editSectionGenerator
+			) use ( $viewFactory ) {
+				return $viewFactory->newPropertyView(
+					$languageCode,
+					$labelDescriptionLookup,
+					$fallbackChain,
+					$editSectionGenerator
+				);
+			}
+		);
+
+		return new EntityParserOutputGeneratorFactory(
+			new DispatchingEntityViewFactory( $entityViewFactoryCallbacks ),
+			$this->getStore()->getEntityInfoBuilderFactory(),
+			$this->getEntityContentFactory(),
+			$this->getLanguageFallbackChainFactory(),
+			TemplateFactory::getDefaultInstance(),
+			$entityDataFormatProvider,
+			// FIXME: Should this be done for all usages of this lookup, or is the impact of
+			// CachingPropertyInfoStore enough?
+			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
+			$this->getLocalEntityUriParser(),
+			$this->settings->getSetting( 'preferredGeoDataProperties' ),
+			$this->settings->getSetting( 'preferredPageImagesProperties' ),
+			$this->settings->getSetting( 'globeUris' )
+		);
+	}
+
+	/**
+	 * @return ViewFactory
+	 */
+	public function getViewFactory() {
+		/** @var Language $wgLang */
+		global $wgLang;
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			$this->settings->getSetting( 'statementSections' ),
-			$dataTypeLookup
+			$this->getPropertyDataTypeLookup()
 		);
 
-		$viewFactory = new ViewFactory(
+		return new ViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
 			$statementGrouperBuilder->getStatementGrouper(),
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
-			$templateFactory,
+			TemplateFactory::getDefaultInstance(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' )
-		);
-
-		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
-		$entityDataFormatProvider->setFormatWhiteList( $formats );
-
-		return new EntityParserOutputGeneratorFactory(
-			new DispatchingEntityViewFactory( $viewFactory ),
-			$this->getStore()->getEntityInfoBuilderFactory(),
-			$this->getEntityContentFactory(),
-			$this->getLanguageFallbackChainFactory(),
-			$templateFactory,
-			$entityDataFormatProvider,
-			// FIXME: Should this be done for all usages of this lookup, or is the impact of
-			// CachingPropertyInfoStore enough?
-			new InProcessCachingDataTypeLookup( $dataTypeLookup ),
-			$this->getLocalEntityUriParser(),
-			$this->settings->getSetting( 'preferredGeoDataProperties' ),
-			$this->settings->getSetting( 'preferredPageImagesProperties' ),
-			$this->settings->getSetting( 'globeUris' )
 		);
 	}
 
