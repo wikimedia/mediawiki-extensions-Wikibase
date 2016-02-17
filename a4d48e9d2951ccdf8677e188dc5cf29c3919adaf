@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_43e6c040",
+        "filename": "repo/resources/experts/getStore.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-17T21:31:10Z",
+      "side": 1,
+      "message": "not in alphabetical order anymore ;)",
+      "revId": "a4d48e9d2951ccdf8677e188dc5cf29c3919adaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
