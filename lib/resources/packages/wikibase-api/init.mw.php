@@ -18,4 +18,3 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 
 include 'resources.php';
 include 'resources.test.php';
-
