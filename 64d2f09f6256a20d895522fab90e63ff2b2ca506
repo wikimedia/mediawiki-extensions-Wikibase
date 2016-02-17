@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_933acd31",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-17T10:30:13Z",
+      "side": 1,
+      "message": "See comments in PS5.",
+      "revId": "64d2f09f6256a20d895522fab90e63ff2b2ca506",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
