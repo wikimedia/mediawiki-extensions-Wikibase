@@ -9,7 +9,7 @@ use Language;
 use Status;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\FingerprintHolder;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 
@@ -216,8 +216,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return Status
 	 */
 	protected function modifyEntity( EntityDocument &$entity ) {
-		if ( !( $entity instanceof FingerprintHolder ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
+		if ( !( $entity instanceof FingerprintProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
 		}
 
 		$fingerprint = $entity->getFingerprint();
