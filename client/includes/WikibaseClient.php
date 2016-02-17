@@ -772,14 +772,7 @@ final class WikibaseClient {
 	 * @return EntityFactory
 	 */
 	public function getEntityFactory() {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
-		);
-
-		//TODO: provide a hook or registry for adding more.
-
-		return new EntityFactory( $entityClasses );
+		return new EntityFactory( $this->entityTypeDefinitions->getEntityFactoryCallbacks() );
 	}
 
 	/**

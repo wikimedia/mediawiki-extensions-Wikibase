@@ -2,9 +2,11 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use OutOfBoundsException;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikimedia\Assert\Assert;
 
 /**
  * Factory for Entity objects.
@@ -22,17 +24,20 @@ use Wikibase\DataModel\Entity\EntityDocument;
 class EntityFactory {
 
 	/**
-	 * @var array Maps entity types to classes implementing the respective entity.
+	 * @var callable[] Maps entity types to callbacks to create an instance the respective entity.
 	 */
-	private $typeMap;
+	private $callbacks;
 
 	/**
 	 * @since 0.5
 	 *
-	 * @param array $typeToClass Maps entity types to classes implementing the respective entity.
+	 * @param callable[] $callbacks Maps entity types to callbacks to create an instance the respective entity.
+	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $typeToClass ) {
-		$this->typeMap = $typeToClass;
+	public function __construct( array $callbacks ) {
+		Assert::parameterElementType( 'callable', $callbacks, '$callbacks' );
+
+		$this->callbacks = $callbacks;
 	}
 
 	/**
@@ -43,7 +48,7 @@ class EntityFactory {
 	 * @return array all available type identifiers
 	 */
 	public function getEntityTypes() {
-		return array_keys( $this->typeMap );
+		return array_keys( $this->callbacks );
 	}
 
 	/**
@@ -56,23 +61,7 @@ class EntityFactory {
 	 * @return bool
 	 */
 	public function isEntityType( $type ) {
-		return array_key_exists( $type, $this->typeMap );
-	}
-
-	/**
-	 * Returns the class implementing the given entity type.
-	 *
-	 * @param string $type
-	 *
-	 * @throws OutOfBoundsException
-	 * @return string Class
-	 */
-	private function getEntityClass( $type ) {
-		if ( !isset( $this->typeMap[$type] ) ) {
-			throw new OutOfBoundsException( 'Unknown entity type ' . $type );
-		}
-
-		return $this->typeMap[$type];
+		return array_key_exists( $type, $this->callbacks );
 	}
 
 	/**
@@ -82,19 +71,22 @@ class EntityFactory {
 	 *
 	 * @param String $entityType The type of the desired new entity.
 	 *
-	 * @throws RuntimeException
+	 * @throws OutOfBoundsException
 	 * @return EntityDocument The new Entity object.
 	 */
 	public function newEmpty( $entityType ) {
-		$class = $this->getEntityClass( $entityType );
-
-		if ( method_exists( $class, 'newFromType' ) ) {
-			return $class::newFromType( '' );
-		} elseif ( method_exists( $class, 'newEmpty' ) ) {
-			return $class::newEmpty();
-		} else {
-			throw new RuntimeException( "$class does not support a newEmpty method" );
+		if ( !isset( $this->callbacks[$entityType] ) ) {
+			throw new OutOfBoundsException( 'Unknown entity type ' . $entityType );
 		}
+
+		$entity = call_user_func( $this->callbacks[$entityType] );
+
+		Assert::postcondition(
+			$entity instanceof EntityDocument && $entity->getType() === $entityType,
+			'Callback returned no entity or entity of wrong type'
+		);
+
+		return $entity;
 	}
 
 }

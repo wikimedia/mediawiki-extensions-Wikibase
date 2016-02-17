@@ -54,6 +54,13 @@ class EntityTypeDefinitions {
 	/**
 	 * @return callable[]
 	 */
+	public function getEntityFactoryCallbacks() {
+		return $this->entityTypeDefinitions->getMapForDefinitionField( 'entity-factory-callback' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
 	public function getChangeFactoryCallbacks() {
 		return $this->entityTypeDefinitions->getMapForDefinitionField( 'change-factory-callback' );
 	}

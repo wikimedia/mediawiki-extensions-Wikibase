@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
 
 /**
@@ -16,10 +19,21 @@ use Wikibase\EntityFactory;
  */
 class EntityFactoryTest extends \MediaWikiTestCase {
 
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testConstructorWithNoCallback_throwsInvalidArgumentException() {
+		new EntityFactory( array( 'foo' => 'bar' ) );
+	}
+
 	private function getEntityFactory() {
 		return new EntityFactory( array(
-			'item' => 'Wikibase\DataModel\Entity\Item',
-			'property' => 'Wikibase\DataModel\Entity\Property',
+			'item' => function() {
+				return new Item();
+			},
+			'property' => function() {
+				return Property::newFromType( '' );
+			}
 		) );
 	}
 
