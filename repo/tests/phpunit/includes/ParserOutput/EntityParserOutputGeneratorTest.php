@@ -105,7 +105,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	public function testGetParserOutput_dontGenerateHtml() {
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( false );
 
 		$item = $this->newItem();
 		$timestamp = wfTimestamp( TS_MW );
@@ -136,7 +136,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function newEntityParserOutputGenerator() {
+	private function newEntityParserOutputGenerator( $createView = true ) {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 
 		$formats = array( 'json', 'ntriples' );
@@ -145,6 +145,27 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
+
+		$viewFactory = $this->getMockBuilder( 'Wikibase\View\ViewFactory' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$entityViewFactory = $this->getMockBuilder( 'Wikibase\Repo\ParserOutput\EntityViewFactory' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		if ( $createView ) {
+			$entityViewFactory->expects( $this->once() )
+				->method( 'newEntityView' )
+				->with(
+					$this->equalTo( 'item' ),
+					$this->identicalTo( $viewFactory )
+				)
+				->will( $this->returnValue( $this->getEntityView() ) );
+		} else {
+			$entityViewFactory->expects( $this->never() )
+				->method( 'newEntityView' );
+		}
 
 		$dataUpdaters = array(
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
@@ -156,7 +177,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 
 		return new EntityParserOutputGenerator(
-			$this->getEntityViewFactory(),
+			$viewFactory,
+			$entityViewFactory,
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
 			new SqlEntityInfoBuilderFactory(),
@@ -206,11 +228,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		return $item;
 	}
 
-	private function getEntityViewFactory() {
-		$entityViewFactory = $this->getMockBuilder( 'Wikibase\View\EntityViewFactory' )
-			->disableOriginalConstructor()
-			->getMock();
-
+	private function getEntityView() {
 		$entityView = $this->getMockBuilder( 'Wikibase\View\EntityView' )
 			->setMethods( array(
 				'getTitleHtml',
@@ -232,11 +250,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->method( 'getPlaceholders' )
 			->will( $this->returnValue( '<PLACEHOLDERS>' ) );
 
-		$entityViewFactory->expects( $this->any() )
-			->method( 'newEntityView' )
-			->will( $this->returnValue( $entityView ) );
-
-		return $entityViewFactory;
+		return $entityView;
 	}
 
 	private function getConfigBuilderMock() {

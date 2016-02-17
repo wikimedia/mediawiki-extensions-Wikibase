@@ -12,8 +12,8 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
-use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewFactory;
 
 /**
  * @since 0.5
@@ -27,6 +27,11 @@ class EntityParserOutputGeneratorFactory {
 	 * @var TemplateFactory
 	 */
 	private $templateFactory;
+
+	/**
+	 * @var ViewFactory
+	 */
+	private $viewFactory;
 
 	/**
 	 * @var EntityViewFactory
@@ -79,6 +84,7 @@ class EntityParserOutputGeneratorFactory {
 	private $globeUris;
 
 	/**
+	 * @param ViewFactory $viewFactory
 	 * @param EntityViewFactory $entityViewFactory
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -92,6 +98,7 @@ class EntityParserOutputGeneratorFactory {
 	 * @param string[] $globeUris Mapping of globe uris to string names.
 	 */
 	public function __construct(
+		ViewFactory $viewFactory,
 		EntityViewFactory $entityViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
@@ -104,6 +111,7 @@ class EntityParserOutputGeneratorFactory {
 		array $preferredPageImagesProperties = array(),
 		array $globeUris
 	) {
+		$this->viewFactory = $viewFactory;
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -128,6 +136,7 @@ class EntityParserOutputGeneratorFactory {
 		$language = $options->getUserLangObj();
 
 		return new EntityParserOutputGenerator(
+			$this->viewFactory,
 			$this->entityViewFactory,
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
