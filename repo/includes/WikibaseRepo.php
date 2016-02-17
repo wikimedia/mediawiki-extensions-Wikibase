@@ -18,6 +18,7 @@ use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
 use StubObject;
+use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -72,9 +73,9 @@ use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
@@ -93,6 +94,7 @@ use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
+use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -108,6 +110,7 @@ use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\View\EntityViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -225,6 +228,11 @@ class WikibaseRepo {
 	private $valueSnakRdfBuilderFactory;
 
 	/**
+	 * @var RdfVocabulary
+	 */
+	private $rdfVocabulary;
+
+	/**
 	 * @var CachingCommonsMediaFileNameLookup|null
 	 */
 	private $cachingCommonsMediaFileNameLookup = null;
@@ -233,7 +241,7 @@ class WikibaseRepo {
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
 	 * @throws MWException
-	 * @return WikibaseRepo
+	 * @return self
 	 */
 	private static function newInstance() {
 		global $wgWBRepoDataTypes, $wgWBRepoSettings, $wgContLang;
@@ -263,7 +271,7 @@ class WikibaseRepo {
 	 *
 	 * @since 0.4
 	 *
-	 * @return WikibaseRepo
+	 * @return self
 	 */
 	public static function getDefaultInstance() {
 		static $instance = null;
@@ -883,6 +891,32 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return RdfVocabulary
+	 */
+	public function getRdfVocabulary() {
+		global $wgDummyLanguageCodes;
+
+		if ( $this->rdfVocabulary === null ) {
+			$settings = $this->getSettings();
+
+			$languageCodes = array_merge(
+				$wgDummyLanguageCodes,
+				$settings->getSetting( 'canonicalLanguageCodes' )
+			);
+
+			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
+
+			$this->rdfVocabulary = new RdfVocabulary(
+				$settings->getSetting( 'conceptBaseUri' ),
+				$entityDataTitle->getCanonicalURL() . '/',
+				$languageCodes
+			);
+		}
+
+		return $this->rdfVocabulary;
+	}
+
+	/**
 	 * @return ExceptionLocalizer
 	 */
 	public function getExceptionLocalizer() {
@@ -1414,7 +1448,7 @@ class WikibaseRepo {
 			$dataTypeLookup
 		);
 
-		$entityViewFactory = new EntityViewFactory(
+		$viewFactory = new ViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
@@ -1433,7 +1467,7 @@ class WikibaseRepo {
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		return new EntityParserOutputGeneratorFactory(
-			$entityViewFactory,
+			new DispatchingEntityViewFactory( $viewFactory ),
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
 			$this->getLanguageFallbackChainFactory(),
