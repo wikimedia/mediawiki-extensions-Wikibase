@@ -74,7 +74,6 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
@@ -106,8 +105,9 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\View\EntityViewFactory;
+use Wikibase\View\BasicViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1404,6 +1404,7 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
+		/** @var Language $wgLang */
 		global $wgLang;
 
 		$templateFactory = TemplateFactory::getDefaultInstance();
@@ -1414,7 +1415,7 @@ class WikibaseRepo {
 			$dataTypeLookup
 		);
 
-		$entityViewFactory = new EntityViewFactory(
+		$basicViewFactory = new BasicViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
@@ -1432,8 +1433,17 @@ class WikibaseRepo {
 		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
+		$entityViewFactoryCallbacks = array(
+			Item::ENTITY_TYPE => function( ViewFactory $entityViewFactory ) {
+				return $entityViewFactory->newItemView();
+			},
+			Property::ENTITY_TYPE => function( ViewFactory $entityViewFactory ) {
+				return $entityViewFactory->newPropertyView();
+			}
+		);
+
 		return new EntityParserOutputGeneratorFactory(
-			$entityViewFactory,
+			$basicViewFactory,
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
 			$this->getLanguageFallbackChainFactory(),
@@ -1443,6 +1453,7 @@ class WikibaseRepo {
 			// CachingPropertyInfoStore enough?
 			new InProcessCachingDataTypeLookup( $dataTypeLookup ),
 			$this->getLocalEntityUriParser(),
+			$entityViewFactoryCallbacks,
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )

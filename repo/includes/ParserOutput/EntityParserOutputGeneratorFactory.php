@@ -12,7 +12,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
-use Wikibase\View\EntityViewFactory;
+use Wikibase\View\BasicViewFactory;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -29,9 +29,9 @@ class EntityParserOutputGeneratorFactory {
 	private $templateFactory;
 
 	/**
-	 * @var EntityViewFactory
+	 * @var BasicViewFactory
 	 */
-	private $entityViewFactory;
+	private $basicViewFactory;
 
 	/**
 	 * @var EntityInfoBuilderFactory
@@ -64,6 +64,11 @@ class EntityParserOutputGeneratorFactory {
 	private $externalEntityIdParser;
 
 	/**
+	 * @var callable[]
+	 */
+	private $entityViewFactoryCallbacks;
+
+	/**
 	 * @var string[]
 	 */
 	private $preferredGeoDataProperties;
@@ -79,7 +84,7 @@ class EntityParserOutputGeneratorFactory {
 	private $globeUris;
 
 	/**
-	 * @param EntityViewFactory $entityViewFactory
+	 * @param BasicViewFactory $basicViewFactory
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
@@ -87,12 +92,13 @@ class EntityParserOutputGeneratorFactory {
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param EntityIdParser $externalEntityIdParser
+	 * @param callable[] $entityViewFactoryCallbacks
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
 	 * @param string[] $globeUris Mapping of globe uris to string names.
 	 */
 	public function __construct(
-		EntityViewFactory $entityViewFactory,
+		BasicViewFactory $basicViewFactory,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
@@ -100,11 +106,12 @@ class EntityParserOutputGeneratorFactory {
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $externalEntityIdParser,
+		array $entityViewFactoryCallbacks,
 		array $preferredGeoDataProperties = array(),
 		array $preferredPageImagesProperties = array(),
 		array $globeUris
 	) {
-		$this->entityViewFactory = $entityViewFactory;
+		$this->basicViewFactory = $basicViewFactory;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
@@ -112,6 +119,7 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->externalEntityIdParser = $externalEntityIdParser;
+		$this->entityViewFactoryCallbacks = $entityViewFactoryCallbacks;
 		$this->preferredGeoDataProperties = $preferredGeoDataProperties;
 		$this->preferredPageImagesProperties = $preferredPageImagesProperties;
 		$this->globeUris = $globeUris;
@@ -128,13 +136,14 @@ class EntityParserOutputGeneratorFactory {
 		$language = $options->getUserLangObj();
 
 		return new EntityParserOutputGenerator(
-			$this->entityViewFactory,
+			$this->basicViewFactory,
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
 			$this->entityInfoBuilderFactory,
 			$this->getLanguageFallbackChain( $language ),
 			$this->templateFactory,
 			$this->entityDataFormatProvider,
+			$this->entityViewFactoryCallbacks,
 			$this->getDataUpdaters(),
 			$language->getCode()
 		);

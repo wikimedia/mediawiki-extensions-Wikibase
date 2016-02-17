@@ -5,6 +5,7 @@ namespace Wikibase\Repo\ParserOutput;
 use InvalidArgumentException;
 use ParserOptions;
 use ParserOutput;
+use RuntimeException;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -21,10 +22,13 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
+use Wikibase\View\BasicViewFactory;
 use Wikibase\View\EmptyEditSectionGenerator;
-use Wikibase\View\EntityViewFactory;
+use Wikibase\View\EntityView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
+use Wikibase\View\ViewFactory;
+use Wikimedia\Assert\Assert;
 
 /**
  * Creates the parser output for an entity.
@@ -41,9 +45,9 @@ use Wikibase\View\ToolbarEditSectionGenerator;
 class EntityParserOutputGenerator {
 
 	/**
-	 * @var EntityViewFactory
+	 * @var BasicViewFactory
 	 */
-	private $entityViewFactory;
+	private $basicViewFactory;
 
 	/**
 	 * @var ParserOutputJsConfigBuilder
@@ -76,6 +80,11 @@ class EntityParserOutputGenerator {
 	private $entityDataFormatProvider;
 
 	/**
+	 * @var callable[]
+	 */
+	private $entityViewFactoryCallbacks;
+
+	/**
 	 * @var ParserOutputDataUpdater[]
 	 */
 	private $dataUpdaters;
@@ -86,34 +95,37 @@ class EntityParserOutputGenerator {
 	private $languageCode;
 
 	/**
-	 * @param EntityViewFactory $entityViewFactory
+	 * @param BasicViewFactory $basicViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
+	 * @param callable[] $entityViewFactoryCallbacks
 	 * @param ParserOutputDataUpdater[] $dataUpdaters
 	 * @param string $languageCode
 	 */
 	public function __construct(
-		EntityViewFactory $entityViewFactory,
+		BasicViewFactory $basicViewFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
+		array $entityViewFactoryCallbacks,
 		array $dataUpdaters,
 		$languageCode
 	) {
-		$this->entityViewFactory = $entityViewFactory;
+		$this->basicViewFactory = $basicViewFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
+		$this->entityViewFactoryCallbacks = $entityViewFactoryCallbacks;
 		$this->dataUpdaters = $dataUpdaters;
 		$this->languageCode = $languageCode;
 	}
@@ -131,6 +143,7 @@ class EntityParserOutputGenerator {
 	 * @param bool $generateHtml
 	 *
 	 * @throws InvalidArgumentException
+	 * @throws RuntimeException
 	 * @return ParserOutput
 	 */
 	public function getParserOutput(
@@ -299,13 +312,16 @@ class EntityParserOutputGenerator {
 			$this->templateFactory
 		) : new EmptyEditSectionGenerator();
 
-		$entityView = $this->entityViewFactory->newEntityView(
-			$entityRevision->getEntity()->getType(),
+		$viewFactory = new ViewFactory(
+			$this->basicViewFactory,
 			$this->languageCode,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
 			$editSectionGenerator
 		);
+
+		$entityType = $entityRevision->getEntity()->getType();
+		$entityView = $this->createEntityView( $viewFactory, $entityType );
 
 		// Set the display title to display the label together with the item's id
 		$titleHtml = $entityView->getTitleHtml( $entityRevision );
@@ -325,6 +341,30 @@ class EntityParserOutputGenerator {
 		// Since the output depends on the user language, we must make sure
 		// ParserCache::getKey() includes it in the cache key.
 		$parserOutput->recordOption( 'userlang' );
+	}
+
+	/**
+	 * @param ViewFactory $viewFactory
+	 * @param string $entityType
+	 *
+	 * @return EntityView
+	 */
+	private function createEntityView( ViewFactory $viewFactory, $entityType ) {
+		if ( !isset( $this->entityViewFactoryCallbacks[$entityType] ) ) {
+			throw new RuntimeException( "No EntityView is registered for entity type '$entityType'" );
+		}
+
+		$entityView = call_user_func(
+			$this->entityViewFactoryCallbacks[$entityType],
+			$viewFactory
+		);
+
+		Assert::postcondition(
+			$entityView instanceof EntityView,
+			'Callback must return an instance of EntityView'
+		);
+
+		return $entityView;
 	}
 
 	/**
