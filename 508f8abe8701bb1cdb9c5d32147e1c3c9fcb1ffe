@@ -139,6 +139,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_34e980a7",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 17
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-17T14:18:58Z",
+      "side": 1,
+      "message": "if ( mw.util.getParamValue( \u0027performance\u0027 ) ) {",
+      "parentUuid": "4ea78b8a_54b51c2e",
+      "revId": "508f8abe8701bb1cdb9c5d32147e1c3c9fcb1ffe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_14bb2424",
         "filename": "view/resources/wikibase/view/ViewFactory.js",
         "patchSetId": 17
