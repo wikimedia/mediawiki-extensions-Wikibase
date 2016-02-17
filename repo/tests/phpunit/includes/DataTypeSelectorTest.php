@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataTypes\DataType;
+use DataTypes\Message;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataTypeSelector;
 
@@ -16,6 +17,14 @@ use Wikibase\DataTypeSelector;
  * @author Thiemo Mättig
  */
 class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
+
+	protected function setUp() {
+		parent::setUp();
+
+		Message::registerTextFunction( function( $key, $languageCode ) {
+			return '(' . implode( '|', func_get_args() ) . ')';
+		} );
+	}
 
 	/**
 	 * @param DataType[]|null $dataTypes
@@ -68,15 +77,15 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 				array( new DataType( '<PT>', '<VT>' ) ),
 				'',
 				'<select name="&lt;NAME&gt;" id="&lt;ID&gt;" class="wb-select">'
-				. '<option value="&lt;PT&gt;">(datatypes-type-&lt;PT>)</option>'
+				. '<option value="&lt;PT&gt;">(datatypes-type-&lt;PT>|qqx)</option>'
 				. '</select>'
 			),
 			array(
 				array( new DataType( 'PT1', 'VT1' ), new DataType( 'PT2', 'VT2' ) ),
 				'PT2',
 				'<select name="&lt;NAME&gt;" id="&lt;ID&gt;" class="wb-select">'
-				. '<option value="PT1">(datatypes-type-PT1)</option>'
-				. '<option value="PT2" selected="">(datatypes-type-PT2)</option>'
+				. '<option value="PT1">(datatypes-type-PT1|qqx)</option>'
+				. '<option value="PT2" selected="">(datatypes-type-PT2|qqx)</option>'
 				. '</select>'
 			),
 		);
@@ -85,11 +94,11 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	public function testGetOptionsArray() {
 		$selector = $this->newInstance();
 		$options = $selector->getOptionsArray();
-		$this->assertSame( array( '<PT>' => '(datatypes-type-<PT>)' ), $options );
+		$this->assertSame( array( '<PT>' => '(datatypes-type-<PT>|qqx)' ), $options );
 	}
 
 	/**
-	 * @dataProvider testGetOptionsHtmlProvider
+	 * @dataProvider getOptionsHtmlProvider
 	 */
 	public function testGetOptionsHtml( $selectedTypeId, $expected ) {
 		$selector = $this->newInstance();
@@ -97,15 +106,15 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( $expected, $html );
 	}
 
-	public function testGetOptionsHtmlProvider() {
+	public function getOptionsHtmlProvider() {
 		return array(
 			array(
 				'',
-				'<option value="&lt;PT&gt;">(datatypes-type-&lt;PT>)</option>'
+				'<option value="&lt;PT&gt;">(datatypes-type-&lt;PT>|qqx)</option>'
 			),
 			array(
 				'<PT>',
-				'<option value="&lt;PT&gt;" selected="">(datatypes-type-&lt;PT>)</option>'
+				'<option value="&lt;PT&gt;" selected="">(datatypes-type-&lt;PT>|qqx)</option>'
 			),
 		);
 	}
