@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_2eb93229",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T12:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_d365a542",
+      "revId": "441b364d32bd4b4ec4982e95276937617972db0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_8e54e602",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
         "patchSetId": 4
@@ -36,6 +54,24 @@
         "endLine": 360,
         "endChar": 13
       },
+      "revId": "441b364d32bd4b4ec4982e95276937617972db0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_ee8a3a6d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-17T12:03:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea78b8a_8e54e602",
       "revId": "441b364d32bd4b4ec4982e95276937617972db0b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
