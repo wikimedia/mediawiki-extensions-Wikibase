@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_7accc165",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-17T17:09:29Z",
+      "side": 1,
+      "message": "This is how this is done in many other places (in isInitialValue functions, for example):\n\n$.each( …, function ( … ) {\n    isValid \u003d view.isValid();\n    return isValid;\n} );",
+      "revId": "b01d6bdac29c4387a63183c72553be4b9c883fb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
