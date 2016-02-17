@@ -105,7 +105,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 	}
 
 	public function testGetParserOutput_dontGenerateHtml() {
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( false );
 
 		$item = $this->newItem();
 		$timestamp = wfTimestamp( TS_MW );
@@ -136,7 +136,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function newEntityParserOutputGenerator() {
+	private function newEntityParserOutputGenerator( $createView = true ) {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 
 		$formats = array( 'json', 'ntriples' );
@@ -156,7 +156,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 
 		return new EntityParserOutputGenerator(
-			$this->getEntityViewFactory(),
+			$this->getEntityViewFactory( $createView ),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
 			new SqlEntityInfoBuilderFactory(),
@@ -206,11 +206,19 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		return $item;
 	}
 
-	private function getEntityViewFactory() {
-		$entityViewFactory = $this->getMockBuilder( 'Wikibase\View\EntityViewFactory' )
+	private function getEntityViewFactory( $createView ) {
+		$entityViewFactory = $this->getMockBuilder( 'Wikibase\Repo\ParserOutput\EntityViewFactory' )
 			->disableOriginalConstructor()
 			->getMock();
 
+		$entityViewFactory->expects( $createView ? $this->once() : $this->never() )
+			->method( 'newEntityView' )
+			->will( $this->returnValue( $this->getEntityView() ) );
+
+		return $entityViewFactory;
+	}
+
+	private function getEntityView() {
 		$entityView = $this->getMockBuilder( 'Wikibase\View\EntityView' )
 			->setMethods( array(
 				'getTitleHtml',
@@ -232,11 +240,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->method( 'getPlaceholders' )
 			->will( $this->returnValue( '<PLACEHOLDERS>' ) );
 
-		$entityViewFactory->expects( $this->any() )
-			->method( 'newEntityView' )
-			->will( $this->returnValue( $entityView ) );
-
-		return $entityViewFactory;
+		return $entityView;
 	}
 
 	private function getConfigBuilderMock() {

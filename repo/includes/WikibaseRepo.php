@@ -34,6 +34,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -45,6 +46,7 @@ use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -74,7 +76,6 @@ use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
@@ -94,6 +95,7 @@ use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
+use Wikibase\Repo\ParserOutput\EntityViewFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
@@ -106,8 +108,10 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\View\EntityViewFactory;
+use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\ViewFactory;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\RepoViewFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1404,6 +1408,7 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
+		/** @var Language $wgLang */
 		global $wgLang;
 
 		$templateFactory = TemplateFactory::getDefaultInstance();
@@ -1414,7 +1419,7 @@ class WikibaseRepo {
 			$dataTypeLookup
 		);
 
-		$entityViewFactory = new EntityViewFactory(
+		$viewFactory = new ViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
@@ -1432,8 +1437,40 @@ class WikibaseRepo {
 		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
+		// TODO move this to WikibaseRepo.entitytypes.php or EntityHandler resp. EntityContent
+		$entityViewFactoryCallbacks = array(
+			Item::ENTITY_TYPE => function(
+				ViewFactory $viewFactory,
+				$languageCode,
+				LabelDescriptionLookup $labelDescriptionLookup,
+				LanguageFallbackChain $fallbackChain,
+				EditSectionGenerator $editSectionGenerator
+			) {
+				return $viewFactory->newItemView(
+					$languageCode,
+					$labelDescriptionLookup,
+					$fallbackChain,
+					$editSectionGenerator
+				);
+			},
+			Property::ENTITY_TYPE => function(
+				ViewFactory $viewFactory,
+				$languageCode,
+				LabelDescriptionLookup $labelDescriptionLookup,
+				LanguageFallbackChain $fallbackChain,
+				EditSectionGenerator $editSectionGenerator
+			) {
+				return $viewFactory->newPropertyView(
+					$languageCode,
+					$labelDescriptionLookup,
+					$fallbackChain,
+					$editSectionGenerator
+				);
+			}
+		);
+
 		return new EntityParserOutputGeneratorFactory(
-			$entityViewFactory,
+			new EntityViewFactory( $viewFactory, $entityViewFactoryCallbacks ),
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
 			$this->getLanguageFallbackChainFactory(),
