@@ -21,12 +21,10 @@
 	float: left;
 	line-height: 1.2;
 	width: 100%;
-}
-.wikibase-sitelinklistview.wb-edit .wikibase-sitelinkview {
+
 	white-space: nowrap;
-}
-.wikibase-sitelinklistview .wikibase-sitelinkview-new {
-	white-space: normal;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container {
@@ -36,19 +34,16 @@
 	line-height: 1.5;
 	padding-left: 0.2em;
 	padding-right: 0;
-	white-space: nowrap;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container .wikibase-sitelinkview-siteid {
 	background: none;
 	padding: 0 0.2em 0 0;
-	white-space: nowrap;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link {
 	display: inline;
 	margin-left: 0.4em;
-	word-wrap: break-word;
 }
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link-new {
 	display: inline-block;
