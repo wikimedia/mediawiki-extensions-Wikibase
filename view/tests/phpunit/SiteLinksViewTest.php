@@ -51,7 +51,9 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 		$this->assertSame(
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
 			. '<GROUP data="wikipedia" class="">'
-			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)</h3>'
+			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)'
+			. '(parentheses: (wikibase-ui-pendingquantitycounter-nonpending: '
+			. '(wikibase-propertyedittool-counter-entrieslabel: 0), 0))</h3>'
 			. '</GROUP>',
 			$html
 		);
@@ -66,7 +68,9 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 		$this->assertSame(
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
 			. '<GROUP data="wikipedia" class="">'
-			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)</h3>'
+			. '<h3 id="sitelinks-wikipedia">(wikibase-sitelinks-wikipedia)'
+			. '(parentheses: (wikibase-ui-pendingquantitycounter-nonpending: '
+			. '(wikibase-propertyedittool-counter-entrieslabel: 1), 1))</h3>'
 			. '<LINK id="enwiki" lang="en" title="&lt;LANG&gt;">'
 			. 'enwiki: <PAGE href="#enwiki" lang="en" dir="auto">Title</PAGE>'
 			. '</LINK>'
@@ -84,7 +88,9 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 		$this->assertSame(
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'
 			. '<GROUP data="special" class="">'
-			. '<h3 id="sitelinks-special">(wikibase-sitelinks-special)</h3>'
+			. '<h3 id="sitelinks-special">(wikibase-sitelinks-special)'
+			. '(parentheses: (wikibase-ui-pendingquantitycounter-nonpending: '
+			. '(wikibase-propertyedittool-counter-entrieslabel: 1), 1))</h3>'
 			. '<LINK id="specialwiki" lang="en" title="(wikibase-sitelinks-sitename-specialwiki)">'
 			. 'specialwiki: <PAGE href="#specialwiki" lang="en" dir="auto">Title</PAGE>'
 			. '</LINK>'
