@@ -53,7 +53,7 @@ class SnakListSerializer implements DispatchableSerializer {
 	 * @param SnakList $object
 	 *
 	 * @throws SerializationException
-	 * @return array
+	 * @return array[]
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {

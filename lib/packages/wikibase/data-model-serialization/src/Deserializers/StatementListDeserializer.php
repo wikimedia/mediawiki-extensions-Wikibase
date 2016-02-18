@@ -30,7 +30,7 @@ class StatementListDeserializer implements Deserializer {
 	/**
 	 * @see Deserializer::deserialize
 	 *
-	 * @param array $serialization
+	 * @param array[] $serialization
 	 *
 	 * @throws DeserializationException
 	 * @return StatementList

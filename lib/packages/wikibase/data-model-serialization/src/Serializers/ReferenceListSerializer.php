@@ -45,7 +45,7 @@ class ReferenceListSerializer implements DispatchableSerializer {
 	 * @param ReferenceList $object
 	 *
 	 * @throws SerializationException
-	 * @return array
+	 * @return array[]
 	 */
 	public function serialize( $object ) {
 		if ( !$this->isSerializerFor( $object ) ) {

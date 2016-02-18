@@ -47,7 +47,7 @@ class EntityIdDeserializer implements Deserializer {
 	}
 
 	/**
-	 * @param mixed $serialization
+	 * @param string $serialization
 	 *
 	 * @throws DeserializationException
 	 */
