@@ -99,10 +99,12 @@ class TimeParserFactory {
 		if ( $languageCode === self::CANONICAL_LANGUAGE_CODE ) {
 			$replacements = array();
 		} else {
-			$replacements = $this->monthNameProvider->getMonthNameReplacements(
-				$languageCode,
+			$canonicalMonthNames = $this->monthNameProvider->getLocalizedMonthNames(
 				self::CANONICAL_LANGUAGE_CODE
 			);
+			$replacements = array_map( function( $i ) use ( $canonicalMonthNames ) {
+				return $canonicalMonthNames[$i];
+			}, $this->monthNameProvider->getMonthNumbers( $languageCode ) );
 		}
 
 		return new MonthNameUnlocalizer( $replacements );

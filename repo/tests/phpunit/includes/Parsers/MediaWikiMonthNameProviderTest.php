@@ -19,7 +19,7 @@ use Wikibase\Repo\Parsers\MediaWikiMonthNameProvider;
 class MediaWikiMonthNameProviderTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @dataProvider monthNamesProvider
+	 * @dataProvider languageCodeProvider
 	 */
 	public function testGetLocalizedMonthNames( $languageCode ) {
 		$instance = new MediaWikiMonthNameProvider();
@@ -29,28 +29,21 @@ class MediaWikiMonthNameProviderTest extends PHPUnit_Framework_TestCase {
 		$this->assertCount( 12, $actual );
 	}
 
-	public function monthNamesProvider() {
-		return array(
-			array( 'en' ),
-			array( 'de' ),
-		);
-	}
-
 	/**
-	 * @dataProvider replacementsProvider
+	 * @dataProvider languageCodeProvider
 	 */
-	public function testGetMonthNameReplacements( $languageCode, $baseLanguageCode ) {
+	public function testGetMonthNumbers( $languageCode ) {
 		$instance = new MediaWikiMonthNameProvider();
-		$actual = $instance->getMonthNameReplacements( $languageCode, $baseLanguageCode );
+		$actual = $instance->getMonthNumbers( $languageCode );
 		$this->assertInternalType( 'array', $actual );
-		$this->assertContainsOnly( 'string', $actual );
+		$this->assertContainsOnly( 'int', $actual );
 		$this->assertGreaterThanOrEqual( 12, count( $actual ) );
 	}
 
-	public function replacementsProvider() {
+	public function languageCodeProvider() {
 		return array(
-			array( 'en', 'de' ),
-			array( 'de', 'en' ),
+			array( 'en' ),
+			array( 'de' ),
 		);
 	}
 

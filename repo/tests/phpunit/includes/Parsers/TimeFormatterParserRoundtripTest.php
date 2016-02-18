@@ -27,12 +27,17 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 	private function newTimeParserFactory( ParserOptions $options = null ) {
 		$monthNameProvider = $this->getMock( 'Wikibase\Repo\Parsers\MonthNameProvider' );
 		$monthNameProvider->expects( $this->any() )
-			->method( 'getMonthNameReplacements' )
+			->method( 'getLocalizedMonthNames' )
 			->will( $this->returnValue( array(
-				'8月' => 'August',
-				'agosto' => 'August',
-				'Augusti' => 'August',
-				'Avgust' => 'August',
+				8 => 'August',
+			) ) );
+		$monthNameProvider->expects( $this->any() )
+			->method( 'getMonthNumbers' )
+			->will( $this->returnValue( array(
+				'8月' => 8,
+				'agosto' => 8,
+				'Augusti' => 8,
+				'Avgust' => 8,
 			) ) );
 
 		return new TimeParserFactory( $options, $monthNameProvider );
