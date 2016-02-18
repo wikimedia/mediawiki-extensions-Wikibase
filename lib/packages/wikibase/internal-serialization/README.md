@@ -106,9 +106,10 @@ Wikibase Internal Serialization has been written by [Jeroen De Dauw]
 
 ## Release notes
 
-### 2.1.0 (2016-02-16)
+### 2.1.0 (2016-02-18)
 
 * Added compatibility with Wikibase DataModel 5.x
+* Added compatibility with DataValues Common 0.3
 
 ### 2.0.0 (2015-08-31)
 
