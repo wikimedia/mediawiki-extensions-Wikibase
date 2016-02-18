@@ -158,13 +158,7 @@ class EntityParserOutputGenerator {
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
-
-		// FIXME: OCP violation - https://phabricator.wikimedia.org/T75495
-		if ( $entity instanceof Item ) {
-			$this->addBadgesToParserOutput( $parserOutput, $entity->getSiteLinkList() );
-		}
-
-		$this->addTitleTextToParserOutput( $parserOutput, $entity );
+		$parserOutput->setExtensionData( 'wikibase-titletext', $this->getTitleText( $entity ) );
 
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
@@ -238,23 +232,11 @@ class EntityParserOutputGenerator {
 	}
 
 	/**
-	 * @param ParserOutput $parserOutput
-	 * @param SiteLinkList $siteLinkList
-	 */
-	private function addBadgesToParserOutput( ParserOutput $parserOutput, SiteLinkList $siteLinkList ) {
-		/** @var SiteLink $siteLink */
-		foreach ( $siteLinkList as $siteLink ) {
-			foreach ( $siteLink->getBadges() as $badge ) {
-				$parserOutput->addLink( $this->entityTitleLookup->getTitleForId( $badge ) );
-			}
-		}
-	}
-
-	/**
-	 * @param ParserOutput $parserOutput
 	 * @param EntityDocument $entity
+	 *
+	 * @return string
 	 */
-	private function addTitleTextToParserOutput( ParserOutput $parserOutput, EntityDocument $entity ) {
+	private function getTitleText( EntityDocument $entity ) {
 		$titleText = null;
 
 		if ( $entity instanceof FingerprintProvider ) {
@@ -274,7 +256,7 @@ class EntityParserOutputGenerator {
 			}
 		}
 
-		$parserOutput->setExtensionData( 'wikibase-titletext', $titleText );
+		return $titleText;
 	}
 
 	/**
