@@ -75,6 +75,23 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			'images'
 		);
 
+		// TODO would be nice to test this, but ReferencedEntitiesDataUpdater uses LinkBatch which uses the database
+//		$this->assertEquals(
+//			array( 'item:Q42', 'item:Q35' ),
+//			array_keys( $parserOutput->getLinks()[NS_MAIN] ),
+//			'badges'
+//		);
+
+		$this->assertArrayEquals(
+			array(
+				new ItemId( 'Q42' ),
+				new ItemId( 'Q35' ),
+				new PropertyId( 'P42' ),
+				new PropertyId( 'P10' )
+			),
+			$parserOutput->getExtensionData( 'referenced-entities' )
+		);
+
 		$expectedUsedOptions = array( 'userlang', 'editsection' );
 		$actualOptions = $parserOutput->getUsedOptions();
 		$missingOptions = array_diff( $expectedUsedOptions, $actualOptions );
@@ -202,6 +219,9 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:This is a file.pdf' ) ) );
 		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:Selfie.jpg' ) ) );
+
+		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'kitten', array( new ItemId( 'Q42' ) ) );
+		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'meow', array( new ItemId( 'Q42' ), new ItemId( 'Q35' ) ) );
 
 		return $item;
 	}

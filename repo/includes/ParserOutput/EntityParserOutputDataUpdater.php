@@ -49,18 +49,29 @@ class EntityParserOutputDataUpdater {
 	 */
 	public function __construct( ParserOutput $parserOutput, array $dataUpdaters ) {
 		foreach ( $dataUpdaters as $updater ) {
-			if ( $updater instanceof StatementDataUpdater ) {
-				$this->statementDataUpdaters[] = $updater;
-			} elseif ( $updater instanceof SiteLinkDataUpdater ) {
-				$this->siteLinkDataUpdaters[] = $updater;
-			} else {
-				throw new InvalidArgumentException( 'Each $dataUpdaters element must be a '
-					. 'StatementDataUpdater, SiteLinkDataUpdater or both' );
-			}
+			$this->registerDataUpdater( $updater );
 		}
 
 		$this->parserOutput = $parserOutput;
 		$this->dataUpdaters = $dataUpdaters;
+	}
+
+	private function registerDataUpdater( $updater ) {
+		if ( !( $updater instanceof StatementDataUpdater ) &&
+		     !( $updater instanceof SiteLinkDataUpdater )
+		) {
+			throw new InvalidArgumentException(
+				'Each $dataUpdaters element must be a StatementDataUpdater, SiteLinkDataUpdater or both'
+			);
+		}
+
+		if ( $updater instanceof StatementDataUpdater ) {
+			$this->statementDataUpdaters[] = $updater;
+		}
+
+		if ( $updater instanceof SiteLinkDataUpdater ) {
+			$this->siteLinkDataUpdaters[] = $updater;
+		}
 	}
 
 	/**

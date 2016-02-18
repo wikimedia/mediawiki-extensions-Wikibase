@@ -37,13 +37,26 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$siteLinkDataUpdater->expects( $this->once() )
 			->method( 'updateParserOutput' );
 
+		$siteLinkAndStatementDataUpdater = $this->getMockBuilder( 'Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater' )
+			->disableOriginalConstructor()
+			->getMock();
+		$siteLinkAndStatementDataUpdater->expects( $this->exactly( $statements ) )
+			->method( 'processStatement' );
+		$siteLinkAndStatementDataUpdater->expects( $this->exactly( $siteLinks ) )
+			->method( 'processSiteLink' );
+		$siteLinkAndStatementDataUpdater->expects( $this->once() )
+			->method( 'updateParserOutput' );
+
 		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), array(
 			$statementDataUpdater,
 			$siteLinkDataUpdater,
+			$siteLinkAndStatementDataUpdater
 		) );
+
 		foreach ( $entities as $entity ) {
 			$instance->processEntity( $entity );
 		}
+
 		$instance->finish();
 	}
 
