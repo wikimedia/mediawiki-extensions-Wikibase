@@ -55,7 +55,7 @@
 		 * @inheritdoc
 		 */
 		valueCharacteristics: function() {
-			return { unit: this._unitSelector.getConceptUri() };
+			return { unit: this._unitSelector.getConceptUri() || null };
 		},
 
 		/**
