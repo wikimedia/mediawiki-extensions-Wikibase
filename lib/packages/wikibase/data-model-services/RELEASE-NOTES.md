@@ -1,6 +1,6 @@
 # Wikibase DataModel Services release notes
 
-## Version 3.3.0 (2016-02-16)
+## Version 3.3.0 (2016-02-18)
 
 * Added compatibility with Wikibase DataModel 5.0.
 * Added `FILTER_TYPE` constant to `DataTypeStatementFilter`, `NullStatementFilter` and `PropertySetStatementFilter`.
