@@ -23,14 +23,14 @@ abstract class DeserializerBaseTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider deserializableProvider
 	 */
-	public function testIsDeserializerForReturnsTrue( $serializable ) {
+	public function testIsDeserializerForReturnsTrue( $serializable = null ) {
 		$deserializer = $this->buildDeserializer();
 
 		if ( $deserializer instanceof DispatchableDeserializer ) {
 			$this->assertTrue( $deserializer->isDeserializerFor( $serializable ) );
 		}
 		else {
-			$this->assertTrue( true );
+			$this->assertNull( $serializable, 'not a DispatchableDeserializer' );
 		}
 	}
 

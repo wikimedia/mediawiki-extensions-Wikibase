@@ -23,19 +23,8 @@ class TermListDeserializerTest extends DeserializerBaseTest {
 		return new TermListDeserializer( new TermDeserializer() );
 	}
 
-	/**
-	 * @return array[] things that are deserialized by the deserializer
-	 */
 	public function deserializableProvider() {
-		return array(
-			array(
-				'en' => array( 'language' => 'en', 'value' => 'FooBar' ),
-			),
-			array(
-				'en' => array( 'language' => 'en', 'value' => 'FooBar' ),
-				'de' => array( 'language' => 'de', 'value' => 'ItsALydia' ),
-			),
-		);
+		return array( array() );
 	}
 
 	/**
@@ -43,18 +32,22 @@ class TermListDeserializerTest extends DeserializerBaseTest {
 	 */
 	public function nonDeserializableProvider() {
 		return array(
-			array(
+			'must be an array' => array( new \stdClass() ),
+			'must be an array of arrays' => array( array(
+				'en' => new \stdClass(),
+			) ),
+			'must not contain source' => array( array(
 				'en' => array( 'language' => 'en', 'value' => 'FooBar', 'source' => 'fr' ),
-			),
-			array(
+			) ),
+			'array key must match' => array( array(
 				'en' => array( 'language' => 'de', 'value' => 'Evil language' ),
-			),
-			array(
+			) ),
+			'must contain value' => array( array(
 				'en' => array( 'language' => 'en' ),
-			),
-			array(
+			) ),
+			'array key must be present' => array( array(
 				8 => array( 'language' => 'en', 'value' => 'FooBar' ),
-			),
+			) ),
 		);
 	}
 

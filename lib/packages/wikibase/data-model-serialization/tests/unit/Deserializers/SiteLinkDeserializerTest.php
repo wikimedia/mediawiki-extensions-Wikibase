@@ -26,28 +26,7 @@ class SiteLinkDeserializerTest extends DeserializerBaseTest {
 	}
 
 	public function deserializableProvider() {
-		return array(
-			array(
-				array(
-					'site' => 'test',
-					'title' => 'Nyan Cat'
-				)
-			),
-			array(
-				array(
-					'site' => 'enwiki',
-					'title' => 'Nyan Cat',
-					'badges' => array()
-				)
-			),
-			array(
-				array(
-					'site' => 'enwiki',
-					'title' => 'Nyan Cat',
-					'badges' => array( 'Q42' )
-				)
-			),
-		);
+		return array( array() );
 	}
 
 	public function nonDeserializableProvider() {
