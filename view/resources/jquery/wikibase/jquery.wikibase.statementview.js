@@ -584,8 +584,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {wikibase.datamodel.Statement|null}
 	 */
 	value: function() {
-		var guid = this.options.value ? this.options.value.getClaim().getGuid() : null;
-		return this._instantiateStatement( guid );
+		if ( this.isInEditMode() ) {
+			var guid = this.options.value ? this.options.value.getClaim().getGuid() : null;
+			return this._instantiateStatement( guid );
+		} else {
+			return this.options.value;
+		}
 	},
 
 	/**
