@@ -39,18 +39,18 @@ class MediaWikiMonthNameProviderTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider replacementsProvider
 	 */
-	public function testGetMonthNameReplacements( $languageCode, $baseLanguageCode ) {
+	public function testGetMonthNameUnlocalizations( $languageCode ) {
 		$instance = new MediaWikiMonthNameProvider();
-		$actual = $instance->getMonthNameReplacements( $languageCode, $baseLanguageCode );
+		$actual = $instance->getMonthNumbers( $languageCode );
 		$this->assertInternalType( 'array', $actual );
-		$this->assertContainsOnly( 'string', $actual );
+		$this->assertContainsOnly( 'int', $actual );
 		$this->assertGreaterThanOrEqual( 12, count( $actual ) );
 	}
 
 	public function replacementsProvider() {
 		return array(
-			array( 'en', 'de' ),
-			array( 'de', 'en' ),
+			array( 'en' ),
+			array( 'de' ),
 		);
 	}
 
