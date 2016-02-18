@@ -104,8 +104,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			// sitelinkview is created dynamically, in contrast to being initialized on pre-existing
 			// DOM.
 			this._draw();
-		} else {
-			this._shortenPageName();
 		}
 
 		this._createBadgeSelector();
@@ -193,40 +191,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			this._drawEditMode();
 		} else {
 			this.element.removeClass( 'wb-edit' );
-			this._shortenPageName();
 		}
-	},
-
-	/**
-	 * Shortens the page name using the ellipsis character in order to prevent the page name from
-	 * wrapping.
-	 *
-	 * @private
-	 */
-	_shortenPageName: function() {
-		if ( this._isInEditMode ) {
-			return;
-		}
-		var $a = this.$link.find( 'a' ),
-			fullText = $a.text(),
-			text = fullText;
-
-		$a.text( '.' );
-
-		var lineHeight = this.element.height();
-
-		$a.text( text );
-
-		if ( this.element.height() <= lineHeight ) {
-			return;
-		}
-
-		while ( this.element.height() > lineHeight && text.length > 0 ) {
-			text = text.substring( 0, text.length - 1 );
-			$a.text( text + '…' );
-		}
-
-		$a.attr( 'title', fullText );
 	},
 
 	/**
