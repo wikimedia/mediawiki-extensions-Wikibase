@@ -25,27 +25,13 @@ use Wikibase\DataModel\Snak\SnakList;
 class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 	public function instanceProvider() {
-		$instances = array();
-
-		foreach ( $this->getConstructorArg() as $arg ) {
-			$instances[] = array( new ReferenceList( $arg ) );
-		}
-
-		return $instances;
-	}
-
-	public function getElementInstances() {
 		return array(
-			new Reference(),
-			new Reference( array( new PropertyNoValueSnak( 2 ) ) ),
-			new Reference( array( new PropertyNoValueSnak( 3 ) ) ),
-		);
-	}
-
-	public function getConstructorArg() {
-		return array(
-			array(),
-			$this->getElementInstances(),
+			array( new ReferenceList( array() ) ),
+			array( new ReferenceList( array(
+				new Reference(),
+				new Reference( array( new PropertyNoValueSnak( 2 ) ) ),
+				new Reference( array( new PropertyNoValueSnak( 3 ) ) ),
+			) ) ),
 		);
 	}
 
@@ -147,14 +133,6 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 			$this->assertFalse( $array->hasReference( $element ) );
 			$this->assertEquals( --$elementCount, count( $array ) );
 		}
-
-		$elements = $this->getElementInstances();
-		$element = array_shift( $elements );
-
-		$array->removeReference( $element );
-		$array->removeReference( $element );
-
-		$this->assertTrue( true );
 	}
 
 	public function testRemoveReferenceRemovesIdenticalObjects() {
