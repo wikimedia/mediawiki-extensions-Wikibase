@@ -1,0 +1,47 @@
+<?php
+
+namespace Wikibase\DataModel\Services\Tests\Lookup;
+
+use Exception;
+use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
+
+/**
+ * @covers Wikibase\DataModel\Services\Lookup\TermLookupException
+ *
+ * @licence GNU GPL v2+
+ * @author Thiemo Mättig
+ */
+class TermLookupExceptionTest extends PHPUnit_Framework_TestCase {
+
+	public function testConstructorWithOnlyRequiredArguments() {
+		$entityId = new ItemId( 'Q1' );
+		$exception = new TermLookupException( $entityId, array( 'de', 'en' ) );
+
+		$this->assertSame( $entityId, $exception->getEntityId() );
+		$this->assertSame(
+			'Term lookup failed for: Q1 with language codes: de, en',
+			$exception->getMessage()
+		);
+		$this->assertSame( 0, $exception->getCode() );
+		$this->assertNull( $exception->getPrevious() );
+	}
+
+	public function testConstructorWithAllArguments() {
+		$entityId = new ItemId( 'Q1' );
+		$previous = new Exception( 'previous' );
+		$exception = new TermLookupException(
+			$entityId,
+			array( 'de', 'en' ),
+			'customMessage',
+			$previous
+		);
+
+		$this->assertSame( $entityId, $exception->getEntityId() );
+		$this->assertSame( 'customMessage', $exception->getMessage() );
+		$this->assertSame( 0, $exception->getCode() );
+		$this->assertSame( $previous, $exception->getPrevious() );
+	}
+
+}
