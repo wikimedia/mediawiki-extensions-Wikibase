@@ -68,7 +68,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 *
 	 * @return SiteLink[]
 	 */
-	public function diffSiteLinks( array $siteLinks1, array $siteLinks2 ) {
+	private function diffSiteLinks( array $siteLinks1, array $siteLinks2 ) {
 		return array_udiff(
 			$siteLinks1,
 			$siteLinks2,

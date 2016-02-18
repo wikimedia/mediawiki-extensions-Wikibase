@@ -79,29 +79,24 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	public function testUpdateLinksOfItem() {
 		// save initial links
 		$item = new Item( new ItemId( 'Q177' ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
-		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Bar' );
-		$item->getSiteLinkList()->addNewSiteLink( 'svwiki', 'Börk' );
+		$siteLinks = $item->getSiteLinkList();
+		$siteLinks->addNewSiteLink( 'enwiki', 'Foo' );
+		$siteLinks->addNewSiteLink( 'dewiki', 'Bar' );
+		$siteLinks->addNewSiteLink( 'svwiki', 'Börk' );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
 
 		// modify links, and save again
-		$item->getSiteLinkList()->removeLinkWithSiteId( 'enwiki' );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'FooK' );
-		$item->getSiteLinkList()->removeLinkWithSiteId( 'dewiki' );
-		$item->getSiteLinkList()->addNewSiteLink( 'nlwiki', 'GrooK' );
+		$siteLinks->removeLinkWithSiteId( 'enwiki' );
+		$siteLinks->addNewSiteLink( 'enwiki', 'FooK' );
+		$siteLinks->removeLinkWithSiteId( 'dewiki' );
+		$siteLinks->addNewSiteLink( 'nlwiki', 'GrooK' );
 
 		$this->siteLinkTable->saveLinksOfItem( $item );
 
 		// check that the update worked correctly
 		$actualLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
-		$expectedLinks = $item->getSiteLinkList()->toArray();
-
-		$missingLinks = $this->siteLinkTable->diffSiteLinks( $expectedLinks, $actualLinks );
-		$extraLinks = $this->siteLinkTable->diffSiteLinks( $actualLinks, $expectedLinks );
-
-		$this->assertEmpty( $missingLinks, 'Missing links' );
-		$this->assertEmpty( $extraLinks, 'Extra links' );
+		$this->assertArrayEquals( $siteLinks->toArray(), $actualLinks );
 	}
 
 	/**
