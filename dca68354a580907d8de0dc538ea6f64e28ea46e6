@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_2fba82bc",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/EntityParserOutputGeneratorTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2016-02-18T15:41:51Z",
+      "side": 1,
+      "message": "Use dependency injection for a mock of LinkBatch.",
+      "revId": "dca68354a580907d8de0dc538ea6f64e28ea46e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
