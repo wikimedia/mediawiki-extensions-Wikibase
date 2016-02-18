@@ -52,12 +52,12 @@ class EntityIdValue extends DataValueObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @param string $value
+	 * @param string $serialized
 	 *
 	 * @throws IllegalValueException
 	 */
-	public function unserialize( $value ) {
-		list( $entityType, $numericId ) = json_decode( $value );
+	public function unserialize( $serialized ) {
+		list( $entityType, $numericId ) = json_decode( $serialized );
 
 		try {
 			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );

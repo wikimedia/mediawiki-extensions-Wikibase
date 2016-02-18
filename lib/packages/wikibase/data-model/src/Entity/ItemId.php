@@ -63,10 +63,10 @@ class ItemId extends EntityId {
 	/**
 	 * @see Serializable::unserialize
 	 *
-	 * @param string $value
+	 * @param string $serialized
 	 */
-	public function unserialize( $value ) {
-		list( , $this->serialization ) = json_decode( $value );
+	public function unserialize( $serialized ) {
+		list( , $this->serialization ) = json_decode( $serialized );
 	}
 
 	/**
