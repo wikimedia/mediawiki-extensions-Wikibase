@@ -127,8 +127,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 		this.$h
 		.attr( 'id', 'sitelinks-' + this.options.value.group )
-		// .text( mw.msg( 'wikibase-sitelinks-' + this.options.value.group ) )
-		.text( this.__headingText )
+		.text( this.__headingText || this.options.value.group )
 		.append( this.$counter );
 
 		if ( !this.$headingSection.data( 'sticknode' ) ) {
