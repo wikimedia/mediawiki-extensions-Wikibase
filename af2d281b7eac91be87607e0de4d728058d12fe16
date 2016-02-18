@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_7e2b4e93",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-18T09:33:20Z",
+      "side": 1,
+      "message": "Todo: adjust documentation",
+      "revId": "af2d281b7eac91be87607e0de4d728058d12fe16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_de428262",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-18T09:33:20Z",
+      "side": 1,
+      "message": "Todo: rename to $basicViewFactory",
+      "revId": "af2d281b7eac91be87607e0de4d728058d12fe16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_be146652",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-18T09:33:20Z",
+      "side": 1,
+      "message": "Todo move this down",
+      "revId": "af2d281b7eac91be87607e0de4d728058d12fe16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_b103370f",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-18T09:33:20Z",
+      "side": 1,
+      "message": "Todo wrong typehint",
+      "revId": "af2d281b7eac91be87607e0de4d728058d12fe16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_3117474c",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-18T09:33:20Z",
+      "side": 1,
+      "message": "Todo rename",
+      "revId": "af2d281b7eac91be87607e0de4d728058d12fe16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_71385fd0",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1417,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-18T09:33:20Z",
+      "side": 1,
+      "message": "Todo rename variable",
+      "revId": "af2d281b7eac91be87607e0de4d728058d12fe16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
