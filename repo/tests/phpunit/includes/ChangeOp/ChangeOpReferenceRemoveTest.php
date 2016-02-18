@@ -40,52 +40,30 @@ class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 		new ChangeOpReferenceRemove( $guid, $referenceHash );
 	}
 
-	public function changeOpRemoveProvider() {
-		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+	public function testApplyRemovesReference() {
+		$item = $this->newItemWithClaim( 'q345', new PropertyValueSnak( 2754236, new StringValue( 'test' ) ) );
+		$reference = new Reference( array( new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) ) ) );
+		$statement = $item->getStatements()->toArray()[0];
+		$statement->getReferences()->addReference( $reference );
+		$changeOp = new ChangeOpReferenceRemove( $statement->getGuid(), $reference->getHash() );
 
-		$item = $this->newItemWithClaim( 'q345', $snak );
-		$statements = $item->getStatements()->toArray();
-		/** @var Statement $statement */
-		$statement = reset( $statements );
-		$guid = $statement->getGuid();
-		$snaks = new SnakList();
-		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$newReference = new Reference( $snaks );
-		$statement->getReferences()->addReference( $newReference );
-		$referenceHash = $newReference->getHash();
-		$changeOp = new ChangeOpReferenceRemove( $guid, $referenceHash );
-		$args[ 'Removing a single reference' ] = array( $item, $changeOp, $referenceHash );
+		$changeOp->apply( $item );
 
-		$item = $this->newItemWithClaim( 'q346', $snak );
-		$statements = $item->getStatements()->toArray();
-		/** @var Statement $statement */
-		$statement = reset( $statements );
-		$guid = $statement->getGuid();
-		$snaks = new SnakList();
-		$snaks[] = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$newReference = new Reference( $snaks );
-		$references = $statement->getReferences();
-		$references->addReference( $newReference );
-		$references->addReference( $newReference );
-		$referenceHash = $newReference->getHash();
-		$changeOp = new ChangeOpReferenceRemove( $guid, $referenceHash );
-		$args[ 'Removing references that have the same hash' ] = array( $item, $changeOp, $referenceHash );
-
-		return $args;
+		$this->assertTrue( $statement->getReferences()->isEmpty() );
 	}
 
-	/**
-	 * @dataProvider changeOpRemoveProvider
-	 */
-	public function testApplyRemoveReference( Item $item, ChangeOpReferenceRemove $changeOp, $referenceHash ) {
+	public function testApplyWithDuplicateReferencePreservesOne() {
+		$item = $this->newItemWithClaim( 'q345', new PropertyValueSnak( 2754236, new StringValue( 'test' ) ) );
+		$reference = new Reference( array( new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) ) ) );
+		$statement = $item->getStatements()->toArray()[0];
+		$statement->getReferences()->addReference( clone $reference );
+		$statement->getReferences()->addReference( clone $reference );
+		$changeOp = new ChangeOpReferenceRemove( $statement->getGuid(), $reference->getHash() );
+
 		$changeOp->apply( $item );
-		$statements = $item->getStatements()->toArray();
-		$this->assertCount( 1, $statements, 'More than one claim returned on item...' );
-		/** @var Statement $statement */
-		$statement = reset( $statements );
-		$references = $statement->getReferences();
-		$this->assertFalse( $references->hasReferenceHash( $referenceHash ), "Reference still exists" );
+
+		$this->assertTrue( $statement->getReferences()->hasReferenceHash( $reference->getHash() ) );
+		$this->assertCount( 1, $statement->getReferences() );
 	}
 
 	private function newItemWithClaim( $itemIdString, $snak ) {
