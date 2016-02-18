@@ -1,5 +1,10 @@
 # Wikibase DataModel release notes
 
+## Version 5.0.1 (2016-02-18)
+
+* Fixed a bug and restored behaviour of `ReferenceList::removeReferenceHash`
+* `ReferenceList::unserialize` no longer calls the constructor
+
 ## Version 5.0.0 (2016-02-15)
 
 * Removed `Claims` class (deprecated since 1.0)
