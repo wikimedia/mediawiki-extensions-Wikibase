@@ -44,6 +44,12 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotNull( $copy->getReference( $reference->getHash() ) );
 	}
 
+	public function testConstructorIgnoresIdenticalObjects() {
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$list = new ReferenceList( array( $reference, $reference ) );
+		$this->assertCount( 1, $list );
+	}
+
 	public function testConstructorDoesNotIgnoreCopies() {
 		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
 		$list = new ReferenceList( array( $reference, clone $reference ) );
@@ -194,12 +200,28 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$this->assertSameReferenceOrder( $expectedList, $references );
 	}
 
+	public function testAddReferenceIgnoresIdenticalObjects() {
+		$list = new ReferenceList();
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$list->addReference( $reference );
+		$list->addReference( $reference );
+		$this->assertCount( 1, $list );
+	}
+
 	public function testAddReferenceDoesNotIgnoreCopies() {
 		$list = new ReferenceList();
 		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
 		$list->addReference( $reference );
 		$list->addReference( clone $reference );
 		$this->assertCount( 2, $list );
+	}
+
+	public function testAddReferenceAtIndexIgnoresIdenticalObjects() {
+		$list = new ReferenceList();
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$list->addReference( $reference, 0 );
+		$list->addReference( $reference, 0 );
+		$this->assertCount( 1, $list );
 	}
 
 	public function testAddReferenceAtIndexZero() {

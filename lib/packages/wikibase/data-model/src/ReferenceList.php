@@ -28,7 +28,7 @@ use Wikibase\DataModel\Snak\Snak;
 class ReferenceList implements Comparable, Countable, IteratorAggregate, Serializable {
 
 	/**
-	 * @var Reference[]
+	 * @var Reference[] Ordered list or references, indexed by SPL object hash.
 	 */
 	private $references = array();
 
@@ -73,7 +73,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 
 		if ( $index === null || $index >= count( $this->references ) ) {
 			// Append object to the end of the reference list.
-			$this->references[] = $reference;
+			$this->references[spl_object_hash( $reference )] = $reference;
 		} else {
 			$this->insertReferenceAtIndex( $reference, $index );
 		}
@@ -100,7 +100,11 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 * @param int $index
 	 */
 	private function insertReferenceAtIndex( Reference $reference, $index ) {
-		array_splice( $this->references, $index, 0, array( $reference ) );
+		$this->references = array_merge(
+			array_slice( $this->references, 0, $index ),
+			array( spl_object_hash( $reference ) => $reference ),
+			array_slice( $this->references, $index )
+		);
 	}
 
 	/**
@@ -126,10 +130,14 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 * @return int|bool
 	 */
 	public function indexOf( Reference $reference ) {
-		foreach ( $this->references as $index => $ref ) {
+		$index = 0;
+
+		foreach ( $this->references as $ref ) {
 			if ( $ref === $reference ) {
 				return $index;
 			}
+
+			$index++;
 		}
 
 		return false;
@@ -174,13 +182,11 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 			return;
 		}
 
-		foreach ( $this->references as $index => $ref ) {
+		foreach ( $this->references as $splObjectHash => $ref ) {
 			if ( $ref === $reference ) {
-				unset( $this->references[$index] );
+				unset( $this->references[$splObjectHash] );
 			}
 		}
-
-		$this->references = array_values( $this->references );
 	}
 
 	/**
@@ -211,7 +217,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( $this->references );
+		return serialize( array_values( $this->references ) );
 	}
 
 	/**
@@ -222,7 +228,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 * @param string $serialized
 	 */
 	public function unserialize( $serialized ) {
-		$this->references = unserialize( $serialized );
+		$this->__construct( unserialize( $serialized ) );
 	}
 
 	/**
@@ -283,7 +289,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 * @return Traversable
 	 */
 	public function getIterator() {
-		return new ArrayIterator( $this->references );
+		return new ArrayIterator( array_values( $this->references ) );
 	}
 
 }
