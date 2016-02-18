@@ -16,6 +16,24 @@
       "revId": "36ab587d67462fd884981435165aa4a96996fefa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_9e616a02",
+        "filename": "lib/includes/store/sql/SiteLinkTable.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-18T09:13:08Z",
+      "side": 1,
+      "message": "Yes. The test should not call this, but I did not wanted to make this patch to complicated.",
+      "parentUuid": "4ea78b8a_83c59842",
+      "revId": "36ab587d67462fd884981435165aa4a96996fefa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
