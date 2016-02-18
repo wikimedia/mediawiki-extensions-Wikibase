@@ -157,6 +157,26 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue( true );
 	}
 
+	public function testRemoveReferenceRemovesIdenticalObjects() {
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$references = new ReferenceList( array( $reference, $reference ) );
+
+		$references->removeReference( $reference );
+
+		$this->assertTrue( $references->isEmpty() );
+	}
+
+	public function testRemoveReferenceDoesNotRemoveCopies() {
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$references = new ReferenceList( array( $reference, clone $reference ) );
+
+		$references->removeReference( $reference );
+
+		$this->assertFalse( $references->isEmpty() );
+		$this->assertTrue( $references->hasReference( $reference ) );
+		$this->assertNotSame( $reference, $references->getReference( $reference->getHash() ) );
+	}
+
 	public function testAddReferenceOnEmptyList() {
 		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
 
@@ -328,6 +348,36 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		}
 
 		$this->assertEquals( 0, count( $references ) );
+	}
+
+	public function testRemoveReferenceHashRemovesIdenticalObjects() {
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$references = new ReferenceList( array( $reference, $reference ) );
+
+		$references->removeReferenceHash( $reference->getHash() );
+
+		$this->assertTrue( $references->isEmpty() );
+	}
+
+	public function testRemoveReferenceHashDoesNotRemoveCopies() {
+		$reference = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$references = new ReferenceList( array( $reference, clone $reference ) );
+
+		$references->removeReferenceHash( $reference->getHash() );
+
+		$this->assertFalse( $references->isEmpty() );
+		$this->assertTrue( $references->hasReference( $reference ) );
+		$this->assertNotSame( $reference, $references->getReference( $reference->getHash() ) );
+	}
+
+	public function testRemoveReferenceHashUpdatesIndexes() {
+		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
+		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
+		$references = new ReferenceList( array( $reference1, $reference2 ) );
+
+		$references->removeReferenceHash( $reference1->getHash() );
+
+		$this->assertSame( 0, $references->indexOf( $reference2 ) );
 	}
 
 	public function testGivenOneSnak_addNewReferenceAddsSnak() {
