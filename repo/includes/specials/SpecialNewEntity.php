@@ -223,12 +223,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$fingerprint = $entity->getFingerprint();
 		$languageCode = $this->contentLanguage->getCode();
 
-		if ( $this->label !== '' ) {
-			$fingerprint->setLabel( $languageCode, $this->label );
-		}
-		if ( $this->description !== '' ) {
-			$fingerprint->setDescription( $languageCode, $this->description );
-		}
+		$fingerprint->setLabel( $languageCode, $this->label );
+		$fingerprint->setDescription( $languageCode, $this->description );
 		$fingerprint->setAliasGroup( $languageCode, $this->aliases );
 
 		return Status::newGood();
