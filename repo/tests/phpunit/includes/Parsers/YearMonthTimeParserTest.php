@@ -16,6 +16,7 @@ use Wikibase\Repo\Parsers\YearMonthTimeParser;
  *
  * @licence GNU GPL v2+
  * @author Addshore
+ * @author Thiemo Mättig
  */
 class YearMonthTimeParserTest extends StringValueParserTest {
 
@@ -32,7 +33,19 @@ class YearMonthTimeParserTest extends StringValueParserTest {
 	 * @return YearMonthTimeParser
 	 */
 	protected function getInstance() {
-		return new YearMonthTimeParser();
+		$monthNameProvider = $this->getMockBuilder( 'Wikibase\Repo\Parsers\MonthNameProvider' )
+			->disableOriginalConstructor()
+			->getMock();
+		$monthNameProvider->expects( $this->once() )
+			->method( 'getMonthNumbers' )
+			->with( 'en' )
+			->will( $this->returnValue( array(
+				'January' => 1,
+				'Jan' => 1,
+				'April' => 4,
+			) ) );
+
+		return new YearMonthTimeParser( $monthNameProvider );
 	}
 
 	/**

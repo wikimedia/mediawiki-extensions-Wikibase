@@ -19,7 +19,7 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 *
 	 * @param string $languageCode
 	 *
-	 * @return string[] Array mapping the month's numbers 1 to 12 to localized month names.
+	 * @return string[] Array mapping month numbers (1 to 12) to localized month names.
 	 */
 	public function getLocalizedMonthNames( $languageCode ) {
 		$language = Language::factory( $languageCode );
@@ -41,7 +41,7 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 * @param string $languageCode
 	 *
 	 * @return int[] Array mapping localized month names (including full month names, genitive names
-	 * and abbreviations) to the month's numbers 1 to 12.
+	 * and abbreviations) to month numbers (1 to 12).
 	 */
 	public function getMonthNumbers( $languageCode ) {
 		$language = Language::factory( $languageCode );
