@@ -58,6 +58,8 @@ class TermListDeserializer implements Deserializer {
 
 	/**
 	 * @param array $serialization
+	 *
+	 * @throws DeserializationException
 	 */
 	private function assertCanDeserialize( $serialization ) {
 		if ( !is_array( $serialization ) ) {
@@ -70,7 +72,10 @@ class TermListDeserializer implements Deserializer {
 		}
 	}
 
-	private function assertRequestedAndActualLanguageMatch( array $serialization, $requestedLanguage ) {
+	private function assertRequestedAndActualLanguageMatch(
+		array $serialization,
+		$requestedLanguage
+	) {
 		if ( $serialization['language'] !== $requestedLanguage ) {
 			throw new DeserializationException(
 				'Deserialization of a value of the attribute language (actual)'

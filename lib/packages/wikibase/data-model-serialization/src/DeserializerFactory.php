@@ -45,7 +45,10 @@ class DeserializerFactory {
 	 * @param Deserializer $dataValueDeserializer deserializer for DataValue objects
 	 * @param EntityIdParser $entityIdParser
 	 */
-	public function __construct( Deserializer $dataValueDeserializer, EntityIdParser $entityIdParser ) {
+	public function __construct(
+		Deserializer $dataValueDeserializer,
+		EntityIdParser $entityIdParser
+	) {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->entityIdParser = $entityIdParser;
 	}

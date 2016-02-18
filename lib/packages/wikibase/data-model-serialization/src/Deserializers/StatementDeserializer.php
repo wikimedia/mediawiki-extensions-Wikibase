@@ -40,7 +40,11 @@ class StatementDeserializer implements DispatchableDeserializer {
 	 */
 	private $referencesDeserializer;
 
-	public function __construct( Deserializer $snakDeserializer, Deserializer $snaksDeserializer, Deserializer $referencesDeserializer ) {
+	public function __construct(
+		Deserializer $snakDeserializer,
+		Deserializer $snaksDeserializer,
+		Deserializer $referencesDeserializer
+	) {
 		$this->snakDeserializer = $snakDeserializer;
 		$this->snaksDeserializer = $snaksDeserializer;
 		$this->referencesDeserializer = $referencesDeserializer;
