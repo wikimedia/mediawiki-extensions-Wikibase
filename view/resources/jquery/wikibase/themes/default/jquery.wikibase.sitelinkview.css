@@ -15,8 +15,14 @@
 	background-image: linear-gradient(transparent, transparent), url(images/wb-badges-default.svg);
 	background-repeat: no-repeat;
 	background-position: 0 center;
-	display: inline;
-	padding: 0 8px;
+	display: inline-block;
+	height: 19px;
+	vertical-align: middle;
+	width: 12px;
+}
+
+.wb-badge:not(:last-child) {
+	margin-right: 4px;
 }
 
 .wb-badge-empty {
@@ -46,6 +52,6 @@
 	background-color: #D6F3FF;
 }
 
-.wikibase-sitelinkview-badges {
+.wb-badge:first-child {
 	margin-left: 0.4em;
 }
