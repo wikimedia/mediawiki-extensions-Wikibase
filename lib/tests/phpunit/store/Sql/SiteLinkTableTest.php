@@ -97,8 +97,8 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		$actualLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
 		$expectedLinks = $item->getSiteLinkList()->toArray();
 
-		$missingLinks = array_udiff( $expectedLinks, $actualLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
-		$extraLinks = array_udiff( $actualLinks, $expectedLinks, array( $this->siteLinkTable, 'compareSiteLinks' ) );
+		$missingLinks = $this->siteLinkTable->diffSiteLinks( $expectedLinks, $actualLinks );
+		$extraLinks = $this->siteLinkTable->diffSiteLinks( $actualLinks, $expectedLinks );
 
 		$this->assertEmpty( $missingLinks, 'Missing links' );
 		$this->assertEmpty( $extraLinks, 'Extra links' );
