@@ -7,6 +7,11 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
+ * A parser capable of splitting a statement id into the entity id of the entity the statement
+ * belongs to, and the randomly generated global unique identifier (GUID).
+ *
+ * @see StatementGuid
+ *
  * @since 1.0
  *
  * @licence GNU GPL v2+
@@ -34,10 +39,10 @@ class StatementGuidParser {
 	 */
 	public function parse( $serialization ) {
 		if ( !is_string( $serialization ) ) {
-			throw new StatementGuidParsingException( '$serialization must be a string; got ' . gettype( $serialization ) );
+			throw new StatementGuidParsingException( '$serialization must be a string' );
 		}
 
-		$keyParts = explode( StatementGuid::SEPARATOR, $serialization );
+		$keyParts = explode( StatementGuid::SEPARATOR, $serialization, 2 );
 
 		if ( count( $keyParts ) !== 2 ) {
 			throw new StatementGuidParsingException( '$serialization does not have the correct number of parts' );
