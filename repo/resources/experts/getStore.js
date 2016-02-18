@@ -43,11 +43,11 @@ MODULE.getStore = function( dataTypeStore ) {
 
 	var dataTypeIdToExpertConstructor = {
 		commonsMedia: vv.experts.CommonsMediaType,
+		'external-id': vv.experts.StringValue,
 		monolingualtext: vv.experts.MonolingualText,
 		url: vv.experts.StringValue,
 		'wikibase-item': wb.experts.Item,
 		'wikibase-property': wb.experts.Property
-
 	};
 
 	for ( var dataTypeId in dataTypeIdToExpertConstructor ) {
