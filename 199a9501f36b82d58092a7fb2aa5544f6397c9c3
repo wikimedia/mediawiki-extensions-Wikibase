@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ea78b8a_25038112",
+        "filename": "repo/tests/phpunit/includes/Parsers/MediaWikiMonthNameProviderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-18T17:50:03Z",
+      "side": 1,
+      "message": "Wrong name.",
+      "revId": "199a9501f36b82d58092a7fb2aa5544f6397c9c3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
