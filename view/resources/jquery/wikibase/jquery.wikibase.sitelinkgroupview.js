@@ -91,9 +91,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 		PARENT.prototype._create.call( this );
 
-		// TODO: Remove scraping
-		this.__headingText = this.$h.text();
-
 		this.$sitelinklistview = this.element.find( '.wikibase-sitelinklistview' );
 
 		if ( !this.$sitelinklistview.length ) {
@@ -125,11 +122,13 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 		this.element.data( 'group', this.options.value.group );
 
-		this.$h
-		.attr( 'id', 'sitelinks-' + this.options.value.group )
-		// .text( mw.msg( 'wikibase-sitelinks-' + this.options.value.group ) )
-		.text( this.__headingText )
-		.append( this.$counter );
+		if ( this.$h.contents().length === 1 ) {
+			// Only contains the counter
+			this.$h
+			.attr( 'id', 'sitelinks-' + this.options.value.group )
+			.text( this.options.value.group )
+			.append( this.$counter );
+		}
 
 		if ( !this.$headingSection.data( 'sticknode' ) ) {
 			this.$headingSection.sticknode( {

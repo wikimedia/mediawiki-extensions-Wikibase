@@ -103,7 +103,9 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			this._createListView();
 		}
 
-		this._refreshCounter();
+		if ( this.options.$counter && this.options.$counter.is( ':empty' ) ) {
+			this._refreshCounter();
+		}
 
 		if ( this.options.autoInput && !this.isFull() ) {
 			var self = this,
