@@ -117,7 +117,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	}
 
 	/**
-	 * Returns the index of a reference or false if the reference could not be found.
+	 * Returns the index of the Reference object or false if the Reference could not be found.
 	 *
 	 * @since 0.5
 	 *
@@ -160,29 +160,31 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	}
 
 	/**
-	 * Removes the reference with the provided hash if it exists in the list.
+	 * Looks for the first Reference object in this list with the provided hash.
+	 * Removes all occurences of that object.
 	 *
 	 * @since 0.3
 	 *
 	 * @param string $referenceHash	`
 	 */
 	public function removeReferenceHash( $referenceHash ) {
-		foreach ( $this->references as $index => $reference ) {
-			if ( $reference->getHash() === $referenceHash ) {
-				$this->removeReferenceAtIndex( $index );
+		$reference = $this->getReference( $referenceHash );
+
+		if ( $reference === null ) {
+			return;
+		}
+
+		foreach ( $this->references as $index => $ref ) {
+			if ( $ref === $reference ) {
+				unset( $this->references[$index] );
 			}
 		}
+
+		$this->references = array_values( $this->references );
 	}
 
 	/**
-	 * @param int $index
-	 */
-	private function removeReferenceAtIndex( $index ) {
-		array_splice( $this->references, $index, 1 );
-	}
-
-	/**
-	 * Returns the reference with the provided hash, or
+	 * Returns the first Reference object with the provided hash, or
 	 * null if there is no such reference in the list.
 	 *
 	 * @since 0.3

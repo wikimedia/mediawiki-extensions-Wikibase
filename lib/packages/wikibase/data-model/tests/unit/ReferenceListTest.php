@@ -330,6 +330,21 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 0, count( $references ) );
 	}
 
+	public function testRemoveReferenceHash_occurrencesOfSameObjectGetRemoved() {
+		$reference = new Reference( array( new PropertyNoValueSnak( 42 ) ) );
+		$references = new ReferenceList( array(
+			$reference,
+			clone $reference,
+			$reference
+		) );
+
+		$references->removeReferenceHash( $reference->getHash() );
+
+		$this->assertTrue( $references->hasReferenceHash( $reference->getHash() ) );
+		$this->assertCount( 1, $references );
+		$this->assertNotSame( $reference, $references->getReference( $reference->getHash() ) );
+	}
+
 	public function testGivenOneSnak_addNewReferenceAddsSnak() {
 		$references = new ReferenceList();
 		$snak = new PropertyNoValueSnak( 1 );
