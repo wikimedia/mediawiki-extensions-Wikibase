@@ -606,7 +606,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	display: none;
 }
 
-.wb-sitelinks-heading .sitelinklistview-counter {
+.wb-sitelinks-heading .wikibase-sitelinkgroupview-counter {
 	font-size: 67%; /* reset to standard font size */
 	margin-left: 0.6em;
 	line-height: 100%; /* prevent white space below heading */
