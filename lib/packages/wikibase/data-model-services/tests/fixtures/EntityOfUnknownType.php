@@ -17,6 +17,9 @@ class EntityOfUnknownType implements EntityDocument {
 		return null;
 	}
 
+	/**
+	 * @return string Returns the entity type "unknown-entity-type".
+	 */
 	public function getType() {
 		return 'unknown-entity-type';
 	}
