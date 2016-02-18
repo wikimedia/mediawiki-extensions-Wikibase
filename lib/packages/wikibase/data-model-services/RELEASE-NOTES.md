@@ -4,6 +4,7 @@
 
 * Added compatibility with Wikibase DataModel 5.0.
 * Added `FILTER_TYPE` constant to `DataTypeStatementFilter`, `NullStatementFilter` and `PropertySetStatementFilter`.
+* Fixed `StatementGuidParser` not parsing GUIDs with multiple dollar signs.
 
 ## Version 3.2.0 (2015-12-03)
 
