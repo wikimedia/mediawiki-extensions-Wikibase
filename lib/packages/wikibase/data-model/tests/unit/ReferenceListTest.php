@@ -224,6 +224,24 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$this->assertCount( 1, $list );
 	}
 
+	public function testAddReferenceAtIndexMovesIdenticalObjects() {
+		$list = new ReferenceList();
+		$list->addNewReference( new PropertyNoValueSnak( 1 ) );
+		$reference = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
+		$list->addReference( $reference );
+		$this->assertSame( 1, $list->indexOf( $reference ), 'pre condition' );
+
+		$list->addReference( $reference, 0 );
+
+		$this->assertCount( 2, $list, 'not added' );
+		$this->assertSame( 0, $list->indexOf( $reference ), 'can decrease index' );
+
+		$list->addReference( $reference, 2 );
+
+		$this->assertCount( 2, $list, 'not added' );
+		$this->assertSame( 0, $list->indexOf( $reference ), 'can not increase index' );
+	}
+
 	public function testAddReferenceAtIndexZero() {
 		$reference1 = new Reference( array( new PropertyNoValueSnak( 1 ) ) );
 		$reference2 = new Reference( array( new PropertyNoValueSnak( 2 ) ) );
