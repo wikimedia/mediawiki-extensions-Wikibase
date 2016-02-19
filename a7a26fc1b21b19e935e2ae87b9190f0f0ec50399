@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_e30bb224",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-19T11:01:30Z",
+      "side": 1,
+      "message": "I just realized this should use this.options.value, to prevent the more expensive DOM access via jQuery.text().",
+      "revId": "a7a26fc1b21b19e935e2ae87b9190f0f0ec50399",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
