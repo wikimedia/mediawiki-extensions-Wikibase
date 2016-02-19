@@ -204,29 +204,31 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * @private
 	 */
 	_shortenPageName: function() {
-		if ( this._isInEditMode ) {
+		if ( this._isInEditMode || !this.options.value ) {
 			return;
 		}
-		var $a = this.$link.find( 'a' ),
-			fullText = $a.text(),
-			text = fullText;
 
+		var text = this.options.value.getPageName();
+		// 15 characters cover ~57% of the article titles in the German Wikipedia.
+		if ( text.length <= 15 ) {
+			return;
+		}
+
+		var $a = this.$link.find( 'a' );
 		$a.text( '.' );
-
 		var lineHeight = this.element.height();
-
 		$a.text( text );
 
 		if ( this.element.height() <= lineHeight ) {
 			return;
 		}
 
+		$a.attr( 'title', text );
+
 		while ( this.element.height() > lineHeight && text.length > 0 ) {
 			text = text.substring( 0, text.length - 1 );
 			$a.text( text + '…' );
 		}
-
-		$a.attr( 'title', fullText );
 	},
 
 	/**
