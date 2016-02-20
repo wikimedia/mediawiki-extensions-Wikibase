@@ -107,7 +107,7 @@ class RestrictedEntityLookup implements EntityLookup {
 	/**
 	 * Resets the number of entities loaded via this object.
 	 *
-	 * @since 3.2.1
+	 * @since 3.4
 	 */
 	public function resetEntityAccessCount() {
 		$this->entityAccessCount = 0;
