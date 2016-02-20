@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Search\Elastic\Fields;
 
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Statement\StatementListHolder;
+use Wikibase\DataModel\Statement\StatementListProvider;
 
 /**
  * @since 0.5
@@ -32,7 +32,7 @@ class StatementCountField implements SearchIndexField {
 	 * @return int
 	 */
 	public function getFieldData( EntityDocument $entity ) {
-		if ( $entity instanceof StatementListHolder ) {
+		if ( $entity instanceof StatementListProvider ) {
 			return $entity->getStatements()->count();
 		}
 

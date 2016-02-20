@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
 use Wikibase\DataModel\Term\AliasGroupList;
-use Wikibase\DataModel\Term\FingerprintHolder;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
@@ -137,7 +137,7 @@ class EntityChangeFactory {
 
 		// Also don't include description and alias diffs.
 		// FIXME: Implement T113468 and remove this.
-		if ( $oldEntity instanceof FingerprintHolder ) {
+		if ( $oldEntity instanceof FingerprintProvider ) {
 			$oldFingerprint = $oldEntity->getFingerprint();
 			$newFingerprint = $newEntity->getFingerprint();
 

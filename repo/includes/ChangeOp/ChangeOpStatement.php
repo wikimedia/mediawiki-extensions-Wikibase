@@ -94,6 +94,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
 	 *
+	 * @throws InvalidArgumentException
 	 * @throws ChangeOpException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
