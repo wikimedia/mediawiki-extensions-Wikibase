@@ -16,6 +16,41 @@
       "revId": "bb0737fa90f6f50160ef740978ebd9b148467816",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_f1636bd8",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-21T15:53:33Z",
+      "side": 1,
+      "message": "Cause we already have WikibaseLib.datatypes.php which is also lowercase.",
+      "parentUuid": "4ea78b8a_9dcc17c2",
+      "revId": "bb0737fa90f6f50160ef740978ebd9b148467816",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_b15df31c",
+        "filename": "repo/WikibaseRepo.entitytypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-21T15:53:33Z",
+      "side": 1,
+      "message": "Wrong",
+      "revId": "bb0737fa90f6f50160ef740978ebd9b148467816",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
