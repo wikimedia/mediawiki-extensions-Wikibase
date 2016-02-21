@@ -48,6 +48,8 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} breyting",
 	"wikibase-replicationnote": "Athugaðu að það tekur nokkrar mínútur þangað til breytingarnar eru sýnilegar á öllum wiki verkefnum.",
 	"wikibase-watchlist-show-changes-pref": "Sýna {{WBREPONAME}} breytingar í vaktlistanum þínum",
+	"wikibase-error-deserialize-error": "Mistókst að afpakka gögnum.",
+	"wikibase-error-serialize-error": "Mistókst að raðbinda gögn",
 	"wikibase-error-invalid-entity-id": "Tilgreint auðkenni þekkist ekki. Vinsamlegast notaðu gilt auðkenni einingarinnar.",
 	"wikibase-error-exceeded-entity-access-limit": "Of margir {{WBREPONAME}} hlutir sóttir.",
 	"unconnectedpages": "Síður sem tengjast ekki hlutum",
