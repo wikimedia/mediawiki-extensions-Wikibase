@@ -127,6 +127,7 @@ call_user_func( function() {
 	$wgHooks['ParserLimitReportFormat'][] = '\Wikibase\Client\Hooks\ParserLimitHookHandlers::onParserLimitReportFormat';
 	$wgHooks['ParserLimitReportPrepare'][] = '\Wikibase\Client\Hooks\ParserLimitHookHandlers::onParserLimitReportPrepare';
 	$wgHooks['FormatAutocomments'][] = '\Wikibase\ClientHooks::onFormat';
+	$wgHooks['ParserClearState'][] = '\Wikibase\Client\Hooks\ParserClearStateHookHandler::onParserClearState';
 
 	// recent changes / watchlist hooks
 	$wgHooks['ChangesListSpecialPageFilters'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageFilters';
