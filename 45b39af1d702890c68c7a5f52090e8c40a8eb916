@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_3bf23de0",
+        "filename": "client/includes/Hooks/ParserClearStateHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-22T11:26:24Z",
+      "side": 1,
+      "message": "a little text about this hook would be nice",
+      "revId": "45b39af1d702890c68c7a5f52090e8c40a8eb916",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_7b10b504",
+        "filename": "client/includes/Hooks/ParserClearStateHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-22T11:26:24Z",
+      "side": 1,
+      "message": "missing return true",
+      "revId": "45b39af1d702890c68c7a5f52090e8c40a8eb916",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
