@@ -140,9 +140,9 @@ call_user_func( function() {
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(
-		'class' => 'Wikibase\ApiClientInfo',
+		'class' => 'Wikibase\Client\Api\ApiClientInfo',
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
-			return new Wikibase\ApiClientInfo(
+			return new Wikibase\Client\Api\ApiClientInfo(
 				Wikibase\Client\WikibaseClient::getDefaultInstance()->getSettings(),
 				$apiQuery,
 				$moduleName
