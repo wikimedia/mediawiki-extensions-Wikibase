@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\ChangeNotificationSender;
 use Wikibase\Store\ChangeDispatchCoordinator;
@@ -216,6 +217,55 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $siteLinkDiff ) );
 
 		return $change;
+	}
+
+	public function testInitialValues() {
+		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
+		$dispatcher = new ChangeDispatcher(
+			$coordinator,
+			$this->getNotificationSender(),
+			$this->getChunkedChangesAccess(),
+			$this->getSubscriptionLookup()
+		);
+
+		$this->assertSame( $coordinator, $dispatcher->getDispatchCoordinator() );
+		$this->assertFalse( $dispatcher->isVerbose() );
+		$this->assertInstanceOf(
+			'Wikibase\Lib\Reporting\MessageReporter',
+			$dispatcher->getMessageReporter()
+		);
+		$this->assertInstanceOf(
+			'Wikibase\Lib\Reporting\ExceptionHandler',
+			$dispatcher->getExceptionHandler()
+		);
+		$this->assertSame( 1000, $dispatcher->getBatchSize() );
+		$this->assertSame( 3, $dispatcher->getBatchChunkFactor() );
+		$this->assertSame( 15, $dispatcher->getMaxChunks() );
+	}
+
+	public function testSetters() {
+		$dispatcher = new ChangeDispatcher(
+			$this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' ),
+			$this->getNotificationSender(),
+			$this->getChunkedChangesAccess(),
+			$this->getSubscriptionLookup()
+		);
+
+		$dispatcher->setVerbose( true );
+		$reporter = new NullMessageReporter();
+		$dispatcher->setMessageReporter( $reporter );
+		$exceptionHandler = $this->getMock( 'Wikibase\Lib\Reporting\ExceptionHandler' );
+		$dispatcher->setExceptionHandler( $exceptionHandler );
+		$dispatcher->setBatchSize( 1 );
+		$dispatcher->setBatchChunkFactor( 1 );
+		$dispatcher->setMaxChunks( 1 );
+
+		$this->assertTrue( $dispatcher->isVerbose() );
+		$this->assertSame( $reporter, $dispatcher->getMessageReporter() );
+		$this->assertSame( $exceptionHandler, $dispatcher->getExceptionHandler() );
+		$this->assertSame( 1, $dispatcher->getBatchSize() );
+		$this->assertSame( 1, $dispatcher->getBatchChunkFactor() );
+		$this->assertSame( 1, $dispatcher->getMaxChunks() );
 	}
 
 	public function testSelectClient() {
