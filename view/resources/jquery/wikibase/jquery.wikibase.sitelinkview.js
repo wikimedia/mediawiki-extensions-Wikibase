@@ -214,20 +214,41 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			return;
 		}
 
-		var $a = this.$link.find( 'a' );
-		$a.text( '.' );
-		var lineHeight = this.element.height();
-		$a.text( text );
+		var $a = this.$link.find( 'a' ),
+			currentLength = 0,
+			lowerBreakPoint = 0,
+			upperBreakPoint = 0,
+			minimumHeight = 0;
 
-		if ( this.element.height() <= lineHeight ) {
-			return;
+		while ( true ) {
+			var length = !lowerBreakPoint ? 10 : !upperBreakPoint ? text.length
+				: Math.round( ( lowerBreakPoint + upperBreakPoint ) / 2 );
+
+			// Stop when we can not learn anything new.
+			if ( length === currentLength ) {
+				break;
+			}
+
+			$a.text( text.length > length ? text.slice( 0, length ) + '…' : text );
+			var height = this.element.height();
+
+			if ( !lowerBreakPoint || height <= minimumHeight ) {
+				lowerBreakPoint = length;
+				minimumHeight = height;
+			} else {
+				upperBreakPoint = length;
+			}
+
+			currentLength = length;
 		}
 
-		$a.attr( 'title', text );
+		// The loop may have stopped with a text that's just one character to long.
+		if ( currentLength > lowerBreakPoint ) {
+			$a.text( text.slice( 0, lowerBreakPoint ) + '…' );
+		}
 
-		while ( this.element.height() > lineHeight && text.length > 0 ) {
-			text = text.substring( 0, text.length - 1 );
-			$a.text( text + '…' );
+		if ( text.length > lowerBreakPoint ) {
+			$a.attr( 'title', text );
 		}
 	},
 
