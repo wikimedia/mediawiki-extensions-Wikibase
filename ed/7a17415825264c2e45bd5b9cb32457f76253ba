@@ -1,0 +1,7 @@
+Verified+2: jenkins-bot
+Code-Review+2: JanZerebecki <jan.wikimedia@zerebecki.de>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 22 Feb 2016 19:34:37 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/272523
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/wmf/1.27.0-wmf.14
