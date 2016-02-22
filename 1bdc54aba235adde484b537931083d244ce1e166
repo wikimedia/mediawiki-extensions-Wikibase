@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_3ee8ebdc",
+        "filename": "client/includes/Hooks/ParserClearStateHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-22T15:49:50Z",
+      "side": 1,
+      "message": "leading dot?",
+      "revId": "1bdc54aba235adde484b537931083d244ce1e166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_bec37b60",
+        "filename": "client/includes/Hooks/ParserClearStateHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-22T15:49:50Z",
+      "side": 1,
+      "message": "Do we have any consistency of GNU GPL vs just GPL?",
+      "revId": "1bdc54aba235adde484b537931083d244ce1e166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_1eebafdc",
+        "filename": "client/includes/Hooks/ParserClearStateHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-22T15:49:50Z",
+      "side": 1,
+      "message": "Add some documentation? Link to ticket on phabricator would be great.",
+      "revId": "1bdc54aba235adde484b537931083d244ce1e166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_3ecf8b84",
+        "filename": "composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-22T15:49:50Z",
+      "side": 1,
+      "message": "~3.4 for consistency",
+      "revId": "1bdc54aba235adde484b537931083d244ce1e166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
