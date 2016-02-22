@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_69e9cf7a",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceRemoveTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-22T17:02:00Z",
+      "side": 1,
+      "message": "This assumes $statement is changed when apply() is called on $item above. This is true, and we know and want this. But it\u0027s still bad style here in the test and hard to read and to understand. Please avoid.",
+      "revId": "27b1b07e0384551eca6a27cbc80bef15c5c32c74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_09fe1b36",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceRemoveTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-22T17:02:00Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "27b1b07e0384551eca6a27cbc80bef15c5c32c74",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
