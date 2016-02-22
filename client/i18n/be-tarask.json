@@ -26,6 +26,7 @@
 	"wikibase-dataitem": "Аб’ект {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Правіць спасылкі",
 	"wikibase-editlinkstitle": "Рэдагаваць міжмоўныя спасылкі",
+	"wikibase-addlinkstitle": "Дадаць міжмоўныя спасылкі",
 	"wikibase-linkitem-addlinks": "Дадаць спасылкі",
 	"wikibase-linkitem-alreadylinked": "Старонку, якую вы хочаце злучыць, ужо далучаная да [$1 аб’екта] ў цэнтральным рэпазыторыі, які спасылаецца на $2 на гэтым сайце. Аб’екты могуць мець толькі па адной старонцы з аднаго сайту. Выберыце, калі ласка, інушю старонку.",
 	"wikibase-linkitem-close": "Закрыць дыялёгі і абнавіць старонку",

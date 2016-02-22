@@ -276,7 +276,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Putite cagnà chesto mettenno <nowiki>{{#babel: }}</nowiki> dint' 'a [[Special:MyPage|paggena utente]] {{GENDER:$1|vuosta}} .",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, se scagnaje 'a $3 - $4",
 	"wikibase-api-unresolved-redirect": "N'ID entità specificato se riferisce a nu redirect, ca nun è suppurtato int'a stu cuntesto.",
-	"wikibase-api-no-such-sitelink": "Nun se puteva truvà nu cullegamento a 'o sito '$1' quanno si cerca 'e cagnà 'a distinzione.",
+	"wikibase-api-no-such-sitelink": "Nun se puteva truvà nu cullegamento a 'o sito \"$1\" quanno si cerca 'e cagnà 'a distinzione.",
 	"wikibase-api-target-not-empty": "'O redirect se può crià surtanto ncopp'a n'entità abbacante o scancellata.",
 	"wikibase-api-target-is-redirect": "'A destinaziona 'e redirect nun adda essere nu redirect pure.",
 	"wikibase-api-target-is-incompatible": "Tenta 'e rindirizzà a n'entità 'e tipo differente.",
