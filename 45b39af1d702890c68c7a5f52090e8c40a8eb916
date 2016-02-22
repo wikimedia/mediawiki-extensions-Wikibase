@@ -50,6 +50,24 @@
       "revId": "45b39af1d702890c68c7a5f52090e8c40a8eb916",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_1e472f24",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-22T15:42:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea41786_9b281134",
+      "revId": "45b39af1d702890c68c7a5f52090e8c40a8eb916",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
