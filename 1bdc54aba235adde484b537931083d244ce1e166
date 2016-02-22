@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_7ee8a3af",
+        "filename": "client/includes/Hooks/ParserClearStateHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-22T15:55:06Z",
+      "side": 1,
+      "message": "sorry, meant trailing..\n\nI think we mostly do just \"@since 0.5\"",
+      "parentUuid": "2ea41786_fe9fb360",
+      "revId": "1bdc54aba235adde484b537931083d244ce1e166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_bec37b60",
         "filename": "client/includes/Hooks/ParserClearStateHookHandler.php",
         "patchSetId": 3
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Ok, if that does the right thing.",
       "parentUuid": "2ea41786_3ecf8b84",
+      "revId": "1bdc54aba235adde484b537931083d244ce1e166",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_ded677f6",
+        "filename": "composer.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-22T15:55:06Z",
+      "side": 1,
+      "message": "It\u0027s the same.\n\nthe ^x.y.z Syntax allows all releases that have the same x which also does ~x.y. Only difference is that with ~x.y.z both x and y have to be the same.",
+      "parentUuid": "2ea41786_beb7fbd2",
       "revId": "1bdc54aba235adde484b537931083d244ce1e166",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
