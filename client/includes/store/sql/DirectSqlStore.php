@@ -321,7 +321,10 @@ class DirectSqlStore implements ClientStore {
 		$persistentCachingLookup->setVerifyRevision( true );
 
 		// Top caching layer using an in-process hash.
-		$hashCachingLookup = new CachingEntityRevisionLookup( $persistentCachingLookup, new HashBagOStuff() );
+		$hashCachingLookup = new CachingEntityRevisionLookup(
+			$persistentCachingLookup,
+			new HashBagOStuff( [ 'maxKeys' => 1000 ] )
+		);
 		// No need to verify the revision ID, we'll ignore updates that happen during the request.
 		$hashCachingLookup->setVerifyRevision( false );
 

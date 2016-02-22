@@ -408,7 +408,7 @@ class SqlStore implements Store {
 		// Top caching layer using an in-process hash.
 		$hashCachingLookup = new CachingEntityRevisionLookup(
 			$persistentCachingLookup,
-			new HashBagOStuff()
+			new HashBagOStuff( [ 'maxKeys' => 1000 ] )
 		);
 		// No need to verify the revision ID, we'll ignore updates that happen during the request.
 		$hashCachingLookup->setVerifyRevision( false );
