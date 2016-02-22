@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_29d437be",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-22T16:59:09Z",
+      "side": 1,
+      "message": "I\u0027d actually prefer the code that is now in newItemSerializer() to be inlined here.",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_09d7fbc5",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-22T16:59:09Z",
+      "side": 1,
+      "message": "This abstraction seems like overkill to me.",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
