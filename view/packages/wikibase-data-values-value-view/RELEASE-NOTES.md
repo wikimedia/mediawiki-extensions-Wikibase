@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.16.1 (2016-02-22)
+* Fix quantities without unit in `QuantityInput`
+
 ## 0.16.0 (2016-02-10)
 
 * Changed `ValueView` to take two `ValueFormatter` instances instead of a
