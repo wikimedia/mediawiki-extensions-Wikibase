@@ -103,6 +103,8 @@ class ApiClientInfo extends ApiQueryBase {
 
 	/**
 	 * @see ApiBase::getExamplesMessages()
+	 *
+	 * @codeCoverageIgnore
 	 */
 	protected function getExamplesMessages() {
 		return array(

@@ -187,6 +187,8 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 
 	/**
 	 * @see ApiBase::getExamplesMessages
+	 *
+	 * @codeCoverageIgnore
 	 */
 	protected function getExamplesMessages() {
 		return array(

@@ -241,6 +241,8 @@ class RemoveClaims extends ApiBase {
 
 	/**
 	 * @see ApiBase::getExamplesMessages
+	 *
+	 * @codeCoverageIgnore
 	 */
 	protected function getExamplesMessages() {
 		return array(

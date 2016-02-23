@@ -252,6 +252,8 @@ class PageTerms extends ApiQueryBase {
 
 	/**
 	 * @see ApiBase::getExamplesMessages
+	 *
+	 * @codeCoverageIgnore
 	 */
 	protected function getExamplesMessages() {
 		if ( defined( 'WB_VERSION' ) ) {

@@ -235,6 +235,8 @@ class SetAliases extends ModifyEntity {
 
 	/**
 	 * @see ApiBase::getExamplesMessages
+	 *
+	 * @codeCoverageIgnore
 	 */
 	protected function getExamplesMessages() {
 		return array(

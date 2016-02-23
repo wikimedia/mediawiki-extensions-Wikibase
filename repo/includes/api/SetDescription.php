@@ -115,6 +115,8 @@ class SetDescription extends ModifyTerm {
 
 	/**
 	 * @see ApiBase::getExamplesMessages
+	 *
+	 * @codeCoverageIgnore
 	 */
 	protected function getExamplesMessages() {
 		return array(
