@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_0d07f9ce",
+        "filename": "docs/entities.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T20:57:51Z",
+      "side": 1,
+      "message": "This document however is not just about the implementation details but also about the general concept of entities which is way more abstract.",
+      "parentUuid": "2ea41786_e35b9355",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_29d437be",
         "filename": "lib/WikibaseLib.entitytypes.php",
         "patchSetId": 6
@@ -90,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_8d6be981",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T20:57:51Z",
+      "side": 1,
+      "message": "That isn\u0027t actually allowed as the component defines that serializes may only created by the factory and all classes other than the factories are package private.",
+      "parentUuid": "2ea41786_c70a2224",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_09d7fbc5",
         "filename": "lib/includes/EntityTypeDefinitions.php",
         "patchSetId": 6
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "I would have just copied the code, yea.",
       "parentUuid": "2ea41786_f2e03f95",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_2d68b583",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T20:57:51Z",
+      "side": 1,
+      "message": "Getting rid of it",
+      "parentUuid": "2ea41786_670fae34",
       "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
