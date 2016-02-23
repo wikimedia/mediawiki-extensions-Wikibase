@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_ad226aa0",
+        "filename": "repo/includes/Parsers/YearMonthTimeParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-23T11:14:55Z",
+      "side": 1,
+      "message": "_* the month\u0027s number (1 to 12)\n\nEach month only has one number.",
+      "revId": "6c8dc265d2e61b9b5311de54b137466bfa1bf434",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_ad702aa4",
+        "filename": "repo/includes/Parsers/YearMonthTimeParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-23T11:14:55Z",
+      "side": 1,
+      "message": "This includes genitive month names, the old data didn\u0027t",
+      "revId": "6c8dc265d2e61b9b5311de54b137466bfa1bf434",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
