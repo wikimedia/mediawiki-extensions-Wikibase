@@ -47,8 +47,12 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	options: {
 		template: 'wikibase-sitelinkgroupview',
 		templateParams: [
-			'', // id
-			'', // heading
+			function() {
+				return 'sitelinks-' + this.options.value.group; }, // id
+			function() {
+				// This is just the plain group name, but it's difficult to dynamically load the right message
+				return this.options.value.group;
+			}, // heading
 			'', // counter
 			'', // sitelinklistview
 			'', // group
@@ -121,15 +125,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			deferred = $.Deferred();
 
 		this.element.data( 'group', this.options.value.group );
-
-		if ( this.$h.contents().length === 1 ) {
-			// Only contains the counter
-			this.$h
-			.attr( 'id', 'sitelinks-' + this.options.value.group )
-			// This is just the plain group name, but it's difficult to dynamically load the right message
-			.text( this.options.value.group )
-			.append( this.$counter );
-		}
 
 		if ( !this.$headingSection.data( 'sticknode' ) ) {
 			this.$headingSection.sticknode( {
