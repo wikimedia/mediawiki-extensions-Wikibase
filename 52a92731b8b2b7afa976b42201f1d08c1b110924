@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_e7fb9e0f",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T17:23:07Z",
+      "side": 1,
+      "message": "These globals are typed in the code base. At least my PHPStorm does not need the additional type hint.",
+      "parentUuid": "2ea41786_23852bb2",
+      "revId": "52a92731b8b2b7afa976b42201f1d08c1b110924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_631c836b",
         "filename": "repo/includes/content/EntityContent.php",
         "patchSetId": 7
