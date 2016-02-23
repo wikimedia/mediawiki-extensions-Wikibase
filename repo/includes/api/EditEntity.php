@@ -304,6 +304,7 @@ class EditEntity extends ModifyEntity {
 	 * @param array $data
 	 * @param EntityDocument $entity
 	 *
+	 * @throws UsageException
 	 * @return ChangeOps
 	 */
 	private function getChangeOps( array $data, EntityDocument $entity ) {
@@ -313,29 +314,41 @@ class EditEntity extends ModifyEntity {
 		//       for more efficient validation!
 
 		if ( array_key_exists( 'labels', $data ) ) {
+			if ( !( $entity instanceof FingerprintProvider ) ) {
+				$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-supported' );
+			}
 			$this->assertArray( $data['labels'], 'List of labels must be an array' );
 			$changeOps->add( $this->getLabelChangeOps( $data['labels'] ) );
 		}
 
 		if ( array_key_exists( 'descriptions', $data ) ) {
+			if ( !( $entity instanceof FingerprintProvider ) ) {
+				$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-supported' );
+			}
 			$this->assertArray( $data['descriptions'], 'List of descriptions must be an array' );
 			$changeOps->add( $this->getDescriptionChangeOps( $data['descriptions'] ) );
 		}
 
 		if ( array_key_exists( 'aliases', $data ) ) {
+			if ( !( $entity instanceof FingerprintProvider ) ) {
+				$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
+			}
 			$this->assertArray( $data['aliases'], 'List of aliases must be an array' );
 			$changeOps->add( $this->getAliasesChangeOps( $data['aliases'] ) );
 		}
 
 		if ( array_key_exists( 'sitelinks', $data ) ) {
 			if ( !( $entity instanceof Item ) ) {
-				$this->errorReporter->dieError( 'Non Items cannot have sitelinks', 'not-recognized' );
+				$this->errorReporter->dieError( 'Non Items cannot have sitelinks', 'not-supported' );
 			}
 			$this->assertArray( $data['sitelinks'], 'List of sitelinks must be an array' );
 			$changeOps->add( $this->getSiteLinksChangeOps( $data['sitelinks'], $entity ) );
 		}
 
 		if ( array_key_exists( 'claims', $data ) ) {
+			if ( !( $entity instanceof StatementListProvider ) ) {
+				$this->errorReporter->dieError( 'The given entity cannot contain statements', 'not-supported' );
+			}
 			$this->assertArray( $data['claims'], 'List of claims must be an array' );
 			$changeOps->add( $this->getClaimsChangeOps( $data['claims'] ) );
 		}
