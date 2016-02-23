@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "4ea78b8a_93a2ea39",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-02-23T23:20:06Z",
+      "side": 1,
+      "message": "It\u0027s definitely datatype - this is the term in RDF/SPARQL world. E.g. see: https://www.w3.org/TR/sparql11-query/#matchArbDT",
+      "parentUuid": "4ea78b8a_3481a34f",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea78b8a_32ad3ee8",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 1
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Yes, i wondered about that too. but it\u0027s a separate concern.",
       "parentUuid": "4ea78b8a_32ad3ee8",
+      "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea78b8a_b3ada630",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-02-23T23:20:06Z",
+      "side": 1,
+      "message": "It looks like the Property type is here from times where it was all in one class, and then it made sense. Now, not so much...",
+      "parentUuid": "4ea78b8a_f49a2bbc",
       "revId": "daadcf8b04916e99c52da6bdb601b81424c28be9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
