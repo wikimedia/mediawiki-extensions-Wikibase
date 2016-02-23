@@ -429,6 +429,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param string[] $badgeIds
 	 * @param Summary &$summary The summary for this edit will be saved here.
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Status
 	 */
 	private function setSiteLink( EntityDocument $item, $siteId, $pageName, $badgeIds, &$summary ) {

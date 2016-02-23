@@ -263,6 +263,8 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param Exception $ex
+	 *
 	 * @return EntityLookup
 	 */
 	private function getEntityLookupThrows( Exception $ex ) {

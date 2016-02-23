@@ -45,7 +45,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup|\PHPUnit_Framework_MockObject_MockObject
+	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
@@ -65,7 +65,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return Title|\PHPUnit_Framework_MockObject_MockObject
+	 * @return Title
 	 */
 	public function getMockTitle() {
 		$mock = $this->getMockBuilder( 'Title' )
@@ -88,7 +88,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $params
 	 * @param TermSearchResult[] $matches
 	 *
-	 * @return EntitySearchHelper|\PHPUnit_Framework_MockObject_MockObject
+	 * @return EntitySearchHelper
 	 */
 	private function getMockEntitySearchHelper( array $params, array $matches ) {
 		$mock = $this->getMockBuilder( 'Wikibase\Repo\Api\EntitySearchHelper' )
@@ -109,9 +109,9 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param array $matches
+	 * @param array[] $expected
 	 *
-	 * @return ApiPageSet|\PHPUnit_Framework_MockObject_MockObject
+	 * @return ApiPageSet
 	 */
 	private function getMockApiPageSet( array $expected ) {
 		$mock = $this->getMockBuilder( 'ApiPageSet' )

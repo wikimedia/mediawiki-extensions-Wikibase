@@ -66,6 +66,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @param string $languageCode
 	 * @param string $value
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Summary
 	 */
 	protected function setValue( EntityDocument $entity, $languageCode, $value ) {

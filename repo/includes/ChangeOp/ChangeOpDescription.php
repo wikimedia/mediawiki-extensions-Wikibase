@@ -106,6 +106,7 @@ class ChangeOpDescription extends ChangeOpBase {
 	 *
 	 * @param EntityDocument $entity
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {

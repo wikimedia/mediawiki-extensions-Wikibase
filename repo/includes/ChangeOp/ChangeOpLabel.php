@@ -77,6 +77,8 @@ class ChangeOpLabel extends ChangeOpBase {
 	 *
 	 * @param EntityDocument $entity
 	 * @param Summary|null $summary
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		if ( !( $entity instanceof FingerprintHolder ) ) {
@@ -109,6 +111,7 @@ class ChangeOpLabel extends ChangeOpBase {
 	 *
 	 * @param EntityDocument $entity
 	 *
+	 * @throws InvalidArgumentException
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {
