@@ -147,7 +147,7 @@ methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptab
 		acceptableRanks
 	)
 
-	local label = nil
+	local label
 	if propertyLabelOrId:match( '^P%d+$' ) then
 		label = mw.wikibase.label( propertyLabelOrId )
 	end
