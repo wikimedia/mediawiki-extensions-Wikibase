@@ -7,7 +7,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-define( 'WIKIBASE_DATAMODEL_VERSION', '5.0.1' );
+define( 'WIKIBASE_DATAMODEL_VERSION', '5.0.2' );
 
 if ( defined( 'MEDIAWIKI' ) && function_exists( 'wfLoadExtension' ) ) {
 	wfLoadExtension( 'WikibaseDataModel', __DIR__ . '/mediawiki-extension.json' );
