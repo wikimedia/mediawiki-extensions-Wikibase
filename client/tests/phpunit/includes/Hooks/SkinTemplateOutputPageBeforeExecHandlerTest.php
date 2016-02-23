@@ -176,6 +176,11 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 		$context->expects( $this->any() )
 			->method( 'getRequest' )
 			->will( $this->returnValue( $request ) );
+		$context->expects( $this->any() )
+			->method( 'getConfig' )
+			->will( $this->returnValue(
+				ConfigFactory::getDefaultInstance()->makeConfig( 'main' )
+			) );
 
 		return $context;
 	}
