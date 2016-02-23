@@ -7,7 +7,6 @@ use FauxRequest;
 use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;

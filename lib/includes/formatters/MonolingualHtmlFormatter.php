@@ -5,7 +5,6 @@ namespace Wikibase\Formatters;
 use DataValues\MonolingualTextValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
-use ValueFormatters\ValueFormatter;
 use ValueFormatters\ValueFormatterBase;
 use Wikibase\Lib\LanguageNameLookup;
 

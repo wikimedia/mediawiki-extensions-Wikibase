@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder

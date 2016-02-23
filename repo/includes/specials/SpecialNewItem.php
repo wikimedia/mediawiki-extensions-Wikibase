@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
 use Status;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 

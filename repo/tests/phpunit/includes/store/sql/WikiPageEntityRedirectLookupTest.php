@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use LoadBalancer;
 use MediaWikiTestCase;
 use Title;
 use WikiPage;
