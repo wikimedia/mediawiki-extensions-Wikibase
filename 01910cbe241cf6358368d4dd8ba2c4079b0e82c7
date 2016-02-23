@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_e35b9355",
+        "filename": "docs/entities.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-23T17:24:41Z",
+      "side": 1,
+      "message": "Then please provide a patch doing that. Or at least file a ticket about it. \nTBH, I\u0027d prefer at least a basic version of the document to be in this patch. \nDocumentation should be written in parallel with the code, just like tests.",
+      "parentUuid": "2ea41786_b2eac771",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_29d437be",
         "filename": "lib/WikibaseLib.entitytypes.php",
         "patchSetId": 6
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_c70a2224",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-23T17:24:41Z",
+      "side": 1,
+      "message": "This doesn\u0027t strike me as problematic:\n\n    new ItemSerializer(\n\t\t\t$this-\u003enewTermListSerializer(),\n\t\t\t$this-\u003enewAliasGroupListSerializer(),\n\t\t\t$this-\u003enewStatementListSerializer(),\n\t\t\t$this-\u003enewSiteLinkSerializer(),\n\t\t\t$this-\u003eshouldUseObjectsForMaps()\n\t\t);\n\nHiding the constructor call behind another level of indirection seems pointless, and doesn\u0027t make the code easier to read and understand.\n\nBut I don\u0027t consider this a blocker. Just a case of unnecessary layers...",
+      "parentUuid": "2ea41786_92d22bd4",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_09d7fbc5",
         "filename": "lib/includes/EntityTypeDefinitions.php",
         "patchSetId": 6
@@ -83,6 +119,24 @@
       "side": 1,
       "message": "Not sure... You\u0027d just copy the method from DataTypeDefinitions in here?\n\nAlso see https://gerrit.wikimedia.org/r/#/c/271080/2 for the relevant patch.",
       "parentUuid": "2ea41786_09d7fbc5",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_670fae34",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-23T17:24:41Z",
+      "side": 1,
+      "message": "I would have just copied the code, yea.",
+      "parentUuid": "2ea41786_f2e03f95",
       "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
