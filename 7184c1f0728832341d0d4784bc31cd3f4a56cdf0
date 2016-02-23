@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_92422b12",
+        "filename": "repo/resources/performance/Statistics.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T09:34:24Z",
+      "side": 1,
+      "message": "too many asterisks",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_5244b31c",
+        "filename": "repo/resources/performance/Statistics.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T09:34:24Z",
+      "side": 1,
+      "message": "too many asterisks",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_f2503fdb",
+        "filename": "repo/resources/performance/Statistics.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T09:34:24Z",
+      "side": 1,
+      "message": "missing documentation",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_723d2f8a",
+        "filename": "repo/resources/performance/Statistics.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T09:34:24Z",
+      "side": 1,
+      "message": "too many asterisks",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_52c5938f",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T09:34:24Z",
+      "side": 1,
+      "message": "does this variable really need to be attached to the global wikibase object? If so, it should perhaps be defined somewhere else. Otherwise, just use a local variable.",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_b20167bb",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T09:34:24Z",
+      "side": 1,
+      "message": "missing negation?",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_b2d4074d",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T09:34:24Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
