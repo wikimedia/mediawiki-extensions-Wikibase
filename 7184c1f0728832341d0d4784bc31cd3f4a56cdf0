@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_edc14284",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-23T11:37:49Z",
+      "side": 1,
+      "message": "What other scope could window.performance possibly have? I don\u0027t care about this, it would just be unusable if it would be local to this file.",
+      "parentUuid": "2ea41786_b24e479a",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_b20167bb",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 21
@@ -151,6 +169,24 @@
       "side": 1,
       "message": "Adrian told me to introduce it.",
       "parentUuid": "2ea41786_b2d4074d",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_2dc8baa9",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-02-23T11:37:49Z",
+      "side": 1,
+      "message": "I didn\u0027t. I dislike this, too.",
+      "parentUuid": "2ea41786_b235e7f5",
       "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
