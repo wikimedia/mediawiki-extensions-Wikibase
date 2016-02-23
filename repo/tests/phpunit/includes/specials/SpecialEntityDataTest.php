@@ -15,6 +15,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -80,8 +81,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$rdfBuilder = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
 		$serializationService = new EntityDataSerializationService(
-			self::URI_BASE,
-			self::URI_DATA,
 			$mockRepository,
 			$titleLookup,
 			$dataTypeLookup,
@@ -89,7 +88,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
-			new HashSiteStore()
+			new HashSiteStore(),
+			new RdfVocabulary( self::URI_BASE, self::URI_DATA )
 		);
 
 		$formats = array( 'json', 'rdfxml', 'ntriples' );
