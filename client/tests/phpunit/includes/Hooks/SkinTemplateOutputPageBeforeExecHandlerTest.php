@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use ConfigFactory;
 use FauxRequest;
 use IContextSource;
 use OutputPage;
@@ -176,6 +177,11 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 		$context->expects( $this->any() )
 			->method( 'getRequest' )
 			->will( $this->returnValue( $request ) );
+		$context->expects( $this->any() )
+			->method( 'getConfig' )
+			->will( $this->returnValue(
+				ConfigFactory::getDefaultInstance()->makeConfig( 'main' )
+			) );
 
 		return $context;
 	}
