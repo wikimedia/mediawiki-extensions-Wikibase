@@ -87,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_633fa3d4",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T17:21:04Z",
+      "side": 1,
+      "message": "Can this class please have a toString function to be used in the JS console? With that, all this HTML stuff wouldn\u0027t even be necessary.",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_4d2656cb",
         "filename": "repo/resources/performance/Mark.js",
         "patchSetId": 24
@@ -166,6 +183,58 @@
       "writtenOn": "2016-02-23T13:26:42Z",
       "side": 1,
       "message": "var performanceMark \u003d new ...",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_a3ea7b71",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T17:21:04Z",
+      "side": 1,
+      "message": "This is intended, as far as I know, to be able to access it later. I suggest to put this in the wikibase.performance namespace.",
+      "parentUuid": "2ea41786_4d0df640",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_6371e3dc",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T17:21:04Z",
+      "side": 1,
+      "message": "Can all this here be a service function in wb._performanceMark I can manually call, when I forgot to set …?performance\u003d1 in the URL?",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_63b24394",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T17:21:04Z",
+      "side": 1,
+      "message": "I\u0027m still not sure if this is helpful or even necessary. This could also be in the JS console.",
       "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
