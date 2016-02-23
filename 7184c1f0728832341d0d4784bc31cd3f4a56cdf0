@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_eda5c244",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:19:51Z",
+      "side": 1,
+      "message": "Not sure how this is related to the specific mark we create here. The only thing I see is a global field introduced in a strange place which could (for now) just be a local variable.\n\nTo ask differently: do you plan to access wb._performanceMark anywhere else than this file and can it be injected instead?",
+      "parentUuid": "2ea41786_b24e479a",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_b20167bb",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 21
