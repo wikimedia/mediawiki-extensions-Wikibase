@@ -26,6 +26,7 @@ use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpStatement
+ * @covers Wikibase\ChangeOp\ChangeOpBase
  *
  * @group Wikibase
  * @group WikibaseRepo

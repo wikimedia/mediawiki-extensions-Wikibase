@@ -19,6 +19,7 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpQualifier
+ * @covers Wikibase\ChangeOp\ChangeOpBase
  *
  * @group Wikibase
  * @group WikibaseRepo

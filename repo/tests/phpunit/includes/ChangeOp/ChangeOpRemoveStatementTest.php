@@ -13,6 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpRemoveStatement
+ * @covers Wikibase\ChangeOp\ChangeOpBase
  *
  * @group Wikibase
  * @group WikibaseRepo

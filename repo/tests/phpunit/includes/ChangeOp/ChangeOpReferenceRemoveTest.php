@@ -14,6 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpReferenceRemove
+ * @covers Wikibase\ChangeOp\ChangeOpBase
  *
  * @group Wikibase
  * @group WikibaseRepo

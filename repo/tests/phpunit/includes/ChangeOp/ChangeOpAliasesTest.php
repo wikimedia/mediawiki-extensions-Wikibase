@@ -9,6 +9,7 @@ use Wikibase\ItemContent;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpAliases
+ * @covers Wikibase\ChangeOp\ChangeOpBase
  *
  * @group Wikibase
  * @group WikibaseRepo

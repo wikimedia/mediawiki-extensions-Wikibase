@@ -12,6 +12,7 @@ use Wikibase\Summary;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpLabel
+ * @covers Wikibase\ChangeOp\ChangeOpBase
  *
  * @group Wikibase
  * @group WikibaseRepo

@@ -14,6 +14,7 @@ use Wikibase\Summary;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpSiteLink
+ * @covers Wikibase\ChangeOp\ChangeOpBase
  *
  * @group Wikibase
  * @group WikibaseRepo
