@@ -49,11 +49,12 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		templateParams: [
 			function() {
 				return 'sitelinks-' + this.options.value.group;
-			}, // id
+			},
 			function() {
-				// This is just the plain group name, but it's difficult to dynamically load the right message
-				return this.options.value.group;
-			}, // heading
+				// It's hard to dynamically load the right message. Fake it as best as possible.
+				return this.options.value.group[0].toUpperCase()
+					+ this.options.value.group.slice( 1 );
+			},
 			'', // counter
 			'', // sitelinklistview
 			'', // group
@@ -63,7 +64,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		templateShortCuts: {
 			$headingSection: '.wikibase-sitelinkgroupview-heading-section',
 			headingContainer: '.wikibase-sitelinkgroupview-heading-container',
-			$h: 'h2,h3', /* TODO: Temporarily kept for compatibility, remove "h2" after July 2015 */
+			$h: 'h3',
 			$counter: '.wikibase-sitelinkgroupview-counter'
 		},
 		value: null,
