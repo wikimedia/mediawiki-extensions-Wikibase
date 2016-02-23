@@ -33,6 +33,23 @@
       "revId": "ca69ffcc316dbdf5330aed5355526aaf1d0b952e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_1bbe4f61",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-23T23:31:08Z",
+      "side": 1,
+      "message": "The documentation says \"Exception thrown if a value is not a valid key\". I felt this to be the case here. But I don\u0027t care much.",
+      "revId": "ca69ffcc316dbdf5330aed5355526aaf1d0b952e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
