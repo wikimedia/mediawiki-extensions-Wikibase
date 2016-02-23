@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_8dfc4ed7",
+        "filename": "repo/includes/Parsers/YearMonthTimeParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T11:27:52Z",
+      "side": 0,
+      "message": "This was introduced in I2e35005 in preparation for this patch. This misses the genitive month names. I did not wanted to change this in I2e35005, but change it now.",
+      "revId": "a523bdaab719b5391b723fb8718051018a17d31e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
