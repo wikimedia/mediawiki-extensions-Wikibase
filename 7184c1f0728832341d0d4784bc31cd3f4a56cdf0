@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_b24e479a",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-23T11:03:05Z",
+      "side": 1,
+      "message": "window.performance also has a global scope BTW.\nI did this in Adrians flavor.\nI don\u0027t have a strong opinion about this I just want to get this thing merged.",
+      "parentUuid": "2ea41786_52c5938f",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_b20167bb",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 21
@@ -115,6 +133,24 @@
       "writtenOn": "2016-02-23T09:34:24Z",
       "side": 1,
       "message": "unused",
+      "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_b235e7f5",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-23T11:03:05Z",
+      "side": 1,
+      "message": "Adrian told me to introduce it.",
+      "parentUuid": "2ea41786_b2d4074d",
       "revId": "7184c1f0728832341d0d4784bc31cd3f4a56cdf0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
