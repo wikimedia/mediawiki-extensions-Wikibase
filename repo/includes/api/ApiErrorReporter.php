@@ -10,6 +10,7 @@ use Language;
 use LogicException;
 use Message;
 use Status;
+use UsageException;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 
 /**
@@ -104,6 +105,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
+	 * @throws UsageException
 	 * @throws LogicException
 	 */
 	public function dieStatus( Status $status, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -139,6 +141,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
+	 * @throws UsageException
 	 * @throws LogicException
 	 */
 	public function dieException( Exception $ex, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -164,6 +167,7 @@ class ApiErrorReporter {
 	 * @param string $errorCode A code identifying the error.
 	 * @param string [$param,...] Parameters for the Message.
 	 *
+	 * @throws UsageException
 	 * @throws LogicException
 	 */
 	public function dieMessage( $errorCode /*...*/ ) {
@@ -196,6 +200,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
+	 * @throws UsageException
 	 * @throws LogicException
 	 */
 	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -224,6 +229,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extradata Any extra data to include in the error report
 	 *
+	 * @throws UsageException
 	 * @throws LogicException
 	 */
 	public function dieError( $description, $errorCode, $httpRespCode = 0, $extradata = array() ) {
@@ -258,6 +264,7 @@ class ApiErrorReporter {
 	 * @param int $httpRespCode
 	 * @param null|array $extradata
 	 *
+	 * @throws UsageException
 	 * @throws LogicException
 	 */
 	private function throwUsageException( $description, $errorCode, $httpRespCode = 0, $extradata = null ) {
