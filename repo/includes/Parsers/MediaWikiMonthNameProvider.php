@@ -23,7 +23,6 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 */
 	public function getLocalizedMonthNames( $languageCode ) {
 		$language = Language::factory( $languageCode );
-
 		$monthNames = array();
 
 		for ( $i = 1; $i <= 12; $i++ ) {
@@ -37,29 +36,24 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 * Creates a replacements array using information retrieved via MediaWiki's Language object.
 	 * Takes full month names, genitive names and abbreviations into account.
 	 *
-	 * @see MonthNameProvider::getMonthNameReplacements
+	 * @see MonthNameProvider::getMonthNumbers
 	 *
 	 * @param string $languageCode
-	 * @param string $canonicalLanguageCode
 	 *
-	 * @return string[] Array mapping localized month names (including full month names, genitive
-	 * names and abbreviations) to the same month names in a canonical language (usually English).
+	 * @return int[] Array mapping localized month names (including full month names, genitive names
+	 * and abbreviations) to the month's numbers 1 to 12.
 	 */
-	public function getMonthNameReplacements( $languageCode, $canonicalLanguageCode = 'en' ) {
+	public function getMonthNumbers( $languageCode ) {
 		$language = Language::factory( $languageCode );
-		$baseLanguage = Language::factory( $canonicalLanguageCode );
-
-		$replacements = array();
+		$numbers = array();
 
 		for ( $i = 1; $i <= 12; $i++ ) {
-			$canonical = $baseLanguage->getMonthName( $i );
-
-			$replacements[$language->getMonthName( $i )] = $canonical;
-			$replacements[$language->getMonthNameGen( $i )] = $canonical;
-			$replacements[$language->getMonthAbbreviation( $i )] = $canonical;
+			$numbers[$language->getMonthName( $i )] = $i;
+			$numbers[$language->getMonthNameGen( $i )] = $i;
+			$numbers[$language->getMonthAbbreviation( $i )] = $i;
 		}
 
-		return $replacements;
+		return $numbers;
 	}
 
 }
