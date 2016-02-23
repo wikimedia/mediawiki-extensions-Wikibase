@@ -448,6 +448,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 
 		if ( dropValue ) {
 			self.$listview.data( 'listview' ).value( self.options.value );
+			this._refreshCounter();
 		} else {
 			this._removeIncompleteSiteLinks();
 		}
