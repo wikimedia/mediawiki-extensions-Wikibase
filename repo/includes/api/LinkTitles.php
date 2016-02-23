@@ -7,7 +7,6 @@ use ApiMain;
 use Site;
 use SiteList;
 use Status;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;

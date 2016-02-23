@@ -76,7 +76,6 @@ use Wikibase\PropertyInfoBuilder;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Content\PropertyHandler;
