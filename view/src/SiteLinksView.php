@@ -148,19 +148,27 @@ class SiteLinksView {
 			$siteLinks
 		);
 
+		$count = count( $siteLinksForTable );
+
 		return $this->templateFactory->render(
 			'wikibase-sitelinkgroupview',
 			// TODO: support entity-id as prefix for element IDs.
 			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ),
 			wfMessage( 'wikibase-sitelinks-' . $group )->parse(),
-			'', // counter
+			wfMessage( 'parentheses',
+				wfMessage(
+					'wikibase-ui-pendingquantitycounter-nonpending',
+					wfMessage( 'wikibase-propertyedittool-counter-entrieslabel', $count ),
+					$count
+				)
+			),
 			$this->templateFactory->render(
 				'wikibase-sitelinklistview',
 				$this->getHtmlForSiteLinks( $siteLinksForTable, $group === 'special' )
 			),
 			htmlspecialchars( $group ),
 			$this->sectionEditLinkGenerator->getSiteLinksEditSection( $itemId ),
-			count( $siteLinksForTable ) > 1 ? ' mw-collapsible' : ''
+			$count > 1 ? ' mw-collapsible' : ''
 		);
 	}
 
