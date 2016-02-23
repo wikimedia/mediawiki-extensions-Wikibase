@@ -2,11 +2,11 @@
 
 ## Version 5.0.2 (2016-02-23)
 
-* Fixed regression in `ReferenceList::addReference` and the constructor possibly adding to many objects
+* Fixed regression in `ReferenceList::addReference` and the constructor possibly adding too many objects
 
 ## Version 5.0.1 (2016-02-18)
 
-* Fixed regression in `ReferenceList::removeReferenceHash` possibly removing to many objects
+* Fixed regression in `ReferenceList::removeReferenceHash` possibly removing too many objects
 * `ReferenceList::unserialize` no longer calls the constructor
 
 ## Version 5.0.0 (2016-02-15)
