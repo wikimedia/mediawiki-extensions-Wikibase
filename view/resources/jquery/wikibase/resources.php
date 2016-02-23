@@ -334,6 +334,9 @@ return call_user_func( function() {
 				'wikibase.buildErrorOutput',
 				'wikibase.sites',
 			),
+			'messages' => array(
+				'wikibase-sitelinks-wikipedia',
+			),
 		),
 
 		'jquery.wikibase.sitelinklistview' => $moduleTemplate + array(

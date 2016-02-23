@@ -118,16 +118,15 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 */
 	draw: function() {
 		var self = this,
+			group = this.options.value.group,
 			deferred = $.Deferred();
 
-		this.element.data( 'group', this.options.value.group );
+		this.element.data( 'group', group );
 
-		if ( this.$h.contents().length === 1 ) {
-			// Only contains the counter
+		if ( this.$h.contents().length < 2 ) {
 			this.$h
-			.attr( 'id', 'sitelinks-' + this.options.value.group )
-			// This is just the plain group name, but it's difficult to dynamically load the right message
-			.text( this.options.value.group )
+			.attr( 'id', 'sitelinks-' + group )
+			.text( mw.msg( 'wikibase-sitelinks-' + group ) )
 			.append( this.$counter );
 		}
 
