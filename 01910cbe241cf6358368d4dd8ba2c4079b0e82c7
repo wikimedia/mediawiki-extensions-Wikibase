@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_f0d7d226",
+        "filename": "docs/entities.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T21:46:06Z",
+      "side": 1,
+      "message": "It acutally should come before any of the implementation done for Wikibase... I however couldn\u0027t find anything abstract about entities in general on mediawiki.org or anywhere else. Can you point me somewhere?",
+      "parentUuid": "2ea41786_4da0919a",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_29d437be",
         "filename": "lib/WikibaseLib.entitytypes.php",
         "patchSetId": 6
@@ -156,6 +174,24 @@
       "side": 1,
       "message": "That approach is contrary to the idea of injecting factory callbacks. It wouldn\u0027t be possible for other entity types. I\u0027d prefer to treat Items and Properties like other Entities if possible.",
       "parentUuid": "2ea41786_8d6be981",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_10ddce47",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T21:46:06Z",
+      "side": 1,
+      "message": "Wikibase DataModel Serialization in fact says:\n\n\"All access to services provided by this library should happen through the SerializerFactory and DeserializerFactory. The rest of the code is an implementation detail which users should not know about.\"\n\nOther extensions which define their own entity types cannot only use Wikibase DataModel Serialization but they can define their own custom (de)serializers which are then known at the relevant place. However, if we don\u0027t change the contract of the serialization component (which I don\u0027t think will and should happen), this is the only thing that is possible and also makes sense.\n\nBasically, that\u0027s also the point of the abstract Serializer/Deserializer interfaces: You don\u0027t know exactly how the object gets constructed and thus it is easy to change the (de)serializer classes without making a breaking change to the component.",
+      "parentUuid": "2ea41786_0d35b942",
       "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
