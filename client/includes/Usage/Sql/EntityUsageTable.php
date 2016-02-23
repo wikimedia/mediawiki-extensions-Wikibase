@@ -19,6 +19,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  * @internal
  */
 class EntityUsageTable {
@@ -74,26 +75,6 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * Sets the "touched" timestamp for the given usages.
-	 *
-	 * @param int $pageId
-	 * @param EntityUsage[] $usages
-	 * @param string $touched timestamp in any format MWTimestamp accepts
-	 */
-	public function touchUsages( $pageId, array $usages, $touched ) {
-		if ( empty( $usages ) ) {
-			return;
-		}
-
-		$rowIds = $this->getAffectedRowIds( $pageId, $usages );
-		$batches = array_chunk( $rowIds, $this->batchSize );
-
-		foreach ( $batches as $batch ) {
-			$this->touchUsageBatch( $batch, $touched );
-		}
-	}
-
-	/**
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
 	 *
@@ -122,33 +103,13 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * @param int[] $rowIds the ids of the rows to touch
-	 * @param string $touched timestamp
-	 */
-	private function touchUsageBatch( array $rowIds, $touched ) {
-		$this->connection->begin( __METHOD__ );
-		$this->connection->update(
-			$this->tableName,
-			array(
-				'eu_touched' => wfTimestamp( TS_MW, $touched ),
-			),
-			array(
-				'eu_row_id' => $rowIds
-			),
-			__METHOD__
-		);
-		$this->connection->commit( __METHOD__ );
-	}
-
-	/**
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 * @param string $touched timestamp
 	 *
 	 * @throws InvalidArgumentException
 	 * @return array[]
 	 */
-	private function makeUsageRows( $pageId, array $usages, $touched ) {
+	private function makeUsageRows( $pageId, array $usages ) {
 		$rows = array();
 
 		foreach ( $usages as $usage ) {
@@ -159,8 +120,7 @@ class EntityUsageTable {
 			$rows[] = array(
 				'eu_page_id' => (int)$pageId,
 				'eu_aspect' => $usage->getAspectKey(),
-				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
-				'eu_touched' => wfTimestamp( TS_MW, $touched ),
+				'eu_entity_id' => $usage->getEntityId()->getSerialization()
 			);
 		}
 
@@ -170,22 +130,17 @@ class EntityUsageTable {
 	/**
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 * @param string|false $touched timestamp, may be false only if $usages is empty.
 	 *
 	 * @throws InvalidArgumentException
 	 * @return int The number of entries added
 	 */
-	public function addUsages( $pageId, array $usages, $touched ) {
+	public function addUsages( $pageId, array $usages ) {
 		if ( empty( $usages ) ) {
 			return 0;
 		}
 
-		if ( !is_string( $touched ) || $touched === '' ) {
-			throw new InvalidArgumentException( '$touched must be a timestamp string.' );
-		}
-
 		$batches = array_chunk(
-			$this->makeUsageRows( $pageId, $usages, $touched ),
+			$this->makeUsageRows( $pageId, $usages ),
 			$this->batchSize
 		);
 
@@ -205,58 +160,23 @@ class EntityUsageTable {
 
 	/**
 	 * @param int $pageId
-	 * @param string|null $timeOp Operator to use with $timestamp, e.g. "<" or ">=".
-	 * @param string|null $timestamp
 	 *
 	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
-	public function queryUsages( $pageId, $timeOp = null, $timestamp = null ) {
+	public function queryUsages( $pageId ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
-		if ( $timeOp !== null && ( !is_string( $timeOp ) || $timeOp === '' ) ) {
-			throw new InvalidArgumentException( '$timeOp must be an operator.' );
-		}
-
-		if ( $timestamp !== null && ( !is_string( $timestamp ) || $timestamp === '' ) ) {
-			throw new InvalidArgumentException( '$timestamp must be a timestamp string.' );
-		}
-
-		if ( is_string( $timeOp ) !== is_string( $timestamp ) ) {
-			throw new InvalidArgumentException( '$timeOp and $timestamp must either both be null, or both be strings.' );
-		}
-
-		$where = array(
-			'eu_page_id' => $pageId,
-		);
-
-		switch ( $timeOp ) {
-			case null:
-				break;
-
-			case '<':
-				$where[] = 'eu_touched < ' . $this->connection->addQuotes( $timestamp );
-				break;
-
-			case '>=':
-				$where[] = 'eu_touched >= ' . $this->connection->addQuotes( $timestamp );
-				break;
-
-			default:
-				throw new InvalidArgumentException( '$timeOp must be one of the allowed comparison operators.' );
-		}
-
 		$res = $this->connection->select(
 			$this->tableName,
-			array( 'eu_aspect', 'eu_entity_id' ),
-			$where,
+			[ 'eu_aspect', 'eu_entity_id' ],
+			[ 'eu_page_id' => $pageId ],
 			__METHOD__
 		);
 
-		$usages = $this->convertRowsToUsages( $res );
-		return $usages;
+		return $this->convertRowsToUsages( $res );
 	}
 
 	/**
@@ -291,37 +211,44 @@ class EntityUsageTable {
 	}
 
 	/**
-	 * Removes usage tracking entries that were last updated before the given
-	 * timestamp.
+	 * Removes all usage tracking for a given page.
 	 *
 	 * @param int $pageId
-	 * @param string $lastUpdatedBefore timestamp; if empty, '00000000000000' is assumed
 	 *
 	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
-	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
-		if ( !is_string( $lastUpdatedBefore ) ) {
-			throw new InvalidArgumentException( '$lastUpdatedBefore must be a string' );
+	public function pruneUsages( $pageId ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int.' );
 		}
 
-		if ( $lastUpdatedBefore === '' ) {
-			// treat '' as '00000000000000' instead of `now`.
-			return array();
+		$old = $this->queryUsages( $pageId );
+
+		$this->removeUsages( $pageId, $old );
+
+		return $old;
+	}
+
+	/**
+	 * @param int $pageId
+	 * @param EntityUsage[] $usages
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function removeUsages( $pageId, array $usages ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+		if ( empty( $usages ) ) {
+			return;
 		}
 
-		$lastUpdatedBefore = wfTimestamp( TS_MW, $lastUpdatedBefore );
+		$rowIds = $this->getAffectedRowIds( $pageId, $usages );
+		$rowIdChunks = array_chunk( $rowIds, $this->batchSize );
 
-		$old = $this->queryUsages( $pageId, '<', $lastUpdatedBefore );
-
-		do {
-			$where = array(
-				'eu_page_id' => (int)$pageId,
-				'eu_touched < ' . $this->connection->addQuotes( $lastUpdatedBefore ),
-			);
-			$res = $this->getPrimaryKeys( $where, __METHOD__ );
-
-			if ( !$res ) {
+		foreach ( $rowIdChunks as $chunk ) {
+			if ( !$chunk ) {
 				break;
 			}
 
@@ -329,16 +256,14 @@ class EntityUsageTable {
 
 			$this->connection->delete(
 				$this->tableName,
-				array(
-					'eu_row_id' => $res,
-				),
+				[
+					'eu_row_id' => $chunk,
+				],
 				__METHOD__
 			);
 
 			$this->connection->commit( __METHOD__ );
-		} while ( count( $res ) === $this->batchSize );
-
-		return $old;
+		}
 	}
 
 	/**

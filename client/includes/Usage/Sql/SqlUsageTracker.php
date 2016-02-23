@@ -106,23 +106,18 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::trackUsedEntities
+	 * @see UsageTracker::addUsedEntities
 	 *
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 * @param string $touched
 	 *
 	 * @throws Exception
 	 * @throws UsageTrackerException
 	 * @throws Exception
 	 */
-	public function trackUsedEntities( $pageId, array $usages, $touched ) {
+	public function addUsedEntities( $pageId, array $usages ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int.' );
-		}
-
-		if ( !is_string( $touched ) || $touched === '' ) {
-			throw new InvalidArgumentException( '$touched must be a timestamp string.' );
 		}
 
 		if ( empty( $usages ) ) {
@@ -135,17 +130,14 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		try {
 			$usageTable = $this->newUsageTable( $db );
-			$oldUsages = $usageTable->queryUsages( $pageId, '>=', '00000000000000' );
+			$oldUsages = $usageTable->queryUsages( $pageId );
 
 			$newUsages = $this->reindexEntityUsages( $usages );
-			$oldUsages = $this->reindexEntityUsages( $oldUsages );
 
-			$keep = array_intersect_key( $oldUsages, $newUsages );
 			$added = array_diff_key( $newUsages, $oldUsages );
 
-			// update the "touched" timestamp for the remaining entries
-			$usageTable->touchUsages( $pageId, $keep, $touched );
-			$usageTable->addUsages( $pageId, $added, $touched );
+			// Actually add the new entries
+			$usageTable->addUsages( $pageId, $added );
 
 			$this->connectionManager->releaseConnection( $db );
 		} catch ( Exception $ex ) {
@@ -160,23 +152,69 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	/**
-	 * @see UsageTracker::pruneStaleUsages
+	 * @see UsageTracker::replaceUsedEntities
 	 *
 	 * @param int $pageId
-	 * @param string $lastUpdatedBefore timestamp
+	 * @param EntityUsage[] $usages
 	 *
-	 * @return EntityUsage[]
+	 * @return EntityUsage[] Usages that have been removed
+	 *
 	 * @throws Exception
 	 * @throws UsageTrackerException
+	 * @throws Exception
 	 */
-	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
+	public function replaceUsedEntities( $pageId, array $usages ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int.' );
+		}
+
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
 		$db = $this->connectionManager->getWriteConnection();
 
 		try {
 			$usageTable = $this->newUsageTable( $db );
-			$pruned = $usageTable->pruneStaleUsages( $pageId, $lastUpdatedBefore );
+			$oldUsages = $usageTable->queryUsages( $pageId );
+
+			$newUsages = $this->reindexEntityUsages( $usages );
+
+			$removed = array_diff_key( $oldUsages, $newUsages );
+			$added = array_diff_key( $newUsages, $oldUsages );
+
+			$usageTable->removeUsages( $pageId, $removed );
+			$usageTable->addUsages( $pageId, $added );
+
+			$this->connectionManager->releaseConnection( $db );
+
+			return $removed;
+		} catch ( Exception $ex ) {
+			$this->connectionManager->releaseConnection( $db );
+
+			if ( $ex instanceof DBError ) {
+				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
+			} else {
+				throw $ex;
+			}
+		}
+	}
+
+	/**
+	 * @see UsageTracker::pruneUsages
+	 *
+	 * @param int $pageId
+	 *
+	 * @return EntityUsage[]
+	 * @throws Exception
+	 * @throws UsageTrackerException
+	 */
+	public function pruneUsages( $pageId ) {
+		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
+		// transaction to prevent long lock retention during big updates.
+		$db = $this->connectionManager->getWriteConnection();
+
+		try {
+			$usageTable = $this->newUsageTable( $db );
+			$pruned = $usageTable->pruneUsages( $pageId );
 
 			$this->connectionManager->releaseConnection( $db );
 			return $pruned;
