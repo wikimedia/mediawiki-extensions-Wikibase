@@ -66,6 +66,8 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param string $text
+	 *
 	 * @return Title
 	 */
 	private function getTitleMock( $text ) {

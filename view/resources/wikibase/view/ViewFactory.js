@@ -112,7 +112,7 @@
 	SELF.prototype._expertStore = null;
 
 	/**
-	 * @property {wikibsae.ValueFormatterFactory}
+	 * @property {wikibase.ValueFormatterFactory}
 	 * @private
 	 **/
 	SELF.prototype._formatterFactory = null;
