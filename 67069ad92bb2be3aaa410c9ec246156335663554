@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_a316fbaa",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpReferenceRemoveTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T17:01:56Z",
+      "side": 1,
+      "message": "\"Duplicate\" is a bit unclear.\n* The old test added the same object twice, which never worked. When removing the remaining one, nothing is left.\n* The rewritten test adds two equal but non-identical objects and assumes that only one is removed.",
+      "revId": "67069ad92bb2be3aaa410c9ec246156335663554",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
