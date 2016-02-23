@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_07911a4a",
+        "filename": "client/tests/phpunit/includes/Hooks/SkinTemplateOutputPageBeforeExecHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-02-23T17:56:47Z",
+      "side": 1,
+      "message": "we\u0027re in a namespace here",
+      "revId": "0db7872e5132335c11c98a8a55edd99e93c27161",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
