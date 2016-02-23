@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_ad4eea99",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "too many asterisks",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_6d48f28c",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "too many asterisks",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_8d4d2e9e",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "too many asterisks",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_0d593e5d",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "How does this comment enhance the documentation? Even the method name tells more about the functionality ;-)",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_2d62fa06",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "too many asterisks",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_4d2656cb",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "this line makes no sense",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_cd3a46e4",
+        "filename": "repo/resources/performance/Mark.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "inconsistent formatting, I think we don\u0027t add spaces inside of []",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_cd21e6ad",
+        "filename": "repo/resources/performance/Statistics.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "wrong",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_8d1bee81",
+        "filename": "repo/resources/performance/resources.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "new line after \u003c?php",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_4d0df640",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "var performanceMark \u003d new ...",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_0d07fe20",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 24
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-02-23T13:26:42Z",
+      "side": 1,
+      "message": "We have some asynchronous stuff running above which has to be finished when we show the notification. How do we make sure that those tasks are finished when stats pop up?",
+      "revId": "540d7b691f2368989f249505df51cd1a5587a45f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
