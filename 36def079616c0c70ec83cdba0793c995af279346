@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_2dd2fa2c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T12:32:53Z",
+      "side": 1,
+      "message": "Would \"\u003c\u003d 1\" work?",
+      "revId": "36def079616c0c70ec83cdba0793c995af279346",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_6db8f2e2",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T12:32:53Z",
+      "side": 1,
+      "message": "Why not set the text to \"this.$h.text()\"? Why set it at all, if it should not change?",
+      "revId": "36def079616c0c70ec83cdba0793c995af279346",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
