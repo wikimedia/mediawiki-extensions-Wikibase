@@ -20,6 +20,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
 class EntityUsageTableTest extends \MediaWikiTestCase {
 
@@ -47,11 +48,10 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	/**
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 * @param string $touched timestamp
 	 *
 	 * @return array[]
 	 */
-	private function getUsageRows( $pageId, array $usages, $touched ) {
+	private function getUsageRows( $pageId, array $usages ) {
 		$rows = array();
 
 		foreach ( $usages as $key => $usage ) {
@@ -62,10 +62,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 			if ( $pageId > 0 ) {
 				$row['eu_page_id'] = $pageId;
-			}
-
-			if ( $touched !== '' ) {
-				$row['eu_touched'] = wfTimestamp( TS_MW, $touched );
 			}
 
 			if ( is_int( $key ) ) {
@@ -83,9 +79,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	}
 
 	public function testAddUsages() {
-		$t1 = '20150111000000';
-		$t2 = '20150222000000';
-
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
@@ -105,102 +98,70 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$usageTable = $this->getEntityUsageTable();
 
 		// adding usages should put them into the database
-		$usageTable->addUsages( 23, $usagesT1, $t1 );
+		$usageTable->addUsages( 23, $usagesT1 );
 
-		$rowsT1 = $this->getUsageRows( 23, $usagesT1, $t1 );
+		$rowsT1 = $this->getUsageRows( 23, $usagesT1 );
 		$this->assertUsageTableContains( $rowsT1 );
 
+		$oldRows = $this->getUsageRows( 23, array_diff( $usagesT1, $usagesT2 ) );
+		$this->assertUsageTableContains( $oldRows );
+
 		// adding usages that were already tracked should be ignored
-		$usageTable->addUsages( 23, $usagesT2, $t2 );
+		$usageTable->addUsages( 23, $usagesT2 );
 
-		$newRows = $this->getUsageRows( 23, array_diff( $usagesT2, $usagesT1 ), $t2 );
-		$this->assertUsageTableContains( $newRows );
-
-		$oldRows = $this->getUsageRows( 23, array_diff( $usagesT1, $usagesT2 ), $t1 );
-		$this->assertUsageTableContains( $oldRows );
-
-		// rows in T1 and T2 should still have timestamp T1
-		$keepRows = $this->getUsageRows( 23, array_intersect( $usagesT1, $usagesT2 ), $t1 );
+		$keepRows = $this->getUsageRows(
+			23,
+			array_unique( array_merge( $usagesT1, $usagesT2 ) )
+		);
 		$this->assertUsageTableContains( $keepRows );
 	}
 
-	public function testTouchUsage() {
-		$t1 = '20150111000000';
-		$t2 = '20150222000000';
-
+	public function testPruneUsages() {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
-		$q5 = new ItemId( 'Q5' );
 
-		$usagesT1 = array(
+		$usages = array(
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
 		);
 
-		$usagesT2 = array(
-			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
+		$usageTable = $this->getEntityUsageTable();
 
-		// test with small batch size
-		$usageTable = $this->getEntityUsageTable( 2 );
-		$usageTable->addUsages( 23, $usagesT1, $t1 );
+		// Adding usages should put them into the database
+		$usageTable->addUsages( 23, $usages );
 
-		// touch usage entries (some non-existing)
-		$usageTable->touchUsages( 23, $usagesT2, $t2 );
+		$rows = $this->getUsageRows( 23, $usages );
+		$this->assertUsageTableContains( $rows );
 
-		// rows in T1 and T2 should now have timestamp T2
-		$keepRows = $this->getUsageRows( 23, array_intersect( $usagesT1, $usagesT2 ), $t2 );
-		$this->assertUsageTableContains( $keepRows );
+		$usageTable->pruneUsages( 23 );
 
-		$extraRows = $this->getUsageRows( 23, array_diff( $usagesT2, $usagesT1 ), $t2 );
-		$this->assertUsageTableDoesNotContain( $extraRows );
+		$this->assertUsageTableDoesNotContain( $rows );
 
-		$oldRows = $this->getUsageRows( 23, array_diff( $usagesT1, $usagesT2 ), $t1 );
-		$this->assertUsageTableContains( $oldRows );
 	}
 
-	public function provideQueryUsages() {
-		$t0 = '00000000000000';
-		$t1 = '20150111000000';
-		$t2 = '20150222000000';
-
+	public function testRemoveUsages() {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
-		$q5 = new ItemId( 'Q5' );
 
-		$usagesT1 = array(
+		$usages = array(
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
+			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
 		);
 
-		$usagesT2 = array(
-			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
+		$usageTable = $this->getEntityUsageTable();
 
-		$usagesT1T2 = array(
-			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
+		// Adding usages should put them into the database
+		$usageTable->addUsages( 23, $usages );
 
-		return array(
-			array( '>=', $t0, $usagesT1T2 ),
-			array( '<', $t0, array() ),
+		$rows = $this->getUsageRows( 23, $usages );
+		$this->assertUsageTableContains( $rows );
 
-			array( '<', $t1, array() ),
-			array( '>=', $t1, $usagesT1T2 ),
+		$usageTable->removeUsages( 23, [ $usages[0] ] );
 
-			array( '<', $t2, $usagesT1 ),
-			array( '>=', $t2, $usagesT2 ),
-
-			array( '<', '"evil"', array() ),
-			array( '<', '[evil]', $usagesT1T2 ),
-		);
+		$this->assertUsageTableDoesNotContain( array_slice( $rows, 0, 1 ) );
+		$this->assertUsageTableContains( array_slice( $rows, 1 ) );
 	}
 
 	private function getUsageStrings( array $usages ) {
@@ -212,13 +173,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		return $strings;
 	}
 
-	/**
-	 * @dataProvider provideQueryUsages
-	 */
-	public function testQueryUsages( $timeOp, $timestamp, $expected ) {
-		$t1 = '20150111000000';
-		$t2 = '20150222000000';
-
+	public function testQueryUsages() {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
@@ -235,108 +190,38 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 		$usageTable = $this->getEntityUsageTable();
 
-		$usageTable->addUsages( 23, $usagesT1, $t1 );
-		$usageTable->addUsages( 23, $usagesT2, $t2 );
+		$usageTable->addUsages( 23, $usagesT1 );
 
-		// Add for different page, with swapped timestamps, to detect leakage between page ids.
-		$usageTable->addUsages( 25, $usagesT1, $t2 );
-		$usageTable->addUsages( 25, $usagesT2, $t1 );
-
-		$usages = $usageTable->queryUsages( 23, $timeOp, $timestamp );
+		// Add for different page, to detect leakage between page ids.
+		$usageTable->addUsages( 25, $usagesT2 );
 
 		$this->assertEquals(
-			$this->getUsageStrings( $expected ),
-			$this->getUsageStrings( $usages )
+			$this->getUsageStrings( $usagesT1 ),
+			$this->getUsageStrings( $usageTable->queryUsages( 23 ) )
+		);
+
+		$this->assertEquals(
+			$this->getUsageStrings( $usagesT2 ),
+			$this->getUsageStrings( $usageTable->queryUsages( 25 ) )
 		);
 	}
 
 	public function provideQueryUsages_InvalidArgumentException() {
-		return array(
-			'$pageId is null' => array( null, '=', '00000000000000' ),
-			'$pageId is false' => array( false, '=', '00000000000000' ),
-			'$pageId is a string' => array( '-7', '=', '00000000000000' ),
-
-			'$timeOp is empty' => array( 7, '', '00000000000000' ),
-			'$timeOp is an int' => array( 7, 3, '00000000000000' ),
-			'$timeOp is evil' => array( 7, 'not null --', '00000000000000' ),
-
-			'$timestamp is empty' => array( 7,'>', '' ),
-			'$timestamp is an int' => array( 7, '>', 3 ),
-
-			'no $timeOp but $timestamp' => array( 7, null, '00000000000000' ),
-			'$timeOp but no $timestamp' => array( 7, '>=', null ),
-		);
+		return [
+			'$pageId is null' => [ null ],
+			'$pageId is false' => [ false ],
+			'$pageId is a string' => [ '-7' ],
+		];
 	}
 
 	/**
 	 * @dataProvider provideQueryUsages_InvalidArgumentException
 	 */
-	public function testQueryUsages_InvalidArgumentException( $pageId, $timeOp, $timestamp ) {
+	public function testQueryUsages_InvalidArgumentException( $pageId ) {
 		$usageTable = $this->getEntityUsageTable();
 
 		$this->setExpectedException( InvalidArgumentException::class );
-		$usageTable->queryUsages( $pageId, $timeOp, $timestamp );
-	}
-
-	public function testPruneStaleUsages() {
-		$t1 = '20150111000000';
-		$t2 = '20150222000000';
-
-		$q3 = new ItemId( 'Q3' );
-		$q4 = new ItemId( 'Q4' );
-		$q5 = new ItemId( 'Q5' );
-
-		$usagesT1 = array(
-			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-		);
-
-		$usagesT2 = array(
-			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
-
-		$usageTable = $this->getEntityUsageTable();
-
-		// init database: $usagesT2 get timestamp $t2,
-		// array_diff( $usagesT1, $usagesT2 ) get timestamp $t1.
-		$usageTable->addUsages( 23, $usagesT1, $t1 );
-		$usageTable->addUsages( 23, $usagesT2, $t2 );
-
-		// pruning should remove stale entries with a timestamp < $t2
-		$stale = array_diff( $usagesT1, $usagesT2 );
-		$pruned = $usageTable->pruneStaleUsages( 23, $t2 );
-
-		$this->assertEquals(
-			$this->getUsageStrings( $stale ),
-			$this->getUsageStrings( $pruned ),
-			'pruned'
-		);
-
-		$rowsT1_stale = $this->getUsageRows( 23, $stale, $t1 );
-		$rowsT2 = $this->getUsageRows( 23, $usagesT2, $t2 );
-
-		$this->assertUsageTableDoesNotContain( $rowsT1_stale );
-		$this->assertUsageTableContains( $rowsT2 );
-	}
-
-	public function testAddTouchUsages_batching() {
-		$t1 = '20150111000000';
-		$t2 = '20150222000000';
-
-		$usages = $this->makeUsages( 10 );
-		$rowsT1 = $this->getUsageRows( 7, $usages, $t1 );
-		$rowsT2 = $this->getUsageRows( 7, $usages, $t2 );
-
-		$usageTable = $this->getEntityUsageTable( 3 );
-
-		// inserting more rows than fit into a single batch
-		$usageTable->addUsages( 7, $usages, $t1 );
-		$this->assertUsageTableContains( $rowsT1 );
-
-		// touching more rows than fit into a single batch
-		$usageTable->touchUsages( 7, $usages, $t2 );
-		$this->assertUsageTableContains( $rowsT2 );
+		$usageTable->queryUsages( $pageId );
 	}
 
 	public function testGetPagesUsing() {
@@ -350,8 +235,8 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
 		$usageTable = $this->getEntityUsageTable( 3 );
-		$usageTable->addUsages( 23, array( $u3s, $u3l, $u4l ), '20150102030405' );
-		$usageTable->addUsages( 42, array( $u4l, $u4t ), '20150102030405' );
+		$usageTable->addUsages( 23, array( $u3s, $u3l, $u4l ) );
+		$usageTable->addUsages( 42, array( $u4l, $u4t ) );
 
 		$pages = $usageTable->getPagesUsing( array( $q6 ) );
 		$this->assertEmpty( iterator_to_array( $pages ) );
@@ -388,8 +273,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 			iterator_to_array( $pages ),
 			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
-
-		$usageTable->addUsages( 23, array(), '20150102030405' );
 	}
 
 	/**

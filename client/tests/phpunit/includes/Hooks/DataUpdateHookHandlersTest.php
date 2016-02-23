@@ -22,55 +22,55 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
 class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Title $title
 	 * @param EntityUsage[]|null $expectedUsages
-	 * @param string|null $touched
 	 * @param bool $prune whether pruneUsagesForPage() should be used
 	 * @param bool $add whether addUsagesForPage() should be used
+	 * @param bool $replace whether replaceUsagesForPage() should be used
 	 *
 	 * @return UsageUpdater
 	 */
 	private function newUsageUpdater(
 		Title $title,
 		array $expectedUsages = null,
-		$touched = null,
 		$prune = true,
-		$add = true
+		$add = true,
+		$replace = false
 	) {
 		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		if ( $touched === null ) {
-			$touched = $title->getTouched();
-		}
-
-		// NOTE: doLinksUpdateComplete currently uses wfTimestampNow() as the touch date,
-		// instead of $title->getTouched(), since that proved to be unreliable. Once that is
-		// fixed, this test should check for the exact timestamp, instead of accepting any
-		// greater timestamp.
-		$touchedMatcher = $this->greaterThanOrEqual( $touched );
-
-		if ( $expectedUsages === null || !$add ) {
+		if ( $expectedUsages === null || $replace || !$add ) {
 			$usageUpdater->expects( $this->never() )
 				->method( 'addUsagesForPage' );
 		} else {
 			$usageUpdater->expects( $this->once() )
 				->method( 'addUsagesForPage' )
-				->with( $title->getArticleID(), $expectedUsages, $touchedMatcher );
+				->with( $title->getArticleID(), $expectedUsages );
 		}
 
 		if ( $prune ) {
 			$usageUpdater->expects( $this->once() )
 				->method( 'pruneUsagesForPage' )
-				->with( $title->getArticleID(), $touchedMatcher );
+				->with( $title->getArticleID() );
 		} else {
 			$usageUpdater->expects( $this->never() )
 				->method( 'pruneUsagesForPage' );
+		}
+
+		if ( $replace ) {
+			$usageUpdater->expects( $this->once() )
+				->method( 'replaceUsagesForPage' )
+				->with( $title->getArticleID(), $expectedUsages );
+		} else {
+			$usageUpdater->expects( $this->never() )
+				->method( 'replaceUsagesForPage' );
 		}
 
 		return $usageUpdater;
@@ -87,7 +87,6 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	private function newJobScheduler(
 		Title $title,
 		array $expectedUsages = null,
-		$touched = null,
 		$useJobQueue = false
 	) {
 		$jobScheduler = $this->getMockBuilder( JobQueueGroup::class )
@@ -109,8 +108,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 							'type' => 'wikibase-addUsagesForPage',
 							'params' => array(
 								'pageId' => $title->getArticleID(),
-								'usages' => $expectedUsageArray,
-								'touched' => $touched
+								'usages' => $expectedUsageArray
 							),
 							'opts' => array(
 								'removeDuplicates' => true
@@ -140,21 +138,21 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @param Title $title
 	 * @param EntityUsage[]|null $expectedUsages
-	 * @param string|null $touched timestamp
 	 * @param bool $prune whether pruneUsagesForPage() should be used
 	 * @param bool $asyncAdd whether addUsagesForPage() should be called via the job queue
+	 * @param bool $replace whether replaceUsagesForPage() should be used
 	 *
 	 * @return DataUpdateHookHandlers
 	 */
 	private function newDataUpdateHookHandlers(
 		Title $title,
 		array $expectedUsages = null,
-		$touched = null,
 		$prune = true,
-		$asyncAdd = false
+		$asyncAdd = false,
+		$replace = false
 	) {
-		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $touched, $prune, !$asyncAdd );
-		$jobScheduler = $this->newJobScheduler( $title, $expectedUsages, $touched, $asyncAdd );
+		$usageUpdater = $this->newUsageUpdater( $title, $expectedUsages, $prune, !$asyncAdd, $replace );
+		$jobScheduler = $this->newJobScheduler( $title, $expectedUsages, $asyncAdd );
 
 		return new DataUpdateHookHandlers(
 			$usageUpdater,
@@ -164,14 +162,11 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param array[]|null $usages
-	 * @param string $timestamp
 	 *
 	 * @return ParserOutput
 	 */
-	private function newParserOutput( array $usages = null, $timestamp ) {
+	private function newParserOutput( array $usages = null ) {
 		$output = new ParserOutput();
-
-		$output->setTimestamp( $timestamp );
 
 		if ( $usages ) {
 			$acc = new ParserOutputUsageAccumulator( $output );
@@ -188,11 +183,10 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 * @param int $id
 	 * @param int $ns
 	 * @param string $text
-	 * @param string $touched
 	 *
 	 * @return Title
 	 */
-	private function newTitle( $id, $ns, $text, $touched ) {
+	private function newTitle( $id, $ns, $text ) {
 		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -209,22 +203,17 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			->method( 'getDBKey' )
 			->will( $this->returnValue( $text ) );
 
-		$title->expects( $this->any() )
-			->method( 'getTouched' )
-			->will( $this->returnValue( $touched ) );
-
 		return $title;
 	}
 
 	/**
 	 * @param Title $title
 	 * @param EntityUsage[]|null $usages
-	 * @param string $touched
 	 *
 	 * @return LinksUpdate
 	 */
-	private function newLinksUpdate( Title $title, array $usages = null, $touched ) {
-		$pout = $this->newParserOutput( $usages, $touched );
+	private function newLinksUpdate( Title $title, array $usages = null ) {
+		$pout = $this->newParserOutput( $usages );
 
 		$linksUpdate = $this->getMockBuilder( LinksUpdate::class )
 			->disableOriginalConstructor()
@@ -246,7 +235,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( DataUpdateHookHandlers::class, $handler );
 	}
 
-	public function provideLinksUpdateComplete() {
+	public function provideEntityUsages() {
 		return array(
 			'usage' => array(
 				array(
@@ -263,40 +252,36 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideLinksUpdateComplete
+	 * @dataProvider provideEntityUsages
 	 */
 	public function testLinksUpdateComplete( $usage ) {
-		$timestamp = '20150505000000';
-		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen', $timestamp );
+		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
-		$linksUpdate = $this->newLinksUpdate( $title, $usage, $timestamp );
+		$linksUpdate = $this->newLinksUpdate( $title, $usage );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, true, false );
+		$handler = $this->newDataUpdateHookHandlers( $title, $usage, false, false, true );
 		$handler->doLinksUpdateComplete( $linksUpdate );
 	}
 
 	/**
-	 * @dataProvider provideLinksUpdateComplete
+	 * @dataProvider provideEntityUsages
 	 */
 	public function testDoParserCacheSaveComplete( $usage ) {
-		$timestamp = '20150505000000';
-
-		$parserOutput = $this->newParserOutput( $usage, $timestamp );
-		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen', $timestamp );
+		$parserOutput = $this->newParserOutput( $usage );
+		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, false, true );
+		$handler = $this->newDataUpdateHookHandlers( $title, $usage, false, true );
 		$handler->doParserCacheSaveComplete( $parserOutput, $title );
 	}
 
 	public function testDoArticleDeleteComplete() {
-		$timestamp = '20150505000000';
-		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen', $timestamp );
+		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, null, $timestamp, true, false );
-		$handler->doArticleDeleteComplete( $title->getNamespace(), $title->getArticleID(), $timestamp );
+		$handler = $this->newDataUpdateHookHandlers( $title, null, true, false );
+		$handler->doArticleDeleteComplete( $title->getNamespace(), $title->getArticleID() );
 	}
 
 }
