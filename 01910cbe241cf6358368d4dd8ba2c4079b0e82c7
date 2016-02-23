@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_4da0919a",
+        "filename": "docs/entities.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-23T21:21:22Z",
+      "side": 1,
+      "message": "In that case, this document should come before the implementation.",
+      "parentUuid": "2ea41786_0d07f9ce",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_29d437be",
         "filename": "lib/WikibaseLib.entitytypes.php",
         "patchSetId": 6
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "That isn\u0027t actually allowed as the component defines that serializes may only created by the factory and all classes other than the factories are package private.",
       "parentUuid": "2ea41786_c70a2224",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_0d35b942",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-23T21:21:22Z",
+      "side": 1,
+      "message": "That approach is contrary to the idea of injecting factory callbacks. It wouldn\u0027t be possible for other entity types. I\u0027d prefer to treat Items and Properties like other Entities if possible.",
+      "parentUuid": "2ea41786_8d6be981",
       "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
