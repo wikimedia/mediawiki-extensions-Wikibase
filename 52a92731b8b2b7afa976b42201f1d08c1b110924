@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_0316ef4d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T16:01:50Z",
+      "side": 1,
+      "message": "Must be …Provider. There is no setter called here, as far as I can see.",
+      "revId": "52a92731b8b2b7afa976b42201f1d08c1b110924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_a3227ba0",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T16:01:50Z",
+      "side": 1,
+      "message": "Why is this type hint here? It should not be necessary.",
+      "revId": "52a92731b8b2b7afa976b42201f1d08c1b110924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_631c836b",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T16:01:50Z",
+      "side": 1,
+      "message": "Should be the first line in a method, in my opinion.",
+      "revId": "52a92731b8b2b7afa976b42201f1d08c1b110924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_83217f9c",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T16:01:50Z",
+      "side": 1,
+      "message": "…Provider",
+      "revId": "52a92731b8b2b7afa976b42201f1d08c1b110924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_c32777b0",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T16:01:50Z",
+      "side": 1,
+      "message": "Now there are two \"return \u0027\u0027;\" in this method. Code can easily be rearranged to avoid that.",
+      "revId": "52a92731b8b2b7afa976b42201f1d08c1b110924",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
