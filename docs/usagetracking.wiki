@@ -38,7 +38,7 @@ as a links table, just like templatelinks or imagelinks. It has the following fi
   eu_entity_id      VARBINARY(255) NOT NULL  -- the ID of the entity being used
   eu_aspect         VARBINARY(37) NOT NULL   -- the aspect of the entity. See EntityUsage::XXX_USAGE for possible values.
   eu_page_id        INT NOT NULL             -- the ID of the page that uses the entities.
-  eu_touched        BINARY(14) NOT NULL DEFAULT '' -- timestamp corresponding to page.page_touched
+  eu_touched        BINARY(14) NOT NULL DEFAULT '' -- timestamp corresponding to page.page_touched (currently unused)
 
 The following indexes are provided for efficient access:
 
@@ -52,18 +52,16 @@ amount of redundant data, and would not play well with indexes.
 
 == Updating of usage entries ==
 
-Usage tracking information on the client has to be updated when pages are edited (resp. created, deleted, or renamed) and when pages are re-rendered due to a change in a template. This corresponds to cases in which the page_touched field is updated in the page table. In addition to that, usages that become apparent only when the page is rendered with a specific target language need to be tracked when such a language specific rendering is committed to the parser cache. This is particularly important for per-language tracking of label usage on multilingual wikis.
+Usage tracking information on the client has to be updated when pages are edited (resp. created, deleted, or renamed) and when pages are re-rendered due to a change in a template. In addition to that, usages that become apparent only when the page is rendered with a specific target language need to be tracked when such a language specific rendering is committed to the parser cache. This is particularly important for per-language tracking of label usage on multilingual wikis.
 
-To allow tracking information to be added as new renderings of a page materialize, these updates have to be disconnected from the process of pruning outdated tracking information. This is achieved using a passive purging strategy, similar to the mechanism used to discard stale parser cache entries based on the timestamp in the page_touched field: When a new rendering of a page becomes available, all usages present in that rendering are recorded in wbc_entity_usage, with eu_touched set to the page's touch date (or a later timestamp, e.g. the current time). When looking up usages, entries with a stale page_touched timestamp can be ignored. Furthermore, such stale usage entries can be pruned when a page is edited.
+Tracking information, that needs to be added as new renderings of a page materialize, is being added to the tracking table, after the corresponding parser cache entry has been saved. Tracking data is being discarded whenever the corresponding parser cache entries are being invalidated. If that happens, we simply remove all records in wbc_entity_usage except for the ones in the new (post invalidation) parser cache entry.
 
 This implies that entity usage tracking is actually tracking usage in page renderings (technically, entries in the parser cache). It does not directly correspond to what is or is not present in a pages wikitext or templates. However, since a page is always rendered in at least one language when it is edited, this distinction is somewhat academic.
 
 Overview of events that trigger updates to usage tracking:
-* ArticleEditUpdates: add/touch usage entries from ParserOutput (deprecated in favor of LinksUpdateComplete)
-* ArticleEditUpdates: prune stale entries, unsubscribe unused entries (deprecated in favor of LinksUpdateComplete)
-* LinksUpdateComplete: add/touch usage entries from ParserOutput (planned to replace ArticleEditUpdates)
-* LinksUpdateComplete: prune stale entries unsubscribe unused entries (planned to replace ArticleEditUpdates)
-* ParserCacheSave: add/touch usage entries from ParserOutput (planned, needs core patch)
+* LinksUpdateComplete: add usage entries from ParserOutput
+* LinksUpdateComplete: prune all old entries, unsubscribe unused entries
+* ParserCacheSave: add new usage entries from ParserOutput
 * ArticleDeleteComplete: prune all entries, unsubscribe unused entries
 
 

@@ -29,11 +29,6 @@ class AddUsagesForPageJob extends Job {
 	private $usages;
 
 	/**
-	 * @var string timestamp
-	 */
-	private $touched;
-
-	/**
 	 * @var UsageUpdater
 	 */
 	private $usageUpdater;
@@ -48,11 +43,10 @@ class AddUsagesForPageJob extends Job {
 	 *
 	 * @param Title $title
 	 * @param EntityUsage[] $usages
-	 * @param string $touched
 	 *
 	 * @return JobSpecification
 	 */
-	public static function newSpec( Title $title, array $usages, $touched ) {
+	public static function newSpec( Title $title, array $usages ) {
 		// NOTE: Map EntityUsage objects to scalar arrays, for JSON serialization in the job queue.
 		$usages = array_map( function ( EntityUsage $usage ) {
 			return $usage->asArray();
@@ -60,8 +54,7 @@ class AddUsagesForPageJob extends Job {
 
 		$jobParams = array(
 			'pageId' => $title->getArticleId(),
-			'usages' => $usages,
-			'touched' => $touched
+			'usages' => $usages
 		);
 
 		return new JobSpecification(
@@ -89,11 +82,6 @@ class AddUsagesForPageJob extends Job {
 			'$params["usages"]',
 			'must be a non-empty array' );
 
-		Assert::parameter(
-			isset( $params['touched'] ) && is_string( $params['touched'] ) && $params['touched'] !== '',
-			'$params["touched"]',
-			'must be a timestamp string' );
-
 		Assert::parameterElementType(
 			'array',
 			$params['usages'],
@@ -101,7 +89,6 @@ class AddUsagesForPageJob extends Job {
 
 		$this->pageId = $params['pageId'];
 		$this->usages = $params['usages'];
-		$this->touched = $params['touched'];
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$usageUpdater = $wikibaseClient->getStore()->getUsageUpdater();
@@ -118,25 +105,6 @@ class AddUsagesForPageJob extends Job {
 	public function overrideServices( UsageUpdater $usageUpdater, EntityIdParser $idParser ) {
 		$this->usageUpdater = $usageUpdater;
 		$this->idParser = $idParser;
-	}
-
-	/**
-	 * @see Job::getDeduplicationInfo
-	 *
-	 * @return array Job params array, with touched omitted.
-	 */
-	public function getDeduplicationInfo() {
-		// parent Job class returns an array with 'params' key
-		$info = parent::getDeduplicationInfo();
-
-		// If this job is not yet processed and a new one (e.g. from a more recent
-		// edit) is created with same page id and usages, then the job queue can
-		// disregard this one and avoid duplicate, excess database updates.
-		if ( is_array( $info['params'] ) ) {
-			unset( $info['params']['touched'] );
-		}
-
-		return $info;
 	}
 
 	/**
@@ -165,8 +133,7 @@ class AddUsagesForPageJob extends Job {
 	public function run() {
 		$this->usageUpdater->addUsagesForPage(
 			$this->pageId,
-			$this->getUsages(),
-			$this->touched
+			$this->getUsages()
 		);
 	}
 
