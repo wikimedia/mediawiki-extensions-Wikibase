@@ -9,34 +9,45 @@ namespace Wikibase\Client\Usage;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
 interface UsageTracker {
 
 	/**
-	 * Updates entity usage information for the given page. New usage records
-	 * are added, but old ones may or may not be removed. Implementations
-	 * are free to rely on passive purging based on the $touched timestamp.
+	 * Adds new entity usage information for the given page. New usage records
+	 * are added, but old ones are not removed.
 	 *
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of entity usages.
-	 * @param string $touched Timestamp corresponding to page.page_touched.
 	 *
 	 * See docs/usagetracking.wiki for details.
 	 *
 	 * @throws UsageTrackerException
 	 */
-	public function trackUsedEntities( $pageId, array $usages, $touched );
+	public function addUsedEntities( $pageId, array $usages );
 
 	/**
-	 * Removes usage tracking entries that were last updated before the given
-	 * timestamp.
+	 * Replaces entity usage information for the given page.
+	 * All usages not present in $usages will be removed.
+	 *
+	 * @param int $pageId The ID of the page the entities are used on.
+	 * @param EntityUsage[] $usages A list of entity usages.
+	 *
+	 * See docs/usagetracking.wiki for details.
+	 *
+	 * @throws UsageTrackerException
+	 * @return EntityUsage[] Usages that have been removed
+	 */
+	public function replaceUsedEntities( $pageId, array $usages );
+
+	/**
+	 * Removes all usage tracking entries for a given page.
 	 *
 	 * @param int $pageId
-	 * @param string $lastUpdatedBefore
 	 *
 	 * @throws UsageTrackerException
 	 * @return EntityUsage[] the pruned usages
 	 */
-	public function pruneStaleUsages( $pageId, $lastUpdatedBefore );
+	public function pruneUsages( $pageId );
 
 }

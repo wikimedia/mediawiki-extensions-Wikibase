@@ -43,8 +43,8 @@ class UsageLookupContractTester {
 		$this->putUsagesCallback = $putUsagesCallback;
 	}
 
-	private function putUsages( $pageId, array $usages, $timestamp ) {
-		call_user_func( $this->putUsagesCallback, $pageId, $usages, $timestamp );
+	private function putUsages( $pageId, array $usages ) {
+		call_user_func( $this->putUsagesCallback, $pageId, $usages );
 	}
 
 	public function testGetUsageForPage() {
@@ -57,7 +57,7 @@ class UsageLookupContractTester {
 
 		$usages = array( $u3i, $u3l, $u4l );
 
-		$this->putUsages( 23, $usages, '20150102030405' );
+		$this->putUsages( 23, $usages );
 
 		Assert::assertEmpty( $this->lookup->getUsagesForPage( 24 ) );
 
@@ -68,7 +68,7 @@ class UsageLookupContractTester {
 		$expectedUsageStrings = $this->getUsageStrings( $usages );
 		Assert::assertEquals( $expectedUsageStrings, $actualUsageStrings );
 
-		$this->putUsages( 23, array(), '20150102030405' );
+		$this->putUsages( 23, array() );
 	}
 
 	public function testGetPagesUsing() {
@@ -81,8 +81,8 @@ class UsageLookupContractTester {
 		$u4l = new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' );
 		$u4t = new EntityUsage( $q4, EntityUsage::TITLE_USAGE );
 
-		$this->putUsages( 23, array( $u3s, $u3l, $u4l ), '20150102030405' );
-		$this->putUsages( 42, array( $u4l, $u4t ), '20150102030405' );
+		$this->putUsages( 23, array( $u3s, $u3l, $u4l ) );
+		$this->putUsages( 42, array( $u4l, $u4t ) );
 
 		$pages = $this->lookup->getPagesUsing( array( $q6 ) );
 		Assert::assertEmpty( iterator_to_array( $pages ) );
@@ -123,7 +123,7 @@ class UsageLookupContractTester {
 			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
 
-		$this->putUsages( 23, array(), '20150102030405' );
+		$this->putUsages( 23, array() );
 	}
 
 	/**
@@ -166,7 +166,7 @@ class UsageLookupContractTester {
 
 		$usages = array( $u3i, $u3l, $u4l );
 
-		$this->putUsages( 23, $usages, '20150102030405' );
+		$this->putUsages( 23, $usages );
 
 		Assert::assertEmpty( $this->lookup->getUnusedEntities( array( $q4 ) ), 'Q4 should not be unused' );
 

@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
 class UsageTrackerContractTester {
 
@@ -48,76 +49,86 @@ class UsageTrackerContractTester {
 	 *
 	 * @return EntityUsage[]
 	 */
-	private function getUsages( $pageId, $timestamp ) {
-		return call_user_func( $this->getUsagesCallback, $pageId, $timestamp );
+	private function getUsages( $pageId ) {
+		return call_user_func( $this->getUsagesCallback, $pageId );
 	}
 
-	public function testTrackUsedEntities() {
-		$t1 = '20150111000000';
-		$t2 = '20150222000000';
-
+	private function getTestUsages() {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
 
-		$usagesT1 = array(
+		$usagesT1 = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q3, EntityUsage::LABEL_USAGE, 'de' ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
-		);
+		];
 
-		$usagesT2 = array(
+		$usagesT2 = [
 			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
 			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
+		];
 
-		$this->tracker->trackUsedEntities( 23, $usagesT1, $t1 );
-		$this->tracker->trackUsedEntities( 23, $usagesT2, $t2 );
-
-		// Track again for a different page ID, with swapped timestamps, to detect leakage.
-		$this->tracker->trackUsedEntities( 24, $usagesT2, $t1 );
-		$this->tracker->trackUsedEntities( 24, $usagesT1, $t2 );
-
-		// Entries present in $usagesT1 and $usagesT2 should have been touched with $t2.
-		$updatedUsages = $this->getUsages( 23, $t2 );
-		$this->assertSameUsages( $usagesT2, $updatedUsages );
-
-		// Note: Entries in $usagesT1 but not in $usagesT2 may or may not be still present
-		// with the stale $t1 timestamp. trackUsedEntities() only guarantees that
-		// the provided usage entries will be tracked, and are updated to the new timestamp.
+		return [ $usagesT1, $usagesT2 ];
 	}
 
-	public function testPruneStaleUsages() {
-		$t1 = '20150111000000';
-		$t2 = '20150222000000';
+	public function testAddUsedEntities() {
+		list( $usagesT1, $usagesT2 ) = $this->getTestUsages();
 
-		$q3 = new ItemId( 'Q3' );
-		$q4 = new ItemId( 'Q4' );
-		$q5 = new ItemId( 'Q5' );
+		$this->tracker->addUsedEntities( 23, $usagesT1 );
 
-		$usagesT1 = array(
-			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q3, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
+		// Entries present in $usagesT1 should be set.
+		$this->assertSameUsages( $usagesT1, $this->getUsages( 23 ) );
+
+		// Also add $usagesT2 and check that both T1 and T2 are present.
+		$this->tracker->addUsedEntities( 23, $usagesT2 );
+
+		$this->assertSameUsages(
+				array_unique( array_merge( $usagesT1, $usagesT2 ) ),
+				$this->getUsages( 23 )
 		);
+	}
 
-		$usagesT2 = array(
-			new EntityUsage( $q3, EntityUsage::SITELINK_USAGE ),
-			new EntityUsage( $q4, EntityUsage::LABEL_USAGE ),
-			new EntityUsage( $q5, EntityUsage::ALL_USAGE ),
-		);
+	public function testReplaceUsedEntities() {
+		list( $usagesT1, $usagesT2 ) = $this->getTestUsages();
+		$usageAll = array_unique( array_merge( $usagesT1, $usagesT2 ) );
 
-		// init database: $usagesT2 get timestamp $t2,
-		// array_diff( $usagesT1, $usagesT2 ) get timestamp $t1.
-		$this->tracker->trackUsedEntities( 23, $usagesT1, $t1 );
-		$this->tracker->trackUsedEntities( 23, $usagesT2, $t2 );
+		$this->tracker->replaceUsedEntities( 23, $usagesT1 );
 
-		// pruning should remove entries with a timestamp < $t2
-		$this->tracker->pruneStaleUsages( 23, $t2 );
+		// Entries present in $usagesT1 should be set.
+		$this->assertSameUsages( $usagesT1, $this->getUsages( 23 ) );
 
-		$actualUsages = $this->getUsages( 23, $t2 );
-		$this->assertSameUsages( $usagesT2, $actualUsages );
+		$this->tracker->replaceUsedEntities( 23, $usagesT2 );
+
+		// Entries present in $usagesT2 should be set.
+		$this->assertSameUsages( $usagesT2, $this->getUsages( 23 ) );
+
+		$this->tracker->replaceUsedEntities( 42, $usageAll );
+
+		// Entries present in $usageAll should be set on page #42
+		$this->assertSameUsages( $usageAll, $this->getUsages( 42 ) );
+
+		// Entries present for page #23 stay unchanged.
+		$this->assertSameUsages( $usagesT2, $this->getUsages( 23 ) );
+	}
+
+	public function testPruneUsages() {
+		list( $usagesT1, $usagesT2 ) = $this->getTestUsages();
+
+		$this->tracker->addUsedEntities( 23, $usagesT1 );
+		$this->tracker->addUsedEntities( 24, $usagesT1 );
+
+		// Entries present in $usagesT1 should be set.
+		$this->assertSameUsages( $usagesT1, $this->getUsages( 23 ) );
+
+		// Pruning should remove all entries
+		$this->tracker->pruneUsages( 23 );
+
+		$this->assertSameUsages( [], $this->getUsages( 23 ) );
+
+		// Usages on page #24 stay unchanged
+		$this->assertSameUsages( $usagesT1, $this->getUsages( 24 ) );
 	}
 
 	/**

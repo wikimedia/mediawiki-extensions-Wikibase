@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
 class UsageUpdater {
 
@@ -49,11 +50,36 @@ class UsageUpdater {
 		UsageLookup $usageLookup,
 		SubscriptionManager $subscriptionManager
 	) {
-
 		$this->clientId = $clientId;
 		$this->usageTracker = $usageTracker;
 		$this->usageLookup = $usageLookup;
 		$this->subscriptionManager = $subscriptionManager;
+	}
+
+	/**
+	 * Adds entity usage information for the given page, and automatically adjusts
+	 * any subscriptions based on that usage.
+	 *
+	 * @param int $pageId The ID of the page the entities are used on.
+	 * @param EntityUsage[] $usages A list of EntityUsage objects.
+	 * See docs/usagetracking.wiki for details.
+	 *
+	 * @see UsageTracker::trackUsedEntities
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function addUsagesForPage( $pageId, array $usages ) {
+		if ( !is_int( $pageId ) ) {
+			throw new InvalidArgumentException( '$pageId must be an int!' );
+		}
+
+		$this->usageTracker->addUsedEntities( $pageId, $usages );
+		$newlyUsedEntities = $this->getEntityIds( $usages );
+
+		// Subscribe to anything that was added
+		if ( !empty( $newlyUsedEntities ) ) {
+			$this->subscriptionManager->subscribe( $this->clientId, $newlyUsedEntities );
+		}
 	}
 
 	/**
@@ -63,51 +89,49 @@ class UsageUpdater {
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of EntityUsage objects.
 	 * See docs/usagetracking.wiki for details.
-	 * @param string $touched timestamp. Timestamp of the update that contained the given usages.
 	 *
-	 * @see UsageTracker::trackUsedEntities
+	 * @see UsageTracker::replaceUsedEntities
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addUsagesForPage( $pageId, array $usages, $touched ) {
+	public function replaceUsagesForPage( $pageId, array $usages ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int!' );
 		}
 
-		if ( !is_string( $touched ) || $touched === '' ) {
-			throw new InvalidArgumentException( '$touched must be a timestamp string!' );
-		}
-
-		$this->usageTracker->trackUsedEntities( $pageId, $usages, $touched );
+		$prunedUsages = $this->usageTracker->replaceUsedEntities( $pageId, $usages );
 		$currentlyUsedEntities = $this->getEntityIds( $usages );
 
 		// Subscribe to anything that was added
 		if ( !empty( $currentlyUsedEntities ) ) {
 			$this->subscriptionManager->subscribe( $this->clientId, $currentlyUsedEntities );
 		}
+		// Unsubscribe from anything that was pruned and is otherwise unused.
+		if ( !empty( $prunedUsages ) ) {
+			$prunedEntityIds = $this->getEntityIds( $prunedUsages );
+			$unusedIds = $this->usageLookup->getUnusedEntities( $prunedEntityIds );
+			if ( !empty( $unusedIds ) ) {
+				$this->subscriptionManager->unsubscribe( $this->clientId, $unusedIds );
+			}
+		}
 	}
 
 	/**
-	 * Removes stale usage information for the given page, and removes
+	 * Removes all usage information for the given page, and removes
 	 * any subscriptions that have become unnecessary.
 	 *
 	 * @param int $pageId The ID of the page the entities are used on.
-	 * @param string $lastUpdatedBefore timestamp. Entries older than this timestamp will be removed.
 	 *
-	 * @see UsageTracker::trackUsedEntities
+	 * @see UsageTracker::pruneUsages
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function pruneUsagesForPage( $pageId, $lastUpdatedBefore = '00000000000000' ) {
+	public function pruneUsagesForPage( $pageId ) {
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int!' );
 		}
 
-		if ( !is_string( $lastUpdatedBefore ) || $lastUpdatedBefore === '' ) {
-			throw new InvalidArgumentException( '$lastUpdatedBefore must be a timestamp string!' );
-		}
-
-		$prunedUsages = $this->usageTracker->pruneStaleUsages( $pageId, $lastUpdatedBefore );
+		$prunedUsages = $this->usageTracker->pruneUsages( $pageId );
 
 		$prunedEntityIds = $this->getEntityIds( $prunedUsages );
 		$unusedIds = $this->usageLookup->getUnusedEntities( $prunedEntityIds );
