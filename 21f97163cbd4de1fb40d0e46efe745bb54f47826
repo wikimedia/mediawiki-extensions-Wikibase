@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_2debdadc",
+        "filename": "repo/includes/api/SetClaim.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-23T12:14:48Z",
+      "side": 1,
+      "message": "I prefer $guid. The additional \"statement\" usually doesn\u0027t make the code easier to read.",
+      "revId": "21f97163cbd4de1fb40d0e46efe745bb54f47826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
