@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Parsers;
 
 use DataValues\TimeValue;
-use Language;
 use ValueParsers\CalendarModelParser;
 use ValueParsers\IsoTimestampParser;
 use ValueParsers\ParseException;
@@ -26,9 +25,9 @@ class YearMonthTimeParser extends StringValueParser {
 	const FORMAT_NAME = 'year-month';
 
 	/**
-	 * @var int[]
+	 * @var int[] Array mapping localized month names to month numbers (1 to 12).
 	 */
-	private $monthNameUnlocalizations;
+	private $monthNumbers;
 
 	/**
 	 * @var ValueParser
@@ -37,36 +36,22 @@ class YearMonthTimeParser extends StringValueParser {
 
 	/**
 	 * @see StringValueParser::__construct
+	 *
+	 * @param MonthNameProvider $monthNameProvider
+	 * @param ParserOptions|null $options
 	 */
-	public function __construct( ParserOptions $options = null ) {
+	public function __construct(
+		MonthNameProvider $monthNameProvider,
+		ParserOptions $options = null
+	) {
 		parent::__construct( $options );
 
 		$languageCode = $this->getOption( ValueParser::OPT_LANG );
-		$this->monthNameUnlocalizations = $this->getMonthNameUnlocalizations( $languageCode );
+		$this->monthNumbers = $monthNameProvider->getMonthNumbers( $languageCode );
 		$this->isoTimestampParser = new IsoTimestampParser(
 			new CalendarModelParser( $this->options ),
 			$this->options
 		);
-	}
-
-	/**
-	 * @see TimeParserFactory::getMwMonthNameReplacements
-	 *
-	 * @param string $languageCode
-	 *
-	 * @return int[]
-	 */
-	private function getMonthNameUnlocalizations( $languageCode ) {
-		$language = Language::factory( $languageCode );
-
-		$replacements = array();
-
-		for ( $i = 1; $i <= 12; $i++ ) {
-			$replacements[$language->getMonthName( $i )] = $i;
-			$replacements[$language->getMonthAbbreviation( $i )] = $i;
-		}
-
-		return $replacements;
 	}
 
 	/**
@@ -145,7 +130,7 @@ class YearMonthTimeParser extends StringValueParser {
 	 * @return TimeValue|bool
 	 */
 	private function parseYearMonth( $year, $month ) {
-		foreach ( $this->monthNameUnlocalizations as $monthName => $i ) {
+		foreach ( $this->monthNumbers as $monthName => $i ) {
 			if ( strcasecmp( $monthName, $month ) === 0 ) {
 				return $this->getTimeFromYearMonth( $year, $i );
 			}

@@ -13,7 +13,7 @@ interface MonthNameProvider {
 	/**
 	 * @param string $languageCode
 	 *
-	 * @return string[] Array mapping the month's numbers 1 to 12 to localized month names.
+	 * @return string[] Array mapping month numbers (1 to 12) to localized month names.
 	 */
 	public function getLocalizedMonthNames( $languageCode );
 
@@ -21,7 +21,7 @@ interface MonthNameProvider {
 	 * @param string $languageCode
 	 *
 	 * @return int[] Array mapping localized month names (possibly including full month names,
-	 * genitive names and abbreviations) to the month's numbers 1 to 12.
+	 * genitive names and abbreviations) to month numbers (1 to 12).
 	 */
 	public function getMonthNumbers( $languageCode );
 

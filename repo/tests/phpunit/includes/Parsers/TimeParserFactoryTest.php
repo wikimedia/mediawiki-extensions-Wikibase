@@ -106,9 +106,9 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			 */
 			'1 1999' =>
 				array( '+1999-01-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
-			'March 1999' =>
+			'enMonth3 1999' =>
 				array( '+1999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
-			'1999 March' =>
+			'1999 enMonth3' =>
 				array( '+1999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH ),
 
 			/**
