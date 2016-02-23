@@ -11,29 +11,38 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
 class NullUsageTracker implements UsageTracker, UsageLookup {
 
 	/**
-	 * @see UsageTracker::trackUsedEntities
+	 * @see UsageTracker::addUsedEntities
 	 *
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
-	 * @param string $touched
 	 */
-	public function trackUsedEntities( $pageId, array $usages, $touched ) {
+	public function addUsedEntities( $pageId, array $usages ) {
 		// no-op
 	}
 
 	/**
-	 * @see UsageTracker::pruneStaleUsages
+	 * @see UsageTracker::replaceUsedEntities
 	 *
 	 * @param int $pageId
-	 * @param string $lastUpdatedBefore
+	 * @param EntityUsage[] $usages
+	 */
+	public function replaceUsedEntities( $pageId, array $usages ) {
+		// no-op
+	}
+
+	/**
+	 * @see UsageTracker::pruneUsages
+	 *
+	 * @param int $pageId
 	 *
 	 * @return EntityUsage[]
 	 */
-	public function pruneStaleUsages( $pageId, $lastUpdatedBefore ) {
+	public function pruneUsages( $pageId ) {
 		return array();
 	}
 

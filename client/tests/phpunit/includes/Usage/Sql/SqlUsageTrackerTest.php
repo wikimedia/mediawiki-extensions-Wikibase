@@ -52,24 +52,28 @@ class SqlUsageTrackerTest extends \MediaWikiTestCase {
 		$this->lookupTester = new UsageLookupContractTester( $this->sqlUsageTracker, array( $this, 'putUsages' ) );
 	}
 
-	public function getUsages( $pageId, $timestamp ) {
+	public function getUsages( $pageId ) {
 		$db = wfGetDB( DB_SLAVE );
 		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db );
-		return $updater->queryUsages( $pageId, '>=', $timestamp );
+		return $updater->queryUsages( $pageId );
 	}
 
-	public function putUsages( $pageId, array $usages, $timestamp ) {
+	public function putUsages( $pageId, array $usages ) {
 		$db = wfGetDB( DB_MASTER );
 		$updater = new EntityUsageTable( new BasicEntityIdParser(), $db );
-		return $updater->addUsages( $pageId, $usages, $timestamp );
+		return $updater->addUsages( $pageId, $usages );
 	}
 
-	public function testTrackUsedEntities() {
-		$this->trackerTester->testTrackUsedEntities();
+	public function testAddUsedEntities() {
+		$this->trackerTester->testAddUsedEntities();
 	}
 
-	public function testPruneStaleUsages() {
-		$this->trackerTester->testPruneStaleUsages();
+	public function testReplaceUsedEntities() {
+		$this->trackerTester->testReplaceUsedEntities();
+	}
+
+	public function testPruneUsages() {
+		$this->trackerTester->testPruneUsages();
 	}
 
 	public function testGetUsageForPage() {
