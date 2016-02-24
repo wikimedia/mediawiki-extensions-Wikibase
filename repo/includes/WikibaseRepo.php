@@ -1508,8 +1508,13 @@ class WikibaseRepo {
 			$this->monolingualTextLanguages = new DifferenceContentLanguages(
 				new UnionContentLanguages(
 					new MediaWikiContentLanguages(),
-					// Special ISO 639-2 codes
-					new StaticContentLanguages( array( 'und', 'mis', 'mul', 'zxx' ) )
+					new StaticContentLanguages( array(
+						// Special ISO 639-2 codes
+						'und', 'mis', 'mul', 'zxx',
+
+						// T125066
+						'ett', 'koy', 'lkt', 'lld'
+					) )
 				),
 
 				// MediaWiki language codes we don't want for monolingual text values
