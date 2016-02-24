@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_e13e2626",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T11:06:15Z",
+      "side": 1,
+      "message": "Not part of this patch, but this padding-right and the \"padding-left: 0.2em;\" above should be on the same container.",
+      "revId": "f5bcca81683695cb559a8a3c14e42c2a4f3963bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_e1ff0661",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T11:06:15Z",
+      "side": 1,
+      "message": "\"word-break: break-word;\" is in no standard. If this is Chromium only, there should be a comment.\n\nThis also messes the layout up. Have a sitelink with a very long word, and edit it. There will be a huge amount of whitespace in an odd place between the edit field and the badges. Disable the rule and this issue disappears.",
+      "revId": "f5bcca81683695cb559a8a3c14e42c2a4f3963bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_61d476ed",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T11:06:15Z",
+      "side": 1,
+      "message": "Please order alphabetically.",
+      "revId": "f5bcca81683695cb559a8a3c14e42c2a4f3963bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_01010271",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T11:06:15Z",
+      "side": 1,
+      "message": "Please add \"vertical-align: middle;\", otherwise the alignment is off a bit.",
+      "revId": "f5bcca81683695cb559a8a3c14e42c2a4f3963bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_a127ce0c",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T11:06:15Z",
+      "side": 1,
+      "message": "Should be \"inline-block\" to restore the original behavior. Can be merged with the rule below then.",
+      "revId": "f5bcca81683695cb559a8a3c14e42c2a4f3963bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_41f85a46",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T11:06:15Z",
+      "side": 1,
+      "message": "This selector should be stronger. I would add the \".wikibase-sitelinkview\" from above, resulting in:\n\n.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit .wikibase-sitelinkview-link {",
+      "revId": "f5bcca81683695cb559a8a3c14e42c2a4f3963bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_a1fb4e43",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T11:06:15Z",
+      "side": 1,
+      "message": "Please add \"word-break: normal;\" to fix the Chromium issue described above.",
+      "revId": "f5bcca81683695cb559a8a3c14e42c2a4f3963bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
