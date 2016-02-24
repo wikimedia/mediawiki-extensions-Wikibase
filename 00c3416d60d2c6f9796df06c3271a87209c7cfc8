@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_10c0692e",
+        "filename": "lib/includes/modules/SitesModuleWorker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T17:02:17Z",
+      "side": 1,
+      "message": "As far as I can see the fallback was intended. The benefit is that you don\u0027t need translations for stuff that does not need to be translated, because it is simply the same string in that language (or even all languages).\n\nNot sure if this impression is correct.",
+      "revId": "00c3416d60d2c6f9796df06c3271a87209c7cfc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
