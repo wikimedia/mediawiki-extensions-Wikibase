@@ -118,10 +118,10 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidLanguageCode_getByLanguageThrowsException( $languageCode ) {
 		$list = new TermList();
+		$this->setExpectedException( 'OutOfBoundsException' );
 		$list->getByLanguage( $languageCode );
 	}
 
@@ -150,11 +150,10 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
-	public function testGivenInvalidLanguageCode_hasTermForLanguageThrowsException( $languageCode ) {
+	public function testGivenInvalidLanguageCode_hasTermForLanguageReturnsFalse( $languageCode ) {
 		$list = new TermList();
-		$list->hasTermForLanguage( $languageCode );
+		$this->assertFalse( $list->hasTermForLanguage( $languageCode ) );
 	}
 
 	public function invalidLanguageCodeProvider() {
@@ -194,11 +193,11 @@ class TermListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
-	public function testGivenInvalidLanguageCode_removeByLanguageThrowsException( $languageCode ) {
-		$list = new TermList();
+	public function testGivenInvalidLanguageCode_removeByLanguageDoesNoOp( $languageCode ) {
+		$list = new TermList( array( new Term( 'en', 'foo' ) ) );
 		$list->removeByLanguage( $languageCode );
+		$this->assertFalse( $list->isEmpty() );
 	}
 
 	public function testGivenTermForNewLanguage_setTermAddsTerm() {
