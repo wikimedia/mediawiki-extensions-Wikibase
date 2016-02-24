@@ -109,7 +109,7 @@ class SnakList extends HashArray {
 	 *
 	 * @since 0.5
 	 */
-	public function orderByProperty( $order = array() ) {
+	public function orderByProperty( array $order = array() ) {
 		$snaksByProperty = $this->getSnaksByProperty();
 		$orderedProperties = array_unique( array_merge( $order, array_keys( $snaksByProperty ) ) );
 
