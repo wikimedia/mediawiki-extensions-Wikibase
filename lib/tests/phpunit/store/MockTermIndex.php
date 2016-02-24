@@ -126,7 +126,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	private function makeTemplateTerms( $textsByLanguage, array $types ) {
+	private function makeTemplateTerms( array $textsByLanguage, array $types ) {
 		$terms = array();
 
 		foreach ( $textsByLanguage as $lang => $texts ) {

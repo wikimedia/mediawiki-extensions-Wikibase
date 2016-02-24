@@ -57,8 +57,8 @@ class Summary {
 		$moduleName = null,
 		$actionName = null,
 		$languageCode = null,
-		$commentArgs = array(),
-		$summaryArgs = array()
+		array $commentArgs = array(),
+		array $summaryArgs = array()
 	) {
 		$this->moduleName = $moduleName;
 		$this->actionName = $actionName;

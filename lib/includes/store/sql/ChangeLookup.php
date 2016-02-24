@@ -81,7 +81,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	 *
 	 * @return Change[]
 	 */
-	public function loadByChangeIds( $ids ) {
+	public function loadByChangeIds( array $ids ) {
 		Assert::parameterElementType( 'integer', $ids, '$ids' );
 
 		return $this->loadChanges(

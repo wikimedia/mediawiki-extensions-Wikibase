@@ -387,7 +387,7 @@ class ChangeOpsMerge {
 	 *
 	 * @return Error[]
 	 */
-	private function removeConflictsWithEntity( $errors, EntityId $fromId ) {
+	private function removeConflictsWithEntity( array $errors, EntityId $fromId ) {
 		$filtered = array();
 
 		foreach ( $errors as $error ) {

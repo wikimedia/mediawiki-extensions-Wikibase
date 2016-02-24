@@ -174,7 +174,7 @@ class EntityTermsView {
 	 */
 	public function getEntityTermsForLanguageListView(
 		Fingerprint $fingerprint,
-		$languageCodes,
+		array $languageCodes,
 		Title $title = null
 	) {
 		$entityTermsForLanguageViewsHtml = '';

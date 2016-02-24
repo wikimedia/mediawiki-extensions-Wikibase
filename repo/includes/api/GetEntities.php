@@ -145,9 +145,10 @@ class GetEntities extends ApiBase {
 
 	/**
 	 * @param array $params
+	 *
 	 * @return EntityId[]
 	 */
-	private function getEntityIdsFromIdParam( $params ) {
+	private function getEntityIdsFromIdParam( array $params ) {
 		$ids = array();
 		if ( isset( $params['ids'] ) ) {
 			foreach ( $params['ids'] as $id ) {
@@ -206,7 +207,7 @@ class GetEntities extends ApiBase {
 	 *
 	 * @return array
 	 */
-	private function getPropsFromParams( $params ) {
+	private function getPropsFromParams( array $params ) {
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
 			$params['props'][] = 'sitelinks';
 		}
@@ -220,7 +221,7 @@ class GetEntities extends ApiBase {
 	 *
 	 * @return EntityRevision[]
 	 */
-	private function getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects = false ) {
+	private function getEntityRevisionsFromEntityIds( array $entityIds, $resolveRedirects = false ) {
 		$revisionArray = array();
 
 		$this->entityPrefetcher->prefetch( $entityIds );
