@@ -172,16 +172,13 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	/**
 	 * @see ChangeOp::validate
 	 *
-	 * @since 0.5
-	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @throws ChangeOpException
-	 * @return Result
+	 * @return Result Always successful.
 	 */
 	public function validate( EntityDocument $entity ) {
 		//TODO: move validation logic from apply() here.
-		return parent::validate( $entity );
+		return Result::newSuccess();
 	}
 
 }

@@ -104,11 +104,7 @@ class ChangeOpLabel extends ChangeOpBase {
 	}
 
 	/**
-	 * Validates this ChangeOp
-	 *
-	 * @see ChangeOp::validate()
-	 *
-	 * @since 0.5
+	 * @see ChangeOp::validate
 	 *
 	 * @param EntityDocument $entity
 	 *
