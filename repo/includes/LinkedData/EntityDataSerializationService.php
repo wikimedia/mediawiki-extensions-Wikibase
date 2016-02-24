@@ -151,7 +151,7 @@ class EntityDataSerializationService {
 	/**
 	 * @param string[] $fieldsToShow
 	 */
-	public function setFieldsToShow( $fieldsToShow ) {
+	public function setFieldsToShow( array $fieldsToShow ) {
 		$this->fieldsToShow = $fieldsToShow;
 	}
 

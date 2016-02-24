@@ -120,7 +120,7 @@ class SiteMatrixParser {
 	 *
 	 * @return Site[]
 	 */
-	private function getSitesFromLangGroup( $langGroup ) {
+	private function getSitesFromLangGroup( array $langGroup ) {
 		$sites = array();
 
 		foreach ( $langGroup['site'] as $siteData ) {
@@ -142,7 +142,7 @@ class SiteMatrixParser {
 	 *
 	 * @return Site
 	 */
-	private function getSiteFromSiteData( $siteData ) {
+	private function getSiteFromSiteData( array $siteData ) {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( $siteData['dbname'] );
 

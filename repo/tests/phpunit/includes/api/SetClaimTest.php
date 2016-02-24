@@ -332,7 +332,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 *
 	 * @return array|bool
 	 */
-	private function assertApiRequest( $params, $error ) {
+	private function assertApiRequest( array $params, $error ) {
 		$resultArray = false;
 
 		try {

@@ -306,7 +306,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param string|null $legend initial value for the label input box
 	 * @param array[] $additionalFormElements initial value for the description input box
 	 */
-	private function createForm( $legend = null, $additionalFormElements = array() ) {
+	private function createForm( $legend = null, array $additionalFormElements = array() ) {
 		$this->addCopyrightText();
 
 		HTMLForm::factory( 'ooui', $additionalFormElements, $this->getContext() )

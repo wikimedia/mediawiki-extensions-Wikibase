@@ -390,7 +390,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array The values found in the array structure.
 	 * @todo needs unit test
 	 */
-	protected static function collectValues( $data, $ignore = array() ) {
+	protected static function collectValues( array $data, array $ignore = array() ) {
 		$values = array();
 
 		$erongi = array_flip( $ignore );
