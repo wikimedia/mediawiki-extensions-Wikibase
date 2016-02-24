@@ -49,7 +49,7 @@ class EntityDataSerializationService {
 	 * Attributes that should be included in the serialized form of the entity.
 	 * That is, all well known attributes.
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	private $fieldsToShow = array(
 		'labels',
@@ -149,14 +149,14 @@ class EntityDataSerializationService {
 	}
 
 	/**
-	 * @param array $fieldsToShow
+	 * @param string[] $fieldsToShow
 	 */
 	public function setFieldsToShow( $fieldsToShow ) {
 		$this->fieldsToShow = $fieldsToShow;
 	}
 
 	/**
-	 * @return array
+	 * @return string[]
 	 */
 	public function getFieldsToShow() {
 		return $this->fieldsToShow;

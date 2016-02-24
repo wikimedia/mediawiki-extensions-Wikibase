@@ -245,11 +245,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	}
 
 	/**
-	 * Build additional formelements
-	 *
-	 * @since 0.1
-	 *
-	 * @return string Formatted HTML for inclusion in the form
+	 * @return array[]
 	 */
 	protected function additionalFormElements() {
 		$this->getOutput()->addModules( 'wikibase.special.languageLabelDescriptionAliases' );
@@ -308,7 +304,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * Building the HTML form for creating a new item.
 	 *
 	 * @param string|null $legend initial value for the label input box
-	 * @param array $additionalFormElements initial value for the description input box
+	 * @param array[] $additionalFormElements initial value for the description input box
 	 */
 	private function createForm( $legend = null, $additionalFormElements = array() ) {
 		$this->addCopyrightText();

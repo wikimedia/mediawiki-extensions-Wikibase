@@ -42,7 +42,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	/**
 	 * @see LabelConflictFinder::getLabelConflicts
 	 *
-	 * @param string[] $entityType The relevant entity type
+	 * @param string $entityType The relevant entity type
 	 * @param string[] $labels The label to look for
 	 * @param array[]|null $aliases
 	 *
@@ -121,7 +121,7 @@ class MockTermIndex implements TermIndex, LabelConflictFinder {
 	}
 
 	/**
-	 * @param string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
+	 * @param array[]|string[] $textsByLanguage A list of texts, or a list of lists of texts (keyed by language on the top level)
 	 * @param string[] $types
 	 *
 	 * @return TermIndexEntry[]
