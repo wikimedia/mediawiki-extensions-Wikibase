@@ -16,6 +16,24 @@
       "revId": "00c3416d60d2c6f9796df06c3271a87209c7cfc8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_10e14997",
+        "filename": "lib/includes/modules/SitesModuleWorker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-02-24T17:33:38Z",
+      "side": 1,
+      "message": "at least all \"special\" sites we have on Wikidata do need to be translated, as they would at least be written differently in languages like Arabic and Japanese.\n\nwhen entering site links, it still has fallback to site id and not sure site id should be conflated with site name.\n\nanyway, if you or others feel strong enough that we should keep the fallback, we probably can and still fix the bug. (and maybe i can split into two changes)",
+      "parentUuid": "2ea41786_10c0692e",
+      "revId": "00c3416d60d2c6f9796df06c3271a87209c7cfc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
