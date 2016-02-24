@@ -16,6 +16,24 @@
       "revId": "bb2081ed18bed86614c110fda768da7ffbc69908",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_81ac1234",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T11:08:32Z",
+      "side": 1,
+      "message": "This is a bunch of very minor cleanups, all unrelated to the counter. What\u0027s your question? Which detail confuses you?",
+      "parentUuid": "2ea41786_61a6b6a9",
+      "revId": "bb2081ed18bed86614c110fda768da7ffbc69908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
