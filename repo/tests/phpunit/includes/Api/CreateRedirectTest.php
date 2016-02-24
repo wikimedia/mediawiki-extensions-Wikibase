@@ -103,7 +103,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	 *
 	 * @return CreateRedirect
 	 */
-	private function newApiModule( $params, User $user = null ) {
+	private function newApiModule( array $params, User $user = null ) {
 		if ( !$user ) {
 			$user = $GLOBALS['wgUser'];
 		}
@@ -161,7 +161,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		return $titleLookup;
 	}
 
-	private function callApiModule( $params, User $user = null ) {
+	private function callApiModule( array $params, User $user = null ) {
 		global $wgUser;
 
 		if ( !isset( $params['token'] ) ) {

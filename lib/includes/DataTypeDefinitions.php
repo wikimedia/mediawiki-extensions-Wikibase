@@ -123,7 +123,7 @@ class DataTypeDefinitions {
 	 * @return array A filtered version of $map that only contains the entries
 	 *         with keys that match the prefix $prefix, with that prefix removed.
 	 */
-	private function getFilteredByPrefix( $map, $prefix ) {
+	private function getFilteredByPrefix( array $map, $prefix ) {
 		$filtered = array();
 
 		foreach ( $map as $key => $value ) {

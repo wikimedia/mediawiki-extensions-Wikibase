@@ -52,7 +52,7 @@ class EntityDataFormatProvider {
 	/**
 	 * @param string[]|null $formatWhiteList
 	 */
-	public function setFormatWhiteList( $formatWhiteList ) {
+	public function setFormatWhiteList( array $formatWhiteList = null ) {
 		$this->formatWhiteList = $formatWhiteList;
 
 		// force re-init of format maps

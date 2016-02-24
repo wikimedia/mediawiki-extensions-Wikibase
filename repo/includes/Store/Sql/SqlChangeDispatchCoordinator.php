@@ -416,7 +416,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @throws DBUnexpectedError
 	 */
-	public function initState( $clientWikiDBs ) {
+	public function initState( array $clientWikiDBs ) {
 		$db = $this->getRepoMaster();
 
 		$trackedSiteIds = $db->selectFieldValues(

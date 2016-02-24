@@ -202,7 +202,12 @@ class LinkBeginHookHandler {
 		$out->addModuleStyles( array( 'wikibase.common' ) );
 	}
 
-	private function getPreferredTerm( $termsByLanguage ) {
+	/**
+	 * @param array $termsByLanguage
+	 *
+	 * @return string[]|null
+	 */
+	private function getPreferredTerm( array $termsByLanguage ) {
 		if ( empty( $termsByLanguage ) ) {
 			return null;
 		}
@@ -249,7 +254,7 @@ class LinkBeginHookHandler {
 	}
 
 	/**
-	 * @param array $termData A term record as returned by
+	 * @param string[]|null $termData A term record as returned by
 	 * LanguageFallbackChain::extractPreferredValueOrAny(),
 	 * containing the 'value' and 'language' fields, or null
 	 * or an empty array.
@@ -258,7 +263,7 @@ class LinkBeginHookHandler {
 	 *
 	 * @return array list( string $text, Language $language )
 	 */
-	private function extractTextAndLanguage( $termData ) {
+	private function extractTextAndLanguage( array $termData = null ) {
 		if ( $termData ) {
 			return array(
 				$termData['value'],
@@ -272,7 +277,7 @@ class LinkBeginHookHandler {
 		}
 	}
 
-	private function getHtml( Title $title, $labelData ) {
+	private function getHtml( Title $title, array $labelData = null ) {
 		/** @var Language $labelLang */
 		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
 
@@ -297,7 +302,7 @@ class LinkBeginHookHandler {
 			. '</span>';
 	}
 
-	private function getTitleAttribute( Title $title, $labelData, $descriptionData ) {
+	private function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null ) {
 		/** @var Language $labelLang */
 		/** @var Language $descriptionLang */
 

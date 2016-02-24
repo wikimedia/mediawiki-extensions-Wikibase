@@ -90,7 +90,7 @@ class InterwikiSorter {
 	 *
 	 * @return int
 	 */
-	private function compareLinks( $a, $b ) {
+	private function compareLinks( array $a, array $b ) {
 		$a = $a[0];
 		$b = $b[0];
 
