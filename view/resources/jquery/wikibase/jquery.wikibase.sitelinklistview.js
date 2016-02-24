@@ -297,11 +297,11 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	_getFormattedCounterText: function() {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
-			$items = listview.items(),
-			$pendingItems = $items.filter( '.wb-new' ).filter( function() {
+			$items = listview.items().filter( function() {
 				var sitelinkview = lia.liInstance( $( this ) );
 				return !sitelinkview.isEmpty();
-			} );
+			} ),
+			$pendingItems = $items.filter( '.wb-new' );
 
 		var $counterMsg = wb.utilities.ui.buildPendingCounter(
 			$items.length - $pendingItems.length,
@@ -447,7 +447,8 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		var self = this;
 
 		if ( dropValue ) {
-			self.$listview.data( 'listview' ).value( self.options.value );
+			this.$listview.data( 'listview' ).value( this.options.value );
+			this._refreshCounter();
 		} else {
 			this._removeIncompleteSiteLinks();
 		}
