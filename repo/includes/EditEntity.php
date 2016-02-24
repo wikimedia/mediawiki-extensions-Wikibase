@@ -434,12 +434,12 @@ class EditEntity {
 		if ( $patch->isEmpty() ) {
 			// we didn't technically fix anything, but if there is nothing to change,
 			// so just keep the current content as it is.
-			$this->newEntity = unserialize( serialize( $latestRev->getEntity() ) );
+			$this->newEntity = $latestRev->getEntity()->copy();
 			return true;
 		}
 
 		// apply the patch( base -> new ) to the latest revision.
-		$patchedLatest = unserialize( serialize( $latestRev->getEntity() ) );
+		$patchedLatest = $latestRev->getEntity()->copy();
 		$entityPatcher->patchEntity( $patchedLatest, $patch );
 
 		// detect conflicts against latest revision
