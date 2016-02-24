@@ -92,7 +92,11 @@ $.extend( SELF.prototype, {
 	 * @param {wikibase.datamodel.Term} term
 	 */
 	setLabel: function( languageCode, term ) {
-		this._labels.setItem( languageCode, term );
+		if ( term.getText() === '' ) {
+			this._labels.removeItemByKey( languageCode );
+		} else {
+			this._labels.setItem( languageCode, term );
+		}
 	},
 
 	/**
@@ -147,7 +151,11 @@ $.extend( SELF.prototype, {
 	 * @param {wikibase.datamodel.Term} term
 	 */
 	setDescription: function( languageCode, term ) {
-		this._descriptions.setItem( languageCode, term );
+		if ( term.getText() === '' ) {
+			this._descriptions.removeItemByKey( languageCode );
+		} else {
+			this._descriptions.setItem( languageCode, term );
+		}
 	},
 
 	/**
@@ -219,7 +227,11 @@ $.extend( SELF.prototype, {
 				throw new Error( 'Language code the wb.datamodel.MultiTerm object should be set '
 					+ 'for needs to be specified' );
 			}
-			this._aliases.setItem( languageCode, aliases );
+			if ( aliases.isEmpty() ) {
+				this._aliases.removeItemByKey( languageCode );
+			} else {
+				this._aliases.setItem( languageCode, aliases );
+			}
 		} else if( aliases instanceof wb.datamodel.MultiTermMap ) {
 			if( languageCode ) {
 				throw new Error( 'Unable to handle language code when setting a '

@@ -126,7 +126,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 } );
 
 QUnit.test( 'setLabel()', function( assert ) {
-	assert.expect( 3 );
+	assert.expect( 4 );
 	var fingerprint = new wb.datamodel.Fingerprint(),
 		label = new wb.datamodel.Term( 'de', 'de-label' );
 
@@ -147,6 +147,13 @@ QUnit.test( 'setLabel()', function( assert ) {
 	assert.ok(
 		fingerprint.hasLabel( 'de', label ),
 		'Set label.'
+	);
+
+	fingerprint.setLabel( 'de', new wb.datamodel.Term( 'de', '' ) );
+
+	assert.ok(
+		!fingerprint.hasLabelFor( 'de' ),
+		'Set label with empty term removes label.'
 	);
 } );
 
@@ -194,7 +201,7 @@ QUnit.test( 'removeLabelFor()', function( assert ) {
 } );
 
 QUnit.test( 'setDescription()', function( assert ) {
-	assert.expect( 3 );
+	assert.expect( 4 );
 	var fingerprint = new wb.datamodel.Fingerprint(),
 		description = new wb.datamodel.Term( 'de', 'de-description' );
 
@@ -215,6 +222,13 @@ QUnit.test( 'setDescription()', function( assert ) {
 	assert.ok(
 		fingerprint.hasDescription( 'de', description ),
 		'Set description.'
+	);
+
+	fingerprint.setDescription( 'de', new wb.datamodel.Term( 'de', '' ) );
+
+	assert.ok(
+		!fingerprint.hasDescriptionFor( 'de' ),
+		'Set description with empty term removes description.'
 	);
 } );
 
@@ -268,7 +282,7 @@ QUnit.test( 'removeDescriptionFor()', function( assert ) {
 } );
 
 QUnit.test( 'setAliases()', function( assert ) {
-	assert.expect( 6 );
+	assert.expect( 8 );
 	var fingerprint = new wb.datamodel.Fingerprint(),
 		deAliases = new wb.datamodel.MultiTerm( 'de', ['de-alias'] ),
 		enAliases = new wb.datamodel.MultiTerm( 'en', ['en-alias'] ),
@@ -310,6 +324,20 @@ QUnit.test( 'setAliases()', function( assert ) {
 	assert.ok(
 		fingerprint.hasAliases( 'en', enAliases ),
 		'Set aliases passing a MultiTermMap object.'
+	);
+
+	fingerprint.setAliases( 'en', new wb.datamodel.MultiTerm( 'en', [] ) );
+
+	assert.ok(
+		!fingerprint.hasAliasesFor( 'en' ),
+		'Set aliases with empty list removes aliases.'
+	);
+
+	assert.throws(
+		function() {
+			fingerprint.setAliases( new wb.datamodel.MultiTerm( 'en', [] ) );
+		},
+		'Throwing error when trying to set an empty MultiTerm without specifying a language code.'
 	);
 } );
 
