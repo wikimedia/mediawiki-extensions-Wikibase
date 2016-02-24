@@ -34,6 +34,23 @@
       "revId": "bb2081ed18bed86614c110fda768da7ffbc69908",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_fc1c897e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-24T15:47:22Z",
+      "side": 1,
+      "message": "Moved to I0b8991d.",
+      "revId": "bb2081ed18bed86614c110fda768da7ffbc69908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
