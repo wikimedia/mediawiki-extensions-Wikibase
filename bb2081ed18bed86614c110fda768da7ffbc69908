@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_61a6b6a9",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-02-24T10:10:22Z",
+      "side": 1,
+      "message": "Is this necessary to fix the counter?\nI don\u0027t get what you do here.",
+      "revId": "bb2081ed18bed86614c110fda768da7ffbc69908",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
