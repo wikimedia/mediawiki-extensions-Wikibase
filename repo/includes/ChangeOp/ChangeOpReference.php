@@ -137,7 +137,7 @@ class ChangeOpReference extends ChangeOpBase {
 			throw new ChangeOpException( "The statement has already a reference with hash $hash" );
 		}
 		$references->addReference( $this->reference, $this->index );
-		$this->updateSummary( $summary, 'add' );
+		$summary->setAction( 'add' );
 	}
 
 	/**
@@ -167,7 +167,7 @@ class ChangeOpReference extends ChangeOpBase {
 		}
 		$references->removeReferenceHash( $this->referenceHash );
 		$references->addReference( $this->reference, $this->index );
-		$this->updateSummary( $summary, 'set' );
+		$summary->setAction( 'set' );
 	}
 
 	/**

@@ -129,7 +129,7 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		}
 
 		$statement->setMainSnak( $this->snak );
-		$this->updateSummary( $summary, null, '', $this->getClaimSummaryArgs( $this->snak ) );
+		$summary->addAutoSummaryArgs( $this->getClaimSummaryArgs( $this->snak ) );
 	}
 
 	/**

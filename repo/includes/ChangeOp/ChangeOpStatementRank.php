@@ -69,7 +69,7 @@ class ChangeOpStatementRank extends ChangeOpBase {
 
 		$oldRank = $statement->getRank();
 		$statement->setRank( $this->rank );
-		$this->updateSummary( $summary, null, '', $this->getSnakSummaryArgs( $statement->getMainSnak() ) );
+		$summary->addAutoSummaryArgs( $this->getSnakSummaryArgs( $statement->getMainSnak() ) );
 
 		if ( $summary !== null ) {
 			$statementRankSerializer = new StatementRankSerializer();

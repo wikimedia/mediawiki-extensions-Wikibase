@@ -153,10 +153,10 @@ class ChangeOpStatement extends ChangeOpBase {
 		}
 
 		if ( $oldStatement === null ) {
-			$this->updateSummary( $summary, 'create' );
+			$summary->setAction( 'create' );
 		} else {
 			$this->checkMainSnakUpdate( $oldStatement );
-			$this->updateSummary( $summary, 'update' );
+			$summary->setAction( 'update' );
 		}
 
 		return $newStatements;

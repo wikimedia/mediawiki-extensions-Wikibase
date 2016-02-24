@@ -91,7 +91,7 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 			throw new ChangeOpException( "Reference with hash $this->referenceHash does not exist" );
 		}
 		$references->removeReferenceHash( $this->referenceHash );
-		$this->updateSummary( $summary, 'remove' );
+		$summary->setAction( 'remove' );
 		if ( $summary !== null ) {
 			$summary->addAutoCommentArgs( 1 ); //atomic edit, only one reference changed
 		}
