@@ -273,11 +273,8 @@ class SnakListTest extends HashArrayTest {
 
 	/**
 	 * @dataProvider orderByPropertyProvider
-	 * @param SnakList $snakList
-	 * @param SnakList $expected
-	 * @param string[] $order
 	 */
-	public function testOrderByProperty( SnakList $snakList, SnakList $expected, $order = array() ) {
+	public function testOrderByProperty( SnakList $snakList, SnakList $expected, array $order = array() ) {
 		$initialSnakList = new SnakList( array_values( iterator_to_array( $snakList ) ) );
 
 		$snakList->orderByProperty( $order );
