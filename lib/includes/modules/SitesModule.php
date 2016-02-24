@@ -42,7 +42,7 @@ class SitesModule extends ResourceLoaderModule {
 	 * @return string
 	 */
 	public function getScript( ResourceLoaderContext $context ) {
-		return $this->worker->getScript();
+		return $this->worker->getScript( $context->getLanguage() );
 	}
 
 	/**
