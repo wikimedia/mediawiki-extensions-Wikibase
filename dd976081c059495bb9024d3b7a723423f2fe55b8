@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_9ff21dcc",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T17:24:20Z",
+      "side": 1,
+      "message": "Instead of a longer stacktrace. 4 tabs are not much.",
+      "parentUuid": "2ea41786_1c163baa",
+      "revId": "dd976081c059495bb9024d3b7a723423f2fe55b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_7c240f08",
         "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-25T16:43:28Z",
       "side": 1,
       "message": "Signaling error state via a return value isn\u0027t nice",
+      "revId": "dd976081c059495bb9024d3b7a723423f2fe55b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_dfcf3581",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T17:24:20Z",
+      "side": 1,
+      "message": "This is not new, it was like this before and is what the contract of the superclass demands.",
+      "parentUuid": "2ea41786_7c240f08",
       "revId": "dd976081c059495bb9024d3b7a723423f2fe55b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

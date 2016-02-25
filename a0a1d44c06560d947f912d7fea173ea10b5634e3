@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_1fe70d11",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T17:24:20Z",
+      "side": 0,
+      "message": "Especially this if-else is very much pointless, and the reason I started this patch.",
+      "revId": "a0a1d44c06560d947f912d7fea173ea10b5634e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
