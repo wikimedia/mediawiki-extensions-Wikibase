@@ -21,9 +21,6 @@
  *           aliases: <{wikibase.datamodel.MultiTerm}>
  *         }
  *
- * @option {string} [helpMessage]
- *         Default: mw.msg( 'wikibase-entitytermsforlanguageview-input-help-message' )
- *
  * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
  *
  * @event change
@@ -77,7 +74,6 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 			$aliases: '.wikibase-entitytermsforlanguageview-aliases'
 		},
 		value: null,
-		helpMessage: mw.msg( 'wikibase-entitytermsforlanguageview-input-help-message' ),
 		entityChangersFactory: null
 	},
 

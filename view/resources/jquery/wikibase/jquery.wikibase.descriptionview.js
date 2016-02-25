@@ -17,9 +17,6 @@
  * @option {string} [inputNodeName='TEXTAREA']
  *         Should either be 'TEXTAREA' or 'INPUT'.
  *
- * @option {string} [helpMessage]
- *         Default: mw.msg( 'wikibase-description-input-help-message' )
- *
  * @option {wikibase.entityChangers.DescriptionsChanger} descriptionsChanger
  */
 $.widget( 'wikibase.descriptionview', PARENT, {
@@ -38,7 +35,6 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		},
 		value: null,
 		inputNodeName: 'TEXTAREA',
-		helpMessage: mw.msg( 'wikibase-description-input-help-message' ),
 		descriptionsChanger: null
 	},
 
