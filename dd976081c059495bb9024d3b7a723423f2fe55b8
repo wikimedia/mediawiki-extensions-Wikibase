@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_1c163baa",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T16:43:28Z",
+      "side": 1,
+      "message": "we have deeper nesting now",
+      "revId": "dd976081c059495bb9024d3b7a723423f2fe55b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_7c240f08",
+        "filename": "repo/includes/specials/SpecialSetLabelDescriptionAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T16:43:28Z",
+      "side": 1,
+      "message": "Signaling error state via a return value isn\u0027t nice",
+      "revId": "dd976081c059495bb9024d3b7a723423f2fe55b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
