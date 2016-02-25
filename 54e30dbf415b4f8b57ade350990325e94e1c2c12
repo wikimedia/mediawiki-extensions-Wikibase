@@ -16,6 +16,142 @@
       "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_99e8fd0c",
+        "filename": "repo/includes/ParserOutput/EntityViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T14:59:10Z",
+      "side": 1,
+      "message": "By looking at the names, I\u0027d assume that an EntityViewFactory is a ViewFactory. Can we come up with better names?",
+      "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_7968a184",
+        "filename": "repo/includes/ParserOutput/EntityViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T14:59:10Z",
+      "side": 1,
+      "message": "I agree with adrian: only the callback knows whether it needs a ViewFactory. So it shouldn\u0027t be a parameter to the callback, but the callback should pull it in from its context. See me comment in WikibaseRepo.",
+      "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_598cc589",
+        "filename": "repo/includes/ParserOutput/EntityViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T14:59:10Z",
+      "side": 1,
+      "message": "What for do we need to pass the fallback chain here?",
+      "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_59f36507",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 1440,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T14:59:10Z",
+      "side": 1,
+      "message": "Ok, but let\u0027s make sure we actually do that soon. Ideally, a patch for that should be up when this is merged.\nTo avoid bloating the function, we could define the callbacks in a static member for now, instead of inline.",
+      "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_390229bf",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T14:59:10Z",
+      "side": 1,
+      "message": "function ( ... ) use ( $viewFactory ) would be cleaner. That way, EntityViewFactory doesn\u0027t have to know about ViewFactory at all. And callbacks are free to depend on it, or not.",
+      "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_79c2e189",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T14:59:10Z",
+      "side": 1,
+      "message": "DataModelViewFactory?",
+      "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_393469a7",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T14:59:10Z",
+      "side": 1,
+      "message": "I still don\u0027t like the asymmetry here: well known entity types get a method here, while \"custom\" entity types would have the equivalent logic in a callback closure.",
+      "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_f93d718b",
+        "filename": "view/tests/phpunit/ViewFactoryTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T14:59:10Z",
+      "side": 1,
+      "message": "Drop the \"Basic\" bit, the method names should be consistent with the class name.",
+      "revId": "54e30dbf415b4f8b57ade350990325e94e1c2c12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
