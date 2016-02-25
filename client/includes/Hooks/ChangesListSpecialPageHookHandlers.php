@@ -48,7 +48,7 @@ class ChangesListSpecialPageHookHandlers {
 	private $showExternalChanges;
 
 	/**
-	 * @var ChangesListSpecialPageHookHandlers
+	 * @var self
 	 */
 	private static $instance = null;
 
@@ -77,7 +77,7 @@ class ChangesListSpecialPageHookHandlers {
 	 * @param IContextSource $context
 	 * @param string $specialPageName
 	 *
-	 * @return ChangesListSpecialPageHookHandlers
+	 * @return self
 	 */
 	private static function newFromGlobalState(
 		IContextSource $context,
@@ -100,7 +100,7 @@ class ChangesListSpecialPageHookHandlers {
 	 * @param IContextSource $context
 	 * @param string $specialPageName
 	 *
-	 * @return ChangesListSpecialPageHookHandlers
+	 * @return self
 	 */
 	private static function getInstance(
 		IContextSource $context,

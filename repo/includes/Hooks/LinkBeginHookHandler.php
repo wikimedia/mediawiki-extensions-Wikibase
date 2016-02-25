@@ -58,7 +58,7 @@ class LinkBeginHookHandler {
 	private $pageLanguage;
 
 	/**
-	 * @return LinkBeginHookHandler
+	 * @return self
 	 */
 	private static function newFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

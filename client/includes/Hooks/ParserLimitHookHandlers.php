@@ -38,7 +38,7 @@ class ParserLimitHookHandlers {
 	}
 
 	/**
-	 * @return ParserLimitHookHandlers
+	 * @return self
 	 */
 	public static function newFromGlobalState() {
 		global $wgLang;

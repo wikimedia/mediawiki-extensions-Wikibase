@@ -163,7 +163,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityPrefetcher $entityPrefetcher
 	 * @param RdfVocabulary $vocabulary
 	 *
-	 * @return RdfDumpGenerator
+	 * @return self
 	 * @throws MWException
 	 */
 	public static function createDumpGenerator(
@@ -195,7 +195,7 @@ class RdfDumpGenerator extends DumpGenerator {
 			new HashDedupeBag()
 		);
 
-		return new RdfDumpGenerator( $output, $entityRevisionLookup, $rdfBuilder, $entityPrefetcher );
+		return new self( $output, $entityRevisionLookup, $rdfBuilder, $entityPrefetcher );
 	}
 
 }
