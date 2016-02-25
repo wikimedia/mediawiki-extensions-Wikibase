@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_59928558",
+        "filename": "docs/entities.wiki",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T15:17:31Z",
+      "side": 1,
+      "message": "The only thing I can point you to is https://www.mediawiki.org/wiki/Wikibase/DataModel which is probably too abstract",
+      "parentUuid": "2ea41786_f0d7d226",
+      "revId": "01910cbe241cf6358368d4dd8ba2c4079b0e82c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_29d437be",
         "filename": "lib/WikibaseLib.entitytypes.php",
         "patchSetId": 6
