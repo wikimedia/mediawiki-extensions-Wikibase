@@ -30,12 +30,12 @@ the git repository and take care of loading yourself.
 To add this package as a local, per-project dependency to your project, simply add a
 dependency on `wikibase/data-model` to your project's `composer.json` file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
-Wikibase DataModel 4.x:
+Wikibase DataModel 5.x:
 
 ```js
 {
     "require": {
-        "wikibase/data-model": "~4.0"
+        "wikibase/data-model": "~5.0"
     }
 }
 ```
@@ -69,7 +69,7 @@ Wikibase DataModel has been written by [Jeroen De Dauw](https://www.mediawiki.or
 and Thiemo Mättig as [Wikimedia Germany](https://wikimedia.de) employees for the [Wikidata project]
 (https://wikidata.org/).
 
-Contributions where also made by [several other people]
+Contributions were also made by [several other people]
 (https://www.ohloh.net/p/wikibasedatamodel/contributors?sort=commits).
 
 ### Concept
