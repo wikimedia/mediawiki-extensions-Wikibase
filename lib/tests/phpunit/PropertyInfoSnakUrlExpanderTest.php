@@ -27,6 +27,7 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
 		$p66 = new PropertyId( 'P66' );
 		$p2 = new PropertyId( 'P2' );
 		$p3 = new PropertyId( 'P3' );
+		$p523 = new PropertyId( 'P523' );
 
 		$infoStore = new MockPropertyInfoStore();
 
@@ -40,9 +41,15 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
 			PropertyInfoStore::KEY_FORMATTER_URL => 'http://acme.info/foo/$1',
 		) );
 
+		$infoStore->setPropertyInfo( $p523, array(
+			PropertyInfoStore::KEY_DATA_TYPE => 'string',
+			PropertyInfoStore::KEY_FORMATTER_URL => '$1',
+		) );
+
 		$infoProvider = new FieldPropertyInfoProvider( $infoStore, PropertyInfoStore::KEY_FORMATTER_URL );
 
 		$value = new StringValue( 'X&Y' );
+		$url = new StringValue( 'http://acme.info/&?&foo/' );
 
 		return array(
 			'unknown property' => array(
@@ -59,6 +66,11 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
 				$infoProvider,
 				new PropertyValueSnak( $p3, $value ),
 				'http://acme.info/foo/X%26Y'
+			),
+			'minimal url pattern' => array(
+				$infoProvider,
+				new PropertyValueSnak( $p523, $url ),
+				'http://acme.info/%26%3F%26foo/'
 			),
 		);
 	}
