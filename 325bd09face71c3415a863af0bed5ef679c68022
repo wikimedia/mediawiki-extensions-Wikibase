@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_088cb536",
+        "filename": "lib/includes/PropertyInfoSnakUrlExpander.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T22:09:16Z",
+      "side": 1,
+      "message": "This will fail for patterns like http://acme.test/foo?q\u003d$1. I just now wrote the tests to verify, so I already have the fix here. I\u0027ll amend.",
+      "revId": "325bd09face71c3415a863af0bed5ef679c68022",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
