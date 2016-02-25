@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_f9e331d2",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T15:47:48Z",
+      "side": 1,
+      "message": "please document the new hook in Wikibase/docs/hooks.txt",
+      "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_d940b5aa",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T15:47:48Z",
+      "side": 1,
+      "message": "The DeserializerFactory seems increasingly pointless...\nFor consistency, it seems like $this-\u003egetEntityDeserializer() should be used directly with new InternalDeserializerFactory(), just like getDataValueDeserializer() and getEntityIdParser().",
+      "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_794d01e0",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T15:47:48Z",
+      "side": 1,
+      "message": "Is there a reason we can\u0027t put $this-\u003egetEntityDeserializer() here?",
+      "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_391789aa",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T15:47:48Z",
+      "side": 1,
+      "message": "Is there a reason we can\u0027t put $this-\u003egetEntityDeserializer() here?",
+      "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_797bc1eb",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T15:47:48Z",
+      "side": 1,
+      "message": "DNM",
+      "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_b958598d",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T15:47:48Z",
+      "side": 1,
+      "message": "Would be nice if this would actually dispatch be entity type. But that\u0027s for another patch.",
+      "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
