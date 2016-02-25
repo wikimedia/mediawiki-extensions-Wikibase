@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_d9fbd542",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T15:53:25Z",
+      "side": 0,
+      "message": "This was a 16x16 square before, but the image is 12x19px. This is why it sometimes missed a few pixels at the top and/or bottom.",
+      "revId": "9971ff0ae5170cfe7dc7bd58ac323cee12c13299",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

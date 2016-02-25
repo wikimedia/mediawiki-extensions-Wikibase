@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_59be0562",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinklistview.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T15:53:25Z",
+      "side": 1,
+      "message": "In PS8 I split these rules, because hyphens/work-break should not be applied on badges.",
+      "revId": "cc8fe9fbd5802c6b75eae268f0fd4ab71948679a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_d982f5a8",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T15:53:25Z",
+      "side": 1,
+      "message": "Can\u0027t be \"inline\" any more, otherwise with/height won\u0027t work.",
+      "revId": "cc8fe9fbd5802c6b75eae268f0fd4ab71948679a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_79f8a146",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T15:53:25Z",
+      "side": 1,
+      "message": "12px + 4px is identical to the previous 16px.",
+      "revId": "cc8fe9fbd5802c6b75eae268f0fd4ab71948679a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_b985b9b3",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T15:53:25Z",
+      "side": 1,
+      "message": "This avoids having an unwanted margin when there are no badges.",
+      "revId": "cc8fe9fbd5802c6b75eae268f0fd4ab71948679a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_f9b25191",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T15:53:25Z",
+      "side": 1,
+      "message": "The added comment is pure documentation and stripped from the output.",
+      "revId": "cc8fe9fbd5802c6b75eae268f0fd4ab71948679a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
