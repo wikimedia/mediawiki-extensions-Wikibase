@@ -263,6 +263,7 @@
 	"wikibase-entitydata-storage-error": "Kunne ikke laste entiteten $1.",
 	"wikibase-entitydata-title": "Entity data",
 	"wikibase-entitydata-text": "Denne siden er et grensesnitt for lenkede data for entitetsinnhold. Angi entitets-IDen i URLen ved hjelp av undersidesyntaks.",
+	"wikibase-redirectentity-submit": "Omdiriger",
 	"special-mylanguagefallbackchain": "Min språktilbakefallskjede",
 	"wikibase-mylanguagefallbackchain-text": "Språktilbakefallskjeden som brukes for å vise entitetsetiketter for deg vises under.",
 	"wikibase-mylanguagefallbackchain-babel": "Du kan redigere den ved å legge inn <nowiki>{{#babel: }}</nowiki> på [[Special:MyPage|brukersiden]] {{GENDER:$1|din}}.",
@@ -278,6 +279,7 @@
 	"wikibase-special-mergeitems-error-prefix": "Elementene kunne ikke slås sammen. Følgende feil oppstod:",
 	"wikibase-listdatatypes-wikibase-item-head": "Element",
 	"wikibase-listdatatypes-wikibase-item-body": "Lenke til andre elementer i prosjektet. Når en verdi fylles inn, vil prosjektets «Element»-navnerom gjennomsøkes etter matchende elementer.",
+	"wikibase-listdatatypes-wikibase-property-head": "Egenskap",
 	"wikibase-listdatatypes-commonsmedia-head": "Commons-medium",
 	"wikibase-listdatatypes-commonsmedia-body": "Lenke til filer lagret i Wikimedia Commons. Når en verdi fylles inn, vil «Fil»-navnerommet på Commons gjennomsøkes etter matchende filer.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Koordinat",
@@ -307,6 +309,7 @@
 	"right-item-redirect": "Opprett elementomdirigeringer",
 	"right-property-term": "Endre egenskapenes termer (etikett, beskrivelse, kallenavn)",
 	"right-property-create": "Oprett egenskaper",
+	"action-item-merge": "flere elementer",
 	"action-property-create": "opprett egenskaper",
 	"apihelp-wbparsevalue-param-parser": "ID fra ValueParser som brukes. <span class=\"apihelp-deprecated\">Avskrevet</span>. Bruk heller parameteren for datatype."
 }
