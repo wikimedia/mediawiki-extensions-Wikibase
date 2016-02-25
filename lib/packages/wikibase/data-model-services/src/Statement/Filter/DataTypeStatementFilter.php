@@ -18,6 +18,9 @@ use Wikibase\DataModel\Statement\StatementFilter;
  */
 class DataTypeStatementFilter implements StatementFilter {
 
+	/**
+	 * @since 3.3
+	 */
 	const FILTER_TYPE = 'dataType';
 
 	/**
