@@ -99,9 +99,11 @@ class SitesModuleWorker {
 	 * Sites infos will be available in 'wbSiteDetails' config var.
 	 * @see ResourceLoaderModule::getScript
 	 *
+	 * @param string $languageCode
+	 *
 	 * @return string
 	 */
-	public function getScript() {
+	public function getScript( $languageCode ) {
 		$groups = $this->getSiteLinkGroups();
 		$specialGroups = $this->getSpecialSiteLinkGroups();
 		$specialPos = array_search( 'special', $groups );
@@ -116,7 +118,11 @@ class SitesModuleWorker {
 		 */
 		foreach ( $this->getSites() as $site ) {
 			if ( $this->shouldSiteBeIncluded( $site, $groups ) ) {
-				$siteDetails[$site->getGlobalId()] = $this->getSiteDetails( $site, $specialGroups );
+				$siteDetails[$site->getGlobalId()] = $this->getSiteDetails(
+					$site,
+					$specialGroups,
+					$languageCode
+				);
 			}
 		}
 
@@ -126,10 +132,11 @@ class SitesModuleWorker {
 	/**
 	 * @param MediaWikiSite $site
 	 * @param string[] $specialGroups
+	 * @param string $languageCode
 	 *
 	 * @return string[]
 	 */
-	private function getSiteDetails( MediaWikiSite $site, array $specialGroups ) {
+	private function getSiteDetails( MediaWikiSite $site, array $specialGroups, $languageCode ) {
 		$languageNameLookup = new LanguageNameLookup();
 
 		$group = $site->getGroup();
@@ -137,8 +144,7 @@ class SitesModuleWorker {
 		// FIXME: quickfix to allow a custom site-name / handling for the site groups which are
 		// special according to the specialSiteLinkGroups setting
 		if ( in_array( $group, $specialGroups ) ) {
-			$languageNameMsg = wfMessage( 'wikibase-sitelinks-sitename-' . $site->getGlobalId() );
-			$languageName = $languageNameMsg->exists() ? $languageNameMsg->parse() : $site->getGlobalId();
+			$languageName = $this->getSpecialSiteLanguageName( $site, $languageCode );
 			$groupName = 'special';
 		} else {
 			$languageName = $languageNameLookup->getName( $site->getLanguageCode() );
@@ -168,6 +174,22 @@ class SitesModuleWorker {
 				'languageCode' => $site->getLanguageCode(),
 				'group' => $groupName
 		);
+	}
+
+	/**
+	 * @param Site $site
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	private function getSpecialSiteLanguageName( Site $site, $languageCode ) {
+		$siteId = $site->getGlobalId();
+		$messageKey = 'wikibase-sitelinks-sitename-' . $siteId;
+
+		// @note: inLanguage needs to be called before exists and parse. See: T127872.
+		$languageNameMsg = wfMessage( $messageKey )->inLanguage( $languageCode );
+
+		return $languageNameMsg->exists() ? $languageNameMsg->parse() : $siteId;
 	}
 
 	/**

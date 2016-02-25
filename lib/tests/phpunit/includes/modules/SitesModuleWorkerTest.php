@@ -60,10 +60,16 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @dataProvider getScriptProvider
 	 */
-	public function testGetScript( array $sites, array $groups, array $specialGroups, $expected ) {
+	public function testGetScript(
+		array $sites,
+		array $groups,
+		array $specialGroups,
+		$languageCode,
+		$expected
+	) {
 		$worker = $this->newSitesModuleWorker( $sites, $groups, $specialGroups );
 
-		$result = $worker->getScript();
+		$result = $worker->getScript( $languageCode );
 
 		$this->assertEquals( $result, 'mediaWiki.config.set("wbSiteDetails",' . $expected . ');' );
 	}
@@ -76,13 +82,15 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 		$nonMwSite = new Site();
 		$nonMwSite->setGlobalId( 'siteid' );
 		$nonMwSite->setGroup( 'allowedgroup' );
+
 		return array(
-			'no sites' => array( array(), array(), array(), '[]' ),
-			'no site in sitelinkgroups' => array( array( $site ), array(), array(), '[]' ),
+			'no sites' => array( array(), array(), array(), 'qqx', '[]' ),
+			'no site in sitelinkgroups' => array( array( $site ), array(), array(), 'qqx', '[]' ),
 			'single site in sitelinkgroups' => array(
 				array( $site ),
 				array( 'allowedgroup' ),
 				array(),
+				'qqx',
 				'{"siteid":{"shortName":"","name":"","id":"siteid","pageUrl":"","apiUrl":"",' .
 				'"languageCode":null,"group":"allowedgroup"}}'
 			),
@@ -90,13 +98,15 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 				array( $site ),
 				array( 'special' ),
 				array( 'allowedgroup' ),
-				'{"siteid":{"shortName":"siteid","name":"siteid","id":"siteid","pageUrl":"","apiUrl":"",' .
-				'"languageCode":null,"group":"special"}}'
+				'ar',
+				'{"siteid":{"shortName":"siteid","name":"siteid","id":"siteid","pageUrl":"",' .
+				'"apiUrl":"","languageCode":null,"group":"special"}}'
 			),
 			'single non-MediaWiki site in sitelinkgroups' => array(
 				array( $nonMwSite ),
 				array( 'allowedgroup' ),
 				array(),
+				'qqx',
 				'[]'
 			),
 		);
