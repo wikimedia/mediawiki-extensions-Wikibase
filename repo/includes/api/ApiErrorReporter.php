@@ -176,7 +176,7 @@ class ApiErrorReporter {
 		array_shift( $params );
 		$message = wfMessage( $messageName, $params );
 
-		if ( !$message || !$message->exists() ) {
+		if ( !$message->exists() ) {
 			// TODO: log warning
 			// TODO: replace with generic message
 		}

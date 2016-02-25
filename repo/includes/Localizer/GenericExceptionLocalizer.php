@@ -20,11 +20,7 @@ class GenericExceptionLocalizer implements ExceptionLocalizer {
 	 * @return Message
 	 */
 	public function getExceptionMessage( Exception $exception ) {
-		$key = 'wikibase-error-unexpected';
-		$params = array( $exception->getMessage() );
-		$msg = wfMessage( $key )->params( $params );
-
-		return $msg;
+		return wfMessage( 'wikibase-error-unexpected', $exception->getMessage() );
 	}
 
 	/**

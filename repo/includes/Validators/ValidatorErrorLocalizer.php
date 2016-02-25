@@ -76,7 +76,7 @@ class ValidatorErrorLocalizer {
 			}
 		}
 
-		return wfMessage( $key )->params( $params );
+		return wfMessage( $key, $params );
 	}
 
 	/**
