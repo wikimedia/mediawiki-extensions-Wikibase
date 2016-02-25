@@ -24,7 +24,7 @@ class EntityDataFormatProvider {
 	/**
 	 * White list of supported formats.
 	 *
-	 * @var array|null
+	 * @var string[]|null
 	 */
 	private $formatWhiteList = null;
 
@@ -50,7 +50,7 @@ class EntityDataFormatProvider {
 	}
 
 	/**
-	 * @param array $formatWhiteList
+	 * @param string[]|null $formatWhiteList
 	 */
 	public function setFormatWhiteList( $formatWhiteList ) {
 		$this->formatWhiteList = $formatWhiteList;
@@ -61,7 +61,7 @@ class EntityDataFormatProvider {
 	}
 
 	/**
-	 * @return array
+	 * @return string[]|null
 	 */
 	public function getFormatWhiteList() {
 		return $this->formatWhiteList;

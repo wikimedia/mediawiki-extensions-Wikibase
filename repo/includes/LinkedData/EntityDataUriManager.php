@@ -22,7 +22,7 @@ class EntityDataUriManager {
 	private $interfaceTitle;
 
 	/**
-	 * @var String[]
+	 * @var string[]
 	 */
 	private $supportedExtensions;
 
