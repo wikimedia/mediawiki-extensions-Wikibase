@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_bc10475c",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T16:57:48Z",
+      "side": 1,
+      "message": "missing spaces",
+      "revId": "ed9a317ef52d8bb856efd9ce30c948d6663f28f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_3c1d3779",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-25T16:57:48Z",
+      "side": 1,
+      "message": "This methods generates HTML directly into OutputPage. So you can do reporting via $this-\u003egetOutput()-\u003eshowErrorPage() or with $this-\u003egetOutput()-\u003eaddHTML() and $this-\u003egetOutput()-\u003eaddWikiMsg().",
+      "revId": "ed9a317ef52d8bb856efd9ce30c948d6663f28f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
