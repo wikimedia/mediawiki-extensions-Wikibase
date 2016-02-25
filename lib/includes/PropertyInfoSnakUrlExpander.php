@@ -48,7 +48,7 @@ class PropertyInfoSnakUrlExpander implements SnakUrlExpander {
 			return null;
 		}
 
-		$id = urlencode( $value->getValue() );
+		$id = wfUrlencode( $value->getValue() );
 		$url = str_replace( '$1', $id, $pattern );
 		return $url;
 	}
