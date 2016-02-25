@@ -179,8 +179,7 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 						value: value,
 						siteLinksChanger: self.options.siteLinksChanger,
 						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
-						eventSingletonManager: this._eventSingletonManager,
-						helpMessage: mw.msg( 'wikibase-sitelinkgroupview-input-help-message' )
+						eventSingletonManager: this._eventSingletonManager
 					};
 				}
 			} ),

@@ -116,7 +116,6 @@ return call_user_func( function() {
 				'wikibase-description-edit-placeholder',
 				'wikibase-description-edit-placeholder-language-aware',
 				'wikibase-description-empty',
-				'wikibase-description-input-help-message',
 			),
 		),
 
@@ -197,7 +196,6 @@ return call_user_func( function() {
 				'wikibase-entitytermsforlanguagelistview-language',
 				'wikibase-entitytermsforlanguagelistview-less',
 				'wikibase-entitytermsforlanguagelistview-more',
-				'wikibase-entitytermsforlanguageview-input-help-message',
 			),
 		),
 
@@ -216,9 +214,6 @@ return call_user_func( function() {
 				'mediawiki.Title',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.templates',
-			),
-			'messages' => array(
-				'wikibase-entitytermsforlanguageview-input-help-message',
 			),
 		),
 
@@ -312,9 +307,6 @@ return call_user_func( function() {
 				'jquery.wikibase.sitelinkgroupview',
 				'wikibase.sites',
 			),
-			'messages' => array(
-				'wikibase-sitelinkgroupview-input-help-message',
-			),
 		),
 
 		'jquery.wikibase.sitelinkgroupview' => $moduleTemplate + array(
@@ -333,6 +325,9 @@ return call_user_func( function() {
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.buildErrorOutput',
 				'wikibase.sites',
+			),
+			'messages' => array(
+				'wikibase-sitelinkgroupview-input-help-message',
 			),
 		),
 
@@ -382,7 +377,6 @@ return call_user_func( function() {
 			'messages' => array(
 				'wikibase-add-badges',
 				'wikibase-badgeselector-badge-placeholder-title',
-				'wikibase-sitelinks-input-help-message',
 				'wikibase-sitelink-site-edit-placeholder',
 				'wikibase-sitelink-page-edit-placeholder',
 			),
@@ -397,10 +391,6 @@ return call_user_func( function() {
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
-			),
-			'messages' => array(
-				'wikibase-claimview-snak-tooltip',
-				'wikibase-claimview-snak-new-tooltip',
 			),
 		),
 

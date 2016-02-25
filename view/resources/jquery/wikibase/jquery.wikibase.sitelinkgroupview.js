@@ -71,8 +71,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		entityIdPlainFormatter: null,
 		siteLinksChanger: null,
 		eventSingletonManager: null,
-		helpMessage: 'Add a site link by specifying a site and a page of that site, edit or remove '
-			+ 'existing site links.'
+		helpMessage: mw.msg( 'wikibase-sitelinkgroupview-input-help-message' )
 	},
 
 	/**
