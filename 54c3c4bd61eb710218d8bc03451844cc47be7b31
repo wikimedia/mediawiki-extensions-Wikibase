@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_bc64c7e2",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.descriptionview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T16:24:52Z",
+      "side": 1,
+      "message": "Because this is not an editable widget, there is nothing consuming this message.\n\n+2",
+      "revId": "54c3c4bd61eb710218d8bc03451844cc47be7b31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_1c707b9f",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T16:24:52Z",
+      "side": 1,
+      "message": "But this forwards to entitytermsforlanguageview, which forwards to aliasesview, which uses the message. Oh, wait, What\u0027s that? entitytermsforlanguageview does not forward but constructs entirely new messages. Ouch.\n\n+2",
+      "revId": "54c3c4bd61eb710218d8bc03451844cc47be7b31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_5c76f3a0",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T16:24:52Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "54c3c4bd61eb710218d8bc03451844cc47be7b31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_9c446b4c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T16:24:52Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "54c3c4bd61eb710218d8bc03451844cc47be7b31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_dc3ae3bf",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T16:24:52Z",
+      "side": 1,
+      "message": "+2\n\nAlso unused in sitelinkgroupview and sitelinkgrouplistview.",
+      "revId": "54c3c4bd61eb710218d8bc03451844cc47be7b31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_7c472f51",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-25T16:24:52Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "54c3c4bd61eb710218d8bc03451844cc47be7b31",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
