@@ -147,13 +147,12 @@ class ChangeOpQualifier extends ChangeOpBase {
 	}
 
 	/**
-	 * @see ChangeOp::validate()
+	 * @see ChangeOp::validate
 	 *
 	 * @since 0.5
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @throws ChangeOpException
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {

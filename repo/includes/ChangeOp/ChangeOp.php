@@ -27,6 +27,7 @@ interface ChangeOp {
 	 *
 	 * @param EntityDocument $entity
 	 *
+	 * @throws ChangeOpException
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity );

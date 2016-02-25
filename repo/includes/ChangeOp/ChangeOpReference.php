@@ -183,13 +183,10 @@ class ChangeOpReference extends ChangeOpBase {
 	}
 
 	/**
-	 * @see ChangeOp::validate()
-	 *
-	 * @since 0.5
+	 * @see ChangeOp::validate
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @throws ChangeOpException
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {
