@@ -22,36 +22,56 @@
 	line-height: 1.2;
 	width: 100%;
 }
-.wikibase-sitelinklistview.wb-edit .wikibase-sitelinkview {
-	white-space: nowrap;
-}
-.wikibase-sitelinklistview .wikibase-sitelinkview-new {
-	white-space: normal;
-}
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container {
 	background: #E8E8E8;
 	border: 1px solid #C9C9C9;
-	display: inline-block;
+	display: table-cell;
 	line-height: 1.5;
 	padding-left: 0.2em;
 	padding-right: 0;
-	white-space: nowrap;
+	vertical-align: middle;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container .wikibase-sitelinkview-siteid {
 	background: none;
 	padding: 0 0.2em 0 0;
-	white-space: nowrap;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link {
-	display: inline;
-	margin-left: 0.4em;
+	display: table-cell;
+	padding-left: 0.4em;
+	vertical-align: middle;
+}
+
+.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link .wikibase-sitelinkview-page {
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+	/* WebKit supports non-standard "word-break: break-word" for compatibility.
+	 * https://miketaylr.com/posts/2014/01/word-break-break-word.html */
+	word-break: break-word;
 	word-wrap: break-word;
 }
-.wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link-new {
+
+/* Edit mode */
+
+.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit {
+	white-space: nowrap;
+}
+
+.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit .wikibase-sitelinkview-siteid-container {
 	display: inline-block;
+}
+
+.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit .wikibase-sitelinkview-link {
+	display: inline;
+}
+
+.wikibase-sitelinklistview .wikibase-sitelinkview.wb-edit .wikibase-sitelinkview-link .wikibase-sitelinkview-page {
+	/* Must reset non-standard WebKit value to avoid render issues. */
+	word-break: normal;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-toolbar-container {
