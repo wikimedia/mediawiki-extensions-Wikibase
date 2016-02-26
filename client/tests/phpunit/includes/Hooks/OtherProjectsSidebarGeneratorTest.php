@@ -93,7 +93,9 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			array $result,
 			$suppressErrors = false
 		) {
-		$this->setMwGlobals( 'wgHooks', array( 'WikibaseClientOtherProjectsSidebar' => array( $handler ) ) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
+			'WikibaseClientOtherProjectsSidebar' => array( $handler ),
+		) );
 
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
@@ -212,11 +214,13 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function testBuildProjectLinkSidebar_hookNotCalledIfPageNotConnected() {
-		$handler = function() {
-			$this->assertTrue( false, "Should not get called." );
-		};
-
-		$this->setMwGlobals( 'wgHooks', array( 'WikibaseClientOtherProjectsSidebar' => array( $handler ) ) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
+			'WikibaseClientOtherProjectsSidebar' => array(
+				function () {
+					$this->assertTrue( false, 'Should not get called.' );
+				},
+			),
+		) );
 
 		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
 		$lookup->expects( $this->any() )
@@ -239,13 +243,15 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	public function testBuildProjectLinkSidebar_hookCalledWithEmptySidebar() {
 		$called = false;
 
-		$handler = function( ItemId $itemId, $sidebar ) use ( &$called ) {
-			$this->assertSame( 'Q123', $itemId->getSerialization() );
-			$this->assertSame( array(), $sidebar );
-			$called = true;
-		};
-
-		$this->setMwGlobals( 'wgHooks', array( 'WikibaseClientOtherProjectsSidebar' => array( $handler ) ) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
+			'WikibaseClientOtherProjectsSidebar' => array(
+				function ( ItemId $itemId, $sidebar ) use ( &$called ) {
+					$this->assertSame( 'Q123', $itemId->getSerialization() );
+					$this->assertSame( array(), $sidebar );
+					$called = true;
+				},
+			),
+		) );
 
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
