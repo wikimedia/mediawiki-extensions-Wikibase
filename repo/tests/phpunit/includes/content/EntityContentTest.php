@@ -101,35 +101,36 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testWikibaseTextForSearchIndex() {
-		global $wgHooks;
-
 		$entityContent = $this->newEmpty();
 		$entityContent->getEntity()->setLabel( 'en', "cake" );
 
-		$this->stashMwGlobals( 'wgHooks' );
-		$wgHooks['WikibaseTextForSearchIndex'][] =
-			function ( $actualEntityContent, &$text ) use ( $entityContent ) {
-				PHPUnit_Framework_Assert::assertSame( $entityContent, $actualEntityContent );
-				PHPUnit_Framework_Assert::assertRegExp( '/cake/m', $text );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
+			'WikibaseTextForSearchIndex' => array(
+				function ( $actualEntityContent, &$text ) use ( $entityContent ) {
+					PHPUnit_Framework_Assert::assertSame( $entityContent, $actualEntityContent );
+					PHPUnit_Framework_Assert::assertRegExp( '/cake/m', $text );
 
-				$text .= "\nHOOK";
-				return true;
-			};
+					$text .= "\nHOOK";
+					return true;
+				},
+			),
+		) );
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertRegExp( '/cake.*HOOK/s', $text, 'Text for search index should be updated by the hook' );
 	}
 
 	public function testWikibaseTextForSearchIndex_abort() {
-		global $wgHooks;
-
 		$entityContent = $this->newEmpty();
 		$entityContent->getEntity()->setLabel( 'en', "cake" );
 
-		$this->stashMwGlobals( 'wgHooks' );
-		$wgHooks['WikibaseTextForSearchIndex'][] = function() {
-			return false;
-		};
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
+			'WikibaseTextForSearchIndex' => array(
+				function () {
+					return false;
+				},
+			),
+		) );
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertEquals( '', $text, 'Text for search index should be empty if the hook returned false' );

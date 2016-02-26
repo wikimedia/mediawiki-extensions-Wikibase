@@ -17,19 +17,19 @@ use Wikibase\Repo\Notifications\HookChangeTransmitter;
 class HookChangeTransmitterTest extends \MediaWikiTestCase {
 
 	public function testTransmitChange() {
-		global $wgHooks;
-
-		$this->stashMwGlobals( 'wgHooks' );
-
 		$change = $this->getMockBuilder( 'Wikibase\EntityChange' )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$called = false;
-		$wgHooks['HookChangeTransmitterTest'][] = function( $actualChange ) use ( $change, &$called ) {
-			self::assertEquals( $change, $actualChange );
-			$called = true;
-		};
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
+			'HookChangeTransmitterTest' => array(
+				function ( $actualChange ) use ( $change, &$called ) {
+					self::assertEquals( $change, $actualChange );
+					$called = true;
+				},
+			),
+		) );
 
 		$transmitter = new HookChangeTransmitter( 'HookChangeTransmitterTest' );
 		$transmitter->transmitChange( $change );
