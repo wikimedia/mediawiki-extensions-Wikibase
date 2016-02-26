@@ -13,7 +13,8 @@ use Wikibase\Repo\WikibaseRepo;
  * Page for creating new Wikibase properties.
  *
  * @since 0.2
- * @licence GNU GPL v2+
+ *
+ * @license GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class SpecialNewProperty extends SpecialNewEntity {

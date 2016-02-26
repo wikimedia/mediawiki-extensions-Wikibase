@@ -25,7 +25,7 @@ use Wikibase\Repo\Hooks\EditFilterHookRunner;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  */
 class EditFilterHookRunnerTest extends \MediaWikiTestCase {

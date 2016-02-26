@@ -28,7 +28,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
  * @group WikibaseLib
  * @group WikibaseChange
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

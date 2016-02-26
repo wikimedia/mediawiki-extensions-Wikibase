@@ -26,7 +26,7 @@ use Wikibase\Store\SubscriptionLookup;
  * @group WikibaseChange
  * @group WikibaseChangeDispatcher
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {

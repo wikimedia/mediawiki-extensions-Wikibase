@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * Factory for ChangeOps that modify SiteLinks.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class SiteLinkChangeOpFactory {

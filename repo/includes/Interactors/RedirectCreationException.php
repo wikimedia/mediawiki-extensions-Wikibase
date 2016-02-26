@@ -9,7 +9,7 @@ use Exception;
  *
  * @since 0.5
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class RedirectCreationException extends Exception {

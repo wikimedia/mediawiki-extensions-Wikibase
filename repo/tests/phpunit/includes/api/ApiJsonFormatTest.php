@@ -12,7 +12,7 @@ use ApiBase;
  * @group Database
  * @group medium
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Addshore
  */

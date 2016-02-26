@@ -18,7 +18,7 @@ namespace Wikibase\Test\Repo\Api;
  * @group LanguageAttributeTest
  * @group BreakingTheSlownessBarrier
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  */
 class SetLabelTest extends ModifyTermTestCase {

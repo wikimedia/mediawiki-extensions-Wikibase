@@ -10,7 +10,7 @@ use Wikibase\Lib\Reporting\ObservableMessageReporter;
 /**
  * Schema updater for SqlUsageTracker
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class SqlUsageTrackerSchemaUpdater {

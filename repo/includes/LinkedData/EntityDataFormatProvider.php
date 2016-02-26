@@ -13,7 +13,7 @@ use Wikimedia\Purtle\RdfWriterFactory;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >

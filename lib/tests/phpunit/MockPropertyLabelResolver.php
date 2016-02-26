@@ -9,7 +9,8 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
  * Mock resolver, based on a MockRepository
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class MockPropertyLabelResolver implements PropertyLabelResolver {

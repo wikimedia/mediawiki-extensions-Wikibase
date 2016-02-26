@@ -15,7 +15,7 @@ use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class ExternalLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {

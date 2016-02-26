@@ -11,7 +11,7 @@ use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class WikibaseStringValueNormalizerTest extends \PHPUnit_Framework_TestCase {

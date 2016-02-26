@@ -17,7 +17,7 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
  * @group WikibaseAPI
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  */
 class EntityLoadingHelperTest extends \MediaWikiTestCase {

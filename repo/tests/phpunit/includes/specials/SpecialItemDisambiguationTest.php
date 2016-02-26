@@ -25,7 +25,7 @@ use Wikibase\TermIndexEntry;
  * @group Database
  *        ^---- needed because we rely on Title objects internally
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Addshore
  * @author Thiemo Mättig

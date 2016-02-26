@@ -5,7 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */

@@ -16,7 +16,7 @@ use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
  * @group WikibaseUsageTracking
  * @group Database
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {

@@ -11,7 +11,7 @@ use Wikibase\Lib\Sites\SiteMatrixParser;
  *
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {

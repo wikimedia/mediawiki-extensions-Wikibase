@@ -12,7 +12,7 @@ use Diff\DiffOp\DiffOpChange;
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Mättig
  */

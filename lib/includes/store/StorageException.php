@@ -7,8 +7,7 @@ use MWException;
 use Status;
 
 /**
- * @license GPL 2+
- *
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class StorageException extends MWException {

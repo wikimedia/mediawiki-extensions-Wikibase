@@ -21,7 +21,7 @@ use Wikibase\Rdf\DedupeBag;
  * @group WikibaseRepo
  * @group WikibaseRdf
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ValueSnakRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {

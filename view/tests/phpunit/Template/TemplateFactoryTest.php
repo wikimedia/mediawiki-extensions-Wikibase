@@ -12,7 +12,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @group Wikibase
  * @group WikibaseView
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class TemplateFactoryTest extends PHPUnit_Framework_TestCase {

@@ -11,7 +11,7 @@ use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
  * @group WikibaseRepo
  * @group ChangeOp
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class SiteLinkChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {

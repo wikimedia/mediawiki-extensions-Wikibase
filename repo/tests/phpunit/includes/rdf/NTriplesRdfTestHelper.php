@@ -11,7 +11,7 @@ use PHPUnit_Framework_Assert;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

@@ -11,7 +11,7 @@ use Wikibase\Client\ForbiddenSerializer;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class ForbiddenSerializerTest extends PHPUnit_Framework_TestCase {

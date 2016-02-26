@@ -14,7 +14,7 @@ use Wikibase\LabelDescriptionDuplicateDetector;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class TermValidatorFactory {

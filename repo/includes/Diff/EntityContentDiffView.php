@@ -29,7 +29,7 @@ use WikiPage;
  *
  * @since 0.1
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

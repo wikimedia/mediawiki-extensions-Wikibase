@@ -26,7 +26,7 @@ use Wikibase\Test\TestChanges;
  *
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ChangeRunCoalescerTest extends \MediaWikiTestCase {

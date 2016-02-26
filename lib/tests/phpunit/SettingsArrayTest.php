@@ -11,7 +11,7 @@ use Wikibase\SettingsArray;
  * @group WikibaseLib
  * @group SettingsArrayTest
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SettingsArrayTest extends \PHPUnit_Framework_TestCase {

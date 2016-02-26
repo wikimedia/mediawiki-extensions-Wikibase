@@ -11,7 +11,7 @@ use DataValues\TimeValue;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Stas Malyshev
  */
 class JulianDateTimeValueCleaner extends DateTimeValueCleaner {

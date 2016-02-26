@@ -12,7 +12,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @group Purtle
  * @group RdfWriter
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class XmlRdfWriterTest extends RdfWriterTestBase {

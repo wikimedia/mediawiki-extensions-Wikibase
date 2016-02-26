@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch < hoo@online.de >
  */

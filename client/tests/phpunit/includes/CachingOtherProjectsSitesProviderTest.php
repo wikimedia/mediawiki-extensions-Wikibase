@@ -15,7 +15,7 @@ use Wikibase\Client\OtherProjectsSitesProvider;
  * @group Wikibase
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class CachingOtherProjectsSitesProviderTest extends \PHPUnit_Framework_TestCase {

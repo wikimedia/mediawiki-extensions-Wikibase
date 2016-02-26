@@ -9,7 +9,7 @@ use Message;
 /**
  * Interface for services that provide localized messages for various types of Exceptions.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 interface ExceptionLocalizer {

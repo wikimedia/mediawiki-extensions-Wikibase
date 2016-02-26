@@ -18,7 +18,7 @@ use Wikibase\Test\MockPropertyInfoStore;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {

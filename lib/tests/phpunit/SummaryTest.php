@@ -11,7 +11,7 @@ use Wikibase\Summary;
  * @group Wikibase
  * @group WikibaseSummary
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */

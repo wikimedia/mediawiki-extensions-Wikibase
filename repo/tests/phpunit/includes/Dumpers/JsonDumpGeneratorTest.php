@@ -32,7 +32,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseRepo
  * @group JsonDump
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Addshore
  */

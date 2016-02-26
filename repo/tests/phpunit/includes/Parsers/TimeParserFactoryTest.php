@@ -16,7 +16,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  * @group Wikibase
  * @group TimeParsers
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  * @author Thiemo Mättig
  */

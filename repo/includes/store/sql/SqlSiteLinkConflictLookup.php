@@ -11,7 +11,7 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
 /**
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >

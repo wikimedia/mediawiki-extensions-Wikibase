@@ -16,7 +16,7 @@ use Wikibase\NoLangLinkHandler;
  * @group HookHandler
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {

@@ -14,7 +14,7 @@ use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {

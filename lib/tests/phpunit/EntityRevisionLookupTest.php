@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  *
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {

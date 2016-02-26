@@ -15,7 +15,7 @@ use Wikibase\Repo\Parsers\YearTimeParser;
  * @group Wikibase
  * @group TimeParsers
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  * @author Thiemo Mättig
  */

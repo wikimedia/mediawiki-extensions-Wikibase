@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class RevisionBasedEntityLookup implements EntityLookup {

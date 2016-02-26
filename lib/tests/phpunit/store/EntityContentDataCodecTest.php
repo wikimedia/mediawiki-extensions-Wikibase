@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityContentDataCodecTest extends MediaWikiTestCase {

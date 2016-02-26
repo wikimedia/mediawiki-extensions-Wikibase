@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @group RepoLinkerTest
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class RepoLinkerTest extends \PHPUnit_Framework_TestCase {

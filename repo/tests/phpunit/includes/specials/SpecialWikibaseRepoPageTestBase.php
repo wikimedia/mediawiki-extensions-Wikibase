@@ -28,7 +28,7 @@ use Wikibase\SummaryFormatter;
 /**
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {

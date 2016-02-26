@@ -30,7 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseEntityData
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityDataSerializationServiceTest extends \MediaWikiTestCase {

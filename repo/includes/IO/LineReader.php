@@ -11,7 +11,7 @@ use Wikibase\Repo\Disposable;
  * Each line returned will contain the line separator character(s) and all whitespace.
  * Concatenating all lines returned by the reader should result in the original file.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class LineReader implements Iterator, Disposable {

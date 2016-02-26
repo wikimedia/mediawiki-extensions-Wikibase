@@ -23,7 +23,7 @@ use Wikibase\Test\MockPropertyInfoStore;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {

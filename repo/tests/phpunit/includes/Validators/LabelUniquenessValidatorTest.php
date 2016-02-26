@@ -22,7 +22,7 @@ use Wikibase\Test\ChangeOpTestMockProvider;
  * @group WikibaseRepo
  * @group WikibaseContent
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class LabelUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {

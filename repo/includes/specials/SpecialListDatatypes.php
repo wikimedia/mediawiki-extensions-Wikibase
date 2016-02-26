@@ -12,7 +12,8 @@ use Wikibase\Repo\WikibaseRepo;
  * Page for listing available datatypes.
  *
  * @since 0.2
- * @licence GNU GPL v2+
+ *
+ * @license GNU GPL v2+
  * @author Jens Ohlig
  */
 class SpecialListDatatypes extends SpecialWikibasePage {

@@ -14,7 +14,8 @@ use Wikibase\Summary;
  * Class for qualifier removal change operation
  *
  * @since 0.5
- * @licence GNU GPL v2+
+ *
+ * @license GNU GPL v2+
  * @author Addshore
  */
 class ChangeOpQualifierRemove extends ChangeOpBase {

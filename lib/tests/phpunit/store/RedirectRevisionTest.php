@@ -14,7 +14,7 @@ use Wikibase\RedirectRevision;
  * @group WikibaseLib
  * @group WikibaseStore
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class RedirectRevisionTest extends PHPUnit_Framework_TestCase {

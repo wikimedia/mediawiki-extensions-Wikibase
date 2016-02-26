@@ -32,7 +32,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  * @group Database
  *        ^--- needed just because we are using Title objects.
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EditEntityTest extends MediaWikiTestCase {

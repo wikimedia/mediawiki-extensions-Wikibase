@@ -15,7 +15,7 @@ use Wikibase\Repo\Search\Elastic\Fields\SiteLinkCountField;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SiteLinkCountFieldTest extends PHPUnit_Framework_TestCase {

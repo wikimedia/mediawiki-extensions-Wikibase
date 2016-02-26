@@ -12,7 +12,7 @@ use Wikibase\Client\PropertyLabelNotResolvedException;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class PropertyLabelNotResolvedExceptionTest extends PHPUnit_Framework_TestCase {

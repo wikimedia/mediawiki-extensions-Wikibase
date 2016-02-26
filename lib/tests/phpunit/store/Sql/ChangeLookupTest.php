@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
  * @group WikibaseStore
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Marius Hoch
  */
 class ChangeLookupTest extends \MediaWikiTestCase {

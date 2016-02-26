@@ -25,7 +25,7 @@ use Wikibase\Repo\Store\SQL\EntityPerPageTable;
  *
  * @group medium
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */

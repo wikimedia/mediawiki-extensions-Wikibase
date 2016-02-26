@@ -19,7 +19,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
  * @group WikibaseDataAccess
  * @group PropertyParserFunctionTest
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */

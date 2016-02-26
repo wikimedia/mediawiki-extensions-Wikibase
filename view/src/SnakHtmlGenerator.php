@@ -14,8 +14,8 @@ use Wikibase\View\Template\TemplateFactory;
  * Base class for generating Snak html.
  *
  * @since 0.5
- * @licence GNU GPL v2+
  *
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Pragunbhutani
  * @author Katie Filbert < aude.wiki@gmail.com >

@@ -20,7 +20,8 @@ use Wikibase\Summary;
  * Class for statement modification operations
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GNU GPL v2+
  * @author Addshore
  * @author H. Snater < mediawiki@snater.com >
  * @author Thiemo Mättig

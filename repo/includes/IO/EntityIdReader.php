@@ -13,7 +13,7 @@ use Wikibase\Repo\Store\EntityIdPager;
 /**
  * EntityIdReader reads entity IDs from a file, one per line.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityIdReader implements EntityIdPager, Disposable {

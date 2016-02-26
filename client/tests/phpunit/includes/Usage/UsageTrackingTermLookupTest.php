@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
  * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class UsageTrackingTermLookupTest extends \MediaWikiTestCase {

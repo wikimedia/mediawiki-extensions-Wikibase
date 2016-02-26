@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class ExternalChangeTest extends PHPUnit_Framework_TestCase {

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @see docs/usagetracking.wiki
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 interface UsageLookup {

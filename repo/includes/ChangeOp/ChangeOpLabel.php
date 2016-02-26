@@ -15,7 +15,8 @@ use Wikibase\Summary;
  * Class for label change operation
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  * @author Thiemo Mättig

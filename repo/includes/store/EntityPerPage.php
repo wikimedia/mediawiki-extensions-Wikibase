@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @since 0.2
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
 interface EntityPerPage {

@@ -35,7 +35,7 @@ use Wikibase\Repo\Api\ResultBuilder;
  * @group WikibaseAPI
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  * @author Thiemo Mättig
  */

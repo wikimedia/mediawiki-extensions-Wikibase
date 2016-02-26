@@ -10,7 +10,7 @@ use Wikibase\View\TextInjector;
  * @group Wikibase
  * @group WikibaseView
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class TextInjectorTest extends \PHPUnit_Framework_TestCase {

@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @group WikibaseStore
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {

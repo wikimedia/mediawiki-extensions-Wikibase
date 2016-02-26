@@ -20,7 +20,7 @@ use Wikibase\DataModel\Snak\Snak;
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class SnakConstructionService {

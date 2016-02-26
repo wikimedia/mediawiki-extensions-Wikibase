@@ -11,7 +11,7 @@ namespace Wikibase\Lib;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class UserInputException extends MessageException {

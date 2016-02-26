@@ -32,7 +32,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @group ChangeOp
  * @group ChangeOpStatement
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  * @author Daniel Kinzler
  */

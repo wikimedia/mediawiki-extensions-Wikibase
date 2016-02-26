@@ -12,7 +12,7 @@ use Wikibase\Repo\Api\GetClaimsStatementFilter;
 /**
  * @covers Wikibase\Repo\Api\GetClaimsStatementFilter
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {

@@ -17,7 +17,7 @@ use Wikibase\TermPropertyLabelResolver;
  * @group WikibaseLib
  * @group WikibaseStore
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class TermPropertyLabelResolverTest extends \MediaWikiTestCase {

@@ -12,7 +12,7 @@ use WikiPage;
 /**
  * Tests for blocking of direct editing.
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  *
  * @group API

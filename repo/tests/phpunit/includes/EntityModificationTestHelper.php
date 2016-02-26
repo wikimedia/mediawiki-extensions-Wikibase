@@ -16,7 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * EntityModificationTestHelper
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityModificationTestHelper {

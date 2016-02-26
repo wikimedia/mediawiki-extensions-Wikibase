@@ -13,12 +13,11 @@ use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
 /**
  * @covers Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder
  *
- * @license GPL 2+
- *
  * @group Wikibase
  * @group WikibaseStore
  * @group WikibaseRepo
  *
+ * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {

@@ -21,7 +21,7 @@ use Wikibase\Store\SubscriptionLookup;
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ChangeDispatcher {

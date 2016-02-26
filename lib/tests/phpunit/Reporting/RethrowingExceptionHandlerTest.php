@@ -11,7 +11,7 @@ use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
  * @group Wikibase
  * @group WikibaseReporting
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class RethrowingExceptionHandlerTest extends \PHPUnit_Framework_TestCase {

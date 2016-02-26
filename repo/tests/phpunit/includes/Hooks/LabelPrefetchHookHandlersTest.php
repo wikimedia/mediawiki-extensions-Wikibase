@@ -25,7 +25,7 @@ use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
  * @group Database
  *        ^--- who knows what ChangesList may do internally...
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

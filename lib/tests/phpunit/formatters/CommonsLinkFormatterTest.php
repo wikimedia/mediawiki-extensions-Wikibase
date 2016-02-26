@@ -16,7 +16,7 @@ use Wikibase\Lib\CommonsLinkFormatter;
  * @group Wikibase
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Adrian Lang
  */
 class CommonsLinkFormatterTest extends \MediaWikiTestCase {

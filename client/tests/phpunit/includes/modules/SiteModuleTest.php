@@ -12,7 +12,7 @@ use Wikibase\SiteModule;
  * @group Wikibase
  * @group WikibaseClient
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class SiteModuleTest extends PHPUnit_Framework_TestCase {

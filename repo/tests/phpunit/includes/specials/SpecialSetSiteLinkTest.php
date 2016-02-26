@@ -25,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Marius Hoch < hoo@online.de >

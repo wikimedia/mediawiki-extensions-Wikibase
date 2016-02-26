@@ -13,7 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * Test for redirect resolution in the wbgetentities API module
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  *
  * @group API

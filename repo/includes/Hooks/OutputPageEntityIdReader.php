@@ -13,8 +13,8 @@ use Wikibase\Repo\Content\EntityContentFactory;
  *
  * @since 0.5
  *
- * @author Marius Hoch < hoo@online.de >
  * @license GNU GPL v2+
+ * @author Marius Hoch < hoo@online.de >
  */
 class OutputPageEntityIdReader {
 

@@ -17,7 +17,7 @@ use ValueFormatters\ValueFormatter;
  *
  * @todo Use MediaWiki renderer
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Adrian Lang
  */
 class CommonsLinkFormatter implements ValueFormatter {

@@ -17,7 +17,7 @@ use Wikibase\Lib\DispatchingValueFormatter;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {

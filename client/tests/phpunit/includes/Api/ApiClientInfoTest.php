@@ -21,7 +21,7 @@ use Wikibase\SettingsArray;
  *
  * @group medium
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ApiClientInfoTest extends \MediaWikiTestCase {

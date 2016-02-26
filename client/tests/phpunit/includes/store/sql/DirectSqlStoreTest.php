@@ -14,7 +14,7 @@ use Wikibase\DirectSqlStore;
  * @group WikibaseClient
  * @group WikibaseClientStore
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author DanielKinzler
  */
 class DirectSqlStoreTest extends \MediaWikiTestCase {

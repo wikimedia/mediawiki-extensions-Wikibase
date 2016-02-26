@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\StorageException;
  * Consumers of this interface should provide documentation that clearly states what information
  * the PropertyInfoProvider instance is expected to return, and in what form.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 interface PropertyInfoProvider {

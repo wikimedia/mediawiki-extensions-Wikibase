@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @group WikibaseUsageTracking
  * @group Database
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class SqlSubscriptionManagerTest extends \MediaWikiTestCase {

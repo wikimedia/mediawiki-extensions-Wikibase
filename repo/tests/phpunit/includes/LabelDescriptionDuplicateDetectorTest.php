@@ -17,7 +17,7 @@ use Wikibase\TermIndexEntry;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase {

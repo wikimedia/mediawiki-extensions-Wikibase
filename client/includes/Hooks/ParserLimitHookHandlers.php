@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 /**
  * @since 0.5.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class ParserLimitHookHandlers {

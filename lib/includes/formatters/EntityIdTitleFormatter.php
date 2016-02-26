@@ -11,7 +11,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityIdTitleFormatter implements EntityIdFormatter {

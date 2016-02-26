@@ -20,7 +20,8 @@ use Wikibase\StringNormalizer;
  * API module to get the data for one or more Wikibase entities.
  *
  * @since 0.1
- * @licence GNU GPL v2+
+ *
+ * @license GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Marius Hoch < hoo@online.de >

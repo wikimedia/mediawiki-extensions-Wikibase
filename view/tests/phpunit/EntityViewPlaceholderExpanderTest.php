@@ -25,7 +25,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @group Wikibase
  * @group WikibaseView
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {

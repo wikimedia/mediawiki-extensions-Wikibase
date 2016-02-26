@@ -12,7 +12,7 @@ use Wikibase\RepoAccessModule;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class RepoAccessModuleTest extends PHPUnit_Framework_TestCase {

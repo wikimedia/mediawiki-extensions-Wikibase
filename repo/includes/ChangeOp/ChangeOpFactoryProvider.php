@@ -15,7 +15,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
  *
  * Yes, this is a factory factory. Sue me and call me Java.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ChangeOpFactoryProvider {

@@ -75,7 +75,7 @@ use Wikibase\StringNormalizer;
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */

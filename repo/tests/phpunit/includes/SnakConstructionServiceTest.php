@@ -16,7 +16,7 @@ use Wikibase\Repo\SnakConstructionService;
  * @group WikibaseRepo
  * @group Snak
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {

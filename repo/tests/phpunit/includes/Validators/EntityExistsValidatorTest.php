@@ -15,12 +15,11 @@ use Wikibase\Test\MockRepository;
 /**
  * @covers Wikibase\Repo\Validators\EntityExistsValidator
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {

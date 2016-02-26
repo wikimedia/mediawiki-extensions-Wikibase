@@ -13,7 +13,7 @@ use Wikibase\Repo\Store\EntityPerPage;
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

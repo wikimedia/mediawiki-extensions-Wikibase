@@ -18,7 +18,7 @@ use Wikibase\Lib\SnakUrlExpander;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class HtmlExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCase {

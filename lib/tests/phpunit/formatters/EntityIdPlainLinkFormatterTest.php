@@ -19,7 +19,7 @@ use Wikibase\Lib\EntityIdPlainLinkFormatter;
  * @group WikibaseLib
  * @group EntityIdFormatterTest
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */

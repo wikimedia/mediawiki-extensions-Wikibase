@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {

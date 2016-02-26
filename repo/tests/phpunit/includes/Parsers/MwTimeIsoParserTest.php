@@ -14,7 +14,7 @@ use Wikibase\Repo\Parsers\MwTimeIsoParser;
  * @group Wikibase
  * @group TimeParsers
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  */
 class MwTimeIsoParserTest extends StringValueParserTest {

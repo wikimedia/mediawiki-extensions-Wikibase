@@ -15,7 +15,7 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @since 0.1
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
  */

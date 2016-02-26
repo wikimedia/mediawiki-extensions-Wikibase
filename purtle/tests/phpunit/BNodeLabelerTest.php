@@ -10,7 +10,7 @@ use Wikimedia\Purtle\BNodeLabeler;
  *
  * @group Purtle
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

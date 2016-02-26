@@ -18,7 +18,7 @@ use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
  * @group WikibaseStore
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {

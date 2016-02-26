@@ -12,7 +12,7 @@ use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

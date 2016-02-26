@@ -19,7 +19,7 @@ use Wikibase\Repo\Diff\EntityContentDiffView;
  * @group WikibaseRepo
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class EntityContentDiffViewTest extends \MediaWikiTestCase {

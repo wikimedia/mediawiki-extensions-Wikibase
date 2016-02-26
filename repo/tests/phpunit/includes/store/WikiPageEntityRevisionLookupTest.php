@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseEntityLookup
  * @group medium
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {

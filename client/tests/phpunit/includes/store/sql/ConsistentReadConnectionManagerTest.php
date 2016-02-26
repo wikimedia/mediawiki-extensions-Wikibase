@@ -11,7 +11,7 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
  * @group WikibaseClient
  * @group WikibaseClientStore
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author DanielKinzler
  */
 class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {

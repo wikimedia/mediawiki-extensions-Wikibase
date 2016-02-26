@@ -14,7 +14,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  */
 class TermSearchResultTest extends PHPUnit_Framework_TestCase {

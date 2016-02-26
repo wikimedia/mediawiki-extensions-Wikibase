@@ -15,7 +15,6 @@ require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
  * @license GNU GPL v2+
- *
  * @author Marius Hoch
  */
 class ChangePropertyDataType extends Maintenance {

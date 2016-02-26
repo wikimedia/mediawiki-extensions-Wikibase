@@ -20,7 +20,7 @@ use Wikibase\Test\MockRepository;
  * @group WikibaseIntegration
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {

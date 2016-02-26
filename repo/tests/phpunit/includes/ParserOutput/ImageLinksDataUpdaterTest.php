@@ -15,7 +15,7 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class ImageLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {

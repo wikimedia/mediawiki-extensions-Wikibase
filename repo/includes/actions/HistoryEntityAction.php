@@ -11,7 +11,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.3
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class HistoryEntityAction extends HistoryAction {

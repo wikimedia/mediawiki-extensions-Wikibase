@@ -20,7 +20,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * @group Wikibase
  * @group WikibaseView
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  * @author Adrian Heine

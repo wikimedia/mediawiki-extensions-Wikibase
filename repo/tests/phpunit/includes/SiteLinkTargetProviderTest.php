@@ -12,7 +12,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  * @author Marius Hoch < hoo@online.de >
  * @author Thiemo Mättig

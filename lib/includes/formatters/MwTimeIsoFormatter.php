@@ -12,7 +12,7 @@ use ValueFormatters\ValueFormatterBase;
 /**
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  * @author Addshore
  * @author Thiemo Mättig

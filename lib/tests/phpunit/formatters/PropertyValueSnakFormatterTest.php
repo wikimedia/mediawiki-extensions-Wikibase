@@ -28,7 +28,7 @@ use Wikibase\Lib\UnDeserializableValueFormatter;
  * @group Wikibase
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {

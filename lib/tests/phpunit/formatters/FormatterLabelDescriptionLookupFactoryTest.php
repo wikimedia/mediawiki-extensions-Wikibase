@@ -21,7 +21,7 @@ use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_TestCase {

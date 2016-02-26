@@ -12,7 +12,7 @@ use ValueValidators\ValueValidator;
  * The AlternativeValidator considers the data to be valid if any of the
  * inner validators accepts the data.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class AlternativeValidator implements ValueValidator {

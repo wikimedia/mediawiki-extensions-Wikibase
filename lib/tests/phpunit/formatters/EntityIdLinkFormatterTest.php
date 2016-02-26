@@ -19,7 +19,7 @@ use Wikibase\Lib\EntityIdLinkFormatter;
  * @group WikibaseLib
  * @group EntityIdFormatterTest
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityIdLinkFormatterTest extends PHPUnit_Framework_TestCase {

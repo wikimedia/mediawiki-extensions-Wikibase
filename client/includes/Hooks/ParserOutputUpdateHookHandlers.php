@@ -15,7 +15,7 @@ use Wikibase\NamespaceChecker;
 /**
  * @since 0.5.
  *
- * @license GPL 2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

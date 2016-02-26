@@ -12,7 +12,7 @@ use User;
  * @group EntityView
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Thiemo Mättig
  */
 class BabelUserLanguageLookupTest extends \MediaWikiTestCase {

@@ -7,7 +7,7 @@ namespace Wikibase\Lib\Interactors;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Addshore
  */
 interface TermSearchInteractor {

@@ -23,7 +23,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @group WikibaseRepo
  * @group ChangeOp
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Thiemo Mättig
  */

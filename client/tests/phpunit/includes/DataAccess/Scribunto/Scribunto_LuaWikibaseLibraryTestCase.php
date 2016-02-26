@@ -28,7 +28,7 @@ use Wikibase\Test\MockClientStore;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  * @author Daniel Kinzler
  */

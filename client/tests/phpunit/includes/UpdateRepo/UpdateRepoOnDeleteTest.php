@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @group Test
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {

@@ -11,7 +11,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseStore
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class IdGeneratorTest extends \MediaWikiTestCase {

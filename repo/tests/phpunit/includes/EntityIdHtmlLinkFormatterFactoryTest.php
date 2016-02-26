@@ -13,7 +13,7 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {

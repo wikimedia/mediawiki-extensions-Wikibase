@@ -12,7 +12,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
  * @group WikibaseEntityData
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */

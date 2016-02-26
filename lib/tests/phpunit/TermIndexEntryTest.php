@@ -14,7 +14,7 @@ use Wikibase\TermIndexEntry;
  * @group WikibaseTerm
  * @group WikibaseLib
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  */
 class TermIndexEntryTest extends PHPUnit_Framework_TestCase {

@@ -14,7 +14,7 @@ use Wikibase\OutputPageJsConfigBuilder;
  * @group Wikibase
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {

@@ -21,7 +21,7 @@ use Wikibase\Lib\EntityIdTitleFormatter;
  * @group WikibaseLib
  * @group EntityIdFormatterTest
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class EntityIdTitleFormatterTest extends PHPUnit_Framework_TestCase {

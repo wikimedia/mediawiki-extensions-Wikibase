@@ -13,7 +13,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @group WikibaseRepo
  * @group WikibaseRdf
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */

@@ -12,7 +12,7 @@ use Wikibase\Rdf\HashDedupeBag;
  * @group WikibaseRepo
  * @group WikibaseRdf
  *
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  * @author Daniel Kinzler
  */
 class HashDedupeBagTest extends PHPUnit_Framework_TestCase {
