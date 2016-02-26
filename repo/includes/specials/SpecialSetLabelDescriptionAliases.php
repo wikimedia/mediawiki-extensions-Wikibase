@@ -345,17 +345,15 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		$changeOps = $this->getChangeOps( $entity->getFingerprint() );
 
-		try {
-			$summary = $this->applyChangeOpList( $changeOps, $entity );
-		} catch ( ChangeOpException $ex ) {
-			$this->showErrorHTML( $ex->getMessage() );
-			$summary = false;
+		if ( empty( $changeOps ) ) {
+			return false;
 		}
 
-		if ( !$summary ) {
+		try {
+			return $this->applyChangeOpList( $changeOps, $entity );
+		} catch ( ChangeOpException $ex ) {
+			$this->showErrorHTML( $ex->getMessage() );
 			return false;
-		} else {
-			return $summary;
 		}
 	}
 
@@ -363,32 +361,23 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @param ChangeOp[] $changeOps
 	 * @param EntityDocument $entity
 	 *
-	 * @return bool|Summary
+	 * @throws ChangeOpException
+	 * @return Summary
 	 */
 	private function applyChangeOpList( array $changeOps, EntityDocument $entity ) {
-		if ( empty( $changeOps ) ) {
-			return false;
-		} elseif ( count( $changeOps ) === 1 ) {
+		if ( count( $changeOps ) === 1 ) {
 			// special case for single change-op, produces a better edit summary
-			$keys = array_keys( $changeOps );
-			$module = $keys[0];
-
-			$changeOp = $changeOps[ $module ];
+			$changeOp = reset( $changeOps );
+			$module = key( $changeOps );
 			$summary = new Summary( $module );
-
 			$this->applyChangeOp( $changeOp, $entity, $summary );
+			return $summary;
 		} else {
 			// NOTE: it's important to bundle all ChangeOp objects into a ChangeOps object,
 			// so validation and modification is properly batched.
-
-			$summary = new Summary(); // dummy
-			$changeOp = new ChangeOps( $changeOps );
-
-			$this->applyChangeOp( $changeOp, $entity, $summary );
-			$summary = $this->getSummaryForLabelDescriptionAliases();
+			$this->applyChangeOp( new ChangeOps( $changeOps ), $entity, new Summary() );
+			return $this->getSummaryForLabelDescriptionAliases();
 		}
-
-		return $summary;
 	}
 
 	/**
