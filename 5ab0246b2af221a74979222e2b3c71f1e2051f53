@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_7b164c4f",
+        "filename": "docs/datatypes.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-26T18:31:15Z",
+      "side": 1,
+      "message": "I disagree about the use of metasyntactic variables. \"data-type\" and \"DataType\" might have a particular meaning in this context, and might be intended to be used as literal values. \"foo-bar\" and \"FooBar\" are clearly placeholders.\n\nMetasyntactic variables are common practice, and I believe they make things clearer. See also:\n\nhttps://en.wikipedia.org/wiki/Metasyntactic_variable\nhttps://www.ietf.org/rfc/rfc3092.txt",
+      "parentUuid": "2ea41786_18d87e57",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_78f2d2ce",
         "filename": "lib/includes/DataTypeDefinitions.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-26T17:30:34Z",
       "side": 1,
       "message": "As far as I understand this map is not guaranteed to contain all property types known to the system. Or is it? Either or should be mentioned.",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_5b3030e5",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-26T18:31:15Z",
+      "side": 1,
+      "message": "Good point!",
+      "parentUuid": "2ea41786_78f2d2ce",
       "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_9b3d48bb",
+        "filename": "lib/tests/phpunit/DataTypeDefinitionsTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-26T18:31:15Z",
+      "side": 1,
+      "message": "Yes, because it\u0027s not defined in the array, and the knowledge of how to construct the default URI belongs into RdfVocabulary, not DataTypeDefinitions.",
+      "parentUuid": "2ea41786_18bf1ecf",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_f8b482e6",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_5b47d050",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-26T18:31:15Z",
+      "side": 1,
+      "message": "IIRC I introduced it to make it easier to test the custom URI stuff. I\u0027ll check.",
+      "parentUuid": "2ea41786_f8b482e6",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_78c9727a",
         "filename": "repo/includes/rdf/RdfVocabulary.php",
         "patchSetId": 4
@@ -81,6 +153,24 @@
       "writtenOn": "2016-02-26T17:30:34Z",
       "side": 1,
       "message": "The result of this could be cached in the array. Not sure if relevant (how often is this called?), but it\u0027s free.",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_7b440c4b",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-02-26T18:31:15Z",
+      "side": 1,
+      "message": "Good point, this stuff is performance sensitive - we may end up doing this millions of times when generating an RDF dump.",
+      "parentUuid": "2ea41786_78c9727a",
       "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
