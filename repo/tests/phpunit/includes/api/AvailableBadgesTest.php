@@ -16,7 +16,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group medium
  *
  * @licence GNU GPL v2+
- *
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class AvailabeBadgesTest extends ApiTestCase {

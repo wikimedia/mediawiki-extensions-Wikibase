@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\StorageException;
  *
  * @since 0.5
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class JsonDumpGenerator extends DumpGenerator {

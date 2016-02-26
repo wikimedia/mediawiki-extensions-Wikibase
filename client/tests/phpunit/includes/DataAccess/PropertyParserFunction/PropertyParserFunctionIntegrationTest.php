@@ -22,7 +22,7 @@ use Wikibase\Test\MockClientStore;
  * @group PropertyParserFunctionTest
  * @group Database
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {

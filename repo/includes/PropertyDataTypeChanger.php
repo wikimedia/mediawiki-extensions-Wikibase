@@ -17,7 +17,7 @@ use User;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch
  */
 class PropertyDataTypeChanger {

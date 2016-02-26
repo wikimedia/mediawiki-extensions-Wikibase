@@ -27,6 +27,7 @@
  *
  * @see README.md
  * @see http://wikiba.se
+ *
  * @licence GNU GPL v2+
  */
 

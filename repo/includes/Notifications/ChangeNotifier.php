@@ -15,7 +15,7 @@ use Wikimedia\Assert\Assert;
  * Class for generating and submitting change notifications in different situations.
  * This is a helper intended for use in hook handler functions.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ChangeNotifier {

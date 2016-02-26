@@ -14,6 +14,7 @@ use Wikibase\Summary;
  * Class for statement rank change operation
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */

@@ -7,7 +7,7 @@ use InvalidArgumentException;
 /**
  * XML/RDF implementation of RdfWriter
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class XmlRdfWriter extends RdfWriterBase {

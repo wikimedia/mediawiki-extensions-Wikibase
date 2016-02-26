@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
  *
  * @since 0.5
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {

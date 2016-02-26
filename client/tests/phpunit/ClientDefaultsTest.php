@@ -6,11 +6,11 @@ use Wikibase\SettingsArray;
 
 /**
  * Copyright © 02.07.13 by the authors listed below.
- * @license GPL 2+
  *
  * @group Wikibase
  * @group WikibaseClient
  *
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ClientDefaultsTest extends \MediaWikiTestCase {

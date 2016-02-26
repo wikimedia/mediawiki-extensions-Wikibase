@@ -31,7 +31,6 @@ use Wikibase\Lib\AutoCommentFormatter;
  * @since 0.1
  *
  * @licence GNU GPL v2+
- *
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jens Ohlig
  * @author Daniel Kinzler

@@ -11,7 +11,6 @@ use Message;
  * @since 0.5
  *
  * @licence GNU GPL v2+
- *
  * @author Brad Jorsch
  * @author Thiemo Mättig
  * @author Tobias Gritschacher

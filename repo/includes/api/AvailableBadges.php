@@ -10,6 +10,7 @@ use Wikibase\Repo\WikibaseRepo;
  * API module to query available badge items.
  *
  * @since 0.5
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

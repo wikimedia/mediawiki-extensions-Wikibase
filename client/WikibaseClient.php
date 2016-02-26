@@ -27,6 +27,7 @@
  *
  * @see README.md
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase_Client
+ *
  * @licence GNU GPL v2+
  */
 

@@ -27,6 +27,7 @@ use Wikibase\Summary;
  * API module for creating or updating an entire Claim.
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >

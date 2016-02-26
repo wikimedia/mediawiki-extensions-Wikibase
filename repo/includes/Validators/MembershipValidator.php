@@ -10,7 +10,7 @@ use ValueValidators\ValueValidator;
 /**
  * MembershipValidator checks that a value is in a fixed set of allowed values.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class MembershipValidator implements ValueValidator {

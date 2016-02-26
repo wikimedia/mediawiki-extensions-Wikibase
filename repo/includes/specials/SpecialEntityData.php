@@ -20,6 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  * for the web server to map ID prefixes to wiki namespaces.
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Thomas Pellissier Tanon

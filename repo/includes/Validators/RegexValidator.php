@@ -9,7 +9,7 @@ use ValueValidators\ValueValidator;
 /**
  * RegexValidator checks a string against a regular expression.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class RegexValidator implements ValueValidator {

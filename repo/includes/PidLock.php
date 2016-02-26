@@ -7,7 +7,7 @@ namespace Wikibase\Repo;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >

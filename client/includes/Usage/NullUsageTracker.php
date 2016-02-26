@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * No-op implementation of the UsageTracker and UsageLookup interfaces.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class NullUsageTracker implements UsageTracker, UsageLookup {

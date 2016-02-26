@@ -12,8 +12,7 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
  * Resolves property labels (which are unique per language) into entity IDs
  * using a TermIndex.
  *
- * @license GPL 2+
- *
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

@@ -13,7 +13,7 @@ use Wikibase\Repo\Validators\NotEntityIdValidator;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class NotEntityIdValidatorTest extends \PHPUnit_Framework_TestCase {

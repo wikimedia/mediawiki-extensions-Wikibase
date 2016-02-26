@@ -9,6 +9,7 @@ use Wikibase\DispatchStats;
  * Page for displaying diagnostics about the dispatch process.
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

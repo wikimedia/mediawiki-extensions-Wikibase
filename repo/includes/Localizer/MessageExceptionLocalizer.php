@@ -8,7 +8,7 @@ use Message;
 use Wikibase\Lib\MessageException;
 
 /**
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

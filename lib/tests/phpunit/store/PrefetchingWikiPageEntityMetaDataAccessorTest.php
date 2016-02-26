@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
  * @group WikibaseStore
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_TestCase {

@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\StatementList;
 /**
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
 class DispatchingEntityTypeStatementGrouper implements StatementGrouper {

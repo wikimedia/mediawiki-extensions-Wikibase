@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
  * Page for creating new Wikibase items.
  *
  * @since 0.1
+ *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */

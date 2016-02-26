@@ -5,7 +5,7 @@ namespace Wikibase\Repo;
 /**
  * An interface for objects that support explicit disposal.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  *
  * @todo make this reusable outside Wikibase

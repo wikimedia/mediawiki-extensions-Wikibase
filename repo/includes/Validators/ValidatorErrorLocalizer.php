@@ -12,7 +12,7 @@ use ValueValidators\Result;
 /**
  * Class ValidatorErrorLocalizer
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ValidatorErrorLocalizer {

@@ -6,7 +6,7 @@ use Exception;
 use Message;
 
 /**
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

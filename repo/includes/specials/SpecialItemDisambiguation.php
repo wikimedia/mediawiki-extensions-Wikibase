@@ -19,6 +19,7 @@ use Wikibase\TermIndexEntry;
  * A result page is shown, disambiguating between multiple results if necessary.
  *
  * @since 0.1
+ *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

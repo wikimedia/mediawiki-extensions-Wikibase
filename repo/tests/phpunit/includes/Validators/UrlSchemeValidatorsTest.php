@@ -9,13 +9,12 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 /**
  * @covers Wikibase\Repo\Validators\UrlSchemeValidators
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  * @group Database
  *
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

@@ -12,7 +12,6 @@ use Wikibase\SettingsArray;
  * @since 0.4
  *
  * @licence GNU GPL v2+
- *
  * @author Daniel Kinzler
  */
 

@@ -21,7 +21,6 @@ use Wikibase\Lib\SnakFormatter;
  * @since 0.5
  *
  * @licence GNU GPL v2+
- *
  * @author John Erling Blad
  * @author Daniel Kinzler
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >

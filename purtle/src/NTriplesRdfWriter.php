@@ -5,7 +5,7 @@ namespace Wikimedia\Purtle;
 /**
  * NTriplesRdfWriter
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class NTriplesRdfWriter extends N3RdfWriterBase {

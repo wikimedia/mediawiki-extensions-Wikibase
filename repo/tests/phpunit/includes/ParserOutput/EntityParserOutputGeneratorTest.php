@@ -32,7 +32,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @group WikibaseRepo
  * @group Database
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityParserOutputGeneratorTest extends MediaWikiTestCase {

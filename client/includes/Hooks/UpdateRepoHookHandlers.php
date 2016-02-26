@@ -23,7 +23,7 @@ use WikiPage;
  *
  * @since 0.5.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class UpdateRepoHookHandlers {

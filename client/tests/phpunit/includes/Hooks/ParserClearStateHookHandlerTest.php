@@ -19,7 +19,7 @@ use Wikibase\Test\MockClientStore;
  * @group WikibaseIntegration
  * @group Database
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch
  */
 class ParserClearStateHookHandlerTest extends MediaWikiTestCase {

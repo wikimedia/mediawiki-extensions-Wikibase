@@ -29,7 +29,7 @@ use Wikibase\Test\MockRepository;
  * @group WikibaseClient
  * @group WikibaseScribunto
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */
 class EntityAccessorTest extends \PHPUnit_Framework_TestCase {

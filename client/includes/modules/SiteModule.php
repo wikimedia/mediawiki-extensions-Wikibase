@@ -12,6 +12,7 @@ use Wikibase\Client\WikibaseClient;
  * Provides information about the current (client) site
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Marius Hoch < hoo@online.de >
  */

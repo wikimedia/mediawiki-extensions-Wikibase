@@ -11,7 +11,7 @@ use UsageException;
 use User;
 
 /**
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ApiModuleTestHelper {

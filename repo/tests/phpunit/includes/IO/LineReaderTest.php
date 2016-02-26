@@ -11,7 +11,7 @@ use Wikibase\Repo\IO\LineReader;
  * @group WikibaseRepo
  * @group WikibaseIO
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class LineReaderTest extends \PHPUnit_Framework_TestCase {

@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  * @group WikibaseLib
  * @group WikibaseStore
  *
- * @license GPL v2+
+ * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_TestCase {

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Represents a violation of a uniqueness constraint.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class UniquenessViolation extends Error {

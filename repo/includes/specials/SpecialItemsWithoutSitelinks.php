@@ -9,6 +9,7 @@ use Wikibase\Repo\WikibaseRepo;
  * Page for listing entities without label.
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */

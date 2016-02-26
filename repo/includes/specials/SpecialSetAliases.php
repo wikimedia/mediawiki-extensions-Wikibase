@@ -12,6 +12,7 @@ use Wikibase\Summary;
  * Special page for setting the aliases of a Wikibase entity.
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

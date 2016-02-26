@@ -26,6 +26,7 @@ use Wikibase\SummaryFormatter;
  * labels, descriptions and aliases.
  *
  * @since 0.5
+ *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */

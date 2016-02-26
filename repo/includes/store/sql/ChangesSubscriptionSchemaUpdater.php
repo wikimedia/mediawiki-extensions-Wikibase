@@ -9,7 +9,7 @@ use Wikibase\Lib\Reporting\ObservableMessageReporter;
 /**
  * Schema updater for the wb_changes_subscription table.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ChangesSubscriptionSchemaUpdater {

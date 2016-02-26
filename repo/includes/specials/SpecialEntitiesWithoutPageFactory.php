@@ -13,7 +13,7 @@ use Wikibase\TermIndexEntry;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SpecialEntitiesWithoutPageFactory {

@@ -21,6 +21,7 @@ use Wikibase\Summary;
  * Abstract special page for setting a value of a Wikibase entity.
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler

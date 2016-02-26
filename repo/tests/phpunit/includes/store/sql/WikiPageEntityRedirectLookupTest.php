@@ -20,7 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch
  */
 class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {

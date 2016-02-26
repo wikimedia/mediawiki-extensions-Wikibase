@@ -5,7 +5,7 @@ namespace Wikimedia\Purtle;
 /**
  * RdfWriter implementation for generating Turtle output.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class TurtleRdfWriter extends N3RdfWriterBase {

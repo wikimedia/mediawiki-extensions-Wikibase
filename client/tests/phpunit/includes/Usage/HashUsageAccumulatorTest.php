@@ -12,7 +12,7 @@ use Wikibase\Client\Usage\HashUsageAccumulator;
  * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class HashUsageAccumulatorTest extends \PHPUnit_Framework_TestCase {

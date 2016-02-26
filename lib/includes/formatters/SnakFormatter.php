@@ -10,7 +10,7 @@ use Wikibase\DataModel\Snak\Snak;
  * output format. A SnakFormatter may be able to work on any kind of Snak, or
  * may be specialized on a single kind of snak.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 interface SnakFormatter {

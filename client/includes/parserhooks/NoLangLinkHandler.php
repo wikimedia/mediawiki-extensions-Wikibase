@@ -12,7 +12,6 @@ use Wikibase\Client\WikibaseClient;
  * @since 0.1
  *
  * @licence GNU GPL v2+
- *
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler

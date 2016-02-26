@@ -9,11 +9,10 @@ use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 /**
  * @covers Wikibase\Repo\CachingCommonsMediaFileNameLookup
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  *
+ * @licence GNU GPL v2+
  * @author Marius Hoch
  */
 class CachingCommonsMediaFileNameLookupTest extends \PHPUnit_Framework_TestCase {

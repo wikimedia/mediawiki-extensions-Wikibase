@@ -19,7 +19,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 /**
  * An SQL based usage tracker implementation.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class SqlUsageTracker implements UsageTracker, UsageLookup {

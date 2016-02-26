@@ -7,7 +7,7 @@ use Exception;
 /**
  * RethrowingExceptionHandler handles exceptions by re-throwing them.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class RethrowingExceptionHandler implements ExceptionHandler {

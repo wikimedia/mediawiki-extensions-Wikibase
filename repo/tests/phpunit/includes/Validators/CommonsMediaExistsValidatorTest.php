@@ -8,12 +8,11 @@ use Wikibase\Repo\Validators\CommonsMediaExistsValidator;
 /**
  * @covers Wikibase\Repo\Validators\CommonsMediaExistsValidator
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
+ * @licence GNU GPL v2+
  * @author Marius Hoch
  */
 class CommonsMediaExistsValidatorTest extends \PHPUnit_Framework_TestCase {

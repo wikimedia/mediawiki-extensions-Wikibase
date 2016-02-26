@@ -27,6 +27,7 @@
  *
  * @see README.md
  * @see https://www.mediawiki.org/wiki/Extension:WikibaseLib
+ *
  * @licence GNU GPL v2+
  */
 

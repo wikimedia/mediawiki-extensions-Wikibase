@@ -43,6 +43,7 @@ use WikiPage;
  * storage abstraction layer.
  *
  * @since 0.1
+ *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */

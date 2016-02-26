@@ -14,7 +14,7 @@ use Wikibase\Client\Hooks\ParserLimitHookHandlers;
  * @group Wikibase
  * @group WikibaseHooks
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch
  */
 class ParserLimitHookHandlersTest extends PHPUnit_Framework_TestCase {

@@ -13,7 +13,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Job for scheduled invocation of UsageUpdater::addUsagesForPage
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class AddUsagesForPageJob extends Job {

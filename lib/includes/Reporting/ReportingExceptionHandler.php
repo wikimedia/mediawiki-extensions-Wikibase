@@ -7,7 +7,7 @@ use Exception;
 /**
  * ReportingExceptionHandler reports exceptions to a MessageReporter.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ReportingExceptionHandler implements ExceptionHandler {

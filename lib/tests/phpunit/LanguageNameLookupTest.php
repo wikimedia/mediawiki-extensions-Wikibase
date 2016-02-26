@@ -11,7 +11,7 @@ use Wikibase\Lib\LanguageNameLookup;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

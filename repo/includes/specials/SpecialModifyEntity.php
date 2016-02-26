@@ -26,6 +26,7 @@ use Wikibase\SummaryFormatter;
  * Abstract special page for modifying Wikibase entity.
  *
  * @since 0.4
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@googlemail.com >
  * @author Daniel Kinzler

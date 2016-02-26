@@ -14,8 +14,7 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * @license GNU GPL v2+
- *
+ * @licence GNU GPL v2+
  * @author Marius Hoch
  */
 class ChangePropertyDataType extends Maintenance {

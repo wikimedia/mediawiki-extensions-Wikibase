@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */

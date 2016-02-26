@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @since 0.4
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

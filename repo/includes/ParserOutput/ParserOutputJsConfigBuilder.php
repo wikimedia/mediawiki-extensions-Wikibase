@@ -11,7 +11,6 @@ use Wikibase\DataModel\SerializerFactory;
  * @since 0.5
  *
  * @licence GNU GPL v2+
- *
  * @author H. Snater < mediawiki at snater.com >
  * @author Daniel Werner
  * @author Daniel Kinzler

@@ -31,7 +31,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

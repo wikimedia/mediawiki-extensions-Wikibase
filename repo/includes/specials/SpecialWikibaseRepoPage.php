@@ -21,6 +21,7 @@ use Wikibase\SummaryFormatter;
  * Abstract base class for special pages of the WikibaseRepo extension.
  *
  * @since 0.5
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

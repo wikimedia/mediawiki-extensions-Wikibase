@@ -34,7 +34,7 @@ use Wikibase\DataModel\Statement\StatementFilter;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

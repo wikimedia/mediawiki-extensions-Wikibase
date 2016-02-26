@@ -20,7 +20,7 @@ use Wikibase\Repo\PropertyDataTypeChanger;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @licence GNU GPL v2+
  * @author Marius Hoch
  */
 class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {

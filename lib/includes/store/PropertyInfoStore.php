@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\StorageException;
 
 /**
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

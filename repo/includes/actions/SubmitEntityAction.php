@@ -16,6 +16,7 @@ use WikiPage;
  * Otherwise it will just show the normal entity view.
  *
  * @since 0.1
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig

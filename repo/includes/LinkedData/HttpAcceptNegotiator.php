@@ -9,7 +9,7 @@ namespace Wikibase\Repo\LinkedData;
  * To use this with a request header, first parse the header value into an array of weights
  * using HttpAcceptParser, then call getBestSupportedKey.
  *
- * @license GPL 2+
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class HttpAcceptNegotiator {

@@ -10,12 +10,11 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 /**
  * @covers Wikibase\Repo\Validators\ValidatorErrorLocalizer
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {

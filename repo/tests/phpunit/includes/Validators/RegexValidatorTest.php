@@ -8,12 +8,11 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 /**
  * @covers Wikibase\Repo\Validators\RegexValidator
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
+ * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
 class RegexValidatorTest extends \PHPUnit_Framework_TestCase {
