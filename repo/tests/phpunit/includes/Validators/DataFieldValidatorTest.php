@@ -58,9 +58,4 @@ class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testSetOptions() {
-		$validator = new DataFieldValidator( 0, new StringLengthValidator( 0, 0 ) );
-		$validator->setOptions( array() );
-	}
-
 }

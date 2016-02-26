@@ -101,9 +101,4 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 		$validator->validate( $value );
 	}
 
-	public function testSetOptions() {
-		$validator = new EntityExistsValidator( $this->getEntityLookup() );
-		$validator->setOptions( array() );
-	}
-
 }

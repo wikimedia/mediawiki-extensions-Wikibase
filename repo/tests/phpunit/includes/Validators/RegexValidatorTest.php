@@ -47,9 +47,4 @@ class RegexValidatorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testSetOptions() {
-		$validator = new RegexValidator( '' );
-		$validator->setOptions( array() );
-	}
-
 }
