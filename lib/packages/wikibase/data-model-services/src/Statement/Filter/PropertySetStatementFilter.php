@@ -16,6 +16,9 @@ use Wikibase\DataModel\Statement\StatementFilter;
  */
 class PropertySetStatementFilter implements StatementFilter {
 
+	/**
+	 * @since 3.3
+	 */
 	const FILTER_TYPE = 'propertySet';
 
 	/**

@@ -17,6 +17,9 @@ use Wikibase\DataModel\Statement\StatementFilter;
  */
 class NullStatementFilter implements StatementFilter {
 
+	/**
+	 * @since 3.3
+	 */
 	const FILTER_TYPE = 'null';
 
 	/**
