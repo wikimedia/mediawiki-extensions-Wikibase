@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: JanZerebecki <jan.wikimedia@zerebecki.de>
+Code-Review+2: Thiemo Mättig (WMDE) <thiemo.maettig@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Fri, 26 Feb 2016 15:34:10 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/273309
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
