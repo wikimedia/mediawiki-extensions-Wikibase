@@ -83,7 +83,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertInternalType( 'array', $package );
 		$this->assertArrayHasKey( 'setupInterface', $package );
 		$this->assertInstanceOf(
-			'Scribunto_LuaStandaloneInterpreterFunction',
+			'LuaSandboxFunction', // 'Scribunto_LuaStandaloneInterpreterFunction',
 			$package['setupInterface']
 		);
 	}
