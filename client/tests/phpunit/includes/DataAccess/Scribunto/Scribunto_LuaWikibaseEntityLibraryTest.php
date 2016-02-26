@@ -71,10 +71,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 
 		$this->assertInternalType( 'array', $package );
 		$this->assertArrayHasKey( 'create', $package );
-		$this->assertInstanceOf(
-			'Scribunto_LuaStandaloneInterpreterFunction',
-			$package['create']
-		);
+		$this->assertInstanceOf( 'LuaSandboxFunction', $package['create'] );
 	}
 
 	/**
