@@ -3,9 +3,11 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Language;
+use LuaSandboxFunction;
 use Parser;
 use ParserOptions;
 use Scribunto;
+use Scribunto_LuaStandaloneInterpreterFunction;
 use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
@@ -82,9 +84,15 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 		$this->assertInternalType( 'array', $package );
 		$this->assertArrayHasKey( 'setupInterface', $package );
-		$this->assertInstanceOf(
-			'Scribunto_LuaStandaloneInterpreterFunction',
-			$package['setupInterface']
+
+		// The value of setupInterface depends on the Lua runtime in use.
+		$isLuaFunction =
+			( $package['setupInterface'] instanceof Scribunto_LuaStandaloneInterpreterFunction ) ||
+			( $package['setupInterface'] instanceof LuaSandboxFunction );
+
+		$this->assertTrue(
+			$isLuaFunction,
+			'$package[\'setupInterface\'] needs to be Scribunto_LuaStandaloneInterpreterFunction or LuaSandboxFunction'
 		);
 	}
 

@@ -2,9 +2,11 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
+use LuaSandboxFunction;
 use Parser;
 use ParserOptions;
 use Scribunto;
+use Scribunto_LuaStandaloneInterpreterFunction;
 use Title;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\WikibaseClient;
@@ -71,9 +73,15 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 
 		$this->assertInternalType( 'array', $package );
 		$this->assertArrayHasKey( 'create', $package );
-		$this->assertInstanceOf(
-			'Scribunto_LuaStandaloneInterpreterFunction',
-			$package['create']
+
+		// The value of create depends on the Lua runtime in use.
+		$isLuaFunction =
+			( $package['create'] instanceof Scribunto_LuaStandaloneInterpreterFunction ) ||
+			( $package['create'] instanceof LuaSandboxFunction );
+
+		$this->assertTrue(
+			$isLuaFunction,
+			'$package[\'create\'] needs to be Scribunto_LuaStandaloneInterpreterFunction or LuaSandboxFunction'
 		);
 	}
 
