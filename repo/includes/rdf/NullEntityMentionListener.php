@@ -12,6 +12,8 @@ use Wikibase\DataModel\Entity\PropertyId;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ *
+ * @codeCoverageIgnore
  */
 class NullEntityMentionListener implements EntityMentionListener {
 
