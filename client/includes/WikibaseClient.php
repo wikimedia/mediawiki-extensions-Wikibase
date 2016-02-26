@@ -12,6 +12,7 @@ use Language;
 use LogicException;
 use MediaWikiSite;
 use MWException;
+use RequestContext;
 use Site;
 use SiteSQLStore;
 use SiteStore;
@@ -957,7 +958,8 @@ final class WikibaseClient {
 		return new WikiPageUpdater(
 			JobQueueGroup::singleton(),
 			$this->getRecentChangeFactory(),
-			$this->getStore()->getRecentChangesDuplicateDetector()
+			$this->getStore()->getRecentChangesDuplicateDetector(),
+			RequestContext::getMain()->getStats()
 		);
 	}
 
