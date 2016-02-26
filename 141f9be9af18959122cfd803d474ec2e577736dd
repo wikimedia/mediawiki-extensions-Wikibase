@@ -88,6 +88,24 @@
       "revId": "141f9be9af18959122cfd803d474ec2e577736dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_e287f5da",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2016-02-26T13:50:41Z",
+      "side": 1,
+      "message": "of course...",
+      "parentUuid": "2ea41786_822161f8",
+      "revId": "141f9be9af18959122cfd803d474ec2e577736dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
