@@ -16,6 +16,24 @@
       "revId": "51d758e92a136adcc1ea6388f2043d052025ddea",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_25d8b757",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibraryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-02-26T15:38:51Z",
+      "side": 1,
+      "message": "yes that seems to be the problem and not sure yet about fixing... (and probably not today for me)\n\nbut being able to use luasandbox in jenkins would be a very good thing and is high priority",
+      "parentUuid": "2ea41786_e5229f4f",
+      "revId": "51d758e92a136adcc1ea6388f2043d052025ddea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
