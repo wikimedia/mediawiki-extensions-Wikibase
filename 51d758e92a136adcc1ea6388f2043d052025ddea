@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_e5229f4f",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibraryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-26T15:35:31Z",
+      "side": 1,
+      "message": "I expected these two classes to have the same base class, so this assertion can check for the base class. But it seems there is no base class. As far as I understand Scribunto_LuaStandaloneInterpreterFunction is written in PHP and LuaSandboxFunction is something from a PHP extension, written in C. See https://github.com/wikimedia/mediawiki-php-luasandbox How does this go together? How do these two implementations interact? How can one be sure you can switch one implementation with the other when there are no common interfaces?",
+      "revId": "51d758e92a136adcc1ea6388f2043d052025ddea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
