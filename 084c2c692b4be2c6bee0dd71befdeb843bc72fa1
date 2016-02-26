@@ -87,6 +87,24 @@
       "revId": "084c2c692b4be2c6bee0dd71befdeb843bc72fa1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_2ebf39cf",
+        "filename": "client/tests/phpunit/includes/Usage/UsageTrackingIntegrationTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-26T08:39:33Z",
+      "side": 1,
+      "message": "The \"global\" keyword still confuses me. I was under the impression its for the whole scope, but you are right, the variable is only accessible *after* this line. Still a possible issue because all this depends heavily on the order and side effects of the instructions.\n\nAfter reading MediaWikiTestCase again I realized there is mergeMwGlobalArrayValue for exactly what you do here. Done in my follow-up.",
+      "parentUuid": "2ea41786_3f1d2979",
+      "revId": "084c2c692b4be2c6bee0dd71befdeb843bc72fa1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
