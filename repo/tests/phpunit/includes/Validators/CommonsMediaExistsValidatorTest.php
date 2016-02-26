@@ -66,9 +66,4 @@ class CommonsMediaExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 		$validator->validate( 5 );
 	}
 
-	public function testSetOptions() {
-		$validator = new CommonsMediaExistsValidator( $this->getCachingCommonsMediaFileNameLookup() );
-		$validator->setOptions( array() );
-	}
-
 }

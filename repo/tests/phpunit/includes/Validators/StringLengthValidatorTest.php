@@ -52,9 +52,4 @@ class StringLengthValidatorTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function testSetOptions() {
-		$validator = new StringLengthValidator( 0, 0 );
-		$validator->setOptions( array() );
-	}
-
 }
