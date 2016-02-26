@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use Closure;
 use HashSiteStore;
 use MediaWikiSite;
 use SiteStore;
@@ -88,11 +89,11 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	 * @dataProvider projectLinkSidebarHookProvider
 	 */
 	public function testBuildProjectLinkSidebar_hook(
-			/* callable */ $handler,
-			array $siteIdsToOutput,
-			array $result,
-			$suppressErrors = false
-		) {
+		Closure $handler,
+		array $siteIdsToOutput,
+		array $result,
+		$suppressErrors = false
+	) {
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
 			'WikibaseClientOtherProjectsSidebar' => array( $handler ),
 		) );
