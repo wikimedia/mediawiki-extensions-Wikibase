@@ -25,6 +25,22 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @dataProvider invalidConstructorArgumentProvider
+	 */
+	public function testInvalidConstructorArgument( $maxLength ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->newFactory( $maxLength, array() );
+	}
+
+	public function invalidConstructorArgumentProvider() {
+		return array(
+			array( null ),
+			array( 1.0 ),
+			array( 0 ),
+		);
+	}
+
+	/**
 	 * @param int $maxLength
 	 * @param string[] $languageCodes
 	 *
