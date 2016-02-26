@@ -70,6 +70,24 @@
       "revId": "141f9be9af18959122cfd803d474ec2e577736dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_822161f8",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-26T13:44:29Z",
+      "side": 1,
+      "message": "But this code is not here in this extension. All code in this extension works fine with 5.5.0.",
+      "parentUuid": "2ea41786_4235a941",
+      "revId": "141f9be9af18959122cfd803d474ec2e577736dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
