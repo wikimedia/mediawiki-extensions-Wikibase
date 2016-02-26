@@ -111,7 +111,7 @@ class MockRepository implements
 	public function getEntity( EntityId $entityId ) {
 		$revision = $this->getEntityRevision( $entityId );
 
-		return $revision === null ? null : unserialize( serialize( $revision->getEntity() ) );
+		return $revision === null ? null : $revision->getEntity()->copy();
 	}
 
 	/**
@@ -161,7 +161,7 @@ class MockRepository implements
 
 		$revision = $revisions[$revisionId];
 		$revision = new EntityRevision( // return a copy!
-			unserialize( serialize( $revision->getEntity() ) ), // return a copy!
+			$revision->getEntity()->copy(), // return a copy!
 			$revision->getRevisionId(),
 			$revision->getTimestamp()
 		);
@@ -260,7 +260,7 @@ class MockRepository implements
 		$this->maxRevisionId = max( $this->maxRevisionId, $revisionId );
 
 		$revision = new EntityRevision(
-			unserialize( serialize( $entity ) ), // note: always clone
+			$entity->copy(), // note: always clone
 			$revisionId,
 			wfTimestamp( TS_MW, $timestamp )
 		);
@@ -309,7 +309,7 @@ class MockRepository implements
 		$this->maxRevisionId = max( $this->maxRevisionId, $revisionId );
 
 		$this->redirects[$key] = new RedirectRevision(
-			unserialize( serialize( $redirect ) ),
+			$redirect, // EntityRedirect is immutable
 			$revisionId,
 			wfTimestamp( TS_MW, $timestamp )
 		);

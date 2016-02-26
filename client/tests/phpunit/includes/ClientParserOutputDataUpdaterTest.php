@@ -33,6 +33,9 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	 */
 	private $mockRepo = null;
 
+	/**
+	 * @return Item[]
+	 */
 	private function getItems() {
 		$items = array();
 
@@ -227,7 +230,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 		foreach ( $this->getItems() as $item ) {
 			$siteLinkLookup->putEntity( $item );
 
-			$itemNoSiteLinks = unserialize( serialize( $item ) );
+			$itemNoSiteLinks = $item->copy();
 			$itemNoSiteLinks->setSiteLinkList( new SiteLinkList() );
 
 			$mockRepoNoSiteLinks->putEntity( $itemNoSiteLinks );

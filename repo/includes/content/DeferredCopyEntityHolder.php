@@ -48,7 +48,7 @@ class DeferredCopyEntityHolder implements EntityHolder {
 	public function getEntity( $expectedClass = 'Wikibase\DataModel\Entity\EntityDocument' ) {
 		if ( !$this->entity ) {
 			$entity = $this->entityHolder->getEntity( $expectedClass );
-			$this->entity = unserialize( serialize( $entity ) );
+			$this->entity = $entity->copy();
 		}
 
 		return $this->entity;
