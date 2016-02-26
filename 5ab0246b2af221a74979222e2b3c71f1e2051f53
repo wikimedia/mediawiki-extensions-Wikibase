@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_18d87e57",
+        "filename": "docs/datatypes.wiki",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-26T17:30:34Z",
+      "side": 1,
+      "message": "\"tje\" ?-)\n\nPlease avoid \"foo bar\" in user documentation. I find it really painful whenever I see it. In this case, \"data-type\" becoming \"DataType\" works perfectly fine.",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_78f2d2ce",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-26T17:30:34Z",
+      "side": 1,
+      "message": "As far as I understand this map is not guaranteed to contain all property types known to the system. Or is it? Either or should be mentioned.",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_18bf1ecf",
+        "filename": "lib/tests/phpunit/DataTypeDefinitionsTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-26T17:30:34Z",
+      "side": 1,
+      "message": "So it does *not* contain the type \"bar\"? Hm, …",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_f8b482e6",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-26T17:30:34Z",
+      "side": 1,
+      "message": "This is unrelated to and unused in this patch, isn\u0027t it?",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_78c9727a",
+        "filename": "repo/includes/rdf/RdfVocabulary.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-02-26T17:30:34Z",
+      "side": 1,
+      "message": "The result of this could be cached in the array. Not sure if relevant (how often is this called?), but it\u0027s free.",
+      "revId": "5ab0246b2af221a74979222e2b3c71f1e2051f53",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
