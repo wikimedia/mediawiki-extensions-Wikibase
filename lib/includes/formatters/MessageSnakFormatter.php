@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\Snak;
  * This is useful in cases where the output shall solely depend on the snak type,
  * e.g. for PropertyNoValueSnak or PropertySomeValueSnak.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

@@ -13,7 +13,7 @@ use Wikibase\Lib\Sites\SitesBuilder;
  *
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SitesBuilderTest extends PHPUnit_Framework_TestCase {

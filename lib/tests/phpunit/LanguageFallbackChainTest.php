@@ -13,7 +13,7 @@ use Wikibase\LanguageWithConversion;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Liangent
  * @author Thiemo Mättig
  */

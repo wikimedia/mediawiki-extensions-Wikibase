@@ -14,8 +14,8 @@ use Wikibase\Repo\WikibaseRepo;
  * This class allows us to override services within Wikibase API modules
  *
  * @since 0.5
- * @licence GNU GPL v2+
  *
+ * @license GPL-2.0+
  * @author Addshore
  */
 abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {

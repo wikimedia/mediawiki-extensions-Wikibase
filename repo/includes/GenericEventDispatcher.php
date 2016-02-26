@@ -9,7 +9,7 @@ use InvalidArgumentException;
  *
  * @todo: should go into MediaWiki core.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class GenericEventDispatcher {

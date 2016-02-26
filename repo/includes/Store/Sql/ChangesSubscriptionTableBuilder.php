@@ -17,7 +17,7 @@ use Wikibase\Lib\Reporting\NullMessageReporter;
  * based on the wb_items_per_site. Any wiki linked via the wb_items_per_site table
  * will be considered a subscriber.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ChangesSubscriptionTableBuilder {

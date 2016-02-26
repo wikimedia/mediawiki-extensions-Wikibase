@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
  * Exception indicating that an attempt was made to access a redirected EntityId
  * without resolving the redirect first.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class RevisionedUnresolvedRedirectException extends UnresolvedEntityRedirectException {

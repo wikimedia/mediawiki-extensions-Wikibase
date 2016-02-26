@@ -11,7 +11,7 @@ use Wikibase\StringNormalizer;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */

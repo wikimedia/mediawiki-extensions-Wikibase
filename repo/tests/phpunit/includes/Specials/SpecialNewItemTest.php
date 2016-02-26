@@ -19,7 +19,7 @@ use Wikibase\Repo\Specials\SpecialNewItem;
  * @group Database
  *        ^---- needed because we rely on Title objects internally
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Addshore

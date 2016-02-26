@@ -17,7 +17,7 @@ use Wikibase\Repo\Diff\DiffView;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */

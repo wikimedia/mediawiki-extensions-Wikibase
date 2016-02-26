@@ -18,7 +18,7 @@ use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
  * @group WikibaseRepo
  * @group WikibaseClaim
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class DifferencesSnakVisualizerTest extends MediaWikiTestCase {

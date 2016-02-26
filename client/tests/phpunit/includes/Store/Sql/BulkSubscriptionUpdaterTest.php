@@ -18,7 +18,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
  * @group WikibaseUsageTracking
  * @group Database
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {

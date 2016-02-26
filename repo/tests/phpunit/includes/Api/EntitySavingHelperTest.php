@@ -18,7 +18,7 @@ use Wikibase\Repo\Api\EntitySavingHelper;
  * @group WikibaseAPI
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {

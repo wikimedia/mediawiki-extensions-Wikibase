@@ -10,7 +10,8 @@ use Wikibase\Summary;
  * Special page for setting the label of a Wikibase entity.
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SpecialSetLabel extends SpecialModifyTerm {

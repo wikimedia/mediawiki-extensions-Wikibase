@@ -14,7 +14,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseAPI
  * @group WikibaseRepo
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {

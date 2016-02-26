@@ -22,7 +22,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @group Wikibase
  * @group WikibaseView
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  * @author H. Snater < mediawiki@snater.com >

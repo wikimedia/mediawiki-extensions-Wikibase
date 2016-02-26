@@ -17,7 +17,7 @@ use Wikibase\Rdf\RdfVocabulary;
  * @group WikibaseRepo
  * @group WikibaseRdf
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class RdfVocabularyTest extends PHPUnit_Framework_TestCase {

@@ -16,7 +16,7 @@ use WikiPage;
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Addshore

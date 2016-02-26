@@ -19,7 +19,7 @@ use Wikibase\Lib\SnakFormatter;
  * snakFormatter's output. A fallback ValueFormatter can be used to provide basic
  * formatting for values in the presence of snak formatting errors.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ErrorHandlingSnakFormatter implements SnakFormatter {

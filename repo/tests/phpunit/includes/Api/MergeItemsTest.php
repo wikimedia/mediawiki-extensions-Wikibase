@@ -40,7 +40,7 @@ use Wikibase\Test\MockRepository;
  * @group MergeItemsTest
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  * @author Lucie-Aimée Kaffee
  */

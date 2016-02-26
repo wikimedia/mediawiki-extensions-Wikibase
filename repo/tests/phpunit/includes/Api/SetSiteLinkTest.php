@@ -10,7 +10,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Repo\Api\SetSiteLink
  * @covers Wikibase\Repo\Api\ModifyEntity
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  * @author Addshore

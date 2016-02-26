@@ -22,8 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  * @group medium
  *
- * @licence GNU GPL v2+
- *
+ * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >

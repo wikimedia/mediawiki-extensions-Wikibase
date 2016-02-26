@@ -9,13 +9,12 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 /**
  * @covers Wikibase\Repo\Validators\UrlValidator
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  * @group Database
  *
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class UrlValidatorTest extends \MediaWikiTestCase {

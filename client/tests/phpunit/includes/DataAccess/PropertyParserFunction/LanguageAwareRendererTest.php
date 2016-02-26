@@ -26,7 +26,7 @@ use Wikibase\Lib\SnakFormatter;
  * @group WikibaseDataAccess
  * @group PropertyParserFunctionTest
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

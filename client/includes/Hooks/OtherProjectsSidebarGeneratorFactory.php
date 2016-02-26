@@ -9,7 +9,7 @@ use Wikibase\SettingsArray;
 /**
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class OtherProjectsSidebarGeneratorFactory {

@@ -21,7 +21,7 @@ use Wikibase\DataModel\Snak\Snak;
  * PropertyValueSnakFormatter is a formatter for PropertyValueSnaks. This is essentially a
  * SnakFormatter adapter for TypedValueFormatter.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class PropertyValueSnakFormatter implements SnakFormatter {

@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  * Helper class for updating the wbc_entity_usage table.
  * This is used internally by SqlUsageTracker.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @internal
  */

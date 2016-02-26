@@ -23,7 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseAPI
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 class StatementModificationHelperTest extends \MediaWikiTestCase {

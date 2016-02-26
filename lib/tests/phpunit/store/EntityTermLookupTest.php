@@ -14,7 +14,7 @@ use Wikibase\TermIndexEntry;
  * @group WikibaseLib
  * @group WikibaseStore
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class EntityTermLookupTest extends \MediaWikiTestCase {

@@ -13,7 +13,7 @@ use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
  * @group WikibaseRepo
  * @group WikibaseChange
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch
  */
 class DatabaseChangeTransmitterTest extends \PHPUnit_Framework_TestCase {

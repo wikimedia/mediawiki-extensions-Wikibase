@@ -13,7 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {

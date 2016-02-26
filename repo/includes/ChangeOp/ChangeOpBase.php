@@ -9,7 +9,8 @@ use Wikibase\Summary;
  * Base class for change operations.
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
 abstract class ChangeOpBase implements ChangeOp {

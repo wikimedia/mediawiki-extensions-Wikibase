@@ -14,7 +14,7 @@ use Wikibase\Store\EntityIdLookup;
 /**
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch
  */
 class WikiPageEntityRedirectLookup implements EntityRedirectLookup {

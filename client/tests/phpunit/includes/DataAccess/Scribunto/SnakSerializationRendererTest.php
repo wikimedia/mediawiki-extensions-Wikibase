@@ -21,7 +21,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @group WikibaseClient
  * @group WikibaseScribunto
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {

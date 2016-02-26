@@ -10,7 +10,7 @@ use Wikibase\Lib\Reporting\MessageReporter;
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Daniel Kinzler

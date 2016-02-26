@@ -11,7 +11,7 @@ use Wikimedia\Assert\Assert;
  * PropertyInfoProvider implementation based on a specific field in the array returned
  * by a PropertyInfoStore.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class FieldPropertyInfoProvider implements PropertyInfoProvider {

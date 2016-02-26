@@ -26,7 +26,7 @@ use Wikibase\Repo\ValidatorBuilders;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {

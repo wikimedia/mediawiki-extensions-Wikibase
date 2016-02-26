@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
  * @group WikibaseClient
  * @group WikibaseUsageTracking
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {

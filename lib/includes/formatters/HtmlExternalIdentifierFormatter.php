@@ -16,7 +16,7 @@ use Wikimedia\Assert\ParameterTypeException;
  * the identifier. The link is created based on a URL pattern associated with the snak's property id
  * via a SnakUrlExpander.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class HtmlExternalIdentifierFormatter implements SnakFormatter {

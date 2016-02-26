@@ -21,7 +21,7 @@ use Wikibase\SiteLinkCommentCreator;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {

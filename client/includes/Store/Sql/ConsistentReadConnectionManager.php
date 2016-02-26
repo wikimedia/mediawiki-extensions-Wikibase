@@ -22,7 +22,7 @@ use LoadBalancer;
  * (by avoiding race conditions due to replication lag), but can reduce performance (by directing
  * more read operations to the master database server).
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ConsistentReadConnectionManager {

@@ -15,7 +15,8 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  * Helper class for api modules to load entities.
  *
  * @since 0.5
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Addshore
  */
 class EntityLoadingHelper {

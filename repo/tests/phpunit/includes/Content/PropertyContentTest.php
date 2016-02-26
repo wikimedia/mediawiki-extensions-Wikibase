@@ -18,7 +18,7 @@ use Wikibase\PropertyContent;
  * @group WikibaseRepo
  * @group WikibaseContent
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class PropertyContentTest extends EntityContentTest {

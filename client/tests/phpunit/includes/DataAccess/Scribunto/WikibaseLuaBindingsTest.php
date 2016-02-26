@@ -24,7 +24,7 @@ use Wikibase\Test\MockRepository;
  * @group WikibaseClient
  * @group WikibaseScribunto
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >

@@ -14,7 +14,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 /**
  * @since 0.5
  *
- * @license GPLv2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class EditEntityFactory {

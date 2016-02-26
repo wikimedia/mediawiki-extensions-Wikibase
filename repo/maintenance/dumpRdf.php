@@ -18,7 +18,7 @@ require_once __DIR__ . '/dumpEntities.php';
 /**
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Stas Malyshev
  * @author Addshore
  */

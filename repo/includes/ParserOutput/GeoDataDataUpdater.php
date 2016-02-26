@@ -23,7 +23,7 @@ use Wikibase\DataModel\Statement\Statement;
  * This class uses the Coord and CoordinatesOutput classes from the
  * GeoData extension.
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class GeoDataDataUpdater implements StatementDataUpdater {

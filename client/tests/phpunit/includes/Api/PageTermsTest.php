@@ -24,7 +24,7 @@ use Wikibase\TermIndexEntry;
  * @group WikibaseAPI
  * @group WikibaseClient
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class PageTermsTest extends \MediaWikiTestCase {

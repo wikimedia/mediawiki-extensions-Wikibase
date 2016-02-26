@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityInfoTermLookup;
  * @group WikibaseLib
  * @group WikibaseStore
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

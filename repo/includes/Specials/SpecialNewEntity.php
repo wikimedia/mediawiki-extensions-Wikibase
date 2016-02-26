@@ -17,7 +17,8 @@ use Wikibase\Summary;
  * Page for creating new Wikibase entities that contain a Fingerprint.
  *
  * @since 0.1
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
  * @author John Erling Blad < jeblad@gmail.com >

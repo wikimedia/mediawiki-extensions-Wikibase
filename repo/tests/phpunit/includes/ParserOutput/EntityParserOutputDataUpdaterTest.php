@@ -16,7 +16,7 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdater;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {

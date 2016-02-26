@@ -9,12 +9,11 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 /**
  * @covers Wikibase\Repo\Validators\DataFieldValidator
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {

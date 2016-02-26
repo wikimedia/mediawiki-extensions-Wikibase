@@ -10,7 +10,7 @@ use Wikibase\Repo\Store\EntityPerPage;
  * EntityPerPageIdPager is a cursor for iterating over batches of EntityIds from an
  * EntityPerPage service.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EntityPerPageIdPager implements EntityIdPager {

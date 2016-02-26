@@ -21,7 +21,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {

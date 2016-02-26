@@ -9,7 +9,7 @@ use Wikibase\Repo\BabelUserLanguageLookup;
  * Double for the PHPUnit test that overrides the only method that depends on the Babel extension
  * so we can test everything else.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class BabelUserLanguageLookupDouble extends BabelUserLanguageLookup {
