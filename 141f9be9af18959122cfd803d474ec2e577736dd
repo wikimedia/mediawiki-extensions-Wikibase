@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_82bde1af",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-02-26T13:15:20Z",
+      "side": 1,
+      "message": "mediawiki supports \"\u003e\u003d5.5.9\"\n\ndo we want to be consistent?",
+      "revId": "141f9be9af18959122cfd803d474ec2e577736dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
