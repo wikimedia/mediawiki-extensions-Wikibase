@@ -18,7 +18,8 @@ use Wikibase\Repo\Store\EntityIdPager;
  * redirects.
  *
  * @since 0.5
- * @license GPL 2+
+ *
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 abstract class DumpGenerator {

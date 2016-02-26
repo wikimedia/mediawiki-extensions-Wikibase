@@ -25,7 +25,7 @@ use Wikibase\Lib\SnakFormatter;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {

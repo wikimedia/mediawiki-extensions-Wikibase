@@ -20,7 +20,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @group WikibaseRepo
  * @group ChangeOp
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {

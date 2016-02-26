@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Katie Filbert <aude.wiki@gmail.com>
  */
 class HashSiteLinkStore implements SiteLinkStore {

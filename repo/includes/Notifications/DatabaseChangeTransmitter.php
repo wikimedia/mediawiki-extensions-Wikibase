@@ -10,7 +10,7 @@ use Wikibase\Repo\Store\ChangeStore;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch
  */
 class DatabaseChangeTransmitter implements ChangeTransmitter {

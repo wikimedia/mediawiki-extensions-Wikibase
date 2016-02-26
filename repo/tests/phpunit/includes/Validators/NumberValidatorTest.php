@@ -7,12 +7,11 @@ use Wikibase\Repo\Validators\NumberValidator;
 /**
  * @covers Wikibase\Repo\Validators\NumberValidator
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */

@@ -16,7 +16,7 @@ use Wikibase\Repo\WikibaseHtmlSnakFormatterFactory;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class WikibaseHtmlSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {

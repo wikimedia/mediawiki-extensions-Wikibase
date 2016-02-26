@@ -11,7 +11,7 @@ use Wikibase\Repo\GenericEventDispatcher;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class GenericEventDispatcherTest extends \PHPUnit_Framework_TestCase {

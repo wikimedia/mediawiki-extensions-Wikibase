@@ -17,7 +17,7 @@ use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
  *
  * @todo Propose for MediaWiki core.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DataUpdateAdapter extends DataUpdate {

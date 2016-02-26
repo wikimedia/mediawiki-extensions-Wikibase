@@ -26,7 +26,7 @@ use Wikibase\Store\EntityIdLookup;
  *
  * @since 0.2
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */

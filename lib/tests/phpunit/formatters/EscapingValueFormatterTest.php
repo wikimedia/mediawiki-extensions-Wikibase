@@ -15,7 +15,7 @@ use Wikibase\Lib\EscapingValueFormatter;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EscapingValueFormatterTest extends \PHPUnit_Framework_TestCase {

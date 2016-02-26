@@ -24,7 +24,7 @@ use Wikimedia\Assert\Assert;
  *
  * @see docs/datatypes.wiki
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DataTypeDefinitions {

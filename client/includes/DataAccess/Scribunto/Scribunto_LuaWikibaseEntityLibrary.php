@@ -22,7 +22,7 @@ use Wikibase\Lib\SnakFormatter;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {

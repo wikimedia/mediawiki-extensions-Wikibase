@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
  * Validator for checking that a given string is NOT an EntityId.
  * Useful e.g. for preventing property labels that "look like" property IDs.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class NotEntityIdValidator implements ValueValidator {

@@ -11,7 +11,7 @@ use ValueValidators\ValueValidator;
  * The DataValueValidator class allows the validation of the plain value
  * of a simple DataValues object based on the DataValue's array representation.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DataValueValidator implements ValueValidator {

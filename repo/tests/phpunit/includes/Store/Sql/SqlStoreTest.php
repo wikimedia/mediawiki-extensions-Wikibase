@@ -12,7 +12,7 @@ use Wikibase\SqlStore;
  * @group WikibaseStore
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class SqlStoreTest extends MediaWikiTestCase {

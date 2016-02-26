@@ -16,7 +16,7 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

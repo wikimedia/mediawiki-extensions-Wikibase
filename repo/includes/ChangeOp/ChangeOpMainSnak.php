@@ -17,7 +17,8 @@ use Wikibase\Summary;
  * Class for mainsnak change operation
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >

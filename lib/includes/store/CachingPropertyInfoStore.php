@@ -11,7 +11,8 @@ use Wikibase\DataModel\Entity\PropertyId;
  * that maintains a cached copy of the property info in memcached.
  *
  * @since 0.4
- * @license GPL 2+
+ *
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class CachingPropertyInfoStore implements PropertyInfoStore {

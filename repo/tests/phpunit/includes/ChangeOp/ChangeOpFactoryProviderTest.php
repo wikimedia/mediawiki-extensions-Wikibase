@@ -15,7 +15,7 @@ use Wikibase\Repo\Validators\EntityConstraintProvider;
  * @group WikibaseRepo
  * @group ChangeOp
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ChangeOpFactoryProviderTest extends \PHPUnit_Framework_TestCase {

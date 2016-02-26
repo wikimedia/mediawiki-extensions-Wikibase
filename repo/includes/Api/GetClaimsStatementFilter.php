@@ -11,7 +11,7 @@ use Wikibase\DataModel\Statement\StatementFilter;
 use Wikibase\StatementRankSerializer;
 
 /**
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  * @author Thiemo Mättig

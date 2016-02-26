@@ -15,7 +15,7 @@ use Wikibase\ChangeRow;
  * @group WikibaseLib
  * @group WikibaseChange
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class ChangeRowTest extends MediaWikiTestCase {

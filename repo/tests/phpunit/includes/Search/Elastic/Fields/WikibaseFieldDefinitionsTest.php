@@ -12,7 +12,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class WikibaseFieldDefinitionsTest extends PHPUnit_Framework_TestCase {

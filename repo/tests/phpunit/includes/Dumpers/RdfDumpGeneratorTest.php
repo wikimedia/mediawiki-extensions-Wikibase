@@ -30,7 +30,7 @@ use Wikibase\Test\Rdf\RdfBuilderTestData;
  * @group WikibaseRdf
  * @group RdfDump
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  */
 class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 

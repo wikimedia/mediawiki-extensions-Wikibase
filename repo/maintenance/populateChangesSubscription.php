@@ -17,7 +17,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for populating wb_changes_subscription based on the wb_items_per_site table.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class PopulateChangesSubscription extends LoggedUpdateMaintenance {

@@ -12,7 +12,7 @@ use Wikibase\PropertyInfoStore;
  *
  * @since 0.4
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class MockPropertyInfoStore implements PropertyInfoStore {

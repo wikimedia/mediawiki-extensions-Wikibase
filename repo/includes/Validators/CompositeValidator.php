@@ -9,7 +9,7 @@ use ValueValidators\ValueValidator;
  * A CompositeValidator uses a list of sub-validators to validate the data.
  * It does not implement any validation logic directly.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class CompositeValidator implements ValueValidator {

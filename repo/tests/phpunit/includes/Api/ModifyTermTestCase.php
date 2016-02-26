@@ -5,7 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 /**
  * Test case for language attributes API modules.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 abstract class ModifyTermTestCase extends WikibaseApiTestCase {

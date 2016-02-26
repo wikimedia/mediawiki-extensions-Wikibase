@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Value object representing the entity usages on a single page.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class PageEntityUsages {

@@ -18,7 +18,8 @@ use Wikibase\View\Template\TemplateFactory;
  *        these functions require an EntityRevision while a DataValue (if it were implemented) should be sufficient.
  *
  * @since 0.1
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki at snater.com >
  * @author Daniel Werner
  * @author Daniel Kinzler

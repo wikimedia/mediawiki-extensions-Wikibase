@@ -14,7 +14,7 @@ use Wikibase\Rdf\DispatchingValueSnakRdfBuilder;
  * @group WikibaseRepo
  * @group WikibaseRdf
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DispatchingValueSnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {

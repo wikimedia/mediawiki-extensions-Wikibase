@@ -5,7 +5,7 @@ namespace Wikimedia\Purtle;
 /**
  * Base class for RdfWriter implementations that output an N3 dialect.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 abstract class N3RdfWriterBase extends RdfWriterBase {

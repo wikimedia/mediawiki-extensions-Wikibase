@@ -12,7 +12,7 @@ use Wikibase\Lib\DataTypeDefinitions;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {

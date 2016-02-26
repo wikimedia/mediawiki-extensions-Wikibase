@@ -7,7 +7,7 @@ namespace Wikibase;
  *
  * @since 0.1
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Mättig

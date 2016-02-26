@@ -13,7 +13,7 @@ use Wikibase\Lib\FieldPropertyInfoProvider;
  * @group WikibaseLib
  * @group WikibaseStore
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class FieldPropertyInfoProviderTest extends PHPUnit_Framework_TestCase {

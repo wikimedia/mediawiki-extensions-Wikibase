@@ -10,7 +10,7 @@ use ValueValidators\ValueValidator;
 /**
  * UrlValidator checks URLs based on sub-validators for each scheme.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class UrlValidator implements ValueValidator {

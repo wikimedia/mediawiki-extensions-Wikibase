@@ -22,7 +22,7 @@ use Wikibase\Test\MockRepository;
 /**
  * Helper class for Lua integration tests.
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseDataAccessTestItemSetUpHelper {

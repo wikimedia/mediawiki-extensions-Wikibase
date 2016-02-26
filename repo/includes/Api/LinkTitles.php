@@ -20,7 +20,8 @@ use Wikibase\Summary;
  * Requires API write mode to be enabled.
  *
  * @since 0.1
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Addshore
  */

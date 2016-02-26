@@ -31,7 +31,7 @@ use Wikibase\SqlIdGenerator;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class WikiPageEntityStoreTest extends MediaWikiTestCase {

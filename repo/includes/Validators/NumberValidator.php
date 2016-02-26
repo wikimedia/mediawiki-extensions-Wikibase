@@ -7,7 +7,7 @@ use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 
 /**
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class NumberValidator implements ValueValidator {

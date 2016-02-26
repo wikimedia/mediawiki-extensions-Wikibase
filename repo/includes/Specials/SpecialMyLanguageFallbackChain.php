@@ -14,7 +14,8 @@ use Wikibase\Repo\WikibaseRepo;
  * Page for displaying the current language fallback chain for debugging.
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  */
 class SpecialMyLanguageFallbackChain extends SpecialPage {
 

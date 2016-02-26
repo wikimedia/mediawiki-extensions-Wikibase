@@ -9,7 +9,7 @@ use Wikimedia\Purtle\RdfWriterFactory;
  *
  * @group Purtle
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

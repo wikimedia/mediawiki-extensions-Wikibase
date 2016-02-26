@@ -14,7 +14,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @group WikibaseClient
  * @group WikibaseScribunto
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {

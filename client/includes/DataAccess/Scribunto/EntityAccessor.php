@@ -17,7 +17,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >

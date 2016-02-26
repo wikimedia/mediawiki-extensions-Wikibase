@@ -9,7 +9,7 @@ use MWException;
  * Object representing either a verbatim language or a converted language.
  * Used for items in language fallback chain.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Liangent
  */
 class LanguageWithConversion {

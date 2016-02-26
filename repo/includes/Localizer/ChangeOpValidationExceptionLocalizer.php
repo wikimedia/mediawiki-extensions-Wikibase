@@ -10,7 +10,7 @@ use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
 /**
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

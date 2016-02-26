@@ -10,7 +10,7 @@ use Wikimedia\Assert\Assert;
 /**
  * Caching service that looks up normalized file names from Wikimedia Commons.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Marius Hoch
  */
 class CachingCommonsMediaFileNameLookup {

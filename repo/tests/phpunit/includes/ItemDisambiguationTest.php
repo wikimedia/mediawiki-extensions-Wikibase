@@ -18,7 +18,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @group WikibaseSpecialPage
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class ItemDisambiguationTest extends MediaWikiTestCase {

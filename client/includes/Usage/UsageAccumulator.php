@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Interface and base class for objects accumulating usage tracking information for a given page.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

@@ -19,7 +19,7 @@ use Wikibase\HistoryEntityAction;
  * @group WikibaseAction
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {

@@ -8,12 +8,11 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 /**
  * @covers Wikibase\Repo\Validators\StringLengthValidator
  *
- * @license GPL 2+
- *
  * @group WikibaseRepo
  * @group Wikibase
  * @group WikibaseValidators
  *
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class StringLengthValidatorTest extends \PHPUnit_Framework_TestCase {

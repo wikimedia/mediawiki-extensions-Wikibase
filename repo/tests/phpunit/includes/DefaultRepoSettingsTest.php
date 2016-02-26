@@ -8,7 +8,7 @@ use Wikibase\SettingsArray;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class DefaultRepoSettingsTest extends \PHPUnit_Framework_TestCase {

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @group Wikibase
  * @group WikibaseClient
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {

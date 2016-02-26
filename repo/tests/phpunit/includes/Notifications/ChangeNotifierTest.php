@@ -24,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseRepo
  * @group WikibaseChange
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ChangeNotifierTest extends \MediaWikiTestCase {

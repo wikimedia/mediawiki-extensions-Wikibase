@@ -24,7 +24,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DispatchChanges extends Maintenance {

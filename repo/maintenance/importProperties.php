@@ -26,7 +26,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @since 0.1
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Nikola Smolenski <smolensk@eunet.rs>
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */

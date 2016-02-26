@@ -12,7 +12,7 @@ namespace Wikibase\Client\Tests\DataAccess\Scribunto;
  * @group WikibaseClient
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class Scribunto_LuaWikibaseLibraryNoArbitraryAccessTest extends Scribunto_LuaWikibaseLibraryTestCase {

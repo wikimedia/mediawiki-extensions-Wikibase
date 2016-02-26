@@ -10,7 +10,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @covers Wikibase\Repo\Api\EditEntity
  * @covers Wikibase\Repo\Api\ModifyEntity
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  * @author Michal Lazowik
  *

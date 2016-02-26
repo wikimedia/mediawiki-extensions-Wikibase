@@ -22,7 +22,7 @@ use Wikibase\Test\MockTermIndex;
  * @group WikibaseLib
  * @group WikibaseInteractor
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {

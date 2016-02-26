@@ -19,7 +19,8 @@ use Wikibase\Repo\WikibaseRepo;
  * Special page for merging one item to another.
  *
  * @since 0.5
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Daniel Kinzler
  */

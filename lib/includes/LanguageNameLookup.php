@@ -10,7 +10,7 @@ use Language;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
