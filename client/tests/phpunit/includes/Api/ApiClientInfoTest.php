@@ -7,11 +7,11 @@ use ApiQuery;
 use ApiTestContext;
 use FauxRequest;
 use User;
-use Wikibase\ApiClientInfo;
+use Wikibase\Client\Api\ApiClientInfo;
 use Wikibase\SettingsArray;
 
 /**
- * @covers Wikibase\ApiClientInfo
+ * @covers Wikibase\Client\Api\ApiClientInfo
  *
  * @group Database
  * @group API
