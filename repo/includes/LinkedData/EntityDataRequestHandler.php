@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\LinkedData;
 
 use HttpError;
-use Message;
 use OutputPage;
 use SquidUpdate;
 use WebRequest;
