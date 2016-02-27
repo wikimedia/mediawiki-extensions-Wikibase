@@ -280,7 +280,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Pode modificala incluíndo <nowiki>{{#babel: }}</nowiki> na súa [[Special:MyPage|páxina de {{GENDER:$1|usuario|usuaria}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, traducido do $3 - $4",
 	"wikibase-api-unresolved-redirect": "O identificador indicado refírese a unha redirección, o que non está soportado neste contexto.",
-	"wikibase-api-no-such-sitelink": "Non se puido atopar a ligazón de sitio a '$1' ó tentar editar a identificación.",
+	"wikibase-api-no-such-sitelink": "Non se puido atopar a ligazón de sitio a \"$1\" ó tentar editar identificacións.",
 	"wikibase-api-target-not-empty": "Só se pode crear a redirección sobre unha entidade vacía ou borrada.",
 	"wikibase-api-target-is-redirect": "O destino da redirección non debe ser unha redirección.",
 	"wikibase-api-target-is-incompatible": "Intento de redirixir a unha entidade dun tipo diferente.",

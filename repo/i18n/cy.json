@@ -56,7 +56,7 @@
 	"wikibase-disambiguation-title": "Gwahaniaethu ystyron \"$1\"",
 	"wikibase-aliases-empty": "Nid oes arallenwau i hwn eto.",
 	"wikibase-propertypage-datatype": "Math y data",
-	"wikibase-statementview-rank-normal": "Ranc normal",
+	"wikibase-statementview-rank-normal": "Safle normal",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ffynonellau|ffynhonnell|ffynonellau}}",
 	"wikibase-snakview-property-input-placeholder": "nodwedd",
 	"wikibase-snakview-choosesnaktype": "Dewiswch fath y gwerth.",

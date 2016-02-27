@@ -4,10 +4,12 @@
 			"ChrisPtDe"
 		]
 	},
-	"wikibase-comment-update": "Lims de lengoua betâs a jorn.",
+	"tooltip-t-wikibase": "Lim de vers la piéce de rèferencièl de les balyês liyêes",
+	"wikibase-comment-update": "Piéce {{WBREPONAME}} changiêe",
 	"wikibase-comment-sitelink-add": "Lim de lengoua apondu : $1",
 	"wikibase-comment-sitelink-change": "Lim de lengoua changiê de $1 a $2",
 	"wikibase-comment-sitelink-remove": "Lim de lengoua enlevâ : $1",
+	"wikibase-dataitem": "Piéce {{WBREPONAME}}",
 	"wikibase-editlinks": "Changiér los lims",
 	"wikibase-editlinkstitle": "Changiér los lims entèrlengoua",
 	"wikibase-rc-hide-wikidata": "Wikidata $1",
