@@ -8,5 +8,6 @@
 	"url": "https://github.com/wmde/WikibaseDataModel",
 	"description": "The canonical PHP implementation of the Data Model at the heart of the Wikibase software.",
 	"license-name": "GPL-2.0+",
-	"type": "wikibase"
+	"type": "wikibase",
+	"manifest_version": 1
 }
