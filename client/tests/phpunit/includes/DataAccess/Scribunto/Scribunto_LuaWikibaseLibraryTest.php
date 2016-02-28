@@ -7,6 +7,7 @@ use LuaSandboxFunction;
 use Parser;
 use ParserOptions;
 use Scribunto;
+use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
 use Title;
 use User;
@@ -70,7 +71,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testConstructor() {
-		$engine = Scribunto::newDefaultEngine( array() );
+		$engine = $this->getEngine();
 		$luaWikibaseLibrary = new Scribunto_LuaWikibaseLibrary( $engine );
 		$this->assertInstanceOf(
 			'Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary',
@@ -317,28 +318,16 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	 * @return Scribunto_LuaWikibaseLibrary
 	 */
 	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false ) {
-		$title = Title::newFromText( 'Whatever' );
-		$parserOptions = new ParserOptions();
+		/* @var $engine Scribunto_LuaEngine */
+		$engine = $this->getEngine();
+		$engine->load();
 
-		$parser = new Parser();
-		$parser->startExternalParse(
-			$title,
-			$parserOptions,
-			Parser::OT_HTML
-		);
-
-		$parserOptions->registerWatcher(
+		$engine->getParser()->getOptions()->registerWatcher(
 			function( $optionName ) use ( &$cacheSplit ) {
 				$this->assertSame( 'userlang', $optionName );
 				$cacheSplit = true;
 			}
 		);
-
-		$engine = Scribunto::newDefaultEngine( array(
-			'parser' => $parser,
-			'title' => $title
-		) );
-		$engine->load();
 
 		return new Scribunto_LuaWikibaseLibrary( $engine );
 	}
