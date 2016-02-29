@@ -40,6 +40,12 @@ class DeserializerFactory {
 	 */
 	private $currentEntityDeserializer;
 
+	/**
+	 * @param Deserializer $dataValueDeserializer
+	 * @param EntityIdParser $idParser
+	 * @param DispatchableDeserializer|null $currentEntityDeserializer used instead of constructing
+	 *        a new current Deserializer for entities using a current DeserializerFactory.
+	 */
 	public function __construct(
 		Deserializer $dataValueDeserializer,
 		EntityIdParser $idParser,
