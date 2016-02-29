@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+2: Siebrand <siebrand@kitano.nl>
+Code-Review+2: Adrian Heine <adrian.lang@wikimedia.de>
+Submitted-by: jenkins-bot
+Submitted-at: Mon, 29 Feb 2016 14:32:58 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/273264
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
