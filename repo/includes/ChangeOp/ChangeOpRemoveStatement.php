@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\StatementListHolder;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Summary;
 
 /**
@@ -58,8 +58,8 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 	 * @throws ChangeOpException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof StatementListHolder ) ) {
-			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
 
 		$statements = $entity->getStatements();
@@ -70,7 +70,6 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 		}
 
 		$statements->removeStatementsWithGuid( $this->guid );
-		$entity->setStatements( $statements );
 
 		$removedSnak = $statement->getMainSnak();
 		$this->updateSummary( $summary, 'remove', '', $this->getSummaryArgs( $removedSnak ) );
