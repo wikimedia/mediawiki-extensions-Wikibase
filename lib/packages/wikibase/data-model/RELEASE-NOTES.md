@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 5.1 (dev)
+
+* Deprecated `FingerprintHolder` and `StatementListHolder`
+
 ## Version 5.0.2 (2016-02-23)
 
 * Fixed regression in `ReferenceList::addReference` and the constructor possibly adding too many objects
