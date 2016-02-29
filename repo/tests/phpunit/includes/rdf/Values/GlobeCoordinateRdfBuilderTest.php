@@ -3,7 +3,7 @@
 namespace Wikibase\Test\Rdf;
 
 use DataValues\Geo\Values\LatLongValue;
-use DataValues\GlobeCoordinateValue;
+use DataValues\Geo\Values\GlobeCoordinateValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
