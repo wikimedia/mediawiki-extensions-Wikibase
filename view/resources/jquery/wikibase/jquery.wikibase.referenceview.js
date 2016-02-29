@@ -21,9 +21,6 @@
  *        Required for saving the `Reference` represented by the widget instance.
  * @param {string|null} [options.statementGuid]
  *        The GUID of the `Statement` the `Reference` represented by the widget instance belongs to.
- * @param {string} [options.helpMessage=mw.msg( 'wikibase-claimview-snak-new-tooltip' )]
- *        End-user message explaining how to interact with the widget. The message is most likely to
- *        be used inside the tooltip of the toolbar corresponding to the widget.
  */
 /**
  * @event afterstartediting
@@ -70,8 +67,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		value: null,
 		listItemAdapter: null,
 		referencesChanger: null,
-		statementGuid: null,
-		helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' )
+		statementGuid: null
 	},
 
 	/**

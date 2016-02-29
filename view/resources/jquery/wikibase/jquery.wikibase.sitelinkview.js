@@ -21,9 +21,6 @@
  *
  * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
  *
- * @option {string} [helpMessage]
- *         Default: mw.msg( 'wikibase-sitelinks-input-help-message' )
- *
  * @event change
  *        - {jQuery.Event}
  *
@@ -76,8 +73,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		},
 		value: null,
 		getAllowedSites: function() { return []; },
-		entityIdPlainFormatter: null,
-		helpMessage: mw.msg( 'wikibase-sitelinks-input-help-message' )
+		entityIdPlainFormatter: null
 	},
 
 	/**
@@ -94,7 +90,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !this.options.entityIdPlainFormatter || !this.options.helpMessage ) {
+		if ( !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 

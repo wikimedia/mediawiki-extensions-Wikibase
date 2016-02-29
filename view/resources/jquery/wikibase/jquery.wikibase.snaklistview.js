@@ -23,9 +23,6 @@
  * @param {boolean} [singleProperty=true]
  *        If `true`, it is assumed that the widget is filled with `Snak`s featuring a single common
  *        property.
- * @param {string} [optionshelpMessage=mw.msg( 'wikibase-claimview-snak-new-tooltip' )]
- *        End-user message explaining how to use the `snaklistview` widget. The message is most
- *        likely to be used inside the tooltip of the toolbar corresponding to the `snaklistview`.
  */
 /**
  * @event afterstartediting
@@ -66,8 +63,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		},
 		value: null,
 		singleProperty: false,
-		listItemAdapter: null,
-		helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' )
+		listItemAdapter: null
 	},
 
 	/**

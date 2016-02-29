@@ -201,11 +201,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 				newItemOptionsFn: function( value ) {
 					return {
 						value: value,
-						entityChangersFactory: self.options.entityChangersFactory,
-						helpMessage: mw.msg(
-							'wikibase-entitytermsforlanguageview-input-help-message',
-							wb.getLanguageNameByCode( value.language )
-						)
+						entityChangersFactory: self.options.entityChangersFactory
 					};
 				}
 			} ),
