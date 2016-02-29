@@ -7,8 +7,6 @@ namespace Wikibase\Lib;
  * allow them to bubble up to presentation layer and contain message
  * that can be displayed to the user in their language.
  *
- * Ideally should be moved to core!
- *
  * @since 0.5
  *
  * @licence GNU GPL v2+
