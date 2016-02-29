@@ -11,6 +11,7 @@
 * Removed `HashArray::indicesAreUpToDate`
 * Removed `HashArray::removeDuplicates`
 * Removed `$acceptDuplicates` feature from `HashArray`
+* Added `clear` to `TermList`, `AliasGroupList` and `StatementList`
 
 ## Version 6.3.1 (2016-11-30)
 
