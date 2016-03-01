@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gts-tg"
+		]
+	},
+	"wikibase-edit": "μεταγράφειν",
+	"wikibase-add": "προστιθέναι",
+	"wikibase-label-empty": "Ἐτικέτα μη ὀριζμένη",
+	"wikibase-description-empty": "Περιγραφή μη ὀριζμένη",
+	"wikibase-sitelinks-special": "Ἔτεροι ἰστότοποι",
+	"wikibase-aliases-empty": "Οὐδέν ψευδώνυμα ἀνευρέθησαν",
+	"wikibase-statementview-rank-normal": "Συνήθης κατάταξη",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|μνεία|μνείαι}}"
+}

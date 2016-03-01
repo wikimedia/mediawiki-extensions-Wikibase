@@ -12,7 +12,8 @@
 			"زكريا",
 			"محمد أحمد عبد الفتاح",
 			"Hiba Alshawi",
-			"Hosseinblue"
+			"Hosseinblue",
+			"Maroen1990"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
@@ -32,6 +33,7 @@
 	"wikibase-dataitem": "عنصر بيانات",
 	"wikibase-editlinks": "عدل الوصلات",
 	"wikibase-editlinkstitle": "تحرير الروابط ما بين اللغات",
+	"wikibase-addlinkstitle": "إضافة روابط بين اللغات",
 	"wikibase-linkitem-addlinks": "أضف وصلات",
 	"wikibase-linkitem-alreadylinked": "هذه الصفحة التي تريد ربطها مرتبطة بالفعل ب[$1 مادة] في المستودع المركزي للبيانات والتي يرتبط ب$2 على هذا الموقع. بإمكان المواد إلحاق صفحة واحدة فقط لكل موقع. الرجاء اختيار صفحة مختلفة للربط.",
 	"wikibase-linkitem-close": "أغلق مربع الحوار وأعد تحميل الصفحة",
@@ -56,6 +58,8 @@
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
 	"wikibase-replicationnote": "قد يلزم وقت لتظهر التعديلات في جميع الويكيات.",
 	"wikibase-watchlist-show-changes-pref": "إظهار تعديلات {{WBREPONAME}} في قائمة مراقبتك",
+	"wikibase-error-deserialize-error": "فشل إلغاء تسلسل البيانات.",
+	"wikibase-error-serialize-error": "فشل في تسلسل البيانات.",
 	"wikibase-error-invalid-entity-id": "المعرِّف الذي أدخلته يجهله النظام. يرجى إدخال معرِّف كائن صالح.",
 	"unconnectedpages": "صفحات غير متصلة بعناصر",
 	"unconnectedpages-summary": "هذه الصفحة تعرض الصفحات التي ليست مرتبطة بعناصر بيانات (في النطاقات التي تدعم العناصر المرتبطة). القائمة مرتبة حسب رقم الصفحة تنازليا، بحيث أن الصفحات الأجدد تعرض أولا.",
@@ -65,6 +69,7 @@
 	"pageswithbadges-summary": "هذه الصفحة تعرض الصفحات بباجات (كمثال مقالة جيدة أو مقالة مختارة). القائمة مرتبة حسب رقم الصفحة تنازليا، بحيث أن الصفحات الأجدد تعرض أولا.",
 	"wikibase-pageswithbadges-legend": "قائمة الصفحات مع باج معين",
 	"wikibase-pageswithbadges-badge": "درجه:",
+	"wikibase-pageswithbadges-submit": "عرض الصفحات",
 	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
 	"wikibase-otherprojects": "مشاريع أخرى",

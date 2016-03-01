@@ -10,10 +10,11 @@
 			"سامي الرحيلي",
 			"Abanima",
 			"Fitoschido",
-			"Macofe"
+			"Macofe",
+			"Maroen1990"
 		]
 	},
-	"specialpages-group-wikibase": "مستودع قاعدة ويكي",
+	"specialpages-group-wikibase": "بيانات ويكي",
 	"wikibase-deletedentity-item": "عنصر محذوف",
 	"wikibase-deletedentity-property": "خاصية محذوفة",
 	"wikibase-deletedentity-query": "طلب محذوف",
@@ -27,7 +28,7 @@
 	"wikibase-error-autocomplete-connection": "لم يكن من الممكن البحث في واجهة برمجة التطبيقات الخاصة بالموقع. الرجاء المحاولة مرة أخرى لاحقاَ.",
 	"wikibase-error-autocomplete-response": "إجابة الخادوم: $1",
 	"wikibase-error-ui-no-external-page": "لم يمكن إيجاد المقالة المحددة على الموقع الموافق.",
-	"wikibase-error-ui-edit-conflict": "حدث تضارب تحرير. رجاء إعادة تحميل الصفحة والمحاولة مرة أخرى.",
+	"wikibase-error-ui-edit-conflict": "هناك نزاع في تحرير. الرجاء حفظ التغييرات في حاسوبك، إعادة تحميل هذه الصفحة وحفظها مرة أخرى.",
 	"wikibase-quantitydetails-amount": "الكمية",
 	"wikibase-quantitydetails-upperbound": "الحد الأعلى",
 	"wikibase-quantitydetails-lowerbound": "الحد الأدنى",
@@ -69,6 +70,7 @@
 	"wikibase-validator-no-such-property": "الخاصية $1 غير موجودة",
 	"wikibase-validator-bad-value": "قيمة البيانات فاسدة: $1",
 	"wikibase-validator-bad-value-type": "نمط القيمة $1 غير مقبول، المتوقع: $2",
+	"wikibase-validator-bad-data-type": "نوع بيانات خاطئ: $1",
 	"wikibase-validator-bad-url": "مسار سيء التشكيل: $1",
 	"wikibase-validator-unknown-unit": "وحدة غير معروفة: $1",
 	"wikibase-validator-no-validators": "محظور",
@@ -92,6 +94,7 @@
 	"wikibase-entity-summary-wbsetsitelink-add": "أضيفت وصلة إلى [$2]",
 	"wikibase-entity-summary-wbsetsitelink-set": "تغيير الوصلة إلى [$2]",
 	"wikibase-entity-summary-wbsetsitelink-remove": "إزالة وصلة إلى [$2]",
+	"wikibase-entity-summary-wblinktitles-connect": "إضافة وصلة لغة لربط الصفحات",
 	"wikibase-entity-summary-wbcreateclaim-value": "إنشاء {{PLURAL:$1|ادعاء|ادعائين|$1 ادعاءات|$1 ادعاء}}",
 	"wikibase-entity-summary-wbcreateclaim-novalue": "إنشاء {{PLURAL:$1|ادعاء|ادعائين|$1 ادعاءات|$1 ادعاء}}",
 	"wikibase-entity-summary-wbcreateclaim-somevalue": "إنشاء {{PLURAL:$1|ادعاء|ادعائين|$1 ادعاءات|$1 ادعاء}}",
