@@ -33,6 +33,24 @@
       "revId": "231bb4ba6587f3e3ed5bac9154f6d6d6d03062b7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_71a3b6fd",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-03-01T19:44:48Z",
+      "side": 1,
+      "message": "I consider the name ClaimHtmlGenerator to be legacy in every regard :) How about just Wikibase\\View\\Factory?",
+      "parentUuid": "2ea41786_06432a16",
+      "revId": "231bb4ba6587f3e3ed5bac9154f6d6d6d03062b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
