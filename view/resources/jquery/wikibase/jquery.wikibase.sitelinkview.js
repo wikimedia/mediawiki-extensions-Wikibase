@@ -352,6 +352,10 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * @return {boolean}
 	 */
 	isInitialValue: function() {
+		if ( !this._isInEditMode ) {
+			return true;
+		}
+
 		var currentValue = this.value();
 
 		if ( !this.options.value || !currentValue ) {
