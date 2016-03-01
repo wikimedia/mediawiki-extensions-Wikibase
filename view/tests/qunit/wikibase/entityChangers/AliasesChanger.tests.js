@@ -143,8 +143,9 @@
 			assert.ok( true, 'setAliases succeeded' );
 
 			assert.ok(
+				item.getFingerprint().getAliasesFor( 'language' ) === null ||
 				item.getFingerprint().getAliasesFor( 'language' ).isEmpty(),
-				'Verified aliases being empty.'
+				'Verified aliases being empty or removed.'
 			);
 
 			sinon.assert.calledWith(
