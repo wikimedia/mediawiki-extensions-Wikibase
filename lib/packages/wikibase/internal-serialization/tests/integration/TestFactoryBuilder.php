@@ -62,7 +62,7 @@ class TestFactoryBuilder {
 			'number' => 'DataValues\NumberValue',
 			'string' => 'DataValues\StringValue',
 			'unknown' => 'DataValues\UnknownValue',
-			'globecoordinate' => 'DataValues\GlobeCoordinateValue',
+			'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
 			'monolingualtext' => 'DataValues\MonolingualTextValue',
 			'multilingualtext' => 'DataValues\MultilingualTextValue',
 			'quantity' => 'DataValues\QuantityValue',

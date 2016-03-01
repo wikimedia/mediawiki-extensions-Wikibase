@@ -19,6 +19,7 @@ use Wikibase\InternalSerialization\Deserializers\StatementDeserializer;
  * legacy internal format and in the new one.
  *
  * @since 1.0
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

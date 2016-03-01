@@ -39,7 +39,7 @@ class LegacyPropertyDeserializer implements Deserializer {
 	 */
 	public function deserialize( $serialization ) {
 		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'Item serialization should be an array' );
+			throw new DeserializationException( 'Property serialization should be an array' );
 		}
 
 		return new Property(
