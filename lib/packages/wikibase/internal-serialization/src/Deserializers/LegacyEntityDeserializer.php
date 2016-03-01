@@ -2,7 +2,6 @@
 
 namespace Wikibase\InternalSerialization\Deserializers;
 
-use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -14,16 +13,19 @@ use Wikibase\DataModel\Entity\EntityDocument;
 class LegacyEntityDeserializer implements DispatchableDeserializer {
 
 	/**
-	 * @var Deserializer
+	 * @var DispatchableDeserializer
 	 */
 	private $itemDeserializer;
 
 	/**
-	 * @var Deserializer
+	 * @var DispatchableDeserializer
 	 */
 	private $propertyDeserializer;
 
-	public function __construct( Deserializer $itemDeserializer, Deserializer $propertyDeserializer ) {
+	public function __construct(
+		DispatchableDeserializer $itemDeserializer,
+		DispatchableDeserializer $propertyDeserializer
+	) {
 		$this->itemDeserializer = $itemDeserializer;
 		$this->propertyDeserializer = $propertyDeserializer;
 	}
@@ -39,15 +41,11 @@ class LegacyEntityDeserializer implements DispatchableDeserializer {
 			throw new DeserializationException( 'Entity serialization must be an array' );
 		}
 
-		if ( $this->isPropertySerialization( $serialization ) ) {
+		if ( $this->propertyDeserializer->isDeserializerFor( $serialization ) ) {
 			return $this->propertyDeserializer->deserialize( $serialization );
 		}
 
 		return $this->itemDeserializer->deserialize( $serialization );
-	}
-
-	private function isPropertySerialization( $serialization ) {
-		return array_key_exists( 'datatype', $serialization );
 	}
 
 	/**
@@ -60,9 +58,8 @@ class LegacyEntityDeserializer implements DispatchableDeserializer {
 	 * @return bool
 	 */
 	public function isDeserializerFor( $serialization ) {
-		return is_array( $serialization )
-			// This element is called 'id' in the current serialization.
-			&& array_key_exists( 'entity', $serialization );
+		return $this->itemDeserializer->isDeserializerFor( $serialization )
+			|| $this->propertyDeserializer->isDeserializerFor( $serialization );
 	}
 
 }

@@ -88,15 +88,14 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 		return $currentDeserializer;
 	}
 
-	public function testLegacySerializationWithoutId_legacyIsDetected() {
+	public function testLegacySerializationWithoutId_exceptionIsThrown() {
 		$deserializer = new EntityDeserializer(
 			$this->getStubLegacyDeserializer(),
 			$this->getThrowingDeserializer()
 		);
 
-		$returnValue = $deserializer->deserialize( $this->getLegacyItemSerializationWithoutId() );
-
-		$this->assertEquals( 'legacy', $returnValue );
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$deserializer->deserialize( $this->getLegacyItemSerializationWithoutId() );
 	}
 
 	private function getLegacyItemSerializationWithoutId() {
@@ -105,15 +104,14 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 		) );
 	}
 
-	public function testCurrentSerializationWithoutId_currentIsDetected() {
+	public function testCurrentSerializationWithoutId_exceptionIsThrown() {
 		$deserializer = new EntityDeserializer(
 			$this->getThrowingDeserializer(),
 			$this->getStubCurrentDeserializer()
 		);
 
-		$returnValue = $deserializer->deserialize( $this->getCurrentItemSerializationWithoutId() );
-
-		$this->assertEquals( 'current', $returnValue );
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$deserializer->deserialize( $this->getCurrentItemSerializationWithoutId() );
 	}
 
 	private function getCurrentItemSerializationWithoutId() {

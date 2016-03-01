@@ -3,6 +3,7 @@
 namespace Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\InvalidAttributeException;
 use Wikibase\DataModel\Entity\Item;
@@ -17,7 +18,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class LegacyItemDeserializer implements Deserializer {
+class LegacyItemDeserializer implements DispatchableDeserializer {
 
 	/**
 	 * @var Deserializer
@@ -168,6 +169,22 @@ class LegacyItemDeserializer implements Deserializer {
 		}
 
 		return $serialization[$key];
+	}
+
+	/**
+	 * @see DispatchableDeserializer::isDeserializerFor
+	 *
+	 * @since 2.2
+	 *
+	 * @param mixed $serialization
+	 *
+	 * @return bool
+	 */
+	public function isDeserializerFor( $serialization ) {
+		return is_array( $serialization )
+			// This element is called 'id' in the current serialization.
+			&& array_key_exists( 'entity', $serialization )
+			&& !array_key_exists( 'datatype', $serialization );
 	}
 
 }

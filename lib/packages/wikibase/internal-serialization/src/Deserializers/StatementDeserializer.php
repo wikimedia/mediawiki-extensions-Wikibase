@@ -2,7 +2,6 @@
 
 namespace Wikibase\InternalSerialization\Deserializers;
 
-use Deserializers\Deserializer;
 use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Statement\Statement;
@@ -12,7 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class StatementDeserializer implements Deserializer {
+class StatementDeserializer implements DispatchableDeserializer {
 
 	/**
 	 * @var DispatchableDeserializer
@@ -39,33 +38,29 @@ class StatementDeserializer implements Deserializer {
 	 * @throws DeserializationException
 	 */
 	public function deserialize( $serialization ) {
-		if ( !is_array( $serialization ) ) {
-			throw new DeserializationException( 'Claim serialization must be an array' );
-		}
-
 		if ( $this->currentDeserializer->isDeserializerFor( $serialization ) ) {
 			return $this->currentDeserializer->deserialize( $serialization );
 		} elseif ( $this->legacyDeserializer->isDeserializerFor( $serialization ) ) {
 			return $this->legacyDeserializer->deserialize( $serialization );
-		} else {
-			return $this->fromUnknownSerialization( $serialization );
 		}
+
+		throw new DeserializationException(
+			'The provided claim serialization is neither legacy nor current'
+		);
 	}
 
-	private function fromUnknownSerialization( array $serialization ) {
-		try {
-			return $this->currentDeserializer->deserialize( $serialization );
-		} catch ( DeserializationException $currentEx ) {
-			try {
-				return $this->legacyDeserializer->deserialize( $serialization );
-			} catch ( DeserializationException $legacyEx ) {
-				throw new DeserializationException(
-					'The provided claim serialization is neither legacy ('
-					. $legacyEx->getMessage() . ') nor current ('
-					. $currentEx->getMessage() . ')'
-				);
-			}
-		}
+	/**
+	 * @see DispatchableDeserializer::isDeserializerFor
+	 *
+	 * @since 2.2
+	 *
+	 * @param mixed $serialization
+	 *
+	 * @return bool
+	 */
+	public function isDeserializerFor( $serialization ) {
+		return $this->currentDeserializer->isDeserializerFor( $serialization )
+			|| $this->legacyDeserializer->isDeserializerFor( $serialization );
 	}
 
 }
