@@ -63,7 +63,7 @@ class AutoCommentFormatter {
 		$found = false;
 		foreach ( $this->messagePrefixes as $prefix ) {
 			$key = "$prefix-summary-$name";
-			$msg = wfMessage( $key );
+			$msg = wfMessage( $key )->inLanguage( $this->language );
 
 			if ( $msg->exists() && !$msg->isDisabled() ) {
 				$found = $msg;

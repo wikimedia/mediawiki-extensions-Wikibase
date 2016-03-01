@@ -30,7 +30,6 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 		$this->language = Language::factory( 'qqx' );
-		$this->setMwGlobals( 'wgLang', $this->language );
 	}
 
 	public function provideTestAutoComment() {
