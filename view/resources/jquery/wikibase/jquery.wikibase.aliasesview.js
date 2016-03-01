@@ -214,12 +214,11 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 */
 	value: function( value ) {
 		if ( value !== undefined ) {
-			this.option( 'value', value );
-			return;
+			return this.option( 'value', value );
 		}
 
 		if ( !this.isInEditMode() ) {
-			return this.option( 'value' );
+			return this.options.value;
 		}
 
 		var tagadata = this.$list.data( 'tagadata' );

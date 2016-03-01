@@ -298,12 +298,11 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 */
 	value: function( value ) {
 		if ( value !== undefined ) {
-			this.option( 'value', value );
-			return;
+			return this.option( 'value', value );
 		}
 
 		if ( !this._isInEditMode ) {
-			return this.option( 'value' );
+			return this.options.value;
 		}
 
 		return new wb.datamodel.Term(

@@ -145,21 +145,21 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 	 * @return {wikibase.datamodel.StatementGroup|null|undefined}
 	 */
 	value: function( statementGroupView ) {
-		if ( statementGroupView === undefined ) {
-			var statementList = this.statementlistview.value();
-			if ( !statementList.length ) {
-				return null;
-			}
-			// Use the first statement's main snak property id as the statementgroupview may have
-			// been initialized without a value (as there is no initial value, the id cannot be
-			// retrieved from this.options.value).
-			return new wb.datamodel.StatementGroup(
-				statementList.toArray()[0].getClaim().getMainSnak().getPropertyId(),
-				statementList
-			);
+		if ( statementGroupView !== undefined ) {
+			return this.option( 'value', statementGroupView );
 		}
 
-		this.option( 'value', statementGroupView );
+		var statementList = this.statementlistview.value();
+		if ( !statementList.length ) {
+			return null;
+		}
+		// Use the first statement's main snak property id as the statementgroupview may have
+		// been initialized without a value (as there is no initial value, the id cannot be
+		// retrieved from this.options.value).
+		return new wb.datamodel.StatementGroup(
+			statementList.toArray()[0].getClaim().getMainSnak().getPropertyId(),
+			statementList
+		);
 	},
 
 	/**

@@ -442,7 +442,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	value: function( siteLink ) {
 		if ( siteLink === undefined ) {
 			if ( !this._isInEditMode ) {
-				return this.option( 'value' );
+				return this.options.value;
 			}
 
 			var siteselector = this.element.find( ':wikibase-siteselector' ).data( 'siteselector' ),
