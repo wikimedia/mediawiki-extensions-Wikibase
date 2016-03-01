@@ -282,10 +282,11 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @return {Object|*}
 	 */
 	value: function( value ) {
-		if ( value === undefined ) {
-			return this.option( 'value' );
+		if ( value !== undefined ) {
+			return this.option( 'value', value );
 		}
-		return this.option( 'value', value );
+
+		return this.options.value;
 	},
 
 	/**

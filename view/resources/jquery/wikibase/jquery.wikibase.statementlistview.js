@@ -153,22 +153,22 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @return {wikibase.datamodel.StatementList|undefined}
 	 */
 	value: function( statementList ) {
-		if ( statementList === undefined ) {
-			var statements = [],
-				lia = this._listview.listItemAdapter();
-
-			this._listview.items().each( function() {
-				var statementview = lia.liInstance( $( this ) ),
-					statement = statementview.value();
-				if ( statement ) {
-					statements.push( statement );
-				}
-			} );
-
-			return new wb.datamodel.StatementList( statements );
+		if ( statementList !== undefined ) {
+			return this.option( 'value', statementList );
 		}
 
-		this.option( 'value', statementList );
+		var statements = [],
+			lia = this._listview.listItemAdapter();
+
+		this._listview.items().each( function() {
+			var statementview = lia.liInstance( $( this ) ),
+				statement = statementview.value();
+			if ( statement ) {
+				statements.push( statement );
+			}
+		} );
+
+		return new wb.datamodel.StatementList( statements );
 	},
 
 	/**
