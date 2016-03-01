@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_e6c84eac",
+        "filename": "repo/includes/ParserOutput/EntityViewFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-01T18:15:21Z",
+      "side": 1,
+      "message": "DispatchingEntityViewFactory?",
+      "revId": "231bb4ba6587f3e3ed5bac9154f6d6d6d03062b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_06432a16",
+        "filename": "view/src/ViewFactory.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-01T18:15:21Z",
+      "side": 1,
+      "message": "DataModelViewFactory? UiViewFactory? Does the name even have to have anything to do with \"View\"? We also have things like ClaimHtmlGenerator. How does that fit in?",
+      "revId": "231bb4ba6587f3e3ed5bac9154f6d6d6d03062b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
