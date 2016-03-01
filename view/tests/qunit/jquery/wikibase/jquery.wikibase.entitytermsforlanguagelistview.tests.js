@@ -24,10 +24,10 @@ function createFingerprint() {
 			nl: new wb.datamodel.Term( 'nl', 'nl-description' )
 		} ),
 		new wb.datamodel.MultiTermMap( {
-			de: new wb.datamodel.MultiTerm( 'de', [] ),
-			en: new wb.datamodel.MultiTerm( 'en', [] ),
-			it: new wb.datamodel.MultiTerm( 'it', [] ),
-			fa: new wb.datamodel.MultiTerm( 'fa', [] )
+			de: new wb.datamodel.MultiTerm( 'de', [ 'de-alias' ] ),
+			en: new wb.datamodel.MultiTerm( 'en', [ 'en-alias' ] ),
+			it: new wb.datamodel.MultiTerm( 'it', [ 'it-alias' ] ),
+			fa: new wb.datamodel.MultiTerm( 'fa', [ 'fa-alias' ] )
 		} )
 	);
 }

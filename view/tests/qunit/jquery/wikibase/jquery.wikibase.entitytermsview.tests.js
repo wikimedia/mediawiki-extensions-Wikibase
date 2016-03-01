@@ -21,9 +21,9 @@ function createFingerprint() {
 			fa: new wb.datamodel.Term( 'fa', 'fa-description' )
 		} ),
 		new wb.datamodel.MultiTermMap( {
-			de: new wb.datamodel.MultiTerm( 'de', [] ),
-			en: new wb.datamodel.MultiTerm( 'en', [] ),
-			fa: new wb.datamodel.MultiTerm( 'fa', [] )
+			de: new wb.datamodel.MultiTerm( 'de', [ 'de-alias' ] ),
+			en: new wb.datamodel.MultiTerm( 'en', [ 'en-alias' ] ),
+			fa: new wb.datamodel.MultiTerm( 'fa', [ 'fa-alias' ] )
 		} )
 	);
 }
