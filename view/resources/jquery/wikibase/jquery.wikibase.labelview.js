@@ -206,6 +206,10 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 * @inheritdoc
 	 */
 	isInitialValue: function() {
+		if ( !this.isInEditMode() ) {
+			return true;
+		}
+
 		return this.value().equals( this.options.value );
 	},
 

@@ -251,6 +251,10 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 * @return {boolean}
 	 */
 	isInitialValue: function() {
+		if ( !this._isInEditMode ) {
+			return true;
+		}
+
 		return this.value().equals( this.options.value );
 	},
 
