@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_46fb62de",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-01T18:09:07Z",
+      "side": 1,
+      "message": "Intended?",
+      "revId": "4e507de2cfcae1ddc41a557e08dbf3460b9b677a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_e6e12e2a",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-01T18:09:07Z",
+      "side": 1,
+      "message": "I like alphabetical order. :-)",
+      "revId": "4e507de2cfcae1ddc41a557e08dbf3460b9b677a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
