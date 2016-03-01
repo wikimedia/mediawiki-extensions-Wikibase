@@ -107,7 +107,7 @@ QUnit.test( 'Create and destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
+QUnit.test( 'startEditing() & stopEditing()', 3, function( assert ) {
 	var $sitelinkgroupview = createSitelinkgroupview( {
 			value: {
 				group: 'group1',
@@ -203,18 +203,6 @@ QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
 
 	addToQueue( $queue, function() {
 		sitelinkgroupview.startEditing();
-	} );
-
-	addToQueue( $queue, function() {
-		// Mock adding a new item:
-		var sitelinklistview = sitelinkgroupview.$sitelinklistview.data( 'sitelinklistview' ),
-			listview = sitelinklistview.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
-			$sitelinkview = listview.addItem(
-				new wb.datamodel.SiteLink( 'aawiki', 'aawiki-page' )
-			);
-		lia.liInstance( $sitelinkview ).startEditing();
-		sitelinkgroupview.stopEditing();
 	} );
 
 	$queue.dequeue( 'tests' );
