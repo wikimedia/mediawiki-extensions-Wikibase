@@ -18,6 +18,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacyStatementDeserializer;
  * Factory for constructing deserializers that implement handling for the legacy format.
  *
  * @since 1.0
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
