@@ -1198,7 +1198,7 @@ class WikibaseRepo {
 	/**
 	 * @return InternalDeserializerFactory
 	 */
-	protected function getInternalDeserializerFactory() {
+	public function getInternalDeserializerFactory() {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
@@ -1250,7 +1250,7 @@ class WikibaseRepo {
 	/**
 	 * @return InternalSerializerFactory
 	 */
-	protected function getInternalSerializerFactory() {
+	public function getInternalSerializerFactory() {
 		return new InternalSerializerFactory( new DataValueSerializer() );
 	}
 
