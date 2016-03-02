@@ -28,7 +28,9 @@ $.widget( 'wikibase.labelview', PARENT, {
 		templateParams: [
 			'', // additional class
 			'', // text
-			'' // toolbar
+			'', // toolbar
+			'auto', // dir
+			'' // lang
 		],
 		templateShortCuts: {
 			$text: '.wikibase-labelview-text'

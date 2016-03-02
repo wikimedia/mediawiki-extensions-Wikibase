@@ -231,7 +231,9 @@ class EntityTermsView {
 					? $labels->getByLanguage( $languageCode )->getText()
 					: $this->msg( 'wikibase-label-empty' )->text()
 				),
-				''
+				'',
+				'auto', // FIXME get that somewhere
+				$hasLabel ? $languageCode : '' // FIXME Should be UI language if !$hasLabel
 			),
 			$this->templateFactory->render( 'wikibase-descriptionview',
 				$hasDescription ? '' : 'wb-empty',
@@ -240,7 +242,8 @@ class EntityTermsView {
 					: $this->msg( 'wikibase-description-empty' )->text()
 				),
 				'',
-				''
+				'auto', // FIXME get that somewhere
+				$hasDescription ? $languageCode : '' // FIXME Should be UI language if !$hasLabel
 			),
 			$this->getAliasesView( $fingerprint->getAliasGroups(), $languageCode ),
 			''
@@ -258,7 +261,9 @@ class EntityTermsView {
 			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'wb-empty',
 				'',
-				''
+				'',
+				'auto', // FIXME get that somewhere
+				'' // FIXME Should be UI language if !$hasLabel
 			);
 		} else {
 			$aliasesHtml = '';
@@ -273,7 +278,9 @@ class EntityTermsView {
 			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'',
 				$aliasesHtml,
-				''
+				'',
+				'auto', // FIXME get that somewhere
+				$languageCode // FIXME Should be UI language if !$hasLabel
 			);
 		}
 	}
