@@ -3,11 +3,14 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use InvalidArgumentException;
+use LogicException;
+use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityView;
 use Wikibase\View\ItemView;
 use Wikibase\View\PropertyView;
 use Wikibase\View\ViewFactory;
@@ -23,11 +26,18 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @expectedException InvalidArgumentException
 	 */
+	public function testInvalidConstructorArgument() {
+		new DispatchingEntityViewFactory(
+			array( 'invalid' )
+		);
+	}
+
+	/**
+	 * @expectedException OutOfBoundsException
+	 */
 	public function testUnknownEntityType() {
 		$factory = new DispatchingEntityViewFactory(
-			$this->getMockBuilder( ViewFactory::class )
-				->disableOriginalConstructor()
-				->getMock()
+			array()
 		);
 
 		$factory->newEntityView(
@@ -39,74 +49,62 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewItemView() {
-		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$languageFallbackChain = new LanguageFallbackChain( array() );
-		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
-		$itemView = $this->getMockBuilder( ItemView::class )
-			->disableOriginalConstructor()->getMockForAbstractClass();
-
-		$viewFactory = $this->getMockBuilder( ViewFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$viewFactory->expects( $this->once() )
-			->method( 'newItemView' )
-			->with(
-				$this->equalTo( 'en' ),
-				$this->identicalTo( $labelDescriptionLookup ),
-				$this->identicalTo( $languageFallbackChain ),
-				$this->identicalTo( $editSectionGenerator )
+	/**
+	 * @expectedException LogicException
+	 */
+	public function testNoEntityViewReturned() {
+		$factory = new DispatchingEntityViewFactory(
+			array(
+				'foo' => function() {
+					return null;
+				}
 			)
-			->will( $this->returnValue( $itemView ) );
-
-		$factory = new DispatchingEntityViewFactory( $viewFactory );
-
-		$actual = $factory->newEntityView(
-			'item',
-			'en',
-			$labelDescriptionLookup,
-			$languageFallbackChain,
-			$editSectionGenerator,
-			$itemView
 		);
 
-		$this->assertSame( $itemView, $actual );
+		$factory->newEntityView(
+			'foo',
+			'en',
+			$this->getMock( LabelDescriptionLookup::class ),
+			new LanguageFallbackChain( array() ),
+			$this->getMock( EditSectionGenerator::class )
+		);
 	}
 
-	public function testNewPropertyView() {
+	public function testNewEntityView() {
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 		$languageFallbackChain = new LanguageFallbackChain( array() );
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
-		$propertyView = $this->getMockBuilder( PropertyView::class )
-			->disableOriginalConstructor()->getMockForAbstractClass();
-
-		$viewFactory = $this->getMockBuilder( ViewFactory::class )
+		$entityView = $this->getMockBuilder( EntityView::class )
 			->disableOriginalConstructor()
-			->getMock();
+			->getMockForAbstractClass();
 
-		$viewFactory->expects( $this->once() )
-			->method( 'newPropertyView' )
-			->with(
-				$this->equalTo( 'en' ),
-				$this->identicalTo( $labelDescriptionLookup ),
-				$this->identicalTo( $languageFallbackChain ),
-				$this->identicalTo( $editSectionGenerator )
+		$factory = new DispatchingEntityViewFactory(
+			array(
+				'foo' => function(
+					$languageCodeParam,
+					LabelDescriptionLookup $labelDescriptionLookupParam,
+					LanguageFallbackChain $languageFallbackChainParam,
+					EditSectionGenerator $editSectionGeneratorParam
+				) use ( $labelDescriptionLookup, $languageFallbackChain, $editSectionGenerator, $entityView ) {
+					$this->assertEquals( 'en', $languageCodeParam );
+					$this->assertSame( $labelDescriptionLookup, $labelDescriptionLookupParam );
+					$this->assertSame( $languageFallbackChain, $languageFallbackChainParam );
+					$this->assertSame( $editSectionGenerator, $editSectionGeneratorParam );
+
+					return $entityView;
+				}
 			)
-			->will( $this->returnValue( $propertyView ) );
+		);
 
-		$factory = new DispatchingEntityViewFactory( $viewFactory );
-
-		$actual = $factory->newEntityView(
-			'property',
+		$newEntityView = $factory->newEntityView(
+			'foo',
 			'en',
 			$labelDescriptionLookup,
 			$languageFallbackChain,
-			$editSectionGenerator,
-			$propertyView
+			$editSectionGenerator
 		);
 
-		$this->assertSame( $propertyView, $actual );
+		$this->assertSame( $entityView, $newEntityView );
 	}
 
 }
