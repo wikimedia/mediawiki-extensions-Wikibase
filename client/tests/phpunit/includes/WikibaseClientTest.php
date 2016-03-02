@@ -221,7 +221,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetDeserializerFactoryReturnType() {
-		$returnValue = $this->getWikibaseClient()->getDeserializerFactory();
+		$returnValue = $this->getWikibaseClient()->getCurrentDeserializerFactory();
 		$this->assertInstanceOf( 'Wikibase\DataModel\DeserializerFactory', $returnValue );
 	}
 

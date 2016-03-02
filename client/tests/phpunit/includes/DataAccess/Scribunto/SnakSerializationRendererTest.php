@@ -61,8 +61,8 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 				}
 			} ) );
 
-		$snakDeserializer = $wikibaseClient->getDeserializerFactory()->newSnakDeserializer();
-		$snaksDeserializer = $wikibaseClient->getDeserializerFactory()->newSnakListDeserializer();
+		$snakDeserializer = $wikibaseClient->getCurrentDeserializerFactory()->newSnakDeserializer();
+		$snaksDeserializer = $wikibaseClient->getCurrentDeserializerFactory()->newSnakListDeserializer();
 
 		return new SnakSerializationRenderer(
 			$snakFormatter,
