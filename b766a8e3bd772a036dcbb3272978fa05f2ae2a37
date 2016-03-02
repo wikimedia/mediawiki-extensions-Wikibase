@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_704ac760",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T20:40:47Z",
+      "side": 1,
+      "message": "meh. Constructing with an empty array isn\u0027t common or desirable. Why make it the default?",
+      "revId": "b766a8e3bd772a036dcbb3272978fa05f2ae2a37",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
