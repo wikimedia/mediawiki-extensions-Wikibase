@@ -88,7 +88,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	}
 
 	public function assertSerializationEqualsEntity( EntityDocument $entity, $serialization ) {
-		$deserializer = WikibaseRepo::getDefaultInstance()->getEntityDeserializer();
+		$deserializer = WikibaseRepo::getDefaultInstance()->getExternalFormatEntityDeserializer();
 		$unserializedEntity = $deserializer->deserialize( $serialization );
 
 		$this->assertTrue(
