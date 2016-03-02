@@ -38,12 +38,6 @@ ENV['LANGUAGE_CODE'] = lenv.lookup(:language_code, default: -> { 'en' })
 require_all 'features/support/pages'
 #require_all 'features/support/utils'
 
-# TODO remove once everything is migrated
-Before('@repo_login') do
-  abort('WB_REPO_USERNAME environment variable is not defined! Please export a value for that variable before proceeding.') unless ENV['WB_REPO_USERNAME']
-  abort('WB_REPO_PASSWORD environment variable is not defined! Please export a value for that variable before proceeding.') unless ENV['WB_REPO_PASSWORD']
-end
-
 PageObject.default_element_wait = 10 # increased to avoid fails on saucelabs
 
 # TODO find out if this is still needed? is there a real fix wait on it happening instead of sleeping? move this into one of the gems if this is needed, as other can benefit
