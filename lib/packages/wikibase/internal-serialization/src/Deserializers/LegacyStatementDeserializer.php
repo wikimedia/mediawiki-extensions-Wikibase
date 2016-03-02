@@ -3,6 +3,7 @@
 namespace Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Deserializers\Exceptions\MissingAttributeException;
 use InvalidArgumentException;
@@ -16,7 +17,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class LegacyStatementDeserializer implements Deserializer {
+class LegacyStatementDeserializer implements DispatchableDeserializer {
 
 	/**
 	 * @var Deserializer
@@ -84,6 +85,21 @@ class LegacyStatementDeserializer implements Deserializer {
 		}
 
 		return new ReferenceList( $references );
+	}
+
+	/**
+	 * @see DispatchableDeserializer::isDeserializerFor
+	 *
+	 * @since 2.2
+	 *
+	 * @param mixed $serialization
+	 *
+	 * @return bool
+	 */
+	public function isDeserializerFor( $serialization ) {
+		return is_array( $serialization )
+			// This element is called 'mainsnak' in the current serialization.
+			&& array_key_exists( 'm', $serialization );
 	}
 
 }

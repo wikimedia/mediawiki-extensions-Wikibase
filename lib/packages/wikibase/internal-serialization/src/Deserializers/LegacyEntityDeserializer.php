@@ -3,6 +3,7 @@
 namespace Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\Exceptions\DeserializationException;
 use Wikibase\DataModel\Entity\EntityDocument;
 
@@ -10,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LegacyEntityDeserializer implements Deserializer {
+class LegacyEntityDeserializer implements DispatchableDeserializer {
 
 	/**
 	 * @var Deserializer
@@ -47,6 +48,21 @@ class LegacyEntityDeserializer implements Deserializer {
 
 	private function isPropertySerialization( $serialization ) {
 		return array_key_exists( 'datatype', $serialization );
+	}
+
+	/**
+	 * @see DispatchableDeserializer::isDeserializerFor
+	 *
+	 * @since 2.2
+	 *
+	 * @param mixed $serialization
+	 *
+	 * @return bool
+	 */
+	public function isDeserializerFor( $serialization ) {
+		return is_array( $serialization )
+			// This element is called 'id' in the current serialization.
+			&& array_key_exists( 'entity', $serialization );
 	}
 
 }

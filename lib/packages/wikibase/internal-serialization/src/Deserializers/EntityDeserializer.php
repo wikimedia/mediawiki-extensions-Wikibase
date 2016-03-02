@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 class EntityDeserializer implements Deserializer {
 
 	/**
-	 * @var Deserializer
+	 * @var DispatchableDeserializer
 	 */
 	private $legacyDeserializer;
 
@@ -25,7 +25,7 @@ class EntityDeserializer implements Deserializer {
 	private $currentDeserializer;
 
 	public function __construct(
-		Deserializer $legacyDeserializer,
+		DispatchableDeserializer $legacyDeserializer,
 		DispatchableDeserializer $currentDeserializer
 	) {
 		$this->legacyDeserializer = $legacyDeserializer;
@@ -45,16 +45,11 @@ class EntityDeserializer implements Deserializer {
 
 		if ( $this->currentDeserializer->isDeserializerFor( $serialization ) ) {
 			return $this->currentDeserializer->deserialize( $serialization );
-		} elseif ( $this->isLegacySerialization( $serialization ) ) {
+		} elseif ( $this->legacyDeserializer->isDeserializerFor( $serialization ) ) {
 			return $this->legacyDeserializer->deserialize( $serialization );
 		} else {
 			return $this->fromUnknownSerialization( $serialization );
 		}
-	}
-
-	private function isLegacySerialization( array $serialization ) {
-		// This element is called 'id' in the current serialization.
-		return array_key_exists( 'entity', $serialization );
 	}
 
 	private function fromUnknownSerialization( array $serialization ) {

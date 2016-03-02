@@ -27,7 +27,13 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getStubLegacyDeserializer() {
-		$legacyDeserializer = $this->getMock( 'Deserializers\Deserializer' );
+		$legacyDeserializer = $this->getMock( 'Deserializers\DispatchableDeserializer' );
+
+		$legacyDeserializer->expects( $this->any() )
+			->method( 'isDeserializerFor' )
+			->will( $this->returnCallback( function( $serialization ) {
+				return array_key_exists( 'entity', $serialization );
+			} ) );
 
 		$legacyDeserializer->expects( $this->any() )
 			->method( 'deserialize' )
