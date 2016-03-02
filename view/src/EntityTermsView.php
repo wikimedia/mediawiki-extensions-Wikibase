@@ -221,8 +221,6 @@ class EntityTermsView {
 		$languageName = $this->languageNameLookup->getName( $languageCode );
 		$labels = $labelsProvider->getLabels();
 		$descriptions = $descriptionsProvider->getDescriptions();
-		$hasLabel = $labels->hasTermForLanguage( $languageCode );
-		$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
 
 		return $this->templateFactory->render( 'wikibase-entitytermsforlanguageview',
 			'tr',
@@ -231,25 +229,34 @@ class EntityTermsView {
 			$this->templateFactory->render( 'wikibase-entitytermsforlanguageview-language',
 				htmlspecialchars( $languageName )
 			),
-			$this->templateFactory->render( 'wikibase-labelview',
-				$hasLabel ? '' : 'wb-empty',
-				htmlspecialchars( $hasLabel
-					? $labels->getByLanguage( $languageCode )->getText()
-					: $this->textProvider->get( 'wikibase-label-empty' )
-				),
-				''
+			$this->getTermView(
+				$labels,
+				'wikibase-labelview', // Template
+				'wikibase-label-empty', // Text key
+				$languageCode
 			),
-			$this->templateFactory->render( 'wikibase-descriptionview',
-				$hasDescription ? '' : 'wb-empty',
-				htmlspecialchars( $hasDescription
-					? $descriptions->getByLanguage( $languageCode )->getText()
-					: $this->textProvider->get( 'wikibase-description-empty' )
-				),
-				'',
-				''
+			$this->getTermView(
+				$descriptions,
+				'wikibase-descriptionview', // Template
+				'wikibase-description-empty', // Text key
+				$languageCode
 			),
 			$aliasesProvider ? $this->getAliasesView( $aliasesProvider->getAliasGroups(), $languageCode ) : '',
 			''
+		);
+	}
+
+	private function getTermView( TermList $termList, $templateName, $emptyTextKey, $languageCode ) {
+		$hasTerm = $termList->hasTermForLanguage( $languageCode );
+		return $this->templateFactory->render( $templateName,
+			$hasTerm ? '' : 'wb-empty',
+			htmlspecialchars( $hasTerm
+				? $termList->getByLanguage( $languageCode )->getText()
+				: $this->textProvider->get( $emptyTextKey )
+			),
+			'',
+			'auto', // FIXME DirLookup
+			$hasTerm ? $languageCode : $this->textProvider->getLanguageOf( $emptyTextKey )
 		);
 	}
 
@@ -264,6 +271,8 @@ class EntityTermsView {
 			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'wb-empty',
 				'',
+				'',
+				'auto', // FIXME DirLookup
 				''
 			);
 		} else {
@@ -279,7 +288,9 @@ class EntityTermsView {
 			return $this->templateFactory->render( 'wikibase-aliasesview',
 				'',
 				$aliasesHtml,
-				''
+				'',
+				'auto', // FIXME DirLookup
+				$languageCode
 			);
 		}
 	}
