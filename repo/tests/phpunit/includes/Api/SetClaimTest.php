@@ -296,7 +296,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	) {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$statementSerializer = $serializerFactory->newStatementSerializer();
-		$statementDeserializer = WikibaseRepo::getDefaultInstance()->getStatementDeserializer();
+		$statementDeserializer = WikibaseRepo::getDefaultInstance()->getExternalFormatStatementDeserializer();
 
 		if ( $statement instanceof Statement ) {
 			$serialized = $statementSerializer->serialize( $statement );
