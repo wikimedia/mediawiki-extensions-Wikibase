@@ -130,33 +130,25 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		}
 
 		// Scrape languages from static HTML:
-		var scrapedLanguages = [],
-			i;
-		$entitytermsforlanguageview.each( function() {
+		var mismatchAt = null,
+			userLanguages = this.options.userLanguages;
+		$entitytermsforlanguageview.each( function( i ) {
+			var lang = null;
 			$.each( $( this ).attr( 'class' ).split( ' ' ), function() {
 				if ( this.indexOf( 'wikibase-entitytermsforlanguageview-' ) === 0 ) {
-					scrapedLanguages.push(
-						this.split( 'wikibase-entitytermsforlanguageview-' )[1]
-					);
+					lang = this.split( 'wikibase-entitytermsforlanguageview-' )[1];
 					return false;
 				}
 			} );
+			if ( lang !== userLanguages[i] ) {
+				mismatchAt = i;
+				return false;
+			}
 		} );
 
-		var mismatch = scrapedLanguages.length !== this.options.userLanguages.length;
-
-		if ( !mismatch ) {
-			for ( i = 0; i < scrapedLanguages.length; i++ ) {
-				if ( scrapedLanguages[i] !== this.options.userLanguages[i] ) {
-					mismatch = true;
-					break;
-				}
-			}
-		}
-
-		if ( mismatch ) {
+		if ( mismatchAt !== null ) {
 			mw.log.warn( 'Existing entitytermsforlanguagelistview DOM does not match configured languages' );
-			$entitytermsforlanguageview.remove();
+			$entitytermsforlanguageview.slice( mismatchAt ).remove();
 		}
 	},
 
