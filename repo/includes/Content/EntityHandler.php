@@ -18,12 +18,11 @@ use Title;
 use User;
 use Wikibase\Content\DeferredDecodingEntityHolder;
 use Wikibase\Content\EntityHolder;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Store\EntityPerPage;
@@ -76,6 +75,11 @@ abstract class EntityHandler extends ContentHandler {
 	 * @var ValidatorErrorLocalizer
 	 */
 	private $errorLocalizer;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
 
 	/**
 	 * @var callable|null Callback to determine whether a serialized
