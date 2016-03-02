@@ -171,8 +171,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	 * @inheritdoc
 	 */
 	draw: function() {
-		var self = this,
-			deferred = $.Deferred();
+		var deferred = $.Deferred();
 
 		this.$entitytermsforlanguagelistview
 			= this.element.find( '.wikibase-entitytermsforlanguagelistview' );
@@ -193,17 +192,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			// TODO: Remove as soon as drop-down edit buttons are implemented. The language list may
 			// then be shown (without directly switching to edit mode) using the drop down menu.
 			this._createEntitytermsforlanguagelistviewToggler();
-		}
-
-		if ( !this._$notification ) {
-			this.notification()
-				.appendTo( this._getEntitytermsforlanguagelistview().$header )
-				.on( 'closeableupdate.' + this.widgetName, function() {
-					var sticknode = self.element.data( 'sticknode' );
-					if ( sticknode ) {
-						sticknode.refresh();
-					}
-				} );
 		}
 
 		return deferred.resolve().promise();
@@ -492,16 +480,26 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	 * @inheritdoc
 	 */
 	notification: function( $content, additionalCssClasses ) {
+		var self = this;
 		if ( !this._$notification ) {
 			var $closeable = $( '<div/>' ).closeable();
 
 			this._$notification = $( '<tr/>' ).append( $( '<td/>' ).append( $closeable ) );
 
 			this._$notification.data( 'closeable', $closeable.data( 'closeable' ) );
-		}
+			this._$notification
+				.appendTo( this._getEntitytermsforlanguagelistview().$header )
+				.on( 'closeableupdate.' + this.widgetName, function() {
+						var sticknode = self.element.data( 'sticknode' );
+						if ( sticknode ) {
+							sticknode.refresh();
+						}
+				} );
 
-		var $headerTr = this._getEntitytermsforlanguagelistview().$header.children( 'tr' ).first();
-		this._$notification.children( 'td' ).attr( 'colspan', $headerTr.children().length );
+			var $headerTr = this._getEntitytermsforlanguagelistview().$header.children( 'tr' ).first();
+			this._$notification.children( 'td' ).attr( 'colspan', $headerTr.children().length );
+
+		}
 
 		this._$notification.data( 'closeable' ).setContent( $content, additionalCssClasses );
 		return this._$notification;
