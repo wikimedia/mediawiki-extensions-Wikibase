@@ -16,6 +16,24 @@
       "revId": "a7e319236b59adde67293c691aa9e4d8c050323a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_ff9f6853",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2016-03-02T16:15:59Z",
+      "side": 1,
+      "message": "For some reason, lookup does not return environment variables that are empty string, as it is the case for item_namespace. It is probably a bug. Investigating.",
+      "parentUuid": "2ea41786_5c1a4a7f",
+      "revId": "a7e319236b59adde67293c691aa9e4d8c050323a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
