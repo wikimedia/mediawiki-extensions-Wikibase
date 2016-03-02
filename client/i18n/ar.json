@@ -67,11 +67,13 @@
 	"wikibase-unconnectedpages-submit": "عرض الصفحات",
 	"pageswithbadges": "الصفحات التي تحوي على باجات",
 	"pageswithbadges-summary": "هذه الصفحة تعرض الصفحات بباجات (كمثال مقالة جيدة أو مقالة مختارة). القائمة مرتبة حسب رقم الصفحة تنازليا، بحيث أن الصفحات الأجدد تعرض أولا.",
+	"wikibase-pageswithbadges-invalid-id": "$1 ليس معرف عنصر صالحاً.",
 	"wikibase-pageswithbadges-legend": "قائمة الصفحات مع باج معين",
 	"wikibase-pageswithbadges-badge": "درجه:",
 	"wikibase-pageswithbadges-submit": "عرض الصفحات",
 	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
+	"wikibase-property-render-error": "\nفشل عرض الملكية$1: $2",
 	"wikibase-otherprojects": "مشاريع أخرى",
 	"wikibase-otherprojects-beta-message": "المشاريع الأخرى في الشريط الجانبي",
 	"wikibase-otherprojects-beta-description": "يضيف قسم \"{{int:wikibase-otherprojects}}\" إلى الشريط الجانبي لعرض وصلات لمشاريع ويكيميديا الأخرى استنادا إلى معطيات {{WBREPONAME}}."
