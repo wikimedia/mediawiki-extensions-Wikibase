@@ -46,7 +46,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$codec = new EntityContentDataCodec(
 			new BasicEntityIdParser(),
-			$wikibaseRepo->getInternalEntitySerializer(),
+			$wikibaseRepo->getEntitySerializer(),
 			$wikibaseRepo->getInternalEntityDeserializer()
 		);
 		$blob = $codec->encodeEntity( $entity, CONTENT_FORMAT_JSON );

@@ -86,7 +86,7 @@ class SetClaim extends ApiBase {
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
-		$this->statementDeserializer = $wikibaseRepo->getStatementDeserializer();
+		$this->statementDeserializer = $wikibaseRepo->getCurrentStatementDeserializer();
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 
