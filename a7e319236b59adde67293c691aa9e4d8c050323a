@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_5c1a4a7f",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2016-03-02T15:29:24Z",
+      "side": 1,
+      "message": "This is now duplicating the default everywhere it is referenced, can that be avoided?",
+      "revId": "a7e319236b59adde67293c691aa9e4d8c050323a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
