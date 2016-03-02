@@ -1,4 +1,4 @@
-( function( mw, wb, $ ) {
+( function( wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -484,4 +484,4 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 
 } );
 
-}( mediaWiki, wikibase, jQuery ) );
+}( wikibase, jQuery ) );
