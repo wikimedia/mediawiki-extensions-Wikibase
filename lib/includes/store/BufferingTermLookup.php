@@ -229,7 +229,7 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 	 *
 	 * @return array[]
 	 */
-	private function groupEntityIds( $entityIds ) {
+	private function groupEntityIds( array $entityIds ) {
 		$entityIdsByType = array();
 
 		foreach ( $entityIds as $id ) {

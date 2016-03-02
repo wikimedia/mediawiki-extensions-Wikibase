@@ -40,7 +40,7 @@ class EntityDataUriManager {
 	 */
 	public function __construct(
 		Title $interfaceTitle,
-		$supportedExtensions,
+		array $supportedExtensions,
 		EntityTitleLookup $entityTitleLookup
 	) {
 		$this->interfaceTitle = $interfaceTitle;

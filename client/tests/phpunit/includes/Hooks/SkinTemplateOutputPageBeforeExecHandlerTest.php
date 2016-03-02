@@ -95,13 +95,13 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 	/**
 	 * Changes $actualLanguageUrls and $actualWbeditlanglinks when SkinFallbackTemplate::set is called.
 	 *
-	 * @param array $languageUrls
+	 * @param mixed $languageUrls
 	 * @param mixed &$actualLanguageUrls
 	 * @param mixed &$actualWbeditlanglinks
 	 *
 	 * @return SkinFallbackTemplate
 	 */
-	private function getTemplate( $languageUrls = array(), &$actualLanguageUrls = null, &$actualWbeditlanglinks = null ) {
+	private function getTemplate( $languageUrls, &$actualLanguageUrls, &$actualWbeditlanglinks = null ) {
 		$template = $this->getMock( 'SkinFallbackTemplate' );
 
 		$template->expects( $this->any() )

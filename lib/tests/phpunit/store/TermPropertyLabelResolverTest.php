@@ -28,7 +28,7 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 	 *
 	 * @return PropertyLabelResolver
 	 */
-	public function getResolver( $lang, $terms ) {
+	public function getResolver( $lang, array $terms ) {
 		$resolver = new TermPropertyLabelResolver(
 			$lang,
 			new MockTermIndex( $terms ),

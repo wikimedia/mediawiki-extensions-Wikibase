@@ -135,7 +135,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return bool Success indicator
 	 */
-	public function insertTermsInternal( EntityDocument $entity, $terms, DatabaseBase $dbw ) {
+	public function insertTermsInternal( EntityDocument $entity, array $terms, DatabaseBase $dbw ) {
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entity->getId()->getNumericId(),
@@ -251,7 +251,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return bool Success indicator
 	 */
-	public function deleteTermsInternal( EntityId $entityId, $terms, DatabaseBase $dbw ) {
+	public function deleteTermsInternal( EntityId $entityId, array $terms, DatabaseBase $dbw ) {
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 

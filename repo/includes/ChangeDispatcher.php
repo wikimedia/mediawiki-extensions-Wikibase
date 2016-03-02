@@ -231,7 +231,7 @@ class ChangeDispatcher {
 	 * @param array $wikiState the dispatch state of a client wiki, as returned by lockClient()
 	 * @return int The number of changes dispatched
 	 */
-	public function dispatchTo( $wikiState ) {
+	public function dispatchTo( array $wikiState ) {
 		$siteID = $wikiState['chd_site'];
 		$after = (int)$wikiState['chd_seen'];
 
@@ -373,7 +373,7 @@ class ChangeDispatcher {
 	 *         and $seen if the ID of the last change considered for the batch
 	 *         (even if that was filtered out), for use as a continuation marker.
 	 */
-	private function filterChanges( $siteID, $changes, $limit ) {
+	private function filterChanges( $siteID, array $changes, $limit ) {
 		// collect all item IDs mentioned in the changes
 		$entitySet = array();
 		foreach ( $changes as $change ) {

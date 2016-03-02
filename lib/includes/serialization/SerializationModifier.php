@@ -47,7 +47,7 @@ class SerializationModifier {
 	 * @param string $path
 	 * @param mixed $value
 	 */
-	private function setArrayValueAtKey( &$array, $path, $value ) {
+	private function setArrayValueAtKey( array &$array, $path, $value ) {
 		$current = &$array;
 		$pathParts = $this->getPathParts( $path );
 
