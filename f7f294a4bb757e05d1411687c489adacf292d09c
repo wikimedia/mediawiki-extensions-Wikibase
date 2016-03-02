@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_e92eda9f",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-03-02T12:12:45Z",
+      "side": 0,
+      "message": "unused",
+      "revId": "f7f294a4bb757e05d1411687c489adacf292d09c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
