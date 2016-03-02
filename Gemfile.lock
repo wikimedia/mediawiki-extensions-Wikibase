@@ -129,3 +129,6 @@ DEPENDENCIES
   parallel_tests
   require_all
   rubocop
+
+BUNDLED WITH
+   1.10.6
