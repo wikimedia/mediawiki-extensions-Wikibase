@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\DataValue;
 use HashSiteStore;
@@ -24,6 +24,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SummaryFormatter;
+use Wikibase\Test\MockRepository;
 
 /**
  * @since 0.5

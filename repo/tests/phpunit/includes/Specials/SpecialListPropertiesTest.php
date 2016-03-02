@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Specials;
 
 use DataTypes\DataTypeFactory;
 use Language;
@@ -14,6 +14,7 @@ use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Test\MockPropertyInfoStore;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialListProperties
