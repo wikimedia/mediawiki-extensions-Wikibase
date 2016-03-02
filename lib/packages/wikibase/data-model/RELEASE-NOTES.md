@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 5.1 (dev)
+## Version 5.1.0 (dev)
 
 * Deprecated `FingerprintHolder` and `StatementListHolder`
 
