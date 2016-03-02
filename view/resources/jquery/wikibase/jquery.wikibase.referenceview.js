@@ -1,4 +1,4 @@
-( function( mw, wb, $ ) {
+( function( wb, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -397,4 +397,4 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 } );
 
-}( mediaWiki, wikibase, jQuery ) );
+}( wikibase, jQuery ) );
