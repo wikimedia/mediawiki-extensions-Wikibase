@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_5ffebc67",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-02T16:27:53Z",
+      "side": 1,
+      "message": "Depends on whether we want to have a list of all *defined* entity types or all *enabled*  entity types.",
+      "parentUuid": "2ea41786_dfb86c27",
+      "revId": "4efd19da9abbc39001bd34014d9c8decd1d24210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_1f6044cb",
         "filename": "lib/tests/phpunit/EntityTypesTest.php",
         "patchSetId": 9
