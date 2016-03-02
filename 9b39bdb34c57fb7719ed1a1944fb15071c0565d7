@@ -87,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "2ea41786_fa80d6fa",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T17:56:39Z",
+      "side": 1,
+      "message": "The instance should be cached!",
+      "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_b958598d",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 1
@@ -98,6 +115,23 @@
       "writtenOn": "2016-02-25T15:47:48Z",
       "side": 1,
       "message": "Would be nice if this would actually dispatch be entity type. But that\u0027s for another patch.",
+      "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_5a8a4a1d",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1211,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T17:56:39Z",
+      "side": 1,
+      "message": "The instance should be cached!",
       "revId": "9b39bdb34c57fb7719ed1a1944fb15071c0565d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
