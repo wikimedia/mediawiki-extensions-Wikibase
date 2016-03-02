@@ -7,6 +7,8 @@ use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
+use Deserializers\DispatchingDeserializer;
 use HashBagOStuff;
 use Hooks;
 use IContextSource;
@@ -14,6 +16,7 @@ use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use RequestContext;
+use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
@@ -112,8 +115,8 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -159,6 +162,16 @@ class WikibaseRepo {
 	 * @var StatementGuidValidator|null
 	 */
 	private $statementGuidValidator = null;
+
+	/**
+	 * @var Deserializer|null
+	 */
+	private $currentEntityDeserializer = null;
+
+	/**
+	 * @var Serializer|null
+	 */
+	private $entitySerializer = null;
 
 	/**
 	 * @var EntityIdParser|null
@@ -1174,38 +1187,20 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
-			$this->getInternalEntitySerializer(),
+			$this->getEntitySerializer(),
 			$this->getInternalEntityDeserializer(),
 			$this->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 	}
 
 	/**
-	 * @return Deserializer
+	 * @return DeserializerFactory
 	 */
-	public function getInternalEntityDeserializer() {
-		return $this->getInternalDeserializerFactory()->newEntityDeserializer();
-	}
-
-	/**
-	 * @return Serializer
-	 */
-	public function getInternalEntitySerializer() {
-		return $this->getInternalSerializerFactory()->newEntitySerializer();
-	}
-
-	/**
-	 * @return Serializer
-	 */
-	public function getInternalStatementSerializer() {
-		return $this->getInternalSerializerFactory()->newStatementSerializer();
-	}
-
-	/**
-	 * @return Deserializer
-	 */
-	public function getInternalStatementDeserializer() {
-		return $this->getInternalDeserializerFactory()->newStatementDeserializer();
+	private function getCurrentDeserializerFactory() {
+		return new DeserializerFactory(
+			$this->getDataValueDeserializer(),
+			$this->getEntityIdParser()
+		);
 	}
 
 	/**
@@ -1215,32 +1210,89 @@ class WikibaseRepo {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
-			$this->getEntityDeserializer()
+			$this->getCurrentEntityDeserializer()
 		);
 	}
 
 	/**
-	 * @return DeserializerFactory
+	 * @return InternalSerializerFactory
 	 */
-	protected function getDeserializerFactory() {
-		return new DeserializerFactory(
-			$this->getDataValueDeserializer(),
-			$this->getEntityIdParser()
-		);
+	private function getSerializerFactory() {
+		return new InternalSerializerFactory( new DataValueSerializer() );
 	}
 
 	/**
+	 * Returns a deserializer to deserialize entities in current serialization only.
+	 *
 	 * @return Deserializer
 	 */
-	public function getEntityDeserializer() {
-		return $this->getDeserializerFactory()->newEntityDeserializer();
+	public function getCurrentEntityDeserializer() {
+		if ( $this->currentEntityDeserializer === null ) {
+			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+			$deserializerFactory = $this->getCurrentDeserializerFactory();
+			$deserializers = array();
+
+			foreach ( $deserializerFactoryCallbacks as $callback ) {
+				$deserializers[] = call_user_func( $callback, $deserializerFactory );
+			}
+
+			$this->currentEntityDeserializer = new DispatchingDeserializer( $deserializers );
+		}
+
+		return $this->currentEntityDeserializer;
 	}
 
 	/**
+	 * Returns a deserializer to deserialize entities in both current and legacy serialization.
+	 *
 	 * @return Deserializer
 	 */
-	public function getStatementDeserializer() {
-		return $this->getDeserializerFactory()->newStatementDeserializer();
+	public function getInternalEntityDeserializer() {
+		return $this->getInternalDeserializerFactory()->newEntityDeserializer();
+	}
+
+	/**
+	 * @return Serializer
+	 */
+	public function getEntitySerializer() {
+		if ( $this->entitySerializer === null ) {
+			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+			$serializerFactory = $this->getSerializerFactory();
+			$serializers = array();
+
+			foreach ( $serializerFactoryCallbacks as $callback ) {
+				$serializers[] = call_user_func( $callback, $serializerFactory );
+			}
+
+			$this->entitySerializer = new DispatchingSerializer( $serializers );
+		}
+
+		return $this->entitySerializer;
+	}
+
+	/**
+	 * Returns a deserializer to deserialize statements in both current and legacy serialization.
+	 *
+	 * @return Deserializer
+	 */
+	public function getInternalStatementDeserializer() {
+		return $this->getInternalDeserializerFactory()->newStatementDeserializer();
+	}
+
+	/**
+	 * Returns a deserializer to deserialize statements in current serialization only.
+	 *
+	 * @return Deserializer
+	 */
+	public function getCurrentStatementDeserializer() {
+		return $this->getCurrentDeserializerFactory()->newStatementDeserializer();
+	}
+
+	/**
+	 * @return Serializer
+	 */
+	public function getStatementSerializer() {
+		return $this->getSerializerFactory()->newStatementSerializer();
 	}
 
 	/**
@@ -1259,13 +1311,6 @@ class WikibaseRepo {
 			'time' => 'DataValues\TimeValue',
 			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
 		) );
-	}
-
-	/**
-	 * @return InternalSerializerFactory
-	 */
-	public function getInternalSerializerFactory() {
-		return new InternalSerializerFactory( new DataValueSerializer() );
 	}
 
 	/**
