@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\Serializers\DataValueSerializer;
 use FauxRequest;
@@ -22,6 +22,7 @@ use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\EntityDataTestProvider;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialEntityData
