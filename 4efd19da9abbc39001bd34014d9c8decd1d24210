@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_bfbd7018",
+        "filename": "docs/entities.wiki",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T15:50:49Z",
+      "side": 1,
+      "message": "Should perhaps be called entitytypes.wiki",
+      "revId": "4efd19da9abbc39001bd34014d9c8decd1d24210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_5f579c05",
+        "filename": "docs/entities.wiki",
+        "patchSetId": 9
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T15:50:49Z",
+      "side": 1,
+      "message": "still TBD",
+      "revId": "4efd19da9abbc39001bd34014d9c8decd1d24210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_3f542001",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T15:50:49Z",
+      "side": 1,
+      "message": "Should say where to find out what each entity *type* definition looks like, and what the signature of each callback should be. \"See class level documentation for details\" is probably fine for now.",
+      "revId": "4efd19da9abbc39001bd34014d9c8decd1d24210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_dfb86c27",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T15:50:49Z",
+      "side": 1,
+      "message": "DataTypeDefinitions could have a getEntityTypes() method. It probably should anyway, where else do we have the knowledge to enumerate all entity types?",
+      "revId": "4efd19da9abbc39001bd34014d9c8decd1d24210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_1f6044cb",
+        "filename": "lib/tests/phpunit/EntityTypesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T15:50:49Z",
+      "side": 1,
+      "message": "Just grab all entity types defined in WikibaseLib.entitytypes.php",
+      "revId": "4efd19da9abbc39001bd34014d9c8decd1d24210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_bf5ed015",
+        "filename": "lib/tests/phpunit/EntityTypesTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T15:50:49Z",
+      "side": 1,
+      "message": "what\u0027s a ChangeSerializer?",
+      "revId": "4efd19da9abbc39001bd34014d9c8decd1d24210",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
