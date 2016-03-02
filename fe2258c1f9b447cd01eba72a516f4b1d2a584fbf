@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_ff6e8892",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-02T16:03:52Z",
+      "side": 1,
+      "message": "The fact that registering a change-factory-callback is optional should be mentiend in the documentation for EntityTypeDefintions::getChangeFactoryCallbacks(), and in entity.wiki",
+      "revId": "fe2258c1f9b447cd01eba72a516f4b1d2a584fbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
