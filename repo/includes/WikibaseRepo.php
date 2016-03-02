@@ -7,6 +7,8 @@ use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
+use Deserializers\DispatchingDeserializer;
 use HashBagOStuff;
 use Hooks;
 use IContextSource;
@@ -14,6 +16,7 @@ use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use RequestContext;
+use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use SiteSQLStore;
 use SiteStore;
@@ -112,8 +115,8 @@ use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -1191,7 +1194,15 @@ class WikibaseRepo {
 	 * @return Serializer
 	 */
 	public function getInternalEntitySerializer() {
-		return $this->getInternalSerializerFactory()->newEntitySerializer();
+		$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+		$serializerFactory = $this->getInternalSerializerFactory();
+		$serializers = array();
+
+		foreach ( $serializerFactoryCallbacks as $callback ) {
+			$serializers[] = call_user_func( $callback, $serializerFactory );
+		}
+
+		return new DispatchingSerializer( $serializers );
 	}
 
 	/**
@@ -1230,10 +1241,18 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return Deserializer
+	 * @return DispatchableDeserializer
 	 */
 	public function getEntityDeserializer() {
-		return $this->getDeserializerFactory()->newEntityDeserializer();
+		$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+		$deserializerFactory = $this->getDeserializerFactory();
+		$deserializers = array();
+
+		foreach ( $deserializerFactoryCallbacks as $callback ) {
+			$deserializers[] = call_user_func( $callback, $deserializerFactory );
+		}
+
+		return new DispatchingDeserializer( $deserializers );
 	}
 
 	/**
