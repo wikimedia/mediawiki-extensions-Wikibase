@@ -8,7 +8,9 @@
 
 class NonExistingItemPage
   include PageObject
-  page_url ENV['WIKIDATA_REPO_URL'] + ENV['ITEM_NAMESPACE'] + ENV['ITEM_ID_PREFIX'] + 'xy'
+
+  env = MediawikiSelenium::Environment.load_default
+  page_url '<%= env.lookup(:mediawiki_url) %><%= env.lookup(:item_namespace, default: "") %><%= env.lookup(:item_id_prefix) %>xy'
 
   h1(:first_heading, class: 'firstHeading')
   link(:special_log_link, css: '.noarticletext a:nth-child(1)')
