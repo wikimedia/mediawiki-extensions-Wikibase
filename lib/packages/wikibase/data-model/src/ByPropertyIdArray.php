@@ -5,6 +5,7 @@ namespace Wikibase\DataModel;
 use ArrayObject;
 use OutOfBoundsException;
 use RuntimeException;
+use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -52,7 +53,7 @@ class ByPropertyIdArray extends ArrayObject {
 	/**
 	 * @see ArrayObject::__construct
 	 *
-	 * @param array|object|null $input
+	 * @param PropertyIdProvider[]|Traversable|null $input
 	 */
 	public function __construct( $input = null ) {
 		parent::__construct( (array)$input );
@@ -66,6 +67,7 @@ class ByPropertyIdArray extends ArrayObject {
 	public function buildIndex() {
 		$this->byId = array();
 
+		/** @var PropertyIdProvider $object */
 		foreach ( $this as $object ) {
 			$propertyId = $object->getPropertyId()->getSerialization();
 
@@ -116,7 +118,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 *
 	 * @throws OutOfBoundsException
 	 * @throws RuntimeException
-	 * @return object[]
+	 * @return PropertyIdProvider[]
 	 */
 	public function getByPropertyId( PropertyId $propertyId ) {
 		$this->assertIndexIsBuild();
@@ -132,7 +134,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 * Returns the absolute index of an object or false if the object could not be found.
 	 * @since 0.5
 	 *
-	 * @param object $object
+	 * @param PropertyIdProvider $object
 	 *
 	 * @return bool|int
 	 * @throws RuntimeException
@@ -154,7 +156,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 * Returns the objects in a flat array (using the indexed form for generating the array).
 	 * @since 0.5
 	 *
-	 * @return object[]
+	 * @return PropertyIdProvider[]
 	 * @throws RuntimeException
 	 */
 	public function toFlatArray() {
@@ -196,7 +198,7 @@ class ByPropertyIdArray extends ArrayObject {
 	/**
 	 * Moves an object within its "property group".
 	 *
-	 * @param object $object
+	 * @param PropertyIdProvider $object
 	 * @param int $toIndex Absolute index within a "property group".
 	 *
 	 * @throws OutOfBoundsException
@@ -235,12 +237,11 @@ class ByPropertyIdArray extends ArrayObject {
 	/**
 	 * Moves an object to the end of its "property group".
 	 *
-	 * @param object $object
+	 * @param PropertyIdProvider $object
 	 */
 	private function moveObjectToEndOfPropertyGroup( $object ) {
 		$this->removeObject( $object );
 
-		/** @var PropertyId $propertyId */
 		$propertyId = $object->getPropertyId();
 		$propertyIdSerialization = $propertyId->getSerialization();
 
@@ -257,7 +258,7 @@ class ByPropertyIdArray extends ArrayObject {
 	/**
 	 * Removes an object from the array structures.
 	 *
-	 * @param object $object
+	 * @param PropertyIdProvider $object
 	 */
 	private function removeObject( $object ) {
 		$flatArray = $this->toFlatArray();
@@ -269,7 +270,7 @@ class ByPropertyIdArray extends ArrayObject {
 	/**
 	 * Inserts an object at a specific index.
 	 *
-	 * @param object $object
+	 * @param PropertyIdProvider $object
 	 * @param int $index Absolute index within the flat list of objects.
 	 */
 	private function insertObjectAtIndex( $object, $index ) {
@@ -364,7 +365,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 * to achieve the designated index for the object to move.
 	 * @since 0.5
 	 *
-	 * @param object $object
+	 * @param PropertyIdProvider $object
 	 * @param int $toIndex Absolute index where to move the object to.
 	 *
 	 * @throws OutOfBoundsException
@@ -407,7 +408,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 *
 	 * @since 0.5
 	 *
-	 * @param object $object
+	 * @param PropertyIdProvider $object
 	 * @param int|null $index Absolute index where to place the new object.
 	 *
 	 * @throws RuntimeException
@@ -441,13 +442,12 @@ class ByPropertyIdArray extends ArrayObject {
 	/**
 	 * Adds an object to an existing property group at the specified absolute index.
 	 *
-	 * @param object $object
+	 * @param PropertyIdProvider $object
 	 * @param int|null $index
 	 *
 	 * @throws OutOfBoundsException
 	 */
 	private function addObjectToPropertyGroup( $object, $index = null ) {
-		/** @var PropertyId $propertyId */
 		$propertyId = $object->getPropertyId();
 		$validIndices = $this->getFlatArrayIndices( $propertyId );
 
