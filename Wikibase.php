@@ -31,6 +31,8 @@
  * @license GPL-2.0+
  */
 
+die( "OOOOPS!" );
+
 if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
 	require_once __DIR__ . '/repo/Wikibase.php';
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
