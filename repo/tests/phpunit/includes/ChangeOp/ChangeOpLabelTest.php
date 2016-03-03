@@ -105,7 +105,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return FingerprintProvider|EntityDocument
 	 */
-	protected function provideNewEntity() {
+	private function provideNewEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
 		$item->setDescription( 'en', 'DUPE' );
 		$item->setDescription( 'fr', 'DUPE' );
@@ -138,7 +138,12 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider changeOpSummaryProvider
 	 */
-	public function testUpdateSummary( $entity, ChangeOp $changeOp, $summaryExpectedAction, $summaryExpectedLanguage ) {
+	public function testUpdateSummary(
+		EntityDocument $entity,
+		ChangeOp $changeOp,
+		$summaryExpectedAction,
+		$summaryExpectedLanguage
+	) {
 		$summary = new Summary();
 
 		$changeOp->apply( $entity, $summary );

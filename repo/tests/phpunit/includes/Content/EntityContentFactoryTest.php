@@ -263,7 +263,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider newFromEntityProvider
-	 * @param EntityDocument $entity
 	 */
 	public function testNewFromEntity( EntityDocument $entity ) {
 		$factory = $this->newFactory();
@@ -284,7 +283,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider newFromRedirectProvider
-	 * @param EntityRedirect $redirect
 	 */
 	public function testNewFromRedirect( EntityRedirect $redirect ) {
 		$factory = $this->newFactory();
@@ -306,7 +304,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider newFromRedirectProvider_unsupported
-	 * @param EntityRedirect $redirect
 	 */
 	public function testNewFromRedirect_unsupported( EntityRedirect $redirect ) {
 		$factory = $this->newFactory();
