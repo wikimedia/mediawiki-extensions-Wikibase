@@ -27,7 +27,7 @@ use Wikibase\TermIndexEntry;
 class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return EntityTitleLookup|\PHPUnit_Framework_MockObject_MockObject
+	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
@@ -45,7 +45,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param bool $exists
 	 *
-	 * @return Title|\PHPUnit_Framework_MockObject_MockObject
+	 * @return Title
 	 */
 	public function getMockTitle( $exists ) {
 		$mock = $this->getMockBuilder( 'Title' )
