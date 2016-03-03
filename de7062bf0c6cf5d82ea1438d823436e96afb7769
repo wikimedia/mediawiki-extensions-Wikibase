@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_09b4897c",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-03T15:19:00Z",
+      "side": 1,
+      "message": "What is this? Unrelated to this patch. Why is this necessary? (I would like to understand.)",
+      "revId": "de7062bf0c6cf5d82ea1438d823436e96afb7769",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_49504137",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-03T15:19:00Z",
+      "side": 1,
+      "message": "Why did you decided to remove this? The same \"hack\" as below should be possible here.",
+      "revId": "de7062bf0c6cf5d82ea1438d823436e96afb7769",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
