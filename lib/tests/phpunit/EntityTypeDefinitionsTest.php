@@ -18,12 +18,12 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 			'foo' => array(
 				'serializer-factory-callback' => 'foo-serializer',
 				'deserializer-factory-callback' => 'foo-deserializer',
-				'change-factory-callback' => 'foo-change'
+				'view-factory-callback' => 'foo-view'
 			),
 			'bar' => array(
 				'serializer-factory-callback' => 'bar-serializer',
 				'deserializer-factory-callback' => 'bar-deserializer',
-				'change-factory-callback' => 'bar-change'
+				'view-factory-callback' => 'bar-view'
 			),
 			'baz' => array()
 		);
@@ -58,10 +58,10 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(
 			array(
-				'foo' => 'foo-change',
-				'bar' => 'bar-change'
+				'foo' => 'foo-view',
+				'bar' => 'bar-view'
 			),
-			$definitions->getChangeFactoryCallbacks()
+			$definitions->getViewFactoryCallbacks()
 		);
 	}
 
