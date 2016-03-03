@@ -385,7 +385,10 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			window,
 			namespaceEventNames( 'scroll touchmove resize', this.widgetName ),
 			function( event, self ) {
-				self._startEditingInViewport();
+				// It's possible an event is triggered with the widget not being initialized.
+				if ( self.$listview ) {
+					self._startEditingInViewport();
+				}
 			},
 			{
 				throttle: 150
