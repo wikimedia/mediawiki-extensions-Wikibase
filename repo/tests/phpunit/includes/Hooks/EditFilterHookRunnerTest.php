@@ -52,7 +52,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			->getMock();
 		$entityContentFactory->expects( $this->any() )
 			->method( 'newFromEntity' )
-			->with( $this->isInstanceOf( 'Wikibase\DataModel\Entity\Entity' ) )
+			->with( $this->isInstanceOf( 'Wikibase\DataModel\Entity\EntityDocument' ) )
 			->will( $this->returnValue( ItemContent::newEmpty() ) );
 		$entityContentFactory->expects( $this->any() )
 			->method( 'newFromRedirect' )
