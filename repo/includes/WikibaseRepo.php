@@ -1460,38 +1460,8 @@ class WikibaseRepo {
 		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
-		// TODO move this to WikibaseRepo.entitytypes.php or EntityHandler resp. EntityContent
-		$entityViewFactoryCallbacks = array(
-			Item::ENTITY_TYPE => function(
-				$languageCode,
-				LabelDescriptionLookup $labelDescriptionLookup,
-				LanguageFallbackChain $fallbackChain,
-				EditSectionGenerator $editSectionGenerator
-			) use ( $viewFactory ) {
-				return $viewFactory->newItemView(
-					$languageCode,
-					$labelDescriptionLookup,
-					$fallbackChain,
-					$editSectionGenerator
-				);
-			},
-			Property::ENTITY_TYPE => function(
-				$languageCode,
-				LabelDescriptionLookup $labelDescriptionLookup,
-				LanguageFallbackChain $fallbackChain,
-				EditSectionGenerator $editSectionGenerator
-			) use ( $viewFactory ) {
-				return $viewFactory->newPropertyView(
-					$languageCode,
-					$labelDescriptionLookup,
-					$fallbackChain,
-					$editSectionGenerator
-				);
-			}
-		);
-
 		return new EntityParserOutputGeneratorFactory(
-			new DispatchingEntityViewFactory( $entityViewFactoryCallbacks ),
+			new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() ),
 			$this->getStore()->getEntityInfoBuilderFactory(),
 			$this->getEntityContentFactory(),
 			$this->getLanguageFallbackChainFactory(),

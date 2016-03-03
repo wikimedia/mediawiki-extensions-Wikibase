@@ -41,11 +41,9 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideEntityTypes() {
-		return array_map(
-			function( $entityType ) {
-				return array( $entityType );
-			},
-			array_keys( $this->getRegistry() )
+		return array(
+			array( 'item' ),
+			array( 'property' )
 		);
 	}
 

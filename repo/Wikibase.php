@@ -115,6 +115,14 @@ call_user_func( function() {
 	// Registry and definition of entity types
 	$wgWBRepoEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 
+	$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
+
+	// merge WikibaseRepo.entitytypes.php into $wgWBRepoEntityTypes
+	foreach ( $repoEntityTypes as $type => $repoDef ) {
+		$baseDef = isset( $wgWBRepoEntityTypes[$type] ) ? $wgWBRepoEntityTypes[$type] : array();
+		$wgWBRepoEntityTypes[$type] = array_merge( $baseDef, $repoDef );
+	}
+
 	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = function() {
 		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
 		return $wikibaseRepo->newItemHandler();
