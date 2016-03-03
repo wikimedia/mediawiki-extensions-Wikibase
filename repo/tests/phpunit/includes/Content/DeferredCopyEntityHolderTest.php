@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use Wikibase\Content\DeferredCopyEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 
@@ -22,7 +22,7 @@ use Wikibase\DataModel\Entity\ItemId;
 class DeferredCopyEntityHolderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	private function newEntity() {
 		$item = new Item( new ItemId( 'Q17' ) );
@@ -32,11 +32,11 @@ class DeferredCopyEntityHolderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return EntityHolder
 	 */
-	private function newHolder( Entity $entity ) {
+	private function newHolder( EntityDocument $entity ) {
 		$holder = new EntityInstanceHolder( $entity );
 		return new DeferredCopyEntityHolder( $holder );
 	}

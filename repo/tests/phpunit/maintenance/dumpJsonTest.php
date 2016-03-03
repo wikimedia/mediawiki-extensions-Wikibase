@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\StringValue;
 use MediaWikiTestCase;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -50,7 +50,7 @@ class DumpJsonTest extends MediaWikiTestCase {
 		$snakList = new SnakList();
 		$snakList->addSnak( new PropertySomeValueSnak( new PropertyId( 'P12' ) ) );
 		$snakList->addSnak( new PropertyValueSnak( new PropertyId( 'P12' ), new StringValue( 'stringVal' ) ) );
-		/** @var Entity[] $testEntities */
+		/** @var EntityDocument[] $testEntities */
 		$testEntities = array(
 			new Item( new ItemId( 'Q1' ) ),
 			new Property( new PropertyId( 'P1' ), null, 'string' ),

@@ -5,9 +5,10 @@ namespace Wikibase\Test;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpDescription;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Summary;
 
 /**
@@ -57,7 +58,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testApply( ChangeOp $changeOpDescription, $expectedDescription ) {
 		$entity = $this->provideNewEntity();
-		$entity->setDescription( 'en', 'INVALID' );
+		$entity->getFingerprint()->setDescription( 'en', 'INVALID' );
 
 		$changeOpDescription->apply( $entity );
 
@@ -102,7 +103,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return Entity
+	 * @return EntityDocument|FingerprintProvider
 	 */
 	protected function provideNewEntity() {
 		$item = new Item( new ItemId( 'Q23' ) );
@@ -119,11 +120,11 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		$args = array();
 
 		$entity = $this->provideNewEntity();
-		$entity->setDescription( 'de', 'Test' );
+		$entity->getFingerprint()->setDescription( 'de', 'Test' );
 		$args[] = array( $entity, new ChangeOpDescription( 'de', 'Zusammenfassung', $validatorFactory ), 'set', 'de' );
 
 		$entity = $this->provideNewEntity();
-		$entity->setDescription( 'de', 'Test' );
+		$entity->getFingerprint()->setDescription( 'de', 'Test' );
 		$args[] = array( $entity, new ChangeOpDescription( 'de', null, $validatorFactory ), 'remove', 'de' );
 
 		$entity = $this->provideNewEntity();

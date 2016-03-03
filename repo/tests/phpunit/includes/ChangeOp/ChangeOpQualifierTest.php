@@ -6,7 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpQualifier;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -175,7 +175,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider applyInvalidProvider
 	 */
-	public function testApplyInvalid( Entity $entity, $claimGuid, Snak $snak, $snakHash = '' ) {
+	public function testApplyInvalid( EntityDocument $entity, $claimGuid, Snak $snak, $snakHash = '' ) {
 		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
 		$changeOpQualifier = new ChangeOpQualifier(
 			$claimGuid,
@@ -216,7 +216,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider validateProvider
 	 */
-	public function testValidate( Entity $entity, $claimGuid, Snak $snak, $snakHash = '' ) {
+	public function testValidate( EntityDocument $entity, $claimGuid, Snak $snak, $snakHash = '' ) {
 		$changeOpQualifier = new ChangeOpQualifier(
 			$claimGuid,
 			$snak,

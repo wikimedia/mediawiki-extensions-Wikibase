@@ -6,7 +6,7 @@ use MWException;
 use PHPUnit_Framework_TestCase;
 use Site;
 use SiteList;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -83,7 +83,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param Entity[] $entities
+	 * @param EntityDocument[] $entities
 	 * @param EntityId[] $redirects
 	 *
 	 * @return RdfDumpGenerator

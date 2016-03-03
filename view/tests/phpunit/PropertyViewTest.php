@@ -4,7 +4,7 @@ namespace Wikibase\View\Tests;
 
 use DataTypes\DataTypeFactory;
 use Language;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -34,7 +34,7 @@ class PropertyViewTest extends EntityViewTest {
 	 * @param EntityId $id
 	 * @param Statement[] $statements
 	 *
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	protected function makeEntity( EntityId $id, array $statements = array() ) {
 		$property = Property::newFromType( 'string' );
@@ -63,10 +63,10 @@ class PropertyViewTest extends EntityViewTest {
 	 * Prepares the given entity data for comparison with $entity.
 	 * That is, this method should add any extra data from $entity to $entityData.
 	 *
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param array $entityData
 	 */
-	protected function prepareEntityData( Entity $entity, array &$entityData ) {
+	protected function prepareEntityData( EntityDocument $entity, array &$entityData ) {
 		/* @var Property $entity */
 		$entityData['datatype'] = $entity->getDataTypeId();
 	}

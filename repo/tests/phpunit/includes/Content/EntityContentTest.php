@@ -6,11 +6,11 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use PHPUnit_Framework_Assert;
 use Title;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -91,9 +91,17 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertRegExp( $pattern . 'm', $text );
 	}
 
+	private function setLabel( EntityDocument $entity, $lang, $text ) {
+		if ( $entity instanceof FingerprintProvider ) {
+			$entity->getFingerprint()->setLabel( $lang, $text );
+		} else {
+			throw new \InvalidArgumentException( 'FingerprintProvider expected!' );
+		}
+	}
+
 	public function getTextForSearchIndexProvider() {
 		$entityContent = $this->newEmpty();
-		$entityContent->getEntity()->setLabel( 'en', "cake" );
+		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		return array(
 			array( $entityContent, '/^cake$/' )
@@ -102,7 +110,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function testWikibaseTextForSearchIndex() {
 		$entityContent = $this->newEmpty();
-		$entityContent->getEntity()->setLabel( 'en', "cake" );
+		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
 			'WikibaseTextForSearchIndex' => array(
@@ -122,7 +130,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function testWikibaseTextForSearchIndex_abort() {
 		$entityContent = $this->newEmpty();
-		$entityContent->getEntity()->setLabel( 'en', "cake" );
+		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
 			'WikibaseTextForSearchIndex' => array(
@@ -160,7 +168,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		);
 
 		$contentWithLabel = $this->newEmpty( $this->getDummyId() );
-		$contentWithLabel->getEntity()->setLabel( 'en', 'Foo' );
+		$this->setLabel( $contentWithLabel->getEntity(), 'en', 'Foo' );
 
 		$cases['labels'] = array(
 			$contentWithLabel,
@@ -185,7 +193,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function provideGetEntityStatus() {
 		$contentWithLabel = $this->newEmpty();
-		$contentWithLabel->getEntity()->setLabel( 'de', 'xyz' );
+		$this->setLabel( $contentWithLabel->getEntity(), 'de', 'xyz' );
 
 		return array(
 			'empty' => array(
@@ -223,9 +231,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$empty = $this->newEmpty();
 
 		$labeledEntityContent = $this->newEmpty();
-		$fingerprint = $labeledEntityContent->getEntity()->getFingerprint();
-		$fingerprint->getLabels()->setTerm( new Term( 'de', 'xyz' ) );
-		$labeledEntityContent->getEntity()->setFingerprint( $fingerprint );
+		$this->setLabel( $labeledEntityContent->getEntity(), 'de', 'xyz' );
 
 		return array(
 			'empty' => array(
@@ -263,10 +269,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$empty = $this->newEmpty( $this->getDummyId() );
 
 		$spam = $this->newEmpty( $this->getDummyId() );
-		$spam->getEntity()->setLabel( 'en', 'Spam' );
+		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
 
 		$ham = $this->newEmpty( $this->getDummyId() );
-		$ham->getEntity()->setLabel( 'en', 'Ham' );
+		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
 		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
 		$spamToHamDiff = new EntityDiff( array(
@@ -310,10 +316,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function patchedCopyProvider() {
 		$spam = $this->newEmpty( $this->getDummyId() );
-		$spam->getEntity()->setLabel( 'en', 'Spam' );
+		$this->setLabel( $spam->getEntity(), 'en', 'Spam' );
 
 		$ham = $this->newEmpty( $this->getDummyId() );
-		$ham->getEntity()->setLabel( 'en', 'Ham' );
+		$this->setLabel( $ham->getEntity(), 'en', 'Ham' );
 
 		$spamToHam = new DiffOpChange( 'Spam', 'Ham' );
 		$spamToHamDiff = new EntityDiff( array(
@@ -349,7 +355,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$empty = $this->newEmpty();
 		$labels = $this->newEmpty();
 
-		$labels->getEntity()->setLabel( 'en', 'Foo' );
+		$this->setLabel( $labels->getEntity(), 'en', 'Foo' );
 
 		return array(
 			'empty' => array( $empty ),
@@ -373,10 +379,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$empty = $this->newEmpty();
 
 		$labels1 = $this->newEmpty();
-		$labels1->getEntity()->setLabel( 'en', 'Foo' );
+		$this->setLabel( $labels1->getEntity(), 'en', 'Foo' );
 
 		$labels2 = $this->newEmpty();
-		$labels2->getEntity()->setLabel( 'de', 'Foo' );
+		$this->setLabel( $labels2->getEntity(), 'de', 'Foo' );
 
 		return array(
 			'empty' => array( $empty, $empty, true ),
@@ -397,13 +403,13 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $equals, $actual );
 	}
 
-	private function createTitleForEntity( Entity $entity ) {
+	private function createTitleForEntity( EntityDocument $entity ) {
 		// NOTE: needs database access
 		$this->entityStore->assignFreshId( $entity );
 		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$title = $titleLookup->getTitleForId( $entity->getId() );
 
-		if ( !$title->exists() ) {
+		if ( $title->getArticleID( Title::GAID_FOR_UPDATE ) <= 0 ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 			$store->saveEntity( $entity, 'test', $GLOBALS['wgUser'] );
 
@@ -413,6 +419,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		// sanity check - page must exist now
 		$this->assertGreaterThan( 0, $title->getArticleID(), 'sanity check: getArticleID()' );
+		$this->assertGreaterThan( 0, $title->getArticleID( Title::GAID_FOR_UPDATE ), 'sanity check: getArticleID()' );
 		$this->assertTrue( $title->exists(), 'sanity check: exists()' );
 
 		return $title;

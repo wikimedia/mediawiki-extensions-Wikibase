@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\Content\EntityInstanceHolder;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -52,10 +52,15 @@ class ItemHandlerTest extends EntityHandlerTest {
 	public function contentProvider() {
 		$contents = parent::contentProvider();
 
-		/**
-		 * @var ItemContent $content
-		 */
-		$content = clone $contents[1][0];
+		/** @var ItemContent $content */
+		$content = $this->newEntityContent();
+		$content->getEntity()->setAliases( 'en', array( 'foo' ) );
+		$content->getEntity()->setDescription( 'de', 'foobar' );
+		$content->getEntity()->setDescription( 'en', 'baz' );
+		$content->getEntity()->setLabel( 'nl', 'o_O' );
+		$contents[] = array( $content );
+
+		$content = $content->copy();
 		$content->getItem()->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foobar' );
 		$contents[] = array( $content );
 
@@ -88,11 +93,11 @@ class ItemHandlerTest extends EntityHandlerTest {
 	}
 
 	/**
-	 * @param Entity|null $entity
+	 * @param EntityDocument|null $entity
 	 *
 	 * @return EntityContent
 	 */
-	protected function newEntityContent( Entity $entity = null ) {
+	protected function newEntityContent( EntityDocument $entity = null ) {
 		if ( !$entity ) {
 			$entity = new Item( new ItemId( 'Q42' ) );
 		}

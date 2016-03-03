@@ -6,7 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpReference;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -262,7 +262,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideApplyInvalid
 	 */
-	public function testApplyInvalid( Entity $entity, $claimGuid, Reference $reference, $referenceHash = '', $index = null ) {
+	public function testApplyInvalid( EntityDocument $entity, $claimGuid, Reference $reference, $referenceHash = '', $index = null ) {
 		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
 
 		$changeOpReference = new ChangeOpReference(
@@ -309,7 +309,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideValidate
 	 */
-	public function testValidate( Entity $entity, $claimGuid, Reference $reference, $referenceHash = '', $index = null ) {
+	public function testValidate( EntityDocument $entity, $claimGuid, Reference $reference, $referenceHash = '', $index = null ) {
 		$changeOpReference = new ChangeOpReference(
 			$claimGuid,
 			$reference,
