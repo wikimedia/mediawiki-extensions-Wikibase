@@ -9,6 +9,7 @@ use SiteStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\SettingsArray;
 
 /**
@@ -113,7 +114,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseClient = new WikibaseClient(
 			$settings,
 			Language::factory( 'en' ),
-			new DataTypeDefinitions(),
+			new DataTypeDefinitions( array() ),
+			new EntityTypeDefinitions( array() ),
 			$this->getSiteStore()
 		);
 
@@ -130,7 +132,14 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getLangLinkSiteGroupProvider
 	 */
 	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteStore $siteStore ) {
-		$client = new WikibaseClient( $settings, Language::factory( 'en' ), new DataTypeDefinitions(), $siteStore );
+		$client = new WikibaseClient(
+			$settings,
+			Language::factory( 'en' ),
+			new DataTypeDefinitions( array() ),
+			new EntityTypeDefinitions( array() ),
+			$siteStore
+		);
+
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
 	}
 
@@ -158,7 +167,14 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getSiteGroupProvider
 	 */
 	public function testGetSiteGroup( $expected, SettingsArray $settings, SiteStore $siteStore ) {
-		$client = new WikibaseClient( $settings, Language::factory( 'en' ), new DataTypeDefinitions(), $siteStore );
+		$client = new WikibaseClient(
+			$settings,
+			Language::factory( 'en' ),
+			new DataTypeDefinitions( array() ),
+			new EntityTypeDefinitions( array() ),
+			$siteStore
+		);
+
 		$this->assertEquals( $expected, $client->getSiteGroup() );
 	}
 
@@ -298,10 +314,13 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseClient
 	 */
 	private function getWikibaseClient() {
-		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$sites = new HashSiteStore( array() );
-		$dataTypeDefinitions = new DataTypeDefinitions();
-		return new WikibaseClient( $settings, Language::factory( 'en' ), $dataTypeDefinitions, $sites );
+		return new WikibaseClient(
+			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
+			Language::factory( 'en' ),
+			new DataTypeDefinitions( array() ),
+			new EntityTypeDefinitions( array() ),
+			new HashSiteStore()
+		);
 	}
 
 }
