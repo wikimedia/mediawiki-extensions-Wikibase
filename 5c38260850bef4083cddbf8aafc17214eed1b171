@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_a406bc21",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-03T16:23:26Z",
+      "side": 1,
+      "message": "Why do we need the serializer on the client?\nWe might in the future, but I don\u0027t think we do at the moment.",
+      "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_18fdb004",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-03T16:23:26Z",
+      "side": 1,
+      "message": "repo/WikibaseRepo.entitytypes.php",
+      "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_d8063820",
+        "filename": "lib/tests/phpunit/EntityTypesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-03T16:23:26Z",
+      "side": 1,
+      "message": "should test all defined types. and should test that at least item and property are defined.",
+      "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_e40cb447",
+        "filename": "lib/tests/phpunit/EntityTypesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-03T16:23:26Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be a test for view-factory-callback here now?",
+      "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
