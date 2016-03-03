@@ -9,6 +9,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use OutOfBoundsException;
 use PHPUnit_Framework_MockObject_MockBuilder;
+use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -73,7 +74,7 @@ class ChangeOpTestMockProvider {
 	 *
 	 * @param string $class
 	 *
-	 * @return object
+	 * @return PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMock( $class ) {
 		return $this->mockBuilderFactory->getMock( $class );

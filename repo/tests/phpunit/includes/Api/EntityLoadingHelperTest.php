@@ -6,6 +6,7 @@ use Exception;
 use UsageException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\BadRevisionException;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Api\EntityLoadingHelper;
@@ -25,7 +26,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	/**
 	 * @param mixed $entityRevisionReturn if value is instance of Exception it will be thrown
 	 *
-	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 * @return EntityRevisionLookup
 	 */
 	public function getMockEntityRevisionLookup( $entityRevisionReturn ) {
 		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );

@@ -46,7 +46,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup|\PHPUnit_Framework_MockObject_MockObject
+	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
@@ -57,7 +57,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return Title|\PHPUnit_Framework_MockObject_MockObject
+	 * @return Title
 	 */
 	public function getMockTitle() {
 		$mock = $this->getMockBuilder( 'Title' )
@@ -89,7 +89,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 * @param array $params
 	 * @param TermSearchResult[] $returnResults
 	 *
-	 * @return EntitySearchHelper|\PHPUnit_Framework_MockObject_MockObject
+	 * @return EntitySearchHelper
 	 */
 	private function getMockEntitySearchHelper( array $params, array $returnResults = array() ) {
 		// defaults from SearchEntities
@@ -273,9 +273,9 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'language' => 'en'
 		), $overrideParams );
 
-		$searchInteractor = $this->getMockEntitySearchHelper( $params, $interactorReturn );
+		$entitySearchHelper = $this->getMockEntitySearchHelper( $params, $interactorReturn );
 
-		$result = $this->callApiModule( $params, $searchInteractor );
+		$result = $this->callApiModule( $params, $entitySearchHelper );
 
 		$this->assertResultLooksGood( $result );
 		$this->assertEquals( $expected, $result['search'] );
