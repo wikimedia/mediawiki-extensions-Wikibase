@@ -6,14 +6,16 @@
  * This file is NOT an entry point the Wikibase extension. Use Wikibase.php.
  * It should furthermore not be included from outside the extension.
  *
+ * @see docs/options.wiki
+ *
  * @since 0.4
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( !defined( 'WB_REPO_EXAMPLE_ENTRY' ) ) {
-	die( 'Not an entry point.' );
+if ( !defined( 'WB_VERSION' ) ) {
+	die( 'Not an entry point. Load Wikibase.php first.' );
 }
 
 call_user_func( function() {
