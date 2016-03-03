@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea41786_c4ff3830",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpDescriptionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-03T16:10:49Z",
+      "side": 1,
+      "message": "Here it does.",
+      "revId": "4d03bcd5ae1bee1d18bc72cdba597f6537d614bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ea41786_84f9404c",
+        "filename": "repo/tests/phpunit/includes/ChangeOp/ChangeOpLabelTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-03T16:10:49Z",
+      "side": 1,
+      "message": "And here.",
+      "revId": "4d03bcd5ae1bee1d18bc72cdba597f6537d614bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
