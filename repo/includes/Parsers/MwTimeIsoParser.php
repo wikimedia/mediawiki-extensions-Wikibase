@@ -18,7 +18,7 @@ use ValueParsers\ValueParser;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  *
  * @todo move me to DataValues-time

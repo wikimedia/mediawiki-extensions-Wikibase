@@ -22,7 +22,7 @@ use Wikibase\Repo\Diff\EntityDiffVisualizer;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EntityDiffVisualizerTest extends MediaWikiTestCase {

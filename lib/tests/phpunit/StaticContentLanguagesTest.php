@@ -11,7 +11,7 @@ use Wikibase\Lib\StaticContentLanguages;
  * @group WikibaseLib
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class StaticContentLanguagesTest extends PHPUnit_Framework_TestCase {

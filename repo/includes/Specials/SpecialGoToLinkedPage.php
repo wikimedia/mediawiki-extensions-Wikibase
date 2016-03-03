@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
  * Enables accessing a linked page on a site by providing the item id and site
  * id.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jan Zerebecki
  */
 class SpecialGoToLinkedPage extends SpecialWikibasePage {

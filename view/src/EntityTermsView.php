@@ -16,8 +16,8 @@ use Wikibase\View\Template\TemplateFactory;
  * in the user's current language.
  *
  * @since 0.5
- * @licence GNU GPL v2+
  *
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author H. Snater < mediawiki@snater.com >

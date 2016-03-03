@@ -40,7 +40,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class DumpRdfTest extends MediaWikiLangTestCase {

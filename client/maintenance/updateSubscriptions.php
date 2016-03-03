@@ -20,7 +20,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * Maintenance script for inserting subscriptions into wb_changes_subscription based on the
  * wbc_entity_usage table.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class UpdateSubscriptions extends Maintenance {

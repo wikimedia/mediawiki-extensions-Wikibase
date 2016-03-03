@@ -9,7 +9,7 @@ use ValueValidators\ValueValidator;
 /**
  * TypeValidator checks a value's data type.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class TypeValidator implements ValueValidator {

@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @see docs/usagetracking.wiki
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class SqlSubscriptionManager implements SubscriptionManager {

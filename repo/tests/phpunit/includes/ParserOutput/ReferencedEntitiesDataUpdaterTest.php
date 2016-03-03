@@ -20,7 +20,7 @@ use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
  * @group WikibaseRepo
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {

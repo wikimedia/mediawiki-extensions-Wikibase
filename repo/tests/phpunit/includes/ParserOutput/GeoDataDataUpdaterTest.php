@@ -27,7 +27,7 @@ use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
  * @group WikibaseRepo
  * @group Database
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class GeoDataDataUpdaterTest extends \MediaWikiTestCase {

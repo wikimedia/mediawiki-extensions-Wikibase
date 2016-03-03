@@ -10,7 +10,7 @@ use Wikibase\ChunkCache;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ChunkCacheTest extends \MediaWikiTestCase {

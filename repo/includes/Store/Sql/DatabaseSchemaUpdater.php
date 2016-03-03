@@ -18,8 +18,8 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @since 0.5
- * @license GNU GPL v2+
  *
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Marius Hoch
  */

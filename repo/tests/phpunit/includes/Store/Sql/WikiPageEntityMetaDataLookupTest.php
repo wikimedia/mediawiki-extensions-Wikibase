@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseStore
  * @group Database
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {

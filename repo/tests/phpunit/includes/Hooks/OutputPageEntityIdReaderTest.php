@@ -16,7 +16,7 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
  * @group WikibaseRepo
  * @group Wikibase
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class OutputPageEntityIdReaderTest extends PHPUnit_Framework_TestCase {

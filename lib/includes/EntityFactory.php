@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  * - all entities can construct themselves from their serialization
  * Not a single method is non-problematic, so you should not use this class at all.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EntityFactory {

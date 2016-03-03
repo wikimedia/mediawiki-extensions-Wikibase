@@ -9,7 +9,7 @@ use ValueValidators\ValueValidator;
 /**
  * NumberRangeValidator checks that a numerical value is in a given range.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class NumberRangeValidator implements ValueValidator {

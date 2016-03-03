@@ -14,7 +14,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class VocabularyUriFormatter implements ValueFormatter {

@@ -14,7 +14,7 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * API module to search for Wikibase entities that can be used as a generator.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class QuerySearchEntities extends ApiQueryGeneratorBase {

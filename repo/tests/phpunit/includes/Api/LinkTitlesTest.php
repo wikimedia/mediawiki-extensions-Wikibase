@@ -5,7 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 /**
  * @covers Wikibase\Repo\Api\LinkTitles
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Addshore
  *

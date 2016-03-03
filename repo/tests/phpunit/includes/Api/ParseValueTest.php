@@ -24,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group WikibaseAPI
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ParseValueTest extends \PHPUnit_Framework_TestCase {

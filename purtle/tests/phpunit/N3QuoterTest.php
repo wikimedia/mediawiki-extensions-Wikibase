@@ -10,7 +10,7 @@ use Wikimedia\Purtle\N3Quoter;
  *
  * @group Purtle
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class N3QuoterTest extends PHPUnit_Framework_TestCase {

@@ -11,7 +11,7 @@ use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
  * @group WikibaseRepo
  * @group WikibaseChange
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch
  */
 class DatabaseSchemaUpdaterTest extends \PHPUnit_Framework_TestCase {

@@ -7,7 +7,7 @@ namespace Wikibase\Client\Usage;
  *
  * @see docs/usagetracking.wiki
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 interface UsageTracker {

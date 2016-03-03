@@ -22,7 +22,7 @@ use Wikibase\Repo\Diff\ClaimDiffer;
  * @group WikibaseRepo
  * @group ClaimSummaryBuilder
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Daniel Kinzler
  */

@@ -15,7 +15,7 @@ use ReflectionMethod;
  *
  * @group medium
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Lucie-Aimée Kaffee
  */
 class ApiConventionsTest extends \MediaWikiTestCase {

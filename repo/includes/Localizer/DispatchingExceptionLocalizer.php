@@ -10,7 +10,7 @@ use Message;
  * ExceptionLocalizer implementing localization of some well known types of exceptions
  * that may occur in the context of the Wikibase exception, as provided in $localizers.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  */

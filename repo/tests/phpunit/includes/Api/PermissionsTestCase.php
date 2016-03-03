@@ -8,7 +8,7 @@ use Wikibase\Test\PermissionsHelper;
 /**
  * Base class for permissions tests
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
  * @author Addshore
  */

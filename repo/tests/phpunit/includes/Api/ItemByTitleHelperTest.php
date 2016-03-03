@@ -16,7 +16,7 @@ use Wikibase\StringNormalizer;
  * @group Wikibase
  * @group WikibaseAPI
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  * @author Addshore
  */

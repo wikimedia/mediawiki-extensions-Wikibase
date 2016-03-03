@@ -9,7 +9,8 @@ use Wikibase\Repo\WikibaseRepo;
  * Page for listing entities without label.
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {

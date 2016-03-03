@@ -14,7 +14,7 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
  * @group Wikibase
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {

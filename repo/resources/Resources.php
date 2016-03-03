@@ -7,7 +7,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @since 0.1
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >
  *

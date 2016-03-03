@@ -14,7 +14,7 @@ use User;
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  */
 class LanguageFallbackChainFactory {
 

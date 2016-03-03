@@ -13,7 +13,7 @@ use Wikimedia\Assert\Assert;
  *
  * @since 0.5
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch
  */
 class ChangeLookup extends DBAccessBase implements ChunkAccess {

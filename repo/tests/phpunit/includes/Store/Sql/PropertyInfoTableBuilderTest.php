@@ -15,8 +15,6 @@ use Wikibase\Repo\WikibaseRepo;
 /**
  * @covers Wikibase\PropertyInfoTableBuilder
  *
- * @license GPL 2+
- *
  * @group Wikibase
  * @group WikibaseStore
  * @group WikibasePropertyInfo
@@ -24,6 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  * @group medium
  *
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {

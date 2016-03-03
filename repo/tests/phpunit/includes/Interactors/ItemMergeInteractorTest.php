@@ -30,7 +30,7 @@ use Wikibase\Test\MockRepository;
  * @group Database
  * @group medium
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  * @author Daniel Kinzler
  * @author Lucie-Aimée Kaffee

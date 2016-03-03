@@ -15,7 +15,7 @@ use Wikibase\StatementRankSerializer;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  * @author Thiemo Mättig
  */

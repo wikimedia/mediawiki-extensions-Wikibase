@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\StorageException;
  *
  * @todo: move this into MediaWiki core.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class TitleFactory {

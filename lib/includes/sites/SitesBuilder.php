@@ -11,8 +11,7 @@ use SiteStore;
  * @since 0.5
  * @note: this should move out of Wikibase
  *
- * @licence GNU GPL v2+
- *
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class SitesBuilder {

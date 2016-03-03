@@ -18,7 +18,7 @@ use Wikibase\Repo\LinkedData\EntityDataUriManager;
  * @group WikibaseEntityData
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EntityDataUriManagerTest extends \MediaWikiTestCase {

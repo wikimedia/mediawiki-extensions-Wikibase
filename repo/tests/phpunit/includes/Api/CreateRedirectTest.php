@@ -32,7 +32,7 @@ use Wikibase\Test\MockRepository;
  * @group WikibaseRepo
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class CreateRedirectTest extends \MediaWikiTestCase {

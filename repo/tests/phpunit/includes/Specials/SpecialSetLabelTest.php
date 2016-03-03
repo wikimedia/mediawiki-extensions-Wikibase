@@ -19,7 +19,7 @@ use Wikibase\Repo\Specials\SpecialSetLabel;
  * @group Database
  *        ^---- needed because we rely on Title objects internally
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

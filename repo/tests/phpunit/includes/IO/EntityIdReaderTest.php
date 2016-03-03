@@ -18,7 +18,7 @@ use Wikibase\Repo\IO\LineReader;
  * @group WikibaseRepo
  * @group WikibaseIO
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {

@@ -11,7 +11,7 @@ use Wikibase\ChangeNotificationJob;
  *
  * @since 0.5
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class JobQueueChangeNotificationSender implements ChangeNotificationSender {

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Trivial EntityHolder holding an entity object.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EntityInstanceHolder implements EntityHolder {

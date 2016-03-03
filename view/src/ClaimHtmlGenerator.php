@@ -17,8 +17,8 @@ use Wikibase\View\Template\TemplateFactory;
  * @todo move Statement-specific formatting elsewhere.
  *
  * @since 0.4
- * @licence GNU GPL v2+
  *
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  * @author Pragunbhutani
  * @author Katie Filbert < aude.wiki@gmail.com >

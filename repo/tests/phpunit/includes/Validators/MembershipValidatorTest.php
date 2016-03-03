@@ -12,7 +12,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @group Wikibase
  * @group WikibaseValidators
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class MembershipValidatorTest extends \PHPUnit_Framework_TestCase {

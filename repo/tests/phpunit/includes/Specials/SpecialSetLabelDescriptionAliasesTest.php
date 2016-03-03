@@ -33,7 +33,7 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler

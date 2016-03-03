@@ -16,7 +16,7 @@ use ValueFormatters\ValueFormatterBase;
  * @todo: drop ValueFormatterBase ancestry. Plain format() shouldn't be supported,
  * formatValue() should require the dataType ID.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DispatchingValueFormatter extends ValueFormatterBase implements TypedValueFormatter {

@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch < hoo@online.de >
  */

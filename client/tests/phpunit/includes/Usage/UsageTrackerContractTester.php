@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * Helper class for testing UsageTracker implementations,
  * providing generic tests for the interface's contract.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class UsageTrackerContractTester {

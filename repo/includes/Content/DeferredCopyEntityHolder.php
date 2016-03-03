@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * EntityHolder implementing deferred copying.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class DeferredCopyEntityHolder implements EntityHolder {

@@ -30,7 +30,7 @@ use Wikibase\Repo\Validators\SnakValidator;
  * @group WikibaseRepo
  * @group WikibaseValidators
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class SnakValidatorTest extends PHPUnit_Framework_TestCase {

@@ -7,7 +7,7 @@ namespace Wikibase\Lib;
  *
  * @since 0.5
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class UnionContentLanguages implements ContentLanguages {

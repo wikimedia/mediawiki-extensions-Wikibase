@@ -14,7 +14,7 @@ use Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain;
  * @group WikibaseSpecialPage
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  */
 class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 

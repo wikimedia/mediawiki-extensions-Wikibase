@@ -15,7 +15,7 @@ use Wikibase\Test\MockRepository;
  * @group WikibaseLib
  * @group WikibaseEntityLookup
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class GenericEntityInfoBuilderTest extends EntityInfoBuilderTest {

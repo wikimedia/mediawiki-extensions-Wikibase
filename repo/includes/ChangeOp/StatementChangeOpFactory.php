@@ -14,7 +14,7 @@ use Wikibase\Repo\Validators\SnakValidator;
 /**
  * Factory for ChangeOps that modify Statements.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class StatementChangeOpFactory {

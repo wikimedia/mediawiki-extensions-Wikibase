@@ -16,7 +16,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  * @group WikibaseEntityLookup
  * @group Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {

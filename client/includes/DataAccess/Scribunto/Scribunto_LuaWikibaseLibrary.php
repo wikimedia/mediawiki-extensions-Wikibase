@@ -27,7 +27,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  *
  * @since 0.4
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
  * @author Bene* < benestar.wikimedia@gmail.com >

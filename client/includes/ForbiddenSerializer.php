@@ -9,7 +9,8 @@ use Serializers\Serializer;
  * Serializer to be used as a stand-in when no serialization is supported.
  *
  * @since 0.5
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ForbiddenSerializer implements Serializer {

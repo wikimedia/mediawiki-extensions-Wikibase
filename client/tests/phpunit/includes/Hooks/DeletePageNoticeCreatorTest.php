@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @group Wikibase
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
 class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {

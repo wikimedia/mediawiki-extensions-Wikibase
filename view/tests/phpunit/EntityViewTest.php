@@ -15,7 +15,7 @@ use Wikibase\View\EntityView;
  * @group Wikibase
  * @group WikibaseView
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */

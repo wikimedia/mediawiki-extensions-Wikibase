@@ -19,7 +19,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
  * @group WikibaseRepo
  * @group WikibaseValidators
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {

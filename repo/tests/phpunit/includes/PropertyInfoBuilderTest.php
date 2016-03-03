@@ -14,7 +14,7 @@ use Wikibase\PropertyInfoBuilder;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class PropertyInfoBuilderTest extends \PHPUnit_Framework_TestCase {

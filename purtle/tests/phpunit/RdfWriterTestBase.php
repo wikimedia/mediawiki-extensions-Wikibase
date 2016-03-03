@@ -10,7 +10,7 @@ use Wikimedia\Purtle\RdfWriter;
  * Base class for tests for RdfWriter implementations.
  * Provides a common test suite for all implementations.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

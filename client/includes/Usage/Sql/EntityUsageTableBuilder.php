@@ -25,7 +25,7 @@ use Wikibase\Lib\Reporting\NullMessageReporter;
  * data item; once the page is re-parse, the "X" aspect would be removed with
  * whatever aspect(s) are actually used on the page.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EntityUsageTableBuilder {

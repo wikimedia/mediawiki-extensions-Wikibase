@@ -10,8 +10,8 @@ use Wikibase\DataModel\Statement\Statement;
  * Generates HTML for a section edit link
  *
  * @since 0.5
- * @licence GNU GPL v2+
  *
+ * @license GPL-2.0+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 interface EditSectionGenerator {

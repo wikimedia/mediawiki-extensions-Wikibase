@@ -9,7 +9,7 @@ use ValueValidators\ValueValidator;
  * UrlSchemeValidators is a collection of validators for some commonly used URL schemes.
  * This is intended for conveniently supplying a map of validators to UrlValidator.
  *
- * @license GPL 2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Thiemo Mättig
  */

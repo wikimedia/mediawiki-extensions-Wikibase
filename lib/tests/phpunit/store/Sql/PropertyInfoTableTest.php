@@ -15,7 +15,7 @@ use Wikibase\PropertyInfoTable;
  * @group WikibasePropertyInfo
  * @group Database
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class PropertyInfoTableTest extends MediaWikiTestCase {

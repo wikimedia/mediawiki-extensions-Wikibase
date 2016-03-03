@@ -27,7 +27,8 @@
  *
  * @see README.md
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase_Repository
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {

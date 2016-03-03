@@ -18,7 +18,8 @@ use Wikibase\Repo\WikibaseRepo;
  * Special page for creating redirects between entities
  *
  * @since 0.5
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author Addshore
  */
 class SpecialRedirectEntity extends SpecialWikibasePage {

@@ -41,7 +41,7 @@ use Wikibase\Repo\Validators\TypeValidator;
  * A helper class for test cases that deal with claims.
  * Provides mock services frequently used with claims.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class ChangeOpTestMockProvider {

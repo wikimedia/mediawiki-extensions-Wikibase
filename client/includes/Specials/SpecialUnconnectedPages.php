@@ -18,7 +18,8 @@ use Wikibase\NamespaceChecker;
  * List client pages that are not connected to repository items.
  *
  * @since 0.4
- * @licence GNU GPL v2+
+ *
+ * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Amir Sarabadani < ladsgroup@gmail.com >
  * @author Daniel Kinzler

@@ -15,7 +15,7 @@ use Wikibase\Test\MockRepository;
  * @group WikibaseClient
  * @group WikibaseDataAccess
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
