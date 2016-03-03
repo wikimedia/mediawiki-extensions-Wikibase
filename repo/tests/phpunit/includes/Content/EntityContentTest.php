@@ -409,7 +409,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$title = $titleLookup->getTitleForId( $entity->getId() );
 
-		if ( $title->getArticleID( Title::GAID_FOR_UPDATE ) <= 0 ) {
+		if ( !$title->exists( Title::GAID_FOR_UPDATE ) ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 			$store->saveEntity( $entity, 'test', $GLOBALS['wgUser'] );
 
@@ -418,9 +418,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		}
 
 		// sanity check - page must exist now
-		$this->assertGreaterThan( 0, $title->getArticleID(), 'sanity check: getArticleID()' );
-		$this->assertGreaterThan( 0, $title->getArticleID( Title::GAID_FOR_UPDATE ), 'sanity check: getArticleID()' );
-		$this->assertTrue( $title->exists(), 'sanity check: exists()' );
+		$this->assertTrue( $title->exists( Title::GAID_FOR_UPDATE ), 'sanity check: exists()' );
 
 		return $title;
 	}
