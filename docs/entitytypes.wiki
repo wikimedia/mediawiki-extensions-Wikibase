@@ -24,6 +24,8 @@ to be implemented and registered:
 * Serializers and Deserializers must be defined to convert the entity into native data structures
   that can be (de-)serialized as json. These classes have to implement the DispatchableSerializer
   respectively the DispatchableDeserializer interfaces from the serialization compoment.
+* Each entity needs a view to provide an HTML representation to the user. Each view has to extend
+  the abstract EntityView class from the WikibaseView component.
 * MediaWiki bindings are needed by defining a content class extending EntityContent and a handler
   class extending EntityHandler. Furthermore, the handler has to be globally registered in
   $wgContentHandlers. It is used to create instances of the content class.
@@ -43,6 +45,9 @@ associated with a function having the dedicated signature:
 ; deserializer-factory-callback (repo and client):
 : a callable that returns a DispatchableDeserializer instance, with the first and only argument
   being a DeserializerFactory
+; view-factory-callback (repo only)
+: a callable that returns an EntityView instance, with the arguments being a language code, a
+  LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes respectively
 WikibaseClientEntityTypes hooks to provide additional entity type definitions.
