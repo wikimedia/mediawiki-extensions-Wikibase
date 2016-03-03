@@ -6,57 +6,53 @@
  * This file is NOT an entry point the Wikibase Client extension. Use WikibaseClient.php.
  * It should furthermore not be included from outside the extension.
  *
+ * @see docs/options.wiki
+ *
  * @since 0.4
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 
-if ( !defined( 'WB_CLIENT_EXAMPLE_ENTRY' ) ) {
-	die( 'Not an entry point.' );
+if ( !defined( 'WBC_VERSION' ) ) {
+	die( 'Not an entry point. Load WikibaseClient.php first.' );
 }
-
-// NOTE: If this wiki also runs the Wikibase repo extension,
-//       stop and just use the defaults for settings.
-if ( defined( 'WB_VERSION' ) ) {
-	return;
-}
-
-// Base URL for building links to the repository.
-// Assumes your wiki is setup as "http://repo.example.org/wiki/"
-// This can be protocol relative, such as "//www.wikidata.org"
-$wgWBClientSettings['repoUrl'] = "http://repo.example.org";
-
-// This setting is optional if you have the same type of setup for your
-// repo and client.  It will default to using the client's $wgArticlePath setting,
-// and if you do not have $wgArticlePath set anywhere, MediaWiki has a default for it.
-$wgWBClientSettings['repoArticlePath'] = "/wiki/$1";
-
-/**
- * Assuming your wiki is setup with such script path as "http://repo.example.org/w/api.php". This
- * should be the same as the $wgScriptPath setting if you have it set in your repo. If $wgScriptPath
- * is not set, then MediaWiki assumes a default.
- *
- * If your client and repo are setup in the same way, then the below setting is optional and will
- * default to what you have $wgScriptPath set in the client.
- */
-$wgWBClientSettings['repoScriptPath'] = "/w";
 
 // The global site ID by which this wiki is known on the repo.
 $wgWBClientSettings['siteGlobalID'] = "mywiki";
 
-// Database name of the repository, for direct access from the client.
-// repoDatabase and changesDatabase will generally be the same.
-// This requires the given database name to be known to LBFactory, see
-// $wgLBFactoryConf below.
-$wgWBClientSettings['repoDatabase'] = "repo";
-$wgWBClientSettings['changesDatabase'] = "repo";
-
 $wgWBClientSettings['injectRecentChanges'] = true;
 $wgWBClientSettings['showExternalRecentChanges'] = true;
 
-// Make sure we use the same keys on repo and clients, so we can share cached objects.
-$wgWBClientSettings['sharedCacheKeyPrefix'] = $wgWBClientSettings['repoDatabase'] . ':WBL/' . rawurlencode( WBL_VERSION );
+// If this wiki also runs the Wikibase repo extension,
+// use the automatic defaults for repo-related settings.
+// If this wiki isn't running the repo extension,
+// configure an example repo.
+if ( !defined( 'WB_VERSION' ) ) {
+	// Base URL for building links to the repository.
+	// Assumes your wiki is setup as "http://repo.example.org/wiki/"
+	// This can be protocol relative, such as "//www.wikidata.org"
+	$wgWBClientSettings['repoUrl'] = "http://repo.example.org";
+
+	// This setting is optional if you have the same type of setup for your
+	// repo and client.  It will default to using the client's $wgArticlePath setting,
+	// and if you do not have $wgArticlePath set anywhere, MediaWiki has a default for it.
+	$wgWBClientSettings['repoArticlePath'] = "/wiki/$1";
+
+	// Assuming your wiki is setup with such script path as "http://repo.example.org/w/api.php". This
+	// should be the same as the $wgScriptPath setting if you have it set in your repo. If $wgScriptPath
+	// is not set, then MediaWiki assumes a default.
+	//
+	// If your client and repo are setup in the same way, then the below setting is optional and will
+	// default to what you have $wgScriptPath set in the client.
+	$wgWBClientSettings['repoScriptPath'] = "/w";
+
+	// Database name of the repository, for direct access from the client.
+	// repoDatabase and changesDatabase will generally be the same.
+	// This requires the given database name to be known to LBFactory, see
+	// $wgLBFactoryConf below.
+	$wgWBClientSettings['repoDatabase'] = "repo";
+}
 
 // In order to access a remote repo using a different database server,
 // LBFactoryMulti must be used. In that case, enabled the block below.
