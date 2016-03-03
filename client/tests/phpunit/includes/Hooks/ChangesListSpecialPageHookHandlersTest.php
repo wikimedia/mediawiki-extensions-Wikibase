@@ -13,6 +13,9 @@ use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
  * @group WikibaseClientHooks
  * @group WikibaseClient
  * @group Wikibase
+ *
+ * @license GPL-2.0+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase {
 

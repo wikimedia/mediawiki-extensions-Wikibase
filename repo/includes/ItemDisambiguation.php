@@ -16,7 +16,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
- * @author jeblad
+ * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @authro Adam Shorland

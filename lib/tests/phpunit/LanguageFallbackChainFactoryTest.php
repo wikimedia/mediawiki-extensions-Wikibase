@@ -16,7 +16,7 @@ use Wikibase\LanguageFallbackChainFactory;
  * @group WikibaseLib
  *
  * @license GPL-2.0+
- * @author Liangent
+ * @author Liangent < liangent@gmail.com >
  */
 class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 

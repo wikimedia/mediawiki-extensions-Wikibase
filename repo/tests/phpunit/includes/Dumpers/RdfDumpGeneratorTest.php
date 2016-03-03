@@ -31,6 +31,7 @@ use Wikibase\Test\Rdf\RdfBuilderTestData;
  * @group RdfDump
  *
  * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 

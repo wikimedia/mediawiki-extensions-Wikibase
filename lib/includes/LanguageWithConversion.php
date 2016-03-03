@@ -10,7 +10,7 @@ use MWException;
  * Used for items in language fallback chain.
  *
  * @license GPL-2.0+
- * @author Liangent
+ * @author Liangent < liangent@gmail.com >
  */
 class LanguageWithConversion {
 
