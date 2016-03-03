@@ -45,6 +45,11 @@ $wgWBClientSettings['repoScriptPath'] = "/w";
 // The global site ID by which this wiki is known on the repo.
 $wgWBClientSettings['siteGlobalID'] = "mywiki";
 
+// The name of the wiki group the local group is part of.
+// If null, the group will be looked zup in the sires table in the database,
+// based on siteGlobalID.
+$wgWBClientSettings['siteGroup'] = "mywikigroup";
+
 // Database name of the repository, for direct access from the client.
 // repoDatabase and changesDatabase will generally be the same.
 // This requires the given database name to be known to LBFactory, see
