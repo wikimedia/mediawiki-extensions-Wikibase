@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Definition of data types for use with Wikibase.
  * The array returned by the code below is supposed to be merged into $wgWBRepoDataTypes.
