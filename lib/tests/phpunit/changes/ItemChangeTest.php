@@ -36,21 +36,19 @@ class ItemChangeTest extends EntityChangeTest {
 	}
 
 	public function entityProvider() {
-		$entities = array_filter(
+		$items = array_filter(
 			TestChanges::getEntities(),
 			function( EntityDocument $entity ) {
-				return ( $entity instanceof Item );
+				return $entity instanceof Item;
 			}
 		);
 
-		$cases = array_map(
+		return array_map(
 			function( Item $item ) {
 				return array( $item );
 			},
-			$entities
+			$items
 		);
-
-		return $cases;
 	}
 
 	public function itemChangeProvider() {
