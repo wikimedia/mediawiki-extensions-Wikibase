@@ -14,7 +14,7 @@ use OutputPage;
 use RequestContext;
 use RuntimeException;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -91,7 +91,8 @@ class ActionTestCase extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @var Entity[]|EntityRedirect[] List of Entity or EntityRedirect objects, with logical handles as keys.
+	 * @var EntityDocument[]|EntityRedirect[] List of EntityDocument or EntityRedirect objects,
+	 *      with logical handles as keys.
 	 */
 	private static $testItems = array();
 
@@ -260,7 +261,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @todo Provide this for all kinds of entities.
 	 *
 	 * @param string $handle
-	 * @param array $revisions List of Entity or string. String values represent redirects.
+	 * @param array $revisions List of EntityDocument or string. String values represent redirects.
 	 *
 	 * @return Item|EntityRedirect
 	 * @throws MWException
@@ -273,7 +274,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$id = null;
 		$result = null;
 
-		/** @var Entity|string $item */
+		/** @var EntityDocument|string $item */
 		foreach ( $revisions as $item ) {
 			$flags = ( $id !== null ) ? EDIT_UPDATE : EDIT_NEW;
 			$result = $this->createTestContentRevision( $item, $id, $wgUser, $flags );
@@ -289,13 +290,13 @@ class ActionTestCase extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param Entity|string $item
+	 * @param EntityDocument|string $item
 	 * @param EntityId|null $id
 	 * @param User $user
 	 * @param int $flags
 	 *
 	 * @throws RuntimeException
-	 * @return Entity|EntityRedirect
+	 * @return EntityDocument|EntityRedirect
 	 */
 	private function createTestContentRevision( $item, $id, User $user, $flags ) {
 		if ( $flags == EDIT_NEW ) {

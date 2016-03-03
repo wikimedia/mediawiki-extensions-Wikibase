@@ -7,7 +7,7 @@ use DataValues\Serializers\DataValueSerializer;
 use InvalidArgumentException;
 use MWContentSerializationException;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -64,7 +64,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @param EntityId[] $ids
 	 *
-	 * @return Entity[]
+	 * @return EntityDocument[]
 	 */
 	public function makeEntities( array $ids ) {
 		$entities = array();

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test\Repo\Validators;
 
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -114,9 +114,9 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 	/**
 	 * @dataProvider validEntityProvider
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 */
-	public function testValidateEntity( Entity $entity ) {
+	public function testValidateEntity( EntityDocument $entity ) {
 		$dupeDetector = $this->getMockDupeDetector();
 		$validator = new LabelDescriptionUniquenessValidator( $dupeDetector );
 
@@ -170,10 +170,10 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 
 	/**
 	 * @dataProvider invalidEntityProvider
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string|null $error
 	 */
-	public function testValidateEntity_failure( Entity $entity, $error ) {
+	public function testValidateEntity_failure( EntityDocument $entity, $error ) {
 		$dupeDetector = $this->getMockDupeDetector();
 		$validator = new LabelDescriptionUniquenessValidator( $dupeDetector );
 

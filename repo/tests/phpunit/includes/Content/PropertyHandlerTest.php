@@ -47,9 +47,14 @@ class PropertyHandlerTest extends EntityHandlerTest {
 	public function contentProvider() {
 		$contents = parent::contentProvider();
 
-		/**
-		 * @var PropertyContent $content
-		 */
+		/** @var PropertyContent $content */
+		$content = $this->newEntityContent();
+		$content->getEntity()->setAliases( 'en', array( 'foo' ) );
+		$content->getEntity()->setDescription( 'de', 'foobar' );
+		$content->getEntity()->setDescription( 'en', 'baz' );
+		$content->getEntity()->setLabel( 'nl', 'o_O' );
+		$contents[] = array( $content );
+
 		$content = clone $contents[1][0];
 		// TODO: add some prop-specific stuff: $content->getProperty()->;
 		$contents[] = array( $content );

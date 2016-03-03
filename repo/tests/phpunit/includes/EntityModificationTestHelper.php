@@ -5,7 +5,6 @@ namespace Wikibase\Test;
 use Deserializers\Deserializer;
 use PHPUnit_Framework_Assert as Assert;
 use Serializers\Serializer;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -103,7 +102,7 @@ class EntityModificationTestHelper {
 	}
 
 	/**
-	 * @param array|Entity $entity
+	 * @param array|EntityDocument $entity
 	 * @param EntityId|string|null $id Overrides any id in $entity
 	 */
 	public function putEntity( $entity, $id = null ) {
@@ -161,11 +160,11 @@ class EntityModificationTestHelper {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 *
 	 * @return array
 	 */
-	public function serializeEntity( Entity $entity ) {
+	public function serializeEntity( EntityDocument $entity ) {
 		$data = $this->serializer->serialize( $entity );
 
 		return $data;
@@ -195,16 +194,16 @@ class EntityModificationTestHelper {
 	 * Top level keys not present in the $expected structure are ignored.
 	 * Some fields ('id' and 'hash') in lower level structures are ignored.
 	 *
-	 * @param array|Entity $expected
-	 * @param array|Entity $actual
+	 * @param array|EntityDocument $expected
+	 * @param array|EntityDocument $actual
 	 * @param string $message
 	 */
 	public function assertEntityEquals( $expected, $actual, $message = '' ) {
-		if ( $expected instanceof Entity ) {
+		if ( $expected instanceof EntityDocument ) {
 			$expected = $this->serializeEntity( $expected );
 		}
 
-		if ( $actual instanceof Entity ) {
+		if ( $actual instanceof EntityDocument ) {
 			$actual = $this->serializeEntity( $actual );
 		}
 

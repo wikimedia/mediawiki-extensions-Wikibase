@@ -6,7 +6,7 @@ use MediaWikiTestCase;
 use Revision;
 use Status;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -94,7 +94,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider simpleEntityParameterProvider()
 	 */
-	public function testSaveEntity( Entity $entity ) {
+	public function testSaveEntity( EntityDocument $entity ) {
 		/* @var WikiPageEntityStore $store */
 		/* @var EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
@@ -121,6 +121,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// TODO: check notifications in wb_changes table!
 
 		// update entity
+		// FIXME: the clear() method is not defined by EntityDocument.
+		//        How else do we create an empty instance of the same type?
 		$entity->clear();
 		$entity->getFingerprint()->setLabel( 'en', 'UPDATED' );
 
@@ -167,7 +169,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideSaveEntityError
 	 */
-	public function testSaveEntityError( Entity $entity, $flags, $baseRevId, $error ) {
+	public function testSaveEntityError( EntityDocument $entity, $flags, $baseRevId, $error ) {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
@@ -367,7 +369,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @todo: rewrite the tests using this
 	 *
 	 * @param WikiPageEntityStore $store
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string $summary
 	 * @param User|null $user
 	 * @param int $flags
@@ -377,7 +379,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 */
 	protected function saveEntity(
 		WikiPageEntityStore $store,
-		Entity $entity,
+		EntityDocument $entity,
 		$summary = '',
 		User $user = null,
 		$flags = 0,
@@ -505,7 +507,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider simpleEntityParameterProvider
 	 */
-	public function testDeleteEntity( Entity $entity ) {
+	public function testDeleteEntity( EntityDocument $entity ) {
 		/* @var WikiPageEntityStore $store */
 		/* @var EntityRevisionLookup $lookup */
 		list( $store, $lookup ) = $this->createStoreAndLookup();

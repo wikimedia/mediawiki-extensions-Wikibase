@@ -5,7 +5,7 @@ namespace Wikibase\Test;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use Wikibase\ChangeOp\ChangeOpStatement;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -330,12 +330,12 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param Snak $mainSnak
 	 *
 	 * @return Statement
 	 */
-	private function makeStatement( Entity $entity, Snak $mainSnak ) {
+	private function makeStatement( EntityDocument $entity, Snak $mainSnak ) {
 		$statement = new Statement( $mainSnak );
 		$guidGenerator = new GuidGenerator();
 		$statement->setGuid( $guidGenerator->newGuid( $entity->getId() ) );

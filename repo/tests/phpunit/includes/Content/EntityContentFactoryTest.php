@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Title;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -263,9 +263,9 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider newFromEntityProvider
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 */
-	public function testNewFromEntity( Entity $entity ) {
+	public function testNewFromEntity( EntityDocument $entity ) {
 		$factory = $this->newFactory();
 		$content = $factory->newFromEntity( $entity );
 

@@ -9,7 +9,7 @@ use RequestContext;
 use Status;
 use Title;
 use User;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -139,7 +139,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Status $inputStatus
-	 * @param Entity|EntityRedirect|null $new
+	 * @param EntityDocument|EntityRedirect|null $new
 	 * @param array $expected
 	 *
 	 * @dataProvider runData

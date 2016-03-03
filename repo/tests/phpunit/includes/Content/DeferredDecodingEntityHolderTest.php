@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\Content\DeferredDecodingEntityHolder;
 use Wikibase\Content\EntityHolder;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -26,7 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
 class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return Entity
+	 * @return EntityDocument
 	 */
 	private function newEntity() {
 		$item = new Item( new ItemId( 'Q17' ) );
@@ -36,13 +36,13 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param Entity $entity
+	 * @param EntityDocument $entity
 	 * @param string|null $expectedEntityType
 	 * @param EntityId|null $expectedEntityId
 	 *
 	 * @return EntityHolder
 	 */
-	private function newHolder( Entity $entity, $expectedEntityType = null, EntityId $expectedEntityId = null ) {
+	private function newHolder( EntityDocument $entity, $expectedEntityType = null, EntityId $expectedEntityId = null ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$codec = new EntityContentDataCodec(
 			new BasicEntityIdParser(),
