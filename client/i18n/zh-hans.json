@@ -88,7 +88,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}项ID",
 	"wikibase-pageinfo-entity-id-none": "无",
 	"wikibase-property-render-error": "无法生成属性$1：$2",
-	"wikibase-otherprojects": "其他项目",
+	"wikibase-otherprojects": "在其他项目中",
 	"wikibase-otherprojects-beta-message": "其他项目侧边栏",
 	"wikibase-otherprojects-beta-description": "在边栏添加“{{int:wikibase-otherprojects}}”节，它包含连入{{WBREPONAME}}数据的其他维基媒体项目的页面连接。"
 }

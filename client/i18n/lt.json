@@ -5,7 +5,8 @@
 			"Hugo.arg",
 			"Reedy",
 			"Salpusnis",
-			"Albertas"
+			"Albertas",
+			"Zygimantus"
 		]
 	},
 	"wikibase-client-desc": "Wikibase išplėtimo klientas",
@@ -77,7 +78,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} įrašo identifikatorius",
 	"wikibase-pageinfo-entity-id-none": "Nėra",
 	"wikibase-property-render-error": "Nepavyko pavaizduoti savybės $1: $2",
-	"wikibase-otherprojects": "Kiti projektai",
+	"wikibase-otherprojects": "Kituose projektuose",
 	"wikibase-otherprojects-beta-message": "Kitų projektų šoninė juosta",
 	"wikibase-otherprojects-beta-description": "Prie šoninės juostos prideda \"{{int:wikibase-otherprojects}}\" sekciją, pateikiančią nuorodas į kitus Wikimedia projektus, pagrįstus {{WBREPONAME}} duomenimis."
 }

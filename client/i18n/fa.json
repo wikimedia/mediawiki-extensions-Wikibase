@@ -81,7 +81,7 @@
 	"wikibase-pageinfo-entity-id": "شناسه مورد {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "هیچ‌کدام",
 	"wikibase-property-render-error": "خطا در ارائهٔ خصوصیت  $1: $2",
-	"wikibase-otherprojects": "دیگر پروژه‌ها",
+	"wikibase-otherprojects": "در دیگر پروژه‌ها",
 	"wikibase-otherprojects-beta-message": "نوار کناری سایر پروژه‌ها",
 	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد."
 }

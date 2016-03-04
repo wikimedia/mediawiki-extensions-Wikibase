@@ -87,7 +87,7 @@
 	"wikibase-pageinfo-entity-id": "ID de l’élément {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Aucun",
 	"wikibase-property-render-error": "Échec de rendu de la propriété $1 : $2",
-	"wikibase-otherprojects": "Autres projets",
+	"wikibase-otherprojects": "Dans d’autres projets",
 	"wikibase-otherprojects-beta-message": "Barre latérale des autres projets",
 	"wikibase-otherprojects-beta-description": "Ajoute une section « {{int:wikibase-otherprojects}} » à la barre latérale qui fournit des liens vers les autres  projets de Wikimédia basés sur les données {{WBREPONAME}}."
 }

@@ -76,7 +76,7 @@
 	"wikibase-pageinfo-entity-id": "ID for {{WBREPONAME}}-element",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-property-render-error": "Klarte ikke å gjengi egenskapen $1: $2",
-	"wikibase-otherprojects": "Andre prosjekter",
+	"wikibase-otherprojects": "På andre prosjekter",
 	"wikibase-otherprojects-beta-message": "Andre prosjekter i sidefeltet",
 	"wikibase-otherprojects-beta-description": "Legger til «{{int:wikibase-otherprojects}}» i sidefeltet, med lenker til andre Wikimedia-prosjekter basert på data fra {{WBREPONAME}}."
 }

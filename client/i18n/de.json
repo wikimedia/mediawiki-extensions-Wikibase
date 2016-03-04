@@ -77,7 +77,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-Objektkennung",
 	"wikibase-pageinfo-entity-id-none": "Keine",
 	"wikibase-property-render-error": "Eigenschaft „$1“ konnte nicht gerendert werden: $2",
-	"wikibase-otherprojects": "Andere Projekte",
+	"wikibase-otherprojects": "In anderen Projekten",
 	"wikibase-otherprojects-beta-message": "Seitenleiste anderer Projekte",
 	"wikibase-otherprojects-beta-description": "Ergänzt einen Abschnitt „{{int:wikibase-otherprojects}}“ in der Seitenleiste mit Links zu anderen auf {{WBREPONAME}}-Daten basierenden Wikimedia-Projekten."
 }

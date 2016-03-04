@@ -87,7 +87,7 @@
 	"wikibase-pageinfo-entity-id": "ID elemento {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nessuno",
 	"wikibase-property-render-error": "Errore durante il rendering della proprietà $1: $2",
-	"wikibase-otherprojects": "Altri progetti",
+	"wikibase-otherprojects": "In altri progetti",
 	"wikibase-otherprojects-beta-message": "Altri progetti nella barra laterale",
 	"wikibase-otherprojects-beta-description": "Aggiunge una sezione \"{{int:wikibase-otherprojects}}\" alla barra laterale che fornisce collegamenti agli altri progetti Wikimedia basati sui dati {{WBREPONAME}}."
 }

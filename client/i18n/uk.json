@@ -88,7 +88,7 @@
 	"wikibase-pageinfo-entity-id": "Ідентифікатор елемента у {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Нема",
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",
-	"wikibase-otherprojects": "Інші проекти",
+	"wikibase-otherprojects": "В інших проектах",
 	"wikibase-otherprojects-beta-message": "Бічна панель інших проектів",
 	"wikibase-otherprojects-beta-description": "Додає розділ «{{int:wikibase-otherprojects}}» на бічну панель, який містить посилання на інші проекти Фонду Вікімедіа, використовуючи {{WBREPONAME}} для отримання потрібних для цього даних."
 }

@@ -11,12 +11,12 @@
 	"tooltip-t-wikibase": "म्हायती भांडारांत जोडिल्ल्या कलमाचो नग",
 	"wikibase-comment-update": "{{WBREPONAME}} नग बदल्ला",
 	"wikibase-dataitem": "{{WBREPONAME}}नग",
-	"wikibase-editlinks": "दुवो संस्करण",
-	"wikibase-editlinkstitle": "आंतरभाशीक दुवो संस्करण",
+	"wikibase-editlinks": "दुवो संपादीत करात",
+	"wikibase-editlinkstitle": "आंतरभाशीक दुवो संपादीत करात",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "लिपयात",
 	"wikibase-rc-hide-wikidata-show": "दाखयात",
 	"wikibase-rc-wikibase-edit-letter": "डे",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संस्करण",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} संपादन",
 	"wikibase-otherprojects": "हेर प्रकल्प"
 }

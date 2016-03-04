@@ -4,14 +4,15 @@
 			"Darshan kandolkar",
 			"Konknni mogi 24",
 			"Supriya kankumbikar",
-			"Vaishali Parab"
+			"Vaishali Parab",
+			"The Discoverer"
 		]
 	},
-	"wikibase-edit": "संस्करण",
+	"wikibase-edit": "संपादन",
 	"wikibase-add": "जोड",
 	"wikibase-label-empty": "कुरू निश्चीत करुं ना",
 	"wikibase-description-empty": "आतां मेरेन खंयचेंच वर्णन दिवूंक ना",
-	"wikibase-statements": "विधानां",
+	"wikibase-statementsection-statements": "विधानां",
 	"wikibase-sitelinks-special": "हेर वेबसायट",
 	"wikibase-aliases-empty": "खंयचीच उर्फ परिभाशा ना",
 	"wikibase-statementview-rank-normal": "सामान्य क्रम",

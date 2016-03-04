@@ -65,7 +65,7 @@
 	"wikibase-pageinfo-entity-id": "Ідэнтыфікатар аб’екта {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Няма",
 	"wikibase-property-render-error": "Не ўдалося адлюстраваць уласьцівасьць $1: $2",
-	"wikibase-otherprojects": "Іншыя праекты",
+	"wikibase-otherprojects": "У іншых праектах",
 	"wikibase-otherprojects-beta-message": "Бакавая панэль іншых праектаў",
 	"wikibase-otherprojects-beta-description": "Дадае на бакавую панэль разьдзел «{{int:wikibase-otherprojects}}», які ўтрымлівае спасылкі на іншыя праекты фундацыі «Вікімэдыя», заснаваныя на зьвестках з {{WBREPONAME}}."
 }

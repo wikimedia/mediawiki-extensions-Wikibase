@@ -68,7 +68,7 @@
 	"wikibase-pageinfo-entity-id": "ID položky {{grammar:2sg|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Žádná",
 	"wikibase-property-render-error": "Nepodařilo se zobrazit vlastnost $1: $2",
-	"wikibase-otherprojects": "Jiné projekty",
+	"wikibase-otherprojects": "Na jiných projektech",
 	"wikibase-otherprojects-beta-message": "Panel Jiné projekty",
 	"wikibase-otherprojects-beta-description": "Přidává do postranní lišty sekci „{{int:wikibase-otherprojects}}“, obsahující odkazy na ostatní projekty Wikimedia podle údajů na {{grammar:6sg|{{WBREPONAME}}}}."
 }

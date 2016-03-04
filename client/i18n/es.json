@@ -13,7 +13,8 @@
 			"Pegna",
 			"Vivaelcelta",
 			"Themasterriot",
-			"Macofe"
+			"Macofe",
+			"Idontknow"
 		]
 	},
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
@@ -85,7 +86,7 @@
 	"wikibase-pageinfo-entity-id": "Id. del elemento de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Ninguno",
 	"wikibase-property-render-error": "Error al procesar propiedad $1: $2",
-	"wikibase-otherprojects": "Otros proyectos",
+	"wikibase-otherprojects": "En otros proyectos",
 	"wikibase-otherprojects-beta-message": "Barra lateral de otros proyectos",
 	"wikibase-otherprojects-beta-description": "Añade a la barra lateral la sección «{{int:wikibase-otherprojects}}» que enlaza los proyectos de Wikimedia cuyos datos se alojan en {{WBREPONAME}}."
 }

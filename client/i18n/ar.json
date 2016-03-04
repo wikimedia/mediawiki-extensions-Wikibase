@@ -74,7 +74,7 @@
 	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
 	"wikibase-property-render-error": "\nفشل عرض الملكية$1: $2",
-	"wikibase-otherprojects": "مشاريع أخرى",
+	"wikibase-otherprojects": "في مشاريع أخرى",
 	"wikibase-otherprojects-beta-message": "المشاريع الأخرى في الشريط الجانبي",
 	"wikibase-otherprojects-beta-description": "يضيف قسم \"{{int:wikibase-otherprojects}}\" إلى الشريط الجانبي لعرض وصلات لمشاريع ويكيميديا الأخرى استنادا إلى معطيات {{WBREPONAME}}."
 }

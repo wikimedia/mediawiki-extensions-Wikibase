@@ -79,7 +79,7 @@
 	"wikibase-pageinfo-entity-id": "מזהה פריט ב{{GRAMMAR:תחילית|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "אין",
 	"wikibase-property-render-error": "כשל בהכנת המאפיין $1 לתצוגה: $2",
-	"wikibase-otherprojects": "מיזמים אחרים",
+	"wikibase-otherprojects": "במיזמים אחרים",
 	"wikibase-otherprojects-beta-message": "סרגל צד של מיזמים אחרים",
 	"wikibase-otherprojects-beta-description": "הוספה לסרגל הצד של חלק \"{{int:wikibase-otherprojects}}\" שמספק קישורים למיזמי ויקימדיה אחרים לפי נתוני {{WBREPONAME}}."
 }
