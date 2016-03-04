@@ -48,7 +48,7 @@ class EntityChangeTest extends ChangeRowTest {
 	 * @return string
 	 */
 	protected function getEntityClass() {
-		return 'Wikibase\DataModel\Entity\Entity';
+		return 'Wikibase\DataModel\Entity\EntityDocument';
 	}
 
 	protected function newEntityChange( EntityId $entityId ) {
