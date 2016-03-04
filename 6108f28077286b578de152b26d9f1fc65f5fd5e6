@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_859bc41a",
+        "filename": "Wikibase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-03-04T12:31:30Z",
+      "side": 1,
+      "message": "i think for legacy reasons, but probably ok to change that now or remove them",
+      "parentUuid": "0e2f53b6_c56dcc98",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_a56a487c",
         "filename": "client/ExampleSettings.php",
         "patchSetId": 8
