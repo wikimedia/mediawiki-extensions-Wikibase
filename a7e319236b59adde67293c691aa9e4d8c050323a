@@ -34,6 +34,24 @@
       "revId": "a7e319236b59adde67293c691aa9e4d8c050323a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_084d0be1",
+        "filename": "tests/browser/features/step_definitions/non_existing_item_steps.rb",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 487
+      },
+      "writtenOn": "2016-03-04T14:03:15Z",
+      "side": 1,
+      "message": "Reported: https://phabricator.wikimedia.org/T128860",
+      "parentUuid": "2ea41786_ff9f6853",
+      "revId": "a7e319236b59adde67293c691aa9e4d8c050323a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
