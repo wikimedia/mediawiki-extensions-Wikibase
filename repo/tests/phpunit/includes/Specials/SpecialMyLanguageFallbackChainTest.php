@@ -15,6 +15,7 @@ use Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain;
  * @group Database
  *
  * @license GPL-2.0+
+ * @author Liangent < liangent@gmail.com >
  */
 class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 

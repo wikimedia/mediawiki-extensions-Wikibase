@@ -10,6 +10,7 @@ use DataValues\TimeValue;
  * ensures it looks OK.
  *
  * @license GPL-2.0+
+ * @author Stas Malyshev
  */
 class DateTimeValueCleaner {
 

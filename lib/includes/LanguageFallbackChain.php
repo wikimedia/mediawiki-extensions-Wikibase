@@ -12,7 +12,7 @@ use Language;
  * @since 0.4
  *
  * @license GPL-2.0+
- * @author Liangent
+ * @author Liangent < liangent@gmail.com >
  * @author Thiemo Mättig
  */
 class LanguageFallbackChain {

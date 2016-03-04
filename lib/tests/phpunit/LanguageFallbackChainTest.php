@@ -14,7 +14,7 @@ use Wikibase\LanguageWithConversion;
  * @group WikibaseLib
  *
  * @license GPL-2.0+
- * @author Liangent
+ * @author Liangent < liangent@gmail.com >
  * @author Thiemo Mättig
  */
 class LanguageFallbackChainTest extends \MediaWikiTestCase {

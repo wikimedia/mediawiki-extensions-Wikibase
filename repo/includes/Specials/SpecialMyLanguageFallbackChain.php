@@ -16,6 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @since 0.4
  *
  * @license GPL-2.0+
+ * @author Liangent < liangent@gmail.com >
  */
 class SpecialMyLanguageFallbackChain extends SpecialPage {
 
