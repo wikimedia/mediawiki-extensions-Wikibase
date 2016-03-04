@@ -16,7 +16,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return \PHPUnit_Framework_MockObject_MockObject|EntityLookup
+	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
 		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
