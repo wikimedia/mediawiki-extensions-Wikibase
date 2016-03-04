@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_e55a9021",
+        "filename": "client/config/WikibaseClient.jenkins.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2016-03-04T10:40:16Z",
+      "side": 1,
+      "message": "Why can\u0027t this be in the example?",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
