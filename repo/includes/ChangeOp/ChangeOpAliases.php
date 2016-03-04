@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintHolder;
+use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 
@@ -102,8 +102,8 @@ class ChangeOpAliases extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof FingerprintHolder ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintHolder' );
+		if ( !( $entity instanceof FingerprintProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
 		}
 
 		$fingerprint = $entity->getFingerprint();
@@ -111,7 +111,6 @@ class ChangeOpAliases extends ChangeOpBase {
 		$this->updateSummary( $summary, $this->action, $this->languageCode, $this->aliases );
 
 		$this->updateFingerprint( $fingerprint );
-		$entity->setFingerprint( $fingerprint );
 	}
 
 	/**

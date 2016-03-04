@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Statement\StatementListHolder;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Summary;
 
@@ -97,8 +97,8 @@ class ChangeOpReference extends ChangeOpBase {
 	 * - the reference gets set to $reference when $referenceHash and $reference are set
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof StatementListHolder ) ) {
-			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
 
 		$statements = $entity->getStatements();
@@ -121,7 +121,6 @@ class ChangeOpReference extends ChangeOpBase {
 		}
 
 		$statement->setReferences( $references );
-		$entity->setStatements( $statements );
 	}
 
 	/**

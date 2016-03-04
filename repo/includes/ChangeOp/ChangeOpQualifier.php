@@ -7,7 +7,7 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Statement\StatementListHolder;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Summary;
 
@@ -75,8 +75,8 @@ class ChangeOpQualifier extends ChangeOpBase {
 	 * - the qualifier gets set to $snak when $snakHash and $snak are set
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof StatementListHolder ) ) {
-			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
 
 		$statements = $entity->getStatements();
@@ -95,7 +95,6 @@ class ChangeOpQualifier extends ChangeOpBase {
 		}
 
 		$statement->setQualifiers( $qualifiers );
-		$entity->setStatements( $statements );
 	}
 
 	/**

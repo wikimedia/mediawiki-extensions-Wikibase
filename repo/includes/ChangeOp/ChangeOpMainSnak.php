@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\DataModel\Statement\StatementListHolder;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Summary;
 
@@ -81,8 +81,8 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 * - the claim's mainsnak gets set to $snak when $claimGuid and $snak are set
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof StatementListHolder ) ) {
-			throw new InvalidArgumentException( '$entity must be a StatementListHolder' );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a StatementListProvider' );
 		}
 
 		$statements = $entity->getStatements();
@@ -92,8 +92,6 @@ class ChangeOpMainSnak extends ChangeOpBase {
 		} else {
 			$this->setStatement( $statements, $summary );
 		}
-
-		$entity->setStatements( $statements );
 	}
 
 	/**
