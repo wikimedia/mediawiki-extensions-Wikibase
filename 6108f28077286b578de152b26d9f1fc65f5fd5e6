@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_881c7b6c",
+        "filename": "Wikibase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-04T13:25:58Z",
+      "side": 1,
+      "message": "We should just delete them.",
+      "parentUuid": "0e2f53b6_c56dcc98",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_a56a487c",
         "filename": "client/ExampleSettings.php",
         "patchSetId": 8
@@ -48,6 +66,24 @@
       "writtenOn": "2016-03-04T11:21:34Z",
       "side": 1,
       "message": "I find a newline good practice.",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_c835e3d9",
+        "filename": "client/ExampleSettings.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-04T13:25:58Z",
+      "side": 1,
+      "message": "I think this file can simply go away...",
+      "parentUuid": "0e2f53b6_a56a487c",
       "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_88a91bdf",
+        "filename": "client/config/WikibaseClient.jenkins.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-04T13:25:58Z",
+      "side": 1,
+      "message": "Maybe, but I don\u0027t think it\u0027s that important here.",
+      "parentUuid": "0e2f53b6_a5f1a8dc",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_e55a9021",
         "filename": "client/config/WikibaseClient.jenkins.php",
         "patchSetId": 8
@@ -82,6 +136,24 @@
       "writtenOn": "2016-03-04T10:40:16Z",
       "side": 1,
       "message": "Why can\u0027t this be in the example?",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_c89963ca",
+        "filename": "client/config/WikibaseClient.jenkins.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-04T13:25:58Z",
+      "side": 1,
+      "message": "Because for a typical install, it\u0027s a bad idea to set it explicitly.\nFor a test run, we want to set, because that means we don\u0027t have to inject anything into the database to make the client code work... and also for performance.",
+      "parentUuid": "0e2f53b6_e55a9021",
       "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

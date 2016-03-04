@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_28756f93",
+        "filename": "client/config/WikibaseClient.example.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-04T13:25:58Z",
+      "side": 0,
+      "message": "Because it defaults to the repo database, and there is generally no reason to change that. Example settings should be examples of things that people would actually want to change, I think.",
+      "parentUuid": "0e2f53b6_6527a060",
+      "revId": "974cd645e3a4673ad907cb5f2422e1b4e5bf8bb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_c51b0c20",
         "filename": "client/config/WikibaseClient.example.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-04T11:21:34Z",
       "side": 0,
       "message": "This is gone in the new version. Why?",
+      "revId": "974cd645e3a4673ad907cb5f2422e1b4e5bf8bb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_68581736",
+        "filename": "client/config/WikibaseClient.example.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-04T13:25:58Z",
+      "side": 0,
+      "message": "Because there is usually no reason to set this manually, and having the default duplicated here leads to inconsistencies (as evidenced by the fact that this got out of sync with the current default).\n\nI had the choice to leave the wrong value, duplicate the default, or remove it. Removing it seemed best.",
+      "parentUuid": "0e2f53b6_c51b0c20",
       "revId": "974cd645e3a4673ad907cb5f2422e1b4e5bf8bb0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
