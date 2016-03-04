@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e2f53b6_c56dcc98",
+        "filename": "Wikibase.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-04T11:21:34Z",
+      "side": 1,
+      "message": "I wonder why the two ExampleSettings files are not in the config folders? Should we fix this?",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_a56a487c",
+        "filename": "client/ExampleSettings.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-04T11:21:34Z",
+      "side": 1,
+      "message": "I find a newline good practice.",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_a5f1a8dc",
+        "filename": "client/config/WikibaseClient.jenkins.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-04T11:21:34Z",
+      "side": 1,
+      "message": "@see docs/options.wiki?",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_e55a9021",
         "filename": "client/config/WikibaseClient.jenkins.php",
         "patchSetId": 8
@@ -13,6 +64,23 @@
       "writtenOn": "2016-03-04T10:40:16Z",
       "side": 1,
       "message": "Why can\u0027t this be in the example?",
+      "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_e5fbb0b8",
+        "filename": "repo/config/Wikibase.jenkins.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-04T11:21:34Z",
+      "side": 1,
+      "message": "@see docs/options.wiki?",
       "revId": "6108f28077286b578de152b26d9f1fc65f5fd5e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

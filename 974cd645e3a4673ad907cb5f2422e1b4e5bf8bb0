@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_6527a060",
+        "filename": "client/config/WikibaseClient.example.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-04T11:21:34Z",
+      "side": 0,
+      "message": "This is gone in the new version. Why?",
+      "revId": "974cd645e3a4673ad907cb5f2422e1b4e5bf8bb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_c51b0c20",
+        "filename": "client/config/WikibaseClient.example.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-04T11:21:34Z",
+      "side": 0,
+      "message": "This is gone in the new version. Why?",
+      "revId": "974cd645e3a4673ad907cb5f2422e1b4e5bf8bb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
