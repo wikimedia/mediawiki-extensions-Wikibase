@@ -76,7 +76,7 @@
 	"pageswithbadges": "صفحات با درجه‌هایشان",
 	"wikibase-pageswithbadges-invalid-id": "\"$1\" یک شناسهٔ آیتم معتبر نیست.",
 	"wikibase-pageswithbadges-legend": "فهرست صفحات با درجه‌های داده شده",
-	"wikibase-pageswithbadges-badge": "درجه:",
+	"wikibase-pageswithbadges-badge": "نشان:",
 	"wikibase-pageswithbadges-submit": "نمایش صفحات",
 	"wikibase-pageinfo-entity-id": "شناسه مورد {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "هیچ‌کدام",

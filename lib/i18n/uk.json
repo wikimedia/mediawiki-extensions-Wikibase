@@ -146,7 +146,7 @@
 	"wikibase-entity-summary-wbsetqualifier-update": "Змінено {{PLURAL:$1|уточнення|кілька уточнень}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "Вилучено {{PLURAL:$1|уточнення|кілька уточнень}}",
 	"wikibase-entity-summary-wbremovereferences-remove": "Вилучено {{PLURAL:$3|посилання}} із запису",
-	"wikibase-entity-summary-wbmergeitems-from": "Об'єднано елемент з $3",
+	"wikibase-entity-summary-wbmergeitems-from": "Приєднано елемент із $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Приєднано елемент до $3",
 	"wikibase-item-summary-wbcreate-new": "Створено новий елемент",
 	"wikibase-item-summary-wbeditentity": "Створено новий елемент",
