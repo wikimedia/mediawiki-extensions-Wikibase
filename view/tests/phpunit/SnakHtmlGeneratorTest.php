@@ -5,6 +5,7 @@ namespace Wikibase\View\Tests;
 use DataValues\StringValue;
 use PHPUnit_Framework_MockObject_Matcher_Invocation;
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -37,7 +38,7 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	private function getSnakHtmlGenerator(
 		PHPUnit_Framework_MockObject_Matcher_Invocation $formatPropertyIdMatcher
 	) {
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$snakFormatter = $this->getMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->once() )
 			->method( 'formatSnak' )
 			->will( $this->returnValue( '<SNAK>' ) );
@@ -45,7 +46,7 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
-		$propertyIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+		$propertyIdFormatter = $this->getMock( EntityIdFormatter::class );
 		$propertyIdFormatter->expects( $formatPropertyIdMatcher )
 			->method( 'formatEntityId' )
 			->will( $this->returnValue( '<ID>' ) );

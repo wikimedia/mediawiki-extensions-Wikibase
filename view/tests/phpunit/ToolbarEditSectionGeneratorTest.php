@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
@@ -102,7 +103,7 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 	}
 
 	private function newToolbarEditSectionGenerator() {
-		$specialPageLinker = $this->getMock( 'Wikibase\View\SpecialPageLinker' );
+		$specialPageLinker = $this->getMock( SpecialPageLinker::class );
 		$specialPageLinker->expects( $this->any() )
 			->method( 'getLink' )
 			->will( $this->returnCallback( function( $specialPage, $params = array() ) {

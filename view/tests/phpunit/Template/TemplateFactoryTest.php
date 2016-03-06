@@ -25,7 +25,7 @@ class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetDefaultInstance() {
 		$instance = TemplateFactory::getDefaultInstance();
-		$this->assertInstanceOf( 'Wikibase\View\Template\TemplateFactory', $instance );
+		$this->assertInstanceOf( TemplateFactory::class, $instance );
 	}
 
 	public function testGetTemplates() {

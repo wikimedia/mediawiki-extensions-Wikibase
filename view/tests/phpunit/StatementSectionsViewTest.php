@@ -4,8 +4,10 @@ namespace Wikibase\View\Tests;
 
 use Language;
 use MediaWikiTestCase;
+use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
@@ -38,14 +40,12 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 			'wb-section-heading' => '<HEADING id="$2" class="$3">$1</HEADING>',
 		) ) );
 
-		$statementGrouper = $this->getMock(
-			'Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper'
-		);
+		$statementGrouper = $this->getMock( StatementGrouper::class );
 		$statementGrouper->expects( $this->any() )
 			->method( 'groupStatements' )
 			->will( $this->returnValue( $statementLists ) );
 
-		$statementListView = $this->getMockBuilder( 'Wikibase\View\StatementGroupListView' )
+		$statementListView = $this->getMockBuilder( StatementGroupListView::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$statementListView->expects( $this->any() )
