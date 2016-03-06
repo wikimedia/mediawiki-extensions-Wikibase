@@ -4,12 +4,8 @@ namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Language;
 use LuaSandboxFunction;
-use Parser;
-use ParserOptions;
-use Scribunto;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
-use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\WikibaseClient;

@@ -16,8 +16,6 @@
 
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
 
 return array(
 	'item' => array(

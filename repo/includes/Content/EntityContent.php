@@ -11,7 +11,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use Diff\Patcher\PatcherException;
 use Hooks;
-use Language;
 use LogicException;
 use MWException;
 use ParserOptions;

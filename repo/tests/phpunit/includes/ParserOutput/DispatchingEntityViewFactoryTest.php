@@ -11,9 +11,6 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityView;
-use Wikibase\View\ItemView;
-use Wikibase\View\PropertyView;
-use Wikibase\View\ViewFactory;
 
 /**
  * @covers Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory

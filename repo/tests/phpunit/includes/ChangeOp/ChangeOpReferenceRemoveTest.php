@@ -10,8 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpReferenceRemove
