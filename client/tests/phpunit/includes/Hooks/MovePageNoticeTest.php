@@ -3,11 +3,14 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
+use MovePageForm;
+use OutputPage;
 use Title;
 use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers Wikibase\Client\Hooks\MovePageNotice
@@ -47,7 +50,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 	 */
 	public function testDoSpecialMovepageAfterMove( $expected, Title $oldTitle, Title $newTitle ) {
 		$siteLinkLookup = $this->getMock(
-			'Wikibase\Lib\Store\SiteLinkTable',
+			SiteLinkLookup::class,
 			array( 'getItemIdForSiteLink' ),
 			array( 'SiteLinkTable', true )
 		);
@@ -63,7 +66,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 			$this->getRepoLinker()
 		);
 
-		$outputPage = $this->getMockBuilder( 'OutputPage' )
+		$outputPage = $this->getMockBuilder( OutputPage::class )
 				->disableOriginalConstructor()
 				->getMock();
 
@@ -75,7 +78,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 				->method( 'addModules' )
 				->with( 'wikibase.client.page-move' );
 
-		$movePageForm = $this->getMock( 'MovePageForm' );
+		$movePageForm = $this->getMock( MovePageForm::class );
 		$movePageForm->expects( $this->once() )
 				->method( 'getOutput' )
 				->will( $this->returnValue( $outputPage ) );

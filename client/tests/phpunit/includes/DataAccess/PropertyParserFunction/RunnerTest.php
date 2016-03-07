@@ -6,15 +6,22 @@ use Parser;
 use ParserOptions;
 use ParserOutput;
 use PHPUnit_Framework_TestCase;
+use PPFrame;
 use PPFrame_Hash;
+use PPNode;
 use Preprocessor_Hash;
 use Title;
 use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
+use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRenderer;
+use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers Wikibase\Client\DataAccess\PropertyParserFunction\Runner
@@ -62,7 +69,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
-			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
+			$this->getMock( SiteLinkLookup::class ),
 			new BasicEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
@@ -72,7 +79,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$parser = $this->getParser();
 		$frame = $this->getFromFrame( $itemId->getSerialization() );
 
-		$result = $runner->runPropertyParserFunction( $parser, $frame, array( 'Cat', $this->getMock( 'PPNode' ) ) );
+		$result = $runner->runPropertyParserFunction(
+			$parser,
+			$frame,
+			array( 'Cat', $this->getMock( PPNode::class ) )
+		);
 
 		$expected = array(
 			'meow!',
@@ -94,7 +105,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 		$runner = new Runner(
 			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
-			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
+			$this->getMock( SiteLinkLookup::class ),
 			new BasicEntityIdParser(),
 			$restrictedEntityLookup,
 			'enwiki',
@@ -103,22 +114,24 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 
 		$parser = $this->getParser();
 		$frame = $this->getFromFrame( $itemId->getSerialization() );
-		$runner->runPropertyParserFunction( $parser, $frame, array( 'Cat', $this->getMock( 'PPNode' ) ) );
+		$runner->runPropertyParserFunction(
+			$parser,
+			$frame,
+			array( 'Cat', $this->getMock( PPNode::class ) )
+		);
 
 		// Still 0 as the entity has been loaded before
 		$this->assertSame( 0, $parser->mExpensiveFunctionCount );
 	}
 
 	public function testRunPropertyParserFunction_arbitraryAccessNotFound() {
-		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory'
-			)
+		$rendererFactory = $this->getMockBuilder( StatementGroupRendererFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$runner = new Runner(
 			$rendererFactory,
-			$this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' ),
+			$this->getMock( SiteLinkLookup::class ),
 			new BasicEntityIdParser(),
 			$this->getRestrictedEntityLookup(),
 			'enwiki',
@@ -128,7 +141,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$parser = $this->getParser();
 		$frame = $this->getFromFrame( 'ThisIsNotQuiteAnEntityId' );
 
-		$result = $runner->runPropertyParserFunction( $parser, $frame, array( 'Cat', $this->getMock( 'PPNode' ) ) );
+		$result = $runner->runPropertyParserFunction(
+			$parser,
+			$frame,
+			array( 'Cat', $this->getMock( PPNode::class ) )
+		);
 
 		$expected = array(
 			'',
@@ -160,14 +177,11 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 	 * @return RestrictedEntityLookup
 	 */
 	private function getRestrictedEntityLookup() {
-		return new RestrictedEntityLookup(
-			$this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' ),
-			200
-		);
+		return new RestrictedEntityLookup( $this->getMock( EntityLookup::class ), 200 );
 	}
 
 	private function getSiteLinkLookup( ItemId $itemId ) {
-		$siteLinkLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkLookup' )
+		$siteLinkLookup = $this->getMockBuilder( SiteLinkLookup::class )
 			->getMock();
 
 		$siteLinkLookup->expects( $this->once() )
@@ -177,15 +191,20 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		return $siteLinkLookup;
 	}
 
+	/**
+	 * @param string $itemIdSerialization
+	 *
+	 * @return PPFrame
+	 */
 	private function getFromFrame( $itemIdSerialization ) {
-		$frame = $this->getMockBuilder( 'PPFrame' )
+		$frame = $this->getMockBuilder( PPFrame::class )
 			->getMock();
 		$frame->expects( $this->once() )
 			->method( 'expand' )
 			->with( 'Cat' )
 			->will( $this->returnValue( 'Cat' ) );
 
-		$childFrame = $this->getMockBuilder( 'PPFrame' )
+		$childFrame = $this->getMockBuilder( PPFrame::class )
 			->getMock();
 		$childFrame->expects( $this->once() )
 			->method( 'getArgument' )
@@ -199,12 +218,16 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		return $frame;
 	}
 
-	private function getStatementGroupRendererFactory( $entityId, $propertyLabelOrId ) {
+	/**
+	 * @param EntityId $entityId
+	 * @param string $propertyLabelOrId
+	 *
+	 * @return StatementGroupRendererFactory
+	 */
+	private function getStatementGroupRendererFactory( EntityId $entityId, $propertyLabelOrId ) {
 		$renderer = $this->getRenderer( $entityId, $propertyLabelOrId );
 
-		$rendererFactory = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory'
-			)
+		$rendererFactory = $this->getMockBuilder( StatementGroupRendererFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -215,10 +238,14 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		return $rendererFactory;
 	}
 
-	private function getRenderer( $entityId, $propertyLabelOrId ) {
-		$renderer = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRenderer'
-			)
+	/**
+	 * @param EntityId $entityId
+	 * @param string $propertyLabelOrId
+	 *
+	 * @return StatementGroupRenderer
+	 */
+	private function getRenderer( EntityId $entityId, $propertyLabelOrId ) {
+		$renderer = $this->getMockBuilder( StatementGroupRenderer::class )
 			->disableOriginalConstructor()
 			->getMock();
 

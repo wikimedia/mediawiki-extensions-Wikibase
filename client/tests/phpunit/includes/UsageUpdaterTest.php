@@ -4,6 +4,9 @@ namespace Wikibase\Client\Test\Store;
 
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\SubscriptionManager;
+use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
@@ -44,18 +47,18 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider addUsagesForPageProvider
 	 */
 	public function testAddUsagesForPage( $newUsage, $touched, $subscribe ) {
-		$usageTracker = $this->getMock( 'Wikibase\Client\Usage\UsageTracker' );
+		$usageTracker = $this->getMock( UsageTracker::class );
 		$usageTracker->expects( $this->once() )
 			->method( 'trackUsedEntities' )
 			->with( 23, $newUsage, $touched );
 
-		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
+		$usageLookup = $this->getMock( UsageLookup::class );
 		$usageLookup->expects( $this->never() )
 			->method( 'getUsagesForPage' );
 		$usageLookup->expects( $this->never() )
 			->method( 'getUnusedEntities' );
 
-		$subscriptionManager = $this->getMock( 'Wikibase\Client\Usage\SubscriptionManager' );
+		$subscriptionManager = $this->getMock( SubscriptionManager::class );
 		$subscriptionManager->expects( $this->never() )
 			->method( 'unsubscribe' );
 
@@ -112,13 +115,13 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider pruneUsagesForPageProvider
 	 */
 	public function testPruneUsagesForPage( $lastUpdatedBefore, $prunedUsages, $prunedEntityIds, $unused ) {
-		$usageTracker = $this->getMock( 'Wikibase\Client\Usage\UsageTracker' );
+		$usageTracker = $this->getMock( UsageTracker::class );
 		$usageTracker->expects( $this->once() )
 			->method( 'pruneStaleUsages' )
 			->with( 23, $lastUpdatedBefore )
 			->will( $this->returnValue( $prunedUsages ) );
 
-		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
+		$usageLookup = $this->getMock( UsageLookup::class );
 		$usageLookup->expects( $this->never() )
 			->method( 'getUsagesForPage' );
 		$usageLookup->expects( $this->once() )
@@ -130,7 +133,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 			) )
 			->will( $this->returnValue( $unused ) );
 
-		$subscriptionManager = $this->getMock( 'Wikibase\Client\Usage\SubscriptionManager' );
+		$subscriptionManager = $this->getMock( SubscriptionManager::class );
 		$subscriptionManager->expects( $this->never() )
 			->method( 'subscribe' );
 

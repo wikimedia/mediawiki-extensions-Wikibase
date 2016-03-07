@@ -24,7 +24,7 @@ class CachingOtherProjectsSitesProviderTest extends \PHPUnit_Framework_TestCase 
 	 * @return OtherProjectsSitesProvider
 	 */
 	private function getOtherProjectsSitesProvider() {
-		$otherProjectsSitesProvider = $this->getMock( 'Wikibase\Client\OtherProjectsSitesProvider' );
+		$otherProjectsSitesProvider = $this->getMock( OtherProjectsSitesProvider::class );
 
 		$otherProjectsSitesProvider->expects( $this->once() )
 			->method( 'getOtherProjectsSiteIds' )

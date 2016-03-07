@@ -95,7 +95,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	private function getLanguageLinkBadgeDisplay() {
-		$badgeDisplay = $this->getMockBuilder( 'Wikibase\Client\Hooks\LanguageLinkBadgeDisplay' )
+		$badgeDisplay = $this->getMockBuilder( LanguageLinkBadgeDisplay::class )
 			->disableOriginalConstructor()
 			->getMock();
 

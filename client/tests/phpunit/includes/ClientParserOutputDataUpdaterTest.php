@@ -86,19 +86,17 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	 * @return OtherProjectsSidebarGeneratorFactory
 	 */
 	private function getOtherProjectsSidebarGeneratorFactory( array $otherProjects ) {
-		$otherProjectsSidebarGenerator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
+		$generator = $this->getOtherProjectsSidebarGenerator( $otherProjects );
 
-		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
-				'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory'
-			)
+		$factory = $this->getMockBuilder( OtherProjectsSidebarGeneratorFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
+		$factory->expects( $this->any() )
 			->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
+			->will( $this->returnValue( $generator ) );
 
-		return $otherProjectsSidebarGeneratorFactory;
+		return $factory;
 	}
 
 	/**
@@ -107,15 +105,15 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	 * @return OtherProjectsSidebarGenerator
 	 */
 	private function getOtherProjectsSidebarGenerator( array $otherProjects ) {
-		$otherProjectsSidebarGenerator = $this->getMockBuilder( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator' )
+		$generator = $this->getMockBuilder( OtherProjectsSidebarGenerator::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$otherProjectsSidebarGenerator->expects( $this->any() )
+		$generator->expects( $this->any() )
 			->method( 'buildProjectLinkSidebar' )
 			->will( $this->returnValue( $otherProjects ) );
 
-		return $otherProjectsSidebarGenerator;
+		return $generator;
 	}
 
 	public function testUpdateItemIdProperty() {

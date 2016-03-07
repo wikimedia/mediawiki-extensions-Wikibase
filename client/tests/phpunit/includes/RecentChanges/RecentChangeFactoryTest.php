@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Diff\MapDiffer;
 use Language;
+use SiteStore;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -30,7 +31,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return RecentChangeFactory
 	 */
 	private function newRecentChangeFactory() {
-		$siteStore = $this->getMock( 'SiteStore' );
+		$siteStore = $this->getMock( SiteStore::class );
 
 		$lang = Language::factory( 'qqx' );
 		$siteLinkCommentCreator = new SiteLinkCommentCreator( $lang, $siteStore, 'testwiki' );
@@ -76,7 +77,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return Title
 	 */
 	private function newTitle( $ns, $text, $pageId, $revId, $length ) {
-		$title = $this->getMockBuilder( 'Title' )
+		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 

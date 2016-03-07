@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\SnakFormatter;
 
 /**
@@ -131,9 +132,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	 * @return SnaksFinder
 	 */
 	private function getSnaksFinder( array $snaks ) {
-		$snaksFinder = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\SnaksFinder'
-			)
+		$snaksFinder = $this->getMockBuilder( SnaksFinder::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -144,10 +143,11 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		return $snaksFinder;
 	}
 
+	/**
+	 * @return PropertyIdResolver
+	 */
 	private function getPropertyIdResolver() {
-		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyIdResolver'
-			)
+		$propertyIdResolver = $this->getMockBuilder( PropertyIdResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -158,10 +158,11 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 		return $propertyIdResolver;
 	}
 
+	/**
+	 * @return PropertyIdResolver
+	 */
 	private function getPropertyIdResolverForPropertyNotFound() {
-		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyIdResolver'
-			)
+		$propertyIdResolver = $this->getMockBuilder( PropertyIdResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -181,12 +182,10 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup( $entityAccessLimit ) {
-		$lookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
+		$lookup = $this->getMock( EntityLookup::class );
 		$lookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->will( $this->returnValue(
-				$this->getMock( 'Wikibase\DataModel\StatementListProvider' )
-			) );
+			->will( $this->returnValue( $this->getMock( StatementListProvider::class ) ) );
 
 		return new RestrictedEntityLookup( $lookup, $entityAccessLimit );
 	}
@@ -195,7 +194,7 @@ class LanguageAwareRendererTest extends \PHPUnit_Framework_TestCase {
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter() {
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$snakFormatter = $this->getMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )

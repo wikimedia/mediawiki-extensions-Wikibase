@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
+use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Statement\Statement;
@@ -23,7 +24,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 	 * @return WikibaseLuaEntityBindings
 	 */
 	private function getWikibaseLuaEntityBindings() {
-		$entityStatementsRenderer = $this->getMockBuilder( 'Wikibase\Client\DataAccess\StatementTransclusionInteractor' )
+		$entityStatementsRenderer = $this->getMockBuilder( StatementTransclusionInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
 

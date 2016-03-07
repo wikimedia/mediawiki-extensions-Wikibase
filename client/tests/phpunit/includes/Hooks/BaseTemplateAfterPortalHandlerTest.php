@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use BaseTemplate;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 
 /**
@@ -21,7 +22,7 @@ class BaseTemplateAfterPortletHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider getEditLinkProvider
 	 */
 	public function testGetEditLink( $expect, $link, $name ) {
-		$template = $this->getMockBuilder( 'BaseTemplate' )
+		$template = $this->getMockBuilder( BaseTemplate::class )
 			->disableOriginalConstructor()
 			->getMock();
 
