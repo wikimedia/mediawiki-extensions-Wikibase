@@ -30,7 +30,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 		$options = new FormatterOptions();
 		$options->setOption( ValueFormatter::OPT_LANG, 'qqx' );
 
-		$dateTimeFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$dateTimeFormatter = $this->getMock( ValueFormatter::class );
 
 		$dateTimeFormatter->expects( $this->any() )
 			->method( 'format' )

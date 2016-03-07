@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
+use Message;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -35,7 +36,7 @@ class MessageSnakFormatterTest extends \MediaWikiTestCase {
 	 * @return MessageSnakFormatter
 	 */
 	private function getFormatter( $snakType, $format ) {
-		$message = $this->getMockBuilder( 'Message' )
+		$message = $this->getMockBuilder( Message::class )
 			->setConstructorArgs( array( 'message' ) )
 			->getMock();
 

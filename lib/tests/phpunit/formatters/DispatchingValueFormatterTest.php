@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test;
 use DataValues\StringValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\DispatchingValueFormatter;
@@ -62,12 +63,12 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function formatProvider() {
-		$stringFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$stringFormatter = $this->getMock( ValueFormatter::class );
 		$stringFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnValue( 'VT:string' ) );
 
-		$mediaFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$mediaFormatter = $this->getMock( ValueFormatter::class );
 		$mediaFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnValue( 'VT:wikibase-entityid' ) );
@@ -104,12 +105,12 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function formatValueProvider() {
-		$stringFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$stringFormatter = $this->getMock( ValueFormatter::class );
 		$stringFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnValue( 'VT:string' ) );
 
-		$mediaFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$mediaFormatter = $this->getMock( ValueFormatter::class );
 		$mediaFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnValue( 'PT:commonsMedia' ) );

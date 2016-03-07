@@ -31,7 +31,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 		$options = new FormatterOptions();
 		$options->setOption( ValueFormatter::OPT_LANG, 'qqx' );
 
-		$timeFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$timeFormatter = $this->getMock( ValueFormatter::class );
 		$timeFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnValue( $formattedHeading ) );

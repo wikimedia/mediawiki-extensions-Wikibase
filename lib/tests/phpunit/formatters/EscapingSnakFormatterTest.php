@@ -27,7 +27,7 @@ class EscapingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter( $output ) {
-		$formatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$formatter = $this->getMock( SnakFormatter::class );
 
 		$formatter->expects( $this->any() )
 			->method( 'formatSnak' )

@@ -84,7 +84,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 			) ),
 		);
 
-		$termIndex = $this->getMock( 'Wikibase\TermIndex' );
+		$termIndex = $this->getMock( TermIndex::class );
 
 		$termIndex->expects( $this->exactly( $getTermsOfEntityCalls ) )
 			->method( 'getTermsOfEntity' )

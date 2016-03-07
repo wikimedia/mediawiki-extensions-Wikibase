@@ -89,8 +89,11 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup->getEntity( new ItemId( 'Q1' ) );
 	}
 
+	/**
+	 * @return EntityRevisionLookup
+	 */
 	private function newEntityLookupExceptionThrowingRevisionLookup() {
-		$revisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$revisionLookup = $this->getMock( EntityRevisionLookup::class );
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
@@ -123,8 +126,11 @@ class RevisionBasedEntityLookupTest extends \PHPUnit_Framework_TestCase {
 		$entityLookup->hasEntity( new ItemId( 'Q1' ) );
 	}
 
+	/**
+	 * @return EntityRevisionLookup
+	 */
 	private function newBadExceptionThrowingRevisionLookup() {
-		$revisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$revisionLookup = $this->getMock( EntityRevisionLookup::class );
 
 		$revisionLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
