@@ -36,7 +36,7 @@ class ErrorHandlingSnakFormatterTest extends \MediaWikiTestCase {
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter( $throw = null ) {
-		$formatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$formatter = $this->getMock( SnakFormatter::class );
 
 		$formatter->expects( $this->any() )
 			->method( 'getFormat' )
@@ -59,7 +59,7 @@ class ErrorHandlingSnakFormatterTest extends \MediaWikiTestCase {
 	 * @return ValueFormatter
 	 */
 	private function getValueFormatter() {
-		$formatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$formatter = $this->getMock( ValueFormatter::class );
 
 		$formatter->expects( $this->any() )
 			->method( 'format' )

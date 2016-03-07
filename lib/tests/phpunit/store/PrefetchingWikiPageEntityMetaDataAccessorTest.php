@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 
 /**
  * @covers Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor
@@ -29,7 +30,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
 
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( array(
@@ -77,7 +78,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 			'Q3' => '~=[,,_,,]:3'
 		);
 
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( array(
@@ -108,7 +109,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 			'Q2' => 'cat',
 		);
 
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
 			->with( array(
@@ -137,7 +138,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$fromMaster = EntityRevisionLookup::LATEST_FROM_MASTER;
 		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
 
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->exactly( 3 ) )
 			->method( 'loadRevisionInformation' )
 			->will( $this->returnCallback( function( array $entityIds, $mode ) {
@@ -197,7 +198,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		// lookup function.
 		$q1 = new ItemId( 'Q1' );
 
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
 			->with( $q1, 123 )
@@ -221,7 +222,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$fromSlave = EntityRevisionLookup::LATEST_FROM_SLAVE;
 		$q1 = new ItemId( 'Q1' );
 
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor' );
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->exactly( 2 ) )
 			->method( 'loadRevisionInformation' )
 			->with( array( $q1->getSerialization() => $q1 ) )

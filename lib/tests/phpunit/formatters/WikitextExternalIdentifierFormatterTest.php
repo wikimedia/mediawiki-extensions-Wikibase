@@ -24,7 +24,7 @@ use Wikibase\Lib\SnakUrlExpander;
 class WikitextExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideFormatSnak() {
-		$formatterUrlExpander = $this->getMock( 'Wikibase\Lib\SnakUrlExpander' );
+		$formatterUrlExpander = $this->getMock( SnakUrlExpander::class );
 
 		$formatterUrlExpander->expects( $this->any() )
 			->method( 'expandUrl' )
@@ -85,7 +85,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCas
 	 * @dataProvider provideFormatSnak_ParameterTypeException
 	 */
 	public function testFormatSnak_ParameterTypeException( $snak ) {
-		$urlExpander = $this->getMock( 'Wikibase\Lib\SnakUrlExpander' );
+		$urlExpander = $this->getMock( SnakUrlExpander::class );
 		$formatter = new WikitextExternalIdentifierFormatter( $urlExpander );
 
 		$this->setExpectedException( 'Wikimedia\Assert\ParameterTypeException' );
@@ -93,7 +93,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCas
 	}
 
 	public function testGetFormat() {
-		$urlExpander = $this->getMock( 'Wikibase\Lib\SnakUrlExpander' );
+		$urlExpander = $this->getMock( SnakUrlExpander::class );
 		$formatter = new WikitextExternalIdentifierFormatter( $urlExpander );
 
 		$this->assertSame( SnakFormatter::FORMAT_WIKI, $formatter->getFormat() );

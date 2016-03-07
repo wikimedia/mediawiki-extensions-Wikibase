@@ -18,7 +18,7 @@ use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 class ReportingExceptionHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testReportMessage() {
-		$reporter = $this->getMock( 'Wikibase\Lib\Reporting\MessageReporter' );
+		$reporter = $this->getMock( MessageReporter::class );
 		$reporter->expects( $this->once() )
 			->method( 'reportMessage' );
 

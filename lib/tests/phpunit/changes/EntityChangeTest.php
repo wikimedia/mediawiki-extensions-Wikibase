@@ -7,6 +7,7 @@ use Diff\DiffOp\DiffOpAdd;
 use RecentChange;
 use Revision;
 use stdClass;
+use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -193,7 +194,7 @@ class EntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testSetMetadataFromUser() {
-		$user = $this->getMockBuilder( 'User' )
+		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -263,14 +264,14 @@ class EntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testGivenEntityChangeWithoutObjectId_setRevisionInfoSetsObjectId() {
-		$content = $this->getMockBuilder( 'Wikibase\ItemContent' )
+		$content = $this->getMockBuilder( ItemContent::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$content->expects( $this->once() )
 			->method( 'getEntityId' )
 			->will( $this->returnValue( new ItemId( 'Q1' ) ) );
 
-		$revision = $this->getMockBuilder( 'Revision' )
+		$revision = $this->getMockBuilder( Revision::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$revision->expects( $this->once() )

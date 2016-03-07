@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Change;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
@@ -20,7 +21,7 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
 class ChangeLookupTest extends \MediaWikiTestCase {
 
 	public function testGetRecordId() {
-		$change = $this->getMock( 'Wikibase\Change' );
+		$change = $this->getMock( Change::class );
 		$change->expects( $this->once() )
 			->method( 'getId' )
 			->will( $this->returnValue( 42 ) );

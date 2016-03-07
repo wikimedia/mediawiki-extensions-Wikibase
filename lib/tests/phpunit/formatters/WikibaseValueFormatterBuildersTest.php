@@ -20,9 +20,12 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -53,7 +56,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders( EntityTitleLookup $entityTitleLookup ) {
-		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
+		$termLookup = $this->getMock( TermLookup::class );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
@@ -75,7 +78,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				);
 			} ) );
 
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ) );
@@ -104,7 +107,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getTitleLookup() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -424,7 +427,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 	}
 
 	public function provideNewFormatter_LabelDescriptionLookupOption() {
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'xy', 'Custom LabelDescriptionLookup' ) ) );

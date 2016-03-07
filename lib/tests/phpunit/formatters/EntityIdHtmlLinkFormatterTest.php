@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\EntityIdHtmlLinkFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -32,7 +33,7 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup( Term $term = null ) {
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
@@ -44,7 +45,7 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookupNoLabel() {
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->throwException( new LabelDescriptionLookupException(
@@ -61,7 +62,7 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function newEntityTitleLookup( $exists = true ) {
-		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists ) {
@@ -105,7 +106,7 @@ class EntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
 
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnCallback( function( $languageCode ) {
