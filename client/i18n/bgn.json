@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Baloch Afghanistan"
+			"Baloch Afghanistan",
+			"Ibrahim khashrowdi"
 		]
 	},
 	"tooltip-t-wikibase": "لینک بئ آیتم متوصل بئ مخزن دیتا",
@@ -14,5 +15,5 @@
 	"wikibase-rc-hide-wikidata-show": "نشان داتین",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ئی ایڈیٹ",
-	"wikibase-otherprojects": "دیگرین پروژه هان"
+	"wikibase-otherprojects": "بِه دیگرین پروژه‌ئانی تا"
 }
