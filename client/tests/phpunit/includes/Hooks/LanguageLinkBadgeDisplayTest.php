@@ -11,6 +11,7 @@ use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\Term;
 
@@ -31,9 +32,7 @@ class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	private function getLanguageLinkBadgeDisplay() {
-		$labelLookup = $this->getMockBuilder(
-				'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup'
-			)
+		$labelLookup = $this->getMockBuilder( LabelDescriptionLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 

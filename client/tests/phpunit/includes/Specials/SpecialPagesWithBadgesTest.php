@@ -27,7 +27,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelLookup() {
-		$labelLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
+		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( ItemId $id ) {
@@ -46,7 +46,9 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 			new ItemId( 'Q456' )
 		);
 
-		$labelDescriptionLookupFactory = $this->getMockBuilder( 'Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory' )
+		$labelDescriptionLookupFactory = $this->getMockBuilder(
+				LanguageFallbackLabelDescriptionLookupFactory::class
+			)
 			->disableOriginalConstructor()
 			->getMock();
 		$labelDescriptionLookupFactory->expects( $this->once() )

@@ -27,7 +27,7 @@ class UsageTrackingTermLookupTest extends \MediaWikiTestCase {
 	 * @return TermLookup
 	 */
 	private function getMockTermLookup( $method, ItemId $entityId, $languageCode ) {
-		$mockLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
+		$mockLookup = $this->getMock( TermLookup::class );
 		$mockLookup->expects( $this->once() )
 			->method( $method )
 			->with( $entityId, $languageCode )

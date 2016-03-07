@@ -4,7 +4,10 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use FauxRequest;
 use FormOptions;
+use IDatabase;
+use LoadBalancer;
 use SpecialPageFactory;
+use User;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 
 /**
@@ -369,8 +372,13 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		return new FauxRequest( $requestParams );
 	}
 
+	/**
+	 * @param array $userOptions
+	 *
+	 * @return User
+	 */
 	private function getUser( array $userOptions ) {
-		$user = $this->getMockBuilder( 'User' )
+		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -389,8 +397,11 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 		return $user;
 	}
 
+	/**
+	 * @return LoadBalancer
+	 */
 	private function getLoadBalancer() {
-		$databaseBase = $this->getMockBuilder( 'IDatabase' )
+		$databaseBase = $this->getMockBuilder( IDatabase::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -400,7 +411,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 				return "'$input'";
 			} ) );
 
-		$loadBalancer = $this->getMockBuilder( 'LoadBalancer' )
+		$loadBalancer = $this->getMockBuilder( LoadBalancer::class )
 			->disableOriginalConstructor()
 			->getMock();
 

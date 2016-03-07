@@ -31,7 +31,7 @@ class UsageTrackingSnakFormatterTest extends \MediaWikiTestCase {
 	 * @return SnakFormatter
 	 */
 	private function getMockSnakFormatter( $method, $return ) {
-		$mockFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$mockFormatter = $this->getMock( SnakFormatter::class );
 
 		$mockFormatter->expects( $this->once() )
 			->method( $method )

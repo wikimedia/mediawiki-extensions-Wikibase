@@ -3,9 +3,11 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
+use Parser;
 use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Hooks\ParserLimitHookHandlers;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 
 /**
  * @covers Wikibase\Client\Hooks\ParserLimitHookHandlers
@@ -20,7 +22,7 @@ use Wikibase\Client\Hooks\ParserLimitHookHandlers;
 class ParserLimitHookHandlersTest extends PHPUnit_Framework_TestCase {
 
 	public function testDoParserLimitReportPrepare() {
-		$restrictedEntityLookup = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup' )
+		$restrictedEntityLookup = $this->getMockBuilder( RestrictedEntityLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -35,10 +37,7 @@ class ParserLimitHookHandlersTest extends PHPUnit_Framework_TestCase {
 
 		$parserOutput = new ParserOutput();
 
-		$handler->doParserLimitReportPrepare(
-			$this->getMock( 'Parser' ),
-			$parserOutput
-		);
+		$handler->doParserLimitReportPrepare( $this->getMock( Parser::class ), $parserOutput );
 
 		$limitReportData = $parserOutput->getLimitReportData();
 
@@ -49,7 +48,7 @@ class ParserLimitHookHandlersTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider doParserLimitReportFormatProvider
 	 */
 	public function testDoParserLimitReportFormat( $expected, $isHTML, $localize ) {
-		$restrictedEntityLookup = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup' )
+		$restrictedEntityLookup = $this->getMockBuilder( RestrictedEntityLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -32,7 +32,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	 * @return JobQueueGroup
 	 */
 	private function getJobQueueGroupMock() {
-		$jobQueueGroup = $this->getMockBuilder( 'JobQueueGroup' )
+		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -43,7 +43,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	 * @return RecentChangeFactory
 	 */
 	private function getRCFactoryMock() {
-		$rcFactory = $this->getMockBuilder( 'Wikibase\Client\RecentChanges\RecentChangeFactory' )
+		$rcFactory = $this->getMockBuilder( RecentChangeFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -58,7 +58,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	 * @return RecentChangesDuplicateDetector
 	 */
 	private function getRCDupeDetectorMock() {
-		$rcDupeDetector = $this->getMockBuilder( 'Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector' )
+		$rcDupeDetector = $this->getMockBuilder( RecentChangesDuplicateDetector::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -71,7 +71,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	 * @return Title
 	 */
 	private function getTitleMock( $text ) {
-		$title = $this->getMockBuilder( 'Title' )
+		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -94,7 +94,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	 * @return EntityChange
 	 */
 	private function getEntityChangeMock() {
-		$change = $this->getMockBuilder( 'Wikibase\EntityChange' )
+		$change = $this->getMockBuilder( EntityChange::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -105,7 +105,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	 * @return RecentChange
 	 */
 	private function getRecentChangeMock() {
-		$change = $this->getMockBuilder( 'RecentChange' )
+		$change = $this->getMockBuilder( RecentChange::class )
 			->disableOriginalConstructor()
 			->getMock();
 

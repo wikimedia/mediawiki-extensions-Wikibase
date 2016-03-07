@@ -7,6 +7,7 @@ use Title;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers Wikibase\Client\Hooks\DeletePageNoticeCreator
@@ -44,11 +45,7 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 	 * @dataProvider getPageDeleteNoticeHtmlProvider
 	 */
 	public function testGetPageDeleteNoticeHtml( $expected, Title $title, $message ) {
-		$siteLinkLookup = $this->getMock(
-			'Wikibase\Lib\Store\SiteLinkTable',
-			array( 'getItemIdForSiteLink' ),
-			array( 'SiteLinkTable', true )
-		);
+		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForSiteLink' )

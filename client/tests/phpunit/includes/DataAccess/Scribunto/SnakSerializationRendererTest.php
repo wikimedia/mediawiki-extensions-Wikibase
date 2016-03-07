@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Serializers\SnakSerializer;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\Client\DataAccess\Scribunto\SnakSerializationRenderer
@@ -49,7 +50,7 @@ class SnakSerializationRendererTest extends PHPUnit_Framework_TestCase {
 	private function getSnakRenderer() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$snakFormatter = $this->getMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )
 			->will( $this->returnCallback( function ( PropertyValueSnak $snak ) {

@@ -110,8 +110,13 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @param string $fullText
+	 *
+	 * @return Title
+	 */
 	private function getTitle( $fullText ) {
-		$title = $this->getMockBuilder( 'Title' )
+		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 

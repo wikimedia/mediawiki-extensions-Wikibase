@@ -223,7 +223,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			),
 		) );
 
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+		$lookup = $this->getMock( SiteLinkLookup::class );
 		$lookup->expects( $this->any() )
 				->method( 'getItemIdForSiteLink' )
 				->will( $this->returnValue( null ) );
@@ -290,7 +290,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	private function getSiteLinkLookup() {
 		$Q123 = new ItemId( 'Q123' );
 
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+		$lookup = $this->getMock( SiteLinkLookup::class );
 		$lookup->expects( $this->any() )
 				->method( 'getItemIdForSiteLink' )
 				->will( $this->returnValue( $Q123 ) );
