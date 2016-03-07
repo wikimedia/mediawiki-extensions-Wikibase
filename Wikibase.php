@@ -33,14 +33,20 @@
 
 if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
 	require_once __DIR__ . '/repo/Wikibase.php';
+
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
-		require_once __DIR__ . '/repo/ExampleSettings.php';
+		// Use example config for testing
+		require_once __DIR__ . '/repo/config/Wikibase.example.php';
 	}
 }
 
 if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnableWikibaseClient'] ) {
 	require_once __DIR__ . '/client/WikibaseClient.php';
+
 	if ( isset( $wgWikimediaJenkinsCI ) && $wgWikimediaJenkinsCI == true ) {
-		require_once __DIR__ . '/client/ExampleSettings.php';
+		// Use example config for testing
+		require_once __DIR__ . '/client/config/WikibaseClient.example.php';
+		// TODO make this unncessary. Include hack to make testing work with the current code
+		require_once __DIR__ . '/client/config/WikibaseClient.jenkins.php';
 	}
 }
