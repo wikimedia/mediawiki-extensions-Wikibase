@@ -298,4 +298,14 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 			&& $this->references->equals( $target->references );
 	}
 
+	/**
+	 * @see http://php.net/manual/en/language.oop5.cloning.php
+	 *
+	 * @since 5.1
+	 */
+	public function __clone() {
+		$this->qualifiers = clone $this->qualifiers;
+		$this->references = clone $this->references;
+	}
+
 }

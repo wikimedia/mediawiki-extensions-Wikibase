@@ -327,7 +327,19 @@ class Item extends Entity implements StatementListHolder {
 	 * @return self
 	 */
 	public function copy() {
-		return unserialize( serialize( $this ) );
+		return clone $this;
+	}
+
+	/**
+	 * @see http://php.net/manual/en/language.oop5.cloning.php
+	 *
+	 * @since 5.1
+	 */
+	public function __clone() {
+		$this->fingerprint = clone $this->fingerprint;
+		// SiteLinkList is mutable, but SiteLink is not. No deeper cloning necesarry.
+		$this->siteLinks = clone $this->siteLinks;
+		$this->statements = clone $this->statements;
 	}
 
 }

@@ -301,7 +301,7 @@ abstract class Entity implements FingerprintHolder, EntityDocument {
 	}
 
 	/**
-	 * Returns a deep copy of the entity.
+	 * @see EntityDocument::copy
 	 *
 	 * @since 0.1
 	 *
