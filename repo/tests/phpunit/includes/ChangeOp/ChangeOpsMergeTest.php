@@ -400,11 +400,9 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 
 	public function testSitelinkConflictNormalization() {
 		$from = new Item( new ItemId( 'Q111' ) );
-		$expectedFrom = clone $from;
 		$from->getSiteLinkList()->addNewSiteLink( 'enwiki', 'FOo' );
 
 		$to = new Item( new ItemId( 'Q222' ) );
-		$expectedTo = clone $to;
 		$to->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
 		$enwiki = $this->getMock( 'Site' );
@@ -413,7 +411,12 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			->will( $this->returnValue( 'enwiki' ) );
 		$enwiki->expects( $this->exactly( 2 ) )
 			->method( 'normalizePageName' )
+			->withConsecutive(
+				array( $this->equalTo( 'FOo' ) ),
+				array( $this->equalTo( 'Foo' ) )
+			)
 			->will( $this->returnValue( 'Foo' ) );
+
 		$mockSiteStore = new HashSiteStore( TestSites::getSites() );
 		$mockSiteStore->saveSite( $enwiki );
 
@@ -425,9 +428,6 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$changeOps->apply();
-
-		$this->assertTrue( $from->equals( $expectedFrom ) );
-		$this->assertTrue( $to->equals( $expectedTo ) );
 	}
 
 	public function testExceptionThrownWhenNormalizingSiteNotFound() {
