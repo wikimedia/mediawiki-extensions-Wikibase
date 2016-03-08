@@ -171,6 +171,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$entityDataFormatProvider,
 			$dataUpdaters,
 			'en',
+			'en',
 			true
 		);
 	}

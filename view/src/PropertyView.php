@@ -44,7 +44,8 @@ class PropertyView extends EntityView {
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param DataTypeFactory $dataTypeFactory
-	 * @param string $languageCode
+	 * @param string $uiLanguageCode
+	 * @param string $contentLanguageCode
 	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
@@ -53,10 +54,11 @@ class PropertyView extends EntityView {
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		StatementSectionsView $statementSectionsView,
 		DataTypeFactory $dataTypeFactory,
-		$languageCode,
+		$uiLanguageCode,
+		$contentLanguageCode,
 		LocalizedTextProvider $textProvider
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $languageDirectionalityLookup, $languageCode );
+		parent::__construct( $templateFactory, $entityTermsView, $languageDirectionalityLookup, $uiLanguageCode, $contentLanguageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -109,7 +111,7 @@ class PropertyView extends EntityView {
 		$dataTypeLabelHtml = '';
 		try {
 			$dataType = $this->dataTypeFactory->getType( $propertyType );
-			$dataTypeLabelHtml = htmlspecialchars( $dataType->getLabel( $this->languageCode ) );
+			$dataTypeLabelHtml = htmlspecialchars( $dataType->getLabel( $this->uiLanguageCode ) );
 		} catch ( OutOfBoundsException $ex ) {
 			$dataTypeLabelHtml .= '<span class="error">' .
 				htmlspecialchars( $this->textProvider->get( 'wikibase-propertypage-bad-datatype', [ $propertyType ] ) ) .
