@@ -40,7 +40,12 @@ abstract class EntityView {
 	/**
 	 * @var Language
 	 */
-	protected $language;
+	protected $uiLanguage;
+
+	/**
+	 * @var string
+	 */
+	protected $contentLanguageCode;
 
 	/**
 	 * @var TextInjector
@@ -50,15 +55,18 @@ abstract class EntityView {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
-	 * @param Language $language
+	 * @param Language $uiLanguage
+	 * @param string $contentLanguageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
-		Language $language
+		Language $uiLanguage,
+		$contentLanguageCode
 	) {
 		$this->entityTermsView = $entityTermsView;
-		$this->language = $language;
+		$this->uiLanguage = $uiLanguage;
+		$this->contentLanguageCode = $contentLanguageCode;
 
 		$this->textInjector = new TextInjector();
 		$this->templateFactory = $templateFactory;
@@ -96,8 +104,8 @@ abstract class EntityView {
 		$html = $this->templateFactory->render( 'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
-			$this->language->getCode(),
-			$this->language->getDir(),
+			$this->uiLanguage->getCode(),
+			$this->uiLanguage->getDir(),
 			$this->getMainHtml( $entityRevision ),
 			$this->getSideHtml( $entity )
 		);
@@ -120,7 +128,7 @@ abstract class EntityView {
 
 		if ( $entity instanceof FingerprintProvider ) {
 			return $this->entityTermsView->getTitleHtml(
-				$this->language->getCode(),
+				$this->contentLanguageCode,
 				$entity->getFingerprint(),
 				$entity->getId()
 			);
@@ -160,7 +168,7 @@ abstract class EntityView {
 
 		if ( $entity instanceof FingerprintProvider ) {
 			return $this->entityTermsView->getHtml(
-				$this->language->getCode(),
+				$this->contentLanguageCode,
 				$entity->getFingerprint(),
 				$id,
 				$this->getHtmlForTermBox( $id, $entityRevision->getRevisionId() ),
@@ -184,7 +192,9 @@ abstract class EntityView {
 			return $this->textInjector->newMarker(
 				'termbox',
 				$entityId->getSerialization(),
-				$revisionId
+				$revisionId,
+				$this->uiLanguage->getCode(),
+				$this->contentLanguageCode
 			);
 		}
 

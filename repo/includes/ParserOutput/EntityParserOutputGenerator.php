@@ -79,7 +79,12 @@ class EntityParserOutputGenerator {
 	/**
 	 * @var string
 	 */
-	private $languageCode;
+	private $uiLanguageCode;
+
+	/**
+	 * @var string
+	 */
+	private $contentLanguageCode;
 
 	/**
 	 * @var bool
@@ -95,7 +100,8 @@ class EntityParserOutputGenerator {
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param ParserOutputDataUpdater[] $dataUpdaters
-	 * @param string $languageCode
+	 * @param string $uiLanguageCode
+	 * @param string $contentLanguageCode
 	 * @param bool $editable
 	 */
 	public function __construct(
@@ -107,7 +113,8 @@ class EntityParserOutputGenerator {
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
-		$languageCode,
+		$uiLanguageCode,
+		$contentLanguageCode,
 		$editable
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -118,7 +125,8 @@ class EntityParserOutputGenerator {
 		$this->templateFactory = $templateFactory;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
-		$this->languageCode = $languageCode;
+		$this->uiLanguageCode = $uiLanguageCode;
+		$this->contentLanguageCode = $contentLanguageCode;
 		$this->editable = $editable;
 	}
 
@@ -269,7 +277,8 @@ class EntityParserOutputGenerator {
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entityRevision->getEntity()->getType(),
-			$this->languageCode,
+			$this->uiLanguageCode,
+			$this->contentLanguageCode,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
 			$editSectionGenerator

@@ -51,11 +51,6 @@ class EntityViewPlaceholderExpander {
 	private $user;
 
 	/**
-	 * @var Language
-	 */
-	private $uiLanguage;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
@@ -89,7 +84,6 @@ class EntityViewPlaceholderExpander {
 	 * @param TemplateFactory $templateFactory
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
-	 * @param Language $uiLanguage the user's current UI language (as per the present request)
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param UserLanguageLookup $userLanguageLookup
@@ -100,7 +94,6 @@ class EntityViewPlaceholderExpander {
 		TemplateFactory $templateFactory,
 		Title $targetPage,
 		User $user,
-		Language $uiLanguage,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		UserLanguageLookup $userLanguageLookup,
@@ -109,7 +102,6 @@ class EntityViewPlaceholderExpander {
 	) {
 		$this->targetPage = $targetPage;
 		$this->user = $user;
-		$this->uiLanguage = $uiLanguage;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -123,16 +115,16 @@ class EntityViewPlaceholderExpander {
 	 *
 	 * @see UserLanguageLookup
 	 *
+	 * @param string[] $skip Language codes to skip (usually the UI language)
+	 *
 	 * @return string[]
 	 */
-	public function getExtraUserLanguages() {
+	public function getExtraUserLanguages( $skip ) {
 		if ( $this->extraLanguages === null ) {
 			if ( $this->user->isAnon() ) {
 				// no extra languages for anon user
 				$this->extraLanguages = array();
 			} else {
-				// ignore current interface language
-				$skip = array( $this->uiLanguage->getCode() );
 				$langs = array_diff(
 					$this->userLanguageLookup->getAllUserLanguages( $this->user ),
 					$skip
@@ -208,7 +200,9 @@ class EntityViewPlaceholderExpander {
 				$entityId = $this->getEntityIdFromString( $args[0] );
 				return $this->renderTermBox(
 					$entityId,
-					isset( $args[1] ) ? (int)$args[1] : 0
+					isset( $args[1] ) ? (int)$args[1] : 0,
+					$args[2],
+					$args[3]
 				);
 			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
 				return $this->isInitiallyCollapsed() ? 'wikibase-initially-collapsed' : '';
@@ -239,10 +233,10 @@ class EntityViewPlaceholderExpander {
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	public function renderTermBox( EntityId $entityId, $revisionId ) {
+	public function renderTermBox( EntityId $entityId, $revisionId, $uiLanguageCode, $contentLanguageCode ) {
 		$languages = array_merge(
-			array( $this->uiLanguage->getCode() ),
-			$this->getExtraUserLanguages()
+			[ $contentLanguageCode ],
+			$this->getExtraUserLanguages( [ $contentLanguageCode ] )
 		);
 
 		try {
@@ -264,7 +258,7 @@ class EntityViewPlaceholderExpander {
 			$this->templateFactory,
 			null,
 			$this->languageNameLookup,
-			$this->uiLanguage->getCode()
+			$uiLanguageCode
 		);
 
 		// FIXME: assumes all entities have a fingerprint

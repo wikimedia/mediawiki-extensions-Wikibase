@@ -39,16 +39,18 @@ class PropertyView extends EntityView {
 	 * @param EntityTermsView $entityTermsView
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param DataTypeFactory $dataTypeFactory
-	 * @param Language $language
+	 * @param Language $uiLanguage
+	 * @param string $contentLanguageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
 		StatementSectionsView $statementSectionsView,
 		DataTypeFactory $dataTypeFactory,
-		Language $language
+		Language $uiLanguage,
+		$contentLanguageCode
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $language );
+		parent::__construct( $templateFactory, $entityTermsView, $uiLanguage, $contentLanguageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -101,7 +103,7 @@ class PropertyView extends EntityView {
 		try {
 			$dataType = $this->dataTypeFactory->getType( $propertyType );
 			$html .= $this->templateFactory->render( 'wikibase-propertyview-datatype',
-				htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
+				htmlspecialchars( $dataType->getLabel( $this->uiLanguage->getCode() ) )
 			);
 		} catch ( OutOfBoundsException $ex ) {
 			$html .= Html::rawElement( 'span', array( 'class' => 'error' ),

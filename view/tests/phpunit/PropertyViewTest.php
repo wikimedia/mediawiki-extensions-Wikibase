@@ -84,7 +84,8 @@ class PropertyViewTest extends EntityViewTest {
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getDataTypeFactory(),
-			Language::factory( 'en' )
+			Language::factory( 'en' ),
+			'en'
 		);
 
 		return array(
