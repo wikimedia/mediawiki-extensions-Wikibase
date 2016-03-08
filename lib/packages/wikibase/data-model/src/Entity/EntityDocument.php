@@ -73,8 +73,8 @@ interface EntityDocument extends Comparable {
 	 * No change done to the clone is allowed to interfere with the original object. Only properties
 	 * containing immutable objects are allowed to (and should) reference the original object.
 	 *
-	 * Since EntityDocuments are not immutable (at least the id can be set) the method is not
-	 * allowed to return $this.
+	 * Since EntityDocuments are mutable (at least the id can be set) the method is not allowed to
+	 * return $this.
 	 *
 	 * @since 5.0
 	 *
