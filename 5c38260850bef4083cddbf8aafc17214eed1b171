@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_2b471024",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-08T09:46:01Z",
+      "side": 1,
+      "message": "That\u0027s true. We can change the definitions array but I don\u0027t think it matters much to have the serializer on client (doesn\u0027t add a lot of overhead).",
+      "parentUuid": "2ea41786_a406bc21",
+      "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_18fdb004",
         "filename": "lib/WikibaseLib.entitytypes.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-03T16:23:26Z",
       "side": 1,
       "message": "repo/WikibaseRepo.entitytypes.php",
+      "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_eb3d288c",
+        "filename": "lib/WikibaseLib.entitytypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-08T09:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea41786_18fdb004",
       "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_8b38dc9c",
+        "filename": "lib/tests/phpunit/EntityTypesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-08T09:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea41786_d8063820",
+      "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea41786_e40cb447",
         "filename": "lib/tests/phpunit/EntityTypesTest.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2016-03-03T16:23:26Z",
       "side": 1,
       "message": "Shouldn\u0027t there be a test for view-factory-callback here now?",
+      "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_ab3320bf",
+        "filename": "lib/tests/phpunit/EntityTypesTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-08T09:46:01Z",
+      "side": 1,
+      "message": "That one is repo-only and thus only exists in the repo EntityTypesTest",
+      "parentUuid": "2ea41786_e40cb447",
       "revId": "5c38260850bef4083cddbf8aafc17214eed1b171",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
