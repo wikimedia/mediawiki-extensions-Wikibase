@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_dc9bcc19",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-08T16:01:02Z",
+      "side": 0,
+      "message": "This is removed completely. I suppose it isn\u0027t needed anymore?",
+      "revId": "37483ea3f7a7f15e3e99162429fc3c6ebdf2092f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
