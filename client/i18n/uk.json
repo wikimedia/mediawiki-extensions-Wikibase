@@ -60,7 +60,7 @@
 	"wikibase-linkitem-confirmitem-button": "Підтвердити",
 	"wikibase-linkitem-not-loggedin-title": "Вам необхідно увійти в систему",
 	"wikibase-linkitem-not-loggedin": "Вам необхідно увійти в систему на цій вікі і на [$1 центральному сховищі даних], щоб скористатись цією функцією.",
-	"wikibase-linkitem-success-link": "Сторінки було успішно пов'язано. Ви можете знайти елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
+	"wikibase-linkitem-success-link": "Сторінки було пов'язано. Ви можете знайти елемент, який містить ці посилання, у нашому [$1 центральному сховищі даних].",
 	"wikibase-limitreport-entities-accessed": "Число завантажених елементів Вікібази",
 	"wikibase-property-notfound": "Властивість $1 не знайдено.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

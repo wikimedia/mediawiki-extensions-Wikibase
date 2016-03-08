@@ -88,7 +88,7 @@
 	"wikibase-propertypage-datatype": "Jenis data",
 	"wikibase-propertypage-bad-datatype": "Jenis data tidak diketahui: $1",
 	"wikibase-claimview-snak-tooltip": "Masukkan nilai yang sesuai dengan atribut bernama \"$1\". Jika atribut tidak memiliki nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, Anda dapat memilih cadangan untuk penentuan nilai kesesuaian dengan mengeklik ikon di sebelah kotak isian nilai.",
-	"wikibase-claimview-snak-new-tooltip": "Setelah menentukan properti Anda dapat memasukkan nilai yang sesuai. Jika properti tidak memiliki nilai yang ditentukan atau nilai sebenarnya tidak diketahui, alternatif Anda dapat menentukan nilai kustom dengan mengeklik ikon di sebelah kotak input.",
+	"wikibase-claimview-snak-new-tooltip": "Setelah menentukan atribut, Anda dapat memasukkan nilai yang sesuai. Jika atribut tidak memiliki nilai yang ditentukan atau nilai sebenarnya tidak diketahui, alternatifnya Anda dapat menentukan nilai kesesuaian dengan mengeklik ikon di sebelah kotak masukan.",
 	"wikibase-statementview-rank-preferred": "Peringkat yang disukai",
 	"wikibase-statementview-rank-normal": "Peringkat normal",
 	"wikibase-statementview-rank-deprecated": "Peringkat usang",

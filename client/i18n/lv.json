@@ -25,12 +25,12 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Slēpt",
 	"wikibase-rc-hide-wikidata-show": "Rādīt",
-	"wikibase-rc-show-wikidata-pref": "Rādīt labojumos Vikidatos pēdējās izmaiņās",
+	"wikibase-rc-show-wikidata-pref": "Rādīt labojumos {{WBREPONAME}} pēdējās izmaiņās",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Labojums {{WBREPONAME}}",
-	"wikibase-watchlist-show-changes-pref": "Rādīt labojumus Vikidatos uzraugāmo lapu sarakstā",
+	"wikibase-watchlist-show-changes-pref": "Rādīt labojumus {{WBREPONAME}} uzraugāmo lapu sarakstā",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
 	"wikibase-unconnectedpages-submit": "Rādīt lapas",
-	"wikibase-pageinfo-entity-id": "Wikidata ieraksta ID",
-	"wikibase-otherprojects": "Citi projekti"
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} ieraksta ID",
+	"wikibase-otherprojects": "Citos projektos"
 }
