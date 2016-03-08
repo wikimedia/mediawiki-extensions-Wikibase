@@ -176,7 +176,7 @@ class ViewFactory {
 	/**
 	 * Creates an ItemView suitable for rendering the item.
 	 *
-	 * @param string $languageCode
+	 * @param string $languageCode UI language
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -189,7 +189,7 @@ class ViewFactory {
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
+		$entityTermsView = $this->newEntityTermsView( $editSectionGenerator );
 
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
@@ -237,7 +237,7 @@ class ViewFactory {
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
+		$entityTermsView = $this->newEntityTermsView( $editSectionGenerator );
 
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
@@ -307,17 +307,15 @@ class ViewFactory {
 	}
 
 	/**
-	 * @param string $languageCode
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return EntityTermsView
 	 */
-	public function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
+	public function newEntityTermsView( EditSectionGenerator $editSectionGenerator ) {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$editSectionGenerator,
 			$this->languageNameLookup,
-			$languageCode,
 			$this->textProvider
 		);
 	}
