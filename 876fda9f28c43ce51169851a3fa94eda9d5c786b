@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_d8aab181",
+        "filename": "lib/includes/DataTypeDefinitions.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-08T22:30:51Z",
+      "side": 1,
+      "message": "typo: od-\u003edo",
+      "revId": "876fda9f28c43ce51169851a3fa94eda9d5c786b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
