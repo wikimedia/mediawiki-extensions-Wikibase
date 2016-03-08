@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_d03e1326",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-03-08T08:35:03Z",
+      "side": 1,
+      "message": "You\u0027re right. I just removed this part now.",
+      "parentUuid": "0e2f53b6_565a14fa",
+      "revId": "b87e7486613db856e0f30bdc00c4c36b799ea73c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_d6462426",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-04T17:10:11Z",
       "side": 1,
       "message": "Why was this outside of the if() before? Does this depend on the $content?",
+      "revId": "b87e7486613db856e0f30bdc00c4c36b799ea73c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_1027db0e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-03-08T08:35:03Z",
+      "side": 1,
+      "message": "No clue, but this doesn\u0027t need to be run multiple times, so I moved it into the initialization branch.",
+      "parentUuid": "0e2f53b6_d6462426",
       "revId": "b87e7486613db856e0f30bdc00c4c36b799ea73c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
