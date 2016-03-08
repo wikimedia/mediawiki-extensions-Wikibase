@@ -82,6 +82,11 @@ class EntityParserOutputGenerator {
 	private $languageCode;
 
 	/**
+	 * @var bool
+	 */
+	private $editable;
+
+	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
@@ -91,6 +96,7 @@ class EntityParserOutputGenerator {
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param ParserOutputDataUpdater[] $dataUpdaters
 	 * @param string $languageCode
+	 * @param bool $editable
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
@@ -101,7 +107,8 @@ class EntityParserOutputGenerator {
 		TemplateFactory $templateFactory,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
-		$languageCode
+		$languageCode,
+		$editable
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->configBuilder = $configBuilder;
@@ -112,6 +119,7 @@ class EntityParserOutputGenerator {
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
 		$this->languageCode = $languageCode;
+		$this->editable = $editable;
 	}
 
 	/**
@@ -119,11 +127,7 @@ class EntityParserOutputGenerator {
 	 *
 	 * @since 0.5
 	 *
-	 * @note: the new ParserOutput will be registered as a watcher with $options by
-	 *        calling $options->registerWatcher( array( $parserOutput, 'recordOption' ) ).
-	 *
 	 * @param EntityRevision $entityRevision
-	 * @param ParserOptions $options
 	 * @param bool $generateHtml
 	 *
 	 * @throws InvalidArgumentException
@@ -131,20 +135,9 @@ class EntityParserOutputGenerator {
 	 */
 	public function getParserOutput(
 		EntityRevision $entityRevision,
-		ParserOptions $options,
 		$generateHtml = true
 	) {
 		$parserOutput = new ParserOutput();
-		$options->registerWatcher( array( $parserOutput, 'recordOption' ) );
-
-		// @note: SIDE EFFECT: the call to $options->getUserLang() effectively splits
-		// the parser cache. It gets reported to the ParserOutput which is registered
-		// as a watcher to $options above.
-		if ( $options->getUserLang() !== $this->languageCode ) {
-			// The language requested by $parserOptions is different from what
-			// this generator was configured for. This indicates an inconsistency.
-			throw new InvalidArgumentException( 'Unexpected user language in ParserOptions' );
-		}
 
 		$entity = $entityRevision->getEntity();
 
@@ -160,8 +153,7 @@ class EntityParserOutputGenerator {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
 				$entityRevision,
-				$this->getEntityInfo( $parserOutput ),
-				$options->getEditSection()
+				$this->getEntityInfo( $parserOutput )
 			);
 		} else {
 			// If we don't have HTML, the ParserOutput in question
@@ -259,20 +251,18 @@ class EntityParserOutputGenerator {
 	 * @param ParserOutput $parserOutput
 	 * @param EntityRevision $entityRevision
 	 * @param EntityInfo $entityInfo
-	 * @param bool $editable
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
 		EntityRevision $entityRevision,
-		EntityInfo $entityInfo,
-		$editable = true
+		EntityInfo $entityInfo
 	) {
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			new EntityInfoTermLookup( $entityInfo ),
 			$this->languageFallbackChain
 		);
 
-		$editSectionGenerator = $editable ? new ToolbarEditSectionGenerator(
+		$editSectionGenerator = $this->editable ? new ToolbarEditSectionGenerator(
 			new RepoSpecialPageLinker(),
 			$this->templateFactory
 		) : new EmptyEditSectionGenerator();
@@ -292,17 +282,6 @@ class EntityParserOutputGenerator {
 		$html = $entityView->getHtml( $entityRevision );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
-
-		// Force parser cache split by whether edit links are show.
-		// MediaWiki core has the ability to split on editsection, but does not trigger it
-		// automatically when $parserOptions->getEditSection() is called. Presumably this
-		// is because core uses <mw:editsection> tags that are substituted by ParserOutput::getText
-		// using the info from ParserOutput::getEditSectionTokens.
-		$parserOutput->recordOption( 'editsection' );
-
-		// Since the output depends on the user language, we must make sure
-		// ParserCache::getKey() includes it in the cache key.
-		$parserOutput->recordOption( 'userlang' );
 	}
 
 	/**

@@ -119,23 +119,25 @@ class EntityParserOutputGeneratorFactory {
 	/**
 	 * Creates an EntityParserOutputGenerator to create the ParserOutput for the entity
 	 *
-	 * @param ParserOptions $options
+	 * @param string $userLanguageCode
+	 * @param bool $editable
 	 *
 	 * @return EntityParserOutputGenerator
 	 */
-	public function getEntityParserOutputGenerator( ParserOptions $options ) {
-		$language = $options->getUserLangObj();
+	public function getEntityParserOutputGenerator( $userLanguageCode, $editable ) {
 
+		$userLanguage = Language::factory( $userLanguageCode );
 		return new EntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
 			$this->entityInfoBuilderFactory,
-			$this->getLanguageFallbackChain( $language ),
+			$this->getLanguageFallbackChain( $userLanguage ),
 			$this->templateFactory,
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
-			$language->getCode()
+			$userLanguageCode,
+			$editable
 		);
 	}
 

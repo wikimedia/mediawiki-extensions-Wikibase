@@ -154,6 +154,14 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$title = Title::newFromText( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title );
 
+		$expectedUsedOptions = array( 'userlang', 'editsection' );
+		$actualOptions = $parserOutput->getUsedOptions();
+		$missingOptions = array_diff( $expectedUsedOptions, $actualOptions );
+		$this->assertEmpty(
+			$missingOptions,
+			'Missing cache-split flags: ' . join( '|', $missingOptions ) . '. Options: ' . join( '|', $actualOptions )
+		);
+
 		$this->assertInstanceOf( '\ParserOutput', $parserOutput );
 		$this->assertEquals( EntityContent::STATUS_EMPTY, $parserOutput->getProperty( 'wb-status' ) );
 	}
