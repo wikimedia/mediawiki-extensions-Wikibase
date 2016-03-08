@@ -120,6 +120,7 @@ abstract class EntityView {
 
 		if ( $entity instanceof FingerprintProvider ) {
 			return $this->entityTermsView->getTitleHtml(
+				$this->language->getCode(),
 				$entity->getFingerprint(),
 				$entity->getId()
 			);
@@ -159,6 +160,7 @@ abstract class EntityView {
 
 		if ( $entity instanceof FingerprintProvider ) {
 			return $this->entityTermsView->getHtml(
+				$this->language->getCode(),
 				$entity->getFingerprint(),
 				$id,
 				$this->getHtmlForTermBox( $id, $entityRevision->getRevisionId() ),
