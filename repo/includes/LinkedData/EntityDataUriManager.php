@@ -195,15 +195,37 @@ class EntityDataUriManager {
 	 * the given entity.
 	 *
 	 * @param EntityId $id
+	 * @param array $query Query parameters with values
 	 *
 	 * @return string[]
 	 */
-	public function getCacheableUrls( EntityId $id ) {
+	public function getCacheableUrls( EntityId $id, array $query = array() ) {
 		$urls = array();
 
 		foreach ( $this->supportedExtensions as $format => $ext ) {
 			$title = $this->getDocTitle( $id, $format );
-			$urls[] = $title->getInternalURL();
+			$internal = $title->getInternalURL();
+			$urls[] = $internal;
+			if ( !empty( $query ) ) {
+				// this can explode really fast so we need to be careful
+				$queries = array();
+				foreach ( $query as $name => $values ) {
+					$n = rawurlencode( $name );
+					$newqueries = array();
+					foreach ( $values as $value ) {
+						$v = rawurlencode( $value );
+						$newqueries[] = array( $n => $v );
+						foreach ( $queries as $q ) {
+							$q[$n] = $v;
+							$newqueries[] = $q;
+						}
+					}
+					$queries = array_merge( $queries, $newqueries );
+				}
+				foreach ( $queries as $q ) {
+					$urls[] = wfAppendQuery( $internal, $q );
+				}
+			}
 		}
 
 		return $urls;
