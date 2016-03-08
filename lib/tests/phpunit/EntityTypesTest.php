@@ -49,16 +49,30 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testKnownEntityTypesSupported() {
+		$entityTypes = $this->provideEntityTypes();
+
+		$this->assertContains( array( 'item' ), $entityTypes );
+		$this->assertContains( array( 'property' ), $entityTypes );
+	}
+
 	/**
 	 * @dataProvider provideEntityTypes
 	 */
 	public function testSerializerFactory( $entityType ) {
-		$registry = $this->getRegistry()[$entityType];
+		$registry = $this->getRegistry();
 		$serializerFactory = $this->getSerializerFactroy( $entityType );
+
+		$this->assertArrayHasKey( $entityType, $registry );
+		$this->assertArrayHasKey( 'serializer-factory-callback', $registry[$entityType] );
+
+		$callback = $registry[$entityType]['serializer-factory-callback'];
+
+		$this->assertInternalType( 'callable', $callback );
 
 		$this->assertInstanceOf(
 			'Serializers\Serializer',
-			call_user_func( $registry['serializer-factory-callback'], $serializerFactory )
+			call_user_func( $callback, $serializerFactory )
 		);
 	}
 
@@ -66,12 +80,19 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideEntityTypes
 	 */
 	public function testDeserializerFactory( $entityType ) {
-		$registry = $this->getRegistry()[$entityType];
+		$registry = $this->getRegistry();
 		$deserializerFactroy = $this->getDeserializerFactroy( $entityType );
+
+		$this->assertArrayHasKey( $entityType, $registry );
+		$this->assertArrayHasKey( 'deserializer-factory-callback', $registry[$entityType] );
+
+		$callback = $registry[$entityType]['deserializer-factory-callback'];
+
+		$this->assertInternalType( 'callable', $callback );
 
 		$this->assertInstanceOf(
 			'Deserializers\Deserializer',
-			call_user_func( $registry['deserializer-factory-callback'], $deserializerFactroy )
+			call_user_func( $callback, $deserializerFactroy )
 		);
 	}
 

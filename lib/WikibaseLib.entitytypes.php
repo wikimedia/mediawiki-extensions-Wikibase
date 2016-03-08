@@ -5,6 +5,9 @@
  * The array returned by the code below is supposed to be merged into $wgWBRepoEntityTypes
  * resp. $wgWBClientEntityTypes.
  *
+ * @note: When adding entity types here, also add the corresponding information to
+ * repo/WikibaseRepo.entitytypes.php
+ *
  * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
  * objects or loading classes here!
  *
