@@ -40,6 +40,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$factory->newEntityView(
 			'unknown',
 			'en',
+			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( array() ),
 			$this->getMock( EditSectionGenerator::class )
@@ -61,6 +62,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$factory->newEntityView(
 			'foo',
 			'en',
+			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( array() ),
 			$this->getMock( EditSectionGenerator::class )
@@ -78,12 +80,14 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$factory = new DispatchingEntityViewFactory(
 			array(
 				'foo' => function(
-					$languageCodeParam,
+					$uiLanguageCodeParam,
+					$contentLanguageCodeParam,
 					LabelDescriptionLookup $labelDescriptionLookupParam,
 					LanguageFallbackChain $languageFallbackChainParam,
 					EditSectionGenerator $editSectionGeneratorParam
 				) use ( $labelDescriptionLookup, $languageFallbackChain, $editSectionGenerator, $entityView ) {
-					$this->assertEquals( 'en', $languageCodeParam );
+					$this->assertEquals( 'en', $uiLanguageCodeParam );
+					$this->assertEquals( 'en', $contentLanguageCodeParam );
 					$this->assertSame( $labelDescriptionLookup, $labelDescriptionLookupParam );
 					$this->assertSame( $languageFallbackChain, $languageFallbackChainParam );
 					$this->assertSame( $editSectionGenerator, $editSectionGeneratorParam );
@@ -95,6 +99,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$newEntityView = $factory->newEntityView(
 			'foo',
+			'en',
 			'en',
 			$labelDescriptionLookup,
 			$languageFallbackChain,
