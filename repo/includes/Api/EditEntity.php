@@ -108,7 +108,7 @@ class EditEntity extends ModifyEntity {
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
-		$this->statementDeserializer = $wikibaseRepo->getStatementDeserializer();
+		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
 		$this->entityFactory = $wikibaseRepo->getEntityFactory();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();

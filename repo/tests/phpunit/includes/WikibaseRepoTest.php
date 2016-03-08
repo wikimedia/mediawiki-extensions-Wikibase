@@ -205,34 +205,54 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityContentDataCodec', $codec );
 	}
 
-	public function testGetInternalEntitySerializer() {
-		$serializer = $this->getWikibaseRepo()->getInternalEntitySerializer();
+	public function testGetInternalFormatDeserializerFactory() {
+		$deserializerFactory = $this->getWikibaseRepo()->getInternalFormatDeserializerFactory();
+		$this->assertInstanceOf( 'Wikibase\InternalSerialization\DeserializerFactory', $deserializerFactory );
+	}
+
+	public function testGetExternalFormatDeserializerFactory() {
+		$deserializerFactory = $this->getWikibaseRepo()->getExternalFormatDeserializerFactory();
+		$this->assertInstanceOf( 'Wikibase\DataModel\DeserializerFactory', $deserializerFactory );
+	}
+
+	public function testGetSerializerFactory() {
+		$serializerFactory = $this->getWikibaseRepo()->getSerializerFactory();
+		$this->assertInstanceOf( 'Wikibase\DataModel\SerializerFactory', $serializerFactory );
+	}
+
+	public function testGetExternalFormatEntityDeserializer() {
+		$deserializer = $this->getWikibaseRepo()->getExternalFormatEntityDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testGetInternalFormatEntityDeserializer() {
+		$deserializer = $this->getWikibaseRepo()->getInternalFormatEntityDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testGetEntitySerializer() {
+		$serializer = $this->getWikibaseRepo()->getEntitySerializer();
 		$this->assertInstanceOf( 'Serializers\Serializer', $serializer );
 	}
 
-	public function testGetInternalEntityDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getInternalEntityDeserializer();
+	public function testGetExternalFormatStatementDeserializer() {
+		$deserializer = $this->getWikibaseRepo()->getExternalFormatStatementDeserializer();
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
-	public function testGetInternalStatementSerializer() {
-		$serializer = $this->getWikibaseRepo()->getInternalStatementSerializer();
+	public function testGetInternalFormatStatementDeserializer() {
+		$deserializer = $this->getWikibaseRepo()->getInternalFormatStatementDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	}
+
+	public function testGetStatementSerializer() {
+		$serializer = $this->getWikibaseRepo()->getStatementSerializer();
 		$this->assertInstanceOf( 'Serializers\Serializer', $serializer );
 	}
 
-	public function testGetEntityDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getEntityDeserializer();
-		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
-	}
-
-	public function testGetStatementDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getStatementDeserializer();
-		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
-	}
-
-	public function testGetInternalStatementDeserializer() {
-		$deserializer = $this->getWikibaseRepo()->getInternalStatementDeserializer();
-		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
+	public function testGetDataValueDeserializer() {
+		$service = $this->getWikibaseRepo()->getDataValueDeserializer();
+		$this->assertInstanceOf( 'Deserializers\Deserializer', $service );
 	}
 
 	public function testGetEntityChangeFactory() {
@@ -336,11 +356,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetTermsLanguages() {
 		$service = $this->getWikibaseRepo()->getTermsLanguages();
 		$this->assertInstanceOf( 'Wikibase\Lib\ContentLanguages', $service );
-	}
-
-	public function testGetDataValueDeserializer() {
-		$service = $this->getWikibaseRepo()->getDataValueDeserializer();
-		$this->assertInstanceOf( 'Deserializers\Deserializer', $service );
 	}
 
 	public function testNewPropertyInfoBuilder() {

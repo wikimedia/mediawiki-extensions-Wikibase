@@ -220,11 +220,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( 'Wikibase\Lib\OutputFormatValueFormatterFactory', $returnValue );
 	}
 
-	public function testGetDeserializerFactoryReturnType() {
-		$returnValue = $this->getWikibaseClient()->getDeserializerFactory();
-		$this->assertInstanceOf( 'Wikibase\DataModel\DeserializerFactory', $returnValue );
-	}
-
 	public function testGetLanguageLinkBadgeDisplay() {
 		$returnValue = $this->getWikibaseClient()->getLanguageLinkBadgeDisplay();
 		$this->assertInstanceOf( 'Wikibase\Client\Hooks\LanguageLinkBadgeDisplay', $returnValue );
@@ -270,13 +265,23 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$codec->encodeEntity( new Item(), CONTENT_FORMAT_JSON );
 	}
 
-	public function testGetInternalEntityDeserializer() {
-		$deserializer = $this->getWikibaseClient()->getInternalEntityDeserializer();
+	public function testGetInternalFormatDeserializerFactory() {
+		$deserializerFactory = $this->getWikibaseClient()->getInternalFormatDeserializerFactory();
+		$this->assertInstanceOf( 'Wikibase\InternalSerialization\DeserializerFactory', $deserializerFactory );
+	}
+
+	public function testGetExternalFormatDeserializerFactory() {
+		$deserializerFactory = $this->getWikibaseClient()->getExternalFormatDeserializerFactory();
+		$this->assertInstanceOf( 'Wikibase\DataModel\DeserializerFactory', $deserializerFactory );
+	}
+
+	public function testGetInternalFormatEntityDeserializer() {
+		$deserializer = $this->getWikibaseClient()->getInternalFormatEntityDeserializer();
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
-	public function testGetInternalStatementDeserializer() {
-		$deserializer = $this->getWikibaseClient()->getInternalStatementDeserializer();
+	public function testGetInternalFormatStatementDeserializer() {
+		$deserializer = $this->getWikibaseClient()->getInternalFormatStatementDeserializer();
 		$this->assertInstanceOf( 'Deserializers\Deserializer', $deserializer );
 	}
 
