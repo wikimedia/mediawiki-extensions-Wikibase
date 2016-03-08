@@ -185,22 +185,56 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$base = $title->getInternalURL();
 
 		return array(
-			array( 'Q12', array(
+			array( 'Q12', array(), array(
 				"$base/Q12.txt",
 				"$base/Q12.rdf",
 			) ),
+			array( 'Q13',
+				array( "flavor" => array( "vanilla", "pistachio", "chocolate" ) ),
+				array(
+				"$base/Q13.txt",
+				"$base/Q13.txt?flavor=vanilla",
+				"$base/Q13.txt?flavor=pistachio",
+				"$base/Q13.txt?flavor=chocolate",
+				"$base/Q13.rdf",
+				"$base/Q13.rdf?flavor=vanilla",
+				"$base/Q13.rdf?flavor=pistachio",
+				"$base/Q13.rdf?flavor=chocolate",
+				) ),
+			array( 'Q14',
+				array( "flavor" => array( "vanilla", "chocolate" ), "toppings" => array( "candy", "fruit" ) ),
+				array(
+				"$base/Q14.txt",
+				"$base/Q14.txt?flavor=vanilla",
+				"$base/Q14.txt?flavor=chocolate",
+				"$base/Q14.txt?toppings=candy",
+				"$base/Q14.txt?flavor=vanilla&toppings=candy",
+				"$base/Q14.txt?flavor=chocolate&toppings=candy",
+				"$base/Q14.txt?toppings=fruit",
+				"$base/Q14.txt?flavor=vanilla&toppings=fruit",
+				"$base/Q14.txt?flavor=chocolate&toppings=fruit",
+				"$base/Q14.rdf",
+				"$base/Q14.rdf?flavor=vanilla",
+				"$base/Q14.rdf?flavor=chocolate",
+				"$base/Q14.rdf?toppings=candy",
+				"$base/Q14.rdf?flavor=vanilla&toppings=candy",
+				"$base/Q14.rdf?flavor=chocolate&toppings=candy",
+				"$base/Q14.rdf?toppings=fruit",
+				"$base/Q14.rdf?flavor=vanilla&toppings=fruit",
+				"$base/Q14.rdf?flavor=chocolate&toppings=fruit",
+				) ),
 		);
 	}
 
 	/**
 	 * @dataProvider provideGetCacheableUrls
 	 */
-	public function testGetCacheableUrls( $id, $expected ) {
+	public function testGetCacheableUrls( $id, $query, $expected ) {
 		$id = $this->idParser->parse( $id );
 
 		$uriManager = $this->makeUriManager();
 
-		$actual = $uriManager->getCacheableUrls( $id );
+		$actual = $uriManager->getCacheableUrls( $id, $query );
 		$this->assertEquals( $expected, $actual );
 	}
 

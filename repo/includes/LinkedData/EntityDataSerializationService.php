@@ -368,6 +368,14 @@ class EntityDataSerializationService {
 	}
 
 	/**
+	 * Produce list of supported flavors
+	 * @return string[]
+	 */
+	public function getFlavors() {
+		return array( 'simple', 'dump', 'long', 'full' );
+	}
+
+	/**
 	 * Creates an Rdf Serializer that can generate the given output format.
 	 *
 	 * @param string $format The desired serialization format, as a format name understood by ApiBase or RdfWriterFactory

@@ -249,6 +249,51 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testCacheableUrls() {
+		// construct handler
+		$handler = $this->newHandler();
+
+		$idParser = new BasicEntityIdParser();
+		$id = $idParser->parse( 'Q42' );
+
+		$uris = $handler->getCacheableUrls( $id );
+
+		$base = $this->interfaceTitle->getInternalURL();
+		$formats = array(
+				"$base/Q42.json",
+				"$base/Q42.json?flavor=simple",
+				"$base/Q42.json?flavor=dump",
+				"$base/Q42.json?flavor=long",
+				"$base/Q42.json?flavor=full",
+				"$base/Q42.php",
+				"$base/Q42.php?flavor=simple",
+				"$base/Q42.php?flavor=dump",
+				"$base/Q42.php?flavor=long",
+				"$base/Q42.php?flavor=full",
+				"$base/Q42.rdf",
+				"$base/Q42.rdf?flavor=simple",
+				"$base/Q42.rdf?flavor=dump",
+				"$base/Q42.rdf?flavor=long",
+				"$base/Q42.rdf?flavor=full",
+				"$base/Q42.n3",
+				"$base/Q42.n3?flavor=simple",
+				"$base/Q42.n3?flavor=dump",
+				"$base/Q42.n3?flavor=long",
+				"$base/Q42.n3?flavor=full",
+				"$base/Q42.ttl",
+				"$base/Q42.ttl?flavor=simple",
+				"$base/Q42.ttl?flavor=dump",
+				"$base/Q42.ttl?flavor=long",
+				"$base/Q42.ttl?flavor=full",
+				"$base/Q42.n3",
+				"$base/Q42.n3?flavor=simple",
+				"$base/Q42.n3?flavor=dump",
+				"$base/Q42.n3?flavor=long",
+				"$base/Q42.n3?flavor=full",
+		);
+		$this->assertArrayEquals( $formats, $uris );
+	}
+
 	//TODO: test canHandleRequest
 	//TODO: test httpContentNegotiation
 	//TODO: test getCanonicalFormat
