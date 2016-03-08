@@ -40,7 +40,12 @@ abstract class EntityView {
 	/**
 	 * @var string
 	 */
-	protected $languageCode;
+	protected $uiLanguageCode;
+
+	/**
+	 * @var string
+	 */
+	protected $contentLanguageCode;
 
 	/**
 	 * @var TextInjector
@@ -51,17 +56,20 @@ abstract class EntityView {
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
-	 * @param string $languageCode
+	 * @param string $uiLanguageCode
+	 * @param string $contentLanguageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
-		$languageCode
+		$uiLanguageCode,
+		$contentLanguageCode
 	) {
 		$this->entityTermsView = $entityTermsView;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
-		$this->languageCode = $languageCode;
+		$this->uiLanguageCode = $uiLanguageCode;
+		$this->contentLanguageCode = $contentLanguageCode;
 
 		$this->textInjector = new TextInjector();
 		$this->templateFactory = $templateFactory;
@@ -97,8 +105,8 @@ abstract class EntityView {
 		$html = $this->templateFactory->render( 'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
-			$this->languageCode,
-			$this->languageDirectionalityLookup->getDirectionality( $this->languageCode ) ?: 'auto',
+			$this->uiLanguageCode,
+			$this->languageDirectionalityLookup->getDirectionality( $this->uiLanguageCode ) ?: 'auto',
 			$this->getMainHtml( $entity ),
 			$this->getSideHtml( $entity )
 		);
@@ -119,7 +127,7 @@ abstract class EntityView {
 	public function getTitleHtml( EntityDocument $entity ) {
 		if ( $entity instanceof FingerprintProvider ) {
 			return $this->entityTermsView->getTitleHtml(
-				$this->languageCode,
+				$this->contentLanguageCode,
 				$entity->getFingerprint(),
 				$entity->getId()
 			);
@@ -158,7 +166,7 @@ abstract class EntityView {
 
 		if ( $entity instanceof FingerprintProvider ) {
 			return $this->entityTermsView->getHtml(
-				$this->languageCode,
+				$this->contentLanguageCode,
 				$entity->getFingerprint(),
 				$id,
 				$this->getHtmlForTermBox(),
