@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_5e4331b6",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-03-08T17:15:37Z",
+      "side": 1,
+      "message": "We came up with the name getExternalFormatDeserializerFactory",
+      "range": {
+        "startLine": 217,
+        "startChar": 39,
+        "endLine": 217,
+        "endChar": 68
+      },
+      "revId": "69f88a4132a36a74fe27212f354430bd48910f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_7e8c35dc",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-03-08T17:15:37Z",
+      "side": 1,
+      "message": "Would be nice to have caching.",
+      "range": {
+        "startLine": 817,
+        "startChar": 13,
+        "endLine": 817,
+        "endChar": 32
+      },
+      "revId": "69f88a4132a36a74fe27212f354430bd48910f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_a1197c80",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-03-08T17:15:37Z",
+      "side": 1,
+      "message": "Add tests for newly introduced methods",
+      "revId": "69f88a4132a36a74fe27212f354430bd48910f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_1e17e957",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-03-08T17:15:37Z",
+      "side": 1,
+      "message": "qqx?",
+      "range": {
+        "startLine": 68,
+        "startChar": 23,
+        "endLine": 68,
+        "endChar": 26
+      },
+      "revId": "69f88a4132a36a74fe27212f354430bd48910f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
