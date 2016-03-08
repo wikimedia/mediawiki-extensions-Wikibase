@@ -185,9 +185,21 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$base = $title->getInternalURL();
 
 		return array(
-			array( 'Q12', array(
+			array( 'Q12', array(), array(
 				"$base/Q12.txt",
 				"$base/Q12.rdf",
+			) ),
+			array( 'Q13',
+				array( "flavor" => array( "vanilla", "pistachio", "chocolate" ) ),
+				array(
+				"$base/Q13.txt",
+				"$base/Q13.rdf",
+			) ),
+			array( 'Q14',
+				array( "flavor" => array( "vanilla", "chocolate" ), "toppings" => array( "candy", "fruit" ) ),
+				array(
+				"$base/Q14.txt",
+				"$base/Q14.rdf",
 			) ),
 		);
 	}
@@ -195,12 +207,13 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetCacheableUrls
 	 */
-	public function testGetCacheableUrls( $id, $expected ) {
+	public function testGetCacheableUrls( $id, $query, $expected ) {
 		$id = $this->idParser->parse( $id );
 
 		$uriManager = $this->makeUriManager();
 
-		$actual = $uriManager->getCacheableUrls( $id );
+		$actual = $uriManager->getCacheableUrls( $id, $query );
+		var_export($actual);
 		$this->assertEquals( $expected, $actual );
 	}
 
