@@ -139,7 +139,6 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testNewEntityTermsView() {
 		$entityTermsView = $this->newViewFactory()->newEntityTermsView(
-			'de',
 			$this->getMock( EditSectionGenerator::class )
 		);
 
