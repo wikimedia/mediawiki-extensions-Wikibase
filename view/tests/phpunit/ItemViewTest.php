@@ -63,6 +63,7 @@ class ItemViewTest extends EntityViewTest {
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getMock( Language::class ),
+			'en',
 			$this->getMockBuilder( SiteLinksView::class )
 				->disableOriginalConstructor()
 				->getMock(),

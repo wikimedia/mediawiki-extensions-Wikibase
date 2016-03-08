@@ -151,7 +151,8 @@ class ViewFactory {
 	/**
 	 * Creates an ItemView suitable for rendering the item.
 	 *
-	 * @param string $languageCode UI language
+	 * @param string $uiLanguageCode UI language
+	 * @param string $contentLanguageCode Content language
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -159,22 +160,23 @@ class ViewFactory {
 	 * @return ItemView
 	 */
 	public function newItemView(
-		$languageCode,
+		$uiLanguageCode,
+		$contentLanguageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
+		$entityTermsView = $this->newEntityTermsView( $uiLanguageCode, $editSectionGenerator );
 
 		$statementSectionsView = $this->newStatementSectionsView(
-			$languageCode,
+			$uiLanguageCode,
 			$labelDescriptionLookup,
 			$fallbackChain,
 			$editSectionGenerator
 		);
 
 		// @fixme all that seems needed in ItemView is language code and dir.
-		$language = Language::factory( $languageCode );
+		$uiLanguage = Language::factory( $uiLanguageCode );
 
 		$siteLinksView = new SiteLinksView(
 			$this->templateFactory,
@@ -190,7 +192,8 @@ class ViewFactory {
 			$this->templateFactory,
 			$entityTermsView,
 			$statementSectionsView,
-			$language,
+			$uiLanguage,
+			$contentLanguageCode,
 			$siteLinksView,
 			$this->siteLinkGroups
 		);
@@ -199,7 +202,8 @@ class ViewFactory {
 	/**
 	 * Creates an PropertyView suitable for rendering the property.
 	 *
-	 * @param string $languageCode
+	 * @param string $uiLanguageCode UI language
+	 * @param string $contentLanguageCode Content language
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -207,34 +211,36 @@ class ViewFactory {
 	 * @return PropertyView
 	 */
 	public function newPropertyView(
-		$languageCode,
+		$uiLanguageCode,
+		$contentLanguageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$entityTermsView = $this->newEntityTermsView( $languageCode, $editSectionGenerator );
+		$entityTermsView = $this->newEntityTermsView( $uiLanguageCode, $editSectionGenerator );
 
 		$statementSectionsView = $this->newStatementSectionsView(
-			$languageCode,
+			$uiLanguageCode,
 			$labelDescriptionLookup,
 			$fallbackChain,
 			$editSectionGenerator
 		);
 
 		// @fixme all that seems needed in PropertyView is language code and dir.
-		$language = Language::factory( $languageCode );
+		$uiLanguage = Language::factory( $uiLanguageCode );
 
 		return new PropertyView(
 			$this->templateFactory,
 			$entityTermsView,
 			$statementSectionsView,
 			$this->dataTypeFactory,
-			$language
+			$uiLanguage,
+			$contentLanguageCode
 		);
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param string $uiLanguageCode
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -242,13 +248,13 @@ class ViewFactory {
 	 * @return StatementSectionsView
 	 */
 	private function newStatementSectionsView(
-		$languageCode,
+		$uiLanguageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
-			$languageCode,
+			$uiLanguageCode,
 			$fallbackChain,
 			$labelDescriptionLookup
 		);
@@ -275,17 +281,17 @@ class ViewFactory {
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param string $uiLanguageCode
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return EntityTermsView
 	 */
-	private function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
+	private function newEntityTermsView( $uiLanguageCode, EditSectionGenerator $editSectionGenerator ) {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$editSectionGenerator,
 			$this->languageNameLookup,
-			$languageCode
+			$uiLanguageCode
 		);
 	}
 

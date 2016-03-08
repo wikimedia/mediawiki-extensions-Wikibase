@@ -100,6 +100,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$itemView = $this->newViewFactory()->newItemView(
 			'de',
+			'de',
 			$this->getMock( LabelDescriptionLookup::class ),
 			$languageFallback,
 			$this->getMock( EditSectionGenerator::class )
@@ -112,6 +113,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$languageFallback = new LanguageFallbackChain( array() );
 
 		$propertyView = $this->newViewFactory()->newPropertyView(
+			'de',
 			'de',
 			$this->getMock( LabelDescriptionLookup::class ),
 			$languageFallback,

@@ -42,7 +42,8 @@ class ItemView extends EntityView {
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
 	 * @param StatementSectionsView $statementSectionsView
-	 * @param Language $language
+	 * @param Language $uiLanguage
+	 * @param string $contentLanguageCode
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
 	 */
@@ -50,11 +51,12 @@ class ItemView extends EntityView {
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
 		StatementSectionsView $statementSectionsView,
-		Language $language,
+		Language $uiLanguage,
+		$contentLanguageCode,
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $language );
+		parent::__construct( $templateFactory, $entityTermsView, $uiLanguage, $contentLanguageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinksView = $siteLinksView;
