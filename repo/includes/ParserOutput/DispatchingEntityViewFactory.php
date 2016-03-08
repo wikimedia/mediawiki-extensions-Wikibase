@@ -37,7 +37,8 @@ class DispatchingEntityViewFactory {
 	 * Creates a new EntityView that can display the given type of entity.
 	 *
 	 * @param string $entityType
-	 * @param string $languageCode
+	 * @param string $uiLanguageCode
+	 * @param string $contentLanguageCode
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
@@ -47,7 +48,8 @@ class DispatchingEntityViewFactory {
 	 */
 	public function newEntityView(
 		$entityType,
-		$languageCode,
+		$uiLanguageCode,
+		$contentLanguageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $languageFallbackChain,
 		EditSectionGenerator $editSectionGenerator
@@ -58,7 +60,8 @@ class DispatchingEntityViewFactory {
 
 		$entityView = call_user_func(
 			$this->entityViewFactoryCallbacks[$entityType],
-			$languageCode,
+			$uiLanguageCode,
+			$contentLanguageCode,
 			$labelDescriptionLookup,
 			$languageFallbackChain,
 			$editSectionGenerator

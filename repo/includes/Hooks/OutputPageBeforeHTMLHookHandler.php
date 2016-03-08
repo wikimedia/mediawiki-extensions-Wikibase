@@ -162,7 +162,6 @@ class OutputPageBeforeHTMLHookHandler {
 			$this->templateFactory,
 			$out->getTitle(),
 			$out->getUser(),
-			$out->getLanguage(),
 			$this->entityIdParser,
 			$this->entityRevisionLookup,
 			$this->userLanguageLookup,

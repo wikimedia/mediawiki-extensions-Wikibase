@@ -114,7 +114,7 @@ class EntityTermsView {
 
 		if ( $entityId !== null ) {
 			$id = $entityId->getSerialization();
-			$idInParentheses = wfMessage( 'parentheses', $id )->text();
+			$idInParentheses = $this->msg( 'parentheses' )->params( $id )->text();
 		}
 
 		if ( $labels->hasTermForLanguage( $mainLanguageCode ) ) {
@@ -126,7 +126,7 @@ class EntityTermsView {
 		} else {
 			return $this->templateFactory->render( 'wikibase-title',
 				'wb-empty',
-				wfMessage( 'wikibase-label-empty' )->escaped(),
+				$this->msg( 'wikibase-label-empty' )->escaped(),
 				$idInParentheses
 			);
 		}
@@ -143,7 +143,7 @@ class EntityTermsView {
 			$text = $descriptions->getByLanguage( $languageCode )->getText();
 			return htmlspecialchars( $text );
 		} else {
-			return wfMessage( 'wikibase-description-empty' )->escaped();
+			return $this->msg( 'wikibase-description-empty' )->escaped();
 		}
 	}
 
@@ -167,7 +167,7 @@ class EntityTermsView {
 			return $this->templateFactory->render( 'wikibase-entitytermsview-aliases', $aliasesHtml );
 		} else {
 			return $this->templateFactory->render( 'wikibase-entitytermsview-aliases',
-				wfMessage( 'wikibase-aliases-empty' )->escaped()
+				$this->msg( 'wikibase-aliases-empty' )->escaped()
 			);
 		}
 	}

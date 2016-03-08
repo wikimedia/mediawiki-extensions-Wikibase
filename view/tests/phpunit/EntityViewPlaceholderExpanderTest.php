@@ -48,8 +48,6 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$language = Language::factory( 'en' );
-
 		$idParser = $this->getMockBuilder( EntityIdParser::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -68,7 +66,6 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			$templateFactory,
 			$title,
 			$user,
-			$language,
 			$idParser,
 			$entityRevisionLookup,
 			$userLanguages,
@@ -156,7 +153,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
 		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $item->getId() );
 
-		$html = $expander->getHtmlForPlaceholder( 'termbox', 'Q23' );
+		$html = $expander->getHtmlForPlaceholder( 'termbox', 'Q23', 0, 'en', 'en' );
 		$this->assertInternalType( 'string', $html );
 	}
 
@@ -167,7 +164,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
-		$html = $expander->renderTermBox( new ItemId( 'Q23' ), 0 );
+		$html = $expander->renderTermBox( new ItemId( 'Q23' ), 0, 'en', 'en' );
 
 		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
 		$this->assertContains( 'Moskow', $html );
@@ -186,7 +183,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 
 		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $itemId );
 
-		$html = $expander->renderTermBox( $itemId, 1 );
+		$html = $expander->renderTermBox( $itemId, 1, 'en', 'en' );
 		$this->assertEquals( '', $html );
 	}
 
@@ -197,7 +194,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 
 		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $itemId );
 
-		$html = $expander->renderTermBox( $itemId, 1 );
+		$html = $expander->renderTermBox( $itemId, 1, 'en', 'en' );
 		$this->assertEquals( '', $html );
 	}
 
@@ -207,10 +204,10 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
 
 		$expander = $this->newExpander( $this->newUser( true ), $entityRevisionLookup, $itemId );
-		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages() );
+		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages( array() ) );
 
 		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $itemId );
-		$this->assertArrayEquals( array( 'de', 'ru' ), $expander->getExtraUserLanguages() );
+		$this->assertArrayEquals( array( 'de', 'ru' ), $expander->getExtraUserLanguages( array( 'en' ) ) );
 	}
 
 }
