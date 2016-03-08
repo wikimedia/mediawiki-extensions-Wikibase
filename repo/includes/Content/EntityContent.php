@@ -287,12 +287,24 @@ abstract class EntityContent extends AbstractContent {
 		$entityParserOutputGeneratorFactory = WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
 
 		$outputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			$options
+			$options->getUserLang(),
+			$options->getEditSection()
 		);
 
 		$entityRevision = $this->getEntityRevision( $revisionId );
 
-		$output = $outputGenerator->getParserOutput( $entityRevision, $options, $generateHtml );
+		$output = $outputGenerator->getParserOutput( $entityRevision, $generateHtml );
+
+		// Force parser cache split by whether edit links are show.
+		// MediaWiki core has the ability to split on editsection, but does not trigger it
+		// automatically when $parserOptions->getEditSection() is called. Presumably this
+		// is because core uses <mw:editsection> tags that are substituted by ParserOutput::getText
+		// using the info from ParserOutput::getEditSectionTokens.
+		$output->recordOption( 'editsection' );
+
+		// Since the output depends on the user language, we must make sure
+		// ParserCache::getKey() includes it in the cache key.
+		$output->recordOption( 'userlang' );
 
 		$this->applyEntityPageProperties( $output );
 

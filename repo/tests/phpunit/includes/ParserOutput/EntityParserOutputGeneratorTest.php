@@ -3,9 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
-use Language;
 use MediaWikiTestCase;
-use ParserOptions;
 use SpecialPage;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -44,7 +42,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$timestamp = wfTimestamp( TS_MW );
 		$revision = new EntityRevision( $item, 13044, $timestamp );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, $this->getParserOptions() );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
 
 		$this->assertSame( '<TITLE>', $parserOutput->getTitleText(), 'title text' );
 		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
@@ -92,14 +90,6 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$parserOutput->getExtensionData( 'referenced-entities' )
 		);
 
-		$expectedUsedOptions = array( 'userlang', 'editsection' );
-		$actualOptions = $parserOutput->getUsedOptions();
-		$missingOptions = array_diff( $expectedUsedOptions, $actualOptions );
-		$this->assertEmpty(
-			$missingOptions,
-			'Missing cache-split flags: ' . join( '|', $missingOptions ) . '. Options: ' . join( '|', $actualOptions )
-		);
-
 		$jsonHref = SpecialPage::getTitleFor( 'EntityData', $item->getId()->getSerialization() . '.json' )->getCanonicalURL();
 		$ntHref = SpecialPage::getTitleFor( 'EntityData', $item->getId()->getSerialization() . '.nt' )->getCanonicalURL();
 
@@ -128,7 +118,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$timestamp = wfTimestamp( TS_MW );
 		$revision = new EntityRevision( $item, 13044, $timestamp );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, $this->getParserOptions(), false );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, false );
 
 		$this->assertSame( '', $parserOutput->getText() );
 		// ParserOutput without HTML must not end up in the cache.
@@ -144,7 +134,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$timestamp = wfTimestamp( TS_MW );
 		$revision = new EntityRevision( $item, 13045, $timestamp );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, $this->getParserOptions() );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
 
 		$this->assertEquals(
 			'Q7799929',
@@ -181,7 +171,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			TemplateFactory::getDefaultInstance(),
 			$entityDataFormatProvider,
 			$dataUpdaters,
-			'en'
+			'en',
+			true
 		);
 	}
 
@@ -297,10 +288,6 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'commonsMedia' );
 
 		return $dataTypeLookup;
-	}
-
-	private function getParserOptions() {
-		return new ParserOptions( null, Language::factory( 'en' ) );
 	}
 
 }
