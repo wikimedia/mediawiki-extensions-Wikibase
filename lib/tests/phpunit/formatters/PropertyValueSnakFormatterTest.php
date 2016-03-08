@@ -64,7 +64,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				new PropertyDataTypeLookupException( new PropertyId( 'P666' ) ) );
 		}
 
-		$typeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$typeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$typeLookup->expects( $this->atLeastOnce() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $getDataTypeIdForPropertyResult );
@@ -86,7 +86,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				new OutOfBoundsException( 'unknown datatype ' . $dataType ) );
 		}
 
-		$typeFactory = $this->getMockBuilder( 'DataTypes\DataTypeFactory' )
+		$typeFactory = $this->getMockBuilder( DataTypeFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -129,7 +129,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	}
 
 	private function getMockFormatter( $value ) {
-		$formatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$formatter = $this->getMock( ValueFormatter::class );
 		$formatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnValue( $value ) );
@@ -219,10 +219,10 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 	}
 
 	private function getDummyPropertyValueSnakFormatter( $format = 'test' ) {
-		$typeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$typeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$typeLookup->expects( $this->never() )->method( 'getDataTypeIdForProperty' );
 
-		$typeFactory = $this->getMockBuilder( 'DataTypes\DataTypeFactory' )
+		$typeFactory = $this->getMockBuilder( DataTypeFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 

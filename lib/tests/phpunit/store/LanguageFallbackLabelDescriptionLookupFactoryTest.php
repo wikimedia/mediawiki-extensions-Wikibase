@@ -5,6 +5,8 @@ namespace Wikibase\Test;
 use Language;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
@@ -20,8 +22,11 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  */
 class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return TermLookup
+	 */
 	private function getTermLookupMock() {
-		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
+		$termLookup = $this->getMock( TermLookup::class );
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {
@@ -37,8 +42,11 @@ class LanguageFallbackLabelDescriptionLookupFactoryTest extends \PHPUnit_Framewo
 		return $termLookup;
 	}
 
+	/**
+	 * @return TermBuffer
+	 */
 	private function getTermBufferMock() {
-		$termBuffer = $this->getMock( 'Wikibase\DataModel\Services\Term\TermBuffer' );
+		$termBuffer = $this->getMock( TermBuffer::class );
 		$termBuffer->expects( $this->once() )
 			->method( 'prefetchTerms' )
 			->with(

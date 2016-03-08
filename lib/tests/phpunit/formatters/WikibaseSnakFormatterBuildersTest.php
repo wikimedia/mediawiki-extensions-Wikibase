@@ -12,6 +12,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
+use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Test\MockPropertyInfoStore;
 
@@ -34,7 +35,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 	private function getWikibaseSnakFormatterBuilders() {
 		$p1 = new PropertyId( 'P1' );
 
-		$valueFormatterBuilders = $this->getMockBuilder( 'Wikibase\Lib\WikibaseValueFormatterBuilders' )
+		$valueFormatterBuilders = $this->getMockBuilder( WikibaseValueFormatterBuilders::class )
 			->disableOriginalConstructor()
 			->getMock();
 

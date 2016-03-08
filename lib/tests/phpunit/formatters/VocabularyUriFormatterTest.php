@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Test;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\VocabularyUriFormatter;
@@ -39,7 +40,7 @@ class VocabularyUriFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider unitProvider
 	 */
 	public function testFormat( $unit, $expected ) {
-		$labelLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
+		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
 		$labelLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnCallback( function( EntityId $id ) {

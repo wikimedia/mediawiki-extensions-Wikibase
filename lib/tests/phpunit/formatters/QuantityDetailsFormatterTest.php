@@ -7,6 +7,7 @@ use DataValues\QuantityValue;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
 use ValueFormatters\NumberLocalizer;
+use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\QuantityDetailsFormatter;
 
 /**
@@ -23,7 +24,7 @@ use Wikibase\Lib\QuantityDetailsFormatter;
 class QuantityDetailsFormatterTest extends PHPUnit_Framework_TestCase {
 
 	private function newFormatter( NumberLocalizer $numberLocalizer = null ) {
-		$vocabularyUriFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$vocabularyUriFormatter = $this->getMock( ValueFormatter::class );
 		$vocabularyUriFormatter->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback( function( $value ) {
@@ -98,7 +99,7 @@ class QuantityDetailsFormatterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenHtmlCharacters_formatEscapesHtmlCharacters() {
-		$unitFormatter = $this->getMock( 'ValueFormatters\NumberLocalizer' );
+		$unitFormatter = $this->getMock( NumberLocalizer::class );
 		$unitFormatter->expects( $this->any() )
 			->method( 'localizeNumber' )
 			->will( $this->returnValue( '<a>+2</a>' ) );

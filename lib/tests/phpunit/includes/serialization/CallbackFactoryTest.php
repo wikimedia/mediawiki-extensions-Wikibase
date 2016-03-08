@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Serialization;
 
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Serialization\CallbackFactory;
 
 /**
@@ -16,8 +17,11 @@ use Wikibase\Lib\Serialization\CallbackFactory;
  */
 class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return PropertyDataTypeLookup
+	 */
 	private function getPropertyDataTypeLookup() {
-		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$mock = $this->getMock( PropertyDataTypeLookup::class );
 
 		$mock->expects( $this->once() )
 			->method( 'getDataTypeIdForProperty' )

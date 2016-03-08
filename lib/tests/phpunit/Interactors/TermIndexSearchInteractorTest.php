@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -76,7 +77,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @return BufferingTermLookup
 	 */
 	private function getMockBufferingTermLookup() {
-		$mock = $this->getMockBuilder( 'Wikibase\Store\BufferingTermLookup' )
+		$mock = $this->getMockBuilder( BufferingTermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -113,7 +114,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @return LanguageFallbackChainFactory
 	 */
 	private function getMockLanguageFallbackChainFactory() {
-		$mockFactory = $this->getMockBuilder( 'Wikibase\LanguageFallbackChainFactory' )
+		$mockFactory = $this->getMockBuilder( LanguageFallbackChainFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mockFactory->expects( $this->any() )
@@ -124,8 +125,13 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		return $mockFactory;
 	}
 
+	/**
+	 * @param string $langCode
+	 *
+	 * @return LanguageFallbackChain
+	 */
 	public function getMockLanguageFallbackChainFromLanguage( $langCode ) {
-		$mockFallbackChain = $this->getMockBuilder( 'Wikibase\LanguageFallbackChain' )
+		$mockFallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mockFallbackChain->expects( $this->any() )

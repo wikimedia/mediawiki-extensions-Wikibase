@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Change;
 use Wikibase\ChangeNotificationJob;
 
 /**
@@ -28,8 +29,8 @@ class ChangeNotificationJobTest extends \MediaWikiTestCase {
 			),
 			array( // #1: some changes
 				array(
-					$this->getMock( 'Wikibase\Change' ),
-					$this->getMock( 'Wikibase\Change' ),
+					$this->getMock( Change::class ),
+					$this->getMock( Change::class ),
 				),
 				'/^ChangeNotification/'
 			),

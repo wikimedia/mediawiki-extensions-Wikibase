@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\DataValueFactory;
 use DataValues\UnDeserializableValue;
+use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use PHPUnit_Framework_TestCase;
 
@@ -19,7 +20,7 @@ use PHPUnit_Framework_TestCase;
 class DataValueFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function newInstance() {
-		$deserializer = $this->getMock( 'Deserializers\Deserializer' );
+		$deserializer = $this->getMock( Deserializer::class );
 		$deserializer->expects( $this->any() )
 			->method( 'deserialize' )
 			->will( $this->returnCallback( function( array $data ) {

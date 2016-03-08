@@ -2,7 +2,11 @@
 
 namespace Wikibase\Lib\Tests;
 
+use Deserializers\Deserializer;
 use PHPUnit_Framework_TestCase;
+use Serializers\Serializer;
+use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\SerializerFactory;
 
 /**
  * @covers WikibaseLib.entitytypes.php
@@ -16,26 +20,36 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 		return require __DIR__  . '/../../WikibaseLib.entitytypes.php';
 	}
 
+	/**
+	 * @param string $entityType
+	 *
+	 * @return SerializerFactory
+	 */
 	private function getSerializerFactroy( $entityType ) {
-		$serializerFactory = $this->getMockBuilder( 'Wikibase\DataModel\SerializerFactory' )
+		$serializerFactory = $this->getMockBuilder( SerializerFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$serializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Serializer' )
-			->will( $this->returnValue( $this->getMock( 'Serializers\Serializer' ) ) );
+			->will( $this->returnValue( $this->getMock( Serializer::class ) ) );
 
 		return $serializerFactory;
 	}
 
+	/**
+	 * @param string $entityType
+	 *
+	 * @return DeserializerFactory
+	 */
 	private function getDeserializerFactroy( $entityType ) {
-		$deserializerFactory = $this->getMockBuilder( 'Wikibase\DataModel\DeserializerFactory' )
+		$deserializerFactory = $this->getMockBuilder( DeserializerFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$deserializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Deserializer' )
-			->will( $this->returnValue( $this->getMock( 'Deserializers\Deserializer' ) ) );
+			->will( $this->returnValue( $this->getMock( Deserializer::class ) ) );
 
 		return $deserializerFactory;
 	}

@@ -40,7 +40,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_Test
 	}
 
 	public function provideGetLabelDescriptionLookup() {
-		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
+		$termLookup = $this->getMock( TermLookup::class );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabel' )
@@ -99,7 +99,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_Test
 	 * @dataProvider provideGetLabelDescriptionLookup_failure
 	 */
 	public function testGetLabelDescriptionLookup_failure( FormatterOptions $options ) {
-		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
+		$termLookup = $this->getMock( TermLookup::class );
 		$factory = new FormatterLabelDescriptionLookupFactory( $termLookup );
 
 		$this->setExpectedException( 'InvalidArgumentException' );

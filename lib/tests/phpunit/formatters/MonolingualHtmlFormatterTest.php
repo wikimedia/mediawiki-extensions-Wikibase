@@ -6,6 +6,7 @@ use DataValues\MonolingualTextValue;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Formatters\MonolingualHtmlFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 
 /**
  * @covers Wikibase\Formatters\MonolingualHtmlFormatter
@@ -25,7 +26,7 @@ class MonolingualHtmlFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider monolingualHtmlFormatProvider
 	 */
 	public function testFormat( $value, $options, $pattern, $not = '' ) {
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->any() )
 			->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ) );

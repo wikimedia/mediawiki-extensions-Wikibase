@@ -32,7 +32,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getDataTypeLookup( $dataType = 'string' ) {
-		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 
 		$dataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
@@ -48,7 +48,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @return SnakFormatter
 	 */
 	private function makeSnakFormatter( $output, $format = SnakFormatter::FORMAT_PLAIN ) {
-		$formatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$formatter = $this->getMock( SnakFormatter::class );
 
 		$formatter->expects( $this->any() )
 			->method( 'formatSnak' )

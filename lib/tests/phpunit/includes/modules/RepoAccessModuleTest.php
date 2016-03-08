@@ -21,7 +21,7 @@ class RepoAccessModuleTest extends PHPUnit_Framework_TestCase {
 	 * @return ResourceLoaderContext
 	 */
 	private function getContext() {
-		return $this->getMockBuilder( 'ResourceLoaderContext' )
+		return $this->getMockBuilder( ResourceLoaderContext::class )
 			->disableOriginalConstructor()
 			->getMock();
 	}

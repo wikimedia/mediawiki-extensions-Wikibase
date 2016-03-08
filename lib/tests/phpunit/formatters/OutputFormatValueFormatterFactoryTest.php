@@ -55,16 +55,6 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 		);
 	}
 
-	public function makeMockValueFormatter( $value ) {
-		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
-
-		$mock->expects( $this->atLeastOnce() )
-			->method( 'format' )
-			->will( $this->returnValue( $value ) );
-
-		return $mock;
-	}
-
 	private function newOutputFormatValueFormatterFactory() {
 		$factoryCallbacks = array(
 			'VT:string' => function( $format, FormatterOptions $options ) {
