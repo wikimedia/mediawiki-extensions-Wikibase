@@ -16,6 +16,23 @@
       "revId": "eefc2b367b9d8733e83ece37639141c791ce621e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_e19f04b8",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-08T17:25:57Z",
+      "side": 1,
+      "message": "Ah, good to test this! But I\u0027d actually test for equality: not only do we want to make sure that we split the cache when needed - we also want to make sure that we don\u0027t split it more than necessary.",
+      "revId": "eefc2b367b9d8733e83ece37639141c791ce621e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
