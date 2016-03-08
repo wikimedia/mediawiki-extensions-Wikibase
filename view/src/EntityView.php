@@ -119,6 +119,7 @@ abstract class EntityView {
 	public function getTitleHtml( EntityDocument $entity ) {
 		if ( $entity instanceof FingerprintProvider ) {
 			return $this->entityTermsView->getTitleHtml(
+				$this->languageCode,
 				$entity->getFingerprint(),
 				$entity->getId()
 			);
@@ -157,6 +158,7 @@ abstract class EntityView {
 
 		if ( $entity instanceof FingerprintProvider ) {
 			return $this->entityTermsView->getHtml(
+				$this->languageCode,
 				$entity->getFingerprint(),
 				$id,
 				$this->getHtmlForTermBox(),
