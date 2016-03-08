@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 5.1 (dev)
+## Version 5.1.0 (dev)
 
 * `Item::copy` and `Property::copy` do not clone immutable objects any more, saving time and memory
 * Deprecated `FingerprintHolder` and `StatementListHolder`
