@@ -289,11 +289,21 @@ class EntityDataRequestHandler {
 	 * @param EntityId $id       The entity
 	 */
 	public function purgeWebCache( EntityId $id ) {
-		$urls = $this->uriManager->getCacheableUrls( $id );
-
 		//TODO: use a factory or service, so we can mock & test this
-		$update = new SquidUpdate( $urls );
+		$update = new SquidUpdate( $this->getCacheableUrls( $id ) );
 		$update->doUpdate();
+	}
+
+	/**
+	 * Produce list of cacheable URLs for this entity.
+	 * @param EntityId $id
+	 * @return List of Special:EntityData URLs for this entity.
+	 */
+	public function getCacheableUrls( $id ) {
+		$params = array(
+				"flavor" => $this->serializationService->getFlavors()
+		);
+		return $this->uriManager->getCacheableUrls( $id, $params );
 	}
 
 	/**
