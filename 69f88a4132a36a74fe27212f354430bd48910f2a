@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_a1a97c7a",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-08T18:25:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e2f53b6_5e4331b6",
+      "revId": "69f88a4132a36a74fe27212f354430bd48910f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_7e8c35dc",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 7
@@ -65,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_81a6f8a5",
+        "filename": "client/tests/phpunit/includes/WikibaseClientTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-08T18:25:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e2f53b6_a1197c80",
+      "revId": "69f88a4132a36a74fe27212f354430bd48910f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_1e17e957",
         "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
         "patchSetId": 7
@@ -82,6 +118,24 @@
         "endLine": 68,
         "endChar": 26
       },
+      "revId": "69f88a4132a36a74fe27212f354430bd48910f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_21ad6c81",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-08T18:25:57Z",
+      "side": 1,
+      "message": "unrelated",
+      "parentUuid": "0e2f53b6_1e17e957",
       "revId": "69f88a4132a36a74fe27212f354430bd48910f2a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
