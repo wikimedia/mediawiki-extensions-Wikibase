@@ -24,14 +24,16 @@ use Wikibase\View\EditSectionGenerator;
 return array(
 	'item' => array(
 		'view-factory-callback' => function(
-			$languageCode,
+			$uiLanguageCode,
+			$contentLanguageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
 			LanguageFallbackChain $fallbackChain,
 			EditSectionGenerator $editSectionGenerator
 		) {
 			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
 			return $viewFactory->newItemView(
-				$languageCode,
+				$uiLanguageCode,
+				$contentLanguageCode,
 				$labelDescriptionLookup,
 				$fallbackChain,
 				$editSectionGenerator
@@ -45,14 +47,16 @@ return array(
 	),
 	'property' => array(
 		'view-factory-callback' => function(
-			$languageCode,
+			$uiLanguageCode,
+			$contentLanguageCode,
 			LabelDescriptionLookup $labelDescriptionLookup,
 			LanguageFallbackChain $fallbackChain,
 			EditSectionGenerator $editSectionGenerator
 		) {
 			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
 			return $viewFactory->newPropertyView(
-				$languageCode,
+				$uiLanguageCode,
+				$contentLanguageCode,
 				$labelDescriptionLookup,
 				$fallbackChain,
 				$editSectionGenerator

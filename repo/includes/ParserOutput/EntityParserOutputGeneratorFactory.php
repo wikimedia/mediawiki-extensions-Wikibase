@@ -126,21 +126,31 @@ class EntityParserOutputGeneratorFactory {
 	 * @return EntityParserOutputGenerator
 	 */
 	public function getEntityParserOutputGenerator( $userLanguageCode, $editable ) {
+		$contentLanguageCode = $this->followMwLanguageFallbacks( $userLanguageCode, false );
+		$uiLanguageCode = $this->followMwLanguageFallbacks( $userLanguageCode, true );
 
-		$userLanguage = Language::factory( $userLanguageCode );
+		$contentLanguage = Language::factory( $contentLanguageCode );
 		return new EntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->newParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
 			$this->entityInfoBuilderFactory,
-			$this->getLanguageFallbackChain( $userLanguage ),
+			$this->getLanguageFallbackChain( $contentLanguage ),
 			$this->templateFactory,
 			new MediaWikiLocalizedTextProvider( $userLanguageCode ),
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
-			$userLanguageCode,
+			$uiLanguageCode,
+			$contentLanguageCode,
 			$editable
 		);
+	}
+
+	private function followMwLanguageFallbacks( $code, $searchValidUiLanguage ) {
+		while ( $code && !Language::fetchLanguageName( $code, null, $searchValidUiLanguage ? 'mwfile' : 'mw' ) ) {
+			$code = Language::getFallbackFor( $code );
+		}
+		return $code;
 	}
 
 	/**
