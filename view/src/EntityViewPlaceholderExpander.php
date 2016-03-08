@@ -234,7 +234,6 @@ class EntityViewPlaceholderExpander {
 			$this->templateFactory,
 			null,
 			$this->languageNameLookup,
-			$this->uiLanguage->getCode(),
 			$this->textProvider
 		);
 
