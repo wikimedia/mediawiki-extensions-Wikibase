@@ -3,6 +3,7 @@
 namespace Wikibase\View\Tests\Module;
 
 use PHPUnit_Framework_TestCase;
+use ResourceLoaderContext;
 use Wikibase\View\Module\TemplateModule;
 
 /**
@@ -49,7 +50,7 @@ class TemplateModuleTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getResourceLoaderContext() {
-		$context = $this->getMockBuilder( 'ResourceLoaderContext' )
+		$context = $this->getMockBuilder( ResourceLoaderContext::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$context->expects( $this->any() )

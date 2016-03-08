@@ -5,8 +5,11 @@ namespace Wikibase\View\Tests;
 use Language;
 use MediaWikiLangTestCase;
 use MessageCache;
+use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TextInjector;
@@ -42,12 +45,12 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$languageNameCalls = 0,
 		$languageCode = 'en'
 	) {
-		$editSectionGenerator = $this->getMock( 'Wikibase\View\EditSectionGenerator' );
+		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$editSectionGenerator->expects( $this->exactly( $editSectionCalls ) )
 			->method( 'getLabelDescriptionAliasesEditSection' )
 			->will( $this->returnValue( '<EDITSECTION>' ) );
 
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
 			->method( 'getName' )
 			->will( $this->returnCallback( function( $languageCode ) {
@@ -217,7 +220,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	}
 
 	public function testGetEntityTermsForLanguageListView() {
-		$title = $this->getMock( 'Title' );
+		$title = $this->getMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'getLocalURL' )
 			->will( $this->returnValue( '<LOCALURL>' ) );

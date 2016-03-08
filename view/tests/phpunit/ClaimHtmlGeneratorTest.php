@@ -33,7 +33,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @return SnakHtmlGenerator
 	 */
 	private function getSnakHtmlGeneratorMock() {
-		$snakHtmlGenerator = $this->getMockBuilder( 'Wikibase\View\SnakHtmlGenerator' )
+		$snakHtmlGenerator = $this->getMockBuilder( SnakHtmlGenerator::class )
 			->disableOriginalConstructor()
 			->getMock();
 

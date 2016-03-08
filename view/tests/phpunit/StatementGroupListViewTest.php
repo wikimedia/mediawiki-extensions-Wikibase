@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\View\ClaimHtmlGenerator;
+use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
@@ -124,7 +125,7 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 		return new StatementGroupListView(
 			$templateFactory,
 			$propertyIdFormatter,
-			$this->getMock( 'Wikibase\View\EditSectionGenerator' ),
+			$this->getMock( EditSectionGenerator::class ),
 			$this->getClaimHtmlGenerator()
 		);
 	}
@@ -133,7 +134,7 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 * @return ClaimHtmlGenerator
 	 */
 	private function getClaimHtmlGenerator() {
-		$claimHtmlGenerator = $this->getMockBuilder( 'Wikibase\View\ClaimHtmlGenerator' )
+		$claimHtmlGenerator = $this->getMockBuilder( ClaimHtmlGenerator::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -150,7 +151,7 @@ class StatementGroupListViewTest extends MediaWikiLangTestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function getEntityIdFormatter() {
-		$lookup = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+		$lookup = $this->getMock( EntityIdFormatter::class );
 
 		$lookup->expects( $this->once() )
 			->method( 'formatEntityId' )

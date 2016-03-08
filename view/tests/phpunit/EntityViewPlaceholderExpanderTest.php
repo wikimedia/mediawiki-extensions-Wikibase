@@ -4,13 +4,17 @@ namespace Wikibase\View\Tests;
 
 use Language;
 use MediaWikiTestCase;
+use Title;
 use User;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -40,25 +44,25 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	private function newExpander( User $user, EntityRevisionLookup $entityRevisionLookup, ItemId $itemId ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
-		$title = $this->getMockBuilder( 'Title' )
+		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$language = Language::factory( 'en' );
 
-		$idParser = $this->getMockBuilder( 'Wikibase\DataModel\Entity\EntityIdParser' )
+		$idParser = $this->getMockBuilder( EntityIdParser::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$idParser->expects( $this->any() )
 			->method( 'parse' )
 			->will( $this->returnValue( $itemId ) );
 
-		$userLanguages = $this->getMock( 'Wikibase\Lib\UserLanguageLookup' );
+		$userLanguages = $this->getMock( UserLanguageLookup::class );
 		$userLanguages->expects( $this->any() )
 			->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
 
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 
 		return new EntityViewPlaceholderExpander(
 			$templateFactory,
@@ -82,7 +86,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	private function getEntityRevisionLookup( Item $item = null, $revId = 5 ) {
 		$revision = ( $item === null ) ? null : new EntityRevision( $item, $revId );
 
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$entityLookup = $this->getMock( EntityRevisionLookup::class );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->will( $this->returnValue( $revision ) );
@@ -94,7 +98,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	 * @return EntityRevisionLookup
 	 */
 	private function getExceptionThrowingEntityRevisionLookup() {
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$entityLookup = $this->getMock( EntityRevisionLookup::class );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->will( $this->returnCallback( function() {
@@ -109,7 +113,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	 * @return EntityRevisionLookup
 	 */
 	private function getNullReturningEntityRevisionLookup() {
-		$entityLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$entityLookup = $this->getMock( EntityRevisionLookup::class );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
 			->will( $this->returnValue( null ) );
@@ -134,7 +138,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	 * @return User
 	 */
 	private function newUser( $isAnon = false ) {
-		$user = $this->getMockBuilder( 'User' )
+		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$user->expects( $this->any() )

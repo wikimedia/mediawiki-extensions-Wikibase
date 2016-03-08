@@ -5,9 +5,17 @@ namespace Wikibase\View\Tests;
 use DataTypes\DataTypeFactory;
 use PHPUnit_Framework_TestCase;
 use SiteList;
+use SiteStore;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\HtmlSnakFormatterFactory;
+use Wikibase\View\ItemView;
+use Wikibase\View\PropertyView;
 use Wikibase\View\ViewFactory;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\Template\TemplateFactory;
@@ -46,7 +54,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 	) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( array() ) );
 
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 
@@ -92,12 +100,12 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$itemView = $this->newViewFactory()->newItemView(
 			'de',
-			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
+			$this->getMock( LabelDescriptionLookup::class ),
 			$languageFallback,
-			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
+			$this->getMock( EditSectionGenerator::class )
 		);
 
-		$this->assertInstanceOf( 'Wikibase\View\ItemView', $itemView );
+		$this->assertInstanceOf( ItemView::class, $itemView );
 	}
 
 	public function testNewPropertyView() {
@@ -105,18 +113,18 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$propertyView = $this->newViewFactory()->newPropertyView(
 			'de',
-			$this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ),
+			$this->getMock( LabelDescriptionLookup::class ),
 			$languageFallback,
-			$this->getMock( 'Wikibase\View\EditSectionGenerator' )
+			$this->getMock( EditSectionGenerator::class )
 		);
 
-		$this->assertInstanceOf( 'Wikibase\View\PropertyView', $propertyView );
+		$this->assertInstanceOf( PropertyView::class, $propertyView );
 	}
 
 	private function getEntityIdFormatterFactory( $format ) {
-		$entityIdFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
 
-		$formatterFactory = $this->getMock( 'Wikibase\View\EntityIdFormatterFactory' );
+		$formatterFactory = $this->getMock( EntityIdFormatterFactory::class );
 
 		$formatterFactory->expects( $this->any() )
 			->method( 'getOutputFormat' )
@@ -130,13 +138,13 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getSnakFormatterFactory() {
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$snakFormatter = $this->getMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_HTML ) );
 
-		$snakFormatterFactory = $this->getMock( 'Wikibase\View\HtmlSnakFormatterFactory' );
+		$snakFormatterFactory = $this->getMock( HtmlSnakFormatterFactory::class );
 
 		$snakFormatterFactory->expects( $this->any() )
 			->method( 'getSnakFormatter' )
@@ -146,7 +154,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getSiteStore() {
-		$siteStore = $this->getMock( 'SiteStore' );
+		$siteStore = $this->getMock( SiteStore::class );
 
 		$siteStore->expects( $this->any() )
 			->method( 'getSites' )
