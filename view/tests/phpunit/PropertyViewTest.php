@@ -87,6 +87,7 @@ class PropertyViewTest extends EntityViewTest {
 				->getMock(),
 			$this->getDataTypeFactory(),
 			'en',
+			'en',
 			$this->getMock( LocalizedTextProvider::class )
 		);
 
