@@ -67,7 +67,7 @@ if ( !defined( 'WBL_VERSION' ) ) {
 }
 
 call_user_func( function() {
-	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks;
+	global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgHooks, $wgExtensionFunctions;
 	global $wgAPIMetaModules, $wgAPIPropModules, $wgSpecialPages, $wgResourceModules;
 	global $wgWBClientSettings, $wgRecentChangesFlags, $wgMessagesDirs;
 	global $wgJobClasses, $wgWBClientDataTypes, $wgWBClientEntityTypes;
@@ -129,6 +129,15 @@ call_user_func( function() {
 	$wgHooks['ParserLimitReportPrepare'][] = '\Wikibase\Client\Hooks\ParserLimitHookHandlers::onParserLimitReportPrepare';
 	$wgHooks['FormatAutocomments'][] = '\Wikibase\ClientHooks::onFormat';
 	$wgHooks['ParserClearState'][] = '\Wikibase\Client\Hooks\ParserClearStateHookHandler::onParserClearState';
+
+	// for client notifications (requires the Echo extension)
+	// note that Echo calls BeforeCreateEchoEvent hook when it is being initialized,
+	// thus we have to register these two handlers disregarding Echo is loaded or not
+	$wgHooks['BeforeCreateEchoEvent'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onBeforeCreateEchoEvent';
+	$wgHooks['EchoGetBundleRules'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onEchoGetBundleRules';
+
+	// conditionally register the remaining two handlers which would otherwise fail
+	$wgExtensionFunctions[] = '\Wikibase\ClientHooks::onExtensionLoad';
 
 	// tracking local edits
 	if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
