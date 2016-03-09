@@ -13,7 +13,8 @@
 			"ZxxZxxZ",
 			"درفش کاویانی",
 			"Alirezaaa",
-			"Mjbmr"
+			"Mjbmr",
+			"Huji"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌بیس",
@@ -30,7 +31,7 @@
 	"wikibase-after-page-delete-queued": "[$1 آیتم {{WBREPONAME}}] مرتبط با این صفحه  به صورت خودکار به‌زودی به‌روز خواهد شد توجه داشته باشید که ممکن است این به صورت مداوم اتفاق نیافتد.",
 	"wikibase-comment-add": "یک مورد {{WBREPONAME}} ایجاد شده‌‌است.",
 	"wikibase-comment-remove": "آیتم مرتبط {{WBREPONAME}} حذف شد. پیوندهای زبانی حذف شد.",
-	"wikibase-comment-linked": "مورد {{WBREPONAME}} در این صفحه مرتبط شده‌است.",
+	"wikibase-comment-linked": "مورد {{WBREPONAME}} به این صفحه پیوند شده‌است.",
 	"wikibase-comment-unlink": "این صفحه تکی از مورد {{WBREPONAME}} مرتبط نشده‌است. پیوندهای زبانی حذف شده‌است.",
 	"wikibase-comment-restore": "مورد مرتبط {{WBREPONAME}} حذف نشد. پیوندهای زبانی برگردانده شد.",
 	"wikibase-comment-update": "مورد {{WBREPONAME}} تغییر کرد",

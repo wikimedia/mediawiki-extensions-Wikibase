@@ -5,11 +5,14 @@
 		]
 	},
 	"tooltip-t-wikibase": "Nuɛ̈të wël akutëyithiic",
+	"wikibase-comment-update": "këdäŋ cï waar",
 	"wikibase-dataitem": "{{WBREPONAME}} këdäŋ",
 	"wikibase-editlinks": "Lathë anuɛ̈tic",
 	"wikibase-editlinkstitle": "Lathë anuɛ̈t ë kaamëtokic",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Thaan",
 	"wikibase-rc-hide-wikidata-show": "Nyooth",
-	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-letter": "Cw",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} cökic",
 	"wikibase-otherprojects": "Kalooi kɔ̈k"
 }

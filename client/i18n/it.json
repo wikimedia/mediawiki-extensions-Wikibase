@@ -59,7 +59,7 @@
 	"wikibase-linkitem-confirmitem-button": "Conferma",
 	"wikibase-linkitem-not-loggedin-title": "Devi aver effettuato l'accesso",
 	"wikibase-linkitem-not-loggedin": "Devi aver effettuato l'accesso su questo wiki e nell'[$1 archivio dati centralizzato] per utilizzare questa funzionalità.",
-	"wikibase-linkitem-success-link": "Le pagine sono state collegate correttamente. Puoi trovare l'elemento contenente i link nel nostro [$1 archivio dati centralizzato].",
+	"wikibase-linkitem-success-link": "Le pagine sono state collegate. Puoi trovare l'elemento contenente i link nel nostro [$1 archivio dati centralizzato].",
 	"wikibase-limitreport-entities-accessed": "Numero di entità Wikibase caricate",
 	"wikibase-property-notfound": "Proprietà $1 non trovata.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

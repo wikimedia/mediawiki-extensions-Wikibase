@@ -46,7 +46,7 @@
 	"wikibase-linkitem-confirmitem-button": "Cunferma",
 	"wikibase-linkitem-not-loggedin-title": "Vuje avite abbesuogno è trasì",
 	"wikibase-linkitem-not-loggedin": "Avite 'e trasì a sta wiki e dint' 'o [$1 repositorio 'e date centrale] pe' puté ausà sta funziona.",
-	"wikibase-linkitem-success-link": "'E paggene so state cullegate currettamente. Putite truvà l'elemento cuntenente 'e link dint'a [$1 l'archivio date centralizzato] nuoste.",
+	"wikibase-linkitem-success-link": "'E paggene so state cullegate. Putite truvà l'elemento cuntenente 'e link dint'a [$1 l'archivio date centralizzato] nuoste.",
 	"wikibase-limitreport-entities-accessed": "Nummero 'entiàt Wikibase carrecate",
 	"wikibase-property-notfound": "Proprietà $1 nun truvata.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

@@ -34,7 +34,7 @@
 	"wikibase-linkitem-confirmitem-button": "Potrdi",
 	"wikibase-linkitem-not-loggedin-title": "Biti morate prijavljeni",
 	"wikibase-linkitem-not-loggedin": "Za uporabo te funkcije morate biti prijavljeni tako v tem wikiju kot v [$1 osrednji zbirki podatkov].",
-	"wikibase-linkitem-success-link": "Strani sta uspešno povezani. Predmet s povezavami lahko najdete v našem [$1 osrednjem podatkovnem odložišču].",
+	"wikibase-linkitem-success-link": "Strani sta povezani. Predmet s povezavami lahko najdete v našem [$1 osrednjem podatkovnem odložišču].",
 	"wikibase-property-notfound": "Lastnosti $1 ni mogoče najti.",
 	"wikibase-rc-hide-wikidata": "$1 {{GRAMMAR:tožilnik|{{WBREPONAME}}}}",
 	"wikibase-rc-hide-wikidata-hide": "Skrij",
@@ -52,5 +52,5 @@
 	"wikibase-pageinfo-entity-id": "ID objekta v {{GRAMMAR:mestnik|{{WBREPONAME}}}}",
 	"wikibase-pageinfo-entity-id-none": "Brez",
 	"wikibase-property-render-error": "Upodobitev lastnosti $1 je spodletela: $2",
-	"wikibase-otherprojects": "Drugi projekti"
+	"wikibase-otherprojects": "V drugih projektih"
 }

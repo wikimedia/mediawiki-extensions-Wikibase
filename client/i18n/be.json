@@ -3,7 +3,8 @@
 		"authors": [
 			"Дзяніс Тутэйшы",
 			"Чаховіч Уладзіслаў",
-			"Maksim L."
+			"Maksim L.",
+			"Mikalai Udodau"
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэння Wikibase",
@@ -42,5 +43,5 @@
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "Праўка {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-replicationnote": "Калі ласка, звернеце ўвагу, што можа прайсці некалькі хвілін, пакуль змены стануць бачнымі ва ўсіх вікі-праектах",
-	"wikibase-otherprojects": "Іншыя праекты"
+	"wikibase-otherprojects": "У іншых праектах"
 }
