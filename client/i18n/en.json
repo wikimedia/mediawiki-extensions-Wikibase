@@ -5,7 +5,8 @@
 			"Jeroen De Dauw",
 			"Nikola Smolenski",
 			"Marius Hoch",
-			"Jeblad"
+			"Jeblad",
+			"Matěj Suchánek"
 		]
 	},
 	"wikibase-client-desc": "Client for the Wikibase extension",
@@ -80,5 +81,12 @@
 	"wikibase-property-render-error": "Failed to render property $1: $2",
 	"wikibase-otherprojects": "In other projects",
 	"wikibase-otherprojects-beta-message": "Other projects sidebar",
-	"wikibase-otherprojects-beta-description": "Adds an \"{{int:wikibase-otherprojects}}\" section to the sidebar that provides links to the other Wikimedia projects based on {{WBREPONAME}} data."
+	"wikibase-otherprojects-beta-description": "Adds an \"{{int:wikibase-otherprojects}}\" section to the sidebar that provides links to the other Wikimedia projects based on {{WBREPONAME}} data.",
+	"echo-category-title-wikibase-connection": "connection with {{WBREPONAME}}",
+	"echo-pref-tooltip-page-connection": "Notify when page {{GENDER:$1|I created}} gets connected to a {{WBREPONAME}} item.",
+	"notification-header-page-connection": "$3 was {{GENDER:$2|connected}} to a {{WBREPONAME}} item.",
+	"notification-link-text-view-item": "View item",
+	"notification-page-connection-email-batch-body": "$1 was {{GENDER:$2|connected}} to $3.",
+	"notification-page-connection-email-subject": "A page on {{SITENAME}} {{GENDER:$1|you created}} was {{GENDER:$2|connected}} to a {{WBREPONAME}} item",
+	"notification-page-connection-link": ""
 }
