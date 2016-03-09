@@ -102,3 +102,4 @@ Default:
 :;<code>'CachingSqlStore'</code>: No direct access to the repo's database. Use cache information received from change notifications. '''Warning:''' dies is currently dysfunctional.
 :;<code>null</code>: Automatic, use <code>'DirectSqlStore'</code> if <code>repoDatabase</code> is set, <code>'CachingSqlStore'</code> if not.
 : '''Caveat:''' should always be <code>null</code> at the moment, because some code relies on the <code>repoDatabase</code> setting to determine whether the local cache tables should be used.
+;sendEchoNotification: if true, allows users on the client wiki to get a notification when a page they created is connected to a repo item. This requires Echo extension.
