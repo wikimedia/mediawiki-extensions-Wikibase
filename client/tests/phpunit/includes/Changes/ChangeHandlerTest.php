@@ -4,10 +4,12 @@ namespace Wikibase\Client\Tests\Changes;
 
 use ArrayIterator;
 use MediaWikiTestCase;
+use SiteStore;
 use Title;
 use Wikibase\Change;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
+use Wikibase\Client\Changes\ChangeListTransformer;
 use Wikibase\Client\Changes\PageUpdater;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
@@ -48,8 +50,11 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @return ChangeListTransformer
+	 */
 	private function getChangeListTransformer() {
-		$transformer = $this->getMock( 'Wikibase\Client\Changes\ChangeListTransformer' );
+		$transformer = $this->getMock( ChangeListTransformer::class );
 
 		$transformer->expects( $this->any() )
 			->method( 'transformChangeList' )
@@ -73,7 +78,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$titleFactory,
 			$updater ?: new MockPageUpdater(),
 			$changeListTransformer,
-			$this->getMock( 'SiteStore' ),
+			$this->getMock( SiteStore::class ),
 			'repowiki',
 			true
 		);
@@ -282,7 +287,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$titlesById = $this->getFakePageIdMap( $pageNamesPerItemId );
 		$pageIdsByTitle = array_flip( $titlesById );
 
-		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
+		$titleFactory = $this->getMock( TitleFactory::class );
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
@@ -324,7 +329,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	 * @return UsageLookup
 	 */
 	private function getUsageLookup( SiteLinkLookup $siteLinkLookup ) {
-		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
+		$usageLookup = $this->getMock( UsageLookup::class );
 		$usageLookup->expects( $this->any() )
 			->method( 'getPagesUsing' )
 			->will( $this->returnCallback(

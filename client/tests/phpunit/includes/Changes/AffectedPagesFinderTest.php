@@ -12,11 +12,13 @@ use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\SiteLinkUsageLookup;
+use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\ItemChange;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Test\TestChanges;
 
@@ -41,7 +43,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 * @return TitleFactory
 	 */
 	private function getTitleFactory() {
-		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
+		$titleFactory = $this->getMock( TitleFactory::class );
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
@@ -68,7 +70,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	private function getAffectedPagesFinder( array $usage, array $expectedAspects = array() ) {
-		$usageLookup = $this->getMock( 'Wikibase\Client\Usage\UsageLookup' );
+		$usageLookup = $this->getMock( UsageLookup::class );
 
 		$usageLookup->expects( $this->any() )
 			->method( 'getPagesUsing' )
@@ -480,7 +482,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	}
 
 	private function getSiteLinkUsageLookup( $pageTitle ) {
-		$siteLinkLookup = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->any() )
 			->method( 'getItemIdForLink' )

@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use JobQueueGroup;
+use LinksUpdate;
 use ParserOutput;
 use Title;
 use Wikibase\Client\Hooks\DataUpdateHookHandlers;
@@ -10,7 +11,6 @@ use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
-use WikiPage;
 
 /**
  * @covers Wikibase\Client\Hooks\DataUpdateHookHandlers
@@ -41,7 +41,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$prune = true,
 		$add = true
 	) {
-		$usageUpdater = $this->getMockBuilder( 'Wikibase\Client\Store\UsageUpdater' )
+		$usageUpdater = $this->getMockBuilder( UsageUpdater::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -90,7 +90,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$touched = null,
 		$useJobQueue = false
 	) {
-		$jobScheduler = $this->getMockBuilder( 'JobQueueGroup' )
+		$jobScheduler = $this->getMockBuilder( JobQueueGroup::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -193,7 +193,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 * @return Title
 	 */
 	private function newTitle( $id, $ns, $text, $touched ) {
-		$title = $this->getMockBuilder( 'Title' )
+		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -221,12 +221,12 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 * @param EntityUsage[]|null $usages
 	 * @param string $touched
 	 *
-	 * @return WikiPage
+	 * @return LinksUpdate
 	 */
 	private function newLinksUpdate( Title $title, array $usages = null, $touched ) {
 		$pout = $this->newParserOutput( $usages, $touched );
 
-		$linksUpdate = $this->getMockBuilder( 'LinksUpdate' )
+		$linksUpdate = $this->getMockBuilder( LinksUpdate::class )
 			->disableOriginalConstructor()
 			->getMock();
 

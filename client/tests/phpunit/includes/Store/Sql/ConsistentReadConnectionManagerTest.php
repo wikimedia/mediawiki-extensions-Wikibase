@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
+use IDatabase;
+use LoadBalancer;
 use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
 
 /**
@@ -16,12 +18,18 @@ use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
  */
 class ConsistentReadConnectionManagerTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return IDatabase
+	 */
 	private function getConnectionMock() {
-		return $this->getMock( 'IDatabase' );
+		return $this->getMock( IDatabase::class );
 	}
 
+	/**
+	 * @return LoadBalancer
+	 */
 	private function getLoadBalancerMock() {
-		$lb = $this->getMockBuilder( 'LoadBalancer' )
+		$lb = $this->getMockBuilder( LoadBalancer::class )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -9,7 +9,11 @@ use OutputPage;
 use PHPUnit_Framework_TestCase;
 use Skin;
 use SkinFallbackTemplate;
+use SkinTemplate;
+use Title;
 use Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler;
+use Wikibase\Client\RepoItemLinkGenerator;
+use WikiPage;
 
 /**
  * @covers Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler
@@ -74,7 +78,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 	}
 
 	private function newSkinTemplateOutputPageBeforeExecHandler( $link = null ) {
-		$repoItemLinkGenerator = $this->getMockBuilder( 'Wikibase\Client\RepoItemLinkGenerator' )
+		$repoItemLinkGenerator = $this->getMockBuilder( RepoItemLinkGenerator::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -102,7 +106,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 	 * @return SkinFallbackTemplate
 	 */
 	private function getTemplate( $languageUrls, &$actualLanguageUrls, &$actualWbeditlanglinks = null ) {
-		$template = $this->getMock( 'SkinFallbackTemplate' );
+		$template = $this->getMock( SkinFallbackTemplate::class );
 
 		$template->expects( $this->any() )
 			->method( 'get' )
@@ -130,13 +134,13 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 	 * @return Skin
 	 */
 	private function getSkin( array $noexternallanglinks = null ) {
-		$skin = $this->getMock( 'SkinTemplate' );
+		$skin = $this->getMock( SkinTemplate::class );
 
 		$output = new OutputPage( $this->getContext() );
 		$output->setProperty( 'noexternallanglinks', $noexternallanglinks );
 		$output->setProperty( 'wikibase_item', 'Q2013' );
 
-		$title = $this->getMock( 'Title' );
+		$title = $this->getMock( Title::class );
 		$title->expects( $this->any() )
 			->method( 'exists' )
 			->will( $this->returnValue( true ) );
@@ -160,14 +164,14 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 	private function getContext() {
 		$request = new FauxRequest( array( 'action' => 'view' ) );
 
-		$wikiPage = $this->getMockBuilder( 'WikiPage' )
+		$wikiPage = $this->getMockBuilder( WikiPage::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$wikiPage->expects( $this->any() )
 			->method( 'getActionOverrides' )
 			->will( $this->returnValue( array() ) );
 
-		$context = $this->getMock( 'IContextSource' );
+		$context = $this->getMock( IContextSource::class );
 		$context->expects( $this->any() )
 			->method( 'canUseWikiPage' )
 			->will( $this->returnValue( true ) );

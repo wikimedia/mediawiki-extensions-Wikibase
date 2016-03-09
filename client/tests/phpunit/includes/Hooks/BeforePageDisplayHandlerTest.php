@@ -5,7 +5,10 @@ namespace Wikibase\Client\Tests\Hooks;
 use RequestContext;
 use Skin;
 use SkinFallback;
+use Title;
+use User;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
+use Wikibase\NamespaceChecker;
 
 /**
  * @covers Wikibase\Client\Hooks\BeforePageDisplayHandler
@@ -239,8 +242,13 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		return $context;
 	}
 
+	/**
+	 * @param bool $titleExists
+	 *
+	 * @return Title
+	 */
 	private function getTitle( $titleExists ) {
-		$title = $this->getMockBuilder( 'Title' )
+		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -251,8 +259,13 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		return $title;
 	}
 
+	/**
+	 * @param bool $loggedIn
+	 *
+	 * @return User
+	 */
 	private function getUser( $loggedIn ) {
-		$user = $this->getMockBuilder( 'User' )
+		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -263,8 +276,13 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		return $user;
 	}
 
+	/**
+	 * @param bool $wikibaseEnabled
+	 *
+	 * @return NamespaceChecker
+	 */
 	private function getNamespaceChecker( $wikibaseEnabled ) {
-		$namespaceChecker = $this->getMockBuilder( 'Wikibase\NamespaceChecker' )
+		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
 			->disableOriginalConstructor()
 			->getMock();
 

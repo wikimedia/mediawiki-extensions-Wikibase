@@ -69,7 +69,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 	 * @return TitleFactory
 	 */
 	private function getTitleFactory() {
-		$titleFactory = $this->getMock( 'Wikibase\Client\Store\TitleFactory' );
+		$titleFactory = $this->getMock( TitleFactory::class );
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
 			->will( $this->returnCallback( function( $text ) {

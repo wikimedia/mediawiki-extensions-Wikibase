@@ -35,7 +35,7 @@ class ScribuntoLuaWikibaseInProcessEntityCacheTest extends Scribunto_LuaWikibase
 	protected static function getEntityLookup() {
 		$phpunit = new self();
 
-		$entityLookup = $phpunit->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
+		$entityLookup = $phpunit->getMock( EntityLookup::class );
 		$entityLookup->expects( $phpunit->exactly( 20 ) )
 			->method( 'getEntity' )
 			->will( $phpunit->returnCallback(

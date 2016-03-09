@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -54,7 +55,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		SiteLinkLookup $siteLinkLookup,
 		UsageAccumulator $usageAccumulator = null
 	) {
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
 			->will( $this->returnValue( new Term( 'xy', 'LabelString' ) ) );

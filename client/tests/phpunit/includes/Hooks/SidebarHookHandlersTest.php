@@ -47,9 +47,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 * @return LabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup( array $siteLinksPerItem ) {
-		$labelLookup = $this->getMockBuilder(
-				'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup'
-			)
+		$labelLookup = $this->getMockBuilder( LabelDescriptionLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -90,7 +88,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 * @return OtherProjectsSidebarGenerator
 	 */
 	private function getSidebarGenerator( array $projects ) {
-		$sidebarGenerator = $this->getMockBuilder( 'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator' )
+		$sidebarGenerator = $this->getMockBuilder( OtherProjectsSidebarGenerator::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -110,7 +108,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$otherProjectsSidebarGenerator = $this->getSidebarGenerator( $projects );
 
 		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
-				'Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory'
+				OtherProjectsSidebarGeneratorFactory::class
 			)
 			->disableOriginalConstructor()
 			->getMock();
@@ -262,7 +260,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	 * @return Skin
 	 */
 	private function newSkin( IContextSource $context ) {
-		$skin = $this->getMockBuilder( 'Skin' )
+		$skin = $this->getMockBuilder( Skin::class )
 			->disableOriginalConstructor()
 			->getMock();
 

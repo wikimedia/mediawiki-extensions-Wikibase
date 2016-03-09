@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -50,7 +51,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$language = new Language( $langCode );
 
-		$propertyDataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$propertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'structured-cat' ) );

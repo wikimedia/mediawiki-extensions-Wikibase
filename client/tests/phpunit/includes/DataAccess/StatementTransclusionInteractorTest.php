@@ -18,6 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
@@ -109,9 +110,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @return SnaksFinder
 	 */
 	private function getSnaksFinder( array $snaks ) {
-		$snaksFinder = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\SnaksFinder'
-			)
+		$snaksFinder = $this->getMockBuilder( SnaksFinder::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -122,10 +121,11 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		return $snaksFinder;
 	}
 
+	/**
+	 * @return PropertyIdResolver
+	 */
 	private function getPropertyIdResolver() {
-		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyIdResolver'
-			)
+		$propertyIdResolver = $this->getMockBuilder( PropertyIdResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -136,10 +136,11 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		return $propertyIdResolver;
 	}
 
+	/**
+	 * @return PropertyIdResolver
+	 */
 	private function getPropertyIdResolverForPropertyNotFound() {
-		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyIdResolver'
-			)
+		$propertyIdResolver = $this->getMockBuilder( PropertyIdResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -157,8 +158,11 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 		return new RevisionBasedEntityLookup( $this->getEntityRevisionLookup() );
 	}
 
+	/**
+	 * @return EntityRevisionLookup
+	 */
 	private function getEntityRevisionLookup() {
-		$lookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
+		$lookup = $this->getMock( EntityRevisionLookup::class );
 
 		$lookup->expects( $this->any() )
 			->method( 'getEntityRevision' )
@@ -186,7 +190,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	 * @return SnakFormatter
 	 */
 	private function getSnakFormatter() {
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$snakFormatter = $this->getMock( SnakFormatter::class );
 
 		$snakFormatter->expects( $this->any() )
 			->method( 'formatSnak' )

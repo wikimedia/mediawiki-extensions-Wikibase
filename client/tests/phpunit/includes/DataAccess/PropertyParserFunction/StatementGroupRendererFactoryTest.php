@@ -9,6 +9,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
@@ -17,9 +18,12 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\SnakFormatter;
 
 /**
  * @covers Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory
@@ -142,11 +146,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
 	public function testNewRendererFromParser_languageOption( $allowDataAccessInUserLanguage ) {
-		$idResolver = $this->getMockBuilder( 'Wikibase\Client\DataAccess\PropertyIdResolver' )
+		$idResolver = $this->getMockBuilder( PropertyIdResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$formatterFactory = $this->getMockBuilder( 'Wikibase\Lib\OutputFormatSnakFormatterFactory' )
+		$formatterFactory = $this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$formatterFactory->expects( $this->once() )
@@ -157,7 +161,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 						$allowDataAccessInUserLanguage ? 'es' : 'de',
 						$options->getOption( ValueFormatter::OPT_LANG )
 					);
-					return $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+					return $this->getMock( SnakFormatter::class );
 				}
 			) );
 
@@ -166,7 +170,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			new SnaksFinder(),
 			new LanguageFallbackChainFactory(),
 			$formatterFactory,
-			$this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' ),
+			$this->getMock( EntityLookup::class ),
 			$allowDataAccessInUserLanguage
 		);
 		$factory->newRendererFromParser( $this->getParser( 'de', 'es' ) );
@@ -190,10 +194,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @return PropertyIdResolver
+	 */
 	private function getPropertyIdResolver() {
-		$propertyIdResolver = $this->getMockBuilder(
-				'Wikibase\Client\DataAccess\PropertyIdResolver'
-			)
+		$propertyIdResolver = $this->getMockBuilder( PropertyIdResolver::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -206,8 +211,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		return $propertyIdResolver;
 	}
 
+	/**
+	 * @return SnaksFinder
+	 */
 	private function getSnaksFinder() {
-		$snakListFinder = $this->getMock( 'Wikibase\Client\DataAccess\SnaksFinder' );
+		$snakListFinder = $this->getMock( SnaksFinder::class );
 
 		$snakListFinder->expects( $this->any() )
 			->method( 'findSnaks' )
@@ -228,8 +236,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new LanguageFallbackChainFactory();
 	}
 
+	/**
+	 * @return SnakFormatter
+	 */
 	private function getSnakFormatterFactory() {
-		$snakFormatter = $this->getMockBuilder( 'Wikibase\Lib\SnakFormatter' )
+		$snakFormatter = $this->getMockBuilder( SnakFormatter::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -237,9 +248,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			->method( 'formatSnak' )
 			->will( $this->returnValue( 'Kittens!' ) );
 
-		$snakFormatterFactory = $this->getMockBuilder(
-				'Wikibase\Lib\OutputFormatSnakFormatterFactory'
-			)
+		$snakFormatterFactory = $this->getMockBuilder( OutputFormatSnakFormatterFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -250,8 +259,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		return $snakFormatterFactory;
 	}
 
+	/**
+	 * @return EntityLookup
+	 */
 	private function getEntityLookup() {
-		$entityLookup = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\EntityLookup' )
+		$entityLookup = $this->getMockBuilder( EntityLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 

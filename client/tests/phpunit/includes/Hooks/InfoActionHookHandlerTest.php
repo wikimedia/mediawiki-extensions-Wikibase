@@ -4,8 +4,12 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use IContextSource;
 use RequestContext;
+use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\NamespaceChecker;
 
 /**
  * @covers Wikibase\Client\Hooks\InfoActionHookHandler
@@ -79,7 +83,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return InfoActionHookHandler
 	 */
 	private function newHookHandler( $enabled, $entityId ) {
-		$namespaceChecker = $this->getMockBuilder( 'Wikibase\NamespaceChecker' )
+		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -87,7 +91,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'isWikibaseEnabled' )
 			->will( $this->returnValue( $enabled ) );
 
-		$repoLinker = $this->getMockBuilder( 'Wikibase\Client\RepoLinker' )
+		$repoLinker = $this->getMockBuilder( RepoLinker::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -95,7 +99,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'buildEntityLink' )
 			->will( $this->returnValue( 'https://www.wikidata.org/wiki/Q4' ) );
 
-		$siteLinkLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkTable' )
+		$siteLinkLookup = $this->getMockBuilder( SiteLinkLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -117,7 +121,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	 * @return IContextSource
 	 */
 	private function getContext() {
-		$title = $this->getMockBuilder( 'Title' )
+		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 
