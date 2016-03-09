@@ -472,4 +472,16 @@ final class ClientHooks {
 		return true;
 	}
 
+	/**
+	 * @see https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:$wgExtensionFunctions
+	 */
+	public static function onExtensionLoad() {
+		global $wgHooks;
+		if ( class_exists( '\\EchoEvent' ) ) {
+			$wgHooks['BeforeCreateEchoEvent'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onBeforeCreateEchoEvent';
+			$wgHooks['EchoGetBundleRules'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onEchoGetBundleRules';
+			$wgHooks['WikibaseHandleChange'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onWikibaseHandleChange';
+		}
+	}
+
 }
