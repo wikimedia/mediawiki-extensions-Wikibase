@@ -16,7 +16,8 @@
 			"Lokal Profil",
 			"Purodha",
 			"Bináris",
-			"Umherirrender"
+			"Umherirrender",
+			"Matěj Suchánek"
 		]
 	},
 	"wikibase-client-desc": "{{desc|name=Wikibase Client|url=https://www.mediawiki.org/wiki/Extension:Wikibase_Client}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]].",
@@ -91,5 +92,12 @@
 	"wikibase-property-render-error": "Error message shown when the #property parser function fails to render a property value.\n\nParameters:\n* $1 - the property ID or name\n* $2 - the original error message (this is typically in English and may be rather technical)",
 	"wikibase-otherprojects": "Label of the sidebar section containing links to other projects.\n\nAlso used in {{msg-mw|Wikibase-otherprojects-beta-description}}\n{{Identical|Other project}}\n{{related|Wikibase-otherprojects}}",
 	"wikibase-otherprojects-beta-message": "Used as checkbox label for the \"other projects\" beta feature.\n\nThe description for this label is {{msg-mw|wikibase-otherprojects-beta-description}}\n{{related|Wikibase-otherprojects}}",
-	"wikibase-otherprojects-beta-description": "Description for the \"other projects\" beta feature.\n\nThis description is for the checkbox label {{msg-mw|wikibase-otherprojects-beta-label}}.\n\nRefers to {{msg-mw|Wikibase-otherprojects}}.\n{{related|Wikibase-otherprojects}}"
+	"wikibase-otherprojects-beta-description": "Description for the \"other projects\" beta feature.\n\nThis description is for the checkbox label {{msg-mw|wikibase-otherprojects-beta-label}}.\n\nRefers to {{msg-mw|Wikibase-otherprojects}}.\n{{related|Wikibase-otherprojects}}",
+	"echo-category-title-wikibase-action": "This is a short title for notification category.\n\nUsed in a list of options under the heading {{msg-mw|Prefs-echosubscriptions}} in Special:Preferences.\n\nParameters:\n* $1 - number of messages, for PLURAL support\n{{Related|Echo-category-title}}",
+	"echo-pref-tooltip-wikibase-action": "This is a short description of the wikibase-action notification category.\n{{Related|Echo-pref-tooltip}}",
+	"notification-header-page-connection": "Header text for a notification when your article is connected to a Wikibase repository. Parameters:\n* $1 – formatted username\n* $2 – username of the person who connected the page, can be used for GENDER\n* $3 – page that was connected\nSee also:\n* {{msg-mw|Notification-subject-page-connection}}\n* {{msg-mw|Notification-header-page-linked}}",
+	"notification-bundle-header-page-connection": "Bundled message for the page connection notification. Parameters:\n* $1 – formatted username\n* $2 – the username for GENDER\n* $3 – the page title\n* $4 – the number of other pages that were connected, except that if the count is greater than 99, this value will be 100; uses standard number formatting and used for PLURAL\nSee also:\n* {{msg-mw|Notification-header-page-connection}}\n* {{msg-mw|Notification-bundle-header-page-linked}}\n{{Related|Notification-bundle}}",
+	"notification-link-text-view-item": "Label for button that links to the item your article was connected to. Parameters:\n* $1 – username. can be used for GENDER\n\nSee also:\n* {{msg-mw|Notification-link-text-view-page}}",
+	"notification-subject-page-connection": "Email subject. Parameters:\n* $1 – formatted username\n* $2 – the username of the person who connected the page, can be used for GENDER.\n* $3 – username of the viewing user, can be used for GENDER\nSee also:\n* {{msg-mw|Notification-header-page-connection}}\n* {{msg-mw|Notification-page-linked-email-subject}}",
+	"notification-page-connection-link": "{{notranslate}}\nThe name of the page where notified users can find more information and help.  Parameters:\n* $1 – repository name (eg. Wikidata)"
 }
