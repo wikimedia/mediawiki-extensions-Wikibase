@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_d9675021",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T16:02:12Z",
+      "side": 1,
+      "message": "Deep nesting makes code hard to read. Please break the inner blocks out into private helper method(s).",
+      "revId": "b9c1f1e002a882d7f9a0b7c73b27a4e8aaef3ddc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
