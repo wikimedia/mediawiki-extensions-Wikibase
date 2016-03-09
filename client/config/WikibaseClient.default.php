@@ -30,6 +30,8 @@ return call_user_func( function() {
 		'languageLinkSiteGroup' => null,
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
+		'sendEchoNotification' => false,
+		'repoIcon' => false,
 		// default for repo items in main namespace
 		'repoNamespaces' => [
 			'wikibase-item' => '',
