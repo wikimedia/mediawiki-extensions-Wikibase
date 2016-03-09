@@ -300,7 +300,7 @@ class EditEntityTest extends MediaWikiTestCase {
 
 		// change entity ----------------------------------
 		if ( $inputData === null ) {
-			$item->clear();
+			$item = new Item( $item->getId() );
 		} else {
 			if ( !empty( $inputData['label'] ) ) {
 				foreach ( $inputData['label'] as $k => $v ) {
