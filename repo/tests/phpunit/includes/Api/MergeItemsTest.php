@@ -7,9 +7,11 @@ use Language;
 use RequestContext;
 use Status;
 use TestSites;
+use Title;
 use UsageException;
 use User;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -130,12 +132,14 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$contentModelMappings = array(
-			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
-		);
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				return Title::newFromText( $entityId->getSerialization() );
+			} ) );
 
-		return new EntityContentFactory( $contentModelMappings );
+		return $entityTitleLookup;
 	}
 
 	/**

@@ -39,15 +39,19 @@ These globals are associative arrays mapping entity type identifiers to a set of
 act as factory methods. The structure of this set is defined as follows, where each string key is
 associated with a function having the dedicated signature:
 
-; serializer-factory-callback (repo and client):
+; serializer-factory-callback (repo and client)
 : a callable that returns a DispatchableSerializer instance, with the first and only argument being
   a SerialierFactory
-; deserializer-factory-callback (repo and client):
+; deserializer-factory-callback (repo and client)
 : a callable that returns a DispatchableDeserializer instance, with the first and only argument
   being a DeserializerFactory
 ; view-factory-callback (repo only)
 : a callable that returns an EntityView instance, with the arguments being a language code, a
   LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator
+; content-model-id (repo only)
+: a string representing the id of the content model
+; content-handler-factory-callback (repo only)
+: a callable that returns an EntityHandler instance supporting this entity type
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes respectively
 WikibaseClientEntityTypes hooks to provide additional entity type definitions.

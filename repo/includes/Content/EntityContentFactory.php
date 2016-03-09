@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Content;
 
-use ContentHandler;
 use InvalidArgumentException;
 use MWException;
 use OutOfBoundsException;
@@ -13,13 +12,14 @@ use User;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Store\EntityIdLookup;
+use Wikimedia\Assert\Assert;
 
 /**
  * Factory for EntityContent objects.
@@ -29,6 +29,7 @@ use Wikibase\Store\EntityIdLookup;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityPermissionChecker {
 
@@ -38,10 +39,26 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	private $entityContentModels;
 
 	/**
-	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
+	 * @var callable[] Entity type ID to callback mapping for creating ContentHandler objects.
 	 */
-	public function __construct( array $entityContentModels ) {
+	private $entityHandlerFactoryCallbacks;
+
+	/**
+	 * @var EntityHandler[] Entity type ID to entity handler mapping.
+	 */
+	private $entityHandlers = array();
+
+	/**
+	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
+	 * @param callable[] $entityHandlerFactoryCallbacks Entity type ID to callback mapping for
+	 *  creating ContentHandler objects.
+	 */
+	public function __construct( array $entityContentModels, array $entityHandlerFactoryCallbacks ) {
+		Assert::parameterElementType( 'string', $entityContentModels, '$entityContentModels' );
+		Assert::parameterElementType( 'callable', $entityHandlerFactoryCallbacks, '$entityHandlerFactoryCallbacks' );
+
 		$this->entityContentModels = $entityContentModels;
+		$this->entityHandlerFactoryCallbacks = $entityHandlerFactoryCallbacks;
 	}
 
 	/**
@@ -104,14 +121,14 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	 */
 	public function getEntityIdForTitle( Title $title ) {
 		$contentModel = $title->getContentModel();
-		$handler = ContentHandler::getForModelID( $contentModel );
 
-		if ( $handler instanceof EntityHandler ) {
-			try {
-				return $handler->getIdForTitle( $title );
-			} catch ( EntityIdParsingException $ex ) {
-				// Not a valid entity page title.
-			}
+		try {
+			$handler = $this->getEntityHandlerForContentModel( $contentModel );
+			return $handler->getIdForTitle( $title );
+		} catch ( OutOfBoundsException $ex ) {
+			// Not an entity content model
+		} catch ( EntityIdParsingException $ex ) {
+			// Not a valid entity page title.
 		}
 
 		return null;
@@ -162,19 +179,50 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 	}
 
 	/**
-	 * Returns the ContentHandler for the given entity type.
+	 * Returns the EntityHandler for the given entity type.
 	 *
 	 * @since 0.5
 	 *
 	 * @param string $entityType
 	 *
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
-	 * @throws MWException
 	 * @return EntityHandler
 	 */
 	public function getContentHandlerForType( $entityType ) {
-		$contentModel = $this->getContentModelForType( $entityType );
-		return ContentHandler::getForModelID( $contentModel );
+		if ( !isset( $this->entityHandlerFactoryCallbacks[$entityType] ) ) {
+			throw new OutOfBoundsException( 'No content handler defined for entity type ' . $entityType );
+		}
+
+		if ( !isset( $this->entityHandlers[$entityType] ) ) {
+			$entityHandler = call_user_func( $this->entityHandlerFactoryCallbacks[$entityType] );
+
+			Assert::postcondition(
+				$entityHandler instanceof EntityHandler,
+				'Callback must return an instance of EntityHandler'
+			);
+
+			$this->entityHandlers[$entityType] = $entityHandler;
+		}
+
+		return $this->entityHandlers[$entityType];
+	}
+
+	/**
+	 * Returns the EntityHandler for the given model id.
+	 *
+	 * @param string $contentModel
+	 *
+	 * @throws OutOfBoundsException if no entity handler is defined for the given content model.
+	 * @return EntityHandler
+	 */
+	public function getEntityHandlerForContentModel( $contentModel ) {
+		$entityTypePerModel = array_flip( $this->entityContentModels );
+
+		if ( !isset( $entityTypePerModel[$contentModel] ) ) {
+			throw new OutOfBoundsException( 'No entity handler defined for content model ' . $contentModel );
+		}
+
+		return $this->getContentHandlerForType( $entityTypePerModel[$contentModel] );
 	}
 
 	/**

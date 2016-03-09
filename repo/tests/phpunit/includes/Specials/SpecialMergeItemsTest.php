@@ -9,6 +9,7 @@ use RawMessage;
 use SpecialPageTestBase;
 use Status;
 use TestSites;
+use Title;
 use User;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -105,12 +106,14 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$contentModelMappings = array(
-			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
-		);
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				return Title::newFromText( $entityId->getSerialization() );
+			} ) );
 
-		return new EntityContentFactory( $contentModelMappings );
+		return $entityTitleLookup;
 	}
 
 	/**

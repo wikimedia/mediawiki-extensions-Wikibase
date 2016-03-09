@@ -18,6 +18,9 @@ use InvalidArgumentException;
  *   (requires a DeserializerFactory to be passed to it)
  * - view-factory-callback: a callback for creating a view for entities of this type (requires a
  *   language code, a LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator)
+ * - content-model-id: a string used as the content model identifier
+ * - content-handler-factory-callback: a callback for creating a content handler dealing with
+ *   entities of this type
  *
  * @see docs/entitytypes.wiki
  *
@@ -50,7 +53,7 @@ class EntityTypeDefinitions {
 	/**
 	 * @param string $field
 	 *
-	 * @return array
+	 * @return mixed
 	 */
 	private function getMapForDefinitionField( $field ) {
 		$fieldValues = array();
@@ -83,6 +86,20 @@ class EntityTypeDefinitions {
 	 */
 	public function getViewFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'view-factory-callback' );
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getContentModelIds() {
+		return $this->getMapForDefinitionField( 'content-model-id' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getContentHandlerFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'content-handler-factory-callback' );
 	}
 
 }
