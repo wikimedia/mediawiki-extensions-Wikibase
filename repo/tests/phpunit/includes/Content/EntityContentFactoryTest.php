@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -32,9 +33,10 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider contentModelsProvider
 	 */
-	public function testGetEntityContentModels( array $contentModelIds ) {
+	public function testGetEntityContentModels( array $contentModelIds, array $callbacks ) {
 		$factory = new EntityContentFactory(
-			$contentModelIds
+			$contentModelIds,
+			$callbacks
 		);
 
 		$this->assertEquals(
@@ -46,11 +48,29 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	public function contentModelsProvider() {
 		$argLists = array();
 
-		$argLists[] = array( array() );
-		$argLists[] = array( array( 'Foo' => 'Bar' ) );
-		$argLists[] = array( WikibaseRepo::getDefaultInstance()->getContentModelMappings() );
+		$argLists[] = array( array(), array() );
+		$argLists[] = array( array( 'Foo' => 'Bar' ), array() );
+		$argLists[] = array( WikibaseRepo::getDefaultInstance()->getContentModelMappings(), array() );
 
 		return $argLists;
+	}
+
+	public function provideInvalidConstructorArguments() {
+		return array(
+			array( array( null ), array() ),
+			array( array(), array( null ) ),
+			array( array( 1 ), array() ),
+		    array( array(), array( 'foo' ) )
+		);
+	}
+
+	/**
+	 * @dataProvider provideInvalidConstructorArguments
+	 */
+	public function testInvalidConstructorArguments( array $contentModelIds, array $callbacks ) {
+		$this->setExpectedException( InvalidArgumentException::class );
+
+		new EntityContentFactory( $contentModelIds, $callbacks );
 	}
 
 	public function testIsEntityContentModel() {
@@ -64,8 +84,18 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	protected function newFactory() {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
 		return new EntityContentFactory(
-			WikibaseRepo::getDefaultInstance()->getContentModelMappings()
+			$wikibaseRepo->getContentModelMappings(),
+			array(
+				'item' => function() use ( $wikibaseRepo ) {
+					return $wikibaseRepo->newItemHandler();
+				},
+				'property' => function() use ( $wikibaseRepo ) {
+					return $wikibaseRepo->newPropertyHandler();
+				}
+			)
 		);
 	}
 

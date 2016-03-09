@@ -9,7 +9,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\Template\TemplateFactory;
@@ -56,18 +55,12 @@ class OutputPageBeforeHTMLHookHandler {
 	private $languageNameLookup;
 
 	/**
-	 * @var EntityContentFactory
-	 */
-	private $entityContentFactory;
-
-	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param LanguageNameLookup $languageNameLookup
-	 * @param EntityContentFactory $entityContentFactory
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -75,8 +68,7 @@ class OutputPageBeforeHTMLHookHandler {
 		ContentLanguages $termsLanguages,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
-		LanguageNameLookup $languageNameLookup,
-		EntityContentFactory $entityContentFactory
+		LanguageNameLookup $languageNameLookup
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -84,7 +76,6 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookup = $languageNameLookup;
-		$this->entityContentFactory = $entityContentFactory;
 	}
 
 	/**
@@ -95,7 +86,6 @@ class OutputPageBeforeHTMLHookHandler {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
-		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
 
 		return new self(
 			TemplateFactory::getDefaultInstance(),
@@ -103,8 +93,7 @@ class OutputPageBeforeHTMLHookHandler {
 			$wikibaseRepo->getTermsLanguages(),
 			$entityIdParser,
 			$wikibaseRepo->getEntityRevisionLookup(),
-			new LanguageNameLookup( $wgLang->getCode() ),
-			$entityContentFactory
+			new LanguageNameLookup( $wgLang->getCode() )
 		);
 	}
 

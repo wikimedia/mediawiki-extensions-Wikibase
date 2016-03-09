@@ -36,6 +36,11 @@ return array(
 				$fallbackChain,
 				$editSectionGenerator
 			);
+		},
+		'content-model-id' => CONTENT_MODEL_WIKIBASE_ITEM,
+		'content-handler-factory-callback' => function() {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			return $wikibaseRepo->newItemHandler();
 		}
 	),
 	'property' => array(
@@ -52,6 +57,11 @@ return array(
 				$fallbackChain,
 				$editSectionGenerator
 			);
+		},
+		'content-model-id' => CONTENT_MODEL_WIKIBASE_PROPERTY,
+		'content-handler-factory-callback' => function() {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			return $wikibaseRepo->newPropertyHandler();
 		}
 	)
 );

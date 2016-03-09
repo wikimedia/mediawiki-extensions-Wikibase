@@ -61,7 +61,17 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		);
 
 		$store = new WikiPageEntityStore(
-			new EntityContentFactory( $wikibaseRepo->getContentModelMappings() ),
+			new EntityContentFactory(
+				$wikibaseRepo->getContentModelMappings(),
+				array(
+					'item' => function() use ( $wikibaseRepo ) {
+						return $wikibaseRepo->newItemHandler();
+					},
+					'property' => function() use ( $wikibaseRepo ) {
+						return $wikibaseRepo->newPropertyHandler();
+					}
+				)
+			),
 			new SqlIdGenerator( wfGetLB() )
 		);
 

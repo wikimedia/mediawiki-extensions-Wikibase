@@ -18,12 +18,16 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 			'foo' => array(
 				'serializer-factory-callback' => 'foo-serializer',
 				'deserializer-factory-callback' => 'foo-deserializer',
-				'view-factory-callback' => 'foo-view'
+				'view-factory-callback' => 'foo-view',
+				'content-model-id' => 'foo-model',
+				'content-handler-factory-callback' => 'foo-handler'
 			),
 			'bar' => array(
 				'serializer-factory-callback' => 'bar-serializer',
 				'deserializer-factory-callback' => 'bar-deserializer',
-				'view-factory-callback' => 'bar-view'
+				'view-factory-callback' => 'bar-view',
+				'content-model-id' => 'bar-model',
+				'content-handler-factory-callback' => 'bar-handler'
 			),
 			'baz' => array()
 		);
@@ -62,6 +66,30 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'bar' => 'bar-view'
 			),
 			$definitions->getViewFactoryCallbacks()
+		);
+	}
+
+	public function testGetContentModelIds() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertEquals(
+			array(
+				'foo' => 'foo-model',
+				'bar' => 'bar-model'
+			),
+			$definitions->getContentModelIds()
+		);
+	}
+
+	public function testGetContentHandlerFactoryCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertEquals(
+			array(
+				'foo' => 'foo-handler',
+				'bar' => 'bar-handler'
+			),
+			$definitions->getContentHandlerFactoryCallbacks()
 		);
 	}
 
