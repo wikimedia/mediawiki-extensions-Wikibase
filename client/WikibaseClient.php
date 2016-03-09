@@ -130,6 +130,11 @@ call_user_func( function() {
 	$wgHooks['FormatAutocomments'][] = '\Wikibase\ClientHooks::onFormat';
 	$wgHooks['ParserClearState'][] = '\Wikibase\Client\Hooks\ParserClearStateHookHandler::onParserClearState';
 
+	// Echo notifications
+	$wgHooks['BeforeCreateEchoEvent'][] = '\Wikibase\ClientHooks::onBeforeCreateEchoEvent';
+	$wgHooks['WikibaseHandleChange'][] = '\Wikibase\ClientHooks::onWikibaseHandleChange';
+	$wgHooks['EchoGetBundleRules'][] = '\Wikibase\ClientHooks::onEchoGetBundleRules';
+
 	// tracking local edits
 	if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 		// NOTE: Usage tracking is pointless during unit testing, and slows things down.
