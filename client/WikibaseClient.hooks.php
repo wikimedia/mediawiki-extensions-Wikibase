@@ -5,6 +5,7 @@ namespace Wikibase;
 use Action;
 use BaseTemplate;
 use ChangesList;
+use Diff\DiffOp\DiffOpAdd;
 use IContextSource;
 use Message;
 use OutputPage;
@@ -23,6 +24,7 @@ use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\ItemChange;
 use Wikibase\Lib\AutoCommentFormatter;
 
 /**
@@ -468,4 +470,122 @@ final class ClientHooks {
 		return true;
 	}
 
+	public static function onExtensionLoad() {
+		if ( class_exists( '\\EchoEvent' ) ) {
+			$wgHooks['BeforeCreateEchoEvent'][] = '\Wikibase\ClientHooks::onBeforeCreateEchoEvent';
+			$wgHooks['WikibaseHandleChange'][] = '\Wikibase\ClientHooks::onWikibaseHandleChange';
+			$wgHooks['EchoGetBundleRules'][] = '\Wikibase\ClientHooks::onEchoGetBundleRules';
+		}
+	}
+
+	/**
+	 * @see https://www.mediawiki.org/wiki/Extension:Echo/BeforeCreateEchoEvent
+	 */
+	public static function onBeforeCreateEchoEvent( &$notifications, &$notificationCategories, &$icons ) {
+		$notificationCategories['wikibase-action'] = array(
+			'priority' => 5, // really?
+			'tooltip' => 'echo-pref-tooltip-page-connection',
+		);
+
+		$notifications['page-connection'] = array(
+			'user-locators' => array(
+				'EchoUserLocator::locateArticleCreator',
+			),
+			'category' => 'wikibase-action',
+			'group' => 'neutral',
+			'section' => 'alert',
+			'presentation-model' => '\\Wikibase\\Client\\Notifications\\PageConnectionPresentationModel',
+			'formatter-class' => '\\Wikibase\\Client\\Notifications\\PageConnectionFormatter',
+			'bundle' => array( 'web' => true, 'email' => false ),
+			'email-subject-message' => 'notification-page-connection-email-subject',
+			'email-subject-params' => array( 'user', 'agent', 'page-count' ),
+			'email-body-batch-message' => 'notification-page-connection-email-batch-body',
+			'email-body-batch-params' => array( 'title', 'agent', 'item' ),
+			'icon' => 'page-connection',
+		);
+
+		$path = 'Echo/modules/icons/Generic.png'; // need to find an icon that fits
+		$icons += array(
+			'page-connection' => array(
+				'path' => $path
+			)
+		);
+
+		return true;
+	}
+
+	/**
+	 * @see https://www.mediawiki.org/wiki/Notifications/Developer_guide#Bundled_notifications
+	 */
+	public static function onEchoGetBundleRules( $event, &$bundleString ) {
+		if ( $event->getType() == 'page-connection' ) {
+			$bundleString = 'page-connection';
+		}
+
+		return true;
+	}
+
+	/**
+	 * Helper function for self::onWikibaseHandleChange
+	 *
+	 * @param Title $title
+	 *
+	 * @return boolean
+	 */
+	private static function canNotifyForTitle( Title $title ) {
+		return (bool)$title && $title->exists() && !$title->isRedirect()
+			&& \MWNamespace::isContent( $title->getNamespace() );
+	}
+
+	/**
+	 * @note This hook is triggered by the same extension
+	 */
+	public static function onWikibaseHandleChange( $change ) {
+		if ( !( $change instanceof ItemChange ) ) {
+			return;
+		}
+
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+		if ( $settings->getSetting( 'sendEchoNotification' ) !== true ) {
+			return;
+		}
+
+		$siteId = $settings->getSetting( 'siteGlobalID' );
+		$siteLinkDiff = $change->getSiteLinkDiff();
+
+		if ( !array_key_exists( $siteId, $siteLinkDiff ) ) {
+			return;
+		}
+
+		$siteLinkDiffOp = $siteLinkDiff[$siteId]['name'];
+
+		if ( !( $siteLinkDiffOp instanceof DiffOpAdd ) ) {
+			// FIXME: could also be DiffOpChange but that would also notify on page moves
+			// checking comment would be hacky solution but sitelink can also be updated by hand
+			// maybe compare old and new title?
+			return;
+		}
+
+		$new = $siteLinkDiffOp->getNewValue();
+		$title = Title::newFromText( $new );
+		if ( self::canNotifyForTitle( $title ) ) {
+			$metadata = $change->getMetadata();
+			$entityId = $change->getEntityId();
+			$repoLinker = $wikibaseClient->newRepoLinker();
+			$agent = User::newFromName( $metadata['user_text'], false );
+			\EchoEvent::create( array(
+				'agent' => $agent,
+				'extra' => array(
+					'entityId' => $entityId,
+					'url' => $repoLinker->getEntityUrl( $entityId ),
+					// maybe also add diff link?
+				),
+				'title' => $title,
+				'type' => 'page-connection'
+			) );
+		}
+
+		return true;
+	}
 }
