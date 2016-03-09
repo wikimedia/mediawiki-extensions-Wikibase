@@ -24,19 +24,7 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 		$testUser = new \TestUser( 'Wikibase User' );
 
 		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			new ParserOptions( $testUser->getUser(), Language::factory( 'en' ) )
-		);
-
-		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\EntityParserOutputGenerator', $instance );
-	}
-
-	public function testGetEntityParserOutputGenerator_noParserOptionLanguage() {
-		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
-
-		$testUser = new \TestUser( 'Wikibase User' );
-
-		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
-			new ParserOptions( $testUser->getUser() )
+			'en', true
 		);
 
 		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\EntityParserOutputGenerator', $instance );
