@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_4f1c0b7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-09T23:30:42Z",
+      "side": 1,
+      "message": "I may be missing something but I don\u0027t know what you are talking about here :/",
+      "revId": "9b3bbd420614eb1db317e97211aff6d503c3b264",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_0f2203b1",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/VariantsAwareRendererTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-09T23:30:42Z",
+      "side": 1,
+      "message": "missing tabs",
+      "revId": "9b3bbd420614eb1db317e97211aff6d503c3b264",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
