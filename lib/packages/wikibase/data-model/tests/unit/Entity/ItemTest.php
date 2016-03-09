@@ -18,7 +18,6 @@ use Wikibase\DataModel\Term\TermList;
 
 /**
  * @covers Wikibase\DataModel\Entity\Item
- * @covers Wikibase\DataModel\Entity\Entity
  *
  * @group Wikibase
  * @group WikibaseItem
@@ -450,38 +449,11 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		$entity->setLabel( $languageCode, $labelText );
 
-		$this->assertEquals( $labelText, $entity->getLabel( $languageCode ) );
+		$this->assertEquals( $labelText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 
 		$entity->setLabel( $languageCode, $moarText );
 
-		$this->assertEquals( $moarText, $entity->getLabel( $languageCode ) );
-	}
-
-	/**
-	 * @dataProvider labelProvider
-	 * @param string $languageCode
-	 * @param string $labelText
-	 */
-	public function testGetLabel( $languageCode, $labelText ) {
-		$entity = $this->getNewEmpty();
-
-		$this->assertFalse( $entity->getLabel( $languageCode ) );
-
-		$entity->setLabel( $languageCode, $labelText );
-
-		$this->assertEquals( $labelText, $entity->getLabel( $languageCode ) );
-	}
-
-	/**
-	 * @dataProvider labelProvider
-	 * @param string $languageCode
-	 * @param string $labelText
-	 */
-	public function testRemoveLabel( $languageCode, $labelText ) {
-		$entity = $this->getNewEmpty();
-		$entity->setLabel( $languageCode, $labelText );
-		$entity->removeLabel( $languageCode );
-		$this->assertFalse( $entity->getLabel( $languageCode ) );
+		$this->assertEquals( $moarText, $entity->getFingerprint()->getLabel( $languageCode )->getText() );
 	}
 
 	public function descriptionProvider() {
@@ -503,38 +475,11 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		$entity->setDescription( $languageCode, $description );
 
-		$this->assertEquals( $description, $entity->getDescription( $languageCode ) );
+		$this->assertEquals( $description, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
 
 		$entity->setDescription( $languageCode, $moarText );
 
-		$this->assertEquals( $moarText, $entity->getDescription( $languageCode ) );
-	}
-
-	/**
-	 * @dataProvider descriptionProvider
-	 * @param string $languageCode
-	 * @param string $description
-	 */
-	public function testGetDescription( $languageCode, $description ) {
-		$entity = $this->getNewEmpty();
-
-		$this->assertFalse( $entity->getDescription( $languageCode ) );
-
-		$entity->setDescription( $languageCode, $description );
-
-		$this->assertEquals( $description, $entity->getDescription( $languageCode ) );
-	}
-
-	/**
-	 * @dataProvider descriptionProvider
-	 * @param string $languageCode
-	 * @param string $description
-	 */
-	public function testRemoveDescription( $languageCode, $description ) {
-		$entity = $this->getNewEmpty();
-		$entity->setDescription( $languageCode, $description );
-		$entity->removeDescription( $languageCode );
-		$this->assertFalse( $entity->getDescription( $languageCode ) );
+		$this->assertEquals( $moarText, $entity->getFingerprint()->getDescription( $languageCode )->getText() );
 	}
 
 	public function aliasesProvider() {
@@ -565,29 +510,6 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider aliasesProvider
 	 */
-	public function testAddAliases( array $aliasesLists ) {
-		$entity = $this->getNewEmpty();
-
-		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			foreach ( $aliasesList as $aliases ) {
-				$entity->addAliases( $langCode, $aliases );
-			}
-		}
-
-		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$expected = array_values( array_unique( call_user_func_array( 'array_merge', $aliasesList ) ) );
-			asort( $expected );
-
-			$actual = $entity->getAliases( $langCode );
-			asort( $actual );
-
-			$this->assertEquals( $expected, $actual );
-		}
-	}
-
-	/**
-	 * @dataProvider aliasesProvider
-	 */
 	public function testSetAliases( array $aliasesLists ) {
 		$entity = $this->getNewEmpty();
 
@@ -601,7 +523,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );
 			asort( $aliasesList );
 
-			$actual = $entity->getAliases( $langCode );
+			$actual = $entity->getFingerprint()->getAliasGroup( $langCode )->getAliases();
 			asort( $actual );
 
 			$this->assertEquals( $expected, $actual );
@@ -626,96 +548,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 			$expected = array_values( array_unique( array_pop( $aliasesList ) ) );
 			asort( $aliasesList );
 
-			$actual = $entity->getAliases( $langCode );
-			asort( $actual );
-
-			$this->assertEquals( $expected, $actual );
-		}
-	}
-
-	/**
-	 * @dataProvider aliasesProvider
-	 */
-	public function testSetAllAliases( array $aliasGroups ) {
-		$entity = $this->getNewEmpty();
-		$entity->addAliases( 'zh', array( 'qwertyuiop123', '321poiuytrewq' ) );
-
-		$aliasesToSet = array();
-		foreach ( $aliasGroups as $langCode => $aliasGroup ) {
-			foreach ( $aliasGroup as $aliases ) {
-				$aliasesToSet[$langCode] = $aliases;
-			}
-		}
-
-		$entity->setAllAliases( $aliasesToSet );
-
-		foreach ( $aliasGroups as $langCode => $aliasGroup ) {
-			$expected = array_values( array_unique( array_pop( $aliasGroup ) ) );
-			asort( $aliasGroup );
-
-			$actual = $entity->getFingerprint()->getAliasGroups()->getByLanguage( $langCode )->getAliases();
-			asort( $actual );
-
-			$this->assertEquals( $expected, $actual );
-		}
-
-		/** @var AliasGroup $aliasGroup */
-		foreach ( $entity->getFingerprint()->getAliasGroups() as $langCode => $aliasGroup ) {
-			$this->assertEquals( $aliasGroup->getAliases(), array_unique( $aliasesToSet[$langCode] ) );
-		}
-	}
-
-	public function testGetAliases() {
-		$entity = $this->getNewEmpty();
-		$aliases = array( 'a', 'b' );
-
-		$entity->getFingerprint()->setAliasGroup( 'en', $aliases );
-
-		$this->assertEquals(
-			$aliases,
-			$entity->getAliases( 'en' )
-		);
-	}
-
-	public function duplicateAliasesProvider() {
-		return array(
-			array( array(
-				       'en' => array( array( 'foo', 'bar', 'baz' ), array( 'foo', 'bar', 'baz' ) )
-			       ) ),
-			array( array(
-				       'en' => array( array( 'foo', 'bar', 'baz' ), array( 'foo', 'bar' ) )
-			       ) ),
-			array( array(
-				       'en' => array( array( 'foo', 'bar' ), array( 'foo', 'bar', 'baz' ) )
-			       ) ),
-			array( array(
-				       'en' => array( array( 'foo', 'bar' ), array( 'bar', 'baz' ) ),
-				       'de' => array( array(), array( 'foo' ) ),
-				       'nl' => array( array( 'foo' ), array() ),
-			       ) ),
-			array( array(
-				       'en' => array( array( 'foo', 'bar', 'baz' ), array( 'foo', 'bar', 'baz', 'foo', 'bar' ) )
-			       ) ),
-		);
-	}
-
-	/**
-	 * @dataProvider duplicateAliasesProvider
-	 */
-	public function testRemoveAliases( array $aliasesLists ) {
-		$entity = $this->getNewEmpty();
-
-		foreach ( $aliasesLists as $langCode => $aliasesList ) {
-			$aliases = array_shift( $aliasesList );
-			$removedAliases = array_shift( $aliasesList );
-
-			$entity->setAliases( $langCode, $aliases );
-			$entity->removeAliases( $langCode, $removedAliases );
-
-			$expected = array_values( array_diff( $aliases, $removedAliases ) );
-			$actual = $entity->getAliases( $langCode );
-
-			asort( $expected );
+			$actual = $entity->getFingerprint()->getAliasGroup( $langCode )->getAliases();
 			asort( $actual );
 
 			$this->assertEquals( $expected, $actual );
@@ -852,13 +685,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		$entity = $this->getNewEmpty();
 		$entity->setFingerprint( new Fingerprint() );
 
-		$this->assertHasNoTerms( $entity );
-	}
-
-	private function assertHasNoTerms( Item $entity ) {
-		$this->assertEquals( array(), $entity->getLabels() );
-		$this->assertEquals( array(), $entity->getDescriptions() );
-		$this->assertEquals( array(), $entity->getAllAliases() );
+		$this->assertTrue( $entity->getFingerprint()->isEmpty() );
 	}
 
 	public function testGivenEmptyFingerprint_existingTermsAreRemoved() {
@@ -870,7 +697,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		$entity->setFingerprint( new Fingerprint() );
 
-		$this->assertHasNoTerms( $entity );
+		$this->assertTrue( $entity->getFingerprint()->isEmpty() );
 	}
 
 	public function testWhenSettingFingerprint_getFingerprintReturnsIt() {
@@ -890,7 +717,7 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		$entity->setFingerprint( $fingerprint );
 		$newFingerprint = $entity->getFingerprint();
 
-		$this->assertEquals( $fingerprint, $newFingerprint );
+		$this->assertSame( $fingerprint, $newFingerprint );
 	}
 
 }

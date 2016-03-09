@@ -1,5 +1,13 @@
 # Wikibase DataModel release notes
 
+## Version 6.0.0 (dev)
+
+* Removed `Entity` class (deprecated since 1.0)
+* `Item` and `Property` no longer extend `Entity`
+    * Removed `getLabel`, `getLabels`, `getDescription`, `getDescriptions`, `getAliases`,
+      `getAllAliases`, `setLabels`, `setDescriptions`, `addAliases`, `setAllAliases`,
+      `removeLabel`, `removeDescription` and `removeAliases` methods
+
 ## Version 5.1.0 (2016-03-08)
 
 This release significantly reduces the memory footprint when entities are cloned.
