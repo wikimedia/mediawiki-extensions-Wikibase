@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Services\Tests\Diff;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
-use Wikibase\DataModel\Entity\Entity;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
@@ -172,7 +171,7 @@ class ItemDiffTest extends EntityDiffOldTest {
 	/**
 	 * @dataProvider provideApplyData
 	 */
-	public function testApply( Entity $a, Entity $b ) {
+	public function testApply( Item $a, Item $b ) {
 		parent::testApply( $a, $b );
 
 		/**
