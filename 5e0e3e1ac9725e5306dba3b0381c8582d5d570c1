@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_340da142",
+        "filename": "repo/includes/Content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T18:22:52Z",
+      "side": 1,
+      "message": "array_flip",
+      "revId": "5e0e3e1ac9725e5306dba3b0381c8582d5d570c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_cffbfe0f",
+        "filename": "repo/includes/Content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T18:22:52Z",
+      "side": 1,
+      "message": "This needs caching.",
+      "revId": "5e0e3e1ac9725e5306dba3b0381c8582d5d570c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_ef21a29b",
+        "filename": "repo/tests/phpunit/includes/Content/EntityContentFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T18:22:52Z",
+      "side": 1,
+      "message": "odd whitespace",
+      "revId": "5e0e3e1ac9725e5306dba3b0381c8582d5d570c1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
