@@ -26,7 +26,6 @@ use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\AutoCommentFormatter;
 
 /**
@@ -470,6 +469,20 @@ final class ClientHooks {
 		$queryPages[] = array( SpecialUnconnectedPages::class, 'UnconnectedPages' );
 		$queryPages[] = array( SpecialPagesWithBadges::class, 'PagesWithBadges' );
 		return true;
+	}
+
+	/**
+	 * @see https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:$wgExtensionFunctions
+	 */
+	public static function onExtensionLoad() {
+		global $wgHooks;
+		if ( class_exists( '\\EchoEvent' ) ) {
+			$wgHooks['AddNewAccount'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onAddNewAccount';
+			$wgHooks['BeforeCreateEchoEvent'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onBeforeCreateEchoEvent';
+			$wgHooks['EchoGetBundleRules'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onEchoGetBundleRules';
+			$wgHooks['UserGetDefaultOptions'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onUserGetDefaultOptions';
+			$wgHooks['WikibaseHandleChange'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onWikibaseHandleChange';
+		}
 	}
 
 }
