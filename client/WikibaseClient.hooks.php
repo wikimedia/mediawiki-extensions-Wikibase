@@ -5,6 +5,7 @@ namespace Wikibase;
 use Action;
 use BaseTemplate;
 use ChangesList;
+use EchoEvent;
 use IContextSource;
 use Message;
 use OutputPage;
@@ -20,6 +21,7 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
+use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
@@ -470,6 +472,19 @@ final class ClientHooks {
 		$queryPages[] = array( SpecialUnconnectedPages::class, 'UnconnectedPages' );
 		$queryPages[] = array( SpecialPagesWithBadges::class, 'PagesWithBadges' );
 		return true;
+	}
+
+	/**
+	 * These hooks should only be run if we use the Echo extension
+	 *
+	 * @see https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:$wgExtensionFunctions
+	 */
+	public static function onExtensionLoad() {
+		global $wgHooks;
+		if ( class_exists( EchoEvent::class ) ) {
+			$wgHooks['UserGetDefaultOptions'][] = EchoNotificationsHandlers::class . '::onUserGetDefaultOptions';
+			$wgHooks['WikibaseHandleChange'][] = EchoNotificationsHandlers::class . '::onWikibaseHandleChange';
+		}
 	}
 
 }
