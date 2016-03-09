@@ -2,7 +2,7 @@
 
 namespace Wikibase\DataModel\Tests\Term;
 
-use InvalidArgumentException;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
+class AliasGroupListTest extends PHPUnit_Framework_TestCase {
 
 	public function testIsEmpty() {
 		$list = new AliasGroupList();
@@ -106,10 +106,10 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidLanguageCode_getByLanguageThrowsException( $languageCode ) {
 		$list = new AliasGroupList();
+		$this->setExpectedException( 'OutOfBoundsException' );
 		$list->getByLanguage( $languageCode );
 	}
 
@@ -162,11 +162,11 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
-	public function testGivenInvalidLanguageCode_removeByLanguageThrowsException( $languageCode ) {
-		$list = new AliasGroupList();
+	public function testGivenInvalidLanguageCode_removeByLanguageIsNoOp( $languageCode ) {
+		$list = new AliasGroupList( array( new AliasGroup( 'en', array( 'foo' ) ) ) );
 		$list->removeByLanguage( $languageCode );
+		$this->assertFalse( $list->isEmpty() );
 	}
 
 	public function testGivenEmptyGroups_constructorRemovesThem() {
@@ -273,11 +273,10 @@ class AliasGroupListTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
-	public function testGivenInvalidLanguageCode_hasGroupForLanguageThrowsException( $languageCode ) {
+	public function testGivenInvalidLanguageCode_hasGroupForLanguageReturnsFalse( $languageCode ) {
 		$list = new AliasGroupList();
-		$list->hasGroupForLanguage( $languageCode );
+		$this->assertFalse( $list->hasGroupForLanguage( $languageCode ) );
 	}
 
 	public function invalidLanguageCodeProvider() {

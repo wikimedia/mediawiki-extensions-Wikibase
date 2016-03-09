@@ -73,12 +73,9 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	 * @param string $languageCode
 	 *
 	 * @return AliasGroup
-	 * @throws InvalidArgumentException
 	 * @throws OutOfBoundsException
 	 */
 	public function getByLanguage( $languageCode ) {
-		$this->assertIsLanguageCode( $languageCode );
-
 		if ( !array_key_exists( $languageCode, $this->groups ) ) {
 			throw new OutOfBoundsException( 'AliasGroup with languageCode "' . $languageCode . '" not found' );
 		}
@@ -99,17 +96,9 @@ class AliasGroupList implements Countable, IteratorAggregate {
 
 	/**
 	 * @param string $languageCode
-	 * @throws InvalidArgumentException
 	 */
 	public function removeByLanguage( $languageCode ) {
-		$this->assertIsLanguageCode( $languageCode );
 		unset( $this->groups[$languageCode] );
-	}
-
-	private function assertIsLanguageCode( $languageCode ) {
-		if ( !is_string( $languageCode ) || $languageCode === '' ) {
-			throw new InvalidArgumentException( '$languageCode must be a non-empty string' );
-		}
 	}
 
 	/**
@@ -185,7 +174,6 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	 * @return boolean
 	 */
 	public function hasGroupForLanguage( $languageCode ) {
-		$this->assertIsLanguageCode( $languageCode );
 		return array_key_exists( $languageCode, $this->groups );
 	}
 
