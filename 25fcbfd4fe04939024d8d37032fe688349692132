@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_af215aae",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-09T19:37:35Z",
+      "side": 1,
+      "message": "Sure, will do. Don\u0027t want to make it private since if we get to implement the squid hook, we may need this one.",
+      "parentUuid": "0e2f53b6_dbb108de",
+      "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_7b7a7c20",
         "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_2f26eac9",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-09T19:37:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure how you unit test static array. Just comparing it to static array looks kind of pointless.",
+      "parentUuid": "0e2f53b6_7b7a7c20",
+      "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_1b7d3018",
         "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2016-03-09T11:42:17Z",
       "side": 1,
       "message": "Wow, four nested loops! Two is usually already a code smell ;)\nPlease split the inner two off to a private helper function.",
+      "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_ef1b6280",
+        "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-09T19:37:35Z",
+      "side": 1,
+      "message": "Yes, there are many loops, because of the nature of what we do here which is kind of nasty. I don\u0027t see any helper function that would make sense here though.",
+      "parentUuid": "0e2f53b6_1b7d3018",
       "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
