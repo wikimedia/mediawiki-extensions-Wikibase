@@ -16,6 +16,24 @@
       "revId": "37483ea3f7a7f15e3e99162429fc3c6ebdf2092f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_2819c827",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-03-09T08:39:22Z",
+      "side": 0,
+      "message": "It isn\u0027t needed and wasn\u0027t needed either. Since we record our option usage explicitly, we don\u0027t need a watcher for it.",
+      "parentUuid": "0e2f53b6_dc9bcc19",
+      "revId": "37483ea3f7a7f15e3e99162429fc3c6ebdf2092f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
