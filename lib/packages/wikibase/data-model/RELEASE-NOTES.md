@@ -7,6 +7,10 @@
     * Removed `getLabel`, `getLabels`, `getDescription`, `getDescriptions`, `getAliases`,
       `getAllAliases`, `setLabels`, `setDescriptions`, `addAliases`, `setAllAliases`,
       `removeLabel`, `removeDescription` and `removeAliases` methods
+* `TermList` and `AliasGroupList` no longer throw an `InvalidArgumentException` for invalidlanguage codes, instead
+    * `getByLangauge` throws an `OutOfBoundsException`.
+    * `removeByLanguage` does nothing.
+    * `hasTermForLanguage` and `hasGroupForLangauge` return false.
 
 ## Version 5.1.0 (2016-03-08)
 
