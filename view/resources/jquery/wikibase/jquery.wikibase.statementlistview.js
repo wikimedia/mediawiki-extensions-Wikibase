@@ -24,6 +24,7 @@
  *        The list of `Statement`s to be displayed by this view.
  * @param {wikibase.entityChangers.ClaimsChanger} options.claimsChanger
  * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
+ */
 /**
  * @event afterstartediting
  * Triggered when edit mode has been started for one of the `statementview` widgets managed by the

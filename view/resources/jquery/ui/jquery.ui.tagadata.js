@@ -47,7 +47,7 @@
  *        Triggered when a tag is clicked.
  *        - {jQuery.Event}
  *        - {jQuery} $tag
-
+ *
  * @event tagchanged
  *        Triggered when a tag's label is changed.
  *        - {jQuery.Event}
