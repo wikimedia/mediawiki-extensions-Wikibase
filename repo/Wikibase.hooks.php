@@ -15,6 +15,7 @@ use Linker;
 use LogEntry;
 use MWException;
 use MWExceptionHandler;
+use OutOfBoundsException;
 use OutputPage;
 use ParserOutput;
 use RecentChange;
@@ -847,6 +848,26 @@ final class RepoHooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Handler for the ContentHandlerForModelID hook, implemented to create EntityHandler
+	 * instances that have knowledge of the necessary services.
+	 *
+	 * @param string $modelId
+	 * @param ContentHandler|null $handler
+	 *
+	 * @return bool
+	 */
+	public static function onContentHandlerForModelID( $modelId, &$handler ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		try {
+			$handler = $wikibaseRepo->getEntityContentFactory()->getEntityHandlerForContentModel( $modelId );
+			return false;
+		} catch ( OutOfBoundsException $ex ) {
+			// no entity content model id
+		}
 	}
 
 	/**

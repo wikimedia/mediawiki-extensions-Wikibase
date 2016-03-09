@@ -9,7 +9,6 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -45,8 +44,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			new StaticContentLanguages( array( 'en', 'es', 'ru' ) ),
 			new BasicEntityIdParser(),
 			$this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' ),
-			$languageNameLookup,
-			new EntityContentFactory( array() )
+			$languageNameLookup
 		);
 
 		return $outputPageBeforeHTMLHookHandler;

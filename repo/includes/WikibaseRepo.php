@@ -37,7 +37,6 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -49,7 +48,6 @@ use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -113,7 +111,6 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
-use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 
@@ -500,7 +497,10 @@ class WikibaseRepo {
 	 * @return EntityContentFactory
 	 */
 	public function getEntityContentFactory() {
-		return new EntityContentFactory( $this->getContentModelMappings() );
+		return new EntityContentFactory(
+			$this->getContentModelMappings(),
+			$this->entityTypeDefinitions->getContentHandlerFactoryCallbacks()
+		);
 	}
 
 	/**
@@ -1155,11 +1155,7 @@ class WikibaseRepo {
 	 * @return array
 	 */
 	public function getContentModelMappings() {
-		// @TODO: We should have smth. like this for namespaces too
-		$map = array(
-			Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-			Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY
-		);
+		$map = $this->entityTypeDefinitions->getContentModelIds();
 
 		Hooks::run( 'WikibaseContentModelMapping', array( &$map ) );
 
@@ -1498,8 +1494,6 @@ class WikibaseRepo {
 	 * @return EntityParserOutputGeneratorFactory
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
-		$viewFactory = $this->getViewFactory();
-
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
