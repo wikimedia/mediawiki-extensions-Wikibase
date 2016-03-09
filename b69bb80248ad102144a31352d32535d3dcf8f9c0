@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_1eb07e3d",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGeneratorFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T13:40:05Z",
+      "side": 1,
+      "message": "Needs @param documentation.\nThe second param should probably $mode or some such, where you can give \u0027mwfile\u0027 or \u0027mw\u0027. Boolean parameters are generally discouraged, because they are hard to read. What does doFoo( \u0027X\u0027, true, false, false, true ) mean?....",
+      "revId": "b69bb80248ad102144a31352d32535d3dcf8f9c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_5eba061f",
+        "filename": "view/tests/phpunit/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T13:40:05Z",
+      "side": 1,
+      "message": "[]",
+      "revId": "b69bb80248ad102144a31352d32535d3dcf8f9c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_be86b268",
+        "filename": "view/tests/phpunit/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T13:40:05Z",
+      "side": 1,
+      "message": "[ \u0027en\u0027 ]",
+      "revId": "b69bb80248ad102144a31352d32535d3dcf8f9c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
