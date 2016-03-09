@@ -40,6 +40,8 @@ interface EntityDocument extends Comparable {
 	 *
 	 * @since 3.0
 	 *
+	 * @param EntityId $id
+	 *
 	 * @throws InvalidArgumentException if the id is not of the correct type.
 	 */
 	public function setId( $id );
