@@ -38,6 +38,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$this->setMwGlobals( array(
 			'wgLang' => Language::factory( 'qqx' ),
 		) );
+		RequestContext::getMain()->setLanguage( 'qqx' );
 	}
 
 	private function getEntityTermsView(
