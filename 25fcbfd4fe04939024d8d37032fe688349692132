@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_dbb108de",
+        "filename": "repo/includes/LinkedData/EntityDataRequestHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T11:42:17Z",
+      "side": 1,
+      "message": "Please provide a unit test, or make this private. But if you make it private, we can\u0027t really test, because we can\u0027t mock SquidUpdate above...",
+      "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_7b7a7c20",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T11:42:17Z",
+      "side": 1,
+      "message": "trivial, but would still be nice to have a unit test. We should assert that\u0027s a non-empty array of strings, and perhaps check for some well known values we rely on elsewhere.",
+      "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_1b7d3018",
+        "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-09T11:42:17Z",
+      "side": 1,
+      "message": "Wow, four nested loops! Two is usually already a code smell ;)\nPlease split the inner two off to a private helper function.",
+      "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
