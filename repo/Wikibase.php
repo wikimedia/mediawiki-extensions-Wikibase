@@ -124,16 +124,6 @@ call_user_func( function() {
 		$wgWBRepoEntityTypes[$type] = array_merge( $baseDef, $repoDef );
 	}
 
-	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = function() {
-		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-		return $wikibaseRepo->newItemHandler();
-	};
-
-	$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = function() {
-		$wikibaseRepo = \Wikibase\Repo\WikibaseRepo::getDefaultInstance();
-		return $wikibaseRepo->newPropertyHandler();
-	};
-
 	// rights
 	// names should be according to other naming scheme
 	$wgGroupPermissions['*']['item-term'] = true;
@@ -273,6 +263,7 @@ call_user_func( function() {
 	$wgHooks['SkinTemplateBuildNavUrlsNav_urlsAfterPermalink'][] = 'Wikibase\RepoHooks::onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink';
 	$wgHooks['SkinMinervaDefaultModules'][] = 'Wikibase\RepoHooks::onSkinMinervaDefaultModules';
 	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
+	$wgHooks['ContentHandlerForModelID'][] = 'Wikibase\RepoHooks::onContentHandlerForModelID';
 
 	// CirrusSearch hooks
 	$wgHooks['CirrusSearchMappingConfig'][] = 'Wikibase\Repo\Hooks\CirrusSearchHookHandlers::onCirrusSearchMappingConfig';

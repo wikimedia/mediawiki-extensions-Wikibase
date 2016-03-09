@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Test;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityView;
 
@@ -58,6 +59,37 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertInstanceOf( EntityView::class, $entityView );
+	}
+
+	/**
+	 * @dataProvider provideEntityTypes
+	 */
+	public function testContentModelId( $entityType ) {
+		$registry = $this->getRegistry();
+
+		$this->assertArrayHasKey( $entityType, $registry );
+		$this->assertArrayHasKey( 'content-model-id', $registry[$entityType] );
+		$this->assertSame( 'wikibase-' . $entityType, $registry[$entityType]['content-model-id'] );
+	}
+
+	/**
+	 * @dataProvider provideEntityTypes
+	 */
+	public function testContentHandlerFactoryCallback( $entityType ) {
+		$registry = $this->getRegistry();
+
+		$this->assertArrayHasKey( $entityType, $registry );
+		$this->assertArrayHasKey( 'content-handler-factory-callback', $registry[$entityType] );
+
+		$callback = $registry[$entityType]['content-handler-factory-callback'];
+
+		$this->assertInternalType( 'callable', $callback );
+
+		/** @var EntityHandler $entityHandler */
+		$entityHandler = call_user_func( $callback );
+
+		$this->assertInstanceOf( EntityHandler::class, $entityHandler );
+		$this->assertSame( $entityType, $entityHandler->getEntityType() );
 	}
 
 }
