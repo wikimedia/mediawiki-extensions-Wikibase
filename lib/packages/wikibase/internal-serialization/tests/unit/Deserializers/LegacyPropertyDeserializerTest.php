@@ -3,6 +3,7 @@
 namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
@@ -87,12 +88,13 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider TermListProvider
 	 */
 	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
+		/** @var Property $property */
 		$property = $this->deserializer->deserialize( array(
 			'datatype' => 'foo',
 			'label' => $labels
 		) );
 
-		$this->assertEquals( $labels, $property->getLabels() );
+		$this->assertEquals( $labels, $property->getLabels()->toTextArray() );
 	}
 
 	public function TermListProvider() {
@@ -115,12 +117,13 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider TermListProvider
 	 */
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
+		/** @var Property $property */
 		$property = $this->deserializer->deserialize( array(
 			'datatype' => 'foo',
 			'description' => $descriptions
 		) );
 
-		$this->assertEquals( $descriptions, $property->getDescriptions() );
+		$this->assertEquals( $descriptions, $property->getDescriptions()->toTextArray() );
 	}
 
 	public function testGivenInvalidAliases_exceptionIsThrown() {
@@ -132,12 +135,13 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider aliasesListProvider
 	 */
 	public function testGivenAliases_getAliasesReturnsThem( array $aliases ) {
+		/** @var Property $property */
 		$property = $this->deserializer->deserialize( array(
 			'datatype' => 'foo',
 			'aliases' => $aliases
 		) );
 
-		$this->assertEquals( $aliases, $property->getAllAliases() );
+		$this->assertEquals( $aliases, $property->getAliasGroups()->toTextArray() );
 	}
 
 	public function aliasesListProvider() {
