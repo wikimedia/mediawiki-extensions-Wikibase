@@ -1,8 +1,12 @@
 # Wikibase DataModel release notes
 
-## Version 6.0.0 (dev)
+## Version 6.0.0 (2016-03-10)
+
+This release removes the long deprecated Entity base class in favor of much more narrow interfaces.
 
 * Removed `Entity` class (deprecated since 1.0)
+* `StatementListProvider`, `LabelsProvider`, `DescriptionsProvider`, `AliasesProvider` and
+  `FingerprintProvider` now give the guarantee to return objects by reference
 * `Item` and `Property` no longer extend `Entity`
     * Removed `getLabel`, `getDescription`, `getAliases`, `getAllAliases`,
       `setLabels`, `setDescriptions`, `addAliases`, `setAllAliases`,
@@ -12,7 +16,7 @@
 * `Item::getDescriptions` and `Property::getDescriptions` now return a `TermList`
 * Added `Item::getAliasGroups` and `Property::getAliasGroups`
 * `TermList` and `AliasGroupList` no longer throw an `InvalidArgumentException` for invalid language codes.
-    * `getByLangauge` now throws an `OutOfBoundsException`.
+    * `getByLangauge` throws an `OutOfBoundsException` instead.
     * `removeByLanguage` does nothing for invalid values.
     * `hasTermForLanguage` and `hasGroupForLangauge` return false instead.
 
