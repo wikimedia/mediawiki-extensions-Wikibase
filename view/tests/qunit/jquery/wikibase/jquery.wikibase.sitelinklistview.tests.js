@@ -179,7 +179,7 @@ QUnit.test( 'isValid() with invalid sitelinkview', function( assert ) {
 } );
 
 QUnit.test( 'isInitialValue()', function( assert ) {
-	assert.expect( 3 );
+	assert.expect( 4 );
 	var $sitelinklistview = createSitelinklistview( {
 			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
 		} ),
@@ -193,7 +193,7 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 
 	var $sitelinkview = listview.addItem( new wb.datamodel.SiteLink( 'aawiki', 'aawiki-page' ) );
 
-	assert.ok(
+	assert.notOk(
 		sitelinklistview.isInitialValue(),
 		'Verified isInitialValue() still returning false after adding another unchanged value'
 	);
@@ -204,6 +204,15 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 		sitelinklistview.isInitialValue(),
 		'TRUE after resetting to initial value.'
 	);
+
+/*
+ * @fixme ...
+ *
+	assert.notOk(
+		sitelinklistview.isInitialValue(),
+		'FALSE after removing one of the original site link values'
+	);
+*/
 } );
 
 QUnit.test( 'startEditing() & stopEditing()', 4, function( assert ) {
