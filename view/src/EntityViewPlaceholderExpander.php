@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use Language;
 use MWException;
 use RuntimeException;
 use Title;
@@ -51,9 +50,9 @@ class EntityViewPlaceholderExpander {
 	private $user;
 
 	/**
-	 * @var Language
+	 * @var string
 	 */
-	private $uiLanguage;
+	private $uiLanguageCode;
 
 	/**
 	 * @var EntityIdParser
@@ -89,7 +88,7 @@ class EntityViewPlaceholderExpander {
 	 * @param TemplateFactory $templateFactory
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
-	 * @param Language $uiLanguage the user's current UI language (as per the present request)
+	 * @param string $uiLanguageCode the user's current UI language (as per the present request)
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param UserLanguageLookup $userLanguageLookup
@@ -100,7 +99,7 @@ class EntityViewPlaceholderExpander {
 		TemplateFactory $templateFactory,
 		Title $targetPage,
 		User $user,
-		Language $uiLanguage,
+		$uiLanguageCode,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		UserLanguageLookup $userLanguageLookup,
@@ -109,7 +108,7 @@ class EntityViewPlaceholderExpander {
 	) {
 		$this->targetPage = $targetPage;
 		$this->user = $user;
-		$this->uiLanguage = $uiLanguage;
+		$this->uiLanguageCode = $uiLanguageCode;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -132,7 +131,7 @@ class EntityViewPlaceholderExpander {
 				$this->extraLanguages = array();
 			} else {
 				// ignore current interface language
-				$skip = array( $this->uiLanguage->getCode() );
+				$skip = array( $this->uiLanguageCode );
 				$langs = array_diff(
 					$this->userLanguageLookup->getAllUserLanguages( $this->user ),
 					$skip
@@ -241,7 +240,7 @@ class EntityViewPlaceholderExpander {
 	 */
 	public function renderTermBox( EntityId $entityId, $revisionId ) {
 		$languages = array_merge(
-			array( $this->uiLanguage->getCode() ),
+			array( $this->uiLanguageCode ),
 			$this->getExtraUserLanguages()
 		);
 
@@ -264,7 +263,7 @@ class EntityViewPlaceholderExpander {
 			$this->templateFactory,
 			null,
 			$this->languageNameLookup,
-			$this->uiLanguage->getCode()
+			$this->uiLanguageCode
 		);
 
 		// FIXME: assumes all entities have a fingerprint
