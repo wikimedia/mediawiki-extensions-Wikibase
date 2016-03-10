@@ -5,8 +5,6 @@
 This release removes the long deprecated Entity base class in favor of much more narrow interfaces.
 
 * Removed `Entity` class (deprecated since 1.0)
-* `StatementListProvider`, `LabelsProvider`, `DescriptionsProvider`, `AliasesProvider` and
-  `FingerprintProvider` now give the guarantee to return objects by reference
 * `Item` and `Property` no longer extend `Entity`
     * Removed `getLabel`, `getDescription`, `getAliases`, `getAllAliases`,
       `setLabels`, `setDescriptions`, `addAliases`, `setAllAliases`,
@@ -15,10 +13,12 @@ This release removes the long deprecated Entity base class in favor of much more
 * `Item::getLabels` and `Property::getLabels` now return a `TermList`
 * `Item::getDescriptions` and `Property::getDescriptions` now return a `TermList`
 * Added `Item::getAliasGroups` and `Property::getAliasGroups`
+* `StatementListProvider`, `LabelsProvider`, `DescriptionsProvider`, `AliasesProvider` and
+  `FingerprintProvider` now give the guarantee to return objects by reference
 * `TermList` and `AliasGroupList` no longer throw an `InvalidArgumentException` for invalid language codes.
-    * `getByLangauge` throws an `OutOfBoundsException` instead.
+    * `getByLanguage` throws an `OutOfBoundsException` instead.
     * `removeByLanguage` does nothing for invalid values.
-    * `hasTermForLanguage` and `hasGroupForLangauge` return false instead.
+    * `hasTermForLanguage` and `hasGroupForLanguage` return false instead.
 
 ## Version 5.1.0 (2016-03-08)
 
