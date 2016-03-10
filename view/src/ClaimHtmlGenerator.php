@@ -2,6 +2,7 @@
 
 namespace Wikibase\View;
 
+use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\ByPropertyIdGrouper;
@@ -23,6 +24,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Pragunbhutani
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class ClaimHtmlGenerator {
 
@@ -35,6 +37,11 @@ class ClaimHtmlGenerator {
 	 * @var SnakHtmlGenerator
 	 */
 	private $snakHtmlGenerator;
+
+	/**
+	 * @var NumberLocalizer
+	 */
+	private $numberLocalizer;
 
 	/**
 	 * @var string[]
@@ -52,10 +59,12 @@ class ClaimHtmlGenerator {
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		SnakHtmlGenerator $snakHtmlGenerator
+		SnakHtmlGenerator $snakHtmlGenerator,
+		NumberLocalizer $numberLocalizer
 	) {
 		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->templateFactory = $templateFactory;
+		$this->numberLocalizer = $numberLocalizer;
 	}
 
 	/**
@@ -204,12 +213,13 @@ class ClaimHtmlGenerator {
 		$referenceCount = count( $statement->getReferences() );
 
 		if ( !array_key_exists( $referenceCount, $this->referenceHeadings ) ) {
+			$formattedReferenceCount = $this->numberLocalizer->localizeNumber( $referenceCount );
 			$this->referenceHeadings[ $referenceCount ] = wfMessage(
 				'wikibase-ui-pendingquantitycounter-nonpending',
 				wfMessage(
 					'wikibase-statementview-referencesheading-pendingcountersubject'
-				)->numParams( $referenceCount )->text()
-			)->numParams( $referenceCount )->text();
+				)->params( $formattedReferenceCount )->text()
+			)->params( $formattedReferenceCount )->text();
 		}
 
 		return $this->referenceHeadings[ $referenceCount ];
