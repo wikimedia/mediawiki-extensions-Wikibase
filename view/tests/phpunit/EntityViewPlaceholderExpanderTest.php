@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use Language;
 use MediaWikiTestCase;
 use Title;
 use User;
@@ -48,8 +47,6 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$language = Language::factory( 'en' );
-
 		$idParser = $this->getMockBuilder( EntityIdParser::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -57,10 +54,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			->method( 'parse' )
 			->will( $this->returnValue( $itemId ) );
 
-		$userLanguages = $this->getMock( UserLanguageLookup::class );
-		$userLanguages->expects( $this->any() )
-			->method( 'getAllUserLanguages' )
-			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
+		$termsLanguages = [ 'de', 'en', 'ru' ];
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 
@@ -68,11 +62,10 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			$templateFactory,
 			$title,
 			$user,
-			$language,
+			'en',
 			$idParser,
 			$entityRevisionLookup,
-			$userLanguages,
-			new MediaWikiContentLanguages(),
+			$termsLanguages,
 			$languageNameLookup
 		);
 	}
@@ -199,18 +192,6 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 
 		$html = $expander->renderTermBox( $itemId, 1 );
 		$this->assertEquals( '', $html );
-	}
-
-	public function testGetExtraUserLanguages() {
-		$item = $this->getItem();
-		$itemId = $item->getId();
-		$entityRevisionLookup = $this->getEntityRevisionLookup( $item );
-
-		$expander = $this->newExpander( $this->newUser( true ), $entityRevisionLookup, $itemId );
-		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages() );
-
-		$expander = $this->newExpander( $this->newUser(), $entityRevisionLookup, $itemId );
-		$this->assertArrayEquals( array( 'de', 'ru' ), $expander->getExtraUserLanguages() );
 	}
 
 }

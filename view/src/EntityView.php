@@ -86,7 +86,7 @@ abstract class EntityView {
 	 *
 	 * @note: The HTML returned by this method may contain placeholders. Such placeholders can be
 	 * expanded with the help of TextInjector::inject() calling back to
-	 * EntityViewPlaceholderExpander::getExtraUserLanguages()
+	 * EntityViewPlaceholderExpander::getHtmlForPlaceholder()
 	 * @note: In order to keep the list of placeholders small, this calls resetPlaceholders().
 	 *
 	 * @since 0.1
