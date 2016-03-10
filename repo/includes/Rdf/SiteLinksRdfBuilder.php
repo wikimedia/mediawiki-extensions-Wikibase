@@ -42,6 +42,11 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 	private $sites;
 
 	/**
+	 * @var DedupeBag
+	 */
+	private $dedupeBag;
+
+	/**
 	 * @param RdfVocabulary $vocabulary
 	 * @param RdfWriter $writer
 	 * @param SiteList $siteLookup
@@ -52,6 +57,21 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 		$this->writer = $writer;
 		$this->siteLookup = $siteLookup;
 		$this->sites = $sites === null ? null : array_flip( $sites );
+		$this->dedupeBag = new NullDedupeBag();
+	}
+
+	/**
+	 * @return DedupeBag
+	 */
+	public function getDedupeBag() {
+		return $this->dedupeBag;
+	}
+
+	/**
+	 * @param DedupeBag $dedupeBag
+	 */
+	public function setDedupeBag( DedupeBag $dedupeBag ) {
+		$this->dedupeBag = $dedupeBag;
 	}
 
 	/**
@@ -91,17 +111,31 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 				$url = $baseUrl;
 			}
 
+			$group = $site->getGroup();
+			$siteUrl = parse_url( $url, PHP_URL_SCHEME ) . '://' . parse_url( $url, PHP_URL_HOST ) . "/";
+
 			$this->writer->about( $url )
 				->a( RdfVocabulary::NS_SCHEMA_ORG, 'Article' )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )->is( RdfVocabulary::NS_ENTITY, $entityLName )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'inLanguage' )->text(
-						$this->vocabulary->getCanonicalLanguageCode( $site->getLanguageCode() ) );
+						$this->vocabulary->getCanonicalLanguageCode( $site->getLanguageCode() ) )
+				->say( RdfVocabulary::NS_SCHEMA_ORG, 'isPartOf' )->is( $siteUrl );
 
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$this->writer
 					->say( RdfVocabulary::NS_ONTOLOGY, 'badge' )
 						->is( RdfVocabulary::NS_ENTITY, $this->vocabulary->getEntityLName( $badge ) );
 			}
+
+			/* Write group of the site only once.
+			 * We are using URL as namespace to ensure it is not cut off.
+			 * Since we do not have too may distinct sizes, memory cost is small.
+			 */
+			if ( !$this->dedupeBag->alreadySeen( '', $siteUrl ) ) {
+				$this->writer->about( $siteUrl )
+					->say( RdfVocabulary::NS_ONTOLOGY, 'wikiGroup' )->text( $group );
+			}
+
 		}
 	}
 
