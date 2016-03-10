@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\NumberValue;
 use DataValues\QuantityValue;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
 use ValueFormatters\NumberLocalizer;
@@ -117,7 +118,7 @@ class QuantityDetailsFormatterTest extends PHPUnit_Framework_TestCase {
 		$formatter = $formatter = $this->newFormatter();
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

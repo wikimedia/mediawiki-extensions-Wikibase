@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
+use MWException;
 use Wikibase\ChangeRow;
 
 /**
@@ -29,7 +30,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testCanNotCalculateAgeWithoutTime() {
 		$change = new ChangeRow();
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 		$change->getAge();
 	}
 
@@ -40,7 +41,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testCanNotReturnTimeWithoutTime() {
 		$change = new ChangeRow();
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 		$change->getTime();
 	}
 
@@ -61,7 +62,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testCanNotReturnDefaultObjectId() {
 		$change = new ChangeRow();
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 		$change->getObjectId();
 	}
 
@@ -77,7 +78,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testCanNotReturnFieldWithoutDefault() {
 		$change = new ChangeRow();
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 		$change->getField( 'field' );
 	}
 
@@ -110,7 +111,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 	public function testDoesNotSerializeObjects() {
 		$info = array( 'array' => array( 'object' => new ChangeRow() ) );
 		$change = new ChangeRow();
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 		$change->serializeInfo( $info );
 	}
 
@@ -130,7 +131,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 
 	public function testCanNotUnserializeWithoutObjectId() {
 		$change = new ChangeRow();
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 		$change->unserializeInfo( 's:5:"value";' );
 	}
 

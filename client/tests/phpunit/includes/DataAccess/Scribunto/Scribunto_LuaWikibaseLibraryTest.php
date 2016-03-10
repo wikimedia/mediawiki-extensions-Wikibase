@@ -6,6 +6,7 @@ use Language;
 use LuaSandboxFunction;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
+use ScribuntoException;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\WikibaseClient;
@@ -153,19 +154,19 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testGetEntityInvalidIdType() {
-		$this->setExpectedException( 'ScribuntoException' );
+		$this->setExpectedException( ScribuntoException::class );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$luaWikibaseLibrary->getEntity( array() );
 	}
 
 	public function testGetEntityInvalidEntityId() {
-		$this->setExpectedException( 'ScribuntoException' );
+		$this->setExpectedException( ScribuntoException::class );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$luaWikibaseLibrary->getEntity( 'X888' );
 	}
 
 	public function testGetEntity_entityAccessLimitExceeded() {
-		$this->setExpectedException( 'ScribuntoException' );
+		$this->setExpectedException( ScribuntoException::class );
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
@@ -245,7 +246,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnak_invalidSerialization() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
-		$this->setExpectedException( 'ScribuntoException' );
+		$this->setExpectedException( ScribuntoException::class );
 		$luaWikibaseLibrary->renderSnak( array( 'a' => 'b' ) );
 	}
 
@@ -277,7 +278,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnaks_invalidSerialization() {
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
-		$this->setExpectedException( 'ScribuntoException' );
+		$this->setExpectedException( ScribuntoException::class );
 		$luaWikibaseLibrary->renderSnaks( array( 'a' => 'b' ) );
 	}
 

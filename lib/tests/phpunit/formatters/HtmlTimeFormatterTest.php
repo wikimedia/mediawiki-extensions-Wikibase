@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -258,7 +259,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 	public function testGivenInvalidValue_formatThrowsException( $value ) {
 		$formatter = $this->getFormatter();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

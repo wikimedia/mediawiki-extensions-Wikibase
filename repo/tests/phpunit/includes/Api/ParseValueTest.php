@@ -7,6 +7,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use FauxRequest;
 use Language;
+use UsageException;
 use ValueParsers\NullParser;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ParseValue;
@@ -305,7 +306,7 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideInvalid
 	 */
 	public function testParse_failure( array $params ) {
-		$this->setExpectedException( 'UsageException' );
+		$this->setExpectedException( UsageException::class );
 		$this->callApiModule( $params );
 	}
 

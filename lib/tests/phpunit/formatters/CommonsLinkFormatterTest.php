@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\CommonsLinkFormatter;
 
@@ -72,7 +73,7 @@ class CommonsLinkFormatterTest extends \MediaWikiTestCase {
 		$formatter = new CommonsLinkFormatter();
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

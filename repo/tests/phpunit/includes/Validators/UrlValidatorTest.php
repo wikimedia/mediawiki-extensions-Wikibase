@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Validators;
 
+use InvalidArgumentException;
 use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\Validators\UrlValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -23,7 +24,7 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( array $validators ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new UrlValidator( $validators );
 	}
 
@@ -36,7 +37,7 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 
 	public function testGivenNonString_validateFails() {
 		$validator = new UrlValidator( array() );
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$validator->validate( null );
 	}
 

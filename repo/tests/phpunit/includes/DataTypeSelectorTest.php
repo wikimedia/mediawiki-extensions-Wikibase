@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataTypes\DataType;
+use MWException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataTypeSelector;
 
@@ -54,7 +55,7 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testConstructorThrowsException( array $dataTypes, $languageCode ) {
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 		new DataTypeSelector( $dataTypes, $languageCode );
 	}
 

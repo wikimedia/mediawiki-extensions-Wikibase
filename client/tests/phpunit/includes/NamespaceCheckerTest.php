@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests;
 
+use InvalidArgumentException;
 use MWNamespace;
 use Wikibase\NamespaceChecker;
 
@@ -66,7 +67,7 @@ class NamespaceCheckerTest extends \MediaWikiTestCase {
 	 */
 	public function testIsWikibaseEnabledInvalid( $namespace, $excluded, $enabled ) {
 		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$namespaceChecker->isWikibaseEnabled( $namespace );
 	}
 

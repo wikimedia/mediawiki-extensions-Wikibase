@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use DatabaseBase;
+use InvalidArgumentException;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
@@ -273,7 +274,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	public function testQueryUsages_InvalidArgumentException( $pageId, $timeOp, $timestamp ) {
 		$usageTable = $this->getEntityUsageTable();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$usageTable->queryUsages( $pageId, $timeOp, $timestamp );
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use LogicException;
 use RequestContext;
 use Status;
 use Wikibase\DataModel\Entity\Item;
@@ -117,7 +118,7 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 			$this->getMockEditEntityFactory( 0 )
 		);
 
-		$this->setExpectedException( 'LogicException' );
+		$this->setExpectedException( LogicException::class );
 		$helper->attemptSaveEntity( new Item(), '' );
 	}
 

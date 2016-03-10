@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use RuntimeException;
 use Wikibase\Content\DeferredDecodingEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -81,7 +82,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenEntityWithoutId_getEntityThrowsException() {
 		$holder = $this->newHolder( new Item() );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$holder->getEntity();
 	}
 
@@ -90,7 +91,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 		$holder = $this->newHolder( $item );
 
 		$holder->getEntity( 'Wikibase\DataModel\Entity\Item' );
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$holder->getEntity( 'Wikibase\DataModel\Entity\Property' );
 	}
 
@@ -98,7 +99,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->newEntity();
 		$holder = $this->newHolder( $item, 'property' );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$holder->getEntity();
 	}
 
@@ -106,7 +107,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->newEntity();
 		$holder = $this->newHolder( $item, 'property' );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$holder->getEntity( 'Wikibase\DataModel\Entity\Property' );
 	}
 
@@ -114,7 +115,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 		$item = $this->newEntity();
 		$holder = $this->newHolder( $item, 'item', new ItemId( 'Q42' ) );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$holder->getEntity();
 	}
 
@@ -145,7 +146,7 @@ class DeferredDecodingEntityHolderTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenEntityWithoutId_getEntityIdThrowsException() {
 		$holder = $this->newHolder( new Item() );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$holder->getEntityId();
 	}
 

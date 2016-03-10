@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use OutOfBoundsException;
 use Wikibase\SettingsArray;
 
 /**
@@ -62,7 +63,7 @@ class SettingsArrayTest extends \PHPUnit_Framework_TestCase {
 	public function testGetUnknownSetting( array $settings ) {
 		$settingsArray = new SettingsArray( $settings );
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 
 		$settingsArray->getSetting( 'NyanData ALL the way across the sky' );
 	}

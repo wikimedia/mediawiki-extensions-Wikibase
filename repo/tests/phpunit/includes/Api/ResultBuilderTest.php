@@ -6,6 +6,7 @@ use ApiResult;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use HashSiteStore;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -148,7 +149,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideMarkResultSuccessExceptions
 	 */
 	public function testMarkResultSuccessExceptions( $param ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->markSuccess( $param );
@@ -1487,7 +1488,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->setList( $path, $name, $values, $tag );
 	}
 
@@ -1555,7 +1556,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->setValue( $path, $name, $value );
 	}
 
@@ -1645,7 +1646,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$result = $this->getDefaultResult();
 		$builder = $this->getResultBuilder( $result );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->appendValue( $path, $key, $value, $tag );
 	}
 

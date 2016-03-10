@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests;
 
+use InvalidArgumentException;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -85,7 +86,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetNamespaceWithInvalid_ThrowsException( array $settings, $entityType ) {
 	 	$repoLinker = $this->getRepoLinkerForSettings( $settings );
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$repoLinker->getNamespace( $entityType );
 	}
 
@@ -145,7 +146,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testGetPageUrlInvalidThrowsException( array $settings, $page ) {
 		$repoLinker = $this->getRepoLinkerForSettings( $settings );
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$repoLinker->getPageUrl( $page );
 	}
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Validators;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -97,7 +98,7 @@ class EntityExistsValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideValidate_exception()
 	 */
 	public function testValidate_exception( $value, $type ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		$validator = new EntityExistsValidator( $this->getEntityLookup(), $type );
 		$validator->validate( $value );

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use InvalidArgumentException;
 use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
@@ -81,7 +82,7 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testGivenInvalidDataUpdater_constructorThrowsException( array $argument ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new EntityParserOutputDataUpdater( new ParserOutput(), $argument );
 	}
 

@@ -6,6 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use RecentChange;
 use Revision;
+use RuntimeException;
 use stdClass;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -333,7 +334,7 @@ class EntityChangeTest extends ChangeRowTest {
 		$change = new EntityChange();
 
 		if ( !defined( 'WB_VERSION' ) ) {
-			$this->setExpectedException( 'RuntimeException' );
+			$this->setExpectedException( RuntimeException::class );
 		}
 
 		$array = $change->arrayalizeObjects( $statement );

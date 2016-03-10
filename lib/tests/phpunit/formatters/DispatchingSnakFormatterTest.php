@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -103,7 +104,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider constructorErrorsProvider
 	 */
 	public function testConstructorErrors( $format, array $formattersBySnakType, array $formattersByDataType ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		$dataTypeLookup = $this->getDataTypeLookup();
 

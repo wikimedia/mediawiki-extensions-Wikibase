@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Exception;
 use HashSiteStore;
+use PermissionsError;
 use PHPUnit_Framework_Error;
 use RawMessage;
 use SpecialPageTestBase;
@@ -473,7 +474,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
 
 		if ( $permission === 'item-merge' ) {
-			$this->setExpectedException( 'PermissionsError' );
+			$this->setExpectedException( PermissionsError::class );
 		}
 		$html = $this->executeSpecialMergeItems( $params, $user );
 		if ( $permission === 'edit' ) {

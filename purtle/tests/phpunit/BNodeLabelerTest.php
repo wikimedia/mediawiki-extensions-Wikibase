@@ -2,6 +2,7 @@
 
 namespace Wikimedia\Purtle\Tests;
 
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikimedia\Purtle\BNodeLabeler;
 
@@ -20,7 +21,7 @@ class BNodeLabelerTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testInvalidConstructorArguments( $prefix, $start ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new BNodeLabeler( $prefix, $start );
 	}
 

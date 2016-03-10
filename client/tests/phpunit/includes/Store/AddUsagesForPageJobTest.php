@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Test\Store;
 
+use InvalidArgumentException;
 use Title;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\Store\UsageUpdater;
@@ -86,7 +87,7 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideConstructor_failure
 	 */
 	public function testConstructor_failure( array $params ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		$title = Title::makeTitle( NS_MAIN, 'Foo' );
 		new AddUsagesForPageJob( $title, $params );

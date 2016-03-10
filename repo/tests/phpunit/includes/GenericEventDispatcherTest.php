@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\GenericEventDispatcher;
 
@@ -17,7 +18,7 @@ use Wikibase\Repo\GenericEventDispatcher;
 class GenericEventDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 	public function testRegisterWatcher_failure() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		$watcher = $this->getMock( 'Wikibase\Lib\Store\EntityStoreWatcher' );
 		$dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\FooBar' );

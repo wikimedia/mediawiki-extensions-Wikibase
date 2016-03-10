@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Validators;
 
+use InvalidArgumentException;
 use Wikibase\Repo\Validators\DataFieldValidator;
 use Wikibase\Repo\Validators\StringLengthValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -22,7 +23,7 @@ class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( $field ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new DataFieldValidator( $field, new StringLengthValidator( 0, 0 ) );
 	}
 

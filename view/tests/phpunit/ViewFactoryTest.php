@@ -3,6 +3,7 @@
 namespace Wikibase\View\Tests;
 
 use DataTypes\DataTypeFactory;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use SiteList;
 use SiteStore;
@@ -80,7 +81,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		EntityIdFormatterFactory $htmlFormatterFactory,
 		EntityIdFormatterFactory $plainFormatterFactory
 	) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$this->newViewFactory( $htmlFormatterFactory, $plainFormatterFactory );
 	}
 

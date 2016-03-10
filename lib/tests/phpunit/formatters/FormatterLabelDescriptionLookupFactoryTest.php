@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use InvalidArgumentException;
 use Language;
 use OutOfBoundsException;
 use ValueFormatters\FormatterOptions;
@@ -102,7 +103,7 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_Test
 		$termLookup = $this->getMock( TermLookup::class );
 		$factory = new FormatterLabelDescriptionLookupFactory( $termLookup );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$factory->getLabelDescriptionLookup( $options );
 	}
 
