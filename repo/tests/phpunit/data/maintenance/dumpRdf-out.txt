@@ -106,10 +106,14 @@ _:genid2 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/
 <https://en.wikipedia.org/wiki/Berlin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Article> .
 <https://en.wikipedia.org/wiki/Berlin> <http://schema.org/about> <fooUri/Q2> .
 <https://en.wikipedia.org/wiki/Berlin> <http://schema.org/inLanguage> "en" .
+<https://en.wikipedia.org/wiki/Berlin> <http://schema.org/isPartOf> <https://en.wikipedia.org/> .
+<https://en.wikipedia.org/> <http://wikiba.se/ontology-beta#wikiGroup> "wikipedia" .
 <https://de.wikipedia.org/wiki/England> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Article> .
 <https://de.wikipedia.org/wiki/England> <http://schema.org/about> <fooUri/Q2> .
 <https://de.wikipedia.org/wiki/England> <http://schema.org/inLanguage> "de" .
+<https://de.wikipedia.org/wiki/England> <http://schema.org/isPartOf> <https://de.wikipedia.org/> .
 <https://de.wikipedia.org/wiki/England> <http://wikiba.se/ontology-beta#badge> <fooUri/Q1> .
+<https://de.wikipedia.org/> <http://wikiba.se/ontology-beta#wikiGroup> "wikipedia" .
 <fooUri/reference/2d8eac3c95db6407b057e9883971cbdb562d6473> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://wikiba.se/ontology-beta#Reference> .
 <fooUri/reference/2d8eac3c95db6407b057e9883971cbdb562d6473> <fooUri/prop/reference/P12> "refSnakVal" .
 <fooUri/reference/2d8eac3c95db6407b057e9883971cbdb562d6473> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <fooUri/prop/novalue/P12> .

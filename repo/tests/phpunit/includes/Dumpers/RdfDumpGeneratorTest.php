@@ -70,6 +70,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		$wiki = new Site();
 		$wiki->setGlobalId( 'test' );
 		$wiki->setLanguageCode( 'test' );
+		$wiki->setGroup( 'acmetest' );
 		$wiki->setLinkPath( 'http://test.acme.test/$1' );
 		$list['test'] = $wiki;
 
