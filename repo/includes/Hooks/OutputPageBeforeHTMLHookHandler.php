@@ -150,6 +150,13 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @return EntityViewPlaceholderExpander
 	 */
 	private function getEntityViewPlaceholderExpander( OutputPage $out ) {
+		// All user languages that are valid term languages
+		$termsLanguages = array_intersect(
+			$this->userLanguageLookup->getAllUserLanguages( $out->getUser() ),
+			$this->termsLanguages->getLanguages()
+		);
+
+		$languageCode = $out->getLanguage()->getCode();
 
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		$revisionId = $out->getRevisionId();
@@ -162,12 +169,10 @@ class OutputPageBeforeHTMLHookHandler {
 			$this->templateFactory,
 			$out->getTitle(),
 			$out->getUser(),
-			$out->getLanguage(),
 			$labelsProvider,
 			$descriptionsProvider,
 			$aliasesProvider,
-			$this->userLanguageLookup,
-			$this->termsLanguages,
+			array_merge( [ $languageCode ], $termsLanguages ),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $out->getLanguage()->getCode() )
 		);
