@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2f53b6_9b58158e",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.sitelinklistview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-10T14:17:29Z",
+      "side": 1,
+      "message": "\"FALSE after changing the number of elements in the list\".",
+      "revId": "af8cbd0c5580bcde8399415546ce3a7dbcc3fc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
