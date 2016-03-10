@@ -91,11 +91,16 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 				$url = $baseUrl;
 			}
 
+			$group = $site->getGroup();
+			$siteUrl = parse_url( $url, PHP_URL_SCHEME ) . '://' . parse_url( $url, PHP_URL_HOST ) . "/";
+
 			$this->writer->about( $url )
 				->a( RdfVocabulary::NS_SCHEMA_ORG, 'Article' )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'about' )->is( RdfVocabulary::NS_ENTITY, $entityLName )
 				->say( RdfVocabulary::NS_SCHEMA_ORG, 'inLanguage' )->text(
-						$this->vocabulary->getCanonicalLanguageCode( $site->getLanguageCode() ) );
+						$this->vocabulary->getCanonicalLanguageCode( $site->getLanguageCode() ) )
+				->say( RdfVocabulary::NS_ONTOLOGY, 'wikiGroup' )->text( $group )
+				->say( RdfVocabulary::NS_SCHEMA_ORG, 'isPartOf' )->is( $siteUrl );
 
 			foreach ( $siteLink->getBadges() as $badge ) {
 				$this->writer
