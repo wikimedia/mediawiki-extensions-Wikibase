@@ -4,6 +4,7 @@ namespace Wikibase\Test\Rdf;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\FullStatementRdfBuilder;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\NullDedupeBag;
@@ -74,7 +75,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$vocabulary = $this->getTestData()->getVocabulary();
 
-		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
+		$mentionTracker = $this->getMock( EntityMentionListener::class );
 		$mentionTracker->expects( $this->any() )
 			->method( 'propertyMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {

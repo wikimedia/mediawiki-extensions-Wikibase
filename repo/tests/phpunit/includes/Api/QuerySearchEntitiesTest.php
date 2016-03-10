@@ -48,7 +48,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
 			->will( $this->returnValue( $this->getMockTitle() ) );
 
@@ -68,7 +68,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	 * @return Title
 	 */
 	public function getMockTitle() {
-		$mock = $this->getMockBuilder( 'Title' )
+		$mock = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -91,7 +91,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntitySearchHelper
 	 */
 	private function getMockEntitySearchHelper( array $params, array $matches ) {
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Api\EntitySearchHelper' )
+		$mock = $this->getMockBuilder( EntitySearchHelper::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->atLeastOnce() )
@@ -114,7 +114,7 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 	 * @return ApiPageSet
 	 */
 	private function getMockApiPageSet( array $expected ) {
-		$mock = $this->getMockBuilder( 'ApiPageSet' )
+		$mock = $this->getMockBuilder( ApiPageSet::class )
 			->disableOriginalConstructor()
 			->getMock();
 

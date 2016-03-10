@@ -17,6 +17,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Diff\ClaimDifference;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
+use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 
 /**
  * @covers Wikibase\Repo\Diff\ClaimDifferenceVisualizer
@@ -31,8 +32,11 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
  */
 class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 
+	/**
+	 * @return DifferencesSnakVisualizer
+	 */
 	public function newDifferencesSnakVisualizer() {
-		$instance = $this->getMockBuilder( 'Wikibase\Repo\Diff\DifferencesSnakVisualizer' )
+		$instance = $this->getMockBuilder( DifferencesSnakVisualizer::class )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -3,8 +3,10 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
+use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
@@ -24,9 +26,8 @@ class ImageLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 * @return ImageLinksDataUpdater
 	 */
 	private function newInstance() {
-		$matcher = $this->getMockBuilder(
-			'Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher'
-		)->disableOriginalConstructor()
+		$matcher = $this->getMockBuilder( PropertyDataTypeMatcher::class )
+			->disableOriginalConstructor()
 			->getMock();
 		$matcher->expects( $this->any() )
 			->method( 'isMatchingDataType' )
@@ -54,7 +55,7 @@ class ImageLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	public function testUpdateParserOutput( StatementList $statements, array $expected ) {
 		$actual = array();
 
-		$parserOutput = $this->getMockBuilder( 'ParserOutput' )
+		$parserOutput = $this->getMockBuilder( ParserOutput::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$parserOutput->expects( $this->exactly( count( $expected ) ) )

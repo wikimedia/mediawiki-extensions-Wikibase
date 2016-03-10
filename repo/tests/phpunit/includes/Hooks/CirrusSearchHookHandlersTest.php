@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use CirrusSearch\Connection;
+use CirrusSearch\Maintenance\MappingConfigBuilder;
 use Elastica\Document;
 use ParserOutput;
 use PHPUnit_Framework_TestCase;
@@ -37,7 +39,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testOnCirrusSearchBuildDocumentParse() {
-		$connection = $this->getMockBuilder( 'CirrusSearch\Connection' )
+		$connection = $this->getMockBuilder( Connection::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -57,9 +59,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testOnCirrusSearchMappingConfig() {
-		$mappingConfigBuilder = $this->getMockBuilder(
-				'CirrusSearch\Maintenance\MappingConfigBuilder'
-			)
+		$mappingConfigBuilder = $this->getMockBuilder( MappingConfigBuilder::class )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -70,7 +70,7 @@ class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit_Framework_TestCa
 	 * @return ValueFormatter
 	 */
 	private function getMockFormatter() {
-		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$mock = $this->getMock( ValueFormatter::class );
 		$mock->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback(

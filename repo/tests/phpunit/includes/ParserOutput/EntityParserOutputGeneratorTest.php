@@ -15,12 +15,17 @@ use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityRevision;
+use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
+use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
+use Wikibase\View\EntityView;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -176,8 +181,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @return LanguageFallbackChain
+	 */
 	private function newLanguageFallbackChain() {
-		$fallbackChain = $this->getMockBuilder( 'Wikibase\LanguageFallbackChain' )
+		$fallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -217,8 +225,13 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		return $item;
 	}
 
+	/**
+	 * @param bool $createView
+	 *
+	 * @return DispatchingEntityViewFactory
+	 */
 	private function getEntityViewFactory( $createView ) {
-		$entityViewFactory = $this->getMockBuilder( 'Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory' )
+		$entityViewFactory = $this->getMockBuilder( DispatchingEntityViewFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -229,8 +242,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		return $entityViewFactory;
 	}
 
+	/**
+	 * @return EntityView
+	 */
 	private function getEntityView() {
-		$entityView = $this->getMockBuilder( 'Wikibase\View\EntityView' )
+		$entityView = $this->getMockBuilder( EntityView::class )
 			->setMethods( array(
 				'getTitleHtml',
 				'getHtml',
@@ -254,8 +270,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		return $entityView;
 	}
 
+	/**
+	 * @return ParserOutputJsConfigBuilder
+	 */
 	private function getConfigBuilderMock() {
-		$configBuilder = $this->getMockBuilder( 'Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder' )
+		$configBuilder = $this->getMockBuilder( ParserOutputJsConfigBuilder::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -266,8 +285,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		return $configBuilder;
 	}
 
+	/**
+	 * @return EntityTitleLookup
+	 */
 	private function getEntityTitleLookupMock() {
-		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
 
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )

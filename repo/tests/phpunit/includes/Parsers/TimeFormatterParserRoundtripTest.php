@@ -10,6 +10,7 @@ use ValueParsers\IsoTimestampParser;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
+use Wikibase\Repo\Parsers\MonthNameProvider;
 use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**
@@ -25,7 +26,7 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
 class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 
 	private function newTimeParserFactory( ParserOptions $options = null ) {
-		$monthNameProvider = $this->getMock( 'Wikibase\Repo\Parsers\MonthNameProvider' );
+		$monthNameProvider = $this->getMock( MonthNameProvider::class );
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getLocalizedMonthNames' )
 			->will( $this->returnValue( array(

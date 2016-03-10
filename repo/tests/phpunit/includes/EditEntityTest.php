@@ -51,7 +51,7 @@ class EditEntityTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )
@@ -75,7 +75,7 @@ class EditEntityTest extends MediaWikiTestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getEntityPermissionChecker( array $permissions = null ) {
-		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
+		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
 
 		$checkAction = function( $user, $action ) use ( $permissions ) {
 			if ( $permissions === null
@@ -112,7 +112,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		if ( is_null( $expects ) ) {
 			$expects = $this->any();
 		}
-		$runner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()
 			->getMock();

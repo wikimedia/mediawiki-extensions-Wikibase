@@ -5,11 +5,13 @@ namespace Wikibase\Test;
 use DataValues\DataValue;
 use Language;
 use MediaWikiLangTestCase;
+use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
@@ -81,17 +83,17 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	 * @return SummaryFormatter
 	 */
 	private function newFormatter() {
-		$idFormatter = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+		$idFormatter = $this->getMock( EntityIdFormatter::class );
 		$idFormatter->expects( $this->any() )->method( 'formatEntityId' )
 			->will( $this->returnCallback( array( $this, 'formatId' ) ) );
 
-		$valueFormatter = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$valueFormatter = $this->getMock( ValueFormatter::class );
 		$valueFormatter->expects( $this->any() )->method( 'format' )
 			->will( $this->returnCallback( array( $this, 'formatValue' ) ) );
 		$valueFormatter->expects( $this->any() )->method( 'getFormat' )
 			->will( $this->returnValue( SnakFormatter::FORMAT_PLAIN ) );
 
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$snakFormatter = $this->getMock( SnakFormatter::class );
 		$snakFormatter->expects( $this->any() )->method( 'formatSnak' )
 			->will( $this->returnCallback( array( $this, 'formatSnak' ) ) );
 		$snakFormatter->expects( $this->any() )->method( 'getFormat' )

@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
@@ -88,7 +89,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getPermissionCheckers() {
-		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
+		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
@@ -109,7 +110,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return RedirectCreationInteractor
 	 */
 	public function getMockRedirectCreationInteractor( EntityRedirect $redirect = null ) {
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Interactors\RedirectCreationInteractor' )
+		$mock = $this->getMockBuilder( RedirectCreationInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -191,7 +192,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return EntityConstraintProvider
 	 */
 	private function getConstraintProvider() {
-		$constraintProvider = $this->getMockBuilder( 'Wikibase\Repo\Validators\EntityConstraintProvider' )
+		$constraintProvider = $this->getMockBuilder( EntityConstraintProvider::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -206,7 +207,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return SnakValidator
 	 */
 	private function getSnakValidator() {
-		$snakValidator = $this->getMockBuilder( 'Wikibase\Repo\Validators\SnakValidator' )
+		$snakValidator = $this->getMockBuilder( SnakValidator::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -221,7 +222,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return TermValidatorFactory
 	 */
 	private function getTermValidatorFactory() {
-		$dupeDetector = $this->getMockBuilder( 'Wikibase\LabelDescriptionDuplicateDetector' )
+		$dupeDetector = $this->getMockBuilder( LabelDescriptionDuplicateDetector::class )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use FauxResponse;
 use Site;
+use SiteList;
 use SiteStore;
 use SpecialPageTestBase;
 use Title;
@@ -34,7 +35,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
-		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$mock = $this->getMock( EntityTitleLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
@@ -50,7 +51,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	private function getMockSiteLinkLookup() {
 		$itemId = new ItemId( 'Q123' );
 
-		$mock = $this->getMock( 'Wikibase\Lib\Store\SiteLinkLookup' );
+		$mock = $this->getMock( SiteLinkLookup::class );
 
 		$mock->expects( $this->any() )
 			->method( 'getItemIdForLink' )
@@ -73,12 +74,12 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			return $site;
 		};
 
-		$mockSiteList = $this->getMock( 'SiteList' );
+		$mockSiteList = $this->getMock( SiteList::class );
 		$mockSiteList->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnCallback( $getSite ) );
 
-		$mock = $this->getMock( 'SiteStore' );
+		$mock = $this->getMock( SiteStore::class );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnCallback( $getSite ) );

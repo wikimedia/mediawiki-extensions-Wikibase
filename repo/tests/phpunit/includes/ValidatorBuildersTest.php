@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ValidatorBuilders;
 
 /**
@@ -57,8 +58,11 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 		return $builders;
 	}
 
+	/**
+	 * @return CachingCommonsMediaFileNameLookup
+	 */
 	private function getCachingCommonsMediaFileNameLookup() {
-		$fileNameLookup = $this->getMockBuilder( 'Wikibase\Repo\CachingCommonsMediaFileNameLookup' )
+		$fileNameLookup = $this->getMockBuilder( CachingCommonsMediaFileNameLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 

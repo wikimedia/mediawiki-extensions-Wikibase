@@ -36,7 +36,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	 * @return ItemDisambiguation
 	 */
 	private function getMockItemDisambiguation() {
-		$mock = $this->getMockBuilder( 'Wikibase\ItemDisambiguation' )
+		$mock = $this->getMockBuilder( ItemDisambiguation::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -69,7 +69,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 				),
 			),
 		);
-		$mock = $this->getMockBuilder( 'Wikibase\Lib\Interactors\TermIndexSearchInteractor' )
+		$mock = $this->getMockBuilder( TermIndexSearchInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
 

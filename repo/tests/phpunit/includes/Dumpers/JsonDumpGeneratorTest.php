@@ -20,6 +20,8 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\JsonDumpGenerator;
+use Wikibase\Lib\Reporting\ExceptionHandler;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
@@ -114,7 +116,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 
 		$entities = $this->makeEntities( $ids );
 
-		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
+		$entityLookup = $this->getMock( EntityLookup::class );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $entities, $missingIds, $redirectedIds ) {
@@ -173,7 +175,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityIdPager
 	 */
 	public function makeIdPager( array $ids, $entityType = null ) {
-		$pager = $this->getMock( 'Wikibase\Repo\Store\EntityIdPager' );
+		$pager = $this->getMock( EntityIdPager::class );
 
 		$offset = 0;
 
@@ -238,7 +240,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 			$this->getMockPropertyDataTypeLookup()
 		);
 
-		$exceptionHandler = $this->getMock( 'Wikibase\Lib\Reporting\ExceptionHandler' );
+		$exceptionHandler = $this->getMock( ExceptionHandler::class );
 		$exceptionHandler->expects( $this->exactly( count( $ids ) ) )
 			->method( 'handleException' );
 
@@ -254,7 +256,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	public function getMockPropertyDataTypeLookup() {
-		$mock = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$mock = $this->getMock( PropertyDataTypeLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );
@@ -268,7 +270,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookupThrows( Exception $ex ) {
-		$entityLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\EntityLookup' );
+		$entityLookup = $this->getMock( EntityLookup::class );
 		$entityLookup->expects( $this->any() )
 			->method( 'getEntity' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( $ex ) {
@@ -481,7 +483,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$dumper = $this->newDumpGenerator( $ids, $missingIds );
 		$pager = $this->makeIdPager( $ids );
 
-		$exceptionHandler = $this->getMock( 'Wikibase\Lib\Reporting\ExceptionHandler' );
+		$exceptionHandler = $this->getMock( ExceptionHandler::class );
 		$exceptionHandler->expects( $this->exactly( count( $missingIds ) ) )
 			->method( 'handleException' );
 
@@ -507,7 +509,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 		$dumper = $this->newDumpGenerator( $ids );
 		$pager = $this->makeIdPager( $ids );
 
-		$progressReporter = $this->getMock( 'Wikibase\Lib\Reporting\MessageReporter' );
+		$progressReporter = $this->getMock( MessageReporter::class );
 		$progressReporter->expects( $this->exactly( count( $ids ) / 10 ) )
 			->method( 'reportMessage' );
 

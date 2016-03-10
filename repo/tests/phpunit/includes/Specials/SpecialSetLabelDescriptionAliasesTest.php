@@ -15,6 +15,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
@@ -70,8 +71,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		return $page;
 	}
 
+	/**
+	 * @return EditFilterHookRunner
+	 */
 	private function getMockEditFitlerHookRunner() {
-		$runner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -101,7 +105,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return LabelDescriptionDuplicateDetector
 	 */
 	private function getLabelDescriptionDuplicateDetector() {
-		$detector = $this->getMockBuilder( 'Wikibase\LabelDescriptionDuplicateDetector' )
+		$detector = $this->getMockBuilder( LabelDescriptionDuplicateDetector::class )
 			->disableOriginalConstructor()
 			->getMock();
 

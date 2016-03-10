@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use HashSiteStore;
 use InvalidArgumentException;
 use MediaWikiTestCase;
+use Site;
 use TestSites;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -19,6 +20,8 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
+use Wikibase\Repo\Validators\EntityValidator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpsMerge
@@ -59,7 +62,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$siteLookup = new HashSiteStore( TestSites::getSites() );
 		}
 		// A validator which makes sure that no site link is for page 'DUPE'
-		$siteLinkUniquenessValidator = $this->getMock( 'Wikibase\Repo\Validators\EntityValidator' );
+		$siteLinkUniquenessValidator = $this->getMock( EntityValidator::class );
 		$siteLinkUniquenessValidator->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnCallback( function( Item $item ) {
@@ -72,7 +75,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 				return Result::newSuccess();
 			} ) );
 
-		$constraintProvider = $this->getMockBuilder( 'Wikibase\Repo\Validators\EntityConstraintProvider' )
+		$constraintProvider = $this->getMockBuilder( EntityConstraintProvider::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$constraintProvider->expects( $this->any() )
@@ -406,7 +409,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$to = new Item( new ItemId( 'Q222' ) );
 		$to->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
 
-		$enwiki = $this->getMock( 'Site' );
+		$enwiki = $this->getMock( Site::class );
 		$enwiki->expects( $this->once() )
 			->method( 'getGlobalId' )
 			->will( $this->returnValue( 'enwiki' ) );

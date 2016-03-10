@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
+use ValueParsers\EraParser;
 use ValueParsers\ParserOptions;
 use ValueParsers\Test\StringValueParserTest;
 use Wikibase\Repo\Parsers\YearTimeParser;
@@ -37,8 +38,11 @@ class YearTimeParserTest extends StringValueParserTest {
 		return new YearTimeParser( $this->getMockEraParser() );
 	}
 
+	/**
+	 * @return EraParser
+	 */
 	private function getMockEraParser() {
-		$mock = $this->getMockBuilder( 'ValueParsers\EraParser' )
+		$mock = $this->getMockBuilder( EraParser::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
 use ValueParsers\Test\StringValueParserTest;
+use Wikibase\Repo\Parsers\MonthNameProvider;
 use Wikibase\Repo\Parsers\YearMonthTimeParser;
 
 /**
@@ -33,7 +34,7 @@ class YearMonthTimeParserTest extends StringValueParserTest {
 	 * @return YearMonthTimeParser
 	 */
 	protected function getInstance() {
-		$monthNameProvider = $this->getMockBuilder( 'Wikibase\Repo\Parsers\MonthNameProvider' )
+		$monthNameProvider = $this->getMockBuilder( MonthNameProvider::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$monthNameProvider->expects( $this->once() )

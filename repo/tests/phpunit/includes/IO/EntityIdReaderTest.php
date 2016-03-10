@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 
@@ -130,7 +131,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 			new PropertyId( 'P42' ),
 		);
 
-		$exceptionHandler = $this->getMock( 'Wikibase\Lib\Reporting\ExceptionHandler' );
+		$exceptionHandler = $this->getMock( ExceptionHandler::class );
 		$exceptionHandler->expects( $this->exactly( 2 ) ) //two bad lines in EntityIdReaderTest.bad.txt
 			->method( 'handleException' );
 

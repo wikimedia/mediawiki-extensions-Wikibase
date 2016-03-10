@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use IContextSource;
 use OutputPage;
 use PHPUnit_Framework_TestCase;
+use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 
 /**
@@ -25,7 +28,7 @@ class OutputPageEntityIdReaderTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider getEntityIdFromOutputPageProvider
 	 */
 	public function testGetEntityIdFromOutputPage( $expected, OutputPage $out, $isEntityContentModel ) {
-		$entityContentFactory = $this->getMockBuilder( 'Wikibase\Repo\Content\EntityContentFactory' )
+		$entityContentFactory = $this->getMockBuilder( EntityContentFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -46,12 +49,12 @@ class OutputPageEntityIdReaderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getEntityIdFromOutputPageProvider() {
-		$title = $this->getMock( 'Title' );
+		$title = $this->getMock( Title::class );
 		$title->expects( $this->any() )
 			->method( 'getContentModel' )
 			->will( $this->returnValue( 'bar' ) );
 
-		$context = $this->getMock( 'IContextSource' );
+		$context = $this->getMock( IContextSource::class );
 		$context->expects( $this->any() )
 			->method( 'getTitle' )
 			->will( $this->returnValue( $title ) );

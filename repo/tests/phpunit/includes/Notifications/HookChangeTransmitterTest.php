@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests\Repo;
 
+use Wikibase\EntityChange;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 
 /**
@@ -17,7 +18,7 @@ use Wikibase\Repo\Notifications\HookChangeTransmitter;
 class HookChangeTransmitterTest extends \MediaWikiTestCase {
 
 	public function testTransmitChange() {
-		$change = $this->getMockBuilder( 'Wikibase\EntityChange' )
+		$change = $this->getMockBuilder( EntityChange::class )
 			->disableOriginalConstructor()
 			->getMock();
 

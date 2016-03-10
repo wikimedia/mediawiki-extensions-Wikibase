@@ -72,7 +72,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p2, 'alphabetic' );
 		$this->propertyDataTypeLookup->setDataTypeForProperty( $p4, 'fiddlediddle' );
 
-		$this->validatorFactory = $this->getMock( 'Wikibase\Repo\DataTypeValidatorFactory' );
+		$this->validatorFactory = $this->getMock( DataTypeValidatorFactory::class );
 		$this->validatorFactory->expects( $this->any() )
 			->method( 'getValidators' )
 			->will( $this->returnCallback( function( $dataTypeId ) use (

@@ -3,6 +3,7 @@
 namespace Wikibase\Updates\Test;
 
 use RuntimeException;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Updates\DataUpdateAdapter;
 
@@ -18,7 +19,7 @@ use Wikibase\Updates\DataUpdateAdapter;
 class DataUpdateAdapterTest extends \PHPUnit_Framework_TestCase {
 
 	public function testDoUpdate() {
-		$reporter = $this->getMock( 'Wikibase\Lib\Reporting\MessageReporter' );
+		$reporter = $this->getMock( MessageReporter::class );
 		$reporter->expects( $this->once() )
 			->method( 'reportMessage' );
 

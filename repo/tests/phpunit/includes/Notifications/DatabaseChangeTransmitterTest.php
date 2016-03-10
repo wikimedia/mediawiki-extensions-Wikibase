@@ -2,7 +2,9 @@
 
 namespace Wikibase\Tests\Repo;
 
+use Wikibase\Change;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
+use Wikibase\Repo\Store\ChangeStore;
 
 /**
  * @covers Wikibase\Repo\Notifications\DatabaseChangeTransmitter
@@ -19,9 +21,9 @@ use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 class DatabaseChangeTransmitterTest extends \PHPUnit_Framework_TestCase {
 
 	public function testTransmitChange() {
-		$change = $this->getMock( 'Wikibase\Change' );
+		$change = $this->getMock( Change::class );
 
-		$changeStore = $this->getMock( 'Wikibase\Repo\Store\ChangeStore' );
+		$changeStore = $this->getMock( ChangeStore::class );
 		$changeStore->expects( $this->once() )
 			->method( 'saveChange' )
 			->with( $change );

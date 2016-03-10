@@ -152,9 +152,7 @@ class DumpJsonTest extends MediaWikiTestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getMockPropertyDataTypeLookup() {
-		$mockDataTypeLookup = $this->getMock(
-			'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup'
-		);
+		$mockDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $id ) {

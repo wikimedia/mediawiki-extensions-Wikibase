@@ -6,7 +6,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -30,7 +30,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				if ( $id->getSerialization() === 'Q111' ) {
@@ -48,7 +48,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return Title
 	 */
 	public function getMockTitle( $exists ) {
-		$mock = $this->getMockBuilder( 'Title' )
+		$mock = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -66,7 +66,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockSearchInteractor( $search, $language, $type, array $returnResults = array() ) {
-		$mock = $this->getMockBuilder( 'Wikibase\Lib\Interactors\TermIndexSearchInteractor' )
+		$mock = $this->getMockBuilder( TermIndexSearchInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->atLeastOnce() )
@@ -84,10 +84,10 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
 	 *
-	 * @return LanguageLabelDescriptionLookup
+	 * @return LabelDescriptionLookup
 	 */
 	private function getMockLabelDescriptionLookup() {
-		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' )
+		$mock = $this->getMockBuilder( LabelDescriptionLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )

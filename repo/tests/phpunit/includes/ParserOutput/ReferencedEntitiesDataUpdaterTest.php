@@ -4,13 +4,16 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\QuantityValue;
 use MediaWikiTestCase;
+use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 
 /**
@@ -41,7 +44,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	 * @return ReferencedEntitiesDataUpdater
 	 */
 	private function newInstance( $count = 0 ) {
-		$entityTitleLookup = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityTitleLookup' )
+		$entityTitleLookup = $this->getMockBuilder( EntityTitleLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$entityTitleLookup->expects( $this->exactly( $count ) )
@@ -50,7 +53,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 				return Title::newFromText( $id->getSerialization() );
 			} ) );
 
-		$entityidParser = $this->getMockBuilder( 'Wikibase\DataModel\Entity\EntityIdParser' )
+		$entityidParser = $this->getMockBuilder( EntityIdParser::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$entityidParser->expects( $this->any() )
@@ -110,7 +113,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 	) {
 		$actual = array();
 
-		$parserOutput = $this->getMockBuilder( 'ParserOutput' )
+		$parserOutput = $this->getMockBuilder( ParserOutput::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$parserOutput->expects( $this->exactly( count( $expected ) ) )

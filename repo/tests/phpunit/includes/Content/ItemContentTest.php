@@ -207,7 +207,7 @@ class ItemContentTest extends EntityContentTest {
 		$cases['redirect'] = array(
 			ItemContent::newFromRedirect(
 				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
-				$this->getMock( 'Title' )
+				$this->getMock( Title::class )
 			),
 			array()
 		);

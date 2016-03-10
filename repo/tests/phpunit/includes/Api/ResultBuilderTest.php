@@ -7,12 +7,16 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use HashSiteStore;
 use InvalidArgumentException;
+use Revision;
+use Status;
+use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -26,6 +30,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ResultBuilder;
 
 /**
@@ -47,7 +52,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getResultBuilder( ApiResult $result, $addMetaData = false ) {
-		$mockTitle = $this->getMockBuilder( 'Title' )
+		$mockTitle = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mockTitle->expects( $this->any() )
@@ -60,12 +65,12 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'MockPrefixedText' ) );
 
-		$mockEntityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$mockEntityTitleLookup = $this->getMock( EntityTitleLookup::class );
 		$mockEntityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $mockTitle ) );
 
-		$mockPropertyDataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$mockPropertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$mockPropertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnCallback( function( PropertyId $id ) {
@@ -1386,13 +1391,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddRevisionIdFromStatusToResult() {
 		$result = $this->getDefaultResult();
-		$mockRevision = $this->getMockBuilder( 'Revision' )
+		$mockRevision = $this->getMockBuilder( Revision::class )
 		->disableOriginalConstructor()
 		->getMock();
 		$mockRevision->expects( $this->once() )
 			->method( 'getId' )
 			->will( $this->returnValue( 123 ) );
-		$mockStatus = $this->getMock( 'Status' );
+		$mockStatus = $this->getMock( Status::class );
 		$mockStatus->expects( $this->once() )
 			->method( 'getValue' )
 			->will( $this->returnValue( array( 'revision' => $mockRevision ) ) );

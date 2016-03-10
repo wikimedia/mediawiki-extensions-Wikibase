@@ -63,7 +63,7 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @return ValueFormatter
 	 */
 	private function getMockValueFormatter() {
-		$mock = $this->getMock( 'ValueFormatters\ValueFormatter' );
+		$mock = $this->getMock( ValueFormatter::class );
 		$mock->expects( $this->any() )
 			->method( 'format' )
 			->will( $this->returnCallback(
@@ -82,7 +82,7 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @return EntityIdFormatter
 	 */
 	private function getMockIdFormatter() {
-		$mock = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+		$mock = $this->getMock( EntityIdFormatter::class );
 		$mock->expects( $this->any() )
 			->method( 'formatEntityId' )
 			->will( $this->returnCallback(
@@ -98,7 +98,7 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @return SiteStore
 	 */
 	private function getMockSitesTable() {
-		$mock = $this->getMock( 'SiteStore' );
+		$mock = $this->getMock( SiteStore::class );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnCallback(

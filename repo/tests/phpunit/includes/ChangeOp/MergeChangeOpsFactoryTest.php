@@ -9,6 +9,7 @@ use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**
  * @covers Wikibase\ChangeOp\MergeChangeOpsFactory
@@ -30,7 +31,7 @@ class MergeChangeOpsFactoryTest extends PHPUnit_Framework_TestCase {
 
 		$toItemId = new ItemId( 'Q3' );
 
-		$constraintProvider = $this->getMockBuilder( 'Wikibase\Repo\Validators\EntityConstraintProvider' )
+		$constraintProvider = $this->getMockBuilder( EntityConstraintProvider::class )
 			->disableOriginalConstructor()
 			->getMock();
 

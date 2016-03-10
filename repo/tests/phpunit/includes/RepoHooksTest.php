@@ -2,10 +2,12 @@
 
 namespace Wikibase\Tests;
 
+use ApiQuerySiteinfo;
 use ConfigFactory;
 use DerivativeContext;
 use ImportStringSource;
 use OutputPage;
+use ParserOutput;
 use RequestContext;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
@@ -40,7 +42,7 @@ class RepoHooksTest extends \MediaWikiTestCase {
 	}
 
 	public function testOnAPIQuerySiteInfoGeneralInfo() {
-		$api = $this->getMockBuilder( 'ApiQuerySiteinfo' )
+		$api = $this->getMockBuilder( ApiQuerySiteinfo::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -211,7 +213,7 @@ XML
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$out = new OutputPage( $context );
 
-		$parserOutput = $this->getMock( 'ParserOutput' );
+		$parserOutput = $this->getMock( ParserOutput::class );
 		$parserOutput->expects( $this->exactly( 3 ) )
 			->method( 'getExtensionData' )
 			->will( $this->returnCallback( function ( $key ) use ( $altLinks ) {

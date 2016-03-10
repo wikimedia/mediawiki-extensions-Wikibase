@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
@@ -111,7 +112,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( 'Wikibase\Lib\Store\EntityStoreWatcher' );
+		$watcher = $this->getMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 2 ) )
 			->method( 'entityUpdated' );
 		$watcher->expects( $this->never() )
@@ -211,7 +212,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( 'Wikibase\Lib\Store\EntityStoreWatcher' );
+		$watcher = $this->getMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 1 ) )
 			->method( 'redirectUpdated' );
 		$watcher->expects( $this->never() )
@@ -524,7 +525,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// register mock watcher
-		$watcher = $this->getMock( 'Wikibase\Lib\Store\EntityStoreWatcher' );
+		$watcher = $this->getMock( EntityStoreWatcher::class );
 		$watcher->expects( $this->exactly( 1 ) )
 			->method( 'entityDeleted' );
 

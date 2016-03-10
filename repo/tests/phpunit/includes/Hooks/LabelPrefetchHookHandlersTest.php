@@ -13,7 +13,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\Repo\Hooks\LabelPrefetchHookHandlers
@@ -63,12 +65,12 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 	 * @return LabelPrefetchHookHandlers
 	 */
 	private function getLabelPrefetchHookHandlers( $prefetchTerms, array $termTypes, array $languageCodes ) {
-		$termBuffer = $this->getMock( 'Wikibase\DataModel\Services\Term\TermBuffer' );
+		$termBuffer = $this->getMock( TermBuffer::class );
 		$termBuffer->expects( $this->atLeastOnce() )
 			->method( 'prefetchTerms' )
 			->will( $this->returnCallback( $prefetchTerms ) );
 
-		$idLookup = $this->getMock( 'Wikibase\Store\EntityIdLookup' );
+		$idLookup = $this->getMock( EntityIdLookup::class );
 		$idLookup->expects( $this->atLeastOnce() )
 			->method( 'getEntityIds' )
 			->will( $this->returnCallback( array( $this, 'titlesToIds' ) ) );
@@ -134,7 +136,7 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 		$context->setTitle( new Title( NS_SPECIAL, 'Watchlist' ) );
 
 		/** @var ChangesList $changesList */
-		$changesList = $this->getMockBuilder( 'ChangesList' )
+		$changesList = $this->getMockBuilder( ChangesList::class )
 		->disableOriginalConstructor()
 		->getMock();
 
