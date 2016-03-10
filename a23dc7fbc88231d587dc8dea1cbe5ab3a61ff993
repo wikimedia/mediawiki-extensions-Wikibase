@@ -52,6 +52,24 @@
       "revId": "a23dc7fbc88231d587dc8dea1cbe5ab3a61ff993",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_5b884dec",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-10T14:08:50Z",
+      "side": 1,
+      "message": "Oh yes, sorry for confusion. We call filter() on items() but basically use children() to obtain the list items.",
+      "parentUuid": "0e2f53b6_fb34c148",
+      "revId": "a23dc7fbc88231d587dc8dea1cbe5ab3a61ff993",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
