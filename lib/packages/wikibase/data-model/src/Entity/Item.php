@@ -8,8 +8,13 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListHolder;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintHolder;
+use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\TermList;
 
 /**
  * Represents a single Wikibase item.
@@ -19,8 +24,10 @@ use Wikibase\DataModel\Term\FingerprintHolder;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class Item implements EntityDocument, FingerprintHolder, StatementListHolder {
+class Item implements EntityDocument, FingerprintHolder, StatementListHolder,
+	LabelsProvider, DescriptionsProvider, AliasesProvider {
 
 	const ENTITY_TYPE = 'item';
 
@@ -111,6 +118,39 @@ class Item implements EntityDocument, FingerprintHolder, StatementListHolder {
 	 */
 	public function setFingerprint( Fingerprint $fingerprint ) {
 		$this->fingerprint = $fingerprint;
+	}
+
+	/**
+	 * @see LabelsProvider::getLabels
+	 *
+	 * @since 6.0
+	 *
+	 * @return TermList
+	 */
+	public function getLabels() {
+		return $this->fingerprint->getLabels();
+	}
+
+	/**
+	 * @see DescriptionsProvider::getDescriptions
+	 *
+	 * @since 6.0
+	 *
+	 * @return TermList
+	 */
+	public function getDescriptions() {
+		return $this->fingerprint->getDescriptions();
+	}
+
+	/**
+	 * @see AliasesProvider::getAliasGroups
+	 *
+	 * @since 6.0
+	 *
+	 * @return AliasGroupList
+	 */
+	public function getAliasGroups() {
+		return $this->fingerprint->getAliasGroups();
 	}
 
 	/**

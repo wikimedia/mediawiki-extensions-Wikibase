@@ -241,6 +241,9 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
 		$this->assertTrue( $item->getFingerprint()->isEmpty() );
+		$this->assertTrue( $item->getLabels()->isEmpty() );
+		$this->assertTrue( $item->getDescriptions()->isEmpty() );
+		$this->assertTrue( $item->getAliasGroups()->isEmpty() );
 		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
 		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
@@ -250,6 +253,9 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertNull( $item->getId() );
 		$this->assertTrue( $item->getFingerprint()->isEmpty() );
+		$this->assertTrue( $item->getLabels()->isEmpty() );
+		$this->assertTrue( $item->getDescriptions()->isEmpty() );
+		$this->assertTrue( $item->getAliasGroups()->isEmpty() );
 		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
 		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
@@ -718,6 +724,69 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		$newFingerprint = $entity->getFingerprint();
 
 		$this->assertSame( $fingerprint, $newFingerprint );
+	}
+
+	public function testGetLabels() {
+		$item = new Item();
+		$item->setLabel( 'en', 'foo' );
+
+		$this->assertEquals(
+			new TermList( array(
+				new Term( 'en', 'foo' )
+			) ),
+			$item->getLabels()
+		);
+	}
+
+	public function testGetDescriptions() {
+		$item = new Item();
+		$item->setDescription( 'en', 'foo bar' );
+
+		$this->assertEquals(
+			new TermList( array(
+				new Term( 'en', 'foo bar' )
+			) ),
+			$item->getDescriptions()
+		);
+	}
+
+	public function testGetAliasGroups() {
+		$item = new Item();
+		$item->setAliases( 'en', array( 'foo', 'bar' ) );
+
+		$this->assertEquals(
+			new AliasGroupList( array(
+				new AliasGroup( 'en', array( 'foo', 'bar' ) )
+			) ),
+			$item->getAliasGroups()
+		);
+	}
+
+	public function testGetLabels_sameListAsFingerprint() {
+		$item = new Item();
+
+		$this->assertSame(
+			$item->getFingerprint()->getLabels(),
+			$item->getLabels()
+		);
+	}
+
+	public function testGetDescriptions_sameListAsFingerprint() {
+		$item = new Item();
+
+		$this->assertSame(
+			$item->getFingerprint()->getDescriptions(),
+			$item->getDescriptions()
+		);
+	}
+
+	public function testGetAliasGroups_sameListAsFingerprint() {
+		$item = new Item();
+
+		$this->assertSame(
+			$item->getFingerprint()->getAliasGroups(),
+			$item->getAliasGroups()
+		);
 	}
 
 }

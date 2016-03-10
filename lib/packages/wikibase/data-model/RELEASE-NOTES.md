@@ -4,9 +4,13 @@
 
 * Removed `Entity` class (deprecated since 1.0)
 * `Item` and `Property` no longer extend `Entity`
-    * Removed `getLabel`, `getLabels`, `getDescription`, `getDescriptions`, `getAliases`,
-      `getAllAliases`, `setLabels`, `setDescriptions`, `addAliases`, `setAllAliases`,
+    * Removed `getLabel`, `getDescription`, `getAliases`, `getAllAliases`,
+      `setLabels`, `setDescriptions`, `addAliases`, `setAllAliases`,
       `removeLabel`, `removeDescription` and `removeAliases` methods
+* `Item` and `Property` now implement `LabelsProvider`, `DescriptionsProvider` and `AliasesProvider`
+* `Item::getLabels` and `Property::getLabels` now return a `TermList`
+* `Item::getDescriptions` and `Property::getDescriptions` now return a `TermList`
+* Added `Item::getAliasGroups` and `Property::getAliasGroups`
 * `TermList` and `AliasGroupList` no longer throw an `InvalidArgumentException` for invalid language codes.
     * `getByLangauge` now throws an `OutOfBoundsException`.
     * `removeByLanguage` does nothing for invalid values.
