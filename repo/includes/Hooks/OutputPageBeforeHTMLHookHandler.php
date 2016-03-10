@@ -123,39 +123,41 @@ class OutputPageBeforeHTMLHookHandler {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
 
 		if ( !empty( $placeholders ) ) {
+			// All user-specified languages, that are valid term languages
+			// Reindex the keys so that javascript still works if an unknown
+			// language code in the babel box causes an index to miss
+			$termsLanguages = array_values( array_intersect(
+				$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
+				$this->termsLanguages->getLanguages()
+			) );
+			$termsLanguages = array_diff( $termsLanguages, [ $out->getLanguage()->getCode() ] );
+
 			$injector = new TextInjector( $placeholders );
-			$expander = $this->getEntityViewPlaceholderExpander( $out );
+			$expander = $this->getEntityViewPlaceholderExpander( $out, $termsLanguages );
 
 			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
 
-			$out->addJsConfigVars(
-				'wbUserSpecifiedLanguages',
-				// All user-specified languages, that are valid term languages
-				// Reindex the keys so that javascript still works if an unknown
-				// language code in the babel box causes an index to miss
-				array_values( array_intersect(
-					$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
-					$this->termsLanguages->getLanguages()
-				) )
-			);
+			$out->addJsConfigVars( 'wbUserSpecifiedLanguages', $termsLanguages );
 		}
 	}
 
 	/**
 	 * @param OutputPage $out
+	 * @param string[] $termsLanguages
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function getEntityViewPlaceholderExpander( OutputPage $out ) {
+	private function getEntityViewPlaceholderExpander( OutputPage $out, array $termsLanguages ) {
+		$languageCode = $out->getLanguage()->getCode();
+
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
 			$out->getTitle(),
 			$out->getUser(),
-			$out->getLanguage(),
+			$languageCode,
 			$this->entityIdParser,
 			$this->entityRevisionLookup,
-			$this->userLanguageLookup,
-			$this->termsLanguages,
+			array_merge( [ $languageCode ], $termsLanguages ),
 			$this->languageNameLookup
 		);
 	}

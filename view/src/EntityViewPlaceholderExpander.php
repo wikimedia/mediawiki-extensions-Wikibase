@@ -3,18 +3,15 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use Language;
 use MWException;
 use RuntimeException;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -51,9 +48,9 @@ class EntityViewPlaceholderExpander {
 	private $user;
 
 	/**
-	 * @var Language
+	 * @var string
 	 */
-	private $uiLanguage;
+	private $uiLanguageCode;
 
 	/**
 	 * @var EntityIdParser
@@ -66,17 +63,7 @@ class EntityViewPlaceholderExpander {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var UserLanguageLookup
-	 */
-	private $userLanguageLookup;
-
-	/**
-	 * @var string[]|null
-	 */
-	private $extraLanguages = null;
-
-	/**
-	 * @var ContentLanguages
+	 * @var string[]
 	 */
 	private $termsLanguages;
 
@@ -89,60 +76,30 @@ class EntityViewPlaceholderExpander {
 	 * @param TemplateFactory $templateFactory
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
-	 * @param Language $uiLanguage the user's current UI language (as per the present request)
+	 * @param string $uiLanguageCode the user's current UI language (as per the present request)
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
-	 * @param UserLanguageLookup $userLanguageLookup
-	 * @param ContentLanguages $termsLanguages
+	 * @param string[] $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		Title $targetPage,
 		User $user,
-		Language $uiLanguage,
+		$uiLanguageCode,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
-		UserLanguageLookup $userLanguageLookup,
-		ContentLanguages $termsLanguages,
+		array $termsLanguages,
 		LanguageNameLookup $languageNameLookup
 	) {
 		$this->targetPage = $targetPage;
 		$this->user = $user;
-		$this->uiLanguage = $uiLanguage;
+		$this->uiLanguageCode = $uiLanguageCode;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
-		$this->userLanguageLookup = $userLanguageLookup;
 		$this->templateFactory = $templateFactory;
 		$this->termsLanguages = $termsLanguages;
 		$this->languageNameLookup = $languageNameLookup;
-	}
-
-	/**
-	 * Returns a list of languages desired by the user in addition to the current interface language.
-	 *
-	 * @see UserLanguageLookup
-	 *
-	 * @return string[]
-	 */
-	public function getExtraUserLanguages() {
-		if ( $this->extraLanguages === null ) {
-			if ( $this->user->isAnon() ) {
-				// no extra languages for anon user
-				$this->extraLanguages = array();
-			} else {
-				// ignore current interface language
-				$skip = array( $this->uiLanguage->getCode() );
-				$langs = array_diff(
-					$this->userLanguageLookup->getAllUserLanguages( $this->user ),
-					$skip
-				);
-				// Make sure we only report actual term languages
-				$this->extraLanguages = array_intersect( $langs, $this->termsLanguages->getLanguages() );
-			}
-		}
-
-		return $this->extraLanguages;
 	}
 
 	/**
@@ -240,11 +197,6 @@ class EntityViewPlaceholderExpander {
 	 * @return string HTML
 	 */
 	public function renderTermBox( EntityId $entityId, $revisionId ) {
-		$languages = array_merge(
-			array( $this->uiLanguage->getCode() ),
-			$this->getExtraUserLanguages()
-		);
-
 		try {
 			// we may want to cache this...
 			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
@@ -264,13 +216,13 @@ class EntityViewPlaceholderExpander {
 			$this->templateFactory,
 			null,
 			$this->languageNameLookup,
-			$this->uiLanguage->getCode()
+			$this->uiLanguageCode
 		);
 
 		// FIXME: assumes all entities have a fingerprint
 		$html = $entityTermsView->getEntityTermsForLanguageListView(
 			$entity->getFingerprint(),
-			$languages,
+			$this->termsLanguages,
 			$this->targetPage
 		);
 
