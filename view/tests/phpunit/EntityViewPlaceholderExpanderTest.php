@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use Language;
 use MediaWikiTestCase;
 use Title;
 use User;
@@ -48,8 +47,6 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$language = Language::factory( 'en' );
-
 		$idParser = $this->getMockBuilder( EntityIdParser::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -68,7 +65,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			$templateFactory,
 			$title,
 			$user,
-			$language,
+			'en',
 			$idParser,
 			$entityRevisionLookup,
 			$userLanguages,

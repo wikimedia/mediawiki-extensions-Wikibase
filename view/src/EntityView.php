@@ -2,7 +2,6 @@
 
 namespace Wikibase\View;
 
-use Language;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -38,9 +37,14 @@ abstract class EntityView {
 	private $entityTermsView;
 
 	/**
-	 * @var Language
+	 * @var LanguageDirectionalityLookup
 	 */
-	protected $language;
+	private $languageDirectionalityLookup;
+
+	/**
+	 * @var string
+	 */
+	protected $languageCode;
 
 	/**
 	 * @var TextInjector
@@ -50,15 +54,18 @@ abstract class EntityView {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
-	 * @param Language $language
+	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
+	 * @param string $languageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
-		Language $language
+		LanguageDirectionalityLookup $languageDirectionalityLookup,
+		$languageCode
 	) {
 		$this->entityTermsView = $entityTermsView;
-		$this->language = $language;
+		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
+		$this->languageCode = $languageCode;
 
 		$this->textInjector = new TextInjector();
 		$this->templateFactory = $templateFactory;
@@ -96,8 +103,8 @@ abstract class EntityView {
 		$html = $this->templateFactory->render( 'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
-			$this->language->getCode(),
-			$this->language->getDir(),
+			$this->languageCode,
+			$this->languageDirectionalityLookup->getDirectionality( $this->languageCode ) ?: 'auto',
 			$this->getMainHtml( $entityRevision ),
 			$this->getSideHtml( $entity )
 		);

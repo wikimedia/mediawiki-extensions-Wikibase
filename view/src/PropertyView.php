@@ -5,7 +5,6 @@ namespace Wikibase\View;
 use DataTypes\DataTypeFactory;
 use Html;
 use InvalidArgumentException;
-use Language;
 use Wikibase\DataModel\Entity\EntityDocument;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Property;
@@ -37,18 +36,20 @@ class PropertyView extends EntityView {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
+	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param DataTypeFactory $dataTypeFactory
-	 * @param Language $language
+	 * @param string $languageCode
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
+		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		StatementSectionsView $statementSectionsView,
 		DataTypeFactory $dataTypeFactory,
-		Language $language
+		$languageCode
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $language );
+		parent::__construct( $templateFactory, $entityTermsView, $languageDirectionalityLookup, $languageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -101,7 +102,7 @@ class PropertyView extends EntityView {
 		try {
 			$dataType = $this->dataTypeFactory->getType( $propertyType );
 			$html .= $this->templateFactory->render( 'wikibase-propertyview-datatype',
-				htmlspecialchars( $dataType->getLabel( $this->language->getCode() ) )
+				htmlspecialchars( $dataType->getLabel( $this->languageCode ) )
 			);
 		} catch ( OutOfBoundsException $ex ) {
 			$html .= Html::rawElement( 'span', array( 'class' => 'error' ),

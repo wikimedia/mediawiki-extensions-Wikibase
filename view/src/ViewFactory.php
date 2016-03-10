@@ -4,7 +4,6 @@ namespace Wikibase\View;
 
 use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
-use Language;
 use SiteStore;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
@@ -67,6 +66,11 @@ class ViewFactory {
 	private $languageNameLookup;
 
 	/**
+	 * @var LanguageDirectionalityLookup
+	 */
+	private $languageDirectionalityLookup;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -90,6 +94,7 @@ class ViewFactory {
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param TemplateFactory $templateFactory
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
@@ -105,6 +110,7 @@ class ViewFactory {
 		DataTypeFactory $dataTypeFactory,
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
+		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		array $siteLinkGroups = array(),
 		array $specialSiteLinkGroups = array(),
 		array $badgeItems = array()
@@ -123,6 +129,7 @@ class ViewFactory {
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
@@ -173,9 +180,6 @@ class ViewFactory {
 			$editSectionGenerator
 		);
 
-		// @fixme all that seems needed in ItemView is language code and dir.
-		$language = Language::factory( $languageCode );
-
 		$siteLinksView = new SiteLinksView(
 			$this->templateFactory,
 			$this->siteStore->getSites(),
@@ -189,8 +193,9 @@ class ViewFactory {
 		return new ItemView(
 			$this->templateFactory,
 			$entityTermsView,
+			$this->languageDirectionalityLookup,
 			$statementSectionsView,
-			$language,
+			$languageCode,
 			$siteLinksView,
 			$this->siteLinkGroups
 		);
@@ -221,15 +226,13 @@ class ViewFactory {
 			$editSectionGenerator
 		);
 
-		// @fixme all that seems needed in PropertyView is language code and dir.
-		$language = Language::factory( $languageCode );
-
 		return new PropertyView(
 			$this->templateFactory,
 			$entityTermsView,
+			$this->languageDirectionalityLookup,
 			$statementSectionsView,
 			$this->dataTypeFactory,
-			$language
+			$languageCode
 		);
 	}
 
