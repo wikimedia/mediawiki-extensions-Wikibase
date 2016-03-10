@@ -264,17 +264,6 @@ class Property implements EntityDocument, FingerprintHolder, StatementListHolder
 	}
 
 	/**
-	 * Removes all content from the Property.
-	 * The id and the type are not part of the content.
-	 *
-	 * @since 0.1
-	 */
-	public function clear() {
-		$this->fingerprint = new Fingerprint();
-		$this->statements = new StatementList();
-	}
-
-	/**
 	 * @since 1.1
 	 *
 	 * @return StatementList

@@ -231,23 +231,6 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		return $statement;
 	}
 
-	public function testClearRemovesAllButId() {
-		$item = new Item( new ItemId( 'Q42' ) );
-		$item->getFingerprint()->setLabel( 'en', 'foo' );
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
-		$item->getStatements()->addStatement( $this->newStatement() );
-
-		$item->clear();
-
-		$this->assertEquals( new ItemId( 'Q42' ), $item->getId() );
-		$this->assertTrue( $item->getFingerprint()->isEmpty() );
-		$this->assertTrue( $item->getLabels()->isEmpty() );
-		$this->assertTrue( $item->getDescriptions()->isEmpty() );
-		$this->assertTrue( $item->getAliasGroups()->isEmpty() );
-		$this->assertTrue( $item->getSiteLinkList()->isEmpty() );
-		$this->assertTrue( $item->getStatements()->isEmpty() );
-	}
-
 	public function testEmptyConstructor() {
 		$item = new Item();
 
@@ -279,13 +262,6 @@ class ItemTest extends PHPUnit_Framework_TestCase {
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ) );
 
 		$item->setStatements( new StatementList() );
-		$this->assertTrue( $item->getStatements()->isEmpty() );
-	}
-
-	public function testGetStatementsReturnsCorrectTypeAfterClear() {
-		$item = new Item();
-		$item->clear();
-
 		$this->assertTrue( $item->getStatements()->isEmpty() );
 	}
 
