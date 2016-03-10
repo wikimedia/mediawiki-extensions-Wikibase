@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use Language;
 use MWException;
 use RuntimeException;
 use Title;
@@ -11,9 +10,7 @@ use User;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -51,11 +48,6 @@ class EntityViewPlaceholderExpander {
 	private $user;
 
 	/**
-	 * @var Language
-	 */
-	private $uiLanguage;
-
-	/**
 	 * @var LabelsProvider
 	 */
 	private $labelsProvider;
@@ -71,17 +63,7 @@ class EntityViewPlaceholderExpander {
 	private $aliasesProvider;
 
 	/**
-	 * @var UserLanguageLookup
-	 */
-	private $userLanguageLookup;
-
-	/**
-	 * @var string[]|null
-	 */
-	private $extraLanguages = null;
-
-	/**
-	 * @var ContentLanguages
+	 * @var string[]
 	 */
 	private $termsLanguages;
 
@@ -99,12 +81,10 @@ class EntityViewPlaceholderExpander {
 	 * @param TemplateFactory $templateFactory
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
-	 * @param Language $uiLanguage the user's current UI language (as per the present request)
 	 * @param LabelsProvider $labelsProvider
 	 * @param DescriptionsProvider $descriptionsProvider
 	 * @param AliasesProvider|null $aliasesProvider
-	 * @param UserLanguageLookup $userLanguageLookup
-	 * @param ContentLanguages $termsLanguages
+	 * @param string[] $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
 	 */
@@ -112,53 +92,22 @@ class EntityViewPlaceholderExpander {
 		TemplateFactory $templateFactory,
 		Title $targetPage,
 		User $user,
-		Language $uiLanguage,
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
 		AliasesProvider $aliasesProvider = null,
-		UserLanguageLookup $userLanguageLookup,
-		ContentLanguages $termsLanguages,
+		array $termsLanguages,
 		LanguageNameLookup $languageNameLookup,
 		LocalizedTextProvider $textProvider
 	) {
 		$this->targetPage = $targetPage;
 		$this->user = $user;
-		$this->uiLanguage = $uiLanguage;
 		$this->labelsProvider = $labelsProvider;
 		$this->descriptionsProvider = $descriptionsProvider;
 		$this->aliasesProvider = $aliasesProvider;
-		$this->userLanguageLookup = $userLanguageLookup;
 		$this->templateFactory = $templateFactory;
 		$this->termsLanguages = $termsLanguages;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
-	}
-
-	/**
-	 * Returns a list of languages desired by the user in addition to the current interface language.
-	 *
-	 * @see UserLanguageLookup
-	 *
-	 * @return string[]
-	 */
-	public function getExtraUserLanguages() {
-		if ( $this->extraLanguages === null ) {
-			if ( $this->user->isAnon() ) {
-				// no extra languages for anon user
-				$this->extraLanguages = array();
-			} else {
-				// ignore current interface language
-				$skip = array( $this->uiLanguage->getCode() );
-				$langs = array_diff(
-					$this->userLanguageLookup->getAllUserLanguages( $this->user ),
-					$skip
-				);
-				// Make sure we only report actual term languages
-				$this->extraLanguages = array_intersect( $langs, $this->termsLanguages->getLanguages() );
-			}
-		}
-
-		return $this->extraLanguages;
 	}
 
 	/**
@@ -225,10 +174,6 @@ class EntityViewPlaceholderExpander {
 	 * @return string HTML
 	 */
 	public function renderTermBox() {
-		$languages = array_merge(
-			array( $this->uiLanguage->getCode() ),
-			$this->getExtraUserLanguages()
-		);
 
 		$entityTermsView = new EntityTermsView(
 			$this->templateFactory,
@@ -241,7 +186,7 @@ class EntityViewPlaceholderExpander {
 			$this->labelsProvider,
 			$this->descriptionsProvider,
 			$this->aliasesProvider,
-			$languages,
+			$this->termsLanguages,
 			$this->targetPage
 		);
 
