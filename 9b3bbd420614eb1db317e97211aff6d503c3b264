@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_95f10495",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-10T09:14:15Z",
+      "side": 1,
+      "message": "There are a few places in this patch where I\u0027m replacing a SiteLinkTable mock with a SiteLinkLookup mock. The first is a specific implementation, but all the tests need is the interface.",
+      "parentUuid": "0e2f53b6_4f1c0b7a",
+      "revId": "9b3bbd420614eb1db317e97211aff6d503c3b264",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_0f2203b1",
         "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/VariantsAwareRendererTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-09T23:30:42Z",
       "side": 1,
       "message": "missing tabs",
+      "revId": "9b3bbd420614eb1db317e97211aff6d503c3b264",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_75fba077",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/VariantsAwareRendererTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-10T09:14:15Z",
+      "side": 1,
+      "message": "True, but I did not wanted to touch these lines for the most minimal diff.",
+      "parentUuid": "0e2f53b6_0f2203b1",
       "revId": "9b3bbd420614eb1db317e97211aff6d503c3b264",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
