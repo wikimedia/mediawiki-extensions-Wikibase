@@ -71,9 +71,15 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 			return;
 		}
 
+		$splHash = spl_object_hash( $reference );
+
+		if ( array_key_exists( $splHash, $this->references ) ) {
+			return;
+		}
+
 		if ( $index === null || $index >= count( $this->references ) ) {
 			// Append object to the end of the reference list.
-			$this->references[spl_object_hash( $reference )] = $reference;
+			$this->references[$splHash] = $reference;
 		} else {
 			$this->insertReferenceAtIndex( $reference, $index );
 		}
@@ -104,9 +110,11 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 			throw new InvalidArgumentException( '$index must be an integer' );
 		}
 
+		$splHash = spl_object_hash( $reference );
+
 		$this->references = array_merge(
 			array_slice( $this->references, 0, $index ),
-			[ spl_object_hash( $reference ) => $reference ],
+			[ $splHash => $reference ],
 			array_slice( $this->references, $index )
 		);
 	}

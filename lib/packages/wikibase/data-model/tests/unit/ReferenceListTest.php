@@ -241,17 +241,31 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 		$list->addNewReference( new PropertyNoValueSnak( 1 ) );
 		$reference = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
 		$list->addReference( $reference );
-		$this->assertSame( 1, $list->indexOf( $reference ), 'pre condition' );
+		$list->addNewReference( new PropertyNoValueSnak( 3 ) );
+
+		$this->assertSame(
+			1,
+			$list->indexOf( $reference ),
+			'pre-condition is that the element is at index 1'
+		);
 
 		$list->addReference( $reference, 0 );
 
-		$this->assertCount( 2, $list, 'not added' );
-		$this->assertSame( 0, $list->indexOf( $reference ), 'can decrease index' );
+		$this->assertCount( 3, $list, 'not added' );
+		$this->assertSame(
+			1,
+			$list->indexOf( $reference ),
+			'make sure calling addReference with a lower index did not changed it'
+		);
 
 		$list->addReference( $reference, 2 );
 
-		$this->assertCount( 2, $list, 'not added' );
-		$this->assertSame( 0, $list->indexOf( $reference ), 'can not increase index' );
+		$this->assertCount( 3, $list, 'not added' );
+		$this->assertSame(
+			1,
+			$list->indexOf( $reference ),
+			'make sure calling addReference with a higher index did not changed it'
+		);
 	}
 
 	public function testAddReferenceAtIndexZero() {
