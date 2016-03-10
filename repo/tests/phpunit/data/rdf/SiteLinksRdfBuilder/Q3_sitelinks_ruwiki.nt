@@ -1,3 +1,5 @@
 <http://ruwiki.acme.test/%D0%A1%D0%B0%D0%BD%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%BE> <http://schema.org/about> <http://acme.test/Q3> .
 <http://ruwiki.acme.test/%D0%A1%D0%B0%D0%BD%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%BE> <http://schema.org/inLanguage> "ru" .
 <http://ruwiki.acme.test/%D0%A1%D0%B0%D0%BD%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%BE> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Article> .
+<http://ruwiki.acme.test/%D0%A1%D0%B0%D0%BD%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%BE> <http://wikiba.se/ontology-beta#wikiGroup> "none" .
+<http://ruwiki.acme.test/%D0%A1%D0%B0%D0%BD%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%BE> <http://schema.org/isPartOf> <http://ruwiki.acme.test/> .
