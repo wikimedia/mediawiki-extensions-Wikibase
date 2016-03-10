@@ -88,7 +88,7 @@ class JsonDumpGeneratorTest extends \PHPUnit_Framework_TestCase {
 	protected function makeEntity( EntityId $id ) {
 		if ( $id instanceof ItemId ) {
 			$entity = new Item( $id );
-			$entity->getSiteLinkList()->addNewSiteLink( 'test', 'Foo' );
+			$entity->getSiteLinkList()->addNewSiteLink( 'test', 'Foo' . $id->getSerialization() );
 		} elseif ( $id instanceof PropertyId ) {
 			$entity = new Property( $id, null, 'wibblywobbly' );
 		} else {
