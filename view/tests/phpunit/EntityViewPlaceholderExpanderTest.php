@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use Language;
 use PHPUnit_Framework_TestCase;
 use Title;
 use User;
@@ -11,7 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
-use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\KeyNameLocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -47,12 +45,7 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$language = Language::factory( 'en' );
-
-		$userLanguages = $this->getMock( UserLanguageLookup::class );
-		$userLanguages->expects( $this->any() )
-			->method( 'getAllUserLanguages' )
-			->will( $this->returnValue( array( 'de', 'en', 'ru' ) ) );
+		$termsLanguages = [ 'de', 'en', 'ru' ];
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 
@@ -60,12 +53,10 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 			$templateFactory,
 			$title,
 			$user,
-			$language,
 			$item,
 			$item,
 			$aliasesProvider,
-			$userLanguages,
-			new MediaWikiContentLanguages(),
+			$termsLanguages,
 			$languageNameLookup,
 			new KeyNameLocalizedTextProvider( 'lkt' )
 		);
@@ -138,19 +129,6 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 		$this->assertContains( 'Hauptstadt Russlands', $html );
 
 		$this->assertContains( 'wikibase-entitytermsforlanguageview-ru', $html );
-	}
-
-	/**
-	 * @dataProvider provideEntityAndAliases
-	 */
-	public function testGetExtraUserLanguage( Item $item, AliasesProvider $aliasesProvider = null ) {
-		$itemId = $item->getId();
-
-		$expander = $this->newExpander( $this->newUser( true ), $item, $itemId, $aliasesProvider );
-		$this->assertEquals( array(), $expander->getExtraUserLanguages() );
-
-		$expander = $this->newExpander( $this->newUser(), $item, $itemId, $aliasesProvider );
-		$this->assertEquals( array( 'de', 'ru' ), array_values( $expander->getExtraUserLanguages() ) );
 	}
 
 }
