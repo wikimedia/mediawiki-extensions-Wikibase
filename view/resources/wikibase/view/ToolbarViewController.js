@@ -6,7 +6,7 @@ wikibase.view.ToolbarViewController = ( function( wb, mw ) {
  * through wikibase views using toolbars
  *
  * @class wikibase.view.ToolbarViewController
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @since 0.5
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  * @extends wikibase.view.ViewController

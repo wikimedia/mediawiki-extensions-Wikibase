@@ -16,7 +16,6 @@
 			"preset": "jsduck5",
 			"extra": {
 				"TODO:": "some",
-				"licence": "some",
 				"license": "some",
 				"note:": "some",
 				"option": "some",

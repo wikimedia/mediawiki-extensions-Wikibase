@@ -1,7 +1,7 @@
 /**
  * JavaScript for updating language-aware input placeholders
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  */
 ( function ( $, mw, OO ) {
 	'use strict';

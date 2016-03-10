@@ -3,7 +3,7 @@
  *
  * @since 0.1
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jens Ohlig
  */
 ( function( $, mw, OO, wb ) {

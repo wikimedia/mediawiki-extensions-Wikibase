@@ -10,7 +10,7 @@ $.util = $.util || {};
  *
  * @method jQuery.util.getDirectionality
  * @member jQuery.util
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @param {string} languageCode

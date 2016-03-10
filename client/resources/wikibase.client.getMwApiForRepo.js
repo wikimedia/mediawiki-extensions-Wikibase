@@ -1,5 +1,5 @@
 /**
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Adrian Lang <adrian.lang@wikimedia.de>
  */
 ( function( mw, wb ) {

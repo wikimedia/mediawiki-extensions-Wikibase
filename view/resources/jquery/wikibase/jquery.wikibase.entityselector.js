@@ -48,7 +48,7 @@ function mwMsgOrString( msgKey, string ) {
  * @extends jQuery.ui.suggester
  * @uses jQuery.event.special.eachchange
  * @uses jQuery.ui.ooMenu
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

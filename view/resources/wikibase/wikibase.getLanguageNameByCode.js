@@ -3,7 +3,7 @@
  *
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */

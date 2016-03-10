@@ -1,7 +1,7 @@
 /**
  * Replacing the native MediaWiki search suggestions with the jQuery.wikibase.entitysearch widget.
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function( $, mw ) {

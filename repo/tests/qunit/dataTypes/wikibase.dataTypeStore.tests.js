@@ -1,6 +1,6 @@
 /**
  * @since 0.4
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 
