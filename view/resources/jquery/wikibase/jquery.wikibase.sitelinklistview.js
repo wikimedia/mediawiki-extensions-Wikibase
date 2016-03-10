@@ -362,10 +362,15 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	isInitialValue: function() {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
+			nonEmptyItems = listview.nonEmptyItems(),
 			isInitialValue = true;
 
+		if ( nonEmptyItems.length !== this.options.value.length ) {
+			return false;
+		}
+
 		// Ignore empty values.
-		listview.nonEmptyItems().each( function() {
+		nonEmptyItems.each( function() {
 			var sitelinkview = lia.liInstance( $( this ) );
 			isInitialValue = sitelinkview.isInitialValue();
 			return isInitialValue;
