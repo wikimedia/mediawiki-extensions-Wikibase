@@ -164,6 +164,7 @@ class RdfBuilderTestData {
 		$wiki->setGlobalId( 'enwiki' );
 		$wiki->setLanguageCode( 'en' );
 		$wiki->setLinkPath( 'http://enwiki.acme.test/$1' );
+		$wiki->setGroup( 'wikipedia' );
 		$list['enwiki'] = $wiki;
 
 		$wiki = new Site();

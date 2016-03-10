@@ -216,13 +216,13 @@
       <rdfs:comment>Badge on the Wiki page.</rdfs:comment>
       <rdfs:range rdf:resource="&wikibase;Item"/>
   </owl:ObjectProperty>
- 
+
   <owl:ObjectProperty rdf:about="&wikibase;directClaim">
       <rdfs:label>directClaim</rdfs:label>
       <rdfs:comment>Link between Wikibase Property and direct claim predicate.</rdfs:comment>
       <rdfs:domain rdf:resource="&wikibase;Property"/>
   </owl:ObjectProperty>
- 
+
   <owl:ObjectProperty rdf:about="&wikibase;claim">
       <rdfs:label>claim</rdfs:label>
       <rdfs:comment>Link between Wikibase Property and claim predicate.</rdfs:comment>
@@ -353,6 +353,11 @@
       <rdfs:comment>Time value as datetime literal.</rdfs:comment>
       <rdfs:domain rdf:resource="&wikibase;TimeValue"/>
       <rdfs:range rdf:resource="&xsd;dateTime"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&wikibase;wikiGroup">
+      <rdfs:label>wikiGroup</rdfs:label>
+      <rdfs:comment>Wiki group that the site belongs to.</rdfs:comment>
   </owl:DatatypeProperty>
 
 </rdf:RDF>

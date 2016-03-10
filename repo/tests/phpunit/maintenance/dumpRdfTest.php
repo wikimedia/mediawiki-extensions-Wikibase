@@ -111,7 +111,16 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 						'GUID2'
 					)
 				) )
-			)
+			),
+			new Item(
+				new ItemId( 'Q4' ),
+				null,
+				new SiteLinkList( array(
+					new SiteLink( 'enwiki', 'San Jose' ),
+					new SiteLink( 'dewiki', 'USA' )
+				) ),
+				null
+			),
 		);
 
 		foreach ( $testEntities as $key => $testEntity ) {
