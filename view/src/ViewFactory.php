@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use DataTypes\DataTypeFactory;
 use InvalidArgumentException;
 use SiteStore;
+use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\LanguageFallbackChain;
@@ -71,6 +72,11 @@ class ViewFactory {
 	private $languageDirectionalityLookup;
 
 	/**
+	 * @var NumberLocalizer
+	 */
+	private $numberLocalizer;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteLinkGroups;
@@ -95,6 +101,7 @@ class ViewFactory {
 	 * @param TemplateFactory $templateFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
+	 * @param NumberLocalizer $numberLocalizer
 	 * @param string[] $siteLinkGroups
 	 * @param string[] $specialSiteLinkGroups
 	 * @param string[] $badgeItems
@@ -111,6 +118,7 @@ class ViewFactory {
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
+		NumberLocalizer $numberLocalizer,
 		array $siteLinkGroups = array(),
 		array $specialSiteLinkGroups = array(),
 		array $badgeItems = array()
@@ -130,6 +138,7 @@ class ViewFactory {
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
+		$this->numberLocalizer = $numberLocalizer;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->badgeItems = $badgeItems;
@@ -263,11 +272,16 @@ class ViewFactory {
 			$snakFormatter,
 			$propertyIdFormatter
 		);
+		$claimHtmlGenerator = new ClaimHtmlGenerator(
+			$this->templateFactory,
+			$snakHtmlGenerator,
+			$this->numberLocalizer
+		);
 		$statementGroupListView = new StatementGroupListView(
 			$this->templateFactory,
 			$propertyIdFormatter,
 			$editSectionGenerator,
-			new ClaimHtmlGenerator( $this->templateFactory, $snakHtmlGenerator )
+			$claimHtmlGenerator
 		);
 
 		return new StatementSectionsView(
