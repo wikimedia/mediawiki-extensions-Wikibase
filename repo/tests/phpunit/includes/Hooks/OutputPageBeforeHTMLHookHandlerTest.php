@@ -28,11 +28,14 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return OutputPageBeforeHTMLHookHandler
 	 */
-	private function getHookHandler() {
+	private function getHookHandler( $uiLanguageCode ) {
 		$userLanguageLookup = $this->getMock( 'Wikibase\Lib\UserLanguageLookup' );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
-			->will( $this->returnValue( array( 'de', 'es', 'ru' ) ) );
+			->will( $this->returnValue( [ 'de', 'es', 'ru' ] ) );
+		$userLanguageLookup->expects( $this->once() )
+			->method( 'getAllUserLanguages' )
+			->will( $this->returnValue( array_unique( [ $uiLanguageCode, 'de', 'es', 'ru' ] ) ) );
 
 		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
 		$languageNameLookup->expects( $this->never() )
@@ -41,7 +44,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
 			$userLanguageLookup,
-			new StaticContentLanguages( array( 'en', 'es', 'ru' ) ),
+			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
 			new BasicEntityIdParser(),
 			$this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' ),
 			$languageNameLookup
@@ -54,10 +57,10 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 	 * Integration test mostly testing that things don't fatal/ throw.
 	 */
 	public function testOutputPageBeforeHTMLHookHandler() {
-		$outputPageBeforeHTMLHookHandler = $this->getHookHandler();
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler( $context->getLanguage()->getCode() );
 
 		$html = '';
-		$context = new DerivativeContext( RequestContext::getMain() );
 		$out = new OutputPage( $context );
 		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
 		$out->setProperty(
@@ -71,7 +74,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 		$jsConfigVars = $out->getJsConfigVars();
 		$wbUserSpecifiedLanguages = $jsConfigVars['wbUserSpecifiedLanguages'];
 
-		$this->assertSame( array( 'es', 'ru' ), $wbUserSpecifiedLanguages );
+		$this->assertSame( [ 'es', 'ru' ], $wbUserSpecifiedLanguages );
 	}
 
 }
