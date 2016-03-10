@@ -15,6 +15,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\HtmlSnakFormatterFactory;
 use Wikibase\View\ItemView;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\PropertyView;
 use Wikibase\View\ViewFactory;
 use Wikibase\View\EntityIdFormatterFactory;
@@ -67,6 +68,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			new DataTypeFactory( array() ),
 			$templateFactory,
 			$languageNameLookup,
+			$this->getMock( LanguageDirectionalityLookup::class ),
 			array(),
 			array(),
 			array()

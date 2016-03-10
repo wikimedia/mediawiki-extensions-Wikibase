@@ -2,13 +2,13 @@
 
 namespace Wikibase\View\Tests;
 
-use Language;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\ItemView;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -59,10 +59,11 @@ class ItemViewTest extends EntityViewTest {
 			$this->getMockBuilder( EntityTermsView::class )
 				->disableOriginalConstructor()
 				->getMock(),
+			$this->getMock( LanguageDirectionalityLookup::class ),
 			$this->getMockBuilder( StatementSectionsView::class )
 				->disableOriginalConstructor()
 				->getMock(),
-			$this->getMock( Language::class ),
+			'en',
 			$this->getMockBuilder( SiteLinksView::class )
 				->disableOriginalConstructor()
 				->getMock(),
