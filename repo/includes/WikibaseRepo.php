@@ -61,6 +61,7 @@ use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Lib\MediaWikiNumberLocalizer;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
@@ -1537,6 +1538,7 @@ class WikibaseRepo {
 			TemplateFactory::getDefaultInstance(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new MediaWikiLanguageDirectionalityLookup(),
+			new MediaWikiNumberLocalizer( $wgLang ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' )
