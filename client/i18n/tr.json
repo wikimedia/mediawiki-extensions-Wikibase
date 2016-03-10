@@ -8,11 +8,13 @@
 			"Ömer Berkay",
 			"Stultiwikia",
 			"Mavrikant",
-			"KorkmazO"
+			"KorkmazO",
+			"HakanIST"
 		]
 	},
 	"tooltip-t-wikibase": "Veri havuzundaki ilgili ögeye bağlantı",
-	"wikibase-after-page-move-queued": "Bu sayfa ile ilişkili [$1 Vikiveri öğesi] kısa bir süre içinde otomatik olarak güncellenecektir.",
+	"wikibase-after-page-move-queued": "Bu sayfa ile ilişkili [$1 Vikiveri öğesi] kısa bir süre içinde otomatik olarak güncellenecektir. Unutmayın, bu anında gerçekleşmeyebilir.",
+	"wikibase-after-page-delete-queued": "Bu sayfa ile ilişkili [$1 Vikiveri öğesi] kısa bir süre içinde otomatik olarak güncellenecektir. Unutmayın bu anında gerçekleşmeyebilir.",
 	"wikibase-comment-update": "{{WBREPONAME}} ögesi değiştirildi",
 	"wikibase-comment-sitelink-add": "Dil bağlantısı ekledi: $1",
 	"wikibase-comment-sitelink-remove": "Dil bağlantısı silindi: $1",
