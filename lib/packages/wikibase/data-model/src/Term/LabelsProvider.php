@@ -3,6 +3,9 @@
 namespace Wikibase\DataModel\Term;
 
 /**
+ * Common interface for classes (typically Entities) that contain a TermList, representing labels.
+ * Implementations must guarantee this returns the original, mutable object by reference.
+ *
  * @since 4.1
  *
  * @licence GNU GPL v2+
@@ -11,7 +14,7 @@ namespace Wikibase\DataModel\Term;
 interface LabelsProvider {
 
 	/**
-	 * It is not guaranteed that this method returns the original object.
+	 * This is guaranteed to return the original, mutable object by reference.
 	 *
 	 * @return TermList
 	 */

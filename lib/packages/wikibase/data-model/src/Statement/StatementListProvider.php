@@ -3,7 +3,8 @@
 namespace Wikibase\DataModel\Statement;
 
 /**
- * Interface for classes that contain a StatementList.
+ * Common interface for classes (typically Entities) that contain a StatementList. Implementations
+ * must guarantee this returns the original, mutable object by reference.
  *
  * @since 2.2.0
  *
@@ -13,6 +14,8 @@ namespace Wikibase\DataModel\Statement;
 interface StatementListProvider {
 
 	/**
+	 * This is guaranteed to return the original, mutable object by reference.
+	 *
 	 * @return StatementList
 	 */
 	public function getStatements();
