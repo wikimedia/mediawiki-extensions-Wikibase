@@ -3,7 +3,8 @@
 		"authors": [
 			"Bachounda",
 			"Oldstoneage",
-			"Hussam"
+			"Hussam",
+			"GeekEmad"
 		]
 	},
 	"tooltip-t-wikibase": "الوصل بعنصر مرتبط في غاراج المعلومات",
@@ -17,5 +18,5 @@
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تبدبل {{WBREPONAME}}",
 	"wikibase-unconnectedpages-submit": "وري الصفحة",
-	"wikibase-otherprojects": "مشارع وحدخرة"
+	"wikibase-otherprojects": "في مشارع اخرى"
 }

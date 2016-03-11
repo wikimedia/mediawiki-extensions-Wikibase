@@ -50,7 +50,7 @@
 	"wikibase-linkitem-confirmitem-button": "Confirmar",
 	"wikibase-linkitem-not-loggedin-title": "Necessita de estar autenticado",
 	"wikibase-linkitem-not-loggedin": "Precisa de estar autenticado nesta wiki e no [$1 repositório central de dados] para usar esse recurso.",
-	"wikibase-linkitem-success-link": "As páginas foram ligadas com êxito. Pode encontrar o item que contém as ligações no nosso [$1 repositório central de dados].",
+	"wikibase-linkitem-success-link": "As páginas foram ligadas. Pode encontrar o item que contém as ligações no nosso [$1 repositório central de dados].",
 	"wikibase-property-notfound": "Propriedade não encontrada: $1",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ocultar",
