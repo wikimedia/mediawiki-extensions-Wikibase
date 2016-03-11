@@ -94,7 +94,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 			'label' => $labels
 		) );
 
-		$this->assertEquals( $labels, $property->getLabels()->toTextArray() );
+		$this->assertEquals( $labels, $property->getFingerprint()->getLabels()->toTextArray() );
 	}
 
 	public function TermListProvider() {
@@ -123,7 +123,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 			'description' => $descriptions
 		) );
 
-		$this->assertEquals( $descriptions, $property->getDescriptions()->toTextArray() );
+		$this->assertEquals( $descriptions, $property->getFingerprint()->getDescriptions()->toTextArray() );
 	}
 
 	public function testGivenInvalidAliases_exceptionIsThrown() {
@@ -141,7 +141,7 @@ class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
 			'aliases' => $aliases
 		) );
 
-		$this->assertEquals( $aliases, $property->getAliasGroups()->toTextArray() );
+		$this->assertEquals( $aliases, $property->getFingerprint()->getAliasGroups()->toTextArray() );
 	}
 
 	public function aliasesListProvider() {

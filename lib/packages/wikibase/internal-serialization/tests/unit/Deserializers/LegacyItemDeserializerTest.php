@@ -174,7 +174,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
 		$item = $this->itemFromSerialization( array( 'label' => $labels ) );
 
-		$this->assertEquals( $labels, $item->getLabels()->toTextArray() );
+		$this->assertEquals( $labels, $item->getFingerprint()->getLabels()->toTextArray() );
 	}
 
 	public function TermListProvider() {
@@ -199,7 +199,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
 		$item = $this->itemFromSerialization( array( 'description' => $descriptions ) );
 
-		$this->assertEquals( $descriptions, $item->getDescriptions()->toTextArray() );
+		$this->assertEquals( $descriptions, $item->getFingerprint()->getDescriptions()->toTextArray() );
 	}
 
 	public function testGivenInvalidAliases_exceptionIsThrown() {
@@ -213,7 +213,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenAliases_getAliasesReturnsThem( array $aliases ) {
 		$item = $this->itemFromSerialization( array( 'aliases' => $aliases ) );
 
-		$this->assertEquals( $aliases, $item->getAliasGroups()->toTextArray() );
+		$this->assertEquals( $aliases, $item->getFingerprint()->getAliasGroups()->toTextArray() );
 	}
 
 	public function aliasesListProvider() {
