@@ -114,7 +114,7 @@ QUnit.test( 'Create and destroy with initial value', function( assert ) {
 	sitelinklistview.destroy();
 
 	assert.ok(
-		$sitelinklistview.data( 'sitelinkview' ) === undefined,
+		$sitelinklistview.data( 'sitelinklistview' ) === undefined,
 		'Destroyed widget.'
 	);
 } );
@@ -179,7 +179,7 @@ QUnit.test( 'isValid() with invalid sitelinkview', function( assert ) {
 } );
 
 QUnit.test( 'isInitialValue()', function( assert ) {
-	assert.expect( 4 );
+	assert.expect( 5 );
 	var $sitelinklistview = createSitelinklistview( {
 			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
 		} ),
@@ -191,26 +191,35 @@ QUnit.test( 'isInitialValue()', function( assert ) {
 		'Verified isInitialValue() returning TRUE.'
 	);
 
-	var $sitelinkview = listview.addItem( new wb.datamodel.SiteLink( 'aawiki', 'aawiki-page' ) );
+	var $sitelinkview = listview.items().first(),
+		lia = listview.listItemAdapter(),
+		sitelink = lia.liInstance( $sitelinkview ).value();
+	listview.removeItem( $sitelinkview );
 
 	assert.notOk(
 		sitelinklistview.isInitialValue(),
-		'FALSE after adding another site link'
+		'FALSE after removing an item.'
+	);
+
+	listview.addItem( sitelink );
+
+	assert.ok(
+		sitelinklistview.isInitialValue(),
+		'TRUE after resetting to initial state.'
+	);
+
+	$sitelinkview = listview.addItem( new wb.datamodel.SiteLink( 'aawiki', 'aawiki-page' ) );
+
+	assert.notOk(
+		sitelinklistview.isInitialValue(),
+		'FALSE after adding an item, even if the added item is unchanged.'
 	);
 
 	listview.removeItem( $sitelinkview );
 
 	assert.ok(
 		sitelinklistview.isInitialValue(),
-		'TRUE after resetting to initial value.'
-	);
-
-	var items = listview.items();
-	listview.removeItem( $( items[0] ) );
-
-	assert.notOk(
-		sitelinklistview.isInitialValue(),
-		'FALSE after removing one of the original site link values'
+		'TRUE after resetting to initial state.'
 	);
 } );
 
