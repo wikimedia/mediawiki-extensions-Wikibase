@@ -54,7 +54,7 @@ class DeserializerFactory {
 	}
 
 	/**
-	 * Returns a Deserializer that can deserialize Entity objects.
+	 * Returns a Deserializer that can deserialize Item and Property objects.
 	 *
 	 * @return DispatchableDeserializer
 	 */

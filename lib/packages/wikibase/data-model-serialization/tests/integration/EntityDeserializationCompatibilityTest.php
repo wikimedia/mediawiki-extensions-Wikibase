@@ -48,7 +48,7 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf(
 			'Wikibase\DataModel\Entity\EntityDocument',
 			$entity,
-			'Deserialization of ' . $fileName . ' should lead to an Entity instance'
+			'Deserialization of ' . $fileName . ' should lead to an EntityDocument instance'
 		);
 	}
 
