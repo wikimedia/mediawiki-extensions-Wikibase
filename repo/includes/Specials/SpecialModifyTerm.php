@@ -126,10 +126,6 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			return false;
 		}
 
-		if ( !( $this->entityRevision->getEntity() instanceof FingerprintProvider ) ) {
-			return false;
-		}
-
 		try {
 			$this->checkTermChangePermissions( $this->entityRevision->getEntity() );
 		} catch ( PermissionsError $e ) {
@@ -175,14 +171,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 * @throws InvalidArgumentException
 	 */
 	private function checkTermChangePermissions( EntityDocument $entity ) {
-		if ( $entity instanceof Item ) {
-			$type = 'item';
-		} elseif ( $entity instanceof Property ) {
-			$type = 'property';
-		} else {
-			throw new InvalidArgumentException( 'Unexpected Entity type when checking special page term change permissions' );
-		}
-		$restriction = $type . '-term';
+		$restriction = $entity->getType() . '-term';
+
 		if ( !$this->getUser()->isAllowed( $restriction ) ) {
 			throw new PermissionsError( $restriction );
 		}
@@ -273,12 +263,12 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		}
 	}
 
-	private function setValueIfNull( FingerprintProvider $fingerprintProvider = null ) {
+	private function setValueIfNull( EntityDocument $entity = null ) {
 		if ( $this->value === null ) {
-			if ( $fingerprintProvider === null ) {
+			if ( $entity === null ) {
 				$this->value = '';
 			} else {
-				$this->value = $this->getValue( $fingerprintProvider->getFingerprint(), $this->languageCode );
+				$this->value = $this->getValue( $entity, $this->languageCode );
 			}
 		}
 	}
@@ -297,12 +287,12 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 	 *
 	 * @since 0.5
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
-	abstract protected function getValue( Fingerprint $fingerprint, $languageCode );
+	abstract protected function getValue( EntityDocument $entity, $languageCode );
 
 	/**
 	 * Setting the value of the entity name by the given language
