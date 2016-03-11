@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOpException;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
 
@@ -152,6 +153,14 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( ChangeOpException::class );
 		$changeOpAliases->apply( $entity );
+	}
+
+	public function testApplyNoAliasesProvider() {
+		$changeOp = new ChangeOpAliases( 'en', array( 'Foo' ), 'set', $this->getTermValidatorFactory() );
+		$entity = $this->getMock( EntityDocument::class );
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$changeOp->apply( $entity );
 	}
 
 }

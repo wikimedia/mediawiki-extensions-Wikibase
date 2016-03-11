@@ -152,4 +152,12 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $summaryExpectedLanguage, $summary->getLanguageCode() );
 	}
 
+	public function testApplyNoLabelsProvider() {
+		$changeOp = new ChangeOpLabel( 'en', 'Foo', $this->getTermValidatorFactory() );
+		$entity = $this->getMock( EntityDocument::class );
+
+		$this->setExpectedException( InvalidArgumentException::class );
+		$changeOp->apply( $entity );
+	}
+
 }

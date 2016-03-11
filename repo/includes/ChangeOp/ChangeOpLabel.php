@@ -7,6 +7,8 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 
@@ -61,15 +63,15 @@ class ChangeOpLabel extends ChangeOpBase {
 	}
 
 	/**
-	 * Applies the change to the fingerprint
+	 * Applies the change to the labels
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param TermList $labels
 	 */
-	private function updateFingerprint( Fingerprint $fingerprint ) {
+	private function updateLabels( TermList $labels ) {
 		if ( $this->label === null ) {
-			$fingerprint->removeLabel( $this->languageCode );
+			$labels->removeByLanguage( $this->languageCode );
 		} else {
-			$fingerprint->getLabels()->setTextForLanguage( $this->languageCode, $this->label );
+			$labels->setTextForLanguage( $this->languageCode, $this->label );
 		}
 	}
 
@@ -82,15 +84,15 @@ class ChangeOpLabel extends ChangeOpBase {
 	 * @throws InvalidArgumentException
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		if ( !( $entity instanceof LabelsProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
 		}
 
-		$fingerprint = $entity->getFingerprint();
+		$labels = $entity->getLabels();
 
-		if ( $fingerprint->getLabels()->hasTermForLanguage( $this->languageCode ) ) {
+		if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
 			if ( $this->label === null ) {
-				$oldLabel = $fingerprint->getLabel( $this->languageCode )->getText();
+				$oldLabel = $labels->getByLanguage( $this->languageCode )->getText();
 				$this->updateSummary( $summary, 'remove', $this->languageCode, $oldLabel );
 			} else {
 				$this->updateSummary( $summary, 'set', $this->languageCode, $this->label );
@@ -99,7 +101,7 @@ class ChangeOpLabel extends ChangeOpBase {
 			$this->updateSummary( $summary, 'add', $this->languageCode, $this->label );
 		}
 
-		$this->updateFingerprint( $fingerprint );
+		$this->updateLabels( $labels );
 	}
 
 	/**
@@ -111,13 +113,12 @@ class ChangeOpLabel extends ChangeOpBase {
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		if ( !( $entity instanceof LabelsProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
 		}
 
 		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getLabelValidator( $entity->getType() );
-		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
 		// check that the language is valid
 		$result = $languageValidator->validate( $this->languageCode );
@@ -131,15 +132,20 @@ class ChangeOpLabel extends ChangeOpBase {
 			return $result;
 		}
 
-		// Check if the new fingerprint of the entity is valid (e.g. if the label is unique)
-		$fingerprint = unserialize( serialize( $entity->getFingerprint() ) );
-		$this->updateFingerprint( $fingerprint );
+		// TODO: Don't bind against Fingerprint here, rather use general builders for validators
+		if ( $entity instanceof FingerprintProvider ) {
+			$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
-		$result = $fingerprintValidator->validateFingerprint(
-			$fingerprint,
-			$entity->getId(),
-			array( $this->languageCode )
-		);
+			// Check if the new fingerprint of the entity is valid (e.g. if the label is unique)
+			$fingerprint = clone $entity->getFingerprint();
+			$this->updateLabels( $fingerprint->getLabels() );
+
+			$result = $fingerprintValidator->validateFingerprint(
+				$fingerprint,
+				$entity->getId(),
+				array( $this->languageCode )
+			);
+		}
 
 		return $result;
 	}
