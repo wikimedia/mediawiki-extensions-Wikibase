@@ -6,8 +6,9 @@ use ApiMain;
 use Wikibase\ChangeOp\ChangeOpLabel;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 
 /**
  * API module to set the label for a Wikibase entity.
@@ -50,9 +51,15 @@ class SetLabel extends ModifyTerm {
 
 	/**
 	 * @see ModifyEntity::modifyEntity
+	 *
+	 * @param EntityDocument $entity
+	 * @param array $params
+	 * @param int $baseRevId
+	 *
+	 * @return Summary
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
+		if ( !( $entity instanceof LabelsProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-supported' );
 		}
 
@@ -62,9 +69,11 @@ class SetLabel extends ModifyTerm {
 		$changeOp = $this->getChangeOp( $params );
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
+		$labels = $entity->getLabels();
 		$resultBuilder = $this->getResultBuilder();
-		if ( $entity->getFingerprint()->hasLabel( $language ) ) {
-			$termList = $entity->getFingerprint()->getLabels()->getWithLanguages( array( $language ) );
+
+		if ( $labels->hasTermForLanguage( $language ) ) {
+			$termList = $labels->getWithLanguages( array( $language ) );
 			$resultBuilder->addLabels( $termList, 'entity' );
 		} else {
 			$resultBuilder->addRemovedLabel( $language, 'entity' );
