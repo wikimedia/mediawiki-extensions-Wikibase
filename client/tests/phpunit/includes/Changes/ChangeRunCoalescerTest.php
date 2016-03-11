@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\TestChanges;
@@ -161,18 +160,17 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		);
 
 		$lookup = $this->getEntityRevisionLookup();
-		$entityFactory = new EntityFactory( $entityClasses );
 
 		$itemId = new ItemId( $objectId );
 
 		if ( $revA === 0 ) {
-			$oldEntity = $entityFactory->newEmpty( Item::ENTITY_TYPE );
+			$oldEntity = new Item();
 		} else {
 			$oldEntity = $lookup->getEntityRevision( $itemId, $revA )->getEntity();
 		}
 
 		if ( $revB === 0 ) {
-			$newEntity = $entityFactory->newEmpty( Item::ENTITY_TYPE );
+			$newEntity = new Item();
 		} else {
 			$newEntity = $lookup->getEntityRevision( $itemId, $revB )->getEntity();
 		}

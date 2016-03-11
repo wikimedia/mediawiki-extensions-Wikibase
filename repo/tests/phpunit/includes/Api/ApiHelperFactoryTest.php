@@ -23,7 +23,6 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
 		$exceptionLocalizer = $this->getMock( 'Wikibase\Repo\Localizer\ExceptionLocalizer' );
 		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$summaryFormatter = $this->getMockBuilder( 'Wikibase\SummaryFormatter' )
 			->disableOriginalConstructor()->getMock();
 		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
@@ -34,7 +33,6 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 			$titleLookup,
 			$exceptionLocalizer,
 			$dataTypeLookup,
-			$entityFactory,
 			new HashSiteStore(),
 			$summaryFormatter,
 			$entityRevisionLookup,
