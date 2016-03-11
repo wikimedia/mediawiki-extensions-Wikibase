@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_61e836b0",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-11T14:29:01Z",
+      "side": 1,
+      "message": "I think these two lines can be in the provider. Can you think of a reason why they are here?",
+      "revId": "f5395f3ef3a68330b716871868c577045c641dcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
