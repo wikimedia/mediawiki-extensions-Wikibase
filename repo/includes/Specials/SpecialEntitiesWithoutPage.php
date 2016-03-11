@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use HTMLForm;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Repo\Store\EntityPerPage;
 
@@ -49,9 +48,9 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private $entityPerPage;
 
 	/**
-	 * @var EntityFactory
+	 * @var string[]
 	 */
-	private $entityFactory;
+	private $entityTypes;
 
 	/**
 	 * @var ContentLanguages
@@ -63,7 +62,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @param string $termType One of the TermIndexEntry::TYPE_... constants.
 	 * @param string $legendMsg
 	 * @param EntityPerPage $entityPerPage
-	 * @param EntityFactory $entityFactory
+	 * @param string[] $entityTypes
 	 * @param ContentLanguages $termsLanguages
 	 */
 	public function __construct(
@@ -71,7 +70,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$termType,
 		$legendMsg,
 		EntityPerPage $entityPerPage,
-		EntityFactory $entityFactory,
+		array $entityTypes,
 		ContentLanguages $termsLanguages
 	) {
 		parent::__construct( $name );
@@ -79,7 +78,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$this->termType = $termType;
 		$this->legendMsg = $legendMsg;
 		$this->entityPerPage = $entityPerPage;
-		$this->entityFactory = $entityFactory;
+		$this->entityTypes = $entityTypes;
 		$this->termsLanguages = $termsLanguages;
 	}
 
@@ -129,7 +128,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		if ( $this->type === '' ) {
 			$this->type = null;
 		}
-		if ( $this->type !== null && !$this->entityFactory->isEntityType( $this->type ) ) {
+		if ( $this->type !== null && !in_array( $this->type, $this->entityTypes ) ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-entitieswithoutlabel-invalid-type', $this->type )->parse() );
 			$this->type = null;
 		}
@@ -142,7 +141,8 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$options = array(
 			$this->msg( 'wikibase-entitieswithoutlabel-label-alltypes' )->text() => ''
 		);
-		foreach ( $this->entityFactory->getEntityTypes() as $type ) {
+
+		foreach ( $this->entityTypes as $type ) {
 			// Messages: wikibase-entity-item, wikibase-entity-property, wikibase-entity-query
 			$options[$this->msg( 'wikibase-entity-' . $type )->text()] = $type;
 		}
