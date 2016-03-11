@@ -97,10 +97,6 @@ This library comes with a set up PHPUnit tests that cover all non-trivial code. 
 tests using the PHPUnit configuration file found in the root directory.
 
     phpunit
-    
-By default the slow tests are not run. You can run them with
-
-    phpunit --group slow
 
 ## Authors
 

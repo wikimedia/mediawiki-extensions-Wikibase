@@ -33,7 +33,6 @@
 		"data-values/serialization": "~1.0"
 	},
 	"require-dev": {
-		"data-values/common": "~0.3.0|~0.2.0",
 		"data-values/geo": "~1.0|~0.1",
 		"data-values/number": "~0.2",
 		"data-values/time": "~0.2"
@@ -54,8 +53,7 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
-			"phpunit",
-			"phpunit --group slow"
+			"phpunit"
 		],
 		"ci": [
 			"composer test"

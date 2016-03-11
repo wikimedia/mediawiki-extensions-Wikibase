@@ -11,8 +11,6 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 
 /**
- * @group slow
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -27,13 +25,9 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(
 				array(
-					'boolean' => 'DataValues\BooleanValue',
-					'number' => 'DataValues\NumberValue',
 					'string' => 'DataValues\StringValue',
 					'unknown' => 'DataValues\UnknownValue',
 					'globecoordinate' => 'DataValues\GlobeCoordinateValue',
-					'monolingualtext' => 'DataValues\MonolingualTextValue',
-					'multilingualtext' => 'DataValues\MultilingualTextValue',
 					'quantity' => 'DataValues\QuantityValue',
 					'time' => 'DataValues\TimeValue',
 					'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
@@ -52,7 +46,7 @@ class EntityDeserializationCompatibilityTest extends \PHPUnit_Framework_TestCase
 		$entity = $this->deserializer->deserialize( $serialization );
 
 		$this->assertInstanceOf(
-			'Wikibase\DataModel\Entity\Entity',
+			'Wikibase\DataModel\Entity\EntityDocument',
 			$entity,
 			'Deserialization of ' . $fileName . ' should lead to an Entity instance'
 		);
