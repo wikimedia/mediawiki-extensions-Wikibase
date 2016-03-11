@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo\Specials;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Summary;
 
 /**
@@ -28,6 +30,19 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	}
 
 	/**
+	 * @see SpecialModifyTerm::validateInput
+	 *
+	 * @return bool
+	 */
+	protected function validateInput() {
+		if ( !parent::validateInput() ) {
+			return false;
+		}
+
+		return $this->entityRevision->getEntity() instanceof LabelsProvider;
+	}
+
+	/**
 	 * @see SpecialSetEntity::getPostedValue()
 	 *
 	 * @since 0.4
@@ -43,15 +58,23 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
-	protected function getValue( Fingerprint $fingerprint, $languageCode ) {
-		return $fingerprint->hasLabel( $languageCode )
-			? $fingerprint->getLabel( $languageCode )->getText()
-			: '';
+	protected function getValue( EntityDocument $entity, $languageCode ) {
+		if ( !( $entity instanceof LabelsProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
+		}
+
+		$labels = $entity->getLabels();
+
+		if ( $labels->hasTermForLanguage( $languageCode ) ) {
+			return $labels->getByLanguage( $languageCode )->getText();
+		}
+
+		return '';
 	}
 
 	/**

@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Specials;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Summary;
 
@@ -28,6 +30,19 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	}
 
 	/**
+	 * @see SpecialModifyTerm::validateInput
+	 *
+	 * @return bool
+	 */
+	protected function validateInput() {
+		if ( !parent::validateInput() ) {
+			return false;
+		}
+
+		return $this->entityRevision->getEntity() instanceof DescriptionsProvider;
+	}
+
+	/**
 	 * @see SpecialSetEntity::getPostedValue()
 	 *
 	 * @since 0.4
@@ -43,15 +58,24 @@ class SpecialSetDescription extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getValue( Fingerprint $fingerprint, $languageCode ) {
-		return $fingerprint->hasDescription( $languageCode ) ?
-			$fingerprint->getDescription( $languageCode )->getText()
-			: '';
+	protected function getValue( EntityDocument $entity, $languageCode ) {
+		if ( !( $entity instanceof DescriptionsProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a DescriptionsProvider' );
+		}
+
+		$descriptions = $entity->getDescriptions();
+
+		if ( $descriptions->hasTermForLanguage( $languageCode ) ) {
+			return $descriptions->getByLanguage( $languageCode )->getText();
+		}
+
+		return '';
 	}
 
 	/**

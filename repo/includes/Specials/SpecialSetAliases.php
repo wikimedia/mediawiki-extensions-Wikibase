@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Summary;
@@ -30,6 +31,19 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	}
 
 	/**
+	 * @see SpecialModifyTerm::validateInput
+	 *
+	 * @return bool
+	 */
+	protected function validateInput() {
+		if ( !parent::validateInput() ) {
+			return false;
+		}
+
+		return $this->entityRevision->getEntity() instanceof AliasesProvider;
+	}
+
+	/**
 	 * @see SpecialSetEntity::getPostedValue()
 	 *
 	 * @since 0.4
@@ -45,14 +59,21 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 *
 	 * @since 0.4
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string
 	 */
-	protected function getValue( Fingerprint $fingerprint, $languageCode ) {
-		if ( $fingerprint->hasAliasGroup( $languageCode ) ) {
-			return implode( '|', $fingerprint->getAliasGroup( $languageCode )->getAliases() );
+	protected function getValue( EntityDocument $entity, $languageCode ) {
+		if ( !( $entity instanceof AliasesProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be an AliasesProvider' );
+		}
+
+		$aliases = $entity->getAliasGroups();
+
+		if ( $aliases->hasGroupForLanguage( $languageCode ) ) {
+			return implode( '|', $aliases->getByLanguage( $languageCode )->getAliases() );
 		}
 
 		return '';
@@ -71,14 +92,14 @@ class SpecialSetAliases extends SpecialModifyTerm {
 	 * @return Summary
 	 */
 	protected function setValue( EntityDocument $entity, $languageCode, $value ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		if ( !( $entity instanceof AliasesProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be an AliasesProvider' );
 		}
 
 		$summary = new Summary( 'wbsetaliases' );
 
 		if ( $value === '' ) {
-			$aliases = $entity->getFingerprint()->getAliasGroup( $languageCode )->getAliases();
+			$aliases = $entity->getAliasGroups()->getByLanguage( $languageCode )->getAliases();
 			$changeOp = $this->termChangeOpFactory->newRemoveAliasesOp( $languageCode, $aliases );
 		} else {
 			$changeOp = $this->termChangeOpFactory->newSetAliasesOp( $languageCode, explode( '|', $value ) );
