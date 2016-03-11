@@ -1177,6 +1177,20 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return string[]
+	 */
+	public function getEnabledEntityTypes() {
+		$entityTypeByContentModel = array_flip( $this->getContentModelMappings() );
+
+		return array_map(
+			function( $contentModel ) use ( $entityTypeByContentModel ) {
+				return $entityTypeByContentModel[$contentModel];
+			},
+			array_keys( $this->settings->getSetting( 'entityNamespaces' ) )
+		);
+	}
+
+	/**
 	 * @return EntityContentDataCodec
 	 */
 	public function getEntityContentDataCodec() {
