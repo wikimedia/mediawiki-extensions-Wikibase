@@ -6,7 +6,7 @@
 	],
 	"url": "https://github.com/wmde/WikibaseDataModelSerialization",
 	"description": "Serializers and deserializers for the Wikibase DataModel",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"type": "wikibase",
 	"license-name": "GPL-2.0+",
 	"manifest_version": 1

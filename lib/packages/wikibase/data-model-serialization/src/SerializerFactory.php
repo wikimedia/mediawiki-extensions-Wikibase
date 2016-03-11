@@ -94,7 +94,7 @@ class SerializerFactory {
 	}
 
 	/**
-	 * Returns a Serializer that can serialize Entity objects.
+	 * Returns a Serializer that can serialize Item and Property objects.
 	 *
 	 * @return Serializer
 	 */
