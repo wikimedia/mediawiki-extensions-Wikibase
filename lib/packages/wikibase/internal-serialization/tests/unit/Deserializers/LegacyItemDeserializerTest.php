@@ -115,6 +115,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param string $serialization
+	 *
 	 * @return Item
 	 */
 	private function itemFromSerialization( $serialization ) {
@@ -173,7 +174,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenLabels_getLabelsReturnsThem( array $labels ) {
 		$item = $this->itemFromSerialization( array( 'label' => $labels ) );
 
-		$this->assertEquals( $labels, $item->getLabels() );
+		$this->assertEquals( $labels, $item->getLabels()->toTextArray() );
 	}
 
 	public function TermListProvider() {
@@ -198,7 +199,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenDescriptions_getDescriptionsReturnsThem( array $descriptions ) {
 		$item = $this->itemFromSerialization( array( 'description' => $descriptions ) );
 
-		$this->assertEquals( $descriptions, $item->getDescriptions() );
+		$this->assertEquals( $descriptions, $item->getDescriptions()->toTextArray() );
 	}
 
 	public function testGivenInvalidAliases_exceptionIsThrown() {
@@ -212,7 +213,7 @@ class LegacyItemDeserializerTest extends \PHPUnit_Framework_TestCase {
 	public function testGivenAliases_getAliasesReturnsThem( array $aliases ) {
 		$item = $this->itemFromSerialization( array( 'aliases' => $aliases ) );
 
-		$this->assertEquals( $aliases, $item->getAllAliases() );
+		$this->assertEquals( $aliases, $item->getAliasGroups()->toTextArray() );
 	}
 
 	public function aliasesListProvider() {
