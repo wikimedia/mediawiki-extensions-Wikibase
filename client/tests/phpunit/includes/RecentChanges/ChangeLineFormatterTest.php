@@ -37,7 +37,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		// these are required because Linker is used in ChangeLineFormatter
 		// @todo eliminate Linker or at least use of Linker in Wikibase :)
 		$this->setMwGlobals( array(
-			'wgLang' => Language::factory( 'en' ),
 			'wgScriptPath' => '',
 			'wgScript' => '/index.php',
 			'wgArticlePath' => '/wiki/$1'

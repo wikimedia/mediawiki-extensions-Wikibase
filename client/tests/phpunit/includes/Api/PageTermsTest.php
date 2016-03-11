@@ -6,7 +6,7 @@ use ApiMain;
 use ApiPageSet;
 use ApiQuery;
 use FauxRequest;
-use Language;
+use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
 use Wikibase\Client\Api\PageTerms;
@@ -28,14 +28,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class PageTermsTest extends \MediaWikiTestCase {
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setMwGlobals( 'wgLang', Language::factory( 'en' ) );
-		$this->setMwGlobals( 'wgContLang', Language::factory( 'en' ) );
-	}
+class PageTermsTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param array $params

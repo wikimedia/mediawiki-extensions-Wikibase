@@ -26,9 +26,7 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( array(
-			'wgLang' => Language::factory( 'qqx' ),
-		) );
+		$this->setUserLang( 'qqx' );
 	}
 
 	/**

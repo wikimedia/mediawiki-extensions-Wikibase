@@ -28,9 +28,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->setMwGlobals( array(
-			'wgLang' => Language::factory( 'de' )
-		) );
+		$this->setUserLang( 'de' );
 	}
 
 	protected function getRepoLinker() {
