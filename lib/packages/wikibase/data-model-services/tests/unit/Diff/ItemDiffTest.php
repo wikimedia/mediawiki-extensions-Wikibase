@@ -7,6 +7,8 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\SiteLink;
 
@@ -27,11 +29,6 @@ class ItemDiffTest extends EntityDiffOldTest {
 	public function provideApplyData() {
 		$originalTests = $this->generateApplyData( Item::ENTITY_TYPE );
 		$tests = array();
-
-		/**
-		 * @var Item $a
-		 * @var Item $b
-		 */
 
 		// add link ------------------------------
 		$a = new Item();
@@ -172,13 +169,13 @@ class ItemDiffTest extends EntityDiffOldTest {
 	 * @dataProvider provideApplyData
 	 */
 	public function testApply( Item $a, Item $b ) {
-		parent::testApply( $a, $b );
+		$differ = new EntityDiffer();
+		$patcher = new EntityPatcher();
+		$patcher->patchEntity( $a, $differ->diffEntities( $a, $b ) );
 
-		/**
-		 * @var Item $a
-		 * @var Item $b
-		 * @var SiteLink[] $siteLinks
-		 */
+		$this->assertEquals( $b, $a );
+
+		/** @var SiteLink[] $siteLinks */
 		$siteLinks = array_merge(
 			$a->getSiteLinkList()->toArray(),
 			$b->getSiteLinkList()->toArray()
@@ -221,8 +218,6 @@ class ItemDiffTest extends EntityDiffOldTest {
 
 	/**
 	 * @dataProvider isEmptyProvider
-	 * @param Diff[] $diffOps
-	 * @param bool $isEmpty
 	 */
 	public function testIsEmpty( array $diffOps, $isEmpty ) {
 		$diff = new ItemDiff( $diffOps );

@@ -29,7 +29,7 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public static function generateApplyData( $entityType ) {
+	protected function generateApplyData( $entityType ) {
 		$tests = array();
 
 		// #0: add label
@@ -124,22 +124,6 @@ abstract class EntityDiffOldTest extends \PHPUnit_Framework_TestCase {
 
 		$tests[] = array( $a, $b );
 		return $tests;
-	}
-
-	/**
-	 * @return array[]
-	 */
-	public abstract function provideApplyData();
-
-	/**
-	 * @dataProvider provideApplyData
-	 */
-	public function testApply( Item $a, Item $b ) {
-		$differ = new EntityDiffer();
-		$patcher = new EntityPatcher();
-
-		$patcher->patchEntity( $a, $differ->diffEntities( $a, $b ) );
-		$this->assertTrue( $a->getFingerprint()->equals( $b->getFingerprint() ) );
 	}
 
 	public function provideConflictDetection() {

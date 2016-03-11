@@ -1,5 +1,9 @@
 # Wikibase DataModel Services release notes
 
+## Version 3.5.0 (2016-03-11)
+
+* Added compatibility with Wikibase DataModel 6.x
+
 ## Version 3.4.0 (2016-02-22)
 
 * Added `RestrictedEntityLookup::reset`
