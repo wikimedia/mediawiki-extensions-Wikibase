@@ -6,7 +6,7 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\Entity;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -22,7 +22,7 @@ class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider entityProvider
 	 */
-	public function testEntitySerializationRoundtrips( Entity $entity ) {
+	public function testEntitySerializationRoundtrips( EntityDocument $entity ) {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer(),
@@ -41,17 +41,13 @@ class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
 		$entities[] = array( $entity );
 
 		$entity = new Item();
-		$entity->setLabels( array(
-			'en' => 'Nyan Cat',
-			'fr' => 'Nyan Cat'
-		) );
+		$entity->setLabel( 'en', 'Nyan Cat' );
+		$entity->setLabel( 'fr', 'Nyan Cat' );
 		$entities[] = array( $entity );
 
 		$entity = new Item();
-		$entity->setDescriptions( array(
-			'en' => 'A Nyan Cat',
-			'fr' => 'A Nyan Cat'
-		) );
+		$entity->setDescription( 'en', 'Nyan Cat' );
+		$entity->setDescription( 'fr', 'Nyan Cat' );
 		$entities[] = array( $entity );
 
 		$entity = new Item();
