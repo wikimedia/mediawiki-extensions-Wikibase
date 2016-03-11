@@ -10,6 +10,7 @@ use Wikibase\ChangeOp\ChangeOpValidationException;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\MessageException;
@@ -75,7 +76,8 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
+			$wikibaseRepo->newEditEntityFactory( $this->getContext() ),
+			$wikibaseRepo->getEntityIdParser()
 		);
 	}
 
@@ -93,14 +95,16 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityTitleLookup $entityTitleLookup,
 		SiteStore $siteStore,
-		EditEntityFactory $editEntityFactory
+		EditEntityFactory $editEntityFactory,
+		EntityIdParser $entityIdParser
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->setSpecialWikibaseRepoPageServices(
 			$summaryFormatter,
 			$entityTitleLookup,
 			$siteStore,
-			$editEntityFactory
+			$editEntityFactory,
+			$entityIdParser
 		);
 	}
 

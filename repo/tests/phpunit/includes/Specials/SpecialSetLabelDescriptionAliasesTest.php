@@ -8,10 +8,18 @@ use Status;
 use ValueValidators\Result;
 use WebRequest;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\EditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\StaticContentLanguages;
@@ -65,7 +73,8 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getEntityStore(),
 				$this->getEntityPermissionChecker(),
 				$this->getMockEditFitlerHookRunner()
-			)
+			),
+			$this->getIdParser()
 		);
 
 		return $page;
@@ -399,4 +408,74 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->assertTrue( $expected->equals( $actual ), 'Fingerprint mismatches' );
 	}
 
+	public function testNoProvider() {
+		$entity = $this->getMock( EntityDocument::class );
+		$entity->method( 'getId' )->willReturn( new ItemId( 'Q123' ) );
+		$entity->method( 'copy' )->willReturn( $entity );
+
+		$this->mockRepository->putEntity( $entity );
+		list( $output, ) = $this->executeSpecialPage( 'Q123' );
+
+		$this->assertNotRegExp( '/<input[^>]*name="label"/', $output );
+		$this->assertNotRegExp( '/<input[^>]*name="description"/', $output );
+		$this->assertNotRegExp( '/<input[^>]*name="aliases"/', $output );
+	}
+
+	public function testLabelsProvider() {
+		$entity = $this->getMock( EntityWithLabels::class );
+		$entity->method( 'getId' )->willReturn( new ItemId( 'Q123' ) );
+		$entity->method( 'copy' )->willReturn( $entity );
+
+		$labels = new TermList( array( new Term( 'en', 'Foo' ) ) );
+		$entity->method( 'getLabels' )->willReturn( $labels );
+
+		$this->mockRepository->putEntity( $entity );
+		list( $output, ) = $this->executeSpecialPage( 'Q123' );
+
+		$this->assertRegExp( '/<input[^>]*value="Foo"[^>]*name="label"/', $output );
+		$this->assertNotRegExp( '/<input[^>]*name="description"/', $output );
+		$this->assertNotRegExp( '/<input[^>]*name="aliases"/', $output );
+	}
+
+	public function testDescriptionsProvider() {
+		$entity = $this->getMock( EntityWithDescriptions::class );
+		$entity->method( 'getId' )->willReturn( new ItemId( 'Q123' ) );
+		$entity->method( 'copy' )->willReturn( $entity );
+
+		$descriptions = new TermList( array( new Term( 'en', 'Foo' ) ) );
+		$entity->method( 'getDescriptions' )->willReturn( $descriptions );
+
+		$this->mockRepository->putEntity( $entity );
+		list( $output, ) = $this->executeSpecialPage( 'Q123' );
+
+		$this->assertNotRegExp( '/<input[^>]*name="label"/', $output );
+		$this->assertRegExp( '/<input[^>]*value="Foo"[^>]*name="description"/', $output );
+		$this->assertNotRegExp( '/<input[^>]*name="aliases"/', $output );
+	}
+
+	public function testAliasesProvider() {
+		$entity = $this->getMock( EntityWithAliases::class );
+		$entity->method( 'getId' )->willReturn( new ItemId( 'Q123' ) );
+		$entity->method( 'copy' )->willReturn( $entity );
+
+		$aliases = new AliasGroupList( array( new AliasGroup( 'en', array( 'Foo', 'Bar' ) ) ) );
+		$entity->method( 'getAliasGroups' )->willReturn( $aliases );
+
+		$this->mockRepository->putEntity( $entity );
+		list( $output, ) = $this->executeSpecialPage( 'Q123' );
+
+		$this->assertNotRegExp( '/<input[^>]*name="label"/', $output );
+		$this->assertNotRegExp( '/<input[^>]*name="description"/', $output );
+		$this->assertRegExp( '/<input[^>]*value="Foo|Bar"[^>]*name="aliases"/', $output );
+	}
+
+}
+
+interface EntityWithLabels extends EntityDocument, LabelsProvider {
+}
+
+interface EntityWithDescriptions extends EntityDocument, DescriptionsProvider {
+}
+
+interface EntityWithAliases extends EntityDocument, AliasesProvider {
 }

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Specials;
 
 use Html;
-use InvalidArgumentException;
 use Language;
 use SiteStore;
 use Wikibase\ChangeOp\ChangeOp;
@@ -11,8 +10,13 @@ use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -94,14 +98,16 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		SiteStore $siteStore,
 		FingerprintChangeOpFactory $changeOpFactory,
 		ContentLanguages $termsLanguages,
-		EditEntityFactory $editEntityFactory
+		EditEntityFactory $editEntityFactory,
+		EntityIdParser $entityIdParser
 	) {
 		$this->setSpecialModifyEntityServices(
 			$summaryFormatter,
 			$entityRevisionLookup,
 			$entityTitleLookup,
 			$siteStore,
-			$editEntityFactory
+			$editEntityFactory,
+			$entityIdParser
 		);
 
 		$this->changeOpFactory = $changeOpFactory;
@@ -114,9 +120,20 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	protected function validateInput() {
-		return parent::validateInput()
-			&& $this->entityRevision->getEntity() instanceof FingerprintProvider
-			&& $this->isValidLanguageCode( $this->languageCode )
+		if ( !parent::validateInput() ) {
+			return false;
+		}
+
+		$entity = $this->entityRevision->getEntity();
+
+		if ( !( $entity instanceof LabelsProvider )
+			&& !( $entity instanceof DescriptionsProvider )
+			&& !( $entity instanceof AliasesProvider )
+		) {
+			return false;
+		}
+
+		return $this->isValidLanguageCode( $this->languageCode )
 			&& $this->wasPostedWithLabelDescriptionOrAliases()
 			&& $this->isAllowedToChangeTerms( $this->entityRevision->getEntity() );
 	}
@@ -175,12 +192,19 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				. Html::hidden(
 					'language',
 					$this->languageCode
-				)
-				. $this->getLabeledInputField( 'label', $this->label )
-				. Html::element( 'br' )
-				. $this->getLabeledInputField( 'description', $this->description )
-				. Html::element( 'br' )
-				. $this->getLabeledInputField( 'aliases', implode( '|', $this->aliases ) );
+				);
+
+			if ( $entity instanceof LabelsProvider ) {
+				$html .= $this->getLabeledInputField( 'label', $this->label );
+			}
+
+			if ( $entity instanceof DescriptionsProvider ) {
+				$html .= $this->getLabeledInputField( 'description', $this->description );
+			}
+
+			if ( $entity instanceof AliasesProvider ) {
+				$html .= $this->getLabeledInputField( 'aliases', implode( '|', $this->aliases ) );
+			}
 		} else {
 			$intro = $this->msg( 'wikibase-setlabeldescriptionaliases-intro' );
 			$fieldId = 'wikibase-setlabeldescriptionaliases-language';
@@ -246,7 +270,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 				'id' => $fieldId,
 				'placeholder' => $value,
 			)
-		);
+		)
+		. Html::element( 'br' );
 	}
 
 	/**
@@ -273,8 +298,16 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		if ( $this->languageCode !== null && $this->entityRevision !== null ) {
 			$entity = $this->entityRevision->getEntity();
 
-			if ( $entity instanceof FingerprintProvider ) {
-				$this->setFingerprintFields( $entity->getFingerprint() );
+			if ( $entity instanceof LabelsProvider ) {
+				$this->setLabelsFields( $entity->getLabels() );
+			}
+
+			if ( $entity instanceof DescriptionsProvider ) {
+				$this->setDescriptionsFields( $entity->getDescriptions() );
+			}
+
+			if ( $entity instanceof AliasesProvider ) {
+				$this->setAliasesFields( $entity->getAliasGroups() );
 			}
 		}
 	}
@@ -302,23 +335,27 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		}
 	}
 
-	private function setFingerprintFields( Fingerprint $fingerprint ) {
+	private function setLabelsFields( TermList $labels ) {
 		if ( !$this->getRequest()->getCheck( 'label' )
-			&& $fingerprint->hasLabel( $this->languageCode )
+			&& $labels->hasTermForLanguage( $this->languageCode )
 		) {
-			$this->label = $fingerprint->getLabel( $this->languageCode )->getText();
+			$this->label = $labels->getByLanguage( $this->languageCode )->getText();
 		}
+	}
 
+	private function setDescriptionsFields( TermList $descriptions ) {
 		if ( !$this->getRequest()->getCheck( 'description' )
-			&& $fingerprint->hasDescription( $this->languageCode )
+			&& $descriptions->hasTermForLanguage( $this->languageCode )
 		) {
-			$this->description = $fingerprint->getDescription( $this->languageCode )->getText();
+			$this->description = $descriptions->getByLanguage( $this->languageCode )->getText();
 		}
+	}
 
+	private function setAliasesFields( AliasGroupList $labels ) {
 		if ( !$this->getRequest()->getCheck( 'aliases' )
-			&& $fingerprint->hasAliasGroup( $this->languageCode )
+			&& $labels->hasGroupForLanguage( $this->languageCode )
 		) {
-			$this->aliases = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
+			$this->aliases = $labels->getByLanguage( $this->languageCode )->getAliases();
 		}
 	}
 
@@ -336,15 +373,22 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @throws InvalidArgumentException
 	 * @return Summary|bool
 	 */
 	protected function modifyEntity( EntityDocument $entity ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		$changeOps = array();
+
+		if ( $entity instanceof LabelsProvider ) {
+			$changeOps += $this->getLabelsChangeOps( $entity->getLabels() );
 		}
 
-		$changeOps = $this->getChangeOps( $entity->getFingerprint() );
+		if ( $entity instanceof DescriptionsProvider ) {
+			$changeOps += $this->getDescriptionsChangeOps( $entity->getDescriptions() );
+		}
+
+		if ( $entity instanceof AliasesProvider ) {
+			$changeOps += $this->getAliasesChangeOps( $entity->getAliasGroups() );
+		}
 
 		if ( empty( $changeOps ) ) {
 			return false;
@@ -382,57 +426,78 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param Fingerprint $fingerprint
+	 * @param TermList $labels
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getChangeOps( Fingerprint $fingerprint ) {
-		$changeOpFactory = $this->changeOpFactory;
+	private function getLabelsChangeOps( TermList $labels ) {
 		$changeOps = array();
 
 		if ( $this->label !== '' ) {
-			if ( !$fingerprint->hasLabel( $this->languageCode )
-				|| $fingerprint->getLabel( $this->languageCode )->getText() !== $this->label
+			if ( !$labels->hasTermForLanguage( $this->languageCode )
+				|| $labels->getByLanguage( $this->languageCode )->getText() !== $this->label
 			) {
-				$changeOps['wbsetlabel'] = $changeOpFactory->newSetLabelOp(
+				$changeOps['wbsetlabel'] = $this->changeOpFactory->newSetLabelOp(
 					$this->languageCode,
 					$this->label
 				);
 			}
-		} elseif ( $fingerprint->hasLabel( $this->languageCode ) ) {
-			$changeOps['wbsetlabel'] = $changeOpFactory->newRemoveLabelOp(
+		} elseif ( $labels->hasTermForLanguage( $this->languageCode ) ) {
+			$changeOps['wbsetlabel'] = $this->changeOpFactory->newRemoveLabelOp(
 				$this->languageCode
 			);
 		}
 
+		return $changeOps;
+	}
+
+	/**
+	 * @param TermList $descriptions
+	 *
+	 * @return ChangeOp[]
+	 */
+	private function getDescriptionsChangeOps( TermList $descriptions ) {
+		$changeOps = array();
+
 		if ( $this->description !== '' ) {
-			if ( !$fingerprint->hasDescription( $this->languageCode )
-				|| $fingerprint->getDescription( $this->languageCode )->getText() !== $this->description
+			if ( !$descriptions->hasTermForLanguage( $this->languageCode )
+				|| $descriptions->getByLanguage( $this->languageCode )->getText() !== $this->description
 			) {
-				$changeOps['wbsetdescription'] = $changeOpFactory->newSetDescriptionOp(
+				$changeOps['wbsetdescription'] = $this->changeOpFactory->newSetDescriptionOp(
 					$this->languageCode,
 					$this->description
 				);
 			}
-		} elseif ( $fingerprint->hasDescription( $this->languageCode ) ) {
-			$changeOps['wbsetdescription'] = $changeOpFactory->newRemoveDescriptionOp(
+		} elseif ( $descriptions->hasTermForLanguage( $this->languageCode ) ) {
+			$changeOps['wbsetdescription'] = $this->changeOpFactory->newRemoveDescriptionOp(
 				$this->languageCode
 			);
 		}
 
+		return $changeOps;
+	}
+
+	/**
+	 * @param AliasGroupList $aliases
+	 *
+	 * @return ChangeOp[]
+	 */
+	private function getAliasesChangeOps( AliasGroupList $aliases ) {
+		$changeOps = array();
+
 		if ( !empty( $this->aliases ) ) {
-			if ( !$fingerprint->hasAliasGroup( $this->languageCode )
-				|| $fingerprint->getAliasGroup( $this->languageCode )->getAliases() !== $this->aliases
+			if ( !$aliases->hasGroupForLanguage( $this->languageCode )
+				|| $aliases->getByLanguage( $this->languageCode )->getAliases() !== $this->aliases
 			) {
-				$changeOps['wbsetaliases'] = $changeOpFactory->newSetAliasesOp(
+				$changeOps['wbsetaliases'] = $this->changeOpFactory->newSetAliasesOp(
 					$this->languageCode,
 					$this->aliases
 				);
 			}
-		} elseif ( $fingerprint->hasAliasGroup( $this->languageCode ) ) {
-			$changeOps['wbsetaliases'] = $changeOpFactory->newRemoveAliasesOp(
+		} elseif ( $aliases->hasGroupForLanguage( $this->languageCode ) ) {
+			$changeOps['wbsetaliases'] = $this->changeOpFactory->newRemoveAliasesOp(
 				$this->languageCode,
-				$fingerprint->getAliasGroup( $this->languageCode )->getAliases()
+				$aliases->getByLanguage( $this->languageCode )->getAliases()
 			);
 		}
 

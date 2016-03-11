@@ -9,6 +9,7 @@ use Status;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -48,6 +49,11 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	private $editEntityFactory;
 
 	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
 	 * @since 0.5
 	 *
 	 * @param string $title The title of the special page
@@ -61,7 +67,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->newEditEntityFactory( $this->getContext() )
+			$wikibaseRepo->newEditEntityFactory( $this->getContext() ),
+			$wikibaseRepo->getEntityIdParser()
 		);
 	}
 
@@ -77,12 +84,14 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		SiteStore $siteStore,
-		EditEntityFactory $editEntityFactory
+		EditEntityFactory $editEntityFactory,
+		EntityIdParser $entityIdParser
 	) {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->siteStore = $siteStore;
 		$this->editEntityFactory = $editEntityFactory;
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
@@ -94,10 +103,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @throws UserInputException
 	 */
 	protected function parseEntityId( $rawId ) {
-		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
-
 		try {
-			$id = $idParser->parse( $rawId );
+			$id = $this->entityIdParser->parse( $rawId );
 		} catch ( RuntimeException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
