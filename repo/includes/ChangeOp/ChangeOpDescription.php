@@ -5,8 +5,10 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 
@@ -61,15 +63,15 @@ class ChangeOpDescription extends ChangeOpBase {
 	}
 
 	/**
-	 * Applies the change to the fingerprint
+	 * Applies the change to the descriptions
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param TermList $descriptions
 	 */
-	private function updateFingerprint( Fingerprint $fingerprint ) {
+	private function updateDescriptions( TermList $descriptions ) {
 		if ( $this->description === null ) {
-			$fingerprint->removeDescription( $this->languageCode );
+			$descriptions->removeByLanguage( $this->languageCode );
 		} else {
-			$fingerprint->getDescriptions()->setTextForLanguage( $this->languageCode, $this->description );
+			$descriptions->setTextForLanguage( $this->languageCode, $this->description );
 		}
 	}
 
@@ -77,15 +79,15 @@ class ChangeOpDescription extends ChangeOpBase {
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		if ( !( $entity instanceof DescriptionsProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a DescriptionsProvider' );
 		}
 
-		$fingerprint = $entity->getFingerprint();
+		$descriptions = $entity->getDescriptions();
 
-		if ( $fingerprint->getDescriptions()->hasTermForLanguage( $this->languageCode ) ) {
+		if ( $descriptions->hasTermForLanguage( $this->languageCode ) ) {
 			if ( $this->description === null ) {
-				$removedDescription = $fingerprint->getDescription( $this->languageCode )->getText();
+				$removedDescription = $descriptions->getByLanguage( $this->languageCode )->getText();
 				$this->updateSummary( $summary, 'remove', $this->languageCode, $removedDescription );
 			} else {
 				$this->updateSummary( $summary, 'set', $this->languageCode, $this->description );
@@ -94,7 +96,7 @@ class ChangeOpDescription extends ChangeOpBase {
 			$this->updateSummary( $summary, 'add', $this->languageCode, $this->description );
 		}
 
-		$this->updateFingerprint( $fingerprint );
+		$this->updateDescriptions( $descriptions );
 	}
 
 	/**
@@ -106,13 +108,12 @@ class ChangeOpDescription extends ChangeOpBase {
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		if ( !( $entity instanceof DescriptionsProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a DescriptionsProvider' );
 		}
 
 		$languageValidator = $this->termValidatorFactory->getLanguageValidator();
 		$termValidator = $this->termValidatorFactory->getDescriptionValidator();
-		$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
 		// check that the language is valid
 		$result = $languageValidator->validate( $this->languageCode );
@@ -126,16 +127,21 @@ class ChangeOpDescription extends ChangeOpBase {
 			return $result;
 		}
 
-		// Check if the new fingerprint of the entity is valid (e.g. if the combination
-		// of label and description  is still unique)
-		$fingerprint = unserialize( serialize( $entity->getFingerprint() ) );
-		$this->updateFingerprint( $fingerprint );
+		// TODO: Don't bind against Fingerprint here, rather use general builders for validators
+		if ( $entity instanceof FingerprintProvider ) {
+			$fingerprintValidator = $this->termValidatorFactory->getFingerprintValidator( $entity->getType() );
 
-		$result = $fingerprintValidator->validateFingerprint(
-			$fingerprint,
-			$entity->getId(),
-			array( $this->languageCode )
-		);
+			// Check if the new fingerprint of the entity is valid (e.g. if the combination
+			// of label and description  is still unique)
+			$fingerprint = clone $entity->getFingerprint();
+			$this->updateDescriptions( $fingerprint->getDescriptions() );
+
+			$result = $fingerprintValidator->validateFingerprint(
+				$fingerprint,
+				$entity->getId(),
+				array( $this->languageCode )
+			);
+		}
 
 		return $result;
 	}

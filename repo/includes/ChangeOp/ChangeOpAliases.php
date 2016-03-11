@@ -5,6 +5,8 @@ namespace Wikibase\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -72,15 +74,15 @@ class ChangeOpAliases extends ChangeOpBase {
 	}
 
 	/**
-	 * Applies the change to the fingerprint
+	 * Applies the change to the aliases
 	 *
-	 * @param Fingerprint $fingerprint
+	 * @param AliasGroupList $aliases
 	 *
 	 * @throws ChangeOpException
 	 */
-	private function updateFingerprint( Fingerprint $fingerprint ) {
-		if ( $fingerprint->getAliasGroups()->hasGroupForLanguage( $this->languageCode ) ) {
-			$oldAliases = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
+	private function updateAliases( AliasGroupList $aliases ) {
+		if ( $aliases->hasGroupForLanguage( $this->languageCode ) ) {
+			$oldAliases = $aliases->getByLanguage( $this->languageCode )->getAliases();
 		} else {
 			$oldAliases = array();
 		}
@@ -95,22 +97,20 @@ class ChangeOpAliases extends ChangeOpBase {
 			throw new ChangeOpException( 'Bad action: ' . $this->action );
 		}
 
-		$fingerprint->getAliasGroups()->setAliasesForLanguage( $this->languageCode, $newAliases );
+		$aliases->setAliasesForLanguage( $this->languageCode, $newAliases );
 	}
 
 	/**
 	 * @see ChangeOp::apply()
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
-			throw new InvalidArgumentException( '$entity must be a FingerprintProvider' );
+		if ( !( $entity instanceof AliasesProvider ) ) {
+			throw new InvalidArgumentException( '$entity must be a AliasesProvider' );
 		}
-
-		$fingerprint = $entity->getFingerprint();
 
 		$this->updateSummary( $summary, $this->action, $this->languageCode, $this->aliases );
 
-		$this->updateFingerprint( $fingerprint );
+		$this->updateAliases( $entity->getAliasGroups() );
 	}
 
 	/**
