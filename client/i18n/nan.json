@@ -8,11 +8,13 @@
 	"tooltip-t-wikibase": "liân khì chu-liāu chhng-khò͘ --ê hāng-bo̍k",
 	"wikibase-comment-update": "已經改 {{WBREPONAME}} 項目",
 	"wikibase-dataitem": "{{WBREPONAME}} hāng-bo̍k",
-	"wikibase-editlinks": "改連結",
-	"wikibase-editlinkstitle": "改其他話語的連接",
+	"wikibase-editlinks": "Kái liân-kiat",
+	"wikibase-editlinkstitle": "Kái kî-thaⁿ gú-giân ê liân-kiat",
+	"wikibase-addlinkstitle": "Ka-thiam kî-thaⁿ gú-giân ê liân-kiat",
+	"wikibase-linkitem-addlinks": "Ka-thiam liân-kiat",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-show": "開",
-	"wikibase-rc-wikibase-edit-letter": "量",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} 編輯",
+	"wikibase-rc-hide-wikidata-show": "hiàn",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} siu-kái",
 	"wikibase-otherprojects": "Chí-mōe kè-ōe"
 }

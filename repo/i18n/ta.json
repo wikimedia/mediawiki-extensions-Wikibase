@@ -8,7 +8,8 @@
 			"மதனாஹரன்",
 			"Macofe",
 			"கலைவாணன்",
-			"Jayarathina"
+			"Jayarathina",
+			"தமிழ்க்குரிசில்"
 		]
 	},
 	"wikibase-entity-item": "உருப்படி",
@@ -19,6 +20,8 @@
 	"wikibase-add": "சேர்",
 	"wikibase-save-inprogress": "சேமிக்கப்படுகிறது...",
 	"wikibase-remove-inprogress": "நீக்கப்படுகிறது...",
+	"wikibase-label-empty": "மாற்றுகள் வரையறுக்கப்படவில்லை",
+	"wikibase-description-empty": "விவரணமேதும் வழங்கப்படவில்லை",
 	"wikibase-description-edit-placeholder": "விவரங்களை உள்ளிடவும்",
 	"wikibase-sitelink-site-edit-placeholder": "தளம்",
 	"wikibase-sitelink-page-edit-placeholder": "பக்கம்",

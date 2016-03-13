@@ -3,7 +3,8 @@
 		"authors": [
 			"Lloffiwr",
 			"Ham II",
-			"Diafol"
+			"Diafol",
+			"Robin Owain"
 		]
 	},
 	"tooltip-t-wikibase": "Cysylltu i eitem ystorfa gysylltiedig",
@@ -39,5 +40,5 @@
 	"wikibase-unconnectedpages-submit": "Gwneler",
 	"wikibase-pageinfo-entity-id": "ID yr Eitem {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Dim",
-	"wikibase-otherprojects": "Prosiectau eraill"
+	"wikibase-otherprojects": "Mewn prosiectau eraill"
 }
