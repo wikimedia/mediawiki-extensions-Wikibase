@@ -38,6 +38,7 @@ constraints on the values, or impact how they are rendered or exported.
 
 Each key is associated with a map that provides the following fields:
 * value-type (repo and client): the value type to use for this data type (not used for value type keys).
+* rdf-uri (repo only): the URI to use in RDF to identify the data type. It is good practice to use a URI that will resolve to an RDF document that contains an OWL description of the data type, defining it to be of rdf:type wikibase:PropertyType, and providing a rdfs:label and a rdfs:comment describing the type. If no URI is defined explicitly, a URI will be composed using the base URI of the Wikibase ontology, and adding a CamelCase version of the datatype ID (so that "foo-bar" would become "FooBar").
 * validator-factory-callback (repo only): a callable that acts as a factory for the list of validators that should be used to check any user supplied values of the given data type. The callable will be called without any arguments, and must return a list of ValueValidator objects.
 * parser-factory-callback (repo only): a callable that acts as a factory for a ValueParser for this data type.
 * formatter-factory-callback (repo and client): a callable that acts as a factory for ValueFormatters for use with this data type.

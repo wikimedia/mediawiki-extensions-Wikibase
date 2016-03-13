@@ -26,6 +26,7 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 			),
 			'PT:foo' => array(
 				'value-type' => 'FOO',
+				'rdf-uri' => 'http://acme.test/vocab/Foo',
 				'validator-factory-callback' => 'DataTypeDefinitionsTest::getFooValidators',
 				'parser-factory-callback' => 'DataTypeDefinitionsTest::getFooParser',
 				'snak-formatter-factory-callback' => 'DataTypeDefinitionsTest::getFooSnakFormatter',
@@ -49,6 +50,11 @@ class DataTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 	public function testGetValueTypes() {
 		$defs = $this->getDataTypeDefinitions();
 		$this->assertEquals( array( 'foo' => 'FOO', 'bar' => 'BAR' ), $defs->getValueTypes() );
+	}
+
+	public function testGetRdfTypeUris() {
+		$defs = $this->getDataTypeDefinitions();
+		$this->assertEquals( array( 'foo' => 'http://acme.test/vocab/Foo' ), $defs->getRdfTypeUris() );
 	}
 
 	public function testGetValidatorFactoryCallbacks() {
