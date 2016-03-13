@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use Language;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
@@ -41,20 +40,22 @@ class ItemView extends EntityView {
 	 *
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
+	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param StatementSectionsView $statementSectionsView
-	 * @param Language $language
+	 * @param string $languageCode
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EntityTermsView $entityTermsView,
+		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		StatementSectionsView $statementSectionsView,
-		Language $language,
+		$languageCode,
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups
 	) {
-		parent::__construct( $templateFactory, $entityTermsView, $language );
+		parent::__construct( $templateFactory, $entityTermsView, $languageDirectionalityLookup, $languageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinksView = $siteLinksView;
