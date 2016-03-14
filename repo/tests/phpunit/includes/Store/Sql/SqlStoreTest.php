@@ -4,10 +4,26 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\IdGenerator;
+use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\Store\SiteLinkStore;
+use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\PropertyInfoStore;
+use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
+use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\SqlStore;
 use Wikibase\Store\EntityIdLookup;
+use Wikibase\TermIndex;
 
 /**
  * @covers Wikibase\SqlStore
@@ -36,88 +52,82 @@ class SqlStoreTest extends MediaWikiTestCase {
 
 	public function testGetTermIndex() {
 		$service = $this->newInstance()->getTermIndex();
-		$this->assertInstanceOf( 'Wikibase\TermIndex', $service );
+		$this->assertInstanceOf( TermIndex::class, $service );
 	}
 
 	public function testGetLabelConflictFinder() {
 		$service = $this->newInstance()->getLabelConflictFinder();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\LabelConflictFinder', $service );
+		$this->assertInstanceOf( LabelConflictFinder::class, $service );
 	}
 
 	public function testNewIdGenerator() {
 		$service = $this->newInstance()->newIdGenerator();
-		$this->assertInstanceOf( 'Wikibase\IdGenerator', $service );
+		$this->assertInstanceOf( IdGenerator::class, $service );
 	}
 
 	public function testNewSiteLinkStore() {
 		$service = $this->newInstance()->newSiteLinkStore();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\SiteLinkStore', $service );
+		$this->assertInstanceOf( SiteLinkStore::class, $service );
 	}
 
 	public function testNewEntityPerPage() {
 		$service = $this->newInstance()->newEntityPerPage();
-		$this->assertInstanceOf( 'Wikibase\Repo\Store\EntityPerPage', $service );
+		$this->assertInstanceOf( EntityPerPage::class, $service );
 	}
 
 	public function testGetEntityRedirectLookup() {
 		$service = $this->newInstance()->getEntityRedirectLookup();
-		$this->assertInstanceOf(
-			'Wikibase\DataModel\Services\Lookup\EntityRedirectLookup',
-			$service
-		);
+		$this->assertInstanceOf( EntityRedirectLookup::class, $service );
 	}
 
 	public function testGetEntityLookup() {
 		$service = $this->newInstance()->getEntityLookup();
-		$this->assertInstanceOf( 'Wikibase\DataModel\Services\Lookup\EntityLookup', $service );
+		$this->assertInstanceOf( EntityLookup::class, $service );
 	}
 
 	public function testGetEntityStoreWatcher() {
 		$service = $this->newInstance()->getEntityStoreWatcher();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityStoreWatcher', $service );
+		$this->assertInstanceOf( EntityStoreWatcher::class, $service );
 	}
 
 	public function testGetEntityStore() {
 		$service = $this->newInstance()->getEntityStore();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityStore', $service );
+		$this->assertInstanceOf( EntityStore::class, $service );
 	}
 
 	public function testGetEntityRevisionLookup() {
 		$service = $this->newInstance()->getEntityRevisionLookup();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityRevisionLookup', $service );
+		$this->assertInstanceOf( EntityRevisionLookup::class, $service );
 	}
 
 	public function testGetEntityInfoBuilderFactory() {
 		$service = $this->newInstance()->getEntityInfoBuilderFactory();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityInfoBuilderFactory', $service );
+		$this->assertInstanceOf( EntityInfoBuilderFactory::class, $service );
 	}
 
 	public function testGetPropertyInfoStore() {
 		$service = $this->newInstance()->getPropertyInfoStore();
-		$this->assertInstanceOf( 'Wikibase\PropertyInfoStore', $service );
+		$this->assertInstanceOf( PropertyInfoStore::class, $service );
 	}
 
 	public function testGetSiteLinkConflictLookup() {
 		$service = $this->newInstance()->getSiteLinkConflictLookup();
-		$this->assertInstanceOf( 'Wikibase\Repo\Store\SiteLinkConflictLookup', $service );
+		$this->assertInstanceOf( SiteLinkConflictLookup::class, $service );
 	}
 
 	public function testGetEntityPrefetcher() {
 		$service = $this->newInstance()->getEntityPrefetcher();
-		$this->assertInstanceOf(
-			'Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor',
-			$service
-		);
+		$this->assertInstanceOf( PrefetchingWikiPageEntityMetaDataAccessor::class, $service );
 	}
 
 	public function testGetChangeLookup() {
 		$service = $this->newInstance()->getChangeLookup();
-		$this->assertInstanceOf( 'Wikibase\Lib\Store\ChangeLookup', $service );
+		$this->assertInstanceOf( ChangeLookup::class, $service );
 	}
 
 	public function testGetChangeStore() {
 		$service = $this->newInstance()->getChangeStore();
-		$this->assertInstanceOf( 'Wikibase\Repo\Store\Sql\SqlChangeStore', $service );
+		$this->assertInstanceOf( SqlChangeStore::class, $service );
 	}
 
 }

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\UpdateRepo;
 
+use IJobSpecification;
 use JobQueueGroup;
 use JobQueueRedis;
 use JobSpecification;
@@ -125,7 +126,7 @@ class UpdateRepoOnMoveTest extends \PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'Q123' );
 
 		$moveData = $this->getFakeMoveData();
-		$this->assertInstanceOf( 'IJobSpecification', $job );
+		$this->assertInstanceOf( IJobSpecification::class, $job );
 		$this->assertEquals( 'UpdateRepoOnMove', $job->getType() );
 
 		$params = $job->getParams();

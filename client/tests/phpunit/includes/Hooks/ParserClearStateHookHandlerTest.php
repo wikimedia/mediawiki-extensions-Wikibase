@@ -36,7 +36,7 @@ class ParserClearStateHookHandlerTest extends MediaWikiTestCase {
 		}
 
 		$this->assertInstanceOf(
-			'Wikibase\Test\MockClientStore',
+			MockClientStore::class,
 			$wikibaseClient->getStore(),
 			'Mocking the default ClientStore failed'
 		);

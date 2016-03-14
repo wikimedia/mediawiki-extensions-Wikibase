@@ -119,7 +119,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function testCanConstruct() {
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
-		$this->assertInstanceOf( '\Wikibase\Repo\Api\ResultBuilder', $resultBuilder );
+		$this->assertInstanceOf( ResultBuilder::class, $resultBuilder );
 	}
 
 	/**

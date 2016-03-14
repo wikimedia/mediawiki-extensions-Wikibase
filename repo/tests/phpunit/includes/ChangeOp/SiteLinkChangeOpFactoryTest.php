@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 
 /**
@@ -25,12 +26,12 @@ class SiteLinkChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewSetSiteLinkOp() {
 		$op = $this->newChangeOpFactory()->newSetSiteLinkOp( 'enwiki', 'Foo' );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewRemoveSiteLinkOp() {
 		$op = $this->newChangeOpFactory()->newRemoveSiteLinkOp( 'enwiki' );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 }

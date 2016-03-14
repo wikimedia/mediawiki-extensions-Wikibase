@@ -37,7 +37,7 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructor( $sort, $sortOrders, $sortPrepend ) {
 		$interwikiSorter = new InterwikiSorter( $sort, $sortOrders, $sortPrepend );
-		$this->assertInstanceOf( '\Wikibase\InterwikiSorter', $interwikiSorter );
+		$this->assertInstanceOf( InterwikiSorter::class, $interwikiSorter );
 	}
 
 	public function sortLinksProvider() {

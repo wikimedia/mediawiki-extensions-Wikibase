@@ -55,7 +55,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		$factory = $this->newTimeParserFactory();
 		$parser = $factory->getTimeParser();
 
-		$this->assertInstanceOf( 'ValueParsers\ValueParser', $parser );
+		$this->assertInstanceOf( ValueParser::class, $parser );
 	}
 
 	/**

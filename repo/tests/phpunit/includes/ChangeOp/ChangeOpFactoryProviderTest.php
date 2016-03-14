@@ -5,6 +5,10 @@ namespace Wikibase\Test;
 use HashSiteStore;
 use TestSites;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\ChangeOp\MergeChangeOpsFactory;
+use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
@@ -60,22 +64,22 @@ class ChangeOpFactoryProviderTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetFingerprintChangeOpFactory() {
 		$factory = $this->newChangeOpFactoryProvider()->getFingerprintChangeOpFactory();
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\FingerprintChangeOpFactory', $factory );
+		$this->assertInstanceOf( FingerprintChangeOpFactory::class, $factory );
 	}
 
 	public function testGetStatementChangeOpFactory() {
 		$factory = $this->newChangeOpFactoryProvider()->getStatementChangeOpFactory();
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\StatementChangeOpFactory', $factory );
+		$this->assertInstanceOf( StatementChangeOpFactory::class, $factory );
 	}
 
 	public function testGetSiteLinkChangeOpFactory() {
 		$factory = $this->newChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\SiteLinkChangeOpFactory', $factory );
+		$this->assertInstanceOf( SiteLinkChangeOpFactory::class, $factory );
 	}
 
 	public function testGetMergeChangeOpFactory() {
 		$factory = $this->newChangeOpFactoryProvider()->getMergeChangeOpFactory();
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\MergeChangeOpsFactory', $factory );
+		$this->assertInstanceOf( MergeChangeOpsFactory::class, $factory );
 	}
 
 }

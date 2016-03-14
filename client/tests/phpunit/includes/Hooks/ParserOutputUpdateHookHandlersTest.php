@@ -241,7 +241,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$settings->setSetting( 'siteGroup', 'NYAN' );
 
 		$handler = ParserOutputUpdateHookHandlers::newFromGlobalState();
-		$this->assertInstanceOf( 'Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers', $handler );
+		$this->assertInstanceOf( ParserOutputUpdateHookHandlers::class, $handler );
 
 		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );
 	}

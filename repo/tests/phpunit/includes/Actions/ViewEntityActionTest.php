@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\ViewEntityAction;
 use WikiPage;
 
 /**
@@ -36,7 +37,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$page = $this->getTestItemPage( "Berlin" );
 
 		$action = $this->createAction( "view", $page );
-		$this->assertInstanceOf( 'Wikibase\ViewEntityAction', $action );
+		$this->assertInstanceOf( ViewEntityAction::class, $action );
 	}
 
 	public function provideShow() {

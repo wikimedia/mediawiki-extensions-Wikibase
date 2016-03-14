@@ -5,7 +5,9 @@ namespace Wikibase\Test;
 use MWException;
 use Title;
 use User;
+use Wikibase\EditEntityAction;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SubmitEntityAction;
 use WikiPage;
 
 /**
@@ -45,10 +47,10 @@ class EditEntityActionTest extends ActionTestCase {
 		$page = $this->getTestItemPage( 'Berlin' );
 
 		$action = $this->createAction( 'edit', $page );
-		$this->assertInstanceOf( 'Wikibase\EditEntityAction', $action );
+		$this->assertInstanceOf( EditEntityAction::class, $action );
 
 		$action = $this->createAction( 'submit', $page );
-		$this->assertInstanceOf( 'Wikibase\SubmitEntityAction', $action );
+		$this->assertInstanceOf( SubmitEntityAction::class, $action );
 	}
 
 	protected function adjustRevisionParam( $key, array &$params, WikiPage $page ) {

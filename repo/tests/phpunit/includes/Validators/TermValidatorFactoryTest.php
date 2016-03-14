@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use InvalidArgumentException;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -11,6 +12,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\Validators\FingerprintValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
@@ -62,7 +64,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getFingerprintValidator( Item::ENTITY_TYPE );
 
-		$this->assertInstanceOf( 'Wikibase\Repo\Validators\FingerprintValidator', $validator );
+		$this->assertInstanceOf( FingerprintValidator::class, $validator );
 
 		$goodFingerprint = new Fingerprint(
 			new TermList( array(
@@ -101,7 +103,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getLanguageValidator();
 
-		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
+		$this->assertInstanceOf( ValueValidator::class, $validator );
 
 		$this->assertTrue( $validator->validate( 'ja' )->isValid() );
 		$this->assertFalse( $validator->validate( 'xx' )->isValid() );
@@ -112,7 +114,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getLabelValidator( Item::ENTITY_TYPE );
 
-		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
+		$this->assertInstanceOf( ValueValidator::class, $validator );
 
 		$this->assertTrue( $validator->validate( 'foo' )->isValid() );
 		$this->assertFalse( $validator->validate( '' )->isValid() );
@@ -124,7 +126,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getLabelValidator( Property::ENTITY_TYPE );
 
-		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
+		$this->assertInstanceOf( ValueValidator::class, $validator );
 
 		$this->assertTrue( $validator->validate( 'foo' )->isValid() );
 		$this->assertFalse( $validator->validate( '' )->isValid() );
@@ -139,7 +141,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getDescriptionValidator();
 
-		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
+		$this->assertInstanceOf( ValueValidator::class, $validator );
 
 		$this->assertTrue( $validator->validate( 'foo' )->isValid() );
 		$this->assertFalse( $validator->validate( '' )->isValid() );
@@ -151,7 +153,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		$validator = $builders->getAliasValidator( Item::ENTITY_TYPE );
 
-		$this->assertInstanceOf( 'ValueValidators\ValueValidator', $validator );
+		$this->assertInstanceOf( ValueValidator::class, $validator );
 
 		$this->assertTrue( $validator->validate( 'foo' )->isValid() );
 		$this->assertFalse( $validator->validate( '' )->isValid() );

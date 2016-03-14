@@ -32,7 +32,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 		$actual = $difference->getReferenceChanges();
 
-		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $actual );
+		$this->assertInstanceOf( Diff::class, $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -45,7 +45,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 		$actual = $difference->getQualifierChanges();
 
-		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $actual );
+		$this->assertInstanceOf( Diff::class, $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -59,7 +59,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 		$actual = $difference->getMainSnakChange();
 
-		$this->assertInstanceOf( 'Diff\DiffOp\DiffOpChange', $actual );
+		$this->assertInstanceOf( DiffOpChange::class, $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -73,7 +73,7 @@ class ClaimDifferenceTest extends \MediaWikiTestCase {
 
 		$actual = $difference->getRankChange();
 
-		$this->assertInstanceOf( 'Diff\DiffOp\DiffOpChange', $actual );
+		$this->assertInstanceOf( DiffOpChange::class, $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 

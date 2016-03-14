@@ -38,10 +38,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	public function testConstructor() {
 		$entityAccessor = $this->getEntityAccessor();
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\Scribunto\EntityAccessor',
-			$entityAccessor
-		);
+		$this->assertInstanceOf( EntityAccessor::class, $entityAccessor );
 	}
 
 	private function getEntityAccessor(

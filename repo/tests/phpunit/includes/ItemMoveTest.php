@@ -80,7 +80,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 
 		// Moving a regular page into data NS onto an existing item
 		$title = $this->itemTitle;
-		$this->assertInstanceOf( 'Title', $title ); // sanity check
+		$this->assertInstanceOf( Title::class, $title ); // sanity check
 
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 

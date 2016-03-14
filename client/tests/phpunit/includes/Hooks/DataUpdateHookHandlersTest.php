@@ -243,7 +243,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 	public function testNewFromGlobalState() {
 		$handler = DataUpdateHookHandlers::newFromGlobalState();
-		$this->assertInstanceOf( 'Wikibase\Client\Hooks\DataUpdateHookHandlers', $handler );
+		$this->assertInstanceOf( DataUpdateHookHandlers::class, $handler );
 	}
 
 	public function provideLinksUpdateComplete() {

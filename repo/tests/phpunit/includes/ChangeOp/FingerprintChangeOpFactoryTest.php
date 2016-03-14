@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 
 /**
@@ -29,37 +30,37 @@ class FingerprintChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testNewAddAliasesOp() {
 		$op = $this->newChangeOpFactory()->newAddAliasesOp( 'en', array( 'foo' ) );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewSetAliasesOp() {
 		$op = $this->newChangeOpFactory()->newSetAliasesOp( 'en', array( 'foo' ) );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewRemoveAliasesOp() {
 		$op = $this->newChangeOpFactory()->newRemoveAliasesOp( 'en', array( 'foo' ) );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewSetDescriptionOp() {
 		$op = $this->newChangeOpFactory()->newSetDescriptionOp( 'en', 'foo' );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewRemoveDescriptionOp() {
 		$op = $this->newChangeOpFactory()->newRemoveDescriptionOp( 'en' );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewSetLabelOp() {
 		$op = $this->newChangeOpFactory()->newSetLabelOp( 'en', 'foo' );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 	public function testNewRemoveLabelOp() {
 		$op = $this->newChangeOpFactory()->newRemoveLabelOp( 'en' );
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOp', $op );
+		$this->assertInstanceOf( ChangeOp::class, $op );
 	}
 
 }

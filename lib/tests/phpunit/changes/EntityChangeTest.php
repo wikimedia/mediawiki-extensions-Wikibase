@@ -359,7 +359,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$change = new EntityChange();
 		$statement = $change->objectifyArrays( $data );
-		$this->assertInstanceOf( 'Wikibase\DataModel\Statement\Statement', $statement );
+		$this->assertInstanceOf( Statement::class, $statement );
 	}
 
 	public function testGivenNonStatementSerialization_objectifyArraysReturnsOriginal() {

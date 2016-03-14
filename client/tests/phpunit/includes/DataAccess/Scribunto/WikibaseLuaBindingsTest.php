@@ -38,10 +38,7 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 			new HashSiteLinkStore()
 		);
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings',
-			$wikibaseLuaBindings
-		);
+		$this->assertInstanceOf( WikibaseLuaBindings::class, $wikibaseLuaBindings );
 	}
 
 	/**
