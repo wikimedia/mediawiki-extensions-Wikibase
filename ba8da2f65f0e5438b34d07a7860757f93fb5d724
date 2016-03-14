@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_2f244807",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T14:10:46Z",
+      "side": 1,
+      "message": "We should think about alternative ways to do this. It\u0027s a bit tricky, since Labels and Descriptions interact here. Maybe we need a LabelAndDescriptionProvider interface, or some such?",
+      "revId": "ba8da2f65f0e5438b34d07a7860757f93fb5d724",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
