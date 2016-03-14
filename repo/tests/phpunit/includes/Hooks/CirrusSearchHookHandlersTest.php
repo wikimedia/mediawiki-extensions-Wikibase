@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use CirrusSearch\Connection;
 use CirrusSearch\Maintenance\MappingConfigBuilder;
+use CirrusSearch;
 use Elastica\Document;
 use ParserOutput;
 use PHPUnit_Framework_TestCase;
@@ -33,7 +34,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		if ( !class_exists( 'CirrusSearch' ) ) {
+		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch is not available' );
 		}
 	}

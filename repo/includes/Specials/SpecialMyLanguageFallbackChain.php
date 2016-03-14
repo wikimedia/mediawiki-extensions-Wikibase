@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Babel;
 use Html;
 use IContextSource;
 use Language;
@@ -103,7 +104,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 		$this->outputHeader();
 
 		$this->getOutput()->addWikiMsg( 'wikibase-mylanguagefallbackchain-text' );
-		if ( class_exists( 'Babel' ) && !$this->getContext()->getUser()->isAnon() ) {
+		if ( class_exists( Babel::class ) && !$this->getContext()->getUser()->isAnon() ) {
 			$this->getOutput()->addWikiMsg( 'wikibase-mylanguagefallbackchain-babel',
 				$this->getContext()->getUser()->getName() );
 		}

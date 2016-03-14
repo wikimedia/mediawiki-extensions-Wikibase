@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
-if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
+if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 	abstract class Scribunto_LuaWikibaseLibraryTestCase extends \MediaWikiTestCase {
 
 		protected function setUp() {
@@ -15,6 +15,7 @@ if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 }
 
 use Language;
+use Scribunto_LuaEngineTestBase;
 use Title;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\WikibaseClient;
