@@ -395,7 +395,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		$factory = new LanguageFallbackChainFactory( $anonymousPageViewCached );
 		$fallbackChain = $factory->newFromContextForPageView( $context );
 
-		$this->assertInstanceOf( 'Wikibase\LanguageFallbackChain', $fallbackChain, $msg );
+		$this->assertInstanceOf( LanguageFallbackChain::class, $fallbackChain, $msg );
 	}
 
 	public function newFromContextForPageViewProvider() {

@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\SiteLinkUniquenessValidator;
+use Wikibase\Repo\Validators\UniquenessViolation;
 use Wikibase\Test\ChangeOpTestMockProvider;
 
 /**
@@ -56,7 +57,7 @@ class SiteLinkUniquenessValidatorTest extends \PHPUnit_Framework_TestCase {
 
 		$errors = $result->getErrors();
 		$this->assertEquals( 'sitelink-conflict', $errors[0]->getCode() );
-		$this->assertInstanceOf( 'Wikibase\Repo\Validators\UniquenessViolation', $errors[0] );
+		$this->assertInstanceOf( UniquenessViolation::class, $errors[0] );
 
 		//NOTE: ChangeOpTestMockProvider::getSiteLinkConflictsForItem() uses 'Q666' as
 		//      the conflicting item for all site links with the name 'DUPE'.

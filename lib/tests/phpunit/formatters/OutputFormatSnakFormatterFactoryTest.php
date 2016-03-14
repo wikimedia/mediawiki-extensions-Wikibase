@@ -146,7 +146,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->newOutputFormatSnakFormatterFactory( $dataType );
 		$formatter = $factory->getSnakFormatter( $format, new FormatterOptions() );
 
-		$this->assertInstanceOf( 'Wikibase\Lib\SnakFormatter', $formatter );
+		$this->assertInstanceOf( SnakFormatter::class, $formatter );
 		$this->assertEquals( $format, $formatter->getFormat() );
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P5' ), $value );

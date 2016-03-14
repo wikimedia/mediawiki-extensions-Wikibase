@@ -283,7 +283,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			$this->assertEquals( $expectedError->getCode(), $error->getCode(), 'Error code:' );
 			$this->assertEquals( $expectedError->getParameters(), $error->getParameters(), 'Error parameters:' );
 
-			$this->assertInstanceOf( 'Wikibase\Repo\Validators\UniquenessViolation', $error );
+			$this->assertInstanceOf( UniquenessViolation::class, $error );
 			$this->assertEquals( $expectedError->getConflictingEntity(), $error->getConflictingEntity() );
 		}
 	}

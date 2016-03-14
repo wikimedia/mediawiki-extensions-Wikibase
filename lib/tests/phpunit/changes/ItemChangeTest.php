@@ -74,8 +74,7 @@ class ItemChangeTest extends EntityChangeTest {
 	 */
 	public function testGetSiteLinkDiff( ItemChange $change ) {
 		$siteLinkDiff = $change->getSiteLinkDiff();
-		$this->assertInstanceOf( 'Diff\Diff', $siteLinkDiff,
-			"getSiteLinkDiff must return a Diff" );
+		$this->assertInstanceOf( Diff::class, $siteLinkDiff, 'getSiteLinkDiff must return a Diff' );
 	}
 
 	public function changeBackwardsCompatProvider() {
@@ -144,8 +143,11 @@ class ItemChangeTest extends EntityChangeTest {
 
 		try {
 			$siteLinkDiff = $change->getSiteLinkDiff();
-			$this->assertInstanceOf( 'Diff\Diff', $siteLinkDiff,
-				"getSiteLinkDiff must return a Diff" );
+			$this->assertInstanceOf(
+				Diff::class,
+				$siteLinkDiff,
+				'getSiteLinkDiff must return a Diff'
+			);
 		} finally {
 			\MediaWiki\restoreWarnings();
 		}

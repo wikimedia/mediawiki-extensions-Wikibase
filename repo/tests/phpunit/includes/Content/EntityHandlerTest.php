@@ -20,6 +20,8 @@ use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Validators\EntityValidator;
+use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 use WikitextContent;
@@ -128,7 +130,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	 */
 	public function testGetModelName( EntityHandler $entityHandler ) {
 		$this->assertEquals( $this->getModelId(), $entityHandler->getModelID() );
-		$this->assertInstanceOf( 'ContentHandler', $entityHandler );
+		$this->assertInstanceOf( ContentHandler::class, $entityHandler );
 		$this->assertInstanceOf( $this->getClassName(), $entityHandler );
 	}
 
@@ -315,7 +317,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$undo = $handler->getUndoContent( $latestRevision, $newerRevision, $olderRevision );
 
 		if ( $expected ) {
-			$this->assertInstanceOf( 'Wikibase\EntityContent', $undo, $message );
+			$this->assertInstanceOf( EntityContent::class, $undo, $message );
 			$this->assertTrue( $expected->equals( $undo ), $message );
 		} else {
 			$this->assertFalse( $undo, $message );
@@ -466,13 +468,13 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'array', $validators );
 
 		foreach ( $validators as $validator ) {
-			$this->assertInstanceOf( 'Wikibase\Repo\Validators\EntityValidator', $validator );
+			$this->assertInstanceOf( EntityValidator::class, $validator );
 		}
 	}
 
 	public function testGetValidationErrorLocalizer() {
 		$localizer = $this->getHandler()->getValidationErrorLocalizer();
-		$this->assertInstanceOf( 'Wikibase\Repo\Validators\ValidatorErrorLocalizer', $localizer );
+		$this->assertInstanceOf( ValidatorErrorLocalizer::class, $localizer );
 	}
 
 	public function testMakeParserOptions() {

@@ -70,10 +70,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testConstructor() {
 		$engine = $this->getEngine();
 		$luaWikibaseLibrary = new Scribunto_LuaWikibaseLibrary( $engine );
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary',
-			$luaWikibaseLibrary
-		);
+		$this->assertInstanceOf( Scribunto_LuaWikibaseLibrary::class, $luaWikibaseLibrary );
 	}
 
 	public function testRegister() {

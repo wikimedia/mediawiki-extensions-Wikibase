@@ -63,7 +63,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$propertyId = $this->makeProperty( $prop )->getId();
 
 			$snaks[$type] = new $type( $propertyId, $data );
-			$this->assertInstanceOf( 'Wikibase\DataModel\Snak\Snak', $snaks[$type] );
+			$this->assertInstanceOf( Snak::class, $snaks[$type] );
 		}
 
 		return $snaks[$type];

@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Diff\ClaimDiffer;
+use Wikibase\Summary;
 
 /**
  * @covers Wikibase\ClaimSummaryBuilder
@@ -136,7 +137,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		foreach ( $newStatements as $newStatement ) {
 			$summary = $claimSummaryBuilder->buildClaimSummary( null, $newStatement );
-			$this->assertInstanceOf( 'Wikibase\Summary', $summary, "this should return a Summary object" );
+			$this->assertInstanceOf( Summary::class, $summary, 'this should return a Summary object' );
 			$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
 			$this->assertEquals( 'create', $summary->getActionName() );
 		}
@@ -156,7 +157,7 @@ class ClaimSummaryBuilderTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$summary = $claimSummaryBuilder->buildClaimSummary( $originalStatement, $modifiedStatement );
-		$this->assertInstanceOf( 'Wikibase\Summary', $summary, "this should return a Summary object" );
+		$this->assertInstanceOf( Summary::class, $summary, 'this should return a Summary object' );
 		$this->assertEquals( 'wbsetclaim', $summary->getModuleName() );
 		$this->assertEquals( $action, $summary->getActionName() );
 	}

@@ -111,7 +111,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$to,
 			$ignoreConflicts
 		);
-		$this->assertInstanceOf( 'Wikibase\ChangeOp\ChangeOpsMerge', $changeOps );
+		$this->assertInstanceOf( ChangeOpsMerge::class, $changeOps );
 	}
 
 	public function provideValidConstruction() {

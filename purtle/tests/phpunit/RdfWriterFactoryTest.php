@@ -3,6 +3,7 @@
 namespace Wikimedia\Purtle\Tests;
 
 use InvalidArgumentException;
+use Wikimedia\Purtle\RdfWriter;
 use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
@@ -31,7 +32,7 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 		foreach ( $factory->getSupportedFormats() as $format ) {
 			$writer = $factory->getWriter( $format );
 
-			$this->assertInstanceOf( 'Wikimedia\Purtle\RdfWriter', $writer );
+			$this->assertInstanceOf( RdfWriter::class, $writer );
 		}
 	}
 
@@ -97,7 +98,7 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 		$this->assertContains( $expectedMimeType, $factory->getMimeTypes( $canonicalName ) );
 
 		$writer = $factory->getWriter( $canonicalName );
-		$this->assertInstanceOf( 'Wikimedia\Purtle\RdfWriter', $writer );
+		$this->assertInstanceOf( RdfWriter::class, $writer );
 	}
 
 	public function testGetMimeTypes() {

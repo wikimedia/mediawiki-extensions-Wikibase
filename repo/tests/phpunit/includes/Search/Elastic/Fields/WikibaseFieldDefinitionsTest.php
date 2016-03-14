@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use PHPUnit_Framework_TestCase;
+use Wikibase\Repo\Search\Elastic\Fields\SearchIndexField;
 use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
 
 /**
@@ -31,7 +32,7 @@ class WikibaseFieldDefinitionsTest extends PHPUnit_Framework_TestCase {
 
 		foreach ( $wikibaseFieldDefinitions->getFields() as $fieldName => $field ) {
 			$this->assertInstanceOf(
-				'Wikibase\Repo\Search\Elastic\Fields\SearchIndexField',
+				SearchIndexField::class,
 				$field,
 				"$fieldName must be instance of SearchIndexField"
 			);

@@ -135,7 +135,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 		$factory = array( $builders, $functionName );
 		$formatter = call_user_func( $factory, $format, $options );
 
-		$this->assertInstanceOf( 'ValueFormatters\ValueFormatter', $formatter );
+		$this->assertInstanceOf( ValueFormatter::class, $formatter );
 		return $formatter;
 	}
 

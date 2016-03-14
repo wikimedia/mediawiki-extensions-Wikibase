@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
+use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\ChangeNotificationSender;
@@ -231,14 +232,8 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertSame( $coordinator, $dispatcher->getDispatchCoordinator() );
 		$this->assertFalse( $dispatcher->isVerbose() );
-		$this->assertInstanceOf(
-			'Wikibase\Lib\Reporting\MessageReporter',
-			$dispatcher->getMessageReporter()
-		);
-		$this->assertInstanceOf(
-			'Wikibase\Lib\Reporting\ExceptionHandler',
-			$dispatcher->getExceptionHandler()
-		);
+		$this->assertInstanceOf( MessageReporter::class, $dispatcher->getMessageReporter() );
+		$this->assertInstanceOf( ExceptionHandler::class, $dispatcher->getExceptionHandler() );
 		$this->assertSame( 1000, $dispatcher->getBatchSize() );
 		$this->assertSame( 3, $dispatcher->getBatchChunkFactor() );
 		$this->assertSame( 15, $dispatcher->getMaxChunks() );

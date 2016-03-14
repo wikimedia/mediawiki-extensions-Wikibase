@@ -10,7 +10,9 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
+use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
+use Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\EntityId;
@@ -44,10 +46,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
-			$renderer
-		);
+		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
 	public function testNewRenderer_contentConversionDisabled() {
@@ -56,10 +55,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
-			$renderer
-		);
+		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
 	public function testNewRenderer_titleConversionDisabled() {
@@ -68,10 +64,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer',
-			$renderer
-		);
+		$this->assertInstanceOf( VariantsAwareRenderer::class, $renderer );
 	}
 
 	/**
@@ -83,10 +76,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
-			$renderer
-		);
+		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
 	public function newRenderer_forParserFormatProvider() {
@@ -103,10 +93,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer',
-			$renderer
-		);
+		$this->assertInstanceOf( LanguageAwareRenderer::class, $renderer );
 	}
 
 	public function testNewRender_forVariantLanguage() {
@@ -115,10 +102,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$rendererFactory = $this->getStatementGroupRendererFactory();
 		$renderer = $rendererFactory->newRendererFromParser( $parser );
 
-		$this->assertInstanceOf(
-			'Wikibase\Client\DataAccess\PropertyParserFunction\VariantsAwareRenderer',
-			$renderer
-		);
+		$this->assertInstanceOf( VariantsAwareRenderer::class, $renderer );
 	}
 
 	/**

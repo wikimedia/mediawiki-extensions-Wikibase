@@ -85,7 +85,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'callable', $callback );
 
 		$this->assertInstanceOf(
-			'Serializers\Serializer',
+			Serializer::class,
 			call_user_func( $callback, $serializerFactory )
 		);
 	}
@@ -105,7 +105,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'callable', $callback );
 
 		$this->assertInstanceOf(
-			'Deserializers\Deserializer',
+			Deserializer::class,
 			call_user_func( $callback, $deserializerFactroy )
 		);
 	}

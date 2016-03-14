@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Hooks;
 
 use HashSiteStore;
 use TestSites;
+use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\SettingsArray;
 use Wikibase\Test\MockRepository;
@@ -39,7 +40,7 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator();
 
 		$this->assertInstanceOf(
-			'Wikibase\Client\Hooks\OtherProjectsSidebarGenerator',
+			OtherProjectsSidebarGenerator::class,
 			$otherProjectSidebarGenerator
 		);
 	}

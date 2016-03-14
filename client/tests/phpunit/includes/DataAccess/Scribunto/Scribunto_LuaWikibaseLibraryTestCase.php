@@ -115,7 +115,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$this->assertInstanceOf(
-			'Wikibase\Test\MockClientStore',
+			MockClientStore::class,
 			$wikibaseClient->getStore(),
 			'Mocking the default ClientStore failed'
 		);

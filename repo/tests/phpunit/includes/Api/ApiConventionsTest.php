@@ -5,6 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 use ApiBase;
 use ApiMain;
 use FauxRequest;
+use Message;
 use ReflectionMethod;
 
 /**
@@ -75,7 +76,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 			. ' of module ' . $moduleClass . ' is empty' );
 
 		foreach ( $descArray as $desc ) {
-			$this->assertInstanceOf( 'Message', $desc, 'the value returned by the method '
+			$this->assertInstanceOf( Message::class, $desc, 'the value returned by the method '
 				. $method . ' of the module ' . $moduleClass . ' is not a Message object' );
 		}
 	}
@@ -135,7 +136,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 				);
 			} else {
 				$this->assertInstanceOf(
-					'Message',
+					Message::class,
 					$example,
 					'the value of the example for ' . $url . ' in ' . $moduleClass
 					. ' is not a Message'

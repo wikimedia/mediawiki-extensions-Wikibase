@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\DispatchingEntityTypeStatementGrouper;
 use Wikibase\Repo\StatementGrouperBuilder;
 
 /**
@@ -46,7 +47,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 	public function testAcceptsEmptyArray() {
 		$builder = $this->newInstance( array() );
 		$grouper = $builder->getStatementGrouper();
-		$this->assertInstanceOf( 'Wikibase\Repo\DispatchingEntityTypeStatementGrouper', $grouper );
+		$this->assertInstanceOf( DispatchingEntityTypeStatementGrouper::class, $grouper );
 	}
 
 	public function testAcceptsNullGrouper() {

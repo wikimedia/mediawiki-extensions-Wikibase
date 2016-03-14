@@ -10,7 +10,11 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ApiHelperFactory;
+use Wikibase\Repo\Api\EntityLoadingHelper;
+use Wikibase\Repo\Api\EntitySavingHelper;
+use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SummaryFormatter;
@@ -80,7 +84,7 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->newApiHelperFactory();
 
 		$resultBuilder = $factory->getResultBuilder( $api );
-		$this->assertInstanceOf( 'Wikibase\Repo\Api\ResultBuilder', $resultBuilder );
+		$this->assertInstanceOf( ResultBuilder::class, $resultBuilder );
 	}
 
 	public function testGetErrorReporter() {
@@ -88,21 +92,21 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = $this->newApiHelperFactory();
 
 		$errorReporter = $factory->getErrorReporter( $api );
-		$this->assertInstanceOf( 'Wikibase\Repo\Api\ApiErrorReporter', $errorReporter );
+		$this->assertInstanceOf( ApiErrorReporter::class, $errorReporter );
 	}
 
 	public function testGetEntitySavingHelper() {
 		$factory = $this->newApiHelperFactory();
 
 		$helper = $factory->getEntitySavingHelper( $this->newApiModule() );
-		$this->assertInstanceOf( 'Wikibase\Repo\Api\EntitySavingHelper', $helper );
+		$this->assertInstanceOf( EntitySavingHelper::class, $helper );
 	}
 
 	public function testGetEntityLoadingHelper() {
 		$factory = $this->newApiHelperFactory();
 
 		$helper = $factory->getEntityLoadingHelper( $this->newApiModule() );
-		$this->assertInstanceOf( 'Wikibase\Repo\Api\EntityLoadingHelper', $helper );
+		$this->assertInstanceOf( EntityLoadingHelper::class, $helper );
 	}
 
 }

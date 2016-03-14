@@ -32,7 +32,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 		/** @var TermFallback $term */
 		$term = $labelDescriptionLookup->getLabel( new ItemId( 'Q118' ) );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Term\TermFallback', $term );
+		$this->assertInstanceOf( TermFallback::class, $term );
 		$this->assertEquals( 'fallbackterm', $term->getText() );
 		$this->assertEquals( 'zh', $term->getLanguageCode() );
 		$this->assertEquals( 'zh-cn', $term->getActualLanguageCode() );
@@ -48,7 +48,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 		/** @var TermFallback $term */
 		$term = $labelDescriptionLookup->getLabel( new ItemId( 'Q118' ) );
 
-		$this->assertInstanceOf( 'Wikibase\DataModel\Term\TermFallback', $term );
+		$this->assertInstanceOf( TermFallback::class, $term );
 		$this->assertEquals( 'fallbackterm', $term->getText() );
 		$this->assertEquals( 'zh', $term->getLanguageCode() );
 		$this->assertEquals( 'zh-cn', $term->getActualLanguageCode() );

@@ -175,7 +175,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$settings->setSetting( 'siteGroup', 'NYAN' );
 
 		$handler = SidebarHookHandlers::newFromGlobalState();
-		$this->assertInstanceOf( 'Wikibase\Client\Hooks\SidebarHookHandlers', $handler );
+		$this->assertInstanceOf( SidebarHookHandlers::class, $handler );
 
 		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );
 	}

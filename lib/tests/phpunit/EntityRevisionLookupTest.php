@@ -190,7 +190,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $result );
 
 		$entityRev = $lookup->getEntityRevision( $id );
-		$this->assertInstanceOf( 'Wikibase\EntityRevision', $entityRev );
+		$this->assertInstanceOf( EntityRevision::class, $entityRev );
 	}
 
 	public function testGetLatestRevisionForMissing() {

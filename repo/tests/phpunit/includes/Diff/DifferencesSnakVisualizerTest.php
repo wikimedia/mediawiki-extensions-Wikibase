@@ -63,7 +63,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 
 	public function testConstruction() {
 		$instance = $this->newDifferencesSnakVisualizer();
-		$this->assertInstanceOf( 'Wikibase\Repo\Diff\DifferencesSnakVisualizer', $instance );
+		$this->assertInstanceOf( DifferencesSnakVisualizer::class, $instance );
 	}
 
 	public function testConstructionWithBadDetailsFormatter() {

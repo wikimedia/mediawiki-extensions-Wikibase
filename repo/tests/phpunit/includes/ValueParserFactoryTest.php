@@ -4,6 +4,7 @@ namespace Wikibase\Tests\Repo;
 
 use ValueParsers\NullParser;
 use ValueParsers\ParserOptions;
+use ValueParsers\ValueParser;
 use Wikibase\Repo\ValueParserFactory;
 
 /**
@@ -50,7 +51,7 @@ class ValueParserFactoryTest extends \PHPUnit_Framework_TestCase {
 
 		foreach ( $valueParserFactory->getParserIds() as $id ) {
 			$parser = $valueParserFactory->newParser( $id, $options );
-			$this->assertInstanceOf( 'ValueParsers\ValueParser', $parser );
+			$this->assertInstanceOf( ValueParser::class, $parser );
 		}
 	}
 

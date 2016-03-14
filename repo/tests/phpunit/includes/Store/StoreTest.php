@@ -2,11 +2,18 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\IdGenerator;
+use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\Store\ChangeStore;
+use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
+use Wikibase\TermIndex;
 
 /**
  * @covers Wikibase\Store
@@ -49,50 +56,44 @@ class StoreTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param Store $store
 	 */
 	public function testNewSiteLinkStore( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\Lib\Store\SiteLinkLookup', $store->newSiteLinkStore() );
+		$this->assertInstanceOf( SiteLinkLookup::class, $store->newSiteLinkStore() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param Store $store
 	 */
 	public function testNewTermCache( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\TermIndex', $store->getTermIndex() );
+		$this->assertInstanceOf( TermIndex::class, $store->getTermIndex() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param Store $store
 	 */
 	public function testGetLabelConflictFinder( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\Lib\Store\LabelConflictFinder', $store->getLabelConflictFinder() );
+		$this->assertInstanceOf( LabelConflictFinder::class, $store->getLabelConflictFinder() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param Store $store
 	 */
 	public function testNewIdGenerator( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\IdGenerator', $store->newIdGenerator() );
+		$this->assertInstanceOf( IdGenerator::class, $store->newIdGenerator() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param Store $store
 	 */
 	public function testGetChangeLookup( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\Lib\Store\ChangeLookup', $store->getChangeLookup() );
+		$this->assertInstanceOf( ChangeLookup::class, $store->getChangeLookup() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param Store $store
 	 */
 	public function testGetChangeStore( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\Repo\Store\ChangeStore', $store->getChangeStore() );
+		$this->assertInstanceOf( ChangeStore::class, $store->getChangeStore() );
 	}
 
 	/**
@@ -100,7 +101,7 @@ class StoreTest extends \MediaWikiTestCase {
 	 */
 	public function testGetSiteLinkConflictLookup( Store $store ) {
 		$this->assertInstanceOf(
-			'\Wikibase\Repo\Store\SiteLinkConflictLookup',
+			SiteLinkConflictLookup::class,
 			$store->getSiteLinkConflictLookup()
 		);
 	}

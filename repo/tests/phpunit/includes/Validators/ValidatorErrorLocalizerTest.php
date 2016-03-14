@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Repo\Validators;
 
+use Message;
+use Status;
 use ValueFormatters\ValueFormatter;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -65,7 +67,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 		$message = $localizer->getErrorMessage( $error );
 
 		//TODO: check that messages for actual error codes exist
-		$this->assertInstanceOf( 'Message', $message );
+		$this->assertInstanceOf( Message::class, $message );
 		$this->assertEquals( $params, $message->getParams() );
 	}
 
@@ -88,7 +90,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 		$localizer = new ValidatorErrorLocalizer( $this->getMockFormatter() );
 		$status = $localizer->getResultStatus( $result );
 
-		$this->assertInstanceOf( 'Status', $status );
+		$this->assertInstanceOf( Status::class, $status );
 		$this->assertEquals( $result->isValid(), $status->isOk(), 'isOK()' );
 
 		$this->assertEquals( count( $result->getErrors() ), count( $status->getErrorsArray() ), 'Error count:' );

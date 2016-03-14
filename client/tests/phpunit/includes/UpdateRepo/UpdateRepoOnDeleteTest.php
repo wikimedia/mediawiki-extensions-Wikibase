@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\UpdateRepo;
 
+use IJobSpecification;
 use JobQueueGroup;
 use JobQueueRedis;
 use JobSpecification;
@@ -117,7 +118,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 		$itemId = new ItemId( 'Q123' );
 
 		$data = $this->getFakeData();
-		$this->assertInstanceOf( 'IJobSpecification', $job );
+		$this->assertInstanceOf( IJobSpecification::class, $job );
 		$this->assertEquals( 'UpdateRepoOnDelete', $job->getType() );
 
 		$params = $job->getParams();

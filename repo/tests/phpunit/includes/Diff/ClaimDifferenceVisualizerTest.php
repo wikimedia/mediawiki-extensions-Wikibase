@@ -78,7 +78,7 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 
 	public function testConstruction() {
 		$instance = $this->newClaimDifferenceVisualizer();
-		$this->assertInstanceOf( 'Wikibase\Repo\Diff\ClaimDifferenceVisualizer', $instance );
+		$this->assertInstanceOf( ClaimDifferenceVisualizer::class, $instance );
 	}
 
 	/**

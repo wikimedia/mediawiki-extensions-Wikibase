@@ -59,7 +59,7 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructor( $propertyIds ) {
 		$instance = $this->newInstance( $propertyIds );
-		$this->assertInstanceOf( 'Wikibase\Repo\ParserOutput\PageImagesDataUpdater', $instance );
+		$this->assertInstanceOf( PageImagesDataUpdater::class, $instance );
 	}
 
 	public function constructorArgumentsProvider() {
