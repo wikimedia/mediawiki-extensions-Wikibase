@@ -244,7 +244,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 
 	public function testGetEntityTermsForLanguageListView_isEscaped() {
 		MessageCache::singleton()->enable();
-		$this->setMwGlobals( 'wgLang', Language::factory( 'en' ) );
+		$this->setUserLang( 'en' );
 		$this->insertPage( 'MediaWiki:wikibase-entitytermsforlanguagelistview-language', "''RAW''" );
 
 		$view = $this->getEntityTermsView();

@@ -24,13 +24,13 @@ use WikiPage;
 class ViewEntityActionTest extends ActionTestCase {
 
 	protected function setUp() {
+		parent::setUp();
+
 		// NOTE: use a language here for which we actually have labels etc
-		$this->languageCode = 'de';
+		$this->setUserLang( 'de' );
 
 		// Remove handlers for the "OutputPageParserOutput" hook
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'OutputPageParserOutput' => array() ) );
-
-		parent::setUp();
 	}
 
 	public function testActionForPage() {
