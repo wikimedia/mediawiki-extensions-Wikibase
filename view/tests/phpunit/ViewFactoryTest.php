@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use SiteList;
 use SiteStore;
+use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
@@ -70,6 +71,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$templateFactory,
 			$languageNameLookup,
 			$this->getMock( LanguageDirectionalityLookup::class ),
+			new BasicNumberLocalizer(),
 			array(),
 			array(),
 			array()
