@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 
@@ -35,7 +36,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	public function testWhenEntityNotFound_getLabelThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
+		$this->setExpectedException( TermLookupException::class );
 		$termLookup->getLabel( new ItemId( 'Q90000' ), 'en' );
 	}
 
@@ -72,7 +73,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	public function testGetLabels_noEntityThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
+		$this->setExpectedException( TermLookupException::class );
 		$termLookup->getLabels( new ItemId( 'Q90000' ), array( 'x' ) );
 	}
 
@@ -93,7 +94,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	public function testWhenEntityNotFound_getDescriptionThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
+		$this->setExpectedException( TermLookupException::class );
 		$termLookup->getDescription( new ItemId( 'Q90000' ), 'en' );
 	}
 
@@ -135,7 +136,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 	public function testGetDescriptions_noEntityThrowsException() {
 		$termLookup = $this->getEntityInfoTermLookup();
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\TermLookupException' );
+		$this->setExpectedException( TermLookupException::class );
 		$termLookup->getDescriptions( new ItemId( 'Q90000' ), array( 'x' ) );
 	}
 

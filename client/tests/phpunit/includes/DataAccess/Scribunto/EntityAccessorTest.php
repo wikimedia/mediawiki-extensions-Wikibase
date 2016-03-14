@@ -134,7 +134,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideZeroIndexedArray
 	 */
 	public function testZeroIndexArray( array $array, array $expected ) {
-		$renumber = new ReflectionMethod( 'Wikibase\Client\DataAccess\Scribunto\EntityAccessor', 'renumber' );
+		$renumber = new ReflectionMethod( EntityAccessor::class, 'renumber' );
 		$renumber->setAccessible( true );
 		$renumber->invokeArgs( $this->getEntityAccessor(), array( &$array ) );
 

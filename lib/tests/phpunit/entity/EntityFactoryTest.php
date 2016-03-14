@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\EntityFactory;
 
 /**
@@ -18,8 +20,8 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 
 	private function getEntityFactory() {
 		return new EntityFactory( array(
-			'item' => 'Wikibase\DataModel\Entity\Item',
-			'property' => 'Wikibase\DataModel\Entity\Property',
+			'item' => Item::class,
+			'property' => Property::class,
 		) );
 	}
 
@@ -56,8 +58,8 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 
 	public function provideNewEmpty() {
 		return array(
-			array( 'item', 'Wikibase\DataModel\Entity\Item' ),
-			array( 'property', 'Wikibase\DataModel\Entity\Property' ),
+			array( 'item', Item::class ),
+			array( 'property', Property::class ),
 		);
 	}
 

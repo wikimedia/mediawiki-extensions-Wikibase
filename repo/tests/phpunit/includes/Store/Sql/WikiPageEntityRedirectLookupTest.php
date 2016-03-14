@@ -6,6 +6,7 @@ use DatabaseMysql;
 use LoadBalancer;
 use MediaWikiTestCase;
 use Title;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Store\EntityIdLookup;
 use WikiPage;
@@ -93,7 +94,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testGetRedirectForEntityId_entityDoesNotExist() {
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException' );
+		$this->setExpectedException( EntityRedirectLookupException::class );
 		$this->getWikiPageEntityRedirectLookup()->getRedirectForEntityId( new ItemId( 'Q48758903' ) );
 	}
 

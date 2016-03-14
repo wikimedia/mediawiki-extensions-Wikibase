@@ -7,7 +7,9 @@ use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use OutOfBoundsException;
+use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\FormattingException;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -183,7 +185,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				SnakFormatter::FORMAT_HTML,
 				$dispatchingFormatter,
 				null,
-				'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
+				MismatchingDataValueTypeException::class
 			),
 
 			'VT mismatching PT, fail' => array(
@@ -193,7 +195,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				SnakFormatter::FORMAT_WIKI,
 				$dispatchingFormatter,
 				null,
-				'ValueFormatters\Exceptions\MismatchingDataValueTypeException'
+				MismatchingDataValueTypeException::class
 			),
 
 			'property not found, fail' => array(
@@ -203,7 +205,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				SnakFormatter::FORMAT_HTML,
 				$dispatchingFormatter,
 				null,
-				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
+				PropertyDataTypeLookupException::class
 			),
 
 			'data type not found, fail' => array(
@@ -213,7 +215,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 				SnakFormatter::FORMAT_HTML,
 				$dispatchingFormatter,
 				null,
-				'ValueFormatters\FormattingException'
+				FormattingException::class
 			),
 		);
 	}

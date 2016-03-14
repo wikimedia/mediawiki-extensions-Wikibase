@@ -9,6 +9,7 @@ use Site;
 use TestSites;
 use ValueValidators\Error;
 use ValueValidators\Result;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -453,7 +454,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		);
 
 		$this->setExpectedException(
-			'\Wikibase\ChangeOp\ChangeOpException',
+			ChangeOpException::class,
 			'Conflicting sitelinks for enwiki, Failed to normalize'
 		);
 
@@ -470,10 +471,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 			$to
 		);
 
-		$this->setExpectedException(
-			'\Wikibase\ChangeOp\ChangeOpException',
-			'SiteLink conflict'
-		);
+		$this->setExpectedException( ChangeOpException::class, 'SiteLink conflict' );
 		$changeOps->apply();
 	}
 
@@ -506,7 +504,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$changeOps = $this->makeChangeOpsMerge( $from, $to );
 
 		$this->setExpectedException(
-			'\Wikibase\ChangeOp\ChangeOpException',
+			ChangeOpException::class,
 			'The two items cannot be merged because one of them links to the other using property P42'
 		);
 		$changeOps->apply();
@@ -523,7 +521,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$changeOps = $this->makeChangeOpsMerge( $from, $to );
 
 		$this->setExpectedException(
-			'\Wikibase\ChangeOp\ChangeOpException',
+			ChangeOpException::class,
 			'The two items cannot be merged because one of them links to the other using property P42'
 		);
 		$changeOps->apply();

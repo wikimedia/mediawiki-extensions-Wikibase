@@ -16,6 +16,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
+use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 
 /**
@@ -39,12 +40,12 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function getEntityChangeFactory() {
 		$entityClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
+			Item::ENTITY_TYPE => Item::class,
+			Property::ENTITY_TYPE => Property::class,
 		);
 
 		$changeClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			Item::ENTITY_TYPE => ItemChange::class,
 		);
 
 		$factory = new EntityChangeFactory(
@@ -58,8 +59,8 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	public function newForEntityProvider() {
 		return array(
-			'add item' => array( EntityChange::ADD, new ItemId( 'Q17' ), 'Wikibase\ItemChange' ),
-			'remove property' => array( EntityChange::REMOVE, new PropertyId( 'P17' ), 'Wikibase\EntityChange' ),
+			'add item' => array( EntityChange::ADD, new ItemId( 'Q17' ), ItemChange::class ),
+			'remove property' => array( EntityChange::REMOVE, new PropertyId( 'P17' ), EntityChange::class ),
 		);
 	}
 

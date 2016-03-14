@@ -50,7 +50,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 	private function getTimeValue( $timestamp, $precision, $calendarModel ) {
 		$value = new TimeValue( '+1-00-00T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_YEAR, $calendarModel );
 
-		$class = new \ReflectionClass( 'DataValues\TimeValue' );
+		$class = new \ReflectionClass( TimeValue::class );
 
 		$timestampProperty = $class->getProperty( 'timestamp' );
 		$timestampProperty->setAccessible( true );

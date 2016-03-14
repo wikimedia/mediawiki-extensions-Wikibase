@@ -13,6 +13,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\EntityChange;
+use Wikibase\ItemChange;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Reporting\NullMessageReporter;
@@ -177,8 +179,9 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 * @return Change
 	 */
 	private function newChange( $changeId, EntityId $entityId, $time, Diff $siteLinkDiff = null ) {
-		$changeClass = ( $entityId->getEntityType() === Item::ENTITY_TYPE )
-			? 'Wikibase\ItemChange' : 'Wikibase\EntityChange';
+		$changeClass = $entityId->getEntityType() === Item::ENTITY_TYPE
+			? ItemChange::class
+			: EntityChange::class;
 
 		$change = $this->getMockBuilder( $changeClass )
 			->disableOriginalConstructor()

@@ -151,7 +151,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$jobQueueGroup = $this->getJobQueueGroupMock();
 
 		$jobMatcher = function( Job $job ) use ( $title ) {
-			PHPUnit_Framework_Assert::assertInstanceOf( 'RefreshLinksJob', $job );
+			PHPUnit_Framework_Assert::assertInstanceOf( RefreshLinksJob::class, $job );
 			PHPUnit_Framework_Assert::assertEquals(
 				$title->getPrefixedDBkey(),
 				$job->getTitle()->getPrefixedDBkey()

@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
+use Wikibase\ItemChange;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Test\MockRepository;
 use Wikibase\Test\TestChanges;
@@ -123,9 +124,9 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$diff = $this->makeDiff( $values['object_id'], $values['info']['metadata']['parent_id'], $values[ 'revision_id' ] );
 		$values['info'] = serialize( $values['info'] );
 
-		$class = 'Wikibase\EntityChange';
+		$class = EntityChange::class;
 		if ( $values['type'] === 'wikibase-item~add' || $values['type'] === 'wikibase-item~update' ) {
-			$class = 'Wikibase\ItemChange';
+			$class = ItemChange::class;
 		}
 
 		$change = new $class( $values );
@@ -157,7 +158,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 
 	private function makeDiff( $objectId, $revA, $revB ) {
 		$entityClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
+			Item::ENTITY_TYPE => Item::class,
 		);
 
 		$lookup = $this->getEntityRevisionLookup();

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
+use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -91,7 +92,7 @@ class RdfVocabularyTest extends PHPUnit_Framework_TestCase {
 			$this->assertEquals( $uri, $vocab->getNamespaceURI( $ns ) );
 		}
 
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 		$vocab->getNamespaceURI( 'NonExistingNamespaceForGetNamespaceUriTest' );
 	}
 

@@ -63,7 +63,7 @@ class ApiModuleTestHelper {
 	 * @param Exception $ex
 	 */
 	public function assertUsageException( $expected, Exception $ex ) {
-		Assert::assertInstanceOf( 'UsageException', $ex );
+		Assert::assertInstanceOf( UsageException::class, $ex );
 		/** @var UsageException $ex */
 
 		if ( is_string( $expected ) ) {

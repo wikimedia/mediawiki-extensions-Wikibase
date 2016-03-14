@@ -11,9 +11,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * @covers Wikibase\Test\MockRepository
@@ -447,21 +449,21 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 				'entity' => $thirdItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
-				'error' => 'Wikibase\Lib\Store\StorageException'
+				'error' => StorageException::class
 			),
 
 			'not exists' => array(
 				'entity' => $fourthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
-				'error' => 'Wikibase\Lib\Store\\StorageException'
+				'error' => StorageException::class
 			),
 
 			'bad base' => array(
 				'entity' => $fifthItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => 1234,
-				'error' => 'Wikibase\Lib\Store\\StorageException'
+				'error' => StorageException::class
 			),
 		);
 	}
@@ -513,7 +515,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $redirect->getEntityId()->getSerialization(), $logEntry['entity'] );
 		$this->assertEquals( 'redirected Q10 to Q1', $logEntry['summary'] );
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\RevisionedUnresolvedRedirectException' );
+		$this->setExpectedException( RevisionedUnresolvedRedirectException::class );
 		$this->repo->getEntity( $q10 );
 	}
 
@@ -601,7 +603,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$redirect = new EntityRedirect( new ItemId( 'Q11' ), new ItemId( 'Q1' ) );
 		$this->repo->putRedirect( $redirect );
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\RevisionedUnresolvedRedirectException' );
+		$this->setExpectedException( RevisionedUnresolvedRedirectException::class );
 		$this->repo->deleteEntity( $redirect->getEntityId(), 'testing', $GLOBALS['wgUser'] );
 	}
 
@@ -698,7 +700,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 		$this->assertNull( $mock->getRedirectForEntityId( $q5 ), 'not a redirect' );
 		$this->assertEquals( $q5, $mock->getRedirectForEntityId( $q55 ) );
 
-		$this->setExpectedException( 'Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException' );
+		$this->setExpectedException( EntityRedirectLookupException::class );
 		$mock->getRedirectForEntityId( $q77 );
 	}
 

@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
+use Diff\Patcher\PatcherException;
 use ParserOutput;
 use PHPUnit_Framework_Assert;
 use Title;
@@ -353,7 +354,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	 */
 	public function testGetPatchedCopy( EntityContent $base, EntityContentDiff $patch, EntityContent $expected = null ) {
 		if ( $expected === null ) {
-			$this->setExpectedException( 'Diff\Patcher\PatcherException' );
+			$this->setExpectedException( PatcherException::class );
 		}
 
 		$actual = $base->getPatchedCopy( $patch );

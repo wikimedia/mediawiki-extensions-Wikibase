@@ -125,7 +125,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 
 		$actual = $lookup->getPagesUsing( array( $q23 ), array( EntityUsage::OTHER_USAGE ) );
 		$this->assertInstanceOf( Traversable::class, $actual );
-		$this->assertContainsOnlyInstancesOf( 'Wikibase\Client\Usage\PageEntityUsages', $actual );
+		$this->assertContainsOnlyInstancesOf( PageEntityUsages::class, $actual );
 		$this->assertCount( 1, $actual );
 
 		/** @var PageEntityUsages[] $actual */
@@ -134,7 +134,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 
 		$usages = $pageUsageObject->getUsages();
 		$this->assertInternalType( 'array', $usages );
-		$this->assertContainsOnlyInstancesOf( 'Wikibase\Client\Usage\EntityUsage', $usages );
+		$this->assertContainsOnlyInstancesOf( EntityUsage::class, $usages );
 		$this->assertCount( 1, $usages );
 
 		$usage = reset( $usages );
@@ -143,7 +143,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 
 		$actual = $lookup->getPagesUsing( array( $q42, $q23, $p11 ) );
 		$this->assertInstanceOf( Traversable::class, $actual );
-		$this->assertContainsOnlyInstancesOf( 'Wikibase\Client\Usage\PageEntityUsages', $actual );
+		$this->assertContainsOnlyInstancesOf( PageEntityUsages::class, $actual );
 		$this->assertCount( 1, $actual );
 
 		$pageUsageObject = $actual[0];
@@ -151,7 +151,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 
 		$usages = $pageUsageObject->getUsages();
 		$this->assertInternalType( 'array', $usages );
-		$this->assertContainsOnlyInstancesOf( 'Wikibase\Client\Usage\EntityUsage', $usages );
+		$this->assertContainsOnlyInstancesOf( EntityUsage::class, $usages );
 		$this->assertCount( 1, $usages );
 
 		$usage = reset( $usages );

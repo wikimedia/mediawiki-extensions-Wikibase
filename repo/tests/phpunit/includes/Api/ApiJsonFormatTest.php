@@ -3,6 +3,8 @@
 namespace Wikibase\Test\Repo\Api;
 
 use ApiBase;
+use Wikibase\Repo\Api\GetEntities;
+use Wikibase\Repo\Api\SetLabel;
 
 /**
  * @group API
@@ -103,7 +105,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 			'ids' => $entityId
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetEntities', 'wbgetentities', $params );
+		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -121,7 +123,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 			'value' => 'enGbLabel',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetLabel', 'wbsetlabel', $params, true );
+		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -134,7 +136,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 			'value' => '',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetLabel', 'wbsetlabel', $params, true );
+		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 

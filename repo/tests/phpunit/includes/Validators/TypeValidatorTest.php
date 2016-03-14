@@ -25,9 +25,9 @@ class TypeValidatorTest extends \PHPUnit_Framework_TestCase {
 			array( 'integer', 1.1, false, "not an integer" ),
 			array( 'object', new StringValue( "foo" ), true, "object" ),
 			array( 'object', "foo", false, "not an object" ),
-			array( 'DataValues\StringValue', new StringValue( "foo" ), true, "StringValue" ),
-			array( 'DataValues\StringValue', new NumberValue( 7 ), false, "not a StringValue" ),
-			array( 'DataValues\StringValue', 33, false, "definitly not a StringValue" ),
+			array( StringValue::class, new StringValue( "foo" ), true, "StringValue" ),
+			array( StringValue::class, new NumberValue( 7 ), false, "not a StringValue" ),
+			array( StringValue::class, 33, false, "definitly not a StringValue" ),
 		);
 	}
 

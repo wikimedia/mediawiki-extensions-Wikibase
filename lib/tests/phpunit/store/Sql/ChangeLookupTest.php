@@ -72,7 +72,7 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 		$start = $this->offsetStart( $start );
 
 		$lookup = new ChangeLookup(
-			array( 'wikibase-item~remove' => 'Wikibase\EntityChange' ),
+			array( 'wikibase-item~remove' => EntityChange::class ),
 			wfWikiID()
 		);
 
@@ -88,7 +88,7 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 		$start = $this->offsetStart( 3 );
 
 		$lookup = new ChangeLookup(
-			array( 'wikibase-item~remove' => 'Wikibase\EntityChange' ),
+			array( 'wikibase-item~remove' => EntityChange::class ),
 			wfWikiID()
 		);
 
@@ -117,7 +117,7 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 		$changeStore->saveChange( $expected );
 
 		$lookup = new ChangeLookup(
-			array( 'wikibase-item~remove' => 'Wikibase\EntityChange' ),
+			array( 'wikibase-item~remove' => EntityChange::class ),
 			wfWikiID()
 		);
 
@@ -135,7 +135,7 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 		}
 
 		$lookup = new ChangeLookup(
-			array( 'wikibase-item~remove' => 'Wikibase\EntityChange' ),
+			array( 'wikibase-item~remove' => EntityChange::class ),
 			wfWikiID()
 		);
 

@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpAliases;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
 
@@ -149,7 +150,7 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 
 		$changeOpAliases = new ChangeOpAliases( 'en', array( 'test' ), 'invalidAction', $validatorFactory );
 
-		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+		$this->setExpectedException( ChangeOpException::class );
 		$changeOpAliases->apply( $entity );
 	}
 

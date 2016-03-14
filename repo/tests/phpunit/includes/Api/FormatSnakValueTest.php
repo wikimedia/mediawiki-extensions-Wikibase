@@ -7,6 +7,7 @@ use DataValues\DataValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use UsageException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -251,7 +252,7 @@ class FormatSnakValueTest extends ApiTestCase {
 		);
 
 		$this->setExpectedException(
-			'UsageException',
+			UsageException::class,
 			'The parameters datatype, property can not be used together'
 		);
 		$this->doApiRequest( $params );

@@ -784,7 +784,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		$titleLookup = $this->getEntityTitleLookup();
 		$item = new Item();
 
-		$isNew = new ReflectionMethod( 'Wikibase\EditEntity', 'isNew' );
+		$isNew = new ReflectionMethod( EditEntity::class, 'isNew' );
 		$isNew->setAccessible( true );
 
 		$edit = $this->makeEditEntity( $repo, $item, $titleLookup );

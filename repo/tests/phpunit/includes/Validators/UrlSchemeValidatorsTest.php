@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Validators;
 
 use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 use Wikibase\Repo\Validators\UrlSchemeValidators;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
@@ -133,7 +134,7 @@ class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 		$validators = $factory->getValidators( $schemes );
 
 		$this->assertEquals( array( 'http', 'https', 'ftp' ), array_keys( $validators ) );
-		$this->assertContainsOnlyInstancesOf( 'ValueValidators\ValueValidator', $validators );
+		$this->assertContainsOnlyInstancesOf( ValueValidator::class, $validators );
 	}
 
 }

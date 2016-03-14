@@ -456,7 +456,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	 * @dataProvider permissionProvider
 	 */
 	public function testSetRedirect_noPermission( $permission ) {
-		$this->setExpectedException( 'Wikibase\Repo\Interactors\ItemMergeException' );
+		$this->setExpectedException( ItemMergeException::class );
 
 		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
 

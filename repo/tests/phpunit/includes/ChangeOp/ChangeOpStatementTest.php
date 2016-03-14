@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpStatement;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -230,7 +231,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @param Statement $statement
 	 */
 	public function testApplyInvalidThrowsException( Item $item, Statement $statement ) {
-		$this->setExpectedException( '\Wikibase\ChangeOp\ChangeOpException' );
+		$this->setExpectedException( ChangeOpException::class );
 
 		$changeOpStatement = $this->newChangeOpStatement( $statement );
 		$changeOpStatement->apply( $item );
@@ -311,7 +312,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideInvalidApply
 	 */
 	public function testInvalidApply( Item $item, ChangeOpStatement $changeOp ) {
-		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+		$this->setExpectedException( ChangeOpException::class );
 
 		$changeOp->apply( $item );
 	}

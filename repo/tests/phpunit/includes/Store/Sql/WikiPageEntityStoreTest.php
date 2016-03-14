@@ -165,14 +165,14 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 				'entity' => $firstItem,
 				'flags' => EDIT_NEW,
 				'baseRevid' => false,
-				'error' => 'Wikibase\Lib\Store\StorageException'
+				'error' => StorageException::class
 			),
 
 			'not exists' => array(
 				'entity' => $secondItem,
 				'flags' => EDIT_UPDATE,
 				'baseRevid' => false,
-				'error' => 'Wikibase\Lib\Store\StorageException'
+				'error' => StorageException::class
 			),
 		);
 	}
@@ -284,7 +284,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		list( $store, ) = $this->createStoreAndLookup();
 		$user = $GLOBALS['wgUser'];
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\StorageException' );
+		$this->setExpectedException( StorageException::class );
 		$store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
 	}
 

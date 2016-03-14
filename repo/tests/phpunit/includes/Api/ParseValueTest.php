@@ -9,6 +9,7 @@ use FauxRequest;
 use Language;
 use UsageException;
 use ValueParsers\NullParser;
+use ValueParsers\ParseException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ParseValue;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
@@ -225,7 +226,7 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 				),
 				array(
 					'0/raw' => 'XYZ',
-					'0/error' => 'ValueParsers\ParseException',
+					'0/error' => ParseException::class,
 					'0/error-info' => '/^.+$/',
 					'0/messages/0/html/*' => '/^.+$/',
 				),
@@ -237,7 +238,7 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 					'datatype' => 'globe-coordinate',
 				),
 				array(
-					'0/error' => 'ValueParsers\ParseException',
+					'0/error' => ParseException::class,
 					'1/type' => 'globecoordinate',
 				),
 			),

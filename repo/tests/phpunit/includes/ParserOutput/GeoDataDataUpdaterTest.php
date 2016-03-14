@@ -8,6 +8,7 @@ use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
+use GeoData\GeoData;
 use ParserOutput;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -33,10 +34,7 @@ use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
 class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 	private function willSkipTests() {
-		if ( !class_exists( 'GeoData\GeoData' ) ) {
-			return true;
-		}
-		return false;
+		return !class_exists( GeoData::class );
 	}
 
 	protected function setUp() {

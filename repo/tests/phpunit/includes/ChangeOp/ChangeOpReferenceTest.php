@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpReference;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -263,7 +264,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideApplyInvalid
 	 */
 	public function testApplyInvalid( EntityDocument $entity, $claimGuid, Reference $reference, $referenceHash = '', $index = null ) {
-		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+		$this->setExpectedException( ChangeOpException::class );
 
 		$changeOpReference = new ChangeOpReference(
 			$claimGuid,

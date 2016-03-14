@@ -5,8 +5,13 @@ namespace Wikibase\Lib\Test;
 use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\SnakConstructionService;
 
 /**
@@ -25,7 +30,7 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 		$dataTypeLookup = new InMemoryDataTypeLookup();
 		$dataTypeFactory = new DataTypeFactory( array( 'string' => 'string' ) );
 		$dataValueFactory = new DataValueFactory( new DataValueDeserializer( array(
-			'string' => 'DataValues\StringValue',
+			'string' => StringValue::class,
 		) ) );
 
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'p1' ), 'string' );
@@ -62,34 +67,34 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'novalue' => array(
 				1, 'novalue', null,
-				'Wikibase\DataModel\Snak\PropertyNoValueSnak',
+				PropertyNoValueSnak::class,
 			),
 			'somevalue' => array(
 				1, 'somevalue', null,
-				'Wikibase\DataModel\Snak\PropertySomeValueSnak',
+				PropertySomeValueSnak::class,
 			),
 			'value' => array(
 				1, 'value', '"hello"',
-				'Wikibase\DataModel\Snak\PropertyValueSnak',
+				PropertyValueSnak::class,
 			),
 			'novalue/badprop' => array(
 				66, 'novalue', null,
-				'Wikibase\DataModel\Snak\PropertyNoValueSnak',
-				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
+				PropertyNoValueSnak::class,
+				PropertyDataTypeLookupException::class
 			),
 			'somevalue/badprop' => array(
 				66, 'somevalue', null,
-				'Wikibase\DataModel\Snak\PropertySomeValueSnak',
-				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
+				PropertySomeValueSnak::class,
+				PropertyDataTypeLookupException::class
 			),
 			'value/badprop' => array(
 				66, 'value', '"hello"',
-				'Wikibase\DataModel\Snak\PropertyValueSnak',
-				'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException'
+				PropertyValueSnak::class,
+				PropertyDataTypeLookupException::class
 			),
 			'value/badvalue' => array(
 				1, 'value', array( 'foo' ),
-				'Wikibase\DataModel\Snak\PropertyValueSnak',
+				PropertyValueSnak::class,
 				'InvalidArgumentException'
 			),
 		);

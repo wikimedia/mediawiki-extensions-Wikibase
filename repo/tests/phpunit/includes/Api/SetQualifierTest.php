@@ -10,6 +10,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
@@ -109,9 +111,9 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 	public function provideAddRequests() {
 		return array(
-			array( 'Wikibase\DataModel\Snak\PropertyNoValueSnak' ),
-			array( 'Wikibase\DataModel\Snak\PropertySomeValueSnak' ),
-			array( 'Wikibase\DataModel\Snak\PropertyValueSnak', new StringValue( 'o_O' ) )
+			array( PropertyNoValueSnak::class ),
+			array( PropertySomeValueSnak::class ),
+			array( PropertyValueSnak::class, new StringValue( 'o_O' ) )
 		);
 	}
 
@@ -135,7 +137,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	}
 
 	public function provideChangeRequests() {
-		return array( array( 'Wikibase\DataModel\Snak\PropertyValueSnak', new StringValue( 'o_O' ) ) );
+		return array( array( PropertyValueSnak::class, new StringValue( 'o_O' ) ) );
 	}
 
 	/**

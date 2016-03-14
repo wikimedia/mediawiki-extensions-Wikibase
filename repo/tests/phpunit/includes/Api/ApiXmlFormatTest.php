@@ -7,6 +7,15 @@ use DOMDocument;
 use DOMXPath;
 use HashSiteStore;
 use TestSites;
+use Wikibase\Repo\Api\EditEntity;
+use Wikibase\Repo\Api\GetClaims;
+use Wikibase\Repo\Api\GetEntities;
+use Wikibase\Repo\Api\SetAliases;
+use Wikibase\Repo\Api\SetClaim;
+use Wikibase\Repo\Api\SetDescription;
+use Wikibase\Repo\Api\SetLabel;
+use Wikibase\Repo\Api\SetQualifier;
+use Wikibase\Repo\Api\SetReference;
 use Wikibase\Repo\Api\SetSiteLink;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
@@ -33,7 +42,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'ids' => $entityId
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetEntities', 'wbgetentities', $params );
+		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -49,7 +58,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'entity' => $entityId
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\GetClaims', 'wbgetclaims', $params );
+		$module = $this->getApiModule( GetClaims::class, 'wbgetclaims', $params );
 		$actual = $this->executeApiModule( $module );
 
 		$this->assertXmlStringEqualsXmlString( $this->getExpectedXml( 'getclaims' ), $actual );
@@ -66,7 +75,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'value' => 'enGbLabel',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetLabel', 'wbsetlabel', $params, true );
+		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -79,7 +88,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'value' => '',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetLabel', 'wbsetlabel', $params, true );
+		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -97,7 +106,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'value' => 'enGbDescription',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetDescription', 'wbsetdescription', $params, true );
+		$module = $this->getApiModule( SetDescription::class, 'wbsetdescription', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -110,7 +119,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'value' => '',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetDescription', 'wbsetdescription', $params, true );
+		$module = $this->getApiModule( SetDescription::class, 'wbsetdescription', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -128,7 +137,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'set' => 'AA|BB|CC',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetAliases', 'wbsetaliases', $params, true );
+		$module = $this->getApiModule( SetAliases::class, 'wbsetaliases', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -141,7 +150,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'remove' => 'BB|CC',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetAliases', 'wbsetaliases', $params, true );
+		$module = $this->getApiModule( SetAliases::class, 'wbsetaliases', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
@@ -161,7 +170,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		);
 
 		/** @var SetSiteLink $module */
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetSiteLink', 'wbsetsitelink', $params, true );
+		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
 		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( TestSites::getSites() ), array() );
 		$module->setServices( $siteTargetProvider );
 		$result = $this->executeApiModule( $module );
@@ -179,7 +188,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		);
 
 		/** @var SetSiteLink $module */
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetSiteLink', 'wbsetsitelink', $params, true );
+		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
 		$module->setServices( $siteTargetProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
@@ -197,7 +206,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'claim' => $json,
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetClaim', 'wbsetclaim', $params, true );
+		$module = $this->getApiModule( SetClaim::class, 'wbsetclaim', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
 
@@ -216,7 +225,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'snaks' => $json,
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetReference', 'wbsetreference', $params, true );
+		$module = $this->getApiModule( SetReference::class, 'wbsetreference', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
 		$actual = $this->replaceHashWithMock( $actual );
@@ -236,7 +245,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'snaktype' => 'value',
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\SetQualifier', 'wbsetqualifier', $params, true );
+		$module = $this->getApiModule( SetQualifier::class, 'wbsetqualifier', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result );
 		$actual = $this->replaceHashWithMock( $actual );
@@ -258,7 +267,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 			'data' => $json,
 		);
 
-		$module = $this->getApiModule( '\Wikibase\Repo\Api\EditEntity', 'wbeditEntity', $params, true );
+		$module = $this->getApiModule( EditEntity::class, 'wbeditEntity', $params, true );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 		$actual = $this->replaceHashWithMock( $actual );

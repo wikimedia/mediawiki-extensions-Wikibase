@@ -16,6 +16,7 @@ use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DiffChange;
 use Wikibase\EntityChange;
 use Wikibase\EntityFactory;
+use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 
 /**
@@ -60,12 +61,12 @@ final class TestChanges {
 	 */
 	public static function getEntityChangeFactory() {
 		$entityClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
+			Item::ENTITY_TYPE => Item::class,
+			Property::ENTITY_TYPE => Property::class,
 		);
 
 		$changeClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			Item::ENTITY_TYPE => ItemChange::class,
 		);
 
 		$factory = new EntityChangeFactory(

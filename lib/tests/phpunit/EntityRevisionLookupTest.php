@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Store\StorageException;
 
 /**
  * Base class for testing EntityRevisionLookup implementations
@@ -92,13 +93,13 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 				new ItemId( 'q42' ), 12, true,
 			),
 			array( // #3: bad revision
-				new ItemId( 'q42' ), 600000, false, 'Wikibase\Lib\Store\StorageException',
+				new ItemId( 'q42' ), 600000, false, StorageException::class,
 			),
 			array( // #4: wrong type
 				new ItemId( 'q753' ), EntityRevisionLookup::LATEST_FROM_SLAVE, false,
 			),
 			array( // #5: mismatching revision
-				new PropertyId( 'p753' ), 11, false, 'Wikibase\Lib\Store\StorageException',
+				new PropertyId( 'p753' ), 11, false, StorageException::class,
 			),
 			array( // #6: some revision
 				new PropertyId( 'p753' ), EntityRevisionLookup::LATEST_FROM_SLAVE, true,

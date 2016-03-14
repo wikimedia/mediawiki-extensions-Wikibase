@@ -11,6 +11,7 @@ use Wikibase\Lib\PropertyInfoProvider;
 use Wikibase\Lib\PropertyInfoSnakUrlExpander;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Test\MockPropertyInfoStore;
+use Wikimedia\Assert\ParameterTypeException;
 
 /**
  * @covers Wikibase\Lib\PropertyInfoSnakUrlExpander
@@ -137,7 +138,7 @@ class PropertyInfoSnakUrlExpanderTest extends \PHPUnit_Framework_TestCase {
 		);
 		$urlExpander = new PropertyInfoSnakUrlExpander( $infoProvider );
 
-		$this->setExpectedException( 'Wikimedia\Assert\ParameterTypeException' );
+		$this->setExpectedException( ParameterTypeException::class );
 		$urlExpander->expandUrl( $snak );
 	}
 

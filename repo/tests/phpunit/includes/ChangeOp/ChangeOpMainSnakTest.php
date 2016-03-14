@@ -7,6 +7,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOp;
+use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -171,7 +172,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider provideInvalidApply
 	 */
 	public function testInvalidApply( EntityDocument $item, ChangeOp $changeOp ) {
-		$this->setExpectedException( 'Wikibase\ChangeOp\ChangeOpException' );
+		$this->setExpectedException( ChangeOpException::class );
 
 		$changeOp->apply( $item );
 	}

@@ -231,7 +231,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider permissionProvider
 	 */
 	public function testSetRedirect_noPermission( $permission ) {
-		$this->setExpectedException( 'Wikibase\Repo\Interactors\RedirectCreationException' );
+		$this->setExpectedException( RedirectCreationException::class );
 
 		$user = User::newFromName( 'UserWithoutPermission-' . $permission );
 

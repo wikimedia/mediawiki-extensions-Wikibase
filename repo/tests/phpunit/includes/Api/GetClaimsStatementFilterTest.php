@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel\Services\Tests\Statement\Filter;
 
 use PHPUnit_Framework_TestCase;
+use RuntimeException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -34,7 +35,7 @@ class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 			$errorReporter->expects( $this->once() )
 				->method( 'dieException' )
 				->with(
-					$this->isInstanceOf( 'RuntimeException' ),
+					$this->isInstanceOf( RuntimeException::class ),
 					'param-invalid'
 				);
 		}

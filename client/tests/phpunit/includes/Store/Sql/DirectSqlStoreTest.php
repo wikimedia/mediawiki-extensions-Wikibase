@@ -2,9 +2,21 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
+use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\Usage\SubscriptionManager;
+use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DirectSqlStore;
+use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\PropertyInfoStore;
+use Wikibase\Store\EntityIdLookup;
+use Wikibase\TermIndex;
 
 /**
  * @covers Wikibase\DirectSqlStore
@@ -48,18 +60,18 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	public function provideGetters() {
 		return array(
-			array( 'getSiteLinkLookup', 'Wikibase\Lib\Store\SiteLinkLookup' ),
-			array( 'getEntityLookup', 'Wikibase\DataModel\Services\Lookup\EntityLookup' ),
-			array( 'getTermIndex', 'Wikibase\TermIndex' ),
-			array( 'getPropertyLabelResolver', 'Wikibase\DataModel\Services\Term\PropertyLabelResolver' ),
-			array( 'getPropertyInfoStore', 'Wikibase\PropertyInfoStore' ),
-			array( 'getUsageTracker', 'Wikibase\Client\Usage\UsageTracker' ),
-			array( 'getUsageLookup', 'Wikibase\Client\Usage\UsageLookup' ),
-			array( 'getSubscriptionManager', 'Wikibase\Client\Usage\SubscriptionManager', true ),
-			array( 'getEntityIdLookup', 'Wikibase\Store\EntityIdLookup' ),
-			array( 'getEntityPrefetcher', 'Wikibase\DataModel\Services\Entity\EntityPrefetcher' ),
-			array( 'getChangeLookup', 'Wikibase\Lib\Store\ChangeLookup' ),
-			array( 'getRecentChangesDuplicateDetector', 'Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector' ),
+			array( 'getSiteLinkLookup', SiteLinkLookup::class ),
+			array( 'getEntityLookup', EntityLookup::class ),
+			array( 'getTermIndex', TermIndex::class ),
+			array( 'getPropertyLabelResolver', PropertyLabelResolver::class ),
+			array( 'getPropertyInfoStore', PropertyInfoStore::class ),
+			array( 'getUsageTracker', UsageTracker::class ),
+			array( 'getUsageLookup', UsageLookup::class ),
+			array( 'getSubscriptionManager', SubscriptionManager::class, true ),
+			array( 'getEntityIdLookup', EntityIdLookup::class ),
+			array( 'getEntityPrefetcher', EntityPrefetcher::class ),
+			array( 'getChangeLookup', ChangeLookup::class ),
+			array( 'getRecentChangesDuplicateDetector', RecentChangesDuplicateDetector::class ),
 		);
 	}
 

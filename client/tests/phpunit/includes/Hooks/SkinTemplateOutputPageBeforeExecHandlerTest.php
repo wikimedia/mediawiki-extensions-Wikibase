@@ -85,7 +85,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 		$repoItemLinkGenerator->expects( $this->any() )
 			->method( 'getLink' )
 			->with(
-				$this->isInstanceOf( 'Title' ),
+				$this->isInstanceOf( Title::class ),
 				$this->isType( 'string' ),
 				$this->isType( 'bool' ),
 				$this->logicalOr( $this->isType( 'array' ), $this->isNull() ),

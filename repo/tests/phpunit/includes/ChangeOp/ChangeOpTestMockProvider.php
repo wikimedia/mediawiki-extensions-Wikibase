@@ -212,7 +212,7 @@ class ChangeOpTestMockProvider {
 			), true )
 		);
 
-		$validators = array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
+		$validators = array( new TypeValidator( DataValue::class ), $topValidator );
 
 		$mock = $this->getMock( DataTypeValidatorFactory::class );
 		$mock->expects( PHPUnit_Framework_TestCase::any() )

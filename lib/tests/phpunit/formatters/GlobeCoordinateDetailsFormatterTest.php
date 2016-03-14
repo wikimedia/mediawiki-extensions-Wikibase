@@ -64,7 +64,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
 	public function testEscaping() {
 		$value = $this->getMock(
-			'DataValues\Geo\Values\GlobeCoordinateValue',
+			GlobeCoordinateValue::class,
 			array( 'getLatitude', 'getLongitude', 'getPrecision' ),
 			array( new LatLongValue( 0, 0 ), null, '<GLOBE>' )
 		);

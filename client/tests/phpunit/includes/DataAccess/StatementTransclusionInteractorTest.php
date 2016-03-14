@@ -61,7 +61,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 			array()
 		);
 
-		$this->setExpectedException( 'Wikibase\Client\PropertyLabelNotResolvedException' );
+		$this->setExpectedException( PropertyLabelNotResolvedException::class );
 		$renderer->render( new ItemId( 'Q42' ), 'blah' );
 	}
 

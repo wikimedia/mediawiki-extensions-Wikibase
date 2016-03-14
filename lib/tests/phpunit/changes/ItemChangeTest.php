@@ -32,7 +32,7 @@ class ItemChangeTest extends EntityChangeTest {
 	 * @return string
 	 */
 	protected function getRowClass() {
-		return 'Wikibase\ItemChange';
+		return ItemChange::class;
 	}
 
 	public function entityProvider() {

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Test;
 
 use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use User;
 use Wikibase\DataModel\Entity\Property;
@@ -38,7 +39,7 @@ class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {
 			->with(
 				$expectedProperty,
 				'Changed data type from rustydata to shinydata',
-				$this->isInstanceOf( 'User' ),
+				$this->isInstanceOf( User::class ),
 				EDIT_UPDATE, 6789
 			)
 			->will( $this->returnValue( new EntityRevision( $expectedProperty, 6790 ) ) );
@@ -55,7 +56,7 @@ class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
 		$this->setExpectedException(
-			'Wikibase\Lib\Store\StorageException',
+			StorageException::class,
 			"Could not load property: P43"
 		);
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'shinydata' );
@@ -73,14 +74,14 @@ class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {
 			->with(
 				$expectedProperty,
 				'Changed data type from rustydata to shinydata',
-				$this->isInstanceOf( 'User' ),
+				$this->isInstanceOf( User::class ),
 				EDIT_UPDATE, 6789
 			)
 			->will( $this->throwException( $storageException ) );
 
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
-		$this->setExpectedException( 'Wikibase\Lib\Store\StorageException' );
+		$this->setExpectedException( StorageException::class );
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'shinydata' );
 	}
 
@@ -92,7 +93,7 @@ class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {
 		$propertyDataTypeChanger = $this->getPropertyDataTypeChanger( $entityStore );
 
 		$this->setExpectedException(
-			'InvalidArgumentException',
+			InvalidArgumentException::class,
 			"New and old data type must have the same data value type."
 		);
 		$propertyDataTypeChanger->changeDataType( $propertyId, $this->getMock( User::class ), 'otherdatatype' );

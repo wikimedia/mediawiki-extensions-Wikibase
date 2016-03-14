@@ -56,7 +56,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		if ( $expectedExceptionCode ) {
 			$mock->expects( $this->once() )
 				->method( 'dieException' )
-				->with( $this->isInstanceOf( 'Exception' ), $expectedExceptionCode )
+				->with( $this->isInstanceOf( Exception::class ), $expectedExceptionCode )
 				->will( $this->throwException( new UsageException( 'mockUsageException', 'mock' ) ) );
 		}
 		if ( $expectedErrorCode ) {

@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests;
 
 use PHPUnit_Framework_TestCase;
+use RuntimeException;
 use Wikibase\Client\ForbiddenSerializer;
 
 /**
@@ -19,7 +20,7 @@ class ForbiddenSerializerTest extends PHPUnit_Framework_TestCase {
 	public function test() {
 		$serializer = new ForbiddenSerializer( 'customMessage' );
 
-		$this->setExpectedException( 'RuntimeException', 'customMessage' );
+		$this->setExpectedException( RuntimeException::class, 'customMessage' );
 		$serializer->serialize( null );
 	}
 

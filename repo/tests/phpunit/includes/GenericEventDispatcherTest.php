@@ -36,7 +36,7 @@ class GenericEventDispatcherTest extends \PHPUnit_Framework_TestCase {
 			->method( 'entityDeleted' )
 			->with( $this->equalTo( $q12 ) );
 
-		$dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\EntityStoreWatcher' );
+		$dispatcher = new GenericEventDispatcher( EntityStoreWatcher::class );
 
 		// check register & dispatch
 		$handle = $dispatcher->registerWatcher( $watcher );

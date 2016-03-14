@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use MWException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\Term;
@@ -202,7 +203,7 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetTerm_throwsException( $termIndexEntryData ) {
 		$termIndexEntry = new TermIndexEntry( $termIndexEntryData );
-		$this->setExpectedException( 'MWException', 'Can not construct Term from partial TermIndexEntry' );
+		$this->setExpectedException( MWException::class, 'Can not construct Term from partial TermIndexEntry' );
 		$termIndexEntry->getTerm();
 	}
 

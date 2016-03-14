@@ -239,7 +239,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	}
 
 	private function callApiModule( $params, EntityRedirect $expectedRedirect = null ) {
-		$module = $this->apiModuleTestHelper->newApiModule( 'Wikibase\Repo\Api\MergeItems', 'wbmergeitems', $params );
+		$module = $this->apiModuleTestHelper->newApiModule( MergeItems::class, 'wbmergeitems', $params );
 		$this->overrideServices( $module, $expectedRedirect );
 
 		$module->execute();

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\SnakUrlExpander;
+use Wikimedia\Assert\ParameterTypeException;
 
 /**
  * @covers Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter
@@ -88,7 +89,7 @@ class WikitextExternalIdentifierFormatterTest extends \PHPUnit_Framework_TestCas
 		$urlExpander = $this->getMock( SnakUrlExpander::class );
 		$formatter = new WikitextExternalIdentifierFormatter( $urlExpander );
 
-		$this->setExpectedException( 'Wikimedia\Assert\ParameterTypeException' );
+		$this->setExpectedException( ParameterTypeException::class );
 		$formatter->formatSnak( $snak );
 	}
 

@@ -3,7 +3,9 @@
 namespace Wikibase\Test;
 
 use DataValues\Serializers\DataValueSerializer;
+use Deserializers\Exceptions\DeserializationException;
 use PHPUnit_Framework_TestCase;
+use Serializers\Exceptions\SerializationException;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -76,13 +78,13 @@ class StatementRankSerializerTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenInvalidRank_serializationFails() {
 		$serializer = new StatementRankSerializer();
-		$this->setExpectedException( 'Serializers\Exceptions\SerializationException' );
+		$this->setExpectedException( SerializationException::class );
 		$serializer->serialize( -1 );
 	}
 
 	public function testGivenInvalidSerialization_deserializeFails() {
 		$serializer = new StatementRankSerializer();
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->setExpectedException( DeserializationException::class );
 		$serializer->deserialize( 'invalid' );
 	}
 

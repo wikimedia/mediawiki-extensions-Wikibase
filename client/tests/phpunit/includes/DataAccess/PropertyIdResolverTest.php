@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess;
 
 use Wikibase\Client\DataAccess\PropertyIdResolver;
+use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Test\MockPropertyLabelResolver;
@@ -64,7 +65,7 @@ class PropertyIdResolverTest extends \PHPUnit_Framework_TestCase {
 	public function testResolvePropertyIdWithInvalidInput_throwsException( $propertyIdOrLabel ) {
 		$propertyIdResolver = $this->getPropertyIdResolver();
 
-		$this->setExpectedException( 'Wikibase\Client\PropertyLabelNotResolvedException' );
+		$this->setExpectedException( PropertyLabelNotResolvedException::class );
 
 		$propertyIdResolver->resolvePropertyId( $propertyIdOrLabel, 'en' );
 	}

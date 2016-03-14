@@ -40,7 +40,7 @@ class EntityChangeTest extends ChangeRowTest {
 	 * @return string
 	 */
 	protected function getRowClass() {
-		return 'Wikibase\EntityChange';
+		return EntityChange::class;
 	}
 
 	protected function newEntityChange( EntityId $entityId ) {
@@ -328,7 +328,7 @@ class EntityChangeTest extends ChangeRowTest {
 			),
 			'type' => 'statement',
 			'rank' => 'normal',
-			'_claimclass_' => 'Wikibase\DataModel\Statement\Statement',
+			'_claimclass_' => Statement::class,
 		);
 
 		$change = new EntityChange();
@@ -354,7 +354,7 @@ class EntityChangeTest extends ChangeRowTest {
 				'property' => 'P1',
 			),
 			'type' => 'statement',
-			'_claimclass_' => 'Wikibase\DataModel\Statement\Statement',
+			'_claimclass_' => Statement::class,
 		);
 
 		$change = new EntityChange();
