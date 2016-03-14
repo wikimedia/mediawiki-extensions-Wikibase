@@ -88,7 +88,10 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new EntityContentFactory(
-			$wikibaseRepo->getContentModelMappings(),
+			array(
+				'item' => CONTENT_MODEL_WIKIBASE_ITEM,
+				'property' => CONTENT_MODEL_WIKIBASE_PROPERTY
+			),
 			array(
 				'item' => function() use ( $wikibaseRepo ) {
 					return $wikibaseRepo->newItemHandler();
