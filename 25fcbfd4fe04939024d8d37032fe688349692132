@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0e2f53b6_0c2211b1",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T13:55:53Z",
+      "side": 1,
+      "message": "It\u0027s a bit silly, yea. It\u0027s mostly in the name of completeness.",
+      "parentUuid": "0e2f53b6_2f26eac9",
+      "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2f53b6_1b7d3018",
         "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
         "patchSetId": 5
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Yes, there are many loops, because of the nature of what we do here which is kind of nasty. I don\u0027t see any helper function that would make sense here though.",
       "parentUuid": "0e2f53b6_1b7d3018",
+      "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2f53b6_2f2387a7",
+        "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T13:55:53Z",
+      "side": 1,
+      "message": "The complexity will always be extensions x keys x values, of course, no matter how you slice or dice it. But the code here is pretty complex and hard to understand because of the interactions with the inner-most loop. To be honest, I don\u0027t quite see why that is needed. So, there is two things I would recommend: split out the inner part of the code to a private function, to give it a name, and a clear interface, to make information flow more explicit; or unravel the nesting into a sequence of loops, with an explicitly maintained working stack.",
+      "parentUuid": "0e2f53b6_ef1b6280",
       "revId": "25fcbfd4fe04939024d8d37032fe688349692132",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
