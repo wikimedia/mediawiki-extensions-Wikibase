@@ -6,7 +6,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
 use InvalidArgumentException;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
-use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
@@ -16,6 +15,7 @@ use Wikibase\DataModel\Term\TermList;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class FingerprintPatcher {
 
@@ -35,73 +35,36 @@ class FingerprintPatcher {
 	 * @throws InvalidArgumentException
 	 */
 	public function patchFingerprint( Fingerprint $fingerprint, EntityDiff $patch ) {
-		$labels = $this->patcher->patch(
-			$fingerprint->getLabels()->toTextArray(),
-			$patch->getLabelsDiff()
-		);
+		$this->patchTermList( $fingerprint->getLabels(), $patch->getLabelsDiff() );
+		$this->patchTermList( $fingerprint->getDescriptions(), $patch->getDescriptionsDiff() );
 
-		$fingerprint->setLabels( $this->newTermListFromArray( $labels ) );
-
-		$descriptions = $this->patcher->patch(
-			$fingerprint->getDescriptions()->toTextArray(),
-			$patch->getDescriptionsDiff()
-		);
-
-		$fingerprint->setDescriptions( $this->newTermListFromArray( $descriptions ) );
-
-		$this->patchAliases( $fingerprint, $patch->getAliasesDiff() );
+		$this->patchAliasGroupList( $fingerprint->getAliasGroups(), $patch->getAliasesDiff() );
 	}
 
-	/**
-	 * @param string[] $termArray
-	 *
-	 * @return TermList
-	 */
-	private function newTermListFromArray( array $termArray ) {
-		$termList = new TermList();
+	private function patchTermList( TermList $terms, Diff $patch ) {
+		$original = $terms->toTextArray();
+		$patched = $this->patcher->patch( $original, $patch );
 
-		foreach ( $termArray as $language => $labelText ) {
-			$termList->setTextForLanguage( $language, $labelText );
+		foreach ( $patched as $languageCode => $text ) {
+			$terms->setTextForLanguage( $languageCode, $text );
 		}
 
-		return $termList;
+		foreach ( array_diff_key( $original, $patched ) as $languageCode => $text ) {
+			$terms->removeByLanguage( $languageCode );
+		}
 	}
 
-	private function patchAliases( Fingerprint $fingerprint, Diff $aliasesDiff ) {
-		$patchedAliases = $this->patcher->patch(
-			$this->getAliasesArrayForPatching( $fingerprint->getAliasGroups() ),
-			$aliasesDiff
-		);
+	private function patchAliasGroupList( AliasGroupList $groups, Diff $patch ) {
+		$original = $groups->toTextArray();
+		$patched = $this->patcher->patch( $original, $patch );
 
-		$fingerprint->setAliasGroups( $this->getAliasesFromArrayForPatching( $patchedAliases ) );
-	}
-
-	private function getAliasesArrayForPatching( AliasGroupList $aliases ) {
-		$textLists = array();
-
-		/**
-		 * @var AliasGroup $aliasGroup
-		 */
-		foreach ( $aliases as $languageCode => $aliasGroup ) {
-			$textLists[$languageCode] = $aliasGroup->getAliases();
+		foreach ( $patched as $languageCode => $aliases ) {
+			$groups->setAliasesForLanguage( $languageCode, $aliases );
 		}
 
-		return $textLists;
-	}
-
-	/**
-	 * @param array[] $patchedAliases
-	 *
-	 * @return AliasGroupList
-	 */
-	private function getAliasesFromArrayForPatching( array $patchedAliases ) {
-		$aliases = new AliasGroupList();
-
-		foreach( $patchedAliases as $languageCode => $aliasList ) {
-			$aliases->setAliasesForLanguage( $languageCode, $aliasList );
+		foreach ( array_diff_key( $original, $patched ) as $languageCode => $aliases ) {
+			$groups->removeByLanguage( $languageCode );
 		}
-
-		return $aliases;
 	}
 
 }
