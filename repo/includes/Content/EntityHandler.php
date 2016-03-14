@@ -25,6 +25,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Repo\Diff\EntityContentDiffView;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\EntityValidator;
@@ -154,7 +155,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	protected function getDiffEngineClass() {
-		return 'Wikibase\Repo\Diff\EntityContentDiffView';
+		return EntityContentDiffView::class;
 	}
 
 	/**

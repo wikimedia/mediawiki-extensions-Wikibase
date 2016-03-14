@@ -203,5 +203,5 @@ class ImportProperties extends Maintenance {
 
 }
 
-$maintClass = 'Wikibase\ImportProperties';
+$maintClass = ImportProperties::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

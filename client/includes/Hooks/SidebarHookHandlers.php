@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use BetaFeatures;
 use OutputPage;
 use ParserOutput;
 use Skin;
@@ -234,9 +235,9 @@ class SidebarHookHandlers {
 			return true;
 		}
 
-		$betaFeatureEnabled = class_exists( '\BetaFeatures' ) &&
+		$betaFeatureEnabled = class_exists( BetaFeatures::class ) &&
 			$this->otherProjectsLinksBeta &&
-			\BetaFeatures::isFeatureEnabled( $skin->getContext()->getUser(), 'wikibase-otherprojects' );
+			BetaFeatures::isFeatureEnabled( $skin->getContext()->getUser(), 'wikibase-otherprojects' );
 
 		if ( $this->otherProjectsLinksDefault || $betaFeatureEnabled ) {
 			$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );

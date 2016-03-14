@@ -8,14 +8,19 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\EditItemAction;
 use Wikibase\EntityContent;
+use Wikibase\HistoryItemAction;
+use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\SubmitItemAction;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
+use Wikibase\ViewItemAction;
 
 /**
  * Content handler for Wikibase items.
@@ -75,7 +80,7 @@ class ItemHandler extends EntityHandler {
 	 * @return string
 	 */
 	protected function getContentClass() {
-		return '\Wikibase\ItemContent';
+		return ItemContent::class;
 	}
 
 	/**
@@ -83,10 +88,10 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-			'history' => '\Wikibase\HistoryItemAction',
-			'view' => '\Wikibase\ViewItemAction',
-			'edit' => '\Wikibase\EditItemAction',
-			'submit' => '\Wikibase\SubmitItemAction',
+			'history' => HistoryItemAction::class,
+			'view' => ViewItemAction::class,
+			'edit' => EditItemAction::class,
+			'submit' => SubmitItemAction::class,
 		);
 	}
 

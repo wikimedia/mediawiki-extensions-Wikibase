@@ -121,5 +121,5 @@ class PopulateSitesTable extends Maintenance {
 
 }
 
-$maintClass = 'Wikibase\PopulateSitesTable';
+$maintClass = PopulateSitesTable::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

@@ -71,7 +71,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 	 * @return string
 	 */
 	public function getUpdateKey() {
-		return 'Wikibase\RebuildPropertyInfo';
+		return self::class;
 	}
 
 	/**
@@ -87,5 +87,5 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 
 }
 
-$maintClass = 'Wikibase\RebuildPropertyInfo';
+$maintClass = RebuildPropertyInfo::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

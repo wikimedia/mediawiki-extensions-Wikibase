@@ -71,7 +71,7 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 	 * @return string
 	 */
 	public function getUpdateKey() {
-		return 'Wikibase\PopulateEntityUsage';
+		return self::class;
 	}
 
 	/**
@@ -87,5 +87,5 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 
 }
 
-$maintClass = 'Wikibase\PopulateEntityUsage';
+$maintClass = PopulateEntityUsage::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

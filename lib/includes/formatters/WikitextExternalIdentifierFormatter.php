@@ -54,7 +54,7 @@ class WikitextExternalIdentifierFormatter implements SnakFormatter {
 	 * @return string Wikitext
 	 */
 	public function formatSnak( Snak $snak ) {
-		Assert::parameterType( 'Wikibase\DataModel\Snak\PropertyValueSnak', $snak, '$snak' );
+		Assert::parameterType( PropertyValueSnak::class, $snak, '$snak' );
 		/** @var PropertyValueSnak $snak */
 
 		$id = $snak->getDataValue()->getValue();

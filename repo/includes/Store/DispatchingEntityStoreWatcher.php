@@ -19,7 +19,7 @@ use Wikibase\Repo\GenericEventDispatcher;
 class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements EntityStoreWatcher {
 
 	public function __construct() {
-		parent::__construct( 'Wikibase\Lib\Store\EntityStoreWatcher' );
+		parent::__construct( EntityStoreWatcher::class );
 	}
 
 	/**

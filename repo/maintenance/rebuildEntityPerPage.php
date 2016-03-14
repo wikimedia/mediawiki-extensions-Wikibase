@@ -86,10 +86,10 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 	 * @return string
 	 */
 	public function getUpdateKey() {
-		return 'Wikibase\Repo\Maintenance\RebuildEntityPerPage';
+		return self::class;
 	}
 
 }
 
-$maintClass = 'Wikibase\Repo\Maintenance\RebuildEntityPerPage';
+$maintClass = RebuildEntityPerPage::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

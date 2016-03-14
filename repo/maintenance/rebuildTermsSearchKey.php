@@ -67,7 +67,7 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 	 * @return string
 	 */
 	public function getUpdateKey() {
-		return 'Wikibase\RebuildTermsSearchKey';
+		return self::class;
 	}
 
 	/**
@@ -83,5 +83,5 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 
 }
 
-$maintClass = 'Wikibase\RebuildTermsSearchKey';
+$maintClass = RebuildTermsSearchKey::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

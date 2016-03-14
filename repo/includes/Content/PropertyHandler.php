@@ -8,7 +8,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\EditPropertyAction;
 use Wikibase\EntityContent;
+use Wikibase\HistoryPropertyAction;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
@@ -16,8 +18,10 @@ use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\SubmitPropertyAction;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
+use Wikibase\ViewPropertyAction;
 
 /**
  * Content handler for Wikibase items.
@@ -48,7 +52,7 @@ class PropertyHandler extends EntityHandler {
 	 * @return string
 	 */
 	protected function getContentClass() {
-		return 'Wikibase\PropertyContent';
+		return PropertyContent::class;
 	}
 
 	/**
@@ -93,10 +97,10 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-			'history' => 'Wikibase\HistoryPropertyAction',
-			'view' => 'Wikibase\ViewPropertyAction',
-			'edit' => 'Wikibase\EditPropertyAction',
-			'submit' => 'Wikibase\SubmitPropertyAction',
+			'history' => HistoryPropertyAction::class,
+			'view' => ViewPropertyAction::class,
+			'edit' => EditPropertyAction::class,
+			'submit' => SubmitPropertyAction::class,
 		);
 	}
 

@@ -162,5 +162,5 @@ TEXT
 
 }
 
-$maintClass = 'Wikibase\PopulateInterwiki';
+$maintClass = PopulateInterwiki::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

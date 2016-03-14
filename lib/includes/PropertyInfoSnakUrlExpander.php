@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Assert\Assert;
 
@@ -40,7 +41,7 @@ class PropertyInfoSnakUrlExpander implements SnakUrlExpander {
 		$propertyId = $snak->getPropertyId();
 		$value = $snak->getDataValue();
 
-		Assert::parameterType( 'DataValues\StringValue', $value, '$snak->getDataValue()' );
+		Assert::parameterType( StringValue::class, $value, '$snak->getDataValue()' );
 
 		$pattern = $this->infoProvider->getPropertyInfo( $propertyId );
 
