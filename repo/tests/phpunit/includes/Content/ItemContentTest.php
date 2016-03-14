@@ -68,9 +68,31 @@ class ItemContentTest extends EntityContentTest {
 	 * @return ItemContent
 	 */
 	private function newRedirect( ItemId $itemId, ItemId $targetId ) {
-		// FIXME: Use the respective EntityHandler instead of going via the global title lookup!
-		$titleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
-		$title = $titleLookup->getTitleForId( $targetId );
+		$nsLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$itemNs = $nsLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+
+		$title = $this->getMock( Title::class );
+		$title->expects( $this->any() )
+			->method( 'getFullText' )
+			->will( $this->returnValue( $targetId->getSerialization() ) );
+		$title->expects( $this->any() )
+			->method( 'getText' )
+			->will( $this->returnValue( $targetId->getSerialization() ) );
+		$title->expects( $this->any() )
+			->method( 'isRedirect' )
+			->will( $this->returnValue( false ) );
+		$title->expects( $this->any() )
+			->method( 'getNamespace' )
+			->will( $this->returnValue( $itemNs ) );
+		$title->expects( $this->any() )
+			->method( 'equals' )
+			->will( $this->returnCallback( function( Title $other ) use ( $targetId ) {
+				// XXX: Ignores namespaces
+				return $other->getText() === $targetId->getSerialization();
+			} ) );
+		$title->expects( $this->any() )
+			->method( 'getLinkURL' )
+			->will( $this->returnValue( 'http://foo.bar/' . $targetId->getSerialization() ) );
 
 		return ItemContent::newFromRedirect( new EntityRedirect( $itemId, $targetId ), $title );
 	}
