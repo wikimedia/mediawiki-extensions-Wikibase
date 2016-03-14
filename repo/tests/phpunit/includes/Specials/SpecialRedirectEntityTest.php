@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Specials;
 
 use Exception;
 use FauxRequest;
@@ -18,6 +18,8 @@ use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Specials\SpecialRedirectEntity;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Test\EntityModificationTestHelper;
+use Wikibase\Test\MockRepository;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialRedirectEntity

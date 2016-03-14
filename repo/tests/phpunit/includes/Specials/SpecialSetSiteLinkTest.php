@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use FauxResponse;
