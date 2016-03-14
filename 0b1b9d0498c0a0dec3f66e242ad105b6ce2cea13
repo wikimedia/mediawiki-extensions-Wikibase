@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_8fe9147e",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T14:24:58Z",
+      "side": 1,
+      "message": "This removed the current user language from the list of valid term languages... why?",
+      "revId": "0b1b9d0498c0a0dec3f66e242ad105b6ce2cea13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_ef8420b8",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T14:24:58Z",
+      "side": 1,
+      "message": "...and now we again add the user language? I don\u0027t understand...",
+      "revId": "0b1b9d0498c0a0dec3f66e242ad105b6ce2cea13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_8fb75481",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T14:24:58Z",
+      "side": 1,
+      "message": "Do we really need this? And if yes, shouldn\u0027t this be a fallback chain?",
+      "revId": "0b1b9d0498c0a0dec3f66e242ad105b6ce2cea13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
