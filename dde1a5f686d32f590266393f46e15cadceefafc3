@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_3485c1a0",
+        "filename": "client/maintenance/populateEntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-14T14:08:27Z",
+      "side": 1,
+      "message": "not sure about this… using the class name here in the first place here probably wasn\u0027t a good idea. The idea for update keys is to never change, that should not be tied to the name of the class that performs the update.",
+      "revId": "dde1a5f686d32f590266393f46e15cadceefafc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_14823d97",
+        "filename": "client/maintenance/updateSubscriptions.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-14T14:08:27Z",
+      "side": 1,
+      "message": "See my comment in populateEntityUsage",
+      "revId": "dde1a5f686d32f590266393f46e15cadceefafc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_0f4a24c8",
+        "filename": "repo/maintenance/populateChangesSubscription.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-14T14:08:27Z",
+      "side": 1,
+      "message": "See populateEntityUsage",
+      "revId": "dde1a5f686d32f590266393f46e15cadceefafc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_6f1650ae",
+        "filename": "repo/maintenance/rebuildEntityPerPage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-14T14:08:27Z",
+      "side": 1,
+      "message": "See populateEntityUsage",
+      "revId": "dde1a5f686d32f590266393f46e15cadceefafc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_4f1b8cd4",
+        "filename": "repo/maintenance/rebuildPropertyInfo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-14T14:08:27Z",
+      "side": 1,
+      "message": "See populateEntityUsage",
+      "revId": "dde1a5f686d32f590266393f46e15cadceefafc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_af1058ae",
+        "filename": "repo/maintenance/rebuildTermsSearchKey.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-14T14:08:27Z",
+      "side": 1,
+      "message": "See populateEntityUsage",
+      "revId": "dde1a5f686d32f590266393f46e15cadceefafc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
