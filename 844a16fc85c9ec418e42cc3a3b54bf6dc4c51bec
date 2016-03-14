@@ -16,6 +16,24 @@
       "revId": "844a16fc85c9ec418e42cc3a3b54bf6dc4c51bec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_b4e391d3",
+        "filename": "client/tests/phpunit/includes/RecentChanges/ChangeLineFormatterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-14T11:18:08Z",
+      "side": 0,
+      "message": "It\u0027s not needed, as this is a MediaWikiLangTestCase derived test",
+      "parentUuid": "ee33df1d_54b7a5d3",
+      "revId": "844a16fc85c9ec418e42cc3a3b54bf6dc4c51bec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
