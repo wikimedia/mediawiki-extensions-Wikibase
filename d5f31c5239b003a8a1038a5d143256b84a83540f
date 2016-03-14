@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_54aa0583",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2016-03-14T10:51:19Z",
+      "side": 1,
+      "message": "Aren\u0027t these going to be touched again with T88258?",
+      "revId": "d5f31c5239b003a8a1038a5d143256b84a83540f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
