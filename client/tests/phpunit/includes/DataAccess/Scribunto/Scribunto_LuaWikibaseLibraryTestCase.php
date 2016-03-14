@@ -2,8 +2,18 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
-if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
-	abstract class Scribunto_LuaWikibaseLibraryTestCase extends \MediaWikiTestCase {
+use Language;
+use PHPUnit_Framework_TestCase;
+use PHPUnit_Framework_TestSuite;
+use Scribunto_LuaEngineTestBase;
+use Title;
+use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Test\MockClientStore;
+
+if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
+	abstract class Scribunto_LuaWikibaseLibraryTestCase extends PHPUnit_Framework_TestCase {
 
 		protected function setUp() {
 			$this->markTestSkipped( 'Scribunto is not available' );
@@ -13,12 +23,6 @@ if ( !class_exists( 'Scribunto_LuaEngineTestBase' ) ) {
 
 	return;
 }
-
-use Language;
-use Title;
-use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\Test\MockClientStore;
 
 /**
  * Base class for Wikibase Scribunto Tests
@@ -32,7 +36,7 @@ use Wikibase\Test\MockClientStore;
  * @author Marius Hoch < hoo@online.de >
  * @author Daniel Kinzler
  */
-abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngineTestBase {
+abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineTestBase {
 
 	/**
 	 * @var bool|null
@@ -96,7 +100,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends \Scribunto_LuaEngine
 	 *
 	 * @param string $className
 	 *
-	 * @return \PHPUnit_Framework_TestSuite
+	 * @return PHPUnit_Framework_TestSuite
 	 */
 	public static function suite( $className ) {
 		self::doMock();

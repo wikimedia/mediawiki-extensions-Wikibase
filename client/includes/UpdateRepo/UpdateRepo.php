@@ -110,7 +110,7 @@ abstract class UpdateRepo {
 	 * @return bool
 	 */
 	public function userIsValidOnRepo() {
-		if ( !class_exists( 'CentralAuthUser' ) ) {
+		if ( !class_exists( CentralAuthUser::class ) ) {
 			// We can't do anything without CentralAuth as there's no way to verify that
 			// the local user equals the repo one with the same name
 			wfDebugLog(
