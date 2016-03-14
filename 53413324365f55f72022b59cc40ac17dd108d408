@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_f9287298",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-14T09:12:41Z",
+      "side": 1,
+      "message": "missing doc",
+      "revId": "53413324365f55f72022b59cc40ac17dd108d408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
