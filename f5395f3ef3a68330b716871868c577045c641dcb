@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_03b31c4d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-14T20:33:51Z",
+      "side": 1,
+      "message": "Sorry for not adding the DNM marker :(",
+      "parentUuid": "ee33df1d_b215609f",
+      "revId": "f5395f3ef3a68330b716871868c577045c641dcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_f2d368d5",
         "filename": "composer.json",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "side": 1,
       "message": "Also, something is wrong here - we want internal-serialization 2.3, and data-model-services 3.5",
       "parentUuid": "ee33df1d_f2d368d5",
+      "revId": "f5395f3ef3a68330b716871868c577045c641dcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_a3aeb0e2",
+        "filename": "composer.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-14T20:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_352dba8c",
       "revId": "f5395f3ef3a68330b716871868c577045c641dcb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
