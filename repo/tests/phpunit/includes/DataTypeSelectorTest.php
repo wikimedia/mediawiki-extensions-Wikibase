@@ -24,7 +24,7 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	 * @return DataType
 	 */
 	private function newDataType( $propertyType ) {
-		$dataType = $this->getMockBuilder( 'DataTypes\DataType' )
+		$dataType = $this->getMockBuilder( DataType::class )
 			->disableOriginalConstructor()
 			->getMock();
 

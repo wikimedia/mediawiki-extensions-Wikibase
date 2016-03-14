@@ -9,6 +9,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
@@ -68,7 +69,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	 * @return BufferingTermLookup
 	 */
 	private function getBufferingTermLookup() {
-		$lookup = $this->getMockBuilder( 'Wikibase\Store\BufferingTermLookup' )
+		$lookup = $this->getMockBuilder( BufferingTermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$lookup->expects( $this->any() )
@@ -85,7 +86,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback(
@@ -101,7 +102,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$specialPage = new SpecialListProperties();
 		$specialPage->getContext()->setLanguage( Language::factory( 'en' ) );
 
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 

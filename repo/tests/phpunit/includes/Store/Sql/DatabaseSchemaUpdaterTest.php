@@ -2,7 +2,10 @@
 
 namespace Wikibase\Tests\Repo;
 
+use DatabaseMysql;
+use MysqlUpdater;
 use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
+use Wikibase\Store;
 
 /**
  * @covers Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater
@@ -20,9 +23,9 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 * Extremely simple test making sure this isn't going to blow up.
 	 */
 	public function testDoSchemaUpdate() {
-		$store = $this->getMock( 'Wikibase\Store' );
+		$store = $this->getMock( Store::class );
 
-		$db = $this->getMockBuilder( 'DatabaseMysql' )
+		$db = $this->getMockBuilder( DatabaseMysql::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -30,7 +33,7 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getType' )
 			->will( $this->returnValue( 'mysql' ) );
 
-		$updater = $this->getMockBuilder( 'MysqlUpdater' )
+		$updater = $this->getMockBuilder( MysqlUpdater::class )
 			->disableOriginalConstructor()
 			->getMock();
 

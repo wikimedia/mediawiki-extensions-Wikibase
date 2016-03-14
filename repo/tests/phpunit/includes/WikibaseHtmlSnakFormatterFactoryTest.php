@@ -5,8 +5,10 @@ namespace Wikibase\Repo\Test;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Repo\WikibaseHtmlSnakFormatterFactory;
 
@@ -22,11 +24,13 @@ use Wikibase\Repo\WikibaseHtmlSnakFormatterFactory;
 class WikibaseHtmlSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetSnakFormatter() {
-		$snakFormatter = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$snakFormatter = $this->getMock( SnakFormatter::class );
 		$languageFallbackChain = new LanguageFallbackChain( array() );
-		$labelDescriptionLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' );
+		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 
-		$outputFormatSnakFormatterFactory = $this->getMockBuilder( 'Wikibase\Lib\OutputFormatSnakFormatterFactory' )
+		$outputFormatSnakFormatterFactory = $this->getMockBuilder(
+				OutputFormatSnakFormatterFactory::class
+			)
 			->disableOriginalConstructor()
 			->getMock();
 

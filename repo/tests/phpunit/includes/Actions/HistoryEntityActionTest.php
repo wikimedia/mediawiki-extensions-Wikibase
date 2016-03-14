@@ -2,8 +2,11 @@
 
 namespace Wikibase\Test;
 
+use Article;
 use HashConfig;
+use IContextSource;
 use MWContentSerializationException;
+use OutputPage;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use Title;
@@ -24,8 +27,13 @@ use Wikibase\HistoryEntityAction;
  */
 class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 
+	/**
+	 * @param string $title
+	 *
+	 * @return Article
+	 */
 	private function getPage( $title ) {
-		$page = $this->getMockBuilder( 'Article' )
+		$page = $this->getMockBuilder( Article::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$page->expects( $this->any() )
@@ -35,16 +43,24 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 		return $page;
 	}
 
+	/**
+	 * @return OutputPage
+	 */
 	private function getOutput() {
-		$output = $this->getMockBuilder( 'OutputPage' )
+		$output = $this->getMockBuilder( OutputPage::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		return $output;
 	}
 
+	/**
+	 * @param PHPUnit_Framework_MockObject_MockObject $output
+	 *
+	 * @return IContextSource
+	 */
 	private function getContext( PHPUnit_Framework_MockObject_MockObject $output ) {
-		$context = $this->getMock( 'IContextSource' );
+		$context = $this->getMock( IContextSource::class );
 		$context->expects( $this->once() )
 			->method( 'getConfig' )
 			->will( $this->returnValue( new HashConfig( array(

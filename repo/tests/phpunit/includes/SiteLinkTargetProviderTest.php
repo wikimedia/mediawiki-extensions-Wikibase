@@ -4,6 +4,7 @@ namespace Wikibase\Tests\Repo;
 
 use Site;
 use SiteList;
+use SiteStore;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**
@@ -104,9 +105,12 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 		return $siteList;
 	}
 
+	/**
+	 * @return SiteStore
+	 */
 	private function getMockSiteStore() {
 		$siteList = $this->getSiteList();
-		$mockSiteStore = $this->getMock( 'SiteStore' );
+		$mockSiteStore = $this->getMock( SiteStore::class );
 		$mockSiteStore->expects( $this->once() )
 			->method( 'getSites' )
 			->will( $this->returnValue( $siteList ) );

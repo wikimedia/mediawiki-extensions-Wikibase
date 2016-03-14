@@ -2,10 +2,18 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiBase;
+use ApiResult;
 use HashSiteStore;
 use Language;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ApiHelperFactory;
+use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SummaryFormatter;
 
 /**
  * @covers Wikibase\Repo\Api\ApiHelperFactory
@@ -20,14 +28,14 @@ use Wikibase\Repo\WikibaseRepo;
 class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 
 	private function newApiHelperFactory() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
-		$exceptionLocalizer = $this->getMock( 'Wikibase\Repo\Localizer\ExceptionLocalizer' );
-		$dataTypeLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$exceptionLocalizer = $this->getMock( ExceptionLocalizer::class );
+		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
-		$summaryFormatter = $this->getMockBuilder( 'Wikibase\SummaryFormatter' )
+		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )
 			->disableOriginalConstructor()->getMock();
-		$entityRevisionLookup = $this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' );
-		$editEntityFactory = $this->getMockBuilder( 'Wikibase\EditEntityFactory' )
+		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
+		$editEntityFactory = $this->getMockBuilder( EditEntityFactory::class )
 			->disableOriginalConstructor()->getMock();
 
 		return new ApiHelperFactory(
@@ -42,14 +50,17 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @return ApiBase
+	 */
 	private function newApiModule() {
 		$language = Language::factory( 'en' );
 
-		$result = $this->getMockBuilder( 'ApiResult' )
+		$result = $this->getMockBuilder( ApiResult::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$api = $this->getMockBuilder( 'ApiBase' )
+		$api = $this->getMockBuilder( ApiBase::class )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -49,7 +49,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockTitleLookup() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )->method( 'getTitleForId' )
 			->will( $this->returnValue( $this->getMockTitle() ) );
 
@@ -60,7 +60,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 * @return Title
 	 */
 	public function getMockTitle() {
-		$mock = $this->getMockBuilder( 'Title' )
+		$mock = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -100,7 +100,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			'continue' => 0
 		), $params );
 
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Api\EntitySearchHelper' )
+		$mock = $this->getMockBuilder( EntitySearchHelper::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->atLeastOnce() )

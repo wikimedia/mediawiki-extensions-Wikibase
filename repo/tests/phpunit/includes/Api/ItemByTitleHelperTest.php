@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Api;
 
 use MediaWikiSite;
+use SiteStore;
 use Title;
 use UsageException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -23,10 +24,13 @@ use Wikibase\StringNormalizer;
  */
 class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return SiteStore
+	 */
 	public function getSiteStoreMock() {
 		$dummySite = new MediaWikiSite();
 
-		$siteStoreMock = $this->getMockBuilder( 'SiteStore' )
+		$siteStoreMock = $this->getMockBuilder( SiteStore::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -44,7 +48,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return ResultBuilder
 	 */
 	public function getResultBuilderMock( $expectedNormalizedTitle = 0 ) {
-		$apiResultBuilderMock = $this->getMockBuilder( 'Wikibase\Repo\Api\ResultBuilder' )
+		$apiResultBuilderMock = $this->getMockBuilder( ResultBuilder::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$apiResultBuilderMock->expects( $this->exactly( $expectedNormalizedTitle ) )
@@ -59,7 +63,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 	 * @return SiteLinkLookup
 	 */
 	private function getSiteLinkLookupMock( $itemId ) {
-		$siteLinkLookupMock = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkLookup' )
+		$siteLinkLookupMock = $this->getMockBuilder( SiteLinkLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 

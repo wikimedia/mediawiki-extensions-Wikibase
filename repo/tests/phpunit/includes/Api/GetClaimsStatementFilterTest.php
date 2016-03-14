@@ -23,7 +23,7 @@ class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 	 * @return ApiErrorReporter
 	 */
 	private function getApiErrorReporter( $expectsError = false ) {
-		$errorReporter = $this->getMockBuilder( 'Wikibase\Repo\Api\ApiErrorReporter' )
+		$errorReporter = $this->getMockBuilder( ApiErrorReporter::class )
 			->disableOriginalConstructor()
 			->getMock();
 

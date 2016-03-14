@@ -2,14 +2,21 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiBase;
 use LogicException;
+use PHPUnit_Framework_MockObject_MockObject;
 use RequestContext;
 use Status;
+use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\EditEntity;
+use Wikibase\EditEntityFactory;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntitySavingHelper;
+use Wikibase\SummaryFormatter;
 
 /**
  * @covers Wikibase\Repo\Api\EntitySavingHelper
@@ -24,26 +31,40 @@ use Wikibase\Repo\Api\EntitySavingHelper;
  */
 class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 
+	/**
+	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
+	 */
 	private function getMockApiBase() {
-		return $this->getMockBuilder( 'ApiBase' )
+		return $this->getMockBuilder( ApiBase::class )
 			->disableOriginalConstructor()
 			->getMock();
 	}
 
+	/**
+	 * @return ApiErrorReporter
+	 */
 	private function getMockErrorReporter() {
-		return $this->getMockBuilder( 'Wikibase\Repo\Api\ApiErrorReporter' )
+		return $this->getMockBuilder( ApiErrorReporter::class )
 			->disableOriginalConstructor()
 			->getMock();
 	}
 
+	/**
+	 * @return SummaryFormatter
+	 */
 	private function getMockSummaryFormatter() {
-		return $this->getMockBuilder( 'Wikibase\SummaryFormatter' )
+		return $this->getMockBuilder( SummaryFormatter::class )
 			->disableOriginalConstructor()
 			->getMock();
 	}
 
+	/**
+	 * @param int $calls
+	 *
+	 * @return EditEntity
+	 */
 	private function getMockEditEntity( $calls ) {
-		$mock = $this->getMockBuilder( 'Wikibase\EditEntity' )
+		$mock = $this->getMockBuilder( EditEntity::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->exactly( $calls ) )
@@ -52,8 +73,13 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 		return $mock;
 	}
 
+	/**
+	 * @param int $calls
+	 *
+	 * @return EditEntityFactory
+	 */
 	private function getMockEditEntityFactory( $calls ) {
-		$mock = $this->getMockBuilder( 'Wikibase\EditEntityFactory' )
+		$mock = $this->getMockBuilder( EditEntityFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->exactly( $calls ) )
@@ -63,7 +89,7 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function newContext() {
-		$user = $this->getMockBuilder( 'User' )
+		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
 

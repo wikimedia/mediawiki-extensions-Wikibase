@@ -71,7 +71,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 			return $result;
 		};
 
-		$epp = $this->getMock( 'Wikibase\Repo\Store\EntityPerPage' );
+		$epp = $this->getMock( EntityPerPage::class );
 
 		$epp->expects( $this->any() )
 			->method( 'listEntities' )

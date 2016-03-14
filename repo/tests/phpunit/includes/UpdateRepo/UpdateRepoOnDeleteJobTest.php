@@ -2,13 +2,19 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use Site;
+use SiteStore;
 use Status;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
+use Wikibase\SummaryFormatter;
 use Wikibase\Test\MockRepository;
 
 /**
@@ -48,14 +54,19 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @param bool $titleExists
+	 *
+	 * @return SiteStore
+	 */
 	private function getSiteStore( $titleExists ) {
-		$enwiki = $this->getMock( 'Site' );
+		$enwiki = $this->getMock( Site::class );
 		$enwiki->expects( $this->any() )
 			->method( 'normalizePageName' )
 			->with( 'Delete me' )
 			->will( $this->returnValue( $titleExists ) );
 
-		$siteStore = $this->getMock( 'SiteStore' );
+		$siteStore = $this->getMock( SiteStore::class );
 		$siteStore->expects( $this->any() )
 			->method( 'getSite' )
 			->with( 'enwiki' )
@@ -64,8 +75,13 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		return $siteStore;
 	}
 
+	/**
+	 * @param ItemId $itemId
+	 *
+	 * @return EntityTitleLookup
+	 */
 	private function getEntityTitleLookup( ItemId $itemId ) {
-		$entityTitleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->with( $itemId )
@@ -74,8 +90,11 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		return $entityTitleLookup;
 	}
 
+	/**
+	 * @return EntityPermissionChecker
+	 */
 	private function getEntityPermissionChecker() {
-		$entityPermissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
+		$entityPermissionChecker = $this->getMock( EntityPermissionChecker::class );
 		$entityPermissionChecker->expects( $this->any() )
 				->method( 'getPermissionStatusForEntity' )
 				->will( $this->returnValue( Status::newGood() ) );
@@ -83,15 +102,21 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		return $entityPermissionChecker;
 	}
 
+	/**
+	 * @return SummaryFormatter
+	 */
 	private function getSummaryFormatter() {
-		$summaryFormatter = $this->getMockBuilder( 'Wikibase\SummaryFormatter' )
+		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )
 				->disableOriginalConstructor()->getMock();
 
 		return $summaryFormatter;
 	}
 
+	/**
+	 * @return EditFilterHookRunner
+	 */
 	private function getMockEditFitlerHookRunner() {
-		$runner = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()
 			->getMock();

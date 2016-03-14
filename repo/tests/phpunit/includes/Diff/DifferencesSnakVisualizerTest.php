@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -25,7 +26,7 @@ use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 
 	public function newSnakFormatter( $returnValue = '<i>SNAK</i>', $format = SnakFormatter::FORMAT_HTML ) {
-		$instance = $this->getMock( 'Wikibase\Lib\SnakFormatter' );
+		$instance = $this->getMock( SnakFormatter::class );
 		$instance->expects( $this->any() )
 			->method( 'getFormat' )
 			->will( $this->returnValue( $format ) );
@@ -38,8 +39,11 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 		return $instance;
 	}
 
+	/**
+	 * @return EntityIdFormatter
+	 */
 	public function newEntityIdLabelFormatter() {
-		$instance = $this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' );
+		$instance = $this->getMock( EntityIdFormatter::class );
 
 		$instance->expects( $this->any() )
 			->method( 'formatEntityId' )

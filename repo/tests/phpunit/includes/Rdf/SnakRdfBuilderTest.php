@@ -10,8 +10,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SnakRdfBuilder;
+use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 
 /**
@@ -75,7 +77,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		Snak $snak = null,
 		array &$mentioned = array()
 	) {
-		$mentionTracker = $this->getMock( 'Wikibase\Rdf\EntityMentionListener' );
+		$mentionTracker = $this->getMock( EntityMentionListener::class );
 		$mentionTracker->expects( $this->any() )
 			->method( 'propertyMentioned' )
 			->will( $this->returnCallback( function( EntityId $id ) use ( &$mentioned ) {
@@ -83,7 +85,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$mentioned[$key] = $id;
 			} ) );
 
-		$valueBuilder = $this->getMock( 'Wikibase\Rdf\ValueSnakRdfBuilder' );
+		$valueBuilder = $this->getMock( ValueSnakRdfBuilder::class );
 
 		if ( $snak instanceof PropertyValueSnak ) {
 			$valueBuilder->expects( $this->once() )

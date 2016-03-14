@@ -5,6 +5,7 @@ namespace Wikibase\Tests\Repo;
 use Language;
 use MediaWikiTestCase;
 use RequestContext;
+use User;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\WikibaseRepo;
@@ -89,7 +90,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testNewRedirectCreationInteractorReturnType() {
-		$user = $this->getMockBuilder( 'User' )
+		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$context = new RequestContext();

@@ -6,6 +6,7 @@ use FauxRequest;
 use PHPUnit_Framework_MockObject_Matcher_InvokedRecorder;
 use RequestContext;
 use Status;
+use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -71,7 +72,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getPermissionCheckers() {
-		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
+		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
@@ -104,7 +105,7 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 		if ( $hookReturn === null ) {
 			$hookReturn = Status::newGood();
 		}
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -153,12 +154,12 @@ class RedirectCreationInteractorTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$title = $this->getMock( 'Title' );
+				$title = $this->getMock( Title::class );
 				$title->expects( $this->any() )
 					->method( 'isDeleted' )
 					->will( $this->returnValue( $id->getSerialization() === 'Q666' ) );

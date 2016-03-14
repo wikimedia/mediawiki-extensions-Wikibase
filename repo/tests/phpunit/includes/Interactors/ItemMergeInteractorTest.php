@@ -6,6 +6,7 @@ use ContentHandler;
 use HashSiteStore;
 use Status;
 use TestSites;
+use Title;
 use User;
 use WatchedItem;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
@@ -13,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
@@ -67,8 +69,11 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		) );
 	}
 
+	/**
+	 * @return EditFilterHookRunner
+	 */
 	public function getMockEditFilterHookRunner() {
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -83,7 +88,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	 * @return EntityPermissionChecker
 	 */
 	private function getPermissionCheckers() {
-		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
+		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
@@ -104,7 +109,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getEntityTitleLookup() {
-		$mock = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$mock = $this->getMock( EntityTitleLookup::class );
 
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
@@ -163,12 +168,12 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$title = $this->getMock( 'Title' );
+				$title = $this->getMock( Title::class );
 				$title->expects( $this->any() )
 					->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );

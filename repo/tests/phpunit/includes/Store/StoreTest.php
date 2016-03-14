@@ -2,9 +2,11 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlStore;
 use Wikibase\Store;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\Store
@@ -28,8 +30,8 @@ class StoreTest extends \MediaWikiTestCase {
 			new SqlStore(
 				$wikibaseRepo->getEntityContentDataCodec(),
 				$wikibaseRepo->getEntityIdParser(),
-				$this->getMock( 'Wikibase\Store\EntityIdLookup' ),
-				$this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' )
+				$this->getMock( EntityIdLookup::class ),
+				$this->getMock( EntityTitleLookup::class )
 			)
 		);
 

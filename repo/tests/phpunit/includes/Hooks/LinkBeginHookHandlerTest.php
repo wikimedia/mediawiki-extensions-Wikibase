@@ -229,7 +229,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	 * @return EntityIdLookup
 	 */
 	private function getEntityIdLookup() {
-		$entityIdLookup = $this->getMock( 'Wikibase\Store\EntityIdLookup' );
+		$entityIdLookup = $this->getMock( EntityIdLookup::class );
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getEntityIdForTitle' )
@@ -248,7 +248,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	 * @return TermLookup
 	 */
 	private function getTermLookup() {
-		$termLookup = $this->getMock( 'Wikibase\DataModel\Services\Lookup\TermLookup' );
+		$termLookup = $this->getMock( TermLookup::class );
 
 		$termLookup->expects( $this->any() )
 			->method( 'getLabels' )

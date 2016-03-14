@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Interactors;
 
+use User;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 
@@ -20,7 +21,9 @@ use Wikibase\Repo\Interactors\TokenCheckInteractor;
 class TokenCheckInteractorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getMockUser() {
-		$user = $this->getMockBuilder( 'User' )->disableOriginalConstructor()->getMock();
+		$user = $this->getMockBuilder( User::class )
+			->disableOriginalConstructor()
+			->getMock();
 		$user->expects( $this->any() )
 			->method( 'matchEditToken' )
 			->will( $this->returnCallback(

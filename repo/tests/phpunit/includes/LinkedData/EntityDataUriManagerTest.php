@@ -6,6 +6,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 
 /**
@@ -35,7 +36,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 	}
 
 	protected function makeUriManager() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {

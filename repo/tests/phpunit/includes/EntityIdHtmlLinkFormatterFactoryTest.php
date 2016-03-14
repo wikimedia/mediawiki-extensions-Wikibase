@@ -3,7 +3,10 @@
 namespace Wikibase\Repo\Test;
 
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 
 /**
@@ -19,9 +22,9 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	private function getFormatterFactory() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 
@@ -40,7 +43,7 @@ class EntityIdHtmlLinkFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 	public function testGetEntityIdFormatter() {
 		$factory = $this->getFormatterFactory();
 
-		$formatter = $factory->getEntityIdFormatter( $this->getMock( 'Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup' ) );
+		$formatter = $factory->getEntityIdFormatter( $this->getMock( LabelDescriptionLookup::class ) );
 		$this->assertInstanceOf( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter', $formatter );
 	}
 

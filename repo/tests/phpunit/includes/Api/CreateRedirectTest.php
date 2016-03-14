@@ -7,6 +7,7 @@ use FauxRequest;
 use Language;
 use RequestContext;
 use Status;
+use Title;
 use UsageException;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
@@ -19,7 +20,9 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateRedirect;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\RedirectCreationInteractor;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\MockRepository;
 
@@ -70,8 +73,11 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$this->mockRepository->putRedirect( $redirect );
 	}
 
+	/**
+	 * @return EntityPermissionChecker
+	 */
 	private function getPermissionCheckers() {
-		$permissionChecker = $this->getMock( 'Wikibase\Repo\Store\EntityPermissionChecker' );
+		$permissionChecker = $this->getMock( EntityPermissionChecker::class );
 
 		$permissionChecker->expects( $this->any() )
 			->method( 'getPermissionStatusForEntityId' )
@@ -86,8 +92,11 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		return $permissionChecker;
 	}
 
+	/**
+	 * @return EditFilterHookRunner
+	 */
 	public function getMockEditFilterHookRunner() {
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Hooks\EditFilterHookRunner' )
+		$mock = $this->getMockBuilder( EditFilterHookRunner::class )
 			->setMethods( array( 'run' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -146,12 +155,12 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function getMockEntityTitleLookup() {
-		$titleLookup = $this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' );
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
 
 		$titleLookup->expects( $this->any() )
 			->method( 'getTitleForID' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$title = $this->getMock( 'Title' );
+				$title = $this->getMock( Title::class );
 				$title->expects( $this->any() )
 					->method( 'isDeleted' )
 					->will( $this->returnValue( false ) );

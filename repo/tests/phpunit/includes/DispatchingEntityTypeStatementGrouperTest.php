@@ -25,9 +25,7 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 	 * @return StatementGrouper
 	 */
 	private function newGrouper( $count ) {
-		$grouper = $this->getMock(
-			'Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper'
-		);
+		$grouper = $this->getMock( StatementGrouper::class );
 
 		$grouper->expects( $this->exactly( $count ) )
 			->method( 'groupStatements' );

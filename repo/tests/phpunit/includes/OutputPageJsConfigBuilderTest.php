@@ -3,6 +3,9 @@
 namespace Wikibase\Test;
 
 use Language;
+use OutputPage;
+use Title;
+use User;
 use Wikibase\OutputPageJsConfigBuilder;
 
 /**
@@ -63,8 +66,13 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @param bool $isBlocked
+	 *
+	 * @return User
+	 */
 	public function getUser( $isBlocked ) {
-		$user = $this->getMockBuilder( 'User' )
+		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -77,8 +85,13 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 		return $user;
 	}
 
+	/**
+	 * @param bool $canEdit
+	 *
+	 * @return Title
+	 */
 	private function getTitle( $canEdit ) {
-		$title = $this->getMockBuilder( 'Title' )
+		$title = $this->getMockBuilder( Title::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -91,8 +104,14 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 		return $title;
 	}
 
+	/**
+	 * @param bool $isBlocked
+	 * @param bool $canEdit
+	 *
+	 * @return OutputPage
+	 */
 	private function getOutputPage( $isBlocked, $canEdit ) {
-		$out = $this->getMockBuilder( 'OutputPage' )
+		$out = $this->getMockBuilder( OutputPage::class )
 			->disableOriginalConstructor()
 			->getMock();
 

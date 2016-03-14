@@ -5,6 +5,7 @@ namespace Wikibase\Test\Rdf;
 use Closure;
 use PHPUnit_Framework_Assert;
 use PHPUnit_Framework_TestCase;
+use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\NullEntityMentionListener;
@@ -78,7 +79,7 @@ class ValueSnakRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 		DedupeBag $expectedDedupe,
 		&$called
 	) {
-		$valueSnakRdfBuilder = $this->getMock( 'Wikibase\Rdf\ValueSnakRdfBuilder' );
+		$valueSnakRdfBuilder = $this->getMock( ValueSnakRdfBuilder::class );
 
 		return function(
 			$mode,

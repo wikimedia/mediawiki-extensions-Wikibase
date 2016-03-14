@@ -6,6 +6,7 @@ use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\Validators\CompositeEntityValidator;
+use Wikibase\Repo\Validators\EntityValidator;
 
 /**
  * @covers Wikibase\Repo\Validators\CompositeEntityValidator
@@ -24,12 +25,12 @@ class CompositeEntityValidatorTest extends \PHPUnit_Framework_TestCase {
 		$success = Result::newSuccess();
 		$failure = Result::newError( array( Error::newError( 'Foo!' ) ) );
 
-		$good = $this->getMock( 'Wikibase\Repo\Validators\EntityValidator' );
+		$good = $this->getMock( EntityValidator::class );
 		$good->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnValue( $success ) );
 
-		$bad = $this->getMock( 'Wikibase\Repo\Validators\EntityValidator' );
+		$bad = $this->getMock( EntityValidator::class );
 		$bad->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnValue( $failure ) );

@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\NullMessageReporter;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\ChangeNotificationSender;
@@ -70,7 +71,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 * @return ChangeNotificationSender
 	 */
 	private function getNotificationSender( array &$notifications = array() ) {
-		$sender = $this->getMock( 'Wikibase\Repo\Notifications\ChangeNotificationSender' );
+		$sender = $this->getMock( ChangeNotificationSender::class );
 
 		$sender->expects( $this->any() )
 			->method( 'sendNotification' )
@@ -85,7 +86,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 * @return ChunkAccess Guaranteed to only return Change objects from loadChunk.
 	 */
 	private function getChunkedChangesAccess() {
-		$chunkedAccess = $this->getMock( 'Wikibase\ChunkAccess' );
+		$chunkedAccess = $this->getMock( ChunkAccess::class );
 
 		$chunkedAccess->expects( $this->any() )
 			->method( 'loadChunk' )
@@ -104,7 +105,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 * @return SubscriptionLookup
 	 */
 	private function getSubscriptionLookup() {
-		$lookup = $this->getMock( 'Wikibase\Store\SubscriptionLookup' );
+		$lookup = $this->getMock( SubscriptionLookup::class );
 
 		$lookup->expects( $this->any() )
 			->method( 'getSubscriptions' )
@@ -220,7 +221,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testInitialValues() {
-		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
+		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
 		$dispatcher = new ChangeDispatcher(
 			$coordinator,
 			$this->getNotificationSender(),
@@ -245,7 +246,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 	public function testSetters() {
 		$dispatcher = new ChangeDispatcher(
-			$this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' ),
+			$this->getMock( ChangeDispatchCoordinator::class ),
 			$this->getNotificationSender(),
 			$this->getChunkedChangesAccess(),
 			$this->getSubscriptionLookup()
@@ -254,7 +255,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		$dispatcher->setVerbose( true );
 		$reporter = new NullMessageReporter();
 		$dispatcher->setMessageReporter( $reporter );
-		$exceptionHandler = $this->getMock( 'Wikibase\Lib\Reporting\ExceptionHandler' );
+		$exceptionHandler = $this->getMock( ExceptionHandler::class );
 		$dispatcher->setExceptionHandler( $exceptionHandler );
 		$dispatcher->setBatchSize( 1 );
 		$dispatcher->setBatchChunkFactor( 1 );
@@ -279,7 +280,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			'chd_lock' => null
 		);
 
-		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
+		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
 
 		$coordinator->expects( $this->once() )
 			->method( 'selectClient' )
@@ -333,7 +334,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 		array $expectedChanges,
 		$expectedSeen
 	) {
-		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
+		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
 
 		$dispatcher = $this->getChangeDispatcher( $coordinator );
 		$dispatcher->setBatchSize( $batchSize );
@@ -346,7 +347,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetPendingChanges_maxChunks() {
-		$chunkAccess = $this->getMock( 'Wikibase\ChunkAccess' );
+		$chunkAccess = $this->getMock( ChunkAccess::class );
 
 		$chunkAccess->expects( $this->exactly( 1 ) )
 			->method( 'loadChunk' )
@@ -359,7 +360,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			} ) );
 
 		$dispatcher = new ChangeDispatcher(
-			$this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' ),
+			$this->getMock( ChangeDispatchCoordinator::class ),
 			$this->getNotificationSender(),
 			$chunkAccess,
 			$this->getSubscriptionLookup()
@@ -444,7 +445,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	public function testDispatchTo( $batchSize, array $wikiState, $expectedFinalSeen, array $expectedNotifications ) {
 		$expectedFinalState = array_merge( $wikiState, array( 'chd_seen' => $expectedFinalSeen ) );
 
-		$coordinator = $this->getMock( 'Wikibase\Store\ChangeDispatchCoordinator' );
+		$coordinator = $this->getMock( ChangeDispatchCoordinator::class );
 
 		$coordinator->expects( $this->never() )
 			->method( 'lockClient' );

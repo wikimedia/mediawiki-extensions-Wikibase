@@ -6,6 +6,7 @@ use DataValues\TimeValue;
 use PHPUnit_Framework_TestCase;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
+use Wikibase\Repo\Parsers\MonthNameProvider;
 use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**
@@ -26,7 +27,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		$options = new ParserOptions();
 		$options->setOption( ValueParser::OPT_LANG, $languageCode );
 
-		$monthNameProvider = $this->getMock( 'Wikibase\Repo\Parsers\MonthNameProvider' );
+		$monthNameProvider = $this->getMock( MonthNameProvider::class );
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getLocalizedMonthNames' )
 			->will( $this->returnCallback( function( $languageCode ) {

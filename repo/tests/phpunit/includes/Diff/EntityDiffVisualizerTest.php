@@ -11,6 +11,7 @@ use Language;
 use MediaWikiTestCase;
 use Site;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
+use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -86,7 +87,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	protected function getMockContext() {
 		$en = Language::factory( 'en' );
 
-		$mock = $this->getMock( 'IContextSource' );
+		$mock = $this->getMock( IContextSource::class );
 		$mock->expects( $this->any() )
 			->method( 'getLanguage' )
 			->will( $this->returnValue( $en ) );
@@ -98,7 +99,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	 * @return ClaimDiffer
 	 */
 	protected function getMockClaimDiffer() {
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Diff\ClaimDiffer' )
+		$mock = $this->getMockBuilder( ClaimDiffer::class )
 			->disableOriginalConstructor()
 			->getMock();
 		return $mock;
@@ -108,7 +109,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 	 * @return ClaimDifferenceVisualizer
 	 */
 	protected function getMockClaimDiffVisualizer() {
-		$mock = $this->getMockBuilder( 'Wikibase\Repo\Diff\ClaimDifferenceVisualizer' )
+		$mock = $this->getMockBuilder( ClaimDifferenceVisualizer::class )
 			->disableOriginalConstructor()
 			->getMock();
 		return $mock;
@@ -126,7 +127,7 @@ class EntityDiffVisualizerTest extends MediaWikiTestCase {
 			$this->getMockClaimDiffer(),
 			$this->getMockClaimDiffVisualizer(),
 			new HashSiteStore( array( $enwiki ) ),
-			$this->getMock( 'Wikibase\DataModel\Services\EntityId\EntityIdFormatter' )
+			$this->getMock( EntityIdFormatter::class )
 		);
 	}
 

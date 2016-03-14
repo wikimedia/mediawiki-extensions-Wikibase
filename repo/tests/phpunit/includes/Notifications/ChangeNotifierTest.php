@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Notifications\ChangeNotifier;
+use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -30,7 +31,7 @@ use Wikibase\Repo\WikibaseRepo;
 class ChangeNotifierTest extends \MediaWikiTestCase {
 
 	private function getChangeNotifier( $expectNotifications = 1 ) {
-		$changeTransmitter = $this->getMock( 'Wikibase\Repo\Notifications\ChangeTransmitter' );
+		$changeTransmitter = $this->getMock( ChangeTransmitter::class );
 		$changeTransmitter->expects( $this->exactly( $expectNotifications ) )
 			->method( 'transmitChange' );
 

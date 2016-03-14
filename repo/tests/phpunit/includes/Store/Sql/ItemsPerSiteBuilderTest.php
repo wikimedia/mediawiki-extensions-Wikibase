@@ -42,7 +42,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return SiteLinkTable
 	 */
 	private function getSiteLinkTable() {
-		$mock = $this->getMockBuilder( 'Wikibase\Lib\Store\SiteLinkTable' )
+		$mock = $this->getMockBuilder( SiteLinkTable::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -59,7 +59,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityLookup
 	 */
 	private function getEntityLookup() {
-		$mock = $this->getMockBuilder( 'Wikibase\DataModel\Services\Lookup\EntityLookup' )
+		$mock = $this->getMockBuilder( EntityLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -87,7 +87,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 	 * @return EntityIdPager
 	 */
 	private function getEntityIdPager() {
-		$mock = $this->getMock( 'Wikibase\Repo\Store\EntityIdPager' );
+		$mock = $this->getMock( EntityIdPager::class );
 
 		$itemIds = array(
 			$this->getTestItemId(),

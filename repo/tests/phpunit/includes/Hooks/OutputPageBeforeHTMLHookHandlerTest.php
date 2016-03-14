@@ -8,7 +8,10 @@ use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -29,12 +32,12 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 	 * @return OutputPageBeforeHTMLHookHandler
 	 */
 	private function getHookHandler() {
-		$userLanguageLookup = $this->getMock( 'Wikibase\Lib\UserLanguageLookup' );
+		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
 			->will( $this->returnValue( array( 'de', 'es', 'ru' ) ) );
 
-		$languageNameLookup = $this->getMock( 'Wikibase\Lib\LanguageNameLookup' );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 
@@ -43,7 +46,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			$userLanguageLookup,
 			new StaticContentLanguages( array( 'en', 'es', 'ru' ) ),
 			new BasicEntityIdParser(),
-			$this->getMock( 'Wikibase\Lib\Store\EntityRevisionLookup' ),
+			$this->getMock( EntityRevisionLookup::class ),
 			$languageNameLookup
 		);
 

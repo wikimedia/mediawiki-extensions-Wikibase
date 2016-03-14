@@ -3,7 +3,11 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\SqlStore;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\SqlStore
@@ -18,15 +22,15 @@ use Wikibase\SqlStore;
 class SqlStoreTest extends MediaWikiTestCase {
 
 	public function newInstance() {
-		$contentCodec = $this->getMockBuilder( 'Wikibase\Lib\Store\EntityContentDataCodec' )
+		$contentCodec = $this->getMockBuilder( EntityContentDataCodec::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		return new SqlStore(
 			$contentCodec,
-			$this->getMock( 'Wikibase\DataModel\Entity\EntityIdParser' ),
-			$this->getMock( 'Wikibase\Store\EntityIdLookup' ),
-			$this->getMock( 'Wikibase\Lib\Store\EntityTitleLookup' )
+			$this->getMock( EntityIdParser::class ),
+			$this->getMock( EntityIdLookup::class ),
+			$this->getMock( EntityTitleLookup::class )
 		);
 	}
 

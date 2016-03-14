@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Repo\Validators\SnakValidator;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOps
@@ -140,7 +141,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$error = Error::newError( 'Testing', 'test', 'test-error', array() );
 		$result = Result::newError( array( $error ) );
 
-		$snakValidator = $this->getMockBuilder( 'Wikibase\Repo\Validators\SnakValidator' )
+		$snakValidator = $this->getMockBuilder( SnakValidator::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -158,7 +159,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function testValidate_() {
 		$item = new Item();
 
-		$changeOp = $this->getMockBuilder( 'Wikibase\ChangeOp\ChangeOp' )
+		$changeOp = $this->getMockBuilder( ChangeOp::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$changeOp->expects( $this->any() )

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\BooleanValue;
 use DataValues\StringValue;
+use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -78,7 +79,7 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		array $propertyIds,
 		$expected
 	) {
-		$parserOutput = $this->getMockBuilder( 'ParserOutput' )
+		$parserOutput = $this->getMockBuilder( ParserOutput::class )
 			->disableOriginalConstructor()
 			->getMock();
 
