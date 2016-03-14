@@ -21,6 +21,7 @@
  * out more at http://wikiba.se               \/        \/
  * and join the open data revolution.              <>
  */
+use Wikibase\ChangeNotificationJob;
 
 /**
  * Entry point for the WikibaseLib extension.
@@ -73,7 +74,7 @@ call_user_func( function() {
 	// i18n
 	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/i18n';
 
-	$wgJobClasses['ChangeNotification'] = 'Wikibase\ChangeNotificationJob';
+	$wgJobClasses['ChangeNotification'] = ChangeNotificationJob::class;
 
 	// Hooks
 	$wgHooks['UnitTestsList'][] = 'Wikibase\LibHooks::registerPhpUnitTests';

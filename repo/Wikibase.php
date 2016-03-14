@@ -22,6 +22,51 @@
  * and join the open data revolution.              <>
  */
 
+use Wikibase\Repo\Api\AvailableBadges;
+use Wikibase\Repo\Api\CreateClaim;
+use Wikibase\Repo\Api\CreateRedirect;
+use Wikibase\Repo\Api\EditEntity;
+use Wikibase\Repo\Api\FormatSnakValue;
+use Wikibase\Repo\Api\GetClaims;
+use Wikibase\Repo\Api\GetEntities;
+use Wikibase\Repo\Api\LinkTitles;
+use Wikibase\Repo\Api\MergeItems;
+use Wikibase\Repo\Api\ParseValue;
+use Wikibase\Repo\Api\QuerySearchEntities;
+use Wikibase\Repo\Api\RemoveClaims;
+use Wikibase\Repo\Api\RemoveQualifiers;
+use Wikibase\Repo\Api\RemoveReferences;
+use Wikibase\Repo\Api\SearchEntities;
+use Wikibase\Repo\Api\SetAliases;
+use Wikibase\Repo\Api\SetClaim;
+use Wikibase\Repo\Api\SetClaimValue;
+use Wikibase\Repo\Api\SetDescription;
+use Wikibase\Repo\Api\SetLabel;
+use Wikibase\Repo\Api\SetQualifier;
+use Wikibase\Repo\Api\SetReference;
+use Wikibase\Repo\Api\SetSiteLink;
+use Wikibase\Repo\Specials\SpecialDispatchStats;
+use Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory;
+use Wikibase\Repo\Specials\SpecialEntityData;
+use Wikibase\Repo\Specials\SpecialGoToLinkedPage;
+use Wikibase\Repo\Specials\SpecialItemByTitle;
+use Wikibase\Repo\Specials\SpecialItemDisambiguation;
+use Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks;
+use Wikibase\Repo\Specials\SpecialListDatatypes;
+use Wikibase\Repo\Specials\SpecialListProperties;
+use Wikibase\Repo\Specials\SpecialMergeItems;
+use Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain;
+use Wikibase\Repo\Specials\SpecialNewItem;
+use Wikibase\Repo\Specials\SpecialNewProperty;
+use Wikibase\Repo\Specials\SpecialRedirectEntity;
+use Wikibase\Repo\Specials\SpecialSetAliases;
+use Wikibase\Repo\Specials\SpecialSetDescription;
+use Wikibase\Repo\Specials\SpecialSetLabel;
+use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
+use Wikibase\Repo\Specials\SpecialSetSiteLink;
+use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
+use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
+
 /**
  * Entry point for the Wikibase Repository extension.
  *
@@ -162,61 +207,61 @@ call_user_func( function() {
 	};
 
 	// API module registration
-	$wgAPIModules['wbgetentities'] = 'Wikibase\Repo\Api\GetEntities';
-	$wgAPIModules['wbsetlabel'] = 'Wikibase\Repo\Api\SetLabel';
-	$wgAPIModules['wbsetdescription'] = 'Wikibase\Repo\Api\SetDescription';
-	$wgAPIModules['wbsearchentities'] = 'Wikibase\Repo\Api\SearchEntities';
-	$wgAPIModules['wbsetaliases'] = 'Wikibase\Repo\Api\SetAliases';
-	$wgAPIModules['wbeditentity'] = 'Wikibase\Repo\Api\EditEntity';
-	$wgAPIModules['wblinktitles'] = 'Wikibase\Repo\Api\LinkTitles';
-	$wgAPIModules['wbsetsitelink'] = 'Wikibase\Repo\Api\SetSiteLink';
-	$wgAPIModules['wbcreateclaim'] = 'Wikibase\Repo\Api\CreateClaim';
-	$wgAPIModules['wbgetclaims'] = 'Wikibase\Repo\Api\GetClaims';
-	$wgAPIModules['wbremoveclaims'] = 'Wikibase\Repo\Api\RemoveClaims';
-	$wgAPIModules['wbsetclaimvalue'] = 'Wikibase\Repo\Api\SetClaimValue';
-	$wgAPIModules['wbsetreference'] = 'Wikibase\Repo\Api\SetReference';
-	$wgAPIModules['wbremovereferences'] = 'Wikibase\Repo\Api\RemoveReferences';
-	$wgAPIModules['wbsetclaim'] = 'Wikibase\Repo\Api\SetClaim';
-	$wgAPIModules['wbremovequalifiers'] = 'Wikibase\Repo\Api\RemoveQualifiers';
-	$wgAPIModules['wbsetqualifier'] = 'Wikibase\Repo\Api\SetQualifier';
-	$wgAPIModules['wbmergeitems'] = 'Wikibase\Repo\Api\MergeItems';
-	$wgAPIModules['wbformatvalue'] = 'Wikibase\Repo\Api\FormatSnakValue';
-	$wgAPIModules['wbparsevalue'] = 'Wikibase\Repo\Api\ParseValue';
-	$wgAPIModules['wbavailablebadges'] = 'Wikibase\Repo\Api\AvailableBadges';
-	$wgAPIModules['wbcreateredirect'] = 'Wikibase\Repo\Api\CreateRedirect';
-	$wgAPIListModules['wbsearch'] = 'Wikibase\Repo\Api\QuerySearchEntities';
+	$wgAPIModules['wbgetentities'] = GetEntities::class;
+	$wgAPIModules['wbsetlabel'] = SetLabel::class;
+	$wgAPIModules['wbsetdescription'] = SetDescription::class;
+	$wgAPIModules['wbsearchentities'] = SearchEntities::class;
+	$wgAPIModules['wbsetaliases'] = SetAliases::class;
+	$wgAPIModules['wbeditentity'] = EditEntity::class;
+	$wgAPIModules['wblinktitles'] = LinkTitles::class;
+	$wgAPIModules['wbsetsitelink'] = SetSiteLink::class;
+	$wgAPIModules['wbcreateclaim'] = CreateClaim::class;
+	$wgAPIModules['wbgetclaims'] = GetClaims::class;
+	$wgAPIModules['wbremoveclaims'] = RemoveClaims::class;
+	$wgAPIModules['wbsetclaimvalue'] = SetClaimValue::class;
+	$wgAPIModules['wbsetreference'] = SetReference::class;
+	$wgAPIModules['wbremovereferences'] = RemoveReferences::class;
+	$wgAPIModules['wbsetclaim'] = SetClaim::class;
+	$wgAPIModules['wbremovequalifiers'] = RemoveQualifiers::class;
+	$wgAPIModules['wbsetqualifier'] = SetQualifier::class;
+	$wgAPIModules['wbmergeitems'] = MergeItems::class;
+	$wgAPIModules['wbformatvalue'] = FormatSnakValue::class;
+	$wgAPIModules['wbparsevalue'] = ParseValue::class;
+	$wgAPIModules['wbavailablebadges'] = AvailableBadges::class;
+	$wgAPIModules['wbcreateredirect'] = CreateRedirect::class;
+	$wgAPIListModules['wbsearch'] = QuerySearchEntities::class;
 
 	// Special page registration
-	$wgSpecialPages['NewItem'] = 'Wikibase\Repo\Specials\SpecialNewItem';
-	$wgSpecialPages['NewProperty'] = 'Wikibase\Repo\Specials\SpecialNewProperty';
-	$wgSpecialPages['ItemByTitle'] = 'Wikibase\Repo\Specials\SpecialItemByTitle';
-	$wgSpecialPages['GoToLinkedPage'] = 'Wikibase\Repo\Specials\SpecialGoToLinkedPage';
-	$wgSpecialPages['ItemDisambiguation'] = 'Wikibase\Repo\Specials\SpecialItemDisambiguation';
-	$wgSpecialPages['ItemsWithoutSitelinks'] = 'Wikibase\Repo\Specials\SpecialItemsWithoutSitelinks';
-	$wgSpecialPages['SetLabel'] = 'Wikibase\Repo\Specials\SpecialSetLabel';
-	$wgSpecialPages['SetDescription'] = 'Wikibase\Repo\Specials\SpecialSetDescription';
-	$wgSpecialPages['SetAliases'] = 'Wikibase\Repo\Specials\SpecialSetAliases';
-	$wgSpecialPages['SetLabelDescriptionAliases'] = 'Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases';
-	$wgSpecialPages['SetSiteLink'] = 'Wikibase\Repo\Specials\SpecialSetSiteLink';
+	$wgSpecialPages['NewItem'] = SpecialNewItem::class;
+	$wgSpecialPages['NewProperty'] = SpecialNewProperty::class;
+	$wgSpecialPages['ItemByTitle'] = SpecialItemByTitle::class;
+	$wgSpecialPages['GoToLinkedPage'] = SpecialGoToLinkedPage::class;
+	$wgSpecialPages['ItemDisambiguation'] = SpecialItemDisambiguation::class;
+	$wgSpecialPages['ItemsWithoutSitelinks'] = SpecialItemsWithoutSitelinks::class;
+	$wgSpecialPages['SetLabel'] = SpecialSetLabel::class;
+	$wgSpecialPages['SetDescription'] = SpecialSetDescription::class;
+	$wgSpecialPages['SetAliases'] = SpecialSetAliases::class;
+	$wgSpecialPages['SetLabelDescriptionAliases'] = SpecialSetLabelDescriptionAliases::class;
+	$wgSpecialPages['SetSiteLink'] = SpecialSetSiteLink::class;
 	$wgSpecialPages['EntitiesWithoutLabel'] = array(
-		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
+		SpecialEntitiesWithoutPageFactory::class,
 		'newSpecialEntitiesWithoutLabel'
 	);
-	$wgSpecialPages['EntitiesWithoutDescription'] = array(
-		'Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory',
+	$wgSpecialPages['EntitiesWithoutDescription'] = [
+		SpecialEntitiesWithoutPageFactory::class,
 		'newSpecialEntitiesWithoutDescription'
-	);
-	$wgSpecialPages['ListDatatypes'] = 'Wikibase\Repo\Specials\SpecialListDatatypes';
-	$wgSpecialPages['ListProperties'] = 'Wikibase\Repo\Specials\SpecialListProperties';
-	$wgSpecialPages['DispatchStats'] = 'Wikibase\Repo\Specials\SpecialDispatchStats';
-	$wgSpecialPages['EntityData'] = 'Wikibase\Repo\Specials\SpecialEntityData';
-	$wgSpecialPages['MyLanguageFallbackChain'] = 'Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain';
-	$wgSpecialPages['MergeItems'] = 'Wikibase\Repo\Specials\SpecialMergeItems';
-	$wgSpecialPages['RedirectEntity'] = 'Wikibase\Repo\Specials\SpecialRedirectEntity';
+	];
+	$wgSpecialPages['ListDatatypes'] = SpecialListDatatypes::class;
+	$wgSpecialPages['ListProperties'] = SpecialListProperties::class;
+	$wgSpecialPages['DispatchStats'] = SpecialDispatchStats::class;
+	$wgSpecialPages['EntityData'] = SpecialEntityData::class;
+	$wgSpecialPages['MyLanguageFallbackChain'] = SpecialMyLanguageFallbackChain::class;
+	$wgSpecialPages['MergeItems'] = SpecialMergeItems::class;
+	$wgSpecialPages['RedirectEntity'] = SpecialRedirectEntity::class;
 
 	// Jobs
-	$wgJobClasses['UpdateRepoOnMove'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob';
-	$wgJobClasses['UpdateRepoOnDelete'] = 'Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob';
+	$wgJobClasses['UpdateRepoOnMove'] = UpdateRepoOnMoveJob::class;
+	$wgJobClasses['UpdateRepoOnDelete'] = UpdateRepoOnDeleteJob::class;
 
 	// Hooks
 	$wgHooks['BeforePageDisplay'][] = 'Wikibase\RepoHooks::onBeforePageDisplay';

@@ -22,6 +22,12 @@
  * and join the open data revolution.              <>
  */
 
+use Wikibase\Client\Api\ApiClientInfo;
+use Wikibase\Client\Api\PageTerms;
+use Wikibase\Client\Specials\SpecialPagesWithBadges;
+use Wikibase\Client\Specials\SpecialUnconnectedPages;
+use Wikibase\Client\Store\AddUsagesForPageJob;
+
 /**
  * Entry point for the Wikibase Client extension.
  *
@@ -153,11 +159,11 @@ call_user_func( function() {
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
 
 	// job classes
-	$wgJobClasses['wikibase-addUsagesForPage'] = 'Wikibase\Client\Store\AddUsagesForPageJob';
+	$wgJobClasses['wikibase-addUsagesForPage'] = AddUsagesForPageJob::class;
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(
-		'class' => 'Wikibase\Client\Api\ApiClientInfo',
+		'class' => ApiClientInfo::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 			return new Wikibase\Client\Api\ApiClientInfo(
 				Wikibase\Client\WikibaseClient::getDefaultInstance()->getSettings(),
@@ -168,7 +174,7 @@ call_user_func( function() {
 	);
 
 	$wgAPIPropModules['pageterms'] = array(
-		'class' => 'Wikibase\Client\Api\PageTerms',
+		'class' => PageTerms::class,
 		'factory' => function ( ApiQuery $query, $moduleName ) {
 			// FIXME: HACK: make pageterms work directly on entity pages on the repo.
 			// We should instead use an EntityIdLookup that combines the repo and the client
@@ -196,8 +202,8 @@ call_user_func( function() {
 	);
 
 	// Special page registration
-	$wgSpecialPages['UnconnectedPages'] = 'Wikibase\Client\Specials\SpecialUnconnectedPages';
-	$wgSpecialPages['PagesWithBadges'] = 'Wikibase\Client\Specials\SpecialPagesWithBadges';
+	$wgSpecialPages['UnconnectedPages'] = SpecialUnconnectedPages::class;
+	$wgSpecialPages['PagesWithBadges'] = SpecialPagesWithBadges::class;
 	$wgHooks['wgQueryPages'][] = 'Wikibase\ClientHooks::onwgQueryPages';
 
 	// Resource loader modules

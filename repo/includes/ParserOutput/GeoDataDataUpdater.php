@@ -5,6 +5,7 @@ namespace Wikibase\Repo\ParserOutput;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use GeoData\Coord;
 use GeoData\CoordinatesOutput;
+use GeoData\GeoData;
 use ParserOutput;
 use RuntimeException;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -60,7 +61,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 		array $preferredPropertiesIds,
 		array $globeUris
 	) {
-		if ( !class_exists( 'GeoData\GeoData' ) ) {
+		if ( !class_exists( GeoData::class ) ) {
 			throw new RuntimeException( 'GeoDataDataUpdater requires the GeoData extension '
 				. 'to be enabled' );
 		}

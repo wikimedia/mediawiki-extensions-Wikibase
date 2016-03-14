@@ -96,7 +96,7 @@ class UpdateSubscriptions extends Maintenance {
 	 * @return string
 	 */
 	public function getUpdateKey() {
-		return 'Wikibase\UpdateSubscriptions';
+		return UpdateSubscriptions::class;
 	}
 
 	/**
@@ -110,5 +110,5 @@ class UpdateSubscriptions extends Maintenance {
 
 }
 
-$maintClass = 'Wikibase\UpdateSubscriptions';
+$maintClass = UpdateSubscriptions::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

@@ -1,10 +1,13 @@
 <?php
 
+use Wikibase\View\Module\TemplateModule;
+
 /**
  * @license GPL-2.0+
  * @author Daniel Werner
  * @author H. Snater < mediawiki@snater.com >
  */
+
 return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
@@ -58,7 +61,7 @@ return call_user_func( function() {
 		),
 
 		'wikibase.templates' => $moduleTemplate + array(
-			'class' => 'Wikibase\View\Module\TemplateModule',
+			'class' => TemplateModule::class,
 			'scripts' => 'templates.js',
 		),
 

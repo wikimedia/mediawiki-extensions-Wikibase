@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store;
 use DBAccessBase;
 use ResultWrapper;
 use Wikibase\Change;
+use Wikibase\ChangeRow;
 use Wikibase\ChunkAccess;
 use Wikimedia\Assert\Assert;
 
@@ -50,7 +51,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	 * @return int
 	 */
 	public function getRecordId( $rec ) {
-		Assert::parameterType( 'Wikibase\Change', $rec, '$rec' );
+		Assert::parameterType( Change::class, $rec, '$rec' );
 
 		/* @var Change $rec */
 		return $rec->getId();
@@ -172,7 +173,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 		if ( array_key_exists( $type, $this->changeHandlers ) ) {
 			return $this->changeHandlers[$type];
 		} else {
-			return 'Wikibase\ChangeRow';
+			return ChangeRow::class;
 		}
 	}
 

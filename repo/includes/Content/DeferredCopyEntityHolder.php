@@ -45,7 +45,7 @@ class DeferredCopyEntityHolder implements EntityHolder {
 	 * @throws RuntimeException If the entity held by this EntityHolder is not compatible with $expectedClass.
 	 * @return EntityDocument
 	 */
-	public function getEntity( $expectedClass = 'Wikibase\DataModel\Entity\EntityDocument' ) {
+	public function getEntity( $expectedClass = EntityDocument::class ) {
 		if ( !$this->entity ) {
 			$entity = $this->entityHolder->getEntity( $expectedClass );
 			$this->entity = $entity->copy();

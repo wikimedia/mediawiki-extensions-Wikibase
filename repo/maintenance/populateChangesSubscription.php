@@ -80,7 +80,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 	 * @return string
 	 */
 	public function getUpdateKey() {
-		return 'Wikibase\PopulateChangesSubscription';
+		return PopulateChangesSubscription::class;
 	}
 
 	/**
@@ -94,5 +94,5 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 }
 
-$maintClass = 'Wikibase\PopulateChangesSubscription';
+$maintClass = PopulateChangesSubscription::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

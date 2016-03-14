@@ -54,7 +54,7 @@ class WikiPageEntityStore implements EntityStore {
 		$this->contentFactory = $contentFactory;
 		$this->idGenerator = $idGenerator;
 
-		$this->dispatcher = new GenericEventDispatcher( 'Wikibase\Lib\Store\EntityStoreWatcher' );
+		$this->dispatcher = new GenericEventDispatcher( EntityStoreWatcher::class );
 	}
 
 	/**

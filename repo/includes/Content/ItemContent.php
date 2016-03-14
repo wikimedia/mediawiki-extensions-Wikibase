@@ -157,7 +157,7 @@ class ItemContent extends EntityContent {
 			throw new LogicException( 'Neither redirect nor item found in ItemContent!' );
 		}
 
-		return $this->itemHolder->getEntity( 'Wikibase\DataModel\Entity\Item' );
+		return $this->itemHolder->getEntity( Item::class );
 	}
 
 	/**

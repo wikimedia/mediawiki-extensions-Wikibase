@@ -2,8 +2,11 @@
 
 namespace Wikibase\Repo;
 
+use DataValues\DataValue;
+use DataValues\QuantityValue;
 use DataValues\TimeValue;
 use ValueValidators\ValueValidator;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -132,7 +135,7 @@ class ValidatorBuilders {
 		$validators = array();
 
 		//NOTE: The DataValue in question is going to be an instance of EntityId!
-		$validators[] = new TypeValidator( 'Wikibase\DataModel\Entity\EntityIdValue' );
+		$validators[] = new TypeValidator( EntityIdValue::class );
 		$validators[] = new EntityExistsValidator( $this->entityLookup, $entityType );
 
 		return $validators;
@@ -178,7 +181,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
+		return array( new TypeValidator( DataValue::class ), $topValidator );
 	}
 
 	/**
@@ -191,7 +194,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
+		return array( new TypeValidator( DataValue::class ), $topValidator );
 	}
 
 	/**
@@ -214,7 +217,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
+		return array( new TypeValidator( DataValue::class ), $topValidator );
 	}
 
 	/**
@@ -258,7 +261,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
+		return array( new TypeValidator( DataValue::class ), $topValidator );
 	}
 
 	/**
@@ -280,7 +283,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
+		return array( new TypeValidator( DataValue::class ), $topValidator );
 	}
 
 	/**
@@ -330,7 +333,7 @@ class ValidatorBuilders {
 			$urlValidator
 		);
 
-		return array( new TypeValidator( 'DataValues\DataValue' ), $topValidator );
+		return array( new TypeValidator( DataValue::class ), $topValidator );
 	}
 
 	/**
@@ -356,7 +359,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $validators ) //Note: each validator is fatal
 		);
 
-		return array( new TypeValidator( 'DataValues\QuantityValue' ), $topValidator );
+		return array( new TypeValidator( QuantityValue::class ), $topValidator );
 	}
 
 }

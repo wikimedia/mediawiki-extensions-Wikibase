@@ -39,7 +39,7 @@ class SqlChangeStore implements ChangeStore {
 	 * @throws DBQueryError
 	 */
 	public function saveChange( Change $change ) {
-		Assert::parameterType( 'Wikibase\ChangeRow', $change, '$change' );
+		Assert::parameterType( ChangeRow::class, $change, '$change' );
 
 		if ( $change->getId() === null ) {
 			$this->insertChange( $change );

@@ -72,5 +72,5 @@ class ChangePropertyDataType extends Maintenance {
 
 }
 
-$maintClass = 'Wikibase\ChangePropertyDataType';
+$maintClass = ChangePropertyDataType::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
