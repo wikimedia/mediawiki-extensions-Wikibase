@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -38,7 +39,7 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( array $groupers ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new DispatchingEntityTypeStatementGrouper( $groupers );
 	}
 

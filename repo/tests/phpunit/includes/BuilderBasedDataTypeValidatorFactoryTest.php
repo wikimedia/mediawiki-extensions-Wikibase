@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 use ValueValidators\NullValidator;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
@@ -24,7 +25,7 @@ class BuilderBasedDataTypeValidatorFactoryTest extends PHPUnit_Framework_TestCas
 
 	public function testUnknownPropertyType() {
 		$factory = new BuilderBasedDataTypeValidatorFactory( array() );
-		$this->setExpectedException( 'OutOfBoundsException' );
+		$this->setExpectedException( OutOfBoundsException::class );
 		$factory->getValidators( 'unknown' );
 	}
 

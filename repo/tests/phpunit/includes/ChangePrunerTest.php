@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use MediaWikiTestCase;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Reporting\MessageReporter;
@@ -24,17 +25,17 @@ class ChangePrunerTest extends MediaWikiTestCase {
 	private $messages = array();
 
 	public function testConstructorWithInvalidBatchSize() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new ChangePruner( 0, 0, 0, false );
 	}
 
 	public function testConstructorWithInvalidKeepSeconds() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new ChangePruner( 1, -1, 0, false );
 	}
 
 	public function testConstructorWithInvalidGraceSeconds() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new ChangePruner( 1, 0, -1, false );
 	}
 

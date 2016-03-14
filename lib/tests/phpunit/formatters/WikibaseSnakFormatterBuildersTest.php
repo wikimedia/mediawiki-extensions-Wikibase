@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -88,7 +89,7 @@ class WikibaseSnakFormatterBuildersTest extends \PHPUnit_Framework_TestCase {
 		$options = new FormatterOptions();
 		$builders = $this->getWikibaseSnakFormatterBuilders();
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$builders->newExternalIdentifierFormatter( 'unknown', $options );
 	}
 

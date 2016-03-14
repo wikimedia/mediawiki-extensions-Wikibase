@@ -85,7 +85,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			$this->getMockErrorReporter( null, 'cant-load-entity-content' )
 		);
 
-		$this->setExpectedException( 'UsageException' );
+		$this->setExpectedException( UsageException::class );
 		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
 	}
 
@@ -98,7 +98,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			$this->getMockErrorReporter( 'unresolved-redirect' )
 		);
 
-		$this->setExpectedException( 'UsageException' );
+		$this->setExpectedException( UsageException::class );
 		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
 	}
 
@@ -108,7 +108,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			$this->getMockErrorReporter( 'nosuchrevid' )
 		);
 
-		$this->setExpectedException( 'UsageException' );
+		$this->setExpectedException( UsageException::class );
 		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
 	}
 
@@ -118,7 +118,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			$this->getMockErrorReporter( 'cant-load-entity-content' )
 		);
 
-		$this->setExpectedException( 'UsageException' );
+		$this->setExpectedException( UsageException::class );
 		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
 	}
 

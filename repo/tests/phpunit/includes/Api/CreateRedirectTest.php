@@ -233,7 +233,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	}
 
 	public function testSetRedirect_noPermission() {
-		$this->setExpectedException( 'UsageException' );
+		$this->setExpectedException( UsageException::class );
 
 		$user = User::newFromName( 'UserWithoutPermission' );
 

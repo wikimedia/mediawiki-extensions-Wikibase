@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use HashSiteStore;
+use InvalidArgumentException;
 use MediaWikiTestCase;
 use TestSites;
 use ValueValidators\Error;
@@ -126,7 +127,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	 * @dataProvider provideInvalidConstruction
 	 */
 	public function testInvalidIgnoreConflicts( Item $from, Item $to, array $ignoreConflicts ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$this->makeChangeOpsMerge(
 			$from,
 			$to,

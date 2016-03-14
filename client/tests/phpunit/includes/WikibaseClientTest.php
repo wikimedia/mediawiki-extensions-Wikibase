@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests;
 
 use HashSiteStore;
 use Language;
+use RuntimeException;
 use Site;
 use SiteStore;
 use Wikibase\Client\WikibaseClient;
@@ -261,7 +262,7 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$codec = $this->getWikibaseClient()->getEntityContentDataCodec();
 		$this->assertInstanceOf( 'Wikibase\Lib\Store\EntityContentDataCodec', $codec );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 		$codec->encodeEntity( new Item(), CONTENT_FORMAT_JSON );
 	}
 

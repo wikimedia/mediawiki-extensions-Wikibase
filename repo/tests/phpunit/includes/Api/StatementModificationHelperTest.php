@@ -79,7 +79,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		$guid = $statement->getGuid();
 
 		$this->assertEquals( $statement, $helper->getStatementFromEntity( $guid, $item ) );
-		$this->setExpectedException( '\UsageException' );
+		$this->setExpectedException( UsageException::class );
 		$helper->getStatementFromEntity( 'q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0N', $item );
 	}
 

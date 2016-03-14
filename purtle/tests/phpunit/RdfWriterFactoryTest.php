@@ -2,6 +2,7 @@
 
 namespace Wikimedia\Purtle\Tests;
 
+use InvalidArgumentException;
 use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
@@ -36,7 +37,7 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 
 	public function testGivenInvalidFormat_getWriterThrowsException() {
 		$factory = new RdfWriterFactory();
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$factory->getWriter( 'invalid' );
 	}
 
@@ -112,7 +113,7 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 
 	public function testGivenInvalidFormat_getMimeTypesThrowsException() {
 		$factory = new RdfWriterFactory();
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$factory->getMimeTypes( 'invalid' );
 	}
 
@@ -128,7 +129,7 @@ class RdfWriterFactoryTest extends \MediaWikiTestCase {
 
 	public function testGivenInvalidFormat_getFileExtensionsThrowsException() {
 		$factory = new RdfWriterFactory();
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$factory->getFileExtension( 'invalid' );
 	}
 

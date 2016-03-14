@@ -6,6 +6,7 @@ use Elastica\Document;
 use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use Title;
+use UnexpectedValueException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -134,7 +135,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 			)
 		);
 
-		$this->setExpectedException( 'UnexpectedValueException' );
+		$this->setExpectedException( UnexpectedValueException::class );
 
 		$hookHandlers = new CirrusSearchHookHandlers( $fieldDefinitions );
 		$hookHandlers->addExtraFieldsToMappingConfig( $config );

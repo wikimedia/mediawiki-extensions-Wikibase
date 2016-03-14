@@ -4,7 +4,9 @@ namespace Wikibase\Test;
 
 use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
+use InvalidArgumentException;
 use Language;
+use MWException;
 use Revision;
 use RuntimeException;
 use Title;
@@ -142,7 +144,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	public function testGivenNonEntityContent_serializeContentThrowsException() {
 		$handler = $this->getHandler();
 		$content = new WikitextContent( '' );
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$handler->serializeContent( $content );
 	}
 
@@ -340,7 +342,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	public function testMakeEmptyContent() {
 		// We don't support empty content.
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 
 		$handler = $this->getHandler();
 		$handler->makeEmptyContent();
@@ -348,7 +350,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 
 	public function testMakeRedirectContent() {
 		// We don't support title based redirects.
-		$this->setExpectedException( 'MWException' );
+		$this->setExpectedException( MWException::class );
 
 		$handler = $this->getHandler();
 		$handler->makeRedirectContent( Title::newFromText( 'X11', $handler->getEntityNamespace() ) );

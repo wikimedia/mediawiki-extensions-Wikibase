@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Exception;
+use InvalidArgumentException;
 use RuntimeException;
 use ValueParsers\ParseException;
 use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;
@@ -68,7 +69,7 @@ class DispatchingExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 			'ParseException' => new ParseExceptionLocalizer(),
 		);
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		$localizer = new DispatchingExceptionLocalizer( $localizers );
 		$localizer->getExceptionMessage( new RuntimeException( 'oops!' ) );

@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\HtmlUrlFormatter;
 
@@ -46,7 +47,7 @@ class HtmlUrlFormatterTest extends \PHPUnit_Framework_TestCase {
 		$formatter = new HtmlUrlFormatter( new FormatterOptions() );
 		$value = new NumberValue( 23 );
 
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$formatter->format( $value );
 	}
 

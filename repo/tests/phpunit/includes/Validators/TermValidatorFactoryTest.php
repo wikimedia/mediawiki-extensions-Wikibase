@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -28,7 +29,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( $maxLength ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$this->newFactory( $maxLength, array() );
 	}
 

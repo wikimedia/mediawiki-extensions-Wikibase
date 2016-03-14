@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
@@ -96,7 +97,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 				'custom' => array( 'type' => 'dataType' ),
 			)
 		) );
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}
 
@@ -123,7 +124,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 				'custom' => array( 'type' => 'propertySet' ),
 			)
 		) );
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}
 
@@ -150,7 +151,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 				'custom' => array( 'type' => 'invalid' ),
 			)
 		) );
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$builder->getStatementGrouper();
 	}
 

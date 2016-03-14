@@ -130,7 +130,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->makeSetQualifierRequest( $guid, null, $snak, $item->getId() );
 
 		// now the hash exists, so the same request should fail
-		$this->setExpectedException( 'UsageException' );
+		$this->setExpectedException( UsageException::class );
 		$this->makeSetQualifierRequest( $guid, null, $snak, $item->getId() );
 	}
 
@@ -157,7 +157,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->makeSetQualifierRequest( $guid, $hash, $newQualifier, $item->getId() );
 
 		// now the hash changed, so the same request should fail
-		$this->setExpectedException( 'UsageException' );
+		$this->setExpectedException( UsageException::class );
 		$this->makeSetQualifierRequest( $guid, $hash, $newQualifier, $item->getId() );
 	}
 

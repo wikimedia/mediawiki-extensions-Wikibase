@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
@@ -40,7 +41,7 @@ class EntityRevisionTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testInvalidConstructorArguments( $revisionId, $mwTimestamp ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new EntityRevision( new Item(), $revisionId, $mwTimestamp );
 	}
 

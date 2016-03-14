@@ -7,6 +7,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use DataValues\UnknownValue;
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use ValueValidators\Error;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -230,7 +231,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenNonSnak_validateFails() {
 		$validator = $this->getSnakValidator();
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		$validator->validate( null );
 	}
 

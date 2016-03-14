@@ -17,7 +17,7 @@ use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 class RethrowingExceptionHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testReportMessage() {
-		$this->setExpectedException( 'RuntimeException' );
+		$this->setExpectedException( RuntimeException::class );
 
 		$handler = new RethrowingExceptionHandler();
 		$handler->handleException( new RuntimeException(), "test", "Just a test!" );

@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -62,7 +63,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	}
 
 	public function testConstructionWithBadDetailsFormatter() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new DifferencesSnakVisualizer(
 			$this->newEntityIdLabelFormatter(),
 			$this->newSnakFormatter( '', 'qwertyuiop' ),
@@ -72,7 +73,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	}
 
 	public function testConstructionWithBadTerseFormatter() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new DifferencesSnakVisualizer(
 			$this->newEntityIdLabelFormatter(),
 			$this->newSnakFormatter(),

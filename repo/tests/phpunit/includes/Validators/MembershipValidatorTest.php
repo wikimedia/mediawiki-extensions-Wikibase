@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test\Repo\Validators;
 
+use InvalidArgumentException;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 
@@ -21,7 +22,7 @@ class MembershipValidatorTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidConstructorArgumentsProvider
 	 */
 	public function testInvalidConstructorArgument( $errorCode, $normalizer ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new MembershipValidator( array(), $errorCode, $normalizer );
 	}
 

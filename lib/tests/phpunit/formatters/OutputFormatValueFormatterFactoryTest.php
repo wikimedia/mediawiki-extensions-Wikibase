@@ -6,6 +6,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use Language;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\FormattingException;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -182,7 +183,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 		);
 
 		// formatter for 'VT:string' should have been removed
-		$this->setExpectedException( 'ValueFormatters\FormattingException' );
+		$this->setExpectedException( FormattingException::class );
 		$formatter->format( new StringValue( 'boo!' ) ); // expecting a FormattingException
 	}
 

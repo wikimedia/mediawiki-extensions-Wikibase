@@ -5,6 +5,7 @@ namespace Wikibase\Store\Test;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use MediaWikiTestCase;
+use MWContentSerializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -95,7 +96,7 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 	public function testEncodeBigEntity() {
 		$entity = new Item( new ItemId( 'Q1' ) );
 
-		$this->setExpectedException( 'MWContentSerializationException' );
+		$this->setExpectedException( MWContentSerializationException::class );
 		$this->getCodec( 6 )->encodeEntity( $entity, CONTENT_FORMAT_JSON );
 	}
 
@@ -104,7 +105,7 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 
 		$blob = $this->getCodec()->encodeEntity( $entity, CONTENT_FORMAT_JSON );
 
-		$this->setExpectedException( 'MWContentSerializationException' );
+		$this->setExpectedException( MWContentSerializationException::class );
 		$this->getCodec( 6 )->decodeEntity( $blob, CONTENT_FORMAT_JSON );
 	}
 

@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use DataValues\NumberValue;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpStatement;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -58,7 +59,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidIndexProvider
 	 */
 	public function testConstructionWithInvalidIndex( $invalidIndex ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 
 		$this->newChangeOpStatement(
 			$this->mockProvider->makeStatement( 'P7' ),
