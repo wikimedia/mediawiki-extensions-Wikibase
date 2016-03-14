@@ -59,17 +59,11 @@ final class TestChanges {
 	 * @return EntityChangeFactory
 	 */
 	public static function getEntityChangeFactory() {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
-		);
-
 		$changeClasses = array(
 			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
 		);
 
 		$factory = new EntityChangeFactory(
-			new EntityFactory( $entityClasses ),
 			new EntityDiffer(),
 			$changeClasses
 		);

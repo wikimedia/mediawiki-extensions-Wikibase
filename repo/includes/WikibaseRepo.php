@@ -516,7 +516,6 @@ class WikibaseRepo {
 		);
 
 		return new EntityChangeFactory(
-			$this->getEntityFactory(),
 			new EntityDiffer(),
 			$changeClasses
 		);

@@ -912,7 +912,6 @@ final class WikibaseClient {
 		);
 
 		return new EntityChangeFactory(
-			$this->getEntityFactory(),
 			new EntityDiffer(),
 			$changeClasses
 		);

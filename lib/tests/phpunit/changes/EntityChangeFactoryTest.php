@@ -38,17 +38,11 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityChangeFactory
 	 */
 	public function getEntityChangeFactory() {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
-		);
-
 		$changeClasses = array(
 			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
 		);
 
 		$factory = new EntityChangeFactory(
-			new EntityFactory( $entityClasses ),
 			new EntityDiffer(),
 			$changeClasses
 		);
