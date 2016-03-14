@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_afe338d3",
+        "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T13:56:28Z",
+      "side": 1,
+      "message": "see my comment on PS5",
+      "revId": "ab0289c75079da28b797522c4740d3d3547689e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
