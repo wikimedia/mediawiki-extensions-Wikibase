@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_af87b8db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T14:15:55Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be sufficient to state that \n\t\u003chttp://en.wikipedia.org/\u003e wikibase:wikiGroup \"wikipedia\" ?\n\nThat would save a lot of bytes...",
+      "revId": "acd537356229da056c513268ad1354f03258a879",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_6f649046",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-14T14:15:55Z",
+      "side": 1,
+      "message": "$site-\u003egetPageUrl() would include the /wiki/ part. Wouldn\u0027t it be correct to include that?",
+      "revId": "acd537356229da056c513268ad1354f03258a879",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
