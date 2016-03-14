@@ -3,9 +3,18 @@
 namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
+use DataValues\BooleanValue;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\MonolingualTextValue;
+use DataValues\MultilingualTextValue;
+use DataValues\NumberValue;
+use DataValues\QuantityValue;
 use DataValues\Serializers\DataValueSerializer;
+use DataValues\StringValue;
+use DataValues\TimeValue;
+use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use HashBagOStuff;
@@ -29,6 +38,7 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -47,6 +57,7 @@ use Wikibase\EditEntityFactory;
 use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory as InternalSerializerFactory;
+use Wikibase\ItemChange;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -511,7 +522,7 @@ class WikibaseRepo {
 	public function getEntityChangeFactory() {
 		//TODO: take this from a setting or registry.
 		$changeClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\ItemChange',
+			Item::ENTITY_TYPE => ItemChange::class,
 			// Other types of entities will use EntityChange
 		);
 
@@ -1168,8 +1179,8 @@ class WikibaseRepo {
 	 */
 	public function getEntityFactory() {
 		$entityClasses = array(
-			Item::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Item',
-			Property::ENTITY_TYPE => 'Wikibase\DataModel\Entity\Property',
+			Item::ENTITY_TYPE => Item::class,
+			Property::ENTITY_TYPE => Property::class,
 		);
 
 		//TODO: provide a hook or registry for adding more.
@@ -1296,16 +1307,16 @@ class WikibaseRepo {
 	 */
 	public function getDataValueDeserializer() {
 		return new DataValueDeserializer( array(
-			'boolean' => 'DataValues\BooleanValue',
-			'number' => 'DataValues\NumberValue',
-			'string' => 'DataValues\StringValue',
-			'unknown' => 'DataValues\UnknownValue',
-			'globecoordinate' => 'DataValues\Geo\Values\GlobeCoordinateValue',
-			'monolingualtext' => 'DataValues\MonolingualTextValue',
-			'multilingualtext' => 'DataValues\MultilingualTextValue',
-			'quantity' => 'DataValues\QuantityValue',
-			'time' => 'DataValues\TimeValue',
-			'wikibase-entityid' => 'Wikibase\DataModel\Entity\EntityIdValue',
+			'boolean' => BooleanValue::class,
+			'number' => NumberValue::class,
+			'string' => StringValue::class,
+			'unknown' => UnknownValue::class,
+			'globecoordinate' => GlobeCoordinateValue::class,
+			'monolingualtext' => MonolingualTextValue::class,
+			'multilingualtext' => MultilingualTextValue::class,
+			'quantity' => QuantityValue::class,
+			'time' => TimeValue::class,
+			'wikibase-entityid' => EntityIdValue::class,
 		) );
 	}
 

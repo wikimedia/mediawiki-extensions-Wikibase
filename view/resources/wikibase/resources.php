@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\View\Module\TemplateModule;
+
 /**
  * @license GPL-2.0+
  * @author Daniel Werner
@@ -58,7 +60,7 @@ return call_user_func( function() {
 		),
 
 		'wikibase.templates' => $moduleTemplate + array(
-			'class' => 'Wikibase\View\Module\TemplateModule',
+			'class' => TemplateModule::class,
 			'scripts' => 'templates.js',
 		),
 

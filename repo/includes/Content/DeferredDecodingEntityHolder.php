@@ -94,7 +94,7 @@ class DeferredDecodingEntityHolder implements EntityHolder {
 	 * @throws RuntimeException If the entity held by this EntityHolder is not compatible with $expectedClass.
 	 * @return EntityDocument
 	 */
-	public function getEntity( $expectedClass = 'Wikibase\DataModel\Entity\EntityDocument' ) {
+	public function getEntity( $expectedClass = EntityDocument::class ) {
 		if ( !$this->entity ) {
 			$this->entity = $this->codec->decodeEntity( $this->blob, $this->contentFormat );
 

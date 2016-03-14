@@ -91,5 +91,5 @@ class RebuildEntityPerPage extends LoggedUpdateMaintenance {
 
 }
 
-$maintClass = 'Wikibase\Repo\Maintenance\RebuildEntityPerPage';
+$maintClass = RebuildEntityPerPage::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

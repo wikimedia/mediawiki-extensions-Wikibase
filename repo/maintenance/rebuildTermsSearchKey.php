@@ -83,5 +83,5 @@ class RebuildTermsSearchKey extends LoggedUpdateMaintenance {
 
 }
 
-$maintClass = 'Wikibase\RebuildTermsSearchKey';
+$maintClass = RebuildTermsSearchKey::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

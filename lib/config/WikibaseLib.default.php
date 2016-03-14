@@ -1,5 +1,8 @@
 <?php
 
+use Wikibase\EntityChange;
+use Wikibase\ItemChange;
+
 /**
  * Lib is not an application and should not have global config state.
  * Therefore you should NOT add new settings here. If both client and repo
@@ -14,7 +17,6 @@
  *
  * @license GPL-2.0+
  */
-
 return array(
 	// whether changes get recorded to wb_changes
 	'useChangesTable' => true,
@@ -33,25 +35,25 @@ return array(
 	'localClientDatabases' => array(),
 
 	'changeHandlers' => array(
-		'wikibase-item~add' => 'Wikibase\ItemChange',
-		'wikibase-property~add' => 'Wikibase\EntityChange',
-		'wikibase-query~add' => 'Wikibase\EntityChange',
+		'wikibase-item~add' => ItemChange::class,
+		'wikibase-property~add' => EntityChange::class,
+		'wikibase-query~add' => EntityChange::class,
 
-		'wikibase-item~update' => 'Wikibase\ItemChange',
-		'wikibase-property~update' => 'Wikibase\EntityChange',
-		'wikibase-query~update' => 'Wikibase\EntityChange',
+		'wikibase-item~update' => ItemChange::class,
+		'wikibase-property~update' => EntityChange::class,
+		'wikibase-query~update' => EntityChange::class,
 
-		'wikibase-item~remove' => 'Wikibase\ItemChange',
-		'wikibase-property~remove' => 'Wikibase\EntityChange',
-		'wikibase-query~remove' => 'Wikibase\EntityChange',
+		'wikibase-item~remove' => ItemChange::class,
+		'wikibase-property~remove' => EntityChange::class,
+		'wikibase-query~remove' => EntityChange::class,
 
-		'wikibase-item~refresh' => 'Wikibase\ItemChange',
-		'wikibase-property~refresh' => 'Wikibase\EntityChange',
-		'wikibase-query~refresh' => 'Wikibase\EntityChange',
+		'wikibase-item~refresh' => ItemChange::class,
+		'wikibase-property~refresh' => EntityChange::class,
+		'wikibase-query~refresh' => EntityChange::class,
 
-		'wikibase-item~restore' => 'Wikibase\ItemChange',
-		'wikibase-property~restore' => 'Wikibase\EntityChange',
-		'wikibase-query~restore' => 'Wikibase\EntityChange',
+		'wikibase-item~restore' => ItemChange::class,
+		'wikibase-property~restore' => EntityChange::class,
+		'wikibase-query~restore' => EntityChange::class,
 	),
 
 	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],

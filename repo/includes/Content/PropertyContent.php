@@ -62,7 +62,7 @@ class PropertyContent extends EntityContent {
 	 * @return Property
 	 */
 	public function getProperty() {
-		return $this->propertyHolder->getEntity( 'Wikibase\DataModel\Entity\Property' );
+		return $this->propertyHolder->getEntity( Property::class );
 	}
 
 	/**

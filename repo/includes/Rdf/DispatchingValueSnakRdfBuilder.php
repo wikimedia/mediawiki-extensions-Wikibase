@@ -27,7 +27,7 @@ class DispatchingValueSnakRdfBuilder implements ValueSnakRdfBuilder {
 	 * (with prefix "PT:") or value type (with prefix "VT:").
 	 */
 	public function __construct( array $valueBuilders ) {
-		Assert::parameterElementType( 'Wikibase\Rdf\ValueSnakRdfBuilder', $valueBuilders, '$valueBuilders' );
+		Assert::parameterElementType( ValueSnakRdfBuilder::class, $valueBuilders, '$valueBuilders' );
 
 		$this->valueBuilders = $valueBuilders;
 	}

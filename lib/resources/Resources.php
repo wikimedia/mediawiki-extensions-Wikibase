@@ -1,5 +1,8 @@
 <?php
 
+use Wikibase\RepoAccessModule;
+use Wikibase\SitesModule;
+
 /**
  * @license GPL-2.0+
  * @author Daniel Werner
@@ -19,11 +22,11 @@ return call_user_func( function() {
 	$modules = array(
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + array(
-			'class' => 'Wikibase\SitesModule',
+			'class' => SitesModule::class,
 		),
 
 		'mw.config.values.wbRepo' => $moduleTemplate + array(
-			'class' => 'Wikibase\RepoAccessModule',
+			'class' => RepoAccessModule::class,
 		),
 
 		'wikibase' => $moduleTemplate + array(
