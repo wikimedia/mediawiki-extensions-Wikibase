@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_0fc863a9",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-14T15:22:44Z",
+      "side": 0,
+      "message": "I wonder where this code lives now?",
+      "revId": "af8cbd0c5580bcde8399415546ce3a7dbcc3fc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_6f380f9c",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-14T15:22:44Z",
+      "side": 0,
+      "message": "This class was using BabelUserLanguageLookup::getAllUserLanguages() before, but is now fed with BabelUserLanguageLookup::getUserSpecifiedLanguages(), which is not guaranteed to contain the UI language.",
+      "revId": "af8cbd0c5580bcde8399415546ce3a7dbcc3fc07",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
