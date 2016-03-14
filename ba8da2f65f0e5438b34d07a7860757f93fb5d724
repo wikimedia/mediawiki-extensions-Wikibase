@@ -16,6 +16,24 @@
       "revId": "ba8da2f65f0e5438b34d07a7860757f93fb5d724",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_43ffe4a7",
+        "filename": "repo/includes/ChangeOp/ChangeOpDescription.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-14T20:44:09Z",
+      "side": 1,
+      "message": "I\u0027d rather create the validators based on entity type (there are some `instanceof` checks in the factories anyways). It\u0027s not a blocker but I will work on this once we have the first basic prototype live.",
+      "parentUuid": "ee33df1d_2f244807",
+      "revId": "ba8da2f65f0e5438b34d07a7860757f93fb5d724",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
