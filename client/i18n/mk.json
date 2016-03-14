@@ -73,7 +73,7 @@
 	"wikibase-pageinfo-entity-id": "Предметна назнака на {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "нема",
 	"wikibase-property-render-error": "Не успеав да го испишам својството $1: $2",
-	"wikibase-otherprojects": "Други проекти",
+	"wikibase-otherprojects": "На други проекти",
 	"wikibase-otherprojects-beta-message": "Странична лента со други проекти",
 	"wikibase-otherprojects-beta-description": "Во страничникот додава дел „{{int:wikibase-otherprojects}}“ што содржи врски до другите Викимедиини проекти врз основа на податоците на {{WBREPONAME}}."
 }

@@ -74,7 +74,7 @@
 	"wikibase-pageinfo-entity-id": "ID del elementu de {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Dengún",
 	"wikibase-property-render-error": "Fallu al renderizar la propiedá $1: $2",
-	"wikibase-otherprojects": "Otros proyeutos",
+	"wikibase-otherprojects": "N'otros proyeutos",
 	"wikibase-otherprojects-beta-message": "Barra llateral d'otros proyeutos",
 	"wikibase-otherprojects-beta-description": "Amiesta la seición «{{int:wikibase-otherprojects}}» a la barra llateral qu'ufre enllaces los demás proyeutos de Wikimedia basaos nos datos de {{WBREPONAME}}."
 }

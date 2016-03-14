@@ -7,6 +7,7 @@
 	},
 	"wikibase-edit": "တည်းဖြတ်",
 	"wikibase-add": "ပေါင်းထည့်",
+	"wikibase-description-empty": "ဖော်ပြချက် ပေးမထားပါ",
 	"wikibase-sitelinks-special": "အခြား ဆိုဒ်များ",
 	"wikibase-statementview-rank-normal": "သာမန် အဆင့်",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ရည်ညွှန်းချက်|ရည်ညွှန်းချက်များ}}",
