@@ -15,12 +15,16 @@ use StubObject;
 use Title;
 use UnexpectedValueException;
 use User;
+use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
+use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
+use Wikibase\Client\Specials\SpecialPagesWithBadges;
+use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\AutoCommentFormatter;
@@ -80,8 +84,8 @@ final class ClientHooks {
 	public static function onScribuntoExternalLibraries( $engine, array &$extraLibraries ) {
 		$allowDataTransclusion = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'allowDataTransclusion' );
 		if ( $engine == 'lua' && $allowDataTransclusion === true ) {
-			$extraLibraries['mw.wikibase'] = 'Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary';
-			$extraLibraries['mw.wikibase.entity'] = 'Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary';
+			$extraLibraries['mw.wikibase'] = Scribunto_LuaWikibaseLibrary::class;
+			$extraLibraries['mw.wikibase.entity'] = Scribunto_LuaWikibaseEntityLibrary::class;
 		}
 
 		return true;
@@ -463,8 +467,8 @@ final class ClientHooks {
 	}
 
 	public static function onwgQueryPages( &$queryPages ) {
-		$queryPages[] = array( 'Wikibase\Client\Specials\SpecialUnconnectedPages', 'UnconnectedPages' );
-		$queryPages[] = array( 'Wikibase\Client\Specials\SpecialPagesWithBadges', 'PagesWithBadges' );
+		$queryPages[] = array( SpecialUnconnectedPages::class, 'UnconnectedPages' );
+		$queryPages[] = array( SpecialPagesWithBadges::class, 'PagesWithBadges' );
 		return true;
 	}
 

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
+use GeoData\GeoData;
 use Language;
-use ParserOptions;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -180,7 +180,7 @@ class EntityParserOutputGeneratorFactory {
 			$updaters[] = new PageImagesDataUpdater( $this->preferredPageImagesProperties );
 		}
 
-		if ( class_exists( 'GeoData\GeoData' ) ) {
+		if ( class_exists( GeoData::class ) ) {
 			$updaters[] = new GeoDataDataUpdater(
 				$propertyDataTypeMatcher,
 				$this->preferredGeoDataProperties,

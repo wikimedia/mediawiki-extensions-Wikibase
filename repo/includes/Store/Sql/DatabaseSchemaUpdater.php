@@ -6,6 +6,8 @@ use DatabaseBase;
 use DatabaseUpdater;
 use HashBagOStuff;
 use MWException;
+use Wikibase\RebuildTermsSearchKey;
+use Wikibase\Repo\Maintenance\RebuildEntityPerPage;
 use Wikibase\Store;
 use Wikibase\PropertyInfoTable;
 use Wikibase\PropertyInfoTableBuilder;
@@ -288,9 +290,7 @@ class DatabaseSchemaUpdater {
 				$this->getUpdateScriptPath( 'AddEntityPerPage', $db->getType() )
 			);
 
-			$updater->addPostDatabaseUpdateMaintenance(
-				'Wikibase\Repo\Maintenance\RebuildEntityPerPage'
-			);
+			$updater->addPostDatabaseUpdateMaintenance( RebuildEntityPerPage::class );
 		} else {
 			$updater->addExtensionField(
 				'wb_entity_per_page',
@@ -315,7 +315,7 @@ class DatabaseSchemaUpdater {
 				$this->getUpdateScriptPath( 'AddTermsSearchKey', $db->getType() )
 			);
 
-			$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildTermsSearchKey' );
+			$updater->addPostDatabaseUpdateMaintenance( RebuildTermsSearchKey::class );
 		}
 
 		// creates wb_terms.term_row_id

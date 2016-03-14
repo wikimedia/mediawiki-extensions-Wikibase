@@ -70,7 +70,7 @@ class EntityChangeFactory {
 		if ( isset( $this->changeClasses[ $entityType ] ) ) {
 			$class = $this->changeClasses[$entityType];
 		} else {
-			$class = '\Wikibase\EntityChange';
+			$class = EntityChange::class;
 		}
 
 		/** @var EntityChange $instance  */

@@ -1,5 +1,6 @@
 <?php
 
+use DataTypes\Modules\DataTypesModule;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -40,7 +41,7 @@ return call_user_func( function() {
 		),
 
 		'mw.config.values.wbDataTypes' => $moduleTemplate + array(
-			'class' => 'DataTypes\DataTypesModule',
+			'class' => DataTypesModule::class,
 			'datatypefactory' => function() {
 				return WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 			},

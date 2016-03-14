@@ -94,5 +94,5 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 }
 
-$maintClass = 'Wikibase\PopulateChangesSubscription';
+$maintClass = PopulateChangesSubscription::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
