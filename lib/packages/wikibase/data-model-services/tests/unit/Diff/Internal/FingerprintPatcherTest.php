@@ -5,6 +5,7 @@ namespace Wikibase\DataModel\Services\Tests\Diff\Internal;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Term\Fingerprint;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 
@@ -80,19 +82,148 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFingerprintResultsFromPatch( $expectedFingerprint, $fingerprint, $patch );
 	}
 
-	public function testAliasDiffOnlyAffectsAliases() {
+	public function aliasDiffProvider() {
+		return array(
+			'diffs containing add/remove ops (default)' => array( array(
+				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ) ),
+				'en' => new Diff( array( new DiffOpRemove( 'en-old' ), new DiffOpAdd( 'en-new' ) ) ),
+				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ) ),
+			) ),
+			'diffs containing atomic ops' => array( array(
+				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ) ),
+				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ) ),
+				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ) ),
+			) ),
+			'atomic diff ops' => array( array(
+				'de' => new DiffOpAdd( array( 'foo' ) ),
+				'en' => new DiffOpChange( array( 'en-old' ), array( 'en-new' ) ),
+				'fa' => new DiffOpRemove( array( 'fa-old' ) ),
+			) ),
+		);
+	}
+
+	/**
+	 * @dataProvider aliasDiffProvider
+	 */
+	public function testAliasDiffOnlyAffectsAliases( array $diffOps ) {
 		$fingerprint = $this->newSimpleFingerprint();
+		$fingerprint->setAliasGroup( 'en', array( 'en-old' ) );
+		$fingerprint->setAliasGroup( 'fa', array( 'fa-old' ) );
 
 		$patch = new EntityDiff( array(
-			'aliases' => new Diff( array(
-				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ),
-			), true )
+			'aliases' => new Diff( $diffOps ),
 		) );
 
 		$expectedFingerprint = $this->newSimpleFingerprint();
 		$expectedFingerprint->setAliasGroup( 'de', array( 'foo' ) );
+		$expectedFingerprint->setAliasGroup( 'en', array( 'en-new' ) );
 
 		$this->assertFingerprintResultsFromPatch( $expectedFingerprint, $fingerprint, $patch );
+	}
+
+	public function conflictingEditProvider() {
+		return array(
+			'does not add existing label language' => array( array(
+				'label' => new Diff( array(
+					'en' => new DiffOpAdd( 'added' ),
+				), true ),
+			) ),
+			'does not change modified label' => array( array(
+				'label' => new Diff( array(
+					'en' => new DiffOpChange( 'original', 'changed' ),
+				), true ),
+			) ),
+			'does not change missing label' => array( array(
+				'label' => new Diff( array(
+					'de' => new DiffOpChange( 'original', 'changed' ),
+				), true ),
+			) ),
+			'does not remove modified label' => array( array(
+				'label' => new Diff( array(
+					'en' => new DiffOpRemove( 'original' ),
+				), true ),
+			) ),
+			'removing missing label is no-op' => array( array(
+				'label' => new Diff( array(
+					'de' => new DiffOpRemove( 'original' ),
+				), true ),
+			) ),
+
+			'does not add existing description language' => array( array(
+				'description' => new Diff( array(
+					'en' => new DiffOpAdd( 'added' ),
+				), true ),
+			) ),
+			'does not change modified description' => array( array(
+				'description' => new Diff( array(
+					'en' => new DiffOpChange( 'original', 'changed' ),
+				), true ),
+			) ),
+			'changing missing description is no-op' => array( array(
+				'description' => new Diff( array(
+					'de' => new DiffOpChange( 'original', 'changed' ),
+				), true ),
+			) ),
+			'does not remove modified description' => array( array(
+				'description' => new Diff( array(
+					'en' => new DiffOpRemove( 'original' ),
+				), true ),
+			) ),
+			'removing missing description is no-op' => array( array(
+				'description' => new Diff( array(
+					'de' => new DiffOpRemove( 'original' ),
+				), true ),
+			) ),
+
+			'does not add existing aliases language' => array( array(
+				'aliases' => new Diff( array(
+					'en' => new DiffOpAdd( array( 'added' ) ),
+				), true ),
+			) ),
+			'does not change missing aliases language' => array( array(
+				'aliases' => new Diff( array(
+					'de' => new Diff( array( new DiffOpRemove( 'original' ), new DiffOpAdd( 'changed' ) ) ),
+				), true ),
+			) ),
+			'changing missing aliases is no-op' => array( array(
+				'aliases' => new Diff( array(
+					'de' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ) ),
+					'en' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ) ),
+				), true ),
+			) ),
+			'changing missing aliases is no-op (atomic)' => array( array(
+				'aliases' => new Diff( array(
+					'de' => new DiffOpChange( array( 'original' ), array( 'changed' ) ),
+					'en' => new DiffOpChange( array( 'original' ), array( 'changed' ) ),
+				), true ),
+			) ),
+			'removing missing aliases is no-op' => array( array(
+				'aliases' => new Diff( array(
+					'de' => new Diff( array( new DiffOpRemove( 'original' ) ) ),
+					'en' => new Diff( array( new DiffOpRemove( 'original' ) ) ),
+				), true ),
+			) ),
+			'removing missing aliases is no-op (atomic)' => array( array(
+				'aliases' => new Diff( array(
+					'de' => new DiffOpRemove( array( 'original' ) ),
+					'en' => new DiffOpRemove( array( 'original' ) ),
+				), true ),
+			) ),
+		);
+	}
+
+	/**
+	 * @dataProvider conflictingEditProvider
+	 */
+	public function testGivenConflictingEdit_fingerprintIsReturnedAsIs( array $diffOps ) {
+		$fingerprint = new Fingerprint();
+		$fingerprint->setLabel( 'en', 'conflict' );
+		$fingerprint->setDescription( 'en', 'conflict' );
+		$fingerprint->setAliasGroup( 'en', array( 'conflict' ) );
+
+		$patch = new EntityDiff( $diffOps );
+
+		$this->assertFingerprintResultsFromPatch( $fingerprint, $fingerprint, $patch );
 	}
 
 }
