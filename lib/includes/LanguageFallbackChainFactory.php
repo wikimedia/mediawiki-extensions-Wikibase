@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use Babel;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -214,7 +215,7 @@ class LanguageFallbackChainFactory {
 	 * @return LanguageFallbackChain
 	 */
 	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
-		if ( !class_exists( 'Babel' ) || $user->isAnon() ) {
+		if ( !class_exists( Babel::class ) || $user->isAnon() ) {
 			return $this->newFromLanguageCode( $languageCode, self::FALLBACK_ALL );
 		}
 
@@ -247,7 +248,7 @@ class LanguageFallbackChainFactory {
 				// Make the current language at the top of the chain.
 				$levelBabel = array_unique( array_merge(
 					array( $languageCode ),
-					\Babel::getUserLanguages( $user, $level )
+					Babel::getUserLanguages( $user, $level )
 				) );
 
 				$babel[$level] = array_diff( $levelBabel, $previousLevelBabel );
