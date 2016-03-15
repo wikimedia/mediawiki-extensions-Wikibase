@@ -5,10 +5,8 @@ namespace Wikibase\Test;
 use Action;
 use ApiQueryInfo;
 use Article;
-use ContentHandler;
 use Exception;
 use FauxRequest;
-use Language;
 use MWException;
 use OutputPage;
 use RequestContext;
@@ -78,11 +76,6 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$wgUser->removeGroup( "dummy" );
 	}
 
-	protected function shouldTestRedirects() {
-		$handler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-		return $handler->supportsRedirects();
-	}
-
 	/**
 	 * @var EntityDocument[]|EntityRedirect[] List of EntityDocument or EntityRedirect objects,
 	 *      with logical handles as keys.
@@ -125,14 +118,12 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'Oslo' );
 		$items['Oslo'][] = $item;
 
-		if ( $this->shouldTestRedirects() ) {
-			$item = new Item();
-			$item->setLabel( 'de', 'Berlin' );
-			$items['Berlin2'][] = $item;
+		$item = new Item();
+		$item->setLabel( 'de', 'Berlin' );
+		$items['Berlin2'][] = $item;
 
-			// HACK: this revision is a redirect
-			$items['Berlin2'][] = 'Berlin';
-		}
+		// HACK: this revision is a redirect
+		$items['Berlin2'][] = 'Berlin';
 
 		return $items;
 	}

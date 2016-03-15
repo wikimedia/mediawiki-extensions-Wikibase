@@ -291,19 +291,17 @@ class EditEntityActionTest extends ActionTestCase {
 
 		);
 
-		if ( self::shouldTestRedirects() ) {
-			// -- show undo form for redirect -----------------------------------
-			$cases[] = array( //18: // undo form with legal undo
-				'edit', // action
-				'Berlin2', // handle
-				array( // params
-					'undo' => 0, // current revision
-				),
-				false, // post
-				null, // user
-				'/undo-success/', // htmlPattern: should be a success
-			);
-		}
+		// -- show undo form for redirect -----------------------------------
+		$cases[] = array( //18: // undo form with legal undo
+			'edit', // action
+			'Berlin2', // handle
+			array( // params
+				'undo' => 0, // current revision
+			),
+			false, // post
+			null, // user
+			'/undo-success/', // htmlPattern: should be a success
+		);
 
 		return $cases;
 	}
