@@ -22,6 +22,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Hooks\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SummaryFormatter;
 use Wikibase\Test\MockRepository;
@@ -105,6 +106,22 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 			->will( $this->returnValue( $ok ) );
 
 		return $permissionChecker;
+	}
+
+	/**
+	 * @return EditFilterHookRunner
+	 */
+	protected function getEditFilterHookRunner() {
+		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
+			->setMethods( array( 'run' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$runner->expects( $this->any() )
+			->method( 'run' )
+			->will( $this->returnValue( Status::newGood() ) );
+
+		return $runner;
 	}
 
 	/**

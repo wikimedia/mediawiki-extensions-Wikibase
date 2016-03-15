@@ -64,25 +64,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),
 				$this->getEntityPermissionChecker(),
-				$this->getMockEditFitlerHookRunner()
+				$this->getEditFilterHookRunner()
 			)
 		);
 
 		return $page;
-	}
-
-	/**
-	 * @return EditFilterHookRunner
-	 */
-	private function getMockEditFitlerHookRunner() {
-		$runner = $this->getMockBuilder( EditFilterHookRunner::class )
-			->setMethods( array( 'run' ) )
-			->disableOriginalConstructor()
-			->getMock();
-		$runner->expects( $this->any() )
-			->method( 'run' )
-			->will( $this->returnValue( Status::newGood() ) );
-		return $runner;
 	}
 
 	/**
