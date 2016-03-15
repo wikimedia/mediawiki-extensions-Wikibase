@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee33df1d_2e80c0f8",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T13:54:17Z",
+      "side": 1,
+      "message": "Explaining \"wikiGroup\" with \"Wiki group\" is not helpful. What is a \"group\" in this context? Grouped by what?",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_6e7ac820",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T13:54:17Z",
+      "side": 1,
+      "message": "What\u0027s the advantage of this if it\u0027s in essence nothing more than a substring of the original URL? Why can\u0027t consumers of this export not do this, by simply applying this exact line of code when they need the short hostname?",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_58786eed",
         "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
         "patchSetId": 4
