@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_47e8870b",
+        "filename": "docs/ontology.owl",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-15T17:38:56Z",
+      "side": 1,
+      "message": "it is how it is called in Mediawiki - see Site.php and getGroup().",
+      "parentUuid": "ee33df1d_2e80c0f8",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_6e7ac820",
         "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
         "patchSetId": 4
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_87d9ef85",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-15T17:38:56Z",
+      "side": 1,
+      "message": "right",
+      "parentUuid": "ee33df1d_58786eed",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_98695620",
         "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
         "patchSetId": 4
@@ -88,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_e7cefbb8",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-15T17:38:56Z",
+      "side": 1,
+      "message": "We can.",
+      "parentUuid": "ee33df1d_98695620",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_7852926b",
         "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/entities.nt",
         "patchSetId": 4
@@ -99,6 +153,24 @@
       "writtenOn": "2016-03-15T10:13:15Z",
       "side": 1,
       "message": "We need a test that checks that this is output only once",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_e73d5b8c",
+        "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/entities.nt",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-15T17:38:56Z",
+      "side": 1,
+      "message": "you are right, I\u0027ll add it. Right now we have only one entity from each wiki.",
+      "parentUuid": "ee33df1d_7852926b",
       "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
