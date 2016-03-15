@@ -5,10 +5,10 @@
 			"Ibrahim khashrowdi"
 		]
 	},
-	"tooltip-t-wikibase": "لینک بئ آیتم متوصل بئ مخزن دیتا",
+	"tooltip-t-wikibase": "لینک بِه لچیته‌ئین آیتم بِه دیتا مخزن‌ئا",
 	"wikibase-comment-update": "{{WBREPONAME}} آیتم ٹگل داته بوت",
-	"wikibase-dataitem": "{{WBREPONAME}} ئی آیتم",
-	"wikibase-editlinks": "لینک ئانی ایڈیٹ کورتین",
+	"wikibase-dataitem": "{{WBREPONAME}}‌ئی آیتم",
+	"wikibase-editlinks": "لینک‌ئانی ایڈیٹ کورتین",
 	"wikibase-editlinkstitle": "میان ویکی ئین لینکانی ایڈیٹ کورتین",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "چیهر داتین",
