@@ -15,10 +15,12 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityTermsView;
 use Wikibase\View\HtmlSnakFormatterFactory;
 use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\PropertyView;
+use Wikibase\View\StatementSectionsView;
 use Wikibase\View\ViewFactory;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\Template\TemplateFactory;
@@ -101,12 +103,10 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewItemView() {
-		$languageFallback = new LanguageFallbackChain( array() );
-
 		$itemView = $this->newViewFactory()->newItemView(
 			'de',
 			$this->getMock( LabelDescriptionLookup::class ),
-			$languageFallback,
+			new LanguageFallbackChain( array() ),
 			$this->getMock( EditSectionGenerator::class )
 		);
 
@@ -114,16 +114,34 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testNewPropertyView() {
-		$languageFallback = new LanguageFallbackChain( array() );
-
 		$propertyView = $this->newViewFactory()->newPropertyView(
 			'de',
 			$this->getMock( LabelDescriptionLookup::class ),
-			$languageFallback,
+			new LanguageFallbackChain( array() ),
 			$this->getMock( EditSectionGenerator::class )
 		);
 
 		$this->assertInstanceOf( PropertyView::class, $propertyView );
+	}
+
+	public function testNewStatementSectionsView() {
+		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
+			'de',
+			$this->getMock( LabelDescriptionLookup::class ),
+			new LanguageFallbackChain( array() ),
+			$this->getMock( EditSectionGenerator::class )
+		);
+
+		$this->assertInstanceOf( StatementSectionsView::class, $statementSectionsView );
+	}
+
+	public function testNewEntityTermsView() {
+		$entityTermsView = $this->newViewFactory()->newEntityTermsView(
+			'de',
+			$this->getMock( EditSectionGenerator::class )
+		);
+
+		$this->assertInstanceOf( EntityTermsView::class, $entityTermsView );
 	}
 
 	private function getEntityIdFormatterFactory( $format ) {
