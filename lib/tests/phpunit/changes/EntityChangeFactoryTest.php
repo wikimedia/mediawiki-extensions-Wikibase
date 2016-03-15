@@ -15,7 +15,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityChange;
-use Wikibase\EntityFactory;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 
@@ -39,17 +38,11 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityChangeFactory
 	 */
 	public function getEntityChangeFactory() {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => Item::class,
-			Property::ENTITY_TYPE => Property::class,
-		);
-
 		$changeClasses = array(
 			Item::ENTITY_TYPE => ItemChange::class,
 		);
 
 		$factory = new EntityChangeFactory(
-			new EntityFactory( $entityClasses ),
 			new EntityDiffer(),
 			$changeClasses
 		);

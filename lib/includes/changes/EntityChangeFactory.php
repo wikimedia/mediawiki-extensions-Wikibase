@@ -12,7 +12,6 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityChange;
-use Wikibase\EntityFactory;
 
 /**
  * Factory for EntityChange objects
@@ -25,34 +24,26 @@ use Wikibase\EntityFactory;
 class EntityChangeFactory {
 
 	/**
-	 * @var string[] Maps entity type IDs to subclasses of EntityChange.
-	 */
-	private $changeClasses;
-
-	/**
-	 * @var EntityFactory
-	 */
-	private $entityFactory;
-
-	/**
 	 * @var EntityDiffer
 	 */
 	private $entityDiffer;
 
 	/**
-	 * @param EntityFactory $entityFactory
+	 * @var string[] Maps entity type IDs to subclasses of EntityChange.
+	 */
+	private $changeClasses;
+
+	/**
 	 * @param EntityDiffer $entityDiffer
 	 * @param string[] $changeClasses Maps entity type IDs to subclasses of EntityChange.
 	 * Entity types not mapped explicitly are assumed to use EntityChange itself.
 	 */
 	public function __construct(
-		EntityFactory $entityFactory,
 		EntityDiffer $entityDiffer,
 		array $changeClasses = array()
 	) {
-		$this->changeClasses = $changeClasses;
-		$this->entityFactory = $entityFactory;
 		$this->entityDiffer = $entityDiffer;
+		$this->changeClasses = $changeClasses;
 	}
 
 	/**
@@ -116,44 +107,45 @@ class EntityChangeFactory {
 		}
 
 		if ( $oldEntity === null ) {
-			$oldEntity = $this->entityFactory->newEmpty( $newEntity->getType() );
 			$id = $newEntity->getId();
+			$this->prepareEntity( $newEntity );
+			$diff = $this->entityDiffer->getConstructionDiff( $newEntity );
 		} elseif ( $newEntity === null ) {
-			$newEntity = $this->entityFactory->newEmpty( $oldEntity->getType() );
 			$id = $oldEntity->getId();
+			$this->prepareEntity( $oldEntity );
+			$diff = $this->entityDiffer->getDestructionDiff( $oldEntity );
 		} elseif ( $oldEntity->getType() !== $newEntity->getType() ) {
 			throw new MWException( 'Entity type mismatch' );
 		} else {
 			$id = $newEntity->getId();
+			$this->prepareEntity( $newEntity );
+			$this->prepareEntity( $oldEntity );
+			$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
 		}
-
-		// HACK: don't include statements diff, since those are unused and not helpful
-		// performance-wise to the dispatcher and change handling.
-		// FIXME: For a better solution, see T113468.
-		if ( $oldEntity instanceof StatementListHolder ) {
-			$oldEntity->setStatements( new StatementList() );
-			$newEntity->setStatements( new StatementList() );
-		}
-
-		// Also don't include description and alias diffs.
-		// FIXME: Implement T113468 and remove this.
-		if ( $oldEntity instanceof FingerprintProvider ) {
-			$oldFingerprint = $oldEntity->getFingerprint();
-			$newFingerprint = $newEntity->getFingerprint();
-
-			$oldFingerprint->setDescriptions( new TermList() );
-			$oldFingerprint->setAliasGroups( new AliasGroupList() );
-			$newFingerprint->setDescriptions( new TermList() );
-			$newFingerprint->setAliasGroups( new AliasGroupList() );
-		}
-
-		$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
 
 		/** @var EntityChange $instance */
 		$instance = self::newForEntity( $action, $id, $fields );
 		$instance->setDiff( $diff );
 
 		return $instance;
+	}
+
+	private function prepareEntity( EntityDocument $entity ) {
+		// HACK: don't include statements diff, since those are unused and not helpful
+		// performance-wise to the dispatcher and change handling.
+		// FIXME: For a better solution, see T113468.
+		if ( $entity instanceof StatementListHolder ) {
+			$entity->setStatements( new StatementList() );
+		}
+
+		// Also don't include description and alias diffs.
+		// FIXME: Implement T113468 and remove this.
+		if ( $entity instanceof FingerprintProvider ) {
+			$fingerprint = $entity->getFingerprint();
+
+			$fingerprint->setDescriptions( new TermList() );
+			$fingerprint->setAliasGroups( new AliasGroupList() );
+		}
 	}
 
 }
