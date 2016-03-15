@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_4c4eec3d",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T16:40:29Z",
+      "side": 1,
+      "message": "Dead code now.",
+      "revId": "a7900cd532093ed9da6d959e99a0b53841c344da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_2c6e0894",
+        "filename": "client/tests/phpunit/includes/Changes/ChangeRunCoalescerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T16:40:29Z",
+      "side": 1,
+      "message": "I wonder why it was done this way?",
+      "revId": "a7900cd532093ed9da6d959e99a0b53841c344da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_2ceba8dc",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T16:40:29Z",
+      "side": 1,
+      "message": "I find \"enabled\" very vague, given the pretty complex implementation. Can you please add a description to this method?",
+      "revId": "a7900cd532093ed9da6d959e99a0b53841c344da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_2cd2882c",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T16:40:29Z",
+      "side": 1,
+      "message": "Looks like this is unused.",
+      "revId": "a7900cd532093ed9da6d959e99a0b53841c344da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

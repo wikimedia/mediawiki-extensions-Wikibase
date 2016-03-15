@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_cc595c03",
+        "filename": "repo/includes/Api/ApiHelperFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T16:40:29Z",
+      "side": 0,
+      "message": "Wow. This was dead code already.",
+      "revId": "4f4a229428e6af0bfce7e90fb596913e06487bda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
