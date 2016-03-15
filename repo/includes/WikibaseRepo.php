@@ -1189,7 +1189,10 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return string[]
+	 * Entity types are enabled when their content model is associated with a namespace in the
+	 * entityNamespaces setting in $wgWBRepoSettings.
+	 *
+	 * @return string[] a list of enabled entity types
 	 */
 	public function getEnabledEntityTypes() {
 		$entityTypeByContentModel = array_flip( $this->getContentModelMappings() );

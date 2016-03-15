@@ -22,6 +22,9 @@ return array(
 		720101010,
 	),
 
+	// List of enabled entity types, mapping the content model id to the namespace id.
+	// The content model id is always "wikibase-<entity type>".
+	// This setting is used to enable entity types.
 	'entityNamespaces' => array(),
 
 	// See StatementGrouperBuilder for an example.

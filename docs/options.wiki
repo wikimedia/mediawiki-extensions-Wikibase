@@ -32,7 +32,7 @@ Default:
 
 === Basic Settings ===
 
-;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping content model IDs such as <code>CONTENT_MODEL_WIKIBASE_ITEM</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
+;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping content model IDs such as <code>CONTENT_MODEL_WIKIBASE_ITEM</code> to namespace IDs. This setting is required to enable each kind of entity.
 ;dataRightsUrl: Url to link to license for data contents. Defaults to $wgRightsUrl setting.
 ;dataRightsText: Text for data license link. Defaults to $wgRightsText setting.
 ;sparqlEndpoint: Url to the service description of the SPARQL end point for the repository. Defaults to null, meaning there is no SPARQL endpoint.
