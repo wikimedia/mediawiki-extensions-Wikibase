@@ -131,11 +131,16 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function overrideSpecialNewEntityLinkProvider() {
-		$entityTypes = array_keys( WikibaseRepo::getDefaultInstance()->getContentModelMappings() );
-
+		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 		$linkTitles = array();
-		foreach ( $entityTypes as $entityType ) {
-			$linkTitles[] = array( 'New' . ucfirst( $entityType ) );
+
+		foreach ( $entityContentFactory->getEntityTypes() as $entityType ) {
+			$entityHandler = $entityContentFactory->getContentHandlerForType( $entityType );
+			$specialPage = $entityHandler->getSpecialPageForCreation();
+
+			if ( $specialPage !== null ) {
+				$linkTitles[] = array( $specialPage );
+			}
 		}
 
 		return $linkTitles;
