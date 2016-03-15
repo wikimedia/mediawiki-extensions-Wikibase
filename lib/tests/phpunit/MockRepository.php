@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -257,7 +258,10 @@ class MockRepository implements
 			$revisionId = ++$this->maxRevisionId;
 		}
 
-		$this->maxEntityId = max( $this->maxEntityId, $entity->getId()->getNumericId() );
+		if ( $this->supportsNumericIds( $entity->getType() ) ) {
+			$this->maxEntityId = max( $this->maxEntityId, $entity->getId()->getNumericId() );
+		}
+
 		$this->maxRevisionId = max( $this->maxRevisionId, $revisionId );
 
 		$revision = new EntityRevision(
@@ -306,7 +310,10 @@ class MockRepository implements
 			$revisionId = ++$this->maxRevisionId;
 		}
 
-		$this->maxEntityId = max( $this->maxEntityId, $redirect->getTargetId()->getNumericId() );
+		if ( $this->supportsNumericIds( $redirect->getTargetId()->getEntityType() ) ) {
+			$this->maxEntityId = max( $this->maxEntityId, $redirect->getTargetId()->getNumericId() );
+		}
+
 		$this->maxRevisionId = max( $this->maxRevisionId, $revisionId );
 
 		$this->redirects[$key] = new RedirectRevision(
@@ -622,9 +629,13 @@ class MockRepository implements
 	 * @throws StorageException
 	 */
 	public function assignFreshId( EntityDocument $entity ) {
-		//TODO: Find a canonical way to generate an EntityId from the maxId number.
-		//XXX: Using setId() with an integer argument is deprecated!
+		if ( !$this->supportsNumericIds( $entity->getType() ) ) {
+			throw new InvalidArgumentException( "The given entity doesn't support numeric ids." );
+		}
+
 		$numericId = ++$this->maxEntityId;
+
+		/** @var Item|Property $entity */
 		$entity->setId( $numericId );
 	}
 
@@ -746,6 +757,15 @@ class MockRepository implements
 		}
 
 		throw new EntityRedirectLookupException( $entityId );
+	}
+
+	/**
+	 * @param string $entityType
+	 *
+	 * @return bool
+	 */
+	private function supportsNumericIds( $entityType ) {
+		return in_array( $entityType, array( 'item', 'property' ) );
 	}
 
 }
