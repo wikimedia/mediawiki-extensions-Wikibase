@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use InvalidArgumentException;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -257,7 +258,7 @@ class MockRepository implements
 			$revisionId = ++$this->maxRevisionId;
 		}
 
-		$this->maxEntityId = max( $this->maxEntityId, $entity->getId()->getNumericId() );
+		$this->updateMaxNumericId( $entity->getId() );
 		$this->maxRevisionId = max( $this->maxRevisionId, $revisionId );
 
 		$revision = new EntityRevision(
@@ -306,7 +307,7 @@ class MockRepository implements
 			$revisionId = ++$this->maxRevisionId;
 		}
 
-		$this->maxEntityId = max( $this->maxEntityId, $redirect->getTargetId()->getNumericId() );
+		$this->updateMaxNumericId( $redirect->getTargetId() );
 		$this->maxRevisionId = max( $this->maxRevisionId, $revisionId );
 
 		$this->redirects[$key] = new RedirectRevision(
@@ -614,12 +615,23 @@ class MockRepository implements
 		return isset( $this->watchlist[ $user->getName() ][ $entityId->getSerialization() ] );
 	}
 
+	private function updateMaxNumericId( EntityId $id ) {
+		if ( method_exists( $id, 'getNumericId' ) ) {
+			$numericId = $id->getNumericId();
+		} else {
+			// FIXME: This is a generic implementation of getNumericId for entities without.
+			$numericId = (int)preg_replace( '/^\D+/', '', $id->getSerialization() );
+		}
+
+		$this->maxEntityId = max( $this->maxEntityId, $numericId );
+	}
+
 	/**
 	 * @see EntityStore::assignFreshId
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @throws StorageException
+	 * @throws InvalidArgumentException when the entity type does not support setting numeric ids.
 	 */
 	public function assignFreshId( EntityDocument $entity ) {
 		//TODO: Find a canonical way to generate an EntityId from the maxId number.
