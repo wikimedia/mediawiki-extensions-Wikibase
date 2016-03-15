@@ -253,7 +253,7 @@ class ViewFactory {
 	 *
 	 * @return StatementSectionsView
 	 */
-	private function newStatementSectionsView(
+	public function newStatementSectionsView(
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
@@ -297,7 +297,7 @@ class ViewFactory {
 	 *
 	 * @return EntityTermsView
 	 */
-	private function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
+	public function newEntityTermsView( $languageCode, EditSectionGenerator $editSectionGenerator ) {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$editSectionGenerator,
