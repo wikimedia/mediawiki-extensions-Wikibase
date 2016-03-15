@@ -8,7 +8,6 @@ use SiteStore;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\EditEntityFactory;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -41,11 +40,6 @@ class ApiHelperFactory {
 	private $dataTypeLookup;
 
 	/**
-	 * @var EntityFactory
-	 */
-	private $entityFactory;
-
-	/**
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
@@ -69,7 +63,6 @@ class ApiHelperFactory {
 		EntityTitleLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
 		PropertyDataTypeLookup $dataTypeLookup,
-		EntityFactory $entityFactory,
 		SiteStore $siteStore,
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -78,7 +71,6 @@ class ApiHelperFactory {
 		$this->titleLookup = $titleLookup;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->entityFactory = $entityFactory;
 		$this->siteStore = $siteStore;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityRevisionLookup = $entityRevisionLookup;

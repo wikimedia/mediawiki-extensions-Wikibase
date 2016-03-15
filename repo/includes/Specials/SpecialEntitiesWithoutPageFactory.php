@@ -23,7 +23,7 @@ class SpecialEntitiesWithoutPageFactory {
 
 		return new self(
 			$wikibaseRepo->getStore()->newEntityPerPage(),
-			$wikibaseRepo->getEntityFactory(),
+			$wikibaseRepo->getEnabledEntityTypes(),
 			$wikibaseRepo->getTermsLanguages()
 		);
 	}
@@ -42,22 +42,27 @@ class SpecialEntitiesWithoutPageFactory {
 	private $entityPerPage;
 
 	/**
-	 * @var EntityFactory
+	 * @var string[]
 	 */
-	private $entityFactory;
+	private $entityTypes;
 
 	/**
 	 * @var ContentLanguages
 	 */
 	private $termsLanguages;
 
+	/**
+	 * @param EntityPerPage $entityPerPage
+	 * @param string[] $entityTypes
+	 * @param ContentLanguages $termsLanguages
+	 */
 	public function __construct(
 		EntityPerPage $entityPerPage,
-		EntityFactory $entityFactory,
+		array $entityTypes,
 		ContentLanguages $termsLanguages
 	) {
 		$this->entityPerPage = $entityPerPage;
-		$this->entityFactory = $entityFactory;
+		$this->entityTypes = $entityTypes;
 		$this->termsLanguages = $termsLanguages;
 	}
 
@@ -72,7 +77,7 @@ class SpecialEntitiesWithoutPageFactory {
 			TermIndexEntry::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
 			$this->entityPerPage,
-			$this->entityFactory,
+			$this->entityTypes,
 			$this->termsLanguages
 		);
 	}
@@ -88,7 +93,7 @@ class SpecialEntitiesWithoutPageFactory {
 			TermIndexEntry::TYPE_DESCRIPTION,
 			'wikibase-entitieswithoutdescription-legend',
 			$this->entityPerPage,
-			$this->entityFactory,
+			$this->entityTypes,
 			$this->termsLanguages
 		);
 	}

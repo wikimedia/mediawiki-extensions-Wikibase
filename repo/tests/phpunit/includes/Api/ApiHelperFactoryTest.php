@@ -16,7 +16,6 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -35,7 +34,6 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 		$titleLookup = $this->getMock( EntityTitleLookup::class );
 		$exceptionLocalizer = $this->getMock( ExceptionLocalizer::class );
 		$dataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )
 			->disableOriginalConstructor()->getMock();
 		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
@@ -46,7 +44,6 @@ class ApiHelperFactoryTest extends \PHPUnit_Framework_TestCase {
 			$titleLookup,
 			$exceptionLocalizer,
 			$dataTypeLookup,
-			$entityFactory,
 			new HashSiteStore(),
 			$summaryFormatter,
 			$entityRevisionLookup,

@@ -20,6 +20,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\EditEntityFactory;
+use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
@@ -248,6 +249,31 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		}
 	}
 
+	public function testGetEntityFactory() {
+		$entityFactory = $this->getWikibaseRepo()->getEntityFactory();
+		$this->assertInstanceOf( EntityFactory::class, $entityFactory );
+	}
+
+	public function testGetEnabledEntityTypes() {
+		$entityTypeDefinitions = array(
+			'foo' => array( 'content-model-id' => 'foo-model' ),
+			'bar' => array( 'content-model-id' => 'bar-model' ),
+		);
+		$wikibaseRepo = $this->getWikibaseRepo( array(), $entityTypeDefinitions );
+		$wikibaseRepo->getSettings()->setSetting(
+			'entityNamespaces',
+			array(
+				'foo-model' => 100,
+				'bar-model' => 102
+			)
+		);
+
+		$this->assertSame(
+			array( 'foo', 'bar' ),
+			$wikibaseRepo->getEnabledEntityTypes()
+		);
+	}
+
 	public function testGetExceptionLocalizer() {
 		$localizer = $this->getWikibaseRepo()->getExceptionLocalizer();
 		$this->assertInstanceOf( ExceptionLocalizer::class, $localizer );
@@ -356,15 +382,18 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	/**
+	 * @param array[] $dataTypeDefinitios
+	 * @param array[] $entityTypeDefinitions
+	 *
 	 * @return WikibaseRepo
 	 */
-	private function getWikibaseRepo() {
+	private function getWikibaseRepo( $dataTypeDefinitios = array(), $entityTypeDefinitions = array() ) {
 		$language = Language::factory( 'qqx' );
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( $dataTypeDefinitios ),
+			new EntityTypeDefinitions( $entityTypeDefinitions ),
 			$language
 		);
 	}
