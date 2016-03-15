@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_cce67c13",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-15T16:40:54Z",
+      "side": 1,
+      "message": "You would then duplicate the conditionals that check whether $newEntity or $oldEntity or both are set. I don\u0027t see the advantage.",
+      "parentUuid": "ee33df1d_ae1690aa",
+      "revId": "4d4291a5392b165f513364b2a871682c9eef2e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_8e1bccd3",
         "filename": "lib/includes/changes/EntityChangeFactory.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-15T14:25:20Z",
       "side": 1,
       "message": "\"Prepare\" is meaningless. It should at lease say \"prepare for *what*\".",
+      "revId": "4d4291a5392b165f513364b2a871682c9eef2e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_ecb8a0e4",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-15T16:40:54Z",
+      "side": 1,
+      "message": "trimEntity()?",
+      "parentUuid": "ee33df1d_8e1bccd3",
       "revId": "4d4291a5392b165f513364b2a871682c9eef2e58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
