@@ -20,6 +20,7 @@ use Wikibase\EntityChange;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityChangeFactory {
 
@@ -106,20 +107,19 @@ class EntityChangeFactory {
 			throw new MWException( 'Either $oldEntity or $newEntity must be given' );
 		}
 
+		$this->minimizeEntityForDiffing( $oldEntity );
+		$this->minimizeEntityForDiffing( $newEntity );
+
 		if ( $oldEntity === null ) {
 			$id = $newEntity->getId();
-			$this->prepareEntity( $newEntity );
 			$diff = $this->entityDiffer->getConstructionDiff( $newEntity );
 		} elseif ( $newEntity === null ) {
 			$id = $oldEntity->getId();
-			$this->prepareEntity( $oldEntity );
 			$diff = $this->entityDiffer->getDestructionDiff( $oldEntity );
 		} elseif ( $oldEntity->getType() !== $newEntity->getType() ) {
 			throw new MWException( 'Entity type mismatch' );
 		} else {
 			$id = $newEntity->getId();
-			$this->prepareEntity( $newEntity );
-			$this->prepareEntity( $oldEntity );
 			$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
 		}
 
@@ -130,16 +130,19 @@ class EntityChangeFactory {
 		return $instance;
 	}
 
-	private function prepareEntity( EntityDocument $entity ) {
-		// HACK: don't include statements diff, since those are unused and not helpful
-		// performance-wise to the dispatcher and change handling.
-		// FIXME: For a better solution, see T113468.
+	/**
+	 * Hack: Don't include statement, description and alias diffs, since those are unused and not
+	 * helpful performance-wise to the dispatcher and change handling.
+	 *
+	 * @fixme Implement T113468 and remove this.
+	 *
+	 * @param EntityDocument $entity
+	 */
+	private function minimizeEntityForDiffing( EntityDocument $entity = null ) {
 		if ( $entity instanceof StatementListHolder ) {
 			$entity->setStatements( new StatementList() );
 		}
 
-		// Also don't include description and alias diffs.
-		// FIXME: Implement T113468 and remove this.
 		if ( $entity instanceof FingerprintProvider ) {
 			$fingerprint = $entity->getFingerprint();
 
