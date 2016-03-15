@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_22473124",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-03-15T19:19:50Z",
+      "side": 1,
+      "message": "Right. It is very cumbersome in SPARQL to parse URLs and extract the \"site\" part, so there were numerous requests to allow people to just include site name in the query, which requires having it as separate triple.",
+      "parentUuid": "ee33df1d_8ec8ec26",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_58786eed",
         "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
         "patchSetId": 4
