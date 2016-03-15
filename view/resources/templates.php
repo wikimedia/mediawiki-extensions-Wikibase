@@ -282,6 +282,11 @@ HTML;
 </div>
 HTML;
 
+	$templates['wikibase-propertyview-bad-datatype'] =
+<<<HTML
+	<span class="error">$1</span>
+HTML;
+
 	$templates['wikibase-toolbar-item'] =
 <<<HTML
 <span class="wikibase-toolbar-item">$1</span>
