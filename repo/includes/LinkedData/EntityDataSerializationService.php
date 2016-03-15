@@ -352,7 +352,8 @@ class EntityDataSerializationService {
 					| RdfProducer::PRODUCE_QUALIFIERS
 					| RdfProducer::PRODUCE_REFERENCES
 					| RdfProducer::PRODUCE_SITELINKS
-					| RdfProducer::PRODUCE_FULL_VALUES;
+					| RdfProducer::PRODUCE_FULL_VALUES
+					| RdfProducer::PRODUCE_VERSION_INFO;
 			case 'long':
 				return RdfProducer::PRODUCE_ALL_STATEMENTS
 					| RdfProducer::PRODUCE_QUALIFIERS
