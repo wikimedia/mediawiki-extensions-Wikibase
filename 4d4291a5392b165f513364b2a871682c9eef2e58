@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_2c43a8b7",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T16:50:12Z",
+      "side": 1,
+      "message": "No. Already resolved in I9e172d2.",
+      "parentUuid": "ee33df1d_cce67c13",
+      "revId": "4d4291a5392b165f513364b2a871682c9eef2e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_8e1bccd3",
         "filename": "lib/includes/changes/EntityChangeFactory.php",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "trimEntity()?",
       "parentUuid": "ee33df1d_8e1bccd3",
+      "revId": "4d4291a5392b165f513364b2a871682c9eef2e58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_0c4064a7",
+        "filename": "lib/includes/changes/EntityChangeFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-15T16:50:12Z",
+      "side": 1,
+      "message": "Already resolved in I9e172d2.",
+      "parentUuid": "ee33df1d_ecb8a0e4",
       "revId": "4d4291a5392b165f513364b2a871682c9eef2e58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
