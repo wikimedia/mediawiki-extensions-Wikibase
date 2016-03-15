@@ -259,7 +259,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			'foo' => array( 'content-model-id' => 'foo-model' ),
 			'bar' => array( 'content-model-id' => 'bar-model' ),
 		);
-		$wikibaseRepo = $this->getWikibaseRepo( array(), $entityTypeDefinitions );
+		$wikibaseRepo = $this->getWikibaseRepo( $entityTypeDefinitions );
 		$wikibaseRepo->getSettings()->setSetting(
 			'entityNamespaces',
 			array(
@@ -382,17 +382,16 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array[] $dataTypeDefinitios
 	 * @param array[] $entityTypeDefinitions
 	 *
 	 * @return WikibaseRepo
 	 */
-	private function getWikibaseRepo( $dataTypeDefinitios = array(), $entityTypeDefinitions = array() ) {
+	private function getWikibaseRepo( $entityTypeDefinitions = array() ) {
 		$language = Language::factory( 'qqx' );
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		return new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( $dataTypeDefinitios ),
+			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
 			$language
 		);
