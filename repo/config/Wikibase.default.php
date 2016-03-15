@@ -22,6 +22,8 @@ return array(
 		720101010,
 	),
 
+	// A map from content model ids to namespace ids.
+	// This setting is used to enable entity types.
 	'entityNamespaces' => array(),
 
 	// See StatementGrouperBuilder for an example.
