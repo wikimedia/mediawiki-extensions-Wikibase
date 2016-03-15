@@ -6,7 +6,7 @@ use ApiMain;
 use Wikibase\ChangeOp\ChangeOpDescription;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -52,7 +52,7 @@ class SetDescription extends ModifyTerm {
 	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
+		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-supported' );
 		}
 
@@ -62,9 +62,11 @@ class SetDescription extends ModifyTerm {
 		$changeOp = $this->getChangeOp( $params );
 		$this->applyChangeOp( $changeOp, $entity, $summary );
 
+		$descriptions = $entity->getDescriptions();
 		$resultBuilder = $this->getResultBuilder();
-		if ( $entity->getFingerprint()->hasDescription( $language ) ) {
-			$termList = $entity->getFingerprint()->getDescriptions()->getWithLanguages( array( $language ) );
+
+		if ( $descriptions->hasTermForLanguage( $language ) ) {
+			$termList = $descriptions->getWithLanguages( array( $language ) );
 			$resultBuilder->addDescriptions( $termList, 'entity' );
 		} else {
 			$resultBuilder->addRemovedDescription( $language, 'entity' );

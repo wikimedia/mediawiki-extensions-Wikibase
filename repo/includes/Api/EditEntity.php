@@ -23,7 +23,9 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -314,7 +316,7 @@ class EditEntity extends ModifyEntity {
 		//       for more efficient validation!
 
 		if ( array_key_exists( 'labels', $data ) ) {
-			if ( !( $entity instanceof FingerprintProvider ) ) {
+			if ( !( $entity instanceof LabelsProvider ) ) {
 				$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-supported' );
 			}
 			$this->assertArray( $data['labels'], 'List of labels must be an array' );
@@ -322,7 +324,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( array_key_exists( 'descriptions', $data ) ) {
-			if ( !( $entity instanceof FingerprintProvider ) ) {
+			if ( !( $entity instanceof DescriptionsProvider ) ) {
 				$this->errorReporter->dieError( 'The given entity cannot contain descriptions', 'not-supported' );
 			}
 			$this->assertArray( $data['descriptions'], 'List of descriptions must be an array' );
@@ -330,7 +332,7 @@ class EditEntity extends ModifyEntity {
 		}
 
 		if ( array_key_exists( 'aliases', $data ) ) {
-			if ( !( $entity instanceof FingerprintProvider ) ) {
+			if ( !( $entity instanceof AliasesProvider ) ) {
 				$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
 			}
 			$this->assertArray( $data['aliases'], 'List of aliases must be an array' );
@@ -605,12 +607,16 @@ class EditEntity extends ModifyEntity {
 	private function buildResult( EntityDocument $entity ) {
 		$builder = $this->getResultBuilder();
 
-		if ( $entity instanceof FingerprintProvider ) {
-			$fingerprint = $entity->getFingerprint();
+		if ( $entity instanceof LabelsProvider ) {
+			$builder->addLabels( $entity->getLabels(), 'entity' );
+		}
 
-			$builder->addLabels( $fingerprint->getLabels(), 'entity' );
-			$builder->addDescriptions( $fingerprint->getDescriptions(), 'entity' );
-			$builder->addAliasGroupList( $fingerprint->getAliasGroups(), 'entity' );
+		if ( $entity instanceof DescriptionsProvider ) {
+			$builder->addDescriptions( $entity->getDescriptions(), 'entity' );
+		}
+
+		if ( $entity instanceof AliasesProvider ) {
+			$builder->addAliasGroupList( $entity->getAliasGroups(), 'entity' );
 		}
 
 		if ( $entity instanceof Item ) {

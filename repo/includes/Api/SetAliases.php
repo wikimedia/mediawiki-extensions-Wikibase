@@ -9,7 +9,7 @@ use Wikibase\ChangeOp\ChangeOpAliases;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -102,7 +102,7 @@ class SetAliases extends ModifyEntity {
 	 * @see ModifyEntity::modifyEntity
 	 */
 	protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId ) {
-		if ( !( $entity instanceof FingerprintProvider ) ) {
+		if ( !( $entity instanceof AliasesProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
 		}
 
@@ -111,6 +111,8 @@ class SetAliases extends ModifyEntity {
 
 		/** @var ChangeOp[] $aliasesChangeOps */
 		$aliasesChangeOps = $this->getChangeOps( $params );
+
+		$aliasGroups = $entity->getAliasGroups();
 
 		if ( count( $aliasesChangeOps ) == 1 ) {
 			$this->applyChangeOp( $aliasesChangeOps[0], $entity, $summary );
@@ -125,16 +127,14 @@ class SetAliases extends ModifyEntity {
 			$summary->setLanguage( $language );
 
 			// Get the full list of current aliases
-			$fingerprint = $entity->getFingerprint();
-			$aliases = $fingerprint->hasAliasGroup( $language )
-				? $fingerprint->getAliasGroup( $language )->getAliases()
-				: array();
-			$summary->addAutoSummaryArgs( $aliases );
+			if ( $aliasGroups->hasGroupForLanguage( $language ) ) {
+				$aliases = $aliasGroups->getByLanguage( $language )->getAliases();
+				$summary->addAutoSummaryArgs( $aliases );
+			}
 		}
 
-		$fingerprint = $entity->getFingerprint();
-		if ( $fingerprint->hasAliasGroup( $language ) ) {
-			$aliasGroupList = $fingerprint->getAliasGroups()->getWithLanguages( array( $language ) );
+		if ( $aliasGroups->hasGroupForLanguage( $language ) ) {
+			$aliasGroupList = $aliasGroups->getWithLanguages( array( $language ) );
 			$this->getResultBuilder()->addAliasGroupList( $aliasGroupList, 'entity' );
 		}
 
