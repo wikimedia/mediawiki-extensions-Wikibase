@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_58786eed",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-15T10:13:15Z",
+      "side": 1,
+      "message": "s/sizes/sites/",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_98695620",
+        "filename": "repo/includes/Rdf/SiteLinksRdfBuilder.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-15T10:13:15Z",
+      "side": 1,
+      "message": "Nice hack to use the URL as the namespace! But I don\u0027t really like the empty string. We may want to dedupe more info about a site later. So perhaps use \u0027wikiGroup\u0027 as the key? Would be consistent and future proof.",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_7852926b",
+        "filename": "repo/tests/phpunit/data/rdf/RdfDumpGenerator/entities.nt",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-15T10:13:15Z",
+      "side": 1,
+      "message": "We need a test that checks that this is output only once",
+      "revId": "f71f283203a0d7f883018bb101d0dcbb08a6de09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
