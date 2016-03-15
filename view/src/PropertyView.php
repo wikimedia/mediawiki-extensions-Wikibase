@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use DataTypes\DataTypeFactory;
-use Html;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use OutOfBoundsException;
@@ -99,16 +98,16 @@ class PropertyView extends EntityView {
 			'wikibase-propertypage-datatype'
 		);
 
+		$dataTypeLabelHtml = '';
 		try {
 			$dataType = $this->dataTypeFactory->getType( $propertyType );
-			$html .= $this->templateFactory->render( 'wikibase-propertyview-datatype',
-				htmlspecialchars( $dataType->getLabel( $this->languageCode ) )
-			);
+			$dataTypeLabelHtml = htmlspecialchars( $dataType->getLabel( $this->languageCode ) );
 		} catch ( OutOfBoundsException $ex ) {
-			$html .= Html::rawElement( 'span', array( 'class' => 'error' ),
-				wfMessage( 'wikibase-propertypage-bad-datatype', $propertyType )->parse()
-			);
+			$dataTypeLabelHtml .= '<span class="error">' .
+				wfMessage( 'wikibase-propertypage-bad-datatype', $propertyType )->escaped() .
+				'</span>';
 		}
+		$html .= $this->templateFactory->render( 'wikibase-propertyview-datatype', $dataTypeLabelHtml );
 
 		return $html;
 	}
