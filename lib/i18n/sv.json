@@ -91,6 +91,7 @@
 	"wikibase-time-precision-BCE-10annum": "$1-talet f.v.t.",
 	"wikibase-snakformatter-valuetype-mismatch": "Värdets typ \"$1\" stämmer inte med egenskapens typ \"$2\".",
 	"wikibase-snakformatter-property-not-found": "Egenskap $1 hittades inte, kan inte avgöra vilken datatyp som ska användas.",
+	"wikibase-snakformatter-formatting-exception": "Formateringsfel: $1.",
 	"wikibase-entity-summary-wbsetitem": "Skapade ett nytt objekt",
 	"wikibase-entity-summary-wbcreate-new": "Skapade en ny entitet",
 	"wikibase-entity-summary-wbcreateredirect": "Omdirigerad till $4",
