@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_26fbc078",
+        "filename": "repo/config/Wikibase.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-16T11:31:25Z",
+      "side": 1,
+      "message": "Should also be mentioned in docs/options.wiki",
+      "revId": "79a5af60c9db0b5846012cb31d7c518570ebc0cb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
