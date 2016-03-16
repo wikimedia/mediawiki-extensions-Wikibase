@@ -168,7 +168,7 @@ abstract class EntityView {
 			return $this->entityTermsView->getHtml(
 				$entity->getFingerprint(),
 				$id,
-				$this->getHtmlForTermBox( $id, $entityRevision->getRevisionId() ),
+				$this->getHtmlForTermBox( $id ),
 				$this->textInjector
 			);
 		}
@@ -178,18 +178,16 @@ abstract class EntityView {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $revisionId
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForTermBox( EntityId $entityId = null, $revisionId ) {
+	private function getHtmlForTermBox( EntityId $entityId = null ) {
 		if ( $entityId !== null ) {
 			// Placeholder for a termbox for the present item.
 			// EntityViewPlaceholderExpander must know about the parameters used here.
 			return $this->textInjector->newMarker(
 				'termbox',
-				$entityId->getSerialization(),
-				$revisionId
+				$entityId->getSerialization()
 			);
 		}
 

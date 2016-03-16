@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
+use Revision;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
@@ -10,6 +11,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TextInjector;
@@ -55,6 +57,11 @@ class OutputPageBeforeHTMLHookHandler {
 	private $languageNameLookup;
 
 	/**
+	 * @var EntityIdLookup
+	 */
+	private $entityIdLookup;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
@@ -68,7 +75,8 @@ class OutputPageBeforeHTMLHookHandler {
 		ContentLanguages $termsLanguages,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
-		LanguageNameLookup $languageNameLookup
+		LanguageNameLookup $languageNameLookup,
+		EntityIdLookup $entityIdLookup
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -76,6 +84,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->entityIdLookup = $entityIdLookup;
 	}
 
 	/**
@@ -93,7 +102,8 @@ class OutputPageBeforeHTMLHookHandler {
 			$wikibaseRepo->getTermsLanguages(),
 			$entityIdParser,
 			$wikibaseRepo->getEntityRevisionLookup(),
-			new LanguageNameLookup( $wgLang->getCode() )
+			new LanguageNameLookup( $wgLang->getCode() ),
+			$wikibaseRepo->getEntityIdLookup()
 		);
 	}
 
@@ -147,13 +157,23 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @return EntityViewPlaceholderExpander
 	 */
 	private function getEntityViewPlaceholderExpander( OutputPage $out ) {
+
+		$entityId = $this->entityIdLookup->getEntityIdForTitle( $out->getTitle() );
+		$revisionId = $out->getRevisionId();
+		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
+		$labelsProvider = $entity;
+		$descriptionsProvider = $entity;
+		$aliasesProvider = $entity;
+
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
 			$out->getTitle(),
 			$out->getUser(),
 			$out->getLanguage(),
 			$this->entityIdParser,
-			$this->entityRevisionLookup,
+			$labelsProvider,
+			$descriptionsProvider,
+			$aliasesProvider,
 			$this->userLanguageLookup,
 			$this->termsLanguages,
 			$this->languageNameLookup
