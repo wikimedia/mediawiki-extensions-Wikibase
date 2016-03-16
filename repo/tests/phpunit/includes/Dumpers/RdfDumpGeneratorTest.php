@@ -71,6 +71,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		$wiki = new Site();
 		$wiki->setGlobalId( 'test' );
 		$wiki->setLanguageCode( 'test' );
+		$wiki->setGroup( 'acmetest' );
 		$wiki->setLinkPath( 'http://test.acme.test/$1' );
 		$list['test'] = $wiki;
 
@@ -149,11 +150,12 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	public function idProvider() {
 		$p10 = new PropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
+		$q40 = new ItemId( 'Q40' );
 		$q4242 = new ItemId( 'Q4242' ); // hardcoded to be a redirect
 
 		return array(
 			'empty' => array( array(), 'empty' ),
-			'some entities' => array( array( $p10, $q30 ), 'entities' ),
+			'some entities' => array( array( $p10, $q30, $q40 ), 'entities' ),
 			'redirect' => array( array( $p10, $q4242 ), 'redirect' ),
 		);
 	}
