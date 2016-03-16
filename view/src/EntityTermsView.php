@@ -6,7 +6,10 @@ use Message;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\Template\TemplateFactory;
@@ -166,14 +169,20 @@ class EntityTermsView {
 	}
 
 	/**
-	 * @param Fingerprint $fingerprint
+	 * @param EntityId $entityId
+	 * @param LabelsProvider $labelsProvider
+	 * @param DescriptionsProvider $descriptionsProvider
+	 * @param AliasesProvider $aliasesProvider
 	 * @param string[] $languageCodes The languages the user requested to be shown
 	 * @param Title|null $title
 	 *
 	 * @return string HTML
 	 */
 	public function getEntityTermsForLanguageListView(
-		Fingerprint $fingerprint,
+		EntityId $entityId,
+		LabelsProvider $labelsProvider,
+		DescriptionsProvider $descriptionsProvider,
+		AliasesProvider $aliasesProvider,
 		array $languageCodes,
 		Title $title = null
 	) {
@@ -181,7 +190,9 @@ class EntityTermsView {
 
 		foreach ( $languageCodes as $languageCode ) {
 			$entityTermsForLanguageViewsHtml .= $this->getEntityTermsForLanguageView(
-				$fingerprint,
+				$labelsProvider,
+				$descriptionsProvider,
+				$aliasesProvider,
 				$languageCode,
 				$title
 			);
@@ -197,20 +208,24 @@ class EntityTermsView {
 	}
 
 	/**
-	 * @param Fingerprint $fingerprint
+	 * @param LabelsProvider $labelsProvider
+	 * @param DescriptionsProvider $descriptionsProvider
+	 * @param AliasesProvider $aliasesProvider
 	 * @param string $languageCode
 	 * @param Title|null $title
 	 *
 	 * @return string HTML
 	 */
 	private function getEntityTermsForLanguageView(
-		Fingerprint $fingerprint,
+		LabelsProvider $labelsProvider,
+		DescriptionsProvider $descriptionsProvider,
+		AliasesProvider $aliasesProvider,
 		$languageCode,
 		Title $title = null
 	) {
 		$languageName = $this->languageNameLookup->getName( $languageCode );
-		$labels = $fingerprint->getLabels();
-		$descriptions = $fingerprint->getDescriptions();
+		$labels = $labelsProvider->getLabels();
+		$descriptions = $descriptionsProvider->getDescriptions();
 		$hasLabel = $labels->hasTermForLanguage( $languageCode );
 		$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
 
@@ -242,7 +257,7 @@ class EntityTermsView {
 				'',
 				''
 			),
-			$this->getAliasesView( $fingerprint->getAliasGroups(), $languageCode ),
+			$this->getAliasesView( $aliasesProvider->getAliasGroups(), $languageCode ),
 			''
 		);
 	}
