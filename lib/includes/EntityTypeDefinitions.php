@@ -21,10 +21,12 @@ use InvalidArgumentException;
  * - content-model-id: a string used as the content model identifier
  * - content-handler-factory-callback: a callback for creating a content handler dealing with
  *   entities of this type
+ * - edit-entity-handler-factory-callback: a callback for creating a handler that can be used in
+ *   the wbeditentity api module
  *
  * @see docs/entitytypes.wiki
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EntityTypeDefinitions {
@@ -107,6 +109,13 @@ class EntityTypeDefinitions {
 	 */
 	public function getContentHandlerFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'content-handler-factory-callback' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEditEntityHandlerFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'edit-entity-handler-factory-callback' );
 	}
 
 }
