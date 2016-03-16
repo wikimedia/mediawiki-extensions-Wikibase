@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_11d358da",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-16T13:43:01Z",
+      "side": 1,
+      "message": "$languageCode may already be in $termsLanguages. Is that a problem?",
+      "revId": "e02cd9ce82546a0f06096ba6fdd6ec90db44420e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
