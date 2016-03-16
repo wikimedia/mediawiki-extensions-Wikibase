@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_31881cec",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-16T13:39:58Z",
+      "side": 1,
+      "message": "This line does not add anything what\u0027s not in the methods name.",
+      "revId": "31c37f9cc7f13ff67cabafe2997fd19b209eff5e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
