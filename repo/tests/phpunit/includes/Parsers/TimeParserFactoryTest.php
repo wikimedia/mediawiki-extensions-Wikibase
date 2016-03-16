@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Parsers;
 
 use DataValues\TimeValue;
 use PHPUnit_Framework_TestCase;
+use ValueParsers\IsoTimestampParser;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Repo\Parsers\MonthNameProvider;
@@ -23,11 +24,12 @@ use Wikibase\Repo\Parsers\TimeParserFactory;
  */
 class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 
-	private function newTimeParserFactory( $languageCode = 'en' ) {
-		$options = new ParserOptions();
-		$options->setOption( ValueParser::OPT_LANG, $languageCode );
-
+	/**
+	 * @return MonthNameProvider
+	 */
+	private function newMonthNameProvider() {
 		$monthNameProvider = $this->getMock( MonthNameProvider::class );
+
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getLocalizedMonthNames' )
 			->will( $this->returnCallback( function( $languageCode ) {
@@ -37,6 +39,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				}
 				return $monthNames;
 			} ) );
+
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getMonthNumbers' )
 			->will( $this->returnCallback( function( $languageCode ) {
@@ -48,11 +51,18 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				return $numbers;
 			} ) );
 
-		return new TimeParserFactory( $options, $monthNameProvider );
+		return $monthNameProvider;
+	}
+
+	private function newTimeParserFactory( $languageCode ) {
+		$options = new ParserOptions();
+		$options->setOption( ValueParser::OPT_LANG, $languageCode );
+
+		return new TimeParserFactory( $options, $this->newMonthNameProvider() );
 	}
 
 	public function testGetTimeParser() {
-		$factory = $this->newTimeParserFactory();
+		$factory = new TimeParserFactory( null, $this->newMonthNameProvider() );
 		$parser = $factory->getTimeParser();
 
 		$this->assertInstanceOf( ValueParser::class, $parser );
@@ -229,7 +239,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \ValueParsers\ParseException
 	 */
 	public function testParseThrowsException( $value ) {
-		$factory = $this->newTimeParserFactory();
+		$factory = new TimeParserFactory( null, $this->newMonthNameProvider() );
 		$parser = $factory->getTimeParser();
 
 		$parser->parse( $value );
@@ -265,6 +275,95 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			array( '23:12:31' ),
 			array( '23:12:59' ),
 		);
+	}
+
+	/**
+	 * @dataProvider parserOptionsProvider
+	 */
+	public function testParserOptions( $value, array $options, TimeValue $expected ) {
+		$factory = new TimeParserFactory(
+			new ParserOptions( $options ),
+			$this->newMonthNameProvider()
+		);
+		$actual = $factory->getTimeParser()->parse( $value );
+
+		$this->assertEquals( $expected->getArrayValue(), $actual->getArrayValue() );
+	}
+
+	public function parserOptionsProvider() {
+		$decadeOption = array( IsoTimestampParser::OPT_PRECISION => TimeValue::PRECISION_YEAR10 );
+		$julianOption = array( IsoTimestampParser::OPT_CALENDAR => TimeValue::CALENDAR_JULIAN );
+
+		$valid = array(
+			// Precision option
+			'2001 1' => array(
+				$decadeOption,
+				'+2001-01-00T00:00:00Z', TimeValue::PRECISION_YEAR10
+			),
+			'+2002-01-01T00:00:00Z' => array(
+				$decadeOption,
+				'+2002-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10
+			),
+			'1 January 2003' => array(
+				$decadeOption,
+				'+2003-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10
+			),
+			'2004 1 1' => array(
+				$decadeOption,
+				'+2004-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10
+			),
+			'1 Jan 2005' => array(
+				$decadeOption,
+				'+2005-01-01T00:00:00Z', TimeValue::PRECISION_YEAR10
+			),
+			'2006' => array(
+				$decadeOption,
+				'+2006-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10
+			),
+
+			// Calendar option
+			'2011 1' => array(
+				$julianOption,
+				'+2011-01-00T00:00:00Z', TimeValue::PRECISION_MONTH, TimeValue::CALENDAR_JULIAN
+			),
+			'+2012-01-01T00:00:00Z' => array(
+				$julianOption,
+				'+2012-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN
+			),
+			'1 January 2013' => array(
+				$julianOption,
+				'+2013-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN
+			),
+			'2014 2 1' => array(
+				$julianOption,
+				'+2014-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN
+			),
+			'1 Jan 2015' => array(
+				$julianOption,
+				'+2015-01-01T00:00:00Z', TimeValue::PRECISION_DAY, TimeValue::CALENDAR_JULIAN
+			),
+			'2016' => array(
+				$julianOption,
+				'+2016-00-00T00:00:00Z', TimeValue::PRECISION_YEAR, TimeValue::CALENDAR_JULIAN
+			),
+		);
+
+		$cases = array();
+
+		foreach ( $valid as $value => $args ) {
+			$options = $args[0];
+			$timestamp = $args[1];
+			$precision = $args[2];
+			$calendarModel = isset( $args[3] ) ? $args[3] : TimeValue::CALENDAR_GREGORIAN;
+
+			$cases[] = array(
+				(string)$value,
+				$options,
+				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel )
+			);
+		}
+
+		return $cases;
 	}
 
 	/**
