@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
+use Revision;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
@@ -68,6 +69,8 @@ class OutputPageBeforeHTMLHookHandler {
 		ContentLanguages $termsLanguages,
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageNameLookup $languageNameLookup,
+		$termIndex,
+		$entityPerPage,
 		OutputPageEntityIdReader $outputPageEntityIdReader
 	) {
 		$this->templateFactory = $templateFactory;
@@ -75,6 +78,8 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->termsLanguages = $termsLanguages;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->termIndex = $termIndex;
+		$this->entityPerPage = $entityPerPage;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 	}
 
@@ -92,11 +97,14 @@ class OutputPageBeforeHTMLHookHandler {
 			$wikibaseRepo->getTermsLanguages(),
 			$wikibaseRepo->getEntityRevisionLookup(),
 			new LanguageNameLookup( $wgLang->getCode() ),
+			$wikibaseRepo->getStore()->getTermIndex(),
+			$wikibaseRepo->getStore()->newEntityPerPage(),
 			new OutputPageEntityIdReader(
 				$wikibaseRepo->getEntityContentFactory(),
 				$wikibaseRepo->getEntityIdParser()
 			)
 		);
+
 	}
 
 	/**
@@ -149,13 +157,82 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @return EntityViewPlaceholderExpander
 	 */
 	private function getEntityViewPlaceholderExpander( OutputPage $out ) {
-
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		$revisionId = $out->getRevisionId();
-		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
-		$labelsProvider = $entity;
-		$descriptionsProvider = $entity;
-		$aliasesProvider = $entity instanceof AliasesProvider ? $entity : null;
+		if ( $revisionId === null || Revision::newFromId( $revisionId )->isCurrent() ) {
+			$labelsProvider = new class( $this->termIndex, $entityId ) implements \Wikibase\DataModel\Term\LabelsProvider {
+				public function __construct( $termIndex, $entityId ) {
+					$this->termIndex = $termIndex;
+					$this->entityId = $entityId;
+				}
+
+				public function getLabels() {
+					if ( !$this->labels ) {
+						$this->labels = new \Wikibase\DataModel\Term\TermList(
+							array_map(
+								function( $termIndexEntry ) {
+									return new \Wikibase\DataModel\Term\Term( $termIndexEntry->getLanguage(), $termIndexEntry->getText() );
+								},
+								$this->termIndex->getTermsOfEntity( $this->entityId, [ 'label' ] ) // FIXME: Filter languages?
+							)
+						);
+					}
+					return $this->labels;
+				}
+			};
+			$descriptionsProvider = new class( $this->termIndex, $entityId ) implements \Wikibase\DataModel\Term\DescriptionsProvider {
+				public function __construct( $termIndex, $entityId ) {
+					$this->termIndex = $termIndex;
+					$this->entityId = $entityId;
+				}
+
+				public function getDescriptions() {
+					if ( !$this->descriptions ) {
+						$this->descriptions = new \Wikibase\DataModel\Term\TermList(
+							array_map(
+								function( $termIndexEntry ) {
+									return new \Wikibase\DataModel\Term\Term( $termIndexEntry->getLanguage(), $termIndexEntry->getText() );
+								},
+								$this->termIndex->getTermsOfEntity( $this->entityId, [ 'description' ] ) // FIXME: Filter languages?
+							)
+						);
+					}
+					return $this->descriptions;
+				}
+			};
+			$emptyEntity = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getContentHandlerForType( $entityId->getEntityType() )->makeEmptyEntity();
+			$aliasesProvider = $emptyEntity instanceof AliasesProvider ? new class( $this->termIndex, $entityId ) implements AliasesProvider {
+				public function __construct( $termIndex, $entityId ) {
+					$this->termIndex = $termIndex;
+					$this->entityId = $entityId;
+				}
+
+				public function getAliasGroups() {
+					if ( !$this->aliases ) {
+						$groupedAliases = [];
+						$aliasesEntries = $this->termIndex->getTermsOfEntity( $this->entityId, [ 'alias' ] ); // FIXME: Filter languages?
+						foreach( $aliasesEntries as $aliasEntry ) {
+							$lang = $aliasEntry->getLanguage();
+							$groupedAliases[ $lang ] = $groupedAliases[ $lang ] ?: [];
+							$groupedAliases[ $lang ][] = $aliasEntry->getText();
+						}
+						$this->aliases = new \Wikibase\DataModel\Term\AliasGroupList( array_map(
+							function( $lang, $aliases ) {
+								return new \Wikibase\DataModel\Term\AliasGroup( $lang, $aliases );
+							},
+							array_keys( $groupedAliases ),
+							$groupedAliases
+						) );
+					}
+					return $this->aliases;
+				}
+			} : null;
+		} else {
+			$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
+			$labelsProvider = $entity;
+			$descriptionsProvider = $entity;
+			$aliasesProvider = $entity instanceof AliasesProvider ? $entity : null;
+		}
 
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
