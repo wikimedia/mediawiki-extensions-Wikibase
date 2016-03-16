@@ -78,7 +78,7 @@ class TimeParserFactory {
 		$parsers[] = new YearMonthTimeParser( $this->monthNameProvider, $this->options );
 		$parsers[] = $isoTimestampParser;
 		$parsers[] = new MwTimeIsoParser( $this->options );
-		$parsers[] = new YearMonthDayTimeParser( $eraParser );
+		$parsers[] = new YearMonthDayTimeParser( $eraParser, $this->options );
 		$parsers[] = new PhpDateTimeParser(
 			$this->getMonthNameUnlocalizer(),
 			$eraParser,
