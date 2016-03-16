@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
@@ -44,10 +43,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
 		$item = $this->newItem();
-		$timestamp = wfTimestamp( TS_MW );
-		$revision = new EntityRevision( $item, 13044, $timestamp );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item );
 
 		$this->assertSame( '<TITLE>', $parserOutput->getTitleText(), 'title text' );
 		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
@@ -120,10 +117,8 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( false );
 
 		$item = $this->newItem();
-		$timestamp = wfTimestamp( TS_MW );
-		$revision = new EntityRevision( $item, 13044, $timestamp );
 
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision, false );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item, false );
 
 		$this->assertSame( '', $parserOutput->getText() );
 		// ParserOutput without HTML must not end up in the cache.
@@ -136,10 +131,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$item = new Item( new ItemId( 'Q7799929' ) );
 		$item->setDescription( 'en', 'a kitten' );
 
-		$timestamp = wfTimestamp( TS_MW );
-		$revision = new EntityRevision( $item, 13045, $timestamp );
-
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item );
 
 		$this->assertEquals(
 			'Q7799929',

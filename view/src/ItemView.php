@@ -5,7 +5,6 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -65,19 +64,17 @@ class ItemView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 *
-	 * @param EntityRevision $entityRevision
+	 * @param EntityDocument $item
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision ) {
-		$item = $entityRevision->getEntity();
-
+	protected function getMainHtml( EntityDocument $item ) {
 		if ( !( $item instanceof Item ) ) {
-			throw new InvalidArgumentException( '$entityRevision must contain an Item.' );
+			throw new InvalidArgumentException( '$item must contain an Item.' );
 		}
 
-		$html = $this->getHtmlForFingerprint( $entityRevision )
+		$html = $this->getHtmlForFingerprint( $item )
 			. $this->templateFactory->render( 'wikibase-toc' )
 			. $this->statementSectionsView->getHtml( $item->getStatements() );
 
