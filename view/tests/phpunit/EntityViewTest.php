@@ -6,7 +6,6 @@ use MediaWikiLangTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\EntityRevision;
 use Wikibase\View\EntityView;
 
 /**
@@ -41,18 +40,15 @@ abstract class EntityViewTest extends MediaWikiLangTestCase {
 	/**
 	 * @param Statement[] $statements
 	 *
-	 * @return EntityRevision
+	 * @return EntityDocument
 	 */
-	protected function newEntityRevisionForStatements( array $statements ) {
+	protected function newEntityForStatements( array $statements ) {
 		static $revId = 1234;
 		$revId++;
 
 		$entity = $this->makeEntity( $this->makeEntityId( $revId ), $statements );
 
-		$timestamp = wfTimestamp( TS_MW );
-		$revision = new EntityRevision( $entity, $revId, $timestamp );
-
-		return $revision;
+		return $entity;
 	}
 
 	/**
@@ -60,13 +56,13 @@ abstract class EntityViewTest extends MediaWikiLangTestCase {
 	 */
 	public function testGetHtml(
 		EntityView $view,
-		EntityRevision $entityRevision,
+		EntityDocument $entity,
 		$regexp
 	) {
-		$output = $view->getHtml( $entityRevision );
+		$output = $view->getHtml( $entity );
 		$this->assertRegexp( $regexp, $output );
 
-		$entityId = $entityRevision->getEntity()->getId()->getSerialization();
+		$entityId = $entity->getId()->getSerialization();
 		$this->assertRegExp( '/id="wb-[a-z]+-' . $entityId . '"/', $output );
 		$this->assertContains( '<div id="toc"></div>', $output );
 	}
