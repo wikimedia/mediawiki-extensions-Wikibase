@@ -464,11 +464,17 @@ $.widget( 'wikibase.statementview', PARENT, {
 			: wb.datamodel.Statement.RANK.NORMAL
 		);
 		this._createMainSnak();
-		this._createQualifiersListview(
-			this.options.value
-				? this.options.value.getClaim().getQualifiers()
-				: new wb.datamodel.SnakList()
-		);
+
+		if ( this.isInEditMode()
+				|| this.options.value
+					&& this.options.value.getClaim().getQualifiers().length
+			) {
+				this._createQualifiersListview(
+					this.options.value
+						? this.options.value.getClaim().getQualifiers()
+						: new wb.datamodel.SnakList()
+				);
+			}
 		this._createReferencesListview(
 			this.options.value ? this.options.value.getReferences().toArray() : []
 		);
@@ -714,8 +720,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		var qualifiers = this.options.value ? this.options.value.getClaim().getQualifiers() : [];
 
-		// Refill the qualifier listview with the initial (or new initial) qualifiers:
-		this._createQualifiersListview( qualifiers );
+		if ( qualifiers.length > 0 ) {
+			// Refill the qualifier listview with the initial (or new initial) qualifiers:
+			this._createQualifiersListview( qualifiers );
+		}
 	},
 
 	/**
