@@ -441,7 +441,7 @@ class EntityDataTestProvider {
 			array( 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'full' ), // parameters
 			array(), // headers
 			'!^<http://data\.acme\.test/Q42> *'
-				. '<http://schema.org/softwareVersion> *"0\.0\.1" *\.$.*^'
+				. '<http://schema.org/softwareVersion> *"0\.0\.2" *\.$.*^'
 				. '<http://acme\.test/Q22> *'
 				. '<http://www\.w3\.org/2002/07/owl#sameAs> *'
 				. '<http://acme\.test/Q42> *.$!sm',
