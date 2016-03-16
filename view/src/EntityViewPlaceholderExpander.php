@@ -125,6 +125,9 @@ class EntityViewPlaceholderExpander {
 		$this->templateFactory = $templateFactory;
 		$this->termsLanguages = $termsLanguages;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->labelsProvider = $labelsProvider;
+		$this->descriptionsProvider = $descriptionsProvider;
+		$this->aliasesProvider = $aliasesProvider;
 	}
 
 	/**
