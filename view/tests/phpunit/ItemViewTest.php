@@ -73,7 +73,7 @@ class ItemViewTest extends EntityViewTest {
 		return array(
 			array(
 				$itemView,
-				$this->newEntityRevisionForStatements( array() ),
+				$this->newEntityForStatements( array() ),
 				'/wb-item/'
 			)
 		);

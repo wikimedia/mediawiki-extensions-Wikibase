@@ -293,7 +293,7 @@ abstract class EntityContent extends AbstractContent {
 
 		$entityRevision = $this->getEntityRevision( $revisionId );
 
-		$output = $outputGenerator->getParserOutput( $entityRevision, $generateHtml );
+		$output = $outputGenerator->getParserOutput( $entityRevision->getEntity(), $generateHtml );
 
 		// Force parser cache split by whether edit links are show.
 		// MediaWiki core has the ability to split on editsection, but does not trigger it
