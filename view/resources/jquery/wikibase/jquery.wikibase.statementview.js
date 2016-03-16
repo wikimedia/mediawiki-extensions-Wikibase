@@ -464,11 +464,17 @@ $.widget( 'wikibase.statementview', PARENT, {
 			: wb.datamodel.Statement.RANK.NORMAL
 		);
 		this._createMainSnak();
-		this._createQualifiersListview(
-			this.options.value
-				? this.options.value.getClaim().getQualifiers()
-				: new wb.datamodel.SnakList()
-		);
+
+		if ( this.isInEditMode()
+				|| this.options.value
+					&& this.options.value.getClaim().getQualifiers().length
+			) {
+				this._createQualifiersListview(
+					this.options.value
+						? this.options.value.getClaim().getQualifiers()
+						: new wb.datamodel.SnakList()
+				);
+			}
 		this._createReferencesListview(
 			this.options.value ? this.options.value.getReferences().toArray() : []
 		);
@@ -551,12 +557,15 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {wikibase.datamodel.SnakList}
 	 */
 	_getQualifiers: function() {
-		var qualifiers = new wb.datamodel.SnakList(),
-			snaklistviews = this._qualifiers.value();
+		var qualifiers = new wb.datamodel.SnakList();
 
-		// Combine qualifiers grouped by property to a single SnakList:
-		for ( var i = 0; i < snaklistviews.length; i++ ) {
-			qualifiers.merge( snaklistviews[i].value() );
+		if ( this._qualifiers ) {
+			var snaklistviews = this._qualifiers.value();
+
+			// Combine qualifiers grouped by property to a single SnakList:
+			for ( var i = 0; i < snaklistviews.length; i++ ) {
+				qualifiers.merge( snaklistviews[i].value() );
+			}
 		}
 
 		return qualifiers;
@@ -714,8 +723,10 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		var qualifiers = this.options.value ? this.options.value.getClaim().getQualifiers() : [];
 
-		// Refill the qualifier listview with the initial (or new initial) qualifiers:
-		this._createQualifiersListview( qualifiers );
+		if ( qualifiers.length > 0 ) {
+			// Refill the qualifier listview with the initial (or new initial) qualifiers:
+			this._createQualifiersListview( qualifiers );
+		}
 	},
 
 	/**
@@ -768,7 +779,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 
 		return this._mainSnakSnakView.isValid() &&
-			this._listViewIsValid( this._qualifiers ) &&
+			( !this._qualifiers || this._listViewIsValid( this._qualifiers ) ) &&
 			this._listViewIsValid( this._referencesListview ) &&
 			this._instantiateStatement( null ) instanceof wb.datamodel.Statement;
 	},
