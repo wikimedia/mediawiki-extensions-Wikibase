@@ -322,11 +322,11 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $entityType
+	 * @param array $params
 	 *
 	 * @return EntityDocument Newly created entity
 	 */
-	protected function createEntity( $entityType ) {
+	protected function createEntity( array $params ) {
 		$this->errorReporter->dieError( 'Could not find an existing entity', 'no-such-entity' );
 	}
 
@@ -417,7 +417,7 @@ abstract class ModifyEntity extends ApiBase {
 		// Try to find the entity or fail and create it, or die in the process
 		$entityRev = $this->getEntityRevisionFromApiParams( $params );
 		if ( is_null( $entityRev ) ) {
-			$entity = $this->createEntity( $params['new'] );
+			$entity = $this->createEntity( $params );
 			$entityRevId = 0;
 
 			// HACK: We need to assign an ID early, for things like the ClaimIdGenerator.
