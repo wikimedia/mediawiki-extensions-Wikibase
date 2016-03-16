@@ -33,6 +33,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Api\EditEntityHandlerFactory;
 use Wikibase\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -1186,6 +1187,15 @@ class WikibaseRepo {
 		//TODO: provide a hook or registry for adding more.
 
 		return new EntityFactory( $entityClasses );
+	}
+
+	/**
+	 * @return EditEntityHandlerFactory
+	 */
+	public function getEditEntityHandlerFactory() {
+		return new EditEntityHandlerFactory(
+			$this->entityTypeDefinitions->getEditEntityHandlerFactoryCallbacks()
+		);
 	}
 
 	/**

@@ -29,6 +29,8 @@ to be implemented and registered:
 * MediaWiki bindings are needed by defining a content class extending EntityContent and a handler
   class extending EntityHandler. Furthermore, the handler has to be globally registered in
   $wgContentHandlers. It is used to create instances of the content class.
+* If the entity type should be supported in the wbeditentity api module, a EditEntityHandler must
+  be registered to allow the creation and modification of entities of that type via the api.
 
 Entity types are defined in the global $wgWBRepoEntityTypes and $wgWBClientEntityTypes arrays,
 respectively. These arrays are constructed at bootstrap time in Wikibase.php and
@@ -52,6 +54,8 @@ associated with a function having the dedicated signature:
 : a string representing the id of the content model
 ; content-handler-factory-callback (repo only)
 : a callable that returns an EntityHandler instance supporting this entity type
+; edit-entity-handler-factory-callback (repo only)
+: a callable that returns an EditEntityHandler instance supporting this entity type
 
 Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes respectively
 WikibaseClientEntityTypes hooks to provide additional entity type definitions.

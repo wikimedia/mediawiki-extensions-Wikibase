@@ -8,9 +8,11 @@ use Deserializers\Deserializer;
 use InvalidArgumentException;
 use LogicException;
 use MWException;
+use OutOfBoundsException;
 use SiteList;
 use Title;
 use UsageException;
+use Wikibase\Api\EditEntityHandlerFactory;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
@@ -20,13 +22,11 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -44,6 +44,7 @@ use Wikibase\Summary;
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  * @author Addshore
  * @author Michał Łazowik
+ * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class EditEntity extends ModifyEntity {
 
@@ -88,9 +89,9 @@ class EditEntity extends ModifyEntity {
 	private $statementDeserializer;
 
 	/**
-	 * @var EntityFactory
+	 * @var EditEntityHandlerFactory
 	 */
-	private $entityFactory;
+	private $editEntityHandlerFactory;
 
 	/**
 	 * @see ModifyEntity::__construct
@@ -111,7 +112,8 @@ class EditEntity extends ModifyEntity {
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
-		$this->entityFactory = $wikibaseRepo->getEntityFactory();
+		$this->editEntityHandlerFactory = $wikibaseRepo->getEditEntityHandlerFactory();
+		$this->enabledEntityTypes = $wikibaseRepo->getEnabledEntityTypes();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -172,19 +174,22 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @see ModifyEntity::createEntity
 	 *
-	 * @param string $entityType
+	 * @param array $params
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
 	 * @return EntityDocument
 	 */
-	protected function createEntity( $entityType ) {
+	protected function createEntity( array $params ) {
 		$this->flags |= EDIT_NEW;
 
 		try {
-			return $this->entityFactory->newEmpty( $entityType );
+			$handler = $this->editEntityHandlerFactory->newEditEntityHandler( $params['new'] );
+			return $handler->createEntityFromData( $params['data'] );
+		} catch ( OutOfBoundsException $ex ) {
+			$this->errorReporter->dieError( "No such entity type: '{$params['new']}'", 'no-such-entity-type' );
 		} catch ( InvalidArgumentException $ex ) {
-			$this->errorReporter->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
+			$this->errorReporter->dieError( $ex->getMessage(), 'param-illegal' );
 		}
 
 		throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
@@ -247,16 +252,8 @@ class EditEntity extends ModifyEntity {
 				}
 			}
 
-			$entity = $this->clearEntity( $entity );
-		}
-
-		// if we create a new property, make sure we set the datatype
-		if ( !$exists && $entity instanceof Property ) {
-			if ( !isset( $data['datatype'] ) ) {
-				$this->errorReporter->dieError( 'No datatype given', 'param-illegal' );
-			} else {
-				$entity->setDataTypeId( $data['datatype'] );
-			}
+			$handler = $this->editEntityHandlerFactory->newEditEntityHandler( $entity->getType() );
+			$entity = $handler->createEmptyEntity( $entity );
 		}
 
 		$changeOps = $this->getChangeOps( $data, $entity );
@@ -265,24 +262,6 @@ class EditEntity extends ModifyEntity {
 
 		$this->buildResult( $entity );
 		return $this->getSummary( $params );
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return EntityDocument
-	 */
-	private function clearEntity( EntityDocument $entity ) {
-		$newEntity = $this->entityFactory->newEmpty( $entity->getType() );
-		$newEntity->setId( $entity->getId() );
-
-		// FIXME how to avoid special case handling here?
-		if ( $entity instanceof Property ) {
-			/** @var Property $newEntity */
-			$newEntity->setDataTypeId( $entity->getDataTypeId() );
-		}
-
-		return $newEntity;
 	}
 
 	/**
