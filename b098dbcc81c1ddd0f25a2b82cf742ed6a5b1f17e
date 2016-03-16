@@ -16,6 +16,24 @@
       "revId": "b098dbcc81c1ddd0f25a2b82cf742ed6a5b1f17e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_e62f18f2",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-16T11:34:09Z",
+      "side": 1,
+      "message": "That might lead to inconsistencies because below in `assignFreshId` we cannot check if the method exists since the entity id is likely to be null.",
+      "parentUuid": "ee33df1d_a6eeb0af",
+      "revId": "b098dbcc81c1ddd0f25a2b82cf742ed6a5b1f17e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
