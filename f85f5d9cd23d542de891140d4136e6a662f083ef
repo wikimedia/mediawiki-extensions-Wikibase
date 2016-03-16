@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_2caa7fd1",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-16T14:18:40Z",
+      "side": 1,
+      "message": "This is a totally weird string by default. Must be microtime( true ).",
+      "revId": "f85f5d9cd23d542de891140d4136e6a662f083ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_2c81df4f",
+        "filename": "repo/maintenance/dispatchChanges.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-16T14:18:40Z",
+      "side": 1,
+      "message": "microtime( true )",
+      "revId": "f85f5d9cd23d542de891140d4136e6a662f083ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
