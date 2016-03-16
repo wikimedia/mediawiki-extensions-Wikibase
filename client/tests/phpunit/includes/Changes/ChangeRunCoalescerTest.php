@@ -156,10 +156,6 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 	}
 
 	private function makeDiff( $objectId, $revA, $revB ) {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => Item::class,
-		);
-
 		$lookup = $this->getEntityRevisionLookup();
 
 		$itemId = new ItemId( $objectId );

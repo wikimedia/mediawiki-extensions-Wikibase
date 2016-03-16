@@ -1189,7 +1189,9 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return string[]
+	 * @return string[] List of entity type identifiers (typically "item" and "property")
+	 *  that are configured in WikibaseRepo.entitytypes.php and enabled via the
+	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getEnabledEntityTypes() {
 		$entityTypeByContentModel = array_flip( $this->getContentModelMappings() );
