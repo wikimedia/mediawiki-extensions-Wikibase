@@ -13,12 +13,14 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 	events: {
 		'listviewcreate snaklistviewafterstartediting': function( event, toolbarController ) {
 			var $target = $( event.target ),
+				$statementview = $target.closest( '.wikibase-statementview' ),
 				$qualifiers = $target.closest( '.wikibase-statementview-qualifiers' ),
 				listview = $target.closest( ':wikibase-listview' ).data( 'listview' ),
 				listviewInited = event.type === 'listviewcreate' && listview.items().length === 0;
 
 			if ( ( listviewInited || event.type === 'snaklistviewafterstartediting' )
 				&& !$qualifiers.data( 'addtoolbar' )
+				&& $statementview.data( 'statementview' ).isInEditMode()
 			) {
 				$qualifiers
 				.addtoolbar( {

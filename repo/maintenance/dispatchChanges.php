@@ -181,7 +181,7 @@ class DispatchChanges extends Maintenance {
 
 		$this->log( "Starting loop for $passes passes or $time seconds" );
 
-		$startTime = time();
+		$startTime = microtime( true );
 		$t = 0;
 
 		// Run passes in a loop, sleeping when idle.
@@ -222,7 +222,7 @@ class DispatchChanges extends Maintenance {
 				}
 			}
 
-			$t = ( time() - $startTime );
+			$t = microtime( true ) - $startTime;
 		}
 
 		$this->log( "Done, exiting after $c passes and $t seconds." );
