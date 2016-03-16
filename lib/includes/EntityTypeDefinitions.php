@@ -51,6 +51,13 @@ class EntityTypeDefinitions {
 	}
 
 	/**
+	 * @return string[] a list of all defined entity types
+	 */
+	public function getEntityTypes() {
+		return array_keys( $this->entityTypeDefinitions );
+	}
+
+	/**
 	 * @param string $field
 	 *
 	 * @return mixed

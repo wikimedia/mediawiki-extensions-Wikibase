@@ -1009,7 +1009,9 @@ class WikibaseRepo {
 
 		// Create a new ValueFormatterFactory, and override the formatter for entity IDs.
 		$valueFormatterFactory = $this->newValueFormatterFactory();
-		foreach ( $this->getEntityFactory()->getEntityTypes() as $entityType ) {
+
+		// Iterate through all defined entity types
+		foreach ( $this->entityTypeDefinitions->getEntityTypes() as $entityType ) {
 			$valueFormatterFactory->setFormatterFactoryCallback(
 				"PT:wikibase-$entityType",
 				function ( $format, FormatterOptions $options ) use ( $idFormatter ) {
