@@ -49,7 +49,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 	) {
 		/** @var GlobeCoordinateValue $value */
 		$value = $snak->getDataValue();
-		$point = "Point({$value->getLatitude()} {$value->getLongitude()})";
+		$point = "Point({$value->getLongitude()} {$value->getLatitude()})";
 		$globe = $value->getGlobe();
 
 		if ( $globe && $globe !== GlobeCoordinateValue::GLOBE_EARTH ) {
