@@ -9,6 +9,7 @@ use ImportStringSource;
 use OutputPage;
 use ParserOutput;
 use RequestContext;
+use Title;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
 use WikiImporter;
@@ -37,6 +38,7 @@ class RepoHooksTest extends \MediaWikiTestCase {
 
 	protected function tearDown() {
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'allowEntityImport', $this->saveAllowImport );
+		Title::clearCaches();
 
 		parent::tearDown();
 	}
