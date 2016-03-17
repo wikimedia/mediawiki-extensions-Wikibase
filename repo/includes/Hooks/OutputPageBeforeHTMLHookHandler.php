@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -164,7 +165,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
 		$labelsProvider = $entity;
 		$descriptionsProvider = $entity;
-		$aliasesProvider = $entity;
+		$aliasesProvider = $entity instanceof AliasesProvider ? $entity : null;
 
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,

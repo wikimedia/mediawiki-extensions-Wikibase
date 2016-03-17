@@ -171,7 +171,7 @@ class EntityTermsView {
 	/**
 	 * @param LabelsProvider $labelsProvider
 	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider $aliasesProvider
+	 * @param AliasesProvider|null $aliasesProvider
 	 * @param string[] $languageCodes The languages the user requested to be shown
 	 * @param Title|null $title
 	 *
@@ -180,7 +180,7 @@ class EntityTermsView {
 	public function getEntityTermsForLanguageListView(
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider,
+		AliasesProvider $aliasesProvider = null,
 		array $languageCodes,
 		Title $title = null
 	) {
@@ -208,7 +208,7 @@ class EntityTermsView {
 	/**
 	 * @param LabelsProvider $labelsProvider
 	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider $aliasesProvider
+	 * @param AliasesProvider|null $aliasesProvider
 	 * @param string $languageCode
 	 * @param Title|null $title
 	 *
@@ -217,7 +217,7 @@ class EntityTermsView {
 	private function getEntityTermsForLanguageView(
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider,
+		AliasesProvider $aliasesProvider = null,
 		$languageCode,
 		Title $title = null
 	) {
@@ -255,7 +255,7 @@ class EntityTermsView {
 				'',
 				''
 			),
-			$this->getAliasesView( $aliasesProvider->getAliasGroups(), $languageCode ),
+			$aliasesProvider ? $this->getAliasesView( $aliasesProvider->getAliasGroups(), $languageCode ) : '',
 			''
 		);
 	}

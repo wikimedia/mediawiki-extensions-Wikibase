@@ -65,7 +65,7 @@ class EntityViewPlaceholderExpander {
 	private $descriptionsProvider;
 
 	/**
-	 * @var AliasesProvider
+	 * @var AliasesProvider|null
 	 */
 	private $aliasesProvider;
 
@@ -97,7 +97,7 @@ class EntityViewPlaceholderExpander {
 	 * @param EntityIdParser $entityIdParser
 	 * @param LabelsProvider $labelsProvider
 	 * @param DescriptionsProvider $descriptionsProvider
-	 * @param AliasesProvider $aliasesProvider
+	 * @param AliasesProvider|null $aliasesProvider
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
@@ -110,7 +110,7 @@ class EntityViewPlaceholderExpander {
 		$entityIdParser,
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
-		AliasesProvider $aliasesProvider,
+		AliasesProvider $aliasesProvider = null,
 		UserLanguageLookup $userLanguageLookup,
 		ContentLanguages $termsLanguages,
 		LanguageNameLookup $languageNameLookup
