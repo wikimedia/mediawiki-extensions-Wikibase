@@ -93,6 +93,11 @@ class EditEntity extends ModifyEntity {
 	private $entityFactory;
 
 	/**
+	 * @var string[]
+	 */
+	private $enabledEntityTypes;
+
+	/**
 	 * @see ModifyEntity::__construct
 	 *
 	 * @param ApiMain $mainModule
@@ -112,6 +117,7 @@ class EditEntity extends ModifyEntity {
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
 		$this->entityFactory = $wikibaseRepo->getEntityFactory();
+		$this->enabledEntityTypes = $wikibaseRepo->getEnabledEntityTypes();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -814,7 +820,7 @@ class EditEntity extends ModifyEntity {
 					self::PARAM_DFLT => false
 				),
 				'new' => array(
-					self::PARAM_TYPE => $this->entityFactory->getEntityTypes(),
+					self::PARAM_TYPE => $this->enabledEntityTypes,
 				),
 			)
 		);

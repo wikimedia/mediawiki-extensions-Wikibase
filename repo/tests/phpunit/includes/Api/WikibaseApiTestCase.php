@@ -345,20 +345,22 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array $response
 	 */
 	protected function assertResultHasEntityType( array $response ) {
-		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		if ( isset( $response['entity'] ) ) {
 			if ( isset( $response['entity']['type'] ) ) {
-				$this->assertTrue(
-					$entityFactory->isEntityType( $response['entity']['type'] ),
+				$this->assertContains(
+					$response['entity']['type'],
+					$wikibaseRepo->getEnabledEntityTypes(),
 					"Missing valid 'type' in response."
 				);
 			}
 		} elseif ( isset( $response['entities'] ) ) {
 			foreach ( $response['entities'] as $entity ) {
 				if ( isset( $entity['type'] ) ) {
-					$this->assertTrue(
-						$entityFactory->isEntityType( $entity['type'] ),
+					$this->assertContains(
+						$entity['type'],
+						$wikibaseRepo->getEnabledEntityTypes(),
 						"Missing valid 'type' in response."
 					);
 				}

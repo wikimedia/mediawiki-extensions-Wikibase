@@ -65,7 +65,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 			$entitySearchHelper,
 			$repo->getEntityTitleLookup(),
 			$repo->getTermsLanguages(),
-			$repo->getEntityFactory()->getEntityTypes()
+			$repo->getEnabledEntityTypes()
 		);
 	}
 

@@ -75,7 +75,7 @@ class SearchEntities extends ApiBase {
 			$entitySearchHelper,
 			$repo->getEntityTitleLookup(),
 			$repo->getTermsLanguages(),
-			$repo->getEntityFactory()->getEntityTypes(),
+			$repo->getEnabledEntityTypes(),
 			$repo->getSettings()->getSetting( 'conceptBaseUri' )
 		);
 	}
