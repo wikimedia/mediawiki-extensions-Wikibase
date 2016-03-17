@@ -30,7 +30,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @param string $title
 	 *
-	 * @return Article
+	 * @return Article|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getPage( $title ) {
 		$page = $this->getMockBuilder( Article::class )
@@ -44,7 +44,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return OutputPage
+	 * @return OutputPage|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getOutput() {
 		$output = $this->getMockBuilder( OutputPage::class )
