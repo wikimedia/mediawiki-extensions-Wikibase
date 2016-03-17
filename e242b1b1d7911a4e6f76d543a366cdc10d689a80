@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_55f4a383",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-03-17T14:41:45Z",
+      "side": 1,
+      "message": "*shrug*",
+      "parentUuid": "ee33df1d_b5b7efd2",
+      "revId": "e242b1b1d7911a4e6f76d543a366cdc10d689a80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_f5b4d7e6",
         "filename": "view/src/EntityViewPlaceholderExpander.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-17T14:34:07Z",
       "side": 1,
       "message": "Would it help to inject this?",
+      "revId": "e242b1b1d7911a4e6f76d543a366cdc10d689a80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_95ee2bb0",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-03-17T14:41:45Z",
+      "side": 1,
+      "message": "Help whom?",
+      "parentUuid": "ee33df1d_f5b4d7e6",
       "revId": "e242b1b1d7911a4e6f76d543a366cdc10d689a80",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
