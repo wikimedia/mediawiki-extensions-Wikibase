@@ -76,13 +76,6 @@ function measureMaximumStringWidths( $container, strings ) {
  * @param {Object} [options.menu.position=Object]
  *        Default object passed to `jQuery.ui.position` when positioning the menu. Positions will be
  *        flipped if isRtl option returns `true`.
- * @param {Object} [options.animation=Object]
- *        Object containing parameters used for the rotation animation.
- * @param {string[]} [options.animation.margins=['-15px', '15px']]
- *        Defines how far the sections should be shifted when animating the rotation. First value
- *        when shifting to the left and vice versa. Values will be flipped in rtl context.
- * @param {number} [options.animation.duration=150]
- *        Defines the animation's duration in milliseconds.
  * @param {boolean} [options.deferInit=false]
  *        Whether to defer initializing the section widths until `initWidths()` is called
  *        "manually".
@@ -114,10 +107,6 @@ $.widget( 'ui.listrotator', {
 				at: 'left bottom',
 				collision: 'none'
 			}
-		},
-		animation: {
-			margins: ['-15px', '15px'],
-			duration: 150 // TODO: Fixed values can't be changed nor turned off
 		},
 		deferInit: false,
 		messages: {
@@ -167,14 +156,6 @@ $.widget( 'ui.listrotator', {
 	 * @readonly
 	 */
 	$menu: null,
-
-	/**
-	 * Temporarily caching the value the rotator is rotating to while the animation is being
-	 * performed.
-	 * @property {*}
-	 * @protected
-	 */
-	_rotatingTo: null,
 
 	/**
 	 * @see jQuery.Widget._create
@@ -479,7 +460,7 @@ $.widget( 'ui.listrotator', {
 			self.activate();
 		} );
 
-		this.rotate( newValue );
+		this._trigger( 'selected', null, [ this.value( newValue ) ] );
 	},
 
 	/**
@@ -496,79 +477,6 @@ $.widget( 'ui.listrotator', {
 	prev: function() {
 		this._setValue( this.$prev.data( 'value' ) );
 		this.activate();
-	},
-
-	/**
-	 * Performs the rotation of the widget.
-	 *
-	 * @param {string} newValue
-	 */
-	rotate: function( newValue ) {
-		if ( newValue === this._rotatingTo
-			|| !this._rotatingTo && newValue === this.$curr.data( 'value' )
-		) {
-			// Rotation is to the given target is in progress or has been performed already.
-			return;
-		}
-
-		var self = this,
-			margins = $.merge( [], this.options.animation.margins ),
-			s = '.' + this.widgetBaseClass + '-label';
-
-		// Nodes that shall be animated:
-		var $nodes = this.$prev.children( s )
-			.add( this.$curr.children( s ) )
-			.add( this.$next.children( s ) );
-
-		// Set the rotation target:
-		this._rotatingTo = newValue;
-
-		// Figure out whether rotating to the right or to the left:
-		var beforeCurrent = true;
-		$.each( this.options.values, function( i, v ) {
-			if ( v.value === newValue ) {
-				return false;
-			}
-			if ( v.value === self.$curr.data( 'value' ) ) {
-				beforeCurrent = false;
-				return false;
-			}
-		} );
-
-		if ( beforeCurrent ) {
-			margins.reverse();
-		}
-
-		if ( this._isRtl() ) {
-			margins.reverse();
-		}
-
-		$nodes.animate(
-			{
-				marginLeft: margins[0],
-				marginRight: margins[1],
-				opacity: 0
-			}, {
-				done: function() {
-					// Reset margins an opacity used for the animation effect:
-					$nodes.css( {
-						marginLeft: '0',
-						marginRight: '0',
-						opacity: 1
-					} );
-
-					// Rotation target changed in the meantime, just abort selecting:
-					if ( self._rotatingTo !== newValue ) {
-						return;
-					}
-
-					self._trigger( 'selected', null, [ self.value( newValue ) ] );
-
-					self._rotatingTo = null;
-				},
-				duration: this.options.animation.duration
-			}
-		);
 	},
 
 	/**
