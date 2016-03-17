@@ -9,6 +9,9 @@ use Wikibase\View\Template\TemplateRegistry;
 /**
  * @covers Wikibase\View\Template\TemplateFactory
  *
+ * @uses Wikibase\View\Template\Template
+ * @uses Wikibase\View\Template\TemplateRegistry
+ *
  * @group Wikibase
  * @group WikibaseView
  *
