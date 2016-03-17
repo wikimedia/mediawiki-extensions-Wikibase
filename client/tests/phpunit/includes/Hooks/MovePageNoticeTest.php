@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use Language;
 use MovePageForm;
 use OutputPage;
 use Title;

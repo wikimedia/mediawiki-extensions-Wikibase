@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
-use ParserOptions;
 use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;

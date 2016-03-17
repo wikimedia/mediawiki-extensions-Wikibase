@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use Language;
 use MediaWikiLangTestCase;
 use MessageCache;
 use Title;

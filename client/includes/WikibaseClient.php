@@ -14,7 +14,6 @@ use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
-use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
 use Exception;
 use Hooks;
