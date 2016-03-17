@@ -448,6 +448,16 @@ class EntityDataTestProvider {
 			200,       // http code
 		);
 
+		$cases[] = array( // #40: dump format includes version, see T130066
+			'',      // subpage
+			array( 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'dump' ), // parameters
+			array(), // headers
+			'!^<http://data\.acme\.test/Q42> +'
+				. '<http://schema.org/softwareVersion> +"0\.0\.1" *\.$'
+				. '!sm',
+			200,       // http code
+		);
+
 		return $cases;
 	}
 
