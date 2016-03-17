@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use MapCacheLRU;
+use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -138,7 +139,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 * @param EntityId[] $entityIds
 	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
-	 * @return array of entity id serialization => object or false if no such entity exists.
+	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
 		if ( $mode === EntityRevisionLookup::LATEST_FROM_MASTER ) {
@@ -174,7 +175,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 * @param EntityId $entityId
 	 * @param int $revisionId
 	 *
-	 * @return object|bool false if no such entity exists
+	 * @return stdClass|bool false if no such entity exists
 	 */
 	public function loadRevisionInformationByRevisionId( EntityId $entityId, $revisionId ) {
 		// Caching this would have little or no benefit, but would be rather complex.
