@@ -42,17 +42,6 @@
 	background: none;
 }
 
-.ui-listrotator .ui-listrotator-prev {
-	float: left;
-	margin-right: 5px;
-	border: none;
-	background: none;
-	text-align: right;
-}
-.ui-listrotator .ui-listrotator-prev > * {
-	float: left;
-}
-
 .ui-listrotator .ui-listrotator-curr {
 	float: left;
 	text-align: center;
@@ -62,16 +51,6 @@
 }
 .ui-listrotator .ui-listrotator-curr > * {
 	float: left;
-}
-
-.ui-listrotator .ui-listrotator-next {
-	float: right;
-	margin-left: 5px;
-	border: none;
-	background: none;
-}
-.ui-listrotator .ui-listrotator-next > * {
-	float :right;
 }
 
 .ui-listrotator .ui-icon {
