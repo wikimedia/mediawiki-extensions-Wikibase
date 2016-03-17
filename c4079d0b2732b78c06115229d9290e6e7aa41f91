@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_cba3ef3d",
+        "filename": "client/includes/DataAccess/Scribunto/SnakSerializationRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-17T20:33:52Z",
+      "side": 0,
+      "message": "This class isn\u0027t visible in this scope.",
+      "revId": "c4079d0b2732b78c06115229d9290e6e7aa41f91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_2b689bf1",
+        "filename": "client/includes/DataAccess/Scribunto/SnakSerializationRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 549
+      },
+      "writtenOn": "2016-03-17T20:33:52Z",
+      "side": 0,
+      "message": "This class isn\u0027t visible in this scope.",
+      "revId": "c4079d0b2732b78c06115229d9290e6e7aa41f91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
