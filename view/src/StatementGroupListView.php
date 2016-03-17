@@ -122,9 +122,7 @@ class StatementGroupListView {
 		foreach ( $statements as $statement ) {
 			$statementViewsHtml .= $this->claimHtmlGenerator->getHtmlForClaim(
 				$statement,
-				$this->editSectionGenerator->getStatementEditSection(
-					$statement instanceof Statement ? $statement : new Statement( $statement )
-				)
+				$this->editSectionGenerator->getStatementEditSection( $statement )
 			);
 		}
 
