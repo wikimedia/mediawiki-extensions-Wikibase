@@ -113,6 +113,8 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 			Title::newFromText( $redirect2->getEntityId()->getSerialization() )
 		);
 
+		Title::clearCaches();
+
 		return array(
 			'empty' => array( $empty, $empty, array( 'empty' => '/^$/', ) ),
 			'same' => array( $itemContent, $itemContent, array( 'empty' => '/^$/', ) ),
