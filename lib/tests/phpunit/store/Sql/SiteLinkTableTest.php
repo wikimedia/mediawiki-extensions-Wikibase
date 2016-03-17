@@ -34,6 +34,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		}
 
 		$this->siteLinkTable = new SiteLinkTable( 'wb_items_per_site', false );
+		$this->tablesUsed[] = 'wb_items_per_site';
 	}
 
 	public function itemProvider() {
@@ -66,9 +67,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @depends testSaveLinksOfItem
+	 * @dataProvider itemProvider
 	 */
-	public function testSaveLinksOfItem_duplicate() {
+	public function testSaveLinksOfItem_duplicate( Item $otherItem ) {
+		$this->siteLinkTable->saveLinksOfItem( $otherItem );
 		$item = new Item( new ItemId( 'Q2' ) );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Beer' );
 
@@ -100,10 +102,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
 	public function testGetSiteLinksOfItem( Item $item ) {
+		$this->siteLinkTable->saveLinksOfItem( $item );
 		$siteLinks = $this->siteLinkTable->getSiteLinksForItem( $item->getId() );
 
 		$this->assertArrayEquals(
@@ -113,10 +115,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
 	public function testGetItemIdForSiteLink( Item $item ) {
+		$this->siteLinkTable->saveLinksOfItem( $item );
 		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
@@ -126,10 +128,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
 	public function testGetItemIdForLink( Item $item ) {
+		$this->siteLinkTable->saveLinksOfItem( $item );
 		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 			$this->assertEquals(
 				$item->getId(),
@@ -139,10 +141,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
 	public function testDeleteLinksOfItem( Item $item ) {
+		$this->siteLinkTable->saveLinksOfItem( $item );
 		$this->assertTrue(
 			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
 		);
@@ -153,10 +155,10 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @depends testSaveLinksOfItem
 	 * @dataProvider itemProvider
 	 */
 	public function testClear( Item $item ) {
+		$this->siteLinkTable->saveLinksOfItem( $item );
 		$this->assertTrue(
 			$this->siteLinkTable->clear() !== false
 		);
