@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\EntityRevision;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -57,19 +56,17 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getMainHtml
 	 *
-	 * @param EntityRevision $entityRevision
+	 * @param EntityDocument $property
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	protected function getMainHtml( EntityRevision $entityRevision ) {
-		$property = $entityRevision->getEntity();
-
+	protected function getMainHtml( EntityDocument $property ) {
 		if ( !( $property instanceof Property ) ) {
-			throw new InvalidArgumentException( '$entityRevision must contain a Property.' );
+			throw new InvalidArgumentException( '$property must contain a Property.' );
 		}
 
-		$html = $this->getHtmlForFingerprint( $entityRevision )
+		$html = $this->getHtmlForFingerprint( $property )
 			. $this->templateFactory->render( 'wikibase-toc' )
 			. $this->getHtmlForDataType( $property->getDataTypeId() )
 			. $this->statementSectionsView->getHtml( $property->getStatements() );

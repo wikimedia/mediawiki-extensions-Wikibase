@@ -91,7 +91,7 @@ class PropertyViewTest extends EntityViewTest {
 		return array(
 			array(
 				$propertyView,
-				$this->newEntityRevisionForStatements( array() ),
+				$this->newEntityForStatements( array() ),
 				'/wb-property/'
 			)
 		);

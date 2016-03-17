@@ -8,7 +8,6 @@ use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -126,19 +125,17 @@ class EntityParserOutputGenerator {
 	 *
 	 * @since 0.5
 	 *
-	 * @param EntityRevision $entityRevision
+	 * @param EntityDocument $entity
 	 * @param bool $generateHtml
 	 *
 	 * @throws InvalidArgumentException
 	 * @return ParserOutput
 	 */
 	public function getParserOutput(
-		EntityRevision $entityRevision,
+		EntityDocument $entity,
 		$generateHtml = true
 	) {
 		$parserOutput = new ParserOutput();
-
-		$entity = $entityRevision->getEntity();
 
 		$updater = new EntityParserOutputDataUpdater( $parserOutput, $this->dataUpdaters );
 		$updater->processEntity( $entity );
@@ -151,7 +148,7 @@ class EntityParserOutputGenerator {
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
-				$entityRevision,
+				$entity,
 				$this->getEntityInfo( $parserOutput )
 			);
 		} else {
@@ -248,12 +245,12 @@ class EntityParserOutputGenerator {
 
 	/**
 	 * @param ParserOutput $parserOutput
-	 * @param EntityRevision $entityRevision
+	 * @param EntityDocument $entity
 	 * @param EntityInfo $entityInfo
 	 */
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
-		EntityRevision $entityRevision,
+		EntityDocument $entity,
 		EntityInfo $entityInfo
 	) {
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
@@ -267,7 +264,7 @@ class EntityParserOutputGenerator {
 		) : new EmptyEditSectionGenerator();
 
 		$entityView = $this->entityViewFactory->newEntityView(
-			$entityRevision->getEntity()->getType(),
+			$entity->getType(),
 			$this->languageCode,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
@@ -275,10 +272,10 @@ class EntityParserOutputGenerator {
 		);
 
 		// Set the display title to display the label together with the item's id
-		$titleHtml = $entityView->getTitleHtml( $entityRevision );
+		$titleHtml = $entityView->getTitleHtml( $entity );
 		$parserOutput->setDisplayTitle( $titleHtml );
 
-		$html = $entityView->getHtml( $entityRevision );
+		$html = $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
 	}
