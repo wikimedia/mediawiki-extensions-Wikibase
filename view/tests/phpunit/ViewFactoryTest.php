@@ -36,8 +36,9 @@ use Wikibase\View\Template\TemplateRegistry;
  * @uses Wikibase\View\ItemView
  * @uses Wikibase\View\PropertyView
  * @uses Wikibase\View\SiteLinksView
- * @uses Wikibase\View\StatementGroupListView
  * @uses Wikibase\View\SnakHtmlGenerator
+ * @uses Wikibase\View\StatementGroupListView
+ * @uses Wikibase\View\StatementSectionsView
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
  * @uses Wikibase\View\Template\TemplateRegistry
