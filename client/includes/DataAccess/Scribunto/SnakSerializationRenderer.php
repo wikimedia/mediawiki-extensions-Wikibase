@@ -2,9 +2,8 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
+use Deserializers\Deserializer;
 use Language;
-use Wikibase\DataModel\Deserializers\SnakDeserializer;
-use Wikibase\DataModel\Deserializers\SnakListDeserializer;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 
@@ -24,7 +23,7 @@ class SnakSerializationRenderer {
 	private $snakFormatter;
 
 	/**
-	 * @var SnakDeserializer
+	 * @var Deserializer
 	 */
 	private $snakDeserializer;
 
@@ -34,21 +33,21 @@ class SnakSerializationRenderer {
 	private $language;
 
 	/**
-	 * @var SnakListDeserializer
+	 * @var Deserializer
 	 */
 	private $snakListDeserializer;
 
 	/**
 	 * @param SnakFormatter $snakFormatter
-	 * @param SnakDeserializer $snakDeserializer
+	 * @param Deserializer $snakDeserializer
 	 * @param Language $language
-	 * @param SnakListDeserializer $snakListDeserializer
+	 * @param Deserializer $snakListDeserializer
 	 */
 	public function __construct(
 		SnakFormatter $snakFormatter,
-		SnakDeserializer $snakDeserializer,
+		Deserializer $snakDeserializer,
 		Language $language,
-		SnakListDeserializer $snakListDeserializer
+		Deserializer $snakListDeserializer
 	) {
 		$this->snakFormatter = $snakFormatter;
 		$this->snakDeserializer = $snakDeserializer;
