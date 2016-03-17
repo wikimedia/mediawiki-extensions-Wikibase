@@ -123,12 +123,12 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		$diff = $this->makeDiff( $values['object_id'], $values['info']['metadata']['parent_id'], $values[ 'revision_id' ] );
 		$values['info'] = serialize( $values['info'] );
 
-		$class = EntityChange::class;
 		if ( $values['type'] === 'wikibase-item~add' || $values['type'] === 'wikibase-item~update' ) {
-			$class = ItemChange::class;
+			$change = new ItemChange( $values );
+		} else {
+			$change = new EntityChange( $values );
 		}
 
-		$change = new $class( $values );
 		$change->setDiff( $diff );
 
 		return $change;
