@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_5571430a",
+        "filename": "view/tests/phpunit/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-17T14:49:06Z",
+      "side": 1,
+      "message": "Bad name: this does not return an Entity. It returns a list of pairs.\nHow about provideEntityAndAliases?",
+      "revId": "36eb9bc9991248c47744137024bb0a577f6fd2f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
