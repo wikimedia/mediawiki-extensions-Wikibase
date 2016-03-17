@@ -221,7 +221,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return SnakFormatter
+	 * @return OutputFormatSnakFormatterFactory
 	 */
 	private function getSnakFormatterFactory() {
 		$snakFormatter = $this->getMockBuilder( SnakFormatter::class )
