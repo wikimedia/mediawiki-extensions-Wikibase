@@ -33,10 +33,10 @@ use Wikibase\View\Template\TemplateFactory;
 class PropertyViewTest extends EntityViewTest {
 
 	/**
-	 * @param EntityId $id
+	 * @param EntityId|PropertyId $id
 	 * @param Statement[] $statements
 	 *
-	 * @return EntityDocument
+	 * @return Property
 	 */
 	protected function makeEntity( EntityId $id, array $statements = array() ) {
 		$property = Property::newFromType( 'string' );
@@ -55,7 +55,7 @@ class PropertyViewTest extends EntityViewTest {
 	 *
 	 * @param int|string $n
 	 *
-	 * @return EntityId
+	 * @return PropertyId
 	 */
 	protected function makeEntityId( $n ) {
 		return new PropertyId( "P$n" );

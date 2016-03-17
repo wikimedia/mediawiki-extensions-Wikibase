@@ -163,7 +163,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array[]|null $usages
+	 * @param EntityUsage[]|null $usages
 	 * @param string $timestamp
 	 *
 	 * @return ParserOutput

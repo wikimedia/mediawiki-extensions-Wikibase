@@ -5,6 +5,7 @@ namespace Wikibase\View\Tests;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\ItemView;
@@ -30,6 +31,12 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class ItemViewTest extends EntityViewTest {
 
+	/**
+	 * @param EntityId|ItemId $id
+	 * @param Statement[] $statements
+	 *
+	 * @return Item
+	 */
 	protected function makeEntity( EntityId $id, array $statements = array() ) {
 		$item = new Item( $id );
 
@@ -46,7 +53,7 @@ class ItemViewTest extends EntityViewTest {
 	 *
 	 * @param int|string $n
 	 *
-	 * @return EntityId
+	 * @return ItemId
 	 */
 	protected function makeEntityId( $n ) {
 		return new ItemId( "Q$n" );
