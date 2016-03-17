@@ -5,6 +5,7 @@ namespace Wikibase\View\Tests;
 use MediaWikiLangTestCase;
 use MessageCache;
 use Title;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\LanguageNameLookup;
@@ -222,9 +223,12 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 			->method( 'getLocalURL' )
 			->will( $this->returnValue( '<LOCALURL>' ) );
 
-		$fingerprint = $this->getFingerprint();
+		$item = new Item(
+			new ItemId( 'Q1' ),
+			$this->getFingerprint()
+		);
 		$view = $this->getEntityTermsView( 0, 1 );
-		$html = $view->getEntityTermsForLanguageListView( $fingerprint, array( 'en' ), $title );
+		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, array( 'en' ), $title );
 
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );
@@ -241,21 +245,43 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
 	}
 
+	public function testGetEntityTermsForLanguageListView_newEntity() {
+		$item = new Item(
+			null,
+			new Fingerprint()
+		);
+		$view = $this->getEntityTermsView( 0, 1 );
+		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, [ 'en' ] );
+
+		$this->assertContains( 'wb-empty', $html );
+		$this->assertContains( '(wikibase-label-empty)', $html );
+		$this->assertContains( '(wikibase-description-empty)', $html );
+		$this->assertNotContains( '(wikibase-aliases-empty)', $html );
+	}
+
 	public function testGetEntityTermsForLanguageListView_isEscaped() {
 		MessageCache::singleton()->enable();
 		$this->setUserLang( 'en' );
 		$this->insertPage( 'MediaWiki:wikibase-entitytermsforlanguagelistview-language', "''RAW''" );
 
+		$item = new Item(
+			new ItemId( 'Q1' ),
+			new Fingerprint()
+		);
 		$view = $this->getEntityTermsView();
-		$html = $view->getEntityTermsForLanguageListView( new Fingerprint(), array() );
+		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, [] );
 
 		$this->assertContains( '&#039;&#039;RAW&#039;&#039;', $html );
 		$this->assertNotContains( "'RAW'", $html );
 	}
 
 	public function testGetEntityTermsForLanguageListView_isMarkedAsEmpty() {
+		$item = new Item(
+			new ItemId( 'Q1' ),
+			new Fingerprint()
+		);
 		$view = $this->getEntityTermsView( 0, 1 );
-		$html = $view->getEntityTermsForLanguageListView( new Fingerprint(), array( 'en' ) );
+		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, [ 'en' ] );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '(wikibase-label-empty)', $html );

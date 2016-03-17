@@ -55,6 +55,11 @@ class OutputPageBeforeHTMLHookHandler {
 	private $languageNameLookup;
 
 	/**
+	 * @var OutputPageEntityIdReader
+	 */
+	private $outputPageEntityIdReader;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
@@ -68,7 +73,8 @@ class OutputPageBeforeHTMLHookHandler {
 		ContentLanguages $termsLanguages,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
-		LanguageNameLookup $languageNameLookup
+		LanguageNameLookup $languageNameLookup,
+		OutputPageEntityIdReader $outputPageEntityIdReader
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -76,6 +82,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 	}
 
 	/**
@@ -93,7 +100,11 @@ class OutputPageBeforeHTMLHookHandler {
 			$wikibaseRepo->getTermsLanguages(),
 			$entityIdParser,
 			$wikibaseRepo->getEntityRevisionLookup(),
-			new LanguageNameLookup( $wgLang->getCode() )
+			new LanguageNameLookup( $wgLang->getCode() ),
+			new OutputPageEntityIdReader(
+				$wikibaseRepo->getEntityContentFactory(),
+				$wikibaseRepo->getEntityIdParser()
+			)
 		);
 	}
 
@@ -147,13 +158,23 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @return EntityViewPlaceholderExpander
 	 */
 	private function getEntityViewPlaceholderExpander( OutputPage $out ) {
+
+		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
+		$revisionId = $out->getRevisionId();
+		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
+		$labelsProvider = $entity;
+		$descriptionsProvider = $entity;
+		$aliasesProvider = $entity;
+
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
 			$out->getTitle(),
 			$out->getUser(),
 			$out->getLanguage(),
 			$this->entityIdParser,
-			$this->entityRevisionLookup,
+			$labelsProvider,
+			$descriptionsProvider,
+			$aliasesProvider,
 			$this->userLanguageLookup,
 			$this->termsLanguages,
 			$this->languageNameLookup

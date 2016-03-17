@@ -8,12 +8,11 @@ use MWException;
 use RuntimeException;
 use Title;
 use User;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -56,14 +55,19 @@ class EntityViewPlaceholderExpander {
 	private $uiLanguage;
 
 	/**
-	 * @var EntityIdParser
+	 * @var LabelsProvider
 	 */
-	private $entityIdParser;
+	private $labelsProvider;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var DescriptionsProvider
 	 */
-	private $entityRevisionLookup;
+	private $descriptionsProvider;
+
+	/**
+	 * @var AliasesProvider
+	 */
+	private $aliasesProvider;
 
 	/**
 	 * @var UserLanguageLookup
@@ -91,7 +95,9 @@ class EntityViewPlaceholderExpander {
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
 	 * @param EntityIdParser $entityIdParser
-	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param LabelsProvider $labelsProvider
+	 * @param DescriptionsProvider $descriptionsProvider
+	 * @param AliasesProvider $aliasesProvider
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
@@ -101,8 +107,10 @@ class EntityViewPlaceholderExpander {
 		Title $targetPage,
 		User $user,
 		Language $uiLanguage,
-		EntityIdParser $entityIdParser,
-		EntityRevisionLookup $entityRevisionLookup,
+		$entityIdParser,
+		LabelsProvider $labelsProvider,
+		DescriptionsProvider $descriptionsProvider,
+		AliasesProvider $aliasesProvider,
 		UserLanguageLookup $userLanguageLookup,
 		ContentLanguages $termsLanguages,
 		LanguageNameLookup $languageNameLookup
@@ -110,8 +118,9 @@ class EntityViewPlaceholderExpander {
 		$this->targetPage = $targetPage;
 		$this->user = $user;
 		$this->uiLanguage = $uiLanguage;
-		$this->entityIdParser = $entityIdParser;
-		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->labelsProvider = $labelsProvider;
+		$this->descriptionsProvider = $descriptionsProvider;
+		$this->aliasesProvider = $aliasesProvider;
 		$this->userLanguageLookup = $userLanguageLookup;
 		$this->templateFactory = $templateFactory;
 		$this->termsLanguages = $termsLanguages;
@@ -174,24 +183,6 @@ class EntityViewPlaceholderExpander {
 	}
 
 	/**
-	 * Gets an EntityId object from a string (with error handling)
-	 *
-	 * @param string $entityId
-	 *
-	 * @return EntityId
-	 * @throws InvalidArgumentException
-	 */
-	private function getEntityIdFromString( $entityId ) {
-		if ( !is_string( $entityId ) ) {
-			throw new InvalidArgumentException(
-				'The first argument must be an entity ID encoded as a string'
-			);
-		}
-
-		return $this->entityIdParser->parse( $entityId );
-	}
-
-	/**
 	 * Dispatch the expansion of placeholders based on the name.
 	 *
 	 * @note This encodes knowledge about which placeholders are used by EntityView with what
@@ -205,11 +196,7 @@ class EntityViewPlaceholderExpander {
 	protected function expandPlaceholder( $name, array $args ) {
 		switch ( $name ) {
 			case 'termbox':
-				$entityId = $this->getEntityIdFromString( $args[0] );
-				return $this->renderTermBox(
-					$entityId,
-					isset( $args[1] ) ? (int)$args[1] : 0
-				);
+				return $this->renderTermBox();
 			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
 				return $this->isInitiallyCollapsed() ? 'wikibase-initially-collapsed' : '';
 			default:
@@ -233,32 +220,14 @@ class EntityViewPlaceholderExpander {
 	/**
 	 * Generates HTML of the term box, to be injected into the entity page.
 	 *
-	 * @param EntityId $entityId
-	 * @param int $revisionId
-	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	public function renderTermBox( EntityId $entityId, $revisionId ) {
+	public function renderTermBox() {
 		$languages = array_merge(
 			array( $this->uiLanguage->getCode() ),
 			$this->getExtraUserLanguages()
 		);
-
-		try {
-			// we may want to cache this...
-			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
-		} catch ( StorageException $ex ) {
-			// Could not load entity revision, $revisionId might be a deleted revision
-			return '';
-		}
-
-		if ( !$entityRev ) {
-			// Could not load entity revision, entity might not exist for $entityId.
-			return '';
-		}
-
-		$entity = $entityRev->getEntity();
 
 		$entityTermsView = new EntityTermsView(
 			$this->templateFactory,
@@ -267,9 +236,10 @@ class EntityViewPlaceholderExpander {
 			$this->uiLanguage->getCode()
 		);
 
-		// FIXME: assumes all entities have a fingerprint
 		$html = $entityTermsView->getEntityTermsForLanguageListView(
-			$entity->getFingerprint(),
+			$this->labelsProvider,
+			$this->descriptionsProvider,
+			$this->aliasesProvider,
 			$languages,
 			$this->targetPage
 		);
