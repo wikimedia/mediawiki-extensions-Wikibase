@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_35d47fbe",
+        "filename": "client/includes/DataAccess/Scribunto/SnakSerializationRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-17T14:58:37Z",
+      "side": 1,
+      "message": "We would need a way to check that the Serializers we get actually return the right kind of object. If we don\u0027t use specialized interfaces for this, the Serializer interface would need to provide a method like isDeserializerFor( $className )",
+      "revId": "9e5c1ef486116dc3e90c6b59002536f6789acb44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_f5d217d4",
+        "filename": "client/includes/DataAccess/Scribunto/SnakSerializationRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-17T14:58:37Z",
+      "side": 1,
+      "message": "Here we assume that whjat the deserializer returns is a Snak.",
+      "revId": "9e5c1ef486116dc3e90c6b59002536f6789acb44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_15ce9b31",
+        "filename": "client/includes/DataAccess/Scribunto/SnakSerializationRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-17T14:58:37Z",
+      "side": 1,
+      "message": "This will fail hard if $snak is not a Snak.",
+      "revId": "9e5c1ef486116dc3e90c6b59002536f6789acb44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_754f27c1",
+        "filename": "client/includes/DataAccess/Scribunto/SnakSerializationRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-17T14:58:37Z",
+      "side": 1,
+      "message": "Here we assume that what the deserializer returns is a SnakList",
+      "revId": "9e5c1ef486116dc3e90c6b59002536f6789acb44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_d5c39308",
+        "filename": "client/includes/DataAccess/Scribunto/SnakSerializationRenderer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-17T14:58:37Z",
+      "side": 1,
+      "message": "This fails hard if the above assumption was incorrect.",
+      "revId": "9e5c1ef486116dc3e90c6b59002536f6789acb44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
