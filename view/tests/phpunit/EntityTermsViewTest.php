@@ -289,4 +289,32 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$this->assertNotContains( '(wikibase-aliases-empty)', $html );
 	}
 
+	public function testGetEntityTermsForLanguageListView_noAliasesProvider() {
+		$title = $this->getMock( Title::class );
+		$title->expects( $this->once() )
+			->method( 'getLocalURL' )
+			->will( $this->returnValue( '<LOCALURL>' ) );
+
+		$item = new Item(
+			new ItemId( 'Q1' ),
+			$this->getFingerprint()
+		);
+		$view = $this->getEntityTermsView( 0, 1 );
+		$html = $view->getEntityTermsForLanguageListView( $item, $item, null, array( 'en' ), $title );
+
+		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
+		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );
+		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-description)', $html );
+		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-aliases)', $html );
+
+		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
+		$this->assertContains( '&lt;LOCALURL&gt;', $html );
+		$this->assertContains( '&lt;LANGUAGENAME-en&gt;', $html );
+		$this->assertContains( '&lt;LABEL&gt;', $html );
+		$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
+		$this->assertNotContains( '&lt;ALIAS1&gt;', $html );
+		$this->assertNotContains( '&lt;ALIAS2&gt;', $html );
+		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
+	}
+
 }

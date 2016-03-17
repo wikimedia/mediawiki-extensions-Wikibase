@@ -9,6 +9,7 @@ use User;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\UserLanguageLookup;
@@ -35,10 +36,11 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	 * @param User $user
 	 * @param Item $item
 	 * @param ItemId $itemId
+	 * @param AliasesProvider|null $aliasesProvider
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function newExpander( User $user, Item $item, ItemId $itemId ) {
+	private function newExpander( User $user, Item $item, ItemId $itemId, AliasesProvider $aliasesProvider = null ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
 		$title = $this->getMockBuilder( Title::class )
@@ -69,14 +71,14 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 			$idParser,
 			$item,
 			$item,
-			$item,
+			$aliasesProvider,
 			$userLanguages,
 			new MediaWikiContentLanguages(),
 			$languageNameLookup
 		);
 	}
 
-	private function getItem() {
+	public function provideEntityAndAliases() {
 		$item = new Item( new ItemId( 'Q23' ) );
 
 		$item->setLabel( 'en', 'Moskow' );
@@ -84,7 +86,16 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 
 		$item->setDescription( 'de', 'Hauptstadt Russlands' );
 
-		return $item;
+		return [
+			[
+				$item,
+				$item
+			],
+			[
+				$item,
+				null
+			]
+		];
 	}
 
 	/**
@@ -106,17 +117,21 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 		return $user;
 	}
 
-	public function testGetHtmlForPlaceholder() {
-		$item = $this->getItem();
-		$expander = $this->newExpander( $this->newUser(), $item, $item->getId() );
+	/**
+	 * @dataProvider provideEntityAndAliases
+	 */
+	public function testGetHtmlForPlaceholder( Item $item, AliasesProvider $aliasesProvider = null ) {
+		$expander = $this->newExpander( $this->newUser(), $item, $item->getId(), $aliasesProvider );
 
 		$html = $expander->getHtmlForPlaceholder( 'termbox', 'Q23' );
 		$this->assertInternalType( 'string', $html );
 	}
 
-	public function testRenderTermBox() {
-		$item = $this->getItem();
-		$expander = $this->newExpander( $this->newUser(), $item, $item->getId() );
+	/**
+	 * @dataProvider provideEntityAndAliases
+	 */
+	public function testRenderTermBox( Item $item, AliasesProvider $aliasesProvider = null ) {
+		$expander = $this->newExpander( $this->newUser(), $item, $item->getId(), $aliasesProvider );
 
 		// According to the mock objects, this should generate a term box for
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
@@ -132,14 +147,16 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 		$this->assertContains( 'wikibase-entitytermsforlanguageview-ru', $html );
 	}
 
-	public function testGetExtraUserLanguages() {
-		$item = $this->getItem();
+	/**
+	 * @dataProvider provideEntityAndAliases
+	 */
+	public function testGetExtraUserLanguage( Item $item, AliasesProvider $aliasesProvider = null ) {
 		$itemId = $item->getId();
 
-		$expander = $this->newExpander( $this->newUser( true ), $item, $itemId );
+		$expander = $this->newExpander( $this->newUser( true ), $item, $itemId, $aliasesProvider );
 		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages() );
 
-		$expander = $this->newExpander( $this->newUser(), $item, $itemId );
+		$expander = $this->newExpander( $this->newUser(), $item, $itemId, $aliasesProvider );
 		$this->assertArrayEquals( array( 'de', 'ru' ), $expander->getExtraUserLanguages() );
 	}
 
