@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_7530c7fc",
+        "filename": "repo/tests/phpunit/includes/Diff/EntityContentDiffViewTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-17T15:07:46Z",
+      "side": 1,
+      "message": "Title::newFromText puts stuff into the caches. If we clear the caches now, and then access the Title, it will have to do more work, and then will again put stuff into caches.\n\nShouldn\u0027t we reather clear the caches *before* we do Title::newFromText? Or after we are done testing?",
+      "revId": "cb1f096160338ae25fbe3430c2c8822ba7e8e2fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
