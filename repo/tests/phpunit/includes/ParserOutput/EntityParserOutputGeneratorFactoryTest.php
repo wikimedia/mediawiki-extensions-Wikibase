@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use Language;
-use ParserOptions;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\WikibaseRepo;
 

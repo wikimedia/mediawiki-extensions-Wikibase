@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Summary;
 

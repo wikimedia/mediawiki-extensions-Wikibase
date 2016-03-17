@@ -3,7 +3,6 @@
 namespace Wikibase\View\Tests;
 
 use InvalidArgumentException;
-use Language;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;

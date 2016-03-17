@@ -2,7 +2,6 @@
 
 namespace Wikibase\View\Tests;
 
-use Language;
 use MediaWikiTestCase;
 use Site;
 use SiteList;

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use Language;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
