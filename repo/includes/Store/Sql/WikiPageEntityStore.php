@@ -44,6 +44,11 @@ class WikiPageEntityStore implements EntityStore {
 	private $idGenerator;
 
 	/**
+	 * @var GenericEventDispatcher
+	 */
+	private $dispatcher;
+
+	/**
 	 * @param EntityContentFactory $contentFactory
 	 * @param IdGenerator $idGenerator
 	 */
