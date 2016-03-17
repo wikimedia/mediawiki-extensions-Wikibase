@@ -104,10 +104,6 @@
 						self.calendarRotator.rotator.activate();
 					}
 				),
-				new vv.ExpertExtender.Toggler(
-					this._messageProvider,
-					$precisionContainer.add( $calendarContainer )
-				),
 				new vv.ExpertExtender.Container(
 					$precisionContainer,
 					this.precisionRotator
