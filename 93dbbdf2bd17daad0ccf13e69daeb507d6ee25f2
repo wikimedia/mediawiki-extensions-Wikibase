@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_9a7ad81d",
+        "filename": "repo/includes/Api/EditEntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-03-17T10:53:21Z",
+      "side": 1,
+      "message": "Naming clash with existing \"EntityHandler\"",
+      "revId": "93dbbdf2bd17daad0ccf13e69daeb507d6ee25f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
