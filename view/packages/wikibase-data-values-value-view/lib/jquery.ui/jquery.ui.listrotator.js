@@ -126,28 +126,12 @@ $.widget( 'ui.listrotator', {
 	$auto: null,
 
 	/**
-	 * Node of the previous list item section.
-	 * @property {jQuery}
-	 * @protected
-	 * @readonly
-	 */
-	$prev: null,
-
-	/**
 	 * Node of the current list item section.
 	 * @property {jQuery}
 	 * @protected
 	 * @readonly
 	 */
 	$curr: null,
-
-	/**
-	 * Node of the next list item section.
-	 * @property {jQuery}
-	 * @protected
-	 * @readonly
-	 */
-	$next: null,
 
 	/**
 	 * Node of the menu opening when clicking on the "current" section.
@@ -164,13 +148,7 @@ $.widget( 'ui.listrotator', {
 	 * @throws {Error} if no values are supplied.
 	 */
 	_create: function() {
-		var self = this,
-			iconClasses = ['ui-icon ui-icon-triangle-1-w', 'ui-icon ui-icon-triangle-1-e'];
-
-		// Flip triangle arrows in rtl context:
-		if ( this._isRtl() ) {
-			iconClasses.reverse();
-		}
+		var self = this;
 
 		if ( this.options.values.length === 0 ) {
 			throw new Error( 'List of values required to initialize list rotator.' );
@@ -199,20 +177,10 @@ $.widget( 'ui.listrotator', {
 		} )
 		.append( $( '<span/>' ).addClass( 'ui-icon ui-icon-triangle-1-s' ) );
 
-		this.$prev = this._createSection( 'prev', function( event ) {
-			self.prev();
-		} )
-		.append( $( '<span/>' ).addClass( iconClasses[0] ) );
-
-		this.$next = this._createSection( 'next', function( event ) {
-			self.next();
-		} )
-		.append( $( '<span/>' ).addClass( iconClasses[1] ) );
-
 		if ( this.$auto ) {
 			this.element.append( this.$auto );
 		}
-		this.element.append( this.$prev ).append( this.$curr ).append( this.$next );
+		this.element.append( this.$curr );
 
 		// Construct and initialize menu widget:
 		this._createMenu();
@@ -255,8 +223,6 @@ $.widget( 'ui.listrotator', {
 		this.$menu.remove();
 		this.$auto.remove();
 		this.$curr.remove();
-		this.$prev.remove();
-		this.$next.remove();
 
 		this.element.removeClass( this.widgetBaseClass + ' ui-widget-content' );
 
@@ -275,16 +241,13 @@ $.widget( 'ui.listrotator', {
 		// Determine the maximum width a label may have and apply that width to each section:
 		var currentLabel = this.$curr.children( '.' + this.widgetBaseClass + '-label' ).text(),
 			labels = [],
-			stringWidths = [],
-			currMaxWidth = 0,
-			prevMaxWidth = 0,
-			nextMaxWidth = 0;
+			currMaxWidth = 0;
 
 		$.each( this.options.values, function( i, v ) {
 			labels.push( v.label );
 		} );
 
-		stringWidths = measureMaximumStringWidths(
+		var stringWidths = measureMaximumStringWidths(
 			this.$curr.children( '.' + this.widgetBaseClass + '-label' ),
 			labels
 		);
@@ -292,19 +255,9 @@ $.widget( 'ui.listrotator', {
 			if ( width > currMaxWidth ) {
 				currMaxWidth = width;
 			}
-			if ( i < stringWidths.length && width > prevMaxWidth ) {
-				prevMaxWidth = width;
-			}
-			if ( i > 0 && width > nextMaxWidth ) {
-				nextMaxWidth = width;
-			}
 		} );
 
 		this.$curr.children( '.' + this.widgetBaseClass + '-label' ).width( currMaxWidth );
-		// The "previous" section will not be filled with the last string while the "next"
-		// section will never be filled with the first string.
-		this.$prev.children( '.' + this.widgetBaseClass + '-label' ).width( prevMaxWidth );
-		this.$next.children( '.' + this.widgetBaseClass + '-label' ).width( nextMaxWidth );
 
 		// Make menu width comply to the "current" section:
 		var menuSpacing = this.$menu.outerWidth() - this.$menu.width();
@@ -394,8 +347,7 @@ $.widget( 'ui.listrotator', {
 		var values = this.options.values,
 			index = 0;
 
-		this.$prev.add( this.$curr ).add( this.$next )
-		.children( '.' + this.widgetBaseClass + '-label' ).empty();
+		this.$curr.children( '.' + this.widgetBaseClass + '-label' ).empty();
 
 		// Retrieve the index of the new value within the list of predefined values:
 		$.each( values, function( i, v ) {
@@ -410,25 +362,6 @@ $.widget( 'ui.listrotator', {
 		.data( 'value', values[index].value )
 		.children( '.' + this.widgetBaseClass + '-label' )
 		.text( values[index].label );
-
-		if ( index > 0 ) {
-			this.$prev
-			.data( 'value', values[index - 1].value )
-			.children( '.' + this.widgetBaseClass + '-label' )
-			.text( values[index - 1].label );
-		}
-
-		if ( index < values.length - 1 ) {
-			this.$next
-			.data( 'value', values[index + 1].value )
-			.children( '.' + this.widgetBaseClass + '-label' )
-			.text( values[index + 1].label );
-		}
-
-		// Hide "previous"/"$next" section when the new value is at the end of the list the
-		// predefined values:
-		this.$prev.css( 'visibility', ( index === 0 ) ? 'hidden' : 'visible' );
-		this.$next.css( 'visibility', ( index === values.length - 1 ) ? 'hidden' : 'visible' );
 
 		// Alter menu item states:
 		this.$menu.children( 'li' ).each( function( i, li ) {
@@ -461,34 +394,6 @@ $.widget( 'ui.listrotator', {
 		} );
 
 		this._trigger( 'selected', null, [ this.value( newValue ) ] );
-	},
-
-	/**
-	 * Rotates the widget to the next value.
-	 */
-	next: function() {
-		this._setValue( this.$next.data( 'value' ) );
-		this.activate();
-	},
-
-	/**
-	 * Rotates the widget to the previous value.
-	 */
-	prev: function() {
-		this._setValue( this.$prev.data( 'value' ) );
-		this.activate();
-	},
-
-	/**
-	 * Returns whether in RTL context.
-	 * @protected
-	 *
-	 * @return {boolean}
-	 */
-	_isRtl: function() {
-		return ( $.isFunction( this.options.isRtl ) )
-			? this.options.isRtl()
-			: this.options.isRtl;
 	},
 
 	/**
@@ -562,16 +467,14 @@ $.widget( 'ui.listrotator', {
 	 * Disables the widget.
 	 */
 	disable: function() {
-		this.$prev.add( this.$curr ).add( this.$next )
-		.addClass( 'ui-state-disabled' );
+		this.$curr.addClass( 'ui-state-disabled' );
 	},
 
 	/**
 	 * Enables the widget.
 	 */
 	enable: function() {
-		this.$prev.add( this.$curr ).add( this.$next )
-		.removeClass( 'ui-state-disabled' );
+		this.$curr.removeClass( 'ui-state-disabled' );
 	}
 
 } );
