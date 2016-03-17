@@ -8,6 +8,8 @@ use Wikimedia\Purtle\N3Quoter;
 /**
  * @covers Wikimedia\Purtle\N3Quoter
  *
+ * @uses Wikimedia\Purtle\UnicodeEscaper
+ *
  * @group Purtle
  *
  * @license GPL-2.0+
