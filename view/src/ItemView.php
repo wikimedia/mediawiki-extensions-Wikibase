@@ -105,7 +105,7 @@ class ItemView extends EntityView {
 	 */
 	protected function getHtmlForSiteLinks( Item $item ) {
 		return $this->siteLinksView->getHtml(
-			$item->getSiteLinks(),
+			$item->getSiteLinkList()->toArray(),
 			$item->getId(),
 			$this->siteLinkGroups
 		);

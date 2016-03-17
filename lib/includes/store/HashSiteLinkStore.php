@@ -143,7 +143,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 
 		$this->deleteLinksOfItem( $itemId );
 
-		foreach ( $item->getSiteLinks() as $siteLink ) {
+		foreach ( $item->getSiteLinkList() as $siteLink ) {
 			$this->indexByLink( $itemId, $siteLink );
 			$this->indexByItemId( $itemId, $siteLink );
 		}

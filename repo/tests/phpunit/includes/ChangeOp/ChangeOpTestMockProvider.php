@@ -475,7 +475,7 @@ class ChangeOpTestMockProvider {
 	public function getSiteLinkConflictsForItem( Item $item ) {
 		$conflicts = array();
 
-		foreach ( $item->getSiteLinks() as $link ) {
+		foreach ( $item->getSiteLinkList()->toArray() as $link ) {
 			$page = $link->getPageName();
 			$site = $link->getSiteId();
 
