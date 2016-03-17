@@ -106,11 +106,11 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 
 		$redirectContent = ItemContent::newFromRedirect(
 			$redirect,
-			Title::newFromText( $redirect->getEntityId()->getSerialization() )
+			$this->getMock( Title::class )
 		);
 		$redirectContent2 = ItemContent::newFromRedirect(
 			$redirect2,
-			Title::newFromText( $redirect2->getEntityId()->getSerialization() )
+			$this->getMock( Title::class )
 		);
 
 		return array(
