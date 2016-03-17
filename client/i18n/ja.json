@@ -67,7 +67,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目 ID",
 	"wikibase-pageinfo-entity-id-none": "なし",
 	"wikibase-property-render-error": "プロパティ $1 のレンダリングに失敗しました: $2",
-	"wikibase-otherprojects": "他のプロジェクトにおいて",
+	"wikibase-otherprojects": "他のプロジェクト",
 	"wikibase-otherprojects-beta-message": "サイドバーに他のプロジェクト",
 	"wikibase-otherprojects-beta-description": "サイドバーに他のウィキメディアプロジェクトへのリンクを {{WBREPONAME}} データに基づいて提供する「{{int:wikibase-otherprojects}}」セクションを追加する。"
 }

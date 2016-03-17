@@ -5,7 +5,8 @@
 			"Bill william compton",
 			"Siddhartha Ghai",
 			"बिप्लब आनन्द",
-			"NehalDaveND"
+			"NehalDaveND",
+			"Sfic"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस एक्सटेंशन के लिए क्लाइन्ट",
@@ -47,5 +48,5 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} परिवर्तन्",
 	"wikibase-unconnectedpages-submit": "जाएँ",
 	"wikibase-pageinfo-entity-id-none": "कुछ नहीं",
-	"wikibase-otherprojects": "अन्य परियोजनाएँ"
+	"wikibase-otherprojects": "अन्य परियोजनाओं में"
 }

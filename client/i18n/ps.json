@@ -36,7 +36,7 @@
 	"wikibase-pageswithbadges-submit": "مخونه ښکاره کول",
 	"wikibase-pageinfo-entity-id": "د {{WBREPONAME}} توکي پېژند",
 	"wikibase-pageinfo-entity-id-none": "هېڅ",
-	"wikibase-otherprojects": "نورې پروژې",
+	"wikibase-otherprojects": "په نورو پروژو کې",
 	"wikibase-otherprojects-beta-message": "د نورو پروژو څنگپټه",
 	"wikibase-otherprojects-beta-description": "د \"{{int:wikibase-otherprojects}}\" يوه برخه څنگپټې کې ورگډوي چې د ويکيمېډيا د نورو پروژو سره تړنې د {{WBREPONAME}} اومتوک پر بنسټ وربرابروي."
 }

@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Huuchin"
+		]
+	},
+	"tooltip-t-wikibase": "То-дигин хадһллң холвсн махбуд тал заалһ",
+	"wikibase-comment-update": "{{WBREPONAME}} махбуд сольгдсн",
+	"wikibase-dataitem": "{{WBREPONAME}} махбуд",
+	"wikibase-editlinks": "Заалһс ясх",
+	"wikibase-editlinkstitle": "Келд дундк заалһ ясх",
+	"wikibase-rc-wikibase-edit-letter": "Ө",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ясвр"
+}

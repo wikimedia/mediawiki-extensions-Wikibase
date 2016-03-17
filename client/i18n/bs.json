@@ -57,7 +57,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} stavka ID",
 	"wikibase-pageinfo-entity-id-none": "Ništa",
 	"wikibase-property-render-error": "Neizvršeno izražavanje osobine $1: $2",
-	"wikibase-otherprojects": "Drugi projekti",
+	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Drugi projekti na bočnoj traci",
 	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s linkovima na ostale Wikimedijine projekte na osnovu podataka s projekta {{WBREPONAME}}."
 }

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Snævar"
+			"Snævar",
+			"Sveinn í Felli"
 		]
 	},
 	"wikibase-client-desc": "Biðlari fyrir Wikibase viðbótina",
@@ -65,7 +66,7 @@
 	"wikibase-pageinfo-entity-id": "Auðkenni {{WBREPONAME}} hluts",
 	"wikibase-pageinfo-entity-id-none": "Enginn",
 	"wikibase-property-render-error": "Mistókst að ganga frá eiginleikanum $1: $2",
-	"wikibase-otherprojects": "Önnur verkefni",
+	"wikibase-otherprojects": "Í öðrum verkefnum",
 	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna",
 	"wikibase-otherprojects-beta-description": "Bætir við \"{{int:wikibase-otherprojects}}\" fyrirsögn í hliðarstikuna með tenglum á önnur Wikimedia verkefni, byggt á gögnum {{WBREPONAME}}."
 }

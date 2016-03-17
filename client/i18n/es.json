@@ -14,7 +14,8 @@
 			"Vivaelcelta",
 			"Themasterriot",
 			"Macofe",
-			"Idontknow"
+			"Idontknow",
+			"Matiia"
 		]
 	},
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
@@ -58,7 +59,7 @@
 	"wikibase-linkitem-confirmitem-button": "Confirmar",
 	"wikibase-linkitem-not-loggedin-title": "Debes iniciar sesión",
 	"wikibase-linkitem-not-loggedin": "Debes iniciar sesión en esta wiki y en el [$1 repositorio central de datos] para usar esta función.",
-	"wikibase-linkitem-success-link": "Se han enlazado las páginas correctamente. Puedes encontrar el elemento que contiene los enlaces en nuestro [$1 depósito central de datos].",
+	"wikibase-linkitem-success-link": "Se han enlazado las páginas. Puedes encontrar el elemento que contiene los enlaces en nuestro [$1 depósito central de datos].",
 	"wikibase-limitreport-entities-accessed": "Número de entidades Wikibase cargadas",
 	"wikibase-property-notfound": "No se encontró la propiedad «$1».",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
