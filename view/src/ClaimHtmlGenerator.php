@@ -9,7 +9,6 @@ use Wikibase\DataModel\Services\ByPropertyIdGrouper;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\StatementRankSerializer;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -51,7 +50,7 @@ class ClaimHtmlGenerator {
 	/**
 	 * @var string[]
 	 */
-	private $statementRankText = array();
+	private $statementRankSelector = array();
 
 	/**
 	 * @param TemplateFactory $templateFactory
@@ -84,17 +83,7 @@ class ClaimHtmlGenerator {
 			false
 		);
 
-		$statementRankSerializer = new StatementRankSerializer();
-		$serializedRank = $statementRankSerializer->serialize( $statement->getRank() );
-
-		// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
-		// wikibase-statementview-rank-deprecated
-		$rankHtml = $this->templateFactory->render(
-			'wikibase-rankselector',
-			'ui-state-disabled',
-			'wikibase-rankselector-' . $serializedRank,
-			$this->getStatementRankText( $serializedRank )
-		);
+		$rankHtml = $this->getRankSelector( $statement->getRank() );
 
 		$referencesHeading = $this->getReferencesHeading( $statement );
 
@@ -227,17 +216,30 @@ class ClaimHtmlGenerator {
 	}
 
 	/**
-	 * @param string $serializedRank
+	 * @param int $rank
 	 *
 	 * @return string Text
 	 */
-	private function getStatementRankText( $serializedRank ) {
-		if ( !array_key_exists( $serializedRank, $this->statementRankText ) ) {
-			$rankText = wfMessage( 'wikibase-statementview-rank-' . $serializedRank )->text();
-			$this->statementRankText[ $serializedRank ] = $rankText;
-		}
+	private function getRankSelector( $rank ) {
+		if ( !array_key_exists( $rank, $this->statementRankSelector ) ) {
+			$rankName = [
+				Statement::RANK_DEPRECATED => 'deprecated',
+				Statement::RANK_NORMAL => 'normal',
+				Statement::RANK_PREFERRED => 'preferred'
+			][ $rank ];
 
-		return $this->statementRankText[ $serializedRank ];
+			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
+			// wikibase-statementview-rank-deprecated
+			$rankSelector = $this->templateFactory->render(
+				'wikibase-rankselector',
+				'ui-state-disabled',
+				'wikibase-rankselector-' . $rankName,
+				wfMessage( 'wikibase-statementview-rank-' . $rankName )->escaped()
+			);
+
+			$this->statementRankSelector[ $rank ] = $rankSelector;
+		}
+		return $this->statementRankSelector[ $rank ];
 	}
 
 }
