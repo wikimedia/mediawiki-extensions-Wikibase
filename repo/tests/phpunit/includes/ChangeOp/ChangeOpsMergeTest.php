@@ -67,8 +67,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$siteLinkUniquenessValidator->expects( $this->any() )
 			->method( 'validateEntity' )
 			->will( $this->returnCallback( function( Item $item ) {
-				$siteLinks = $item->getSiteLinkList();
-				foreach ( $siteLinks as $siteLink ) {
+				foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 					if ( $siteLink->getPageName() === 'DUPE' ) {
 						return Result::newError( array( Error::newError( 'SiteLink conflict' ) ) );
 					}

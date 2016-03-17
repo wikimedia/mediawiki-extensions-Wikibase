@@ -816,7 +816,7 @@ class EditEntityActionTest extends ActionTestCase {
 		if ( isset( $expected['sitelinks'] ) ) {
 			$actual = array();
 
-			foreach ( $item->getSiteLinks() as $siteLink ) {
+			foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 				$actual[$siteLink->getSiteId()] = $siteLink->getPageName();
 			}
 
