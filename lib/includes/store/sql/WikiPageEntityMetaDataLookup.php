@@ -6,6 +6,7 @@ use DatabaseBase;
 use DBAccessBase;
 use DBQueryError;
 use ResultWrapper;
+use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -47,7 +48,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
-	 * @return array of entity id serialization => object or false if no such entity exists.
+	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
 		$rows = array();
@@ -78,7 +79,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param int $revisionId
 	 *
 	 * @throws DBQueryError
-	 * @return object|bool
+	 * @return stdClass|bool
 	 */
 	public function loadRevisionInformationByRevisionId( EntityId $entityId, $revisionId ) {
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_SLAVE );
@@ -120,7 +121,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param int $connType DB_SLAVE or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
-	 * @return object|bool a raw database row object, or false if no such entity revision exists.
+	 * @return stdClass|bool a raw database row object, or false if no such entity revision exists.
 	 */
 	private function selectRevisionInformationById( EntityId $entityId, $revisionId, $connType ) {
 		$db = $this->getConnection( $connType );
@@ -155,7 +156,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param int $connType DB_SLAVE or DB_MASTER
 	 *
 	 * @throws DBQueryError If the query fails.
-	 * @return array of entity id serialization => object or false if no such entity exists.
+	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
 		$db = $this->getConnection( $connType );
@@ -191,7 +192,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param EntityId[] $entityIds
 	 * @param ResultWrapper $res
 	 *
-	 * @return array of entity id serialization => object or false if no such entity exists.
+	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	private function indexResultByEntityId( array $entityIds, ResultWrapper $res ) {
 		$rows = array();

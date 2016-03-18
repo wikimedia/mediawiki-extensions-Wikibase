@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store;
 use DBAccessBase;
 use MWContentSerializationException;
 use Revision;
+use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -148,7 +149,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 *
 	 * @see loadEntityBlob()
 	 *
-	 * @param object $row a row object as expected Revision::getRevisionText(). That is, it
+	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
 	 * @throws MWContentSerializationException
@@ -184,7 +185,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * This calls Revision::getRevisionText to resolve any additional indirections in getting
 	 * to the actual blob data, like the "External Store" mechanism used by Wikipedia & co.
 	 *
-	 * @param object $row a row object as expected Revision::getRevisionText(). That is, it
+	 * @param stdClass $row a row object as expected Revision::getRevisionText(). That is, it
 	 *        should contain the relevant fields from the revision and/or text table.
 	 *
 	 * @throws MWContentSerializationException

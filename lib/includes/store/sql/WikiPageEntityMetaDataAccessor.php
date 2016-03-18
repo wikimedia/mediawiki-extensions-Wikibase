@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql;
 
+use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -24,7 +25,7 @@ interface WikiPageEntityMetaDataAccessor {
 	 * @param EntityId[] $entityIds
 	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
-	 * @return array of entity id serialization => object or false if no such entity exists.
+	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode );
 
@@ -37,7 +38,7 @@ interface WikiPageEntityMetaDataAccessor {
 	 * @param EntityId $entityId
 	 * @param int $revisionId Revision id to fetch data about, must be an integer greater than 0.
 	 *
-	 * @return object|bool false if no such entity exists
+	 * @return stdClass|bool false if no such entity exists
 	 */
 	public function loadRevisionInformationByRevisionId( EntityId $entityId, $revisionId );
 
