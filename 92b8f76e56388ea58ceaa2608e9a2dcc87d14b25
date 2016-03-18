@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_a03682e2",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T14:43:31Z",
+      "side": 1,
+      "message": "Isn\u0027t this just removeUsages( $pageId, $this-\u003equeryUsages( $pageId ) )?",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_800c1e3f",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T14:43:31Z",
+      "side": 1,
+      "message": "but we do?...",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_a00fa232",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T14:43:31Z",
+      "side": 1,
+      "message": "$res is the batch of row IDs. Though it should be limited to $this-\u003ebatchSize !",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_c507581e",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T14:43:31Z",
+      "side": 1,
+      "message": "We shouldn\u0027t always quit the look. Just limit $res to $this-\u003ebatchSize !",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_c02d868d",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T14:43:31Z",
+      "side": 1,
+      "message": "Seems like this could share quite a bit of code with addUsedEntities",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_8061bed2",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T14:43:31Z",
+      "side": 1,
+      "message": "Would be nice not to create it on install, then.",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

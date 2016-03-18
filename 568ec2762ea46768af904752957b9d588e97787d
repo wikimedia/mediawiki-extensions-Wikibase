@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_c016264d",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T14:43:31Z",
+      "side": 0,
+      "message": "Hm, $res could be greater than $this-\u003ebatchSize, from what I see.",
+      "revId": "568ec2762ea46768af904752957b9d588e97787d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
