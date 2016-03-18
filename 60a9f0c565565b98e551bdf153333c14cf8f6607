@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_c578f8ef",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T14:02:19Z",
+      "side": 1,
+      "message": "Ha, nice! But that requires PHP 7. We are targetting 5.5...",
+      "revId": "60a9f0c565565b98e551bdf153333c14cf8f6607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
