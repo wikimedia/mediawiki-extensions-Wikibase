@@ -16,6 +16,24 @@
       "revId": "60a9f0c565565b98e551bdf153333c14cf8f6607",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_ca948090",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-03-18T20:01:31Z",
+      "side": 1,
+      "message": "Ha, that\u0027s the only issue you have with that pile? :D I\u0027m happy to write a cleaner version, I was just hoping to get some early feedback with regard to performance and possible race conditions.",
+      "parentUuid": "ee33df1d_c578f8ef",
+      "revId": "60a9f0c565565b98e551bdf153333c14cf8f6607",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
