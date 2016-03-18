@@ -20,6 +20,7 @@ use ValueParsers\ValueParser;
  *
  * @license GPL-2.0+
  * @author Addshore
+ * @author Marius Hoch
  *
  * @todo move me to DataValues-time
  */
@@ -96,7 +97,11 @@ class MwTimeIsoParser extends StringValueParser {
 	 * @return TimeValue
 	 */
 	protected function stringParse( $value ) {
-		$reconverted = $this->reconvertOutputString( $value );
+		$reconverted = $this->reconvertOutputString( $value, $this->lang );
+		if ( $reconverted === false && $this->lang->getCode() !== 'en' ) {
+			// Also try English
+			$reconverted = $this->reconvertOutputString( $value, Language::factory( 'en' ) );
+		}
 		if ( $reconverted !== false ) {
 			return $reconverted;
 		}
@@ -114,41 +119,17 @@ class MwTimeIsoParser extends StringValueParser {
 	 * @throws RuntimeException
 	 * @return TimeValue|bool
 	 */
-	private function reconvertOutputString( $value ) {
+	private function reconvertOutputString( $value, Language $lang ) {
 		foreach ( self::$precisionMsgKeys as $precision => $msgKeysGroup ) {
 			foreach ( $msgKeysGroup as $msgKey ) {
-				// FIXME: Use the language passed in options! The only reason we are not currently
-				// doing this is due to the formatting not currently localizing. See the fix me in
-				// MwTimeIsoFormatter::getMessage.
-				// TODO: Check other translations?
-				$msgText = wfMessage( $msgKey )->inLanguage( 'en' )->text();
-				$isBceMsg = $this->isBceMsg( $msgKey );
-
-				list( $start, $end ) = explode( '$1', $msgText, 2 );
-				if ( preg_match(
-					'/^\s*'
-						. preg_quote( $start, '/' ) . '(.+?)'
-						. preg_quote( $end, '/' ) . '\s*$/i',
+				$res = $this->parseFromOutputString(
+					$lang,
 					$value,
-					$matches
-				) ) {
-					list( , $number ) = $matches;
-					return $this->parseNumber( $number, $precision, $isBceMsg );
-				}
-
-				// If the msg string ends with BCE also check for BC
-				if ( substr_compare( $end, 'BCE', -3 ) === 0 ) {
-					if ( preg_match(
-						'/^\s*'
-							. preg_quote( $start, '/' ) . '(.+?)'
-							. preg_quote( substr( $end, 0, -1 ), '/' ) . '\s*$/i',
-						$value,
-						$matches
-					) ) {
-						list( , $number ) = $matches;
-						return $this->parseNumber( $number, $precision, $isBceMsg );
-					}
-
+					$precision,
+					$msgKey
+				);
+				if ( $res !== null ) {
+					return $res;
 				}
 			}
 		}
@@ -157,15 +138,106 @@ class MwTimeIsoParser extends StringValueParser {
 	}
 
 	/**
-	 * @param string $number
+	 * @param Language $lang
+	 * @param string $value
+	 * @param int $precision
+	 * @param string $msgKey
+	 *
+	 * @return TimeValue|bool|null
+	 */
+	private function parseFromOutputString( Language $lang, $value, $precision, $msgKey ) {
+		$msgText = $lang->getMessage( $msgKey );
+		$isBceMsg = $this->isBceMsg( $msgKey );
+		$msgRegexp = $this->getRegexpFromMessageText( $msgText );
+
+		if ( preg_match(
+			'/^\s*'. $msgRegexp . '\s*$/i',
+			$value,
+			$matches
+		) ) {
+			return $this->chooseAndParseNumber(
+				$lang,
+				array_slice( $matches, 1 ),
+				$precision,
+				$isBceMsg
+			);
+		}
+
+		// If the msg string ends with BCE also check for BC
+		if ( substr_compare( $msgRegexp, 'BCE', -3 ) === 0 ) {
+			if ( preg_match(
+				'/^\s*' . substr( $msgRegexp, 0, -1 ) . '\s*$/i',
+				$value,
+				$matches
+			) ) {
+				return $this->chooseAndParseNumber(
+					$lang,
+					array_slice( $matches, 1 ),
+					$precision,
+					$isBceMsg
+				);
+			}
+
+		}
+
+		return null;
+	}
+
+	/**
+	 * Creates a regular expression snippet from a given message.
+	 * This replaces $1 with (.+?) and also expands PLURAL clauses
+	 * so that we can match for every combination of these.
+	 *
+	 * @param string $msgText
+	 * @return string
+	 */
+	private function getRegexpFromMessageText( $msgText ) {
+		// Quote regexp
+		$regex = preg_quote( $msgText, '@' );
+
+		// Expand PLURAL: Change "{{PLURAL:$1" to "(" and "}}" to ")"
+		$regex = str_replace( '\{\{PLURAL\:\$1\|', '(', $regex );
+		$regex = str_replace( '\}\}', ')', $regex );
+
+		// Make sure we match for all $1s
+		$regex = str_replace( '\$1', '(.+?)', $regex );
+
+		// Unescape the pipes
+		$regex = str_replace( '\|', '|', $regex );
+
+		return $regex;
+	}
+
+	/**
+	 * Tries to find the number from the given matches and parses it.
+	 * This naively assumes the first parseable number to be the best match.
+	 *
+	 * @param Language $lang
+	 * @param string[] $matches
 	 * @param int $precision
 	 * @param boolean $isBceMsg
 	 *
-	 * @return TimeValue
+	 * @return TimeValue|bool
 	 */
-	private function parseNumber( $number, $precision, $isBceMsg ) {
-		$number = $this->lang->parseFormattedNumber( $number );
-		$year = $number . str_repeat( '0', self::$paddedZeros[$precision] );
+	private function chooseAndParseNumber( Language $lang, $matches, $precision, $isBceMsg ) {
+		$year = null;
+		foreach ( $matches as $number ) {
+			if ( strlen( $number ) === 0 ) {
+				continue;
+			}
+			$number = $lang->parseFormattedNumber( $number );
+			$year = $number . str_repeat( '0', self::$paddedZeros[$precision] );
+
+			if ( ctype_digit( $year ) ) {
+				// IsoTimestampParser works only with digit only years (it uses \d{1,16} to match)
+				break;
+			}
+			$year = null;
+		}
+
+		if ( $year === null ) {
+			return false;
+		}
 
 		$this->setPrecision( $precision );
 
