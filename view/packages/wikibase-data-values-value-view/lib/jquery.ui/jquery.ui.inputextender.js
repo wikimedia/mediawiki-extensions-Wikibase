@@ -394,7 +394,7 @@ $.widget( 'ui.inputextender', {
 			'extensionexpansion',
 			'fadeIn',
 			{
-				duration: 150, // TODO: Fixed values can't be changed nor turned off
+				duration: 100,
 				complete: function() {
 					if ( $.isFunction( callback ) ) {
 						callback();
@@ -421,7 +421,7 @@ $.widget( 'ui.inputextender', {
 			'extensionremoval',
 			'fadeOut',
 			{
-				duration: 150, // TODO: Fixed values can't be changed nor turned off
+				duration: 100,
 				complete: function() {
 					inputExtendersWithVisibleExtension.remove( self );
 					if ( $.isFunction( callback ) ) {
