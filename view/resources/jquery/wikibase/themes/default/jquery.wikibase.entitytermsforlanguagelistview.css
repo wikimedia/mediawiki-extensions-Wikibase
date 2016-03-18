@@ -93,10 +93,10 @@
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-listview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-aliases li {
 	background: none;
 	border: 0;
-	clear: both;
+	display: block;
+	float: none;
 	margin: 0;
 	padding: 0;
-	width: 100%;
 }
 
 .wikibase-entitytermsview .wikibase-entitytermsview-entitytermsforlanguagelistview .wikibase-entitytermsforlanguageview .wikibase-entitytermsforlanguageview-language {
