@@ -34,6 +34,40 @@
       "revId": "b098dbcc81c1ddd0f25a2b82cf742ed6a5b1f17e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_e051aade",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T15:00:20Z",
+      "side": 1,
+      "message": "Maybe just don\u0027t check and let setId throw an exception?",
+      "revId": "b098dbcc81c1ddd0f25a2b82cf742ed6a5b1f17e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_c0e8e60d",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-18T15:00:20Z",
+      "side": 1,
+      "message": "Hardcoding this means this can\u0027t be used with custom entity types. Not so nice",
+      "revId": "b098dbcc81c1ddd0f25a2b82cf742ed6a5b1f17e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
