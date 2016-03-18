@@ -18,9 +18,9 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SnakDeserializerTest extends DeserializerBaseTest {
+class SnakDeserializerTest extends DispatchableDeserializerTest {
 
-	public function buildDeserializer() {
+	protected function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )

@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SnakSerializerTest extends SerializerBaseTest {
+class SnakSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
 		return new SnakSerializer( new DataValueSerializer() );
@@ -74,8 +74,8 @@ class SnakSerializerTest extends SerializerBaseTest {
 					'property' => 'P42',
 					'hash' => 'f39228cb4e94174c87e966c32b02ad93b3512fce',
 					'datavalue' => array(
+						'value' => 'hax',
 						'type' => 'string',
-						'value' => 'hax'
 					)
 				),
 				new PropertyValueSnak( 42, new StringValue( 'hax' ) )

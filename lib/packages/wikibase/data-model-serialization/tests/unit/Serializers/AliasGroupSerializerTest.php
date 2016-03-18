@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Serializers\AliasGroupSerializer;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupFallback;
@@ -13,21 +14,15 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupSerializerTest extends SerializerBaseTest {
+class AliasGroupSerializerTest extends PHPUnit_Framework_TestCase {
 
-	protected function buildSerializer() {
-		return new AliasGroupSerializer();
-	}
-
-	public function serializableProvider() {
-		return array(
-			array(
-				new AliasGroup( 'en', array() )
-			),
-			array(
-				new AliasGroup( 'de', array( 'foo', 'bar' ) )
-			)
-		);
+	/**
+	 * @dataProvider nonSerializableProvider
+	 */
+	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
+		$serializer = new AliasGroupSerializer();
+		$this->setExpectedException( 'Serializers\Exceptions\UnsupportedObjectException' );
+		$serializer->serialize( $nonSerializable );
 	}
 
 	public function nonSerializableProvider() {
@@ -42,6 +37,14 @@ class AliasGroupSerializerTest extends SerializerBaseTest {
 				new AliasGroupList()
 			)
 		);
+	}
+
+	/**
+	 * @dataProvider serializationProvider
+	 */
+	public function testSerialization( $serialization, $object ) {
+		$serializer = new AliasGroupSerializer();
+		$this->assertSame( $serialization, $serializer->serialize( $object ) );
 	}
 
 	public function serializationProvider() {

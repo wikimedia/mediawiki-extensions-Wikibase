@@ -17,7 +17,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class PropertySerializerTest extends SerializerBaseTest {
+class PropertySerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
 		$termListSerializerMock = $this->getMock( '\Serializers\Serializer' );
@@ -119,12 +119,12 @@ class PropertySerializerTest extends SerializerBaseTest {
 		$provider[] = array(
 			array(
 				'type' => 'property',
-				'id' => 'P42',
 				'datatype' => 'string',
-				'claims' => array(),
+				'id' => 'P42',
 				'labels' => array(),
 				'descriptions' => array(),
 				'aliases' => array(),
+				'claims' => array(),
 			),
 			$property
 		);
@@ -135,7 +135,6 @@ class PropertySerializerTest extends SerializerBaseTest {
 			array(
 				'type' => 'property',
 				'datatype' => 'string',
-				'claims' => array(),
 				'labels' => array(
 					'en' => array(
 						'lang' => 'en',
@@ -144,6 +143,7 @@ class PropertySerializerTest extends SerializerBaseTest {
 				),
 				'descriptions' => array(),
 				'aliases' => array(),
+				'claims' => array(),
 			),
 			$property
 		);
@@ -154,7 +154,6 @@ class PropertySerializerTest extends SerializerBaseTest {
 			array(
 				'type' => 'property',
 				'datatype' => 'string',
-				'claims' => array(),
 				'labels' => array(),
 				'descriptions' => array(
 					'en' => array(
@@ -163,6 +162,7 @@ class PropertySerializerTest extends SerializerBaseTest {
 					)
 				),
 				'aliases' => array(),
+				'claims' => array(),
 			),
 			$property
 		);
@@ -173,7 +173,6 @@ class PropertySerializerTest extends SerializerBaseTest {
 			array(
 				'type' => 'property',
 				'datatype' => 'string',
-				'claims' => array(),
 				'labels' => array(),
 				'descriptions' => array(),
 				'aliases' => array(
@@ -182,6 +181,7 @@ class PropertySerializerTest extends SerializerBaseTest {
 						'values' => array( 'foo', 'bar' )
 					)
 				),
+				'claims' => array(),
 			),
 			$property
 		);
@@ -192,6 +192,9 @@ class PropertySerializerTest extends SerializerBaseTest {
 			array(
 				'type' => 'property',
 				'datatype' => 'string',
+				'labels' => array(),
+				'descriptions' => array(),
+				'aliases' => array(),
 				'claims' => array(
 					'P42' => array(
 						array(
@@ -204,9 +207,6 @@ class PropertySerializerTest extends SerializerBaseTest {
 						)
 					)
 				),
-				'labels' => array(),
-				'descriptions' => array(),
-				'aliases' => array(),
 			),
 			$property
 		);

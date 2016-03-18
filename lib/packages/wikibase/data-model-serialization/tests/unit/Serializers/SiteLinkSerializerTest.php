@@ -12,7 +12,7 @@ use Wikibase\DataModel\SiteLink;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class SiteLinkSerializerTest extends SerializerBaseTest {
+class SiteLinkSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
 		return new SiteLinkSerializer();

@@ -2,7 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
-use Deserializers\Deserializer;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Deserializers\TermDeserializer;
 use Wikibase\DataModel\Term\Term;
 
@@ -12,17 +12,15 @@ use Wikibase\DataModel\Term\Term;
  * @licence GNU GPL v2+
  * @author Addshore
  */
-class TermDeserializerTest extends DeserializerBaseTest {
+class TermDeserializerTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return Deserializer
+	 * @dataProvider nonDeserializableProvider
 	 */
-	public function buildDeserializer() {
-		return new TermDeserializer();
-	}
-
-	public function deserializableProvider() {
-		return array( array() );
+	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
+		$deserializer = new TermDeserializer();
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$deserializer->deserialize( $nonDeserializable );
 	}
 
 	/**
@@ -51,6 +49,14 @@ class TermDeserializerTest extends DeserializerBaseTest {
 				'source' => 'de',
 			) ),
 		);
+	}
+
+	/**
+	 * @dataProvider deserializationProvider
+	 */
+	public function testDeserialization( $object, $serialization ) {
+		$deserializer = new TermDeserializer();
+		$this->assertEquals( $object, $deserializer->deserialize( $serialization ) );
 	}
 
 	/**

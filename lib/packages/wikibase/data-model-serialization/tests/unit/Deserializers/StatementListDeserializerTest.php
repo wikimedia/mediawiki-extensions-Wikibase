@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Deserializers\StatementListDeserializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -13,9 +14,9 @@ use Wikibase\DataModel\Statement\StatementList;
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class StatementListDeserializerTest extends DeserializerBaseTest {
+class StatementListDeserializerTest extends PHPUnit_Framework_TestCase {
 
-	public function buildDeserializer() {
+	private function buildDeserializer() {
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );
 
@@ -35,8 +36,13 @@ class StatementListDeserializerTest extends DeserializerBaseTest {
 		return new StatementListDeserializer( $statementDeserializerMock );
 	}
 
-	public function deserializableProvider() {
-		return array( array() );
+	/**
+	 * @dataProvider nonDeserializableProvider
+	 */
+	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
+		$deserializer = $this->buildDeserializer();
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$deserializer->deserialize( $nonDeserializable );
 	}
 
 	public function nonDeserializableProvider() {
@@ -55,6 +61,13 @@ class StatementListDeserializerTest extends DeserializerBaseTest {
 				)
 			),
 		);
+	}
+
+	/**
+	 * @dataProvider deserializationProvider
+	 */
+	public function testDeserialization( $object, $serialization ) {
+		$this->assertEquals( $object, $this->buildDeserializer()->deserialize( $serialization ) );
 	}
 
 	public function deserializationProvider() {

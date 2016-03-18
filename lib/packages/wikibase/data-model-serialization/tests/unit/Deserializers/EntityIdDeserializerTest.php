@@ -2,6 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Deserializers\EntityIdDeserializer;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -12,9 +13,9 @@ use Wikibase\DataModel\Entity\ItemId;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class EntityIdDeserializerTest extends DeserializerBaseTest {
+class EntityIdDeserializerTest extends PHPUnit_Framework_TestCase {
 
-	public function buildDeserializer() {
+	private function buildDeserializer() {
 		$entityIdParserMock = $this->getMock( '\Wikibase\DataModel\Entity\EntityIdParser' );
 		$entityIdParserMock->expects( $this->any() )
 			->method( 'parse' )
@@ -24,8 +25,13 @@ class EntityIdDeserializerTest extends DeserializerBaseTest {
 		return new EntityIdDeserializer( $entityIdParserMock );
 	}
 
-	public function deserializableProvider() {
-		return array( array() );
+	/**
+	 * @dataProvider nonDeserializableProvider
+	 */
+	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
+		$deserializer = $this->buildDeserializer();
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$deserializer->deserialize( $nonDeserializable );
 	}
 
 	public function nonDeserializableProvider() {
@@ -37,6 +43,14 @@ class EntityIdDeserializerTest extends DeserializerBaseTest {
 				array()
 			),
 		);
+	}
+
+	/**
+	 * @dataProvider deserializationProvider
+	 */
+	public function testDeserialization( $object, $serialization ) {
+		$deserializer = $this->buildDeserializer();
+		$this->assertEquals( $object, $deserializer->deserialize( $serialization ) );
 	}
 
 	public function deserializationProvider() {
