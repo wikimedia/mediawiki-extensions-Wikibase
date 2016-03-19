@@ -21,7 +21,7 @@
 	"wikibase-addlinkstitle": "Dodaj međujezičke veze",
 	"wikibase-linkitem-addlinks": "Dodaj veze",
 	"wikibase-linkitem-alreadylinked": "Stranica koju ste želeli da povežete je već prikačena na [$1 stavku] na centralnom spremištu podataka koji vodi do $2 na ovom sajtu. Stavke mogu da imaju samo jednu prikačenu stranicu po sajtu. Izaberite drugu stranicu da biste je povezali.",
-	"wikibase-linkitem-close": "Zatvori dijalog i ponovo učitaj stranicu",
+	"wikibase-linkitem-close": "Zatvori",
 	"wikibase-linkitem-failure": "Nepoznata greška se pojavila pri pokušaju povezivanja date stranice.",
 	"wikibase-linkitem-title": "Veza sa stranicom",
 	"wikibase-linkitem-linkpage": "Poveži sa stranom",
