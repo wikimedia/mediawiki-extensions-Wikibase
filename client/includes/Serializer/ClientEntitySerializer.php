@@ -21,6 +21,11 @@ use Wikibase\Lib\Serialization\SerializationModifier;
 class ClientEntitySerializer implements Serializer {
 
 	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
+
+	/**
 	 * @var PropertyDataTypeLookup
 	 */
 	private $dataTypeLookup;
@@ -46,15 +51,18 @@ class ClientEntitySerializer implements Serializer {
 	private $fallbackChains;
 
 	/**
+	 * @param Serializer $entitySerializer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param string[] $filterLangCodes
 	 * @param LanguageFallbackChain[] $fallbackChains
 	 */
 	public function __construct(
+		Serializer $entitySerializer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $filterLangCodes,
 		array $fallbackChains
 	) {
+		$this->entitySerializer = $entitySerializer;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->filterLangCodes = $filterLangCodes;
 		$this->fallbackChains = $fallbackChains;
