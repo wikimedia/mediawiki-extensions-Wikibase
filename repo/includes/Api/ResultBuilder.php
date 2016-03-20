@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiResult;
 use Revision;
+use Serializers\Serializer;
 use SiteStore;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -50,6 +51,11 @@ class ResultBuilder {
 	private $serializerFactory;
 
 	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
+
+	/**
 	 * @var SiteStore
 	 */
 	private $siteStore;
@@ -83,6 +89,7 @@ class ResultBuilder {
 	 * @param ApiResult $result
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
+	 * @param Serializer $entitySerializer
 	 * @param SiteStore $siteStore
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param bool|null $addMetaData when special elements such as '_element' are needed
@@ -91,6 +98,7 @@ class ResultBuilder {
 		ApiResult $result,
 		EntityTitleLookup $entityTitleLookup,
 		SerializerFactory $serializerFactory,
+		Serializer $entitySerializer,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $dataTypeLookup,
 		$addMetaData = null
@@ -98,6 +106,7 @@ class ResultBuilder {
 		$this->result = $result;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->serializerFactory = $serializerFactory;
+		$this->entitySerializer = $entitySerializer;
 		$this->siteStore = $siteStore;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->addMetaData = $addMetaData;
@@ -339,8 +348,7 @@ class ResultBuilder {
 		array $filterLangCodes,
 		array $fallbackChains
 	) {
-		$entitySerializer = $this->serializerFactory->newEntitySerializer();
-		$serialization = $entitySerializer->serialize( $entity );
+		$serialization = $this->entitySerializer->serialize( $entity );
 
 		$serialization = $this->filterEntitySerializationUsingProps( $serialization, $props );
 
