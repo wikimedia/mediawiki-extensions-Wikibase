@@ -3,6 +3,7 @@
 namespace Wikibase\Client\DataAccess\Scribunto;
 
 use Language;
+use Serializers\Serializer;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -41,6 +42,11 @@ class EntityAccessor {
 	private $usageAccumulator;
 
 	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
+
+	/**
 	 * @var PropertyDataTypeLookup
 	 */
 	private $dataTypeLookup;
@@ -64,6 +70,7 @@ class EntityAccessor {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param UsageAccumulator $usageAccumulator
+	 * @param Serializer $entitySerializer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param Language $language
@@ -73,6 +80,7 @@ class EntityAccessor {
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
 		UsageAccumulator $usageAccumulator,
+		Serializer $entitySerializer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		LanguageFallbackChain $fallbackChain,
 		Language $language,
@@ -81,6 +89,7 @@ class EntityAccessor {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
 		$this->usageAccumulator = $usageAccumulator;
+		$this->entitySerializer = $entitySerializer;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->fallbackChain = $fallbackChain;
 		$this->language = $language;
@@ -147,6 +156,7 @@ class EntityAccessor {
 
 	private function newClientEntitySerializer() {
 		return new ClientEntitySerializer(
+			$this->entitySerializer,
 			$this->dataTypeLookup,
 			array_unique( array_merge(
 				$this->termsLanguages->getLanguages(),
