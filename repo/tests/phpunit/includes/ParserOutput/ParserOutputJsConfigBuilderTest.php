@@ -2,19 +2,23 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use DataValues\Deserializers\DataValueDeserializer;
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use MediaWikiTestCase;
+use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder
@@ -29,12 +33,22 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 
+	private function newEntitySerializer() {
+		$serializerFactory = new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
+
+		return $serializerFactory->newEntitySerializer();
+	}
+
 	public function testBuildConfigItem() {
 		$item = new Item( new ItemId( 'Q5881' ) );
 		$this->addLabels( $item );
 		$mainSnakPropertyId = $this->addStatements( $item );
 
-		$configBuilder = new ParserOutputJsConfigBuilder();
+		$configBuilder = new ParserOutputJsConfigBuilder( $this->newEntitySerializer() );
 		$configVars = $configBuilder->build( $item );
 
 		$this->assertWbEntityId( 'Q5881', $configVars );
@@ -55,7 +69,7 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 		$this->addLabels( $property );
 		$mainSnakPropertyId = $this->addStatements( $property );
 
-		$configBuilder = new ParserOutputJsConfigBuilder();
+		$configBuilder = new ParserOutputJsConfigBuilder( $this->newEntitySerializer() );
 		$configVars = $configBuilder->build( $property );
 
 		$this->assertWbEntityId( 'P330', $configVars );
@@ -88,8 +102,12 @@ class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
 	}
 
 	public function assertSerializationEqualsEntity( EntityDocument $entity, $serialization ) {
-		$deserializer = WikibaseRepo::getDefaultInstance()->getExternalFormatEntityDeserializer();
-		$unserializedEntity = $deserializer->deserialize( $serialization );
+		$deserializerFactory = new DeserializerFactory(
+			new DataValueDeserializer( array( 'string' => StringValue::class ) ),
+			new BasicEntityIdParser()
+		);
+
+		$unserializedEntity = $deserializerFactory->newEntityDeserializer()->deserialize( $serialization );
 
 		$this->assertTrue(
 			$unserializedEntity->equals( $entity ),
