@@ -67,7 +67,7 @@
 	"wikibase-pageinfo-entity-id": "ID khoản mục {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Không có",
 	"wikibase-property-render-error": "Thất bại khi kết xuất thuộc tính $1: $2",
-	"wikibase-otherprojects": "Dự án khác",
+	"wikibase-otherprojects": "Tại dự án khác",
 	"wikibase-otherprojects-beta-message": "Hộp thanh bên dự án khác",
 	"wikibase-otherprojects-beta-description": "Thêm hộp thanh bên “{{int:wikibase-otherprojects}}” có liên kết đến các dự án Wikimedia khác theo dữ liệu {{WBREPONAME}}."
 }

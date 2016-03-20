@@ -3,7 +3,8 @@
 		"authors": [
 			"ArnoLagrange",
 			"KuboF",
-			"Tlustulimu"
+			"Tlustulimu",
+			"Robin van der Vliet"
 		]
 	},
 	"wikibase-client-desc": "Kliento por la Vikidatuma etendaĵo",
@@ -52,7 +53,7 @@
 	"wikibase-unconnectedpages-submit": "Ek",
 	"wikibase-pageinfo-entity-id": "Identigilo de ero en {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nenio",
-	"wikibase-otherprojects": "Aliaj projektoj",
+	"wikibase-otherprojects": "En aliaj projektoj",
 	"wikibase-otherprojects-beta-message": "Aliaj projektoj en flanka strio",
 	"wikibase-otherprojects-beta-description": "Aldonas al flanka strio sekcion \"{{int:wikibase-otherprojects}}\", kiu provizas ligilojn al aliaj Vikimediaj projektoj laŭ datumoj de {{WBREPONAME}}."
 }
