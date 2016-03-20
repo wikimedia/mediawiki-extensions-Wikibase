@@ -1541,6 +1541,10 @@ class WikibaseRepo {
 			// CachingPropertyInfoStore enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
 			$this->getLocalEntityUriParser(),
+			$this->getEntitySerializer(
+				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+			),
 			$this->settings->getSetting( 'preferredGeoDataProperties' ),
 			$this->settings->getSetting( 'preferredPageImagesProperties' ),
 			$this->settings->getSetting( 'globeUris' )
