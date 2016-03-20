@@ -1453,7 +1453,11 @@ class WikibaseRepo {
 			$this->getSiteStore(),
 			$this->getSummaryFormatter(),
 			$this->getEntityRevisionLookup( 'uncached' ),
-			$this->newEditEntityFactory( $context )
+			$this->newEditEntityFactory( $context ),
+			$this->getEntitySerializer(
+				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+			)
 		);
 	}
 
