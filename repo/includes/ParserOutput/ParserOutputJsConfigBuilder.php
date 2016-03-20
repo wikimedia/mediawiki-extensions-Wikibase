@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\Serializers\DataValueSerializer;
 use FormatJson;
+use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\SerializerFactory;
 
@@ -20,16 +21,12 @@ use Wikibase\DataModel\SerializerFactory;
 class ParserOutputJsConfigBuilder {
 
 	/**
-	 * @var SerializerFactory
+	 * @var Serializer
 	 */
-	private $serializerFactory;
+	private $entitySerializer;
 
-	public function __construct() {
-		$this->serializerFactory = new SerializerFactory(
-			new DataValueSerializer(),
-			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
-		);
+	public function __construct( Serializer $entitySerializer ) {
+		$this->entitySerializer = $entitySerializer;
 	}
 
 	/**
@@ -60,9 +57,7 @@ class ParserOutputJsConfigBuilder {
 	 * @return string
 	 */
 	private function getSerializedEntity( EntityDocument $entity ) {
-		$serializer = $this->serializerFactory->newEntitySerializer();
-
-		$serialization = $serializer->serialize( $entity );
+		$serialization = $this->entitySerializer->serialize( $entity );
 
 		// Remove empty parts of the serialization (Added when Lib Serializers were removed)
 		// We could allow parts if we are sure it would not break anything
