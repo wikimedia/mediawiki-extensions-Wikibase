@@ -3,6 +3,7 @@
 namespace Wikibase;
 
 use DataValues\Serializers\DataValueSerializer;
+use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -28,6 +29,11 @@ class DumpJson extends DumpScript {
 	 * @var EntityLookup
 	 */
 	private $entityLookup;
+
+	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
 
 	/**
 	 * @var EntityPrefetcher
@@ -60,12 +66,14 @@ class DumpJson extends DumpScript {
 		EntityPerPage $entityPerPage,
 		EntityPrefetcher $entityPrefetcher,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		EntityLookup $entityLookup
+		EntityLookup $entityLookup,
+		Serializer $entitySerializer
 	) {
 		parent::setDumpEntitiesServices( $entityPerPage );
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->entityLookup = $entityLookup;
+		$this->entitySerializer = $entitySerializer;
 		$this->hasHadServicesSet = true;
 	}
 
@@ -77,7 +85,11 @@ class DumpJson extends DumpScript {
 				$wikibaseRepo->getStore()->newEntityPerPage(),
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
-				new RevisionBasedEntityLookup( $revisionLookup )
+				new RevisionBasedEntityLookup( $revisionLookup ),
+				$wikibaseRepo->getEntitySerializer(
+					SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+					SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+				)
 			);
 		}
 		parent::execute();
@@ -89,17 +101,12 @@ class DumpJson extends DumpScript {
 	 * @return DumpGenerator
 	 */
 	protected function createDumper( $output ) {
-		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
-		$serializerFactory = new SerializerFactory( new DataValueSerializer(), $serializerOptions );
-
-		$entitySerializer = $serializerFactory->newEntitySerializer();
 		$dataTypeLookup = $this->propertyDatatypeLookup;
 
 		$dumper = new JsonDumpGenerator(
 			$output,
 			$this->entityLookup,
-			$entitySerializer,
+			$this->entitySerializer,
 			$this->entityPrefetcher,
 			$dataTypeLookup
 		);
