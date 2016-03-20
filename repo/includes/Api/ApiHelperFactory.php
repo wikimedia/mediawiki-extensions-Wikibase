@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use DataValues\Serializers\DataValueSerializer;
+use Serializers\Serializer;
 use SiteStore;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -59,6 +60,11 @@ class ApiHelperFactory {
 	 */
 	private $siteStore;
 
+	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
+
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
@@ -66,7 +72,8 @@ class ApiHelperFactory {
 		SiteStore $siteStore,
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
-		EditEntityFactory $editEntityFactory
+		EditEntityFactory $editEntityFactory,
+		Serializer $entitySerializer
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->exceptionLocalizer = $exceptionLocalizer;
@@ -75,6 +82,7 @@ class ApiHelperFactory {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->editEntityFactory = $editEntityFactory;
+		$this->entitySerializer = $entitySerializer;
 	}
 
 	/**
@@ -89,6 +97,7 @@ class ApiHelperFactory {
 			$api->getResult(),
 			$this->titleLookup,
 			$this->newSerializerFactory(),
+			$this->entitySerializer,
 			$this->siteStore,
 			$this->dataTypeLookup,
 			true // The mediawiki api should always be given metadata
