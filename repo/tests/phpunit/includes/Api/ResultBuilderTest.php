@@ -87,6 +87,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			$result,
 			$mockEntityTitleLookup,
 			$serializerFactory,
+			$serializerFactory->newEntitySerializer(),
 			new HashSiteStore(),
 			$mockPropertyDataTypeLookup,
 			$addMetaData
