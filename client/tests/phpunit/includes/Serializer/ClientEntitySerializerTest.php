@@ -2,9 +2,11 @@
 
 namespace Wikibase\Client\Tests\Serializer;
 
+use DataValues\Serializers\DataValueSerializer;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\LanguageFallbackChain;
@@ -21,6 +23,8 @@ use Wikibase\LanguageFallbackChain;
 class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance() {
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+
 		$fallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -34,6 +38,7 @@ class ClientEntitySerializerTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( '<DATATYPE>' ) );
 
 		return new ClientEntitySerializer(
+			$serializerFactory->newItemSerializer(),
 			$dataTypeLookup,
 			array( 'en' ),
 			array( 'en' => $fallbackChain )

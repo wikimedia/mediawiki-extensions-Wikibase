@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Language;
 use ReflectionMethod;
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -48,6 +50,9 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 	) {
 		$language = new Language( $langCode );
 
+		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
+		$entitySerializer = $serializerFactory->newEntitySerializer();
+
 		$propertyDataTypeLookup = $this->getMock( PropertyDataTypeLookup::class );
 		$propertyDataTypeLookup->expects( $this->any() )
 			->method( 'getDataTypeIdForProperty' )
@@ -62,6 +67,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 			new BasicEntityIdParser(),
 			$entityLookup ?: new MockRepository(),
 			$usageAccumulator ? $usageAccumulator : new HashUsageAccumulator(),
+			$entitySerializer,
 			$propertyDataTypeLookup,
 			$fallbackChain,
 			$language,
