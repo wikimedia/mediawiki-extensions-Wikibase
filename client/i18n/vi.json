@@ -39,7 +39,7 @@
 	"wikibase-linkitem-confirmitem-button": "Xác nhận",
 	"wikibase-linkitem-not-loggedin-title": "Bạn cần đăng nhập",
 	"wikibase-linkitem-not-loggedin": "Bạn cần đăng nhập vào cả wiki này lẫn [$1 kho dữ liệu chung] để sử dụng tính năng này.",
-	"wikibase-linkitem-success-link": "Các trang đã được liên kết với nhau thành công. Xem khoản mục chứa các liên kết trong [$1 kho dữ liệu chung].",
+	"wikibase-linkitem-success-link": "Các trang đã được liên kết với nhau. Xem khoản mục chứa các liên kết trong [$1 kho dữ liệu chung].",
 	"wikibase-limitreport-entities-accessed": "Số thục thể Wikibase được tải",
 	"wikibase-property-notfound": "Không tìm thấy thuộc tính $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

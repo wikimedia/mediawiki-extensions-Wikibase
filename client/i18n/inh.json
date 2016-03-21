@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Adam-Yourist"
+			"Adam-Yourist",
+			"Умар"
 		]
 	},
-	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} чура элемент"
+	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} чура элемент",
+	"wikibase-rc-hide-wikidata-show": "Хьахьокха"
 }
