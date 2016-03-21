@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_edc19535",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "Should be getPropertyOrderProvider, the actual implementation doesn\u0027t matter here. Also you probably want to return a caching object at some point.",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_2dbc1db1",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "wrong class name",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_adb66d83",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "empty array in case non could be found? Or null?",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_6ddd8517",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "should be above the return",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_0dadd92e",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "missing @throws",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_edf9954c",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "This will probably go sideways (or at least weird) if $pageContent is null",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_0dff9932",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "I think this assumes the page to be existent... we shouldn\u0027t do that.",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_4df9a149",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "new array syntax",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_2df41d50",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_eda7d54b",
+        "filename": "lib/includes/store/PropertyOrderProviderException.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "We decided to use @license now",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_4da7e14c",
+        "filename": "lib/tests/phpunit/store/MediaWikiPagePropertyOrderProviderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T15:09:33Z",
+      "side": 1,
+      "message": "license",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
