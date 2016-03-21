@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_082b07dc",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T19:41:05Z",
+      "side": 1,
+      "message": "You need to loop over the aliases after the explode below.\n\nLike:\n\nforeach ( $aliases as \u0026$alias ) {\n…-\u003etrimToNFC( $alias );\n}",
+      "revId": "010bad506c7413e422c59c6dd0cd0540471e16f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
