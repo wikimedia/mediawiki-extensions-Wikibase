@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_284ecbc4",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T20:13:52Z",
+      "side": 1,
+      "message": "This will add the same aliases to the list again… you can either iterate by reference (foreach ( $this-\u003ealiases as \u0026$alias) { /* Overwrite $alias here */ }) or just explode into a temporary variable and then only add it to $this-\u003ealiases here.",
+      "revId": "b84b4b2987a7bb2e77e17ddd43a6eae55028cc9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
