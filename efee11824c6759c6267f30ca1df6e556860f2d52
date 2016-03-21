@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_2d589d58",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_edc19535",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_2dbc1db1",
         "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-21T15:09:33Z",
       "side": 1,
       "message": "wrong class name",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_cd40115e",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_2dbc1db1",
       "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_28436b44",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_adb66d83",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_6ddd8517",
         "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2016-03-21T15:09:33Z",
       "side": 1,
       "message": "should be above the return",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_6d20e5a8",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_6ddd8517",
       "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_cd177155",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_0dadd92e",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_edf9954c",
         "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2016-03-21T15:09:33Z",
       "side": 1,
       "message": "This will probably go sideways (or at least weird) if $pageContent is null",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_8871d7a9",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_edf9954c",
       "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_48486f60",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_0dff9932",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_4df9a149",
         "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2016-03-21T15:09:33Z",
       "side": 1,
       "message": "new array syntax",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_ad1aed7b",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_4df9a149",
       "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_0d11595f",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_2df41d50",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_eda7d54b",
         "filename": "lib/includes/store/PropertyOrderProviderException.php",
         "patchSetId": 2
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_ed0b552c",
+        "filename": "lib/includes/store/PropertyOrderProviderException.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_eda7d54b",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_4da7e14c",
         "filename": "lib/tests/phpunit/store/MediaWikiPagePropertyOrderProviderTest.php",
         "patchSetId": 2
@@ -183,6 +363,24 @@
       "writtenOn": "2016-03-21T15:09:33Z",
       "side": 1,
       "message": "license",
+      "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_4d0b612d",
+        "filename": "lib/tests/phpunit/store/MediaWikiPagePropertyOrderProviderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-03-21T16:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_4da7e14c",
       "revId": "efee11824c6759c6267f30ca1df6e556860f2d52",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
