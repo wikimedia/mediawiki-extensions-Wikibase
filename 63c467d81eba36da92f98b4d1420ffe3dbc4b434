@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_33064024",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T22:51:30Z",
+      "side": 1,
+      "message": "via -\u003e in",
+      "revId": "63c467d81eba36da92f98b4d1420ffe3dbc4b434",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_530b042d",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T22:51:30Z",
+      "side": 1,
+      "message": "We don\u0027t usually use such underscore variable names. EIther just overwrite $aliases or use $explodedAliases or something along these lines",
+      "revId": "63c467d81eba36da92f98b4d1420ffe3dbc4b434",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
