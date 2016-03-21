@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_c81d9f68",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T16:07:27Z",
+      "side": 1,
+      "message": "We use StringNormalizer::trimToNFC in the SetLabel api, this should probably also be used here. Maybe also use a variable for the result of $this-\u003egetRequest()-\u003egetVal(…) in order to improve readability (same below).",
+      "revId": "187a014fc7a198932e3afb7dbe1c3bfc51cb914a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_a8201b97",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T16:07:27Z",
+      "side": 1,
+      "message": "Same as above (in the SetDescription api)",
+      "revId": "187a014fc7a198932e3afb7dbe1c3bfc51cb914a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_e83183eb",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T16:07:27Z",
+      "side": 1,
+      "message": "Although AliasGroup trims the aliases, you should probably still apply  StringNormalizer::trimToNFC to them (for consistency)",
+      "revId": "187a014fc7a198932e3afb7dbe1c3bfc51cb914a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
