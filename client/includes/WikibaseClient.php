@@ -76,6 +76,7 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
@@ -1093,6 +1094,13 @@ final class WikibaseClient {
 		}
 
 		return $this->restrictedEntityLookup;
+	}
+
+	/**
+	* @return CachingPropertyOrderProvider
+	*/
+	public function getPropertyOrderProvider() {
+		return new CachingPropertyOrderProvider( Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' ) );
 	}
 
 }
