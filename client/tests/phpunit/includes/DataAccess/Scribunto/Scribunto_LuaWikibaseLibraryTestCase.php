@@ -19,6 +19,13 @@ if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 			$this->markTestSkipped( 'Scribunto is not available' );
 		}
 
+		public function testPlaceholder() {
+			$this->assertTrue(
+				false,
+				'PHPunit expects this class to have tests. This should never run.'
+			);
+		}
+
 	}
 
 	return;
