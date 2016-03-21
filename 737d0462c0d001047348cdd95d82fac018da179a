@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_6e745b97",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T23:12:28Z",
+      "side": 1,
+      "message": "You need to filter empty aliases out here ( check if ( $alias !\u003d\u003d \u0027\u0027 ) { $this-\u003ealiases[] \u003d $this-\u003estringNormalizer-\u003etrimToNFC(…); } )",
+      "revId": "737d0462c0d001047348cdd95d82fac018da179a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_2e437344",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T23:12:28Z",
+      "side": 1,
+      "message": "You want $alias in the function call",
+      "revId": "737d0462c0d001047348cdd95d82fac018da179a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
