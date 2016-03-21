@@ -121,6 +121,9 @@ class GetEntities extends ApiBase {
 		$resolveRedirects = $params['redirects'] === 'yes';
 
 		$entityIds = $this->getEntityIdsFromParams( $params );
+
+		$this->getStats()->updateCount( 'wikibase.repo.api.getentities.entities', count( $entityIds ) );
+
 		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects );
 
 		foreach ( $entityRevisions as $sourceEntityId => $entityRevision ) {
