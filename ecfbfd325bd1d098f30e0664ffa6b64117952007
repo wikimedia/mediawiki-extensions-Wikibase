@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_68a3b3fd",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T16:19:54Z",
+      "side": 1,
+      "message": "trimToNFC also does trim whitespace, so no need to do that twice",
+      "revId": "ecfbfd325bd1d098f30e0664ffa6b64117952007",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_a8adbbe9",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T16:19:54Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "ecfbfd325bd1d098f30e0664ffa6b64117952007",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_08b4a732",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T16:19:54Z",
+      "side": 1,
+      "message": "trailing WS",
+      "revId": "ecfbfd325bd1d098f30e0664ffa6b64117952007",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_e8aea3e1",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T16:19:54Z",
+      "side": 1,
+      "message": "You need to do that with each element after the explode below",
+      "revId": "ecfbfd325bd1d098f30e0664ffa6b64117952007",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_48beaf14",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-21T16:19:54Z",
+      "side": 1,
+      "message": "could just check $this-\u003ealiases !\u003d\u003d array() here",
+      "revId": "ecfbfd325bd1d098f30e0664ffa6b64117952007",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
