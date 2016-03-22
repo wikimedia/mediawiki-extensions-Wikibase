@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_8c4d6278",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T20:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_a03682e2",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_800c1e3f",
         "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-18T14:43:31Z",
       "side": 1,
       "message": "but we do?...",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_8ca3a2fc",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T20:03:32Z",
+      "side": 1,
+      "message": "We didn\u0027t... but I now implemented it, to avoid further discussion",
+      "parentUuid": "ee33df1d_800c1e3f",
       "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_ecaa2ed0",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T20:03:32Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ee33df1d_a00fa232",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_c507581e",
         "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2016-03-18T14:43:31Z",
       "side": 1,
       "message": "We shouldn\u0027t always quit the look. Just limit $res to $this-\u003ebatchSize !",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_ccadaae9",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T20:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_c507581e",
       "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_ec550ec7",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T20:03:32Z",
+      "side": 1,
+      "message": "Not trivially... I don\u0027t think that would gain us much.",
+      "parentUuid": "ee33df1d_c02d868d",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_8061bed2",
         "filename": "docs/usagetracking.wiki",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2016-03-18T14:43:31Z",
       "side": 1,
       "message": "Would be nice not to create it on install, then.",
+      "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_0c6af27d",
+        "filename": "docs/usagetracking.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T20:03:32Z",
+      "side": 1,
+      "message": "Agreed, but that\u0027s for a follow-up",
+      "parentUuid": "ee33df1d_8061bed2",
       "revId": "92b8f76e56388ea58ceaa2608e9a2dcc87d14b25",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
