@@ -130,6 +130,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		try {
 			$usageTable = $this->newUsageTable( $db );
+			// queryUsages guarantees this to be identity string => EntityUsage
 			$oldUsages = $usageTable->queryUsages( $pageId );
 
 			$newUsages = $this->reindexEntityUsages( $usages );
@@ -174,6 +175,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		try {
 			$usageTable = $this->newUsageTable( $db );
+			// queryUsages guarantees this to be identity string => EntityUsage
 			$oldUsages = $usageTable->queryUsages( $pageId );
 
 			$newUsages = $this->reindexEntityUsages( $usages );

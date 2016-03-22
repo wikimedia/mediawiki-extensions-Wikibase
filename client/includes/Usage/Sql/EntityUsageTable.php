@@ -162,7 +162,7 @@ class EntityUsageTable {
 	 * @param int $pageId
 	 *
 	 * @throws InvalidArgumentException
-	 * @return EntityUsage[]
+	 * @return EntityUsage[] EntityUsage identity string => EntityUsage
 	 */
 	public function queryUsages( $pageId ) {
 		if ( !is_int( $pageId ) ) {
@@ -248,10 +248,6 @@ class EntityUsageTable {
 		$rowIdChunks = array_chunk( $rowIds, $this->batchSize );
 
 		foreach ( $rowIdChunks as $chunk ) {
-			if ( !$chunk ) {
-				break;
-			}
-
 			$this->connection->begin( __METHOD__ );
 
 			$this->connection->delete(
