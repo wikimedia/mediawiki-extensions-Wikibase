@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_f63a0132",
+        "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T17:30:39Z",
+      "side": 1,
+      "message": "preg_quote escapes the pipes, so this is needed (we\u0027re reusing the pipes from the PLURAL here).",
+      "parentUuid": "ee33df1d_96dbb553",
+      "revId": "16cb87c08e90b53eb70a788f7f595642f01274e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_368109fe",
         "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_f6fb2175",
+        "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T17:30:39Z",
+      "side": 1,
+      "message": "Because we get regexp like /((.+?) foo) bar/ Where the first match is \"… bar\" and not just the number.",
+      "parentUuid": "ee33df1d_368109fe",
+      "revId": "16cb87c08e90b53eb70a788f7f595642f01274e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_b6a6b9bc",
         "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2016-03-22T17:23:50Z",
       "side": 1,
       "message": "Why not \u003d\u003d\u003d \u0027\u0027?",
+      "revId": "16cb87c08e90b53eb70a788f7f595642f01274e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_d63d3d2b",
+        "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-22T17:30:39Z",
+      "side": 1,
+      "message": "Will change",
+      "parentUuid": "ee33df1d_b6a6b9bc",
       "revId": "16cb87c08e90b53eb70a788f7f595642f01274e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
