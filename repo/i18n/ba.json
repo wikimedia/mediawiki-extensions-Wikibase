@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Рустам Нурыев",
-			"Sagan"
+			"Sagan",
+			"Айсар"
 		]
 	},
 	"wikibase-edit": "үҙгәртергә",
@@ -13,5 +14,6 @@
 	"wikibase-sitelinks-special": "Башҡа сайттар",
 	"wikibase-aliases-empty": "Альтернатив исемдәр (синонимдар) күрһәтелмәгән",
 	"wikibase-statementview-rank-normal": "Нормаль ранг",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|сығанаҡ}}"
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|сығанаҡ}}",
+	"wikibase-redirectentity-success": "$ 1 йүнәлтелгән $ 2."
 }

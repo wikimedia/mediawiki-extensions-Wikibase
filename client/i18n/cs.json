@@ -40,7 +40,7 @@
 	"wikibase-linkitem-confirmitem-button": "Potvrdit",
 	"wikibase-linkitem-not-loggedin-title": "Musíte být přihlášen",
 	"wikibase-linkitem-not-loggedin": "Je třeba být přihlášen na této wiki a [$1  Wikidatech], chcete-li použít tuto funkci.",
-	"wikibase-linkitem-success-link": "Stránky byly úspěšně propojeny. V [$1 centrálním datovém úložišti] byla založena položka obsahující tyto odkazy.",
+	"wikibase-linkitem-success-link": "Stránky byly propojeny. Položku obsahující odkazy můžete najít v našem [$1 centrálním datovém úložišti].",
 	"wikibase-limitreport-entities-accessed": "Počet načtených entit Wikibase",
 	"wikibase-property-notfound": "Vlastnost $1 nebyla nalezena.",
 	"wikibase-rc-hide-wikidata": "$1 {{grammar:4sg|{{WBREPONAME}}}}",

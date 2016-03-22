@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Calak",
-			"Asoxor"
+			"Asoxor",
+			"Sarchia"
 		]
 	},
 	"tooltip-t-wikibase": "بەستەر بۆ بەندی خەزێنەی دراوەی پەیوەندیدار",
@@ -44,5 +45,5 @@
 	"wikibase-pageswithbadges-submit": "پەڕەکان نیشان بدە",
 	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "ھیچ",
-	"wikibase-otherprojects": "پرۆژەکانی تر"
+	"wikibase-otherprojects": "لە پڕۆژەکانی تر"
 }
