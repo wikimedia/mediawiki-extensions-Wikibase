@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee33df1d_763431f2",
+        "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-22T17:53:50Z",
+      "side": 1,
+      "message": "This should be (?: then, to avoid the loop.",
+      "revId": "16cb87c08e90b53eb70a788f7f595642f01274e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_96dbb553",
         "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
         "patchSetId": 2
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "preg_quote escapes the pipes, so this is needed (we\u0027re reusing the pipes from the PLURAL here).",
       "parentUuid": "ee33df1d_96dbb553",
+      "revId": "16cb87c08e90b53eb70a788f7f595642f01274e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_b61d197b",
+        "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-22T17:53:50Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "ee33df1d_f63a0132",
       "revId": "16cb87c08e90b53eb70a788f7f595642f01274e3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
