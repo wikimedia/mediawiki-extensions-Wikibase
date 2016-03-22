@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_1b86aebe",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.sitelinklistview.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-03-22T16:27:18Z",
+      "side": 1,
+      "message": "Violates AAA",
+      "revId": "2b3652e1becddd3fa03ee817d9f3d4cdb29b6efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_3b8bb2c5",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.sitelinklistview.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-03-22T16:27:18Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "2b3652e1becddd3fa03ee817d9f3d4cdb29b6efb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
