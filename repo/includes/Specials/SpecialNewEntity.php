@@ -36,17 +36,17 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @var string|null
 	 */
-	private $label = null;
+	private $label;
 
 	/**
 	 * @var string|null
 	 */
-	private $description = null;
+	private $description;
 
 	/**
-	 * @var Language
+	 * @var Language|null
 	 */
-	private $contentLanguage = null;
+	private $contentLanguage;
 
 	/**
 	 * @var string[]
@@ -66,7 +66,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @var string[]
 	 */
-	private $aliases;
+	private $aliases = array();
 
 	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
@@ -182,12 +182,15 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->description = $this->stringNormalizer->trimToNFC( $description );
 
 		$aliases = $this->getRequest()->getVal( 'aliases' );
-		$explodedAliases = ( $aliases === null ? array() : explode( '|', $aliases ) );
+		$explodedAliases = $aliases === null ? array() : explode( '|', $aliases );
 		foreach ( $explodedAliases as $alias ) {
+			$alias = $this->stringNormalizer->trimToNFC( $alias );
+
 			if ( $alias !== '' ) {
-				$this->aliases[] = $this->stringNormalizer->trimToNFC( $alias );
+				$this->aliases[] = $alias;
 			}
 		}
+
 		$this->contentLanguage = Language::factory( $this->getRequest()->getVal(
 			'lang',
 			$this->getLanguage()->getCode()
@@ -202,8 +205,9 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return bool
 	 */
 	protected function hasSufficientArguments() {
-		return $this->label !== '' || $this->description !== ''
-		|| implode( '', $this->aliases ) !== '';
+		return $this->label !== ''
+			|| $this->description !== ''
+			|| $this->aliases !== array();
 	}
 
 	/**
