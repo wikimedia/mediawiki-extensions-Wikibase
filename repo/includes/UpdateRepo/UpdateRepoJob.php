@@ -180,9 +180,7 @@ abstract class UpdateRepoJob extends Job {
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
 		if ( !$user || !$user->isLoggedIn() ) {
-			// This should never happen as we check with CentralAuth
-			// that the user actually does exist
-			wfLogWarning( "User $name doesn't exist while CentralAuth pretends it does" );
+			wfDebugLog( 'UpdateRepo', "User $name doesn't exist." );
 			return false;
 		}
 

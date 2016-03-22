@@ -6,6 +6,7 @@ use IJobSpecification;
 use JobQueueGroup;
 use JobQueueRedis;
 use JobSpecification;
+use PHPUnit_Framework_TestCase;
 use Title;
 use User;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
@@ -23,7 +24,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
+class UpdateRepoOnDeleteTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Return some fake data for testing
@@ -101,12 +102,6 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $jobQueue ) );
 
 		return $jobQueueGroupMock;
-	}
-
-	public function testUserIsValidOnRepo() {
-		$updateRepo = $this->getNewUpdateRepoOnDelete();
-
-		$this->assertFalse( $updateRepo->userIsValidOnRepo() );
 	}
 
 	/**
