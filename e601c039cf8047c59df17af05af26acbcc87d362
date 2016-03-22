@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_16f165da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-22T17:10:48Z",
+      "side": 1,
+      "message": "This does not track the *loaded* entities, as far as I can see, but the requested ones.",
+      "revId": "e601c039cf8047c59df17af05af26acbcc87d362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
