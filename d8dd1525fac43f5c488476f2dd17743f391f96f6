@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_5b0f8de4",
+        "filename": "client/includes/Hooks/UpdateRepoHookHandlers.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-23T15:24:11Z",
+      "side": 1,
+      "message": "This looks like there should be some kind of \"isValid\" or \"isApplicable\" or \"isLinkedToRepo\" method, instead of asking if the class does have an EntityId.",
+      "revId": "d8dd1525fac43f5c488476f2dd17743f391f96f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
