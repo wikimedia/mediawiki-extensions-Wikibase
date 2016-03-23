@@ -9,6 +9,8 @@ use Wikimedia\Purtle\RdfWriter;
  * @covers Wikimedia\Purtle\XmlRdfWriter
  * @covers Wikimedia\Purtle\RdfWriterBase
  *
+ * @uses Wikimedia\Purtle\BNodeLabeler
+ *
  * @group Purtle
  * @group RdfWriter
  *

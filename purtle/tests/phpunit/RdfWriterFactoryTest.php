@@ -9,6 +9,14 @@ use Wikimedia\Purtle\RdfWriterFactory;
 /**
  * @covers Wikimedia\Purtle\RdfWriterFactory
  *
+ * @uses Wikimedia\Purtle\BNodeLabeler
+ * @uses Wikimedia\Purtle\N3Quoter
+ * @uses Wikimedia\Purtle\N3RdfWriterBase
+ * @uses Wikimedia\Purtle\NTriplesRdfWriter
+ * @uses Wikimedia\Purtle\RdfWriterBase
+ * @uses Wikimedia\Purtle\TurtleRdfWriter
+ * @uses Wikimedia\Purtle\XmlRdfWriter
+ *
  * @group Purtle
  *
  * @license GPL-2.0+
