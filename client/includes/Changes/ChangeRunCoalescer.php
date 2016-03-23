@@ -154,6 +154,14 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $latestRevId );
 
 		if ( !$entityRev ) {
+			// XXX: EVIL HACK!
+			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER );
+			if ( $latestRevId !== $entityRev->getRevisionId() ) {
+				$entityRev = null;
+			}
+		}
+
+		if ( !$entityRev ) {
 			throw new MWException( "Failed to load revision $latestRevId of $entityId" );
 		}
 

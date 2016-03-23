@@ -51,24 +51,10 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
-		$rows = array();
-
-		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
+		if ( $mode === EntityRevisionLookup::LATEST_FROM_SLAVE ) {
 			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_SLAVE );
-		}
-
-		$loadFromMaster = array();
-		foreach ( $entityIds as $entityId ) {
-			if ( !isset( $rows[$entityId->getSerialization()] ) || !$rows[$entityId->getSerialization()] ) {
-				$loadFromMaster[] = $entityId;
-			}
-		}
-
-		if ( $loadFromMaster ) {
-			$rows = array_merge(
-				$rows,
-				$this->selectRevisionInformationMultiple( $loadFromMaster, DB_MASTER )
-			);
+		} else {
+			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_MASTER );
 		}
 
 		return $rows;
@@ -84,6 +70,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	public function loadRevisionInformationByRevisionId( EntityId $entityId, $revisionId ) {
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_SLAVE );
 
+		// XXX: Keep master fallback? Callers here are very explicit
 		if ( !$row ) {
 			// Try loading from master
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': try to load ' . $entityId

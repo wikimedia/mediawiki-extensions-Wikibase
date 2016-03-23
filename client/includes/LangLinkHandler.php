@@ -108,6 +108,7 @@ class LangLinkHandler {
 			//NOTE: SiteLinks we could get from $this->siteLinkLookup do not contain badges,
 			//      so we have to fetch the links from the Item.
 
+			// XXX: Master fallback required?
 			/* @var Item $item */
 			$item = $this->entityLookup->getEntity( $itemId );
 

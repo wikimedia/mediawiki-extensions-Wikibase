@@ -162,6 +162,7 @@ class OutputPageBeforeHTMLHookHandler {
 
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		$revisionId = $out->getRevisionId();
+		// XXX: Master fallback required?
 		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
 		$labelsProvider = $entity;
 		$descriptionsProvider = $entity;
