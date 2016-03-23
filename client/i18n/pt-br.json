@@ -10,7 +10,8 @@
 			"TheGabrielZaum",
 			"Tuliouel",
 			"Dianakc",
-			"He7d3r"
+			"He7d3r",
+			"Luk3"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -61,5 +62,5 @@
 	"wikibase-pageinfo-entity-id": "ID do item {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Não há",
 	"wikibase-property-render-error": "Erro ao renderizar a propriedade $1: $2",
-	"wikibase-otherprojects": "Outros projetos"
+	"wikibase-otherprojects": "Em outros projetos"
 }

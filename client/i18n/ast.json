@@ -46,7 +46,7 @@
 	"wikibase-linkitem-confirmitem-button": "Confirmar",
 	"wikibase-linkitem-not-loggedin-title": "Tien d'aniciar sesión",
 	"wikibase-linkitem-not-loggedin": "Tien d'aniciar sesión nesta wiki y nel [$1 depósitu central de datos] pa usar esta carauterística.",
-	"wikibase-linkitem-success-link": "Les páxines enllazáronse correutamente. Puedes alcontrar l'elementu que contien los enllaces nel [$1 depósitu central de datos].",
+	"wikibase-linkitem-success-link": "Enllazáronse les páxines. Puedes alcontrar l'elementu que contien los enllaces nel [$1 depósitu central de datos].",
 	"wikibase-limitreport-entities-accessed": "Númberu d'entidaes de Wikibase cargaes",
 	"wikibase-property-notfound": "Nun s'alcontró la propiedá $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
