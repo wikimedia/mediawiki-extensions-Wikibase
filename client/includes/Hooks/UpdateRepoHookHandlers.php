@@ -201,7 +201,7 @@ class UpdateRepoHookHandlers {
 			$title
 		);
 
-		if ( !$updateRepo->getEntityId() ) {
+		if ( !$updateRepo->isApplicable() ) {
 			return true;
 		}
 
@@ -246,7 +246,7 @@ class UpdateRepoHookHandlers {
 			$newTitle
 		);
 
-		if ( !$updateRepo->getEntityId() ) {
+		if ( !$updateRepo->isApplicable() ) {
 			return true;
 		}
 

@@ -82,7 +82,7 @@ abstract class UpdateRepo {
 	 *
 	 * @return EntityId|null
 	 */
-	public function getEntityId() {
+	protected function getEntityId() {
 		if ( $this->entityId === false ) {
 			$this->entityId = $this->siteLinkLookup->getItemIdForSiteLink(
 				new SiteLink(
@@ -100,6 +100,15 @@ abstract class UpdateRepo {
 		}
 
 		return $this->entityId;
+	}
+
+	/**
+	 * Whether the update can be applied to repo.
+	 *
+	 * @return bool
+	 */
+	public function isApplicable() {
+		return $this->getEntityId() !== null;
 	}
 
 	/**
