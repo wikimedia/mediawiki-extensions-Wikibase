@@ -261,10 +261,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @return ItemId|null
 	 */
 	public function getItemIdForSiteLink( SiteLink $siteLink ) {
-		$siteId = $siteLink->getSiteId();
-		$pageName = $siteLink->getPageName();
-
-		return $this->getItemIdForLink( $siteId, $pageName );
+		return $this->getItemIdForLink( $siteLink->getSiteId(), $siteLink->getPageName() );
 	}
 
 	/**

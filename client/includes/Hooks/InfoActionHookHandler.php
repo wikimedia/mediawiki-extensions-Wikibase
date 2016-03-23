@@ -67,11 +67,12 @@ class InfoActionHookHandler {
 	 * @param IContextSource $context
 	 * @param Title $title
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function getPageInfoRow( IContextSource $context, Title $title ) {
-		$entityId = $this->siteLinkLookup->getItemIdForSiteLink(
-			new SiteLink( $this->siteId, $title->getPrefixedText() )
+		$entityId = $this->siteLinkLookup->getItemIdForLink(
+			$this->siteId,
+			$title->getPrefixedText()
 		);
 
 		$row = $entityId ? $this->getItemPageInfo( $context, $entityId )
@@ -86,7 +87,7 @@ class InfoActionHookHandler {
 	 * @param IContextSource $context
 	 * @param ItemId $itemId
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function getItemPageInfo( IContextSource $context, ItemId $itemId ) {
 		$itemLink = $this->repoLinker->buildEntityLink(
@@ -103,7 +104,7 @@ class InfoActionHookHandler {
 	/**
 	 * @param IContextSource $context
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	private function getUnconnectedItemPageInfo( IContextSource $context ) {
 		return array(

@@ -111,11 +111,9 @@ class MovePageNotice {
 	 * @return string|null
 	 */
 	private function getItemUrl( Title $title ) {
-		$entityId = $this->siteLinkLookup->getItemIdForSiteLink(
-			new SiteLink(
-				$this->siteId,
-				$title->getPrefixedText()
-			)
+		$entityId = $this->siteLinkLookup->getItemIdForLink(
+			$this->siteId,
+			$title->getPrefixedText()
 		);
 
 		if ( !$entityId ) {

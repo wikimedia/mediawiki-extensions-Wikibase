@@ -190,6 +190,11 @@ class HashSiteLinkStore implements SiteLinkStore {
 		$this->linksByItemId[$prefixedId][] = $siteLink;
 	}
 
+	/**
+	 * @param SiteLink $siteLink
+	 *
+	 * @return string
+	 */
 	private function makeSiteLinkKey( SiteLink $siteLink ) {
 		return $siteLink->getSiteId() . ':' . $siteLink->getPageName();
 	}
