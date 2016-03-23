@@ -3,10 +3,9 @@
 namespace Wikibase\View\Tests;
 
 use DataTypes\DataTypeFactory;
+use HashSiteStore;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
-use SiteList;
-use SiteStore;
+use PHPUnit_Framework_TestCase;;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -69,7 +68,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
 			new NullStatementGrouper(),
-			$this->getSiteStore(),
+			new HashSiteStore(),
 			new DataTypeFactory( array() ),
 			$templateFactory,
 			$languageNameLookup,
@@ -175,16 +174,6 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $snakFormatter ) );
 
 		return $snakFormatterFactory;
-	}
-
-	private function getSiteStore() {
-		$siteStore = $this->getMock( SiteStore::class );
-
-		$siteStore->expects( $this->any() )
-			->method( 'getSites' )
-			->will( $this->returnValue( new SiteList() ) );
-
-		return $siteStore;
 	}
 
 }

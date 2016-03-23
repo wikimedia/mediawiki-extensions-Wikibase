@@ -2,8 +2,8 @@
 
 namespace Wikibase\Tests\Repo;
 
+use HashSiteStore;
 use Site;
-use SiteList;
 use SiteStore;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
@@ -28,7 +28,7 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 		array $specialGroups,
 		array $expectedGlobalIds
 	) {
-		$provider = new SiteLinkTargetProvider( $this->getMockSiteStore(), $specialGroups );
+		$provider = new SiteLinkTargetProvider( $this->getSiteStore(), $specialGroups );
 		$siteList = $provider->getSiteList( $groups );
 
 		$globalIds = array();
@@ -96,25 +96,18 @@ class SiteLinkTargetProviderTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	private function getSiteList() {
-		$siteList = new SiteList();
-		$siteList->append( $this->newSite( 'eswiki', 'wikipedia' ) );
-		$siteList->append( $this->newSite( 'dawiki', 'wikipedia' ) );
-		$siteList->append( $this->newSite( 'specieswiki', 'species' ) );
-		$siteList->append( $this->newSite( 'eswikiquote', 'wikiquote' ) );
-		return $siteList;
-	}
-
 	/**
 	 * @return SiteStore
 	 */
-	private function getMockSiteStore() {
-		$siteList = $this->getSiteList();
-		$mockSiteStore = $this->getMock( SiteStore::class );
-		$mockSiteStore->expects( $this->once() )
-			->method( 'getSites' )
-			->will( $this->returnValue( $siteList ) );
-		return $mockSiteStore;
+	private function getSiteStore() {
+		$siteStore = new HashSiteStore();
+
+		$siteStore->saveSite( $this->newSite( 'eswiki', 'wikipedia' ) );
+		$siteStore->saveSite( $this->newSite( 'dawiki', 'wikipedia' ) );
+		$siteStore->saveSite( $this->newSite( 'specieswiki', 'species' ) );
+		$siteStore->saveSite( $this->newSite( 'eswikiquote', 'wikiquote' ) );
+
+		return $siteStore;
 	}
 
 	private function newSite( $globalId, $group ) {
