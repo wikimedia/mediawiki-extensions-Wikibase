@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_1b6b45ef",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-23T16:14:23Z",
+      "side": 1,
+      "message": "We probably want to have an explicit mode in the Lookup for this rather than hacking around it.",
+      "revId": "38613e9fec8bdd048d02386ef0c3816e6aaa2878",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
