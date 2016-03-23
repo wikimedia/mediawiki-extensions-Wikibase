@@ -4,11 +4,10 @@ namespace Wikibase\Test;
 
 use BagOStuff;
 use HashBagOStuff;
+use HashSiteStore;
 use MediaWikiSite;
 use PHPUnit_Framework_TestCase;
 use Site;
-use SiteList;
-use SiteStore;
 use Wikibase\Lib\SitesModuleWorker;
 use Wikibase\SettingsArray;
 
@@ -41,10 +40,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 		array $specialGroups = array(),
 		BagOStuff $cache = null
 	) {
-		$siteStore = $this->getMock( SiteStore::class );
-		$siteStore->expects( $this->any() )
-			->method( 'getSites' )
-			->will( $this->returnValue( new SiteList( $sites ) ) );
+		$siteStore = new HashSiteStore( $sites );
 
 		return new SitesModuleWorker(
 			new SettingsArray( array(
