@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee33df1d_1095e489",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-23T13:38:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_d0641ce4",
+      "revId": "1404d474339dc9b20c4603d9b8419440b217625a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_105fa414",
         "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-23T13:19:27Z",
       "side": 1,
       "message": "Why was $oldUsages \u003d $this-\u003ereindexEntityUsages( $oldUsages ) removed?\nThe array_diff_key below is not guaranteed to work correctly without it. Or does $usageTable-\u003equeryUsages give sufficiently strong guarantees? Then it should be noted here that we rely on these.",
+      "revId": "1404d474339dc9b20c4603d9b8419440b217625a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_30f108ff",
+        "filename": "client/includes/Usage/Sql/SqlUsageTracker.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-03-23T13:38:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_105fa414",
       "revId": "1404d474339dc9b20c4603d9b8419440b217625a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
