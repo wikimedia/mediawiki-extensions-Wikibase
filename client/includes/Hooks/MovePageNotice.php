@@ -7,7 +7,6 @@ use MovePageForm;
 use Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -111,11 +110,9 @@ class MovePageNotice {
 	 * @return string|null
 	 */
 	private function getItemUrl( Title $title ) {
-		$entityId = $this->siteLinkLookup->getItemIdForSiteLink(
-			new SiteLink(
-				$this->siteId,
-				$title->getPrefixedText()
-			)
+		$entityId = $this->siteLinkLookup->getItemIdForLink(
+			$this->siteId,
+			$title->getPrefixedText()
 		);
 
 		if ( !$entityId ) {

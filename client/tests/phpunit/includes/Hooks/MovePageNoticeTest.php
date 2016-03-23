@@ -8,7 +8,6 @@ use Title;
 use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -49,8 +48,8 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
 
 		$siteLinkLookup->expects( $this->any() )
-			->method( 'getItemIdForSiteLink' )
-			->with( new SiteLink( 'dewiki', 'New Amsterdam' ) )
+			->method( 'getItemIdForLink' )
+			->with( 'dewiki', 'New Amsterdam' )
 			->will( $this->returnValue( new ItemId( 'Q4880' ) ) );
 
 		$movePageNotice = new MovePageNotice(

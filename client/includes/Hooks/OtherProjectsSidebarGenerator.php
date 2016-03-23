@@ -66,7 +66,11 @@ class OtherProjectsSidebarGenerator {
 	 * group and global ids.
 	 */
 	public function buildProjectLinkSidebar( Title $title ) {
-		$itemId = $this->getItemId( $title );
+		$itemId = $this->siteLinkLookup->getItemIdForLink(
+			$this->localSiteId,
+			$title->getPrefixedText()
+		);
+
 		if ( !$itemId ) {
 			return array();
 		}
@@ -183,16 +187,6 @@ class OtherProjectsSidebarGenerator {
 	 */
 	private function getSiteLinks( ItemId $itemId ) {
 		return $this->siteLinkLookup->getSiteLinksForItem( $itemId );
-	}
-
-	/**
-	 * @param Title $title
-	 *
-	 * @return Item|null
-	 */
-	private function getItemId( Title $title ) {
-		$siteLink = new SiteLink( $this->localSiteId, $title->getPrefixedText() );
-		return $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
 	}
 
 	/**

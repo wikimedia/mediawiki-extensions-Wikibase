@@ -36,7 +36,7 @@ class UpdateRepoOnDeleteTest extends \PHPUnit_Framework_TestCase {
 		$siteLinkLookupMock = $this->getMock( SiteLinkLookup::class );
 
 		$siteLinkLookupMock->expects( $this->any() )
-			->method( 'getItemIdForSiteLink' )
+			->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $entityId ) );
 
 		return array(

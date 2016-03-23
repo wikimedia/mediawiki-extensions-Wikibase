@@ -180,12 +180,17 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		return new RestrictedEntityLookup( $this->getMock( EntityLookup::class ), 200 );
 	}
 
+	/**
+	 * @param ItemId $itemId
+	 *
+	 * @return SiteLinkLookup
+	 */
 	private function getSiteLinkLookup( ItemId $itemId ) {
 		$siteLinkLookup = $this->getMockBuilder( SiteLinkLookup::class )
 			->getMock();
 
 		$siteLinkLookup->expects( $this->once() )
-			->method( 'getItemIdForSiteLink' )
+			->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $itemId ) );
 
 		return $siteLinkLookup;
