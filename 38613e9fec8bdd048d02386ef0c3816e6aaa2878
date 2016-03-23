@@ -16,6 +16,24 @@
       "revId": "38613e9fec8bdd048d02386ef0c3816e6aaa2878",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_7606e821",
+        "filename": "client/includes/Changes/ChangeRunCoalescer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-23T16:37:11Z",
+      "side": 1,
+      "message": "We should just not need an EntityRev here at all, see comment in line 170 below.",
+      "parentUuid": "ee33df1d_1b6b45ef",
+      "revId": "38613e9fec8bdd048d02386ef0c3816e6aaa2878",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
