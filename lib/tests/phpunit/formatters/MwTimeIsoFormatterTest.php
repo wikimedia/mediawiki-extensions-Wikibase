@@ -493,6 +493,23 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			array(
 				'+10000000000-00-00T00:00:00Z', TimeValue::PRECISION_DAY,
 			),
+
+			// Localization of precision >= PRECISION_YEAR works
+			array(
+				'-12345678912-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1G,
+				'12 Milliarden Jahre v. Chr.',
+				'de'
+			),
+			array(
+				'+12345678112-01-01T01:01:01Z', TimeValue::PRECISION_YEAR1K,
+				'12345679. Jahrtausend',
+				'de'
+			),
+			array(
+				'+10000000-00-00T00:00:01Z', TimeValue::PRECISION_YEAR100M,
+				'10000000',
+				'de'
+			),
 		);
 
 		$argLists = array();

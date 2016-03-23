@@ -275,10 +275,12 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 			return $year . ( $isBCE ? ' BCE' : '' );
 		}
 
-		return $this->getMessage(
+		return wfMessage(
 			'wikibase-time-precision-' . ( $isBCE ? 'BCE-' : '' ) . $msg,
 			$year
-		);
+		)
+		->inLanguage( $this->language )
+		->text();
 	}
 
 	/**
@@ -306,19 +308,6 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		}
 
 		return sprintf( '%.0f', $shifted );
-	}
-
-	/**
-	 * @param string $key
-	 * @param string $param
-	 *
-	 * @return string
-	 */
-	private function getMessage( $key, $param ) {
-		// FIXME: As the frontend cannot parse the translated precisions we only want to
-		// present the English for now. Once the frontend is using backend parsers we can
-		// turn the translation on. See the FIXME in MwTimeIsoParser::reconvertOutputString.
-		return wfMessage( $key, $param )->inLanguage( 'en' )->text();
 	}
 
 }
