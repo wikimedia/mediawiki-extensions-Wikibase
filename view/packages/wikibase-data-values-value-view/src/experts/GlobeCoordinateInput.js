@@ -107,16 +107,24 @@
 				if ( !value ) {
 					return value;
 				}
-				value = value.getValue().getPrecision();
-				if ( value === null ) {
-					return null;
+
+				var precision = value.getValue().getPrecision();
+				if ( !precision ) {
+					return {
+						custom: true,
+						value: null,
+						label: self._messageProvider.getMessage(
+							'valueview-expert-globecoordinateinput-nullprecision'
+						)
+					};
 				}
-				return getPrecisionSetting( value ) || {
+
+				return getPrecisionSetting( precision ) || {
 					custom: true,
-					value: value,
+					value: precision,
 					label: self._messageProvider.getMessage(
 						'valueview-expert-globecoordinateinput-customprecision',
-						[ Formatter.PRECISIONTEXT( value ) ]
+						[ Formatter.PRECISIONTEXT( precision ) ]
 					)
 				};
 			}
