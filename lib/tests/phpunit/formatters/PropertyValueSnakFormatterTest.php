@@ -130,6 +130,11 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 		$this->assertRegExp( $expected, $actual );
 	}
 
+	/**
+	 * @param string $value
+	 *
+	 * @return ValueFormatter
+	 */
 	private function getMockFormatter( $value ) {
 		$formatter = $this->getMock( ValueFormatter::class );
 		$formatter->expects( $this->any() )

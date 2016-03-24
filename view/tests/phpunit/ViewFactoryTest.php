@@ -145,6 +145,11 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( EntityTermsView::class, $entityTermsView );
 	}
 
+	/**
+	 * @param string $format
+	 *
+	 * @return EntityIdFormatterFactory
+	 */
 	private function getEntityIdFormatterFactory( $format ) {
 		$entityIdFormatter = $this->getMock( EntityIdFormatter::class );
 
@@ -161,6 +166,9 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		return $formatterFactory;
 	}
 
+	/**
+	 * @return HtmlSnakFormatterFactory
+	 */
 	private function getSnakFormatterFactory() {
 		$snakFormatter = $this->getMock( SnakFormatter::class );
 
@@ -177,6 +185,9 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		return $snakFormatterFactory;
 	}
 
+	/**
+	 * @return SiteStore
+	 */
 	private function getSiteStore() {
 		$siteStore = $this->getMock( SiteStore::class );
 

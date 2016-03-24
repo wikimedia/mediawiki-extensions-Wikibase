@@ -25,6 +25,12 @@ use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
  */
 class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 
+	/**
+	 * @param string $returnValue
+	 * @param string $format
+	 *
+	 * @return SnakFormatter
+	 */
 	public function newSnakFormatter( $returnValue = '<i>SNAK</i>', $format = SnakFormatter::FORMAT_HTML ) {
 		$instance = $this->getMock( SnakFormatter::class );
 		$instance->expects( $this->any() )

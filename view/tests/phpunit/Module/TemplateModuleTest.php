@@ -52,6 +52,9 @@ class TemplateModuleTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotEquals( $oldSummary['mtime'], $newSummary['mtime'] );
 	}
 
+	/**
+	 * @return ResourceLoaderContext
+	 */
 	private function getResourceLoaderContext() {
 		$context = $this->getMockBuilder( ResourceLoaderContext::class )
 			->disableOriginalConstructor()
