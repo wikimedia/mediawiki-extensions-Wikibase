@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_157b0924",
+        "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-24T19:29:33Z",
+      "side": 1,
+      "message": "What happens if there is other stuff in the message, e.g. other {{random templates}}? Can you add a test for this?",
+      "revId": "07e1e5d7fce197dba6d0cc537ce5a12dc27401d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_558c7132",
+        "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-24T19:29:33Z",
+      "side": 1,
+      "message": "This is quite critical. When the message contains a plain text pipe outside of {{PLURAL the whole regex will fail or, even worse, do a lot of false positive matches.\n\nExample: \"$1. Jahrhundert|\" will result in a regex that matches *every* input.",
+      "revId": "07e1e5d7fce197dba6d0cc537ce5a12dc27401d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
