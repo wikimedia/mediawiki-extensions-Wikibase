@@ -48,7 +48,7 @@
 	"wikibase-linkitem-confirmitem-button": "確認",
 	"wikibase-linkitem-not-loggedin-title": "您需要登入。",
 	"wikibase-linkitem-not-loggedin": "您需要登入此 Wiki 並在 [$1 中央資料儲存庫] 中使用此功能。",
-	"wikibase-linkitem-success-link": "已成功連結頁面。您可以於我們的 [$1 中央資料儲存庫] 找到包含此連結的項目。",
+	"wikibase-linkitem-success-link": "已連結頁面。您可以於我們的 [$1 中央資料儲存庫] 找到包含此連結的項目。",
 	"wikibase-property-notfound": "查無 $1 屬性。",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "隱藏",
