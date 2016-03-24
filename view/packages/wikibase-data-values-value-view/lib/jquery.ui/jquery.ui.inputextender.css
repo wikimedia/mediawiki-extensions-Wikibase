@@ -4,9 +4,9 @@
  */
 
 .ui-inputextender-extension {
-	box-shadow: 2px 2px 6px -1px grey;
+	box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
 	font-size: 84%;
-	padding: 4px;
+	padding: 0.4em 0.7em;
 	position: absolute;
 	z-index: 2; /* needed for MonoBook, listrotator is 1 above */
 }
