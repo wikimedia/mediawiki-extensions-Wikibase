@@ -8,12 +8,6 @@
 	var WIDGET_NAME = 'statementgrouplabelscroll';
 
 	/**
-	 * Name of the animation queue used for animations moving the `Statement` group labels around.
-	 * @type {string}
-	 */
-	var ANIMATION_QUEUE = 'wikibase-' + WIDGET_NAME;
-
-	/**
 	 * For keeping track of currently active statementgrouplabelscroll widgets which need updates on
 	 * certain browser window events.
 	 *
@@ -154,20 +148,12 @@
 	function positionElementInOneLineWithAnother( $element, $target, $within ) {
 		var side = $( 'html' ).prop( 'dir' ) === 'ltr' ? 'left' : 'right';
 		$element
-		.stop( ANIMATION_QUEUE, true, false ) // stop all queued animations, don't jump to end
 		.position( {
 			my: side + ' top',
 			at: side + ' top',
 			of: $target,
-			within: $within,
-			using: function( css, calc ) {
-				$( this ).animate( css, {
-					queue: ANIMATION_QUEUE,
-					easing: 'easeInOutCubic'
-				} );
-			}
-		} )
-		.dequeue( ANIMATION_QUEUE ); // run animations in queue
+			within: $within
+		} );
 	}
 
 	/**
