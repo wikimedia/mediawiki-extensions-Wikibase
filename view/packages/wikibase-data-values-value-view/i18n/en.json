@@ -25,5 +25,5 @@
 	"valueview-expertextender-unitsuggester-label": "Unit (optional): ",
 	"valueview-preview-label": "will be displayed as:",
 	"valueview-preview-novalue": "no valid value recognized",
-	"valueview-listrotator-auto": "auto"
+	"valueview-listrotator-manually": "set manually"
 }

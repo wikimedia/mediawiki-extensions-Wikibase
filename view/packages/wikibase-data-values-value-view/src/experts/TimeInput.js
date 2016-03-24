@@ -61,7 +61,9 @@
 		var precisionMsgKey = 'valueview-expert-timeinput-precision';
 		var $precisionContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-precisioncontainer' )
-			.append( $( '<div/>' ).text( this._messageProvider.getMessage( precisionMsgKey ) ) );
+			.append( $( '<div/>' )
+				.addClass( 'ui-listrotator-caption' )
+				.text( this._messageProvider.getMessage( precisionMsgKey ) ) );
 
 		this.precisionRotator = new vv.ExpertExtender.Listrotator(
 			this.uiBaseClass + '-precision',
@@ -76,7 +78,9 @@
 		var calendarMsgKey = 'valueview-expert-timeinput-calendar';
 		var $calendarContainer = $( '<div/>' )
 			.addClass( this.uiBaseClass + '-calendarcontainer' )
-			.append( $( '<div/>' ).text( this._messageProvider.getMessage( calendarMsgKey ) ) );
+			.append( $( '<div/>' )
+				.addClass( 'ui-listrotator-caption' )
+				.text( this._messageProvider.getMessage( calendarMsgKey ) ) );
 
 		this.calendarRotator = new vv.ExpertExtender.Listrotator(
 			this.uiBaseClass + '-calendar',
