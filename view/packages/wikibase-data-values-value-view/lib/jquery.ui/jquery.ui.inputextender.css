@@ -6,6 +6,7 @@
 .ui-inputextender-extension {
 	box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
 	font-size: 84%;
+	min-width: 27em;
 	padding: 0.4em 0.7em;
 	position: absolute;
 	z-index: 2; /* needed for MonoBook, listrotator is 1 above */
