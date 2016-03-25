@@ -3,7 +3,7 @@
 namespace Wikibase\Client\RecentChanges;
 
 /**
- * Represents an revision on a site
+ * Represents a revision on a site
  *
  * @since 0.5
  *
