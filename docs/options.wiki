@@ -98,7 +98,3 @@ Default:
 === Expert Settings ===
 ;injectRecentChanges: whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
 ;showExternalRecentChanges: whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki. In contrast to <code>injectRecentChanges</code>, this setting just removes the changes from the user interface. The default is <code>false</code>. This is intended to temporarily prevent external changes from showing in order to find or fix some issue on a live site.
-:;<code>'DirectSqlStore'</code>: Access the repo's database directly to fetch entity data etc.
-:;<code>'CachingSqlStore'</code>: No direct access to the repo's database. Use cache information received from change notifications. '''Warning:''' dies is currently dysfunctional.
-:;<code>null</code>: Automatic, use <code>'DirectSqlStore'</code> if <code>repoDatabase</code> is set, <code>'CachingSqlStore'</code> if not.
-: '''Caveat:''' should always be <code>null</code> at the moment, because some code relies on the <code>repoDatabase</code> setting to determine whether the local cache tables should be used.
