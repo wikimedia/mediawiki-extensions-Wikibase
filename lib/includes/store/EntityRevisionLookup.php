@@ -16,14 +16,14 @@ use Wikibase\EntityRevision;
 interface EntityRevisionLookup {
 
 	/**
-	 * Flag to use instead of an revision ID to indicate that the latest revision is desired,
+	 * Flag to use instead of a revision ID to indicate that the latest revision is desired,
 	 * but a slightly lagged version is acceptable. This would generally be the case when fetching
 	 * entities for display.
 	 */
 	const LATEST_FROM_SLAVE = 'slave';
 
 	/**
-	 * Flag to use instead of an revision ID to indicate that the latest revision is desired,
+	 * Flag to use instead of a revision ID to indicate that the latest revision is desired,
 	 * and it is essential to assert that there really is no newer version, to avoid data loss
 	 * or conflicts. This would generally be the case when loading an entity for
 	 * editing/modification.
