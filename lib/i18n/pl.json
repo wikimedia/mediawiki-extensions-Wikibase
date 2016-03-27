@@ -10,7 +10,8 @@
 			"WTM",
 			"Debeet",
 			"Macofe",
-			"Devwebtel"
+			"Devwebtel",
+			"Sethakill"
 		]
 	},
 	"wikibase-lib-desc": "Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client",
@@ -83,7 +84,7 @@
 	"datatypes-type-external-id": "Identyfikator zewnętrzny",
 	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-Gannum": "$1 mld lat C#",
-	"wikibase-time-precision-Mannum": "1 mln lat CE",
+	"wikibase-time-precision-Mannum": "$1 mln lat CE",
 	"wikibase-time-precision-millennium": "$1. tysiąclecie",
 	"wikibase-time-precision-century": "$1. wiek",
 	"wikibase-snakformatter-valuetype-mismatch": "Typ wartości „$1” nie jest zgodny z typem właściwości „$2”.",

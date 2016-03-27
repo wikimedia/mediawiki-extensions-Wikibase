@@ -245,6 +245,7 @@
 	"wikibase-entitydata-unsupported-format": "Tämä käyttöliittymä ei tue tietomuotoa $1.",
 	"wikibase-entitydata-title": "Aiheen tiedot",
 	"wikibase-entitydata-text": "Tämä sivu tarjoaa linkitetyn datan näkymän aiheen arvoille. Kirjoita aiheen tunnus verkko-osoitteesta alasivumuotoa käyttäen.",
+	"wikibase-redirectentity-success": "$1 ohjattiin kohteeseen $2.",
 	"special-mylanguagefallbackchain": "Varakieliketjuni",
 	"wikibase-mylanguagefallbackchain-text": "Varakieliketjua käytetään näyttämään aiheiden nimet sinulle seuraavasti.",
 	"wikibase-mylanguagefallbackchain-babel": "Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> {{GENDER:$1|sinun}} [[Special:MyPage|käyttäjäsivullesi]].",

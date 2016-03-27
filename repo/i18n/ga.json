@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Tem"
 		]
 	},
 	"wikibase-edit": "cur in eagar",
 	"wikibase-save": "Sábháil",
 	"wikibase-cancel": "Cealaigh",
+	"wikibase-sitelinks-special": "Suíomhanna eile",
 	"wikibase-itembytitle-lookup-page": "Leathanach:",
 	"wikibase-itembytitle-submit": "Cuardaigh",
 	"wikibase-itemdisambiguation-lookup-language": "Teanga:",

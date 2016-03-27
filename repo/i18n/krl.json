@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Likopiän tyttö",
-			"Mashoi7"
+			"Mashoi7",
+			"Ilja.mos"
 		]
 	},
 	"wikibase-edit": "kohentele",
 	"wikibase-add": "Lisyä",
+	"wikibase-sitelinks-special": "Muut šivuštot",
 	"wikibase-statementview-rank-normal": "Tavallini arvo"
 }
