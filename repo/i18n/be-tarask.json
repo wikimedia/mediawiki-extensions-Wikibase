@@ -26,6 +26,7 @@
 	"wikibase-entitytermsforlanguagelistview-label": "Метка",
 	"wikibase-entitytermsforlanguagelistview-language": "Мова",
 	"wikibase-entitytermsforlanguagelistview-more": "Болей моваў",
+	"wikibase-entitytermsforlanguagelistview-less": "Меней моваў",
 	"wikibase-label-empty": "Метка ня вызначаная",
 	"wikibase-label-edit-placeholder": "увядзіце метку",
 	"wikibase-label-edit-placeholder-language-aware": "увядзіце метку мовай: $1",
