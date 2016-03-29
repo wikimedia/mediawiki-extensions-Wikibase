@@ -60,6 +60,7 @@ class SpecialSetLabel extends SpecialModifyTerm {
 	 * @param EntityDocument $entity
 	 * @param string $languageCode
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string
 	 */
 	protected function getValue( EntityDocument $entity, $languageCode ) {

@@ -84,7 +84,7 @@ call_user_func( function() {
 	global $wgExtensionMessagesFiles, $wgMessagesDirs;
 	global $wgAPIModules, $wgAPIListModules, $wgSpecialPages, $wgHooks;
 	global $wgWBRepoSettings, $wgResourceModules, $wgValueParsers, $wgJobClasses;
-	global $wgWBRepoDataTypes, $wgWBRepoEntityTypes, $wgContentHandlers;
+	global $wgWBRepoDataTypes, $wgWBRepoEntityTypes;
 
 	$wgExtensionCredits['wikibase'][] = array(
 		'path' => __DIR__,
