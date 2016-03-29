@@ -6,6 +6,7 @@ use ApiQuerySiteinfo;
 use ConfigFactory;
 use DerivativeContext;
 use ImportStringSource;
+use MWException;
 use OutputPage;
 use ParserOutput;
 use RequestContext;
@@ -77,7 +78,7 @@ class RepoHooksTest extends \MediaWikiTestCase {
 			'item_allowimport' => array(
 				array( 'model' => CONTENT_MODEL_WIKIBASE_ITEM ),
 				false,
-				'MWException'
+				MWException::class
 			),
 			'item_noimport' => array(
 				array( 'model' => CONTENT_MODEL_WIKIBASE_ITEM ),
@@ -155,7 +156,7 @@ XML
 XML
 				,
 				false,
-				'MWException'
+				MWException::class
 			),
 			'item (allow)' => array( <<<XML
 <mediawiki>

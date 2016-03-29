@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Validators;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\StringLengthValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -25,7 +26,7 @@ class DataValueValidatorTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array( $validator, new StringValue( '' ), false, null, "mismatch" ),
 			array( $validator, new StringValue( 'foo' ), true, null, "match" ),
-			array( $validator, 'xyz', false, 'InvalidArgumentException', "not a DataValue" ),
+			array( $validator, 'xyz', false, InvalidArgumentException::class, 'not a DataValue' ),
 		);
 	}
 
