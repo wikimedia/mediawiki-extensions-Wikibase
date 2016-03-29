@@ -10,7 +10,6 @@ use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpMainSnak;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -230,7 +229,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider validateProvider
 	 */
-	public function testValidate( EntityId $entityId, $guid, Snak $snak ) {
+	public function testValidate( ItemId $entityId, $guid, Snak $snak ) {
 		$changeOpMainSnak = new ChangeOpMainSnak(
 			$guid,
 			$snak,

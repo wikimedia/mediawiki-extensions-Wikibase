@@ -287,8 +287,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
 
 		/**
-		 * @var EntityContent $latestContent
+		 * @var EntityContent $olderContent
 		 * @var EntityContent $newerContent
+		 * @var EntityContent $latestContent
 		 */
 		$olderContent = $olderRevision->getContent();
 		$newerContent = $newerRevision->getContent();
