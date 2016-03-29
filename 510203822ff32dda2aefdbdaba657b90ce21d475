@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee33df1d_e2204d98",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-03-29T14:25:12Z",
+      "side": 1,
+      "message": "This line should also go. It doesn\u0027t belong here: it was left over when the relevant setting, namely \"defaultClientStore\", was removed in Id9795a180286d. Thanks for finding this inconsistency!",
+      "revId": "510203822ff32dda2aefdbdaba657b90ce21d475",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
