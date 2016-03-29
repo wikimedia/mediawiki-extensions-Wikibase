@@ -16,6 +16,24 @@
       "revId": "4676621dd423574b8c8a74083872437a2a57988a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee33df1d_45b4a333",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-03-29T16:24:42Z",
+      "side": 1,
+      "message": "But they say dedupeBag. o_O?",
+      "parentUuid": "ee33df1d_62771dfe",
+      "revId": "4676621dd423574b8c8a74083872437a2a57988a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
