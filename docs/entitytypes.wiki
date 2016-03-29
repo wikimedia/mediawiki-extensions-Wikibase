@@ -28,7 +28,7 @@ to be implemented and registered:
   the abstract EntityView class from the WikibaseView component.
 * MediaWiki bindings are needed by defining a content class extending EntityContent and a handler
   class extending EntityHandler. Furthermore, the handler has to be globally registered in
-  $wgContentHandlers. It is used to create instances of the content class.
+  $wgWBRepoEntityTypes. It is used to create instances of the content class.
 
 Entity types are defined in the global $wgWBRepoEntityTypes and $wgWBClientEntityTypes arrays,
 respectively. These arrays are constructed at bootstrap time in Wikibase.php and

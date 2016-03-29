@@ -87,7 +87,7 @@ abstract class EntityView {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityDocument $entityDocument the entity to render
+	 * @param EntityDocument $entity the entity to render
 	 *
 	 * @return string HTML
 	 */
