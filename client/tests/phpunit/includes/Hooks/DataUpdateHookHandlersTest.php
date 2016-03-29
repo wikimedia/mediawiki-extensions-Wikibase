@@ -163,7 +163,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array[]|null $usages
+	 * @param EntityUsage[]|null $usages
 	 * @param string $timestamp
 	 *
 	 * @return ParserOutput
@@ -265,28 +265,28 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideLinksUpdateComplete
 	 */
-	public function testLinksUpdateComplete( $usage ) {
+	public function testLinksUpdateComplete( $usages ) {
 		$timestamp = '20150505000000';
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen', $timestamp );
 
-		$linksUpdate = $this->newLinksUpdate( $title, $usage, $timestamp );
+		$linksUpdate = $this->newLinksUpdate( $title, $usages, $timestamp );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, true, false );
+		$handler = $this->newDataUpdateHookHandlers( $title, $usages, $timestamp, true, false );
 		$handler->doLinksUpdateComplete( $linksUpdate );
 	}
 
 	/**
 	 * @dataProvider provideLinksUpdateComplete
 	 */
-	public function testDoParserCacheSaveComplete( $usage ) {
+	public function testDoParserCacheSaveComplete( $usages ) {
 		$timestamp = '20150505000000';
 
-		$parserOutput = $this->newParserOutput( $usage, $timestamp );
+		$parserOutput = $this->newParserOutput( $usages, $timestamp );
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen', $timestamp );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, $usage, $timestamp, false, true );
+		$handler = $this->newDataUpdateHookHandlers( $title, $usages, $timestamp, false, true );
 		$handler->doParserCacheSaveComplete( $parserOutput, $title );
 	}
 

@@ -857,7 +857,8 @@ final class RepoHooks {
 	 * @param string $modelId
 	 * @param ContentHandler|null $handler
 	 *
-	 * @return bool
+	 * @return bool|null False on success to stop other ContentHandlerForModelID hooks from running,
+	 *  null on error.
 	 */
 	public static function onContentHandlerForModelID( $modelId, &$handler ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

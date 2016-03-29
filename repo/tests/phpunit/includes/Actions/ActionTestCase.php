@@ -258,10 +258,9 @@ class ActionTestCase extends \MediaWikiTestCase {
 		$id = null;
 		$result = null;
 
-		/** @var EntityDocument|string $item */
-		foreach ( $revisions as $item ) {
+		foreach ( $revisions as $entity ) {
 			$flags = ( $id !== null ) ? EDIT_UPDATE : EDIT_NEW;
-			$result = $this->createTestContentRevision( $item, $id, $wgUser, $flags );
+			$result = $this->createTestContentRevision( $entity, $id, $wgUser, $flags );
 
 			if ( $result instanceof EntityRedirect ) {
 				$id = $result->getEntityId();
@@ -274,7 +273,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityDocument|string $item
+	 * @param EntityDocument|string $entity
 	 * @param EntityId|null $id
 	 * @param User $user
 	 * @param int $flags
@@ -282,35 +281,35 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @throws RuntimeException
 	 * @return EntityDocument|EntityRedirect
 	 */
-	private function createTestContentRevision( $item, $id, User $user, $flags ) {
+	private function createTestContentRevision( $entity, $id, User $user, $flags ) {
 		if ( $flags == EDIT_NEW ) {
 			$comment = "Creating test item";
 		} else {
 			$comment = "Changing test item";
 		}
 
-		// HACK: If $item is a string, treat it as a redirect target.
+		// HACK: If $entity is a string, treat it as a redirect target.
 		// The redirect must not be the first revision.
-		if ( is_string( $item ) ) {
+		if ( is_string( $entity ) ) {
 			if ( !$id ) {
 				throw new RuntimeException( 'Can\'t create a redirect as the first revision of a test entity page.' );
 			}
 
-			$result = $this->createTestRedirect( $id, $item, $comment, $user, $flags );
+			$result = $this->createTestRedirect( $id, $entity, $comment, $user, $flags );
 		} else {
 			if ( $id ) {
-				$item->setId( $id );
+				$entity->setId( $id );
 			}
 
-			$result = $this->createTestItem( $item, $comment, $user, $flags );
+			$result = $this->createTestItem( $entity, $comment, $user, $flags );
 		}
 
 		return $result;
 	}
 
-	private function createTestItem( Item $item, $comment, $user, $flags ) {
+	private function createTestItem( EntityDocument $entity, $comment, $user, $flags ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$rev = $store->saveEntity( $item, $comment, $user, $flags );
+		$rev = $store->saveEntity( $entity, $comment, $user, $flags );
 
 		$result = $rev->getEntity();
 

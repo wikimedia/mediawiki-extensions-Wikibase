@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\SQL;
 
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -114,7 +115,7 @@ class ItemsPerSiteBuilder {
 			}
 			$item = $this->entityLookup->getEntity( $itemId );
 
-			if ( !$item ) {
+			if ( !( $item instanceof Item ) ) {
 				continue;
 			}
 
