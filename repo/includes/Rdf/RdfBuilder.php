@@ -53,7 +53,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	/**
 	 * @var DedupeBag
 	 */
-	private $dedupBag;
+	private $dedupeBag;
 
 	/**
 	 * Rdf builder for outputting labels for entity stubs.
@@ -89,7 +89,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param PropertyDataTypeLookup $propertyLookup
 	 * @param int $flavor
 	 * @param RdfWriter $writer
-	 * @param DedupeBag $dedupBag
+	 * @param DedupeBag $dedupeBag
 	 */
 	public function __construct(
 		SiteList $sites,
@@ -98,14 +98,14 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		PropertyDataTypeLookup $propertyLookup,
 		$flavor,
 		RdfWriter $writer,
-		DedupeBag $dedupBag
+		DedupeBag $dedupeBag
 	) {
 		$this->vocabulary = $vocabulary;
 		$this->propertyLookup = $propertyLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->writer = $writer;
 		$this->produceWhat = $flavor;
-		$this->dedupBag = $dedupBag ?: new HashBagOStuff();
+		$this->dedupeBag = $dedupeBag ?: new HashDedupeBag();
 
 		// XXX: move construction of sub-builders to a factory class.
 		$this->termsBuilder = new TermsRdfBuilder( $vocabulary, $writer );
@@ -123,7 +123,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		if ( $this->shouldProduce( RdfProducer::PRODUCE_SITELINKS ) ) {
 			$builder = new SiteLinksRdfBuilder( $vocabulary, $writer, $sites );
 			// We can use the same bag since namespaces are different
-			$builder->setDedupeBag( $this->dedupBag );
+			$builder->setDedupeBag( $this->dedupeBag );
 			$this->builders[] = $builder;
 		}
 	}
@@ -139,14 +139,14 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 				$this->vocabulary,
 				$this->writer,
 				$this,
-				$this->dedupBag
+				$this->dedupeBag
 			);
 		} else {
 			$statementValueBuilder = $this->valueSnakRdfBuilderFactory->getSimpleValueSnakRdfBuilder(
 				$this->vocabulary,
 				$this->writer,
 				$this,
-				$this->dedupBag
+				$this->dedupeBag
 			);
 		}
 
@@ -176,7 +176,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		);
 
 		$builder = new FullStatementRdfBuilder( $this->vocabulary, $this->writer, $snakBuilder );
-		$builder->setDedupeBag( $this->dedupBag );
+		$builder->setDedupeBag( $this->dedupeBag );
 		$builder->setProduceQualifiers( $this->shouldProduce( RdfProducer::PRODUCE_QUALIFIERS ) );
 		$builder->setProduceReferences( $this->shouldProduce( RdfProducer::PRODUCE_REFERENCES ) );
 
