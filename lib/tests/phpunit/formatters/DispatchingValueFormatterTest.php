@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Test;
 
 use DataValues\StringValue;
+use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\StringFormatter;
 use ValueFormatters\ValueFormatter;
@@ -38,15 +39,15 @@ class DispatchingValueFormatterTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'keys must be strings' => array(
 				array( 17 => $stringFormatter ),
-				'InvalidArgumentException'
+				InvalidArgumentException::class
 			),
 			'keys must have prefix' => array(
 				array( 'foo' => $stringFormatter ),
-				'InvalidArgumentException'
+				InvalidArgumentException::class
 			),
 			'formatters must be instances of ValueFormatter' => array(
 				array( 'novalue' => 17 ),
-				'InvalidArgumentException'
+				InvalidArgumentException::class
 			),
 		);
 	}

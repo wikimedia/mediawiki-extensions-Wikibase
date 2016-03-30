@@ -45,7 +45,7 @@ class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 			array( 1, $validator, array( 'x', 'foo', '' ), null, null, "match indexed" ),
 			array( 'a', $validator, array(), 'missing-field', null, "missing field" ),
 			array( 'a', $validator, array( 'a' => null ), 'missing-field', null, "field is null" ),
-			array( 1, $validator, 'xyz', null, 'InvalidArgumentException', "not an array" ),
+			array( 1, $validator, 'xyz', null, InvalidArgumentException::class, 'not an array' ),
 		);
 	}
 

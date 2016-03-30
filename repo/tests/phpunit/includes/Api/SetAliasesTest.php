@@ -2,6 +2,8 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use UsageException;
+
 /**
  * @covers Wikibase\Repo\Api\SetAliases
  * @covers Wikibase\Repo\Api\ModifyEntity
@@ -142,21 +144,21 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //0
 				'p' => array( 'language' => 'xx', 'add' => 'Foo' ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'unknown_language'
 				) )
 			),
 			array( //1
 				'p' => array( 'language' => 'nl', 'set' => TermTestHelper::makeOverlyLongString() ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'modification-failed'
 				) )
 			),
 			array( //2
 				'p' => array( 'language' => 'pt', 'remove' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'notoken',
 					'message' => 'The token parameter must be set'
 				) )
@@ -164,7 +166,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //3
 				'p' => array( 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'badtoken',
 					'message' => 'Invalid token'
 				) )
@@ -172,7 +174,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //4
 				'p' => array( 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'no-such-entity-id',
 					'message' => 'Could not find such an entity ID.'
 				) )
@@ -180,7 +182,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //5
 				'p' => array( 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'unknown_site',
 					'message' => "Unrecognized value for parameter 'site'"
 				) )
@@ -188,7 +190,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //6
 				'p' => array( 'site' => 'enwiki', 'title' => 'GhskiDYiu2nUd', 'language' => 'en', 'remove' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'no-such-entity-link',
 					'message' => 'No entity found matching site link'
 				) )
@@ -196,7 +198,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //7
 				'p' => array( 'title' => 'Blub', 'language' => 'en', 'add' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'param-illegal',
 					'message' => 'Either provide the item "id" or pairs'
 				) )
@@ -204,7 +206,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			array( //8
 				'p' => array( 'site' => 'enwiki', 'language' => 'en', 'set' => 'normalValue' ),
 				'e' => array( 'exception' => array(
-					'type' => 'UsageException',
+					'type' => UsageException::class,
 					'code' => 'param-illegal'
 				) )
 			),

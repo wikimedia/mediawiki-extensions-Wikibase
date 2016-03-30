@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\DataValue;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
@@ -48,11 +49,11 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 		return array(
 			'keys must be strings' => array(
 				array( 17 => $stringFormatter ),
-				'InvalidArgumentException'
+				InvalidArgumentException::class
 			),
 			'builder must be callable' => array(
 				array( 'foo' => 17 ),
-				'InvalidArgumentException'
+				InvalidArgumentException::class
 			),
 		);
 	}

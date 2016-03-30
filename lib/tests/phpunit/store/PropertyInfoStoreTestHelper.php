@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\PropertyInfoStore;
@@ -43,7 +44,7 @@ class PropertyInfoStoreTestHelper {
 			array( // #1: missing required field
 				new PropertyId( 'P23' ),
 				array(),
-				'InvalidArgumentException'
+				InvalidArgumentException::class
 			),
 			array( // #2: extra data
 				new PropertyId( 'P23' ),

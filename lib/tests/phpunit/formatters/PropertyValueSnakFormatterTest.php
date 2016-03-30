@@ -6,6 +6,7 @@ use DataTypes\DataType;
 use DataTypes\DataTypeFactory;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
+use InvalidArgumentException;
 use OutOfBoundsException;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
@@ -48,7 +49,7 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 		return array(
 			'format must be a string' => array(
 				17,
-				'InvalidArgumentException'
+				InvalidArgumentException::class
 			),
 		);
 	}

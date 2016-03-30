@@ -6,6 +6,7 @@ use DataTypes\DataTypeFactory;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -95,7 +96,7 @@ class SnakConstructionServiceTest extends \PHPUnit_Framework_TestCase {
 			'value/badvalue' => array(
 				1, 'value', array( 'foo' ),
 				PropertyValueSnak::class,
-				'InvalidArgumentException'
+				InvalidArgumentException::class
 			),
 		);
 	}
