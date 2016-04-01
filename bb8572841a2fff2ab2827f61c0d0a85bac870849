@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_d216225a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Thanks for this hint! I will include this, even though the change is already merged.",
+      "parentUuid": "ce38dbff_1bbd4cae",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_5b1b54d4",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-01T00:56:26Z",
       "side": 1,
       "message": "You\u0027re not specifying which icon you\u0027re using for email (it\u0027s not implicit).\n\nI assume you\u0027re going to add a real icon later.  If so, specify:\n\n\u0027icon\u0027 \u003d\u003e \u0027page-connection\u0027,\n\n(similar to what you do in the presentation model).\n\nOtherwise, use:\n\n\u0027icon\u0027 \u003d\u003e \u0027placeholder\u0027\n\n, drop the $icons part, and change the presentation model as well.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_52a97277",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "We haven\u0027t yet decided on the right icon.",
+      "parentUuid": "ce38dbff_5b1b54d4",
       "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_f2cec685",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_1b21ccf6",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_fb57c85a",
         "filename": "client/i18n/en.json",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2016-04-01T00:56:26Z",
       "side": 1,
       "message": "First letter should be capitalized.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_b28b9e1f",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_fb57c85a",
       "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_b2b43ee6",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_3b52d06a",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_5bc87425",
         "filename": "client/i18n/en.json",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2016-04-01T00:56:26Z",
       "side": 1,
       "message": "\u003cstrong\u003e for the page that\u0027s actually named.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_d2af4290",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_5bc87425",
       "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_72aab683",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_0cfcf4b0",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_fbd6a8c7",
         "filename": "client/i18n/qqq.json",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2016-04-01T00:56:26Z",
       "side": 1,
       "message": "echo-notification-count has been removed. See https://gerrit.wikimedia.org/r/#/c/276096/ for updates regarding this (it also affects $5).",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_7269161d",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_fbd6a8c7",
       "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_527a1220",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_dbd3e4d5",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_3be13098",
         "filename": "client/i18n/qqq.json",
         "patchSetId": 3
@@ -166,6 +328,24 @@
       "writtenOn": "2016-04-01T00:56:26Z",
       "side": 1,
       "message": "Document what this is.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_924e5a9a",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_3be13098",
       "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_92677a22",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_9be95c7e",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_9ba03c40",
         "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
         "patchSetId": 3
@@ -200,6 +398,24 @@
       "writtenOn": "2016-04-01T00:56:26Z",
       "side": 1,
       "message": "This now returns only a single unformatted number.  See https://gerrit.wikimedia.org/r/#/c/276096/ .  Also use numParams and only pass it once.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_927dbae7",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_9ba03c40",
       "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_7282b6ce",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_db8124a6",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_1b8c2cdb",
         "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
         "patchSetId": 3
@@ -234,6 +468,24 @@
       "writtenOn": "2016-04-01T00:56:26Z",
       "side": 1,
       "message": "See discussion on task regarding this.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_b276fed3",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-01T13:50:14Z",
+      "side": 1,
+      "message": "I though it was a good idea. I took inspiration from welcoming notifications.",
+      "parentUuid": "ce38dbff_1b8c2cdb",
       "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
