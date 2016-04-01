@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_b258be36",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "Is this currently used? I mean, in this patch?",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_123d2ab9",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "Copy-pasto.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_3244ae4a",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "Please remove the newline.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_d280e24d",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "This class should also have a test that tests the caching functionality.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_72f2b604",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "I would suggest a more specific key like \"PropertyOrderProvider\", but are not sure if this is necessary.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_d2f742f1",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "The variable is called $cacheKeyPrefix above.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_b2fc3ed7",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "$this-\u003ecacheKey is null and never set, see above.\n\nAlso, all this BagOStuff stuff is not needed, since you want to store a single thing only. Simply initialize $this-\u003ecache with false, check for false and assign the array (or null) to it. No need for get() and set().",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_52eb3209",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "Space missing.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_d26aa2b0",
+        "filename": "lib/includes/store/PropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "This should not talk about a specific implementation. It should describe whats common for all implementations.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_f2afe6dc",
+        "filename": "lib/includes/store/PropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "Newline.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_929f7ab9",
+        "filename": "lib/includes/store/PropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "Array keys can\u0027t be objects, so I assume \"PropertyId\" means \"property id serialization\".\n\nAlso, the use of square brackets is a bit odd. Suggestion: array( $propertyIdSerialization \u003d\u003e $ordinalNumber )",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_12b36a4d",
+        "filename": "lib/includes/store/PropertyOrderProviderException.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "This message does not provide any useful information. Please replace with an empty string.\n\nWhen you do this, this constructor is not different from the parent one any more and can be removed completely.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_52c21289",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "PHPDoc block missing.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_12c88aa9",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "@see parent::… is in my opinion better that copy-pasting comment lines.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_32e82e0b",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "Ah, here is the space thats missing in the other file. ;-)",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_1247ea23",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "Suggestion:\n\n@^\\*\\s*(?:\\[\\[Property:)?(P\\d+)@im\n\nThis makes it possible to have lines like this:\n* [[Property:P1]]\n\nThis makes it very convenient to work with this list.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_925adaf7",
+        "filename": "lib/tests/phpunit/store/MediaWikiPagePropertyOrderProviderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "This is the interface. Should probably be WikiPagePropertyOrderProvider.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_92013abc",
+        "filename": "lib/tests/phpunit/store/MediaWikiPagePropertyOrderProviderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "You could test for \"** P133 \\n\", this should not be matched.",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_d25462cc",
+        "filename": "lib/tests/phpunit/store/MediaWikiPagePropertyOrderProviderTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-01T12:49:11Z",
+      "side": 1,
+      "message": "WikiPagePropertyOrderProvider",
+      "revId": "67bd5f0feb9238f1dd7f5651699e72164f0ef3ed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
