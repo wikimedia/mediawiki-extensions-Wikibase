@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_1bbd4cae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "You should write the exact text:\n\nDepends-On: I10228205785527b273c1fd06af85fcc26df9e583\n\nabove the Change-Id line.  Then, Gerrit will enforce that this patch can not be merged early.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_5b1b54d4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "You\u0027re not specifying which icon you\u0027re using for email (it\u0027s not implicit).\n\nI assume you\u0027re going to add a real icon later.  If so, specify:\n\n\u0027icon\u0027 \u003d\u003e \u0027page-connection\u0027,\n\n(similar to what you do in the presentation model).\n\nOtherwise, use:\n\n\u0027icon\u0027 \u003d\u003e \u0027placeholder\u0027\n\n, drop the $icons part, and change the presentation model as well.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_1b21ccf6",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "You can\u0027t rely on ordering like this.  Someone could load Echo.php later in LocalSettings.php.\n\nInstead, register the hooks conditionally inside $wgExtensionFunctions.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_fb57c85a",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "First letter should be capitalized.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_3b52d06a",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "Page names should be wrapped with \u003cstrong\u003e\u003c/strong\u003e",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_5bc87425",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "\u003cstrong\u003e for the page that\u0027s actually named.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_fbd6a8c7",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "echo-notification-count has been removed. See https://gerrit.wikimedia.org/r/#/c/276096/ for updates regarding this (it also affects $5).",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_dbd3e4d5",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "Email",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_3be13098",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "Document what this is.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_9be95c7e",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "Use the real count with EchoNotificationController::getCappedNotificationCount and numParams.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_9ba03c40",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "This now returns only a single unformatted number.  See https://gerrit.wikimedia.org/r/#/c/276096/ .  Also use numParams and only pass it once.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_db8124a6",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "Should be true",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_1b8c2cdb",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-01T00:56:26Z",
+      "side": 1,
+      "message": "See discussion on task regarding this.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
