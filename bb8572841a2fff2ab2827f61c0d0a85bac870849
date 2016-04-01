@@ -104,6 +104,23 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_0cfcf4b0",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2016-04-01T11:23:03Z",
+      "side": 1,
+      "message": "I think it\u0027s convention to only gender the verb, so \"you\" should be placed outside of it.",
+      "revId": "bb8572841a2fff2ab2827f61c0d0a85bac870849",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_fbd6a8c7",
         "filename": "client/i18n/qqq.json",
         "patchSetId": 3
