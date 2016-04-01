@@ -3,7 +3,8 @@
 		"authors": [
 			"Рустам Нурыев",
 			"Sagan",
-			"Айсар"
+			"Айсар",
+			"Вильданова Гюзель"
 		]
 	},
 	"wikibase-edit": "үҙгәртергә",
@@ -15,5 +16,5 @@
 	"wikibase-aliases-empty": "Альтернатив исемдәр (синонимдар) күрһәтелмәгән",
 	"wikibase-statementview-rank-normal": "Нормаль ранг",
 	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|сығанаҡ}}",
-	"wikibase-redirectentity-success": "$ 1 йүнәлтелгән $ 2."
+	"wikibase-redirectentity-success": "$ 1 $ 2 -гә кире йүнәлтелгән"
 }

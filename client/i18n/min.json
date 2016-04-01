@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Iwan Novirion"
+			"Iwan Novirion",
+			"Naval Scene"
 		]
 	},
 	"wikibase-client-desc": "Klien untuak ekstensi Wikibase",
+	"tooltip-t-wikibase": "Pautan untuak maubuangan ka item panyimpanan data",
 	"wikibase-after-page-move": "Sanak paralu juo [$1 mampabarui item] nan tapauik di Wikidata dalam hal interwiki sangkek mamindahan laman.",
 	"wikibase-after-page-move-queued": "[$1 Item Wikidata] nan takaik ka laman ko akan sacaro otomatih dipabarui sacapeknyo.",
 	"wikibase-comment-remove": "Item Wikidata takait dihapuih. Interwiki hilang.",
@@ -16,6 +18,7 @@
 	"wikibase-comment-sitelink-change": "Interwiki barubah dari $1 ka $2",
 	"wikibase-comment-sitelink-remove": "Pangurangan interwiki: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|parubahan}}",
+	"wikibase-dataitem": "Item di {{WBREPONAME}}",
 	"wikibase-editlinks": "Suntiang interwiki",
 	"wikibase-editlinkstitle": "Suntiang pranala interwiki",
 	"wikibase-linkitem-addlinks": "Tambah interwiki",

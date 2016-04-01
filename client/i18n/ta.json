@@ -4,7 +4,8 @@
 			"Shanmugamp7",
 			"மதனாஹரன்",
 			"Jayarathina",
-			"கலைவாணன்"
+			"கலைவாணன்",
+			"AntanO"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}உருப்படி",
@@ -14,6 +15,6 @@
 	"wikibase-rc-hide-wikidata-hide": "மறை",
 	"wikibase-rc-hide-wikidata-show": "காட்டு",
 	"wikibase-rc-show-wikidata-pref": "விக்கித்தரவு தொகுப்புகளை அண்மைய மாற்றங்களில் காண்பி",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} தொகு",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} தொகுப்பு",
 	"wikibase-otherprojects": "பிற திட்டங்கள்"
 }
