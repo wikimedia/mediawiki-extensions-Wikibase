@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_d1c90357",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_db0c46f3",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_bb0fc2e3",
         "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-22T15:58:04Z",
       "side": 1,
       "message": "Here we should first check if we already have the info in the cache, and use it if it\u0027s there:\n\n  $propertyOrder  \u003d $this-\u003ecache-\u003eget( $this-\u003ecacheKey );\n  if ( $propertyOrder !\u003d\u003d false ) {\n    return $propertyOrder;\n  }",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_11d40bec",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_bb0fc2e3",
       "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_7100f76d",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_7b37faab",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_db3e0687",
         "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2016-03-22T15:58:04Z",
       "side": 1,
       "message": "We do need a cache key :)",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_5105f37b",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_db3e0687",
       "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_0c6514ab",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_3bfbb2bb",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_1b1d0e15",
         "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2016-03-22T15:58:04Z",
       "side": 1,
       "message": "Should probably be a constructor argument.",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_ecea70d6",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_1b1d0e15",
       "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_8c9ac464",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "ee33df1d_9bbf5ecd",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_bbe50209",
         "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
         "patchSetId": 5
@@ -132,6 +258,24 @@
       "writtenOn": "2016-03-22T15:58:04Z",
       "side": 1,
       "message": "This can\u0027t happen, WikiPage::factory is guaranteed to return a WikiPage (or throw an exception)",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_ec9ef058",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "ee33df1d_bbe50209",
       "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_0ca6b4a7",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Added the title of the page",
+      "parentUuid": "ee33df1d_3b76123a",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_fbcdca8a",
         "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
         "patchSetId": 5
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_4cb71cd4",
+        "filename": "lib/includes/store/MediaWikiPagePropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33df1d_fbcdca8a",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_7b8ffa26",
         "filename": "lib/includes/store/PropertyOrderProvider.php",
         "patchSetId": 5
@@ -183,6 +363,24 @@
       "writtenOn": "2016-03-22T15:58:04Z",
       "side": 1,
       "message": "Do we also want to guarantee that the array is sorted by ordinal number? That would be convenient.",
+      "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_ecc55043",
+        "filename": "lib/includes/store/PropertyOrderProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-04-01T11:51:46Z",
+      "side": 1,
+      "message": "Since we just flip the array, it *should* be sorted correctly, doesn\u0027t it? Is that sufficient to guarantee it?",
+      "parentUuid": "ee33df1d_7b8ffa26",
       "revId": "abc2875c5478540beb805ec1e1541063b8cc409f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
