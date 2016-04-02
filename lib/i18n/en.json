@@ -39,7 +39,7 @@
 	"wikibase-globedetails-globe": "Globe",
 	"wikibase-parse-error": "Malformed value.",
 	"wikibase-parse-error-coordinate": "The coordinate value is malformed.",
-	"wikibase-parse-error-entity-id": "The entity id is malformed.",
+	"wikibase-parse-error-entity-id": "The entity ID is malformed.",
 	"wikibase-parse-error-quantity": "The quantity value is malformed.",
 	"wikibase-parse-error-time": "The time value is malformed.",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
