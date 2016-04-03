@@ -411,6 +411,7 @@
 	"apihelp-wbgetentities-param-titles": "相应页面的标题\n与“sites”一起使用，但只为多个标题提供一个网站，或只为一个标题提供多个网站。",
 	"apihelp-wbgetentities-param-redirects": "是否应修复重定向。\n如果设置为“no”，重定向将被视作已删除的实体。",
 	"apihelp-wbgetentities-param-languagefallback": "允许用于在“languages”参数中定义的语言的语言备选，并带有当前API调用环境。",
+	"apihelp-wbgetentities-param-sitefilter": "将实体中的网站链接过滤为这些网站ID内。",
 	"apihelp-wbgetentities-example-1": "获取ID为Q42的实体，及所有可用语言中的所有可用属性",
 	"apihelp-wbgetentities-example-2": "获取ID为P17的实体，及所有可用语言中的所有可用属性",
 	"apihelp-wbgetentities-example-3": "获取ID为Q42和P17的实体，及所有可用语言中的所有可用属性",

@@ -5,8 +5,11 @@
 			"Умар"
 		]
 	},
+	"tooltip-t-wikibase": "Репозиторен хоамай дIадийхкка элементан хьожаярг",
 	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элемент хийцай",
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} чура элемент",
+	"wikibase-editlinks": "Хьожаяргаш тоаяр",
+	"wikibase-editlinkstitle": "Меттай юкъера хьожаяргаш тоаяр",
 	"wikibase-rc-hide-wikidata-show": "Хьахьокха",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} нийсдар"
