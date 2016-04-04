@@ -6,5 +6,6 @@
 	},
 	"wikibase-edit": "แก้ไข",
 	"wikibase-add": "เพิ่ม",
-	"wikibase-sitelinks-special": "เว็บอื่น"
+	"wikibase-sitelinks-special": "เว็บอื่น",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "อ้างอิง"
 }

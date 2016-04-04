@@ -56,7 +56,7 @@
 	"wikibase-pageinfo-entity-id": "Αναγνωριστικό αντικειμένου {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Κανένα",
 	"wikibase-property-render-error": "Αποτυχία απόδοσης της ιδιότητας $1: $2",
-	"wikibase-otherprojects": "Άλλα εγχειρήματα",
+	"wikibase-otherprojects": "Σε άλλα εγχειρήματα",
 	"wikibase-otherprojects-beta-message": "Άλλα εγχειρήματα πλευρικής εργαλειοθήκης",
 	"wikibase-otherprojects-beta-description": "Προσθέτει μια ενότητα \"{{int:wikibase-otherprojects}}\" στην πλευρική στήλη, που παραθέτει συνδέσμους προς άλλα εγχειρήματα Wikimedia με βάση δεδομένα από {{WBREPONAME}}."
 }
