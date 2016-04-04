@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_59a0609a",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-04T23:20:42Z",
+      "side": 1,
+      "message": "Won\u0027t work with:\n\nglobal $wgHooks;",
+      "revId": "abc4c2aec57f6d1e0a3ff9759695f5ffd1e9eaba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_b98b6c1a",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-04T23:20:42Z",
+      "side": 1,
+      "message": "This kind of makes it sound like Echo is a hard requirement, when really it\u0027s optional whether to use Echo (the whole reason for the $wgExtensionFunctions).",
+      "revId": "abc4c2aec57f6d1e0a3ff9759695f5ffd1e9eaba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_f9acd486",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-04T23:20:42Z",
+      "side": 1,
+      "message": "Should be using actual total numbers (not just 1 or 2, and including the current one).  I think the code was updated for this.",
+      "revId": "abc4c2aec57f6d1e0a3ff9759695f5ffd1e9eaba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_b97d2ce7",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-04T23:20:42Z",
+      "side": 1,
+      "message": "I\u0027m not sure, but check to see if there is an off-by-one here.\n\nFor the email message, you want the total, without the minus 1.",
+      "revId": "abc4c2aec57f6d1e0a3ff9759695f5ffd1e9eaba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_b9c36c09",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-04-04T23:20:42Z",
+      "side": 1,
+      "message": "Since you\u0027re saying \"X other pages\" (thus, the X count does not include the main one) here, I think you want to pass false for $includeCurrent to getNotificationCountForOutput.",
+      "revId": "abc4c2aec57f6d1e0a3ff9759695f5ffd1e9eaba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
