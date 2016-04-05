@@ -32,6 +32,7 @@ use Wikibase\SummaryFormatter;
 class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @todo Refactor, so callers do not need to know this is a mock.
 	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockApiBase() {

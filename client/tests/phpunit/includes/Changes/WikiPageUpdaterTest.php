@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Changes;
 use Job;
 use JobQueueGroup;
 use PHPUnit_Framework_Assert;
+use PHPUnit_Framework_MockObject_MockObject;
 use RecentChange;
 use RefreshLinksJob;
 use Title;
@@ -29,7 +30,8 @@ use Wikibase\EntityChange;
 class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return JobQueueGroup
+	 * @todo Refactor, so callers do not need to know this is a mock.
+	 * @return JobQueueGroup|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getJobQueueGroupMock() {
 		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
@@ -40,7 +42,8 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return RecentChangeFactory
+	 * @todo Refactor, so callers do not need to know this is a mock.
+	 * @return RecentChangeFactory|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getRCFactoryMock() {
 		$rcFactory = $this->getMockBuilder( RecentChangeFactory::class )
@@ -55,7 +58,8 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return RecentChangesDuplicateDetector
+	 * @todo Refactor, so callers do not need to know this is a mock.
+	 * @return RecentChangesDuplicateDetector|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getRCDupeDetectorMock() {
 		$rcDupeDetector = $this->getMockBuilder( RecentChangesDuplicateDetector::class )
@@ -68,7 +72,8 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 	/**
 	 * @param string $text
 	 *
-	 * @return Title
+	 * @todo Refactor, so callers do not need to know this is a mock.
+	 * @return Title|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getTitleMock( $text ) {
 		$title = $this->getMockBuilder( Title::class )
