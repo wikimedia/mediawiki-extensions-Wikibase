@@ -30,7 +30,7 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class ItemViewTest extends EntityViewTest {
 
-	protected function makeEntity( EntityId $id, array $statements = array() ) {
+	protected function makeEntity( EntityId $id, array $statements = [] ) {
 		$item = new Item( $id );
 
 		$item->setLabel( 'en', "label:$id" );
@@ -67,13 +67,13 @@ class ItemViewTest extends EntityViewTest {
 			$this->getMockBuilder( SiteLinksView::class )
 				->disableOriginalConstructor()
 				->getMock(),
-			array()
+			[]
 		);
 
 		return array(
 			array(
 				$itemView,
-				$this->newEntityForStatements( array() ),
+				$this->newEntityForStatements( [] ),
 				'/wb-item/'
 			)
 		);

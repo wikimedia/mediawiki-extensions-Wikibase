@@ -21,12 +21,12 @@ abstract class RdfWriterBase implements RdfWriter {
 	/**
 	 * @var array An array of strings, RdfWriters, or closures.
 	 */
-	private $buffer = array();
+	private $buffer = [];
 
 	/**
 	 * @var RdfWriter[] sub-writers.
 	 */
-	private $subs = array();
+	private $subs = [];
 
 	const STATE_START = 0;
 	const STATE_DOCUMENT = 5;
@@ -46,12 +46,12 @@ abstract class RdfWriterBase implements RdfWriter {
 	 * @var string[] a map of shorthand names to array( $base, $local ) pairs.
 	 * @todo handle "a" as a special case directly. Use for custom "variables" like %currentValue instead.
 	 */
-	private $shorthands = array();
+	private $shorthands = [];
 
 	/**
 	 * @var string[] a map of prefixes to base IRIs
 	 */
-	private $prefixes = array();
+	private $prefixes = [];
 
 	/**
 	 * @var array pair to store the current subject.
@@ -290,7 +290,7 @@ abstract class RdfWriterBase implements RdfWriter {
 		$this->state( self::STATE_FINISH );
 
 		// Detaches all subs.
-		$this->subs = array();
+		$this->subs = [];
 	}
 
 	/**
@@ -308,7 +308,7 @@ abstract class RdfWriterBase implements RdfWriter {
 		$this->flattenBuffer();
 
 		$rdf = join( '', $this->buffer );
-		$this->buffer = array();
+		$this->buffer = [];
 
 		return $rdf;
 	}

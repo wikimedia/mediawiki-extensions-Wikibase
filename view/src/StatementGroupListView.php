@@ -83,7 +83,7 @@ class StatementGroupListView {
 	 * @return array[]
 	 */
 	private function groupStatementsByProperties( array $statements ) {
-		$byProperty = array();
+		$byProperty = [];
 
 		foreach ( $statements as $statement ) {
 			$propertyId = $statement->getMainSnak()->getPropertyId();

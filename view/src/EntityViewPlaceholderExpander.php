@@ -136,7 +136,7 @@ class EntityViewPlaceholderExpander {
 		if ( $this->extraLanguages === null ) {
 			if ( $this->user->isAnon() ) {
 				// no extra languages for anon user
-				$this->extraLanguages = array();
+				$this->extraLanguages = [];
 			} else {
 				// ignore current interface language
 				$skip = array( $this->uiLanguage->getCode() );

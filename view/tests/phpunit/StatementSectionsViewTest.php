@@ -33,7 +33,7 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 		$this->setUserLang( 'qqx' );
 	}
 
-	private function newInstance( array $statementLists = array() ) {
+	private function newInstance( array $statementLists = [] ) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
 			'wb-section-heading' => '<HEADING id="$2" class="$3">$1</HEADING>',
 		) ) );
@@ -73,7 +73,7 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 
 		return array(
 			array(
-				array(),
+				[],
 				''
 			),
 			array(
@@ -108,8 +108,8 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 
 	public function invalidArrayProvider() {
 		return array(
-			array( array( 'statements' => array() ) ),
-			array( array( array() ) ),
+			array( array( 'statements' => [] ) ),
+			array( array( [] ) ),
 			array( array( new StatementList() ) ),
 		);
 	}

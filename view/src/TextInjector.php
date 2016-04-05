@@ -35,7 +35,7 @@ class TextInjector {
 	 *        for use by inject(); a map of string markers associated with
 	 *        parameter arrays.
 	 */
-	public function __construct( array $markers = array() ) {
+	public function __construct( array $markers = [] ) {
 		$this->markers = $markers;
 
 		// idea stolen from Parser class in core
@@ -77,8 +77,8 @@ class TextInjector {
 	 * @return string HTML
 	 */
 	public function inject( $html, $callback ) {
-		$search = array();
-		$replace = array();
+		$search = [];
+		$replace = [];
 
 		foreach ( $this->markers as $marker => $args ) {
 			$subst = call_user_func_array( $callback, $args );
