@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_179cdf11",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibraryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-05T09:25:11Z",
+      "side": 1,
+      "message": "Used here.",
+      "revId": "5621f1eaea9232764695c403dadbf1c6b20471b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_b75ff3e7",
         "filename": "repo/Wikibase.php",
         "patchSetId": 1
