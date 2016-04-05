@@ -48,15 +48,13 @@ class TextInjector {
 	 * All parameters passed to this function will be associated with the marker.
 	 *
 	 * @param string $name
-	 * @param string [$arg,...]
 	 *
 	 * @return string
 	 */
-	public function newMarker( $name /*...*/ ) {
+	public function newMarker( $name ) {
 		$marker = '$' . $this->uniqPrefix . '#' . ++$this->markerIndex . '$';
-		$args = func_get_args();
 
-		$this->markers[$marker] = $args;
+		$this->markers[$marker] = array( $name );
 		return $marker;
 	}
 

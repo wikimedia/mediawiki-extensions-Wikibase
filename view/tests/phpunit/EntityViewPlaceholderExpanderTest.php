@@ -114,7 +114,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	public function testGetHtmlForPlaceholder( Item $item, AliasesProvider $aliasesProvider = null ) {
 		$expander = $this->newExpander( $this->newUser(), $item, $item->getId(), $aliasesProvider );
 
-		$html = $expander->getHtmlForPlaceholder( 'termbox', 'Q23' );
+		$html = $expander->getHtmlForPlaceholder( 'termbox' );
 		$this->assertInternalType( 'string', $html );
 	}
 
