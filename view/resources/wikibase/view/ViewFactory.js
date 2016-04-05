@@ -214,6 +214,8 @@
 			'statementgrouplistview',
 			$dom,
 			{
+				// If we have no HTML to initialize on, pass the raw data
+				value: $dom.is( ':parent' ) ? null : statementGroupSet,
 				listItemAdapter: this.getListItemAdapterForStatementGroupView(
 					entity.getId(),
 					function( guid ) {
