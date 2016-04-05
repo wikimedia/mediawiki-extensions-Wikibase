@@ -181,6 +181,8 @@ div.wikibase-statementview textarea {
 	float: left;
 	word-wrap: break-word;
 	padding: 10px;
+	-webkit-transition: top 0.1s ease-out;
+	transition: top 0.1s ease-out;
 }
 
 /* A single claim */
