@@ -165,11 +165,8 @@ class EntityViewPlaceholderExpander {
 	 * @return string HTML to be substituted for the placeholder in the output.
 	 */
 	public function getHtmlForPlaceholder( $name /*...*/ ) {
-		$args = func_get_args();
-		$name = array_shift( $args );
-
 		try {
-			$html = $this->expandPlaceholder( $name, $args );
+			$html = $this->expandPlaceholder( $name );
 			return $html;
 		} catch ( MWException $ex ) {
 			wfWarn( "Expansion of $name failed: " . $ex->getMessage() );
@@ -187,11 +184,10 @@ class EntityViewPlaceholderExpander {
 	 *       intended meaning.
 	 *
 	 * @param string $name
-	 * @param array $args
 	 *
 	 * @return string
 	 */
-	protected function expandPlaceholder( $name, array $args ) {
+	protected function expandPlaceholder( $name ) {
 		switch ( $name ) {
 			case 'termbox':
 				return $this->renderTermBox();

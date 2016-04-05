@@ -27,7 +27,7 @@ class TextInjectorTest extends \PHPUnit_Framework_TestCase {
 		$injector = new TextInjector();
 
 		$foo = $injector->newMarker( 'foo' );
-		$bar = $injector->newMarker( 'bar', 1, 2, 3 );
+		$bar = $injector->newMarker( 'bar' );
 
 		$markers = $injector->getMarkers();
 
@@ -35,16 +35,16 @@ class TextInjectorTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( array( 'foo' ), $markers[$foo] );
 
 		$this->assertArrayHasKey( $bar, $markers );
-		$this->assertEquals( array( 'bar', 1, 2, 3 ), $markers[$bar] );
+		$this->assertEquals( array( 'bar' ), $markers[$bar] );
 	}
 
 	public function testInject() {
 		$injector = new TextInjector();
 
 		$text = 'Good ' . $injector->newMarker( 'morning' )
-			. ' to ' . $injector->newMarker( 'you', 'all' ) . '!';
+			. ' to ' . $injector->newMarker( 'you' ) . '!';
 
-		$expected = 'Good morning to you all!';
+		$expected = 'Good morning to you!';
 
 		$actual = $injector->inject( $text, function () {
 			$args = func_get_args();
