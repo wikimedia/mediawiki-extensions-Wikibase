@@ -109,4 +109,11 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'content-handler-factory-callback' );
 	}
 
+	/**
+	 * @return string[]
+	 */
+	public function getJsDeserializerFactoryFunctions() {
+		return $this->getMapForDefinitionField( 'js-deserializer-factory-function' );
+	}
+
 }
