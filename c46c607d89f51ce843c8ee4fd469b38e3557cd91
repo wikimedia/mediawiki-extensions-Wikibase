@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_f7d33b5f",
+        "filename": "client/tests/phpunit/includes/Changes/WikiPageUpdaterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-05T07:22:53Z",
+      "side": 1,
+      "message": "I disagree with these changes. The return values are not of the type `SomeWikibaseClass or MockObject`, but instead of the type `SomeWikibaseClass and MockObject`. The former is a union type, the latter an intersection type. See for example Flow (http://flowtype.org/docs/union-intersection-types.html) and TypeScript (https://www.typescriptlang.org/docs/handbook/advanced-types.html) about these types.\n\nWhat `|` in phpDoc means, however, is a union type (see https://www.phpdoc.org/docs/latest/guides/types.html#multiple-types-combined): »you can use the pipe, or OR, (|) operator to separate each type that the associated value may be«.",
+      "revId": "c46c607d89f51ce843c8ee4fd469b38e3557cd91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_57c827aa",
+        "filename": "client/tests/phpunit/includes/Store/Sql/ConsistentReadConnectionManagerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-05T07:22:53Z",
+      "side": 1,
+      "message": "See my other comment.",
+      "revId": "c46c607d89f51ce843c8ee4fd469b38e3557cd91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_97c2af86",
+        "filename": "repo/tests/phpunit/includes/Actions/HistoryEntityActionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-05T07:22:53Z",
+      "side": 1,
+      "message": "See my other comment.",
+      "revId": "c46c607d89f51ce843c8ee4fd469b38e3557cd91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
