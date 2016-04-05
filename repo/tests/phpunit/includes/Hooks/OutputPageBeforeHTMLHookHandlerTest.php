@@ -7,7 +7,6 @@ use OutputPage;
 use PHPUnit_Framework_TestCase;
 use RequestContext;
 use Title;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\EntityRevision;
@@ -63,7 +62,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			TemplateFactory::getDefaultInstance(),
 			$userLanguageLookup,
 			new StaticContentLanguages( array( 'en', 'es', 'ru' ) ),
-			new BasicEntityIdParser(),
 			$entityRevisionLookup,
 			$languageNameLookup,
 			$outputPageEntityIdReader

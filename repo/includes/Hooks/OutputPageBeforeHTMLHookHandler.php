@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
@@ -41,11 +40,6 @@ class OutputPageBeforeHTMLHookHandler {
 	private $termsLanguages;
 
 	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
-
-	/**
 	 * @var EntityRevisionLookup
 	 */
 	private $entityRevisionLookup;
@@ -64,15 +58,14 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param TemplateFactory $templateFactory
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
-	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param OutputPageEntityIdReader $outputPageEntityIdReader
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		UserLanguageLookup $userLanguageLookup,
 		ContentLanguages $termsLanguages,
-		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageNameLookup $languageNameLookup,
 		OutputPageEntityIdReader $outputPageEntityIdReader
@@ -80,7 +73,6 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
 		$this->termsLanguages = $termsLanguages;
-		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
@@ -93,13 +85,11 @@ class OutputPageBeforeHTMLHookHandler {
 		global $wgLang;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 
 		return new self(
 			TemplateFactory::getDefaultInstance(),
 			new BabelUserLanguageLookup,
 			$wikibaseRepo->getTermsLanguages(),
-			$entityIdParser,
 			$wikibaseRepo->getEntityRevisionLookup(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
@@ -172,7 +162,6 @@ class OutputPageBeforeHTMLHookHandler {
 			$out->getTitle(),
 			$out->getUser(),
 			$out->getLanguage(),
-			$this->entityIdParser,
 			$labelsProvider,
 			$descriptionsProvider,
 			$aliasesProvider,

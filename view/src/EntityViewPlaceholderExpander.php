@@ -94,7 +94,6 @@ class EntityViewPlaceholderExpander {
 	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
-	 * @param EntityIdParser $entityIdParser
 	 * @param LabelsProvider $labelsProvider
 	 * @param DescriptionsProvider $descriptionsProvider
 	 * @param AliasesProvider|null $aliasesProvider
@@ -107,7 +106,6 @@ class EntityViewPlaceholderExpander {
 		Title $targetPage,
 		User $user,
 		Language $uiLanguage,
-		$entityIdParser,
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
 		AliasesProvider $aliasesProvider = null,
