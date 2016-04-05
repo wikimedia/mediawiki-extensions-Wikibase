@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_d75a77f8",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibraryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-05T07:31:12Z",
+      "side": 1,
+      "message": "meh",
+      "revId": "5621f1eaea9232764695c403dadbf1c6b20471b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_b75ff3e7",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-05T07:31:12Z",
+      "side": 1,
+      "message": "Should reference to $wgContentHandlers also be removed from docs/entitytypes.wiki?",
+      "revId": "5621f1eaea9232764695c403dadbf1c6b20471b9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
