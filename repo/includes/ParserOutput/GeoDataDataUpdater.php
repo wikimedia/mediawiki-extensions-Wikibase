@@ -45,7 +45,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 	private $globeUris;
 
 	/**
-	 * @var Coord[]
+	 * @var array[]
 	 */
 	private $coordinates = array();
 

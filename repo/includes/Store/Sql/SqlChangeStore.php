@@ -48,7 +48,7 @@ class SqlChangeStore implements ChangeStore {
 		}
 	}
 
-	private function updateChange( Change $change ) {
+	private function updateChange( ChangeRow $change ) {
 		$values = $this->getValues( $change );
 
 		$dbw = $this->loadBalancer->getConnection( DB_MASTER );
@@ -63,7 +63,7 @@ class SqlChangeStore implements ChangeStore {
 		$this->loadBalancer->reuseConnection( $dbw );
 	}
 
-	private function insertChange( Change $change ) {
+	private function insertChange( ChangeRow $change ) {
 		$values = $this->getValues( $change );
 
 		$dbw = $this->loadBalancer->getConnection( DB_MASTER );
