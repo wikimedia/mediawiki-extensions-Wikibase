@@ -190,7 +190,7 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$siteLinkLookup->expects( $this->once() )
-			->method( 'getItemIdForSiteLink' )
+			->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $itemId ) );
 
 		return $siteLinkLookup;

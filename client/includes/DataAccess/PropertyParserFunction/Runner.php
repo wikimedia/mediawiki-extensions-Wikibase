@@ -10,7 +10,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -124,8 +123,7 @@ class Runner {
 			$entityId = $this->getEntityIdFromString( $parser, $from );
 		} else {
 			$title = $parser->getTitle();
-			$siteLink = new SiteLink( $this->siteId, $title->getPrefixedText() );
-			$entityId = $this->siteLinkLookup->getItemIdForSiteLink( $siteLink );
+			$entityId = $this->siteLinkLookup->getItemIdForLink( $this->siteId, $title->getPrefixedText() );
 		}
 
 		return $entityId;

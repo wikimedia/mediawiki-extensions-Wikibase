@@ -10,7 +10,6 @@ use RuntimeException;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -85,11 +84,9 @@ abstract class UpdateRepo {
 	 */
 	public function getEntityId() {
 		if ( $this->entityId === false ) {
-			$this->entityId = $this->siteLinkLookup->getItemIdForSiteLink(
-				new SiteLink(
-					$this->siteId,
-					$this->title->getPrefixedText()
-				)
+			$this->entityId = $this->siteLinkLookup->getItemIdForLink(
+				$this->siteId,
+				$this->title->getPrefixedText()
 			);
 
 			if ( $this->entityId === null ) {
