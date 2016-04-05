@@ -84,8 +84,24 @@
 				var entityJSON = JSON.parse( serializedEntity ),
 					entityDeserializer = new wb.serialization.EntityDeserializer();
 
-				deferred.resolve( entityDeserializer.deserialize( entityJSON ) );
-				entityJSON = null;
+				var entityTypes = mw.config.get( 'wbEntityTypes' );
+				var modules = [];
+				var typeNames = [];
+				entityTypes.types.forEach( function( type ) {
+					var deserializerFactoryFunction = entityTypes[ 'deserializer-factory-functions' ][ type ];
+					if ( deserializerFactoryFunction ) {
+						modules.push( deserializerFactoryFunction );
+						typeNames.push( type );
+					}
+				} );
+				mw.loader.using( modules, function() {
+					modules.forEach( function( module, index ) {
+						entityDeserializer.registerStrategy( mw.loader.require( module )(), typeNames[ index ] );
+					} );
+
+					deferred.resolve( entityDeserializer.deserialize( entityJSON ) );
+					entityJSON = null;
+				} );
 			} );
 
 			return deferred.promise();
