@@ -81,13 +81,42 @@
 					return;
 				}
 
-				var entityJSON = JSON.parse( serializedEntity ),
-					entityDeserializer = new wb.serialization.EntityDeserializer();
-
-				deferred.resolve( entityDeserializer.deserialize( entityJSON ) );
-				entityJSON = null;
+				self._getDeserializer().done( function( entityDeserializer ) {
+					var entity = entityDeserializer.deserialize( JSON.parse( serializedEntity ) );
+					deferred.resolve( entity );
+				} );
 			} );
 
+			return deferred.promise();
+		},
+
+		/**
+		 * @return {Object} jQuery promise
+		 *         Resolved parameters:
+		 *         - {wikibase.serialization.EntityDeserializer}
+		 *         No rejected parameters.
+		 */
+		_getDeserializer: function() {
+			var entityDeserializer = new wb.serialization.EntityDeserializer(),
+				deferred = $.Deferred();
+
+			var entityTypes = mw.config.get( 'wbEntityTypes' );
+			var modules = [];
+			var typeNames = [];
+			entityTypes.types.forEach( function( type ) {
+				var deserializerFactoryFunction = entityTypes[ 'deserializer-factory-functions' ][ type ];
+				if ( deserializerFactoryFunction ) {
+					modules.push( deserializerFactoryFunction );
+					typeNames.push( type );
+				}
+			} );
+			mw.loader.using( modules, function() {
+				modules.forEach( function( module, index ) {
+					entityDeserializer.registerStrategy( mw.loader.require( module )(), typeNames[ index ] );
+				} );
+
+				deferred.resolve( entityDeserializer );
+			} );
 			return deferred.promise();
 		}
 	} );
