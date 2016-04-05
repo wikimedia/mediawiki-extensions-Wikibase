@@ -40,16 +40,22 @@ $.widget( 'wikibase.itemview', PARENT, {
 	 * @protected
 	 */
 	_create: function() {
+		var $parent;
+
 		this._createEntityview();
 
 		this.$statements = $( '.wikibase-statementgrouplistview', this.element );
 		if ( this.$statements.length === 0 ) {
-			this.$statements = $( '<div/>' ).appendTo( this.element );
+			$parent = $( '.wikibase-entityview-main', this.element );
+			this.$statements = $( '<div/>' )
+				.appendTo( $parent.length === 1 ? $parent : this.element );
 		}
 
 		this.$siteLinks = $( '.wikibase-sitelinkgrouplistview', this.element );
 		if ( this.$siteLinks.length === 0 ) {
-			this.$siteLinks = $( '<div/>' ).appendTo( this.element );
+			$parent = $( '.wikibase-entityview-side', this.element );
+			this.$siteLinks = $( '<div/>' )
+				.appendTo( $parent.length === 1 ? $parent : this.element );
 		}
 	},
 

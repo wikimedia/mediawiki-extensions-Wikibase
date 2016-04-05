@@ -145,14 +145,15 @@
 	 * Construct a suitable view for the given entity on the given DOM element
 	 *
 	 * @param {wikibase.datamodel.Entity} entity
-	 * @param {jQuery} $dom
+	 * @param {jQuery} $entityview
 	 * @return {jQuery.wikibase.entityview} The constructed entity view
 	 * @throws {Error} If there is no view for the given entity type
 	 **/
-	SELF.prototype.getEntityView = function( entity, $dom ) {
+	SELF.prototype.getEntityView = function( entity, $entityview ) {
 		return this._getView(
+			// Typically "itemview" or "propertyview".
 			entity.getType() + 'view',
-			$dom,
+			$entityview,
 			{
 				buildEntityTermsView: $.proxy( this.getEntityTermsView, this ),
 				buildSitelinkGroupListView: $.proxy( this.getSitelinkGroupListView, this ),
@@ -166,13 +167,13 @@
 	 * Construct a suitable terms view for the given fingerprint on the given DOM element
 	 *
 	 * @param {wikibase.datamodel.Fingerprint} fingerprint
-	 * @param {jQuery} $dom
+	 * @param {jQuery} $entitytermsview
 	 * @return {jQuery.wikibase.entitytermsview} The constructed entity terms view
 	 **/
-	SELF.prototype.getEntityTermsView = function( fingerprint, $dom ) {
+	SELF.prototype.getEntityTermsView = function( fingerprint, $entitytermsview ) {
 		return this._getView(
 			'entitytermsview',
-			$dom,
+			$entitytermsview,
 			{
 				value: fingerprint,
 				userLanguages: this._userLanguages,
@@ -186,13 +187,13 @@
 	 * Construct a suitable view for the given sitelink set on the given DOM element
 	 *
 	 * @param {wikibase.datamodel.SiteLinkSet} sitelinkSet
-	 * @param {jQuery} $dom
+	 * @param {jQuery} $sitelinkgrouplistview
 	 * @return {jQuery.wikibase.sitelinkgrouplistview} The constructed sitelinkgrouplistview
 	 **/
-	SELF.prototype.getSitelinkGroupListView = function( sitelinkSet, $dom ) {
+	SELF.prototype.getSitelinkGroupListView = function( sitelinkSet, $sitelinkgrouplistview ) {
 		return this._getView(
 			'sitelinkgrouplistview',
-			$dom,
+			$sitelinkgrouplistview,
 			{
 				value: sitelinkSet,
 				siteLinksChanger: this._entityChangersFactory.getSiteLinksChanger(),
@@ -205,15 +206,17 @@
 	 * Construct a suitable view for the list of statement groups for the given entity on the given DOM element
 	 *
 	 * @param {wikibase.datamodel.Item|wikibase.datamodel.Property} entity
-	 * @param {jQuery} $dom
+	 * @param {jQuery} $statementgrouplistview
 	 * @return {jQuery.wikibase.statementgrouplistview} The constructed statementgrouplistview
 	 **/
-	SELF.prototype.getStatementGroupListView = function( entity, $dom ) {
+	SELF.prototype.getStatementGroupListView = function( entity, $statementgrouplistview ) {
 		var statementGroupSet = entity.getStatements();
 		return this._getView(
 			'statementgrouplistview',
-			$dom,
+			$statementgrouplistview,
 			{
+				// If we have no HTML to initialize on, pass the raw data
+				value: $statementgrouplistview.is( ':empty' ) ? statementGroupSet : null,
 				listItemAdapter: this.getListItemAdapterForStatementGroupView(
 					entity.getId(),
 					function( guid ) {
@@ -263,15 +266,15 @@
 	 *                                                      all statements should be on or are on
 	 * @param {Function} getStatementForGuid A function returning a `wikibase.datamodel.Statement` for a given GUID
 	 * @param {wikibase.datamodel.StatementList} value
-	 * @param {jQuery} $dom
+	 * @param {jQuery} $statementlistview
 	 * @return {jQuery.wikibase.statementgroupview} The constructed statementlistview
 	 **/
-	SELF.prototype.getStatementListView = function( entityId, propertyId, getStatementForGuid, value, $dom ) {
-		propertyId = propertyId || $dom.closest( '.wikibase-statementgroupview' ).attr( 'id' );
+	SELF.prototype.getStatementListView = function( entityId, propertyId, getStatementForGuid, value, $statementlistview ) {
+		propertyId = propertyId || $statementlistview.closest( '.wikibase-statementgroupview' ).attr( 'id' );
 
 		return this._getView(
 			'statementlistview',
-			$dom,
+			$statementlistview,
 			{
 				value: value.length === 0 ? null : value,
 				listItemAdapter: this.getListItemAdapterForStatementView(
@@ -404,13 +407,13 @@
 	 * @param {boolean} drawProperty Whether the snakview should draw its property
 	 * @param {Object} options An object with keys `locked` and `autoStartEditing`
 	 * @param {wikibase.datamodel.Snak|null} snak
-	 * @param {jQuery} $dom
+	 * @param {jQuery} $snakview
 	 * @return {jQuery.wikibase.snakview} The constructed snakview
 	 */
-	SELF.prototype.getSnakView = function( drawProperty, options, snak, $dom ) {
+	SELF.prototype.getSnakView = function( drawProperty, options, snak, $snakview ) {
 		return this._getView(
 			'snakview',
-			$dom,
+			$snakview,
 			this._getSnakViewOptions( drawProperty, options, snak )
 		);
 	};
