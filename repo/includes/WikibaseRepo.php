@@ -105,6 +105,7 @@ use Wikibase\Repo\Localizer\GenericExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageExceptionLocalizer;
 use Wikibase\Repo\Localizer\MessageParameterFormatter;
 use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
+use Wikibase\Repo\Modules\EntityTypesModuleWorker;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
@@ -1660,4 +1661,7 @@ class WikibaseRepo {
 		return new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() );
 	}
 
+	public function getEntityTypesModuleWorker() {
+		return new EntityTypesModuleWorker( $this->entityTypeDefinitions );
+	}
 }
