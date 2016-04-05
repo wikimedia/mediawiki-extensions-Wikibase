@@ -214,7 +214,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			),
 				'aliases' => array( 'en' => array( array( 'language' => 'en', 'value' => 'foo' ) ) )
 			),
-			'label'
+			array( 'label' )
 		);
 		$testCases['descriptionMerge'] = array(
 			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
@@ -239,7 +239,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 				'en' => array( 'language' => 'en', 'value' => 'bar' ),
 				'de' => array( 'language' => 'de', 'value' => 'berlin' )
 			) ),
-			'description'
+			array( 'description' )
 		);
 		$testCases['aliasesMerge'] = array(
 			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Dickes B" ) ) ) ),
@@ -273,7 +273,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 				'dewiki' => array( 'site' => 'dewiki', 'title' => 'RemainTo' ),
 				'enwiki' => array( 'site' => 'enwiki', 'title' => 'PlFrom' ),
 			) ),
-			'sitelink'
+			array( 'sitelink' )
 		);
 		$testCases['claimMerge'] = array(
 			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
@@ -324,7 +324,13 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider mergeProvider
 	 */
-	public function testMergeItems( $fromData, $toData, $expectedFrom, $expectedTo, $ignoreConflicts = array() ) {
+	public function testMergeItems(
+		array $fromData,
+		array $toData,
+		array $expectedFrom,
+		array $expectedTo,
+		array $ignoreConflicts = array()
+	) {
 		$interactor = $this->newInteractor();
 
 		$fromId = new ItemId( 'Q1' );
@@ -334,10 +340,6 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			'Q1' => $fromData,
 			'Q2' => $toData,
 		) );
-
-		if ( is_string( $ignoreConflicts ) ) {
-			$ignoreConflicts = explode( '|', $ignoreConflicts );
-		}
 
 		$watchedItem = $this->getWatchedItemForId( $fromId );
 		$watchedItem->addWatch();
@@ -359,7 +361,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		$this->assertItemMergedIntoIsWatched( $toId );
 	}
 
-	private function assertRedirectWorks( $expectedFrom, $fromId, $toId ) {
+	private function assertRedirectWorks( $expectedFrom, ItemId $fromId, ItemId $toId ) {
 		if ( empty( $expectedFrom ) ) {
 			try {
 				$this->testHelper->getEntity( $fromId );
@@ -399,7 +401,12 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider mergeFailureProvider
 	 */
-	public function testMergeItems_failure( $fromId, $toId, $ignoreConflicts, $expectedErrorCode ) {
+	public function testMergeItems_failure(
+		ItemId $fromId,
+		ItemId $toId,
+		$ignoreConflicts,
+		$expectedErrorCode
+	) {
 		try {
 			$interactor = $this->newInteractor();
 			$interactor->mergeItems( $fromId, $toId, $ignoreConflicts );
