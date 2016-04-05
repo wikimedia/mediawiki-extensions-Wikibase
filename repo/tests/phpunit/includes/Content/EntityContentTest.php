@@ -172,7 +172,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function providePageProperties() {
-		$cases = array();
+		$cases = [];
 		$emptyContent = $this->newEmpty( $this->getDummyId() );
 
 		$cases['empty'] = array(

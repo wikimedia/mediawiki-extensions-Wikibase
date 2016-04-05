@@ -91,7 +91,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return EntitySearchHelper
 	 */
-	private function getMockEntitySearchHelper( array $params, array $returnResults = array() ) {
+	private function getMockEntitySearchHelper( array $params, array $returnResults = [] ) {
 		// defaults from SearchEntities
 		$params = array_merge( array(
 			'strictlanguage' => false,
@@ -145,8 +145,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 
 		$result = $module->getResult();
 		return $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
 		) );
 	}
@@ -236,8 +236,8 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 		return array(
 			'No exact match' => array(
 				array( 'search' => 'Q999' ),
-				array(),
-				array(),
+				[],
+				[],
 			),
 			'Exact EntityId match' => array(
 				array( 'search' => 'Q111' ),
@@ -245,7 +245,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 				array( $q111Result ),
 			),
 			'Multiple Results' => array(
-				array(),
+				[],
 				array( $q222Match, $q333Match ),
 				array( $q222Result, $q333Result ),
 			),

@@ -136,7 +136,7 @@ class EntityIdReader implements EntityIdPager, Disposable {
 	 * be empty if there are no more entities to list from the given offset.
 	 */
 	public function fetchIds( $limit ) {
-		$ids = array();
+		$ids = [];
 		while ( $limit > 0 ) {
 			$id = $this->next();
 

@@ -67,7 +67,7 @@ class PagePropsEntityIdLookup implements EntityIdLookup {
 			__METHOD__
 		);
 
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $res as $row ) {
 			$entityIds[$row->pp_page] = $this->idParser->parse( $row->pp_value );

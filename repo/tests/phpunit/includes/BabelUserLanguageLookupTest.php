@@ -23,7 +23,7 @@ class BabelUserLanguageLookupTest extends \MediaWikiTestCase {
 	 * @return string[]
 	 */
 	private function split( $subject ) {
-		return empty( $subject ) ? array() : explode( '|', $subject );
+		return empty( $subject ) ? [] : explode( '|', $subject );
 	}
 
 	/**

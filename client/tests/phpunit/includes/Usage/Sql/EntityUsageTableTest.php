@@ -30,7 +30,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	}
 
 	private function makeUsages( $n ) {
-		$usages = array();
+		$usages = [];
 
 		for ( $i = 1; $i <= $n; $i++ ) {
 			$key = "Q$i";
@@ -52,7 +52,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	 * @return array[]
 	 */
 	private function getUsageRows( $pageId, array $usages, $touched ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $usages as $key => $usage ) {
 			$row = array(
@@ -190,15 +190,15 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 		return array(
 			array( '>=', $t0, $usagesT1T2 ),
-			array( '<', $t0, array() ),
+			array( '<', $t0, [] ),
 
-			array( '<', $t1, array() ),
+			array( '<', $t1, [] ),
 			array( '>=', $t1, $usagesT1T2 ),
 
 			array( '<', $t2, $usagesT1 ),
 			array( '>=', $t2, $usagesT2 ),
 
-			array( '<', '"evil"', array() ),
+			array( '<', '"evil"', [] ),
 			array( '<', '[evil]', $usagesT1T2 ),
 		);
 	}
@@ -389,7 +389,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
 
-		$usageTable->addUsages( 23, array(), '20150102030405' );
+		$usageTable->addUsages( 23, [], '20150102030405' );
 	}
 
 	/**

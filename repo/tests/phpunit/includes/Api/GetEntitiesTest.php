@@ -130,7 +130,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 * @return array
 	 */
 	public function provideData() {
-		$testCases = array();
+		$testCases = [];
 
 		// Test cases for props filter
 		foreach ( self::$goodProps  as $propData ) {
@@ -206,7 +206,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		if ( array_key_exists( 'ids', $params ) ) {
 			$ids = explode( '|', $params['ids'] );
 		} else {
-			$ids = array();
+			$ids = [];
 		}
 
 		if ( array_key_exists( 'handles', $params ) ) {
@@ -383,7 +383,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		// TODO: More exception checks should be added once bug T55038 is resolved.
 		return array(
 			array( //0 no params
-				'p' => array(),
+				'p' => [],
 				'e' => array( 'exception' => array( 'type' => UsageException::class, 'code' => 'param-missing' ) ) ),
 			array( //1 bad id
 				'p' => array( 'ids' => 'ABCD' ),
@@ -422,7 +422,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbgetentities';
 		if ( array_key_exists( 'handles', $params ) ) {
-			$ids = array();
+			$ids = [];
 			foreach ( $params['handles'] as $handle ) {
 				$ids[ $handle ] = EntityTestHelper::getId( $handle );
 			}
@@ -572,7 +572,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		array $languages,
 		array $expectedLabels = null,
 		array $expectedDescriptions = null,
-		array $props = array()
+		array $props = []
 	) {
 		$id = EntityTestHelper::getId( $handle );
 
@@ -613,12 +613,12 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 			'dewiki' => array(
 				'site' => 'dewiki',
 				'title' => 'Oslo',
-				'badges' => array(),
+				'badges' => [],
 			),
 			'enwiki' => array(
 				'site' => 'enwiki',
 				'title' => 'Oslo',
-				'badges' => array(),
+				'badges' => [],
 			),
 		);
 		$this->assertEquals( $expectedSiteLinks, $res['entities'][$id]['sitelinks'] );

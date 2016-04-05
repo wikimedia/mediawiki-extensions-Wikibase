@@ -122,7 +122,7 @@ class SearchEntities extends ApiBase {
 			$params['strictlanguage']
 		);
 
-		$entries = array();
+		$entries = [];
 
 		foreach ( $searchResults as $match ) {
 			$entries[] = $this->buildTermSearchMatchEntry( $match );
@@ -204,7 +204,7 @@ class SearchEntities extends ApiBase {
 		$this->getResult()->addValue(
 			null,
 			'search',
-			array()
+			[]
 		);
 
 		// getSearchEntities returns one more item than requested in order to determine if there

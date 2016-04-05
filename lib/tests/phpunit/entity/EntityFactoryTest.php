@@ -34,7 +34,7 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function provideIsEntityType() {
-		$tests = array();
+		$tests = [];
 
 		foreach ( $this->getEntityFactory()->getEntityTypes() as $type ) {
 			$tests[] = array( $type, true );

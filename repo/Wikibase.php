@@ -52,7 +52,7 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.26c', '<' ) ) {
  * @note: that parsers are also registered under their old names for backwards compatibility,
  * for use with the deprecated 'parser' parameter of the wbparsevalue API module.
  */
-$GLOBALS['wgValueParsers'] = array();
+$GLOBALS['wgValueParsers'] = [];
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
@@ -105,7 +105,7 @@ call_user_func( function() {
 
 	// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
 	foreach ( $repoDataTypes as $type => $repoDef ) {
-		$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : array();
+		$baseDef = isset( $wgWBRepoDataTypes[$type] ) ? $wgWBRepoDataTypes[$type] : [];
 		$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
 	}
 
@@ -120,7 +120,7 @@ call_user_func( function() {
 
 	// merge WikibaseRepo.entitytypes.php into $wgWBRepoEntityTypes
 	foreach ( $repoEntityTypes as $type => $repoDef ) {
-		$baseDef = isset( $wgWBRepoEntityTypes[$type] ) ? $wgWBRepoEntityTypes[$type] : array();
+		$baseDef = isset( $wgWBRepoEntityTypes[$type] ) ? $wgWBRepoEntityTypes[$type] : [];
 		$wgWBRepoEntityTypes[$type] = array_merge( $baseDef, $repoDef );
 	}
 

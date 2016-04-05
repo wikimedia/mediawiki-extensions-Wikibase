@@ -57,7 +57,7 @@ class DataValueFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenNoType_newFromArrayFails() {
 		$this->setExpectedException( IllegalValueException::class );
-		$this->newInstance()->newFromArray( array() );
+		$this->newInstance()->newFromArray( [] );
 	}
 
 	public function testGivenNoValue_newFromArrayFails() {
@@ -82,7 +82,7 @@ class DataValueFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenNoType_tryNewFromArrayReturnsWithError() {
-		$value = $this->newInstance()->tryNewFromArray( array() );
+		$value = $this->newInstance()->tryNewFromArray( [] );
 		$expected = new UnDeserializableValue( null, null, 'No type specified' );
 		$this->assertEquals( $expected, $value );
 	}

@@ -773,7 +773,7 @@ final class WikibaseClient {
 
 		return new LanguageLinkBadgeDisplay(
 			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $wgLang ),
-			is_array( $badgeClassNames ) ? $badgeClassNames : array(),
+			is_array( $badgeClassNames ) ? $badgeClassNames : [],
 			$wgLang
 		);
 	}
@@ -848,7 +848,7 @@ final class WikibaseClient {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
-			$deserializers = array();
+			$deserializers = [];
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
 				$deserializers[] = call_user_func( $callback, $deserializerFactory );

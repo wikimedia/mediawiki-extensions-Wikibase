@@ -17,7 +17,7 @@ class LanguageWithConversion {
 	/**
 	 * @var array[]
 	 */
-	static private $objectCache = array();
+	static private $objectCache = [];
 
 	/**
 	 * @var Language|null
@@ -47,12 +47,12 @@ class LanguageWithConversion {
 	/**
 	 * @var string[]
 	 */
-	private $translateCache = array();
+	private $translateCache = [];
 
 	/**
 	 * @var bool[]
 	 */
-	private $translatePool = array();
+	private $translatePool = [];
 
 	/**
 	 * @param null|Language $language
@@ -289,7 +289,7 @@ class LanguageWithConversion {
 			);
 			$translatedPieces = explode( "\0", $translatedBlock );
 			$this->translateCache += array_combine( $pieces, $translatedPieces );
-			$this->translatePool = array();
+			$this->translatePool = [];
 		}
 	}
 

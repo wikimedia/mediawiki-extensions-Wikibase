@@ -22,7 +22,7 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 		parent::__construct( 'DispatchStats' );
 	}
 
-	protected function outputRow( $data, $tag = 'td', $attr = array() ) {
+	protected function outputRow( $data, $tag = 'td', $attr = [] ) {
 		$this->getOutput()->addHTML( Html::openElement( 'tr' ) );
 
 		foreach ( $data as $v ) {
@@ -70,18 +70,18 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 		$stats = new DispatchStats();
 		$stats->load();
 
-		$this->getOutput()->addHTML( Html::rawElement( 'p', array(),
+		$this->getOutput()->addHTML( Html::rawElement( 'p', [],
 			$this->msg( 'wikibase-dispatchstats-intro' )->parse() ) );
 
 		if ( !$stats->hasStats() ) {
-			$this->getOutput()->addHTML( Html::rawElement( 'p', array(),
+			$this->getOutput()->addHTML( Html::rawElement( 'p', [],
 				$this->msg( 'wikibase-dispatchstats-no-stats' )->parse() ) );
 
 			return;
 		}
 
 		// changes ------
-		$this->getOutput()->addHTML( Html::rawElement( 'h2', array(), $this->msg( 'wikibase-dispatchstats-changes' )->parse() ) );
+		$this->getOutput()->addHTML( Html::rawElement( 'h2', [], $this->msg( 'wikibase-dispatchstats-changes' )->parse() ) );
 
 		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => 'wikitable' ) ) );
 
@@ -106,7 +106,7 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
 
 		// dispatch stats ------
-		$this->getOutput()->addHTML( Html::rawElement( 'h2', array(), $this->msg( 'wikibase-dispatchstats-stats' )->parse() ) );
+		$this->getOutput()->addHTML( Html::rawElement( 'h2', [], $this->msg( 'wikibase-dispatchstats-stats' )->parse() ) );
 
 		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => 'wikitable' ) ) );
 

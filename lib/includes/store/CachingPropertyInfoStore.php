@@ -99,7 +99,7 @@ class CachingPropertyInfoStore implements PropertyInfoStore {
 	 */
 	public function getPropertyInfoForDataType( $dataType ) {
 		$propertyInfo = $this->getAllPropertyInfo();
-		$propertyInfoForDataType = array();
+		$propertyInfoForDataType = [];
 
 		foreach ( $propertyInfo as $id => $info ) {
 			if ( $info[PropertyInfoStore::KEY_DATA_TYPE] === $dataType ) {

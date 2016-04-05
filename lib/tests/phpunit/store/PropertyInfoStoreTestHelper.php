@@ -43,7 +43,7 @@ class PropertyInfoStoreTestHelper {
 			),
 			array( // #1: missing required field
 				new PropertyId( 'P23' ),
-				array(),
+				[],
 				InvalidArgumentException::class
 			),
 			array( // #2: extra data
@@ -107,14 +107,14 @@ class PropertyInfoStoreTestHelper {
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'commonsMedia', 'foo' => 'bar' );
 
 		$this->test->assertSame(
-			array(),
+			[],
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'should initially be empty'
 		);
 
 		$table->setPropertyInfo( $p23, $info23 );
 		$this->test->assertSame(
-			array(),
+			[],
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after adding one property'
 		);
@@ -135,7 +135,7 @@ class PropertyInfoStoreTestHelper {
 
 		$table->removePropertyInfo( $p42 );
 		$this->test->assertSame(
-			array(),
+			[],
 			$table->getPropertyInfoForDataType( 'commonsMedia' ),
 			'after removing the second property'
 		);
@@ -149,7 +149,7 @@ class PropertyInfoStoreTestHelper {
 		$info42 = array( PropertyInfoStore::KEY_DATA_TYPE => 'string', 'foo' => 'bar' );
 
 		$this->test->assertSame(
-			array(),
+			[],
 			$table->getAllPropertyInfo(),
 			'should initially be empty'
 		);

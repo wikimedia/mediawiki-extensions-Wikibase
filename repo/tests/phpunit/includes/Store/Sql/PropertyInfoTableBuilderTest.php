@@ -37,7 +37,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		);
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$properties = array();
+		$properties = [];
 
 		foreach ( $infos as $info ) {
 			$property = Property::newFromType( $info[PropertyInfoStore::KEY_DATA_TYPE] );

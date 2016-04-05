@@ -368,7 +368,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 		$item->setDescription( 'pt', 'ptDesc' );
 		$item->setDescription( 'pl', 'Longer Description For An Item' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', array() );
+		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', [] );
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P65' ), new StringValue( 'snakStringValue' ) );
 
@@ -400,7 +400,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
 
-		$props = array();
+		$props = [];
 		$result = $this->getDefaultResult();
 		$resultBuilder = $this->getResultBuilder( $result );
 
@@ -515,7 +515,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			null,
 			$entityRevision,
 			array( 'labels', 'descriptions' ),
-			array(),
+			[],
 			$filterLangCodes,
 			$fallbackChains
 		);
@@ -541,7 +541,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			null,
 			$entityRevision,
 			array( 'labels', 'descriptions', 'aliases' ),
-			array(),
+			[],
 			array( 'de' )
 		);
 
@@ -603,7 +603,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'enwiki' => array(
 							'site' => 'enwiki',
 							'title' => 'Berlin',
-							'badges' => array(),
+							'badges' => [],
 						),
 					),
 				),
@@ -939,13 +939,13 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 							'site' => 'enwiki',
 							'title' => 'User:Addshore',
 							'removed' => '',
-							'badges' => array(),
+							'badges' => [],
 						),
 						'dewikivoyage' => array(
 							'site' => 'dewikivoyage',
 							'title' => 'Berlin',
 							'removed' => '',
-							'badges' => array(),
+							'badges' => [],
 						),
 					),
 				),
@@ -981,24 +981,24 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 						'enwiki' => array(
 							'site' => 'enwiki',
 							'title' => 'User:Addshore',
-							'badges' => array(),
+							'badges' => [],
 						),
 						'dewikivoyage' => array(
 							'site' => 'dewikivoyage',
 							'title' => 'Berlin',
-							'badges' => array(),
+							'badges' => [],
 						),
 						'ptwiki' => array(
 							'site' => 'ptwiki',
 							'title' => 'Port',
 							'removed' => '',
-							'badges' => array(),
+							'badges' => [],
 						),
 						'dewiki' => array(
 							'site' => 'dewiki',
 							'title' => 'Gin',
 							'removed' => '',
-							'badges' => array(),
+							'badges' => [],
 						),
 					),
 				),
@@ -1089,7 +1089,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			'_type' => 'assoc',
 		);
 
-		$props = array();
+		$props = [];
 
 		$resultBuilder = $this->getResultBuilder( $result );
 		$resultBuilder->addStatements( new StatementList( $statement ), $path, $props );
@@ -1416,10 +1416,10 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideSetList() {
 		return array(
-			'null path' => array( null, 'foo', array(), 'letter', false,
-				array( 'foo' => array(), '_type' => 'assoc' )
+			'null path' => array( null, 'foo', [], 'letter', false,
+				array( 'foo' => [], '_type' => 'assoc' )
 			),
-			'empty path' => array( array(), 'foo', array( 'x', 'y' ), 'letter', false,
+			'empty path' => array( [], 'foo', array( 'x', 'y' ), 'letter', false,
 				array(
 					'foo' => array( 'x', 'y' ), '_type' => 'assoc'
 				)
@@ -1500,7 +1500,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function provideSetValue() {
 		return array(
 			'null path' => array( null, 'foo', 'value', false, array( 'foo' => 'value', '_type' => 'assoc' ) ),
-			'empty path' => array( array(), 'foo', 'value', false,
+			'empty path' => array( [], 'foo', 'value', false,
 				array(
 					'foo' => 'value',
 					'_type' => 'assoc',
@@ -1570,7 +1570,7 @@ class ResultBuilderTest extends \PHPUnit_Framework_TestCase {
 			'null path' => array( null, null, 'value', 'letter', false,
 				array( 'value', '_type' => 'assoc' ),
 			),
-			'empty path' => array( array(), null, 'value', 'letter', false,
+			'empty path' => array( [], null, 'value', 'letter', false,
 				array( 'value', '_type' => 'assoc' )
 			),
 			'string path' => array( 'ROOT', null, 'value', 'letter', false,

@@ -72,7 +72,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'e' => array(
 					'value' => array( 'nowiki' => array(
 						'title' => 'Berlin',
-						'badges' => array()
+						'badges' => []
 					) ),
 					'indb' => 5
 				)
@@ -87,7 +87,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'e' => array(
 					'value' => array( 'dewiki' => array(
 						'title' => 'Leipzig Two',
-						'badges' => array()
+						'badges' => []
 					) )
 				)
 			),
@@ -101,7 +101,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'e' => array(
 					'value' => array( 'nowiki' => array(
 						'title' => 'Berlin Two',
-						'badges' => array()
+						'badges' => []
 					) ),
 					'indb' => 5
 				)
@@ -113,7 +113,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linktitle' => '',
 					'summary' => 'WooSummary'
 				),
-				'e' => array( 'value' => array() ) ),
+				'e' => array( 'value' => [] ) ),
 			array( //5 remove link using sitelink
 				'p' => array(
 					'site' => 'dewiki',
@@ -121,7 +121,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'linksite' => 'nowiki',
 					'linktitle' => ''
 				),
-				'e' => array( 'value' => array(), 'indb' => 4 ) ),
+				'e' => array( 'value' => [], 'indb' => 4 ) ),
 			array( //6 add badges to existing sitelink
 				'p' => array(
 					'site' => 'dewiki',
@@ -225,14 +225,14 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				'e' => array(
 					'value' => array( 'svwiki' => array(
 						'title' => 'Berlin',
-						'badges' => array()
+						'badges' => []
 					) ),
 					'indb' => 5
 				)
 			),
 			array( //13 delete link by not providing neither title nor badges
 				'p' => array( 'handle' => 'Berlin', 'linksite' => 'svwiki' ),
-				'e' => array( 'value' => array(), 'indb' => 4 )
+				'e' => array( 'value' => [], 'indb' => 4 )
 			),
 		);
 	}

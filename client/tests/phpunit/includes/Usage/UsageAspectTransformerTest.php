@@ -33,7 +33,7 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 		$transformer->setRelevantAspects( $q1, $aspects );
 
 		$this->assertEquals( $aspects, $transformer->getRelevantAspects( $q1 ) );
-		$this->assertEquals( array(), $transformer->getRelevantAspects( $q99 ) );
+		$this->assertEquals( [], $transformer->getRelevantAspects( $q99 ) );
 	}
 
 	public function provideGetFilteredUsages() {
@@ -42,21 +42,21 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'empty' => array(
 				$q1,
-				array(),
-				array(),
-				array()
+				[],
+				[],
+				[]
 			),
 			'non relevant' => array(
 				$q1,
-				array(),
+				[],
 				array( 'X' ),
-				array()
+				[]
 			),
 			'non used' => array(
 				$q1,
 				array( 'X' ),
-				array(),
-				array()
+				[],
+				[]
 			),
 			'simple filter' => array(
 				$q1,
@@ -86,7 +86,7 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 				$q1,
 				array( 'L.ru' ),
 				array( 'L.en' ),
-				array()
+				[]
 			),
 			'modifier: match unmodified relevant' => array(
 				$q1,
@@ -132,14 +132,14 @@ class UsageAspectTransformerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			'empty' => array(
-				array(),
+				[],
 				$usages,
-				array()
+				[]
 			),
 			'non relevant' => array(
-				array(),
+				[],
 				$usages,
-				array()
+				[]
 			),
 			'simple filter' => array(
 				array(

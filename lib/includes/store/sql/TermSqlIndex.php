@@ -189,7 +189,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			return $this->getFingerprintTerms( $fingerprint, $extraFields );
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -198,8 +198,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	private function getFingerprintTerms( Fingerprint $fingerprint, array $extraFields = array() ) {
-		$terms = array();
+	private function getFingerprintTerms( Fingerprint $fingerprint, array $extraFields = [] ) {
+		$terms = [];
 
 		foreach ( $fingerprint->getDescriptions()->toTextArray() as $languageCode => $description ) {
 			$term = new TermIndexEntry( $extraFields );
@@ -423,11 +423,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			|| ( is_array( $termTypes ) && empty( $termTypes ) )
 			|| ( is_array( $languageCodes ) && empty( $languageCodes ) )
 		) {
-			return array();
+			return [];
 		}
 
 		$entityType = null;
-		$numericIds = array();
+		$numericIds = [];
 
 		foreach ( $entityIds as $id ) {
 			if ( $entityType === null ) {
@@ -507,17 +507,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $terms,
 		$termType = null,
 		$entityType = null,
-		array $options = array()
+		array $options = []
 	) {
 		if ( empty( $terms ) ) {
-			return array();
+			return [];
 		}
 
 		$dbr = $this->getReadDb();
 
 		$termConditions = $this->termsToConditions( $dbr, $terms, $termType, $entityType, $options );
 
-		$queryOptions = array();
+		$queryOptions = [];
 		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
 			$queryOptions['LIMIT'] = $options['LIMIT'];
 		}
@@ -559,7 +559,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $terms,
 		$termType = null,
 		$entityType = null,
-		array $options = array()
+		array $options = []
 	) {
 		$requestedLimit = 0;
 		if ( array_key_exists( 'LIMIT', $options ) ) {
@@ -575,7 +575,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$options
 		);
 
-		$returnTermIndexEntries = array();
+		$returnTermIndexEntries = [];
 		foreach ( $matchingTermIndexEntries as $indexEntry ) {
 			$entityIdSerilization = $indexEntry->getEntityId()->getSerialization();
 			if ( !array_key_exists( $entityIdSerilization, $returnTermIndexEntries ) ) {
@@ -597,8 +597,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return object[]
 	 */
 	private function getRowsOrderedByWeight( Traversable $rows, $limit = 0 ) {
-		$sortData = array();
-		$rowMap = array();
+		$sortData = [];
+		$rowMap = [];
 
 		foreach ( $rows as $key => $row ) {
 			$termWeight = floatval( $row->term_weight );
@@ -627,7 +627,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$sortData = array_slice( $sortData, 0, $limit, true );
 		}
 
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $sortData as $key => $keySortData ) {
 			$entityIds[] = $rowMap[$key];
@@ -650,9 +650,9 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $terms,
 		$termType = null,
 		$entityType = null,
-		array $options = array()
+		array $options = []
 	) {
-		$conditions = array();
+		$conditions = [];
 
 		foreach ( $terms as $term ) {
 			$termConditions = $this->termMatchConditions( $db, $term, $termType, $entityType, $options );
@@ -676,7 +676,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		TermIndexEntry $term,
 		$termType = null,
 		$entityType = null,
-		array $options = array()
+		array $options = []
 	) {
 		$options = array_merge(
 			array(
@@ -686,7 +686,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$options
 		);
 
-		$conditions = array();
+		$conditions = [];
 
 		$language = $term->getLanguage();
 
@@ -737,10 +737,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return TermIndexEntry[]
 	 */
 	private function buildTermResult( $obtainedTerms ) {
-		$matchingTerms = array();
+		$matchingTerms = [];
 
 		foreach ( $obtainedTerms as $obtainedTerm ) {
-			$matchingTerm = array();
+			$matchingTerm = [];
 
 			foreach ( $obtainedTerm as $key => $value ) {
 				if ( !array_key_exists( $key, $this->termFieldMap ) ) {
@@ -798,7 +798,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		if ( empty( $labels ) && empty( $aliases ) ) {
-			return array();
+			return [];
 		}
 
 		$termTypes = ( $aliases === null )
@@ -848,7 +848,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$descriptions = array_intersect_key( $descriptions, $labels );
 
 		if ( empty( $descriptions ) || empty( $labels ) ) {
-			return array();
+			return [];
 		}
 
 		$dbr = $this->getReadDb();
@@ -857,10 +857,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		//        so skip this check during unit tests on MySQL!
 		if ( defined( 'MW_PHPUNIT_TEST' ) && $dbr->getType() === 'mysql' ) {
 			$this->releaseConnection( $dbr );
-			return array();
+			return [];
 		}
 
-		$where = array();
+		$where = [];
 		$where['L.term_entity_type'] = $entityType;
 		$where['L.term_type'] = TermIndexEntry::TYPE_LABEL;
 		$where['D.term_type'] = TermIndexEntry::TYPE_DESCRIPTION;
@@ -868,7 +868,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$where[] = 'D.term_entity_id=' . 'L.term_entity_id';
 		$where[] = 'D.term_entity_type=' . 'L.term_entity_type';
 
-		$termConditions = array();
+		$termConditions = [];
 
 		foreach ( $labels as $lang => $label ) {
 			// Due to the array_intersect_key call earlier, we know a corresponding description exists.
@@ -913,7 +913,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return TermIndexEntry[]
 	 */
 	private function makeQueryTerms( $textsByLanguage, array $types ) {
-		$terms = array();
+		$terms = [];
 
 		foreach ( $textsByLanguage as $lang => $texts ) {
 			$texts = (array)$texts;

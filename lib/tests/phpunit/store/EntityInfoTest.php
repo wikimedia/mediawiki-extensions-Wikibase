@@ -31,7 +31,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getEntityInfo( array $entities ) {
 		$entityRevisionLookup = new MockRepository();
-		$ids = array();
+		$ids = [];
 
 		foreach ( $entities as $entity ) {
 			$entityRevisionLookup->putEntity( $entity );
@@ -78,7 +78,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 
 	public function asArrayProvider() {
 		return array(
-			'empty' => array( array() ),
+			'empty' => array( [] ),
 			'labels' => array( array(
 				'Q11' => array(
 					'id' => 'Q11',
@@ -158,8 +158,8 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( array( 'en' => 'London' ), $info->getLabels( new ItemId( 'Q11' ) ) );
 		$this->assertEquals( array( 'en' => 'Berlin' ), $info->getLabels( new ItemId( 'Q33' ) ) );
-		$this->assertEquals( array(), $info->getLabels( new ItemId( 'Q33' ), array( 'de' ) ) );
-		$this->assertEquals( array(), $info->getLabels( new ItemId( 'Q66' ) ) );
+		$this->assertEquals( [], $info->getLabels( new ItemId( 'Q33' ), array( 'de' ) ) );
+		$this->assertEquals( [], $info->getLabels( new ItemId( 'Q66' ) ) );
 	}
 
 	public function testGetDescription() {
@@ -182,13 +182,13 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( array( 'en' => 'London' ), $info->getDescriptions( new ItemId( 'Q11' ) ) );
 		$this->assertEquals( array( 'en' => 'Berlin' ), $info->getDescriptions( new ItemId( 'Q33' ) ) );
-		$this->assertEquals( array(), $info->getDescriptions( new ItemId( 'Q33' ), array( 'de' ) ) );
-		$this->assertEquals( array(), $info->getDescriptions( new ItemId( 'Q66' ) ) );
+		$this->assertEquals( [], $info->getDescriptions( new ItemId( 'Q33' ), array( 'de' ) ) );
+		$this->assertEquals( [], $info->getDescriptions( new ItemId( 'Q66' ) ) );
 	}
 
 	public function provideBlankInfo() {
 		return array(
-			'unknown item' => array( array() ),
+			'unknown item' => array( [] ),
 			'unknown terms' => array(
 				array(
 					'Q99' => array(
@@ -239,7 +239,7 @@ class EntityInfoTest extends PHPUnit_Framework_TestCase {
 	public function invalidArrayProvider() {
 		return array(
 			'value incomplete' => array(
-				array( 'Q99' => array( 'labels' => array( 'en' => array() ) ) )
+				array( 'Q99' => array( 'labels' => array( 'en' => [] ) ) )
 			),
 			'value invalid' => array(
 				array( 'Q99' => array( 'labels' => array( 'en' => 'not an array' ) ) )

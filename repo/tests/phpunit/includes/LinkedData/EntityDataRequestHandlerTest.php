@@ -212,7 +212,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		array $headers,
 		$expectedOutput,
 		$expectedStatusCode = 200,
-		array $expectedHeaders = array()
+		array $expectedHeaders = []
 	) {
 		$output = $this->makeOutputPage( $params, $headers );
 		$request = $output->getRequest();

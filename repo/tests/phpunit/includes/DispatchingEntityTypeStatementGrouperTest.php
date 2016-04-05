@@ -52,7 +52,7 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 		$statements = new StatementList();
 		$statements->addNewStatement( new PropertyNoValueSnak( 1 ), null, null, 'Q1$' );
 
-		$grouper = new DispatchingEntityTypeStatementGrouper( array() );
+		$grouper = new DispatchingEntityTypeStatementGrouper( [] );
 		$groups = $grouper->groupStatements( $statements );
 
 		$this->assertSame( array( 'statements' => $statements ), $groups );

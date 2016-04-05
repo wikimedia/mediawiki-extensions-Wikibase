@@ -58,7 +58,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	public function testRender_PropertyLabelNotResolvedException() {
 		$renderer = $this->getInteractor(
 			$this->getPropertyIdResolverForPropertyNotFound(),
-			array()
+			[]
 		);
 
 		$this->setExpectedException( PropertyLabelNotResolvedException::class );
@@ -68,7 +68,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	public function testRender_unresolvedRedirect() {
 		$renderer = $this->getInteractor(
 			$this->getPropertyIdResolver(),
-			array()
+			[]
 		);
 
 		$this->assertEquals( '', $renderer->render( new ItemId( 'Q43' ), 'P1337' ) );
@@ -77,7 +77,7 @@ class StatementTransclusionInteractorTest extends PHPUnit_Framework_TestCase {
 	public function testRender_unknownEntity() {
 		$renderer = $this->getInteractor(
 			$this->getPropertyIdResolver(),
-			array()
+			[]
 		);
 
 		$this->assertEquals( '', $renderer->render( new ItemId( 'Q43333' ), 'P1337' ) );

@@ -38,7 +38,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	/**
 	 * @var ItemId[]
 	 */
-	private $redirectItemIds = array();
+	private $redirectItemIds = [];
 
 	protected function setUp() {
 		parent::setUp();
@@ -197,7 +197,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	public function testGetRedirectIds_entityDoesNotExist() {
 		$res = $this->getWikiPageEntityRedirectLookup()->getRedirectIds( new ItemId( 'Q48758903' ) );
 
-		$this->assertSame( array(), $res );
+		$this->assertSame( [], $res );
 	}
 
 	private function getWikiPageEntityRedirectLookup() {

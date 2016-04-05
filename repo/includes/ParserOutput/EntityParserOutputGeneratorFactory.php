@@ -99,8 +99,8 @@ class EntityParserOutputGeneratorFactory {
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityIdParser $externalEntityIdParser,
-		array $preferredGeoDataProperties = array(),
-		array $preferredPageImagesProperties = array(),
+		array $preferredGeoDataProperties = [],
+		array $preferredPageImagesProperties = [],
 		array $globeUris
 	) {
 		$this->entityViewFactory = $entityViewFactory;

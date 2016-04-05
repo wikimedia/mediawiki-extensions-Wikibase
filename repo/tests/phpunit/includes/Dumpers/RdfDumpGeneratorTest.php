@@ -92,7 +92,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @return RdfDumpGenerator
 	 * @throws MWException
 	 */
-	protected function newDumpGenerator( array $entities = array(), array $redirects = array() ) {
+	protected function newDumpGenerator( array $entities = [], array $redirects = [] ) {
 		$out = fopen( 'php://output', 'w' );
 
 		$entityLookup = $this->getMock( EntityLookup::class );
@@ -154,7 +154,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		$q4242 = new ItemId( 'Q4242' ); // hardcoded to be a redirect
 
 		return array(
-			'empty' => array( array(), 'empty' ),
+			'empty' => array( [], 'empty' ),
 			'some entities' => array( array( $p10, $q30, $q40 ), 'entities' ),
 			'redirect' => array( array( $p10, $q4242 ), 'redirect' ),
 		);
@@ -191,7 +191,7 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 	 * @param string $dumpname
 	 */
 	public function testReferenceDedup( array $ids, $dumpname ) {
-		$entities = array();
+		$entities = [];
 		$rdfTest = new RdfBuilderTest();
 
 		foreach ( $ids as $id ) {

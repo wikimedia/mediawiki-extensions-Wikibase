@@ -29,9 +29,9 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			'empty' => array(
-				array(),
+				[],
 				$t1,
-				array(),
+				[],
 			),
 
 			'add usages' => array(
@@ -96,9 +96,9 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'empty' => array(
 				$t1,
-				array(),
-				array(),
-				array(),
+				[],
+				[],
+				[],
 			),
 
 			'pruned usages' => array(

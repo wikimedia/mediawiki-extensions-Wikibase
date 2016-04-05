@@ -65,7 +65,7 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return TermIndexSearchInteractor|\PHPUnit_Framework_MockObject_MockObject
 	 */
-	private function getMockSearchInteractor( $search, $language, $type, array $returnResults = array() ) {
+	private function getMockSearchInteractor( $search, $language, $type, array $returnResults = [] ) {
 		$mock = $this->getMockBuilder( TermIndexSearchInteractor::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -154,10 +154,10 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			'No exact match' => array(
-				'Q999', 10, array(), array()
+				'Q999', 10, [], []
 			),
 			'Exact EntityId match' => array(
-				'Q111', 10, array(), array( 'Q111' => $q111Result )
+				'Q111', 10, [], array( 'Q111' => $q111Result )
 			),
 			'Multiple Results' => array(
 				'Foo', 10, array( $q222Result, $q333Result ), array( 'Q222' => $q222Result, 'Q333' => $q333Result )

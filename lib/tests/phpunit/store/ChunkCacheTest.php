@@ -16,7 +16,7 @@ use Wikibase\ChunkCache;
 class ChunkCacheTest extends \MediaWikiTestCase {
 
 	protected static function getTestData() {
-		static $data = array();
+		static $data = [];
 
 		if ( empty( $data ) ) {
 			for ( $i = 0; $i < 100; $i++ ) {

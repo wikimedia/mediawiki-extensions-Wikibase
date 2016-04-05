@@ -27,7 +27,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 	}
 
 	private function replaceIdsInArray( array $array ) {
-		$replacements = array();
+		$replacements = [];
 		if ( $this->lastPropertyId !== null ) {
 			$replacements['$propertyIdUnderTest'] = $this->lastPropertyId->getSerialization();
 		}

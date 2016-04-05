@@ -51,7 +51,7 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider invalidValueProvider
 	 */
-	public function testValidateInvalidValue( $value, $code, array $params = array() ) {
+	public function testValidateInvalidValue( $value, $code, array $params = [] ) {
 		$validator = new NumberValidator();
 		$result = $validator->validate( $value );
 

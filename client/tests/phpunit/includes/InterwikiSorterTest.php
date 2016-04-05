@@ -27,7 +27,7 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 	public function constructorProvider() {
 		$sortOrders = $this->sortOrdersProvider();
 		return array(
-			array( 'code', $sortOrders, array() ),
+			array( 'code', $sortOrders, [] ),
 			array( 'code', $sortOrders, array( 'en' ) )
 		);
 	}
@@ -46,7 +46,7 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				$links, 'code', $sortOrders, array(),
+				$links, 'code', $sortOrders, [],
 				array( 'ar', 'de', 'en', 'fr', 'hu', 'ja', 'ks', 'ky', 'pt', 'rn' )
 			),
 			array(
@@ -54,7 +54,7 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 				array( 'en', 'ar', 'de', 'fr', 'hu', 'ja', 'ks', 'ky', 'pt', 'rn' )
 			),
 			array(
-				$links, 'alphabetic', $sortOrders, array(),
+				$links, 'alphabetic', $sortOrders, [],
 				$sortOrders['alphabetic']
 			),
 			array(
@@ -62,7 +62,7 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 				array( 'en', 'ja', 'ar', 'de','fr', 'ks', 'rn', 'ky', 'hu', 'pt' )
 			),
 			array(
-				$links, 'alphabetic_revised', $sortOrders, array(),
+				$links, 'alphabetic_revised', $sortOrders, [],
 				$sortOrders['alphabetic_revised']
 			),
 			array(
@@ -70,21 +70,21 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 				array( 'hu', 'ar', 'de', 'en', 'fr', 'ks', 'ky', 'rn', 'ja', 'pt' )
 			),
 			array(
-				array( 'ja', 'de', 'pt', 'en', 'hu' ), 'mycustomorder', $sortOrders, array(),
+				array( 'ja', 'de', 'pt', 'en', 'hu' ), 'mycustomorder', $sortOrders, [],
 				$sortOrders['mycustomorder']
 			),
 			array(
 				array( 'x2', 'x1', 'x3' ),
 				'alphabetic',
-				array( 'alphabetic' => array() ),
-				array(),
+				array( 'alphabetic' => [] ),
+				[],
 				array( 'x1', 'x2', 'x3' )
 			),
 			array(
 				array( 'x2', 'x1', 'en', 'de', 'a2', 'a1' ),
 				'alphabetic',
 				$sortOrders,
-				array(),
+				[],
 				array( 'de', 'en', 'a1', 'a2', 'x1', 'x2' )
 			),
 			array(
@@ -104,22 +104,22 @@ class InterwikiSorterTest extends \PHPUnit_Framework_TestCase {
 			'Code w/o alphabetic' => array(
 				array( 'c', 'b', 'a' ),
 				'code',
-				array(),
-				array(),
+				[],
+				[],
 				array( 'a', 'b', 'c' )
 			),
 			array(
 				array( 'a', 'b', 'k', 'x' ),
 				'alphabetic',
 				array( 'alphabetic' => array( 'x', 'k', 'a' ) ),
-				array(),
+				[],
 				array( 'x', 'k', 'a', 'b' )
 			),
 			'Fall back to code order' => array(
 				array( 'b', 'a' ),
 				'invalid',
-				array(),
-				array(),
+				[],
+				[],
 				array( 'a', 'b' )
 			)
 		);

@@ -64,8 +64,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
 		$this->entityModificationTestHelper->putEntities( array(
-			'Q1' => array(),
-			'Q2' => array(),
+			'Q1' => [],
+			'Q2' => [],
 			'P1' => array( 'datatype' => 'string' ),
 		) );
 	}
@@ -214,7 +214,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 				)
 			) );
 
-		$output = $this->executeSpecialEntityRedirect( array() );
+		$output = $this->executeSpecialEntityRedirect( [] );
 
 		$this->assertNoError( $output );
 
@@ -268,7 +268,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		) );
 
 		// -- prefill the entities --------------------------------------------
-		$this->entityModificationTestHelper->putEntity( array(), 'Q1' );
+		$this->entityModificationTestHelper->putEntity( [], 'Q1' );
 		$this->entityModificationTestHelper->putEntity( $targetItemContent, 'Q2' );
 
 		// -- do the request --------------------------------------------

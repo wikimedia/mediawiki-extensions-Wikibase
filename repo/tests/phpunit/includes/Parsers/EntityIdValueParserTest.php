@@ -44,7 +44,7 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	 * @see ValueParserTestBase::parseProvider
 	 */
 	public function validInputProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$valid = array(
 			'q1' => new EntityIdValue( new ItemId( 'q1' ) ),

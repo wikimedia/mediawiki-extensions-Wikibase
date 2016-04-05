@@ -83,7 +83,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$entityAccessor = $this->getEntityAccessor( $entityLookup );
 
 		$entityArr = $entityAccessor->getEntity( $prefixedId );
-		$actual = is_array( $entityArr ) ? $entityArr : array();
+		$actual = is_array( $entityArr ) ? $entityArr : [];
 		$this->assertSameSize( $expected, $actual );
 
 		foreach ( $expected as $expectedKey ) {
@@ -116,7 +116,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array( array( 'id', 'type', 'descriptions', 'labels', 'sitelinks', 'schemaVersion' ), $item, $entityLookup ),
-			array( array(), $item2, $entityLookup )
+			array( [], $item2, $entityLookup )
 		);
 	}
 
@@ -180,7 +180,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 		$item->setDescription( 'en', 'en-desc' );
 		$item->setDescription( 'pt', 'ptDesc' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Berlin', array( new ItemId( 'Q333' ) ) );
-		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', array() );
+		$item->getSiteLinkList()->addNewSiteLink( 'zh_classicalwiki', 'User:Addshore', [] );
 
 		$snak = new PropertyValueSnak( 65, new StringValue( 'snakStringValue' ) );
 
@@ -304,7 +304,7 @@ class EntityAccessorTest extends \PHPUnit_Framework_TestCase {
 				'zh_classicalwiki' => array(
 					'site' => 'zh_classicalwiki',
 					'title' => 'User:Addshore',
-					'badges' => array()
+					'badges' => []
 				),
 			),
 			'schemaVersion' => 2,

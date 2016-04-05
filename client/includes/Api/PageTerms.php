@@ -86,7 +86,7 @@ class PageTerms extends ApiQueryBase {
 	 * @return array[]
 	 */
 	private function splitPageEntityMapByType( array $pagesToEntityIds ) {
-		$groups = array();
+		$groups = [];
 
 		foreach ( $pagesToEntityIds as $pageId => $entityId ) {
 			$type = $entityId->getEntityType();
@@ -105,7 +105,7 @@ class PageTerms extends ApiQueryBase {
 	 */
 	private function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		$entityIdGroups = $this->splitPageEntityMapByType( $entityIds );
-		$terms = array();
+		$terms = [];
 
 		foreach ( $entityIdGroups as $entityIds ) {
 			$terms = array_merge(
@@ -129,7 +129,7 @@ class PageTerms extends ApiQueryBase {
 		// Re-sort, so the order of page IDs matches the order in which $titles
 		// were given. This is essential for paging to work properly.
 		// This also skips all page IDs up to $continue.
-		$sortedEntityId = array();
+		$sortedEntityId = [];
 		foreach ( $titles as $pid => $title ) {
 			if ( $pid >= $continue && isset( $entityIds[$pid] ) ) {
 				$sortedEntityId[$pid] = $entityIds[$pid];
@@ -162,7 +162,7 @@ class PageTerms extends ApiQueryBase {
 	 * @return array[] An associative array, mapping pageId + entity type to a list of strings.
 	 */
 	private function groupTermsByPageAndType( array $entityToPageMap, array $terms ) {
-		$termsPerPage = array();
+		$termsPerPage = [];
 
 		foreach ( $terms as $term ) {
 			// Since we construct $terms and $entityToPageMap from the same set of page IDs,

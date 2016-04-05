@@ -70,8 +70,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
 		$this->entityModificationTestHelper->putEntities( array(
-			'Q1' => array(),
-			'Q2' => array(),
+			'Q1' => [],
+			'Q2' => [],
 			'P1' => array( 'datatype' => 'string' ),
 			'P2' => array( 'datatype' => 'string' ),
 		) );
@@ -195,7 +195,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 
 		$constraintProvider->expects( $this->any() )
 			->method( 'getUpdateValidators' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		return $constraintProvider;
 	}
@@ -242,19 +242,19 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$module->execute();
 
 		$data = $module->getResult()->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
 		) );
 		return $data;
 	}
 
 	public function provideData() {
-		$testCases = array();
+		$testCases = [];
 		$testCases['labelMerge'] = array(
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
 			true,
 		);
@@ -276,8 +276,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal' ) ) ) ),
@@ -289,8 +289,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 					'value' => array( 'entity-type' => 'item', 'numeric-id' => 2 ), 'type' => 'wikibase-entityid' )
 				),
 				'type' => 'statement', 'rank' => 'normal', 'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
 					'value' => array( 'entity-type' => 'item', 'numeric-id' => 2 ), 'type' => 'wikibase-entityid' )
@@ -384,7 +384,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	public function provideExceptionParamsData() {
 		return array(
 			array( //0 no ids given
-				'p' => array(),
+				'p' => [],
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'param-missing'
@@ -489,10 +489,10 @@ class MergeItemsTest extends \MediaWikiTestCase {
 					),
 					'type' => 'statement', 'rank' => 'normal' ) ) )
 				),
-				array(),
+				[],
 			),
 			array(
-				array(),
+				[],
 				array( 'claims' => array( 'P1' => array( array( 'mainsnak' => array(
 					'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array(
 						'value' => array( 'entity-type' => 'item', 'numeric-id' => 1 ), 'type' => 'wikibase-entityid' )

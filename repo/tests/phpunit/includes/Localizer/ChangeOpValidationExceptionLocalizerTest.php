@@ -22,7 +22,7 @@ use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
 class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetExceptionMessage() {
-		$result0 = Result::newError( array() );
+		$result0 = Result::newError( [] );
 		$result1 = Result::newError( array(
 			Error::newError( 'Eeek!', null, 'too-long', array( 8 ) ),
 		) );
@@ -35,7 +35,7 @@ class ChangeOpValidationExceptionLocalizerTest extends \PHPUnit_Framework_TestCa
 			'ChangeOpValidationException(0)' => array(
 				new ChangeOpValidationException( $result0 ),
 				'wikibase-validator-invalid',
-				array()
+				[]
 			),
 			'ChangeOpValidationException(1)' => array(
 				new ChangeOpValidationException( $result1 ),

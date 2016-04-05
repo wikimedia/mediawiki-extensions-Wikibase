@@ -25,7 +25,7 @@ use Wikibase\TermSqlIndex;
 class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 	public function termProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$argLists[] = array( 'en', 'FoO', 'fOo', true );
 		$argLists[] = array( 'ru', 'Берлин', '  берлин  ', true );
@@ -53,7 +53,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 		// remove search key
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->update( $termCache->getTableName(), array( 'term_search_key' => '' ), array(), __METHOD__ );
+		$dbw->update( $termCache->getTableName(), array( 'term_search_key' => '' ), [], __METHOD__ );
 
 		// rebuild search key
 		$builder = new TermSearchKeyBuilder( $termCache );

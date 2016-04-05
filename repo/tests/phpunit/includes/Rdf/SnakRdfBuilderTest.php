@@ -75,7 +75,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$propertyValueLName,
 		$dataType,
 		Snak $snak = null,
-		array &$mentioned = array()
+		array &$mentioned = []
 	) {
 		$mentionTracker = $this->getMock( EntityMentionListener::class );
 		$mentionTracker->expects( $this->any() )
@@ -176,7 +176,7 @@ class SnakRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$writer->about( RdfVocabulary::NS_ENTITY, 'Q11' );
 
-		$mentioned = array();
+		$mentioned = [];
 		$builder = $this->newBuilder(
 			RdfVocabulary::NSP_DIRECT_CLAIM,
 			$propertyId->getSerialization(),

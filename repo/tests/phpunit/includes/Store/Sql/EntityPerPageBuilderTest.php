@@ -91,7 +91,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 			'Rome', 'Cairo', 'Santiago', 'Sydney', 'Toronto', 'Berlin' );
 
 		/** @var Item[] $items */
-		$items = array();
+		$items = [];
 
 		$prefix = get_class( $this ) . '/';
 
@@ -137,7 +137,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$pageRow = $dbw->select(
 			'page',
 			'page_id',
-			array(),
+			[],
 			__METHOD__,
 			array(
 				'LIMIT' => 1,
@@ -158,7 +158,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	 */
 	private function countPages() {
 		$dbw = wfGetDB( DB_MASTER );
-		$pages = $dbw->select( 'page', array( 'page_id' ), array(), __METHOD__ );
+		$pages = $dbw->select( 'page', array( 'page_id' ), [], __METHOD__ );
 
 		return $pages->numRows();
 	}
@@ -168,7 +168,7 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 	 */
 	private function countEntityPerPageRows() {
 		$dbw = wfGetDB( DB_MASTER );
-		$eppRows = $dbw->selectField( 'wb_entity_per_page', 'count(*)', array(), __METHOD__ );
+		$eppRows = $dbw->selectField( 'wb_entity_per_page', 'count(*)', [], __METHOD__ );
 
 		return (int)$eppRows;
 	}
@@ -181,10 +181,10 @@ class EntityPerPageBuilderTest extends \MediaWikiTestCase {
 		$rows = $dbw->select(
 			'wb_entity_per_page',
 			array( 'epp_page_id', 'epp_entity_id', 'epp_redirect_target' ),
-			array(),
+			[],
 			__METHOD__ );
 
-		$pages = array();
+		$pages = [];
 
 		foreach ( $rows as $row ) {
 			$pages[] = get_object_vars( $row );

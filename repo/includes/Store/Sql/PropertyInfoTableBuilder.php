@@ -157,7 +157,7 @@ class PropertyInfoTableBuilder {
 
 		$total = 0;
 
-		$join = array();
+		$join = [];
 		$tables = array( 'wb_entity_per_page' );
 
 		if ( !$this->shouldUpdateAllEntities ) {

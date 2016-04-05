@@ -85,7 +85,7 @@ class EntityContentDiffView extends DifferenceEngine {
 		);
 		$labelDescriptionLookup = $labelDescriptionLookupFactory->newLabelDescriptionLookup(
 			$this->getLanguage(),
-			array() // TODO: populate ids of entities to prefetch
+			[] // TODO: populate ids of entities to prefetch
 		);
 
 		$htmlFormatterFactory = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory();
@@ -157,7 +157,7 @@ class EntityContentDiffView extends DifferenceEngine {
 
 		$title = $rev->getTitle();
 
-		$header = Linker::linkKnown( $title, $header, array(),
+		$header = Linker::linkKnown( $title, $header, [],
 			array( 'oldid' => $rev->getID() ) );
 
 		if ( $rev->userCan( Revision::DELETED_TEXT, $user ) ) {
@@ -171,7 +171,7 @@ class EntityContentDiffView extends DifferenceEngine {
 					$msg = $this->msg( 'wikibase-restoreold' )->escaped();
 				}
 
-				$header .= ' (' . Linker::linkKnown( $title, $msg, array(), $editQuery ) . ')';
+				$header .= ' (' . Linker::linkKnown( $title, $msg, [], $editQuery ) . ')';
 			}
 
 			if ( $rev->isDeleted( Revision::DELETED_TEXT ) ) {

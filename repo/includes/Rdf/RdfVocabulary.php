@@ -87,7 +87,7 @@ class RdfVocabulary {
 	/**
 	 * @var string[] Mapping of namespace names to URIs.
 	 */
-	private $namespaces = array();
+	private $namespaces = [];
 
 	/**
 	 * @var string
@@ -112,7 +112,7 @@ class RdfVocabulary {
 	/**
 	 * @var string[]
 	 */
-	private static $canonicalLanguageCodeCache = array();
+	private static $canonicalLanguageCodeCache = [];
 
 	/**
 	 * @param string $baseUri Base URI for entity concept URIs.
@@ -124,8 +124,8 @@ class RdfVocabulary {
 	public function __construct(
 		$baseUri,
 		$dataUri,
-		array $canonicalLanguageCodes = array(),
-		array $dataTypeUris = array()
+		array $canonicalLanguageCodes = [],
+		array $dataTypeUris = []
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;

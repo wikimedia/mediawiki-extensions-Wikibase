@@ -61,8 +61,8 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 
 	public function invalidConstructorArgumentsProvider() {
 		return array(
-			array( array(), null ),
-			array( array(), false ),
+			array( [], null ),
+			array( [], false ),
 			array( array( null ), '' ),
 			array( array( false ), '' ),
 			array( array( '' ), '' ),
@@ -81,7 +81,7 @@ class DataTypeSelectorTest extends PHPUnit_Framework_TestCase {
 	public function getHtmlProvider() {
 		return array(
 			array(
-				array(),
+				[],
 				'',
 				'<select name="&lt;NAME&gt;" id="&lt;ID&gt;" class="wb-select">'
 				. '</select>'

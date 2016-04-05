@@ -32,7 +32,7 @@ class TermIndexEntry {
 	/**
 	 * @var array
 	 */
-	private $fields = array();
+	private $fields = [];
 
 	private static $fieldNames = array(
 		'entityType',
@@ -50,7 +50,7 @@ class TermIndexEntry {
 	 *
 	 * @throws MWException
 	 */
-	public function __construct( array $fields = array() ) {
+	public function __construct( array $fields = [] ) {
 		foreach ( $fields as $name => $value ) {
 			switch ( $name ) {
 				case 'termType':

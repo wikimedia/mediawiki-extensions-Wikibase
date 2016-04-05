@@ -40,7 +40,7 @@ class CompositeFingerprintValidatorTest extends \PHPUnit_Framework_TestCase {
 			array( array( $good, $bad ), false ),
 			array( array( $bad, $good ), false ),
 			array( array( $good, $good ), true ),
-			array( array(), true ),
+			array( [], true ),
 		);
 	}
 

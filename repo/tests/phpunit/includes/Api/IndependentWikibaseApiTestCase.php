@@ -55,8 +55,8 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 		$module->execute();
 
 		$data = $module->getResult()->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
 		) );
 		return $data;

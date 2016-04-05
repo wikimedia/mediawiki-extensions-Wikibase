@@ -77,7 +77,7 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$q2 = new Item( null, null, $siteLinks );
 
 		return array(
-			array( array(), 0, 0 ),
+			array( [], 0, 0 ),
 			array( array( $q1 ), 1, 0 ),
 			array( array( $q2 ), 0, 1 ),
 			array( array( $q1, $q2 ), 1, 1 ),
@@ -104,7 +104,7 @@ class EntityParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$entity = $this->getMock( Item::class );
 		$entity->expects( $this->never() )->method( 'getStatements' );
 		$entity->expects( $this->never() )->method( 'getSiteLinkList' );
-		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), array() );
+		$instance = new EntityParserOutputDataUpdater( new ParserOutput(), [] );
 		$instance->processEntity( $entity );
 	}
 

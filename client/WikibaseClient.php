@@ -90,7 +90,7 @@ call_user_func( function() {
 
 	// merge WikibaseClient.datatypes.php into $wgWBClientDataTypes
 	foreach ( $clientDatatypes as $type => $clientDef ) {
-		$baseDef = isset( $wgWBClientDataTypes[$type] ) ? $wgWBClientDataTypes[$type] : array();
+		$baseDef = isset( $wgWBClientDataTypes[$type] ) ? $wgWBClientDataTypes[$type] : [];
 		$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
 	}
 

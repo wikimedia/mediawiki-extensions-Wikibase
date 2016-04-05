@@ -46,7 +46,7 @@ class LanguageFallbackChain {
 	 * @return string[]
 	 */
 	public function getFetchLanguageCodes() {
-		$codes = array();
+		$codes = [];
 
 		foreach ( $this->chain as $language ) {
 			$codes[] = $language->getFetchLanguageCode();

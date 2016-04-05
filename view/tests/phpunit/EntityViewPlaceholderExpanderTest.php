@@ -145,7 +145,7 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 		$itemId = $item->getId();
 
 		$expander = $this->newExpander( $this->newUser( true ), $item, $itemId, $aliasesProvider );
-		$this->assertArrayEquals( array(), $expander->getExtraUserLanguages() );
+		$this->assertArrayEquals( [], $expander->getExtraUserLanguages() );
 
 		$expander = $this->newExpander( $this->newUser(), $item, $itemId, $aliasesProvider );
 		$this->assertArrayEquals( array( 'de', 'ru' ), $expander->getExtraUserLanguages() );

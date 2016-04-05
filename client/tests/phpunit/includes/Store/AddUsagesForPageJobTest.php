@@ -29,7 +29,7 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 		$touched = '20150101000000';
 
 		return array(
-			'empty' => array( array() ),
+			'empty' => array( [] ),
 
 			'$pageId is missing' => array( array(
 				'usages' => $usages,
@@ -57,7 +57,7 @@ class AddUsagesForPageJobTest extends \PHPUnit_Framework_TestCase {
 			) ),
 			'$usages is empty' => array( array(
 				'pageId' => $pageId,
-				'usages' => array(),
+				'usages' => [],
 				'touched' => $touched,
 			) ),
 			'$usages contains crap' => array( array(

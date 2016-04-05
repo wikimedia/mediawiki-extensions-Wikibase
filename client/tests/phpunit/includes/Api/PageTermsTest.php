@@ -68,7 +68,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return Title[]
 	 */
 	private function makeTitles( array $names ) {
-		$titles = array();
+		$titles = [];
 
 		foreach ( $names as $name ) {
 			if ( !preg_match( '/^\D+/', $name ) ) {
@@ -92,7 +92,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return EntityId[]
 	 */
 	private function makeEntityIds( array $pageIds ) {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $pageIds as $pid ) {
 			$entityIds[$pid] = $this->newEntityId( $pid );
@@ -107,7 +107,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return TermIndex
 	 */
 	private function getTermIndex( array $terms ) {
-		$termObjectsByEntityId = array();
+		$termObjectsByEntityId = [];
 
 		foreach ( $terms as $pid => $termGroups ) {
 			$entityId = $this->newEntityId( $pid );
@@ -144,7 +144,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		array $termTypes = null,
 		array $languageCodes = null
 	) {
-		$result = array();
+		$result = [];
 
 		foreach ( $entityIds as $id ) {
 			$key = $id->getSerialization();
@@ -175,7 +175,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	 * @return TermIndexEntry[]
 	 */
 	private function makeTermsFromGroups( EntityId $entityId, array $termGroups ) {
-		$terms = array();
+		$terms = [];
 
 		foreach ( $termGroups as $type => $group ) {
 			foreach ( $group as $lang => $text ) {
@@ -235,8 +235,8 @@ class PageTermsTest extends MediaWikiLangTestCase {
 
 		$result = $module->getResult();
 		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
 		) );
 		return $data;

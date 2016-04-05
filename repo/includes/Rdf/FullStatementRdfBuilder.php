@@ -129,7 +129,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	 * @param StatementList $statementList
 	 */
 	public function addStatements( EntityId $entityId, StatementList $statementList ) {
-		$bestList = array();
+		$bestList = [];
 
 		// FIXME: This is expensive, share the result with TruthyStatementRdfBuilder!
 		foreach ( $statementList->getPropertyIds() as $propertyId ) {

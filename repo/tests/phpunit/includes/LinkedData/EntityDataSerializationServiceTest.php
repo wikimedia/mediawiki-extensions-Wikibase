@@ -134,7 +134,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'json', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				null, // flavor
 				array( // output regex
 					'start' => '!^\s*\{!s',
@@ -142,7 +142,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 					'label' => '!"value"\s*:\s*"Label42"!s',
 					'item-ref' => '!"numeric-id":2233!s',
 				),
-				array(),
+				[],
 				'application/json', // expected mime
 			),
 
@@ -150,7 +150,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'rdfxml', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				null, // flavor
 				array( // output regex
 					'start' => '!^<\?xml!s',
@@ -158,7 +158,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 					'about' => '!rdf:about="http://acme.test/Q42"!s',
 					'label' => '!>Label42<!s',
 				),
-				array(),
+				[],
 				'application/rdf+xml', // expected mime
 			),
 
@@ -166,14 +166,14 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'turtle', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				null, // flavor
 				array( // output regex
 					'start' => '!^\s*@prefix !s',
 					'end' => '!\.\s*$!s',
 					'label' => '!"Label42"@en!s',
 				),
-				array(),
+				[],
 				'text/turtle', // expected mime
 			),
 
@@ -181,7 +181,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'ntriples', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				null, // flavor
 				array( // output regex
 					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> '
@@ -189,7 +189,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 					'label' => '!<http://acme\.test/Q42> '
 						. '*<http://www\.w3\.org/2000/01/rdf-schema#label> *"Label42"@en *\.!s',
 				),
-				array(),
+				[],
 				'application/n-triples', // expected mime
 			),
 
@@ -197,7 +197,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'ntriples', // format
 				$entityRevQ42, // entityRev
 				null, // redirect
-				array(), // incoming
+				[], // incoming
 				'full', // flavor
 				array( // output regex
 					'data about' => '!<http://data\.acme\.test/Q42> *<http://schema\.org/about> '
@@ -240,7 +240,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
 				),
-				array(),
+				[],
 				'application/n-triples', // expected mime
 			),
 
@@ -285,8 +285,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 						. '*<http://www\.w3\.org/2002/07/owl#sameAs> '
 						. '*<http://acme\.test/Q23> *\.!s',
 				),
-				array(
-				),
+				[],
 				'application/n-triples', // expected mime
 			),
 

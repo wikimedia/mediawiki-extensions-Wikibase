@@ -239,7 +239,7 @@ class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 
 		$res = $db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
 
-		$subscriptions = array();
+		$subscriptions = [];
 		foreach ( $res as $row ) {
 			$subscriptions[] = $row->cs_subscriber_id . '@' . $row->cs_entity_id;
 		}

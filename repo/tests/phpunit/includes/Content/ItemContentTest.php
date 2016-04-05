@@ -231,7 +231,7 @@ class ItemContentTest extends EntityContentTest {
 				new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
 				$this->getMock( Title::class )
 			),
-			array()
+			[]
 		);
 
 		$cases['claims'] = array(
@@ -267,7 +267,7 @@ class ItemContentTest extends EntityContentTest {
 		$redirTarget = 'Q17';
 
 		$emptyToRedirDiff = new EntityContentDiff(
-			new EntityDiff( array() ),
+			new EntityDiff( [] ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
 			), true )
@@ -319,7 +319,7 @@ class ItemContentTest extends EntityContentTest {
 		$redir = $this->newRedirect( $q10, new ItemId( $redirTarget ) );
 
 		$emptyToRedirDiff = new EntityContentDiff(
-			new EntityDiff( array() ),
+			new EntityDiff( [] ),
 			new Diff( array(
 				'redirect' => new DiffOpAdd( $redirTarget ),
 			), true )
@@ -397,7 +397,7 @@ class ItemContentTest extends EntityContentTest {
 		$q11 = new ItemId( 'Q11' );
 		$q12 = new ItemId( 'Q12' );
 
-		$cases = array();
+		$cases = [];
 		$cases['entity id'] = array( $this->newEmpty( $q11 ), $q11 );
 		$cases['redirect id'] = array( $this->newRedirect( $q11, $q12 ), $q11 );
 

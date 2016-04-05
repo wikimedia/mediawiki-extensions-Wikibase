@@ -24,7 +24,7 @@ class ChangeNotificationJobTest extends \MediaWikiTestCase {
 	public function provideToString() {
 		return array(
 			array( // #0: empty
-				array(),
+				[],
 				'/^ChangeNotification.*/'
 			),
 			array( // #1: some changes

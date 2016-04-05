@@ -19,7 +19,7 @@ class HttpAcceptParserTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array( // #0
 				'',
-				array()
+				[]
 			),
 			array( // #1
 				'Foo/Bar',

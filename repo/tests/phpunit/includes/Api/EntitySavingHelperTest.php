@@ -108,7 +108,7 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $this->newContext() ) );
 		$mockApiBase->expects( $this->atLeastOnce() )
 			->method( 'extractRequestParams' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$helper = new EntitySavingHelper(
 			$mockApiBase,

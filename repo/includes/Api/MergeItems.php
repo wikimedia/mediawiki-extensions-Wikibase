@@ -118,7 +118,7 @@ class MergeItems extends ApiBase {
 			$summary = $params['summary'];
 
 			if ( $ignoreConflicts === null ) {
-				$ignoreConflicts = array();
+				$ignoreConflicts = [];
 			}
 
 			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $params['bot'] );

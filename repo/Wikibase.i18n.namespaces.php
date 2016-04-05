@@ -34,7 +34,7 @@ foreach ( $namespaceConstants as $const ) {
 	}
 }
 
-$namespaceNames = array();
+$namespaceNames = [];
 
 $namespaceNames['en'] = array(
 	WB_NS_DATA      => 'Data',      // legacy

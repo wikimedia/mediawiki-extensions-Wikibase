@@ -89,11 +89,11 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 	 */
 	private function makeChange( array $values ) {
 		if ( !isset( $values['info'] ) ) {
-			$values['info'] = array();
+			$values['info'] = [];
 		}
 
 		if ( !isset( $values['info']['metadata'] ) ) {
-			$values['info']['metadata'] = array();
+			$values['info']['metadata'] = [];
 		}
 
 		if ( !isset( $values['info']['metadata']['rev_id'] ) && isset( $values['revision_id'] ) ) {
@@ -210,7 +210,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		}
 
 		$extraKeys = array_diff( array_keys( $actual ), array_keys( $expected ) );
-		$this->assertEquals( array(), $extraKeys, $path . " extra keys" );
+		$this->assertEquals( [], $extraKeys, $path . " extra keys" );
 	}
 
 	public function provideCoalesceChanges() {
@@ -316,8 +316,8 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 
 		return array(
 			'empty' => array(
-				array(), // $changes
-				array(), // $expected
+				[], // $changes
+				[], // $expected
 			),
 
 			'single' => array(

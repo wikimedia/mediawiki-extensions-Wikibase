@@ -152,7 +152,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		);
 
 		return $this->getEngine()->registerInterface(
-			__DIR__ . '/mw.wikibase.entity.lua', $lib, array()
+			__DIR__ . '/mw.wikibase.entity.lua', $lib, []
 		);
 	}
 

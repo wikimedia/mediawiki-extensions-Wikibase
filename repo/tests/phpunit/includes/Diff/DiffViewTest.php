@@ -73,7 +73,7 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getDiffOps( $oldValue = null, $newValue = null ) {
-		$diffOps = array();
+		$diffOps = [];
 		if ( $oldValue !== null && $newValue !== null ) {
 			$diffOps['change'] = new DiffOpChange( $oldValue, $newValue );
 		} elseif ( $oldValue !== null ) {
@@ -115,7 +115,7 @@ class DiffViewTest extends PHPUnit_Framework_TestCase {
 	 * @param string|null $newValue
 	 * @param string|string[] $path
 	 */
-	public function testGetHtml( $pattern, $oldValue = null, $newValue = null, $path = array() ) {
+	public function testGetHtml( $pattern, $oldValue = null, $newValue = null, $path = [] ) {
 		if ( !is_array( $path ) ) {
 			$path = preg_split( '@\s*/\s*@', $path );
 		}

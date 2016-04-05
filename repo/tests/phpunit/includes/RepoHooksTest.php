@@ -49,7 +49,7 @@ class RepoHooksTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$actual = array();
+		$actual = [];
 		RepoHooks::onAPIQuerySiteInfoGeneralInfo( $api, $actual );
 		foreach ( $actual['wikibase-propertytypes'] as $key => $value ) {
 			$this->assertInternalType( 'string', $key );
@@ -60,11 +60,11 @@ class RepoHooksTest extends \MediaWikiTestCase {
 	public function revisionInfoProvider() {
 		return array(
 			'empty_allowimport' => array(
-				array(),
+				[],
 				true
 			),
 			'empty_noimport' => array(
-				array(),
+				[],
 				true
 			),
 			'wikitext_allowimport' => array(
@@ -109,7 +109,7 @@ class RepoHooksTest extends \MediaWikiTestCase {
 			$this->setExpectedException( $expectedException );
 		}
 
-		RepoHooks::onImportHandleRevisionXMLTag( $importer, array(), $revisionInfo );
+		RepoHooks::onImportHandleRevisionXMLTag( $importer, [], $revisionInfo );
 		$this->assertTrue( true ); // make PHPUnit happy
 	}
 

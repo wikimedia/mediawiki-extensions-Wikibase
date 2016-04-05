@@ -121,7 +121,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	private function newSettings( array $settings ) {
 		$defaults = array(
 			'sort' => 'code',
-			'sortPrepend' => array(),
+			'sortPrepend' => [],
 			'interwikiSortOrders' => array( 'alphabetic' => array(
 				'ar', 'de', 'en', 'sv', 'zh'
 			) ),
@@ -137,7 +137,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		return new SettingsArray( array_merge( $defaults, $settings ) );
 	}
 
-	private function newParserOutputUpdateHookHandlers( array $settings = array() ) {
+	private function newParserOutputUpdateHookHandlers( array $settings = [] ) {
 		$badgeId = $this->getBadgeItem()->getId();
 
 		$links = array(
@@ -156,7 +156,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$settings = $this->newSettings( $settings );
 
 		$namespaces = $settings->getSetting( 'namespaces' );
-		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
+		$namespaceChecker = new NamespaceChecker( [], $namespaces );
 
 		$mockRepo = $this->getMockRepo( $links );
 		$mockRepo->putEntity( $this->getBadgeItem() );
@@ -263,7 +263,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			'repo-links' => array(
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
-				array(),
+				[],
 				array( 'de:Sauerstoff' ),
 				array( $commonsOxygen ),
 				array( 'de' => $badgesQ1 ),
@@ -273,7 +273,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
 				array( 'noexternallanglinks' => serialize( array( '*' ) ) ),
-				array(),
+				[],
 				array( $commonsOxygen ),
 				null,
 			),
@@ -282,9 +282,9 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 				Title::makeTitle( NS_MAIN, 'Oxygen' ),
 				'Q1',
 				array( 'noexternallanglinks' => serialize( array( 'de' ) ) ),
-				array(),
+				[],
 				array( $commonsOxygen ),
-				array(),
+				[],
 			),
 
 			'noexternallanglinks=ja' => array(
@@ -309,7 +309,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		array $expectedSisterLinks,
 		array $expectedBadges = null
 	) {
-		$parserOutput = $this->newParserOutput( $pagePropsBefore, array() );
+		$parserOutput = $this->newParserOutput( $pagePropsBefore, [] );
 		$handler = $this->newParserOutputUpdateHookHandlers();
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
@@ -350,7 +350,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	 * @dataProvider parserAfterParseProvider_noItem
 	 */
 	public function testDoContentAlterParserOutput_noItem( Title $title ) {
-		$parserOutput = $this->newParserOutput( array(), array() );
+		$parserOutput = $this->newParserOutput( [], [] );
 		$handler = $this->newParserOutputUpdateHookHandlers();
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );

@@ -53,7 +53,7 @@ class ExternalLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider externalLinksProvider
 	 */
 	public function testUpdateParserOutput( StatementList $statements, array $expected ) {
-		$actual = array();
+		$actual = [];
 
 		$parserOutput = $this->getMockBuilder( ParserOutput::class )
 			->disableOriginalConstructor()
@@ -85,7 +85,7 @@ class ExternalLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$this->addStatement( $set2, 'http://2b.de' );
 
 		return array(
-			array( new StatementList(), array() ),
+			array( new StatementList(), [] ),
 			array( $set1, array( 'http://1.de' ) ),
 			array( $set2, array( 'http://2a.de', 'http://2b.de' ) ),
 		);

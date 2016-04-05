@@ -64,7 +64,7 @@ class LanguageLinkBadgeDisplay {
 	 * @param ParserOutput $parserOutput The output page to set the wikibase_badges property on.
 	 */
 	public function attachBadgesToOutput( array $langLinks, ParserOutput $parserOutput ) {
-		$badgeInfoForAllLinks = array();
+		$badgeInfoForAllLinks = [];
 
 		foreach ( $langLinks as $key => $link ) {
 			$badges = $link->getBadges();
@@ -132,8 +132,8 @@ class LanguageLinkBadgeDisplay {
 	 * function.
 	 */
 	private function getBadgeInfo( array $badgeIds ) {
-		$classes = array();
-		$labels = array();
+		$classes = [];
+		$labels = [];
 
 		foreach ( $badgeIds as $badgeId ) {
 			$badgeSerialization = $badgeId->getSerialization();

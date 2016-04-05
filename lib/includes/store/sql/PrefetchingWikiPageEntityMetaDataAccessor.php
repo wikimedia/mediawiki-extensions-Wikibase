@@ -40,7 +40,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	/**
 	 * @var EntityId[]
 	 */
-	private $toFetch = array();
+	private $toFetch = [];
 
 	/**
 	 * @param WikiPageEntityMetaDataAccessor $lookup
@@ -74,7 +74,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 		if ( ( $entityIdCount + count( $this->toFetch ) ) > $this->maxCacheKeys ) {
 			// Fetching everything would exceed the capacity of the cache,
 			// thus discard all older entity ids as we can safely ignore these.
-			$this->toFetch = array();
+			$this->toFetch = [];
 		}
 
 		foreach ( $entityIds as $entityId ) {
@@ -161,7 +161,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 		$this->prefetch( $entityIds );
 		$this->doFetch();
 
-		$data = array();
+		$data = [];
 		foreach ( $entityIds as $entityId ) {
 			$data[$entityId->getSerialization()] = $this->cache->get( $entityId->getSerialization() );
 		}
@@ -196,7 +196,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 		$this->store( $data );
 
 		// Prune $this->toFetch
-		$this->toFetch = array();
+		$this->toFetch = [];
 	}
 
 	private function store( array $data ) {

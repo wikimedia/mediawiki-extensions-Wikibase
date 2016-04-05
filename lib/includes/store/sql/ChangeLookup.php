@@ -87,7 +87,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 
 		return $this->loadChanges(
 			array( 'change_id' => $ids ),
-			array(),
+			[],
 			__METHOD__
 		);
 	}
@@ -143,7 +143,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	}
 
 	private function changesFromRows( ResultWrapper $rows ) {
-		$changes = array();
+		$changes = [];
 		foreach ( $rows as $row ) {
 			$class = $this->getClassForType( $row->change_type );
 			$data = array(

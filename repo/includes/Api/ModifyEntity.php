@@ -286,7 +286,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return ItemId[]
 	 */
 	protected function parseSiteLinkBadges( array $badgesParams ) {
-		$badges = array();
+		$badges = [];
 
 		foreach ( $badgesParams as $badgeSerialization ) {
 			try {

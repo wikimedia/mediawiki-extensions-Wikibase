@@ -36,7 +36,7 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	protected function getNamespaceChecker() {
-		return new NamespaceChecker( array() );
+		return new NamespaceChecker( [] );
 	}
 
 	protected function getEntityIdParser() {
@@ -65,7 +65,7 @@ class RepoItemLinkGeneratorTest extends PHPUnit_Framework_TestCase {
 
 		$title->resetArticleID( 9638 ); // Needed so that Title::exists() -> true
 
-		$data = array();
+		$data = [];
 
 		$data['has edit link'] = array(
 			'expected' => $editLinksLinkRegex,

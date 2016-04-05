@@ -48,7 +48,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = array() ) {
+	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = [] ) {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguage( Language::factory( $lang ), $mode )->getFallbackChain();
@@ -58,7 +58,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromLanguageCode( $lang, $mode, $expected, $disabledVariants = array() ) {
+	public function testNewFromLanguageCode( $lang, $mode, $expected, $disabledVariants = [] ) {
 		$this->setupDisabledVariants( $disabledVariants );
 		$factory = new LanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguageCode( $lang, $mode )->getFallbackChain();
@@ -68,15 +68,15 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	public function providerNewFromLanguage() {
 		return array(
 			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'en' ) ),
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_OTHERS, array() ),
+			array( 'en', LanguageFallbackChainFactory::FALLBACK_VARIANTS, [] ),
+			array( 'en', LanguageFallbackChainFactory::FALLBACK_OTHERS, [] ),
 
 			array( 'zh-classical', LanguageFallbackChainFactory::FALLBACK_SELF, array( 'lzh' ) ),
 
 			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'de-formal', 'de', 'en' ) ),
 			// Repeated to test caching
 			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_ALL, array( 'de-formal', 'de', 'en' ) ),
-			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),
+			array( 'de-formal', LanguageFallbackChainFactory::FALLBACK_VARIANTS, [] ),
 			array( 'de-formal', ~LanguageFallbackChainFactory::FALLBACK_SELF, array( 'de', 'en' ) ),
 
 			array( 'zh', LanguageFallbackChainFactory::FALLBACK_ALL, array(
@@ -171,7 +171,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 			array( 'ii', ~LanguageFallbackChainFactory::FALLBACK_VARIANTS,
 				array( 'ii', 'zh-cn', 'zh-hans', 'en' )
 			),
-			array( 'ii', LanguageFallbackChainFactory::FALLBACK_VARIANTS, array() ),
+			array( 'ii', LanguageFallbackChainFactory::FALLBACK_VARIANTS, [] ),
 			array( 'ii', LanguageFallbackChainFactory::FALLBACK_VARIANTS | LanguageFallbackChainFactory::FALLBACK_OTHERS, array(
 				'zh-cn',
 				array( 'zh-cn', 'zh-hans' ),
@@ -225,7 +225,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
-	public function testNewFromUserAndLanguageCode( $lang, $mode, $expected, $disabledVariants = array() ) {
+	public function testNewFromUserAndLanguageCode( $lang, $mode, $expected, $disabledVariants = [] ) {
 		if ( $mode !== LanguageFallbackChainFactory::FALLBACK_ALL ) {
 			$this->assertTrue( true );
 			return;
@@ -262,8 +262,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 				array(
 					'N' => array( '/' ),
 				),
-				array(
-				),
+				[],
 			),
 			array(
 				array(

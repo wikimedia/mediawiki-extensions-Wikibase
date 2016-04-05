@@ -370,7 +370,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getLabelChangeOps( array $labels ) {
-		$labelChangeOps = array();
+		$labelChangeOps = [];
 
 		foreach ( $labels as $langCode => $arg ) {
 			$this->validateMultilangArgs( $arg, $langCode );
@@ -395,7 +395,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getDescriptionChangeOps( array $descriptions ) {
-		$descriptionChangeOps = array();
+		$descriptionChangeOps = [];
 
 		foreach ( $descriptions as $langCode => $arg ) {
 			$this->validateMultilangArgs( $arg, $langCode );
@@ -432,7 +432,7 @@ class EditEntity extends ModifyEntity {
 	 * @return array[]
 	 */
 	private function getIndexedAliases( array $aliases ) {
-		$indexedAliases = array();
+		$indexedAliases = [];
 
 		foreach ( $aliases as $langCode => $arg ) {
 			if ( !is_string( $langCode ) ) {
@@ -451,9 +451,9 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getIndexedAliasesChangeOps( array $indexedAliases ) {
-		$aliasesChangeOps = array();
+		$aliasesChangeOps = [];
 		foreach ( $indexedAliases as $langCode => $args ) {
-			$aliasesToSet = array();
+			$aliasesToSet = [];
 			$language = '';
 
 			foreach ( $args as $arg ) {
@@ -471,7 +471,7 @@ class EditEntity extends ModifyEntity {
 				}
 			}
 
-			if ( $aliasesToSet !== array() ) {
+			if ( $aliasesToSet !== [] ) {
 				$aliasesChangeOps[] = $this->termChangeOpFactory->newSetAliasesOp( $language, $aliasesToSet );
 			}
 		}
@@ -486,7 +486,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getSiteLinksChangeOps( array $siteLinks, Item $item ) {
-		$siteLinksChangeOps = array();
+		$siteLinksChangeOps = [];
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		foreach ( $siteLinks as $siteId => $arg ) {
@@ -540,7 +540,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getClaimsChangeOps( array $claims ) {
-		$changeOps = array();
+		$changeOps = [];
 
 		//check if the array is associative or in arrays by property
 		if ( array_keys( $claims ) !== range( 0, count( $claims ) - 1 ) ) {
@@ -564,7 +564,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getModifyStatementChangeOps( array $statements ) {
-		$opsToReturn = array();
+		$opsToReturn = [];
 
 		foreach ( $statements as $statementArray ) {
 			if ( !array_key_exists( 'remove', $statementArray ) ) {
@@ -594,7 +594,7 @@ class EditEntity extends ModifyEntity {
 	 * @return ChangeOp[]
 	 */
 	private function getRemoveStatementChangeOps( array $claims ) {
-		$opsToReturn = array();
+		$opsToReturn = [];
 		foreach ( $claims as $claimArray ) {
 			if ( array_key_exists( 'remove', $claimArray ) ) {
 				if ( array_key_exists( 'id', $claimArray ) ) {

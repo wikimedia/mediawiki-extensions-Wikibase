@@ -102,7 +102,7 @@ class EntityUsageTable {
 	 * @throws MWException
 	 */
 	private function getAffectedRowIds( $pageId, array $usages ) {
-		$usageConditions = array();
+		$usageConditions = [];
 		$db = $this->connection;
 
 		foreach ( $usages as $usage ) {
@@ -149,7 +149,7 @@ class EntityUsageTable {
 	 * @return array[]
 	 */
 	private function makeUsageRows( $pageId, array $usages, $touched ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $usages as $usage ) {
 			if ( !( $usage instanceof EntityUsage ) ) {
@@ -276,7 +276,7 @@ class EntityUsageTable {
 	 * @return EntityUsage[]
 	 */
 	private function convertRowsToUsages( Traversable $rows ) {
-		$usages = array();
+		$usages = [];
 
 		foreach ( $rows as $object ) {
 			$entityId = $this->idParser->parse( $object->eu_entity_id );
@@ -307,7 +307,7 @@ class EntityUsageTable {
 
 		if ( $lastUpdatedBefore === '' ) {
 			// treat '' as '00000000000000' instead of `now`.
-			return array();
+			return [];
 		}
 
 		$lastUpdatedBefore = wfTimestamp( TS_MW, $lastUpdatedBefore );
@@ -349,7 +349,7 @@ class EntityUsageTable {
 	 *
 	 * @return Traversable A traversable over PageEntityUsages grouped by page.
 	 */
-	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
+	public function getPagesUsing( array $entityIds, array $aspects = [] ) {
 		if ( empty( $entityIds ) ) {
 			return new ArrayIterator();
 		}
@@ -380,7 +380,7 @@ class EntityUsageTable {
 	 * @return PageEntityUsages[]
 	 */
 	private function foldRowsIntoPageEntityUsages( Traversable $rows ) {
-		$usagesPerPage = array();
+		$usagesPerPage = [];
 
 		foreach ( $rows as $row ) {
 			$pageId = (int)$row->eu_page_id;
@@ -412,10 +412,10 @@ class EntityUsageTable {
 	 */
 	public function getUnusedEntities( array $entityIds ) {
 		if ( empty( $entityIds ) ) {
-			return array();
+			return [];
 		}
 
-		$entityIdMap = array();
+		$entityIdMap = [];
 
 		foreach ( $entityIds as $entityId ) {
 			$idString = $entityId->getSerialization();
@@ -462,7 +462,7 @@ class EntityUsageTable {
 			$method
 		);
 
-		return array_map( 'intval', $rowIds ?: array() );
+		return array_map( 'intval', $rowIds ?: [] );
 	}
 
 }

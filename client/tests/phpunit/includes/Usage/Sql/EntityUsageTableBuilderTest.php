@@ -86,7 +86,7 @@ class EntityUsageTableBuilderTest extends \MediaWikiTestCase {
 
 		$res = $db->select( EntityUsageTable::DEFAULT_TABLE_NAME, '*', '', __METHOD__ );
 
-		$usages = array();
+		$usages = [];
 		foreach ( $res as $row ) {
 			$key = (int)$row->eu_page_id;
 

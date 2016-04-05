@@ -121,7 +121,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @since 0.3
 	 */
-	protected function showQuery( array $query = array() ) {
+	protected function showQuery( array $query = [] ) {
 		$paging = false;
 		$out = $this->getOutput();
 
@@ -148,7 +148,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 				$query,
 				$this->numRows <= $this->limit
 			);
-			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
+			$out->addHTML( Html::rawElement( 'p', [], $paging ) );
 		} else {
 			// No results to show, so don't bother with "showing X of Y" etc.
 			// -- just let the user know and give up now
@@ -163,7 +163,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 		);
 
 		if ( $paging ) {
-			$out->addHTML( Html::rawElement( 'p', array(), $paging ) );
+			$out->addHTML( Html::rawElement( 'p', [], $paging ) );
 		}
 
 		$out->addHTML( Html::closeElement( 'div' ) );
@@ -183,7 +183,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 			$html = Html::openElement( 'ol', array( 'start' => $offset + 1, 'class' => 'special' ) );
 			for ( $i = 0; $i < $num; $i++ ) {
 				$row = $this->formatRow( $entityIds[$i] );
-				$html .= Html::rawElement( 'li', array(), $row );
+				$html .= Html::rawElement( 'li', [], $row );
 			}
 			$html .= Html::closeElement( 'ol' );
 

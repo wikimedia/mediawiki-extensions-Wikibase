@@ -144,7 +144,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 		// This should trigger no more calls to the TermIndex, since the label for 'it' is in the
 		// buffer as a negative entry.
-		$this->assertEquals( array(), $lookup->getLabels( $q116, array( 'it' ) ) );
+		$this->assertEquals( [], $lookup->getLabels( $q116, array( 'it' ) ) );
 
 		// This should trigger one call to getTermsOfEntity
 		$this->assertEquals( 'Vienne', $lookup->getLabel( $q116, 'fr' ) );

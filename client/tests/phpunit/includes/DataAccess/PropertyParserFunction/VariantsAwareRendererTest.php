@@ -37,7 +37,7 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getLanguageAwareRendererFromCode' )
 			->will( $this->returnValue( $languageRenderer ) );
 
-		$languageRenderers = array();
+		$languageRenderers = [];
 
 		foreach ( $variants as $variant ) {
 			$languageRenderers[$variant] = $languageRenderer;
@@ -68,7 +68,7 @@ class VariantsAwareRendererTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'',
 				$itemId,
-				array(),
+				[],
 				'cat'
 			)
 		);

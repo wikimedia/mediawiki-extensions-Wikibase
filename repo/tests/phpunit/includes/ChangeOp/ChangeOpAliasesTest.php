@@ -28,7 +28,7 @@ class ChangeOpAliasesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidConstructorProvider() {
-		$args = array();
+		$args = [];
 		$args[] = array( 42, array( 'myNewAlias' ), 'add' );
 		$args[] = array( 'en', array( 'myNewAlias' ), 1234 );
 

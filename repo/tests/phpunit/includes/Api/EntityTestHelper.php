@@ -15,7 +15,7 @@ class EntityTestHelper {
 	/**
 	 * @var string[] List of currently active handles and their current ids
 	 */
-	private static $activeHandles = array();
+	private static $activeHandles = [];
 
 	/**
 	 * @var string[] List of currently active ids and their current handles
@@ -25,7 +25,7 @@ class EntityTestHelper {
 	/**
 	 * @var array[] Handles and any registered default output data
 	 */
-	private static $entityOutput = array();
+	private static $entityOutput = [];
 
 	/**
 	 * @var array[] Set of pre defined entity data for use in tests
@@ -33,11 +33,11 @@ class EntityTestHelper {
 	private static $entityData = array(
 		'Empty' => array(
 			"new" => "item",
-			"data" => array(),
+			"data" => [],
 		),
 		'Empty2' => array(
 			"new" => "item",
-			"data" => array(),
+			"data" => [],
 		),
 		'StringProp' => array(
 			"new" => "property",
@@ -309,8 +309,8 @@ class EntityTestHelper {
 	 *
 	 * @return array Array of entity output with props and langs removed
 	 */
-	protected static function stripUnwantedOutputValues( array $entityOutput, array $props = array(), array $langs = null ) {
-		$entityProps = array();
+	protected static function stripUnwantedOutputValues( array $entityOutput, array $props = [], array $langs = null ) {
+		$entityProps = [];
 		$props[] = 'type'; // always return the type so we can demobilize
 		foreach ( $props as $prop ) {
 			if ( array_key_exists( $prop, $entityOutput ) ) {
@@ -319,13 +319,13 @@ class EntityTestHelper {
 		}
 		foreach ( $entityProps as $prop => $value ) {
 			if ( ( $prop == 'aliases' || $prop == 'labels' || $prop == 'descriptions' ) && $langs != null && is_array( $langs ) ) {
-				$langValues = array();
+				$langValues = [];
 				foreach ( $langs as $langCode ) {
 					if ( array_key_exists( $langCode, $value ) ) {
 						$langValues[ $langCode ] = $value[ $langCode ];
 					}
 				}
-				if ( $langValues === array() ) {
+				if ( $langValues === [] ) {
 					unset( $entityProps[ $prop ] );
 				} else {
 					$entityProps[ $prop ] = $langValues;

@@ -52,8 +52,8 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 			),
 			'no languages' => array(
 				$q116,
-				array(),
-				array()
+				[],
+				[]
 			),
 		);
 	}
@@ -103,8 +103,8 @@ class EntityTermLookupTest extends \MediaWikiTestCase {
 			),
 			'no languages' => array(
 				$q116,
-				array(),
-				array()
+				[],
+				[]
 			),
 		);
 	}

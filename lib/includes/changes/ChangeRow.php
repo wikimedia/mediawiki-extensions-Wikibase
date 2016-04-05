@@ -56,7 +56,7 @@ class ChangeRow implements Change {
 		return false;
 	}
 
-	public function __construct( array $fields = array() ) {
+	public function __construct( array $fields = [] ) {
 		$this->setFields( $fields );
 	}
 
@@ -203,7 +203,7 @@ class ChangeRow implements Change {
 
 		if ( !is_array( $info ) ) {
 			wfLogWarning( "Failed to unserializeInfo of id: " . $this->getObjectId() );
-			return array();
+			return [];
 		}
 
 		return $info;

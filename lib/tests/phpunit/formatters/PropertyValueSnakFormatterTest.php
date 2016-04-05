@@ -236,9 +236,9 @@ class PropertyValueSnakFormatterTest extends \MediaWikiTestCase {
 
 		$typeFactory->expects( $this->never() )->method( 'getType' );
 
-		$valueFormatter = new DispatchingValueFormatter( array() );
+		$valueFormatter = new DispatchingValueFormatter( [] );
 
-		$options = new FormatterOptions( array() );
+		$options = new FormatterOptions( [] );
 
 		$formatter = new PropertyValueSnakFormatter( $format, $options, $valueFormatter, $typeLookup, $typeFactory );
 		return $formatter;

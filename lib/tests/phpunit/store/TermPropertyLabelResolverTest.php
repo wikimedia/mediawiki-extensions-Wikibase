@@ -122,8 +122,8 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 			array( // #0
 				'de',
 				$terms,
-				array(), // labels
-				array(), // expected
+				[], // labels
+				[], // expected
 			),
 			array( // #1
 				'de',
@@ -155,7 +155,7 @@ class TermPropertyLabelResolverTest extends \MediaWikiTestCase {
 					'Eins',
 					'Zwei'
 				),
-				array() // expected
+				[] // expected
 			),
 			array( // #4
 				'en',

@@ -64,7 +64,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	}
 
 	private function getChangeHandler(
-		array $pageNamesPerItemId = array(),
+		array $pageNamesPerItemId = [],
 		PageUpdater $updater = null
 	) {
 		$siteLinkLookup = $this->getSiteLinkLookup( $pageNamesPerItemId );
@@ -144,7 +144,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$itemDeletion->setField( 'time', '20130102020202' );
 
 		return array(
-			array(),
+			[],
 			array( $itemCreation ),
 			array( $itemDeletion ),
 			array( $itemCreation, $itemDeletion ),
@@ -184,8 +184,8 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	public function provideGetUpdateActions() {
 		return array(
 			'empty' => array(
-				array(),
-				array(),
+				[],
+				[],
 			),
 			'sitelink usage' => array(
 				array( EntityUsage::SITELINK_USAGE ),
@@ -226,7 +226,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetUpdateActions
 	 */
-	public function testGetUpdateActions( array $aspects, array $expected, array $not = array() ) {
+	public function testGetUpdateActions( array $aspects, array $expected, array $not = [] ) {
 		$handler = $this->getChangeHandler();
 		$actions = $handler->getUpdateActions( $aspects );
 
@@ -254,7 +254,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	 * @return string[]
 	 */
 	private function getFakePageIdMap( array $pageNamesPerItemId ) {
-		$titlesByPageId = array();
+		$titlesByPageId = [];
 		$siteId = 'enwiki';
 
 		foreach ( $pageNamesPerItemId as $idString => $pageNames ) {
@@ -334,7 +334,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			->method( 'getPagesUsing' )
 			->will( $this->returnCallback(
 				function( $ids ) use ( $siteLinkLookup ) {
-					$pages = array();
+					$pages = [];
 
 					foreach ( $ids as $id ) {
 						if ( !( $id instanceof ItemId ) ) {
@@ -390,22 +390,22 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		$userEmmy2 = Title::newFromText( 'User:Emmy2' )->getPrefixedText();
 
 		$empty = array(
-			'purgeParserCache' => array(),
-			'scheduleRefreshLinks' => array(),
-			'purgeWebCache' => array(),
-			'injectRCRecord' => array(),
+			'purgeParserCache' => [],
+			'scheduleRefreshLinks' => [],
+			'purgeWebCache' => [],
+			'injectRCRecord' => [],
 		);
 
 		$emmy2PurgeParser = array(
 			'purgeParserCache' => array( 'Emmy2' => true ),
-			'scheduleRefreshLinks' => array(),
+			'scheduleRefreshLinks' => [],
 			'purgeWebCache' => array( 'Emmy2' => true ),
 			'injectRCRecord' => array( 'Emmy2' => true ),
 		);
 
 		$userEmmy2PurgeParser = array(
 			'purgeParserCache' => array( $userEmmy2 => true ),
-			'scheduleRefreshLinks' => array(),
+			'scheduleRefreshLinks' => [],
 			'purgeWebCache' => array( $userEmmy2 => true ),
 			'injectRCRecord' => array( $userEmmy2 => true ),
 		);
@@ -434,28 +434,28 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		return array(
 			array( // #0
 				$changes['property-creation'],
-				array( 'q100' => array() ),
+				array( 'q100' => [] ),
 				$empty
 			),
 			array( // #1
 				$changes['property-deletion'],
-				array( 'q100' => array() ),
+				array( 'q100' => [] ),
 				$empty
 			),
 			array( // #2
 				$changes['property-set-label'],
-				array( 'q100' => array() ),
+				array( 'q100' => [] ),
 				$empty
 			),
 
 			array( // #3
 				$changes['item-creation'],
-				array( 'q100' => array() ),
+				array( 'q100' => [] ),
 				$empty
 			),
 			array( // #4
 				$changes['item-deletion'],
-				array( 'q100' => array() ),
+				array( 'q100' => [] ),
 				$empty
 			),
 			array( // #5
@@ -498,7 +498,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 
 			array( // #12
 				$changes['set-dewiki-sitelink'],
-				array( 'q100' => array() ),
+				array( 'q100' => [] ),
 				$empty // not yet linked
 			),
 			array( // #13

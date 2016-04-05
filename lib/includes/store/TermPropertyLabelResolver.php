@@ -138,7 +138,7 @@ class TermPropertyLabelResolver implements PropertyLabelResolver {
 			)
 		);
 
-		$propertiesByLabel = array();
+		$propertiesByLabel = [];
 
 		foreach ( $terms as $term ) {
 			$label = $term->getText();

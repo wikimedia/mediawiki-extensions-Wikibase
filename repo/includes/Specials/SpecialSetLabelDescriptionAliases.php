@@ -60,7 +60,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	/**
 	 * @var string[]
 	 */
-	private $aliases = array();
+	private $aliases = [];
 
 	public function __construct() {
 		parent::__construct( 'SetLabelDescriptionAliases', 'edit' );
@@ -208,7 +208,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		return Html::rawElement(
 			'p',
-			array(),
+			[],
 			$intro->parse()
 		)
 		. $html
@@ -285,7 +285,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	private function extractInput( $subPage ) {
 		$request = $this->getRequest();
 
-		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
+		$parts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
 
 		$label = $request->getVal( 'label', '' );
@@ -296,7 +296,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
 		$aliases = $request->getVal( 'aliases', '' );
 		$aliases = $this->stringNormalizer->trimToNFC( $aliases );
-		$this->aliases = $aliases === '' ? array() : explode( '|', $aliases );
+		$this->aliases = $aliases === '' ? [] : explode( '|', $aliases );
 		foreach ( $this->aliases as &$alias ) {
 			$alias = $this->stringNormalizer->trimToNFC( $alias );
 		}
@@ -388,7 +388,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	private function getChangeOps( Fingerprint $fingerprint ) {
 		$changeOpFactory = $this->changeOpFactory;
-		$changeOps = array();
+		$changeOps = [];
 
 		if ( $this->label !== '' ) {
 			if ( !$fingerprint->hasLabel( $this->languageCode )

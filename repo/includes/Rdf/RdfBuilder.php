@@ -36,7 +36,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 *
 	 * @var bool[]
 	 */
-	private $entitiesResolved = array();
+	private $entitiesResolved = [];
 
 	/**
 	 * What the serializer would produce?
@@ -65,7 +65,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * Rdf builders to appyl when building rdf for an entity.
 	 * @var EntityRdfBuilder[]
 	 */
-	private $builders = array();
+	private $builders = [];
 
 	/**
 	 * @var RdfVocabulary

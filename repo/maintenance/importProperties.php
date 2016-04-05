@@ -101,7 +101,7 @@ class ImportProperties extends Maintenance {
 		}
 
 		$current = null;
-		$currentProperties = array();
+		$currentProperties = [];
 		$count = 0;
 		$ok = true;
 		while ( true ) {

@@ -123,7 +123,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		parent::execute( $subPage );
 
 		$request = $this->getRequest();
-		$subPageParts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
+		$subPageParts = $subPage === '' ? [] : explode( '/', $subPage, 2 );
 
 		$languageCode = $this->extractLanguageCode( $request, $subPageParts );
 		$label = $this->extractLabel( $request, $subPageParts );
@@ -291,7 +291,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			->setMethod( 'get' )
 			->setFooterText( Html::element(
 				'p',
-				array(),
+				[],
 				$this->msg( 'wikibase-itemdisambiguation-form-hints' )->numParams(
 					$this->limit
 				)->text()

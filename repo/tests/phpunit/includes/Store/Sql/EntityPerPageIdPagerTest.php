@@ -33,7 +33,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 	 * @return EntityPerPageIdPager
 	 */
 	protected function newPager( array $entityIds, $type = null, $redirectMode = EntityPerPage::NO_REDIRECTS ) {
-		$keydIds = array();
+		$keydIds = [];
 		foreach ( $entityIds as $entityId ) {
 			$key = $entityId->getSerialization();
 			$keydIds[$key] = $entityId;
@@ -52,7 +52,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 				next( $keydIds );
 			}
 
-			$result = array();
+			$result = [];
 			while ( count( $result ) < $limit ) {
 				$id = current( $keydIds );
 				next( $keydIds );
@@ -119,7 +119,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 				array(
 					array( $property, $item ),
 					array( $item2 ),
-					array(),
+					[],
 				)
 			),
 			'limit and filter' => array(
@@ -129,7 +129,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 				array(
 					array( $item ),
 					array( $item2 ),
-					array(),
+					[],
 				)
 			)
 		);

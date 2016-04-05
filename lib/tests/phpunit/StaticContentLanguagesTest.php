@@ -30,7 +30,7 @@ class StaticContentLanguagesTest extends PHPUnit_Framework_TestCase {
 
 	public function provideTestGetLanguages() {
 		return array(
-			array( array() ),
+			array( [] ),
 			array( array( 'one' ) ),
 			array( array( 'one', 'two' ) ),
 		);
@@ -48,7 +48,7 @@ class StaticContentLanguagesTest extends PHPUnit_Framework_TestCase {
 
 	public function provideTestHasLanguage() {
 		return array(
-			array( array(), 'one', false ),
+			array( [], 'one', false ),
 			array( array( 'one' ), 'two', false ),
 			array( array( 'one' ), 'one', true ),
 			array( array( 'one', 'two' ), 'two', true ),

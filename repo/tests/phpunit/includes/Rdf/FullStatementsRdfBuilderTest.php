@@ -70,7 +70,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	private function newBuilder(
 		RdfWriter $writer,
 		$flavor,
-		array &$mentioned = array(),
+		array &$mentioned = [],
 		DedupeBag $dedupe = null
 	) {
 		$vocabulary = $this->getTestData()->getVocabulary();
@@ -135,15 +135,15 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$props = array( 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9' );
 
 		return array(
-			array( 'Q4', 0, 'Q4_minimal', array() ),
+			array( 'Q4', 0, 'Q4_minimal', [] ),
 			array( 'Q4', RdfProducer::PRODUCE_ALL, 'Q4_all', $props ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q4_statements', array() ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q6_no_qualifiers', array() ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, 'Q6_with_qualifiers', array() ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , 'Q7_no_refs', array() ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, 'Q7_refs', array() ),
+			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q4_statements', [] ),
+			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q6_no_qualifiers', [] ),
+			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, 'Q6_with_qualifiers', [] ),
+			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , 'Q7_no_refs', [] ),
+			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, 'Q7_refs', [] ),
 			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, 'Q4_minimal', $props ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, 'Q4_values', array() ),
+			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, 'Q4_values', [] ),
 		);
 	}
 
@@ -154,7 +154,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		$entity = $this->getTestData()->getEntity( $entityName );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$mentioned = array();
+		$mentioned = [];
 		$this->newBuilder( $writer, $flavor, $mentioned )->addEntity( $entity );
 
 		$this->assertOrCreateNTriples( $dataSetName, $writer );
@@ -180,7 +180,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$mentioned = array();
+		$mentioned = [];
 		$this->newBuilder( $writer, RdfProducer::PRODUCE_ALL, $mentioned, $dedupe )
 			->addEntity( $entity );
 

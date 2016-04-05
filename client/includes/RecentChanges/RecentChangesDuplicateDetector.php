@@ -92,7 +92,7 @@ class RecentChangesDuplicateDetector {
 		if ( is_array( $rc_params ) && array_key_exists( 'wikibase-repo-change', $rc_params ) ) {
 			$metadata = $rc_params['wikibase-repo-change'];
 		} else {
-			$metadata = array();
+			$metadata = [];
 		}
 
 		$metadata = array_merge( array( 'parent_id' => 0, 'rev_id' => 0 ), $metadata );

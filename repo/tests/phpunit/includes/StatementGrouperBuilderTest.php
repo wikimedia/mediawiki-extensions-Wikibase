@@ -45,7 +45,7 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAcceptsEmptyArray() {
-		$builder = $this->newInstance( array() );
+		$builder = $this->newInstance( [] );
 		$grouper = $builder->getStatementGrouper();
 		$this->assertInstanceOf( DispatchingEntityTypeStatementGrouper::class, $grouper );
 	}

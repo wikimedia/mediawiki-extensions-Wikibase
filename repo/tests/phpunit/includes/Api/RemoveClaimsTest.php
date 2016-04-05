@@ -125,7 +125,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 * @param Item $item
 	 */
 	public function doTestValidRequestMultiple( Item $item ) {
-		$guids = array();
+		$guids = [];
 
 		/** @var Statement $statement */
 		foreach ( $item->getStatements() as $statement ) {

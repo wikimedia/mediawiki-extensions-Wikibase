@@ -8,7 +8,7 @@
  * @license GPL-2.0+
  */
 
-$magicWords = array();
+$magicWords = [];
 
 /** English (English) */
 $magicWords['en'] = array(

@@ -29,7 +29,7 @@ class CompositeValidatorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return array(
-			array( array(), true, 'foo', 0, "no validators" ),
+			array( [], true, 'foo', 0, "no validators" ),
 			array( $validators, true, 'foo', 0, "pass validation" ),
 			array( $validators, true, new StringValue( "foo" ), 1, "fail first validation" ),
 			array( $validators, true, '', 1, "fail second validation" ),

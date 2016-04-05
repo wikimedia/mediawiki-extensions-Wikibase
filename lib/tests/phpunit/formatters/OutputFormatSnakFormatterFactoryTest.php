@@ -158,7 +158,7 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 	public function getSnakFormatterProvider_options() {
 		return array(
 			'default' => array(
-				array(),
+				[],
 				ErrorHandlingSnakFormatter::class
 			),
 			'OPT_ON_ERROR => ON_ERROR_WARN' => array(
@@ -199,10 +199,10 @@ class OutputFormatSnakFormatterFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$factory = new OutputFormatSnakFormatterFactory(
-			array(),
+			[],
 			$valueFormatterFactory,
 			$this->getMock( PropertyDataTypeLookup::class ),
-			new DataTypeFactory( array() )
+			new DataTypeFactory( [] )
 		);
 		$factory->getSnakFormatter( SnakFormatter::FORMAT_PLAIN, new FormatterOptions() );
 	}

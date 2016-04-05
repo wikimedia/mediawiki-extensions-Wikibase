@@ -37,7 +37,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 	public function invalidConstructorProvider() {
 		$this->applySettings();
 
-		$argLists = array();
+		$argLists = [];
 
 		$argLists[] = array( 'enwiki', 1234 );
 		$argLists[] = array( 1234, 'Berlin' );
@@ -70,7 +70,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			$plSiteLink
 		);
 
-		$args = array();
+		$args = [];
 
 		// adding sitelink with badges
 		$args[] = array(
@@ -155,7 +155,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			$plSiteLink
 		);
 
-		$args = array();
+		$args = [];
 
 		// cannot change badges of non-existing sitelink
 		$args[] = array(
@@ -188,7 +188,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			new SiteLink( 'ruwiki', 'Берлин', array( new ItemId( 'Q42' ) ) )
 		);
 
-		$cases = array();
+		$cases = [];
 		$badge = new ItemId( 'Q149' );
 
 		// Add sitelink without badges
@@ -196,7 +196,7 @@ class ChangeOpSiteLinkTest extends \PHPUnit_Framework_TestCase {
 			'add',
 			array( 'Berlin' ),
 			$sitelinks,
-			new ChangeOpSiteLink( 'enwiki', 'Berlin', array() )
+			new ChangeOpSiteLink( 'enwiki', 'Berlin', [] )
 		);
 
 		// Add sitelink with badges

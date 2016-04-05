@@ -93,7 +93,7 @@ class EntityChange extends DiffChange {
 			return $info['metadata'];
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -123,7 +123,7 @@ class EntityChange extends DiffChange {
 			$metadata['comment'] = $this->getComment();
 		}
 
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : [];
 		$info['metadata'] = $metadata;
 		$this->setField( 'info', $info );
 	}
@@ -241,7 +241,7 @@ class EntityChange extends DiffChange {
 		$string .= ': ';
 
 		$fields = $this->getFields();
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : [];
 		$meta = $this->getMetadata();
 
 		if ( is_array( $info ) ) {

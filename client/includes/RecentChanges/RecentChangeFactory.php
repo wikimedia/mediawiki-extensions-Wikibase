@@ -204,7 +204,7 @@ class RecentChangeFactory {
 	 * @return string
 	 */
 	private function getEditCommentMulti( array $changes, Title $target = null ) {
-		$comments = array();
+		$comments = [];
 		$c = 0;
 
 		foreach ( $changes as $change ) {

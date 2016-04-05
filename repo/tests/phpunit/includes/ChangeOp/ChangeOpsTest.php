@@ -46,7 +46,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function changeOpProvider() {
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$ops = array();
+		$ops = [];
 		$ops[] = array( new ChangeOpLabel( 'en', 'myNewLabel', $validatorFactory ) );
 		$ops[] = array( new ChangeOpDescription( 'de', 'myNewDescription', $validatorFactory ) );
 		$ops[] = array( new ChangeOpLabel( 'en', null, $validatorFactory ) );
@@ -66,7 +66,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function changeOpArrayProvider() {
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$ops = array();
+		$ops = [];
 		$ops[] = array(
 					array(
 						new ChangeOpLabel( 'en', 'enLabel', $validatorFactory ),
@@ -90,7 +90,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function invalidChangeOpProvider() {
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$ops = array();
+		$ops = [];
 		$ops[] = array( 1234 );
 		$ops[] = array( array( new ChangeOpLabel( 'en', 'test', $validatorFactory ), 123 ) );
 
@@ -109,7 +109,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 	public function changeOpsProvider() {
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 
 		$language = 'en';
 		$changeOps = new ChangeOps();
@@ -138,7 +138,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), new StringValue( 'INVALID' ) );
 		$guidGenerator = new GuidGenerator();
 
-		$error = Error::newError( 'Testing', 'test', 'test-error', array() );
+		$error = Error::newError( 'Testing', 'test', 'test-error', [] );
 		$result = Result::newError( array( $error ) );
 
 		$snakValidator = $this->getMockBuilder( SnakValidator::class )
@@ -167,7 +167,7 @@ class ChangeOpsTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnCallback( function( Item $item ) {
 				// Fail when the label is already set (by a previous apply call).
 				return $item->getFingerprint()->hasLabel( 'en' )
-					? Result::newError( array() )
+					? Result::newError( [] )
 					: Result::newSuccess();
 			} ) );
 		$changeOp->expects( $this->any() )

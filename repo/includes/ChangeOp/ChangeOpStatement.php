@@ -138,7 +138,7 @@ class ChangeOpStatement extends ChangeOpBase {
 	 */
 	private function removeStatement( array $statements, Summary $summary = null ) {
 		$guid = $this->statement->getGuid();
-		$newStatements = array();
+		$newStatements = [];
 		$oldStatement = null;
 
 		foreach ( $statements as $statement ) {

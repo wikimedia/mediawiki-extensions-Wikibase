@@ -145,7 +145,7 @@ class LabelPrefetchHookHandlers {
 	 * @return Title[]
 	 */
 	private function getChangedTitles( $rows ) {
-		$titles = array();
+		$titles = [];
 
 		foreach ( $rows as $row ) {
 			$titles[] = $this->titleFactory->makeTitle( $row->rc_namespace, $row->rc_title );

@@ -50,7 +50,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -71,7 +71,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	public function invalidIndexProvider() {
 		return array(
 			array( 'foo' ),
-			array( array() ),
+			array( [] ),
 			array( $this->mockProvider->makeStatement( 'P7' ) ),
 		);
 	}
@@ -128,7 +128,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 		$statements[13] = clone $statements[12];
 		$statements[13]->setGuid( 'Q666$D8404CDA-25E4-4334-AF13-A3290BC66613' );
 
-		$args = array();
+		$args = [];
 
 		// test adding the same statements with a null guid (a guid should be created)
 		$args[] = array(
@@ -366,7 +366,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		$guidGenerator = new GuidGenerator();
 
-		$cases = array();
+		$cases = [];
 
 		$statement = new Statement( $badSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );

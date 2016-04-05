@@ -405,7 +405,7 @@ final class RepoHooks {
 			$link = Linker::linkKnown(
 				$rev->getTitle(),
 				$history->msg( 'wikibase-restoreold' )->escaped(),
-				array(),
+				[],
 				array(
 					'action' => 'edit',
 					'restore' => $rev->getId()
@@ -880,7 +880,7 @@ final class RepoHooks {
 	public static function onAPIQuerySiteInfoGeneralInfo( ApiQuerySiteinfo $api, array &$data ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$dataTypes = $wikibaseRepo->getDataTypeFactory()->getTypes();
-		$propertyTypes = array();
+		$propertyTypes = [];
 
 		foreach ( $dataTypes as $id => $type ) {
 			$propertyTypes[$id] = array( 'valuetype' => $type->getDataValueType() );

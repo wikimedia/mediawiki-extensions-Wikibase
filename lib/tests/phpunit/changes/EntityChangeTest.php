@@ -128,9 +128,9 @@ class EntityChangeTest extends ChangeRowTest {
 			'user_text' => '171.80.182.208',
 		) );
 
-		$entityChange->setField( 'info', array() );
+		$entityChange->setField( 'info', [] );
 		$this->assertEquals(
-			array(),
+			[],
 			$entityChange->getMetadata()
 		);
 	}
@@ -279,7 +279,7 @@ class EntityChangeTest extends ChangeRowTest {
 			->method( 'getContent' )
 			->will( $this->returnValue( $content ) );
 
-		$change = new EntityChange( array( 'info' => array(), 'type' => '~' ) );
+		$change = new EntityChange( array( 'info' => [], 'type' => '~' ) );
 		$this->assertFalse( $change->hasField( 'object_id' ), 'precondition' );
 		$change->setRevisionInfo( $revision );
 		$this->assertSame( 'q1', $change->getObjectId() );
@@ -297,7 +297,7 @@ class EntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testHasDiff() {
-		$change = new EntityChange( array( 'info' => array() ) );
+		$change = new EntityChange( array( 'info' => [] ) );
 		$this->assertFalse( $change->hasDiff() );
 
 		$change->setDiff( new Diff() );

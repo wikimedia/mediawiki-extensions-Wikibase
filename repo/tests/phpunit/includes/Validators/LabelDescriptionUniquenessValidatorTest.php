@@ -92,7 +92,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	}
 
 	public function validEntityProvider() {
-		$cases = array();
+		$cases = [];
 
 		foreach ( $this->validFingerprintProvider() as $name => $fingerprintCase ) {
 			// if the case has a non-null languageCodes or a strange entityId param, skip it
@@ -157,7 +157,7 @@ class LabelDescriptionUniquenessValidatorTest extends \PHPUnit_Framework_TestCas
 	}
 
 	public function invalidEntityProvider() {
-		$cases = array();
+		$cases = [];
 
 		$i = 1;
 		foreach ( $this->invalidFingerprintProvider() as $name => $fingerprintCase ) {

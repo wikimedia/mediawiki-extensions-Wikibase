@@ -29,13 +29,13 @@ class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestGetLanguages() {
-		$empty = new StaticContentLanguages( array() );
+		$empty = new StaticContentLanguages( [] );
 		$one = new StaticContentLanguages( array( 'one' ) );
 		$two = new StaticContentLanguages( array( 'one', 'two' ) );
 		$otherTwo = new StaticContentLanguages( array( 'three', 'four' ) );
 
 		return array(
-			array( $empty, $empty, array() ),
+			array( $empty, $empty, [] ),
 			array( $empty, $one, array( 'one' ) ),
 			array( $one, $empty, array( 'one' ) ),
 			array( $one, $two, array( 'one', 'two' ) ),
@@ -55,7 +55,7 @@ class UnionContentLanguagesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideTestHasLanguage() {
-		$empty = new StaticContentLanguages( array() );
+		$empty = new StaticContentLanguages( [] );
 		$one = new StaticContentLanguages( array( 'one' ) );
 		$two = new StaticContentLanguages( array( 'one', 'two' ) );
 		$otherTwo = new StaticContentLanguages( array( 'three', 'four' ) );

@@ -30,7 +30,7 @@ class SerializationModifierTest extends PHPUnit_Framework_TestCase {
 					$value['foo'] = 'bar';
 					return $value;
 				},
-				array(),
+				[],
 				array( 'foo' => 'bar' ),
 			),
 			array(

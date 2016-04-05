@@ -91,7 +91,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsage[]
 	 */
 	private function reindexEntityUsages( array $usages ) {
-		$reindexed = array();
+		$reindexed = [];
 
 		foreach ( $usages as $usage ) {
 			if ( !( $usage instanceof EntityUsage ) ) {
@@ -219,7 +219,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return Traversable A traversable over PageEntityUsages grouped by page.
 	 * @throws UsageTrackerException
 	 */
-	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
+	public function getPagesUsing( array $entityIds, array $aspects = [] ) {
 		if ( empty( $entityIds ) ) {
 			return new ArrayIterator();
 		}
@@ -244,7 +244,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 */
 	public function getUnusedEntities( array $entityIds ) {
 		if ( empty( $entityIds ) ) {
-			return array();
+			return [];
 		}
 
 		$db = $this->connectionManager->getReadConnection();

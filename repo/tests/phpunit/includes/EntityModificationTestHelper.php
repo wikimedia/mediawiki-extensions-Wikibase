@@ -181,7 +181,7 @@ class EntityModificationTestHelper {
 		foreach ( $data as $key => &$value ) {
 			if ( $key === 'hash' || $key === 'id' ) {
 				unset( $data[$key] );
-			} elseif ( $value === array() ) {
+			} elseif ( $value === [] ) {
 				unset( $data[$key] );
 			} elseif ( is_array( $value ) ) {
 				$this->unsetSpuriousFieldsRecursively( $value );

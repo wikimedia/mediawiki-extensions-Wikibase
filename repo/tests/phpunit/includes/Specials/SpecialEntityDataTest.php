@@ -136,7 +136,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			if ( $case[0] === '' && !isset( $case[1]['id'] ) ) {
 				$cases[$n][3] = '!<p>!'; // output regex //TODO: be more specific
 				$cases[$n][4] = 200; // http code
-				$cases[$n][5] = array(); // response headers
+				$cases[$n][5] = []; // response headers
 			}
 		}
 
@@ -159,7 +159,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		array $headers,
 		$expRegExp,
 		$expCode = 200,
-		array $expHeaders = array()
+		array $expHeaders = []
 	) {
 		$request = new FauxRequest( $params );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset

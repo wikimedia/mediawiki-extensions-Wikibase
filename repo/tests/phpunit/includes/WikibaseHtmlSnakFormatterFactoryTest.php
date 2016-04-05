@@ -25,7 +25,7 @@ class WikibaseHtmlSnakFormatterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetSnakFormatter() {
 		$snakFormatter = $this->getMock( SnakFormatter::class );
-		$languageFallbackChain = new LanguageFallbackChain( array() );
+		$languageFallbackChain = new LanguageFallbackChain( [] );
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 
 		$outputFormatSnakFormatterFactory = $this->getMockBuilder(

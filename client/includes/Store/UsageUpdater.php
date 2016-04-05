@@ -124,7 +124,7 @@ class UsageUpdater {
 	 * @return EntityId[]
 	 */
 	private function getEntityIds( array $entityUsages ) {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $entityUsages as $usage ) {
 			$id = $usage->getEntityId();

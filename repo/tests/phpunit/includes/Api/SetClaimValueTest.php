@@ -95,7 +95,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	}
 
 	public function testValidRequests() {
-		$argLists = array();
+		$argLists = [];
 
 		$property = Property::newFromType( 'commonsMedia' );
 

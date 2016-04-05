@@ -51,7 +51,7 @@ class StatementGroupRendererFactory {
 	/**
 	 * @var LanguageAwareRenderer[]
 	 */
-	private $languageAwareRenderers = array();
+	private $languageAwareRenderers = [];
 
 	/**
 	 * @var EntityLookup
@@ -178,7 +178,7 @@ class StatementGroupRendererFactory {
 	 * @return VariantsAwareRenderer
 	 */
 	private function newVariantsAwareRenderer( array $variants, UsageAccumulator $usageAccumulator ) {
-		$languageAwareRenderers = array();
+		$languageAwareRenderers = [];
 
 		foreach ( $variants as $variant ) {
 			$languageAwareRenderers[$variant] = $this->getLanguageAwareRendererFromCode(

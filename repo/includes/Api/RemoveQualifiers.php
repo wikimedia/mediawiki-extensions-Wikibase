@@ -142,7 +142,7 @@ class RemoveQualifiers extends ApiBase {
 	 * @return ChangeOp[]
 	 */
 	private function getChangeOps( $claimGuid, array $qualifierHashes ) {
-		$changeOps = array();
+		$changeOps = [];
 
 		foreach ( $qualifierHashes as $qualifierHash ) {
 			$changeOps[] = $this->statementChangeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
@@ -159,7 +159,7 @@ class RemoveQualifiers extends ApiBase {
 	 */
 	private function getQualifierHashesFromParams( array $params, Statement $statement ) {
 		$qualifiers = $statement->getQualifiers();
-		$hashes = array();
+		$hashes = [];
 
 		foreach ( array_unique( $params['qualifiers'] ) as $qualifierHash ) {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {

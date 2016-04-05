@@ -163,7 +163,7 @@ class ChangeHandler {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': updating ' . count( $usagesPerPage )
 			. " page(s) for change #$changeId." );
 
-		$actionBuckets = array();
+		$actionBuckets = [];
 
 		/** @var PageEntityUsages $usages */
 		foreach ( $usagesPerPage as $usages ) {
@@ -183,7 +183,7 @@ class ChangeHandler {
 	 * @return string[] List of actions, as defined by the ChangeHandler::..._ACTION constants.
 	 */
 	public function getUpdateActions( array $aspects ) {
-		$actions = array();
+		$actions = [];
 		$aspects = array_flip( $aspects );
 
 		$all = isset( $aspects[EntityUsage::ALL_USAGE] );
@@ -269,7 +269,7 @@ class ChangeHandler {
 	 * @return Title[]
 	 */
 	private function getTitlesForPageIds( array $pageIds ) {
-		$titles = array();
+		$titles = [];
 
 		foreach ( $pageIds as $id ) {
 			try {

@@ -79,7 +79,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	 * @return array[] The array of decoded blobs
 	 */
 	private function decodeResult( ResultWrapper $res ) {
-		$infos = array();
+		$infos = [];
 
 		foreach ( $res as $row ) {
 			$info = $this->decodeBlob( $row->pi_info );
@@ -167,7 +167,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 		$res = $dbr->select(
 			$this->tableName,
 			array( 'pi_property_id', 'pi_info' ),
-			array(),
+			[],
 			__METHOD__
 		);
 

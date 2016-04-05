@@ -70,8 +70,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$this->mockRepository = $this->entityModificationTestHelper->getMockRepository();
 
 		$this->entityModificationTestHelper->putEntities( array(
-			'Q1' => array(),
-			'Q2' => array(),
+			'Q1' => [],
+			'Q2' => [],
 			'P1' => array( 'datatype' => 'string' ),
 			'P2' => array( 'datatype' => 'string' ),
 		) );
@@ -254,7 +254,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 				)
 			) );
 
-		$output = $this->executeSpecialMergeItems( array() );
+		$output = $this->executeSpecialMergeItems( [] );
 
 		$this->assertNoError( $output );
 
@@ -298,13 +298,13 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	public function mergeRequestProvider() {
-		$testCases = array();
+		$testCases = [];
 		$testCases['labelMerge'] = array(
 			array( 'labels' => array(
 				'en' => array( 'language' => 'en', 'value' => 'foo' )
 			) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'labels' => array(
 				'en' => array( 'language' => 'en', 'value' => 'foo' )
 			) ),
@@ -343,8 +343,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$testCases['claimMerge'] = array(
 			array( 'claims' => array( 'P1' => array( $statement ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'claims' => array( 'P1' => array( $statementWithoutId ) ) ),
 		);
 

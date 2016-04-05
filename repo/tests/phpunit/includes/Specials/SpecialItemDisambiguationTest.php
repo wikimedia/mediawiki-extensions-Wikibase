@@ -94,7 +94,7 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 						return $searchResults;
 					}
 
-					return array();
+					return [];
 				}
 			) );
 

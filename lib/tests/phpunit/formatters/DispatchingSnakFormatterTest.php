@@ -126,8 +126,8 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'format must be a string' => array(
 				17,
-				array(),
-				array(),
+				[],
+				[],
 			),
 			'snak types must be strings' => array(
 				SnakFormatter::FORMAT_PLAIN,
@@ -136,7 +136,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			),
 			'data types must be strings' => array(
 				SnakFormatter::FORMAT_PLAIN,
-				array(),
+				[],
 				array( 17 => $formatter ),
 			),
 			'snak type formatters must be SnakFormatters' => array(
@@ -146,7 +146,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			),
 			'data type formatters must be SnakFormatters' => array(
 				SnakFormatter::FORMAT_PLAIN,
-				array(),
+				[],
 				array( 'string' => 17 ),
 			),
 			'snak type formatters mismatches output format' => array(
@@ -156,7 +156,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 			),
 			'data type formatters mismatches output format' => array(
 				SnakFormatter::FORMAT_HTML,
-				array(),
+				[],
 				array( 'string' => $formatter ),
 			),
 		);
@@ -214,7 +214,7 @@ class DispatchingSnakFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetFormat() {
-		$formatter = new DispatchingSnakFormatter( 'test', $this->getDataTypeLookup(), array(), array() );
+		$formatter = new DispatchingSnakFormatter( 'test', $this->getDataTypeLookup(), [], [] );
 		$this->assertEquals( 'test', $formatter->getFormat() );
 	}
 

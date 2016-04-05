@@ -417,7 +417,7 @@ class EditEntityTest extends MediaWikiTestCase {
 
 	public function testErrorPage_DoesNotDoubleEscapeHtmlCharacters() {
 		$repo = $this->getMockRepository();
-		$permissions = array();
+		$permissions = [];
 		$context = new RequestContext();
 		// Cannot reuse makeEditEntity because we need the access the context
 		$editEntity = new EditEntity(
@@ -529,8 +529,8 @@ class EditEntityTest extends MediaWikiTestCase {
 		return array(
 
 			array( // #0: no limits
-				array(), // limits: none
-				array(), // groups: none
+				[], // limits: none
+				[], // groups: none
 				array( // edits:
 					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
 					array( 'item' => 'bar', 'label' => 'bar', 'ok' => true ),
@@ -580,7 +580,7 @@ class EditEntityTest extends MediaWikiTestCase {
 						'user' => array( 1, 60 ), // one edit per minute
 					),
 				),
-				array(), // groups: none
+				[], // groups: none
 				array( // edits:
 					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
 					array( 'item' => 'foo', 'label' => 'Foo', 'ok' => false ),
@@ -596,7 +596,7 @@ class EditEntityTest extends MediaWikiTestCase {
 						'user' => array( 10, 60 ), // ten creations per minute
 					),
 				),
-				array(), // groups: none
+				[], // groups: none
 				array( // edits:
 					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
 					array( 'item' => 'bar', 'label' => 'bar', 'ok' => false ),
@@ -613,7 +613,7 @@ class EditEntityTest extends MediaWikiTestCase {
 						'user' => array( 1, 60 ), // ...but only one creation
 					),
 				),
-				array(), // groups: none
+				[], // groups: none
 				array( // edits:
 					array( 'item' => 'foo', 'label' => 'foo', 'ok' => true ),
 					array( 'item' => 'foo', 'label' => 'Foo', 'ok' => true ),
@@ -655,7 +655,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		$user = $this->getUser( 'UserForTestAttemptSaveRateLimit' );
 		$this->setUserGroups( $user, $groups );
 
-		$items = array();
+		$items = [];
 		$titleLookup = $this->getEntityTitleLookup();
 
 		foreach ( $edits as $e ) {

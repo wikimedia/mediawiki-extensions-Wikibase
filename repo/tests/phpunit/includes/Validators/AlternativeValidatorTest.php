@@ -26,7 +26,7 @@ class AlternativeValidatorTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return array(
-			array( array(), 'foo', 1, "no validators" ),
+			array( [], 'foo', 1, "no validators" ),
 			array( $validators, 'bbb', 0, "fail first validation" ),
 			array( $validators, 'aaa', 0, "fail second validation" ),
 			array( $validators, 'xxx', 3, "fail validations" ),

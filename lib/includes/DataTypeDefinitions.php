@@ -46,7 +46,7 @@ class DataTypeDefinitions {
 	/**
 	 * @var array[]
 	 */
-	private $dataTypeDefinitions = array();
+	private $dataTypeDefinitions = [];
 
 	/**
 	 * @param array[] $dataTypeDefinitions An associative array mapping property data type ids
@@ -55,7 +55,7 @@ class DataTypeDefinitions {
 	 * for details.
 	 * @param string[] $disabledDataTypes Array of disabled data types.
 	 */
-	public function __construct( array $dataTypeDefinitions, array $disabledDataTypes = array() ) {
+	public function __construct( array $dataTypeDefinitions, array $disabledDataTypes = [] ) {
 		$dataTypeDefinitions = $this->filterDisabledDataTypes(
 			$dataTypeDefinitions,
 			$disabledDataTypes
@@ -121,7 +121,7 @@ class DataTypeDefinitions {
 	 *         with keys that match the prefix $prefix, with that prefix removed.
 	 */
 	private function getFilteredByPrefix( array $map, $prefix ) {
-		$filtered = array();
+		$filtered = [];
 
 		foreach ( $map as $key => $value ) {
 			$ofs = strlen( $prefix );
@@ -150,7 +150,7 @@ class DataTypeDefinitions {
 	 * constructor.
 	 */
 	private function getMapForDefinitionField( $field ) {
-		$fieldValues = array();
+		$fieldValues = [];
 
 		foreach ( $this->dataTypeDefinitions as $id => $def ) {
 			if ( isset( $def[$field] ) ) {
@@ -174,7 +174,7 @@ class DataTypeDefinitions {
 	 * The keys in this array are plain property data type IDs without a prefix.
 	 */
 	private function resolveValueTypeFallback( array $callbackMap ) {
-		$resolved = array();
+		$resolved = [];
 
 		foreach ( $this->getValueTypes() as $propertyType => $valueType ) {
 			$vtKey = "VT:$valueType";

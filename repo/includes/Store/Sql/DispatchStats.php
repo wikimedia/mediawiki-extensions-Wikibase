@@ -84,7 +84,7 @@ class DispatchStats {
 		$this->average->chd_pending = 0;
 		$this->average->chd_lag = 0;
 
-		$this->clientStates = array();
+		$this->clientStates = [];
 
 		foreach ( $res as $row ) {
 			if ( $this->changeStats ) {

@@ -105,7 +105,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOldChangesListRecentChangesLine( ChangesList &$changesList, &$s,
-		RecentChange $rc, &$classes = array() ) {
+		RecentChange $rc, &$classes = [] ) {
 
 		$type = $rc->getAttribute( 'rc_type' );
 

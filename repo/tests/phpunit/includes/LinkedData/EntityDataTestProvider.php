@@ -53,12 +53,12 @@ class EntityDataTestProvider {
 	}
 
 	public static function provideHandleRequest() {
-		$cases = array();
+		$cases = [];
 
 		$cases[] = array( // #0: no params, fail
 			'',      // subpage
-			array(), // parameters
-			array(), // headers
+			[], // parameters
+			[], // headers
 			'!!', // output regex //TODO: be more specific
 			400,       // http code
 		);
@@ -66,7 +66,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #1: valid item ID
 			'',      // subpage
 			array( 'id' => 'Q42', 'format' => 'json' ), // parameters
-			array(), // headers
+			[], // headers
 			'!^\{.*Raarrr!s', // output regex
 			200,       // http code
 		);
@@ -74,7 +74,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #2: invalid item ID
 			'',      // subpage
 			array( 'id' => 'Q1231231230', 'format' => 'json' ), // parameters
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			404,  // http code
 		);
@@ -86,7 +86,7 @@ class EntityDataTestProvider {
 				'revision' => '4242',
 				'format' => 'json',
 			),
-			array(), // headers
+			[], // headers
 			'!^\{.*Raarr!s', // output regex
 			200,       // http code
 		);
@@ -98,7 +98,7 @@ class EntityDataTestProvider {
 				'revision' => '1231231230',
 				'format' => 'json',
 			),
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			500,       // http code
 		);
@@ -108,7 +108,7 @@ class EntityDataTestProvider {
 			array( // parameters
 				'id' => 'Q42',
 			),
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
@@ -122,7 +122,7 @@ class EntityDataTestProvider {
 				'id' => 'Q42',
 				'format' => 'application/json',
 			),
-			array(), // headers
+			[], // headers
 			'!^\{.*Raarr!s', // output regex
 			200,       // http code
 			array( // headers
@@ -136,7 +136,7 @@ class EntityDataTestProvider {
 				'id' => 'Q42',
 				'format' => 'sdakljflsd',
 			),
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			415,  // http code
 		);
@@ -147,7 +147,7 @@ class EntityDataTestProvider {
 				'id' => 'Q22',
 				'format' => 'application/json',
 			),
-			array(), // headers
+			[], // headers
 			'!^\{.*Raarr!s', // output regex
 			200,       // http code
 			array( // headers
@@ -161,14 +161,14 @@ class EntityDataTestProvider {
 				'id' => '////',
 				'format' => 'json',
 			),
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			400,  // http code
 		);
 
 		// from case #0 to #9, generate #10 to #19
 
-		$subpageCases = array();
+		$subpageCases = [];
 		foreach ( $cases as $c ) {
 			$case = $c;
 			$case[0] = '';
@@ -184,7 +184,7 @@ class EntityDataTestProvider {
 					// when used with subpage syntax.
 					$case[3] = '!!';
 					$case[4] = 301;
-					$case[5] = array();
+					$case[5] = [];
 				}
 
 				$case[0] .= '.' . $case[1]['format'];
@@ -205,7 +205,7 @@ class EntityDataTestProvider {
 				'id' => 'Q42',
 				'format' => 'application/json',
 			),
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			200,  // http code
 			array( // headers
@@ -220,7 +220,7 @@ class EntityDataTestProvider {
 				'id' => 'Q42',
 				'format' => 'HTML',
 			),
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
@@ -236,7 +236,7 @@ class EntityDataTestProvider {
 				'revision' => '4242',
 				'format' => 'text/html',
 			),
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
@@ -251,7 +251,7 @@ class EntityDataTestProvider {
 				'id' => 'q42',
 				'format' => 'application/json',
 			),
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			200,  // http code
 			array( // headers
@@ -262,8 +262,8 @@ class EntityDataTestProvider {
 		// #24: /Q5 does trigger a 303
 		$cases[] = array(
 			'Q42',      // subpage
-			array(), // parameters
-			array(), // headers
+			[], // parameters
+			[], // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
@@ -274,8 +274,8 @@ class EntityDataTestProvider {
 		// #25: /Q5.json does not trigger a redirect
 		$cases[] = array(
 			'Q42.json',      // subpage
-			array(),
-			array(), // headers
+			[],
+			[], // headers
 			'!!', // output regex
 			200,  // http code
 			array( // headers
@@ -286,8 +286,8 @@ class EntityDataTestProvider {
 		// #26: /q5.json does trigger a 301
 		$cases[] = array(
 			'q42.JSON',      // subpage
-			array(), // parameters
-			array(), // headers
+			[], // parameters
+			[], // headers
 			'!!', // output regex
 			301,  // http code
 			array( // headers
@@ -299,7 +299,7 @@ class EntityDataTestProvider {
 		$cases[] = array(
 			'q42.json',      // subpage
 			array( 'revision' => '4242' ), // parameters
-			array(), // headers
+			[], // headers
 			'!!', // output regex
 			301,  // http code
 			array( // headers
@@ -310,8 +310,8 @@ class EntityDataTestProvider {
 		// #28: /Q5.application/json does trigger a 301
 		$cases[] = array(
 			'Q42.application/json',      // subpage
-			array(), // parameters
-			array(), // headers
+			[], // parameters
+			[], // headers
 			'!!', // output regex
 			301,  // http code
 			array( // headers
@@ -322,8 +322,8 @@ class EntityDataTestProvider {
 		// #29: /Q5.html does trigger a 303
 		$cases[] = array(
 			'Q42.html',      // subpage
-			array(), // parameters
-			array(), // headers
+			[], // parameters
+			[], // headers
 			'!!', // output regex
 			303,  // http code
 			array( // headers
@@ -334,29 +334,29 @@ class EntityDataTestProvider {
 		// #30: /Q5.xyz triggers a 415
 		$cases[] = array(
 			'Q42.xyz',      // subpage
-			array(),
-			array(), // headers
+			[],
+			[], // headers
 			'!!', // output regex
 			415,  // http code
-			array(), // headers
+			[], // headers
 		);
 
 		// #31: /Q5 with "Accept: text/foobar" triggers a 406
 		$cases[] = array(
 			'Q42',      // subpage
-			array(),
+			[],
 			array( // headers
 				'Accept' => 'text/foobar'
 			),
 			'!!', // output regex
 			406,  // http code
-			array(), // headers
+			[], // headers
 		);
 
 		// #32: /Q5 with "Accept: text/html" triggers a 303
 		$cases[] = array(
 			'Q42',      // subpage
-			array(), // parameters
+			[], // parameters
 			array( // headers
 				'Accept' => 'text/HTML'
 			),
@@ -370,7 +370,7 @@ class EntityDataTestProvider {
 		// #33: /Q5 with "Accept: application/json" triggers a 303
 		$cases[] = array(
 			'Q42',      // subpage
-			array(), // parameters
+			[], // parameters
 			array( // headers
 				'Accept' => 'application/foobar, application/json'
 			),
@@ -384,7 +384,7 @@ class EntityDataTestProvider {
 		// #34: /Q5 with "Accept: text/html; q=0.5, application/json" uses weights for 303
 		$cases[] = array(
 			'Q42',      // subpage
-			array(), // parameters
+			[], // parameters
 			array( // headers
 				'Accept' => 'text/html; q=0.5, application/json'
 			),
@@ -400,7 +400,7 @@ class EntityDataTestProvider {
 		// #35: IMS from the deep past should return a 200 (revision timestamp is 20131211100908)
 		$cases[] = array(
 			'Q42.json',	  // subpage
-			array(), // parameters
+			[], // parameters
 			array( // headers
 				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' )
 			),
@@ -411,7 +411,7 @@ class EntityDataTestProvider {
 		// #36: new IMS should return a 304 (revision timestamp is 20131211100908)
 		$cases[] = array(
 			'Q42.json',	  // subpage
-			array(), // parameters
+			[], // parameters
 			array( // headers
 				'If-Modified-Since' => '20131213141516'
 			),
@@ -422,8 +422,8 @@ class EntityDataTestProvider {
 		// #37: invalid, no longer supported XML format
 		$cases[] = array(
 			'Q42.xml',
-			array(),
-			array(),
+			[],
+			[],
 			'!!', // output regex
 			415, // http code
 		);
@@ -431,7 +431,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #38: requesting a redirect includes the followed redirect in the output
 			'',      // subpage
 			array( 'id' => 'Q22', 'format' => 'ntriples' ), // parameters
-			array(), // headers
+			[], // headers
 			'!^<http://acme\.test/Q22> *<http://www\.w3\.org/2002/07/owl#sameAs> *<http://acme\.test/Q42> *.$!m', // output regex
 			200,       // http code
 		);
@@ -439,7 +439,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #39: flavors are passed on, incoming redirects are included
 			'',      // subpage
 			array( 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'full' ), // parameters
-			array(), // headers
+			[], // headers
 			'!^<http://data\.acme\.test/Q42> *'
 				. '<http://schema.org/softwareVersion> *"0\.0\.2" *\.$.*^'
 				. '<http://acme\.test/Q22> *'
@@ -451,7 +451,7 @@ class EntityDataTestProvider {
 		$cases[] = array( // #40: dump format includes version, see T130066
 			'',      // subpage
 			array( 'id' => 'Q42', 'format' => 'ntriples', 'flavor' => 'dump' ), // parameters
-			array(), // headers
+			[], // headers
 			'!^<http://data\.acme\.test/Q42> +'
 				. '<http://schema.org/softwareVersion> +"0\.0\.2" *\.$'
 				. '!sm',

@@ -54,7 +54,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	private function getPropertyIds() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$propertyIds = array();
+		$propertyIds = [];
 
 		for ( $i = 0; $i < 4; $i++ ) {
 			$property = Property::newFromType( 'string' );
@@ -71,7 +71,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @return Snak[]
 	 */
 	private function getSnaks() {
-		$snaks = array();
+		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( self::$propertyIds[0] );
 		$snaks[] = new PropertySomeValueSnak( self::$propertyIds[1] );
@@ -84,7 +84,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @return Statement[]
 	 */
 	private function getStatements() {
-		$statements = array();
+		$statements = [];
 
 		$ranks = array(
 			Statement::RANK_DEPRECATED,
@@ -189,7 +189,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$guidGenerator = new GuidGenerator();
 
-		$cases = array();
+		$cases = [];
 
 		$statement = new Statement( $badSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );

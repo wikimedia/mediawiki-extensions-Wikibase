@@ -34,7 +34,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 		$foo = null;
 		$handler->doSkinTemplateOutputPageBeforeExec(
 			$this->getSkin(),
-			$this->getTemplate( array(), $foo, $actualWbeditlanglinks )
+			$this->getTemplate( [], $foo, $actualWbeditlanglinks )
 		);
 
 		$this->assertSame( $expected, $actualWbeditlanglinks );
@@ -47,7 +47,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 		$foo = null;
 		$handler->doSkinTemplateOutputPageBeforeExec(
 			$this->getSkin(),
-			$this->getTemplate( array(), $foo, $actualWbeditlanglinks )
+			$this->getTemplate( [], $foo, $actualWbeditlanglinks )
 		);
 
 		$this->assertNull( $actualWbeditlanglinks );
@@ -62,7 +62,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 			$this->getTemplate( false, $actualLanguageUrls )
 		);
 
-		$this->assertSame( array(), $actualLanguageUrls );
+		$this->assertSame( [], $actualLanguageUrls );
 	}
 
 	public function testDoSkinTemplateOutputPageBeforeExec_noExternalLangLinks() {
@@ -71,7 +71,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 		$actualLanguageUrls = null;
 		$handler->doSkinTemplateOutputPageBeforeExec(
 			$this->getSkin( array( '*' ) ),
-			$this->getTemplate( array(), $actualLanguageUrls )
+			$this->getTemplate( [], $actualLanguageUrls )
 		);
 
 		$this->assertNull( $actualLanguageUrls );
@@ -169,7 +169,7 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends PHPUnit_Framework_Test
 			->getMock();
 		$wikiPage->expects( $this->any() )
 			->method( 'getActionOverrides' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$context = $this->getMock( IContextSource::class );
 		$context->expects( $this->any() )

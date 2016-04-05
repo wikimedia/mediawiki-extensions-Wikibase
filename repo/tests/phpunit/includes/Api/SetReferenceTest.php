@@ -62,7 +62,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$store = $wikibaseRepo->getEntityStore();
 
 		if ( !self::$propertyIds ) {
-			self::$propertyIds = array();
+			self::$propertyIds = [];
 
 			for ( $i = 0; $i < 4; $i++ ) {
 				$property = Property::newFromType( 'string' );
@@ -89,7 +89,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 *
 	 * @return Statement
 	 */
-	private function getNewStatement( array $references = array() ) {
+	private function getNewStatement( array $references = [] ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		// Create a new empty item
 		$item = new Item();

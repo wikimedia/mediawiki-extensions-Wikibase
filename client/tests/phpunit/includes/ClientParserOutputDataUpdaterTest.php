@@ -37,7 +37,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	 * @return Item[]
 	 */
 	private function getItems() {
-		$items = array();
+		$items = [];
 
 		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'Foo' );
@@ -65,7 +65,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	 *
 	 * @return ClientParserOutputDataUpdater
 	 */
-	private function newInstance( array $otherProjects = array() ) {
+	private function newInstance( array $otherProjects = [] ) {
 		$this->mockRepo = new MockRepository();
 
 		foreach ( $this->getItems() as $item ) {
@@ -178,18 +178,18 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 				'Foo sr'
 			),
 			'other project exists, page has no site link' => array(
-				array(),
+				[],
 				array( 'project' => 'catswiki' ),
 				'Foo xx'
 			),
 			'no other projects, page has site link' => array(
-				array(),
-				array(),
+				[],
+				[],
 				'Foo sr'
 			),
 			'no site link for this page' => array(
-				array(),
-				array(),
+				[],
+				[],
 				'Foo xx'
 			)
 		);
@@ -235,7 +235,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 		}
 
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
+			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			$mockRepoNoSiteLinks,
 			'srwiki'
@@ -261,7 +261,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 		}
 
 		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
-			$this->getOtherProjectsSidebarGeneratorFactory( array() ),
+			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
 			$siteLinkLookup,
 			new MockRepository(),
 			'srwiki'

@@ -67,7 +67,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 	public function processStatementProvider() {
 		if ( $this->willSkipTests() ) {
-			return array( array( array(), array(), 'dummy test will be skipped' ) );
+			return array( array( [], [], 'dummy test will be skipped' ) );
 		}
 
 		$statements = $this->getStatements();
@@ -75,7 +75,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				array(),
+				[],
 				array( $statements['P42-string'] ),
 				'non-geo statement'
 			),
@@ -87,7 +87,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 				'one normal geo statement'
 			),
 			array(
-				array(),
+				[],
 				array( $statements['P17-geo-deprecated'] ),
 				'deprecated geo statement'
 			),
@@ -139,17 +139,17 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 				'multiple normal, one preferred'
 			),
 			array(
-				array(),
+				[],
 				array( $statements['P20-some-value'] ),
 				'geo property with some value snak'
 			),
 			array(
-				array(),
+				[],
 				array( $statements['P404-unknown-property'] ),
 				'statement with unknown property, not in PropertyDataTypeLookup'
 			),
 			array(
-				array(),
+				[],
 				array( $statements['P9002-unknown-globe'] ),
 				'statement with unknown globe'
 			)
@@ -267,7 +267,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 	}
 
 	private function getStatements() {
-		$statements = array();
+		$statements = [];
 
 		$statements['P42-string'] = $this->newStatement(
 			new PropertyId( 'P42' ),

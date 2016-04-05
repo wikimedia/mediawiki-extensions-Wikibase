@@ -58,7 +58,7 @@ class ApiClientInfo extends ApiQueryBase {
 	 * @return array
 	 */
 	private function getInfo( array $params ) {
-		$data = array();
+		$data = [];
 
 		foreach ( $params['prop'] as $p ) {
 			switch ( $p ) {

@@ -73,7 +73,7 @@ final class TestChanges {
 
 	private static function getInstances() {
 		/** @var EntityChange[] $changes */
-		static $changes = array();
+		static $changes = [];
 
 		$changeFactory = self::getEntityChangeFactory();
 
@@ -199,7 +199,7 @@ final class TestChanges {
 			}
 		}
 
-		$clones = array();
+		$clones = [];
 
 		foreach ( $changes as $key => $change ) {
 			$clones[$key] = unserialize( serialize( $change ) );
@@ -229,7 +229,7 @@ final class TestChanges {
 		// filter info field by key
 		if ( $infoFilter !== null ) {
 			$infoFilter = array_flip( $infoFilter );
-			$filteredChanges = array();
+			$filteredChanges = [];
 
 			/* @var ChangeRow $change */
 			foreach ( $changes as $change ) {
@@ -260,7 +260,7 @@ final class TestChanges {
 
 	public static function getDiffs() {
 		$changes = self::getChanges();
-		$diffs = array();
+		$diffs = [];
 
 		foreach ( $changes as $change ) {
 			if ( $change instanceof DiffChange
@@ -276,7 +276,7 @@ final class TestChanges {
 	 * @return EntityDocument[]
 	 */
 	public static function getEntities() {
-		$entityList = array();
+		$entityList = [];
 
 		/** @var FingerprintProvider[] $entities */
 		$entities = array(

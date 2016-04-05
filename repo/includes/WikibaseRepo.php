@@ -1026,7 +1026,7 @@ class WikibaseRepo {
 
 		// Create a new SnakFormatterFactory based on the specialized ValueFormatterFactory.
 		$snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-			array(), // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
+			[], // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
 			$valueFormatterFactory,
 			$this->getPropertyDataTypeLookup(),
 			$this->getDataTypeFactory()
@@ -1138,7 +1138,7 @@ class WikibaseRepo {
 	 * @return ChangeTransmitter[]
 	 */
 	private function getChangeTransmitters() {
-		$transmitters = array();
+		$transmitters = [];
 
 		$transmitters[] = new HookChangeTransmitter( 'WikibaseChangeNotification' );
 
@@ -1255,7 +1255,7 @@ class WikibaseRepo {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
 			$deserializerFactory = $this->getExternalFormatDeserializerFactory();
-			$deserializers = array();
+			$deserializers = [];
 
 			foreach ( $deserializerFactoryCallbacks as $callback ) {
 				$deserializers[] = call_user_func( $callback, $deserializerFactory );
@@ -1283,7 +1283,7 @@ class WikibaseRepo {
 		if ( $this->entitySerializer === null ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
 			$serializerFactory = $this->getSerializerFactory();
-			$serializers = array();
+			$serializers = [];
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
 				$serializers[] = call_user_func( $callback, $serializerFactory );

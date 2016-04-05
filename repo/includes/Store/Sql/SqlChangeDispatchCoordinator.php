@@ -290,7 +290,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @return DatabaseBase A connection to the repo's master database
 	 */
 	private function getRepoMaster() {
-		return $this->getRepoLB()->getConnection( DB_MASTER, array(), $this->repoDB );
+		return $this->getRepoLB()->getConnection( DB_MASTER, [], $this->repoDB );
 	}
 
 	/**
@@ -372,7 +372,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$row = $db->selectRow(
 			$this->changesTable,
 			'max( change_id ) as maxid',
-			array(),
+			[],
 			__METHOD__ );
 
 		$maxId = $row ? $row->maxid : 0;
@@ -422,7 +422,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		$trackedSiteIds = $db->selectFieldValues(
 			$this->stateTable,
 			'chd_site',
-			array(),
+			[],
 			__METHOD__
 		);
 

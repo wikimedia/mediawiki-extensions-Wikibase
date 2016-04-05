@@ -116,7 +116,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				$this->getLogRecentChange()
 			),
 			'comment-fallback' => array(
-				array(),
+				[],
 				array(
 					'/<span class=\"comment\">.*\(Associated .*? item deleted\. Language links removed\.\)/'
 				),
@@ -130,7 +130,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				)
 			),
 			'comment-injection' => array(
-				array(),
+				[],
 				array(
 					'/\(&lt;script&gt;evil&lt;\/script&gt;\)/'
 				),
@@ -139,7 +139,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 				)
 			),
 			'comment-html' => array(
-				array(),
+				[],
 				array(
 					'/<span class=\"comment\">.*' . preg_quote( $commentHtml, '/' ) . '/',
 				),

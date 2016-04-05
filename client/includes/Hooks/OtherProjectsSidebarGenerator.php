@@ -72,7 +72,7 @@ class OtherProjectsSidebarGenerator {
 		);
 
 		if ( !$itemId ) {
-			return array();
+			return [];
 		}
 
 		$sidebar = $this->buildPreliminarySidebarFromSiteLinks( $this->getSiteLinks( $itemId ) );
@@ -138,7 +138,7 @@ class OtherProjectsSidebarGenerator {
 	 * @return array[] Arrays of link attributes indexed by site group and by global site id.
 	 */
 	private function buildPreliminarySidebarFromSiteLinks( array $siteLinks ) {
-		$linksByGroup = array();
+		$linksByGroup = [];
 
 		foreach ( $siteLinks as $siteLink ) {
 			if ( !in_array( $siteLink->getSiteId(), $this->siteIdsToOutput ) ) {
@@ -168,7 +168,7 @@ class OtherProjectsSidebarGenerator {
 	 * group and global ids.
 	 */
 	private function sortAndFlattenSidebar( array $linksByGroup ) {
-		$result = array();
+		$result = [];
 
 		ksort( $linksByGroup ); // Sort by group id
 

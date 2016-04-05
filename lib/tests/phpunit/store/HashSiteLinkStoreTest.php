@@ -34,7 +34,7 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideGetLinks() {
-		$cases = array();
+		$cases = [];
 
 		$item1 = new Item( new ItemId( 'Q1' ) );
 		$item1->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
@@ -49,9 +49,9 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 		// #0: all ---------
 		$cases[] = array(
 			$items,
-			array(), // items
-			array(), // sites
-			array(), // pages
+			[], // items
+			[], // sites
+			[], // pages
 			array( // expected
 				array( 'enwiki', 'Foo', 1 ),
 				array( 'dewiki', 'Bar', 1 ),
@@ -63,18 +63,18 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 		// #1: mismatch ---------
 		$cases[] = array(
 			$items,
-			array(), // items
+			[], // items
 			array( 'enwiki' ), // sites
 			array( 'Xoo' ), // pages
-			array() // expected
+			[] // expected
 		);
 
 		// #2: by item ---------
 		$cases[] = array(
 			$items,
 			array( 1 ), // items
-			array(), // sites
-			array(), // pages
+			[], // sites
+			[], // pages
 			array( // expected
 				array( 'enwiki', 'Foo', 1 ),
 				array( 'dewiki', 'Bar', 1 ),
@@ -84,9 +84,9 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 		// #3: by site ---------
 		$cases[] = array(
 			$items,
-			array(), // items
+			[], // items
 			array( 'enwiki' ), // sites
-			array(), // pages
+			[], // pages
 			array( // expected
 				array( 'enwiki', 'Foo', 1 ),
 				array( 'enwiki', 'Bar', 2 ),
@@ -96,8 +96,8 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 		// #4: by page ---------
 		$cases[] = array(
 			$items,
-			array(), // items
-			array(), // sites
+			[], // items
+			[], // sites
 			array( 'Bar' ), // pages
 			array( // expected
 				array( 'dewiki', 'Bar', 1 ),
@@ -108,7 +108,7 @@ class HashSiteLinkStoreTest extends \PHPUnit_Framework_TestCase {
 		// #5: by site and page ---------
 		$cases[] = array(
 			$items,
-			array(), // items
+			[], // items
 			array( 'dewiki' ), // sites
 			array( 'Bar' ), // pages
 			array( // expected

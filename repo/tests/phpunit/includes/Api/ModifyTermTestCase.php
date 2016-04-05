@@ -53,7 +53,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'e' => array( 'value' => array( 'bat-smg' => 'V?sata' ) ) ),
 			array( //7
 				'p' => array( 'language' => 'bat-smg', 'value' => '' ),
-				'e' => array() ),
+				'e' => [] ),
 			array( //8
 				'p' => array( 'language' => 'en', 'value' => "  x\nx  " ),
 				'e' => array( 'value' => array( 'en' => 'x x' ) ) ),
@@ -67,7 +67,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
 		if ( !array_key_exists( 'value', $expected ) ) {
-			$expected['value'] = array();
+			$expected['value'] = [];
 		}
 
 		// -- do the request --------------------------------------------------

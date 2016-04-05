@@ -51,13 +51,13 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
-		$rows = array();
+		$rows = [];
 
 		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
 			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_SLAVE );
 		}
 
-		$loadFromMaster = array();
+		$loadFromMaster = [];
 		foreach ( $entityIds as $entityId ) {
 			if ( !isset( $rows[$entityId->getSerialization()] ) || !$rows[$entityId->getSerialization()] ) {
 				$loadFromMaster[] = $entityId;
@@ -126,7 +126,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private function selectRevisionInformationById( EntityId $entityId, $revisionId, $connType ) {
 		$db = $this->getConnection( $connType );
 
-		$join = array();
+		$join = [];
 
 		// pick text via rev_text_id
 		$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
@@ -139,7 +139,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			$this->selectFields(),
 			array( 'rev_id' => $revisionId ),
 			__METHOD__,
-			array(),
+			[],
 			$join
 		);
 
@@ -161,7 +161,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
 		$db = $this->getConnection( $connType );
 
-		$join = array();
+		$join = [];
 		$fields = $this->selectFields();
 		// To be able to link rows with entity ids
 		$fields[] = 'epp_entity_id';
@@ -178,7 +178,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		// pick text via rev_text_id
 		$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
-		$res = $db->select( $tables, $fields, $this->getEppWhere( $entityIds, $db ), __METHOD__, array(), $join );
+		$res = $db->select( $tables, $fields, $this->getEppWhere( $entityIds, $db ), __METHOD__, [], $join );
 
 		$this->releaseConnection( $db );
 
@@ -195,14 +195,14 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	private function indexResultByEntityId( array $entityIds, ResultWrapper $res ) {
-		$rows = array();
+		$rows = [];
 		// Create a key based map from the rows just returned to reduce
 		// the complexity below.
 		foreach ( $res as $row ) {
 			$rows[$row->epp_entity_type . $row->epp_entity_id] = $row;
 		}
 
-		$result = array();
+		$result = [];
 		foreach ( $entityIds as $entityId ) {
 			$result[$entityId->getSerialization()] = false;
 
@@ -223,7 +223,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return string
 	 */
 	private function getEppWhere( array $entityIds, DatabaseBase $db ) {
-		$where = array();
+		$where = [];
 
 		foreach ( $entityIds as &$entityId ) {
 			$where[] = $db->makeList( array(

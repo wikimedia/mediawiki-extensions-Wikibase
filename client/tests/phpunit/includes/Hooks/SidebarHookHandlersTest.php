@@ -66,7 +66,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	private function newSettings( array $settings ) {
 		$defaults = array(
 			'sort' => 'code',
-			'sortPrepend' => array(),
+			'sortPrepend' => [],
 			'interwikiSortOrders' => array( 'alphabetic' => array(
 				'ar', 'de', 'en', 'sv', 'zh'
 			) ),
@@ -120,7 +120,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return $otherProjectsSidebarGeneratorFactory;
 	}
 
-	private function newSidebarHookHandlers( array $settings = array() ) {
+	private function newSidebarHookHandlers( array $settings = [] ) {
 		$badgeId = $this->getBadgeItem()->getId();
 
 		$siteLinksPerItem = array(
@@ -140,7 +140,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$settings = $this->newSettings( $settings );
 
 		$namespaces = $settings->getSetting( 'namespaces' );
-		$namespaceChecker = new NamespaceChecker( array(), $namespaces );
+		$namespaceChecker = new NamespaceChecker( [], $namespaces );
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
 			$this->getLabelDescriptionLookup( $siteLinksPerItem ),
@@ -293,7 +293,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$context->setOutput( $output );
 		$skin = $this->newSkin( $context );
 
-		$sidebar = array();
+		$sidebar = [];
 
 		$handler = $this->newSidebarHookHandlers( array(
 			'otherProjectsLinksByDefault' => $enabled
@@ -318,7 +318,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	public function testDoSidebarBeforeOutput_empty() {
-		$projects = array();
+		$projects = [];
 		$sidebar = $this->callDoSidebarBeforeOutput( true, $projects );
 
 		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );

@@ -178,7 +178,7 @@ class EntityDataSerializationService {
 		$format,
 		EntityRevision $entityRevision,
 		RedirectRevision $followedRedirect = null,
-		array $incomingRedirects = array(),
+		array $incomingRedirects = [],
 		$flavor = null
 	) {
 

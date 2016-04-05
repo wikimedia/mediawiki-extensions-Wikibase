@@ -98,8 +98,8 @@ class ParserLimitHookHandlers {
 
 		if ( $isHTML ) {
 			$report .= Html::openElement( 'tr' ) .
-			Html::element( 'th', array(), $label ) .
-			Html::element( 'td', array(), $value ) .
+			Html::element( 'th', [], $label ) .
+			Html::element( 'td', [], $value ) .
 			Html::closeElement( 'tr' );
 		} else {
 			$report .= $label . wfMessage( 'colon-separator' )->inLanguage( $language )->text() . $value;

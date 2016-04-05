@@ -110,14 +110,14 @@ class ClaimSummaryBuilder {
 	 * @return array[] Associative array that contains property ID => array of main Snaks
 	 */
 	private function buildSummaryArgs( Statement $newStatement, $guid ) {
-		$pairs = array();
+		$pairs = [];
 
 		if ( $newStatement->getGuid() === $guid ) {
 			$snak = $newStatement->getMainSnak();
 			$key = $snak->getPropertyId()->getSerialization();
 
 			if ( !array_key_exists( $key, $pairs ) ) {
-				$pairs[$key] = array();
+				$pairs[$key] = [];
 			}
 
 			$pairs[$key][] = $snak;

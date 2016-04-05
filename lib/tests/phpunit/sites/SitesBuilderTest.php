@@ -47,7 +47,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 			}
 		}
 
-		$data = array();
+		$data = [];
 
 		$data[] = array( $sites, 'wikidata', null, $expectedSites );
 		$data[] = array( $sites, 'commons', null, $expectedSites );
@@ -130,7 +130,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 	 * @return MediaWikiSite[]
 	 */
 	private function getSites( array $sitesData ) {
-		$sites = array();
+		$sites = [];
 
 		foreach ( $sitesData as $siteData ) {
 			$fields = array(
@@ -139,7 +139,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 				'group' => $siteData['group'],
 				'source' => 'local',
 				'language' => $siteData['lang'],
-				'localids' => array(),
+				'localids' => [],
 				'internalid' => null,
 				'data' => array(
 					'paths' => array(
@@ -148,7 +148,7 @@ class SitesBuilderTest extends PHPUnit_Framework_TestCase {
 					)
 				),
 				'forward' => false,
-				'config' => array()
+				'config' => []
 			);
 
 			$site = new MediaWikiSite();

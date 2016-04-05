@@ -78,7 +78,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'e' => array( 'value' => array( 'en' => array( 'ohi' ) ) ) ),
 			array( //12
 				'p' => array( 'language' => 'en', 'remove' => 'ohi' ),
-				'e' => array() ),
+				'e' => [] ),
 			array( //13
 				'p' => array( 'language' => 'en', 'set' => "  Foo\nBar  " ),
 				'e' => array( 'value' => array( 'en' => array( 'Foo Bar' ) ) ) ),
@@ -95,7 +95,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
 		if ( !array_key_exists( 'value', $expected ) ) {
-			$expected['value'] = array();
+			$expected['value'] = [];
 		}
 
 		// -- do the request --------------------------------------------------

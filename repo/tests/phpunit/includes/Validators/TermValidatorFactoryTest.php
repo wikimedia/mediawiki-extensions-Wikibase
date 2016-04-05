@@ -32,7 +32,7 @@ class TermValidatorFactoryTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidConstructorArgument( $maxLength ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		$this->newFactory( $maxLength, array() );
+		$this->newFactory( $maxLength, [] );
 	}
 
 	public function invalidConstructorArgumentProvider() {

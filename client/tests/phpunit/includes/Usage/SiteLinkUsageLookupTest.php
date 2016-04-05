@@ -171,7 +171,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		$titleFactory = $this->getTitleFactory();
 		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
-		$actual = $lookup->getUnusedEntities( array() );
+		$actual = $lookup->getUnusedEntities( [] );
 		$this->assertEmpty( $actual );
 
 		$actual = $lookup->getUnusedEntities( array( $q23 ) );
@@ -198,7 +198,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		$titleFactory = new TitleFactory();
 		$lookup = $this->getUsageLookup( $links, $titleFactory );
 
-		$usages = $lookup->getPagesUsing( array( $itemId ), array() );
+		$usages = $lookup->getPagesUsing( array( $itemId ), [] );
 
 		$this->assertInstanceOf( Traversable::class, $usages );
 		$this->assertCount( 0, $usages );

@@ -103,7 +103,7 @@ class ValueSnakRdfBuilderFactory {
 		EntityMentionListener $mentionedEntityTracker,
 		DedupeBag $dedupe
 	) {
-		$builders = array();
+		$builders = [];
 
 		foreach ( $this->factoryCallbacks as $key => $callback ) {
 			$builder = call_user_func(

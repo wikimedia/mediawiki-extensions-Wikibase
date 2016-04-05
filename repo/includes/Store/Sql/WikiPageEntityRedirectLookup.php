@@ -96,10 +96,10 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 		}
 
 		if ( !$res ) {
-			return array();
+			return [];
 		}
 
-		$ids = array();
+		$ids = [];
 		foreach ( $res as $row ) {
 			$title = Title::makeTitle( $row->page_namespace, $row->page_title );
 
@@ -145,7 +145,7 @@ class WikiPageEntityRedirectLookup implements EntityRedirectLookup {
 				'page_namespace' => $title->getNamespace()
 			),
 			__METHOD__,
-			array(),
+			[],
 			array(
 				'redirect' => array( 'LEFT JOIN', 'rd_from=page_id' )
 			)

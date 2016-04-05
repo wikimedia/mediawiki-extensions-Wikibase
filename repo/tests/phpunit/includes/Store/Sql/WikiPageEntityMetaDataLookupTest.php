@@ -29,7 +29,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	/**
 	 * @var EntityRevision[]
 	 */
-	private $data = array();
+	private $data = [];
 
 	protected function setUp() {
 		parent::setUp();
@@ -112,7 +112,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadRevisionInformation( $entityIds, DB_SLAVE );
 
-		$serializedEntityIds = array();
+		$serializedEntityIds = [];
 		foreach ( $entityIds as $entityId ) {
 			$serializedEntityIds[] = $entityId->getSerialization();
 		}

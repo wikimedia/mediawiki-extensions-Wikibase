@@ -73,7 +73,7 @@ class UrlSchemeValidators {
 	 * @return ValueValidator[] a map of scheme names to ValueValidator objects.
 	 */
 	public function getValidators( array $schemes ) {
-		$validators = array();
+		$validators = [];
 
 		foreach ( $schemes as $scheme ) {
 			$validator = $this->getValidator( $scheme );

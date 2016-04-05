@@ -133,7 +133,7 @@ class GetClaims extends ApiBase {
 		}
 
 		$statement = $statements->getFirstStatementWithGuid( $guid );
-		return new StatementList( $statement === null ? array() : $statement );
+		return new StatementList( $statement === null ? [] : $statement );
 	}
 
 	private function newRequestParamsBasedFilter() {

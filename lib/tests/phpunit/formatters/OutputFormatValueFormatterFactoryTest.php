@@ -135,7 +135,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit_Framework_TestCase 
 
 		return array(
 			'empty' => array(
-				new FormatterOptions( array() ),
+				new FormatterOptions( [] ),
 				'en', // determined in OutputFormatValueFormatterFactoryTest::newBuilder()
 				'en'  // derived from language code
 			),

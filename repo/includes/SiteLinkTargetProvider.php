@@ -31,7 +31,7 @@ class SiteLinkTargetProvider {
 	 * @param SiteStore $siteStore
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, array $specialSiteGroups = array() ) {
+	public function __construct( SiteStore $siteStore, array $specialSiteGroups = [] ) {
 		$this->siteStore = $siteStore;
 		$this->specialSiteGroups = $specialSiteGroups;
 	}

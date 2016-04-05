@@ -33,7 +33,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit_Framework_TestCase {
 	);
 
 	public function getDataTypeForPropertyProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$emptyInfoStore = new MockPropertyInfoStore();
 		$mockInfoStore = new MockPropertyInfoStore();

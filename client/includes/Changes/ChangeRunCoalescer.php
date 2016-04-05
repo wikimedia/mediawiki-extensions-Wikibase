@@ -62,7 +62,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * @return Change[]
 	 */
 	public function transformChangeList( array $changes ) {
-		$coalesced = array();
+		$coalesced = [];
 
 		$changesByEntity = $this->groupChangesByEntity( $changes );
 		foreach ( $changesByEntity as $entityChanges ) {
@@ -87,13 +87,13 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 *         entity ID is the list of changes performed on that entity.
 	 */
 	private function groupChangesByEntity( array $changes ) {
-		$groups = array();
+		$groups = [];
 
 		foreach ( $changes as $change ) {
 			$id = $change->getEntityId()->getSerialization();
 
 			if ( !isset( $groups[$id] ) ) {
-				$groups[$id] = array();
+				$groups[$id] = [];
 			}
 
 			$groups[$id][] = $change;
@@ -133,7 +133,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		$minor = true;
 		$bot = true;
 
-		$ids = array();
+		$ids = [];
 
 		foreach ( $changes as $change ) {
 			$ids[] = $change->getId();
@@ -187,7 +187,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		//FIXME: size before & size after
 		) );
 
-		$info = $change->hasField( 'info' ) ? $change->getField( 'info' ) : array();
+		$info = $change->hasField( 'info' ) ? $change->getField( 'info' ) : [];
 		$info['change-ids'] = $ids;
 		$info['changes'] = $changes;
 		$change->setField( 'info', $info );
@@ -208,9 +208,9 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 	 * @return EntityChange[] grouped changes
 	 */
 	private function coalesceRuns( array $changes ) {
-		$coalesced = array();
+		$coalesced = [];
 
-		$currentRun = array();
+		$currentRun = [];
 		$currentUser = null;
 		$currentEntity = null;
 		$currentAction = null;
@@ -251,7 +251,7 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 						}
 					}
 
-					$currentRun = array();
+					$currentRun = [];
 					$currentUser = $user;
 					$currentEntity = $entityId;
 					$currentAction = $action === EntityChange::ADD ? EntityChange::UPDATE : $action;

@@ -21,7 +21,7 @@ class ChangeOps implements ChangeOp {
 	/**
 	 * @var ChangeOp[]
 	 */
-	private $changeOps = array();
+	private $changeOps = [];
 
 	/**
 	 * @since 0.4
@@ -30,7 +30,7 @@ class ChangeOps implements ChangeOp {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $changeOps = array() ) {
+	public function __construct( $changeOps = [] ) {
 		$this->add( $changeOps );
 	}
 

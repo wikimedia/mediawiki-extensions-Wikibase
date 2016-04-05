@@ -160,7 +160,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 
 		$this->assertEquals( $target, $response->getheader( 'Location' ), 'Redirect' );
 
-		$matchers = array();
+		$matchers = [];
 		$matchers['site'] = array(
 			'tag' => 'input',
 			'attributes' => array(
@@ -194,7 +194,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	}
 
 	public function requestWithRedirectProvider() {
-		$cases = array();
+		$cases = [];
 		$cases['found'] = array( 'dewiki/Q23', 'http://dewiki.com/TestPageName' );
 		$cases['foundEntityRedirect'] = array( 'dewiki/Q24', 'http://dewiki.com/TestPageName' );
 		$cases['foundWithSiteIdHack'] = array( 'de/Q23', 'http://dewiki.com/TestPageName' );

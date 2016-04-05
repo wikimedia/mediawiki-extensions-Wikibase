@@ -22,10 +22,10 @@ return array(
 		720101010,
 	),
 
-	'entityNamespaces' => array(),
+	'entityNamespaces' => [],
 
 	// See StatementGrouperBuilder for an example.
-	'statementSections' => array(),
+	'statementSections' => [],
 
 	// Define constraints for multilingual terms (such as labels, descriptions and aliases).
 	'multilang-limits' => array(
@@ -36,7 +36,7 @@ return array(
 	'urlSchemes' => array( 'ftp', 'http', 'https', 'irc', 'mailto' ),
 
 	// Items allowed to be used as badges pointing to their CSS class names
-	'badgeItems' => array(),
+	'badgeItems' => [],
 
 	// Number of seconds for which data output shall be cached.
 	// Note: keep that low, because such caches cannot always be purged easily.
@@ -129,7 +129,7 @@ return array(
 	 * WARNING: Disabling a data type after it is in use is dangerous
 	 * and might break items.
 	 */
-	'disabledDataTypes' => array(),
+	'disabledDataTypes' => [],
 
 	// Special non-canonical languages and their BCP 47 mappings
 	// Based on: https://meta.wikimedia.org/wiki/Special_language_codes
@@ -146,11 +146,11 @@ return array(
 
 	// List of image property id strings, in order of preference, that should be considered for
 	// the "page_image" page property.
-	'preferredPageImagesProperties' => array(),
+	'preferredPageImagesProperties' => [],
 
 	// List of globe-coordinate property id strings, in order of preference, to consider for
 	// primary coordinates when extracting coordinates from an entity for the GeoData extension.
-	'preferredGeoDataProperties' => array(),
+	'preferredGeoDataProperties' => [],
 
 	// Mapping of globe URIs to canonical names, as recognized and used by GeoData extension
 	// when indexing and querying for coordinates.

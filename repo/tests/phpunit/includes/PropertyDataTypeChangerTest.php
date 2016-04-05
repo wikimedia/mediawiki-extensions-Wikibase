@@ -122,7 +122,7 @@ class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function getDataTypeFactory() {
-		$dataTypes = array();
+		$dataTypes = [];
 		$dataTypes[] = new DataType( 'rustydata', 'kittens' );
 		$dataTypes[] = new DataType( 'shinydata', 'kittens' );
 		$dataTypes[] = new DataType( 'otherdatatype', 'puppies' );

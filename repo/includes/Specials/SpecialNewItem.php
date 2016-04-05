@@ -137,7 +137,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @return array
 	 */
 	protected function getWarnings() {
-		$warnings = array();
+		$warnings = [];
 
 		if ( $this->getUser()->isAnon() ) {
 			$warnings[] = $this->msg(

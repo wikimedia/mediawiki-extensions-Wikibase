@@ -30,7 +30,7 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 		$siteLinks = $item->getSiteLinkList();
 
 		if ( $siteLinks->isEmpty() ) {
-			return array();
+			return [];
 		}
 
 		if ( $db ) {
@@ -69,7 +69,7 @@ class SqlSiteLinkConflictLookup extends DBAccessBase implements SiteLinkConflict
 			__METHOD__
 		);
 
-		$conflicts = array();
+		$conflicts = [];
 
 		foreach ( $conflictingLinks as $link ) {
 			$conflicts[] = array(

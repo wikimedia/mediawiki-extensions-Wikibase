@@ -62,7 +62,7 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit_Framework_TestCase {
 			'ar', 'fa', 'my', 'pi', 'ne', 'kn', // different numerals
 		);
 
-		$cases = array();
+		$cases = [];
 		foreach ( $languages as $lang ) {
 			foreach ( $numbers as $num ) {
 				$cases[] = array( $num, $lang );

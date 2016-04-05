@@ -91,7 +91,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$p1 = new PropertyId( 'p1' ); // numeric
 		$p2 = new PropertyId( 'p2' ); // alphabetic
 
-		$cases = array();
+		$cases = [];
 
 		$claim = new Statement( new PropertyNoValueSnak( $p1 ) );
 		$cases[] = array( $claim, 'empty claim', true );
@@ -147,7 +147,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$p1 = new PropertyId( 'p1' ); // numeric
 		$p2 = new PropertyId( 'p2' ); // alphabetic
 
-		$cases = array();
+		$cases = [];
 
 		$references = new ReferenceList();
 		$cases[] = array( $references, 'empty reference list', true );
@@ -190,7 +190,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$p1 = new PropertyId( 'p1' ); // numeric
 		$p2 = new PropertyId( 'p2' ); // alphabetic
 
-		$cases = array();
+		$cases = [];
 
 		$reference = new Reference( new SnakList() );
 		$cases[] = array( $reference, 'empty reference', true );
@@ -241,7 +241,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 		$p3 = new PropertyId( 'P3' ); // bad
 		$p4 = new PropertyId( 'P4' ); // property with bad data type
 
-		$cases = array();
+		$cases = [];
 
 		$snak = new PropertyNoValueSnak( $p1 );
 		$cases[] = array( $snak, 'PropertyNoValueSnak' );
@@ -263,7 +263,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 				'doesn\'t match /^[A-Z]+$/i',
 				null,
 				'invalid',
-				array()
+				[]
 			)
 		);
 
@@ -275,7 +275,7 @@ class SnakValidatorTest extends PHPUnit_Framework_TestCase {
 				'doesn\'t match /^\d+$/',
 				null,
 				'invalid',
-				array()
+				[]
 			)
 		);
 

@@ -132,7 +132,7 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	private function getEntityValidators( $entityType = null ) {
-		$validators = array();
+		$validators = [];
 
 		//NOTE: The DataValue in question is going to be an instance of EntityId!
 		$validators[] = new TypeValidator( EntityIdValue::class );
@@ -148,7 +148,7 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	private function getCommonStringValidators( $maxLength = 400 ) {
-		$validators = array();
+		$validators = [];
 
 		$validators[] = new TypeValidator( 'string' );
 		//TODO: validate UTF8 (here and elsewhere)
@@ -201,7 +201,7 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	public function buildMonolingualTextValidators() {
-		$validators = array();
+		$validators = [];
 
 		$validators[] = new DataFieldValidator(
 			'text',
@@ -224,7 +224,7 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	public function buildTimeValidators() {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see TimeFormatter and TimeParser.
@@ -234,7 +234,7 @@ class ValidatorBuilders {
 		$validators[] = new DataFieldValidator( 'calendarmodel', $urlValidator );
 
 		// time string field
-		$timeStringValidators = array();
+		$timeStringValidators = [];
 		$timeStringValidators[] = new TypeValidator( 'string' );
 
 		// down to the day
@@ -248,7 +248,7 @@ class ValidatorBuilders {
 			new CompositeValidator( $timeStringValidators ) //Note: each validator is fatal
 		);
 
-		$precisionValidators = array();
+		$precisionValidators = [];
 		$precisionValidators[] = new TypeValidator( 'integer' );
 		$precisionValidators[] = new NumberRangeValidator( TimeValue::PRECISION_YEAR1G, $maxPrecision );
 
@@ -268,7 +268,7 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	public function buildCoordinateValidators() {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see GlobeCoordinateValue and GlobeCoordinateParser.
@@ -296,7 +296,7 @@ class ValidatorBuilders {
 	 * @return CompositeValidator
 	 */
 	private function getUrlValidator( array $urlSchemes, $prefix = null, $maxLength = 500 ) {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'string' );
 		$validators[] = new StringLengthValidator( 2, $maxLength );
 
@@ -340,7 +340,7 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	public function buildQuantityValidators() {
-		$validators = array();
+		$validators = [];
 		$validators[] = new TypeValidator( 'array' );
 
 		// the 'amount' field is already validated by QuantityValue's constructor

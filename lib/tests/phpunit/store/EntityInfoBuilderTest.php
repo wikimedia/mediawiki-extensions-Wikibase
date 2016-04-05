@@ -77,8 +77,8 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	public function getEntityInfoProvider() {
 		return array(
 			array(
-				array(),
-				array()
+				[],
+				[]
 			),
 
 			array(
@@ -117,8 +117,8 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	public function resolveRedirectsProvider() {
 		return array(
 			'empty' => array(
-				array(),
-				array()
+				[],
+				[]
 			),
 
 			'some redirects' => array(
@@ -165,7 +165,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	 * @return array map if the form $language => array( 'language' => $language, 'value' => $value )
 	 */
 	protected function makeLanguageValueRecords( array $map, $language = null ) {
-		$records = array();
+		$records = [];
 
 		foreach ( $map as $key => $value ) {
 			if ( $language !== null ) {
@@ -190,10 +190,10 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	public function collectTermsProvider() {
 		return array(
 			array(
-				array(),
+				[],
 				null,
 				null,
-				array()
+				[]
 			),
 
 			array(
@@ -219,12 +219,12 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 							'en' => 'label:P3/en', 'de' => 'label:P3/de' ) ),
 						'descriptions' => $this->makeLanguageValueRecords( array(
 							'en' => 'description:P3/en', 'de' => 'description:P3/de' ) ),
-						'aliases' => array(),
+						'aliases' => [],
 					),
 					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE,
-						'labels' => array(),
-						'descriptions' => array(),
-						'aliases' => array()
+						'labels' => [],
+						'descriptions' => [],
+						'aliases' => []
 					),
 				)
 			),
@@ -244,7 +244,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 					'P3' => array( 'id' => 'P3', 'type' => Property::ENTITY_TYPE,
 						'labels' => $this->makeLanguageValueRecords( array( 'de' => 'label:P3/de' ) ),
 					),
-					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE, 'labels' => array() ),
+					'Q7' => array( 'id' => 'Q7', 'type' => Item::ENTITY_TYPE, 'labels' => [] ),
 				)
 			),
 		);
@@ -308,8 +308,8 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	public function collectDataTypesProvider() {
 		return array(
 			array(
-				array(),
-				array()
+				[],
+				[]
 			),
 
 			array(
@@ -351,8 +351,8 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	public function removeMissingAndRedirectsProvider() {
 		return array(
 			'empty' => array(
-				array(),
-				array()
+				[],
+				[]
 			),
 
 			'found' => array(
@@ -368,7 +368,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 				array(
 					new ItemId( 'Q77' ),
 				),
-				array()
+				[]
 			),
 
 			'some found' => array(
@@ -401,8 +401,8 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	public function removeMissingButKeepRedirects() {
 		return array(
 			'empty' => array(
-				array(),
-				array()
+				[],
+				[]
 			),
 
 			'unrelated redirect' => array(
@@ -454,9 +454,9 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	public function removeEntityInfoProvider() {
 		return array(
 			'empty' => array(
-				array(),
-				array(),
-				array(),
+				[],
+				[],
+				[],
 			),
 			'remove nonexisting' => array(
 				array(
@@ -496,9 +496,9 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 	public function retainEntityInfoProvider() {
 		return array(
 			'empty' => array(
-				array(),
-				array(),
-				array(),
+				[],
+				[],
+				[],
 			),
 			'retain nonexisting' => array(
 				array(
@@ -507,7 +507,7 @@ abstract class EntityInfoBuilderTest extends \MediaWikiTestCase {
 				array(
 					new ItemId( 'Q2' ),
 				),
-				array(),
+				[],
 			),
 			'retain some' => array(
 				array(

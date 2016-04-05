@@ -275,7 +275,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 
 		return $this->getEngine()->registerInterface(
-			__DIR__ . '/mw.wikibase.lua', $lib, array()
+			__DIR__ . '/mw.wikibase.lua', $lib, []
 		);
 	}
 

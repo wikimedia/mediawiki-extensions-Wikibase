@@ -64,7 +64,7 @@ class PageImagesDataUpdaterTest extends PHPUnit_Framework_TestCase {
 
 	public function constructorArgumentsProvider() {
 		return array(
-			'Empty' => array( array() ),
+			'Empty' => array( [] ),
 			'Property ids' => array( array( 'P1', 'P9999' ) ),
 			'Non-property ids' => array( array( 'Q1' ) ),
 			'Invalid ids' => array( array( 'invalid' ) ),

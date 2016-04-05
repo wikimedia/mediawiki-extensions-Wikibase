@@ -30,7 +30,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->setUserLang( 'de' );
 
 		// Remove handlers for the "OutputPageParserOutput" hook
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'OutputPageParserOutput' => array() ) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'OutputPageParserOutput' => [] ) );
 	}
 
 	public function testActionForPage() {
@@ -52,7 +52,7 @@ class ViewEntityActionTest extends ActionTestCase {
 	 */
 	public function testShow( $handle, $regex ) {
 		$page = $this->getTestItemPage( $handle );
-		$html = $this->executeViewAction( $page, array() );
+		$html = $this->executeViewAction( $page, [] );
 
 		$this->assertRegExp( $regex, $html );
 	}

@@ -143,7 +143,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	public function insertLinksInternal( Item $item, array $links, DatabaseBase $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting links for ' . $item->getId()->getSerialization() );
 
-		$insert = array();
+		$insert = [];
 		foreach ( $links as $siteLink ) {
 			$insert[] = array(
 				'ips_item_id' => $item->getId()->getNumericId(),
@@ -179,7 +179,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	public function deleteLinksInternal( Item $item, array $links, DatabaseBase $dbw ) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': deleting links for ' . $item->getId()->getSerialization() );
 
-		$siteIds = array();
+		$siteIds = [];
 		foreach ( $links as $siteLink ) {
 			$siteIds[] = $siteLink->getSiteId();
 		}
@@ -295,20 +295,20 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 	 * @return array[]
 	 * @note The arrays returned by this method do not contain badges!
 	 */
-	public function getLinks( array $numericIds = array(), array $siteIds = array(), array $pageNames = array() ) {
+	public function getLinks( array $numericIds = [], array $siteIds = [], array $pageNames = [] ) {
 		$dbr = $this->getConnection( DB_SLAVE );
 
-		$conditions = array();
+		$conditions = [];
 
-		if ( $numericIds !== array() ) {
+		if ( $numericIds !== [] ) {
 			$conditions['ips_item_id'] = $numericIds;
 		}
 
-		if ( $siteIds !== array() ) {
+		if ( $siteIds !== [] ) {
 			$conditions['ips_site_id'] = $siteIds;
 		}
 
-		if ( $pageNames !== array() ) {
+		if ( $pageNames !== [] ) {
 			$conditions['ips_site_page'] = $pageNames;
 		}
 
@@ -323,7 +323,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 			__METHOD__
 		);
 
-		$siteLinks = array();
+		$siteLinks = [];
 
 		foreach ( $links as $link ) {
 			$siteLinks[] = array(
@@ -361,7 +361,7 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 			__METHOD__
 		);
 
-		$siteLinks = array();
+		$siteLinks = [];
 
 		foreach ( $rows as $row ) {
 			$siteLinks[] = new SiteLink( $row->ips_site_id, $row->ips_site_page );

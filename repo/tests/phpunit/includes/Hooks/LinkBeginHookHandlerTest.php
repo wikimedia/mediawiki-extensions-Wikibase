@@ -71,7 +71,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$this->assertTrue( $title->exists() ); // sanity check
 
 		$html = $title->getFullText();
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
@@ -122,17 +122,17 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
-		$this->assertEquals( array(), $customAttribs );
+		$this->assertEquals( [], $customAttribs );
 	}
 
 	public function overrideSpecialNewEntityLinkProvider() {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$linkTitles = array();
+		$linkTitles = [];
 
 		foreach ( $entityContentFactory->getEntityTypes() as $entityType ) {
 			$entityHandler = $entityContentFactory->getContentHandlerForType( $entityType );
@@ -157,7 +157,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$title = Title::makeTitle( NS_MAIN, $linkTitle );
 		$html = $title->getFullText();
 		$context = RequestContext::newExtraneousContext( $contextTitle );
-		$attribs = array();
+		$attribs = [];
 
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $context );
 
@@ -180,13 +180,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$context = RequestContext::newExtraneousContext( $contextTitle );
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
-		$this->assertEquals( array(), $customAttribs );
+		$this->assertEquals( [], $customAttribs );
 	}
 
 	public function testDoOnLinkBegin_unknownEntityTitle() {
@@ -199,13 +199,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$titleText = $title->getFullText();
 		$html = $titleText;
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$context = RequestContext::newExtraneousContext( $contextTitle );
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
-		$this->assertEquals( array(), $customAttribs );
+		$this->assertEquals( [], $customAttribs );
 	}
 
 	public function testDoOnLinkBegin_itemHasNoLabel() {
@@ -217,7 +217,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$this->assertTrue( $title->exists() ); // sanity check
 
 		$html = $title->getFullText();
-		$customAttribs = array();
+		$customAttribs = [];
 
 		$context = RequestContext::newExtraneousContext( $contextTitle );
 		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
@@ -263,7 +263,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 				}
 
 				if ( $id->getSerialization() == self::ITEM_WITHOUT_LABEL ) {
-					return array();
+					return [];
 				}
 
 				throw new StorageException( 'No such entity: ' . $id->getSerialization() );
@@ -277,7 +277,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 				}
 
 				if ( $id->getSerialization() == self::ITEM_WITHOUT_LABEL ) {
-					return array();
+					return [];
 				}
 
 				throw new StorageException( 'No such entity: ' . $id->getSerialization() );

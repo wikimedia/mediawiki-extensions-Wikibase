@@ -69,7 +69,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 	}
 
 	public function testRun_noHooksRegisteredGoodStatus() {
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'EditFilterMergedContent' => array() ) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'EditFilterMergedContent' => [] ) );
 
 		$runner = $this->getEditFilterHookRunner();
 		$status = $runner->run(
@@ -149,7 +149,7 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 	public function testRun_hooksAreCalled( Status $inputStatus, $new, array $expected ) {
 		$hooks = array_merge(
 			$GLOBALS['wgHooks'],
-			array( 'EditFilterMergedContent' => array() )
+			array( 'EditFilterMergedContent' => [] )
 		);
 
 		$hooks['EditFilterMergedContent'][] =

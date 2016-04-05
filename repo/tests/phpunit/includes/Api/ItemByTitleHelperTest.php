@@ -113,7 +113,7 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		list( $entityIds, ) = $itemByTitleHelper->getItemIds( $sites, $titles, true );
 
 		// Still nothing could be found
-		$this->assertEquals( array(), $entityIds );
+		$this->assertEquals( [], $entityIds );
 	}
 
 	/**
@@ -195,14 +195,14 @@ class ItemByTitleHelperTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				// Request with no sites
-				array(),
+				[],
 				array( 'barfoo' ),
 				false
 			),
 			array(
 				// Request with no titles
 				array( 'enwiki' ),
-				array(),
+				[],
 				false
 			),
 		);

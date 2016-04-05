@@ -41,7 +41,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 */
 	public function getSubscriptions( $siteId, array $entityIds ) {
 		if ( empty( $entityIds ) ) {
-			return array();
+			return [];
 		}
 
 		$dbr = $this->dbLoadBalancer->getConnection( DB_SLAVE );
@@ -52,7 +52,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 		$subscribedIds = $this->querySubscriptions( $dbr, $siteId, array_keys( $entityIds ) );
 
 		// collect the item IDs present in these links
-		$linkedEntityIds = array();
+		$linkedEntityIds = [];
 		foreach ( $subscribedIds as $id ) {
 			$linkedEntityIds[$id] = $entityIds[$id];
 		}
@@ -98,7 +98,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 * @return EntityId[] The ItemIds from EntityId[], keyed by numeric id.
 	 */
 	private function reIndexEntityIds( array $entityIds ) {
-		$reindexed = array();
+		$reindexed = [];
 
 		foreach ( $entityIds as $id ) {
 			$key = $id->getSerialization();
@@ -115,7 +115,7 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	 * @return array
 	 */
 	private function extractColumn( $rows, $field ) {
-		$values = array();
+		$values = [];
 
 		foreach ( $rows as $row ) {
 			$values[] = $row->$field;

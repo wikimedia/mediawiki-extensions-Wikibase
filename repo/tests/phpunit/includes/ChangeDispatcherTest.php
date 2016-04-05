@@ -56,7 +56,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return ChangeDispatcher
 	 */
-	private function getChangeDispatcher( ChangeDispatchCoordinator $coordinator, array &$notifications = array() ) {
+	private function getChangeDispatcher( ChangeDispatchCoordinator $coordinator, array &$notifications = [] ) {
 		$dispatcher = new ChangeDispatcher(
 			$coordinator,
 			$this->getNotificationSender( $notifications ),
@@ -73,7 +73,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @return ChangeNotificationSender
 	 */
-	private function getNotificationSender( array &$notifications = array() ) {
+	private function getNotificationSender( array &$notifications = [] ) {
 		$sender = $this->getMock( ChangeNotificationSender::class );
 
 		$sender->expects( $this->any() )
@@ -123,7 +123,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 
 	public function getSubscriptions( $siteId, array $entityIds ) {
 		if ( !isset( $this->subscriptions[$siteId] ) ) {
-			return array();
+			return [];
 		}
 
 		return array_intersect( $this->subscriptions[$siteId], $entityIds );
@@ -452,7 +452,7 @@ class ChangeDispatcherTest extends \PHPUnit_Framework_TestCase {
 			->method( 'releaseClient' )
 			->with( $expectedFinalState );
 
-		$notifications = array();
+		$notifications = [];
 		$dispatcher = $this->getChangeDispatcher( $coordinator, $notifications );
 		$dispatcher->setBatchSize( $batchSize );
 		$dispatcher->dispatchTo( $wikiState );

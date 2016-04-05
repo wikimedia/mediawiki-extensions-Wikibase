@@ -128,7 +128,7 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 
 		$res = $db->select( self::TABLE_NAME, "*", '', __METHOD__ );
 
-		$subscriptions = array();
+		$subscriptions = [];
 		foreach ( $res as $row ) {
 			$subscriptions[] = $row->cs_subscriber_id . '@' . $row->cs_entity_id;
 		}

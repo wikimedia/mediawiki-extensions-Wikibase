@@ -53,7 +53,7 @@ class ImageLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider imageLinksProvider
 	 */
 	public function testUpdateParserOutput( StatementList $statements, array $expected ) {
-		$actual = array();
+		$actual = [];
 
 		$parserOutput = $this->getMockBuilder( ParserOutput::class )
 			->disableOriginalConstructor()
@@ -85,7 +85,7 @@ class ImageLinksDataUpdaterTest extends PHPUnit_Framework_TestCase {
 		$this->addStatement( $set2, '2b.jpg' );
 
 		return array(
-			array( new StatementList(), array() ),
+			array( new StatementList(), [] ),
 			array( $set1, array( '1.jpg' ) ),
 			array( $set2, array( '2a.jpg', '2b.jpg' ) ),
 		);

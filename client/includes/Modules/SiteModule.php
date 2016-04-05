@@ -37,7 +37,7 @@ class SiteModule extends ResourceLoaderModule {
 		 */
 		$site = $wikibaseClient->getSite();
 
-		$currentSite = array();
+		$currentSite = [];
 		if ( $site ) {
 			$currentSite = array(
 				'globalSiteId' => $site->getGlobalId(),
