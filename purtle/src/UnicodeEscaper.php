@@ -40,7 +40,7 @@ namespace Wikimedia\Purtle;
  */
 class UnicodeEscaper {
 
-	private $escChars = array(); // Character encoding cache
+	private $escChars = []; // Character encoding cache
 
 	/**
 	 * @param string $str

@@ -26,7 +26,7 @@ abstract class EntityViewTest extends MediaWikiLangTestCase {
 	 *
 	 * @return EntityDocument
 	 */
-	abstract protected function makeEntity( EntityId $id, array $statements = array() );
+	abstract protected function makeEntity( EntityId $id, array $statements = [] );
 
 	/**
 	 * Generates a prefixed entity ID based on a numeric ID.

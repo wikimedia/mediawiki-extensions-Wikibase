@@ -16,8 +16,8 @@ use Wikibase\View\Template\TemplateRegistry;
 class TemplateRegistryTest extends \MediaWikiTestCase {
 
 	public function testCanConstructWithEmptyArray() {
-		$registry = new TemplateRegistry( array() );
-		$this->assertSame( array(), $registry->getTemplates() );
+		$registry = new TemplateRegistry( [] );
+		$this->assertSame( [], $registry->getTemplates() );
 	}
 
 	public function testRemovesTabs() {
@@ -43,7 +43,7 @@ class TemplateRegistryTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetUnknownTemplate() {
-		$registry = new TemplateRegistry( array() );
+		$registry = new TemplateRegistry( [] );
 
 		\MediaWiki\suppressWarnings();
 		$html = $registry->getTemplate( 'unknown' );

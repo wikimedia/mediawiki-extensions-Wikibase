@@ -28,7 +28,7 @@ class Template extends Message {
 	 *          and use the first non-empty message for
 	 * @param array $params Array message parameters
 	 */
-	public function __construct( TemplateRegistry $templateRegistry, $key, array $params = array() ) {
+	public function __construct( TemplateRegistry $templateRegistry, $key, array $params = [] ) {
 		$this->templateRegistry = $templateRegistry;
 		parent::__construct( $key, $params );
 	}

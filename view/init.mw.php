@@ -45,8 +45,6 @@ $GLOBALS['wgHooks']['ResourceLoaderRegisterModules'][] = function( ResourceLoade
 			'scripts' => array(
 				'resources/jquery/jquery.util.getDirectionality.js',
 			),
-			'dependencies' => array(
-			),
 		),
 		'wikibase.getLanguageNameByCode' => $moduleTemplate + array(
 			'scripts' => array(

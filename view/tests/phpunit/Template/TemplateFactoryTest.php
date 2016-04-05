@@ -54,7 +54,7 @@ class TemplateFactoryTest extends PHPUnit_Framework_TestCase {
 	public function renderParamsProvider() {
 		return array(
 			array( '<PARAM>', '<PARAM>' ),
-			array( array(), '$1' ),
+			array( [], '$1' ),
 			array( array( '<PARAM>' ), '<PARAM>' ),
 			array( array( '<PARAM>', 'ignored' ), '<PARAM>' ),
 		);
