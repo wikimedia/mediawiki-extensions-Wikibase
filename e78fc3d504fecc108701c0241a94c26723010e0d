@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_7dd425bf",
+        "filename": "view/init.mw.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-06T09:04:04Z",
+      "side": 1,
+      "message": "Can be removed",
+      "revId": "e78fc3d504fecc108701c0241a94c26723010e0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
