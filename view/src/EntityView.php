@@ -159,7 +159,7 @@ abstract class EntityView {
 			return $this->entityTermsView->getHtml(
 				$entity->getFingerprint(),
 				$id,
-				$this->getHtmlForTermBox( $id ),
+				$this->getHtmlForTermBox(),
 				$this->textInjector
 			);
 		}
@@ -168,21 +168,12 @@ abstract class EntityView {
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForTermBox( EntityId $entityId = null ) {
-		if ( $entityId !== null ) {
-			// Placeholder for a termbox for the present item.
-			// EntityViewPlaceholderExpander must know about the parameters used here.
-			return $this->textInjector->newMarker(
-				'termbox',
-				$entityId->getSerialization()
-			);
-		}
-
-		return '';
+	private function getHtmlForTermBox() {
+		// Placeholder for a termbox for the present item.
+		// EntityViewPlaceholderExpander must know about the parameters used here.
+		return $this->textInjector->newMarker( 'termbox' );
 	}
 
 }
