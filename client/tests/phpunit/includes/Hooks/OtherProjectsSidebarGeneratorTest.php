@@ -218,7 +218,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
 			'WikibaseClientOtherProjectsSidebar' => array(
 				function () {
-					$this->assertTrue( false, 'Should not get called.' );
+					$this->fail( 'Should not get called.' );
 				},
 			),
 		) );
