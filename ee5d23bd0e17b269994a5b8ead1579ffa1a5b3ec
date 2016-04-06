@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_03c93a29",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTestCase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-04-06T14:50:53Z",
+      "side": 1,
+      "message": "IMO $this-\u003efail( \u0027...\u0027 ) is more clear than $this-\u003eassertTrue( false, \u0027...\u0027 )",
+      "revId": "ee5d23bd0e17b269994a5b8ead1579ffa1a5b3ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
