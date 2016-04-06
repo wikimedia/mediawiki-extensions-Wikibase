@@ -79,6 +79,10 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			->method( 'getSite' )
 			->will( $this->returnCallback( $getSite ) );
 
+		$mockSiteList->expects( $this->any() )
+			->method( 'getGlobalIdentifiers' )
+			->will( $this->returnValue( array( 'dewiki', 'enwiki' ) ) );
+
 		$mock = $this->getMock( SiteStore::class );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )

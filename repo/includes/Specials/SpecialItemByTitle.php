@@ -178,13 +178,14 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
 
-		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
+		$siteIds = $this->sites->getSites()->getGlobalIdentifiers();
 
 		$formDescriptor = array(
 			'site' => array(
 				'name' => 'site',
 				'default' => $siteId,
-				'type' => 'text',
+				'type' => 'combobox',
+				'options' => array_combine( $siteIds, $siteIds ),
 				'id' => 'wb-itembytitle-sitename',
 				'size' => 12,
 				'label-message' => 'wikibase-itembytitle-lookup-site'
