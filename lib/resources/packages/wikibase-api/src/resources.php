@@ -19,8 +19,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'namespace.js'
 			),
-			'dependencies' => array(
-			)
 		),
 
 		'wikibase.api.FormatValueCaller' => $moduleTemplate + array(
