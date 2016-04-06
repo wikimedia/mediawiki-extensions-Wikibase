@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_dd529169",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-06T08:59:24Z",
+      "side": 1,
+      "message": "Could also remove this",
+      "revId": "2c8fe6c6028f4e329b4b440b31ca7a588d602ea2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_bd4fcdbf",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-06T08:59:24Z",
+      "side": 1,
+      "message": "and this",
+      "revId": "2c8fe6c6028f4e329b4b440b31ca7a588d602ea2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
