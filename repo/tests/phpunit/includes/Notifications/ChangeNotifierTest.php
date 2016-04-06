@@ -10,7 +10,6 @@ use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
@@ -46,7 +45,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	/**
 	 * @param ItemId $id
 	 *
-	 * @return EntityContent
+	 * @return ItemContent
 	 */
 	private function makeItemContent( ItemId $id ) {
 		$item = new Item( $id );
@@ -60,7 +59,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	 * @param ItemId $target
 	 *
 	 * @throws RuntimeException
-	 * @return EntityContent
+	 * @return ItemContent
 	 */
 	protected function makeItemRedirectContent( ItemId $id, ItemId $target ) {
 		$title = Title::newFromText( $target->getSerialization() );
@@ -236,7 +235,9 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$parent = $this->makeRevision( $oldContent, $user, $revisionId - 1, $timestamp );
 
 		$content = $this->makeItemContent( $oldContent->getEntityId() );
-		$content->getEntity()->setLabel( 'en', 'Foo' );
+		/** @var Item $item */
+		$item = $content->getEntity();
+		$item->setLabel( 'en', 'Foo' );
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier();
