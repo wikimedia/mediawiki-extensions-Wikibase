@@ -20,8 +20,6 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 	public function testGetEntityParserOutputGenerator() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 
-		$testUser = new \TestUser( 'Wikibase User' );
-
 		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator(
 			'en', true
 		);

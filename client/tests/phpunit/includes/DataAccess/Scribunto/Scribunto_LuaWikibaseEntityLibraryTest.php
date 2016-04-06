@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use LuaSandboxFunction;
+use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\WikibaseClient;
