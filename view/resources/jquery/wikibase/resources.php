@@ -350,7 +350,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'parentheses',
-				'wikibase-propertyedittool-counter-entrieslabel',
+				'wikibase-sitelinks-counter',
 				'wikibase-propertyedittool-counter-pending-tooltip',
 			),
 		),
@@ -422,7 +422,7 @@ return call_user_func( function() {
 				'wikibase-statementview-rank-preferred',
 				'wikibase-statementview-rank-normal',
 				'wikibase-statementview-rank-deprecated',
-				'wikibase-statementview-referencesheading-pendingcountersubject',
+				'wikibase-statementview-referencescounter',
 				'wikibase-statementview-referencesheading-pendingcountertooltip',
 			),
 		),
