@@ -14,7 +14,7 @@ define( [
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
 	QUnit.test( 'Basic checks', function( assert ) {
-		assert.expect( 12 );
+		assert.expect( 14 );
 		var c;
 
 		assert.throws(
@@ -59,6 +59,12 @@ define( [
 			'Verified getPrecision()'
 		);
 
+		assert.equal(
+			c.getGlobe(),
+			'http://www.wikidata.org/entity/Q2',
+			'Verified getGlobe()'
+		);
+
 		assert.deepEqual(
 			c.getDecimal(),
 			{ latitude: 1.5, longitude: 1.5, precision: 0.1 },
@@ -92,10 +98,23 @@ define( [
 			'Verified precision is null'
 		);
 
+		// test with custom globe
+		c = new globeCoordinate.GlobeCoordinate( {
+			latitude: 20,
+			longitude: 25.5,
+			globe: 'http://www.wikidata.org/entity/Q313'
+		} );
+
+		assert.equal(
+			c.getGlobe(),
+			'http://www.wikidata.org/entity/Q313',
+			'Verified getGlobe()'
+		);
+
 	} );
 
 	QUnit.test( 'Strict (in)equality', function( assert ) {
-		assert.expect( 121 );
+		assert.expect( 169 );
 		var gcDefs = [
 				{ latitude: 0, longitude: 0, precision: 1 },
 				{ latitude: -3, longitude: 2, precision: 1 },
@@ -107,7 +126,9 @@ define( [
 				{ latitude: 1.00028, longitude: 0, precision: 1 / 3600 },
 				{ latitude: 1.0005, longitude: 0, precision: 1 / 36000 },
 				{ latitude: 89.9, longitude: -0.00031, precision: 1 / 3600000 },
-				{ latitude: 5, longitude: -0.00292, precision: 1 / 36000 }
+				{ latitude: 5, longitude: -0.00292, precision: 1 / 36000 },
+				{ latitude: 5, longitude: 2, precision: 1, globe: 'http://www.wikidata.org/entity/Q2' },
+				{ latitude: 5, longitude: 2, precision: 1, globe: 'http://www.wikidata.org/entity/Q313' }
 			],
 			c1, c2;
 
@@ -120,6 +141,8 @@ define( [
 				if( gcDef1.latitude === gcDef2.latitude
 					&& gcDef1.longitude === gcDef2.longitude
 					&& gcDef1.precision === gcDef2.precision
+					&& ( gcDef1.globe || 'http://www.wikidata.org/entity/Q2' ) ===
+						( gcDef2.globe || 'http://www.wikidata.org/entity/Q2' )
 				) {
 					assert.ok(
 						c1.equals( c2 ),
