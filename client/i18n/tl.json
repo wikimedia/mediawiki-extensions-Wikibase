@@ -8,10 +8,14 @@
 	},
 	"wikibase-client-desc": "Kliyente para sa dugtong na Wikibase",
 	"tooltip-t-wikibase": "Kawing patungo sa konektadong aytem sa repositoryo ng datos",
+	"wikibase-comment-update": "Nagbago ang {{WBREPONAME}} item",
 	"wikibase-dataitem": "Item na {{WBREPONAME}}",
 	"wikibase-editlinks": "Baguhin ang mga kawing",
 	"wikibase-editlinkstitle": "Baguhin ang mga kawing inter-wika",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipakita",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Pagbabagong ginawa sa pamamagitan ng {{WBREPONAME}}",
 	"wikibase-otherprojects": "Iba pang mga proyekto"
 }
