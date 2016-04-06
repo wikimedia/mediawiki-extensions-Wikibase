@@ -306,7 +306,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		var $counterMsg = wb.utilities.ui.buildPendingCounter(
 			$items.length - $pendingItems.length,
 			$pendingItems.length,
-			'wikibase-propertyedittool-counter-entrieslabel',
+			'wikibase-sitelinks-counter',
 			'wikibase-propertyedittool-counter-pending-tooltip'
 		);
 

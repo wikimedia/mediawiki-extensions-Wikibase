@@ -619,7 +619,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var $counterMsg = wb.utilities.ui.buildPendingCounter(
 			numberOfValues,
 			numberOfPendingValues,
-			'wikibase-statementview-referencesheading-pendingcountersubject',
+			'wikibase-statementview-referencescounter',
 			'wikibase-statementview-referencesheading-pendingcountertooltip' );
 
 		// update counter, don't touch the toggle!

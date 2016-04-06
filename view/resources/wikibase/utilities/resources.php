@@ -47,11 +47,7 @@ return call_user_func( function() {
 				'wikibase',
 				'jquery.tipsy',
 				'mediawiki.language',
-			),
-			'messages' => array(
-				'wikibase-ui-pendingquantitycounter-nonpending',
-				'wikibase-ui-pendingquantitycounter-pending',
-				'wikibase-ui-pendingquantitycounter-pending-pendingsubpart',
+				'mediawiki.jqueryMsg'
 			),
 		),
 
