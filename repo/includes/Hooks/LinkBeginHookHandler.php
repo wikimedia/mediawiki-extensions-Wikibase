@@ -94,9 +94,14 @@ class LinkBeginHookHandler {
 	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query,
 		&$options, &$ret
 	) {
-		$handler = self::newFromGlobalState();
 		$context = RequestContext::getMain();
+		if ( !$context->hasTitle() ) {
+			// Short-circuit this hook if no title is
+			// set in the main context (T131176)
+			return true;
+		}
 
+		$handler = self::newFromGlobalState();
 		$handler->doOnLinkBegin( $target, $html, $customAttribs, $context );
 
 		return true;
