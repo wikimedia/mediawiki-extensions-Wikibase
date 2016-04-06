@@ -157,9 +157,11 @@ class SiteLinksView {
 			wfMessage( 'wikibase-sitelinks-' . $group )->parse(),
 			wfMessage( 'parentheses',
 				wfMessage(
-					'wikibase-ui-pendingquantitycounter-nonpending',
-					wfMessage( 'wikibase-propertyedittool-counter-entrieslabel', $count ),
-					$count
+					'wikibase-sitelinks-counter',
+					$count, // FIXME: NumberLocalizer
+					0, // FIXME: NumberLocalizer
+					'',
+					''
 				)
 			),
 			$this->templateFactory->render(

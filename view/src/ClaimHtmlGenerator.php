@@ -203,13 +203,13 @@ class ClaimHtmlGenerator {
 		$referenceCount = count( $statement->getReferences() );
 
 		if ( !array_key_exists( $referenceCount, $this->referenceHeadings ) ) {
-			$formattedReferenceCount = $this->numberLocalizer->localizeNumber( $referenceCount );
 			$this->referenceHeadings[ $referenceCount ] = wfMessage(
-				'wikibase-ui-pendingquantitycounter-nonpending',
-				wfMessage(
-					'wikibase-statementview-referencesheading-pendingcountersubject'
-				)->params( $formattedReferenceCount )->text()
-			)->params( $formattedReferenceCount )->text();
+				'wikibase-statementview-references-counter',
+				$this->numberLocalizer->localizeNumber( $referenceCount ),
+				$this->numberLocalizer->localizeNumber( 0 ),
+				'',
+				''
+			)->text();
 		}
 
 		return $this->referenceHeadings[ $referenceCount ];
