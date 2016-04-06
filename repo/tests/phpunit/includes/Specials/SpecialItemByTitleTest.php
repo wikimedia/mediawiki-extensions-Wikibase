@@ -10,6 +10,7 @@ use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Specials\SpecialItemByTitle;
@@ -46,6 +47,18 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	}
 
 	/**
+	 * @return LanguageNameLookup
+	 */
+	private function getMockLanguageNameLookup() {
+		$mock = $this->getMock( LanguageNameLookup::class );
+		$mock->expects( $this->any() )
+			->method( 'getName' )
+			->will( $this->returnValue( '<LANG>' ) );
+
+		return $mock;
+	}
+
+	/**
 	 * @return SiteLinkLookup
 	 */
 	private function getMockSiteLinkLookup() {
@@ -74,7 +87,12 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			return $site;
 		};
 
-		$mockSiteList = $this->getMock( SiteList::class );
+		$mockSiteList = $this->getMockBuilder( SiteList::class )
+			->setConstructorArgs( array( array(
+				$getSite( 'dewiki' ),
+				$getSite( 'enwiki' )
+			) ) )
+			->getMock();
 		$mockSiteList->expects( $this->any() )
 			->method( 'getSite' )
 			->will( $this->returnCallback( $getSite ) );
@@ -103,6 +121,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 
 		$page->initServices(
 			$this->getMockTitleLookup(),
+			$this->getMockLanguageNameLookup(),
 			$this->getMockSiteStore(),
 			$this->getMockSiteLinkLookup()
 		);
