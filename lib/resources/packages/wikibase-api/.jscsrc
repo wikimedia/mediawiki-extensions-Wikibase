@@ -30,7 +30,6 @@
 		"checkAnnotations": {
 			"extra": {
 				//"TODO:": "some",
-				"licence": "some",
 				"class": "some",
 				"since": "some",
 				"author": "some",
@@ -47,7 +46,7 @@
 				"member": "some",
 				"method": "some",
 				"extends": "some",
-				//"license": "some",
+				"license": "some",
 				//"note:": "some",
 				//"option": "some",
 				"see": "some"
