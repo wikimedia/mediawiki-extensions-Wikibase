@@ -33,44 +33,28 @@
 	 *
 	 * @param {number} fixedQuantity
 	 * @param {number} pendingQuantity
-	 * @param {string} kindOfQuantityMessage Message string of a message expressing the nature of
-	 *        the quantity, e.g. a message which would return 'items' for displaying something like
-	 *        "3 +1 items". The message will receive as parameter $1 the total quantity (fixed +
-	 *        pending).
+	 * @param {string} mainMessage Message name of a message for the whole counter. The message
+	 *        will receive as parameter $1 the fixed quantity, and as parameter $2 the number of
+	 *        pending items.
 	 * @param {string} pendingQuantityTooltipMessage Message string of a message which will be
 	 *        displayed in the tooltip which will be appended to the number of pending quantity.
-	 *        Parameter $1 will be the number of pending quantity, $2 will be the fixed quantity
-	 *        and $3 the sum of both.
+	 *        Parameter $1 will be the number of pending quantity.
 	 * @return {jQuery} The formatted counter output. Does not have a root node, collection of
 	 *         multiple DOM elements.
 	 */
 	wb.utilities.ui.buildPendingCounter = function(
-		fixedQuantity, pendingQuantity, kindOfQuantityMessage, pendingQuantityTooltipMessage
+		fixedQuantity, pendingQuantity, mainMessage, pendingQuantityTooltipMessage
 	) {
 		var fqNumMsg = mw.language.convertNumber( fixedQuantity ),
-			pqNumMsg = mw.language.convertNumber( pendingQuantity ),
-			tqNumMsg = mw.language.convertNumber( fixedQuantity + pendingQuantity ),
-			qTypeLabel = kindOfQuantityMessage ? mw.msg( kindOfQuantityMessage, tqNumMsg ) : '';
+			pqNumMsg = mw.language.convertNumber( pendingQuantity );
 
-		var msg = !pendingQuantity || pendingQuantity === '0'
-			? mw.msg( 'wikibase-ui-pendingquantitycounter-nonpending', qTypeLabel, fqNumMsg )
-			: mw.msg( 'wikibase-ui-pendingquantitycounter-pending',
-				qTypeLabel,
-				fqNumMsg,
-				'__3__' // can't insert html here since it would be escaped!
-			);
-
-		// replace __3__ with a span we can grab next
-		var $msg = $( ( '<span>' + msg + '</span>' ).replace( /__3__/g, '<span/>' ) ),
-			$msgSpan = $msg.children( 'span' );
+		var $msg = $( '<span/>' ).html( mw.msg( mainMessage, fqNumMsg, pqNumMsg ).replace( /TIPSY_PLACEHOLDER\(([^)]+)\)/, '<span>$1</span>' ) );
+		var $msgSpan = $msg.children( 'span' );
 
 		if ( $msgSpan.length > 0 ) {
 			$msgSpan.attr(
 				'title', // the message displayed in the tooltip
-				mw.msg( pendingQuantityTooltipMessage, pqNumMsg, fqNumMsg, tqNumMsg )
-			);
-			$msgSpan.text( // the '+1' part, displaying the pending quantity
-				mw.msg( 'wikibase-ui-pendingquantitycounter-pending-pendingsubpart', pqNumMsg )
+				mw.msg( pendingQuantityTooltipMessage, pqNumMsg )
 			);
 			$msgSpan.tipsy( {
 				gravity: ( IS_RTL ? 'ne' : 'nw' )
