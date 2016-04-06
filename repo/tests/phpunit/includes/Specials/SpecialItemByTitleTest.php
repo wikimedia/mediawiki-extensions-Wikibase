@@ -120,7 +120,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 				'id' => 'wb-itembytitle-sitename',
 			),
 			'child' => array(
-				'tag' => 'input',
+				'tag' => 'select',
 				'attributes' => array(
 					'name' => 'site',
 				)
@@ -152,7 +152,13 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$cases['empty'] = array( '', null, $matchers );
 
 		// enwiki/NotFound  (mock returns null for everything but dewiki)
-		$matchers['site']['child'][0]['attributes']['value'] = 'enwiki';
+		$matchers['site']['child']['child'] = array(
+			'tag' => 'option',
+			'attributes' => array(
+				'value' => 'enwiki',
+				'selected' => 'selected'
+			)
+		);
 		$matchers['page']['child'][0]['attributes']['value'] = 'NotFound';
 
 		$cases['enwiki/NotFound'] = array( 'enwiki/NotFound', null, $matchers );
