@@ -35,7 +35,7 @@ function createFingerprint() {
 function createEntitytermsview( options ) {
 	options = $.extend( {
 		value: createFingerprint(),
-		userLanguages: [ 'de', 'en' ],
+		userTermsLanguages: [ 'de', 'en' ],
 		entityChangersFactory: {
 			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
 			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
