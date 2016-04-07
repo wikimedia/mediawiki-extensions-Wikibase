@@ -143,9 +143,9 @@
 			var gc1Iso6709 = globeCoordinate.iso6709( this.getDecimal() ),
 				gc2Iso6709 = globeCoordinate.iso6709( otherGlobeCoordinate.getDecimal() );
 
-			return Math.abs( this.getPrecision() - otherGlobeCoordinate.getPrecision() ) < 0.00000001
+			return Math.abs( this._precision - otherGlobeCoordinate._precision ) < 0.00000001
 				&& gc1Iso6709 === gc2Iso6709
-				&& this.getGlobe() === otherGlobeCoordinate.getGlobe();
+				&& this._globe === otherGlobeCoordinate._globe;
 		}
 	};
 

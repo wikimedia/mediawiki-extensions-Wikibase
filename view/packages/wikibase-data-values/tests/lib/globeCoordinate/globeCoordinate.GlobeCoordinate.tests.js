@@ -14,7 +14,7 @@ define( [
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
 	QUnit.test( 'Basic checks', function( assert ) {
-		assert.expect( 14 );
+		assert.expect( 13 );
 		var c;
 
 		assert.throws(
@@ -97,9 +97,11 @@ define( [
 			null,
 			'Verified precision is null'
 		);
+	} );
 
-		// test with custom globe
-		c = new globeCoordinate.GlobeCoordinate( {
+	QUnit.test( 'Costum globe', function( assert ) {
+		assert.expect( 2 );
+		var c = new globeCoordinate.GlobeCoordinate( {
 			latitude: 20,
 			longitude: 25.5,
 			globe: 'http://www.wikidata.org/entity/Q313'
@@ -111,6 +113,10 @@ define( [
 			'Verified getGlobe()'
 		);
 
+		assert.ok(
+			typeof c.getDecimal().globe === 'undefined',
+			'Verified getDecimal()'
+		);
 	} );
 
 	QUnit.test( 'Strict (in)equality', function( assert ) {
