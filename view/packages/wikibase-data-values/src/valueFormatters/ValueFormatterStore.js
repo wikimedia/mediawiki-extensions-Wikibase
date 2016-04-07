@@ -18,7 +18,7 @@ function assertIsValueFormatterConstructor( Formatter ) {
  * Store managing ValueFormatter instances.
  * @class valueFormatters.ValueFormatterStore
  * @since 0.1
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

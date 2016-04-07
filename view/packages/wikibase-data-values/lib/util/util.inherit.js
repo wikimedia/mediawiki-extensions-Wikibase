@@ -40,7 +40,7 @@ this.util = this.util || {};
 
 	/**
 	 * Helper for prototypical inheritance.
-	 * @licence GNU GPL v2+
+	 * @license GPL-2.0+
 	 * @author Daniel Werner < daniel.werner@wikimedia.de >
 	 *
 	 * @param {string|Function} [nameOrBase] The name of the new constructor (currently not used).

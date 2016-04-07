@@ -8,7 +8,7 @@ var PARENT = vp.ValueParser;
  * @class valueParsers.StringParser
  * @extends valueParsers.ValueParser
  * @since 0.1
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Werner < danweetz@web.de >
  *
  * @constructor

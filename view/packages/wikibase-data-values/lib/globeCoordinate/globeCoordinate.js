@@ -4,7 +4,7 @@
  * VERSION: 0.1
  * @class globeCoordinate
  * @singleton
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Denny Vrandečić
  * @author H. Snater < mediawiki@snater.com >
  */

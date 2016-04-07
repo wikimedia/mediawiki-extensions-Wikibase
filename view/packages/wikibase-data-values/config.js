@@ -2,7 +2,7 @@
  * RequireJS configuration
  * Basic RequireJS configuration object expanded with the list of test modules.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
 this.config = ( function() {

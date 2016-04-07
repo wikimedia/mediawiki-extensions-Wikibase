@@ -1,7 +1,7 @@
 /**
  * PhantomJS test runner module corresponding to the native test runner implementation.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
 

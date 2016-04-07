@@ -8,7 +8,7 @@ var PARENT = vf.ValueFormatter;
  * @class valueFormatters.StringFormatter
  * @extends valueFormatters.ValueFormatter
  * @since 0.1
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

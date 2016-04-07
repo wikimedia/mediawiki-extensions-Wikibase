@@ -2,7 +2,7 @@
  * PhantomJS test runner.
  * PhantomJS will exit with an error code if one ore more tests fail.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
 /* global phantom, require, console */

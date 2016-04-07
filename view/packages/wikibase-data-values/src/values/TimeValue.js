@@ -30,7 +30,7 @@ var PARENT = dv.DataValue;
  * @class dataValues.TimeValue
  * @extends dataValues.DataValue
  * @since 0.1
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  * @author Thiemo Mättig
  *
