@@ -18,6 +18,7 @@ use Wikibase\View\EntityTermsView;
 use Wikibase\View\HtmlSnakFormatterFactory;
 use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
+use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\PropertyView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\ViewFactory;
@@ -76,7 +77,8 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			new BasicNumberLocalizer(),
 			array(),
 			array(),
-			array()
+			array(),
+			$this->getMock( LocalizedTextProvider::class )
 		);
 	}
 

@@ -35,6 +35,11 @@ class ItemView extends EntityView {
 	private $siteLinkGroups;
 
 	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
+	/**
 	 * @see EntityView::__construct
 	 *
 	 * @param TemplateFactory $templateFactory
@@ -44,6 +49,7 @@ class ItemView extends EntityView {
 	 * @param string $languageCode
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
+	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -52,13 +58,15 @@ class ItemView extends EntityView {
 		StatementSectionsView $statementSectionsView,
 		$languageCode,
 		SiteLinksView $siteLinksView,
-		array $siteLinkGroups
+		array $siteLinkGroups,
+		LocalizedTextProvider $textProvider
 	) {
 		parent::__construct( $templateFactory, $entityTermsView, $languageDirectionalityLookup, $languageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinksView = $siteLinksView;
 		$this->siteLinkGroups = $siteLinkGroups;
+		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -117,7 +125,7 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	protected function getHtmlForPageImage() {
-		$helpText = wfMessage( 'wikibase-pageimage-helptext' )->text();
+		$helpText = $this->textProvider->get( 'wikibase-pageimage-helptext' );
 		return $this->templateFactory->render(
 			'wikibase-pageimage',
 			htmlspecialchars( $helpText )

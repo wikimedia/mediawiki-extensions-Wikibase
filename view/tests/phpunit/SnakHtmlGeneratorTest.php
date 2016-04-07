@@ -11,6 +11,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\View\KeyNameLocalizedTextProvider;
 use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -54,7 +55,8 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		return new SnakHtmlGenerator(
 			TemplateFactory::getDefaultInstance(),
 			$snakFormatter,
-			$propertyIdFormatter
+			$propertyIdFormatter,
+			new KeyNameLocalizedTextProvider( 'lkt' )
 		);
 	}
 
