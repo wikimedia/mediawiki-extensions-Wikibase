@@ -138,14 +138,11 @@ class OutputPageBeforeHTMLHookHandler {
 			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
 
 			$out->addJsConfigVars(
-				'wbUserSpecifiedLanguages',
-				// All user-specified languages, that are valid term languages
+				'wbUserTermsLanguages',
+				// All user languages that are valid term languages
 				// Reindex the keys so that javascript still works if an unknown
 				// language code in the babel box causes an index to miss
-				array_values( array_intersect(
-					$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
-					$this->termsLanguages->getLanguages()
-				) )
+				array_values( $termsLanguages )
 			);
 		}
 	}
@@ -157,8 +154,6 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @return EntityViewPlaceholderExpander
 	 */
 	private function getEntityViewPlaceholderExpander( OutputPage $out, array $termsLanguages ) {
-		$languageCode = $out->getLanguage()->getCode();
-
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		$revisionId = $out->getRevisionId();
 		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
@@ -173,7 +168,7 @@ class OutputPageBeforeHTMLHookHandler {
 			$labelsProvider,
 			$descriptionsProvider,
 			$aliasesProvider,
-			array_merge( [ $languageCode ], $termsLanguages ),
+			$termsLanguages,
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $out->getLanguage()->getCode() )
 		);

@@ -345,7 +345,7 @@
 			formatterFactory = {},
 			messageProvider = {},
 			parserStore = {},
-			userLanguages = [],
+			userTermsLanguages = [],
 			viewFactory = new ViewFactory(
 				contentLanguages,
 				dataTypeStore,
@@ -357,7 +357,7 @@
 				formatterFactory,
 				messageProvider,
 				parserStore,
-				userLanguages
+				userTermsLanguages
 			),
 			statementGuid = 'statementGuid',
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
@@ -438,7 +438,8 @@
 			formatterFactory = {},
 			messageProvider = {},
 			parserStore = {},
-			userLanguages = [],
+			userTermsLanguages = [],
+			userLanguage = '',
 			viewFactory = new ViewFactory(
 				contentLanguages,
 				dataTypeStore,
@@ -450,7 +451,8 @@
 				formatterFactory,
 				messageProvider,
 				parserStore,
-				userLanguages
+				userTermsLanguages,
+				userLanguage
 			),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
@@ -492,7 +494,7 @@
 			expertStore,
 			formatterFactory,
 			parserStore,
-			userLanguages[0],
+			userLanguage,
 			messageProvider,
 			contentLanguages
 		);
@@ -517,7 +519,8 @@
 			formatterFactory = {},
 			messageProvider = {},
 			parserStore = {},
-			userLanguages = [],
+			userTermsLanguages = [],
+			userLanguage = '',
 			viewFactory = new ViewFactory(
 				contentLanguages,
 				dataTypeStore,
@@ -529,7 +532,8 @@
 				formatterFactory,
 				messageProvider,
 				parserStore,
-				userLanguages
+				userTermsLanguages,
+				userLanguage
 			),
 			options = {},
 			$dom = $( '<div/>' );
@@ -559,7 +563,7 @@
 			expertStore,
 			formatterFactory,
 			parserStore,
-			userLanguages[0],
+			userLanguage,
 			messageProvider,
 			contentLanguages
 		);
@@ -576,7 +580,7 @@
 			entityChangersFactory = {},
 			message = 'message',
 			messageProvider = { getMessage: function() { return message; } },
-			userLanguages = [],
+			userTermsLanguages = [],
 			viewFactory = new ViewFactory(
 				contentLanguages,
 				null,
@@ -588,7 +592,7 @@
 				null,
 				messageProvider,
 				null,
-				userLanguages
+				userTermsLanguages
 			),
 			$dom = $( '<div/>' );
 
@@ -599,7 +603,7 @@
 
 		sinon.assert.calledWith( $.wikibase.entitytermsview, sinon.match( {
 			value: fingerprint,
-			userLanguages: userLanguages,
+			userTermsLanguages: userTermsLanguages,
 			entityChangersFactory: entityChangersFactory,
 			helpMessage: message
 		} ) );
