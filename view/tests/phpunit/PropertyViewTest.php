@@ -11,6 +11,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LanguageDirectionalityLookup;
+use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\PropertyView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -85,7 +86,8 @@ class PropertyViewTest extends EntityViewTest {
 				->disableOriginalConstructor()
 				->getMock(),
 			$this->getDataTypeFactory(),
-			'en'
+			'en',
+			$this->getMock( LocalizedTextProvider::class )
 		);
 
 		return array(

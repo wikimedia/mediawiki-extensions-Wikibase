@@ -2,11 +2,12 @@
 
 namespace Wikibase\View\Tests;
 
-use MediaWikiTestCase;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
@@ -26,7 +27,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * @author Daniel Kinzler
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
+class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider getAddStatementToGroupSectionProvider
@@ -112,7 +113,11 @@ class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
-		return new ToolbarEditSectionGenerator( $specialPageLinker, $templateFactory );
+		return new ToolbarEditSectionGenerator(
+			$specialPageLinker,
+			$templateFactory,
+			$this->getMock( LocalizedTextProvider::class )
+		);
 	}
 
 }
