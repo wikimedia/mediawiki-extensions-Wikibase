@@ -117,8 +117,11 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	protected function getHtmlForPageImage() {
-		$helpText = wfMessage( 'wikibase-pageimage-helptext' )->parse();
-		return $this->templateFactory->render( 'wikibase-pageimage', $helpText );
+		$helpText = wfMessage( 'wikibase-pageimage-helptext' )->text();
+		return $this->templateFactory->render(
+			'wikibase-pageimage',
+			htmlspecialchars( $helpText )
+		);
 	}
 
 }

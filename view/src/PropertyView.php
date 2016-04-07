@@ -72,9 +72,10 @@ class PropertyView extends EntityView {
 			. $this->statementSectionsView->getHtml( $property->getStatements() );
 
 		$footer = wfMessage( 'wikibase-property-footer' );
+		$footer = $footer->exists() ? $footer->parse() : '';
 
-		if ( !$footer->isBlank() ) {
-			$html .= "\n" . $footer->parse();
+		if ( $footer !== '' ) {
+			$html .= "\n" . $footer;
 		}
 
 		return $html;
@@ -90,7 +91,7 @@ class PropertyView extends EntityView {
 	private function getHtmlForDataType( $propertyType ) {
 
 		$html = $this->templateFactory->render( 'wb-section-heading',
-			wfMessage( 'wikibase-propertypage-datatype' )->escaped(),
+			htmlspecialchars( wfMessage( 'wikibase-propertypage-datatype' )->text() ),
 			'datatype',
 			'wikibase-propertypage-datatype'
 		);
@@ -101,7 +102,7 @@ class PropertyView extends EntityView {
 			$dataTypeLabelHtml = htmlspecialchars( $dataType->getLabel( $this->languageCode ) );
 		} catch ( OutOfBoundsException $ex ) {
 			$dataTypeLabelHtml .= '<span class="error">' .
-				wfMessage( 'wikibase-propertypage-bad-datatype', $propertyType )->escaped() .
+				htmlspecialchars( wfMessage( 'wikibase-propertypage-bad-datatype', $propertyType )->text() ) .
 				'</span>';
 		}
 		$html .= $this->templateFactory->render( 'wikibase-propertyview-datatype', $dataTypeLabelHtml );
