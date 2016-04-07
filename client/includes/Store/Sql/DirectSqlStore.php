@@ -79,7 +79,7 @@ class DirectSqlStore implements ClientStore {
 	private $cacheKeyPrefix;
 
 	/**
-	 * @var int
+	 * @var string
 	 */
 	private $cacheType;
 
