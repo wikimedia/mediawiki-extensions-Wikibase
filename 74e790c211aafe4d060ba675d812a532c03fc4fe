@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_db5d6f4d",
+        "filename": "docs/rdf-binding.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-07T20:10:33Z",
+      "side": 1,
+      "message": "Perhaps make it clear that this is the format version, not the ontology version... and explain the difference.",
+      "revId": "74e790c211aafe4d060ba675d812a532c03fc4fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
