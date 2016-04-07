@@ -16,6 +16,24 @@
       "revId": "0d0207c78d2d255a469e9cf87fe06e219c60bd80",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_7f36d2e5",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-07T10:35:39Z",
+      "side": 1,
+      "message": "mediawiki-config]$ grep -r wgMainCacheType\nwmf-config/mc-labs.php:$wgMainCacheType \u003d \"memcached-pecl\";\nwmf-config/mc.php:$wgMainCacheType \u003d \u0027memcached-pecl\u0027;\n\nAccording to the documentation in DefaultSettings it can actually be both (one of the constants or a string).",
+      "parentUuid": "ce38dbff_3f1d6a67",
+      "revId": "0d0207c78d2d255a469e9cf87fe06e219c60bd80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
