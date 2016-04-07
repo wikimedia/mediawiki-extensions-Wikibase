@@ -13,7 +13,7 @@ use Wikibase\DataModel\PropertyIdProvider;
  *
  * @since 1.0
  *
- * @license GNU GpL v2+
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class ByPropertyIdGrouper {

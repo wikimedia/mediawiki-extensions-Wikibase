@@ -13,7 +13,7 @@ use Wikibase\DataModel\SiteLinkList;
 /**
  * @covers Wikibase\DataModel\Services\Diff\Internal\SiteLinkListPatcher
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SiteLinkListPatcherTest extends \PHPUnit_Framework_TestCase {

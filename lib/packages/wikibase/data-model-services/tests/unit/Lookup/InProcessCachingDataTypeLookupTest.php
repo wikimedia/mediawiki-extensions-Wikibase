@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class InProcessCachingDataTypeLookupTest extends PHPUnit_Framework_TestCase {

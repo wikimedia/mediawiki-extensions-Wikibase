@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\Property;
 /**
  * @covers Wikibase\DataModel\Services\Diff\ItemPatcher
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemPatcherTest extends \PHPUnit_Framework_TestCase {

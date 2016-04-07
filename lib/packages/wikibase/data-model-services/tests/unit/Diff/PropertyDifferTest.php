@@ -9,7 +9,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 /**
  * @covers Wikibase\DataModel\Services\Diff\PropertyDiffer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class PropertyDifferTest extends \PHPUnit_Framework_TestCase {

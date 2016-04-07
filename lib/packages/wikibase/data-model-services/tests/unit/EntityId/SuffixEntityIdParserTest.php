@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 /**
  * @covers Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class SuffixEntityIdParserTest extends \PHPUnit_Framework_TestCase {

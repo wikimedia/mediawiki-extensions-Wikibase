@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
  *
  * @since 3.1
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class PropertyDataTypeMatcher {

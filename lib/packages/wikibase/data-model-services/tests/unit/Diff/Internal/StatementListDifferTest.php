@@ -15,7 +15,7 @@ use Wikibase\DataModel\Statement\StatementList;
 /**
  * @covers Wikibase\DataModel\Services\Diff\Internal\StatementListDiffer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class StatementListDifferTest extends \PHPUnit_Framework_TestCase {

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class EntityRetrievingDataTypeLookupTest extends \PHPUnit_Framework_TestCase {

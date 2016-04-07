@@ -5,7 +5,7 @@ namespace Wikibase\DataModel\Services\Lookup;
 /**
  * @since 2.1
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
