@@ -129,4 +129,10 @@ class UpdateRepoOnDeleteTest extends PHPUnit_Framework_TestCase {
 		$updateRepo->injectJob( $this->getJobQueueGroupMock() );
 	}
 
+	public function testIsApplicable() {
+		$updateRepo = $this->getNewUpdateRepoOnDelete();
+
+		$this->assertTrue( $updateRepo->isApplicable() );
+	}
+
 }
