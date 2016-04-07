@@ -30,6 +30,7 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class EntityViewPlaceholderExpander {
 
@@ -84,6 +85,11 @@ class EntityViewPlaceholderExpander {
 	private $languageNameLookup;
 
 	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
@@ -93,6 +99,7 @@ class EntityViewPlaceholderExpander {
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -103,7 +110,8 @@ class EntityViewPlaceholderExpander {
 		AliasesProvider $aliasesProvider = null,
 		UserLanguageLookup $userLanguageLookup,
 		ContentLanguages $termsLanguages,
-		LanguageNameLookup $languageNameLookup
+		LanguageNameLookup $languageNameLookup,
+		LocalizedTextProvider $textProvider
 	) {
 		$this->user = $user;
 		$this->uiLanguage = $uiLanguage;
@@ -114,6 +122,7 @@ class EntityViewPlaceholderExpander {
 		$this->templateFactory = $templateFactory;
 		$this->termsLanguages = $termsLanguages;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -216,7 +225,8 @@ class EntityViewPlaceholderExpander {
 			$this->templateFactory,
 			null,
 			$this->languageNameLookup,
-			$this->uiLanguage->getCode()
+			$this->uiLanguage->getCode(),
+			$this->textProvider
 		);
 
 		$html = $entityTermsView->getEntityTermsForLanguageListView(
