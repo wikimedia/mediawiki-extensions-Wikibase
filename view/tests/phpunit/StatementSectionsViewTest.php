@@ -3,10 +3,11 @@
 namespace Wikibase\View\Tests;
 
 use InvalidArgumentException;
-use MediaWikiTestCase;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -25,13 +26,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
-class StatementSectionsViewTest extends MediaWikiTestCase {
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setUserLang( 'qqx' );
-	}
+class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 
 	private function newInstance( array $statementLists = array() ) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
@@ -53,7 +48,8 @@ class StatementSectionsViewTest extends MediaWikiTestCase {
 		return new StatementSectionsView(
 			$templateFactory,
 			$statementGrouper,
-			$statementListView
+			$statementListView,
+			new DummyLocalizedTextProvider( 'lkt' )
 		);
 	}
 

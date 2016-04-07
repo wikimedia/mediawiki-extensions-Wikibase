@@ -2,7 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
-use MediaWikiTestCase;
+use PHPUnit_Framework_TestCase;
 use Site;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
@@ -30,13 +31,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig
  */
-class SiteLinksViewTest extends MediaWikiTestCase {
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setUserLang( 'qqx' );
-	}
+class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 
 	public function testNoGroups() {
 		$html = $this->newInstance()->getHtml( array(), null, array() );
@@ -157,7 +152,8 @@ class SiteLinksViewTest extends MediaWikiTestCase {
 				'Q42' => 'wb-badge-featuredarticle',
 				'Q12' => 'wb-badge-goodarticle'
 			),
-			array( 'special group' )
+			array( 'special group' ),
+			new DummyLocalizedTextProvider( 'lkt' )
 		);
 	}
 
