@@ -34,18 +34,11 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @return OutputPageBeforeHTMLHookHandler
 	 */
-	private function getHookHandler( $uiLanguageCode ) {
+	private function getHookHandler( $languageNameLookup, $uiLanguageCode ) {
 		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
-		$userLanguageLookup->expects( $this->once() )
-			->method( 'getUserSpecifiedLanguages' )
-			->will( $this->returnValue( [ 'de', 'es', 'ru' ] ) );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( array_unique( [ $uiLanguageCode, 'de', 'es', 'ru' ] ) ) );
-
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->never() )
-			->method( 'getName' );
 
 		$itemId = new ItemId( 'Q1' );
 
@@ -64,7 +57,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
 			$userLanguageLookup,
-			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
+			new StaticContentLanguages( [ 'termonly', 'en', 'es', 'ru' ] ),
 			$entityRevisionLookup,
 			$languageNameLookup,
 			$outputPageEntityIdReader
@@ -73,28 +66,66 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 		return $outputPageBeforeHTMLHookHandler;
 	}
 
-	/**
-	 * Integration test mostly testing that things don't fatal/ throw.
-	 */
-	public function testOutputPageBeforeHTMLHookHandler() {
-		$context = new DerivativeContext( RequestContext::getMain() );
-		$outputPageBeforeHTMLHookHandler = $this->getHookHandler( $context->getLanguage()->getCode() );
+	public function testOutputPageBeforeHTMLHookHandler_contentOnlyUiLanguage() {
+		$languageCode = 'termonly';
 
-		$html = '';
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setLanguage( $languageCode );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup->expects( $this->exactly( 3 ) )
+			->method( 'getName' );
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler( $languageNameLookup, $languageCode );
+
+		$html = 'termbox';
 		$out = new OutputPage( $context );
 		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
 		$out->setProperty(
 			'wikibase-view-chunks',
-			array( array( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ) )
+			[
+				'termbox' => [ 'termbox' ]
+			]
 		);
 
 		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
 
-		// Verify the wbUserSpecifiedLanguages JS variable
+		// Verify the wbUserTermsLanguages JS variable
 		$jsConfigVars = $out->getJsConfigVars();
-		$wbUserSpecifiedLanguages = $jsConfigVars['wbUserSpecifiedLanguages'];
+		$wbUserTermsLanguages = $jsConfigVars['wbUserTermsLanguages'];
 
-		$this->assertSame( [ 'es', 'ru' ], $wbUserSpecifiedLanguages );
+		$this->assertSame( [ $languageCode, 'es', 'ru' ], $wbUserTermsLanguages );
+
+		$this->assertContains( 'wikibase-entitytermsforlanguageview-termonly', $html );
+	}
+
+	public function testOutputPageBeforeHTMLHookHandler_invalidUiLanguage() {
+		$languageCode = 'invalid';
+
+		$context = new DerivativeContext( RequestContext::getMain() );
+		$context->setLanguage( $languageCode );
+		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
+		$languageNameLookup->expects( $this->exactly( 2 ) )
+			->method( 'getName' );
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler( $languageNameLookup, $languageCode );
+
+		$html = 'termbox';
+		$out = new OutputPage( $context );
+		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
+		$out->setProperty(
+			'wikibase-view-chunks',
+			[
+				'termbox' => [ 'termbox' ]
+			]
+		);
+
+		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
+
+		// Verify the wbUserTermsLanguages JS variable
+		$jsConfigVars = $out->getJsConfigVars();
+		$wbUserTermsLanguages = $jsConfigVars['wbUserTermsLanguages'];
+
+		$this->assertSame( [ 'es', 'ru' ], $wbUserTermsLanguages );
+
+		$this->assertNotContains( 'wikibase-entitytermsforlanguageview-invalid', $html );
 	}
 
 }
