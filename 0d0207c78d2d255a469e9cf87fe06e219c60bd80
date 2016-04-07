@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_3f1d6a67",
+        "filename": "client/includes/Store/Sql/DirectSqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-04-07T10:33:20Z",
+      "side": 1,
+      "message": "this defaults to $wgMainCacheType, which defaults to CACHE_NONE or is set to one of the other constants (e.g. CACHE_ANYTHING).  Think these are integers (e.g. -1).\n\nwhere do you see this is a string?",
+      "revId": "0d0207c78d2d255a469e9cf87fe06e219c60bd80",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
