@@ -53,18 +53,26 @@ class ClaimHtmlGenerator {
 	private $statementRankSelector = array();
 
 	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SnakHtmlGenerator $snakHtmlGenerator
 	 * @param NumberLocalizer $numberLocalizer
+	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		SnakHtmlGenerator $snakHtmlGenerator,
-		NumberLocalizer $numberLocalizer
+		NumberLocalizer $numberLocalizer,
+		LocalizedTextProvider $textProvider
 	) {
 		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->templateFactory = $templateFactory;
 		$this->numberLocalizer = $numberLocalizer;
+		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -204,10 +212,10 @@ class ClaimHtmlGenerator {
 
 		if ( !array_key_exists( $referenceCount, $this->referenceHeadings ) ) {
 			$formattedReferenceCount = $this->numberLocalizer->localizeNumber( $referenceCount );
-			$this->referenceHeadings[ $referenceCount ] = htmlspecialchars( wfMessage(
+			$this->referenceHeadings[ $referenceCount ] = htmlspecialchars( $this->textProvider->get(
 				'wikibase-statementview-referencescounter',
-				$formattedReferenceCount
-			)->text() );
+				[ $formattedReferenceCount ]
+			) );
 		}
 
 		return $this->referenceHeadings[ $referenceCount ];
@@ -232,7 +240,7 @@ class ClaimHtmlGenerator {
 				'wikibase-rankselector',
 				'ui-state-disabled',
 				'wikibase-rankselector-' . $rankName,
-				htmlspecialchars( wfMessage( 'wikibase-statementview-rank-' . $rankName )->text() )
+				htmlspecialchars( $this->textProvider->get( 'wikibase-statementview-rank-' . $rankName ) )
 			);
 
 			$this->statementRankSelector[ $rank ] = $rankSelector;

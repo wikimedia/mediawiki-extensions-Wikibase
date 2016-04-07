@@ -3,7 +3,7 @@
 namespace Wikibase\View\Tests;
 
 use DataValues\StringValue;
-use MediaWikiLangTestCase;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -33,15 +33,7 @@ use Wikibase\View\Template\TemplateRegistry;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class StatementGroupListViewTest extends MediaWikiLangTestCase {
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setMwGlobals( array(
-			'wgArticlePath' => '/wiki/$1'
-		) );
-	}
+class StatementGroupListViewTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetHtml() {
 		$propertyId = new PropertyId( 'P77' );

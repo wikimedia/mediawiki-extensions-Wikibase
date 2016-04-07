@@ -12,6 +12,7 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class StatementSectionsView {
 
@@ -30,14 +31,21 @@ class StatementSectionsView {
 	 */
 	private $statementListView;
 
+	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
 	public function __construct(
 		TemplateFactory $templateFactory,
 		StatementGrouper $statementGrouper,
-		StatementGroupListView $statementListView
+		StatementGroupListView $statementListView,
+		LocalizedTextProvider $textProvider
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->statementGrouper = $statementGrouper;
 		$this->statementListView = $statementListView;
+		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -92,7 +100,7 @@ class StatementSectionsView {
 		// TODO: Add link to SpecialPage that allows adding a new statement.
 		return $this->templateFactory->render(
 			'wb-section-heading',
-			htmlspecialchars( wfMessage( $messageKey )->text() ),
+			htmlspecialchars( $this->textProvider->get( $messageKey ) ),
 			$id,
 			$className
 		);
