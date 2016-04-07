@@ -85,7 +85,7 @@ class ClaimHtmlGenerator {
 
 		$rankHtml = $this->getRankSelector( $statement->getRank() );
 
-		$referencesHeading = $this->getReferencesHeading( $statement );
+		$referencesHeadingHtml = $this->getReferencesHeading( $statement );
 
 		$references = $statement->getReferences();
 		$referencesHtml = $this->getHtmlForReferences( $references );
@@ -97,7 +97,7 @@ class ClaimHtmlGenerator {
 			$mainSnakHtml,
 			$this->getHtmlForQualifiers( $statement->getQualifiers() ),
 			$editSectionHtml,
-			$referencesHeading,
+			$referencesHeadingHtml,
 			$referencesHtml,
 			count( $references ) ? 'wikibase-initially-collapsed' : ''
 		);
@@ -203,13 +203,13 @@ class ClaimHtmlGenerator {
 		$referenceCount = count( $statement->getReferences() );
 
 		if ( !array_key_exists( $referenceCount, $this->referenceHeadings ) ) {
-			$this->referenceHeadings[ $referenceCount ] = wfMessage(
+			$this->referenceHeadings[ $referenceCount ] = htmlspecialchars( wfMessage(
 				'wikibase-statementview-references-counter',
 				$this->numberLocalizer->localizeNumber( $referenceCount ),
 				$this->numberLocalizer->localizeNumber( 0 ),
 				'',
 				''
-			)->text();
+			)->text() );
 		}
 
 		return $this->referenceHeadings[ $referenceCount ];
@@ -218,7 +218,7 @@ class ClaimHtmlGenerator {
 	/**
 	 * @param int $rank
 	 *
-	 * @return string Text
+	 * @return string HTML
 	 */
 	private function getRankSelector( $rank ) {
 		if ( !array_key_exists( $rank, $this->statementRankSelector ) ) {
@@ -234,7 +234,7 @@ class ClaimHtmlGenerator {
 				'wikibase-rankselector',
 				'ui-state-disabled',
 				'wikibase-rankselector-' . $rankName,
-				wfMessage( 'wikibase-statementview-rank-' . $rankName )->escaped()
+				htmlspecialchars( wfMessage( 'wikibase-statementview-rank-' . $rankName )->text() )
 			);
 
 			$this->statementRankSelector[ $rank ] = $rankSelector;

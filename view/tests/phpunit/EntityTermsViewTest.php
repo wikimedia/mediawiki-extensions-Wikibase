@@ -262,7 +262,7 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	public function testGetEntityTermsForLanguageListView_isEscaped() {
 		MessageCache::singleton()->enable();
 		$this->setUserLang( 'en' );
-		$this->insertPage( 'MediaWiki:wikibase-entitytermsforlanguagelistview-language', "''RAW''" );
+		$this->insertPage( 'MediaWiki:wikibase-entitytermsforlanguagelistview-language', '"RAW"' );
 
 		$item = new Item(
 			new ItemId( 'Q1' ),
@@ -271,8 +271,8 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 		$view = $this->getEntityTermsView();
 		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, [] );
 
-		$this->assertContains( '&#039;&#039;RAW&#039;&#039;', $html );
-		$this->assertNotContains( "'RAW'", $html );
+		$this->assertContains( '&quot;RAW&quot;', $html );
+		$this->assertNotContains( '"RAW"', $html );
 	}
 
 	public function testGetEntityTermsForLanguageListView_isMarkedAsEmpty() {

@@ -110,7 +110,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 
 	/**
 	 * @param string $cssClassSuffix
-	 * @param string $buttonLabel the message to show on the toolbar button link
+	 * @param string $buttonLabel the text to show on the toolbar button link
 	 * @param string|null $editUrl The edit url
 	 *
 	 * @return string
@@ -124,7 +124,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 			'wikibase-toolbar-button',
 			'wikibase-toolbar-button-' . $cssClassSuffix,
 			$editUrl,
-			$buttonLabel
+			htmlspecialchars( $buttonLabel )
 		);
 	}
 

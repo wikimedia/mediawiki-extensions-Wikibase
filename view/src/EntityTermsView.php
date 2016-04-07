@@ -88,7 +88,7 @@ class EntityTermsView {
 
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
 			$descriptions->hasTermForLanguage( $this->languageCode ) ? '' : 'wb-empty',
-			$this->getDescriptionText( $descriptions ),
+			$this->getDescriptionHtml( $descriptions ),
 			$aliasGroups->hasGroupForLanguage( $this->languageCode ) ? '' : 'wb-empty',
 			$this->getHtmlForAliases( $aliasGroups ),
 			$termBoxHtml,
@@ -108,24 +108,24 @@ class EntityTermsView {
 		EntityId $entityId = null
 	) {
 		$labels = $fingerprint->getLabels();
-		$idInParentheses = '';
+		$idInParenthesesHtml = '';
 
 		if ( $entityId !== null ) {
 			$id = $entityId->getSerialization();
-			$idInParentheses = wfMessage( 'parentheses', $id )->text();
+			$idInParenthesesHtml = htmlspecialchars( wfMessage( 'parentheses', $id )->text() );
 		}
 
 		if ( $labels->hasTermForLanguage( $this->languageCode ) ) {
 			return $this->templateFactory->render( 'wikibase-title',
 				'',
 				htmlspecialchars( $labels->getByLanguage( $this->languageCode )->getText() ),
-				$idInParentheses
+				$idInParenthesesHtml
 			);
 		} else {
 			return $this->templateFactory->render( 'wikibase-title',
 				'wb-empty',
-				wfMessage( 'wikibase-label-empty' )->escaped(),
-				$idInParentheses
+				htmlspecialchars( wfMessage( 'wikibase-label-empty' )->text() ),
+				$idInParenthesesHtml
 			);
 		}
 	}
@@ -135,13 +135,13 @@ class EntityTermsView {
 	 *
 	 * @return string HTML
 	 */
-	private function getDescriptionText( TermList $descriptions ) {
+	private function getDescriptionHtml( TermList $descriptions ) {
 		if ( $descriptions->hasTermForLanguage( $this->languageCode ) ) {
 			$text = $descriptions->getByLanguage( $this->languageCode )->getText();
-			return htmlspecialchars( $text );
 		} else {
-			return wfMessage( 'wikibase-description-empty' )->escaped();
+			$text = wfMessage( 'wikibase-description-empty' )->text();
 		}
+		return htmlspecialchars( $text );
 	}
 
 	/**
@@ -159,13 +159,10 @@ class EntityTermsView {
 					htmlspecialchars( $alias )
 				);
 			}
-
-			return $this->templateFactory->render( 'wikibase-entitytermsview-aliases', $aliasesHtml );
 		} else {
-			return $this->templateFactory->render( 'wikibase-entitytermsview-aliases',
-				wfMessage( 'wikibase-aliases-empty' )->escaped()
-			);
+			$aliasesHtml = htmlspecialchars( wfMessage( 'wikibase-aliases-empty' )->text() );
 		}
+		return $this->templateFactory->render( 'wikibase-entitytermsview-aliases', $aliasesHtml );
 	}
 
 	/**
@@ -197,10 +194,10 @@ class EntityTermsView {
 		}
 
 		return $this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview',
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-language' )->escaped(),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-label' )->escaped(),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-description' )->escaped(),
-			$this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' )->escaped(),
+			htmlspecialchars( $this->msg( 'wikibase-entitytermsforlanguagelistview-language' )->text() ),
+			htmlspecialchars( $this->msg( 'wikibase-entitytermsforlanguagelistview-label' )->text() ),
+			htmlspecialchars( $this->msg( 'wikibase-entitytermsforlanguagelistview-description' )->text() ),
+			htmlspecialchars( $this->msg( 'wikibase-entitytermsforlanguagelistview-aliases' )->text() ),
 			$entityTermsForLanguageViewsHtml
 		);
 	}
