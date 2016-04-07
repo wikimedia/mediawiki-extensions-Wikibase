@@ -1,0 +1,37 @@
+<?php
+
+namespace Wikibase\View;
+
+/**
+ * A service providing localized texts for keys
+ *
+ * @since 0.5
+ *
+ * @license GPL-2.0+
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
+ */
+interface LocalizedTextProvider {
+
+	/**
+	 * @param string $key
+	 * @param string[] $params Parameters that could be used for generating the text
+	 *
+	 * @return string The localized text
+	 */
+	public function get( $key, $params = [] );
+
+	/**
+	 * @param string $key
+	 *
+	 * @return bool
+	 */
+	public function has( $key );
+
+	/**
+	 * @param string $key
+	 *
+	 * @return string The language of the text returned for a specific key
+	 */
+	public function getLanguageOf( $key );
+
+}
