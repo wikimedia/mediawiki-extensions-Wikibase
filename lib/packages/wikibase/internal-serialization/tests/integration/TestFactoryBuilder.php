@@ -5,6 +5,7 @@ namespace Tests\Integration\Wikibase\InternalSerialization;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use Deserializers\Deserializer;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
@@ -24,6 +25,11 @@ class TestFactoryBuilder {
 		);
 	}
 
+	/**
+	 * @param PHPUnit_Framework_TestCase $testCase
+	 *
+	 * @return Deserializer
+	 */
 	private static function newFakeDataValueDeserializer( PHPUnit_Framework_TestCase $testCase ) {
 		$dataValueDeserializer = $testCase->getMock( 'Deserializers\Deserializer' );
 
