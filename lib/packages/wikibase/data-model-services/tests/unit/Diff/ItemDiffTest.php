@@ -17,7 +17,7 @@ use Wikibase\DataModel\SiteLink;
  *
  * @SuppressWarnings(PHPMD)
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

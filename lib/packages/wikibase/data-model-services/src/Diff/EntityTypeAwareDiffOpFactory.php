@@ -11,7 +11,7 @@ use InvalidArgumentException;
  *
  * @since 1.2
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Kinzler
  */
 class EntityTypeAwareDiffOpFactory extends DiffOpFactory {

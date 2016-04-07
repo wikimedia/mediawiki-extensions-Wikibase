@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\StatementList;
 /**
  * @covers Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class FilteringStatementGrouperTest extends PHPUnit_Framework_TestCase {

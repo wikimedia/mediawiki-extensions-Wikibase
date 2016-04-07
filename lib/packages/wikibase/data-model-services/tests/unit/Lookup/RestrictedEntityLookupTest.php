@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Marius Hoch
  */
 class RestrictedEntityLookupTest extends \PHPUnit_Framework_TestCase {

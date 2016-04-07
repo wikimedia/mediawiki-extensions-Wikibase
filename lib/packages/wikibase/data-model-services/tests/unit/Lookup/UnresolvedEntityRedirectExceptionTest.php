@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class UnresolvedEntityRedirectExceptionTest extends PHPUnit_Framework_TestCase {

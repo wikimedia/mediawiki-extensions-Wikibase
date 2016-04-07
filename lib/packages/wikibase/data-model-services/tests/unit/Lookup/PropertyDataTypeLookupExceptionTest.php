@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class PropertyDataTypeLookupExceptionTest extends PHPUnit_Framework_TestCase {

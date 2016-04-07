@@ -8,7 +8,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 /**
  * @covers Wikibase\DataModel\Services\Statement\StatementGuidValidator
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {

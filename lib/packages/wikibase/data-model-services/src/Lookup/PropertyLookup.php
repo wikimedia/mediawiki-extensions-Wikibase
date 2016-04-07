@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * @since 1.0
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 interface PropertyLookup {

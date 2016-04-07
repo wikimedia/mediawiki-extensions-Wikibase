@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 /**
  * @covers Wikibase\DataModel\Services\Statement\StatementGuidParser
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class StatementGuidParserTest extends \PHPUnit_Framework_TestCase {

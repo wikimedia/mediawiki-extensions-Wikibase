@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
  * @covers Wikibase\DataModel\Services\Diff\ItemDiffer
  * @covers Wikibase\DataModel\Services\Diff\ItemDiff
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemDifferTest extends \PHPUnit_Framework_TestCase {

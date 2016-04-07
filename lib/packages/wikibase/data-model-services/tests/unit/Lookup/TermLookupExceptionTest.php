@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
 /**
  * @covers Wikibase\DataModel\Services\Lookup\TermLookupException
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class TermLookupExceptionTest extends PHPUnit_Framework_TestCase {
