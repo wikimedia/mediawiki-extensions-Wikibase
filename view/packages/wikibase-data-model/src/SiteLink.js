@@ -11,7 +11,7 @@
  * @constructor
  *
  * @param {string} siteId
- * @param {string} pageName
+ * @param {string|null} pageName
  * @param {string[]} [badges=[]]
  *
  * @throws {Error} if a required parameter is not specified properly.
