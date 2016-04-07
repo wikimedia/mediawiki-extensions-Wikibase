@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\TermFallback;
 /**
  * @covers Wikibase\DataModel\Term\TermFallback
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
 class TermFallbackTest extends \PHPUnit_Framework_TestCase {

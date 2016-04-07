@@ -24,7 +24,7 @@ use Wikibase\DataModel\Tests\HashArray\HashArrayTest;
  * @uses Wikibase\DataModel\Internal\MapValueHasher
  * @uses Wikibase\DataModel\Entity\EntityId
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  * @author Thiemo Mättig

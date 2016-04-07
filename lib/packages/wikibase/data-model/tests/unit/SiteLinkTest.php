@@ -14,7 +14,7 @@ use Wikibase\DataModel\SiteLink;
  * @group Wikibase
  * @group WikibaseDataModel
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Michał Łazowik
  * @author Thiemo Mättig

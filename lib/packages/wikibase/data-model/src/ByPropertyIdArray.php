@@ -40,7 +40,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @since 0.2
  * @deprecated since 5.0, use a DataModel Service instead
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
 class ByPropertyIdArray extends ArrayObject {

@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\AliasGroupFallback;
 /**
  * @covers Wikibase\DataModel\Term\AliasGroupFallback
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
 class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
