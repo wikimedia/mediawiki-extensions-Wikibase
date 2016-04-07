@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
+use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
@@ -24,7 +25,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * Creates the parser output for an entity.
  *
  * @note This class relies on Entity and behaves differently when you pass an item as paramater.
- *		 We should split this into classes for items and other types of entities.
+ *       We should split this into classes for items and other types of entities.
  *
  * @since 0.5
  *
@@ -65,6 +66,11 @@ class EntityParserOutputGenerator {
 	private $templateFactory;
 
 	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
+	/**
 	 * @var EntityDataFormatProvider
 	 */
 	private $entityDataFormatProvider;
@@ -103,6 +109,7 @@ class EntityParserOutputGenerator {
 		EntityInfoBuilderFactory $entityInfoBuilderFactory,
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
+		LocalizedTextProvider $textProvider,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
 		$languageCode,
@@ -114,6 +121,7 @@ class EntityParserOutputGenerator {
 		$this->entityInfoBuilderFactory = $entityInfoBuilderFactory;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->templateFactory = $templateFactory;
+		$this->textProvider = $textProvider;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
 		$this->languageCode = $languageCode;
@@ -260,7 +268,8 @@ class EntityParserOutputGenerator {
 
 		$editSectionGenerator = $this->editable ? new ToolbarEditSectionGenerator(
 			new RepoSpecialPageLinker(),
-			$this->templateFactory
+			$this->templateFactory,
+			$this->textProvider
 		) : new EmptyEditSectionGenerator();
 
 		$entityView = $this->entityViewFactory->newEntityView(

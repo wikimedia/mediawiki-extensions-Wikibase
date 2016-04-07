@@ -10,6 +10,7 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
+use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -74,7 +75,8 @@ class ItemViewTest extends EntityViewTest {
 			$this->getMockBuilder( SiteLinksView::class )
 				->disableOriginalConstructor()
 				->getMock(),
-			array()
+			array(),
+			$this->getMock( LocalizedTextProvider::class )
 		);
 
 		return array(
