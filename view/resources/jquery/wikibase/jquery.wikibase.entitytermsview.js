@@ -14,7 +14,7 @@
  *
  * @option {Fingerprint} value
  *
- * @option {string[]} userLanguages
+ * @option {string[]} userTermsLanguages
  *         A list of languages for which terms should be displayed initially.
  *
  * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
@@ -61,7 +61,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 				'.wikibase-entitytermsview-entitytermsforlanguagelistview'
 		},
 		value: null,
-		userLanguages: [],
+		userTermsLanguages: [],
 		entityChangersFactory: null,
 		helpMessage: 'Edit label, description and aliases per language.'
 	},
@@ -86,7 +86,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	 */
 	_create: function() {
 		if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
-			|| !$.isArray( this.options.userLanguages )
+			|| !$.isArray( this.options.userTermsLanguages )
 			|| !this.options.entityChangersFactory
 		) {
 			throw new Error( 'Required option(s) missing' );
@@ -101,7 +101,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			this.widgetEventPrefix + 'change.' + this.widgetName + ' ' +
 			this.widgetEventPrefix + 'afterstopediting.' + this.widgetName,
 			function( event, lang ) {
-				var firstLanguage = self.options.userLanguages[0];
+				var firstLanguage = self.options.userTermsLanguages[0];
 
 				if ( typeof lang === 'string' && lang !== firstLanguage ) {
 					return;
@@ -330,7 +330,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		)
 		.entitytermsforlanguagelistview( {
 			value: this.options.value,
-			userLanguages: this.options.userLanguages,
+			userTermsLanguages: this.options.userTermsLanguages,
 			entityChangersFactory: this.options.entityChangersFactory
 		} );
 
