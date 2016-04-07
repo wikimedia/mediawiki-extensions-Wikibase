@@ -44,7 +44,7 @@ function createEntitytermsforlanguagelistview( options ) {
 			getLabelsChanger: function() { return 'I am a LabelsChanger'; }
 		},
 		value: createFingerprint(),
-		userLanguages: [ 'de', 'en' ]
+		userTermsLanguages: [ 'de', 'en' ]
 	}, options || {} );
 
 	return $( '<table/>' )
@@ -191,7 +191,7 @@ QUnit.test( '_hasMoreLanguages()', function( assert ) {
 	assert.ok( entitytermsforlanguagelistview._hasMoreLanguages() );
 
 	$entitytermsforlanguagelistview = createEntitytermsforlanguagelistview( {
-		userLanguages: [ 'de', 'en', 'fa', 'it', 'nl' ]
+		userTermsLanguages: [ 'de', 'en', 'fa', 'it', 'nl' ]
 	} );
 	entitytermsforlanguagelistview
 		= $entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' );
