@@ -11,7 +11,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacySiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {

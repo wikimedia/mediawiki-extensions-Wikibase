@@ -10,7 +10,7 @@ use Wikibase\InternalSerialization\Deserializers\EntityDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\EntityDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {

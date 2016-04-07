@@ -12,7 +12,7 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
