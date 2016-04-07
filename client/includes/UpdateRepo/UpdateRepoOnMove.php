@@ -32,7 +32,8 @@ class UpdateRepoOnMove extends UpdateRepo {
 	public function __construct(
 		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
-		User $user, $siteId,
+		User $user,
+		$siteId,
 		Title $oldTitle,
 		Title $newTitle
 	) {
