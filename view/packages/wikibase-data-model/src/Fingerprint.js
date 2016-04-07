@@ -5,7 +5,7 @@
  * Container for sets of labels, descriptions and aliases.
  * @class wikibase.datamodel.Fingerprint
  * @since 1.0
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

@@ -8,7 +8,7 @@ var PARENT = wb.datamodel.List;
  * @class wikibase.datamodel.ReferenceList
  * @extends wikibase.datamodel.List
  * @since 1.0
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

@@ -8,7 +8,7 @@ var PARENT = wb.datamodel.Group;
  * @class wikibase.datamodel.StatementGroup
  * @extends wikibase.datamodel.Group
  * @since 1.0
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor

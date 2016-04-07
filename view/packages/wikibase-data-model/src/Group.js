@@ -5,7 +5,7 @@
  * References a container of which all items feature the key specified with the Group.
  * @class wikibase.datamodel.Group
  * @since 1.0
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
