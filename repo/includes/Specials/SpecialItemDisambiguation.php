@@ -44,6 +44,11 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	private $contentLanguages;
 
 	/**
+	 * @var LanguageNameLookup
+	 */
+	private $languageNameLookup;
+
+	/**
 	 * @var int
 	 */
 	private $limit;
@@ -56,8 +61,9 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	public function __construct() {
 		parent::__construct( 'ItemDisambiguation', '', true );
 
-		// @todo inject this
+		// @todo inject these
 		$this->contentLanguages = new MediaWikiContentLanguages();
+		$this->languageNameLookup = new LanguageNameLookup();
 
 		// @todo make this configurable
 		$this->limit = 100;
@@ -70,15 +76,18 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 * @param ItemDisambiguation $itemDisambiguation
 	 * @param TermIndexSearchInteractor $searchInteractor
 	 * @param ContentLanguages $contentLanguages
+	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function initServices(
 		ItemDisambiguation $itemDisambiguation,
 		TermIndexSearchInteractor $searchInteractor,
-		ContentLanguages $contentLanguages
+		ContentLanguages $contentLanguages,
+		LanguageNameLookup $languageNameLookup
 	) {
 		$this->itemDisambiguation = $itemDisambiguation;
 		$this->searchInteractor = $searchInteractor;
 		$this->contentLanguages = $contentLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -251,19 +260,32 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	}
 
 	/**
+	 * Return options for the language input field.
+	 *
+	 * @return array
+	 */
+	private function getLanguageOptions() {
+		$options = array();
+		foreach ( $this->contentLanguages->getLanguages() as $languageCode ) {
+			$languageName = $this->languageNameLookup->getName( $languageCode );
+			$options["$languageName ($languageCode)"] = $languageCode;
+		}
+		return $options;
+	}
+
+	/**
 	 * Output a form to allow searching for labels
 	 *
 	 * @param string|null $languageCode
 	 * @param string|null $label
 	 */
 	private function switchForm( $languageCode, $label ) {
-		$this->getOutput()->addModules( 'wikibase.special.languageSuggester' );
-
 		$formDescriptor = array(
 			'language' => array(
 				'name' => 'language',
 				'default' => $languageCode ?: '',
-				'type' => 'text',
+				'type' => 'combobox',
+				'options' => $this->getLanguageOptions(),
 				'id' => 'wb-itemdisambiguation-languagename',
 				'size' => 12,
 				'cssclass' => 'wb-language-suggester',
