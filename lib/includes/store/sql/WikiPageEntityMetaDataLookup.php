@@ -178,7 +178,16 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		// pick text via rev_text_id
 		$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
 
-		$res = $db->select( $tables, $fields, $this->getEppWhere( $entityIds, $db ), __METHOD__, array(), $join );
+		$res = $db->select(
+			$tables,
+			$fields,
+			$this->getEppWhere( $entityIds, $db ),
+			__METHOD__,
+			array(
+				'USE INDEX' => [ 'wb_entity_per_page' => 'wb_epp_entity' ]
+			),
+			$join
+		);
 
 		$this->releaseConnection( $db );
 
