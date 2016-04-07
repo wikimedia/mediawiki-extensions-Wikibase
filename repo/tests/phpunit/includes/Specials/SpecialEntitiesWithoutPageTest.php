@@ -38,7 +38,8 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			'wikibase-entitieswithoutlabel-legend',
 			$wikibaseRepo->getStore()->newEntityPerPage(),
 			array( 'item', 'property' ),
-			new StaticContentLanguages( array( 'acceptedlanguage' ) )
+			new StaticContentLanguages( array( 'acceptedlanguage' ) ),
+			new LanguageNameLookup()
 		);
 	}
 

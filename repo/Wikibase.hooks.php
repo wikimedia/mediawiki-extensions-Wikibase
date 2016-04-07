@@ -1072,14 +1072,6 @@ final class RepoHooks {
 					'wikibase',
 				),
 			),
-			'wikibase.special.languageSuggester' => $moduleTemplate + array(
-				'scripts' => array(
-					'resources/wikibase.special/wikibase.special.languageSuggester.js',
-				),
-				'dependencies' => array(
-					'jquery.ui.suggester',
-				),
-			),
 			'wikibase.special.languageLabelDescriptionAliases' => $moduleTemplate + array(
 				'scripts' => array(
 					'resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js',
@@ -1101,7 +1093,6 @@ final class RepoHooks {
 		$isUlsLoaded = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 		if ( $isUlsLoaded ) {
 			$modules['wikibase.WikibaseContentLanguages']['dependencies'][] = 'ext.uls.languagenames';
-			$modules['wikibase.special.languageSuggester']['dependencies'][] = 'ext.uls.mediawiki';
 			$modules['wikibase.special.languageLabelDescriptionAliases']['dependencies'][] = 'ext.uls.mediawiki';
 		}
 
