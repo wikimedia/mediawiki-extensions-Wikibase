@@ -141,27 +141,32 @@ class OutputPageBeforeHTMLHookHandler {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
 
 		if ( !empty( $placeholders ) ) {
-			$this->replacePlaceholders( $placeholders, $out, $html );
+			$termsLanguages = $this->getTermsLanguagesCodes( $out );
+
+			$this->replacePlaceholders( $placeholders, $termsLanguages, $out, $html );
 
 			$out->addJsConfigVars(
-				'wbUserSpecifiedLanguages',
-				// All user-specified languages, that are valid term languages
+				'wbUserTermsLanguages',
+				// All user languages that are valid term languages
 				// Reindex the keys so that javascript still works if an unknown
 				// language code in the babel box causes an index to miss
-				array_values( array_intersect(
-					$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
-					$this->termsLanguages->getLanguages()
-				) )
+				array_values( $termsLanguages )
 			);
 		}
 	}
 
 	/**
 	 * @param string[] $placeholders
+	 * @param string[] $termsLanguages
 	 * @param OutputPage $out
 	 * @param string &$html
 	 */
-	private function replacePlaceholders( array $placeholders, OutputPage $out, &$html ) {
+	private function replacePlaceholders(
+		array $placeholders,
+		array $termsLanguages,
+		OutputPage $out,
+		&$html
+	) {
 		$injector = new TextInjector( $placeholders );
 		$getHtmlCallback = function() {
 			return '';
@@ -175,7 +180,7 @@ class OutputPageBeforeHTMLHookHandler {
 				$expander = $this->getEntityViewPlaceholderExpander(
 					$entity,
 					$out->getUser(),
-					$this->getTermsLanguagesCodes( $out ),
+					$termsLanguages,
 					$termsListItemsHtml,
 					$out->getLanguage()->getCode()
 				);
@@ -248,7 +253,7 @@ class OutputPageBeforeHTMLHookHandler {
 			$labelsProvider,
 			$descriptionsProvider,
 			$aliasesProvider,
-			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
+			$termsLanguages,
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $languageCode ),
