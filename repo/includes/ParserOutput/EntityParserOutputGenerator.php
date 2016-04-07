@@ -273,7 +273,7 @@ class EntityParserOutputGenerator {
 
 		// Set the display title to display the label together with the item's id
 		$titleHtml = $entityView->getTitleHtml( $entity );
-		$parserOutput->setDisplayTitle( $titleHtml );
+		$parserOutput->setTitleText( $titleHtml );
 
 		$html = $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
