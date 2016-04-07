@@ -40,7 +40,7 @@
 			throw new Error( 'Longitude (' + this._longitude + ') is out of bounds' );
 		}
 
-		this._globe = 'http://www.wikidata.org/entity/Q2'; // TODO: Support other globes
+		this._globe = gcDef.globe || 'http://www.wikidata.org/entity/Q2';
 	};
 
 	SELF.prototype = {
@@ -144,7 +144,8 @@
 				gc2Iso6709 = globeCoordinate.iso6709( otherGlobeCoordinate.getDecimal() );
 
 			return Math.abs( this.getPrecision() - otherGlobeCoordinate.getPrecision() ) < 0.00000001
-				&& gc1Iso6709 === gc2Iso6709;
+				&& gc1Iso6709 === gc2Iso6709
+				&& this.getGlobe() === otherGlobeCoordinate.getGlobe();
 		}
 	};
 
