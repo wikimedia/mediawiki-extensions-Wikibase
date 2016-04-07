@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use SpecialPageTestBase;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialEntitiesWithoutPage;
 use Wikibase\Repo\WikibaseRepo;
@@ -38,7 +39,8 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			'wikibase-entitieswithoutlabel-legend',
 			$wikibaseRepo->getStore()->newEntityPerPage(),
 			array( 'item', 'property' ),
-			new StaticContentLanguages( array( 'acceptedlanguage' ) )
+			new StaticContentLanguages( array( 'acceptedlanguage' ) ),
+			new LanguageNameLookup()
 		);
 	}
 
