@@ -228,7 +228,9 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		foreach ( $entityIds as &$entityId ) {
 			$where[] = $db->makeList( array(
 				// FIXME: this will fail for IDs that do not have a numeric form
-				'epp_entity_id' => $entityId->getNumericId(),
+				// Note: if epp_entity_id is quoted the wrong index will be used
+				//       thus we cast it to int and leave it unquoted
+				'epp_entity_id = ' . (int)$entityId->getNumericId(),
 				'epp_entity_type' => $entityId->getEntityType()
 			), LIST_AND );
 		}
