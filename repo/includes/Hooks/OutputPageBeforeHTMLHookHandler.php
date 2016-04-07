@@ -9,6 +9,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
+use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\Template\TemplateFactory;
@@ -167,7 +168,8 @@ class OutputPageBeforeHTMLHookHandler {
 			$aliasesProvider,
 			$this->userLanguageLookup,
 			$this->termsLanguages,
-			$this->languageNameLookup
+			$this->languageNameLookup,
+			new MediaWikiLocalizedTextProvider( $out->getLanguage()->getCode() )
 		);
 	}
 

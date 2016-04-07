@@ -2,7 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
-use MediaWikiTestCase;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -17,7 +17,7 @@ use Wikibase\View\EmptyEditSectionGenerator;
  * @license GPL-2.0+
  * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
-class EmptyEditSectionGeneratorTest extends MediaWikiTestCase {
+class EmptyEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider getAddStatementToGroupSectionProvider
