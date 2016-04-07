@@ -117,7 +117,7 @@ class SnakHtmlGenerator {
 	 * localised exception messages.
 	 *
 	 * @param Snak $snak
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getFormattedSnakValue( $snak ) {
 		try {
@@ -134,17 +134,17 @@ class SnakHtmlGenerator {
 	}
 
 	/**
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getInvalidSnakMessage() {
-		return wfMessage( 'wikibase-snakformat-invalid-value' )->parse();
+		return htmlspecialchars( wfMessage( 'wikibase-snakformat-invalid-value' )->text() );
 	}
 
 	/**
-	 * @return string
+	 * @return string HTML
 	 */
 	private function getPropertyNotFoundMessage() {
-		return wfMessage( 'wikibase-snakformat-propertynotfound' )->parse();
+		return htmlspecialchars( wfMessage( 'wikibase-snakformat-propertynotfound' )->text() );
 	}
 
 }
