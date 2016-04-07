@@ -8,7 +8,7 @@ var MODULE = wb.serialization,
  * @class wikibase.serialization.ReferenceListDeserializer
  * @extends wikibase.serialization.Deserializer
  * @since 2.0
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
