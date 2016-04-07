@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_18f4fd4f",
+        "filename": "purtle/src/XmlRdfWriter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-07T17:26:27Z",
+      "side": 1,
+      "message": "this looks a little awry",
+      "revId": "18c7baa0aa22772647288d56e16b90bc91069593",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
