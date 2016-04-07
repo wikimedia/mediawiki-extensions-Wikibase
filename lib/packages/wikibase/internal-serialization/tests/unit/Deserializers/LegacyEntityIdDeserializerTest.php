@@ -12,7 +12,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacyEntityIdDeserializerTest extends \PHPUnit_Framework_TestCase {

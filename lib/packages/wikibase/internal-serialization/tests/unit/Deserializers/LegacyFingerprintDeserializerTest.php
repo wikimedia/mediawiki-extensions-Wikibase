@@ -13,7 +13,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacyFingerprintDeserializerTest extends \PHPUnit_Framework_TestCase {

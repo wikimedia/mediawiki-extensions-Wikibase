@@ -8,7 +8,7 @@ use Tests\Integration\Wikibase\InternalSerialization\TestFactoryBuilder;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacyEntityDeserializerTest extends \PHPUnit_Framework_TestCase {

@@ -15,7 +15,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {

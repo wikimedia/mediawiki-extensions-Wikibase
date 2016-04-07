@@ -12,7 +12,7 @@ use Wikibase\InternalSerialization\LegacyDeserializerFactory;
 use Wikibase\InternalSerialization\SerializerFactory;
 
 /**
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class TestFactoryBuilder {
