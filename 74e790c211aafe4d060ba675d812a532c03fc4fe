@@ -16,6 +16,24 @@
       "revId": "74e790c211aafe4d060ba675d812a532c03fc4fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_818d3839",
+        "filename": "docs/rdf-binding.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-04-07T23:53:39Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "ce38dbff_db5d6f4d",
+      "revId": "74e790c211aafe4d060ba675d812a532c03fc4fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
