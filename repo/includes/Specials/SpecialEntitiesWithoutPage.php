@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use HTMLForm;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -58,12 +59,18 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private $termsLanguages;
 
 	/**
+	 * @var LanguageNameLookup
+	 */
+	private $languageNameLookup;
+
+	/**
 	 * @param string $name
 	 * @param string $termType One of the TermIndexEntry::TYPE_... constants.
 	 * @param string $legendMsg
 	 * @param EntityPerPage $entityPerPage
 	 * @param string[] $entityTypes
 	 * @param ContentLanguages $termsLanguages
+	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function __construct(
 		$name,
@@ -71,7 +78,8 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$legendMsg,
 		EntityPerPage $entityPerPage,
 		array $entityTypes,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		LanguageNameLookup $languageNameLookup
 	) {
 		parent::__construct( $name );
 
@@ -80,6 +88,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$this->entityPerPage = $entityPerPage;
 		$this->entityTypes = $entityTypes;
 		$this->termsLanguages = $termsLanguages;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -135,6 +144,20 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	}
 
 	/**
+	 * Return options for the language input field.
+	 *
+	 * @return array
+	 */
+	private function getLanguageOptions() {
+		$options = array();
+		foreach ( $this->termsLanguages->getLanguages() as $languageCode ) {
+			$languageName = $this->languageNameLookup->getName( $languageCode );
+			$options["$languageName ($languageCode)"] = $languageCode;
+		}
+		return $options;
+	}
+
+	/**
 	 * Build the HTML form
 	 */
 	private function setForm() {
@@ -147,13 +170,12 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			$options[$this->msg( 'wikibase-entity-' . $type )->text()] = $type;
 		}
 
-		$this->getOutput()->addModules( 'wikibase.special.languageSuggester' );
-
 		$formDescriptor = array(
 			'language' => array(
 				'name' => 'language',
 				'default' => $this->language,
-				'type' => 'text',
+				'type' => 'combobox',
+				'options' => $this->getLanguageOptions(),
 				'cssclass' => 'wb-language-suggester',
 				'id' => 'wb-entitieswithoutpage-language',
 				'label-message' => 'wikibase-entitieswithoutlabel-label-language'
@@ -174,7 +196,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			)
 		);
 
-		HTMLForm::factory( 'inline', $formDescriptor, $this->getContext() )
+		HTMLForm::factory( 'ooui', $formDescriptor, $this->getContext() )
 			->setId( 'wb-entitieswithoutpage-form' )
 			->setMethod( 'get' )
 			->setWrapperLegendMsg( $this->legendMsg )

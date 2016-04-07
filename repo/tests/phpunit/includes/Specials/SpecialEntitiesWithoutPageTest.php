@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use SpecialPageTestBase;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialEntitiesWithoutPage;
 use Wikibase\Repo\WikibaseRepo;
@@ -38,7 +39,8 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			'wikibase-entitieswithoutlabel-legend',
 			$wikibaseRepo->getStore()->newEntityPerPage(),
 			array( 'item', 'property' ),
-			new StaticContentLanguages( array( 'acceptedlanguage' ) )
+			new StaticContentLanguages( array( 'acceptedlanguage' ) ),
+			new LanguageNameLookup()
 		);
 	}
 
@@ -46,17 +48,17 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertContains( '(wikibase-entitieswithoutlabel-label-language)', $html );
-		$this->assertContains( 'name="language"', $html );
-		$this->assertContains( 'id="wb-entitieswithoutpage-language"', $html );
+		$this->assertContains( 'name=\'language\'', $html );
+		$this->assertContains( 'id=\'wb-entitieswithoutpage-language\'', $html );
 		$this->assertContains( 'wb-language-suggester', $html );
 
 		$this->assertContains( '(wikibase-entitieswithoutlabel-label-type)', $html );
-		$this->assertContains( 'name="type"', $html );
-		$this->assertContains( 'id="wb-entitieswithoutpage-type"', $html );
+		$this->assertContains( 'name=\'type\'', $html );
+		$this->assertContains( 'id=\'wb-entitieswithoutpage-type\'', $html );
 		$this->assertContains( '(wikibase-entitieswithoutlabel-label-alltypes)', $html );
 
 		$this->assertContains( '(wikibase-entitieswithoutlabel-submit)', $html );
-		$this->assertContains( 'id="wikibase-entitieswithoutpage-submit"', $html );
+		$this->assertContains( 'id=\'wikibase-entitieswithoutpage-submit\'', $html );
 	}
 
 	public function testRequestParameters() {
@@ -98,7 +100,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	public function testValidLanguage() {
 		list( $html, ) = $this->executeSpecialPage( 'acceptedlanguage', null, 'qqx' );
 
-		$this->assertContains( 'value="acceptedlanguage"', $html );
+		$this->assertContains( 'value=\'acceptedlanguage\'', $html );
 		$this->assertContains( 'class="mw-spcontent"', $html );
 	}
 
