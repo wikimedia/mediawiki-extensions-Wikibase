@@ -5,7 +5,7 @@
  * Object featuring a main snak and a list of qualifiers.
  * @class wikibase.datamodel.Claim
  * @since 0.3
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  *
  * @constructor

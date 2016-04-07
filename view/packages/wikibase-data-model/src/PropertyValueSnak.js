@@ -8,7 +8,7 @@ var PARENT = wb.datamodel.Snak;
  * @class wikibase.datamodel.PropertyValueSnak
  * @extends wikibase.datamodel.Snak
  * @since 0.3
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Daniel Werner
  *
  * @constructor

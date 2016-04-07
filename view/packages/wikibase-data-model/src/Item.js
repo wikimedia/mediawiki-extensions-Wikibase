@@ -8,7 +8,7 @@ var PARENT = wb.datamodel.Entity;
  * @class wikibase.datamodel.Item
  * @extends wikibase.datamodel.Entity
  * @since 1.0
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  *
  * @constructor
