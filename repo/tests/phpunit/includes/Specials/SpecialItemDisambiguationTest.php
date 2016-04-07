@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
 use Wikibase\TermIndexEntry;
@@ -117,12 +118,25 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		return new StaticContentLanguages( array( 'ar', 'de', 'en', 'fr' ) );
 	}
 
+	/**
+	 * @return LanguageNameLookup
+	 */
+	private function getMockLanguageNameLookup() {
+		$mock = $this->getMock( LanguageNameLookup::class );
+		$mock->expects( $this->any() )
+			->method( 'getName' )
+			->will( $this->returnValue( '<LANG>' ) );
+
+		return $mock;
+	}
+
 	protected function newSpecialPage() {
 		$page = new SpecialItemDisambiguation();
 		$page->initServices(
 			$this->getMockItemDisambiguation(),
 			$this->getMockSearchInteractor(),
-			$this->getContentLanguages()
+			$this->getContentLanguages(),
+			$this->getMockLanguageNameLookup()
 		);
 		return $page;
 	}
@@ -131,16 +145,16 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertContains( '(wikibase-itemdisambiguation-lookup-language)', $html );
-		$this->assertContains( 'name="language"', $html );
-		$this->assertContains( 'id="wb-itemdisambiguation-languagename"', $html );
+		$this->assertContains( 'name=\'language\'', $html );
+		$this->assertContains( 'id=\'wb-itemdisambiguation-languagename\'', $html );
 		$this->assertContains( 'wb-language-suggester', $html );
 
 		$this->assertContains( '(wikibase-itemdisambiguation-lookup-label)', $html );
-		$this->assertContains( 'name="label"', $html );
-		$this->assertContains( 'id="labelname"', $html );
+		$this->assertContains( 'name=\'label\'', $html );
+		$this->assertContains( 'id=\'labelname\'', $html );
 
 		$this->assertContains( '(wikibase-itemdisambiguation-submit)', $html );
-		$this->assertContains( 'id="wb-itembytitle-submit"', $html );
+		$this->assertContains( 'id=\'wb-itembytitle-submit\'', $html );
 	}
 
 	public function testRequestParameters() {
@@ -185,8 +199,8 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	public function testUnknownLabel() {
 		list( $html, ) = $this->executeSpecialPage( 'fr/Unknown', null, 'qqx' );
 
-		$this->assertContains( 'value="fr"', $html );
-		$this->assertContains( 'value="Unknown"', $html );
+		$this->assertContains( 'value=\'fr\'', $html );
+		$this->assertContains( 'value=\'Unknown\'', $html );
 		$this->assertContains( '(wikibase-itemdisambiguation-nothing-found)', $html );
 	}
 
