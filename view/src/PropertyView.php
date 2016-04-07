@@ -32,12 +32,20 @@ class PropertyView extends EntityView {
 	private $dataTypeFactory;
 
 	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
+	/**
+	 * @see EntityView::__construct
+	 *
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param StatementSectionsView $statementSectionsView
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param string $languageCode
+	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -45,12 +53,14 @@ class PropertyView extends EntityView {
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		StatementSectionsView $statementSectionsView,
 		DataTypeFactory $dataTypeFactory,
-		$languageCode
+		$languageCode,
+		LocalizedTextProvider $textProvider
 	) {
 		parent::__construct( $templateFactory, $entityTermsView, $languageDirectionalityLookup, $languageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->dataTypeFactory = $dataTypeFactory;
+		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -91,7 +101,7 @@ class PropertyView extends EntityView {
 	private function getHtmlForDataType( $propertyType ) {
 
 		$html = $this->templateFactory->render( 'wb-section-heading',
-			htmlspecialchars( wfMessage( 'wikibase-propertypage-datatype' )->text() ),
+			htmlspecialchars( $this->textProvider->get( 'wikibase-propertypage-datatype' ) ),
 			'datatype',
 			'wikibase-propertypage-datatype'
 		);
@@ -102,7 +112,7 @@ class PropertyView extends EntityView {
 			$dataTypeLabelHtml = htmlspecialchars( $dataType->getLabel( $this->languageCode ) );
 		} catch ( OutOfBoundsException $ex ) {
 			$dataTypeLabelHtml .= '<span class="error">' .
-				htmlspecialchars( wfMessage( 'wikibase-propertypage-bad-datatype', $propertyType )->text() ) .
+				htmlspecialchars( $this->textProvider->get( 'wikibase-propertypage-bad-datatype', [ $propertyType ] ) ) .
 				'</span>';
 		}
 		$html .= $this->templateFactory->render( 'wikibase-propertyview-datatype', $dataTypeLabelHtml );

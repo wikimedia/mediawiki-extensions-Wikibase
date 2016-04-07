@@ -12,6 +12,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\View\ClaimHtmlGenerator;
+use Wikibase\View\KeyNameLocalizedTextProvider;
 use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -61,7 +62,8 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		$claimHtmlGenerator = new ClaimHtmlGenerator(
 			$templateFactory,
 			$snakHtmlGenerator,
-			new BasicNumberLocalizer()
+			new BasicNumberLocalizer(),
+			new KeyNameLocalizedTextProvider( 'lkt' )
 		);
 
 		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, 'edit' );

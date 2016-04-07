@@ -31,12 +31,23 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	private $templateFactory;
 
 	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
+	/**
 	 * @param SpecialPageLinker $specialPageLinker
 	 * @param TemplateFactory $templateFactory
+	 * @param LocalizedTextProvider $textProvider
 	 */
-	public function __construct( SpecialPageLinker $specialPageLinker, TemplateFactory $templateFactory ) {
+	public function __construct(
+		SpecialPageLinker $specialPageLinker,
+		TemplateFactory $templateFactory,
+		LocalizedTextProvider $textProvider
+	) {
 		$this->templateFactory = $templateFactory;
 		$this->specialPageLinker = $specialPageLinker;
+		$this->textProvider = $textProvider;
 	}
 
 	public function getSiteLinksEditSection( EntityId $entityId = null ) {
@@ -81,7 +92,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	) {
 
 		$editUrl = $this->getEditUrl( $specialPageName, $specialPageUrlParams );
-		$toolbarButton = $this->getToolbarButton( 'edit', wfMessage( 'wikibase-edit' )->text(), $editUrl );
+		$toolbarButton = $this->getToolbarButton( 'edit', $this->textProvider->get( 'wikibase-edit' ), $editUrl );
 
 		return $this->getToolbarContainer(
 			$this->templateFactory->render( 'wikibase-toolbar', '', $toolbarButton )
