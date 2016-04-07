@@ -12,7 +12,7 @@
 	 * @param {Object} gcDef Needs the following attributes:
 	 *        - {number} latitude
 	 *        - {number} longitude
-	 *        - {number} precision
+	 *        - {number|null} [precision]
 	 *
 	 * @throws {Error} when latitude is greater than 360.
 	 * @throws {Error} when longitude is greater than 360.
@@ -27,7 +27,7 @@
 
 		this._latitude = gcDef.latitude;
 		this._longitude = gcDef.longitude;
-		this._precision = gcDef.precision;
+		this._precision = gcDef.precision || null;
 
 		// TODO: Capture altitude and globe
 
@@ -70,7 +70,7 @@
 
 		/**
 		 * Precision
-		 * @property {number}
+		 * @property {number|null}
 		 * @private
 		 */
 		_precision: null,
@@ -101,7 +101,7 @@
 		/**
 		 * Returns the precision.
 		 *
-		 * @return {number}
+		 * @return {number|null}
 		 */
 		getPrecision: function() { return this._precision; },
 
@@ -143,7 +143,8 @@
 			var gc1Iso6709 = globeCoordinate.iso6709( this.getDecimal() ),
 				gc2Iso6709 = globeCoordinate.iso6709( otherGlobeCoordinate.getDecimal() );
 
-			return Math.abs( this._precision - otherGlobeCoordinate._precision ) < 0.00000001
+			return ( this._precision === otherGlobeCoordinate._precision
+				|| Math.abs( this._precision - otherGlobeCoordinate._precision ) < 0.00000001 )
 				&& gc1Iso6709 === gc2Iso6709
 				&& this._globe === otherGlobeCoordinate._globe;
 		}

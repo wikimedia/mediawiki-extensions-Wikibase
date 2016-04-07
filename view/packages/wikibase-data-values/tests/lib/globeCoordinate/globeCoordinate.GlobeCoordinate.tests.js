@@ -14,7 +14,7 @@ define( [
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
 	QUnit.test( 'Basic checks', function( assert ) {
-		assert.expect( 13 );
+		assert.expect( 10 );
 		var c;
 
 		assert.throws(
@@ -76,26 +76,26 @@ define( [
 			'string',
 			'Verified iso6709()'
 		);
+	} );
 
-		// test with no precision provided
-		c = new globeCoordinate.GlobeCoordinate( { latitude: 20, longitude: 25.5 } );
+	QUnit.test( 'Precision defaults to null', function( assert ) {
+		assert.expect( 3 );
+		var c = new globeCoordinate.GlobeCoordinate( { latitude: 0, longitude: 0 } );
 
-		assert.equal(
-			c.getLatitude(),
-			20,
-			'Verified getLatitude()'
+		assert.ok(
+			c.getPrecision() === null,
+			'Verified getPrecision()'
 		);
 
-		assert.equal(
-			c.getLongitude(),
-			25.5,
-			'Verified getLatitude()'
+		assert.deepEqual(
+			c.getDecimal(),
+			{ latitude: 0, longitude: 0, precision: null },
+			'Verified getDecimal()'
 		);
 
-		assert.equal(
-			c.getPrecision(),
-			null,
-			'Verified precision is null'
+		assert.ok(
+			c.equals( c ),
+			'Validated equality'
 		);
 	} );
 
@@ -117,6 +117,36 @@ define( [
 			typeof c.getDecimal().globe === 'undefined',
 			'Verified getDecimal()'
 		);
+	} );
+
+	QUnit.test( 'ISO 6709 strings', function( assert ) {
+		assert.expect( 12 );
+		var gcDefs = [
+				{ precision: 10, expected: '+10+010/' },
+				{ precision: 2, expected: '+14+012/' },
+				{ precision: 1, expected: '+13+012/' },
+				{ precision: 0.1, expected: '+1307+01207/' },
+				{ precision: 0.01, expected: '+130724+0120724/' },
+				{ precision: 1 / 60, expected: '+1307+01207/' },
+				{ precision: 1 / 3600, expected: '+130724+0120724/' },
+				{ precision: 1 / 36000, expected: '+130724.4+0120724.4/' },
+				{ precision: 1 / 360000, expected: '+130724.42+0120724.42/' },
+				{ precision: 0, expected: '+130724.42+0120724.42/' },
+				{ precision: null, expected: '+130724.42+0120724.42/' },
+				{ expected: '+130724.42+0120724.42/' }
+			],
+			c;
+
+		$.each( gcDefs, function( i, gcDef ) {
+			c = new globeCoordinate.GlobeCoordinate(
+				{ latitude: 13.12345, longitude: 12.12345, precision: gcDef.precision }
+			);
+
+			assert.ok(
+				c.iso6709() === gcDef.expected,
+				'Validated ISO 6709 string of data set #' + i + '.'
+			);
+		} );
 	} );
 
 	QUnit.test( 'Strict (in)equality', function( assert ) {
