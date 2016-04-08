@@ -21,16 +21,19 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  */
 class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * @dataProvider getSiteListProvider
-	 */
-	public function testGetSiteList(
-		array $groups,
-		array $specialGroups,
-		array $expectedGlobalIds
-	) {
-		$provider = new SiteLinkTargetProvider( $this->getSiteStore(), $specialGroups );
-		$siteList = $provider->getSiteList( $groups );
+	public function testGetSiteList() {
+		$expectedGlobalIds = array(
+			'dawiki',
+			'eswiki',
+			'eswikiquote',
+			'specieswiki',
+		);
+
+		$provider = new SiteLinkTargetProvider(
+			$this->getSiteStore(),
+			array()
+		);
+		$siteList = $provider->getSiteList();
 
 		$globalIds = array();
 		/** @var Site $site */
@@ -40,7 +43,29 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( $expectedGlobalIds, $globalIds );
 	}
 
-	public function getSiteListProvider() {
+	/**
+	 * @dataProvider getSiteListProviderWithGroups
+	 */
+	public function testGetSiteListForGroups(
+		array $groups,
+		array $specialGroups,
+		array $expectedGlobalIds
+	) {
+		$provider = new SiteLinkTargetProvider(
+			$this->getSiteStore(),
+			$specialGroups
+		);
+		$siteList = $provider->getSiteListForGroups( $groups );
+
+		$globalIds = array();
+		/** @var Site $site */
+		foreach ( $siteList as $site ) {
+			$globalIds[] = $site->getGlobalId();
+		}
+		$this->assertSame( $expectedGlobalIds, $globalIds );
+	}
+
+	public function getSiteListProviderWithGroups() {
 		return array(
 			array(
 				array( 'wikipedia' ),

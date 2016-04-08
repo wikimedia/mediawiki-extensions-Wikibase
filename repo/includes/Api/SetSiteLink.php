@@ -153,7 +153,7 @@ class SetSiteLink extends ModifyEntity {
 			return $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $linksite );
 		} else {
 			$linksite = $this->stringNormalizer->trimToNFC( $params['linksite'] );
-			$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+			$sites = $this->siteLinkTargetProvider->getSiteListForGroups( $this->siteLinkGroups );
 			$site = $sites->getSite( $linksite );
 
 			if ( $site === false ) {
@@ -185,7 +185,7 @@ class SetSiteLink extends ModifyEntity {
 	 * @see ModifyEntity::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$sites = $this->siteLinkTargetProvider->getSiteListForGroups( $this->siteLinkGroups );
 
 		return array_merge(
 			parent::getAllowedParams(),

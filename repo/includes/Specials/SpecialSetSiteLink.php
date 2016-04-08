@@ -85,10 +85,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 
 		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$this->siteStore,
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		);
+		$this->siteLinkTargetProvider = $wikibaseRepo->getSiteLinkTargetProvider();
 
 		$this->labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
 	}
@@ -200,7 +197,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	private function isValidSiteId( $siteId ) {
 		return $siteId !== null
-			&& $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups )->hasSite( $siteId );
+			&& $this->siteLinkTargetProvider->getSiteListForGroups( $this->siteLinkGroups )->hasSite( $siteId );
 	}
 
 	/**

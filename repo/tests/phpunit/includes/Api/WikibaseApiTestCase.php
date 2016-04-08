@@ -10,6 +10,7 @@ use TestUser;
 use Title;
 use UsageException;
 use User;
+use Wikibase\Repo\CachingSiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
@@ -39,6 +40,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( TestSites::getSites() );
+			CachingSiteLinkTargetProvider::clearCache();
 
 			$this->doLogin( 'wbeditor' );
 

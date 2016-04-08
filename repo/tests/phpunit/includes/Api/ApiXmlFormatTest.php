@@ -5,6 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 use ApiBase;
 use DOMDocument;
 use DOMXPath;
+use HashBagOStuff;
 use HashSiteStore;
 use TestSites;
 use Wikibase\Repo\Api\EditEntity;
@@ -171,7 +172,10 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
-		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( TestSites::getSites() ), array() );
+		$siteTargetProvider = new SiteLinkTargetProvider(
+			new HashSiteStore( TestSites::getSites() ),
+			array()
+		);
 		$module->setServices( $siteTargetProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
