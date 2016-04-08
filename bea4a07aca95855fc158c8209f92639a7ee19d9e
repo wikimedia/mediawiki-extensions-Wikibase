@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_cd9c9115",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-08T17:04:28Z",
+      "side": 1,
+      "message": "Please move these handlers to a dedicated handler class, and make them testable.",
+      "revId": "bea4a07aca95855fc158c8209f92639a7ee19d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_2d8b7dc5",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-08T17:04:28Z",
+      "side": 1,
+      "message": "Needs unit test",
+      "revId": "bea4a07aca95855fc158c8209f92639a7ee19d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4d9081f1",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-08T17:04:28Z",
+      "side": 1,
+      "message": "Needs unit test",
+      "revId": "bea4a07aca95855fc158c8209f92639a7ee19d9e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
