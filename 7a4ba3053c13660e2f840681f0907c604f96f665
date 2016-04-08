@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_e7f9b44c",
+        "filename": "repo/includes/Parsers/MwTimeIsoParser.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T12:14:08Z",
+      "side": 1,
+      "message": "Looks like these two string can be variables and reused above. At the moment they are duplicated, but one uses preg_quote and the other is pre-quoted.",
+      "revId": "7a4ba3053c13660e2f840681f0907c604f96f665",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_ff9142fc",
+        "filename": "repo/tests/phpunit/includes/Parsers/MwTimeIsoParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T12:14:08Z",
+      "side": 1,
+      "message": "This is here for backwards compatibility with DataValues Common 0.2.x. I suggest to not touch this.",
+      "revId": "7a4ba3053c13660e2f840681f0907c604f96f665",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_a7e5ec08",
+        "filename": "repo/tests/phpunit/includes/Parsers/MwTimeIsoParserTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T12:14:08Z",
+      "side": 1,
+      "message": "Why is this calling the original code instead of simply returning a string?",
+      "revId": "7a4ba3053c13660e2f840681f0907c604f96f665",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
