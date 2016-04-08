@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_0df679d4",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T15:39:40Z",
+      "side": 1,
+      "message": "Sorry, but this is really ugly. Usually we are nesting messages when we want to do this:\n* \"wikibase-pending-counter\": \"{{PLURAL|0\u003d|+$1}}\"\n* pendingHtml \u003d msg( \u0027wikibase-pending-counter\u0027, pending )\n* if ( pendingHtml !\u003d\u003d \u0027\u0027 ) pendingHtml \u003d \u0027\u003cspan\u003e\u0027  + pendingHtml + \u0027\u003c/span\u003e\u0027\n* \"wikibase-sitelinks-counter\": \"$1{{PLURAL:$2|0\u003d|$3}} …\"\n* html \u003d msg( \u0027wikibase-sitelinks-counter\u0027, …, pending, pendingHtml )",
+      "revId": "44419e75b734e16c135fe3a02b7a98750289798c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_8dd8c959",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T15:39:40Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "44419e75b734e16c135fe3a02b7a98750289798c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
