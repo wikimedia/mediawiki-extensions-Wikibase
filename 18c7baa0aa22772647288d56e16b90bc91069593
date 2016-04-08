@@ -16,6 +16,41 @@
       "revId": "18c7baa0aa22772647288d56e16b90bc91069593",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4de2419d",
+        "filename": "purtle/src/XmlRdfWriter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-08T16:59:43Z",
+      "side": 1,
+      "message": "Yea... why is the second array not converted?",
+      "parentUuid": "ce38dbff_18f4fd4f",
+      "revId": "18c7baa0aa22772647288d56e16b90bc91069593",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_8deba976",
+        "filename": "view/tests/phpunit/SiteLinksViewTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-08T16:59:43Z",
+      "side": 1,
+      "message": "why only the empty arrays?",
+      "revId": "18c7baa0aa22772647288d56e16b90bc91069593",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
