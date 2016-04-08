@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests\Repo;
 
+use HashBagOStuff;
 use HashSiteStore;
 use PHPUnit_Framework_TestCase;
 use Site;
@@ -29,7 +30,11 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 		array $specialGroups,
 		array $expectedGlobalIds
 	) {
-		$provider = new SiteLinkTargetProvider( $this->getSiteStore(), $specialGroups );
+		$provider = new SiteLinkTargetProvider(
+			$this->getSiteStore(),
+			new HashBagOStuff(),
+			$specialGroups
+		);
 		$siteList = $provider->getSiteList( $groups );
 
 		$globalIds = array();

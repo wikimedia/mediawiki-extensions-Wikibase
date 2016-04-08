@@ -39,6 +39,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$sitesTable = WikibaseRepo::getDefaultInstance()->getSiteStore();
 			$sitesTable->clear();
 			$sitesTable->saveSites( TestSites::getSites() );
+			// XXX: This needs to reset SiteLinkTargetProvider
 
 			$this->doLogin( 'wbeditor' );
 
