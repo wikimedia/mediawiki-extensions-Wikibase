@@ -13,6 +13,7 @@
 	 *        - {number} latitude
 	 *        - {number} longitude
 	 *        - {number|null} [precision]
+	 *        - {string|null} [globe] Defaults to http://www.wikidata.org/entity/Q2.
 	 *
 	 * @throws {Error} when latitude is greater than 360.
 	 * @throws {Error} when longitude is greater than 360.

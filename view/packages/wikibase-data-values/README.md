@@ -11,6 +11,10 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.8.1 (2016-04-08)
+* Added support for undefined `precision` to `globeCoordinate.GlobeCoordinate`.
+* Added `globe` support to `globeCoordinate.GlobeCoordinate`.
+
 ### 0.8.0 (2016-01-07)
 
 #### Breaking changes
