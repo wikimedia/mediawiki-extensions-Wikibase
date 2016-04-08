@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_0dce795f",
+        "filename": "lib/includes/store/sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-08T16:11:55Z",
+      "side": 1,
+      "message": "I\u0027m confused - getNumericId() is already guaranteed to return an int. Why is this needed? Also, there should be a regression test to make sure this change actually fixes the problem.",
+      "revId": "8723c6b722f74be2547a23498b42867ce31fd5e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
