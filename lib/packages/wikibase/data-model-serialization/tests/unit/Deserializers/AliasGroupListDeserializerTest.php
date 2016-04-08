@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 /**
  * @covers Wikibase\DataModel\Deserializers\AliasGroupListDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

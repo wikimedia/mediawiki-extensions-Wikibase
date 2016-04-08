@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 /**
  * @covers Wikibase\DataModel\Serializers\AliasGroupListSerializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

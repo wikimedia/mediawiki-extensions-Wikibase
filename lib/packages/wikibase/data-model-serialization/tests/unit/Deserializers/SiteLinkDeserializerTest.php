@@ -11,7 +11,7 @@ use Wikibase\DataModel\SiteLink;
 /**
  * @covers Wikibase\DataModel\Deserializers\SiteLinkDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class SiteLinkDeserializerTest extends PHPUnit_Framework_TestCase {

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 /**
  * @covers Wikibase\DataModel\Deserializers\EntityIdDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class EntityIdDeserializerTest extends PHPUnit_Framework_TestCase {

@@ -11,7 +11,7 @@ use Wikibase\DataModel\SiteLink;
 /**
  * Package private
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class SiteLinkSerializer implements DispatchableSerializer {

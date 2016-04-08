@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 /**
  * @covers Wikibase\DataModel\Serializers\SnakSerializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class SnakSerializerTest extends DispatchableSerializerTest {

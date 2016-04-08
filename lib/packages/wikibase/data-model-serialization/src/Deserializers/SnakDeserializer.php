@@ -18,7 +18,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 /**
  * Package private
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
  */

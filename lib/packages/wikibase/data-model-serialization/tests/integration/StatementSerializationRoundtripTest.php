@@ -15,7 +15,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class StatementSerializationRoundtripTest extends \PHPUnit_Framework_TestCase {
