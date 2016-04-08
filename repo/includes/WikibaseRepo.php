@@ -23,6 +23,7 @@ use IContextSource;
 use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
+use ObjectCache;
 use RequestContext;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
@@ -1658,6 +1659,17 @@ class WikibaseRepo {
 
 	private function getHtmlSnakFormatterFactory() {
 		return new WikibaseHtmlSnakFormatterFactory( $this->getSnakFormatterFactory() );
+	}
+
+	/**
+	 * @return SiteLinkTargetProvider
+	 */
+	public function getSiteLinkTargetprovider() {
+		return new SiteLinkTargetProvider(
+			$this->getSiteStore(),
+			ObjectCache::getInstance( CACHE_ACCEL ),
+			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
 	}
 
 }
