@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_2c06e323",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T09:49:32Z",
+      "side": 1,
+      "message": "We need a ticket for this.",
+      "revId": "bb72c60e717144eda8a9d67981ee4f6846656ef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4c0b672d",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T09:49:32Z",
+      "side": 1,
+      "message": "Upper case P please.",
+      "revId": "bb72c60e717144eda8a9d67981ee4f6846656ef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_87fc280a",
+        "filename": "repo/includes/Api/LinkTitles.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T09:49:32Z",
+      "side": 1,
+      "message": "P",
+      "revId": "bb72c60e717144eda8a9d67981ee4f6846656ef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_67ff64fd",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T09:49:32Z",
+      "side": 1,
+      "message": "P",
+      "revId": "bb72c60e717144eda8a9d67981ee4f6846656ef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_27155c41",
+        "filename": "repo/includes/SiteLinkTargetProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T09:49:32Z",
+      "side": 1,
+      "message": "PHPStorm complains about assignments used as conditions. Please add at least brackets. Better split this.",
+      "revId": "bb72c60e717144eda8a9d67981ee4f6846656ef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_073778e1",
+        "filename": "repo/includes/SiteLinkTargetProvider.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T09:49:32Z",
+      "side": 1,
+      "message": "Please add a newline.",
+      "revId": "bb72c60e717144eda8a9d67981ee4f6846656ef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_872388a5",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 1667,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-08T09:49:32Z",
+      "side": 1,
+      "message": "Please move this next to the existing getSiteStore.",
+      "revId": "bb72c60e717144eda8a9d67981ee4f6846656ef5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
