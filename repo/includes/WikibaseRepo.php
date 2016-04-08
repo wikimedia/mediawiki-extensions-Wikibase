@@ -23,6 +23,7 @@ use IContextSource;
 use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
+use ObjectCache;
 use RequestContext;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
@@ -1111,6 +1112,17 @@ class WikibaseRepo {
 		}
 
 		return $this->siteStore;
+	}
+
+	/**
+	 * @return SiteLinkTargetProvider
+	 */
+	public function getSiteLinkTargetProvider() {
+		return new SiteLinkTargetProvider(
+			$this->getSiteStore(),
+			ObjectCache::getInstance( CACHE_ACCEL ),
+			$this->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
 	}
 
 	/**

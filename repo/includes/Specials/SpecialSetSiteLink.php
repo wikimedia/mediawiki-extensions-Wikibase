@@ -85,10 +85,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 
 		$this->siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$this->siteStore,
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		);
+		$this->siteLinkTargetProvider = $wikibaseRepo->getSiteLinkTargetProvider();
 
 		$this->labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
 	}
