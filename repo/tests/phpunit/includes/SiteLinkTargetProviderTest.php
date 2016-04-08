@@ -102,10 +102,10 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getSiteStore() {
 		return new HashSiteStore( array(
-			$this->newSite( 'eswiki', 'wikipedia' ),
 			$this->newSite( 'dawiki', 'wikipedia' ),
-			$this->newSite( 'specieswiki', 'species' ),
+			$this->newSite( 'eswiki', 'wikipedia' ),
 			$this->newSite( 'eswikiquote', 'wikiquote' ),
+			$this->newSite( 'specieswiki', 'species' ),
 		) );
 	}
 
