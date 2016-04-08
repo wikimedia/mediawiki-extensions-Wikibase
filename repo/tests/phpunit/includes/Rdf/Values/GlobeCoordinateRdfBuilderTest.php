@@ -59,7 +59,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$snak,
 				false,
 				array(
-					'<http://www/Q1> <http://acme/statement/P7> "Point(12.25 -45.5)"^^<http://acme/geo/wktLiteral> .',
+					'<http://www/Q1> <http://acme/statement/P7> "Point(-45.5 12.25)"^^<http://acme/geo/wktLiteral> .',
 				)
 			),
 			'complex' => array(
@@ -68,7 +68,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
-						. '"Point(12.25 -45.5)"^^<http://acme/geo/wktLiteral> .',
+						. '"Point(-45.5 12.25)"^^<http://acme/geo/wktLiteral> .',
 					'<http://www/Q1> '
 						. '<http://acme/statement/value/P7> '
 						. '<http://acme/value/d396dfb27235918ab6969509c5e87a48> .',
@@ -93,7 +93,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				$snak_moon,
 				false,
 				array(
-					'<http://www/Q1> <http://acme/statement/P7> "<http://www.wikidata.org/entity/Q405> Point(8.5 31.4)"^^<http://acme/geo/wktLiteral> .',
+					'<http://www/Q1> <http://acme/statement/P7> "<http://www.wikidata.org/entity/Q405> Point(31.4 8.5)"^^<http://acme/geo/wktLiteral> .',
 				)
 			),
 		);
@@ -112,7 +112,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'<http://www/Q1> '
 						. '<http://acme/statement/P7> '
-						. '"Point(12.25 -45.5)"^^<http://acme/geo/wktLiteral> .',
+						. '"Point(-45.5 12.25)"^^<http://acme/geo/wktLiteral> .',
 					'<http://www/Q1> '
 						. '<http://acme/statement/value/P7> '
 						. '<http://acme/value/79451c61ee7a21407115df912637c022> .',
