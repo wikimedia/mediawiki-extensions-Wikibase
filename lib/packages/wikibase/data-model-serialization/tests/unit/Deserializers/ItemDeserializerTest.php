@@ -21,9 +21,9 @@ use Wikibase\DataModel\Term\TermList;
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class ItemDeserializerTest extends DeserializerBaseTest {
+class ItemDeserializerTest extends DispatchableDeserializerTest {
 
-	public function buildDeserializer() {
+	protected function buildDeserializer() {
 		$entityIdDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )

@@ -15,9 +15,9 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class StatementDeserializerTest extends DeserializerBaseTest {
+class StatementDeserializerTest extends DispatchableDeserializerTest {
 
-	public function buildDeserializer() {
+	protected function buildDeserializer() {
 		$snakDeserializerMock = $this->getMock( '\Deserializers\Deserializer' );
 		$snakDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )

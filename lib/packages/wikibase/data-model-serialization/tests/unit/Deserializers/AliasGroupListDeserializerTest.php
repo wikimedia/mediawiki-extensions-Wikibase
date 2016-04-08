@@ -2,7 +2,7 @@
 
 namespace Tests\Wikibase\DataModel\Deserializers;
 
-use Deserializers\Deserializer;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Deserializers\AliasGroupListDeserializer;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -14,17 +14,15 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class AliasGroupListDeserializerTest extends DeserializerBaseTest {
+class AliasGroupListDeserializerTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return Deserializer
+	 * @dataProvider nonDeserializableProvider
 	 */
-	public function buildDeserializer() {
-		return new AliasGroupListDeserializer();
-	}
-
-	public function deserializableProvider() {
-		return array( array() );
+	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
+		$deserializer = new AliasGroupListDeserializer();
+		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$deserializer->deserialize( $nonDeserializable );
 	}
 
 	/**
@@ -55,6 +53,14 @@ class AliasGroupListDeserializerTest extends DeserializerBaseTest {
 				),
 			) ),
 		);
+	}
+
+	/**
+	 * @dataProvider deserializationProvider
+	 */
+	public function testDeserialization( $object, $serialization ) {
+		$deserializer = new AliasGroupListDeserializer();
+		$this->assertEquals( $object, $deserializer->deserialize( $serialization ) );
 	}
 
 	/**

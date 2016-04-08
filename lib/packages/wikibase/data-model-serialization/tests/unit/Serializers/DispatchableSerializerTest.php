@@ -2,40 +2,34 @@
 
 namespace Tests\Wikibase\DataModel\Serializers;
 
+use PHPUnit_Framework_TestCase;
 use Serializers\DispatchableSerializer;
-use Serializers\Serializer;
 
 /**
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
+ * @author Thiemo Mättig
  */
-abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
+abstract class DispatchableSerializerTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return Serializer
+	 * @return DispatchableSerializer
 	 */
 	protected abstract function buildSerializer();
 
-	public function testImplementsSerializerInterface() {
-		$this->assertInstanceOf( 'Serializers\Serializer', $this->buildSerializer() );
+	public function testImplementsDispatchableSerializerInterface() {
+		$this->assertInstanceOf( 'Serializers\DispatchableSerializer', $this->buildSerializer() );
 	}
 
 	/**
 	 * @dataProvider serializableProvider
 	 */
 	public function testIsSerializerForReturnsTrue( $serializable ) {
-		$serializer = $this->buildSerializer();
-
-		if ( $serializer instanceof DispatchableSerializer ) {
-			$this->assertTrue( $serializer->isSerializerFor( $serializable ) );
-		}
-		else {
-			$this->assertTrue( true );
-		}
+		$this->assertTrue( $this->buildSerializer()->isSerializerFor( $serializable ) );
 	}
 
 	/**
-	 * @return mixed[] things that are serialized by the serializer
+	 * @return array[] things that are serialized by the serializer
 	 */
 	public abstract function serializableProvider();
 
@@ -43,14 +37,7 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider nonSerializableProvider
 	 */
 	public function testIsSerializerForReturnsFalse( $nonSerializable ) {
-		$serializer = $this->buildSerializer();
-
-		if ( $serializer instanceof DispatchableSerializer ) {
-			$this->assertFalse( $serializer->isSerializerFor( $nonSerializable ) );
-		}
-		else {
-			$this->assertTrue( true );
-		}
+		$this->assertFalse( $this->buildSerializer()->isSerializerFor( $nonSerializable ) );
 	}
 
 	/**
@@ -62,7 +49,7 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return mixed[] things that aren't serialized by the serializer
+	 * @return array[] things that aren't serialized by the serializer
 	 */
 	public abstract function nonSerializableProvider();
 
@@ -70,14 +57,12 @@ abstract class SerializerBaseTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider serializationProvider
 	 */
 	public function testSerialization( $serialization, $object ) {
-		$this->assertEquals(
-			$serialization,
-			$this->buildSerializer()->serialize( $object )
-		);
+		$this->assertSame( $serialization, $this->buildSerializer()->serialize( $object ) );
 	}
 
 	/**
-	 * @return array an array of array( serialization, object to serialize)
+	 * @return array[] an array of array( serialization, object to serialize)
 	 */
 	public abstract function serializationProvider();
+
 }

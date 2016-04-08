@@ -17,7 +17,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @licence GNU GPL v2+
  * @author Thomas Pellissier Tanon
  */
-class StatementSerializerTest extends SerializerBaseTest {
+class StatementSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
 		$snakSerializerFake = $this->getMock( '\Serializers\Serializer' );
@@ -94,12 +94,12 @@ class StatementSerializerTest extends SerializerBaseTest {
 		$statement->setGuid( 'q42' );
 		$serializations[] = array(
 			array(
-				'id' => 'q42',
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
 					'property' => 'P42'
 				),
 				'type' => 'statement',
+				'id' => 'q42',
 				'rank' => 'normal'
 			),
 			$statement
@@ -157,6 +157,7 @@ class StatementSerializerTest extends SerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => "P42"
 				),
+				'type' => 'statement',
 				'qualifiers' => array(
 					'P42' => array(
 						array(
@@ -168,7 +169,6 @@ class StatementSerializerTest extends SerializerBaseTest {
 				'qualifiers-order' => array(
 					'P42'
 				),
-				'type' => 'statement',
 				'rank' => 'normal'
 			),
 			$statement
@@ -184,14 +184,14 @@ class StatementSerializerTest extends SerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => "P42"
 				),
+				'type' => 'statement',
+				'rank' => 'normal',
 				'references' => array(
 					array(
 						'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
 						'snaks' => array()
 					)
 				),
-				'type' => 'statement',
-				'rank' => 'normal'
 			),
 			$statement
 		);
