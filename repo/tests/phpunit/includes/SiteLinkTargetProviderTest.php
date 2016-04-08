@@ -37,6 +37,7 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 		foreach ( $siteList as $site ) {
 			$globalIds[] = $site->getGlobalId();
 		}
+		sort( $globalIds );
 		$this->assertSame( $expectedGlobalIds, $globalIds );
 	}
 

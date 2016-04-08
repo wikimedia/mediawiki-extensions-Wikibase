@@ -41,7 +41,7 @@ class SiteLinkTargetProvider {
 	 *
 	 * @param string[] $groups sitelink groups to get
 	 *
-	 * @return SiteList alphabetically ordered by the site's global identifiers.
+	 * @return SiteList
 	 */
 	public function getSiteList( array $groups ) {
 		// As the special sitelink group actually just wraps multiple groups
@@ -57,12 +57,6 @@ class SiteLinkTargetProvider {
 				$sites->append( $site );
 			}
 		}
-
-		// Because of the way SiteList is implemented this will not order the array returned by
-		// SiteList::getGlobalIdentifiers.
-		$sites->uasort( function( Site $a, Site $b ) {
-			return strnatcasecmp( $a->getGlobalId(), $b->getGlobalId() );
-		} );
 
 		return $sites;
 	}
