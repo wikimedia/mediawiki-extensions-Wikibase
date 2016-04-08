@@ -1,24 +1,20 @@
 {
-    "@metadata": {
-        "authors": [
-            "Pikne"
-        ]
-    },
-    "valueview-desc": "Kasutajaliidese komponendid andmeväärtuste kuvamiseks ja muutmiseks",
-    "valueview-expert-advancedadjustments": "täpsem häälestus",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Tüübi \"$1\" väärtuste töötlemise tugi puudub veel.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Andmetüübi \"$1\" väärtuste töötlemise tugi puudub veel.",
-    "valueview-expert-emptyvalue-empty": "tühi",
-    "valueview-expert-globecoordinateinput-precision": "Esitustäpsus:",
-    "valueview-expert-timevalue-calendar-gregorian": "uue kalendri järgi",
-    "valueview-expert-timevalue-calendar-julian": "vana kalendri järgi",
-    "valueview-expert-timeinput-precision": "Esitustäpsus:",
-    "valueview-expert-timeinput-calendar": "Kalender:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(Uus kalender)",
-    "valueview-expert-timeinput-calendarhint-julian": "(Vana kalender)",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; vaheta uue kalendri vastu",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; vaheta vana kalendri vastu",
-    "valueview-preview-label": "kuvatakse nii:",
-    "valueview-preview-novalue": "sobimatu väärtus tuvastatud",
-    "valueview-listrotator-auto": "automaatne"
+	"@metadata": {
+		"authors": [
+			"Pikne"
+		]
+	},
+	"valueview-desc": "Kasutajaliidese komponendid andmeväärtuste kuvamiseks ja muutmiseks",
+	"valueview-expert-advancedadjustments": "täpsem häälestus",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Tüübi \"$1\" väärtuste töötlemise tugi puudub veel.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Andmetüübi \"$1\" väärtuste töötlemise tugi puudub veel.",
+	"valueview-expert-emptyvalue-empty": "tühi",
+	"valueview-expert-globecoordinateinput-precision": "Esitustäpsus:",
+	"valueview-expert-timevalue-calendar-gregorian": "uue kalendri järgi",
+	"valueview-expert-timevalue-calendar-julian": "vana kalendri järgi",
+	"valueview-expert-timeinput-precision": "Esitustäpsus:",
+	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-preview-label": "kuvatakse nii:",
+	"valueview-preview-novalue": "sobimatu väärtus tuvastatud",
+	"valueview-listrotator-auto": "automaatne"
 }

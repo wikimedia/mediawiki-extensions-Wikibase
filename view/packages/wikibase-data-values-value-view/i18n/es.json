@@ -1,26 +1,31 @@
 {
-    "@metadata": {
-        "authors": [
-            "Fitoschido",
-            "Invadinado",
-            "Luis Felipe Schenone"
-        ]
-    },
-    "valueview-desc": "Componentes de la interfaz de usuario para mostrar y editar los datos",
-    "valueview-expert-advancedadjustments": "ajustes avanzados",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Todavía no se admite la manipulación de valores \"$1\"",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Todavía no se admite la manipulación de valores para el tipo de datos \"$1\"",
-    "valueview-expert-emptyvalue-empty": "vacío",
-    "valueview-expert-globecoordinateinput-precision": "Precisión:",
-    "valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
-    "valueview-expert-timevalue-calendar-julian": "Juliano",
-    "valueview-expert-timeinput-precision": "Precisión:",
-    "valueview-expert-timeinput-calendar": "Calendario:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendario Gregoriano)",
-    "valueview-expert-timeinput-calendarhint-julian": "(Calendario Juliano)",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; cambiar a Gregoriano",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; cambiar a Juliano",
-    "valueview-preview-label": "se mostrará como:",
-    "valueview-preview-novalue": "no se reconoce ningún valor válido",
-    "valueview-listrotator-auto": "automático"
+	"@metadata": {
+		"authors": [
+			"Fitoschido",
+			"Invadinado",
+			"Luis Felipe Schenone",
+			"Macofe"
+		]
+	},
+	"valueview-desc": "Componentes de la interfaz de usuario para mostrar y editar los datos",
+	"valueview-expert-advancedadjustments": "ajustes avanzados",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Todavía no se admite la manipulación de valores \"$1\"",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Todavía no se admite la manipulación de valores para el tipo de datos \"$1\"",
+	"valueview-expert-emptyvalue-empty": "vacío",
+	"valueview-expert-globecoordinateinput-precision": "Precisión:",
+	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
+	"valueview-expert-timevalue-calendar-julian": "Juliano",
+	"valueview-expert-timeinput-precision": "Precisión:",
+	"valueview-expert-timeinput-calendar": "Calendario:",
+	"valueview-expertextender-calendarhint-gregorian": "(Calendario gregoriano)",
+	"valueview-expertextender-calendarhint-julian": "(Calendario juliano)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; cambiar a gregoriano",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; cambiar a juliano",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Idioma (obligatorio):",
+	"valueview-expertextender-unitsuggester-label": "Unidad (opcional):",
+	"valueview-preview-label": "se mostrará como:",
+	"valueview-preview-novalue": "no se reconoce ningún valor válido",
+	"valueview-listrotator-auto": "automático"
 }

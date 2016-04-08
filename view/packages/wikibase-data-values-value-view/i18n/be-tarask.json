@@ -1,24 +1,20 @@
 {
-    "@metadata": {
-        "authors": [
-            "Wizardist"
-        ]
-    },
-    "valueview-desc": "Кампанэнты карыстальніцкага інтэрфэйсу для адлюстраваньня і рэдагаваньня зьвестак",
-    "valueview-expert-advancedadjustments": "пашыраныя налады",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Апрацоўка значэньняў «$1» пакуль не падтрымліваецца.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.",
-    "valueview-expert-emptyvalue-empty": "пуста",
-    "valueview-expert-globecoordinateinput-precision": "Дакладнасьць:",
-    "valueview-expert-timevalue-calendar-gregorian": "Грэгарыянскі",
-    "valueview-expert-timevalue-calendar-julian": "Юліянскі",
-    "valueview-expert-timeinput-precision": "Дакладнасьць:",
-    "valueview-expert-timeinput-calendar": "Каляндар:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(Грэгарыянскі каляндар)",
-    "valueview-expert-timeinput-calendarhint-julian": "(Юліянскі каляндар)",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; зьмяніць на грэгарыянскі",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; зьмяніць на юліянскі",
-    "valueview-preview-label": "будзе адлюстроўвацца як:",
-    "valueview-preview-novalue": "слушнае значэньне не распазнанае",
-    "valueview-listrotator-auto": "аўтаматычна"
+	"@metadata": {
+		"authors": [
+			"Wizardist"
+		]
+	},
+	"valueview-desc": "Кампанэнты карыстальніцкага інтэрфэйсу для адлюстраваньня і рэдагаваньня зьвестак",
+	"valueview-expert-advancedadjustments": "пашыраныя налады",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Апрацоўка значэньняў «$1» пакуль не падтрымліваецца.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Апрацоўка значэньняў тыпу «$1» яшчэ не падтрымліваецца.",
+	"valueview-expert-emptyvalue-empty": "пуста",
+	"valueview-expert-globecoordinateinput-precision": "Дакладнасьць:",
+	"valueview-expert-timevalue-calendar-gregorian": "Грэгарыянскі",
+	"valueview-expert-timevalue-calendar-julian": "Юліянскі",
+	"valueview-expert-timeinput-precision": "Дакладнасьць:",
+	"valueview-expert-timeinput-calendar": "Каляндар:",
+	"valueview-preview-label": "будзе адлюстроўвацца як:",
+	"valueview-preview-novalue": "слушнае значэньне не распазнанае",
+	"valueview-listrotator-auto": "аўтаматычна"
 }

@@ -1,24 +1,29 @@
 {
-    "@metadata": {
-        "authors": [
-            "Mormegil"
-        ]
-    },
-    "valueview-desc": "Komponenty uživatelského rozhraní pro zobrazování a editaci datových hodnot",
-    "valueview-expert-advancedadjustments": "pokročilé úpravy",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Zpracování hodnot „$1“ není dosud podporováno.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Zpracování hodnot datového typu „$1“ není dosud podporováno.",
-    "valueview-expert-emptyvalue-empty": "prázdná",
-    "valueview-expert-globecoordinateinput-precision": "Přesnost:",
-    "valueview-expert-timevalue-calendar-gregorian": "gregoriánský",
-    "valueview-expert-timevalue-calendar-julian": "juliánský",
-    "valueview-expert-timeinput-precision": "Přesnost:",
-    "valueview-expert-timeinput-calendar": "Kalendář:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(gregoriánský kalendář)",
-    "valueview-expert-timeinput-calendarhint-julian": "(juliánský kalendář)",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; změnit na gregoriánský",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; změnit na juliánský",
-    "valueview-preview-label": "bude zobrazeno jako:",
-    "valueview-preview-novalue": "nebyla rozpoznána platná hodnota",
-    "valueview-listrotator-auto": "automaticky"
+	"@metadata": {
+		"authors": [
+			"Mormegil",
+			"Matěj Suchánek"
+		]
+	},
+	"valueview-desc": "Komponenty uživatelského rozhraní pro zobrazování a editaci datových hodnot",
+	"valueview-expert-advancedadjustments": "pokročilé úpravy",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Zpracování hodnot „$1“ není dosud podporováno.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Zpracování hodnot datového typu „$1“ není dosud podporováno.",
+	"valueview-expert-emptyvalue-empty": "prázdná",
+	"valueview-expert-globecoordinateinput-precision": "Přesnost:",
+	"valueview-expert-globecoordinateinput-customprecision": "speciální ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "gregoriánský",
+	"valueview-expert-timevalue-calendar-julian": "juliánský",
+	"valueview-expert-timeinput-precision": "Přesnost:",
+	"valueview-expert-timeinput-calendar": "Kalendář:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregoriánský kalendář)",
+	"valueview-expertextender-calendarhint-julian": "(Juliánský kalendář)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "→ změnit na Gregoriánský",
+	"valueview-expertextender-calendarhint-switch-julian": "→ změnit na Juliánský",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Jazyk (povinný):",
+	"valueview-expertextender-unitsuggester-label": "Jednotka (volitelná):",
+	"valueview-preview-label": "bude zobrazeno jako:",
+	"valueview-preview-novalue": "nebyla rozpoznána platná hodnota",
+	"valueview-listrotator-auto": "automaticky"
 }

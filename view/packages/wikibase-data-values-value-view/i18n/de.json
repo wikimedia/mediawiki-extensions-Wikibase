@@ -1,25 +1,29 @@
 {
-    "@metadata": {
-        "authors": [
-            "Kghbln",
-            "Metalhead64"
-        ]
-    },
-    "valueview-desc": "Ergänzt die Benutzeroberfläche um Komponenten zum Anzeigen und Bearbeiten von Datenwerten",
-    "valueview-expert-advancedadjustments": "Erweiterte Anpassungen",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Das Bearbeiten von Werten mit dem Typ „$1“ wird noch nicht unterstützt.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Das Bearbeiten von Werten für den Datentyp „$1“ wird noch nicht unterstützt.",
-    "valueview-expert-emptyvalue-empty": "leer",
-    "valueview-expert-globecoordinateinput-precision": "Genauigkeit:",
-    "valueview-expert-timevalue-calendar-gregorian": "Gregorianisch",
-    "valueview-expert-timevalue-calendar-julian": "Julianisch",
-    "valueview-expert-timeinput-precision": "Genauigkeit:",
-    "valueview-expert-timeinput-calendar": "Kalender:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(Gregorianischer Kalender)",
-    "valueview-expert-timeinput-calendarhint-julian": "(Julianischer Kalender)",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; ändern in Gregorianisch",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; ändern in Julianisch",
-    "valueview-preview-label": "wird angezeigt als:",
-    "valueview-preview-novalue": "keinen gültigen Wert erkannt",
-    "valueview-listrotator-auto": "automatisch"
+	"@metadata": {
+		"authors": [
+			"Kghbln",
+			"Metalhead64"
+		]
+	},
+	"valueview-desc": "Ergänzt die Benutzeroberfläche um Komponenten zum Anzeigen und Bearbeiten von Datenwerten",
+	"valueview-expert-advancedadjustments": "Erweiterte Anpassungen",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Das Bearbeiten von Werten mit dem Typ „$1“ wird noch nicht unterstützt.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Das Bearbeiten von Werten für den Datentyp „$1“ wird noch nicht unterstützt.",
+	"valueview-expert-emptyvalue-empty": "leer",
+	"valueview-expert-globecoordinateinput-precision": "Genauigkeit:",
+	"valueview-expert-globecoordinateinput-customprecision": "Spezial ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorianisch",
+	"valueview-expert-timevalue-calendar-julian": "Julianisch",
+	"valueview-expert-timeinput-precision": "Genauigkeit:",
+	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregorianischer Kalender)",
+	"valueview-expertextender-calendarhint-julian": "(Julianischer Kalender)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; zu Gregorianisch ändern",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; zu Julianisch ändern",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Sprache (verpflichtend):",
+	"valueview-expertextender-unitsuggester-label": "Einheit (optional):",
+	"valueview-preview-label": "wird angezeigt als:",
+	"valueview-preview-novalue": "keinen gültigen Wert erkannt",
+	"valueview-listrotator-auto": "automatisch"
 }

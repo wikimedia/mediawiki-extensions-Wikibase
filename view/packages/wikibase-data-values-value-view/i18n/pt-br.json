@@ -1,18 +1,16 @@
 {
-    "@metadata": {
-        "authors": [
-            "Cainamarques",
-            "Luckas"
-        ]
-    },
-    "valueview-desc": "Componentes da interface para exibir e editar valores de dados.",
-    "valueview-expert-advancedadjustments": "ajustes avançados",
-    "valueview-expert-emptyvalue-empty": "vazio",
-    "valueview-expert-globecoordinateinput-precision": "Precisão:",
-    "valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
-    "valueview-expert-timevalue-calendar-julian": "Juliano",
-    "valueview-expert-timeinput-precision": "Precisão:",
-    "valueview-expert-timeinput-calendar": "Calendário:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(Calendário gregoriano)",
-    "valueview-expert-timeinput-calendarhint-julian": "(Calendário juliano)"
+	"@metadata": {
+		"authors": [
+			"Cainamarques",
+			"Luckas"
+		]
+	},
+	"valueview-desc": "Componentes da interface para exibir e editar valores de dados.",
+	"valueview-expert-advancedadjustments": "ajustes avançados",
+	"valueview-expert-emptyvalue-empty": "vazio",
+	"valueview-expert-globecoordinateinput-precision": "Precisão:",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
+	"valueview-expert-timevalue-calendar-julian": "Juliano",
+	"valueview-expert-timeinput-precision": "Precisão:",
+	"valueview-expert-timeinput-calendar": "Calendário:"
 }

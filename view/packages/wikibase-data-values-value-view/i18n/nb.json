@@ -1,6 +1,16 @@
 {
-    "@metadata": {
-        "authors": []
-    },
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Håndtering av verdier for datatypen «$1» støttes ikke ennå."
+	"@metadata": {
+		"authors": [
+			"Danmichaelo"
+		]
+	},
+	"valueview-desc": "UI-komponenter for å vise og redigere dataverdier",
+	"valueview-expert-advancedadjustments": "avanserte justeringer",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Håndtering av verdier for datatypen «$1» støttes ikke ennå.",
+	"valueview-expert-timevalue-calendar-gregorian": "gregoriansk",
+	"valueview-expert-timevalue-calendar-julian": "juliansk",
+	"valueview-expert-timeinput-precision": "Presisjon:",
+	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-preview-label": "vil vises som:",
+	"valueview-listrotator-auto": "auto"
 }

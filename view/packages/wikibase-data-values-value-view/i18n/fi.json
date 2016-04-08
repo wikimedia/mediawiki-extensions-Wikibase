@@ -1,17 +1,17 @@
 {
-    "@metadata": {
-        "authors": [
-            "Nike",
-            "Silvonen",
-            "Stryn"
-        ]
-    },
-    "valueview-expert-advancedadjustments": "lisäsäädöt",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Datatyypin \"$1\" arvojen käsittelyä ei vielä tueta.",
-    "valueview-expert-emptyvalue-empty": "tyhjä",
-    "valueview-expert-timeinput-precision": "Tarkkuus:",
-    "valueview-expert-timeinput-calendar": "Kalenteri:",
-    "valueview-preview-label": "näytetään muodossa:",
-    "valueview-preview-novalue": "kelvollista arvoa ei tunnistettu",
-    "valueview-listrotator-auto": "auto"
+	"@metadata": {
+		"authors": [
+			"Nike",
+			"Silvonen",
+			"Stryn"
+		]
+	},
+	"valueview-expert-advancedadjustments": "lisäsäädöt",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Datatyypin \"$1\" arvojen käsittelyä ei vielä tueta.",
+	"valueview-expert-emptyvalue-empty": "tyhjä",
+	"valueview-expert-timeinput-precision": "Tarkkuus:",
+	"valueview-expert-timeinput-calendar": "Kalenteri:",
+	"valueview-preview-label": "näytetään muodossa:",
+	"valueview-preview-novalue": "kelvollista arvoa ei tunnistettu",
+	"valueview-listrotator-auto": "auto"
 }

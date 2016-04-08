@@ -1,27 +1,32 @@
 {
-    "@metadata": {
-        "authors": [
-            "Li3939108",
-            "Linforest",
-            "Qiyue2001",
-            "Stevenliuyi"
-        ]
-    },
-    "valueview-desc": "显示和编辑数据值的用户界面",
-    "valueview-expert-advancedadjustments": "高级调整",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "尚不支持对“$1”取值的操作。",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "尚不支持对“$1”数据类型取值的操作。",
-    "valueview-expert-emptyvalue-empty": "空白",
-    "valueview-expert-globecoordinateinput-precision": "精度：",
-    "valueview-expert-timevalue-calendar-gregorian": "格里历",
-    "valueview-expert-timevalue-calendar-julian": "儒略历",
-    "valueview-expert-timeinput-precision": "精度：",
-    "valueview-expert-timeinput-calendar": "日历：",
-    "valueview-expert-timeinput-calendarhint-gregorian": "（格里历）",
-    "valueview-expert-timeinput-calendarhint-julian": "（儒略历）",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; 更改为格里历",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; 更改为儒略历",
-    "valueview-preview-label": "将显示为：",
-    "valueview-preview-novalue": "无法识别",
-    "valueview-listrotator-auto": "自动"
+	"@metadata": {
+		"authors": [
+			"Li3939108",
+			"Linforest",
+			"Qiyue2001",
+			"Stevenliuyi",
+			"Liuxinyu970226"
+		]
+	},
+	"valueview-desc": "显示和编辑数据值的用户界面",
+	"valueview-expert-advancedadjustments": "高级调整",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "尚不支持对“$1”取值的操作。",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "尚不支持对“$1”数据类型取值的操作。",
+	"valueview-expert-emptyvalue-empty": "空白",
+	"valueview-expert-globecoordinateinput-precision": "精度：",
+	"valueview-expert-globecoordinateinput-customprecision": "特殊（$1）",
+	"valueview-expert-timevalue-calendar-gregorian": "格里历",
+	"valueview-expert-timevalue-calendar-julian": "儒略历",
+	"valueview-expert-timeinput-precision": "精度：",
+	"valueview-expert-timeinput-calendar": "日历：",
+	"valueview-expertextender-calendarhint-gregorian": "（格里历）",
+	"valueview-expertextender-calendarhint-julian": "（儒略历）",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr;更改为格里历",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr;更改为儒略历",
+	"valueview-expertextender-languageselector-languagetemplate": "$1（$2）",
+	"valueview-expertextender-languageselector-label": "语言（必填）：",
+	"valueview-expertextender-unitsuggester-label": "单位（可选）：",
+	"valueview-preview-label": "将显示为：",
+	"valueview-preview-novalue": "无法识别",
+	"valueview-listrotator-auto": "自动"
 }

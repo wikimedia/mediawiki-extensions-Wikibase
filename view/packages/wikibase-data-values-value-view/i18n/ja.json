@@ -1,25 +1,23 @@
 {
-    "@metadata": {
-        "authors": [
-            "Fryed-peach",
-            "Shirayuki"
-        ]
-    },
-    "valueview-desc": "データ値を表示/編集するユーザーインターフェイスコンポーネント",
-    "valueview-expert-advancedadjustments": "高度な調整",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "「$1」の値の処理にはまだ対応していません。",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "データ型「$1」の値の処理にはまだ対応していません。",
-    "valueview-expert-emptyvalue-empty": "空",
-    "valueview-expert-globecoordinateinput-precision": "精度:",
-    "valueview-expert-timevalue-calendar-gregorian": "グレゴリオ暦",
-    "valueview-expert-timevalue-calendar-julian": "ユリウス暦",
-    "valueview-expert-timeinput-precision": "精度:",
-    "valueview-expert-timeinput-calendar": "暦:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(グレゴリオ暦)",
-    "valueview-expert-timeinput-calendarhint-julian": "(ユリウス暦)",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; グレゴリオ暦に変更",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; ユリウス暦に変更",
-    "valueview-preview-label": "プレビュー:",
-    "valueview-preview-novalue": "有効な値を認識できませんでした",
-    "valueview-listrotator-auto": "自動"
+	"@metadata": {
+		"authors": [
+			"Fryed-peach",
+			"Shirayuki",
+			"Otokoume"
+		]
+	},
+	"valueview-desc": "データ値を表示/編集するユーザーインターフェイスコンポーネント",
+	"valueview-expert-advancedadjustments": "高度な調整",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "「$1」の値の処理にはまだ対応していません。",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "データ型「$1」の値の処理にはまだ対応していません。",
+	"valueview-expert-emptyvalue-empty": "空",
+	"valueview-expert-globecoordinateinput-precision": "精度:",
+	"valueview-expert-timevalue-calendar-gregorian": "グレゴリオ暦",
+	"valueview-expert-timevalue-calendar-julian": "ユリウス暦",
+	"valueview-expert-timeinput-precision": "精度:",
+	"valueview-expert-timeinput-calendar": "暦:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-preview-label": "プレビュー:",
+	"valueview-preview-novalue": "有効な値を認識できませんでした",
+	"valueview-listrotator-auto": "自動"
 }

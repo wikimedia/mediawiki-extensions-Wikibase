@@ -1,24 +1,28 @@
 {
-    "@metadata": {
-        "authors": [
-            "Bjankuloski06"
-        ]
-    },
-    "valueview-desc": "Посреднички компоненти за приказ и уредување на податочни вредности",
-    "valueview-expert-advancedadjustments": "напредни прилагодувања",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Работата со вредности од типот „$1“ сè уште не е поддржана.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Работата со вредности за податочниот тип „$1“ сè уште не е поддржана.",
-    "valueview-expert-emptyvalue-empty": "празно",
-    "valueview-expert-globecoordinateinput-precision": "Уточнетост:",
-    "valueview-expert-timevalue-calendar-gregorian": "грегоријански",
-    "valueview-expert-timevalue-calendar-julian": "јулијански",
-    "valueview-expert-timeinput-precision": "Уточнетост:",
-    "valueview-expert-timeinput-calendar": "Календар:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(грегоријански календар)",
-    "valueview-expert-timeinput-calendarhint-julian": "(јулијански календар)",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; смени во грегоријански",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; смени во јулијански",
-    "valueview-preview-label": "ќе се прикажува како:",
-    "valueview-preview-novalue": "не препознав важечка вредност",
-    "valueview-listrotator-auto": "автоматски"
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"valueview-desc": "Посреднички компоненти за приказ и уредување на податочни вредности",
+	"valueview-expert-advancedadjustments": "напредни прилагодувања",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Работата со вредности од типот „$1“ сè уште не е поддржана.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Работата со вредности за податочниот тип „$1“ сè уште не е поддржана.",
+	"valueview-expert-emptyvalue-empty": "празно",
+	"valueview-expert-globecoordinateinput-precision": "Уточнетост:",
+	"valueview-expert-globecoordinateinput-customprecision": "посебна ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "грегоријански",
+	"valueview-expert-timevalue-calendar-julian": "јулијански",
+	"valueview-expert-timeinput-precision": "Уточнетост:",
+	"valueview-expert-timeinput-calendar": "Календар:",
+	"valueview-expertextender-calendarhint-gregorian": "(грегоријански календар)",
+	"valueview-expertextender-calendarhint-julian": "(јулијански календар)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; смени во грегоријански",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; смени во јулијански",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Јазик (задолж.)",
+	"valueview-expertextender-unitsuggester-label": "Единица (незадолж.)",
+	"valueview-preview-label": "ќе се прикажува како:",
+	"valueview-preview-novalue": "не препознав важечка вредност",
+	"valueview-listrotator-auto": "автоматски"
 }

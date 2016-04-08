@@ -1,24 +1,29 @@
 {
-    "@metadata": {
-        "authors": [
-            "Ата"
-        ]
-    },
-    "valueview-desc": "Компоненти користувацького інтерфейсу для відображення і редагування значень даних",
-    "valueview-expert-advancedadjustments": "розширені налаштування",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Обробка значень «$1» ще не підтримується.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Обробка значень типу даних «$1» ще не підтримується.",
-    "valueview-expert-emptyvalue-empty": "пусто",
-    "valueview-expert-globecoordinateinput-precision": "Точність:",
-    "valueview-expert-timevalue-calendar-gregorian": "Григоріанський",
-    "valueview-expert-timevalue-calendar-julian": "Юліанський",
-    "valueview-expert-timeinput-precision": "Точність:",
-    "valueview-expert-timeinput-calendar": "Календар:",
-    "valueview-expert-timeinput-calendarhint-gregorian": "(Григоріанський календар)",
-    "valueview-expert-timeinput-calendarhint-julian": "(Юліанський календар)",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; змінити на Григоріанський",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; змінити на Юліанський",
-    "valueview-preview-label": "буде відображатися як:",
-    "valueview-preview-novalue": "не розпізнано допустимого значення",
-    "valueview-listrotator-auto": "автоматично"
+	"@metadata": {
+		"authors": [
+			"Ата",
+			"Mykola Swarnyk"
+		]
+	},
+	"valueview-desc": "Компоненти користувацького інтерфейсу для відображення і редагування значень даних",
+	"valueview-expert-advancedadjustments": "розширені налаштування",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Обробка значень «$1» ще не підтримується.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Обробка значень типу даних «$1» ще не підтримується.",
+	"valueview-expert-emptyvalue-empty": "пусто",
+	"valueview-expert-globecoordinateinput-precision": "Точність:",
+	"valueview-expert-globecoordinateinput-customprecision": "спеціальні ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Григоріанський",
+	"valueview-expert-timevalue-calendar-julian": "Юліанський",
+	"valueview-expert-timeinput-precision": "Точність:",
+	"valueview-expert-timeinput-calendar": "Календар:",
+	"valueview-expertextender-calendarhint-gregorian": "(За григоріанським календарем)",
+	"valueview-expertextender-calendarhint-julian": "(За юліанським календарем)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; змінити на григоріанський стиль",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; змінити на юліанський стиль",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Мова (обов'язково)",
+	"valueview-expertextender-unitsuggester-label": "Блок (на вибір):",
+	"valueview-preview-label": "буде відображатися як:",
+	"valueview-preview-novalue": "не розпізнано допустимого значення",
+	"valueview-listrotator-auto": "автоматично"
 }

@@ -1,25 +1,23 @@
 {
-    "@metadata": {
-        "authors": [
-            "Simon Shek",
-            "Stevenliuyi"
-        ]
-    },
-    "valueview-desc": "顯示和編輯數據值的用戶介面",
-    "valueview-expert-advancedadjustments": "高級調整",
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "尚未支援「$1」值的操作。",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "尚未支援「$1」數據值的操作。",
-    "valueview-expert-emptyvalue-empty": "空",
-    "valueview-expert-globecoordinateinput-precision": "精度：",
-    "valueview-expert-timevalue-calendar-gregorian": "格里曆",
-    "valueview-expert-timevalue-calendar-julian": "儒略曆",
-    "valueview-expert-timeinput-precision": "精度：",
-    "valueview-expert-timeinput-calendar": "日曆：",
-    "valueview-expert-timeinput-calendarhint-gregorian": "（格里曆）",
-    "valueview-expert-timeinput-calendarhint-julian": "（儒略曆）",
-    "valueview-expert-timeinput-calendarhint-switch-gregorian": "&rarr; 更改為格里曆",
-    "valueview-expert-timeinput-calendarhint-switch-julian": "&rarr; 更改為儒略曆",
-    "valueview-preview-label": "將顯示為：",
-    "valueview-preview-novalue": "無法識別",
-    "valueview-listrotator-auto": "自動"
+	"@metadata": {
+		"authors": [
+			"Simon Shek",
+			"Stevenliuyi",
+			"Liuxinyu970226"
+		]
+	},
+	"valueview-desc": "顯示和編輯數據值的用戶介面",
+	"valueview-expert-advancedadjustments": "高級調整",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "尚未支援「$1」值的操作。",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "尚未支援「$1」數據值的操作。",
+	"valueview-expert-emptyvalue-empty": "空",
+	"valueview-expert-globecoordinateinput-precision": "精度：",
+	"valueview-expert-globecoordinateinput-customprecision": "特殊 ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "格里曆",
+	"valueview-expert-timevalue-calendar-julian": "儒略曆",
+	"valueview-expert-timeinput-precision": "精度：",
+	"valueview-expert-timeinput-calendar": "日曆：",
+	"valueview-preview-label": "將顯示為：",
+	"valueview-preview-novalue": "無法識別",
+	"valueview-listrotator-auto": "自動"
 }
