@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase;
 use Serializers\DispatchableSerializer;
 
 /**
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  * @author Thiemo Mättig
  */

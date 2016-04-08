@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\TermList;
 /**
  * @covers Wikibase\DataModel\Serializers\TermListSerializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class TermListSerializerTest extends PHPUnit_Framework_TestCase {

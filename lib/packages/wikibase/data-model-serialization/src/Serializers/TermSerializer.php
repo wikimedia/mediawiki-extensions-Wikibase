@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\TermFallback;
 /**
  * Package private
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class TermSerializer implements Serializer {

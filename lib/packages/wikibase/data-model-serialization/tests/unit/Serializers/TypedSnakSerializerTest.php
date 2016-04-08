@@ -10,7 +10,7 @@ use Wikibase\DataModel\Snak\TypedSnak;
 /**
  * @covers Wikibase\DataModel\Serializers\TypedSnakSerializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class TypedSnakSerializerTest extends \PHPUnit_Framework_TestCase {

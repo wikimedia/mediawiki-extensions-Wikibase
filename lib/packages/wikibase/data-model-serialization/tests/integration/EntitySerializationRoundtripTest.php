@@ -14,7 +14,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class EntitySerializationRoundtripTest extends \PHPUnit_Framework_TestCase {

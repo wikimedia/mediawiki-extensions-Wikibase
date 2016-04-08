@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\Term;
 /**
  * @covers Wikibase\DataModel\Deserializers\TermDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class TermDeserializerTest extends PHPUnit_Framework_TestCase {

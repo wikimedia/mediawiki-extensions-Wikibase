@@ -10,7 +10,7 @@ use Wikibase\DataModel\ReferenceList;
 /**
  * @covers Wikibase\DataModel\Deserializers\ReferenceListDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class ReferenceListDeserializerTest extends PHPUnit_Framework_TestCase {

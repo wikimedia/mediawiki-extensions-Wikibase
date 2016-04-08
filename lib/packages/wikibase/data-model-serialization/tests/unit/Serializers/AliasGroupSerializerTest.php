@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 /**
  * @covers Wikibase\DataModel\Serializers\AliasGroupSerializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class AliasGroupSerializerTest extends PHPUnit_Framework_TestCase {

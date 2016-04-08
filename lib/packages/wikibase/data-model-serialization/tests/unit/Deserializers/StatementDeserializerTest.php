@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * @covers Wikibase\DataModel\Deserializers\StatementDeserializer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 class StatementDeserializerTest extends DispatchableDeserializerTest {
