@@ -96,11 +96,7 @@ class GetEntities extends ApiBase {
 		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		);
-
+		$this->siteLinkTargetProvider = $wikibaseRepo->getSiteLinkTargetProvider();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->entityPrefetcher = $wikibaseRepo->getStore()->getEntityPrefetcher();
 	}
@@ -314,7 +310,7 @@ class GetEntities extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$sites = $this->siteLinkTargetProvider->getSiteListForGroups( $this->siteLinkGroups );
 
 		return array_merge( parent::getAllowedParams(), array(
 			'ids' => array(

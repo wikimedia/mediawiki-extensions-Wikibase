@@ -31,9 +31,29 @@ class SiteLinkTargetProvider {
 	 * @param SiteStore $siteStore
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, array $specialSiteGroups = array() ) {
+	public function __construct(
+		SiteStore $siteStore,
+		array $specialSiteGroups = array()
+	) {
 		$this->siteStore = $siteStore;
 		$this->specialSiteGroups = $specialSiteGroups;
+	}
+
+	/**
+	 * Returns the list of sites that is suitable as a sitelink target.
+	 *
+	 * @return SiteList alphabetically ordered by the site's global identifiers.
+	 */
+	public function getSiteList() {
+		$sites = $this->siteStore->getSites();
+
+		// Because of the way SiteList is implemented this will not order the array returned by
+		// SiteList::getGlobalIdentifiers.
+		$sites->uasort( function( Site $a, Site $b ) {
+			return strnatcasecmp( $a->getGlobalId(), $b->getGlobalId() );
+		} );
+
+		return $sites;
 	}
 
 	/**
@@ -43,26 +63,18 @@ class SiteLinkTargetProvider {
 	 *
 	 * @return SiteList alphabetically ordered by the site's global identifiers.
 	 */
-	public function getSiteList( array $groups ) {
+	public function getSiteListForGroups( array $groups ) {
 		// As the special sitelink group actually just wraps multiple groups
 		// into one we have to replace it with the actual groups
 		$this->substituteSpecialSiteGroups( $groups );
 
 		$sites = new SiteList();
-		$allSites = $this->siteStore->getSites();
-
 		/** @var Site $site */
-		foreach ( $allSites as $site ) {
+		foreach ( $this->getSiteList() as $site ) {
 			if ( in_array( $site->getGroup(), $groups ) ) {
 				$sites->append( $site );
 			}
 		}
-
-		// Because of the way SiteList is implemented this will not order the array returned by
-		// SiteList::getGlobalIdentifiers.
-		$sites->uasort( function( Site $a, Site $b ) {
-			return strnatcasecmp( $a->getGlobalId(), $b->getGlobalId() );
-		} );
 
 		return $sites;
 	}
