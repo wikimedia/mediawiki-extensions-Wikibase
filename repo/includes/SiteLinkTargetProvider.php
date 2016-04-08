@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo;
 
+use BagOStuff;
 use Site;
 use SiteList;
 use SiteStore;
@@ -20,7 +21,13 @@ class SiteLinkTargetProvider {
 	/**
 	 * @var SiteStore
 	 */
+
 	private $siteStore;
+
+	/**
+	 * @var BagOStuff
+	 */
+	private $cache;
 
 	/**
 	 * @var string[]
@@ -29,10 +36,16 @@ class SiteLinkTargetProvider {
 
 	/**
 	 * @param SiteStore $siteStore
+	 * @param BagOStuff $cache
 	 * @param string[] $specialSiteGroups
 	 */
-	public function __construct( SiteStore $siteStore, array $specialSiteGroups = array() ) {
+	public function __construct(
+		SiteStore $siteStore,
+		BagOStuff $cache,
+		array $specialSiteGroups = array()
+	) {
 		$this->siteStore = $siteStore;
+		$this->cache = $cache;
 		$this->specialSiteGroups = $specialSiteGroups;
 	}
 
@@ -48,21 +61,27 @@ class SiteLinkTargetProvider {
 		// into one we have to replace it with the actual groups
 		$this->substituteSpecialSiteGroups( $groups );
 
-		$sites = new SiteList();
-		$allSites = $this->siteStore->getSites();
+		$cacheKey = $this->cache->makeKey( __METHOD__, 'allSites' );
+		$allSites = $this->cache->get( $cacheKey );
+		if ( !$allSites ) {
+			$allSites = $this->siteStore->getSites();
 
+			// Because of the way SiteList is implemented this will not order the array returned by
+			// SiteList::getGlobalIdentifiers.
+			$allSites->uasort( function( Site $a, Site $b ) {
+				return strnatcasecmp( $a->getGlobalId(), $b->getGlobalId() );
+			} );
+
+			$this->cache->set( $cacheKey, $allSites, 300 );
+		}
+
+		$sites = new SiteList();
 		/** @var Site $site */
 		foreach ( $allSites as $site ) {
 			if ( in_array( $site->getGroup(), $groups ) ) {
 				$sites->append( $site );
 			}
 		}
-
-		// Because of the way SiteList is implemented this will not order the array returned by
-		// SiteList::getGlobalIdentifiers.
-		$sites->uasort( function( Site $a, Site $b ) {
-			return strnatcasecmp( $a->getGlobalId(), $b->getGlobalId() );
-		} );
 
 		return $sites;
 	}
