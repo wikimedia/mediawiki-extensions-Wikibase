@@ -12,7 +12,6 @@ use Wikibase\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\StringNormalizer;
 
@@ -41,19 +40,9 @@ class GetEntities extends ApiBase {
 	private $languageFallbackChainFactory;
 
 	/**
-	 * @var SiteLinkTargetProvider
-	 */
-	private $siteLinkTargetProvider;
-
-	/**
 	 * @var EntityPrefetcher
 	 */
 	private $entityPrefetcher;
-
-	/**
-	 * @var string[]
-	 */
-	private $siteLinkGroups;
 
 	/**
 	 * @var ApiErrorReporter
@@ -86,7 +75,6 @@ class GetEntities extends ApiBase {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
@@ -96,12 +84,6 @@ class GetEntities extends ApiBase {
 		$this->entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 
-		$this->siteLinkTargetProvider = new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		);
-
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->entityPrefetcher = $wikibaseRepo->getStore()->getEntityPrefetcher();
 	}
 
@@ -314,15 +296,13 @@ class GetEntities extends ApiBase {
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
-
 		return array_merge( parent::getAllowedParams(), array(
 			'ids' => array(
 				self::PARAM_TYPE => 'string',
 				self::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_TYPE => 'string',
 				self::PARAM_ISMULTI => true,
 				self::PARAM_ALLOW_DUPLICATES => true
 			),
@@ -354,7 +334,7 @@ class GetEntities extends ApiBase {
 				self::PARAM_DFLT => false
 			),
 			'sitefilter' => array(
-				self::PARAM_TYPE => $sites->getGlobalIdentifiers(),
+				self::PARAM_TYPE => 'string',
 				self::PARAM_ISMULTI => true,
 				self::PARAM_ALLOW_DUPLICATES => true
 			),
