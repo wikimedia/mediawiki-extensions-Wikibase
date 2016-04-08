@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_077c98b3",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-08T15:53:18Z",
+      "side": 1,
+      "message": "this is a weird place for hard coding this. Also shouldn\u0027t this return a CachingPropertyOrderProvider?",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_e776d4d2",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-08T15:53:18Z",
+      "side": 1,
+      "message": "not entities",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_a74ccca0",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-08T15:53:18Z",
+      "side": 1,
+      "message": "This is not enough for a cache key, you probably want to use wfMemcKey to prepend it with the wiki\u0027s id (otherwise this will be shared across all wikis, that\u0027s not what you want).",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4786a0ad",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-08T15:53:18Z",
+      "side": 1,
+      "message": "Should be a space after // and uppercase Check. Also cach -\u003e cache",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_2781dc92",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-08T15:53:18Z",
+      "side": 1,
+      "message": "two spaces before equals sign",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_adb30dfc",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-08T15:53:18Z",
+      "side": 1,
+      "message": "Missing spaces before and after the title text.",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_ed94f548",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-08T15:53:18Z",
+      "side": 1,
+      "message": "this makes assumptions on the name of the Wikibase namespace... fine though, I guess",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_0d9af974",
+        "filename": "lib/tests/phpunit/store/WikiPagePropertyOrderProviderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-08T15:53:18Z",
+      "side": 1,
+      "message": "missing tests for a linked property",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
