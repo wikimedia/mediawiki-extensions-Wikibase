@@ -140,10 +140,7 @@ abstract class ModifyEntity extends ApiBase {
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 
-		$this->setServices( new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		) );
+		$this->setServices( $wikibaseRepo->getSiteLinkTargetProvider() );
 
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
@@ -552,7 +549,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return array[]
 	 */
 	private function getAllowedParamsForSiteLink() {
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$sites = $this->siteLinkTargetProvider->getSiteListForGroups( $this->siteLinkGroups );
 
 		return array(
 			'site' => array(

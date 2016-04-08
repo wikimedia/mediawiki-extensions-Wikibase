@@ -487,7 +487,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	private function getSiteLinksChangeOps( array $siteLinks, Item $item ) {
 		$siteLinksChangeOps = array();
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$sites = $this->siteLinkTargetProvider->getSiteListForGroups( $this->siteLinkGroups );
 
 		foreach ( $siteLinks as $siteId => $arg ) {
 			$this->checkSiteLinks( $arg, $siteId, $sites );
