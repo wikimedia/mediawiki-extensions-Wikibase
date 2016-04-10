@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pras"
+			"Pras",
+			"NoiX180"
 		]
 	},
-	"wikibase-edit": "sunting",
-	"wikibase-add": "tambahaken"
+	"wikibase-edit": "besut",
+	"wikibase-add": "tambah"
 }

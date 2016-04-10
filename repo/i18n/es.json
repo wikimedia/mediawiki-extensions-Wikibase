@@ -30,7 +30,8 @@
 			"Kroji",
 			"Larjona",
 			"YoViajo",
-			"Matiia"
+			"Matiia",
+			"AlvaroMolina"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -148,6 +149,7 @@
 	"wikibase-gotolinkedpage-lookup-site": "Sitio:",
 	"wikibase-gotolinkedpage-lookup-item": "Id. del elemento:",
 	"wikibase-gotolinkedpage-submit": "Ir",
+	"wikibase-gotolinkedpage-summary": "Especial:GoToLinkedPage se utiliza para encontrar la página de un artículo en un sitio conectado.<br />El primer campo, \"{{int:wikibase-gotolinkedpage-búsqueda-sitio}}\", es donde se introduce el lenguaje y el código del sitio.<br />En el segundo campo, \"{{int:wikibase-gotolinkedpage-búsqueda-item}}\", debe poner en el ID del elemento que está buscando.",
 	"wikibase-gotolinkedpage-error-page-not-found": "No se encontró ninguna página para esa combinación de elemento y sitio",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "El identificador del elemento ingresado no es válido",
 	"wikibase-gotolinkedpage-error-item-not-found": "No se encontró el elemento",
@@ -345,6 +347,8 @@
 	"apihelp-wbeditentity-example-5": "Borrar todos los datos de la entidad con identificador Q42 y establecer una etiqueta para \"en\"",
 	"apihelp-wbformatvalue-param-generate": "El formato de salida que se desee generar.",
 	"apihelp-wbformatvalue-param-datatype": "El tipo de dato del valor. Esto es distinto del tipo del valor",
+	"apihelp-wbformatvalue-param-property": "ID de la propiedad el valor de los datos pertenece, debe ser usado en lugar del tipo de datos del parámetro.",
+	"apihelp-wbgetentities-param-sitefilter": "Filtro de enlaces de sitio en las entidades a aquellos con estos Identificadores de sitio.",
 	"apihelp-wblinktitles-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",
 	"apihelp-wbmergeitems-description": "Fusiona varios elementos.",
 	"apihelp-wbmergeitems-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «bot».",

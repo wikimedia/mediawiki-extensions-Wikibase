@@ -1,16 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pras"
+			"Pras",
+			"NoiX180"
 		]
 	},
 	"tooltip-t-wikibase": "Pranala dhumateng data penyimpanan item kagandheng",
 	"wikibase-comment-update": "Item {{WBREPONAME}} ewah",
 	"wikibase-dataitem": "Item ing {{WBREPONAME}}",
-	"wikibase-editlinks": "Sunting interwiki",
-	"wikibase-editlinkstitle": "Sunting pranala interwiki",
+	"wikibase-editlinks": "Besut pranala",
+	"wikibase-editlinkstitle": "Besut pranala antarabasa",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "Tedahaken",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Item wonten ing {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Besutan {{WBREPONAME}}"
 }

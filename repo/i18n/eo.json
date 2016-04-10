@@ -6,7 +6,8 @@
 			"ArnoLagrange",
 			"KuboF",
 			"Yekrats",
-			"Macofe"
+			"Macofe",
+			"Robin van der Vliet"
 		]
 	},
 	"wikibase-desc": "Deponejo por strukturitaj datumoj",
@@ -158,6 +159,7 @@
 	"wikibase-listdatatypes-intro": "Ĉi tio estas la listo de ĉiuj datumtipoj nune uzataj en ĉi tiu instalaĵo:",
 	"wikibase-history-title-with-label": "Revizia historio de \"$2\" ($1)",
 	"wikibase-history-title-without-label": "Revizia historio de ($1)",
+	"wikibase-listproperties-submit": "Serĉi",
 	"special-entitieswithoutdescription": "Entoj sen priskribo",
 	"wikibase-entitieswithoutdescription-legend": "Listigi entojn sen priskribo",
 	"special-entitieswithoutlabel": "Entoj sen etikedo",

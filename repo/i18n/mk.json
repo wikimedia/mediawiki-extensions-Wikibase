@@ -131,7 +131,7 @@
 	"wikibase-itemdisambiguation-lookup-label": "Натпис:",
 	"wikibase-itemdisambiguation-submit": "Пребарај",
 	"wikibase-itemdisambiguation-form-hints": "Имајте предвид дека во исходот ќе се $1 {{PLURAL:$1|прикаже не повеќе од една ставка|прикажат не повеќе од $1 ставки}}.",
-	"wikibase-itemdisambiguation-nothing-found": "Нажалост, не пронајдов ниеден натпис.",
+	"wikibase-itemdisambiguation-nothing-found": "За жал, не пронајдов ниеден натпис.",
 	"wikibase-itemdisambiguation-search": "Можете да го [$1 побарате предметот].",
 	"wikibase-itemdisambiguation-create": "Можете да [$1 создадете нов предмет].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Нажалост, укажаниот јазичен код не му е познат на системот. Кодот мора да биде важечки (на пр. „mk“).",

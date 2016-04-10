@@ -46,7 +46,7 @@
 	"wikibase-unconnectedpages-submit": "Idi",
 	"wikibase-pageinfo-entity-id": "Oznaka na Wikidati",
 	"wikibase-pageinfo-entity-id-none": "ništa",
-	"wikibase-otherprojects": "Drugi projekti",
+	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Drugi projekti na bočnoj traci",
 	"wikibase-otherprojects-beta-description": "Dodaje odlomak \"{{int:wikibase-otherprojects}}\" na bočnoj traci s poveznicama na ostale Wikimedijine projekte na osnovi podataka s projekta {{WBREPONAME}}."
 }
