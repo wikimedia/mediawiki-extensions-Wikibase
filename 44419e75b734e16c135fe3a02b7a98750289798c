@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_c47583ca",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-11T10:56:04Z",
+      "side": 1,
+      "message": "https://wordpress.stackexchange.com/questions/135866 is basically the same problem and the answers explore different possible ways to solve this. Maybe you like some of them better. http://ottopress.com/2012/internationalization-youre-probably-doing-it-wrong/comment-page-1/#comment-11044 discusses a comparable issue.\n\nWhat I can think of is having $1: total number, $2: pending number, $3: prepend, $4: append, so that the msg looks like this:\n\n\"$1{{PLURAL:$2|0\u003d|$3+$2$4}} {{PLURAL:$1|entry|e\nntries}}\"\n\nIn code we would have to substitute $3 and $4 with placeholders, again, though, since we are not emitting HTML here, just plain text.\n\nI think the most correct way to do this would be to introduce a {{COUNTER_TOOLTIP|+$2}} magic word in both our PHP and JS code.\n\nMaybe Siebrand has suggestions, too?",
+      "parentUuid": "ce38dbff_84dd3b1a",
+      "revId": "44419e75b734e16c135fe3a02b7a98750289798c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8dd8c959",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
