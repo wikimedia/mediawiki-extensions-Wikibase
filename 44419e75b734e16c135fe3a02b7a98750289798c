@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_84dd3b1a",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-11T09:00:22Z",
+      "side": 1,
+      "message": "Which is really hard to translate. The whole point of this change is to get the whole counter into one message so that it becomes translatable. We can try to make it look better, but I don\u0027t see a fundamentally different way to do this.",
+      "parentUuid": "ce38dbff_0df679d4",
+      "revId": "44419e75b734e16c135fe3a02b7a98750289798c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8dd8c959",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
