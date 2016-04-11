@@ -16,7 +16,8 @@
 			{ precision: 1 / 3600, text: 'to an arcsecond' },
 			{ precision: 1 / 36000, text: 'to 1/10 of an arcsecond' },
 			{ precision: 1 / 360000, text: 'to 1/100 of an arcsecond' },
-			{ precision: 1 / 3600000, text: 'to 1/1000 of an arcsecond' }
+			{ precision: 1 / 3600000, text: 'to 1/1000 of an arcsecond' },
+			{ precision: 1 / 36000000, text: '1/10000\'' }
 		],
 		format: 'decimal'
 	};
@@ -152,8 +153,9 @@
 		// Figure out if the precision is very close to a precision that can be expressed with a
 		// string:
 		for( var i in combinedOptions.precisionTexts ) {
-			if( Math.abs( precision - combinedOptions.precisionTexts[i].precision ) < 0.0000001 ) {
+			if ( Math.abs( precision - combinedOptions.precisionTexts[i].precision ) < 0.000000000001 ) {
 				precisionText = combinedOptions.precisionTexts[i].text;
+				break;
 			}
 		}
 
