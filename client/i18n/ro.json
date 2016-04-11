@@ -4,7 +4,8 @@
 			"Minisarm",
 			"Stelistcristi",
 			"Metalhead64",
-			"XXN"
+			"XXN",
+			"ANDROBETA"
 		]
 	},
 	"wikibase-client-desc": "Client pentru extensia Wikibase",
@@ -51,7 +52,7 @@
 	"wikibase-pageinfo-entity-id": "ID element {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Nimic",
 	"wikibase-property-render-error": "Nu s-a putut reda proprietatea $1: $2",
-	"wikibase-otherprojects": "Alte proiecte",
+	"wikibase-otherprojects": "În alte proiecte",
 	"wikibase-otherprojects-beta-message": "Bară laterală cu alte proiecte",
 	"wikibase-otherprojects-beta-description": "Adaugă secțiunea „{{int:wikibase-otherprojects}}” în cadrul barei laterale, care oferă legături către alte proiecte ale Wikimediei pe baza datelor furnizate de {{WBREPONAME}}."
 }

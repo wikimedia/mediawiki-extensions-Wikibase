@@ -6,5 +6,8 @@
 		]
 	},
 	"wikibase-edit": "besut",
-	"wikibase-add": "tambah"
+	"wikibase-add": "tambah",
+	"wikibase-sitelinks-special": "Sasana liya",
+	"wikibase-aliases-empty": "Durung ana aliyas",
+	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|rujukan|rujukan}}"
 }

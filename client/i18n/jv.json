@@ -5,13 +5,15 @@
 			"NoiX180"
 		]
 	},
-	"tooltip-t-wikibase": "Pranala dhumateng data penyimpanan item kagandheng",
+	"tooltip-t-wikibase": "Pranala menyang iji magepokan saka panyimpenan data",
 	"wikibase-comment-update": "Item {{WBREPONAME}} ewah",
-	"wikibase-dataitem": "Item ing {{WBREPONAME}}",
+	"wikibase-dataitem": "Iji sajeroning {{WBREPONAME}}",
 	"wikibase-editlinks": "Besut pranala",
 	"wikibase-editlinkstitle": "Besut pranala antarabasa",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-show": "Tedahaken",
+	"wikibase-rc-hide-wikidata-hide": "Dhelikaké",
+	"wikibase-rc-hide-wikidata-show": "Tuduhaké",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Besutan {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Besutan {{WBREPONAME}}",
+	"wikibase-otherprojects": "Ana ing proyèk liya"
 }
