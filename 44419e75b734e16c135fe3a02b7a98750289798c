@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_79aa59d2",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-11T20:28:14Z",
+      "side": 1,
+      "message": "I\u0027m sorry, but what\u0027s wrong with my suggestion? The result is the same as yours, just more clean. Messages are in the message file, just split into two, HTML is in the code. No magic placeholders other than $1…9, which is what the translators are used to. When a specific language needs an other order or something the translators are free to do so. What\u0027s the issue we want to solve here, besides the HTML, which my suggestions avoids?",
+      "parentUuid": "ce38dbff_c47583ca",
+      "revId": "44419e75b734e16c135fe3a02b7a98750289798c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8dd8c959",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
