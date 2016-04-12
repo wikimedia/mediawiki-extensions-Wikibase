@@ -9,7 +9,7 @@ use Wikimedia\Assert\Assert;
 /**
  * A factory providing ValueValidators based on factory callbacks.
  *
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class BuilderBasedDataTypeValidatorFactory implements DataTypeValidatorFactory {
 

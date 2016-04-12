@@ -1,6 +1,6 @@
 /**
  * @license GPL-2.0+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 ( function( $, mw, wb, dv, QUnit, sinon ) {
 'use strict';

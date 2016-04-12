@@ -22,7 +22,7 @@ use Wikibase\SettingsArray;
  * @group Wikibase
  * @group WikibaseLib
  *
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 

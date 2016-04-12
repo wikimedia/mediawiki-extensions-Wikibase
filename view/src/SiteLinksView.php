@@ -17,7 +17,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @since 0.5
  *
  * @license GPL-2.0+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class SiteLinksView {

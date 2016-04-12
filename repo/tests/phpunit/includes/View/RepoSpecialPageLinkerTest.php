@@ -11,7 +11,7 @@ use Wikibase\Repo\View\RepoSpecialPageLinker;
  * @group Wikibase
  * @group WikibaseRepo
  *
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class RepoSpecialPageLinkerTest extends MediaWikiLangTestCase {
 

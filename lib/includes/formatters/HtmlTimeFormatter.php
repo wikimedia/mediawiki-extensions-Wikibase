@@ -20,7 +20,7 @@ use ValueFormatters\ValueFormatterBase;
  * @since 0.5
  *
  * @license GPL-2.0+
- * @author Adrian Lang < adrian.lang@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Mättig
  * @author Daniel Kinzler
  */

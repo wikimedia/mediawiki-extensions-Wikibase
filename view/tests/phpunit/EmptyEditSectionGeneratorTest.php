@@ -15,7 +15,7 @@ use Wikibase\View\EmptyEditSectionGenerator;
  * @group WikibaseView
  *
  * @license GPL-2.0+
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class EmptyEditSectionGeneratorTest extends MediaWikiTestCase {
 

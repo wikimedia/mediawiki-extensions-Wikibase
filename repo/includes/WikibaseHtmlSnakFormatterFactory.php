@@ -14,7 +14,7 @@ use Wikibase\View\HtmlSnakFormatterFactory;
 /**
  * An HtmlSnakFormatterFactory implementation using an OutputFormatSnakFormatterFactory
  *
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class WikibaseHtmlSnakFormatterFactory implements HtmlSnakFormatterFactory {
 

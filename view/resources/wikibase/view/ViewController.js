@@ -7,7 +7,7 @@ wikibase.view.ViewController = ( function() {
  * @class wikibase.view.ViewController
  * @license GPL-2.0+
  * @since 0.5
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @abstract
  * @constructor
  */
