@@ -127,8 +127,12 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			$jobScheduler->expects( $this->once() )
 				->method( 'lazyPush' )
 				->with( $this->callback( function ( $job ) use ( $params ) {
+					$jobParams = $job->getParams();
+					// Unrelated parameter used by mw core to tie together logging of jobs
+					unset( $jobParams['requestId'] );
+
 					self::assertEquals( 'enqueue', $job->getType() );
-					self::assertEquals( $params, $job->getParams() );
+					self::assertEquals( $params, $jobParams );
 					return true;
 				} ) );
 
