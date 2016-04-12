@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_f1583d8e",
+        "filename": "package.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-12T08:55:30Z",
+      "side": 1,
+      "message": "Why the move? That was sorted alphabetically.",
+      "revId": "b02c9b4483db972a2a52672bcc757289f7672b7a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
