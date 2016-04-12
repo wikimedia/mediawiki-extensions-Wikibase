@@ -68,6 +68,24 @@
       "revId": "b098dbcc81c1ddd0f25a2b82cf742ed6a5b1f17e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_0ac80a76",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-12T15:19:26Z",
+      "side": 1,
+      "message": "Please replace this with a method_exists check. You may argue that this is not better than your in_array, and that may be correct. Both is probably a bit ugly. My main argument: When we remove getNumericId from one of the entity types one day, this in_array check will be wrong and code will still explode, similar to the status quo where the method is assumed to be there.",
+      "parentUuid": "ee33df1d_c0e8e60d",
+      "revId": "b098dbcc81c1ddd0f25a2b82cf742ed6a5b1f17e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
