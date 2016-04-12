@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Tests\Term;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
