@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_3153c56f",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-12T08:56:45Z",
+      "side": 1,
+      "message": "Ok, thanks for the explanation. But I still disagree that a random magic keyword makes this easier to translate.",
+      "parentUuid": "ce38dbff_b1f875e3",
+      "revId": "44419e75b734e16c135fe3a02b7a98750289798c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8dd8c959",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
