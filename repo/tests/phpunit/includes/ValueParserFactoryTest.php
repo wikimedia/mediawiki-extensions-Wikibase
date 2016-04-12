@@ -15,7 +15,7 @@ use Wikibase\Repo\ValueParserFactory;
  * @group WikibaseRepoTest
  *
  * @license GPL-2.0+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class ValueParserFactoryTest extends \PHPUnit_Framework_TestCase {
 

@@ -24,7 +24,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
- * @author Adrian Heine
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class ToolbarEditSectionGeneratorTest extends MediaWikiTestCase {
 

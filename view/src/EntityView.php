@@ -18,7 +18,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Werner
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
- * @author Adrian Heine <adrian.heine@wikimedia.de>
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 abstract class EntityView {
 

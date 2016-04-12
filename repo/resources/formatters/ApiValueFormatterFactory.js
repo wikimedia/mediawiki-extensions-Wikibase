@@ -1,7 +1,7 @@
 /**
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
- * @author Adrian Heine <adrian.heine@wikimedia.de>
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 ( function( $, wb ) {
 	'use strict';

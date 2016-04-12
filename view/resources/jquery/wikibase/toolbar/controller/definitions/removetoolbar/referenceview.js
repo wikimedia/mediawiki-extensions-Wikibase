@@ -6,7 +6,7 @@
  *
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
- * @author Adrian Heine
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  * @author Jonas Kress
  */
 $.wikibase.toolbarcontroller.definition( 'removetoolbar', {

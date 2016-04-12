@@ -23,7 +23,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Pragunbhutani
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
- * @author Adrian Heine <adrian.heine@wikimedia.de>
+ * @author Adrian Heine < adrian.heine@wikimedia.de >
  */
 class ClaimHtmlGenerator {
 
