@@ -11,6 +11,11 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.8.2 (2016-04-12)
+* Added 1/10000 of an arcsecond as a known precision to `globeCoordinate.Formatter`.
+* Fixed `globeCoordinate.Formatter.PRECISIONTEXT` not properly supporting precisions lower than
+  1/1000 of an arcsecond.
+
 ### 0.8.1 (2016-04-08)
 * Added support for undefined `precision` to `globeCoordinate.GlobeCoordinate`.
 * Added `globe` support to `globeCoordinate.GlobeCoordinate`.
@@ -26,14 +31,19 @@ constants in DataValues Time.
 
 #### Breaking changes
 * Renamed `dataValues.UnUnserializableValue` to `dataValues.UnDeserializableValue`.
-* Changed constructor parameter order of `dataValues.UnDeserializableValue` (formerly `dataValues.UnUnserializableValue`).
-* Removed `time.js` legacy code, including `time.Time` and `time.Parser`. Every "vital" functionality has been ported to `dataValues.TimeValue` which now may be interacted with directly instead of having to retrieve the encapsulated `time.Time` object first.
+* Changed constructor parameter order of `dataValues.UnDeserializableValue` (formerly
+  `dataValues.UnUnserializableValue`).
+* Removed `time.js` legacy code, including `time.Time` and `time.Parser`. Every "vital"
+  functionality has been ported to `dataValues.TimeValue` which now may be interacted with directly
+  instead of having to retrieve the encapsulated `time.Time` object first.
 * Removed obsolete `valueParsers.TimeParser`. Back-end parser is to be used via API.
-* Removed obsolete `mw.ext.dataValues` module as it was just overwriting the obsolete `time.js` settings. Dependencies should be updated to point directly to the `dataValues.values` module.
+* Removed obsolete `mw.ext.dataValues` module as it was just overwriting the obsolete `time.js`
+  settings. Dependencies should be updated to point directly to the `dataValues.values` module.
 
 #### Enhancements
 * Implemented `toJSON` and `newFromJSON` in `dataValues.UnDeserializableValue`.
-* Consolidated code structure, updated and added code documentation to allow generating a proper documentation using JSDuck.
+* Consolidated code structure, updated and added code documentation to allow generating a proper
+  documentation using JSDuck.
 
 ### 0.6.3 (2015-04-01)
 * Remove explicit resource loader dependency on jquery.qunit.
@@ -66,7 +76,8 @@ constants in DataValues Time.
 
 #### Bugfixes
 
-* Don't limit precisions of globe coordinates in the UI (allows display of values with a non predefined precision)
+* Don't limit precisions of globe coordinates in the UI (allows display of values with a non
+  predefined precision)
 
 ### 0.5.0 (2014-03-28)
 
@@ -78,7 +89,8 @@ constants in DataValues Time.
 
 #### Enhancements
 
-* Defined parameters of the promises returned by ValueFormatter's and ValueParser's format/parse functions.
+* Defined parameters of the promises returned by ValueFormatter's and ValueParser's format/parse
+  functions.
 
 ### 0.4.0 (2014-03-24)
 
@@ -105,9 +117,11 @@ constants in DataValues Time.
 
 #### Breaking changes
 
-* Renamed "valueFormatters.factory" Resource Loader module to "valueFormatters.ValueFormatterFactory"
-* Renamed "valueParsers.factory" Resource Loader module to "valueParsers.ValueParserFactory"
-* Removed ValueView dependency from "mw.ext.valueFormatters" module and "mw.ext.valueParsers" module.
+* Renamed "valueFormatters.factory" Resource Loader module to
+  "valueFormatters.ValueFormatterFactory".
+* Renamed "valueParsers.factory" Resource Loader module to "valueParsers.ValueParserFactory".
+* Removed ValueView dependency from "mw.ext.valueFormatters" module and "mw.ext.valueParsers"
+  module.
 
 ### 0.2.0 (2014-01-24)
 
