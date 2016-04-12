@@ -4,7 +4,8 @@
 			"Calak",
 			"Macofe",
 			"Asoxor",
-			"Muhammed taha"
+			"Muhammed taha",
+			"Sarchia"
 		]
 	},
 	"wikibase-entity-item": "بەند",
@@ -28,7 +29,6 @@
 	"wikibase-sitelink-page-edit-placeholder": "پەڕە",
 	"wikibase-alias-edit-placeholder": "نازناوێک بنووسە",
 	"wikibase-label-input-help-message": "سەردێڕی ئەم دراوەیە بە $1 بنووسە.",
-	"wikibase-description-input-help-message": "شیکردنەوەیەکی کورت بە $1 بنووسە.",
 	"wikibase-statementsection-statements": "ئاخاوتەکان",
 	"wikibase-sitelinks": "پێرستی پەڕە بەسراوەکان بەم بەندەوە",
 	"wikibase-sitelinks-special": "ماڵپەڕەکانی تر",
@@ -53,6 +53,7 @@
 	"wikibase-itembytitle-lookup-page": "پەڕە:",
 	"wikibase-itembytitle-submit": "بگەڕێ",
 	"wikibase-itembytitle-create": "ھەروەھا دەتوانی [$1 بەندێک دروست بکەی].",
+	"wikibase-gotolinkedpage-submit": "بڕۆ",
 	"special-itemdisambiguation": "ڕوونکردنەوەی بەند",
 	"wikibase-itemdisambiguation-lookup-fieldset": "گەڕانی بەندەکان بە پێی زمان و سەرناو",
 	"wikibase-itemdisambiguation-lookup-language": "کۆدی زمان:",

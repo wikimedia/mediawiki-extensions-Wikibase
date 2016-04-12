@@ -19,6 +19,7 @@
 	"tooltip-t-wikibase": "Ссылка на связанный элемент репозитория данных",
 	"apihelp-query+pageterms-example-label-en": "Получить метки и синонимы, связанные с английской страницей «London»",
 	"apihelp-query+pageterms-example-item": "Получить обозначения и псевдонимы элемента Q84.",
+	"apihelp-query+wikibase-description": "Получить сведения о клиенте Wikibase и связанном хранилище Wikibase.",
 	"wikibase-after-page-move": "Чтобы исправить на переименованной странице языковые ссылки, вы можете также [$1  обновить] связанный элемент {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-after-page-move-queued": "Связанный с этой страницей [$1 элемент {{grammar:genitive|{{WBREPONAME}}}}] будет автоматически обновлён. Обратите внимание, что это не может произойти мгновенно.",
 	"wikibase-after-page-delete-queued": "Связанный с этой страницей [$1 элемент {{grammar:genitive|{{WBREPONAME}}}}] будет автоматически обновлён. Обратите внимание, что это не может произойти мгновенно.",

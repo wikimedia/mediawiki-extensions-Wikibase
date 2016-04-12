@@ -7,7 +7,8 @@
 			"HenrikKbh",
 			"Poul G",
 			"Steenth",
-			"Peter Alberti"
+			"Peter Alberti",
+			"Fnielsen"
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
@@ -58,7 +59,7 @@
 	"wikibase-pageinfo-entity-id": "Wikidatas emne-ID",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-property-render-error": "Visning af egenskaben $1 mislykkedes: $2",
-	"wikibase-otherprojects": "Andre projekter",
+	"wikibase-otherprojects": "I andre projekter",
 	"wikibase-otherprojects-beta-message": "Andre projekter sidebar",
 	"wikibase-otherprojects-beta-description": "Tilføjer en \"{{int:wikibase-otherprojects}}\" sektion til indholdsoversigten, der giver links til andre Wikimedia-projekter baseret på {{WBREPONAME}} data."
 }
