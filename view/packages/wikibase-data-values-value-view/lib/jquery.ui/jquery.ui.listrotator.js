@@ -88,7 +88,7 @@ function measureMaximumStringWidths( $container, strings ) {
  */
 /**
  * @event auto
- * Triggered when "auto" option is selected.
+ * Triggered when "manually" checkbox is toggled.
  * @param {jQuery.Event} event
  */
 $.widget( 'ui.listrotator', {
@@ -108,17 +108,9 @@ $.widget( 'ui.listrotator', {
 		},
 		deferInit: false,
 		messages: {
-			auto: mwMsgOrString( 'valueview-listrotator-auto', 'auto' )
+			manually: mwMsgOrString( 'valueview-listrotator-manually', 'manually' )
 		}
 	},
-
-	/**
-	 * Node of the selectable "auto" option.
-	 * @property {jQuery}
-	 * @protected
-	 * @readonly
-	 */
-	$auto: null,
 
 	/**
 	 * Node of the current list item section.
@@ -127,6 +119,13 @@ $.widget( 'ui.listrotator', {
 	 * @readonly
 	 */
 	$curr: null,
+
+	/**
+	 * @property {jQuery}
+	 * @protected
+	 * @readonly
+	 */
+	$manually: null,
 
 	/**
 	 * Node of the menu opening when clicking on the "current" section.
@@ -151,31 +150,14 @@ $.widget( 'ui.listrotator', {
 
 		this.element.addClass( this.widgetBaseClass + ' ui-widget-content' );
 
-		// Construct "auto" link:
-		this.$auto = this._createSection( 'auto', function( event ) {
-			if ( self.autoActive() ) {
-				return;
-			}
-			self.activate( self.$auto );
-			self._trigger( 'auto' );
-		} )
-		.addClass( 'ui-state-active' );
-		this.$auto.children( 'span' ).text( this.options.messages.auto );
+		this.$curr = this._createCurrentLink();
+		this.$manually = this._createManuallyCheckbox();
 
-		// Construct the basic sections:
-		this.$curr = this._createSection( 'curr', function( event ) {
-			if ( !self.$menu.is( ':visible' ) ) {
-				self._showMenu();
-			} else {
-				self._hideMenu();
-			}
-		} )
-		.append( $( '<span/>' ).addClass( 'ui-icon ui-icon-triangle-1-s' ) );
-
-		if ( this.$auto ) {
-			this.element.append( this.$auto );
-		}
 		this.element.append( this.$curr );
+		this.element.append( $( '<label/>' )
+			.addClass( this.widgetBaseClass + '-manually' )
+			.text( this.options.messages.manually )
+			.prepend( this.$manually ) );
 
 		// Construct and initialize menu widget:
 		this._createMenu();
@@ -216,7 +198,7 @@ $.widget( 'ui.listrotator', {
 		}
 
 		this.$menu.remove();
-		this.$auto.remove();
+		this.$manually.remove();
 		this.$curr.remove();
 
 		this.element.removeClass( this.widgetBaseClass + ' ui-widget-content' );
@@ -263,23 +245,53 @@ $.widget( 'ui.listrotator', {
 	},
 
 	/**
-	 * Creates a widget section.
-	 * @protected
+	 * @private
 	 *
-	 * @param {string} classSuffix
-	 * @param {Function} clickCallback
 	 * @return {jQuery}
 	 */
-	_createSection: function( classSuffix, clickCallback ) {
+	_createCurrentLink: function() {
+		var self = this;
+
 		return $( '<a/>' )
-		.addClass( this.widgetBaseClass + '-' + classSuffix )
+		.addClass( this.widgetBaseClass + '-curr ui-state-disabled' )
 		.on( 'click.' + this.widgetBaseClass, function( event ) {
 			event.preventDefault();
-			if ( !$( this ).hasClass( 'ui-state-disabled' ) ) {
-				clickCallback( event );
+
+			self.$manually[0].checked = true;
+			$( this ).removeClass( 'ui-state-disabled' );
+
+			if ( !self.$menu.is( ':visible' ) ) {
+				self._showMenu();
+			} else {
+				self._hideMenu();
 			}
 		} )
-		.append( $( '<span/>' ).addClass( this.widgetBaseClass + '-label ui-state-default' ) );
+		.append( $( '<span/>' ).addClass( this.widgetBaseClass + '-label ui-state-default' ) )
+		.append( $( '<span/>' ).addClass( 'ui-icon ui-icon-triangle-1-s' ) );
+	},
+
+	/**
+	 * @private
+	 *
+	 * @return {jQuery}
+	 */
+	_createManuallyCheckbox: function() {
+		var self = this;
+
+		return $( '<input/>' )
+			.attr( 'type', 'checkbox' )
+			.on( 'change', function( event ) {
+				event.preventDefault();
+
+				var checked = event.target.checked;
+				self.$curr.toggleClass( 'ui-state-disabled', !checked );
+				if ( checked ) {
+					self.activate();
+				} else {
+					self.$curr.removeClass( 'ui-state-active' );
+					self._trigger( 'auto' );
+				}
+			} );
 	},
 
 	/**
@@ -397,30 +409,34 @@ $.widget( 'ui.listrotator', {
 	 * @param {jQuery} [$section] Section to activate. "Current" section by default.
 	 */
 	activate: function( $section ) {
-		this.$curr.add( this.$auto ).removeClass( 'ui-state-hover ui-state-active' );
+		this.$curr.removeClass( 'ui-state-active ui-state-disabled ui-state-hover' );
 
 		if ( $section === undefined ) {
 			$section = this.$curr;
 		}
 
 		$section.addClass( 'ui-state-active' );
+
+		if ( $section === this.$curr && !this.$manually[0].checked ) {
+			this.$manually[0].checked = true;
+		}
 	},
 
 	/**
 	 * De-activates the widget.
 	 */
 	deactivate: function() {
-		this.$curr.add( this.$auto ).removeClass( 'ui-state-active' );
+		this.$curr.removeClass( 'ui-state-active' );
 	},
 
 	/**
-	 * Returns whether the listrotator is currently set to "auto", meaning that the value
+	 * Returns whether the listrotator is currently not set to "manually", meaning that the value
 	 * returned by value() has not been chosen by the user explicitly.
 	 *
 	 * @return {boolean}
 	 */
 	autoActive: function() {
-		return this.$auto.hasClass( 'ui-state-active' );
+		return !this.$manually[0].checked;
 	},
 
 	/**

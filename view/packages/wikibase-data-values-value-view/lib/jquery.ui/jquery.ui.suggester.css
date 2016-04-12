@@ -6,7 +6,7 @@
 .ui-suggester-list {
 	background: white;
 	border-color: #C9C9C9;
-	min-width: 8em;
+	min-width: 8em; /* same as .ui-listrotator-label */
 }
 
 .ui-suggester-list .ui-state-hover {

@@ -105,7 +105,7 @@ return call_user_func( function() {
 				'jquery.ui.position',
 			),
 			'messages' => array(
-				'valueview-listrotator-auto',
+				'valueview-listrotator-manually',
 			),
 		),
 
