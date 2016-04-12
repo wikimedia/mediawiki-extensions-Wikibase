@@ -7,7 +7,7 @@ namespace Wikibase\DataModel\Term;
  * @deprecated since 5.1, will be removed in 6.0 in favor of FingerprintProvider, which will then
  *  give the guarantee to return an object by reference. Changes to that object change the entity.
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 interface FingerprintHolder extends FingerprintProvider {

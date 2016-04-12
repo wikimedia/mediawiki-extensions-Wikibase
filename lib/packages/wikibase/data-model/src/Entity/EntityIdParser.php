@@ -7,7 +7,7 @@ namespace Wikibase\DataModel\Entity;
  *
  * @since 4.2
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 interface EntityIdParser {

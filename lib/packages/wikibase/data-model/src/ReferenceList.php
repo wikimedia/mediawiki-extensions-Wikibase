@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\Snak;
  * Does not implement References anymore since 2.0
  * Does not extend SplObjectStorage since 5.0
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  * @author Thiemo Mättig

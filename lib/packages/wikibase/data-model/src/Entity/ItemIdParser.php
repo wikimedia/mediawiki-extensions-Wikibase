@@ -11,7 +11,7 @@ use InvalidArgumentException;
  *
  * @since 4.4
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Thiemo Mättig
  */
 class ItemIdParser implements EntityIdParser {

@@ -10,7 +10,7 @@ use Serializable;
  * Constructor non-public since 1.0
  * Abstract since 2.0
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class EntityId implements Comparable, Serializable {

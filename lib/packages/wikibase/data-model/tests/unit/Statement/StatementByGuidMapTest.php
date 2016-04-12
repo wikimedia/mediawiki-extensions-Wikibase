@@ -10,7 +10,7 @@ use Wikibase\DataModel\Statement\StatementByGuidMap;
 /**
  * @covers Wikibase\DataModel\Statement\StatementByGuidMap
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Kai Nissen < kai.nissen@wikimedia.de >
  */

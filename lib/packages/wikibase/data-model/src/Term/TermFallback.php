@@ -9,7 +9,7 @@ use InvalidArgumentException;
  *
  * @since 2.4.0
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
 class TermFallback extends Term {

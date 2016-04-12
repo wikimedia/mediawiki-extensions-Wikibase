@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @group WikibaseDataModel
  * @group WikibaseSnak
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Addshore
  */
 class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
