@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_b1f875e3",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-12T07:41:40Z",
+      "side": 1,
+      "message": "\"5+2 entries\" is one piece of text. It should be presented to translators as one piece. The fact that part of it is wrapped in some presentational markup doesn\u0027t make it two pieces. Splitting it up is the lego style this change tries to get rid of. Your suggestion is definitely better than the status quo, but I\u0027d like to make this string as accessible to translation as possible. See also https://www.gnu.org/software/gettext/manual/html_node/Preparing-Strings.html#Preparing-Strings.",
+      "parentUuid": "ce38dbff_79aa59d2",
+      "revId": "44419e75b734e16c135fe3a02b7a98750289798c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8dd8c959",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
