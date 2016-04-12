@@ -9,7 +9,7 @@ util.HashMessageProvider = ( function() {
 	 * @since 0.13.0
 	 * @licence GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
-	 * @author Adrian Heine < adrian.heine@wikimedia.de >
+	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *
 	 * @constructor
 	 *

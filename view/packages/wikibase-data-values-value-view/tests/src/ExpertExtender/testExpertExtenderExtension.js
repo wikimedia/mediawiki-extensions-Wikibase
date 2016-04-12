@@ -1,6 +1,6 @@
 /**
  * @licence GNU GPL v2+
- * @author Adrian Lang < adrian.lang@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 ( function( $, valueview, QUnit ) {
 	'use strict';

@@ -8,7 +8,7 @@ this.util = this.util || {};
 	 * @class util.Extendable
 	 * @uses jQuery
 	 * @licence GNU GPL v2+
-	 * @author Adrian Lang <adrian.lang@wikimedia.de>
+	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *
 	 * @constructor
 	 */

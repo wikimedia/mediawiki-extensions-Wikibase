@@ -8,7 +8,7 @@ var PARENT = $.ui.suggester;
  * @extends jQuery.ui.suggester
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  *
  * @constructor
  */

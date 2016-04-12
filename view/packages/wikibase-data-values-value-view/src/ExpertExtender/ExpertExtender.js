@@ -5,7 +5,7 @@
 	 * @class jQuery.valueview.ExpertExtender
 	 * @since 0.6
 	 * @licence GNU GPL v2+
-	 * @author Adrian Lang < adrian.lang@wikimedia.de >
+	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 *
 	 * @constructor
 	 *
