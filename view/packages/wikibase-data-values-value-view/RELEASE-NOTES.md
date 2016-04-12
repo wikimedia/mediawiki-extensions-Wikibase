@@ -1,5 +1,16 @@
 # ValueView release notes
 
+## 0.17.0 (2016-04-12)
+* `GlobeCoordinateInput` and `TimeInput` do not use `jQuery.valueview.ExpertExtender.Toggler` any
+  more.
+* Simplified `jQuery.ui.listrotator` widget:
+  * Removed `$prev` and `$next` elements as well as `prev`, `next` and `rotate` methods.
+  * Replaced `$auto` element with "set manually" checkbox.
+  * Removed all `animation` options.
+  * Removed `isRTL` option.
+* Improved `jQuery.ui.inputextender` styles.
+* Made `jQuery.ui.inputextender` animations faster.
+
 ## 0.16.1 (2016-02-22)
 * Fix quantities without unit in `QuantityInput`
 
