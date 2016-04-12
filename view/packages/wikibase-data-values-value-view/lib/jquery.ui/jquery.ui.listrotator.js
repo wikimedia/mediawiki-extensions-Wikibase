@@ -79,8 +79,6 @@ function measureMaximumStringWidths( $container, strings ) {
  * @param {boolean} [options.deferInit=false]
  *        Whether to defer initializing the section widths until `initWidths()` is called
  *        "manually".
- * @param {boolean|Function} [isRTL=function() { return $( 'body' ).hasClass( 'rtl' ); }]
- *        Whether widget is used in an RTL context.
  */
 /**
  * @event selected
@@ -111,9 +109,6 @@ $.widget( 'ui.listrotator', {
 		deferInit: false,
 		messages: {
 			auto: mwMsgOrString( 'valueview-listrotator-auto', 'auto' )
-		},
-		isRtl: function() {
-			return $( 'body' ).hasClass( 'rtl' );
 		}
 	},
 
