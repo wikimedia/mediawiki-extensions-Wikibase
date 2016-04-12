@@ -124,10 +124,6 @@
 			this.$input,
 			[
 				this.preview,
-				new vv.ExpertExtender.Toggler(
-					this._messageProvider,
-					$precisionContainer
-				),
 				new vv.ExpertExtender.Container(
 					$precisionContainer,
 					this.precisionRotator
