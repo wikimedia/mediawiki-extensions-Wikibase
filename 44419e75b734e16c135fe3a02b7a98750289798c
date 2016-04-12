@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_71eb8d77",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-12T09:03:15Z",
+      "side": 1,
+      "message": "I agree, that\u0027s why I would like to use the magic keyword syntax. We could use \"$1{{PLURAL:$2|0\u003d|WITH_TOOLTIP(+$2)}} {{PLURAL:$1|entry|e\nntries}}\" (or what I suggested above with using $3 and $4).",
+      "parentUuid": "ce38dbff_3153c56f",
+      "revId": "44419e75b734e16c135fe3a02b7a98750289798c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8dd8c959",
         "filename": "repo/i18n/en.json",
         "patchSetId": 3
