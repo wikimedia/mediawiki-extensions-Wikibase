@@ -16,7 +16,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Werner
  * @author Daniel Kinzler
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class ToolbarEditSectionGenerator implements EditSectionGenerator {
 

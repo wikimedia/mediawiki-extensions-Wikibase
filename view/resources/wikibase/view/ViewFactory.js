@@ -9,7 +9,7 @@
 	 * @class wikibase.view.ViewFactory
 	 * @license GPL-2.0+
 	 * @since 0.5
-	 * @author Adrian Heine < adrian.heine@wikimedia.de >
+	 * @author Adrian Heine <adrian.heine@wikimedia.de>
 	 * @constructor
 	 *
 	 * @param {util.ContentLanguages} contentLanguages

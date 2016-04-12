@@ -22,7 +22,7 @@ use Wikibase\StatementRankSerializer;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Addshore
  * @author Daniel Kinzler
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Thiemo Mättig
  */
 class ClaimDifferenceVisualizer {

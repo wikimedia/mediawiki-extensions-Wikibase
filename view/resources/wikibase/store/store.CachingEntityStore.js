@@ -1,6 +1,6 @@
 /**
  * @license GPL-2.0+
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 ( function( wb ) {
 	'use strict';

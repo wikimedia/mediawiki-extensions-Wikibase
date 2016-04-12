@@ -4,7 +4,7 @@
  * @since 0.5
  *
  * @license GPL-2.0+
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 $remoteExtPathParts = explode(
 	DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR, __DIR__, 2

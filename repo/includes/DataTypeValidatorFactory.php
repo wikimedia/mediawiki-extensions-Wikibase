@@ -7,7 +7,7 @@ use ValueValidators\ValueValidator;
 /**
  * A factory providing ValueValidators based on DataType id.
  *
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 interface DataTypeValidatorFactory {
 

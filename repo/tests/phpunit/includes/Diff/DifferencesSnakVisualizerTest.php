@@ -21,7 +21,7 @@ use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
  * @group WikibaseClaim
  *
  * @license GPL-2.0+
- * @author Adrian Heine < adrian.heine@wikimedia.de >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 

@@ -4,7 +4,7 @@
  * @since 0.5
  *
  * @license GPL-2.0+
- * @author Adrian Lang <adrian.lang@wikimedia.de>
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
