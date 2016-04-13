@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_371bae83",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T09:06:54Z",
+      "side": 1,
+      "message": "Can you please move this new message up to the existing \"wikibase-sitelinks\" messages?",
+      "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_5a07791c",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T09:06:54Z",
+      "side": 1,
+      "message": "I suggest the message key\nwikibase-statementview-references-counter or\nwikibase-statementview-references-heading-counter, which is much closer to the existing message keys and CSS class names in the templates.",
+      "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_3a0a7524",
+        "filename": "repo/i18n/qqq.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T09:06:54Z",
+      "side": 1,
+      "message": "Don\u0027t forget to move this up, too.",
+      "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_7a0b5d26",
+        "filename": "view/resources/wikibase/utilities/wikibase.utilities.ui.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T09:06:54Z",
+      "side": 1,
+      "message": "What happens when you feed \u0027\u003cspan\u003e\u0027 to the service? I suggest to either use \u0027\u003cspan\u003e directly, or fake parser tags like \u0027\u003ctipsy\u003e(.*?)\u003c/tipsy\u003e\u0027.",
+      "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_772536bc",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T09:06:54Z",
+      "side": 1,
+      "message": "This is possibly wrong, at least pointless. Parameter $2 in the \"wikibase-statementview-referencescounter\" message is used in {{PLURAL:$2|0\u003d|…}}. Please replace with a static 0 in the patch that introduced this.",
+      "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_5a1e5964",
+        "filename": "view/src/SiteLinksView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T09:06:54Z",
+      "side": 1,
+      "message": "Like here.",
+      "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
