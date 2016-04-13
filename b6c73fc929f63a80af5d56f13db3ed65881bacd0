@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_3afc35d5",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-13T09:28:56Z",
+      "side": 1,
+      "message": "OK, that\u0027s wrong. We exclusively use unescaped messages in JS.",
+      "parentUuid": "ce38dbff_faa3edfa",
+      "revId": "b6c73fc929f63a80af5d56f13db3ed65881bacd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_37760ed6",
         "filename": "view/src/ClaimHtmlGenerator.php",
         "patchSetId": 3
