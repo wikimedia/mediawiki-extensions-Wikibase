@@ -72,6 +72,23 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_9a6581e0",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T09:38:30Z",
+      "side": 1,
+      "message": "Also a misplaced ).",
+      "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_3a0a7524",
         "filename": "repo/i18n/qqq.json",
         "patchSetId": 5
@@ -136,6 +153,24 @@
       "side": 1,
       "message": "It should get escaped.",
       "parentUuid": "ce38dbff_7a0b5d26",
+      "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_bab9652b",
+        "filename": "view/resources/wikibase/utilities/wikibase.utilities.ui.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T09:38:30Z",
+      "side": 1,
+      "message": "But mw.msg is a shortcut for mw.message( … ).text() and does no escaping. And even if, the string replacement can work with escaped strings then. I feel a placeholder with \u003cbrackets\u003e is more safe than a plain ASCII placeholder.",
+      "parentUuid": "ce38dbff_ba2cc590",
       "revId": "9890412231a0406f70398c4b3eff0bca450c97e0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
