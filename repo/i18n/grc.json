@@ -11,5 +11,5 @@
 	"wikibase-sitelinks-special": "Ἔτεροι ἰστότοποι",
 	"wikibase-aliases-empty": "Οὐδέν ψευδώνυμα ἀνευρέθησαν",
 	"wikibase-statementview-rank-normal": "Συνήθης κατάταξη",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|μνεία|μνείαι}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|μνεία|μνείαι}}"
 }

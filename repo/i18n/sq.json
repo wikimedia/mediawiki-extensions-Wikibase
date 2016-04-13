@@ -9,9 +9,9 @@
 	"wikibase-add": "shto",
 	"wikibase-label-empty": "Nuk ka emërtim të përkufizuar",
 	"wikibase-description-empty": "Asnjë përshkrim i përcaktuar",
-	"wikibase-statements": "Qëndrime",
+	"wikibase-statementsection-statements": "Qëndrime",
 	"wikibase-sitelinks-special": "Faqe të tjera",
 	"wikibase-aliases-empty": "Nuk ka emërtim të përkufizuar",
 	"wikibase-statementview-rank-normal": "Rangimi normal",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referencë|referenca}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referencë|referenca}}"
 }

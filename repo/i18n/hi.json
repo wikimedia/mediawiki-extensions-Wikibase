@@ -48,7 +48,7 @@
 	"wikibase-move-down": "नीचे भेजें",
 	"wikibase-aliases-empty": "कोई उर्फ परिभाषित नही।",
 	"wikibase-statementview-rank-normal": "साधारण पद",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|स्रोत}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|स्रोत}}",
 	"wikibase-snakview-property-input-placeholder": "गुणधर्म",
 	"wikibase-snakview-variations-novalue-label": "मूल्य नहीं",
 	"wikibase-snakformat-invalid-value": "अवैध मूल्य",

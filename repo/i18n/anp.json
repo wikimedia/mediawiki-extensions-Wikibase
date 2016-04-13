@@ -9,9 +9,9 @@
 	"wikibase-add": "जोड़ऽ",
 	"wikibase-label-empty": "कोय नामपत्र परिभाषित नै",
 	"wikibase-description-empty": "कोय विवरण परिभाषित नै",
-	"wikibase-statements": "कथन",
+	"wikibase-statementsection-statements": "कथन",
 	"wikibase-sitelinks-special": "अन्य वेबसाइट",
 	"wikibase-aliases-empty": "कोय उर्फ परिभाषित नै",
 	"wikibase-statementview-rank-normal": "सामान्य पद",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|स्रोत}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|स्रोत}}"
 }

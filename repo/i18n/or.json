@@ -17,6 +17,6 @@
 	"wikibase-remove": "ବାହାର କରିବା",
 	"wikibase-aliases-empty": "କିଛି ଅନ୍ୟନାମ ଦିଆଯାଇନାହିଁ",
 	"wikibase-statementview-rank-normal": "ସାଧାରଣ ପଦ",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ଆଧାର|ଆଧାର ଗୁଡ଼ିକ}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ଆଧାର|ଆଧାର ଗୁଡ଼ିକ}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "{{PLURAL:$1|ଆଧାରଟି|$1 ଆଧାର ଗୁଡ଼ିକ}} ବର୍ତ୍ତମାନ ସୁଦ୍ଧା ସାଇତାଯାଇ ନାହିଁ"
 }

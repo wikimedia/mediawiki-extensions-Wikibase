@@ -7,7 +7,8 @@
 			"Susith Chandira Gts",
 			"Sandaru",
 			"Macofe",
-			"හරිත"
+			"හරිත",
+			"SusithCM"
 		]
 	},
 	"wikibase-desc": "ව්‍යූහගත දත්ත කෝෂ්ඨාගාරය",
@@ -27,11 +28,9 @@
 	"wikibase-sitelink-site-edit-placeholder": "අඩවිය",
 	"wikibase-sitelink-page-edit-placeholder": "ලිපිය",
 	"wikibase-alias-edit-placeholder": "අන්වර්ථ නාමය යොදන්න",
-	"wikibase-description-input-help-message": "$1 බසින් කෙටි විස්තරයක් යොදන්න.",
-	"wikibase-statements": "ප්‍රකාශ",
+	"wikibase-statementsection-statements": "ප්‍රකාශ",
 	"wikibase-sitelinks": "මෙම අයිතමය සඳහා සම්බන්ධිත පිටු ලැයිස්තුව",
 	"wikibase-sitelinks-empty": "මෙම අයිතමය සඳහා අඩවි-සබැඳියක් තවමත් නොමැත.",
-	"wikibase-sitelinks-input-help-message": "මෙම අයිතමයට සම්බන්ධ පිටුවකට සබැඳියක් සකසන්න.",
 	"wikibase-sitelinks-special": "වෙනත් අඩවි",
 	"wikibase-remove": "ඉවත් කරන්න",
 	"wikibase-undo-title": "\"$1\" වෙත සංස්කරණය නිෂ්ප්‍රභ කරමින්",
@@ -43,7 +42,7 @@
 	"wikibase-aliases-empty": "අන්වර්ථ නාම කිසිවක් අර්ථ දක්වා නොමැත",
 	"wikibase-propertypage-datatype": "දත්ත වර්ගය",
 	"wikibase-statementview-rank-normal": "සාමාන්‍ය ස්ථානය",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|යොමුව|යොමු}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|යොමුව|යොමු}}",
 	"wikibase-snakview-property-input-placeholder": "ගුණාංගය",
 	"special-itembytitle": "ශීර්ෂය අනුව අයිතමය",
 	"wikibase-itembytitle-lookup-fieldset": "අඩවිය සහ ශීර්ෂය අනුව අයිතමයන් සඳහා සොයන්න",

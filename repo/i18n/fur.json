@@ -11,5 +11,5 @@
 	"wikibase-sitelinks-special": "Altris sîts",
 	"wikibase-aliases-empty": "Nissun alias definît",
 	"wikibase-statementview-rank-normal": "Classificât come normâl",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|riferiment|riferiments}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|riferiment|riferiments}}"
 }

@@ -8,9 +8,9 @@
 	"wikibase-add": "加",
 	"wikibase-label-empty": "未定義標籤",
 	"wikibase-description-empty": "未定義描述",
-	"wikibase-statements": "陳述",
+	"wikibase-statementsection-statements": "陳述",
 	"wikibase-sitelinks-special": "第啲網站",
 	"wikibase-aliases-empty": "未定義其他名。",
 	"wikibase-statementview-rank-normal": "正常等級",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|參考來源}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|參考來源}}"
 }

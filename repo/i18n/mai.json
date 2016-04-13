@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "दोसर साइटसभ",
 	"wikibase-aliases-empty": "कोनो उर्फ परिभाषित नै।",
 	"wikibase-statementview-rank-normal": "सामान्य क्रम",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|स्रोत|स्रोतसभ}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|स्रोत|स्रोतसभ}}"
 }

@@ -16,5 +16,5 @@
 	"wikibase-sitelinks-special": "हेर वेबसायट",
 	"wikibase-aliases-empty": "खंयचीच उर्फ परिभाशा ना",
 	"wikibase-statementview-rank-normal": "सामान्य क्रम",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{बहुवचन:$|संदर्भ|संदर्भ}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{बहुवचन:$|संदर्भ|संदर्भ}}"
 }

@@ -18,7 +18,7 @@
 	"wikibase-sitelinks-special": "инꙑ мєждоусѣтьнꙑ мѣста",
 	"wikibase-remove": "поничьжєниѥ",
 	"wikibase-move-up": "прѣношєниѥ въврьхъ",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|кладѧꙃь|кладѧꙃꙗ|кладаꙃь}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|кладѧꙃь|кладѧꙃꙗ|кладаꙃь}}",
 	"wikibase-entityselector-more": "вѧщє",
 	"wikibase-itembytitle-lookup-site": "мѣсто :",
 	"wikibase-itembytitle-lookup-page": "страница :",

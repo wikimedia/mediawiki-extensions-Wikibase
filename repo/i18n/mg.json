@@ -8,9 +8,9 @@
 	"wikibase-add": "ampiana",
 	"wikibase-label-empty": "Tsy misy marika voafaritra",
 	"wikibase-description-empty": "Tsy misy famisavisana voafaritra",
-	"wikibase-statements": "Filazana",
+	"wikibase-statementsection-statements": "Filazana",
 	"wikibase-sitelinks-special": "Tranonkala hafa",
 	"wikibase-aliases-empty": "Tsy misy solonanarana voafaritra",
 	"wikibase-statementview-rank-normal": "Filaharana tsotra",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|tsiahy}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|tsiahy}}"
 }

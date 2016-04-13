@@ -11,6 +11,6 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ជាភាសាដទៃទៀត",
 	"wikibase-entitytermsforlanguagelistview-language": "ភាសា",
 	"wikibase-sitelinks-special": "វិបសាយផ្សេងទៀត",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
 	"wikibase-statementview-referencesheading-pendingcountertooltip": "មិន​ទាន់​បាន​រក្សា​ទុក {{PLURAL:$1|ឯកសារ​យោង​មួយ|ឯកសារ​យោង $1}}"
 }

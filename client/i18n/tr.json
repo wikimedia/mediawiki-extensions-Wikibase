@@ -41,7 +41,7 @@
 	"unconnectedpages": "Öğelerine bağlanmamış sayfalar",
 	"wikibase-unconnectedpages-submit": "Git",
 	"wikibase-pageswithbadges-submit": "Sayfaları göster",
-	"wikibase-otherprojects": "Diğer projeler",
+	"wikibase-otherprojects": "Diğer projelerde",
 	"wikibase-otherprojects-beta-message": "Diğer projeler kenar çubuğu",
 	"wikibase-otherprojects-beta-description": "Kenar çubuğuna, {{WBREPONAME}} bilgilerine dayalı olarak diğer Wikimedia projelerine bağlantı veren bir \"{{int:wikibase-otherprojects}}\" ekler."
 }

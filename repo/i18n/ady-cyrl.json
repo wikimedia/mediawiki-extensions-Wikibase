@@ -17,5 +17,5 @@
 	"wikibase-sitelinks-special": "НэмыкӀ сайтхэр",
 	"wikibase-aliases-empty": "Синонимхэр гъэнэфагъэхэп",
 	"wikibase-statementview-rank-normal": "Ранг нормал",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|лъапсэ|лъапсэхэр}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|лъапсэ|лъапсэхэр}}"
 }

@@ -7,7 +7,10 @@
 	},
 	"wikibase-edit": "besut",
 	"wikibase-add": "tambah",
+	"wikibase-label-empty": "Durung katengeran",
+	"wikibase-description-empty": "Durung katerangan",
 	"wikibase-sitelinks-special": "Sasana liya",
 	"wikibase-aliases-empty": "Durung ana aliyas",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|rujukan|rujukan}}"
+	"wikibase-statementview-rank-normal": "Tataran sedhengan",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rujukan|rujukan}}"
 }

@@ -8,9 +8,9 @@
 	"wikibase-add": "شامل کورے",
 	"wikibase-label-empty": "کیہ لیبل ڈیفائن کورونو نو بیتی شیر",
 	"wikibase-description-empty": "ھیچ کیہ عنوان نیکی",
-	"wikibase-statements": "بیانات",
+	"wikibase-statementsection-statements": "بیانات",
 	"wikibase-sitelinks-special": "دیگر ویب سائٹ",
 	"wikibase-aliases-empty": "ھیچ کیہ مثال موجود نیکی",
 	"wikibase-statementview-rank-normal": "عام درجہ بندی",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|حوالہ|حوالہ جات}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|حوالہ|حوالہ جات}}"
 }

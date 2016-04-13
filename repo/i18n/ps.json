@@ -27,7 +27,7 @@
 	"wikibase-remove": "غورځول",
 	"wikibase-aliases-empty": "کوم مستعار نوم نه دی څرگند شوی.",
 	"wikibase-statementview-rank-normal": "عادي پوړ",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|سرچينه|سرچينې}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|سرچينه|سرچينې}}",
 	"wikibase-snakview-property-input-placeholder": "ځانتيا",
 	"wikibase-snakview-variations-novalue-label": "بې ارزښته",
 	"wikibase-entityselector-more": "نور",

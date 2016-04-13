@@ -8,9 +8,9 @@
 	"wikibase-add": "tilfye",
 	"wikibase-label-empty": "Ien etikett ä definiirtj",
 	"wikibase-description-empty": "Ien beskriiwels definiirtj",
-	"wikibase-statements": "Utsawn",
+	"wikibase-statementsection-statements": "Utsawn",
 	"wikibase-sitelinks-special": "Anje webbstede",
 	"wikibase-aliases-empty": "Ien aliasse definiirtj",
 	"wikibase-statementview-rank-normal": "Normal rång",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referens|referense}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referens|referense}}"
 }

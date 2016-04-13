@@ -17,13 +17,12 @@
 	"wikibase-description-empty": "S git kei Bschrybig",
 	"wikibase-description-edit-placeholder": "Bschryybig yygee",
 	"wikibase-label-input-help-message": "Gib dr Name fir dää Datesatz in $1 aa.",
-	"wikibase-description-input-help-message": "Gib e churzi Bschryybig in $1 aa.",
-	"wikibase-statements": "Uussage",
+	"wikibase-statementsection-statements": "Uussage",
 	"wikibase-sitelinks": "{{SITENAME}}-Syte, wu mit däm Datenelemänt verchnipft sin",
 	"wikibase-sitelinks-empty": "Bishär sin kei {{SITENAME}}-Syte mit däm Datenelemänt verchnipft.",
 	"wikibase-sitelinks-special": "Anderi Websyte",
 	"wikibase-remove": "uuseneh",
 	"wikibase-aliases-empty": "S kei Alias definiert wore.",
 	"wikibase-statementview-rank-normal": "Normale Rang",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|Fueßnote}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|Fueßnote}}"
 }

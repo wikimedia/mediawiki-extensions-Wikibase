@@ -11,5 +11,5 @@
 	"wikibase-sitelinks-special": "Adaels sait‎",
 	"wikibase-aliases-empty": "No ielias no difain‎",
 	"wikibase-statementview-rank-normal": "Naamal rangk‎",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|refrans|refransdem}}‎"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|refrans|refransdem}}‎"
 }

@@ -8,9 +8,9 @@
 	"wikibase-add": "эп",
 	"wikibase-label-empty": "Бэлиэтэ (аата) суох",
 	"wikibase-description-empty": "Бу туһунан сиһилии сурулла илик эбит",
-	"wikibase-statements": "Этиилэр",
+	"wikibase-statementsection-statements": "Этиилэр",
 	"wikibase-sitelinks-special": "Атын сирдэр",
 	"wikibase-aliases-empty": "Атын аат көстүбэтэ.",
 	"wikibase-statementview-rank-normal": "Ранг",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ылыллыбыт сир}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ылыллыбыт сир}}"
 }

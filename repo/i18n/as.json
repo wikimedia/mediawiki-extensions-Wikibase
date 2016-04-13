@@ -11,11 +11,11 @@
 	"wikibase-add": "যোগ কৰক",
 	"wikibase-label-empty": "কোনো লেবেলৰ সংজ্ঞা প্ৰদান কৰা হোৱা নাই",
 	"wikibase-description-empty": "কোনো বিবৰণৰ সংজ্ঞা প্ৰদান কৰা হোৱা নাই",
-	"wikibase-statements": "বিবৃতিসমূহ",
+	"wikibase-statementsection-statements": "বিবৃতিসমূহ",
 	"wikibase-sitelinks-special": "আন চাইটসমূহ",
 	"wikibase-aliases-empty": "কোনো উপনামৰ সংজ্ঞা প্ৰদান কৰা হোৱা নাই।",
 	"wikibase-statementview-rank-normal": "সাধাৰণ ৰেংক",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|টা তথ্যসূত্ৰ}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|টা তথ্যসূত্ৰ}}",
 	"wikibase-itemdisambiguation-submit": "সন্ধান কৰক",
 	"wikibase-listdatatypes-globe-coordinate-head": "ভৌগোলিক স্থানাংক"
 }

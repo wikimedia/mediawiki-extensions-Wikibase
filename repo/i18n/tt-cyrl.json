@@ -14,5 +14,5 @@
 	"wikibase-sitelinks-special": "Башка сайтлар",
 	"wikibase-aliases-empty": "Альтернатив исемнәр (синонимнар) күрсәтелмәгән",
 	"wikibase-statementview-rank-normal": "Нормаль ранг",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|чыганак}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|чыганак}}"
 }

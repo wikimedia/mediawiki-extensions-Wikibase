@@ -13,5 +13,5 @@
 	"wikibase-sitelinks-special": "Làraichean eile",
 	"wikibase-aliases-empty": "Cha deach alias a shònrachadh",
 	"wikibase-statementview-rank-normal": "Inbhe àbhaisteach",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|tùs|thùs|tùsan|tùs}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|tùs|thùs|tùsan|tùs}}"
 }

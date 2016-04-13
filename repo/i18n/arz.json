@@ -6,8 +6,8 @@
 	},
 	"wikibase-edit": "تعديل",
 	"wikibase-add": "ضيف",
-	"wikibase-statements": "بيانات",
+	"wikibase-statementsection-statements": "بيانات",
 	"wikibase-sitelinks-special": "مواقع تانيه",
 	"wikibase-statementview-rank-normal": "ترتيب طبيعى",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|مرجع واحد|مرجعين|$1 مراجع|$1 مراجع|$1 مرجع|0=مافيش مراجع}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|مرجع واحد|مرجعين|$1 مراجع|$1 مراجع|$1 مرجع|0=مافيش مراجع}}"
 }

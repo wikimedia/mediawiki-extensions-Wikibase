@@ -12,5 +12,5 @@
 	"wikibase-sitelinks-special": "Ōðre webbstedas",
 	"wikibase-aliases-empty": "Þær ne sindon ōðre naman",
 	"wikibase-statementview-rank-normal": "Gewunelic hād",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|fruma|frumena}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|fruma|frumena}}"
 }

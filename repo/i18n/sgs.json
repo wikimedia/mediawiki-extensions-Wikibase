@@ -9,5 +9,5 @@
 	"wikibase-label-empty": "Žīmies nie",
 	"wikibase-description-empty": "Aprašīms nie ožpėldīts",
 	"wikibase-sitelinks-special": "Kėtė tėnklapē",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|šaltėnis|šaltėnē|šaltėniu}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|šaltėnis|šaltėnē|šaltėniu}}"
 }

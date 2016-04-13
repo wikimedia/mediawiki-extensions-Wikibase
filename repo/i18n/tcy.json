@@ -14,5 +14,5 @@
 	"wikibase-sitelinks-special": "ಬೇತೆ ತಾನೊಲು",
 	"wikibase-aliases-empty": "ಅಲಿಯಾಸ್‍ನ್ ವಿವರಿಸವೊಡುಂದು ಇದ್ದಿ.",
 	"wikibase-statementview-rank-normal": "ಸಾದಾರಣೊ ಶ್ರೇಣಿ",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ಉಲ್ಲೇಕೊ|ಉಲ್ಲೇಕೊಲು}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ಉಲ್ಲೇಕೊ|ಉಲ್ಲೇಕೊಲು}}"
 }

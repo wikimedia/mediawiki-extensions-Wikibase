@@ -11,9 +11,9 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "अन्य भाषामी",
 	"wikibase-label-empty": "नामपत्र परिभाषित कोई",
 	"wikibase-description-empty": "कसैलै बिवरणलाई परिभाषित नगरया |",
-	"wikibase-statements": "बयान",
+	"wikibase-statementsection-statements": "बयान",
 	"wikibase-sitelinks-special": "और साइटहरू",
 	"wikibase-aliases-empty": "नामपत्र परिभाषित नाइँ",
 	"wikibase-statementview-rank-normal": "सानतिनो ओहदा",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|reference|सन्दर्भहरू}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|सन्दर्भहरू}}"
 }

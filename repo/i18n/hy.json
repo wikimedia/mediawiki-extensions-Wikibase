@@ -21,10 +21,10 @@
 	"wikibase-label-empty": "Պիտակը (անվանումը) նշված չէ",
 	"wikibase-description-empty": "Նկարագրությունը լրացված չէ",
 	"wikibase-diffview-label": "պիտակ",
-	"wikibase-statements": "Պնդումներ",
+	"wikibase-statementsection-statements": "Պնդումներ",
 	"wikibase-sitelinks-special": "Այլ կայքեր",
 	"wikibase-aliases-empty": "Այլ անվանումներ (հոմանիշներ) նշված չեն",
 	"wikibase-statementview-rank-normal": "Նորմալ աստիճան",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|աղբյուր|աղբյուրներ}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|աղբյուր|աղբյուրներ}}",
 	"wikibase-entityselector-more": "Ավելին"
 }

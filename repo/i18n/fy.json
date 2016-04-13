@@ -3,7 +3,8 @@
 		"authors": [
 			"Kening Aldgilles",
 			"Robin0van0der0vliet",
-			"Macofe"
+			"Macofe",
+			"Robin van der Vliet"
 		]
 	},
 	"wikibase-entity-property": "eigenskip",
@@ -12,10 +13,10 @@
 	"wikibase-cancel": "Annulearje",
 	"wikibase-add": "tafoegje",
 	"wikibase-label-empty": "Gjin label definearre",
-	"wikibase-statements": "Ferklearringen",
+	"wikibase-statementsection-statements": "Ferklearringen",
 	"wikibase-sitelinks-special": "Oare webstees",
 	"wikibase-statementview-rank-normal": "Normale rang",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|boarne|boarnen}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|boarne|boarnen}}",
 	"wikibase-snakview-property-input-placeholder": "eigenskip",
 	"wikibase-entityselector-more": "mear",
 	"wikibase-itembytitle-submit": "Sykje",

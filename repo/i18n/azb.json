@@ -10,10 +10,10 @@
 	"wikibase-add": "آرتیرماق",
 	"wikibase-label-empty": "هئچ بیر آد تعریف اولونماییب‌دیر.",
 	"wikibase-description-empty": "هئچ بیر آچیقلاما تعریف اولماییب‌دیر.",
-	"wikibase-statements": "ایظهالار",
+	"wikibase-statementsection-statements": "ایظهالار",
 	"wikibase-sitelinks-special": "آیری سایتلار",
 	"wikibase-aliases-empty": "هئچ بیر موستعار آدی سئچیلمییب.",
 	"wikibase-statementview-rank-normal": "نورمال درجه",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|قایناق|قایناقلار}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|قایناق|قایناقلار}}",
 	"wikibase-itembytitle-lookup-page": "مقاله:"
 }

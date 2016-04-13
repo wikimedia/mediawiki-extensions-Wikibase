@@ -8,11 +8,11 @@
 	"wikibase-add": "Żid",
 	"wikibase-label-empty": "M'hemm l-ebda tikketta definita",
 	"wikibase-description-empty": "M'hemm l-ebda deskrizzjoni definita",
-	"wikibase-statements": "Dikjarazzjonijiet",
+	"wikibase-statementsection-statements": "Dikjarazzjonijiet",
 	"wikibase-sitelinks-special": "Siti oħra",
 	"wikibase-aliases-empty": "M'hemm l-ebda aliases definiti",
 	"wikibase-statementview-rank-normal": "Klassifikazzjoni normali",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|referenza|referenzi}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referenza|referenzi}}",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 hi ridirezzjoni.",
 	"wikibase-wikibaserepopage-storage-exception": "Sar żball waqt it-tlugħ ta' $1:$2."
 }

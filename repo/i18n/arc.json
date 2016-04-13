@@ -9,8 +9,8 @@
 	"wikibase-save": "ܠܒܘܟ",
 	"wikibase-cancel": "ܒܛܘܠ",
 	"wikibase-addreference": "ܐܘܣܦ ܡܒܘܥܐ",
-	"wikibase-statements": "ܓܠܝܬ̈ܐ",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|ܡܒܘܥܐ|ܡܒܘܥ̈ܐ}}",
+	"wikibase-statementsection-statements": "ܓܠܝܬ̈ܐ",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ܡܒܘܥܐ|ܡܒܘܥ̈ܐ}}",
 	"wikibase-itemdisambiguation-lookup-language": "ܪܡܙܐ ܕܠܫܢܐ:",
 	"wikibase-modifyterm-language": "ܪܡܙܐ ܕܠܫܢܐ:"
 }

@@ -31,7 +31,7 @@
 	"wikibase-move-down": "अधः गम्यताम्",
 	"wikibase-aliases-empty": "किमपि नामान्तरं न दर्शितम्",
 	"wikibase-statementview-rank-normal": "सामान्यश्रेणी",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|उल्लेखः|उल्लेखाः}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|उल्लेखः|उल्लेखाः}}",
 	"wikibase-snakview-property-input-placeholder": "गुणधर्मः",
 	"wikibase-entityselector-more": "अधिकम्",
 	"wikibase-itembytitle-lookup-site": "स्थानम् :",

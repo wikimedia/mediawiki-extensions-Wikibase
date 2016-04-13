@@ -13,7 +13,7 @@
 	"wikibase-sitelinks-special": "Ööder wääbsidjen",
 	"wikibase-aliases-empty": "Nian aliasen fäästlaanj.",
 	"wikibase-statementview-rank-normal": "Normool steed",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "{{PLURAL:$1|efterwis|efterwiser}}",
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|efterwis|efterwiser}}",
 	"special-itembytitle": "Dootenobjekten efter tiitel",
 	"special-newitem": "En nei dootenobjekt maage",
 	"wikibase-listdatatypes-wikibase-item-body": "Ferwisang tu ööder objekten uun't projekt. Di nöömrüm „objekt“ woort trochsoocht. Det as man en ianfach tekstfial.\n* scheme – hiart tu't Iri-tiakenkeed.\n* hierarchicalpart – hiart tu't Iri-tiakenkeed.\n* query – hiart tu't Iri-tiakenkeed.\n* fragment – hiart tu't Iri-tiakenkeed."
