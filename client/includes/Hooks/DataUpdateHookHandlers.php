@@ -29,6 +29,7 @@ use WikiPage;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Marius Hoch
  */
 class DataUpdateHookHandlers {
 
@@ -84,7 +85,7 @@ class DataUpdateHookHandlers {
 		$title = $wikiPage->getTitle();
 
 		$handler = self::newFromGlobalState();
-		$handler->doArticleDeleteComplete( $title->getNamespace(), $id, $logEntry->getTimestamp() );
+		$handler->doArticleDeleteComplete( $title->getNamespace(), $id );
 	}
 
 	/**
@@ -130,29 +131,9 @@ class DataUpdateHookHandlers {
 		$parserOutput = $linksUpdate->getParserOutput();
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
-		// For now, use the current timestamp as the touch date.
-		// $parserOutput->getTimestamp() sounds good, but is documented as "timestamp of the revision",
-		// which is not what we want. $title->getTouched() sounds good, but it may not have been
-		// updated reflecting the current run of LinksUpdate yet. Since on LinksUpdateComplete we
-		// actually want to purge all old tracking entries and only care about keeping the ones
-		// now present in $parserOutput, using the current timestamp should be fine.
-		// NOTE: adjust DataUpdateHookHandlerTest::newUsageUpdater when fixing this.
-		$touched = wfTimestampNow();
-
-		// Add or touch any usages present in the rendering
-		$this->usageUpdater->addUsagesForPage(
-			$title->getArticleId(),
-			$usageAcc->getUsages(),
-			$touched
-		);
-
-		// Prune any usages older than the new rendering's timestamp.
-		// NOTE: only prune after adding the new updates, to avoid unsubscribing and then
-		// immediately re-subscribing to the used entities.
-		$this->usageUpdater->pruneUsagesForPage(
-			$title->getArticleId(),
-			$touched
-		);
+		// Please note that page views that happen between the page save but before this is run will have
+		// their usages removed (as we might add the usages via doParserCacheSaveComplete before this is run).
+		$this->usageUpdater->replaceUsagesForPage( $title->getArticleID(), $usageAcc->getUsages() );
 	}
 
 	/**
@@ -165,16 +146,12 @@ class DataUpdateHookHandlers {
 	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput );
 
-		// Note: ParserOutput::getTimestamp() is unreliable and "sometimes" contains an old timestamp.
-		// Note: getTouched() returns false if $title doesn't exist.
-		$touched = $title->getTouched();
-
-		if ( !$touched || count( $usageAcc->getUsages() ) === 0 ) {
+		if ( count( $usageAcc->getUsages() ) === 0 ) {
 			// no usages or no title, bail out
 			return;
 		}
 
-		// Add or touch any usages present in the new rendering.
+		// Add any usages present in the new rendering.
 		// This allows us to track usages in each user language separately, for multilingual sites.
 
 		// NOTE: Since parser cache updates may be triggered by page views (in a new language),
@@ -183,7 +160,7 @@ class DataUpdateHookHandlers {
 
 		//TODO: Before posting a job, check slave database. If no changes are needed, skip update.
 
-		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages(), $touched );
+		$addUsagesForPageJob = AddUsagesForPageJob::newSpec( $title, $usageAcc->getUsages() );
 		$enqueueJob = EnqueueJob::newFromLocalJobs( $addUsagesForPageJob );
 
 		$this->jobScheduler->lazyPush( $enqueueJob );
@@ -195,10 +172,9 @@ class DataUpdateHookHandlers {
 	 *
 	 * @param int $namespace
 	 * @param int $pageId
-	 * @param string $timestamp
 	 */
-	public function doArticleDeleteComplete( $namespace, $pageId, $timestamp ) {
-		$this->usageUpdater->pruneUsagesForPage( $pageId, $timestamp );
+	public function doArticleDeleteComplete( $namespace, $pageId ) {
+		$this->usageUpdater->pruneUsagesForPage( $pageId );
 	}
 
 }

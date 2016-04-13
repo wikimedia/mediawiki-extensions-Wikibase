@@ -14,17 +14,23 @@ use Wikibase\Client\Usage\NullUsageTracker;
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig
+ * @author Marius Hoch
  */
 class NullUsageTrackerTest extends PHPUnit_Framework_TestCase {
 
-	public function testTrackUsedEntities() {
+	public function testAddUsedEntities() {
 		$instance = new NullUsageTracker();
-		$this->assertNull( $instance->trackUsedEntities( 0, array(), '' ) );
+		$this->assertNull( $instance->addUsedEntities( 0, array() ) );
 	}
 
-	public function testPruneStaleUsages() {
+	public function testReplaceUsedEntities() {
 		$instance = new NullUsageTracker();
-		$this->assertSame( array(), $instance->pruneStaleUsages( 0, '' ) );
+		$this->assertNull( $instance->replaceUsedEntities( 0, array() ) );
+	}
+
+	public function testPruneUsages() {
+		$instance = new NullUsageTracker();
+		$this->assertSame( array(), $instance->pruneUsages( 0 ) );
 	}
 
 	public function testGetUsagesForPage() {
