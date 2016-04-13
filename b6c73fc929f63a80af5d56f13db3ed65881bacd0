@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_f76b06ec",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T08:57:05Z",
+      "side": 1,
+      "message": "This was HTML before, but is now escaped plain text. Quite confusing, but correct. This message, rendered in the backend, does not contain a pending \"+1\" number and therefor no HTML. It\u0027s a plain \"2 references\".",
+      "revId": "b6c73fc929f63a80af5d56f13db3ed65881bacd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_37760ed6",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T08:57:05Z",
+      "side": 1,
+      "message": "The \"Text\" here was wrong before, I think.",
+      "revId": "b6c73fc929f63a80af5d56f13db3ed65881bacd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_f752e63d",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-13T08:57:05Z",
+      "side": 1,
+      "message": "I think this should be allowed to contain Wikitext links. But the current messages do not. We can change this back when we continue working on the feature.",
+      "revId": "b6c73fc929f63a80af5d56f13db3ed65881bacd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
