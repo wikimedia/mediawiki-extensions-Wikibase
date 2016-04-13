@@ -67,7 +67,7 @@
 
 		listrotator.init( $extender );
 		listrotator.draw();
-		listrotator.rotator.prev();
+		listrotator.rotator._setValue( 'fixed value' );
 
 		setTimeout( function() {
 			sinon.assert.calledOnce( onValueChange );

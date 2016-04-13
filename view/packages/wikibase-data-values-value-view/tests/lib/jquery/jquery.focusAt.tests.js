@@ -101,6 +101,7 @@
 				'Can call focusAt on element not in DOM yet.'
 			);
 		} catch ( e ) {
+			assert.expect( 1 );
 			assert.ok(
 				e.name === 'NS_ERROR_FAILURE' && e.result === 0x80004005,
 				'Unable to focus since browser requires element to be in the DOM.'

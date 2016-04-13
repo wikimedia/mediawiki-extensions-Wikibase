@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.17.1 (2016-04-13)
+* Fixed `jQuery.focusAt` and `jquery.valueview.ExpertExtender.Listrotator` QUnit tests.
+
 ## 0.17.0 (2016-04-12)
 * `GlobeCoordinateInput` and `TimeInput` do not use `jQuery.valueview.ExpertExtender.Toggler` any
   more.
