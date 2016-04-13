@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_faa3edfa",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-13T09:18:06Z",
+      "side": 1,
+      "message": "This is even more true in JS. We exclusively use plain text messages there.",
+      "parentUuid": "ce38dbff_f76b06ec",
+      "revId": "b6c73fc929f63a80af5d56f13db3ed65881bacd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_37760ed6",
         "filename": "view/src/ClaimHtmlGenerator.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_5aabf9d4",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-13T09:18:06Z",
+      "side": 1,
+      "message": "Yes, it returns an applied template, which definitely is HTML.",
+      "parentUuid": "ce38dbff_37760ed6",
+      "revId": "b6c73fc929f63a80af5d56f13db3ed65881bacd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_f752e63d",
         "filename": "view/src/ItemView.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2016-04-13T08:57:05Z",
       "side": 1,
       "message": "I think this should be allowed to contain Wikitext links. But the current messages do not. We can change this back when we continue working on the feature.",
+      "revId": "b6c73fc929f63a80af5d56f13db3ed65881bacd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_3aaef5e4",
+        "filename": "view/src/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-13T09:18:06Z",
+      "side": 1,
+      "message": "We cannot easily change this back after I96ec3c211c338d3ab8df3ecfebec7370628a848f. We will find another way to do this, though, if need arises :)",
+      "parentUuid": "ce38dbff_f752e63d",
       "revId": "b6c73fc929f63a80af5d56f13db3ed65881bacd0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
