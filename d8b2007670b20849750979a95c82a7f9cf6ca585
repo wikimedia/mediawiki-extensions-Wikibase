@@ -186,6 +186,23 @@
       "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_6ac2643a",
+        "filename": "repo/resources/wikibase.EntityInitializer.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T15:47:18Z",
+      "side": 1,
+      "message": "This new code is very hard to read. Please split it and introduce function names that make this easier to read.",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
