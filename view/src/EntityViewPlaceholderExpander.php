@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Language;
 use MWException;
 use RuntimeException;
-use Title;
 use User;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -38,11 +37,6 @@ class EntityViewPlaceholderExpander {
 	 * @var TemplateFactory
 	 */
 	private $templateFactory;
-
-	/**
-	 * @var Title
-	 */
-	private $targetPage;
 
 	/**
 	 * @var User
@@ -91,7 +85,6 @@ class EntityViewPlaceholderExpander {
 
 	/**
 	 * @param TemplateFactory $templateFactory
-	 * @param Title $targetPage the page for which this expander is supposed to handle expansion.
 	 * @param User $user the current user
 	 * @param Language $uiLanguage the user's current UI language (as per the present request)
 	 * @param LabelsProvider $labelsProvider
@@ -103,7 +96,6 @@ class EntityViewPlaceholderExpander {
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		Title $targetPage,
 		User $user,
 		Language $uiLanguage,
 		LabelsProvider $labelsProvider,
@@ -113,7 +105,6 @@ class EntityViewPlaceholderExpander {
 		ContentLanguages $termsLanguages,
 		LanguageNameLookup $languageNameLookup
 	) {
-		$this->targetPage = $targetPage;
 		$this->user = $user;
 		$this->uiLanguage = $uiLanguage;
 		$this->labelsProvider = $labelsProvider;
@@ -232,8 +223,7 @@ class EntityViewPlaceholderExpander {
 			$this->labelsProvider,
 			$this->descriptionsProvider,
 			$this->aliasesProvider,
-			$languages,
-			$this->targetPage
+			$languages
 		);
 
 		return $html;

@@ -213,7 +213,7 @@ HTML;
 
 	$templates['wikibase-entitytermsforlanguageview-language'] =
 <<<HTML
-<a href="$1">$2</a>
+<span>$1</span>
 HTML;
 
 	$templates['wikibase-sitelinkgrouplistview'] =
