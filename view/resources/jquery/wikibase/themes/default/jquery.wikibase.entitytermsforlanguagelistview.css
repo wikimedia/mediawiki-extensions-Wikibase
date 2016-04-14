@@ -16,8 +16,10 @@
 	border-color: #2779AA;
 }
 
-.wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header tr td {
+.wikibase-entitytermsforlanguagelistview th {
 	padding: 0;
+	font-weight: inherit;
+	text-align: inherit;
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header .wikibase-entitytermsforlanguagelistview-header-row .wikibase-entitytermsforlanguagelistview-cell {

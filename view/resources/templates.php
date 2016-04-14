@@ -190,10 +190,10 @@ HTML;
 <table class="wikibase-entitytermsforlanguagelistview">
 	<thead class="wikibase-entitytermsforlanguagelistview-header">
 		<tr class="wikibase-entitytermsforlanguagelistview-header-row">
-			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-language">$1</td>
-			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-label">$2</td>
-			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-description">$3</td>
-			<td class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-aliases">$4</td>
+			<th scope="col" class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-language">$1</th>
+			<th scope="col" class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-label">$2</th>
+			<th scope="col" class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-description">$3</th>
+			<th scope="col" class="wikibase-entitytermsforlanguagelistview-cell wikibase-entitytermsforlanguagelistview-aliases">$4</th>
 		</tr>
 	</thead>
 	<tbody class="wikibase-entitytermsforlanguagelistview-listview"><!-- [0,*] wikibase-entitytermsforlanguageview -->$5</tbody>
@@ -203,17 +203,12 @@ HTML;
 	$templates['wikibase-entitytermsforlanguageview'] =
 <<<HTML
 <$1 class="wikibase-entitytermsforlanguageview wikibase-entitytermsforlanguageview-$3" >
-	<$2 class="wikibase-entitytermsforlanguageview-language"><!-- wikibase-entitytermsforlanguageview-language -->$4</$2>
+	<$9 class="wikibase-entitytermsforlanguageview-language">$4</$9>
 	<$2 class="wikibase-entitytermsforlanguageview-label">$5</$2>
 	<$2 class="wikibase-entitytermsforlanguageview-description">$6</$2>
 	<$2 class="wikibase-entitytermsforlanguageview-aliases">$7</$2>
 	<!-- ? wikibase-toolbar -->$8
 </$1>
-HTML;
-
-	$templates['wikibase-entitytermsforlanguageview-language'] =
-<<<HTML
-<span>$1</span>
 HTML;
 
 	$templates['wikibase-sitelinkgrouplistview'] =
