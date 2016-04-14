@@ -16,6 +16,24 @@
       "revId": "8eb0018c71aa02bd19de3aca6e104ce04fbf6fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_6a60a4cc",
+        "filename": "lib/includes/store/HashSiteLinkStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-04-14T15:08:42Z",
+      "side": 1,
+      "message": "what in core?",
+      "parentUuid": "ce38dbff_345293e2",
+      "revId": "8eb0018c71aa02bd19de3aca6e104ce04fbf6fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
