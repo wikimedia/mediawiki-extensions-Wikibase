@@ -164,7 +164,6 @@ return call_user_func( function() {
 				'jquery.ui.toggler',
 				'jquery.wikibase.entitytermsforlanguagelistview',
 				'mediawiki.api',
-				'mediawiki.Title',
 				'mediawiki.user',
 			),
 			'messages' => array(
@@ -211,7 +210,6 @@ return call_user_func( function() {
 				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.descriptionview',
 				'jquery.wikibase.labelview',
-				'mediawiki.Title',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.templates',
 			),

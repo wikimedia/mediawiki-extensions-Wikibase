@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use Message;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\AliasesProvider;
@@ -170,7 +169,6 @@ class EntityTermsView {
 	 * @param DescriptionsProvider $descriptionsProvider
 	 * @param AliasesProvider|null $aliasesProvider
 	 * @param string[] $languageCodes The languages the user requested to be shown
-	 * @param Title|null $title
 	 *
 	 * @return string HTML
 	 */
@@ -178,8 +176,7 @@ class EntityTermsView {
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
 		AliasesProvider $aliasesProvider = null,
-		array $languageCodes,
-		Title $title = null
+		array $languageCodes
 	) {
 		$entityTermsForLanguageViewsHtml = '';
 
@@ -188,8 +185,7 @@ class EntityTermsView {
 				$labelsProvider,
 				$descriptionsProvider,
 				$aliasesProvider,
-				$languageCode,
-				$title
+				$languageCode
 			);
 		}
 
@@ -207,7 +203,6 @@ class EntityTermsView {
 	 * @param DescriptionsProvider $descriptionsProvider
 	 * @param AliasesProvider|null $aliasesProvider
 	 * @param string $languageCode
-	 * @param Title|null $title
 	 *
 	 * @return string HTML
 	 */
@@ -215,8 +210,7 @@ class EntityTermsView {
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
 		AliasesProvider $aliasesProvider = null,
-		$languageCode,
-		Title $title = null
+		$languageCode
 	) {
 		$languageName = $this->languageNameLookup->getName( $languageCode );
 		$labels = $labelsProvider->getLabels();
@@ -229,10 +223,6 @@ class EntityTermsView {
 			'td',
 			$languageCode,
 			$this->templateFactory->render( 'wikibase-entitytermsforlanguageview-language',
-				htmlspecialchars( $title === null
-					? '#'
-					: $title->getLocalURL( array( 'setlang' => $languageCode ) )
-				),
 				htmlspecialchars( $languageName )
 			),
 			$this->templateFactory->render( 'wikibase-labelview',

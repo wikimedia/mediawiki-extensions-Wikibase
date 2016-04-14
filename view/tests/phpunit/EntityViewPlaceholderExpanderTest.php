@@ -4,7 +4,6 @@ namespace Wikibase\View\Tests;
 
 use Language;
 use MediaWikiTestCase;
-use Title;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -42,10 +41,6 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 	private function newExpander( User $user, Item $item, ItemId $itemId, AliasesProvider $aliasesProvider = null ) {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
-
 		$language = Language::factory( 'en' );
 
 		$userLanguages = $this->getMock( UserLanguageLookup::class );
@@ -57,7 +52,6 @@ class EntityViewPlaceholderExpanderTest extends MediaWikiTestCase {
 
 		return new EntityViewPlaceholderExpander(
 			$templateFactory,
-			$title,
 			$user,
 			$language,
 			$item,

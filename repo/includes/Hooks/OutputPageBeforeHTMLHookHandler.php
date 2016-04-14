@@ -159,7 +159,6 @@ class OutputPageBeforeHTMLHookHandler {
 
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
-			$out->getTitle(),
 			$out->getUser(),
 			$out->getLanguage(),
 			$labelsProvider,
