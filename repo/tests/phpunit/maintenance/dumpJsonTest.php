@@ -28,7 +28,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DumpJson;
-use Wikibase\Repo\Test\MockEntityPerPage;
+use Wikibase\Repo\Tests\MockEntityPerPage;
 
 /**
  * @covers Wikibase\DumpJson
