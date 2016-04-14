@@ -27,7 +27,7 @@
 		"data-values/geo": "~1.0",
 		"data-values/interfaces": "~0.2.0|~0.1.5",
 		"data-values/number": "~0.6.0",
-		"data-values/time": "~0.8.3",
+		"data-values/time": "~0.8.4",
 		"data-values/validators": "~0.1.0",
 		"data-values/data-types": "~0.5.0",
 		"data-values/serialization": "~1.0",
