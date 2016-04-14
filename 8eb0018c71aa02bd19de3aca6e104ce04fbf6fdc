@@ -34,6 +34,24 @@
       "revId": "8eb0018c71aa02bd19de3aca6e104ce04fbf6fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_ea95d4e7",
+        "filename": "lib/includes/store/HashSiteLinkStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T16:03:04Z",
+      "side": 1,
+      "message": "I think Hoo does have the impression that SiteLinkStore is a core interface, but it isn\u0027t.",
+      "parentUuid": "ce38dbff_6a60a4cc",
+      "revId": "8eb0018c71aa02bd19de3aca6e104ce04fbf6fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
