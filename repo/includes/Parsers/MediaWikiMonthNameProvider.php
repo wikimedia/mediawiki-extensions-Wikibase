@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Parsers;
 
 use Language;
+use ValueParsers\MonthNameProvider;
 
 /**
  * A MonthNameProvider using MediaWiki's localization infrastructure.
