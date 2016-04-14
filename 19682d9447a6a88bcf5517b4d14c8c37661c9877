@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_2a217c9a",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_0fd64a54",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_afb91e2b",
         "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "Please be specific and make this a helpful description of the actual implementation.",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_efc7a613",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_afb91e2b",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_4f60522f",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_ef8a066d",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_2faeaee4",
         "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "Not exclusively limited to strings.",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4fcfb22d",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Why not?",
+      "parentUuid": "ce38dbff_2faeaee4",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_4fe692ad",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_2f850e5b",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_6fdd5673",
         "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "Should say \"Ignored.\"",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_aff47e51",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_6fdd5673",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_8f86dabc",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "To the best of MediaWiki\u0027s knowledge until https://lists.wikimedia.org/pipermail/mediawiki-i18n/2016-April/001059.html is done.",
+      "parentUuid": "ce38dbff_2ffceed4",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_4fd05255",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 6
@@ -132,6 +258,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "I think this was a mistake. Please avoid because of git blame.",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_cf7c62e5",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "This was on purpose. It was the only case of tab after * in Wikibase.git.",
+      "parentUuid": "ce38dbff_4fd05255",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_8a37e8df",
+        "filename": "view/src/KeyNameLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_afe75e3a",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8f3edab3",
         "filename": "view/src/KeyNameLocalizedTextProvider.php",
         "patchSetId": 6
@@ -166,6 +328,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "Not true.",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_efbcc669",
+        "filename": "view/src/KeyNameLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_8f3edab3",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_4fb4d27d",
+        "filename": "view/src/KeyNameLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_ef4de676",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_2f106e03",
         "filename": "view/src/KeyNameLocalizedTextProvider.php",
         "patchSetId": 6
@@ -200,6 +398,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "Please add a default: $languageCode \u003d \u0027en\u0027. This allows to remove the odd and confusing language codes form all places where this constructor is used.",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_afa2be38",
+        "filename": "view/src/KeyNameLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "This parameter is going to be used in tests. I\u0027d rather add usage of that instead of adding a default.",
+      "parentUuid": "ce38dbff_2f106e03",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_ef6b26ec",
+        "filename": "view/src/KeyNameLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Why not?",
+      "parentUuid": "ce38dbff_4f6cd2cc",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_cfc3c28a",
         "filename": "view/src/LocalizedTextProvider.php",
         "patchSetId": 6
@@ -234,6 +468,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "I think it\u0027s helpful to mention something like \"implementations are not supposed to do any escaping\" and \"this is meant to be identical to MediaWiki core\u0027s Message::text()\". Yes, this is an interface and the whole point is to be independent from core. But users of this class that are familiar with core will find this helpful.",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4a07a01c",
+        "filename": "view/src/LocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_cfc3c28a",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_2a0a1c24",
+        "filename": "view/src/LocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "It is.",
+      "parentUuid": "ce38dbff_4fab32d5",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_af4d9e41",
         "filename": "view/tests/phpunit/EntityTermsViewTest.php",
         "patchSetId": 6
@@ -268,6 +538,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "$textProvider ?: new …",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_ca1a9072",
+        "filename": "view/tests/phpunit/EntityTermsViewTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_af4d9e41",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_0a2478ac",
+        "filename": "view/tests/phpunit/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_af647eaf",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_0f03eac2",
         "filename": "view/tests/phpunit/EntityViewPlaceholderExpanderTest.php",
         "patchSetId": 6
@@ -308,6 +614,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_ea2674b4",
+        "filename": "view/tests/phpunit/EntityViewPlaceholderExpanderTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "I shouldn\u0027t have touched this in this change. The array keys are not always consecutive, that\u0027s why I do `array_values`. This will get away soon anyway :)",
+      "parentUuid": "ce38dbff_0f03eac2",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_ef05e6c5",
         "filename": "view/tests/phpunit/SiteLinksViewTest.php",
         "patchSetId": 6
@@ -319,6 +643,24 @@
       "writtenOn": "2016-04-14T13:21:17Z",
       "side": 1,
       "message": "This constructor parameter does not have any effect, because the only method that uses it is not used in any of the tests. I suggest to add \u0027en\u0027 as a default.",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4a1e8064",
+        "filename": "view/tests/phpunit/SiteLinksViewTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:05:00Z",
+      "side": 1,
+      "message": "I suggest to rather use it.",
+      "parentUuid": "ce38dbff_ef05e6c5",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
