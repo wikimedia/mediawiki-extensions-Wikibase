@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Services\Tests\Statement\Filter;
+namespace Wikibase\Repo\Tests\Api;
 
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
