@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_2fe86eae",
+        "filename": "repo/includes/Store/TermIndexAliasesProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:16:01Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_2fb4eee3",
         "filename": "repo/includes/Store/TermIndexAliasesProvider.php",
         "patchSetId": 5
@@ -104,6 +121,23 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_afd3de03",
+        "filename": "repo/includes/Store/TermIndexDescriptionsProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:16:01Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_0f8e4a33",
         "filename": "repo/includes/Store/TermIndexLabelsProvider.php",
         "patchSetId": 5
@@ -115,6 +149,23 @@
       "writtenOn": "2016-04-14T13:59:55Z",
       "side": 1,
       "message": "This is the third time I see this code. Perhaps it should go into a helper class? or (gasp!) a base class? TermIndexTermProviderBase soudns silly though.",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4fe5f2d6",
+        "filename": "repo/includes/Store/TermIndexLabelsProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:16:01Z",
+      "side": 1,
+      "message": "How could this \"filter languages\"? There is no language code anywhere, not in the constructor, not in the method signature. Please reword this FIXME so other devs can understand and fix it.",
       "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
