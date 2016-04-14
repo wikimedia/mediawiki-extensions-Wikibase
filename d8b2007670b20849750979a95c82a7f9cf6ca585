@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_afeabe99",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Is is possible to be more specific what \"deserializer\" means? Is there an interface describing these deserializers?",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_efee8685",
+        "filename": "repo/includes/Modules/EntityTypesModuleWorker.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Not needed with the class level @since.",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_6fd396d7",
+        "filename": "repo/includes/Modules/EntityTypesModuleWorker.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Single quotes please?",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_ef8166c9",
+        "filename": "repo/includes/Modules/MwConfigModule.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Please add class level documentation.",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_cf258205",
+        "filename": "repo/includes/Modules/MwConfigModule.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Can you please avoid abbreviations and use \"MediaWiki…\"? Thanks.\n\nAlso, a class named \"MediaWiki configuration\" is very generic. What configuration? All of it?",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_0f664a4e",
+        "filename": "repo/includes/Modules/MwConfigModule.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "What is a \"worker\"? This should have documentation.",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_af775efc",
+        "filename": "repo/includes/Modules/MwConfigModule.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "PHPDocs missing.",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_2fe98e7b",
+        "filename": "repo/includes/Modules/MwConfigModule.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Not needed with the class level @since.",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_6f543657",
+        "filename": "repo/includes/Modules/MwConfigModuleWorker.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Please add class level doc.",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_af4e3ec2",
+        "filename": "repo/includes/Modules/MwConfigModuleWorker.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Please use \"MediaWiki\".",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_8ffffa30",
+        "filename": "repo/includes/Modules/MwConfigModuleWorker.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T14:27:57Z",
+      "side": 1,
+      "message": "Not needed with the class level @since.",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
