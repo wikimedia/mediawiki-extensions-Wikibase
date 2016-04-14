@@ -7,8 +7,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
+ * An array based dummy implementation of a SiteLinkStore for exclusive use in tests.
+ * @todo Should be moved to the tests folder and namespace.
+ *
  * @license GPL-2.0+
- * @author Katie Filbert <aude.wiki@gmail.com>
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
 class HashSiteLinkStore implements SiteLinkStore {
 
