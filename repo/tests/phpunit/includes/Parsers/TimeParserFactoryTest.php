@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests\Parsers;
 use DataValues\TimeValue;
 use PHPUnit_Framework_TestCase;
 use ValueParsers\IsoTimestampParser;
+use ValueParsers\MonthNameProvider;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
-use Wikibase\Repo\Parsers\MonthNameProvider;
 use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**

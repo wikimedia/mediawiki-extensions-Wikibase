@@ -7,10 +7,10 @@ use PHPUnit_Framework_TestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use ValueParsers\IsoTimestampParser;
+use ValueParsers\MonthNameProvider;
 use ValueParsers\ParserOptions;
 use ValueParsers\ValueParser;
 use Wikibase\Lib\MwTimeIsoFormatter;
-use Wikibase\Repo\Parsers\MonthNameProvider;
 use Wikibase\Repo\Parsers\TimeParserFactory;
 
 /**

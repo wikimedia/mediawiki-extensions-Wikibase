@@ -7,11 +7,14 @@ use ValueParsers\CalendarModelParser;
 use ValueParsers\DispatchingValueParser;
 use ValueParsers\EraParser;
 use ValueParsers\IsoTimestampParser;
+use ValueParsers\MonthNameProvider;
 use ValueParsers\MonthNameUnlocalizer;
 use ValueParsers\ParserOptions;
 use ValueParsers\PhpDateTimeParser;
 use ValueParsers\ValueParser;
 use ValueParsers\YearMonthDayTimeParser;
+use ValueParsers\YearMonthTimeParser;
+use ValueParsers\YearTimeParser;
 
 /**
  * @since 0.5
