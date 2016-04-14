@@ -1,8 +1,7 @@
 <?php
 
 use DataTypes\Modules\DataTypesModule;
-use Wikibase\Repo\Modules\EntityTypesModuleWorker;
-use Wikibase\Repo\Modules\MwConfigModule;
+use Wikibase\Repo\Modules\MediaWikiConfigModule;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -51,10 +50,9 @@ return call_user_func( function() {
 		),
 
 		'mw.config.values.wbEntityTypes' => $moduleTemplate + [
-			'class' => MwConfigModule::class,
-			'name' => 'wbEntityTypes',
-			'getworker' => function() {
-				return WikibaseRepo::getDefaultInstance()->getEntityTypesModuleWorker();
+			'class' => MediaWikiConfigModule::class,
+			'getconfigvalueprovider' => function() {
+				return WikibaseRepo::getDefaultInstance()->getEntityTypesConfigValueProvider();
 			}
 		],
 
