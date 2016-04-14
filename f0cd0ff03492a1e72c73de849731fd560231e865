@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_ef2686b4",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:01:06Z",
+      "side": 1,
+      "message": "Use EntityFactory instead",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_0fef6a1c",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:01:06Z",
+      "side": 1,
+      "message": "If the revision is less than $wgSlaveLagCritical seconds old, load the full entity (from master!)",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
