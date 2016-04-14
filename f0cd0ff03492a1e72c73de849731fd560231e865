@@ -33,6 +33,142 @@
       "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4fb172f4",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:59:55Z",
+      "side": 1,
+      "message": "Perhaps it would make sense to have isAliasProvider( $entityType ) etc in EntityFactory.",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_2fb4eee3",
+        "filename": "repo/includes/Store/TermIndexAliasesProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:59:55Z",
+      "side": 1,
+      "message": "Not needed. Php let\u0027s you do $x[$foo][] even if $x[$foo] wasn\u0027t set.",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_6f955642",
+        "filename": "repo/includes/Store/TermIndexAliasesProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:59:55Z",
+      "side": 1,
+      "message": "Mixing foreach style with array_map style makes me dizzy... use one or the other, please.",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_af9f5e61",
+        "filename": "repo/includes/Store/TermIndexDescriptionsProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:59:55Z",
+      "side": 1,
+      "message": "Yes, filter languages! What\u0027s the problem?",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_0f8e4a33",
+        "filename": "repo/includes/Store/TermIndexLabelsProvider.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:59:55Z",
+      "side": 1,
+      "message": "This is the third time I see this code. Perhaps it should go into a helper class? or (gasp!) a base class? TermIndexTermProviderBase soudns silly though.",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_4f885224",
+        "filename": "repo/tests/phpunit/includes/Hooks/OutputPageBeforeHTMLHookHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:59:55Z",
+      "side": 1,
+      "message": "We need to take care to test both cases, the one that loads the full entity, and the one that uses the term index.",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_8f81baff",
+        "filename": "repo/tests/phpunit/includes/Store/TermIndexAliasesProviderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:59:55Z",
+      "side": 1,
+      "message": "If this fails, the log message will not be very informative...",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_0f8daa2e",
+        "filename": "repo/tests/phpunit/includes/Store/TermIndexDescriptionsProviderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-14T13:59:55Z",
+      "side": 1,
+      "message": "Is all this data really needed for the tests below?",
+      "revId": "f0cd0ff03492a1e72c73de849731fd560231e865",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
