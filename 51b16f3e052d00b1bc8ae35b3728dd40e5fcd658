@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce38dbff_4f1e9264",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T12:51:40Z",
+      "side": 1,
+      "message": "But the table header is already marked as such, …",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_8f109a54",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T12:51:40Z",
+      "side": 1,
+      "message": "We could use \u0027th scope\u003d\"row\"\u0027 here.",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_2f0a2e24",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T12:51:40Z",
+      "side": 1,
+      "message": "Alphabetical ordered, please?",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_b40b312c",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T12:51:40Z",
+      "side": 1,
+      "message": "Doesn\u0027t this also need a scope?\n\nWhy does this even need to be a parameter? It\u0027s currently never anything but a table cell.",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_efffa6fa",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-14T12:51:40Z",
+      "side": 1,
+      "message": "We could use \u0027th scope\u003d\"row\"\u0027 here.",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
