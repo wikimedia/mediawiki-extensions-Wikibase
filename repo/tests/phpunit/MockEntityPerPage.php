@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Test;
+namespace Wikibase\Repo\Tests;
 
 use BadMethodCallException;
 use InvalidArgumentException;
