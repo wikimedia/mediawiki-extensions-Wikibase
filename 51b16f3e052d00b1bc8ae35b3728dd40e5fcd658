@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_2a85fc5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:18:58Z",
+      "side": 1,
+      "message": "The difference is slim, but thead is a part of the table, not necessarily the part (exclusively) containing column headers. See also the code example in https://www.w3.org/TR/html5/tabular-data.html#the-thead-element, it contains th and td elements in the thead.",
+      "parentUuid": "ce38dbff_4f1e9264",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8f109a54",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-14T12:51:40Z",
       "side": 1,
       "message": "We could use \u0027th scope\u003d\"row\"\u0027 here.",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_8a9b68c0",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:18:58Z",
+      "side": 1,
+      "message": "It\u0027s used for closing, too.",
+      "parentUuid": "ce38dbff_8f109a54",
       "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_ca95708b",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_2f0a2e24",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_b40b312c",
         "filename": "view/resources/templates.php",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ce38dbff_8ae2482c",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:18:58Z",
+      "side": 1,
+      "message": "We can also get rid of the tag parameters in a different change. scope is not required, just recommended.",
+      "parentUuid": "ce38dbff_b40b312c",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_efffa6fa",
         "filename": "view/src/EntityTermsView.php",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2016-04-14T12:51:40Z",
       "side": 1,
       "message": "We could use \u0027th scope\u003d\"row\"\u0027 here.",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce38dbff_0ad63854",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-14T15:18:58Z",
+      "side": 1,
+      "message": "No, it\u0027s used for closing, too.",
+      "parentUuid": "ce38dbff_efffa6fa",
       "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
