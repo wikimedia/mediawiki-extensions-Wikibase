@@ -48,13 +48,11 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 				return "<LANGUAGENAME-$languageCode>";
 			} ) );
 
-		$textProvider = $textProvider ?: new DummyLocalizedTextProvider( 'lkt' );
-
 		return new EntityTermsView(
 			TemplateFactory::getDefaultInstance(),
 			$editSectionGenerator,
 			$languageNameLookup,
-			$textProvider
+			$textProvider ?: new DummyLocalizedTextProvider()
 		);
 	}
 

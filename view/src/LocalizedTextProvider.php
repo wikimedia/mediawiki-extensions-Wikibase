@@ -16,11 +16,11 @@ interface LocalizedTextProvider {
 
 	/**
 	 * @param string $key
-	 * @param string[] $params Parameters that could be used for generating the text
+	 * @param array $params Parameters that could be used for generating the text
 	 *
 	 * @return string The localized text
 	 */
-	public function get( $key, $params = [] );
+	public function get( $key, array $params = [] );
 
 	/**
 	 * @param string $key

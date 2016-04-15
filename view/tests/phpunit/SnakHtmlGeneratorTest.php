@@ -56,7 +56,7 @@ class SnakHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			TemplateFactory::getDefaultInstance(),
 			$snakFormatter,
 			$propertyIdFormatter,
-			new DummyLocalizedTextProvider( 'lkt' )
+			new DummyLocalizedTextProvider()
 		);
 	}
 

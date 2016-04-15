@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\View\Test;
+namespace Wikibase\View\Tests;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\View\DummyLocalizedTextProvider;
@@ -18,10 +18,10 @@ class DummyLocalizedTextProviderTest extends PHPUnit_Framework_TestCase {
 	public function dummyLocalizedTextProviderProvider() {
 		return [
 			[
-				new DummyLocalizedTextProvider( 'en' ),
+				new DummyLocalizedTextProvider(),
 				true,
 				'(parentheses: VALUE)',
-				'en'
+				'qqx'
 			]
 		];
 	}
