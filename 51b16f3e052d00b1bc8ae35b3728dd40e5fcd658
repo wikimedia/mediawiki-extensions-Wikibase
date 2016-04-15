@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e58336e_401c027d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T12:16:16Z",
+      "side": 1,
+      "message": "Sorry, that was meant as a joke. ;-) I knew this was already marked as thead and never checked the tags inside. Why are they td and not th?",
+      "parentUuid": "ce38dbff_2a85fc5a",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_8f109a54",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "ce38dbff_2f0a2e24",
+      "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_601b0683",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T12:16:16Z",
+      "side": 1,
+      "message": "Where?",
+      "parentUuid": "ce38dbff_ca95708b",
       "revId": "51b16f3e052d00b1bc8ae35b3728dd40e5fcd658",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
