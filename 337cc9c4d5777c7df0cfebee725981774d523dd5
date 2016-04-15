@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e58336e_c0e01228",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T10:11:09Z",
+      "side": 1,
+      "message": "I wonder to what \"main\" refers? This is the content language for this HTML snippet.",
+      "revId": "337cc9c4d5777c7df0cfebee725981774d523dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_00eb2a0a",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T10:11:09Z",
+      "side": 1,
+      "message": "As above.",
+      "revId": "337cc9c4d5777c7df0cfebee725981774d523dd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
