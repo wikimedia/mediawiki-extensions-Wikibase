@@ -54,7 +54,7 @@ use Wikibase\Repo\Interactors\RedirectCreationInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
-use Wikibase\Repo\SnakConstructionService;
+use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -176,9 +176,9 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( EntityLookup::class, $returnValue );
 	}
 
-	public function testGetSnakConstructionServiceReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getSnakConstructionService();
-		$this->assertInstanceOf( SnakConstructionService::class, $returnValue );
+	public function testGetSnakFactoryReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getSnakFactory();
+		$this->assertInstanceOf( SnakFactory::class, $returnValue );
 	}
 
 	public function testGetEntityIdParserReturnType() {

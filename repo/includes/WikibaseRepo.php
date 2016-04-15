@@ -152,9 +152,9 @@ class WikibaseRepo {
 	private $valueParserFactory = null;
 
 	/**
-	 * @var SnakConstructionService|null
+	 * @var SnakFactory|null
 	 */
-	private $snakConstructionService = null;
+	private $snakFactory = null;
 
 	/**
 	 * @var PropertyDataTypeLookup|null
@@ -673,20 +673,20 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @since 0.4
+	 * @since 0.5
 	 *
-	 * @return SnakConstructionService
+	 * @return SnakFactory
 	 */
-	public function getSnakConstructionService() {
-		if ( $this->snakConstructionService === null ) {
-			$this->snakConstructionService = new SnakConstructionService(
+	public function getSnakFactory() {
+		if ( $this->snakFactory === null ) {
+			$this->snakFactory = new SnakFactory(
 				$this->getPropertyDataTypeLookup(),
 				$this->getDataTypeFactory(),
 				$this->getDataValueFactory()
 			);
 		}
 
-		return $this->snakConstructionService;
+		return $this->snakFactory;
 	}
 
 	/**

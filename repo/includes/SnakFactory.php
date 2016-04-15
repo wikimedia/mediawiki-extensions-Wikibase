@@ -18,12 +18,12 @@ use Wikibase\DataModel\Snak\Snak;
 /**
  * Factory for creating new snaks.
  *
- * @since 0.4
+ * @since 0.5
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class SnakConstructionService {
+class SnakFactory {
 
 	private $dataTypeLookup;
 	private $dataTypeFactory;

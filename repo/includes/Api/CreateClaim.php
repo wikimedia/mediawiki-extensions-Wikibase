@@ -67,7 +67,7 @@ class CreateClaim extends ApiBase {
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 
 		$this->modificationHelper = new StatementModificationHelper(
-			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getSnakFactory(),
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getStatementGuidValidator(),
 			$apiHelperFactory->getErrorReporter( $this )

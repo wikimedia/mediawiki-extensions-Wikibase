@@ -95,7 +95,7 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 		);
 
 		return new StatementModificationHelper(
-			$wikibaseRepo->getSnakConstructionService(),
+			$wikibaseRepo->getSnakFactory(),
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getStatementGuidValidator(),
 			$errorReporter
