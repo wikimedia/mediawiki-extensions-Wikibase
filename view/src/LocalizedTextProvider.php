@@ -20,7 +20,7 @@ interface LocalizedTextProvider {
 	 *
 	 * @return string The localized text
 	 */
-	public function get( $key, $params = [] );
+	public function get( $key, array $params = [] );
 
 	/**
 	 * @param string $key

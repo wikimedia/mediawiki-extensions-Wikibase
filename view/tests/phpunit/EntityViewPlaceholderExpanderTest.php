@@ -61,7 +61,7 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 			$userLanguages,
 			new MediaWikiContentLanguages(),
 			$languageNameLookup,
-			new DummyLocalizedTextProvider( 'lkt' )
+			new DummyLocalizedTextProvider()
 		);
 	}
 

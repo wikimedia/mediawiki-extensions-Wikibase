@@ -18,10 +18,10 @@ class DummyLocalizedTextProviderTest extends PHPUnit_Framework_TestCase {
 	public function dummyLocalizedTextProviderProvider() {
 		return [
 			[
-				new DummyLocalizedTextProvider( 'en' ),
+				new DummyLocalizedTextProvider(),
 				true,
 				'(parentheses: VALUE)',
-				'en'
+				'qqx'
 			]
 		];
 	}

@@ -34,7 +34,7 @@ class MediaWikiLocalizedTextProvider implements LocalizedTextProvider {
 	 *
 	 * @return string The localized text
 	 */
-	public function get( $key, $params = [] ) {
+	public function get( $key, array $params = [] ) {
 		return ( new Message( $key, $params, Language::factory( $this->languageCode ) ) )->text();
 	}
 
