@@ -53,7 +53,7 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 			$termsLanguages,
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			$languageNameLookup,
-			new DummyLocalizedTextProvider( 'lkt' )
+			new DummyLocalizedTextProvider()
 		);
 	}
 

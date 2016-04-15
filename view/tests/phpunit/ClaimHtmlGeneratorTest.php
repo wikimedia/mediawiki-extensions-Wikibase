@@ -63,7 +63,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 			$templateFactory,
 			$snakHtmlGenerator,
 			new BasicNumberLocalizer(),
-			new DummyLocalizedTextProvider( 'lkt' )
+			new DummyLocalizedTextProvider()
 		);
 
 		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, 'edit' );

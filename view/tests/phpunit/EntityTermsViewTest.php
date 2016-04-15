@@ -30,22 +30,16 @@ use Wikibase\View\TextInjector;
  */
 class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 
-	private function getEntityTermsView(
-		$editSectionCalls = 0,
-		$languageNameCalls = 0,
-		LocalizedTextProvider $textProvider = null
-	) {
+	private function getEntityTermsView( $editSectionCalls = 0 ) {
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$editSectionGenerator->expects( $this->exactly( $editSectionCalls ) )
 			->method( 'getLabelDescriptionAliasesEditSection' )
 			->will( $this->returnValue( '<EDITSECTION>' ) );
 
-		$textProvider = $textProvider ?: new DummyLocalizedTextProvider( 'lkt' );
-
 		return new EntityTermsView(
 			TemplateFactory::getDefaultInstance(),
 			$editSectionGenerator,
-			$textProvider
+			new DummyLocalizedTextProvider()
 		);
 	}
 
@@ -81,7 +75,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
-		$entityTermsView = $this->getEntityTermsView( 1, 0 );
+		$entityTermsView = $this->getEntityTermsView( 1 );
 		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId, '', new TextInjector() );
 
 		$this->assertContains( '<EDITSECTION>', $html );
