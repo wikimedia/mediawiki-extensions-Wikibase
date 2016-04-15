@@ -158,11 +158,13 @@ class EntityParserOutputGenerator {
 		$parserOutput->addJsConfigVars( $configVars );
 		$parserOutput->setExtensionData( 'wikibase-titletext', $this->getTitleText( $entity ) );
 
+		$entityId = $entity->getId();
+
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
 				$entity,
-				$this->getEntityInfo( $parserOutput )
+				$this->getEntityInfo( $parserOutput, $entityId )
 			);
 		} else {
 			// If we don't have HTML, the ParserOutput in question
@@ -183,8 +185,8 @@ class EntityParserOutputGenerator {
 		// Sometimes extensions like SpamBlacklist might call getParserOutput
 		// before the id is assigned, during the process of creating a new entity.
 		// in that case, no alternate links are added, which probably is no problem.
-		if ( $entity->getId() !== null ) {
-			$this->addAlternateLinks( $parserOutput, $entity->getId() );
+		if ( $entityId !== null ) {
+			$this->addAlternateLinks( $parserOutput, $entityId );
 		}
 
 		return $parserOutput;
@@ -194,10 +196,11 @@ class EntityParserOutputGenerator {
 	 * Fetches some basic entity information from a set of entity IDs.
 	 *
 	 * @param ParserOutput $parserOutput
+	 * @param EntityId|null $entityId
 	 *
 	 * @return EntityInfo
 	 */
-	private function getEntityInfo( ParserOutput $parserOutput ) {
+	private function getEntityInfo( ParserOutput $parserOutput, EntityId $entityId = null ) {
 		/**
 		 * Set in ReferencedEntitiesDataUpdater.
 		 *
@@ -209,7 +212,11 @@ class EntityParserOutputGenerator {
 		if ( !is_array( $entityIds ) ) {
 			wfLogWarning( '$entityIds from ParserOutput "referenced-entities" extension data'
 				. ' expected to be an array' );
-			$entityIds = array();
+			$entityIds = [];
+		}
+
+		if ( $entityId !== null ) {
+			$entityIds[] = $entityId;
 		}
 
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
@@ -277,15 +284,18 @@ class EntityParserOutputGenerator {
 			$this->textProvider
 		) : new EmptyEditSectionGenerator();
 
+		$languageNameLookup = new LanguageNameLookup( $this->languageCode );
 		$termsListView = new TermsListView(
 			TemplateFactory::getDefaultInstance(),
-			new LanguageNameLookup( $this->languageCode ),
+			$languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $this->languageCode ),
 			new MediaWikiLanguageDirectionalityLookup()
 		);
 
 		$textInjector = new TextInjector();
 		$entityTermsView = new PlaceholderEmittingEntityTermsView(
+			new FallbackHintHtmlTermRenderer( $languageNameLookup ),
+			$labelDescriptionLookup,
 			$this->templateFactory,
 			$editSectionGenerator,
 			$this->textProvider,

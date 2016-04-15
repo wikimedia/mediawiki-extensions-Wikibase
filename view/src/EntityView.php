@@ -99,8 +99,6 @@ abstract class EntityView {
 	public function getTitleHtml( EntityDocument $entity ) {
 		if ( $entity instanceof LabelsProvider ) {
 			return $this->entityTermsView->getTitleHtml(
-				$this->languageCode,
-				$entity,
 				$entity->getId()
 			);
 		}
