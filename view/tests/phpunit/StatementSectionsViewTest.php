@@ -49,7 +49,7 @@ class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 			$templateFactory,
 			$statementGrouper,
 			$statementListView,
-			new DummyLocalizedTextProvider( 'lkt' )
+			new DummyLocalizedTextProvider()
 		);
 	}
 

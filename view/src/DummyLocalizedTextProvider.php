@@ -13,31 +13,19 @@ namespace Wikibase\View;
 class DummyLocalizedTextProvider implements LocalizedTextProvider {
 
 	/**
-	 * @var string
-	 */
-	private $languageCode;
-
-	/**
-	 * @param string $languageCode
-	 */
-	public function __construct( $languageCode ) {
-		$this->languageCode = $languageCode;
-	}
-
-	/**
 	 * @param string $key
 	 * @param string[] $params Parameters that could be used for generating the text
 	 *
-	 * @return string The localized text
+	 * @return string The $key, followed by a colon and comma separated $params, all in brackets.
 	 */
-	public function get( $key, $params = [] ) {
+	public function get( $key, array $params = [] ) {
 		return "($key" . ( $params !== [] ? ": " . implode( $params, ", " ) : "" ) . ")";
 	}
 
 	/**
 	 * @param string $key
 	 *
-	 * @return bool
+	 * @return bool Always true.
 	 */
 	public function has( $key ) {
 		return true;
@@ -46,10 +34,10 @@ class DummyLocalizedTextProvider implements LocalizedTextProvider {
 	/**
 	 * @param string $key
 	 *
-	 * @return string The language of the text returned for a specific key
+	 * @return string Always "qqx".
 	 */
 	public function getLanguageOf( $key ) {
-		return $this->languageCode;
+		return 'qqx';
 	}
 
 }
