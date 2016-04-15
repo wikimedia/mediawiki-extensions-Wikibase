@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e58336e_9d0cc747",
+        "filename": "repo/tests/phpunit/includes/MediaWikiLocalizedTextProviderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T09:48:23Z",
+      "side": 1,
+      "message": "\"Tests\"?",
+      "revId": "b94753f2ffb9e512a92d3dabbd4db26d6603261a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_c00e5237",
+        "filename": "view/tests/phpunit/DummyLocalizedTextProviderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T09:48:23Z",
+      "side": 1,
+      "message": "\"Tests\"?",
+      "revId": "b94753f2ffb9e512a92d3dabbd4db26d6603261a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_00196a7e",
+        "filename": "view/tests/phpunit/DummyLocalizedTextProviderTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T09:48:23Z",
+      "side": 1,
+      "message": "You could argue that the message is not English but in \u0027qqx\u0027.",
+      "revId": "b94753f2ffb9e512a92d3dabbd4db26d6603261a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
