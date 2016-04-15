@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Poiuyt"
+			"Poiuyt",
+			"飞舞回堂前"
 		]
 	},
 	"tooltip-t-wikibase": "链接到有关数据存储库项",
@@ -14,5 +15,5 @@
 	"wikibase-rc-hide-wikidata-show": "显示",
 	"wikibase-rc-wikibase-edit-letter": "数",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}编辑",
-	"wikibase-otherprojects": "其他项目"
+	"wikibase-otherprojects": "来别样项目里"
 }

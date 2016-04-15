@@ -101,6 +101,7 @@
 	"wikibase-validator-sitelink-conflict": "Спасылка $1 ужо выкарыстоўваецца элемэнтам $2. Вы можаце выдаліць яе з $2, калі яна да яго не адносіцца, ці злучыць абодва элемэнты, калі яны адносяцца да аднае тэмы.",
 	"wikibase-validator-label-conflict": "Уласьцівасьць $3 ужо мае метку «$1» для моўнага коду $2.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».",
+	"wikibase-wikibaserepopage-unresolved-redirect": "$1 зьяўляецца перанакіраваньнем.",
 	"special-itembytitle": "Аб’ект паводле назвы",
 	"wikibase-itembytitle-lookup-fieldset": "Пошук аб’ектаў паводле сайту і назвы",
 	"wikibase-itembytitle-lookup-site": "Сайт:",
