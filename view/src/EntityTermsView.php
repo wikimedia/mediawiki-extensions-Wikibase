@@ -36,16 +36,11 @@ interface EntityTermsView {
 	);
 
 	/**
-	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
-	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param LabelsProvider $labelsProvider
 	 * @param EntityId|null $entityId
 	 *
 	 * @return string HTML
 	 */
 	public function getTitleHtml(
-		$mainLanguageCode,
-		LabelsProvider $labelsProvider,
 		EntityId $entityId = null
 	);
 

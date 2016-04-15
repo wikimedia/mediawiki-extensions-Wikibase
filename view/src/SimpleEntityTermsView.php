@@ -3,10 +3,12 @@
 namespace Wikibase\View;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -22,6 +24,16 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class SimpleEntityTermsView implements EntityTermsView {
+
+	/**
+	 * @var HtmlTermRenderer
+	 */
+	private $htmlTermRenderer;
+
+	/**
+	 * @var LabelDescriptionLookup
+	 */
+	private $labelDescriptionLookup;
 
 	/**
 	 * @var TemplateFactory
@@ -44,17 +56,23 @@ class SimpleEntityTermsView implements EntityTermsView {
 	private $textProvider;
 
 	/**
+	 * @param HtmlTermRenderer $htmlTermRenderer
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param TemplateFactory $templateFactory
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
 	 * @param TermsListView $termsListView
 	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
+		HtmlTermRenderer $htmlTermRenderer,
+		LabelDescriptionLookup $labelDescriptionLookup,
 		TemplateFactory $templateFactory,
 		EditSectionGenerator $sectionEditLinkGenerator,
 		TermsListView $termsListView,
 		LocalizedTextProvider $textProvider
 	) {
+		$this->htmlTermRenderer = $htmlTermRenderer;
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->templateFactory = $templateFactory;
 		$this->termsListView = $termsListView;
@@ -79,7 +97,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 		EntityId $entityId = null
 	) {
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$this->getHeadingHtml( $mainLanguageCode, $descriptionsProvider, $aliasesProvider ),
+			$this->getHeadingHtml( $mainLanguageCode, $entityId, $aliasesProvider ),
 			$this->termsListView->getHtml(
 				$labelsProvider,
 				$descriptionsProvider,
@@ -98,17 +116,17 @@ class SimpleEntityTermsView implements EntityTermsView {
 
 	protected function getHeadingHtml(
 		$languageCode,
-		DescriptionsProvider $descriptionsProvider,
+		EntityId $entityId = null,
 		AliasesProvider $aliasesProvider = null
 	) {
 		$headingPartsHtml = '';
 
-		$descriptions = $descriptionsProvider->getDescriptions();
+		$description = $entityId ? $this->labelDescriptionLookup->getDescription( $entityId ) : null;
 		$headingPartsHtml .= $this->templateFactory->render(
 			'wikibase-entitytermsview-heading-part',
 			'description',
-			$descriptions->hasTermForLanguage( $languageCode ) ? '' : 'wb-empty',
-			$this->getDescriptionHtml( $languageCode, $descriptions )
+			$description ? '' : 'wb-empty',
+			$this->getDescriptionHtml( $description )
 		);
 
 		if ( $aliasesProvider !== null ) {
@@ -167,46 +185,39 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 * @return string HTML
 	 */
 	public function getTitleHtml(
-		$mainLanguageCode,
-		LabelsProvider $labelsProvider,
 		EntityId $entityId = null
 	) {
-		$labels = $labelsProvider->getLabels();
-		$idInParenthesesHtml = '';
-
-		if ( $entityId !== null ) {
-			$id = $entityId->getSerialization();
-			$idInParenthesesHtml = htmlspecialchars( $this->textProvider->get( 'parentheses', [ $id ] ) );
+		if ( $entityId === null ) {
+			return $this->templateFactory->render( 'wikibase-title', 'wb-empty', '', '' );
 		}
 
-		if ( $labels->hasTermForLanguage( $mainLanguageCode ) ) {
-			return $this->templateFactory->render( 'wikibase-title',
-				'',
-				htmlspecialchars( $labels->getByLanguage( $mainLanguageCode )->getText() ),
-				$idInParenthesesHtml
-			);
+		$id = $entityId->getSerialization();
+		$idInParenthesesHtml = htmlspecialchars( $this->textProvider->get( 'parentheses', [ $id ] ) );
+
+		$label = $this->labelDescriptionLookup->getLabel( $entityId );
+		if ( $label === null ) {
+			$labelHtml = htmlspecialchars( $this->textProvider->get( 'wikibase-label-empty' ) );
 		} else {
-			return $this->templateFactory->render( 'wikibase-title',
-				'wb-empty',
-				htmlspecialchars( $this->textProvider->get( 'wikibase-label-empty' ) ),
-				$idInParenthesesHtml
-			);
+			$labelHtml = $this->htmlTermRenderer->renderTerm( $label );
 		}
+
+		return $this->templateFactory->render( 'wikibase-title',
+			$label ? '' : 'wb-empty',
+			$labelHtml,
+			$idInParenthesesHtml
+		);
 	}
 
 	/**
-	 * @param string $languageCode The language of the description
-	 * @param TermList $descriptions The list of descriptions to render
+	 * @param EntityId|null $entityId
 	 *
 	 * @return string HTML
 	 */
-	private function getDescriptionHtml( $languageCode, TermList $descriptions ) {
-		if ( $descriptions->hasTermForLanguage( $languageCode ) ) {
-			$text = $descriptions->getByLanguage( $languageCode )->getText();
-		} else {
-			$text = $this->textProvider->get( 'wikibase-description-empty' );
+	private function getDescriptionHtml( Term $description = null ) {
+		if ( $description === null ) {
+			return htmlspecialchars( $this->textProvider->get( 'wikibase-description-empty' ) );
 		}
-		return htmlspecialchars( $text );
+		return $this->htmlTermRenderer->renderTerm( $description );
 	}
 
 	/**
