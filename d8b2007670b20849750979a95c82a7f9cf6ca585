@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e58336e_c0c77299",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-15T10:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce38dbff_afeabe99",
+      "revId": "d8b2007670b20849750979a95c82a7f9cf6ca585",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_efee8685",
         "filename": "repo/includes/Modules/EntityTypesModuleWorker.php",
         "patchSetId": 8
