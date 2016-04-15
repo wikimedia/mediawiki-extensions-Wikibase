@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "0e58336e_806a9aaf",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-15T10:02:34Z",
+      "side": 1,
+      "message": "No, they cannot. PLURAL parameters are localized, formatted numbers.",
+      "parentUuid": "0e58336e_bd0f0b3b",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_2f850e5b",
         "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
         "patchSetId": 6
@@ -452,6 +470,24 @@
       "side": 1,
       "message": "What \"usage\", and how does this make a default obsolete? Currently this parameter is used a lot in tests, but then the test does nothing with this language code. I find this confusing when reading the test.\n\nThis is a dummy implementation. When you call get() this language code is irrelevant. You could even argue that getLanguageOf() must return a static \u0027qqx\u0027.",
       "parentUuid": "ce38dbff_afa2be38",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_409fe2b9",
+        "filename": "view/src/KeyNameLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-15T10:02:34Z",
+      "side": 1,
+      "message": "There will be tests that check that the effective language code is present in the HTML output.\n\nqqx is not a valid language tag, we could use zxx (No linguistic content), but then we would need another LocalizedTextProvider implementation for the tests I mentioned above. I could live with that approach.",
+      "parentUuid": "0e58336e_80057a16",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
