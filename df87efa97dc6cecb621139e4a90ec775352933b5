@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e58336e_c0cc9269",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T10:58:16Z",
+      "side": 1,
+      "message": "I think this should contain the word \"JavaScript\" somewhere. E.g. \"returns a JavaScript function\".",
+      "revId": "df87efa97dc6cecb621139e4a90ec775352933b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
