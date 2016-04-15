@@ -229,9 +229,7 @@ class EntityTermsView {
 			'tr',
 			'td',
 			$languageCode,
-			$this->templateFactory->render( 'wikibase-entitytermsforlanguageview-language',
-				htmlspecialchars( $languageName )
-			),
+			htmlspecialchars( $languageName ),
 			$this->templateFactory->render( 'wikibase-labelview',
 				$hasLabel ? '' : 'wb-empty',
 				htmlspecialchars( $hasLabel
@@ -250,7 +248,8 @@ class EntityTermsView {
 				''
 			),
 			$aliasesProvider ? $this->getAliasesView( $aliasesProvider->getAliasGroups(), $languageCode ) : '',
-			''
+			'',
+			'th'
 		);
 	}
 
