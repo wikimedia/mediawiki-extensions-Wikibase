@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e58336e_a026be0f",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-15T11:26:49Z",
+      "side": 1,
+      "message": "Much better, thanks!",
+      "revId": "264629663ed371a75872180cc0a299d1617b2b83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_0024ca06",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-15T11:26:49Z",
+      "side": 1,
+      "message": "needs unit tests",
+      "revId": "264629663ed371a75872180cc0a299d1617b2b83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_e020b6f4",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-15T11:26:49Z",
+      "side": 1,
+      "message": "needs unit tests",
+      "revId": "264629663ed371a75872180cc0a299d1617b2b83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_c02932e4",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-15T11:26:49Z",
+      "side": 1,
+      "message": "Since we don\u0027t actually want to link anything in the repo (and attempting to do so will hopefully fail during testing - it would pollute the repo database), you should use a mock here. Something like this:\n\n    $this-\u003erepoLinker \u003d $this-\u003egetMockBuilder( RepoLinker::class )\n                                           -\u003edisableOriginalCOnstructor()\n                                           -\u003egetMock();\n    \n    $this-\u003erepoLinker \u003d $this-\u003eexpects( $this-\u003eany() )\n                                           -\u003emethod( \u0027getFoo\u0027 )\n                                           -\u003ewill( $this-\u003ereturnValue( \u0027FOO\u0027 ) );\n\nPHPUnit\u0027s mocking facility is quite useful for this kind of thing.",
+      "revId": "264629663ed371a75872180cc0a299d1617b2b83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_004deae0",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-15T11:26:49Z",
+      "side": 1,
+      "message": "better to construct a new settings object here. Unit tests should be entirely isolated from local configuration.",
+      "revId": "264629663ed371a75872180cc0a299d1617b2b83",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
