@@ -306,23 +306,4 @@ class ViewFactory {
 		);
 	}
 
-	/**
-	 * @param EditSectionGenerator $editSectionGenerator
-	 *
-	 * @return EntityTermsView
-	 */
-	public function newEntityTermsView( EditSectionGenerator $editSectionGenerator ) {
-		return new SimpleEntityTermsView(
-			$this->templateFactory,
-			$editSectionGenerator,
-			new TermsListView(
-				$this->templateFactory,
-				$this->languageNameLookup,
-				$this->textProvider,
-				$this->languageDirectionalityLookup
-			),
-			$this->textProvider
-		);
-	}
-
 }

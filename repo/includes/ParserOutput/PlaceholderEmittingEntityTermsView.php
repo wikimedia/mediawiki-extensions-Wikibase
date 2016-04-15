@@ -3,12 +3,14 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\HtmlTermRenderer;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SimpleEntityTermsView;
 use Wikibase\View\TermsListView;
@@ -45,13 +47,22 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
+		HtmlTermRenderer $htmlTermRenderer,
+		LabelDescriptionLookup $labelDescriptionLookup,
 		TemplateFactory $templateFactory,
 		EditSectionGenerator $sectionEditLinkGenerator,
 		LocalizedTextProvider $textProvider,
 		TermsListView $termsListView,
 		TextInjector $textInjector
 	) {
-		parent::__construct( $templateFactory, $sectionEditLinkGenerator, $termsListView, $textProvider );
+		parent::__construct(
+			$htmlTermRenderer,
+			$labelDescriptionLookup,
+			$templateFactory,
+			$sectionEditLinkGenerator,
+			$termsListView,
+			$textProvider
+		);
 		$this->templateFactory = $templateFactory;
 		$this->termsListView = $termsListView;
 		$this->textInjector = $textInjector;
@@ -79,7 +90,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 		);
 
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$this->getHeadingHtml( $mainLanguageCode, $descriptionsProvider, $aliasesProvider ),
+			$this->getHeadingHtml( $mainLanguageCode, $entityId, $aliasesProvider ),
 			$this->textInjector->newMarker( 'termbox' ),
 			$cssClasses,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
