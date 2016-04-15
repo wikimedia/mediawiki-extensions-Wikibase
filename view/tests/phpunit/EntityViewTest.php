@@ -2,7 +2,7 @@
 
 namespace Wikibase\View\Tests;
 
-use MediaWikiLangTestCase;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Statement\Statement;
@@ -18,7 +18,7 @@ use Wikibase\View\EntityView;
  * @author H. Snater < mediawiki@snater.com >
  * @author Daniel Kinzler
  */
-abstract class EntityViewTest extends MediaWikiLangTestCase {
+abstract class EntityViewTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param EntityId $id

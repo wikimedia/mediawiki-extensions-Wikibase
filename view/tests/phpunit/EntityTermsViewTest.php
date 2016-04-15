@@ -2,14 +2,15 @@
 
 namespace Wikibase\View\Tests;
 
-use MediaWikiLangTestCase;
-use MessageCache;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
+use Wikibase\View\DummyLocalizedTextProvider;
+use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TextInjector;
 
@@ -21,7 +22,6 @@ use Wikibase\View\TextInjector;
  * @uses Wikibase\View\Template\TemplateRegistry
  * @uses Wikibase\View\TextInjector
  *
- * @group Database
  * @group Wikibase
  * @group WikibaseView
  *
@@ -29,18 +29,13 @@ use Wikibase\View\TextInjector;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig
  */
-class EntityTermsViewTest extends MediaWikiLangTestCase {
-
-	protected function setUp() {
-		parent::setUp();
-
-		$this->setUserLang( 'qqx' );
-	}
+class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 
 	private function getEntityTermsView(
 		$editSectionCalls = 0,
 		$languageNameCalls = 0,
-		$languageCode = 'en'
+		$languageCode = 'en',
+		LocalizedTextProvider $textProvider = null
 	) {
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$editSectionGenerator->expects( $this->exactly( $editSectionCalls ) )
@@ -54,11 +49,14 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 				return "<LANGUAGENAME-$languageCode>";
 			} ) );
 
+		$textProvider = $textProvider ?: new DummyLocalizedTextProvider( 'lkt' );
+
 		return new EntityTermsView(
 			TemplateFactory::getDefaultInstance(),
 			$editSectionGenerator,
 			$languageNameLookup,
-			$languageCode
+			$languageCode,
+			$textProvider
 		);
 	}
 
@@ -253,15 +251,18 @@ class EntityTermsViewTest extends MediaWikiLangTestCase {
 	}
 
 	public function testGetEntityTermsForLanguageListView_isEscaped() {
-		MessageCache::singleton()->enable();
-		$this->setUserLang( 'en' );
-		$this->insertPage( 'MediaWiki:wikibase-entitytermsforlanguagelistview-language', '"RAW"' );
+		$textProvider = $this->getMock( LocalizedTextProvider::class );
+		$textProvider->expects( $this->any() )
+			->method( 'get' )
+			->will( $this->returnCallback( function( $key ) {
+				return $key === 'wikibase-entitytermsforlanguagelistview-language' ? '"RAW"' : "($key)";
+			} ) );
 
 		$item = new Item(
 			new ItemId( 'Q1' ),
 			new Fingerprint()
 		);
-		$view = $this->getEntityTermsView();
+		$view = $this->getEntityTermsView( 0, 0, 'en', $textProvider );
 		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, [] );
 
 		$this->assertContains( '&quot;RAW&quot;', $html );

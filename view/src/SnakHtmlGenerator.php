@@ -20,6 +20,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Pragunbhutani
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class SnakHtmlGenerator {
 
@@ -39,16 +40,23 @@ class SnakHtmlGenerator {
 	private $propertyIdFormatter;
 
 	/**
+	 * @var LocalizedTextProvider
+	 */
+	private $textProvider;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SnakFormatter $snakFormatter
 	 * @param EntityIdFormatter $propertyIdFormatter
+	 * @param LocalizedTextProvider $textProvider
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		SnakFormatter $snakFormatter,
-		EntityIdFormatter $propertyIdFormatter
+		EntityIdFormatter $propertyIdFormatter,
+		LocalizedTextProvider $textProvider
 	) {
 		if ( $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML
 				&& $snakFormatter->getFormat() !== SnakFormatter::FORMAT_HTML_WIDGET ) {
@@ -59,6 +67,7 @@ class SnakHtmlGenerator {
 		$this->snakFormatter = $snakFormatter;
 		$this->propertyIdFormatter = $propertyIdFormatter;
 		$this->templateFactory = $templateFactory;
+		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -137,14 +146,14 @@ class SnakHtmlGenerator {
 	 * @return string HTML
 	 */
 	private function getInvalidSnakMessage() {
-		return htmlspecialchars( wfMessage( 'wikibase-snakformat-invalid-value' )->text() );
+		return htmlspecialchars( $this->textProvider->get( 'wikibase-snakformat-invalid-value' ) );
 	}
 
 	/**
 	 * @return string HTML
 	 */
 	private function getPropertyNotFoundMessage() {
-		return htmlspecialchars( wfMessage( 'wikibase-snakformat-propertynotfound' )->text() );
+		return htmlspecialchars( $this->textProvider->get( 'wikibase-snakformat-propertynotfound' ) );
 	}
 
 }

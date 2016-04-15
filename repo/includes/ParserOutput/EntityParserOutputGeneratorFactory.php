@@ -12,6 +12,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -134,6 +135,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityInfoBuilderFactory,
 			$this->getLanguageFallbackChain( $userLanguage ),
 			$this->templateFactory,
+			new MediaWikiLocalizedTextProvider( $userLanguageCode ),
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguageCode,
