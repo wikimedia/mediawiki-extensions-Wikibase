@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "0e58336e_bd0f0b3b",
+        "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T09:47:20Z",
+      "side": 1,
+      "message": "PLURAL parameters can be ints, for example.",
+      "parentUuid": "ce38dbff_4fcfb22d",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_2f850e5b",
         "filename": "repo/includes/MediaWikiLocalizedTextProvider.php",
         "patchSetId": 6
@@ -416,6 +434,24 @@
       "side": 1,
       "message": "This parameter is going to be used in tests. I\u0027d rather add usage of that instead of adding a default.",
       "parentUuid": "ce38dbff_2f106e03",
+      "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e58336e_80057a16",
+        "filename": "view/src/KeyNameLocalizedTextProvider.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-15T09:47:20Z",
+      "side": 1,
+      "message": "What \"usage\", and how does this make a default obsolete? Currently this parameter is used a lot in tests, but then the test does nothing with this language code. I find this confusing when reading the test.\n\nThis is a dummy implementation. When you call get() this language code is irrelevant. You could even argue that getLanguageOf() must return a static \u0027qqx\u0027.",
+      "parentUuid": "ce38dbff_afa2be38",
       "revId": "19682d9447a6a88bcf5517b4d14c8c37661c9877",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
