@@ -15,12 +15,13 @@
 			"Themasterriot",
 			"Macofe",
 			"Idontknow",
-			"Matiia"
+			"Matiia",
+			"Lemondoge"
 		]
 	},
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
 	"tooltip-t-wikibase": "Enlace al elemento conectado del repositorio de datos",
-	"apihelp-query+pageterms-description": "Obtener los términos asociados con una página a través de un elemento de datos asociado.",
+	"apihelp-query+pageterms-description": "Obtener términos asociados con una página a través de asociado un elemento de datos. En un wikibase entidad de la página, la entidad términos son usados directamente.\nAdvertencia: En un repositorio wiki, pageterms sólo funciona directamente en la entidad páginas, no en las páginas conectado a un elemento. Esto puede cambiar en el futuro.",
 	"apihelp-query+pageterms-example-simple": "Obtener todos los términos asociados con la página 'London', en el idioma del usuario.",
 	"apihelp-query+pageterms-example-label-en": "Obtener etiquetas y alias asociados con la página 'London', en inglés.",
 	"apihelp-query+pageterms-example-item": "Obtener etiquetas y alias del elemento Q84.",

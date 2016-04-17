@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"ElizaMag"
+			"ElizaMag",
+			"Adam-Yourist"
 		]
 	},
-	"wikibase-edit": "хувца"
+	"wikibase-edit": "хувца",
+	"wikibase-add": "тIатоха"
 }

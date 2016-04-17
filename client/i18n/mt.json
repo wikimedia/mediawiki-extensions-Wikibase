@@ -6,7 +6,7 @@
 		]
 	},
 	"wikibase-client-desc": "Klijent għall-estensjoni Wikibase",
-	"tooltip-t-wikibase": "Ħolqa għall-element tal-arkivju tad-dejta",
+	"tooltip-t-wikibase": "Ħolqa għall-element konness tal-arkivju tad-dejta",
 	"wikibase-after-page-move-queued": "L-[$1 element ta' Wikidata] assoċjat ma' din il-paġna se jiġi aġġornat awtomatikament dalwaqt.",
 	"wikibase-comment-update": "Element ta' {{WBREPONAME}} ġie mmodifikat",
 	"wikibase-dataitem": "Element ta' {{WBREPONAME}}",
