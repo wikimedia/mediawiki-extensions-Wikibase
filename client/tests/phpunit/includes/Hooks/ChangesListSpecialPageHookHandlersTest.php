@@ -41,7 +41,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit_Framework_TestCase
 
 		$expected = array(
 			'hideWikibase' => array(
-		        'msg' => 'wikibase-rc-hide-wikidata',
+				'msg' => 'wikibase-rc-hide-wikidata',
 				'default' => true
 			)
 		);
