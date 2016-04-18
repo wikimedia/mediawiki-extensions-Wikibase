@@ -82,7 +82,6 @@ class EntityFactory {
 	 *
 	 * @param String $entityType The type of the desired new entity.
 	 *
-	 * @throws RuntimeException
 	 * @return EntityDocument The new Entity object.
 	 */
 	public function newEmpty( $entityType ) {
@@ -90,11 +89,9 @@ class EntityFactory {
 
 		if ( method_exists( $class, 'newFromType' ) ) {
 			return $class::newFromType( '' );
-		} elseif ( method_exists( $class, 'newEmpty' ) ) {
-			return $class::newEmpty();
-		} else {
-			throw new RuntimeException( "$class does not support a newEmpty method" );
 		}
+
+		return new $class();
 	}
 
 }
