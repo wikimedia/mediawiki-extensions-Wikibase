@@ -9,8 +9,13 @@
 }
 
 .wikibase-rankselector .ui-icon.ui-icon-rankselector {
-	/* @embed */ background-image: url(images/rankselector.png);
-	width: 6px;
+	/* SVG support using a transparent gradient to guarantee cross-browser
+	 * compatibility (browsers able to understand gradient syntax support also SVG).
+	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
+	background-image: url(images/rankselector.png);
+	/* @embed */
+	background-image: linear-gradient(transparent, transparent), url(images/rankselector.svg);
+	width: 8px;
 	height: 20px;
 	padding: 3px 0;
 }
@@ -20,47 +25,47 @@
 }
 
 .wikibase-rankselector .ui-icon.wikibase-rankselector-normal {
-	background-position: -7px;
+	background-position: -9px;
 }
 
 .wikibase-rankselector .ui-icon.wikibase-rankselector-deprecated {
-	background-position: -14px;
+	background-position: -18px;
 }
 
 .wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-preferred {
-	background-position: -21px;
+	background-position: -27px;
 }
 
 .wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-normal {
-	background-position: -28px;
+	background-position: -36px;
 }
 
 .wikibase-rankselector.ui-state-disabled .ui-icon.wikibase-rankselector-deprecated {
-	background-position: -35px;
+	background-position: -45px;
 }
 
 .wikibase-rankselector.ui-state-default .ui-icon.wikibase-rankselector-preferred {
-	background-position: -42px;
+	background-position: -54px;
 }
 
 .wikibase-rankselector.ui-state-default .ui-icon.wikibase-rankselector-normal {
-	background-position: -49px;
-}
-
-.wikibase-rankselector.ui-state-default .ui-icon.wikibase-rankselector-deprecated {
-	background-position: -56px;
-}
-
-.wikibase-rankselector.ui-state-hover .ui-icon.wikibase-rankselector-preferred {
 	background-position: -63px;
 }
 
+.wikibase-rankselector.ui-state-default .ui-icon.wikibase-rankselector-deprecated {
+	background-position: -72px;
+}
+
+.wikibase-rankselector.ui-state-hover .ui-icon.wikibase-rankselector-preferred {
+	background-position: -81px;
+}
+
 .wikibase-rankselector.ui-state-hover .ui-icon.wikibase-rankselector-normal {
-	background-position: -70px;
+	background-position: -90px;
 }
 
 .wikibase-rankselector.ui-state-hover .ui-icon.wikibase-rankselector-deprecated {
-	background-position: -77px;
+	background-position: -99px;
 }
 
 .wikibase-rankselector-menu {
