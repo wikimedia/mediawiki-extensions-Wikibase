@@ -61,7 +61,6 @@
 
 			this._hoverable( this.element );
 
-			// TODO: add a title message
 			this.element
 			.addClass( 'ui-state-default ' + this.widgetBaseClass )
 			.on( 'click.' + widgetName, function( event ) {
@@ -209,8 +208,9 @@
 			this._menu.element.children( '.ui-state-active' ).removeClass( 'ui-state-active' );
 
 			if ( snakType !== null ) {
-				this._menu.element.children( '.' + this.widgetBaseClass + '-menuitem-' + snakType )
-					.addClass( 'ui-state-active' );
+				var $snakTypeLi = this._menu.element.children( '.' + this.widgetBaseClass + '-menuitem-' + snakType );
+				$snakTypeLi.addClass( 'ui-state-active' );
+				this._$icon.attr( 'title', $snakTypeLi.text() );
 			}
 
 			this._trigger( 'change' );
