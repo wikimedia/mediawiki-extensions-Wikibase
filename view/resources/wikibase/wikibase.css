@@ -327,8 +327,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 .wikibase-snakview-typeselector {
 	position: absolute;
-	left: 10px;
-	width: 16px;
+	left: 12px;
 }
 
 .wikibase-snakview-unsupportedsnaktype,

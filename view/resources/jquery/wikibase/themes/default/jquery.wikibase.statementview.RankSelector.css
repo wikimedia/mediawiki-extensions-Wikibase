@@ -17,7 +17,6 @@
 	background-image: linear-gradient(transparent, transparent), url(images/rankselector.svg);
 	width: 8px;
 	height: 20px;
-	padding: 3px 0;
 }
 
 .wikibase-rankselector .ui-icon.wikibase-rankselector-preferred {
