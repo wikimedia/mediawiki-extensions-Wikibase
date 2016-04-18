@@ -12,6 +12,7 @@
 	/* @embed */ background-image: url(images/rankselector.png);
 	width: 6px;
 	height: 20px;
+	padding: 3px 0;
 }
 
 .wikibase-rankselector .ui-icon.wikibase-rankselector-preferred {

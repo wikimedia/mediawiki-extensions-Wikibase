@@ -1,5 +1,7 @@
 .wikibase-snakview-typeselector .wikibase-snaktypeselector {
+	background: none;
 	border: none;
+	cursor: pointer;
 }
 
 /* TODO: Move to vector theme and add default coloured icons  */
@@ -7,6 +9,7 @@
 .ui-state-default .ui-icon-snaktypeselector {
 	/* @embed */
 	background-image: url(images/ui-icon_snaktypeselector_3d80b3.png);
+	height: 26px; /* 20px height of rankselector.png + 2 * 3px padding */
 }
 .ui-state-hover .ui-icon-snaktypeselector {
 	/* @embed */

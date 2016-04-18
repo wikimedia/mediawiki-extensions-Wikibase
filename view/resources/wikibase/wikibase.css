@@ -329,7 +329,6 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	position: absolute;
 	left: 10px;
 	width: 16px;
-	cursor: pointer;
 }
 
 .wikibase-snakview-unsupportedsnaktype,
@@ -450,11 +449,12 @@ div .wikibase-snakview-value span.error.wb-format-error {
 .wikibase-statementview .wikibase-statementview-rankselector {
 	position: absolute;
 	margin-left: 15.2em;
-	margin-top: 1em;
+	margin-top: 10px; /* same as the .wikibase-snakview padding-top */
 	z-index: 1;
 }
 
 .wikibase-statementview .wikibase-statementview-rankselector .wikibase-rankselector {
+	background: none;
 	border: 0;
 }
 
