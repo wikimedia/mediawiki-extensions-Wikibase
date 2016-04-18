@@ -7,17 +7,21 @@
 /* TODO: Move to vector theme and add default coloured icons  */
 
 .ui-state-default .ui-icon-snaktypeselector {
+	/* SVG support using a transparent gradient to guarantee cross-browser
+	 * compatibility (browsers able to understand gradient syntax support also SVG).
+	 * http://pauginer.tumblr.com/post/36614680636/invisible-gradient-technique */
+	background-image: url(images/ui-icon_snaktypeselector.png);
 	/* @embed */
-	background-image: url(images/ui-icon_snaktypeselector_3d80b3.png);
-	height: 26px; /* 20px height of rankselector.png + 2 * 3px padding */
+	background-image: linear-gradient(transparent, transparent), url(images/ui-icon_snaktypeselector.svg);
+	background-position: -11px 0;
+	height: 20px; /* same height as rankselector.png */
+	width: 14px;
 }
 .ui-state-hover .ui-icon-snaktypeselector {
-	/* @embed */
-	background-image: url(images/ui-icon_snaktypeselector_2694e8.png);
+	background-position: -24px 0;
 }
 .ui-state-active .ui-icon-snaktypeselector {
-	/* @embed */
-	background-image: url(images/ui-icon_snaktypeselector_666666.png);
+	background-position: 2px 0;
 }
 
 .wikibase-snaktypeselector-menu {
