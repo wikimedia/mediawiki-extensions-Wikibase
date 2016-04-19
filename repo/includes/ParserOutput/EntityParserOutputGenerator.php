@@ -9,16 +9,19 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\TermsListView;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
@@ -287,6 +290,29 @@ class EntityParserOutputGenerator {
 		$html = $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
+
+		$termsListView = new TermsListView(
+			TemplateFactory::getDefaultInstance(),
+			new LanguageNameLookup( $this->languageCode ),
+			new MediaWikiLocalizedTextProvider( $this->languageCode )
+		);
+		$allLanguages = array_unique(
+			array_keys( $entity->getLabels()->toTextArray() ) +
+			array_keys( $entity->getDescriptions()->toTextArray() ) +
+			array_keys( $entity->getAliasGroups()->toTextArray() )
+		);
+		$parserOutput->setExtensionData(
+			'wikibase-view-terms-list-items',
+			array_combine(
+				$allLanguages,
+				array_map(
+					function( $languageCode ) use( $termsListView, $entity ) {
+						return $termsListView->getListItemHtml( $entity, $entity, $entity, $languageCode );
+					},
+					$allLanguages
+				)
+			)
+		 );
 	}
 
 	/**
