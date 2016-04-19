@@ -299,7 +299,6 @@
 	"wikibase-listdatatypes-url-body": "URL のリテラルデータ。URL は、ウィキテキスト内の外部リンクでも対応しているプロトコルに限定されます。",
 	"wikibase-listdatatypes-external-id-head": "外部識別子",
 	"wikibase-concept-uri": "概念 URI",
-	"wikibase-add-badges": "バッジを追加",
 	"wikibase-pageimage-helptext": "この画像は、この項目の文から取得されています。そのため、文を変更することにより、画像の調整ができます。",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "ウィキベース項目",

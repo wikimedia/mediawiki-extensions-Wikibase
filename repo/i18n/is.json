@@ -270,7 +270,6 @@
 	"wikibase-listdatatypes-string-head": "Strengur",
 	"wikibase-listdatatypes-url-head": "Vefslóð",
 	"wikibase-listdatatypes-url-body": "Bókstaflegur gangna reitur fyrir vefslóð. Vefslóðir eru takmarkaðar við þá samskiptastaðla sem eru einnig studdir í ytri tenglum í wikitexta.",
-	"wikibase-add-badges": "Bæta við merki",
 	"content-model-wikibase-item": "Wikibase hlutur",
 	"content-model-wikibase-property": "Wikibase eiginleiki",
 	"content-model-wikibase-query": "Wikibase fyrirspurn",

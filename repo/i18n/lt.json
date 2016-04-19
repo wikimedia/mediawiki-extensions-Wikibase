@@ -315,7 +315,6 @@
 	"wikibase-listdatatypes-external-id-body": "Tekstinis duomenų laukas failo išoriniam identifikatoriui. Išorinis identifikatorius gali būti automatiškai susietas su autoritetingais resursais rodymui.",
 	"wikibase-concept-uri": "Sąvokos URI",
 	"wikibase-concept-uri-tooltip": "URI, kuris identifikuoja šio įrašo aprašytą sąvoką",
-	"wikibase-add-badges": "Pridėti ženkliukų",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase įrašas",
 	"content-model-wikibase-property": "Wikibase savybė",

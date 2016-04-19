@@ -305,7 +305,6 @@
 	"wikibase-listdatatypes-url-body": "Letterlijke gegevensveld voor een URL. URL's zijn beperkt tot de protocollen die ook beschikbaar zijn voor externe koppelingen in wikitekst.",
 	"wikibase-listdatatypes-external-id-head": "Externe identificatiecode",
 	"wikibase-concept-uri": "Concept-URI",
-	"wikibase-add-badges": "Badges toevoegen",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibaseitem",
 	"content-model-wikibase-property": "Wikibase-eigenschap",

@@ -305,7 +305,6 @@
 	"wikibase-listdatatypes-url-body": "Literaalandmete väli URL-i jaoks. Sobivad URL-id on piiratud protokollidega, mis on toetatud ka vikiteksti välislinkides.",
 	"wikibase-concept-uri": "Mõiste URI",
 	"wikibase-concept-uri-tooltip": "URI, mis identifitseerib mõiste, mida see üksus kirjeldab",
-	"wikibase-add-badges": "Lisa äramärkimised",
 	"content-model-wikibase-item": "Vikibaasi üksus",
 	"content-model-wikibase-property": "Vikibaasi omadus",
 	"content-model-wikibase-query": "Vikibaasi päring",

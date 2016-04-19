@@ -351,7 +351,6 @@
 	"wikibase-listdatatypes-external-id-body": "Champ de donnée littéral pour un identifiant externe. Les identifiants externes peuvent être liés automatiquement à une ressource autorisée pour l’affichage.",
 	"wikibase-concept-uri": "URI du concept",
 	"wikibase-concept-uri-tooltip": "URI qui identifie le concept décrit par cet élément",
-	"wikibase-add-badges": "Ajouter des badges",
 	"wikibase-pageimage-helptext": "Cette image est prise d’après les relevés de cet élément. Vous pouvez ajuster l’image en modifiant le relevé.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Élément Wikibase",

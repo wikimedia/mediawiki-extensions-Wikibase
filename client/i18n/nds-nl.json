@@ -30,7 +30,7 @@
 	"wikibase-linkitem-not-loggedin": "Je mutten an-emeld ween bie disse wiki en de [$1 sentrale gegevensdatabanke] um disse funksie te kunnen gebruken.",
 	"wikibase-linkitem-success-link": "De ziejen bin ekoppeld. t Onderwarp mit de koppelingen ku'j in de [$1 sentrale gegevensdatabanke] vienen.",
 	"wikibase-property-notfound": "Eigenschap $1 niet evunnen.",
-	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Verbarg",
 	"wikibase-rc-hide-wikidata-show": "Bekiek",
 	"wikibase-rc-show-wikidata-pref": "{{WBREPONAME}}-bewarkingen laoten zien in \"Leste wiezigingen\"",

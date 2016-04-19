@@ -324,7 +324,6 @@
 	"wikibase-listdatatypes-external-id-body": "Символьне поле даних для зовнішнього ідентифікатора. Зовнішні ідентифікатори можуть бути автоматично прив'язані до авторитетного ресурсу для відображення.",
 	"wikibase-concept-uri": "URI-концепції",
 	"wikibase-concept-uri-tooltip": "URI, який ідентифікує концепції, описані в цьому елементі",
-	"wikibase-add-badges": "Додати значки",
 	"wikibase-pageimage-helptext": "Зображення береться із тверджень у цьому елементі. Ви можете налаштувати зображення, змінивши твердження.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Елемент вікібази",

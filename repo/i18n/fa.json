@@ -330,7 +330,6 @@
 	"wikibase-listdatatypes-external-id-body": "فیلد داده‌های حروفی برای یک شناسه خارجی. شناسه های خارجی را می‌توان به صورت خودکار به منابع مستقل پیوند داد.",
 	"wikibase-concept-uri": "نشانی مفهوم",
 	"wikibase-concept-uri-tooltip": "نشانی شناسهٔ مفهوم توصیف‌شده توسط این آیتم است",
-	"wikibase-add-badges": "افزودن نشان‌ها",
 	"datatypes-type-url": "نشانی",
 	"content-model-wikibase-item": "آیتم ویکی‌بیس",
 	"content-model-wikibase-property": "خصوصیت ویکی‌بیس",

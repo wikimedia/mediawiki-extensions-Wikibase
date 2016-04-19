@@ -320,7 +320,6 @@
 	"wikibase-listdatatypes-external-id-head": "Identificador externo",
 	"wikibase-listdatatypes-external-id-body": "Literal de los datos de campo para un identificador externo. Externo identificadores de forma automática puede ser conectado a una fuente autorizada para la visualización.",
 	"wikibase-concept-uri-tooltip": "URI que identifica el concepto descrito por este artículo",
-	"wikibase-add-badges": "Añadir insignias",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Elemento de Wikibase",
 	"content-model-wikibase-property": "Propiedad de Wikibase",

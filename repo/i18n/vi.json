@@ -315,7 +315,6 @@
 	"wikibase-listdatatypes-external-id-body": "Trường dữ liệu thô dành cho một định danh bên ngoài. Các định danh bên ngoài có thể được tự động liên kết đến một tài nguyên đáng tin cậy để hiển thị.",
 	"wikibase-concept-uri": "URI khái niệm",
 	"wikibase-concept-uri-tooltip": "URI nhận dạng khái niệm được miêu tả trong khoản mục này",
-	"wikibase-add-badges": "Thêm phù hiệu",
 	"wikibase-pageimage-helptext": "Hình này được lấy từ các lời tuyên bố của mục này. Để chỉnh lại hình, hãy thay đổi lời tuyên bố.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "khoản mục Wikibase",

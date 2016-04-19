@@ -313,7 +313,6 @@
 	"wikibase-listdatatypes-url-body": "一個 URL 的文字字元。URL 被限制於外部連結的方式寫於維基文字中。",
 	"wikibase-concept-uri": "概念 URI",
 	"wikibase-concept-uri-tooltip": "URI 用來辦識此項目所描述的概念",
-	"wikibase-add-badges": "新增徽章",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase 項目",
 	"content-model-wikibase-property": "Wikibase 屬性",

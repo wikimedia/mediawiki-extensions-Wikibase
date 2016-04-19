@@ -321,7 +321,6 @@
 	"wikibase-listdatatypes-external-id-body": "Literálová datová položka pro externí identifikátor. Z externích identifikátorů mohou být pro zobrazení automaticky vytvořeny odkazy na autoritativní zdroj.",
 	"wikibase-concept-uri": "URI pojmu",
 	"wikibase-concept-uri-tooltip": "URI, které identifikuje pojem popisovaný touto položkou",
-	"wikibase-add-badges": "Přidat odznaky",
 	"wikibase-pageimage-helptext": "Tento obrázek se bere z tvrzení o této položce. Změnou daného tvrzení ho můžete změnit.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Položka Wikibase",

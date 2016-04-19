@@ -314,7 +314,6 @@
 	"wikibase-listdatatypes-external-id-head": "Extern identifikator",
 	"wikibase-concept-uri": "Koncept-URI",
 	"wikibase-concept-uri-tooltip": "URI som identifierar det koncept som beskrivs av detta objekt",
-	"wikibase-add-badges": "Lägg till märken",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Wikibase-objekt",
 	"content-model-wikibase-property": "Wikibase-egenskap",

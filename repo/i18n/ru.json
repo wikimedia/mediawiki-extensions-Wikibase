@@ -326,7 +326,6 @@
 	"wikibase-listdatatypes-external-id-head": "Внешний идентификатор",
 	"wikibase-concept-uri": "URI концепта",
 	"wikibase-concept-uri-tooltip": "URI, идентифицирующий концепт, описанных этим элементом",
-	"wikibase-add-badges": "Добавить значки",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Элемент репозитория Wikibase",
 	"content-model-wikibase-property": "Свойство элемента Wikibase",

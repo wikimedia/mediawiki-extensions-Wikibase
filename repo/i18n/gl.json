@@ -314,7 +314,6 @@
 	"wikibase-listdatatypes-external-id-body": "Campo de dato literal para un identificador externo. Os identificadores externos poden ser  vinculados automaticamente a un recurso autorizado para a súa visualización.",
 	"wikibase-concept-uri": "URI do concepto",
 	"wikibase-concept-uri-tooltip": "URI que identifica o concepto descrito por este artigo",
-	"wikibase-add-badges": "Engadir distintivos",
 	"wikibase-pageimage-helptext": "A imaxe xerouse coas declaracións deste elemento. Pode axustar a imaxe cambiando a declaración.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Elemento de Wikibase",

@@ -263,7 +263,6 @@
 	"wikibase-listdatatypes-string-body": "حقل بيانات حرفية لسطر محارف. مثال على الاستخدام النموذجي المعرِّفات التي لها أشكال مكتوبة لا تعتمد على لغة القارئ.\n* القيمة: قيمة صريحة لسطر المحارف النوعي لشكل اللغة (اللهجة)",
 	"wikibase-listdatatypes-time-head": "الوقت",
 	"wikibase-listdatatypes-url-head": "المسار",
-	"wikibase-add-badges": "اضافة وسام",
 	"datatypes-type-url": "المسار",
 	"content-model-wikibase-item": "عنصر Wikibase",
 	"content-model-wikibase-property": "خاصية Wikibase",

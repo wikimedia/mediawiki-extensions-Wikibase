@@ -310,7 +310,6 @@
 	"wikibase-listdatatypes-external-id-body": "Campu de datos lliteral pa un identificador esternu. Los identificadores esternos pueden enllazase automaticamente con un recursu autorizáu pa la so visualización.",
 	"wikibase-concept-uri": "URI del conceptu",
 	"wikibase-concept-uri-tooltip": "URI qu'identifica el conceptu describíu por esti elementu",
-	"wikibase-add-badges": "Amestar insinies",
 	"wikibase-pageimage-helptext": "La imaxe xeneróse dende les declaraciones d'esti elementu. Puedes axustar la imaxe cambiando la declaración.",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Elementu de Wikibase",

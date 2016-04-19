@@ -278,7 +278,6 @@
 	"wikibase-listdatatypes-url-body": "URL에 대한 리터럴 데이터 필드입니다. URL은 또한 위키텍스트의 바깥 링크에 대해 지원되는 프로토콜로 제한됩니다.",
 	"wikibase-listdatatypes-external-id-head": "외부 식별자",
 	"wikibase-concept-uri": "개념 URI",
-	"wikibase-add-badges": "배지 추가",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "위키베이스 항목",
 	"content-model-wikibase-property": "위키베이스 속성",

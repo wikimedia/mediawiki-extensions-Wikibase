@@ -334,7 +334,6 @@
 	"wikibase-listdatatypes-external-id-body": "用于外部标识符文字数据字段。外部标识符可能会自动链接至权威资源以便显示。",
 	"wikibase-concept-uri": "概念URI",
 	"wikibase-concept-uri-tooltip": "识别此项描述概念的URI",
-	"wikibase-add-badges": "添加徽章",
 	"wikibase-pageimage-helptext": "此图片来自该项的声明。您可以通过更改声明调整图片。",
 	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "维基数据库项",
