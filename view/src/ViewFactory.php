@@ -315,7 +315,6 @@ class ViewFactory {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$editSectionGenerator,
-			$this->languageNameLookup,
 			$this->textProvider
 		);
 	}

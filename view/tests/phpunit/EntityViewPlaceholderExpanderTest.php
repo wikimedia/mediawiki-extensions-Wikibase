@@ -16,7 +16,7 @@ use Wikibase\View\Template\TemplateFactory;
 /**
  * @covers Wikibase\View\EntityViewPlaceholderExpander
  *
- * @uses Wikibase\View\EntityTermsView
+ * @uses Wikibase\View\TermsListView
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
  * @uses Wikibase\View\Template\TemplateRegistry

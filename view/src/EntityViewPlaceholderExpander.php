@@ -166,14 +166,13 @@ class EntityViewPlaceholderExpander {
 	 */
 	public function renderTermBox() {
 
-		$entityTermsView = new EntityTermsView(
+		$termsListView = new TermsListView(
 			$this->templateFactory,
-			null,
 			$this->languageNameLookup,
 			$this->textProvider
 		);
 
-		$html = $entityTermsView->getEntityTermsForLanguageListView(
+		$html = $termsListView->getHtml(
 			$this->labelsProvider,
 			$this->descriptionsProvider,
 			$this->aliasesProvider,
