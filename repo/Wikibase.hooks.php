@@ -802,6 +802,12 @@ final class RepoHooks {
 			$out->setProperty( 'wikibase-view-chunks', $placeholders );
 		}
 
+		// Set in EntityParserOutputGenerator.
+		$termsListItems = $parserOutput->getExtensionData( 'wikibase-view-terms-list-items' );
+		if ( $termsListItems !== null ) {
+			$out->setProperty( 'wikibase-view-terms-list-items', $termsListItems );
+		}
+
 		// Used in ViewEntityAction and EditEntityAction to override the page HTML title
 		// with the label, if available, or else the id. Passed via parser output
 		// and output page to save overhead of fetching content and accessing an entity
