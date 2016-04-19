@@ -126,8 +126,14 @@ class OutputPageBeforeHTMLHookHandler {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
 
 		if ( !empty( $placeholders ) ) {
+			// All user languages that are valid term languages
+			$termsLanguages = array_intersect(
+				$this->userLanguageLookup->getAllUserLanguages( $out->getUser() ),
+				$this->termsLanguages->getLanguages()
+			);
+
 			$injector = new TextInjector( $placeholders );
-			$expander = $this->getEntityViewPlaceholderExpander( $out );
+			$expander = $this->getEntityViewPlaceholderExpander( $out, $termsLanguages );
 
 			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
 
@@ -146,10 +152,12 @@ class OutputPageBeforeHTMLHookHandler {
 
 	/**
 	 * @param OutputPage $out
+	 * @param string[] $termsLanguages
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function getEntityViewPlaceholderExpander( OutputPage $out ) {
+	private function getEntityViewPlaceholderExpander( OutputPage $out, array $termsLanguages ) {
+		$languageCode = $out->getLanguage()->getCode();
 
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		$revisionId = $out->getRevisionId();
@@ -161,12 +169,10 @@ class OutputPageBeforeHTMLHookHandler {
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
 			$out->getUser(),
-			$out->getLanguage(),
 			$labelsProvider,
 			$descriptionsProvider,
 			$aliasesProvider,
-			$this->userLanguageLookup,
-			$this->termsLanguages,
+			array_merge( [ $languageCode ], $termsLanguages ),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $out->getLanguage()->getCode() )
 		);
