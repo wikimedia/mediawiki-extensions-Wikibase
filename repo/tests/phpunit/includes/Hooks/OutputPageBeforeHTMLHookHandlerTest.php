@@ -9,6 +9,7 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\EntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
@@ -76,7 +77,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
 			$entityRevisionLookup,
 			$languageNameLookup,
-			$outputPageEntityIdReader
+			$outputPageEntityIdReader,
+			new EntityFactory( [] )
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
@@ -127,7 +129,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			new StaticContentLanguages( [] ),
 			$this->getMock( EntityRevisionLookup::class ),
 			$this->getMock( LanguageNameLookup::class ),
-			$outputPageEntityIdReader
+			$outputPageEntityIdReader,
+			new EntityFactory( [] )
 		);
 
 		$out = $this->newOutputPage();
