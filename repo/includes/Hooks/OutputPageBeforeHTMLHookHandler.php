@@ -9,6 +9,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityViewPlaceholderExpander;
@@ -56,12 +57,18 @@ class OutputPageBeforeHTMLHookHandler {
 	private $outputPageEntityIdReader;
 
 	/**
+	 * @var EntityContentFactory
+	 */
+	private $entityContentFactory;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param OutputPageEntityIdReader $outputPageEntityIdReader
+	 * @param EntityContentFactory $entityContentFactory
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -69,7 +76,8 @@ class OutputPageBeforeHTMLHookHandler {
 		ContentLanguages $termsLanguages,
 		EntityRevisionLookup $entityRevisionLookup,
 		LanguageNameLookup $languageNameLookup,
-		OutputPageEntityIdReader $outputPageEntityIdReader
+		OutputPageEntityIdReader $outputPageEntityIdReader,
+		EntityContentFactory $entityContentFactory
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -77,6 +85,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
+		$this->entityContentFactory = $entityContentFactory;
 	}
 
 	/**
@@ -87,6 +96,8 @@ class OutputPageBeforeHTMLHookHandler {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
+		$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
+
 		return new self(
 			TemplateFactory::getDefaultInstance(),
 			new BabelUserLanguageLookup,
@@ -94,9 +105,10 @@ class OutputPageBeforeHTMLHookHandler {
 			$wikibaseRepo->getEntityRevisionLookup(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
-				$wikibaseRepo->getEntityContentFactory(),
+				$entityContentFactory,
 				$wikibaseRepo->getEntityIdParser()
-			)
+			),
+			$entityContentFactory
 		);
 	}
 
@@ -160,11 +172,12 @@ class OutputPageBeforeHTMLHookHandler {
 		$languageCode = $out->getLanguage()->getCode();
 
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
-		$revisionId = $out->getRevisionId();
-		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
-		$labelsProvider = $entity;
-		$descriptionsProvider = $entity;
-		$aliasesProvider = $entity instanceof AliasesProvider ? $entity : null;
+		$emptyEntity = $this->entityContentFactory->getContentHandlerForType( $entityId->getEntityType() )->makeEmptyEntity();
+		$labelsProvider = $emptyEntity;
+		$descriptionsProvider = $emptyEntity;
+		$aliasesProvider = $emptyEntity instanceof AliasesProvider ? $emptyEntity : null;
+
+		$termsListItems = $out->getProperty( 'wikibase-view-terms-list-items' );
 
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
@@ -172,9 +185,10 @@ class OutputPageBeforeHTMLHookHandler {
 			$labelsProvider,
 			$descriptionsProvider,
 			$aliasesProvider,
-			array_merge( [ $languageCode ], $termsLanguages ),
+			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
 			$this->languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $out->getLanguage()->getCode() )
+			new MediaWikiLocalizedTextProvider( $out->getLanguage()->getCode() ),
+			$termsListItems
 		);
 	}
 
