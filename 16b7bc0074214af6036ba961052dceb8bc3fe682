@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee5cbf65_677dd1e4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-19T14:30:32Z",
+      "side": 0,
+      "message": "The last usage of languageCode was removed in I9644a31.\n\nemptyBadgeTitle was introduced in I51f2e22 but *never* used. o_O",
+      "revId": "16b7bc0074214af6036ba961052dceb8bc3fe682",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
