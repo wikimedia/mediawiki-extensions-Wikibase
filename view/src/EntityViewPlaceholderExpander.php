@@ -89,7 +89,8 @@ class EntityViewPlaceholderExpander {
 		AliasesProvider $aliasesProvider = null,
 		array $termsLanguages,
 		LanguageNameLookup $languageNameLookup,
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		array $termsListItems
 	) {
 		$this->user = $user;
 		$this->labelsProvider = $labelsProvider;
@@ -99,6 +100,7 @@ class EntityViewPlaceholderExpander {
 		$this->termsLanguages = $termsLanguages;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
+		$this->termsListItems = $termsListItems;
 	}
 
 	/**
@@ -172,14 +174,21 @@ class EntityViewPlaceholderExpander {
 			$this->textProvider
 		);
 
-		$html = $termsListView->getHtml(
-			$this->labelsProvider,
-			$this->descriptionsProvider,
-			$this->aliasesProvider,
-			$this->termsLanguages
-		);
+		$contentHtml = '';
+		foreach( $this->termsLanguages as $languageCode ) {
+			if ( isset( $this->termsListItems[ $languageCode ] ) ) {
+				$contentHtml .= $this->termsListItems[ $languageCode ];
+			} else {
+				$contentHtml .= $termsListView->getListItemHtml(
+					$this->labelsProvider,
+					$this->descriptionsProvider,
+					$this->aliasesProvider,
+					$languageCode
+				);
+			}
+		}
 
-		return $html;
+		return $termsListView->getListViewHtml( $contentHtml );
 	}
 
 }
