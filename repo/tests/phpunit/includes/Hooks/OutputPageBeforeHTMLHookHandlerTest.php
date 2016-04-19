@@ -9,13 +9,13 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityRevision;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -57,9 +57,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $itemId ) );
 
 		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
-		$entityRevisionLookup->expects( $this->once() )
-			->method( 'getEntityRevision' )
-			->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
+		$entityRevisionLookup->expects( $this->never() )
+			->method( 'getEntityRevision' );
 
 		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
@@ -67,7 +66,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
 			$entityRevisionLookup,
 			$languageNameLookup,
-			$outputPageEntityIdReader
+			$outputPageEntityIdReader,
+			WikibaseRepo::getDefaultInstance()->getEntityContentFactory()
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
