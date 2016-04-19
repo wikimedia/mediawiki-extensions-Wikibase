@@ -19,10 +19,7 @@ use Wikibase\EntityFactory;
 class EntityFactoryTest extends \MediaWikiTestCase {
 
 	private function getEntityFactory() {
-		return new EntityFactory( array(
-			'item' => Item::class,
-			'property' => Property::class,
-		) );
+		return new EntityFactory();
 	}
 
 	public function provideNewEmpty() {

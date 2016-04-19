@@ -4,6 +4,8 @@ namespace Wikibase;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 
 /**
  * @deprecated
@@ -19,20 +21,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 class EntityFactory {
 
 	/**
-	 * @var string[] Maps entity types to classes implementing the respective entity.
-	 */
-	private $typeMap;
-
-	/**
-	 * @since 0.5
-	 *
-	 * @param string[] $typeToClass Maps entity types to classes implementing the respective entity.
-	 */
-	public function __construct( array $typeToClass ) {
-		$this->typeMap = $typeToClass;
-	}
-
-	/**
 	 * @since 0.3
 	 *
 	 * @param string $entityType
@@ -41,17 +29,14 @@ class EntityFactory {
 	 * @return EntityDocument
 	 */
 	public function newEmpty( $entityType ) {
-		if ( !isset( $this->typeMap[$entityType] ) ) {
-			throw new OutOfBoundsException( 'Unknown entity type ' . $entityType );
+		switch ( $entityType ) {
+			case 'item':
+				return new Item();
+			case 'property':
+				return Property::newFromType( '' );
+			default:
+				throw new OutOfBoundsException( 'Unknown entity type ' . $entityType );
 		}
-
-		$class = $this->typeMap[$entityType];
-
-		if ( method_exists( $class, 'newFromType' ) ) {
-			return $class::newFromType( '' );
-		}
-
-		return new $class();
 	}
 
 }
