@@ -132,7 +132,7 @@ HTML;
 
 	$templates['wikibase-labelview'] =
 <<<HTML
-<div class="wikibase-labelview $1" dir="auto">
+<div class="wikibase-labelview $1" dir="$4" lang="$5">
 	<div class="wikibase-labelview-container">
 		<span class="wikibase-labelview-text">$2</span>
 		<!-- wikibase-toolbar -->$3
@@ -142,7 +142,7 @@ HTML;
 
 	$templates['wikibase-descriptionview'] =
 <<<HTML
-<div class="wikibase-descriptionview $1" dir="auto">
+<div class="wikibase-descriptionview $1" dir="$4" lang="$5">
 	<div class="wikibase-descriptionview-container">
 		<span class="wikibase-descriptionview-text">$2</span>
 		<!-- wikibase-toolbar -->$3
@@ -153,7 +153,7 @@ HTML;
 	$templates['wikibase-aliasesview'] =
 <<<HTML
 <div class="wikibase-aliasesview $1">
-	<ul class="wikibase-aliasesview-list" dir="auto"><!-- [0,*] wikibase-aliasesview-list-item -->$2</ul>
+	<ul class="wikibase-aliasesview-list" dir="$4" lang="$5"><!-- [0,*] wikibase-aliasesview-list-item -->$2</ul>
 	<!-- wikibase-toolbar -->$3
 </div>
 HTML;
