@@ -40,7 +40,6 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
@@ -1181,14 +1180,8 @@ class WikibaseRepo {
 	 * @return EntityFactory
 	 */
 	public function getEntityFactory() {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => Item::class,
-			Property::ENTITY_TYPE => Property::class,
-		);
-
 		//TODO: provide a hook or registry for adding more.
-
-		return new EntityFactory( $entityClasses );
+		return new EntityFactory();
 	}
 
 	/**
