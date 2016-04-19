@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "ee5cbf65_67dcb04c",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-19T15:44:07Z",
+      "side": 1,
+      "message": "This is the most simple way of implementing this, but it\u0027s dangerous because it can very easily get out of sync with the other methods in this class. Please add at least a comment stating this fact.",
+      "revId": "ab0289c75079da28b797522c4740d3d3547689e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee5cbf65_27f2b8cd",
+        "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-19T15:44:07Z",
+      "side": 1,
+      "message": "The code below assumes this is an array of arrays. The documentation should make this clear.",
+      "revId": "ab0289c75079da28b797522c4740d3d3547689e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee33df1d_afe338d3",
         "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
         "patchSetId": 8
@@ -13,6 +47,23 @@
       "writtenOn": "2016-03-14T13:56:28Z",
       "side": 1,
       "message": "see my comment on PS5",
+      "revId": "ab0289c75079da28b797522c4740d3d3547689e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee5cbf65_c7b81ce5",
+        "filename": "repo/includes/LinkedData/EntityDataUriManager.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-19T15:44:07Z",
+      "side": 1,
+      "message": "Q. n. v.? At this point I lost track of what this code actually does. Please avoid abbreviations and non-informational words like \"new\".",
       "revId": "ab0289c75079da28b797522c4740d3d3547689e5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
