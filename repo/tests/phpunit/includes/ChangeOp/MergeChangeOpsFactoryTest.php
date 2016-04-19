@@ -10,6 +10,7 @@ use Wikibase\ChangeOp\ChangeOpsMerge;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**

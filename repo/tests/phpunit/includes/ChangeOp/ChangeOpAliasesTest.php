@@ -8,6 +8,7 @@ use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpAliases

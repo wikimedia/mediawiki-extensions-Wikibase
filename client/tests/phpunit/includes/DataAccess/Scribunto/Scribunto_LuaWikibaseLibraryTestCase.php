@@ -10,7 +10,7 @@ use Title;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Test\MockClientStore;
+use Wikibase\Client\Tests\MockClientStore;
 
 if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 	abstract class Scribunto_LuaWikibaseLibraryTestCase extends PHPUnit_Framework_TestCase {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests\Store;
 
 use Exception;
 use InvalidArgumentException;

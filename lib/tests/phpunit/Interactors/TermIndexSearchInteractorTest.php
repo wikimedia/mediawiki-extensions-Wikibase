@@ -14,7 +14,7 @@ use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Store\BufferingTermLookup;
 use Wikibase\TermIndexEntry;
-use Wikibase\Test\MockTermIndex;
+use Wikibase\Lib\Tests\Store\MockTermIndex;
 
 /**
  * @covers Wikibase\Lib\Interactors\TermIndexSearchInteractor

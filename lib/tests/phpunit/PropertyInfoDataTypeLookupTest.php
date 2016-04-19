@@ -9,8 +9,8 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\PropertyInfoStore;
-use Wikibase\Test\MockPropertyInfoStore;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Lib\PropertyInfoDataTypeLookup

@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\FingerprintValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 

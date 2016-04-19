@@ -22,6 +22,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
+use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

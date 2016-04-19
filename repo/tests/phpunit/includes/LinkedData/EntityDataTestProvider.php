@@ -1,11 +1,12 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\LinkedData;
 
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * Provider class for EntityData tests.

@@ -10,7 +10,7 @@ use Wikibase\Lib\FieldPropertyInfoProvider;
 use Wikibase\Lib\PropertyInfoProvider;
 use Wikibase\Lib\PropertyInfoSnakUrlExpander;
 use Wikibase\PropertyInfoStore;
-use Wikibase\Test\MockPropertyInfoStore;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
 use Wikimedia\Assert\ParameterTypeException;
 
 /**

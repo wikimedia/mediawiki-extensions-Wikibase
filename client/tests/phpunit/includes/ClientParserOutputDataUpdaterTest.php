@@ -13,7 +13,7 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater

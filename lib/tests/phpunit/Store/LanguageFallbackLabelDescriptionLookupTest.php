@@ -8,6 +8,7 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Tests\Store\MockTermIndex;
 use Wikibase\TermIndexEntry;
 
 /**

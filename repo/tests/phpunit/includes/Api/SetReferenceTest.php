@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test\Repo\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;

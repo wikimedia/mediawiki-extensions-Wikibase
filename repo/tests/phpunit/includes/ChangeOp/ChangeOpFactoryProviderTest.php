@@ -10,6 +10,7 @@ use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 
 /**

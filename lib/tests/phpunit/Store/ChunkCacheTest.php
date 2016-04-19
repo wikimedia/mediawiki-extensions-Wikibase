@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\ChunkCache;
+use Wikibase\Lib\Tests\Store\MockChunkAccess;
 
 /**
  * @covers Wikibase\ChunkCache

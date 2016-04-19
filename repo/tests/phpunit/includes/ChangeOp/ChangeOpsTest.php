@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 
 /**

@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\ChangeOp\StatementChangeOpFactory

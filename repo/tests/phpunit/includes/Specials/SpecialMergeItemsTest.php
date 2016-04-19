@@ -27,7 +27,7 @@ use Wikibase\Repo\Specials\SpecialMergeItems;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Test\EntityModificationTestHelper;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialMergeItems

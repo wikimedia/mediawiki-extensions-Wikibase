@@ -53,17 +53,17 @@
 		"classmap": [
 			"client/includes/",
 			"client/WikibaseClient.hooks.php",
-			"client/tests/phpunit/",
 			"lib/includes/",
 			"lib/WikibaseLib.hooks.php",
 			"lib/maintenance/",
-			"lib/tests/phpunit/",
 			"repo/includes/",
 			"repo/maintenance/",
-			"repo/tests/phpunit/",
 			"repo/Wikibase.hooks.php"
 		],
 		"psr-4": {
+			"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes",
+			"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit",
+			"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes",
 			"Wikibase\\View\\": "view/src",
 			"Wikibase\\View\\Tests\\": "view/tests/phpunit",
 			"Wikimedia\\Purtle\\": "purtle/src",

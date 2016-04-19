@@ -15,7 +15,7 @@ use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoStore;
-use Wikibase\Test\MockPropertyInfoStore;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
 
 /**
  * @covers Wikibase\Lib\WikibaseSnakFormatterBuilders

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Tests\Store\TermIndexTest;
 use Wikibase\StringNormalizer;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermSqlIndex;

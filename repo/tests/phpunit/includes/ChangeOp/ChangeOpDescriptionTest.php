@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Summary;
 
 /**

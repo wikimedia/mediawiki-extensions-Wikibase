@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Lib\Tests\Store\MockTermIndex;
 use Wikibase\TermIndexEntry;
 use Wikibase\TermPropertyLabelResolver;
 

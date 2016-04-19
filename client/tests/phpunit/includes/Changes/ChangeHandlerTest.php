@@ -20,8 +20,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Test\MockRepository;
-use Wikibase\Test\TestChanges;
+use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
  * @covers Wikibase\Client\Changes\ChangeHandler

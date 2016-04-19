@@ -15,7 +15,7 @@ use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Store\BufferingTermLookup;
-use Wikibase\Test\MockPropertyInfoStore;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
 
 /**
  * @covers Wikibase\Repo\Specials\SpecialListProperties

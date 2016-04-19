@@ -25,6 +25,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpStatement

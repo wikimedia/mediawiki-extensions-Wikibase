@@ -13,8 +13,8 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Test\MockRepository;
-use Wikibase\Test\TestChanges;
+use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
  * @covers Wikibase\Client\Changes\ChangeRunCoalescer

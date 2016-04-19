@@ -18,6 +18,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpMainSnak

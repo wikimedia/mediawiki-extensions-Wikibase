@@ -9,7 +9,7 @@ use ParserOptions;
 use Title;
 use User;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Test\MockClientStore;
+use Wikibase\Client\Tests\MockClientStore;
 
 /**
  * @covers Wikibase\Client\Hooks\ParserClearStateHookHandler

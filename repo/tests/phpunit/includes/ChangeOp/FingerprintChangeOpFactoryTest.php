@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
  * @covers Wikibase\ChangeOp\FingerprintChangeOpFactory

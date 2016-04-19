@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Client\Tests;
 
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\UsageUpdater;
@@ -9,6 +9,8 @@ use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Lib\Tests\Store\MockTermIndex;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndex;

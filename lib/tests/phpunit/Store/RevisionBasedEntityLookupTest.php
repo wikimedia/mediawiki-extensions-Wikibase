@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Lib\Store\RevisionBasedEntityLookup
