@@ -394,7 +394,6 @@
 	"wikibase-listdatatypes-external-id-body": "{{Wikibase-datatype-body|External identifier}}",
 	"wikibase-concept-uri": "Label for a link in the toolbox on entity pages. Target of the link is the one and specific URI for the entity's concept (\"canonical concept link\").",
 	"wikibase-concept-uri-tooltip": "Text for the canonical concept link in toolbox on entity pages.",
-	"wikibase-add-badges": "Title for an empty (dummy) badge sign that asks the user to add badges to a sitelink.",
 	"wikibase-pageimage-helptext": "Help message giving information about where data for page image has been retrieved from",
 	"datatypes-type-url": "Unused at this time.\n{{Identical|URL}}",
 	"content-model-wikibase-item": "The name for Wikibase item content model, used when describing what type of content a page contains.",
