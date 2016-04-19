@@ -86,7 +86,7 @@ class TermsListView {
 	 *
 	 * @return string HTML
 	 */
-	private function getListViewHtml( $contentHtml ) {
+	public function getListViewHtml( $contentHtml ) {
 		return $this->templateFactory->render( 'wikibase-entitytermsforlanguagelistview',
 			htmlspecialchars( $this->textProvider->get( 'wikibase-entitytermsforlanguagelistview-language' ) ),
 			htmlspecialchars( $this->textProvider->get( 'wikibase-entitytermsforlanguagelistview-label' ) ),
@@ -105,7 +105,7 @@ class TermsListView {
 	 *
 	 * @return string HTML
 	 */
-	private function getListItemHtml(
+	public function getListItemHtml(
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
 		AliasesProvider $aliasesProvider = null,

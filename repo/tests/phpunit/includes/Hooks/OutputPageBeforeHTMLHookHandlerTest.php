@@ -16,6 +16,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -76,7 +77,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
 			$entityRevisionLookup,
 			$languageNameLookup,
-			$outputPageEntityIdReader
+			$outputPageEntityIdReader,
+			WikibaseRepo::getDefaultInstance()->getEntityContentFactory()
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
