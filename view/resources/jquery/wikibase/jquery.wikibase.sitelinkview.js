@@ -140,8 +140,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			value: this.options.value ? this.options.value.getBadges() : [],
 			badges: badges,
 			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-			languageCode: mw.config.get( 'wgUserLanguage' ),
-			emptyBadgeTitle: mw.msg( 'wikibase-add-badges' ),
 			isRtl: $( 'body' ).hasClass( 'rtl' ),
 			messages: {
 				'badge-placeholder-title': mw.msg(

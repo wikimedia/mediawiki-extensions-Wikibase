@@ -29,9 +29,7 @@ var $menu = null;
  *
  * @option {wikibase.entityIdFormatter.entityIdPlainFormatter} entityIdPlainFormatter
  *
- * @option {string} languageCode
- *
- * @option {boolean} [isRTL]
+ * @option {boolean} [isRtl]
  *         Whether the widget is displayed in right-to-left context.
  *         Default: false
  *
@@ -62,7 +60,6 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		value: [],
 		badges: {},
 		entityIdPlainFormatter: null,
-		languageCode: null,
 		isRtl: false,
 		messages: {
 			'badge-placeholder-title': 'Click to assign a badge.'
@@ -73,7 +70,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 	 * @see jQuery.Widget._create
 	 */
 	_create: function() {
-		if ( !this.options.entityIdPlainFormatter || !this.options.languageCode ) {
+		if ( !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
