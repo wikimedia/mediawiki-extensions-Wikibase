@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "ae564743_acc4f795",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T10:41:09Z",
+      "side": 0,
+      "message": "Wouldn\u0027t it be easier to change typeMap to instantiators, which contains callbacks instead of class names? Removing it and then re-adding something very similar seems pointless.",
+      "revId": "6e2ee92f941d82e156dfdc444bd21b53d92d8668",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_91530c1a",
         "filename": "lib/includes/EntityFactory.php",
         "patchSetId": 1
