@@ -5,6 +5,7 @@ namespace Wikibase\View\Tests;
 use PHPUnit_Framework_TestCase;
 use Site;
 use SiteList;
+use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
@@ -148,6 +149,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			$this->getMock( EditSectionGenerator::class ),
 			$this->newEntityIdFormatter(),
 			$languageNameLookup,
+			$this->newNumberLocalizer(),
 			array(
 				'Q42' => 'wb-badge-featuredarticle',
 				'Q12' => 'wb-badge-goodarticle'
@@ -155,6 +157,14 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			array( 'special group' ),
 			new DummyLocalizedTextProvider( 'lkt' )
 		);
+	}
+
+	private function newNumberLocalizer() {
+		$numberLocalizer = $this->getMock( NumberLocalizer::class );
+		$numberLocalizer->expects( $this->any() )
+			->method( 'localizeNumber' )
+			->will( $this->returnCallback( 'strval' ) );
+		return $numberLocalizer;
 	}
 
 	/**
