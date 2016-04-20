@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_ecd38f03",
+        "filename": "repo/includes/CachingSiteLinkTargetProvider.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-20T11:48:39Z",
+      "side": 1,
+      "message": "Meh. How about an Interface with two implementations?\n\n* SiteLinkTargetProvider\n* SiteStoreSiteLinkTargetProvider( SiteStore, string[] )\n* CachingSiteLinkTargetProvider( BagOStuff, SiteLinkTargetProvider )",
+      "revId": "e005551fb192e8c3b162f8d62556fe01cd7280a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
