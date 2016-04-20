@@ -62,6 +62,11 @@ class EntityViewPlaceholderExpander {
 	private $termsLanguages;
 
 	/**
+	 * @var LanguageDirectionalityLookup
+	 */
+	private $languageDirectionalityLookup;
+
+	/**
 	 * @var LanguageNameLookup
 	 */
 	private $languageNameLookup;
@@ -78,6 +83,7 @@ class EntityViewPlaceholderExpander {
 	 * @param DescriptionsProvider $descriptionsProvider
 	 * @param AliasesProvider|null $aliasesProvider
 	 * @param string[] $termsLanguages
+	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
 	 */
@@ -88,6 +94,7 @@ class EntityViewPlaceholderExpander {
 		DescriptionsProvider $descriptionsProvider,
 		AliasesProvider $aliasesProvider = null,
 		array $termsLanguages,
+		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageNameLookup $languageNameLookup,
 		LocalizedTextProvider $textProvider,
 		array $termsListItems
@@ -98,6 +105,7 @@ class EntityViewPlaceholderExpander {
 		$this->aliasesProvider = $aliasesProvider;
 		$this->templateFactory = $templateFactory;
 		$this->termsLanguages = $termsLanguages;
+		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
 		$this->termsListItems = $termsListItems;
@@ -171,7 +179,8 @@ class EntityViewPlaceholderExpander {
 		$termsListView = new TermsListView(
 			$this->templateFactory,
 			$this->languageNameLookup,
-			$this->textProvider
+			$this->textProvider,
+			$this->languageDirectionalityLookup
 		);
 
 		$contentHtml = '';
