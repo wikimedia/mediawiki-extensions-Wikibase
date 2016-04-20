@@ -4,14 +4,10 @@ namespace Wikibase;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikimedia\Assert\Assert;
 
 /**
- * @deprecated
- * This class makes many assumptions that do not hold, including
- * - all entities can be constructed empty
- * - only Items and Properties exist
- * - all entities can construct themselves from their serialization
- * Not a single method is non-problematic, so you should not use this class at all.
+ * Factory for Entity objects.
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -19,39 +15,56 @@ use Wikibase\DataModel\Entity\EntityDocument;
 class EntityFactory {
 
 	/**
-	 * @var string[] Maps entity types to classes implementing the respective entity.
+	 * @var callable[] Maps entity types to instantiator callbacks.
 	 */
-	private $typeMap;
+	private $instantiators;
 
 	/**
 	 * @since 0.5
 	 *
-	 * @param string[] $typeToClass Maps entity types to classes implementing the respective entity.
+	 * @param callable[] $instantiators Maps entity types to instantiator callbacks.
 	 */
-	public function __construct( array $typeToClass ) {
-		$this->typeMap = $typeToClass;
+	public function __construct( array $instantiators ) {
+		Assert::parameterElementType( 'callable', $instantiators, '$instantiators' );
+
+		$this->instantiators = $instantiators;
+	}
+
+	/**
+	 * Returns the instantiator for the given entity type.
+	 *
+	 * @param string $type
+	 *
+	 * @throws OutOfBoundsException
+	 * @return string callable
+	 */
+	private function getEntityInstantiator( $type ) {
+		if ( !isset( $this->instantiators[$type] ) ) {
+			throw new OutOfBoundsException( 'Unknown entity type ' . $type );
+		}
+
+		return $this->instantiators[$type];
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param string $entityType
+	 * @param string $entityType The type of the desired new entity.
 	 *
 	 * @throws OutOfBoundsException
 	 * @return EntityDocument
 	 */
 	public function newEmpty( $entityType ) {
-		if ( !isset( $this->typeMap[$entityType] ) ) {
-			throw new OutOfBoundsException( 'Unknown entity type ' . $entityType );
-		}
+		$instantiator = $this->getEntityInstantiator( $entityType );
 
-		$class = $this->typeMap[$entityType];
+		$entity = call_user_func( $instantiator );
 
-		if ( method_exists( $class, 'newFromType' ) ) {
-			return $class::newFromType( '' );
-		}
+		Assert::postcondition(
+			$entity instanceof EntityDocument,
+			'Instantiator callback for ' . $entityType . ' did not return an Entity.'
+		);
 
-		return new $class();
+		return $entity;
 	}
 
 }

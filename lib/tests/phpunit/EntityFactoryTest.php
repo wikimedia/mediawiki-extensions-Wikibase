@@ -19,10 +19,16 @@ use Wikibase\EntityFactory;
 class EntityFactoryTest extends \MediaWikiTestCase {
 
 	private function getEntityFactory() {
-		return new EntityFactory( array(
-			'item' => Item::class,
-			'property' => Property::class,
-		) );
+		$instantiators = array(
+			Item::ENTITY_TYPE => function() {
+				return new Item();
+			},
+			Property::ENTITY_TYPE => function() {
+				return Property::newFromType( '' );
+			},
+		);
+
+		return new EntityFactory( $instantiators );
 	}
 
 	public function provideNewEmpty() {
