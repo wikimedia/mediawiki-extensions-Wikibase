@@ -2,7 +2,7 @@
   "name": "Wikibase",
   "version": "0.0.0",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test --color=true"
   },
   "repository": {
     "type": "git",
