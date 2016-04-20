@@ -1181,14 +1181,19 @@ class WikibaseRepo {
 	 * @return EntityFactory
 	 */
 	public function getEntityFactory() {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => Item::class,
-			Property::ENTITY_TYPE => Property::class,
+
+		//TODO: get this from EntityTypeDefinitions
+
+		$instantiators = array(
+			Item::ENTITY_TYPE => function() {
+				return new Item();
+			},
+			Property::ENTITY_TYPE => function() {
+				return Property::newFromType( '' );
+			},
 		);
 
-		//TODO: provide a hook or registry for adding more.
-
-		return new EntityFactory( $entityClasses );
+		return new EntityFactory( $instantiators );
 	}
 
 	/**
