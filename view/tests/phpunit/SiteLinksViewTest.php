@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\SiteLinksView;
@@ -142,9 +143,39 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 			->method( 'getName' )
 			->will( $this->returnValue( '<LANG>' ) );
 
+		$siteLinkTargetProvider = $this->getMockBuilder( SiteLinkTargetProvider::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$siteLinkTargetProvider->expects( $this->any() )
+			->method( 'getSiteList' )
+			->will( $this->returnCallback( function( $groups ) {
+				$enWiki = new Site();
+				$enWiki->setGlobalId( 'enwiki' );
+				$enWiki->setLinkPath( '#enwiki' );
+				$enWiki->setLanguageCode( 'en' );
+				$enWiki->setGroup( 'wikipedia' );
+
+				$specialWiki = new Site();
+				$specialWiki->setGlobalId( 'specialwiki' );
+				$specialWiki->setLinkPath( '#specialwiki' );
+				$specialWiki->setLanguageCode( 'en' );
+				$specialWiki->setGroup( 'special group' );
+
+				$deWiki = new Site();
+				$deWiki->setGlobalId( 'dewiki' );
+				$deWiki->setLinkPath( '#dewiki' );
+				$deWiki->setLanguageCode( 'de' );
+				$deWiki->setGroup( 'wikipedia' );
+				if ( $groups[0] === 'special' ) { $groups[0] = 'special group'; }
+				return new SiteList( [
+					'wikipedia' => [ $enWiki, $deWiki ],
+					'special group' => [ $specialWiki ]
+				][ $groups[0] ] );
+			} ) );
+
 		return new SiteLinksView(
 			$templateFactory,
-			$this->newSiteList(),
 			$this->getMock( EditSectionGenerator::class ),
 			$this->newEntityIdFormatter(),
 			$languageNameLookup,
@@ -152,34 +183,9 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 				'Q42' => 'wb-badge-featuredarticle',
 				'Q12' => 'wb-badge-goodarticle'
 			),
-			array( 'special group' ),
-			new DummyLocalizedTextProvider( 'lkt' )
+			new DummyLocalizedTextProvider( 'lkt' ),
+			$siteLinkTargetProvider
 		);
-	}
-
-	/**
-	 * @return SiteList
-	 */
-	private function newSiteList() {
-		$enWiki = new Site();
-		$enWiki->setGlobalId( 'enwiki' );
-		$enWiki->setLinkPath( '#enwiki' );
-		$enWiki->setLanguageCode( 'en' );
-		$enWiki->setGroup( 'wikipedia' );
-
-		$specialWiki = new Site();
-		$specialWiki->setGlobalId( 'specialwiki' );
-		$specialWiki->setLinkPath( '#specialwiki' );
-		$specialWiki->setLanguageCode( 'en' );
-		$specialWiki->setGroup( 'special group' );
-
-		$deWiki = new Site();
-		$deWiki->setGlobalId( 'dewiki' );
-		$deWiki->setLinkPath( '#dewiki' );
-		$deWiki->setLanguageCode( 'de' );
-		$deWiki->setGroup( 'wikipedia' );
-
-		return new SiteList( array( $enWiki, $specialWiki, $deWiki ) );
 	}
 
 	/**
