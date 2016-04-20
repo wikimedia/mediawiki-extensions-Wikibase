@@ -29,6 +29,11 @@ class TermsListView {
 	private $templateFactory;
 
 	/**
+	 * @var LanguageDirectionalityLookup
+	 */
+	private $languageDirectionalityLookup;
+
+	/**
 	 * @var LanguageNameLookup
 	 */
 	private $languageNameLookup;
@@ -42,15 +47,18 @@ class TermsListView {
 	 * @param TemplateFactory $templateFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
+	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		LanguageNameLookup $languageNameLookup,
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		LanguageDirectionalityLookup $languageDirectionalityLookup
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
+		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 	}
 
 	/**
@@ -142,6 +150,7 @@ class TermsListView {
 
 	private function getTermView( TermList $termList, $templateName, $emptyTextKey, $languageCode ) {
 		$hasTerm = $termList->hasTermForLanguage( $languageCode );
+		$effectiveLanguage = $hasTerm ? $languageCode : $this->textProvider->getLanguageOf( $emptyTextKey );
 		return $this->templateFactory->render( $templateName,
 			$hasTerm ? '' : 'wb-empty',
 			htmlspecialchars( $hasTerm
@@ -149,8 +158,8 @@ class TermsListView {
 				: $this->textProvider->get( $emptyTextKey )
 			),
 			'',
-			'auto', // FIXME DirLookup
-			$hasTerm ? $languageCode : $this->textProvider->getLanguageOf( $emptyTextKey )
+			$this->languageDirectionalityLookup->getDirectionality( $effectiveLanguage ) ?: 'auto',
+			$effectiveLanguage
 		);
 	}
 
@@ -166,7 +175,7 @@ class TermsListView {
 				'wb-empty',
 				'',
 				'',
-				'auto', // FIXME DirLookup
+				'', // No text, no language
 				''
 			);
 		} else {
@@ -183,7 +192,7 @@ class TermsListView {
 				'',
 				$aliasesHtml,
 				'',
-				'auto', // FIXME DirLookup
+				$this->languageDirectionalityLookup->getDirectionality( $languageCode ) ?: 'auto',
 				$languageCode
 			);
 		}

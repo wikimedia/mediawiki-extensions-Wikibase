@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\TermsListView;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\LocalizedTextProvider;
@@ -46,7 +47,8 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 		return new TermsListView(
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
-			$textProvider
+			$textProvider,
+			$this->getMock( LanguageDirectionalityLookup::class )
 		);
 	}
 
