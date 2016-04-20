@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\DummyLocalizedTextProvider;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -50,6 +51,7 @@ class EntityViewPlaceholderExpanderTest extends PHPUnit_Framework_TestCase {
 			$item,
 			$aliasesProvider,
 			$termsLanguages,
+			$this->getMock( LanguageDirectionalityLookup::class ),
 			$languageNameLookup,
 			new DummyLocalizedTextProvider( 'lkt' ),
 			[]
