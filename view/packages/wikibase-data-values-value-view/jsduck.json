@@ -1,0 +1,12 @@
+{
+  "--title": "Wikibase ValueView - Documentation",
+  "--output": "docs",
+  "--processes": "0",
+  "--warnings-exit-nonzero": true,
+  "--builtin-classes": true,
+  "--external": "HTMLDocument,Window,MouseEvent,KeyboardEvent,File,jQuery,jQuery.Promise,jQuery.Event",
+  "--warnings": ["-nodoc(class,public)", "-tag(license)"],
+  "--": [
+    "src/"
+  ]
+}
