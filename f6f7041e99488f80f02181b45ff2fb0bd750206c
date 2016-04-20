@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_11309ce4",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T07:37:08Z",
+      "side": 1,
+      "message": "I\u0027d suggest to base this in callbacks defined in EntityTypeDefinitions - either in this patch, or in an immediate follow-up.",
+      "revId": "f6f7041e99488f80f02181b45ff2fb0bd750206c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_068504a0",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 1
@@ -31,6 +48,24 @@
       "side": 1,
       "message": "No. Left on purpose because that\u0027s exactly what we still need to do, and most probably in exactly this method.",
       "parentUuid": "ae564743_068504a0",
+      "revId": "f6f7041e99488f80f02181b45ff2fb0bd750206c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_7121189a",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T07:37:08Z",
+      "side": 1,
+      "message": "I suppose we\u0027d want to use instantiator calbacks from EntityTypeDefinitions.",
+      "parentUuid": "ae564743_e6061023",
       "revId": "f6f7041e99488f80f02181b45ff2fb0bd750206c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

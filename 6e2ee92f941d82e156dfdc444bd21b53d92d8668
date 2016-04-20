@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_b13290ed",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T07:37:08Z",
+      "side": 0,
+      "message": "Huh, we really don\u0027t need this in the client at all?",
+      "revId": "6e2ee92f941d82e156dfdc444bd21b53d92d8668",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_91530c1a",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T07:37:08Z",
+      "side": 0,
+      "message": "We need a way to enumerate entity types somewhere. Ihis seems a good place. Do we have another? If this method isn\u0027t used right now, it can only be because the list of available types is hardcoded somewhere else...",
+      "revId": "6e2ee92f941d82e156dfdc444bd21b53d92d8668",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
