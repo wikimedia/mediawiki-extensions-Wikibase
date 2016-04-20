@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_c0776fce",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T16:26:34Z",
+      "side": 1,
+      "message": "Would be nice to also support an ID range, instead of a data range.\nAlso, since the values go through wfTimestamp, they actually support a variety of formats.",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e0b27347",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T16:26:34Z",
+      "side": 1,
+      "message": "why is this required?",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_604e639d",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T16:26:34Z",
+      "side": 1,
+      "message": "TS_UNIX is a bad choice for a log message...",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_00820797",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T16:26:34Z",
+      "side": 1,
+      "message": "The change_time doesn\u0027t use TS_UNIX, it uses TS_MW. $dbr-\u003etimestamp() fixes that, but why require TS_UNIX here?",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_40535f43",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T16:26:34Z",
+      "side": 1,
+      "message": "Could just be a pair, instead of a list. The range can be *huge*...",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c05e4f48",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T16:26:34Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e061d302",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T16:26:34Z",
+      "side": 1,
+      "message": "This is never set.",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_205c6b4e",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T16:26:34Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
