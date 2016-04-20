@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_711bd882",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-20T09:13:57Z",
+      "side": 1,
+      "message": "I don\u0027t like this part at all, but if we decide to go with this approach, we at least need to check the entity for the Provider interfaces.",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b10c5047",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-20T09:13:57Z",
+      "side": 1,
+      "message": "Whole blob needs to get it\u0027s own method.",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
