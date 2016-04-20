@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_d10f443a",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T10:44:42Z",
+      "side": 1,
+      "message": "To avoid the need for purging all pages when deploying this, implement lazy initialization here: If \u0027wikibase-view-terms-list-items\u0027 isn\u0027t set, generate it here and now. That\u0027s sucky, but no worse than what we did before. And it will stop happening eventually.",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_711bd882",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 5
@@ -19,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "ae564743_2c00e703",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T10:44:42Z",
+      "side": 1,
+      "message": "This is not needed, array_map preserves the keys (unless you are mapping multiple arrays at once)",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_b10c5047",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 5
@@ -30,6 +64,57 @@
       "writtenOn": "2016-04-20T09:13:57Z",
       "side": 1,
       "message": "Whole blob needs to get it\u0027s own method.",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4c339bc0",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T10:44:42Z",
+      "side": 1,
+      "message": "The new block should be in a separate private function.",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2c38e79a",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T10:44:42Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_cc468b26",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-20T10:44:42Z",
+      "side": 1,
+      "message": "This branch would not be needed here if we generated the html snippets on demand in EntityParserOutputGenerator.",
       "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
