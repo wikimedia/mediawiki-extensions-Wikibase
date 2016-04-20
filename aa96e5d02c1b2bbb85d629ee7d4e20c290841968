@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_76ae29e6",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-20T18:43:09Z",
+      "side": 1,
+      "message": "Unused, dead code. Why keep this?",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d6b29547",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-20T18:43:09Z",
+      "side": 1,
+      "message": "Unused, dead code. Why keep this?",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_a371a5df",
         "filename": "lib/includes/EntityFactory.php",
         "patchSetId": 2
