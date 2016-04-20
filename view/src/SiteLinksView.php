@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -33,11 +34,6 @@ class SiteLinksView {
 	private $templateFactory;
 
 	/**
-	 * @var SiteList
-	 */
-	private $sites;
-
-	/**
 	 * @var EditSectionGenerator
 	 */
 	private $sectionEditLinkGenerator;
@@ -53,43 +49,39 @@ class SiteLinksView {
 	private $badgeItems;
 
 	/**
-	 * @var string[]
-	 */
-	private $specialSiteLinkGroups;
-
-	/**
 	 * @var LocalizedTextProvider
 	 */
 	private $textProvider;
 
 	/**
+	 * @var SiteLinkTargetProvider
+	 */
+	private $siteLinkTargetProvider;
+
+	/**
 	 * @param TemplateFactory $templateFactory
-	 * @param SiteList $sites
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
 	 * @param EntityIdFormatter $entityIdFormatter A plaintext producing EntityIdFormatter
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param string[] $badgeItems
-	 * @param string[] $specialSiteLinkGroups
 	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
-		SiteList $sites,
 		EditSectionGenerator $sectionEditLinkGenerator,
 		EntityIdFormatter $entityIdFormatter,
 		LanguageNameLookup $languageNameLookup,
 		array $badgeItems,
-		array $specialSiteLinkGroups,
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		SiteLinkTargetProvider $siteLinkTargetProvider
 	) {
-		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->badgeItems = $badgeItems;
-		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->textProvider = $textProvider;
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 	}
 
 	/**
@@ -151,8 +143,9 @@ class SiteLinksView {
 	 * @return string
 	 */
 	private function getHtmlForSiteLinkGroup( array $siteLinks, ItemId $itemId = null, $group ) {
+		$sitesForGroup = $this->siteLinkTargetProvider->getSiteList( [ $group ] );
 		$siteLinksForTable = $this->getSiteLinksForTable(
-			$this->getSitesForGroup( $group ),
+			$sitesForGroup,
 			$siteLinks
 		);
 
@@ -182,33 +175,6 @@ class SiteLinksView {
 			$this->sectionEditLinkGenerator->getSiteLinksEditSection( $itemId ),
 			$count > 1 ? ' mw-collapsible' : ''
 		);
-	}
-
-	/**
-	 * Get all sites for a given site group, with special handling for the
-	 * "special" site group.
-	 *
-	 * @param string $group
-	 *
-	 * @return SiteList
-	 */
-	private function getSitesForGroup( $group ) {
-		$siteList = new SiteList();
-
-		if ( $group === 'special' ) {
-			$groups = $this->specialSiteLinkGroups;
-		} else {
-			$groups = array( $group );
-		}
-
-		foreach ( $groups as $group ) {
-			$sites = $this->sites->getGroup( $group );
-			foreach ( $sites as $site ) {
-				$siteList->setSite( $site );
-			}
-		}
-
-		return $siteList;
 	}
 
 	/**

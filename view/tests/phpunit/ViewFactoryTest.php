@@ -3,7 +3,6 @@
 namespace Wikibase\View\Tests;
 
 use DataTypes\DataTypeFactory;
-use HashSiteStore;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
@@ -13,6 +12,7 @@ use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\SnakFormatter;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\HtmlSnakFormatterFactory;
@@ -64,19 +64,22 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$languageNameLookup->expects( $this->never() )
 			->method( 'getName' );
 
+		$siteLinkTargetProvider = $this->getMockBuilder( SiteLinkTargetProvider::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		return new ViewFactory(
 			$htmlFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_HTML ),
 			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
 			new NullStatementGrouper(),
-			new HashSiteStore(),
 			new DataTypeFactory( array() ),
 			$templateFactory,
 			$languageNameLookup,
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			new BasicNumberLocalizer(),
 			array(),
-			array(),
+			$siteLinkTargetProvider,
 			array(),
 			$this->getMock( LocalizedTextProvider::class )
 		);

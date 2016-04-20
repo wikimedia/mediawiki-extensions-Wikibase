@@ -1574,14 +1574,13 @@ class WikibaseRepo {
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
 			$statementGrouperBuilder->getStatementGrouper(),
-			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			TemplateFactory::getDefaultInstance(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new MediaWikiLanguageDirectionalityLookup(),
 			new MediaWikiNumberLocalizer( $wgLang ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
-			$this->settings->getSetting( 'specialSiteLinkGroups' ),
+			$this->getSiteLinkTargetProvider(),
 			$this->settings->getSetting( 'badgeItems' ),
 			new MediaWikiLocalizedTextProvider( $wgLang->getCode() )
 		);
