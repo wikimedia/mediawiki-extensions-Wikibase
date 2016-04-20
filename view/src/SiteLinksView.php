@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use Sanitizer;
 use Site;
 use SiteList;
+use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
@@ -48,6 +49,11 @@ class SiteLinksView {
 	private $languageNameLookup;
 
 	/**
+	 * @var NumberLocalizer
+	 */
+	private $numberLocalizer;
+
+	/**
 	 * @var string[]
 	 */
 	private $badgeItems;
@@ -78,6 +84,7 @@ class SiteLinksView {
 		EditSectionGenerator $sectionEditLinkGenerator,
 		EntityIdFormatter $entityIdFormatter,
 		LanguageNameLookup $languageNameLookup,
+		NumberLocalizer $numberLocalizer,
 		array $badgeItems,
 		array $specialSiteLinkGroups,
 		LocalizedTextProvider $textProvider
@@ -88,6 +95,7 @@ class SiteLinksView {
 		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->templateFactory = $templateFactory;
 		$this->languageNameLookup = $languageNameLookup;
+		$this->numberLocalizer = $numberLocalizer;
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->textProvider = $textProvider;
 	}
@@ -167,8 +175,8 @@ class SiteLinksView {
 				$this->textProvider->get(
 					'wikibase-sitelinks-counter',
 					[
-						$count, // FIXME: NumberLocalizer
-						0, // FIXME: NumberLocalizer
+						$this->numberLocalizer->localizeNumber( $count ),
+						$this->numberLocalizer->localizeNumber( 0 ),
 						'',
 						''
 					]
