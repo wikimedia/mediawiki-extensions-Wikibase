@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_0c51a3dd",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-20T10:50:51Z",
+      "side": 1,
+      "message": "I\u0027d do this by passing the actual entity (as fetched from the revision store) if the output property is null.",
+      "parentUuid": "ae564743_d10f443a",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_711bd882",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 5
@@ -104,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_ec4d4f41",
+        "filename": "repo/tests/phpunit/includes/RepoHooksTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-20T10:50:51Z",
+      "side": 1,
+      "message": "More getExtensionData calls?",
+      "parentUuid": "ae564743_2c38e79a",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_cc468b26",
         "filename": "view/src/EntityViewPlaceholderExpander.php",
         "patchSetId": 5
@@ -115,6 +151,24 @@
       "writtenOn": "2016-04-20T10:44:42Z",
       "side": 1,
       "message": "This branch would not be needed here if we generated the html snippets on demand in EntityParserOutputGenerator.",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2c5f47ea",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-20T10:50:51Z",
+      "side": 1,
+      "message": "I suppose you meant the hook handler. I didn\u0027t want to pull TermsListView into the hook handler, but I\u0027m considering moving EntityViewPlaceholderExpander and TextInjector back into Repo and shuffling the code around this feature around a bit.",
+      "parentUuid": "ae564743_cc468b26",
       "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
