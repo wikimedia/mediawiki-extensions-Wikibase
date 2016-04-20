@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityInfoTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
@@ -300,7 +301,8 @@ class EntityParserOutputGenerator {
 		$termsListView = new TermsListView(
 			TemplateFactory::getDefaultInstance(),
 			new LanguageNameLookup( $this->languageCode ),
-			new MediaWikiLocalizedTextProvider( $this->languageCode )
+			new MediaWikiLocalizedTextProvider( $this->languageCode ),
+			new MediaWikiLanguageDirectionalityLookup()
 		);
 		$allLanguages = [];
 		if ( $entity instanceof AliasesProvider ) {
