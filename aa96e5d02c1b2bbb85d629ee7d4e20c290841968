@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_a371a5df",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-04-20T18:00:32Z",
+      "side": 1,
+      "message": "a blank line here (between $entity and Assert) would help (me at least) in readability of the code",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
