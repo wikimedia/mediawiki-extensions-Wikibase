@@ -85,11 +85,16 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 	public function aliasDiffProvider() {
 		return array(
 			'diffs containing add/remove ops (default)' => array( array(
-				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ) ),
-				'en' => new Diff( array( new DiffOpRemove( 'en-old' ), new DiffOpAdd( 'en-new' ) ) ),
-				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ) ),
+				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ), false ),
+				'en' => new Diff( array( new DiffOpRemove( 'en-old' ), new DiffOpAdd( 'en-new' ) ), false ),
+				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ), false ),
 			) ),
-			'diffs containing atomic ops' => array( array(
+			'associative diffs containing atomic ops' => array( array(
+				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ),
+				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ), true ),
+				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ), true ),
+			) ),
+			'partly associative diffs (auto-detected) containing atomic ops' => array( array(
 				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ) ),
 				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ) ),
 				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ) ),
@@ -111,7 +116,7 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 		$fingerprint->setAliasGroup( 'fa', array( 'fa-old' ) );
 
 		$patch = new EntityDiff( array(
-			'aliases' => new Diff( $diffOps ),
+			'aliases' => new Diff( $diffOps, true ),
 		) );
 
 		$expectedFingerprint = $this->newSimpleFingerprint();
@@ -187,8 +192,13 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 			) ),
 			'changing missing aliases is no-op' => array( array(
 				'aliases' => new Diff( array(
-					'de' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ) ),
-					'en' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ) ),
+					'de' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ), true ),
+					'en' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ), true ),
+				), true ),
+			) ),
+			'non-associative aliases change is ignored' => array( array(
+				'aliases' => new Diff( array(
+					'en' => new Diff( array( new DiffOpChange( 'conflict', 'changed' ) ), false ),
 				), true ),
 			) ),
 			'changing missing aliases is no-op (atomic)' => array( array(
