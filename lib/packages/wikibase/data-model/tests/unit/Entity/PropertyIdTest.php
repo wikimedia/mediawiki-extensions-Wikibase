@@ -52,6 +52,7 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 
 	public function invalidIdSerializationProvider() {
 		return array(
+			array( "P1\n" ),
 			array( 'p' ),
 			array( 'q1' ),
 			array( 'pp1' ),

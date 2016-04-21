@@ -15,7 +15,7 @@ class PropertyId extends EntityId {
 	/**
 	 * @since 0.5
 	 */
-	const PATTERN = '/^P[1-9]\d*$/i';
+	const PATTERN = '/^P[1-9]\d*\z/i';
 
 	/**
 	 * @param string $idSerialization
