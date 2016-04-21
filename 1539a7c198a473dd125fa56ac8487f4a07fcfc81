@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_32779437",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T20:12:19Z",
+      "side": 1,
+      "message": "do we know that $icons[\u0027placeholder\u0027] is set?",
+      "revId": "1539a7c198a473dd125fa56ac8487f4a07fcfc81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_52a96877",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T20:12:19Z",
+      "side": 1,
+      "message": "Please import all classes via use statements.",
+      "revId": "1539a7c198a473dd125fa56ac8487f4a07fcfc81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_92b2e0e2",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T20:12:19Z",
+      "side": 1,
+      "message": "what if the count is \u003e 1 ?",
+      "revId": "1539a7c198a473dd125fa56ac8487f4a07fcfc81",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
