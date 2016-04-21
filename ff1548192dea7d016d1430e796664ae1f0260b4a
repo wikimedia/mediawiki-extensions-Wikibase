@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_e9437713",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-21T13:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_4994238e",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_c9f793f1",
         "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-21T13:46:11Z",
       "side": 1,
       "message": "These will be strings at this point. Please cast them to int before returning them. array_map will do.",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0947cb23",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-21T13:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_c9f793f1",
       "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_294e0f3d",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-21T13:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_89ed9b25",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_2991ef9c",
         "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2016-04-21T13:46:11Z",
       "side": 1,
       "message": "requeueRowBatch()",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_895abbf7",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-21T13:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_2991ef9c",
       "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_692da741",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-21T13:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_e9dd3775",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_89d47b4d",
         "filename": "repo/maintenance/requeueChanges.php",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2016-04-21T13:46:11Z",
       "side": 1,
       "message": "Please output the maximum change ID before the batch insert. If something goes wrong, it\u0027s really nice to have that ID somewhere, so we can manually repair the contents of the db table.",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4968a384",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-21T13:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_89d47b4d",
       "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
