@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_eae08a27",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-21T08:25:51Z",
+      "side": 1,
+      "message": "huh?",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_c0776fce",
         "filename": "repo/maintenance/requeueChanges.php",
         "patchSetId": 3
@@ -30,6 +47,23 @@
       "writtenOn": "2016-04-20T16:26:34Z",
       "side": 1,
       "message": "why is this required?",
+      "revId": "d2675f7596662916125d61f0e7db360ea578d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_6aed9a22",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-21T08:25:51Z",
+      "side": 1,
+      "message": "What\u0027s this?",
       "revId": "d2675f7596662916125d61f0e7db360ea578d736",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
