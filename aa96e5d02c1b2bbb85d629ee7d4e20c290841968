@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_ca3f861f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T09:28:53Z",
+      "side": 1,
+      "message": "No. What the two patches do is not \"alternative\". This patch here leaves the code in a half-finished state. I6871b19 plus the following patch I will now never write was intended to always leave the code in a consistent state.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_76ae29e6",
         "filename": "lib/includes/EntityFactory.php",
         "patchSetId": 2
