@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_295baf27",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:35:40Z",
+      "side": 1,
+      "message": "Note that this will fail on 32-bit systems when a numeric id reaches the limit. Which will not happen within the next 100 years on wikidata. ;-)",
+      "revId": "cbdf3c8bc58815f36f2ef1f0e23ddc7f082aaf6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
