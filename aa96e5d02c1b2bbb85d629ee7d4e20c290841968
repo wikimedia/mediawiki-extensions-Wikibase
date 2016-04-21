@@ -50,6 +50,41 @@
       "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4a753692",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-21T08:18:08Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "ae564743_a371a5df",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8a6f4ec0",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-21T08:18:08Z",
+      "side": 1,
+      "message": "could be more explicit here by calling it entitydocument",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
