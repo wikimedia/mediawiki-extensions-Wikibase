@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_72274cb2",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T19:25:19Z",
+      "side": 1,
+      "message": "I think it\u0027s ok to hardcode the page name here. though it would probably be cleaner to pass in a Title object.\n\nIt should indeed by a CachingPropertyOrderProvider.",
+      "parentUuid": "ce38dbff_077c98b3",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_e776d4d2",
         "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
         "patchSetId": 8
@@ -36,6 +54,23 @@
     },
     {
       "key": {
+        "uuid": "ae564743_f2399ccc",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T19:25:19Z",
+      "side": 1,
+      "message": "should be clear if this prefix is per wiki (wfMemcKey is applied automatically), or global (caller has to apply wfMemcKey).",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_a74ccca0",
         "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
         "patchSetId": 8
@@ -47,6 +82,41 @@
       "writtenOn": "2016-04-08T15:53:18Z",
       "side": 1,
       "message": "This is not enough for a cache key, you probably want to use wfMemcKey to prepend it with the wiki\u0027s id (otherwise this will be shared across all wikis, that\u0027s not what you want).",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d253b818",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T19:25:19Z",
+      "side": 1,
+      "message": "It may actually be what we want... but it shouldn\u0027t be the default. But perhaps the default should be null, which would then be turned into wfMemcKey( \u0027PropertyOrderProvider\u0027 ). But if the default isn\u0027t used, it\u0027s up to the caller to apply wfMemcKey or not.",
+      "parentUuid": "ce38dbff_a74ccca0",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_5247a850",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T19:25:19Z",
+      "side": 1,
+      "message": "should have @see PropertyOrderProvider::getPropertyOrder",
       "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +151,57 @@
       "writtenOn": "2016-04-08T15:53:18Z",
       "side": 1,
       "message": "two spaces before equals sign",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_126410e1",
+        "filename": "lib/includes/store/PropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T19:25:19Z",
+      "side": 1,
+      "message": "And if it does exist, what\u0027s the structure of the array?\n\"An associative array mapping property ID strings to ordinal numbers. The order of properties is represented by the ordinal numbers associated with them. The array is not guaranteed to be sorted.\"",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_325b1428",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T19:25:19Z",
+      "side": 1,
+      "message": "Perhaps we should take a Title here, instead of a string.",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d2a9f8dd",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T19:25:19Z",
+      "side": 1,
+      "message": "This is not sorted, it is ordered! That\u0027s an important distinction!",
       "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
