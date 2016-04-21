@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_4994238e",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:46:11Z",
+      "side": 1,
+      "message": "int[]",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c9f793f1",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:46:11Z",
+      "side": 1,
+      "message": "These will be strings at this point. Please cast them to int before returning them. array_map will do.",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_89ed9b25",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:46:11Z",
+      "side": 1,
+      "message": "int[]",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2991ef9c",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:46:11Z",
+      "side": 1,
+      "message": "requeueRowBatch()",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e9dd3775",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:46:11Z",
+      "side": 1,
+      "message": "what happens if the conversion fails? If the input is blablabla? Will this return 0, leading to ALL changes being requeued? We should avoid that...",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_89d47b4d",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:46:11Z",
+      "side": 1,
+      "message": "Please output the maximum change ID before the batch insert. If something goes wrong, it\u0027s really nice to have that ID somewhere, so we can manually repair the contents of the db table.",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c9ce73b9",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:46:11Z",
+      "side": 1,
+      "message": "nice, i like it",
+      "revId": "ff1548192dea7d016d1430e796664ae1f0260b4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
