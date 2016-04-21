@@ -92,7 +92,7 @@ class ClientEntitySerializer implements Serializer {
 		return array_filter(
 			$serialization,
 			function( $value ) {
-				return $value !== array();
+				return $value !== [];
 			}
 		);
 	}

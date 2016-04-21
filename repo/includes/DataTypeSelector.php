@@ -82,7 +82,7 @@ class DataTypeSelector {
 	 * @return array
 	 */
 	public function getOptionsArray() {
-		$dataTypes = array();
+		$dataTypes = [];
 
 		foreach ( $this->dataTypes as $dataType ) {
 			$dataTypes[$dataType->getId()] = $dataType->getLabel( $this->languageCode );

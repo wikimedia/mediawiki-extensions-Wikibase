@@ -31,7 +31,7 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 	public function testDoOutputPageBeforeHtmlRegisterConfig( array $expected, Title $title, $message ) {
 		$entityNamespaceLookup = new EntityNamespaceLookup( array( $title->getNamespace() ) );
 
-		$hookHandler = new OutputPageJsConfigHookHandler( $entityNamespaceLookup, 'https://creativecommons.org', 'CC-0', array() );
+		$hookHandler = new OutputPageJsConfigHookHandler( $entityNamespaceLookup, 'https://creativecommons.org', 'CC-0', [] );
 
 		$context = new RequestContext();
 		$context->setTitle( $title );

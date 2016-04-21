@@ -81,7 +81,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$exception' => new IllegalValueException( 'ugh!' ),
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 0,
-				'$extradata' => array(),
+				'$extradata' => [],
 				'$infoPattern' => '/ugh!/',
 				'$expectedData' => array(
 					'code' => 'errorreporter-test-ugh',
@@ -265,7 +265,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 				'$description' => 'Ugh!',
 				'$code' => 'errorreporter-test-ugh',
 				'$httpStatusCode' => 0,
-				'$extradata' => array(),
+				'$extradata' => [],
 				'$infoPattern' => '/^Ugh!$/',
 				'$expectedData' => array(
 					'info' => 'Ugh!',

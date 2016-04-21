@@ -89,7 +89,7 @@ class BeforePageDisplayHandler {
 
 	private function hasLinkItemWidget( User $user, OutputPage $out, Title $title, $actionName ) {
 		if (
-			$out->getLanguageLinks() !== array() || !$user->isLoggedIn()
+			$out->getLanguageLinks() !== [] || !$user->isLoggedIn()
 			|| !$this->hasEditOrAddLinks( $out, $title, $actionName )
 		) {
 			return false;

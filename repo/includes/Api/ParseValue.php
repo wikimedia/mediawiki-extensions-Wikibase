@@ -113,7 +113,7 @@ class ParseValue extends ApiBase {
 	public function execute() {
 		$parser = $this->getParser();
 
-		$results = array();
+		$results = [];
 
 		$params = $this->extractRequestParams();
 		$validator = $params['validate'] ? $this->getValidator() : null;

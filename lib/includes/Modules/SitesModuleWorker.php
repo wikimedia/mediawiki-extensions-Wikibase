@@ -112,7 +112,7 @@ class SitesModuleWorker {
 			array_splice( $groups, $specialPos, 1, $specialGroups );
 		}
 
-		$siteDetails = array();
+		$siteDetails = [];
 		/**
 		 * @var MediaWikiSite $site
 		 */

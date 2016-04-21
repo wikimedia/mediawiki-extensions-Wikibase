@@ -154,7 +154,7 @@ class OutputFormatSnakFormatterFactory {
 	 * @return SnakFormatter[]
 	 */
 	private function createSnakFormatters( $format, FormatterOptions $options ) {
-		$formatters = array();
+		$formatters = [];
 
 		foreach ( $this->snakFormatterConstructorCallbacks as $key => $callback ) {
 			$instance = call_user_func( $callback, $format, $options );

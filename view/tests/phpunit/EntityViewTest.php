@@ -26,7 +26,7 @@ abstract class EntityViewTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return EntityDocument
 	 */
-	abstract protected function makeEntity( EntityId $id, array $statements = array() );
+	abstract protected function makeEntity( EntityId $id, array $statements = [] );
 
 	/**
 	 * Generates a prefixed entity ID based on a numeric ID.

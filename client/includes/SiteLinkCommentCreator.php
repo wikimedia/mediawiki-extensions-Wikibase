@@ -211,7 +211,7 @@ class SiteLinkCommentCreator {
 	 * @return array|null
 	 */
 	private function getChangeParamsForDiffOp( DiffOp $diffOp, $siteId, $messagePrefix ) {
-		$params = array();
+		$params = [];
 
 		if ( $diffOp instanceof DiffOpAdd ) {
 			$params['message'] = $messagePrefix . 'add';
@@ -257,7 +257,7 @@ class SiteLinkCommentCreator {
 	 * @return array|null
 	 */
 	private function getSiteLinkAddRemoveParams( DiffOp $diffOp, $action, $siteId, Title $title = null ) {
-		$params = array();
+		$params = [];
 
 		if ( in_array( $action, array( 'remove', 'restore' ) ) ) {
 			// Messages: wikibase-comment-remove, wikibase-comment-restore
@@ -341,7 +341,7 @@ class SiteLinkCommentCreator {
 	 */
 	private function generateComment( array $messageSpec ) {
 		$key = $messageSpec['message'];
-		$args = array();
+		$args = [];
 
 		if ( isset( $messageSpec['sitelink']['oldlink'] ) ) {
 			$link = $messageSpec['sitelink']['oldlink'];

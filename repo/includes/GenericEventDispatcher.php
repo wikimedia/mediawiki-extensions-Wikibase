@@ -17,7 +17,7 @@ class GenericEventDispatcher {
 	/**
 	 * @var array
 	 */
-	private $watchers = array();
+	private $watchers = [];
 
 	/**
 	 * @var int

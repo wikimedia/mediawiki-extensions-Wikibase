@@ -388,7 +388,7 @@ class ChangeOpsMerge {
 	 * @return Error[]
 	 */
 	private function removeConflictsWithEntity( array $errors, EntityId $fromId ) {
-		$filtered = array();
+		$filtered = [];
 
 		foreach ( $errors as $error ) {
 			if ( $error instanceof UniquenessViolation

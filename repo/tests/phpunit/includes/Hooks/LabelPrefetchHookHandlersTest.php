@@ -39,7 +39,7 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityId[]
 	 */
 	public function titlesToIds( array $titles ) {
-		$entityIds = array();
+		$entityIds = [];
 		$idParser = new BasicEntityIdParser();
 
 		foreach ( $titles as $title ) {

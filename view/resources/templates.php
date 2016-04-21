@@ -15,7 +15,7 @@ namespace Wikibase;
  */
 
 return call_user_func( function() {
-	$templates = array();
+	$templates = [];
 
 	$templates['wikibase-entityview'] =
 <<<HTML

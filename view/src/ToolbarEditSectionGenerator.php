@@ -51,7 +51,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	}
 
 	public function getSiteLinksEditSection( EntityId $entityId = null ) {
-		$specialPageUrlParams = array();
+		$specialPageUrlParams = [];
 
 		if ( $entityId !== null ) {
 			$specialPageUrlParams[] = $entityId->getSerialization();
@@ -68,7 +68,7 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 	 * @return string
 	 */
 	public function getLabelDescriptionAliasesEditSection( $languageCode, EntityId $entityId = null ) {
-		$specialPageUrlParams = array();
+		$specialPageUrlParams = [];
 
 		if ( $entityId !== null ) {
 			$specialPageUrlParams[] = $entityId->getSerialization();

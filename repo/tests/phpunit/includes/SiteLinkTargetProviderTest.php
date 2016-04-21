@@ -32,7 +32,7 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 		$provider = new SiteLinkTargetProvider( $this->getSiteStore(), $specialGroups );
 		$siteList = $provider->getSiteList( $groups );
 
-		$globalIds = array();
+		$globalIds = [];
 		/** @var Site $site */
 		foreach ( $siteList as $site ) {
 			$globalIds[] = $site->getGlobalId();
@@ -44,29 +44,29 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 		return array(
 			array(
 				array( 'wikipedia' ),
-				array(),
+				[],
 				array( 'dawiki', 'eswiki' )
 			),
 			array(
-				array( 'species' ), array(), array( 'specieswiki' ) ),
+				array( 'species' ), [], array( 'specieswiki' ) ),
 			array(
 				array( 'wikiquote' ),
-				array(),
+				[],
 				array( 'eswikiquote' )
 			),
 			array(
 				array( 'qwerty' ),
-				array(),
-				array()
+				[],
+				[]
 			),
 			array(
 				array( 'wikipedia', 'species' ),
-				array(),
+				[],
 				array( 'dawiki', 'eswiki', 'specieswiki' )
 			),
 			array(
 				array( 'wikipedia', 'wikiquote' ),
-				array(),
+				[],
 				array( 'dawiki', 'eswiki', 'eswikiquote' )
 			),
 			array(
@@ -85,14 +85,14 @@ class SiteLinkTargetProviderTest extends PHPUnit_Framework_TestCase {
 				array( 'dawiki', 'eswiki', 'eswikiquote', 'specieswiki' )
 			),
 			array(
-				array(),
+				[],
 				array( 'wikipedia' ),
-				array()
+				[]
 			),
 			array(
-				array(),
-				array(),
-				array()
+				[],
+				[],
+				[]
 			),
 		);
 	}

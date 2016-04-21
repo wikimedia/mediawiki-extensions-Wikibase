@@ -24,7 +24,7 @@ class PropertyInfoBuilderTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function provideBuildPropertyInfo() {
-		$cases = array();
+		$cases = [];
 
 		$cases[] = array(
 			Property::newFromType( 'foo' ),

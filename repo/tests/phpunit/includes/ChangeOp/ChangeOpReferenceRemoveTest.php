@@ -24,7 +24,7 @@ use Wikibase\DataModel\Snak\Snak;
 class ChangeOpReferenceRemoveTest extends \PHPUnit_Framework_TestCase {
 
 	public function invalidConstructorProvider() {
-		$args = array();
+		$args = [];
 		$args[] = array( '', '' );
 		$args[] = array( '', 'foo' );
 		$args[] = array( 'foo', '' );

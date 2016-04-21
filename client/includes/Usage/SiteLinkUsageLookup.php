@@ -63,7 +63,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 * @throws UsageTrackerException
 	 */
 	public function getUsagesForPage( $pageId ) {
-		$usages = array();
+		$usages = [];
 
 		$title = $this->titleFactory->newFromID( $pageId );
 		$id = $this->siteLinkLookup->getItemIdForLink( $this->clientSiteId, $title->getPrefixedText() );
@@ -85,7 +85,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 * @return Traversable of PageEntityUsages
 	 * @throws UsageTrackerException
 	 */
-	public function getPagesUsing( array $entityIds, array $aspects = array() ) {
+	public function getPagesUsing( array $entityIds, array $aspects = [] ) {
 		if ( empty( $entityIds ) ) {
 			return new ArrayIterator();
 		}
@@ -194,7 +194,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 */
 	public function getUnusedEntities( array $entityIds ) {
 		if ( empty( $entityIds ) ) {
-			return array();
+			return [];
 		}
 
 		// Non-item entities are always considered unused by this implementation.

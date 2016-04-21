@@ -71,7 +71,7 @@ class NoLangLinkHandler {
 	public static function getNoExternalLangLinks( ParserOutput $out ) {
 		$property = $out->getProperty( 'noexternallanglinks' );
 
-		return is_string( $property ) ? unserialize( $property ) : array();
+		return is_string( $property ) ? unserialize( $property ) : [];
 	}
 
 	/**

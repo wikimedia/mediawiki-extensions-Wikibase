@@ -190,7 +190,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @return array[] rows
 	 */
 	private function makeSubscriptionRows( $subscriber, array $subscriptions ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $subscriptions as $entityId ) {
 			$rows[] = array(
@@ -209,7 +209,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @return array
 	 */
 	private function extractField( $rows, $field ) {
-		$values = array();
+		$values = [];
 
 		foreach ( $rows as $row ) {
 			$values[] = $row->$field;

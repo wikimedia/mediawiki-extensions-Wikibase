@@ -45,7 +45,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'simple' => array(
 				Error::newError( 'Bla bla' ),
-				array()
+				[]
 			),
 			'with params' => array(
 				Error::newError(
@@ -74,7 +74,7 @@ class ValidatorErrorLocalizerTest extends \PHPUnit_Framework_TestCase {
 	public function provideGetResultStatus() {
 		return array(
 			array( Result::newSuccess() ),
-			array( Result::newError( array() ) ),
+			array( Result::newError( [] ) ),
 			array( Result::newError( array( Error::newError( 'Bla bla' ) ) ) ),
 			array( Result::newError( array(
 				Error::newError( 'Foo' ),

@@ -220,7 +220,7 @@ class EntityUsageTableBuilder {
 	 * @return EntityId[] An associative array mapping page IDs to Entity IDs.
 	 */
 	private function slurpEntityIds( ResultWrapper $res ) {
-		$entityPerPage = array();
+		$entityPerPage = [];
 
 		foreach ( $res as $row ) {
 			try {

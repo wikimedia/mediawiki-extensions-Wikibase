@@ -41,7 +41,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -55,7 +55,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 		$validSnakHash = $validSnak->getHash();
 
-		$args = array();
+		$args = [];
 		$args[] = array( 123, $validSnak, $validSnakHash );
 		$args[] = array( '', $validSnak, $validSnakHash );
 		$args[] = array( $validClaimGuid, $validSnak, 123 );
@@ -74,7 +74,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpAddProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItemWithClaim( $snak );
 		$statements = $item->getStatements()->toArray();
@@ -103,7 +103,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpSetProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItemWithClaim( $snak );
 		$statements = $item->getStatements()->toArray();
@@ -165,7 +165,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$snakHash = $oldSnak->getHash();
 		$badSnakHash = sha1( "dummy" );
 
-		$cases = array();
+		$cases = [];
 		$cases['malformed claim guid'] = array( $item, 'NotAGuid', $goodSnak, '' );
 		$cases['unknown claim guid'] = array( $item, $badGuid, $goodSnak, $snakHash );
 		$cases['unknown snak hash'] = array( $item, $claimGuid, $goodSnak, $badSnakHash );
@@ -207,7 +207,7 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 		$snakHash = $oldSnak->getHash();
 
-		$cases = array();
+		$cases = [];
 		$cases['invalid snak value'] = array( $item, $claimGuid, $badSnak, '' );
 		$cases['invalid snak value type'] = array( $item, $claimGuid, $brokenSnak, $snakHash );
 

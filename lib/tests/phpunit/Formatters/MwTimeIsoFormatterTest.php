@@ -512,7 +512,7 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 			),
 		);
 
-		$argLists = array();
+		$argLists = [];
 
 		foreach ( $tests as $args ) {
 			$timestamp = $args[0];

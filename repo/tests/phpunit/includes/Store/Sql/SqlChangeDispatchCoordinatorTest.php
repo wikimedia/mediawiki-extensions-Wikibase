@@ -84,7 +84,7 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		$dbw = wfGetDB( DB_MASTER );
 		$res = $dbw->select( 'wb_changes_dispatch', '*', $where, __METHOD__, array( 'ORDER BY' => 'chd_site' ) );
 
-		$rows = array();
+		$rows = [];
 		foreach ( $res as $row ) {
 			$rows[] = get_object_vars( $row );
 		}

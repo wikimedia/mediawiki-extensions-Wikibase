@@ -199,7 +199,7 @@ class EntityDataUriManager {
 	 * @return string[]
 	 */
 	public function getCacheableUrls( EntityId $id ) {
-		$urls = array();
+		$urls = [];
 
 		foreach ( $this->supportedExtensions as $format => $ext ) {
 			$title = $this->getDocTitle( $id, $format );

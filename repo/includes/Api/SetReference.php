@@ -128,7 +128,7 @@ class SetReference extends ApiBase {
 		if ( isset( $params['snaks-order' ] ) ) {
 			$snaksOrder = $this->getArrayFromParam( $params['snaks-order'], 'snaks-order' );
 		} else {
-			$snaksOrder = array();
+			$snaksOrder = [];
 		}
 
 		$deserializer = $this->deserializerFactory->newSnakListDeserializer();

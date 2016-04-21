@@ -43,7 +43,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -52,7 +52,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 	public function invalidArgumentProvider() {
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
-		$args = array();
+		$args = [];
 		$args[] = array( 123, $validSnak );
 		$args[] = array( false, $validSnak );
 
@@ -90,7 +90,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideChangeOps() {
 		$snak = $this->makeSnak( 'P5', 'test' );
-		$args = array();
+		$args = [];
 
 		// add a new claim
 		$item = $this->makeNewItemWithClaim( 'Q123', $snak );
@@ -215,7 +215,7 @@ class ChangeOpMainSnakTest extends \PHPUnit_Framework_TestCase {
 
 		$guidGenerator = new GuidGenerator();
 
-		$cases = array();
+		$cases = [];
 
 		$guid = $guidGenerator->newGuid( $q17 );
 		$cases['bad snak value'] = array( $q17, $guid, $badSnak );

@@ -66,12 +66,12 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				array(),
-				array()
+				[],
+				[]
 			),
 			array(
 				array( 'spam', 'spam2' ),
-				array()
+				[]
 			),
 			array(
 				array( 'enwiktionary' ),
@@ -189,7 +189,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			),
 			'Invalid hook #2, original data is being used' => array(
 				function( ItemId $itemId, array &$sidebar ) {
-					$sidebar[0]['msg'] = array();
+					$sidebar[0]['msg'] = [];
 				},
 				array( 'enwiktionary', 'enwiki', 'enwikiquote' ),
 				array( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ),
@@ -236,7 +236,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		);
 
 		$this->assertSame(
-			array(),
+			[],
 			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
 		);
 	}
@@ -248,7 +248,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 			'WikibaseClientOtherProjectsSidebar' => array(
 				function ( ItemId $itemId, $sidebar ) use ( &$called ) {
 					$this->assertSame( 'Q123', $itemId->getSerialization() );
-					$this->assertSame( array(), $sidebar );
+					$this->assertSame( [], $sidebar );
 					$called = true;
 				},
 			),
@@ -262,7 +262,7 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		);
 
 		$this->assertSame(
-			array(),
+			[],
 			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
 		);
 		$this->assertTrue( $called, 'Hook needs to be called' );

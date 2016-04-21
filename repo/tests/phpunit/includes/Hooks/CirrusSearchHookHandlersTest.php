@@ -66,7 +66,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 
 		$config = array(
 			'page' => array(
-				'properties' => array()
+				'properties' => []
 			)
 		);
 
@@ -97,7 +97,7 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 
 		$config = array(
 			'page' => array(
-				'properties' => array()
+				'properties' => []
 			)
 		);
 

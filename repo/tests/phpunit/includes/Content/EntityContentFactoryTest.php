@@ -47,21 +47,21 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function contentModelsProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array( array(), array() );
-		$argLists[] = array( array( 'Foo' => 'Bar' ), array() );
-		$argLists[] = array( WikibaseRepo::getDefaultInstance()->getContentModelMappings(), array() );
+		$argLists[] = array( [], [] );
+		$argLists[] = array( array( 'Foo' => 'Bar' ), [] );
+		$argLists[] = array( WikibaseRepo::getDefaultInstance()->getContentModelMappings(), [] );
 
 		return $argLists;
 	}
 
 	public function provideInvalidConstructorArguments() {
 		return array(
-			array( array( null ), array() ),
-			array( array(), array( null ) ),
-			array( array( 1 ), array() ),
-			array( array(), array( 'foo' ) )
+			array( array( null ), [] ),
+			array( [], array( null ) ),
+			array( array( 1 ), [] ),
+			array( [], array( 'foo' ) )
 		);
 	}
 
@@ -280,7 +280,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 					'user' => $permissions,
 					'autoconfirmed' => $permissions,
 					'emailconfirmed' => $permissions ),
-			array() // remove all groups not implied
+			[] // remove all groups not implied
 		);
 
 		$factory = $this->newFactory();

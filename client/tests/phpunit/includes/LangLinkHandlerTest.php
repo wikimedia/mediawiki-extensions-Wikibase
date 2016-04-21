@@ -39,7 +39,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	private $langLinkHandler;
 
 	private function getItems() {
-		$items = array();
+		$items = [];
 
 		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'Foo' );
@@ -115,7 +115,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 * @return string[]
 	 */
 	public function linksToBadges( array $siteLinks ) {
-		$badgesByPrefix = array();
+		$badgesByPrefix = [];
 
 		foreach ( $siteLinks as $link ) {
 			$badges = $link->getBadges();
@@ -138,7 +138,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		return array(
 			array( // #0
 				'Xoo', // page
-				array() // expected links
+				[] // expected links
 			),
 			array( // #1
 				'Foo_sr', // page
@@ -161,7 +161,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$title = Title::newFromText( $title );
 		}
 
-		$links = array();
+		$links = [];
 
 		foreach ( $this->langLinkHandler->getEntityLinks( $title ) as $link ) {
 			$links[$link->getSiteId()] = $link->getPageName();
@@ -173,7 +173,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	public function provideGetNoExternalLangLinks() {
 		return array(
 			array( // #0
-				array()
+				[]
 			),
 			array( // #1
 				array( '*' )
@@ -187,7 +187,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 
-	protected function makeParserOutput( array $langLinks, array $noExternalLangLinks = array() ) {
+	protected function makeParserOutput( array $langLinks, array $noExternalLangLinks = [] ) {
 		$out = new ParserOutput();
 		NoLangLinkHandler::setNoExternalLangLinks( $out, $noExternalLangLinks );
 
@@ -202,7 +202,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetNoExternalLangLinks
 	 */
 	public function testGetNoExternalLangLinks( array $noExternalLangLinks ) {
-		$out = $this->makeParserOutput( array(), $noExternalLangLinks );
+		$out = $this->makeParserOutput( [], $noExternalLangLinks );
 		$nel = $this->langLinkHandler->getNoExternalLangLinks( $out );
 
 		$this->assertEquals( $noExternalLangLinks, $nel );
@@ -211,9 +211,9 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	public function provideExcludeRepoLinks() {
 		return array(
 			array( // #0
-				array(),
-				array(),
-				array()
+				[],
+				[],
+				[]
 			),
 			array( // #1
 				array( 'de' ),
@@ -227,7 +227,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			),
 			array( // #3
 				array( 'xy', 'de', 'en' ),
-				array(),
+				[],
 				array( 'xy', 'de', 'en' )
 			)
 		);
@@ -237,7 +237,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		return array(
 			array( // #0
 				'Foo_sr',
-				array(),
+				[],
 				true
 			),
 			array( // #1
@@ -252,7 +252,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			),
 			array( // #3
 				'Talk:Foo_sr',
-				array(),
+				[],
 				false
 			),
 		);
@@ -267,7 +267,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$title->resetArticleID( 1 );
 		}
 
-		$out = $this->makeParserOutput( array(), $noExternalLangLinks );
+		$out = $this->makeParserOutput( [], $noExternalLangLinks );
 
 		$useRepoLinks = $this->langLinkHandler->useRepoLinks( $title, $out );
 
@@ -366,7 +366,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	 * @return array
 	 */
 	private function getPlainLinks( array $links ) {
-		$flat = array();
+		$flat = [];
 
 		foreach ( $links as $link ) {
 			$key = $link->getSiteId();
@@ -398,12 +398,12 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$expectedLinks = array_merge( $expectedLinks, $langLinks );
 
 			if ( !in_array( '*', $case[2] ) ) {
-				$expectedBadges = isset( $badges[ $case[0] ] ) ? $badges[ $case[0] ] : array();
+				$expectedBadges = isset( $badges[ $case[0] ] ) ? $badges[ $case[0] ] : [];
 
 				// no badges for languages mentioned in $noExternalLangLinks
 				$expectedBadges = array_diff_key( $expectedBadges, array_flip( $case[2] ) );
 			} else {
-				$expectedBadges = array();
+				$expectedBadges = [];
 			}
 
 			$cases[$i] = array(
@@ -441,7 +441,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	}
 
 	protected function mapToLinks( $map ) {
-		$links = array();
+		$links = [];
 
 		foreach ( $map as $wiki => $page ) {
 			$lang = preg_replace( '/wiki$/', '', $wiki );
@@ -454,7 +454,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	public function provideFilterRepoLinksByGroup() {
 		return array(
 			array( // #0: nothing
-				array(), array(), array()
+				[], [], []
 			),
 			array( // #1: nothing allowed
 				array(
@@ -464,13 +464,13 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 					'dewiktionary' => 'Foo de word',
 					'enwiktionary' => 'Foo en word',
 				),
-				array(),
-				array()
+				[],
+				[]
 			),
 			array( // #2: nothing there
-				array(),
+				[],
 				array( 'wikipedia' ),
-				array()
+				[]
 			),
 			array( // #3: wikipedia only
 				array(
@@ -506,7 +506,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 	public function provideSuppressRepoLinks() {
 		return array(
 			array( // #0: nothing
-				array(), array(), array()
+				[], [], []
 			),
 			array( // #1: nothing allowed
 				array(
@@ -517,12 +517,12 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 					'enwiktionary' => 'Foo en word',
 				),
 				array( '*' ),
-				array()
+				[]
 			),
 			array( // #2: nothing there
-				array(),
+				[],
 				array( 'de' ),
-				array()
+				[]
 			),
 			array( // #3: no de
 				array(

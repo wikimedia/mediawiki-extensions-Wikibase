@@ -158,7 +158,7 @@ class SummaryFormatter {
 			$args = $this->formatKeyValuePairs( $args );
 		}
 
-		$strings = array();
+		$strings = [];
 
 		foreach ( $args as $key => $arg ) {
 			$strings[$key] = $this->formatArg( $arg );
@@ -214,7 +214,7 @@ class SummaryFormatter {
 	 * @return string[]
 	 */
 	protected function formatKeyValuePairs( array $pairs ) {
-		$list = array();
+		$list = [];
 
 		foreach ( $pairs as $key => $value ) {
 			if ( is_string( $key ) ) {

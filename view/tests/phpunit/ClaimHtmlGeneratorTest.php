@@ -76,7 +76,7 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 	public function getHtmlForClaimProvider() {
 		$snakHtmlGenerator = $this->getSnakHtmlGeneratorMock();
 
-		$testCases = array();
+		$testCases = [];
 
 		$testCases[] = array(
 			$snakHtmlGenerator,

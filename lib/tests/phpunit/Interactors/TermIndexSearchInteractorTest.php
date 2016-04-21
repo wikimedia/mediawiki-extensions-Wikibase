@@ -85,7 +85,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		$mock->expects( $this->any() )
 			->method( 'getLabels' )
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
-				$labels = array();
+				$labels = [];
 				foreach ( $languageCodes as $languageCode ) {
 					$labels[$languageCode] = 'label-' . $languageCode . '-' . $entityId->getSerialization();
 				}
@@ -95,7 +95,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		$mock->expects( $this->any() )
 			->method( 'getDescriptions' )
 			->will( $this->returnCallback( function( EntityId $entityId, $languageCodes ) {
-				$descriptions = array();
+				$descriptions = [];
 				foreach ( $languageCodes as $languageCode ) {
 					$descriptions[$languageCode] =
 						'description-' . $languageCode . '-' . $entityId->getSerialization();
@@ -201,7 +201,7 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 				'prefixSearch' => false,
 				'limit' => 5000,
 				array( 'ABCDEFGHI123', 'br', 'item', $allTermTypes ),
-				array(),
+				[],
 			),
 			'Q111 Foo en Label match exactly' => array(
 				'caseSensitive' => false,

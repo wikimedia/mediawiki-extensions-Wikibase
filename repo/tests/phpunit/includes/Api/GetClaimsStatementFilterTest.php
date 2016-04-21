@@ -61,7 +61,7 @@ class GetClaimsStatementFilterTest extends PHPUnit_Framework_TestCase {
 
 		return array(
 			// No filter
-			array( array(), $statement, true ),
+			array( [], $statement, true ),
 
 			// Filter by rank
 			array( array( 'rank' => 'normal' ), $statement, true ),

@@ -37,8 +37,8 @@ class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 		$this->excludeNamespaces = $settings->getSetting( 'excludeNamespaces' );
 		$this->namespacesToInclude = $settings->getSetting( 'namespaces' );
 
-		$settings->setSetting( 'excludeNamespaces', array() );
-		$settings->setSetting( 'namespaces', array() );
+		$settings->setSetting( 'excludeNamespaces', [] );
+		$settings->setSetting( 'namespaces', [] );
 	}
 
 	protected function tearDown() {
@@ -59,7 +59,7 @@ class NoLangLinkHandlerTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testDoHandle() {
-		$handler = new NoLangLinkHandler( new NamespaceChecker( array() ) );
+		$handler = new NoLangLinkHandler( new NamespaceChecker( [] ) );
 		$parser = new Parser();
 		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
 

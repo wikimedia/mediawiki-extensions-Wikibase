@@ -401,8 +401,8 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array The values found in the array structure.
 	 * @todo needs unit test
 	 */
-	protected static function collectValues( array $data, array $ignore = array() ) {
-		$values = array();
+	protected static function collectValues( array $data, array $ignore = [] ) {
+		$values = [];
 
 		$erongi = array_flip( $ignore );
 		foreach ( $data as $key => $value ) {
@@ -762,7 +762,7 @@ abstract class EntityContent extends AbstractContent {
 	 * @return array A map from property names to property values.
 	 */
 	public function getEntityPageProperties() {
-		$properties = array();
+		$properties = [];
 
 		$status = $this->getEntityStatus();
 		if ( $status !== self::STATUS_NONE ) {

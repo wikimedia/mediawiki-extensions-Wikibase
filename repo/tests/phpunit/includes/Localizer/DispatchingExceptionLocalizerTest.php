@@ -40,7 +40,7 @@ class DispatchingExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 			'ParseException' => array(
 				new ParseException( 'Blarg!' ),
 				'wikibase-parse-error',
-				array(),
+				[],
 				$localizers
 			)
 		);

@@ -139,12 +139,12 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		return array(
 			'empty' => array(
 				'', '', '',
-				array(),
+				[],
 				':0|'
 			),
 			'no args' => array(
 				'foo', 'testing', 'en',
-				array(),
+				[],
 				'foo-testing:0|en'
 			),
 			'one arg' => array(
@@ -219,8 +219,8 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 		$p20q5Snak = new PropertyValueSnak( $p20, $q5Value );
 
 		return array(
-			'empty' => array( array(), '' ),
-			'no args' => array( array(), '' ),
+			'empty' => array( [], '' ),
+			'no args' => array( [], '' ),
 			'one arg' => array( array( 'one' ), 'one' ),
 			'two args' => array( array( 'one', 'two' ), 'one, two' ),
 			'args contains array' => array( array( array( 'one', 'two' ) ), 'one, two' ),
@@ -249,8 +249,8 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	public function provideToStringArgs() {
 		return array(
 			array(
-				array(),
-				array(),
+				[],
+				[],
 				'/* foobar:0| */'
 			),
 			array(
@@ -289,7 +289,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'/* foobar:1||one|two|three|&lt;&gt; */ This is a test…'
 			),
 			array(
-				array(),
+				[],
 				array( str_repeat( 'a', 2 * SUMMARY_MAX_LENGTH ) ),
 				'/* foobar:1| */ ' . str_repeat( 'a', SUMMARY_MAX_LENGTH - 19 ) . '...'
 			),

@@ -39,7 +39,7 @@ class PropertyViewTest extends EntityViewTest {
 	 *
 	 * @return Property
 	 */
-	protected function makeEntity( EntityId $id, array $statements = array() ) {
+	protected function makeEntity( EntityId $id, array $statements = [] ) {
 		$property = Property::newFromType( 'string' );
 		$property->setId( $id );
 
@@ -93,7 +93,7 @@ class PropertyViewTest extends EntityViewTest {
 		return array(
 			array(
 				$propertyView,
-				$this->newEntityForStatements( array() ),
+				$this->newEntityForStatements( [] ),
 				'/wb-property/'
 			)
 		);

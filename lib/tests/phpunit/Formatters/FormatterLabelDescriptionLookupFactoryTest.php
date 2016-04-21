@@ -122,11 +122,11 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit_Framework_Test
 			),
 			'bad LabelDescriptionLookup' => array(
 				new FormatterOptions( array(
-					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => new LanguageFallbackChain( array() )
+					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => new LanguageFallbackChain( [] )
 				) ),
 			),
 			'no options' => array(
-				new FormatterOptions( array() ),
+				new FormatterOptions( [] ),
 			),
 		);
 	}

@@ -117,7 +117,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				array $descriptions,
 				EntityId $ignoreEntityId = null
 			) {
-				$errors = array();
+				$errors = [];
 
 				$errors = array_merge( $errors, $this->detectDupes( $labels ) );
 				$errors = array_merge( $errors, $this->detectDupes( $descriptions ) );
@@ -137,7 +137,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return UniquenessViolation[]
 	 */
 	public function detectDupes( array $terms ) {
-		$errors = array();
+		$errors = [];
 
 		foreach ( $terms as $languageCode => $term ) {
 			if ( $term === 'DUPE' ) {
@@ -167,9 +167,9 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 * @return Fingerprint
 	 */
 	private function makeFingerprint(
-		array $labels = array(),
-		array $descriptions = array(),
-		array $aliases = array()
+		array $labels = [],
+		array $descriptions = [],
+		array $aliases = []
 	) {
 		$fingerprint = new Fingerprint();
 
@@ -303,7 +303,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 					'label' => "FOO\xE2\x80\x82",
 					'aliases' => "\xE2\x80\x82",
 				), true ),
-				array(),
+				[],
 				$this->makeFingerprint(
 					array( 'de' => 'foo', 'en' => 'FOO' )
 				),
@@ -313,7 +313,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$fooFingerprint,
 				'$id',
 				new FauxRequest( array( 'language' => 'de', 'label' => 'FOO' ), true ),
-				array(),
+				[],
 				$this->makeFingerprint(
 					array( 'de' => 'FOO' )
 				),
@@ -323,7 +323,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$fooFingerprint,
 				'$id',
 				new FauxRequest( array( 'language' => 'de', 'description' => 'Lorem Ipsum' ), true ),
-				array(),
+				[],
 				$this->makeFingerprint(
 					array( 'de' => 'foo' ),
 					array( 'de' => 'Lorem Ipsum' )
@@ -337,10 +337,10 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 					'language' => 'de',
 					'aliases' => "foo\xE2\x80\x82|bar",
 				), true ),
-				array(),
+				[],
 				$this->makeFingerprint(
 					array( 'de' => 'foo' ),
-					array(),
+					[],
 					array( 'de' => array( 'foo', 'bar' ) )
 				),
 			),

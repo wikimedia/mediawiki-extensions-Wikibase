@@ -153,7 +153,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testGetEntityInvalidIdType() {
 		$this->setExpectedException( ScribuntoException::class );
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
-		$luaWikibaseLibrary->getEntity( array() );
+		$luaWikibaseLibrary->getEntity( [] );
 	}
 
 	public function testGetEntityInvalidEntityId() {

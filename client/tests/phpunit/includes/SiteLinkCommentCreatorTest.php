@@ -38,7 +38,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getEditCommentProvider() {
-		$changes = array();
+		$changes = [];
 
 		$updates = $this->getUpdates();
 
@@ -263,7 +263,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getUpdates() {
-		$updates = array();
+		$updates = [];
 
 		$updates[] = array(
 			$this->getConnectDiff(),

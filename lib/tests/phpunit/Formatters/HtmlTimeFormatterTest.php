@@ -240,7 +240,7 @@ class HtmlTimeFormatterTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$testCases = array();
+		$testCases = [];
 
 		foreach ( $tests as $name => $data ) {
 			list( $timestamp, $precision, $calendarModel, $pattern ) = $data;

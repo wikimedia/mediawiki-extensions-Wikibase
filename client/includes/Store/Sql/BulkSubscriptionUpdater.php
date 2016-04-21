@@ -234,7 +234,7 @@ class BulkSubscriptionUpdater {
 	 * @return array[] rows
 	 */
 	private function makeSubscriptionRows( array $entities ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $entities as $id ) {
 			$rows[] = array(
@@ -258,7 +258,7 @@ class BulkSubscriptionUpdater {
 	 * @return string[] A list of entity ids strings.
 	 */
 	private function getEntityIdsFromRows( ResultWrapper $res, $entityIdField, array &$continuation = null ) {
-		$entities = array();
+		$entities = [];
 
 		foreach ( $res as $row ) {
 			$entities[] = $row->$entityIdField;

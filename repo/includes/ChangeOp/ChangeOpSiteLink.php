@@ -74,7 +74,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 */
 	private function validateBadges( array $badges ) {
 		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
-		$uniqueBadges = array();
+		$uniqueBadges = [];
 
 		foreach ( $badges as $id ) {
 			if ( !( $id instanceof ItemId ) ) {
@@ -98,8 +98,8 @@ class ChangeOpSiteLink extends ChangeOpBase {
 	 */
 	private function badgesAreEmptyAndUnchanged( SiteLinkList $siteLinks ) {
 		return ( !$siteLinks->hasLinkWithSiteId( $this->siteId )
-			|| $siteLinks->getBySiteId( $this->siteId )->getBadges() === array() )
-			&& $this->badges === array();
+			|| $siteLinks->getBySiteId( $this->siteId )->getBadges() === [] )
+			&& $this->badges === [];
 	}
 
 	/**
@@ -114,11 +114,11 @@ class ChangeOpSiteLink extends ChangeOpBase {
 		if ( $this->badges === null ) {
 			return $siteLinks->hasLinkWithSiteId( $this->siteId )
 				? $siteLinks->getBySiteId( $this->siteId )->getBadges()
-				: array();
+				: [];
 		}
 
 		if ( $this->badgesAreEmptyAndUnchanged( $siteLinks ) ) {
-			return array();
+			return [];
 		}
 
 		$action .= $this->pageName === null ? '-badges' : '-both';
@@ -145,7 +145,7 @@ class ChangeOpSiteLink extends ChangeOpBase {
 				//TODO: throw error, or ignore silently?
 			}
 		} else {
-			$commentArgs = array();
+			$commentArgs = [];
 
 			if ( $this->pageName === null ) {
 				if ( !$siteLinks->hasLinkWithSiteId( $this->siteId ) ) {

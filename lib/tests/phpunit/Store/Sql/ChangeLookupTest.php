@@ -26,7 +26,7 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 			->method( 'getId' )
 			->will( $this->returnValue( 42 ) );
 
-		$changeLookup = new ChangeLookup( array(), 'doesntmatterwiki' );
+		$changeLookup = new ChangeLookup( [], 'doesntmatterwiki' );
 
 		$this->assertSame( 42, $changeLookup->getRecordId( $change ) );
 	}

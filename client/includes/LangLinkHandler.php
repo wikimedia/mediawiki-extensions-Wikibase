@@ -97,7 +97,7 @@ class LangLinkHandler {
 	 * @return SiteLink[] A map of SiteLinks, indexed by global site id.
 	 */
 	public function getEntityLinks( Title $title ) {
-		$links = array();
+		$links = [];
 
 		$itemId = $this->siteLinkLookup->getItemIdForLink(
 			$this->siteId,
@@ -129,7 +129,7 @@ class LangLinkHandler {
 	 * @return SiteLink[] The SiteLinks in $links, indexed by site ID
 	 */
 	private function indexLinksBySiteId( array $links ) {
-		$indexed = array();
+		$indexed = [];
 
 		foreach ( $links as $link ) {
 			$key = $link->getSiteId();
@@ -145,7 +145,7 @@ class LangLinkHandler {
 	 * @return SiteLink[] The SiteLinks in $links, indexed by interwiki prefix.
 	 */
 	private function indexLinksByInterwiki( array $links ) {
-		$indexed = array();
+		$indexed = [];
 
 		foreach ( $links as $link ) {
 			$siteId = $link->getSiteId();
@@ -218,7 +218,7 @@ class LangLinkHandler {
 		foreach ( $nel as $code ) {
 			if ( $code === '*' ) {
 				// all are suppressed
-				return array();
+				return [];
 			}
 
 			$sites = $this->siteStore->getSites();
@@ -289,7 +289,7 @@ class LangLinkHandler {
 	 *           and the target pages on the respective wiki as the associated value.
 	 */
 	private function localLinksToArray( array $flatLinks ) {
-		$links = array();
+		$links = [];
 
 		foreach ( $flatLinks as $s ) {
 			$parts = explode( ':', $s, 2 );
@@ -331,7 +331,7 @@ class LangLinkHandler {
 	 */
 	public function getEffectiveRepoLinks( Title $title, ParserOutput $out ) {
 		if ( !$this->useRepoLinks( $title, $out ) ) {
-			return array();
+			return [];
 		}
 
 		$allowedGroups = array( $this->siteGroup );

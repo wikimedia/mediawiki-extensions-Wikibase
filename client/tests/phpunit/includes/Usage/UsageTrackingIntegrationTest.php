@@ -192,7 +192,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->deletePage( $this->articleTitle );
 
 		// Make sure tracking has been removed for all usages on the deleted page.
-		$this->assertTrackedUsages( array(), $this->articleTitle );
+		$this->assertTrackedUsages( [], $this->articleTitle );
 	}
 
 	/**

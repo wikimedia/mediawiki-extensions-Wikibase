@@ -54,7 +54,7 @@ class ChangeNotificationJob extends Job {
 		);
 
 		if ( $params === false ) {
-			$params = array();
+			$params = [];
 		}
 
 		$params['repo'] = $repo;

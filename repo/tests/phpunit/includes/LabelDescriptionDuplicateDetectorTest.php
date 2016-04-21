@@ -23,7 +23,7 @@ use Wikibase\TermIndexEntry;
 class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getWorld() {
-		$world = array();
+		$world = [];
 
 		$world[] = new TermIndexEntry( array(
 			'termType' => TermIndexEntry::TYPE_LABEL,
@@ -79,9 +79,9 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				$world,
 				Item::ENTITY_TYPE,
 				array( 'en' => 'item label' ),
-				array(),
+				[],
 				null,
-				array()
+				[]
 			),
 
 			'label/description conflict' => array(
@@ -99,7 +99,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				array( 'en' => 'item description' ),
 				new ItemId( 'Q42' ),
-				array()
+				[]
 			),
 		);
 	}
@@ -154,7 +154,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item alias' ),
 				null,
 				null,
-				array()
+				[]
 			),
 
 			'labels only: conflict' => array(
@@ -172,7 +172,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				null,
 				null,
-				array()
+				[]
 			),
 
 			'labels only: ignored conflict' => array(
@@ -181,7 +181,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				null,
 				new ItemId( 'Q42' ),
-				array()
+				[]
 			),
 
 			'labels+aliases: no conflict' => array(
@@ -190,23 +190,23 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'foo' ),
 				array( 'en' => array( 'bar' ) ),
 				null,
-				array()
+				[]
 			),
 
 			'labels+aliases: empty' => array(
 				$world,
 				Item::ENTITY_TYPE,
-				array(),
-				array(),
+				[],
+				[],
 				null,
-				array()
+				[]
 			),
 
 			'labels+aliases: label conflict' => array(
 				$world,
 				Item::ENTITY_TYPE,
 				array( 'en' => 'item label' ),
-				array(),
+				[],
 				null,
 				array( $labelError )
 			),
@@ -214,7 +214,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'labels+aliases: alias conflict' => array(
 				$world,
 				Item::ENTITY_TYPE,
-				array(),
+				[],
 				array( 'en' => array( 'item alias' ) ),
 				new ItemId( 'Q55' ), // ignores Q55, but conflict is with Q42
 				array( $aliasError )
@@ -224,7 +224,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				$world,
 				Item::ENTITY_TYPE,
 				array( 'en' => 'item alias' ),
-				array(), // aliases must be enabled
+				[], // aliases must be enabled
 				null,
 				array( $aliasError )
 			),
@@ -232,7 +232,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			'labels+aliases: alias conflicts with label' => array(
 				$world,
 				Item::ENTITY_TYPE,
-				array(),
+				[],
 				array( 'en' => array( 'item label' ) ),
 				null,
 				array( $labelError )
@@ -244,7 +244,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 				array( 'en' => 'item label' ),
 				array( 'en' => array( 'item alias' ) ),
 				null,
-				array()
+				[]
 			),
 		);
 	}

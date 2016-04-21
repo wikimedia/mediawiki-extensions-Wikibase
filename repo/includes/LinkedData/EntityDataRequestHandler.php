@@ -415,7 +415,7 @@ class EntityDataRequestHandler {
 		} catch ( EntityRedirectLookupException $ex ) {
 			$prefixedId = $id->getSerialization();
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": failed to load incoming redirects of $prefixedId: $ex" );
-			return array();
+			return [];
 		}
 	}
 
@@ -452,7 +452,7 @@ class EntityDataRequestHandler {
 
 		if ( $flavor === 'dump' || $revision > 0 ) {
 			// In dump mode and when fetching a specific revision, don't include incoming redirects.
-			$incomingRedirects = array();
+			$incomingRedirects = [];
 		} else {
 			// Get the incoming redirects of the entity (if we followed a redirect, use the target id).
 			$incomingRedirects = $this->getIncomingRedirects( $entityRevision->getEntity()->getId() );

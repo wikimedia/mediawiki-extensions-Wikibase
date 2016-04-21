@@ -35,7 +35,7 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		$callback = $instance->getCallbackToIndexTags( 'tagName' );
 		$this->assertInternalType( 'callable', $callback );
 
-		$array = array();
+		$array = [];
 		$array = $callback( $array );
 		$this->assertSame( array( '_element' => 'tagName' ), $array );
 	}
@@ -48,7 +48,7 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		$callback = $instance->getCallbackToSetArrayType( 'default', $kvpKeyName );
 		$this->assertInternalType( 'callable', $callback );
 
-		$array = array();
+		$array = [];
 		$array = $callback( $array );
 		$this->assertSame( $expected, $array );
 	}
@@ -68,14 +68,14 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		$callback = $instance->getCallbackToRemoveKeys( $addAsArrayElement );
 		$this->assertInternalType( 'callable', $callback );
 
-		$array = array( 'sourceKey' => array() );
+		$array = array( 'sourceKey' => [] );
 		$array = $callback( $array );
 		$this->assertSame( array( $expected ), $array );
 	}
 
 	public function addAsArrayElementProvider() {
 		return array(
-			array( null, array() ),
+			array( null, [] ),
 			array( 'keyHolder', array( 'keyHolder' => 'sourceKey' ) ),
 		);
 	}
@@ -87,7 +87,7 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertInternalType( 'callable', $callback );
 
 		$array = array(
-			'P1' => array( array() ),
+			'P1' => array( [] ),
 		);
 		$array = $callback( $array );
 		$this->assertSame( array(

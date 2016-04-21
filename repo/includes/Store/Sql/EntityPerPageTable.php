@@ -130,7 +130,7 @@ class EntityPerPageTable implements EntityPerPage {
 		$dbw = wfGetDB( DB_MASTER );
 		$indexes = $this->getUniqueIndexes();
 
-		$conditions = array();
+		$conditions = [];
 
 		foreach ( $indexes as $indexFields ) {
 			$indexValues = array_intersect_key( $values, array_flip( $indexFields ) );
@@ -252,7 +252,7 @@ class EntityPerPageTable implements EntityPerPage {
 	}
 
 	protected function getEntityIdsFromRows( $rows ) {
-		$entities = array();
+		$entities = [];
 
 		foreach ( $rows as $row ) {
 			// FIXME: this only works for items and properties
@@ -304,7 +304,7 @@ class EntityPerPageTable implements EntityPerPage {
 	}
 
 	protected function getItemIdsFromRows( $rows ) {
-		$itemIds = array();
+		$itemIds = [];
 
 		foreach ( $rows as $row ) {
 			$itemIds[] = ItemId::newFromNumber( (int)$row->entity_id );
@@ -326,7 +326,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 */
 	public function listEntities( $entityType, $limit, EntityId $after = null, $redirects = self::NO_REDIRECTS ) {
 		if ( $entityType === null ) {
-			$where = array();
+			$where = [];
 			//NOTE: needs to be id/type, not type/id, according to the definition of the relevant
 			//      index in wikibase.sql: wb_entity_per_page (epp_entity_id, epp_entity_type);
 			$orderBy = array( 'epp_entity_id', 'epp_entity_type' );

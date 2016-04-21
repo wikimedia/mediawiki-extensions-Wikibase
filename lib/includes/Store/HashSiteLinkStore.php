@@ -18,12 +18,12 @@ class HashSiteLinkStore implements SiteLinkStore {
 	/**
 	 * @var SiteLink[] indexed by prefixed ItemId
 	 */
-	private $linksByItemId = array();
+	private $linksByItemId = [];
 
 	/**
 	 * @var ItemId[] indexed by SiteLink link text "siteid:title"
 	 */
-	private $itemIdsByLink = array();
+	private $itemIdsByLink = [];
 
 	/**
 	 * @see SiteLinkStore::getItemIdForLink
@@ -46,18 +46,18 @@ class HashSiteLinkStore implements SiteLinkStore {
 	/**
 	 * @see SiteLinkStore::getLinks
 	 *
-	 * @param int[] $numericIds Numeric (unprefixed) item ids, Defaults to array()
-	 * @param string[] $siteIds Defaults to array()
-	 * @param string[] $pageNames Defaults to array()
+	 * @param int[] $numericIds Numeric (unprefixed) item ids, Defaults to []
+	 * @param string[] $siteIds Defaults to []
+	 * @param string[] $pageNames Defaults to []
 	 *
 	 * @return array[]
 	 */
 	public function getLinks(
-		array $numericIds = array(),
-		array $siteIds = array(),
-		array $pageNames = array()
+		array $numericIds = [],
+		array $siteIds = [],
+		array $pageNames = []
 	) {
-		$links = array();
+		$links = [];
 
 		foreach ( $this->linksByItemId as $prefixedId => $siteLinks ) {
 			/** @var SiteLink $siteLink */
@@ -114,7 +114,7 @@ class HashSiteLinkStore implements SiteLinkStore {
 			return $this->linksByItemId[$prefixedId];
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -179,8 +179,8 @@ class HashSiteLinkStore implements SiteLinkStore {
 	 * @see SiteLinkStore::clear
 	 */
 	public function clear() {
-		$this->linksByItemId = array();
-		$this->itemIdsByLink = array();
+		$this->linksByItemId = [];
+		$this->itemIdsByLink = [];
 	}
 
 	private function indexByLink( ItemId $itemId, SiteLink $siteLink ) {

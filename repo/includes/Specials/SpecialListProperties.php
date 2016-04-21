@@ -233,7 +233,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$propertyInfo = array_slice( $this->getPropertyInfo(), $offset, $limit, true );
 
-		$propertyIds = array();
+		$propertyIds = [];
 
 		foreach ( $propertyInfo as $numericId => $info ) {
 			$propertyIds[] = PropertyId::newFromNumber( $numericId );

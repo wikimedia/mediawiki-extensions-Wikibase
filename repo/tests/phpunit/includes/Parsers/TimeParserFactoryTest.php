@@ -33,7 +33,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getLocalizedMonthNames' )
 			->will( $this->returnCallback( function( $languageCode ) {
-				$monthNames = array();
+				$monthNames = [];
 				for ( $i = 1; $i <= 12; $i++ ) {
 					$monthNames[$i] = $languageCode . 'Month' . $i;
 				}
@@ -43,7 +43,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		$monthNameProvider->expects( $this->any() )
 			->method( 'getMonthNumbers' )
 			->will( $this->returnCallback( function( $languageCode ) {
-				$numbers = array();
+				$numbers = [];
 				for ( $i = 1; $i <= 12; $i++ ) {
 					$numbers[$languageCode . 'Month' . $i] = $i;
 					$numbers[$languageCode . 'Month' . $i . 'Gen'] = $i;
@@ -216,7 +216,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 				array( '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'yue' ),
 		);
 
-		$argLists = array();
+		$argLists = [];
 
 		foreach ( $valid as $value => $expected ) {
 			$timestamp = $expected[0];
@@ -252,7 +252,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			array( false ),
 			array( null ),
 			array( 4.2 ),
-			array( array() ),
+			array( [] ),
 			array( 42 ),
 
 			// Strings that should not be recognozed as date time values
@@ -348,7 +348,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			),
 		);
 
-		$cases = array();
+		$cases = [];
 
 		foreach ( $valid as $value => $args ) {
 			$options = $args[0];

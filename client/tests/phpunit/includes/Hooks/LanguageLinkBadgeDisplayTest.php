@@ -88,8 +88,8 @@ class LanguageLinkBadgeDisplayTest extends PHPUnit_Framework_TestCase {
 		);
 
 		return array(
-			'empty' => array( array(), array() ),
-			'no badges' => array( array(), array( $link0 ) ),
+			'empty' => array( [], [] ),
+			'no badges' => array( [], array( $link0 ) ),
 			'some badges' => array(
 				array( 'dewiki' => $badge1, 'enwiki' => $badge2 ),
 				array( 'jawiki' => $link0, 'dewiki' => $link1, 'enwiki' => $link2 )

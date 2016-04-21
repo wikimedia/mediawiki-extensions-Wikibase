@@ -153,7 +153,7 @@ class GetEntities extends ApiBase {
 	 * @return EntityId[]
 	 */
 	private function getEntityIdsFromIdParam( array $params ) {
-		$ids = array();
+		$ids = [];
 		if ( isset( $params['ids'] ) ) {
 			foreach ( $params['ids'] as $id ) {
 				try {
@@ -172,7 +172,7 @@ class GetEntities extends ApiBase {
 	 * @return EntityId[]
 	 */
 	private function getItemIdsFromSiteTitleParams( array $params ) {
-		$ids = array();
+		$ids = [];
 		if ( !empty( $params['sites'] ) && !empty( $params['titles'] ) ) {
 			$itemByTitleHelper = $this->getItemByTitleHelper();
 			list( $ids, $missingItems ) = $itemByTitleHelper->getItemIds( $params['sites'], $params['titles'], $params['normalize'] );
@@ -226,7 +226,7 @@ class GetEntities extends ApiBase {
 	 * @return EntityRevision[]
 	 */
 	private function getEntityRevisionsFromEntityIds( array $entityIds, $resolveRedirects = false ) {
-		$revisionArray = array();
+		$revisionArray = [];
 
 		$this->entityPrefetcher->prefetch( $entityIds );
 
@@ -271,7 +271,7 @@ class GetEntities extends ApiBase {
 	private function handleEntity(
 		$sourceEntityId,
 		EntityRevision $entityRevision = null,
-		array $params = array()
+		array $params = []
 	) {
 		if ( $entityRevision === null ) {
 			$this->resultBuilder->addMissingEntity( $sourceEntityId, array( 'id' => $sourceEntityId ) );
@@ -296,8 +296,8 @@ class GetEntities extends ApiBase {
 	 *     1 => LanguageFallbackChain[] Keys are requested lang codes
 	 */
 	private function getLanguageCodesAndFallback( array $params ) {
-		$languageCodes = ( is_array( $params['languages'] ) ? $params['languages'] : array() );
-		$fallbackChains = array();
+		$languageCodes = ( is_array( $params['languages'] ) ? $params['languages'] : [] );
+		$fallbackChains = [];
 
 		if ( $params['languagefallback'] ) {
 			$fallbackMode = LanguageFallbackChainFactory::FALLBACK_ALL;

@@ -32,9 +32,9 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 		$this->tablesUsed[] = 'wb_terms';
 		$this->tablesUsed[] = 'wb_entity_per_page';
 
-		$termRows = array();
-		$infoRows = array();
-		$eppRows = array();
+		$termRows = [];
+		$infoRows = [];
+		$eppRows = [];
 
 		$pageId = 1000;
 
@@ -93,7 +93,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	}
 
 	private function getTermRows( EntityId $id, $termType, $terms ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $terms as $lang => $langTerms ) {
 			$langTerms = (array)$langTerms;

@@ -102,7 +102,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 * @return string[]
 	 */
 	public function buildConditionals( DatabaseBase $dbr, Title $title = null, NamespaceChecker $checker = null ) {
-		$conds = array();
+		$conds = [];
 
 		if ( $checker === null ) {
 			$checker = $this->getNamespaceChecker();
@@ -148,7 +148,7 @@ class SpecialUnconnectedPages extends QueryPage {
 			),
 			'conds' => $conds,
 			// Sorting is determined getOrderFields(), which returns array( 'value' ) per default.
-			'options' => array(),
+			'options' => [],
 			'join_conds' => array(
 				// TODO Also get explicit_langlink_count from page_props once that is populated.
 				// Could even filter or sort by it via pp_sortkey.
@@ -170,7 +170,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 */
 	public function reallyDoQuery( $limit, $offset = false ) {
 		if ( is_int( $offset ) && $offset > self::MAX_OFFSET ) {
-			return new FakeResultWrapper( array() );
+			return new FakeResultWrapper( [] );
 		}
 
 		return parent::reallyDoQuery( $limit, $offset );
@@ -226,7 +226,7 @@ class SpecialUnconnectedPages extends QueryPage {
 		) ) . ' ' .
 		Html::submitButton(
 			$this->msg( 'wikibase-unconnectedpages-submit' )->text(),
-			array()
+			[]
 		) .
 		Html::closeElement( 'form' );
 	}

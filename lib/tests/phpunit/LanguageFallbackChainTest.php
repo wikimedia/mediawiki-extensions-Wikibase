@@ -191,8 +191,8 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			array( 'sr', LanguageFallbackChainFactory::FALLBACK_SELF, array(
 				':' => 'qux',
 			), null ),
-			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, array(), null ),
-			array( 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, array(), null ),
+			array( 'en', LanguageFallbackChainFactory::FALLBACK_ALL, [], null ),
+			array( 'ar', LanguageFallbackChainFactory::FALLBACK_SELF, [], null ),
 
 			array( 'de', LanguageFallbackChainFactory::FALLBACK_SELF, $entityInfoBuilderArray, array(
 				'value' => 'Example',
@@ -203,7 +203,7 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 
 	public function provideFetchLanguageCodes() {
 		return array(
-			'empty' => array( array() ),
+			'empty' => array( [] ),
 			'de-ch' => array( array( 'de-ch', 'de', 'en' ) ),
 			'zh' => array( array( 'zh-hans', 'zh-hant', 'zh-cn', 'zh-tw', 'zh-hk', 'zh-sg', 'zh-mo', 'zh-my', 'en' ) ),
 		);
@@ -213,7 +213,7 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 	 * @dataProvider provideFetchLanguageCodes
 	 */
 	public function testGetFetchLanguageCodes( array $languages ) {
-		$languagesWithConversion = array();
+		$languagesWithConversion = [];
 
 		foreach ( $languages as $language ) {
 			$languagesWithConversion[] = LanguageWithConversion::factory( $language );

@@ -37,7 +37,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	 * @return Snak[]
 	 */
 	protected function snakProvider() {
-		$snaks = array();
+		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( 42 );
 		$snaks[] = new PropertySomeValueSnak( 9001 );
@@ -50,7 +50,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	 * @return Statement[]
 	 */
 	protected function statementProvider() {
-		$statements = array();
+		$statements = [];
 
 		$mainSnak = new PropertyNoValueSnak( 42 );
 		$statement = new Statement( $mainSnak );

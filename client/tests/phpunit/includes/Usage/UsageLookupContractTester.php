@@ -68,7 +68,7 @@ class UsageLookupContractTester {
 		$expectedUsageStrings = $this->getUsageStrings( $usages );
 		Assert::assertEquals( $expectedUsageStrings, $actualUsageStrings );
 
-		$this->putUsages( 23, array() );
+		$this->putUsages( 23, [] );
 	}
 
 	public function testGetPagesUsing() {
@@ -123,7 +123,7 @@ class UsageLookupContractTester {
 			'Pages using "title" or "sitelinks" on Q3 or Q4'
 		);
 
-		$this->putUsages( 23, array() );
+		$this->putUsages( 23, [] );
 	}
 
 	/**

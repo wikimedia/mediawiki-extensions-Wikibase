@@ -144,8 +144,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseClient = new WikibaseClient(
 			$settings,
 			Language::factory( 'en' ),
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
 			$this->getSiteStore()
 		);
 
@@ -165,8 +165,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$client = new WikibaseClient(
 			$settings,
 			Language::factory( 'en' ),
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
 			$siteStore
 		);
 
@@ -200,8 +200,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$client = new WikibaseClient(
 			$settings,
 			Language::factory( 'en' ),
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
 			$siteStore
 		);
 
@@ -352,8 +352,8 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		return new WikibaseClient(
 			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
 			Language::factory( 'en' ),
-			new DataTypeDefinitions( array() ),
-			new EntityTypeDefinitions( array() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
 			new HashSiteStore()
 		);
 	}

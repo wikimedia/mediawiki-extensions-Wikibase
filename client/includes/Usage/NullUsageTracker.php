@@ -43,7 +43,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsage[]
 	 */
 	public function pruneUsages( $pageId ) {
-		return array();
+		return [];
 	}
 
 	/**
@@ -54,7 +54,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsage[]
 	 */
 	public function getUsagesForPage( $pageId ) {
-		return array();
+		return [];
 	}
 
 	/**
@@ -65,7 +65,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityId[]
 	 */
 	public function getUnusedEntities( array $entityIds ) {
-		return array();
+		return [];
 	}
 
 	/**
@@ -76,7 +76,7 @@ class NullUsageTracker implements UsageTracker, UsageLookup {
 	 *
 	 * @return Traversable Always empty.
 	 */
-	public function getPagesUsing( array $entities, array $aspects = array() ) {
+	public function getPagesUsing( array $entities, array $aspects = [] ) {
 		return new ArrayIterator();
 	}
 

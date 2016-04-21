@@ -43,7 +43,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 		$args['update'] = array( new ChangeOpLabel( 'en', 'myNew', $validatorFactory ), 'myNew' );
 		$args['set to null'] = array( new ChangeOpLabel( 'en', null, $validatorFactory ), '' );
 
@@ -73,7 +73,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 		$args['valid label'] = array( new ChangeOpLabel( 'fr', 'valid', $validatorFactory ), true );
 		$args['invalid label'] = array( new ChangeOpLabel( 'fr', 'INVALID', $validatorFactory ), false );
 		$args['duplicate label'] = array( new ChangeOpLabel( 'fr', 'DUPE', $validatorFactory ), false );
@@ -117,7 +117,7 @@ class ChangeOpLabelTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 
 		$entity = $this->provideNewEntity();
 		$entity->getFingerprint()->setLabel( 'de', 'Test' );

@@ -19,10 +19,10 @@ return call_user_func( function() {
 	global $wgLanguageCode;
 
 	$defaults = array(
-		'namespaces' => array(), // by default, include all namespaces; deprecated as of 0.4
-		'excludeNamespaces' => array(),
+		'namespaces' => [], // by default, include all namespaces; deprecated as of 0.4
+		'excludeNamespaces' => [],
 		'sort' => 'code',
-		'sortPrepend' => array(),
+		'sortPrepend' => [],
 		'alwaysSort' => false,
 		// @todo would be great to just get this from the sites stuff
 		// but we will need to make sure the caching works good enough
@@ -41,7 +41,7 @@ return call_user_func( function() {
 		'otherProjectsLinksBeta' => false,
 		// List of additional CSS class names for site links that have badges,
 		// e.g. array( 'Q101' => 'badge-goodarticle' )
-		'badgeClassNames' => array(),
+		'badgeClassNames' => [],
 		// Allow accessing data from other items in the parser functions and via Lua
 		'allowArbitraryDataAccess' => true,
 		// Maximum number of full entities that can be accessed on a page. This does
@@ -86,7 +86,7 @@ return call_user_func( function() {
 		 * WARNING: Disabling a data type after it is in use is dangerous
 		 * and might break items.
 		 */
-		'disabledDataTypes' => array(),
+		'disabledDataTypes' => [],
 
 		// The type of object cache to use. Use CACHE_XXX constants.
 		// This is both a repo and client setting, and should be set to the same value in

@@ -30,7 +30,7 @@ use Wikibase\Repo\Store\SQL\EntityPerPageTable;
  */
 class EntityPerPageTableTest extends \MediaWikiTestCase {
 
-	public function __construct( $name = null, $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->tablesUsed[] = 'wb_entity_per_page';
@@ -66,7 +66,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	 *
 	 * @return EntityPerPageTable
 	 */
-	private function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
+	private function newEntityPerPageTable( array $entities = [], array $redirects = [] ) {
 		$idParser = new BasicEntityIdParser();
 
 		$table = new EntityPerPageTable( $idParser );
@@ -124,13 +124,13 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 
 		return array(
 			'empty' => array(
-				array(),
-				array(),
+				[],
+				[],
 				null,
 				100,
 				null,
 				EntityPerPage::NO_REDIRECTS,
-				array()
+				[]
 			),
 			'some entities' => array(
 				array( $item, $property ),
@@ -193,7 +193,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 				100,
 				null,
 				EntityPerPage::NO_REDIRECTS,
-				array()
+				[]
 			),
 		);
 	}

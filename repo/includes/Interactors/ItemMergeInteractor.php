@@ -159,7 +159,7 @@ class ItemMergeInteractor {
 	public function mergeItems(
 		ItemId $fromId,
 		ItemId $toId,
-		array $ignoreConflicts = array(),
+		array $ignoreConflicts = [],
 		$summary = null,
 		$bot = false
 	) {

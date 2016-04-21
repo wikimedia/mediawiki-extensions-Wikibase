@@ -48,7 +48,7 @@ class TermSqlIndexTest extends TermIndexTest {
 	}
 
 	public function termProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$argLists[] = array( 'en', 'FoO', 'fOo', true );
 		$argLists[] = array( 'ru', 'Берлин', 'берлин', true );
@@ -138,7 +138,7 @@ class TermSqlIndexTest extends TermIndexTest {
 			'no options' => array(
 				$fingerprint,
 				array( $labelFooEn ),
-				array(),
+				[],
 				array( $labelFooEn ),
 			),
 			'LIMIT options' => array(
@@ -281,8 +281,8 @@ class TermSqlIndexTest extends TermIndexTest {
 
 		return array(
 			array( $expectedTerms, $item ),
-			array( array(), new Item() ),
-			array( array(), $this->getMock( EntityDocument::class ) )
+			array( [], new Item() ),
+			array( [], $this->getMock( EntityDocument::class ) )
 		);
 	}
 

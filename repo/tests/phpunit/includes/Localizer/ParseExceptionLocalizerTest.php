@@ -20,7 +20,7 @@ class ParseExceptionLocalizerTest extends \PHPUnit_Framework_TestCase {
 
 	public function provideGetExceptionMessage() {
 		return array(
-			'ParseException' => array( new ParseException( 'Blarg!' ), 'wikibase-parse-error', array() ),
+			'ParseException' => array( new ParseException( 'Blarg!' ), 'wikibase-parse-error', [] ),
 		);
 	}
 

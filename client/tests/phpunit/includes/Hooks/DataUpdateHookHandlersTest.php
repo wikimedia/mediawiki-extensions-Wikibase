@@ -249,7 +249,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 			),
 
 			'no usage' => array(
-				array(),
+				[],
 			),
 		);
 	}

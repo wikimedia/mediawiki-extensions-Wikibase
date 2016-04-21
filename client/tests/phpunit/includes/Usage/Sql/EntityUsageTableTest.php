@@ -31,7 +31,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	}
 
 	private function makeUsages( $n ) {
-		$usages = array();
+		$usages = [];
 
 		for ( $i = 1; $i <= $n; $i++ ) {
 			$key = "Q$i";
@@ -52,7 +52,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	 * @return array[]
 	 */
 	private function getUsageRows( $pageId, array $usages ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $usages as $key => $usage ) {
 			$row = array(

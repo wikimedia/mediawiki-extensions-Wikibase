@@ -173,8 +173,8 @@ class EntityDataFormatProvider {
 			return;
 		}
 
-		$this->mimeTypes = array();
-		$this->fileExtensions = array();
+		$this->mimeTypes = [];
+		$this->fileExtensions = [];
 
 		$api = $this->newApiMain( "dummy" );
 		$formatNames = $api->getModuleManager()->getNames( 'format' );

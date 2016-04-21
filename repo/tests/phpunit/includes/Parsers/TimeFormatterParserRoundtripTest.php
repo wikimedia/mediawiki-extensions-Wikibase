@@ -68,7 +68,7 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 
 	public function timeValueProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
-		$cases = array();
+		$cases = [];
 
 		foreach ( $this->isoTimestampProvider() as $case ) {
 			$cases[] = array(
@@ -157,7 +157,7 @@ class TimeFormatterParserRoundtripTest extends PHPUnit_Framework_TestCase {
 
 	public function precisionDayProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';
-		$cases = array();
+		$cases = [];
 
 		$tests = array(
 			// Positive dates

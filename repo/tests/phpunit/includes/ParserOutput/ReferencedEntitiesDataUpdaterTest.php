@@ -111,7 +111,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		SiteLinkList $siteLinks = null,
 		array $expected
 	) {
-		$actual = array();
+		$actual = [];
 
 		$parserOutput = $this->getMockBuilder( ParserOutput::class )
 			->disableOriginalConstructor()
@@ -153,8 +153,7 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 		$siteLinks->addNewSiteLink( 'siteId', 'pageName', array( new ItemId( 'Q1' ) ) );
 
 		return array(
-			array( new StatementList(), null, array(
-			) ),
+			array( new StatementList(), null, [] ),
 			array( $set1, null, array(
 				'P1',
 				'Q1',

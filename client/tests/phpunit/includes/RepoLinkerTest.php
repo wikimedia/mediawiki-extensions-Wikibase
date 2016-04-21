@@ -154,7 +154,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 		$settings = $this->getRepoSettings();
 
 		return array(
-			array( $settings[0], array() )
+			array( $settings[0], [] )
 		);
 	}
 
@@ -176,7 +176,7 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				$settings[1],
 				'//example.com/wiki/Special:Log/delete',
 				'delete',
-				array()
+				[]
 			),
 			array(
 				'<a class="plainlinks" tabindex="1" href="http://www.example.com/w/index.php'
@@ -209,13 +209,13 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				'<a class="plainlinks wb-entity-link" href="//example.com/wiki/Q730">Q730</a>',
 				$settings[1],
 				new ItemId( 'Q730' ),
-				array()
+				[]
 			),
 			array(
 				'<a class="plainlinks wb-entity-link" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
-				array()
+				[]
 			),
 			array(
 				'<a class="plainlinks wb-entity-link kittens" href="http://www.example.com/wiki/Item:Q730">Q730</a>',

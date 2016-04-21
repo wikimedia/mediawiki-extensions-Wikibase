@@ -41,7 +41,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -57,7 +57,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$validReference = new Reference( $snaks );
 		$validReferenceHash = $validReference->getHash();
 
-		$args = array();
+		$args = [];
 		$args[] = array( 123, $validReference, $validReferenceHash );
 		$args[] = array( '', $validReference, $validReferenceHash );
 		$args[] = array( $validClaimGuid, $validReference, 123 );
@@ -77,7 +77,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpAddProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItemWithClaim( $snak );
 		$statements = $item->getStatements()->toArray();
@@ -108,7 +108,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpAddProviderWithIndex() {
 		$snak = new PropertyNoValueSnak( 1 );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItemWithClaim( $snak );
 		$statements = $item->getStatements()->toArray();
@@ -159,7 +159,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function changeOpSetProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
+		$args = [];
 
 		$item = $this->newItemWithClaim( $snak );
 		$statements = $item->getStatements()->toArray();
@@ -252,7 +252,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 		$refHash = $oldReference->getHash();
 		$badRefHash = sha1( 'baosdfhasdfj' );
 
-		$cases = array();
+		$cases = [];
 		$cases['malformed claim guid'] = array( $item, 'NotAGuid', $goodReference, '' );
 		$cases['unknown claim guid'] = array( $item, $badGuid, $goodReference, $refHash );
 		$cases['unknown reference hash'] = array( $item, $claimGuid, $goodReference, $badRefHash );
@@ -300,7 +300,7 @@ class ChangeOpReferenceTest extends \PHPUnit_Framework_TestCase {
 
 		$refHash = $oldReference->getHash();
 
-		$cases = array();
+		$cases = [];
 		$cases['invalid snak value'] = array( $item, $claimGuid, $badReference, '' );
 		$cases['invalid snak value type'] = array( $item, $claimGuid, $brokenReference, $refHash );
 

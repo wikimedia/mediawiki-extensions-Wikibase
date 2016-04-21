@@ -55,7 +55,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		}
 
 		if ( !$instance->hasField( 'info' ) ) {
-			$instance->setField( 'info', array() );
+			$instance->setField( 'info', [] );
 		}
 
 		// Note: the change type determines how the client will
@@ -227,7 +227,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				$preparedAttr
 			),
 
-			//'composite change' => array(),
+			//'composite change' => [],
 		);
 	}
 
@@ -264,7 +264,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $actual, 'attributes' );
 	}
 
-	private function makeItemChangeFromMetaData( $action, Diff $diff, array $fields = array(), array $metadata = array() ) {
+	private function makeItemChangeFromMetaData( $action, Diff $diff, array $fields = [], array $metadata = [] ) {
 		$fields = array_merge( array(
 			'id' => '13',
 			'time' => '20150202030303',
@@ -305,8 +305,8 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$expectedComment,
 		$action,
 		Diff $diff,
-		array $fields = array(),
-		array $metadata = array()
+		array $fields = [],
+		array $metadata = []
 	) {
 		//@todo: also check pre-generated HTML when I5439a76c is merged
 
@@ -341,7 +341,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		//   page disconnected by deletion
 
 		$linksEmpty = array(
-			'links' => array()
+			'links' => []
 		);
 
 		$linksDewikiDummy = array(
@@ -361,7 +361,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'/* set-de-label:1| */ bla bla',
 				'change',
 				$emptyDiff,
-				array(),
+				[],
 				array(
 					'comment' => '/* set-de-label:1| */ bla bla',
 				)
@@ -370,7 +370,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-change: dewiki:Dummy, dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksDewikiBummy ),
-				array(),
+				[],
 				array(
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				)
@@ -379,7 +379,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-add: dewiki:Bummy)',
 				'change',
 				$this->makeItemDiff( $linksEmpty, $linksDewikiBummy ),
-				array(),
+				[],
 				array(
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				)
@@ -388,7 +388,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				'(wikibase-comment-sitelink-remove: dewiki:Dummy)',
 				'change',
 				$this->makeItemDiff( $linksDewikiDummy, $linksEmpty ),
-				array(),
+				[],
 				array(
 					'comment' => '/* IGNORE-KITTENS:1| */ SILLY KITTENS',
 				)
@@ -400,20 +400,20 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 				array(
 					'info' => array( 'changes' => array(
 						array(
-							'fields' => array(),
+							'fields' => [],
 							'metadata' => array(
 								'comment' => '/* set-de-description:1| */ Fuh',
 							),
 						),
 						array(
-							'fields' => array(),
+							'fields' => [],
 							'metadata' => array(
 								'comment' => '/* set-en-description:1| */ Foo',
 							),
 						),
 					) )
 				),
-				array()
+				[]
 			),
 		);
 	}
@@ -422,7 +422,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$change = $this->makeItemChangeFromMetaData(
 			'change',
 			new ItemDiff(),
-			array(),
+			[],
 			array(
 				'comment' => ''  // repo sent no comment
 			)

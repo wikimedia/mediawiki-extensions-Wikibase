@@ -81,7 +81,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	}
 
 	public function invalidRequestProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		//0
 		$params = array(

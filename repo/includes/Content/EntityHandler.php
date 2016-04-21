@@ -622,7 +622,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		$entityId = $content->getEntityId();
 
@@ -663,7 +663,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		$entityId = $content->getEntityId();
 

@@ -38,7 +38,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 	}
 
 	public function itemProvider() {
-		$items = array();
+		$items = [];
 
 		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'Beer' );

@@ -144,7 +144,7 @@ class DiffView extends ContextSource {
 		if ( $oldValue !== null ) {
 			$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 			$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-				Html::rawElement( 'div', array(), $this->getDeletedLine( $oldValue, $path ) ) );
+				Html::rawElement( 'div', [], $this->getDeletedLine( $oldValue, $path ) ) );
 		}
 		if ( $newValue !== null ) {
 			if ( $oldValue === null ) {
@@ -152,7 +152,7 @@ class DiffView extends ContextSource {
 			}
 			$html .= Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 			$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-				Html::rawElement( 'div', array(), $this->getAddedLine( $newValue, $path ) ) );
+				Html::rawElement( 'div', [], $this->getAddedLine( $newValue, $path ) ) );
 		}
 		$html .= Html::closeElement( 'tr' );
 

@@ -165,7 +165,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						array(
 							'site' => 'dewiki',
 							'title' => 'Page',
-							'badges' => array()
+							'badges' => []
 						)
 					)
 				)
@@ -198,12 +198,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 						array(
 							'site' => 'dewiki',
 							'title' => 'BAA',
-							'badges' => array()
+							'badges' => []
 						),
 						array(
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => array()
+							'badges' => []
 						)
 					)
 				)
@@ -220,7 +220,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						array(
 							'site' => 'svwiki',
 							'title' => 'FOO',
-							'badges' => array()
+							'badges' => []
 						)
 					)
 				)
@@ -306,7 +306,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			),
 			'remove the claim' => array(
 				'p' => array( 'data' => '{"claims":[{"id":"%lastClaimId%","remove":""}]}' ),
-				'e' => array( 'claims' => array() )
+				'e' => array( 'claims' => [] )
 			),
 			'add multiple claims' => array(
 				'p' => array( 'data' => '{"claims":['
@@ -337,11 +337,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'remove all stuff' => array(
 				'p' => array( 'clear' => '', 'data' => '{}' ),
 				'e' => array(
-					'labels' => array(),
-					'descriptions' => array(),
-					'aliases' => array(),
-					'sitelinks' => array(),
-					'claims' => array()
+					'labels' => [],
+					'descriptions' => [],
+					'aliases' => [],
+					'sitelinks' => [],
+					'claims' => []
 				)
 			),
 			'add lots of data again' => array(
@@ -363,11 +363,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'remove all stuff in another way' => array(
 				'p' => array( 'clear' => true, 'data' => '{}' ),
 				'e' => array(
-					'labels' => array(),
-					'descriptions' => array(),
-					'aliases' => array(),
-					'sitelinks' => array(),
-					'claims' => array()
+					'labels' => [],
+					'descriptions' => [],
+					'aliases' => [],
+					'sitelinks' => [],
+					'claims' => []
 				)
 			),
 		);

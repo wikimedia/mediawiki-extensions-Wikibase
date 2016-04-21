@@ -164,7 +164,7 @@ class SpecialPagesWithBadges extends QueryPage {
 			$badgeItemIds
 		);
 
-		$options = array();
+		$options = [];
 
 		foreach ( $this->badgeIds as $badgeId ) {
 			$label = $labelLookup->getLabel( new ItemId( $badgeId ) );
@@ -197,7 +197,7 @@ class SpecialPagesWithBadges extends QueryPage {
 			'conds' => array(
 				'pp_propname' => 'wikibase-badge-' . $this->badgeId->getSerialization()
 			),
-			'options' => array(), // sorting is determined getOrderFields(), which returns array( 'value' ) per default.
+			'options' => [], // sorting is determined getOrderFields(), which returns array( 'value' ) per default.
 			'join_conds' => array(
 				'page_props' => array( 'JOIN', array( 'page_id = pp_page' ) )
 			)

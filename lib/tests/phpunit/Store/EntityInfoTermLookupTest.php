@@ -116,9 +116,9 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 				array( 'de', 'fr' )
 			),
 			array(
-				array(),
+				[],
 				new ItemId( 'Q117' ),
-				array()
+				[]
 			)
 		);
 	}
@@ -162,7 +162,7 @@ class EntityInfoTermLookupTest extends \MediaWikiTestCase {
 				'labels' => array(
 					'de' => array( 'language' => 'de', 'value' => 'Berlin' ),
 				),
-				'descriptions' => array()
+				'descriptions' => []
 			),
 		);
 

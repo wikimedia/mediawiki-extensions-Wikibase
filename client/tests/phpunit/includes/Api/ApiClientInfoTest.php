@@ -84,7 +84,7 @@ class ApiClientInfoTest extends \MediaWikiTestCase {
 
 		return array(
 			array(
-				array(),
+				[],
 				$this->getApiRequestParams( '' )
 			),
 			array(

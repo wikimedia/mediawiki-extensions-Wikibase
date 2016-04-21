@@ -333,7 +333,7 @@ class ChangeOpTestMockProvider {
 		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
 			// simulated conflicts always conflict with P666, so if these are
 			// ignored as self-conflicts, we don't need to check any labels.
-			$labels = array();
+			$labels = [];
 		}
 
 		foreach ( $labels as $lang => $text ) {
@@ -388,7 +388,7 @@ class ChangeOpTestMockProvider {
 		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
 			// simulated conflicts always conflict with P666, so if these are
 			// ignored as self-conflicts, we don't need to check any labels.
-			$labels = array();
+			$labels = [];
 		}
 
 		foreach ( $labels as $lang => $text ) {
@@ -473,7 +473,7 @@ class ChangeOpTestMockProvider {
 	 * @return array
 	 */
 	public function getSiteLinkConflictsForItem( Item $item ) {
-		$conflicts = array();
+		$conflicts = [];
 
 		foreach ( $item->getSiteLinkList()->toArray() as $link ) {
 			$page = $link->getPageName();
@@ -539,7 +539,7 @@ class ChangeOpTestMockProvider {
 				return new LabelDescriptionUniquenessValidator( $this->getMockLabelDescriptionDuplicateDetector() );
 
 			default:
-				return new CompositeFingerprintValidator( array() );
+				return new CompositeFingerprintValidator( [] );
 		}
 	}
 

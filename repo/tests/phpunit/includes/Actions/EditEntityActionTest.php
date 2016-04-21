@@ -40,7 +40,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->setMwGlobals( 'wgUser', $user );
 
 		// Remove handlers for the "OutputPageParserOutput" hook
-		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'OutputPageParserOutput' => array() ) );
+		$this->mergeMwGlobalArrayValue( 'wgHooks', array( 'OutputPageParserOutput' => [] ) );
 	}
 
 	public function testActionForPage() {
@@ -91,7 +91,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //0: edit, no parameters
 				'edit', // action
 				'Berlin', // handle
-				array(), // params
+				[], // params
 				false, // post
 				null, // user
 				'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show an item
@@ -100,7 +100,7 @@ class EditEntityActionTest extends ActionTestCase {
 			array( //1: submit, no parameters
 				'submit', // action
 				'Berlin', // handle
-				array(), // params
+				[], // params
 				false, // post
 				null, // user
 				'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show an item
@@ -814,7 +814,7 @@ class EditEntityActionTest extends ActionTestCase {
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {
-			$actual = array();
+			$actual = [];
 
 			foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
 				$actual[$siteLink->getSiteId()] = $siteLink->getPageName();

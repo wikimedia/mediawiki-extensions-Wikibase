@@ -107,7 +107,7 @@ class ToolbarEditSectionGeneratorTest extends PHPUnit_Framework_TestCase {
 		$specialPageLinker = $this->getMock( SpecialPageLinker::class );
 		$specialPageLinker->expects( $this->any() )
 			->method( 'getLink' )
-			->will( $this->returnCallback( function( $specialPage, $params = array() ) {
+			->will( $this->returnCallback( function( $specialPage, $params = [] ) {
 				return 'Special:' . $specialPage . '/' . implode( '/', $params );
 			} ) );
 

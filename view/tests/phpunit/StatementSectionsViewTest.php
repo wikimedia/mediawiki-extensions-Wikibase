@@ -28,7 +28,7 @@ use Wikibase\View\Template\TemplateRegistry;
  */
 class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 
-	private function newInstance( array $statementLists = array() ) {
+	private function newInstance( array $statementLists = [] ) {
 		$templateFactory = new TemplateFactory( new TemplateRegistry( array(
 			'wb-section-heading' => '<HEADING id="$2" class="$3">$1</HEADING>',
 		) ) );
@@ -69,7 +69,7 @@ class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				array(),
+				[],
 				''
 			),
 			array(
@@ -104,8 +104,8 @@ class StatementSectionsViewTest extends PHPUnit_Framework_TestCase {
 
 	public function invalidArrayProvider() {
 		return array(
-			array( array( 'statements' => array() ) ),
-			array( array( array() ) ),
+			array( array( 'statements' => [] ) ),
+			array( array( [] ) ),
 			array( array( new StatementList() ) ),
 		);
 	}

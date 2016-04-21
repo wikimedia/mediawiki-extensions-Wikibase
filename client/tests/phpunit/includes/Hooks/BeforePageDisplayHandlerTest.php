@@ -43,15 +43,15 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	public function wikibaseForNamespaceProvider() {
 		return array(
 			array(
-				array(),
-				array(),
+				[],
+				[],
 				false, // wikibase not enabled for namespace
 				array( 'de:Rom' ), // local site link
 				null, // not connected item, no prefixed id
 				true // user logged in
 			),
 			array(
-				array(),
+				[],
 				array( 'wikibase.client.init' ),
 				true, // wikibase enabled for namespace
 				array( 'de:Rom' ),
@@ -82,7 +82,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	public function pageConnectedToWikibaseProvider() {
 		return array(
 			array(
-				array(),
+				[],
 				array( 'wikibase.client.init' ),
 				true, // wikibase enabled for namespace
 				array( 'de:Rom' ),
@@ -102,8 +102,8 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 		$handler = new BeforePageDisplayHandler( $namespaceChecker );
 		$handler->addModules( $output, 'view' );
 
-		$this->assertEquals( array(), $output->getModules(), 'js modules' );
-		$this->assertEquals( array(), $output->getModuleStyles(), 'css modules' );
+		$this->assertEquals( [], $output->getModules(), 'js modules' );
+		$this->assertEquals( [], $output->getModuleStyles(), 'css modules' );
 	}
 
 	/**
@@ -130,7 +130,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 				array( 'wikibase.client.linkitem.init' ),
 				array( 'wikibase.client.init' ),
 				true, // wikibase enabled for namespace
-				array(), // no lang links
+				[], // no lang links
 				null, // no prefixed id
 				true // user logged in
 			)
@@ -158,10 +158,10 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	public function handleUserLoggedOutWithEmptyLangLinksProvider() {
 		return array(
 			array(
-				array(),
+				[],
 				array( 'wikibase.client.init' ),
 				true, // wikibase enabled for namespace
-				array(), // no lang links
+				[], // no lang links
 				null, // no prefixed id
 				false // user logged out
 			)
@@ -189,10 +189,10 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	public function handleTitleNotExist_NoWikibaseLinksProvider() {
 		return array(
 			array(
-				array(),
-				array(),
+				[],
+				[],
 				true, // wikibase enabled for namespace
-				array(), // no lang links
+				[], // no lang links
 				null, // no prefixed id
 				true // user logged in
 			)
@@ -220,10 +220,10 @@ class BeforePageDisplayHandlerTest extends \PHPUnit_Framework_TestCase {
 	public function handleHistoryActionWithEmptyLangLinksProvider() {
 		return array(
 			array(
-				array(),
-				array(),
+				[],
+				[],
 				true, // wikibase enabled for namespace
-				array(), // no lang links
+				[], // no lang links
 				null, // no prefixed id
 				true // user logged in
 			)

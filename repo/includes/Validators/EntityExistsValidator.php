@@ -56,7 +56,7 @@ class EntityExistsValidator implements ValueValidator {
 
 		$actualType = $value->getEntityType();
 
-		$errors = array();
+		$errors = [];
 
 		if ( $this->entityType !== null && $actualType !== $this->entityType ) {
 			$errors[] = Error::newError(

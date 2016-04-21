@@ -111,8 +111,8 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	}
 
 	public function requestProvider() {
-		$cases = array();
-		$matchers = array();
+		$cases = [];
+		$matchers = [];
 
 		$matchers['site'] = array(
 			'tag' => 'div',
@@ -158,7 +158,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		$cases['enwiki/NotFound'] = array( 'enwiki/NotFound', null, $matchers );
 
 		// dewiki/Gefunden (mock returns Q123 for dewiki)
-		$matchers = array();
+		$matchers = [];
 
 		$cases['dewiki/Gefunden'] = array( 'dewiki/Gefunden', 'Q123', $matchers );
 

@@ -49,7 +49,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$rcFactory->expects( $this->any() )
 			->method( 'prepareChangeAttributes' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		return $rcFactory;
 	}
@@ -195,7 +195,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$rcFactory->expects( $this->any() )
 			->method( 'newRecentChange' )
-			->with( $change, $title, array() )
+			->with( $change, $title, [] )
 			->will( $this->returnValue( $rc ) );
 
 		$rcDupeDetector = $this->getRCDupeDetectorMock();

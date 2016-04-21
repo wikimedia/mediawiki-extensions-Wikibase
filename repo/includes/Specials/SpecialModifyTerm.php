@@ -78,7 +78,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		parent::prepareArguments( $subPage );
 
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 
 		// Language
 		$this->languageCode = $request->getVal( 'language', isset( $parts[1] ) ? $parts[1] : '' );
@@ -203,7 +203,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		if ( $entity !== null && $this->languageCode !== null && $languageName !== '' ) {
 			return Html::rawElement(
 				'p',
-				array(),
+				[],
 				// Messages: wikibase-setlabel-introfull, wikibase-setdescription-introfull,
 				// wikibase-setaliases-introfull
 				$this->msg(
@@ -219,7 +219,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		} else {
 			return Html::rawElement(
 				'p',
-				array(),
+				[],
 				// Messages: wikibase-setlabel-intro, wikibase-setdescription-intro,
 				// wikibase-setaliases-intro
 				$this->msg( 'wikibase-' . strtolower( $this->getName() ) . '-intro' )->parse()

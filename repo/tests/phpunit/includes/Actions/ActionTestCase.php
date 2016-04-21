@@ -80,10 +80,10 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @var EntityDocument[]|EntityRedirect[] List of EntityDocument or EntityRedirect objects,
 	 *      with logical handles as keys.
 	 */
-	private static $testItems = array();
+	private static $testItems = [];
 
 	private function makeTestItemData() {
-		$items = array();
+		$items = [];
 
 		$item = new Item();
 		$item->setLabel( 'de', 'Berlin' );
@@ -143,7 +143,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		global $wgUser,$wgLang;
 
 		if ( $params == null ) {
-			$params = array();
+			$params = [];
 		}
 
 		if ( $session == null ) {

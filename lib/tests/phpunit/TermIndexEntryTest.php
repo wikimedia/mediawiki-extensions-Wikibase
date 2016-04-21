@@ -84,7 +84,7 @@ class TermIndexEntryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function provideCompare() {
-		$tests = array();
+		$tests = [];
 
 		$tests[] = array( // #0
 			new TermIndexEntry(),

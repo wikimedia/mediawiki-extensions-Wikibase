@@ -149,7 +149,7 @@ class RemoveReferences extends ApiBase {
 	 * @return ChangeOp[]
 	 */
 	private function getChangeOps( $guid, array $referenceHashes ) {
-		$changeOps = array();
+		$changeOps = [];
 
 		foreach ( $referenceHashes as $referenceHash ) {
 			$changeOps[] = $this->statementChangeOpFactory->newRemoveReferenceOp( $guid, $referenceHash );
@@ -166,7 +166,7 @@ class RemoveReferences extends ApiBase {
 	 */
 	private function getReferenceHashesFromParams( array $params, Statement $statement ) {
 		$references = $statement->getReferences();
-		$hashes = array();
+		$hashes = [];
 
 		foreach ( array_unique( $params['references'] ) as $referenceHash ) {
 			if ( !$references->hasReferenceHash( $referenceHash ) ) {

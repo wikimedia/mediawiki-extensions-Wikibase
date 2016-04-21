@@ -20,32 +20,32 @@ class NullUsageTrackerTest extends PHPUnit_Framework_TestCase {
 
 	public function testAddUsedEntities() {
 		$instance = new NullUsageTracker();
-		$this->assertNull( $instance->addUsedEntities( 0, array() ) );
+		$this->assertNull( $instance->addUsedEntities( 0, [] ) );
 	}
 
 	public function testReplaceUsedEntities() {
 		$instance = new NullUsageTracker();
-		$this->assertNull( $instance->replaceUsedEntities( 0, array() ) );
+		$this->assertNull( $instance->replaceUsedEntities( 0, [] ) );
 	}
 
 	public function testPruneUsages() {
 		$instance = new NullUsageTracker();
-		$this->assertSame( array(), $instance->pruneUsages( 0 ) );
+		$this->assertSame( [], $instance->pruneUsages( 0 ) );
 	}
 
 	public function testGetUsagesForPage() {
 		$instance = new NullUsageTracker();
-		$this->assertSame( array(), $instance->getUsagesForPage( 0 ) );
+		$this->assertSame( [], $instance->getUsagesForPage( 0 ) );
 	}
 
 	public function testGetUnusedEntities() {
 		$instance = new NullUsageTracker();
-		$this->assertSame( array(), $instance->getUnusedEntities( array() ) );
+		$this->assertSame( [], $instance->getUnusedEntities( [] ) );
 	}
 
 	public function testGetPagesUsing() {
 		$instance = new NullUsageTracker();
-		$this->assertEquals( new ArrayIterator(), $instance->getPagesUsing( array() ) );
+		$this->assertEquals( new ArrayIterator(), $instance->getPagesUsing( [] ) );
 	}
 
 }

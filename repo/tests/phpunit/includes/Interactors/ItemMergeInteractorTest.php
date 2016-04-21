@@ -57,8 +57,8 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		$this->mockRepository = $this->testHelper->getMockRepository();
 
 		$this->testHelper->putEntities( array(
-			'Q1' => array(),
-			'Q2' => array(),
+			'Q1' => [],
+			'Q2' => [],
 			'P1' => array( 'datatype' => 'string' ),
 			'P2' => array( 'datatype' => 'string' ),
 		) );
@@ -187,17 +187,17 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		// NOTE: Any empty arrays and any fields called 'id' or 'hash' get stripped
 		//       from the result before comparing it to the expected value.
 
-		$testCases = array();
+		$testCases = [];
 		$testCases['labelMerge'] = array(
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
 		);
 		$testCases['identicalLabelMerge'] = array(
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
-			array(),
+			[],
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
 		);
 		$testCases['ignoreConflictLabelMerge'] = array(
@@ -206,7 +206,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 				'de' => array( 'language' => 'de', 'value' => 'berlin' )
 			) ),
 			array( 'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'bar' ) ) ),
-			array(),
+			[],
 			array(
 				'labels' => array(
 				'en' => array( 'language' => 'en', 'value' => 'bar' ),
@@ -218,14 +218,14 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		);
 		$testCases['descriptionMerge'] = array(
 			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
 		);
 		$testCases['identicalDescriptionMerge'] = array(
 			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
 			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
-			array(),
+			[],
 			array( 'descriptions' => array( 'de' => array( 'language' => 'de', 'value' => 'foo' ) ) ),
 		);
 		$testCases['ignoreConflictDescriptionMerge'] = array(
@@ -243,14 +243,14 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		);
 		$testCases['aliasesMerge'] = array(
 			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Dickes B" ) ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Dickes B" ) ) ) ),
 		);
 		$testCases['aliasesMerge2'] = array(
 			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Ali1" ) ) ) ),
 			array( 'aliases' => array( "nl" => array( array( "language" => "nl", "value" => "Ali2" ) ) ) ),
-			array(),
+			[],
 			array( 'aliases' => array( 'nl' => array(
 				array( 'language' => 'nl', 'value' => 'Ali2' ),
 				array( 'language' => 'nl', 'value' => 'Ali1' )
@@ -258,8 +258,8 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		);
 		$testCases['sitelinksMerge'] = array(
 			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
 		);
 		$testCases['IgnoreConflictSitelinksMerge'] = array(
@@ -280,8 +280,8 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal',
 				'id' => 'deadbeefdeadbeefdeadbeefdeadbeef' ) ) ) ),
-			array(),
-			array(),
+			[],
+			[],
 			array( 'claims' => array(
 				'P1' => array(
 					array( 'mainsnak' => array(
@@ -299,7 +299,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 				'snaktype' => 'value', 'property' => 'P1', 'datavalue' => array( 'value' => 'imastring2', 'type' => 'string' ) ),
 				'type' => 'statement', 'rank' => 'normal',
 				'id' => 'deadb33fdeadb33fdeadb33fdeadb33f' ) ) ) ),
-			array(),
+			[],
 			array( 'claims' => array(
 				'P1' => array(
 					array(
@@ -329,7 +329,7 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		array $toData,
 		array $expectedFrom,
 		array $expectedTo,
-		array $ignoreConflicts = array()
+		array $ignoreConflicts = []
 	) {
 		$interactor = $this->newInteractor();
 
@@ -390,11 +390,11 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 
 	public function mergeFailureProvider() {
 		return array(
-			'missing from' => array( new ItemId( 'Q100' ), new ItemId( 'Q2' ), array(), 'no-such-entity' ),
-			'missing to' => array( new ItemId( 'Q1' ), new ItemId( 'Q200' ), array(), 'no-such-entity' ),
-			'merge into self' => array( new ItemId( 'Q1' ), new ItemId( 'Q1' ), array(), 'cant-merge-self' ),
-			'from redirect' => array( new ItemId( 'Q11' ), new ItemId( 'Q2' ), array(), 'cant-load-entity-content' ),
-			'to redirect' => array( new ItemId( 'Q1' ), new ItemId( 'Q12' ), array(), 'cant-load-entity-content' ),
+			'missing from' => array( new ItemId( 'Q100' ), new ItemId( 'Q2' ), [], 'no-such-entity' ),
+			'missing to' => array( new ItemId( 'Q1' ), new ItemId( 'Q200' ), [], 'no-such-entity' ),
+			'merge into self' => array( new ItemId( 'Q1' ), new ItemId( 'Q1' ), [], 'cant-merge-self' ),
+			'from redirect' => array( new ItemId( 'Q11' ), new ItemId( 'Q2' ), [], 'cant-load-entity-content' ),
+			'to redirect' => array( new ItemId( 'Q1' ), new ItemId( 'Q12' ), [], 'cant-load-entity-content' ),
 		);
 	}
 
@@ -422,12 +422,12 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 			array(
 				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo' ) ) ),
 				array( 'descriptions' => array( 'en' => array( 'language' => 'en', 'value' => 'foo2' ) ) ),
-				array()
+				[]
 			),
 			array(
 				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo' ) ) ),
 				array( 'sitelinks' => array( 'dewiki' => array( 'site' => 'dewiki', 'title' => 'Foo2' ) ) ),
-				array()
+				[]
 			),
 		);
 	}

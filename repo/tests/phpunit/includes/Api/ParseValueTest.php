@@ -106,7 +106,7 @@ class ParseValueTest extends \PHPUnit_Framework_TestCase {
 
 		$data = $result->getResultData( null, array(
 			'BC' => array( 'nobool' ),
-			'Types' => array(),
+			'Types' => [],
 			'Strip' => 'all',
 		) );
 		return $data;

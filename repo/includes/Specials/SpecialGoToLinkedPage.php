@@ -102,7 +102,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	 */
 	protected function getArguments( $subPage ) {
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = ( $subPage === '' ) ? [] : explode( '/', $subPage, 2 );
 		$site = trim( $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' ) );
 		$itemString = trim( $request->getVal( 'itemid', isset( $parts[1] ) ? $parts[1] : 0 ) );
 
@@ -194,7 +194,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			return $this->siteLinkLookup->getLinks( array( $redirectTarget->getNumericId() ), array( $site ) );
 		}
 
-		return array();
+		return [];
 	}
 
 	/**

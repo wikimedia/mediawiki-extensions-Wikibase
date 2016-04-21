@@ -66,7 +66,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	/**
 	 * @var string[]
 	 */
-	private $aliases = array();
+	private $aliases = [];
 
 	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
@@ -106,7 +106,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->checkBlocked();
 		$this->checkReadOnly();
 
-		$this->parts = ( $subPage === '' ? array() : explode( '/', $subPage ) );
+		$this->parts = ( $subPage === '' ? [] : explode( '/', $subPage ) );
 		$this->prepareArguments();
 
 		$out = $this->getOutput();
@@ -182,7 +182,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->description = $this->stringNormalizer->trimToNFC( $description );
 
 		$aliases = $this->getRequest()->getVal( 'aliases' );
-		$explodedAliases = $aliases === null ? array() : explode( '|', $aliases );
+		$explodedAliases = $aliases === null ? [] : explode( '|', $aliases );
 		foreach ( $explodedAliases as $alias ) {
 			$alias = $this->stringNormalizer->trimToNFC( $alias );
 
@@ -207,7 +207,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	protected function hasSufficientArguments() {
 		return $this->label !== ''
 			|| $this->description !== ''
-			|| $this->aliases !== array();
+			|| $this->aliases !== [];
 	}
 
 	/**
@@ -249,7 +249,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 */
 	private function getLanguageOptions() {
 		$names = Language::fetchLanguageNames( null, 'all' );
-		$languageOptions = array();
+		$languageOptions = [];
 		foreach ( $this->languageCodes as $code ) {
 			$languageOptions[isset( $names[$code] ) ? $names[$code] : $code] = $code;
 		}
@@ -318,7 +318,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param string|null $legend initial value for the label input box
 	 * @param array[] $additionalFormElements initial value for the description input box
 	 */
-	private function createForm( $legend = null, array $additionalFormElements = array() ) {
+	private function createForm( $legend = null, array $additionalFormElements = [] ) {
 		$this->addCopyrightText();
 
 		HTMLForm::factory( 'ooui', $additionalFormElements, $this->getContext() )

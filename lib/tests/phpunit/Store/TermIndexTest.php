@@ -99,7 +99,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				),
 				null, // $termTypes
 				null, // $entityTypes
-				array(), // $options
+				[], // $options
 				array( // $expectedTermKeys
 					'Q11/label.nl:mittens',
 				)
@@ -139,8 +139,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				),
 				TermIndexEntry::TYPE_ALIAS, // $termTypes
 				null, // $entityTypes
-				array(), // $options
-				array(), // $expectedTermKeys
+				[], // $options
+				[], // $expectedTermKeys
 			),
 			'allow multiple term type' => array(
 				array( // $entities
@@ -153,7 +153,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				),
 				array( TermIndexEntry::TYPE_ALIAS, TermIndexEntry::TYPE_LABEL ), // $termTypes
 				null, // $entityTypes
-				array(), // $options
+				[], // $options
 				array( // $expectedTermKeys
 					'Q11/label.nl:mittens',
 				)
@@ -169,8 +169,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				),
 				null, // $termTypes
 				Property::ENTITY_TYPE, // $entityTypes
-				array(), // $options
-				array(), // $expectedTermKeys
+				[], // $options
+				[], // $expectedTermKeys
 			),
 			'allow multiple entity type' => array(
 				array( // $entities
@@ -183,7 +183,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				),
 				null, // $termTypes
 				array( Property::ENTITY_TYPE, Item::ENTITY_TYPE ), // $entityTypes
-				array(), // $options
+				[], // $options
 				array( // $expectedTermKeys
 					'Q11/label.nl:mittens',
 				)
@@ -495,8 +495,8 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$missingTerms = array_udiff( $expectedTerms, $actualTerms, 'Wikibase\TermIndexEntry::compare' );
 		$extraTerms = array_udiff( $actualTerms, $expectedTerms, 'Wikibase\TermIndexEntry::compare' );
 
-		$this->assertEquals( array(), $missingTerms, 'Missing terms' );
-		$this->assertEquals( array(), $extraTerms, 'Extra terms' );
+		$this->assertEquals( [], $missingTerms, 'Missing terms' );
+		$this->assertEquals( [], $extraTerms, 'Extra terms' );
 	}
 
 	private function getTermConflictEntities() {
@@ -535,34 +535,34 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				$entities,
 				Property::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
-				array(),
+				[],
 				array( 'P6' ),
 			),
 			'conflicting label with different case' => array(
 				$entities,
 				Property::ENTITY_TYPE,
 				array( 'de' => 'fOO' ),
-				array(),
+				[],
 				array( 'P6' ),
 			),
 			'conflict between label and alias' => array(
 				$entities,
 				Property::ENTITY_TYPE,
 				array( 'de' => 'AFoo' ),
-				array(),
+				[],
 				array( 'P6' ),
 			),
 			'conflict between alias and label' => array(
 				$entities,
 				Property::ENTITY_TYPE,
-				array(),
+				[],
 				array( 'de' => 'Foo' ),
 				array( 'P6' ),
 			),
 			'conflicting alias' => array(
 				$entities,
 				Property::ENTITY_TYPE,
-				array(),
+				[],
 				array( 'de' => 'AFoo' ),
 				array( 'P6' ),
 			),
@@ -570,14 +570,14 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				$entities,
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Nope' ),
-				array(),
-				array(),
+				[],
+				[],
 			),
 			'conflicts in multiple languages' => array(
 				$entities,
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo', 'en' => 'Foo' ),
-				array(),
+				[],
 				array( 'Q1', 'Q3', 'Q5' ),
 			),
 		);
@@ -615,15 +615,15 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 				$entities,
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
-				array(),
-				array(),
+				[],
+				[],
 			),
 			'by label, mismatching description' => array(
 				$entities,
 				Item::ENTITY_TYPE,
 				array( 'de' => 'Foo' ),
 				array( 'de' => 'XYZ' ),
-				array(),
+				[],
 			),
 			'by label and description' => array(
 				$entities,
@@ -708,17 +708,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$germanLabelTerms = $lookup->getTermsOfEntity( $item->getId(), array( 'label' ), array( 'de' ) );
 		$this->assertEquals( 1, count( $germanLabelTerms ), "expected 1 German label" );
 
-		$noTerms = $lookup->getTermsOfEntity( $item->getId(), array( 'label' ), array() );
+		$noTerms = $lookup->getTermsOfEntity( $item->getId(), array( 'label' ), [] );
 		$this->assertEmpty( $noTerms, "expected no labels" );
 
-		$noTerms = $lookup->getTermsOfEntity( $item->getId(), array(), array( 'de' ) );
+		$noTerms = $lookup->getTermsOfEntity( $item->getId(), [], array( 'de' ) );
 		$this->assertEmpty( $noTerms, "expected no labels" );
 
 		$terms = $lookup->getTermsOfEntity( $item->getId() );
 		$this->assertEquals( 7, count( $terms ), "expected 7 terms for item" );
 
 		// make list of strings for easy checking
-		$term_keys = array();
+		$term_keys = [];
 		foreach ( $terms as $t ) {
 			$term_keys[] = $t->getType() . '/' .  $t->getLanguage() . '/' . $t->getText();
 		}
@@ -772,17 +772,17 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 		$germanLabelTerms = $lookup->getTermsOfEntities( $itemIds, array( TermIndexEntry::TYPE_LABEL ), array( 'de' ) );
 		$this->assertEquals( 2, count( $germanLabelTerms ), "expected 1 German label" );
 
-		$noTerms = $lookup->getTermsOfEntities( $itemIds, array( TermIndexEntry::TYPE_LABEL ), array() );
+		$noTerms = $lookup->getTermsOfEntities( $itemIds, array( TermIndexEntry::TYPE_LABEL ), [] );
 		$this->assertEmpty( $noTerms, "expected no labels" );
 
-		$noTerms = $lookup->getTermsOfEntities( $itemIds, array(), array( 'de' ) );
+		$noTerms = $lookup->getTermsOfEntities( $itemIds, [], array( 'de' ) );
 		$this->assertEmpty( $noTerms, "expected no labels" );
 
 		$terms = $lookup->getTermsOfEntities( $itemIds );
 		$this->assertEquals( 14, count( $terms ), "expected 7 terms for item" );
 
 		// make list of strings for easy checking
-		$term_keys = array();
+		$term_keys = [];
 		foreach ( $terms as $t ) {
 			$term_keys[] = $t->getType() . '/' .  $t->getLanguage() . '/' . $t->getText();
 		}
@@ -813,7 +813,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	}
 
 	private function termExists( TermIndex $termIndex, $text, $termType = null, $language = null, $entityType = null ) {
-		$termFields = array();
+		$termFields = [];
 		$termFields['termText'] = $text;
 
 		if ( $language !== null ) {

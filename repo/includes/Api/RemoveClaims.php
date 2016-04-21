@@ -164,7 +164,7 @@ class RemoveClaims extends ApiBase {
 	 * @param string[] $requiredGuids
 	 */
 	private function assertStatementListContainsGuids( StatementList $statements, array $requiredGuids ) {
-		$existingGuids = array();
+		$existingGuids = [];
 
 		/** @var Statement $statement */
 		foreach ( $statements as $statement ) {
@@ -190,7 +190,7 @@ class RemoveClaims extends ApiBase {
 	 * @return ChangeOp[]
 	 */
 	private function getChangeOps( array $params ) {
-		$changeOps = array();
+		$changeOps = [];
 
 		foreach ( $params['claim'] as $guid ) {
 			$changeOps[] = $this->statementChangeOpFactory->newRemoveStatementOp( $guid );

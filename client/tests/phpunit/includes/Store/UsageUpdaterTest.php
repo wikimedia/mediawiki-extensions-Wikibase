@@ -28,8 +28,8 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			'empty' => array(
-				array(),
-				array(),
+				[],
+				[],
 			),
 
 			'add usages' => array(
@@ -84,9 +84,9 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			'empty' => array(
-				array(),
-				array(),
-				array(),
+				[],
+				[],
+				[],
 			),
 
 			'pruned usages' => array(
@@ -259,7 +259,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 * @return EntityId[]
 	 */
 	private function getEntityIds( array $entityUsages ) {
-		$entityIds = array();
+		$entityIds = [];
 
 		foreach ( $entityUsages as $usage ) {
 			$id = $usage->getEntityId();

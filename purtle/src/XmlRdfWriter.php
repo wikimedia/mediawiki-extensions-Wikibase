@@ -49,7 +49,7 @@ class XmlRdfWriter extends RdfWriterBase {
 		$this->expandQName( $base, $local );
 	}
 
-	private function tag( $ns, $name, $attributes = array(), $content = null ) {
+	private function tag( $ns, $name, $attributes = [], $content = null ) {
 		$sep = $ns === '' ? '' : ':';
 		$this->write( '<' . $ns . $sep . $name );
 
@@ -93,7 +93,7 @@ class XmlRdfWriter extends RdfWriterBase {
 	 */
 	private function getTargetAttributes( $name, $base, $local ) {
 		if ( $base === null && $local === null ) {
-			return array();
+			return [];
 		}
 
 		// handle blank
@@ -174,7 +174,7 @@ class XmlRdfWriter extends RdfWriterBase {
 	}
 
 	protected function writeText( $text, $language = null ) {
-		$attr = empty( $language ) ? array() : array( 'xml:lang' => $language );
+		$attr = empty( $language ) ? [] : array( 'xml:lang' => $language );
 
 		$this->write( "\t\t" );
 		$this->tag(

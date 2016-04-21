@@ -58,7 +58,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 * @return Snak
 	 */
 	private function getTestSnak( $type, $data ) {
-		static $snaks = array();
+		static $snaks = [];
 
 		if ( !isset( $snaks[$type] ) ) {
 			$prop = Property::newFromType( 'string' );

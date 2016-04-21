@@ -109,7 +109,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					array( $q1, $p2 ),
 					array( $q3, $p4 ),
-					array(),
+					[],
 				)
 			),
 			'limit and filter' => array(
@@ -119,7 +119,7 @@ class EntityIdReaderTest extends \PHPUnit_Framework_TestCase {
 				array(
 					array( $q1 ),
 					array( $q3 ),
-					array(),
+					[],
 				)
 			)
 		);

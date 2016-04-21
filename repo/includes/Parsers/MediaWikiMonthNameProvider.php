@@ -23,7 +23,7 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 */
 	public function getLocalizedMonthNames( $languageCode ) {
 		$language = Language::factory( $languageCode );
-		$monthNames = array();
+		$monthNames = [];
 
 		for ( $i = 1; $i <= 12; $i++ ) {
 			$monthNames[$i] = $language->getMonthName( $i );
@@ -45,7 +45,7 @@ class MediaWikiMonthNameProvider implements MonthNameProvider {
 	 */
 	public function getMonthNumbers( $languageCode ) {
 		$language = Language::factory( $languageCode );
-		$numbers = array();
+		$numbers = [];
 
 		for ( $i = 1; $i <= 12; $i++ ) {
 			$numbers[$language->getMonthName( $i )] = $i;

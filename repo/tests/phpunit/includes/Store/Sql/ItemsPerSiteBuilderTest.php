@@ -109,7 +109,7 @@ class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
 
 		$mock->expects( $this->at( 2 ) )
 			->method( 'fetchIds' )
-			->will( $this->returnValue( array() ) )
+			->will( $this->returnValue( [] ) )
 			->with( $this->equalTo( self::BATCH_SIZE ) );
 
 		return $mock;

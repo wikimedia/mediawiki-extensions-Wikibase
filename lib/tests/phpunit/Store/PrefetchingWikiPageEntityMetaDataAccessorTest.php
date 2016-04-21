@@ -142,7 +142,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$lookup->expects( $this->exactly( 3 ) )
 			->method( 'loadRevisionInformation' )
 			->will( $this->returnCallback( function( array $entityIds, $mode ) {
-				$ret = array();
+				$ret = [];
 
 				/**
 				 * @var EntityId $entityId

@@ -40,7 +40,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 	 * @return Result
 	 */
 	public function validateEntity( EntityDocument $entity ) {
-		$errors = array();
+		$errors = [];
 
 		if ( $entity instanceof Item ) {
 			// TODO: do not use global state

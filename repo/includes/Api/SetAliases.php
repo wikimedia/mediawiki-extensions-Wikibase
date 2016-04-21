@@ -172,7 +172,7 @@ class SetAliases extends ModifyEntity {
 	 * @return ChangeOpAliases
 	 */
 	private function getChangeOps( array $params ) {
-		$changeOps = array();
+		$changeOps = [];
 		$language = $params['language'];
 
 		// Set the list of aliases to a user given one OR add/ remove certain entries

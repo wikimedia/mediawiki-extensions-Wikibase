@@ -136,7 +136,7 @@ class ChangesSubscriptionTableBuilder {
 	 *
 	 * @return int The number of subscriptions inserted.
 	 */
-	private function processSubscriptionBatch( &$continuation = array() ) {
+	private function processSubscriptionBatch( &$continuation = [] ) {
 		$db = $this->loadBalancer->getConnection( DB_MASTER );
 
 		$subscriptionsPerItemBatch = $this->getSubscriptionsPerItemBatch( $db, $continuation );
@@ -192,7 +192,7 @@ class ChangesSubscriptionTableBuilder {
 	 *
 	 * @return array[] An associative array mapping item IDs to lists of site IDs.
 	 */
-	private function getSubscriptionsPerItemBatch( DatabaseBase $db, &$continuation = array() ) {
+	private function getSubscriptionsPerItemBatch( DatabaseBase $db, &$continuation = [] ) {
 		if ( empty( $continuation ) ) {
 			$continuationCondition = '1';
 		} else {
@@ -233,9 +233,9 @@ class ChangesSubscriptionTableBuilder {
 	 */
 	private function getSubscriptionsPerItemFromRows(
 		ResultWrapper $res,
-		&$continuation = array()
+		&$continuation = []
 	) {
-		$subscriptionsPerItem = array();
+		$subscriptionsPerItem = [];
 
 		$currentItemId = 0;
 		$itemId = null;
@@ -263,7 +263,7 @@ class ChangesSubscriptionTableBuilder {
 	 * @return array[] rows
 	 */
 	private function makeSubscriptionRows( $itemId, array $subscribers ) {
-		$rows = array();
+		$rows = [];
 
 		foreach ( $subscribers as $subscriber ) {
 			$rows[] = array(

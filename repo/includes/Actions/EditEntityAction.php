@@ -414,7 +414,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @return string
 	 */
 	private function getCancelLink() {
-		$cancelParams = array();
+		$cancelParams = [];
 
 		return Linker::linkKnown(
 			$this->getContext()->getTitle(),

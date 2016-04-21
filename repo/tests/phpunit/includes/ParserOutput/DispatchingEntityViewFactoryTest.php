@@ -34,14 +34,14 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testUnknownEntityType() {
 		$factory = new DispatchingEntityViewFactory(
-			array()
+			[]
 		);
 
 		$factory->newEntityView(
 			'unknown',
 			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
+			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class )
 		);
 	}
@@ -62,14 +62,14 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			'foo',
 			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
+			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class )
 		);
 	}
 
 	public function testNewEntityView() {
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
-		$languageFallbackChain = new LanguageFallbackChain( array() );
+		$languageFallbackChain = new LanguageFallbackChain( [] );
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$entityView = $this->getMockBuilder( EntityView::class )
 			->disableOriginalConstructor()

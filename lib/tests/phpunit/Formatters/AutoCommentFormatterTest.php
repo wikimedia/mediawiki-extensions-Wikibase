@@ -106,7 +106,7 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider provideWrapAutoComment
 	 */
 	public function testWrapAutoComment( $pre, $comment, $post, $expected ) {
-		$formatter = new AutoCommentFormatter( $this->language, array() );
+		$formatter = new AutoCommentFormatter( $this->language, [] );
 		$value = $formatter->wrapAutoComment( $pre, $comment, $post );
 		$this->assertEquals( $expected, $value );
 	}

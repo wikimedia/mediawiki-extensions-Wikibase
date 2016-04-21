@@ -47,7 +47,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	 * @param array $data
 	 * @param string $dataName
 	 */
-	public function __construct( $name = null, array $data = array(), $dataName = '' ) {
+	public function __construct( $name = null, array $data = [], $dataName = '' ) {
 		parent::__construct( $name, $data, $dataName );
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
@@ -56,7 +56,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	protected function makeChangeOpsMerge(
 		Item $fromItem,
 		Item $toItem,
-		array $ignoreConflicts = array(),
+		array $ignoreConflicts = [],
 		$siteLookup = null
 	) {
 		if ( $siteLookup === null ) {
@@ -118,7 +118,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$from = $this->newItemWithId( 'Q111' );
 		$to = $this->newItemWithId( 'Q222' );
 		return array(
-			array( $from, $to, array() ),
+			array( $from, $to, [] ),
 			array( $from, $to, array( 'sitelink' ) ),
 			array( $from, $to, array( 'statement' ) ),
 			array( $from, $to, array( 'description' ) ),
@@ -160,7 +160,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		Item $to,
 		Item $expectedFrom,
 		Item $expectedTo,
-		array $ignoreConflicts = array()
+		array $ignoreConflicts = []
 	) {
 		$from->setId( new ItemId( 'Q111' ) );
 		$to->setId( new ItemId( 'Q222' ) );
@@ -193,7 +193,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 	 * @return array 1=>from 2=>to 3=>expectedFrom 4=>expectedTo
 	 */
 	public function provideData() {
-		$testCases = array();
+		$testCases = [];
 
 		$itemWithEnLabel = new Item();
 		$itemWithEnLabel->getFingerprint()->setLabel( 'en', 'foo' );
@@ -427,7 +427,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			array(),
+			[],
 			$mockSiteStore
 		);
 
@@ -448,7 +448,7 @@ class ChangeOpsMergeTest extends MediaWikiTestCase {
 		$changeOps = $this->makeChangeOpsMerge(
 			$from,
 			$to,
-			array(),
+			[],
 			new HashSiteStore()
 		);
 

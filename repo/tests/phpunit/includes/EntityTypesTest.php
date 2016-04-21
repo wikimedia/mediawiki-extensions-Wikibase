@@ -54,7 +54,7 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 			$callback,
 			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
+			new LanguageFallbackChain( [] ),
 			$this->getMock( EditSectionGenerator::class )
 		);
 

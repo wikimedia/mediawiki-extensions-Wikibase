@@ -15,12 +15,12 @@ class MockEntityPerPage implements EntityPerPage {
 	/**
 	 * @var array
 	 */
-	private $pageIdToEntityId = array();
+	private $pageIdToEntityId = [];
 
 	/**
 	 * @var array
 	 */
-	private $redirects = array();
+	private $redirects = [];
 
 	/**
 	 * Adds a new link between an entity and a page
@@ -144,8 +144,8 @@ class MockEntityPerPage implements EntityPerPage {
 	 * @return boolean Success indicator
 	 */
 	public function clear() {
-		$this->pageIdToEntityId = array();
-		$this->redirects = array();
+		$this->pageIdToEntityId = [];
+		$this->redirects = [];
 	}
 
 	/**

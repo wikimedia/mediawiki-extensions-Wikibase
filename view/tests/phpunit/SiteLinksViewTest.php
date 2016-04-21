@@ -34,13 +34,13 @@ use Wikibase\View\Template\TemplateRegistry;
 class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 
 	public function testNoGroups() {
-		$html = $this->newInstance()->getHtml( array(), null, array() );
+		$html = $this->newInstance()->getHtml( [], null, [] );
 
 		$this->assertSame( '', $html );
 	}
 
 	public function testEmptyGroup() {
-		$html = $this->newInstance()->getHtml( array(), null, array( 'wikipedia' ) );
+		$html = $this->newInstance()->getHtml( [], null, array( 'wikipedia' ) );
 
 		$this->assertSame(
 			'<h2 id="sitelinks" class="wikibase-sitelinks">(wikibase-sitelinks)</h2>'

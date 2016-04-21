@@ -204,7 +204,7 @@ class EntityParserOutputGenerator {
 		if ( !is_array( $entityIds ) ) {
 			wfLogWarning( '$entityIds from ParserOutput "referenced-entities" extension data'
 				. ' expected to be an array' );
-			$entityIds = array();
+			$entityIds = [];
 		}
 
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
@@ -324,7 +324,7 @@ class EntityParserOutputGenerator {
 		$entityDataFormatProvider = $this->entityDataFormatProvider;
 		$subPagePrefix = $entityId->getSerialization() . '.';
 
-		$links = array();
+		$links = [];
 
 		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
 			$ext = $entityDataFormatProvider->getExtension( $format );

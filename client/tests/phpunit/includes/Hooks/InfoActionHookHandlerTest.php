@@ -36,7 +36,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 	public function handleProvider() {
 		$context = $this->getContext();
 
-		$cases = array();
+		$cases = [];
 
 		$cases[] = array(
 			array(
@@ -47,14 +47,14 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 					)
 				)
 			),
-			$context, array( 'header-basic' => array() ), true, new ItemId( 'Q4' ),
+			$context, array( 'header-basic' => [] ), true, new ItemId( 'Q4' ),
 			'item id link'
 		);
 
 		$cases[] = array(
-			array( 'header-basic' => array() ),
+			array( 'header-basic' => [] ),
 			$context,
-			array( 'header-basic' => array() ),
+			array( 'header-basic' => [] ),
 			false,
 			new ItemId( 'Q4' ),
 			'namespace does not have wikibase enabled'
@@ -69,7 +69,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 					)
 				)
 			),
-			$context, array( 'header-basic' => array() ), true, false,
+			$context, array( 'header-basic' => [] ), true, false,
 			'page is not connected to an item'
 		);
 

@@ -117,7 +117,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 	private function getStringListParam( $name ) {
 		$list = $this->getTextParam( $name );
 
-		return $list === '' ? array() : explode( '|', $list );
+		return $list === '' ? [] : explode( '|', $list );
 	}
 
 	private function getTextParam( $name ) {

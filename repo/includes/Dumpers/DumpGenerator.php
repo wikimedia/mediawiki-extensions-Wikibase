@@ -291,7 +291,7 @@ abstract class DumpGenerator {
 	 * @param int &$dumpCount The number of entities already dumped (will be updated).
 	 */
 	private function dumpEntities( array $entityIds, &$dumpCount ) {
-		$toLoad = array();
+		$toLoad = [];
 		foreach ( $entityIds as $entityId ) {
 			if ( $this->idMatchesFilters( $entityId ) ) {
 				$toLoad[] = $entityId;

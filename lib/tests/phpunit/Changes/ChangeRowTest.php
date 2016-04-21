@@ -142,7 +142,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 		$info = $change->unserializeInfo( 's:5:"value";' );
 		\MediaWiki\restoreWarnings();
 
-		$this->assertSame( array(), $info );
+		$this->assertSame( [], $info );
 	}
 
 	public function testSetsField() {

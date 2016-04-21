@@ -31,7 +31,7 @@ class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array( null ),
 			array( 1.0 ),
-			array( array() ),
+			array( [] ),
 		);
 	}
 
@@ -43,7 +43,7 @@ class DataFieldValidatorTest extends \PHPUnit_Framework_TestCase {
 			array( 'a', $validator, array( 'a' => 'foo', 'b' => '' ), null, null, "match assoc" ),
 			array( 1, $validator, array( 'x', '', 'foo' ), 'too-short', null, "mismatch indexed" ),
 			array( 1, $validator, array( 'x', 'foo', '' ), null, null, "match indexed" ),
-			array( 'a', $validator, array(), 'missing-field', null, "missing field" ),
+			array( 'a', $validator, [], 'missing-field', null, "missing field" ),
 			array( 'a', $validator, array( 'a' => null ), 'missing-field', null, "field is null" ),
 			array( 1, $validator, 'xyz', null, InvalidArgumentException::class, 'not an array' ),
 		);

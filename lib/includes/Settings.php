@@ -38,7 +38,7 @@ final class Settings extends SettingsArray {
 	 * The hook WikibaseDefaultSettings can be used to manipulate the defaults.
 	 */
 	private function initFromGlobals() {
-		$settings = array();
+		$settings = [];
 
 		//NOTE: Repo overrides client. This is important especially for
 		//      settings initialized by WikibaseLib.

@@ -76,7 +76,7 @@ class SnaksFinderTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array( $snaksNormal, $item, new PropertyId( 'P1337' ) ),
-			array( array(), $item, new PropertyId( 'P90001' ) ),
+			array( [], $item, new PropertyId( 'P90001' ) ),
 			array(
 				$snakDeprecated,
 				$item,

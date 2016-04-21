@@ -101,7 +101,7 @@ class ClientParserOutputDataUpdater {
 			$otherProjects = $otherProjectsSidebarGenerator->buildProjectLinkSidebar( $title );
 			$out->setExtensionData( 'wikibase-otherprojects-sidebar', $otherProjects );
 		} else {
-			$out->setExtensionData( 'wikibase-otherprojects-sidebar', array() );
+			$out->setExtensionData( 'wikibase-otherprojects-sidebar', [] );
 		}
 	}
 

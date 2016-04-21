@@ -101,7 +101,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$store = new SqlChangeStore( wfGetLB() );
 		$store->saveChange( $change );
 
-		$res = $db->select( 'wb_changes', '*', array(), __METHOD__ );
+		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
 
 		$this->assertEquals( 1, $res->numRows(), 'row count' );
 
@@ -152,7 +152,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$change->setField( 'time', '20121026200049' );
 		$store->saveChange( $change );
 
-		$res = $db->select( 'wb_changes', '*', array(), __METHOD__ );
+		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
 
 		$this->assertEquals( 1, $res->numRows(), 'row count' );
 

@@ -63,7 +63,7 @@ class EntityTypeDefinitions {
 	 * @return mixed
 	 */
 	private function getMapForDefinitionField( $field ) {
-		$fieldValues = array();
+		$fieldValues = [];
 
 		foreach ( $this->entityTypeDefinitions as $id => $def ) {
 			if ( isset( $def[$field] ) ) {

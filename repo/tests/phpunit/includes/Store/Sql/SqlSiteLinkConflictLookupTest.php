@@ -67,7 +67,7 @@ class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 		$siteLinkConflictLookup = new SqlSiteLinkConflictLookup();
 
 		$this->assertSame(
-			array(),
+			[],
 			$siteLinkConflictLookup->getConflictsForItem( $this->getItem( 'Cat' ) )
 		);
 	}

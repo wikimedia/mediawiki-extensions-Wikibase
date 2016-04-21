@@ -183,8 +183,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$result = $module->getResult();
 
 		$data = $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
 		) );
 		return $data;
@@ -251,7 +251,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	}
 
 	public function testModuleFlags() {
-		$module = $this->newApiModule( array() );
+		$module = $this->newApiModule( [] );
 
 		$this->assertTrue( $module->mustBePosted(), 'mustBePosted' );
 		$this->assertTrue( $module->isWriteMode(), 'isWriteMode' );

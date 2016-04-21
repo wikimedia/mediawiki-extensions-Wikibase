@@ -108,7 +108,7 @@ class ApiErrorReporter {
 	 * @throws UsageException
 	 * @throws LogicException
 	 */
-	public function dieStatus( Status $status, $errorCode, $httpRespCode = 0, $extradata = array() ) {
+	public function dieStatus( Status $status, $errorCode, $httpRespCode = 0, $extradata = [] ) {
 		if ( $status->isOK() ) {
 			throw new InvalidArgumentException( 'called dieStatus() with a non-fatal Status!' );
 		}
@@ -144,7 +144,7 @@ class ApiErrorReporter {
 	 * @throws UsageException
 	 * @throws LogicException
 	 */
-	public function dieException( Exception $ex, $errorCode, $httpRespCode = 0, $extradata = array() ) {
+	public function dieException( Exception $ex, $errorCode, $httpRespCode = 0, $extradata = [] ) {
 		if ( $this->localizer->hasExceptionMessage( $ex ) ) {
 			$message = $this->localizer->getExceptionMessage( $ex );
 			$key = $message->getKey();
@@ -203,7 +203,7 @@ class ApiErrorReporter {
 	 * @throws UsageException
 	 * @throws LogicException
 	 */
-	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = array() ) {
+	private function dieMessageObject( Message $message, $errorCode, $httpRespCode = 0, $extradata = [] ) {
 		$description = $message->inLanguage( 'en' )->useDatabase( false )->plain();
 
 		$this->addMessageToResult( $message, $extradata );
@@ -232,7 +232,7 @@ class ApiErrorReporter {
 	 * @throws UsageException
 	 * @throws LogicException
 	 */
-	public function dieError( $description, $errorCode, $httpRespCode = 0, $extradata = array() ) {
+	public function dieError( $description, $errorCode, $httpRespCode = 0, $extradata = [] ) {
 		//TODO: try a reverse lookup in ApiBase::$messageMap
 		$messageKey = "wikibase-api-$errorCode";
 		$message = wfMessage( $messageKey );
@@ -284,7 +284,7 @@ class ApiErrorReporter {
 	 */
 	public function addMessageToResult( Message $message, &$data ) {
 		if ( $data === null ) {
-			$data = array();
+			$data = [];
 		}
 
 		if ( !is_array( $data ) ) {
@@ -293,7 +293,7 @@ class ApiErrorReporter {
 
 		$messageData = $this->convertMessageToResult( $message );
 
-		$messageList = isset( $data['messages'] ) ? $data['messages'] : array();
+		$messageList = isset( $data['messages'] ) ? $data['messages'] : [];
 		ApiResult::setIndexedTagName( $messageList, 'message' );
 
 		$messageList[] = $messageData;
@@ -347,7 +347,7 @@ class ApiErrorReporter {
 	 *         was already present in the $messages parameter.
 	 */
 	private function convertMessagesToResult( array $messageSpecs ) {
-		$result = array();
+		$result = [];
 
 		foreach ( $messageSpecs as $message ) {
 			$type = null;
@@ -390,7 +390,7 @@ class ApiErrorReporter {
 	 *         was already present in the $messages parameter.
 	 */
 	private function convertToMessageList( array $messageSpecs ) {
-		$messages = array();
+		$messages = [];
 
 		foreach ( $messageSpecs as $message ) {
 			if ( !( $message instanceof Message ) ) {
@@ -418,7 +418,7 @@ class ApiErrorReporter {
 		$name = $message->getKey();
 		$params = $message->getParams();
 
-		$row = array();
+		$row = [];
 		ApiResult::setValue( $row, 'name', $name );
 
 		ApiResult::setValue( $row, 'parameters', $params );

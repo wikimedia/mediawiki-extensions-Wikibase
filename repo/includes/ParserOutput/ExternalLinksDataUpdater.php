@@ -30,7 +30,7 @@ class ExternalLinksDataUpdater implements StatementDataUpdater {
 	 * @var null[] Hash set of the URL strings found while processing statements. Only the array
 	 * keys are used for performance reasons, the values are meaningless.
 	 */
-	private $urls = array();
+	private $urls = [];
 
 	/**
 	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher

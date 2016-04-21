@@ -69,7 +69,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		return $titleFactory;
 	}
 
-	private function getAffectedPagesFinder( array $usage, array $expectedAspects = array() ) {
+	private function getAffectedPagesFinder( array $usage, array $expectedAspects = [] ) {
 		$usageLookup = $this->getMock( UsageLookup::class );
 
 		$usageLookup->expects( $this->any() )
@@ -90,7 +90,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 	public function getChangedAspectsProvider() {
 		$changeFactory = TestChanges::getEntityChangeFactory();
-		$cases = array();
+		$cases = [];
 
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
@@ -195,7 +195,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 * @dataProvider getChangedAspectsProvider
 	 */
 	public function testGetChangedAspects( array $expected, ItemChange $change ) {
-		$referencedPagesFinder = $this->getAffectedPagesFinder( array() );
+		$referencedPagesFinder = $this->getAffectedPagesFinder( [] );
 
 		$actual = $referencedPagesFinder->getChangedAspects( $change );
 
@@ -259,14 +259,14 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		// all matches any
 		// any matches all
 
-		$cases = array();
+		$cases = [];
 
 		$cases['create linked item Q1'] = array(
 			array(
 				new PageEntityUsages( 1, array( $q1SitelinkUsage ) ),
 			),
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
-			array(), // No usages recorded yet
+			[], // No usages recorded yet
 			$changeFactory->newFromUpdate(
 				ItemChange::ADD,
 				null,
@@ -308,7 +308,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				new PageEntityUsages( 2, array( $q1SitelinkUsage ) ),
 			),
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
-			array(),
+			[],
 			$changeFactory->newFromUpdate(
 				ItemChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
@@ -374,7 +374,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		);
 
 		$cases['other language label change on Q1 (not used on any page)'] = array(
-			array(),
+			[],
 			array( $labelUsageDe ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate(
@@ -506,7 +506,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 *
 	 * @return Item
 	 */
-	private function getItemWithSiteLinks( ItemId $id, array $links, array $badges = array() ) {
+	private function getItemWithSiteLinks( ItemId $id, array $links, array $badges = [] ) {
 		$item = new Item( $id );
 
 		foreach ( $links as $siteId => $page ) {
@@ -567,7 +567,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	 * @return PageEntityUsages[]
 	 */
 	private function getPageEntityUsageStrings( $usagesPerPage ) {
-		$strings = array();
+		$strings = [];
 
 		foreach ( $usagesPerPage as $pageUsages ) {
 			$strings[] = "$pageUsages";

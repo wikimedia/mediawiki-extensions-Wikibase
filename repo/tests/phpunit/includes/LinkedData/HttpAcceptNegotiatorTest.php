@@ -18,8 +18,8 @@ class HttpAcceptNegotiatorTest extends \PHPUnit_Framework_TestCase {
 	public function provideGetFirstSupportedValue() {
 		return array(
 			array( // #0: empty
-				array(), // supported
-				array(), // accepted
+				[], // supported
+				[], // accepted
 				null, // default
 				null,  // expected
 			),
@@ -75,8 +75,8 @@ class HttpAcceptNegotiatorTest extends \PHPUnit_Framework_TestCase {
 	public function provideGetBestSupportedKey() {
 		return array(
 			array( // #0: empty
-				array(), // supported
-				array(), // accepted
+				[], // supported
+				[], // accepted
 				null, // default
 				null,  // expected
 			),

@@ -31,7 +31,7 @@ class ChunkCache implements ChunkAccess {
 	 *
 	 * @var array
 	 */
-	private $entries = array();
+	private $entries = [];
 
 	/**
 	 * @var int
@@ -142,7 +142,7 @@ class ChunkCache implements ChunkAccess {
 	 * @return array the desired chunk of rows/objects
 	 */
 	public function loadChunk( $start, $size ) {
-		$result = array();
+		$result = [];
 		$remaining = $size;
 
 		while ( $remaining > 0 ) {

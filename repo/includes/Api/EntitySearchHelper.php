@@ -64,7 +64,7 @@ class EntitySearchHelper {
 	 * @return TermSearchResult[] Key: string Serialized EntityId
 	 */
 	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
-		$allSearchResults = array();
+		$allSearchResults = [];
 
 		// If $text is the ID of an existing item, include it in the result.
 		$entityId = $this->getExactMatchForEntityId( $text, $entityType );
@@ -140,7 +140,7 @@ class EntitySearchHelper {
 	 * @return Term[] array with keys 'label' and 'description'
 	 */
 	private function getDisplayTerms( EntityId $entityId ) {
-		$displayTerms = array();
+		$displayTerms = [];
 
 		$displayTerms['label'] = $this->labelDescriptionLookup->getLabel( $entityId );
 		$displayTerms['description'] = $this->labelDescriptionLookup->getDescription( $entityId );

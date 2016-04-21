@@ -53,11 +53,11 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 
 		if ( $localSite === null ) {
 			wfWarn( 'Site not found for ' . $this->localSiteId );
-			return array();
+			return [];
 		}
 
 		$currentGroupId = $localSite->getGroup();
-		$otherProjectsSiteIds = array();
+		$otherProjectsSiteIds = [];
 
 		$this->expandSpecialGroups( $siteLinkGroups );
 		foreach ( $siteLinkGroups as $groupId ) {

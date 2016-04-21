@@ -43,7 +43,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 		$args['update'] = array( new ChangeOpDescription( 'en', 'myNew', $validatorFactory ), 'myNew' );
 		$args['set to null'] = array( new ChangeOpDescription( 'en', null, $validatorFactory ), '' );
 
@@ -73,7 +73,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 		$args['valid description'] = array( new ChangeOpDescription( 'fr', 'valid', $validatorFactory ), true );
 		$args['invalid description'] = array( new ChangeOpDescription( 'fr', 'INVALID', $validatorFactory ), false );
 		$args['duplicate description'] = array( new ChangeOpDescription( 'fr', 'DUPE', $validatorFactory ), false );
@@ -117,7 +117,7 @@ class ChangeOpDescriptionTest extends \PHPUnit_Framework_TestCase {
 		// "INVALID" is invalid
 		$validatorFactory = $this->getTermValidatorFactory();
 
-		$args = array();
+		$args = [];
 
 		$entity = $this->provideNewEntity();
 		$entity->getFingerprint()->setDescription( 'de', 'Test' );

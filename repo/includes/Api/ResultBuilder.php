@@ -266,8 +266,8 @@ class ResultBuilder {
 		EntityRevision $entityRevision,
 		$props = 'all',
 		array $filterSiteIds = null,
-		array $filterLangCodes = array(),
-		array $fallbackChains = array()
+		array $filterLangCodes = [],
+		array $fallbackChains = []
 	) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
@@ -276,10 +276,10 @@ class ResultBuilder {
 			$sourceEntityIdSerialization = $entityId->getSerialization();
 		}
 
-		$record = array();
+		$record = [];
 
 		//if there are no props defined only return type and id..
-		if ( $props === array() ) {
+		if ( $props === [] ) {
 			$record['id'] = $entityId->getSerialization();
 			$record['type'] = $entityId->getEntityType();
 		} else {
@@ -737,7 +737,7 @@ class ResultBuilder {
 	public function addSiteLinkList( SiteLinkList $siteLinkList, $path, $addUrl = false ) {
 		$serializer = $this->serializerFactory->newSiteLinkSerializer();
 
-		$values = array();
+		$values = [];
 		foreach ( $siteLinkList->toArray() as $siteLink ) {
 			$values[$siteLink->getSiteId()] = $serializer->serialize( $siteLink );
 		}
@@ -790,7 +790,7 @@ class ResultBuilder {
 	 */
 	public function addRemovedSiteLinks( SiteLinkList $siteLinkList, $path ) {
 		$serializer = $this->serializerFactory->newSiteLinkSerializer();
-		$values = array();
+		$values = [];
 		foreach ( $siteLinkList->toArray() as $siteLink ) {
 			$value = $serializer->serialize( $siteLink );
 			$value['removed'] = '';

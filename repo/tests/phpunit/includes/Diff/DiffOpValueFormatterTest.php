@@ -30,7 +30,7 @@ class DiffOpValueFormatterTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			array( 'null', null, null, '@<tr>.*</tr>@' ),
 			array( 'empty strings', '', '', '@<tr>.*</tr>@' ),
-			array( 'empty array', array(), array(), '@<tr>.*</tr>@' ),
+			array( 'empty array', [], [], '@<tr>.*</tr>@' ),
 
 			array( 'old string', '<i>old</i>', null,
 				'@<i>old</i>@' ),

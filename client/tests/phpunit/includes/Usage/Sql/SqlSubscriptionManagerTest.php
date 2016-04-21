@@ -63,7 +63,7 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 
 		$manager->unsubscribe( 'enwiki', array( $q11, $q22 ) );
 		$manager->unsubscribe( 'dewiki', array( $q22 ) );
-		$manager->unsubscribe( 'dewiki', array() );
+		$manager->unsubscribe( 'dewiki', [] );
 
 		$this->assertEquals(
 			array(
@@ -79,7 +79,7 @@ class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 
 		$res = $db->select( 'wb_changes_subscription', "*", '', __METHOD__ );
 
-		$subscriptions = array();
+		$subscriptions = [];
 		foreach ( $res as $row ) {
 			$subscriptions[] = $row->cs_subscriber_id . '@' . $row->cs_entity_id;
 		}

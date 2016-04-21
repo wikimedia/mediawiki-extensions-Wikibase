@@ -23,7 +23,7 @@ class MembershipValidatorTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalidConstructorArgument( $errorCode, $normalizer ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new MembershipValidator( array(), $errorCode, $normalizer );
+		new MembershipValidator( [], $errorCode, $normalizer );
 	}
 
 	public function invalidConstructorArgumentsProvider() {

@@ -38,7 +38,7 @@ class ItemViewTest extends EntityViewTest {
 	 *
 	 * @return Item
 	 */
-	protected function makeEntity( EntityId $id, array $statements = array() ) {
+	protected function makeEntity( EntityId $id, array $statements = [] ) {
 		$item = new Item( $id );
 
 		$item->setLabel( 'en', "label:$id" );
@@ -75,14 +75,14 @@ class ItemViewTest extends EntityViewTest {
 			$this->getMockBuilder( SiteLinksView::class )
 				->disableOriginalConstructor()
 				->getMock(),
-			array(),
+			[],
 			$this->getMock( LocalizedTextProvider::class )
 		);
 
 		return array(
 			array(
 				$itemView,
-				$this->newEntityForStatements( array() ),
+				$this->newEntityForStatements( [] ),
 				'/wb-item/'
 			)
 		);

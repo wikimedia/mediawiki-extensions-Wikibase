@@ -26,7 +26,7 @@ class BuilderBasedDataTypeValidatorFactoryTest extends PHPUnit_Framework_TestCas
 	}
 
 	public function testUnknownPropertyType() {
-		$factory = new BuilderBasedDataTypeValidatorFactory( array() );
+		$factory = new BuilderBasedDataTypeValidatorFactory( [] );
 		$this->setExpectedException( OutOfBoundsException::class );
 		$factory->getValidators( 'unknown' );
 	}
@@ -41,9 +41,9 @@ class BuilderBasedDataTypeValidatorFactoryTest extends PHPUnit_Framework_TestCas
 
 	public function testEmptyValidatorsArray() {
 		$factory = new BuilderBasedDataTypeValidatorFactory( array( 'id' => function() {
-			return array();
+			return [];
 		} ) );
-		$this->assertSame( array(), $factory->getValidators( 'id' ) );
+		$this->assertSame( [], $factory->getValidators( 'id' ) );
 	}
 
 	public function testInvalidValidatorObject() {

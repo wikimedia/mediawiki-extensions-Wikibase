@@ -35,9 +35,9 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 * @return SitesModuleWorker
 	 */
 	private function newSitesModuleWorker(
-		array $sites = array(),
-		array $groups = array(),
-		array $specialGroups = array(),
+		array $sites = [],
+		array $groups = [],
+		array $specialGroups = [],
 		BagOStuff $cache = null
 	) {
 		$siteStore = new HashSiteStore( $sites );
@@ -81,12 +81,12 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 		$nonMwSite->setGroup( 'allowedgroup' );
 
 		return array(
-			'no sites' => array( array(), array(), array(), 'qqx', '[]' ),
-			'no site in sitelinkgroups' => array( array( $site ), array(), array(), 'qqx', '[]' ),
+			'no sites' => array( [], [], [], 'qqx', '[]' ),
+			'no site in sitelinkgroups' => array( array( $site ), [], [], 'qqx', '[]' ),
 			'single site in sitelinkgroups' => array(
 				array( $site ),
 				array( 'allowedgroup' ),
-				array(),
+				[],
 				'qqx',
 				'{"siteid":{"shortName":"","name":"","id":"siteid","pageUrl":"","apiUrl":"",' .
 				'"languageCode":null,"group":"allowedgroup"}}'
@@ -102,7 +102,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 			'single non-MediaWiki site in sitelinkgroups' => array(
 				array( $nonMwSite ),
 				array( 'allowedgroup' ),
-				array(),
+				[],
 				'qqx',
 				'[]'
 			),
@@ -113,7 +113,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider getDefinitionSummaryProvider
 	 */
 	public function testGetDefinitionSummary( array $workerLists ) {
-		$results = array();
+		$results = [];
 
 		// Verify the dataHash
 
@@ -178,7 +178,7 @@ class SitesModuleWorkerTest extends PHPUnit_Framework_TestCase {
 	public function testGetDefinitionSummary_caching() {
 		$cacheKey = wfMemcKey( 'wikibase-sites-module-modified-hash' );
 		$cache = new HashBagOStuff();
-		$worker = $this->newSitesModuleWorker( array(), array( 'foo' ), array(), $cache );
+		$worker = $this->newSitesModuleWorker( [], array( 'foo' ), [], $cache );
 
 		// Make sure whatever hash is computed ends up in the cache
 		$summary = $worker->getDefinitionSummary();

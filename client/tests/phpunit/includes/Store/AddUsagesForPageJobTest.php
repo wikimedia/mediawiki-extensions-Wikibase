@@ -29,7 +29,7 @@ class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
 		$usages = array( $usageQ5X->asArray() );
 
 		return array(
-			'empty' => array( array() ),
+			'empty' => array( [] ),
 
 			'$pageId is missing' => array( array(
 				'usages' => $usages,
@@ -51,7 +51,7 @@ class AddUsagesForPageJobTest extends PHPUnit_Framework_TestCase {
 			) ),
 			'$usages is empty' => array( array(
 				'pageId' => $pageId,
-				'usages' => array(),
+				'usages' => [],
 			) ),
 			'$usages contains crap' => array( array(
 				'pageId' => $pageId,

@@ -126,9 +126,9 @@ class ViewFactory {
 		LanguageNameLookup $languageNameLookup,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		NumberLocalizer $numberLocalizer,
-		array $siteLinkGroups = array(),
-		array $specialSiteLinkGroups = array(),
-		array $badgeItems = array(),
+		array $siteLinkGroups = [],
+		array $specialSiteLinkGroups = [],
+		array $badgeItems = [],
 		LocalizedTextProvider $textProvider
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )

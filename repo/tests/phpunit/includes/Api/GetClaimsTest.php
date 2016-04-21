@@ -113,7 +113,7 @@ class GetClaimsTest extends ApiTestCase {
 	public function validRequestProvider() {
 		$entities = $this->getNewEntities();
 
-		$argLists = array();
+		$argLists = [];
 
 		foreach ( $entities as $entity ) {
 			$idSerialization = $entity->getId()->getSerialization();

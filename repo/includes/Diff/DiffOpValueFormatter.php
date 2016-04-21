@@ -75,7 +75,7 @@ class DiffOpValueFormatter {
 	private function generateDeletedCells() {
 		$html = Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '-' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-deletedline' ),
-			Html::rawElement( 'div', array(),
+			Html::rawElement( 'div', [],
 				Html::rawElement( 'del', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->generateValueHtml( $this->oldValues )
 				)
@@ -91,7 +91,7 @@ class DiffOpValueFormatter {
 	private function generateAddedCells() {
 		$html = Html::rawElement( 'td', array( 'class' => 'diff-marker' ), '+' );
 		$html .= Html::rawElement( 'td', array( 'class' => 'diff-addedline' ),
-			Html::rawElement( 'div', array(),
+			Html::rawElement( 'div', [],
 				Html::rawElement( 'ins', array( 'class' => 'diffchange diffchange-inline' ),
 					$this->generateValueHtml( $this->newValues )
 				)
@@ -122,9 +122,9 @@ class DiffOpValueFormatter {
 
 		foreach ( $values as $value ) {
 			if ( $html !== '' ) {
-				$html .= Html::rawElement( 'br', array(), '' );
+				$html .= Html::rawElement( 'br', [], '' );
 			}
-			$html .= Html::rawElement( 'span', array(), $value );
+			$html .= Html::rawElement( 'span', [], $value );
 		}
 
 		return $html;

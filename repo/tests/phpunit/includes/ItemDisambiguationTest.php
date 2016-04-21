@@ -53,7 +53,7 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 	}
 
 	public function testNoResults() {
-		$html = $this->newInstance()->getHTML( array() );
+		$html = $this->newInstance()->getHTML( [] );
 
 		$this->assertSame( '<ul class="wikibase-disambiguation"></ul>', $html );
 	}

@@ -170,7 +170,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetLinks() {
-		$cases = array();
+		$cases = [];
 
 		$a = new Item( new ItemId( 'Q1' ) );
 		$a->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Foo' );
@@ -184,9 +184,9 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// #0: all ---------
 		$cases[] = array( $items,
-			array(), // items
-			array(), // sites
-			array(), // pages
+			[], // items
+			[], // sites
+			[], // pages
 			array( // expected
 				array( 'enwiki', 'Foo', 1 ),
 				array( 'dewiki', 'Bar', 1 ),
@@ -197,17 +197,17 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// #1: mismatch ---------
 		$cases[] = array( $items,
-			array(), // items
+			[], // items
 			array( 'enwiki' ), // sites
 			array( 'Xoo' ), // pages
-			array() // expected
+			[] // expected
 		);
 
 		// #2: by item ---------
 		$cases[] = array( $items,
 			array( 1 ), // items
-			array(), // sites
-			array(), // pages
+			[], // sites
+			[], // pages
 			array( // expected
 				array( 'enwiki', 'Foo', 1 ),
 				array( 'dewiki', 'Bar', 1 ),
@@ -216,9 +216,9 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// #3: by site ---------
 		$cases[] = array( $items,
-			array(), // items
+			[], // items
 			array( 'enwiki' ), // sites
-			array(), // pages
+			[], // pages
 			array( // expected
 				array( 'enwiki', 'Foo', 1 ),
 				array( 'enwiki', 'Bar', 2 ),
@@ -227,8 +227,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// #4: by page ---------
 		$cases[] = array( $items,
-			array(), // items
-			array(), // sites
+			[], // items
+			[], // sites
 			array( 'Bar' ), // pages
 			array( // expected
 				array( 'dewiki', 'Bar', 1 ),
@@ -238,7 +238,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// #5: by site and page ---------
 		$cases[] = array( $items,
-			array(), // items
+			[], // items
 			array( 'dewiki' ), // sites
 			array( 'Bar' ), // pages
 			array( // expected
@@ -265,8 +265,8 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	public function provideGetEntities() {
 		return array(
 			array( // #0: empty
-				array(), // ids
-				array(), // expected
+				[], // ids
+				[], // expected
 			),
 
 			array( // #1: some entities
@@ -365,7 +365,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 
 		// extract map of entity IDs to label arrays.
 		/* @var EntityDocument $e  */
-		$actual = array();
+		$actual = [];
 		foreach ( $entities as $key => $e ) {
 			if ( is_object( $e ) ) {
 				$actual[ $e->getId()->getSerialization() ] = $e->getFingerprint()->getLabels()->toTextArray();

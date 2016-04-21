@@ -36,7 +36,7 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	public function otherProjectSitesProvider() {
-		$tests = array();
+		$tests = [];
 
 		$tests['Same language'] = array(
 			array( 'wikipedia', 'wikisource' ),
@@ -71,7 +71,7 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 		$tests['No other sites'] = array(
 			array( 'wikipedia', 'wikisource' ),
 			'eswiki',
-			array()
+			[]
 		);
 
 		return $tests;
@@ -87,14 +87,14 @@ class OtherProjectsSitesGeneratorTest extends \MediaWikiTestCase {
 		$result = $otherProjectsSitesProvider->getOtherProjectsSiteIds( array( 'wikipedia', 'wikisource' ) );
 		\MediaWiki\restoreWarnings();
 
-		$this->assertSame( array(), $result );
+		$this->assertSame( [], $result );
 	}
 
 	/**
 	 * @return HashSiteStore
 	 */
 	private function getSiteStoreMock() {
-		$sites = array();
+		$sites = [];
 
 		$site = new Site();
 		$site->setGlobalId( 'foo' );

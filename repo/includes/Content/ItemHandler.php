@@ -127,7 +127,7 @@ class ItemHandler extends EntityHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		$updates[] = new DataUpdateAdapter(
 			array( $this->siteLinkStore, 'deleteLinksOfItem' ),
@@ -153,7 +153,7 @@ class ItemHandler extends EntityHandler {
 	 * @return DataUpdate[]
 	 */
 	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
-		$updates = array();
+		$updates = [];
 
 		if ( $content->isRedirect() ) {
 			$updates[] = new DataUpdateAdapter(

@@ -30,7 +30,7 @@ class ImageLinksDataUpdater implements StatementDataUpdater {
 	 * @var null[] Hash set of the file name strings found while processing statements. Only the
 	 * array keys are used for performance reasons, the values are meaningless.
 	 */
-	private $fileNames = array();
+	private $fileNames = [];
 
 	/**
 	 * @param PropertyDataTypeMatcher $propertyDataTypeMatcher

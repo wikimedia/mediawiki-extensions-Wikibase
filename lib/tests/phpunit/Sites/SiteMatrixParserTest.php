@@ -39,7 +39,7 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 	public function sitesFromJsonProvider() {
 		$siteData = $this->getSiteData();
 
-		$data = array();
+		$data = [];
 
 		$data['Protocol relative'] = array(
 			'/w/$1',
@@ -111,7 +111,7 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 			)
 		);
 
-		$specialSites = array();
+		$specialSites = [];
 
 		$specialSites[] = array(
 			'url' => 'http://commons.wikimedia.org',
@@ -192,7 +192,7 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function getSites( array $sitesData, $scriptPath, $articlePath, $protocol = '' ) {
-		$sites = array();
+		$sites = [];
 
 		foreach ( $sitesData as $siteData ) {
 			$fields = array(
@@ -201,7 +201,7 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 				'group' => $siteData['group'],
 				'source' => 'local',
 				'language' => $siteData['lang'],
-				'localids' => array(),
+				'localids' => [],
 				'internalid' => null,
 				'data' => array(
 					'paths' => array(
@@ -210,7 +210,7 @@ class SiteMatrixParserTest extends PHPUnit_Framework_TestCase {
 					)
 				),
 				'forward' => false,
-				'config' => array()
+				'config' => []
 			);
 
 			$site = new MediaWikiSite();

@@ -106,7 +106,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 
 		$this->assertSame(
 			array( '' ),
-			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'P65536', array() )
+			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'P65536', [] )
 		);
 
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
@@ -117,7 +117,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 
 		$this->assertSame(
 			array( '' ),
-			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'father', array() )
+			$luaWikibaseLibrary->formatPropertyValues( 'Q1', 'father', [] )
 		);
 	}
 

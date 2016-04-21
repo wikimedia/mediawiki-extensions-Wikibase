@@ -31,7 +31,7 @@ use Wikibase\Repo\Diff\ClaimDifference;
 class ClaimDifferTest extends PHPUnit_Framework_TestCase {
 
 	public function diffClaimsProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$noValueForP42 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$noValueForP43 = new Statement( new PropertyNoValueSnak( 43 ) );

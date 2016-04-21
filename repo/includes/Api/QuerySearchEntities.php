@@ -121,7 +121,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	public function executeGenerator( $resultPageSet ) {
 		$params = $this->extractRequestParams();
 		$searchResults = $this->getSearchResults( $params );
-		$titles = array();
+		$titles = [];
 
 		foreach ( $searchResults as $match ) {
 			$title = $this->titleLookup->getTitleForId( $match->getEntityId() );

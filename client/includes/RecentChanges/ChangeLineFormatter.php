@@ -320,7 +320,7 @@ class ChangeLineFormatter {
 	 * @return string[] List of HTML links
 	 */
 	private function buildUserLinks( $userName ) {
-		$links = array();
+		$links = [];
 
 		$links['usertalk'] = $this->buildUserTalkLink( $userName );
 

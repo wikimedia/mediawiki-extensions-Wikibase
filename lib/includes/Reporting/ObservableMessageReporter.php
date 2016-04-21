@@ -16,12 +16,12 @@ class ObservableMessageReporter implements MessageReporter {
 	/**
 	 * @var MessageReporter[]
 	 */
-	protected $reporters = array();
+	protected $reporters = [];
 
 	/**
 	 * @var callable[]
 	 */
-	protected $callbacks = array();
+	protected $callbacks = [];
 
 	/**
 	 * @see MessageReporter::report

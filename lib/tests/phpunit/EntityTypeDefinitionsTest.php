@@ -29,7 +29,7 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'content-model-id' => 'bar-model',
 				'content-handler-factory-callback' => 'bar-handler'
 			),
-			'baz' => array()
+			'baz' => []
 		);
 	}
 

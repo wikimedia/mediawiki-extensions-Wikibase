@@ -167,8 +167,8 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 		$result = $api->getResult();
 		$continuationManager->setContinuationIntoResult( $result );
 		return $result->getResultData( null, array(
-			'BC' => array(),
-			'Types' => array(),
+			'BC' => [],
+			'Types' => [],
 			'Strip' => 'all',
 		) );
 	}
@@ -216,8 +216,8 @@ class QuerySearchEntitiesTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'No match' => array(
 				array( 'wbssearch' => 'Foo' ),
-				array(),
-				array(),
+				[],
+				[],
 			),
 			'Exact EntityId match' => array(
 				array( 'wbssearch' => 'Q111' ),

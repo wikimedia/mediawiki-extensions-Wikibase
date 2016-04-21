@@ -125,7 +125,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @see SpecialCreateEntity::getWarnings()
 	 */
 	protected function getWarnings() {
-		$warnings = array();
+		$warnings = [];
 
 		if ( $this->getUser()->isAnon() ) {
 			$warnings[] = $this->msg(
