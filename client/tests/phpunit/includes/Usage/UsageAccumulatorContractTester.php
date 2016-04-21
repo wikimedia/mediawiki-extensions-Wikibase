@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Usage\Tests;
+namespace Wikibase\Client\Tests\Usage;
 
 use PHPUnit_Framework_Assert as Assert;
 use Wikibase\Client\Usage\EntityUsage;
@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class UsageAccumulatorContractTester  {
+class UsageAccumulatorContractTester {
 
 	/**
 	 * @var UsageAccumulator

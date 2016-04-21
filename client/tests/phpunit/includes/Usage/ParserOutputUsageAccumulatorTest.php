@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage\Tests;
 
 use ParserOutput;
+use Wikibase\Client\Tests\Usage\UsageAccumulatorContractTester;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 
 /**
