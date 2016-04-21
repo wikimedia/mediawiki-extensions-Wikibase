@@ -204,6 +204,7 @@ class ViewFactory {
 			$editSectionGenerator,
 			$this->plainTextIdFormatterFactory->getEntityIdFormatter( $labelDescriptionLookup ),
 			$this->languageNameLookup,
+			$this->numberLocalizer,
 			$this->badgeItems,
 			$this->specialSiteLinkGroups,
 			$this->textProvider
