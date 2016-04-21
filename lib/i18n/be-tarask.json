@@ -24,6 +24,7 @@
 	"wikibase-error-autocomplete-response": "Адказ сэрвэра: $1",
 	"wikibase-error-ui-no-external-page": "Пазначаны артыкул на адпаведным сайце ня знойдзены.",
 	"wikibase-error-ui-edit-conflict": "Адбыўся канфлікт рэдагаваньня. Захавайце свае зьмены на кампутары, абнавіце старонку і захавайце зноў, калі ласка.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (трансьлітаравана)",
 	"wikibase-quantitydetails-amount": "Сума",
 	"wikibase-sitelinks-wikipedia": "Вікіпэдыя",
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
