@@ -53,6 +53,7 @@ class EntityRevisionTest extends PHPUnit_Framework_TestCase {
 			array( 1, null ),
 			array( 1, 1423612800 ),
 			array( 1, '20150211' ),
+			array( 1, "20150211000000\n" ),
 			array( 1, '2015-02-110000' ),
 		);
 	}

@@ -41,6 +41,7 @@ class RedirectRevisionTest extends PHPUnit_Framework_TestCase {
 			array( 0, true ),
 			array( 0, 1 ),
 			array( 0, '20141231' ),
+			array( 0, "20141231000000\n" ),
 			array( 0, '2014-12-31T00:00:00' ),
 		);
 	}

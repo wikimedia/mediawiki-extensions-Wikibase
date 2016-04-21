@@ -186,37 +186,42 @@ class TermSqlIndexTest extends TermIndexTest {
 
 	public function provideGetSearchKey() {
 		return array(
-			array( // #0
+			'basic' => array(
 				'foo', // raw
 				'foo', // normalized
 			),
 
-			array( // #1
+			'trailing newline' => array(
+				"foo \n",
+				'foo',
+			),
+
+			'whitespace' => array(
 				'  foo  ', // raw
 				'foo', // normalized
 			),
 
-			array( // #2: lower case of non-ascii character
+			'lower case of non-ascii character' => array(
 				'ÄpFEl', // raw
 				'äpfel', // normalized
 			),
 
-			array( // #3: lower case of decomposed character
+			'lower case of decomposed character' => array(
 				"A\xCC\x88pfel", // raw
 				'äpfel', // normalized
 			),
 
-			array( // #4: lower case of cyrillic character
+			'lower case of cyrillic character' => array(
 				'Берлин', // raw
 				'берлин', // normalized
 			),
 
-			array( // #5: lower case of greek character
+			'lower case of greek character' => array(
 				'Τάχιστη', // raw
 				'τάχιστη', // normalized
 			),
 
-			array( // #6: nasty unicode whitespace
+			'nasty unicode whitespace' => array(
 				// ZWNJ: U+200C \xE2\x80\x8C
 				// RTLM: U+200F \xE2\x80\x8F
 				// PSEP: U+2029 \xE2\x80\xA9

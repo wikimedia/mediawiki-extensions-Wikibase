@@ -42,7 +42,7 @@ class EntityRevision {
 			throw new InvalidArgumentException( 'Revision ID must be a non-negative integer.' );
 		}
 
-		if ( $mwTimestamp !== '' && !preg_match( '/^\d{14}$/', $mwTimestamp ) ) {
+		if ( $mwTimestamp !== '' && !preg_match( '/^\d{14}\z/', $mwTimestamp ) ) {
 			throw new InvalidArgumentException( 'Timestamp must be a string of 14 digits or empty.' );
 		}
 

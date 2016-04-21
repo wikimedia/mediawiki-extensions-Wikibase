@@ -103,6 +103,8 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 			array( '', array( '', '' ) ),
 			array( 'foo', array( 'foo', '' ) ),
 			array( 'foo.bar', array( 'foo', 'bar' ) ),
+			array( "foo.bar\n", array( "foo\n", 'bar' ) ),
+			array( ' foo.bar ', array( ' foo.bar ', '' ) ),
 		);
 	}
 
