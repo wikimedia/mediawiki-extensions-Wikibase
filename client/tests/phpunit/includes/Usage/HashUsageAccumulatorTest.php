@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Usage\Tests;
 
+use Wikibase\Client\Tests\Usage\UsageAccumulatorContractTester;
 use Wikibase\Client\Usage\HashUsageAccumulator;
 
 /**
