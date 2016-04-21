@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_e9ced785",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:59:52Z",
+      "side": 1,
+      "message": "That doesn\u0027t tell me where in the table the newly re-queued stuff begins. I need the max id in the *table* before the re-queue. Not the max id to be re-queued.",
+      "revId": "378cc0de4165b5e8efa81972d6178aaa4f4956c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_49cc238d",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-21T13:59:52Z",
+      "side": 1,
+      "message": "testRequestRowBatch",
+      "revId": "378cc0de4165b5e8efa81972d6178aaa4f4956c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
