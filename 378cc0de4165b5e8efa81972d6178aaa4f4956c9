@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_49a9c377",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-21T14:04:51Z",
+      "side": 1,
+      "message": "Ahhhh, I gotcha!",
+      "parentUuid": "ae564743_e9ced785",
+      "revId": "378cc0de4165b5e8efa81972d6178aaa4f4956c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_49cc238d",
         "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-21T13:59:52Z",
       "side": 1,
       "message": "testRequestRowBatch",
+      "revId": "378cc0de4165b5e8efa81972d6178aaa4f4956c9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_29a60fa8",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-21T14:04:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_49cc238d",
       "revId": "378cc0de4165b5e8efa81972d6178aaa4f4956c9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
