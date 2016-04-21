@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SummaryFormatter;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @since 0.5

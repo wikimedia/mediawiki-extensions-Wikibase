@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests;
 
 use MWException;
 use User;
@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 
 /**
- * @covers Wikibase\Test\MockRepository
+ * @covers Wikibase\Lib\Tests\MockRepository
  *
  * @group Wikibase
  * @group WikibaseLib

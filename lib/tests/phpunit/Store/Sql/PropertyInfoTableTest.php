@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Tests\Store\PropertyInfoStoreTestHelper;
 use Wikibase\PropertyInfoTable;
 
 /**

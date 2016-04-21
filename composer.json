@@ -57,7 +57,6 @@
 			"lib/includes/",
 			"lib/WikibaseLib.hooks.php",
 			"lib/maintenance/",
-			"lib/tests/phpunit/",
 			"repo/includes/",
 			"repo/maintenance/",
 			"repo/tests/phpunit/",
@@ -65,6 +64,7 @@
 		],
 		"psr-4": {
 			"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes",
+			"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit",
 			"Wikibase\\View\\": "view/src",
 			"Wikibase\\View\\Tests\\": "view/tests/phpunit",
 			"Wikimedia\\Purtle\\": "purtle/src",

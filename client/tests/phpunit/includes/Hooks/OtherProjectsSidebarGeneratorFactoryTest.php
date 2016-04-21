@@ -7,7 +7,7 @@ use TestSites;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\SettingsArray;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory

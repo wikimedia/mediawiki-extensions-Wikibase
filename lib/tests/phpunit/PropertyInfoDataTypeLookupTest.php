@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Test;
+namespace Wikibase\Lib\Tests;
 
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -9,8 +9,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\PropertyInfoStore;
-use Wikibase\Test\MockPropertyInfoStore;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
 
 /**
  * @covers Wikibase\Lib\PropertyInfoDataTypeLookup
