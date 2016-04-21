@@ -19,6 +19,91 @@
     },
     {
       "key": {
+        "uuid": "ae564743_e570bd09",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "Wrong.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_45efe982",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "\"classes\" is wrong.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c5fad93f",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "There is currently no assert, anywhere. Old calls with string will be passed to call_user_func without any check, and do weird things.\n\nEither here or down below with an is_callable.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_05de91de",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "Duplicate comment, see 2 lines below.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_257bd5ec",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "string[]",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_76ae29e6",
         "filename": "lib/includes/EntityFactory.php",
         "patchSetId": 2
@@ -36,6 +121,23 @@
     },
     {
       "key": {
+        "uuid": "ae564743_e5d6fdc7",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "\"Predicate\" for what?",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_d6b29547",
         "filename": "lib/includes/EntityFactory.php",
         "patchSetId": 2
@@ -47,6 +149,74 @@
       "writtenOn": "2016-04-20T18:43:09Z",
       "side": 1,
       "message": "Unused, dead code. Why keep this?",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_65c30d0b",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "Wrong.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4569a91c",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "Non-informational comment.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8563c13a",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "Lowercase \"string\".\n\nAlmost non-informational comment.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e5571d5b",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "Useless comment.\n\nShould say @throws OutOfBoundsException, and why.",
       "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -88,6 +258,23 @@
     },
     {
       "key": {
+        "uuid": "ae564743_65914dfb",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "There should be a test for this exception.",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_8a6f4ec0",
         "filename": "lib/includes/EntityFactory.php",
         "patchSetId": 2
@@ -99,6 +286,24 @@
       "writtenOn": "2016-04-21T08:18:08Z",
       "side": 1,
       "message": "could be more explicit here by calling it entitydocument",
+      "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2552b56a",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 1,
+      "message": "I disagree. The concept is called \"Entity\".",
+      "parentUuid": "ae564743_8a6f4ec0",
       "revId": "aa96e5d02c1b2bbb85d629ee7d4e20c290841968",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false

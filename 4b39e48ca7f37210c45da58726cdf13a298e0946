@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_a59b651a",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-21T13:01:12Z",
+      "side": 0,
+      "message": "Could argue that this removal is not part of the refactoring this patch claims to do.",
+      "revId": "4b39e48ca7f37210c45da58726cdf13a298e0946",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
