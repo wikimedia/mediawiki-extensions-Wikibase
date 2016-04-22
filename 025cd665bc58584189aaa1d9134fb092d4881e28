@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_838c543c",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T06:10:30Z",
+      "side": 1,
+      "message": "Letting the caller apply it seems error prone, I don\u0027t see a good reason to allow this cache to be shared… the implementation is clearly targeted at giving different results per wiki.",
+      "parentUuid": "ae564743_f2399ccc",
+      "revId": "025cd665bc58584189aaa1d9134fb092d4881e28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce38dbff_a74ccca0",
         "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
         "patchSetId": 8
