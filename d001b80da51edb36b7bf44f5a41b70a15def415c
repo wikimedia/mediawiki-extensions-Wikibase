@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_b2355ff6",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "Should this really throw? Is it maybe ok to not select any change ids, because there just aren\u0027t any?",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_fef3239a",
         "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
         "patchSetId": 9
@@ -13,6 +30,176 @@
       "writtenOn": "2016-04-22T11:42:07Z",
       "side": 1,
       "message": "should probably be DB_MASTER",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_72f8e746",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "why quoted?",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_32acaf32",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "Why double quotes?",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_12a9ab21",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "Why double quotes?",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_72a62752",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "Why double quotes?",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_327b0fbf",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "No \"unit\" here, should say that the numbers are change ids",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d24d739d",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "Don\u0027t think this adds much value… also ChangeRequeuer::getMaxChangeId doesn\u0027t have tests. I would remove it.",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b2b8bf75",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "no license?",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_12824ba9",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "not sure we want this notation… but I guess you need to ask Thiemo about that or check the phpunit docs.",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_528cc3db",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_92bdbb66",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-04-22T16:15:02Z",
+      "side": 1,
+      "message": "ancient array syntax. Also below",
       "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
