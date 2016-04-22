@@ -52,6 +52,7 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 
 	public function invalidIdSerializationProvider() {
 		return array(
+			array( "Q1\n" ),
 			array( 'q' ),
 			array( 'p1' ),
 			array( 'qq1' ),
