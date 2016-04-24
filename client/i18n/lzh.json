@@ -3,9 +3,11 @@
 		"authors": [
 			"StephDC",
 			"Davidzdh",
-			"飞舞回堂前"
+			"飞舞回堂前",
+			"SolidBlock"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}}項變",
 	"wikibase-editlinks": "纂鏈",
 	"wikibase-editlinkstitle": "修跨語鏈",
 	"wikibase-rc-hide-wikidata-hide": "隱",
