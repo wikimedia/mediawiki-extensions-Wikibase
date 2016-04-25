@@ -2,7 +2,6 @@
 
 namespace Wikibase\Rdf;
 
-use HashBagOStuff;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;

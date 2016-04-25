@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\View\Template\TemplateFactory;
 
