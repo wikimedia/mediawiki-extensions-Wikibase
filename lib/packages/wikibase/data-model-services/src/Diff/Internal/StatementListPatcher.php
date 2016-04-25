@@ -2,9 +2,12 @@
 
 namespace Wikibase\DataModel\Services\Diff\Internal;
 
-use Diff\Comparer\CallbackComparer;
 use Diff\DiffOp\Diff\Diff;
-use Diff\Patcher\MapPatcher;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
+use Diff\Patcher\PatcherException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -16,25 +19,51 @@ use Wikibase\DataModel\Statement\StatementList;
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thiemo Mättig
  */
 class StatementListPatcher {
 
 	/**
-	 * @var MapPatcher
+	 * @since 3.6
+	 *
+	 * @param StatementList $statements
+	 * @param Diff $patch
+	 *
+	 * @throws PatcherException
 	 */
-	private $patcher;
+	public function patchStatementList( StatementList $statements, Diff $patch ) {
+		/** @var DiffOp $diffOp */
+		foreach ( $patch as $diffOp ) {
+			switch ( true ) {
+				case $diffOp instanceof DiffOpAdd:
+					/** @var DiffOpAdd $diffOp */
+					$statements->addStatement( $diffOp->getNewValue() );
+					break;
 
-	public function __construct() {
-		$this->patcher = new MapPatcher();
+				case $diffOp instanceof DiffOpChange:
+					/** @var DiffOpChange $diffOp */
+					/** @var Statement $statement */
+					$statement = $diffOp->getOldValue();
+					$statements->removeStatementsWithGuid( $statement->getGuid() );
+					$statements->addStatement( $diffOp->getNewValue() );
+					break;
 
-		$this->patcher->setValueComparer( new CallbackComparer(
-			function( Statement $firstStatement, Statement $secondStatement ) {
-				return $firstStatement->equals( $secondStatement );
+				case $diffOp instanceof DiffOpRemove:
+					/** @var DiffOpRemove $diffOp */
+					/** @var Statement $statement */
+					$statement = $diffOp->getOldValue();
+					$statements->removeStatementsWithGuid( $statement->getGuid() );
+					break;
+
+				default:
+					throw new PatcherException( 'Invalid statement list diff' );
 			}
-		) );
+		}
 	}
 
 	/**
+	 * @deprecated since 3.6, use patchStatementList instead
+	 *
 	 * @param StatementList $statements
 	 * @param Diff $patch
 	 *
@@ -42,22 +71,9 @@ class StatementListPatcher {
 	 * @return StatementList
 	 */
 	public function getPatchedStatementList( StatementList $statements, Diff $patch ) {
-		$statementsByGuid = array();
-
-		/**
-		 * @var Statement $statement
-		 */
-		foreach ( $statements as $statement ) {
-			$statementsByGuid[$statement->getGuid()] = $statement;
-		}
-
-		$patchedList = new StatementList();
-
-		foreach ( $this->patcher->patch( $statementsByGuid, $patch ) as $statement ) {
-			$patchedList->addStatement( $statement );
-		}
-
-		return $patchedList;
+		$patched = clone $statements;
+		$this->patchStatementList( $patched, $patch );
+		return $patched;
 	}
 
 }
