@@ -13,6 +13,7 @@ use RequestContext;
 use SiteList;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -251,8 +252,56 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function provideHttpContentNegotiation() {
+		$q13 = new ItemId( 'Q13' );
+		return [
+			'No Accept Header' => [
+				$q13,
+				[], // headers
+				'Q13.json'
+			],
+			'Accept Header without weights' => [
+				$q13,
+				[ 'ACCEPT' => '*/*, text/html, text/plain' ], // headers
+				'Q13'
+			],
+			'Accept Header with weights' => [
+				$q13,
+				[ 'ACCEPT' => 'text/*; q=0.5, text/json; q=0.7, application/rdf+xml; q=0.8' ], // headers
+				'Q13.rdf'
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideHttpContentNegotiation
+	 *
+	 * @param EntityId $id
+	 * @param array $headers Request headers
+	 * @param string $expectedRedirectSuffix Expected suffix of the HTTP Location header.
+	 *
+	 * @throws HttpError
+	 */
+	public function testHttpContentNegotiation(
+		EntityId $id,
+		array $headers,
+		$expectedRedirectSuffix
+	) {
+		/* @var FauxResponse $response */
+		$output = $this->makeOutputPage( [], $headers );
+		$request = $output->getRequest();
+
+		$handler = $this->newHandler();
+		$handler->httpContentNegotiation( $request, $output, $id );
+
+		$this->assertStringEndsWith(
+			$expectedRedirectSuffix,
+			$output->getRedirect(),
+			'redirect target'
+		);
+	}
+
 	//TODO: test canHandleRequest
-	//TODO: test httpContentNegotiation
 	//TODO: test getCanonicalFormat
 	//TODO: test ALL the things!
 }
