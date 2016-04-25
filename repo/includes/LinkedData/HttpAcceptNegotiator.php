@@ -5,6 +5,7 @@ namespace Wikibase\Repo\LinkedData;
 /**
  * Utility for negotiating a value from a set of supported values using a preference list.
  * This is intended for use with HTTP headers like Accept, Accept-Language, Accept-Encoding, etc.
+ * See RFC 2616 section 14 for details.
  *
  * To use this with a request header, first parse the header value into an array of weights
  * using HttpAcceptParser, then call getBestSupportedKey.
@@ -42,9 +43,10 @@ class HttpAcceptNegotiator {
 	/**
 	 * Returns the best supported key from the given weight map. Of the keys from the
 	 * $weights parameter that are also in the list of supported values supplied to
-	 * the constructor, this returns the key that has the highest value associated
-	 * with it. Keys that map to 0 or false are ignored. If no such key is found,
-	 * $default is returned.
+	 * the constructor, this returns the key that has the highest weight associated
+	 * with it. If two keys have the same weight, the more specific key is preferred,
+	 * as required by RFC2616 section 14. Keys that map to 0 or false are ignored.
+	 * If no matching key is found, $default is returned.
 	 *
 	 * @param array $weights An associative array mapping accepted values to their
 	 *              respective weights.
@@ -55,7 +57,17 @@ class HttpAcceptNegotiator {
 	 * @return null|string The best supported key from the $weights parameter.
 	 */
 	public function getBestSupportedKey( array $weights, $default = null ) {
-		// it's an associative list. Sort by value and...
+		// $weights is an associative list.
+		// Make sure we correctly bias against wildcards and ranges, see RFC2616, section 14.
+		foreach ( $weights as $name => &$weight ) {
+			if ( $name === '*' || $name === '*/*' ) {
+				$weight -= 0.000002;
+			} elseif ( preg_match( '!^\w+?/\*$!', $name ) ) {
+				$weight -= 0.000001;
+			}
+		}
+
+		// Sort $weights by value and...
 		asort( $weights );
 
 		// remove any keys with values equal to 0 or false (HTTP/1.1 section 3.9)
