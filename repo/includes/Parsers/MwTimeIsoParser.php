@@ -115,6 +115,7 @@ class MwTimeIsoParser extends StringValueParser {
 	 * string to an object that can be used to instantiate a time.Time object.
 	 *
 	 * @param string $value
+	 * @param Language $lang
 	 *
 	 * @throws RuntimeException
 	 * @return TimeValue|bool

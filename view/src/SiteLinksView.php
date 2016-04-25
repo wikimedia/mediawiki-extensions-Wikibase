@@ -74,6 +74,7 @@ class SiteLinksView {
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
 	 * @param EntityIdFormatter $entityIdFormatter A plaintext producing EntityIdFormatter
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param NumberLocalizer $numberLocalizer
 	 * @param string[] $badgeItems
 	 * @param string[] $specialSiteLinkGroups
 	 * @param LocalizedTextProvider $textProvider
@@ -89,14 +90,14 @@ class SiteLinksView {
 		array $specialSiteLinkGroups,
 		LocalizedTextProvider $textProvider
 	) {
+		$this->templateFactory = $templateFactory;
 		$this->sites = $sites;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
-		$this->badgeItems = $badgeItems;
-		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
-		$this->templateFactory = $templateFactory;
+		$this->entityIdFormatter = $entityIdFormatter;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->numberLocalizer = $numberLocalizer;
-		$this->entityIdFormatter = $entityIdFormatter;
+		$this->badgeItems = $badgeItems;
+		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
 		$this->textProvider = $textProvider;
 	}
 

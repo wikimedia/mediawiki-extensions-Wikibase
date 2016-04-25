@@ -28,8 +28,6 @@ class DummyLocalizedTextProviderTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider dummyLocalizedTextProviderProvider
-	 *
-	 * @param DummyLocalizedTextProvider $localizedTextProvider
 	 */
 	public function testGet( DummyLocalizedTextProvider $localizedTextProvider, $has, $content, $languageCode ) {
 		$this->assertEquals( $localizedTextProvider->has( 'parentheses' ), $has );

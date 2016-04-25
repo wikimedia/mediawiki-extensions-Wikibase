@@ -45,7 +45,6 @@ class UsageTrackerContractTester {
 
 	/**
 	 * @param int $pageId
-	 * @param string $timestamp
 	 *
 	 * @return EntityUsage[]
 	 */

@@ -32,6 +32,8 @@ use Wikibase\View\Template\TemplateFactory;
 class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * @param string $uiLanguageCode
+	 *
 	 * @return OutputPageBeforeHTMLHookHandler
 	 */
 	private function getHookHandler( $uiLanguageCode ) {
