@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
