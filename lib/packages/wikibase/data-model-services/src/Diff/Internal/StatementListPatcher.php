@@ -10,6 +10,9 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
+ * TODO: Class must be public.
+ * TODO: Should this support actual edit conflict detection?
+ *
  * Package private.
  *
  * @since 1.0
