@@ -29,8 +29,6 @@ class MediaWikiLocalizedTextProviderTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider mediaWikiLocalizedTextProviderProvider
-	 *
-	 * @param MediaWikiLocalizedTextProvider $localizedTextProvider
 	 */
 	public function testGet( MediaWikiLocalizedTextProvider $localizedTextProvider, $has, $content, $languageCode ) {
 		$this->assertEquals( $localizedTextProvider->has( 'parentheses' ), $has );

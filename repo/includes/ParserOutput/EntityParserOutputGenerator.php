@@ -97,6 +97,7 @@ class EntityParserOutputGenerator {
 	 * @param EntityInfoBuilderFactory $entityInfoBuilderFactory
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param TemplateFactory $templateFactory
+	 * @param LocalizedTextProvider $textProvider
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param ParserOutputDataUpdater[] $dataUpdaters
 	 * @param string $languageCode

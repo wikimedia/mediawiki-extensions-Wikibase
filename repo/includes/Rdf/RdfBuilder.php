@@ -61,7 +61,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $termsBuilder;
 
 	/**
-	 * Rdf builders to appyl when building rdf for an entity.
+	 * RDF builders to apply when building RDF for an entity.
 	 * @var EntityRdfBuilder[]
 	 */
 	private $builders = array();
