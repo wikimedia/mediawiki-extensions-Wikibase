@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_56d78ec4",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "Changed to a strict check for failure",
+      "parentUuid": "ae564743_b2355ff6",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_fef3239a",
         "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2016-04-22T11:42:07Z",
       "side": 1,
       "message": "should probably be DB_MASTER",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_56582e8c",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_fef3239a",
       "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_36d49abe",
+        "filename": "repo/includes/Store/Sql/ChangeRequeuer.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "Why what quoted?",
+      "parentUuid": "ae564743_72f8e746",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_32acaf32",
         "filename": "repo/maintenance/requeueChanges.php",
         "patchSetId": 9
@@ -64,6 +118,24 @@
       "writtenOn": "2016-04-22T16:15:02Z",
       "side": 1,
       "message": "Why double quotes?",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_16e516a0",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_32acaf32",
       "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_b6ef0a82",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_12a9ab21",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_72a62752",
         "filename": "repo/maintenance/requeueChanges.php",
         "patchSetId": 9
@@ -98,6 +188,24 @@
       "writtenOn": "2016-04-22T16:15:02Z",
       "side": 1,
       "message": "Why double quotes?",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f6e9827c",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_72a62752",
       "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_36fbfa45",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_327b0fbf",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_d24d739d",
         "filename": "repo/maintenance/requeueChanges.php",
         "patchSetId": 9
@@ -132,6 +258,24 @@
       "writtenOn": "2016-04-22T16:15:02Z",
       "side": 1,
       "message": "Don\u0027t think this adds much value… also ChangeRequeuer::getMaxChangeId doesn\u0027t have tests. I would remove it.",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_96f80648",
+        "filename": "repo/maintenance/requeueChanges.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "This was requested by daniel",
+      "parentUuid": "ae564743_d24d739d",
       "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_76f5724c",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_b2b8bf75",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_12824ba9",
         "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
         "patchSetId": 9
@@ -166,6 +328,24 @@
       "writtenOn": "2016-04-22T16:15:02Z",
       "side": 1,
       "message": "not sure we want this notation… but I guess you need to ask Thiemo about that or check the phpunit docs.",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d691defc",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "This is required to avoid IDE detecting type errors",
+      "parentUuid": "ae564743_12824ba9",
       "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -200,6 +380,24 @@
       "writtenOn": "2016-04-22T16:15:02Z",
       "side": 1,
       "message": "ancient array syntax. Also below",
+      "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b696eaf1",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/ChangeRequeuerTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-25T13:20:20Z",
+      "side": 1,
+      "message": "AFAIK wikibase has not converted yet",
+      "parentUuid": "ae564743_92bdbb66",
       "revId": "d001b80da51edb36b7bf44f5a41b70a15def415c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
