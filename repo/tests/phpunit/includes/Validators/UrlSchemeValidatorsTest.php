@@ -69,6 +69,11 @@ class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
 
 	public function invalidUrlProvider() {
 		return array(
+			// Trailing newlines
+			array( 'http', "http://example.com\n" ),
+			array( 'mailto', "mailto:mail@example.com\n" ),
+			array( 'any', "http://example.com\n" ),
+
 			array( 'http', 'yadda' ),
 			array( 'http', 'http:' ),
 			array( 'http', 'http://' ),

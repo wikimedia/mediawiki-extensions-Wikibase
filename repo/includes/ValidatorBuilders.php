@@ -239,7 +239,7 @@ class ValidatorBuilders {
 
 		// down to the day
 		$maxPrecision = TimeValue::PRECISION_DAY;
-		$isoDataPattern = '/T00:00:00Z$/';
+		$isoDataPattern = '/T00:00:00Z\z/';
 
 		$timeStringValidators[] = new RegexValidator( $isoDataPattern );
 
