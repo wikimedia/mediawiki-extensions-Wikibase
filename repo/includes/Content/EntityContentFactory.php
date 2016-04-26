@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Content;
 use InvalidArgumentException;
 use MWException;
 use OutOfBoundsException;
-use Revision;
 use Status;
 use Title;
 use User;
@@ -241,27 +240,6 @@ class EntityContentFactory implements EntityTitleLookup, EntityIdLookup, EntityP
 		}
 
 		return $this->entityContentModels[$entityType];
-	}
-
-	/**
-	 * Get the entity content with the provided revision id, or null if there is no such entity content.
-	 *
-	 * Note that this returns an old content that may not be valid anymore.
-	 *
-	 * @since 0.2
-	 *
-	 * @param int $revisionId
-	 *
-	 * @return EntityContent|null
-	 */
-	public function getFromRevision( $revisionId ) {
-		$revision = Revision::newFromId( (int)$revisionId );
-
-		if ( $revision === null ) {
-			return null;
-		}
-
-		return $revision->getContent();
 	}
 
 	/**
