@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -126,9 +128,26 @@ class OutputPageBeforeHTMLHookHandler {
 
 		if ( !empty( $placeholders ) ) {
 			$injector = new TextInjector( $placeholders );
-			$expander = $this->getEntityViewPlaceholderExpander( $out );
+			$callback = function() {
+				return '';
+			};
 
-			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
+			$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
+
+			if ( $entityId instanceof EntityId ) {
+				$revisionId = $out->getRevisionId();
+				$entityRevision = $this->entityRevisionLookup->getEntityRevision(
+					$entityId,
+					$revisionId
+				);
+
+				if ( $entityRevision instanceof EntityRevision ) {
+					$expander = $this->getEntityViewPlaceholderExpander( $out, $entityRevision );
+					$callback = [ $expander, 'getHtmlForPlaceholder' ];
+				}
+			}
+
+			$html = $injector->inject( $html, $callback );
 
 			$out->addJsConfigVars(
 				'wbUserSpecifiedLanguages',
@@ -145,14 +164,16 @@ class OutputPageBeforeHTMLHookHandler {
 
 	/**
 	 * @param OutputPage $out
+	 * @param EntityRevision $entityRev
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function getEntityViewPlaceholderExpander( OutputPage $out ) {
+	private function getEntityViewPlaceholderExpander(
+		OutputPage $out,
+		EntityRevision $entityRevision
+	) {
+		$entity = $entityRevision->getEntity();
 
-		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
-		$revisionId = $out->getRevisionId();
-		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
 		$labelsProvider = $entity;
 		$descriptionsProvider = $entity;
 		$aliasesProvider = $entity instanceof AliasesProvider ? $entity : null;
