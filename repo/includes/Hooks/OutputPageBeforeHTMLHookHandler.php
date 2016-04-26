@@ -3,7 +3,11 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
+use User;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -126,16 +130,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$placeholders = $out->getProperty( 'wikibase-view-chunks' );
 
 		if ( !empty( $placeholders ) ) {
-			// All user languages that are valid term languages
-			$termsLanguages = array_intersect(
-				$this->userLanguageLookup->getAllUserLanguages( $out->getUser() ),
-				$this->termsLanguages->getLanguages()
-			);
-
-			$injector = new TextInjector( $placeholders );
-			$expander = $this->getEntityViewPlaceholderExpander( $out, $termsLanguages );
-
-			$html = $injector->inject( $html, array( $expander, 'getHtmlForPlaceholder' ) );
+			$this->replacePlaceholders( $placeholders, $out, $html );
 
 			$out->addJsConfigVars(
 				'wbUserSpecifiedLanguages',
@@ -151,30 +146,79 @@ class OutputPageBeforeHTMLHookHandler {
 	}
 
 	/**
+	 * @param string[] $placeholders
 	 * @param OutputPage $out
+	 * @param string &$html
+	 */
+	private function replacePlaceholders( array $placeholders, OutputPage $out, &$html ) {
+		$injector = new TextInjector( $placeholders );
+		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
+
+		if ( $entityId instanceof EntityId ) {
+			$entityRev = $this->entityRevisionLookup->getEntityRevision(
+				$entityId,
+				$out->getRevisionId()
+			);
+
+			if ( $entityRev instanceof EntityRevision ) {
+				$expander = $this->getEntityViewPlaceholderExpander(
+					$entityRev->getEntity(),
+					$out->getUser(),
+					$this->getTermsLanguagesCodes( $out ),
+					$out->getLanguage()->getCode()
+				);
+
+				$html = $injector->inject( $html, [ $expander, 'getHtmlForPlaceholder' ] );
+
+				return;
+			}
+		}
+
+		$html = $injector->inject( $html, function() {
+			return '';
+		} );
+	}
+
+	/**
+	 * @param OutputPage $out
+	 *
+	 * @return string[]
+	 */
+	private function getTermsLanguagesCodes( OutputPage $out ) {
+		// All user languages that are valid term languages
+		return array_intersect(
+			$this->userLanguageLookup->getAllUserLanguages( $out->getUser() ),
+			$this->termsLanguages->getLanguages()
+		);
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 * @param User $user
 	 * @param string[] $termsLanguages
+	 * @param string $languageCode
 	 *
 	 * @return EntityViewPlaceholderExpander
 	 */
-	private function getEntityViewPlaceholderExpander( OutputPage $out, array $termsLanguages ) {
-		$languageCode = $out->getLanguage()->getCode();
-
-		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
-		$revisionId = $out->getRevisionId();
-		$entity = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId )->getEntity();
+	private function getEntityViewPlaceholderExpander(
+		EntityDocument $entity,
+		User $user,
+		array $termsLanguages,
+		$languageCode
+	 ) {
 		$labelsProvider = $entity;
 		$descriptionsProvider = $entity;
 		$aliasesProvider = $entity instanceof AliasesProvider ? $entity : null;
 
 		return new EntityViewPlaceholderExpander(
 			$this->templateFactory,
-			$out->getUser(),
+			$user,
 			$labelsProvider,
 			$descriptionsProvider,
 			$aliasesProvider,
 			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
 			$this->languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $out->getLanguage()->getCode() )
+			new MediaWikiLocalizedTextProvider( $languageCode )
 		);
 	}
 
