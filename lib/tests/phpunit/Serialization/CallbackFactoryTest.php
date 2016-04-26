@@ -60,26 +60,6 @@ class CallbackFactoryTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider addAsArrayElementProvider
-	 */
-	public function testGetCallbackToRemoveKeys( $addAsArrayElement, $expected ) {
-		$instance = new CallbackFactory();
-		$callback = $instance->getCallbackToRemoveKeys( $addAsArrayElement );
-		$this->assertInternalType( 'callable', $callback );
-
-		$array = array( 'sourceKey' => array() );
-		$array = $callback( $array );
-		$this->assertSame( array( $expected ), $array );
-	}
-
-	public function addAsArrayElementProvider() {
-		return array(
-			array( null, array() ),
-			array( 'keyHolder', array( 'keyHolder' => 'sourceKey' ) ),
-		);
-	}
-
 	public function testGetCallbackToAddDataTypeToSnaksGroupedByProperty() {
 		$instance = new CallbackFactory();
 		$dataTypeLookup = $this->getPropertyDataTypeLookup();
