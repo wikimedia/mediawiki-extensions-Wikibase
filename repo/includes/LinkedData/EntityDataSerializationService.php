@@ -46,22 +46,6 @@ use Wikimedia\Purtle\RdfWriterFactory;
 class EntityDataSerializationService {
 
 	/**
-	 * Attributes that should be included in the serialized form of the entity.
-	 * That is, all well known attributes.
-	 *
-	 * @var string[]
-	 */
-	private $fieldsToShow = array(
-		'labels',
-		'aliases',
-		'descriptions',
-		'sitelinks',
-		'datatype',
-		'claims',
-		'statements',
-	);
-
-	/**
 	 * @var EntityLookup|null
 	 */
 	private $entityLookup = null;
@@ -146,20 +130,6 @@ class EntityDataSerializationService {
 		$this->rdfVocabulary = $rdfVocabulary;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
-	}
-
-	/**
-	 * @param string[] $fieldsToShow
-	 */
-	public function setFieldsToShow( array $fieldsToShow ) {
-		$this->fieldsToShow = $fieldsToShow;
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public function getFieldsToShow() {
-		return $this->fieldsToShow;
 	}
 
 	/**
