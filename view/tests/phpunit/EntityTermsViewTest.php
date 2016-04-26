@@ -6,7 +6,6 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\DummyLocalizedTextProvider;
@@ -41,19 +40,11 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 			->method( 'getLabelDescriptionAliasesEditSection' )
 			->will( $this->returnValue( '<EDITSECTION>' ) );
 
-		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->exactly( $languageNameCalls ) )
-			->method( 'getName' )
-			->will( $this->returnCallback( function( $languageCode ) {
-				return "<LANGUAGENAME-$languageCode>";
-			} ) );
-
 		$textProvider = $textProvider ?: new DummyLocalizedTextProvider( 'lkt' );
 
 		return new EntityTermsView(
 			TemplateFactory::getDefaultInstance(),
 			$editSectionGenerator,
-			$languageNameLookup,
 			$textProvider
 		);
 	}
@@ -210,97 +201,6 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertNotContains( 'wb-empty', $html );
 		$this->assertNotContains( '(wikibase-label-empty)', $html );
-	}
-
-	public function testGetEntityTermsForLanguageListView() {
-		$item = new Item(
-			new ItemId( 'Q1' ),
-			$this->getFingerprint()
-		);
-		$view = $this->getEntityTermsView( 0, 1 );
-		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, array( 'en' ) );
-
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-description)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-aliases)', $html );
-
-		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
-		$this->assertContains( '&lt;LANGUAGENAME-en&gt;', $html );
-		$this->assertContains( '&lt;LABEL&gt;', $html );
-		$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
-		$this->assertContains( '&lt;ALIAS1&gt;', $html );
-		$this->assertContains( '&lt;ALIAS2&gt;', $html );
-		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
-	}
-
-	public function testGetEntityTermsForLanguageListView_newEntity() {
-		$item = new Item(
-			null,
-			new Fingerprint()
-		);
-		$view = $this->getEntityTermsView( 0, 1 );
-		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, [ 'en' ] );
-
-		$this->assertContains( 'wb-empty', $html );
-		$this->assertContains( '(wikibase-label-empty)', $html );
-		$this->assertContains( '(wikibase-description-empty)', $html );
-		$this->assertNotContains( '(wikibase-aliases-empty)', $html );
-	}
-
-	public function testGetEntityTermsForLanguageListView_isEscaped() {
-		$textProvider = $this->getMock( LocalizedTextProvider::class );
-		$textProvider->expects( $this->any() )
-			->method( 'get' )
-			->will( $this->returnCallback( function( $key ) {
-				return $key === 'wikibase-entitytermsforlanguagelistview-language' ? '"RAW"' : "($key)";
-			} ) );
-
-		$item = new Item(
-			new ItemId( 'Q1' ),
-			new Fingerprint()
-		);
-		$view = $this->getEntityTermsView( 0, 0, $textProvider );
-		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, [] );
-
-		$this->assertContains( '&quot;RAW&quot;', $html );
-		$this->assertNotContains( '"RAW"', $html );
-	}
-
-	public function testGetEntityTermsForLanguageListView_isMarkedAsEmpty() {
-		$item = new Item(
-			new ItemId( 'Q1' ),
-			new Fingerprint()
-		);
-		$view = $this->getEntityTermsView( 0, 1 );
-		$html = $view->getEntityTermsForLanguageListView( $item, $item, $item, [ 'en' ] );
-
-		$this->assertContains( 'wb-empty', $html );
-		$this->assertContains( '(wikibase-label-empty)', $html );
-		$this->assertContains( '(wikibase-description-empty)', $html );
-		$this->assertNotContains( '(wikibase-aliases-empty)', $html );
-	}
-
-	public function testGetEntityTermsForLanguageListView_noAliasesProvider() {
-		$item = new Item(
-			new ItemId( 'Q1' ),
-			$this->getFingerprint()
-		);
-		$view = $this->getEntityTermsView( 0, 1 );
-		$html = $view->getEntityTermsForLanguageListView( $item, $item, null, array( 'en' ) );
-
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-description)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-aliases)', $html );
-
-		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
-		$this->assertContains( '&lt;LANGUAGENAME-en&gt;', $html );
-		$this->assertContains( '&lt;LABEL&gt;', $html );
-		$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
-		$this->assertNotContains( '&lt;ALIAS1&gt;', $html );
-		$this->assertNotContains( '&lt;ALIAS2&gt;', $html );
-		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
 	}
 
 }
