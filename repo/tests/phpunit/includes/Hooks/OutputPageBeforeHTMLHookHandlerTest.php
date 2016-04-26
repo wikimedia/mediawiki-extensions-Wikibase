@@ -9,10 +9,8 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityRevision;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
@@ -57,16 +55,10 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			->method( 'getEntityIdFromOutputPage' )
 			->will( $this->returnValue( $itemId ) );
 
-		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
-		$entityRevisionLookup->expects( $this->once() )
-			->method( 'getEntityRevision' )
-			->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
-
 		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
 			$userLanguageLookup,
 			new StaticContentLanguages( [ 'en', 'es', 'ru' ] ),
-			$entityRevisionLookup,
 			$languageNameLookup,
 			$outputPageEntityIdReader,
 			WikibaseRepo::getDefaultInstance()->getEntityContentFactory()
@@ -89,6 +81,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			'wikibase-view-chunks',
 			array( array( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ) )
 		);
+		$out->setProperty( 'wikibase-terms-list-items', [] );
 
 		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
 
