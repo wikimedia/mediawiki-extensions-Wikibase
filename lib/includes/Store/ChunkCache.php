@@ -86,13 +86,11 @@ class ChunkCache implements ChunkAccess {
 	 * Finds the position for the given key in the internal entry array.
 	 * This is implemented using iterative binary search.
 	 *
-	 * @note This is only public for testing, there is no need to call this function directly.
-	 *
 	 * @param int $key
 	 *
 	 * @return int the position if found, or the negative insert position minus one, if not.
 	 */
-	public function findEntryPosition( $key ) {
+	private function findEntryPosition( $key ) {
 		if ( empty( $this->entries ) ) {
 			return -1;
 		}
@@ -316,36 +314,6 @@ class ChunkCache implements ChunkAccess {
 	 */
 	public function getRecordId( $rec ) {
 		return $this->source->getRecordId( $rec );
-	}
-
-	/**
-	 * Returns the current size of the cache.
-	 *
-	 * @return int
-	 */
-	public function getSize() {
-		return $this->size;
-	}
-
-	/**
-	 * Resets internal hit/miss statistics
-	 */
-	public function resetStarts() {
-		$this->hitCount = 0;
-		$this->missCount = 0;
-	}
-
-	/**
-	 * Returns this cache's hit ratio
-	 */
-	public function getHitRatio() {
-		$total = $this->hitCount + $this->missCount;
-
-		if ( $total === 0 ) {
-			return 0;
-		}
-
-		return $this->hitCount / $total;
 	}
 
 }
