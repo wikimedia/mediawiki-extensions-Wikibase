@@ -32,6 +32,13 @@ use Wikibase\View\Template\TemplateFactory;
 class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 
 	/**
+	 * @return OutputPage
+	 */
+	private function newOutputPage() {
+		return new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
+	}
+
+	/**
 	 * @param string $uiLanguageCode
 	 *
 	 * @return OutputPageBeforeHTMLHookHandler
@@ -79,15 +86,14 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 	 * Integration test mostly testing that things don't fatal/ throw.
 	 */
 	public function testOutputPageBeforeHTMLHookHandler() {
-		$context = new DerivativeContext( RequestContext::getMain() );
-		$outputPageBeforeHTMLHookHandler = $this->getHookHandler( $context->getLanguage()->getCode() );
+		$out = $this->newOutputPage();
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler( $out->getLanguage()->getCode() );
 
 		$html = '';
-		$out = new OutputPage( $context );
 		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
 		$out->setProperty(
 			'wikibase-view-chunks',
-			array( array( 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ) )
+			[ '$1' => [ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ] ]
 		);
 
 		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
@@ -97,6 +103,39 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 		$wbUserSpecifiedLanguages = $jsConfigVars['wbUserSpecifiedLanguages'];
 
 		$this->assertSame( [ 'es', 'ru' ], $wbUserSpecifiedLanguages );
+	}
+
+	public function testGivenDeletedRevision_hookHandlerDoesNotFail() {
+		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
+		$userLanguageLookup->expects( $this->any() )
+			->method( 'getUserSpecifiedLanguages' )
+			->will( $this->returnValue( [] ) );
+		$userLanguageLookup->expects( $this->any() )
+			->method( 'getAllUserLanguages' )
+			->will( $this->returnValue( [] ) );
+
+		$outputPageEntityIdReader = $this->getMockBuilder( OutputPageEntityIdReader::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$outputPageEntityIdReader->expects( $this->once() )
+			->method( 'getEntityIdFromOutputPage' )
+			->will( $this->returnValue( null ) );
+
+		$handler = new OutputPageBeforeHTMLHookHandler(
+			TemplateFactory::getDefaultInstance(),
+			$userLanguageLookup,
+			new StaticContentLanguages( [] ),
+			$this->getMock( EntityRevisionLookup::class ),
+			$this->getMock( LanguageNameLookup::class ),
+			$outputPageEntityIdReader
+		);
+
+		$out = $this->newOutputPage();
+		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
+
+		$html = '$1';
+		$handler->doOutputPageBeforeHTML( $out, $html );
+		$this->assertSame( '', $html );
 	}
 
 }
