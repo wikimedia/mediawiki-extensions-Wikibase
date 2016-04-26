@@ -7,7 +7,8 @@
 			"555",
 			"Macofe",
 			"Fasouzafreitas",
-			"TheEduGobi"
+			"TheEduGobi",
+			"Dianakc"
 		]
 	},
 	"wikibase-lib-desc": "Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client",
@@ -56,12 +57,12 @@
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Alterou a classificação de {{PLURAL:$3|alegação|alegações}}",
 	"wikibase-item-summary-wbeditentity": "Criado um novo item",
 	"wikibase-item-summary-wbeditentity-create": "Criado um novo item",
-	"wikibase-item-summary-wbeditentity-update": "Atualizado um item",
+	"wikibase-item-summary-wbeditentity-update": "Mudou um item",
 	"wikibase-item-summary-wbeditentity-override": "Um item foi sobrescrito",
 	"wikibase-item-summary-wblinktitles-create": "Criado este item para conectar as páginas",
 	"wikibase-item-summary-wblinktitles-connect": "Adicionado um link de idioma para conectar as páginas",
 	"wikibase-property-summary-wbeditentity-create": "Criada uma nova propriedade",
-	"wikibase-property-summary-wbeditentity-update": "Uma propriedade foi atualizada",
+	"wikibase-property-summary-wbeditentity-update": "Mudou uma propriedade",
 	"wikibase-property-summary-wbeditentity-override": "Limpou uma propriedade",
 	"wikibase-property-summary-special-create-property": "Criou uma propriedade com {{PLURAL:$1|um valor [$2]|valores [$2]}}"
 }

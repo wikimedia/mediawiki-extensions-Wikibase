@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Marwan Mohamad"
+			"Marwan Mohamad",
+			"Lukman Tomayahu"
 		]
 	},
 	"wikibase-dataitem": "Item to {{WBREPONAME}}",
 	"wikibase-editlinks": "Ubawa pranala",
-	"wikibase-editlinkstitle": "Ubawa pranala interwiki"
+	"wikibase-editlinkstitle": "Ubawa pranala interwiki",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Mopo?opiohu {{WBREPONAME}}"
 }

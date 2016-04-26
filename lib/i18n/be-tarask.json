@@ -26,6 +26,7 @@
 	"wikibase-error-ui-edit-conflict": "Адбыўся канфлікт рэдагаваньня. Захавайце свае зьмены на кампутары, абнавіце старонку і захавайце зноў, калі ласка.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (трансьлітаравана)",
 	"wikibase-quantitydetails-amount": "Сума",
+	"wikibase-quantitydetails-upperbound": "Верхняя мяжа",
 	"wikibase-sitelinks-wikipedia": "Вікіпэдыя",
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
 	"wikibase-sitelinks-link-columnheading": "Злучаная старонка",

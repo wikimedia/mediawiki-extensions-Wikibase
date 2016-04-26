@@ -44,10 +44,10 @@
 	"wikibase-replicationnote": "कृपया ध्यान देब जे अहाँ पृष्ठ के जोडनए छी उ आन विकि पे देखए लेल किछु समय ल सकएत अछि।",
 	"wikibase-watchlist-show-changes-pref": "अपन साकांक्ष सूची {{WBREPONAME}} मे सम्पादन देखाऊ",
 	"wikibase-error-serialize-error": "डेटा अनुक्रम नै भऽ सकल।",
-	"unconnectedpages": "पन्ना आइटम सँ नै जुडल",
-	"wikibase-unconnectedpages-submit": "जाऊ",
+	"unconnectedpages": "पन्ना आइटमसँ नै जुडल",
+	"wikibase-unconnectedpages-submit": "पन्ना देखाबी",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} बिषय आइडी",
 	"wikibase-pageinfo-entity-id-none": "कोनो नै",
-	"wikibase-otherprojects": "अन्य प्रोजेक्ट सभ",
+	"wikibase-otherprojects": "अन्य परियोजनासभमे",
 	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार"
 }

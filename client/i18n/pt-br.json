@@ -58,7 +58,7 @@
 	"wikibase-error-invalid-entity-id": "O ID inserido é desconhecido pelo sistema. Por favor, utilize um ID de entidade válido.",
 	"unconnectedpages": "Páginas não conectadas a itens",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|interlanguage link|links interlíngua}} na página)",
-	"wikibase-unconnectedpages-submit": "Ir",
+	"wikibase-unconnectedpages-submit": "Mostrar páginas",
 	"wikibase-pageinfo-entity-id": "ID do item {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Não há",
 	"wikibase-property-render-error": "Erro ao renderizar a propriedade $1: $2",
