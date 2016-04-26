@@ -11,7 +11,6 @@ use Wikibase\EntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
@@ -47,11 +46,6 @@ class OutputPageBeforeHTMLHookHandler {
 	private $termsLanguages;
 
 	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $entityRevisionLookup;
-
-	/**
 	 * @var LanguageNameLookup
 	 */
 	private $languageNameLookup;
@@ -70,7 +64,6 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param TemplateFactory $templateFactory
 	 * @param UserLanguageLookup $userLanguageLookup
 	 * @param ContentLanguages $termsLanguages
-	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param OutputPageEntityIdReader $outputPageEntityIdReader
 	 * @param EntityFactory $entityFactory
@@ -79,7 +72,6 @@ class OutputPageBeforeHTMLHookHandler {
 		TemplateFactory $templateFactory,
 		UserLanguageLookup $userLanguageLookup,
 		ContentLanguages $termsLanguages,
-		EntityRevisionLookup $entityRevisionLookup,
 		LanguageNameLookup $languageNameLookup,
 		OutputPageEntityIdReader $outputPageEntityIdReader,
 		EntityFactory $entityFactory
@@ -87,7 +79,6 @@ class OutputPageBeforeHTMLHookHandler {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
 		$this->termsLanguages = $termsLanguages;
-		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 		$this->entityFactory = $entityFactory;
@@ -105,7 +96,6 @@ class OutputPageBeforeHTMLHookHandler {
 			TemplateFactory::getDefaultInstance(),
 			new BabelUserLanguageLookup,
 			$wikibaseRepo->getTermsLanguages(),
-			$wikibaseRepo->getEntityRevisionLookup(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
 				$wikibaseRepo->getEntityContentFactory(),
@@ -170,17 +160,15 @@ class OutputPageBeforeHTMLHookHandler {
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		if ( $entityId instanceof EntityId ) {
 			$termsListItemsHtml = $out->getProperty( 'wikibase-terms-list-items' );
-			$entity = $this->getEntity( $entityId, $out->getRevisionId(), $termsListItemsHtml !== null );
-			if ( $entity instanceof EntityDocument ) {
-				$expander = $this->getEntityViewPlaceholderExpander(
-					$entity,
-					$out->getUser(),
-					$this->getTermsLanguagesCodes( $out ),
-					$termsListItemsHtml,
-					$out->getLanguage()->getCode()
-				);
-				$getHtmlCallback = [ $expander, 'getHtmlForPlaceholder' ];
-			}
+			$entity = $this->getDummyEntity( $entityId->getEntityType() );
+			$expander = $this->getEntityViewPlaceholderExpander(
+				$entity,
+				$out->getUser(),
+				$this->getTermsLanguagesCodes( $out ),
+				$termsListItemsHtml,
+				$out->getLanguage()->getCode()
+			);
+			$getHtmlCallback = [ $expander, 'getHtmlForPlaceholder' ];
 		}
 
 		$html = $injector->inject( $html, $getHtmlCallback );
@@ -188,24 +176,11 @@ class OutputPageBeforeHTMLHookHandler {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $revisionId
-	 * @param bool $termsListPrerendered
 	 *
-	 * @return EntityDocument|null
+	 * @return EntityDocument
 	 */
-	private function getEntity( EntityId $entityId, $revisionId, $termsListPrerendered ) {
-		if ( $termsListPrerendered ) {
-			$entity = $this->entityFactory->newEmpty( $entityId->getEntityType() );
-		} else {
-			// The parser cache content is too old to contain the terms list items
-			// Pass the correct entity to generate terms list items on the fly
-			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
-			if ( !( $entityRev instanceof EntityRevision ) ) {
-				return null;
-			}
-			$entity = $entityRev->getEntity();
-		}
-		return $entity;
+	private function getDummyEntity( $type ) {
+		return $this->entityFactory->newEmpty( $type );
 	}
 
 	/**
@@ -225,7 +200,7 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param EntityDocument $entity
 	 * @param User $user
 	 * @param string[] $termsLanguages
-	 * @param string[]|null $termsListItemsHtml
+	 * @param string[] $termsListItemsHtml
 	 * @param string $languageCode
 	 *
 	 * @return EntityViewPlaceholderExpander
@@ -234,7 +209,7 @@ class OutputPageBeforeHTMLHookHandler {
 		EntityDocument $entity,
 		User $user,
 		array $termsLanguages,
-		array $termsListItemsHtml = null,
+		array $termsListItemsHtml,
 		$languageCode
 	) {
 		// FIXME: This is not necessarily true for all entity types.
