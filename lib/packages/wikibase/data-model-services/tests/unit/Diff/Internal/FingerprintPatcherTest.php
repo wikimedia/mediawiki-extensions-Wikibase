@@ -94,6 +94,11 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ), true ),
 				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ), true ),
 			) ),
+			'non-associative diffs containing atomic ops' => array( array(
+				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ), true ),
+				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ), false ),
+				'fa' => new Diff( array( new DiffOpRemove( 'fa-old' ) ), true ),
+			) ),
 			'partly associative diffs (auto-detected) containing atomic ops' => array( array(
 				'de' => new Diff( array( new DiffOpAdd( 'foo' ) ) ),
 				'en' => new Diff( array( new DiffOpChange( 'en-old', 'en-new' ) ) ),
@@ -194,11 +199,6 @@ class FingerprintPatcherTest extends \PHPUnit_Framework_TestCase {
 				'aliases' => new Diff( array(
 					'de' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ), true ),
 					'en' => new Diff( array( new DiffOpChange( 'original', 'changed' ) ), true ),
-				), true ),
-			) ),
-			'non-associative aliases change is ignored' => array( array(
-				'aliases' => new Diff( array(
-					'en' => new Diff( array( new DiffOpChange( 'conflict', 'changed' ) ), false ),
 				), true ),
 			) ),
 			'changing missing aliases is no-op (atomic)' => array( array(
