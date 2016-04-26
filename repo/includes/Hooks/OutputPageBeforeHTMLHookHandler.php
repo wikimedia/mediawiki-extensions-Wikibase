@@ -153,6 +153,9 @@ class OutputPageBeforeHTMLHookHandler {
 	private function replacePlaceholders( array $placeholders, OutputPage $out, &$html ) {
 		$injector = new TextInjector( $placeholders );
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
+		$getHtmlCallback = function() {
+			return '';
+		};
 
 		if ( $entityId instanceof EntityId ) {
 			$entityRev = $this->entityRevisionLookup->getEntityRevision(
@@ -167,16 +170,11 @@ class OutputPageBeforeHTMLHookHandler {
 					$this->getTermsLanguagesCodes( $out ),
 					$out->getLanguage()->getCode()
 				);
-
-				$html = $injector->inject( $html, [ $expander, 'getHtmlForPlaceholder' ] );
-
-				return;
+				$getHtmlCallback = [ $expander, 'getHtmlForPlaceholder' ];
 			}
 		}
 
-		$html = $injector->inject( $html, function() {
-			return '';
-		} );
+		$html = $injector->inject( $html, $getHtmlCallback );
 	}
 
 	/**
@@ -205,7 +203,8 @@ class OutputPageBeforeHTMLHookHandler {
 		User $user,
 		array $termsLanguages,
 		$languageCode
-	 ) {
+	) {
+		// FIXME: This is not necessarily true for all entity types.
 		$labelsProvider = $entity;
 		$descriptionsProvider = $entity;
 		$aliasesProvider = $entity instanceof AliasesProvider ? $entity : null;
