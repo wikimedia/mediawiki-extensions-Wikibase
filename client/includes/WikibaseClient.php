@@ -46,7 +46,6 @@ use Wikibase\Client\Store\TitleFactory;
 use Wikibase\ClientStore;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -58,7 +57,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\DirectSqlStore;
-use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
 use Wikibase\LangLinkHandler;
@@ -789,20 +787,6 @@ final class WikibaseClient {
 		}
 
 		return $this->siteStore;
-	}
-
-	/**
-	 * @return EntityFactory
-	 */
-	public function getEntityFactory() {
-		$entityClasses = array(
-			Item::ENTITY_TYPE => Item::class,
-			Property::ENTITY_TYPE => Property::class,
-		);
-
-		//TODO: provide a hook or registry for adding more.
-
-		return new EntityFactory( $entityClasses );
 	}
 
 	/**

@@ -24,7 +24,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
-use Wikibase\EntityFactory;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
@@ -258,12 +257,6 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetSiteStore() {
 		$store = $this->getWikibaseClient()->getSiteStore();
 		$this->assertInstanceOf( SiteStore::class, $store );
-	}
-
-	public function testGetEntityFactory() {
-		$factory = $this->getWikibaseClient()->getEntityFactory();
-		$this->assertInstanceOf( EntityFactory::class, $factory );
-		$this->assertSame( array( 'item', 'property' ), $factory->getEntityTypes() );
 	}
 
 	public function testGetOtherProjectsSidebarGeneratorFactoryReturnType() {
