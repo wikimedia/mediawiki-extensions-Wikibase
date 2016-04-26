@@ -61,13 +61,6 @@ class SiteLinksRdfBuilder implements EntityRdfBuilder {
 	}
 
 	/**
-	 * @return DedupeBag
-	 */
-	public function getDedupeBag() {
-		return $this->dedupeBag;
-	}
-
-	/**
 	 * @param DedupeBag $dedupeBag
 	 */
 	public function setDedupeBag( DedupeBag $dedupeBag ) {

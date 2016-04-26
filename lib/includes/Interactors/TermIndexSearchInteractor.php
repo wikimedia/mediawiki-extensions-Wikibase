@@ -111,13 +111,6 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function getUseLanguageFallback() {
-		return $this->useLanguageFallback;
-	}
-
-	/**
 	 * @param int $limit Hard upper limit of 5000
 	 */
 	public function setLimit( $limit ) {

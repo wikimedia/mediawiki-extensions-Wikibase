@@ -56,27 +56,6 @@ class TermSearchKeyBuilder {
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function getRebuildAll() {
-		return $this->all;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getBatchSize() {
-		return $this->batchSize;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getFromId() {
-		return $this->fromId;
-	}
-
-	/**
 	 * @param bool $all
 	 */
 	public function setRebuildAll( $all ) {
@@ -184,15 +163,13 @@ class TermSearchKeyBuilder {
 	 *
 	 * @see TermSqlIndex::getSearchKey
 	 *
-	 * @since 0.4
-	 *
 	 * @param DatabaseBase $dbw the database connection to use
 	 * @param int $rowId the row to update
 	 * @param string $text the term's text
 	 *
 	 * @return string|bool the search key, or false if no search key could be calculated.
 	 */
-	protected function updateSearchKey( DatabaseBase $dbw, $rowId, $text ) {
+	private function updateSearchKey( DatabaseBase $dbw, $rowId, $text ) {
 		$key = $this->table->getSearchKey( $text );
 
 		if ( $key === '' ) {
@@ -217,13 +194,9 @@ class TermSearchKeyBuilder {
 	}
 
 	/**
-	 * reports a message
-	 *
-	 * @since 0.4
-	 *
 	 * @param string $msg
 	 */
-	protected function report( $msg ) {
+	private function report( $msg ) {
 		if ( $this->reporter ) {
 			$this->reporter->reportMessage( $msg );
 		}

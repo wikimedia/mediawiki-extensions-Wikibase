@@ -12,6 +12,7 @@ namespace Wikibase\Repo\LinkedData;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class HttpAcceptNegotiator {
 
@@ -31,15 +32,6 @@ class HttpAcceptNegotiator {
 	public function __construct( array $supported ) {
 		$this->supportedValues = $supported;
 		$this->defaultValue = reset( $supported );
-	}
-
-	/**
-	 * Returns a supported value to be used as a default.
-	 *
-	 * @return string
-	 */
-	public function getDefaultSupportedValue() {
-		return $this->defaultValue;
 	}
 
 	/**
@@ -121,7 +113,7 @@ class HttpAcceptNegotiator {
 	 *
 	 * @return bool Whether the given supported value matches the given accepted value.
 	 */
-	public function valueMatches( $accepted, $supported ) {
+	private function valueMatches( $accepted, $supported ) {
 		// RDF 2045: MIME types are case insensitive.
 		// full match
 		if ( strcasecmp( $accepted, $supported ) === 0 ) {
