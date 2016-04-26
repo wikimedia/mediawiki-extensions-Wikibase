@@ -235,7 +235,7 @@ class LanguageFallbackChainFactory {
 		return $languageFallbackChain;
 	}
 
-	protected function getBabel( $languageCode, $user ) {
+	private function getBabel( $languageCode, $user ) {
 		$babel = array();
 
 		$babelCategoryNames = $this->getBabelCategoryNames();
@@ -261,7 +261,7 @@ class LanguageFallbackChainFactory {
 		return $babel;
 	}
 
-	protected function getBabelCategoryNames() {
+	private function getBabelCategoryNames() {
 		global $wgBabelCategoryNames;
 
 		$babelCategoryNames = array_filter(
@@ -319,34 +319,6 @@ class LanguageFallbackChainFactory {
 		}
 
 		return $chain;
-	}
-
-	/**
-	 * Construct the fallback chain based on a context for direct page views.
-	 * Caching mechanisms used are taken into consideration.
-	 *
-	 * @param IContextSource $context
-	 * @deprecated 0.5 use newFromUserAndLanguageCodeForPageView or other method.
-	 *
-	 * @return LanguageFallbackChain
-	 */
-	public function newFromContextForPageView( IContextSource $context ) {
-		// XXX: Unused? Remove?
-		return $this->newFromUserAndLanguageCodeForPageView(
-			$context->getUser(),
-			$context->getLanguage()->getCode()
-		);
-	}
-
-	/**
-	 * @param User $user
-	 * @param string $languageCode
-	 *
-	 * @return LanguageFallbackChain
-	 */
-	public function newFromUserAndLanguageCodeForPageView( User $user, $languageCode ) {
-		// XXX: Unused? Remove?
-		return $this->newFromLanguageCode( $languageCode, self::FALLBACK_SELF );
 	}
 
 }

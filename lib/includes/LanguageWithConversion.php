@@ -211,19 +211,6 @@ class LanguageWithConversion {
 	}
 
 	/**
-	 * Get the language where data should be fetched. Generally this doesn't need to be used.
-	 *
-	 * @return Language
-	 */
-	public function getFetchLanguage() {
-		if ( $this->sourceLanguageCode !== null ) {
-			return $this->getSourceLanguage();
-		} else {
-			return $this->getLanguage();
-		}
-	}
-
-	/**
 	 * Translate data after fetching them.
 	 *
 	 * @param string $text Data to transform
@@ -244,22 +231,6 @@ class LanguageWithConversion {
 	}
 
 	/**
-	 * Try to work out the original data (in source language) from a given translation output.
-	 *
-	 * @param $text String
-	 * @return String
-	 */
-	public function reverseTranslate( $text ) {
-		if ( $this->parentLanguage ) {
-			return $this->parentLanguage->getConverter()->translate(
-				$text, $this->sourceLanguageCode
-			);
-		} else {
-			return $text;
-		}
-	}
-
-	/**
 	 * Insert a text snippet which will be translated later.
 	 *
 	 * Due to the implementation of language converter, massive
@@ -271,7 +242,7 @@ class LanguageWithConversion {
 	 *
 	 * @param $text String
 	 */
-	public function prepareForTranslate( $text ) {
+	private function prepareForTranslate( $text ) {
 		if ( $this->parentLanguage ) {
 			$this->translatePool[$text] = true;
 		}

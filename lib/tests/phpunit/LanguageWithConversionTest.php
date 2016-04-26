@@ -38,7 +38,6 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expectedSourceLangCode, $obj->getSourceLanguage()->getCode() );
 			$this->assertEquals( $expectedSourceLangCode, $obj->getSourceLanguageCode() );
 		}
-		$this->assertEquals( $expectedFetchLangCode, $obj->getFetchLanguage()->getCode() );
 		$this->assertEquals( $expectedFetchLangCode, $obj->getFetchLanguageCode() );
 	}
 
@@ -130,24 +129,7 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 	public function testTranslateBatched( $langCode, $sourceLangCode, $translations ) {
 		$obj = LanguageWithConversion::factory( $langCode, $sourceLangCode );
 		foreach ( $translations as $text => $translatedText ) {
-			$obj->prepareForTranslate( $text );
-		}
-		foreach ( $translations as $text => $translatedText ) {
 			$this->assertEquals( $obj->translate( $text ), $translatedText );
-		}
-	}
-
-	/**
-	 * @dataProvider provideTranslate
-	 */
-	public function testReverseTranslate( $langCode, $sourceLangCode, $translations ) {
-		if ( $sourceLangCode === null ) {
-			$sourceLangCode = $langCode;
-			$langCode = null;
-		}
-		$obj = LanguageWithConversion::factory( $sourceLangCode, $langCode );
-		foreach ( $translations as $text => $translatedText ) {
-			$this->assertEquals( $obj->reverseTranslate( $text ), $translatedText );
 		}
 	}
 
