@@ -383,26 +383,4 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @dataProvider newFromContextForPageViewProvider
-	 */
-	public function testNewFromContextForPageView( $anonymousPageViewCached, $msg ) {
-		$context = new RequestContext();
-		$context->setLanguage( Language::factory( 'es' ) );
-		$user = User::newFromId( 0 );
-		$context->setUser( $user );
-
-		$factory = new LanguageFallbackChainFactory( $anonymousPageViewCached );
-		$fallbackChain = $factory->newFromContextForPageView( $context );
-
-		$this->assertInstanceOf( LanguageFallbackChain::class, $fallbackChain, $msg );
-	}
-
-	public function newFromContextForPageViewProvider() {
-		return array(
-			array( true, 'anon cached page view' ),
-			array( false, 'not anon cached page view' ),
-		);
-	}
-
 }
