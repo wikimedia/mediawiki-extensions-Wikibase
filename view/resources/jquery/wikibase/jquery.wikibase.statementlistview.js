@@ -222,19 +222,30 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @param {jQuery.wikibase.statementview} statementview
 	 */
 	remove: function( statementview ) {
-		var self = this;
+		var self = this,
+			statement = statementview.option( 'value' );
 
-		statementview.disable();
+		if ( statement && statement.getClaim().getGuid() ) {
+			statementview.disable();
+			this.options.claimsChanger.removeStatement( statement )
+			.done( function() {
+				self._removeStatementview( statementview );
+			} ).fail( function( error ) {
+				statementview.enable();
+				statementview.setError( error );
+			} );
+		} else {
+			this._removeStatementview( statementview );
+		}
+	},
 
-		this.options.claimsChanger.removeStatement( statementview.value() )
-		.done( function() {
-			self._listview.removeItem( statementview.element );
-
-			self._trigger( 'afterremove' );
-		} ).fail( function( error ) {
-			statementview.enable();
-			statementview.setError( error );
-		} );
+	/**
+	 * @param {jQuery.wikibase.statementview} statementview
+	 * @private
+	 */
+	_removeStatementview: function( statementview ) {
+		this._listview.removeItem( statementview.element );
+		this._trigger( 'afterremove' );
 	},
 
 	/**
