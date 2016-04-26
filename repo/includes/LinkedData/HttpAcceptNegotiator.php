@@ -33,13 +33,6 @@ class HttpAcceptNegotiator {
 	}
 
 	/**
-	 * Returns a supported value to be used as a default.
-	 */
-	public function getDefaultSupportedValue() {
-		return $this->defaultValue;
-	}
-
-	/**
 	 * Returns the best supported key from the given weight map. Of the keys from the
 	 * $weights parameter that are also in the list of supported values supplied to
 	 * the constructor, this returns the key that has the highest value associated
@@ -108,7 +101,7 @@ class HttpAcceptNegotiator {
 	 *
 	 * @return bool Whether the given supported value matches the given accepted value.
 	 */
-	public function valueMatches( $accepted, $supported ) {
+	private function valueMatches( $accepted, $supported ) {
 		// RDF 2045: MIME types are case insensitive.
 		$accepted = strtolower( $accepted );
 		$supported = strtolower( $supported );

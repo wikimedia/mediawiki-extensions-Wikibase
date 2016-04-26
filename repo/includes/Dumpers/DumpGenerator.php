@@ -117,15 +117,6 @@ abstract class DumpGenerator {
 	}
 
 	/**
-	 * @see setBatchSize()
-	 *
-	 * @return int
-	 */
-	public function getBatchSize() {
-		return $this->batchSize;
-	}
-
-	/**
 	 * @param MessageReporter $progressReporter
 	 */
 	public function setProgressReporter( MessageReporter $progressReporter ) {
@@ -133,24 +124,10 @@ abstract class DumpGenerator {
 	}
 
 	/**
-	 * @return MessageReporter
-	 */
-	public function getProgressReporter() {
-		return $this->progressReporter;
-	}
-
-	/**
 	 * @param ExceptionHandler $exceptionHandler
 	 */
 	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
-	}
-
-	/**
-	 * @return ExceptionHandler
-	 */
-	public function getExceptionHandler() {
-		return $this->exceptionHandler;
 	}
 
 	/**

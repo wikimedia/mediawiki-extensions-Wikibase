@@ -115,13 +115,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return int
-	 */
-	public function getBatchSize() {
-		return $this->batchSize;
-	}
-
-	/**
 	 * Sets the number of changes we would prefer to process in one go.
 	 * Clients that are lagged by fewer changes than this may be skipped by selectClient().
 	 *
@@ -132,24 +125,10 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return MessageReporter
-	 */
-	public function getMessageReporter() {
-		return $this->messageReporter;
-	}
-
-	/**
 	 * @param MessageReporter $messageReporter
 	 */
 	public function setMessageReporter( MessageReporter $messageReporter ) {
 		$this->messageReporter = $messageReporter;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getRandomness() {
-		return $this->randomness;
 	}
 
 	/**
@@ -160,13 +139,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 */
 	public function setRandomness( $randomness ) {
 		$this->randomness = $randomness;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getLockGraceInterval() {
-		return $this->lockGraceInterval;
 	}
 
 	/**
@@ -182,13 +154,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return int
-	 */
-	public function getDispatchInterval() {
-		return $this->dispatchInterval;
-	}
-
-	/**
 	 * Sets the number of seconds we would prefer to let a client "rest" before dispatching
 	 * to it again. Clients that have received updates less than $dispatchInterval seconds ago
 	 * may be skipped by selectClient().
@@ -197,13 +162,6 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 */
 	public function setDispatchInterval( $dispatchInterval ) {
 		$this->dispatchInterval = $dispatchInterval;
-	}
-
-	/**
-	 * @return callable
-	 */
-	public function getArrayRandOverride() {
-		return $this->array_rand;
 	}
 
 	/**
@@ -216,26 +174,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return callable
-	 */
-	public function getTimeOverride() {
-		return $this->time;
-	}
-
-	/**
 	 * Set override for time(), for testing.
 	 *
 	 * @param callable $time
 	 */
 	public function setTimeOverride( $time ) {
 		$this->time = $time;
-	}
-
-	/**
-	 * @return callable
-	 */
-	public function getEngageClientLockOverride() {
-		return $this->engageClientLockOverride;
 	}
 
 	/**
@@ -248,26 +192,12 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	}
 
 	/**
-	 * @return callable
-	 */
-	public function getIsClientLockUsedOverride() {
-		return $this->isClientLockUsedOverride;
-	}
-
-	/**
 	 * Set override for !$db->lockIsFree, for testing.
 	 *
 	 * @param callable $isClientLockUsedOverride
 	 */
 	public function setIsClientLockUsedOverride( $isClientLockUsedOverride ) {
 		$this->isClientLockUsedOverride = $isClientLockUsedOverride;
-	}
-
-	/**
-	 * @return callable
-	 */
-	public function getReleaseClientLockOverride() {
-		return $this->releaseClientLockOverride;
 	}
 
 	/**

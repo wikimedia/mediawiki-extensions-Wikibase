@@ -99,24 +99,10 @@ class EntityUsageTableBuilder {
 	}
 
 	/**
-	 * @return MessageReporter
-	 */
-	public function getProgressReporter() {
-		return $this->progressReporter;
-	}
-
-	/**
 	 * @param ExceptionHandler $exceptionHandler
 	 */
 	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
 		$this->exceptionHandler = $exceptionHandler;
-	}
-
-	/**
-	 * @return ExceptionHandler
-	 */
-	public function getExceptionHandler() {
-		return $this->exceptionHandler;
 	}
 
 	/**
