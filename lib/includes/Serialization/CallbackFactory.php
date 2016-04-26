@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
  * @since 0.5
+ *
  * @author Addshore
  */
 class CallbackFactory {
@@ -42,25 +43,6 @@ class CallbackFactory {
 			if ( is_array( $array ) ) {
 				ApiResult::setArrayType( $array, $type, $kvpKeyName );
 			}
-			return $array;
-		};
-	}
-
-	/**
-	 * Get callable to remove array keys and optionally set the key as an array value
-	 *
-	 * @param string|null $addAsArrayElement
-	 *
-	 * @return callable
-	 */
-	public function getCallbackToRemoveKeys( $addAsArrayElement = null ) {
-		return function ( $array ) use ( $addAsArrayElement ) {
-			if ( $addAsArrayElement !== null ) {
-				foreach ( $array as $key => &$value ) {
-					$value[$addAsArrayElement] = $key;
-				}
-			}
-			$array = array_values( $array );
 			return $array;
 		};
 	}
