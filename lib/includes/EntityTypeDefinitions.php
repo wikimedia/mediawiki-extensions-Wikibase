@@ -21,6 +21,7 @@ use InvalidArgumentException;
  * - content-model-id: a string used as the content model identifier
  * - content-handler-factory-callback: a callback for creating a content handler dealing with
  *   entities of this type
+ * - entity-factory-callback: a callback for creating an empty entity of this type
  *
  * @see docs/entitytypes.wiki
  *
@@ -107,6 +108,13 @@ class EntityTypeDefinitions {
 	 */
 	public function getContentHandlerFactoryCallbacks() {
 		return $this->getMapForDefinitionField( 'content-handler-factory-callback' );
+	}
+
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityFactoryCallbacks() {
+		return $this->getMapForDefinitionField( 'entity-factory-callback' );
 	}
 
 	/**

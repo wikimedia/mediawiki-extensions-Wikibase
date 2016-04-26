@@ -16,6 +16,8 @@
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\WikibaseRepo;
@@ -41,7 +43,10 @@ return array(
 		'content-handler-factory-callback' => function() {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			return $wikibaseRepo->newItemHandler();
-		}
+		},
+		'entity-factory-callback' => function() {
+			return new Item();
+		},
 	),
 	'property' => array(
 		'view-factory-callback' => function(
@@ -62,6 +67,9 @@ return array(
 		'content-handler-factory-callback' => function() {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			return $wikibaseRepo->newPropertyHandler();
-		}
+		},
+		'entity-factory-callback' => function() {
+			return Property::newFromType( '' );
+		},
 	)
 );
