@@ -131,13 +131,6 @@ class CreateRedirect extends ApiBase {
 	}
 
 	/**
-	 * @return string The empty string to indicate we need a token, but no salt.
-	 */
-	public function getTokenSalt() {
-		return '';
-	}
-
-	/**
 	 * @see ApiBase::mustBePosted()
 	 */
 	public function mustBePosted() {
