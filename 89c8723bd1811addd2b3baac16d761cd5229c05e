@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_6bc9007b",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-26T18:13:01Z",
+      "side": 1,
+      "message": "Why an EntityContentFactory, not just an EntityFactory?",
+      "revId": "89c8723bd1811addd2b3baac16d761cd5229c05e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0bb044f0",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-26T18:13:01Z",
+      "side": 1,
+      "message": "would be nicer to inject this",
+      "revId": "89c8723bd1811addd2b3baac16d761cd5229c05e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4b999c7f",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-26T18:13:01Z",
+      "side": 1,
+      "message": "Very JavaScripty ;)",
+      "revId": "89c8723bd1811addd2b3baac16d761cd5229c05e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2b96e84f",
+        "filename": "repo/tests/phpunit/includes/Hooks/OutputPageBeforeHTMLHookHandlerTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-26T18:13:01Z",
+      "side": 1,
+      "message": "An EntityFactory would be easy to mock here.",
+      "revId": "89c8723bd1811addd2b3baac16d761cd5229c05e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
