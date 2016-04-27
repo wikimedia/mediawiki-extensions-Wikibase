@@ -2,8 +2,18 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
+use Serializers\Serializer;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
+use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * @covers Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory
@@ -28,7 +38,19 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 	}
 
 	private function getEntityParserOutputGeneratorFactory() {
-		return WikibaseRepo::getDefaultInstance()->getEntityParserOutputGeneratorFactory();
+		return new EntityParserOutputGeneratorFactory(
+			$this->getMockBuilder( DispatchingEntityViewFactory::class )
+				->disableOriginalConstructor()->getMock(),
+			$this->getMock( EntityInfoBuilderFactory::class ),
+			$this->getMock( EntityTitleLookup::class ),
+			new LanguageFallbackChainFactory(),
+			$this->getMockBuilder( TemplateFactory::class )
+				->disableOriginalConstructor()->getMock(),
+			$this->getMock( EntityDataFormatProvider::class ),
+			$this->getMock( PropertyDataTypeLookup::class ),
+			new BasicEntityIdParser(),
+			$this->getMock( Serializer::class )
+		);
 	}
 
 }
