@@ -14,6 +14,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
+use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityViewPlaceholderExpander;
@@ -248,6 +249,7 @@ class OutputPageBeforeHTMLHookHandler {
 			$descriptionsProvider,
 			$aliasesProvider,
 			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
+			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $languageCode ),
 			$termsListItemsHtml ?: []
