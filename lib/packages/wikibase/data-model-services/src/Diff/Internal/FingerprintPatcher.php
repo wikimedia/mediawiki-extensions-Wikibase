@@ -61,24 +61,34 @@ class FingerprintPatcher {
 	private function patchTerm( TermList $terms, $lang, AtomicDiffOp $diffOp ) {
 		$hasLang = $terms->hasTermForLanguage( $lang );
 
-		if ( $diffOp instanceof DiffOpAdd ) {
-			if ( !$hasLang ) {
-				$terms->setTextForLanguage( $lang, $diffOp->getNewValue() );
-			}
-		} elseif ( $diffOp instanceof DiffOpChange ) {
-			if ( $hasLang
-				&& $terms->getByLanguage( $lang )->getText() === $diffOp->getOldValue()
-			) {
-				$terms->setTextForLanguage( $lang, $diffOp->getNewValue() );
-			}
-		} elseif ( $diffOp instanceof DiffOpRemove ) {
-			if ( $hasLang
-				&& $terms->getByLanguage( $lang )->getText() === $diffOp->getOldValue()
-			) {
-				$terms->removeByLanguage( $lang );
-			}
-		} else {
-			throw new PatcherException( 'Invalid terms diff' );
+		switch ( true ) {
+			case $diffOp instanceof DiffOpAdd:
+				/** @var DiffOpAdd $diffOp */
+				if ( !$hasLang ) {
+					$terms->setTextForLanguage( $lang, $diffOp->getNewValue() );
+				}
+				break;
+
+			case $diffOp instanceof DiffOpChange:
+				/** @var DiffOpChange $diffOp */
+				if ( $hasLang
+					&& $terms->getByLanguage( $lang )->getText() === $diffOp->getOldValue()
+				) {
+					$terms->setTextForLanguage( $lang, $diffOp->getNewValue() );
+				}
+				break;
+
+			case $diffOp instanceof DiffOpRemove:
+				/** @var DiffOpRemove $diffOp */
+				if ( $hasLang
+					&& $terms->getByLanguage( $lang )->getText() === $diffOp->getOldValue()
+				) {
+					$terms->removeByLanguage( $lang );
+				}
+				break;
+
+			default:
+				throw new PatcherException( 'Invalid terms diff' );
 		}
 	}
 
@@ -106,22 +116,34 @@ class FingerprintPatcher {
 	private function patchAliasGroup( AliasGroupList $groups, $lang, DiffOp $diffOp ) {
 		$hasLang = $groups->hasGroupForLanguage( $lang );
 
-		if ( $diffOp instanceof DiffOpAdd ) {
-			if ( !$hasLang ) {
-				$groups->setAliasesForLanguage( $lang, $diffOp->getNewValue() );
-			}
-		} elseif ( $diffOp instanceof DiffOpChange ) {
-			$this->applyAliasGroupChange( $groups, $lang, $diffOp );
-		} elseif ( $diffOp instanceof DiffOpRemove ) {
-			if ( $hasLang
-				&& $groups->getByLanguage( $lang )->getAliases() === $diffOp->getOldValue()
-			) {
-				$groups->removeByLanguage( $lang );
-			}
-		} elseif ( $diffOp instanceof Diff ) {
-			$this->applyAliasGroupDiff( $groups, $lang, $diffOp );
-		} else {
-			throw new PatcherException( 'Invalid aliases diff' );
+		switch ( true ) {
+			case $diffOp instanceof DiffOpAdd:
+				/** @var DiffOpAdd $diffOp */
+				if ( !$hasLang ) {
+					$groups->setAliasesForLanguage( $lang, $diffOp->getNewValue() );
+				}
+				break;
+
+			case $diffOp instanceof DiffOpChange:
+				/** @var DiffOpChange $diffOp */
+				$this->applyAliasGroupChange( $groups, $lang, $diffOp );
+				break;
+
+			case $diffOp instanceof DiffOpRemove:
+				/** @var DiffOpRemove $diffOp */
+				if ( $hasLang
+					&& $groups->getByLanguage( $lang )->getAliases() === $diffOp->getOldValue()
+				) {
+					$groups->removeByLanguage( $lang );
+				}
+				break;
+
+			case $diffOp instanceof Diff:
+				$this->applyAliasGroupDiff( $groups, $lang, $diffOp );
+				break;
+
+			default:
+				throw new PatcherException( 'Invalid aliases diff' );
 		}
 	}
 
@@ -173,24 +195,35 @@ class FingerprintPatcher {
 	 * @return string[]
 	 */
 	private function getPatchedAliases( array $aliases, Diff $patch ) {
+		/** @var DiffOp $diffOp */
 		foreach ( $patch as $diffOp ) {
-			if ( $diffOp instanceof DiffOpAdd ) {
-				$aliases[] = $diffOp->getNewValue();
-			} elseif ( $diffOp instanceof DiffOpChange ) {
-				$key = array_search( $diffOp->getOldValue(), $aliases, true );
-
-				if ( $key !== false ) {
-					unset( $aliases[$key] );
+			switch ( true ) {
+				case $diffOp instanceof DiffOpAdd:
+					/** @var DiffOpAdd $diffOp */
 					$aliases[] = $diffOp->getNewValue();
-				}
-			} elseif ( $diffOp instanceof DiffOpRemove ) {
-				$key = array_search( $diffOp->getOldValue(), $aliases, true );
+					break;
 
-				if ( $key !== false ) {
-					unset( $aliases[$key] );
-				}
-			} else {
-				throw new PatcherException( 'Invalid aliases diff' );
+				case $diffOp instanceof DiffOpChange:
+					/** @var DiffOpChange $diffOp */
+					$key = array_search( $diffOp->getOldValue(), $aliases, true );
+
+					if ( $key !== false ) {
+						unset( $aliases[$key] );
+						$aliases[] = $diffOp->getNewValue();
+					}
+					break;
+
+				case $diffOp instanceof DiffOpRemove:
+					/** @var DiffOpRemove $diffOp */
+					$key = array_search( $diffOp->getOldValue(), $aliases, true );
+
+					if ( $key !== false ) {
+						unset( $aliases[$key] );
+					}
+					break;
+
+				default:
+					throw new PatcherException( 'Invalid aliases diff' );
 			}
 		}
 
