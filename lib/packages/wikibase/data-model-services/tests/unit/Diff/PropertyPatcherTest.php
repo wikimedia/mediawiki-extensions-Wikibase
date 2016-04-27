@@ -4,7 +4,9 @@ namespace Wikibase\DataModel\Services\Tests\Diff;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\PropertyPatcher;
 use Wikibase\DataModel\Entity\Item;
@@ -18,7 +20,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyPatcherTest extends \PHPUnit_Framework_TestCase {
+class PropertyPatcherTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenEmptyDiff_itemIsReturnedAsIs() {
 		$property = Property::newFromType( 'kittens' );
@@ -55,6 +57,50 @@ class PropertyPatcherTest extends \PHPUnit_Framework_TestCase {
 		$patcher->patchEntity( new Item(), new EntityDiff() );
 	}
 
+	public function testLabelsArePatched() {
+		$property = Property::newFromType( 'string' );
+		$property->setLabel( 'en', 'foo' );
+		$property->setLabel( 'de', 'bar' );
+
+		$patch = new EntityDiff( array(
+			'label' => new Diff( array(
+				'en' => new DiffOpChange( 'foo', 'spam' ),
+				'nl' => new DiffOpAdd( 'baz' ),
+			) ),
+		) );
+
+		$patcher = new PropertyPatcher();
+		$patcher->patchEntity( $property, $patch );
+
+		$this->assertSame( array(
+			'en' => 'spam',
+			'de' => 'bar',
+			'nl' => 'baz',
+		), $property->getFingerprint()->getLabels()->toTextArray() );
+	}
+
+	public function testDescriptionsArePatched() {
+		$property = Property::newFromType( 'string' );
+		$property->setDescription( 'en', 'foo' );
+		$property->setDescription( 'de', 'bar' );
+
+		$patch = new EntityDiff( array(
+			'description' => new Diff( array(
+				'en' => new DiffOpChange( 'foo', 'spam' ),
+				'nl' => new DiffOpAdd( 'baz' ),
+			) ),
+		) );
+
+		$patcher = new PropertyPatcher();
+		$patcher->patchEntity( $property, $patch );
+
+		$this->assertSame( array(
+			'en' => 'spam',
+			'de' => 'bar',
+			'nl' => 'baz',
+		), $property->getFingerprint()->getDescriptions()->toTextArray() );
+	}
+
 	public function testStatementsArePatched() {
 		$s1337 = new Statement( new PropertyNoValueSnak( 1337 ) );
 		$s1337->setGuid( 's1337' );
@@ -70,8 +116,7 @@ class PropertyPatcherTest extends \PHPUnit_Framework_TestCase {
 					's42' => new DiffOpRemove( $s42 ),
 					's23' => new DiffOpAdd( $s23 ),
 				) )
-			)
-		);
+		) );
 
 		$property = Property::newFromType( 'kittens' );
 		$property->getStatements()->addStatement( $s1337 );
