@@ -171,10 +171,6 @@ class OutputPageBeforeHTMLHookHandler {
 			$termsListItemsHtml = $out->getProperty( 'wikibase-terms-list-items' );
 			$entity = $this->getEntity( $entityId, $out->getRevisionId(), $termsListItemsHtml !== null );
 			if ( $entity instanceof EntityDocument ) {
-				if ( $termsListItemsHtml === null ) {
-					$termsListItemsHtml = [];
-				}
-
 				$expander = $this->getEntityViewPlaceholderExpander(
 					$entity,
 					$out->getUser(),
@@ -204,7 +200,7 @@ class OutputPageBeforeHTMLHookHandler {
 			// Pass the correct entity to generate terms list items on the fly
 			$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $revisionId );
 			if ( !( $entityRev instanceof EntityRevision ) ) {
-				return;
+				return null;
 			}
 			$entity = $entityRev->getEntity();
 		}
@@ -254,7 +250,7 @@ class OutputPageBeforeHTMLHookHandler {
 			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $languageCode ),
-			$termsListItemsHtml
+			$termsListItemsHtml ?: []
 		);
 	}
 
