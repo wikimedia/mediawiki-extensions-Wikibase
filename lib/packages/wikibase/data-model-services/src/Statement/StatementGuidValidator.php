@@ -82,13 +82,10 @@ class StatementGuidValidator {
 	 * @return boolean
 	 */
 	protected function validateGuid( $guid ) {
-		$guidFormat = '/^\{?[A-Z\d]{8}-[A-Z\d]{4}-[A-Z\d]{4}-[A-Z\d]{4}-[A-Z\d]{12}\}?$/i';
-
-		if ( !preg_match( $guidFormat, $guid ) ) {
-			return false;
-		}
-
-		return true;
+		return (bool)preg_match(
+			'/^\{?[A-Z\d]{8}-[A-Z\d]{4}-[A-Z\d]{4}-[A-Z\d]{4}-[A-Z\d]{12}\}?\z/i',
+			$guid
+		);
 	}
 
 	/**

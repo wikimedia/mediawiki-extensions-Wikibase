@@ -51,6 +51,7 @@ class StatementGuidValidatorTest extends \PHPUnit_Framework_TestCase {
 
 	public function validateInvalidProvider() {
 		return array(
+			array( "Q1$00000000-0000-0000-0000-000000000000\n" ),
 			array( 'q60$5083E43C-228B-4E3E-B82A-4CB20A22A3F' ),
 			array( 'q60$5083E43C-228B-4E3E-B82A-$4CB20A22A3FB' ),
 			array( '$q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB' ),

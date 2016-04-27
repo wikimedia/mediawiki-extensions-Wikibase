@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
  * @author Daniel Kinzler
  * @author Addshore
  */
-class GuidGenerator  {
+class GuidGenerator {
 
 	/**
 	 * @var V4GuidGenerator
