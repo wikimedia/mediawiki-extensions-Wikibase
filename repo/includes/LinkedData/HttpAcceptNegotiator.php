@@ -16,17 +16,17 @@ namespace Wikibase\Repo\LinkedData;
 class HttpAcceptNegotiator {
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	private $supportedValues;
 
 	/**
-	 * @var mixed
+	 * @var string
 	 */
 	private $defaultValue;
 
 	/**
-	 * @param array $supported A list of supported values.
+	 * @param string[] $supported A list of supported values.
 	 */
 	public function __construct( array $supported ) {
 		$this->supportedValues = $supported;
@@ -35,6 +35,8 @@ class HttpAcceptNegotiator {
 
 	/**
 	 * Returns a supported value to be used as a default.
+	 *
+	 * @return string
 	 */
 	public function getDefaultSupportedValue() {
 		return $this->defaultValue;
@@ -48,7 +50,7 @@ class HttpAcceptNegotiator {
 	 * as required by RFC2616 section 14. Keys that map to 0 or false are ignored.
 	 * If no matching key is found, $default is returned.
 	 *
-	 * @param array $weights An associative array mapping accepted values to their
+	 * @param float[] $weights An associative array mapping accepted values to their
 	 *              respective weights.
 	 *
 	 * @param null|string $default The value to return if non of the keys in $weights
@@ -57,12 +59,11 @@ class HttpAcceptNegotiator {
 	 * @return null|string The best supported key from the $weights parameter.
 	 */
 	public function getBestSupportedKey( array $weights, $default = null ) {
-		// $weights is an associative list.
 		// Make sure we correctly bias against wildcards and ranges, see RFC2616, section 14.
 		foreach ( $weights as $name => &$weight ) {
 			if ( $name === '*' || $name === '*/*' ) {
 				$weight -= 0.000002;
-			} elseif ( preg_match( '!^\w+?/\*$!', $name ) ) {
+			} elseif ( substr( $name, -2 ) === '/*' ) {
 				$weight -= 0.000001;
 			}
 		}
@@ -86,7 +87,7 @@ class HttpAcceptNegotiator {
 	 * to the constructor, this returns the value that has the lowest index in the list.
 	 * If no such value is found, $default is returned.
 	 *
-	 * @param array $preferences A list of acceptable values, in order of preference.
+	 * @param string[] $preferences A list of acceptable values, in order of preference.
 	 *
 	 * @param null|string $default The value to return if non of the keys in $weights
 	 *              is supported (null per default).
@@ -122,11 +123,8 @@ class HttpAcceptNegotiator {
 	 */
 	public function valueMatches( $accepted, $supported ) {
 		// RDF 2045: MIME types are case insensitive.
-		$accepted = strtolower( $accepted );
-		$supported = strtolower( $supported );
-
 		// full match
-		if ( $accepted === $supported ) {
+		if ( strcasecmp( $accepted, $supported ) === 0 ) {
 			return true;
 		}
 
@@ -136,14 +134,10 @@ class HttpAcceptNegotiator {
 		}
 
 		// wildcard match (HTTP/1.1 section 14.1)
-		if ( preg_match( '!^(\w+?)/(\*|\w+)!', $accepted, $acceptedParts )
-			&& preg_match( '!^(\w+?)/(\w+)!', $supported, $supportedParts )
+		if ( substr( $accepted, -2 ) === '/*'
+			&& strncasecmp( $accepted, $supported, strlen( $accepted ) - 2 ) === 0
 		) {
-			if ( $acceptedParts[2] === '*'
-				&& $acceptedParts[1] === $supportedParts[1]
-			) {
-				return true;
-			}
+			return true;
 		}
 
 		return false;
