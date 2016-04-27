@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 6.0.1 (2016-04-25)
+
+* Fixed `ItemId` and `PropertyId` not rejecting strings with a newline at the end.
+
 ## Version 6.0.0 (2016-03-10)
 
 This release removes the long deprecated Entity base class in favor of much more narrow interfaces.
