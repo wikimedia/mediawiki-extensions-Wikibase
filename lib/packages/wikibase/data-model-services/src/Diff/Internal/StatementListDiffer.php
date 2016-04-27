@@ -9,6 +9,8 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
+ * TODO: Class must be public.
+ *
  * Package private.
  *
  * @since 1.0

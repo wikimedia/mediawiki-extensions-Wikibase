@@ -16,6 +16,9 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
 
 /**
+ * TODO: Class should be public (or split, and these should be public).
+ * TODO: Should this support actual edit conflict detection?
+ *
  * Package private.
  *
  * @license GPL-2.0+
