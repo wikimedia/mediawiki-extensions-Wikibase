@@ -72,6 +72,11 @@ class EntityViewPlaceholderExpander {
 	private $textProvider;
 
 	/**
+	 * @var string[]
+	 */
+	private $termsListItems;
+
+	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param User $user the current user
 	 * @param LabelsProvider $labelsProvider
@@ -80,6 +85,7 @@ class EntityViewPlaceholderExpander {
 	 * @param string[] $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
+	 * @param string[] $termsListItems
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -90,7 +96,7 @@ class EntityViewPlaceholderExpander {
 		array $termsLanguages,
 		LanguageNameLookup $languageNameLookup,
 		LocalizedTextProvider $textProvider,
-		array $termsListItems
+		array $termsListItems = array()
 	) {
 		$this->user = $user;
 		$this->labelsProvider = $labelsProvider;
