@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_7a6b7f82",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T17:39:23Z",
+      "side": 1,
+      "message": "Since this value is not run through wfMemcKey later, it needs to be made unique among wikis before being passed in here, if a shared cache is used. Currently, WikibaseClient client doesn\u0027t apply wfMemcKey, nor do we do it here - so all wikis would use the same entry in the cache.",
+      "revId": "9c5b5a61b15afbd304e678fa72aaa2ac2d0bbda9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_da68cb86",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T17:39:23Z",
+      "side": 1,
+      "message": "$this-\u003ecache may be shared by multiple wikis, so $this-\u003ecacheKey needs to be run though wfMemcKey. Or we expect $this-\u003ecacheKey to already be unique among all wikis, but then this requirement needs to be documented in the constructor arcuments.",
+      "revId": "9c5b5a61b15afbd304e678fa72aaa2ac2d0bbda9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_ba6517ad",
+        "filename": "lib/includes/store/WikiPagePropertyOrderProvider.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T17:39:23Z",
+      "side": 1,
+      "message": "missing spaces before and after the \u0027",
+      "revId": "9c5b5a61b15afbd304e678fa72aaa2ac2d0bbda9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
