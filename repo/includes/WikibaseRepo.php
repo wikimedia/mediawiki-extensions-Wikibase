@@ -1182,17 +1182,7 @@ class WikibaseRepo {
 	 * @return EntityFactory
 	 */
 	public function getEntityFactory() {
-
-		//TODO: get this from EntityTypeDefinitions
-
-		$instantiators = array(
-			Item::ENTITY_TYPE => function() {
-				return new Item();
-			},
-			Property::ENTITY_TYPE => function() {
-				return Property::newFromType( '' );
-			},
-		);
+		$instantiators = $this->entityTypeDefinitions->getEntityFactoryCallbacks();
 
 		return new EntityFactory( $instantiators );
 	}

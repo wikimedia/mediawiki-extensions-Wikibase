@@ -20,14 +20,16 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'deserializer-factory-callback' => 'foo-deserializer',
 				'view-factory-callback' => 'foo-view',
 				'content-model-id' => 'foo-model',
-				'content-handler-factory-callback' => 'foo-handler'
+				'content-handler-factory-callback' => 'foo-handler',
+				'entity-factory-callback' => 'new-foo',
 			),
 			'bar' => array(
 				'serializer-factory-callback' => 'bar-serializer',
 				'deserializer-factory-callback' => 'bar-deserializer',
 				'view-factory-callback' => 'bar-view',
 				'content-model-id' => 'bar-model',
-				'content-handler-factory-callback' => 'bar-handler'
+				'content-handler-factory-callback' => 'bar-handler',
+				'entity-factory-callback' => 'new-bar',
 			),
 			'baz' => array()
 		);
@@ -90,6 +92,18 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'bar' => 'bar-handler'
 			),
 			$definitions->getContentHandlerFactoryCallbacks()
+		);
+	}
+
+	public function testGetEntityFactoryCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertEquals(
+			array(
+				'foo' => 'new-foo',
+				'bar' => 'new-bar'
+			),
+			$definitions->getEntityFactoryCallbacks()
 		);
 	}
 

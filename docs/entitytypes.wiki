@@ -52,6 +52,8 @@ associated with a function having the dedicated signature:
 : a string representing the id of the content model
 ; content-handler-factory-callback (repo only)
 : a callable that returns an EntityHandler instance supporting this entity type
+; entity-factory-callback (repo only)
+: a callback for creating an empty entity of this type
 ; js-deserializer-factory-function (repo only)
 : a string representing a resource loader module that, when `require`d, returns a function returning
   a `wikibase.serialization.Deserializer` instance supporting this entity type
