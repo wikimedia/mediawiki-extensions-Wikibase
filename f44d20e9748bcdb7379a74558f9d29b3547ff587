@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_0e604d9f",
+        "filename": "repo/includes/ParserOutput/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-27T09:15:12Z",
+      "side": 0,
+      "message": "Unused import.",
+      "revId": "f44d20e9748bcdb7379a74558f9d29b3547ff587",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_6e5589c5",
+        "filename": "repo/includes/ParserOutput/ParserOutputJsConfigBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-27T09:15:12Z",
+      "side": 0,
+      "message": "Unused import.",
+      "revId": "f44d20e9748bcdb7379a74558f9d29b3547ff587",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
