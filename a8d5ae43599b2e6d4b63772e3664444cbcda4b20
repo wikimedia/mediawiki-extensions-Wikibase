@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_baba371c",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-27T17:24:40Z",
+      "side": 1,
+      "message": "Less clutter. Look how many redundant stuff and non-informational comments disappear.",
+      "parentUuid": "ae564743_ff2141ad",
+      "revId": "a8d5ae43599b2e6d4b63772e3664444cbcda4b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_bf3069fd",
         "filename": "lib/tests/phpunit/EntityFactoryTest.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_3a862768",
+        "filename": "lib/tests/phpunit/EntityFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-27T17:24:40Z",
+      "side": 1,
+      "message": "This is a test. It should not bind to stuff it doesn\u0027t really need to bind to. The provider below uses the same strings, now making it very obvious what happens here, without following these constants.",
+      "parentUuid": "ae564743_bf3069fd",
+      "revId": "a8d5ae43599b2e6d4b63772e3664444cbcda4b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_1f1d1579",
         "filename": "lib/tests/phpunit/EntityFactoryTest.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2016-04-27T17:10:26Z",
       "side": 1,
       "message": "This is a change in behavior, right? Probably doesn\u0027t matter, but still.",
+      "revId": "a8d5ae43599b2e6d4b63772e3664444cbcda4b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_7a97ff93",
+        "filename": "lib/tests/phpunit/EntityFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-27T17:24:40Z",
+      "side": 1,
+      "message": "No, because this is only a test setup.\n\nI want to disallow empty strings as property types some day. This can\u0027t be avoided in all cases, but it\u0027s easy to avoid in tests like this.",
+      "parentUuid": "ae564743_1f1d1579",
       "revId": "a8d5ae43599b2e6d4b63772e3664444cbcda4b20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
