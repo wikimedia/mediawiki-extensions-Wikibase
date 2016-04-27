@@ -10,6 +10,7 @@ use DataValues\MonolingualTextValue;
 use DataValues\MultilingualTextValue;
 use DataValues\NumberValue;
 use DataValues\QuantityValue;
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
@@ -23,6 +24,8 @@ use LogicException;
 use MediaWikiSite;
 use MWException;
 use RequestContext;
+use Serializers\DispatchingSerializer;
+use Serializers\Serializer;
 use Site;
 use SiteSQLStore;
 use SiteStore;
@@ -37,6 +40,7 @@ use Wikibase\Client\DataAccess\PropertyParserFunction\Runner;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
@@ -121,6 +125,11 @@ final class WikibaseClient {
 	 * @var Deserializer|null
 	 */
 	private $entityDeserializer = null;
+
+	/**
+	 * @var Serializer[]
+	 */
+	private $entitySerializers = array();
 
 	/**
 	 * @var EntityIdParser|null
@@ -860,6 +869,27 @@ final class WikibaseClient {
 	 */
 	public function getInternalFormatStatementDeserializer() {
 		return $this->getInternalFormatDeserializerFactory()->newStatementDeserializer();
+	}
+
+	/**
+	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 *
+	 * @return Serializer
+	 */
+	public function getEntitySerializer( $options = 0 ) {
+		if ( !isset( $this->entitySerializers[$options] ) ) {
+			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+			$serializers = array();
+
+			foreach ( $serializerFactoryCallbacks as $callback ) {
+				$serializers[] = call_user_func( $callback, $serializerFactory );
+			}
+
+			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
+		}
+
+		return $this->entitySerializers[$options];
 	}
 
 	/**

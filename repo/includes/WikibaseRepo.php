@@ -42,6 +42,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -178,9 +179,9 @@ class WikibaseRepo {
 	private $entityDeserializer = null;
 
 	/**
-	 * @var Serializer|null
+	 * @var Serializer[]
 	 */
-	private $entitySerializer = null;
+	private $entitySerializers = array();
 
 	/**
 	 * @var EntityIdParser|null
@@ -1283,22 +1284,24 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @param int $options bitwise combination of the SerializerFactory::OPTION_ flags
+	 *
 	 * @return Serializer
 	 */
-	public function getEntitySerializer() {
-		if ( $this->entitySerializer === null ) {
+	public function getEntitySerializer( $options = 0 ) {
+		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = $this->getSerializerFactory();
+			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
 			$serializers = array();
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
 				$serializers[] = call_user_func( $callback, $serializerFactory );
 			}
 
-			$this->entitySerializer = new DispatchingSerializer( $serializers );
+			$this->entitySerializers[$options] = new DispatchingSerializer( $serializers );
 		}
 
-		return $this->entitySerializer;
+		return $this->entitySerializers[$options];
 	}
 
 	/**
