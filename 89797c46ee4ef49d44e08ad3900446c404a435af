@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_ae47a121",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-27T09:13:29Z",
+      "side": 0,
+      "message": "Unused import",
+      "revId": "89797c46ee4ef49d44e08ad3900446c404a435af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8e445d1e",
+        "filename": "repo/maintenance/dumpJson.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-27T09:13:29Z",
+      "side": 0,
+      "message": "Unused import",
+      "revId": "89797c46ee4ef49d44e08ad3900446c404a435af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
