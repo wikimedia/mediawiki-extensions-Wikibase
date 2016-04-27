@@ -2,11 +2,9 @@
 
 namespace Wikibase\Client\Serializer;
 
-use DataValues\Serializers\DataValueSerializer;
 use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Serialization\CallbackFactory;
@@ -19,6 +17,11 @@ use Wikibase\Lib\Serialization\SerializationModifier;
  * @author Addshore
  */
 class ClientEntitySerializer implements Serializer {
+
+	/**
+	 * @var Serializer
+	 */
+	private $entitySerializer;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -46,15 +49,18 @@ class ClientEntitySerializer implements Serializer {
 	private $fallbackChains;
 
 	/**
+	 * @param Serializer $entitySerializer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param string[] $filterLangCodes
 	 * @param LanguageFallbackChain[] $fallbackChains
 	 */
 	public function __construct(
+		Serializer $entitySerializer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $filterLangCodes,
 		array $fallbackChains
 	) {
+		$this->entitySerializer = $entitySerializer;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->filterLangCodes = $filterLangCodes;
 		$this->fallbackChains = $fallbackChains;
@@ -72,11 +78,7 @@ class ClientEntitySerializer implements Serializer {
 	 * @return array
 	 */
 	public function serialize( $entity ) {
-		$serializerOptions = SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH;
-		$serializerFactory = new SerializerFactory( new DataValueSerializer(), $serializerOptions );
-		$entitySerializer = $serializerFactory->newEntitySerializer();
-		$serialization = $entitySerializer->serialize( $entity );
+		$serialization = $this->entitySerializer->serialize( $entity );
 
 		if ( !empty( $this->fallbackChains ) ) {
 			$serialization = $this->addEntitySerializationFallbackInfo( $serialization );
