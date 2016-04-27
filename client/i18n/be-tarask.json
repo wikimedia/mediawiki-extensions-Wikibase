@@ -59,6 +59,7 @@
 	"wikibase-unconnectedpages-submit": "Паказаць старонкі",
 	"pageswithbadges": "Старонкі з адзнакамі",
 	"pageswithbadges-summary": "Гэтая старонка ўтрымлівае сьпіс старонак з адзнакамі (напрыклад, абраныя і добрыя артыкулы). Сьпіс адсартаваны паводле памяншэньня ID старонак, таму новыя старонкі паказваюцца першымі.",
+	"wikibase-pageswithbadges-invalid-id": "$1 не зьяўляецца слушным ідэнтыфікатарам элемэнту",
 	"wikibase-pageswithbadges-legend": "Сьпіс старонак з адзнакамі",
 	"wikibase-pageswithbadges-badge": "Адзнака:",
 	"wikibase-pageswithbadges-submit": "Паказаць старонкі",
