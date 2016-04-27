@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_ce65b5ac",
+        "filename": "repo/tests/phpunit/includes/Api/ApiHelperFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-27T09:21:26Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "28edf2518df150da98e87c0fc87c4b1907fef4fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2e0271be",
+        "filename": "repo/tests/phpunit/includes/Api/ApiHelperFactoryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-27T09:21:26Z",
+      "side": 1,
+      "message": "typo",
+      "revId": "28edf2518df150da98e87c0fc87c4b1907fef4fc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

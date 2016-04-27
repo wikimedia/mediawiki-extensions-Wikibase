@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_2ed8b157",
+        "filename": "repo/includes/Api/ResultBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-27T09:21:26Z",
+      "side": 0,
+      "message": "Pass in the termsList serializer as well and get rid of the serializerFactory.",
+      "revId": "2fa82099915e9e047f8b8436639a32146bfbfeb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
