@@ -101,7 +101,7 @@ class ItemContent extends EntityContent {
 	 *
 	 * @param Item $item
 	 *
-	 * @return static
+	 * @return self
 	 */
 	public static function newFromItem( Item $item ) {
 		return new static( new EntityInstanceHolder( $item ) );
@@ -115,7 +115,7 @@ class ItemContent extends EntityContent {
 	 * @param EntityRedirect $redirect
 	 * @param Title $redirectTitle Title of the redirect target.
 	 *
-	 * @return static
+	 * @return self
 	 */
 	public static function newFromRedirect( EntityRedirect $redirect, Title $redirectTitle ) {
 		return new static( null, $redirect, $redirectTitle );
@@ -163,7 +163,7 @@ class ItemContent extends EntityContent {
 	/**
 	 * Returns a new empty ItemContent.
 	 *
-	 * @return static
+	 * @return self
 	 */
 	public static function newEmpty() {
 		return new static( new EntityInstanceHolder( new Item() ) );

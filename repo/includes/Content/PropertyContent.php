@@ -50,7 +50,7 @@ class PropertyContent extends EntityContent {
 	 *
 	 * @param Property $property
 	 *
-	 * @return static
+	 * @return self
 	 */
 	public static function newFromProperty( Property $property ) {
 		return new static( new EntityInstanceHolder( $property ) );
@@ -68,7 +68,7 @@ class PropertyContent extends EntityContent {
 	/**
 	 * Returns a new empty PropertyContent.
 	 *
-	 * @return static
+	 * @return self
 	 */
 	public static function newEmpty() {
 		return new static( new EntityInstanceHolder( Property::newFromType( 'string' ) ) );
