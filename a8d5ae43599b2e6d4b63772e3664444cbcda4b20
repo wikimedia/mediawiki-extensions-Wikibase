@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_ff2141ad",
+        "filename": "lib/includes/EntityFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T17:10:26Z",
+      "side": 1,
+      "message": "we can do it this way. but why?",
+      "revId": "a8d5ae43599b2e6d4b63772e3664444cbcda4b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_bf3069fd",
+        "filename": "lib/tests/phpunit/EntityFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T17:10:26Z",
+      "side": 1,
+      "message": "How is this better?",
+      "revId": "a8d5ae43599b2e6d4b63772e3664444cbcda4b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_1f1d1579",
+        "filename": "lib/tests/phpunit/EntityFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T17:10:26Z",
+      "side": 1,
+      "message": "This is a change in behavior, right? Probably doesn\u0027t matter, but still.",
+      "revId": "a8d5ae43599b2e6d4b63772e3664444cbcda4b20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
