@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -11,6 +12,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -115,11 +117,18 @@ class DumpJsonTest extends MediaWikiTestCase {
 			$mockEntityPerPage->addEntityPage( $testEntity->getId(), $key );
 		}
 
+		$serializerFactory = new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
+			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+		);
+
 		$dumpScript->setServices(
 			$mockEntityPerPage,
 			new NullEntityPrefetcher(),
 			$this->getMockPropertyDataTypeLookup(),
-			$mockRepo
+			$mockRepo,
+			$serializerFactory->newEntitySerializer()
 		);
 
 		$logFileName = tempnam( sys_get_temp_dir(), "Wikibase-DumpJsonTest" );
