@@ -16,6 +16,24 @@
       "revId": "2fa82099915e9e047f8b8436639a32146bfbfeb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d97bbde9",
+        "filename": "repo/includes/Api/ResultBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-04-27T12:16:10Z",
+      "side": 0,
+      "message": "I realized that this is not actually a good idea since there are a lot of serializers used here.",
+      "parentUuid": "ae564743_2ed8b157",
+      "revId": "2fa82099915e9e047f8b8436639a32146bfbfeb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
