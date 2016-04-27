@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikimedia\Assert\Assert;
 
 /**
- * Factory for Entity objects.
+ * Factory for new, empty Entity objects.
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
@@ -15,14 +15,15 @@ use Wikimedia\Assert\Assert;
 class EntityFactory {
 
 	/**
-	 * @var callable[] Maps entity types to instantiator callbacks.
+	 * @var callable[]
 	 */
 	private $instantiators;
 
 	/**
 	 * @since 0.5
 	 *
-	 * @param callable[] $instantiators Maps entity types to instantiator callbacks.
+	 * @param callable[] $instantiators Array mapping entity type identifiers to callbacks returning
+	 *  a new, empty entity of that type.
 	 */
 	public function __construct( array $instantiators ) {
 		Assert::parameterElementType( 'callable', $instantiators, '$instantiators' );
@@ -31,33 +32,19 @@ class EntityFactory {
 	}
 
 	/**
-	 * Returns the instantiator for the given entity type.
-	 *
-	 * @param string $type
-	 *
-	 * @throws OutOfBoundsException
-	 * @return string callable
-	 */
-	private function getEntityInstantiator( $type ) {
-		if ( !isset( $this->instantiators[$type] ) ) {
-			throw new OutOfBoundsException( 'Unknown entity type ' . $type );
-		}
-
-		return $this->instantiators[$type];
-	}
-
-	/**
 	 * @since 0.3
 	 *
-	 * @param string $entityType The type of the desired new entity.
+	 * @param string $entityType
 	 *
 	 * @throws OutOfBoundsException
 	 * @return EntityDocument
 	 */
 	public function newEmpty( $entityType ) {
-		$instantiator = $this->getEntityInstantiator( $entityType );
+		if ( !isset( $this->instantiators[$entityType] ) ) {
+			throw new OutOfBoundsException( 'Unknown entity type ' . $entityType );
+		}
 
-		$entity = call_user_func( $instantiator );
+		$entity = call_user_func( $this->instantiators[$entityType] );
 
 		Assert::postcondition(
 			$entity instanceof EntityDocument,

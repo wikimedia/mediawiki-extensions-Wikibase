@@ -20,11 +20,11 @@ class EntityFactoryTest extends \MediaWikiTestCase {
 
 	private function getEntityFactory() {
 		$instantiators = array(
-			Item::ENTITY_TYPE => function() {
+			'item' => function() {
 				return new Item();
 			},
-			Property::ENTITY_TYPE => function() {
-				return Property::newFromType( '' );
+			'property' => function() {
+				return Property::newFromType( 'string' );
 			},
 		);
 
