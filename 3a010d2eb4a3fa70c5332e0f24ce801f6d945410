@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_5fe2ed00",
+        "filename": "repo/includes/LinkedData/HttpAcceptNegotiator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-27T16:09:45Z",
+      "side": 1,
+      "message": "Neither of these new features is currently properly tested.\nThere should be a test like \"*/*, text/json\" and a second one \"text/json, */*\" and both should prefer JSON.\nThere should be similar pairs of tests for \"text/*\" and \"*\".",
+      "revId": "3a010d2eb4a3fa70c5332e0f24ce801f6d945410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_3f11f908",
+        "filename": "repo/includes/LinkedData/HttpAcceptNegotiator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-27T16:09:45Z",
+      "side": 1,
+      "message": "The ungreedy +? is not necessary. This may also fail when the MIME type contains dashes. Better: if ( substr( $name, -2 ) \u003d\u003d\u003d \u0027/*\u0027 ) { …",
+      "revId": "3a010d2eb4a3fa70c5332e0f24ce801f6d945410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_ff0661d0",
+        "filename": "repo/includes/LinkedData/HttpAcceptNegotiator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-04-27T16:09:45Z",
+      "side": 1,
+      "message": "This is a clever hack that should work in most cases. But what this really needs is a multi-dimensional sort, right?",
+      "revId": "3a010d2eb4a3fa70c5332e0f24ce801f6d945410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
