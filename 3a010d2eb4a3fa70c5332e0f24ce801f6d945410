@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_df7a7d1e",
+        "filename": "repo/includes/LinkedData/HttpAcceptNegotiator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T16:19:02Z",
+      "side": 1,
+      "message": "You mean, the three tests I added to HttpAcceptNegotiatorTest.php could just succeed accidentally, somehow based on the order of the array elements? Do you think we need to always test all permutations?",
+      "parentUuid": "ae564743_5fe2ed00",
+      "revId": "3a010d2eb4a3fa70c5332e0f24ce801f6d945410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_3f11f908",
         "filename": "repo/includes/LinkedData/HttpAcceptNegotiator.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_ff914153",
+        "filename": "repo/includes/LinkedData/HttpAcceptNegotiator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T16:19:02Z",
+      "side": 1,
+      "message": "You are right, though I can\u0027t think of a MIME type that has a dash in the major part, before the slash. But this expression is equivalent to the one we use later for matching. If we want to change this, we should probably change both.",
+      "parentUuid": "ae564743_3f11f908",
+      "revId": "3a010d2eb4a3fa70c5332e0f24ce801f6d945410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_ff0661d0",
         "filename": "repo/includes/LinkedData/HttpAcceptNegotiator.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2016-04-27T16:09:45Z",
       "side": 1,
       "message": "This is a clever hack that should work in most cases. But what this really needs is a multi-dimensional sort, right?",
+      "revId": "3a010d2eb4a3fa70c5332e0f24ce801f6d945410",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_7f96d150",
+        "filename": "repo/includes/LinkedData/HttpAcceptNegotiator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T16:19:02Z",
+      "side": 1,
+      "message": "Yes. I was trying to avoid that. But this is really unambiguous and should never cause problems, because the weight (\"qvalue\") sent by the client can only have three digits after the comma, see section 3.9 of RFC2616. So my \"adjustment\" is always way smaller than anything the client could specify. \n\nNote that Apache uses a similar hack: https://httpd.apache.org/docs/current/content-negotiation.html#wildcards",
+      "parentUuid": "ae564743_ff0661d0",
       "revId": "3a010d2eb4a3fa70c5332e0f24ce801f6d945410",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
