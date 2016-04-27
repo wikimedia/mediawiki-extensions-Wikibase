@@ -122,6 +122,24 @@ class HttpAcceptNegotiatorTest extends \PHPUnit_Framework_TestCase {
 				null, // default
 				'application/zuul',  // expected
 			),
+			array( // #8: Test specific format preferred over wildcard (T133314)
+				array( 'application/rdf+xml', 'text/json', 'text/html' ), // supported
+				array( '*/*' => 1, 'text/html' => 1 ), // accepted
+				null, // default
+				'text/html',  // expected
+			),
+			array( // #9: Test specific format preferred over range (T133314)
+				array( 'application/rdf+xml', 'text/json', 'text/html' ), // supported
+				array( 'text/*' => 1, 'text/html' => 1 ), // accepted
+				null, // default
+				'text/html',  // expected
+			),
+			array( // #10: Test range preferred over wildcard (T133314)
+				array( 'application/rdf+xml', 'text/html' ), // supported
+				array( '*/*' => 1, 'text/*' => 1 ), // accepted
+				null, // default
+				'text/html',  // expected
+			),
 		);
 	}
 
