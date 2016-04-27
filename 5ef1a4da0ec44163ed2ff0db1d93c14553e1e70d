@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_f98b2170",
+        "filename": "view/tests/phpunit/TermsListViewTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-27T11:03:16Z",
+      "side": 1,
+      "message": "Please test that the directionality lookup is actually used, and the indicated directionality shows up in the generated html in the correct place.",
+      "revId": "5ef1a4da0ec44163ed2ff0db1d93c14553e1e70d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
