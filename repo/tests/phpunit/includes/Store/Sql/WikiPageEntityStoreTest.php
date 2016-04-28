@@ -576,7 +576,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			array( 'epp_page_id' ),
 			array(
 				'epp_entity_type' => $entityId->getEntityType(),
-				'epp_entity_id' => $entityId->getNumericId()
+				'epp_entity_id' => $entityId->getSerialization()
 			),
 			__METHOD__
 		);

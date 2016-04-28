@@ -192,24 +192,23 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @param EntityId[] $entityIds
 	 * @param ResultWrapper $res
 	 *
-	 * @return stdClass[] Array of entity id serialization => object.
+	 * @return stdClass|bool[] Array of entity id serialization => object.
 	 */
 	private function indexResultByEntityId( array $entityIds, ResultWrapper $res ) {
-		$rows = array();
+		$rows = [];
 		// Create a key based map from the rows just returned to reduce
 		// the complexity below.
 		foreach ( $res as $row ) {
-			$rows[$row->epp_entity_type . $row->epp_entity_id] = $row;
+			$rows[$row->epp_entity_id] = $row;
 		}
 
-		$result = array();
+		$result = [];
 		foreach ( $entityIds as $entityId ) {
-			$result[$entityId->getSerialization()] = false;
+			$entityIdSerialization = $entityId->getSerialization();
+			$result[$entityIdSerialization] = false;
 
-			// FIXME: this will fail for IDs that do not have a numeric form
-			$key = $entityId->getEntityType() . $entityId->getNumericId();
-			if ( isset( $rows[$key] ) ) {
-				$result[$entityId->getSerialization()] = $rows[$key];
+			if ( isset( $rows[$entityIdSerialization] ) ) {
+				$result[$entityIdSerialization] = $rows[$entityIdSerialization];
 			}
 		}
 
@@ -223,16 +222,10 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return string
 	 */
 	private function getEppWhere( array $entityIds, DatabaseBase $db ) {
-		$where = array();
+		$where = [];
 
 		foreach ( $entityIds as &$entityId ) {
-			$where[] = $db->makeList( array(
-				// FIXME: this will fail for IDs that do not have a numeric form
-				// Note: if epp_entity_id is quoted the wrong index will be used
-				//       thus we cast it to int and leave it unquoted
-				'epp_entity_id = ' . (int)$entityId->getNumericId(),
-				'epp_entity_type' => $entityId->getEntityType()
-			), LIST_AND );
+			$where[] = 'epp_entity_id = ' . $db->addQuotes( $entityId->getSerialization() );
 		}
 
 		return $db->makeList( $where, LIST_OR );

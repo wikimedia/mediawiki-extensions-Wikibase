@@ -169,7 +169,8 @@ class PropertyInfoTableBuilder {
 			$tables[] = $piTable;
 			$join[$piTable] = array( 'LEFT JOIN',
 				array(
-					'pi_property_id = epp_entity_id',
+					// FIXME: This makes assumptions about the structure of serialized entity ids
+					'pi_property_id = SUBSTR(epp_entity_id, 2)',
 				)
 			);
 		}
@@ -191,17 +192,13 @@ class PropertyInfoTableBuilder {
 				),
 				array(
 					'epp_entity_type = ' . $dbw->addQuotes( Property::ENTITY_TYPE ),
-					'epp_entity_id > ' . (int) $rowId,
+					'SUBSTR(epp_entity_id, 2) > ' . $rowId,
 					'epp_redirect_target IS NULL',
 					$this->shouldUpdateAllEntities ? '1' : 'pi_property_id IS NULL', // if not $all, only add missing entries
 				),
 				__METHOD__,
 				array(
 					'LIMIT' => $this->batchSize,
-					// XXX: We currently have a unique key defined as `wb_epp_entity` (`epp_entity_id`,`epp_entity_type`).
-					//      This SHOULD be the other way around:  `wb_epp_entity` (`epp_entity_type`, `epp_entity_id`).
-					//      Once this is fixed, the below should probable be changed to:
-					//      'ORDER BY' => 'epp_entity_type ASC, epp_entity_id ASC'
 					'ORDER BY' => 'epp_entity_id ASC',
 					'FOR UPDATE'
 				),
@@ -211,10 +208,10 @@ class PropertyInfoTableBuilder {
 			$c = 0;
 
 			foreach ( $props as $row ) {
-				$id = PropertyId::newFromNumber( (int)$row->epp_entity_id );
+				$id = new PropertyId( $row->epp_entity_id );
 				$this->updatePropertyInfo( $id );
 
-				$rowId = $row->epp_entity_id;
+				$rowId = (int) substr( $row->epp_entity_id, 1 );
 				$c++;
 			}
 
@@ -255,7 +252,7 @@ class PropertyInfoTableBuilder {
 		$info = $this->propertyInfoBuilder->buildPropertyInfo( $property );
 
 		$this->propertyInfoTable->setPropertyInfo(
-			$property->getId(),
+			$id,
 			$info
 		);
 	}
