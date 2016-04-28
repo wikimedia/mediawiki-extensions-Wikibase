@@ -4,7 +4,6 @@ namespace Wikibase;
 
 use Maintenance;
 use MWException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
@@ -15,6 +14,7 @@ use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
+use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -237,7 +237,7 @@ abstract class DumpScript extends Maintenance {
 			throw new MWException( "Failed to open ID file: $input" );
 		}
 
-		$stream = new EntityIdReader( new LineReader( $input ), new BasicEntityIdParser() );
+		$stream = new EntityIdReader( new LineReader( $input ), WikibaseRepo::getDefaultInstance()->getEntityIdParser() );
 		$stream->setExceptionHandler( $exceptionReporter );
 
 		return $stream;
