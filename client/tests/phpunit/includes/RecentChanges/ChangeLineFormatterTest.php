@@ -193,7 +193,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'edit-entitylink' => array(
 				'tag' => 'a',
 				'attributes' => array(
-					'class' => 'plainlinks wb-entity-link',
+					'class' => 'wb-entity-link',
 					'href' => 'http://www.wikidata.org/wiki/Q4'
 				),
 				'content' => 'Q4'
@@ -208,7 +208,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'edit-userlink' => array(
 				'tag' => 'a',
 				'attributes' => array(
-					'class' => 'plainlinks mw-userlink',
+					'class' => 'mw-userlink',
 					'href' => 'http://www.wikidata.org/wiki/User:Cat'
 				),
 				'content' => 'Cat'
@@ -222,7 +222,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'edit-usertalk' => array(
 				'tag' => 'a',
 				'attributes' => array(
-					'class' => 'plainlinks',
 					'href' => 'http://www.wikidata.org/wiki/User_talk:Cat'
 				),
 				'content' => 'talk'
@@ -230,7 +229,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'edit-usercontribs' => array(
 				'tag' => 'a',
 				'attributes' => array(
-					'class' => 'plainlinks',
 					'href' => 'http://www.wikidata.org/wiki/Special:Contributions/Cat'
 				),
 				'content' => 'contribs'
@@ -288,7 +286,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'delete-deletionlog' => array(
 				'tag' => 'a',
 				'attributes' => array(
-					'class' => 'plainlinks',
 					'href' => 'http://www.wikidata.org/wiki/Special:Log/delete'
 				),
 				'content' => 'Deletion log'
@@ -321,7 +318,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'delete-userlink' => array(
 				'tag' => 'a',
 				'attributes' => array(
-					'class' => 'plainlinks mw-userlink',
+					'class' => 'mw-userlink',
 					'href' => 'http://www.wikidata.org/wiki/User:Cat'
 				),
 				'content' => 'Cat'
@@ -335,7 +332,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'delete-usertalk' => array(
 				'tag' => 'a',
 				'attributes' => array(
-					'class' => 'plainlinks',
 					'href' => 'http://www.wikidata.org/wiki/User_talk:Cat'
 				),
 				'content' => 'talk'
@@ -343,7 +339,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'delete-contribs' => array(
 				'tag' => 'a',
 				'attributes' => array(
-					'class' => 'plainlinks',
 					'href' => 'http://www.wikidata.org/wiki/Special:Contributions/Cat'
 				),
 				'content' => 'contribs'
