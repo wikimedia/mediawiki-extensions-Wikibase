@@ -180,6 +180,7 @@ class EditEntity {
 		EntityRevisionLookup $entityLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
+		EntityDiffer $entityDiffer,
 		EntityDocument $newEntity,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
@@ -212,6 +213,7 @@ class EditEntity {
 		$this->entityRevisionLookup = $entityLookup;
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
+		$this->entityDiffer = $entityDiffer;
 
 		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
@@ -422,14 +424,13 @@ class EditEntity {
 			return false;
 		}
 
-		$entityDiffer = new EntityDiffer();
 		$entityPatcher = new EntityPatcher();
 
 		// calculate patch against base revision
 		// NOTE: will fail if $baseRev or $base are null, which they may be if
 		// this gets called at an inappropriate time. The data flow in this class
 		// should be improved.
-		$patch = $entityDiffer->diffEntities( $baseRev->getEntity(), $this->newEntity );
+		$patch = $this->entityDiffer->diffEntities( $baseRev->getEntity(), $this->newEntity );
 
 		if ( $patch->isEmpty() ) {
 			// we didn't technically fix anything, but if there is nothing to change,
@@ -443,7 +444,7 @@ class EditEntity {
 		$entityPatcher->patchEntity( $patchedLatest, $patch );
 
 		// detect conflicts against latest revision
-		$cleanPatch = $entityDiffer->diffEntities( $latestRev->getEntity(), $patchedLatest );
+		$cleanPatch = $this->entityDiffer->diffEntities( $latestRev->getEntity(), $patchedLatest );
 
 		$conflicts = $patch->count() - $cleanPatch->count();
 

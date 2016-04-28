@@ -11,6 +11,7 @@ use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
@@ -64,6 +65,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$this->getEntityRevisionLookup(),
 				$this->getEntityStore(),
 				$this->getEntityPermissionChecker(),
+				new EntityDiffer(),
 				$this->getMockEditFitlerHookRunner()
 			)
 		);
