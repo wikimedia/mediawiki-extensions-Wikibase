@@ -119,38 +119,39 @@ class ChangeOpStatement extends ChangeOpBase {
 	}
 
 	/**
-	 * @param StatementListHolder $statementListHolder
+	 * @param StatementListHolder $entity
 	 * @param Summary|null $summary
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function applyStatementToEntity( StatementListHolder $statementListHolder, Summary $summary = null ) {
-		$statements = $this->removeStatement( $statementListHolder->getStatements()->toArray(), $summary );
-		$statements = $this->addStatement( $statements );
-		$statementListHolder->setStatements( new StatementList( $statements ) );
+	private function applyStatementToEntity( StatementListHolder $entity, Summary $summary = null ) {
+		$this->removeStatement( $entity->getStatements(), $summary );
+		$statements = $this->addStatement( $entity->getStatements() );
+		$entity->setStatements( new StatementList( $statements ) );
 	}
 
 	/**
-	 * @param Statement[] $statements
+	 * @param StatementList $statements
 	 * @param Summary|null $summary
-	 *
-	 * @return Statement[]
 	 */
-	private function removeStatement( array $statements, Summary $summary = null ) {
+	private function removeStatement( StatementList $statements, Summary $summary = null ) {
 		$guid = $this->statement->getGuid();
-		$newStatements = array();
+		$index = 0;
 		$oldStatement = null;
 
-		foreach ( $statements as $statement ) {
-			if ( $statement->getGuid() === $guid && $oldStatement === null ) {
+		foreach ( $statements->toArray() as $statement ) {
+			if ( $statement->getGuid() === $guid ) {
 				$oldStatement = $statement;
 
 				if ( $this->index === null ) {
-					$this->index = count( $newStatements );
+					$this->index = $index;
 				}
-			} else {
-				$newStatements[] = $statement;
+
+				$statements->removeStatementsWithGuid( $guid );
+				break;
 			}
+
+			$index++;
 		}
 
 		if ( $oldStatement === null ) {
@@ -159,8 +160,6 @@ class ChangeOpStatement extends ChangeOpBase {
 			$this->checkMainSnakUpdate( $oldStatement );
 			$this->updateSummary( $summary, 'update' );
 		}
-
-		return $newStatements;
 	}
 
 	/**
@@ -186,29 +185,29 @@ class ChangeOpStatement extends ChangeOpBase {
 	}
 
 	/**
-	 * @param Statement[] $statements
+	 * @param StatementList $statements
 	 *
 	 * @throws ChangeOpException
 	 * @return Statement[]
 	 */
-	private function addStatement( array $statements ) {
+	private function addStatement( StatementList $statements ) {
 		// If we fail with the user supplied index and the index is greater than or equal 0
 		// presume the user wants to have the index at the end of the list.
 		if ( $this->index < 0 ) {
 			throw new ChangeOpException( 'Can not add claim at given index: '. $this->index );
 		}
 
-		$indexedStatements = new ByPropertyIdArray( $statements );
+		$indexedStatements = new ByPropertyIdArray( $statements->toArray() );
 		$indexedStatements->buildIndex();
 
 		try {
 			$indexedStatements->addObjectAtIndex( $this->statement, $this->index );
-			$statements = $indexedStatements->toFlatArray();
 		} catch ( OutOfBoundsException $ex ) {
-			$statements[] = $this->statement;
+			$statements->addStatement( $this->statement );
+			return $statements->toArray();
 		}
 
-		return $statements;
+		return $indexedStatements->toFlatArray();
 	}
 
 	/**
