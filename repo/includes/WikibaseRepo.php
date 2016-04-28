@@ -1556,7 +1556,8 @@ class WikibaseRepo {
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			$this->settings->getSetting( 'statementSections' ),
-			$this->getPropertyDataTypeLookup()
+			$this->getPropertyDataTypeLookup(),
+			$this->getStatementGuidParser()
 		);
 
 		return new ViewFactory(

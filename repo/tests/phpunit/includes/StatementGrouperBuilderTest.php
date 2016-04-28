@@ -5,6 +5,7 @@ namespace Wikibase\Test;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\DispatchingEntityTypeStatementGrouper;
@@ -32,7 +33,11 @@ class StatementGrouperBuilderTest extends PHPUnit_Framework_TestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( true ) );
 
-		return new StatementGrouperBuilder( $specifications, $lookup );
+		return new StatementGrouperBuilder(
+			$specifications,
+			$lookup,
+			$this->getMock( StatementGuidParser::class )
+		);
 	}
 
 	/**

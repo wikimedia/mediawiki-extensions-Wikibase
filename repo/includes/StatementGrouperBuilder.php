@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\Statement\Filter\PropertySetStatementFilter;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\StatementFilter;
 
 /**
@@ -51,12 +52,23 @@ class StatementGrouperBuilder {
 	private $dataTypeLookup;
 
 	/**
+	 * @var StatementGuidParser
+	 */
+	private $statementGuidParser;
+
+	/**
 	 * @param array[] $specifications See the class level documentation for details.
 	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param StatementGuidParser $statementGuidParser
 	 */
-	public function __construct( array $specifications, PropertyDataTypeLookup $dataTypeLookup ) {
+	public function __construct(
+		array $specifications,
+		PropertyDataTypeLookup $dataTypeLookup,
+		StatementGuidParser $statementGuidParser
+	) {
 		$this->specifications = $specifications;
 		$this->dataTypeLookup = $dataTypeLookup;
+		$this->statementGuidParser = $statementGuidParser;
 	}
 
 	/**
@@ -72,7 +84,7 @@ class StatementGrouperBuilder {
 				: $this->newFilteringStatementGrouper( $filterSpecs );
 		}
 
-		return new DispatchingEntityTypeStatementGrouper( $groupers );
+		return new DispatchingEntityTypeStatementGrouper( $this->statementGuidParser, $groupers );
 	}
 
 	/**
