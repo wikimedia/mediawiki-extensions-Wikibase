@@ -537,22 +537,22 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			'epp_redirect_target'
 		);
 
+		$idStrings = array_flip( $entityIds );
+
 		$res = $dbw->select(
 			$this->entityPerPageTable,
 			$fields,
 			array(
 				'epp_entity_type' => $entityType,
-				'epp_entity_id' => $entityIds,
+				'epp_entity_id' => $idStrings,
 			),
 			__METHOD__
 		);
 
-		$idStrings = array_flip( $entityIds );
-
 		$this->pageInfoByType[$entityType] = array();
 
 		foreach ( $res as $row ) {
-			$key = $idStrings[$row->epp_entity_id];
+			$key = $row->epp_entity_id;
 
 			$this->pageInfoByType[$entityType][$key] = array(
 				'page_id' => $row->epp_page_id,
