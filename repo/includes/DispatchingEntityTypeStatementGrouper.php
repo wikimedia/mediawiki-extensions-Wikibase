@@ -3,7 +3,6 @@
 namespace Wikibase\Repo;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -35,7 +34,7 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $statementGroupers ) {
+	public function __construct( StatementGuidParser $statementGuidParser, array $statementGroupers ) {
 		foreach ( $statementGroupers as $key => $grouper ) {
 			if ( !is_string( $key ) || !( $grouper instanceof StatementGrouper ) ) {
 				throw new InvalidArgumentException(
@@ -45,8 +44,7 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 			$this->statementGroupers[$key] = $grouper;
 		}
 
-		// TODO: Inject?
-		$this->guidParser = new StatementGuidParser( new BasicEntityIdParser() );
+		$this->guidParser = $statementGuidParser;
 	}
 
 	/**
