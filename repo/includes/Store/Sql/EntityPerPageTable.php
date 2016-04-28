@@ -80,7 +80,7 @@ class EntityPerPageTable implements EntityPerPage {
 		$redirectTarget = $targetId ? $targetId->getSerialization() : null;
 
 		$values = array(
-			'epp_entity_id' => $entityId->getNumericId(),
+			'epp_entity_id' => $entityId->getSerialization(),
 			'epp_entity_type' => $entityId->getEntityType(),
 			'epp_page_id' => $pageId,
 			'epp_redirect_target' => $redirectTarget
@@ -147,11 +147,11 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @return array[]
 	 */
 	private function getUniqueIndexes() {
-		// CREATE UNIQUE INDEX /*i*/wb_epp_entity ON /*_*/wb_entity_per_page (epp_entity_id, epp_entity_type);
+		// CREATE UNIQUE INDEX /*i*/wb_epp_entity ON /*_*/wb_entity_per_page (epp_entity_id);
 		// CREATE UNIQUE INDEX /*i*/wb_epp_page ON /*_*/wb_entity_per_page (epp_page_id);
 
 		return array(
-			'wb_epp_entity' => array( 'epp_entity_id', 'epp_entity_type' ),
+			'wb_epp_entity' => array( 'epp_entity_id' ),
 			'wb_epp_page' => array( 'epp_page_id' ),
 		);
 	}
@@ -181,8 +181,7 @@ class EntityPerPageTable implements EntityPerPage {
 		return $dbw->delete(
 			'wb_entity_per_page',
 			array(
-				// FIXME: this only works for items and properties
-				'epp_entity_id' => $entityId->getNumericId(),
+				'epp_entity_id' => $entityId->getSerialization(),
 				'epp_entity_type' => $entityId->getEntityType()
 			),
 			__METHOD__
@@ -219,7 +218,8 @@ class EntityPerPageTable implements EntityPerPage {
 			'term_entity_type IS NULL'
 		);
 
-		$joinConditions = 'term_entity_id = epp_entity_id' .
+		// FIXME: This makes assumptions about the structure of serialized entity ids
+		$joinConditions = 'term_entity_id = SUBSTRING(epp_entity_id FROM 2)' .
 			' AND term_entity_type = epp_entity_type' .
 			' AND term_type = ' . $dbr->addQuotes( $termType ) .
 			' AND epp_redirect_target IS NULL';
@@ -255,8 +255,7 @@ class EntityPerPageTable implements EntityPerPage {
 		$entities = array();
 
 		foreach ( $rows as $row ) {
-			// FIXME: this only works for items and properties
-			$entities[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->entity_type, $row->entity_id );
+			$entities[] = $this->entityIdParser->parse( $row->entity_id );
 		}
 
 		return $entities;
@@ -279,7 +278,8 @@ class EntityPerPageTable implements EntityPerPage {
 		);
 		$conditions['epp_entity_type'] = Item::ENTITY_TYPE;
 
-		$joinConditions = 'ips_item_id = epp_entity_id AND epp_redirect_target IS NULL';
+		// FIXME: This makes assumptions about the structure of serialized entity ids
+		$joinConditions = 'ips_item_id = SUBSTRING(epp_entity_id FROM 2) AND epp_redirect_target IS NULL';
 
 		if ( $siteId !== null ) {
 			$joinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
@@ -307,7 +307,7 @@ class EntityPerPageTable implements EntityPerPage {
 		$itemIds = array();
 
 		foreach ( $rows as $row ) {
-			$itemIds[] = ItemId::newFromNumber( (int)$row->entity_id );
+			$itemIds[] = new ItemId( $row->entity_id );
 		}
 
 		return $itemIds;
@@ -327,17 +327,12 @@ class EntityPerPageTable implements EntityPerPage {
 	public function listEntities( $entityType, $limit, EntityId $after = null, $redirects = self::NO_REDIRECTS ) {
 		if ( $entityType === null ) {
 			$where = array();
-			//NOTE: needs to be id/type, not type/id, according to the definition of the relevant
-			//      index in wikibase.sql: wb_entity_per_page (epp_entity_id, epp_entity_type);
-			$orderBy = array( 'epp_entity_id', 'epp_entity_type' );
 		} elseif ( !is_string( $entityType ) ) {
 			throw new InvalidArgumentException( '$entityType must be a string (or null)' );
 		} else {
 			$where = array( 'epp_entity_type' => $entityType );
-			// NOTE: If the type is fixed, don't use the type in the order;
-			// before changing this, check index usage.
-			$orderBy = array( 'epp_entity_id' );
 		}
+		$orderBy = array( 'epp_entity_id' );
 
 		if ( $redirects === self::NO_REDIRECTS ) {
 			$where[] = 'epp_redirect_target IS NULL';
@@ -352,16 +347,14 @@ class EntityPerPageTable implements EntityPerPage {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		if ( $after ) {
-			$numericId = (int)$after->getNumericId();
+			$serializedEntityId = $after->getSerialization();
 
 			if ( $entityType === null ) {
-				// Ugly. About time we switch to qualified, string based IDs!
-				// NOTE: this must be consistent with the sort order, see above!
 				$where[] = '( ( epp_entity_type > ' . $dbr->addQuotes( $after->getEntityType() )
-					. ' AND epp_entity_id = ' . $numericId . ' )'
-					. ' OR epp_entity_id > ' . $numericId . ' )';
+					. ' AND epp_entity_id = ' . $dbr->addQuotes( $serializedEntityId ) . ' )'
+					. ' OR epp_entity_id > ' . $dbr->addQuotes( $serializedEntityId ) . ' )';
 			} else {
-				$where[] = 'epp_entity_id > ' . $numericId;
+				$where[] = 'epp_entity_id > ' . $dbr->addQuotes( $serializedEntityId );
 			}
 		}
 

@@ -297,6 +297,11 @@ class DatabaseSchemaUpdater {
 				'epp_redirect_target',
 				$this->getUpdateScriptPath( 'AddEppRedirectTarget', $db->getType() )
 			);
+			$updater->modifyExtensionField(
+				'wb_entity_per_page',
+				'epp_entity_id',
+				$this->getUpdateScriptPath( 'MakeIdInEntityPerPageNonNumeric', $db->getType() )
+			);
 		}
 	}
 
