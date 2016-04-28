@@ -4,8 +4,10 @@ namespace Wikibase\DataModel\Tests;
 
 use ArrayObject;
 use DataValues\StringValue;
+use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use ReflectionMethod;
+use stdClass;
 use Wikibase\DataModel\ByPropertyIdArray;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
@@ -26,7 +28,21 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  */
-class ByPropertyIdArrayTest extends \PHPUnit_Framework_TestCase {
+class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
+
+	public function testGivenNull_constructorAssumesEmptyArray() {
+		$indexedArray = new ByPropertyIdArray( null );
+
+		$this->assertSame( 0, $indexedArray->count() );
+	}
+
+	public function testGivenNonTraversableObject_constructorDoesNotCastObjectToArray() {
+		$object = new stdClass();
+		$object->property = true;
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new ByPropertyIdArray( $object );
+	}
 
 	public function testArrayObjectNotConstructedFromObject() {
 		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );
