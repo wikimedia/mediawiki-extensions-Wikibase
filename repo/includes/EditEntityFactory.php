@@ -5,6 +5,7 @@ namespace Wikibase;
 use IContextSource;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -40,6 +41,11 @@ class EditEntityFactory {
 	private $permissionChecker;
 
 	/**
+	 * @var EntityDiffer
+	 */
+	private $entityDiffer;
+
+	/**
 	 * @var EditFilterHookRunner
 	 */
 	private $editFilterHookRunner;
@@ -54,6 +60,7 @@ class EditEntityFactory {
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
+	 * @param EntityDiffer $entityDiffer
 	 * @param EditFilterHookRunner $editFilterHookRunner
 	 * @param IContextSource|null $context
 	 */
@@ -62,6 +69,7 @@ class EditEntityFactory {
 		EntityRevisionLookup $entityLookup,
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
+		EntityDiffer $entityDiffer,
 		EditFilterHookRunner $editFilterHookRunner,
 		IContextSource $context = null
 	) {
@@ -69,6 +77,7 @@ class EditEntityFactory {
 		$this->entityRevisionLookup = $entityLookup;
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
+		$this->entityDiffer = $entityDiffer;
 		$this->editFilterHookRunner = $editFilterHookRunner;
 		$this->context = $context;
 	}
@@ -91,6 +100,7 @@ class EditEntityFactory {
 			$this->entityRevisionLookup,
 			$this->entityStore,
 			$this->permissionChecker,
+			$this->entityDiffer,
 			$entity,
 			$user,
 			$this->editFilterHookRunner,
