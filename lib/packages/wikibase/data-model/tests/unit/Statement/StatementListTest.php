@@ -236,6 +236,42 @@ class StatementListTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( new StatementList( $statement ), $list );
 	}
 
+	public function testGivenNegativeIndex_addStatementFails() {
+		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
+		$list = new StatementList();
+
+		$this->setExpectedException( 'InvalidArgumentException' );
+		$list->addStatement( $statement, -1 );
+	}
+
+	public function testGivenLargeIndex_addStatementAppends() {
+		$statement = new Statement( new PropertyNoValueSnak( 1 ) );
+		$list = new StatementList();
+
+		$list->addStatement( $statement, 1000 );
+		$this->assertEquals( new StatementList( $statement ), $list );
+	}
+
+	public function testGivenZeroIndex_addStatementPrepends() {
+		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statement2 = new Statement( new PropertyNoValueSnak( 2 ) );
+		$list = new StatementList( $statement2 );
+
+		$list->addStatement( $statement1, 0 );
+		$this->assertEquals( new StatementList( $statement1, $statement2 ), $list );
+	}
+
+	public function testGivenValidIndex_addStatementInserts() {
+		$statement1 = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statement2 = new Statement( new PropertyNoValueSnak( 2 ) );
+		$statement3 = new Statement( new PropertyNoValueSnak( 3 ) );
+		$list = new StatementList( $statement1, $statement3 );
+
+		$list->addStatement( $statement2, 1 );
+		$this->assertEquals( new StatementList( $statement1, $statement2, $statement3 ), $list );
+		$this->assertSame( array( 0, 1, 2 ), array_keys( $list->toArray() ), 'array keys' );
+	}
+
 	public function testGivenGuidOfPresentStatement_statementIsRemoved() {
 		$statement1 = new Statement( $this->newSnak( 24, 'foo' ), null, null, 'foo' );
 		$statement2 = new Statement( $this->newSnak( 32, 'bar' ), null, null, 'bar' );
