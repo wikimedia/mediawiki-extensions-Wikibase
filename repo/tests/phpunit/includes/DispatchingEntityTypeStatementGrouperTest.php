@@ -4,7 +4,9 @@ namespace Wikibase\Test;
 
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\DispatchingEntityTypeStatementGrouper;
@@ -33,12 +35,21 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 		return $grouper;
 	}
 
+	private function getStatementGuidParser() {
+		return $this->getMockBuilder( StatementGuidParser::class )
+			->disableOriginalConstructor()
+			->getMock();
+	}
+
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testInvalidConstructorArgument( array $groupers ) {
 		$this->setExpectedException( InvalidArgumentException::class );
-		new DispatchingEntityTypeStatementGrouper( $groupers );
+		new DispatchingEntityTypeStatementGrouper(
+			$this->getStatementGuidParser(),
+			$groupers
+		);
 	}
 
 	public function invalidConstructorArgumentProvider() {
@@ -52,7 +63,10 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 		$statements = new StatementList();
 		$statements->addNewStatement( new PropertyNoValueSnak( 1 ), null, null, 'Q1$' );
 
-		$grouper = new DispatchingEntityTypeStatementGrouper( array() );
+		$grouper = new DispatchingEntityTypeStatementGrouper(
+			$this->getStatementGuidParser(),
+			[]
+		);
 		$groups = $grouper->groupStatements( $statements );
 
 		$this->assertSame( array( 'statements' => $statements ), $groups );
@@ -63,10 +77,13 @@ class DispatchingEntityTypeStatementGrouperTest extends PHPUnit_Framework_TestCa
 		$statements->addNewStatement( new PropertyNoValueSnak( 1 ), null, null, 'Q1$' );
 		$statements->addNewStatement( new PropertyNoValueSnak( 1 ), null, null, 'P1$' );
 
-		$grouper = new DispatchingEntityTypeStatementGrouper( array(
-			'item' => $this->newGrouper( 1 ),
-			'property' => $this->newGrouper( 0 ),
-		) );
+		$grouper = new DispatchingEntityTypeStatementGrouper(
+			new StatementGuidParser( new BasicEntityIdParser() ),
+			[
+				'item' => $this->newGrouper( 1 ),
+				'property' => $this->newGrouper( 0 ),
+			]
+		);
 		$grouper->groupStatements( $statements );
 	}
 
