@@ -124,4 +124,19 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'js-deserializer-factory-function' );
 	}
 
+	/**
+	 * @return callable[]
+	 */
+	public function getEntityIdBuilders() {
+		$result = [];
+
+		foreach ( $this->entityTypeDefinitions as $def ) {
+			if ( isset( $def['entity-id-builder-pair'] ) ) {
+				$result[ $def['entity-id-builder-pair'][0] ] = $def['entity-id-builder-pair'][1];
+			}
+		}
+
+		return $result;
+	}
+
 }
