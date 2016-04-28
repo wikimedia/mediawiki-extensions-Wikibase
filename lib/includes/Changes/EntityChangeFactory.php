@@ -66,15 +66,13 @@ class EntityChangeFactory {
 			$class = EntityChange::class;
 		}
 
-		/** @var EntityChange $instance  */
+		/** @var EntityChange $instance */
 		$instance = new $class( $fields );
 
-		if ( !$instance->hasField( 'object_id' ) ) {
-			$instance->setField( 'object_id', $entityId->getSerialization() );
-		}
+		$instance->setEntityId( $entityId );
 
 		if ( !$instance->hasField( 'info' ) ) {
-			$instance->setField( 'info', array() );
+			$instance->setField( 'info', [] );
 		}
 
 		// Note: the change type determines how newForChangeType will

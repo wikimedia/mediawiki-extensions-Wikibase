@@ -50,9 +50,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		/** @var EntityChange $instance  */
 		$instance = new ItemChange( $fields );
 
-		if ( !$instance->hasField( 'object_id' ) ) {
-			$instance->setField( 'object_id', $entityId->getSerialization() );
-		}
+		$instance->setEntityId( $entityId );
 
 		if ( !$instance->hasField( 'info' ) ) {
 			$instance->setField( 'info', array() );
