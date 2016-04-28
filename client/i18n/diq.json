@@ -27,7 +27,7 @@
 	"wikibase-linkitem-input-site": "Zıwan:",
 	"wikibase-linkitem-input-page": "Pele:",
 	"wikibase-linkitem-confirmitem-button": "Tesdiq",
-	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}}y $1",
 	"wikibase-rc-hide-wikidata-hide": "Bınımne",
 	"wikibase-rc-hide-wikidata-show": "Bımocne",
 	"wikibase-rc-show-wikidata-pref": "Vurnayışanê {{WBREPONAME}} vurnayışanê peyênan de  bımocne",

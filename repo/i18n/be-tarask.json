@@ -110,6 +110,7 @@
 	"wikibase-itembytitle-submit": "Шукаць",
 	"wikibase-itembytitle-create": "Вы можаце таксама [$1 стварыць новы аб’ект].",
 	"wikibase-gotolinkedpage-lookup-site": "Сайт:",
+	"wikibase-gotolinkedpage-error-item-not-found": "Элемэнт ня знойдзены",
 	"special-itemdisambiguation": "Неадназначнасьць аб’ектаў",
 	"wikibase-itemdisambiguation-lookup-fieldset": "Пошук аб’ектаў паводле мовы і меткі",
 	"wikibase-itemdisambiguation-lookup-language": "Код мовы:",
