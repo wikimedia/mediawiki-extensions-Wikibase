@@ -51,7 +51,6 @@ use Wikibase\ClientStore;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
@@ -323,8 +322,9 @@ final class WikibaseClient {
 	 */
 	public function getEntityIdParser() {
 		if ( $this->entityIdParser === null ) {
-			//TODO: make the ID builders configurable
-			$this->entityIdParser = new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );
+			$this->entityIdParser = new DispatchingEntityIdParser(
+				$this->entityTypeDefinitions->getEntityIdBuilders()
+			);
 		}
 
 		return $this->entityIdParser;
