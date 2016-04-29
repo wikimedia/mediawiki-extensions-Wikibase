@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_b4b6be83",
+        "filename": "client/tests/phpunit/includes/Notifications/PageConnectionFormatterTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-04-29T18:45:05Z",
+      "side": 1,
+      "message": "You could give \"Echo not loaded\" as a parameter here. It\u0027s nice to know why a test is skipped",
+      "revId": "e89221b30422ba35c60a93f6bbc19ca270e590b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
