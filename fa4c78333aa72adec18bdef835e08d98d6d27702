@@ -16,6 +16,24 @@
       "revId": "fa4c78333aa72adec18bdef835e08d98d6d27702",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_aefb0fdd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-29T11:38:29Z",
+      "side": 1,
+      "message": "setclaim doesnt make it possible for an entity to have multiple statements with the same guid... (unless something have changed)\n\nIt \"Creates or updates an entire Statement or Claim.\"\n\nIf you pass it a guid of a claim that already exists it will update it, not add it agian.\n\nCreateClaim also does not allow for this.",
+      "parentUuid": "ae564743_bde18c99",
+      "revId": "fa4c78333aa72adec18bdef835e08d98d6d27702",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
