@@ -71,14 +71,6 @@ if ( !defined( 'WIKIBASE_VIEW_VERSION' ) ) {
 	throw new Exception( 'Wikibase depends on WikibaseView.' );
 }
 
-if ( !defined( 'PURTLE_VERSION' ) ) {
-	include_once __DIR__ . '/../purtle/Purtle.php';
-}
-
-if ( !defined( 'PURTLE_VERSION' ) ) {
-	throw new Exception( 'Wikibase depends on Purtle.' );
-}
-
 call_user_func( function() {
 	global $wgExtensionCredits, $wgGroupPermissions, $wgGrantPermissions, $wgAvailableRights;
 	global $wgExtensionMessagesFiles, $wgMessagesDirs;
