@@ -11,18 +11,7 @@ use InvalidArgumentException;
  * EntityTypeDefinitions provides a one-stop interface for defining entity types.
  * Each entity type is defined using a "entity type definition" array.
  *
- * A definition array has the following fields:
- * - serializer-factory-callback: a callback for creating a serializer for entities of this type
- *   (requires a SerializerFactory to be passed to it)
- * - deserializer-factory-callback: a callback for creating a deserializer for entities of this type
- *   (requires a DeserializerFactory to be passed to it)
- * - view-factory-callback: a callback for creating a view for entities of this type (requires a
- *   language code, a LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator)
- * - content-model-id: a string used as the content model identifier
- * - content-handler-factory-callback: a callback for creating a content handler dealing with
- *   entities of this type
- * - entity-factory-callback: a callback for creating an empty entity of this type
- *
+ * The fields of a definition array can be seen in the follow doc file:
  * @see docs/entitytypes.wiki
  *
  * @licence GNU GPL v2+
