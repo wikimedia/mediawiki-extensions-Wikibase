@@ -3,6 +3,7 @@
 namespace Wikibase\Dumpers;
 
 use InvalidArgumentException;
+use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -317,6 +318,8 @@ abstract class DumpGenerator {
 			} catch ( EntityLookupException $ex ) {
 				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
 			} catch ( StorageException $ex ) {
+				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
+			} catch ( LogicException $ex ) {
 				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
 			}
 		}
