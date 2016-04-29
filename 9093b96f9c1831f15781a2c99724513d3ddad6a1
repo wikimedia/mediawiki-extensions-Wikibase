@@ -16,6 +16,24 @@
       "revId": "9093b96f9c1831f15781a2c99724513d3ddad6a1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0e483b31",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-29T11:56:43Z",
+      "side": 1,
+      "message": "See https://gerrit.wikimedia.org/r/#/c/286142/ for removing the doc block",
+      "parentUuid": "ae564743_6ed8d77f",
+      "revId": "9093b96f9c1831f15781a2c99724513d3ddad6a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
