@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_6ed8d77f",
+        "filename": "lib/includes/EntityTypeDefinitions.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-04-29T11:50:03Z",
+      "side": 1,
+      "message": "There are docs at the top of this page that also probably need updating or removing, I mean we can just reply on the big doc file (whihc you did update)",
+      "revId": "9093b96f9c1831f15781a2c99724513d3ddad6a1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
