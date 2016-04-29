@@ -16,6 +16,24 @@
       "revId": "e89221b30422ba35c60a93f6bbc19ca270e590b8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b4435e66",
+        "filename": "client/tests/phpunit/includes/Notifications/PageConnectionFormatterTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-04-29T19:08:02Z",
+      "side": 1,
+      "message": "Done also for the second test",
+      "parentUuid": "ae564743_b4b6be83",
+      "revId": "e89221b30422ba35c60a93f6bbc19ca270e590b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
