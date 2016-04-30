@@ -185,8 +185,6 @@ abstract class DumpGenerator {
 	 * Set the entity type to be included in the output.
 	 *
 	 * @param string|null $type The desired type (use null for any type).
-	 *
-	 * @throws InvalidArgumentException
 	 */
 	public function setEntityTypeFilter( $type ) {
 		$this->entityType = $type;
