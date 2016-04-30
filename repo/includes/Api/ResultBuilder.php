@@ -118,7 +118,7 @@ class ResultBuilder {
 	/**
 	 * @since 0.5
 	 *
-	 * @param $success bool|int|null
+	 * @param bool|int|null $success
 	 */
 	public function markSuccess( $success = true ) {
 		$value = (int)$success;
@@ -145,9 +145,9 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param $path array|string|null
-	 * @param $name string
-	 * @param $values array
+	 * @param array|string|null $path
+	 * @param string $name
+	 * @param array $values
 	 * @param string $tag tag name to use for elements of $values if not already present
 	 */
 	public function setList( $path, $name, array $values, $tag ) {
@@ -178,9 +178,9 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param $path array|string|null
-	 * @param $name string
-	 * @param $value mixed
+	 * @param array|string|null $path
+	 * @param string $name
+	 * @param mixed $value
 	 */
 	public function setValue( $path, $name, $value ) {
 		$this->checkPathType( $path );
@@ -204,10 +204,10 @@ class ResultBuilder {
 	 *
 	 * @since 0.5
 	 *
-	 * @param $path array|string|null
-	 * @param $key int|string|null the key to use when appending, or null for automatic.
+	 * @param array|string|null $path
+	 * @param int|string|null $key the key to use when appending, or null for automatic.
 	 * May be ignored even if given, based on $this->addMetaData.
-	 * @param $value mixed
+	 * @param mixed $value
 	 * @param string $tag tag name to use for $value in indexed mode
 	 */
 	public function appendValue( $path, $key, $value, $tag ) {
@@ -234,7 +234,7 @@ class ResultBuilder {
 	}
 
 	/**
-	 * @param $key int|string|null the key to use when appending, or null for automatic.
+	 * @param int|string|null $key the key to use when appending, or null for automatic.
 	 */
 	private function checkKeyType( $key ) {
 		Assert::parameter(

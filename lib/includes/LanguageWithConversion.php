@@ -240,7 +240,7 @@ class LanguageWithConversion {
 	 *
 	 * Does nothing if this is not a converted language.
 	 *
-	 * @param $text String
+	 * @param string $text
 	 */
 	private function prepareForTranslate( $text ) {
 		if ( $this->parentLanguage ) {

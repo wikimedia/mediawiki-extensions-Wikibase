@@ -63,7 +63,7 @@ class TemplateFactory {
 	 *
 	 * @since 0.2
 	 *
-	 * @param $key string template key
+	 * @param string $key template key
 	 * Varargs: normal template parameters
 	 *
 	 * @return string

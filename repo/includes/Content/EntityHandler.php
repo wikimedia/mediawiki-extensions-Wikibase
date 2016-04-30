@@ -556,9 +556,9 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @since 0.4
 	 *
-	 * @param $latestRevision Revision The current text
-	 * @param $newerRevision Revision The revision to undo
-	 * @param $olderRevision Revision Must be an earlier revision than $undo
+	 * @param Revision $latestRevision The current text
+	 * @param Revision $newerRevision The revision to undo
+	 * @param Revision $olderRevision Must be an earlier revision than $undo
 	 *
 	 * @return Content|bool Content on success, false on failure
 	 */

@@ -464,8 +464,8 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * Check the rights for the user accessing the module.
 	 *
-	 * @param $entity EntityDocument the entity to check
-	 * @param $user User doing the action
+	 * @param EntityDocument $entity the entity to check
+	 * @param User $user User doing the action
 	 *
 	 * @return Status the check's result
 	 */

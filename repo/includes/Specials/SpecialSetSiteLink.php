@@ -194,7 +194,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * Checks if the site id is valid.
 	 *
-	 * @param $siteId string the site id
+	 * @param string $siteId the site id
 	 *
 	 * @return bool
 	 */

@@ -66,8 +66,8 @@ abstract class IndependentWikibaseApiTestCase extends \MediaWikiTestCase {
 	 * @since 0.5
 	 *
 	 * Do the test for exceptions from Api queries.
-	 * @param $params array of params for the api query
-	 * @param $exception array details of the exception to expect (type,code,message)
+	 * @param array $params array of params for the api query
+	 * @param array $exception details of the exception to expect (type,code,message)
 	 */
 	public function doTestQueryExceptions( $params, $exception ) {
 		try {

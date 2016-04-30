@@ -163,7 +163,7 @@ class EntityTermsView {
 	}
 
 	/**
-	 * @param $languageCode The language for which terms should be edited
+	 * @param string $languageCode The language for which terms should be edited
 	 * @param EntityId|null $entityId
 	 *
 	 * @return string HTML

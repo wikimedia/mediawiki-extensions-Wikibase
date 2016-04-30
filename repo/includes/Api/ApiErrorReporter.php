@@ -340,7 +340,7 @@ class ApiErrorReporter {
 	 * This provides support for message lists coming from Status::getErrorsByType() as well as
 	 * Title::getUserPermissionsErrors() etc.
 	 *
-	 * @param $messageSpecs array a list of errors, as returned by Status::getErrorsByType()
+	 * @param array $messageSpecs a list of errors, as returned by Status::getErrorsByType()
 	 *        or Title::getUserPermissionsErrors()
 	 *
 	 * @return array a result structure containing the messages from $errors as well as what
@@ -383,7 +383,7 @@ class ApiErrorReporter {
 	 *
 	 * @see convertToMessage()
 	 *
-	 * @param $messageSpecs array a list of errors, as returned by Status::getErrorsByType()
+	 * @param array $messageSpecs a list of errors, as returned by Status::getErrorsByType()
 	 *        or Title::getUserPermissionsErrors().
 	 *
 	 * @return array a result structure containing the messages from $errors as well as what

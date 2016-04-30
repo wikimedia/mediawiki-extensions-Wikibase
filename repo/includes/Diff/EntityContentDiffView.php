@@ -127,7 +127,7 @@ class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * Get a header for a specified revision.
 	 *
-	 * @param $rev Revision
+	 * @param Revision $rev
 	 * @param string $complete 'complete' to get the header wrapped depending
 	 *        the visibility of the revision and a link to edit the page.
 	 *

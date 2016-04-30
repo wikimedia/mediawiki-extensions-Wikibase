@@ -347,7 +347,7 @@ final class ClientHooks {
 	/**
 	 * Register the parser functions.
 	 *
-	 * @param $parser Parser
+	 * @param Parser $parser
 	 *
 	 * @return bool
 	 */

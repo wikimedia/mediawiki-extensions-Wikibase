@@ -303,7 +303,7 @@ final class RepoHooks {
 	 *
 	 * @todo: find a better way to do this!
 	 *
-	 * @param $recentChange RecentChange
+	 * @param RecentChange $recentChange
 	 * @return bool
 	 */
 	public static function onRecentChangeSave( RecentChange $recentChange ) {

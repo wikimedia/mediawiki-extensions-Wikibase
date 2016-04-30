@@ -392,7 +392,7 @@ class EntityTestHelper {
 	}
 
 	/**
-	 * @param $id string of entityid
+	 * @param string $id string of entityid
 	 * @return null|string id of current handle (if active)
 	 */
 	public static function getHandle( $id ) {

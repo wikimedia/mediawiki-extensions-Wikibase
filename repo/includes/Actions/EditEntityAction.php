@@ -434,8 +434,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 	/**
 	 * Generate standard summary input and label (wgSummary), compatible to EditPage.
 	 *
-	 * @param $summary string The value of the summary input
-	 * @param $labelText string The html to place inside the label
+	 * @param string $summary The value of the summary input
+	 * @param string $labelText The html to place inside the label
 	 *
 	 * @return array An array in the format array( $label, $input )
 	 */
