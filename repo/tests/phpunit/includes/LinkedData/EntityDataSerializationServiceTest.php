@@ -18,6 +18,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\RedirectRevision;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;

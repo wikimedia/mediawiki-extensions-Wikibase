@@ -28,7 +28,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
 use Wikibase\Settings;
 use Wikibase\SettingsArray;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers

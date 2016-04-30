@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\GenericEntityInfoBuilder;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Lib\Store\EntityInfo

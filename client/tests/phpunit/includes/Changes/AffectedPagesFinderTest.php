@@ -20,7 +20,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Test\TestChanges;
+use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
  * @covers Wikibase\Client\Changes\AffectedPagesFinder

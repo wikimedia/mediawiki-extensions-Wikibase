@@ -16,7 +16,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Client\DataAccess\Scribunto\WikibaseLuaBindings

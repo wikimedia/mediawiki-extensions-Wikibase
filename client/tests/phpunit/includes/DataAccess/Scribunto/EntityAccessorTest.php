@@ -23,7 +23,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Client\DataAccess\Scribunto\EntityAccessor

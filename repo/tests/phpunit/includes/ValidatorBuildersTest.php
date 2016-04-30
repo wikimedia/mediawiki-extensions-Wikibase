@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ValidatorBuilders;
 

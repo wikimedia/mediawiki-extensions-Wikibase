@@ -14,7 +14,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**

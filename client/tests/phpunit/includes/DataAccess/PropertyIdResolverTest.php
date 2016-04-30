@@ -6,8 +6,8 @@ use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Test\MockPropertyLabelResolver;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockPropertyLabelResolver;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Client\DataAccess\PropertyIdResolver

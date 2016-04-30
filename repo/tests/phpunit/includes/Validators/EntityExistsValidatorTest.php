@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Repo\Validators\EntityExistsValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\Repo\Validators\EntityExistsValidator

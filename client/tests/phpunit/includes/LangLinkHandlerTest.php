@@ -14,7 +14,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\LangLinkHandler;
 use Wikibase\NamespaceChecker;
 use Wikibase\NoLangLinkHandler;
-use Wikibase\Test\MockRepository;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers Wikibase\LangLinkHandler

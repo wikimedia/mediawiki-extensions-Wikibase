@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemChange;
 use Wikibase\SiteLinkCommentCreator;
-use Wikibase\Test\TestChanges;
+use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
  * @covers Wikibase\SiteLinkCommentCreator
