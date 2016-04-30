@@ -351,7 +351,10 @@ abstract class RdfWriterBase implements RdfWriter {
 	final public function about( $base, $local = null ) {
 		$this->expandSubject( $base, $local );
 
-		if ( $base === $this->currentSubject[0] && $local === $this->currentSubject[1] ) {
+		if ( $this->state === self::STATE_OBJECT
+			&& $base === $this->currentSubject[0]
+			&& $local === $this->currentSubject[1]
+		) {
 			return $this; // redundant about() call
 		}
 
@@ -392,7 +395,10 @@ abstract class RdfWriterBase implements RdfWriter {
 	final public function say( $base, $local = null ) {
 		$this->expandPredicate( $base, $local );
 
-		if ( $base === $this->currentPredicate[0] && $local === $this->currentPredicate[1] ) {
+		if ( $this->state === self::STATE_OBJECT
+			&& $base === $this->currentPredicate[0]
+			&& $local === $this->currentPredicate[1]
+		) {
 			return $this; // redundant about() call
 		}
 
