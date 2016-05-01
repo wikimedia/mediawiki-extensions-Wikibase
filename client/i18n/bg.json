@@ -6,7 +6,8 @@
 			"Spiritia",
 			"StanProg",
 			"Borislav",
-			"Vodnokon4e"
+			"Vodnokon4e",
+			"Лорд Бъмбъри"
 		]
 	},
 	"tooltip-t-wikibase": "Препратка към свързаният обект от хранилището за данни",
@@ -44,5 +45,5 @@
 	"wikibase-pageswithbadges-submit": "Показване на страниците",
 	"wikibase-pageinfo-entity-id": "ID на обекта в {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Няма",
-	"wikibase-otherprojects": "Други проекти"
+	"wikibase-otherprojects": "В други проекти"
 }

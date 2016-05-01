@@ -4,7 +4,8 @@
 			"ArnoLagrange",
 			"KuboF",
 			"Tlustulimu",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Lucas"
 		]
 	},
 	"wikibase-client-desc": "Kliento por la Vikidatuma etendaĵo",
@@ -16,7 +17,7 @@
 	"wikibase-comment-linked": "Ero en {{WBREPONAME}} estis ligita al ĉi tiu paĝo.",
 	"wikibase-comment-unlink": "Ĉi tiu paĝo estis malligita de la ero en {{WBREPONAME}}. La lingvaj ligiloj estas forigitaj.",
 	"wikibase-comment-restore": "Ligita ero en {{WBREPONAME}} estis restarigita. La lingvaj ligiloj ankaŭ estis restarigitaj.",
-	"wikibase-comment-update": "Ero en {{WBREPONAME}} ĝisdatigita.",
+	"wikibase-comment-update": "Ero en {{WBREPONAME}} ŝanĝita",
 	"wikibase-comment-sitelink-add": "Lingva ligilo aldonita: $1",
 	"wikibase-comment-sitelink-change": "Lingva ligilo ŝanĝita de $1 al $2",
 	"wikibase-comment-sitelink-remove": "Lingva ligilo forigita: $1",

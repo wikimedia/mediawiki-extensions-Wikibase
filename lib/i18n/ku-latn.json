@@ -10,5 +10,6 @@
 	"wikibase-sitelinks-sitename-columnheading": "Ziman",
 	"wikibase-sitelinks-link-columnheading": "Rûpela girêdayî",
 	"wikibase-tooltip-error-details": "Detay",
+	"wikibase-validator-no-such-entity": "$1 nehat dîtin",
 	"wikibase-entity-summary-wbsetsitelink-add": "Girêdanê li [$2] zêde bike"
 }

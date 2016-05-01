@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"GunChleoc"
+			"GunChleoc",
+			"Akerbeltz"
 		]
 	},
 	"wikibase-client-desc": "Cliant airson an tuilleadain Wikibase",
@@ -51,5 +52,5 @@
 	"wikibase-pageinfo-entity-id": "ID an nì {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Chan eil gin",
 	"wikibase-property-render-error": "Dh'fhàillig le reandaradh a bhuaidh $1: $2",
-	"wikibase-otherprojects": "Pròiseactan eile"
+	"wikibase-otherprojects": "Ann am pròiseactan eile"
 }
