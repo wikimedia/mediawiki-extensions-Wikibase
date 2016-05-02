@@ -1,14 +1,14 @@
 <?php
 
-namespace Wikibase\View\Tests;
+namespace Wikibase\Repo\ParserOutput\Tests;
 
-use Wikibase\View\TextInjector;
+use Wikibase\Repo\ParserOutput\TextInjector;
 
 /**
- * @covers Wikibase\View\TextInjector
+ * @covers Wikibase\Repo\ParserOutput\TextInjector
  *
  * @group Wikibase
- * @group WikibaseView
+ * @group WikibaseRepo
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

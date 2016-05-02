@@ -16,10 +16,10 @@ use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
+use Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander;
+use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\View\EntityViewPlaceholderExpander;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\TextInjector;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.
