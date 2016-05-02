@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_928aa56c",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-02T11:13:58Z",
+      "side": 1,
+      "message": "This will happen for all changes that were stored before the new code was deployed, right?",
+      "revId": "aee338dd19a86170c92aac94ca984ed7191d2156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
