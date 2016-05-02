@@ -34,6 +34,11 @@ class EntityTermsView {
 	private $sectionEditLinkGenerator;
 
 	/**
+	 * @var TermsListView
+	 */
+	private $termsListView;
+
+	/**
 	 * @var LocalizedTextProvider
 	 */
 	private $textProvider;
@@ -41,15 +46,18 @@ class EntityTermsView {
 	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
+	 * @param TermsListView $termsListView
 	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
 		EditSectionGenerator $sectionEditLinkGenerator,
+		TermsListView $termsListView,
 		LocalizedTextProvider $textProvider
 	) {
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->templateFactory = $templateFactory;
+		$this->termsListView = $termsListView;
 		$this->textProvider = $textProvider;
 	}
 
@@ -60,8 +68,7 @@ class EntityTermsView {
 	 * @param DescriptionsProvider $descriptionsProvider
 	 * @param AliasesProvider|null $aliasesProvider
 	 * @param EntityId|null $entityId the id of the entity
-	 * @param string $termBoxHtml
-	 * @param TextInjector $textInjector
+	 * @param string $cssClasses
 	 *
 	 * @return string HTML
 	 */
@@ -71,8 +78,25 @@ class EntityTermsView {
 		DescriptionsProvider $descriptionsProvider,
 		AliasesProvider $aliasesProvider = null,
 		EntityId $entityId = null,
-		$termBoxHtml,
-		TextInjector $textInjector
+		$cssClasses = ''
+	) {
+		return $this->templateFactory->render( 'wikibase-entitytermsview',
+			$this->getHeadingHtml( $mainLanguageCode, $descriptionsProvider, $aliasesProvider ),
+			$this->termsListView->getHtml(
+				$labelsProvider,
+				$descriptionsProvider,
+				$aliasesProvider,
+				[ $mainLanguageCode ]
+			),
+			$cssClasses,
+			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
+		);
+	}
+
+	public function getHeadingHtml(
+		$languageCode,
+		DescriptionsProvider $descriptionsProvider,
+		AliasesProvider $aliasesProvider = null
 	) {
 		$headingPartsHtml = '';
 
@@ -80,8 +104,8 @@ class EntityTermsView {
 		$headingPartsHtml .= $this->templateFactory->render(
 			'wikibase-entitytermsview-heading-part',
 			'description',
-			$descriptions->hasTermForLanguage( $mainLanguageCode ) ? '' : 'wb-empty',
-			$this->getDescriptionHtml( $mainLanguageCode, $descriptions )
+			$descriptions->hasTermForLanguage( $languageCode ) ? '' : 'wb-empty',
+			$this->getDescriptionHtml( $languageCode, $descriptions )
 		);
 
 		if ( $aliasesProvider !== null ) {
@@ -89,20 +113,13 @@ class EntityTermsView {
 			$headingPartsHtml .= $this->templateFactory->render(
 				'wikibase-entitytermsview-heading-part',
 				'aliases',
-				$aliasGroups->hasGroupForLanguage( $mainLanguageCode ) ? '' : 'wb-empty',
-				$this->getHtmlForAliases( $mainLanguageCode, $aliasGroups )
+				$aliasGroups->hasGroupForLanguage( $languageCode ) ? '' : 'wb-empty',
+				$this->getHtmlForAliases( $languageCode, $aliasGroups )
 			);
 		}
 
-		$marker = $textInjector->newMarker(
-			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
-		);
-
-		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$headingPartsHtml,
-			$termBoxHtml,
-			$marker,
-			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
+		return $this->templateFactory->render( 'wikibase-entitytermsview-heading',
+			$headingPartsHtml
 		);
 	}
 
