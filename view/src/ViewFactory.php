@@ -179,6 +179,7 @@ class ViewFactory {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
+	 * @param EntityTermsView $entityTermsView
 	 *
 	 * @return ItemView
 	 */
@@ -186,10 +187,9 @@ class ViewFactory {
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator
+		EditSectionGenerator $editSectionGenerator,
+		EntityTermsView $entityTermsView
 	) {
-		$entityTermsView = $this->newEntityTermsView( $editSectionGenerator );
-
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
 			$labelDescriptionLookup,
@@ -228,6 +228,7 @@ class ViewFactory {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
+	 * @param EntityTermsView $entityTermsView
 	 *
 	 * @return PropertyView
 	 */
@@ -235,10 +236,9 @@ class ViewFactory {
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator
+		EditSectionGenerator $editSectionGenerator,
+		EntityTermsView $entityTermsView
 	) {
-		$entityTermsView = $this->newEntityTermsView( $editSectionGenerator );
-
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
 			$labelDescriptionLookup,
@@ -315,6 +315,12 @@ class ViewFactory {
 		return new EntityTermsView(
 			$this->templateFactory,
 			$editSectionGenerator,
+			new TableTermsListView(
+				$this->templateFactory,
+				$this->languageNameLookup,
+				$this->textProvider,
+				$this->languageDirectionalityLookup
+			),
 			$this->textProvider
 		);
 	}
