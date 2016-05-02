@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_b7eb5b76",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-02T10:18:08Z",
+      "side": 1,
+      "message": "This is unused. This may be intended, but I think we should not do this before we actually need labels here.",
+      "revId": "06471a58d8aa72f9a423f40181ee3ab0efb4f1ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_97ee1785",
+        "filename": "view/src/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-02T10:18:08Z",
+      "side": 1,
+      "message": "Doesn\u0027t need labels.",
+      "revId": "06471a58d8aa72f9a423f40181ee3ab0efb4f1ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
