@@ -23,8 +23,8 @@ use Wikibase\Repo\MediaWikiLocalizedTextProvider;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\View\EmptyEditSectionGenerator;
 use Wikibase\View\LocalizedTextProvider;
+use Wikibase\View\TableTermsListView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\TermsListView;
 use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
@@ -279,12 +279,21 @@ class EntityParserOutputGenerator {
 			$this->textProvider
 		) : new EmptyEditSectionGenerator();
 
+		$textInjector = new TextInjector();
+		$entityTermsView = new ParserOutputEntityTermsView(
+			$this->templateFactory,
+			$editSectionGenerator,
+			$this->textProvider,
+			$textInjector
+		);
+
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entity->getType(),
 			$this->languageCode,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
-			$editSectionGenerator
+			$editSectionGenerator,
+			$entityTermsView
 		);
 
 		// Set the display title to display the label together with the item's id
@@ -293,13 +302,13 @@ class EntityParserOutputGenerator {
 
 		$html = $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
-		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
+		$parserOutput->setExtensionData( 'wikibase-view-chunks', $textInjector->getMarkers() );
 
 		$parserOutput->setExtensionData( 'wikibase-terms-list-items', $this->getTermsListItems( $entity ) );
 	}
 
 	private function getTermsListItems( EntityDocument $entity ) {
-		$termsListView = new TermsListView(
+		$termsListView = new TableTermsListView(
 			TemplateFactory::getDefaultInstance(),
 			new LanguageNameLookup( $this->languageCode ),
 			new MediaWikiLocalizedTextProvider( $this->languageCode ),

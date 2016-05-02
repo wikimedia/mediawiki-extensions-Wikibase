@@ -9,13 +9,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\LanguageDirectionalityLookup;
-use Wikibase\View\TermsListView;
+use Wikibase\View\TableTermsListView;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\View\TermsListView
+ * @covers Wikibase\View\TableTermsListView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
@@ -29,9 +29,9 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Thiemo Mättig
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class TermsListViewTest extends PHPUnit_Framework_TestCase {
+class TableTermsListViewTest extends PHPUnit_Framework_TestCase {
 
-	private function getTermsListView(
+	private function getTableTermsListView(
 		$languageNameCalls = 0,
 		LocalizedTextProvider $textProvider = null
 	) {
@@ -54,7 +54,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 				][ $languageCode ];
 			} ) );
 
-		return new TermsListView(
+		return new TableTermsListView(
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
 			$textProvider ?: new DummyLocalizedTextProvider(),
@@ -70,7 +70,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 		return $fingerprint;
 	}
 
-	public function getTermsListViewProvider() {
+	public function getTableTermsListViewProvider() {
 		$item = new Item(
 			new ItemId( 'Q1' ),
 			$this->getFingerprint( 'arc' )
@@ -96,9 +96,9 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @dataProvider getTermsListViewProvider
+	 * @dataProvider getTableTermsListViewProvider
 	 */
-	public function testGetTermsListView(
+	public function testGetTableTermsListView(
 		EntityDocument $entity,
 		$languageCode,
 		$hasLabel,
@@ -106,7 +106,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 		$hasAliases
 	) {
 		$languageDirectionality = $languageCode === 'arc' ? 'rtl' : 'ltr';
-		$view = $this->getTermsListView( 1 );
+		$view = $this->getTableTermsListView( 1 );
 		$html = $view->getHtml( $entity, $entity, $entity, [ $languageCode ] );
 
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
@@ -158,7 +158,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
 	}
 
-	public function testGetTermsListView_isEscaped() {
+	public function testGetTableTermsListView_isEscaped() {
 		$textProvider = $this->getMock( LocalizedTextProvider::class );
 		$textProvider->expects( $this->any() )
 			->method( 'get' )
@@ -170,19 +170,19 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 			new ItemId( 'Q1' ),
 			new Fingerprint()
 		);
-		$view = $this->getTermsListView( 0, $textProvider );
+		$view = $this->getTableTermsListView( 0, $textProvider );
 		$html = $view->getHtml( $item, $item, $item, [] );
 
 		$this->assertContains( '&quot;RAW&quot;', $html );
 		$this->assertNotContains( '"RAW"', $html );
 	}
 
-	public function testGetTermsListView_noAliasesProvider() {
+	public function testGetTableTermsListView_noAliasesProvider() {
 		$item = new Item(
 			new ItemId( 'Q1' ),
 			$this->getFingerprint()
 		);
-		$view = $this->getTermsListView( 1 );
+		$view = $this->getTableTermsListView( 1 );
 		$html = $view->getHtml( $item, $item, null, array( 'en' ) );
 
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
