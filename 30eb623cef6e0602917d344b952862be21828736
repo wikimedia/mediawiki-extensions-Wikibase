@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_126055cb",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-02T11:07:19Z",
+      "side": 1,
+      "message": "Not really a fixme, since there is no fix. More of a hack - ok for a test helper, I think.",
+      "revId": "30eb623cef6e0602917d344b952862be21828736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b2a089f2",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-02T11:07:19Z",
+      "side": 1,
+      "message": "If the ID had no numeric part, it will turn into an empty string. And (int) will turn it into 0. I guess that\u0027s ok-ish, but it should at least be mentioend as intentional in a comment.\n\nThe alternative would be to just bail out if the regex doesn\u0027t match. That\u0027s effectively the same, but clearer, I think.\n\nBtw, if the ID has two numeric parts, both get concatenated...",
+      "revId": "30eb623cef6e0602917d344b952862be21828736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
