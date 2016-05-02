@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_52776dfd",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-02T13:00:20Z",
+      "side": 1,
+      "message": "I guess many lines in this 750+ lines class could be marked with FIXMEs. Hm. What should I do here?",
+      "parentUuid": "ae564743_126055cb",
+      "revId": "30eb623cef6e0602917d344b952862be21828736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_b2a089f2",
         "filename": "lib/tests/phpunit/MockRepository.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-02T11:07:19Z",
       "side": 1,
       "message": "If the ID had no numeric part, it will turn into an empty string. And (int) will turn it into 0. I guess that\u0027s ok-ish, but it should at least be mentioend as intentional in a comment.\n\nThe alternative would be to just bail out if the regex doesn\u0027t match. That\u0027s effectively the same, but clearer, I think.\n\nBtw, if the ID has two numeric parts, both get concatenated...",
+      "revId": "30eb623cef6e0602917d344b952862be21828736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_126df52d",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-02T13:00:20Z",
+      "side": 1,
+      "message": "Yes, and 0 is used in max(), so nothing happens.\n\n\"Bailing out\" would make this code fail for entities that don\u0027t have a prefix.\n\nNo, no concatenation happens. That\u0027s what I had for a minute before I added the ^.",
+      "parentUuid": "ae564743_b2a089f2",
       "revId": "30eb623cef6e0602917d344b952862be21828736",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
