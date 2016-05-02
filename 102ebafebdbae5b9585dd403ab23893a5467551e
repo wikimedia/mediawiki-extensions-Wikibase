@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_92f10501",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-02T11:15:35Z",
+      "side": 1,
+      "message": "when and where is this used?",
+      "revId": "102ebafebdbae5b9585dd403ab23893a5467551e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_52900d98",
+        "filename": "repo/includes/Specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-02T11:15:35Z",
+      "side": 1,
+      "message": "Does this get automatically overwritten doe to a naming convention for messages? I hate magic...",
+      "revId": "102ebafebdbae5b9585dd403ab23893a5467551e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
