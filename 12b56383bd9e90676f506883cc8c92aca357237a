@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_d7624f36",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-05-02T10:14:08Z",
+      "side": 1,
+      "message": "This will register the same strategies, that are already registered in Wikibase\\DataModel\\Services\\Diff\\EntityDiffer::__construct()\n\nWe should kill one or the other.",
+      "revId": "12b56383bd9e90676f506883cc8c92aca357237a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
