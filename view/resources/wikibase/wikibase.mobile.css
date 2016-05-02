@@ -115,3 +115,13 @@
 .wikibase-referenceview {
 	margin: 5px 0;
 }
+
+.wikibase-sitelinkgroupview-counter {
+	font-size: smaller;
+	font-weight: normal;
+	margin-left: 0.6em;
+}
+
+.wikibase-sitelinklistview {
+	line-height: 1.2;
+}
