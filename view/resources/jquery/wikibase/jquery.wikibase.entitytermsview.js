@@ -46,10 +46,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	options: {
 		template: 'wikibase-entitytermsview',
 		templateParams: [
-			'', // description class
-			'', // descriptionview
-			'', // aliases class
-			'', // aliasesview
+			'', // header content
 			'', // entitytermsforlanguagelistview
 			'', // additional entitytermsforlanguagelistview container class(es)
 			'' // toolbar placeholder
