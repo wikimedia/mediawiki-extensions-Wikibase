@@ -3,7 +3,8 @@
 namespace Wikibase\View;
 
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -156,10 +157,12 @@ abstract class EntityView {
 	protected function getHtmlForFingerprint( EntityDocument $entity ) {
 		$id = $entity->getId();
 
-		if ( $entity instanceof FingerprintProvider ) {
+		if ( $entity instanceof LabelsProvider && $entity instanceof DescriptionsProvider ) {
 			return $this->entityTermsView->getHtml(
 				$this->languageCode,
-				$entity->getFingerprint(),
+				$entity,
+				$entity,
+				$entity instanceof AliasesProvider ? $entity : null,
 				$id,
 				$this->getHtmlForTermBox(),
 				$this->textInjector
