@@ -4,6 +4,7 @@ namespace Wikibase\View;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -116,10 +117,10 @@ abstract class EntityView {
 	 * @return string HTML
 	 */
 	public function getTitleHtml( EntityDocument $entity ) {
-		if ( $entity instanceof FingerprintProvider ) {
+		if ( $entity instanceof LabelsProvider ) {
 			return $this->entityTermsView->getTitleHtml(
 				$this->languageCode,
-				$entity->getFingerprint(),
+				$entity,
 				$entity->getId()
 			);
 		}

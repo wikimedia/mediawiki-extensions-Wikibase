@@ -12,8 +12,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * Generates HTML to display the fingerprint of an entity
- * in the user's current language.
+ * Generates HTML to display the terms of an entity.
  *
  * @since 0.5
  *
@@ -92,17 +91,17 @@ class EntityTermsView {
 	/**
 	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
 	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param Fingerprint $fingerprint
+	 * @param LabelsProvider $labelsProvider
 	 * @param EntityId|null $entityId
 	 *
 	 * @return string HTML
 	 */
 	public function getTitleHtml(
 		$mainLanguageCode,
-		Fingerprint $fingerprint,
+		LabelsProvider $labelsProvider,
 		EntityId $entityId = null
 	) {
-		$labels = $fingerprint->getLabels();
+		$labels = $labelsProvider->getLabels();
 		$idInParenthesesHtml = '';
 
 		if ( $entityId !== null ) {
