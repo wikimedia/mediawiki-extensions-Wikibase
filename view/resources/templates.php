@@ -167,12 +167,16 @@ HTML;
 <<<HTML
 <div class="wikibase-entitytermsview">
 	<div class="wikibase-entitytermsview-heading">
-		<div class="wikibase-entitytermsview-heading-description $1">$2</div>
-		<div class="wikibase-entitytermsview-heading-aliases $3"><!-- wikibase-entitytermsview-aliases -->$4</div>
+		<!-- [0,*] wikibase-entitytermsview-heading-part -->$1
 	</div>
-	<!-- ? wikibase-toolbar -->$7
-	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $6"><!-- wikibase-entitytermsforlanguagelistview -->$5</div>
+	<!-- ? wikibase-toolbar -->$4
+	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $3"><!-- wikibase-entitytermsforlanguagelistview -->$2</div>
 </div>
+HTML;
+
+	$templates['wikibase-entitytermsview-heading-part'] =
+<<<HTML
+		<div class="wikibase-entitytermsview-heading-$1 $2">$3</div>
 HTML;
 
 	$templates['wikibase-entitytermsview-aliases'] =
