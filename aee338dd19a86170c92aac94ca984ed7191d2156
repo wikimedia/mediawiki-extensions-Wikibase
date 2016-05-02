@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_72ec3121",
+        "filename": "lib/includes/Changes/EntityChange.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-02T11:16:02Z",
+      "side": 1,
+      "message": "Uhm. Changes are persisted? :D In that case this change is probably rather pointless.",
+      "parentUuid": "ae564743_928aa56c",
+      "revId": "aee338dd19a86170c92aac94ca984ed7191d2156",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_d2841d61",
         "filename": "lib/includes/Changes/EntityChange.php",
         "patchSetId": 4
