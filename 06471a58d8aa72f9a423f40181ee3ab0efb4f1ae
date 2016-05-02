@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_57063f24",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-05-02T10:43:43Z",
+      "side": 1,
+      "message": "Error: Template \"wikibase-entitytermsview\" has no DOM node  selectable via the jQuery expression \".wikibase-entitytermsview-heading-aliases\"\n    at $.widget._createTemplateShortCuts (http://localhost/mediawiki/extensions/Wikibase/view/resources/jquery/ui/jquery.ui.TemplatedWidget.js?6d363:145:12)",
+      "revId": "06471a58d8aa72f9a423f40181ee3ab0efb4f1ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_b7eb5b76",
         "filename": "view/src/EntityTermsView.php",
         "patchSetId": 2
