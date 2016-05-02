@@ -5,19 +5,20 @@ namespace Wikibase\View\Tests;
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\EntityTermsView;
 use Wikibase\View\DummyLocalizedTextProvider;
+use Wikibase\View\SimpleEntityTermsView;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\TextInjector;
+use Wikibase\View\TermsListView;
 
 /**
- * @covers Wikibase\View\EntityTermsView
+ * @covers Wikibase\View\SimpleEntityTermsView
  *
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
  * @uses Wikibase\View\Template\TemplateRegistry
- * @uses Wikibase\View\TextInjector
+ * @uses Wikibase\View\TermsListView
  *
  * @group Wikibase
  * @group WikibaseView
@@ -26,7 +27,7 @@ use Wikibase\View\TextInjector;
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thiemo Mättig
  */
-class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
+class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 
 	private function getEntityTermsView( $editSectionCalls = 0 ) {
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
@@ -34,10 +35,17 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 			->method( 'getLabelDescriptionAliasesEditSection' )
 			->will( $this->returnValue( '<EDITSECTION>' ) );
 
-		return new EntityTermsView(
+		$textProvider = new DummyLocalizedTextProvider( 'lkt' );
+
+		$termsListView = $this->getMockBuilder( TermsListView::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		return new SimpleEntityTermsView(
 			TemplateFactory::getDefaultInstance(),
 			$editSectionGenerator,
-			new DummyLocalizedTextProvider()
+			$termsListView,
+			$textProvider
 		);
 	}
 
@@ -52,7 +60,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	public function testGetHtml_containsDescriptionAndAliases() {
 		$entityTermsView = $this->getEntityTermsView( 1 );
 		$fingerprint = $this->getFingerprint();
-		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '' );
 
 		$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
 		$this->assertContains( '&lt;ALIAS1&gt;', $html );
@@ -74,7 +82,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId, '' );
 
 		$this->assertContains( '<EDITSECTION>', $html );
 	}
@@ -85,7 +93,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		$fingerprint->setAliasGroup( 'en', array( '<a href="#">evil html</a>', '<b>bold</b>', '<i>italic</i>' ) );
 
 		$view = $this->getEntityTermsView( 1 );
-		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '', new TextInjector() );
+		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '' );
 
 		$this->assertContains( 'evil html', $html, 'make sure it works' );
 		$this->assertNotContains( 'href="#"', $html );
@@ -98,7 +106,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	public function testGetHtml_isMarkedAsEmptyValue() {
 		$entityTermsView = $this->getEntityTermsView( 1 );
 		$fingerprint = new Fingerprint();
-		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '' );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '(wikibase-description-empty)', $html );
@@ -108,7 +116,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	public function testGetHtml_isNotMarkedAsEmpty() {
 		$entityTermsView = $this->getEntityTermsView( 1 );
 		$fingerprint = $this->getFingerprint();
-		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '', new TextInjector() );
+		$html = $entityTermsView->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '' );
 
 		$this->assertNotContains( 'wb-empty', $html );
 		$this->assertNotContains( '(wikibase-description-empty)', $html );
@@ -120,7 +128,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		$fingerprint->removeDescription( 'en' );
 
 		$view = $this->getEntityTermsView( 1 );
-		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '', new TextInjector() );
+		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '' );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '(wikibase-description-empty)', $html );
@@ -132,7 +140,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		$fingerprint->removeAliasGroup( 'en' );
 
 		$view = $this->getEntityTermsView( 1 );
-		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '', new TextInjector() );
+		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '' );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertNotContains( '(wikibase-description-empty)', $html );
@@ -140,7 +148,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetTitleHtml_containsLabel() {
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 0 );
 		$fingerprint = $this->getFingerprint();
 		$html = $entityTermsView->getTitleHtml( 'en', $fingerprint, null );
 
@@ -151,7 +159,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider entityFingerprintProvider
 	 */
 	public function testGetTitleHtml_withEntityId( Fingerprint $fingerprint, ItemId $entityId ) {
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( 'en', $fingerprint, $entityId );
 		$idString = $entityId->getSerialization();
 
@@ -159,14 +167,14 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetTitleHtml_withoutEntityId() {
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( 'en', new Fingerprint(), null );
 
 		$this->assertNotContains( '(parentheses', $html );
 	}
 
 	public function testGetTitleHtml_labelIsEscaped() {
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 0 );
 		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', '<a href="#">evil html</a>' );
 		$html = $entityTermsView->getTitleHtml( 'en', $fingerprint, null );
@@ -180,7 +188,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		$fingerprint = $this->getFingerprint();
 		$fingerprint->removeLabel( 'en' );
 
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( 'en', $fingerprint, null );
 
 		$this->assertContains( 'wb-empty', $html );
@@ -190,7 +198,7 @@ class EntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	public function testGetTitleHtml_isNotMarkedAsEmpty() {
 		$fingerprint = $this->getFingerprint();
 
-		$entityTermsView = $this->getEntityTermsView();
+		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( 'en', $fingerprint, null );
 
 		$this->assertNotContains( 'wb-empty', $html );

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\View;
+namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
 use MWException;
@@ -10,18 +10,16 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\View\LanguageDirectionalityLookup;
+use Wikibase\View\LocalizedTextProvider;
+use Wikibase\View\TermsListView;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * Utility for expanding the placeholders left in the HTML by EntityView.
+ * Utility for expanding placeholders left in the HTML
  *
  * This is used to inject any non-cacheable information into the HTML
  * that was cached as part of the ParserOutput.
- *
- * @note This class encapsulated knowledge about which placeholders are used by
- * EntityView, and with what meaning.
- *
- * @see EntityView
  *
  * @since 0.5
  *

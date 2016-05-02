@@ -279,12 +279,29 @@ class EntityParserOutputGenerator {
 			$this->textProvider
 		) : new EmptyEditSectionGenerator();
 
+		$termsListView = new TermsListView(
+			TemplateFactory::getDefaultInstance(),
+			new LanguageNameLookup( $this->languageCode ),
+			new MediaWikiLocalizedTextProvider( $this->languageCode ),
+			new MediaWikiLanguageDirectionalityLookup()
+		);
+
+		$textInjector = new TextInjector();
+		$entityTermsView = new PlaceholderEmittingEntityTermsView(
+			$this->templateFactory,
+			$editSectionGenerator,
+			$this->textProvider,
+			$termsListView,
+			$textInjector
+		);
+
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entity->getType(),
 			$this->languageCode,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
-			$editSectionGenerator
+			$editSectionGenerator,
+			$entityTermsView
 		);
 
 		// Set the display title to display the label together with the item's id
@@ -293,18 +310,15 @@ class EntityParserOutputGenerator {
 
 		$html = $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
-		$parserOutput->setExtensionData( 'wikibase-view-chunks', $entityView->getPlaceholders() );
+		$parserOutput->setExtensionData( 'wikibase-view-chunks', $textInjector->getMarkers() );
 
-		$parserOutput->setExtensionData( 'wikibase-terms-list-items', $this->getTermsListItems( $entity ) );
+		$parserOutput->setExtensionData(
+			'wikibase-terms-list-items',
+			$this->getTermsListItems( $entity, $termsListView )
+		);
 	}
 
-	private function getTermsListItems( EntityDocument $entity ) {
-		$termsListView = new TermsListView(
-			TemplateFactory::getDefaultInstance(),
-			new LanguageNameLookup( $this->languageCode ),
-			new MediaWikiLocalizedTextProvider( $this->languageCode ),
-			new MediaWikiLanguageDirectionalityLookup()
-		);
+	private function getTermsListItems( EntityDocument $entity, TermsListView $termsListView ) {
 		$allLanguages = [];
 		if ( $entity instanceof AliasesProvider ) {
 			$aliasLanguages = array_keys( $entity->getAliasGroups()->toTextArray() );

@@ -7,6 +7,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\View\EditSectionGenerator;
+use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
 
 /**
@@ -50,12 +51,15 @@ class EntityTypesTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertInternalType( 'callable', $callback );
 
+		$entityTermsView = $this->getMock( EntityTermsView::class );
+
 		$entityView = call_user_func(
 			$callback,
 			'en',
 			$this->getMock( LabelDescriptionLookup::class ),
-			new LanguageFallbackChain( array() ),
-			$this->getMock( EditSectionGenerator::class )
+			new LanguageFallbackChain( [] ),
+			$this->getMock( EditSectionGenerator::class ),
+			$entityTermsView
 		);
 
 		$this->assertInstanceOf( EntityView::class, $entityView );
