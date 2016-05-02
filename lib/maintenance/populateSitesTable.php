@@ -16,11 +16,11 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
 require_once $basePath . '/maintenance/Maintenance.php';
 
 if ( !class_exists( SitesBuilder::class ) ) {
-	require_once __DIR__ . '/../includes/sites/SitesBuilder.php';
+	require_once __DIR__ . '/../includes/Sites/SitesBuilder.php';
 }
 
 if ( !class_exists( SiteMatrixParser::class ) ) {
-	require_once __DIR__ . '/../includes/sites/SiteMatrixParser.php';
+	require_once __DIR__ . '/../includes/Sites/SiteMatrixParser.php';
 }
 
 /**
