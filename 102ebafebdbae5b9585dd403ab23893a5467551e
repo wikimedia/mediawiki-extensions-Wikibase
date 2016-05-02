@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ae564743_f27201e1",
+        "filename": "repo/includes/Specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-02T13:26:07Z",
+      "side": 1,
+      "message": "This comment is confusing. What\u0027s the point of having a \"dummy\" here that does not look like a dummy? It should say something like:\n\n// Override [[MediaWiki:Listdatatypes-helppage/en]] in your language to change this.",
+      "revId": "102ebafebdbae5b9585dd403ab23893a5467551e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_52900d98",
         "filename": "repo/includes/Specials/SpecialListDatatypes.php",
         "patchSetId": 3
