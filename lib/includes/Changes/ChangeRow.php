@@ -77,17 +77,13 @@ class ChangeRow implements Change {
 	 * @since 0.4
 	 *
 	 * @param string $name Field name
-	 * @param mixed $default Default value to return when none is found
-	 * (default: null)
 	 *
 	 * @throws MWException
 	 * @return mixed
 	 */
-	public function getField( $name, $default = null ) {
+	public function getField( $name ) {
 		if ( $this->hasField( $name ) ) {
 			$value = $this->fields[$name];
-		} elseif ( !is_null( $default ) ) {
-			$value = $default;
 		} else {
 			throw new MWException( 'Attempted to get not-set field ' . $name );
 		}
@@ -214,13 +210,10 @@ class ChangeRow implements Change {
 	 * Sets multiple fields.
 	 *
 	 * @param array $fields The fields to set
-	 * @param bool $override Override already set fields with the provided values?
 	 */
-	public function setFields( array $fields, $override = true ) {
+	public function setFields( array $fields ) {
 		foreach ( $fields as $name => $value ) {
-			if ( $override || !$this->hasField( $name ) ) {
-				$this->setField( $name, $value );
-			}
+			$this->setField( $name, $value );
 		}
 	}
 
