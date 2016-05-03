@@ -38,16 +38,6 @@ abstract class DiffChange extends ChangeRow {
 	}
 
 	/**
-	 * @since 0.4
-	 *
-	 * @return bool
-	 */
-	public function hasDiff() {
-		$info = $this->getField( 'info' );
-		return isset( $info['diff'] );
-	}
-
-	/**
 	 * @since 0.1
 	 *
 	 * @param Diff $diff
@@ -56,26 +46,6 @@ abstract class DiffChange extends ChangeRow {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		$info['diff'] = $diff;
 		$this->setField( 'info', $info );
-	}
-
-	/**
-	 * Returns whether the change is empty.
-	 * If it's empty, it can be ignored.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function isEmpty() {
-		if ( $this->hasField( 'info' ) ) {
-			$info = $this->getField( 'info' );
-
-			if ( array_key_exists( 'diff', $info ) ) {
-				return $this->getDiff()->isEmpty();
-			}
-		}
-
-		return true;
 	}
 
 	/**

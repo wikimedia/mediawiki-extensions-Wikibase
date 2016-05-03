@@ -45,11 +45,6 @@ class ChangeRowTest extends MediaWikiTestCase {
 		$change->getTime();
 	}
 
-	public function testIsNotEmpty() {
-		$change = new ChangeRow();
-		$this->assertFalse( $change->isEmpty() );
-	}
-
 	public function testGetTypeReturnsChange() {
 		$change = new ChangeRow();
 		$this->assertSame( 'change', $change->getType() );

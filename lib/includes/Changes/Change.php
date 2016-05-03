@@ -23,16 +23,6 @@ interface Change {
 	public function getAge();
 
 	/**
-	 * Returns whether the change is empty.
-	 * If it's empty, it can be ignored.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function isEmpty();
-
-	/**
 	 * Returns the type of change.
 	 *
 	 * @since 0.1
