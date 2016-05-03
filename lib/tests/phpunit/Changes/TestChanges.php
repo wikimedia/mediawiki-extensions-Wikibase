@@ -13,7 +13,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\DiffChange;
 use Wikibase\EntityChange;
 use Wikibase\ItemChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -32,28 +31,6 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
  * @author Daniel Kinzler
  */
 final class TestChanges {
-
-	protected static function getItem() {
-		$item = new Item();
-
-		$fingerprint = $item->getFingerprint();
-		$fingerprint->setLabel( 'en', 'Venezuela' );
-		$fingerprint->setDescription( 'en', 'a country' );
-		$fingerprint->setAliasGroup( 'en', array( 'Bolivarian Republic of Venezuela' ) );
-
-		$siteLinks = $item->getSiteLinkList();
-		$siteLinks->addNewSiteLink( 'enwiki', 'Venezuela' );
-		$siteLinks->addNewSiteLink( 'jawiki', 'ベネズエラ' );
-		$siteLinks->addNewSiteLink( 'cawiki', 'Veneçuela' );
-
-		return $item;
-	}
-
-	public static function getChange() {
-		$changes = self::getInstances();
-
-		return $changes['set-de-label']->toArray();
-	}
 
 	/**
 	 * @return EntityChangeFactory
@@ -256,20 +233,6 @@ final class TestChanges {
 				$change->setField( $name, $value );
 			}
 		}
-	}
-
-	public static function getDiffs() {
-		$changes = self::getChanges();
-		$diffs = array();
-
-		foreach ( $changes as $change ) {
-			if ( $change instanceof DiffChange
-				&& $change->hasDiff() ) {
-				$diffs[] = $change->getDiff();
-			}
-		}
-
-		return $diffs;
 	}
 
 	/**
