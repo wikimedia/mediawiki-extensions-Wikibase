@@ -88,7 +88,7 @@ class ChangeNotificationJob extends Job {
 	 *
 	 * @return Change[] the changes to process.
 	 */
-	public function getChanges() {
+	private function getChanges() {
 		if ( $this->changes === null ) {
 			$params = $this->getParams();
 			$ids = $params['changeIds'];
