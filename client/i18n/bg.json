@@ -41,6 +41,7 @@
 	"wikibase-rc-wikibase-edit-title": "Редакция от {{WBREPONAME}}",
 	"wikibase-replicationnote": "Може да отнеме няколко минути, докато промените се отразят във всички уикита.",
 	"wikibase-watchlist-show-changes-pref": "Показване на редакции от {{WBREPONAME}} в списъка ми за наблюдение",
+	"unconnectedpages": "Страници, които не са свързани с обекти в Уикиданни",
 	"wikibase-unconnectedpages-submit": "Показване на страниците",
 	"wikibase-pageswithbadges-submit": "Показване на страниците",
 	"wikibase-pageinfo-entity-id": "ID на обекта в {{WBREPONAME}}",
