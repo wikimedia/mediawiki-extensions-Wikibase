@@ -34,27 +34,5 @@ return array(
 	// may contain mappings from site-id to db-name.
 	'localClientDatabases' => array(),
 
-	'changeHandlers' => array(
-		'wikibase-item~add' => ItemChange::class,
-		'wikibase-property~add' => EntityChange::class,
-		'wikibase-query~add' => EntityChange::class,
-
-		'wikibase-item~update' => ItemChange::class,
-		'wikibase-property~update' => EntityChange::class,
-		'wikibase-query~update' => EntityChange::class,
-
-		'wikibase-item~remove' => ItemChange::class,
-		'wikibase-property~remove' => EntityChange::class,
-		'wikibase-query~remove' => EntityChange::class,
-
-		'wikibase-item~refresh' => ItemChange::class,
-		'wikibase-property~refresh' => EntityChange::class,
-		'wikibase-query~refresh' => EntityChange::class,
-
-		'wikibase-item~restore' => ItemChange::class,
-		'wikibase-property~restore' => EntityChange::class,
-		'wikibase-query~restore' => EntityChange::class,
-	),
-
 	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],
 );

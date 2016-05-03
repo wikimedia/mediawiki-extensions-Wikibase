@@ -35,6 +35,7 @@ class StoreTest extends \MediaWikiTestCase {
 
 		$instances = array(
 			new SqlStore(
+				$wikibaseRepo->getEntityChangeFactory(),
 				$wikibaseRepo->getEntityContentDataCodec(),
 				$wikibaseRepo->getEntityIdParser(),
 				$this->getMock( EntityIdLookup::class ),
