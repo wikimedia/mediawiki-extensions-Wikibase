@@ -181,10 +181,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return;
 		}
 
-		var lia = this._lia;
-
-		$.each( this._listview.items(), function( i, item ) {
-			var snakview = lia.liInstance( $( item ) );
+		this._listview.value().each( function( snakview ) {
 			snakview.startEditing();
 		} );
 
@@ -221,10 +218,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			// editing:
 			this._createListView();
 		} else {
-			$.each( this._listview.items(), function( i, item ) {
-				var $item = $( item ),
-					snakview = lia.liInstance( $item );
-
+			this._listview.value().each( function( snakview ) {
 				snakview.stopEditing( dropValue );
 
 				// After saving, the property should not be editable anymore.
@@ -287,12 +281,10 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return this.option( 'value', snakList );
 		}
 
-		var lia = this._lia,
-			snaks = [];
+		var snaks = [];
 
-		this._listview.items().each( function() {
-			var snakview = lia.liInstance( $( this ) ),
-				snak = snakview.snak();
+		this._listview.value().each( function( snakview ) {
+			var snak = snakview.snak();
 			if ( snak ) {
 				snaks.push( snak );
 			}
@@ -307,16 +299,9 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
-		var lia = this._lia,
-			isValid = true;
-
-		this._listview.items().each( function() {
-			var snakview = lia.liInstance( $( this ) );
-			isValid = snakview.isValid() && snakview.snak();
-			return isValid;
+		return this._listview.value().every( function( snakview ) {
+			return snakview.isValid() && !!snakview.snak();
 		} );
-
-		return isValid;
 	},
 
 	/**
@@ -326,7 +311,9 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isInitialValue: function() {
-		return this.options.value.equals( this.value() );
+		return this._listview.value().every( function( snakview ) {
+			return snakview.isInitialValue();
+		} );
 	},
 
 	/**
