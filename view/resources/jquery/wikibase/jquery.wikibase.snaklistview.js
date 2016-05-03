@@ -181,10 +181,10 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return;
 		}
 
-		var self = this;
+		var lia = this._lia;
 
 		$.each( this._listview.items(), function( i, item ) {
-			var snakview = self._lia.liInstance( $( item ) );
+			var snakview = lia.liInstance( $( item ) );
 			snakview.startEditing();
 		} );
 
@@ -207,7 +207,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 
 		this._trigger( 'stopediting', null, [dropValue] );
 
-		var self = this;
+		var lia = this._lia;
 
 		this.element.removeClass( 'wb-error' );
 		this._detachEditModeEventHandlers();
@@ -223,7 +223,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		} else {
 			$.each( this._listview.items(), function( i, item ) {
 				var $item = $( item ),
-					snakview = self._lia.liInstance( $item );
+					snakview = lia.liInstance( $item );
 
 				snakview.stopEditing( dropValue );
 
@@ -287,12 +287,12 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return this.option( 'value', snakList );
 		}
 
-		var listview = this.$listview.data( 'listview' ),
+		var lia = this._lia,
 			snaks = [];
 
-		listview.items().each( function() {
-			var liInstance = listview.listItemAdapter().liInstance( $( this ) ),
-				snak = liInstance.snak();
+		this._listview.items().each( function() {
+			var snakview = lia.liInstance( $( this ) ),
+				snak = snakview.snak();
 			if ( snak ) {
 				snaks.push( snak );
 			}
@@ -307,11 +307,10 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
-		var listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
+		var lia = this._lia,
 			isValid = true;
 
-		listview.items().each( function() {
+		this._listview.items().each( function() {
 			var snakview = lia.liInstance( $( this ) );
 			isValid = snakview.isValid() && snakview.snak();
 			return isValid;
@@ -373,7 +372,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			if ( !( value instanceof wb.datamodel.SnakList ) ) {
 				throw new Error( 'value has to be an instance of wikibase.datamodel.SnakList' );
 			}
-			this.$listview.data( 'listview' ).value( value.toArray() );
+			this._listview.value( value.toArray() );
 		}
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
@@ -392,7 +391,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		var $items = this._listview.items();
 
 		if ( $items.length ) {
-			this._listview.listItemAdapter().liInstance( $items.first() ).focus();
+			this._lia.liInstance( $items.first() ).focus();
 		} else {
 			this.element.focus();
 		}
@@ -426,7 +425,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 					self._listview.move( self._findListItem( snak ), i );
 				}
 			} );
-			self._updatePropertyLabels();
+			this._updatePropertyLabels();
 		}
 	},
 
@@ -465,13 +464,13 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {jQuery|null}
 	 */
 	_findListItem: function( snak ) {
-		var self = this,
+		var lia = this._lia,
 			$snakview = null;
 
 		this._listview.items().each( function() {
 			var $itemNode = $( this );
 
-			if ( self._listview.listItemAdapter().liInstance( $itemNode ).snak().equals( snak ) ) {
+			if ( lia.liInstance( $itemNode ).snak().equals( snak ) ) {
 				$snakview = $itemNode;
 			}
 
