@@ -296,22 +296,6 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertEquals( $timestamp, $change->getTime() );
 	}
 
-	public function testHasDiff() {
-		$change = new EntityChange( array( 'info' => array() ) );
-		$this->assertFalse( $change->hasDiff() );
-
-		$change->setDiff( new Diff() );
-		$this->assertTrue( $change->hasDiff() );
-	}
-
-	public function testIsEmpty() {
-		$change = new EntityChange();
-		$this->assertTrue( $change->isEmpty() );
-
-		$change->setDiff( new Diff( array( new DiffOpAdd( '' ) ) ) );
-		$this->assertFalse( $change->isEmpty() );
-	}
-
 	public function testSerializeAndUnserializeInfo() {
 		$info = array( 'diff' => new DiffOpAdd( '' ) );
 		$change = new EntityChange();

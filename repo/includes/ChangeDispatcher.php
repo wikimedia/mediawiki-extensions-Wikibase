@@ -348,7 +348,7 @@ class ChangeDispatcher {
 	 * @return bool
 	 */
 	private function isRelevantChange( Change $change, $siteID ) {
-		if ( $change instanceof ItemChange && !$change->isEmpty() ) {
+		if ( $change instanceof ItemChange ) {
 			$siteLinkDiff = $change->getSiteLinkDiff();
 
 			if ( isset( $siteLinkDiff[ $siteID ] ) ) {

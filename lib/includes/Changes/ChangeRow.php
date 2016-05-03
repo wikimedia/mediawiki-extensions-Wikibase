@@ -45,17 +45,6 @@ class ChangeRow implements Change {
 		return $this->getField( 'time' );
 	}
 
-	/**
-	 * @see Change::isEmpty
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function isEmpty() {
-		return false;
-	}
-
 	public function __construct( array $fields = array() ) {
 		$this->setFields( $fields );
 	}
