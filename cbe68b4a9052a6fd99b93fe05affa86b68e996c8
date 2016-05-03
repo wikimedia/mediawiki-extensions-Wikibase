@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_263716ad",
+        "filename": "lib/includes/Changes/ChangeRow.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-03T12:58:33Z",
+      "side": 1,
+      "message": "I like it more when this is coded explicitly in these 4 places. Less magic hidden behind optional method parameters. And: I want to continue working on this and possible get rid of these 4 places.",
+      "parentUuid": "ae564743_cb9f4354",
+      "revId": "cbe68b4a9052a6fd99b93fe05affa86b68e996c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_2b8fdf27",
         "filename": "lib/includes/Changes/ChangeRow.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-03T10:32:33Z",
       "side": 1,
       "message": "I\u0027d actually like it if this would not override, but log a warning, but that\u0027s a non-trivial change.",
+      "revId": "cbe68b4a9052a6fd99b93fe05affa86b68e996c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_a642060f",
+        "filename": "lib/includes/Changes/ChangeRow.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-03T12:58:33Z",
+      "side": 1,
+      "message": "Agree, but should not be part of this patch.",
+      "parentUuid": "ae564743_2b8fdf27",
       "revId": "cbe68b4a9052a6fd99b93fe05affa86b68e996c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
