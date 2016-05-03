@@ -6,7 +6,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\Template\TemplateFactory;
@@ -57,8 +56,10 @@ class EntityTermsView {
 	/**
 	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
 	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param Fingerprint $fingerprint the fingerprint to render
-	 * @param EntityId|null $entityId the id of the fingerprint's entity
+	 * @param LabelsProvider $labelsProvider
+	 * @param DescriptionsProvider $descriptionsProvider
+	 * @param AliasesProvider|null $aliasesProvider
+	 * @param EntityId|null $entityId the id of the entity
 	 * @param string $termBoxHtml
 	 * @param TextInjector $textInjector
 	 *
@@ -66,22 +67,39 @@ class EntityTermsView {
 	 */
 	public function getHtml(
 		$mainLanguageCode,
-		Fingerprint $fingerprint,
+		LabelsProvider $labelsProvider,
+		DescriptionsProvider $descriptionsProvider,
+		AliasesProvider $aliasesProvider = null,
 		EntityId $entityId = null,
 		$termBoxHtml,
 		TextInjector $textInjector
 	) {
-		$descriptions = $fingerprint->getDescriptions();
-		$aliasGroups = $fingerprint->getAliasGroups();
+		$headingPartsHtml = '';
+
+		$descriptions = $descriptionsProvider->getDescriptions();
+		$headingPartsHtml .= $this->templateFactory->render(
+			'wikibase-entitytermsview-heading-part',
+			'description',
+			$descriptions->hasTermForLanguage( $mainLanguageCode ) ? '' : 'wb-empty',
+			$this->getDescriptionHtml( $mainLanguageCode, $descriptions )
+		);
+
+		if ( $aliasesProvider !== null ) {
+			$aliasGroups = $aliasesProvider->getAliasGroups();
+			$headingPartsHtml .= $this->templateFactory->render(
+				'wikibase-entitytermsview-heading-part',
+				'aliases',
+				$aliasGroups->hasGroupForLanguage( $mainLanguageCode ) ? '' : 'wb-empty',
+				$this->getHtmlForAliases( $mainLanguageCode, $aliasGroups )
+			);
+		}
+
 		$marker = $textInjector->newMarker(
 			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
 		);
 
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$descriptions->hasTermForLanguage( $mainLanguageCode ) ? '' : 'wb-empty',
-			$this->getDescriptionHtml( $mainLanguageCode, $descriptions ),
-			$aliasGroups->hasGroupForLanguage( $mainLanguageCode ) ? '' : 'wb-empty',
-			$this->getHtmlForAliases( $mainLanguageCode, $aliasGroups ),
+			$headingPartsHtml,
 			$termBoxHtml,
 			$marker,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )

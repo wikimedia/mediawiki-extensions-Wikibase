@@ -46,16 +46,24 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	options: {
 		template: 'wikibase-entitytermsview',
 		templateParams: [
-			'', // description class
-			'', // descriptionview
-			'', // aliases class
-			'', // aliasesview
+			function() {
+				return $( mw.wbTemplate(
+						'wikibase-entitytermsview-heading-part',
+						'description',
+						'',
+						''
+					) ).add( mw.wbTemplate(
+						'wikibase-entitytermsview-heading-part',
+						'aliases',
+						'',
+						''
+					) );
+			}, // header content
 			'', // entitytermsforlanguagelistview
 			'', // additional entitytermsforlanguagelistview container class(es)
 			'' // toolbar placeholder
 		],
 		templateShortCuts: {
-			$headingAliases: '.wikibase-entitytermsview-heading-aliases',
 			$headingDescription: '.wikibase-entitytermsview-heading-description',
 			$entitytermsforlanguagelistviewContainer:
 				'.wikibase-entitytermsview-entitytermsforlanguagelistview'
@@ -120,7 +128,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 						: description.getText()
 					);
 
-				var $ul = self.$headingAliases
+				var $ul = self.element.find( '.wikibase-entitytermsview-heading-aliases' )
 					.toggleClass( 'wb-empty', isAliasesEmpty )
 					.children( 'ul' );
 
