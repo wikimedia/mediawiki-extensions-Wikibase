@@ -317,16 +317,19 @@ class EntityParserOutputGenerator {
 		}
 		$allLanguages = array_unique( $allLanguages );
 
-		return array_map(
-			function( $languageCode ) use( $termsListView, $entity ) {
-				return $termsListView->getListItemHtml(
-					$entity,
-					$entity,
-					$entity instanceof AliasesProvider ? $entity : null,
-					$languageCode
-				);
-			},
-			$allLanguages
+		return array_combine(
+			$allLanguages,
+			array_map(
+				function( $languageCode ) use( $termsListView, $entity ) {
+					return $termsListView->getListItemHtml(
+						$entity,
+						$entity,
+						$entity instanceof AliasesProvider ? $entity : null,
+						$languageCode
+					);
+				},
+				$allLanguages
+			)
 		);
 	}
 
