@@ -133,9 +133,7 @@ abstract class DiffChange extends ChangeRow {
 	 * @param mixed $data
 	 * @return mixed
 	 */
-	public function arrayalizeObjects( $data ) {
-		return $data; // noop
-	}
+	abstract public function arrayalizeObjects( $data );
 
 	/**
 	 * May be overwritten by subclasses to provide special handling.
@@ -148,8 +146,6 @@ abstract class DiffChange extends ChangeRow {
 	 * @param array $data
 	 * @return mixed
 	 */
-	public function objectifyArrays( array $data ) {
-		return $data; // noop
-	}
+	abstract public function objectifyArrays( array $data );
 
 }
