@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
+use Language;
 use PHPUnit_Framework_TestCase;
 use ResourceLoaderContext;
 use Wikibase\SitesModule;
@@ -21,9 +22,17 @@ class SitesModuleTest extends PHPUnit_Framework_TestCase {
 	 * @return ResourceLoaderContext
 	 */
 	private function getContext() {
-		return $this->getMockBuilder( ResourceLoaderContext::class )
+		$context = $this->getMockBuilder( ResourceLoaderContext::class )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$context->expects( $this->any() )
+			->method( 'getLanguage' )
+			->will( $this->returnCallback( function() {
+				return Language::factory( 'en' );
+			} ) );
+
+		return $context;
 	}
 
 	public function testGetScript() {
