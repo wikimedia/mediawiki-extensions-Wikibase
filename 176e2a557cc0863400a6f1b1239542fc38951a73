@@ -16,6 +16,24 @@
       "revId": "176e2a557cc0863400a6f1b1239542fc38951a73",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_86f8a2e3",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-03T12:54:39Z",
+      "side": 1,
+      "message": "Should not make any difference. The previous isEmpty method executed pretty much the exact same code paths as the getSiteLinkDiff method below.",
+      "parentUuid": "ae564743_6b8a771d",
+      "revId": "176e2a557cc0863400a6f1b1239542fc38951a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
