@@ -26,7 +26,6 @@ use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -580,7 +579,7 @@ abstract class EntityContent extends AbstractContent {
 		$fromEntity = $fromContent->isRedirect() ? $this->makeEmptyEntity() : $fromContent->getEntity();
 		$toEntity = $toContent->isRedirect() ? $this->makeEmptyEntity() : $toContent->getEntity();
 
-		$entityDiffer = new EntityDiffer();
+		$entityDiffer = WikibaseRepo::getDefaultInstance()->getEntityDiffer();
 		$entityDiff = $entityDiffer->diffEntities( $fromEntity, $toEntity );
 
 		return new EntityContentDiff( $entityDiff, $redirectDiff );

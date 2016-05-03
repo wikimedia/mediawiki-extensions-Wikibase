@@ -107,6 +107,13 @@ class EntityTypeDefinitions {
 	}
 
 	/**
+	 * @return callable[]
+	 */
+	public function getEntityDifferStrategyBuilders() {
+		return $this->getMapForDefinitionField( 'entity-differ-strategy-builder' );
+	}
+
+	/**
 	 * @return string[]
 	 */
 	public function getJsDeserializerFactoryFunctions() {

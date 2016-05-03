@@ -11,7 +11,7 @@
  * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
  * objects or loading classes here!
  *
- * @see docs/entiytypes.wiki
+ * @see docs/entitytypes.wiki
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
@@ -21,6 +21,8 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\DataModel\Services\Diff\ItemDiffer;
+use Wikibase\DataModel\Services\Diff\PropertyDiffer;
 
 return array(
 	'item' => array(
@@ -35,7 +37,10 @@ return array(
 			function( $serialization ) {
 				return new ItemId( $serialization );
 			}
-		]
+		],
+		'entity-differ-strategy-builder' => function() {
+			return new ItemDiffer();
+		}
 	),
 	'property' => array(
 		'serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -49,6 +54,9 @@ return array(
 			function( $serialization ) {
 				return new PropertyId( $serialization );
 			}
-		]
+		],
+		'entity-differ-strategy-builder' => function() {
+			return new PropertyDiffer();
+		}
 	)
 );

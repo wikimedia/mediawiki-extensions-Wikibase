@@ -529,9 +529,23 @@ class WikibaseRepo {
 		);
 
 		return new EntityChangeFactory(
-			new EntityDiffer(),
+			$this->getEntityDiffer(),
 			$changeClasses
 		);
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityDiffer
+	 */
+	public function getEntityDiffer() {
+		$strategieBuilders = $this->entityTypeDefinitions->getEntityDifferStrategyBuilders();
+		$entityDiffer = new EntityDiffer();
+		foreach ( $strategieBuilders as $strategyBuilder ) {
+			$entityDiffer->registerEntityDifferStrategy( call_user_func( $strategyBuilder ) );
+		}
+		return $entityDiffer;
 	}
 
 	/**
@@ -1472,6 +1486,7 @@ class WikibaseRepo {
 			$this->getEntityRevisionLookup( 'uncached' ),
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
+			$this->getEntityDiffer(),
 			$this->newEditFilterHookRunner( $context ),
 			$context
 		);
