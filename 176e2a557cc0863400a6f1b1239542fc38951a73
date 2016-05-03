@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_6b8a771d",
+        "filename": "repo/includes/ChangeDispatcher.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-03T10:27:55Z",
+      "side": 1,
+      "message": "Could this be a performance optimization?",
+      "revId": "176e2a557cc0863400a6f1b1239542fc38951a73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
