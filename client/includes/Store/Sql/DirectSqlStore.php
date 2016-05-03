@@ -19,7 +19,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
-use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
@@ -454,10 +454,10 @@ class DirectSqlStore implements ClientStore {
 	/**
 	 * @since 0.5
 	 *
-	 * @return ChangeLookup
+	 * @return EntityChangeLookup
 	 */
-	public function getChangeLookup() {
-		return new ChangeLookup( $this->changeHandlerClasses, $this->repoWiki );
+	public function getEntityChangeLookup() {
+		return new EntityChangeLookup( $this->changeHandlerClasses, $this->repoWiki );
 	}
 
 }

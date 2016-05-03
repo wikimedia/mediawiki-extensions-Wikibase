@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 use Wikibase\IdGenerator;
-use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -85,8 +85,8 @@ class StoreTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetChangeLookup( Store $store ) {
-		$this->assertInstanceOf( ChangeLookup::class, $store->getChangeLookup() );
+	public function testGetEntityChangeLookup( Store $store ) {
+		$this->assertInstanceOf( EntityChangeLookup::class, $store->getEntityChangeLookup() );
 	}
 
 	/**

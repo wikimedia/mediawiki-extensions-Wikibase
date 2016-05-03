@@ -2,13 +2,12 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\Change;
 use Wikibase\EntityChange;
-use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 
 /**
- * @covers Wikibase\Lib\Store\ChangeLookup
+ * @covers Wikibase\Lib\Store\EntityChangeLookup
  *
  * @group Wikibase
  * @group WikibaseLib
@@ -18,15 +17,15 @@ use Wikibase\Repo\Store\Sql\SqlChangeStore;
  * @license GPL-2.0+
  * @author Marius Hoch
  */
-class ChangeLookupTest extends \MediaWikiTestCase {
+class EntityChangeLookupTest extends \MediaWikiTestCase {
 
 	public function testGetRecordId() {
-		$change = $this->getMock( Change::class );
+		$change = $this->getMock( EntityChange::class );
 		$change->expects( $this->once() )
 			->method( 'getId' )
 			->will( $this->returnValue( 42 ) );
 
-		$changeLookup = new ChangeLookup( array(), 'doesntmatterwiki' );
+		$changeLookup = new EntityChangeLookup( [], 'doesntmatterwiki' );
 
 		$this->assertSame( 42, $changeLookup->getRecordId( $change ) );
 	}
@@ -71,8 +70,8 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 		}
 		$start = $this->offsetStart( $start );
 
-		$lookup = new ChangeLookup(
-			array( 'wikibase-item~remove' => EntityChange::class ),
+		$lookup = new EntityChangeLookup(
+			[ 'wikibase-item~remove' => EntityChange::class ],
 			wfWikiID()
 		);
 
@@ -87,12 +86,12 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 	public function testLoadByChangeIds() {
 		$start = $this->offsetStart( 3 );
 
-		$lookup = new ChangeLookup(
+		$lookup = new EntityChangeLookup(
 			array( 'wikibase-item~remove' => EntityChange::class ),
 			wfWikiID()
 		);
 
-		$changes = $lookup->loadByChangeIds( array( $start, $start + 1, $start + 4 ) );
+		$changes = $lookup->loadByChangeIds( [ $start, $start + 1, $start + 4 ] );
 		list( $changeOne, $changeTwo, $changeThree ) = $this->getEntityChanges();
 
 		$this->assertChangesEqual(
@@ -116,17 +115,14 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 		$changeStore = new SqlChangeStore( wfGetLB() );
 		$changeStore->saveChange( $expected );
 
-		$lookup = new ChangeLookup(
-			array( 'wikibase-item~remove' => EntityChange::class ),
+		$lookup = new EntityChangeLookup(
+			[ 'wikibase-item~remove' => EntityChange::class ],
 			wfWikiID()
 		);
 
 		$change = $lookup->loadByRevisionId( 342342 );
 
-		$this->assertChangesEqual(
-			array( $expected ),
-			array( $change )
-		);
+		$this->assertChangesEqual( [ $expected ], [ $change ] );
 	}
 
 	public function testLoadByRevisionId_notFound() {
@@ -134,8 +130,8 @@ class ChangeLookupTest extends \MediaWikiTestCase {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
 		}
 
-		$lookup = new ChangeLookup(
-			array( 'wikibase-item~remove' => EntityChange::class ),
+		$lookup = new EntityChangeLookup(
+			[ 'wikibase-item~remove' => EntityChange::class ],
 			wfWikiID()
 		);
 

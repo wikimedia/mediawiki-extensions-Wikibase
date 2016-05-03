@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\IdGenerator;
-use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -120,9 +120,9 @@ class SqlStoreTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( PrefetchingWikiPageEntityMetaDataAccessor::class, $service );
 	}
 
-	public function testGetChangeLookup() {
-		$service = $this->newInstance()->getChangeLookup();
-		$this->assertInstanceOf( ChangeLookup::class, $service );
+	public function testGetEntityChangeLookup() {
+		$service = $this->newInstance()->getEntityChangeLookup();
+		$this->assertInstanceOf( EntityChangeLookup::class, $service );
 	}
 
 	public function testGetChangeStore() {

@@ -218,7 +218,7 @@ class MockClientStore implements ClientStore {
 		);
 	}
 
-	public function getChangeLookup() {
+	public function getEntityChangeLookup() {
 		// FIXME: Incomplete
 	}
 

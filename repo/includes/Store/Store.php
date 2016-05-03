@@ -5,7 +5,7 @@ namespace Wikibase;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
-use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -155,9 +155,9 @@ interface Store {
 	/**
 	 * @since 0.5
 	 *
-	 * @return ChangeLookup
+	 * @return EntityChangeLookup
 	 */
-	public function getChangeLookup();
+	public function getEntityChangeLookup();
 
 	/**
 	 * @since 0.5

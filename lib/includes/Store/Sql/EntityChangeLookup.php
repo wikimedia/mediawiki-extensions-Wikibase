@@ -4,9 +4,8 @@ namespace Wikibase\Lib\Store;
 
 use DBAccessBase;
 use ResultWrapper;
-use Wikibase\Change;
-use Wikibase\ChangeRow;
 use Wikibase\ChunkAccess;
+use Wikibase\EntityChange;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -17,7 +16,7 @@ use Wikimedia\Assert\Assert;
  * @license GPL-2.0+
  * @author Marius Hoch
  */
-class ChangeLookup extends DBAccessBase implements ChunkAccess {
+class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 
 	/**
 	 * Flag to indicate that we need to query a master database.
@@ -44,16 +43,16 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	}
 
 	/**
-	 * Returns the sequential ID of the given Change.
+	 * Returns the sequential ID of the given EntityChange.
 	 *
-	 * @param Change $rec
+	 * @param EntityChange $rec
 	 *
 	 * @return int
 	 */
 	public function getRecordId( $rec ) {
-		Assert::parameterType( Change::class, $rec, '$rec' );
+		Assert::parameterType( EntityChange::class, $rec, '$rec' );
 
-		/* @var Change $rec */
+		/* @var EntityChange $rec */
 		return $rec->getId();
 	}
 
@@ -61,7 +60,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	 * @param int $start
 	 * @param int $size
 	 *
-	 * @return Change[]
+	 * @return EntityChange[]
 	 */
 	public function loadChunk( $start, $size ) {
 		Assert::parameterType( 'integer', $start, '$start' );
@@ -80,7 +79,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	/**
 	 * @param int[] $ids
 	 *
-	 * @return Change[]
+	 * @return EntityChange[]
 	 */
 	public function loadByChangeIds( array $ids ) {
 		Assert::parameterElementType( 'integer', $ids, '$ids' );
@@ -96,7 +95,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	 * @param int $revisionId
 	 * @param string $mode One of the self::FROM_... constants.
 	 *
-	 * @return Change|null
+	 * @return EntityChange|null
 	 */
 	public function loadByRevisionId( $revisionId, $mode = self::FROM_SLAVE ) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
@@ -123,7 +122,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 	 * @param string $method
 	 * @param int $mode (DB_SLAVE or DB_MASTER)
 	 *
-	 * @return Change[]
+	 * @return EntityChange[]
 	 */
 	private function loadChanges( array $where, array $options, $method, $mode = DB_SLAVE ) {
 		$dbr = $this->getConnection( $mode );
@@ -173,7 +172,7 @@ class ChangeLookup extends DBAccessBase implements ChunkAccess {
 		if ( array_key_exists( $type, $this->changeHandlers ) ) {
 			return $this->changeHandlers[$type];
 		} else {
-			return ChangeRow::class;
+			return EntityChange::class;
 		}
 	}
 
