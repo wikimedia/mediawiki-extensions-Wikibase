@@ -326,7 +326,16 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isInitialValue: function() {
-		return this.options.value.equals( this.value() );
+		var lia = this._lia,
+			isInitialValue = true;
+
+		this._listview.items().each( function() {
+			var snakview = lia.liInstance( $( this ) );
+			isInitialValue = snakview.isInitialValue();
+			return isInitialValue;
+		} );
+
+		return isInitialValue;
 	},
 
 	/**
