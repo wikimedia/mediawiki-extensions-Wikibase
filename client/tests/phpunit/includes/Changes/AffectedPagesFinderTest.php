@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\ItemChange;
+use Wikibase\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
@@ -98,7 +98,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['create linked item Q1'] = array(
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			$changeFactory->newFromUpdate(
-				ItemChange::ADD,
+				EntityChange::ADD,
 				null,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) )
 			)
@@ -107,7 +107,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['unlink item Q1'] = array(
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
 				new Item( $q1 )
 			)
@@ -116,7 +116,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['link item Q2'] = array(
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) )
 			)
@@ -125,7 +125,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['change link of Q1'] = array(
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '2' ) )
 			)
@@ -134,7 +134,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['delete linked item Q2'] = array(
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			$changeFactory->newFromUpdate(
-				ItemChange::REMOVE,
+				EntityChange::REMOVE,
 				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) ),
 				null
 			),
@@ -144,7 +144,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['add another sitelink to Q2'] = array(
 			array( EntityUsage::SITELINK_USAGE ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) ),
 				$this->getItemWithSiteLinks( $q2, array(
 					'enwiki' => '2',
@@ -156,7 +156,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['alias change on Q1'] = array(
 			array( EntityUsage::OTHER_USAGE ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithAliases( $q1, 'de', array( 'EINS' ) )
 			)
@@ -165,7 +165,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['local label change on Q1 (used by Q2)'] = array(
 			array( EntityUsage::makeAspectKey( EntityUsage::LABEL_USAGE, 'en' ) ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'en', 'ONE' )
 			)
@@ -174,7 +174,8 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$badges = array( new ItemId( 'Q34' ) );
 		$cases['badge only change on Q1'] = array(
 			array( EntityUsage::SITELINK_USAGE ),
-			$changeFactory->newFromUpdate( ItemChange::UPDATE,
+			$changeFactory->newFromUpdate(
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ), $badges ) )
 		);
@@ -182,7 +183,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$cases['statement change on Q1'] = array(
 			array( EntityUsage::OTHER_USAGE ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithStatement( $q1, new PropertyId( 'P5' ), new StringValue( 'Hello' ) )
 			)
@@ -194,7 +195,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getChangedAspectsProvider
 	 */
-	public function testGetChangedAspects( array $expected, ItemChange $change ) {
+	public function testGetChangedAspects( array $expected, EntityChange $change ) {
 		$referencedPagesFinder = $this->getAffectedPagesFinder( array() );
 
 		$actual = $referencedPagesFinder->getChangedAspects( $change );
@@ -268,7 +269,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array(), // No usages recorded yet
 			$changeFactory->newFromUpdate(
-				ItemChange::ADD,
+				EntityChange::ADD,
 				null,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) )
 			)
@@ -282,7 +283,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array( $page1Q1Usages, $page2Q1Usages ), // "1" was recorded to be linked to Q1 and the local title used on page "2"
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
 				new Item( $q1 )
 			)
@@ -296,7 +297,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) )
 			)
@@ -310,7 +311,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array(),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '2' ) )
 			)
@@ -324,7 +325,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '2' ) )
 			)
@@ -337,7 +338,8 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			),
 			array( EntityUsage::SITELINK_USAGE ),
 			array( $page1Q1Usages, $page2Q1Usages ),
-			$changeFactory->newFromUpdate( ItemChange::UPDATE,
+			$changeFactory->newFromUpdate(
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ) ),
 				$this->getItemWithSiteLinks( $q1, array( 'enwiki' => '1' ), $badges ) )
 		);
@@ -350,7 +352,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( EntityUsage::SITELINK_USAGE, EntityUsage::TITLE_USAGE ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::REMOVE,
+				EntityChange::REMOVE,
 				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) ),
 				null
 			),
@@ -364,7 +366,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( EntityUsage::SITELINK_USAGE ),
 			array( $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				$this->getItemWithSiteLinks( $q2, array( 'enwiki' => '2' ) ),
 				$this->getItemWithSiteLinks( $q2, array(
 					'enwiki' => '2',
@@ -378,7 +380,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( $labelUsageDe ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'de', 'EINS' )
 			)
@@ -391,7 +393,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( EntityUsage::OTHER_USAGE ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithAliases( $q2, 'fr', array( 'X', 'Y' ) )
 			)
@@ -405,7 +407,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( $labelUsageDe ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithLabel( $q2, 'de', 'EINS' )
 			)
@@ -418,7 +420,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( $labelUsageEn ),
 			array( $page1Q1Usages, $page2Q1Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q1 ),
 				$this->getItemWithLabel( $q1, 'en', 'ONE' )
 			)
@@ -432,7 +434,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			array( $labelUsageEn ),
 			array( $page1Q2Usages, $page2Q2Usages ),
 			$changeFactory->newFromUpdate(
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				new Item( $q2 ),
 				$this->getItemWithLabel( $q2, 'en', 'TWO' )
 			)
@@ -444,7 +446,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider getAffectedUsagesByPageProvider
 	 */
-	public function testGetAffectedUsagesByPage( array $expected, array $expectedAspects, array $usage, ItemChange $change ) {
+	public function testGetAffectedUsagesByPage( array $expected, array $expectedAspects, array $usage, EntityChange $change ) {
 		// Everything will affect pages with ALL_USAGE.
 		$expectedAspects = array_merge( $expectedAspects, array( EntityUsage::ALL_USAGE ) );
 
@@ -471,7 +473,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$changeFactory = TestChanges::getEntityChangeFactory();
 
 		$change = $changeFactory->newFromUpdate(
-			ItemChange::UPDATE,
+			EntityChange::UPDATE,
 			$this->getItemWithSiteLinks( $itemId, array( 'enwiki' => $pageTitle ) ),
 			new Item( $itemId )
 		);

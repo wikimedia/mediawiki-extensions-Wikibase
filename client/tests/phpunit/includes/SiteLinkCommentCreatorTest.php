@@ -10,7 +10,7 @@ use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ItemChange;
+use Wikibase\EntityChange;
 use Wikibase\SiteLinkCommentCreator;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
@@ -45,20 +45,20 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		foreach ( $updates as $update ) {
 			$changes[] = array(
 				$update[0],
-				ItemChange::UPDATE,
+				EntityChange::UPDATE,
 				$update[1]
 			);
 		}
 
 		$changes[] = array(
 			$this->getDeleteDiff(),
-			ItemChange::REMOVE,
+			EntityChange::REMOVE,
 			'(wikibase-comment-remove)'
 		);
 
 		$changes[] = array(
 			$this->getRestoreDiff(),
-			ItemChange::RESTORE,
+			EntityChange::RESTORE,
 			'(wikibase-comment-restore)'
 		);
 
@@ -237,7 +237,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 
 	private function getSiteLinkDiffForUpdate( Item $item, Item $item2 ) {
 		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::UPDATE, $item, $item2 );
+		$change = $changeFactory->newFromUpdate( EntityChange::UPDATE, $item, $item2 );
 
 		return $change->getSiteLinkDiff();
 	}
@@ -247,7 +247,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::REMOVE, $item, null );
+		$change = $changeFactory->newFromUpdate( EntityChange::REMOVE, $item, null );
 
 		return $change->getSiteLinkDiff();
 	}
@@ -257,7 +257,7 @@ class SiteLinkCommentCreatorTest extends \PHPUnit_Framework_TestCase {
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Japan' );
 
 		$changeFactory = TestChanges::getEntityChangeFactory();
-		$change = $changeFactory->newFromUpdate( ItemChange::RESTORE, null, $item );
+		$change = $changeFactory->newFromUpdate( EntityChange::RESTORE, null, $item );
 
 		return $change->getSiteLinkDiff();
 	}
