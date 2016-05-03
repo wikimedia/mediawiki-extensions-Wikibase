@@ -3,8 +3,6 @@
 namespace Wikibase;
 
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOp;
-use Wikibase\DataModel\Services\Diff\EntityTypeAwareDiffOpFactory;
 
 /**
  * Class for changes that can be represented as a Diff.
@@ -46,80 +44,6 @@ abstract class DiffChange extends ChangeRow {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		$info['diff'] = $diff;
 		$this->setField( 'info', $info );
-	}
-
-	/**
-	 * @see ChangeRow::serializeInfo()
-	 *
-	 * Overwritten to use the array representation of the diff.
-	 *
-	 * @since 0.4
-	 * @param array $info
-	 * @return string
-	 */
-	public function serializeInfo( array $info ) {
-		if ( isset( $info['diff'] ) && $info['diff'] instanceof DiffOp ) {
-			/** @var DiffOp $op */
-			$op = $info['diff'];
-			$info['diff'] = $op->toArray( array( $this, 'arrayalizeObjects' ) );
-		}
-
-		return parent::serializeInfo( $info );
-	}
-
-	/**
-	 * @see ChangeRow::unserializeInfo()
-	 *
-	 * Overwritten to use the array representation of the diff.
-	 *
-	 * @since 0.4
-	 * @param string $str
-	 * @return array the info array
-	 */
-	public function unserializeInfo( $str ) {
-		static $factory = null;
-
-		if ( $factory == null ) {
-			$factory = new EntityTypeAwareDiffOpFactory( array( $this, 'objectifyArrays' ) );
-		}
-
-		$info = parent::unserializeInfo( $str );
-
-		if ( isset( $info['diff'] ) && is_array( $info['diff'] ) ) {
-			$info['diff'] = $factory->newFromArray( $info['diff'] );
-		}
-
-		return $info;
-	}
-
-	/**
-	 * Converts an object to an array structure.
-	 * Callback function for use by \Diff\DiffOp::toArray().
-	 *
-	 * Subclasses should override this to provide array representations of specific value objects.
-	 *
-	 * @since 0.4
-	 *
-	 * @param mixed $data
-	 * @return mixed
-	 */
-	public function arrayalizeObjects( $data ) {
-		return $data; // noop
-	}
-
-	/**
-	 * May be overwritten by subclasses to provide special handling.
-	 * Callback function for use by \Diff\DiffOpFactory
-	 *
-	 * Subclasses should override this to reconstruct value objects from arrays.
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $data
-	 * @return mixed
-	 */
-	public function objectifyArrays( array $data ) {
-		return $data; // noop
 	}
 
 }
