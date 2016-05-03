@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_cb9f4354",
+        "filename": "lib/includes/Changes/ChangeRow.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-03T10:32:33Z",
+      "side": 1,
+      "message": "There are actually four places where we do hasField ? getField : default. That could be replaced by using this parameter.",
+      "revId": "cbe68b4a9052a6fd99b93fe05affa86b68e996c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2b8fdf27",
+        "filename": "lib/includes/Changes/ChangeRow.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-03T10:32:33Z",
+      "side": 1,
+      "message": "I\u0027d actually like it if this would not override, but log a warning, but that\u0027s a non-trivial change.",
+      "revId": "cbe68b4a9052a6fd99b93fe05affa86b68e996c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
