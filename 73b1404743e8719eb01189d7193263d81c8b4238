@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_cbd743c3",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-03T11:04:00Z",
+      "side": 1,
+      "message": "Unfortunately, the array doesn\u0027t have any keys at this point. See https://gerrit.wikimedia.org/r/286623.",
+      "parentUuid": "ae564743_2c00e703",
+      "revId": "73b1404743e8719eb01189d7193263d81c8b4238",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_b10c5047",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 5
