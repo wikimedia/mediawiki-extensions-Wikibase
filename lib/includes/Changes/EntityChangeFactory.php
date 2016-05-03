@@ -86,6 +86,20 @@ class EntityChangeFactory {
 	}
 
 	/**
+	 * @since 0.5
+	 *
+	 * @param string $changeType
+	 * @param EntityId $entityId
+	 * @param array $fields additional fields to set
+	 *
+	 * @return EntityChange
+	 */
+	public function newForChangeType( $changeType, EntityId $entityId, array $fields ) {
+		$action = explode( '~', $changeType )[1];
+		return $this->newForEntity( $action, $entityId, $fields );
+	}
+
+	/**
 	 * Constructs an EntityChange from the given old and new Entity.
 	 *
 	 * @since 0.5

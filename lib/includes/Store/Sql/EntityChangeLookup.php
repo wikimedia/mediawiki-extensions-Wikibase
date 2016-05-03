@@ -5,7 +5,9 @@ namespace Wikibase\Lib\Store;
 use DBAccessBase;
 use ResultWrapper;
 use Wikibase\ChunkAccess;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -26,20 +28,29 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	const FROM_SLAVE = 'slave';
 
 	/**
-	 * @var string[]
+	 * @var EntityChangeFactory
 	 */
-	private $changeHandlers;
+	private $entityChangeFactory;
 
 	/**
-	 * @param array $changeHandlers Value of the "changeHandlers" setting (change type to class map)
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
+	 * @param EntityChangeFactory $entityChangeFactory
+	 * @param EntityIdParser $entityIdParser
 	 * @param string|bool $wiki The target wiki's name. This must be an ID
 	 * that LBFactory can understand.
 	 */
-	public function __construct( array $changeHandlers, $wiki = false ) {
-		Assert::parameterElementType( 'string', $changeHandlers, '$changeHandlers' );
-
+	public function __construct(
+		EntityChangeFactory $entityChangeFactory,
+		EntityIdParser $entityIdParser,
+		$wiki = false
+	) {
 		parent::__construct( $wiki );
-		$this->changeHandlers = $changeHandlers;
+		$this->entityChangeFactory = $entityChangeFactory;
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
@@ -142,38 +153,20 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	}
 
 	private function changesFromRows( ResultWrapper $rows ) {
-		$changes = array();
+		$changes = [];
 		foreach ( $rows as $row ) {
-			$class = $this->getClassForType( $row->change_type );
-			$data = array(
+			$data = [
 				'id' => (int)$row->change_id,
-				'type' => $row->change_type,
 				'time' => $row->change_time,
 				'info' => $row->change_info,
-				'object_id' => $row->change_object_id,
 				'user_id' => $row->change_user_id,
 				'revision_id' => $row->change_revision_id,
-			);
-
-			$changes[] = new $class( $data );
+			];
+			$entityId = $this->entityIdParser->parse( $row->change_object_id );
+			$changes[] = $this->entityChangeFactory->newForChangeType( $row->change_type, $entityId, $data );
 		}
 
 		return $changes;
-	}
-
-	/**
-	 * Returns the name of a class that can handle changes of the provided type.
-	 *
-	 * @param string $type
-	 *
-	 * @return string
-	 */
-	private function getClassForType( $type ) {
-		if ( array_key_exists( $type, $this->changeHandlers ) ) {
-			return $this->changeHandlers[$type];
-		} else {
-			return EntityChange::class;
-		}
 	}
 
 }
