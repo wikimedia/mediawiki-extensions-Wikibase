@@ -307,13 +307,16 @@ class EntityParserOutputGenerator {
 		);
 		$allLanguages = [];
 		if ( $entity instanceof AliasesProvider ) {
-			$allLanguages += array_keys( $entity->getAliasGroups()->toTextArray() );
+			$aliasLanguages = array_keys( $entity->getAliasGroups()->toTextArray() );
+			$allLanguages = array_merge( $allLanguages, $aliasLanguages );
 		}
 		if ( $entity instanceof DescriptionsProvider ) {
-			$allLanguages += array_keys( $entity->getDescriptions()->toTextArray() );
+			$descriptionLanguages = array_keys( $entity->getDescriptions()->toTextArray() );
+			$allLanguages = array_merge( $allLanguages, $descriptionLanguages );
 		}
 		if ( $entity instanceof LabelsProvider ) {
-			$allLanguages += array_keys( $entity->getLabels()->toTextArray() );
+			$labelLanguages = array_keys( $entity->getLabels()->toTextArray() );
+			$allLanguages = array_merge( $allLanguages, $labelLanguages );
 		}
 		$allLanguages = array_unique( $allLanguages );
 
