@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_c4c8c879",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-04T18:47:26Z",
+      "side": 0,
+      "message": "It seems to me that getEntityChangeFactory() ins WikibaseRepo and WikibaseClient should use this setting. Or this should be moved into WikibaseLib.entitytypes.php.\nIf we have a need to different change classes per entity type (do we, really?), we need this extension point, here or elsewhere.",
+      "revId": "20b33d3965b2b2bac84848b07252693206436ec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
