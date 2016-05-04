@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Interactors;
 
+use MediaWiki\MediaWikiServices;
 use User;
 use WatchedItem;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -323,7 +324,9 @@ class ItemMergeInteractor {
 		$fromTitle = $this->entityTitleLookup->getTitleForId( $fromId );
 		$toTitle = $this->entityTitleLookup->getTitleForId( $toId );
 
-		WatchedItem::duplicateEntries( $fromTitle, $toTitle );
+		MediaWikiServices::getInstance()
+			->getWatchedItemStore()
+			->duplicateAllAssociatedEntries( $fromTitle, $toTitle );
 	}
 
 }
