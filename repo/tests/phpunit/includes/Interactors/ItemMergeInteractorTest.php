@@ -4,6 +4,7 @@ namespace Wikibase\Test\Interactors;
 
 use ContentHandler;
 use HashSiteStore;
+use MediaWiki\MediaWikiServices;
 use Status;
 use TestSites;
 use Title;
@@ -342,7 +343,8 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 		) );
 
 		$watchedItem = $this->getWatchedItemForId( $fromId );
-		$watchedItem->addWatch();
+		$watchedItemStore = MediaWikiServices::getInstance()->getWatchedItemStore();
+		$watchedItemStore->addWatch( $watchedItem->getUser(), $watchedItem->getLinkTarget() );
 
 		$interactor->mergeItems( $fromId, $toId, $ignoreConflicts, 'CustomSummary' );
 
@@ -378,7 +380,11 @@ class ItemMergeInteractorTest extends \MediaWikiTestCase {
 
 	private function assertItemMergedIntoIsWatched( ItemId $toId ) {
 		$watchedItem = $this->getWatchedItemForId( $toId );
-		$this->assertTrue( $watchedItem->isWatched(), 'Item merged into is being watched' );
+		$watchedItemStore = MediaWikiServices::getInstance()->getWatchedItemStore();
+		$this->assertTrue(
+			$watchedItemStore->isWatched( $watchedItem->getUser(), $watchedItem->getLinkTarget() ),
+			'Item merged into is being watched'
+		);
 	}
 
 	private function getWatchedItemForId( ItemId $itemId ) {
