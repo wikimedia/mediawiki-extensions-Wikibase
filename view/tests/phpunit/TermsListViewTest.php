@@ -43,7 +43,6 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 				return "<LANGUAGENAME-$languageCode>";
 			} ) );
 
-		$textProvider = $textProvider ?: new DummyLocalizedTextProvider( 'lkt' );
 		$languageDirectionalityLookup = $this->getMock( LanguageDirectionalityLookup::class );
 		$languageDirectionalityLookup->expects( $this->any() )
 			->method( 'getDirectionality' )
@@ -51,14 +50,14 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 				return [
 					'en' => 'ltr',
 					'arc' => 'rtl',
-					'lkt' => 'ltr'
+					'qqx' => 'ltr'
 				][ $languageCode ];
 			} ) );
 
 		return new TermsListView(
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
-			$textProvider,
+			$textProvider ?: new DummyLocalizedTextProvider(),
 			$languageDirectionalityLookup
 		);
 	}
@@ -125,7 +124,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 			$this->assertNotContains( '(wikibase-label-empty)', $html );
 			$this->assertContains( '&lt;LABEL&gt;', $html );
 		} else {
-			$this->assertContains( 'class="wikibase-labelview wb-empty" dir="ltr" lang="lkt"', $html );
+			$this->assertContains( 'class="wikibase-labelview wb-empty" dir="ltr" lang="qqx"', $html );
 			$this->assertContains( '(wikibase-label-empty)', $html );
 		}
 
@@ -137,7 +136,7 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 			$this->assertNotContains( '(wikibase-description-empty)', $html );
 			$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
 		} else {
-			$this->assertContains( 'class="wikibase-descriptionview wb-empty" dir="ltr" lang="lkt"', $html );
+			$this->assertContains( 'class="wikibase-descriptionview wb-empty" dir="ltr" lang="qqx"', $html );
 			$this->assertContains( '(wikibase-description-empty)', $html );
 		}
 

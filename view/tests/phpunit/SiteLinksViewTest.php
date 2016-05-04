@@ -155,7 +155,7 @@ class SiteLinksViewTest extends PHPUnit_Framework_TestCase {
 				'Q12' => 'wb-badge-goodarticle'
 			),
 			array( 'special group' ),
-			new DummyLocalizedTextProvider( 'lkt' )
+			new DummyLocalizedTextProvider()
 		);
 	}
 
