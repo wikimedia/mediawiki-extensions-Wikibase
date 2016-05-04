@@ -69,6 +69,24 @@
       "revId": "30eb623cef6e0602917d344b952862be21828736",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_244b8464",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-04T18:15:50Z",
+      "side": 1,
+      "message": "I don\u0027t like the implicit \"anything non-numeric is 0\" together with the \"max with 0 will not do anything\". It\u0027s a bit non-abvious when quickly browsing the code.\n\nBut then, this entire class is one big hack. Whatever.",
+      "parentUuid": "ae564743_126df52d",
+      "revId": "30eb623cef6e0602917d344b952862be21828736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
