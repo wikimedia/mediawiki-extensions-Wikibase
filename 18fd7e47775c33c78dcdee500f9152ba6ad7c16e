@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_44f15dfd",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2016-05-04T10:28:45Z",
+      "side": 1,
+      "message": "Why not class const?",
+      "revId": "18fd7e47775c33c78dcdee500f9152ba6ad7c16e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
