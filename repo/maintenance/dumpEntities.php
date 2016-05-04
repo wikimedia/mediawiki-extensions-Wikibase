@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Maintenance;
 
 use Maintenance;
 use MWException;

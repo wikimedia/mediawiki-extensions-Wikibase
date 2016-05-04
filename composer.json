@@ -57,15 +57,15 @@
 			"client/tests/phpunit/MockClientStore.php",
 			"lib/includes/",
 			"lib/WikibaseLib.hooks.php",
-			"lib/maintenance/",
 			"repo/includes/",
-			"repo/maintenance/",
 			"repo/tests/phpunit/",
 			"repo/Wikibase.hooks.php"
 		],
 		"psr-4": {
 			"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes",
+			"Wikibase\\Lib\\Maintenance\\": "lib/maintenance",
 			"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit",
+			"Wikibase\\Repo\\Maintenance\\": "repo/maintenance",
 			"Wikibase\\View\\": "view/src",
 			"Wikibase\\View\\Tests\\": "view/tests/phpunit"
 		}

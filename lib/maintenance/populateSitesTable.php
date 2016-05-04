@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Maintenance;
 
 use Http;
 use Maintenance;
