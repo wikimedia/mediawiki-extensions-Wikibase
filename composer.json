@@ -57,9 +57,7 @@
 			"client/tests/phpunit/MockClientStore.php",
 			"lib/includes/",
 			"lib/WikibaseLib.hooks.php",
-			"lib/maintenance/",
 			"repo/includes/",
-			"repo/maintenance/",
 			"repo/tests/phpunit/",
 			"repo/Wikibase.hooks.php"
 		],
