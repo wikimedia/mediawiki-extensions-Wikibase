@@ -29,12 +29,12 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\DumpJson;
+use Wikibase\Repo\Maintenance\DumpJson;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Tests\MockEntityPerPage;
 
 /**
- * @covers Wikibase\DumpJson
+ * @covers Wikibase\Repo\Maintenance\DumpJson
  *
  * @group WikibaseRepo
  * @group Wikibase
