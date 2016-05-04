@@ -16,6 +16,24 @@
       "revId": "18fd7e47775c33c78dcdee500f9152ba6ad7c16e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_24c3898d",
+        "filename": "view/src/EntityViewPlaceholderExpander.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-04T10:47:48Z",
+      "side": 1,
+      "message": "Possible, but would not help because this is the only method that cares about this string. All the other code that uses the same string constant is in JavaScript.\n\nAnd most importantly: as a constant this must have a much, much more descriptive name. Something like self::SHOW_ENTITY_TERMS_LIST_VIEW_OPTION. This would make the change pointless since readability does not increase.",
+      "parentUuid": "ae564743_44f15dfd",
+      "revId": "18fd7e47775c33c78dcdee500f9152ba6ad7c16e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
