@@ -165,14 +165,15 @@ class EntityViewPlaceholderExpander {
 	/**
 	 * @return bool If the terms list should be initially collapsed for the current user.
 	 */
-	 private function isInitiallyCollapsed() {
+	private function isInitiallyCollapsed() {
+		$name = 'wikibase-entitytermsview-showEntitytermslistview';
+
 		if ( $this->user->isAnon() ) {
-			return isset( $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] )
-				&& $_COOKIE['wikibase-entitytermsview-showEntitytermslistview'] === 'false';
+			return isset( $_COOKIE[$name] ) && $_COOKIE[$name] === 'false';
 		} else {
-			return !$this->user->getBoolOption( 'wikibase-entitytermsview-showEntitytermslistview' );
+			return !$this->user->getOption( $name, true );
 		}
-	 }
+	}
 
 	/**
 	 * Generates HTML of the term box, to be injected into the entity page.
