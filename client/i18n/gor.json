@@ -5,9 +5,11 @@
 			"Lukman Tomayahu"
 		]
 	},
+	"wikibase-comment-update": "item {{WBREPONAME}} lo'ubawa",
 	"wikibase-dataitem": "Item to {{WBREPONAME}}",
 	"wikibase-editlinks": "Ubawa pranala",
 	"wikibase-editlinkstitle": "Ubawa pranala interwiki",
+	"wikibase-rc-hide-wikidata-show": "Popobilohe",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Mopo?opiohu {{WBREPONAME}}"
 }

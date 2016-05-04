@@ -27,6 +27,7 @@
 	"wikibase-language-fallback-transliteration-hint": "$1 (трансьлітаравана)",
 	"wikibase-quantitydetails-amount": "Сума",
 	"wikibase-quantitydetails-upperbound": "Верхняя мяжа",
+	"wikibase-quantitydetails-lowerbound": "Ніжняя мяжа",
 	"wikibase-sitelinks-wikipedia": "Вікіпэдыя",
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
 	"wikibase-sitelinks-link-columnheading": "Злучаная старонка",
