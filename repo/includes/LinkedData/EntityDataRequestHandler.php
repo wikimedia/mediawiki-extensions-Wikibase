@@ -139,20 +139,6 @@ class EntityDataRequestHandler {
 	}
 
 	/**
-	 * @param int $maxAge
-	 */
-	public function setMaxAge( $maxAge ) {
-		$this->maxAge = $maxAge;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getMaxAge() {
-		return $this->maxAge;
-	}
-
-	/**
 	 * Checks whether the request is complete, i.e. whether it contains all information needed
 	 * to reply with entity data.
 	 *

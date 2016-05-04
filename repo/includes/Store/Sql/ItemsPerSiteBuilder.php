@@ -133,13 +133,9 @@ class ItemsPerSiteBuilder {
 	}
 
 	/**
-	 * reports a message
-	 *
-	 * @since 0.5
-	 *
 	 * @param string $msg
 	 */
-	protected function report( $msg ) {
+	private function report( $msg ) {
 		if ( $this->reporter ) {
 			$this->reporter->reportMessage( $msg );
 		}

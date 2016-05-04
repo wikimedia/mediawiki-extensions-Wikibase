@@ -80,27 +80,6 @@ class PropertyInfoTableBuilder {
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function getRebuildAll() {
-		return $this->shouldUpdateAllEntities;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getBatchSize() {
-		return $this->batchSize;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getFromId() {
-		return $this->fromId;
-	}
-
-	/**
 	 * @param bool $all
 	 */
 	public function setRebuildAll( $all ) {
