@@ -109,7 +109,7 @@ class LanguageWithConversionTest extends \MediaWikiTestCase {
 			array( 'zh-cn', 'zh-classical' ),
 			array( 'zh', 'sr' ),
 			array( 'zh-cn', 'en-gb' ),
-			array( 'zh-tw', 'sr-ec' ),
+			array( 'zh-tw', 'sr-cyrl' ),
 		);
 	}
 
