@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_672579bc",
+        "filename": "lib/includes/ChangeNotificationJob.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-05T16:21:47Z",
+      "side": 1,
+      "message": "an",
+      "revId": "20b33d3965b2b2bac84848b07252693206436ec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
