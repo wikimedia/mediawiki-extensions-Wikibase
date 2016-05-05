@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
-use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -497,10 +497,10 @@ class SqlStore implements Store {
 	/**
 	 * @since 0.5
 	 *
-	 * @return ChangeLookup
+	 * @return EntityChangeLookup
 	 */
-	public function getChangeLookup() {
-		return new ChangeLookup( $this->changeHandlerClasses );
+	public function getEntityChangeLookup() {
+		return new EntityChangeLookup( $this->changeHandlerClasses );
 	}
 
 	/**

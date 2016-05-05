@@ -84,7 +84,7 @@ class ChangeNotificationJob extends Job {
 	/**
 	 * Returns the batch of changes that should be processed.
 	 *
-	 * Change objects are loaded using a ChangeLookup.
+	 * EntityChange objects are loaded using a EntityChangeLookup.
 	 *
 	 * @return Change[] the changes to process.
 	 */
@@ -97,7 +97,7 @@ class ChangeNotificationJob extends Job {
 
 			// load actual change records from the changes table
 			// TODO: allow mock store for testing!
-			$changeLookup = WikibaseClient::getDefaultInstance()->getStore()->getChangeLookup();
+			$changeLookup = WikibaseClient::getDefaultInstance()->getStore()->getEntityChangeLookup();
 			$this->changes = $changeLookup->loadByChangeIds( $ids );
 
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": loaded " . count( $this->changes )
@@ -124,7 +124,7 @@ class ChangeNotificationJob extends Job {
 		$changeHandler->handleChanges( $changes );
 
 		if ( $changes ) {
-			/* @var Change $last */
+			/* @var EntityChange $last */
 			$n = count( $changes );
 			$last = end( $changes );
 

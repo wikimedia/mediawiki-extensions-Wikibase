@@ -29,7 +29,7 @@ use StubUserLang;
 use Title;
 use User;
 use Wikibase\Lib\AutoCommentFormatter;
-use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\WikibaseRepo;
@@ -318,9 +318,9 @@ final class RepoHooks {
 		}
 
 		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
-			$changeLookup = WikibaseRepo::getDefaultInstance()->getStore()->getChangeLookup();
+			$changeLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityChangeLookup();
 
-			$change = $changeLookup->loadByRevisionId( $revId, ChangeLookup::FROM_MASTER );
+			$change = $changeLookup->loadByRevisionId( $revId, EntityChangeLookup::FROM_MASTER );
 
 			if ( $change ) {
 				$changeStore = WikibaseRepo::getDefaultInstance()->getStore()->getChangeStore();

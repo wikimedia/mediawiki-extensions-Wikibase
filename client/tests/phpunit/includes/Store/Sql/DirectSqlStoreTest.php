@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DirectSqlStore;
-use Wikibase\Lib\Store\ChangeLookup;
+use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Store\EntityIdLookup;
@@ -70,7 +70,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			array( 'getSubscriptionManager', SubscriptionManager::class, true ),
 			array( 'getEntityIdLookup', EntityIdLookup::class ),
 			array( 'getEntityPrefetcher', EntityPrefetcher::class ),
-			array( 'getChangeLookup', ChangeLookup::class ),
+			array( 'getEntityChangeLookup', EntityChangeLookup::class ),
 			array( 'getRecentChangesDuplicateDetector', RecentChangesDuplicateDetector::class ),
 		);
 	}
