@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\Maintenance;
 
 use LoggedUpdateMaintenance;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;

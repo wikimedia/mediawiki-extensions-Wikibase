@@ -29,14 +29,14 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\DumpRdf;
+use Wikibase\Repo\Maintenance\DumpRdf;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Tests\MockEntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\DumpRdf
+ * @covers Wikibase\Repo\Maintenance\DumpRdf
  *
  * @group WikibaseRepo
  * @group Wikibase

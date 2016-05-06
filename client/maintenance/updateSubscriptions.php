@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client\Maintenance;
 
 use Maintenance;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
