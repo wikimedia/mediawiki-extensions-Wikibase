@@ -29,6 +29,7 @@ use StubUserLang;
 use Title;
 use User;
 use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
@@ -778,7 +779,11 @@ final class RepoHooks {
 			StubUserLang::unstub( $wgLang );
 		}
 
-		$formatter = new AutoCommentFormatter( $wgLang, array( $messagePrefix, 'wikibase-entity' ) );
+		$formatter = new AutoCommentFormatter(
+			$wgLang,
+			array( $messagePrefix, 'wikibase-entity' ),
+			new LanguageNameLookup()
+		);
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {

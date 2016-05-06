@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use Language;
 use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 
 /**
  * @covers Wikibase\Lib\AutoCommentFormatter
@@ -58,7 +59,11 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider provideTestAutoComment
 	 */
 	public function testFormatAutoComment( array $prefixes, $auto, $expected ) {
-		$formatter = new AutoCommentFormatter( $this->language, $prefixes );
+		$formatter = new AutoCommentFormatter(
+			$this->language,
+			$prefixes,
+			new LanguageNameLookup()
+		);
 		$value = $formatter->formatAutoComment( $auto );
 		$this->assertEquals( $expected, $value );
 	}
@@ -106,7 +111,11 @@ class AutoCommentFormatterTest extends \MediaWikiTestCase {
 	 * @dataProvider provideWrapAutoComment
 	 */
 	public function testWrapAutoComment( $pre, $comment, $post, $expected ) {
-		$formatter = new AutoCommentFormatter( $this->language, array() );
+		$formatter = new AutoCommentFormatter(
+			$this->language,
+			array(),
+			new LanguageNameLookup()
+		);
 		$value = $formatter->wrapAutoComment( $pre, $comment, $post );
 		$this->assertEquals( $expected, $value );
 	}

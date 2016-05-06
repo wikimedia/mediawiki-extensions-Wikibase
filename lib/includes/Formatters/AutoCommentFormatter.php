@@ -37,14 +37,25 @@ class AutoCommentFormatter {
 	private $messages = array();
 
 	/**
+	 * @var LanguageNameLookup
+	 */
+	private $languageNameLookup;
+
+	/**
 	 * @param Language $language
 	 * @param string[] $messagePrefixes Prefixes to try when constructing the message key from
 	 *        the name given in the autocomment block. Typically something like
 	 *        array( "wikibase-item", "wikibase-entity" ).
+	 * @param LanguageNameLookup $languageNameLookup
 	 */
-	public function __construct( Language $language, array $messagePrefixes ) {
+	public function __construct(
+		Language $language,
+		array $messagePrefixes,
+		LanguageNameLookup $languageNameLookup
+	) {
 		$this->language = $language;
 		$this->messagePrefixes = $messagePrefixes;
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -105,9 +116,37 @@ class AutoCommentFormatter {
 			return null;
 		}
 
+		$args = $this->getSummaryParams( $matches[1], $args );
+
 		// render the autocomment
 		$auto = $msg->params( $args )->parse();
 		return $auto;
+	}
+
+	/**
+	 * Gets the potentially modified arguments for a message.
+	 *
+	 * @param string $name
+	 * @param string[] $args
+	 *
+	 * @return string[]
+	 */
+	private function getSummaryParams( $name, array $args ) {
+		if ( preg_match( '/^(wbsetlabel|wbsetdescription|wbsetaliases)/', $name ) ) {
+			// wikibase-entity-summary-wbsetlabel-add
+			// wikibase-entity-summary-wbsetlabel-set
+			// wikibase-entity-summary-wbsetlabel-remove
+			// wikibase-entity-summary-wbsetlabeldescriptionaliases
+			// wikibase-entity-summary-wbsetdescription-add
+			// wikibase-entity-summary-wbsetdescription-set
+			// wikibase-entity-summary-wbsetdescription-remove
+			// wikibase-entity-summary-wbsetaliases-set
+			// wikibase-entity-summary-wbsetaliases-add-remove
+			// wikibase-entity-summary-wbsetaliases-add
+			// wikibase-entity-summary-wbsetaliases-remove
+			$args[] = $this->languageNameLookup->getName( $args[1] );
+		}
+		return $args;
 	}
 
 	/**

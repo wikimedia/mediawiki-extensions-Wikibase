@@ -28,6 +28,7 @@ use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\LanguageNameLookup;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -176,7 +177,11 @@ final class ClientHooks {
 
 		StubObject::unstub( $wgContLang );
 
-		$formatter = new AutoCommentFormatter( $wgContLang, array( 'wikibase-entity' ) );
+		$formatter = new AutoCommentFormatter(
+			$wgContLang,
+			array( 'wikibase-entity' ),
+			new LanguageNameLookup()
+		);
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {
