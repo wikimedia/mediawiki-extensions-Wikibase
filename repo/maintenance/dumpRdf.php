@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Maintenance;
+namespace Wikibase;
 
 use SiteStore;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;

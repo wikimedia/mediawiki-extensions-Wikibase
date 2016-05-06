@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Client\Maintenance;
+namespace Wikibase;
 
 use BagOStuff;
 use Http;

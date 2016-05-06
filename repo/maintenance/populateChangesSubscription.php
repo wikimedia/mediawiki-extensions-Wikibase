@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Maintenance;
+namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use Wikibase\DataModel\Entity\ItemId;

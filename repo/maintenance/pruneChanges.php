@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Maintenance;
+namespace Wikibase;
 
 use Maintenance;
 use Wikibase\Lib\Reporting\MessageReporter;
