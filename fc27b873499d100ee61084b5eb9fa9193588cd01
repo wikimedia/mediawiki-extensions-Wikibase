@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_8ec7024a",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-06T12:29:20Z",
+      "side": 1,
+      "message": "ID should be upper case.",
+      "revId": "fc27b873499d100ee61084b5eb9fa9193588cd01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eaa8f54_226fdbfa",
         "filename": "repo/i18n/en.json",
         "patchSetId": 8
