@@ -106,14 +106,11 @@ class SubmitEntityAction extends EditEntityAction {
 		$editToken = $request->getText( 'wpEditToken' );
 
 		if ( $newerRevision->getId() === $latestRevision->getId() ) { // restore
-			if ( $summary === '' ) {
-				$summary = $this->makeRestoreSummary( $olderRevision );
-			}
-
 			if ( $diff->isEmpty() ) {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
 			} else {
+				$summary = $this->makeRestoreSummary( $olderRevision, $summary );
 				$status = $this->attemptSave( $title, $olderContent, $summary, $editToken );
 			}
 		} else { // undo
@@ -123,10 +120,7 @@ class SubmitEntityAction extends EditEntityAction {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
 			} else {
-				if ( $summary === '' ) {
-					$summary = $this->makeUndoSummary( $newerRevision );
-				}
-
+				$summary = $this->makeUndoSummary( $newerRevision, $summary );
 				$status = $this->attemptSave( $title, $patchedContent, $summary, $editToken );
 			}
 		}

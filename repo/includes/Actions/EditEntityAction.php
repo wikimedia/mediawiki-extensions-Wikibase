@@ -27,6 +27,7 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Summary;
 
 /**
  * Handles the edit action for Wikibase entities.
@@ -48,6 +49,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 	private $entityDiffVisualizer;
 
 	/**
+	 * @var SummaryFormatter
+	 */
+	private $summaryFormatter;
+
+	/**
 	 * @param Page $page
 	 * @param IContextSource|null $context
 	 */
@@ -63,6 +69,8 @@ abstract class EditEntityAction extends ViewEntityAction {
 		) );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$this->summaryFormatter = $wikibaseRepo->getSummaryFormatter();
 
 		$termLookup = new EntityRetrievingTermLookup( $wikibaseRepo->getEntityLookup() );
 		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, $languageCode );
@@ -252,7 +260,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 	/**
 	 * @see FormlessAction::show
 	 *
-	 * Calls paren't show() action to just display the entity, unless an undo action is requested.
+	 * Calls parent show() action to just display the entity, unless an undo action is requested.
 	 *
 	 * @since 0.1
 	 */
@@ -343,14 +351,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->displayUndoDiff( $appDiff );
 
 		if ( $restore ) {
-			$this->showConfirmationForm(
-				$this->makeRestoreSummary( $olderRevision )
-			);
+			$this->showConfirmationForm();
 		} else {
-			$this->showConfirmationForm(
-				$this->makeUndoSummary( $newerRevision ),
-				$newerRevision->getId()
-			);
+			$this->showConfirmationForm( $newerRevision->getId() );
 		}
 	}
 
@@ -376,17 +379,20 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @since 0.1
 	 *
 	 * @param Revision $olderRevision
+	 * @param string $userSummary User provided summary
 	 *
 	 * @return string
 	 */
-	protected function makeRestoreSummary( Revision $olderRevision ) {
-		$autoSummary = wfMessage( //TODO: use translatable auto-comment!
-			'wikibase-restore-summary',
-			$olderRevision->getId(),
-			$olderRevision->getUserText()
-		)->inContentLanguage()->text();
+	protected function makeRestoreSummary( Revision $olderRevision, $userSummary = '' ) {
+		$id = $olderRevision->getId();
+		$username = $olderRevision->getUserText();
 
-		return $autoSummary;
+		$summary = new Summary;
+		$summary->setAction( 'restore' );
+		$summary->addAutoCommentArgs( $id, $username );
+		$summary->setUserSummary( $userSummary );
+
+		return $this->summaryFormatter->formatSummary( $summary );
 	}
 
 	/**
@@ -395,17 +401,20 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @since 0.1
 	 *
 	 * @param Revision $newerRevision
+	 * @param string $userSummary User provided summary
 	 *
 	 * @return string
 	 */
-	protected function makeUndoSummary( Revision $newerRevision ) {
-		$autoSummary = wfMessage( //TODO: use translatable auto-comment!
-			'undo-summary',
-			$newerRevision->getId(),
-			$newerRevision->getUserText()
-		)->inContentLanguage()->text();
+	protected function makeUndoSummary( Revision $newerRevision, $userSummary = '' ) {
+		$id = $newerRevision->getId();
+		$username = $newerRevision->getUserText();
 
-		return $autoSummary;
+		$summary = new Summary;
+		$summary->setAction( 'undo' );
+		$summary->addAutoCommentArgs( $id, $username );
+		$summary->setUserSummary( $userSummary );
+
+		return $this->summaryFormatter->formatSummary( $summary );
 	}
 
 	/**
@@ -434,12 +443,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 	/**
 	 * Generate standard summary input and label (wgSummary), compatible to EditPage.
 	 *
-	 * @param string $summary The value of the summary input
 	 * @param string $labelText The html to place inside the label
 	 *
 	 * @return array An array in the format array( $label, $input )
 	 */
-	private function getSummaryInput( $summary, $labelText ) {
+	private function getSummaryInput( $labelText ) {
 		// Note: the maxlength is overriden in JS to 255 and to make it use UTF-8 bytes, not characters.
 		$inputAttrs = array(
 			'id' => 'wpSummary',
@@ -459,7 +467,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 			$label = Html::rawElement( 'span', $spanLabelAttrs, $label );
 		}
 
-		$input = Html::input( 'wpSummary', $summary, 'text', $inputAttrs );
+		$input = Html::input( 'wpSummary', '', 'text', $inputAttrs );
 
 		return array( $label, $input );
 	}
@@ -521,10 +529,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 	/**
 	 * Shows a form that can be used to confirm the requested undo/restore action.
 	 *
-	 * @param string $summary
 	 * @param int $undidRevision
 	 */
-	private function showConfirmationForm( $summary, $undidRevision = 0 ) {
+	private function showConfirmationForm( $undidRevision = 0 ) {
 		$req = $this->getRequest();
 
 		$args = array(
@@ -556,9 +563,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( "<p class='editOptions'>\n" );
 
-		$labelText = wfMessage( 'summary' )->text();
-		list( $label, $field ) = $this->getSummaryInput( $summary, $labelText );
-		$this->getOutput()->addHTML( $label . ' ' . $field );
+		$labelText = wfMessage( 'wikibase-summary-generated' )->text();
+		list( $label, $field ) = $this->getSummaryInput( $labelText );
+		$this->getOutput()->addHTML( $label . "\n" . Html::rawElement( 'br' ) . "\n" . $field );
 		$this->getOutput()->addHTML( "<p class='editButtons'>\n" );
 		$this->getOutput()->addHTML( $this->getEditButton() . "\n" );
 
