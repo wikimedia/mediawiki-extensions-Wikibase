@@ -9,13 +9,20 @@ use Elastica\Document;
 use ParserOutput;
 use PHPUnit_Framework_TestCase;
 use Title;
-use UnexpectedValueException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
+use Wikibase\ItemContent;
 use Wikibase\Repo\Hooks\CirrusSearchHookHandlers;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\DescriptionsProviderFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\ItemFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\LabelsProviderFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\PropertyFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\TermSearchFieldDefinition;
+use Wikibase\Repo\Search\Elastic\Indexer\EntityContentIndexer;
+use Wikibase\Repo\Search\Elastic\Indexer\ItemIndexer;
+use Wikibase\Repo\Search\Elastic\Indexer\PropertyIndexer;
+use Wikibase\Repo\Search\Elastic\Mapping\MappingConfigModifier;
 
 /**
  * @covers Wikibase\Repo\Hooks\CirrusSearchHookHandlers
@@ -54,6 +61,8 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 			$connection
 		);
 
+		$this->assertSame( 'kitten', $document->get( 'label_en' ), 'label_en' );
+		$this->assertSame( 'young cat', $document->get( 'description_en' ), 'description_en' );
 		$this->assertSame( 1, $document->get( 'label_count' ), 'label_count' );
 		$this->assertSame( 1, $document->get( 'sitelink_count' ), 'sitelink_count' );
 		$this->assertSame( 1, $document->get( 'statement_count' ), 'statement_count' );
@@ -64,101 +73,119 @@ class CirrusSearchHookHandlersTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$config = array(
-			'page' => array(
-				'properties' => array()
-			)
-		);
+		$config = [
+			'page' => [
+				'properties' => []
+			]
+		];
 
 		CirrusSearchHookHandlers::onCirrusSearchMappingConfig( $config, $mappingConfigBuilder );
 
-		$this->assertSame(
-			array( 'label_count', 'sitelink_count', 'statement_count' ),
-			array_keys( $config['page']['properties'] )
-		);
+		$this->assertArrayHasKey( 'label_en', $config['page']['properties'] );
+		$this->assertArrayHasKey( 'description_de', $config['page']['properties'] );
+		$this->assertArrayHasKey( 'label_count', $config['page']['properties'] );
+		$this->assertArrayHasKey( 'sitelink_count', $config['page']['properties'] );
+		$this->assertArrayHasKey( 'statement_count', $config['page']['properties'] );
 	}
 
 	public function testIndexExtraFields() {
-		$fieldDefinitions = $this->newFieldDefinitions();
-
 		$document = new Document();
-		$content = $this->getContent();
 
-		$hookHandlers = new CirrusSearchHookHandlers( $fieldDefinitions );
-		$hookHandlers->indexExtraFields( $document, $content );
+		$hookHandlers = $this->getCirrusSearchHookHandlers( [ 'en', 'es' ] );
+		$hookHandlers->indexExtraFields( $this->getContent(), $document );
 
+		$this->assertSame( 'kitten', $document->get( 'label_en' ), 'label_en' );
+		$this->assertSame( 'young cat', $document->get( 'description_en' ), 'description_en' );
 		$this->assertSame( 1, $document->get( 'label_count' ), 'label_count' );
 		$this->assertSame( 1, $document->get( 'sitelink_count' ), 'sitelink_count' );
 		$this->assertSame( 1, $document->get( 'statement_count' ), 'statement_count' );
 	}
 
 	public function testAddExtraFieldsToMappingConfig() {
-		$fieldDefinitions = $this->newFieldDefinitions();
+		$hookHandlers = $this->getCirrusSearchHookHandlers( [ 'en' ] );
 
-		$config = array(
-			'page' => array(
-				'properties' => array()
-			)
-		);
+		$config = [
+			'page' => [
+				'properties' => []
+			]
+		];
 
-		$hookHandlers = new CirrusSearchHookHandlers( $fieldDefinitions );
 		$hookHandlers->addExtraFieldsToMappingConfig( $config );
 
-		$expected = array(
-			'page' => array(
-				'properties' => array(
-					'label_count' => array(
+		$expected = [
+			'page' => [
+				'properties' => [
+					'label_en' => [
+						'type' => 'string'
+					],
+					'label_count' => [
 						'type' => 'integer'
-					),
-					'sitelink_count' => array(
+					],
+					'description_en' => [
+						'type' => 'string'
+					],
+					'sitelink_count' => [
 						'type' => 'integer'
-					),
-					'statement_count' => array(
+					],
+					'statement_count' => [
 						'type' => 'integer'
-					)
-				)
-			)
-		);
+					]
+				]
+			]
+		];
 
 		$this->assertSame( $expected, $config );
 	}
 
-	public function testAddExtraFields_throwsExceptionIfFieldNameAlreadySet() {
-		$fieldDefinitions = $this->newFieldDefinitions();
-
-		$config = array(
-			'page' => array(
-				'properties' => array(
-					'sitelink_count' => array(
-						'type' => 'long'
-					)
-				)
-			)
+	private function getCirrusSearchHookHandlers( array $languageCodes ) {
+		$termSearchFieldDefinition = new TermSearchFieldDefinition();
+		$labelsProviderFieldDefinitions = new LabelsProviderFieldDefinitions(
+			$termSearchFieldDefinition,
+			$languageCodes
 		);
 
-		$this->setExpectedException( UnexpectedValueException::class );
+		$descriptionsProviderFieldDefinitions = new DescriptionsProviderFieldDefinitions(
+			$termSearchFieldDefinition,
+			$languageCodes
+		);
 
-		$hookHandlers = new CirrusSearchHookHandlers( $fieldDefinitions );
-		$hookHandlers->addExtraFieldsToMappingConfig( $config );
-	}
+		$fieldDefinitions = [
+			'item' => new ItemFieldDefinitions(
+				$labelsProviderFieldDefinitions,
+				$descriptionsProviderFieldDefinitions
+			),
+			'property' => new PropertyFieldDefinitions(
+				$labelsProviderFieldDefinitions,
+				$descriptionsProviderFieldDefinitions
+			)
+		];
 
-	private function newFieldDefinitions() {
-		// when we add multilingual fields, then WikibaseFieldDefinitions
-		// will take WikibaseContentLanguages as an argument.
-		return new WikibaseFieldDefinitions();
+		$mappingConfigModifier = new MappingConfigModifier( $fieldDefinitions );
+
+		$entityContentIndexer = new EntityContentIndexer( [
+			'item' => new ItemIndexer( $languageCodes ),
+			'property' => new PropertyIndexer( $languageCodes )
+		] );
+
+		return new CirrusSearchHookHandlers(
+			$mappingConfigModifier,
+			$entityContentIndexer
+		);
 	}
 
 	private function getContent() {
 		$item = new Item();
-		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
+
+		$item->getFingerprint()->setLabel( 'en', 'kitten' );
+		$item->getFingerprint()->setDescription( 'en', 'young cat' );
+
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
+
 		$item->getStatements()->addNewStatement(
 			new PropertyNoValueSnak( new PropertyId( 'P1' ) )
 		);
 
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-		return $entityContentFactory->newFromEntity( $item );
+		return ItemContent::newFromItem( $item );
 	}
 
 }
