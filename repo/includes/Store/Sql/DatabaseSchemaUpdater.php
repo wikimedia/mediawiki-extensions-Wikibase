@@ -6,7 +6,7 @@ use DatabaseBase;
 use DatabaseUpdater;
 use HashBagOStuff;
 use MWException;
-use Wikibase\Repo\Maintenance\RebuildTermsSearchKey;
+use Wikibase\RebuildTermsSearchKey;
 use Wikibase\Repo\Maintenance\RebuildEntityPerPage;
 use Wikibase\Store;
 use Wikibase\PropertyInfoTable;

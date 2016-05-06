@@ -1,19 +1,17 @@
 <?php
 
-namespace Wikibase\Repo\Maintenance;
+namespace Wikibase;
 
 use Exception;
 use Maintenance;
 use MWException;
 use RequestContext;
-use Wikibase\ChunkCache;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\ChangeLookup;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SettingsArray;
 use Wikibase\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Store\Sql\SqlSubscriptionLookup;
 

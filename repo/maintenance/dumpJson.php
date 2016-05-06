@@ -1,7 +1,8 @@
 <?php
 
-namespace Wikibase\Repo\Maintenance;
+namespace Wikibase;
 
+use DataValues\Serializers\DataValueSerializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;

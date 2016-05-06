@@ -1,11 +1,10 @@
 <?php
 
-namespace Wikibase\Repo\Maintenance;
+namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermSearchKeyBuilder;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
