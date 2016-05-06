@@ -10,7 +10,10 @@ use ParserOutput;
 use Title;
 use UnexpectedValueException;
 use Wikibase\EntityContent;
-use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
+use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\FieldDefinitions;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\ItemFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\PropertyFieldDefinitions;
 
 /**
  * @since 0.5
@@ -21,7 +24,7 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
 class CirrusSearchHookHandlers {
 
 	/**
-	 * @var WikibaseFieldDefinitions
+	 * @var FieldDefinitions[]
 	 */
 	private $fieldDefinitions;
 
@@ -67,48 +70,57 @@ class CirrusSearchHookHandlers {
 	 * @return self
 	 */
 	public static function newFromGlobalState() {
-		return new self( new WikibaseFieldDefinitions() );
+		$contentLanguages = new MediaWikiContentLanguages();
+		$languageCodes = $contentLanguages->getLanguages();
+
+		// @todo get these from EntityTypeDefinitions
+		$fieldDefinitions = [
+			'item' => new ItemFieldDefinitions( $languageCodes ),
+			'property' => new PropertyFieldDefinitions( $languageCodes )
+		];
+
+		return new self( $fieldDefinitions );
 	}
 
 	/**
-	 * @param WikibaseFieldDefinitions $fieldDefinitions
+	 * @param FieldDefinitions[] $fieldDefinitions
 	 */
-	public function __construct( WikibaseFieldDefinitions $fieldDefinitions ) {
+	public function __construct( array $fieldDefinitions ) {
 		$this->fieldDefinitions = $fieldDefinitions;
 	}
 
 	/**
 	 * @param Document $document
 	 * @param Content $content
+	 *
+	 * @throws UnexpectedValueException
 	 */
 	public function indexExtraFields( Document $document, Content $content ) {
 		if ( !$content instanceof EntityContent || $content->isRedirect() === true ) {
 			return;
 		}
 
-		$fields = $this->fieldDefinitions->getFields();
 		$entity = $content->getEntity();
+		$entityType = $entity->getType();
 
-		foreach ( $fields as $fieldName => $field ) {
-			$data = $field->getFieldData( $entity );
-			$document->set( $fieldName, $data );
+		if ( !array_key_exists( $entityType, $this->fieldDefinitions ) ) {
+			throw new UnexpectedValueException( 'Unexpected entity type: ' . $entityType );
 		}
+
+		$this->fieldDefinitions[$entityType]->indexEntity( $entity, $document );
 	}
 
 	/**
 	 * @param array &$config
-	 *
-	 * @throws UnexpectedValueException
 	 */
 	public function addExtraFieldsToMappingConfig( array &$config ) {
-		$fields = $this->fieldDefinitions->getFields();
+		foreach( $this->fieldDefinitions as $fieldDefinition ) {
+			$properties = $fieldDefinition->getMappingProperties();
+			$propertiesToAdd = array_diff_key( $properties, $config['page']['properties'] );
 
-		foreach ( $fields as $fieldName => $field ) {
-			if ( array_key_exists( $fieldName, $config['page']['properties'] ) ) {
-				throw new UnexpectedValueException( "$fieldName is already set in the mapping." );
+			foreach ( $propertiesToAdd as $key => $property ) {
+				$config['page']['properties'][$key] = $property;
 			}
-
-			$config['page']['properties'][$fieldName] = $field->getMapping();
 		}
 	}
 
