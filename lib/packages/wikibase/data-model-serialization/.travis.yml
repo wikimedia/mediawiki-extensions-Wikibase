@@ -6,15 +6,17 @@ env:
 matrix:
   fast_finish: true
   include:
-    - env: DM=~4.0
+    - env: DM=~6.0
       php: 5.3
     - env: DM=@dev
       php: 5.4
-    - env: DM=~5.0@dev
-      php: 5.6
+    - env: DM=~6.0
+      php: 5.5
     - env: DM=~5.0
+      php: 5.6
+    - env: DM=~4.2
       php: 7
-    - env: DM=~4.0
+    - env: DM=~4.2
       php: hhvm
   exclude:
     - env: THENEEDFORTHIS=FAIL
