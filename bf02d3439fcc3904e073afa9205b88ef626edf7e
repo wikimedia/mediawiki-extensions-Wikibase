@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_7063680a",
+        "filename": "repo/includes/Search/Elastic/FieldDefinitions/LabelsProviderFieldDefinitions.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-05-06T21:23:35Z",
+      "side": 1,
+      "message": "these depend on CirrusSearch.  While hard-coded in cirrus, this is basically config and should be passed in here from the hook handler.",
+      "revId": "bf02d3439fcc3904e073afa9205b88ef626edf7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
