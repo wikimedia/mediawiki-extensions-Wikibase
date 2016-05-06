@@ -40,15 +40,21 @@ class StatementListPatcher {
 			switch ( true ) {
 				case $diffOp instanceof DiffOpAdd:
 					/** @var DiffOpAdd $diffOp */
-					$statements->addStatement( $diffOp->getNewValue() );
+					/** @var Statement $statement */
+					$statement = $diffOp->getNewValue();
+					$guid = $statement->getGuid();
+					if ( $statements->getFirstStatementWithGuid( $guid ) === null ) {
+						$statements->addStatement( $statement );
+					}
 					break;
 
 				case $diffOp instanceof DiffOpChange:
 					/** @var DiffOpChange $diffOp */
-					/** @var Statement $statement */
-					$statement = $diffOp->getOldValue();
-					$statements->removeStatementsWithGuid( $statement->getGuid() );
-					$statements->addStatement( $diffOp->getNewValue() );
+					/** @var Statement $oldStatement */
+					/** @var Statement $newStatement */
+					$oldStatement = $diffOp->getOldValue();
+					$newStatement = $diffOp->getNewValue();
+					$this->changeStatement( $statements, $oldStatement->getGuid(), $newStatement );
 					break;
 
 				case $diffOp instanceof DiffOpRemove:
@@ -61,6 +67,39 @@ class StatementListPatcher {
 				default:
 					throw new PatcherException( 'Invalid statement list diff' );
 			}
+		}
+	}
+
+	/**
+	 * @param StatementList $statements
+	 * @param string|null $oldGuid
+	 * @param Statement $newStatement
+	 */
+	private function changeStatement( StatementList $statements, $oldGuid, Statement $newStatement ) {
+		$replacements = array();
+
+		foreach ( $statements->toArray() as $statement ) {
+			$guid = $statement->getGuid();
+
+			// Collect all elements starting from the first with the same GUID
+			if ( $replacements !== array() ) {
+				$guid === null
+					? $replacements[] = $statement
+					: $replacements[$guid] = $statement;
+			} elseif ( $guid === $oldGuid ) {
+				$guid === null
+					? $replacements[] = $newStatement
+					: $replacements[$guid] = $newStatement;
+			}
+		}
+
+		// Remove all starting from the one that should be replaced
+		foreach ( $replacements as $guid => $statement ) {
+			$statements->removeStatementsWithGuid( is_int( $guid ) ? null : $guid );
+		}
+		// Re-add all starting from the new one
+		foreach ( $replacements as $statement ) {
+			$statements->addStatement( $statement );
 		}
 	}
 
