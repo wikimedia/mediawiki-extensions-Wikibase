@@ -8,9 +8,15 @@ use Content;
 use Elastica\Document;
 use ParserOutput;
 use Title;
-use UnexpectedValueException;
 use Wikibase\EntityContent;
-use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
+use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\FieldDefinitions;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\ItemFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\FieldDefinitions\PropertyFieldDefinitions;
+use Wikibase\Repo\Search\Elastic\Indexer\EntityContentIndexer;
+use Wikibase\Repo\Search\Elastic\Indexer\ItemIndexer;
+use Wikibase\Repo\Search\Elastic\Indexer\PropertyIndexer;
+use Wikibase\Repo\Search\Elastic\Mapping\MappingConfigModifier;
 
 /**
  * @since 0.5
@@ -21,9 +27,14 @@ use Wikibase\Repo\Search\Elastic\Fields\WikibaseFieldDefinitions;
 class CirrusSearchHookHandlers {
 
 	/**
-	 * @var WikibaseFieldDefinitions
+	 * @var MappingConfigModifier
 	 */
-	private $fieldDefinitions;
+	private $mappingConfigModifier;
+
+	/**
+	 * @var EntityContentIndexer
+	 */
+	private $entityContentIndexer;
 
 	/**
 	 * @param Document $document
@@ -42,7 +53,7 @@ class CirrusSearchHookHandlers {
 		Connection $connection
 	) {
 		$hookHandler = self::newFromGlobalState();
-		$hookHandler->indexExtraFields( $document, $content );
+		$hookHandler->indexExtraFields( $content, $document );
 
 		return true;
 	}
@@ -67,49 +78,55 @@ class CirrusSearchHookHandlers {
 	 * @return self
 	 */
 	public static function newFromGlobalState() {
-		return new self( new WikibaseFieldDefinitions() );
+		$contentLanguages = new MediaWikiContentLanguages();
+		$languageCodes = $contentLanguages->getLanguages();
+
+		// @todo get these from EntityTypeDefinitions
+		$fieldDefinitions = [
+			'item' => new ItemFieldDefinitions( $languageCodes ),
+			'property' => new PropertyFieldDefinitions( $languageCodes )
+		];
+
+		$entityIndexers = [
+			'item' => new ItemIndexer( $languageCodes ),
+			'property' => new PropertyIndexer( $languageCodes )
+		];
+
+		return new self(
+			new MappingConfigModifier( $fieldDefinitions ),
+			new EntityContentIndexer( $entityIndexers )
+		);
 	}
 
 	/**
-	 * @param WikibaseFieldDefinitions $fieldDefinitions
+	 * @param MappingConfigModifier $mappingConfigModifier
+	 * @param EntityContentIndexer $entityContentIndexr
 	 */
-	public function __construct( WikibaseFieldDefinitions $fieldDefinitions ) {
-		$this->fieldDefinitions = $fieldDefinitions;
+	public function __construct(
+		MappingConfigModifier $mappingConfigModifier,
+		EntityContentIndexer $entityContentIndexer
+	) {
+		$this->mappingConfigModifier = $mappingConfigModifier;
+		$this->entityContentIndexer = $entityContentIndexer;
 	}
 
 	/**
 	 * @param Document $document
 	 * @param Content $content
 	 */
-	public function indexExtraFields( Document $document, Content $content ) {
+	public function indexExtraFields( Content $content, Document $document ) {
 		if ( !$content instanceof EntityContent || $content->isRedirect() === true ) {
 			return;
 		}
 
-		$fields = $this->fieldDefinitions->getFields();
-		$entity = $content->getEntity();
-
-		foreach ( $fields as $fieldName => $field ) {
-			$data = $field->getFieldData( $entity );
-			$document->set( $fieldName, $data );
-		}
+		$this->entityContentIndexer->indexContent( $content, $document );
 	}
 
 	/**
 	 * @param array &$config
-	 *
-	 * @throws UnexpectedValueException
 	 */
 	public function addExtraFieldsToMappingConfig( array &$config ) {
-		$fields = $this->fieldDefinitions->getFields();
-
-		foreach ( $fields as $fieldName => $field ) {
-			if ( array_key_exists( $fieldName, $config['page']['properties'] ) ) {
-				throw new UnexpectedValueException( "$fieldName is already set in the mapping." );
-			}
-
-			$config['page']['properties'][$fieldName] = $field->getMapping();
-		}
+		$this->mappingConfigModifier->addFields( $config['page']['properties'] );
 	}
 
 }
