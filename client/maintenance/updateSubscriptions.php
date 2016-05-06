@@ -43,7 +43,7 @@ class UpdateSubscriptions extends Maintenance {
 	}
 
 	/**
-	 * @see LoggedUpdateMaintenance::doDBUpdates
+	 * @see Maintenance::execute
 	 *
 	 * @throws EntityIdParsingException
 	 * @return bool
@@ -88,15 +88,6 @@ class UpdateSubscriptions extends Maintenance {
 
 		$updater->updateSubscriptions( $startItem );
 		return true;
-	}
-
-	/**
-	 * @see LoggedUpdateMaintenance::getUpdateKey
-	 *
-	 * @return string
-	 */
-	public function getUpdateKey() {
-		return 'Wikibase\UpdateSubscriptions';
 	}
 
 	/**
