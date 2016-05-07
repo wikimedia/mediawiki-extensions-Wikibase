@@ -28,15 +28,26 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 	protected $coordinateFormatter;
 
 	/**
+	 * @var ValueFormatter
+	 */
+	protected $vocabularyUriFormatter;
+
+	/**
+	 * @param ValueFormatter $vocabularyUriFormatter
 	 * @param FormatterOptions|null $options
 	 */
-	public function __construct( FormatterOptions $options = null ) {
+	public function __construct(
+		ValueFormatter $vocabularyUriFormatter,
+		FormatterOptions $options = null
+	) {
 		parent::__construct( $options );
 
 		// TODO: What's a good default? Should this be locale dependant? Configurable?
 		$this->defaultOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
 
 		$this->coordinateFormatter = new GlobeCoordinateFormatter( $this->options );
+
+		$this->vocabularyUriFormatter = $vocabularyUriFormatter;
 	}
 
 	/**
@@ -72,11 +83,26 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 		$html .= $this->renderLabelValuePair( 'precision',
 			htmlspecialchars( $value->getPrecision() ) );
 		$html .= $this->renderLabelValuePair( 'globe',
-			htmlspecialchars( $value->getGlobe() ) );
+			$this->formatGlobe( $value->getGlobe() ) );
 
 		$html .= Html::closeElement( 'table' );
 
 		return $html;
+	}
+
+	/**
+	 * @param string $globe URI
+	 *
+	 * @return string HTML
+	 */
+	private function formatGlobe( $globe ) {
+		$formattedGlobe = $this->vocabularyUriFormatter->format( $globe );
+
+		if ( $formattedGlobe === null || $formattedGlobe === $globe ) {
+			return htmlspecialchars( $globe );
+		}
+
+		return Html::element( 'a', array( 'href' => $globe ), $formattedGlobe );
 	}
 
 	/**
