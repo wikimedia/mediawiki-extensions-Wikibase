@@ -235,7 +235,6 @@ class ChangeLineFormatter {
 			$url,
 			wfMessage( 'diff' )->text(),
 			array(
-				'class' => 'plainlinks',
 				'tabindex' => $count
 			)
 		);
@@ -260,10 +259,7 @@ class ChangeLineFormatter {
 
 		return $this->repoLinker->formatLink(
 			$url,
-			wfMessage( 'hist' )->text(),
-			array(
-				'class' => 'plainlinks'
-			)
+			wfMessage( 'hist' )->text()
 		);
 	}
 

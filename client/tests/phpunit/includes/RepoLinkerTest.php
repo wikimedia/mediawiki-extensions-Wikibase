@@ -172,20 +172,19 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				'<a class="plainlinks" href="//example.com/wiki/Special:Log/delete">delete</a>',
+				'<a class="extiw" href="//example.com/wiki/Special:Log/delete">delete</a>',
 				$settings[1],
 				'//example.com/wiki/Special:Log/delete',
 				'delete',
 				array()
 			),
 			array(
-				'<a class="plainlinks" tabindex="1" href="http://www.example.com/w/index.php'
+				'<a tabindex="1" class="extiw" href="http://www.example.com/w/index.php'
 					. '?title=Item%3AQ60&amp;diff=prev&amp;oldid=778">diff</a>',
 				$settings[2],
 				'http://www.example.com/w/index.php?title=Item%3AQ60&diff=prev&oldid=778',
 				'diff',
 				array(
-					'class' => 'plainlinks',
 					'tabindex' => 1
 				)
 			)
@@ -206,19 +205,19 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 
 		return array(
 			array(
-				'<a class="plainlinks wb-entity-link" href="//example.com/wiki/Q730">Q730</a>',
+				'<a class="extiw wb-entity-link" href="//example.com/wiki/Q730">Q730</a>',
 				$settings[1],
 				new ItemId( 'Q730' ),
 				array()
 			),
 			array(
-				'<a class="plainlinks wb-entity-link" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
+				'<a class="extiw wb-entity-link" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
 				array()
 			),
 			array(
-				'<a class="plainlinks wb-entity-link kittens" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
+				'<a class="extiw wb-entity-link kittens" href="http://www.example.com/wiki/Item:Q730">Q730</a>',
 				$settings[2],
 				new ItemId( 'Q730' ),
 				array( 'kittens' )

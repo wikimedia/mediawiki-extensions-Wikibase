@@ -104,8 +104,9 @@ class RepoLinker {
 	 * @return string (html)
 	 */
 	public function formatLink( $url, $text, array $attribs = array() ) {
-		$attribs['class'] = isset( $attribs['class'] ) ?
-			'plainlinks ' . $attribs['class'] : 'plainlinks';
+		$attribs['class'] = isset( $attribs['class'] )
+			? 'extiw ' . $attribs['class']
+			: 'extiw';
 
 		$attribs['href'] = $url;
 
