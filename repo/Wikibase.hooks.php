@@ -401,6 +401,7 @@ final class RepoHooks {
 		if ( $entityContentFactory->isEntityContentModel( $history->getTitle()->getContentModel() )
 			&& $article->getPage()->getLatest() !== $rev->getID()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
+			&& !$rev->isDeleted( Revision::DELETED_TEXT )
 		) {
 			$link = Linker::linkKnown(
 				$rev->getTitle(),
