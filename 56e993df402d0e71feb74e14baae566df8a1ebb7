@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_56257cbb",
+        "filename": "lib/includes/store/PropertyOrderProviderException.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-07T09:59:51Z",
+      "side": 1,
+      "message": "not sure this is useful, but why not",
+      "revId": "56e993df402d0e71feb74e14baae566df8a1ebb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
