@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_81819094",
+        "filename": "repo/includes/Actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-07T11:44:54Z",
+      "side": 0,
+      "message": "hah... that\u0027s one funny typo :D",
+      "revId": "76647f4a190a6251eaea37a09809aff0c32f0a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
