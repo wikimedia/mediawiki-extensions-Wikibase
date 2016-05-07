@@ -291,7 +291,10 @@ class WikibaseValueFormatterBuilders {
 	 */
 	public function newGlobeCoordinateFormatter( $format, FormatterOptions $options ) {
 		if ( $format === SnakFormatter::FORMAT_HTML_DIFF ) {
-			return new GlobeCoordinateDetailsFormatter( $options );
+			return new GlobeCoordinateDetailsFormatter(
+				$this->getVocabularyUriFormatter( $options ),
+				$options
+			);
 		} else {
 			$options->setOption( GeoCoordinateFormatter::OPT_FORMAT, GeoCoordinateFormatter::TYPE_DMS );
 			$options->setOption( GeoCoordinateFormatter::OPT_SPACING_LEVEL, array(
