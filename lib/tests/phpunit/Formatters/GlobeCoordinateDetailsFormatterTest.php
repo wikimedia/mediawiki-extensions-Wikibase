@@ -22,11 +22,24 @@ use Wikibase\Lib\GlobeCoordinateDetailsFormatter;
  */
 class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 
+	private function newFormatter( FormatterOptions $options = null ) {
+		$vocabularyUriFormatter = $this->getMock( ValueFormatter::class );
+		$vocabularyUriFormatter->expects( $this->any() )
+			->method( 'format' )
+			->will( $this->returnCallback( function( $value ) {
+				return preg_match( '@^http://www\.wikidata\.org/entity/(.*)@', $value, $matches )
+					? $matches[1]
+					: $value;
+			} ) );
+
+		return new GlobeCoordinateDetailsFormatter( $vocabularyUriFormatter, $options );
+	}
+
 	/**
 	 * @dataProvider quantityFormatProvider
 	 */
 	public function testFormat( $value, $options, $pattern ) {
-		$formatter = new GlobeCoordinateDetailsFormatter( $options );
+		$formatter = $this->newFormatter( $options );
 
 		$html = $formatter->format( $value );
 		$this->assertRegExp( $pattern, $html );
@@ -55,7 +68,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testFormatError() {
-		$formatter = new GlobeCoordinateDetailsFormatter();
+		$formatter = $this->newFormatter();
 		$value = new NumberValue( 23 );
 
 		$this->setExpectedException( InvalidArgumentException::class );
@@ -78,7 +91,7 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getPrecision' )
 			->will( $this->returnValue( '<PRECISION>' ) );
 
-		$formatter = new GlobeCoordinateDetailsFormatter();
+		$formatter = $this->newFormatter();
 		$formatted = $formatter->format( $value );
 
 		$this->assertContains( '&lt;LAT&gt;', $formatted );
