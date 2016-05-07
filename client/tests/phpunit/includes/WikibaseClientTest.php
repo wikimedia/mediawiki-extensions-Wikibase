@@ -36,6 +36,7 @@ use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
@@ -336,6 +337,11 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetRestrictedEntityLookup() {
 		$restrictedEntityLookup = $this->getWikibaseClient()->getRestrictedEntityLookup();
 		$this->assertInstanceOf( RestrictedEntityLookup::class, $restrictedEntityLookup );
+	}
+
+	public function testGetPropertyOrderProvider() {
+		$propertyOrderProvider = $this->getWikibaseClient()->getPropertyOrderProvider();
+		$this->assertInstanceOf( PropertyOrderProvider::class, $propertyOrderProvider );
 	}
 
 	/**
