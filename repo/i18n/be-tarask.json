@@ -22,6 +22,7 @@
 	"wikibase-remove-inprogress": "Выдаленьне…",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На іншых мовах",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Наладзіць",
+	"wikibase-setting-entitytermsview-showEntitytermslistview": "Паказваць меткі, сынонімы і апісаньні на ўсіх маіх мовах пры загрузцы старонкі",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Таксама вядома як",
 	"wikibase-entitytermsforlanguagelistview-description": "Апісаньне",
 	"wikibase-entitytermsforlanguagelistview-label": "Метка",

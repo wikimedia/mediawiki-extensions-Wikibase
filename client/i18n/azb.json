@@ -4,14 +4,15 @@
 			"Amir a57",
 			"Koroğlu",
 			"Mousa",
-			"Alp Er Tunqa"
+			"Alp Er Tunqa",
+			"Ilğım"
 		]
 	},
-	"tooltip-t-wikibase": "آیتمه باغلانتی وئری مخزنی ایله ایلگی سی وار",
+	"tooltip-t-wikibase": "آیتمه باغلی وئری مخزنی ایله ایلگی‌سی وار",
 	"wikibase-comment-update": "{{WBREPONAME}} آیتمی دَییشیلدی",
 	"wikibase-dataitem": "{{WBREPONAME}} آیتمی",
 	"wikibase-editlinks": "باغلانتیلاری دَییشدیر",
-	"wikibase-editlinkstitle": "آیری دیل‌لره باغلانتیلاری دَییشدیر",
+	"wikibase-editlinkstitle": "باشقا دیل‌لره باغلانتیلاری دَییشدیر",
 	"wikibase-linkitem-addlinks": "باغلانتی آرتیر",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "گیزلت",

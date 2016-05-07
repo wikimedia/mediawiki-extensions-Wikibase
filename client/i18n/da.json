@@ -8,7 +8,8 @@
 			"Poul G",
 			"Steenth",
 			"Peter Alberti",
-			"Fnielsen"
+			"Fnielsen",
+			"Sarrus"
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
@@ -56,6 +57,7 @@
 	"unconnectedpages": "Sider, der ikke er forbundet til emner",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|sproghenvisning|sproghenvisninger}} på siden)",
 	"wikibase-unconnectedpages-submit": "Udfør",
+	"wikibase-pageswithbadges-submit": "Vis sider",
 	"wikibase-pageinfo-entity-id": "Wikidatas emne-ID",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
 	"wikibase-property-render-error": "Visning af egenskaben $1 mislykkedes: $2",
