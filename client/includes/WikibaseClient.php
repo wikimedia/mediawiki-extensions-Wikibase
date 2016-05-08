@@ -30,6 +30,7 @@ use Site;
 use SiteSQLStore;
 use SiteStore;
 use StubObject;
+use Title;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
@@ -70,11 +71,13 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
+use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\MediaWikiContentLanguages;
+use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
@@ -1107,6 +1110,18 @@ final class WikibaseClient {
 		}
 
 		return $this->restrictedEntityLookup;
+	}
+
+	/**
+	 * @return CachingPropertyOrderProvider
+	 */
+	public function getPropertyOrderProvider() {
+		$title = Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' );
+
+		return new CachingPropertyOrderProvider(
+			new WikiPagePropertyOrderProvider( $title ),
+			wfGetMainCache()
+		);
 	}
 
 }
