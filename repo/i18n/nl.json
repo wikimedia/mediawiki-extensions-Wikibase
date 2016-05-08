@@ -279,7 +279,7 @@
 	"wikibase-self-conflict-patched": "Uw bewerking is samengevoegd met de laatste versie, en daarbij zijn enige tussentijdse wijzigingen overschreven.",
 	"wikibase-conflict-patched": "Uw bewerking is samengevoegd met de laatste versie.",
 	"wikibase-restoreold": "opnieuw instellen",
-	"wikibase-restore-summary": "Versie $1 van [[Special:Contributions/$2|$2]] teruggeplaatst",
+	"wikibase-entity-summary-restore": "Versie $3 van [[Special:Contributions/$4|{{GENDER:$4|$4}}]] teruggeplaatst",
 	"wikibase-no-direct-editing": "Rechtstreeks bewerken is niet mogelijk in de naamruimte $1",
 	"wikibase-noentity": "Deze gegevensset bestaat niet. U kunt de [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} bijbehorende logboeken doorzoeken].",
 	"wikibase-noentity-createone": "U kunt ook [[$1|een nieuwe maken]].",

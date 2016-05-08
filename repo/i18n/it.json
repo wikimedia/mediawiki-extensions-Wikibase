@@ -295,7 +295,7 @@
 	"wikibase-self-conflict-patched": "La tua modifica è stata inserita nell'ultima versione, escludendo alcune delle tue modifiche intermedie.",
 	"wikibase-conflict-patched": "La tua modifica è stata inserita nell'ultima versione.",
 	"wikibase-restoreold": "ripristina",
-	"wikibase-restore-summary": "Ripristina versione $1 di [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Ripristina versione $3 di [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "La modifica diretta è stata disabilitata nel namespace $1",
 	"wikibase-noentity": "Questa entità non esiste.\nPuoi [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare tra i relativi log] per sapere cosa è successo.",
 	"wikibase-noentity-createone": "Puoi anche [[$1|crearne uno nuovo]].",

@@ -90,7 +90,7 @@
 	"wikibase-entitydata-title": "වස්තු දත්ත",
 	"wikibase-conflict-patched": "ඔබේ සංස්කරණය නවතම අනුවාදයට patched කරන ලදී.",
 	"wikibase-restoreold": "නැවත සකසන්න",
-	"wikibase-restore-summary": "සංශෝධනය ප්‍රතිස්ථාපනය කරන්න $1 by [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "සංශෝධනය ප්‍රතිස්ථාපනය කරන්න $3 by [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "$1 නාමඅවකාශයේ පැහැදිලි සංස්කරණය අක්‍රිය කර ඇත",
 	"wikibase-noentity-createone": "ඔබට [[$1|අලුත් එකක්]] ද තැනිය හැක.",
 	"content-model-wikibase-item": "විකිපාදක අයිතමය",

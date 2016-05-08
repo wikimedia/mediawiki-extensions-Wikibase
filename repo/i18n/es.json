@@ -297,7 +297,7 @@
 	"wikibase-self-conflict-patched": "Su edición fue modificada en la última versión, reemplazando algunos de sus propios cambios intermedios.",
 	"wikibase-conflict-patched": "Su edición fue modificada en la versión más reciente.",
 	"wikibase-restoreold": "restaurar",
-	"wikibase-restore-summary": "Se restauró la revisión $1 de [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Se restauró la revisión $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "La edición directa está desactivada en el espacio de nombres $1",
 	"wikibase-noentity": "Esta entidad no existe. Puedes [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar en los registros relacionados] para encontrarla.",
 	"wikibase-noentity-createone": "También puedes [[$1|crear una nueva]].",

@@ -281,7 +281,7 @@
 	"wikibase-self-conflict-patched": "'O cagnamiento vuosto è stato nzertato dint' 'a l'urdema verziona, lassanno fore ll'urdeme cagnamiente 'e miezo.",
 	"wikibase-conflict-patched": "'O cagnamiento vuosto fuje azzeccato sano sano a ll'urdema verziona.",
 	"wikibase-restoreold": "arrepiglia",
-	"wikibase-restore-summary": "Arrepiglia versione $1 'e [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Arrepiglia versione $3 'e [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Cagnamiento diretto stutato int' 'o namespace $1",
 	"wikibase-noentity": "St'entità nun esiste. Putite [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} ascià 'e riggistre azzeccate] pe' cerca 'e truva chello addò jette.",
 	"wikibase-noentity-createone": "Putite pure [[$1|crià uno nuovo]].",

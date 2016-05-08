@@ -292,7 +292,7 @@
 	"wikibase-self-conflict-patched": "Suntingan Anda telah ditambahkan ke versi terbaru, mengganti beberapa perubahan menengah yang dilalukan oleh Anda sendiri.",
 	"wikibase-conflict-patched": "Suntingan Anda telah ditambahkan ke dalam versi terkini.",
 	"wikibase-restoreold": "kembalikan",
-	"wikibase-restore-summary": "Mengembalikan perubahan $1 oleh [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Mengembalikan perubahan $3 oleh [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Penyuntingan langsung dinonaktifkan di ruang nama $1",
 	"wikibase-noentity": "Entitas ini tidak ada. Anda dapat [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} mencari log terkait] untuk mengetahui status entitas saat ini.",
 	"wikibase-noentity-createone": "Anda juga dapat [[$1|membuat yang baru]].",

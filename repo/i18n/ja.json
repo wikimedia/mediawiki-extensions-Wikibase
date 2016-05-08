@@ -272,7 +272,7 @@
 	"wikibase-self-conflict-patched": "編集内容を最新版に反映させたため、あなたの中間の版での変更が上書きされます。",
 	"wikibase-conflict-patched": "あなたの編集内容を最新版に反映させました。",
 	"wikibase-restoreold": "復元",
-	"wikibase-restore-summary": "[[Special:Contributions/$2|$2]] による版 $1 を復元",
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] による版 $3 を復元",
 	"wikibase-no-direct-editing": "$1 名前空間では直接の編集は無効になっています",
 	"wikibase-noentity": "この実体は存在しません。<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 関連する記録を検索し]</span>どこに行ったのか調べることができます。",
 	"wikibase-noentity-createone": "[[$1|新規作成]]することもできます。",

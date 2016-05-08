@@ -123,7 +123,7 @@
 	"wikibase-entitydata-text": "Гэта старонка падае інтэрфейс звязаных дадзеных для значэнняў сутнасці. Просьба падаць ідэнтыфікатар сутнасці ў URL, выкарыстоўваючы сінтаксіс падстаронак.",
 	"wikibase-conflict-patched": "Ваша праўка было выпраўлена ў апошняй версіі.",
 	"wikibase-restoreold": "аднавіць",
-	"wikibase-restore-summary": "Адноўлена версія $1 з дапамогай [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Адноўлена версія $3 з дапамогай [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "У прасторы імёнаў «$1» адключана прамое рэдагаванне",
 	"wikibase-noentity": "Такога набору дадзеных не існуе. Вы можаце\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пашукаць адпаведныя запісы ў журналах]</span>,\nкаб даведацца, куды ён дзеўся.",
 	"wikibase-noentity-createone": "Вы таксама можаце [[$1|стварыць яго]].",

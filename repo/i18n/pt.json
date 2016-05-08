@@ -250,7 +250,7 @@
 	"wikibase-api-no-such-sitelink": "Não foi possível encontrar uma ligação de sítio para '$1' ao tentar editar os emblemas.",
 	"wikibase-conflict-patched": "A sua edição foi actualizada para a versão mais recente.",
 	"wikibase-restoreold": "restaurar",
-	"wikibase-restore-summary": "Restaurar revisão $1 por [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Restaurar revisão $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-noentity": "Este conjunto de dados não existe. Pode\n[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os registos relacionados]\npara descobrir o que lhe sucedeu.",
 	"wikibase-noentity-createone": "Pode também [[$1|criar um novo]].",
 	"wikibase-special-mergeitems-error-prefix": "Os itens não podem ser fundidos. O seguinte erro foi encontrado:",

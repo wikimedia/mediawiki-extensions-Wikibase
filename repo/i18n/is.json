@@ -253,7 +253,7 @@
 	"wikibase-self-conflict-patched": "Breytingunni þinni hefur verið bætt við nýjustu útgáfu, sem hefur hunsað sumar millibreytingar þínar.",
 	"wikibase-conflict-patched": "Breytingunni þinni hefur verið bætt við nýjustu útgáfu.",
 	"wikibase-restoreold": "endursetja",
-	"wikibase-restore-summary": "Endurvekja útgáfu $1 eftir [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Endurvekja útgáfu $3 eftir [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Bein breyting er óvirk í nafnrými $1",
 	"wikibase-noentity": "Þessi eining er ekki til.\nÞú getur [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} leitað í aðgerðarskránni] til að finna hvað hefur gerst.",
 	"wikibase-noentity-createone": "Þú getur líka [[$1|búið til nýjan]].",

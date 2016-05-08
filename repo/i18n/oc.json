@@ -186,7 +186,7 @@
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, traduch dempuèi $3 - $4",
 	"wikibase-conflict-patched": "Vòstra modificacion es estada integrada dins la darrièra version.",
 	"wikibase-restoreold": "restablir",
-	"wikibase-restore-summary": "Restabliment de la revision $1 per [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Restabliment de la revision $3 per [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "La modificacion dirècta es desactivada dins l'espaci $1",
 	"wikibase-noentity": "Aqueste ensemble de donadas existís pas. Podètz\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} consultar los jornals]</span> per mai d’informacions.",
 	"wikibase-noentity-createone": "Ne podètz tanben [[$1|crear una novèla]].",

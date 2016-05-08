@@ -299,7 +299,7 @@
 	"wikibase-self-conflict-patched": "Ваша правка была помещена в последнюю версию, при этом были перекрыты некоторые из ваших собственных промежуточных изменений.",
 	"wikibase-conflict-patched": "Ваша правка было исправлена в последней версии.",
 	"wikibase-restoreold": "восстановить",
-	"wikibase-restore-summary": "Восстановлена версия $1 с помощью [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Восстановлена версия $3 с помощью [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "В пространстве имён «$1» отключено прямое редактирование",
 	"wikibase-noentity": "Такой сущности не существует. Вы можете [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} поискать соответствующие записи в журналах], чтобы узнать, где он может быть.",
 	"wikibase-noentity-createone": "Вы также можете [[$1|создать его]].",

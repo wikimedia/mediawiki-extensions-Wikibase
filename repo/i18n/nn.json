@@ -186,7 +186,7 @@
 	"wikibase-self-conflict-patched": "Endringa di vart bøtt inn i den nyaste versjonen, og overstyrte nokre av dine eigne mellomliggjande endringar.",
 	"wikibase-conflict-patched": "Endringa di vart bøtt inn i den nyaste versjonen.",
 	"wikibase-restoreold": "attopprett",
-	"wikibase-restore-summary": "Attoppretta versjon $1 av [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Attoppretta versjon $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Direkteendring er slege av i namnerommet $1",
 	"wikibase-noentity": "Dette datasettet finst ikkje. Du kan  <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkja i relaterte loggar] for å finna ut kvar det fór.",
 	"wikibase-noentity-createone": "Du kan dessutan [[$1|oppretta eit nytt eit]].",

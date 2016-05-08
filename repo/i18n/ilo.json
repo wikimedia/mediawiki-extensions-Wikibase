@@ -278,7 +278,7 @@
 	"wikibase-self-conflict-patched": "Ti inurnosmo  ket natakupan idiay kinaudi a bersion, a nangbalbaliw kadagiti bukodmo a naipakatengngaan a panagbalbaliw.",
 	"wikibase-conflict-patched": "Ti inurnosmo ket natakupan idiay kinaudi a bersion.",
 	"wikibase-restoreold": "isubli",
-	"wikibase-restore-summary": "Isubli ti panagbalbaliw ti $1 babaen ti [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Isubli ti panagbalbaliw ti $3 babaen ti [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Ti dagus a panagurnos ket nabaldado idiay nagan ti lugar ti $1",
 	"wikibase-noentity": "Daytoy nga agasmang ti datos ket awan. Mabalinmo ti\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} kadagiti mainaig a listaan]</span>\ntapno birukem ti napananda.",
 	"wikibase-noentity-createone": "Mabalinmo pay ti [[$1|agpartuat ti maysa a baro]].",

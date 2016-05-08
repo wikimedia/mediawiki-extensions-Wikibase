@@ -209,7 +209,7 @@
 	"wikibase-self-conflict-patched": "Din redigering blev føjet til den nyeste version, og tilsidesatte nogle af dine egne mellemliggende ændringer.",
 	"wikibase-conflict-patched": "Din redigering blev føjet til den nyeste version",
 	"wikibase-restoreold": "gendan",
-	"wikibase-restore-summary": "Gendan version $1 af [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Gendan version $3 af [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Direkte redigering er deaktiveret i navnerummet $1",
 	"wikibase-noentity": "Dette datasæt findes ikke. Du kan\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søge i relaterede logfiler]</span>\nfor at finde ud af, hvad der er sket med det.",
 	"wikibase-noentity-createone": "Du kan også [[$1|oprette et nyt]].",

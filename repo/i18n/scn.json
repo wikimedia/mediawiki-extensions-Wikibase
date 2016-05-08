@@ -268,7 +268,7 @@
 	"wikibase-self-conflict-patched": "Lu tò canciamentu fu ripizzatu nta l'ùrtima virsioni, suprascrivennu quarchi canciamentu minzanu fattu di tìa stissu.",
 	"wikibase-conflict-patched": "Lu tò canciamentu fu ripizzatu nta l'ùrtima virsioni.",
 	"wikibase-restoreold": "ricùpira",
-	"wikibase-restore-summary": "Ricùpiru dâ virsioni $1 di [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Ricùpiru dâ virsioni $3 di [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Lu canciamentu direttu è disattivatu ntô namespace $1",
 	"wikibase-noentity": "Sta ntità nun esisti. Poi [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} circari ntê riggistri apprupiati] pi capiri unni jìu a finiri.",
 	"wikibase-noentity-createone": "Nni poi puru [[$1|criari una nova]].",

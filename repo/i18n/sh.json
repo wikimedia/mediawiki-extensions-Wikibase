@@ -128,7 +128,7 @@
 	"wikibase-self-conflict-patched": "Vaša izmjena je ubačena u posljednju verziju, presnimivši neke od vaših ranijih izmjena.",
 	"wikibase-conflict-patched": "Vaša izmjena je dodana u posljednju verziju.",
 	"wikibase-restoreold": "obnovi",
-	"wikibase-restore-summary": "Obnovite izmjenu $1 od [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Obnovite izmjenu $3 od [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Neposredno uređivanje je onemogućeno u imenskom prostoru $1",
 	"wikibase-noentity": "Ovaj set podataka ne postoji. Možete <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pretražiti vezane evidencije]</span>\nda otkrijete gdje je nestao.",
 	"wikibase-noentity-createone": "Također možete [[$1|možete stvoriti novi]].",

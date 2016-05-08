@@ -3,11 +3,14 @@
 		"authors": [
 			"Fohanno",
 			"Fulup",
-			"Y-M D"
+			"Y-M D",
+			"Pymouss"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-sitelinks-sitename-columnheading": "Yezh",
 	"wikibase-tooltip-error-details": "Munudoù",
-	"wikibase-validator-no-validators": "Difennet"
+	"wikibase-validator-no-validators": "Difennet",
+	"wikibase-entity-summary-wbsetlabel-add": "Skridennad [$2] ouzhpennet",
+	"wikibase-entity-summary-wbsetlabel-set": "Skridennad [$2] kemmet"
 }

@@ -286,7 +286,7 @@
 	"wikibase-self-conflict-patched": "Din redigering integrerades med den senaste versionen, vilket har åsidosatt några av dina egna mellanliggande ändringar.",
 	"wikibase-conflict-patched": "Din redigering lappades i den senaste versionen.",
 	"wikibase-restoreold": "återställ",
-	"wikibase-restore-summary": "Återställ versionen $1 av [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Återställ versionen $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Direkt redigering har inaktiverats i namnområdet $1",
 	"wikibase-noentity": "Denna entitet finns inte. Du kan [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} söka i de relaterade loggarna] för att ta reda på var den tog vägen.",
 	"wikibase-noentity-createone": "Du kan också [[$1|skapa en ny]].",

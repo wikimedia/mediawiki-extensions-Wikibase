@@ -139,7 +139,7 @@
 	"wikibase-self-conflict-patched": "Twója změna jo se do nejnowšeje wersije pópšawiła, z tym až pśepisujo někotare z twójich mjazycasnych změnow.",
 	"wikibase-conflict-patched": "Twója změna jo se do nejnowšeje wersije zaźěłała.",
 	"wikibase-restoreold": "slědk stajiś",
-	"wikibase-restore-summary": "Wersiju $1 wót [[Special:Contributions/$2|$2]] wótnowiś",
+	"wikibase-entity-summary-restore": "Wersiju $3 wót [[Special:Contributions/$4|{{GENDER:$4|$4}}]] wótnowiś",
 	"wikibase-no-direct-editing": "Direktne wobźěłowanje w mjenjowem rumje $1 jo se znjemóžniło.",
 	"wikibase-noentity": "Toś ta datowa sajźba njeeksistěrujo. Móžoš <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wótpowědujuce protokole pśepytaś]</span>, aby wuslěźił, což jo se jej stało.",
 	"wikibase-noentity-createone": "Móžoš teke [[$1|nowu napóraś]].",

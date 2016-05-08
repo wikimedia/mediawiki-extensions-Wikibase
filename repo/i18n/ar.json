@@ -244,7 +244,7 @@
 	"wikibase-self-conflict-patched": "تم رقع تعديلك على النسخة الأخيرة مع تجاوز بعض من تعديلاتك المتوسطة.",
 	"wikibase-conflict-patched": "تم رقع تعديلك على النسخة الأخيرة.",
 	"wikibase-restoreold": "استرجاع",
-	"wikibase-restore-summary": "استرجع التعديل $1 من قبل [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "استرجع التعديل $3 من قبل [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "التحرير المباشر معطل في النطاق $1",
 	"wikibase-noentity": "هذا الكائن غير موجود. يمكنك [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} البحث في السجلات المتعلقة] لتعرف أين انتقل.",
 	"wikibase-noentity-createone": "كما يمكنك [[$1|إنشاء كائن جديد]].",

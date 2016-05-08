@@ -11,5 +11,5 @@
 	"wikibase-sitelinks-special": "အခြား ဆိုဒ်များ",
 	"wikibase-statementview-rank-normal": "သာမန် အဆင့်",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ရည်ညွှန်းချက်|ရည်ညွှန်းချက်များ}}",
-	"wikibase-restore-summary": "[[Special:Contributions/$2|$2]] မှ ပြင်ဆင်မှု $1 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်"
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု $3 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်"
 }

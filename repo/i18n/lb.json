@@ -203,7 +203,7 @@
 	"wikibase-self-conflict-patched": "Är Ännerung gouf an déi lescht Versioun integréiert an e puer vun Ären Ännerungen déi Dir an der Tëschenzäit gemaach hat goufen iwwerschriwwen.",
 	"wikibase-conflict-patched": "Är Ännerung gouf an déi lescht Versioun integréiert.",
 	"wikibase-restoreold": "restauréieren",
-	"wikibase-restore-summary": "Versioun $1 vum [[Special:Contributions/$2|$2]] gouf restauréiert",
+	"wikibase-entity-summary-restore": "Versioun $3 vum [[Special:Contributions/$4|{{GENDER:$4|$4}}]] gouf restauréiert",
 	"wikibase-no-direct-editing": "D'Direktänneren ass am Nummraum $1 ausgeschalt",
 	"wikibase-noentity-createone": "Dir kënnt och [[$1|een Neit uleeën]]",
 	"wikibase-special-mergeitems-error-prefix": "D'Elementer konnten net zesummegeluecht ginn. Dëse Feeler ass geschitt:",

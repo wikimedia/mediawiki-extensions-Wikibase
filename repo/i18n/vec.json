@@ -165,7 +165,7 @@
 	"wikibase-self-conflict-patched": "La to modifica la xe stà inserita in te l'ultima version, escludendo alcune dele to modifiche intermedie.",
 	"wikibase-conflict-patched": "La to modifica la xe stà inserìa in te l'ultima version.",
 	"wikibase-restoreold": "ripristina",
-	"wikibase-restore-summary": "Ripristina revision $1 de [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Ripristina revision $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "La modifica direta la xe stà disabilità nel namespace $1",
 	"wikibase-noentity": "Sto set de dati no l'esiste mia.\nTe pol <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} sercar tra i relativi log]</span> par saver in do che l'è finìo.",
 	"wikibase-noentity-createone": "Te pol anca [[$1|creàrghene uno novo]].",

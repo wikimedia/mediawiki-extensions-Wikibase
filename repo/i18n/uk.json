@@ -295,7 +295,7 @@
 	"wikibase-self-conflict-patched": "Ваше редагування увійшло в останню версію, при цьому були перекриті деякі з Ваших власних проміжних змін.",
 	"wikibase-conflict-patched": "Ваше редагування враховане в останній версії.",
 	"wikibase-restoreold": "відновити",
-	"wikibase-restore-summary": "Відновлена версія $1 за допомогою [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Відновлена версія $3 за допомогою [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "У просторі назв «$1» вимкнено пряме редагування",
 	"wikibase-noentity": "Такої сутності не існує. Ви можете [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пошукати відповідні записи в журналах], щоб дізнатися, куди вона поділася.",
 	"wikibase-noentity-createone": "Ви також можете [[$1|створити нову]].",

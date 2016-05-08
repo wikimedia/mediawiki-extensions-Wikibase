@@ -183,7 +183,7 @@
 	"wikibase-self-conflict-patched": "A szerkesztésedet végrehajtottuk az utolsó változaton, felülírva a saját közbenső változtatásaidat. (Ez leginkább akkor fordul elő, ha egyszerre több helyről szerkesztesz.)",
 	"wikibase-conflict-patched": "A szerkesztésed sikeresen végre lett hajtva.",
 	"wikibase-restoreold": "visszaállítás erre",
-	"wikibase-restore-summary": "Visszaállítás a(z) [[Special:Contributions/$2|$2]] által szerkesztett $1 változatra.",
+	"wikibase-entity-summary-restore": "Visszaállítás a(z) [[Special:Contributions/$4|{{GENDER:$4|$4}}]] által szerkesztett $3 változatra.",
 	"wikibase-no-direct-editing": "A(z) $1 névtérben a lapok közvetlenül nem szerkeszthetőek.",
 	"wikibase-noentity": "Nincs ilyen fogalom. Ha korábban volt, [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} a naplókból] kiderülhet, mi történt vele.",
 	"wikibase-noentity-createone": "Vagy [[$1|hozz létre egy újat]].",

@@ -251,7 +251,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> {{GENDER:$1|sinun}} [[Special:MyPage|käyttäjäsivullesi]].",
 	"wikibase-api-no-such-sitelink": "Sivustolinkkiä sivustolle '$1' ei löytynyt yritettäessä muokata merkkejä.",
 	"wikibase-restoreold": "palauta",
-	"wikibase-restore-summary": "Käyttäjän [[Special:Contributions/$2|$2]] tekemän muokkauksen $1 palautus",
+	"wikibase-entity-summary-restore": "Käyttäjän [[Special:Contributions/$4|{{GENDER:$4|$4}}]] tekemän muokkauksen $3 palautus",
 	"wikibase-no-direct-editing": "Sivun lähdekoodin muokkaaminen on poistettu käytöstä nimiavaruudessa $1",
 	"wikibase-noentity": "Valitsemaasi aihetta ei löytynyt.\nVoit [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} selata sivuun liittyviä lokeja]</span> ottaaksesi selvää, mitä sille on tapahtunut.",
 	"wikibase-noentity-createone": "Voit myös [[$1|luoda uuden]].",

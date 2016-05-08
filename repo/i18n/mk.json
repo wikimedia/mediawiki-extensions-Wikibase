@@ -276,7 +276,7 @@
 	"wikibase-self-conflict-patched": "Вашето уредување е прикрпено на последната верзија, презапишувајќи врз некои од вашите меѓувремени промени.",
 	"wikibase-conflict-patched": "Вашето уредување е прикрпено на последната верзија.",
 	"wikibase-restoreold": "врати",
-	"wikibase-restore-summary": "Повраток на преработката $1 од [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Повраток на преработката $3 од [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Непосредното уредување е оневозможено во именскиот простор $1",
 	"wikibase-noentity": "Оваа единица не постои. Можете да ги [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате дневниците] за да дознаете каде отишла.",
 	"wikibase-noentity-createone": "Можете и да [[$1|создадете нов]].",

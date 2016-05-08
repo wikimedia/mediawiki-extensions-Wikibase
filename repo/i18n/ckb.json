@@ -97,7 +97,7 @@
 	"wikibase-entitieswithoutlabel-label-alltypes": "ھەموو",
 	"wikibase-entitieswithoutlabel-invalid-language": "«$1» کۆدێکی زمانی دروست نییە.",
 	"wikibase-restoreold": "گەڕاندنەوە",
-	"wikibase-restore-summary": "گەڕاندنەوەی پێداچوونەوەی $1 لە لایەن [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "گەڕاندنەوەی پێداچوونەوەی $3 لە لایەن [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-noentity-createone": "ھەروەھا دەتوانی [[$1|یەکی نوێ دروست بکەی]].",
 	"wikibase-listdatatypes-wikibase-item-head": "بەند",
 	"wikibase-listdatatypes-multilingualtext-head": "دەقی فرەزمانی",

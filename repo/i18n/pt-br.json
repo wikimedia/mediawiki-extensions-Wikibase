@@ -209,7 +209,7 @@
 	"wikibase-self-conflict-patched": "Sua edição foi atualizada para a versão mais recente, sobrescrevendo algumas das suas próprias alterações intermediárias.",
 	"wikibase-conflict-patched": "Sua edição se tornou a versão mais recente.",
 	"wikibase-restoreold": "restaurar",
-	"wikibase-restore-summary": "Restaurar a revisão $1 por [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Restaurar a revisão $3 por [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "A edição direta está desabilitada no espaço nominal $1",
 	"wikibase-noentity": "Esta entidade não existe. Você pode [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar nos registros relacionados] para descobrir o que ocorreu.",
 	"wikibase-noentity-createone": "Você também pode [[$1|criar um novo]].",

@@ -162,7 +162,7 @@
 	"wikibase-self-conflict-patched": "Twoja změna je so do najnowšeje wersije porjedźiła, přepisujo někotre z twojich mjeztymnych změnow.",
 	"wikibase-conflict-patched": "Twoja změna je so do najnowšeje wersije zadźěłała.",
 	"wikibase-restoreold": "wróćo stajić",
-	"wikibase-restore-summary": "Wersiju $1 wot [[Special:Contributions/$2|$2]] wobnowić",
+	"wikibase-entity-summary-restore": "Wersiju $3 wot [[Special:Contributions/$4|{{GENDER:$4|$4}}]] wobnowić",
 	"wikibase-no-direct-editing": "Direktne wobdźěłowanje w mjenowym rumje $1 je znjemóžnjene.",
 	"wikibase-noentity": "Tuta datowa sadźba njeeksistuje. Móžeš <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wotpowědowace protokole přepytać]</span>, zo by wuslědźił, štož je so jej stało.",
 	"wikibase-noentity-createone": "Móžeš tež [[$1|nowu wutworić]].",

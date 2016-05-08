@@ -287,7 +287,7 @@
 	"wikibase-self-conflict-patched": "您的編輯已修補成最新版本，覆蓋了部份您中間所做的更改。",
 	"wikibase-conflict-patched": "您的編輯已修補成最新版本。",
 	"wikibase-restoreold": "還原",
-	"wikibase-restore-summary": "還原 [[Special:Contributions/$2|$2]] 的修訂 $1",
+	"wikibase-entity-summary-restore": "還原 [[Special:Contributions/$4|{{GENDER:$4|$4}}]] 的修訂 $3",
 	"wikibase-no-direct-editing": "命名空間 $1 已停用直接編輯",
 	"wikibase-noentity": "此實體不存在，您可 <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 搜尋相關日誌]</span> 來查詢該項目去向。",
 	"wikibase-noentity-createone": "您也可以 [[$1|新增一個]]。",

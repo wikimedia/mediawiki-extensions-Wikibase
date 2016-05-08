@@ -222,7 +222,7 @@
 	"wikibase-redirectentity-submit": "ווייטערפירן",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, קאנווערטירט פון $3 - $4",
 	"wikibase-restoreold": "אויפֿריכטן",
-	"wikibase-restore-summary": "אויפֿריכטן רעוויזיע $1 פֿון [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "אויפֿריכטן רעוויזיע $3 פֿון [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-noentity-createone": "איר קענט אויך [[$1|שאפֿן א נײַעם]].",
 	"wikibase-listdatatypes-wikibase-item-head": "דאטנאביעקט",
 	"wikibase-listdatatypes-wikibase-property-head": "אייגנשאפֿט",

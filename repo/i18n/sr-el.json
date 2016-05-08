@@ -169,7 +169,7 @@
 	"wikibase-redirectentity-success": "$1 je uspešno preusmereno na $2.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, pretvoreno iz $3 - $4",
 	"wikibase-restoreold": "vrati",
-	"wikibase-restore-summary": "Vraćena izmena $1 korisnika [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Vraćena izmena $3 korisnika [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Direktne izmene su onemogućene u imenskom prostoru $1",
 	"wikibase-noentity": "Ovaj entitet ne postoji. Možete [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pretražiti srodne dnevnike] da biste saznali gde je premešten.",
 	"wikibase-noentity-createone": "Možete takođe [[$1|napraviti novi]].",

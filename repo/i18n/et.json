@@ -279,7 +279,7 @@
 	"wikibase-self-conflict-patched": "Sinu muudatus paigati viimasesse versiooni, mõned sinu vahepealsed muudatused kirjutati üle.",
 	"wikibase-conflict-patched": "Sinu muudatus paigati viimasesse versiooni.",
 	"wikibase-restoreold": "ennista",
-	"wikibase-restore-summary": "Kasutaja [[Special:Contributions/$2|$2]] redaktsioon $1 taastatud.",
+	"wikibase-entity-summary-restore": "Kasutaja [[Special:Contributions/$4|{{GENDER:$4|$4}}]] redaktsioon $3 taastatud.",
 	"wikibase-no-direct-editing": "Otseredigeerimine nimeruumis $1 on keelatud",
 	"wikibase-noentity": "Üksust pole olemas. Saad <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} otsida seotud logidest]</span>, kuhu see kadus.",
 	"wikibase-noentity-createone": "Saad ka [[$1|uue luua]].",

@@ -272,7 +272,7 @@
 	"wikibase-self-conflict-patched": "Do Twojej edycja została zastosowana poprawka do najnowszej wersji, zastępując kilka zmian pośrednich.",
 	"wikibase-conflict-patched": "Do Twojej edycji została zastosowana poprawka do najnowszej wersji.",
 	"wikibase-restoreold": "przywróć",
-	"wikibase-restore-summary": "Przywrócono wersję $1 zrobioną przez [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Przywrócono wersję $3 zrobioną przez [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Bezpośrednia edycja jest wyłączona w przestrzeni nazw $1",
 	"wikibase-noentity": "Ta encja nie istnieje. Możesz [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} przeszukać rejestry operacji], aby sprawdzić gdzie ona mogła się podziać.",
 	"wikibase-noentity-createone": "Możesz także [[$1|utworzyć nowy]].",

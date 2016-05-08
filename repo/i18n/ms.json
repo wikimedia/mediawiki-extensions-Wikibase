@@ -202,7 +202,7 @@
 	"wikibase-self-conflict-patched": "Suntingan anda ditampungkan ke dalam versi terkini, sekaligus mengubah ganti sesetengah suntingan pertengahan anda.",
 	"wikibase-conflict-patched": "Suntingan anda telah ditampungkan ke dalam versi terkini.",
 	"wikibase-restoreold": "pulihkan",
-	"wikibase-restore-summary": "Pulihkan semakan $1 oleh [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Pulihkan semakan $3 oleh [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Penyuntingan secara langsung dilarang di ruang nama $1",
 	"wikibase-noentity": "Set data ini tidak wujud. Anda boleh\n<span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} mencari log-log yang berkaitan]</span>\nuntuk mencari di mana set data itu.",
 	"wikibase-noentity-createone": "Anda juga boleh [[$1|mencipta set data yang baru]].",

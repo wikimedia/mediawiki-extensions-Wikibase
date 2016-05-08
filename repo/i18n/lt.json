@@ -286,7 +286,7 @@
 	"wikibase-self-conflict-patched": "Jūsų pakeitimas buvo įtrauktas į paskutinę versiją, perdengiant kai kuriuos jūsų paties tarpinius pakeitimus.",
 	"wikibase-conflict-patched": "Jūsų pakeitimas buvo įtrauktas į paskutinę versiją.",
 	"wikibase-restoreold": "perkrauti",
-	"wikibase-restore-summary": "Atstatyti versiją $1, kurią sukūrė [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Atstatyti versiją $3, kurią sukūrė [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Tiesioginis redagavimas yra deaktyvuotas vardų srityje $1",
 	"wikibase-noentity": "Ši esybė neegzistuoja. Galite [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} ieškoti susijusiuose žurnaluose], kad rastumėte kur ji nukeliavo.",
 	"wikibase-noentity-createone": "Taip pat galite [[$1|sukurti naują]].",

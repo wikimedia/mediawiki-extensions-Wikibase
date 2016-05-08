@@ -281,7 +281,7 @@
 	"wikibase-self-conflict-patched": "La so edición parcheóse na última versión, sobreescribiendo dalgún de los sos cambios intermedios.",
 	"wikibase-conflict-patched": "La so edición parcheóse na última versión.",
 	"wikibase-restoreold": "restaurar",
-	"wikibase-restore-summary": "Restaurose la revisión $1 de [[Special:Contributions/$2|$2]]",
+	"wikibase-entity-summary-restore": "Restaurose la revisión $3 de [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "La edición direuta ta desactivada nel espaciu de nomes $1",
 	"wikibase-noentity": "Esta entidá nun esiste. Pues [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar nos rexistros rellacionaos] pa saber aú pudo dir.",
 	"wikibase-noentity-createone": "Tamién pue [[$1|crear unu nuevu]].",

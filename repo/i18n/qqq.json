@@ -366,7 +366,7 @@
 	"wikibase-self-conflict-patched": "Warning issued when an edit is made based on an old revision, clean patching was not possible, but all intermediate edits where made by the same user, so aggressive patching was applied, overriding earlier changes by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.",
 	"wikibase-conflict-patched": "Warning issued when an edit is made based on an old revision, but the edit conflict could be resolved by patching. This warning is usually not displayed.",
 	"wikibase-restoreold": "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.\n{{Identical|Restore}}",
-	"wikibase-entity-summary-restore": "Edit summary for a restore action. Parameters:\n* $3 - the revision id number\n* $4 - the username whose changes are being undone",
+	"wikibase-entity-summary-restore": "Edit summary for a restore action. Parameters:\n* $3 - the revision id number\n* $4 - the username of the user whose changes were undone",
 	"wikibase-entity-summary-undo": "Edit summary for an undo action. Parameters:\n* $3 - the revision id number\n* $4 - the username whose changes are being undone",
 	"wikibase-no-direct-editing": "Error messages if a direct (full-text) edit is attempted in an entity names.\n\nParameters:\n* $1 - the name of the namespace for which direct editing was denied",
 	"wikibase-noentity": "Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.",
