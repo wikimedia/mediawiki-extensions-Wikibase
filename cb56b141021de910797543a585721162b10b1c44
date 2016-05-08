@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_d6a6a7bd",
+        "filename": "lib/includes/Formatters/GlobeCoordinateDetailsFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-08T23:46:51Z",
+      "side": 1,
+      "message": "What if $this-\u003evocabularyUriFormatter is null?",
+      "revId": "cb56b141021de910797543a585721162b10b1c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b6a9738f",
+        "filename": "lib/tests/phpunit/Formatters/GlobeCoordinateDetailsFormatterTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-08T23:46:51Z",
+      "side": 1,
+      "message": "Maybe make this return something \"fancier\" like \"formatted-globe-Q123\" so that it\u0027s clear that this has been properly invoked?",
+      "revId": "cb56b141021de910797543a585721162b10b1c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
