@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_36956343",
+        "filename": "lib/includes/Formatters/GlobeCoordinateDetailsFormatter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-08T23:51:30Z",
+      "side": 1,
+      "message": "Just to be clear here: If there\u0027s no strong reason to allow it to be null, just don\u0027t allow null for $vocabularyUriFormatter in the constructor (and change the docs according to that).",
+      "parentUuid": "ae564743_d6a6a7bd",
+      "revId": "cb56b141021de910797543a585721162b10b1c44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_b6a9738f",
         "filename": "lib/tests/phpunit/Formatters/GlobeCoordinateDetailsFormatterTest.php",
         "patchSetId": 4
