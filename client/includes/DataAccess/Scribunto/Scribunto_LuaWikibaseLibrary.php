@@ -22,6 +22,7 @@ use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -64,6 +65,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @var PropertyIdResolver|null
 	 */
 	private $propertyIdResolver = null;
+
+	/**
+	 *
+	 * @var PropertyOrderProvider|null
+	 */
+	private $propertyOrderProvider = null;
 
 	/**
 	 * @return WikibaseLuaBindings
@@ -277,6 +284,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'resolvePropertyId' => array( $this, 'resolvePropertyId' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
 			'incrementExpensiveFunctionCount' => array( $this, 'incrementExpensiveFunctionCount' ),
+			'getPropertyOrder' => array( $this, 'getPropertyOrder' ),
+			'orderProperties' => array( $this, 'orderProperties' ),
 		);
 
 		return $this->getEngine()->registerInterface(
@@ -448,6 +457,59 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		} catch ( PropertyLabelNotResolvedException $e ) {
 			return array( null );
 		}
+	}
+
+	/**
+	 * @param string[] $propertyIds
+	 *
+	 * @return string[]
+	 */
+	public function orderProperties( $propertyIds ) {
+		$orderedPropertiesPart = array();
+		$unorderedProperties = array();
+
+		$propertyOrder = $this->getPropertyOrder()[0];
+		foreach ( $propertyIds as $propertyId ) {
+			if ( isset( $propertyOrder[$propertyId] ) ) {
+				$orderedPropertiesPart[ $propertyOrder[ $propertyId ] ] = $propertyId;
+			} else {
+				$unorderedProperties[] = $propertyId;
+			}
+		}
+		ksort( $orderedPropertiesPart );
+		$orderedProperties = array_merge( $orderedPropertiesPart, $unorderedProperties );
+
+		// Lua tables start at one
+		$orderedPropertiesResult = array_combine(
+				range( 1, count( $orderedProperties ) ), array_values( $orderedProperties )
+		);
+		return array( $orderedPropertiesResult );
+	}
+
+	/**
+	 * Return the order of properties as provided by the PropertyOrderProvider
+	 * @return int[]|null
+	 */
+	public function getPropertyOrder() {
+		return array( $this->getPropertyOrderProvider()->getPropertyOrder() );
+	}
+
+	/**
+	 * @return PropertyOrderProvider
+	 */
+	private function getPropertyOrderProvider() {
+		if ( !$this->propertyOrderProvider ) {
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$this->propertyOrderProvider = $wikibaseClient->getPropertyOrderProvider();
+		}
+		return $this->propertyOrderProvider;
+	}
+
+	/**
+	 * @param PropertyOrderProvider $propertyOrderProvider
+	 */
+	public function setPropertyOrderProvider( PropertyOrderProvider $propertyOrderProvider ) {
+		$this->propertyOrderProvider = $propertyOrderProvider;
 	}
 
 }
