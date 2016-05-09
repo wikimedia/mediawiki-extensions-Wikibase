@@ -5,6 +5,7 @@ namespace Wikibase;
 use Exception;
 use Maintenance;
 use MWException;
+use MWExceptionHandler;
 use RequestContext;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
@@ -222,6 +223,9 @@ class DispatchChanges extends Maintenance {
 				}
 			} catch ( Exception $ex ) {
 				$stats->increment( 'wikibase.repo.dispatchChanges.exception' );
+
+				MWExceptionHandler::logException( $ex );
+
 				if ( $c < $maxPasses ) {
 					$this->log( "ERROR: $ex; sleeping for {$delay} seconds" );
 					sleep( $delay );
