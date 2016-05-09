@@ -164,12 +164,10 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 */
 	_updatePropertyLabels: function() {
 		if ( this.options.singleProperty ) {
-			var views = this._listview.value();
-
-			for ( var i = 0; i < views.length; i++ ) {
-				var operation = ( i === 0 ) ? 'showPropertyLabel' : 'hidePropertyLabel';
-				views[i][operation]();
-			}
+			this._listview.value().forEach( function ( snakview, index ) {
+				var operation = index ? 'hidePropertyLabel' : 'showPropertyLabel';
+				snakview[operation]();
+			} );
 		}
 	},
 
@@ -297,14 +295,9 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
-		var isValid = true;
-
-		this._listview.value().forEach( function( snakview ) {
-			isValid = snakview.isValid() && snakview.snak();
-			return isValid;
+		return this._listview.value().every( function( snakview ) {
+			return snakview.isValid() && snakview.snak() !== null;
 		} );
-
-		return isValid;
 	},
 
 	/**
