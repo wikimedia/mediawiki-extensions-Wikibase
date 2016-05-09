@@ -306,6 +306,38 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		);
 	}
 
+	public function orderPropertiesProvider() {
+		return array(
+			'all IDs in the provider' => array(
+				array( 'P16', 'P5', 'P4', 'P8' ),
+				"* P8 \n"
+				. "*P16 \n"
+				. "* P4 \n"
+				. "* P5",
+				array( 'P8', 'P16', 'P4', 'P5' )
+			),
+			'part of the IDs in the provider' => array(
+				array( 'P16', 'P5', 'P4', 'P8' ),
+				"* P8 \n"
+				. "* P5",
+				array( 'P8', 'P5', 'P16', 'P4')
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider orderPropertiesProvider
+	 */
+	public function testOrderProperties( $propertyIds, $WikipageText, $expected ) {
+		$this->makeWikiPage( 'MediaWiki:Wikibase-SortedProperties', $WikipageText );
+		$propertyOrderProvider = new WikiPagePropertyOrderProvider( Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' ) );
+		
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->setPropertyOrderProvider( $propertyOrderProvider );
+		$orderedProperties = $luaWikibaseLibrary->orderProperties( $propertyIds );
+		$this->assertEquals( $expected, $orderedProperties );
+	}
+
 	/**
 	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
 	 *
