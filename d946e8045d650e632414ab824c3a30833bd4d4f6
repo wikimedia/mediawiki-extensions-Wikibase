@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_6576ff3a",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "PropertyOrderProvider|null",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_85f6b3c0",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "eehh...",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c5b38be6",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "a bit easier to read:\n\n  if ( isset( $propertyOrderProvider[$propertyId] ) ) { ... }\n\nNote: \"isset\" is not a function, it\u0027s a language construct, like instanceof. $propertyOrderProvider[$propertyId] is never evaluated, just checked.",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_259b6769",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "good idea!",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0597433f",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "$unorderedProperties[] \u003d $propertyId;  \u003c--- easier to read then array_push",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_25952743",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "Please say something about they key. It\u0027s not possible to understand the intent here.",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0588e322",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "we need two getters: one for the order, and one for the provider.\n\ngetPropertyOrder() just does:\n\n  return getPropertyOrderProvider()-\u003egetPropertyOrder().\n\nthis should eb accessible through Lua.\n\ngetPropertyOrderProvider() goes something like this:\n\n  if ( !$this-\u003epropertyOrderProvider ) {\n    $wikibaseClient \u003d WikibaseClient::getDefaultInstance();\n    $this-\u003epropertyOrderProvider \u003d $wikibaseClient-\u003egetPropertyOrderProvider();\n  }\n  return $this-\u003epropertyOrderProvider;\n\nThat\u0027s called \"lazy initialization\" (though doing it from global state is a bit icky).\n\ngetPropertyOrderProvider should *not* be accessible via lua.",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_257c071b",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "this isn\u0027t used.... see above.",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_a5c2d75a",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "This should return the order (as an array), not the provider object!",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_05baa3da",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "o_O",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_25cec786",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T18:37:40Z",
+      "side": 1,
+      "message": "No test for getPropertyOrder?",
+      "revId": "d946e8045d650e632414ab824c3a30833bd4d4f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
