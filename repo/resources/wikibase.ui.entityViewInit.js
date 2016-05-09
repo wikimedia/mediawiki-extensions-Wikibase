@@ -45,16 +45,7 @@
 	function getUserTermsLanguages() {
 		var userLanguages = mw.config.get( 'wbUserTermsLanguages' ),
 			isUlsDefined = mw.uls && $.uls && $.uls.data,
-			languages = userLanguages ? userLanguages.slice() : [],
-			userLanguage = mw.config.get( 'wgUserLanguage' ),
-			userLanguageIndex = languages.indexOf( userLanguage );
-
-		if ( userLanguageIndex !== 0 ) {
-			if ( userLanguageIndex > 0 ) {
-				languages = languages.splice( userLanguageIndex, 1 );
-			}
-			languages.unshift( userLanguage );
-		}
+			languages = userLanguages ? userLanguages.slice() : [];
 
 		if ( userLanguages.length < 4 && isUlsDefined ) {
 			languages = languages.concat( mw.uls.getFrequentLanguageList().slice( 1, 4 - userLanguages.length ) );
