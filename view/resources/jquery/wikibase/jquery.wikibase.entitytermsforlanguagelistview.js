@@ -15,7 +15,7 @@
  *
  * @option {Fingerprint} value
  *
- * @option {string[]} userLanguages
+ * @option {string[]} userTermsLanguages
  *         A list of languages for which terms should be displayed initially.
  *
  * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
@@ -55,7 +55,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			$listview: '.wikibase-entitytermsforlanguagelistview-listview'
 		},
 		value: null,
-		userLanguages: [],
+		userTermsLanguages: [],
 		entityChangersFactory: null
 	},
 
@@ -84,7 +84,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 */
 	_create: function() {
 		if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
-			|| !$.isArray( this.options.userLanguages )
+			|| !$.isArray( this.options.userTermsLanguages )
 			|| !this.options.entityChangersFactory
 		) {
 			throw new Error( 'Required option(s) missing' );
@@ -131,7 +131,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 
 		// Scrape languages from static HTML:
 		var mismatchAt = null,
-			userLanguages = this.options.userLanguages;
+			userTermsLanguages = this.options.userTermsLanguages;
 		$entitytermsforlanguageview.each( function( i ) {
 			var lang = null;
 			$.each( $( this ).attr( 'class' ).split( ' ' ), function() {
@@ -140,7 +140,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 					return false;
 				}
 			} );
-			if ( lang !== userLanguages[i] ) {
+			if ( lang !== userTermsLanguages[i] ) {
 				mismatchAt = i;
 				return false;
 			}
@@ -197,7 +197,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 					};
 				}
 			} ),
-			value: $.map( this.options.userLanguages, function( lang ) {
+			value: $.map( this.options.userTermsLanguages, function( lang ) {
 				return self._getValueForLanguage( lang );
 			} ),
 			listItemNodeName: 'TR'
@@ -236,7 +236,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 */
 	_hasMoreLanguages: function() {
 		var fingerprint = this.options.value,
-			minLength = this.options.userLanguages.length;
+			minLength = this.options.userTermsLanguages.length;
 
 		if ( fingerprint.getLabels().length > minLength
 			|| fingerprint.getDescriptions().length > minLength
@@ -342,7 +342,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			languages[lang] = lang;
 		} );
 
-		$.each( this.options.userLanguages, function() {
+		$.each( this.options.userTermsLanguages, function() {
 			delete languages[this];
 		} );
 

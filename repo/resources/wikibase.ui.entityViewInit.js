@@ -40,22 +40,25 @@
 	}
 
 	/**
-	 * @return {string[]} An ordered list of languages the user wants to use, the first being her
-	 *                    preferred language, and thus the UI language (currently wgUserLanguage).
+	 * @return {string[]} An ordered list of languages the user wants to use for terms.
 	 */
-	function getUserLanguages() {
-		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
+	function getUserTermsLanguages() {
+		var userLanguages = mw.config.get( 'wbUserTermsLanguages' ),
 			isUlsDefined = mw.uls && $.uls && $.uls.data,
-			languages;
+			languages = userLanguages ? userLanguages.slice() : [],
+			userLanguage = mw.config.get( 'wgUserLanguage' ),
+			userLanguageIndex = languages.indexOf( userLanguage );
 
-		if ( !userLanguages.length && isUlsDefined ) {
-			languages = mw.uls.getFrequentLanguageList().slice( 1, 4 );
-		} else {
-			languages = userLanguages.slice();
-			languages.splice( $.inArray( mw.config.get( 'wgUserLanguage' ), userLanguages ), 1 );
+		if ( userLanguageIndex !== 0 ) {
+			if ( userLanguageIndex > 0 ) {
+				languages = languages.splice( userLanguageIndex, 1 );
+			}
+			languages.unshift( userLanguage );
 		}
 
-		languages.unshift( mw.config.get( 'wgUserLanguage' ) );
+		if ( userLanguages.length < 4 && isUlsDefined ) {
+			languages = languages.concat( mw.uls.getFrequentLanguageList().slice( 1, 4 - userLanguages.length ) );
+		}
 
 		return languages;
 	}
@@ -89,8 +92,9 @@
 			repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php',
 			mwApi = wb.api.getLocationAgnosticMwApi( repoApiUrl ),
 			repoApi = new wb.api.RepoApi( mwApi ),
-			userLanguages = getUserLanguages(),
-			entityStore = buildEntityStore( repoApi, userLanguages[0] ),
+			userLanguage = mw.config.get( 'wgUserLanguage' ),
+			userTermsLanguages = getUserTermsLanguages(),
+			entityStore = buildEntityStore( repoApi, userLanguage ),
 			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
 			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
 				repoApi,
@@ -103,12 +107,12 @@
 					repoApi,
 					dataTypeStore
 				),
-				userLanguages[0]
+				userLanguage
 			),
 			parserStore = getParserStore( repoApi ),
 			htmlDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/html' ),
 			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
-			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
+			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguage } ),
 			viewFactory = new wikibase.view.ViewFactory(
 				contentLanguages,
 				dataTypeStore,
@@ -128,7 +132,8 @@
 					}
 				},
 				parserStore,
-				userLanguages,
+				userTermsLanguages,
+				userLanguage,
 				repoApiUrl
 			);
 

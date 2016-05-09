@@ -35,9 +35,8 @@
 	 *        Required by the `ValueView` for showing the user interface in the correct language.
 	 * @param {valueParsers.ValueParserStore} parserStore
 	 *        Required by the `ValueView` for parsing entered values.
-	 * @param {string[]} userLanguages An array of language codes, the first being the UI language
-	 *        Required for showing the user interface in the correct language and for showing terms
-	 *        in all languages requested by the user.
+	 * @param {string[]} userTermsLanguages A sorted list of language codes for terms
+	 * @param {string} userLanguage The UI language code
 	 * @param {string|null} [vocabularyLookupApiUrl=null]
 	 */
 	var SELF = MODULE.ViewFactory = function ViewFactory(
@@ -51,7 +50,8 @@
 		formatterFactory,
 		messageProvider,
 		parserStore,
-		userLanguages,
+		userTermsLanguages,
+		userLanguage,
 		vocabularyLookupApiUrl
 	) {
 		this._contentLanguages = contentLanguages;
@@ -64,8 +64,9 @@
 		this._formatterFactory = formatterFactory;
 		this._messageProvider = messageProvider;
 		this._parserStore = parserStore;
-		// Maybe make userLanguages an argument to getEntityView instead of to the constructor
-		this._userLanguages = userLanguages;
+		this._userTermsLanguages = userTermsLanguages;
+		// FIXME: Get rid of this
+		this._userLanguage = userLanguage;
 		this._vocabularyLookupApiUrl = vocabularyLookupApiUrl || null;
 	};
 
@@ -133,7 +134,13 @@
 	 * @property {string[]}
 	 * @private
 	 **/
-	SELF.prototype._userLanguages = null;
+	SELF.prototype._userTermsLanguages = null;
+
+	/**
+	 * @property {string}
+	 * @private
+	 **/
+	SELF.prototype._userLanguage = null;
 
 	/**
 	 * @property {string|null}
@@ -176,7 +183,7 @@
 			$entitytermsview,
 			{
 				value: fingerprint,
-				userLanguages: this._userLanguages,
+				userTermsLanguages: this._userTermsLanguages,
 				entityChangersFactory: this._entityChangersFactory,
 				helpMessage: this._messageProvider.getMessage( 'wikibase-entitytermsview-input-help-message' )
 			}
@@ -446,7 +453,7 @@
 			this._expertStore,
 			this._formatterFactory,
 			this._parserStore,
-			this._userLanguages && this._userLanguages[0],
+			this._userLanguage,
 			this._messageProvider,
 			this._contentLanguages,
 			this._vocabularyLookupApiUrl
