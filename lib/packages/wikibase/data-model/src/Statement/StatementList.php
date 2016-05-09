@@ -26,6 +26,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 class StatementList implements IteratorAggregate, Comparable, Countable {
 
@@ -74,8 +75,23 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 		return $propertyIds;
 	}
 
-	public function addStatement( Statement $statement ) {
-		$this->statements[] = $statement;
+	/**
+	 * @since 1.0, setting an index is supported since 6.1
+	 * @see ReferenceList::addReference
+	 *
+	 * @param Statement $statement
+	 * @param int|null $index New position of the added statement, or null to append.
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	public function addStatement( Statement $statement, $index = null ) {
+		if ( $index === null ) {
+			$this->statements[] = $statement;
+		} elseif ( is_int( $index ) && $index >= 0 ) {
+			array_splice( $this->statements, $index, 0, array( $statement ) );
+		} else {
+			throw new InvalidArgumentException( '$index must be a non-negative integer or null' );
+		}
 	}
 
 	/**
@@ -91,7 +107,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 		$statement = new Statement( $mainSnak, $qualifiers, $references );
 		$statement->setGuid( $guid );
 
-		$this->addStatement( $statement );
+		$this->statements[] = $statement;
 	}
 
 	/**
@@ -139,7 +155,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 		foreach ( $this->statements as $statement ) {
 			if ( $statement->getPropertyId()->equals( $id ) ) {
-				$statementList->addStatement( $statement );
+				$statementList->statements[] = $statement;
 			}
 		}
 
@@ -159,7 +175,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 		foreach ( $this->statements as $statement ) {
 			if ( array_key_exists( $statement->getRank(), $acceptableRanks ) ) {
-				$statementList->addStatement( $statement );
+				$statementList->statements[] = $statement;
 			}
 		}
 
@@ -318,7 +334,7 @@ class StatementList implements IteratorAggregate, Comparable, Countable {
 
 		foreach ( $this->statements as $statement ) {
 			if ( $filter->statementMatches( $statement ) ) {
-				$statementList->addStatement( $statement );
+				$statementList->statements[] = $statement;
 			}
 		}
 
