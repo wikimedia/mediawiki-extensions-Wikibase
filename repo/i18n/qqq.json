@@ -116,7 +116,6 @@
 	"wikibase-disambiguation-title": "Disambiguation page title. Parameters:\n* $1 - the label of the item being disambiguated",
 	"wb-special-newitem-new-item-notification": "Message displayed when a new item was created on [[d:Special:NewItem]] and the user has been redirected to the new items page.\n\nParameters:\n* $1 - the new items id\n* $2 - a link back to the special page with \"special-newitem\" as label",
 	"wikibase-aliases-input-help-message": "Bubble help message for entering the aliases of the data set used for a specific item.\n\nParameters:\n* $1 - (Unused) language name\n{{Related|Wikibase-input-help-message}}",
-	"wikibase-aliases-empty": "Placeholder message when no aliases for this data set representing a specific item have been defined.",
 	"wikibase-propertypage-datatype": "Heading used on a page displaying a [[d:Wikidata:Glossary#Property|Property]] for the [[d:Wikidata:Glossary#Datatypes|data type]] applied to a property.\n\nThe section below the heading contains a data type label. (See [[d:Special:ListDatatypes|List of all data types available]].)\n{{Identical|Data type}}",
 	"wikibase-propertypage-bad-datatype": "Error message shown on the property page when the property has an unknown data type.\n* $1 the ID of the unknown data type.",
 	"wikibase-property-footer": "Text displayed at the bottom of every property page.",

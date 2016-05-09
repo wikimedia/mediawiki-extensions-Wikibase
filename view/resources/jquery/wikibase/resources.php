@@ -172,7 +172,6 @@ return call_user_func( function() {
 				'wikibase-entitytermsview-entitytermsforlanguagelistview-toggler',
 				'wikibase-description-empty',
 				'wikibase-label-empty',
-				'wikibase-aliases-empty',
 			),
 		),
 
