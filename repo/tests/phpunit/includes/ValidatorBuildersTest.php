@@ -11,6 +11,7 @@ use DataValues\StringValue;
 use DataValues\TimeValue;
 use PHPUnit_Framework_TestCase;
 use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -311,8 +312,13 @@ class ValidatorBuildersTest extends PHPUnit_Framework_TestCase {
 		$this->assertValidation( $expected, $validators, $value, $message );
 	}
 
+	/**
+	 * @param bool $expected
+	 * @param ValueValidator[] $validators
+	 * @param mixed $value
+	 * @param string $message
+	 */
 	protected function assertValidation( $expected, array $validators, $value, $message ) {
-
 		$result = Result::newSuccess();
 		foreach ( $validators as $validator ) {
 			$result = $validator->validate( $value );

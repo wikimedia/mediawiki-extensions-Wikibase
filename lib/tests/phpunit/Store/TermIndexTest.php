@@ -673,6 +673,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$termIndex->saveTermsOfEntity( $entity );
 		}
 
+		// FIXME: This tests the LabelConflictFinder interface!
 		$matches = $termIndex->getLabelWithDescriptionConflicts( $entityType, $labels, $descriptions );
 		$actual = $this->getEntityIdStrings( $matches );
 

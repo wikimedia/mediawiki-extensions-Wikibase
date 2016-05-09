@@ -12,7 +12,6 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 
 /**

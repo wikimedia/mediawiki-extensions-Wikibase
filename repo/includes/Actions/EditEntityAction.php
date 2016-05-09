@@ -27,7 +27,6 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\DifferencesSnakVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * Handles the edit action for Wikibase entities.

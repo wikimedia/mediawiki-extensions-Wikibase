@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 
 /**
- * A dedicated formatter for concept URIs refering to entities on a vocabulary repository.
+ * A dedicated formatter for concept URIs referring to entities on a vocabulary repository.
  *
  * @since 0.5
  *

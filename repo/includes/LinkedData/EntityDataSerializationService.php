@@ -9,7 +9,6 @@ use DerivativeContext;
 use DerivativeRequest;
 use MWException;
 use RequestContext;
-use Serializers\Serializer;
 use SiteList;
 use SiteStore;
 use Wikibase\DataModel\Entity\EntityId;
@@ -60,11 +59,6 @@ class EntityDataSerializationService {
 	 * @var SerializerFactory
 	 */
 	private $serializerFactory;
-
-	/**
-	 * @var Serializer
-	 */
-	private $entitySerializer;
 
 	/**
 	 * @var PropertyDataTypeLookup
