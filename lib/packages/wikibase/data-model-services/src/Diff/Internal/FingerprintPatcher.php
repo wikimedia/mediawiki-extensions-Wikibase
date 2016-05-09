@@ -4,12 +4,10 @@ namespace Wikibase\DataModel\Services\Diff\Internal;
 
 use Diff\Patcher\PatcherException;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\TermListPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
- * TODO: Class should be public.
- * TODO: Should this support actual edit conflict detection?
- *
  * Package private.
  *
  * @since 1.0

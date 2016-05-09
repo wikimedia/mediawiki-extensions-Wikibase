@@ -1,19 +1,19 @@
 <?php
 
-namespace Wikibase\DataModel\Services\Tests\Diff\Internal;
+namespace Wikibase\DataModel\Services\Tests\Diff;
 
 use DataValues\StringValue;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Services\Diff\Internal\StatementListDiffer;
+use Wikibase\DataModel\Services\Diff\StatementListDiffer;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\Internal\StatementListDiffer
+ * @covers Wikibase\DataModel\Services\Diff\StatementListDiffer
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
