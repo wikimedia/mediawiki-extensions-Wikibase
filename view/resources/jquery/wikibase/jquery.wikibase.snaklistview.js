@@ -164,11 +164,11 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 */
 	_updatePropertyLabels: function() {
 		if ( this.options.singleProperty ) {
-			var views = this._listview.value();
+			var snakviews = this._listview.value();
 
-			for ( var i = 0; i < views.length; i++ ) {
+			for ( var i = 0; i < snakviews.length; i++ ) {
 				var operation = ( i === 0 ) ? 'showPropertyLabel' : 'hidePropertyLabel';
-				views[i][operation]();
+				snakviews[i][operation]();
 			}
 		}
 	},
@@ -181,7 +181,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return;
 		}
 
-		this._listview.value().forEach( function( snakview ) {
+		$.each( this._listview.value(), function( index, snakview ) {
 			snakview.startEditing();
 		} );
 
@@ -216,7 +216,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			// editing:
 			this._createListView();
 		} else {
-			this._listview.value().forEach( function( snakview ) {
+			$.each( this._listview.value(), function( index, snakview ) {
 				snakview.stopEditing( dropValue );
 
 				// After saving, the property should not be editable anymore.
@@ -281,7 +281,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 
 		var snaks = [];
 
-		this._listview.value().forEach( function( snakview ) {
+		$.each( this._listview.value(), function( index, snakview ) {
 			var snak = snakview.snak();
 			if ( snak ) {
 				snaks.push( snak );
@@ -299,7 +299,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	isValid: function() {
 		var isValid = true;
 
-		this._listview.value().forEach( function( snakview ) {
+		$.each( this._listview.value(), function( index, snakview ) {
 			isValid = snakview.isValid() && snakview.snak();
 			return isValid;
 		} );

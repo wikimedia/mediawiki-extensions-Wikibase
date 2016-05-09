@@ -103,7 +103,7 @@
 			var entityTypes = mw.config.get( 'wbEntityTypes' );
 			var modules = [];
 			var typeNames = [];
-			entityTypes.types.forEach( function( type ) {
+			$.each( entityTypes.types, function( index, type ) {
 				var deserializerFactoryFunction = entityTypes[ 'deserializer-factory-functions' ][ type ];
 				if ( deserializerFactoryFunction ) {
 					modules.push( deserializerFactoryFunction );
@@ -111,7 +111,7 @@
 				}
 			} );
 			mw.loader.using( modules, function() {
-				modules.forEach( function( module, index ) {
+				$.each( modules, function( index, module ) {
 					entityDeserializer.registerStrategy( mw.loader.require( module )(), typeNames[ index ] );
 				} );
 
