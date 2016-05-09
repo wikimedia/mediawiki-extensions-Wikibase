@@ -148,7 +148,6 @@ class TermsListViewTest extends PHPUnit_Framework_TestCase {
 				$html
 			);
 		}
-		$this->assertNotContains( '(wikibase-aliases-empty)', $html );
 
 		// List headings
 		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );

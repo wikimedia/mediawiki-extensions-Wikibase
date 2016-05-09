@@ -133,8 +133,12 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 					.children( 'ul' );
 
 				if ( isAliasesEmpty ) {
-					$ul.text( mw.msg( 'wikibase-aliases-empty' ) );
+					$ul.remove();
 				} else {
+					if ( $ul.length === 0 ) {
+						$ul = mw.wbTemplate( 'wikibase-entitytermsview-aliases', '' )
+						self.element.find( '.wikibase-entitytermsview-heading-aliases' ).append( $ul );
+					}
 					$ul.empty();
 					$.each( aliases.getTexts(), function( i, text ) {
 						$ul.append( mw.wbTemplate( 'wikibase-entitytermsview-aliases-alias', text ) );

@@ -85,7 +85,6 @@
 	"wikibase-disambiguation-title": "Disambiguation for \"$1\"",
 	"wb-special-newitem-new-item-notification": "New item $1 created and redirected to its page. Back to $2.",
 	"wikibase-aliases-input-help-message": "To make this entity easier to find, you can enter alternative names.",
-	"wikibase-aliases-empty": "No aliases defined",
 	"wikibase-propertypage-datatype": "Data type",
 	"wikibase-propertypage-bad-datatype": "Unknown data type: $1",
 	"wikibase-property-footer": "",
