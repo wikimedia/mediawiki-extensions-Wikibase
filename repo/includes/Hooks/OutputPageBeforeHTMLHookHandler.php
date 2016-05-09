@@ -253,7 +253,7 @@ class OutputPageBeforeHTMLHookHandler {
 			$labelsProvider,
 			$descriptionsProvider,
 			$aliasesProvider,
-			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
+			$termsLanguages,
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $languageCode ),

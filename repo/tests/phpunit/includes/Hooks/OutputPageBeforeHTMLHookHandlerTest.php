@@ -158,8 +158,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame( [ 'es', 'ru' ], $wbUserTermsLanguages );
 
-		// FIXME
-		// $this->assertNotContains( 'wikibase-entitytermsforlanguageview-invalid', $html );
+		$this->assertNotContains( 'wikibase-entitytermsforlanguageview-invalid', $html );
 	}
 
 	public function testGivenDeletedRevision_hookHandlerDoesNotFail() {
