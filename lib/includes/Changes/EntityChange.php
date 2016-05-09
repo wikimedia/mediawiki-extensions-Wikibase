@@ -69,12 +69,22 @@ class EntityChange extends DiffChange {
 	 */
 	public function getEntityId() {
 		if ( !$this->entityId && $this->hasField( 'object_id' ) ) {
-			// FIXME: this should be an injected EntityIdParser
+			// FIXME: this should not happen
+			wfWarn( "object_id set in EntityChange, but not entityId" );
 			$idParser = new BasicEntityIdParser();
 			$this->entityId = $idParser->parse( $this->getObjectId() );
 		}
 
 		return $this->entityId;
+	}
+
+	/**
+	 * Set the Change's entity id (as returned by getEntityId) and the object_id field
+	 * @param EntityId $entityId
+	 */
+	public function setEntityId( EntityId $entityId ) {
+		$this->entityId = $entityId;
+		$this->setField( 'object_id', $entityId->getSerialization() );
 	}
 
 	/**

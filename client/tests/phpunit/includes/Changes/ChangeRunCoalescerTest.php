@@ -128,6 +128,7 @@ class ChangeRunCoalescerTest extends \MediaWikiTestCase {
 		} else {
 			$change = new EntityChange( $values );
 		}
+		$change->setEntityId( new ItemId( $values['object_id'] ) );
 
 		$change->setDiff( $diff );
 
