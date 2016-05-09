@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_b94de477",
+        "filename": "lib/includes/store/CachingPropertyOrderProvider.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-09T07:54:31Z",
+      "side": 1,
+      "message": "I suppose this is wrong.",
+      "revId": "bd5d59ecc6172b9e75f9e89feba8508ee1cdf7a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
