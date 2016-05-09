@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_8f489261",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-09T13:30:06Z",
+      "side": 1,
+      "message": "Must be {boolean} in JavaScript.",
+      "revId": "190d742f63d8b93a8d1d3248bc412bd4e59bc0fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
