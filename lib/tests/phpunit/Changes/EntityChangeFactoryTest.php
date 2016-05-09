@@ -73,6 +73,24 @@ class EntityChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $entityId, $change->getEntityId() );
 	}
 
+	/**
+	 * @dataProvider newForEntityProvider
+	 *
+	 * @param string $action
+	 * @param EntityId $entityId
+	 * @param string $expectedClass
+	 */
+	public function testNewForChangeType( $action, $entityId, $expectedClass ) {
+		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
+		$factory = $this->getEntityChangeFactory();
+
+		$change = $factory->newForChangeType( $type, $entityId, [] );
+		$this->assertInstanceOf( $expectedClass, $change );
+		$this->assertEquals( $type, $change->getType() );
+		$this->assertEquals( $action, $change->getAction() );
+		$this->assertEquals( $entityId, $change->getEntityId() );
+	}
+
 	public function testNewFromUpdate() {
 		$itemId = new ItemId( 'Q1' );
 

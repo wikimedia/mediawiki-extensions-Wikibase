@@ -77,12 +77,26 @@ class EntityChangeFactory {
 			$instance->setField( 'info', array() );
 		}
 
-		// Note: the change type determines how the client will
+		// Note: the change type determines how newForChangeType will
 		// instantiate and handle the change
 		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
 		$instance->setField( 'type', $type );
 
 		return $instance;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param string $changeType
+	 * @param EntityId $entityId
+	 * @param array $fields additional fields to set
+	 *
+	 * @return EntityChange
+	 */
+	public function newForChangeType( $changeType, EntityId $entityId, array $fields ) {
+		$action = explode( '~', $changeType )[1];
+		return $this->newForEntity( $action, $entityId, $fields );
 	}
 
 	/**

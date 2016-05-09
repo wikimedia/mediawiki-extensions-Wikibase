@@ -20,7 +20,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ;sharedCacheDuration: The default duration of entries in the shared object cache, in seconds. Default is 3600 seconds = 1 hour.
 ;sharedCacheType: The type of cache to use for the shared object cache. Defaults to $wgMainCacheType. Use CACHE_XXX constants.
 ;useChangesTable: Whether to record changes in the database, so they can be pushed to clients. Boolean, defaults to <code>true</code>. May be set to false in situations where there are no clients to notify, to preserve space. '''Note''' that if this is true, the <code>pruneChanges.php</code> script should be run periodically to remove old changes from the database table.
-;changeHandlers: Array mapping change type IDs to handler classes. May be used by extensions to register additional change classes.
 ;disabledDataTypes: Array listing of disabled data types on a wiki. This setting is intended to be used a new Wikibase install without items yet, or to control deployment of new data types. This setting should be set the same in the client and repo settings.
 Default:
 <poem>

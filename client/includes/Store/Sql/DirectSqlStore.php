@@ -17,6 +17,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
@@ -47,6 +48,11 @@ class DirectSqlStore implements ClientStore {
 	 * @var EntityContentDataCodec
 	 */
 	private $contentCodec;
+
+	/**
+	 * @var EntityChangeFactory
+	 */
+	private $entityChangeFactory;
 
 	/**
 	 * @var EntityIdParser
@@ -144,11 +150,7 @@ class DirectSqlStore implements ClientStore {
 	private $siteId;
 
 	/**
-	 * @var string[]
-	 */
-	private $changeHandlerClasses;
-
-	/**
+	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
@@ -156,12 +158,14 @@ class DirectSqlStore implements ClientStore {
 	 * @param string $languageCode
 	 */
 	public function __construct(
+		EntityChangeFactory $entityChangeFactory,
 		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
 		$repoWiki = false,
 		$languageCode
 	) {
 		$this->contentCodec = $contentCodec;
+		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
@@ -172,7 +176,6 @@ class DirectSqlStore implements ClientStore {
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
-		$this->changeHandlerClasses = $settings->getSetting( 'changeHandlers' );
 	}
 
 	/**
@@ -457,7 +460,7 @@ class DirectSqlStore implements ClientStore {
 	 * @return EntityChangeLookup
 	 */
 	public function getEntityChangeLookup() {
-		return new EntityChangeLookup( $this->changeHandlerClasses, $this->repoWiki );
+		return new EntityChangeLookup( $this->entityChangeFactory, $this->entityIdParser, $this->repoWiki );
 	}
 
 }

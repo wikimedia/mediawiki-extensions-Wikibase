@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DirectSqlStore;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
@@ -32,11 +33,16 @@ use Wikibase\TermIndex;
 class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 	protected function newStore() {
+
+		$entityChangeFactory = $this->getMockBuilder( EntityChangeFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$idParser = new BasicEntityIdParser();
 
 		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
 
-		$store = new DirectSqlStore( $contentCodec, $idParser, wfWikiID(), 'en' );
+		$store = new DirectSqlStore( $entityChangeFactory, $contentCodec, $idParser, wfWikiID(), 'en' );
 
 		return $store;
 	}

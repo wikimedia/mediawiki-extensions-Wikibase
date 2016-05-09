@@ -467,6 +467,7 @@ final class WikibaseClient {
 			// $repoDatabase needs to be a logical database name that LBFactory understands.
 			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
 			$this->store = new DirectSqlStore(
+				$this->getEntityChangeFactory(),
 				$this->getEntityContentDataCodec(),
 				$this->getEntityIdParser(),
 				$repoDatabase,
