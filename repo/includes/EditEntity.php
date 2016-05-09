@@ -155,12 +155,13 @@ class EditEntity {
 	private $requiredPermissions = array( 'edit' );
 
 	/**
-	 * @since 0.1
+	 * @since 0.5
 	 *
 	 * @param EntityTitleLookup $titleLookup
 	 * @param EntityRevisionLookup $entityLookup
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
+	 * @param EntityDiffer $entityDiffer
 	 * @param EntityDocument $newEntity the new entity object
 	 * @param User $user the user performing the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner

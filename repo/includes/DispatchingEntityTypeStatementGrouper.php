@@ -29,12 +29,16 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 	private $guidParser;
 
 	/**
+	 * @param StatementGuidParser $statementGuidParser
 	 * @param StatementGrouper[] $statementGroupers An associative array, mapping entity types
 	 *  (typically "item" and "property") to StatementGrouper objects.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( StatementGuidParser $statementGuidParser, array $statementGroupers ) {
+	public function __construct(
+		StatementGuidParser $statementGuidParser,
+		array $statementGroupers
+	) {
 		foreach ( $statementGroupers as $key => $grouper ) {
 			if ( !is_string( $key ) || !( $grouper instanceof StatementGrouper ) ) {
 				throw new InvalidArgumentException(

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use ValueValidators\Error;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -270,7 +269,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 
 	/**
 	 * @param Result $result
-	 * @param Error[] $expectedErrors
+	 * @param UniquenessViolation[] $expectedErrors
 	 */
 	protected function assertResult( Result $result, array $expectedErrors ) {
 		$this->assertEquals( empty( $expectedErrors ), $result->isValid(), 'isValid()' );
@@ -285,6 +284,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit_Framework_TestCase 
 			$this->assertEquals( $expectedError->getParameters(), $error->getParameters(), 'Error parameters:' );
 
 			$this->assertInstanceOf( UniquenessViolation::class, $error );
+			/** @var UniquenessViolation $error */
 			$this->assertEquals( $expectedError->getConflictingEntity(), $error->getConflictingEntity() );
 		}
 	}

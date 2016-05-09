@@ -2,11 +2,9 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use DataValues\Serializers\DataValueSerializer;
 use FormatJson;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\SerializerFactory;
 
 /**
  * @since 0.5

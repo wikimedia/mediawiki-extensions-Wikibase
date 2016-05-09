@@ -4,12 +4,10 @@ namespace Wikibase\Test\Interactors;
 
 use ContentHandler;
 use HashSiteStore;
-use MediaWiki\MediaWikiServices;
 use Status;
 use TestSites;
 use Title;
 use User;
-use WatchedItem;
 use Wikibase\ChangeOp\MergeChangeOpsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;

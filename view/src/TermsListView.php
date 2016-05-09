@@ -122,8 +122,6 @@ class TermsListView {
 		$languageName = $this->languageNameLookup->getName( $languageCode );
 		$labels = $labelsProvider->getLabels();
 		$descriptions = $descriptionsProvider->getDescriptions();
-		$hasLabel = $labels->hasTermForLanguage( $languageCode );
-		$hasDescription = $descriptions->hasTermForLanguage( $languageCode );
 
 		return $this->templateFactory->render( 'wikibase-entitytermsforlanguageview',
 			'tr',

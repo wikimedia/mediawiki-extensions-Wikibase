@@ -3,13 +3,11 @@
 namespace Wikibase\View\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\DummyLocalizedTextProvider;
-use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\TextInjector;
 

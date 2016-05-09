@@ -80,7 +80,8 @@ class EntityParserOutputGeneratorFactory {
 	private $preferredPageImagesProperties;
 
 	/**
-	 * @var string[] Mapping of globe uris to string names, as recognized by GeoData.
+	 * @var string[] Mapping of globe URIs to canonical globe names, as recognized by the GeoData
+	 *  extension.
 	 */
 	private $globeUris;
 
@@ -96,7 +97,8 @@ class EntityParserOutputGeneratorFactory {
 	 * @param Serializer $entitySerializer
 	 * @param string[] $preferredGeoDataProperties
 	 * @param string[] $preferredPageImagesProperties
-	 * @param string[] $globeUris Mapping of globe uris to string names.
+	 * @param string[] $globeUris Mapping of globe URIs to canonical globe names, as recognized by
+	 *  the GeoData extension.
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
