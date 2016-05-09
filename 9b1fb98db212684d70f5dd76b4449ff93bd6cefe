@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_acbc8468",
+        "filename": "lib/includes/Changes/EntityChangeFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T12:54:27Z",
+      "side": 1,
+      "message": "An \"amorphous\" parameter like that makes me uneasy. But the signature should be the same as for newForEntity(), so ok.",
+      "revId": "9b1fb98db212684d70f5dd76b4449ff93bd6cefe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

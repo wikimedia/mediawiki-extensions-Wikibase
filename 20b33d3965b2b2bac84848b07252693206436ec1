@@ -34,6 +34,24 @@
       "revId": "20b33d3965b2b2bac84848b07252693206436ec1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8c90a0f2",
+        "filename": "docs/options.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T12:54:27Z",
+      "side": 0,
+      "message": "the idea was to make sure we keep the name consistent if we need it again later. But you are right: the name is misleading (it contains EntityChange classes, not ChangeHandler classes), and perhaps this doesn\u0027t need to be configurable at all. I guess ItemChange can just die...",
+      "parentUuid": "ae564743_7c8b3fc4",
+      "revId": "20b33d3965b2b2bac84848b07252693206436ec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
