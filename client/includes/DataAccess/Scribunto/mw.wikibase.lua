@@ -195,6 +195,19 @@ function wikibase.setupInterface()
 		return php.resolvePropertyId( propertyLabelOrId )
 	end
 
+	-- Returns a table of the given property IDs ordered
+	--
+	-- @param {table} propertyIds
+	wikibase.orderProperties = function( propertyIds )
+		checkType( 'orderProperties', 1, propertyIds, 'table' )
+		return php.orderProperties( propertyIds )
+	end
+
+	-- Returns an ordered table of serialized property IDs
+	wikibase.getPropertyOrder = function()
+		return php.getPropertyOrder()
+	end
+
 	mw = mw or {}
 	mw.wikibase = wikibase
 	package.loaded['mw.wikibase'] = wikibase
