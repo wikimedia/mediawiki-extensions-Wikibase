@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_effb0edc",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-09T13:47:02Z",
+      "side": 1,
+      "message": "I prefer the more specific variable name \"snakviews\" here.",
+      "revId": "1ffa79e8de8f8ddd439f5b306b547499a5e84aa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2fafc6df",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-09T13:47:02Z",
+      "side": 1,
+      "message": "http://caniuse.com/#search\u003dforEach",
+      "revId": "1ffa79e8de8f8ddd439f5b306b547499a5e84aa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4fe2fa2e",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-09T13:47:02Z",
+      "side": 1,
+      "message": "I prefer this in revers order, but this should not matter.",
+      "revId": "1ffa79e8de8f8ddd439f5b306b547499a5e84aa7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
