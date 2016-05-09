@@ -30,21 +30,6 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$this->tablesUsed[] = EntityUsageTable::DEFAULT_TABLE_NAME;
 	}
 
-	private function makeUsages( $n ) {
-		$usages = array();
-
-		for ( $i = 1; $i <= $n; $i++ ) {
-			$key = "Q$i";
-			$id = new ItemId( $key );
-
-			$usages["$key#L.de"] = new EntityUsage( $id, EntityUsage::LABEL_USAGE, 'de' );
-			$usages["$key#L.en"] = new EntityUsage( $id, EntityUsage::LABEL_USAGE, 'en' );
-			$usages["$key#T"] = new EntityUsage( $id, EntityUsage::TITLE_USAGE );
-		}
-
-		return $usages;
-	}
-
 	/**
 	 * @param int $pageId
 	 * @param EntityUsage[] $usages
