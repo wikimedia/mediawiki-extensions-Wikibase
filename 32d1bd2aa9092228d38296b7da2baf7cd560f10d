@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_2cd354d8",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-09T12:38:13Z",
+      "side": 1,
+      "message": "Lydia wrote in https://phabricator.wikimedia.org/T98014#2209356 that we want to remove the message. We could keep the ul and have empty space there, though. @Lydia?",
+      "parentUuid": "ae564743_2c54f455",
+      "revId": "32d1bd2aa9092228d38296b7da2baf7cd560f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_4c2b28db",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
         "patchSetId": 1
@@ -36,6 +54,24 @@
       "writtenOn": "2016-05-09T12:25:17Z",
       "side": 1,
       "message": "Missing semicolon.",
+      "revId": "32d1bd2aa9092228d38296b7da2baf7cd560f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4cd848f4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-09T12:38:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_4c2b28db",
       "revId": "32d1bd2aa9092228d38296b7da2baf7cd560f10d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
