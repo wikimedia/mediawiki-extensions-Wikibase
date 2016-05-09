@@ -277,6 +277,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'resolvePropertyId' => array( $this, 'resolvePropertyId' ),
 			'getSiteLinkPageName' => array( $this, 'getSiteLinkPageName' ),
 			'incrementExpensiveFunctionCount' => array( $this, 'incrementExpensiveFunctionCount' ),
+			'getOrderedProperties' => array( $this, 'getOrderedProperties'),
 		);
 
 		return $this->getEngine()->registerInterface(
@@ -448,6 +449,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		} catch ( PropertyLabelNotResolvedException $e ) {
 			return array( null );
 		}
+	}
+
+	public function getOrderedProperties() {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$propertyOrderProvider = $wikibaseClient->getPropertyOrderProvider();
+		return $propertyOrderProvider->getPropertyOrder();
 	}
 
 }
