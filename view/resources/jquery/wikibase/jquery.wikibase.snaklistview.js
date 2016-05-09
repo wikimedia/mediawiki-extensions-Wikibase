@@ -164,11 +164,11 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 */
 	_updatePropertyLabels: function() {
 		if ( this.options.singleProperty ) {
-			var $items = this._listview.items();
+			var views = this._listview.values();
 
-			for ( var i = 0; i < $items.length; i++ ) {
+			for ( var i = 0; i < views.length; i++ ) {
 				var operation = ( i === 0 ) ? 'showPropertyLabel' : 'hidePropertyLabel';
-				this._lia.liInstance( $items.eq( i ) )[operation]();
+				views[i][operation]();
 			}
 		}
 	},
@@ -181,10 +181,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return;
 		}
 
-		var lia = this._lia;
-
-		$.each( this._listview.items(), function( i, item ) {
-			var snakview = lia.liInstance( $( item ) );
+		this._listview.values().forEach( function( snakview ) {
 			snakview.startEditing();
 		} );
 
@@ -207,8 +204,6 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 
 		this._trigger( 'stopediting', null, [dropValue] );
 
-		var lia = this._lia;
-
 		this.element.removeClass( 'wb-error' );
 		this._detachEditModeEventHandlers();
 		this.disable();
@@ -221,10 +216,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			// editing:
 			this._createListView();
 		} else {
-			$.each( this._listview.items(), function( i, item ) {
-				var $item = $( item ),
-					snakview = lia.liInstance( $item );
-
+			this._listview.values().forEach( function( snakview ) {
 				snakview.stopEditing( dropValue );
 
 				// After saving, the property should not be editable anymore.
@@ -287,12 +279,10 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return this.option( 'value', snakList );
 		}
 
-		var lia = this._lia,
-			snaks = [];
+		var snaks = [];
 
-		this._listview.items().each( function() {
-			var snakview = lia.liInstance( $( this ) ),
-				snak = snakview.snak();
+		this._listview.values().forEach( function( snakview ) {
+			var snak = snakview.snak();
 			if ( snak ) {
 				snaks.push( snak );
 			}
@@ -307,11 +297,9 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
-		var lia = this._lia,
-			isValid = true;
+		var isValid = true;
 
-		this._listview.items().each( function() {
-			var snakview = lia.liInstance( $( this ) );
+		this._listview.values().forEach( function( snakview ) {
 			isValid = snakview.isValid() && snakview.snak();
 			return isValid;
 		} );
@@ -358,6 +346,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 */
 	destroy: function() {
 		this._listview.destroy();
+		this._listview = null;
+		this._lia = null;
 		PARENT.prototype.destroy.call( this );
 	},
 
