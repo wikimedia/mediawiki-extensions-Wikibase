@@ -28,6 +28,7 @@ use SpecialSearch;
 use StubUserLang;
 use Title;
 use User;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\Lib\AutoCommentFormatter;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
@@ -627,8 +628,10 @@ final class RepoHooks {
 				$entity = $content->getEntity();
 				$languageCode = $searchPage->getLanguage()->getCode(); // TODO: language fallback!
 
-				if ( $entity->getFingerprint()->hasDescription( $languageCode ) ) {
-					$description = $entity->getFingerprint()->getDescription( $languageCode )->getText();
+				if ( $entity instanceof DescriptionsProvider &&
+					$entity->getDescriptions()->hasTermForLanguage( $languageCode )
+				) {
+					$description = $entity->getDescriptions()->getByLanguage( $languageCode )->getText();
 					$attr = array( 'class' => 'wb-itemlink-description' );
 					$link .= wfMessage( 'colon-separator' )->text();
 					$link .= Html::element( 'span', $attr, $description );

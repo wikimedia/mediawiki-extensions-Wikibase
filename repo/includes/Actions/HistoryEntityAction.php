@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use HistoryAction;
 use MWContentSerializationException;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -80,20 +81,20 @@ class HistoryEntityAction extends HistoryAction {
 		}
 
 		$entity = $content->getEntity();
+		$idSerialization = $entity->getId()->getSerialization();
+		$labelText = null;
 
-		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labels = $entity->getFingerprint()->getLabels()->toTextArray();
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $labels );
+		if ( $entity instanceof LabelsProvider ) {
+			$labelData = $this->getLanguageFallbackChain()->extractPreferredValueOrAny(
+				$entity->getLabels()->toTextArray()
+			);
 
-		if ( $labelData ) {
-			$labelText = $labelData['value'];
-		} else {
-			$labelText = null;
+			if ( $labelData ) {
+				$labelText = $labelData['value'];
+			}
 		}
 
-		$idSerialization = $entity->getId()->getSerialization();
-
-		if ( isset( $labelText ) ) {
+		if ( $labelText !== null ) {
 			// Escaping HTML characters in order to retain original label that may contain HTML
 			// characters. This prevents having characters evaluated or stripped via
 			// OutputPage::setPageTitle:
