@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_85aa336b",
+        "filename": "lib/includes/Formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2016-05-09T18:36:25Z",
+      "side": 1,
+      "message": "Argument with default value before argument without looks weird, but I guess it serves the purpose of allowing null while still requiring a NumberLocalizer otherwise.",
+      "revId": "efca5a1d38da64755af5278abc45e0615a017c66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
