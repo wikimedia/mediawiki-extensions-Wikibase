@@ -74,14 +74,31 @@ class EntityTermsView {
 		$termBoxHtml,
 		TextInjector $textInjector
 	) {
+		$marker = $textInjector->newMarker(
+			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
+		);
+
+		return $this->templateFactory->render( 'wikibase-entitytermsview',
+			$this->getHeadingHtml( $mainLanguageCode, $descriptionsProvider, $aliasesProvider ),
+			$termBoxHtml,
+			$marker,
+			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
+		);
+	}
+
+	private function getHeadingHtml(
+		$languageCode,
+		DescriptionsProvider $descriptionsProvider,
+		AliasesProvider $aliasesProvider = null
+	) {
 		$headingPartsHtml = '';
 
 		$descriptions = $descriptionsProvider->getDescriptions();
 		$headingPartsHtml .= $this->templateFactory->render(
 			'wikibase-entitytermsview-heading-part',
 			'description',
-			$descriptions->hasTermForLanguage( $mainLanguageCode ) ? '' : 'wb-empty',
-			$this->getDescriptionHtml( $mainLanguageCode, $descriptions )
+			$descriptions->hasTermForLanguage( $languageCode ) ? '' : 'wb-empty',
+			$this->getDescriptionHtml( $languageCode, $descriptions )
 		);
 
 		if ( $aliasesProvider !== null ) {
@@ -89,20 +106,13 @@ class EntityTermsView {
 			$headingPartsHtml .= $this->templateFactory->render(
 				'wikibase-entitytermsview-heading-part',
 				'aliases',
-				$aliasGroups->hasGroupForLanguage( $mainLanguageCode ) ? '' : 'wb-empty',
-				$this->getHtmlForAliases( $mainLanguageCode, $aliasGroups )
+				$aliasGroups->hasGroupForLanguage( $languageCode ) ? '' : 'wb-empty',
+				$this->getHtmlForAliases( $languageCode, $aliasGroups )
 			);
 		}
 
-		$marker = $textInjector->newMarker(
-			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
-		);
-
-		return $this->templateFactory->render( 'wikibase-entitytermsview',
-			$headingPartsHtml,
-			$termBoxHtml,
-			$marker,
-			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
+		return $this->templateFactory->render( 'wikibase-entitytermsview-heading',
+			$headingPartsHtml
 		);
 	}
 
