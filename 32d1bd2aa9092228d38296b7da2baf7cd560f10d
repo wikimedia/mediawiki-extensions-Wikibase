@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_2c54f455",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-05-09T12:25:17Z",
+      "side": 1,
+      "message": "Are we sure we want to completely remove the alias empty message?\nThis will also lead to a jumping page when editing aliases.",
+      "range": {
+        "startLine": 136,
+        "startChar": 9,
+        "endLine": 136,
+        "endChar": 15
+      },
+      "revId": "32d1bd2aa9092228d38296b7da2baf7cd560f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4c2b28db",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-05-09T12:25:17Z",
+      "side": 1,
+      "message": "Missing semicolon.",
+      "revId": "32d1bd2aa9092228d38296b7da2baf7cd560f10d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
