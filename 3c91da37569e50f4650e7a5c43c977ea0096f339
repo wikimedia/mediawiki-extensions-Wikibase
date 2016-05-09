@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_cf928aff",
+        "filename": "lib/tests/phpunit/Store/CachingPropertyOrderProviderTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-09T15:11:47Z",
+      "side": 1,
+      "message": "This is testing an implementation detail. Better: Do the same getPropertyOrder call a 2nd time. Done. The once() makes sure the uncached provider is not queried again.",
+      "revId": "3c91da37569e50f4650e7a5c43c977ea0096f339",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
