@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_8c4ee0db",
+        "filename": "repo/includes/ParserOutput/ParserOutputEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T12:21:48Z",
+      "side": 1,
+      "message": "PlaceholderEmittingEntityTermsView for consistency",
+      "revId": "28448ff5f2e80e3a8408c7e5606e0c4f71cf18a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8c254006",
+        "filename": "repo/includes/ParserOutput/PlaceholderEmittingTermsListView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T12:21:48Z",
+      "side": 1,
+      "message": "move logic to ParserOutputWEntityTermsView",
+      "revId": "28448ff5f2e80e3a8408c7e5606e0c4f71cf18a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_6c20acf2",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/DispatchingEntityViewFactoryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T12:21:48Z",
+      "side": 1,
+      "message": "an interface would be nice",
+      "revId": "28448ff5f2e80e3a8408c7e5606e0c4f71cf18a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8c7c20e4",
+        "filename": "view/src/EntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T12:21:48Z",
+      "side": 1,
+      "message": "perhaps not in this patch",
+      "revId": "28448ff5f2e80e3a8408c7e5606e0c4f71cf18a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0c60102e",
+        "filename": "view/tests/phpunit/EntityTermsViewTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T12:21:48Z",
+      "side": 1,
+      "message": "is this actually used / tested?",
+      "revId": "28448ff5f2e80e3a8408c7e5606e0c4f71cf18a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_ec62fc35",
+        "filename": "view/tests/phpunit/EntityTermsViewTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-09T12:21:48Z",
+      "side": 1,
+      "message": "mock this?",
+      "revId": "28448ff5f2e80e3a8408c7e5606e0c4f71cf18a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
