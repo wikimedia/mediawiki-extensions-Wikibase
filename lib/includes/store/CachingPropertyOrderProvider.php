@@ -49,7 +49,7 @@ class CachingPropertyOrderProvider implements PropertyOrderProvider {
 	 * @return int[]|null
 	 */
 	public function getPropertyOrder() {
-		$cacheKey = wfMemcKey( 'ArticlePlaceholder-PropertyOrderProvider' );
+		$cacheKey = wfMemcKey( 'wikibase-PropertyOrderProvider' );
 
 		// check if the list is already in the cache
 		$propertyOrder = $this->cache->get( $cacheKey );
