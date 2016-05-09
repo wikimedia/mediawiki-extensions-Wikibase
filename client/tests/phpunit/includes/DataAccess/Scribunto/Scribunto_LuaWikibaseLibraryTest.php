@@ -7,9 +7,13 @@ use LuaSandboxFunction;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
 use ScribuntoException;
+use Title;
 use User;
+use WikiPage;
+use WikitextContent;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 
 /**
  * @covers Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary
@@ -304,6 +308,80 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 			array( null ),
 			$luaWikibaseLibrary->resolvePropertyId( 'foo' )
 		);
+	}
+
+	public function orderPropertiesProvider() {
+		return array(
+			'all IDs in the provider' => array(
+				array( 'P16', 'P5', 'P4', 'P8' ),
+				"* P8 \n"
+				. "*P16 \n"
+				. "* P4 \n"
+				. "* P5",
+				array( 'P8', 'P16', 'P4', 'P5' )
+			),
+			'part of the IDs in the provider' => array(
+				array( 'P16', 'P5', 'P4', 'P8' ),
+				"* P8 \n"
+				. "* P5",
+				array( 'P8', 'P5', 'P16', 'P4')
+			)
+		);
+	}
+
+	public function getPropertyOrderProvider() {
+		return array(
+			'all IDs in the provider' => array(
+				"* P8 \n"
+				. "*P16 \n"
+				. "* P4 \n"
+				. "* P5",
+				array( 'P8', 'P16', 'P4', 'P5' )
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider orderPropertiesProvider
+	 */
+	public function testOrderProperties( $propertyIds, $wikipageText, $expected ) {
+		$luaWikibaseLibrary = $this->setPropertyOrderProvider( $wikipageText );
+
+		$orderedProperties = $luaWikibaseLibrary->orderProperties( $propertyIds );
+		$this->assertEquals( $expected, $orderedProperties );
+	}
+
+	/**
+	 * @dataProvider getPropertyOrderProvider
+	 */
+	public function testGetPropertyOrder( $wikipageText, $expected ) {
+		$luaWikibaseLibrary = $this->setPropertyOrderProvider( $wikipageText );
+		$propertyOrder = $luaWikibaseLibrary->getPropertyOrder();
+
+		$this->assertEquals( $expected, $propertyOrder );
+	}
+
+	/**
+	 * @param string $wikipageText
+	 * @return Scribunto_LuaWikibaseLibrary $luaWikibaseLibrary
+	 */
+	private function setPropertyOrderProvider( $wikipageText ) {
+		$this->makeWikiPage( 'MediaWiki:Wikibase-SortedProperties', $wikipageText );
+		$propertyOrderProvider = new WikiPagePropertyOrderProvider( Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' ) );
+		
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->setPropertyOrderProvider( $propertyOrderProvider );
+		return $luaWikibaseLibrary;
+	}
+
+	/**
+	 * @param string $name
+	 * @param string $text
+	 */
+	private function makeWikiPage( $name, $text ) {
+		$title = Title::newFromText( $name );
+		$wikiPage = WikiPage::factory( $title );
+		$wikiPage->doEditContent( new WikitextContent( $text ), 'test' );
 	}
 
 	/**
