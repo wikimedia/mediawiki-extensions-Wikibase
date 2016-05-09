@@ -125,6 +125,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_referencesListview: null,
 
 	/**
+	 * @property {bool}
+	 * @private
+	 */
+	_ignoreReferencesListviewChanges: false,
+
+	/**
 	 * Reference to the `listview` widget managing the qualifier `snaklistview`s.
 	 * @property {jQuery.wikibase.listview|null}
 	 * @private
@@ -312,6 +318,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		$listview
 		.on( 'listviewitemadded listviewitemremoved', function( event, value, $li ) {
+			if ( self._ignoreReferencesListviewChanges ) {
+				return;
+			}
 			if ( event.target === $listview[0] ) {
 				self._drawReferencesCounter();
 			}
@@ -687,8 +696,11 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @protected
 	 */
 	_recreateReferences: function() {
+		// Normally, statementview would trigger a change event when references are removed and added
+		this._ignoreReferencesListviewChanges = true;
 		this._referencesListview.option( 'value', this.options.value
 				? this.options.value.getReferences().toArray() : [] );
+		this._ignoreReferencesListviewChanges = false;
 
 		this._drawReferencesCounter();
 	},
