@@ -289,13 +289,17 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
+		if ( !this._isInEditMode ) {
+			return true;
+		}
+
 		var isValid = true;
+
 		$.each( this.$listview.data( 'listview' ).value(), function() {
-			if ( !this.isValid() ) {
-				isValid = false;
-			}
+			isValid = this.isValid();
 			return isValid;
 		} );
+
 		return isValid;
 	},
 

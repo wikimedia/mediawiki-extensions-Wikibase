@@ -177,7 +177,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * Starts the widget's edit mode.
 	 */
 	startEditing: function() {
-		if ( this.isInEditMode() ) {
+		if ( this._isInEditMode ) {
 			return;
 		}
 
@@ -198,7 +198,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 *        before edit mode was started
 	 */
 	stopEditing: function( dropValue ) {
-		if ( !this.isInEditMode() ) {
+		if ( !this._isInEditMode ) {
 			return;
 		}
 
@@ -297,6 +297,10 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
+		if ( !this._isInEditMode ) {
+			return true;
+		}
+
 		var isValid = true;
 
 		$.each( this._listview.value(), function( index, snakview ) {
