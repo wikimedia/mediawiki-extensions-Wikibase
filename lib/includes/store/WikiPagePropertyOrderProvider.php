@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store;
 
-use Wikibase\Lib\Store\PropertyOrderProviderException;
 use WikiPage;
 use Title;
 use TextContent;
@@ -72,10 +71,8 @@ class WikiPagePropertyOrderProvider implements PropertyOrderProvider {
 	 * @return string[]
 	 */
 	private function parseList( $pageContent ) {
-		$orderedProperties = [];
-		$orderedPropertiesMatches = [];
-
 		$pageContent = preg_replace( '@<!--.*?-->@s', '', $pageContent );
+
 		preg_match_all(
 			'@^\*\s*(?:\[\[Property:)?(P\d+)@im',
 			$pageContent,
