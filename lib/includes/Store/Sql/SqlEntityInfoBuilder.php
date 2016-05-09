@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\LegacyIdInterpreter;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityInfo;
@@ -115,13 +114,14 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $idParser;
 
 	/**
+	 * @param EntityIdParser $entityIdParser
 	 * @param EntityId[] $ids
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $ids, $wiki = false ) {
+	public function __construct( EntityIdParser $entityIdParser, array $ids, $wiki = false ) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
@@ -132,7 +132,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->propertyInfoTable = 'wb_property_info';
 		$this->entityPerPageTable = 'wb_entity_per_page';
 
-		$this->idParser = new BasicEntityIdParser();
+		$this->idParser = $entityIdParser;
 
 		$this->setEntityIds( $ids );
 	}

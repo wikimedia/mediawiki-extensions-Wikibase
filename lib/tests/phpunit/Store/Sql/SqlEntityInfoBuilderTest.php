@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -136,7 +137,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	 * @return SqlEntityInfoBuilder
 	 */
 	protected function newEntityInfoBuilder( array $ids ) {
-		return new SqlEntityInfoBuilder( $ids );
+		return new SqlEntityInfoBuilder( new BasicEntityIdParser(), $ids );
 	}
 
 }

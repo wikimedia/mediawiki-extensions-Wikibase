@@ -156,12 +156,14 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
 
+		$entityIdParser = new BasicEntityIdParser();
+
 		$dataUpdaters = array(
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ReferencedEntitiesDataUpdater(
 				$entityTitleLookup,
-				new BasicEntityIdParser()
+				$entityIdParser
 			)
 		);
 
@@ -169,7 +171,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getEntityViewFactory( $createView ),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
-			new SqlEntityInfoBuilderFactory(),
+			new SqlEntityInfoBuilderFactory( $entityIdParser ),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getMock( LocalizedTextProvider::class ),

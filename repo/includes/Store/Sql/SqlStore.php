@@ -442,7 +442,7 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilderFactory
 	 */
 	private function newEntityInfoBuilderFactory() {
-		return new SqlEntityInfoBuilderFactory();
+		return new SqlEntityInfoBuilderFactory( $this->entityIdParser );
 	}
 
 	/**
