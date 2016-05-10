@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_dc899928",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-10T15:09:17Z",
+      "side": 1,
+      "message": "getPropertyOrder (on both sides)",
+      "revId": "75e796fa8487ea810d5d07058bf096e75e8a4097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_7ca7ada4",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-10T15:09:17Z",
+      "side": 1,
+      "message": "really |null?",
+      "revId": "75e796fa8487ea810d5d07058bf096e75e8a4097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_bcb4a5d0",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-10T15:09:17Z",
+      "side": 1,
+      "message": "really |null?",
+      "revId": "75e796fa8487ea810d5d07058bf096e75e8a4097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_9cb9e1c9",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 9
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-10T15:09:17Z",
+      "side": 1,
+      "message": "Lua tests would be nice",
+      "revId": "75e796fa8487ea810d5d07058bf096e75e8a4097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_5ce909a6",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-10T15:09:17Z",
+      "side": 1,
+      "message": "Name and responsibility of this patch are realyl strange. I\u0027d suggest to make a method called getPropertyOrderProvider. Leave it to the caller to do $luaWikibaseLibrary-\u003esetPropertyOrderProvider( $propertyOrderProvider );",
+      "revId": "75e796fa8487ea810d5d07058bf096e75e8a4097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
