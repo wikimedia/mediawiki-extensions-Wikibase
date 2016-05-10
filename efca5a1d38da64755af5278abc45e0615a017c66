@@ -16,6 +16,24 @@
       "revId": "efca5a1d38da64755af5278abc45e0615a017c66",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_db19a38a",
+        "filename": "lib/includes/Formatters/QuantityDetailsFormatter.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-10T09:09:26Z",
+      "side": 1,
+      "message": "Unfortunately there is no difference between nullable and optional arguments in PHP. In most cases we want the nullable feature and live with the side-effect that this makes the argument optional.",
+      "parentUuid": "ae564743_85aa336b",
+      "revId": "efca5a1d38da64755af5278abc45e0615a017c66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
