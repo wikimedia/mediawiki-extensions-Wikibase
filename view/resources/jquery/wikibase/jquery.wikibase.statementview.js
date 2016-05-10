@@ -125,7 +125,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_referencesListview: null,
 
 	/**
-	 * @property {bool}
+	 * @property {boolean}
 	 * @private
 	 */
 	_ignoreReferencesListviewChanges: false,
