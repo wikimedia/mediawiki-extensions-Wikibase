@@ -30,9 +30,19 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	private $templateFactory;
 
 	/**
+	 * @var TermsListView
+	 */
+	private $termsListView;
+
+	/**
 	 * @var TextInjector
 	 */
 	private $textInjector;
+
+	/**
+	 * @var string[]
+	 */
+	private $termsListItems;
 
 	/**
 	 * @param TemplateFactory $templateFactory
@@ -48,7 +58,10 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	) {
 		parent::__construct( $templateFactory, $sectionEditLinkGenerator, $termsListView, $textProvider );
 		$this->templateFactory = $templateFactory;
+		$this->termsListView = $termsListView;
 		$this->textInjector = $textInjector;
+
+		$this->termsListItems = [];
 	}
 
 	/**
@@ -72,12 +85,34 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
 		);
 
+		$termsListLanguages = $this->getTermsLanguageCodes(
+			$mainLanguageCode,
+			$labelsProvider,
+			$descriptionsProvider,
+			$aliasesProvider
+		);
+		foreach ( $termsListLanguages as $languageCode ) {
+			$this->termsListItems[ $languageCode ] = $this->termsListView->getListItemHtml(
+				$labelsProvider,
+				$descriptionsProvider,
+				$aliasesProvider,
+				$languageCode
+			);
+		}
+
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
 			$this->getHeadingHtml( $mainLanguageCode, $descriptionsProvider, $aliasesProvider ),
 			$this->textInjector->newMarker( 'termbox' ),
 			$cssClasses,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
 		);
+	}
+
+	/**
+	 * @return string[] HTML snippets
+	 */
+	public function getTermsListItems() {
+		return $this->termsListItems;
 	}
 
 }

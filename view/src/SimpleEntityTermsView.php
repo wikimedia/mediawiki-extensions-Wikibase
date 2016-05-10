@@ -84,7 +84,12 @@ class SimpleEntityTermsView implements EntityTermsView {
 				$labelsProvider,
 				$descriptionsProvider,
 				$aliasesProvider,
-				[ $mainLanguageCode ]
+				$this->getTermsLanguageCodes(
+					$mainLanguageCode,
+					$labelsProvider,
+					$descriptionsProvider,
+					$aliasesProvider
+				)
 			),
 			'',
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
@@ -119,6 +124,38 @@ class SimpleEntityTermsView implements EntityTermsView {
 		return $this->templateFactory->render( 'wikibase-entitytermsview-heading',
 			$headingPartsHtml
 		);
+	}
+
+	/**
+	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
+	 *  title and header section. Not necessarily identical to the interface language.
+	 * @param LabelsProvider $labelsProvider
+	 * @param DescriptionsProvider $descriptionsProvider
+	 * @param AliasesProvider|null $aliasesProvider
+	 *
+	 * @return string[]
+	 */
+	protected function getTermsLanguageCodes(
+		$mainLanguageCode,
+		LabelsProvider $labelsProvider,
+		DescriptionsProvider $descriptionsProvider,
+		AliasesProvider $aliasesProvider = null
+	) {
+		$allLanguages = [ $mainLanguageCode ];
+
+		$labelLanguages = array_keys( $labelsProvider->getLabels()->toTextArray() );
+		$allLanguages = array_merge( $allLanguages, $labelLanguages );
+
+		$descriptionLanguages = array_keys( $descriptionsProvider->getDescriptions()->toTextArray() );
+		$allLanguages = array_merge( $allLanguages, $descriptionLanguages );
+
+		if ( $aliasesProvider ) {
+			$aliasLanguages = array_keys( $aliasesProvider->getAliasGroups()->toTextArray() );
+			$allLanguages = array_merge( $allLanguages, $aliasLanguages );
+		}
+
+		$allLanguages = array_unique( $allLanguages );
+		return $allLanguages;
 	}
 
 	/**
