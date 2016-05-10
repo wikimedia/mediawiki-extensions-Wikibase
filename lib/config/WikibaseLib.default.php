@@ -17,24 +17,24 @@ use Wikibase\ItemChange;
  *
  * @license GPL-2.0+
  */
-return array(
+return [
 	// whether changes get recorded to wb_changes
 	'useChangesTable' => true,
 
-	'siteLinkGroups' => array(
+	'siteLinkGroups' => [
 		'wikipedia',
-	),
+	],
 
-	'specialSiteLinkGroups' => array(),
+	'specialSiteLinkGroups' => [],
 
 	// local by default. Set to something LBFactory understands.
 	'changesDatabase' => false,
 
 	// list of logical database names of local client wikis.
 	// may contain mappings from site-id to db-name.
-	'localClientDatabases' => array(),
+	'localClientDatabases' => [],
 
-	'changeHandlers' => array(
+	'changeHandlers' => [
 		'wikibase-item~add' => ItemChange::class,
 		'wikibase-property~add' => EntityChange::class,
 		'wikibase-query~add' => EntityChange::class,
@@ -54,7 +54,7 @@ return array(
 		'wikibase-item~restore' => ItemChange::class,
 		'wikibase-property~restore' => EntityChange::class,
 		'wikibase-query~restore' => EntityChange::class,
-	),
+	],
 
 	'maxSerializedEntitySize' => $GLOBALS['wgMaxArticleSize'],
-);
+];
