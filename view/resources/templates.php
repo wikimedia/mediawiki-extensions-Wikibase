@@ -166,11 +166,16 @@ HTML;
 	$templates['wikibase-entitytermsview'] =
 <<<HTML
 <div class="wikibase-entitytermsview">
-	<div class="wikibase-entitytermsview-heading">
-		<!-- [0,*] wikibase-entitytermsview-heading-part -->$1
-	</div>
+	<!-- wikibase-entitytermsview-heading -->$1
 	<!-- ? wikibase-toolbar -->$4
 	<div class="wikibase-entitytermsview-entitytermsforlanguagelistview $3"><!-- wikibase-entitytermsforlanguagelistview -->$2</div>
+</div>
+HTML;
+
+	$templates['wikibase-entitytermsview-heading'] =
+<<<HTML
+<div class="wikibase-entitytermsview-heading">
+	<!-- [0,*] wikibase-entitytermsview-heading-part -->$1
 </div>
 HTML;
 
