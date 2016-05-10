@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_a16e42fc",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-05-10T14:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_01b72ef3",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_a1c5a266",
         "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
         "patchSetId": 5
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_a13c82e0",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-05-10T14:03:33Z",
+      "side": 1,
+      "message": "But don\u0027t I have only one array after merging two of them?",
+      "parentUuid": "ae564743_41d48617",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_81ca1e6f",
         "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
         "patchSetId": 5
@@ -64,6 +100,24 @@
       "writtenOn": "2016-05-10T13:04:20Z",
       "side": 1,
       "message": "doc?",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_01156e4d",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-05-10T14:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_81ca1e6f",
       "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -115,6 +169,24 @@
       "writtenOn": "2016-05-10T13:04:20Z",
       "side": 1,
       "message": "as above (return an array), also you want $this-\u003epropertyOrderProvider-\u003egetPropertyOrder(), don\u0027t you?",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e1195a8a",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-05-10T14:03:33Z",
+      "side": 1,
+      "message": "Nope, I need this one to overwrite it in the test- the one actually returning the array of properties is the getPropertyOrder() :)",
+      "parentUuid": "ae564743_e1b2faf7",
       "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
