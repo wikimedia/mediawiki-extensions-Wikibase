@@ -93,21 +93,19 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {wikibase.datamodel.Claim} claim
-	 * @param {number} [index]
 	 * @return {jQuery.Promise}
 	 *         Resolved parameters:
 	 *         - {wikibase.datamodel.Claim} The saved claim
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	setClaim: function( claim, index ) {
+	setClaim: function( claim ) {
 		var self = this,
 			deferred = $.Deferred();
 
 		this._api.setClaim(
 			this._claimSerializer.serialize( claim ),
-			this._revisionStore.getClaimRevision( claim.getGuid() ),
-			index
+			this._revisionStore.getClaimRevision( claim.getGuid() )
 		)
 		.done( function( result ) {
 			var savedClaim = self._claimDeserializer.deserialize( result.claim ),
@@ -129,21 +127,19 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {wikibase.datamodel.Statement} statement
-	 * @param {number} [index]
 	 * @return {Object} jQuery.Promise
 	 *         Resolved parameters:
 	 *         - {wikibase.datamodel.Statement} The saved statement
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	setStatement: function( statement, index ) {
+	setStatement: function( statement ) {
 		var self = this,
 			deferred = $.Deferred();
 
 		this._api.setClaim(
 			this._statementSerializer.serialize( statement ),
-			this._revisionStore.getClaimRevision( statement.getClaim().getGuid() ),
-			index
+			this._revisionStore.getClaimRevision( statement.getClaim().getGuid() )
 		)
 		.done( function( result ) {
 			var savedStatement = self._statementDeserializer.deserialize( result.claim ),
