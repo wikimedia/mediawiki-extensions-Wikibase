@@ -50,11 +50,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$this->assertSame( '<TITLE>', $parserOutput->getTitleText(), 'title text' );
 		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
 
-		$this->assertSame(
-			'<PLACEHOLDERS>',
-			$parserOutput->getExtensionData( 'wikibase-view-chunks' ),
-			'view chunks'
-		);
+		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-view-chunks' ), 'view chunks' );
 
 		$this->assertArrayHasKey(
 			'en',
@@ -251,7 +247,6 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			->setMethods( array(
 				'getTitleHtml',
 				'getHtml',
-				'getPlaceholders',
 			) )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
@@ -263,10 +258,6 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$entityView->expects( $this->any() )
 			->method( 'getHtml' )
 			->will( $this->returnValue( '<HTML>' ) );
-
-		$entityView->expects( $this->any() )
-			->method( 'getPlaceholders' )
-			->will( $this->returnValue( '<PLACEHOLDERS>' ) );
 
 		return $entityView;
 	}

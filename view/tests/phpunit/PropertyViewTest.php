@@ -23,7 +23,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @uses Wikibase\View\Template\Template
  * @uses Wikibase\View\Template\TemplateFactory
  * @uses Wikibase\View\Template\TemplateRegistry
- * @uses Wikibase\View\TextInjector
  *
  * @group Wikibase
  * @group WikibaseView
@@ -78,9 +77,7 @@ class PropertyViewTest extends EntityViewTest {
 		$templateFactory = TemplateFactory::getDefaultInstance();
 		$propertyView = new PropertyView(
 			$templateFactory,
-			$this->getMockBuilder( EntityTermsView::class )
-				->disableOriginalConstructor()
-				->getMock(),
+			$this->getMock( EntityTermsView::class ),
 			$this->getMock( LanguageDirectionalityLookup::class ),
 			$this->getMockBuilder( StatementSectionsView::class )
 				->disableOriginalConstructor()

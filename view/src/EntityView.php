@@ -44,11 +44,6 @@ abstract class EntityView {
 	protected $languageCode;
 
 	/**
-	 * @var TextInjector
-	 */
-	private $textInjector;
-
-	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param EntityTermsView $entityTermsView
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
@@ -64,27 +59,11 @@ abstract class EntityView {
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 		$this->languageCode = $languageCode;
 
-		$this->textInjector = new TextInjector();
 		$this->templateFactory = $templateFactory;
 	}
 
 	/**
-	 * Returns the placeholder map build while generating HTML.
-	 * The map returned here may be used with TextInjector.
-	 *
-	 * @return array[] string -> array
-	 */
-	public function getPlaceholders() {
-		return $this->textInjector->getMarkers();
-	}
-
-	/**
 	 * Builds and returns the HTML representing a whole WikibaseEntity.
-	 *
-	 * @note: The HTML returned by this method may contain placeholders. Such placeholders can be
-	 * expanded with the help of TextInjector::inject() calling back to
-	 * EntityViewPlaceholderExpander::getHtmlForPlaceholder()
-	 * @note: In order to keep the list of placeholders small, this calls resetPlaceholders().
 	 *
 	 * @since 0.1
 	 *
@@ -163,22 +142,11 @@ abstract class EntityView {
 				$entity,
 				$entity,
 				$entity instanceof AliasesProvider ? $entity : null,
-				$id,
-				$this->getHtmlForTermBox(),
-				$this->textInjector
+				$id
 			);
 		}
 
 		return '';
-	}
-
-	/**
-	 * @return string HTML
-	 */
-	private function getHtmlForTermBox() {
-		// Placeholder for a termbox for the present item.
-		// EntityViewPlaceholderExpander must know about the parameters used here.
-		return $this->textInjector->newMarker( 'termbox' );
 	}
 
 }

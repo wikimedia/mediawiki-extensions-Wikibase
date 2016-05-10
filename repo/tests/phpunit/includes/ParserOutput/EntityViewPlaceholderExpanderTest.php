@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\View\Tests;
+namespace Wikibase\Repo\Tests\ParserOutput;
 
 use PHPUnit_Framework_TestCase;
 use User;
@@ -8,13 +8,13 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\View\EntityViewPlaceholderExpander;
+use Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
- * @covers Wikibase\View\EntityViewPlaceholderExpander
+ * @covers Wikibase\Repo\ParserOutput\EntityViewPlaceholderExpander
  *
  * @uses Wikibase\View\TermsListView
  * @uses Wikibase\View\Template\Template
@@ -22,7 +22,6 @@ use Wikibase\View\Template\TemplateFactory;
  * @uses Wikibase\View\Template\TemplateRegistry
  *
  * @group Wikibase
- * @group WikibaseView
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
