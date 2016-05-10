@@ -52,17 +52,17 @@ call_user_func( function() {
 
 	// the special group includes all the sites in the specialSiteLinkGroups,
 	// grouped together in a 'Pages linked to other sites' section.
-	$wgWBRepoSettings['siteLinkGroups'] = array(
+	$wgWBRepoSettings['siteLinkGroups'] = [
 		'wikipedia',
 		'wikinews',
 		'wikiquote',
 		'wikisource',
 		'wikivoyage',
 		'special'
-	);
+	];
 
 	// these are the site_group codes as listed in the sites table
-	$wgWBRepoSettings['specialSiteLinkGroups'] = array( 'commons', 'wikidata' );
+	$wgWBRepoSettings['specialSiteLinkGroups'] = [ 'commons', 'wikidata' ];
 } );
 
 /*

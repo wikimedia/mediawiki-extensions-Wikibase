@@ -59,35 +59,35 @@ if ( !defined( 'WB_VERSION' ) ) {
 // If the repo is on the same server, this is not necessary.
 // This does not work with database types other than mysql.
 if ( false ) {
-	$wgLBFactoryConf = array(
+	$wgLBFactoryConf = [
 		'class' => 'LBFactoryMulti',
 
 		// Connect to all databases using the same credentials.
-		'serverTemplate' => array(
+		'serverTemplate' => [
 			'dbname'      => $wgDBname,
 			'user'        => $wgDBuser,
 			'password'    => $wgDBpassword,
 			'type'        => 'mysql',
 			'flags'       => DBO_DEFAULT | DBO_DEBUG,
-		),
+		],
 
 		// Configure two sections, one for the repo and one for the client.
 		// Each section contains only one server.
-		'sectionLoads' => array(
-			'DEFAULT' => array(
+		'sectionLoads' => [
+			'DEFAULT' => [
 				'localhost' => 1,
-			),
-			'repo' => array(
+			],
+			'repo' => [
 				'local1' => 1,
-			),
-		),
+			],
+		],
 
 		// Map the wiki database names to sections. Database names must be unique,
 		// i.e. may not exist in more than one section.
-		'sectionsByDB' => array(
+		'sectionsByDB' => [
 			$wgDBname => 'DEFAULT',
 			'repowiki' => 'repo',
-		),
+		],
 
 		/**
 		 * Map host names to IP addresses to bypass DNS.
@@ -102,15 +102,15 @@ if ( false ) {
 		 * that is grant access to the wikiuser for each of them. Failure to do so will make the
 		 * MySQL server refuse access.
 		 */
-		'hostsByName' => array(
+		'hostsByName' => [
 			'localhost' => '127.0.0.1:3306',
 			'local1' => '127.0.2.1',
 			'local2' => '127.0.2.2',
 			'local3' => '127.0.2.3',
-		),
+		],
 
 		// Set up as fake master, because there are no slaves.
-		'masterTemplateOverrides' => array( 'fakeMaster' => true ),
-	);
+		'masterTemplateOverrides' => [ 'fakeMaster' => true ],
+	];
 
 }

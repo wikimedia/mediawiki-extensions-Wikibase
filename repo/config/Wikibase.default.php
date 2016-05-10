@@ -11,8 +11,8 @@
  * @license GPL-2.0+
  */
 
-return array(
-	'idBlacklist' => array(
+return [
+	'idBlacklist' => [
 		1,
 		23,
 		42,
@@ -20,23 +20,23 @@ return array(
 		9001,
 		31337,
 		720101010,
-	),
+	],
 
-	'entityNamespaces' => array(),
+	'entityNamespaces' => [],
 
 	// See StatementGrouperBuilder for an example.
-	'statementSections' => array(),
+	'statementSections' => [],
 
 	// Define constraints for multilingual terms (such as labels, descriptions and aliases).
-	'multilang-limits' => array(
+	'multilang-limits' => [
 		'length' => 250, // length constraint
-	),
+	],
 
 	// URL schemes allowed for URL values. See UrlSchemeValidators for a full list.
-	'urlSchemes' => array( 'ftp', 'http', 'https', 'irc', 'mailto' ),
+	'urlSchemes' => [ 'ftp', 'http', 'https', 'irc', 'mailto' ],
 
 	// Items allowed to be used as badges pointing to their CSS class names
-	'badgeItems' => array(),
+	'badgeItems' => [],
 
 	// Number of seconds for which data output shall be cached.
 	// Note: keep that low, because such caches cannot always be purged easily.
@@ -51,7 +51,7 @@ return array(
 	// This is a whitelist, some formats may not be supported because when missing
 	// optional dependencies (e.g. easyRdf).
 	// The formats are given using logical names as used by EntityDataSerializationService.
-	'entityDataFormats' => array(
+	'entityDataFormats' => [
 		// using the API
 		'json', // default
 		'php',
@@ -64,7 +64,7 @@ return array(
 
 		// hardcoded internal handling
 		'html',
-	),
+	],
 
 	'dataRightsUrl' => function() {
 		return $GLOBALS['wgRightsUrl'];
@@ -129,11 +129,11 @@ return array(
 	 * WARNING: Disabling a data type after it is in use is dangerous
 	 * and might break items.
 	 */
-	'disabledDataTypes' => array(),
+	'disabledDataTypes' => [],
 
 	// Special non-canonical languages and their BCP 47 mappings
 	// Based on: https://meta.wikimedia.org/wiki/Special_language_codes
-	'canonicalLanguageCodes' => array(
+	'canonicalLanguageCodes' => [
 			'simple'      => 'en-x-simple',
 			'crh'         => 'crh-Latn',
 			'cbk-zam'     => 'cbk-x-zam',
@@ -142,19 +142,19 @@ return array(
 			'roa-tara'    => 'it-x-tara',
 			'de-formal'   => 'de-x-formal',
 			'nl-informal' => 'nl-x-informal',
-	),
+	],
 
 	// List of image property id strings, in order of preference, that should be considered for
 	// the "page_image" page property.
-	'preferredPageImagesProperties' => array(),
+	'preferredPageImagesProperties' => [],
 
 	// List of globe-coordinate property id strings, in order of preference, to consider for
 	// primary coordinates when extracting coordinates from an entity for the GeoData extension.
-	'preferredGeoDataProperties' => array(),
+	'preferredGeoDataProperties' => [],
 
 	// Mapping of globe URIs to canonical names, as recognized and used by GeoData extension
 	// when indexing and querying for coordinates.
-	'globeUris' => array(
+	'globeUris' => [
 		'http://www.wikidata.org/entity/Q2' => 'earth',
 		'http://www.wikidata.org/entity/Q308' => 'mercury',
 		'http://www.wikidata.org/entity/Q313' => 'venus',
@@ -182,5 +182,5 @@ return array(
 		'http://www.wikidata.org/entity/Q3332' => 'oberon',
 		'http://www.wikidata.org/entity/Q3359' => 'triton',
 		'http://www.wikidata.org/entity/Q339' => 'pluto'
-	),
-);
+	],
+];
