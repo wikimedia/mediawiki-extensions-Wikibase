@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_249a3b17",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T23:18:39Z",
+      "side": 1,
+      "message": "… \u003d $this-\u003egetPropertyOrderProvider()-\u003egetPropertyOrder()",
+      "revId": "4589ff8f63875b81cabe96d2ac97e29e79e73887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_44abef19",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T23:18:39Z",
+      "side": 1,
+      "message": "string[] (property id serializations) and null[] (this can never not return an array).",
+      "revId": "4589ff8f63875b81cabe96d2ac97e29e79e73887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c4bfff5a",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T23:18:39Z",
+      "side": 1,
+      "message": "Should also have keys starting at one, shouldn\u0027t it.",
+      "revId": "4589ff8f63875b81cabe96d2ac97e29e79e73887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_a483eb9a",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.lua",
+        "patchSetId": 14
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T23:18:39Z",
+      "side": 1,
+      "message": "Should be \"Returns an ordered table of serialized property ids\" or something along these lines. Needs to make clear that we don\u0027t have some serialization of a list of ids.",
+      "revId": "4589ff8f63875b81cabe96d2ac97e29e79e73887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_a45acb50",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T23:18:39Z",
+      "side": 1,
+      "message": "not true",
+      "revId": "4589ff8f63875b81cabe96d2ac97e29e79e73887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8457c728",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T23:18:39Z",
+      "side": 1,
+      "message": "It would be *way* faster to just use a Mock here that returns the given list. There\u0027s no need to return or test a real one.",
+      "revId": "4589ff8f63875b81cabe96d2ac97e29e79e73887",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
