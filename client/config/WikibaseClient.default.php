@@ -18,11 +18,11 @@ use Wikibase\SettingsArray;
 return call_user_func( function() {
 	global $wgLanguageCode;
 
-	$defaults = array(
-		'namespaces' => array(), // by default, include all namespaces; deprecated as of 0.4
-		'excludeNamespaces' => array(),
+	$defaults = [
+		'namespaces' => [], // by default, include all namespaces; deprecated as of 0.4
+		'excludeNamespaces' => [],
 		'sort' => 'code',
-		'sortPrepend' => array(),
+		'sortPrepend' => [],
 		'alwaysSort' => false,
 		// @todo would be great to just get this from the sites stuff
 		// but we will need to make sure the caching works good enough
@@ -31,17 +31,17 @@ return call_user_func( function() {
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
 		// default for repo items in main namespace
-		'repoNamespaces' => array(
+		'repoNamespaces' => [
 			'wikibase-item' => '',
 			'wikibase-property' => 'Property'
-		),
+		],
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinksByDefault' => false,
 		'otherProjectsLinksBeta' => false,
 		// List of additional CSS class names for site links that have badges,
 		// e.g. array( 'Q101' => 'badge-goodarticle' )
-		'badgeClassNames' => array(),
+		'badgeClassNames' => [],
 		// Allow accessing data from other items in the parser functions and via Lua
 		'allowArbitraryDataAccess' => true,
 		// Maximum number of full entities that can be accessed on a page. This does
@@ -86,7 +86,7 @@ return call_user_func( function() {
 		 * WARNING: Disabling a data type after it is in use is dangerous
 		 * and might break items.
 		 */
-		'disabledDataTypes' => array(),
+		'disabledDataTypes' => [],
 
 		// The type of object cache to use. Use CACHE_XXX constants.
 		// This is both a repo and client setting, and should be set to the same value in
@@ -102,8 +102,8 @@ return call_user_func( function() {
 		 * http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename-firstword (revised)
 		 * and from pywikipedia for alphabetic_sr
 		 */
-		'interwikiSortOrders' => array(
-			'alphabetic' => array(
+		'interwikiSortOrders' => [
+			'alphabetic' => [
 				'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
 				'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'azb', 'bm', 'bn', 'bjn',
 				'zh-min-nan', 'nan', 'map-bms', 'ba', 'be', 'be-x-old', 'bh', 'bcl', 'bi',
@@ -130,8 +130,8 @@ return call_user_func( function() {
 				'uk', 'ur', 'ug', 'za', 'vec', 'vep', 'vi', 'vo', 'fiu-vro', 'wa', 'zh-classical',
 				'vls', 'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea', 'bat-smg',
 				'zh', 'zh-tw', 'zh-cn'
-			),
-			'alphabetic_revised' => array(
+			],
+			'alphabetic_revised' => [
 				'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc', 'roa-rup',
 				'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'azb', 'bjn', 'id', 'ms', 'bm', 'bn',
 				'zh-min-nan', 'nan', 'map-bms', 'jv', 'su', 'ba', 'min', 'be', 'be-x-old', 'bh',
@@ -157,8 +157,8 @@ return call_user_func( function() {
 				'uk', 'ur', 'ug', 'za', 'vec', 'vep', 'vo', 'fiu-vro', 'wa', 'zh-classical', 'vls',
 				'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea', 'bat-smg', 'zh',
 				'zh-tw', 'zh-cn'
-			),
-			'alphabetic_sr' => array(
+			],
+			'alphabetic_sr' => [
 				'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
 				'roa-rup', 'frp', 'arz', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'azb', 'bjn', 'id',
 				'ms', 'bg', 'bm', 'zh-min-nan', 'nan', 'map-bms', 'jv', 'su', 'ba', 'be',
@@ -185,8 +185,8 @@ return call_user_func( function() {
 				'tpi', 'chy', 've', 'tr', 'tk', 'tw', 'udm', 'uk', 'ur', 'ug', 'za', 'vec',
 				'vep', 'vo', 'fiu-vro', 'wa', 'vls', 'war', 'wo', 'wuu', 'ts', 'xmf', 'yi',
 				'yo', 'diq', 'zea', 'zh', 'zh-tw', 'zh-cn', 'zh-classical', 'zh-yue', 'bat-smg'
-			),
-			'alphabetic_fy' => array(
+			],
+			'alphabetic_fy' => [
 				'aa', 'ab', 'ace', 'af', 'ay', 'ak', 'als', 'am', 'an', 'ang', 'ar', 'arc',
 				'arz', 'as', 'ast', 'av', 'az', 'azb', 'ba', 'bar', 'bat-smg', 'bcl', 'be', 'be-x-old',
 				'bg', 'bh', 'bi', 'bjn', 'bm', 'bn', 'bo', 'bpy', 'br', 'bs', 'bug', 'bxr',
@@ -212,9 +212,9 @@ return call_user_func( function() {
 				'uz', 've', 'vec', 'vep', 'vi', 'vls', 'vo', 'wa', 'war', 'wo', 'wuu', 'xal',
 				'xh', 'xmf', 'za', 'zea', 'zh', 'zh-classical', 'zh-cn', 'zh-yue', 'zh-min-nan',
 				'zh-tw', 'zu'
-			),
-		),
-	);
+			],
+		],
+	];
 
 	// Some defaults depend on information not available at this time.
 	// Especially, if the repository may be active on the local wiki, and
