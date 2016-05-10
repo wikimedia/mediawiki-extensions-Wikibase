@@ -30,6 +30,11 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	private $templateFactory;
 
 	/**
+	 * @var TermsListView
+	 */
+	private $termsListView;
+
+	/**
 	 * @var TextInjector
 	 */
 	private $textInjector;
@@ -48,6 +53,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	) {
 		parent::__construct( $templateFactory, $sectionEditLinkGenerator, $termsListView, $textProvider );
 		$this->templateFactory = $templateFactory;
+		$this->termsListView = $termsListView;
 		$this->textInjector = $textInjector;
 	}
 
@@ -78,6 +84,41 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 			$cssClasses,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
 		);
+	}
+
+	/**
+	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
+	 *  title and header section. Not necessarily identical to the interface language.
+	 * @param LabelsProvider $labelsProvider
+	 * @param DescriptionsProvider $descriptionsProvider
+	 * @param AliasesProvider|null $aliasesProvider
+	 *
+	 * @return string[] HTML snippets
+	 */
+	public function getTermsListItems(
+		$mainLanguageCode,
+		LabelsProvider $labelsProvider,
+		DescriptionsProvider $descriptionsProvider,
+		AliasesProvider $aliasesProvider = null
+	) {
+		$termsListItems = [];
+
+		$termsListLanguages = $this->getTermsLanguageCodes(
+			$mainLanguageCode,
+			$labelsProvider,
+			$descriptionsProvider,
+			$aliasesProvider
+		);
+		foreach ( $termsListLanguages as $languageCode ) {
+			$termsListItems[ $languageCode ] = $this->termsListView->getListItemHtml(
+				$labelsProvider,
+				$descriptionsProvider,
+				$aliasesProvider,
+				$languageCode
+			);
+		}
+
+		return $termsListItems;
 	}
 
 }
