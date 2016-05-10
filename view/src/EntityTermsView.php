@@ -164,19 +164,20 @@ class EntityTermsView {
 	 * @return string HTML
 	 */
 	private function getHtmlForAliases( $languageCode, AliasGroupList $aliasGroups ) {
-		if ( $aliasGroups->hasGroupForLanguage( $languageCode ) ) {
-			$aliasesHtml = '';
-			$aliases = $aliasGroups->getByLanguage( $languageCode )->getAliases();
-			foreach ( $aliases as $alias ) {
-				$aliasesHtml .= $this->templateFactory->render(
-					'wikibase-entitytermsview-aliases-alias',
-					htmlspecialchars( $alias )
-				);
-			}
-		} else {
-			$aliasesHtml = htmlspecialchars( $this->textProvider->get( 'wikibase-aliases-empty' ) );
+		if ( !$aliasGroups->hasGroupForLanguage( $languageCode ) ) {
+			return '';
 		}
-		return $this->templateFactory->render( 'wikibase-entitytermsview-aliases', $aliasesHtml );
+
+		$aliasesHtml = '';
+		$aliases = $aliasGroups->getByLanguage( $languageCode )->getAliases();
+		foreach ( $aliases as $alias ) {
+			$aliasesHtml .= $this->templateFactory->render(
+				'wikibase-entitytermsview-aliases-alias',
+				htmlspecialchars( $alias )
+			);
+		}
+		$aliasesHtml = $this->templateFactory->render( 'wikibase-entitytermsview-aliases', $aliasesHtml );
+		return $aliasesHtml;
 	}
 
 	/**
