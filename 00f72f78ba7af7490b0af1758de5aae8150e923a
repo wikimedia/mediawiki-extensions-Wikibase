@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_01b72ef3",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "int[]?",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_a1c5a266",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "trailing WS",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_41d48617",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "return array( $orderProperties ); You want to return *one* array/ list.",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_81ca1e6f",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "doc?",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_21d19226",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "trailing WS",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_61c70a68",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e1b2faf7",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "as above (return an array), also you want $this-\u003epropertyOrderProvider-\u003egetPropertyOrder(), don\u0027t you?",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c18ed632",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "long line",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_619eea67",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-10T13:04:20Z",
+      "side": 1,
+      "message": "trailing WS",
+      "revId": "00f72f78ba7af7490b0af1758de5aae8150e923a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
