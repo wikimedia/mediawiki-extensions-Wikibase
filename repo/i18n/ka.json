@@ -61,7 +61,6 @@
 	"wikibase-undo-firstrev": "გვერდის შექმნის გაუქმება შეუძლებელია",
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|ერთი მნიშვნელობა|$1 მნიშვნელობა}} ჯერ არ შენახულა",
 	"wikibase-disambiguation-title": "„$1“ მრავალმნიშვნელობა",
-	"wikibase-aliases-empty": "ფსევდონიმები არ არის გარკვეული.",
 	"wikibase-propertypage-datatype": "მონაცემის ტიპი",
 	"wikibase-statementview-rank-normal": "ნორმალური რანგი",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|სქოლიო|სქოლიო}}",

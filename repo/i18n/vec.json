@@ -52,7 +52,6 @@
 	"wikibase-disambiguation-title": "Disanbigua par \"$1\"",
 	"wb-special-newitem-new-item-notification": "L'elemento novo $1 el xe stà creà e el rimanda a la so pagina. Torna a $2.",
 	"wikibase-aliases-input-help-message": "Se sto insieme de dati el xe conosesto con pi de un nome, te pol inserir alias e sinonimi, in modo che se possa catarlo anca tramite i so nomi alternativi.",
-	"wikibase-aliases-empty": "Nissun alias definìo.",
 	"wikibase-propertypage-datatype": "Tipo de dato",
 	"wikibase-claimview-snak-tooltip": "Inserisi un valor corispondente a la proprietà che se ciama \"$1\". Se la proprietà no la ga nisun valor designà o se no se sa el valor efetivo, se pol sieliere n'alternativa a la specifica de un valor personalizà strucando su l'icona in parte a la casèla de input del valor.",
 	"wikibase-claimview-snak-new-tooltip": "Dopo ver specificà na proprietà se pol inserir el valor corispondente. Se la proprietà no la ga nisun valor designà o se no se sa el valor efetivo, se pol sieliere n'alternativa a la specifica de un valor personalizà strucando su l'icona in parte a la casèla de input del valor.",

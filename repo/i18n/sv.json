@@ -84,7 +84,6 @@
 	"wikibase-disambiguation-title": "Särskiljning för \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nya objektet $1 skapades och omdirigerades till dess sida. Tillbaka till $2.",
 	"wikibase-aliases-input-help-message": "För att göra denna entitet enklare att hitta kan du ange alternativa namn.",
-	"wikibase-aliases-empty": "Inga alias definierade.",
 	"wikibase-propertypage-datatype": "Datatyp",
 	"wikibase-propertypage-bad-datatype": "Okänd datatyp: $1",
 	"wikibase-claimview-snak-tooltip": "Ange ett värde som motsvarar egenskapen \"$1\". Om egenskapen inte har några angivna värden eller det riktiga värdet är okänt kan du välja ett alternativ för att ange ett anpassat värde genom att klicka på ikonen bredvid värdets textruta.",

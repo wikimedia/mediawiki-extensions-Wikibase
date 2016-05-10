@@ -72,7 +72,6 @@
 	"wikibase-disambiguation-title": "\"$1\" এর দ্ব্যর্থতা নিরসন",
 	"wb-special-newitem-new-item-notification": "নতুন আইটেম $1 তৈরি হয়েছে এবং এর পাতায় পুনঃনির্দেশিত হয়েছে। $2 এ ফিরে যাও।",
 	"wikibase-aliases-input-help-message": "এই সত্তা সহজে খুঁজে বের করার জন্য, আপনি কয়েকটি বিকল্প নাম লিখতে পারেন।",
-	"wikibase-aliases-empty": "কোনো উপনাম সজ্ঞায়িত হয়নি",
 	"wikibase-propertypage-datatype": "উপাত্তের ধরণ",
 	"wikibase-propertypage-bad-datatype": "উপাত্তের ধরন অজানা: $1",
 	"wikibase-statementview-rank-normal": "সাধারন র‍্যাঙ্ক",

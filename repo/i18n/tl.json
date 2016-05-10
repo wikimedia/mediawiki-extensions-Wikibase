@@ -40,7 +40,6 @@
 	"wikibase-disambiguation-title": "Paglilinaw para sa \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nilikha ang bagong bagay na $1 at muling pinapunta sa pahina nito. Bumalik sa $2.",
 	"wikibase-aliases-input-help-message": "Kung nakikilala ang pangkat ng dato sa ilalim na mas mahigit kaysa sa isang partikular na pangalan, makakapagpasok ka ng mga bansag at mga kasingkahulugan, upang matagpuan ito sa pamamagitan ng kasalit na mga pangalan nito.",
-	"wikibase-aliases-empty": "Walang bansag na nabigyan ng kahulugan.",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|sanggunian|mga sanggunian}}",
 	"wikibase-move-error": "Hindi ka maaaring maglipat ng mga pahinang nasa loob ng puwang ng pangalan ng datp, at hindi ka maaaring maglipat ng mga pahina na papasok dito.",
 	"wikibase-itemlink": "$1 $2",

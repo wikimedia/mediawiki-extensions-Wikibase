@@ -87,7 +87,6 @@
 	"wikibase-disambiguation-title": "\"$1\" 的消歧義",
 	"wb-special-newitem-new-item-notification": "已建立新項目 $1 並重新導向至該頁面。 返回 $2。",
 	"wikibase-aliases-input-help-message": "要該此項目易於搜尋，您可以輸入別名。",
-	"wikibase-aliases-empty": "尚未定義別名。",
 	"wikibase-propertypage-datatype": "資料型態",
 	"wikibase-propertypage-bad-datatype": "未知的數據型態: $1",
 	"wikibase-claimview-snak-tooltip": "請輸入屬性名稱為 \"$1\" 所對應的數值。 若該屬性沒有指定的數值或實際數值為未知，您可以點選數值輸入框旁的圖示來指定自訂數值替代。",

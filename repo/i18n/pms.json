@@ -61,7 +61,6 @@
 	"wikibase-disambiguation-title": "Omonimìa për «$1»",
 	"wb-special-newitem-new-item-notification": "N'element neuv $1 creà e ridiressionà vers soa pàgina. André a $2.",
 	"wikibase-aliases-input-help-message": "Se cost ansem ëd dat a l'é conossù con pi che un nòm particolar, a peul anserì dj'alternative e dij sinònim, parèj a peul esse trovà con ij sò nòm alternativ.",
-	"wikibase-aliases-empty": "Gnun-a alternativa definìa.",
 	"wikibase-propertypage-datatype": "Sòrt ëd dat",
 	"wikibase-claimview-snak-tooltip": "Buté un valor rëspondent a la propietà ciamà «$1». Se la propietà a l'ha gnun valor dsernù o se sò valor atual a l'é nen conossù, a peul serne n'alternativa pr'ëspessifiché un valor përsonalisà an sgnacand an sla plancia da banda dla casela d'imission dël valor.",
 	"wikibase-claimview-snak-new-tooltip": "Apress avèj spessificà na propietà, a peul anserì un valor corëspondent. Se la propietà a l'ha gnun valor designà o si ël valor atual a l'é nen conossù, a peul serne n'alternativa an spessificand un valor përsonalisà an sgnacand an sla plancia da banda dla casela d'imission dël valor.",

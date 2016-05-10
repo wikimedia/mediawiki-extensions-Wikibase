@@ -37,7 +37,6 @@
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Yona valor p’oncor encartâye|$1 valors p’oncor encartâyes}}",
 	"wikibase-disambiguation-title": "Homonimia por « $1 »",
 	"wb-special-newitem-new-item-notification": "Un novél èlèment $1 fêt et pués redirigiê vers la sina pâge. Retôrn a $2.",
-	"wikibase-aliases-empty": "Gins d’aliâs dèfeni.",
 	"wikibase-propertypage-datatype": "Tipo de donâs",
 	"wikibase-snakview-property-input-placeholder": "propriètât",
 	"wikibase-validator-label-conflict": "N’ôtra propriètât ($3) at ja lo lambél « $1 » associyê u code lengoua $2",

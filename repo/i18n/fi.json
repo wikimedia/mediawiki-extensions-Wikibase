@@ -86,7 +86,6 @@
 	"wikibase-disambiguation-title": "Täsmennyssivu nimelle ”$1”",
 	"wb-special-newitem-new-item-notification": "Luotiin uusi kohde $1 ja sinut ohjattiin sen sivulle. Palaa sivulle $2.",
 	"wikibase-aliases-input-help-message": "Jotta tämä aihe löytyisi helpommin, voit lisätä vaihtoehtoisia nimiä.",
-	"wikibase-aliases-empty": "Aliaksia ei määritetty.",
 	"wikibase-propertypage-datatype": "Tietotyyppi",
 	"wikibase-claimview-snak-tooltip": "Kirjoita arvo, joka vastaa ominaisuutta \"$1\". Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.",
 	"wikibase-claimview-snak-new-tooltip": "Määritettyäsi ominaisuuden voit kirjoittaa sitä vastaavan arvon. Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon mukautetulle arvolle painamalla kuvaketta arvon syöttökentän vieressä.",

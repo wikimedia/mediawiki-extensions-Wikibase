@@ -47,7 +47,6 @@
 	"wikibase-disambiguation-title": "Значэнні для «$1»",
 	"wb-special-newitem-new-item-notification": "Новы элемент «$1» створаны і перанакіраваны на яго старонку. Вярнуцца да «$2».",
 	"wikibase-aliases-input-help-message": "Калі гэты набор дадзеных вядомы пад больш чым пад адной назвай, вы можаце ўвесці тут псеўданімы, альтэрнатыўныя назвы і сінонімы, каб гэты элемент можна было знайсці па яго альтэрнатыўных імёнах.",
-	"wikibase-aliases-empty": "Альтэрнатыўныя назвы (сінонімы) не вызначаны",
 	"wikibase-propertypage-datatype": "Тып дадзеных",
 	"wikibase-statementview-rank-normal": "Звычайны ранг",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|крыніца|крыніцы|крыніц}}",

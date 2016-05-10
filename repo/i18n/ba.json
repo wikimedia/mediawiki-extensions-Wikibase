@@ -15,7 +15,6 @@
 	"wikibase-description-empty": "Тасуирлама тултырылмаған",
 	"wikibase-statementsection-statements": "Раҫлауҙар",
 	"wikibase-sitelinks-special": "Башҡа сайттар",
-	"wikibase-aliases-empty": "Альтернатив исемдәр (синонимдар) күрһәтелмәгән",
 	"wikibase-statementview-rank-normal": "Нормаль ранг",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|сығанаҡ}}",
 	"wikibase-redirectentity-success": "$1 $2 битенә кире йүнәлтелгән."

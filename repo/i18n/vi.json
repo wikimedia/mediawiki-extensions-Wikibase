@@ -80,7 +80,6 @@
 	"wikibase-disambiguation-title": "Định hướng cho “$1”",
 	"wb-special-newitem-new-item-notification": "Khoản mục $1 đã được tạo mới và chuyển hướng đến trang của nó. Quay lại $2.",
 	"wikibase-aliases-input-help-message": "Đặt các biệt danh để giúp người ta tìm thấy thực thể này.",
-	"wikibase-aliases-empty": "Không có định rõ biệt danh.",
 	"wikibase-propertypage-datatype": "Kiểu dữ liệu",
 	"wikibase-propertypage-bad-datatype": "Kiểu dữ liệu không rõ: $1",
 	"wikibase-claimview-snak-tooltip": "Hãy nhập một giá trị ứng với thuộc tính có tên “$1”. Nếu giá trị của thuộc tính không được định rõ hoặc nếu không biết giá trị chính xác, bạn có thể bấm hình bên cạnh hộp nhập giá trị thay vì định rõ một giá trị tùy biến.",

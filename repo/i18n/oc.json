@@ -63,7 +63,6 @@
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Una valor pas encara enregistrada|$1&nbsp;valors pas encara enregistradas}}",
 	"wikibase-disambiguation-title": "Omonimia per «&nbsp;$1&nbsp;»",
 	"wb-special-newitem-new-item-notification": "Un novèl element $1 creat e redirigit cap a sa pagina. Retorn a $2.",
-	"wikibase-aliases-empty": "Cap d'aliàs pas definit.",
 	"wikibase-propertypage-datatype": "Tipe de donadas&nbsp;",
 	"wikibase-claimview-snak-tooltip": "Picatz una valor que correspond a la proprietat apelada « $1 ». Se la proprietat a pas de valor designada o se sa valor actuala es pas coneguda, podètz causir una alternativa per especificar una valor personalizada en clicant sus l’icòna al costat de la zòna de picada de la valor.",
 	"wikibase-statementview-rank-preferred": "Reng privilegiat",

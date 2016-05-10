@@ -84,7 +84,6 @@
 	"wikibase-disambiguation-title": "Ketaksaan untuk \"$1\"",
 	"wb-special-newitem-new-item-notification": "Butir baru $1 telah dibuat dan dialihkan ke laman tersebut. Kembali ke $2.",
 	"wikibase-aliases-input-help-message": "Untuk membuat entitas lebih mudah ditemukan, Anda bisa memasukkan  nama lain.",
-	"wikibase-aliases-empty": "Nama lain belum ditentukan",
 	"wikibase-propertypage-datatype": "Jenis data",
 	"wikibase-propertypage-bad-datatype": "Jenis data tidak diketahui: $1",
 	"wikibase-claimview-snak-tooltip": "Masukkan nilai yang sesuai dengan atribut bernama \"$1\". Jika atribut tidak memiliki nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, Anda dapat memilih cadangan untuk penentuan nilai kesesuaian dengan mengeklik ikon di sebelah kotak isian nilai.",

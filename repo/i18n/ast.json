@@ -76,7 +76,6 @@
 	"wikibase-disambiguation-title": "Dixebra pa «$1»",
 	"wb-special-newitem-new-item-notification": "El nuevu elementu $1 creóse y redirixóse a la so páxina. Volver a $2.",
 	"wikibase-aliases-input-help-message": "Pa facer esta entidá más fácil d'alcontrar, pues escribir nomes alternativos.",
-	"wikibase-aliases-empty": "Nun se definieron alcuños.",
 	"wikibase-propertypage-datatype": "Tipu de datu",
 	"wikibase-propertypage-bad-datatype": "Tipu de datu desconocíu: $1",
 	"wikibase-claimview-snak-tooltip": "Escriba un valor que correspuenda cola propiedá llamada «$1». Si la propiedá nun tien dengún valor designáu o nun se conoz el valor real, pue escoyer como alternativa da-y un valor personalizáu calcando nel iconu que ta cabo'l cuadru d'escritura.",

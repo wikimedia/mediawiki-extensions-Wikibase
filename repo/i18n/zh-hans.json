@@ -98,7 +98,6 @@
 	"wikibase-disambiguation-title": "“$1”的消歧义",
 	"wb-special-newitem-new-item-notification": "新项$1已创建并已重定向至其页面。返回$2。",
 	"wikibase-aliases-input-help-message": "要让此实体更易查找，您可以输入别名。",
-	"wikibase-aliases-empty": "没有已定义的别名。",
 	"wikibase-propertypage-datatype": "数据类型",
 	"wikibase-propertypage-bad-datatype": "未知的数据类型：$1",
 	"wikibase-claimview-snak-tooltip": "请输入属性“$1”对应的值。如果该属性没有指定的值或实际值是未知的，您可以通过点击值输入框旁的图标来指定一个自定义值。",

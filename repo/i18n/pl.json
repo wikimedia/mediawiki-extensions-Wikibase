@@ -87,7 +87,6 @@
 	"wikibase-disambiguation-title": "Ujednoznacznienie „$1”",
 	"wb-special-newitem-new-item-notification": "Został utworzony nowy element $1 i przekierowano na jego stronę. Powrót do $2.",
 	"wikibase-aliases-input-help-message": "Aby ta encja mogła zostać łatwiej odszukana, możesz wprowadzić nazwy alternatywne.",
-	"wikibase-aliases-empty": "Nie zdefiniowano aliasów.",
 	"wikibase-propertypage-datatype": "Typ danych",
 	"wikibase-propertypage-bad-datatype": "Nieznany typ danych: $1",
 	"wikibase-claimview-snak-tooltip": "Podaj wartość odpowiadającą właściwości o nazwie „$1”. Jeśli nie istnieje żadna wartość dla tej właściwości albo rzeczywista wartość nie jest znana, to zamiast podawania wartości można wybrać alternatywną możliwość klikając na ikonę obok pola wprowadzania wartości.",

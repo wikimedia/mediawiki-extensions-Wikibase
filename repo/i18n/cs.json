@@ -88,7 +88,6 @@
 	"wikibase-disambiguation-title": "Rozcestník pro „$1“",
 	"wb-special-newitem-new-item-notification": "Nová položka $1 vytvořena a přesměrováno na její stránku. Zpět na $2.",
 	"wikibase-aliases-input-help-message": "Můžete přidat alternativní názvy, aby tato entita šla snadněji nalézt.",
-	"wikibase-aliases-empty": "Žádné aliasy nebyly definovány.",
 	"wikibase-propertypage-datatype": "Datový typ",
 	"wikibase-propertypage-bad-datatype": "Neznámý datový typ: $1",
 	"wikibase-claimview-snak-tooltip": "Zadejte hodnotu odpovídající vlastnosti jménem „$1“. Pokud vlastnost nemá žádnou určenou hodnotu nebo není hodnota známa, můžete si místo jejího zadání vybrat alternativu kliknutím na ikonu vedle kolonky pro zadání hodnoty.",

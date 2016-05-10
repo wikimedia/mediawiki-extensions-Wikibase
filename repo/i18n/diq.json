@@ -36,7 +36,6 @@
 	"wikibase-move-up": "bere cor",
 	"wikibase-move-down": "bere cêr",
 	"wikibase-disambiguation-title": "Menaya \"$1\" bine",
-	"wikibase-aliases-empty": "Qet yew ilawe tarif nêbiyo",
 	"wikibase-statementview-rank-normal": "Dereceyo normal",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|çıme|çımeyi}}",
 	"wikibase-entityselector-more": "zêde",

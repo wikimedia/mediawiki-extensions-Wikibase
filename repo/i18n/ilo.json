@@ -76,7 +76,6 @@
 	"wikibase-disambiguation-title": "Panangipalpalawag para iti \"$1\"",
 	"wb-special-newitem-new-item-notification": "Baro a banag ti $1 ti napartuat ken naibaw-ing ti panidna. Agsubli idiay $2.",
 	"wikibase-aliases-input-help-message": "Tapno nalaklaka a mabirukan daytoy nga entidad, mabalinmo ti agikabil kadagiti alternatibo a nagan.",
-	"wikibase-aliases-empty": "Awan dagiti sabali a nagan a naipalawag.",
 	"wikibase-propertypage-datatype": "Kita ti datos",
 	"wikibase-propertypage-bad-datatype": "Di ammo a kita ti datos: $1",
 	"wikibase-claimview-snak-tooltip": "Mangikabil ti maysa a pateg a kapadpada ti tagikua nga agnagan ti \"$1\". No ti maysa a tagikua ket awan ti nainaganan a pategna wenno di ammo ti agpayso a pateg, mabalinmo ti agpili ti sabali a pananginagan ti naidumduma a pateg babaen ti panagpindut ti ikono a testo idiay kaariping a pagikabilan a kahon ti pateg.",

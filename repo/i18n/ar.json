@@ -83,7 +83,6 @@
 	"wikibase-disambiguation-title": "توضيح «$1»",
 	"wb-special-newitem-new-item-notification": "تم إنشاء المدخلة الجديدة $1 وتحويلها إلى صفحتها. عودة إلى $2.",
 	"wikibase-aliases-input-help-message": "يمكنك إدخال أسماء بديلة لتيسير إيجاد هذا الكائن.",
-	"wikibase-aliases-empty": "لم يتم تعريف أي كنية.",
 	"wikibase-propertypage-datatype": "نوع البيانات",
 	"wikibase-propertypage-bad-datatype": "غير معروف نوع البيانات:$1",
 	"wikibase-claimview-snak-tooltip": "أدخل قيمة تتوافق مع الخاصية المسماة «$1». إذا لم يكن للخاصية قيمة مخصصة أو القيمة الفعلية مجهولة، يمكنك اختيار بديل لتحديد قيمة مخصصة بالنقر على الرمز أمام صندوق إدخال القيمة.",

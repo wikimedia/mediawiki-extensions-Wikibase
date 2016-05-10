@@ -81,7 +81,6 @@
 	"wikibase-disambiguation-title": "\"$1\" paaiškinimas",
 	"wb-special-newitem-new-item-notification": "Sukurtas naujas $1 įrašas ir nukreipta į jo puslapį. Grįžti į $2.",
 	"wikibase-aliases-input-help-message": "Kad palengvintumėte šios esybės paiešką, jūs galite įvesti alternatyvius vardus.",
-	"wikibase-aliases-empty": "Sinonimai neapibrėžti.",
 	"wikibase-propertypage-datatype": "Duomenų tipas",
 	"wikibase-propertypage-bad-datatype": "Nežinomas duomenų tipas: $1",
 	"wikibase-claimview-snak-tooltip": "Įveskite reikšmę, atitinkančią savybę pavadinimu \"$1\". Jei savybė neturi paskirtos reikšmės arba tikroji reikšmė nežinoma, jūs galite alternatyviai įrašyti norimą reikšmę arba paspausti piktogramą ties reikšmės įvedimo lauku.",

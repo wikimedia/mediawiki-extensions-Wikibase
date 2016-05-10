@@ -99,7 +99,6 @@
 	"wikibase-disambiguation-title": "Begriffsklärung für „$1“",
 	"wb-special-newitem-new-item-notification": "Es wurde das neue Datenobjekt $1 erstellt und auf seine Seite weitergeleitet. Zurück zu $2.",
 	"wikibase-aliases-input-help-message": "Um dieses Objekt leichter wiederzufinden, kannst du alternative Namen eingeben.",
-	"wikibase-aliases-empty": "Es wurden keine Aliasse definiert.",
 	"wikibase-propertypage-datatype": "Datentyp",
 	"wikibase-propertypage-bad-datatype": "Unbekannter Datentyp: $1",
 	"wikibase-claimview-snak-tooltip": "Gib einen Wert ein, der der Eigenschaft namens „$1“ entspricht. Falls die Eigenschaft keinen bestimmten Wert hat oder der derzeitige Wert unbekannt ist, kannst du eine Alternative wählen, um einen benutzerdefinierten Wert anzugeben, indem du auf das Symbol neben dem Werteingabekasten klickst.",

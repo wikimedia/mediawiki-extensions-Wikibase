@@ -104,7 +104,6 @@
 	"wikibase-disambiguation-title": "Desambiguación para \"$1\"",
 	"wb-special-newitem-new-item-notification": "Nuevo elemento $1 creado y redirigido a la página correspondiente. Volver a  $2.",
 	"wikibase-aliases-input-help-message": "Para que sea más fácil encontrar esta entidad, puedes escribir nombres alternativos.",
-	"wikibase-aliases-empty": "No hay alias definidos.",
 	"wikibase-propertypage-datatype": "Tipo de dato",
 	"wikibase-propertypage-bad-datatype": "Tipo de dato desconocido: $1",
 	"wikibase-claimview-snak-tooltip": "Ingresa un valor correspondiente a la propiedad \"$1\". Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir una alternativa y especificar un valor personalizado haciendo clic en el icono junto a la caja de entrada del valor.",

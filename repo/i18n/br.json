@@ -34,7 +34,6 @@
 	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|enankad|enankadoù}}",
 	"wikibase-sitelinks-special": "Lec'hiennoù all",
 	"wikibase-remove": "Dilemel",
-	"wikibase-aliases-empty": "Alias termenet ebet",
 	"wikibase-statementview-rank-normal": "Renk voutin",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|daveenn|daveennoù}}",
 	"wikibase-entityselector-more": "muioc'h",

@@ -118,7 +118,6 @@
 	"wikibase-disambiguation-title": "Homonymie pour «&nbsp;$1&nbsp;»",
 	"wb-special-newitem-new-item-notification": "Un nouvel élément $1 créé et redirigé vers sa page. Retour à $2.",
 	"wikibase-aliases-input-help-message": "Pour rendre cette entité plus facile à trouver, vous pouvez entrer des noms de remplacement.",
-	"wikibase-aliases-empty": "Aucun alias défini.",
 	"wikibase-propertypage-datatype": "Type de données",
 	"wikibase-propertypage-bad-datatype": "Type de données inconnu : $1",
 	"wikibase-claimview-snak-tooltip": "Saisissez une valeur correspondant à la propriété appelée « $1 ». Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle n’est pas connue, vous pouvez choisir une alternative pour spécifier une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.",

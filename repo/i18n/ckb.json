@@ -35,7 +35,6 @@
 	"wikibase-sitelinks-special": "ماڵپەڕەکانی تر",
 	"wikibase-remove": "سڕینەوە",
 	"wikibase-disambiguation-title": "ڕوونکردنەوە بۆ «$1»",
-	"wikibase-aliases-empty": "نازناوێک دیاری نەکراوە.",
 	"wikibase-propertypage-datatype": "جۆری دراوە",
 	"wikibase-statementview-rank-normal": "پلەی ئاسایی",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ژێدەر|ژێدەرەکان}}",

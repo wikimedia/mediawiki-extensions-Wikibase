@@ -81,7 +81,6 @@
 	"wikibase-disambiguation-title": "Homónimos de \"$1\"",
 	"wb-special-newitem-new-item-notification": "Creouse o novo elemento $1, que redirixe cara á súa páxina. Volver a $2.",
 	"wikibase-aliases-input-help-message": "Para que esta entidade sexa máis doada de atopar, pode introducir nomes alternativos.",
-	"wikibase-aliases-empty": "Non hai ningún pseudónimo definido.",
 	"wikibase-propertypage-datatype": "Tipo de datos",
 	"wikibase-propertypage-bad-datatype": "Tipo de dato descoñecido: $1",
 	"wikibase-claimview-snak-tooltip": "Insira un valor correspondente á propiedade chamada \"$1\". Se a propiedade non ten ningún valor designado ou non se coñece o valor real, pode elixir a alternativa de especificar un valor personalizado premendo na icona que está ao carón da caixa de entrada.",

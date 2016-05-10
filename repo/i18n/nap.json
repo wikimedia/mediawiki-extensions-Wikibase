@@ -76,7 +76,6 @@
 	"wikibase-disambiguation-title": "Disambbiguazzione pe \"$1\"",
 	"wb-special-newitem-new-item-notification": "L'elemento nuovo $1 è stato criato e sponta 'a paggena soja. Torna a $2.",
 	"wikibase-aliases-input-help-message": "Pe' puté fa st'entita cchiù semprice 'e truvà, putite miette nomme alternative.",
-	"wikibase-aliases-empty": "Nun se trovano ll'aliasse. Nun se so' definite.",
 	"wikibase-propertypage-datatype": "Tipo 'e dato",
 	"wikibase-propertypage-bad-datatype": "Tipo 'e date scanusciuto: $1",
 	"wikibase-claimview-snak-tooltip": "Miette nu valore ca curispunnesse 'a proprietà chiammata \"$1\". Si 'a proprieàt nun tenesse valore nzignato o stu valore nun fosse canusciuto, putite scegliere nu nomme alternativo facenno specifica d' 'o valore prescigliuto cu nu clic a 'o buttone annanz 'a casciulella 'e trasuta ccà.",

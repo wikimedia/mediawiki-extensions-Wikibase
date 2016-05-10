@@ -95,7 +95,6 @@
 	"wikibase-disambiguation-title": "ابهام‌زدایی برای «$1»",
 	"wb-special-newitem-new-item-notification": "آیتم جدید $1 ایجاد و به صفحه‌اش تغییرمسیر داده شد. بازگشت به $2.",
 	"wikibase-aliases-input-help-message": "برای این موجودیت هم‌معنی‌هایش را وارد کنید تا بتوان آن را با آسان‌تر پیدا کرد.",
-	"wikibase-aliases-empty": "هیچ نام مستعاری تعریف نشده است",
 	"wikibase-propertypage-datatype": "نوع داده",
 	"wikibase-propertypage-bad-datatype": "نوع داده ناشناخته: $1",
 	"wikibase-claimview-snak-tooltip": "مقدار مربوط به خصوصیت «$1» را وارد کنید. اگر خصوصیت فاقد مقدار است یا مقدار کنونی در دسترس نیست، می‌توانید مقدار موازی خود را با کلیک کردن روی دکمهٔ کنار جعبهٔ مقدار وارد کنید.",

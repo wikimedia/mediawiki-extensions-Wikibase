@@ -39,7 +39,6 @@
 	"wikibase-undo-revision-error": "නිෂ්ප්‍රභ කිරීම අසාර්ථකයි",
 	"wikibase-undo-firstrev": "පිටුවල තැනීම නිෂ්ප්‍රභ කල නොහැක",
 	"wikibase-disambiguation-title": "\"$1\" සඳහා අනේකාර්ථය",
-	"wikibase-aliases-empty": "අන්වර්ථ නාම කිසිවක් අර්ථ දක්වා නොමැත",
 	"wikibase-propertypage-datatype": "දත්ත වර්ගය",
 	"wikibase-statementview-rank-normal": "සාමාන්‍ය ස්ථානය",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|යොමුව|යොමු}}",

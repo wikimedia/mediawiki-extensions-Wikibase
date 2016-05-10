@@ -90,7 +90,6 @@
 	"wikibase-disambiguation-title": "Значення для «$1»",
 	"wb-special-newitem-new-item-notification": "Новий елемент $1 створено. Вас перенаправлено на його сторінку. Назад до «$2».",
 	"wikibase-aliases-input-help-message": "Щоб полегшити пошук цієї сутності, ви можете вказати додаткові назви.",
-	"wikibase-aliases-empty": "Не визначено жодної додаткової назви.",
 	"wikibase-propertypage-datatype": "Тип даних",
 	"wikibase-propertypage-bad-datatype": "Невідомий тип даних: $1",
 	"wikibase-claimview-snak-tooltip": "Введіть значення, яке відповідає властивості «$1». Якщо властивість не має значення або воно невідоме, Ви можете вказати звичайне значення, клацнувши по значку біля поля введення.",

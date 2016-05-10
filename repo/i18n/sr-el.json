@@ -58,7 +58,6 @@
 	"wikibase-disambiguation-title": "Višeznačnost za „$1“",
 	"wb-special-newitem-new-item-notification": "Nova stavka $1 je napravljena i preusmerena na ovu stranicu. Povratak na $2.",
 	"wikibase-aliases-input-help-message": "Da bi olakšali pronalaženje entiteta možete uneti alternativne nazive.",
-	"wikibase-aliases-empty": "Nijedan pseudonim nije definisan.",
 	"wikibase-propertypage-datatype": "Tip podatka",
 	"wikibase-claimview-snak-new-tooltip": "Posle navođenja svojstva možete uneti odgovarajuću vrednost. Ako svojstvo nema određenu vrednost ili tačna vrednost nije poznata, umesto navođenja prilagođene vrednosti možete izabrati alternativne vrednosti klikom na ikonu pored polja za unos vrednosti.",
 	"wikibase-statementview-rank-normal": "Normalni rang",

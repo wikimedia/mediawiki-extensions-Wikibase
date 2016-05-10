@@ -66,7 +66,6 @@
 	"wikibase-disambiguation-title": "Alternativ for «$1»",
 	"wb-special-newitem-new-item-notification": "Nytt element «$1» er oppretta og sendt vidare til sida. Attende til $2.",
 	"wikibase-aliases-input-help-message": "Er datasettet kjend med meir enn eitt namn, kan du leggja til tilleggsnamn og liketydingar slik at det kan finnast med desse namna òg.",
-	"wikibase-aliases-empty": "Ingen tilleggsnamn er definerte.",
 	"wikibase-propertypage-datatype": "Datatype",
 	"wikibase-statementview-rank-normal": "Normal rang",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|referanse|referansar}}",

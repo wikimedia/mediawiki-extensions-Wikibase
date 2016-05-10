@@ -75,7 +75,6 @@
 	"wikibase-disambiguation-title": "Eristatavad üksused sildiga \"$1\"",
 	"wb-special-newitem-new-item-notification": "Uus üksus $1 loodud. Sind suunati selle leheküljele. Naase leheküljele \"$2\".",
 	"wikibase-aliases-input-help-message": "Et seda üksust oleks lihtsam leida, saad sisestada teised võimalikud nimetused.",
-	"wikibase-aliases-empty": "Rööpkujusid pole määratud",
 	"wikibase-propertypage-datatype": "Andmetüüp",
 	"wikibase-claimview-snak-tooltip": "Sisesta omadusele \"$1\" vastav väärtus. Kui omaduse väärtus pole ette antud või kui tegelik väärtus pole teada, võid klõpsata väärtuse sisestamise välja kõrval olevat ikooni ja valida kohandatud väärtuse asemele midagi muud.",
 	"wikibase-claimview-snak-new-tooltip": "Kui oled määranud omaduse, saad sisestada sobiva väärtuse. Kui omaduse väärtus pole ette antud või kui tegelik väärtus pole teada, võid klõpsata väärtuse sisestamise välja kõrval olevat ikooni ja valida kohandatud väärtuse asemele midagi muud.",

@@ -85,7 +85,6 @@
 	"wikibase-disambiguation-title": "Desambiguação para \"$1\"",
 	"wb-special-newitem-new-item-notification": "Novo item $1 criado e redirecionado para sua página. Voltar à $2.",
 	"wikibase-aliases-input-help-message": "Para tornar esta entidade mais fácil de ser encontrada, você pode inserir nomes alternativos.",
-	"wikibase-aliases-empty": "Não há nomes alternativos definidos.",
 	"wikibase-propertypage-datatype": "Tipo de dados",
 	"wikibase-claimview-snak-tooltip": "Insira um valor correspondente à propriedade \"$1\". Se a propriedade não possui valor designado ou o atual valor não for conhecido você pode, alternativamente, especificar um valor personalizado clicando no ícone próximo à caixa de entrada de valores.",
 	"wikibase-claimview-snak-new-tooltip": "Depois de especificar uma propriedade, você pode inserir um valor relacionado. Se a propriedade não possui valor designado ou o valor atual não for conhecido você pode, alternativamente, especificar um valor personalizado clicando no ícone próximo à caixa de entrada de valores.",

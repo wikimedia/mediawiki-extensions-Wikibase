@@ -76,7 +76,6 @@
 	"wikibase-disambiguation-title": "Alternativer for «$1»",
 	"wb-special-newitem-new-item-notification": "Nytt element «$1» er lagd og videresendt til dets side. Tilbake til $2.",
 	"wikibase-aliases-input-help-message": "For å gjøre entiteten enklere å finne kan du oppgi alternative navn.",
-	"wikibase-aliases-empty": "Ingen kallenavn er definert.",
 	"wikibase-propertypage-datatype": "Datatype",
 	"wikibase-propertypage-bad-datatype": "Ukjent datatype: $1",
 	"wikibase-claimview-snak-tooltip": "Angi en verdi som tilsvarer egenskapen «$1». Hvis egenskapen er uten verdi, eller den faktiske verdien er ukjent, kan du velge et alternativ til en egendefinert verdi ved å klikke ikonet ved siden av verdiboksen.",

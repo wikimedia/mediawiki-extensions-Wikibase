@@ -82,7 +82,6 @@
 	"wikibase-disambiguation-title": "「$1」の曖昧さ回避",
 	"wb-special-newitem-new-item-notification": "新しい項目 $1 が作成され、そのページに転送されました。$2 に戻る。",
 	"wikibase-aliases-input-help-message": "この実体を見つけやすくするために別名を入力することができます。",
-	"wikibase-aliases-empty": "別名は定義されていません。",
 	"wikibase-propertypage-datatype": "データ型",
 	"wikibase-propertypage-bad-datatype": "不明なデータ型: $1",
 	"wikibase-claimview-snak-tooltip": "「$1」という名前のプロパティに対する値を入力します。プロパティに指定する値がないか指定する値が不明な場合、カスタム値を入力する代わりに、値の入力ボックス横のアイコンをクリックして他の選択肢を選ぶこともできます。",

@@ -82,7 +82,6 @@
 	"wikibase-disambiguation-title": "Egyértelműsítés: „$1”",
 	"wb-special-newitem-new-item-notification": "Az új fogalom ($1) létrejött; átirányítottuk a böngészőt a fogalom lapjára. Vissza az $2 lapra.",
 	"wikibase-aliases-input-help-message": "Az elem könnyebb megtalálása érdekében megadhatsz alternatív neveket is.",
-	"wikibase-aliases-empty": "Nincs más név megadva.",
 	"wikibase-propertypage-datatype": "Adattípus",
 	"wikibase-propertypage-bad-datatype": "Ismeretlen adattípus: $1",
 	"wikibase-claimview-snak-tooltip": "Adj meg egy értéket a(z) „$1” tulajdonsághoz. Ha a tulajdonsághoz nem rendelhető érték, vagy az érték nem ismert, azt a beviteli mező melletti ikonra kattintva jelezheted.",

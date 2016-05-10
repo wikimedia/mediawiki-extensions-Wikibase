@@ -59,7 +59,6 @@
 	"wikibase-propertyedittool-counter-pending-tooltip": "{{PLURAL:$1|Ee Wäert gouf|$1 Wäerter goufen}} nach net gespäichert",
 	"wikibase-disambiguation-title": "Homonymie fir \"$1\"",
 	"wb-special-newitem-new-item-notification": "Neit Element $1 ugeluecht a virugeleet op seng Säit. Zréck op $2.",
-	"wikibase-aliases-empty": "Keen Alias definéiert:",
 	"wikibase-propertypage-datatype": "Datentyp",
 	"wikibase-propertypage-bad-datatype": "Onbekannten Datentyp: $1",
 	"wikibase-statementview-rank-normal": "Normal Bewäertung",

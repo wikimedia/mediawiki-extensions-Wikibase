@@ -84,7 +84,6 @@
 	"wikibase-disambiguation-title": "פירושונים עבור \"$1\"",
 	"wb-special-newitem-new-item-notification": "פריט חדש $1 נוצר והופנה לדף שלו. חזרה אל $2.",
 	"wikibase-aliases-input-help-message": "כדי שיהיה קל יותר למצוא את הישות הזה, אפשר להזין שמות חלופיים.",
-	"wikibase-aliases-empty": "לא הוגדרו כינויים.",
 	"wikibase-propertypage-datatype": "סוג נתונים",
 	"wikibase-propertypage-bad-datatype": "סוג נתונים בלתי־ידוע: $1",
 	"wikibase-claimview-snak-tooltip": "נא להזין ערך המתאים למאפיין ששמו \"$1\". אם למאפיין אין ערך מוגדר או שהערך האמתי אינו ידוע, ביכולתך לבחור חלופה לציון ערך מותאם אישית באמצעות לחיצה על התמונה ליד תיבת הזנת הערך.",
