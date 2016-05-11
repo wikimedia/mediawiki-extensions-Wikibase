@@ -84,6 +84,25 @@ An example call might look like this:
 mw.wikibase.resolvePropertyId( 'father' ) -- Returns the property id for the property with label "father", like "P12".
 </source>
 
+=== mw.wikibase.getPropertyOrder ===
+<code>wikibase.getPropertyOrder()</code><br>
+Returns a table with the order of property IDs as provided by the page MediaWiki:Wikibase-SortedProperties. If the page does not exist, a nil value is returned.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getPropertyOrder() -- Returns a table with the order of the property IDs such as { ['P1'] = 0, ['P31'] = 1, ['P5'] = 2 }
+</source>
+
+=== mw.wikibase.orderProperties ===
+<code>wikibase.orderProperties( tableOfPropertyIds )</code><br>
+Returns a table with the given property IDs ordered according to the page MediaWiki:Wikibase-SortedProperties.
+
+An example call might look like this:
+<source lang="lua">
+propertyIds = { 'P1', 'P5', 'P31' }
+mw.wikibase.orderProperties( propertyIds ) -- Returns a table with ordered property IDs such as { 'P5', 'P1', 'P31' }
+</source>
+
 == mw.wikibase.entity ==
 <code>mw.wikibase.entity</code> represents a Wikibase entity in Lua. A <code>mw.wikibase.entity</code> table for the item which is linked with the current page can be obtained with [[#mw.wikibase.getEntityObject|<code>mw.wikibase.getEntityObject</code>]].
 
