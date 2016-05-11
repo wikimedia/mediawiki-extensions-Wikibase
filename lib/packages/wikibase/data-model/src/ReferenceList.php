@@ -58,7 +58,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 * @since 0.1
 	 *
 	 * @param Reference $reference
-	 * @param int|null $index
+	 * @param int|null $index New position of the added reference, or null to append.
 	 *
 	 * @throws InvalidArgumentException
 	 */
