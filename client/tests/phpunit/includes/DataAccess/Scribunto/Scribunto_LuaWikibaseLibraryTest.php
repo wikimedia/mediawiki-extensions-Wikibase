@@ -326,6 +326,11 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 				array( 'P16', 'P5', 'P4' ),
 				array( 'P8' => 0, 'P5' => 1 ),
 				array( array( 1 => 'P5', 2 => 'P16', 3 => 'P4' ) )
+			),
+			'empty list of property ids' => array(
+				array(),
+				array( 'P8' => 0, 'P5' => 1 ),
+				array( array() )
 			)
 		);
 	}
