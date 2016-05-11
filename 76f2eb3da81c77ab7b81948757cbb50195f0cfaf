@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_7a768802",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-11T06:03:11Z",
+      "side": 1,
+      "message": "Needs to be string[]|null[] (per PS14)",
+      "revId": "76f2eb3da81c77ab7b81948757cbb50195f0cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_da66b44d",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-11T06:03:11Z",
+      "side": 1,
+      "message": "This increases all values of the array by one (which is going to make them one), that\u0027s not desirable. See how it is implemented in orderProperties above and don\u0027t forget to handle null also.",
+      "revId": "76f2eb3da81c77ab7b81948757cbb50195f0cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_1a5dcc7e",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-11T06:03:11Z",
+      "side": 1,
+      "message": "It would be *way* faster to just use a Mock here that returns the given list. There\u0027s no need to return or test a real one.",
+      "revId": "76f2eb3da81c77ab7b81948757cbb50195f0cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
