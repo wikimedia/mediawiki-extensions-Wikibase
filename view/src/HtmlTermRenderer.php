@@ -14,7 +14,8 @@ interface HtmlTermRenderer {
 
 	/**
 	 * @param Term $term
-	 * @return string HTML
+	 * @return string HTML representing the term; This will be used in an HTML language and directionality context
+	 *   that corresponds to $term->getLanguageCode().
 	 */
 	public function renderTerm( Term $term );
 

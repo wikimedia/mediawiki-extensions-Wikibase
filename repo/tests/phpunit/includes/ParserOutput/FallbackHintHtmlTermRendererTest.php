@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
 use Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer;
 
 /**
@@ -17,9 +18,11 @@ use Wikibase\Repo\ParserOutput\FallbackHintHtmlTermRenderer;
 class FallbackHintHtmlTermRendererTest extends PHPUnit_Framework_TestCase {
 
 	private function newHtmlTermRenderer() {
+		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
 
 		return new FallbackHintHtmlTermRenderer(
+			$languageDirectionalityLookup,
 			$languageNameLookup
 		);
 	}
@@ -36,7 +39,16 @@ class FallbackHintHtmlTermRendererTest extends PHPUnit_Framework_TestCase {
 					'de',
 					'de'
 				),
-				'lkt &amp; term<sup class="wb-language-fallback-indicator wb-language-fallback-variant"></sup>'
+				'<span lang="de" dir="ltr">lkt &amp; term</span><sup class="wb-language-fallback-indicator wb-language-fallback-variant"></sup>'
+			],
+			[
+				new TermFallback(
+					'en',
+					'arc term',
+					'arc',
+					'arc'
+				),
+				'<span lang="arc" dir="rtl">arc term</span><sup class="wb-language-fallback-indicator"></sup>'
 			],
 		];
 	}

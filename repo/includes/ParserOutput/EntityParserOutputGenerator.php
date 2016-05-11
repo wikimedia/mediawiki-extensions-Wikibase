@@ -284,17 +284,21 @@ class EntityParserOutputGenerator {
 			$this->textProvider
 		) : new EmptyEditSectionGenerator();
 
+		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
 		$languageNameLookup = new LanguageNameLookup( $this->languageCode );
 		$termsListView = new TermsListView(
 			TemplateFactory::getDefaultInstance(),
 			$languageNameLookup,
 			new MediaWikiLocalizedTextProvider( $this->languageCode ),
-			new MediaWikiLanguageDirectionalityLookup()
+			$languageDirectionalityLookup
 		);
 
 		$textInjector = new TextInjector();
 		$entityTermsView = new PlaceholderEmittingEntityTermsView(
-			new FallbackHintHtmlTermRenderer( $languageNameLookup ),
+			new FallbackHintHtmlTermRenderer(
+				$languageDirectionalityLookup,
+				$languageNameLookup
+			),
 			$labelDescriptionLookup,
 			$this->templateFactory,
 			$editSectionGenerator,
