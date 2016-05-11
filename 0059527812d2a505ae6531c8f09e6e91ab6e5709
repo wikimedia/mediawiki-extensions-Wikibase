@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_99b8c926",
+        "filename": "repo/includes/ChangeOp/StatementChangeOpFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-11T12:29:51Z",
+      "side": 0,
+      "message": "Is this method used anywhere?",
+      "revId": "0059527812d2a505ae6531c8f09e6e91ab6e5709",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
