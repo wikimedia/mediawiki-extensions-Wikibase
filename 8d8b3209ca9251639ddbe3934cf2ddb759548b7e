@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_f9ef4519",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-11T12:35:50Z",
+      "side": 1,
+      "message": "@return array [ int[] ] or [ null ]",
+      "revId": "8d8b3209ca9251639ddbe3934cf2ddb759548b7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_79e33532",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-11T12:35:50Z",
+      "side": 1,
+      "message": "there is no need to shift the values. these are not array keys, they are ordinals.",
+      "revId": "8d8b3209ca9251639ddbe3934cf2ddb759548b7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_59c75199",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-11T12:35:50Z",
+      "side": 1,
+      "message": "Just use $this-\u003egetMock( PropertyOrderProvider::class );",
+      "revId": "8d8b3209ca9251639ddbe3934cf2ddb759548b7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b9c02d80",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-11T12:35:50Z",
+      "side": 1,
+      "message": "Please just indent by one extra tab.",
+      "revId": "8d8b3209ca9251639ddbe3934cf2ddb759548b7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
