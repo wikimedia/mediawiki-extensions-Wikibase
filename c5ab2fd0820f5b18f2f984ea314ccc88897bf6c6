@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_59d11125",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-11T12:51:05Z",
+      "side": 1,
+      "message": "This array needs to be re-numbered.",
+      "revId": "c5ab2fd0820f5b18f2f984ea314ccc88897bf6c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_19bcb9d4",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 18
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-11T12:51:05Z",
+      "side": 1,
+      "message": "$this-\u003egetMock(  … ), no need to use the MockBuilder here (and it is even incorrectly used).",
+      "revId": "c5ab2fd0820f5b18f2f984ea314ccc88897bf6c6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
