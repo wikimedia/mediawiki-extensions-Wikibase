@@ -462,9 +462,13 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	/**
 	 * @param string[] $propertyIds
 	 *
-	 * @return string[]
+	 * @return array[]
 	 */
 	public function orderProperties( $propertyIds ) {
+		if ( $propertyIds === array() ) {
+			return array( array() );
+		}
+
 		$orderedPropertiesPart = array();
 		$unorderedProperties = array();
 
