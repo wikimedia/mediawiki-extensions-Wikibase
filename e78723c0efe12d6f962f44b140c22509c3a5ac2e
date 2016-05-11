@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_dc922f4e",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-11T14:56:24Z",
+      "side": 1,
+      "message": "huh? Wrong",
+      "revId": "e78723c0efe12d6f962f44b140c22509c3a5ac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_fc8d732f",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-11T14:56:24Z",
+      "side": 1,
+      "message": "indentation messed.",
+      "revId": "e78723c0efe12d6f962f44b140c22509c3a5ac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_9c75572f",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-11T14:56:24Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "e78723c0efe12d6f962f44b140c22509c3a5ac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
