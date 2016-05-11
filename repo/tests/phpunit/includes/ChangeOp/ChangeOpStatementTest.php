@@ -7,6 +7,7 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use Wikibase\ChangeOp\ChangeOpException;
 use Wikibase\ChangeOp\ChangeOpStatement;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,7 +15,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
@@ -25,6 +25,8 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Repo\Tests\ChangeOp\StatementListProviderDummy;
 
 /**
  * @covers Wikibase\ChangeOp\ChangeOpStatement
@@ -37,6 +39,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @license GPL-2.0+
  * @author Addshore
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
 class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
@@ -69,29 +72,32 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function invalidIndexProvider() {
-		return array(
-			array( 'foo' ),
-			array( array() ),
-			array( $this->mockProvider->makeStatement( 'P7' ) ),
-		);
+		return [
+			[ false ],
+			[ -1 ],
+			[ 1.0 ],
+			[ '1' ],
+			[ '' ],
+		];
 	}
 
 	/**
 	 * @dataProvider provideTestApply
 	 *
-	 * @param Item $item
+	 * @param StatementListProvider $entity
 	 * @param Statement $statement
 	 * @param Statement[] $expected
 	 * @param int|null $index
 	 */
-	public function testApply( Item $item, Statement $statement, array $expected,
+	public function testApply( StatementListProvider $entity, Statement $statement, array $expected,
 		$index = null
 	) {
 		$changeOpStatement = $this->newChangeOpStatement( $statement, $index );
-		$changeOpStatement->apply( $item );
+		$changeOpStatement->apply( $entity );
 
 		$expectedStatementList = new StatementList( $expected );
-		$this->assertTrue( $item->getStatements()->equals( $expectedStatementList ) );
+		$this->assertEquals( $expectedStatementList, $entity->getStatements() );
+		$this->assertTrue( $entity->getStatements()->equals( $expectedStatementList ) );
 	}
 
 	public function provideTestApply() {
@@ -208,6 +214,12 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 			0
 		);
 
+		$args['StatementListProvider support'] = [
+			new StatementListProviderDummy( 'Q777' ),
+			$statement777,
+			[ $statement777 ],
+		];
+
 		return $args;
 	}
 
@@ -215,7 +227,7 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 		$property = Property::newFromType( 'string' );
 		$property->setId( new PropertyId( 'P73923' ) );
 
-		$statement = $this->makeStatement( $property, new PropertyNoValueSnak( 45 ) );
+		$statement = new Statement( new PropertyNoValueSnak( 45 ) );
 		$expected = new StatementList( array( $statement ) );
 
 		$changeOpStatement = $this->newChangeOpStatement( $statement );
@@ -305,13 +317,17 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 
 		$args['wrong main snak property'] = array( $item, $changeOp );
 
+		$statementListProvider = new StatementListProviderDummy( 'Q777' );
+		$changeOp = $this->newChangeOpStatement( $newStatement, 0 );
+		$args['index on unsupported entity type'] = [ $statementListProvider, $changeOp ];
+
 		return $args;
 	}
 
 	/**
 	 * @dataProvider provideInvalidApply
 	 */
-	public function testInvalidApply( Item $item, ChangeOpStatement $changeOp ) {
+	public function testInvalidApply( EntityDocument $item, ChangeOpStatement $changeOp ) {
 		$this->setExpectedException( ChangeOpException::class );
 
 		$changeOp->apply( $item );
@@ -324,35 +340,15 @@ class ChangeOpStatementTest extends \PHPUnit_Framework_TestCase {
 	 * @return Item
 	 */
 	private function makeNewItemWithStatement( $idString, Snak $mainSnak ) {
-		$item = new Item( new ItemId( $idString ) );
+		$id = new ItemId( $idString );
 
-		$this->addStatementsToItem( $item, $mainSnak );
-
-		return $item;
-	}
-
-	/**
-	 * @param EntityDocument $entity
-	 * @param Snak $mainSnak
-	 *
-	 * @return Statement
-	 */
-	private function makeStatement( EntityDocument $entity, Snak $mainSnak ) {
 		$statement = new Statement( $mainSnak );
 		$guidGenerator = new GuidGenerator();
-		$statement->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
+		$statement->setGuid( $guidGenerator->newGuid( $id ) );
 
-		return $statement;
-	}
-
-	/**
-	 * @param Item $item
-	 * @param Snak $mainSnak
-	 */
-	private function addStatementsToItem( Item $item, Snak $mainSnak ) {
-		$statement = $this->makeStatement( $item, $mainSnak );
-
+		$item = new Item( $id );
 		$item->getStatements()->addStatement( $statement );
+		return $item;
 	}
 
 	public function validateProvider() {
