@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_95ec0fba",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-05-11T12:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_7a768802",
+      "revId": "76f2eb3da81c77ab7b81948757cbb50195f0cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_da66b44d",
         "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
         "patchSetId": 16
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_55c8b759",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-05-11T12:41:19Z",
+      "side": 1,
+      "message": "But orderProperties returns 1 \u003d\u003e P1 2 \u003d\u003e P2 etc and propertyOrder gives us P1 \u003d\u003e 1 P2 \u003d\u003e 2 etc, that\u0027s why we need to increase the values, not the keys.",
+      "parentUuid": "ae564743_da66b44d",
+      "revId": "76f2eb3da81c77ab7b81948757cbb50195f0cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_1a5dcc7e",
         "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
         "patchSetId": 16
@@ -47,6 +83,24 @@
       "writtenOn": "2016-05-11T06:03:11Z",
       "side": 1,
       "message": "It would be *way* faster to just use a Mock here that returns the given list. There\u0027s no need to return or test a real one.",
+      "revId": "76f2eb3da81c77ab7b81948757cbb50195f0cfaf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_79f7b5d0",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1752
+      },
+      "writtenOn": "2016-05-11T12:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_1a5dcc7e",
       "revId": "76f2eb3da81c77ab7b81948757cbb50195f0cfaf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
