@@ -94,6 +94,7 @@
 	"wikibase-snakview-variations-novalue-label": "без значэньня",
 	"wikibase-snakview-snaktypeselector-value": "уласнае значэньне",
 	"wikibase-snakformat-invalid-value": "Няслушнае значэньне.",
+	"wikibase-snakformat-propertynotfound": "Уласьцівасьць ня знойдзеная.",
 	"wikibase-shortcopyrightwarning": "Націснуўшы «$1», вы пагаджаецеся з [[$2|умовамі выкарыстаньня]], і пагаджаецеся беззваротна апублікаваць ваш унёсак на ўмовах $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Я згодны зьдзяйсьняць наступныя праўкі паводле гэтых умоваў. Не паказвайце больш гэтае паведамленьне.",
 	"wikibase-entityselector-more": "болей",
