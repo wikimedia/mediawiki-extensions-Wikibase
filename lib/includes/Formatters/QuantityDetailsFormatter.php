@@ -36,18 +36,18 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	protected $numberFormatter;
 
 	/**
-	 * @var ValueFormatter|null
+	 * @var ValueFormatter
 	 */
 	protected $vocabularyUriFormatter;
 
 	/**
 	 * @param NumberLocalizer|null $numberLocalizer
-	 * @param ValueFormatter|null $vocabularyUriFormatter
+	 * @param ValueFormatter $vocabularyUriFormatter
 	 * @param FormatterOptions|null $options
 	 */
 	public function __construct(
 		NumberLocalizer $numberLocalizer = null,
-		ValueFormatter $vocabularyUriFormatter = null,
+		ValueFormatter $vocabularyUriFormatter,
 		FormatterOptions $options = null
 	) {
 		parent::__construct( $options );
