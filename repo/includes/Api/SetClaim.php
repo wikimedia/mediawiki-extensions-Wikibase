@@ -10,6 +10,7 @@ use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use UsageException;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
@@ -143,17 +144,20 @@ class SetClaim extends ApiBase {
 
 		$summary = $this->getSummary( $params, $statement, $entity->getStatements() );
 
-		$changeop = $this->statementChangeOpFactory->newSetStatementOp(
-			$statement,
-			isset( $params['index'] ) ? $params['index'] : null
-		);
-
+		$index = isset( $params['index'] ) ? $params['index'] : null;
+		$changeop = $this->statementChangeOpFactory->newSetStatementOp( $statement, $index );
 		$this->modificationHelper->applyChangeOp( $changeop, $entity, $summary );
 
 		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->addStatement( $statement );
+
+		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
+		$stats->increment( 'wikibase.repo.api.wbsetclaim.total' );
+		if ( $index !== null ) {
+			$stats->increment( 'wikibase.repo.api.wbsetclaim.index' );
+		}
 	}
 
 	/**
