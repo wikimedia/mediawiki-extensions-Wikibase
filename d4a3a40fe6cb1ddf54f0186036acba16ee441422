@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_65a8a3d8",
+        "filename": "repo/includes/Hooks/CirrusSearchHookHandlers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-12T13:46:11Z",
+      "side": 1,
+      "message": "Or get them from the respective EntityHandler classes?",
+      "revId": "d4a3a40fe6cb1ddf54f0186036acba16ee441422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_45ad9fe6",
+        "filename": "repo/includes/Hooks/CirrusSearchHookHandlers.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-12T13:46:11Z",
+      "side": 1,
+      "message": "output parameters are icky... rather return an array structure, and then merge. Or is there some reason not to do that?",
+      "revId": "d4a3a40fe6cb1ddf54f0186036acba16ee441422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_45847f5e",
+        "filename": "repo/includes/Search/Elastic/FieldDefinitions/LabelsProviderFieldDefinitions.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-12T13:46:11Z",
+      "side": 1,
+      "message": "This code looks the same as DescriptionProviderFieldDefinitions. Could be covered by one class, or use subclassing.",
+      "revId": "d4a3a40fe6cb1ddf54f0186036acba16ee441422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_65f6e3f7",
+        "filename": "repo/includes/Search/Elastic/Mapping/MappingConfigModifier.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-12T13:46:11Z",
+      "side": 1,
+      "message": "I\u0027m a bit blurry why we need this class. Can you add a brief comment? This logic is always the same, it doesn\u0027t depend on specific kinds of fields or entities, right?",
+      "revId": "d4a3a40fe6cb1ddf54f0186036acba16ee441422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_45fbdfdd",
+        "filename": "repo/includes/Search/Elastic/Mapping/MappingConfigModifier.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-12T13:46:11Z",
+      "side": 1,
+      "message": "If not too inconvenient, I would like to avoid output parameters. Leave the merging to the caller, if it\u0027s not too much pain. Output params hide information flow.",
+      "revId": "d4a3a40fe6cb1ddf54f0186036acba16ee441422",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
