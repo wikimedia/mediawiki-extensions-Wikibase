@@ -167,11 +167,11 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			return true;
 		};
 
-		$jobQueueGroup->expects( $this->any() )
+		$jobQueueGroup->expects( $this->once() )
 			->method( 'push' )
 			->with( $this->callback( $jobMatcher ) );
 
-		$jobQueueGroup->expects( $this->any() )
+		$jobQueueGroup->expects( $this->once() )
 			->method( 'deduplicateRootJob' )
 			->with( $this->callback( $jobMatcher ) );
 
@@ -193,14 +193,14 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$rcFactory = $this->getRCFactoryMock();
 
-		$rcFactory->expects( $this->any() )
+		$rcFactory->expects( $this->once() )
 			->method( 'newRecentChange' )
 			->with( $change, $title, array() )
 			->will( $this->returnValue( $rc ) );
 
 		$rcDupeDetector = $this->getRCDupeDetectorMock();
 
-		$rcDupeDetector->expects( $this->any() )
+		$rcDupeDetector->expects( $this->once() )
 			->method( 'changeExists' )
 			->with( $rc );
 
