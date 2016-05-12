@@ -93,28 +93,6 @@ class WikibaseSnakFormatterBuilders {
 	}
 
 	/**
-	 * Wraps the given formatter in an EscapingSnakFormatter if necessary.
-	 *
-	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
-	 * @param SnakFormatter $formatter The plain text formatter to wrap.
-	 *
-	 * @throws InvalidArgumentException
-	 * @return SnakFormatter
-	 */
-	private function escapeSnakFormatter( $format, SnakFormatter $formatter ) {
-		switch ( $this->getBaseFormat( $format ) ) {
-			case SnakFormatter::FORMAT_HTML:
-				return new EscapingSnakFormatter( $format, $formatter, 'htmlspecialchars' );
-			case SnakFormatter::FORMAT_WIKI:
-				return new EscapingSnakFormatter( $format, $formatter, 'wfEscapeWikiText' );
-			case SnakFormatter::FORMAT_PLAIN:
-				return $formatter;
-		}
-
-		throw new InvalidArgumentException( 'Unsupported output format: ' . $format );
-	}
-
-	/**
 	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
 	 * @param FormatterOptions $options
 	 *
