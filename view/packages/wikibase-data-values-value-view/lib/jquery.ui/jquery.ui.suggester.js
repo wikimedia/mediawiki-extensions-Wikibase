@@ -304,6 +304,9 @@ $.widget( 'ui.suggester', {
 			suppressKeyPress = false;
 
 		this.element
+		.on( 'focus.suggester', function( event ) {
+			self._updateMenuVisibility();
+		} )
 		.on( 'keydown.suggester', function( event ) {
 			var isDisabled = self.element.hasClass( 'ui-state-disabled' );
 
@@ -339,6 +342,7 @@ $.widget( 'ui.suggester', {
 
 				case keyCode.TAB:
 					if ( !self.options.menu.getActiveItem() ) {
+						self._close();
 						return;
 					}
 					self.options.menu.select( event );
@@ -601,7 +605,6 @@ $.widget( 'ui.suggester', {
 			this._close();
 		} else {
 			this._open();
-			this.repositionMenu();
 		}
 	},
 
