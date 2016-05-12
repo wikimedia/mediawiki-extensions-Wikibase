@@ -35,61 +35,67 @@ return call_user_func( function() {
 	// NOTE: Factory callbacks are registered below by value type (using the prefix "VT:") or by
 	// property data type (prefix "PT:").
 
-	return array(
-		'VT:bad' => array(
+	return [
+		'VT:bad' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newUnDeserializableValueFormatter( $format, $options );
 			}
-		),
-		'VT:globecoordinate' => array(
+		],
+		'VT:globecoordinate' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newGlobeCoordinateFormatter( $format, $options );
 			},
-		),
-		'VT:monolingualtext' => array(
+		],
+		'VT:monolingualtext' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newMonolingualFormatter( $format, $options );
 			},
-		),
-		'VT:quantity' => array(
+		],
+		'VT:quantity' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newQuantityFormatter( $format, $options );
 			},
-		),
-		'VT:string' => array(
+		],
+		'VT:string' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newStringFormatter( $format, $options );
 			},
-		),
-		'PT:url' => array(
+		],
+		'PT:url' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newUrlFormatter( $format, $options );
 			},
-		),
-		'PT:commonsMedia' => array(
+		],
+		'PT:commonsMedia' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newCommonsMediaFormatter( $format, $options );
 			},
-		),
-		'VT:time' => array(
+		],
+		'VT:time' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newTimeFormatter( $format, $options );
 			},
-		),
-		'VT:wikibase-entityid' => array(
+		],
+		'VT:wikibase-entityid' => [
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
 				$factory = WikibaseClient::getDefaultValueFormatterBuilders();
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
-		),
-	);
+		],
+		'PT:external-id' => [
+			'snak-formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseClient::getDefaultSnakFormatterBuilders();
+				return $factory->newExternalIdentifierFormatter( $format, $options );
+			},
+		],
+	];
 
 } );
