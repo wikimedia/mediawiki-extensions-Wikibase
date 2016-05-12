@@ -90,6 +90,12 @@ return call_user_func( function() {
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
 		),
+		'PT:external-id' => array(
+			'snak-formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseClient::getDefaultSnakFormatterBuilders();
+				return $factory->newExternalIdentifierFormatter( $format, $options );
+			},
+		),
 	);
 
 } );
