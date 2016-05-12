@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Likopiän tyttö",
-			"Mashoi7"
+			"Mashoi7",
+			"Ilja.mos"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} on muutettu",
@@ -10,5 +11,5 @@
 	"wikibase-rc-hide-wikidata-hide": "Peitä",
 	"wikibase-rc-hide-wikidata-show": "Näytä",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-otherprojects": "Muut projektat"
+	"wikibase-otherprojects": "Toizis projektois"
 }

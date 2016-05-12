@@ -8,7 +8,7 @@
 	"tooltip-t-wikibase": "Репозиторен хоамай вIашагIювзаенна элементан хьожаярг",
 	"wikibase-comment-update": "Элемент {{grammar:genitive|{{WBREPONAME}}}} хийцай",
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} чура элемент",
-	"wikibase-editlinks": "Хьожаяргаш тоаяр",
+	"wikibase-editlinks": "ТIахьожаяргаш тоаяр",
 	"wikibase-editlinkstitle": "Меттай юкъера хьожаяргаш тоаяр",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "Хьахьокха",
