@@ -1,18 +1,18 @@
 <?php
 
-namespace Wikibase\DataModel\Services\Tests\Diff\Internal;
+namespace Wikibase\DataModel\Services\Tests\Diff;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use PHPUnit_Framework_TestCase;
-use Wikibase\DataModel\Services\Diff\Internal\TermListPatcher;
+use Wikibase\DataModel\Services\Diff\TermListPatcher;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\Internal\TermListPatcher
+ * @covers Wikibase\DataModel\Services\Diff\TermListPatcher
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Services\Diff\Internal;
+namespace Wikibase\DataModel\Services\Diff;
 
 use Diff\DiffOp\AtomicDiffOp;
 use Diff\DiffOp\Diff\Diff;
@@ -11,8 +11,6 @@ use Diff\Patcher\PatcherException;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * Package private.
- *
  * @since 3.6
  *
  * @license GPL-2.0+

@@ -10,9 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 
 /**
- * TODO: Class should be public.
- * TODO: Should this support actual edit conflict detection?
- *
  * Package private.
  *
  * @license GPL-2.0+

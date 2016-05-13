@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
 use Wikibase\DataModel\Services\Diff\Internal\SiteLinkListPatcher;
-use Wikibase\DataModel\Services\Diff\Internal\StatementListPatcher;
 
 /**
  * @since 1.0
@@ -76,10 +75,10 @@ class ItemPatcher implements EntityPatcherStrategy {
 			) );
 		}
 
-		$item->setStatements( $this->statementListPatcher->getPatchedStatementList(
+		$this->statementListPatcher->patchStatementList(
 			$item->getStatements(),
 			$patch->getClaimsDiff()
-		) );
+		);
 	}
 
 }

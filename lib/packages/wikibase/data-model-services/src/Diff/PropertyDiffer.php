@@ -7,7 +7,6 @@ use Diff\DiffOp\DiffOp;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Diff\Internal\StatementListDiffer;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**

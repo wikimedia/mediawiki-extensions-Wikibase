@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\DataModel\Services\Tests\Diff\Internal;
+namespace Wikibase\DataModel\Services\Tests\Diff;
 
 use DataValues\StringValue;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Services\Diff\Internal\StatementListPatcher;
+use Wikibase\DataModel\Services\Diff\StatementListPatcher;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -15,7 +15,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @covers Wikibase\DataModel\Services\Diff\Internal\StatementListPatcher
+ * @covers Wikibase\DataModel\Services\Diff\StatementListPatcher
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -225,10 +225,10 @@ class StatementListPatcherTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testStatementOrder( StatementList $statements, Diff $patch, array $expectedGuids ) {
 		$patcher = new StatementListPatcher();
-		$patchedStatements = $patcher->getPatchedStatementList( $statements, $patch );
+		$patcher->patchStatementList( $statements, $patch );
 
 		$guids = array();
-		foreach ( $patchedStatements->toArray() as $statement ) {
+		foreach ( $statements->toArray() as $statement ) {
 			$guids[] = $statement->getGuid();
 		}
 		$this->assertSame( $expectedGuids, $guids );
@@ -240,11 +240,14 @@ class StatementListPatcherTest extends \PHPUnit_Framework_TestCase {
 		$this->assertListResultsFromPatch( $statements, $statements, new Diff() );
 	}
 
-	private function assertListResultsFromPatch( StatementList $expected, StatementList $original, Diff $patch ) {
+	private function assertListResultsFromPatch(
+		StatementList $expected,
+		StatementList $statements,
+		Diff $patch
+	) {
 		$patcher = new StatementListPatcher();
-		$clone = clone $original;
-		$this->assertEquals( $expected, $patcher->getPatchedStatementList( $original, $patch ) );
-		$this->assertEquals( $clone, $original, 'original must not change' );
+		$patcher->patchStatementList( $statements, $patch );
+		$this->assertEquals( $expected, $statements );
 	}
 
 	public function testFoo() {

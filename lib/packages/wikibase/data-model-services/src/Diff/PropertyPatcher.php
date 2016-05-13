@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Diff\Internal\FingerprintPatcher;
-use Wikibase\DataModel\Services\Diff\Internal\StatementListPatcher;
 
 /**
  * @since 1.0
@@ -62,10 +61,10 @@ class PropertyPatcher implements EntityPatcherStrategy {
 	private function patchProperty( Property $property, EntityDiff $patch ) {
 		$this->fingerprintPatcher->patchFingerprint( $property->getFingerprint(), $patch );
 
-		$property->setStatements( $this->statementListPatcher->getPatchedStatementList(
+		$this->statementListPatcher->patchStatementList(
 			$property->getStatements(),
 			$patch->getClaimsDiff()
-		) );
+		);
 	}
 
 }

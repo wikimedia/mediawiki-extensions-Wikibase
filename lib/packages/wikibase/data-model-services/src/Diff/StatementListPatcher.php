@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\DataModel\Services\Diff\Internal;
+namespace Wikibase\DataModel\Services\Diff;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
@@ -8,17 +8,11 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Diff\Patcher\PatcherException;
-use InvalidArgumentException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * TODO: Class must be public.
- * TODO: Should this support actual edit conflict detection?
- *
- * Package private.
- *
- * @since 1.0
+ * @since 3.6
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -101,21 +95,6 @@ class StatementListPatcher {
 		foreach ( $replacements as $statement ) {
 			$statements->addStatement( $statement );
 		}
-	}
-
-	/**
-	 * @deprecated since 3.6, use patchStatementList instead
-	 *
-	 * @param StatementList $statements
-	 * @param Diff $patch
-	 *
-	 * @throws InvalidArgumentException
-	 * @return StatementList
-	 */
-	public function getPatchedStatementList( StatementList $statements, Diff $patch ) {
-		$patched = clone $statements;
-		$this->patchStatementList( $patched, $patch );
-		return $patched;
 	}
 
 }
