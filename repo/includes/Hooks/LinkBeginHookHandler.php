@@ -3,12 +3,14 @@
 namespace Wikibase\Repo\Hooks;
 
 use Action;
-use DummyLinker;
 use Language;
-use Linker;
+use MediaWiki\Linker\HtmlArmor;
+use MediaWiki\Linker\LinkTarget;
+use MediaWiki\Linker\HtmlPageLinkRenderer;
 use RequestContext;
 use SpecialPageFactory;
 use Title;
+use TitleValue;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\StorageException;
@@ -82,17 +84,16 @@ class LinkBeginHookHandler {
 	 * This is only handling special pages right now and gets disabled in normal pages.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin
 	 *
-	 * @param DummyLinker $skin
+	 * @param HtmlPageLinkRenderer $linkRenderer
 	 * @param Title $target
-	 * @param string $html
+	 * @param string|HtmlArmor $text
 	 * @param array $customAttribs
 	 * @param string $query
-	 * @param array $options
 	 * @param mixed $ret
 	 * @return bool true
 	 */
-	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query,
-		&$options, &$ret
+	public static function onHtmlPageLinkRendererBegin( HtmlPageLinkRenderer $linkRenderer, $target, &$text,
+		array &$customAttribs, &$query, &$ret
 	) {
 		$context = RequestContext::getMain();
 		if ( !$context->hasTitle() ) {
@@ -102,7 +103,7 @@ class LinkBeginHookHandler {
 		}
 
 		$handler = self::newFromGlobalState();
-		$handler->doOnLinkBegin( $target, $html, $customAttribs, $context );
+		$handler->doOnHtmlPageLinkRendererBegin( $linkRenderer, $target, $text, $customAttribs, $context );
 
 		return true;
 	}
@@ -131,12 +132,15 @@ class LinkBeginHookHandler {
 	}
 
 	/**
-	 * @param Title $target
-	 * @param string &$html
+	 * @param HtmlPageLinkRenderer $linkRenderer
+	 * @param LinkTarget $target
+	 * @param string|HtmlArmor &$text
 	 * @param array &$customAttribs
 	 * @param RequestContext $context
 	 */
-	public function doOnLinkBegin( Title $target, &$html, array &$customAttribs, RequestContext $context ) {
+	public function doOnHtmlPageLinkRendererBegin( HtmlPageLinkRenderer $linkRenderer, LinkTarget $target, &$text, array &$customAttribs,
+												   RequestContext $context
+	) {
 		$out = $context->getOutput();
 
 		if ( !$this->entityNamespaceLookup->isEntityNamespace( $target->getNamespace() ) ) {
@@ -157,24 +161,25 @@ class LinkBeginHookHandler {
 		// would be replaced by a link to Special:NewProperty. This is useful in logs,
 		// to indicate that the logged action occurred while creating an entity.
 		if ( SpecialPageFactory::exists( $targetText ) ) {
-			$target = Title::makeTitle( NS_SPECIAL, $targetText );
-			$html = Linker::linkKnown( $target );
+			$target = new TitleValue( NS_SPECIAL, $targetText );
+			$text = new HtmlArmor( $linkRenderer->makeKnownLink( $target ) );
 
 			return;
 		}
 
-		if ( !$target->exists() ) {
+		$title = Title::newFromLinkTarget( $target );
+		if ( !$title->exists() ) {
 			// The link points to a non-existing item.
 			return;
 		}
 
 		// if custom link text is given, there is no point in overwriting it
 		// but not if it is similar to the plain title
-		if ( $html !== null && $target->getFullText() !== $html ) {
+		if ( $text !== null && $title->getFullText() !== HtmlArmor::getHtml( $text ) ) {
 			return;
 		}
 
-		$entityId = $this->entityIdLookup->getEntityIdForTitle( $target );
+		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
 
 		if ( !$entityId ) {
 			return;
@@ -196,10 +201,10 @@ class LinkBeginHookHandler {
 		$labelData = $this->getPreferredTerm( $labels );
 		$descriptionData = $this->getPreferredTerm( $descriptions );
 
-		$html = $this->getHtml( $target, $labelData );
+		$text = new HtmlArmor( $this->getHtml( $target, $labelData ) );
 
 		$customAttribs['title'] = $this->getTitleAttribute(
-			$target,
+			$title,
 			$labelData,
 			$descriptionData
 		);
@@ -283,7 +288,7 @@ class LinkBeginHookHandler {
 		}
 	}
 
-	private function getHtml( Title $title, array $labelData = null ) {
+	private function getHtml( LinkTarget $title, array $labelData = null ) {
 		/** @var Language $labelLang */
 		list( $labelText, $labelLang ) = $this->extractTextAndLanguage( $labelData );
 
