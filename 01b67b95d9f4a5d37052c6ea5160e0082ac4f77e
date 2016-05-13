@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_3d98731e",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 834
+      },
+      "writtenOn": "2016-05-13T20:39:14Z",
+      "side": 1,
+      "message": "Why not HtmlPageLinkRenderer $linkRenderer?",
+      "revId": "01b67b95d9f4a5d37052c6ea5160e0082ac4f77e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
