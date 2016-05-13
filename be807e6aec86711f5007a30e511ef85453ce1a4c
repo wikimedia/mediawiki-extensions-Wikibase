@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_06f3a8d2",
+        "filename": "lib/includes/Formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-05-13T09:21:32Z",
+      "side": 1,
+      "message": "Should this be injectable?",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
