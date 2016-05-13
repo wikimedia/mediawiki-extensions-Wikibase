@@ -2,8 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use HtmlArmor;
 use Language;
-use Linker;
+use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use SpecialPageFactory;
 use Title;
@@ -62,6 +64,16 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		return RequestContext::newExtraneousContext( Title::newFromText( $title ) );
 	}
 
+	/**
+	 * @var LinkRenderer
+	 */
+	protected $linkRenderer;
+
+	public function setUp() {
+		parent::setUp();
+		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+	}
+
 	public function validContextProvider() {
 		$historyContext = $this->newContext( 'Foo' );
 		$historyContext->getRequest()->setVal( 'action', 'history' );
@@ -83,16 +95,17 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
 		$title = $this->newTitle( self::ITEM_WITH_LABEL );
-		$html = $title->getFullText();
+		$html = new HtmlArmor( $title->getFullText() );
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
 		$expectedHtml = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
 			. '<span class="wb-itemlink-id">(' . self::ITEM_WITH_LABEL . ')</span></span>';
 
-		$this->assertEquals( $expectedHtml, $html );
+		$this->assertEquals( $expectedHtml, HtmlArmor::getHtml( $html ) );
 
 		$this->assertContains( 'linkbegin-label', $customAttribs['title'] );
 		$this->assertContains( 'linkbegin-description', $customAttribs['title'] );
@@ -123,12 +136,13 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$title = $this->newTitle( self::ITEM_WITH_LABEL );
 		$titleText = $title->getFullText();
-		$html = $titleText;
+		$html = new HtmlArmor( $titleText );
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
-		$this->assertEquals( $titleText, $html );
+		$this->assertEquals( $titleText, HtmlArmor::getHtml( $html ) );
 		$this->assertEquals( array(), $customAttribs );
 	}
 
@@ -156,19 +170,21 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
 		$title = Title::makeTitle( NS_MAIN, $linkTitle );
-		$html = $title->getFullText();
+		$html = new HtmlArmor( $title->getFullText() );
 		$context = $this->newContext();
 		$attribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $attribs, $context );
 
 		$specialPageTitle = Title::makeTitle(
 			NS_SPECIAL,
 			SpecialPageFactory::getLocalNameFor( $linkTitle )
 		);
 
-		$this->assertContains( Linker::linkKnown( $specialPageTitle ), $html );
-		$this->assertContains( $specialPageTitle->getFullText(), $html );
+		$result = HtmlArmor::getHtml( $html );
+		$this->assertContains( $this->linkRenderer->makeKnownLink( $specialPageTitle ), $result );
+		$this->assertContains( $specialPageTitle->getFullText(), $result );
 	}
 
 	public function testDoOnLinkBegin_nonEntityTitleLink() {
@@ -179,13 +195,14 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$this->assertTrue( $title->exists() ); // sanity check
 
 		$titleText = $title->getFullText();
-		$html = $titleText;
+		$html = new HtmlArmor( $titleText );
 		$customAttribs = array();
 
 		$context = $this->newContext();
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
-		$this->assertEquals( $titleText, $html );
+		$this->assertEquals( $titleText, HtmlArmor::getHtml( $html ) );
 		$this->assertEquals( array(), $customAttribs );
 	}
 
@@ -194,13 +211,14 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 		$title = $this->newTitle( self::ITEM_DELETED, false );
 		$titleText = $title->getFullText();
-		$html = $titleText;
+		$html = new HtmlArmor( $titleText );
 		$customAttribs = array();
 
 		$context = $this->newContext();
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
-		$this->assertEquals( $titleText, $html );
+		$this->assertEquals( $titleText, HtmlArmor::getHtml( $html ) );
 		$this->assertEquals( array(), $customAttribs );
 	}
 
@@ -208,17 +226,18 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
 		$title = $this->newTitle( self::ITEM_WITHOUT_LABEL );
-		$html = $title->getFullText();
+		$html = new HtmlArmor( $title->getFullText() );
 		$customAttribs = array();
 
 		$context = $this->newContext();
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
 		$expected = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr"></span> '
 			. '<span class="wb-itemlink-id">(' . self::ITEM_WITHOUT_LABEL . ')</span></span>';
 
-		$this->assertEquals( $expected, $html );
+		$this->assertEquals( $expected, HtmlArmor::getHtml( $html ) );
 		$this->assertContains( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
 	}
 
@@ -226,18 +245,18 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
 
 		$title = $this->newTitle( self::ITEM_LABEL_NO_DESCRIPTION );
-		$html = $title->getFullText();
+		$html = new HtmlArmor( $title->getFullText() );
 		$customAttribs = array();
 
 		$context = $this->newContext();
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin( $this->linkRenderer, $title, $html, $customAttribs, $context );
 
 		$expected = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
 			. '<span class="wb-itemlink-id">(' . self::ITEM_LABEL_NO_DESCRIPTION . ')</span></span>';
 
 		$lang = Language::factory( 'en' );
-		$this->assertEquals( $expected, $html );
+		$this->assertEquals( $expected, HtmlArmor::getHtml( $html ) );
 		$this->assertEquals(
 			$lang->getDirMark() . 'linkbegin-label' . $lang->getDirMark(),
 			$customAttribs['title']
