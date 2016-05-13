@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_a97e0d12",
+        "filename": "jsduck.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-13T12:07:14Z",
+      "side": 1,
+      "message": "Do we really have all these externals?",
+      "revId": "52c8ab6396a774e7d4627f3a2c6e8addbffc27fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_69899526",
+        "filename": "jsduck.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-13T12:07:14Z",
+      "side": 1,
+      "message": "Please put this into an array as described in https://github.com/senchalabs/jsduck/wiki/Config-file",
+      "revId": "52c8ab6396a774e7d4627f3a2c6e8addbffc27fa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
