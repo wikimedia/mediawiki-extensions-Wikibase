@@ -3,7 +3,8 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use Language;
-use Linker;
+use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use SpecialPageFactory;
 use Title;
@@ -62,6 +63,16 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		return RequestContext::newExtraneousContext( Title::newFromText( $title ) );
 	}
 
+	/**
+	 * @var LinkRenderer
+	 */
+	protected $linkRenderer;
+
+	public function setUp() {
+		parent::setUp();
+		$this->linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+	}
+
 	public function validContextProvider() {
 		$historyContext = $this->newContext( 'Foo' );
 		$historyContext->getRequest()->setVal( 'action', 'history' );
@@ -86,7 +97,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$html = $title->getFullText();
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
 		$expectedHtml = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
@@ -126,7 +138,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$html = $titleText;
 		$customAttribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -160,14 +173,15 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$context = $this->newContext();
 		$attribs = array();
 
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $attribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $attribs, $context );
 
 		$specialPageTitle = Title::makeTitle(
 			NS_SPECIAL,
 			SpecialPageFactory::getLocalNameFor( $linkTitle )
 		);
 
-		$this->assertContains( Linker::linkKnown( $specialPageTitle ), $html );
+		$this->assertContains( $this->linkRenderer->makeKnownLink( $specialPageTitle ), $html );
 		$this->assertContains( $specialPageTitle->getFullText(), $html );
 	}
 
@@ -183,7 +197,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$customAttribs = array();
 
 		$context = $this->newContext();
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -198,7 +213,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$customAttribs = array();
 
 		$context = $this->newContext();
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
 		$this->assertEquals( $titleText, $html );
 		$this->assertEquals( array(), $customAttribs );
@@ -212,7 +228,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$customAttribs = array();
 
 		$context = $this->newContext();
-		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+		$linkBeginHookHandler->doOnHtmlPageLinkRendererBegin(
+			$this->linkRenderer, $title, $html, $customAttribs, $context );
 
 		$expected = '<span class="wb-itemlink">'
 			. '<span class="wb-itemlink-label" lang="en" dir="ltr"></span> '
