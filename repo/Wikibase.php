@@ -223,7 +223,7 @@ call_user_func( function() {
 	$wgHooks['ArticleDeleteComplete'][] = 'Wikibase\RepoHooks::onArticleDeleteComplete';
 	$wgHooks['ArticleUndelete'][] = 'Wikibase\RepoHooks::onArticleUndelete';
 	$wgHooks['GetPreferences'][] = 'Wikibase\RepoHooks::onGetPreferences';
-	$wgHooks['LinkBegin'][] = 'Wikibase\Repo\Hooks\LinkBeginHookHandler::onLinkBegin';
+	$wgHooks['HtmlPageLinkRendererBegin'][] = 'Wikibase\Repo\Hooks\LinkBeginHookHandler::onHtmlPageLinkRendererBegin';
 	$wgHooks['ChangesListInitRows'][] = 'Wikibase\Repo\Hooks\LabelPrefetchHookHandlers::onChangesListInitRows';
 	$wgHooks['OutputPageBodyAttributes'][] = 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
 	//FIXME: handle other types of entities with autocomments too!
