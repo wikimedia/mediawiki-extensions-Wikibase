@@ -71,7 +71,7 @@
 	"wikibase-unconnectedpages-submit": "Show pages",
 	"pageswithbadges": "Pages with badges",
 	"pageswithbadges-summary": "This page lists pages with badges (e.g. good article or featured article). The list is sorted by descending page ID, so that newer pages are listed first.",
-	"wikibase-pageswithbadges-invalid-id": "$1 is not a valid item id",
+	"wikibase-pageswithbadges-invalid-id": "$1 is not a valid item ID",
 	"wikibase-pageswithbadges-legend": "List of pages with a given badge",
 	"wikibase-pageswithbadges-badge": "Badge:",
 	"wikibase-pageswithbadges-submit": "Show pages",
