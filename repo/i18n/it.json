@@ -413,5 +413,5 @@
 	"apihelp-wbsetreference-description": "Crea un riferimento o imposta il valore di uno esistente.",
 	"apihelp-wbsetreference-param-statement": "Un GUID che identifica la dichiarazione per cui si sta impostando un riferimento",
 	"apihelp-wbsetsitelink-param-summary": "Riepilogo per la modifica.\nSarà preceduto da un commento generato automaticamente. Il limite di lunghezza del commento automatico, insieme con il riassunto, è di 260 caratteri. Siate consapevoli del fatto che tutto ciò che supera tale limite verrà tagliato.",
-	"apihelp-wbsetsitelink-example-1": "Aggiungi un sitelink \"Idrogeno\" per la pagina in inglese con ID \"Q42\", se il sitelink non esiste"
+	"apihelp-wbsetsitelink-example-1": "Aggiunge un sitelink alla voce in inglese \"Hydrogen\" all'elemento con ID \"Q42\", se il sitelink non esiste"
 }

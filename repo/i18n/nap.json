@@ -3,7 +3,8 @@
 		"authors": [
 			"Chelin",
 			"C.R.",
-			"Candalua"
+			"Candalua",
+			"Macofe"
 		]
 	},
 	"wikibase-desc": "Archivio 'e date strutturate",
@@ -343,15 +344,15 @@
 	"apihelp-wbcreateredirect-param-bot": "Nzegna stu cagnamiento comm'a nu bot. Sta bannera 'URL sarrà surtanto rispettata si l'utente appartene a 'o gruppo \"bot\".",
 	"apihelp-wbcreateredirect-example-1": "Tuòrna Q11 comme fosse nu redirect 'e Q12",
 	"apihelp-wbeditentity-description": "Crè n'elemento 'e trasuta semprice 'e Wikibase e cagna chisto c' 'a nformazione serializata.",
-	"apihelp-wbeditentity-param-id": "L'identificatore 'e n'entità, mettenno pure 'o prefisso.\nAusate tutte dduje 'id' o 'sito' e 'titolo' nzieme.",
-	"apihelp-wbeditentity-param-site": "N'identificatore p' 'o sito addò se mpizza 'a paggena.\nAúsa nzieme c' 'o 'titolo' pe' ffà nu sitelink sano sano.",
-	"apihelp-wbeditentity-param-title": "Titolo d' 'a paggena a ffa suoccio.\nAusà nzieme c' 'o 'sito' pe' ffà nu sitelink sano sano.",
+	"apihelp-wbeditentity-param-id": "L'identificatore 'e n'entità, mettenno pure 'o prefisso.\nAusate tutte dduje <var>id</var> o <var>site</var> e <var>title</var> nzieme.",
+	"apihelp-wbeditentity-param-site": "N'identificatore p' 'o sito addò se mpizza 'a paggena.\nAúsa nzieme c' 'o <var>title</var> pe' ffà nu sitelink sano sano.",
+	"apihelp-wbeditentity-param-title": "Titolo d' 'a paggena a ffa suoccio.\nAusà nzieme c' 'o <var>site</var> pe' ffà nu sitelink sano sano.",
 	"apihelp-wbeditentity-param-baserevid": "L'identificatore nummerico p' 'a verziona 'e ca pigliasse 'o cagnamiento.\nChest'è ausato pe' putè scummiglià cunflitte pe' tramente ca se sarva.",
 	"apihelp-wbeditentity-param-summary": "Sommario pe' l'edizione.\nSarrà pre'appiso 'a nu cummento automatecamente criato. 'O lemmeto 'e luongo 'e n'autocommento nziem'a sommario fosse 260 carattere. Pe' piacere stateve accuorte ca tutto pe' coppa fosse nu lemmeto 'e passa e ferma.",
 	"apihelp-wbeditentity-param-bot": "Nzegna stu cagnamiento comm'a nu bot. Sta bannera 'URL sarrà surtanto rispettata si l'utente appartene a 'o gruppo \"bot\".",
 	"apihelp-wbeditentity-param-data": "L'oggetto serializzato ca s'ausasse comm' 'a fonte 'e date.\nN'entità criata mò mò sarrà nzegnata na 'id' dinto.",
 	"apihelp-wbeditentity-param-clear": "Si se mpustasse, l'entità sana sana fosse sbacantata primm' 'e prucedere.\nL'entità nun sarrà sarvata primma 'e se ghienchere ch' 'e \"date\", può darse ca se fossero luvat'a miezo cocche parte.",
-	"apihelp-wbeditentity-param-new": "Se si mpustasse, n'entità nova se criasse.\nMpustate chesto a 'o tipo 'entità ca vulite crià.\nNun è premmesso 'e n'avé sta mpustaziona quanno l' 'id' è pure mpustato.",
+	"apihelp-wbeditentity-param-new": "Se si mpustasse, n'entità nova se criasse.\nMpustate chesto a 'o tipo 'entità ca vulite crià.\nNun è premmesso 'e n'avé sta mpustaziona quanno l' <var>id</var> è pure mpustato.",
 	"apihelp-wbeditentity-example-1": "Crèa n'element nuovo abbacante, tòrna 'a struttura entità sana sana",
 	"apihelp-wbeditentity-example-2": "Crè n'elemento nuovo 'e mpusta 'etichette pe' de e en",
 	"apihelp-wbeditentity-example-3": "Crèa na pruprietà nova cuntenenno 'e date json, turnanno na struttura entità nova",
