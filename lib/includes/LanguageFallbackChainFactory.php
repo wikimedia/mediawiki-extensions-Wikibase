@@ -32,7 +32,7 @@ class LanguageFallbackChainFactory {
 
 	/**
 	 * Other compatible languages that can be translated into the requested language
-	 * (and translation is automatically done), e.g. 'sr', 'sr-ec' and 'sr-el' for 'sr'.
+	 * (and translation is automatically done), e.g. 'sr', 'sr-cyrl' and 'sr-latn' for 'sr'.
 	 */
 	const FALLBACK_VARIANTS = 2;
 
