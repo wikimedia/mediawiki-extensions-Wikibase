@@ -44,7 +44,8 @@
 			"Ash Crow",
 			"Orlodrim",
 			"Guillom",
-			"Thibaut120094"
+			"Thibaut120094",
+			"Trial"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -387,7 +388,7 @@
 	"apihelp-wbcreateredirect-example-1": "Transformer Q11 en une redirection vers Q12",
 	"apihelp-wbeditentity-description": "Crée une nouvelle entité Wikibase unique et la modifie avec l’information sérialisée.",
 	"apihelp-wbeditentity-param-id": "L’identifiant de l’entité, y compris le préfixe.\nUtiliser soit <var>id</var> soit <var>site</var> et <var>title</var> ensemble.",
-	"apihelp-wbeditentity-param-site": "Un identifiant pour le site sur lequel se trouve la page.\nÀ utiliser ensemble avec <var>title</var> pour faire un lien de site complet.",
+	"apihelp-wbeditentity-param-site": "Un identifiant pour le site sur lequel se trouve la page.\nÀ utiliser avec <var>title</var> pour faire un lien de site complet.",
 	"apihelp-wbeditentity-param-title": "Titre de la page à associer.\nÀ utiliser avec <var>site</var> pour faire un lien de site complet.",
 	"apihelp-wbeditentity-param-baserevid": "L’identifiant numérique de la révision sur laquelle baser la modification.\nIl est utilisé pour détecter les conflits à l’enregistrement.",
 	"apihelp-wbeditentity-param-summary": "Résumé de la modification.\nSera complété par un commentaire automatiquement généré. La longueur maximale du commentaire automatique ajouté au résumé est de 260 caractères. Notez bien que tout ce qui dépasse cette limite sera tronqué.",

@@ -13,13 +13,15 @@
 			"محمد أحمد عبد الفتاح",
 			"Hiba Alshawi",
 			"Hosseinblue",
-			"Maroen1990"
+			"Maroen1990",
+			"Shbib Al-Subaie"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
 	"tooltip-t-wikibase": "الربط بعنصر مرتبط في مستودع البيانات",
 	"wikibase-after-page-move": "يمكنك أيضا [$1 تحديث] بند ويكي بيانات المرتبط بها للحفاظ على روابط اللغة ضمن الصفحة المنقولة.",
-	"wikibase-after-page-move-queued": "[$1 عنصر ويكي بيانات] المرتبط بهذه الصفحة سيُحدّث قريبًا تلقائيًا.",
+	"wikibase-after-page-move-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
+	"wikibase-after-page-delete-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
 	"wikibase-comment-add": "تم إنشاء عنصر {{WBREPONAME}}.",
 	"wikibase-comment-remove": "تم حذف بند ويكيبيانات المرتبطة. و تم إزالة ارتباطات اللغة.",
 	"wikibase-comment-linked": "تم ربط عنصر ويكيبيانات مع هذه الصفحة.",

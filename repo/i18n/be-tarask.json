@@ -104,6 +104,7 @@
 	"wikibase-validator-label-conflict": "Уласьцівасьць $3 ужо мае метку «$1» для моўнага коду $2.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Невядомы код мовы «$1». Калі ласка, выкарыстоўвайце только вядомыя сыстэме моўныя коды, як то «en».",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 зьяўляецца перанакіраваньнем.",
+	"wikibase-wikibaserepopage-storage-exception": "Адбылася памылка пры спробе загрузіць $1: $2.",
 	"special-itembytitle": "Аб’ект паводле назвы",
 	"wikibase-itembytitle-lookup-fieldset": "Пошук аб’ектаў паводле сайту і назвы",
 	"wikibase-itembytitle-lookup-site": "Сайт:",

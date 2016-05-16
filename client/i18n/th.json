@@ -3,12 +3,14 @@
 		"authors": [
 			"Nullzero",
 			"Horus",
-			"Octahedron80"
+			"Octahedron80",
+			"Pilarbini"
 		]
 	},
 	"wikibase-editlinks": "แก้ไขลิงก์",
 	"wikibase-editlinkstitle": "แก้ไขลิงก์ข้ามภาษา",
 	"wikibase-linkitem-addlinks": "เพิ่มลิงก์ข้ามภาษา",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ซ่อน",
 	"wikibase-rc-hide-wikidata-show": "แสดง",
 	"wikibase-rc-wikibase-edit-letter": "ด",

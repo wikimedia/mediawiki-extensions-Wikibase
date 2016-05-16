@@ -8,7 +8,8 @@
 			"아라",
 			"Namoroka",
 			"Revi",
-			"Hwangjy9"
+			"Hwangjy9",
+			"Ykhwong"
 		]
 	},
 	"wikibase-lib-desc": "위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다",
@@ -70,7 +71,7 @@
 	"wikibase-validator-bad-value-type": "$1 값 유형이 잘못됨, $2(으)로 예상됨",
 	"wikibase-validator-bad-url": "잘못된 형식의 URL: $1",
 	"wikibase-validator-bad-url-scheme": "지원하지 않는 URL 계획: $1",
-	"wikibase-validator-unknown-unit": "알수 없는 장치: $1",
+	"wikibase-validator-unknown-unit": "알 수 없는 장치: $1",
 	"wikibase-validator-not-allowed": "잘못된 값: $1",
 	"wikibase-validator-no-validators": "접근 거부",
 	"datatypes-type-wikibase-item": "항목",
