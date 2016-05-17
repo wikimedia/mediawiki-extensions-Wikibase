@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_1efab6b5",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-17T12:05:21Z",
+      "side": 1,
+      "message": "I find the name of this class weird. \"Fallback\" for what? \"Indicator\" for what? \"Html\" of what? Suggestion: LanguageFallbackIndicator. Done.",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_aab5497a",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-17T12:05:21Z",
+      "side": 1,
+      "message": "What should be fixed here? TermFallback sets sourceLanguage when the value is a transliteration, null otherwise. In both cases, actualLanguage is the language of the text you get.",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0aaef52a",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-17T12:05:21Z",
+      "side": 1,
+      "message": "sourceLanguage should *not* be rendered when it\u0027s null! It\u0027s not a transliteration when that getter returns null.\n\nI believe this should only render actualLanguage, possibly with an optional hint \"transliterated from sourceLanguage\" when sourceLanguage is not null. At least that\u0027s how it was meant to be.",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_aa7429cd",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-17T12:05:21Z",
+      "side": 1,
+      "message": "if ( $sourceLanguage !\u003d\u003d null ) {",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_06f3a8d2",
         "filename": "lib/includes/Formatters/EntityIdHtmlLinkFormatter.php",
         "patchSetId": 2

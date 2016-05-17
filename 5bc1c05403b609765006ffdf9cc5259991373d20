@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_0a7d55b0",
+        "filename": "lib/includes/Formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-17T12:05:21Z",
+      "side": 0,
+      "message": "I wonder where this 2nd parameter comes from? The message only supports one.",
+      "revId": "5bc1c05403b609765006ffdf9cc5259991373d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
