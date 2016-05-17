@@ -14,6 +14,7 @@ use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DirectSqlStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityChangeLookup;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Store\EntityIdLookup;
@@ -42,7 +43,16 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 
 		$contentCodec = WikibaseClient::getDefaultInstance()->getEntityContentDataCodec();
 
-		$store = new DirectSqlStore( $entityChangeFactory, $contentCodec, $idParser, wfWikiID(), 'en' );
+		$entityNamespaceLookup = new EntityNamespaceLookup( [] );
+
+		$store = new DirectSqlStore(
+			$entityChangeFactory,
+			$contentCodec,
+			$idParser,
+			$entityNamespaceLookup,
+			wfWikiID(),
+			'en'
+		);
 
 		return $store;
 	}

@@ -9,17 +9,18 @@ use Revision;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
+use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkTable;
@@ -121,6 +122,11 @@ class SqlStore implements Store {
 	private $entityTitleLookup;
 
 	/**
+	 * @var EntityNamespaceLookup
+	 */
+	private $entityNamespaceLookup;
+
+	/**
 	 * @var string
 	 */
 	private $cacheKeyPrefix;
@@ -146,19 +152,22 @@ class SqlStore implements Store {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,
 		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
 		EntityIdLookup $entityIdLookup,
-		EntityTitleLookup $entityTitleLookup
+		EntityTitleLookup $entityTitleLookup,
+		EntityNamespaceLookup $entityNamespaceLookup
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->contentCodec = $contentCodec;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 
 		//TODO: inject settings
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
@@ -490,7 +499,7 @@ class SqlStore implements Store {
 	public function getEntityPrefetcher() {
 		if ( $this->entityPrefetcher === null ) {
 			$this->entityPrefetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
-				new WikiPageEntityMetaDataLookup( $this->entityIdParser )
+				new WikiPageEntityMetaDataLookup( $this->entityNamespaceLookup )
 			);
 		}
 

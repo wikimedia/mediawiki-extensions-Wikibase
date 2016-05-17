@@ -13,8 +13,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -38,9 +37,9 @@ use Wikibase\SqlIdGenerator;
 class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 	/**
-	 * @var EntityIdParser
+	 * @var EntityNamespaceLookup
 	 */
-	private $entityIdParser;
+	private $entityNamespaceLookup;
 
 	/**
 	 * @see EntityLookupTest::newEntityLoader()
@@ -57,7 +56,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
-			new WikiPageEntityMetaDataLookup( $this->getEntityIdParser(), false ),
+			new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup(), false ),
 			false
 		);
 
@@ -82,12 +81,17 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		return array( $store, $lookup );
 	}
 
-	private function getEntityIdParser() {
-		if ( !isset( $this->entityIdParser ) ) {
-			$this->entityIdParser = new BasicEntityIdParser();
+	private function getEntityNamespaceLookup() {
+		if ( !isset( $this->entityNamespaceLookup ) ) {
+			$this->entityNamespaceLookup = new EntityNamespaceLookup(
+				[
+					CONTENT_MODEL_WIKIBASE_ITEM => 105,
+					CONTENT_MODEL_WIKIBASE_PROPERTY => 106
+				]
+			);
 		}
 
-		return $this->entityIdParser;
+		return $this->entityNamespaceLookup;
 	}
 
 	public function simpleEntityParameterProvider() {
