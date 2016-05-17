@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_5e3c2edf",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-17T13:24:01Z",
+      "side": 1,
+      "message": "The same \"entityNamespaces\" setting is empty in the default repo configuration. I wonder why. But since the \"repoNamespaces\" setting (see above) is not empty, the \"entityNamespaces\" setting should reflect this.\n\nI wonder if we should call this \"repoEntityNamespaces\". Does this help? The difference to the \"repoNamespaces\" setting above is not obvious at all. What about \"repoEntityNamespaceIds\"? I like this much more.",
+      "revId": "9a3b22abaac910f7c864c8405cedb74c263ebbe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
