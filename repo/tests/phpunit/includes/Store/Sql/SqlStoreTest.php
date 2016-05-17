@@ -11,6 +11,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -52,7 +53,8 @@ class SqlStoreTest extends MediaWikiTestCase {
 			$contentCodec,
 			$this->getMock( EntityIdParser::class ),
 			$this->getMock( EntityIdLookup::class ),
-			$this->getMock( EntityTitleLookup::class )
+			$this->getMock( EntityTitleLookup::class ),
+			new EntityNamespaceLookup( [] )
 		);
 	}
 
