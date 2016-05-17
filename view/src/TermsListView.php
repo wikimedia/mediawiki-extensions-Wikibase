@@ -173,8 +173,9 @@ class TermsListView {
 				'wb-empty',
 				'',
 				'',
-				'', // No text, no language
-				''
+				// FIXME: Ideally we would not emit dir and lang attributes at all here
+				'', // Empty dir attribute is considered invalid and thus the element inherits dir
+				$languageCode // Empty lang attribute would mean "explicitly unknown language"
 			);
 		} else {
 			$aliasesHtml = '';
