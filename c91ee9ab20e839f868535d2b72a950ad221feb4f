@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_9e61a634",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityMetaDataLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-17T12:50:24Z",
+      "side": 1,
+      "message": "This (entity type \u003d\u003e content model).",
+      "revId": "c91ee9ab20e839f868535d2b72a950ad221feb4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
