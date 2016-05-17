@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_d78301ab",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:10:13Z",
+      "side": 1,
+      "message": "Should be injected if possible. One day, this will hopefully no longer rely on global state...",
+      "revId": "21ac515f1cf8f98f97fc4f15053c55a8950559ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_57bff15b",
+        "filename": "repo/includes/ParserOutput/FallbackHintHtmlTermRenderer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:10:13Z",
+      "side": 1,
+      "message": "Long line, please use a local var.",
+      "revId": "21ac515f1cf8f98f97fc4f15053c55a8950559ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_97b5097b",
+        "filename": "repo/includes/ParserOutput/FallbackHintHtmlTermRenderer.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:10:13Z",
+      "side": 1,
+      "message": "What about the directionality of the fallback hint itself?... Also, what about the placement of the fallback hint, wrt directionality?",
+      "revId": "21ac515f1cf8f98f97fc4f15053c55a8950559ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
