@@ -27,9 +27,17 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	options: {
 		template: 'wikibase-aliasesview',
 		templateParams: [
-			'', // additional class
+			function() {
+				return this.options.value.getTexts().length === 0 ? 'wb-empty' : '';
+			}, // additional class
 			'', // list items
-			'' // toolbar
+			'', // toolbar
+			function() {
+				return $.util.getDirectionality( this.options.value.getLanguageCode() );
+			},
+			function() {
+				return this.options.value.getLanguageCode();
+			}
 		],
 		templateShortCuts: {
 			$list: 'ul'
@@ -54,15 +62,8 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 
 		PARENT.prototype._create.call( this );
 
-		this.element.removeClass( 'wb-empty' );
-
 		if ( this.$list.children( 'li' ).length !== this.options.value.getTexts().length ) {
 			this.draw();
-		} else {
-			var languageCode = this.options.value.getLanguageCode();
-			this.$list
-			.prop( 'lang', languageCode )
-			.prop( 'dir', $.util.getDirectionality( languageCode ) );
 		}
 
 		this.$list.addClass( this.widgetFullName + '-input' );
@@ -94,10 +95,9 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 				tagadata.destroy();
 			}
 
-			this.$list
-			.empty()
-			.prop( 'lang', this.options.value.getLanguageCode() )
-			.prop( 'dir', $.util.getDirectionality( this.options.value.getLanguageCode() ) );
+			this.element.toggleClass( 'wb-empty', this.options.value.getTexts().length === 0 );
+
+			this.$list.empty();
 
 			$.each( this.options.value.getTexts(), function( index, text ) {
 				self.$list.append( mw.wbTemplate( 'wikibase-aliasesview-list-item', text ) );
