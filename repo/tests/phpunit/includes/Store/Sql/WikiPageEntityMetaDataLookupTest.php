@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -49,10 +49,19 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	/**
+	 * @return EntityNamespaceLookup
+	 */
+	private function getEntityNamespaceLookup() {
+		$entityNamespaceLookup = new EntityNamespaceLookup( [ 'wikibase-item' => 0 ] );
+
+		return $entityNamespaceLookup;
+	}
+
+	/**
 	 * @return WikiPageEntityMetaDataLookup
 	 */
 	private function getWikiPageEntityMetaDataLookup() {
-		return new WikiPageEntityMetaDataLookup( new BasicEntityIdParser() );
+		return new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() );
 	}
 
 	public function testLoadRevisionInformationById_latest() {
