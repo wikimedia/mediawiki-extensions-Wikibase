@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_becbca1f",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-17T13:04:15Z",
+      "side": 1,
+      "message": "This is a simple c\u0026p extraction. Please review the differences, not the code I move around.",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_1efab6b5",
         "filename": "lib/includes/FallbackHtmlIndicator.php",
         "patchSetId": 2
@@ -13,6 +30,24 @@
       "writtenOn": "2016-05-17T12:05:21Z",
       "side": 1,
       "message": "I find the name of this class weird. \"Fallback\" for what? \"Indicator\" for what? \"Html\" of what? Suggestion: LanguageFallbackIndicator. Done.",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_bee2aa95",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-17T13:04:15Z",
+      "side": 1,
+      "message": "I actually like that name. Since the method is called ›getHtml‹, the output format is clear.",
+      "parentUuid": "ae564743_1efab6b5",
       "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -36,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_3e505a60",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-17T13:04:15Z",
+      "side": 1,
+      "message": "this is c\u0026p.",
+      "parentUuid": "ae564743_aab5497a",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_0aaef52a",
         "filename": "lib/includes/FallbackHtmlIndicator.php",
         "patchSetId": 2
@@ -53,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_1e4d96c7",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-17T13:04:15Z",
+      "side": 1,
+      "message": "this is c\u0026p.",
+      "parentUuid": "ae564743_0aaef52a",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_aa7429cd",
         "filename": "lib/includes/FallbackHtmlIndicator.php",
         "patchSetId": 2
@@ -64,6 +135,24 @@
       "writtenOn": "2016-05-17T12:05:21Z",
       "side": 1,
       "message": "if ( $sourceLanguage !\u003d\u003d null ) {",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_7ec5b20c",
+        "filename": "lib/includes/FallbackHtmlIndicator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-17T13:04:15Z",
+      "side": 1,
+      "message": "this is c\u0026p.",
+      "parentUuid": "ae564743_aa7429cd",
       "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
