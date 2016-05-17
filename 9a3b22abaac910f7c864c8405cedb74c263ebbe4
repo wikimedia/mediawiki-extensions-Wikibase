@@ -16,6 +16,23 @@
       "revId": "9a3b22abaac910f7c864c8405cedb74c263ebbe4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_1757392a",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:17:02Z",
+      "side": 1,
+      "message": "Why is \u0027120\u0027 a string?\nBut in any case, we should not hard-code any namespace id outside the core range (\u003c100), not even as defaults. 120 may be used for something else on the client wiki. Namespace IDs should be considered dynamic.",
+      "revId": "9a3b22abaac910f7c864c8405cedb74c263ebbe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
