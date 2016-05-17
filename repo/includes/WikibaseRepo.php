@@ -825,7 +825,8 @@ class WikibaseRepo {
 				$this->getEntityContentDataCodec(),
 				$this->getEntityIdParser(),
 				$this->getEntityIdLookup(),
-				$this->getEntityTitleLookup()
+				$this->getEntityTitleLookup(),
+				$this->getEntityNamespaceLookup()
 			);
 		}
 
