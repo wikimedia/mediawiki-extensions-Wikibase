@@ -4,5 +4,9 @@
 			"Servien"
 		]
 	},
-	"wikibase-rc-hide-wikidata-show": "wiesen"
+	"wikibase-editlinks": "Lenken ännern",
+	"wikibase-editlinkstitle": "Interspraaklenken ännern",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-show": "wiesen",
+	"wikibase-rc-wikibase-edit-title": "Ännern vun {{WBREPONAME}}"
 }
