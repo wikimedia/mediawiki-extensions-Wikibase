@@ -8,8 +8,8 @@ use DBQueryError;
 use ResultWrapper;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
  * Service for looking up meta data about one or more entities as needed for
@@ -25,22 +25,20 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntityMetaDataAccessor {
 
 	/**
-	 * @var EntityIdParser
+	 * @var EntityNamespaceLookup
 	 */
-	private $entityIdParser;
+	private $entityNamespaceLookup;
 
 	/**
-	 * @param EntityIdParser $entityIdParser
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
 	 */
 	public function __construct(
-		EntityIdParser $entityIdParser,
+		EntityNamespaceLookup $entityNamespaceLookup,
 		$wiki = false
 	) {
 		parent::__construct( $wiki );
-
-		// TODO: migrate table away from using a numeric field so we no longer need this!
-		$this->entityIdParser = $entityIdParser;
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
 	/**
@@ -161,24 +159,20 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private function selectRevisionInformationMultiple( array $entityIds, $connType ) {
 		$db = $this->getConnection( $connType );
 
-		$join = array();
+		$join = [];
 		$fields = $this->selectFields();
 		// To be able to link rows with entity ids
-		$fields[] = 'epp_entity_id';
-		$fields[] = 'epp_entity_type';
+		$fields[] = 'page_title';
 
-		$tables = array( 'page', 'revision', 'text', 'wb_entity_per_page' );
-
-		// pick page via epp_page_id
-		$join['page'] = array( 'INNER JOIN', 'epp_page_id=page_id' );
+		$tables = [ 'page', 'revision', 'text' ];
 
 		// pick latest revision via page_latest
-		$join['revision'] = array( 'INNER JOIN', 'page_latest=rev_id' );
+		$join['revision'] = [ 'INNER JOIN', 'page_latest=rev_id' ];
 
 		// pick text via rev_text_id
-		$join['text'] = array( 'INNER JOIN', 'old_id=rev_text_id' );
+		$join['text'] = [ 'INNER JOIN', 'old_id=rev_text_id' ];
 
-		$res = $db->select( $tables, $fields, $this->getEppWhere( $entityIds, $db ), __METHOD__, array(), $join );
+		$res = $db->select( $tables, $fields, $this->getWhere( $entityIds, $db ), __METHOD__, [], $join );
 
 		$this->releaseConnection( $db );
 
@@ -195,21 +189,21 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 * @return stdClass[] Array of entity id serialization => object.
 	 */
 	private function indexResultByEntityId( array $entityIds, ResultWrapper $res ) {
-		$rows = array();
+		$rows = [];
 		// Create a key based map from the rows just returned to reduce
 		// the complexity below.
 		foreach ( $res as $row ) {
-			$rows[$row->epp_entity_type . $row->epp_entity_id] = $row;
+			$rows[$row->page_title] = $row;
 		}
 
-		$result = array();
+		$result = [];
 		foreach ( $entityIds as $entityId ) {
-			$result[$entityId->getSerialization()] = false;
+			$entityId = $entityId->getSerialization();
 
-			// FIXME: this will fail for IDs that do not have a numeric form
-			$key = $entityId->getEntityType() . $entityId->getNumericId();
-			if ( isset( $rows[$key] ) ) {
-				$result[$entityId->getSerialization()] = $rows[$key];
+			$result[$entityId] = false;
+
+			if ( isset( $rows[$entityId] ) ) {
+				$result[$entityId] = $rows[$entityId];
 			}
 		}
 
@@ -222,17 +216,17 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	 *
 	 * @return string
 	 */
-	private function getEppWhere( array $entityIds, DatabaseBase $db ) {
-		$where = array();
+	private function getWhere( array $entityIds, DatabaseBase $db ) {
+		$where = [];
 
-		foreach ( $entityIds as &$entityId ) {
-			$where[] = $db->makeList( array(
-				// FIXME: this will fail for IDs that do not have a numeric form
-				// Note: if epp_entity_id is quoted the wrong index will be used
-				//       thus we cast it to int and leave it unquoted
-				'epp_entity_id = ' . (int)$entityId->getNumericId(),
-				'epp_entity_type' => $entityId->getEntityType()
-			), LIST_AND );
+		foreach ( $entityIds as $entityId ) {
+			$where[] = $db->makeList(
+				[
+					$db->addQuotes( $entityId->getSerialization() ) . '=page_title',
+					$this->entityNamespaceLookup->getEntityNamespace( 'wikibase-' . $entityId->getEntityType() ) . '=page_namespace'
+				],
+				LIST_AND
+			);
 		}
 
 		return $db->makeList( $where, LIST_OR );
