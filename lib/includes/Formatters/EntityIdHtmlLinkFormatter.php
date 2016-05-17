@@ -122,43 +122,39 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		return $entityId->getSerialization() . $separator . $undefinedInfo;
 	}
 
+	/**
+	 * @param TermFallback $term
+	 *
+	 * @return string HTML
+	 */
 	private function getHtmlForFallbackIndicator( TermFallback $term ) {
 		$requestedLanguage = $term->getLanguageCode();
 		$actualLanguage = $term->getActualLanguageCode();
 		$sourceLanguage = $term->getSourceLanguageCode();
 
-		// FIXME: TermFallback should either return equal values or null
-		$sourceLanguage = $sourceLanguage === null ? $actualLanguage : $sourceLanguage;
+		$isFallback = $actualLanguage !== $requestedLanguage;
+		$isTransliterated = $sourceLanguage === null || $sourceLanguage !== $actualLanguage;
 
-		$isInRequestedLanguage = $actualLanguage === $requestedLanguage;
-		$isInSourceLanguage = $actualLanguage === $sourceLanguage;
-
-		if ( $isInRequestedLanguage && $isInSourceLanguage ) {
-			// This is neither a fallback nor a transliteration
+		if ( !$isFallback && !$isTransliterated ) {
 			return '';
 		}
 
-		$sourceLanguageName = $this->languageNameLookup->getName( $sourceLanguage );
-		$actualLanguageName = $this->languageNameLookup->getName( $actualLanguage );
+		$text = $this->languageNameLookup->getName( $actualLanguage );
 
-		// Generate indicator text
-		if ( $isInSourceLanguage ) {
-			$text = $sourceLanguageName;
-		} else {
+		if ( $isTransliterated ) {
 			$text = wfMessage(
 				'wikibase-language-fallback-transliteration-hint',
-				$sourceLanguageName,
-				$actualLanguageName
+				$this->languageNameLookup->getName( $sourceLanguage ),
+				$text
 			)->text();
 		}
 
-		// Generate HTML class names
 		$classes = 'wb-language-fallback-indicator';
-		if ( !$isInSourceLanguage ) {
+		if ( $isTransliterated ) {
 			$classes .= ' wb-language-fallback-transliteration';
 		}
-		if ( !$isInRequestedLanguage
-				&& $this->getBaseLanguage( $actualLanguage ) === $this->getBaseLanguage( $requestedLanguage )
+		if ( $isFallback
+			&& $this->getBaseLanguage( $actualLanguage ) === $this->getBaseLanguage( $requestedLanguage )
 		) {
 			$classes .= ' wb-language-fallback-variant';
 		}
