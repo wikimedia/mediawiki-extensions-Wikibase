@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests\Store;
 
-use Wikibase\Repo\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
- * @covers Wikibase\Repo\EntityNamespaceLookup
+ * @covers Wikibase\Lib\Store\EntityNamespaceLookup
  *
  * @group Wikibase
  *
@@ -35,7 +35,7 @@ class EntityNamespaceLookupTest extends \PHPUnit_Framework_TestCase {
 		$entityNamespaces = $this->getNamespaces();
 
 		return array(
-			array( $entityNamespaces, CONTENT_MODEL_WIKIBASE_ITEM, 120 ),
+			array( $entityNamespaces, 'wikibase-item', 120 ),
 			array( $entityNamespaces, 'kittens', false )
 		);
 	}
@@ -57,8 +57,8 @@ class EntityNamespaceLookupTest extends \PHPUnit_Framework_TestCase {
 
 	private function getNamespaces() {
 		return array(
-			CONTENT_MODEL_WIKIBASE_ITEM => 120,
-			CONTENT_MODEL_WIKIBASE_PROPERTY => 122
+			'wikibase-item' => 120,
+			'wikibase-property' => 122
 		);
 	}
 
