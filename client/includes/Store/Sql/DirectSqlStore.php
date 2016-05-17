@@ -16,14 +16,15 @@ use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
@@ -115,6 +116,11 @@ class DirectSqlStore implements ClientStore {
 	private $entityIdLookup = null;
 
 	/**
+	 * @var EntityNamespaceLookup
+	 */
+	private $entityNamespaceLookup = null;
+
+	/**
 	 * @var PropertyInfoTable|null
 	 */
 	private $propertyInfoTable = null;
@@ -153,6 +159,7 @@ class DirectSqlStore implements ClientStore {
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param string|bool $repoWiki The symbolic database name of the repo wiki or false for the
 	 * local wiki.
 	 * @param string $languageCode
@@ -161,12 +168,14 @@ class DirectSqlStore implements ClientStore {
 		EntityChangeFactory $entityChangeFactory,
 		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
+		EntityNamespaceLookup $entityNamespaceLookup,
 		$repoWiki = false,
 		$languageCode
 	) {
 		$this->contentCodec = $contentCodec;
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
 
@@ -433,7 +442,7 @@ class DirectSqlStore implements ClientStore {
 		if ( $this->entityPrefetcher === null ) {
 			$this->entityPrefetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
 				new WikiPageEntityMetaDataLookup(
-					$this->entityIdParser,
+					$this->entityNamespaceLookup,
 					$this->repoWiki
 				)
 			);
