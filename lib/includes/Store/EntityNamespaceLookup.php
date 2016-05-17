@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo;
+namespace Wikibase\Lib\Store;
 
 /**
  * Utility functions for Wikibase namespaces.
@@ -64,7 +64,7 @@ final class EntityNamespaceLookup {
 	 *
 	 * @param int $ns the namespace ID
 	 *
-	 * @return bool true iff $ns is an entity namespace
+	 * @return bool true if $ns is an entity namespace
 	 */
 	public function isEntityNamespace( $ns ) {
 		return in_array( $ns, $this->entityNamespaces );
