@@ -43,7 +43,6 @@ class PropertyPatcher implements EntityPatcherStrategy {
 	 * @param EntityDocument $entity
 	 * @param EntityDiff $patch
 	 *
-	 * @return Property
 	 * @throws InvalidArgumentException
 	 */
 	public function patchEntity( EntityDocument $entity, EntityDiff $patch ) {
