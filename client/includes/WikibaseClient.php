@@ -77,6 +77,7 @@ use Wikibase\Lib\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -207,6 +208,11 @@ final class WikibaseClient {
 	 * @var TermLookup|null
 	 */
 	private $termLookup = null;
+
+	/**
+	 * @var EntityNamespaceLookup|null
+	 */
+	private $entityNamespaceLookup = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -1123,6 +1129,19 @@ final class WikibaseClient {
 			new WikiPagePropertyOrderProvider( $title ),
 			wfGetMainCache()
 		);
+	}
+
+	/**
+	 * @return EntityNamespaceLookup
+	 */
+	public function getEntityNamespaceLookup() {
+		if ( $this->entityNamespaceLookup === null ) {
+			$this->entityNamespaceLookup = new EntityNamespaceLookup(
+				$this->settings->getSetting( 'entityNamespaces' )
+			);
+		}
+
+		return $this->entityNamespaceLookup;
 	}
 
 }
