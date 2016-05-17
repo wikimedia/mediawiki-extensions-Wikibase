@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib\Store;
 
+use Wikimedia\Assert;
+
 /**
  * Utility functions for Wikibase namespaces.
  *
@@ -24,6 +26,7 @@ final class EntityNamespaceLookup {
 	 * @param int[] $entityNamespaces
 	 */
 	public function __construct( array $entityNamespaces ) {
+		Assert::parameterElementType( 'int', $entityNamespaces, '$entityNamespaces' );
 		$this->entityNamespaces = $entityNamespaces;
 	}
 
