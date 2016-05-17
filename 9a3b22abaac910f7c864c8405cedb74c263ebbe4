@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_97422961",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:17:50Z",
+      "side": 1,
+      "message": "Namespace IDs are integers. What does it mean for this to be an empty string?",
+      "revId": "9a3b22abaac910f7c864c8405cedb74c263ebbe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_5e3c2edf",
         "filename": "client/config/WikibaseClient.default.php",
         "patchSetId": 4
