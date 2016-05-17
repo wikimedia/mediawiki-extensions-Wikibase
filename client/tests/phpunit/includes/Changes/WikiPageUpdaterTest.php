@@ -4,7 +4,6 @@ namespace Wikibase\Client\Tests\Changes;
 
 use Job;
 use JobQueueGroup;
-use PHPUnit_Framework_Assert;
 use RecentChange;
 use RefreshLinksJob;
 use Title;
@@ -84,7 +83,7 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 			->will( $this->returnValue( true ) );
 
 		$title->expects( $this->any() )
-			->method( 'getPrefixedDBKey' )
+			->method( 'getPrefixedDBkey' )
 			->will( $this->returnValue( $text ) );
 
 		return $title;
@@ -150,16 +149,12 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$jobQueueGroup = $this->getJobQueueGroupMock();
 
-		$jobMatcher = function( Job $job ) use ( $title ) {
-			PHPUnit_Framework_Assert::assertInstanceOf( RefreshLinksJob::class, $job );
-			PHPUnit_Framework_Assert::assertEquals(
-				$title->getPrefixedDBkey(),
-				$job->getTitle()->getPrefixedDBkey()
-			);
+		$jobMatcher = function( RefreshLinksJob $job ) {
+			$this->assertSame( 'Foo', $job->getTitle()->getPrefixedDBkey() );
 
-			$expectedSignature = RefreshLinksJob::newRootJobParams( $title->getPrefixedDBkey() );
+			$expectedSignature = Job::newRootJobParams( 'Foo' );
 			$actualSignature = $job->getRootJobParams();
-			PHPUnit_Framework_Assert::assertEquals(
+			$this->assertSame(
 				$expectedSignature['rootJobSignature'],
 				$actualSignature['rootJobSignature']
 			);
@@ -193,14 +188,14 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 
 		$rcFactory = $this->getRCFactoryMock();
 
-		$rcFactory->expects( $this->any() )
+		$rcFactory->expects( $this->once() )
 			->method( 'newRecentChange' )
 			->with( $change, $title, array() )
 			->will( $this->returnValue( $rc ) );
 
 		$rcDupeDetector = $this->getRCDupeDetectorMock();
 
-		$rcDupeDetector->expects( $this->any() )
+		$rcDupeDetector->expects( $this->once() )
 			->method( 'changeExists' )
 			->with( $rc );
 
@@ -213,7 +208,6 @@ class WikiPageUpdaterTest extends \MediaWikiTestCase {
 		$updater->injectRCRecords( array(
 			$title
 		), $change );
-
 	}
 
 }
