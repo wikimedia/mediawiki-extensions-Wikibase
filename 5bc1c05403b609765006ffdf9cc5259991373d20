@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_d7978149",
+        "filename": "repo/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T19:33:20Z",
+      "side": 1,
+      "message": "So this is a stateful object, kind of a builder-like thing now? That should be explicitly mentioned in the docs. Usually we assume that we have semi-stateless services (stateless except for lazy init and caching, and external i/o), and immutable value objects.",
+      "revId": "5bc1c05403b609765006ffdf9cc5259991373d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f7f56580",
+        "filename": "repo/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T19:33:20Z",
+      "side": 1,
+      "message": "Can we just generate these on the fly here? We are free to pass any parameters we want, right?",
+      "revId": "5bc1c05403b609765006ffdf9cc5259991373d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_77315556",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderEmittingEntityTermsViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T19:33:20Z",
+      "side": 1,
+      "message": "There is hidden information flow via object state between getHtml() and getTermsListItems(). Can we avoid this? See my earlier comment.",
+      "revId": "5bc1c05403b609765006ffdf9cc5259991373d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
