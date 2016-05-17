@@ -39,8 +39,7 @@
 		claimsChanger.removeStatement(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) ),
-			'index'
+			) )
 		);
 
 		assert.ok( api.removeClaim.calledOnce );
@@ -70,8 +69,7 @@
 		claimsChanger.removeStatement(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) ),
-			'index'
+			) )
 		)
 		.done( function() {
 			assert.ok( true, 'removeStatement succeeded' );
@@ -107,8 +105,7 @@
 		claimsChanger.removeStatement(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) ),
-			'index'
+			) )
 		)
 		.done( function() {
 			assert.ok( false, 'removeStatement should have failed' );
@@ -141,8 +138,7 @@
 		);
 
 		claimsChanger.setClaim(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
-			'index'
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		);
 
 		assert.ok( api.setClaim.calledOnce );
@@ -169,8 +165,7 @@
 		QUnit.stop();
 
 		claimsChanger.setClaim(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
-			'index'
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		)
 		.done( function( savedClaim ) {
 			assert.ok(
@@ -209,8 +204,7 @@
 		QUnit.stop();
 
 		claimsChanger.setClaim(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ),
-			'index'
+			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
 		)
 		.done( function( savedClaim ) {
 			assert.ok( false, 'setClaim should have failed' );
@@ -247,8 +241,7 @@
 		claimsChanger.setStatement(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) ),
-			'index'
+			) )
 		);
 
 		assert.ok( api.setClaim.calledOnce );
@@ -282,8 +275,7 @@
 		claimsChanger.setStatement(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) ),
-			'index'
+			) )
 		)
 		.done( function( savedStatement ) {
 			assert.ok(
@@ -326,8 +318,7 @@
 		claimsChanger.setStatement(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) ),
-			'index'
+			) )
 		)
 		.done( function( savedStatement ) {
 			assert.ok( false, 'setStatement should have failed' );
