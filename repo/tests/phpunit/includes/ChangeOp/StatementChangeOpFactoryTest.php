@@ -37,15 +37,7 @@ class StatementChangeOpFactoryTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testNewAddClaimOp() {
-		$snak = new PropertyNoValueSnak( new PropertyId( 'P7' ) );
-		$statement = new Statement( $snak );
-
-		$op = $this->newChangeOpFactory()->newAddStatementOp( $statement );
-		$this->assertInstanceOf( ChangeOp::class, $op );
-	}
-
-	public function testNewSetClaimOp() {
+	public function testNewSetStatementOp() {
 		$snak = new PropertyNoValueSnak( new PropertyId( 'P7' ) );
 		$statement = new Statement( $snak );
 

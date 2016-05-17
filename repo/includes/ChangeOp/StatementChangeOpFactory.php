@@ -65,24 +65,6 @@ class StatementChangeOpFactory {
 	 * @throws InvalidArgumentException
 	 * @return ChangeOp
 	 */
-	public function newAddStatementOp( Statement $statement, $index = null ) {
-		return new ChangeOpStatement(
-			$statement,
-			$this->guidGenerator,
-			$this->guidValidator,
-			$this->guidParser,
-			$this->snakValidator,
-			$index
-		);
-	}
-
-	/**
-	 * @param Statement $statement
-	 * @param int|null $index
-	 *
-	 * @throws InvalidArgumentException
-	 * @return ChangeOp
-	 */
 	public function newSetStatementOp( Statement $statement, $index = null ) {
 		return new ChangeOpStatement(
 			$statement,
