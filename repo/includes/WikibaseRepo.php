@@ -78,6 +78,7 @@ use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
