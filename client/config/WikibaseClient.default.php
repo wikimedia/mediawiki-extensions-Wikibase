@@ -35,6 +35,10 @@ return call_user_func( function() {
 			'wikibase-item' => '',
 			'wikibase-property' => 'Property'
 		],
+		'entityNamespaces' => [
+			'wikibase-item' => '',
+			'wikibase-property' => '120'
+		],
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinksByDefault' => false,
