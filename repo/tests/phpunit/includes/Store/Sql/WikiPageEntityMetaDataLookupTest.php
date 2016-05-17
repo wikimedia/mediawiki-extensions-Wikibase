@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\EntityRevision;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -49,10 +49,32 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	}
 
 	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getEntityTitleLookup() {
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
+
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForID' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::makeTitle(
+					NS_MAIN,
+					$id->getEntityType() . '/' . $id->getSerialization()
+				);
+			} ) );
+
+		$titleLookup->expects( $this->any() )
+			->method( 'getNamespaceForType' )
+			->will( $this->returnValue( NS_MAIN ) );
+
+		return $titleLookup;
+	}
+
+	/**
 	 * @return WikiPageEntityMetaDataLookup
 	 */
 	private function getWikiPageEntityMetaDataLookup() {
-		return new WikiPageEntityMetaDataLookup( new BasicEntityIdParser() );
+		return new WikiPageEntityMetaDataLookup( $this->getEntityTitleLookup() );
 	}
 
 	public function testLoadRevisionInformationById_latest() {

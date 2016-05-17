@@ -490,7 +490,7 @@ class SqlStore implements Store {
 	public function getEntityPrefetcher() {
 		if ( $this->entityPrefetcher === null ) {
 			$this->entityPrefetcher = new PrefetchingWikiPageEntityMetaDataAccessor(
-				new WikiPageEntityMetaDataLookup( $this->entityIdParser )
+				new WikiPageEntityMetaDataLookup( $this->entityTitleLookup )
 			);
 		}
 

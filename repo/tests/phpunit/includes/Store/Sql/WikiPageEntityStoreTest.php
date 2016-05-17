@@ -13,10 +13,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\BasicEntityTitleLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
@@ -38,9 +38,9 @@ use Wikibase\SqlIdGenerator;
 class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 	/**
-	 * @var EntityIdParser
+	 * @var EntityTitleLookup
 	 */
-	private $entityIdParser;
+	private $entityTitleLookup;
 
 	/**
 	 * @see EntityLookupTest::newEntityLoader()
@@ -57,7 +57,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$contentCodec,
-			new WikiPageEntityMetaDataLookup( $this->getEntityIdParser(), false ),
+			new WikiPageEntityMetaDataLookup( $this->getEntityTitleLookup(), false ),
 			false
 		);
 
@@ -82,12 +82,25 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		return array( $store, $lookup );
 	}
 
-	private function getEntityIdParser() {
-		if ( !isset( $this->entityIdParser ) ) {
-			$this->entityIdParser = new BasicEntityIdParser();
+	private function getEntityTitleLookup() {
+		if ( !isset( $this->entityTitleLookup ) ) {
+			$this->entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+
+			$this->entityTitleLookup->expects( $this->any() )
+				->method( 'getTitleForID' )
+				->will( $this->returnCallback( function( EntityId $id ) {
+					return Title::makeTitle(
+						NS_MAIN,
+						$id->getEntityType() . '/' . $id->getSerialization()
+					);
+				} ) );
+
+			$this->entityTitleLookup->expects( $this->any() )
+				->method( 'getNamespaceForType' )
+				->will( $this->returnValue( NS_MAIN ) );
 		}
 
-		return $this->entityIdParser;
+		return $this->entityTitleLookup;
 	}
 
 	public function simpleEntityParameterProvider() {

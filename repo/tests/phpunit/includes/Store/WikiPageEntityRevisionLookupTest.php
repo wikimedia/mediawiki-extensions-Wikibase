@@ -2,13 +2,13 @@
 
 namespace Wikibase\Test;
 
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
@@ -78,9 +78,31 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 		return new WikiPageEntityRevisionLookup(
 			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
-			new WikiPageEntityMetaDataLookup( new BasicEntityIdParser() ),
+			new WikiPageEntityMetaDataLookup( $this->getEntityTitleLookup() ),
 			false
 		);
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getEntityTitleLookup() {
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
+
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitleForID' )
+			->will( $this->returnCallback( function( EntityId $id ) {
+				return Title::makeTitle(
+					NS_MAIN,
+					$id->getEntityType() . '/' . $id->getSerialization()
+				);
+			} ) );
+
+		$titleLookup->expects( $this->any() )
+			->method( 'getNamespaceForType' )
+			->will( $this->returnValue( NS_MAIN ) );
+
+		return $titleLookup;
 	}
 
 	protected function resolveLogicalRevision( $revision ) {
@@ -105,7 +127,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$entityContentDataCodec,
-			new WikiPageEntityMetaDataLookup( new BasicEntityIdParser() ),
+			new WikiPageEntityMetaDataLookup( $this->getEntityTitleLookup() ),
 			false
 		);
 
