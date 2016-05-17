@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Lib\Tests\Store;
 
-use Wikibase\Repo\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
- * @covers Wikibase\Repo\EntityNamespaceLookup
+ * @covers Wikibase\Lib\Store\EntityNamespaceLookup
  *
  * @group Wikibase
  *

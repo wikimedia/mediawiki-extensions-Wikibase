@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\OutputPageJsConfigBuilder;
-use Wikibase\Repo\EntityNamespaceLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
