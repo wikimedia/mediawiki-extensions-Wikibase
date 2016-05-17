@@ -16,6 +16,24 @@
       "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8a2a0529",
+        "filename": "lib/includes/Formatters/EntityIdHtmlLinkFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-17T08:01:53Z",
+      "side": 1,
+      "message": "We could do it, but I don\u0027t see benefits currently. I consider FallbackHtmlIndicator to be an implementation detail of this formatter.",
+      "parentUuid": "ae564743_06f3a8d2",
+      "revId": "be807e6aec86711f5007a30e511ef85453ce1a4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
