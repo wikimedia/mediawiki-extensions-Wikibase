@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_37223dfc",
+        "filename": "repo/includes/ParserOutput/FallbackHintHtmlTermRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:05:21Z",
+      "side": 1,
+      "message": "Could just take a LanguageFallbackIndicator directly, no need to know about constructing it, or about LanguageNameLookup.",
+      "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_171f39bb",
+        "filename": "repo/includes/ParserOutput/FallbackHintHtmlTermRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:05:21Z",
+      "side": 1,
+      "message": "Hm... not realyl about this patch, but are we sure the indicator shoudl always come after the term itself? Never the other way around? And that there will never by a need to wrap the two together?",
+      "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f7ff252f",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:05:21Z",
+      "side": 1,
+      "message": "This and a return statement for this case should just go into the try block.",
+      "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d7fca13d",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-17T20:05:21Z",
+      "side": 1,
+      "message": "These trinaries can be avoided by having two returns, one in the try block, and one after the catch block.",
+      "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
