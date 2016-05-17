@@ -22,9 +22,9 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
-	 * @var LanguageFallbackIndicator
+	 * @var LanguageNameLookup
 	 */
-	private $languageFallbackIndicator;
+	private $languageNameLookup;
 
 	/**
 	 * @var EntityTitleLookup
@@ -44,7 +44,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		parent::__construct( $labelDescriptionLookup );
 
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->languageFallbackIndicator = new LanguageFallbackIndicator( $languageNameLookup );
+		$this->languageNameLookup = $languageNameLookup;
 	}
 
 	/**
@@ -91,7 +91,7 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		);
 
 		if ( $term instanceof TermFallback ) {
-			$fallbackIndicatorHtml = $this->languageFallbackIndicator->getHtml( $term );
+			$fallbackIndicatorHtml = $this->getHtmlForFallbackIndicator( $term );
 
 			if ( $term->getActualLanguageCode() !== $term->getLanguageCode() ) {
 				$attributes['lang'] = $term->getActualLanguageCode();
@@ -120,6 +120,54 @@ class EntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 		$separator = wfMessage( 'word-separator' )->text();
 		return $entityId->getSerialization() . $separator . $undefinedInfo;
+	}
+
+	private function getHtmlForFallbackIndicator( TermFallback $term ) {
+		$requestedLanguage = $term->getLanguageCode();
+		$actualLanguage = $term->getActualLanguageCode();
+		$sourceLanguage = $term->getSourceLanguageCode();
+
+		$isFallback = $actualLanguage !== $requestedLanguage;
+		$isTransliteration = $sourceLanguage === null || $sourceLanguage !== $actualLanguage;
+
+		if ( !$isFallback && !$isTransliteration ) {
+			return '';
+		}
+
+		$text = $this->languageNameLookup->getName( $actualLanguage );
+
+		if ( $isTransliteration ) {
+			$text = wfMessage(
+				'wikibase-language-fallback-transliteration-hint',
+				$this->languageNameLookup->getName( $sourceLanguage ),
+				$text
+			)->text();
+		}
+
+		// Generate HTML class names
+		$classes = 'wb-language-fallback-indicator';
+		if ( $isTransliteration ) {
+			$classes .= ' wb-language-fallback-transliteration';
+		}
+		if ( $isFallback
+				&& $this->getBaseLanguage( $actualLanguage ) === $this->getBaseLanguage( $requestedLanguage )
+		) {
+			$classes .= ' wb-language-fallback-variant';
+		}
+
+		$attributes = array( 'class' => $classes );
+
+		$html = Html::element( 'sup', $attributes, $text );
+		return $html;
+	}
+
+	/**
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	private function getBaseLanguage( $languageCode ) {
+		return preg_replace( '/-.*/', '', $languageCode );
 	}
 
 }
