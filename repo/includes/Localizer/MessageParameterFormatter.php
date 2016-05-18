@@ -142,9 +142,13 @@ class MessageParameterFormatter implements ValueFormatter {
 		$page = $link->getPageName();
 
 		$site = $this->sites->getSite( $link->getSiteId() );
-		$url = $site->getPageUrl( $link->getPageName() );
 
-		return "[$url $siteId:$page]";
+		if ( $site ) {
+			$url = $site->getPageUrl( $link->getPageName() );
+			return "[$url $siteId:$page]";
+		} else {
+			return "[$siteId:$page]";
+		}
 	}
 
 }
