@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_03f37b69",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-18T10:10:05Z",
+      "side": 1,
+      "message": "needs documentation in docs/options.wiki",
+      "revId": "d93ba87071dc39d5371e295bf44c2cea4b2af968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_63935704",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-18T10:10:05Z",
+      "side": 1,
+      "message": "please make these integers",
+      "revId": "d93ba87071dc39d5371e295bf44c2cea4b2af968",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
