@@ -33,6 +33,7 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Marius Hoch < hoo@online.de >
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Lucie-Aimée Kaffee
  */
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 

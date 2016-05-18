@@ -26,6 +26,7 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
+ * @author Lucie-Aimée Kaffee
  */
 class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestCase {
 
