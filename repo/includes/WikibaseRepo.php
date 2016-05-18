@@ -1520,7 +1520,7 @@ class WikibaseRepo {
 
 			$oldSetting = $entityNamespaces;
 			$entityNamespaces = [];
-			foreach( $oldSetting as $contentModel => $namespace ) {
+			foreach ( $oldSetting as $contentModel => $namespace ) {
 				if ( isset( $entityTypes[ $contentModel ] ) ) {
 					$entityNamespaces[ $entityTypes[ $contentModel ] ] = $namespace;
 				}

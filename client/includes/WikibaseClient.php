@@ -1157,7 +1157,7 @@ final class WikibaseClient {
 
 			$oldSetting = $setting;
 			$setting = [];
-			foreach( $oldSetting as $contentModel => $namespace ) {
+			foreach ( $oldSetting as $contentModel => $namespace ) {
 				if ( isset( $entityTypes[ $contentModel ] ) ) {
 					$setting[ $entityTypes[ $contentModel ] ] = $namespace;
 				}
