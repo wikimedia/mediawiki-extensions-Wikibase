@@ -790,10 +790,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return true;
 		}
 
-		return this._mainSnakSnakView.isValid() &&
-			( !this._qualifiers || this._listViewIsValid( this._qualifiers ) ) &&
-			this._listViewIsValid( this._referencesListview ) &&
-			this._instantiateStatement( null ) instanceof wb.datamodel.Statement;
+		return this._mainSnakSnakView.isValid()
+			// Main snak must be valid and serializable, which fails when the snaktype is missing.
+			&& this._mainSnakSnakView.snak()
+			&& this._rankSelector.isValid()
+			&& ( !this._qualifiers || this._listViewIsValid( this._qualifiers ) )
+			&& ( !this._referencesListview || this._listViewIsValid( this._referencesListview ) );
 	},
 
 	/**

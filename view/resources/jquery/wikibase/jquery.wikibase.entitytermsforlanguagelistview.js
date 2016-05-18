@@ -390,6 +390,10 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @return {boolean}
 	 */
 	isValid: function() {
+		if ( !this._isInEditMode ) {
+			return true;
+		}
+
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter(),
 			isValid = true;
