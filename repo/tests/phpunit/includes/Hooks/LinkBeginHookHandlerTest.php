@@ -288,8 +288,8 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 
 	private function getEntityNamespaceLookup() {
 		$entityNamespaces = array(
-			'wikibase-item' => 0,
-			'wikibase-property' => 102
+			'item' => 0,
+			'property' => 102
 		);
 
 		return new EntityNamespaceLookup( $entityNamespaces );

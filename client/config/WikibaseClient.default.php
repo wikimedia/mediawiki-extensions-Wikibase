@@ -269,8 +269,8 @@ return call_user_func( function() {
 			// XXX: Default to having Items in the main namespace, and properties in NS 120.
 			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
 			return [
-				'wikibase-item' => 0,
-				'wikibase-property' => 120
+				'item' => 0,
+				'property' => 120
 			];
 		}
 	};
@@ -287,8 +287,8 @@ return call_user_func( function() {
 			// XXX: Default to having Items in the main namespace, and properties in the 'Property' namespace.
 			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
 			return [
-				'wikibase-item' => '',
-				'wikibase-property' => 'Property'
+				'item' => '',
+				'property' => 'Property'
 			];
 		}
 	};
