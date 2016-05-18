@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_28f65c5a",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T08:01:24Z",
+      "side": 1,
+      "message": "It\u0027s wrong :)",
+      "parentUuid": "ae564743_97422961",
+      "revId": "9a3b22abaac910f7c864c8405cedb74c263ebbe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_5e3c2edf",
         "filename": "client/config/WikibaseClient.default.php",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2016-05-17T20:17:02Z",
       "side": 1,
       "message": "Why is \u0027120\u0027 a string?\nBut in any case, we should not hard-code any namespace id outside the core range (\u003c100), not even as defaults. 120 may be used for something else on the client wiki. Namespace IDs should be considered dynamic.",
+      "revId": "9a3b22abaac910f7c864c8405cedb74c263ebbe4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_68933404",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T08:01:24Z",
+      "side": 1,
+      "message": "From repoNamespaces I derived that the defaults are supposed to apply to Wikidata.org. Otherwise putting items in the main namespace seems quite specific, too (granted, not as specific as a namespace number).",
+      "parentUuid": "ae564743_1757392a",
       "revId": "9a3b22abaac910f7c864c8405cedb74c263ebbe4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
