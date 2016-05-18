@@ -156,8 +156,8 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 				),
 				false, // $repoIsLocal
 				array( // $expected
-					'repoNamespaces' => [ 'wikibase-item' => '', 'wikibase-property' => 'Property' ],
-					'entityNamespaces' => [ 'wikibase-item' => 0, 'wikibase-property' => 120 ],
+					'repoNamespaces' => [ 'item' => '', 'property' => 'Property' ],
+					'entityNamespaces' => [ 'item' => 0, 'property' => 120 ],
 				)
 			),
 		);
