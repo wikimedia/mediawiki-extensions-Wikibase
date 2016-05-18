@@ -52,4 +52,23 @@ class PlaceholderEmittingEntityTermsViewTest extends PHPUnit_Framework_TestCase 
 		);
 	}
 
+	public function testGetTermsListItems() {
+		$textInjector = new TextInjector();
+		$property = new Property( null, null, 'string' );
+
+		$entityTermsView = $this->newEntityTermsView( $textInjector );
+
+		$termsListItems = $entityTermsView->getTermsListItems(
+			'lkt',
+			$property,
+			$property,
+			$property
+		);
+
+		$this->assertEquals(
+			$termsListItems,
+			[ 'lkt' => null ]
+		);
+	}
+
 }

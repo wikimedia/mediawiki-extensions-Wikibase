@@ -30,14 +30,12 @@ use Wikibase\View\ToolbarEditSectionGenerator;
 /**
  * Creates the parser output for an entity.
  *
- * @note This class relies on Entity and behaves differently when you pass an item as paramater.
- *       We should split this into classes for items and other types of entities.
- *
  * @since 0.5
  *
  * @license GPL-2.0+
  * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class EntityParserOutputGenerator {
 
@@ -314,38 +312,11 @@ class EntityParserOutputGenerator {
 
 		$parserOutput->setExtensionData(
 			'wikibase-terms-list-items',
-			$this->getTermsListItems( $entity, $termsListView )
-		);
-	}
-
-	private function getTermsListItems( EntityDocument $entity, TermsListView $termsListView ) {
-		$allLanguages = [];
-		if ( $entity instanceof AliasesProvider ) {
-			$aliasLanguages = array_keys( $entity->getAliasGroups()->toTextArray() );
-			$allLanguages = array_merge( $allLanguages, $aliasLanguages );
-		}
-		if ( $entity instanceof DescriptionsProvider ) {
-			$descriptionLanguages = array_keys( $entity->getDescriptions()->toTextArray() );
-			$allLanguages = array_merge( $allLanguages, $descriptionLanguages );
-		}
-		if ( $entity instanceof LabelsProvider ) {
-			$labelLanguages = array_keys( $entity->getLabels()->toTextArray() );
-			$allLanguages = array_merge( $allLanguages, $labelLanguages );
-		}
-		$allLanguages = array_unique( $allLanguages );
-
-		return array_combine(
-			$allLanguages,
-			array_map(
-				function( $languageCode ) use( $termsListView, $entity ) {
-					return $termsListView->getListItemHtml(
-						$entity,
-						$entity,
-						$entity instanceof AliasesProvider ? $entity : null,
-						$languageCode
-					);
-				},
-				$allLanguages
+			$entityTermsView->getTermsListItems(
+				$this->languageCode,
+				$entity,
+				$entity,
+				$entity instanceof AliasesProvider ? $entity : null
 			)
 		);
 	}

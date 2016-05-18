@@ -29,7 +29,7 @@ use Wikibase\View\TermsListView;
  */
 class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 
-	private function getEntityTermsView( $editSectionCalls = 0 ) {
+	private function getEntityTermsView( $editSectionCalls = 0, TermsListView $termsListView = null ) {
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
 		$editSectionGenerator->expects( $this->exactly( $editSectionCalls ) )
 			->method( 'getLabelDescriptionAliasesEditSection' )
@@ -37,7 +37,7 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 
 		$textProvider = new DummyLocalizedTextProvider( 'lkt' );
 
-		$termsListView = $this->getMockBuilder( TermsListView::class )
+		$termsListView = $termsListView ?: $this->getMockBuilder( TermsListView::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -145,6 +145,25 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertNotContains( '(wikibase-description-empty)', $html );
 		$this->assertContains( '<div class="wikibase-entitytermsview-heading-aliases wb-empty"></div>', $html );
+	}
+
+	/**
+	 * @dataProvider entityFingerprintProvider
+	 */
+	public function testGetHtml_containsAllTerms( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
+		$termsListView = $this->getMockBuilder( TermsListView::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$termsListView->expects( $this->once() )
+			->method( 'getHtml' )
+			->with(
+				$fingerprint,
+				$fingerprint,
+				$fingerprint,
+				$this->equalTo( $languageCode === 'de' ? [ 'de', 'en' ] : [ 'en' ] )
+			);
+		$entityTermsView = $this->getEntityTermsView( 1, $termsListView );
+		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId, '' );
 	}
 
 	public function testGetTitleHtml_containsLabel() {
