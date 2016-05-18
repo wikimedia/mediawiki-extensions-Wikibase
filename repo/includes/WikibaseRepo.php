@@ -1252,14 +1252,7 @@ class WikibaseRepo {
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getEnabledEntityTypes() {
-		$entityTypeByContentModel = array_flip( $this->getContentModelMappings() );
-
-		return array_map(
-			function( $contentModel ) use ( $entityTypeByContentModel ) {
-				return $entityTypeByContentModel[$contentModel];
-			},
-			array_keys( $this->settings->getSetting( 'entityNamespaces' ) )
-		);
+		return array_keys( $this->getEntityNamespacesSetting() );
 	}
 
 	/**
@@ -1567,13 +1560,21 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return int[]
+	 */
+	private function getEntityNamespacesSetting() {
+		return $this->fixLegacyContentModelSetting(
+			$this->settings->getSetting( 'entityNamespaces' ),
+			'entityNamespaces'
+		);
+	}
+
+	/**
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->settings->getSetting( 'entityNamespaces' )
-			);
+			$this->entityNamespaceLookup = new EntityNamespaceLookup( $this->getEntityNamespacesSetting() );
 		}
 
 		return $this->entityNamespaceLookup;
@@ -1745,6 +1746,21 @@ class WikibaseRepo {
 
 	public function getEntityTypesConfigValueProvider() {
 		return new EntityTypesConfigValueProvider( $this->entityTypeDefinitions );
+	}
+
+	private function fixLegacyContentModelSetting( array $setting, $name ) {
+		if ( isset( $setting[ 'wikibase-item' ] ) || isset( $setting[ 'wikibase-property' ] ) ) {
+			wfWarn( "The specified value for the Wikibase setting '$name' uses content model ids. This is deprecated. " .
+				"Please update to plain entity types." );
+			$oldSetting = $setting;
+			$setting = [];
+			$prefix = 'wikibase-';
+			foreach ( $oldSetting as $contentModel => $namespace ) {
+				$pos = strpos( $contentModel, $prefix );
+				$setting[ $pos === 0 ? substr( $contentModel, strlen( $prefix ) ) : $contentModel ] = $namespace;
+			}
+		}
+		return $setting;
 	}
 
 }
