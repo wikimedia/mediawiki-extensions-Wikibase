@@ -32,12 +32,12 @@ return call_user_func( function() {
 		'showExternalRecentChanges' => true,
 		// default for repo items in main namespace
 		'repoNamespaces' => [
-			'wikibase-item' => '',
-			'wikibase-property' => 'Property'
+			'item' => '',
+			'property' => 'Property'
 		],
 		'entityNamespaces' => [
-			'wikibase-item' => 0,
-			'wikibase-property' => 120
+			'item' => 0,
+			'property' => 120
 		],
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,

@@ -428,7 +428,10 @@ final class WikibaseClient {
 			$this->settings->getSetting( 'repoUrl' ),
 			$this->settings->getSetting( 'repoArticlePath' ),
 			$this->settings->getSetting( 'repoScriptPath' ),
-			$this->settings->getSetting( 'repoNamespaces' )
+			$this->fixLegacyContentModelSetting(
+				$this->settings->getSetting( 'repoNamespaces' ),
+				'repoNamespaces'
+			)
 		);
 	}
 
@@ -1138,11 +1141,31 @@ final class WikibaseClient {
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->settings->getSetting( 'entityNamespaces' )
+				$this->fixLegacyContentModelSetting(
+					$this->settings->getSetting( 'entityNamespaces' ),
+					'entityNamespaces'
+				)
 			);
 		}
 
 		return $this->entityNamespaceLookup;
+	}
+
+	private function fixLegacyContentModelSetting( array $setting, $name ) {
+		if ( isset( $setting[ CONTENT_MODEL_WIKIBASE_ITEM ] ) || isset( $setting[ CONTENT_MODEL_WIKIBASE_PROPERTY ] ) ) {
+			wfLogWarning( "Legacy $name Wikibase setting. Please update." );
+			$contentModelIds = $this->getContentModelMappings();
+			$entityTypes = array_flip( $contentModelIds );
+
+			$oldSetting = $setting;
+			$setting = [];
+			foreach ( $oldSetting as $contentModel => $namespace ) {
+				if ( isset( $entityTypes[ $contentModel ] ) ) {
+					$setting[ $entityTypes[ $contentModel ] ] = $namespace;
+				}
+			}
+		}
+		return $setting;
 	}
 
 }
