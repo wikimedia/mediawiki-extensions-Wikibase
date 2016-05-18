@@ -38,6 +38,11 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $oldAllowDataTransclusion;
 
+	/**
+	 * @var int[]
+	 */
+	private $oldEntityNamespaces;
+
 	protected function setUp() {
 		if ( !defined( 'WB_VERSION' ) ) {
 			$this->markTestSkipped( 'Integration test requires repo and client extension to be active on the same wiki.' );
@@ -47,7 +52,9 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
+		$this->oldEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
 		$settings->setSetting( 'allowDataTransclusion', true );
+		$settings->setSetting( 'entityNamespaces', [ 'wikibase-item' => 0 ] );
 
 		$ns = $this->getDefaultWikitextNS();
 		$this->articleTitle = Title::makeTitle( $ns, 'UsageTrackingIntegrationTest_Article' );
@@ -77,6 +84,10 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		WikibaseClient::getDefaultInstance()->getSettings()->setSetting(
 			'allowDataTransclusion',
 			$this->oldAllowDataTransclusion
+		);
+		WikibaseClient::getDefaultInstance()->getSettings()->setSetting(
+			'entityNamespaces',
+			$this->oldEntityNamespaces
 		);
 	}
 
