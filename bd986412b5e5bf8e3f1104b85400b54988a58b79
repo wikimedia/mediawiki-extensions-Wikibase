@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_f8dc2d1e",
+        "filename": "repo/includes/Localizer/MessageParameterFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-18T18:08:10Z",
+      "side": 1,
+      "message": "Must be wrapped in [[]] to form a valid interwiki link.",
+      "revId": "bd986412b5e5bf8e3f1104b85400b54988a58b79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
