@@ -138,7 +138,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	},
 
 	/**
-	 * Creates labelview and descriptionview widget.
+	 * Creates labelview, descriptionview and aliasesview widget
 	 */
 	_createWidgets: function() {
 		var self = this;
