@@ -31,6 +31,7 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 		$decimal = new DecimalValue( '+123.456' );
 		$entityId = new ItemId( 'Q123' );
 		$siteLink = new SiteLink( 'acme', 'Foo' );
+		$badSiteLink = new SiteLink( 'bad', 'Foo' );
 
 		return array(
 			'string' => array( 'Hello', 'en', 'Hello' ),
@@ -40,6 +41,7 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 			'DecimalValue en' => array( $decimal, 'en', 'DataValues\DecimalValue:+123.456' ),
 			'EntityId' => array( $entityId, 'en', '[[ENTITYID]]' ),
 			'SiteLink' => array( $siteLink, 'en', '[http://acme.com/Foo acme:Foo]' ),
+			'SiteLink bad' => array( $badSiteLink, 'en', '[bad:Foo]' ),
 			'list of floats' => array( array( 1.2, 0.5 ), 'en', '1.2, 0.5' ),
 		);
 	}
@@ -98,17 +100,16 @@ class MessageParameterFormatterTest extends PHPUnit_Framework_TestCase {
 	 * @return SiteStore
 	 */
 	private function getMockSitesTable() {
+		$acme = new Site();
+		$acme->setGlobalId( 'acme' );
+		$acme->setLinkPath( "http://acme.com/$1" );
+
 		$mock = $this->getMock( SiteStore::class );
 		$mock->expects( $this->any() )
 			->method( 'getSite' )
-			->will( $this->returnCallback(
-				function ( $siteId ) {
-					$site = new Site();
-					$site->setGlobalId( $siteId );
-					$site->setLinkPath( "http://$siteId.com/$1" );
-					return $site;
-				}
-			) );
+			->will( $this->returnValueMap( [
+				[ 'acme', $acme ],
+			] ) );
 
 		return $mock;
 	}
