@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit_Framework_TestCase;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
@@ -11,12 +12,13 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class EntityNamespaceLookupTest extends \PHPUnit_Framework_TestCase {
+class EntityNamespaceLookupTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetEntityNamespaces() {
 		$entityNamespaces = $this->getNamespaces();
-		$entityNamespaceLookup = new EntityNamespaceLookup( $this->getNamespaces() );
+		$entityNamespaceLookup = new EntityNamespaceLookup( $entityNamespaces );
 
 		$this->assertEquals( $entityNamespaces, $entityNamespaceLookup->getEntityNamespaces() );
 	}
@@ -24,7 +26,7 @@ class EntityNamespaceLookupTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider getEntityNamespaceProvider
 	 */
-	public function testGetEntityNamespace( array $entityNamespaces, $namespace, $expected ) {
+	public function testGetEntityNamespace( $namespace, $expected ) {
 		$entityNamespaces = $this->getNamespaces();
 
 		$entityNamespaceLookup = new EntityNamespaceLookup( $entityNamespaces );
@@ -32,12 +34,10 @@ class EntityNamespaceLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function getEntityNamespaceProvider() {
-		$entityNamespaces = $this->getNamespaces();
-
-		return array(
-			array( $entityNamespaces, 'wikibase-item', 120 ),
-			array( $entityNamespaces, 'kittens', false )
-		);
+		return [
+			[ 'item', 120 ],
+			[ 'kittens', false ]
+		];
 	}
 
 	public function testIsEntityNamespace() {
@@ -56,10 +56,10 @@ class EntityNamespaceLookupTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	private function getNamespaces() {
-		return array(
-			'wikibase-item' => 120,
-			'wikibase-property' => 122
-		);
+		return [
+			'item' => 120,
+			'property' => 122
+		];
 	}
 
 }
