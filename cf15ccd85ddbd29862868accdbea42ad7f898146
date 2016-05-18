@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_120e22e8",
+        "filename": "repo/includes/Content/PropertyHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-18T14:03:38Z",
+      "side": 1,
+      "message": "My first impression was that this alternative format (either a string class name or a callable) was invented in this patch, but no: https://github.com/wikimedia/mediawiki/blob/master/includes/actions/Action.php#L107\n\nThis is even allowed to contain an actual Action object! Dang. Please review I7fd8032 when you can.",
+      "revId": "cf15ccd85ddbd29862868accdbea42ad7f898146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_52453a17",
+        "filename": "repo/tests/phpunit/includes/Actions/HistoryEntityActionTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-18T14:03:38Z",
+      "side": 1,
+      "message": "Should be \u0027/^Q\\d+\\z/\u0027 without brackets when you don\u0027t care about group 1.",
+      "revId": "cf15ccd85ddbd29862868accdbea42ad7f898146",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

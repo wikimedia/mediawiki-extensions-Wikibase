@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_72831e06",
+        "filename": "repo/includes/Actions/HistoryEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-18T14:03:38Z",
+      "side": 0,
+      "message": "Uh, this is scary. This is the whole reason the test exists (see Ie07d170), but I believe this is also the reason why you created this change set.",
+      "revId": "9ebbb4bd33ca39bcdc7f98d9db4e2bdb00f881ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
