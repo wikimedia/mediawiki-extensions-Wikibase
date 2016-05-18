@@ -62,16 +62,4 @@ class EntityNamespaceLookupTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testIsCoreNamespace() {
-		$this->assertTrue(
-			EntityNamespaceLookup::isCoreNamespace( 4 ),
-			'4 is a core namespace'
-		);
-
-		$this->assertFalse(
-			EntityNamespaceLookup::isCoreNamespace( 9000 ),
-			'9000 is not a core namespace'
-		);
-	}
-
 }
