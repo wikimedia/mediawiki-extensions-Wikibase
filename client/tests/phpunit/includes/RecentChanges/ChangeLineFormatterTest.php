@@ -47,8 +47,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'/wiki/$1',
 			'/w',
 			array(
-				'wikibase-item' => '',
-				'wikibase-property' => 'Property'
+				'item' => '',
+				'property' => 'Property'
 			)
 		);
 	}
