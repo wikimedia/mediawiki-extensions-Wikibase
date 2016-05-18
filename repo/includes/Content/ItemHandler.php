@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EditItemAction;
 use Wikibase\EntityContent;
-use Wikibase\HistoryItemAction;
+use Wikibase\HistoryEntityAction;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\SiteLinkStore;
@@ -88,7 +88,7 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-			'history' => HistoryItemAction::class,
+			'history' => HistoryEntityAction::class,
 			'view' => ViewItemAction::class,
 			'edit' => EditItemAction::class,
 			'submit' => SubmitItemAction::class,
