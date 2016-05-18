@@ -285,7 +285,7 @@
 	"wikibase-self-conflict-patched": "Sửa đổi của bạn đã được vá vào phiên bản gần đây nhất và ghi đè một số thay đổi ở giữa của bạn.",
 	"wikibase-conflict-patched": "Sửa đổi của bạn đã được vá vào phiên bản gần đây nhất.",
 	"wikibase-restoreold": "phục hồi",
-	"wikibase-entity-summary-restore": "Phục hồi phiên bản $3 của [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Phục hồi phiên bản $3 của [[Special:Contributions/$4|{{GENDER:$4}}$4]]",
 	"wikibase-no-direct-editing": "Không gian tên $1 không cho phép sửa đổi trực tiếp",
 	"wikibase-noentity": "Thực thể này không tồn tại. Bạn có thể tìm kiếm nó trong [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} các nhật trình có liên quan].",
 	"wikibase-noentity-createone": "Bạn cũng có thể [[$1|tạo một thực thể mới]].",
