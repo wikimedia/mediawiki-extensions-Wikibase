@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_e3ec87f4",
+        "filename": "repo/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T09:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_d7978149",
+      "revId": "5bc1c05403b609765006ffdf9cc5259991373d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_f7f56580",
         "filename": "repo/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_83e4ab0b",
+        "filename": "repo/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T09:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_f7f56580",
+      "revId": "5bc1c05403b609765006ffdf9cc5259991373d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_77315556",
         "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderEmittingEntityTermsViewTest.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2016-05-17T19:33:20Z",
       "side": 1,
       "message": "There is hidden information flow via object state between getHtml() and getTermsListItems(). Can we avoid this? See my earlier comment.",
+      "revId": "5bc1c05403b609765006ffdf9cc5259991373d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_23caff70",
+        "filename": "repo/tests/phpunit/includes/ParserOutput/PlaceholderEmittingEntityTermsViewTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T09:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_77315556",
       "revId": "5bc1c05403b609765006ffdf9cc5259991373d20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
