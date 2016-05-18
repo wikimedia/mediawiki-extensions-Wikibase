@@ -461,7 +461,7 @@ abstract class EntityHandler extends ContentHandler {
 	final public function getEntityNamespace() {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 
-		return $entityNamespaceLookup->getEntityNamespace( $this->getModelID() );
+		return $entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
 	}
 
 	/**

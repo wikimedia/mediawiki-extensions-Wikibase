@@ -223,7 +223,7 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 			$where[] = $db->makeList(
 				[
 					$db->addQuotes( $entityId->getSerialization() ) . '=page_title',
-					$this->entityNamespaceLookup->getEntityNamespace( 'wikibase-' . $entityId->getEntityType() ) . '=page_namespace'
+					$this->entityNamespaceLookup->getEntityNamespace( $entityId->getEntityType() ) . '=page_namespace'
 				],
 				LIST_AND
 			);
