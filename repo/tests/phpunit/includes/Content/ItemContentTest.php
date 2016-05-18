@@ -69,7 +69,7 @@ class ItemContentTest extends EntityContentTest {
 	 */
 	private function newRedirect( ItemId $itemId, ItemId $targetId ) {
 		$nsLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-		$itemNs = $nsLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+		$itemNs = $nsLookup->getEntityNamespace( 'item' );
 
 		$title = $this->getMock( Title::class );
 		$title->expects( $this->any() )

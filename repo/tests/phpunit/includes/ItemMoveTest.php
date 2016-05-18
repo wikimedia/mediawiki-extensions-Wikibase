@@ -85,7 +85,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
-		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( 'item' );
 
 		// Moving a regular page into data NS to an invalid location
 		// @todo: test other types of entities too!

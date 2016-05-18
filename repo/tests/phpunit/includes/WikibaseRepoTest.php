@@ -253,21 +253,17 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetEnabledEntityTypes() {
-		$entityTypeDefinitions = array(
-			'foo' => array( 'content-model-id' => 'foo-model' ),
-			'bar' => array( 'content-model-id' => 'bar-model' ),
-		);
-		$wikibaseRepo = $this->getWikibaseRepo( $entityTypeDefinitions );
+		$wikibaseRepo = $this->getWikibaseRepo();
 		$wikibaseRepo->getSettings()->setSetting(
 			'entityNamespaces',
-			array(
-				'foo-model' => 100,
-				'bar-model' => 102
-			)
+			[
+				'foo' => 100,
+				'bar' => 102
+			]
 		);
 
 		$this->assertSame(
-			array( 'foo', 'bar' ),
+			[ 'foo', 'bar' ],
 			$wikibaseRepo->getEnabledEntityTypes()
 		);
 	}
