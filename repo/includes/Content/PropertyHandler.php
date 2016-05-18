@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EditPropertyAction;
 use Wikibase\EntityContent;
-use Wikibase\HistoryPropertyAction;
+use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
@@ -97,7 +97,7 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-			'history' => HistoryPropertyAction::class,
+			'history' => HistoryEntityAction::class,
 			'view' => ViewPropertyAction::class,
 			'edit' => EditPropertyAction::class,
 			'submit' => SubmitPropertyAction::class,
