@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Content;
 
 use DataUpdate;
+use IContextSource;
+use Page;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -13,10 +15,12 @@ use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\SubmitItemAction;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
@@ -30,6 +34,7 @@ use Wikibase\ViewItemAction;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class ItemHandler extends EntityHandler {
 
@@ -39,6 +44,16 @@ class ItemHandler extends EntityHandler {
 	private $siteLinkStore;
 
 	/**
+	 * @var EntityIdLookup
+	 */
+	private $entityIdLookup;
+
+	/**
+	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	private $labelDescriptionLookupFactory;
+
+	/**
 	 * @param EntityPerPage $entityPerPage
 	 * @param TermIndex $termIndex
 	 * @param EntityContentDataCodec $contentCodec
@@ -46,6 +61,8 @@ class ItemHandler extends EntityHandler {
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser
 	 * @param SiteLinkStore $siteLinkStore
+	 * @param EntityIdLookup $entityIdLookup
+	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
@@ -56,6 +73,8 @@ class ItemHandler extends EntityHandler {
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
 		SiteLinkStore $siteLinkStore,
+		EntityIdLookup $entityIdLookup,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(
@@ -69,6 +88,8 @@ class ItemHandler extends EntityHandler {
 			$legacyExportFormatDetector
 		);
 
+		$this->entityIdLookup = $entityIdLookup;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->siteLinkStore = $siteLinkStore;
 	}
 
@@ -88,7 +109,14 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-			'history' => HistoryEntityAction::class,
+			'history' => function( Page $page, IContextSource $context = null ) {
+				return new HistoryEntityAction(
+					$page,
+					$context,
+					$this->entityIdLookup,
+					$this->labelDescriptionLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
+				);
+			},
 			'view' => ViewItemAction::class,
 			'edit' => EditItemAction::class,
 			'submit' => SubmitItemAction::class,

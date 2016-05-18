@@ -12,7 +12,9 @@ use PHPUnit_Framework_TestCase;
 use Title;
 use User;
 use WebRequest;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\HistoryEntityAction;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\HistoryEntityAction
@@ -24,6 +26,7 @@ use Wikibase\HistoryEntityAction;
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 
@@ -92,7 +95,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 
 	public function testGivenUnDeserializableRevision_historyActionDoesNotFail() {
 		$page = $this->getPage( 'Page title' );
-		$page->expects( $this->once() )
+		$page->expects( $this->any() )
 			->method( 'getPage' )
 			->will( $this->throwException( new MWContentSerializationException() ) );
 
@@ -101,8 +104,28 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 			->method( 'setPageTitle' )
 			->with( '(history-title: Page title)' );
 
-		$action = new HistoryEntityAction( $page, $this->getContext( $output ) );
+		$action = new HistoryEntityAction(
+			$page,
+			$this->getContext( $output ),
+			$this->getEntityIdLookup(),
+			$this->getMock( LabelDescriptionLookup::class )
+		);
 		$action->show();
+	}
+
+	private function getEntityIdLookup() {
+		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup->expects( $this->any() )
+			->method( 'getEntityIdForTitle' )
+			->will( $this->returnCallback( function( Title $title ) {
+				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
+					return new ItemId( $m[0] );
+				}
+
+				return null;
+			} ) );
+
+		return $entityIdLookup;
 	}
 
 }

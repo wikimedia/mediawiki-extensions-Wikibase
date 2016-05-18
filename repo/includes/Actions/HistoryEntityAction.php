@@ -3,8 +3,10 @@
 namespace Wikibase;
 
 use HistoryAction;
-use MWContentSerializationException;
-use Wikibase\Repo\WikibaseRepo;
+use IContextSource;
+use Page;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * Handles the history action for Wikibase entities.
@@ -13,52 +15,35 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class HistoryEntityAction extends HistoryAction {
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var EntityIdLookup $entityIdLookup
 	 */
-	protected $languageFallbackChain;
+	private $entityIdLookup;
 
 	/**
-	 * Get the language fallback chain for current context.
-	 *
-	 * @since 0.4
-	 *
-	 * @return LanguageFallbackChain
+	 * @var LabelDescriptionLookup $labelDescriptionLookup
 	 */
-	public function getLanguageFallbackChain() {
-		if ( $this->languageFallbackChain === null ) {
-			$this->languageFallbackChain = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
-				->newFromContext( $this->getContext() );
-		}
-
-		return $this->languageFallbackChain;
-	}
+	private $labelDescriptionLookup;
 
 	/**
-	 * Set language fallback chain.
-	 *
-	 * @since 0.4
-	 *
-	 * @param LanguageFallbackChain $chain
+	 * @param Page $page
+	 * @param IContextSource|null $context
+	 * @param EntityIdLookup $entityIdLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 */
-	public function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
-		$this->languageFallbackChain = $chain;
-	}
-
-	/**
-	 * Returns the content of the page being viewed.
-	 *
-	 * @return EntityContent|null
-	 */
-	protected function getContent() {
-		try {
-			return $this->getArticle()->getPage()->getContent();
-		} catch ( MWContentSerializationException $ex ) {
-			return null;
-		}
+	public function __construct(
+		Page $page,
+		IContextSource $context = null,
+		EntityIdLookup $entityIdLookup,
+		LabelDescriptionLookup $labelDescriptionLookup
+	) {
+		parent::__construct( $page, $context );
+		$this->entityIdLookup = $entityIdLookup;
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 	}
 
 	/**
@@ -67,33 +52,19 @@ class HistoryEntityAction extends HistoryAction {
 	 * @return string
 	 */
 	protected function getPageTitle() {
-		$content = $this->getContent();
+		$title = $this->getTitle();
 
-		if ( !$content ) {
-			// Page does not exist or the entity or redirect can not be deserialized.
+		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
+
+		if ( !$entityId ) {
 			return parent::getPageTitle();
 		}
 
-		if ( $content->isRedirect() ) {
-			//TODO: use a message like <autoredircomment> to represent the redirect.
-			return parent::getPageTitle();
-		}
+		$label = $this->labelDescriptionLookup->getLabel( $entityId );
+		$idSerialization = $entityId->getSerialization();
 
-		$entity = $content->getEntity();
-
-		$languageFallbackChain = $this->getLanguageFallbackChain();
-		$labels = $entity->getFingerprint()->getLabels()->toTextArray();
-		$labelData = $languageFallbackChain->extractPreferredValueOrAny( $labels );
-
-		if ( $labelData ) {
-			$labelText = $labelData['value'];
-		} else {
-			$labelText = null;
-		}
-
-		$idSerialization = $entity->getId()->getSerialization();
-
-		if ( isset( $labelText ) ) {
+		if ( $label !== null ) {
+			$labelText = $label->getText();
 			// Escaping HTML characters in order to retain original label that may contain HTML
 			// characters. This prevents having characters evaluated or stripped via
 			// OutputPage::setPageTitle:

@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Content;
 
 use DataUpdate;
+use IContextSource;
+use Page;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -12,12 +14,14 @@ use Wikibase\EditPropertyAction;
 use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
 use Wikibase\PropertyInfoStore;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\SubmitPropertyAction;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
@@ -45,6 +49,16 @@ class PropertyHandler extends EntityHandler {
 	private $propertyInfoBuilder;
 
 	/**
+	 * @var EntityIdLookup
+	 */
+	private $entityIdLookup;
+
+	/**
+	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	private $labelDescriptionLookupFactory;
+
+	/**
 	 * @see EntityHandler::getContentClass
 	 *
 	 * @since 0.3
@@ -62,6 +76,8 @@ class PropertyHandler extends EntityHandler {
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdLookup $entityIdLookup
+	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param PropertyInfoStore $infoStore
 	 * @param PropertyInfoBuilder $propertyInfoBuilder
 	 * @param callable|null $legacyExportFormatDetector
@@ -73,6 +89,8 @@ class PropertyHandler extends EntityHandler {
 		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
+		EntityIdLookup $entityIdLookup,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		PropertyInfoStore $infoStore,
 		PropertyInfoBuilder $propertyInfoBuilder,
 		$legacyExportFormatDetector = null
@@ -88,6 +106,8 @@ class PropertyHandler extends EntityHandler {
 			$legacyExportFormatDetector
 		);
 
+		$this->entityIdLookup = $entityIdLookup;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->infoStore = $infoStore;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
 	}
@@ -97,7 +117,14 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-			'history' => HistoryEntityAction::class,
+			'history' => function( Page $page, IContextSource $context = null ) {
+				return new HistoryEntityAction(
+					$page,
+					$context,
+					$this->entityIdLookup,
+					$this->labelDescriptionLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
+				);
+			},
 			'view' => ViewPropertyAction::class,
 			'edit' => EditPropertyAction::class,
 			'submit' => SubmitPropertyAction::class,
