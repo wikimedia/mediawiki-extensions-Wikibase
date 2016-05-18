@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_4f1ab51c",
+        "filename": "repo/includes/ParserOutput/FallbackHintHtmlTermRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T11:04:36Z",
+      "side": 1,
+      "message": "I thought about this, too, but I feel like this is actually an implementation detail as it currently stands. As soon as LanguageFallbackIndicator has more constructor args we should do it, though :)",
+      "parentUuid": "ae564743_37223dfc",
+      "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_171f39bb",
         "filename": "repo/includes/ParserOutput/FallbackHintHtmlTermRenderer.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-17T20:05:21Z",
       "side": 1,
       "message": "Hm... not realyl about this patch, but are we sure the indicator shoudl always come after the term itself? Never the other way around? And that there will never by a need to wrap the two together?",
+      "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_8f104df9",
+        "filename": "repo/includes/ParserOutput/FallbackHintHtmlTermRenderer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T11:04:36Z",
+      "side": 1,
+      "message": "Wrapping is still possible. As for the order, I think it\u0027s the right thing to do.",
+      "parentUuid": "ae564743_171f39bb",
       "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_6fee99ec",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T11:04:36Z",
+      "side": 1,
+      "message": "That\u0027s possible.",
+      "parentUuid": "ae564743_f7ff252f",
+      "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_d7fca13d",
         "filename": "view/src/SimpleEntityTermsView.php",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2016-05-17T20:05:21Z",
       "side": 1,
       "message": "These trinaries can be avoided by having two returns, one in the try block, and one after the catch block.",
+      "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_6fd5f912",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-18T11:04:36Z",
+      "side": 1,
+      "message": "I actually like that the implementation makes clear what the return value always looks like from the outside (a rendered wikibase-title).",
+      "parentUuid": "ae564743_d7fca13d",
       "revId": "d12a1be9a8492b4c60fb8a1d2e695db16691f0a0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
