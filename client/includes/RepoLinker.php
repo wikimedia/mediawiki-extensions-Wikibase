@@ -47,13 +47,11 @@ class RepoLinker {
 	 * @throws InvalidArgumentException
 	 */
 	public function getNamespace( $entityType ) {
-		$contentType = 'wikibase-' . $entityType;
-
-		if ( !array_key_exists( $contentType, $this->namespaces ) ) {
+		if ( !array_key_exists( $entityType, $this->namespaces ) ) {
 			throw new InvalidArgumentException( "No namespace configured for entities of type $entityType" );
 		}
 
-		return $this->namespaces[$contentType];
+		return $this->namespaces[$entityType];
 	}
 
 	/**

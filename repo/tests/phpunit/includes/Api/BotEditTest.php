@@ -166,7 +166,7 @@ class BotEditTest extends WikibaseApiTestCase {
 		$change = null;
 
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-		$itemNs = $entityNamespaceLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+		$itemNs = $entityNamespaceLookup->getEntityNamespace( 'item' );
 
 		foreach ( $rcResult[0]['query']['recentchanges'] as $rc ) {
 			$title = Title::newFromText( $rc['title'] );
