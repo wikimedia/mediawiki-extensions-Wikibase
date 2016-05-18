@@ -32,32 +32,32 @@ final class EntityNamespaceLookup {
 	}
 
 	/**
-	 * Returns a list of entity content model ids pointing to the ids of the namespaces
+	 * Returns a list of entity types pointing to the ids of the namespaces
 	 * in which they reside.
 	 *
 	 * @since 0.4
 	 *
-	 * @return array [ content model id (string) -> namespace id (integer) ]
+	 * @return array [ entity type (string) -> namespace id (integer) ]
 	 */
 	public function getEntityNamespaces() {
 		return $this->entityNamespaces;
 	}
 
 	/**
-	 * Returns the namespace ID for the given entity content model, or false if the content model
-	 * is not a known entity model.
+	 * Returns the namespace ID for the given entity type, or false if the parameter
+	 * is not a known entity type.
 	 *
 	 * The return value is based on getEntityNamespaces(), which is configured via
 	 * $wgWBRepoSettings['entityNamespaces'].
 	 *
 	 * @since 0.4
 	 *
-	 * @param String $model the model ID
+	 * @param string $entityType the entity type
 	 *
-	 * @return int|bool the namespace associated with the given content model (or false if there is none)
+	 * @return int|bool the namespace associated with the given entity type (or false if there is none)
 	 */
-	public function getEntityNamespace( $model ) {
-		return isset( $this->entityNamespaces[$model] ) ? $this->entityNamespaces[$model] : false;
+	public function getEntityNamespace( $entityType ) {
+		return isset( $this->entityNamespaces[$entityType] ) ? $this->entityNamespaces[$entityType] : false;
 	}
 
 	/**

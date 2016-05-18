@@ -80,19 +80,22 @@ final class RepoHooks {
 	public static function onSetupAfterCache() {
 		global $wgNamespaceContentModels;
 
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$entityNamespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
 		$namespaces = $entityNamespaceLookup->getEntityNamespaces();
 
 		if ( empty( $namespaces ) ) {
 			throw new MWException( 'Wikibase: Incomplete configuration: '
 				. '$wgWBRepoSettings[\'entityNamespaces\'] has to be set to an '
-				. 'array mapping content model IDs to namespace IDs. '
+				. 'array mapping entity types to namespace IDs. '
 				. 'See Wikibase.example.php for details and examples.' );
 		}
 
-		foreach ( $namespaces as $contentModel => $namespace ) {
+		$contentModelIds = $wikibaseRepo->getContentModelMappings();
+
+		foreach ( $namespaces as $entityType => $namespace ) {
 			if ( !isset( $wgNamespaceContentModels[$namespace] ) ) {
-				$wgNamespaceContentModels[$namespace] = $contentModel;
+				$wgNamespaceContentModels[$namespace] = $contentModelIds[$entityType];
 			}
 		}
 
@@ -849,12 +852,19 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onContentModelCanBeUsedOn( $contentModel, Title $title, &$ok ) {
-		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$expectedModel = array_search(
+		$namespaceLookup = $wikibaseRepo->getEntityNamespaceLookup();
+		$contentModelIds = $wikibaseRepo->getContentModelMappings();
+
+		$expectedModel = false;
+		$expectedEntityType = array_search(
 			$title->getNamespace(),
 			$namespaceLookup->getEntityNamespaces()
 		);
+		if ( $expectedEntityType !== false ) {
+			$expectedModel = $contentModelIds[$expectedEntityType];
+		}
 
 		// If the namespace is an entity namespace, the content model
 		// must be the model assigned to that namespace.
