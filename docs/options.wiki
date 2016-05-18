@@ -8,7 +8,7 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 == Common Settings ==
 === Basic Settings ===
 
-;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping content model IDs such as <code>CONTENT_MODEL_WIKIBASE_ITEM</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
+;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping entity types such as <code>'item'</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
 ;changesDatabase: The database that changes are recorded to for processing by clients. This must be set to a symbolic database identifier that MediaWiki's LBFactory class understands; <code>false</code> means that the wiki's own database shall be used. '''Note''' that on the client, this setting should usually be the same as the <code>repoDatabase</code> setting.
 ;siteLinkGroups: The site groups to use in sitelinks. Must correspond to a value used to give the site group in the MediaWiki <code>sites</code> table. Default is array( "wikipedia" ). This defines which groups of sites can be linked to Wikibase items. '''Note''' that this setting replaces the old ''siteLinkGroup'' setting, which only allowed for a single group.
 ;specialSiteLinkGroups: This maps one or more site groups into a single "special" group. This is useful if sites from multiple site groups should be shown in a single "special" section on item pages, instead of one section per site group. To show these site-groups you have to add the group "special" to the '''siteLinkGroups''' setting (see above).
@@ -79,8 +79,8 @@ Default:
 ;repoNamespaces: An array telling the client wiki which namespaces on the repository are used for which kind of entity. This is given as an associative array mapping entity type IDs such as Item::ENTITY_TYPE, to namespace names. This information is used when constructing links to entities on the repository. Default:
 <poem>
           array(
-              'wikibase-item' => '',
-              'wikibase-property' => 'Property'
+              'item' => '',
+              'property' => 'Property'
           )
 </poem>
 ;allowDataTransclusion: switch to enable data transclusion features like the <nowiki>{{#property}}</nowiki> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <tt>true</tt>.

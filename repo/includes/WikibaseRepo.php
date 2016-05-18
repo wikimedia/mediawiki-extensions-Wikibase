@@ -1209,14 +1209,7 @@ class WikibaseRepo {
 	 *  $wgWBRepoSettings['entityNamespaces'] setting.
 	 */
 	public function getEnabledEntityTypes() {
-		$entityTypeByContentModel = array_flip( $this->getContentModelMappings() );
-
-		return array_map(
-			function( $contentModel ) use ( $entityTypeByContentModel ) {
-				return $entityTypeByContentModel[$contentModel];
-			},
-			array_keys( $this->settings->getSetting( 'entityNamespaces' ) )
-		);
+		return array_keys( $this->getEntityNamespacesSetting() );
 	}
 
 	/**
@@ -1515,13 +1508,34 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @return int[]
+	 */
+	private function getEntityNamespacesSetting() {
+		$entityNamespaces = $this->settings->getSetting( 'entityNamespaces' );
+
+		if ( isset( $entityNamespaces[ CONTENT_MODEL_WIKIBASE_ITEM ] ) || isset( $entityNamespaces[ CONTENT_MODEL_WIKIBASE_PROPERTY ] ) ) {
+			wfLogWarning( "Legacy entityNamespaces Wikibase setting. Please update." );
+			$contentModelIds = $this->getContentModelMappings();
+			$entityTypes = array_flip( $contentModelIds );
+
+			$oldSetting = $entityNamespaces;
+			$entityNamespaces = [];
+			foreach( $oldSetting as $contentModel => $namespace ) {
+				if ( isset( $entityTypes[ $contentModel ] ) ) {
+					$entityNamespaces[ $entityTypes[ $contentModel ] ] = $namespace;
+				}
+			}
+		}
+
+		return $entityNamespaces;
+	}
+
+	/**
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->settings->getSetting( 'entityNamespaces' )
-			);
+			$this->entityNamespaceLookup = new EntityNamespaceLookup( $this->getEntityNamespacesSetting() );
 		}
 
 		return $this->entityNamespaceLookup;

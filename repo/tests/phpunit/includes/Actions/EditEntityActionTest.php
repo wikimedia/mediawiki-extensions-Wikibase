@@ -881,7 +881,7 @@ class EditEntityActionTest extends ActionTestCase {
 
 	private function getItemNamespace() {
 		 $entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-		 return $entityNamespaceLookup->getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+		 return $entityNamespaceLookup->getEntityNamespace( 'item' );
 	}
 
 	private function getEditToken() {

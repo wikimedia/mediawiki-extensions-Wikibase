@@ -34,8 +34,8 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
 		$repoNamespaces = array(
-			'wikibase-item' => '',
-			'wikibase-property' => 'Property:'
+			'item' => '',
+			'property' => 'Property:'
 		);
 
 		return new RepoLinker( $baseUrl, $articlePath, $scriptPath, $repoNamespaces );

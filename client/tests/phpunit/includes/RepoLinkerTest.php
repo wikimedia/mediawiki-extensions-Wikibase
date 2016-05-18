@@ -27,8 +27,8 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 				'repoNamespaces' => array(
-					'wikibase-item' => '',
-					'wikibase-property' => 'Property'
+					'item' => '',
+					'property' => 'Property'
 				)
 			),
 			array(
@@ -36,8 +36,8 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 				'repoNamespaces' => array(
-					'wikibase-item' => '',
-					'wikibase-property' => 'Property'
+					'item' => '',
+					'property' => 'Property'
 				)
 			),
 			array(
@@ -45,8 +45,8 @@ class RepoLinkerTest extends \PHPUnit_Framework_TestCase {
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '/w',
 				'repoNamespaces' => array(
-					'wikibase-item' => 'Item',
-					'wikibase-property' => 'Property'
+					'item' => 'Item',
+					'property' => 'Property'
 				)
 			)
 		);
