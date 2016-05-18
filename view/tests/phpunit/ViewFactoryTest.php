@@ -111,7 +111,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( array() ),
 			$editSectionGenerator,
-			$factory->newEntityTermsView( $editSectionGenerator )
+			$this->getMock( EntityTermsView::class )
 		);
 
 		$this->assertInstanceOf( ItemView::class, $itemView );
@@ -125,7 +125,7 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( array() ),
 			$editSectionGenerator,
-			$factory->newEntityTermsView( $editSectionGenerator )
+			$this->getMock( EntityTermsView::class )
 		);
 
 		$this->assertInstanceOf( PropertyView::class, $propertyView );
@@ -140,14 +140,6 @@ class ViewFactoryTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertInstanceOf( StatementSectionsView::class, $statementSectionsView );
-	}
-
-	public function testNewEntityTermsView() {
-		$entityTermsView = $this->newViewFactory()->newEntityTermsView(
-			$this->getMock( EditSectionGenerator::class )
-		);
-
-		$this->assertInstanceOf( EntityTermsView::class, $entityTermsView );
 	}
 
 	/**

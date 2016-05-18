@@ -20,6 +20,18 @@ h1 .wikibase-title .wikibase-title-id {
 	unicode-bidi: embed;
 }
 
+/**
+ * Make the title's fallback hint look the same as other fallback hints
+ * This is hacky and vector-specific
+ * It basically overrides MediaWiki's h1 styling with Vector's .mw-body styling
+ */
+.skin-vector .wikibase-title .wb-language-fallback-indicator {
+	/* 0.8 (.wb-language-fallback-indicator) * 0.875 (.mw-body-content) / 1.875 (.mw-body h1) */
+	font-size: 0.3888em;
+	font-family: sans-serif;
+	color: #252525;
+}
+
 h1 .wikibase-title .wikibase-title-id:before {
 	/* Prevent id being hidden in ellipsis on very long labels: */
 	content: ' ';
@@ -251,6 +263,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	font-style: italic;
 	margin: 0 0.5em;
 	line-height: 1;
+	font-size: 0.8em;
 }
 
 /***** /ENTITY ID VALUES *****/
