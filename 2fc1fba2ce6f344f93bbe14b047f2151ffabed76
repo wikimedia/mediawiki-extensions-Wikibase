@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_e1e630aa",
+        "filename": "repo/tests/phpunit/includes/Specials/SpecialListDatatypesTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-05-19T23:45:04Z",
+      "side": 1,
+      "message": "curious, why the underscore?",
+      "revId": "2fc1fba2ce6f344f93bbe14b047f2151ffabed76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
