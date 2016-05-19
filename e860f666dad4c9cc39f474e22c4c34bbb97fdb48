@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_a2839b04",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-19T20:05:15Z",
+      "side": 1,
+      "message": "This is production code. Why do you import an unused test dummy?",
+      "parentUuid": "ae564743_d88e84d4",
+      "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_a9d1c9fd",
         "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "I believe you confused the two interfaces. Provider \u003d only a getter. Holder \u003d getter and setter.",
       "parentUuid": "ae564743_a9d1c9fd",
+      "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c2a32f95",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-19T20:05:15Z",
+      "side": 1,
+      "message": "I didn\u0027t. Your answer indicates that passing something that\u0027s only a Holder, but doesn\u0027t explicitly implement Provider should work. It did work, but your change breaks that.",
+      "parentUuid": "ae564743_389ea00a",
       "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
