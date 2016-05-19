@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Игорь Бродский",
-			"Sebranik"
+			"Sebranik",
+			"Ghiutun"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}}-element om toižetadud",
@@ -11,6 +12,7 @@
 	"wikibase-editlinkstitle": "Redaktiruida kelidenkeskeižid kosketusid",
 	"wikibase-linkitem-addlinks": "Ližata kosketused",
 	"wikibase-rc-hide-wikidata": "$1 Wikidata",
+	"wikibase-rc-hide-wikidata-hide": "Peitta",
 	"wikibase-rc-hide-wikidata-show": "Ozutada",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-redakcii"
