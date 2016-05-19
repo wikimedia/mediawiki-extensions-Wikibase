@@ -1,8 +1,5 @@
 <?php
 
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
-
 /**
  * Lib is not an application and should not have global config state.
  * Therefore you should NOT add new settings here. If both client and repo

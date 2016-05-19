@@ -4,11 +4,9 @@ namespace Wikibase\Repo\ParserOutput;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\HtmlTermRenderer;
 use Wikibase\View\LocalizedTextProvider;

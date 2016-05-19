@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
-use Wikibase\DataModel\Services\Entity\EntityIdParser;
 use Wikibase\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityChangeLookup;

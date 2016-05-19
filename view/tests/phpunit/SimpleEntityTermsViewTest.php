@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\HtmlTermRenderer;

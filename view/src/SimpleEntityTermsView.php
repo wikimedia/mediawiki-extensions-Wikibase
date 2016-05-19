@@ -10,7 +10,6 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
