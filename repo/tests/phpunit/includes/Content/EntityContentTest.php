@@ -6,7 +6,6 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Diff\Patcher\PatcherException;
 use ParserOutput;
-use PHPUnit_Framework_Assert;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -84,13 +83,9 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider getTextForSearchIndexProvider
-	 *
-	 * @param EntityContent $entityContent
-	 * @param string $pattern
 	 */
-	public function testGetTextForSearchIndex( EntityContent $entityContent, $pattern ) {
-		$text = $entityContent->getTextForSearchIndex();
-		$this->assertRegExp( $pattern . 'm', $text );
+	public function testGetTextForSearchIndex( EntityContent $entityContent, $expected ) {
+		$this->assertSame( $expected, $entityContent->getTextForSearchIndex() );
 	}
 
 	private function setLabel( EntityDocument $entity, $lang, $text ) {
@@ -106,7 +101,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		return array(
-			array( $entityContent, '/^cake$/' )
+			array( $entityContent, 'cake' )
 		);
 	}
 
@@ -117,8 +112,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->mergeMwGlobalArrayValue( 'wgHooks', array(
 			'WikibaseTextForSearchIndex' => array(
 				function ( $actualEntityContent, &$text ) use ( $entityContent ) {
-					PHPUnit_Framework_Assert::assertSame( $entityContent, $actualEntityContent );
-					PHPUnit_Framework_Assert::assertRegExp( '/cake/m', $text );
+					$this->assertSame( $entityContent, $actualEntityContent );
+					$this->assertSame( 'cake', $text );
 
 					$text .= "\nHOOK";
 					return true;
@@ -127,7 +122,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		) );
 
 		$text = $entityContent->getTextForSearchIndex();
-		$this->assertRegExp( '/cake.*HOOK/s', $text, 'Text for search index should be updated by the hook' );
+		$this->assertSame( "cake\nHOOK", $text, 'Text for search index should be updated by the hook' );
 	}
 
 	public function testWikibaseTextForSearchIndex_abort() {
@@ -143,7 +138,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		) );
 
 		$text = $entityContent->getTextForSearchIndex();
-		$this->assertEquals( '', $text, 'Text for search index should be empty if the hook returned false' );
+		$this->assertSame( '', $text, 'Text for search index should be empty if the hook returned false' );
 	}
 
 	public function testGetParserOutput() {
@@ -168,7 +163,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		);
 
 		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
-		$this->assertEquals( EntityContent::STATUS_EMPTY, $parserOutput->getProperty( 'wb-status' ) );
+		$this->assertSame( EntityContent::STATUS_EMPTY, $parserOutput->getProperty( 'wb-status' ) );
 	}
 
 	public function providePageProperties() {
@@ -200,7 +195,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		foreach ( $expectedProps as $name => $expected ) {
 			$actual = $parserOutput->getProperty( $name );
-			$this->assertEquals( $expected, $actual, "page property $name" );
+			$this->assertSame( $expected, $actual, "page property $name" );
 		}
 	}
 
@@ -223,10 +218,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetEntityStatus
 	 */
-	public function testGetEntityStatus( EntityContent $content, $status ) {
-		$actual = $content->getEntityStatus();
-
-		$this->assertEquals( $status, $actual );
+	public function testGetEntityStatus( EntityContent $content, $expected ) {
+		$this->assertSame( $expected, $content->getEntityStatus() );
 	}
 
 	abstract public function provideGetEntityId();
@@ -272,7 +265,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		foreach ( $pageProps as $key => $value ) {
 			$this->assertArrayHasKey( $key, $actual );
-			$this->assertEquals( $value, $actual[$key], $key );
+			$this->assertSame( $value, $actual[$key], $key );
 		}
 
 		$this->assertArrayEquals( array_keys( $pageProps ), array_keys( $actual ) );
@@ -301,10 +294,6 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider diffProvider
-	 *
-	 * @param EntityContent $a
-	 * @param EntityContent $b
-	 * @param EntityContentDiff $expected
 	 */
 	public function testGetDiff( EntityContent $a, EntityContent $b, EntityContentDiff $expected ) {
 		$actual = $a->getDiff( $b );
@@ -347,10 +336,6 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider patchedCopyProvider
-	 *
-	 * @param EntityContent $base
-	 * @param EntityContentDiff $patch
-	 * @param EntityContent|null $expected
 	 */
 	public function testGetPatchedCopy( EntityContent $base, EntityContentDiff $patch, EntityContent $expected = null ) {
 		if ( $expected === null ) {
@@ -378,7 +363,6 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider copyProvider
-	 * @param EntityContent $content
 	 */
 	public function testCopy( EntityContent $content ) {
 		$copy = $content->copy();
@@ -407,13 +391,9 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider equalsProvider
 	 */
-	public function testEquals( EntityContent $a, EntityContent $b, $equals ) {
-
-		$actual = $a->equals( $b );
-		$this->assertEquals( $equals, $actual );
-
-		$actual = $b->equals( $a );
-		$this->assertEquals( $equals, $actual );
+	public function testEquals( EntityContent $a, EntityContent $b, $expected ) {
+		$this->assertSame( $expected, $a->equals( $b ) );
+		$this->assertSame( $expected, $b->equals( $a ) );
 	}
 
 	private function createTitleForEntity( EntityDocument $entity ) {

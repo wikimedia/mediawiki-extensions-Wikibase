@@ -97,25 +97,13 @@ class ItemContentTest extends EntityContentTest {
 		return ItemContent::newFromRedirect( new EntityRedirect( $itemId, $targetId ), $title );
 	}
 
-	/**
-	 * @dataProvider getTextForSearchIndexProvider
-	 *
-	 * @param EntityContent $itemContent
-	 * @param string $pattern
-	 */
-	public function testGetTextForSearchIndex( EntityContent $itemContent, $pattern ) {
-		$text = $itemContent->getTextForSearchIndex();
-		$this->assertRegExp( $pattern . 'm', $text );
-	}
-
 	public function getTextForSearchIndexProvider() {
 		$itemContent = $this->newEmpty();
 		$itemContent->getEntity()->setLabel( 'en', "cake" );
 		$itemContent->getEntity()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 
 		return array(
-			array( $itemContent, '!^cake$!' ),
-			array( $itemContent, '!^Berlin$!' )
+			array( $itemContent, "cake\nBerlin" ),
 		);
 	}
 
