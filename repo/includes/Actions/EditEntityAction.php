@@ -123,9 +123,12 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @return bool true if there were permission errors
 	 */
 	protected function showPermissionError( $action ) {
-		if ( !$this->getTitle()->userCan( $action, $this->getUser() ) ) {
+		$rigor = $this->getRequest()->wasPosted() ? 'secure' : 'full';
+
+		if ( !$this->getTitle()->userCan( $action, $this->getUser(), $rigor ) ) {
 			$this->getOutput()->showPermissionsErrorPage(
-				array( $this->getTitle()->getUserPermissionsErrors( $action, $this->getUser() ) ),
+				[ $this->getTitle()
+					->getUserPermissionsErrors( $action, $this->getUser(), $rigor ) ],
 				$action
 			);
 
