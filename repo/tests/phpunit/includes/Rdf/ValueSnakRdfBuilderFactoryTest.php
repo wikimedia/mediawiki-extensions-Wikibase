@@ -3,7 +3,6 @@
 namespace Wikibase\Test\Rdf;
 
 use Closure;
-use PHPUnit_Framework_Assert;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
@@ -96,11 +95,11 @@ class ValueSnakRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 			$valueSnakRdfBuilder,
 			&$called
 		) {
-			PHPUnit_Framework_Assert::assertSame( $expectedMode, $mode );
-			PHPUnit_Framework_Assert::assertSame( $expectedVocab, $vocab );
-			PHPUnit_Framework_Assert::assertSame( $expectedWriter, $writer );
-			PHPUnit_Framework_Assert::assertSame( $expectedTracker, $tracker );
-			PHPUnit_Framework_Assert::assertSame( $expectedDedupe, $dedupe );
+			$this->assertSame( $expectedMode, $mode );
+			$this->assertSame( $expectedVocab, $vocab );
+			$this->assertSame( $expectedWriter, $writer );
+			$this->assertSame( $expectedTracker, $tracker );
+			$this->assertSame( $expectedDedupe, $dedupe );
 			$called = true;
 
 			return $valueSnakRdfBuilder;

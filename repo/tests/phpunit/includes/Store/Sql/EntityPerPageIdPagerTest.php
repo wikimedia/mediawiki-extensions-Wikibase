@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 
-use PHPUnit_Framework_Assert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -45,7 +44,7 @@ class EntityPerPageIdPagerTest extends \MediaWikiTestCase {
 			EntityId $after = null,
 			$actualRedirectMode = EntityPerPage::NO_REDIRECTS
 		) use ( $keydIds, $redirectMode ) {
-			PHPUnit_Framework_Assert::assertEquals( $redirectMode, $actualRedirectMode );
+			$this->assertEquals( $redirectMode, $actualRedirectMode );
 
 			reset( $keydIds );
 			while ( $after && current( $keydIds ) && key( $keydIds ) <= $after->getSerialization() ) {
