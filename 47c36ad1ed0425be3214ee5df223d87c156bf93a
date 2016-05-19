@@ -16,6 +16,24 @@
       "revId": "47c36ad1ed0425be3214ee5df223d87c156bf93a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_a18398cf",
+        "filename": "client/tests/phpunit/includes/ClientParserOutputDataUpdaterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-19T23:34:06Z",
+      "side": 1,
+      "message": "You\u0027re right, I also just ran these tests without a running database.",
+      "parentUuid": "ae564743_c1196cdd",
+      "revId": "47c36ad1ed0425be3214ee5df223d87c156bf93a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
