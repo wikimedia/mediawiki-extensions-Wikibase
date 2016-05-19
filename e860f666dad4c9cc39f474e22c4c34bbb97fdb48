@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_d88e84d4",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-19T10:15:35Z",
+      "side": 1,
+      "message": "Please suggest a better name. It\u0027s a test dummy that implements EntityDocument and StatementListProvider, similar to MediaInfo. But I can\u0027t use MediaInfo here.",
+      "parentUuid": "ae564743_636072fc",
+      "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_a9d1c9fd",
         "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-18T21:34:17Z",
       "side": 1,
       "message": "Would it make sense to have something implement only Holder, not Provider? Would this code work with a Holder but not Provider?",
+      "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_389ea00a",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-19T10:15:35Z",
+      "side": 1,
+      "message": "I believe you confused the two interfaces. Provider \u003d only a getter. Holder \u003d getter and setter.",
+      "parentUuid": "ae564743_a9d1c9fd",
       "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
