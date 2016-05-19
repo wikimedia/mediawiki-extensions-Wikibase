@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use ChangesList;
 use FauxRequest;
-use PHPUnit_Framework_Assert;
 use RequestContext;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
@@ -120,9 +119,9 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit_Framework_TestCase {
 			sort( $expectedIdStrings );
 			sort( $entityIdStrings );
 
-			PHPUnit_Framework_Assert::assertEquals( $expectedIdStrings, $entityIdStrings );
-			PHPUnit_Framework_Assert::assertEquals( $expectedTermTypes, $termTypes );
-			PHPUnit_Framework_Assert::assertEquals( $expectedLanguageCodes, $languageCodes );
+			$this->assertEquals( $expectedIdStrings, $entityIdStrings );
+			$this->assertEquals( $expectedTermTypes, $termTypes );
+			$this->assertEquals( $expectedLanguageCodes, $languageCodes );
 		};
 
 		$linkBeginHookHandler = $this->getLabelPrefetchHookHandlers(
