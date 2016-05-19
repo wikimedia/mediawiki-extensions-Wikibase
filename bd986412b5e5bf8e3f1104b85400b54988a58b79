@@ -16,6 +16,24 @@
       "revId": "bd986412b5e5bf8e3f1104b85400b54988a58b79",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_98652c10",
+        "filename": "repo/includes/Localizer/MessageParameterFormatter.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-19T10:19:03Z",
+      "side": 1,
+      "message": "Oh, right. Will do. Though iIt\u0027s not going to be valid anyway - if the prefix was a valid interwiki, $site would not be null. So... it will actually become a (broken) local link. Hm.",
+      "parentUuid": "ae564743_f8dc2d1e",
+      "revId": "bd986412b5e5bf8e3f1104b85400b54988a58b79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
