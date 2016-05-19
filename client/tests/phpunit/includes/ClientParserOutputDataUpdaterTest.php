@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests;
 
-use MediaWikiLangTestCase;
 use ParserOutput;
+use PHPUnit_Framework_TestCase;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -20,13 +20,12 @@ use Wikibase\Lib\Tests\MockRepository;
  *
  * @group WikibaseClient
  * @group Wikibase
- * @group Database
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
+class ClientParserOutputDataUpdaterTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var MockRepository|null
@@ -100,6 +99,21 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	}
 
 	/**
+	 * @param string $prefixedText
+	 *
+	 * @return Title
+	 */
+	private function getTitle( $prefixedText ) {
+		$title = $this->getMock( Title::class );
+
+		$title->expects( $this->once() )
+			->method( 'getPrefixedText' )
+			->will( $this->returnValue( $prefixedText ) );
+
+		return $title;
+	}
+
+	/**
 	 * @param string[] $otherProjects
 	 *
 	 * @return OtherProjectsSidebarGenerator
@@ -120,7 +134,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 		$parserOutput = new ParserOutput();
 
 		$titleText = 'Foo sr';
-		$title = Title::newFromText( $titleText );
+		$title = $this->getTitle( $titleText );
 
 		$instance = $this->newInstance();
 
@@ -145,7 +159,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 		$parserOutput = new ParserOutput();
 
 		$titleText = 'Foo xx';
-		$title = Title::newFromText( $titleText );
+		$title = $this->getTitle( $titleText );
 
 		$instance = $this->newInstance();
 
@@ -160,7 +174,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	 */
 	public function testUpdateOtherProjectsLinksData( $expected, $otherProjects, $titleText ) {
 		$parserOutput = new ParserOutput();
-		$title = Title::newFromText( $titleText );
+		$title = $this->getTitle( $titleText );
 
 		$instance = $this->newInstance( $otherProjects );
 
@@ -198,30 +212,36 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	public function testUpdateBadgesProperty() {
 		$parserOutput = new ParserOutput();
 
-		$title = Title::newFromText( 'Talk:Foo sr' );
+		$title = $this->getTitle( 'Talk:Foo sr' );
 
 		$instance = $this->newInstance();
 
 		$instance->updateBadgesProperty( $title, $parserOutput );
-		$this->assertTrue( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
+		$this->assertTrue(
+			$parserOutput->getProperty( 'wikibase-badge-Q17' ),
+			'property "wikibase-badge-Q17" should be set'
+		);
 	}
 
 	public function testUpdateBadgesProperty_removesPreviousData() {
 		$parserOutput = new ParserOutput();
 		$parserOutput->setProperty( 'wikibase-badge-Q17', true );
 
-		$title = Title::newFromText( 'Foo sr' );
+		$title = $this->getTitle( 'Foo sr' );
 
 		$instance = $this->newInstance();
 
 		$instance->updateBadgesProperty( $title, $parserOutput );
-		$this->assertFalse( $parserOutput->getProperty( 'wikibase-badge-Q17' ) );
+		$this->assertFalse(
+			$parserOutput->getProperty( 'wikibase-badge-Q17' ),
+			'property "wikibase-badge-Q17" should not be set'
+		);
 	}
 
 	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupEmptySiteLinkList() {
 		$parserOutput = new ParserOutput();
 
-		$title = Title::newFromText( 'Foo sr' );
+		$title = $this->getTitle( 'Foo sr' );
 
 		$siteLinkLookup = new MockRepository();
 		$mockRepoNoSiteLinks = new MockRepository();
@@ -253,7 +273,7 @@ class ClientParserOutputDataUpdaterTest extends MediaWikiLangTestCase {
 	public function testUpdateBadgesProperty_inconsistentSiteLinkLookupNoSuchEntity() {
 		$parserOutput = new ParserOutput();
 
-		$title = Title::newFromText( 'Foo sr' );
+		$title = $this->getTitle( 'Foo sr' );
 
 		$siteLinkLookup = new MockRepository();
 		foreach ( $this->getItems() as $item ) {
