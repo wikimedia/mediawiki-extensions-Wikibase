@@ -50,7 +50,6 @@ class ItemPatcher implements EntityPatcherStrategy {
 	 * @param EntityDocument $entity
 	 * @param EntityDiff $patch
 	 *
-	 * @return Item
 	 * @throws InvalidArgumentException
 	 */
 	public function patchEntity( EntityDocument $entity, EntityDiff $patch ) {
