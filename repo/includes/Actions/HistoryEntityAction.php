@@ -3,9 +3,10 @@
 namespace Wikibase;
 
 use HistoryAction;
-use MWContentSerializationException;
-use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\Repo\WikibaseRepo;
+use IContextSource;
+use Page;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * Handles the history action for Wikibase entities.
@@ -14,52 +15,38 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class HistoryEntityAction extends HistoryAction {
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var EntityIdLookup $entityIdLookup
 	 */
-	protected $languageFallbackChain;
+	private $entityIdLookup;
 
 	/**
-	 * Get the language fallback chain for current context.
-	 *
-	 * @since 0.4
-	 *
-	 * @return LanguageFallbackChain
+	 * @var LabelDescriptionLookup $labelDescriptionLookup
 	 */
-	public function getLanguageFallbackChain() {
-		if ( $this->languageFallbackChain === null ) {
-			$this->languageFallbackChain = WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
-				->newFromContext( $this->getContext() );
-		}
-
-		return $this->languageFallbackChain;
-	}
+	private $labelDescriptionLookup;
 
 	/**
-	 * Set language fallback chain.
+	 * @since 0.5
 	 *
-	 * @since 0.4
-	 *
-	 * @param LanguageFallbackChain $chain
+	 * @param Page $page
+	 * @param IContextSource|null $context
+	 * @param EntityIdLookup $entityIdLookup
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 */
-	public function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
-		$this->languageFallbackChain = $chain;
-	}
+	public function __construct(
+		Page $page,
+		IContextSource $context = null,
+		EntityIdLookup $entityIdLookup,
+		LabelDescriptionLookup $labelDescriptionLookup
+	) {
+		parent::__construct( $page, $context );
 
-	/**
-	 * Returns the content of the page being viewed.
-	 *
-	 * @return EntityContent|null
-	 */
-	protected function getContent() {
-		try {
-			return $this->getArticle()->getPage()->getContent();
-		} catch ( MWContentSerializationException $ex ) {
-			return null;
-		}
+		$this->entityIdLookup = $entityIdLookup;
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
 	}
 
 	/**
@@ -68,33 +55,17 @@ class HistoryEntityAction extends HistoryAction {
 	 * @return string
 	 */
 	protected function getPageTitle() {
-		$content = $this->getContent();
+		$entityId = $this->entityIdLookup->getEntityIdForTitle( $this->getTitle() );
 
-		if ( !$content ) {
-			// Page does not exist or the entity or redirect can not be deserialized.
+		if ( !$entityId ) {
 			return parent::getPageTitle();
 		}
 
-		if ( $content->isRedirect() ) {
-			//TODO: use a message like <autoredircomment> to represent the redirect.
-			return parent::getPageTitle();
-		}
+		$idSerialization = $entityId->getSerialization();
+		$label = $this->labelDescriptionLookup->getLabel( $entityId );
 
-		$entity = $content->getEntity();
-		$idSerialization = $entity->getId()->getSerialization();
-		$labelText = null;
-
-		if ( $entity instanceof LabelsProvider ) {
-			$labelData = $this->getLanguageFallbackChain()->extractPreferredValueOrAny(
-				$entity->getLabels()->toTextArray()
-			);
-
-			if ( $labelData ) {
-				$labelText = $labelData['value'];
-			}
-		}
-
-		if ( $labelText !== null ) {
+		if ( $label !== null ) {
+			$labelText = $label->getText();
 			// Escaping HTML characters in order to retain original label that may contain HTML
 			// characters. This prevents having characters evaluated or stripped via
 			// OutputPage::setPageTitle:

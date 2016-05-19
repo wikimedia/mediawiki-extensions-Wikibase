@@ -1373,6 +1373,8 @@ class WikibaseRepo {
 			$errorLocalizer,
 			$this->getEntityIdParser(),
 			$siteLinkStore,
+			$this->getEntityIdLookup(),
+			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$legacyFormatDetector
 		);
 
@@ -1399,6 +1401,8 @@ class WikibaseRepo {
 			$constraintProvider,
 			$errorLocalizer,
 			$this->getEntityIdParser(),
+			$this->getEntityIdLookup(),
+			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$propertyInfoStore,
 			$propertyInfoBuilder,
 			$legacyFormatDetector

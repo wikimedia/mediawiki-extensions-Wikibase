@@ -12,7 +12,11 @@ use PHPUnit_Framework_TestCase;
 use Title;
 use User;
 use WebRequest;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\HistoryEntityAction;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers Wikibase\HistoryEntityAction
@@ -24,6 +28,7 @@ use Wikibase\HistoryEntityAction;
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 
@@ -39,6 +44,10 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 		$page->expects( $this->any() )
 			->method( 'getTitle' )
 			->will( $this->returnValue( Title::newFromText( $title ) ) );
+		$page->expects( $this->never() )
+			->method( 'getPage' )
+			// Deserializing the full entity may fail, see https://gerrit.wikimedia.org/r/262881
+			->will( $this->throwException( new MWContentSerializationException() ) );
 
 		return $page;
 	}
@@ -63,10 +72,10 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 		$context = $this->getMock( IContextSource::class );
 		$context->expects( $this->once() )
 			->method( 'getConfig' )
-			->will( $this->returnValue( new HashConfig( array(
+			->will( $this->returnValue( new HashConfig( [
 				'UseFileCache' => false,
 				'UseMediaWikiUIEverywhere' => false,
-			) ) ) );
+			] ) ) );
 		$context->expects( $this->any() )
 			->method( 'getRequest' )
 			->will( $this->returnValue( new WebRequest() ) );
@@ -90,18 +99,51 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 		return $context;
 	}
 
-	public function testGivenUnDeserializableRevision_historyActionDoesNotFail() {
-		$page = $this->getPage( 'Page title' );
-		$page->expects( $this->once() )
-			->method( 'getPage' )
-			->will( $this->throwException( new MWContentSerializationException() ) );
+	public function pageTitleProvider() {
+		return [
+			'fallback to parent' => [
+				null,
+				null,
+				'(history-title: Page title)'
+			],
+			'without label' => [
+				new ItemId( 'Q1' ),
+				null,
+				'(wikibase-history-title-without-label: Q1)'
+			],
+			'with label' => [
+				new ItemId( 'Q2' ),
+				new Term( 'qqx', 'Label' ),
+				'(wikibase-history-title-with-label: Q2, Label)'
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider pageTitleProvider
+	 */
+	public function testGetPageTitle( ItemId $entityId = null, Term $label = null, $expected ) {
+		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup->expects( $this->once() )
+			->method( 'getEntityIdForTitle' )
+			->will( $this->returnValue( $entityId ) );
+
+		$labelLookup = $this->getMock( LabelDescriptionLookup::class );
+		$labelLookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnValue( $label ) );
 
 		$output = $this->getOutput();
 		$output->expects( $this->once() )
 			->method( 'setPageTitle' )
-			->with( '(history-title: Page title)' );
+			->with( $expected );
 
-		$action = new HistoryEntityAction( $page, $this->getContext( $output ) );
+		$action = new HistoryEntityAction(
+			$this->getPage( 'Page title' ),
+			$this->getContext( $output ),
+			$entityIdLookup,
+			$labelLookup
+		);
 		$action->show();
 	}
 
