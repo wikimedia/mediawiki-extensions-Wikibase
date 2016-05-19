@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_c1196cdd",
+        "filename": "client/tests/phpunit/includes/ClientParserOutputDataUpdaterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-05-19T23:29:51Z",
+      "side": 1,
+      "message": "with these changes, do we still need to extend MediaWikiLangTestCase? or even need MediaWIkiTestCase or would extending PHPUnit_Framework_TestCase be okay now?\n\nI tried changing $wgDBPassword and think the test is no longer hitting the database and that PHPUnit_Framework_TestCase would be okay now.",
+      "revId": "47c36ad1ed0425be3214ee5df223d87c156bf93a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
