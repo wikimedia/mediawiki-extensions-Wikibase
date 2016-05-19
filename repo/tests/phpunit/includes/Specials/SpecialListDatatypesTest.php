@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Language;
+use MediaWiki\MediaWikiServices;
 use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialListDatatypes;
 
@@ -26,6 +27,19 @@ class SpecialListDatatypesTest extends SpecialPageTestBase {
 		$this->setMwGlobals( array(
 			'wgContLang' => Language::factory( 'qqx' )
 		) );
+		$services = MediaWikiServices::getInstance();
+		$services->resetServiceForTesting( 'TitleFormatter' );
+		$services->resetServiceForTesting( 'TitleParser' );
+		$services->resetServiceForTesting( '_MediaWikiTitleCodec' );
+	}
+
+	protected function tearDown() {
+		parent::tearDown();
+
+		$services = MediaWikiServices::getInstance();
+		$services->resetServiceForTesting( 'TitleFormatter' );
+		$services->resetServiceForTesting( 'TitleParser' );
+		$services->resetServiceForTesting( '_MediaWikiTitleCodec' );
 	}
 
 	protected function newSpecialPage() {
