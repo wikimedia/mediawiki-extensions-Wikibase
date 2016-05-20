@@ -28,15 +28,17 @@ ENV['WIKIDATA_REPO_API'] = lenv.lookup(:mediawiki_url_api, default: -> {
 })
 #TODO use user_factory instead
 #ENV['WB_REPO_USERNAME'] = lenv.lookup(:mediawiki_user)
+#ENV['WB_REPO_PASSWORD'] = lenv.lookup(:mediawiki_password)
+
 ENV['ITEM_NAMESPACE'] = lenv.lookup(:item_namespace, default: -> { '' })
 ENV['PROPERTY_NAMESPACE'] = lenv.lookup(:property_namespace, default: -> { 'Property:' })
 ENV['ITEM_ID_PREFIX'] = lenv.lookup(:item_id_prefix, default: -> { 'Q' })
 ENV['PROPERTY_ID_PREFIX'] = lenv.lookup(:property_id_prefix, default: -> { 'P' })
 ENV['LANGUAGE_CODE'] = lenv.lookup(:language_code, default: -> { 'en' })
 
-#require_all 'features/support/modules'
+require_all 'features/support/modules'
 require_all 'features/support/pages'
-#require_all 'features/support/utils'
+require_all 'features/support/utils'
 
 # TODO remove once everything is migrated
 Before('@repo_login') do
