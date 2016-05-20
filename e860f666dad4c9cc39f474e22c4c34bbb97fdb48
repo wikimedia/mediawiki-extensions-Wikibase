@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_aa224dae",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-20T14:59:10Z",
+      "side": 1,
+      "message": "Oh, \"wa?\" meant \"unused\". Yes, that was mistake.",
+      "parentUuid": "ae564743_a2839b04",
+      "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_a9d1c9fd",
         "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
         "patchSetId": 3
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I didn\u0027t. Your answer indicates that passing something that\u0027s only a Holder, but doesn\u0027t explicitly implement Provider should work. It did work, but your change breaks that.",
       "parentUuid": "ae564743_389ea00a",
+      "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_95016a0a",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-20T14:59:10Z",
+      "side": 1,
+      "message": "All our …Holder interfaces *extend* …Provider. Having \"only a …Holder\" is not possible.",
+      "parentUuid": "ae564743_c2a32f95",
       "revId": "e860f666dad4c9cc39f474e22c4c34bbb97fdb48",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
