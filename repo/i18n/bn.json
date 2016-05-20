@@ -218,7 +218,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "{{GENDER:$1|আপনি}} আপনার [[Special:MyPage|ব্যবহারকারী পাতায়]]  <nowiki>{{#babel: }}</nowiki> লাগানোর দ্বারা এটি সম্পাদনা করতে পারেন।",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, $3 - $4 থেকে রূপান্তরিত",
 	"wikibase-restoreold": "পুনরুদ্ধার",
-	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] কর্তৃক $3-এর সংশোধনটি পুনরুদ্ধার করা হয়েছে",
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] কর্তৃক $3 নং সংশোধনটি পুনরুদ্ধার করা হয়েছে",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|আলাপ]]) কর্তৃক $3 নম্বর সংশোধনটি বাতিল করা হয়েছে",
 	"wikibase-noentity": "এই ভুক্তি বিদ্যমান নয়। আপনি এ সম্পর্কিত  [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} প্রাসঙ্গিক লগ খুঁজে বের] করতে অনুসন্ধান করতে পারেন।",
 	"wikibase-noentity-createone": "এছাড়াও আপনি [[$1|নতুন একটি তৈরি করতে]] পারেন।",

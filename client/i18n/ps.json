@@ -21,6 +21,7 @@
 	"wikibase-linkitem-selectlink": "د دې مخ د اړوندې موضوع سره سم د ويکيډاټا يو بل وېبځی او يو بل مخ وټاکئ.",
 	"wikibase-linkitem-input-site": "ژبه:",
 	"wikibase-linkitem-input-page": "مخ:",
+	"wikibase-linkitem-confirmitem-text": "هغه مخ چې تاسې ټاکلی له پخوا څخه [زموږ مرکزي اومتوک زېرمتون کې $1 يو توکي سره] اړونده شوی. لطفاً تاييد کړئ چې دا {{PLURAL:$2|مخ|مخونه}} چې لاندې ښودل {{PLURAL:$2|شوی|شوي}} هماغه {{PLURAL:$2|يو مخ دی|څو مخونه دي}} چې تاسې يې د دې مخ سره تړئ.",
 	"wikibase-linkitem-confirmitem-button": "تاييدول",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "پټول",

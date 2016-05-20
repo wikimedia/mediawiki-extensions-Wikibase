@@ -8,10 +8,10 @@
 	"tooltip-t-wikibase": "Wumbuta u mopohumbuto butir to huwali polahuwala lo data",
 	"wikibase-comment-update": "item {{WBREPONAME}} lo'ubawa",
 	"wikibase-dataitem": "Item to {{WBREPONAME}}",
-	"wikibase-editlinks": "Ubawa pranala",
-	"wikibase-editlinkstitle": "Ubawa pranala interwiki",
+	"wikibase-editlinks": "Ubawa wumbuta",
+	"wikibase-editlinkstitle": "Ubawa wumbuta interwiki",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "Popobilohe",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Mopo'opiyohu {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Monguba {{WBREPONAME}}"
 }
