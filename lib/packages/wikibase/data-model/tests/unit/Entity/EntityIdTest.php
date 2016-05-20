@@ -27,7 +27,7 @@ class EntityIdTest extends \PHPUnit_Framework_TestCase {
 		$ids[] = array( new ItemId( 'Q1' ) );
 		$ids[] = array( new ItemId( 'Q42' ) );
 		$ids[] = array( new ItemId( 'Q31337' ) );
-		$ids[] = array( new ItemId( 'Q2147483648' ) );
+		$ids[] = array( new ItemId( 'Q2147483647' ) );
 		$ids[] = array( new PropertyId( 'P101010' ) );
 
 		return $ids;

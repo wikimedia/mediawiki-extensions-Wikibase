@@ -10,12 +10,12 @@ use InvalidArgumentException;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyId extends EntityId {
+class PropertyId extends EntityId implements Int32EntityId {
 
 	/**
 	 * @since 0.5
 	 */
-	const PATTERN = '/^P[1-9]\d*\z/i';
+	const PATTERN = '/^P[1-9]\d{0,9}\z/i';
 
 	/**
 	 * @param string $idSerialization
@@ -29,11 +29,18 @@ class PropertyId extends EntityId {
 
 	private function assertValidIdFormat( $idSerialization ) {
 		if ( !is_string( $idSerialization ) ) {
-			throw new InvalidArgumentException( '$idSerialization must be a string; got ' . gettype( $idSerialization ) );
+			throw new InvalidArgumentException( '$idSerialization must be a string' );
 		}
 
 		if ( !preg_match( self::PATTERN, $idSerialization ) ) {
 			throw new InvalidArgumentException( '$idSerialization must match ' . self::PATTERN );
+		}
+
+		if ( strlen( $idSerialization ) > 10
+			&& substr( $idSerialization, 1 ) > Int32EntityId::MAX
+		) {
+			throw new InvalidArgumentException( '$idSerialization can not exceed '
+				. Int32EntityId::MAX );
 		}
 	}
 

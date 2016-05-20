@@ -40,8 +40,7 @@ class EntityIdValueTest extends PHPUnit_Framework_TestCase {
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q42' ),
 			new ItemId( 'Q31337' ),
-			// Check for 32-bit integer overflow on 32-bit PHP systems.
-			new ItemId( 'Q2147483648' ),
+			new ItemId( 'Q2147483647' ),
 			new PropertyId( 'P1' ),
 			new PropertyId( 'P42' ),
 			new PropertyId( 'P31337' ),
