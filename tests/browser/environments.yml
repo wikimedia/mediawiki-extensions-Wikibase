@@ -14,14 +14,14 @@
 #   export MEDIAWIKI_USER=Selenium_user2
 #   bundle exec cucumber
 #
-mw-vagrant-host:
+mw-vagrant-host: &default
   language_code: en
   browser: firefox
   mediawiki_url: http://127.0.0.1:8080/wiki/
   mediawiki_user: Selenium_user
   mediawiki_password: vagrant
 
-mw-vagrant-guest: &default
+mw-vagrant-guest:
   language_code: en
   browser: firefox
   mediawiki_url: http://127.0.0.1/wiki/
