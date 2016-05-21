@@ -3,11 +3,15 @@
 		"authors": [
 			"Likopiän tyttö",
 			"Mashoi7",
-			"Ilja.mos"
+			"Ilja.mos",
+			"Varvana"
 		]
 	},
+	"tooltip-t-wikibase": "Linkki yhissettyh keškuštietovaraštoh",
 	"wikibase-comment-update": "{{WBREPONAME}} on muutettu",
+	"wikibase-dataitem": "{{WBREPONAME}}-elementti",
 	"wikibase-editlinks": "Kohenna linkit",
+	"wikibase-editlinkstitle": "Kohentele kielienvälisie linkkijä",
 	"wikibase-rc-hide-wikidata-hide": "Peitä",
 	"wikibase-rc-hide-wikidata-show": "Näytä",
 	"wikibase-rc-wikibase-edit-letter": "D",

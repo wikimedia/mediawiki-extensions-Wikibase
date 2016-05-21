@@ -11,7 +11,9 @@
 	"wikibase-editlinks": "Ubawa wumbuta",
 	"wikibase-editlinkstitle": "Ubawa wumbuta interwiki",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Wanto'a",
 	"wikibase-rc-hide-wikidata-show": "Popobilohe",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Monguba {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Monguba {{WBREPONAME}}",
+	"wikibase-otherprojects": "To delomo poroyek uweewo"
 }
