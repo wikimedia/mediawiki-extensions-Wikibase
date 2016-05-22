@@ -9,8 +9,9 @@
 	"wikibase-comment-update": "Элемент {{grammar:genitive|{{WBREPONAME}}}} хийцай",
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} чура элемент",
 	"wikibase-editlinks": "ТIахьожаяргаш тоаяр",
-	"wikibase-editlinkstitle": "Меттай юкъера хьожаяргаш тоаяр",
+	"wikibase-editlinkstitle": "Меттай юкъера тIахьожаяргаш тоаяр",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "ДIакъайладаккха",
 	"wikibase-rc-hide-wikidata-show": "Хьахьокха",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{grammar:genitive|{{WBREPONAME}}}} нийсдар"
