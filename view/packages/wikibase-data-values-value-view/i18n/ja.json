@@ -18,6 +18,5 @@
 	"valueview-expert-timeinput-calendar": "暦:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-preview-label": "プレビュー:",
-	"valueview-preview-novalue": "有効な値を認識できませんでした",
-	"valueview-listrotator-auto": "自動"
+	"valueview-preview-novalue": "有効な値を認識できませんでした"
 }

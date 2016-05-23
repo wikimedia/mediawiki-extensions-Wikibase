@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"An13sa",
+			"Sator",
+			"Subi"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "hutsik",
+	"valueview-expert-globecoordinateinput-customprecision": "berezia ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoriarra",
+	"valueview-expert-timevalue-calendar-julian": "Juliotarra",
+	"valueview-expert-timeinput-calendar": "Egutegia:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregoriar egutegia)",
+	"valueview-expertextender-calendarhint-julian": "(Juliotar egutegia)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; Gregoriarrera aldatu",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; Juliotarrera aldatu",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Hizkuntza (beharrezkoa):",
+	"valueview-expertextender-unitsuggester-label": "Unitatea (hautazkoa):",
+	"valueview-preview-label": "honela erakutsiko da:",
+	"valueview-preview-novalue": "ez da baliozko balorerik berreskuratu",
+	"valueview-listrotator-manually": "eskuz aldatu"
+}

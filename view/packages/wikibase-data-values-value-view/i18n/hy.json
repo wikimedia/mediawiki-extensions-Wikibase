@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Աշոտ1997"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "դատարկ",
+	"valueview-expert-globecoordinateinput-customprecision": "սպասարկող ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Գրիգորյան",
+	"valueview-expert-timevalue-calendar-julian": "Հուլյան",
+	"valueview-expert-timeinput-calendar": "Օրացույց.",
+	"valueview-expertextender-calendarhint-gregorian": "(Գրիգորյան օրացույց)",
+	"valueview-expertextender-calendarhint-julian": "(Հուլյան օրացույց)",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)"
+}

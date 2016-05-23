@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Siebrand"
+			"Siebrand",
+			"Sjoerddebruin"
 		]
 	},
 	"valueview-desc": "Gebruikersinterface-elementen voor het weergeven en bewerken van gegevenswaarden",
@@ -10,11 +11,18 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Het verwerken van waarden van het gegevenstype \"$1\" wordt nog niet ondersteund.",
 	"valueview-expert-emptyvalue-empty": "leeg",
 	"valueview-expert-globecoordinateinput-precision": "Precisie:",
+	"valueview-expert-globecoordinateinput-customprecision": "speciaal ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriaanse",
 	"valueview-expert-timevalue-calendar-julian": "Juliaanse",
 	"valueview-expert-timeinput-precision": "Precisie:",
 	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregoriaanse kalender)",
+	"valueview-expertextender-calendarhint-julian": "(Juliaanse kalender)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; wijzigen naar Gregoriaans",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; wijzigen naar Juliaans",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Taal (verplicht):",
+	"valueview-expertextender-unitsuggester-label": "Eenheid (optioneel):",
 	"valueview-preview-label": "wordt weergegeven als:",
-	"valueview-preview-novalue": "geen geldige waarde herkend",
-	"valueview-listrotator-auto": "automatisch"
+	"valueview-preview-novalue": "geen geldige waarde herkend"
 }

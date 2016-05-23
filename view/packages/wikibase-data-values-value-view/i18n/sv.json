@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Jopparn",
-			"Tobulos1"
+			"Tobulos1",
+			"WikiPhoenix"
 		]
 	},
 	"valueview-desc": "UI-komponenter för visning och redigering av datavärden",
@@ -15,7 +16,9 @@
 	"valueview-expert-timevalue-calendar-julian": "Juliansk",
 	"valueview-expert-timeinput-precision": "Precision:",
 	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregorianska kalendern)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; ändra till Gregoriansk",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-preview-label": "kommer att visas som:",
-	"valueview-preview-novalue": "inget giltigt värde erkänns",
-	"valueview-listrotator-auto": "automatisk"
+	"valueview-preview-novalue": "inget giltigt värde erkänns"
 }

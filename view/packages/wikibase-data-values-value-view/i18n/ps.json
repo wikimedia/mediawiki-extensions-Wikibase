@@ -1,8 +1,16 @@
 {
-    "@metadata": {
-        "authors": [
-            "Ahmed-Najib-Biabani-Ibrahimkhel"
-        ]
-    },
-    "valueview-expert-emptyvalue-empty": "تش"
+	"@metadata": {
+		"authors": [
+			"Ahmed-Najib-Biabani-Ibrahimkhel"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "تش",
+	"valueview-expert-globecoordinateinput-customprecision": "ځانگړی ($1)",
+	"valueview-expertextender-calendarhint-gregorian": "(گرېگورين کالهنداره)",
+	"valueview-expertextender-calendarhint-julian": "(جوليان کالهنداره)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; گرېگورين ته ور اړول",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; جوليان کالهندارې ته بدلول",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "ژبه (لازمي):",
+	"valueview-expertextender-unitsuggester-label": "يوون (اختياري):"
 }

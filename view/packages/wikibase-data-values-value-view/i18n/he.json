@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"Orsa"
+			"Orsa",
+			"Guycn2"
 		]
 	},
 	"valueview-desc": "רכיבי ממשק להצגה ועריכה של ערכי נתונים",
@@ -11,11 +12,15 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "טיפול בערכים מסוג נתונים \"$1\" אינו נתמך עדיין.",
 	"valueview-expert-emptyvalue-empty": "ריק",
 	"valueview-expert-globecoordinateinput-precision": "דיוק:",
+	"valueview-expert-globecoordinateinput-customprecision": "מיוחד ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "גרגוריאני:",
 	"valueview-expert-timevalue-calendar-julian": "יוליאני",
 	"valueview-expert-timeinput-precision": "דיוק:",
 	"valueview-expert-timeinput-calendar": "לוח שנה:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "שפה (חובה):",
+	"valueview-expertextender-unitsuggester-label": "יחידה (אופציונלי):",
 	"valueview-preview-label": "יוצג בתור:",
 	"valueview-preview-novalue": "לא הוכר שום ערך תקין",
-	"valueview-listrotator-auto": "אוטומטי"
+	"valueview-listrotator-manually": "הגדרה באופן ידני"
 }

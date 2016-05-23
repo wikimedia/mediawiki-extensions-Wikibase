@@ -11,7 +11,7 @@
 	"valueview-expert-emptyvalue-empty": "tyhjä",
 	"valueview-expert-timeinput-precision": "Tarkkuus:",
 	"valueview-expert-timeinput-calendar": "Kalenteri:",
+	"valueview-expertextender-languageselector-label": "Kieli (pakollinen):",
 	"valueview-preview-label": "näytetään muodossa:",
-	"valueview-preview-novalue": "kelvollista arvoa ei tunnistettu",
-	"valueview-listrotator-auto": "auto"
+	"valueview-preview-novalue": "kelvollista arvoa ei tunnistettu"
 }

@@ -25,5 +25,5 @@
 	"valueview-expertextender-unitsuggester-label": "Einheit (optional):",
 	"valueview-preview-label": "wird angezeigt als:",
 	"valueview-preview-novalue": "keinen gültigen Wert erkannt",
-	"valueview-listrotator-auto": "automatisch"
+	"valueview-listrotator-manually": "manuell festlegen"
 }

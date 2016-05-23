@@ -25,5 +25,5 @@
 	"valueview-expertextender-unitsuggester-label": "Jednotka (volitelná):",
 	"valueview-preview-label": "bude zobrazeno jako:",
 	"valueview-preview-novalue": "nebyla rozpoznána platná hodnota",
-	"valueview-listrotator-auto": "automaticky"
+	"valueview-listrotator-manually": "nastavit ručně"
 }

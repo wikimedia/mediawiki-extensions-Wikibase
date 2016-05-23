@@ -16,6 +16,5 @@
 	"valueview-expert-timeinput-precision": "정밀도:",
 	"valueview-expert-timeinput-calendar": "달력:",
 	"valueview-preview-label": "다음과 같이 보이기:",
-	"valueview-preview-novalue": "올바른 값이 인식되지 않음",
-	"valueview-listrotator-auto": "자동"
+	"valueview-preview-novalue": "올바른 값이 인식되지 않음"
 }

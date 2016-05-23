@@ -28,5 +28,5 @@
 	"valueview-expertextender-unitsuggester-label": "单位（可选）：",
 	"valueview-preview-label": "将显示为：",
 	"valueview-preview-novalue": "无法识别",
-	"valueview-listrotator-auto": "自动"
+	"valueview-listrotator-manually": "手动设置"
 }

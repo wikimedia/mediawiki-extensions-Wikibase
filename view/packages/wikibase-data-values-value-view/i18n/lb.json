@@ -7,11 +7,19 @@
 	"valueview-expert-advancedadjustments": "Erweidert Upassungen",
 	"valueview-expert-emptyvalue-empty": "eidel",
 	"valueview-expert-globecoordinateinput-precision": "Präzisioun:",
+	"valueview-expert-globecoordinateinput-customprecision": "Spezial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorianesch",
 	"valueview-expert-timevalue-calendar-julian": "Julianesch",
 	"valueview-expert-timeinput-precision": "Präzisioun:",
 	"valueview-expert-timeinput-calendar": "Kalenner:",
+	"valueview-expertextender-calendarhint-gregorian": "(Gregorianesche Kalenner)",
+	"valueview-expertextender-calendarhint-julian": "(Julianesche Kalenner)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; op Gregorianesch wiesselen",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; op Julianesch wiesselen",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Sprooch (obligatoresch)",
+	"valueview-expertextender-unitsuggester-label": "Eenheet (fakultativ)",
 	"valueview-preview-label": "gëtt gewisen als:",
 	"valueview-preview-novalue": "kee valabele Wäert erkannt",
-	"valueview-listrotator-auto": "auto"
+	"valueview-listrotator-manually": "manuell astellen"
 }

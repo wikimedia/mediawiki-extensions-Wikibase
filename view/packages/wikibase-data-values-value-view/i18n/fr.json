@@ -8,7 +8,8 @@
 			"Peter17",
 			"Urhixidur",
 			"Verdy p",
-			"Wladek92"
+			"Wladek92",
+			"Yasten"
 		]
 	},
 	"valueview-desc": "Composants graphiques pour l’affichage et la modification des données",
@@ -29,7 +30,7 @@
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Langue (obligatoire) :",
 	"valueview-expertextender-unitsuggester-label": "Unité (facultatif) :",
-	"valueview-preview-label": "affiché comme :",
+	"valueview-preview-label": "sera affiché comme :",
 	"valueview-preview-novalue": "aucune valeur valide reconnu",
-	"valueview-listrotator-auto": "auto"
+	"valueview-listrotator-manually": "définir manuellement"
 }
