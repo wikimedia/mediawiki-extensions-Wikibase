@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_6fa03a32",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-23T16:07:48Z",
+      "side": 1,
+      "message": "wfLogWarning writes this into the log for every request in production. wfWarn would suffice, I thing - that makes tests fail, and shows a warning to developers. Also, the error could be more helpful. Update what, where, how?",
+      "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_ef73aae2",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-23T16:07:48Z",
+      "side": 1,
+      "message": "So here we just asssume that we can truncate all keys if at least one old key is defined. I don\u0027t think we can make that assumption.",
+      "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_6f2ddaa2",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-23T16:07:48Z",
+      "side": 1,
+      "message": "This logic is pretty complex. Do we have tests fro it? Would it be better to move it into EntityNamespaceLookup?",
+      "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
