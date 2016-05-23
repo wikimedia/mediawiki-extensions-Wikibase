@@ -11,4 +11,4 @@ end
 task default: [:test]
 
 desc 'Run all build/tests commands (CI entry point)'
-task test: [] # TODO add :rubocop after files where moved from WikidataBrowsertests
+task test: [:rubocop]
