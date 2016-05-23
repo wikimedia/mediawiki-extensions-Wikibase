@@ -51,7 +51,7 @@ class ItemHandler extends EntityHandler {
 	/**
 	 * @var LanguageFallbackLabelDescriptionLookupFactory
 	 */
-	private $labelDescriptionLookupFactory;
+	private $labelLookupFactory;
 
 	/**
 	 * @param EntityPerPage $entityPerPage
@@ -62,7 +62,7 @@ class ItemHandler extends EntityHandler {
 	 * @param EntityIdParser $entityIdParser
 	 * @param SiteLinkStore $siteLinkStore
 	 * @param EntityIdLookup $entityIdLookup
-	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
+	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
@@ -74,7 +74,7 @@ class ItemHandler extends EntityHandler {
 		EntityIdParser $entityIdParser,
 		SiteLinkStore $siteLinkStore,
 		EntityIdLookup $entityIdLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory,
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(
@@ -89,7 +89,7 @@ class ItemHandler extends EntityHandler {
 		);
 
 		$this->entityIdLookup = $entityIdLookup;
-		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
+		$this->labelLookupFactory = $labelLookupFactory;
 		$this->siteLinkStore = $siteLinkStore;
 	}
 
@@ -114,7 +114,7 @@ class ItemHandler extends EntityHandler {
 					$page,
 					$context,
 					$this->entityIdLookup,
-					$this->labelDescriptionLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
+					$this->labelLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
 				);
 			},
 			'view' => ViewItemAction::class,

@@ -54,7 +54,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 	/**
 	 * @param Page $page
-	 * @param IContextSource|null $context
+	 * @param IContextSource $context
 	 */
 	public function __construct( Page $page, IContextSource $context = null ) {
 		parent::__construct( $page, $context );
