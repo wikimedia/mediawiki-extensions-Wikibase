@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_cfa8668c",
+        "filename": "tests/browser/features/support/env.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-23T15:16:55Z",
+      "side": 1,
+      "message": "The message refers to an other variable. This looks like a mistake to me.",
+      "revId": "65905c2b28231746ff0987b66d6b178752e14b16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
