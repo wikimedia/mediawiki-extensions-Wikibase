@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Comp1089",
-			"Рустам Нурыев"
+			"Рустам Нурыев",
+			"Ләйсән"
 		]
 	},
 	"tooltip-t-wikibase": "Мәғлүмәт репозитарийҙағы үҙара бәйле элементҡа һылтанма",
@@ -10,6 +11,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} элементы",
 	"wikibase-editlinks": "Һылтанмаларҙы төҙәт",
 	"wikibase-editlinkstitle": "Башҡа телдәргә һылтанмаларҙы төҙәтеү",
+	"wikibase-linkitem-addlinks": "Һылтанмалар өҫтәү",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Йәшерергә",
 	"wikibase-rc-hide-wikidata-show": "Күрһәтергә",
