@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use Content;
+use DeferredUpdates;
 use EnqueueJob;
 use JobQueueGroup;
 use LinksUpdate;
@@ -84,8 +85,10 @@ class DataUpdateHookHandlers {
 	) {
 		$title = $wikiPage->getTitle();
 
-		$handler = self::newFromGlobalState();
-		$handler->doArticleDeleteComplete( $title->getNamespace(), $id );
+		DeferredUpdates::addCallableUpdate( function() use ( $title, $id ) {
+			$handler = self::newFromGlobalState();
+			$handler->doArticleDeleteComplete( $title->getNamespace(), $id );
+		} );
 	}
 
 	/**
