@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_b4ae227a",
+        "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-23T21:19:07Z",
+      "side": 1,
+      "message": "Or just change the parameter to take only the type, not the entire ID object. And perhaps call it newDummyEntity or something?",
+      "parentUuid": "ae564743_efe56ad7",
+      "revId": "26b14cb23da8e5e81b91e2f3bba7f4d10d917c0a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_4ff73688",
         "filename": "repo/includes/Hooks/OutputPageBeforeHTMLHookHandler.php",
         "patchSetId": 12
