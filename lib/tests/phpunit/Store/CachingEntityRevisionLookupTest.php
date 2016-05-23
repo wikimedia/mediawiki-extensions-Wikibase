@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Store;
 
 use HashBagOStuff;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Tests\EntityRevisionLookupTest;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
