@@ -10,6 +10,7 @@ use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Hooks\EditFilterHookRunner;
@@ -176,6 +177,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 				$mockRepository,
 				$this->getEntityPermissionChecker(),
 				new EntityDiffer(),
+				new EntityPatcher(),
 				$this->getMockEditFitlerHookRunner()
 			)
 		);

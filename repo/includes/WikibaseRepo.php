@@ -1508,6 +1508,7 @@ class WikibaseRepo {
 			$this->getEntityStore(),
 			$this->getEntityPermissionChecker(),
 			$this->getEntityDiffer(),
+			$this->getEntityPatcher(),
 			$this->newEditFilterHookRunner( $context ),
 			$context
 		);
