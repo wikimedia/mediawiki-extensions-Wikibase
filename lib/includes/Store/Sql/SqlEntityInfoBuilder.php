@@ -373,7 +373,13 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function injectTerms( ResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
 			// FIXME: this only works for items and properties
-			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
+			try {
+				$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
+			} catch ( InvalidArgumentException $ex ) {
+				wfWarn( 'Unsupported entity type "' . $row->term_entity_type . '"' );
+				continue;
+			}
+
 			$key = $entityId->getSerialization();
 
 			if ( !isset( $this->entityInfo[$key] ) ) {

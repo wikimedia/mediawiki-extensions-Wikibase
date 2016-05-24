@@ -184,7 +184,13 @@ class BufferingTermLookup extends EntityTermLookupBase implements TermBuffer {
 		$keys = array();
 
 		foreach ( $terms as $term ) {
-			$key = $this->getBufferKey( $term->getEntityId(), $term->getType(), $term->getLanguage() );
+			$id = $term->getEntityId();
+
+			if ( $id === null ) {
+				continue;
+			}
+
+			$key = $this->getBufferKey( $id, $term->getType(), $term->getLanguage() );
 			$this->buffer->set( $key, $term->getText() );
 			$keys[] = $key;
 		}
