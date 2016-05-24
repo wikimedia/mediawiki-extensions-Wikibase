@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_34a5ed43",
+        "filename": "jsduck.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-24T14:56:15Z",
+      "side": 1,
+      "message": "Hm, not what I meant. Having two \"--warnings\" looks like they are overriding each other, and one is ignored. I can\u0027t tell if this really happens, but based on what I read in the official documentation I believe so. Please merge into a two-element array. Or remove one of the switches if it is not necessary.",
+      "revId": "7b8c3d33375c69501b0c9f10f0e3f1cfb7f6dec1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
