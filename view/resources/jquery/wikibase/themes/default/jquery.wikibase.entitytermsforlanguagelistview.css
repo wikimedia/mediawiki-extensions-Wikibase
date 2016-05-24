@@ -19,7 +19,7 @@
 .wikibase-entitytermsforlanguagelistview th {
 	font-weight: inherit;
 	padding: 0;
-	text-align: inherit;
+	text-align: left;
 }
 
 .wikibase-entitytermsforlanguagelistview .wikibase-entitytermsforlanguagelistview-header .wikibase-entitytermsforlanguagelistview-header-row .wikibase-entitytermsforlanguagelistview-cell {
