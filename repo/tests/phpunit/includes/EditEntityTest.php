@@ -72,7 +72,7 @@ class EditEntityTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param array|null $permissions
+	 * @param bool[]|null $permissions
 	 *
 	 * @return EntityPermissionChecker
 	 */
@@ -130,9 +130,8 @@ class EditEntityTest extends MediaWikiTestCase {
 	 * @param EntityTitleLookup $titleLookup
 	 * @param User|null $user
 	 * @param bool $baseRevId
+	 * @param bool[]|null $permissions map of actions to bool, indicating which actions are allowed.
 	 * @param EditFilterHookRunner|null $editFilterHookRunner
-	 *
-	 * @param null|array $permissions map of actions to bool, indicating which actions are allowed.
 	 *
 	 * @return EditEntity
 	 */
@@ -142,7 +141,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		EntityTitleLookup $titleLookup,
 		User $user = null,
 		$baseRevId = false,
-		$permissions = null,
+		array $permissions = null,
 		$editFilterHookRunner = null
 	) {
 		$context = new RequestContext();
