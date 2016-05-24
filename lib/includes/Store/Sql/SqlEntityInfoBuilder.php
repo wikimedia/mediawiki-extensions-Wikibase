@@ -373,8 +373,13 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function injectTerms( ResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
 			// FIXME: this only works for items and properties
-			$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
-			$key = $entityId->getSerialization();
+			// FIXME: This is a horrible hack to make WikibaseMediaInfo work!
+			if ( $row->term_entity_type === 'mediainfo' ) {
+				$key = 'M' . $row->term_entity_id;
+			} else {
+				$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
+				$key = $entityId->getSerialization();
+			}
 
 			if ( !isset( $this->entityInfo[$key] ) ) {
 				continue;
