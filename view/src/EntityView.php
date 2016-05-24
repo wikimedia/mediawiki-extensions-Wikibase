@@ -74,7 +74,8 @@ abstract class EntityView {
 	public function getHtml( EntityDocument $entity ) {
 		$entityId = $entity->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 
-		$html = $this->templateFactory->render( 'wikibase-entityview',
+		$html = $this->templateFactory->render(
+			'wikibase-entityview',
 			$entity->getType(),
 			$entityId,
 			$this->languageCode,
