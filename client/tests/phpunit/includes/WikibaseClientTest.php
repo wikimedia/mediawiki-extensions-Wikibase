@@ -129,6 +129,16 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
 	}
 
+	public function testGetRepoSettingsReturnType() {
+		$returnValue = $this->getWikibaseClient()->getRepoSettings();
+
+		if ( defined( 'WB_VERSION' ) ) {
+			$this->assertInstanceOf( SettingsArray::class, $returnValue );
+		} else {
+			$this->assertNull( $returnValue );
+		}
+	}
+
 	public function testGetSiteReturnType() {
 		$returnValue = $this->getWikibaseClient()->getSite();
 		$this->assertInstanceOf( Site::class, $returnValue );

@@ -52,6 +52,15 @@ if ( !defined( 'WB_VERSION' ) ) {
 	// This requires the given database name to be known to LBFactory, see
 	// $wgLBFactoryConf below.
 	$wgWBClientSettings['repoDatabase'] = "repo";
+
+	// Tell the client which namespace ID on the repo holds which type of entity.
+	$baseRepoNs = 120;
+
+	define( 'WB_REPO_NS_ITEM', $baseRepoNs );
+	define( 'WB_REPO_NS_PROPERTY', $baseRepoNs + 2 );
+
+	$wgWBRepoSettings['entityNamespaces']['wikibase-item'] = WB_REPO_NS_ITEM;
+	$wgWBRepoSettings['entityNamespaces']['wikibase-property'] = WB_REPO_NS_PROPERTY;
 }
 
 // In order to access a remote repo using a different database server,

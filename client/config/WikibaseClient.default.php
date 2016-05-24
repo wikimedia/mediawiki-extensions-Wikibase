@@ -30,15 +30,6 @@ return call_user_func( function() {
 		'languageLinkSiteGroup' => null,
 		'injectRecentChanges' => true,
 		'showExternalRecentChanges' => true,
-		// default for repo items in main namespace
-		'repoNamespaces' => [
-			'wikibase-item' => '',
-			'wikibase-property' => 'Property'
-		],
-		'entityNamespaces' => [
-			'wikibase-item' => 0,
-			'wikibase-property' => 120
-		],
 		'allowDataTransclusion' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinksByDefault' => false,
@@ -266,7 +257,43 @@ return call_user_func( function() {
 	$defaults['repoDatabase'] = function ( SettingsArray $settings ) {
 		// Use false (meaning the local wiki's database) if this wiki is the repo,
 		// otherwise default to null (meaning we can't access the repo's DB directly).
-		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? false : null;
+		return $settings->getSetting( 'thisWikiIsTheRepo' ) ? false : [
+			'wikibase-item' => 0,
+			'wikibase-property' => 120
+		];
+	};
+
+	$defaults['entityNamespaces'] = function ( SettingsArray $settings ) {
+		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
+			// if this is the repo wiki, use the repo setting
+			$repoSettings = WikibaseClient::getDefaultInstance()->getRepoSettings();
+			return $repoSettings->getSetting( 'entityNamespaces' );
+		} else {
+			// XXX: Default to having Items in the main namespace, and properties in NS 120.
+			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
+			return [
+				'wikibase-item' => 0,
+				'wikibase-property' => 120
+			];
+		}
+	};
+
+	$defaults['repoNamespaces'] = function ( SettingsArray $settings ) {
+		if ( $settings->getSetting( 'thisWikiIsTheRepo' ) ) {
+			// if this is the repo wiki, look up the namespace names based on the entityNamespaces setting
+			$namespaceNames = array_map(
+				'MWNamespace::getCanonicalName',
+				$settings->getSetting( 'entityNamespaces' )
+			);
+			return $namespaceNames;
+		} else {
+			// XXX: Default to having Items in the main namespace, and properties in the 'Property' namespace.
+			// That is the live setup at wikidata.org, it is NOT consistent with the example settings!
+			return [
+				'wikibase-item' => '',
+				'wikibase-property' => 'Property'
+			];
+		}
 	};
 
 	$defaults['changesDatabase'] = function ( SettingsArray $settings ) {
