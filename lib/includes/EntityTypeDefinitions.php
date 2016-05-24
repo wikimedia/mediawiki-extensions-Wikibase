@@ -114,6 +114,13 @@ class EntityTypeDefinitions {
 	}
 
 	/**
+	 * @return callable[]
+	 */
+	public function getEntityPatcherStrategyBuilders() {
+		return $this->getMapForDefinitionField( 'entity-patcher-strategy-builder' );
+	}
+
+	/**
 	 * @return string[]
 	 */
 	public function getJsDeserializerFactoryFunctions() {

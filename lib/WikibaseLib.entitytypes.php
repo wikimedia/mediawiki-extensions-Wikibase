@@ -22,7 +22,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
+use Wikibase\DataModel\Services\Diff\ItemPatcher;
 use Wikibase\DataModel\Services\Diff\PropertyDiffer;
+use Wikibase\DataModel\Services\Diff\PropertyPatcher;
 
 return array(
 	'item' => array(
@@ -40,7 +42,10 @@ return array(
 		],
 		'entity-differ-strategy-builder' => function() {
 			return new ItemDiffer();
-		}
+		},
+		'entity-patcher-strategy-builder' => function() {
+			return new ItemPatcher();
+		},
 	),
 	'property' => array(
 		'serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
@@ -57,6 +62,9 @@ return array(
 		],
 		'entity-differ-strategy-builder' => function() {
 			return new PropertyDiffer();
-		}
+		},
+		'entity-patcher-strategy-builder' => function() {
+			return new PropertyPatcher();
+		},
 	)
 );
