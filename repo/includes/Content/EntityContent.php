@@ -605,7 +605,7 @@ abstract class EntityContent extends AbstractContent {
 
 		// FIXME: this should either be done in the derivatives, or the patcher
 		// should be injected, so the application can add support for additional entity types.
-		$patcher = new EntityPatcher();
+		$patcher = WikibaseRepo::getDefaultInstance()->getEntityPatcher();
 		$patcher->patchEntity( $entityAfterPatch, $patch->getEntityDiff() );
 
 		$redirAfterPatch = $this->getPatchedRedirect( $patch->getRedirectDiff() );

@@ -51,6 +51,21 @@ class EditEntity {
 	private $entityStore;
 
 	/**
+	 * @var EntityPermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
+	 * @var EntityDiffer
+	 */
+	private $entityDiffer;
+
+	/**
+	 * @var EntityPatcher
+	 */
+	private $entityPatcher;
+
+	/**
 	 * The modified entity we are trying to save
 	 *
 	 * @var EntityDocument|null
@@ -162,6 +177,7 @@ class EditEntity {
 	 * @param EntityStore $entityStore
 	 * @param EntityPermissionChecker $permissionChecker
 	 * @param EntityDiffer $entityDiffer
+	 * @param EntityPatcher $entityPatcher
 	 * @param EntityDocument $newEntity the new entity object
 	 * @param User $user the user performing the edit
 	 * @param EditFilterHookRunner $editFilterHookRunner
@@ -182,6 +198,7 @@ class EditEntity {
 		EntityStore $entityStore,
 		EntityPermissionChecker $permissionChecker,
 		EntityDiffer $entityDiffer,
+		EntityPatcher $entityPatcher,
 		EntityDocument $newEntity,
 		User $user,
 		EditFilterHookRunner $editFilterHookRunner,
@@ -215,6 +232,7 @@ class EditEntity {
 		$this->entityStore = $entityStore;
 		$this->permissionChecker = $permissionChecker;
 		$this->entityDiffer = $entityDiffer;
+		$this->entityPatcher = $entityPatcher;
 
 		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
@@ -425,8 +443,6 @@ class EditEntity {
 			return false;
 		}
 
-		$entityPatcher = new EntityPatcher();
-
 		// calculate patch against base revision
 		// NOTE: will fail if $baseRev or $base are null, which they may be if
 		// this gets called at an inappropriate time. The data flow in this class
@@ -442,7 +458,7 @@ class EditEntity {
 
 		// apply the patch( base -> new ) to the latest revision.
 		$patchedLatest = $latestRev->getEntity()->copy();
-		$entityPatcher->patchEntity( $patchedLatest, $patch );
+		$this->entityPatcher->patchEntity( $patchedLatest, $patch );
 
 		// detect conflicts against latest revision
 		$cleanPatch = $this->entityDiffer->diffEntities( $latestRev->getEntity(), $patchedLatest );

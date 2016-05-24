@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\EditEntity;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -163,6 +164,7 @@ class EditEntityTest extends MediaWikiTestCase {
 			$mockRepository,
 			$permissionChecker,
 			new EntityDiffer(),
+			new EntityPatcher(),
 			$entity,
 			$user,
 			$editFilterHookRunner,
@@ -429,6 +431,7 @@ class EditEntityTest extends MediaWikiTestCase {
 			$repo,
 			$this->getEntityPermissionChecker( $permissions ),
 			new EntityDiffer(),
+			new EntityPatcher(),
 			new Item(),
 			$this->getUser( 'EditEntityTestUser' ),
 			$this->getMockEditFitlerHookRunner(),
