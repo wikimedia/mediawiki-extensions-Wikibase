@@ -42,6 +42,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
@@ -546,6 +547,20 @@ class WikibaseRepo {
 			$entityDiffer->registerEntityDifferStrategy( call_user_func( $strategyBuilder ) );
 		}
 		return $entityDiffer;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityPatcher
+	 */
+	public function getEntityPatcher() {
+		$strategieBuilders = $this->entityTypeDefinitions->getEntityPatcherStrategyBuilders();
+		$entityPatcher = new EntityPatcher();
+		foreach ( $strategieBuilders as $strategyBuilder ) {
+			$entityPatcher->registerEntityPatcherStrategy( call_user_func( $strategyBuilder ) );
+		}
+		return $entityPatcher;
 	}
 
 	/**
