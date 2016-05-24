@@ -3,11 +3,12 @@
 		"authors": [
 			"Likopiän tyttö",
 			"Mashoi7",
-			"Ilja.mos"
+			"Ilja.mos",
+			"Varvana"
 		]
 	},
 	"wikibase-edit": "kohentele",
-	"wikibase-add": "Lisyä",
+	"wikibase-add": "lisyä",
 	"wikibase-sitelinks-special": "Muut šivuštot",
 	"wikibase-statementview-rank-normal": "Tavallini arvo"
 }

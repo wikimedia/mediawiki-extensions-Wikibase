@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"පසිඳු කාවින්ද",
-			"Subi"
+			"Subi",
+			"Sator"
 		]
 	},
+	"wikibase-error-save-generic": "Errore bat gertatu da gordetzean. Zure aldaketak ezingo dira osatu.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliteratuta)",
 	"wikibase-timedetails-timezone": "Ordu-eremua",
 	"wikibase-timedetails-calendar": "Egutegia",
