@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_112f0e86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-25T16:44:18Z",
+      "side": 1,
+      "message": "Is there a ticket for this? Was there a specific motivation to do this change now? Not that there is something wrong. I\u0027m just trying to understand what impact this will have.",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_514ce679",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-25T16:44:18Z",
+      "side": 1,
+      "message": "There is an getRepoSettings in WikibaseClient? This sounds suspicious. Makes me wonder why the obscure \"thisWikiIsTheRepo\" check above is not a method, or even part of getRepoSettings. It could return null just the client settings if no repo settings are available.",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f129ba7f",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-25T16:44:18Z",
+      "side": 1,
+      "message": "Please avoid abbreviations in comments, especially \"NS\".",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d13f56af",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-25T16:44:18Z",
+      "side": 1,
+      "message": "\"The the\"",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_91695ebe",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-25T16:44:18Z",
+      "side": 1,
+      "message": "I believe this method does not belong here, and this comment makes this quite obvious. But I don\u0027t have an obvious alternative, sorry.\n\nWhat about a tiny \\Wikibase\\Client\\WikibaseRepoSettingsAccessor class, or something like that?",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_115d4e1a",
+        "filename": "client/tests/phpunit/ClientDefaultsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-25T16:44:18Z",
+      "side": 1,
+      "message": "Please do not do this. These numbers always get in our way when we try to continue working on a class, and test cases change, move or become obsolete. Please use this syntax:\n\n\u0027test case description\u0027 \u003d\u003e array( … ),",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
