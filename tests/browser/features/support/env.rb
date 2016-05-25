@@ -41,7 +41,7 @@ require_all 'features/support/pages'
 # TODO: remove once everything is migrated
 Before('@repo_login') do
   abort('WB_REPO_USERNAME environment variable is not defined! Please export a value for that variable before proceeding.') unless ENV['WB_REPO_USERNAME']
-  abort('WB_REPO_PASSWORD environment variable is not defined! Please export a value for that variable before proceeding.') unless ENV['WB_REPO_PASSWORD']
+  abort('MEDIAWIKI_PASSWORD environment variable is not defined! Please export a value for that variable before proceeding.') unless ENV['MEDIAWIKI_PASSWORD']
 end
 
 PageObject.default_element_wait = 10 # increased to avoid fails on saucelabs
