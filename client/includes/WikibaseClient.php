@@ -917,7 +917,11 @@ final class WikibaseClient {
 			'multilingualtext' => MultilingualTextValue::class,
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,
-			'wikibase-entityid' => EntityIdValue::class,
+			'wikibase-entityid' => function( $value ) {
+				return isset( $value['id'] )
+					? $this->getEntityIdParser()->parse( $value['id'] )
+					: EntityIdValue::newFromArray( $value );
+			},
 		) );
 	}
 

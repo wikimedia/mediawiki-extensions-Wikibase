@@ -30,7 +30,7 @@
 		"data-values/time": "~0.8.4",
 		"data-values/validators": "~0.1.0",
 		"data-values/data-types": "~0.5.0",
-		"data-values/serialization": "~1.0",
+		"data-values/serialization": "~1.1",
 		"data-values/javascript": "~0.8.0",
 		"data-values/value-view": "~0.17.1",
 		"wikibase/data-model": "~6.0",
