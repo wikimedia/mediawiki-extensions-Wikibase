@@ -130,7 +130,7 @@ return call_user_func( function() {
 				'se', 'sm', 'sa', 'sg', 'sc', 'sco', 'stq', 'st', 'nso', 'tn', 'sq', 'scn',
 				'si', 'simple', 'sd', 'ss', 'sk', 'sl', 'cu', 'szl', 'so', 'ckb', 'srn', 'sr',
 				'sh', 'su', 'fi', 'sv', 'tl', 'ta', 'shi', 'kab', 'roa-tara', 'tt', 'te', 'tet',
-				'th', 'ti', 'tg', 'to', 'chr', 'chy', 've', 'tr', 'tk', 'tw', 'udm', 'bug',
+				'th', 'ti', 'tg', 'to', 'chr', 'chy', 've', 'tr', 'tk', 'tw', 'tyv', 'udm', 'bug',
 				'uk', 'ur', 'ug', 'za', 'vec', 'vep', 'vi', 'vo', 'fiu-vro', 'wa', 'zh-classical',
 				'vls', 'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea', 'bat-smg',
 				'zh', 'zh-tw', 'zh-cn'
@@ -157,7 +157,7 @@ return call_user_func( function() {
 				'se', 'sa', 'sg', 'sc', 'sco', 'stq', 'st', 'nso', 'tn', 'sq', 'scn', 'si',
 				'simple', 'sd', 'ss', 'sk', 'sl', 'cu', 'szl', 'so', 'ckb', 'srn', 'sr', 'sh',
 				'fi', 'sv', 'tl', 'ta', 'shi', 'kab', 'roa-tara', 'tt', 'te', 'tet', 'th', 'vi',
-				'ti', 'tg', 'tpi', 'tokipona', 'tp', 'chr', 'chy', 've', 'tr', 'tk', 'tw', 'udm',
+				'ti', 'tg', 'tpi', 'tokipona', 'tp', 'chr', 'chy', 've', 'tr', 'tk', 'tw', 'tyv', 'udm',
 				'uk', 'ur', 'ug', 'za', 'vec', 'vep', 'vo', 'fiu-vro', 'wa', 'zh-classical', 'vls',
 				'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea', 'bat-smg', 'zh',
 				'zh-tw', 'zh-cn'
@@ -186,7 +186,7 @@ return call_user_func( function() {
 				'st', 'nso', 'tn', 'sq', 'si', 'scn', 'simple', 'ss', 'sk', 'sl', 'cu', 'szl',
 				'so', 'ckb', 'srn', 'sr', 'sh', 'fi', 'sv', 'ta', 'shi', 'tl', 'kab',
 				'roa-tara', 'tt', 'te', 'tet', 'th', 'ti', 'vi', 'tg', 'tokipona', 'tp',
-				'tpi', 'chy', 've', 'tr', 'tk', 'tw', 'udm', 'uk', 'ur', 'ug', 'za', 'vec',
+				'tpi', 'chy', 've', 'tr', 'tk', 'tw', 'tyv', 'udm', 'uk', 'ur', 'ug', 'za', 'vec',
 				'vep', 'vo', 'fiu-vro', 'wa', 'vls', 'war', 'wo', 'wuu', 'ts', 'xmf', 'yi',
 				'yo', 'diq', 'zea', 'zh', 'zh-tw', 'zh-cn', 'zh-classical', 'zh-yue', 'bat-smg'
 			],
@@ -212,7 +212,7 @@ return call_user_func( function() {
 				'rw', 'sa', 'sah', 'sc', 'scn', 'sco', 'sd', 'se', 'sg', 'sh', 'shi', 'si', 'simple',
 				'sk', 'sl', 'sm', 'sn', 'so', 'sq', 'sr', 'srn', 'ss', 'st', 'stq', 'su', 'sv',
 				'sw', 'szl', 'ta', 'te', 'tet', 'tg', 'th', 'ti', 'ty', 'tk', 'tl', 'tn', 'to',
-				'tokipona', 'tp', 'tpi', 'tr', 'ts', 'tt', 'tum', 'tw', 'udm', 'ug', 'uk', 'ur',
+				'tokipona', 'tp', 'tpi', 'tr', 'ts', 'tt', 'tum', 'tw', 'tyv', 'udm', 'ug', 'uk', 'ur',
 				'uz', 've', 'vec', 'vep', 'vi', 'vls', 'vo', 'wa', 'war', 'wo', 'wuu', 'xal',
 				'xh', 'xmf', 'za', 'zea', 'zh', 'zh-classical', 'zh-cn', 'zh-yue', 'zh-min-nan',
 				'zh-tw', 'zu'
