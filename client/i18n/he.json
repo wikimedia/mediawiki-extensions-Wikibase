@@ -22,7 +22,7 @@
 	"apihelp-query+wikibase-param-prop": "אילו מאפיינים לקבל:\n;<kbd>url</kbd>: כתובת URL בסיסית, נתיב תסריטים (script path) ונתיב ערכים (article path) של מאגר ויקיבייס.\n;<kbd>siteid</kbd>: ה־siteid של האתר הזה.",
 	"wikibase-after-page-move": "אפשר גם [$1 לעדכן] את הפריט המשויך ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} כדי לתחזק את קישורי השפה בדף שהועבר.",
 	"wikibase-after-page-move-queued": "[$1 פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}}] שמשויך לדף הזה יעודכן באופן אוטומטי בקרוב. ייתכן שזה לא יקרה מיד.",
-	"wikibase-after-page-delete": "באפשרותך גם להסיר את הקישור אל דף הזה מ[$1 פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}}] המשויך כדי לשמור על קישורי השפה.",
+	"wikibase-after-page-delete": "נא להסיר את הקישור אל דף הזה מ[$1 פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} המשויך] כדי לשמור על קישורי השפה.",
 	"wikibase-after-page-delete-queued": "[$1 פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}}] המשויך לדף הזה יעודכן אוטומטית. ייתכן שזה לא יקרה מיד.",
 	"wikibase-comment-add": "נוצר פריט {{WBREPONAME}}.",
 	"wikibase-comment-remove": "פריט ה{{GRAMMAR:תחילית|{{WBREPONAME}}}} המשויך נמחק. קישורי שפה הוסרו.",

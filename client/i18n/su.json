@@ -5,6 +5,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "Tutumbu ka item gudang data anu nyambung",
+	"wikibase-comment-update": "Item {{WBREPONAME}} robah",
 	"wikibase-dataitem": "Item {{WBREPONAME}}",
 	"wikibase-editlinks": "Édit tutumbu",
 	"wikibase-editlinkstitle": "Édit tutumbu antarbasa",
@@ -13,5 +14,5 @@
 	"wikibase-rc-hide-wikidata-show": "Témbongkeun",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Éditan {{WBREPONAME}}",
-	"wikibase-otherprojects": "Proyék lian"
+	"wikibase-otherprojects": "Di proyék lianna"
 }
