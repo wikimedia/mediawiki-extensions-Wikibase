@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_ba9c32b9",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-26T13:25:38Z",
+      "side": 1,
+      "message": "A clean replacement for this is now submitted as I9b54124.",
+      "revId": "972056aae9a7d1362b0638e4e1959d0664168860",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_3c2b0230",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-26T13:25:38Z",
+      "side": 1,
+      "message": "We could temporary work around the exception with a try-catch-continue for unsupported entity types. Which means terms can be stored, but not retrieved yet.",
+      "revId": "972056aae9a7d1362b0638e4e1959d0664168860",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_dcf806bf",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-26T13:25:38Z",
+      "side": 1,
+      "message": "Mentioning \"EntityId::\" is not correct.",
+      "revId": "972056aae9a7d1362b0638e4e1959d0664168860",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
