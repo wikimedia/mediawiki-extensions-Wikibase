@@ -10,6 +10,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
  *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thiemo Mättig
  */
 class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 
@@ -22,6 +23,12 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 				'content-model-id' => 'foo-model',
 				'content-handler-factory-callback' => 'foo-handler',
 				'entity-factory-callback' => 'new-foo',
+				'entity-differ-strategy-builder' => 'foo-differ',
+				'entity-patcher-strategy-builder' => 'foo-patcher',
+				'js-deserializer-factory-function' => 'foo-js-deserializer',
+				'entity-id-pattern' => 'foo-id-pattern',
+				'entity-id-builder' => 'new-foo-id',
+				'entity-id-composer' => 'new-composed-foo-id',
 			),
 			'bar' => array(
 				'serializer-factory-callback' => 'bar-serializer',
@@ -105,6 +112,46 @@ class EntityTypeDefinitionsTest extends PHPUnit_Framework_TestCase {
 			),
 			$definitions->getEntityFactoryCallbacks()
 		);
+	}
+
+	public function testGetEntityDifferStrategyBuilders() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame( [
+			'foo' => 'foo-differ',
+		], $definitions->getEntityDifferStrategyBuilders() );
+	}
+
+	public function testGetEntityPatcherStrategyBuilders() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame( [
+			'foo' => 'foo-patcher',
+		], $definitions->getEntityPatcherStrategyBuilders() );
+	}
+
+	public function testGetJsDeserializerFactoryFunctions() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame( [
+			'foo' => 'foo-js-deserializer',
+		], $definitions->getJsDeserializerFactoryFunctions() );
+	}
+
+	public function testGetEntityIdBuilders() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame( [
+			'foo-id-pattern' => 'new-foo-id',
+		], $definitions->getEntityIdBuilders() );
+	}
+
+	public function testGetEntityIdFragmentBuilders() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame( [
+			'foo' => 'new-composed-foo-id',
+		], $definitions->getEntityIdComposers() );
 	}
 
 }
