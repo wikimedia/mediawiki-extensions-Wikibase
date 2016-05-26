@@ -46,9 +46,13 @@ associated with a function having the dedicated signature:
 : a callable that returns a DispatchableDeserializer instance, with the first and only argument
   being a DeserializerFactory
 ; entity-id-pattern (repo and client)
-: a regular expression that matches serialized entity ids
+: a regular expression that matches serialized entity IDs
 ; entity-id-builder (repo and client)
-: a callable that returns an EntityId instance for a given entity id serialization
+: a callable that returns an EntityId instance for a given entity ID serialization
+; entity-id-fragment-builder (repo and client)
+: a callable that returns an EntityId instance for a given unique fragment of an entity ID
+  serialization. Only entity types with IDs that are constructed from a static and a unique part can
+  and should specify this.
 ; view-factory-callback (repo only)
 : a callable that returns an EntityView instance, with the arguments being a language code, a
   LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator
