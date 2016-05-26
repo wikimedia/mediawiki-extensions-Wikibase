@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -20,8 +21,10 @@ interface TermIndex {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityDocument $entity
+	 * @param EntityDocument $entity Must have an ID, and optionally any combination of terms as
+	 *  declared by the TermIndexEntry::TYPE_... constants.
 	 *
+	 * @throws InvalidArgumentException when $entity does not have an ID.
 	 * @return boolean Success indicator
 	 */
 	public function saveTermsOfEntity( EntityDocument $entity );
