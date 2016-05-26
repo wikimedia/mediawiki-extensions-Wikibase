@@ -65,6 +65,7 @@
 	"wikibase-snakview-variations-novalue-label": "nav vērtības",
 	"wikibase-snakview-snaktypeselector-value": "pielāgota vērtība",
 	"wikibase-snakformat-invalid-value": "Nederīga vērtība.",
+	"wikibase-snakformat-propertynotfound": "Īpašība nav atrasta.",
 	"wikibase-copyrighttooltip-acknowledge": "Es piekrītu šiem noteikumiem saviem nākotnes labojumiem. Turpmāk nerādīt šo ziņojumu.",
 	"wikibase-entityselector-more": "vairāk",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 ir pāradresācija.",
