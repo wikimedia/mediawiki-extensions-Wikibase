@@ -1,0 +1,361 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_d1e904e4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "EchoEvent::class",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_51bdf4d3",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "Should maybe also use ::class and then just append the \u0027::method\u0027. Also below.",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d1d0e425",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "Why is \"connected\" gendered? Relative to whom would it be (meaningfully) gendered?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d197444b",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b1945048",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_11a25ca4",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_518b3423",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "@license?\n@author?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d1c46448",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "I think it would be better to actually inline the respective settings than to clue the whole settings object into this.",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_9194ac3b",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d ?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f1a408a1",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "Isn\u0027t this redundant with the default options?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f1bb68b8",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "empty line before the return would aid readability",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_91e2ecce",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "We usually return null in such cases, but false is ok as well, I guess",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_512e94f8",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "I don\u0027t quite get this, maybe try to reword this?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d1cbc44d",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "Why do you cast $title to bool? The type hint already makes sure we can an object.",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_713d9829",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "@author?\n@license?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_5115f49e",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "Type hints?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_311a00d1",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "type hints?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_5163343e",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "@… (See other files)",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_718bd8e8",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "this should already be bool, why cast?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_31684019",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "EchoEvent::class",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_1151bc65",
+        "filename": "docs/options.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T13:26:21Z",
+      "side": 1,
+      "message": "\"… This requires the Echo extension.\"",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
