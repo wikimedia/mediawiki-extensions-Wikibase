@@ -7,6 +7,8 @@ use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\LanguageFallbackChain;
@@ -157,13 +159,11 @@ class EntityParserOutputGenerator {
 		$parserOutput->addJsConfigVars( $configVars );
 		$parserOutput->setExtensionData( 'wikibase-titletext', $this->getTitleText( $entity ) );
 
-		$entityId = $entity->getId();
-
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
 				$entity,
-				$this->getEntityInfo( $parserOutput, $entityId )
+				$this->getEntityInfo( $parserOutput )
 			);
 		} else {
 			// If we don't have HTML, the ParserOutput in question
@@ -184,6 +184,7 @@ class EntityParserOutputGenerator {
 		// Sometimes extensions like SpamBlacklist might call getParserOutput
 		// before the id is assigned, during the process of creating a new entity.
 		// in that case, no alternate links are added, which probably is no problem.
+		$entityId = $entity->getId();
 		if ( $entityId !== null ) {
 			$this->addAlternateLinks( $parserOutput, $entityId );
 		}
@@ -195,11 +196,10 @@ class EntityParserOutputGenerator {
 	 * Fetches some basic entity information from a set of entity IDs.
 	 *
 	 * @param ParserOutput $parserOutput
-	 * @param EntityId|null $entityId
 	 *
 	 * @return EntityInfo
 	 */
-	private function getEntityInfo( ParserOutput $parserOutput, EntityId $entityId = null ) {
+	private function getEntityInfo( ParserOutput $parserOutput ) {
 		/**
 		 * Set in ReferencedEntitiesDataUpdater.
 		 *
@@ -212,10 +212,6 @@ class EntityParserOutputGenerator {
 			wfLogWarning( '$entityIds from ParserOutput "referenced-entities" extension data'
 				. ' expected to be an array' );
 			$entityIds = [];
-		}
-
-		if ( $entityId !== null ) {
-			$entityIds[] = $entityId;
 		}
 
 		$entityInfoBuilder = $this->entityInfoBuilderFactory->newEntityInfoBuilder( $entityIds );
@@ -272,8 +268,11 @@ class EntityParserOutputGenerator {
 		EntityDocument $entity,
 		EntityInfo $entityInfo
 	) {
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			new EntityInfoTermLookup( $entityInfo ),
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity( $entity );
+
+		$inMemoryLabelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			new EntityRetrievingTermLookup( $entityLookup ),
 			$this->languageFallbackChain
 		);
 
@@ -298,7 +297,7 @@ class EntityParserOutputGenerator {
 				$languageDirectionalityLookup,
 				$languageNameLookup
 			),
-			$labelDescriptionLookup,
+			$inMemoryLabelDescriptionLookup,
 			$this->templateFactory,
 			$editSectionGenerator,
 			$this->textProvider,
@@ -306,10 +305,15 @@ class EntityParserOutputGenerator {
 			$textInjector
 		);
 
+		$entityInfoLabelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			new EntityInfoTermLookup( $entityInfo ),
+			$this->languageFallbackChain
+		);
+
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entity->getType(),
 			$this->languageCode,
-			$labelDescriptionLookup,
+			$entityInfoLabelDescriptionLookup,
 			$this->languageFallbackChain,
 			$editSectionGenerator,
 			$entityTermsView
