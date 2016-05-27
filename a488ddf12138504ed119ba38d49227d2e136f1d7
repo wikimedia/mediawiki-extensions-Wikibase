@@ -16,6 +16,24 @@
       "revId": "a488ddf12138504ed119ba38d49227d2e136f1d7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_511b3485",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-27T13:45:09Z",
+      "side": 1,
+      "message": "Could be inversed, yes. I did not wanted to cause to many conflicts with I0f7e2e3.",
+      "parentUuid": "ae564743_5127b462",
+      "revId": "a488ddf12138504ed119ba38d49227d2e136f1d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
