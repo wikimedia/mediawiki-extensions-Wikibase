@@ -16,6 +16,23 @@
       "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_ecf38f67",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-27T15:21:26Z",
+      "side": 1,
+      "message": "I believe this should use the full, terms table based lookup because it\u0027s also used to label badges, for example.",
+      "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
