@@ -153,7 +153,7 @@ call_user_func( function() {
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
 
 	// job classes
-	$wgJobClasses['wikibase-addUsagesForPage'] = 'Wikibase\Client\Store\AddUsagesForPageJob';
+	$wgJobClasses['wikibase-addUsagesForPage'] = Wikibase\Client\Store\AddUsagesForPageJob::class;
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = array(
