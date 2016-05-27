@@ -17,7 +17,8 @@
 			"Ricordisamoa",
 			"FRacco",
 			"Alexmar983",
-			"Statix64"
+			"Statix64",
+			"Matteocng"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -355,6 +356,8 @@
 	"apihelp-wbcreateredirect-param-to": "ID entità a cui puntare il redirect",
 	"apihelp-wbcreateredirect-param-bot": "Contrassegna questa modifica come bot. Questo flag di URL sarà rispettato solo se l'utente appartiene al gruppo \"bot\".",
 	"apihelp-wbcreateredirect-example-1": "Trasforma Q11 in un redirect a Q12",
+	"apihelp-wbeditentity-param-id": "L'identificatore dell'entità, incluso il prefisso.\nUtilizza <var>id</var> oppure <var>site</var> e <var>title</var> insieme.",
+	"apihelp-wbeditentity-param-title": "Titolo della pagina da associare.\nUtilizza insieme a <var>site</var> per creare un sitelink completo.",
 	"apihelp-wbeditentity-example-11": "Aggiunge un'etichetta senza sovrascrivere se già presente",
 	"apihelp-wbeditentity-example-12": "Rimuovi un'etichetta",
 	"apihelp-wbformatvalue-param-property": "ID proprietà a cui appartiene il valore dei dati, dovrebbe essere usato al posto del parametro tipo di dati.",
@@ -394,6 +397,9 @@
 	"apihelp-query+wbsearch-example-1": "Ricerca di \"abc\" in lingua inglese, con valori predefiniti per il tipo e limite",
 	"apihelp-query+wbsearch-example-2": "Ricerca di \"abc\" in lingua inglese con un limite di 50",
 	"apihelp-wbsetaliases-description": "Imposta gli alias per un'entità Wikibase.",
+	"apihelp-wbsetaliases-param-id": "L'identificatore dell'entità, incluso il prefisso.\nUtilizza <var>id</var> oppure <var>site</var> e <var>title</var> insieme.",
+	"apihelp-wbsetaliases-param-site": "Un identificatore per il sito in cui risiede la pagina.\nUtilizza insieme a <var>title</var> per creare un sitelink completo.",
+	"apihelp-wbsetaliases-param-title": "Titolo della pagina da associare.\nUtilizza insieme a <var>site</var> per creare un sitelink completo.",
 	"apihelp-wbsetaliases-param-bot": "Contrassegna questa modifica come bot. Questo flag di URL sarà rispettato solo se l'utente appartiene al gruppo \"bot\".",
 	"apihelp-wbsetaliases-param-add": "Elenco degli alias da aggiungere (può essere combinato con remove)",
 	"apihelp-wbsetaliases-param-remove": "Elenco degli alias da rimuovere (può essere combinato con add)",
@@ -404,14 +410,20 @@
 	"apihelp-wbsetclaimvalue-param-claim": "Un GUID che identifica l'asserzione",
 	"apihelp-wbsetclaimvalue-param-snaktype": "Il tipo di snak",
 	"apihelp-wbsetdescription-description": "Imposta una descrizione per una singola entità Wikibase.",
+	"apihelp-wbsetdescription-param-site": "Un identificatore per il sito in cui risiede la pagina.\nUtilizza insieme a <var>title</var> per creare un sitelink completo.",
+	"apihelp-wbsetdescription-param-title": "Titolo della pagina da associare.\nUtilizza insieme a <var>site</var> per creare un sitelink completo.",
 	"apihelp-wbsetdescription-param-language": "Lingua della descrizione",
 	"apihelp-wbsetdescription-param-value": "Il valore da impostare per la descrizione",
 	"apihelp-wbsetlabel-description": "Imposta un'etichetta per una singola entità Wikibase.",
+	"apihelp-wbsetlabel-param-id": "L'identificatore dell'entità, incluso il prefisso.\nUtilizza <var>id</var> oppure <var>site</var> e <var>title</var> insieme.",
+	"apihelp-wbsetlabel-param-site": "Un identificatore per il sito in cui risiede la pagina.\nUtilizza insieme a <var>title</var> per creare un sitelink completo.",
 	"apihelp-wbsetlabel-param-language": "Lingua dell'etichetta",
 	"apihelp-wbsetlabel-param-value": "Il valore dell'etichetta",
 	"apihelp-wbsetqualifier-param-claim": "Un GUID che identifica l'asserzione per cui si sta impostando un qualificatore",
 	"apihelp-wbsetreference-description": "Crea un riferimento o imposta il valore di uno esistente.",
 	"apihelp-wbsetreference-param-statement": "Un GUID che identifica la dichiarazione per cui si sta impostando un riferimento",
+	"apihelp-wbsetsitelink-param-title": "Titolo della pagina da associare.\nUtilizza insieme a <var>site</var> per creare un sitelink completo.",
 	"apihelp-wbsetsitelink-param-summary": "Riepilogo per la modifica.\nSarà preceduto da un commento generato automaticamente. Il limite di lunghezza del commento automatico, insieme con il riassunto, è di 260 caratteri. Siate consapevoli del fatto che tutto ciò che supera tale limite verrà tagliato.",
-	"apihelp-wbsetsitelink-example-1": "Aggiunge un sitelink alla voce in inglese \"Hydrogen\" all'elemento con ID \"Q42\", se il sitelink non esiste"
+	"apihelp-wbsetsitelink-example-1": "Aggiunge un sitelink alla voce in inglese \"Hydrogen\" all'elemento con ID \"Q42\", se il sitelink non esiste",
+	"apihelp-wbsetsitelink-example-3": "Aggiunge un sitelink alla voce in tedesco \"Wasserstoff\", all'elemento che è collegato alla voce in inglese \"Hydrogen\", se il sitelink non esiste"
 }

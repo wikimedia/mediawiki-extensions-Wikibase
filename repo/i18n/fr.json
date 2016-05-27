@@ -46,7 +46,8 @@
 			"Guillom",
 			"Thibaut120094",
 			"Trial",
-			"Yasten"
+			"Yasten",
+			"Dcausse"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -122,8 +123,8 @@
 	"wikibase-aliases-input-help-message": "Pour rendre cette entité plus facile à trouver, vous pouvez entrer des noms de remplacement.",
 	"wikibase-propertypage-datatype": "Type de données",
 	"wikibase-propertypage-bad-datatype": "Type de données inconnu : $1",
-	"wikibase-claimview-snak-tooltip": "Saisissez une valeur correspondant à la propriété appelée « $1 ». Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle n’est pas connue, vous pouvez choisir une alternative pour spécifier une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.",
-	"wikibase-claimview-snak-new-tooltip": "Après avoir spécifié une propriété, vous pouvez saisir une valeur correspondante. Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle est inconnue, vous pouvez choisir une alternative en spécifiant une valeur personnalisée en cliquant sur l’icône à côté de la zone de saisie de la valeur.",
+	"wikibase-claimview-snak-tooltip": "Saisissez une valeur correspondant à la propriété appelée « $1 ». Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle n’est pas connue, vous pouvez choisir une  valeur alternative en cliquant sur l’icône précédant la zone de saisie.",
+	"wikibase-claimview-snak-new-tooltip": "Après avoir spécifié une propriété, vous pouvez saisir une valeur correspondante. Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle est inconnue, vous pouvez choisir une valeur alternative en cliquant sur l’icône précédant la zone de saisie.",
 	"wikibase-statementview-rank-preferred": "Rang privilégié",
 	"wikibase-statementview-rank-normal": "Rang normal",
 	"wikibase-statementview-rank-deprecated": "Rang obsolète",

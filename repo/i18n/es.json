@@ -32,7 +32,8 @@
 			"YoViajo",
 			"Matiia",
 			"AlvaroMolina",
-			"Lemondoge"
+			"Lemondoge",
+			"Rubentl134"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -51,6 +52,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En más idiomas",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Mostrar etiquetas, alias y descripciones en todos mis idiomas al cargar la página",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Las lenguas personales adicionales a la interfaz de lenguaje del usuario puede ser modificada utilizando el [[mw:Extension:Babel|Babel extension]] sintaxis en la página de usuario.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "También conocido como",
 	"wikibase-entitytermsforlanguagelistview-description": "Descripción",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiqueta",
@@ -107,7 +109,7 @@
 	"wikibase-propertypage-datatype": "Tipo de dato",
 	"wikibase-propertypage-bad-datatype": "Tipo de dato desconocido: $1",
 	"wikibase-claimview-snak-tooltip": "Escribe un valor correspondiente a la propiedad llamada \"$1\". Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir un tipo de valor alternativo haciendo clic en el icono previo a la casilla de entrada.",
-	"wikibase-claimview-snak-new-tooltip": "Después de especificar una propiedad, puedes escribir un valor correspondiente. Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir un tipo de valor alternativo haciendo clic en el icono previo a la casilla de entrada.",
+	"wikibase-claimview-snak-new-tooltip": "Después de especificar una propiedad, puedes escribir un valor correspondiente. Si la propiedad no tiene ningún valor asignado o si éste no se conoce, puedes elegir un tipo de valor alternativo haciendo clic en el ícono previo a la casilla de entrada.",
 	"wikibase-statementview-rank-preferred": "Nivel preferido",
 	"wikibase-statementview-rank-normal": "Calificación normal",
 	"wikibase-statementview-rank-deprecated": "Nivel obsoleto",
