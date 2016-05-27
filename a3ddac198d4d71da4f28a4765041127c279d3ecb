@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_4c855b5d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_d1e904e4",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_51bdf4d3",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 19
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_accd178c",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_51bdf4d3",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_d1d0e425",
         "filename": "client/i18n/en.json",
         "patchSetId": 19
@@ -47,6 +83,24 @@
       "writtenOn": "2016-05-27T13:26:21Z",
       "side": 1,
       "message": "Why is \"connected\" gendered? Relative to whom would it be (meaningfully) gendered?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_0cc1a383",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "I used Echo notifications as the pattern:\nhttps://phabricator.wikimedia.org/diffusion/ECHO/browse/master/i18n/en.json$213\n\nThough I don\u0027t know why these should be gendered (even in Czech there is no need to do it), I\u0027m not 100% sure about this.",
+      "parentUuid": "ae564743_d1d0e425",
       "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_ec754f2e",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_518b3423",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_d1c46448",
         "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
         "patchSetId": 19
@@ -132,6 +204,24 @@
       "writtenOn": "2016-05-27T13:26:21Z",
       "side": 1,
       "message": "I think it would be better to actually inline the respective settings than to clue the whole settings object into this.",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2c8f4728",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Could you tell why? Just asking before rewriting the code",
+      "parentUuid": "ae564743_d1c46448",
       "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_cc7e8b15",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Maybe, done",
+      "parentUuid": "ae564743_9194ac3b",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_f1a408a1",
         "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
         "patchSetId": 19
@@ -172,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_ac42370f",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "I will remove this handler anyway as it\u0027s being deprecated and widely replaced",
+      "parentUuid": "ae564743_f1a408a1",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_f1bb68b8",
         "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
         "patchSetId": 19
@@ -183,6 +309,24 @@
       "writtenOn": "2016-05-27T13:26:21Z",
       "side": 1,
       "message": "empty line before the return would aid readability",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_ec4c2f46",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_f1bb68b8",
       "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +367,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_ec638fa5",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "If someone replaces a sitelink which links to a non-existent page, it\u0027s more likely that they moved the page without creating redirect (IMO), ie. that it propably is not case to send a notification.",
+      "parentUuid": "ae564743_512e94f8",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_d1cbc44d",
         "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
         "patchSetId": 19
@@ -234,6 +396,24 @@
       "writtenOn": "2016-05-27T13:26:21Z",
       "side": 1,
       "message": "Why do you cast $title to bool? The type hint already makes sure we can an object.",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4c271b63",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "You\u0027re right, didn\u0027t make sense",
+      "parentUuid": "ae564743_d1cbc44d",
       "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +437,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_0c1523ea",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_713d9829",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_5115f49e",
         "filename": "client/includes/Notifications/PageConnectionFormatter.php",
         "patchSetId": 19
@@ -268,6 +466,24 @@
       "writtenOn": "2016-05-27T13:26:21Z",
       "side": 1,
       "message": "Type hints?",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_2c2c6745",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_5115f49e",
       "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +507,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_ac17d7f2",
+        "filename": "client/includes/Notifications/PageConnectionFormatter.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_311a00d1",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_5163343e",
         "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
         "patchSetId": 19
@@ -302,6 +536,24 @@
       "writtenOn": "2016-05-27T13:26:21Z",
       "side": 1,
       "message": "@… (See other files)",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_ec11cffd",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_5163343e",
       "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +577,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_ace6b70f",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Propably altered some existing code without thinking",
+      "parentUuid": "ae564743_718bd8e8",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_31684019",
         "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
         "patchSetId": 19
@@ -342,6 +612,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_8c85b30e",
+        "filename": "client/tests/phpunit/includes/Hooks/EchoNotificationsHandlersTest.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_31684019",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_1151bc65",
         "filename": "docs/options.wiki",
         "patchSetId": 19
@@ -353,6 +641,24 @@
       "writtenOn": "2016-05-27T13:26:21Z",
       "side": 1,
       "message": "\"… This requires the Echo extension.\"",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_4cb1dbde",
+        "filename": "docs/options.wiki",
+        "patchSetId": 19
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-05-27T14:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_1151bc65",
       "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
