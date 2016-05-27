@@ -34,7 +34,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	/**
 	 * @var LabelDescriptionLookup
 	 */
-	private $labelDescriptionLookup;
+	private $inMemoryLabelDescriptionLookup;
 
 	/**
 	 * @var TemplateFactory
@@ -58,7 +58,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 
 	/**
 	 * @param HtmlTermRenderer $htmlTermRenderer
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LabelDescriptionLookup $inMemoryLabelDescriptionLookup
 	 * @param TemplateFactory $templateFactory
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
 	 * @param TermsListView $termsListView
@@ -66,14 +66,14 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 */
 	public function __construct(
 		HtmlTermRenderer $htmlTermRenderer,
-		LabelDescriptionLookup $labelDescriptionLookup,
+		LabelDescriptionLookup $inMemoryLabelDescriptionLookup,
 		TemplateFactory $templateFactory,
 		EditSectionGenerator $sectionEditLinkGenerator,
 		TermsListView $termsListView,
 		LocalizedTextProvider $textProvider
 	) {
 		$this->htmlTermRenderer = $htmlTermRenderer;
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->inMemoryLabelDescriptionLookup = $inMemoryLabelDescriptionLookup;
 		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
 		$this->templateFactory = $templateFactory;
 		$this->termsListView = $termsListView;
@@ -125,7 +125,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 		$description = null;
 		if ( $entityId !== null ) {
 			try {
-				$description = $this->labelDescriptionLookup->getDescription( $entityId );
+				$description = $this->inMemoryLabelDescriptionLookup->getDescription( $entityId );
 			} catch ( LabelDescriptionLookupException $e ) {
 				// This masks the differences between missing entities, missing terms and lookup errors.
 			}
@@ -205,7 +205,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 
 			$label = null;
 			try {
-				$label = $this->labelDescriptionLookup->getLabel( $entityId );
+				$label = $this->inMemoryLabelDescriptionLookup->getLabel( $entityId );
 			} catch ( LabelDescriptionLookupException $e ) {
 				// This masks the differences between missing entities, missing terms and lookup errors.
 			}

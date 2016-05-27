@@ -48,7 +48,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	 */
 	public function __construct(
 		HtmlTermRenderer $htmlTermRenderer,
-		LabelDescriptionLookup $labelDescriptionLookup,
+		LabelDescriptionLookup $inMemoryLabelDescriptionLookup,
 		TemplateFactory $templateFactory,
 		EditSectionGenerator $sectionEditLinkGenerator,
 		LocalizedTextProvider $textProvider,
@@ -57,7 +57,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	) {
 		parent::__construct(
 			$htmlTermRenderer,
-			$labelDescriptionLookup,
+			$inMemoryLabelDescriptionLookup,
 			$templateFactory,
 			$sectionEditLinkGenerator,
 			$termsListView,
