@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_5127b462",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-27T12:48:51Z",
+      "side": 1,
+      "message": "Could just return []; in case this is not true, would simplify the structure of this functions.",
+      "revId": "a488ddf12138504ed119ba38d49227d2e136f1d7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
