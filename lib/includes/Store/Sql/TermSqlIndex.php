@@ -10,9 +10,9 @@ use Traversable;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\LabelConflictFinder;
 
 /**
@@ -86,11 +86,17 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityDocument $entity
+	 * @param EntityDocument $entity Must have an ID, and optionally any combination of terms as
+	 *  declared by the TermIndexEntry::TYPE_... constants.
 	 *
+	 * @throws InvalidArgumentException when $entity does not have an ID.
 	 * @return bool Success indicator
 	 */
 	public function saveTermsOfEntity( EntityDocument $entity ) {
+		if ( $entity->getId() === null ) {
+			throw new InvalidArgumentException( '$entity must have an ID' );
+		}
+
 		//First check whether there's anything to update
 		$newTerms = $this->getEntityTerms( $entity );
 		$oldTerms = $this->getTermsOfEntity( $entity->getId() );
@@ -139,7 +145,8 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entity->getId()->getNumericId(),
-			'term_entity_type' => $entity->getType()
+			'term_entity_type' => $entity->getType(),
+			'term_weight' => $this->getWeight( $entity ),
 		);
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': inserting terms for ' . $entity->getId()->getSerialization() );
@@ -150,8 +157,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				$this->tableName,
 				array_merge(
 					$this->getTermFields( $term ),
-					$entityIdentifiers,
-					array( 'term_weight'  => $this->getWeight( $entity ) )
+					$entityIdentifiers
 				),
 				__METHOD__,
 				array( 'IGNORE' )
@@ -173,19 +179,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	public function getEntityTerms( EntityDocument $entity ) {
 		// FIXME: OCP violation. No support for new types of entities can be registered
 
+		$extraFields = [
+			'entityType' => $entity->getType(),
+			'entityId' => $entity->getId()->getNumericId(),
+		];
+
 		if ( $entity instanceof FingerprintProvider ) {
 			$fingerprint = $entity->getFingerprint();
-
-			/** @var EntityDocument $entity */
-			$extraFields = array(
-				'entityType' => $entity->getType(),
-			);
-
-			$entityId = $entity->getId();
-			if ( $entityId !== null ) {
-				$extraFields['entityId'] = $entityId->getNumericId();
-			}
-
 			return $this->getFingerprintTerms( $fingerprint, $extraFields );
 		}
 
@@ -198,7 +198,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	private function getFingerprintTerms( Fingerprint $fingerprint, array $extraFields = array() ) {
+	private function getFingerprintTerms( Fingerprint $fingerprint, array $extraFields ) {
 		$terms = array();
 
 		foreach ( $fingerprint->getDescriptions()->toTextArray() as $languageCode => $description ) {
@@ -221,12 +221,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 			$terms[] = $term;
 		}
 
-		/** @var AliasGroup $aliasGroup */
-		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
+		foreach ( $fingerprint->getAliasGroups()->toArray() as $aliasGroup ) {
+			$languageCode = $aliasGroup->getLanguageCode();
+
 			foreach ( $aliasGroup->getAliases() as $alias ) {
 				$term = new TermIndexEntry( $extraFields );
 
-				$term->setLanguage( $aliasGroup->getLanguageCode() );
+				$term->setLanguage( $languageCode );
 				$term->setType( TermIndexEntry::TYPE_ALIAS );
 				$term->setText( $alias );
 
@@ -296,15 +297,15 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 *
 	 * @param EntityDocument $entity
 	 *
-	 * @return float weight
+	 * @return float
 	 */
 	private function getWeight( EntityDocument $entity ) {
 		// FIXME: OCP violation. No support for new types of entities can be registered
 
 		$weight = 0.0;
 
-		if ( $entity instanceof FingerprintProvider ) {
-			$weight = max( $weight, $entity->getFingerprint()->getLabels()->count() / 1000.0 );
+		if ( $entity instanceof LabelsProvider ) {
+			$weight = max( $weight, $entity->getLabels()->count() / 1000.0 );
 		}
 
 		if ( $entity instanceof Item ) {
