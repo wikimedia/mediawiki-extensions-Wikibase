@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_4ce9db7d",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-05-27T15:18:06Z",
+      "side": 1,
+      "message": "if the entity doesn\u0027t have an id at this point, then this might not work\n\nalso i don\u0027t like use of LabelDescriptionLookup here",
+      "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
