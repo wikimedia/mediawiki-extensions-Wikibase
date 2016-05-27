@@ -7,6 +7,8 @@ use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\LanguageFallbackChain;
@@ -272,8 +274,11 @@ class EntityParserOutputGenerator {
 		EntityDocument $entity,
 		EntityInfo $entityInfo
 	) {
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			new EntityInfoTermLookup( $entityInfo ),
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity( $entity );
+
+		$inMemoryLabelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			new EntityRetrievingTermLookup( $entityLookup ),
 			$this->languageFallbackChain
 		);
 
@@ -298,7 +303,7 @@ class EntityParserOutputGenerator {
 				$languageDirectionalityLookup,
 				$languageNameLookup
 			),
-			$labelDescriptionLookup,
+			$inMemoryLabelDescriptionLookup,
 			$this->templateFactory,
 			$editSectionGenerator,
 			$this->textProvider,
@@ -309,7 +314,7 @@ class EntityParserOutputGenerator {
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entity->getType(),
 			$this->languageCode,
-			$labelDescriptionLookup,
+			$inMemoryLabelDescriptionLookup,
 			$this->languageFallbackChain,
 			$editSectionGenerator,
 			$entityTermsView
