@@ -31,7 +31,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	private $htmlTermRenderer;
 
 	/**
-	 * @var LabelDescriptionLookup
+	 * @var LabelDescriptionLookup For getting label/description of entity being rendered.
 	 */
 	private $labelDescriptionLookup;
 
