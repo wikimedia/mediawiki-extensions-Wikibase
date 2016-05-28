@@ -10,7 +10,8 @@
 			"관인생략",
 			"Hwangjy9",
 			"Bluemersen",
-			"HDNua"
+			"HDNua",
+			"Ykhwong"
 		]
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",
@@ -31,7 +32,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} 항목",
 	"wikibase-editlinks": "링크 편집",
 	"wikibase-editlinkstitle": "언어 인터위키 링크 편집",
-	"wikibase-addlinkstitle": "언어간 링크 추가",
+	"wikibase-addlinkstitle": "언어 간 링크 추가",
 	"wikibase-linkitem-addlinks": "링크 추가",
 	"wikibase-linkitem-alreadylinked": "링크하고자 하는 문서는 이미 이 사이트에 $2(으)로 링크한 중앙 데이터 저장소의 [$1항목]에 연결되어 있습니다. 항목은 사이트마다 문서 하나만 연결할 수 있습니다. 링크할 다른 문서를 선택하세요.",
 	"wikibase-linkitem-close": "대화 상자를 닫고 문서를 다시 불러오기",
