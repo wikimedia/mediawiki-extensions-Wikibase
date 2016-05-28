@@ -56,7 +56,7 @@ class PropertyHandler extends EntityHandler {
 	/**
 	 * @var LanguageFallbackLabelDescriptionLookupFactory
 	 */
-	private $labelDescriptionLookupFactory;
+	private $labelLookupFactory;
 
 	/**
 	 * @see EntityHandler::getContentClass
@@ -77,7 +77,7 @@ class PropertyHandler extends EntityHandler {
 	 * @param ValidatorErrorLocalizer $errorLocalizer
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdLookup $entityIdLookup
-	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
+	 * @param LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory
 	 * @param PropertyInfoStore $infoStore
 	 * @param PropertyInfoBuilder $propertyInfoBuilder
 	 * @param callable|null $legacyExportFormatDetector
@@ -90,7 +90,7 @@ class PropertyHandler extends EntityHandler {
 		ValidatorErrorLocalizer $errorLocalizer,
 		EntityIdParser $entityIdParser,
 		EntityIdLookup $entityIdLookup,
-		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		LanguageFallbackLabelDescriptionLookupFactory $labelLookupFactory,
 		PropertyInfoStore $infoStore,
 		PropertyInfoBuilder $propertyInfoBuilder,
 		$legacyExportFormatDetector = null
@@ -107,7 +107,7 @@ class PropertyHandler extends EntityHandler {
 		);
 
 		$this->entityIdLookup = $entityIdLookup;
-		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
+		$this->labelLookupFactory = $labelLookupFactory;
 		$this->infoStore = $infoStore;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
 	}
@@ -122,7 +122,7 @@ class PropertyHandler extends EntityHandler {
 					$page,
 					$context,
 					$this->entityIdLookup,
-					$this->labelDescriptionLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
+					$this->labelLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
 				);
 			},
 			'view' => ViewPropertyAction::class,

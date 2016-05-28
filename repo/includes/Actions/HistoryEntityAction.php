@@ -20,14 +20,14 @@ use Wikibase\Store\EntityIdLookup;
 class HistoryEntityAction extends HistoryAction {
 
 	/**
-	 * @var EntityIdLookup $entityIdLookup
+	 * @var EntityIdLookup
 	 */
 	private $entityIdLookup;
 
 	/**
-	 * @var LabelDescriptionLookup $labelDescriptionLookup
+	 * @var LabelDescriptionLookup
 	 */
-	private $labelDescriptionLookup;
+	private $labelLookup;
 
 	/**
 	 * @since 0.5
@@ -35,18 +35,18 @@ class HistoryEntityAction extends HistoryAction {
 	 * @param Page $page
 	 * @param IContextSource|null $context
 	 * @param EntityIdLookup $entityIdLookup
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param LabelDescriptionLookup $labelLookup
 	 */
 	public function __construct(
 		Page $page,
 		IContextSource $context = null,
 		EntityIdLookup $entityIdLookup,
-		LabelDescriptionLookup $labelDescriptionLookup
+		LabelDescriptionLookup $labelLookup
 	) {
 		parent::__construct( $page, $context );
 
 		$this->entityIdLookup = $entityIdLookup;
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->labelLookup = $labelLookup;
 	}
 
 	/**
@@ -62,7 +62,7 @@ class HistoryEntityAction extends HistoryAction {
 		}
 
 		$idSerialization = $entityId->getSerialization();
-		$label = $this->labelDescriptionLookup->getLabel( $entityId );
+		$label = $this->labelLookup->getLabel( $entityId );
 
 		if ( $label !== null ) {
 			$labelText = $label->getText();
