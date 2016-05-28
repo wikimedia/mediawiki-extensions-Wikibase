@@ -26,6 +26,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\LangLinkHandler;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -344,12 +345,36 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( PropertyOrderProvider::class, $propertyOrderProvider );
 	}
 
+	public function useFallbackAllForDataAccessProvider() {
+		return [
+			[ true ],
+			[ false ]
+		];
+	}
+
+	/**
+	 * @dataProvider useFallbackAllForDataAccessProvider
+	 */
+	public function testGetDataAccessLanguageFallbackChain( $useFallbackAllForDataAccess ) {
+		$extraSettings = [ 'useFallbackAllForDataAccess' => $useFallbackAllForDataAccess ];
+		$lang = Language::factory( 'de' );
+
+		$dataAccessLanguageFallbackChain = $this->getWikibaseClient( $extraSettings )->
+				getDataAccessLanguageFallbackChain( $lang );
+
+		$this->assertInstanceOf( LanguageFallbackChain::class, $dataAccessLanguageFallbackChain );
+		$langCodes = $dataAccessLanguageFallbackChain->getFetchLanguageCodes();
+
+		// "de" falls back to "en" if useFallbackAllForDataAccess is true
+		$this->assertCount( $useFallbackAllForDataAccess ? 2 : 1, $langCodes );
+	}
+
 	/**
 	 * @return WikibaseClient
 	 */
-	private function getWikibaseClient() {
+	private function getWikibaseClient( array $extraSettings = [] ) {
 		return new WikibaseClient(
-			new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
+			new SettingsArray( $extraSettings + WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() ),
 			Language::factory( 'en' ),
 			new DataTypeDefinitions( array() ),
 			new EntityTypeDefinitions( array() ),

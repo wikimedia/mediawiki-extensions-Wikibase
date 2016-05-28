@@ -40,6 +40,7 @@ return call_user_func( function() {
 			'wikibase-property' => 120
 		],
 		'allowDataTransclusion' => true,
+		'useFallbackAllForDataAccess' => true,
 		'propagateChangesToRepo' => true,
 		'otherProjectsLinksByDefault' => false,
 		'otherProjectsLinksBeta' => false,

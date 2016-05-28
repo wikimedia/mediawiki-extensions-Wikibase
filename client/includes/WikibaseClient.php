@@ -64,6 +64,7 @@ use Wikibase\DirectSqlStore;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
 use Wikibase\LangLinkHandler;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -992,7 +993,8 @@ final class WikibaseClient {
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
 			$entityLookup,
-			$this->getSettings()->getSetting( 'allowDataAccessInUserLanguage' )
+			$this->getSettings()->getSetting( 'allowDataAccessInUserLanguage' ),
+			$this->getSettings()->getSetting( 'useFallbackAllForDataAccess' )
 		);
 	}
 
@@ -1143,6 +1145,24 @@ final class WikibaseClient {
 		}
 
 		return $this->entityNamespaceLookup;
+	}
+
+	/**
+	 * @param Language $language
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public function getDataAccessLanguageFallbackChain( Language $language ) {
+		if ( !$this->getSettings()->getSetting( 'useFallbackAllForDataAccess' ) ) {
+			$mode = LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS;
+		} else {
+			$mode = LanguageFallbackChainFactory::FALLBACK_ALL;
+		}
+
+		return $this->getLanguageFallbackChainFactory()->newFromLanguage(
+			$language,
+			$mode
+		);
 	}
 
 }

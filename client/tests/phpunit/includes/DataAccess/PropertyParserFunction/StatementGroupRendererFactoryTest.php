@@ -155,7 +155,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			new LanguageFallbackChainFactory(),
 			$formatterFactory,
 			$this->getMock( EntityLookup::class ),
-			$allowDataAccessInUserLanguage
+			$allowDataAccessInUserLanguage,
+			true
 		);
 		$factory->newRendererFromParser( $this->getParser( 'de', 'es' ) );
 	}
@@ -174,7 +175,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
 			$this->getEntityLookup(),
-			$allowDataAccessInUserLanguage
+			$allowDataAccessInUserLanguage,
+			true
 		);
 	}
 

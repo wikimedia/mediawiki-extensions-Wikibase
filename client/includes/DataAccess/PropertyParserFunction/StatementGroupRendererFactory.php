@@ -64,12 +64,18 @@ class StatementGroupRendererFactory {
 	private $allowDataAccessInUserLanguage;
 
 	/**
+	 * @var bool
+	 */
+	private $useFallbackAllForDataAccess;
+
+	/**
 	 * @param PropertyIdResolver $propertyIdResolver
 	 * @param SnaksFinder $snaksFinder
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
 	 * @param EntityLookup $entityLookup
 	 * @param bool $allowDataAccessInUserLanguage
+	 * @param bool $useFallbackAllForDataAccess
 	 */
 	public function __construct(
 		PropertyIdResolver $propertyIdResolver,
@@ -77,7 +83,8 @@ class StatementGroupRendererFactory {
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		EntityLookup $entityLookup,
-		$allowDataAccessInUserLanguage
+		$allowDataAccessInUserLanguage,
+		$useFallbackAllForDataAccess
 	) {
 		$this->propertyIdResolver = $propertyIdResolver;
 		$this->snaksFinder = $snaksFinder;
@@ -85,6 +92,7 @@ class StatementGroupRendererFactory {
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->entityLookup = $entityLookup;
 		$this->allowDataAccessInUserLanguage = $allowDataAccessInUserLanguage;
+		$this->useFallbackAllForDataAccess = $useFallbackAllForDataAccess;
 	}
 
 	/**
@@ -223,10 +231,12 @@ class StatementGroupRendererFactory {
 		Language $language,
 		UsageAccumulator $usageAccumulator
 	) {
-		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
-			$language,
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
-		);
+		if ( !$this->useFallbackAllForDataAccess ) {
+			$mode = LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS;
+		} else {
+			$mode = LanguageFallbackChainFactory::FALLBACK_ALL;
+		}
+		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage( $language, $mode );
 
 		$options = new FormatterOptions( array(
 			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
