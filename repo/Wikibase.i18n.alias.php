@@ -110,6 +110,30 @@ $specialPageAliases['cdo'] = array(
 	'SetSiteLink' => array( '設置站點鏈接' ),
 );
 
+/** Czech (česky) */
+$specialPageAliases['cs'] = array(
+	'DispatchStats' => array( 'Statistiky_distribuce' ),
+	'EntitiesWithoutDescription' => array( 'Entity_bez_popisku' ),
+	'EntitiesWithoutLabel' => array( 'Entity_bez_štítku' ),
+	'EntityData' => array( 'Data_entity' ),
+	'GoToLinkedPage' => array( 'Jít_na_odkazovanou_stránku' ),
+	'ItemByTitle' => array( 'Položka_podle_názvu' ),
+	'ItemDisambiguation' => array( 'Rozcestník_položek' ),
+	'ItemsWithoutSitelinks' => array( 'Položky_bez_odkazů' ),
+	'ListDatatypes' => array( 'Seznam_datových_typů' ),
+	'ListProperties' => array( 'Seznam_vlastností' ),
+	'MergeItems' => array( 'Sloučit_položky' ),
+	'MyLanguageFallbackChain' => array( 'Můj_řetězec_záložních_jazkyů' ),
+	'NewItem' => array( 'Vytvořit_položku', 'Nová_položka' ),
+	'NewProperty' => array( 'Vytvořit_vlastnost', 'Nová_vlastnost' ),
+	'RedirectEntity' => array( 'Přesměrovat_entitu' ),
+	'SetAliases' => array( 'Nastavit_aliasy', 'Přidat_aliasy' ),
+	'SetDescription' => array( 'Nastavit_popisek', 'Přidat_popisek' ),
+	'SetLabel' => array( 'Nastavit_štítek', 'Přidat_štítek' ),
+	'SetLabelDescriptionAliases' => array( 'Nastavit_štítek_popisek_nebo_aliasy' ),
+	'SetSiteLink' => array( 'Nastavit_odkaz_na_článek', 'Přidat_odkaz_na_článek' ),
+);
+
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
 	'DispatchStats' => array( 'Abfertigungsstatistiken' ),
