@@ -5,7 +5,8 @@
 			"Erdemaslancan",
 			"Gorizon",
 			"Marmase",
-			"Mirzali"
+			"Mirzali",
+			"Kumkumuk"
 		]
 	},
 	"tooltip-t-wikibase": "Dola data de eleqeyın çirs gre",
@@ -29,7 +30,7 @@
 	"wikibase-linkitem-confirmitem-button": "Tesdiq",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Bınımne",
-	"wikibase-rc-hide-wikidata-show": "Bımocne",
+	"wikibase-rc-hide-wikidata-show": "Bıasene",
 	"wikibase-rc-show-wikidata-pref": "Vurnayışanê {{WBREPONAME}} vurnayışanê peyênan de  bımocne",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} vurnayış",

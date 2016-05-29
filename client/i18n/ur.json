@@ -39,6 +39,7 @@
 	"wikibase-error-deserialize-error": "ڈیٹا کے تسلسل میں خامی۔",
 	"wikibase-error-serialize-error": "ڈیٹا کے سلسلہ میں خامی ہے۔",
 	"unconnectedpages": "ویکی ڈیٹا میں غیر شریک صفحات",
+	"unconnectedpages-summary": "اس صفحہ پر [[ویکیپیڈیا:ویکی ڈیٹا|ویکی ڈیٹا]] سے غیر منسلک صفحات کی فہرست ہے (ان [[ویکیپیڈیا:نام فضا|نام فضاؤں]] میں،  جن کو ویکی ڈیٹا قبول کرتا ہے)۔ یہ فہرست نزولی ترتیب سے ہے، اس لیے تازہ ترین صفحات اوپر ملیں گے۔",
 	"wikibase-unconnectedpages-submit": "چلو",
 	"wikibase-pageinfo-entity-id-none": "کوئی نہیں",
 	"wikibase-otherprojects": "دیگر منصوبے"
