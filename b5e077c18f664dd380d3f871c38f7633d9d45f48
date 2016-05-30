@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_35fdb939",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T17:40:24Z",
+      "side": 1,
+      "message": "// FIXME: introduce and use EntityIdBuilder (or something) service",
+      "revId": "b5e077c18f664dd380d3f871c38f7633d9d45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d5e8bd79",
+        "filename": "lib/includes/Store/Sql/SqlEntityInfoBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T17:40:24Z",
+      "side": 1,
+      "message": "This means that the TermIndex does not actually work with MediaInfo - it just doesn\u0027t cause an unhandled exception anymore.",
+      "revId": "b5e077c18f664dd380d3f871c38f7633d9d45f48",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
