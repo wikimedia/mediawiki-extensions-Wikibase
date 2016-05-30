@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_38fe53ac",
+        "filename": "repo/includes/Actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T07:40:37Z",
+      "side": 1,
+      "message": "This was a mistake. Can\u0027t be null. See \\Action::__construct.",
+      "parentUuid": "ae564743_4abc1668",
+      "revId": "1059e9b6f4de6b196f80d3cc3add55000413761b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_aab1728f",
         "filename": "repo/includes/Actions/EditEntityAction.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-28T11:57:11Z",
       "side": 1,
       "message": "Should probably be changed accordingly",
+      "revId": "1059e9b6f4de6b196f80d3cc3add55000413761b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_98267f62",
+        "filename": "repo/includes/Actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T07:40:37Z",
+      "side": 1,
+      "message": "I agree, but I can\u0027t change this here. See \\Action::__construct.",
+      "parentUuid": "ae564743_aab1728f",
       "revId": "1059e9b6f4de6b196f80d3cc3add55000413761b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
