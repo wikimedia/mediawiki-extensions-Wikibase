@@ -169,14 +169,19 @@ class OutputPageBeforeHTMLHookHandler {
 
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		if ( $entityId instanceof EntityId ) {
-			$termsListItemsHtml = $out->getProperty( 'wikibase-terms-list-items' );
-			$entity = $this->getEntity( $entityId, $out->getRevisionId(), $termsListItemsHtml !== null );
+			$termboxPlaceholder = null;
+			foreach ( $placeholders as $key => $placeholder ) {
+				if ( $placeholder[0] === 'termbox' ) {
+					$termboxPlaceholder = $key;
+					break;
+				}
+			}
+			$entity = $this->getEntity( $entityId, $out->getRevisionId(), $termboxPlaceholder !== null );
 			if ( $entity instanceof EntityDocument ) {
 				$expander = $this->getEntityViewPlaceholderExpander(
 					$entity,
 					$out->getUser(),
 					$this->getTermsLanguagesCodes( $out ),
-					$termsListItemsHtml,
 					$out->getLanguage()->getCode()
 				);
 				$getHtmlCallback = [ $expander, 'getHtmlForPlaceholder' ];
@@ -225,7 +230,6 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param EntityDocument $entity
 	 * @param User $user
 	 * @param string[] $termsLanguages
-	 * @param string[]|null $termsListItemsHtml
 	 * @param string $languageCode
 	 *
 	 * @return EntityViewPlaceholderExpander
@@ -234,7 +238,6 @@ class OutputPageBeforeHTMLHookHandler {
 		EntityDocument $entity,
 		User $user,
 		array $termsLanguages,
-		array $termsListItemsHtml = null,
 		$languageCode
 	) {
 		// FIXME: This is not necessarily true for all entity types.
@@ -251,8 +254,7 @@ class OutputPageBeforeHTMLHookHandler {
 			array_unique( array_merge( [ $languageCode ], $termsLanguages ) ),
 			new MediaWikiLanguageDirectionalityLookup(),
 			$this->languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $languageCode ),
-			$termsListItemsHtml ?: []
+			new MediaWikiLocalizedTextProvider( $languageCode )
 		);
 	}
 

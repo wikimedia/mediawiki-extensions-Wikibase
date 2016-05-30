@@ -87,9 +87,17 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 			'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class'
 		);
 
+		$marker = $this->textInjector->newMarker(
+			'termbox',
+			$this->getTermsListItems(
+				$mainLanguageCode,
+				$labelsProvider,
+				$descriptionsProvider,
+				$aliasesProvider
+		) );
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
 			$this->getHeadingHtml( $mainLanguageCode, $entityId, $aliasesProvider ),
-			$this->textInjector->newMarker( 'termbox' ),
+			$marker,
 			$cssClasses,
 			$this->getHtmlForLabelDescriptionAliasesEditSection( $mainLanguageCode, $entityId )
 		);
@@ -104,7 +112,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	 *
 	 * @return string[] HTML snippets
 	 */
-	public function getTermsListItems(
+	private function getTermsListItems(
 		$mainLanguageCode,
 		LabelsProvider $labelsProvider,
 		DescriptionsProvider $descriptionsProvider,
