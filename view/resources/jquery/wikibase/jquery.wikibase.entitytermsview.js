@@ -236,7 +236,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 						{ expires: 365, path: '/' }
 					);
 				} else {
-					api.postWithToken( 'options', {
+					api.postWithToken( 'csrf', {
 						action: 'options',
 						optionname: 'wikibase-entitytermsview-showEntitytermslistview',
 						optionvalue: params.visible ? '1' : '0'
