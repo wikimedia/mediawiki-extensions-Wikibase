@@ -44,17 +44,17 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return OutputPageBeforeHTMLHookHandler
 	 */
-	private function getHookHandler( $uiLanguageCode ) {
+	private function getHookHandler( $uiLanguageCode, $hasRevision = true, $willRenderTermBox = false ) {
 		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
 			->will( $this->returnValue( [ 'de', 'es', 'ru' ] ) );
-		$userLanguageLookup->expects( $this->once() )
+		$userLanguageLookup->expects( $this->any() )
 			->method( 'getAllUserLanguages' )
 			->will( $this->returnValue( array_unique( [ $uiLanguageCode, 'de', 'es', 'ru' ] ) ) );
 
 		$languageNameLookup = $this->getMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->never() )
+		$languageNameLookup->expects( $willRenderTermBox ? $this->atLeastOnce() : $this->never() )
 			->method( 'getName' );
 
 		$itemId = new ItemId( 'Q1' );
@@ -67,9 +67,11 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( $itemId ) );
 
 		$entityRevisionLookup = $this->getMock( EntityRevisionLookup::class );
-		$entityRevisionLookup->expects( $this->once() )
-			->method( 'getEntityRevision' )
-			->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
+		if ( $hasRevision ) {
+			$entityRevisionLookup->expects( $this->once() )
+				->method( 'getEntityRevision' )
+				->will( $this->returnValue( new EntityRevision( new Item( $itemId ) ) ) );
+		}
 
 		$outputPageBeforeHTMLHookHandler = new OutputPageBeforeHTMLHookHandler(
 			TemplateFactory::getDefaultInstance(),
@@ -78,7 +80,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 			$entityRevisionLookup,
 			$languageNameLookup,
 			$outputPageEntityIdReader,
-			new EntityFactory( [] )
+			new EntityFactory( [ 'item' => function() { return new Item(); } ] )
 		);
 
 		return $outputPageBeforeHTMLHookHandler;
@@ -108,37 +110,32 @@ class OutputPageBeforeHTMLHookHandlerTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGivenDeletedRevision_hookHandlerDoesNotFail() {
-		$userLanguageLookup = $this->getMock( UserLanguageLookup::class );
-		$userLanguageLookup->expects( $this->any() )
-			->method( 'getUserSpecifiedLanguages' )
-			->will( $this->returnValue( [] ) );
-		$userLanguageLookup->expects( $this->any() )
-			->method( 'getAllUserLanguages' )
-			->will( $this->returnValue( [] ) );
-
-		$outputPageEntityIdReader = $this->getMockBuilder( OutputPageEntityIdReader::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$outputPageEntityIdReader->expects( $this->once() )
-			->method( 'getEntityIdFromOutputPage' )
-			->will( $this->returnValue( null ) );
-
-		$handler = new OutputPageBeforeHTMLHookHandler(
-			TemplateFactory::getDefaultInstance(),
-			$userLanguageLookup,
-			new StaticContentLanguages( [] ),
-			$this->getMock( EntityRevisionLookup::class ),
-			$this->getMock( LanguageNameLookup::class ),
-			$outputPageEntityIdReader,
-			new EntityFactory( [] )
-		);
-
 		$out = $this->newOutputPage();
-		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
+		$handler = $this->getHookHandler( $out->getLanguage()->getCode(), false, false );
 
 		$html = '$1';
+		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox' ] ] );
+
 		$handler->doOutputPageBeforeHTML( $out, $html );
+
 		$this->assertSame( '', $html );
 	}
 
+	public function testGivenPlaceholdersWithData_EntityRevisionIsNotFetched() {
+		$out = $this->newOutputPage();
+		$outputPageBeforeHTMLHookHandler = $this->getHookHandler( $out->getLanguage()->getCode(), false, true );
+
+		$html = '$1';
+		$out->setProperty( 'wikibase-view-chunks', [ '$1' => [ 'termbox', [] ] ] );
+
+		$outputPageBeforeHTMLHookHandler->doOutputPageBeforeHTML( $out, $html );
+
+		// Verify the wbUserSpecifiedLanguages JS variable
+		$jsConfigVars = $out->getJsConfigVars();
+		$wbUserSpecifiedLanguages = $jsConfigVars['wbUserSpecifiedLanguages'];
+
+		$this->assertSame( [ 'es', 'ru' ], $wbUserSpecifiedLanguages );
+
+		$this->assertNotSame( '', $html );
+	}
 }

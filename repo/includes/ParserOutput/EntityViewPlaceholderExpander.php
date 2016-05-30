@@ -75,11 +75,6 @@ class EntityViewPlaceholderExpander {
 	private $textProvider;
 
 	/**
-	 * @var string[]
-	 */
-	private $termsListItems;
-
-	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param User $user the current user
 	 * @param LabelsProvider $labelsProvider
@@ -89,7 +84,6 @@ class EntityViewPlaceholderExpander {
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
-	 * @param string[] $termsListItems
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -100,8 +94,7 @@ class EntityViewPlaceholderExpander {
 		array $termsLanguages,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageNameLookup $languageNameLookup,
-		LocalizedTextProvider $textProvider,
-		array $termsListItems = array()
+		LocalizedTextProvider $textProvider
 	) {
 		$this->user = $user;
 		$this->labelsProvider = $labelsProvider;
@@ -112,7 +105,6 @@ class EntityViewPlaceholderExpander {
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
-		$this->termsListItems = $termsListItems;
 	}
 
 	/**
@@ -123,12 +115,13 @@ class EntityViewPlaceholderExpander {
 	 * the meaning of each placeholder name, as used by EntityView.
 	 *
 	 * @param string $name the name (or kind) of placeholder; determines how the expansion is done.
+	 * @param mixed|null $data Additional data that should be passed to the replacing function
 	 *
 	 * @return string HTML to be substituted for the placeholder in the output.
 	 */
-	public function getHtmlForPlaceholder( $name ) {
+	public function getHtmlForPlaceholder( $name, $data = null ) {
 		try {
-			return $this->expandPlaceholder( $name );
+			return $this->expandPlaceholder( $name, $data );
 		} catch ( MWException $ex ) {
 			wfWarn( "Expansion of $name failed: " . $ex->getMessage() );
 		} catch ( RuntimeException $ex ) {
@@ -141,17 +134,17 @@ class EntityViewPlaceholderExpander {
 	/**
 	 * Dispatch the expansion of placeholders based on the name.
 	 *
-	 * @note This encodes knowledge about which placeholders are used by EntityView with what
-	 *       intended meaning.
+	 * @note This encodes knowledge about which placeholders are used with what intended meaning.
 	 *
 	 * @param string $name
+	 * @param mixed|null $data Additional data that should be passed to the replacing function
 	 *
 	 * @return string
 	 */
-	protected function expandPlaceholder( $name ) {
+	protected function expandPlaceholder( $name, $data ) {
 		switch ( $name ) {
 			case 'termbox':
-				return $this->renderTermBox();
+				return $this->renderTermBox( $data );
 			case 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class':
 				return $this->isInitiallyCollapsed() ? 'wikibase-initially-collapsed' : '';
 			default:
@@ -176,11 +169,16 @@ class EntityViewPlaceholderExpander {
 	/**
 	 * Generates HTML of the term box, to be injected into the entity page.
 	 *
+	 * @param string[]|null $termsListItems An array of pre-rendered terms list HTML snippets per language code
+	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	public function renderTermBox() {
+	public function renderTermBox( array $termsListItems = null ) {
 
+		if ( $termsListItems === null ) {
+			$termsListItems = [];
+		}
 		$termsListView = new TermsListView(
 			$this->templateFactory,
 			$this->languageNameLookup,
@@ -190,8 +188,8 @@ class EntityViewPlaceholderExpander {
 
 		$contentHtml = '';
 		foreach ( $this->termsLanguages as $languageCode ) {
-			if ( isset( $this->termsListItems[ $languageCode ] ) ) {
-				$contentHtml .= $this->termsListItems[ $languageCode ];
+			if ( isset( $termsListItems[ $languageCode ] ) ) {
+				$contentHtml .= $termsListItems[ $languageCode ];
 			} else {
 				$contentHtml .= $termsListView->getListItemHtml(
 					$this->labelsProvider,

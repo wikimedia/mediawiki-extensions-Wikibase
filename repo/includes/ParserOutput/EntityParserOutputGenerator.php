@@ -322,16 +322,6 @@ class EntityParserOutputGenerator {
 		$html = $entityView->getHtml( $entity );
 		$parserOutput->setText( $html );
 		$parserOutput->setExtensionData( 'wikibase-view-chunks', $textInjector->getMarkers() );
-
-		$parserOutput->setExtensionData(
-			'wikibase-terms-list-items',
-			$entityTermsView->getTermsListItems(
-				$this->languageCode,
-				$entity,
-				$entity,
-				$entity instanceof AliasesProvider ? $entity : null
-			)
-		);
 	}
 
 	/**
