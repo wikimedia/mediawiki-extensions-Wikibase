@@ -284,28 +284,7 @@ class EntityParserOutputGenerator {
 			$this->textProvider
 		) : new EmptyEditSectionGenerator();
 
-		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
-		$languageNameLookup = new LanguageNameLookup( $this->languageCode );
-		$termsListView = new TermsListView(
-			TemplateFactory::getDefaultInstance(),
-			$languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $this->languageCode ),
-			$languageDirectionalityLookup
-		);
-
 		$textInjector = new TextInjector();
-		$entityTermsView = new PlaceholderEmittingEntityTermsView(
-			new FallbackHintHtmlTermRenderer(
-				$languageDirectionalityLookup,
-				$languageNameLookup
-			),
-			$entityLabelDescriptionLookup,
-			$this->templateFactory,
-			$editSectionGenerator,
-			$this->textProvider,
-			$termsListView,
-			$textInjector
-		);
 
 		$referencedEntitiesLabelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			new EntityInfoTermLookup( $entityInfo ),
@@ -318,7 +297,11 @@ class EntityParserOutputGenerator {
 			$referencedEntitiesLabelDescriptionLookup,
 			$this->languageFallbackChain,
 			$editSectionGenerator,
-			$entityTermsView
+			// FIXME
+			\Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getViewFactory(
+				$entityLabelDescriptionLookup,
+				$textInjector
+			)
 		);
 
 		// Set the display title to display the label together with the item's id

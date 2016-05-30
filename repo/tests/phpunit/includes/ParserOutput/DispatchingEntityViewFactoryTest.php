@@ -10,8 +10,8 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\EntityTermsView;
 use Wikibase\View\EntityView;
+use Wikibase\View\ViewFactory;
 
 /**
  * @covers Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory
@@ -37,7 +37,10 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$factory = new DispatchingEntityViewFactory(
 			array()
 		);
-		$entityTermsView = $this->getMock( EntityTermsView::class );
+
+		$viewFactory = $this->getMockBuilder( ViewFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
 
 		$factory->newEntityView(
 			'unknown',
@@ -45,7 +48,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( array() ),
 			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$viewFactory
 		);
 	}
 
@@ -60,7 +63,10 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 				}
 			)
 		);
-		$entityTermsView = $this->getMock( EntityTermsView::class );
+
+		$viewFactory = $this->getMockBuilder( ViewFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
 
 		$factory->newEntityView(
 			'foo',
@@ -68,7 +74,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( array() ),
 			$this->getMock( EditSectionGenerator::class ),
-			$entityTermsView
+			$viewFactory
 		);
 	}
 
@@ -76,10 +82,12 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 		$languageFallbackChain = new LanguageFallbackChain( array() );
 		$editSectionGenerator = $this->getMock( EditSectionGenerator::class );
-		$entityTermsView = $this->getMock( EntityTermsView::class );
 		$entityView = $this->getMockBuilder( EntityView::class )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
+		$viewFactory = $this->getMockBuilder( ViewFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
 
 		$factory = new DispatchingEntityViewFactory(
 			array(
@@ -88,19 +96,19 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 					LabelDescriptionLookup $labelDescriptionLookupParam,
 					LanguageFallbackChain $languageFallbackChainParam,
 					EditSectionGenerator $editSectionGeneratorParam,
-					EntityTermsView $entityTermsViewParam
+					ViewFactory $viewFactoryParam
 				) use(
 					$labelDescriptionLookup,
 					$languageFallbackChain,
 					$editSectionGenerator,
-					$entityTermsView,
-					$entityView
+					$entityView,
+					$viewFactory
 				) {
 					$this->assertEquals( 'en', $languageCodeParam );
 					$this->assertSame( $labelDescriptionLookup, $labelDescriptionLookupParam );
 					$this->assertSame( $languageFallbackChain, $languageFallbackChainParam );
 					$this->assertSame( $editSectionGenerator, $editSectionGeneratorParam );
-					$this->assertSame( $entityTermsView, $entityTermsViewParam );
+					$this->assertSame( $viewFactory, $viewFactoryParam );
 
 					return $entityView;
 				}
@@ -113,7 +121,7 @@ class DispatchingEntityViewFactoryTest extends PHPUnit_Framework_TestCase {
 			$labelDescriptionLookup,
 			$languageFallbackChain,
 			$editSectionGenerator,
-			$entityTermsView
+			$viewFactory
 		);
 
 		$this->assertSame( $entityView, $newEntityView );

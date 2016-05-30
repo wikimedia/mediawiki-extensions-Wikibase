@@ -7,7 +7,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\EntityView;
-use Wikibase\View\EntityTermsView;
+use Wikibase\View\ViewFactory;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -42,7 +42,6 @@ class DispatchingEntityViewFactory {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
-	 * @param EntityTermsView $entityTermsView
 	 *
 	 * @throws OutOfBoundsException
 	 * @return EntityView
@@ -53,7 +52,7 @@ class DispatchingEntityViewFactory {
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $languageFallbackChain,
 		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		ViewFactory $viewFactory
 	) {
 		if ( !isset( $this->entityViewFactoryCallbacks[$entityType] ) ) {
 			throw new OutOfBoundsException( "No EntityView is registered for entity type '$entityType'" );
@@ -65,7 +64,7 @@ class DispatchingEntityViewFactory {
 			$labelDescriptionLookup,
 			$languageFallbackChain,
 			$editSectionGenerator,
-			$entityTermsView
+			$viewFactory
 		);
 
 		Assert::postcondition(

@@ -179,7 +179,6 @@ class ViewFactory {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
-	 * @param EntityTermsView $entityTermsView
 	 *
 	 * @return ItemView
 	 */
@@ -187,9 +186,10 @@ class ViewFactory {
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		EditSectionGenerator $editSectionGenerator
 	) {
+		$entityTermsView = $this->newEntityTermsView( $editSectionGenerator );
+
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
 			$labelDescriptionLookup,
@@ -228,7 +228,6 @@ class ViewFactory {
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
-	 * @param EntityTermsView $entityTermsView
 	 *
 	 * @return PropertyView
 	 */
@@ -236,9 +235,10 @@ class ViewFactory {
 		$languageCode,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator,
-		EntityTermsView $entityTermsView
+		EditSectionGenerator $editSectionGenerator
 	) {
+		$entityTermsView = $this->newEntityTermsView( $editSectionGenerator );
+
 		$statementSectionsView = $this->newStatementSectionsView(
 			$languageCode,
 			$labelDescriptionLookup,
@@ -302,6 +302,25 @@ class ViewFactory {
 			$this->templateFactory,
 			$this->statementGrouper,
 			$statementGroupListView,
+			$this->textProvider
+		);
+	}
+
+	/**
+	 * @param EditSectionGenerator $editSectionGenerator
+	 *
+	 * @return EntityTermsView
+	 */
+	public function newEntityTermsView( EditSectionGenerator $editSectionGenerator ) {
+		return new SimpleEntityTermsView(
+			$this->templateFactory,
+			$editSectionGenerator,
+			new TermsListView(
+				$this->templateFactory,
+				$this->languageNameLookup,
+				$this->textProvider,
+				$this->languageDirectionalityLookup
+			),
 			$this->textProvider
 		);
 	}

@@ -22,7 +22,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EditSectionGenerator;
-use Wikibase\View\EntityTermsView;
+use Wikibase\View\ViewFactory;
 
 return array(
 	'item' => array(
@@ -31,15 +31,13 @@ return array(
 			LabelDescriptionLookup $labelDescriptionLookup,
 			LanguageFallbackChain $fallbackChain,
 			EditSectionGenerator $editSectionGenerator,
-			EntityTermsView $entityTermsView
+			ViewFactory $viewFactory
 		) {
-			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
 			return $viewFactory->newItemView(
 				$languageCode,
 				$labelDescriptionLookup,
 				$fallbackChain,
-				$editSectionGenerator,
-				$entityTermsView
+				$editSectionGenerator
 			);
 		},
 		'content-model-id' => CONTENT_MODEL_WIKIBASE_ITEM,
@@ -57,15 +55,13 @@ return array(
 			LabelDescriptionLookup $labelDescriptionLookup,
 			LanguageFallbackChain $fallbackChain,
 			EditSectionGenerator $editSectionGenerator,
-			EntityTermsView $entityTermsView
+			ViewFactory $viewFactory
 		) {
-			$viewFactory = WikibaseRepo::getDefaultInstance()->getViewFactory();
 			return $viewFactory->newPropertyView(
 				$languageCode,
 				$labelDescriptionLookup,
 				$fallbackChain,
-				$editSectionGenerator,
-				$entityTermsView
+				$editSectionGenerator
 			);
 		},
 		'content-model-id' => CONTENT_MODEL_WIKIBASE_PROPERTY,

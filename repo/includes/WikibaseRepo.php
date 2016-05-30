@@ -47,6 +47,7 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -114,6 +115,8 @@ use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
+use Wikibase\Repo\ParserOutput\RepoViewFactory;
+use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
@@ -1625,9 +1628,12 @@ class WikibaseRepo {
 	}
 
 	/**
+	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param TextInjector $textInjector
+	 *
 	 * @return ViewFactory
 	 */
-	public function getViewFactory() {
+	public function getViewFactory( LabelDescriptionLookup $labelDescriptionLookup, TextInjector $textInjector ) {
 		/** @var Language $wgLang */
 		global $wgLang;
 
@@ -1637,7 +1643,7 @@ class WikibaseRepo {
 			$this->getStatementGuidParser()
 		);
 
-		return new ViewFactory(
+		return new RepoViewFactory(
 			$this->getEntityIdHtmlLinkFormatterFactory(),
 			new EntityIdLabelFormatterFactory(),
 			$this->getHtmlSnakFormatterFactory(),
@@ -1651,7 +1657,9 @@ class WikibaseRepo {
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
-			new MediaWikiLocalizedTextProvider( $wgLang->getCode() )
+			new MediaWikiLocalizedTextProvider( $wgLang->getCode() ),
+			$textInjector,
+			$labelDescriptionLookup
 		);
 	}
 
