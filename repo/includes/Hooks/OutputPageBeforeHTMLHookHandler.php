@@ -169,8 +169,22 @@ class OutputPageBeforeHTMLHookHandler {
 
 		$entityId = $this->outputPageEntityIdReader->getEntityIdFromOutputPage( $out );
 		if ( $entityId instanceof EntityId ) {
-			$termsListItemsHtml = $out->getProperty( 'wikibase-terms-list-items' );
-			$entity = $this->getEntity( $entityId, $out->getRevisionId(), $termsListItemsHtml !== null );
+			$termsListItemsHtml = null;
+			$termboxPlaceholder = null;
+			foreach ( $placeholders as $key => $placeholder ) {
+				if ( $placeholder[0] === 'termbox' ) {
+					$termboxPlaceholder = $key;
+					break;
+				}
+			}
+			if ( $termboxPlaceholder === null ) {
+				$termsListItemsHtml = $out->getProperty( 'wikibase-terms-list-items' );
+			}
+			$entity = $this->getEntity(
+				$entityId,
+				$out->getRevisionId(),
+				$termboxPlaceholder !== null || $termsListItemsHtml !== null
+			);
 			if ( $entity instanceof EntityDocument ) {
 				$expander = $this->getEntityViewPlaceholderExpander(
 					$entity,

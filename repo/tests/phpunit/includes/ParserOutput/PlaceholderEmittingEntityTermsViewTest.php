@@ -52,7 +52,10 @@ class PlaceholderEmittingEntityTermsViewTest extends PHPUnit_Framework_TestCase 
 
 		$this->assertEquals(
 			array_values( $textInjector->getMarkers() ),
-			[ [ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ], [ 'termbox' ] ]
+			[
+				[ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ],
+				[ 'termbox', [ 'lkt' => null ] ]
+			]
 		);
 	}
 
