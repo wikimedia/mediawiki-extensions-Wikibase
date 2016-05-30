@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_e869a8bd",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-05-30T18:32:53Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "ae564743_f5ab416b",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_f5aea194",
         "filename": "lib/includes/FragmentedEntityIdBuilder.php",
         "patchSetId": 3
@@ -81,6 +99,74 @@
       "writtenOn": "2016-05-30T17:31:14Z",
       "side": 1,
       "message": "Yes, I think $uniquePart would be better. And an example would help.",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_28b28048",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-05-30T18:32:53Z",
+      "side": 1,
+      "message": "should the parameter type not be string? Or should builders always support multiple types?",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_685d981a",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-05-30T18:32:53Z",
+      "side": 1,
+      "message": "this type is wrong. think UnexecptedValueException is correct",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_e8a888da",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-05-30T18:32:53Z",
+      "side": 1,
+      "message": "You could move the type check to the builders branch, remove the local var and use only guards",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c8adc4e9",
+        "filename": "lib/tests/phpunit/FragmentedEntityIdBuilderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-05-30T18:32:53Z",
+      "side": 1,
+      "message": "This method is deprecated. Wikibase still using old PHPUnit?",
       "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
