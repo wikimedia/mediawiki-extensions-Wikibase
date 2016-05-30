@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_12afebdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T14:18:07Z",
+      "side": 1,
+      "message": "If *all* implementations support all kinds of input, then yes. But if some implementatiosn only support int as an input, but the interface doesn\u0027t make this restriction, that\u0027s an LSP violation: not all implementations support the full range of parameters that the interface allows.\n\nNow, LSP violations arn\u0027t a show stopper in my mind, but they are a smell, and we should only allow them if we have a good reason. In general, interfaces should indeed be as restrictive as possible.",
+      "parentUuid": "ae564743_722f4786",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_bef9ab80",
         "filename": "docs/entitytypes.wiki",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "It\u0027s a callable. It gets a mixed parameter and constructs an EntityId object from that. \"Constructs\".",
       "parentUuid": "ae564743_bef9ab80",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_52b96328",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T14:18:07Z",
+      "side": 1,
+      "message": "I don\u0027t see how the secodn sentence is necessary. I could turn the fragment 23 into \"X23X\", that would work fine, but it would not be legal according to this documentation, because the 23 isn\u0027t a suffix.",
+      "parentUuid": "ae564743_f2523715",
       "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_928adb6c",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T14:18:07Z",
+      "side": 1,
+      "message": "I don\u0027t see a strong need to check the keys, since including bad keys will not trigger fatal errors later. But I don\u0027t feel strongly about this, just a suggestion.",
+      "parentUuid": "ae564743_323cafbc",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_5eddef16",
         "filename": "lib/includes/FragmentedEntityIdBuilder.php",
         "patchSetId": 2
@@ -142,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_32994fc9",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T14:18:07Z",
+      "side": 1,
+      "message": "Ok... I find the term \"fragment\" a bit unclear. It\u0027s basically the unique part of the ID?",
+      "parentUuid": "ae564743_72462756",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_9eb027da",
         "filename": "lib/includes/FragmentedEntityIdBuilder.php",
         "patchSetId": 2
@@ -171,6 +243,24 @@
       "side": 1,
       "message": "We had so much insane trouble with using + instead of array_merge, I will most certainly never use it again, except when array_merge can\u0027t be used.",
       "parentUuid": "ae564743_9eb027da",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_52904398",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T14:18:07Z",
+      "side": 1,
+      "message": "Actually, the convention in core is to use +\u003d ONLY for applying defaults. But it indeed seems to be the preferred way to apply defaults. \n\nAnyway, never mind the syntax - doing this in the constructor seems cleaner to me. But no big deal.",
+      "parentUuid": "ae564743_525a0323",
       "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +313,24 @@
       "side": 1,
       "message": "Yes. Not critical because these tests don\u0027t do much anyway.",
       "parentUuid": "ae564743_dec8df53",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b2ec3f28",
+        "filename": "lib/tests/phpunit/EntityTypeDefinitionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T14:18:07Z",
+      "side": 1,
+      "message": "thanks for adding the missing ones",
+      "parentUuid": "ae564743_d2573304",
       "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
