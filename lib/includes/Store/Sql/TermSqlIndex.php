@@ -10,9 +10,11 @@ use Traversable;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\AliasGroupList;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\LabelConflictFinder;
 
 /**
@@ -25,6 +27,7 @@ use Wikibase\Lib\Store\LabelConflictFinder;
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  * @author Daniel Kinzler
  * @author Denny
+ * @author Thiemo Mättig
  */
 class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinder {
 
@@ -177,51 +180,77 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return TermIndexEntry[]
 	 */
 	public function getEntityTerms( EntityDocument $entity ) {
-		// FIXME: OCP violation. No support for new types of entities can be registered
+		// FIXME: Introduce and use an Int32EntityId interface.
+		if ( !method_exists( $entity->getId(), 'getNumericId' ) ) {
+			wfWarn( 'Entity type "' . $entity->getType() . '" does not implement getNumericId' );
+			return [];
+		}
 
+		$terms = [];
 		$extraFields = [
 			'entityType' => $entity->getType(),
 			'entityId' => $entity->getId()->getNumericId(),
 		];
 
-		if ( $entity instanceof FingerprintProvider ) {
-			$fingerprint = $entity->getFingerprint();
-			return $this->getFingerprintTerms( $fingerprint, $extraFields );
+		if ( $entity instanceof DescriptionsProvider ) {
+			$terms = array_merge( $terms, $this->getTermListTerms(
+				TermIndexEntry::TYPE_DESCRIPTION,
+				$entity->getDescriptions(),
+				$extraFields
+			) );
 		}
 
-		return array();
+		if ( $entity instanceof LabelsProvider ) {
+			$terms = array_merge( $terms, $this->getTermListTerms(
+				TermIndexEntry::TYPE_LABEL,
+				$entity->getLabels(),
+				$extraFields
+			) );
+		}
+
+		if ( $entity instanceof AliasesProvider ) {
+			$terms = array_merge( $terms, $this->getAliasGroupListTerms(
+				$entity->getAliasGroups(),
+				$extraFields
+			) );
+		}
+
+		return $terms;
 	}
 
 	/**
-	 * @param Fingerprint $fingerprint
+	 * @param string $termType
+	 * @param TermList $termList
 	 * @param array $extraFields
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	private function getFingerprintTerms( Fingerprint $fingerprint, array $extraFields ) {
-		$terms = array();
+	private function getTermListTerms( $termType, TermList $termList, array $extraFields ) {
+		$terms = [];
 
-		foreach ( $fingerprint->getDescriptions()->toTextArray() as $languageCode => $description ) {
+		foreach ( $termList->toTextArray() as $languageCode => $text ) {
 			$term = new TermIndexEntry( $extraFields );
 
 			$term->setLanguage( $languageCode );
-			$term->setType( TermIndexEntry::TYPE_DESCRIPTION );
-			$term->setText( $description );
+			$term->setType( $termType );
+			$term->setText( $text );
 
 			$terms[] = $term;
 		}
 
-		foreach ( $fingerprint->getLabels()->toTextArray() as $languageCode => $label ) {
-			$term = new TermIndexEntry( $extraFields );
+		return $terms;
+	}
 
-			$term->setLanguage( $languageCode );
-			$term->setType( TermIndexEntry::TYPE_LABEL );
-			$term->setText( $label );
+	/**
+	 * @param AliasGroupList $aliasGroupList
+	 * @param array $extraFields
+	 *
+	 * @return TermIndexEntry[]
+	 */
+	private function getAliasGroupListTerms( AliasGroupList $aliasGroupList, array $extraFields ) {
+		$terms = [];
 
-			$terms[] = $term;
-		}
-
-		foreach ( $fingerprint->getAliasGroups()->toArray() as $aliasGroup ) {
+		foreach ( $aliasGroupList->toArray() as $aliasGroup ) {
 			$languageCode = $aliasGroup->getLanguageCode();
 
 			foreach ( $aliasGroup->getAliases() as $alias ) {
@@ -300,8 +329,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @return float
 	 */
 	private function getWeight( EntityDocument $entity ) {
-		// FIXME: OCP violation. No support for new types of entities can be registered
-
 		$weight = 0.0;
 
 		if ( $entity instanceof LabelsProvider ) {

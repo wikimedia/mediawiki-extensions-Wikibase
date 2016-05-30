@@ -220,7 +220,12 @@ class TermIndexEntry {
 			$numericId = $this->fields['entityId'];
 
 			// FIXME: this only works for items and properties
-			return LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
+			try {
+				return LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
+			} catch ( InvalidArgumentException $ex ) {
+				wfWarn( 'Unsupported entity type "' . $entityType . '"' );
+				return null;
+			}
 		}
 
 		return null;
