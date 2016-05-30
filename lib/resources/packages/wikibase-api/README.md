@@ -6,6 +6,17 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 2.0.0 (2016-05-31)
+
+* Removed meaningless, unsupported `sort` and `dir` parameters from:
+  * `wikibase.api.RepoApi.getEntities`
+  * `wikibase.api.RepoApi.getEntitiesByPage`. This only breaks callers using the `normalize` parameter.
+* Replaced deprecated "edit" token with "csrf".
+
+### 1.1.1 (2016-05-30)
+
+* Fix getLocationAgnosticMwApi behavior in Internet Explorer
+
 ### 1.1.0 (2016-02-17)
 
 * Added optional propertyId parameter to RepoApi::formatValue
