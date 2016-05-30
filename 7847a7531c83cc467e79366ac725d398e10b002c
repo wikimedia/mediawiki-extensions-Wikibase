@@ -321,6 +321,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_92dbfb53",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:51:51Z",
+      "side": 1,
+      "message": "An other reason why I did not wanted to do this: Method calls obfuscated in arrays of strings.",
+      "parentUuid": "ae564743_9eb027da",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_de9a9f63",
         "filename": "lib/includes/FragmentedEntityIdBuilder.php",
         "patchSetId": 2
