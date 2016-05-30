@@ -75,11 +75,6 @@ class EntityViewPlaceholderExpander {
 	private $textProvider;
 
 	/**
-	 * @var string[]
-	 */
-	private $termsListItems;
-
-	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param User $user the current user
 	 * @param LabelsProvider $labelsProvider
@@ -89,7 +84,6 @@ class EntityViewPlaceholderExpander {
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param LocalizedTextProvider $textProvider
-	 * @param string[] $termsListItems
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -100,8 +94,7 @@ class EntityViewPlaceholderExpander {
 		array $termsLanguages,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageNameLookup $languageNameLookup,
-		LocalizedTextProvider $textProvider,
-		array $termsListItems = array()
+		LocalizedTextProvider $textProvider
 	) {
 		$this->user = $user;
 		$this->labelsProvider = $labelsProvider;
@@ -112,7 +105,6 @@ class EntityViewPlaceholderExpander {
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->textProvider = $textProvider;
-		$this->termsListItems = $termsListItems;
 	}
 
 	/**
@@ -185,7 +177,7 @@ class EntityViewPlaceholderExpander {
 	public function renderTermBox( array $termsListItems = null ) {
 
 		if ( $termsListItems === null ) {
-			$termsListItems = $this->termsListItems;
+			$termsListItems = [];
 		}
 		$termsListView = new TermsListView(
 			$this->templateFactory,
