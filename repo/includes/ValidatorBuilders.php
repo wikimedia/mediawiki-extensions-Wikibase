@@ -132,13 +132,10 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	private function getEntityValidators( $entityType = null ) {
-		$validators = array();
-
-		//NOTE: The DataValue in question is going to be an instance of EntityId!
-		$validators[] = new TypeValidator( EntityIdValue::class );
-		$validators[] = new EntityExistsValidator( $this->entityLookup, $entityType );
-
-		return $validators;
+		return [
+			new TypeValidator( EntityIdValue::class ),
+			new EntityExistsValidator( $this->entityLookup, $entityType ),
+		];
 	}
 
 	/**
