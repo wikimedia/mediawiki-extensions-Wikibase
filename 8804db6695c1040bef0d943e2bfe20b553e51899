@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_c3cc8c3b",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T11:30:22Z",
+      "side": 1,
+      "message": "\"Use fallback all\" is odd wording. But I guess everything a bit more self-explaining would become extremely long.",
+      "revId": "8804db6695c1040bef0d943e2bfe20b553e51899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
