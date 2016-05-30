@@ -283,36 +283,29 @@ class EntityParserOutputGenerator {
 			$this->textProvider
 		) : new EmptyEditSectionGenerator();
 
-		$languageDirectionalityLookup = new MediaWikiLanguageDirectionalityLookup();
-		$languageNameLookup = new LanguageNameLookup( $this->languageCode );
-		$termsListView = new TermsListView(
-			TemplateFactory::getDefaultInstance(),
-			$languageNameLookup,
-			new MediaWikiLocalizedTextProvider( $this->languageCode ),
-			$languageDirectionalityLookup
-		);
-
 		$textInjector = new TextInjector();
-		$entityTermsView = new PlaceholderEmittingEntityTermsView(
-			new FallbackHintHtmlTermRenderer(
-				$languageDirectionalityLookup,
-				$languageNameLookup
-			),
-			$labelDescriptionLookup,
-			$this->templateFactory,
-			$editSectionGenerator,
-			$this->textProvider,
-			$termsListView,
-			$textInjector
-		);
+
+		/**
+		 * TextInjector needs to be created here
+		 * WBRepo/DispatchingEntityViewFactory should not know about it
+		 * EntityType::view-factory-callback should not know about it
+		 * WBView/ViewFactory must not know about it
+		 * TextInjector is used in PlaceholderEmittingEntityTermsView
+
+		 * Make DispatchingEntityViewFactory extend ViewFactory
+		 * Add ViewFactory::newEntityTermsView
+		 * Make DispatchingEntityViewFactory::newEntityTermsView return a PlaceholderEmittingEntityTermsView
+		 * Make DispatchingEntityViewFactory::newEntityView take a textInjector
+		 * Make it pass $this to the builder functions
+		 * Let the builders use $this->newEntityTermsView
+		 */
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$entity->getType(),
 			$this->languageCode,
 			$labelDescriptionLookup,
 			$this->languageFallbackChain,
-			$editSectionGenerator,
-			$entityTermsView
+			$editSectionGenerator
 		);
 
 		// Set the display title to display the label together with the item's id
