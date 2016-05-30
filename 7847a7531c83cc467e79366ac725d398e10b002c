@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_12c40b94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:24:06Z",
+      "side": 1,
+      "message": "I do have the impression you are using LSP wrong. You can\u0027t, for example, argue that the ItemId constructor does not accept \"P1\". You can\u0027t argue that a quantity parser does not accept \"March 1999\". That\u0027s not LSP.",
+      "parentUuid": "ae564743_12afebdf",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_bef9ab80",
         "filename": "docs/entitytypes.wiki",
         "patchSetId": 2
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I don\u0027t see how the secodn sentence is necessary. I could turn the fragment 23 into \"X23X\", that would work fine, but it would not be legal according to this documentation, because the 23 isn\u0027t a suffix.",
       "parentUuid": "ae564743_f2523715",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_92377bab",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:24:06Z",
+      "side": 1,
+      "message": "So your original comment was not about the word \"construct\" but about \"suffix\"? Yes, that\u0027s a mistake. I forgot this while working on this code.",
+      "parentUuid": "ae564743_52b96328",
       "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -208,6 +244,24 @@
       "side": 1,
       "message": "Ok... I find the term \"fragment\" a bit unclear. It\u0027s basically the unique part of the ID?",
       "parentUuid": "ae564743_72462756",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f23cf790",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:24:06Z",
+      "side": 1,
+      "message": "Exactly. Would $uniquePart be better?",
+      "parentUuid": "ae564743_32994fc9",
       "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
