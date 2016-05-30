@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_deef3fad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T13:12:31Z",
+      "side": 1,
+      "message": "When and where do we need an interface that is this generic? It seems to me like we have very few places where an entity ID wouldn\u0027t be constructed by parsing, and we are trying to get rid of the remaining ones. The only concrete need we have is constructing EntityIds from an int32.",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_bef9ab80",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T13:12:31Z",
+      "side": 1,
+      "message": "What exactly does \"constructed\" mean in this context? Why should Item not define this? Why does it have to be a suffix?",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_3ea8fb73",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T13:12:31Z",
+      "side": 1,
+      "message": "Assert::parameterElementType",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_5eddef16",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T13:12:31Z",
+      "side": 1,
+      "message": "Please explain some more what the structure of this would (typically) be. In the case if Q123, would it be [ \u0027Q\u0027, 123 ] or what? Also, shouldn\u0027t it be \"fragements\" (plural)?",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_9eb027da",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T13:12:31Z",
+      "side": 1,
+      "message": "Would be somewhat niver to merge the defaults into $builders in the constructor:\n\n  $builders +\u003d [ \n      \u0027item\u0027 \u003d\u003e [ ItemId::class, \u0027newFromNumber\u0027 ],\n      \u0027property\u0027 \u003d\u003e [ PropertyId::class, \u0027newFromNumber\u0027 ]\n  ]\n\nUsing +\u003d to apply defaults to a config array is common practice in mediawiki.",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_de9a9f63",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T13:12:31Z",
+      "side": 1,
+      "message": "Assert::postcondition",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_dec8df53",
+        "filename": "lib/tests/phpunit/EntityTypeDefinitionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T13:12:31Z",
+      "side": 1,
+      "message": "did we miss all these so far?",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
