@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_722f4786",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:10:21Z",
+      "side": 1,
+      "message": "Why restrict it? More important: This interface does not need to know anything about the two parts it gets. Adding knowledge like \"one part is a 1-character string and the other part is an integer in a certain range\" is adding knowledge that does nothing good. It\u0027s not needed. It shouldn\u0027t be here.",
+      "parentUuid": "ae564743_deef3fad",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_bef9ab80",
         "filename": "docs/entitytypes.wiki",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-30T13:12:31Z",
       "side": 1,
       "message": "What exactly does \"constructed\" mean in this context? Why should Item not define this? Why does it have to be a suffix?",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f2523715",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:10:21Z",
+      "side": 1,
+      "message": "It\u0027s a callable. It gets a mixed parameter and constructs an EntityId object from that. \"Constructs\".",
+      "parentUuid": "ae564743_bef9ab80",
       "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_323cafbc",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:10:21Z",
+      "side": 1,
+      "message": "And then have two loops, one via Assert and a foreach to check the array keys? I don\u0027t see the benefit.",
+      "parentUuid": "ae564743_3ea8fb73",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_5eddef16",
         "filename": "lib/includes/FragmentedEntityIdBuilder.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_72462756",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:10:21Z",
+      "side": 1,
+      "message": "It\u0027s a single value, I don\u0027t see how this could be plural. Even if it\u0027s an array, it\u0027s a single array.\n\nStructure is explained on the top level, but can be anything, depending on the entity type.",
+      "parentUuid": "ae564743_5eddef16",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_9eb027da",
         "filename": "lib/includes/FragmentedEntityIdBuilder.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2016-05-30T13:12:31Z",
       "side": 1,
       "message": "Would be somewhat niver to merge the defaults into $builders in the constructor:\n\n  $builders +\u003d [ \n      \u0027item\u0027 \u003d\u003e [ ItemId::class, \u0027newFromNumber\u0027 ],\n      \u0027property\u0027 \u003d\u003e [ PropertyId::class, \u0027newFromNumber\u0027 ]\n  ]\n\nUsing +\u003d to apply defaults to a config array is common practice in mediawiki.",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_525a0323",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:10:21Z",
+      "side": 1,
+      "message": "We had so much insane trouble with using + instead of array_merge, I will most certainly never use it again, except when array_merge can\u0027t be used.",
+      "parentUuid": "ae564743_9eb027da",
       "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -115,6 +205,24 @@
       "writtenOn": "2016-05-30T13:12:31Z",
       "side": 1,
       "message": "did we miss all these so far?",
+      "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_d2573304",
+        "filename": "lib/tests/phpunit/EntityTypeDefinitionsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-05-30T14:10:21Z",
+      "side": 1,
+      "message": "Yes. Not critical because these tests don\u0027t do much anyway.",
+      "parentUuid": "ae564743_dec8df53",
       "revId": "7847a7531c83cc467e79366ac725d398e10b002c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
