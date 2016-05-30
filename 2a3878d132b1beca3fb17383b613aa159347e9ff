@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_7579f129",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T17:31:14Z",
+      "side": 1,
+      "message": "I would like to avoid the term \"fragement\" alltogether. How about entity-id-composer or just entity-id-factory-function?",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_55766d3a",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T17:31:14Z",
+      "side": 1,
+      "message": "\"unique part\"",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_b58a6915",
+        "filename": "docs/entitytypes.wiki",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T17:31:14Z",
+      "side": 1,
+      "message": "I can\u0027t think of any kind of id for which this would not be true. Unless maybe there are multiple unique parts?",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f5ab416b",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T17:31:14Z",
+      "side": 1,
+      "message": "Can we avoid the term \"fragment\" alltogether?",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_f5aea194",
+        "filename": "lib/includes/FragmentedEntityIdBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-30T17:31:14Z",
+      "side": 1,
+      "message": "Yes, I think $uniquePart would be better. And an example would help.",
+      "revId": "2a3878d132b1beca3fb17383b613aa159347e9ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
