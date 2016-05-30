@@ -34,12 +34,10 @@ return array(
 		'deserializer-factory-callback' => function( DeserializerFactory $deserializerFactory ) {
 			return $deserializerFactory->newItemDeserializer();
 		},
-		'entity-id-builder-pair' => [
-			ItemId::PATTERN,
-			function( $serialization ) {
-				return new ItemId( $serialization );
-			}
-		],
+		'entity-id-pattern' => ItemId::PATTERN,
+		'entity-id-builder' => function( $serialization ) {
+			return new ItemId( $serialization );
+		},
 		'entity-differ-strategy-builder' => function() {
 			return new ItemDiffer();
 		},
@@ -54,12 +52,10 @@ return array(
 		'deserializer-factory-callback' => function( DeserializerFactory $deserializerFactory ) {
 			return $deserializerFactory->newPropertyDeserializer();
 		},
-		'entity-id-builder-pair' => [
-			PropertyId::PATTERN,
-			function( $serialization ) {
-				return new PropertyId( $serialization );
-			}
-		],
+		'entity-id-pattern' => PropertyId::PATTERN,
+		'entity-id-builder' => function( $serialization ) {
+			return new PropertyId( $serialization );
+		},
 		'entity-differ-strategy-builder' => function() {
 			return new PropertyDiffer();
 		},

@@ -134,8 +134,8 @@ class EntityTypeDefinitions {
 		$result = [];
 
 		foreach ( $this->entityTypeDefinitions as $def ) {
-			if ( isset( $def['entity-id-builder-pair'] ) ) {
-				$result[ $def['entity-id-builder-pair'][0] ] = $def['entity-id-builder-pair'][1];
+			if ( isset( $def['entity-id-pattern'] ) && isset( $def['entity-id-builder'] ) ) {
+				$result[$def['entity-id-pattern']] = $def['entity-id-builder'];
 			}
 		}
 
