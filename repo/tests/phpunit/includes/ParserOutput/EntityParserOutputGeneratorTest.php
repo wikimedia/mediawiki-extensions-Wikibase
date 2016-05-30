@@ -52,11 +52,6 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-view-chunks' ), 'view chunks' );
 
-		$this->assertArrayHasKey(
-			'en',
-			$parserOutput->getExtensionData( 'wikibase-terms-list-items' )
-		);
-
 		$this->assertSame( array( '<JS>' ), $parserOutput->getJsConfigVars(), 'config vars' );
 
 		$this->assertEquals(
