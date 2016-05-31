@@ -17,7 +17,8 @@
 			"Mattho69",
 			"Macofe",
 			"Yasten",
-			"Dcausse"
+			"Dcausse",
+			"Wladek92"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -32,7 +33,7 @@
 	"apihelp-query+wikibase-param-prop": "Quelles propriétés obtenir :\n;<kbd>url</kbd>: URL de base, chemin du script et chemin de l’article du référentiel Wikibase.\n;<kbd>siteid</kbd>: Le siteid de ce site.",
 	"wikibase-after-page-move": "Vous devriez aussi mettre à jour [$1 l’élément {{WBREPONAME}}] associé pour conserver les liens de langue sur la page déplacée.",
 	"wikibase-after-page-move-queued": "L’[$1 élément {{WBREPONAME}}] associé avec cette page sera mis à jour automatiquement. Veuillez noter que cela peut ne pas être instantané.",
-	"wikibase-after-page-delete": "Vous pouvez aussi supprimer le lien vers cette page depuis l’[$1 {{WBREPONAME}} élément associé] pour maintenir les liens de langue.",
+	"wikibase-after-page-delete": "Vous devriez aussi supprimer le lien vers cette page depuis l’[$1 {{WBREPONAME}} élément associé] pour conserver les liens de langue.",
 	"wikibase-after-page-delete-queued": "L’[$1 élément {{WBREPONAME}}] associé avec cette page sera automatiquement mis à jour. Veuillez noter que cela peut ne pas être instantané.",
 	"wikibase-comment-add": "Un élément {{WBREPONAME}} a été créé.",
 	"wikibase-comment-remove": "Élément {{WBREPONAME}} associé supprimé. Liens de langue supprimés.",
