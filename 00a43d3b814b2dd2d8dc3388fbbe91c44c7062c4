@@ -87,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "ae564743_e647197b",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-31T07:21:54Z",
+      "side": 1,
+      "message": "Why not have a use clause for this?",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_115d4e1a",
         "filename": "client/tests/phpunit/ClientDefaultsTest.php",
         "patchSetId": 3
