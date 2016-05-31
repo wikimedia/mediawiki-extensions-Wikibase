@@ -85,6 +85,23 @@
       "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_a1218b9f",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-31T07:36:03Z",
+      "side": 1,
+      "message": "This class shouldn\u0027t know anything about the implementation details of its LabelDescriptionLookup.",
+      "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
