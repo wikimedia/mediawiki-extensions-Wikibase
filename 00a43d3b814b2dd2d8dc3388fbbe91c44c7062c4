@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e68cf02_1bbd6364",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T18:43:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_112f0e86",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_514ce679",
         "filename": "client/config/WikibaseClient.default.php",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e68cf02_db2f6b9b",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T18:43:36Z",
+      "side": 1,
+      "message": "getRepoSettings is added by this change. It indeed rerturns null if this wiki isn\u0027t a repo. thisWikiIsTheRepo is an earlier hack. They could indeed be unified.",
+      "parentUuid": "ae564743_514ce679",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_f129ba7f",
         "filename": "client/config/WikibaseClient.default.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2016-05-25T16:44:18Z",
       "side": 1,
       "message": "Please avoid abbreviations in comments, especially \"NS\".",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e68cf02_9b0cd347",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T18:43:36Z",
+      "side": 1,
+      "message": "Even if \"namespace\" is spelled out before in the same sentence? Why is \"NS\" especially bad?",
+      "parentUuid": "ae564743_f129ba7f",
       "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "6e68cf02_5e0a2925",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T18:43:36Z",
+      "side": 1,
+      "message": "I agree that it\u0027s very ugly to have this here. I\u0027m not convinced that a standalone WikibaseRepoSettingsAccessor would be less obscure. How would that be better?",
+      "parentUuid": "ae564743_91695ebe",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_e647197b",
         "filename": "client/includes/WikibaseClient.php",
         "patchSetId": 3
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "6e68cf02_be0edd35",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T18:43:36Z",
+      "side": 1,
+      "message": "Because it feels wrong to have a use clause for something we don\u0027t know exists until we check WB_VERSION. Technically, that would work fine, I suppose.",
+      "parentUuid": "ae564743_e647197b",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_115d4e1a",
         "filename": "client/tests/phpunit/ClientDefaultsTest.php",
         "patchSetId": 3
@@ -115,6 +205,24 @@
       "writtenOn": "2016-05-25T16:44:18Z",
       "side": 1,
       "message": "Please do not do this. These numbers always get in our way when we try to continue working on a class, and test cases change, move or become obsolete. Please use this syntax:\n\n\u0027test case description\u0027 \u003d\u003e array( … ),",
+      "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e68cf02_1e2711b3",
+        "filename": "client/tests/phpunit/ClientDefaultsTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T18:43:36Z",
+      "side": 1,
+      "message": "I know, I was a first in the team to use array key for that :) But I didn\u0027t want to change them all in this change, so I opted for consistency inside the method.",
+      "parentUuid": "ae564743_115d4e1a",
       "revId": "00a43d3b814b2dd2d8dc3388fbbe91c44c7062c4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
