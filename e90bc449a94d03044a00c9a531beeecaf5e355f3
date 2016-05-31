@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_a1fa2b0b",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-31T07:34:54Z",
+      "side": 1,
+      "message": "You didn\u0027t commit that class",
+      "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_4ce9db7d",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 2
@@ -30,6 +47,41 @@
       "writtenOn": "2016-05-27T15:21:26Z",
       "side": 1,
       "message": "I believe this should use the full, terms table based lookup because it\u0027s also used to label badges, for example.",
+      "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_c1091f31",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-31T07:34:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae564743_ecf38f67",
+      "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_260f513d",
+        "filename": "repo/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-31T07:34:54Z",
+      "side": 1,
+      "message": "I don\u0027t think the implementation details are relevant here.",
       "revId": "e90bc449a94d03044a00c9a531beeecaf5e355f3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
