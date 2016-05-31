@@ -35,7 +35,7 @@ ENV['PROPERTY_ID_PREFIX'] = lenv.lookup(:property_id_prefix, default: -> { 'P' }
 ENV['LANGUAGE_CODE'] = lenv.lookup(:language_code, default: -> { 'en' })
 
 # require_all 'features/support/modules'
-require_all 'features/support/pages'
+require_all 'tests/browser/features/support/pages'
 # require_all 'features/support/utils'
 
 # TODO: remove once everything is migrated
