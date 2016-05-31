@@ -185,16 +185,11 @@ class SimpleEntityTermsView implements EntityTermsView {
 	}
 
 	/**
-	 * @param string $mainLanguageCode Desired language of the label, description and aliases in the
-	 *  title and header section. Not necessarily identical to the interface language.
-	 * @param LabelsProvider $labelsProvider
 	 * @param EntityId|null $entityId
 	 *
 	 * @return string HTML
 	 */
-	public function getTitleHtml(
-		EntityId $entityId = null
-	) {
+	public function getTitleHtml( EntityId $entityId = null ) {
 		$isEmpty = true;
 		$idInParenthesesHtml = '';
 
@@ -222,7 +217,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	}
 
 	/**
-	 * @param EntityId|null $entityId
+	 * @param Term|null $description
 	 *
 	 * @return string HTML
 	 */
