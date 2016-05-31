@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_013957cb",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-31T07:41:15Z",
+      "side": 1,
+      "message": "Why not? Why should anyone have mixed settings?",
+      "parentUuid": "ae564743_ef73aae2",
+      "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_6f2ddaa2",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 11
@@ -47,6 +65,24 @@
       "writtenOn": "2016-05-23T16:07:48Z",
       "side": 1,
       "message": "This logic is pretty complex. Do we have tests fro it? Would it be better to move it into EntityNamespaceLookup?",
+      "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_41434f43",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-31T07:41:15Z",
+      "side": 1,
+      "message": "In Repo, we can have a more generic implementation than in lib or Client. If you can live with using WikibaseClient\u0027s implementation in Repo as well, it can be moved to lib, since it has no dependencies whatsoever.",
+      "parentUuid": "ae564743_6f2ddaa2",
       "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
