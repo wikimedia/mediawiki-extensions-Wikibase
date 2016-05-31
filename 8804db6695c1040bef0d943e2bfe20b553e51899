@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae564743_217a9bb9",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-05-31T10:04:11Z",
+      "side": 1,
+      "message": "Do we *really* want to open that can of worms? Language fallbacks are politics…",
+      "parentUuid": "ae564743_f57061db",
+      "revId": "8804db6695c1040bef0d943e2bfe20b553e51899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_1577d5d0",
         "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
         "patchSetId": 1
