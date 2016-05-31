@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e68cf02_785e1d7d",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T16:09:13Z",
+      "side": 1,
+      "message": "If we have no EntityId, we may want to skip HTML generation completely.",
+      "revId": "b06e698457b3e301b5d50266e64c0aa589e37469",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
