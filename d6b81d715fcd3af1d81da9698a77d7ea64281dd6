@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6e68cf02_7b53b71a",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T16:52:09Z",
+      "side": 1,
+      "message": "Someone *will*. And then we should at least show a meaningful error, and not mess up horribly.",
+      "parentUuid": "ae564743_013957cb",
+      "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_6f2ddaa2",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 11
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "In Repo, we can have a more generic implementation than in lib or Client. If you can live with using WikibaseClient\u0027s implementation in Repo as well, it can be moved to lib, since it has no dependencies whatsoever.",
       "parentUuid": "ae564743_6f2ddaa2",
+      "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e68cf02_db43eb41",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T16:52:09Z",
+      "side": 1,
+      "message": "Yes, I think I would prefer that, for consistency and simplicity. We don\u0027t have to invest so much into supporting legacy settings.",
+      "parentUuid": "ae564743_41434f43",
       "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
