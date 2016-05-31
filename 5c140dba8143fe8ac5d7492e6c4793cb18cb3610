@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae564743_41bcefb1",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-05-31T08:45:14Z",
+      "side": 1,
+      "message": "Thiemo and I agreed that this should only add ULS language codes when wbUserTermsLanguages.length \u003c\u003d 1.",
+      "revId": "5c140dba8143fe8ac5d7492e6c4793cb18cb3610",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
