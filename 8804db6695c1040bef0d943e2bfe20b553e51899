@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e68cf02_9bafb3de",
+        "filename": "client/config/WikibaseClient.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-05-31T16:55:29Z",
+      "side": 1,
+      "message": "I think it should be technically possible to configure this. If the WMF wants to allow this to deviate from UI language fallback is a different question.\n\nIf you think this is a point of contention, let\u0027s for now not have a setting at all, and just go with the new behavior everywhere. To me, this is a bug fix. If it causes issues, it\u0027s easy enough to revert.\n\nWhat I want to avoid is introducing yet another setting, that does not really give us any useful options, and just adds complexity.",
+      "parentUuid": "ae564743_217a9bb9",
+      "revId": "8804db6695c1040bef0d943e2bfe20b553e51899",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_1577d5d0",
         "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
         "patchSetId": 1
