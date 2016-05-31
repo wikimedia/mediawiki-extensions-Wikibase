@@ -249,9 +249,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 */
 	private function getLanguageOptions() {
 		$names = Language::fetchLanguageNames( null, 'all' );
-		$languageOptions = array();
+		$languageOptions = [];
 		foreach ( $this->languageCodes as $code ) {
-			$languageOptions[isset( $names[$code] ) ? $names[$code] : $code] = $code;
+			$languageName = isset( $names[$code] ) ? $names[$code] : $code;
+			$languageOptions["$languageName ($code)"] = $code;
 		}
 		return $languageOptions;
 	}
@@ -269,7 +270,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				'name' => 'lang',
 				'options' => $this->getLanguageOptions(),
 				'default' => $langCode,
-				'type' => 'select',
+				'type' => 'combobox',
 				'id' => 'wb-newentity-language',
 				'label-message' => 'wikibase-newentity-language'
 			),
