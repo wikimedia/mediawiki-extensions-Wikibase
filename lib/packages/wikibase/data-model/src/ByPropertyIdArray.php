@@ -3,6 +3,7 @@
 namespace Wikibase\DataModel;
 
 use ArrayObject;
+use InvalidArgumentException;
 use OutOfBoundsException;
 use RuntimeException;
 use Traversable;
@@ -51,11 +52,18 @@ class ByPropertyIdArray extends ArrayObject {
 	private $byId = null;
 
 	/**
+	 * @deprecated since 5.0, use a DataModel Service instead
 	 * @see ArrayObject::__construct
 	 *
 	 * @param PropertyIdProvider[]|Traversable|null $input
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $input = null ) {
+		if ( is_object( $input ) && !( $input instanceof Traversable ) ) {
+			throw new InvalidArgumentException( '$input must be an array, Traversable or null' );
+		}
+
 		parent::__construct( (array)$input );
 	}
 
@@ -411,6 +419,7 @@ class ByPropertyIdArray extends ArrayObject {
 	 * @param PropertyIdProvider $object
 	 * @param int|null $index Absolute index where to place the new object.
 	 *
+	 * @throws OutOfBoundsException
 	 * @throws RuntimeException
 	 */
 	public function addObjectAtIndex( $object, $index = null ) {
