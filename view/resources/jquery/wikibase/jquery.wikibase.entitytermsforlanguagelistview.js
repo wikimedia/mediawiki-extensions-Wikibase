@@ -134,9 +134,9 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			userLanguages = this.options.userLanguages;
 		$entitytermsforlanguageview.each( function( i ) {
 			var lang = null;
-			$.each( $( this ).attr( 'class' ).split( ' ' ), function() {
-				if ( this.indexOf( 'wikibase-entitytermsforlanguageview-' ) === 0 ) {
-					lang = this.split( 'wikibase-entitytermsforlanguageview-' )[1];
+			$( this ).attr( 'class' ).split( ' ' ).every( function( className ) {
+				if ( className.indexOf( 'wikibase-entitytermsforlanguageview-' ) === 0 ) {
+					lang = className.split( 'wikibase-entitytermsforlanguageview-' )[1];
 					return false;
 				}
 			} );
@@ -300,12 +300,12 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			lia = listview.listItemAdapter(),
 			self = this;
 
-		$.each( Object.keys( this._getMoreLanguages() ).sort(), function() {
-			var $item = listview.addItem( self._getValueForLanguage( this ) );
+		Object.keys( this._getMoreLanguages() ).sort().forEach( function( languageCode ) {
+			var $item = listview.addItem( self._getValueForLanguage( languageCode ) );
 			if ( self._isInEditMode ) {
 				lia.liInstance( $item ).startEditing();
 			}
-			self._moreLanguagesItems[this] = $item;
+			self._moreLanguagesItems[languageCode] = $item;
 		} );
 	},
 
@@ -317,8 +317,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	_removeMoreLanguages: function() {
 		var listview = this.$listview.data( 'listview' );
 
-		$.each( this._moreLanguagesItems, function() {
-			listview.removeItem( this );
+		this._moreLanguagesItems.forEach( function( item ) {
+			listview.removeItem( item );
 		} );
 
 		this._moreLanguagesItems = {};
@@ -342,8 +342,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			languages[lang] = lang;
 		} );
 
-		$.each( this.options.userLanguages, function() {
-			delete languages[this];
+		this.options.userLanguages.forEach( function( lang ) {
+			delete languages[lang];
 		} );
 
 		return languages;
@@ -551,8 +551,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		listview.items().each( function() {
 			var entitytermsforlanguageview = lia.liInstance( $( this ) );
 
-			$.each( ['label', 'description', 'aliases'], function() {
-				var $view = entitytermsforlanguageview['$' + this + 'view'],
+			['label', 'description', 'aliases'].forEach( function( name ) {
+				var $view = entitytermsforlanguageview['$' + name + 'view'],
 					autoExpandInput = $view.find( 'input,textarea' ).data( 'inputautoexpand' );
 
 				if ( autoExpandInput ) {
