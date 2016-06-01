@@ -308,14 +308,11 @@ $.widget( 'ui.tagadata', {
 		}
 
 		var $label = $( '<span/>' ).addClass( 'tagadata-label' ),
-			$input = $( '<input />' )
-				.attr( 'name', this.options.itemName + '[]' )
-				.prop( 'lang', this.element.prop( 'lang' ) || '' );
-			try {
-				$input.prop( 'dir', this.element.prop( 'dir' ) || 'auto' );
-			} catch ( e ) {
-				// IE does not support dir=auto
-			}
+			$input = $( '<input />' ).attr( {
+				name: this.options.itemName + '[]',
+				lang: this.element.prop( 'lang' ) || '',
+				dir: this.element.prop( 'dir' ) || 'auto'
+			} );
 
 		$tag = this._createTagNode().addClass( additionalClasses || '' ).append( $label );
 
