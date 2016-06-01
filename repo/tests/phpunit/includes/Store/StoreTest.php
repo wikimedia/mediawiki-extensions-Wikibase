@@ -39,6 +39,7 @@ class StoreTest extends \MediaWikiTestCase {
 				$wikibaseRepo->getEntityChangeFactory(),
 				$wikibaseRepo->getEntityContentDataCodec(),
 				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->getEntityIdComposer(),
 				$this->getMock( EntityIdLookup::class ),
 				$this->getMock( EntityTitleLookup::class ),
 				new EntityNamespaceLookup( [] )

@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store\Sql;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 
@@ -21,29 +22,40 @@ use Wikibase\Lib\Store\EntityInfoBuilderFactory;
 class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 
 	/**
-	 * @var string|bool
-	 */
-	private $wiki;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
+	 * @var string|bool
+	 */
+	private $wiki;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdComposer $entityIdComposer
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $entityIdParser, $wiki = false ) {
+	public function __construct(
+		EntityIdParser $entityIdParser,
+		EntityIdComposer $entityIdComposer,
+		$wiki = false
+	) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
 
-		$this->wiki = $wiki;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityIdComposer = $entityIdComposer;
+		$this->wiki = $wiki;
 	}
 
 	/**
@@ -54,7 +66,12 @@ class SqlEntityInfoBuilderFactory implements EntityInfoBuilderFactory {
 	 * @return EntityInfoBuilder
 	 */
 	public function newEntityInfoBuilder( array $entityIds ) {
-		return new SqlEntityInfoBuilder( $this->entityIdParser, $entityIds, $this->wiki );
+		return new SqlEntityInfoBuilder(
+			$this->entityIdParser,
+			$this->entityIdComposer,
+			$entityIds,
+			$this->wiki
+		);
 	}
 
 }

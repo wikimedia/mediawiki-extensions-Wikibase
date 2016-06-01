@@ -8,6 +8,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityInfoBuilderFactory;
@@ -48,10 +49,15 @@ class SqlStoreTest extends MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
+		$entityIdComposer = $this->getMockBuilder( EntityIdComposer::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		return new SqlStore(
 			$changeFactory,
 			$contentCodec,
 			$this->getMock( EntityIdParser::class ),
+			$entityIdComposer,
 			$this->getMock( EntityIdLookup::class ),
 			$this->getMock( EntityTitleLookup::class ),
 			new EntityNamespaceLookup( [] )

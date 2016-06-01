@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 
 /**
@@ -137,7 +138,11 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTest {
 	 * @return SqlEntityInfoBuilder
 	 */
 	protected function newEntityInfoBuilder( array $ids ) {
-		return new SqlEntityInfoBuilder( new BasicEntityIdParser(), $ids );
+		return new SqlEntityInfoBuilder(
+			new BasicEntityIdParser(),
+			new EntityIdComposer( [] ),
+			$ids
+		);
 	}
 
 }

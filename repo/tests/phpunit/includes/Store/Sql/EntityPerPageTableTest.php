@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 
@@ -67,9 +68,7 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	 * @return EntityPerPageTable
 	 */
 	private function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
-		$idParser = new BasicEntityIdParser();
-
-		$table = new EntityPerPageTable( $idParser );
+		$table = new EntityPerPageTable( new BasicEntityIdParser(), new EntityIdComposer( [] ) );
 		$table->clear();
 
 		foreach ( $entities as $entity ) {

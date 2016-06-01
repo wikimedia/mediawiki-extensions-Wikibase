@@ -4,9 +4,11 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use MWException;
+use RuntimeException;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Object representing a term index entry.
@@ -209,22 +211,38 @@ class TermIndexEntry {
 	}
 
 	/**
+	 * @since 0.5
+	 *
+	 * @return int|null
+	 */
+	public function getNumericId() {
+		return array_key_exists( 'entityId', $this->fields ) ? $this->fields['entityId'] : null;
+	}
+
+	/**
 	 * @since 0.2
 	 *
+	 * @throws RuntimeException
 	 * @return EntityId|null
 	 */
 	public function getEntityId() {
 		$entityType = $this->getEntityType();
+		$numericId = $this->getNumericId();
 
-		if ( $entityType !== null && array_key_exists( 'entityId', $this->fields ) ) {
-			$numericId = $this->fields['entityId'];
+		if ( $entityType !== null && $numericId !== null ) {
+			// TODO: This does not belong to a value object. Provide entityId object to constructor, so service will be obsolete.
+			if ( defined( 'WB_VERSION' ) ) {
+				$entityIdComposer = WikibaseRepo::getDefaultInstance()->getEntityIdComposer();
+			} elseif ( defined( 'WBC_VERSION' ) ) {
+				$entityIdComposer = WikibaseClient::getDefaultInstance()->getEntityIdComposer();
+			} else {
+				throw new RuntimeException( 'Need either client or repo loaded' );
+			}
 
-			// FIXME: this only works for items and properties
 			try {
-				return LegacyIdInterpreter::newIdFromTypeAndNumber( $entityType, $numericId );
+				return $entityIdComposer->composeEntityId( $entityType, $numericId );
 			} catch ( InvalidArgumentException $ex ) {
-				wfWarn( 'Unsupported entity type "' . $entityType . '"' );
-				return null;
+				wfLogWarning( 'Unsupported entity type "' . $entityType . '"' );
 			}
 		}
 
