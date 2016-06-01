@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6e68cf02_8a3f57d3",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-06-01T07:36:29Z",
+      "side": 1,
+      "message": "My plan would be to remove this stuff again in maybe the next deployment und just add a very helpful error message. It\u0027s pretty trivial to fix and people using Wikibase should be able to do something like that quickly. Compared to the amount of for example parser cache purging that\u0027s needed, this is a really nice upgrade path.",
+      "parentUuid": "6e68cf02_7b53b71a",
+      "revId": "d6b81d715fcd3af1d81da9698a77d7ea64281dd6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_6f2ddaa2",
         "filename": "repo/includes/WikibaseRepo.php",
         "patchSetId": 11
