@@ -76,7 +76,7 @@ class PropertyView extends EntityView {
 			throw new InvalidArgumentException( '$property must contain a Property.' );
 		}
 
-		$html = $this->getHtmlForFingerprint( $property )
+		$html = $this->getHtmlForTerms( $property )
 			. $this->templateFactory->render( 'wikibase-toc' )
 			. $this->getHtmlForDataType( $property->getDataTypeId() )
 			. $this->statementSectionsView->getHtml( $property->getStatements() );

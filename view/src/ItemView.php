@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -78,11 +79,11 @@ class ItemView extends EntityView {
 	 * @return string HTML
 	 */
 	protected function getMainHtml( EntityDocument $item ) {
-		if ( !( $item instanceof Item ) ) {
-			throw new InvalidArgumentException( '$item must contain an Item.' );
+		if ( !( $item instanceof StatementListProvider ) ) {
+			throw new InvalidArgumentException( '$item must be a StatementListProvider' );
 		}
 
-		$html = $this->getHtmlForFingerprint( $item )
+		$html = $this->getHtmlForTerms( $item )
 			. $this->templateFactory->render( 'wikibase-toc' )
 			. $this->statementSectionsView->getHtml( $item->getStatements() );
 
@@ -94,12 +95,16 @@ class ItemView extends EntityView {
 	 *
 	 * @param EntityDocument $entity
 	 *
+	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
 	protected function getSideHtml( EntityDocument $entity ) {
-		return $this->getHtmlForPageImage()
-				.$this->getHtmlForSiteLinks( $entity );
+		if ( !( $entity instanceof Item ) ) {
+			throw new InvalidArgumentException( '$item must be an Item' );
+		}
 
+		return $this->getHtmlForPageImage()
+			. $this->getHtmlForSiteLinks( $entity );
 	}
 
 	/**
@@ -111,7 +116,7 @@ class ItemView extends EntityView {
 	 *
 	 * @return string HTML
 	 */
-	protected function getHtmlForSiteLinks( Item $item ) {
+	private function getHtmlForSiteLinks( Item $item ) {
 		return $this->siteLinksView->getHtml(
 			$item->getSiteLinkList()->toArray(),
 			$item->getId(),
@@ -124,7 +129,7 @@ class ItemView extends EntityView {
 	 *
 	 * @return string
 	 */
-	protected function getHtmlForPageImage() {
+	private function getHtmlForPageImage() {
 		$helpText = $this->textProvider->get( 'wikibase-pageimage-helptext' );
 		return $this->templateFactory->render(
 			'wikibase-pageimage',
