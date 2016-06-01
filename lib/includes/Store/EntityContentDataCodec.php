@@ -312,7 +312,8 @@ class EntityContentDataCodec {
 
 		if ( is_array( $data[$key] ) ) {
 			try {
-				// Handle the old-style representation of IDs as a two element array.
+				// Handle the old-style representation of IDs as a two element array. This is only
+				// relevant for items and properties and must not support other entity types.
 				$stubbedId = $data[$key];
 				return LegacyIdInterpreter::newIdFromTypeAndNumber( $stubbedId[0], $stubbedId[1] );
 			} catch ( InvalidArgumentException $ex ) {

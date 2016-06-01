@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -65,6 +66,11 @@ class SqlStore implements Store {
 	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
+
+	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
 
 	/**
 	 * @var EntityRevisionLookup|null
@@ -150,6 +156,7 @@ class SqlStore implements Store {
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -158,6 +165,7 @@ class SqlStore implements Store {
 		EntityChangeFactory $entityChangeFactory,
 		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
+		EntityIdComposer $entityIdComposer,
 		EntityIdLookup $entityIdLookup,
 		EntityTitleLookup $entityTitleLookup,
 		EntityNamespaceLookup $entityNamespaceLookup
@@ -165,6 +173,7 @@ class SqlStore implements Store {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->contentCodec = $contentCodec;
 		$this->entityIdParser = $entityIdParser;
+		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
@@ -285,7 +294,7 @@ class SqlStore implements Store {
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage() {
-		return new EntityPerPageTable( $this->entityIdParser );
+		return new EntityPerPageTable( $this->entityIdParser, $this->entityIdComposer );
 	}
 
 	/**
@@ -451,7 +460,7 @@ class SqlStore implements Store {
 	 * @return EntityInfoBuilderFactory
 	 */
 	private function newEntityInfoBuilderFactory() {
-		return new SqlEntityInfoBuilderFactory( $this->entityIdParser );
+		return new SqlEntityInfoBuilderFactory( $this->entityIdParser, $this->entityIdComposer );
 	}
 
 	/**
