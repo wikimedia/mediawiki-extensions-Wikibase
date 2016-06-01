@@ -482,6 +482,20 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( CachingCommonsMediaFileNameLookup::class, $lookup );
 	}
 
+	/**
+	 * @return DataValueFactory
+	 */
+	private function getDataValueFactory() {
+		return $this->getWikibaseRepo( [
+			'item' => [
+				'entity-id-pattern' => ItemId::PATTERN,
+				'entity-id-builder' => function( $serialization ) {
+					return new ItemId( $serialization );
+				},
+			],
+		] )->getDataValueFactory();
+	}
+
 	public function dataValueProvider() {
 		return [
 			'string' => [ new StringValue( 'Test' ) ],
@@ -505,7 +519,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @dataProvider dataValueProvider
 	 */
 	public function testDataValueSerializationDeserializationRoundtrip( DataValue $expected ) {
-		$service = $this->getWikibaseRepo()->getDataValueFactory();
+		$service = $this->getDataValueFactory();
 		$deserialized = $service->newFromArray( $expected->toArray() );
 
 		$this->assertEquals( $expected, $deserialized );
@@ -532,15 +546,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @dataProvider entityIdValueSerializationProvider
 	 */
 	public function testEntityIdValueDeserialization( array $serialization ) {
-		$entityTypeDefinitions = [
-			'item' => [
-				'entity-id-pattern' => ItemId::PATTERN,
-				'entity-id-builder' => function( $serialization ) {
-					return new ItemId( $serialization );
-				},
-			],
-		];
-		$service = $this->getWikibaseRepo( $entityTypeDefinitions )->getDataValueFactory();
+		$service = $this->getDataValueFactory();
 		$deserialized = $service->newFromArray( [
 			'type' => 'wikibase-entityid',
 			'value' => $serialization,
