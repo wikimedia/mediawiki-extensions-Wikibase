@@ -74,11 +74,14 @@ class UsageUpdater {
 		}
 
 		$this->usageTracker->addUsedEntities( $pageId, $usages );
-		$newlyUsedEntities = $this->getEntityIds( $usages );
 
-		// Subscribe to anything that was added
+		$newlyUsedEntities = $this->getEntityIds( $usages );
+		// Subscribe to anything that was unused before.
 		if ( !empty( $newlyUsedEntities ) ) {
-			$this->subscriptionManager->subscribe( $this->clientId, $newlyUsedEntities );
+			$newlyUsedEntities = $this->usageLookup->getUnusedEntities( $newlyUsedEntities );
+			if ( !empty( $newlyUsedEntities ) ) {
+				$this->subscriptionManager->subscribe( $this->clientId, $newlyUsedEntities );
+			}
 		}
 	}
 
