@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e68cf02_61c3010b",
+        "filename": "repo/includes/Specials/SpecialNewEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-01T14:52:29Z",
+      "side": 1,
+      "message": "Worst case is that this will show the language code twice. Shouldn\u0027t happen on production and isn\u0027t that bad.",
+      "revId": "2e621205022b47216b00536ff0265ff26d7a7905",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
