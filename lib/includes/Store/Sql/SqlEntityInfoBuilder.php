@@ -9,9 +9,9 @@ use RuntimeException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 
@@ -114,14 +114,25 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $idParser;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityId[] $ids
 	 * @param string|bool $wiki The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( EntityIdParser $entityIdParser, array $ids, $wiki = false ) {
+	public function __construct(
+		EntityIdParser $entityIdParser,
+		EntityIdComposer $entityIdComposer,
+		array $ids,
+		$wiki = false
+	) {
 		if ( !is_string( $wiki ) && $wiki !== false ) {
 			throw new InvalidArgumentException( '$wiki must be a string or false.' );
 		}
@@ -133,6 +144,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->entityPerPageTable = 'wb_entity_per_page';
 
 		$this->idParser = $entityIdParser;
+		$this->entityIdComposer = $entityIdComposer;
 
 		$this->setEntityIds( $ids );
 	}
@@ -372,11 +384,13 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 */
 	private function injectTerms( ResultWrapper $dbResult ) {
 		foreach ( $dbResult as $row ) {
-			// FIXME: this only works for items and properties
 			try {
-				$entityId = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->term_entity_type, (int)$row->term_entity_id );
+				$entityId = $this->entityIdComposer->composeEntityId(
+					$row->term_entity_type,
+					$row->term_entity_id
+				);
 			} catch ( InvalidArgumentException $ex ) {
-				wfWarn( 'Unsupported entity type "' . $row->term_entity_type . '"' );
+				wfLogWarning( 'Unsupported entity type "' . $row->term_entity_type . '"' );
 				continue;
 			}
 

@@ -6,10 +6,10 @@ use DatabaseBase;
 use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\LegacyIdInterpreter;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\EntityPerPage;
 
 /**
@@ -30,10 +30,16 @@ class EntityPerPageTable implements EntityPerPage {
 	private $entityIdParser;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 */
-	public function __construct( EntityIdParser $entityIdParser ) {
+	public function __construct( EntityIdParser $entityIdParser, EntityIdComposer $entityIdComposer ) {
 		$this->entityIdParser = $entityIdParser;
+		$this->entityIdComposer = $entityIdComposer;
 	}
 
 	/**
@@ -255,8 +261,11 @@ class EntityPerPageTable implements EntityPerPage {
 		$entities = array();
 
 		foreach ( $rows as $row ) {
-			// FIXME: this only works for items and properties
-			$entities[] = LegacyIdInterpreter::newIdFromTypeAndNumber( $row->entity_type, $row->entity_id );
+			try {
+				$entities[] = $this->entityIdComposer->composeEntityId( $row->entity_type, $row->entity_id );
+			} catch ( InvalidArgumentException $ex ) {
+				wfLogWarning( 'Unsupported entity type "' . $row->entity_type . '"' );
+			}
 		}
 
 		return $entities;
