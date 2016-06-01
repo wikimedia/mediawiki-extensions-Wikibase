@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e68cf02_def474ce",
+        "filename": "view/resources/jquery/ui/jquery.ui.tagadata.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 640
+      },
+      "writtenOn": "2016-06-01T08:56:33Z",
+      "side": 1,
+      "message": "As tests are not run for IE i\u0027d like to have a comment above.",
+      "revId": "bd1b054f55e6b40420e58b3126876a190f803879",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
