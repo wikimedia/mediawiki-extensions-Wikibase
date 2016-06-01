@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "ae564743_9c27ae0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-01T14:50:44Z",
+      "side": 1,
+      "message": "Is this a typo? \"if it isn\u0027t actually a valid term language\"?",
+      "revId": "5c140dba8143fe8ac5d7492e6c4793cb18cb3610",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_3c67824b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-01T14:50:44Z",
+      "side": 1,
+      "message": "This change should be announced, at least in the weekly.\n\nWould be nice to have the difference between the two explained in this commit message: The new list always contains the UI language as first element, when it\u0027s a valid term language.\n\nThe previous \"user specified\" list only contained the Babel languages.\n\nThis means this change is only relevant when a users Babel box does not contain the UI language he uses.",
+      "revId": "5c140dba8143fe8ac5d7492e6c4793cb18cb3610",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae564743_9c404ea9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-01T14:50:44Z",
+      "side": 1,
+      "message": "This needs a PM decision.\n\nPersonally I would not like this behavior. When I set my babel box to de and en, because that\u0027s all I care about, I do not want to see two more \"random\" languages.",
+      "revId": "5c140dba8143fe8ac5d7492e6c4793cb18cb3610",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_41bcefb1",
         "filename": "repo/resources/wikibase.ui.entityViewInit.js",
         "patchSetId": 1
