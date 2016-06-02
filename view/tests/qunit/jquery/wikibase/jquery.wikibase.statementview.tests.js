@@ -223,9 +223,6 @@ QUnit.test( 'performs correct claimsChanger call', function( assert ) {
 			claimsChanger: {
 				setStatement: setStatement
 			},
-			dataTypeStore: {
-				getDataType: function() { return null; }
-			},
 			guidGenerator: {
 				newGuid: function() { return guid; }
 			}
