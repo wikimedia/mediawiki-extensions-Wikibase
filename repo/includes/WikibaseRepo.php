@@ -385,15 +385,21 @@ class WikibaseRepo {
 	 * @return WikibaseValueFormatterBuilders
 	 */
 	private function newWikibaseValueFormatterBuilders() {
-		global $wgLang;
-
 		return new WikibaseValueFormatterBuilders(
 			$this->getDefaultLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
-			new LanguageNameLookup( $wgLang->getCode() ),
+			$this->getLanguageNameLookup(),
 			$this->getLocalEntityUriParser(),
 			$this->getEntityTitleLookup()
 		);
+	}
+
+	/**
+	 * @return LanguageNameLookup
+	 */
+	public function getLanguageNameLookup() {
+		global $wgLang;
+		return new LanguageNameLookup( $wgLang->getCode() );
 	}
 
 	/**
@@ -1555,11 +1561,9 @@ class WikibaseRepo {
 	 * @return EntityIdHtmlLinkFormatterFactory
 	 */
 	public function getEntityIdHtmlLinkFormatterFactory() {
-		global $wgLang;
-
 		return new EntityIdHtmlLinkFormatterFactory(
 			$this->getEntityTitleLookup(),
-			new LanguageNameLookup( $wgLang->getCode() )
+			$this->getLanguageNameLookup()
 		);
 	}
 
@@ -1613,14 +1617,21 @@ class WikibaseRepo {
 			$this->getSiteStore(),
 			$this->getDataTypeFactory(),
 			TemplateFactory::getDefaultInstance(),
-			new LanguageNameLookup( $wgLang->getCode() ),
-			new MediaWikiLanguageDirectionalityLookup(),
+			$this->getLanguageNameLookup(),
+			$this->getLanguageDirectionalityLookup(),
 			new MediaWikiNumberLocalizer( $wgLang ),
 			$this->settings->getSetting( 'siteLinkGroups' ),
 			$this->settings->getSetting( 'specialSiteLinkGroups' ),
 			$this->settings->getSetting( 'badgeItems' ),
 			new MediaWikiLocalizedTextProvider( $wgLang->getCode() )
 		);
+	}
+
+	/**
+	 * @return LanguageDirectionalityLookup
+	 */
+	public function getLanguageDirectionalityLookup() {
+		return new MediaWikiLanguageDirectionalityLookup();
 	}
 
 	/**
