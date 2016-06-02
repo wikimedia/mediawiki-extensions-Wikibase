@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 
+use Wikibase\Client\WikibaseClient;
 use Wikibase\SettingsArray;
 
 /**
@@ -16,7 +17,7 @@ use Wikibase\SettingsArray;
 class ClientDefaultsTest extends \MediaWikiTestCase {
 
 	public function settingsProvider() {
-		return array(
+		$cases = array(
 			array( // #0: no local repo, all values set
 				array( // $settings
 					'repoUrl' => 'http://acme.com',
@@ -148,7 +149,38 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'sharedCacheKeyPrefix' => 'wikibase_shared/wikidata_1_25wmf24',
 				)
 			),
+			array( // #6: derive repoNamespaces and entityNamespaces
+				array( // $settings
+				),
+				array( // $wg
+				),
+				false, // $repoIsLocal
+				array( // $expected
+					'repoNamespaces' => [ 'wikibase-item' => '', 'wikibase-property' => 'Property' ],
+					'entityNamespaces' => [ 'wikibase-item' => 0, 'wikibase-property' => 120 ],
+				)
+			),
 		);
+
+		if ( defined( 'WB_VERSION' ) ) {
+			$repoSettings = WikibaseClient::getDefaultInstance()->getRepoSettings();
+			$entityNamespaces = $repoSettings->getSetting( 'entityNamespaces' );
+			$namespaceNames = array_map( 'MWNamespace::getCanonicalName', $entityNamespaces );
+
+			$cases[] = array( // #7: default repoNamespaces and entityNamespaces
+				array( // $settings
+				),
+				array( // $wg
+				),
+				true, // $repoIsLocal
+				array( // $expected
+					'repoNamespaces' => $namespaceNames,
+					'entityNamespaces' => $entityNamespaces,
+				)
+			);
+		}
+
+		return $cases;
 	}
 
 	/**

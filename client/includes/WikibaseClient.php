@@ -521,6 +521,23 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * Returns the repo's settings array IF the local wiki also acts as a repository.
+	 * If the local wiki is not a repository, this method returns null.
+	 *
+	 * This is intended to be used ONLY to allow client settings to default to local repo
+	 * settings in WikibaseClient.default.php.
+	 *
+	 * @return SettingsArray|null
+	 */
+	public function getRepoSettings() {
+		if ( defined( 'WB_VERSION' ) ) {
+			return \Wikibase\Repo\WikibaseRepo::getDefaultInstance()->getSettings();
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * Returns a new instance constructed from global settings.
 	 * IMPORTANT: Use only when it is not feasible to inject an instance properly.
 	 *
