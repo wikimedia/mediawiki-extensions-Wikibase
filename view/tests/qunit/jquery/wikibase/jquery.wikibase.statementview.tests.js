@@ -5,20 +5,7 @@
 ( function( $, mw, wb, dv, QUnit, sinon ) {
 'use strict';
 
-QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment( {
-	teardown: function() {
-		$( '.test_statementview' ).each( function() {
-			var $statementview = $( this ),
-				statementview = $statementview.data( 'statementview' );
-
-			if ( statementview ) {
-				statementview.destroy();
-			}
-
-			$statementview.remove();
-		} );
-	}
-} ) );
+QUnit.module( 'jquery.wikibase.statementview', QUnit.newMwEnvironment() );
 
 /**
  * @param {Object} [options]
