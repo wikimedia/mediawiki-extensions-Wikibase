@@ -82,7 +82,7 @@
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 år}} e.v.t.",
 	"wikibase-time-precision-millennium": "$1. årtusende",
 	"wikibase-time-precision-century": "$1. århundrade",
-	"wikibase-time-precision-10annum": "$1 årtionde",
+	"wikibase-time-precision-10annum": "$1-talet",
 	"wikibase-time-precision-BCE-Gannum": "$1 miljarder år f.v.t.",
 	"wikibase-time-precision-BCE-Mannum": "$1 miljoner år f.v.t.",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1}} år f.v.t.",
