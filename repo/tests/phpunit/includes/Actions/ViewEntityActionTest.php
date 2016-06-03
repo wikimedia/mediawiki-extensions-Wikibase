@@ -110,6 +110,9 @@ class ViewEntityActionTest extends ActionTestCase {
 		return $action->getOutput()->getHTML();
 	}
 
+	/**
+	 * @covers ViewEntityAction::onBeforeDisplayNoArticleText
+	 */
 	public function testShow404() {
 		$id = new ItemId( 'q1122334455' );
 		$title = WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getTitleForId( $id );
@@ -125,6 +128,7 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$action->show();
 		$this->assertEquals( 200, $response->getStatusCode(), "response code" );
+		$this->assertContains( 'noarticletext', $action->getOutput()->getHTML(), "response HTML" );
 
 		// $wgSend404Code enabled -----
 		$this->setMwGlobals( 'wgSend404Code', true );
