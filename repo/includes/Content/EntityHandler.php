@@ -6,6 +6,7 @@ use Content;
 use ContentHandler;
 use DataUpdate;
 use Diff\Patcher\PatcherException;
+use Html;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
@@ -148,6 +149,31 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	abstract protected function getContentClass();
+
+	/**
+	 * Handle the fact that a given page does not contain an Entity, even though it could.
+	 * Per default, this behaves similarly to Article::showMissingArticle: it shows
+	 * a message to the user.
+	 *
+	 * @see Article::showMissingArticle
+	 *
+	 * @param Title $title The title of the page that potentially could, but does not,
+	 *        contain an entity.
+	 * @param IContextSource $context Context to use for reporting. In particular, output
+	 *        will be written to $context->getOutput().
+	 */
+	public function showMissingEntity( Title $title, IContextSource $context ) {
+		$dir = $context->getLanguage()->getDir();
+		$lang = $context->getLanguage()->getCode();
+		$text = wfMessage( 'wikibase-noentity' )->inLanguage( $lang )->plain();
+
+		$outputPage = $context->getOutput();
+		$outputPage->addWikiText( Html::openElement( 'div', [
+				'class' => "noarticletext mw-content-$dir",
+				'dir' => $dir,
+				'lang' => $lang,
+			] ) . "\n$text\n</div>" );
+	}
 
 	/**
 	 * @see ContentHandler::getDiffEngineClass
