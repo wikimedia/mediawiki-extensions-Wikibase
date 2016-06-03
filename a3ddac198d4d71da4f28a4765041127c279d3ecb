@@ -298,6 +298,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_9e0bfad8",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-06-03T17:57:35Z",
+      "side": 1,
+      "message": "You only need this if you want the settings for newly registered users to be different than the default for all users (the latter affects established users).\n\nEcho only uses it for a few settings that we want to differ like this.  Since you have it true for both here, you don\u0027t need it.\n\nIf you did need it, the new one is LocalUserCreated.",
+      "parentUuid": "ae564743_ac42370f",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_f1bb68b8",
         "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
         "patchSetId": 19
