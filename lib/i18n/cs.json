@@ -144,7 +144,7 @@
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|Bylo přidáno|Byla přidána}} vymezení",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|Bylo změněno|Byla změněna}} vymezení",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "{{PLURAL:$1|Bylo odstraněno|Byla odstraněna}} vymezení",
-	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|Odstraněna reference|Odstraněny reference}} z výroku",
+	"wikibase-entity-summary-wbremovereferences-remove": "{{PLURAL:$3|Odstraněna|Odstraněny}} reference tvrzení",
 	"wikibase-entity-summary-wbmergeitems-from": "Sloučeno z položky $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Sloučeno do položky $3",
 	"wikibase-item-summary-wbcreate-new": "Vytvořena nová položka",

@@ -567,7 +567,7 @@
 	"apihelp-wbsetsitelink-example-2": "Engade unha ligazón a sitio ó artigo en inglés \"Hydrogen\"  con identificador \"Q42\", se a ligazón ó sitio non existe. Tamén engade \"Loves Oxygen\" ó resumo de edición.",
 	"apihelp-wbsetsitelink-example-3": "Engade unha ligazón de sitio ó artigo en alemán \"Wasserstoff\" no elemento que é ligado co artigo en inglés \"Hydrogen\", se a ligazón ó sitio non existe",
 	"apihelp-wbsetsitelink-example-4": "Elimina a ligazón ó sitio en alemán do elemento",
-	"apihelp-wbsetsitelink-example-5": "Engade a ligazón a sitio \"Wodór\" para a páxina en polaco no elemento con ligazón á páxina en inglés a \"Hydrogen\" cun distintivo apuntando ó elemento con identificador \"Q149\"",
+	"apihelp-wbsetsitelink-example-5": "Engade a ligazón a sitio ó artigo en polaco \"Wodór\" no elemento que está ligado co artigo en inglés \"Hydrogen\", cun distintivo apuntando ó elemento con identificador \"Q149\"",
 	"apihelp-wbsetsitelink-example-6": "Cambia os distintivos para a ligazón á páxina en polaco do elemento con identificador \"Q42\" a dous distintivos apuntado ós elmentos con identificadores \"Q2\" e \"Q149\" sen proporcionar a ligazón ó título",
 	"apihelp-wbsetsitelink-example-7": "Cambia a ligazón á páxina en polaco do elemento con identificador \"Q42\" sen cambiar os distintivos",
 	"apihelp-wbsetsitelink-example-8": "Cambia a ligazón á páxina en polaco do elemento con identificador \"Q42\" e elimina todos os seus distintivos"
