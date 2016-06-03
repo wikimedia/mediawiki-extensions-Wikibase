@@ -2,13 +2,11 @@
 
 namespace Wikibase;
 
-use ContentHandler;
-use Hooks;
-use LogEventsList;
+use Article;
 use OutputPage;
-use SpecialPage;
 use ViewAction;
-use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\WikibaseRepo;
+use Xml;
 
 /**
  * Handles the view action for Wikibase entities.
@@ -22,19 +20,44 @@ use Wikibase\Repo\Content\EntityHandler;
 abstract class ViewEntityAction extends ViewAction {
 
 	/**
+	 * Handler for the BeforeDisplayNoArticleText called by Article.
+	 * We implement this solely to replace the standard message that
+	 * is shown when an entity does not exists.
+	 *
+	 * @param Article $article
+	 * @return bool
+	 * @throws \MWException
+	 */
+	public static function onBeforeDisplayNoArticleText( Article $article ) {
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+
+		$ns = $article->getTitle()->getNamespace();
+		$oldid = $article->getOldID();
+		if ( $namespaceLookup->isEntityNamespace( $ns ) && !$oldid ) {
+			$context = $article->getContext();
+			$dir = $context->getLanguage()->getDir();
+			$lang = $context->getLanguage()->getCode();
+			$text = wfMessage( 'wikibase-noentity' )->plain();
+
+			$outputPage = $context->getOutput();
+			$outputPage->addWikiText( Xml::openElement( 'div', [
+					'class' => "noarticletext mw-content-$dir",
+					'dir' => $dir,
+					'lang' => $lang,
+				] ) . "\n$text\n</div>" );
+
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * @see ViewAction::show
 	 *
 	 * Parent is doing $this->checkCanExecute( $this->getUser() )
 	 */
 	public function show() {
-		if ( !$this->page->exists() ) {
-			// @fixme could use ShowMissingArticle hook instead.
-			// Article checks for missing / deleted revisions and either
-			// shows appropriate error page or deleted revision, if permission allows.
-			$this->displayMissingEntity();
-			return;
-		}
-
 		$this->showEntityPage();
 	}
 
@@ -64,11 +87,6 @@ abstract class ViewEntityAction extends ViewAction {
 
 		// NOTE: page-wide property, independent of user permissions
 		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
-
-		$user = $this->getUser();
-		$parserOptions = $this->page->makeParserOptions( $user );
-
-		$this->page->setParserOptions( $parserOptions );
 		$this->page->view();
 
 		$this->overrideTitleText( $outputPage );
@@ -121,83 +139,6 @@ abstract class ViewEntityAction extends ViewAction {
 	private function setHTMLTitle( OutputPage $outputPage, $titleText ) {
 		// Prevent replacing {{...}} by using rawParams() instead of params():
 		$outputPage->setHTMLTitle( $this->msg( 'pagetitle' )->rawParams( $titleText ) );
-	}
-
-	/**
-	 * Displays there is no entity for the current page.
-	 */
-	private function displayMissingEntity() {
-		$title = $this->getTitle();
-		$oldid = $this->page->getOldID();
-
-		$out = $this->getOutput();
-
-		$out->setPageTitle( $title->getPrefixedText() );
-
-		// TODO: Factor the "show stuff for missing page" code out from Article::showMissingArticle,
-		//       so it can be re-used here. The below code is copied & modified from there...
-
-		Hooks::run( 'ShowMissingArticle', array( $this->page ) );
-
-		# Show delete and move logs
-		LogEventsList::showLogExtract( $out, array( 'delete', 'move' ), $title, '',
-			array(
-				'lim' => 10,
-				'conds' => array( "log_action != 'revision'" ),
-				'showIfEmpty' => false,
-				'msgKey' => array( 'moveddeleted-notice' )
-			)
-		);
-
-		$this->send404Code();
-
-		$hookResult = Hooks::run( 'BeforeDisplayNoArticleText', array( $this ) );
-
-		// XXX: ...end of stuff stolen from Article::showMissingArticle
-
-		if ( $hookResult ) {
-			// Show error message
-			if ( $oldid ) {
-				$text = wfMessage( 'missing-article',
-					$this->getTitle()->getPrefixedText(),
-					wfMessage( 'missingarticle-rev', $oldid )->plain() )->plain();
-			} else {
-				/** @var EntityHandler $entityHandler */
-				$entityHandler = ContentHandler::getForTitle( $this->getTitle() );
-				$entityCreationPage = $entityHandler->getSpecialPageForCreation();
-
-				$text = wfMessage( 'wikibase-noentity' )->plain();
-
-				if ( $entityCreationPage !== null
-					&& $this->getTitle()->quickUserCan( 'create', $this->getUser() )
-					&& $this->getTitle()->quickUserCan( 'edit', $this->getUser() )
-				) {
-					/*
-					 * add text with link to special page for creating an entity of that type if possible and
-					 * if user has the rights for it
-					 */
-					$createEntityPage = SpecialPage::getTitleFor( $entityCreationPage );
-					$text .= ' ' . wfMessage(
-						'wikibase-noentity-createone',
-						$createEntityPage->getPrefixedText() // TODO: might be nicer to use an 'action=create' instead
-					)->plain();
-				}
-			}
-
-			$text = "<div class='noarticletext'>\n$text\n</div>";
-
-			$out->addWikiText( $text );
-		}
-	}
-
-	private function send404Code() {
-		global $wgSend404Code;
-
-		if ( $wgSend404Code ) {
-			// If there's no backing content, send a 404 Not Found
-			// for better machine handling of broken links.
-			$this->getRequest()->response()->header( 'HTTP/1.1 404 Not Found' );
-		}
 	}
 
 	/**
