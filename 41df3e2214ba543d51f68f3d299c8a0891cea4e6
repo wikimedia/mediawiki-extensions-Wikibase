@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_8c163b59",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-03T12:27:20Z",
+      "side": 1,
+      "message": "Eeewww.... this is bad. We actually want this to be the other way around: TermIndex should (at some point) contain the string, and getNumericId should be deprecated.\n\nHow about this: the constructor expects an EntityId object, and this is returned here. getNumericId would call getNumericId on the EntityId object, if that is supported. Otherwise, it throws an exception (or returns false?).\n\nBut the constructor is somewhat bound to the database fields, and it\u0027s called in 60 different places. I\u0027m not sure yet what the best solution is... but we should have a plan before deprecating this. And in any case, we might need to do that refactoring separately, and rebase on top of it.",
+      "revId": "41df3e2214ba543d51f68f3d299c8a0891cea4e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
