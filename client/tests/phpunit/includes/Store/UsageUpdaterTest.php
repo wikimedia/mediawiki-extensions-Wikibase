@@ -52,7 +52,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAddUsagesForPage( $newUsage, $unusedEntitiesToSubscribe ) {
 		$usageTracker = $this->getMock( UsageTracker::class );
-		$usageTracker->expects( $this->once() )
+		$usageTracker->expects( empty( $newUsage ) ? $this->never() : $this->once() )
 			->method( 'addUsedEntities' )
 			->with( 23, $newUsage );
 
