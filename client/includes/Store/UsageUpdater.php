@@ -73,15 +73,14 @@ class UsageUpdater {
 			throw new InvalidArgumentException( '$pageId must be an int!' );
 		}
 
+		$usageEntityIds = $this->getEntityIds( $usages );
+		$newlyUsedEntities = $this->usageLookup->getUnusedEntities( $usageEntityIds );
+
 		$this->usageTracker->addUsedEntities( $pageId, $usages );
 
-		$newlyUsedEntities = $this->getEntityIds( $usages );
 		// Subscribe to anything that was unused before.
 		if ( !empty( $newlyUsedEntities ) ) {
-			$newlyUsedEntities = $this->usageLookup->getUnusedEntities( $newlyUsedEntities );
-			if ( !empty( $newlyUsedEntities ) ) {
-				$this->subscriptionManager->subscribe( $this->clientId, $newlyUsedEntities );
-			}
+			$this->subscriptionManager->subscribe( $this->clientId, $newlyUsedEntities );
 		}
 	}
 
