@@ -44,6 +44,12 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
 				array( $q2 )
 			),
+
+			'add usages, all usages already subscribed' => array(
+				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
+					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
+				array()
+			),
 		);
 	}
 
@@ -52,7 +58,7 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testAddUsagesForPage( $newUsage, $unusedEntitiesToSubscribe ) {
 		$usageTracker = $this->getMock( UsageTracker::class );
-		$usageTracker->expects( $this->once() )
+		$usageTracker->expects( empty( $newUsage ) ? $this->never() : $this->once() )
 			->method( 'addUsedEntities' )
 			->with( 23, $newUsage );
 
