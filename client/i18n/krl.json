@@ -12,6 +12,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-elementti",
 	"wikibase-editlinks": "Kohenna linkit",
 	"wikibase-editlinkstitle": "Kohentele kielienvälisie linkkijä",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Peitä",
 	"wikibase-rc-hide-wikidata-show": "Näytä",
 	"wikibase-rc-wikibase-edit-letter": "D",
