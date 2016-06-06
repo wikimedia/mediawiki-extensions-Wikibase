@@ -64,6 +64,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DifferenceContentLanguages;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityIdLinkFormatter;
 use Wikibase\Lib\EntityIdPlainLinkFormatter;
 use Wikibase\Lib\EntityIdValueFormatter;
@@ -187,6 +188,11 @@ class WikibaseRepo {
 	 * @var EntityIdParser|null
 	 */
 	private $entityIdParser = null;
+
+	/**
+	 * @var EntityIdComposer|null
+	 */
+	private $entityIdComposer = null;
 
 	/**
 	 * @var StringNormalizer|null
@@ -743,6 +749,21 @@ class WikibaseRepo {
 	/**
 	 * @since 0.5
 	 *
+	 * @return EntityIdComposer
+	 */
+	public function getEntityIdComposer() {
+		if ( $this->entityIdComposer === null ) {
+			$this->entityIdComposer = new EntityIdComposer(
+				$this->entityTypeDefinitions->getEntityIdComposers()
+			);
+		}
+
+		return $this->entityIdComposer;
+	}
+
+	/**
+	 * @since 0.5
+	 *
 	 * @return StatementGuidParser
 	 */
 	public function getStatementGuidParser() {
@@ -845,6 +866,7 @@ class WikibaseRepo {
 				$this->getEntityChangeFactory(),
 				$this->getEntityContentDataCodec(),
 				$this->getEntityIdParser(),
+				$this->getEntityIdComposer(),
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
 				$this->getEntityNamespaceLookup()

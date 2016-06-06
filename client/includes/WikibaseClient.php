@@ -67,6 +67,7 @@ use Wikibase\LangLinkHandler;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -138,6 +139,11 @@ final class WikibaseClient {
 	 * @var EntityIdParser|null
 	 */
 	private $entityIdParser = null;
+
+	/**
+	 * @var EntityIdComposer|null
+	 */
+	private $entityIdComposer = null;
 
 	/**
 	 * @var LanguageFallbackChainFactory|null
@@ -337,6 +343,21 @@ final class WikibaseClient {
 		}
 
 		return $this->entityIdParser;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntityIdComposer
+	 */
+	public function getEntityIdComposer() {
+		if ( $this->entityIdComposer === null ) {
+			$this->entityIdComposer = new EntityIdComposer(
+				$this->entityTypeDefinitions->getEntityIdComposers()
+			);
+		}
+
+		return $this->entityIdComposer;
 	}
 
 	/**

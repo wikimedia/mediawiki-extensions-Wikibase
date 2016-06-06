@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilderFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -167,7 +168,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getEntityViewFactory( $createView ),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
-			new SqlEntityInfoBuilderFactory( $entityIdParser ),
+			new SqlEntityInfoBuilderFactory( $entityIdParser, new EntityIdComposer( [] ) ),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getMock( LocalizedTextProvider::class ),
