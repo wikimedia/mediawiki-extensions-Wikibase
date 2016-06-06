@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_95b470e6",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-06T14:49:15Z",
+      "side": 1,
+      "message": "Instead of a SettingsArray, just provide the settings directly.\nIf at all possible, this class shouldn\u0027t know or care where this info comes from. It needs a siteId and a sendEchoNotification flag, so it asks for a siterId and a flag, no more, no less.",
+      "revId": "d74ee8054a8e2fce6a30908b9c291b3b45f16ea2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
