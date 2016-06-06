@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_9521109d",
+        "filename": "repo/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-06T14:10:36Z",
+      "side": 1,
+      "message": "This parameter list is completely wrong...",
+      "revId": "86fcd133448bd006d43998a0b1cbb413d294aa9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_b51c146c",
+        "filename": "repo/includes/ParserOutput/PlaceholderEmittingEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-06T14:10:36Z",
+      "side": 1,
+      "message": "why rename this? there is no requirement nor any check that this is an in-memory construct.",
+      "revId": "86fcd133448bd006d43998a0b1cbb413d294aa9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_f535fcd8",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-06T14:10:36Z",
+      "side": 1,
+      "message": "why rename this? there is no requirement nor any check that this is an in-memory construct.",
+      "revId": "86fcd133448bd006d43998a0b1cbb413d294aa9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_d53278ee",
+        "filename": "view/src/SimpleEntityTermsView.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-06T14:10:36Z",
+      "side": 1,
+      "message": "why rename this? there is no requirement nor any check that this is an in-memory construct.",
+      "revId": "86fcd133448bd006d43998a0b1cbb413d294aa9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
