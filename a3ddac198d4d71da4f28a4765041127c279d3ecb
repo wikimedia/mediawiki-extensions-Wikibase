@@ -228,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_baf7e3f1",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-06T10:55:50Z",
+      "side": 1,
+      "message": "Because we don\u0027t want to pass in the whole kitchen sink, but rather the parts we really need.",
+      "parentUuid": "ae564743_2c8f4728",
+      "revId": "a3ddac198d4d71da4f28a4765041127c279d3ecb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae564743_9194ac3b",
         "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
         "patchSetId": 19
