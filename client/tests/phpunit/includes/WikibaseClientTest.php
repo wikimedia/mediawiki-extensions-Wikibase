@@ -26,6 +26,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\LangLinkHandler;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -352,6 +353,19 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 	public function testGetPropertyOrderProvider() {
 		$propertyOrderProvider = $this->getWikibaseClient()->getPropertyOrderProvider();
 		$this->assertInstanceOf( PropertyOrderProvider::class, $propertyOrderProvider );
+	}
+
+	public function testGetDataAccessLanguageFallbackChain() {
+		$lang = Language::factory( 'de' );
+
+		$dataAccessLanguageFallbackChain = $this->getWikibaseClient()
+			->getDataAccessLanguageFallbackChain( $lang );
+
+		$this->assertInstanceOf( LanguageFallbackChain::class, $dataAccessLanguageFallbackChain );
+		$langCodes = $dataAccessLanguageFallbackChain->getFetchLanguageCodes();
+
+		// "de" falls back to "en"
+		$this->assertCount( 2, $langCodes );
 	}
 
 	/**

@@ -64,6 +64,7 @@ use Wikibase\DirectSqlStore;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\ItemChange;
 use Wikibase\LangLinkHandler;
+use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\DataTypeDefinitions;
@@ -1185,6 +1186,18 @@ final class WikibaseClient {
 		}
 
 		return $this->entityNamespaceLookup;
+	}
+
+	/**
+	 * @param Language $language
+	 *
+	 * @return LanguageFallbackChain
+	 */
+	public function getDataAccessLanguageFallbackChain( Language $language ) {
+		return $this->getLanguageFallbackChainFactory()->newFromLanguage(
+			$language,
+			LanguageFallbackChainFactory::FALLBACK_ALL
+		);
 	}
 
 }

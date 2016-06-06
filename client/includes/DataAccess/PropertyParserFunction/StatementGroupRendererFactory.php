@@ -225,7 +225,7 @@ class StatementGroupRendererFactory {
 	) {
 		$languageFallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
 			$language,
-			LanguageFallbackChainFactory::FALLBACK_SELF | LanguageFallbackChainFactory::FALLBACK_VARIANTS
+			LanguageFallbackChainFactory::FALLBACK_ALL
 		);
 
 		$options = new FormatterOptions( array(
