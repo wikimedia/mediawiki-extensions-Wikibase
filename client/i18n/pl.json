@@ -17,7 +17,7 @@
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
 	"tooltip-t-wikibase": "Link do powiązanego elementu w repozytorium danych",
-	"wikibase-after-page-move": "Możesz także [$1 zaktualizować] powiązany element Wikidanych w celu zachowania linków do innych wersji językowych na przeniesionej stronie.",
+	"wikibase-after-page-move": "Należy także zaktualizować [$1 powiązany element Wikidanych] w celu zachowania linków do innych wersji językowych na przeniesionej stronie.",
 	"wikibase-after-page-move-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie automatycznie zaktualizowany. Może nie stać się to jednak natychmiast.",
 	"wikibase-after-page-delete-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie automatycznie zaktualizowany. Może nie stać się to jednak natychmiast.",
 	"wikibase-comment-add": "Utworzono element Wikidanych.",
