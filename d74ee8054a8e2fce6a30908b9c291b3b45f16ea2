@@ -16,6 +16,24 @@
       "revId": "d74ee8054a8e2fce6a30908b9c291b3b45f16ea2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_7dd9f282",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 24
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-06T19:29:52Z",
+      "side": 1,
+      "message": "Ok, modified tests accordingly",
+      "parentUuid": "0efd9372_95b470e6",
+      "revId": "d74ee8054a8e2fce6a30908b9c291b3b45f16ea2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
