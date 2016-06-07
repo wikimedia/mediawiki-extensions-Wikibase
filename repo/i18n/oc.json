@@ -204,5 +204,7 @@
 	"content-model-wikibase-property": "Propietat de Wikibase",
 	"content-model-wikibase-query": "Requèsta de Wikibase",
 	"right-property-create": "Crear de proprietats",
-	"action-property-create": "crear de proprietats"
+	"action-property-create": "crear de proprietats",
+	"apihelp-wblinktitles-example-1": "Apondre un ligam \"Idrogèn\" a partir de la pagina en anglés cap a \"Wasserstoff\" sus la pagina alemanda",
+	"apihelp-wbsetaliases-example-3": "Levar Foo e Bar de la lista dels aliasses angleses per l’entitat d’ID Q1"
 }

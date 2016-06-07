@@ -9,6 +9,8 @@
 	},
 	"wikibase-edit": "kohentele",
 	"wikibase-add": "lisyä",
+	"wikibase-label-empty": "Nimie ei ole lisätty",
+	"wikibase-description-empty": "Kuvaušta ei ole lisätty",
 	"wikibase-sitelinks-special": "Muut šivuštot",
 	"wikibase-statementview-rank-normal": "Tavallini arvo"
 }
