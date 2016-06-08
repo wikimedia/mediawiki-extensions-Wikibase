@@ -71,14 +71,37 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	public function assignFreshId( EntityDocument $entity ) {
 		if ( $entity->getId() !== null ) {
-			throw new StorageException( 'This entity already has an ID!' );
+			throw new StorageException( 'This entity already has an ID: ' . $entity->getId() . ' !' );
 		}
 
-		$contentModelId = $this->contentFactory->getContentModelForType( $entity->getType() );
+		$type = $entity->getType();
+		$handler = $this->contentFactory->getContentHandlerForType( $type );
+
+		if ( !$handler->allowAutomaticIds() !== null ) {
+			throw new StorageException( $type . ' entities do not support automatic IDs!' );
+		}
+
+		// TODO: move this into EntityHandler!
+		$contentModelId = $handler->getModelID();
 		$numericId = $this->idGenerator->getNewId( $contentModelId );
 
-		//FIXME: this relies on setId() accepting numeric IDs!
+		// FIXME: this relies on setId() accepting numeric IDs! Use an EntityIdComposer instead.
 		$entity->setId( $numericId );
+	}
+
+	/**
+	 * @see EntityStore::canCreateWithId()
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return bool
+	 * @throws StorageException
+	 */
+	public function canCreateWithCustomId( EntityId $id ) {
+		$type = $id->getEntityType();
+		$handler = $this->contentFactory->getContentHandlerForType( $type );
+
+		return $handler->canCreateWithCustomId( $id );
 	}
 
 	/**
