@@ -370,46 +370,4 @@ class TermIndexSearchInteractorTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	public function provideLimitInputAndExpected() {
-		return array(
-			array( 1, 1 ),
-			array( 5000, 5000 ),
-			array( 999999, 5000 ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideLimitInputAndExpected
-	 */
-	public function testSetLimit( $input, $expected ) {
-		$interactor = $this->newTermSearchInteractor();
-		$interactor->setLimit( $input );
-		$this->assertEquals( $expected, $interactor->getLimit() );
-	}
-
-	public function provideBooleanOptions() {
-		return array(
-			array( true ),
-			array( false ),
-		);
-	}
-
-	/**
-	 * @dataProvider provideBooleanOptions
-	 */
-	public function testSetIsCaseSensitive( $booleanValue ) {
-		$interactor = $this->newTermSearchInteractor();
-		$interactor->setIsCaseSensitive( $booleanValue );
-		$this->assertEquals( $booleanValue, $interactor->getIsCaseSensitive() );
-	}
-
-	/**
-	 * @dataProvider provideBooleanOptions
-	 */
-	public function testSetIsprefixSearch( $booleanValue ) {
-		$interactor = $this->newTermSearchInteractor();
-		$interactor->setIsPrefixSearch( $booleanValue );
-		$this->assertEquals( $booleanValue, $interactor->getIsPrefixSearch() );
-	}
-
 }

@@ -19,8 +19,6 @@ use Wikimedia\Assert\Assert;
  */
 class TermIndexSearchInteractor implements TermSearchInteractor {
 
-	const HARD_LIMIT = 5000;
-
 	/**
 	 * @var TermIndex
 	 */
@@ -47,24 +45,9 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	private $displayLanguageCode;
 
 	/**
-	 * @var bool do a case sensitive search
+	 * @var TermSearchOptions
 	 */
-	private $isCaseSensitive = false;
-
-	/**
-	 * @var bool do a prefix search
-	 */
-	private $isPrefixSearch = false;
-
-	/**
-	 * @var bool use language fallback in the search
-	 */
-	private $useLanguageFallback = true;
-
-	/**
-	 * @var int
-	 */
-	private $limit = self::HARD_LIMIT;
+	private $termSearchOptions;
 
 	/**
 	 * @param TermIndex $termIndex Used to search the terms
@@ -87,63 +70,47 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 			$this->bufferingTermLookup,
 			$this->languageFallbackChainFactory->newFromLanguageCode( $this->displayLanguageCode )
 		);
+
+		$this->termSearchOptions = new TermSearchOptions();
 	}
 
 	/**
-	 * @return int
+	 * @param TermSearchOptions $termSearchOptions
 	 */
-	public function getLimit() {
-		return $this->limit;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function getIsCaseSensitive() {
-		return $this->isCaseSensitive;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function getIsPrefixSearch() {
-		return $this->isPrefixSearch;
+	public function setTermSearchOptions( TermSearchOptions $termSearchOptions ) {
+		$this->termSearchOptions = $termSearchOptions;
 	}
 
 	/**
 	 * @param int $limit Hard upper limit of 5000
+	 * @deprecated
 	 */
 	public function setLimit( $limit ) {
-		Assert::parameterType( 'integer', $limit, '$limit' );
-		Assert::parameter( $limit > 0, '$limit', 'Must be positive' );
-		if ( $limit > self::HARD_LIMIT ) {
-			$limit = self::HARD_LIMIT;
-		}
-		$this->limit = $limit;
+		$this->termSearchOptions->setLimit( $limit );
 	}
 
 	/**
 	 * @param bool $caseSensitive
+	 * @deprecated
 	 */
 	public function setIsCaseSensitive( $caseSensitive ) {
-		Assert::parameterType( 'boolean', $caseSensitive, '$caseSensitive' );
-		$this->isCaseSensitive = $caseSensitive;
+		$this->termSearchOptions->setIsCaseSensitive( $caseSensitive );
 	}
 
 	/**
 	 * @param bool $prefixSearch
+	 * @deprecated
 	 */
 	public function setIsPrefixSearch( $prefixSearch ) {
-		Assert::parameterType( 'boolean', $prefixSearch, '$prefixSearch' );
-		$this->isPrefixSearch = $prefixSearch;
+		$this->termSearchOptions->setIsPrefixSearch( $prefixSearch );
 	}
 
 	/**
 	 * @param bool $useLanguageFallback
+	 * @deprecated
 	 */
 	public function setUseLanguageFallback( $useLanguageFallback ) {
-		Assert::parameterType( 'boolean', $useLanguageFallback, '$useLanguageFallback' );
-		$this->useLanguageFallback = $useLanguageFallback;
+		$this->termSearchOptiosn->setUseLanguageFallback( $useLanguageFallback );
 	}
 
 	/**
@@ -156,7 +123,12 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 *
 	 * @return TermSearchResult[]
 	 */
-	public function searchForEntities( $text, $languageCode, $entityType, array $termTypes ) {
+	public function searchForEntities(
+		$text,
+		$languageCode,
+		$entityType,
+		array $termTypes
+	) {
 		$matchedTermIndexEntries = $this->getMatchingTermIndexEntries(
 			$text,
 			$languageCode,
@@ -193,14 +165,19 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 			),
 			null,
 			$entityType,
-			$this->getTermIndexOptions()
+			$this->getTermIndexOptions( $this->termSearchOptions )
 		);
+
+		$limit = $this->termSearchOptions->getLimit();
+
 		// Shortcut out if we already have enough TermIndexEntries
-		if ( count( $matchedTermIndexEntries ) >= $this->limit || !$this->useLanguageFallback ) {
+		if ( count( $matchedTermIndexEntries ) >= $limit
+			|| !$this->termSearchOptions->getUseLanguageFallback()
+		) {
 			return $matchedTermIndexEntries;
 		}
 
-		if ( $this->useLanguageFallback ) {
+		if ( $this->termSearchOptions->getUseLanguageFallback() ) {
 			// Matches in the main language will always be first
 			$matchedTermIndexEntries = array_merge(
 				$matchedTermIndexEntries,
@@ -213,8 +190,8 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 				)
 			);
 
-			if ( count( $matchedTermIndexEntries ) > $this->limit ) {
-				array_slice( $matchedTermIndexEntries, 0, $this->limit, true );
+			if ( count( $matchedTermIndexEntries ) > $limit ) {
+				array_slice( $matchedTermIndexEntries, 0, $limit, true );
 			}
 		}
 
@@ -335,9 +312,9 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 
 	private function getTermIndexOptions() {
 		return array(
-			'caseSensitive' => $this->isCaseSensitive,
-			'prefixSearch' => $this->isPrefixSearch,
-			'LIMIT' => $this->limit,
+			'caseSensitive' => $this->termSearchOptions->getIsCaseSensitive(),
+			'prefixSearch' => $this->termSearchOptions->getIsPrefixSearch(),
+			'LIMIT' => $this->termSearchOptions->getLimit(),
 		);
 	}
 
