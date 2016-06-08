@@ -739,4 +739,37 @@ abstract class EntityHandler extends ContentHandler {
 		return $updates;
 	}
 
+	/**
+	 * Whether IDs can automatically be assigned to entities
+	 * of the kind supported by this EntityHandler.
+	 *
+	 * @return bool
+	 */
+	public function allowAutomaticIds() {
+		return true;
+	}
+
+	/**
+	 * Whether the given custom ID is valid for creating a new entity
+	 * of the kind supported by this EntityHandler.
+	 *
+	 * Implementations are not required to check if an entity with the given ID already exists.
+	 * If this method returns true, this means that an entity with the given ID could be
+	 * created (or already existed) at the time the method was called. There is no guarantee
+	 * that this continues to be true after the method call returned. Callers must be careful
+	 * to handle race conditions.
+	 *
+	 * @note For entity types that cannot be created with custom IDs (that is,
+	 * entity types that are defined to use automatic IDs), this should always
+	 * return false.
+	 *
+	 * @see EntityStore::canCreateWithCustomId()
+	 *
+	 * @param EntityId $id
+	 * @return bool
+	 */
+	public function canCreateWithCustomId( EntityId $id ) {
+		return false;
+	}
+
 }

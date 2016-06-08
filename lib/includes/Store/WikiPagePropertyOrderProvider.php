@@ -21,6 +21,7 @@ class WikiPagePropertyOrderProvider implements PropertyOrderProvider {
 
 	/**
 	 * Constructor of the WikiPageOrderProvider
+	 *
 	 * @param Title $pageTitle page name the ordered property list is on
 	 */
 	public function __construct( Title $pageTitle ) {
@@ -38,11 +39,13 @@ class WikiPagePropertyOrderProvider implements PropertyOrderProvider {
 			return null;
 		}
 		$parsedList = $this->parseList( $pageContent );
+
 		return array_flip( $parsedList );
 	}
 
 	/**
 	 * Get Content of MediaWiki:Wikibase-SortedProperties
+	 *
 	 * @return string|null
 	 * @throws PropertyOrderProviderException
 	 */
@@ -68,6 +71,7 @@ class WikiPagePropertyOrderProvider implements PropertyOrderProvider {
 
 	/**
 	 * @param string $pageContent
+	 *
 	 * @return string[]
 	 */
 	private function parseList( $pageContent ) {
