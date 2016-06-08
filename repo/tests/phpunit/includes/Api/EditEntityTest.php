@@ -5,6 +5,10 @@ namespace Wikibase\Test\Repo\Api;
 use UsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\StorageException;
+use Wikibase\MediaInfo\DataModel\MediaInfo;
+use Wikibase\MediaInfo\DataModel\MediaInfoId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -76,6 +80,14 @@ class EditEntityTest extends WikibaseApiTestCase {
 				self::$idMap['%Q149%'] => '',
 				'Q99999' => '', // Just in case we have a wrong config
 			) );
+
+			// Create a file page for which we can later create a MediaInfo entity.
+			// XXX It's ugly to have knowledge about MediaInfo here. But since we currently can't
+			// inject mock handlers for a mock media type, this is the only way to test automatic
+			// creation.
+
+			$titleInfo = $this->insertPage( 'File:EditEntityTest.jpg' );
+			self::$idMap['%M11%'] = 'M' . $titleInfo['id'];
 		}
 		self::$hasSetup = true;
 	}
@@ -100,6 +112,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. '"datatype":"string"}'
 				),
 				'e' => array( 'type' => 'property' ) ),
+			'new mediainfo from id' => array(
+				'p' => array( 'id' => '%M11%', 'data' => '{}' ),
+				'e' => array( 'type' => 'mediainfo' ),
+				't' => 'mediainfo', // skip if MediaInfo is not configured
+			),
 			'add a sitelink..' => array( // make sure if we pass in a valid id it is accepted
 				'p' => array(
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki",'
@@ -383,9 +400,27 @@ class EditEntityTest extends WikibaseApiTestCase {
 	}
 
 	/**
+	 * Skips a test of the given entity type is not enabled.
+	 *
+	 * @param string $needed the required entity type
+	 */
+	private function skipIfEntityTypeNotKnown( $needed ) {
+		if ( $needed === null ) {
+			return;
+		}
+
+		$enabledTypes = WikibaseRepo::getDefaultInstance()->getEnabledEntityTypes();
+		if ( !in_array( $needed, $enabledTypes ) ) {
+			$this->markTestSkipped( 'Entity type not enabled: ' . $needed );
+		}
+	}
+
+	/**
 	 * @dataProvider provideData
 	 */
-	public function testEditEntity( $params, $expected ) {
+	public function testEditEntity( $params, $expected, $needed = null ) {
+		$this->skipIfEntityTypeNotKnown( $needed );
+
 		$this->injectIds( $params );
 		$this->injectIds( $expected );
 
@@ -480,6 +515,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'no-such-entity-id'
+				) ) ),
+			'unknown id' => array(
+				'p' => array( 'id' => 'Q1234567', 'data' => '{}' ),
+				'e' => array( 'exception' => array(
+					'type' => UsageException::class,
+					'code' => 'no-such-entity'
 				) ) ),
 			'invalid explicit id' => array(
 				'p' => array( 'id' => '1234', 'data' => '{}' ),
@@ -778,13 +819,41 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => 'not-supported',
 					'message' => 'Non Items cannot have sitelinks'
 				) ) ),
+			'create mediainfo with automatic id' => array(
+				'p' => array( 'new' => 'mediainfo', 'data' => '{}' ),
+				'e' => array( 'exception' => array(
+					'type' => StorageException::class,
+					'message' => 'mediainfo entities do not support automatic IDs'
+				) ),
+				't' => 'mediainfo' // skip if MediaInfo is not configured
+			),
+			'create mediainfo with malformed id' => array(
+				'p' => array( 'id' => 'M123X', 'data' => '{}' ),
+				'e' => array( 'exception' => array(
+					'type' => UsageException::class,
+					'code' => 'no-such-entity-id',
+					'message' => 'Could not find such an entity ID'
+				) ),
+				't' => 'mediainfo' // skip if MediaInfo is not configured
+			),
+			'create mediainfo with bad id' => array(
+				'p' => array( 'id' => 'M12734569', 'data' => '{}' ),
+				'e' => array( 'exception' => array(
+					'type' => UsageException::class,
+					'code' => 'no-such-entity',
+					'message' => 'Could not find such an entity'
+				) ),
+				't' => 'mediainfo' // skip if MediaInfo is not configured
+			),
 		);
 	}
 
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testEditEntityExceptions( $params, $expected ) {
+	public function testEditEntityExceptions( $params, $expected, $needed = null ) {
+		$this->skipIfEntityTypeNotKnown( $needed );
+
 		$this->injectIds( $params );
 		$this->injectIds( $expected );
 
