@@ -561,7 +561,7 @@
 	"apihelp-wbsetdescription-example-2": "Définir la chaîne \"Une encyclopédie que chacun peut éditer\" comme une description en langue anglaise de la page avec un lien de site à enwiki:Wikipedia",
 	"apihelp-wbsetlabel-description": "Définit un label pour une seule entité Wikibase.",
 	"apihelp-wbsetlabel-param-id": "Identificateur de l’entité, incluant le préfixe.\nUtiliser soit <var>id</var> soit <var>site</var> avec <var>title</var>.",
-	"apihelp-wbsetlabel-param-site": "Un identifiant pour le site sur lequel réside la page.\nÀ utiliser avec <var>title</var> pour faire un lien de site complet.",
+	"apihelp-wbsetlabel-param-site": "Un identifiant pour le site sur lequel réside la page.\nÀ utiliser conjointement avec <var>title</var> pour faire un lien de site complet.",
 	"apihelp-wbsetlabel-param-title": "Titre de la page à associer.\nÀ utiliser avec <var>site</var> pour faire un lien de site complet.",
 	"apihelp-wbsetlabel-param-baserevid": "L’identifiant numérique de la révision sur laquelle baser la modification.\nIl est utilisé pour détecter les conflits à l’enregistrement.",
 	"apihelp-wbsetlabel-param-summary": "Résumé de la modification.\nSera préfixé par un commentaire généré automatiquement. La taille limite du commentaire automatique ajouté au résumé est de 260 caractères pour l'ensemble. Notez bien que tout ce qui est au-delà de cette limite sera tronqué.",
