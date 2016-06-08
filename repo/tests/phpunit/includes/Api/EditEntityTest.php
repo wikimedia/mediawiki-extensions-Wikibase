@@ -481,6 +481,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'type' => UsageException::class,
 					'code' => 'no-such-entity-id'
 				) ) ),
+			'unknown id' => array(
+				'p' => array( 'id' => 'Q1234567', 'data' => '{}' ),
+				'e' => array( 'exception' => array(
+					'type' => UsageException::class,
+					'code' => 'no-such-entity'
+				) ) ),
 			'invalid explicit id' => array(
 				'p' => array( 'id' => '1234', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
