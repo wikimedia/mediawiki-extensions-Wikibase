@@ -712,4 +712,29 @@ abstract class EntityHandler extends ContentHandler {
 		return $updates;
 	}
 
+	/**
+	 * Whether IDs can automatically be assigned to entities
+	 * of the kind supported by this EntityHandler.
+	 *
+	 * @return bool
+	 */
+	public function allowAutomaticIds() {
+		return true;
+	}
+
+	/**
+	 * Whether the given custom ID is valid for creating a new entity
+	 * of the kind supported by this EntityHandler.
+	 *
+	 * @note For entity types that cannot be created with custom IDs (that is,
+	 * entity types that are defined to use automatic IDs), this should always
+	 * return false.
+	 *
+	 * @param EntityId $id
+	 * @return bool
+	 */
+	public function canCreateWithCustomId( EntityId $id ) {
+		return false;
+	}
+
 }
