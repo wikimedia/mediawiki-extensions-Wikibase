@@ -176,24 +176,48 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * @see ModifyEntity::createEntity
+	 * Create an empty entity.
 	 *
-	 * @param string $entityType
+	 * @since 0.1
+	 *
+	 * @param string|null $entityType The type of entity to be created (ignored if $id is given)
+	 * @param EntityId|null $id The ID of the entity to be created (optional if $entityType is
+	 *        given)
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
-	 * @return EntityDocument
+	 * @return EntityDocument Newly created entity
 	 */
-	protected function createEntity( $entityType ) {
-		$this->flags |= EDIT_NEW;
+	protected function createEntity( $entityType, EntityId $id = null ) {
+		// TODO: pull this up into ModifyEntity.
 
-		try {
-			return $this->entityFactory->newEmpty( $entityType );
-		} catch ( InvalidArgumentException $ex ) {
-			$this->errorReporter->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
+		if ( $id ) {
+			$entityType = $id->getEntityType();
+		} elseif ( !$entityType ) {
+			$this->errorReporter->dieError( "No entity type provided for creation!", 'no-entity-type' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
-		throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		try {
+			$entity = $this->entityFactory->newEmpty( $entityType );
+		} catch ( InvalidArgumentException $ex ) {
+			$this->errorReporter->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		}
+
+		if ( $id !== null ) {
+			if ( !$this->entityStore->canCreateWithCustomId( $id ) ) {
+				$this->errorReporter->dieError( "Cannot create entity with ID: '$id'", 'bad-entity-id' );
+				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+			}
+
+			$entity->setId( $id );
+		} else {
+			// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
+			$this->entityStore->assignFreshId( $entity );
+		}
+
+		return $entity;
 	}
 
 	/**

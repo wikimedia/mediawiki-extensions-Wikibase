@@ -137,4 +137,14 @@ interface EntityStore {
 	 */
 	public function isWatching( User $user, EntityId $id );
 
+	/**
+	 * Whether an entity with the given custom ID can be created.
+	 *
+	 * @see EntityHandler::canCreateWithCustomId()
+	 *
+	 * @param EntityId $id
+	 * @return bool
+	 */
+	public function canCreateWithCustomId( EntityId $id );
+
 }
