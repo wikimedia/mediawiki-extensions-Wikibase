@@ -262,10 +262,9 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			]
 		);
 
-		$this->assertSame(
-			[ 'foo', 'bar' ],
-			$wikibaseRepo->getEnabledEntityTypes()
-		);
+		$enabled = $wikibaseRepo->getEnabledEntityTypes();
+		$this->assertContains( 'foo', $enabled );
+		$this->assertContains( 'bar', $enabled );
 	}
 
 	public function testGetExceptionLocalizer() {
