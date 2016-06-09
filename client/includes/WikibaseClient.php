@@ -1179,15 +1179,25 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * @return int[]
+	 */
+	private function getEntityNamespacesSetting() {
+		$namespaces = $this->fixLegacyContentModelSetting(
+			$this->settings->getSetting( 'entityNamespaces' ),
+			'entityNamespaces'
+		);
+
+		Hooks::run( 'WikibaseEntityNamespaces', [ &$namespaces ] );
+		return $namespaces;
+	}
+
+	/**
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->fixLegacyContentModelSetting(
-					$this->settings->getSetting( 'entityNamespaces' ),
-					'entityNamespaces'
-				)
+				$this->getEntityNamespacesSetting()
 			);
 		}
 

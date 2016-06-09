@@ -1563,10 +1563,13 @@ class WikibaseRepo {
 	 * @return int[]
 	 */
 	private function getEntityNamespacesSetting() {
-		return $this->fixLegacyContentModelSetting(
+		$namespaces = $this->fixLegacyContentModelSetting(
 			$this->settings->getSetting( 'entityNamespaces' ),
 			'entityNamespaces'
 		);
+
+		Hooks::run( 'WikibaseEntityNamespaces', [ &$namespaces ] );
+		return $namespaces;
 	}
 
 	/**
@@ -1574,7 +1577,9 @@ class WikibaseRepo {
 	 */
 	public function getEntityNamespaceLookup() {
 		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = new EntityNamespaceLookup( $this->getEntityNamespacesSetting() );
+			$this->entityNamespaceLookup = new EntityNamespaceLookup(
+				$this->getEntityNamespacesSetting()
+			);
 		}
 
 		return $this->entityNamespaceLookup;
