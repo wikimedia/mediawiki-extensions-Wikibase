@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_cee65413",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-09T15:37:12Z",
+      "side": 1,
+      "message": "This used to be sorted alphabetically… why did you alter that?",
+      "revId": "c2c806429e86a4a0c345e0b8cd4fd87c84e7aabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_6ef5a8b5",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-09T15:37:12Z",
+      "side": 1,
+      "message": "missing spaces",
+      "revId": "c2c806429e86a4a0c345e0b8cd4fd87c84e7aabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_0ee85cdc",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-09T15:37:12Z",
+      "side": 1,
+      "message": "needs to be wrapped in an array",
+      "revId": "c2c806429e86a4a0c345e0b8cd4fd87c84e7aabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_8ec3ac60",
+        "filename": "client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-09T15:37:12Z",
+      "side": 1,
+      "message": "indentation",
+      "revId": "c2c806429e86a4a0c345e0b8cd4fd87c84e7aabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_8eaa8c80",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibraryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-09T15:37:12Z",
+      "side": 1,
+      "message": "You should have asserted that this returns an array… because it doesn\u0027t.",
+      "revId": "c2c806429e86a4a0c345e0b8cd4fd87c84e7aabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
