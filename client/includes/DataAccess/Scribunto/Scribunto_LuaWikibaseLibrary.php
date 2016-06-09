@@ -8,12 +8,14 @@ use Language;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
 use ValueFormatters\FormatterOptions;
+use Wikibase\Client\RepoLinker;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingSnakFormatter;
 use Wikibase\Client\Usage\UsageTrackingTermLookup;
-use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
@@ -273,6 +275,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			'getLabel' => array( $this, 'getLabel' ),
 			'getEntity' => array( $this, 'getEntity' ),
 			'getSetting' => array( $this, 'getSetting' ),
+			'getEntityUrl' => array( $this, 'getEntityUrl' ),
 			'renderSnak' => array( $this, 'renderSnak' ),
 			'renderSnaks' => array( $this, 'renderSnaks' ),
 			'getEntityId' => array( $this, 'getEntityId' ),
@@ -342,6 +345,59 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	public function getSetting( $setting ) {
 		$this->checkType( 'setting', 1, $setting, 'string' );
 		return array( $this->getLuaBindings()->getSetting( $setting ) );
+	}
+
+	/**
+	 * @param string $entityIdSerialization entity ID serialization
+	 *
+	 * @return string[]|null[]
+	 */
+	public function getEntityUrl( $entityIdSerialization ) {
+		try{
+			$url = $this->getRepoLinker()->getEntityUrl(
+				$this->getEntityIdParser()->parse( $entityIdSerialization )
+			);
+		} catch (EntityIdParsingException $ex) {
+			$url = null;
+		}
+
+		return $url;
+	}
+
+		/**
+	 * @return RepoLinker
+	 */
+	private function getRepoLinker() {
+		if ( !$this->repoLinker ) {
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$this->repoLinker = $wikibaseClient->newRepoLinker();
+		}
+		return $this->repoLinker;
+	}
+
+	/**
+	 * @param RepoLinker $repoLinker
+	 */
+	public function setRepoLinker( RepoLinker $repoLinker ) {
+		$this->repoLinker = $repoLinker;
+	}
+
+	/**
+	 * @return EntityIdParser
+	 */
+	private function getEntityIdParser() {
+		if ( !$this->entityIdParser ) {
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$this->entityIdParser = $wikibaseClient->getEntityIdParser();
+		}
+		return $this->entityIdParser;
+	}
+
+	/**
+	 * @param EntityIdParser $entityIdParser
+	 */
+	public function setEntityIdParser( EntityIdParser $entityIdParser ) {
+		$this->entityIdParser = $entityIdParser;
 	}
 
 	/**
