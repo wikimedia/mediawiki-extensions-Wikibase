@@ -8,8 +8,12 @@ use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
 use ScribuntoException;
 use User;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
+use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**
@@ -178,6 +182,37 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$entityId = $luaWikibaseLibrary->getEntityId( 'CanHazKitten123' );
 		$this->assertEquals( array( null ), $entityId );
+	}
+
+	public function getEntityUrlProvider() {
+		return [
+			'Valid ID' => [ [ 'this-is-a-URL' ], 'Q1' ],
+			'Invalid ID' => [ [ null ], 'not-an-id' ]
+		];
+	}
+
+	/**
+	 * @dataProvider getEntityUrlProvider
+	 */
+	public function testGetEntityUrl( $expected, $entityIdSerialization ) {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->setRepoLinker( $this->getRepoLinker() );
+		$result = $luaWikibaseLibrary->getEntityUrl( $entityIdSerialization );
+
+		$this->assertSame( $expected, $result );
+	}
+
+	private function getRepoLinker() {
+		$repoLinker = $this->getMockBuilder( RepoLinker::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$repoLinker->expects( $this->any() )
+			->method( 'getEntityUrl' )
+			->with( new ItemId( 'Q1' ) )
+			->will( $this->returnValue( 'this-is-a-URL' ) );
+
+		return $repoLinker;
 	}
 
 	/**

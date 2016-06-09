@@ -18,6 +18,17 @@ mw.wikibase.getEntity( 'Q42' ) -- Returns a mw.wikibase.entity table for the Ite
 === mw.wikibase.getEntityObject ===
 Alias for [[#mw.wikibase.getEntity|mw.wikibase.getEntity]].
 
+== mw.wikibase.getEntityUrl ==
+<code>wikibase.getEntityUrl()</code><br>
+<code>wikibase.getEntityUrl( id )</code><br>
+Takes an item ID and returns the URL to the item in the repo.
+
+If no ID was specified, the URL of the item connected to the current page will be returned, if the page is indeed connected.
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getEntityUrl( 'Q42' ) -- Returns the URL to the item as a string, like "http://wikidata.org/wiki/Q42".
+</source>
+
 === mw.wikibase.label ===
 <code>wikibase.label()</code><br>
 <code>wikibase.label( id )</code><br>
