@@ -30,25 +30,13 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 		return array(
 			'empty' => array(
 				array(),
-				array()
+				array(),
 			),
 
 			'add usages' => array(
 				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
 					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
-				array( $q1, $q2 )
-			),
-
-			'add usages, Q1 already subscribed' => array(
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
-				array( $q2 )
-			),
-
-			'add usages, all usages already subscribed' => array(
-				array( new EntityUsage( $q1, EntityUsage::LABEL_USAGE ),
-					new EntityUsage( $q2, EntityUsage::ALL_USAGE ) ),
-				array()
+				array( $q1, $q2 ),
 			),
 		);
 	}
@@ -56,34 +44,27 @@ class UsageUpdaterTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider addUsagesForPageProvider
 	 */
-	public function testAddUsagesForPage( $newUsage, $unusedEntitiesToSubscribe ) {
+	public function testAddUsagesForPage( $newUsage, $subscribe ) {
 		$usageTracker = $this->getMock( UsageTracker::class );
-		$usageTracker->expects( empty( $newUsage ) ? $this->never() : $this->once() )
+		$usageTracker->expects( $this->once() )
 			->method( 'addUsedEntities' )
 			->with( 23, $newUsage );
-
-		$usageEntityIds = [];
-		foreach ( $newUsage as $usage ) {
-			$usageEntityIds[$usage->getEntityId()->getSerialization()] = $usage->getEntityId();
-		}
 
 		$usageLookup = $this->getMock( UsageLookup::class );
 		$usageLookup->expects( $this->never() )
 			->method( 'getUsagesForPage' );
-		$usageLookup->expects( empty( $newUsage ) ? $this->never() : $this->once() )
-			->method( 'getUnusedEntities' )
-			->with( $usageEntityIds )
-			->will( $this->returnValue( $unusedEntitiesToSubscribe ) );
+		$usageLookup->expects( $this->never() )
+			->method( 'getUnusedEntities' );
 
 		$subscriptionManager = $this->getMock( SubscriptionManager::class );
 		$subscriptionManager->expects( $this->never() )
 			->method( 'unsubscribe' );
 
-		$subscriptionManager->expects( empty( $unusedEntitiesToSubscribe ) ? $this->never() : $this->once() )
+		$subscriptionManager->expects( empty( $subscribe ) ? $this->never() : $this->once() )
 			->method( 'subscribe' )
 			->with( 'testwiki', $this->callback(
-				function ( $actualSubscribe ) use ( $unusedEntitiesToSubscribe ) {
-					return self::arraysHaveSameContent( $actualSubscribe, $unusedEntitiesToSubscribe );
+				function ( $actualSubscribe ) use ( $subscribe ) {
+					return self::arraysHaveSameContent( $actualSubscribe, $subscribe );
 				}
 			) );
 
