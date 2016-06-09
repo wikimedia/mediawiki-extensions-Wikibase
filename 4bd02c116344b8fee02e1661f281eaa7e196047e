@@ -16,6 +16,23 @@
       "revId": "4bd02c116344b8fee02e1661f281eaa7e196047e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_ce15b49e",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-06-09T16:12:56Z",
+      "side": 1,
+      "message": "where does this throw MWException?",
+      "revId": "4bd02c116344b8fee02e1661f281eaa7e196047e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
