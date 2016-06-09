@@ -25,6 +25,11 @@ $entity: EntityContent to be indexed
 additional mappings between Entity types and content model identifiers to be defiend.
 &$map: an associative array mapping Entity types to content model ids.
 
+'WikibaseEntityNamespaces': called by WikibaseRepo::getEntityNamespaceLookup() as well as
+by WikibaseClient::getEntityNamespaceLookup() to allow additional mappings between Entity
+types and namespace IDs to be defiend.
+&$map: an associative array mapping Entity types to namespace ids.
+
 'WikibaseRebuildData': DEPRECATED. Used by rebuildAllData.
 $report: A closure that can be called with a string to report that messages.
 
