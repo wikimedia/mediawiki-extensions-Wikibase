@@ -9,7 +9,9 @@ use Scribunto_LuaStandaloneInterpreterFunction;
 use ScribuntoException;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
+use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**
@@ -179,6 +181,38 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$entityId = $luaWikibaseLibrary->getEntityId( 'CanHazKitten123' );
 		$this->assertEquals( array( null ), $entityId );
 	}
+
+	public function testGetEntityUrl() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$luaWikibaseLibrary->setRepoLinker( $this->getRepoLinker() );
+		$luaWikibaseLibrary->setEntityIdParser( $this->getEntityIdParser() );
+		$luaWikibaseLibrary->getEntityUrl( 'Q1' );
+	}
+
+	private function getRepoLinker() {
+		$repoLinker = $this->getMockBuilder( RepoLinker::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$repoLinker->expects( $this->once() )
+			->method( 'getEntityUrl' );
+
+		return $repoLinker;
+	}
+
+	private function getEntityIdParser() {
+		$entityIdParser = $this->getMock( EntityIdParser::class );
+
+		$entityIdParser->expects( $this->once() )
+			->method( 'parse' )
+			->with( 'Q1' )
+			->will( $this->returnValue(
+				WikibaseClient::getDefaultInstance()->getEntityIdParser()->parse( 'Q1' )
+			) );
+
+		return $entityIdParser;
+	}
+
 
 	/**
 	 * @dataProvider allowDataAccessInUserLanguageProvider

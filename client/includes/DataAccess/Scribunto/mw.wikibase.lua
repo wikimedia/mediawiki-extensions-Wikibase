@@ -126,6 +126,22 @@ function wikibase.setupInterface()
 	-- getEntityObject is an alias for getEntity as these used to be different.
 	wikibase.getEntityObject = wikibase.getEntity
 
+	-- Get the URL for the given entity id, if specified, or of the
+	-- connected entity, if exists.
+	--
+	-- @param {string} [id]
+	wikibase.getEntityUrl = function( id )
+		checkTypeMulti( 'getEntityUrl', 1, id, { 'string', 'nil' } )
+
+		id = getIdOfConnectedItemIfNil( id )
+
+		if id == nil then
+			return nil
+		end
+
+		return php.getEntityUrl( id )
+	end
+
 	-- Get the label for the given entity id, if specified, or of the
 	-- connected entity, if exists. (in content language)
 	--
