@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_c41633ac",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-06-09T19:59:41Z",
+      "side": 1,
+      "message": "Won\u0027t this throw a warning if Echo is not installed?",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_845c2b50",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-06-09T19:59:41Z",
+      "side": 1,
+      "message": "If you want this subject line to be used by the new email formatter that was introduced recently, you\u0027ll also need a notification-subject-page-connection message; absent that it\u0027ll use notification-header-page-connection. The -email-batch-body and -email-subject messages (as well as the NotificationFormatter system) are going away, everything\u0027s being migrated to PresentationModels.",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_4471a30a",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-06-09T19:59:41Z",
+      "side": 1,
+      "message": "Also document that $1 is the username to be used for display purposes. I know the message doesn\u0027t currently use it, but you don\u0027t want people to try using $2 for the display user name in the future.",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_c4b8f376",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-06-09T19:59:41Z",
+      "side": 1,
+      "message": "Note that this causes all of these events for the same user to be bundled together. When receiving a bundle, the user has no good way to figure out which other pages were connected. However, that won\u0027t be a problem for long, because we\u0027re working on expandable bundles and hope to be able to ship that feature in a few weeks.",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_c49113fd",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2016-06-09T19:59:41Z",
+      "side": 1,
+      "message": "I see that this corresponds to the bundleCount \u003e 1 case in getHeaderMessageKey(), but I think it\u0027d be less confusing if you combined both of these things in getHeaderMessage(). i.e. don\u0027t override and don\u0027t use getHeaderMessageKey(), and have one if/else branch in getHeaderMessage() that both decides which message to use and which params to pass to it.",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
