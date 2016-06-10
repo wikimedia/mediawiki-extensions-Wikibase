@@ -170,9 +170,17 @@ class UsageLookupContractTester {
 
 		Assert::assertEmpty( $this->lookup->getUnusedEntities( array( $q4 ) ), 'Q4 should not be unused' );
 
-		$unused = $this->lookup->getUnusedEntities( array( $q4, $q6 ) );
+		$entityIds = array( $q4, $q6 );
+		if ( wfGetDB( DB_SLAVE )->getType() === 'mysql' ) {
+			// On MySQL we use UNIONs on the table… as the table is temporary that
+			// doesn't work in unit tests.
+			// https://dev.mysql.com/doc/refman/5.7/en/temporary-table-problems.html
+			$entityIds = array( $q6 );
+		}
+
+		$unused = $this->lookup->getUnusedEntities( $entityIds );
 		Assert::assertCount( 1, $unused );
-		Assert::assertEquals( $q6, reset( $unused ), 'Q6 shouold be unused' );
+		Assert::assertEquals( $q6, reset( $unused ), 'Q6 should be unused' );
 	}
 
 	/**
