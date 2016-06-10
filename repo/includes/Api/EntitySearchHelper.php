@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\TermIndexEntry;
 
@@ -82,29 +83,40 @@ class EntitySearchHelper {
 
 		// If not matched enough then search for full term matches
 		$missing = $limit - count( $allSearchResults );
+
 		if ( $missing > 0 ) {
+			$searchOptions = $this->getSearchOptions( $missing, false, $strictLanguage );
+
 			$exactSearchResults = $this->searchEntities(
 				$text,
 				$languageCode,
 				$entityType,
-				$missing,
-				false,
-				$strictLanguage
+				$this->getSearchOptions( $missing, false, $strictLanguage )
 			);
-			$allSearchResults = $this->mergeSearchResults( $allSearchResults, $exactSearchResults, $limit );
+
+			$allSearchResults = $this->mergeSearchResults(
+				$allSearchResults,
+				$exactSearchResults,
+				$limit
+			);
 
 			// If still not enough matched then search for prefix matches
 			$missing = $limit - count( $allSearchResults );
+
 			if ( $missing > 0 ) {
+				// needs to be the full limit as exact matches are also contained in the prefix search
 				$prefixSearchResults = $this->searchEntities(
 					$text,
 					$languageCode,
 					$entityType,
-					$limit, // needs to be the full limit as exact matches are also contained in the prefix search
-					true,
-					$strictLanguage
+					$this->getSearchOptions( $limit, true, $strictLanguage )
 				);
-				$allSearchResults = $this->mergeSearchResults( $allSearchResults, $prefixSearchResults, $limit );
+
+				$allSearchResults = $this->mergeSearchResults(
+					$allSearchResults,
+					$prefixSearchResults,
+					$limit
+				);
 			}
 		}
 
@@ -176,6 +188,24 @@ class EntitySearchHelper {
 	}
 
 	/**
+	 * @param int $limit
+	 * @param bool $prefixSearch
+	 * @param bool $strictLanguage
+	 *
+	 * @return TermSearchOptions
+	 */
+	private function getSearchOptions( $limit, $prefixSearch, $strictLanguage ) {
+		$searchOptions = new TermSearchOptions();
+
+		$searchOptions->setLimit( $limit );
+		$searchOptions->setIsPrefixSearch( $prefixSearch );
+		$searchOptions->setIsCaseSensitive( false );
+		$searchOptions->setUseLanguageFallback( !$strictLanguage );
+
+		return $searchOptions;
+	}
+
+	/**
 	 * Wrapper around TermSearchInteractor::searchForEntities
 	 *
 	 * @see TermSearchInteractor::searchForEntities
@@ -183,17 +213,18 @@ class EntitySearchHelper {
 	 * @param string $text
 	 * @param string $languageCode
 	 * @param string $entityType
-	 * @param int $limit
-	 * @param bool $prefixSearch
-	 * @param bool $strictLanguage
+	 * @param TermSearchOptions $searchOptions
 	 *
 	 * @return TermSearchResult[]
 	 */
-	private function searchEntities( $text, $languageCode, $entityType, $limit, $prefixSearch, $strictLanguage ) {
-		$this->termIndexSearchInteractor->setLimit( $limit );
-		$this->termIndexSearchInteractor->setIsPrefixSearch( $prefixSearch );
-		$this->termIndexSearchInteractor->setIsCaseSensitive( false );
-		$this->termIndexSearchInteractor->setUseLanguageFallback( !$strictLanguage );
+	private function searchEntities(
+		$text,
+		$languageCode,
+		$entityType,
+		TermSearchOptions $searchOptions
+	) {
+		$this->termIndexSearchInteractor->setTermSearchOptions( $searchOptions );
+
 		return $this->termIndexSearchInteractor->searchForEntities(
 			$text,
 			$languageCode,

@@ -8,6 +8,7 @@ use WebRequest;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
@@ -212,17 +213,28 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 	 */
 	private function getSearchResults( $label, $languageCode ) {
 		$searchInteractor = $this->getSearchInteractor( $this->getLanguage()->getCode() );
-		$searchInteractor->setLimit( $this->limit );
-		$searchInteractor->setIsCaseSensitive( false );
-		$searchInteractor->setIsPrefixSearch( false );
-		$searchInteractor->setUseLanguageFallback( true );
 
 		return $searchInteractor->searchForEntities(
 			$label,
 			$languageCode,
 			'item',
-			array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS )
+			array( TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_ALIAS ),
+			$this->getSearchOptions()
 		);
+	}
+
+	/**
+	 * @return TermSearchOptions
+	 */
+	private function getSearchOptions() {
+		$searchOptions = new TermSearchOptions();
+
+		$searchOptions->setLimit( $this->limit );
+		$searchOptions->setIsCaseSensitive( false );
+		$searchOptions->setIsPrefixSearch( false );
+		$searchOptions->setUseLanguageFallback( true );
+
+		return $searchOptions;
 	}
 
 	/**
