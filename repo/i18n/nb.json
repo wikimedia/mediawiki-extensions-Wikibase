@@ -268,7 +268,7 @@
 	"wikibase-self-conflict-patched": "Redigeringen ble lappet inn i den nyeste versjonen, og overstyrte noen av dine egne mellomliggende endringer.",
 	"wikibase-conflict-patched": "Redigeringen ble lappet inn i den nyeste versjonen.",
 	"wikibase-restoreold": "tilbakestill",
-	"wikibase-entity-summary-restore": "Legg tilbake versjonen $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Gjenoppretter revisjon $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-no-direct-editing": "Direkteredigering er avslått i navnerommet $1",
 	"wikibase-noentity": "Denne entiteten finnes ikke.\nDu kan [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]\nfor å finne ut hva som har skjedd.",
 	"wikibase-noentity-createone": "Du kan også [[$1|opprette en ny en]].",
