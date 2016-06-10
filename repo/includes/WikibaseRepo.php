@@ -71,6 +71,7 @@ use Wikibase\Lib\EntityIdValueFormatter;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\TermIndexTermSearchResultsBuilder;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\MediaWikiNumberLocalizer;
@@ -85,6 +86,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\UnionContentLanguages;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
@@ -655,11 +657,26 @@ class WikibaseRepo {
 	 * @return TermIndexSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
-		return new TermIndexSearchInteractor(
-			$this->getStore()->getTermIndex(),
-			$this->getLanguageFallbackChainFactory(),
-			$this->getBufferingTermLookup(),
+		$termIndex = $this->getStore()->getTermIndex();
+		$languageFallbackChainFactory = $this->getLanguageFallbackChainFactory();
+		$bufferingTermLookup = $this->getBufferingTermLookup();
+
+		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
+			$bufferingTermLookup,
+			$languageFallbackChainFactory->newFromLanguageCode( $displayLanguageCode )
+		);
+
+		$termSearchResultsBuilder = new TermIndexTermSearchResultsBuilder(
+			$languageFallbackChainFactory,
+			$bufferingTermLookup,
+			$labelDescriptionLookup,
 			$displayLanguageCode
+		);
+
+		return new TermIndexSearchInteractor(
+			$termIndex,
+			$languageFallbackChainFactory,
+			$termSearchResultsBuilder
 		);
 	}
 
