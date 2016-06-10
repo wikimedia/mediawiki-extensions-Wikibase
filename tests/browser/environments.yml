@@ -45,7 +45,7 @@ test:
 integration:
   item_namespace: 'Item:'
   language_code: en
-  browser: firefox
+  browser: chrome
   user_factory: true
   # mediawiki_url: JENKINS WILL SET THIS
 
