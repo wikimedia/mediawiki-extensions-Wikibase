@@ -306,7 +306,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 
 		$unused = $usageTable->getUnusedEntities( array( $q4, $q6 ) );
 		$this->assertCount( 1, $unused );
-		$this->assertEquals( $q6, reset( $unused ), 'Q6 shouold be unused' );
+		$this->assertEquals( $q6, reset( $unused ), 'Q6 should be unused' );
 	}
 
 	/**
