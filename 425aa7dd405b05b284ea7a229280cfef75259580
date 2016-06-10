@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_a5d2062a",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-10T15:02:41Z",
+      "side": 1,
+      "message": "Please add a comment that explains why we do a complex UNION here instead of the straight forward DISTINCT query. Someone might otherwise spend time \"optimizing\" this...",
+      "revId": "425aa7dd405b05b284ea7a229280cfef75259580",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_c5c90a7d",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-10T15:02:41Z",
+      "side": 1,
+      "message": "in every subquery? if we have many subqueries, that\u0027s kilobytes of redundant text... I\u0027d set it to \u0027\u0027 or to \u0027-/-\u0027 or something.",
+      "revId": "425aa7dd405b05b284ea7a229280cfef75259580",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
