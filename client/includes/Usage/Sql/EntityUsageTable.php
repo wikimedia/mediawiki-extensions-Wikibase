@@ -356,15 +356,28 @@ class EntityUsageTable {
 	 * @return string[]
 	 */
 	private function getUsedEntityIdStrings( array $idStrings ) {
-		$where = array( 'eu_entity_id' => $idStrings );
+		$subQueries = [];
 
-		return $this->connection->selectFieldValues(
-			$this->tableName,
-			'eu_entity_id',
-			$where,
-			__METHOD__,
-			array( 'DISTINCT' )
-		);
+		foreach ( $idStrings as $idString ) {
+			$subQueries[] = $this->connection->selectSQLText(
+				$this->tableName,
+				'eu_entity_id',
+				[ 'eu_entity_id' => $idString ],
+				__METHOD__,
+				array( 'LIMIT' => 1 )
+			);
+		}
+
+		$sql = $this->connection->unionQueries( $subQueries, false );
+
+		$res = $this->connection->query( $sql );
+
+		$values = [];
+		foreach ( $res as $row ) {
+			$values[] = $row->eu_entity_id;
+		}
+
+		return $values;
 	}
 
 	/**
