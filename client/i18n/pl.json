@@ -19,6 +19,7 @@
 	"tooltip-t-wikibase": "Link do powiązanego elementu w repozytorium danych",
 	"wikibase-after-page-move": "Należy także zaktualizować [$1 powiązany element Wikidanych] w celu zachowania linków do innych wersji językowych na przeniesionej stronie.",
 	"wikibase-after-page-move-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie automatycznie zaktualizowany. Może nie stać się to jednak natychmiast.",
+	"wikibase-after-page-delete": "Należy również usunąć link do tej strony z [$1 odpowiedniego elementu Wikidanych] w celu aktualizacji linków językowych.",
 	"wikibase-after-page-delete-queued": "Powiązany z tą stroną [$1 element Wikidanych] zostanie automatycznie zaktualizowany. Może nie stać się to jednak natychmiast.",
 	"wikibase-comment-add": "Utworzono element Wikidanych.",
 	"wikibase-comment-remove": "Powiązany element Wikidanych skasowany. Linki do innych wersji językowych usunięte.",

@@ -10,7 +10,6 @@
 	"wikibase-description-empty": "کوئی گل نہیں دسی گئی",
 	"wikibase-statementsection-statements": "واتاں",
 	"wikibase-sitelinks-special": "ہور سائیٹاں",
-	"wikibase-aliases-empty": "مشہور ناں نہیں دسیا گیا",
 	"wikibase-statementview-rank-normal": "نارمل رینک",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|اتہ پتہ|اتے پتے}}"
 }
