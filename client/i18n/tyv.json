@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Agilight",
-			"Монгуш Салим"
+			"Монгуш Салим",
+			"Көпек"
 		]
 	},
 	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элементини өскертип каан",
 	"wikibase-dataitem": "элемент",
-	"wikibase-editlinks": "Шөлүлгелерни эдер",
+	"wikibase-editlinks": "Айтыгны эдери",
 	"wikibase-editlinkstitle": "Дылдар аразының шөлүлгелерин эдер"
 }
