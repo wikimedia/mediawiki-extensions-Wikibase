@@ -51,64 +51,20 @@ abstract class ModifyEntity extends ApiBase {
 	 * @var SiteLinkTargetProvider
 	 */
 	protected $siteLinkTargetProvider;
-
-	/**
-	 * @var SiteLinkLookup
-	 */
-	private $siteLinkLookup;
-
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
-
 	/**
 	 * @var EntityStore
 	 */
 	protected $entityStore;
-
 	/**
 	 * @since 0.5
 	 *
 	 * @var string[]
 	 */
 	protected $siteLinkGroups;
-
 	/**
 	 * @var string[]
 	 */
 	protected $badgeItems;
-
-	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
-
-	/**
-	 * @var EntityPermissionChecker
-	 */
-	private $permissionChecker;
-
-	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $revisionLookup;
-
-	/**
-	 * @var ResultBuilder
-	 */
-	private $resultBuilder;
-
-	/**
-	 * @var EntitySavingHelper
-	 */
-	private $entitySavingHelper;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
 	 *
@@ -118,6 +74,38 @@ abstract class ModifyEntity extends ApiBase {
 	 * @var int
 	 */
 	protected $flags;
+	/**
+	 * @var SiteLinkLookup
+	 */
+	protected $siteLinkLookup;
+	/**
+	 * @var EntityTitleLookup
+	 */
+	protected $titleLookup;
+	/**
+	 * @var ApiErrorReporter
+	 */
+	protected $errorReporter;
+	/**
+	 * @var EntityPermissionChecker
+	 */
+	protected $permissionChecker;
+	/**
+	 * @var EntityRevisionLookup
+	 */
+	protected $revisionLookup;
+	/**
+	 * @var ResultBuilder
+	 */
+	protected $resultBuilder;
+	/**
+	 * @var EntitySavingHelper
+	 */
+	protected $entitySavingHelper;
+	/**
+	 * @var EntityIdParser
+	 */
+	protected $idParser;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -133,29 +121,87 @@ abstract class ModifyEntity extends ApiBase {
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$settings = $wikibaseRepo->getSettings();
 
-		//TODO: provide a mechanism to override the services
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
-		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
+		$this->setEntityModificationSettings(
+			$settings->getSetting( 'siteLinkGroups' ),
+			$settings->getSetting( 'badgeItems' )
+		);
 
-		$this->setServices( new SiteLinkTargetProvider(
-			$wikibaseRepo->getSiteStore(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
-		) );
-
-		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
-		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
-		$this->entityStore = $wikibaseRepo->getEntityStore();
-		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
-		$this->siteLinkLookup = $wikibaseRepo->getStore()->newSiteLinkStore();
-		$this->badgeItems = $settings->getSetting( 'badgeItems' );
+		$this->setEntityModificationServices(
+			$wikibaseRepo->getStringNormalizer(),
+			new SiteLinkTargetProvider(
+				$wikibaseRepo->getSiteStore(),
+				$settings->getSetting( 'specialSiteLinkGroups' )
+			),
+			$wikibaseRepo->getStore()->newSiteLinkStore(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getEntityStore(),
+			$apiHelperFactory->getErrorReporter( $this ),
+			$wikibaseRepo->getEntityPermissionChecker(),
+			$wikibaseRepo->getEntityRevisionLookup( 'uncached' ),
+			$apiHelperFactory->getResultBuilder( $this ),
+			$apiHelperFactory->getEntitySavingHelper( $this ),
+			$wikibaseRepo->getEntityIdParser()
+		);
 	}
 
-	public function setServices( SiteLinkTargetProvider $siteLinkTargetProvider ) {
+	public function setSiteLinktTargetProvider( SiteLinkTargetProvider $siteLinkTargetProvider ) {
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+	}
+
+	/**
+	 * Specify settings used by ModifyEntity.
+	 *
+	 * @param string[] $siteLinkGroups
+	 * @param string[] $badgeItems
+	 */
+	public function setEntityModificationSettings(
+		array $siteLinkGroups,
+		array $badgeItems
+	) {
+		$this->siteLinkGroups = $siteLinkGroups;
+		$this->badgeItems = $badgeItems;
+	}
+
+	/**
+	 * Inject services used by ModifyEntity.
+	 *
+	 * @param StringNormalizer $stringNormalizer
+	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
+	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityStore $entityStore
+	 * @param ApiErrorReporter $errorReporter
+	 * @param EntityPermissionChecker $permissionChecker
+	 * @param EntityRevisionLookup $revisionLookup
+	 * @param ResultBuilder $resultBuilder
+	 * @param EntitySavingHelper $entitySavingHelper
+	 * @param EntityIdParser $idParser
+	 */
+	public function setEntityModificationServices(
+		StringNormalizer $stringNormalizer,
+		SiteLinkTargetProvider $siteLinkTargetProvider,
+		SiteLinkLookup $siteLinkLookup,
+		EntityTitleLookup $titleLookup,
+		EntityStore $entityStore,
+		ApiErrorReporter $errorReporter,
+		EntityPermissionChecker $permissionChecker,
+		EntityRevisionLookup $revisionLookup,
+		ResultBuilder $resultBuilder,
+		EntitySavingHelper $entitySavingHelper,
+		EntityIdParser $idParser
+	) {
+		$this->stringNormalizer = $stringNormalizer;
+		$this->siteLinkLookup = $siteLinkLookup;
+		$this->titleLookup = $titleLookup;
+		$this->entityStore = $entityStore;
+		$this->errorReporter = $errorReporter;
+		$this->permissionChecker = $permissionChecker;
+		$this->revisionLookup = $revisionLookup;
+		$this->resultBuilder = $resultBuilder;
+		$this->entitySavingHelper = $entitySavingHelper;
+		$this->idParser = $idParser;
+
+		$this->setSiteLinktTargetProvider( $siteLinkTargetProvider );
 	}
 
 	/**
@@ -216,7 +262,7 @@ abstract class ModifyEntity extends ApiBase {
 
 			if ( $entityRevision === null ) {
 				$this->errorReporter->dieError( "Can't access entity " . $entityId
-					. ', revision may have been deleted.', 'no-such-entity' );
+				                                . ', revision may have been deleted.', 'no-such-entity' );
 			}
 		}
 
@@ -273,7 +319,7 @@ abstract class ModifyEntity extends ApiBase {
 
 		if ( $itemId === null ) {
 			$this->errorReporter->dieError( 'No entity found matching site link ' . $site . ':' . $title,
-				'no-such-entity-link' );
+			                                'no-such-entity-link' );
 		}
 
 		return $itemId;
@@ -294,13 +340,13 @@ abstract class ModifyEntity extends ApiBase {
 				$badgeId = new ItemId( $badgeSerialization );
 			} catch ( InvalidArgumentException $ex ) {
 				$this->errorReporter->dieError( 'Badges: could not parse "' . $badgeSerialization
-					. '", the id is invalid', 'invalid-entity-id' );
+				                                . '", the id is invalid', 'invalid-entity-id' );
 				continue;
 			}
 
 			if ( !array_key_exists( $badgeId->getSerialization(), $this->badgeItems ) ) {
 				$this->errorReporter->dieError( 'Badges: item "' . $badgeSerialization . '" is not a badge',
-					'not-badge' );
+				                                'not-badge' );
 			}
 
 			$itemTitle = $this->getTitleLookup()->getTitleForId( $badgeId );

@@ -172,7 +172,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
 		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( TestSites::getSites() ), array() );
-		$module->setServices( $siteTargetProvider );
+		$module->setSiteLinktTargetProvider( $siteTargetProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 		//If a URL has been added just remove it as it is not always present
@@ -189,7 +189,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
-		$module->setServices( $siteTargetProvider );
+		$module->setSiteLinktTargetProvider( $siteTargetProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
 
