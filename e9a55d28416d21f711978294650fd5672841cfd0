@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_37b925e7",
+        "filename": "client/tests/phpunit/includes/Usage/Sql/EntityUsageTableTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-13T15:06:16Z",
+      "side": 1,
+      "message": "I\u0027d prefer to disable the UNIONIZING thing in the actual class if the table is temporary... can we check for that? Or disable it if we are in a unit tests. That\u0027s nearly as icky as the hack here, though (or is it more icky?)",
+      "revId": "e9a55d28416d21f711978294650fd5672841cfd0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
