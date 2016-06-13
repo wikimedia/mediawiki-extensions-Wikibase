@@ -32,11 +32,6 @@ class SetAliases extends ModifyEntity {
 	private $termChangeOpFactory;
 
 	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
-
-	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param string $modulePrefix
@@ -45,10 +40,8 @@ class SetAliases extends ModifyEntity {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 	}
 

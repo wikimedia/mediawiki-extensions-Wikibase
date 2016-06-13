@@ -2,8 +2,14 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiBase;
+use ApiMain;
+use ApiQueryInfo;
 use ApiTestCase;
+use AuthPlugin;
+use FauxRequest;
 use OutOfBoundsException;
+use RequestContext;
 use Revision;
 use TestSites;
 use TestUser;
@@ -21,17 +27,196 @@ use WikiPage;
  * @author Daniel Kinzler
  * @author Addshore
  */
-abstract class WikibaseApiTestCase extends ApiTestCase {
+abstract class WikibaseApiTestCase extends \MediaWikiTestCase {
 
 	/**
 	 * @var TestUser|null
 	 */
 	private static $wbTestUser = null;
 
+	/**
+	 * @param ApiMain $main
+	 * @param string[] $params
+	 *
+	 * @return ApiBase
+	 */
+	protected function newApiModule( ApiMain $main, $action ) {
+		$module = $main->getModuleManager()->getModule( $action, 'action' );
+		return $module;
+	}
+
+	/**
+	 * Does the API request and returns the result.
+	 *
+	 * The returned value is an array containing
+	 * - the result data (array)
+	 * - the request (WebRequest)
+	 * - the session data of the request (array)
+	 * - if $appendModule is true, the Api module $module
+	 *
+	 * @param array $params
+	 * @param array|null $session
+	 * @param bool $appendModule
+	 * @param User|null $user
+	 *
+	 * @return array
+	 */
+	protected function doApiRequest(
+		array $params,
+		array $session = null,
+		$appendModule = false,
+		User $user = null
+	) {
+		$params += [ 'token' => '\\' ];
+		$request = new FauxRequest( $params, true, $session );
+
+		if ( !$user ) {
+			$user = self::$wbTestUser->getUser();
+		}
+
+		$context = new RequestContext( $request );
+		$context->setUser( $user );
+
+		$main = new ApiMain( $request );
+		$main->setContext( $context );
+
+		$action = $params['action'];
+		$module = $this->newApiModule( $main, $action );
+
+		$module->execute();
+		$result = $module->getResult();
+
+		$data = $result->getResultData( null, array(
+			'BC' => array( 'nobool' ),
+			'Types' => array(),
+			'Strip' => 'all',
+		) );
+
+		$results = [
+			$data,
+			$context->getRequest(),
+			$context->getRequest()->getSessionArray()
+		];
+
+		if ( $appendModule ) {
+			$results[] = $module;
+		}
+
+		return $results;
+	}
+
+	/**
+	 * Does the API request and returns the result.
+	 *
+	 * The returned value is an array containing
+	 * - the result data (array)
+	 * - the request (WebRequest)
+	 * - the session data of the request (array)
+	 * - if $appendModule is true, the Api module $module
+	 *
+	 * @param array $params
+	 * @param array|null $session
+	 * @param bool $appendModule
+	 * @param User|null $user
+	 *
+	 * @return array
+	 */
+	protected function doApiRequest_OLD( array $params, array $session = null,
+		$appendModule = false, User $user = null
+	) {
+		global $wgRequest, $wgUser;
+
+		if ( is_null( $session ) ) {
+			// re-use existing global session by default
+			$session = $wgRequest->getSessionArray();
+		}
+
+		// set up global environment
+		if ( $user ) {
+			$wgUser = $user;
+		}
+
+		$wgRequest = new FauxRequest( $params, true, $session );
+		RequestContext::getMain()->setRequest( $wgRequest );
+		RequestContext::getMain()->setUser( $wgUser );
+		\MediaWiki\Auth\AuthManager::resetCache();
+
+		// set up local environment
+		$context = $this->apiContext->newTestContext( $wgRequest, $wgUser );
+
+		$module = new ApiMain( $context, true );
+
+		// run it!
+		$module->execute();
+
+		// construct result
+		$results = [
+			$module->getResult()->getResultData( null, [ 'Strip' => 'all' ] ),
+			$context->getRequest(),
+			$context->getRequest()->getSessionArray()
+		];
+
+		if ( $appendModule ) {
+			$results[] = $module;
+		}
+
+		return $results;
+	}
+
+	protected function doLogin( $testUser = 'sysop' ) { // FIXME: Move It!
+		if ( $testUser === null ) {
+			$testUser = static::getTestSysop();
+		} elseif ( is_string( $testUser ) && array_key_exists( $testUser, self::$users ) ) {
+			$testUser = self::$users[ $testUser ];
+		} elseif ( !$testUser instanceof TestUser ) {
+			throw new MWException( "Can not log in to undefined user $testUser" );
+		}
+
+		$data = $this->doApiRequest( [
+			'action' => 'login',
+			'lgname' => $testUser->username,
+			'lgpassword' => $testUser->password ] );
+
+		$token = $data[0]['login']['token'];
+
+		$data = $this->doApiRequest(
+			[
+				'action' => 'login',
+				'lgtoken' => $token,
+				'lgname' => $testUser->username,
+				'lgpassword' => $testUser->password,
+			],
+			$data[2]
+		);
+
+		if ( $data[0]['login']['result'] === 'Success' ) {
+			// DWIM
+			global $wgUser;
+			$wgUser = $testUser->getUser();
+			RequestContext::getMain()->setUser( $wgUser );
+		}
+
+		return $data;
+	}
+
 	protected function setUp() {
+		global $wgDisableAuthManager;
+		static $isSetup = false;
+
 		parent::setUp();
 
-		static $isSetup = false;
+		ApiQueryInfo::resetTokenCache(); // tokens are invalid because we cleared the session
+
+		self::$users = [
+			'sysop' => static::getTestSysop(),
+			'uploader' => static::getTestUser(),
+		];
+
+		$this->setMwGlobals( [
+			'wgAuth' => $wgDisableAuthManager ? new AuthPlugin : new \MediaWiki\Auth\AuthManagerAuthPlugin,
+			'wgRequest' => new FauxRequest( [] ),
+			'wgUser' => self::$users['sysop']->user,
+		] );
 
 		$this->setupUser();
 
@@ -44,6 +229,13 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 			$isSetup = true;
 		}
+	}
+
+	protected function tearDown() {
+		// Avoid leaking session over tests
+		\MediaWiki\Session\SessionManager::getGlobalSession()->clear();
+
+		parent::tearDown();
 	}
 
 	private function setupUser() {
