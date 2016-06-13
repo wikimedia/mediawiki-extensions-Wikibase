@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_1728612e",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-13T15:01:09Z",
+      "side": 1,
+      "message": "I still think it would be good to explain here *why* we do it this way.",
+      "revId": "1ee94b36455ebe7def46505422acf381d48b0ea6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
