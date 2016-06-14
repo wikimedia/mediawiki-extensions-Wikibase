@@ -1376,19 +1376,19 @@ class WikibaseRepo {
 	 */
 	public function getDataValueDeserializer() {
 		return new DataValueDeserializer( array(
-			'boolean' => BooleanValue::class,
-			'number' => NumberValue::class,
 			'string' => StringValue::class,
 			'unknown' => UnknownValue::class,
 			'globecoordinate' => GlobeCoordinateValue::class,
 			'monolingualtext' => MonolingualTextValue::class,
-			'multilingualtext' => MultilingualTextValue::class,
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,
 			'wikibase-entityid' => function( $value ) {
-				return isset( $value['id'] )
-					? $this->getEntityIdParser()->parse( $value['id'] )
-					: EntityIdValue::newFromArray( $value );
+				if ( isset( $value['id'] ) ) {
+					$id = $this->getEntityIdParser()->parse( $value['id'] );
+					return new EntityIdValue( $id );
+				} else {
+					return EntityIdValue::newFromArray( $value );
+				}
 			},
 		) );
 	}
