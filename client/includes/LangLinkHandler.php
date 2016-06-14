@@ -399,7 +399,7 @@ class LangLinkHandler {
 
 	/**
 	 * Extracts the local interwiki code, which in case of the
-	 * wikimedia site groups, is always set to the language code.
+	 * wikimedia site groups, is always the global id's prefix.
 	 *
 	 * @fixme put somewhere more sane and use site identifiers data,
 	 * so that this works in non-wikimedia cases where the assumption
@@ -410,7 +410,11 @@ class LangLinkHandler {
 	 * @return string
 	 */
 	public function getInterwikiCodeFromSite( Site $site ) {
-		return $site->getLanguageCode();
+		// FIXME: We should use $site->getInterwikiIds, but the interwiki ids in
+		// the sites table are wrong currently, see T137537.
+		$id = $site->getGlobalId();
+		$wikiPos = strpos( $id, 'wiki' );
+		return strtr( substr( $id, 0, $wikiPos ), [ '_' => '-' ] );
 	}
 
 }
