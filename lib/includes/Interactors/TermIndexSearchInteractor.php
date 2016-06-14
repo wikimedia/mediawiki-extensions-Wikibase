@@ -183,7 +183,8 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 		$entityType,
 		array $termTypes
 	) {
-		$languageCodes = array( $languageCode );
+		$languageCodes = [ $languageCode ];
+
 		$matchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
 			$this->makeTermIndexEntryTemplates(
 				$text,
@@ -199,44 +200,78 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 			return $matchedTermIndexEntries;
 		}
 
-		$matchedEntityIdSerializations = array();
-		foreach ( $matchedTermIndexEntries as $termIndexEntry ) {
-			$matchedEntityIdSerializations[] = $termIndexEntry->getEntityId()->getSerialization();
-		}
-
 		if ( $this->useLanguageFallback ) {
-			$fallbackMatchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
-				$this->makeTermIndexEntryTemplates(
-					$text,
-					$this->addFallbackLanguageCodes( $languageCodes ),
-					$termTypes
-				),
-				null,
-				$entityType,
-				$this->getTermIndexOptions()
-			);
-
-			// Remove any IndexEntries that are already have an match for
-			foreach ( $fallbackMatchedTermIndexEntries as $key => $termIndexEntry ) {
-				if ( in_array(
-					$termIndexEntry->getEntityId()->getSerialization(),
-					$matchedEntityIdSerializations
-				) ) {
-					unset( $fallbackMatchedTermIndexEntries[$key] );
-				}
-			}
-
 			// Matches in the main language will always be first
 			$matchedTermIndexEntries = array_merge(
 				$matchedTermIndexEntries,
-				$fallbackMatchedTermIndexEntries
+				$this->getFallbackMatchedTermIndexEntries(
+					$text,
+					$languageCodes,
+					$termTypes,
+					$entityType,
+					$this->getMatchedEntityIdSerializations( $matchedTermIndexEntries )
+				)
 			);
+
 			if ( count( $matchedTermIndexEntries ) > $this->limit ) {
 				array_slice( $matchedTermIndexEntries, 0, $this->limit, true );
 			}
 		}
 
 		return $matchedTermIndexEntries;
+	}
+
+	/**
+	 * @param TermIndexEntry[]
+	 *
+	 * @return string[]
+	 */
+	private function getMatchedEntityIdSerializations( array $matchedTermIndexEntries ) {
+		$matchedEntityIdSerializations = [];
+
+		foreach ( $matchedTermIndexEntries as $termIndexEntry ) {
+			$matchedEntityIdSerializations[] = $termIndexEntry->getEntityId()->getSerialization();
+		}
+
+		return $matchedEntityIdSerializations;
+	}
+
+	/**
+	 * @param string $text
+	 * @param string[] $languageCodes
+	 * @param string[] $termTypes
+	 * @param string $entityType
+	 * @param string[] $matchedEntityIdSerializations
+	 */
+	private function getFallbackMatchedTermIndexEntries(
+		$text,
+		array $languageCodes,
+		$termTypes,
+		$entityType,
+		array $matchedEntityIdSerializations
+	) {
+		$fallbackMatchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
+			$this->makeTermIndexEntryTemplates(
+				$text,
+				$this->addFallbackLanguageCodes( $languageCodes ),
+				$termTypes
+			),
+			null,
+			$entityType,
+			$this->getTermIndexOptions()
+		);
+
+		// Remove any IndexEntries that are already have an match for
+		foreach ( $fallbackMatchedTermIndexEntries as $key => $termIndexEntry ) {
+			if ( in_array(
+				$termIndexEntry->getEntityId()->getSerialization(),
+				$matchedEntityIdSerializations
+			) ) {
+				unset( $fallbackMatchedTermIndexEntries[$key] );
+			}
+		}
+
+		return $fallbackMatchedTermIndexEntries;
 	}
 
 	/**
