@@ -410,7 +410,8 @@ class LangLinkHandler {
 	 * @return string
 	 */
 	public function getInterwikiCodeFromSite( Site $site ) {
-		return $site->getLanguageCode();
+		$id = $site->getGlobalId();
+		return substr( $id, -4, 4 ) === 'wiki' ? substr( $id, 0, -4 ) : $id;
 	}
 
 }
