@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_7e654141",
+        "filename": "lib/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-14T14:40:43Z",
+      "side": 1,
+      "message": "array type hint?",
+      "revId": "ad016776adf4e768a823bf925245c69364ff516d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_be8849ed",
+        "filename": "lib/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-14T14:40:43Z",
+      "side": 1,
+      "message": "s/are/we/",
+      "revId": "ad016776adf4e768a823bf925245c69364ff516d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
