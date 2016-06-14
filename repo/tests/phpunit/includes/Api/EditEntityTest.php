@@ -547,7 +547,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => 'param-missing'
 				) ) ),
 			'when clearing must also have data!' => array(
-				'p' => array( 'site' => 'enwiki', 'new' => 'Berlin', 'clear' => '' ),
+				'p' => array( 'site' => 'enwiki', 'title' => 'Berlin', 'clear' => '' ),
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'nodata'
