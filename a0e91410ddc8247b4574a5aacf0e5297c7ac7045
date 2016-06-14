@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_feac9134",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-14T15:02:24Z",
+      "side": 1,
+      "message": "I find ViewEntityAction an odd place for a hook handler… the handler has almost no relation anything in that class (also it has no coupling with the rest of the class)… why not make it an own class?",
+      "revId": "a0e91410ddc8247b4574a5aacf0e5297c7ac7045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_9e9f4506",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-14T15:02:24Z",
+      "side": 1,
+      "message": "Should not be fully qualified",
+      "revId": "a0e91410ddc8247b4574a5aacf0e5297c7ac7045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_7eb9c177",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-14T15:02:24Z",
+      "side": 1,
+      "message": "Why not just -\u003esetContext instead of doing this \"per hand\"?",
+      "revId": "a0e91410ddc8247b4574a5aacf0e5297c7ac7045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
