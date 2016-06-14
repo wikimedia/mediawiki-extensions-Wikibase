@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_def9cd4c",
+        "filename": "lib/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-14T14:54:33Z",
+      "side": 1,
+      "message": "Should be injected… but I guess you plan to do that in a follow-up.",
+      "revId": "b92b7ee09f1ab48eed4932065778bf85590fa4cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_9ee8e578",
+        "filename": "lib/includes/Interactors/TermSearchOptions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-14T14:54:33Z",
+      "side": 1,
+      "message": "The comment is a little unclear IMO.",
+      "revId": "b92b7ee09f1ab48eed4932065778bf85590fa4cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
