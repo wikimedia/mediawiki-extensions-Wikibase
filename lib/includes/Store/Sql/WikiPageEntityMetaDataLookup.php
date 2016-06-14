@@ -220,13 +220,33 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 		$where = [];
 
 		foreach ( $entityIds as $entityId ) {
+			$namespace = $this->entityNamespaceLookup->getEntityNamespace(
+				$entityId->getEntityType()
+			);
+
+			if ( $namespace === false ) {
+				// If we don't know a namespace, there is no chance we'll find a page.
+				wfWarn(
+					__METHOD__ . ': no namespace defined for entity type '
+						. $entityId->getEntityType(),
+					4
+				);
+
+				continue;
+			}
+
 			$where[] = $db->makeList(
 				[
 					$db->addQuotes( $entityId->getSerialization() ) . '=page_title',
-					$this->entityNamespaceLookup->getEntityNamespace( $entityId->getEntityType() ) . '=page_namespace'
+					$namespace . '=page_namespace'
 				],
 				LIST_AND
 			);
+		}
+
+		if ( empty( $where ) ) {
+			// If we skipped all entity IDs, select nothing, not everything.
+			return '0';
 		}
 
 		return $db->makeList( $where, LIST_OR );
