@@ -6,7 +6,6 @@ use ApiMain;
 use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
 use InvalidArgumentException;
-use LogicException;
 use MWException;
 use SiteList;
 use Title;
@@ -26,7 +25,6 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -78,24 +76,9 @@ class EditEntity extends ModifyEntity {
 	private $revisionLookup;
 
 	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
-	/**
 	 * @var Deserializer
 	 */
 	private $statementDeserializer;
-
-	/**
-	 * @var EntityFactory
-	 */
-	private $entityFactory;
-
-	/**
-	 * @var string[]
-	 */
-	private $enabledEntityTypes;
 
 	/**
 	 * @see ModifyEntity::__construct
@@ -116,8 +99,6 @@ class EditEntity extends ModifyEntity {
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
-		$this->entityFactory = $wikibaseRepo->getEntityFactory();
-		$this->enabledEntityTypes = $wikibaseRepo->getEnabledEntityTypes();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
@@ -173,51 +154,6 @@ class EditEntity extends ModifyEntity {
 	private function entityExists( EntityId $entityId ) {
 		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
 		return ( $title !== null && $title->exists() );
-	}
-
-	/**
-	 * Create an empty entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string|null $entityType The type of entity to be created (ignored if $id is given)
-	 * @param EntityId|null $id The ID of the entity to be created (optional if $entityType is
-	 *        given)
-	 *
-	 * @throws UsageException
-	 * @throws LogicException
-	 * @return EntityDocument Newly created entity
-	 */
-	protected function createEntity( $entityType, EntityId $id = null ) {
-		// TODO: pull this up into ModifyEntity.
-
-		if ( $id ) {
-			$entityType = $id->getEntityType();
-		} elseif ( !$entityType ) {
-			$this->errorReporter->dieError( "No entity type provided for creation!", 'no-entity-type' );
-			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
-		}
-
-		try {
-			$entity = $this->entityFactory->newEmpty( $entityType );
-		} catch ( InvalidArgumentException $ex ) {
-			$this->errorReporter->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
-			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
-		}
-
-		if ( $id !== null ) {
-			if ( !$this->entityStore->canCreateWithCustomId( $id ) ) {
-				$this->errorReporter->dieError( "Cannot create entity with ID: '$id'", 'bad-entity-id' );
-				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
-			}
-
-			$entity->setId( $id );
-		} else {
-			// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
-			$this->entityStore->assignFreshId( $entity );
-		}
-
-		return $entity;
 	}
 
 	/**
@@ -842,9 +778,6 @@ class EditEntity extends ModifyEntity {
 				'clear' => array(
 					self::PARAM_TYPE => 'boolean',
 					self::PARAM_DFLT => false
-				),
-				'new' => array(
-					self::PARAM_TYPE => $this->enabledEntityTypes,
 				),
 			)
 		);
