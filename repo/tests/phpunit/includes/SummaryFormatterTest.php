@@ -16,6 +16,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\RepoHooks;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -446,13 +447,15 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	 *
 	 * @dataProvider providerOnFormat
 	 */
-	public function testOnFormat( $model, $root, $pre, $auto, $post, $title, $local, $expected ) {
+	public function testOnFormat( $type, $root, $pre, $auto, $post, $title, $local, $expected ) {
 		$itemTitle = $this->getMock( $title );
-		$itemTitle->expects( $this->once() )->method( 'getContentModel' )->will( $this->returnValue( $model ) );
+		$itemTitle->expects( $this->once() )->method( 'getNamespace' )->will( $this->returnValue(
+			WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup()->getEntityNamespace( $type )
+		) );
 
 		$comment = null;
 
-		RepoHooks::onFormat( array( $model, $root ), $comment, $pre, $auto, $post, $itemTitle, $local );
+		RepoHooks::onFormat( $comment, $pre, $auto, $post, $itemTitle, $local );
 
 		if ( is_null( $expected ) ) {
 			$this->assertEquals( $expected, $comment, "Didn't find the expected null" );
@@ -464,7 +467,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 	public function providerOnFormat() {
 		return array( //@todo: test other types of entities too!
 			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
+				'item',
 				"wikibase-item",
 				false, '', false,
 				'Title',
@@ -472,7 +475,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null
 			),
 			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
+				'item',
 				"wikibase-item",
 				false, '', false,
 				'Title',
@@ -480,7 +483,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				null
 			),
 			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
+				'item',
 				"wikibase-item",
 				true, 'wbeditentity', true,
 				'Title',
@@ -488,7 +491,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'!<span dir="auto"><span class="autocomment">.*?: </span></span>!'
 			),
 			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
+				'item',
 				"wikibase-item",
 				true, 'wbsetlabel-set:1|en', true,
 				'Title',
@@ -496,7 +499,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'!<span dir="auto"><span class="autocomment">.*?\[en\].*?: </span></span>!'
 			),
 			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
+				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|<>', false,
 				'Title',
@@ -504,7 +507,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'!<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>!'
 			),
 			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
+				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|&lt;&gt;', false,
 				'Title',
@@ -512,7 +515,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'!<span dir="auto"><span class="autocomment">.*?\[&lt;&gt;\].*?</span></span>!'
 			),
 			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
+				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|&', false,
 				'Title',
@@ -520,7 +523,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 				'!<span dir="auto"><span class="autocomment">.*?\[&amp;\].*?</span></span>!'
 			),
 			array(
-				CONTENT_MODEL_WIKIBASE_ITEM,
+				'item',
 				"wikibase-item",
 				false, 'wbsetlabel-set:1|…', false,
 				'Title',
