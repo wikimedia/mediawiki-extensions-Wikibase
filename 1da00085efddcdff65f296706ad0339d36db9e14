@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_73a61ac0",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-14T11:02:32Z",
+      "side": 1,
+      "message": "Please explain why we don\u0027t use $site-\u003egetInterwikiIds() here. The reason is that we have bad data in the SiteStore...",
+      "revId": "1da00085efddcdff65f296706ad0339d36db9e14",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
