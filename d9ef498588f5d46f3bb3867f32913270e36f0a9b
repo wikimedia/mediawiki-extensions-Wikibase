@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_f3d7aac2",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-06-14T11:58:25Z",
+      "side": 1,
+      "message": "This is wrong, since it returns an EntityId, not an EntityIdValue.",
+      "revId": "d9ef498588f5d46f3bb3867f32913270e36f0a9b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
