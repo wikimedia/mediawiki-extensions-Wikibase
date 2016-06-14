@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_5ebcbd67",
+        "filename": "lib/includes/Interactors/TermIndexSearchInteractor.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-06-14T15:00:16Z",
+      "side": 1,
+      "message": "yeah",
+      "parentUuid": "0efd9372_def9cd4c",
+      "revId": "b92b7ee09f1ab48eed4932065778bf85590fa4cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_9ee8e578",
         "filename": "lib/includes/Interactors/TermSearchOptions.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-06-14T14:54:33Z",
       "side": 1,
       "message": "The comment is a little unclear IMO.",
+      "revId": "b92b7ee09f1ab48eed4932065778bf85590fa4cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_beb32995",
+        "filename": "lib/includes/Interactors/TermSearchOptions.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-06-14T15:00:16Z",
+      "side": 1,
+      "message": "agree and this probably will change",
+      "parentUuid": "0efd9372_9ee8e578",
       "revId": "b92b7ee09f1ab48eed4932065778bf85590fa4cd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
