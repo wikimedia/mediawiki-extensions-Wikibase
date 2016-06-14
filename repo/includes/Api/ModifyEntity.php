@@ -18,6 +18,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\EntityFactory;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -107,7 +108,17 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @var EntityIdParser
 	 */
-	private $idParser;
+	protected $idParser;
+
+	/**
+	 * @var EntityFactory
+	 */
+	protected $entityFactory;
+
+	/**
+	 * @var string[]
+	 */
+	private $enabledEntityTypes;
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
@@ -139,6 +150,8 @@ abstract class ModifyEntity extends ApiBase {
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
+		$this->entityFactory = $wikibaseRepo->getEntityFactory();
+		$this->enabledEntityTypes = $wikibaseRepo->getEnabledEntityTypes();
 
 		$this->setServices( new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteStore(),
@@ -327,7 +340,33 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return EntityDocument Newly created entity
 	 */
 	protected function createEntity( $entityType, EntityId $id = null ) {
-		$this->errorReporter->dieError( 'Could not find an existing entity', 'no-such-entity' );
+		if ( $id ) {
+			$entityType = $id->getEntityType();
+		} elseif ( !$entityType ) {
+			$this->errorReporter->dieError( "No entity type provided for creation!", 'no-entity-type' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		}
+
+		try {
+			$entity = $this->entityFactory->newEmpty( $entityType );
+		} catch ( InvalidArgumentException $ex ) {
+			$this->errorReporter->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		}
+
+		if ( $id !== null ) {
+			if ( !$this->entityStore->canCreateWithCustomId( $id ) ) {
+				$this->errorReporter->dieError( "Cannot create entity with ID: '$id'", 'bad-entity-id' );
+				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+			}
+
+			$entity->setId( $id );
+		} else {
+			// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
+			$this->entityStore->assignFreshId( $entity );
+		}
+
+		return $entity;
 	}
 
 	/**
@@ -393,8 +432,9 @@ abstract class ModifyEntity extends ApiBase {
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
-		// note that this is changed back and could fail
-		if ( !( isset( $params['id'] ) xor ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+		if ( ( isset( $params['id'] ) || isset( $params['new'] ) )
+			=== ( isset( $params['site'] ) && isset( $params['title'] ) )
+		) {
 			$this->errorReporter->dieError(
 				'Either provide the item "id" or pairs of "site" and "title" for a corresponding page',
 				'param-illegal'
@@ -554,6 +594,9 @@ abstract class ModifyEntity extends ApiBase {
 		return array(
 			'id' => array(
 				self::PARAM_TYPE => 'string',
+			),
+			'new' => array(
+				self::PARAM_TYPE => $this->enabledEntityTypes,
 			),
 		);
 	}
