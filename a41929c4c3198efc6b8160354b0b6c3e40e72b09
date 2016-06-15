@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_f49aed62",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-15T10:05:42Z",
+      "side": 1,
+      "message": "This comes up empty for xywiktionary, as well as for wikidatawiki, and for things like wikimania2012wiki.\n\nA slightly more robust alternative:\n\n    return preg_replace( \u0027/(wiki\\w*|wiktionary)$/\u0027, \u0027\u0027, $id );",
+      "revId": "a41929c4c3198efc6b8160354b0b6c3e40e72b09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_b48b45e7",
+        "filename": "client/tests/phpunit/includes/LangLinkHandlerTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-15T10:05:42Z",
+      "side": 1,
+      "message": "After checking against the sites database, it sems we should also test berhavior for xywiktionary.\n\nI also suggest that something unrecognized, like asdklfjhasdkjf, should be returned as it is.",
+      "revId": "a41929c4c3198efc6b8160354b0b6c3e40e72b09",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
