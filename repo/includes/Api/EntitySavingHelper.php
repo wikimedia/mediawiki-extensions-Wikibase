@@ -7,6 +7,7 @@ use LogicException;
 use Status;
 use UsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EditEntity as EditEntityHandler;
 use Wikibase\EditEntityFactory;
 use Wikibase\Summary;
@@ -53,6 +54,48 @@ class EntitySavingHelper {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;
 	}
+
+	/**
+	 * Create an empty entity.
+	 *
+	 * @param string|null $entityType The type of entity to be created (ignored if $id is given)
+	 * @param EntityId|null $id The ID of the entity to be created (optional if $entityType is
+	 *        given)
+	 *
+	 * @throws UsageException
+	 * @throws LogicException
+	 * @return EntityDocument Newly created entity
+	 */
+	public function newEntity( $entityType, EntityId $id = null ) {
+		if ( $id ) {
+			$entityType = $id->getEntityType();
+		} elseif ( !$entityType ) {
+			$this->errorReporter->dieError( "No entity type provided for creation!", 'no-entity-type' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		}
+
+		try {
+			$entity = $this->entityFactory->newEmpty( $entityType );
+		} catch ( InvalidArgumentException $ex ) {
+			$this->errorReporter->dieError( "No such entity type: '$entityType'", 'no-such-entity-type' );
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		}
+
+		if ( $id !== null ) {
+			if ( !$this->entityStore->canCreateWithCustomId( $id ) ) {
+				$this->errorReporter->dieError( "Cannot create entity with ID: '$id'", 'bad-entity-id' );
+				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+			}
+
+			$entity->setId( $id );
+		} else {
+			// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
+			$this->entityStore->assignFreshId( $entity );
+		}
+
+		return $entity;
+	}
+
 
 	/**
 	 * Attempts to save the new entity content, chile first checking for permissions,
