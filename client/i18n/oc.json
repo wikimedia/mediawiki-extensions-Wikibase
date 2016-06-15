@@ -9,6 +9,7 @@
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
 	"wikibase-editlinks": "Modificar los ligams",
 	"wikibase-editlinkstitle": "Modificar los ligams interlenga",
+	"wikibase-linkitem-addlinks": "Apondre de ligams",
 	"wikibase-linkitem-alreadylinked": "La pagina a la quala vos volètz ligar es ja estacada a un [$1 element] del depaus de donadas central que se liga a $2 sus aqueste site. Los elements pòdon pas aver qu’una pagina estacada per site. Causissètz una autra pagina per vos i ligar.",
 	"wikibase-linkitem-confirmitem-text": "La pagina qu'avètz causida es ja associada a un [$1 element dins nòstre depaus de donadas central]. Confirmatz que {{PLURAL:$2|la pagina afichada çaijós es la|las paginas afichadas çaijós son las}} que volètz ligar amb aquesta pagina.",
 	"wikibase-linkitem-success-link": "Las paginas son estadas ligadas corrèctament. Podètz trobar l’element que conten los ligams dins nòstre [$1 entrepaus central de donadas].",
@@ -19,5 +20,6 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modificacion de {{WBREPONAME}}.",
 	"unconnectedpages": "Paginas pas religadas a d'elements",
+	"pageswithbadges": "Paginas amb de badges",
 	"wikibase-otherprojects": "Autres projèctes"
 }
