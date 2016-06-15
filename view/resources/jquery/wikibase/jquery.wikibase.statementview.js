@@ -53,12 +53,6 @@
  *        likely to be used inside the tooltip of the toolbar corresponding to the `statementview`.
  */
 /**
- * @event afterremove
- * Triggered after a `referenceview` has been remove from the `statementview`'s list of
- * `referenceview`s.
- * @param {jQuery.Event} event
- */
-/**
  * @event change
  * Triggered whenever the view's content is changed.
  * @param {jQuery.Event} event
