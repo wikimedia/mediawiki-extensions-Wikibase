@@ -95,7 +95,7 @@ SELF.prototype.getStatementView = function( startEditingCallback, entityId, prop
 	};
 
 	var statementsChanger = this._entityChangersFactory.getStatementsChanger();
-	controller = statementview._controller = this._getController(
+	controller = this._getController(
 		this._toolbarFactory.getToolbarContainer( statementview.element ),
 		statementview,
 		statementsChanger,

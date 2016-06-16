@@ -33,9 +33,7 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 					return;
 				}
 
-				statementlistview.enterNewItem().done( function( statementview ) {
-					statementview.focus();
-				} );
+				statementlistview.enterNewItem();
 
 				// Re-focus "add" button after having added or having cancelled adding a statement:
 				var eventName = 'statementlistviewafterstopediting.addtoolbar';

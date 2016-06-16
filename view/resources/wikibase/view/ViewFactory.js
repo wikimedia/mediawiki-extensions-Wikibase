@@ -400,6 +400,7 @@
 	};
 
 	SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, value, $dom ) {
+		var structureEditorFactory = this._structureEditorFactory;
 		var currentPropertyId = value ? value.getClaim().getMainSnak().getPropertyId() : propertyId;
 		var view = this._getView(
 			'statementview',
@@ -425,6 +426,12 @@
 					false
 				),
 				entityIdPlainFormatter: this._entityIdPlainFormatter,
+				getAdder: function( doAdd, $dom, label ) {
+					var newDoAdd = function() {
+						return startEditingCallback().then( doAdd );
+					};
+					return structureEditorFactory.getAdder( newDoAdd, $dom, label );
+				},
 				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
 				qualifiersListItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback )
 			}
