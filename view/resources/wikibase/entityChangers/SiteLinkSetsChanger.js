@@ -58,7 +58,8 @@
 			}
 
 			function getDiffValue() {
-				var siteLinks = [];
+				var siteLinks = [],
+					unchangedSiteLinks = [];
 				siteLinks = siteLinks.concat( getRemovedSiteLinkIds().map( function( siteId ) {
 					return new wb.datamodel.SiteLink( siteId, '' );
 				} ) );
@@ -66,25 +67,29 @@
 				newSiteLinkSet.each( function( site, sitelink ) {
 					if ( !sitelink.equals( oldSiteLinkSet.getItemByKey( site ) ) ) {
 						siteLinks.push( sitelink );
+					} else {
+						unchangedSiteLinks.push( sitelink );
 					}
 				} );
-				return siteLinks;
+				return { changed: siteLinks, unchanged: unchangedSiteLinks };
 			}
 
 			var diffValue = getDiffValue();
 			var siteLinksChanger = this._siteLinksChanger;
-			var resultValue = new wb.datamodel.SiteLinkSet( [] );
+			var resultValue =  diffValue.unchanged;
 
-			return chain( diffValue.map( function( siteLink ) {
+			return chain( diffValue.changed.map( function( siteLink ) {
 				return function() {
 					return siteLinksChanger.setSiteLink( siteLink ).done( function( savedSiteLink ) {
 						if ( savedSiteLink ) { // Is null if a site link was removed
-							resultValue.addItem( savedSiteLink );
+							resultValue.push( savedSiteLink );
 						}
 					} );
 				};
 			} ) ).then( function() {
-				return resultValue;
+				return new wb.datamodel.SiteLinkSet( resultValue.sort( function( s1, s2 ) {
+					return s1.getSiteId().localeCompare( s2.getSiteId() );
+				} ) );
 			} );
 		}
 
