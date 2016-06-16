@@ -11,8 +11,11 @@
  */
 function createSitelinkgrouplistview( options ) {
 	options = $.extend( {
-		siteLinksChanger: 'I am a SiteLinksChanger',
-		entityIdPlainFormatter: 'I am an EntityIdPlainFormatter'
+		listItemAdapter: wb.tests.getMockListItemAdapter(
+			'sitelinkgroupview',
+			function() {
+			}
+		)
 	}, options );
 
 	return $( '<div/>' )

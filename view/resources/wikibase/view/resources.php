@@ -50,10 +50,12 @@ return call_user_func( function() {
 				'ViewFactory.js'
 			),
 			'dependencies' => array(
+				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.entitytermsview',
 				'jquery.wikibase.itemview',
 				'jquery.wikibase.listview', // For ListItemAdapter
 				'jquery.wikibase.propertyview',
+				'jquery.wikibase.sitelinkgroupview',
 				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.statementgroupview',
 				'jquery.wikibase.statementlistview',

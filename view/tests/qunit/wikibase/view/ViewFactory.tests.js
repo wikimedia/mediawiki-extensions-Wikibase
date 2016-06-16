@@ -64,6 +64,24 @@
 	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
 		var sitelinkSet = new wb.datamodel.SiteLinkSet( [] ),
+			viewFactory = new ViewFactory(),
+			$dom = $( '<div/>' );
+
+		sinon.spy( $.wikibase, 'sitelinkgrouplistview' );
+		$dom.sitelinkgrouplistview = $.wikibase.sitelinkgrouplistview;
+
+		viewFactory.getSitelinkGroupListView( sitelinkSet, $dom );
+
+		sinon.assert.calledWith( $.wikibase.sitelinkgrouplistview, sinon.match( {
+			value: sitelinkSet
+		} ) );
+
+		$.wikibase.sitelinkgrouplistview.restore();
+	} );
+
+	QUnit.test( 'getSitelinkGroupView passes correct options to views', function( assert ) {
+		assert.expect( 1 );
+		var value = { group: 'groupid', sitelinks: [] },
 			siteLinksChanger = {},
 			entityChangersFactory = { getSiteLinksChanger: function() { return siteLinksChanger; } },
 			entityIdPlainFormatter = {},
@@ -74,20 +92,22 @@
 				null,
 				entityIdPlainFormatter
 			),
+			eventSingletonManager = new $.util.EventSingletonManager(),
 			$dom = $( '<div/>' );
 
-		sinon.spy( $.wikibase, 'sitelinkgrouplistview' );
-		$dom.sitelinkgrouplistview = $.wikibase.sitelinkgrouplistview;
+		sinon.spy( $.wikibase, 'sitelinkgroupview' );
+		$dom.sitelinkgroupview = $.wikibase.sitelinkgroupview;
 
-		viewFactory.getSitelinkGroupListView( sitelinkSet, $dom );
+		viewFactory.getSitelinkGroupView( eventSingletonManager, value, $dom );
 
-		sinon.assert.calledWith( $.wikibase.sitelinkgrouplistview, sinon.match( {
-			value: sitelinkSet,
+		sinon.assert.calledWith( $.wikibase.sitelinkgroupview, sinon.match( {
+			value: value,
 			entityIdPlainFormatter: entityIdPlainFormatter,
+			eventSingletonManager: eventSingletonManager,
 			siteLinksChanger: siteLinksChanger
 		} ) );
 
-		$.wikibase.sitelinkgrouplistview.restore();
+		$.wikibase.sitelinkgroupview.restore();
 	} );
 
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function( assert ) {
