@@ -12,8 +12,7 @@
 function createSitelinklistview( options ) {
 	options = $.extend( {
 		allowedSiteIds: ['aawiki', 'enwiki'],
-		entityIdPlainFormatter: 'I am an EntityIdPlainFormatter',
-		siteLinksChanger: 'I am a SiteLinksChanger'
+		entityIdPlainFormatter: 'I am an EntityIdPlainFormatter'
 	}, options );
 
 	var $sitelinklistview = $( '<table/>' )
