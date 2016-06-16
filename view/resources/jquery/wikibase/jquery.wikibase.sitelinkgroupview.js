@@ -24,9 +24,8 @@ function getSiteIdsOfGroup( group ) {
  * @since 0.5
  * @extends jQuery.ui.EditableTemplatedWidget
  *
- * @option {Object} value
- *         Object representing the widget's value.
- *         Structure: { group: <{string}>, siteLinks: <{wikibase.datamodel.SiteLink[]}> }
+ * @option {string} groupName
+ * @option {wikibase.datamodel.SiteLink[]} value A list of SiteLinks
  *
  * @option {wikibase.entityChangers.SiteLinksChanger} siteLinksChanger
  *
@@ -48,12 +47,12 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		template: 'wikibase-sitelinkgroupview',
 		templateParams: [
 			function() {
-				return 'sitelinks-' + this.options.value.group;
+				return 'sitelinks-' + this.options.groupName;
 			},
 			function() {
 				// It's hard to dynamically load the right message. Fake it as best as possible.
-				return this.options.value.group[0].toUpperCase()
-					+ this.options.value.group.slice( 1 );
+				return this.options.groupName[0].toUpperCase()
+					+ this.options.groupName.slice( 1 );
 			},
 			'', // counter
 			'', // sitelinklistview
@@ -68,6 +67,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			$counter: '.wikibase-sitelinkgroupview-counter'
 		},
 		value: null,
+		groupName: null,
 		entityIdPlainFormatter: null,
 		siteLinksChanger: null,
 		eventSingletonManager: null,
@@ -85,14 +85,20 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	_eventSingletonManager: null,
 
 	/**
+	 * @type {string[]}
+	 */
+	_siteIdsOfGroup: null,
+
+	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
+		if ( !this.options.groupName || !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
 			throw new Error( 'Required parameter(s) missing' );
 		}
 
 		this.options.value = this._checkValue( this.options.value );
+		this._siteIdsOfGroup = getSiteIdsOfGroup( this.options.groupName );
 
 		PARENT.prototype._create.call( this );
 
@@ -125,7 +131,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		var self = this,
 			deferred = $.Deferred();
 
-		this.element.data( 'group', this.options.value.group );
+		this.element.data( 'group', this.options.groupName );
 
 		if ( !this.$headingSection.data( 'sticknode' ) ) {
 			this.$headingSection.sticknode( {
@@ -172,9 +178,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		} )
 		.sitelinklistview( {
 			value: this._getSiteLinksOfGroup(),
-			allowedSiteIds: this.options.value
-				? getSiteIdsOfGroup( this.options.value.group )
-				: [],
+			allowedSiteIds: this._siteIdsOfGroup,
 			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
 			siteLinksChanger: this.options.siteLinksChanger,
 			eventSingleton: this._eventSingleton,
@@ -193,29 +197,18 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			return [];
 		}
 
-		return $.grep( this.options.value.siteLinks, function( siteLink ) {
-			return $.inArray(
-				siteLink.getSiteId(),
-				getSiteIdsOfGroup( self.options.value.group )
-			) !== -1;
+		return $.grep( this.options.value, function( siteLink ) {
+			return $.inArray( siteLink.getSiteId(), self._siteIdsOfGroup ) !== -1;
 		} );
 	},
 
 	/**
 	 * @param {*} value
 	 * @return {Object}
-	 *
-	 * @throws {Error} if value is not defined properly.
 	 */
 	_checkValue: function( value ) {
-		if ( !$.isPlainObject( value ) ) {
-			throw new Error( 'Value needs to be an object' );
-		} else if ( !value.group ) {
-			throw new Error( 'Value needs group id to be specified' );
-		}
-
-		if ( !value.siteLinks ) {
-			value.siteLinks = [];
+		if ( !value ) {
+			value = [];
 		}
 
 		return value;
@@ -293,7 +286,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.EditableTemplatedWidget.isEmpty
 	 */
 	isEmpty: function() {
-		return !this.value().siteLinks.length;
+		return !this.value().length;
 	},
 
 	/**
@@ -331,8 +324,13 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 		if ( key === 'value' ) {
 			this.$sitelinklistview.data( 'sitelinklistview' )
-			.option( 'allowedSiteIds', getSiteIdsOfGroup( this.options.value.group ) )
-			.value( this.options.value.siteLinks );
+			.value( this.options.value );
+
+			this.draw();
+		} else if ( key === 'groupName' ) {
+			this._siteIdsOfGroup = getSiteIdsOfGroup( value );
+			this.$sitelinklistview.data( 'sitelinklistview' )
+			.option( 'allowedSiteIds', this._siteIdsOfGroup );
 
 			this.draw();
 		} else if ( key === 'disabled' ) {
