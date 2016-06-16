@@ -82,7 +82,6 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementgrouplistview-statementgroupview',
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementlistview-statementview',
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.referenceview-snakview',
-				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementview-referenceview',
 				'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementview-snakview',
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview',
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview-snakview',
