@@ -4,9 +4,11 @@ namespace Wikibase\Test;
 
 use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
+use FauxRequest;
 use InvalidArgumentException;
 use Language;
 use MWException;
+use RequestContext;
 use Revision;
 use RuntimeException;
 use Title;
@@ -484,6 +486,20 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$hash = $options->optionsHash( array( 'userlang' ) );
 
 		$this->assertRegExp( '/wb\d+/', $hash, 'contains Wikibase version' );
+	}
+
+	public function testShowMissingEntity() {
+		$handler = $this->getHandler();
+
+		$title = Title::makeTitle( $handler->getEntityNamespace(), 'MISSING' );
+
+		$context = new RequestContext( new FauxRequest() );
+		$context->setLanguage( 'qqx' );
+		$context->setTitle( $title );
+
+		$handler->showMissingEntity( $title, $context );
+
+		$this->assertContains( '(wikibase-noentity)', $context->getOutput()->getHTML() );
 	}
 
 }
