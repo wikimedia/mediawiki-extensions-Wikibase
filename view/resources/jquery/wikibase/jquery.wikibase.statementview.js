@@ -138,6 +138,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_$toggler: null,
 
 	/**
+	 * @property {Object}
+	 * @private
+	 */
+	_referenceAdder: null,
+
+	/**
 	 * @inheritdoc
 	 * @protected
 	 *
@@ -161,6 +167,21 @@ $.widget( 'wikibase.statementview', PARENT, {
 		} else {
 			this._createReferencesToggler();
 		}
+
+		var self = this;
+		this._referenceAdder = this.options.getAdder(
+			function() {
+				var listview = self._referencesListview,
+					lia = listview.listItemAdapter();
+
+				listview.enterNewItem().done( function( $referenceview ) {
+					var referenceview = lia.liInstance( $referenceview );
+					referenceview.focus();
+				} );
+			},
+			this.$references,
+			mw.msg( 'wikibase-addreference' )
+		);
 		this.element.toggleClass( 'wb-new', this.options.value === null );
 	},
 
@@ -454,6 +475,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 			.off( '.' + this.widgetName )
 			.empty();
 		this._referencesListview = null;
+		this._referenceAdder.destroy();
+		this._referenceAdder = null;
 	},
 
 	/**
@@ -726,6 +749,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			if ( this._referencesListview ) {
 				this._referencesListview.option( key, value );
 			}
+			this._referenceAdder[ value ? 'disable' : 'enable']();
 		}
 		if ( key === 'value' ) {
 			this.element.toggleClass( 'wb-new', value === null );

@@ -228,8 +228,9 @@
 		var entityId = 'Q1',
 			value = null,
 			entityIdPlainFormatter = {},
+			structureEditorFactory = { getAdder: function() {} },
 			viewFactory = new ViewFactory(
-				null,
+				structureEditorFactory,
 				null,
 				null,
 				null,
@@ -287,7 +288,8 @@
 		var entityId = 'Q1',
 			propertyId = 'propertyId',
 			value = null,
-			viewFactory = new ViewFactory(),
+			structureEditorFactory = { getAdder: function() {} },
+			viewFactory = new ViewFactory( structureEditorFactory ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			dom = {};
 
@@ -316,7 +318,8 @@
 		var entityId = new wb.datamodel.EntityId( 'type', 1 ),
 			propertyId = 'P1',
 			value = new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( propertyId ) ) ),
-			viewFactory = new ViewFactory(),
+			structureEditorFactory = { getAdder: function() {} },
+			viewFactory = new ViewFactory( structureEditorFactory ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			dom = {};
 
