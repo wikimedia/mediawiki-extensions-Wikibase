@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_98cd8f8c",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-16T12:42:57Z",
+      "side": 1,
+      "message": "Conceptually, the view action should handle both cases: the entity exists, or it doesn\u0027t exist. It seems sensible to me to handle both cases in the same class. The fact that the \"missing\" case is handled via a hook is due to the poor design of the ViewAction class. Subclassing (like what we had before) is the more obvious solution, but to make it work nicely, we\u0027d need to restructure ViewAction in core first.",
+      "parentUuid": "0efd9372_feac9134",
+      "revId": "a0e91410ddc8247b4574a5aacf0e5297c7ac7045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_9e9f4506",
         "filename": "repo/includes/Actions/ViewEntityAction.php",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_58b327fd",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-16T12:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0efd9372_9e9f4506",
+      "revId": "a0e91410ddc8247b4574a5aacf0e5297c7ac7045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_7eb9c177",
         "filename": "repo/includes/Content/EntityHandler.php",
         "patchSetId": 7
@@ -47,6 +83,24 @@
       "writtenOn": "2016-06-14T15:02:24Z",
       "side": 1,
       "message": "Why not just -\u003esetContext instead of doing this \"per hand\"?",
+      "revId": "a0e91410ddc8247b4574a5aacf0e5297c7ac7045",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_f8cc9b8e",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-16T12:42:57Z",
+      "side": 1,
+      "message": "does it make a difference?",
+      "parentUuid": "0efd9372_7eb9c177",
       "revId": "a0e91410ddc8247b4574a5aacf0e5297c7ac7045",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
