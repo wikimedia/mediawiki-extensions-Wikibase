@@ -410,6 +410,7 @@ return call_user_func( function() {
 				'wikibase.utilities',
 			),
 			'messages' => array(
+				'wikibase-addreference',
 				'wikibase-claimview-snak-tooltip',
 				'wikibase-claimview-snak-new-tooltip',
 				'wikibase-statementview-rank-preferred',

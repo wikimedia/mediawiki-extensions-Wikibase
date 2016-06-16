@@ -19,7 +19,6 @@
 					'statementgrouplistview-statementgroupview',
 					'statementlistview-statementview',
 					'statementview-snakview',
-					'statementview-referenceview',
 					'referenceview-snakview'
 				],
 				removetoolbar: [
