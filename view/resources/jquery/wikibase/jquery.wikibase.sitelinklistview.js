@@ -741,36 +741,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		} );
 	},
 
-	/**
-	 * Removes a sitelinkview instance.
-	 *
-	 * @param {jQuery.wikibase.sitelinkview} sitelinkview
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {Object}
-	 *         Rejected parameters:
-	 *         - {wikibase.api.RepoApiError}
-	 */
-	remove: function( sitelinkview ) {
-		var self = this,
-			siteLink = sitelinkview.value(),
-			emptySiteLink = new wb.datamodel.SiteLink( siteLink.getSiteId(), '' );
-
-		this.disable();
-
-		return this._saveSiteLink( emptySiteLink )
-		.done( function() {
-			self.$listview.data( 'listview' ).removeItem( sitelinkview.element );
-			self._afterRemove();
-		} )
-		.fail( function( error ) {
-			sitelinkview.setError( error );
-		} )
-		.always( function() {
-			self.enable();
-		} );
-	},
-
 	_afterRemove: function() {
 		this._refreshCounter();
 	},
