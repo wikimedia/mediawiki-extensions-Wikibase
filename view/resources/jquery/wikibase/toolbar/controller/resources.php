@@ -105,17 +105,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.toolbarcontroller.definitions.edittoolbar.sitelinkgroupview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/edittoolbar/sitelinkgroupview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.edittoolbar',
-				'jquery.wikibase.sitelinkgroupview',
-				'jquery.wikibase.toolbarcontroller',
-			),
-		),
-
 		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview-snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/removetoolbar/referenceview-snakview.js',
