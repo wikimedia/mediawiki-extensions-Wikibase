@@ -12,16 +12,11 @@
 function createSitelinkgroupview( options ) {
 	options = $.extend( {
 		getSiteLinkListView: function( value, $dom ) {
+			var _value = value;
 			var widget = {
 				destroy: function() {},
 				draw: function() {
 					return $.Deferred().resolve().promise();
-				},
-				isInitialValue: function() {
-					return true;
-				},
-				isValid: function() {
-					return true;
 				},
 				option: function() {},
 				startEditing: function() {
@@ -31,13 +26,18 @@ function createSitelinkgroupview( options ) {
 				stopEditing: function() {
 					return $.Deferred().resolve().promise();
 				},
-				value: function() {},
+				value: function( newValue ) {
+					if ( arguments.length > 0 ) {
+						_value = newValue;
+					} else {
+						return _value;
+					}
+				},
 				widgetEventPrefix: ''
 			};
 			$dom.data( 'sitelinklistview', widget );
 			return widget;
-		},
-		siteLinkSetsChanger: 'I am a SiteLinkSetsChanger'
+		}
 	}, options );
 
 	var $sitelinkgroupview = $( '<div/>' )
@@ -99,7 +99,7 @@ QUnit.test( 'Create and destroy', function( assert ) {
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 		$sitelinkgroupview = createSitelinkgroupview( {
 			groupName: 'group1',
-			value: [siteLink]
+			value: new wb.datamodel.SiteLinkSet( [siteLink] )
 		} ),
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -125,7 +125,7 @@ QUnit.test( 'Create and destroy', function( assert ) {
 QUnit.test( 'startEditing() & stopEditing()', 3, function( assert ) {
 	var $sitelinkgroupview = createSitelinkgroupview( {
 			groupName: 'group1',
-			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
+			value: new wb.datamodel.SiteLinkSet( [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )] )
 		} ),
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -224,7 +224,7 @@ QUnit.test( 'startEditing() & stopEditing()', 3, function( assert ) {
 QUnit.test( 'setError()', 1, function( assert ) {
 	var $sitelinkgroupview = createSitelinkgroupview( {
 			groupName: 'group1',
-			value: []
+			value: new wb.datamodel.SiteLinkSet( [] )
 		} ),
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -243,7 +243,7 @@ QUnit.test( 'setError()', 1, function( assert ) {
 QUnit.test( 'value()', function( assert ) {
 	assert.expect( 2 );
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
-		siteLinks = [siteLink],
+		siteLinks = new wb.datamodel.SiteLinkSet( [siteLink] ),
 		$sitelinkgroupview = createSitelinkgroupview( {
 			groupName: 'group1',
 			value: siteLinks
@@ -256,10 +256,10 @@ QUnit.test( 'value()', function( assert ) {
 		'Retrieved initial value.'
 	);
 
-	siteLinks = [
+	siteLinks = new wb.datamodel.SiteLinkSet( [
 		new wikibase.datamodel.SiteLink( 'dewiki', '1234' ),
 		new wikibase.datamodel.SiteLink( 'enwiki', '5678' )
-	];
+	] );
 
 	sitelinkgroupview.value( siteLinks );
 

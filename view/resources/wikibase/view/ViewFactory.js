@@ -219,7 +219,7 @@
 	 * Construct a suitable view for the given sitelink group on the given DOM element
 	 *
 	 * @param {string} groupName
-	 * @param {wikibase.datamodel.SiteLink[]} siteLinks
+	 * @param {wikibase.datamodel.SiteLinkSet} siteLinks
 	 * @param {jQuery} $sitelinkgroupview
 	 * @return {jQuery.wikibase.sitelinkgroupview} The constructed sitelinkgroupview
 	 **/
@@ -230,8 +230,7 @@
 			{
 				groupName: groupName,
 				value: siteLinks,
-				getSiteLinkListView: this.getSiteLinkListView.bind( this ),
-				siteLinkSetsChanger: this._entityChangersFactory.getSiteLinkSetsChanger()
+				getSiteLinkListView: this.getSiteLinkListView.bind( this )
 			}
 		);
 	};
