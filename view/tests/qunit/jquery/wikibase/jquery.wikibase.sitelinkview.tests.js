@@ -117,9 +117,6 @@
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkviewstopediting', function( event, dropValue, callback ) {
-			callback();
-		} )
 		.on( 'sitelinkviewafterstopediting', function( event, dropValue ) {
 			assert.ok(
 				true,
@@ -160,9 +157,6 @@
 				true,
 				'Started edit mode.'
 			);
-		} )
-		.on( 'sitelinkviewstopediting', function( event, dropValue, callback ) {
-			callback();
 		} )
 		.on( 'sitelinkviewafterstopediting', function( event, dropValue ) {
 			assert.ok(

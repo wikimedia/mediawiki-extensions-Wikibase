@@ -232,40 +232,66 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		return deferred.promise();
 	},
 
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.stopEditing
-	 */
-	stopEditing: function( dropValue ) {
-		var self = this,
-			deferred = $.Deferred();
+	_save: function() {
+		var deferred = $.Deferred();
+		var self = this;
+		var sitelinklistview = this.$sitelinklistview.data( 'sitelinklistview' );
+		var siteLinks = sitelinklistview.diffValue();
 
-		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
-			return deferred.resolve().promise();
+		function next() {
+			if ( siteLinks.length === 0 ) {
+				deferred.resolve();
+				return;
+			}
+
+			var siteLink = siteLinks.pop();
+			self.options.siteLinksChanger.setSiteLink( siteLink ).done( function( savedSiteLink ) {
+				self._onSiteLinkSaved( siteLink, savedSiteLink );
+				next();
+			} ).fail( function( error ) {
+				deferred.reject( error );
+			} );
 		}
 
-		this._trigger( 'stopediting', null, [dropValue] );
-
-		this.disable();
-
-		this.$sitelinklistview
-		.one(
-			'sitelinklistviewafterstopediting.sitelinkgroupviewstopediting',
-			function( event, dropValue ) {
-				self._afterStopEditing( dropValue );
-				self.$sitelinklistview.off( '.sitelinkgroupviewstopediting' );
-				self.notification();
-				deferred.resolve();
-			}
-		)
-		.one( 'sitelinklistviewtoggleerror.sitelinkgroupviewstopediting', function( event, error ) {
-			self.enable();
-			self.$sitelinklistview.off( '.sitelinkgroupviewstopediting' );
-			deferred.reject( error );
-		} );
-
-		this.$sitelinklistview.data( 'sitelinklistview' ).stopEditing( dropValue );
+		setTimeout( next, 0 );
 
 		return deferred.promise();
+	},
+
+	_onSiteLinkSaved: function( inSiteLink, savedSiteLink ) {
+		var deferred = $.Deferred();
+
+		var sitelinklistview = this.$sitelinklistview.data( 'sitelinklistview' );
+		if ( inSiteLink.getPageName() !== '' ) {
+			sitelinklistview.$listview.data( 'listview' ).value().some( function( sitelinkview ) {
+				var value = sitelinkview.value();
+				if ( !value ) {
+					return;
+				}
+				var found = value.equals( inSiteLink );
+				if ( found ) {
+					sitelinkview.stopEditing().done( function() {
+						sitelinkview.value( savedSiteLink );
+						deferred.resolve();
+					} );
+				}
+				return found;
+			} );
+		}
+
+		return deferred.promise();
+	},
+
+	/**
+	 * @see jQuery.ui.EditableTemplatedWidget._afterStopEditing
+	 */
+	_afterStopEditing: function( dropValue ) {
+		var self = this;
+		return this.$sitelinklistview.data( 'sitelinklistview' ).stopEditing( dropValue )
+		.done( function() {
+			self.notification();
+			return PARENT.prototype._afterStopEditing.call( self );
+		} );
 	},
 
 	/**
