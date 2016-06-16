@@ -51,21 +51,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementview-referenceview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/addtoolbar/statementview-referenceview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.listview',
-				'jquery.wikibase.statementview',
-				'jquery.wikibase.toolbarcontroller',
-			),
-			'messages' => array(
-				'wikibase-addreference',
-			),
-		),
-
 		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementview-snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/addtoolbar/statementview-snakview.js',
