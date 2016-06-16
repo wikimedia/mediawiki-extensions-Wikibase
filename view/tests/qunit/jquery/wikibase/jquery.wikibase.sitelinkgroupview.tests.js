@@ -84,7 +84,8 @@ QUnit.test( 'Create and destroy', function( assert ) {
 	assert.expect( 3 );
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
 		$sitelinkgroupview = createSitelinkgroupview( {
-			value: { group: 'group1', siteLinks: [siteLink] }
+			groupName: 'group1',
+			value: [siteLink]
 		} ),
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -109,10 +110,8 @@ QUnit.test( 'Create and destroy', function( assert ) {
 
 QUnit.test( 'startEditing() & stopEditing()', 3, function( assert ) {
 	var $sitelinkgroupview = createSitelinkgroupview( {
-			value: {
-				group: 'group1',
-				siteLinks: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
-			}
+			groupName: 'group1',
+			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
 		} ),
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -210,7 +209,8 @@ QUnit.test( 'startEditing() & stopEditing()', 3, function( assert ) {
 
 QUnit.test( 'setError()', 1, function( assert ) {
 	var $sitelinkgroupview = createSitelinkgroupview( {
-			value: { group: 'group1', siteLinks: [] }
+			groupName: 'group1',
+			value: []
 		} ),
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
@@ -229,8 +229,9 @@ QUnit.test( 'setError()', 1, function( assert ) {
 QUnit.test( 'value()', function( assert ) {
 	assert.expect( 2 );
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
-		value = { group: 'group1', siteLinks: [siteLink] },
+		value = [siteLink],
 		$sitelinkgroupview = createSitelinkgroupview( {
+			groupName: 'group1',
 			value: value
 		} ),
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
@@ -241,12 +242,10 @@ QUnit.test( 'value()', function( assert ) {
 		'Retrieved initial value.'
 	);
 
-	var siteLinks = [
+	value = [
 		new wikibase.datamodel.SiteLink( 'dewiki', '1234' ),
 		new wikibase.datamodel.SiteLink( 'enwiki', '5678' )
 	];
-
-	value = { group: 'group2', siteLinks: siteLinks };
 
 	sitelinkgroupview.value( value );
 

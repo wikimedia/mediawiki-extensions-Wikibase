@@ -81,7 +81,8 @@
 
 	QUnit.test( 'getSitelinkGroupView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
-		var value = { group: 'groupid', sitelinks: [] },
+		var group = 'groupid',
+			value = [],
 			siteLinksChanger = {},
 			entityChangersFactory = { getSiteLinksChanger: function() { return siteLinksChanger; } },
 			entityIdPlainFormatter = {},
@@ -98,9 +99,10 @@
 		sinon.spy( $.wikibase, 'sitelinkgroupview' );
 		$dom.sitelinkgroupview = $.wikibase.sitelinkgroupview;
 
-		viewFactory.getSitelinkGroupView( eventSingletonManager, value, $dom );
+		viewFactory.getSitelinkGroupView( eventSingletonManager, group, value, $dom );
 
 		sinon.assert.calledWith( $.wikibase.sitelinkgroupview, sinon.match( {
+			groupName: group,
 			value: value,
 			entityIdPlainFormatter: entityIdPlainFormatter,
 			eventSingletonManager: eventSingletonManager,

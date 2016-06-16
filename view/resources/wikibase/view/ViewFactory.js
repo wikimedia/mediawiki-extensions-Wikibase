@@ -202,7 +202,7 @@
 				listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
 					listItemWidget: $.wikibase.sitelinkgroupview,
 					getNewItem: function( value, dom ) {
-						return self.getSitelinkGroupView( eventSingletonManager, value, $( dom ) );
+						return self.getSitelinkGroupView( eventSingletonManager, value.group, value.siteLinks, $( dom ) );
 					}
 				} )
 			}
@@ -217,11 +217,12 @@
 	 * @param {jQuery} $sitelinkgroupview
 	 * @return {jQuery.wikibase.sitelinkgroupview} The constructed sitelinkgroupview
 	 **/
-	SELF.prototype.getSitelinkGroupView = function( eventSingletonManager, value, $sitelinkgroupview ) {
+	SELF.prototype.getSitelinkGroupView = function( eventSingletonManager, groupName, value, $sitelinkgroupview ) {
 		return this._getView(
 			'sitelinkgroupview',
 			$sitelinkgroupview,
 			{
+				groupName: groupName,
 				value: value,
 				eventSingletonManager: eventSingletonManager,
 				siteLinksChanger: this._entityChangersFactory.getSiteLinksChanger(),
