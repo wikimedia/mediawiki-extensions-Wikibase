@@ -23,8 +23,7 @@
 					'referenceview-snakview'
 				],
 				edittoolbar: [
-					'entitytermsview',
-					'sitelinkgroupview'
+					'entitytermsview'
 				],
 				removetoolbar: [
 					'referenceview',
@@ -328,18 +327,21 @@
 	 * @param {jQuery} $entityview
 	 */
 	function attachCopyrightTooltip( $entityview ) {
-		$entityview.on( 'edittoolbarafterstartediting statementviewafterstartediting', function( event ) {
-			var $target = $( event.target ),
-				gravity = 'sw';
+		$entityview.on(
+			'edittoolbarafterstartediting sitelinkgroupviewafterstartediting statementviewafterstartediting',
+			function( event ) {
+				var $target = $( event.target ),
+					gravity = 'sw';
 
-			if ( $target.data( 'sitelinkgroupview' ) ) {
-				gravity = 'nw';
-			} else if ( $target.data( 'entitytermsview' ) ) {
-				gravity = 'w';
+				if ( $target.data( 'sitelinkgroupview' ) ) {
+					gravity = 'nw';
+				} else if ( $target.data( 'entitytermsview' ) ) {
+					gravity = 'w';
+				}
+
+				showCopyrightTooltip( $entityview, $target, gravity );
 			}
-
-			showCopyrightTooltip( $entityview, $target, gravity );
-		} );
+		);
 	}
 
 	mw.hook( 'wikipage.content' ).add( function() {

@@ -42,7 +42,7 @@ function scrapeSiteLinks( $siteLinks, siteLinkSet ) {
 
 		value.push( {
 			group: group,
-			siteLinks: siteLinksOfGroup
+			siteLinks: new wb.datamodel.SiteLinkSet( siteLinksOfGroup )
 		} );
 	} );
 
@@ -71,7 +71,7 @@ function orderSiteLinksByGroup( siteLinkSet ) {
 
 		for ( var i = 0; i < value.length; i++ ) {
 			if ( value[i].group === site.getGroup() ) {
-				value[i].siteLinks.push( siteLink );
+				value[i].siteLinks.addItem( siteLink );
 				found = true;
 				break;
 			}
@@ -80,7 +80,7 @@ function orderSiteLinksByGroup( siteLinkSet ) {
 		if ( !found ) {
 			value.push( {
 				group: site.getGroup(),
-				siteLinks: [siteLink]
+				siteLinks: new wb.datamodel.SiteLinkSet( [siteLink] )
 			} );
 		}
 	} );
