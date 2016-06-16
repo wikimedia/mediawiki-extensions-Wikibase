@@ -28,8 +28,6 @@ function getSiteIdsOfGroup( group ) {
  * @option {wikibase.datamodel.SiteLink[]} value A list of SiteLinks
  * @option {Function} getSiteLinkListView
  *
- * @option {wikibase.entityChangers.SiteLinkSetsChanger} siteLinkSetsChanger
- *
  * @option {string} [helpMessage]
  *                  Default: 'Add a site link by specifying a site and a page of that site, edit or
  *                  remove existing site links.'
@@ -64,7 +62,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		value: null,
 		getSiteLinkListView: null,
 		groupName: null,
-		siteLinkSetsChanger: null,
 		helpMessage: mw.msg( 'wikibase-sitelinkgroupview-input-help-message' )
 	},
 
@@ -82,14 +79,11 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !this.options.groupName
-			|| !this.options.siteLinkSetsChanger
-			|| !this.options.getSiteLinkListView
-		) {
+		if ( !this.options.groupName || !this.options.getSiteLinkListView ) {
 			throw new Error( 'Required parameter(s) missing' );
 		}
 
-		this.options.value = this.options.value || [];
+		this.options.value = this._checkValue( this.options.value );
 		this._siteIdsOfGroup = getSiteIdsOfGroup( this.options.groupName );
 
 		PARENT.prototype._create.call( this );
@@ -177,37 +171,58 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @return {wikibase.datamodel.SiteLink[]}
 	 */
 	_getSiteLinksOfGroup: function() {
-		var self = this;
+		var self = this,
+			result = [];
 
 		if ( !this.options.value ) {
-			return [];
+			return result;
 		}
 
-		return $.grep( this.options.value, function( siteLink ) {
-			return $.inArray( siteLink.getSiteId(), self._siteIdsOfGroup ) !== -1;
+		this.options.value.each( function( siteId, siteLink ) {
+			if ( $.inArray( siteId, self._siteIdsOfGroup ) !== -1 ) {
+				result.push( siteLink );
+			}
 		} );
+		return result;
+	},
+
+	/**
+	 * @param {*} value
+	 * @return {Object}
+	 */
+	_checkValue: function( value ) {
+		if ( !value ) {
+			value = new wb.datamodel.SiteLinkSet( [] );
+		} else if ( !( value instanceof wb.datamodel.SiteLinkSet ) ) {
+			throw new Error();
+		}
+
+		return value;
 	},
 
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.startEditing
 	 */
 	startEditing: function() {
-		var self = this,
-			deferred = $.Deferred();
-
-		this.$sitelinklistview.one( 'sitelinklistviewafterstartediting', function() {
-			PARENT.prototype.startEditing.call( self )
-				.done( deferred.resolve )
-				.fail( deferred.reject );
+		var self = this;
+		return this.$sitelinklistview.data( 'sitelinklistview' ).startEditing().done( function() {
+			return PARENT.prototype.startEditing.call( self );
 		} );
-
-		this.$sitelinklistview.data( 'sitelinklistview' ).startEditing();
-
-		return deferred.promise();
 	},
 
 	_save: function() {
-		return this.options.siteLinkSetsChanger.save( this.value(), this.options.value );
+		var deferred = $.Deferred();
+		return deferred.resolve().promise();
+	},
+
+	stopEditing: function( dropValue ) {
+		var done = $.Deferred().resolve( dropValue ).promise();
+		if ( !this.isInEditMode() ) {
+			return done;
+		}
+		this._trigger( 'stopediting', null, [dropValue] );
+		this._afterStopEditing( dropValue );
+		return done;
 	},
 
 	/**
@@ -233,30 +248,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			return this.option( 'value', value );
 		}
 
-		return this.options.value;
-	},
-
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isEmpty
-	 */
-	isEmpty: function() {
-		return !this.options.value.length;
-	},
-
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isValid
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		return this.$sitelinklistview.data( 'sitelinklistview' ).isValid();
-	},
-
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		return this.$sitelinklistview.data( 'sitelinklistview' ).isInitialValue();
+		return new wb.datamodel.SiteLinkSet( this.$sitelinklistview.data( 'sitelinklistview' ).value() );
 	},
 
 	/**
@@ -266,12 +258,20 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		this.$sitelinklistview.data( 'sitelinklistview' ).focus();
 	},
 
+	_getSiteLinksArray: function() {
+		var res = [];
+		this.options.value.each( function( siteId, siteLink ) {
+			res.push( siteLink );
+		} );
+		return res;
+	},
+
 	/**
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
 	_setOption: function( key, value ) {
 		if ( key === 'value' ) {
-			value = value || [];
+			value = this._checkValue( value );
 		} else if ( key === 'groupName' && value !== this.options.groupName ) {
 			this._siteIdsOfGroup = getSiteIdsOfGroup( value );
 			this.$sitelinklistview.data( 'sitelinklistview' )
@@ -284,7 +284,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 		if ( key === 'value' ) {
 			this.$sitelinklistview.data( 'sitelinklistview' )
-			.value( this.options.value );
+			.value( this._getSiteLinksArray() );
 
 			this.draw();
 		} else if ( key === 'disabled' ) {
@@ -298,24 +298,25 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.EditableTemplatedWidget.setError
 	 */
 	setError: function( error ) {
-		if ( error ) {
-			var self = this;
-
-			var $error = wb.buildErrorOutput( error, {
-				progress: function() {
-					self.$headingSection.data( 'sticknode' ).refresh();
-				}
-			} );
-
-			this.element.addClass( 'wb-error' );
-			this.notification( $error, 'wb-error' );
-		} else {
+		if ( !error ) {
 			if ( this.$notification && this.$notification.hasClass( 'wb-error' ) ) {
 				this.notification();
 			}
 		}
 
 		PARENT.prototype.setError.call( this, error );
+	},
+
+	doErrorNotification: function( error ) {
+		var self = this;
+
+		var $error = wb.buildErrorOutput( error, {
+			progress: function() {
+				self.$headingSection.data( 'sticknode' ).refresh();
+			}
+		} );
+
+		this.notification( $error, 'wb-error' );
 	}
 } );
 
