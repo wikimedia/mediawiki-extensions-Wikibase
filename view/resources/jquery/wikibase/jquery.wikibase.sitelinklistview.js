@@ -463,110 +463,33 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			} );
 	},
 
+	diffValue: function() {
+		var listview = this.$listview.data( 'listview' );
+		var siteLinks = [];
+		siteLinks = siteLinks.concat( this._getRemovedSiteLinkIds().map( function( siteId ) {
+			return new wb.datamodel.SiteLink( siteId, '' );
+		} ) );
+
+		listview.items().each( function( i, dom ) {
+			var sitelinkview = $( dom ).data( 'sitelinkview' );
+			if ( sitelinkview.isInitialValue() ) {
+				return;
+			}
+			var value = sitelinkview.value();
+			if ( value ) {
+				siteLinks.push( value );
+			}
+		} );
+		return siteLinks;
+	},
+
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget._save
 	 */
 	_save: function() {
-		var self = this,
-			deferred = $.Deferred(),
-			listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter();
+		var deferred = $.Deferred();
 
-		var $queue = $( {} );
-
-		/**
-		 * @param {jQuery} $queue
-		 * @param {string} siteId
-		 */
-		function addRemoveToQueue( $queue, siteId ) {
-			$queue.queue( 'stopediting', function( next ) {
-				var emptySiteLink = new wb.datamodel.SiteLink( siteId, '' );
-				self._saveSiteLink( emptySiteLink )
-					.done( function() {
-						self._afterRemove();
-
-						// Avoid exceeding call stack size.
-						setTimeout( next, 0 );
-					} )
-					.fail( function( error ) {
-						$queue.clearQueue( 'stopediting' );
-						self._resetEditMode();
-						deferred.reject( error );
-					} );
-			} );
-		}
-
-		var removedSiteLinkIds = this._getRemovedSiteLinkIds();
-
-		for ( var i = 0; i < removedSiteLinkIds.length; i++ ) {
-			addRemoveToQueue( $queue, removedSiteLinkIds[i] );
-		}
-
-		/**
-		 * @param {jQuery} $queue
-		 * @param {jQuery.wikibase.sitelinkview} sitelinkview
-		 */
-		function addStopEditToQueue( $queue, sitelinkview ) {
-			$queue.queue( 'stopediting', function( next ) {
-				sitelinkview.element
-				.one( 'sitelinkviewstopediting.sitelinklistviewstopediting', function( event, dropValue, callback ) {
-					event.stopPropagation();
-
-					var $sitelinkview = $( event.target ),
-						sitelinkview = $sitelinkview.data( 'sitelinkview' ),
-						value = sitelinkview.value();
-
-					if ( !dropValue && !sitelinkview.isInitialValue() ) {
-						sitelinkview.disable();
-
-						self._saveSiteLink( value )
-						.done( function( newSiteLink ) {
-							sitelinkview.value( newSiteLink );
-							callback();
-						} )
-						.fail( function( error ) {
-							sitelinkview.setError( error );
-						} )
-						.always( function() {
-							sitelinkview.enable();
-						} );
-					}
-				} )
-				.one( 'sitelinkviewafterstopediting.sitelinklistviewstopediting', function( event ) {
-					sitelinkview.element.off( '.sitelinklistviewstopediting' );
-					// Avoid exceeding call stack size.
-					setTimeout( next, 0 );
-				} )
-				.one(
-					'sitelinkviewtoggleerror.sitelinklistviewstopediting',
-					function( event, error ) {
-						sitelinkview.element.off( '.sitelinklistviewstopediting' );
-						$queue.clearQueue( 'stopediting' );
-						self._resetEditMode();
-						deferred.reject( error );
-					}
-				);
-				sitelinkview.stopEditing();
-			} );
-		}
-
-		listview.items().each( function() {
-			var sitelinkview = lia.liInstance( $( this ) );
-
-			if ( sitelinkview.isInitialValue() ) {
-				sitelinkview.stopEditing( true );
-			} else {
-				addStopEditToQueue( $queue, sitelinkview );
-			}
-		} );
-
-		$queue.queue( 'stopediting', function() {
-			deferred.resolve();
-		} );
-
-		$queue.dequeue( 'stopediting' );
-
-		return deferred.promise();
+		return deferred.resolve().promise();
 	},
 
 	/**
@@ -578,6 +501,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		return PARENT.prototype._afterStopEditing.call( this, dropValue )
 			.done( function() {
 				self.$listview.data( 'listview' ).value( self.options.value );
+				self._refreshCounter();
 			} );
 	},
 
@@ -741,10 +665,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		} );
 	},
 
-	_afterRemove: function() {
-		this._refreshCounter();
-	},
-
 	/**
 	 * Adds a pending `sitelinkview` to the `sitelinklistview`.
 	 *
@@ -757,29 +677,12 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	enterNewItem: function() {
 		var self = this,
 			listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
-			afterStopEditingEvent = lia.prefixedEvent( 'afterstopediting.' + this.widgetName );
+			lia = listview.listItemAdapter();
 
 		return listview.enterNewItem().done( function( $sitelinkview ) {
 			var sitelinkview = lia.liInstance( $sitelinkview );
 
-			$sitelinkview
-			.addClass( 'wb-new' )
-			.on( afterStopEditingEvent, function( event, dropValue ) {
-				var siteLink = sitelinkview.value();
-
-				listview.removeItem( $sitelinkview );
-
-				if ( !dropValue && siteLink ) {
-					listview.addItem( siteLink );
-				}
-
-				if ( self.__pendingItems && --self.__pendingItems !== 0 ) {
-					return;
-				}
-
-				self._refreshCounter();
-			} );
+			$sitelinkview.addClass( 'wb-new' );
 
 			self._refreshCounter();
 
@@ -789,7 +692,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 				sitelinkview.startEditing();
 			}
 
-			this.__pendingItems = this.__pendingItems ? this.__pendingItems + 1 : 1;
 		} );
 	}
 } );
