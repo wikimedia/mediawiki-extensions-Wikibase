@@ -373,7 +373,7 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 		this.element.off( 'keydown.' + this.widgetName );
 
-		this._trigger( 'afterStopEditing', null, [dropValue] );
+		this._trigger( 'afterstopediting', null, [dropValue] );
 	},
 
 	/**
