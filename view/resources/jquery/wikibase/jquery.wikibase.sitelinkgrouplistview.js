@@ -95,11 +95,8 @@ var PARENT = $.ui.TemplatedWidget;
  * @since 0.5
  * @extends jQuery.ui.TemplatedWidget
  *
+ * @option {jQuery.wikibase.listview.ListItemAdapter} listItemAdapter
  * @option {wikibase.datamodel.SiteLinkSet} value
- *
- * @option {wikibase.entityChangers.SiteLinksChanger} siteLinksChanger
- *
- * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
  */
 $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	options: {
@@ -109,8 +106,6 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 		],
 		templateShortCuts: {},
 		value: null,
-		siteLinksChanger: null,
-		entityIdPlainFormatter: null
 	},
 
 	/**
@@ -119,25 +114,16 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 	$listview: null,
 
 	/**
-	 * @type {jQuery.util.EventSingletonManager}
-	 */
-	_eventSingletonManager: null,
-
-	/**
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !this.options.value || !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
+		if ( !this.options.listItemAdapter || !this.options.value ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
 		PARENT.prototype._create.call( this );
 
-		this._eventSingletonManager = new $.util.EventSingletonManager();
-
 		this._createListview();
-
-		this.element.addClass( 'wikibase-sitelinkgrouplistview' );
 	},
 
 	/**
@@ -152,14 +138,10 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 			this.$listview.remove();
 			delete this.$listview;
 		}
-		this.element.removeClass( 'wikibase-sitelinkgrouplistview' );
 		PARENT.prototype.destroy.call( this );
 	},
 
 	_createListview: function() {
-		var self = this,
-			prefix = $.wikibase.sitelinkgroupview.prototype.widgetEventPrefix;
-
 		var value = this.element.is( ':empty' )
 				? orderSiteLinksByGroup( this.options.value )
 				: scrapeSiteLinks( this.element, this.options.value );
@@ -172,21 +154,11 @@ $.widget( 'wikibase.sitelinkgrouplistview', PARENT, {
 
 		this.$listview
 		.listview( {
-			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-				listItemWidget: $.wikibase.sitelinkgroupview,
-				newItemOptionsFn: function( value ) {
-					return {
-						value: value,
-						siteLinksChanger: self.options.siteLinksChanger,
-						entityIdPlainFormatter: self.options.entityIdPlainFormatter,
-						eventSingletonManager: this._eventSingletonManager
-					};
-				}
-			} ),
+			listItemAdapter: this.options.listItemAdapter,
 			value: value,
 			encapsulate: true
 		} )
-		.on( prefix + 'disable.' + this.widgetName, function( event ) {
+		.on( this.options.listItemAdapter.prefixedEvent( 'disable.' + this.widgetName ), function( event ) {
 			event.stopPropagation();
 		} );
 	},

@@ -219,6 +219,7 @@ return call_user_func( function() {
 				'jquery.wikibase.sitelinkgrouplistview',
 				'wikibase.datamodel.SiteLink',
 				'wikibase.datamodel.SiteLinkSet',
+				'wikibase.tests.getMockListItemAdapter',
 				'wikibase.tests.qunit.testrunner',
 			),
 		),

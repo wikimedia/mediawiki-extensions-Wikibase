@@ -299,9 +299,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.TemplatedWidget',
-				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.listview',
-				'jquery.wikibase.sitelinkgroupview',
 				'wikibase.sites',
 			),
 		),
