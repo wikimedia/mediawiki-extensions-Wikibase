@@ -39,6 +39,19 @@ SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) 
 	return statementview;
 };
 
+SELF.prototype.getSitelinkGroupView = function( groupName, value, $sitelinkgroupview ) {
+	var view = PARENT.prototype.getSitelinkGroupView.apply( this, arguments );
+	var siteLinkSetsChanger = this._entityChangersFactory.getSiteLinkSetsChanger();
+	this._getController(
+		this._toolbarFactory.getToolbarContainer( view.element.find( '.wikibase-sitelinkgroupview-heading-container' ) ),
+		view,
+		siteLinkSetsChanger,
+		null,
+		value
+	);
+	return view;
+};
+
 SELF.prototype._getController = function( $container, view, model, onRemove, value ) {
 	var edittoolbar = this._toolbarFactory.getEditToolbar(
 		{

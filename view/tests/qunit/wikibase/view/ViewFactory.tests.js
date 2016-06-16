@@ -82,14 +82,8 @@
 	QUnit.test( 'getSitelinkGroupView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
 		var groupName = 'groupid',
-			siteLinks = [],
-			siteLinkSetsChanger = {},
-			entityChangersFactory = { getSiteLinkSetsChanger: function() { return siteLinkSetsChanger; } },
-			viewFactory = new ViewFactory(
-				null,
-				null,
-				entityChangersFactory
-			),
+			siteLinks = new wb.datamodel.SiteLinkSet( [] ),
+			viewFactory = new ViewFactory(),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase, 'sitelinkgroupview' );
@@ -100,8 +94,7 @@
 		sinon.assert.calledWith( $.wikibase.sitelinkgroupview, sinon.match( {
 			groupName: groupName,
 			value: siteLinks,
-			getSiteLinkListView: sinon.match.func,
-			siteLinkSetsChanger: siteLinkSetsChanger
+			getSiteLinkListView: sinon.match.func
 		} ) );
 
 		$.wikibase.sitelinkgroupview.restore();
