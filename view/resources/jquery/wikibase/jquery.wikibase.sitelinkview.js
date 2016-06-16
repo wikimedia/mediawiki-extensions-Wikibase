@@ -388,20 +388,27 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * Stops the widget's edit mode.
 	 *
 	 * @param {boolean} dropValue
+	 * @return {Object} jQuery.Promise
+	 *         Resolved parameters:
+	 *         - {boolean} dropValue
+	 *         Rejected parameters:
+	 *         - {Error}
 	 */
 	stopEditing: function( dropValue ) {
-		var self = this;
+		var deferred = $.Deferred();
 
 		if ( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
-			return;
+			return deferred.resolve().promise();
 		}
 
-		this._trigger( 'stopediting', null, [dropValue, function() {
-			if ( self._badgeselector ) {
-				self._badgeselector.stopEditing( dropValue );
-			}
-			self._afterStopEditing( dropValue );
-		}] );
+		this._trigger( 'stopediting', null, [dropValue] );
+
+		if ( this._badgeselector ) {
+			this._badgeselector.stopEditing( dropValue );
+		}
+		this._afterStopEditing( dropValue );
+
+		return deferred.resolve().promise();
 	},
 
 	/**
