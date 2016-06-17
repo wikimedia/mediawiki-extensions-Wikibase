@@ -165,7 +165,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 			),
 			null,
 			$entityType,
-			$this->getTermIndexOptions( $this->termSearchOptions )
+			$this->getTermIndexOptions()
 		);
 
 		$limit = $this->termSearchOptions->getLimit();
