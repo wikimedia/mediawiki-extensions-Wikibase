@@ -16,6 +16,24 @@
       "revId": "97a33bafcdd9bb2b515edbaa8b9b7846f3df3eb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_8daee7e0",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-17T12:16:09Z",
+      "side": 1,
+      "message": "A soft dependency, but yes, cyclic. It\u0027s not nice, but the other choices seem worse:\na) not have tests for an entity type that supports custom ids (and no incremental ids) or\nb) rewrite the entire testing infrastructure for api modules so we can define a fake entity type or\nc) fully implement and inject a dummy entity type for testing. \n\nIn principle, b) is of course the right choice. But blocking this functionality on a major refactoring isn\u0027t practical.",
+      "parentUuid": "0efd9372_72aa82d2",
+      "revId": "97a33bafcdd9bb2b515edbaa8b9b7846f3df3eb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
