@@ -71,7 +71,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetMatchingTerms() {
-		list( $item0, $item1, $item2 ) = $this->getTestitems();
+		list( $item0, $item1, $item2 ) = $this->getTestItems();
 
 		return array(
 			'cross-language match' => array(
@@ -249,7 +249,7 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 	 * @see provideGetMatchingTerms
 	 */
 	public function provideGetTopMatchingTerms() {
-		list( $item0, $item1, $item2 ) = $this->getTestitems();
+		list( $item0, $item1, $item2 ) = $this->getTestItems();
 
 		return array(
 			'EXACT MATCH not prefix, case sensitive' => array(
