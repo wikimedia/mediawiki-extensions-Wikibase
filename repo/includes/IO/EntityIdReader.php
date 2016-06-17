@@ -18,20 +18,18 @@ use Wikibase\Repo\Store\EntityIdPager;
  */
 class EntityIdReader implements EntityIdPager, Disposable {
 
-	/**
-	 * @var LineReader
-	 */
 	private $reader;
-
-	/**
-	 * @var ExceptionHandler
-	 */
-	private $exceptionHandler;
+	private $parser;
 
 	/**
 	 * @var string|null
 	 */
 	private $entityType;
+
+	/**
+	 * @var ExceptionHandler
+	 */
+	private $exceptionHandler;
 
 	/**
 	 * @param LineReader $reader
