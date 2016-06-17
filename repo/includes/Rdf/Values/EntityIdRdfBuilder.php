@@ -19,9 +19,7 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class EntityIdRdfBuilder implements ValueSnakRdfBuilder {
 
-	/**
-	 * @var EntityMentionListener
-	 */
+	private $vocabulary;
 	private $mentionedEntityTracker;
 
 	/**
@@ -30,7 +28,6 @@ class EntityIdRdfBuilder implements ValueSnakRdfBuilder {
 	 */
 	public function __construct( RdfVocabulary $vocabulary, EntityMentionListener $mentionedEntityTracker ) {
 		$this->vocabulary = $vocabulary;
-
 		$this->mentionedEntityTracker = $mentionedEntityTracker;
 	}
 
