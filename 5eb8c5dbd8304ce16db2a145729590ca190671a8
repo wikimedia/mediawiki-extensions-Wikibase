@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_056af211",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-17T08:05:40Z",
+      "side": 1,
+      "message": "Not 100% sure but local testing did not",
+      "parentUuid": "0efd9372_c41633ac",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_845c2b50",
         "filename": "client/i18n/en.json",
         "patchSetId": 26
@@ -30,6 +48,24 @@
       "writtenOn": "2016-06-09T19:59:41Z",
       "side": 1,
       "message": "If you want this subject line to be used by the new email formatter that was introduced recently, you\u0027ll also need a notification-subject-page-connection message; absent that it\u0027ll use notification-header-page-connection. The -email-batch-body and -email-subject messages (as well as the NotificationFormatter system) are going away, everything\u0027s being migrated to PresentationModels.",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_8561c2d2",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-17T08:05:40Z",
+      "side": 1,
+      "message": "Migrated to presentation models \\o/",
+      "parentUuid": "0efd9372_845c2b50",
       "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_c230e0fe",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-17T08:05:40Z",
+      "side": 1,
+      "message": "Done in all messages",
+      "parentUuid": "0efd9372_4471a30a",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_c4b8f376",
         "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
         "patchSetId": 26
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_e2336408",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-17T08:05:40Z",
+      "side": 1,
+      "message": "It was intended to bundle more notifications into one as it\u0027s not important what pages were connected but that they *were* connected",
+      "parentUuid": "0efd9372_c4b8f376",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_c49113fd",
         "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
         "patchSetId": 26
@@ -81,6 +153,24 @@
       "writtenOn": "2016-06-09T19:59:41Z",
       "side": 1,
       "message": "I see that this corresponds to the bundleCount \u003e 1 case in getHeaderMessageKey(), but I think it\u0027d be less confusing if you combined both of these things in getHeaderMessage(). i.e. don\u0027t override and don\u0027t use getHeaderMessageKey(), and have one if/else branch in getHeaderMessage() that both decides which message to use and which params to pass to it.",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_221d6c79",
+        "filename": "client/includes/Notifications/PageConnectionPresentationModel.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-17T08:05:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0efd9372_c49113fd",
       "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
