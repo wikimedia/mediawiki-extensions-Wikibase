@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_72aa82d2",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-06-17T07:20:03Z",
+      "side": 1,
+      "message": "So the dependence is cyclic? :\u0027(",
+      "revId": "97a33bafcdd9bb2b515edbaa8b9b7846f3df3eb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
