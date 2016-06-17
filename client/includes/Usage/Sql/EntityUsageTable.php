@@ -362,7 +362,7 @@ class EntityUsageTable {
 		$values = [];
 		if ( $this->connection->getType() === 'mysql' ) {
 			// On MySQL we can UNION all queries and run them at once
-			$sql = $this->connection->unionQueries( $subQueries, false );
+			$sql = $this->connection->unionQueries( $subQueries, true );
 
 			$res = $this->connection->query( $sql, __METHOD__ );
 			foreach ( $res as $row ) {
