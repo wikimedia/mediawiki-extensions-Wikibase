@@ -16,6 +16,24 @@
       "revId": "10b7ee087f70fe44bde929bf1acf73c156c9a5aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_a7c66a4c",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-17T00:58:44Z",
+      "side": 1,
+      "message": "The only caller is the above getUnusedEntities which creates an array idSerialization \u003d\u003e Entity Id object and then uses array_keys on that. So the ids are guaranteed to be unique.",
+      "parentUuid": "0efd9372_67ada280",
+      "revId": "10b7ee087f70fe44bde929bf1acf73c156c9a5aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
