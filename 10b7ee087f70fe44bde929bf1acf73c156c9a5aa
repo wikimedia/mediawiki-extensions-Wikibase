@@ -34,6 +34,24 @@
       "revId": "10b7ee087f70fe44bde929bf1acf73c156c9a5aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_e7c07231",
+        "filename": "client/includes/Usage/Sql/EntityUsageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-06-17T00:59:48Z",
+      "side": 1,
+      "message": "I was more so thinking about it as a minor pitfall in the future. But it doesn\u0027t really matter :)",
+      "parentUuid": "0efd9372_a7c66a4c",
+      "revId": "10b7ee087f70fe44bde929bf1acf73c156c9a5aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
