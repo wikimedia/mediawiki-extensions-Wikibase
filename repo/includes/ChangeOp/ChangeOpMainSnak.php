@@ -30,14 +30,8 @@ class ChangeOpMainSnak extends ChangeOpBase {
 	 */
 	private $statementGuid;
 
-	/**
-	 * @var Snak
-	 */
 	private $snak;
-
-	/**
-	 * @var SnakValidator
-	 */
+	private $guidGenerator;
 	private $snakValidator;
 
 	/**
