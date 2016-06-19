@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "0efd9372_672c8d46",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-06-19T08:40:58Z",
+      "side": 1,
+      "message": "(ignored if $id is given) I think this is a little odd. I think type should be mandatory and id optional.",
+      "revId": "97a33bafcdd9bb2b515edbaa8b9b7846f3df3eb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_4786a9ad",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-06-19T08:40:58Z",
+      "side": 1,
+      "message": "I don\u0027t really understand where this suddenly has appeared here.",
+      "revId": "97a33bafcdd9bb2b515edbaa8b9b7846f3df3eb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_72aa82d2",
         "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
         "patchSetId": 8
