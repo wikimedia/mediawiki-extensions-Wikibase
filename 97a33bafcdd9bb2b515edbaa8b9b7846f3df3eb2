@@ -68,6 +68,24 @@
       "revId": "97a33bafcdd9bb2b515edbaa8b9b7846f3df3eb2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_ce2aa2d6",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2016-06-20T09:00:00Z",
+      "side": 1,
+      "message": "A lot of things (have) become impractical when design is not treated as a first class citizen.\n\nHaving a dummy entity type sounds reasonable to me. Then again, I don\u0027t recall all the millions of (unfortunately) relevant details of this code.",
+      "parentUuid": "0efd9372_8daee7e0",
+      "revId": "97a33bafcdd9bb2b515edbaa8b9b7846f3df3eb2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
