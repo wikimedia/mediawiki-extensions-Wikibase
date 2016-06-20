@@ -3,13 +3,10 @@
 namespace Wikibase\Repo;
 
 use DataTypes\DataTypeFactory;
-use DataValues\BooleanValue;
 use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
-use DataValues\MultilingualTextValue;
-use DataValues\NumberValue;
 use DataValues\QuantityValue;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
@@ -1374,7 +1371,7 @@ class WikibaseRepo {
 	/**
 	 * @return Deserializer
 	 */
-	public function getDataValueDeserializer() {
+	private function getDataValueDeserializer() {
 		return new DataValueDeserializer( array(
 			'string' => StringValue::class,
 			'unknown' => UnknownValue::class,
@@ -1383,12 +1380,9 @@ class WikibaseRepo {
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,
 			'wikibase-entityid' => function( $value ) {
-				if ( isset( $value['id'] ) ) {
-					$id = $this->getEntityIdParser()->parse( $value['id'] );
-					return new EntityIdValue( $id );
-				} else {
-					return EntityIdValue::newFromArray( $value );
-				}
+				return isset( $value['id'] )
+					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
+					: EntityIdValue::newFromArray( $value );
 			},
 		) );
 	}

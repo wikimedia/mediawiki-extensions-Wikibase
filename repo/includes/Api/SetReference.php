@@ -79,10 +79,7 @@ class SetReference extends ApiBase {
 
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
-		$this->deserializerFactory = new DeserializerFactory(
-			$wikibaseRepo->getDataValueDeserializer(),
-			$wikibaseRepo->getEntityIdParser()
-		);
+		$this->deserializerFactory = $wikibaseRepo->getExternalFormatDeserializerFactory();
 
 		$this->modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakFactory(),
