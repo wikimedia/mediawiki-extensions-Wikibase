@@ -3,12 +3,9 @@
 namespace Wikibase\Client;
 
 use DataTypes\DataTypeFactory;
-use DataValues\BooleanValue;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
-use DataValues\MultilingualTextValue;
-use DataValues\NumberValue;
 use DataValues\QuantityValue;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
@@ -950,18 +947,15 @@ final class WikibaseClient {
 	 */
 	private function getDataValueDeserializer() {
 		return new DataValueDeserializer( array(
-			'boolean' => BooleanValue::class,
-			'number' => NumberValue::class,
 			'string' => StringValue::class,
 			'unknown' => UnknownValue::class,
 			'globecoordinate' => GlobeCoordinateValue::class,
 			'monolingualtext' => MonolingualTextValue::class,
-			'multilingualtext' => MultilingualTextValue::class,
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,
 			'wikibase-entityid' => function( $value ) {
 				return isset( $value['id'] )
-					? $this->getEntityIdParser()->parse( $value['id'] )
+					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
 					: EntityIdValue::newFromArray( $value );
 			},
 		) );

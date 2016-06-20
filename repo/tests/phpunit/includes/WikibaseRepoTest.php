@@ -3,7 +3,6 @@
 namespace Wikibase\Tests\Repo;
 
 use DataTypes\DataTypeFactory;
-use DataValues\BooleanValue;
 use DataValues\DataValue;
 use DataValues\DataValueFactory;
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -24,7 +23,6 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -334,11 +332,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( Serializer::class, $serializer );
 	}
 
-	public function testGetDataValueDeserializer() {
-		$service = $this->getWikibaseRepo()->getDataValueDeserializer();
-		$this->assertInstanceOf( Deserializer::class, $service );
-	}
-
 	public function testGetEntityChangeFactory() {
 		$factory = $this->getWikibaseRepo()->getEntityChangeFactory();
 		$this->assertInstanceOf( EntityChangeFactory::class, $factory );
@@ -489,80 +482,72 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( CachingCommonsMediaFileNameLookup::class, $lookup );
 	}
 
-	public function providetDataValueDeserializer_valueTypes() {
-		$latLong = new LatLongValue( 23.7, 42.1 );
-
-		$time = new TimeValue(
-			'+1980-10-07T17:33:22Z',
-			0,
-			0,
-			1,
-			TimeValue::PRECISION_DAY,
-			TimeValue::CALENDAR_GREGORIAN
-		);
-
-		$quantity = QuantityValue::newFromNumber( 2.3, 'm', 2.5, 2.1 );
-
-		$itemId = new ItemId( 'Q13' );
-
+	public function dataValueProvider() {
 		return [
 			'string' => [ new StringValue( 'Test' ) ],
 			'unknown' => [ new UnknownValue( [ 'foo' => 'bar' ] ) ],
-			'globecoordinate' => [ new GlobeCoordinateValue( $latLong, 2.3 ) ],
+			'globecoordinate' => [ new GlobeCoordinateValue( new LatLongValue( 2, 3 ), 1 ) ],
 			'monolingualtext' => [ new MonolingualTextValue( 'als', 'Test' ) ],
-			'quantity' => [ $quantity ],
-			'time' => [ $time ],
-			'wikibase-entityid old style' => [
-				new EntityIdValue( $itemId ),
-				[
-					'type' => 'wikibase-entityid',
-					'value' => [ 'entity-type' => 'item', 'numeric-id' => 13 ]
-				]
-			],
-			'wikibase-entityid' => [
-				new EntityIdValue( $itemId ),
-				[
-					'type' => 'wikibase-entityid',
-					'value' => [ 'id' => 'Q13', ]
-				]
-			],
+			'quantity' => [ QuantityValue::newFromNumber( 2 ) ],
+			'time' => [ new TimeValue(
+				'+1980-10-07T17:33:22Z',
+				0,
+				0,
+				1,
+				TimeValue::PRECISION_DAY,
+				TimeValue::CALENDAR_GREGORIAN
+			) ],
+			'wikibase-entityid' => [ new EntityIdValue( new ItemId( 'Q13' ) ) ],
 		];
 	}
 
 	/**
-	 * @dataProvider providetDataValueDeserializer_valueTypes
-	 *
-	 * @param $data
-	 * @param DataValue $expected
+	 * @dataProvider dataValueProvider
 	 */
-	public function testGetDataValueDeserializer_valueTypes( DataValue $expected, $data = null ) {
-		if ( $data === null ) {
-			// test round trip
-			$data = $expected->toArray();
-		}
+	public function testDataValueSerializationDeserializationRoundtrip( DataValue $expected ) {
+		$service = $this->getWikibaseRepo()->getDataValueFactory();
+		$deserialized = $service->newFromArray( $expected->toArray() );
 
-		$entityTypeDefs = [
-			'item' => array(
+		$this->assertEquals( $expected, $deserialized );
+	}
+
+	public function entityIdValueSerializationProvider() {
+		return [
+			'legacy' => [ [
+				'entity-type' => 'item',
+				'numeric-id' => 13,
+			] ],
+			'intermediate' => [ [
+				'entity-type' => 'item',
+				'numeric-id' => 13,
+				'id' => 'Q13',
+			] ],
+			'new' => [ [
+				'id' => 'Q13',
+			] ],
+		];
+	}
+
+	/**
+	 * @dataProvider entityIdValueSerializationProvider
+	 */
+	public function testEntityIdValueDeserialization( array $serialization ) {
+		$entityTypeDefinitions = [
+			'item' => [
 				'entity-id-pattern' => ItemId::PATTERN,
 				'entity-id-builder' => function( $serialization ) {
 					return new ItemId( $serialization );
 				},
-			),
-			'property' => array(
-				'entity-id-pattern' => PropertyId::PATTERN,
-				'entity-id-builder' => function( $serialization ) {
-					return new PropertyId( $serialization );
-				},
-			)
+			],
 		];
+		$service = $this->getWikibaseRepo( $entityTypeDefinitions )->getDataValueFactory();
+		$deserialized = $service->newFromArray( [
+			'type' => 'wikibase-entityid',
+			'value' => $serialization,
+		] );
 
-		$service = $this->getWikibaseRepo( $entityTypeDefs )->getDataValueDeserializer();
-		$value = $service->deserialize( $data );
-
-		$this->assertTrue(
-			$expected->equals( $value ),
-			$expected->getType() . "\n" . var_export( $data, true )
-		);
+		$expected = new EntityIdValue( new ItemId( 'Q13' ) );
+		$this->assertEquals( $expected, $deserialized );
 	}
 
 }
