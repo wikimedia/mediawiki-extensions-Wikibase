@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_89e414dd",
+        "filename": "lib/includes/TermIndexEntry.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-20T13:55:38Z",
+      "side": 1,
+      "message": "This does not work. There are 75 calls to the constructor of this class. This is a _value_ object. It should not know anything about services.",
+      "revId": "dbfcbb70624d0e9a315b7afd74b6ea6030a07ee3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
