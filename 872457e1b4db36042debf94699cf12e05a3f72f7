@@ -33,6 +33,40 @@
       "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_0ecdca88",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-20T07:20:16Z",
+      "side": 1,
+      "message": "What exactly is tested here? I can\u0027t really tell from the method name or the lines below.\n\nAfter closer inspection this code mixes two different tests. One test is an actual roundtrip. When $data is null the serialization is run by calling …-\u003etoArray(), which is then deserialized. The other test (where $data is set) is about old and incomplete serializations.\n\nPlease split these tests into two separate methods.",
+      "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_eec7a665",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-20T07:20:16Z",
+      "side": 1,
+      "message": "How is this line responsible for an successful roundtrip?",
+      "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
