@@ -610,7 +610,7 @@ class MockRepositoryTest extends \MediaWikiTestCase {
 	public function testUpdateWatchlist() {
 		$user = User::newFromName( 'WikiPageEntityStoreTestUser2' );
 
-		$item = new Item();
+		$item = new Item( new ItemId( 'Q77534' ) );
 		$this->repo->saveEntity( $item, 'testing', $user, EDIT_NEW );
 		$itemId = $item->getId();
 

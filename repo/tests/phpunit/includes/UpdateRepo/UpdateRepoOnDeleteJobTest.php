@@ -156,6 +156,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 		// Needed as UpdateRepoOnDeleteJob instantiates a User object
 		$user->addToDatabase();
 
+		$mockRepository->assignFreshId( $item );
 		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
 
 		$params = array(

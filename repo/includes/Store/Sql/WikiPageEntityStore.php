@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
+use LogicException;
 use MWException;
 use Revision;
 use Status;
@@ -39,46 +40,19 @@ class WikiPageEntityStore implements EntityStore {
 	private $contentFactory;
 
 	/**
-	 * @var IdGenerator
-	 */
-	private $idGenerator;
-
-	/**
 	 * @var GenericEventDispatcher
 	 */
 	private $dispatcher;
 
 	/**
 	 * @param EntityContentFactory $contentFactory
-	 * @param IdGenerator $idGenerator
 	 */
 	public function __construct(
-		EntityContentFactory $contentFactory,
-		IdGenerator $idGenerator
+		EntityContentFactory $contentFactory
 	) {
 		$this->contentFactory = $contentFactory;
-		$this->idGenerator = $idGenerator;
 
 		$this->dispatcher = new GenericEventDispatcher( EntityStoreWatcher::class );
-	}
-
-	/**
-	 * @see EntityStore::assignFreshId()
-	 *
-	 * @param EntityDocument $entity
-	 *
-	 * @throws StorageException
-	 */
-	public function assignFreshId( EntityDocument $entity ) {
-		if ( $entity->getId() !== null ) {
-			throw new StorageException( 'This entity already has an ID!' );
-		}
-
-		$contentModelId = $this->contentFactory->getContentModelForType( $entity->getType() );
-		$numericId = $this->idGenerator->getNewId( $contentModelId );
-
-		//FIXME: this relies on setId() accepting numeric IDs!
-		$entity->setId( $numericId );
 	}
 
 	/**
@@ -132,11 +106,7 @@ class WikiPageEntityStore implements EntityStore {
 		$baseRevId = false
 	) {
 		if ( $entity->getId() === null ) {
-			if ( ( $flags & EDIT_NEW ) !== EDIT_NEW ) {
-				throw new StorageException( Status::newFatal( 'edit-gone-missing' ) );
-			}
-
-			$this->assignFreshId( $entity );
+			throw new LogicException( 'An entity cannot be saved without an ID being set.' );
 		}
 
 		$content = $this->contentFactory->newFromEntity( $entity );
@@ -215,11 +185,15 @@ class WikiPageEntityStore implements EntityStore {
 		$baseRevId = false
 	) {
 		$page = $this->getWikiPageForEntity( $entityContent->getEntityId() );
+		$title = $page->getTitle();
 
-		if ( ( $flags & EDIT_NEW ) === EDIT_NEW ) {
-			$title = $page->getTitle();
-			if ( $title->exists() ) {
+		if ( $title->exists() ) {
+			if ( !( $flags & EDIT_UPDATE ) ) {
 				throw new StorageException( Status::newFatal( 'edit-already-exists' ) );
+			}
+		} else {
+			if ( !( $flags & EDIT_NEW ) ) {
+				throw new StorageException( Status::newFatal( 'edit-gone-missing' ) );
 			}
 		}
 

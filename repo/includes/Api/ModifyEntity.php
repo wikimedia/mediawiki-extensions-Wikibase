@@ -357,6 +357,20 @@ abstract class ModifyEntity extends ApiBase {
 	abstract protected function modifyEntity( EntityDocument &$entity, array $params, $baseRevId );
 
 	/**
+	 * @since 0.5
+	 *
+	 * @param EntityDocument $entity
+	 */
+	protected function assignFreshId( EntityDocument $entity ) {
+		// FIXME // FIXME // FIXME // FIXME // FIXME // FIXME // FIXME
+		$contentModelId = $this->contentFactory->getContentModelForType( $entity->getType() );
+		$numericId = $this->idGenerator->getNewId( $contentModelId );
+
+		//FIXME: this relies on setId() accepting numeric IDs!
+		$entity->setId( $numericId );
+	}
+
+	/**
 	 * Applies the given ChangeOp to the given Entity.
 	 * Any ChangeOpException is converted into a UsageException with the code 'modification-failed'.
 	 *
@@ -422,7 +436,7 @@ abstract class ModifyEntity extends ApiBase {
 
 			// HACK: We need to assign an ID early, for things like the ClaimIdGenerator.
 			if ( $entity->getId() === null ) {
-				$this->entityStore->assignFreshId( $entity );
+				$this->assignFreshId( $entity );
 			}
 		} else {
 			$entity = $entityRev->getEntity();

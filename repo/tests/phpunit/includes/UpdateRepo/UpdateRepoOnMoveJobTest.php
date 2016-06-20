@@ -151,6 +151,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 
 		$mockRepository = new MockRepository();
 
+		$mockRepository->assignFreshId( $item );
 		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
 
 		$params = array(

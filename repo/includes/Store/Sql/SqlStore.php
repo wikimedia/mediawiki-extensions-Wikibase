@@ -364,9 +364,8 @@ class SqlStore implements Store {
 	 */
 	private function newEntityStore() {
 		$contentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		$idGenerator = $this->newIdGenerator();
 
-		$store = new WikiPageEntityStore( $contentFactory, $idGenerator );
+		$store = new WikiPageEntityStore( $contentFactory );
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
 		return $store;
 	}

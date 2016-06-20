@@ -502,7 +502,12 @@ class EditEntityTest extends MediaWikiTestCase {
 		$token = $user->getEditToken();
 		$edit = $this->makeEditEntity( $repo, $item, $titleLookup, $user, false, $permissions );
 
-		$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), $token );
+		$new = ( $item->getId() === null );
+		if ( $new ) {
+			$repo->assignFreshId( $item );
+		}
+
+		$edit->attemptSave( "testing", ( $new ? EDIT_NEW : EDIT_UPDATE ), $token );
 
 		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
@@ -678,10 +683,15 @@ class EditEntityTest extends MediaWikiTestCase {
 				$items[$name] = $item;
 			}
 
+			$new = ( $item->getId() === null );
+			if ( $new ) {
+				$repo->assignFreshId( $item );
+			}
+
 			$item->setLabel( 'en', $label );
 
 			$edit = $this->makeEditEntity( $repo, $item, $titleLookup, $user );
-			$edit->attemptSave( "testing", ( $item->getId() === null ? EDIT_NEW : EDIT_UPDATE ), false );
+			$edit->attemptSave( "testing", ( $new ? EDIT_NEW : EDIT_UPDATE ), false );
 
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
@@ -771,7 +781,9 @@ class EditEntityTest extends MediaWikiTestCase {
 		$item = new Item();
 		$item->setLabel( "en", "Test" );
 
-		if ( !$new ) {
+		if ( $new ) {
+			$repo->assignFreshId( $item );
+		} else {
 			$repo->putEntity( $item );
 			$repo->updateWatchlist( $user, $item->getId(), $watched );
 		}
@@ -816,9 +828,14 @@ class EditEntityTest extends MediaWikiTestCase {
 	 * @dataProvider provideHookRunnerReturnStatus
 	 */
 	public function testEditFilterHookRunnerInteraction( Status $hookReturnStatus ) {
+		$repo = $this->getMockRepository();
+		$item = new Item();
+
+		$repo->assignFreshId( $item );
+
 		$edit = $this->makeEditEntity(
-			$this->getMockRepository(),
-			new Item(),
+			$repo,
+			$item,
 			$this->getEntityTitleLookup(),
 			null,
 			false,
