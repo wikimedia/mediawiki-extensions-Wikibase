@@ -211,11 +211,9 @@ class TermIndexEntry {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @return int|null
 	 */
-	public function getNumericId() {
+	private function getNumericId() {
 		return array_key_exists( 'entityId', $this->fields ) ? $this->fields['entityId'] : null;
 	}
 
@@ -230,7 +228,8 @@ class TermIndexEntry {
 		$numericId = $this->getNumericId();
 
 		if ( $entityType !== null && $numericId !== null ) {
-			// TODO: This does not belong to a value object. Provide entityId object to constructor, so service will be obsolete.
+			// TODO: This does not belong to a value object. Introduce a TermIndexEntryFactory and
+			// encapsulate all knowledge about numeric IDs there.
 			if ( defined( 'WB_VERSION' ) ) {
 				$entityIdComposer = WikibaseRepo::getDefaultInstance()->getEntityIdComposer();
 			} elseif ( defined( 'WBC_VERSION' ) ) {
