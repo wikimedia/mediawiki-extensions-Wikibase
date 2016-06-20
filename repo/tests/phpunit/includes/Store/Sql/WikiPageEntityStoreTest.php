@@ -21,7 +21,6 @@ use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SqlIdGenerator;
 
 /**
  * @covers Wikibase\Repo\Store\WikiPageEntityStore
@@ -68,19 +67,19 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 						return $wikibaseRepo->newPropertyHandler();
 					}
 				)
-			),
-			new SqlIdGenerator( wfGetLB() )
+			)
 		);
 
 		return array( $store, $lookup );
 	}
 
 	public function simpleEntityParameterProvider() {
-		$item = new Item();
+		$item = new Item( $this->newEntityId() );
 		$item->setLabel( 'en', 'Item' );
 		$item->setDescription( 'en', 'Item description' );
 
 		$property = Property::newFromType( 'string' );
+		$property->setId( $this->newPropertyId() );
 		$property->setLabel( 'en', 'Property' );
 		$property->setDescription( 'en', 'Property description' );
 
@@ -142,7 +141,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$firstItem = new Item();
 		$firstItem->setLabel( 'en', 'one' );
 
-		$secondItem = new Item( new ItemId( 'Q768476834' ) );
+		$secondItem = new Item( $this->newEntityId() );
 		$secondItem->setLabel( 'en', 'Bwahahaha' );
 		$secondItem->setLabel( 'de', 'Kähähähä' );
 
@@ -172,7 +171,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$user = $GLOBALS['wgUser'];
 
 		// setup target item
-		$one = new Item();
+		$one = new Item( $this->newEntityId() );
 		$one->setLabel( 'en', 'one' );
 		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
 
@@ -207,14 +206,14 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store->registerWatcher( $watcher );
 
 		// create one
-		$one = new Item();
+		$one = new Item( $this->newEntityId() );
 		$one->setLabel( 'en', 'one' );
 
 		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
 		$oneId = $r1->getEntity()->getId();
 
 		// redirect one to Q33
-		$q33 = new ItemId( 'Q33' );
+		$q33 = $this->newEntityId();
 		$redirect = new EntityRedirect( $oneId, $q33 );
 
 		$redirectRevId = $store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
@@ -282,7 +281,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$anonUser = User::newFromId( 0 );
 		$anonUser->setName( '127.0.0.1' );
 		$user = User::newFromName( "EditEntityTestUser" );
-		$item = new Item();
+		$item = new Item( $this->newEntityId() );
 
 		// check for default values, last revision by anon --------------------
 		$item->setLabel( 'en', "Test Anon default" );
@@ -342,7 +341,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$user->addToDatabase();
 		}
 
-		$item = new Item();
+		$item = new Item( $this->newEntityId() );
 		$store->saveEntity( $item, 'testing', $user, EDIT_NEW );
 
 		$itemId = $item->getId();
@@ -354,8 +353,20 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertFalse( $store->isWatching( $user, $itemId ) );
 	}
 
+	protected function newPropertyId() {
+		static $counter = 2293057681;
+
+		return new PropertyId( 'P' . $counter++ );
+	}
+
+	protected function newEntityId() {
+		static $counter = 2293057681;
+
+		return new ItemId( 'Q' . $counter++ );
+	}
+
 	protected function newEntity() {
-		$item = new Item();
+		$item = new Item( $this->newEntityId() );
 		return $item;
 	}
 
@@ -456,7 +467,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// try to save without flags
 		$entity->setLabel( 'en', $prefix . 'six' );
 		$status = $this->saveEntity( $store, $entity, 'create item' );
-		$this->assertTrue( $status->isOK(), 'try to save without flags, save failed' );
+		$this->assertFalse( $status->isOK(), "save should have failed" );
+		$this->assertTrue(
+			$status->hasMessage( 'edit-already-exists' ),
+			'try to create without flags, edit gone missing'
+		);
 	}
 
 	public function testRepeatedSave() {
@@ -501,8 +516,12 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertEquals( $prev_id, $rev_id, "revision ID should stay the same if no change was made" );
 	}
 
+	public function provideDeleteEntity() {
+		return $this->simpleEntityParameterProvider();
+	}
+
 	/**
-	 * @dataProvider simpleEntityParameterProvider
+	 * @dataProvider provideDeleteEntity
 	 */
 	public function testDeleteEntity( EntityDocument $entity ) {
 		/* @var WikiPageEntityStore $store */

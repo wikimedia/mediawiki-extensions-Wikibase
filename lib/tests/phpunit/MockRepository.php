@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
+use LogicException;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -489,13 +490,18 @@ class MockRepository implements
 	 *
 	 * @return EntityRevision
 	 * @throws StorageException
+	 * @throws LogicException
 	 */
 	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevisionId = false ) {
 		$entityId = $entity->getId();
 
+		if ( !$entityId ) {
+			throw new LogicException( 'An entity cannot be saved without an ID being set.' );
+		}
+
 		$status = Status::newGood();
 
-		if ( ( $flags & EDIT_NEW ) > 0 && $entityId && $this->hasEntity( $entityId ) ) {
+		if ( ( $flags & EDIT_NEW ) > 0 && $this->hasEntity( $entityId ) ) {
 			$status->fatal( 'edit-already-exists' );
 		}
 

@@ -128,6 +128,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 				$status = $this->modifyEntity( $entity );
 
 				if ( $status->isGood() ) {
+					if ( !$entity->getId() ) {
+						$this->assignFreshId( $entity );
+					}
+
 					$summary = new Summary( 'wbeditentity', 'create' );
 					$summary->setLanguage( $uiLanguageCode );
 					$summary->addAutoSummaryArgs( $this->label, $this->description );
@@ -219,6 +223,20 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return EntityDocument Created entity of correct subtype
 	 */
 	abstract protected function createEntity();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param EntityDocument $entity
+	 */
+	protected function assignFreshId( EntityDocument $entity ) {
+		// FIXME // FIXME // FIXME // FIXME // FIXME // FIXME // FIXME
+		$contentModelId = $this->contentFactory->getContentModelForType( $entity->getType() );
+		$numericId = $this->idGenerator->getNewId( $contentModelId );
+
+		//FIXME: this relies on setId() accepting numeric IDs!
+		$entity->setId( $numericId );
+	}
 
 	/**
 	 * Attempt to modify entity

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use LogicException;
 use MWException;
 use PermissionsError;
 use User;
@@ -24,29 +25,13 @@ use Wikibase\EntityRevision;
 interface EntityStore {
 
 	/**
-	 * Assigns a fresh ID to the given entity.
-	 *
-	 * @note The new ID is "consumed" after this method returns, and will not be
-	 * assigned to another other entity. The next available ID for each kind of
-	 * entity is considered part of the persistent state of the Wikibase
-	 * installation.
-	 *
-	 * @note calling this method on an Entity that already has an ID, and specifically
-	 * calling this method twice on the same entity, shall result in an exception.
-	 *
-	 * @param EntityDocument $entity
-	 *
-	 * @throws StorageException
-	 */
-	public function assignFreshId( EntityDocument $entity );
-
-	/**
 	 * Saves the given Entity to some underlying storage mechanism.
 	 *
-	 * @note: If the item does not have an ID yet (i.e. it was not yet created in the database),
-	 *        saveEntity() will fail with a edit-gone-missing message unless the EDIT_NEW bit is
-	 *        set in $flags. If EDIT_NEW is set and the Entity does not yet have an ID, a new ID
-	 *        is assigned using assignFreshId().
+	 * @note: If the Entity does not have an ID yet, this method will fail with a LogicException.
+	 *
+	 * @note: If the Entity does not exist yet, saving will fail unless the EDIT_NEW bit is set
+	 *        in $flags. Conversely, saving will fail if the Entity exists unless the EDIT_UPDATE
+	 *        flag is set.
 	 *
 	 * @note: if the save is triggered by any kind of user interaction, consider using
 	 *        EditEntity::attemptSave(), which automatically handles edit conflicts, permission
@@ -64,6 +49,7 @@ interface EntityStore {
 	 *
 	 * @return EntityRevision
 	 * @throws StorageException
+	 * @throws LogicException
 	 * @throws PermissionsError
 	 */
 	public function saveEntity( EntityDocument $entity, $summary, User $user, $flags = 0, $baseRevId = false );
