@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_ce9f4254",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-20T08:26:00Z",
+      "side": 1,
+      "message": "Some of these are unused.",
+      "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_d84d57c9",
         "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
         "patchSetId": 2
@@ -30,6 +47,23 @@
       "writtenOn": "2016-06-16T13:23:02Z",
       "side": 1,
       "message": "typo",
+      "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_6e99f670",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-20T08:26:00Z",
+      "side": 1,
+      "message": "Seems to be an incomplete, auto-generated stub. I find it best practice to not have any @param lines when there is a @dataProvider.",
       "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -64,6 +98,40 @@
       "writtenOn": "2016-06-20T07:20:16Z",
       "side": 1,
       "message": "How is this line responsible for an successful roundtrip?",
+      "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_eea4c6a0",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-20T08:26:00Z",
+      "side": 1,
+      "message": "Mixing [] with array() here is a bit odd.",
+      "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_8e96da40",
+        "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-20T08:26:00Z",
+      "side": 1,
+      "message": "This is unused, there are only items tested.",
       "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
