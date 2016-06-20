@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_a91758f2",
+        "filename": "repo/includes/Rdf/Values/EntityIdRdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-06-20T12:51:53Z",
+      "side": 0,
+      "message": "Why did you remove this?",
+      "revId": "10b7ee087f70fe44bde929bf1acf73c156c9a5aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
