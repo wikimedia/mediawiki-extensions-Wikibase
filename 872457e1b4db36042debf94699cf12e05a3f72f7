@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0efd9372_ced2a22b",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1388,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-20T07:13:07Z",
+      "side": 1,
+      "message": "The same line is missing in the WikibaseClient top level factory. Both implementations should be identical.",
+      "revId": "872457e1b4db36042debf94699cf12e05a3f72f7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_d84d57c9",
         "filename": "repo/tests/phpunit/includes/WikibaseRepoTest.php",
         "patchSetId": 2
