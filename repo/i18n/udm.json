@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"AlnashPiyash2"
+			"AlnashPiyash2",
+			"Kaganer"
 		]
 	},
-	"wikibase-edit": "тупатыны"
+	"wikibase-edit": "тупатыны",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Мукет кылъёсын",
+	"wikibase-entityselector-more": "эшшо",
+	"wikibase-history-title-with-label": "«$2» ($1) воштонъёслэн историзы",
+	"wikibase-history-title-without-label": "$1 — воштонъёслэн историзы"
 }

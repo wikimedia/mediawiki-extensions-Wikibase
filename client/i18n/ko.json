@@ -71,5 +71,5 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} 항목 ID",
 	"wikibase-pageinfo-entity-id-none": "없음",
 	"wikibase-property-render-error": "$1 속성 표시 실패: $2",
-	"wikibase-otherprojects": "다른 프로젝트에서"
+	"wikibase-otherprojects": "다른 프로젝트"
 }

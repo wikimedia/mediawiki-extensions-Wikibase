@@ -68,7 +68,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}कलमाची ओळखण",
 	"wikibase-pageinfo-entity-id-none": "काहीही नाही",
 	"wikibase-property-render-error": "$1 गुणधर्म देण्यास अयशस्वी:$2",
-	"wikibase-otherprojects": "इतर प्रकल्प",
+	"wikibase-otherprojects": "इतर प्रकल्पात",
 	"wikibase-otherprojects-beta-message": "इतर प्रकल्प कडपट्टी(साईडबार)",
 	"wikibase-otherprojects-beta-description": "हे कडपट्टीस (साईडबार) \"{{int:wikibase-otherprojects}}\" विभाग जोडते,ज्यायोगे, {{WBREPONAME}}वर आधारीत दुसऱ्या विकिमिडिया प्रकल्पांशी दुवे दिल्या जातात."
 }
