@@ -16,6 +16,24 @@
       "revId": "1e5d32f8fcab68fe3d3095ab29172bb9298a36dd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_6df612d6",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 29
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-22T13:10:11Z",
+      "side": 1,
+      "message": "Sounds legit. However, I don\u0027t know about any wiki-hosted Wikibase documentation...",
+      "parentUuid": "0efd9372_7ba88f1d",
+      "revId": "1e5d32f8fcab68fe3d3095ab29172bb9298a36dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
