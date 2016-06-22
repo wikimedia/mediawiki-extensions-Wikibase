@@ -75,6 +75,41 @@
 		} );
 	} );
 
+	QUnit.test( 'setSiteLink correctly passes badges', function( assert ) {
+		assert.expect( 1 );
+		var api = {
+			setSitelink: sinon.spy( function() {
+				return $.Deferred().resolve( {
+					entity: {
+						sitelinks: {
+							siteId: {
+								title: 'pageName',
+								badges: [ 'Q2' ]
+							},
+							lastrevid: 'lastrevid'
+						}
+					}
+				} ).promise();
+			} )
+		};
+		var siteLinksChanger = new SUBJECT(
+			api,
+			{ getSitelinksRevision: function() { return 0; }, setSitelinksRevision: function() {} },
+			new wb.datamodel.Item( 'Q1' )
+		);
+
+		QUnit.stop();
+
+		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', 'pageName', [ 'Q2' ] ) )
+		.done( function( savedSiteLink ) {
+			QUnit.start();
+			assert.deepEqual( savedSiteLink.getBadges(), [ 'Q2' ] );
+		} )
+		.fail( function() {
+			assert.ok( false, 'setSiteLink failed' );
+		} );
+	} );
+
 	QUnit.test( 'setSiteLink correctly handles API failures', function( assert ) {
 		assert.expect( 2 );
 		var api = {
