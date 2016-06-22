@@ -56,6 +56,7 @@ SELF.prototype._view = null;
 
 SELF.prototype.setValue = function( value ) {
 	this._value = value;
+	// When option is set, remove icon is shown. Not really needed on every setValue().
 	this._toolbar.option(
 		'onRemove',
 		( value && this._model.remove ) ? $.proxy( this, 'remove' ) : null
@@ -90,14 +91,14 @@ SELF.prototype._updateToolbarState = function() {
 	}
 };
 
-SELF.prototype._viewHasNewGoodValue = function() {
+SELF.prototype._viewHasSavableValue = function() {
 	var viewValue = this._view.value();
 	return viewValue !== null && ( this._value === null || !this._value.equals( viewValue ) );
 };
 
 SELF.prototype._updateSaveButtonState = function() {
 	var btnSave = this._toolbar.getButton( 'save' ),
-		enableSave = this._viewHasNewGoodValue();
+		enableSave = this._viewHasSavableValue();
 
 	btnSave[enableSave ? 'enable' : 'disable']();
 };
@@ -109,7 +110,7 @@ SELF.prototype._updateSaveButtonState = function() {
  * persisted or dropped
  */
 SELF.prototype.stopEditing = function( dropValue ) {
-	if ( !dropValue && !this._viewHasNewGoodValue() ) {
+	if ( !dropValue && !this._viewHasSavableValue() ) {
 		return;
 	}
 
@@ -179,7 +180,7 @@ SELF.prototype._leaveEditMode = function( dropValue ) {
 		// FIXME: The toolbar has a race condition
 		window.setTimeout( function() {
 			self._toolbar.toNonEditMode();
-		} );
+		}, 0 );
 	}
 };
 
