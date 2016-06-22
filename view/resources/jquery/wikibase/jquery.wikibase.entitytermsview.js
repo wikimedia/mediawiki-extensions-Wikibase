@@ -17,8 +17,6 @@
  * @option {string[]} userLanguages
  *         A list of languages for which terms should be displayed initially.
  *
- * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
- *
  * @option {string} [helpMessage]
  *                  Default: 'Edit label, description and aliases per language.'
  *
@@ -70,7 +68,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		},
 		value: null,
 		userLanguages: [],
-		entityChangersFactory: null,
 		helpMessage: 'Edit label, description and aliases per language.'
 	},
 
@@ -95,7 +92,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	_create: function() {
 		if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
 			|| !$.isArray( this.options.userLanguages )
-			|| !this.options.entityChangersFactory
 		) {
 			throw new Error( 'Required option(s) missing' );
 		}
@@ -146,8 +142,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 				}
 			}
 		);
-
-		this._entityTermsChanger = this.options.entityChangersFactory.getEntityTermsChanger();
 
 		this.draw();
 	},
@@ -340,8 +334,7 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		)
 		.entitytermsforlanguagelistview( {
 			value: this.options.value,
-			userLanguages: this.options.userLanguages,
-			entityChangersFactory: this.options.entityChangersFactory
+			userLanguages: this.options.userLanguages
 		} );
 
 		this.$entitytermsforlanguagelistview.data( 'entitytermsforlanguagelistview' )
@@ -378,8 +371,11 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	_save: function() {
-		return this._entityTermsChanger.save( this.value(), this.options.value );
+	stopEditing: function( dropValue ) {
+		var deferred = $.Deferred();
+		this._trigger( 'stopediting', null, [dropValue] );
+		this._afterStopEditing( dropValue );
+		return deferred.resolve( dropValue ).promise();
 	},
 
 	/**
