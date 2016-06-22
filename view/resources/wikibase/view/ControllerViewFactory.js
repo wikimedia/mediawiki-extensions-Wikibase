@@ -12,6 +12,65 @@ var SELF = util.inherit(
 	}
 );
 
+SELF.prototype.getEntityTermsView = function( value, $entitytermsview ) {
+	var view = PARENT.prototype.getEntityTermsView.apply( this, arguments );
+	var $container = this._toolbarFactory.getToolbarContainer( view.element );
+	$container.sticknode( {
+		$container: view.$entitytermsforlanguagelistview,
+		autoWidth: true,
+		zIndex: 2
+	} )
+	.on( 'sticknodeupdate', function( event ) {
+		if ( !$( event.target ).data( 'sticknode' ).isFixed() ) {
+			$container.css( 'width', 'auto' );
+		}
+	} );
+
+	view.element.on( 'entitytermsviewchange', function() {
+		$container.data( 'sticknode' ).refresh();
+	} );
+
+	view.element.on( 'entitytermsviewafterstartediting', function() {
+		if ( !view.$entitytermsforlanguagelistviewContainer.is( ':visible' ) ) {
+			view.$entitytermsforlanguagelistviewContainer.slideDown( {
+				complete: function() {
+					view.$entitytermsforlanguagelistview
+						.data( 'entitytermsforlanguagelistview' ).updateInputSize();
+					view.$entitytermsforlanguagelistviewToggler.data( 'toggler' )
+						.refresh();
+				},
+				duration: 'fast'
+			} );
+		}
+
+		view.focus();
+	} );
+
+	view.element.on( 'entitytermsviewafterstopediting', function() {
+		var showEntitytermslistviewValue = mw.user.isAnon()
+			? $.cookie( 'wikibase-entitytermsview-showEntitytermslistview' )
+			: mw.user.options.get( 'wikibase-entitytermsview-showEntitytermslistview' );
+		var showEntitytermslistview = ( showEntitytermslistviewValue === 'true'
+			|| showEntitytermslistviewValue === '1'
+			|| showEntitytermslistviewValue === null );
+
+		if ( view.$entitytermsforlanguagelistviewContainer.is( ':visible' ) && !showEntitytermslistview ) {
+			view.$entitytermsforlanguagelistviewContainer.slideUp( {
+				complete: function() {
+					view.$entitytermsforlanguagelistviewToggler.data( 'toggler' ).refresh();
+				},
+				duration: 'fast'
+			} );
+		}
+
+		$container.data( 'sticknode' ).refresh();
+	} );
+
+	var entityTermsChanger = this._entityChangersFactory.getEntityTermsChanger();
+	this._getController( $container, view, entityTermsChanger, null, value );
+	return view;
+};
+
 SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) {
 	var controller;
 	var statementview = PARENT.prototype.getStatementView.apply( this, arguments );
