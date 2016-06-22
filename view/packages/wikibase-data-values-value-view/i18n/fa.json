@@ -4,7 +4,8 @@
 			"Alireza",
 			"Ebraminio",
 			"Reza1615",
-			"Rtemis"
+			"Rtemis",
+			"AzorAhai"
 		]
 	},
 	"valueview-desc": "اجزای رابط کاربر برای نمایش و ویرایش مقادیر داده‌ها",
@@ -17,6 +18,7 @@
 	"valueview-expert-timevalue-calendar-julian": "ژولینی",
 	"valueview-expert-timeinput-precision": "دقت:",
 	"valueview-expert-timeinput-calendar": "تقویم:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-preview-label": "پیش‌نمایش:",
 	"valueview-preview-novalue": "مقدار وارد شده معتبر نیست"
 }

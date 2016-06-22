@@ -1,10 +1,30 @@
 {
-    "@metadata": {
-        "authors": [
-            "Aftab1995",
-            "Bellayet"
-        ]
-    },
-    "valueview-expert-emptyvalue-empty": "খালি",
-    "valueview-preview-label": "যা হিসাবে প্রদর্শন করা হবে:"
+	"@metadata": {
+		"authors": [
+			"Aftab1995",
+			"Bellayet",
+			"Aftabuzzaman"
+		]
+	},
+	"valueview-desc": "উপাত্তের মান প্রদর্শন এবং সম্পাদনার জন্য UI উপাদান",
+	"valueview-expert-advancedadjustments": "উন্নত সমন্বয়",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" মান পরিচালনা এখনো সমর্থিত নয়।",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" উপাত্তের ধরনের জন্য মান পরিচালনা এখনো সমর্থিত নয়।",
+	"valueview-expert-emptyvalue-empty": "খালি",
+	"valueview-expert-globecoordinateinput-precision": "স্পষ্টতা:",
+	"valueview-expert-globecoordinateinput-customprecision": "বিশেষ ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "গ্রেগরীয়",
+	"valueview-expert-timevalue-calendar-julian": "জুলীয়",
+	"valueview-expert-timeinput-precision": "স্পষ্টতা:",
+	"valueview-expert-timeinput-calendar": "পঞ্জিকা:",
+	"valueview-expertextender-calendarhint-gregorian": "(গ্রেগরীয় পঞ্জিকা)",
+	"valueview-expertextender-calendarhint-julian": "(জুলীয় পঞ্জিকা)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; গ্রেগরীয়তে পরিবর্তন করুন",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; জুলীয়তে পরিবর্তন করুন",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "ভাষা (আবশ্যিক):",
+	"valueview-expertextender-unitsuggester-label": "একক (ঐচ্ছিক):",
+	"valueview-preview-label": "যা হিসাবে প্রদর্শন করা হবে:",
+	"valueview-preview-novalue": "কোন বৈধ মান স্বীকৃত নয়",
+	"valueview-listrotator-manually": "ম্যানুয়ালি নির্ধারণ করুন"
 }

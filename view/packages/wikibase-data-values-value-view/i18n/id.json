@@ -1,7 +1,28 @@
 {
-    "@metadata": {
-        "authors": []
-    },
-    "valueview-expert-unsupportedvalue-unsupporteddatavalue": "Penanganan \"$1\" nilai data belum didukung.",
-    "valueview-expert-unsupportedvalue-unsupporteddatatype": "Penanganan nilai untuk \"$1\" tipe data belum didukung."
+	"@metadata": {
+		"authors": [
+			"Rachmat.Wahidi"
+		]
+	},
+	"valueview-desc": "Komponen-komponen UI untuk menampilkan dan mengedit nilai data",
+	"valueview-expert-advancedadjustments": "penyesuaian lanjutan",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Penanganan nilai data \"$1\" belum didukung.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Penanganan nilai data untuk tipe data \"$1\" belum didukung.",
+	"valueview-expert-emptyvalue-empty": "kosong",
+	"valueview-expert-globecoordinateinput-precision": "Kepersisan:",
+	"valueview-expert-globecoordinateinput-customprecision": "istimewa ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
+	"valueview-expert-timevalue-calendar-julian": "Julian",
+	"valueview-expert-timeinput-precision": "Kepersisan:",
+	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-expertextender-calendarhint-gregorian": "(kalender Gregorian)",
+	"valueview-expertextender-calendarhint-julian": "(kalender Julian)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; ganti menjadi Gregorian",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; ganti menjadi Julian",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Bahasa (diperlukan):",
+	"valueview-expertextender-unitsuggester-label": "Satuan (opsional):",
+	"valueview-preview-label": "akan ditampilkan sebagai:",
+	"valueview-preview-novalue": "tidak nilai sah yang dikenali",
+	"valueview-listrotator-manually": "atur manual"
 }

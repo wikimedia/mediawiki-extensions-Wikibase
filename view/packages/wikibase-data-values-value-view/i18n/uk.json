@@ -24,5 +24,6 @@
 	"valueview-expertextender-languageselector-label": "Мова (обов'язково)",
 	"valueview-expertextender-unitsuggester-label": "Блок (на вибір):",
 	"valueview-preview-label": "буде відображатися як:",
-	"valueview-preview-novalue": "не розпізнано допустимого значення"
+	"valueview-preview-novalue": "не розпізнано допустимого значення",
+	"valueview-listrotator-manually": "встановити вручну"
 }
