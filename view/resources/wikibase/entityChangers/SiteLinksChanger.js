@@ -54,9 +54,12 @@
 				siteLink.getBadges()
 			)
 			.done( function( result ) {
+				var siteId = siteLink.getSiteId(),
+					resultData = result.entity.sitelinks[siteId];
 				var savedSiteLink = new wb.datamodel.SiteLink(
-					siteLink.getSiteId(),
-					result.entity.sitelinks[siteLink.getSiteId()].title
+					siteId,
+					resultData.title,
+					resultData.badges
 				);
 
 				// Update revision store:
