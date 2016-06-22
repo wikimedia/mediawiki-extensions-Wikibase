@@ -19,8 +19,6 @@
 	 * @param {dataTypes.DataTypeStore} dataTypeStore
 	 *        Required by the `snakview` for retrieving and evaluating a proper `dataTypes.DataType`
 	 *        object when interacting on a "value" `Variation`.
-	 * @param {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
-	 *        Required to store changed data.
 	 * @param {wikibase.entityIdFormatter.EntityIdHtmlFormatter} entityIdHtmlFormatter
 	 *        Required by several views for rendering links to entities.
 	 * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
@@ -43,7 +41,6 @@
 	var SELF = MODULE.ViewFactory = function ViewFactory(
 		contentLanguages,
 		dataTypeStore,
-		entityChangersFactory,
 		entityIdHtmlFormatter,
 		entityIdPlainFormatter,
 		entityStore,
@@ -56,7 +53,6 @@
 	) {
 		this._contentLanguages = contentLanguages;
 		this._dataTypeStore = dataTypeStore;
-		this._entityChangersFactory = entityChangersFactory;
 		this._entityIdHtmlFormatter = entityIdHtmlFormatter;
 		this._entityIdPlainFormatter = entityIdPlainFormatter;
 		this._entityStore = entityStore;
@@ -81,12 +77,6 @@
 	 * @private
 	 **/
 	SELF.prototype._dataTypeStore = null;
-
-	/**
-	 * @property {wikibase.entityChangers.EntityChangersFactory}
-	 * @private
-	 **/
-	SELF.prototype._entityChangersFactory = null;
 
 	/**
 	 * @property {wikibase.entityIdFormatter.EntityIdHtmlFormatter}
@@ -184,7 +174,6 @@
 			{
 				value: fingerprint,
 				userLanguages: this._userLanguages,
-				entityChangersFactory: this._entityChangersFactory,
 				helpMessage: this._messageProvider.getMessage( 'wikibase-entitytermsview-input-help-message' )
 			}
 		);
