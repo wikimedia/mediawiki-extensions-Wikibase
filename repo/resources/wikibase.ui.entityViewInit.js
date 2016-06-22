@@ -23,7 +23,6 @@
 					'referenceview-snakview'
 				],
 				edittoolbar: [
-					'entitytermsview'
 				],
 				removetoolbar: [
 					'referenceview',
@@ -113,7 +112,6 @@
 				entityChangersFactory,
 				contentLanguages,
 				dataTypeStore,
-				entityChangersFactory,
 				new wb.entityIdFormatter.CachingEntityIdHtmlFormatter(
 					new wb.entityIdFormatter.DataValueBasedEntityIdHtmlFormatter( entityIdParser, htmlDataValueEntityIdFormatter )
 				),
@@ -328,7 +326,7 @@
 	 */
 	function attachCopyrightTooltip( $entityview ) {
 		$entityview.on(
-			'edittoolbarafterstartediting sitelinkgroupviewafterstartediting statementviewafterstartediting',
+			'entitytermsafterstartediting sitelinkgroupviewafterstartediting statementviewafterstartediting',
 			function( event ) {
 				var $target = $( event.target ),
 					gravity = 'sw';

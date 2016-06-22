@@ -81,19 +81,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.toolbarcontroller.definitions.edittoolbar.entitytermsview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/edittoolbar/entitytermsview.js',
-			),
-			'dependencies' => array(
-				'jquery.sticknode',
-				'jquery.wikibase.entitytermsview',
-				'jquery.wikibase.edittoolbar',
-				'jquery.wikibase.toolbarcontroller',
-				'mediawiki.user',
-			),
-		),
-
 		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/removetoolbar/referenceview.js',
