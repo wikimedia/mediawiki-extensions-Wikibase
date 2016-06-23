@@ -185,34 +185,6 @@ QUnit.test( 'startEditing() & stopEditing()', 6, function( assert ) {
 	$queue.dequeue( 'tests' );
 } );
 
-QUnit.test( 'isInitialValue()', function( assert ) {
-	assert.expect( 3 );
-	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),
-		entitytermsforlanguageview
-			= $entitytermsforlanguageview.data( 'entitytermsforlanguageview' );
-
-	entitytermsforlanguageview.startEditing();
-
-	assert.ok(
-		entitytermsforlanguageview.isInitialValue(),
-		'Verified isInitialValue() returning true.'
-	);
-
-	entitytermsforlanguageview.$label.find( 'input, textarea' ).val( 'changed' );
-
-	assert.ok(
-		!entitytermsforlanguageview.isInitialValue(),
-		'Verified isInitialValue() returning false after changing value.'
-	);
-
-	entitytermsforlanguageview.$label.find( 'input, textarea' ).val( 'test label' );
-
-	assert.ok(
-		entitytermsforlanguageview.isInitialValue(),
-		'Verified isInitialValue() returning true after resetting to initial value.'
-	);
-} );
-
 QUnit.test( 'setError()', function( assert ) {
 	assert.expect( 1 );
 	var $entitytermsforlanguageview = createEntitytermsforlanguageview(),

@@ -316,26 +316,12 @@
 		 * @inheritdoc
 		 */
 		stopEditing: function( dropValue ) {
-			if ( dropValue ) {
-				this._setRank( this.options.value );
-			}
 			// Hide the menu the rank selector currently references to:
 			if ( $menu && $menu.data( this.widgetName ) === this ) {
 				$menu.hide();
 			}
-
-			var deferred = $.Deferred();
-			this._trigger( 'stopediting', null, [dropValue] );
-			this._afterStopEditing( dropValue );
-			return deferred.resolve( dropValue ).promise();
+			return PARENT.prototype.stopEditing.call( this, dropValue );
 		},
-
-		/**
-		 * @inheritdoc
-		 */
-		isEmpty: function() {
-			return false;
-		}
 
 	} );
 
