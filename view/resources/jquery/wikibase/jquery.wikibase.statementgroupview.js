@@ -122,7 +122,7 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 
 		$statementlistview
 		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
-			self.$property.toggleClass( 'wb-error', error );
+			self.$property.toggleClass( 'wb-error', Boolean( error ) );
 		} )
 		.on( prefix + 'afterstopediting.' + this.widgetName, function( event, dropValue ) {
 			self.$property.removeClass( 'wb-error' ).removeClass( 'wb-edit' );
