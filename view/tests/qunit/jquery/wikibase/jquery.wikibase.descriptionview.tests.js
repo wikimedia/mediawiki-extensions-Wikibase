@@ -100,33 +100,6 @@ QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
 	descriptionview.stopEditing();
 } );
 
-QUnit.test( 'isInitialValue()', function( assert ) {
-	assert.expect( 3 );
-	var $descriptionview = createDescriptionview(),
-		descriptionview = $descriptionview.data( 'descriptionview' );
-
-	descriptionview.startEditing();
-
-	assert.ok(
-		descriptionview.isInitialValue(),
-		'Verified isInitialValue() returning true.'
-	);
-
-	descriptionview.$text.find( 'textarea' ).val( 'changed' );
-
-	assert.ok(
-		!descriptionview.isInitialValue(),
-		'Verified isInitialValue() returning false after changing value.'
-	);
-
-	descriptionview.$text.find( 'textarea' ).val( 'test description' );
-
-	assert.ok(
-		descriptionview.isInitialValue(),
-		'Verified isInitialValue() returning true after resetting to initial value.'
-	);
-} );
-
 QUnit.test( 'setError()', function( assert ) {
 	assert.expect( 1 );
 	var $descriptionview = createDescriptionview(),

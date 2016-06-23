@@ -90,7 +90,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 				PARENT.prototype.destroy.call( self );
 			} );
 
-			this.cancelEditing();
+			this.stopEditing( true );
 		} else {
 			PARENT.prototype.destroy.call( this );
 		}
@@ -172,38 +172,11 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 * @inheritdoc
 	 * @protected
 	 */
-	_save: function() {
-		var deferred = $.Deferred();
-		return deferred.resolve().promise();
-	},
-
-	/**
-	 * @inheritdoc
-	 * @protected
-	 */
 	_afterStopEditing: function( dropValue ) {
 		if ( dropValue && this.options.value.getText() === '' ) {
 			this.$text.children( '.' + this.widgetFullName + '-input' ).val( '' );
 		}
 		return PARENT.prototype._afterStopEditing.call( this, dropValue );
-	},
-
-	/**
-	 * @inheritdoc
-	 */
-	isValid: function() {
-		return true;
-	},
-
-	/**
-	 * @inheritdoc
-	 */
-	isInitialValue: function() {
-		if ( !this.isInEditMode() ) {
-			return true;
-		}
-
-		return this.value().equals( this.options.value );
 	},
 
 	/**
