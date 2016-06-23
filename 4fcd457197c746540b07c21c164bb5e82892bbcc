@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_37f0d08d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-23T15:31:34Z",
+      "side": 1,
+      "message": "According to MDN every() stops when a falsy value is returned, which is always the case, because it\u0027s either false or undefined.",
+      "revId": "4fcd457197c746540b07c21c164bb5e82892bbcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
