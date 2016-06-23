@@ -90,45 +90,6 @@ QUnit.test( 'Create & destroy', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isInitialValue()', function( assert ) {
-	assert.expect( 3 );
-	var view = createEntitytermsforlanguagelistview().data( 'entitytermsforlanguagelistview' ),
-		listview = view.$listview.data( 'listview' );
-
-	assert.ok(
-		view.isInitialValue(),
-		'Verified isInitialValue() returning true.'
-	);
-
-	var $item = listview.addItem( {
-		language: 'fa',
-		label: new wb.datamodel.Term( 'fa', 'fa-label' ),
-		description: new wb.datamodel.Term( 'fa', 'fa-description' ),
-		aliases: new wb.datamodel.MultiTerm( 'fa', [] )
-	} );
-
-	assert.ok(
-		view.isInitialValue(),
-		'Verified isInitialValue()still returning false after adding another unchanged value.'
-	);
-
-	// Replace the method with a fake that always acts like the value changed.
-	$item.data( 'entitytermsforlanguageview' ).isInitialValue = function() {
-		return false;
-	};
-
-	assert.ok(
-		!view.isInitialValue(),
-		'Verified isInitialValue() returning false.'
-	);
-} );
-
-// TODO: Add test which is kind of pointless without having a method to save a whole fingerprint
-// which could be overwritten by the test mechanism. Instead, the "save" functions of labelview,
-// descriptionview and aliasesview for each single entitytermsforlanguage would need to be
-// overwritten (see entitytermsforlanguage tests).
-// QUnit.test( 'startEditing() & stopEditing()', function( assert ) {} );
-
 QUnit.test( 'setError()', function( assert ) {
 	assert.expect( 1 );
 	var $entitytermsforlanguagelistview = createEntitytermsforlanguagelistview(),

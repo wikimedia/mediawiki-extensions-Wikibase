@@ -377,44 +377,6 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		return !!this.$listview.data( 'listview' ).items().length;
 	},
 
-	/**
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		if ( !this._isInEditMode ) {
-			return true;
-		}
-
-		var listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
-			isValid = true;
-
-		listview.items().each( function() {
-			var entitytermsforlanguageview = lia.liInstance( $( this ) );
-			isValid = entitytermsforlanguageview.isValid();
-			return isValid;
-		} );
-
-		return isValid;
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		var listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
-			isInitialValue = true;
-
-		listview.items().each( function() {
-			var entitytermsforlanguageview = lia.liInstance( $( this ) );
-			isInitialValue = entitytermsforlanguageview.isInitialValue();
-			return isInitialValue;
-		} );
-
-		return isInitialValue;
-	},
-
 	startEditing: function() {
 		if ( this._isInEditMode ) {
 			return;
@@ -437,7 +399,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	stopEditing: function( dropValue ) {
 		var deferred = $.Deferred();
 
-		if ( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this._isInEditMode ) {
 			return deferred.resolve().promise();
 		}
 
