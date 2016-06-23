@@ -36,6 +36,7 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -123,6 +124,7 @@ use Wikibase\Store\BufferingTermLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 
@@ -392,7 +394,7 @@ class WikibaseRepo {
 			$this->getDefaultLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			$this->getLanguageNameLookup(),
-			$this->getLocalEntityUriParser(),
+			$this->getLocalItemUriParser(),
 			$this->getEntityTitleLookup()
 		);
 	}
@@ -918,10 +920,10 @@ class WikibaseRepo {
 	/**
 	 * @return EntityIdParser
 	 */
-	private function getLocalEntityUriParser() {
+	private function getLocalItemUriParser() {
 		return new SuffixEntityIdParser(
-			$this->getSettings()->getSetting( 'conceptBaseUri' ),
-			$this->getEntityIdParser()
+			$this->getVocabularyBaseUri(),
+			new ItemIdParser()
 		);
 	}
 
@@ -931,7 +933,7 @@ class WikibaseRepo {
 	private function getVocabularyBaseUri() {
 		//@todo: We currently use the local repo concept URI here. This should be configurable,
 		// to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
-		return $this->getSettings()->getSetting( 'conceptBaseUri' );
+		return $this->settings->getSetting( 'conceptBaseUri' );
 	}
 
 	/**
@@ -993,17 +995,15 @@ class WikibaseRepo {
 		global $wgDummyLanguageCodes;
 
 		if ( $this->rdfVocabulary === null ) {
-			$settings = $this->getSettings();
-
 			$languageCodes = array_merge(
 				$wgDummyLanguageCodes,
-				$settings->getSetting( 'canonicalLanguageCodes' )
+				$this->settings->getSetting( 'canonicalLanguageCodes' )
 			);
 
 			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
 
 			$this->rdfVocabulary = new RdfVocabulary(
-				$settings->getSetting( 'conceptBaseUri' ),
+				$this->getVocabularyBaseUri(),
 				$entityDataTitle->getCanonicalURL() . '/',
 				$languageCodes,
 				$this->dataTypeDefinitions->getRdfTypeUris()
@@ -1260,7 +1260,7 @@ class WikibaseRepo {
 			$this->getEntityIdParser(),
 			$this->getEntitySerializer(),
 			$this->getInternalFormatEntityDeserializer(),
-			$this->getSettings()->getSetting( 'maxSerializedEntitySize' ) * 1024
+			$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
 	}
 
@@ -1449,7 +1449,7 @@ class WikibaseRepo {
 	 * @return PropertyInfoBuilder
 	 */
 	public function newPropertyInfoBuilder() {
-		$formatterUrlProperty = $this->getSettings()->getSetting( 'formatterUrlProperty' );
+		$formatterUrlProperty = $this->settings->getSetting( 'formatterUrlProperty' );
 
 		if ( $formatterUrlProperty !== null ) {
 			$formatterUrlProperty = new PropertyId( $formatterUrlProperty );
@@ -1594,7 +1594,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityParserOutputGeneratorFactory() {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$formats = $this->getSettings()->getSetting( 'entityDataFormats' );
+		$formats = $this->settings->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setFormatWhiteList( $formats );
 
 		return new EntityParserOutputGeneratorFactory(
@@ -1607,7 +1607,7 @@ class WikibaseRepo {
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
 			// CachingPropertyInfoStore enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
-			$this->getLocalEntityUriParser(),
+			$this->getLocalItemUriParser(),
 			$this->getEntitySerializer(
 				SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
 				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH

@@ -28,17 +28,17 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	/**
 	 * @var QuantityFormatter
 	 */
-	protected $quantityFormatter;
+	private $quantityFormatter;
 
 	/**
 	 * @var QuantityFormatter
 	 */
-	protected $numberFormatter;
+	private $numberFormatter;
 
 	/**
 	 * @var ValueFormatter
 	 */
-	protected $vocabularyUriFormatter;
+	private $vocabularyUriFormatter;
 
 	/**
 	 * @param NumberLocalizer|null $numberLocalizer
@@ -102,6 +102,12 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 			$this->formatNumber( $value->getUpperBound(), $value->getUnit() ) );
 		$html .= $this->renderLabelValuePair( 'lowerBound',
 			$this->formatNumber( $value->getLowerBound(), $value->getUnit() ) );
+		/**
+		 * @todo Display URIs to entities in the local repository as clickable labels.
+		 * @todo Display URIs that start with http:// or https:// as clickable links.
+		 * @todo Mark "unitless" units somehow, e.g. via CSS or with an appended message.
+		 * @see WikibaseValueFormatterBuilders::$unitOneUris
+		 */
 		$html .= $this->renderLabelValuePair( 'unit', $this->formatUnit( $value->getUnit() ) );
 
 		$html .= Html::closeElement( 'table' );
@@ -142,7 +148,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @return string HTML for the label/value pair
 	 */
-	protected function renderLabelValuePair( $fieldName, $valueHtml ) {
+	private function renderLabelValuePair( $fieldName, $valueHtml ) {
 		$html = Html::openElement( 'tr' );
 
 		$html .= Html::element( 'th', array( 'class' => 'wb-quantity-' . $fieldName ),
@@ -159,7 +165,7 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 *
 	 * @return Message
 	 */
-	protected function getFieldLabel( $fieldName ) {
+	private function getFieldLabel( $fieldName ) {
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
 
 		// Messages:

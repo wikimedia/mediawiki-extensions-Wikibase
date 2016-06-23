@@ -18,8 +18,8 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
@@ -87,7 +87,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			Language::factory( 'en' ),
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			$languageNameLookup,
-			new BasicEntityIdParser(),
+			new ItemIdParser(),
 			$entityTitleLookup
 		);
 	}
