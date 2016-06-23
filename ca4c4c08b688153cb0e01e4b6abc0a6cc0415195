@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_7a151f40",
+        "filename": "composer.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-06-23T16:09:32Z",
+      "side": 1,
+      "message": "this doesn\u0027t exactly match the version in core, and will allow pulling in different versions than what core has",
+      "revId": "ca4c4c08b688153cb0e01e4b6abc0a6cc0415195",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
