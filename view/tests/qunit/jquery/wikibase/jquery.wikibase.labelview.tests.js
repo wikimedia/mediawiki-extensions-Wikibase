@@ -100,33 +100,6 @@ QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
 	labelview.stopEditing();
 } );
 
-QUnit.test( 'isInitialValue()', function( assert ) {
-	assert.expect( 3 );
-	var $labelview = createLabelview(),
-		labelview = $labelview.data( 'labelview' );
-
-	labelview.startEditing();
-
-	assert.ok(
-		labelview.isInitialValue(),
-		'Verified isInitialValue() returning true.'
-	);
-
-	labelview.$text.find( 'textarea' ).val( 'changed' );
-
-	assert.ok(
-		!labelview.isInitialValue(),
-		'Verified isInitialValue() returning false after changing value.'
-	);
-
-	labelview.$text.find( 'textarea' ).val( 'test label' );
-
-	assert.ok(
-		labelview.isInitialValue(),
-		'Verified isInitialValue() returning true after resetting to initial value.'
-	);
-} );
-
 QUnit.test( 'setError()', function( assert ) {
 	assert.expect( 1 );
 	var $labelview = createLabelview(),
