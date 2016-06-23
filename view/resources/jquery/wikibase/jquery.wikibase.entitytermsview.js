@@ -344,38 +344,12 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	},
 
 	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isValid
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		return this._getEntitytermsforlanguagelistview().isValid();
-	},
-
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		return this._getEntitytermsforlanguagelistview().isInitialValue();
-	},
-
-	/**
 	 * @inheritdoc
 	 */
 	startEditing: function() {
 		this._getEntitytermsforlanguagelistview().startEditing();
 
 		return PARENT.prototype.startEditing.call( this );
-	},
-
-	/**
-	 * @inheritdoc
-	 */
-	stopEditing: function( dropValue ) {
-		var deferred = $.Deferred();
-		this._trigger( 'stopediting', null, [dropValue] );
-		this._afterStopEditing( dropValue );
-		return deferred.resolve( dropValue ).promise();
 	},
 
 	/**
@@ -416,13 +390,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 		}
 
 		return this._getEntitytermsforlanguagelistview().value();
-	},
-
-	/**
-	 * @inheritdoc
-	 */
-	isEmpty: function() {
-		return this._getEntitytermsforlanguagelistview().isEmpty();
 	},
 
 	/**

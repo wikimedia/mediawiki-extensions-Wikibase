@@ -210,21 +210,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		} );
 	},
 
-	_save: function() {
-		var deferred = $.Deferred();
-		return deferred.resolve().promise();
-	},
-
-	stopEditing: function( dropValue ) {
-		var done = $.Deferred().resolve( dropValue ).promise();
-		if ( !this.isInEditMode() ) {
-			return done;
-		}
-		this._trigger( 'stopediting', null, [dropValue] );
-		this._afterStopEditing( dropValue );
-		return done;
-	},
-
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget._afterStopEditing
 	 */

@@ -309,65 +309,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	},
 
 	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isEmpty
-	 * @return {boolean}
-	 */
-	isEmpty: function() {
-		return !this.$listview.data( 'listview' ).items().length;
-	},
-
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isValid
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		var listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
-			isValid = true;
-
-		listview.items().each( function() {
-			// Site link views are regarded valid if they have a valid site. Invalid site links
-			// (without a page name) and empty values (with no site id and page name input) are
-			// supposed to be stripped when querying this widget for its value.
-			// Put together, we consider sitelinkviews invalid only when they have something in
-			// the siteId input field which does not resolve to a valid siteId and which is not
-			// empty.
-			var sitelinkview = lia.liInstance( $( this ) );
-			isValid = sitelinkview.isValid()
-				|| sitelinkview.isEmpty()
-				// Previously existing values do always feature a valid site id:
-				|| Boolean( sitelinkview.option( 'value' ) );
-			return isValid;
-		} );
-
-		return isValid;
-	},
-
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.isInitialValue
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		var listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter(),
-			$nonEmptyItems = listview.nonEmptyItems(),
-			isInitialValue = true;
-
-		if ( $nonEmptyItems.length !== this.options.value.length ) {
-			return false;
-		}
-
-		// Ignore empty values.
-		$nonEmptyItems.each( function() {
-			var sitelinkview = lia.liInstance( $( this ) );
-			isInitialValue = sitelinkview.isInitialValue();
-			return isInitialValue;
-		} );
-
-		return isInitialValue;
-	},
-
-	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.startEditing
 	 */
 	startEditing: function() {
@@ -429,29 +370,11 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	 * @see jQuery.ui.EditableTemplatedWidget.stopEditing
 	 */
 	stopEditing: function( dropValue ) {
-		var done = $.Deferred().resolve( dropValue ).promise();
-		if ( !this.isInEditMode() ) {
-			return done;
-		}
-		if ( dropValue ) {
-			this.$listview.data( 'listview' ).value( this.options.value );
-			this._refreshCounter();
-		} else {
+		if ( !dropValue ) {
 			this._removeIncompleteSiteLinks();
 		}
 
-		this._trigger( 'stopediting', null, [dropValue] );
-		this._afterStopEditing( dropValue );
-		return done;
-	},
-
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget._save
-	 */
-	_save: function() {
-		var deferred = $.Deferred();
-
-		return deferred.resolve().promise();
+		return PARENT.prototype.stopEditing.call( this, dropValue );
 	},
 
 	/**
@@ -462,7 +385,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 
 		return PARENT.prototype._afterStopEditing.call( this, dropValue )
 			.done( function() {
-				self.$listview.data( 'listview' ).value( self.options.value );
 				self._refreshCounter();
 				self._eventSingletonManager.unregister(
 					self,
@@ -477,18 +399,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 
 		listview.items().not( listview.nonEmptyItems() ).each( function() {
 			listview.removeItem( $( this ) );
-		} );
-	},
-
-	_resetEditMode: function() {
-		this.enable();
-
-		var listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter();
-
-		listview.items().each( function() {
-			var sitelinkview = lia.liInstance( $( this ) );
-			sitelinkview.startEditing();
 		} );
 	},
 
@@ -525,7 +435,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			return $foundNode || $nodes.first();
 		}
 
-		if ( !this.isValid() ) {
+		if ( this.value() === null ) {
 			$items = $items.filter( function() {
 				var sitelinkview = lia.liInstance( $( this ) );
 				return sitelinkview.value() === null;

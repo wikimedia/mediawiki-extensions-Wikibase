@@ -200,33 +200,6 @@ QUnit.test( 'startEditing() & stopEditing()', 6, function( assert ) {
 	$queue.dequeue( 'tests' );
 } );
 
-QUnit.test( 'isInitialValue()', function( assert ) {
-	assert.expect( 3 );
-	var $aliasesview = createAliasesview(),
-		aliasesview = $aliasesview.data( 'aliasesview' );
-
-	aliasesview.startEditing();
-
-	assert.ok(
-		aliasesview.isInitialValue(),
-		'Verified isInitialValue() returning true.'
-	);
-
-	aliasesview.$list.data( 'tagadata' ).getTags().first().find( 'input' ).val( 'changed' );
-
-	assert.ok(
-		!aliasesview.isInitialValue(),
-		'Verified isInitialValue() returning false after changing value.'
-	);
-
-	aliasesview.$list.data( 'tagadata' ).getTags().first().find( 'input' ).val( 'a' );
-
-	assert.ok(
-		aliasesview.isInitialValue(),
-		'Verified isInitialValue() returning true after resetting to initial value.'
-	);
-} );
-
 QUnit.test( 'setError()', function( assert ) {
 	assert.expect( 1 );
 	var $aliasesview = createAliasesview(),

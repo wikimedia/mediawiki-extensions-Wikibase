@@ -162,32 +162,6 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	/**
 	 * @inheritdoc
 	 * @protected
-	 */
-	_save: function() {
-		return $.Deferred().resolve().promise();
-	},
-
-	/**
-	 * @inheritdoc
-	 */
-	isValid: function() {
-		return true;
-	},
-
-	/**
-	 * @inheritdoc
-	 */
-	isInitialValue: function() {
-		if ( !this.isInEditMode() ) {
-			return true;
-		}
-
-		return this.value().equals( this.options.value );
-	},
-
-	/**
-	 * @inheritdoc
-	 * @protected
 	 *
 	 * @throws {Error} when trying to set the widget's value to something other than a
 	 *         `wikibase.datamodel.MultiTerm` instance.
