@@ -643,16 +643,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 	},
 
-	stopEditing: function( dropValue ) {
-		var deferred = $.Deferred();
-
-		this._trigger( 'stopediting', null, [dropValue] );
-
-		this._afterStopEditing( dropValue );
-
-		return deferred.resolve( dropValue ).promise();
-	},
-
 	/**
 	 * @inheritdoc
 	 * @protected
@@ -714,15 +704,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 			// Refill the qualifier listview with the initial (or new initial) qualifiers:
 			this._createQualifiersListview( qualifiers );
 		}
-	},
-
-	/**
-	 * @inheritdoc
-	 */
-	isEmpty: function() {
-		return false;
-		// TODO: Supposed to do at least...
-		// this._mainSnakSnakView.isEmpty(); (does not exist at the moment of writing)
 	},
 
 	/**

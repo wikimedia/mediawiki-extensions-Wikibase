@@ -157,7 +157,7 @@ QUnit.test( 'isFull()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isValid()', function( assert ) {
+QUnit.test( 'value()', function( assert ) {
 	assert.expect( 1 );
 	var $sitelinklistview = createSitelinklistview( {
 			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
@@ -165,12 +165,12 @@ QUnit.test( 'isValid()', function( assert ) {
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 	assert.ok(
-		sitelinklistview.isValid(),
-		'Verified isValid() returning TRUE.'
+		sitelinklistview.value(),
+		'Verified value() returning value.'
 	);
 } );
 
-QUnit.test( 'isValid() with invalid sitelinkview', function( assert ) {
+QUnit.test( 'value() with invalid sitelinkview', function( assert ) {
 	assert.expect( 1 );
 	var $sitelinklistview = createSitelinklistview( {
 			value: []
@@ -190,54 +190,10 @@ QUnit.test( 'isValid() with invalid sitelinkview', function( assert ) {
 		return false;
 	};
 
-	assert.ok(
-		!sitelinklistview.isValid(),
-		'Verified isValid() returning FALSE.'
-	);
-} );
-
-QUnit.test( 'isInitialValue()', function( assert ) {
-	assert.expect( 5 );
-	var $sitelinklistview = createSitelinklistview( {
-			value: [new wb.datamodel.SiteLink( 'enwiki', 'enwiki-page' )]
-		} ),
-		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' ),
-		listview = sitelinklistview.$listview.data( 'listview' );
-
-	assert.ok(
-		sitelinklistview.isInitialValue(),
-		'Verified isInitialValue() returning TRUE.'
-	);
-
-	var $sitelinkview = listview.items().first(),
-		lia = listview.listItemAdapter(),
-		sitelink = lia.liInstance( $sitelinkview ).value();
-	listview.removeItem( $sitelinkview );
-
-	assert.notOk(
-		sitelinklistview.isInitialValue(),
-		'FALSE after removing an item.'
-	);
-
-	listview.addItem( sitelink );
-
-	assert.ok(
-		sitelinklistview.isInitialValue(),
-		'TRUE after resetting to initial state.'
-	);
-
-	$sitelinkview = listview.addItem( new wb.datamodel.SiteLink( 'aawiki', 'aawiki-page' ) );
-
-	assert.notOk(
-		sitelinklistview.isInitialValue(),
-		'FALSE after adding an item, even if the added item is unchanged.'
-	);
-
-	listview.removeItem( $sitelinkview );
-
-	assert.ok(
-		sitelinklistview.isInitialValue(),
-		'TRUE after resetting to initial state.'
+	assert.strictEqual(
+		sitelinklistview.value().length,
+		0,
+		'Verified value() returning valid values.'
 	);
 } );
 
