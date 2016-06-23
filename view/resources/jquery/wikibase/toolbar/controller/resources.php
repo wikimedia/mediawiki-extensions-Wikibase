@@ -137,7 +137,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.edittoolbar',
 				'jquery.wikibase.removetoolbar',
 			),
 		),

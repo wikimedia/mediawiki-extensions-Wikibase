@@ -1,6 +1,7 @@
 /**
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
+ * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 ( function( $ ) {
 	'use strict';
@@ -117,49 +118,14 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         - {Error}
 	 */
 	stopEditing: function( dropValue ) {
-		var self = this,
-			deferred = $.Deferred();
-
-		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
-			return deferred.resolve().promise();
+		var done = $.Deferred().resolve().promise();
+		if ( !this.isInEditMode() ) {
+			return done;
 		}
-
 		this._trigger( 'stopediting', null, [dropValue] );
-
-		this.disable();
-
-		if ( dropValue ) {
-			return this._afterStopEditing( dropValue );
-		} else {
-			this._save()
-			.done( function( savedValue ) {
-				self.options.value = savedValue || self.value();
-				self._afterStopEditing( dropValue )
-				.done( function() {
-					deferred.resolve( dropValue );
-				} )
-				.fail( function( error ) {
-					deferred.reject( error );
-				} );
-			} )
-			.fail( function( error ) {
-				self.setError( error );
-				deferred.reject( error );
-				self.enable();
-			} );
-		}
-
-		return deferred.promise();
+		this._afterStopEditing( dropValue );
+		return done;
 	},
-
-	/**
-	 * @return {Object} jQuery.Promise
-	 *         Resolved parameters:
-	 *         - {*} [value] the data model object returned by save API call
-	 *         Rejected parameters:
-	 *         - {Error}
-	 */
-	_save: util.abstractMember,
 
 	/**
 	 * @param {boolean} dropValue
@@ -178,7 +144,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 		.done( function() {
 			self.enable();
 			self._trigger( 'afterstopediting', null, [dropValue] );
-			deferred.resolve( dropValue );
+			deferred.resolve();
 		} )
 		.fail( function( error ) {
 			self.setError( error );
@@ -186,13 +152,6 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 		} );
 
 		return deferred.promise();
-	},
-
-	/**
-	 * Cancels the widget's edit mode.
-	 */
-	cancelEditing: function() {
-		this.stopEditing( true );
 	},
 
 	/**
@@ -211,28 +170,6 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 * @return {*|undefined}
 	 */
 	value: util.abstractMember,
-
-	/**
-	 * Returns whether the widget features any value (may it be valid or invalid).
-	 *
-	 * @return {boolean}
-	 */
-	isEmpty: util.abstractMember,
-
-	/**
-	 * Returns whether the widget's value is valid.
-	 *
-	 * @return {boolean}
-	 */
-	isValid: util.abstractMember,
-
-	/**
-	 * Returns whether the widget's value is the widget's value from before starting edit mode.
-	 * (Always returns "true" in non-edit mode.)
-	 *
-	 * @return {boolean}
-	 */
-	isInitialValue: util.abstractMember,
 
 	/**
 	 * Toggles error state.

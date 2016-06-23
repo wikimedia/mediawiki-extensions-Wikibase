@@ -5,12 +5,12 @@
 ( function( $, mw, wb ) {
 	'use strict';
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
  * Manages a description.
  * @since 0.5
- * @extends jQuery.ui.TemplatedWidget
+ * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {wikibase.datamodel.Term} value
  *
@@ -34,11 +34,6 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		value: null,
 		inputNodeName: 'TEXTAREA'
 	},
-
-	/**
-	 * @type {boolean}
-	 */
-	_isInEditMode: false,
 
 	/**
 	 * @see jQuery.ui.TemplatedWidget._create
@@ -74,7 +69,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		PARENT.prototype._create.call( this );
 
 		if ( this.$text.text() === '' ) {
-			this._draw();
+			this.draw();
 		}
 	},
 
@@ -82,14 +77,14 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
 	destroy: function() {
-		if ( this._isInEditMode ) {
+		if ( this.isInEditMode() ) {
 			var self = this;
 
 			this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
 				PARENT.prototype.destroy.call( self );
 			} );
 
-			this.cancelEditing();
+			this.stopEditing( true );
 		} else {
 			PARENT.prototype.destroy.call( this );
 		}
@@ -98,7 +93,8 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
 	 * Main draw routine.
 	 */
-	_draw: function() {
+	draw: function() {
+		var done = $.Deferred().resolve().promise();
 		var self = this,
 			languageCode = this.options.value.getLanguageCode(),
 			descriptionText = this.options.value.getText();
@@ -109,7 +105,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 
 		this.element[descriptionText ? 'removeClass' : 'addClass']( 'wb-empty' );
 
-		if ( !this._isInEditMode && !descriptionText ) {
+		if ( !this.isInEditMode() && !descriptionText ) {
 			this.$text.text( mw.msg( 'wikibase-description-empty' ) );
 			// Apply lang and dir of UI language
 			// instead language of that row
@@ -117,16 +113,16 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 			this.element
 			.attr( 'lang', userLanguage )
 			.attr( 'dir', $.util.getDirectionality( userLanguage ) );
-			return;
+			return done;
 		}
 
 		this.element
 		.attr( 'lang', languageCode )
 		.attr( 'dir', $.util.getDirectionality( languageCode ) );
 
-		if ( !this._isInEditMode ) {
+		if ( !this.isInEditMode() ) {
 			this.$text.text( descriptionText );
-			return;
+			return done;
 		}
 
 		var $input = $( document.createElement( this.options.inputNodeName ) );
@@ -162,106 +158,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		}
 
 		this.$text.empty().append( $input );
-	},
-
-	/**
-	 * Starts the widget's edit mode.
-	 */
-	startEditing: function() {
-		if ( this._isInEditMode ) {
-			return;
-		}
-		this.element.addClass( 'wb-edit' );
-		this._isInEditMode = true;
-		this._draw();
-		this._trigger( 'afterstartediting' );
-	},
-
-	/**
-	 * Stops the widget's edit mode.
-	 *
-	 * @param {boolean} dropValue
-	 */
-	stopEditing: function( dropValue ) {
-		if ( !this._isInEditMode ) {
-			return;
-		} else if ( ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
-			return;
-		} else if ( dropValue ) {
-			this._afterStopEditing( dropValue );
-			return;
-		}
-
-		this.disable();
-
-		this._trigger( 'stopediting', null, [dropValue] );
-
-		this.enable();
-		this._afterStopEditing( dropValue );
-	},
-
-	/**
-	 * Cancels the widget's edit mode.
-	 */
-	cancelEditing: function() {
-		this.stopEditing( true );
-	},
-
-	/**
-	 * Callback tearing down edit mode.
-	 *
-	 * @param {boolean} dropValue
-	 */
-	_afterStopEditing: function( dropValue ) {
-		if ( !dropValue ) {
-			this.options.value = this.value();
-		} else if ( this.options.value.getText() === '' ) {
-			this.$text.children( '.' + this.widgetFullName + '-input' ).val( '' );
-		}
-
-		this.element.removeClass( 'wb-edit' );
-		this._isInEditMode = false;
-		this._draw();
-
-		this._trigger( 'afterstopediting', null, [dropValue] );
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		// Function is required by edittoolbar definition.
-		return true;
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		if ( !this._isInEditMode ) {
-			return true;
-		}
-
-		return this.value().equals( this.options.value );
-	},
-
-	/**
-	 * Toggles error state.
-	 *
-	 * @param {Error} error
-	 */
-	setError: function( error ) {
-		if ( error ) {
-			this.element.addClass( 'wb-error' );
-			this._trigger( 'toggleerror', null, [error] );
-		} else {
-			this.removeError();
-			this._trigger( 'toggleerror' );
-		}
-	},
-
-	removeError: function() {
-		this.element.removeClass( 'wb-error' );
+		return done;
 	},
 
 	/**
@@ -274,7 +171,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 
 		var response = PARENT.prototype._setOption.call( this, key, value );
 
-		if ( key === 'disabled' && this._isInEditMode ) {
+		if ( key === 'disabled' && this.isInEditMode() ) {
 			this.$text.children( '.' + this.widgetFullName + '-input' ).prop( 'disabled', value );
 		}
 
@@ -292,7 +189,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 			return this.option( 'value', value );
 		}
 
-		if ( !this._isInEditMode ) {
+		if ( !this.isInEditMode() ) {
 			return this.options.value;
 		}
 
@@ -306,7 +203,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget.focus
 	 */
 	focus: function() {
-		if ( this._isInEditMode ) {
+		if ( this.isInEditMode() ) {
 			this.$text.children( '.' + this.widgetFullName + '-input' ).focus();
 		} else {
 			this.element.focus();

@@ -22,8 +22,6 @@
 					'statementview-referenceview',
 					'referenceview-snakview'
 				],
-				edittoolbar: [
-				],
 				removetoolbar: [
 					'referenceview',
 					'statementview-snakview',
