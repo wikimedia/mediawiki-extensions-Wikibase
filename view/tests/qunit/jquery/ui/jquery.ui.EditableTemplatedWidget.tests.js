@@ -11,25 +11,13 @@ QUnit.module( 'jquery.ui.EditableTemplatedWidget', QUnit.newMwEnvironment( {
 			_create: function() {
 				this._initialValue = this.options.value;
 			},
-			_draw: function() {},
-			_save: function() {
-				return $.Deferred().resolve().promise();
-			},
+			draw: function() {},
 			value: function( value ) {
 				if ( value === undefined ) {
 					this.option( 'value', value );
 				} else {
 					return this.option( 'value' );
 				}
-			},
-			isEmpty: function() {
-				return !this.option( 'value' );
-			},
-			isValid: function() {
-				return !!this.option( 'value' );
-			},
-			isInitialValue: function() {
-				return this.option( 'value' ) === this._initialValue;
 			}
 		} );
 	},
