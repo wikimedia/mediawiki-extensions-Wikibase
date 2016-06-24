@@ -44,12 +44,6 @@
 	 * @param {jQuery.Event}
 	 * @param {boolean} Whether widget has been dis- oder enabled.
 	 */
-	/**
-	 * @event init
-	 * Triggered after the widget is fully initialized. (`jQuery.Widget` native "create" event is
-	 * triggered after the template DOM is ready and template short-cuts are assigned.)
-	 * @param {jQuery.Event}
-	 */
 	$.widget( 'ui.TemplatedWidget', PARENT, {
 		/**
 		 * @see jQuery.Widget.options
@@ -87,21 +81,6 @@
 			this._createTemplateShortCuts();
 
 			PARENT.prototype._create.apply( this );
-		},
-
-		/**
-		 * Initializes any additional widget logic (i.e. child widgets, event handlers). DOM
-		 * creation/manipulation is supposed to be performed in `_create` which is run before
-		 * `_init`. With the `TemplatedWidget`'s base `_init` implementation triggering the "init"
-		 * event, inheriting widgets should call parent's `_init` as last action for other
-		 * components listening to the "init" event can be sure the widget in fully initialized.
-		 *
-		 * @see jQuery.Widget._init
-		 * @protected
-		 */
-		_init: function() {
-			PARENT.prototype._init.call( this );
-			this._trigger( 'init' );
 		},
 
 		/**
