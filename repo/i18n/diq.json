@@ -5,14 +5,15 @@
 			"Gorizon",
 			"Marmase",
 			"Mirzali",
-			"Macofe"
+			"Macofe",
+			"Kumkumuk"
 		]
 	},
 	"wikibase-entity-item": "unsur",
 	"wikibase-entity-query": "persen",
 	"wikibase-edit": "bıvurne",
 	"wikibase-save": "qeyd ke",
-	"wikibase-cancel": "bıtexelne",
+	"wikibase-cancel": "peyd ke",
 	"wikibase-add": "cı ke",
 	"wikibase-addreference": "referans cı ke",
 	"wikibase-save-inprogress": "Starêno...",
