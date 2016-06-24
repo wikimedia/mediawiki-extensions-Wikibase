@@ -1731,7 +1731,7 @@ class WikibaseRepo {
 	public function getCachingCommonsMediaFileNameLookup() {
 		if ( $this->cachingCommonsMediaFileNameLookup === null ) {
 			$this->cachingCommonsMediaFileNameLookup = new CachingCommonsMediaFileNameLookup(
-				new MediaWikiPageNameNormalizer( 'https://commons.wikimedia.org/w/api.php' ),
+				new MediaWikiPageNameNormalizer(),
 				new HashBagOStuff()
 			);
 		}
