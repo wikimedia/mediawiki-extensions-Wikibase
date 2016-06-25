@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_d4b337fb",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-25T10:37:41Z",
+      "side": 1,
+      "message": "*facepalm* Didn\u0027t realize this requires it as well. Will rewrite and add tests.",
+      "parentUuid": "0efd9372_74cd2b88",
+      "revId": "7399619148bb70afadb32242fc802c4230d11408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_54c8e776",
         "filename": "docs/options.wiki",
         "patchSetId": 30
@@ -30,6 +48,24 @@
       "writtenOn": "2016-06-25T10:25:08Z",
       "side": 1,
       "message": "is repoIcon really an expert setting?",
+      "revId": "7399619148bb70afadb32242fc802c4230d11408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_f4b0fbf2",
+        "filename": "docs/options.wiki",
+        "patchSetId": 30
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-25T10:37:41Z",
+      "side": 1,
+      "message": "I put it here because it is not used elsewhere but by the notifications (which I think are expert settings, aren\u0027t they?)\nDo you suggest anything else?",
+      "parentUuid": "0efd9372_54c8e776",
       "revId": "7399619148bb70afadb32242fc802c4230d11408",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
