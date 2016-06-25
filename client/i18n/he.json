@@ -35,7 +35,7 @@
 	"wikibase-comment-sitelink-remove": "קישור השפה הוסר: $1",
 	"wikibase-comment-multi": "{{PLURAL:$1|שינוי אחד|$1 שינויים}}",
 	"wikibase-dataitem": "פריט {{WBREPONAME}}",
-	"wikibase-editlinks": "עריכת קישורים",
+	"wikibase-editlinks": "עריכת הקישורים",
 	"wikibase-editlinkstitle": "עריכת קישורים בין־לשוניים",
 	"wikibase-addlinkstitle": "הוספת קישורים בין־לשוניים",
 	"wikibase-linkitem-addlinks": "הוספת קישורים",

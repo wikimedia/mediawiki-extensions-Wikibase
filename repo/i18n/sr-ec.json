@@ -177,6 +177,7 @@
 	"wikibase-entitydata-unsupported-format": "Формат података $1 не подржава овај интерфејс.",
 	"wikibase-entitydata-title": "Подаци за унос",
 	"wikibase-redirectentity-success": "$1 је успешно преусмерено на $2.",
+	"wikibase-redirectentity-submit": "Преусмерење",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, претворено из $3 - $4",
 	"wikibase-restoreold": "врати",
 	"wikibase-entity-summary-restore": "Враћена измена $3 корисника [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
