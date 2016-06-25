@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_74cd2b88",
+        "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-25T10:25:08Z",
+      "side": 1,
+      "message": "Accessing global state in a static function makes it hard to test. Please forward to an instance method, like for onWikibaseHandleChange.",
+      "revId": "7399619148bb70afadb32242fc802c4230d11408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_54c8e776",
+        "filename": "docs/options.wiki",
+        "patchSetId": 30
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-25T10:25:08Z",
+      "side": 1,
+      "message": "is repoIcon really an expert setting?",
+      "revId": "7399619148bb70afadb32242fc802c4230d11408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
