@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_cf99e072",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 30
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-25T13:01:04Z",
+      "side": 1,
+      "message": "Ok, now defaults to \"Project:$1\" where \"$1\" is the name of the repository (eg. Wikidata)",
+      "parentUuid": "0efd9372_f4875b12",
+      "revId": "7399619148bb70afadb32242fc802c4230d11408",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_74cd2b88",
         "filename": "client/includes/Hooks/EchoNotificationsHandlers.php",
         "patchSetId": 30
