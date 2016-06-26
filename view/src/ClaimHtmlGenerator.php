@@ -101,6 +101,7 @@ class ClaimHtmlGenerator {
 		return $this->templateFactory->render(
 			'wikibase-statementview',
 			$statement->getGuid(),
+			$this->getRankName( $statement->getRank() ),
 			$rankHtml,
 			$mainSnakHtml,
 			$this->getHtmlForQualifiers( $statement->getQualifiers() ),
@@ -232,11 +233,7 @@ class ClaimHtmlGenerator {
 	 */
 	private function getRankSelector( $rank ) {
 		if ( !array_key_exists( $rank, $this->statementRankSelector ) ) {
-			$rankName = [
-				Statement::RANK_DEPRECATED => 'deprecated',
-				Statement::RANK_NORMAL => 'normal',
-				Statement::RANK_PREFERRED => 'preferred'
-			][ $rank ];
+			$rankName = $this->getRankName( $rank );
 
 			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
 			// wikibase-statementview-rank-deprecated
@@ -250,6 +247,19 @@ class ClaimHtmlGenerator {
 			$this->statementRankSelector[ $rank ] = $rankSelector;
 		}
 		return $this->statementRankSelector[ $rank ];
+	}
+
+	/**
+	 * @param int $rank
+	 *
+	 * @return string
+	 */
+	private function getRankName( $rank ) {
+		return [
+			Statement::RANK_DEPRECATED => 'deprecated',
+			Statement::RANK_NORMAL => 'normal',
+			Statement::RANK_PREFERRED => 'preferred'
+		][ $rank ];
 	}
 
 }
