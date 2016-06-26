@@ -37,6 +37,7 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 	const ITEM_WITH_LABEL = 'Q1';
 	const ITEM_WITHOUT_LABEL = 'Q11';
 	const ITEM_DELETED = 'Q111';
+	const ITEM_LABEL_NO_DESCRIPTION = 'Q1111';
 
 	public function validContextProvider() {
 		$historyContext = RequestContext::newExtraneousContext(
@@ -230,6 +231,32 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 		$this->assertContains( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
 	}
 
+	public function testDoOnLinkBegin_itemHasNoDescription() {
+		$contextTitle = Title::newFromText( 'Special:Recentchanges' );
+		$linkBeginHookHandler = $this->getLinkBeginHookHandler();
+
+		$title = Title::makeTitle( NS_MAIN, self::ITEM_LABEL_NO_DESCRIPTION );
+		$title->resetArticleID( 1 );
+		$this->assertTrue( $title->exists() ); // sanity check
+
+		$html = $title->getFullText();
+		$customAttribs = array();
+
+		$context = RequestContext::newExtraneousContext( $contextTitle );
+		$linkBeginHookHandler->doOnLinkBegin( $title, $html, $customAttribs, $context );
+
+		$expected = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">linkbegin-label</span> '
+			. '<span class="wb-itemlink-id">(' . self::ITEM_LABEL_NO_DESCRIPTION . ')</span></span>';
+
+		$lang = Language::factory( 'en' );
+		$this->assertEquals( $expected, $html );
+		$this->assertEquals(
+			$lang->getDirMark() . 'linkbegin-label' . $lang->getDirMark(),
+			$customAttribs['title']
+		);
+	}
+
 	/**
 	 * @return EntityIdLookup
 	 */
@@ -266,6 +293,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 					return array();
 				}
 
+				if ( $id->getSerialization() == self::ITEM_LABEL_NO_DESCRIPTION ) {
+					return array( 'en' => 'linkbegin-label' );
+				}
+
 				throw new StorageException( 'No such entity: ' . $id->getSerialization() );
 			} ) );
 
@@ -277,6 +308,10 @@ class LinkBeginHookHandlerTest extends \MediaWikiTestCase {
 				}
 
 				if ( $id->getSerialization() == self::ITEM_WITHOUT_LABEL ) {
+					return array();
+				}
+
+				if ( $id->getSerialization() == self::ITEM_LABEL_NO_DESCRIPTION ) {
 					return array();
 				}
 
