@@ -321,16 +321,17 @@ class LinkBeginHookHandler {
 				. $this->pageLanguage->getDirMark()
 			: $title->getPrefixedText();
 
-		$descriptionText = $descriptionLang->getDirMark() . $descriptionText
-			. $this->pageLanguage->getDirMark();
-
-		return ( $descriptionText !== '' ) ?
-			wfMessage(
+		if ( $descriptionText !== '' ) {
+			$descriptionText = $descriptionLang->getDirMark() . $descriptionText
+				. $this->pageLanguage->getDirMark();
+			return wfMessage(
 				'wikibase-itemlink-title',
 				$titleText,
 				$descriptionText
-			)->inContentLanguage()->text() :
-			$titleText; // no description, just display the title then
+			)->inContentLanguage()->text();
+		} else {
+			return $titleText; // no description, just display the title then
+		}
 	}
 
 }
