@@ -89,16 +89,16 @@ HTML;
 
 	$templates['wikibase-statementview'] =
 <<<HTML
-<div class="wikibase-statementview wikibase-statement-$1">
-	<div class="wikibase-statementview-rankselector">$2</div>
+<div class="wikibase-statementview wikibase-statement-$1 wikibase-statement-$2">
+	<div class="wikibase-statementview-rankselector">$3</div>
 	<div class="wikibase-statementview-mainsnak-container">
-		<div class="wikibase-statementview-mainsnak" dir="auto"><!-- wikibase-snakview -->$3</div>
-		<div class="wikibase-statementview-qualifiers"><!-- wikibase-listview -->$4</div>
+		<div class="wikibase-statementview-mainsnak" dir="auto"><!-- wikibase-snakview -->$4</div>
+		<div class="wikibase-statementview-qualifiers"><!-- wikibase-listview -->$5</div>
 	</div>
-	<!-- wikibase-toolbar -->$5
+	<!-- wikibase-toolbar -->$6
 	<div class="wikibase-statementview-references-container">
-		<div class="wikibase-statementview-references-heading">$6</div>
-		<div class="wikibase-statementview-references $8"><!-- wikibase-listview -->$7</div>
+		<div class="wikibase-statementview-references-heading">$7</div>
+		<div class="wikibase-statementview-references $9"><!-- wikibase-listview -->$8</div>
 	</div>
 </div>
 HTML;
