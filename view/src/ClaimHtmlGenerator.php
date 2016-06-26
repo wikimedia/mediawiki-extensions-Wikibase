@@ -27,6 +27,12 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class ClaimHtmlGenerator {
 
+	private static $rankNames = [
+		Statement::RANK_DEPRECATED => 'deprecated',
+		Statement::RANK_NORMAL => 'normal',
+		Statement::RANK_PREFERRED => 'preferred'
+	];
+
 	/**
 	 * @var TemplateFactory
 	 */
@@ -101,6 +107,7 @@ class ClaimHtmlGenerator {
 		return $this->templateFactory->render(
 			'wikibase-statementview',
 			$statement->getGuid(),
+			self::$rankNames[ $statement->getRank() ],
 			$rankHtml,
 			$mainSnakHtml,
 			$this->getHtmlForQualifiers( $statement->getQualifiers() ),
@@ -232,11 +239,7 @@ class ClaimHtmlGenerator {
 	 */
 	private function getRankSelector( $rank ) {
 		if ( !array_key_exists( $rank, $this->statementRankSelector ) ) {
-			$rankName = [
-				Statement::RANK_DEPRECATED => 'deprecated',
-				Statement::RANK_NORMAL => 'normal',
-				Statement::RANK_PREFERRED => 'preferred'
-			][ $rank ];
+			$rankName = self::$rankNames[ $rank ];
 
 			// Messages: wikibase-statementview-rank-preferred, wikibase-statementview-rank-normal,
 			// wikibase-statementview-rank-deprecated
