@@ -68,6 +68,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 			function() { // GUID
 				return ( this.options.value && this.options.value.getClaim().getGuid() ) || 'new';
 			},
+			function() { // Rank string
+				return this._getRankString(
+					this.options.value
+						? this.options.value.getRank()
+						: wb.datamodel.Statement.RANK.NORMAL
+				);
+			},
 			function() { // Rank selector
 				return $( '<div/>' );
 			},
@@ -843,6 +850,28 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 */
 	focus: function() {
 		this._mainSnakSnakView.focus();
+	},
+
+	/**
+	 * Returns a `RANK`'s serialized string.
+	 *
+	 * @see wikibase.datamodel.Statement.RANK
+	 * @ignore
+	 *
+	 * @param {number} rank
+	 * @return {string|null}
+	 */
+	_getRankString: function( rank ) {
+		var rankString = null;
+
+		$.each( wb.datamodel.Statement.RANK, function( rankId, i ) {
+			if ( rank === i ) {
+				rankString = rankId.toLowerCase();
+			}
+			return rankString === null;
+		} );
+
+		return rankString;
 	}
 } );
 
