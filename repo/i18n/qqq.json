@@ -199,6 +199,7 @@
 	"wikibase-newitem-page": "Label for the page-textfield holding the page name of the first linked page to add to the new item",
 	"wikibase-newitem-no-external-page": "Error message shown when a user tries to add a page that does not exist on the website choosen.",
 	"wikibase-newitem-not-recognized-siteid": "Error message shown when a user tries to add a link to a site with an unknown identifier.\n\nSee also:\n* {{msg-mw|Wikibase-api-not-recognized-siteid}}",
+	"wikibase-newitem-not-recognized-language": "Error message shown when a user tries to create an item with an unknown language code.\n\nSee also:\n* {{msg-mw|Wikibase-api-not-recognized-language}}",
 	"wikibase-newentity-language": "Label for the \"lang\" dropdown menu holding the language in which the label, description and aliases of the new item should be typed.\n{{Identical|Language}}",
 	"wikibase-newentity-label": "Label for the \"label\" textfield holding the label of the new item.\n{{Identical|Label}}",
 	"wikibase-newentity-description": "Label for the \"description\" textfield holding the description of the new item.\n{{Identical|Description}}",
