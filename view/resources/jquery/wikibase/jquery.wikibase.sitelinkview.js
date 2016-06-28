@@ -339,30 +339,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	},
 
 	/**
-	 * @return {boolean}
-	 */
-	isValid: function() {
-		return !!this.value();
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isInitialValue: function() {
-		if ( !this._isInEditMode ) {
-			return true;
-		}
-
-		var currentValue = this.value();
-
-		if ( !this.options.value || !currentValue ) {
-			return false;
-		}
-
-		return currentValue.equals( this.options.value );
-	},
-
-	/**
 	 * Puts the widget into edit mode.
 	 */
 	startEditing: function() {
@@ -396,7 +372,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	stopEditing: function( dropValue ) {
 		var deferred = $.Deferred();
 
-		if ( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this._isInEditMode ) {
 			return deferred.resolve().promise();
 		}
 
@@ -408,13 +384,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		this._afterStopEditing( dropValue );
 
 		return deferred.resolve().promise();
-	},
-
-	/**
-	 * Cancels editing.
-	 */
-	cancelEditing: function() {
-		this.stopEditing( true );
 	},
 
 	/**
