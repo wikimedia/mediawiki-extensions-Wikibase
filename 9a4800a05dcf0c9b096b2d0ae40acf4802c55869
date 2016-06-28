@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_f7b59279",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-28T15:48:00Z",
+      "side": 1,
+      "message": "Many tests in this class use a very similar setup. This indicates that this code can be refactored into methods and reused.",
+      "revId": "9a4800a05dcf0c9b096b2d0ae40acf4802c55869",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_5700de38",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-28T15:48:00Z",
+      "side": 1,
+      "message": "Looks like this should be a switch statement.",
+      "revId": "9a4800a05dcf0c9b096b2d0ae40acf4802c55869",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_37fd5a38",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-28T15:48:00Z",
+      "side": 1,
+      "message": "Looks like this should be a switch statement.",
+      "revId": "9a4800a05dcf0c9b096b2d0ae40acf4802c55869",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
