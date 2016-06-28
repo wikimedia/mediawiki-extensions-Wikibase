@@ -154,7 +154,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				$this->showErrorHTML( $this->msg( $errors[0][0], array_slice( $errors[0], 1 ) )->parse() );
 				$this->setForm( $entity );
 			} else {
-				$entityUrl = $this->getEntityTitle( $entity->getId() )->getFullUrl();
+				$entityUrl = $this->getEntityTitle( $entity->getId() )->getFullURL();
 				$this->getOutput()->redirect( $entityUrl );
 			}
 		}

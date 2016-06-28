@@ -143,7 +143,7 @@ class SearchEntities extends ApiBase {
 		$entry = array(
 			'id' => $match->getEntityId()->getSerialization(),
 			'concepturi' => $this->conceptBaseUri . $match->getEntityId()->getSerialization(),
-			'url' => $title->getFullUrl(),
+			'url' => $title->getFullURL(),
 			'title' => $title->getPrefixedText(),
 			'pageid' => $title->getArticleID()
 		);

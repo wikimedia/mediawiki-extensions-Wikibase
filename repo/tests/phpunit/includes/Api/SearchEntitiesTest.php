@@ -64,7 +64,7 @@ class SearchEntitiesTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
-			->method( 'getFullUrl' )
+			->method( 'getFullURL' )
 			->will( $this->returnValue( 'http://fullTitleUrl' ) );
 		$mock->expects( $this->any() )
 			->method( 'getPrefixedText' )
