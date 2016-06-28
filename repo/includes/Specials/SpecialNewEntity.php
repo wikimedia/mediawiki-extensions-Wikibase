@@ -147,7 +147,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 						$out->addHTML( '</div>' );
 					} elseif ( $entity !== null ) {
 						$title = $this->getEntityTitle( $entity->getId() );
-						$entityUrl = $title->getFullUrl();
+						$entityUrl = $title->getFullURL();
 						$this->getOutput()->redirect( $entityUrl );
 					}
 				} else {

@@ -152,7 +152,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				unset( $query['title'] );
 				unset( $query['site'] );
 				unset( $query['page'] );
-				$itemUrl = $title->getFullUrl( $query );
+				$itemUrl = $title->getFullURL( $query );
 				$this->getOutput()->redirect( $itemUrl );
 				return;
 			}

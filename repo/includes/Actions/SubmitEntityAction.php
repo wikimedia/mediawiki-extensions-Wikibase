@@ -126,7 +126,7 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		if ( $status->isOK() ) {
-			$this->getOutput()->redirect( $title->getFullUrl() );
+			$this->getOutput()->redirect( $title->getFullURL() );
 		} else {
 			$this->showUndoErrorPage( $status );
 		}
