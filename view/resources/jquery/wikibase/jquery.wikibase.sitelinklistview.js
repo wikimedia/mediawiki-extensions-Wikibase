@@ -157,7 +157,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 					sitelinkview = listItemAdapter.liInstance( $sitelinkview );
 
 				if ( sitelinkview ) {
-					self._removeSitelinkviewIfEmpty( sitelinkview, event );
+					self._removeSitelinkviewIfEmpty( sitelinkview, event ); // FIXME: Move to sitelinkview
 				}
 			}
 		} )
@@ -229,14 +229,14 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			secondToLast = $items.length > 1 && lia.liInstance( $items.eq( -2 ) ),
 			secondToLastEmpty = secondToLast && secondToLast.isEmpty(),
 			secondToLastInvalidPending
-				= secondToLast && !secondToLast.isValid() && !secondToLast.option( 'value' );
+				= secondToLast && !secondToLast.value() && !secondToLast.option( 'value' );
 
 		if ( lastSitelinkview
 			&& lastSitelinkview.isEmpty()
 			&& ( secondToLastEmpty || secondToLastInvalidPending )
 		) {
 			listview.removeItem( $lastSitelinkview );
-		} else if ( !lastSitelinkview || lastSitelinkview.isValid() && !this.isFull() ) {
+		} else if ( !lastSitelinkview || lastSitelinkview.value() && !this.isFull() ) {
 			this.enterNewItem();
 		}
 	},
@@ -530,7 +530,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		if ( !this.isValid() ) {
 			$items = $items.filter( function() {
 				var sitelinkview = lia.liInstance( $( this ) );
-				return !sitelinkview.isValid();
+				return sitelinkview.value() === null;
 			} );
 		}
 		$items = findFirstInViewPort( $items );
