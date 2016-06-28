@@ -9,8 +9,10 @@ use Status;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
+use Wikibase\View\LanguageDirectionalityLookup;
 
 /**
  * Page for creating new Wikibase entities that contain a Fingerprint.
