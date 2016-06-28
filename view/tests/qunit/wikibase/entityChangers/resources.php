@@ -51,6 +51,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.entityChangers.EntityTermsChanger.tests' => $moduleBase + array(
+			'scripts' => array(
+				'EntityTermsChanger.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.entityChangers.EntityTermsChanger'
+			),
+		),
+
 		'wikibase.entityChangers.LabelsChanger.tests' => $moduleBase + array(
 			'scripts' => array(
 				'LabelsChanger.tests.js',
