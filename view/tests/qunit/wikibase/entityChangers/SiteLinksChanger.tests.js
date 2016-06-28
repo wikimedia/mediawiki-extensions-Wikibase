@@ -136,4 +136,57 @@
 		} );
 	} );
 
+	QUnit.test( 'setSiteLink performs correct API call for remove', function( assert ) {
+		assert.expect( 1 );
+		var api = {
+			setSitelink: sinon.spy( function() {
+				return $.Deferred().promise();
+			} )
+		};
+		var siteLinksChanger = new SUBJECT(
+			api,
+			{ getSitelinksRevision: function() { return 0; } },
+			new wb.datamodel.Item( 'Q1' )
+		);
+
+		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', '' ) );
+
+		assert.ok( api.setSitelink.calledOnce );
+	} );
+
+	QUnit.test( 'setSiteLink correctly handles API response for remove', function( assert ) {
+		assert.expect( 1 );
+		var api = {
+			setSitelink: sinon.spy( function() {
+				return $.Deferred().resolve( {
+					entity: {
+						sitelinks: {
+							siteId: {
+								title: 'pageName',
+								removed: ''
+							},
+							lastrevid: 'lastrevid'
+						}
+					}
+				} ).promise();
+			} )
+		};
+		var siteLinksChanger = new SUBJECT(
+			api,
+			{ getSitelinksRevision: function() { return 0; }, setSitelinksRevision: function() {} },
+			new wb.datamodel.Item( 'Q1' )
+		);
+
+		QUnit.stop();
+
+		siteLinksChanger.setSiteLink( new wb.datamodel.SiteLink( 'siteId', '' ) )
+		.done( function( savedSiteLink ) {
+			QUnit.start();
+			assert.strictEqual( savedSiteLink, null );
+		} )
+		.fail( function() {
+			assert.ok( false, 'setSiteLink failed' );
+		} );
+	} );
+
 } )( sinon, wikibase, jQuery );
