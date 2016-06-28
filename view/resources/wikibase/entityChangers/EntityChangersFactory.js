@@ -67,6 +67,13 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+	 * @return {wikibase.entityChangers.EntityTermsChanger}
+	 */
+	getEntityTermsChanger: function() {
+		return new MODULE.EntityTermsChanger( this._api, this._revisionStore, this._entity );
+	},
+
+	/**
 	 * @return {wikibase.entityChangers.LabelsChanger}
 	 */
 	getLabelsChanger: function() {

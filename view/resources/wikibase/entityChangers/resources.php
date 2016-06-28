@@ -66,6 +66,7 @@ return call_user_func( function() {
 				'wikibase.entityChangers.AliasesChanger',
 				'wikibase.entityChangers.ClaimsChanger',
 				'wikibase.entityChangers.DescriptionsChanger',
+				'wikibase.entityChangers.EntityTermsChanger',
 				'wikibase.entityChangers.LabelsChanger',
 				'wikibase.entityChangers.ReferencesChanger',
 				'wikibase.entityChangers.SiteLinksChanger',
@@ -75,6 +76,16 @@ return call_user_func( function() {
 				'wikibase.serialization.ReferenceSerializer',
 				'wikibase.serialization.StatementDeserializer',
 				'wikibase.serialization.StatementSerializer',
+			)
+		),
+
+		'wikibase.entityChangers.EntityTermsChanger' => $moduleTemplate + array(
+			'scripts' => array(
+				'EntityTermsChanger.js',
+			),
+			'dependencies' => array(
+				'wikibase.entityChangers.__namespace',
+				'wikibase.api.RepoApiError',
 			)
 		),
 
