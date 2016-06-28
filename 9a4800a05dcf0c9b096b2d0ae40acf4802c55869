@@ -50,6 +50,23 @@
       "revId": "9a4800a05dcf0c9b096b2d0ae40acf4802c55869",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_291b3e74",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-28T16:11:37Z",
+      "side": 1,
+      "message": "Here is a stupid typo \"getSeialization\" -\u003e \"getSerialization\". Not fixing now in order to keep comments on the top.",
+      "revId": "9a4800a05dcf0c9b096b2d0ae40acf4802c55869",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
