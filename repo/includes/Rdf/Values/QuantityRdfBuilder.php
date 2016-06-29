@@ -4,6 +4,7 @@ namespace Wikibase\Rdf\Values;
 
 use DataValues\QuantityValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\UnitConverter;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
@@ -25,10 +26,16 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	private $complexValueHelper;
 
 	/**
+	 * @var UnitConverter
+	 */
+	private $unitConverter;
+
+	/**
 	 * @param ComplexValueRdfHelper|null $complexValueHelper
 	 */
-	public function __construct( ComplexValueRdfHelper $complexValueHelper = null ) {
+	public function __construct( ComplexValueRdfHelper $complexValueHelper = null, UnitConverter $uc = null ) {
 		$this->complexValueHelper = $complexValueHelper;
+		$this->unitConverter = $uc;
 	}
 
 	/**
@@ -61,25 +68,28 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	/**
 	 * Adds a value node representing all details of $value
 	 *
-	 * @param RdfWriter $writer
-	 * @param string $propertyValueNamespace Property value relation namespace
-	 * @param string $propertyValueLName Property value relation name
-	 * @param string $dataType Property data type
+	 * @param RdfWriter     $writer
+	 * @param string        $propertyValueNamespace Property value relation namespace
+	 * @param string        $propertyValueLName Property value relation name
+	 * @param string        $dataType Property data type
 	 * @param QuantityValue $value
+	 * @param bool          $normalized Is this a normalized value?
 	 */
 	private function addValueNode(
 		RdfWriter $writer,
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
-		QuantityValue $value
+		QuantityValue $value,
+		$normalized = false
 	) {
 		$valueLName = $this->complexValueHelper->attachValueNode(
 			$writer,
 			$propertyValueNamespace,
 			$propertyValueLName,
 			$dataType,
-			$value
+			$value,
+			$normalized
 		);
 
 		if ( $valueLName === null ) {
@@ -106,6 +116,19 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUnit' )
 			->is( $unitUri );
+
+		// FIXME: make this depend on flavor
+		// We exclude unitless ones here because same property should not have
+		// both unitless and united quantity, and they are unlikely to be in the same query.
+		if ( !$normalized && $this->unitConverter && $unitUri !== RdfVocabulary::ONE_ENTITY ) {
+			$newValue = $this->unitConverter->toStandardUnits( $value );
+
+			if ( $newValue ) {
+				// Add normalized node
+				$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName,
+					$dataType, $newValue, true );
+			}
+		}
 	}
 
 }
