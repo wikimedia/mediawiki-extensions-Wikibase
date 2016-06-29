@@ -40,7 +40,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	/**
 	 * @return EntityHandler
 	 */
-	private function newFrobHandler() {
+	private function newCustomEntityHandler() {
 		$handler = $this->getMockBuilder( EntityHandler::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -53,22 +53,22 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param string $text
+	 * @param string $idString
 	 *
 	 * @return EntityId
 	 */
-	private function newFrobId( $text ) {
+	private function newCustomEntityId( $idString ) {
 		$id = $this->getMockBuilder( EntityId::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$id->expects( $this->any() )
 			->method( 'getSerialization' )
-			->will( $this->returnValue( $text ) );
+			->will( $this->returnValue( $idString ) );
 
 		$id->expects( $this->any() )
 			->method( 'getEntityType' )
-			->will( $this->returnValue( 'frob' ) );
+			->will( $this->returnValue( 'custom-type' ) );
 
 		return $id;
 	}
@@ -97,7 +97,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 				array(
 					'item' => CONTENT_MODEL_WIKIBASE_ITEM,
 					'property' => CONTENT_MODEL_WIKIBASE_PROPERTY,
-					'frob' => 'FROB',
+					'custom-type' => 'wikibase-custom-type',
 				),
 				array(
 					'item' => function() use ( $wikibaseRepo ) {
@@ -106,8 +106,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					'property' => function() use ( $wikibaseRepo ) {
 						return $wikibaseRepo->newPropertyHandler();
 					},
-					'frob' => function() use ( $wikibaseRepo ) {
-						return $this->newFrobHandler();
+					'custom-type' => function() use ( $wikibaseRepo ) {
+						return $this->newCustomEntityHandler();
 					},
 				)
 			),
@@ -449,7 +449,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$warnings = $status->getErrorsByType( 'warning' );
 			return "\nStatus (OK): Warnings: " . var_dump( $warnings );
 		} else {
-			return $status->getWikiText();
+			return "\n" . $status->getWikiText();
 		}
 	}
 
@@ -640,7 +640,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function provideCanCreateWithCustomId() {
 		return [
 			'no custom id allowed' => [ new ItemId( 'Q7' ), false ],
-			'custom id allowed' => [ $this->newFrobId( 'F7' ), true ],
+			'custom id allowed' => [ $this->newCustomEntityId( 'F7' ), true ],
 		];
 	}
 

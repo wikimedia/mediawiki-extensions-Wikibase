@@ -758,6 +758,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * return false.
 	 *
 	 * @param EntityId $id
+	 *
 	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
