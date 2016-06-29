@@ -16,6 +16,7 @@ use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
 use HashBagOStuff;
 use Hooks;
+use Http;
 use IContextSource;
 use Language;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
@@ -1731,7 +1732,7 @@ class WikibaseRepo {
 	public function getCachingCommonsMediaFileNameLookup() {
 		if ( $this->cachingCommonsMediaFileNameLookup === null ) {
 			$this->cachingCommonsMediaFileNameLookup = new CachingCommonsMediaFileNameLookup(
-				new MediaWikiPageNameNormalizer(),
+				new MediaWikiPageNameNormalizer( new Http() ),
 				new HashBagOStuff()
 			);
 		}
