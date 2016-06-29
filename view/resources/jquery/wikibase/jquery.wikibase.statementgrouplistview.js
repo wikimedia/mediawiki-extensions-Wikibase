@@ -74,6 +74,7 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 
 		this.element.statementgrouplabelscroll();
 
+		this._statementGroupAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
 	},
 
 	/**
@@ -82,6 +83,10 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 	 */
 	destroy: function() {
 		this.listview.destroy();
+		if ( this._statementGroupAdder ) {
+			this._statementGroupAdder.destroy();
+			this._statementGroupAdder = null;
+		}
 		PARENT.prototype.destroy.call( this );
 	},
 
@@ -208,6 +213,9 @@ $.widget( 'wikibase.statementgrouplistview', PARENT, {
 
 		if ( key === 'disabled' ) {
 			this.listview.option( key, value );
+			if ( this._statementGroupAdder ) {
+				this._statementGroupAdder[ value ? 'disable' : 'enable' ]();
+			}
 		}
 
 		return response;
