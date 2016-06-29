@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_7d006039",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:36:56Z",
+      "side": 1,
+      "message": "This will create these class names:\n* wikibase-statement-preferred\n* wikibase-statement-normal\n* wikibase-statement-deprecated\n\nI would suggest wb-preferred and so on instead. We are trying to use this convention in a few places: general flags that could be added to many different nodes get short wb-… names (e.g. wb-empty and wb-new), everything else long names.",
+      "revId": "04492440441b3101ed4f1573c79865ca355668b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_5dfd9c36",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:36:56Z",
+      "side": 1,
+      "message": "This could be\n\n private static $rankNames \u003d [ … ];\n\nat the top of this file, and the lookup\n\n return self::$rankNames[$rank];\n\nThis line can then be inlined 2 times.",
+      "revId": "04492440441b3101ed4f1573c79865ca355668b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_2c5d0c7f",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:36:56Z",
+      "side": 1,
+      "message": "Would be cool to have a class for such tasks, similar to what I proposed in https://github.com/wmde/WikibaseDataModel/pull/562",
+      "revId": "04492440441b3101ed4f1573c79865ca355668b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
