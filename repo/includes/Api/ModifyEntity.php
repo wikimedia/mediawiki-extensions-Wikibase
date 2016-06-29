@@ -319,14 +319,14 @@ abstract class ModifyEntity extends ApiBase {
 	 * @since 0.1
 	 *
 	 * @param string|null $entityType The type of entity to be created (ignored if $id is given)
-	 * @param EntityId|null $id The ID of the entity to be created (optional if $entityType is
+	 * @param EntityId|null $customId The ID of the entity to be created (optional if $entityType is
 	 *        given)
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
 	 * @return EntityDocument Newly created entity
 	 */
-	protected function createEntity( $entityType, EntityId $id = null ) {
+	protected function createEntity( $entityType, EntityId $customId = null ) {
 		$this->errorReporter->dieError( 'Could not find an existing entity', 'no-such-entity' );
 	}
 
