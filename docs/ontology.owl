@@ -241,6 +241,12 @@
       <rdfs:domain rdf:resource="&wikibase;Property"/>
   </owl:ObjectProperty>
 
+  <owl:ObjectProperty rdf:about="&wikibase;statementValueNormalized">
+      <rdfs:label>statementValueNormalized</rdfs:label>
+      <rdfs:comment>Link between Wikibase Property and statement normalized value predicate.</rdfs:comment>
+      <rdfs:domain rdf:resource="&wikibase;Property"/>
+  </owl:ObjectProperty>
+
   <owl:ObjectProperty rdf:about="&wikibase;qualifier">
       <rdfs:label>qualifier</rdfs:label>
       <rdfs:comment>Link between Wikibase Property and qualifier predicate.</rdfs:comment>
@@ -253,6 +259,12 @@
       <rdfs:domain rdf:resource="&wikibase;Property"/>
   </owl:ObjectProperty>
 
+  <owl:ObjectProperty rdf:about="&wikibase;qualifierValueNormalized">
+      <rdfs:label>qualifierValueNormalized</rdfs:label>
+      <rdfs:comment>Link between Wikibase Property and qualifier normalized value predicate.</rdfs:comment>
+      <rdfs:domain rdf:resource="&wikibase;Property"/>
+  </owl:ObjectProperty>
+
   <owl:ObjectProperty rdf:about="&wikibase;reference">
       <rdfs:label>reference</rdfs:label>
       <rdfs:comment>Link between Wikibase Property and reference predicate.</rdfs:comment>
@@ -262,6 +274,12 @@
   <owl:ObjectProperty rdf:about="&wikibase;referenceValue">
       <rdfs:label>referenceValue</rdfs:label>
       <rdfs:comment>Link between Wikibase Property and reference value predicate.</rdfs:comment>
+      <rdfs:domain rdf:resource="&wikibase;Property"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&wikibase;referenceValueNormalized">
+      <rdfs:label>referenceValue</rdfs:label>
+      <rdfs:comment>Link between Wikibase Property and reference normalized value predicate.</rdfs:comment>
       <rdfs:domain rdf:resource="&wikibase;Property"/>
   </owl:ObjectProperty>
 
