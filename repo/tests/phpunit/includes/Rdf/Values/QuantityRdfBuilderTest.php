@@ -3,7 +3,10 @@
 namespace Wikibase\Test\Rdf;
 
 use DataValues\QuantityValue;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\UnitConverter;
+use Wikibase\Lib\UnitStorage;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
@@ -38,6 +41,10 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 	public function provideAddValue() {
 		$value = QuantityValue::newFromNumber( '+23.5', '1', '+23.6', '+23.4' );
 		$snak = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
+
+		$unitId = new ItemId( 'Q2' );
+		$value = QuantityValue::newFromNumber( '+23.5', 'http://acme/' . $unitId->getSerialization(), '+23.6', '+23.4' );
+		$snak2 = new PropertyValueSnak( new PropertyId( 'P7' ), $value );
 
 		return array(
 			'simple' => array(
@@ -74,13 +81,99 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 						. '<http://www.wikidata.org/entity/Q199> .',
 				)
 			),
+			'units' => array(
+				$snak2,
+				true,
+				array(
+					'<http://www/Q1> '
+					. '<http://acme/statement/P7> '
+					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://www/Q1> '
+					. '<http://acme/statement/value/P7> '
+					. '<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+					. '<http://acme/onto/QuantityValue> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityAmount> '
+					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityUpperBound> '
+					. '"+23.6"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityLowerBound> '
+					. '"+23.4"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityUnit> '
+					. '<http://acme/Q2> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityNormalized> '
+					. '<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> .',
+				)
+			),
+			'units_convert' => array(
+				$snak2,
+				true,
+				array(
+					'<http://www/Q1> '
+					. '<http://acme/statement/P7> '
+					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://www/Q1> '
+					. '<http://acme/statement/value/P7> '
+					. '<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+					. '<http://acme/onto/QuantityValue> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityAmount> '
+					. '"+23.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityUpperBound> '
+					. '"+23.6"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityLowerBound> '
+					. '"+23.4"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityUnit> '
+					. '<http://acme/Q2> .',
+					'<http://acme/value/d56fea2e7acc4c42069d87f695cab5b9> '
+					. '<http://acme/onto/quantityNormalized> '
+					. '<http://acme/value/e80660d9a958a139230804dacf35a6ea> .',
+					'<http://acme/value/e80660d9a958a139230804dacf35a6ea> '
+					. '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> '
+					. '<http://acme/onto/QuantityValue> .',
+					'<http://acme/value/e80660d9a958a139230804dacf35a6ea> '
+					. '<http://acme/onto/quantityAmount> '
+					. '"+2930"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/e80660d9a958a139230804dacf35a6ea> '
+					. '<http://acme/onto/quantityUpperBound> '
+					. '"+2940"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/e80660d9a958a139230804dacf35a6ea> '
+					. '<http://acme/onto/quantityLowerBound> '
+					. '"+2920"^^<http://www.w3.org/2001/XMLSchema#decimal> .',
+					'<http://acme/value/e80660d9a958a139230804dacf35a6ea> '
+					. '<http://acme/onto/quantityUnit> <http://acme/Q1> .',
+					'<http://acme/value/e80660d9a958a139230804dacf35a6ea> '
+					. '<http://acme/onto/quantityNormalized> '
+					. '<http://acme/value/e80660d9a958a139230804dacf35a6ea> .',
+
+				),
+				array( 'factor' => '124.7', 'unit' => 'Q1' )
+			),
 		);
+	}
+
+	private function getConverter( $result ) {
+		$mockStorage = $this->getMock( UnitStorage::class );
+		$mockStorage->method( 'getConversion' )->willReturn( $result );
+		return new UnitConverter( $mockStorage, 'http://acme/' );
 	}
 
 	/**
 	 * @dataProvider provideAddValue
 	 */
-	public function testAddValue( PropertyValueSnak $snak, $complex, array $expected ) {
+	public function testAddValue( PropertyValueSnak $snak, $complex, array $expected,
+	                              array $units = null ) {
 		$vocab = new RdfVocabulary( 'http://acme.com/item/', 'http://acme.com/data/' );
 
 		$snakWriter = new NTriplesRdfWriter();
@@ -98,7 +191,7 @@ class QuantityRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 			$helper = null;
 		}
 
-		$builder = new QuantityRdfBuilder( $helper );
+		$builder = new QuantityRdfBuilder( $helper, $this->getConverter( $units ) );
 
 		$snakWriter->start();
 		$snakWriter->about( 'www', 'Q1' );
