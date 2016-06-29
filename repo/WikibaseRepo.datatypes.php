@@ -174,7 +174,8 @@ return call_user_func( function() {
 				DedupeBag $dedupe
 			) {
 				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
-				return new QuantityRdfBuilder( $complexValueHelper );
+				$uc = new \Wikibase\Lib\UnitConvertor(new \Wikibase\Lib\JsonUnitStorage("/vagrant/mediawiki/units.json"));
+				return new QuantityRdfBuilder( $complexValueHelper, $uc );
 			},
 		),
 		'VT:string' => array(
