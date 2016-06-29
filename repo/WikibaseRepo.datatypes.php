@@ -173,8 +173,10 @@ return call_user_func( function() {
 				EntityMentionListener $tracker,
 				DedupeBag $dedupe
 			) {
-				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
-				return new QuantityRdfBuilder( $complexValueHelper );
+				$complexValueHelper = $mode === 'simple' ? null
+					: new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
+				return new QuantityRdfBuilder( $complexValueHelper,
+					WikibaseRepo::getDefaultInstance()->getUnitConverter() );
 			},
 		),
 		'VT:string' => array(

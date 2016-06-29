@@ -82,6 +82,7 @@ class RdfVocabulary {
 			self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE,
 			self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE,
 			self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE,
+			self::NS_ONTOLOGY => self::NS_ONTOLOGY
 	);
 
 	/**
