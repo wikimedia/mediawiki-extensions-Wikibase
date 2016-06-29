@@ -98,7 +98,8 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 				$labelsProvider,
 				$descriptionsProvider,
 				$aliasesProvider
-		) );
+			)
+		);
 		return $this->templateFactory->render( 'wikibase-entitytermsview',
 			$this->getHeadingHtml( $mainLanguageCode, $entityId, $aliasesProvider ),
 			$marker,
