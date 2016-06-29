@@ -16,6 +16,24 @@
       "revId": "7e4eb0a75089e1d07b48e70282838a4e632309c8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_932b7377",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-06-29T12:37:22Z",
+      "side": 0,
+      "message": "jquery.ui.TemplatedWidget already does this.",
+      "parentUuid": "0efd9372_98571229",
+      "revId": "7e4eb0a75089e1d07b48e70282838a4e632309c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
