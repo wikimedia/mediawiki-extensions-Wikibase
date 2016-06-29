@@ -213,7 +213,9 @@
 	 * Construct a suitable view for the given sitelink group on the given DOM element
 	 *
 	 * @param {jQuery.util.EventSingletonManager} eventSingletonManager
-	 * @param {Object} group: string, siteLinks: [SiteLink]
+	 * @param {Object} value
+	 *        Object representing the widget's value.
+	 *        Structure: { group: <{string}>, siteLinks: <{wikibase.datamodel.SiteLink[]}> }
 	 * @param {jQuery} $sitelinkgroupview
 	 * @return {jQuery.wikibase.sitelinkgroupview} The constructed sitelinkgroupview
 	 **/
