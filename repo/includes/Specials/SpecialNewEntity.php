@@ -238,13 +238,19 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		}
 
 		$fingerprint = $entity->getFingerprint();
+		$status = Status::newGood();
+
 		$languageCode = $this->contentLanguageCode;
+		if ( !in_array( $languageCode, $this->languageCodes ) ) {
+			$status->error( 'wikibase-newitem-not-recognized-language' );
+			return $status;
+		}
 
 		$fingerprint->setLabel( $languageCode, $this->label );
 		$fingerprint->setDescription( $languageCode, $this->description );
 		$fingerprint->setAliasGroup( $languageCode, $this->aliases );
 
-		return Status::newGood();
+		return $status;
 	}
 
 	/**
