@@ -327,6 +327,13 @@
       <rdfs:range rdf:resource="&wikibase;Item"/>
   </owl:ObjectProperty>
 
+  <owl:ObjectProperty rdf:about="&wikibase;quantityNormalized">
+        <rdfs:label>quantityNormalized</rdfs:label>
+        <rdfs:comment>Representation of this quantity in standard units.</rdfs:comment>
+        <rdfs:domain rdf:resource="&wikibase;QuantityValue"/>
+        <rdfs:range rdf:resource="&wikibase;QuantityValue"/>
+  </owl:ObjectProperty>
+
   <owl:ObjectProperty rdf:about="&wikibase;timeCalendarModel">
       <rdfs:label>timeCalendarModel</rdfs:label>
       <rdfs:comment>Preferred calendar used to display this date to the user.</rdfs:comment>
