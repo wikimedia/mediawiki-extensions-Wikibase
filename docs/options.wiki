@@ -50,6 +50,8 @@ Default:
 ;formatterUrlProperty: Property to be used on properties that defines a formatter URL which is used to link identifiers. The placeholder <code>$1</code> will be replaced by the identifier. Example: <code>https://www.wikidata.org/entity/$1</code>
 ;transformLegacyFormatOnExport: Whether entity revisions stored in a legacy format should be converted on the fly while exporting. Enabled per default.
 ;allowEntityImport: allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
+;unitStorage: Definition for unit conversion storage. Should be in in the format <code>ObjectFactory</code understands,
+  example: <code>array( 'class' => 'Wikibase\\Lib\\JsonUnitStorage',  'args' => array( 'myUnits.json' ) )</code>
 
 == Client Settings ==
 
