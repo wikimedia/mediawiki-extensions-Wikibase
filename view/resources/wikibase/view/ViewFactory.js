@@ -285,6 +285,16 @@
 		} );
 	};
 
+	SELF.prototype._getAdderWithStartEditing = function( startEditingCallback ) {
+		var structureEditorFactory = this._structureEditorFactory;
+		return function( doAdd, $dom, label ) {
+			var newDoAdd = function() {
+				return startEditingCallback().then( doAdd );
+			};
+			return structureEditorFactory.getAdder( newDoAdd, $dom, label );
+		};
+	};
+
 	/**
 	 * Construct a suitable view for the list of statement groups for the given entity on the given DOM element
 	 *
@@ -318,7 +328,8 @@
 						} );
 						return res;
 					}
-				)
+				),
+				getAdder: this._getAdderWithStartEditing( startEditingCallback )
 			}
 		);
 	};
@@ -359,27 +370,24 @@
 	SELF.prototype.getStatementListView = function( startEditingCallback, entityId, propertyId, getStatementForGuid, value, $statementlistview ) {
 		propertyId = propertyId || $statementlistview.closest( '.wikibase-statementgroupview' ).attr( 'id' );
 
-		var statementlistview;
-		statementlistview = this._getView(
+		return this._getView(
 			'statementlistview',
 			$statementlistview,
 			{
 				value: value.length === 0 ? null : value,
-				listItemAdapter: this.getListItemAdapterForStatementView(
+				getListItemAdapter: this.getListItemAdapterForStatementView.bind(
+					this,
 					startEditingCallback,
 					entityId,
 					function( dom ) {
 						var guidMatch = dom.className.match( /wikibase-statement-(\S+)/ );
 						return guidMatch ? getStatementForGuid( guidMatch[ 1 ] ) : null;
 					},
-					propertyId,
-					function( statementview ) {
-						return statementlistview.remove( statementview );
-					}
-				)
+					propertyId
+				),
+				getAdder: this._getAdderWithStartEditing( startEditingCallback )
 			}
 		);
-		return statementlistview;
 	};
 
 	/**
@@ -405,7 +413,6 @@
 	};
 
 	SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, removeCallback, value, $dom ) {
-		var structureEditorFactory = this._structureEditorFactory;
 		var currentPropertyId = value ? value.getClaim().getMainSnak().getPropertyId() : propertyId;
 		var view = this._getView(
 			'statementview',
@@ -431,12 +438,7 @@
 					false
 				),
 				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				getAdder: function( doAdd, $dom, label ) {
-					var newDoAdd = function() {
-						return startEditingCallback().then( doAdd );
-					};
-					return structureEditorFactory.getAdder( newDoAdd, $dom, label );
-				},
+				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
 				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
 				qualifiersListItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback )
 			}
@@ -464,7 +466,8 @@
 			$dom,
 			{
 				value: value || null,
-				listItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback )
+				listItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback ),
+				getAdder: this._getAdderWithStartEditing( startEditingCallback )
 			}
 		);
 		return view;

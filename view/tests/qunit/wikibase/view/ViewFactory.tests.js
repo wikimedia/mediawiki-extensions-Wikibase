@@ -122,7 +122,8 @@
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
 		var entity = new wb.datamodel.Item( 'Q1' ),
-			viewFactory = new ViewFactory(),
+			structureEditorFactory = { getAdder: function() {} },
+			viewFactory = new ViewFactory( structureEditorFactory ),
 			$dom = $( '<div/>' );
 
 		$dom.statementgrouplistview = sinon.stub( $.wikibase, 'statementgrouplistview' );
@@ -176,7 +177,8 @@
 				new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ) )
 			] ),
 			entityId = 'entityId',
-			viewFactory = new ViewFactory(),
+			structureEditorFactory = { getAdder: function() {} },
+			viewFactory = new ViewFactory( structureEditorFactory ),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
@@ -204,7 +206,8 @@
 		assert.expect( 1 );
 		var value = new wb.datamodel.StatementList(),
 			entityId = 'entityId',
-			viewFactory = new ViewFactory(),
+			structureEditorFactory = { getAdder: function() {} },
+			viewFactory = new ViewFactory( structureEditorFactory ),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
@@ -359,17 +362,19 @@
 		);
 
 		ListItemAdapter.restore();
-
 	} );
 
 	QUnit.test( 'getReferenceView passes correct options to view', function( assert ) {
 		assert.expect( 1 );
 		var value = null,
-			viewFactory = new ViewFactory(),
+			structureEditorFactory = {
+				getAdder: function() {}
+			},
+			viewFactory = new ViewFactory( structureEditorFactory ),
 			$dom = $( '<div/>' ),
 			referenceview = sinon.stub( $dom, 'referenceview' );
 
-		viewFactory.getReferenceView( {}, value, $dom );
+		viewFactory.getReferenceView( null, value, $dom );
 
 		sinon.assert.calledWith(
 			referenceview,

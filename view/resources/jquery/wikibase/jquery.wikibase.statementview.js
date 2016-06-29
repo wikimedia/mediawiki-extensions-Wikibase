@@ -283,7 +283,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 
 		// Using the property id, qualifier snaks are split into groups of snaklistviews. These
 		// snaklistviews are managed in a listview:
-		var $qualifiers = this.$qualifiers.children();
+		var $qualifiers = this.$qualifiers.children( '.wikibase-listview' );
 		if ( !$qualifiers.length ) {
 			$qualifiers = $( '<div/>' ).prependTo( this.$qualifiers );
 		}
@@ -461,9 +461,13 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_destroyQualifiersListView: function() {
 		this._qualifiers.destroy();
 		this.$qualifiers
-			.off( '.' + this.widgetName )
-			.empty();
+			.off( '.' + this.widgetName );
 		this._qualifiers = null;
+
+		if ( this._qualifierAdder ) {
+			this._qualifierAdder.destroy();
+			this._qualifierAdder = null;
+		}
 	},
 
 	/**
@@ -633,6 +637,24 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 */
 	startEditing: function() {
 		var self = this;
+
+		if ( this.isInEditMode() ) {
+			return $.Deferred().resolve().promise();
+		}
+
+		this._qualifierAdder = this.options.getAdder(
+			function() {
+				var listview = self._qualifiers;
+				listview.enterNewItem();
+
+				var snaklistview = listview.value()[listview.value().length - 1];
+				snaklistview.enterNewItem().done( function() {
+					snaklistview.focus();
+				} );
+			},
+			this.$qualifiers,
+			mw.msg( 'wikibase-addqualifier' )
+		);
 
 		// We need to initialize the main snak before calling PARENT::startEditing,
 		// since that triggers 'afterstartediting' which tries to set focus into
