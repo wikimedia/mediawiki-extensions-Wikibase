@@ -16,56 +16,6 @@ return call_user_func( function() {
 
 	$modules = array(
 
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementgrouplistview-statementgroupview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/addtoolbar/statementgrouplistview-statementgroupview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.statementgrouplistview',
-				'jquery.wikibase.toolbarcontroller',
-			),
-		),
-
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementlistview-statementview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/addtoolbar/statementlistview-statementview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.listview',
-				'jquery.wikibase.statementlistview',
-				'jquery.wikibase.toolbarcontroller',
-				'wikibase.templates',
-			),
-		),
-
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.referenceview-snakview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/addtoolbar/referenceview-snakview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.referenceview',
-				'jquery.wikibase.toolbarcontroller',
-			),
-		),
-
-		'jquery.wikibase.toolbarcontroller.definitions.addtoolbar.statementview-snakview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/addtoolbar/statementview-snakview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
-				'jquery.wikibase.listview',
-				'jquery.wikibase.statementview',
-				'jquery.wikibase.toolbarcontroller',
-			),
-			'messages' => array(
-				'wikibase-addqualifier',
-			),
-		),
-
 		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/removetoolbar/referenceview.js',
@@ -121,7 +71,6 @@ return call_user_func( function() {
 				'jquery.wikibase.toolbarcontroller.definitions.js',
 			),
 			'dependencies' => array(
-				'jquery.wikibase.addtoolbar',
 				'jquery.wikibase.removetoolbar',
 			),
 		),

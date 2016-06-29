@@ -13,11 +13,20 @@
 	 */
 	function createReferenceview( options ) {
 		options = $.extend( {
+			getAdder: function() {
+				return {
+					destroy: function() {}
+				};
+			},
 			listItemAdapter: wb.tests.getMockListItemAdapter(
 				'snaklistview',
 				function() {
 					this.enterNewItem = function() {
-						return $.Deferred().resolve().promise();
+						return $.Deferred().resolve( {
+							data: function() {
+								return { focus: function() {} };
+							}
+						} ).promise();
 					};
 					this.isValid = function() {
 						return false;
