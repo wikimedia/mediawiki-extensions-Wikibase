@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_9d9ee464",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T08:17:27Z",
+      "side": 1,
+      "message": "I believe this makes the test fail on systems where the default language is not English. Please have a look at the other tests, they do as follows:\n\n$this-\u003eassertContains( \u0027linkbegin-label\u0027, $customAttribs[\u0027title\u0027] );",
+      "revId": "53ad14821379a492640142be257170b46170e370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
