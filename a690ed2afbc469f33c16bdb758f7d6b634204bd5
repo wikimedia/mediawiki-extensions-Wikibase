@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_d86ebafd",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T12:34:20Z",
+      "side": 1,
+      "message": "Very hard to understand what \"group: string, siteLinks: [SiteLink]\" means. I suggest to copy-paste the docs from jquery.wikibase.sitelinkgroupview.js.\n\nThe variable name \"value\" is missing here.",
+      "revId": "a690ed2afbc469f33c16bdb758f7d6b634204bd5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

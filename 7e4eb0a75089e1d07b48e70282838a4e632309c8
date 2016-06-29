@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_98571229",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgrouplistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T12:34:20Z",
+      "side": 0,
+      "message": "What made this obsolete?",
+      "revId": "7e4eb0a75089e1d07b48e70282838a4e632309c8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
