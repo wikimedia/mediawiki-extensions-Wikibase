@@ -28,6 +28,7 @@ class FallbackHintHtmlTermRenderer implements HtmlTermRenderer {
 	private $languageDirectionalityLookup;
 
 	/**
+	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function __construct(

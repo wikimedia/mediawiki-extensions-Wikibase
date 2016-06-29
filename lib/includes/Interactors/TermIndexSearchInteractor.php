@@ -199,7 +199,7 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	}
 
 	/**
-	 * @param TermIndexEntry[]
+	 * @param TermIndexEntry[] $matchedTermIndexEntries
 	 *
 	 * @return string[]
 	 */
@@ -219,6 +219,8 @@ class TermIndexSearchInteractor implements TermSearchInteractor {
 	 * @param string[] $termTypes
 	 * @param string $entityType
 	 * @param string[] $matchedEntityIdSerializations
+	 *
+	 * @return TermIndexEntry[]
 	 */
 	private function getFallbackMatchedTermIndexEntries(
 		$text,

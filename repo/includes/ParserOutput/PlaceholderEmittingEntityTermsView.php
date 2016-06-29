@@ -45,7 +45,7 @@ class PlaceholderEmittingEntityTermsView extends SimpleEntityTermsView {
 	 * @param TemplateFactory $templateFactory
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
 	 * @param LocalizedTextProvider $textProvider
-	 * @param TermListView $termListView
+	 * @param TermsListView $termsListView
 	 * @param TextInjector $textInjector
 	 */
 	public function __construct(

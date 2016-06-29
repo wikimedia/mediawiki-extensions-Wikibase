@@ -109,7 +109,7 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetHtml_isEditable( Fingerprint $fingerprint, ItemId $entityId, $languageCode ) {
 		$entityTermsView = $this->getEntityTermsView( 1 );
-		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId, '' );
+		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId );
 
 		$this->assertContains( '<EDITSECTION>', $html );
 	}
@@ -166,7 +166,7 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 		$fingerprint->removeAliasGroup( 'en' );
 
 		$view = $this->getEntityTermsView( 1 );
-		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint, null, '' );
+		$html = $view->getHtml( 'en', $fingerprint, $fingerprint, $fingerprint );
 
 		$this->assertContains( 'wb-empty', $html );
 		$this->assertContains( '<div class="wikibase-entitytermsview-heading-aliases wb-empty"></div>', $html );

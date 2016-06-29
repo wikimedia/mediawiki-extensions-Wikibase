@@ -12,8 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 
 /**

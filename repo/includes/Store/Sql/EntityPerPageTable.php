@@ -36,6 +36,7 @@ class EntityPerPageTable implements EntityPerPage {
 
 	/**
 	 * @param EntityIdParser $entityIdParser
+	 * @param EntityIdComposer $entityIdComposer
 	 */
 	public function __construct( EntityIdParser $entityIdParser, EntityIdComposer $entityIdComposer ) {
 		$this->entityIdParser = $entityIdParser;

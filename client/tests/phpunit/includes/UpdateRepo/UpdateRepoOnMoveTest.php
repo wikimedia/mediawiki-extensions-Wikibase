@@ -135,7 +135,7 @@ class UpdateRepoOnMoveTest extends PHPUnit_Framework_TestCase {
 	public function testInjectJob() {
 		$updateRepo = $this->getNewUpdateRepoOnMove();
 
-		$jobQueueGroupMock = $this->getJobQueueGroupMock( true );
+		$jobQueueGroupMock = $this->getJobQueueGroupMock();
 
 		$updateRepo->injectJob( $jobQueueGroupMock );
 	}

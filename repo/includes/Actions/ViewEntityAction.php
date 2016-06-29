@@ -7,7 +7,6 @@ use MWException;
 use OutputPage;
 use ViewAction;
 use Wikibase\Repo\WikibaseRepo;
-use Xml;
 
 /**
  * Handles the view action for Wikibase entities.

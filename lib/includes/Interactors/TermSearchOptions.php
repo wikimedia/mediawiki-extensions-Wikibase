@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Interactors;
 
-use Wikibase\DataModel\Term\Term;
 use Wikimedia\Assert\Assert;
 
 /**

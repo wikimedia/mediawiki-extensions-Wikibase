@@ -300,7 +300,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$usages = array( $u3i, $u3l, $u4l );
 
 		$usageTable = $this->getEntityUsageTable( 3 );
-		$usageTable->addUsages( 23, $usages, '20150102030405' );
+		$usageTable->addUsages( 23, $usages );
 
 		$this->assertEmpty( $usageTable->getUnusedEntities( array( $q4 ) ), 'Q4 should not be unused' );
 
