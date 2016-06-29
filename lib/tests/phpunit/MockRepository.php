@@ -761,11 +761,10 @@ class MockRepository implements
 	}
 
 	/**
-	 * Whether an entity with the given custom ID can be created.
-	 *
-	 * @see EntityHandler::canCreateWithCustomId()
+	 * @see EntityStore::canCreateWithCustomId
 	 *
 	 * @param EntityId $id
+	 *
 	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {

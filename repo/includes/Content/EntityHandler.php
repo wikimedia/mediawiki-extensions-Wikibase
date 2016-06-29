@@ -766,6 +766,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @see EntityStore::canCreateWithCustomId()
 	 *
 	 * @param EntityId $id
+	 *
 	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
