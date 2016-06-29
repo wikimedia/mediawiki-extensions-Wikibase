@@ -85,6 +85,8 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\UnionContentLanguages;
+use Wikibase\Lib\UnitConverter;
+use Wikibase\Lib\UnitStorage;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
@@ -1760,6 +1762,37 @@ class WikibaseRepo {
 			}
 		}
 		return $setting;
+	}
+
+	/**
+	 * Get configure unit converter.
+	 * @return null|UnitConverter Configured Unit converter, or null if none configured
+	 */
+	public function getUnitConverter() {
+		$unitStorage = $this->getUnitStorage();
+		if ( !$unitStorage ) {
+			return null;
+		}
+		return new UnitConverter( $unitStorage, $this->settings->getSetting( 'conceptBaseUri' ) );
+	}
+
+	/**
+	 * Creates configured unit storage. Configuration is in unitStorage parameter,
+	 * in getObjectFromSpec format.
+	 * @see \ObjectFactory::getObjectFromSpec
+	 * @return null|UnitStorage Configured unit storage, or null
+	 */
+	private function getUnitStorage() {
+		if ( !$this->settings->hasSetting( 'unitStorage' ) ) {
+			return null;
+		}
+		$storage =
+			\ObjectFactory::getObjectFromSpec( $this->settings->getSetting( 'unitStorage' ) );
+		if ( !( $storage instanceof UnitStorage ) ) {
+			wfWarn( "Bad unit storage configuration, ignoring" );
+			return null;
+		}
+		return $storage;
 	}
 
 }

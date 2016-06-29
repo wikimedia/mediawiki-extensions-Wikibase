@@ -181,9 +181,11 @@ class RdfDumpGenerator extends DumpGenerator {
 			throw new MWException( "Unknown format: $format" );
 		}
 
-		$flavor = RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+		$flavor =
+			RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
 			RdfProducer::PRODUCE_QUALIFIERS | RdfProducer::PRODUCE_REFERENCES |
-			RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES;
+			RdfProducer::PRODUCE_SITELINKS | RdfProducer::PRODUCE_FULL_VALUES |
+			RdfProducer::PRODUCE_NORMALIZED_VALUES;
 
 		$rdfBuilder = new RdfBuilder(
 			$sites,
