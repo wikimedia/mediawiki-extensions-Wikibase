@@ -19,6 +19,11 @@ var statementgroupviewListItemAdapter = wb.tests.getMockListItemAdapter(
  */
 var createStatementgrouplistview = function( options, $node ) {
 	options = $.extend( {
+		getAdder: function() {
+			return {
+				destroy: function() {}
+			};
+		},
 		listItemAdapter: statementgroupviewListItemAdapter,
 		value: new wb.datamodel.StatementGroupSet()
 	}, options || {} );
