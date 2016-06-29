@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_1d995471",
+        "filename": "lib/includes/Store/EntityStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "When looking at the implementation this does not check if such an entity was already created or not. But the method name suggests it may fail when the entity already exists. This should be specified in the documentation. Maybe an other method name would make this more obvious? isValidCustomId?",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_7da18090",
+        "filename": "lib/tests/phpunit/MockRepository.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "Copy-pasting this here is not helpful, since it does not describe what this implementation does and why it always returns false.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_5d9e3c59",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "This \"silently ignoring errors\" sounds a bit dangerous. A caller should be able to always provide this type, am I right? If this is the case then please add a check and throw an exception if the type does not match.\n\nAt least fail when the parameter is not null but should.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_fdb450d1",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "$id is a bit vague. $customId?",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_7dc8605a",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "This got moved from ModifyEntity, where createEntity is called.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_fd029074",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "The flag got moved from createEntity to here.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_dd36ac4e",
+        "filename": "repo/includes/Store/Sql/WikiPageEntityStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "Dangling space.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_1d14b49f",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "You are introducing this \u0027t\u0027 key here. I guess it\u0027s short for \"type\". Later this is called $needed. Both is not obvious. Together it\u0027s probably something like \"entity type under test\".\n\nCan\u0027t this use the \u0027type\u0027 field from \u0027e\u0027?",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_9d48a4d0",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "string|null",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_fd7f30db",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "Frob? Looks like this should be named newEntityHandler.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_9d76e4ff",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "What \"text\"? Should probably be something like $idString.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_dd84ecda",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "Frob? Should be newEntityId.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_1d8b14e9",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "What?",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_3d5d387f",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "I assume this is meant to be some kind of dummy entity type. I find it confusing because it looks like an IDE failure, copy-paste or global search-and-replace mistake. Suggestion: Call it \"custom-type\".",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_bd7928f4",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 1,
+      "message": "This misses a newline.",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

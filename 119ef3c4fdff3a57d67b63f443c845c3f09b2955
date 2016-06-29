@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_3dab786e",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 0,
+      "message": "The flag moved to ModifyEntity, where createEntity is called.",
+      "revId": "119ef3c4fdff3a57d67b63f443c845c3f09b2955",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_dd07cc83",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T09:02:37Z",
+      "side": 0,
+      "message": "This moved into createEntity.",
+      "revId": "119ef3c4fdff3a57d67b63f443c845c3f09b2955",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
