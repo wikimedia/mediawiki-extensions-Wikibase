@@ -4,6 +4,7 @@ namespace Wikibase\Rdf\Values;
 
 use DataValues\QuantityValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\UnitConverter;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
@@ -25,10 +26,16 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	private $complexValueHelper;
 
 	/**
+	 * @var UnitConverter
+	 */
+	private $unitConverter;
+
+	/**
 	 * @param ComplexValueRdfHelper|null $complexValueHelper
 	 */
-	public function __construct( ComplexValueRdfHelper $complexValueHelper = null ) {
+	public function __construct( ComplexValueRdfHelper $complexValueHelper = null, UnitConverter $uc = null ) {
 		$this->complexValueHelper = $complexValueHelper;
+		$this->unitConverter = $uc;
 	}
 
 	/**
@@ -106,6 +113,19 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUnit' )
 			->is( $unitUri );
+
+		// FIXME: make this depend on flavor
+		if ( $this->unitConverter && $unitUri !== RdfVocabulary::ONE_ENTITY ) {
+			$newValue = $this->unitConverter->toStandardUnits( $value );
+			if ( $newValue === $value ) {
+				$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
+					->is( RdfVocabulary::NS_VALUE, $valueLName );
+			} else {
+				$this->addValueNode( $valueWriter, RdfVocabulary::NS_ONTOLOGY,
+					'quantityNormalized', $dataType, $newValue );
+			}
+		}
+
 	}
 
 }
