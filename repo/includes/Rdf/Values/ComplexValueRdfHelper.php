@@ -67,6 +67,7 @@ class ComplexValueRdfHelper {
 	 * @param string $dataType Property data type (unused, passed here for symmetry
 	 *        with the signature of ValueSnakRdfBuilder::addValue).
 	 * @param DataValue $value
+	 * @param bool $normalized Is this a normalized value?
 	 *
 	 * @return string|null The LName of the value node (in the RdfVocabulary::NS_VALUE namespace),
 	 *  or null if the value node should not be processed (generally, because it already has
@@ -77,11 +78,15 @@ class ComplexValueRdfHelper {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
-		DataValue $value
+		DataValue $value,
+		$normalized = false
 	) {
 		$valueLName = $value->getHash();
 
-		$writer->say( RdfVocabulary::$claimToValue[$propertyValueNamespace], $propertyValueLName )
+		$namespaces =
+			$normalized ? RdfVocabulary::$claimToValueNormalized : RdfVocabulary::$claimToValue;
+
+		$writer->say( $namespaces[$propertyValueNamespace], $propertyValueLName )
 			->is( RdfVocabulary::NS_VALUE, $valueLName );
 
 		if ( $this->dedupeBag->alreadySeen( $valueLName, 'V' ) !== false ) {
