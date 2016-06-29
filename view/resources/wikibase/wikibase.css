@@ -280,7 +280,7 @@ div .wikibase-snakview-value span.error.wb-format-error {
 
 /***** EDIT/NEW CLAIM *****/
 
-.wikibase-statementgrouplistview .wb-new > .wb-addtoolbar {
+.wikibase-statementgrouplistview .wb-new > .wikibase-statementlistview > .wikibase-toolbar-wrapper .wikibase-addtoolbar-container {
 	display: none;
 }
 

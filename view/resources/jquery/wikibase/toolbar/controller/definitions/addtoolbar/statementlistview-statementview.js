@@ -18,10 +18,6 @@ $.wikibase.toolbarcontroller.definition( 'addtoolbar', {
 				$container = $statementlistview.children( '.wikibase-toolbar-wrapper' )
 					.children( '.wikibase-toolbar-container' );
 
-			if ( statementlistview.isEmpty() ) {
-				return;
-			}
-
 			if ( !$container.length ) {
 				// TODO: Remove layout-specific toolbar wrapper
 				$container = $( '<div/>' ).appendTo(
