@@ -15,12 +15,6 @@
 		// be initialized:
 		var toolbarControllerConfig = {
 			toolbars: {
-				addtoolbar: [
-					'statementgrouplistview-statementgroupview',
-					'statementlistview-statementview',
-					'statementview-snakview',
-					'referenceview-snakview'
-				],
 				removetoolbar: [
 					'referenceview',
 					'statementview-snakview',
