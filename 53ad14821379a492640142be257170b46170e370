@@ -16,6 +16,24 @@
       "revId": "53ad14821379a492640142be257170b46170e370",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_581bea1f",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-06-29T10:58:04Z",
+      "side": 1,
+      "message": "The idea was to assert that the string does not contain the description part, ie. that it equals the label (with dir marks). The first marker comes from the term language (en), the second one from the constructing language (en).\n\nBut if this is not correct, we can do what you suggest, and $this-\u003eassertFalse( strpos( $customAttribs[\u0027title\u0027], \u0027|\u0027 ) ); as well.",
+      "parentUuid": "0efd9372_9d9ee464",
+      "revId": "53ad14821379a492640142be257170b46170e370",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
