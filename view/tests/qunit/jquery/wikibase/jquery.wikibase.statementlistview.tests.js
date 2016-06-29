@@ -31,7 +31,9 @@ var createStatementlistview = function( options, $node ) {
 				destroy: function() {}
 			};
 		},
-		listItemAdapter: statementviewListItemAdapter,
+		getListItemAdapter: function() {
+			return statementviewListItemAdapter;
+		},
 		value: new wb.datamodel.StatementList()
 	}, options || {} );
 
