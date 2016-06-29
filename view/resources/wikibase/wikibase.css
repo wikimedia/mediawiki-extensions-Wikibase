@@ -431,6 +431,11 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	float: right;
 	margin-bottom: 1em;
 	position: static;
+	display: none;
+}
+
+.wikibase-statementview.wb-edit .wikibase-statementview-qualifiers > .wikibase-toolbar-container {
+	display: block;
 }
 
 /***** /QUALIFIERS *****/
