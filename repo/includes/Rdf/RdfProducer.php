@@ -61,6 +61,11 @@ interface RdfProducer {
 	const PRODUCE_RESOLVED_ENTITIES = 256;
 
 	/**
+	 * Produce normalized values for values with units. 
+	 */
+	const PRODUCE_NORMALIZED_VALUES = 512;
+
+	/**
 	 * All options turned on.
 	 */
 	const PRODUCE_ALL = 0xFFFF;
