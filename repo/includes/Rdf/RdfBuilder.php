@@ -400,16 +400,22 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is( RdfVocabulary::NSP_CLAIM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is( RdfVocabulary::NSP_CLAIM_VALUE, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValueNormalized' )->is( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifier' )->is( RdfVocabulary::NSP_QUALIFIER, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValue' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'qualifierValueNormalized' )->is( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'reference' )->is( RdfVocabulary::NSP_REFERENCE, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValue' )->is( RdfVocabulary::NSP_REFERENCE_VALUE, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'referenceValueNormalized' )->is( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'novalue' )->is( RdfVocabulary::NSP_NOVALUE, $id );
 		// Always object properties
 		$this->writer->about( RdfVocabulary::NSP_CLAIM, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
 		// Depending on property type
 		if ( $isObjectProperty ) {
 			$datatype = 'ObjectProperty';
