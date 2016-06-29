@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_b322f7f9",
+        "filename": "repo/includes/ParserOutput/TextInjector.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-29T13:47:29Z",
+      "side": 1,
+      "message": "This works (I had to try it out) but is a bit confusing. The 2nd parameter does not become part of the array when it is omitted, but does when the caller passes \"null\", even if the resulting $data value is \"null\" in both cases. I find it better to not have this optional \"null\" here. See the old implementation in https://github.com/wikimedia/mediawiki-extensions-Wikibase/commit/7bc3422de31d5949dbc46e0771a3cc981e420ff3",
+      "revId": "1913187363d7c7bf8b5c2520763a8b7dfb801c58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
