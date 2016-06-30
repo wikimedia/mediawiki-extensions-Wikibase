@@ -18,10 +18,7 @@ var PARENT = $.wikibase.toolbar;
  * Apart from the required methods, the interaction widget has to have defined a help message in
  * its options that will be used as tooltip message.
  *
- * @option {Function} [getHelpMessage=option.interactionWidget.getHelpMessage]
- *
- * @option {jQuery.Widget} [interactionWidget]
- *         Name of the widget the toolbar shall interact with.
+ * @option {Function} getHelpMessage
  *
  * @option {Function} [onRemove]
  *         Function to be triggered when hitting the "remove" button. If omitted, no "remove"
@@ -47,7 +44,6 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	 */
 	options: {
 		getHelpMessage: null,
-		interactionWidget: null,
 		onRemove: null,
 		buttonLabels: {
 			edit: mw.msg( 'wikibase-edit' ),
@@ -95,20 +91,6 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	_create: function() {
 		PARENT.prototype._create.call( this );
 
-		if ( this.options.interactionWidget ) {
-			this.setController( this.options.interactionWidget );
-			if ( !this.options.getHelpMessage ) {
-				if ( !this.options.interactionWidget.getHelpMessage ) {
-					throw new Error( 'Either getHelpMessage or interactionWidget.getHelpMessage '
-						+ 'option must be provided' );
-				}
-				this.options.getHelpMessage = $.proxy(
-					this.options.interactionWidget.getHelpMessage,
-					this.options.interactionWidget
-				);
-			}
-		}
-
 		this._buttons = {};
 
 		var $scrapedSubToolbar = this.getContainer().children( '.wikibase-toolbar' );
@@ -136,10 +118,6 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	 */
 	destroy: function() {
 		var self = this;
-
-		if ( this.options.interactionWidget ) {
-			this.options.interactionWidget.element.off( '.' + this.widgetName );
-		}
 
 		if ( this._$tooltipAnchor ) {
 			var $wbtooltip = this._$tooltipAnchor.find( ':wikibase-wbtooltip' ),
@@ -222,84 +200,12 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 		} );
 	},
 
-	_attachInteractionWidgetEventHandlers: function() {
-		var self = this,
-			prefix = this.options.interactionWidget.widgetEventPrefix;
-
-		function isInteractionWidgetNode( node ) {
-			return node === self.options.interactionWidget.element.get( 0 );
-		}
-
-		this.options.interactionWidget.element
-		.on( prefix + 'afterstartediting.' + this.widgetName, function( event ) {
-			if ( isInteractionWidgetNode( event.target ) ) {
-				self.toEditMode();
-				self._trigger( 'afterstartediting' );
-			}
-		} )
-		.on( prefix + 'stopediting.' + this.widgetName, function( event, dropValue ) {
-			if ( !isInteractionWidgetNode( event.target ) ) {
-				return;
-			}
-			self.disable();
-			if ( !dropValue ) {
-				self.toggleActionMessage( mw.msg( 'wikibase-save-inprogress' ) );
-			}
-		} )
-		.on( prefix + 'afterstopediting.' + this.widgetName, function( event, dropValue ) {
-			if ( isInteractionWidgetNode( event.target ) ) {
-				self.toNonEditMode();
-				self.enable();
-				if ( !dropValue ) {
-					self.toggleActionMessage( function() {
-						self._trigger( 'afterstopediting' );
-					} );
-				}
-			}
-		} )
-		.on( prefix + 'disable.' + this.widgetName, function( event, disable ) {
-			if ( isInteractionWidgetNode( event.target ) ) {
-				self[disable ? 'disable' : 'enable']();
-			}
-		} )
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
-			if ( isInteractionWidgetNode( event.target ) && error instanceof wb.api.RepoApiError ) {
-				var $anchor;
-
-				if ( error.action === 'save' || error.action === 'remove' ) {
-					$anchor = self.getButton( error.action ).element;
-				}
-
-				self.enable();
-				self.toggleActionMessage( function() {
-					// FIXME Move responsibility of displaying error out of here completely.
-					if ( $( event.target ).data( 'sitelinkgroupview' ) === undefined ) {
-						self.displayError( error, $anchor );
-					}
-				} );
-			}
-		} );
-	},
-
 	_attachEventHandlers: function() {
 		var self = this;
-
-		if ( this.options.interactionWidget ) {
-			this._attachInteractionWidgetEventHandlers();
-		}
 
 		this.getContainer()
 		.on( 'toolbarbuttonaction.' + this.widgetName, function( event ) {
 			if ( self._buttons.edit && event.target === self._buttons.edit.get( 0 ) ) {
-				if ( self.options.interactionWidget ) {
-					var prefix = self.options.interactionWidget.widgetEventPrefix;
-					self.options.interactionWidget.element.one(
-						prefix + 'afterstartediting.' + self.widgetName,
-						function() {
-							self._trigger( 'edit' );
-						}
-					);
-				}
 				self._controller.startEditing();
 			} else if ( self._buttons.save && event.target === self._buttons.save.get( 0 ) ) {
 				self._controller.stopEditing();
