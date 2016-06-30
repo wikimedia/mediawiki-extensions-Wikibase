@@ -83,20 +83,11 @@
 		assert.expect( 1 );
 		var groupName = 'groupid',
 			siteLinks = [],
-			siteLinksChanger = {},
-			entityChangersFactory = { getSiteLinksChanger: function() { return siteLinksChanger; } },
-			entityIdPlainFormatter = {},
-			viewFactory = new ViewFactory(
-				null,
-				null,
-				entityChangersFactory,
-				null,
-				entityIdPlainFormatter
-			),
+			viewFactory = new ViewFactory(),
 			eventSingletonManager = new $.util.EventSingletonManager(),
 			$dom = $( '<div/>' );
 
-		sinon.spy( $.wikibase, 'sitelinkgroupview' );
+		sinon.stub( $.wikibase, 'sitelinkgroupview' );
 		$dom.sitelinkgroupview = $.wikibase.sitelinkgroupview;
 
 		viewFactory.getSitelinkGroupView( eventSingletonManager, groupName, siteLinks, $dom );
@@ -104,12 +95,37 @@
 		sinon.assert.calledWith( $.wikibase.sitelinkgroupview, sinon.match( {
 			groupName: groupName,
 			value: siteLinks,
-			entityIdPlainFormatter: entityIdPlainFormatter,
+			getSiteLinkListView: sinon.match.func
+		} ) );
+
+		$.wikibase.sitelinkgroupview.restore();
+	} );
+
+	QUnit.test( 'getSiteLinkListView passes correct options to views', function( assert ) {
+		assert.expect( 1 );
+		var siteLinks = [],
+			siteLinksChanger = {},
+			entityChangersFactory = { getSiteLinksChanger: function() { return siteLinksChanger; } },
+			viewFactory = new ViewFactory(
+				null,
+				null,
+				entityChangersFactory
+			),
+			eventSingletonManager = new $.util.EventSingletonManager(),
+			$dom = $( '<div/>' );
+
+		sinon.spy( $.wikibase, 'sitelinklistview' );
+		$dom.sitelinklistview = $.wikibase.sitelinklistview;
+
+		viewFactory.getSiteLinkListView( eventSingletonManager, siteLinks, $dom );
+
+		sinon.assert.calledWith( $.wikibase.sitelinklistview, sinon.match( {
+			value: siteLinks,
 			eventSingletonManager: eventSingletonManager,
 			siteLinksChanger: siteLinksChanger
 		} ) );
 
-		$.wikibase.sitelinkgroupview.restore();
+		$.wikibase.sitelinklistview.restore();
 	} );
 
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function( assert ) {
