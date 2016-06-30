@@ -93,11 +93,14 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !this.options.groupName || !this.options.siteLinksChanger || !this.options.entityIdPlainFormatter ) {
+		if ( !this.options.groupName
+			|| !this.options.siteLinksChanger
+			|| !this.options.entityIdPlainFormatter
+		) {
 			throw new Error( 'Required parameter(s) missing' );
 		}
 
-		this.options.value = this._checkValue( this.options.value );
+		this.options.value = this.options.value || [];
 		this._siteIdsOfGroup = getSiteIdsOfGroup( this.options.groupName );
 
 		PARENT.prototype._create.call( this );
@@ -203,18 +206,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	},
 
 	/**
-	 * @param {*} value
-	 * @return {Object}
-	 */
-	_checkValue: function( value ) {
-		if ( !value ) {
-			value = [];
-		}
-
-		return value;
-	},
-
-	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.startEditing
 	 */
 	startEditing: function() {
@@ -271,8 +262,8 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget.value
 	 *
-	 * @param {Object} [value]
-	 * @return {Object|*}
+	 * @param {wikibase.datamodel.SiteLink[]} [value]
+	 * @return {wikibase.datamodel.SiteLink[]}
 	 */
 	value: function( value ) {
 		if ( value !== undefined ) {
@@ -286,7 +277,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.EditableTemplatedWidget.isEmpty
 	 */
 	isEmpty: function() {
-		return !this.value().length;
+		return !this.options.value.length;
 	},
 
 	/**
@@ -317,7 +308,13 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 */
 	_setOption: function( key, value ) {
 		if ( key === 'value' ) {
-			value = this._checkValue( value );
+			value = value || [];
+		} else if ( key === 'groupName' && value !== this.options.groupName ) {
+			this._siteIdsOfGroup = getSiteIdsOfGroup( value );
+			this.$sitelinklistview.data( 'sitelinklistview' )
+				.option( 'allowedSiteIds', this._siteIdsOfGroup );
+
+			this.draw();
 		}
 
 		var response = PARENT.prototype._setOption.call( this, key, value );
@@ -325,12 +322,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		if ( key === 'value' ) {
 			this.$sitelinklistview.data( 'sitelinklistview' )
 			.value( this.options.value );
-
-			this.draw();
-		} else if ( key === 'groupName' ) {
-			this._siteIdsOfGroup = getSiteIdsOfGroup( value );
-			this.$sitelinklistview.data( 'sitelinklistview' )
-			.option( 'allowedSiteIds', this._siteIdsOfGroup );
 
 			this.draw();
 		} else if ( key === 'disabled' ) {

@@ -229,29 +229,29 @@ QUnit.test( 'setError()', 1, function( assert ) {
 QUnit.test( 'value()', function( assert ) {
 	assert.expect( 2 );
 	var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
-		value = [siteLink],
+		siteLinks = [siteLink],
 		$sitelinkgroupview = createSitelinkgroupview( {
 			groupName: 'group1',
-			value: value
+			value: siteLinks
 		} ),
 		sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' );
 
 	assert.deepEqual(
 		sitelinkgroupview.value(),
-		value,
+		siteLinks,
 		'Retrieved initial value.'
 	);
 
-	value = [
+	siteLinks = [
 		new wikibase.datamodel.SiteLink( 'dewiki', '1234' ),
 		new wikibase.datamodel.SiteLink( 'enwiki', '5678' )
 	];
 
-	sitelinkgroupview.value( value );
+	sitelinkgroupview.value( siteLinks );
 
 	assert.deepEqual(
 		sitelinkgroupview.value(),
-		value,
+		siteLinks,
 		'Set and retrieved new value.'
 	);
 } );
