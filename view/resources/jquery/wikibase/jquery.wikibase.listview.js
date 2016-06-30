@@ -25,13 +25,6 @@
  *         Node name of the base node of new list items.
  */
 /**
- * @event itemadded
- * Triggered after a list item got added to the list.
- * @param {jQuery.Event} event
- * @param {*|null} value The value the new list item is representing. `null` for empty value.
- * @param {jQuery} $li The DOM node of the widget representing the value.
- */
-/**
  * @event itemremoved
  * Triggered after a list got removed from the list.
  * @param {jQuery.Event} event
@@ -250,9 +243,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @return {jQuery} New list item's node.
 	 */
 	addItem: function( liValue ) {
-		var $li = this._addLiValue( liValue );
-		this._trigger( 'itemadded', null, [liValue, $li] );
-		return $li;
+		return this._addLiValue( liValue );
 	},
 
 	/**
