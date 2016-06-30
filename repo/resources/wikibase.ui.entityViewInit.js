@@ -17,25 +17,6 @@
 	}
 
 	/**
-	 * @param {jQuery} $entityview
-	 */
-	function initToolbarController( $entityview ) {
-		// The toolbars (defined per jquery.wikibase.toolbarcontroller.definition) that should
-		// be initialized:
-		var toolbarControllerConfig = {
-			toolbars: {
-				removetoolbar: [
-					'statementview-snakview',
-					'referenceview-snakview',
-					'sitelinkgroupview-sitelinkview'
-				]
-			}
-		};
-
-		$entityview.toolbarcontroller( toolbarControllerConfig );
-	}
-
-	/**
 	 * @return {string[]} An ordered list of languages the user wants to use, the first being her
 	 *                    preferred language, and thus the UI language (currently wgUserLanguage).
 	 */
@@ -369,10 +350,6 @@
 		var $entityview = $( '.wikibase-entityview' );
 		var entityInitializer = new wb.EntityInitializer( 'wbEntity' );
 		var canEdit = isEditable();
-
-		if ( canEdit ) {
-			initToolbarController( $entityview );
-		}
 
 		entityInitializer.getEntity().done( function( entity ) {
 			var viewName = createEntityView( entity, $entityview.first() );
