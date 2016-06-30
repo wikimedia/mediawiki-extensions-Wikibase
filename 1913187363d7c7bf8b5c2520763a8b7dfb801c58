@@ -16,6 +16,24 @@
       "revId": "1913187363d7c7bf8b5c2520763a8b7dfb801c58",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_f9bf3d5a",
+        "filename": "repo/includes/ParserOutput/TextInjector.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-06-30T07:24:52Z",
+      "side": 1,
+      "message": "I agree.",
+      "parentUuid": "0efd9372_b322f7f9",
+      "revId": "1913187363d7c7bf8b5c2520763a8b7dfb801c58",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
