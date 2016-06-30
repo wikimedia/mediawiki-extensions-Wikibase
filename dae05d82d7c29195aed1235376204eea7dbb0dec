@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_992b9192",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-30T08:08:28Z",
+      "side": 1,
+      "message": "please use proper spacing",
+      "revId": "dae05d82d7c29195aed1235376204eea7dbb0dec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
