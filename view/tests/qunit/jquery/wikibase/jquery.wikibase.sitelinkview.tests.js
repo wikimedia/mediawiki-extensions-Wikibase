@@ -12,7 +12,14 @@
 	function createSitelinkview( options ) {
 		options = $.extend( {
 			entityIdPlainFormatter: 'i am an EntityIdPlainFormatter',
-			allowedSiteIds: ['aawiki', 'enwiki']
+			allowedSiteIds: ['aawiki', 'enwiki'],
+			getSiteLinkRemover: function() {
+				return {
+					destroy: function() {},
+					disable: function() {},
+					enable: function() {}
+				};
+			}
 		}, options );
 
 		return $( '<div/>' )
