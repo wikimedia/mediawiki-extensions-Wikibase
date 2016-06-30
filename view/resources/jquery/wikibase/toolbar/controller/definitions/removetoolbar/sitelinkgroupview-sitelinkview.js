@@ -32,8 +32,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					.removetoolbar( {
 						$container: $( '<span/>' ).appendTo(
 							$sitelinkview.data( 'sitelinkview' ).$siteIdContainer
-						),
-						icon: true
+						)
 					} )
 					.on( 'removetoolbarremove.removetoolbar', function( event ) {
 						if ( event.target !== $sitelinkview.get( 0 ) ) {
