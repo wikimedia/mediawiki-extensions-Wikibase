@@ -370,6 +370,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'wikibase-badgeselector-badge-placeholder-title',
+				'wikibase-remove',
 				'wikibase-sitelink-site-edit-placeholder',
 				'wikibase-sitelink-page-edit-placeholder',
 			),

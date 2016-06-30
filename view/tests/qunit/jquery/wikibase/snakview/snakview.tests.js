@@ -46,6 +46,8 @@ var createSnakview = function( options, $node ) {
 				return $.Deferred().resolve().promise();
 			}
 		},
+		getSnakRemover: function() {
+		},
 		valueViewBuilder: 'I am a ValueViewBuilder',
 		dataTypeStore: new dt.DataTypeStore()
 	}, options || {} );
