@@ -16,6 +16,24 @@
       "revId": "4a022cf823841236e325c3022848c272532208aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_b470ae08",
+        "filename": "view/resources/jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-06-30T18:23:37Z",
+      "side": 0,
+      "message": "I suggest to add a tooltip to all remove toolbars, but with more context. »remove this statement with qualifiers and references«, »remove this part of the reference«, »remove this sitelink«, etc. What do you think?",
+      "parentUuid": "0efd9372_9ff37168",
+      "revId": "4a022cf823841236e325c3022848c272532208aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
