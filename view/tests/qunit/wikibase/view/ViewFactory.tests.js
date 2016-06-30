@@ -372,7 +372,7 @@
 				getAdder: function() {},
 				getRemover: function() {}
 			},
-			viewFactory = new ViewFactory(),
+			viewFactory = new ViewFactory( structureEditorFactory ),
 			removeCallback = function() {},
 			$dom = $( '<div/>' ),
 			referenceview = sinon.stub( $dom, 'referenceview' );
@@ -412,43 +412,20 @@
 		assert.deepEqual(
 			result,
 			{
-				value: value || undefined,
+				getListItemAdapter: result.getListItemAdapter, // Hack
 				singleProperty: true,
-				listItemAdapter: result.listItemAdapter // Hack
+				value: value || undefined
 			}
 		);
 
-		assert.ok( result.listItemAdapter instanceof $.wikibase.listview.ListItemAdapter );
+		assert.ok( result.getListItemAdapter instanceof Function );
 
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
 	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', function( assert ) {
-		assert.expect( 3 );
-		var contentLanguages = {},
-			value = null,
-			dataTypeStore = {},
-			entityIdHtmlFormatter = {},
-			entityIdPlainFormatter = {},
-			entityStore = {},
-			expertStore = {},
-			formatterFactory = {},
-			messageProvider = {},
-			parserStore = {},
-			userLanguages = [],
-			viewFactory = new ViewFactory(
-				null,
-				contentLanguages,
-				dataTypeStore,
-				entityIdHtmlFormatter,
-				entityIdPlainFormatter,
-				entityStore,
-				expertStore,
-				formatterFactory,
-				messageProvider,
-				parserStore,
-				userLanguages
-			),
+		assert.expect( 1 );
+		var viewFactory = new ViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
 		viewFactory.getListItemAdapterForSnakView();
@@ -457,44 +434,10 @@
 			ListItemAdapter,
 			sinon.match( {
 				listItemWidget: $.wikibase.snakview,
-				newItemOptionsFn: sinon.match.func
+				getNewItem: sinon.match.func
 			} )
 		);
 
-		sinon.spy( wb, 'ValueViewBuilder' );
-
-		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
-
-		assert.deepEqual(
-			result,
-			{
-				value: value || {
-					property: null,
-					snaktype: 'value'
-				},
-				autoStartEditing: undefined,
-				dataTypeStore: dataTypeStore,
-				drawProperty: true,
-				entityIdHtmlFormatter: entityIdHtmlFormatter,
-				entityIdPlainFormatter: entityIdPlainFormatter,
-				entityStore: entityStore,
-				locked: {
-					property: false
-				},
-				valueViewBuilder: wb.ValueViewBuilder.returnValues[0]
-			}
-		);
-
-		sinon.assert.calledWith( wb.ValueViewBuilder,
-			expertStore,
-			formatterFactory,
-			parserStore,
-			userLanguages[0],
-			messageProvider,
-			contentLanguages
-		);
-
-		wb.ValueViewBuilder.restore();
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 

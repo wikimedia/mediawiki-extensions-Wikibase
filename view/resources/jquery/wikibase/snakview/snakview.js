@@ -97,7 +97,8 @@ $.widget( 'wikibase.snakview', PARENT, {
 		entityStore: null,
 		valueViewBuilder: null,
 		dataTypeStore: null,
-		drawProperty: true
+		drawProperty: true,
+		getSnakRemover: null
 	},
 
 	/**
@@ -280,6 +281,10 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @inheritdoc
 	 */
 	destroy: function() {
+		if ( this._snakRemover ) {
+			this._snakRemover.destroy();
+			this._snakRemover = null;
+		}
 		var snakTypeSelector = this._getSnakTypeSelector();
 		if ( snakTypeSelector ) {
 			snakTypeSelector.destroy();
@@ -305,6 +310,10 @@ $.widget( 'wikibase.snakview', PARENT, {
 		var self = this;
 
 		this._isInEditMode = true;
+
+		if ( this.options.getSnakRemover ) {
+			this._snakRemover = this.options.getSnakRemover( this.element );
+		}
 
 		if ( this._variation ) {
 			$( this._variation ).one( 'afterstartediting', function() {
@@ -346,6 +355,11 @@ $.widget( 'wikibase.snakview', PARENT, {
 	stopEditing: function( dropValue ) {
 		if ( !this.isInEditMode() ) {
 			return;
+		}
+
+		if ( this._snakRemover ) {
+			this._snakRemover.destroy();
+			this._snakRemover = null;
 		}
 
 		var snak = this.snak();
