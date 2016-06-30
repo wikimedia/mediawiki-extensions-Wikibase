@@ -41,7 +41,7 @@ Feature: Adding references to statements
     Then Reference add button should be there
       And Statement save button should be disabled
       And Reference add snak button should be there
-      And Reference remove snak button should be disabled
+      And Reference remove snak button should be there
       And Reference remove button should be there
       And Statement cancel button should be there
       And Snak entity selector input element should be there
@@ -76,7 +76,7 @@ Feature: Adding references to statements
     Then Reference add button should be there
       And Statement save button should be disabled
       And Reference add snak button should be there
-      And Reference remove snak button should be disabled
+      And Reference remove snak button should be there
       And Reference remove button should be there
       And Statement cancel button should be there
       And Snak entity selector input element should be there
@@ -89,7 +89,7 @@ Feature: Adding references to statements
       And I select the snak property stringprop
       And I enter something as string snak value
     Then Reference add button should be there
-      And Reference remove snak button should be disabled
+      And Reference remove snak button should be there
       And Reference remove button should be there
       And Statement save button should be there
       And Reference add snak button should be there
@@ -158,7 +158,7 @@ Feature: Adding references to statements
     Then Statement save button should be disabled
       And Statement cancel button should be there
       And Reference remove button should be there
-      And Reference remove snak button should be disabled
+      And Reference remove snak button should be there
       And Reference add snak button should be there
       And Reference add button should be there
       And Snak entity selector input element should not be there

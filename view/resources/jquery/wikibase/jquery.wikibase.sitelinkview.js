@@ -105,12 +105,37 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		this._createBadgeSelector();
 	},
 
+	_createRemover: function() {
+		this._siteLinkRemover = this.options.getSiteLinkRemover( this.$siteIdContainer, mw.msg( 'wikibase-remove' ) );
+		this._siteLinkRemover[ this.options.value ? 'enable' : 'disable' ]();
+
+		// Update inputautoexpand maximum width after adding "remove" toolbar:
+		var $siteIdInput = this.$siteId.find( 'input' ),
+			inputautoexpand = $siteIdInput.length
+				? $siteIdInput.data( 'inputautoexpand' )
+				: null;
+		if ( inputautoexpand ) {
+			$siteIdInput.inputautoexpand( {
+				maxWidth: this.element.width() - (
+					this.$siteIdContainer.outerWidth( true ) - $siteIdInput.width()
+				)
+			} );
+		}
+
+		this.updatePageNameInputAutoExpand();
+	},
+
 	/**
 	 * @see jQuery.ui.TemplatedWidget.destroy
 	 */
 	destroy: function() {
 		if ( this._badgeselector ) {
 			this._badgeselector.destroy();
+		}
+
+		if ( this._siteLinkRemover ) {
+			this._siteLinkRemover.destroy();
+			this._siteLinkRemover = null;
 		}
 
 		if ( this._isInEditMode ) {
@@ -152,6 +177,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			// Adding/removing badges decreases/increases available space:
 			self.updatePageNameInputAutoExpand();
 			self._trigger( 'change' );
+			self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
 		} );
 
 		this._badgeselector = $badgeselector.data( 'badgeselector' );
@@ -207,6 +233,8 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			}
 		}
 
+		this._createRemover();
+
 		var $pageNameInput = $( '<input>' )
 			.attr( 'placeholder', mw.msg( 'wikibase-sitelink-page-edit-placeholder' ) )
 			.attr( 'dir', dir )
@@ -220,11 +248,16 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 				self.setError();
 				self._trigger( 'change' );
 			}
+			self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
 		} );
 
 		this.$link.find( '.wikibase-sitelinkview-page' )
 			.attr( 'dir', dir )
 			.empty().append( $pageNameInput );
+
+		if ( this._badgeselector ) {
+			this._badgeselector.startEditing();
+		}
 
 		if ( this.options.value ) {
 			this.updatePageNameInputAutoExpand();
@@ -272,6 +305,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			pagesuggester.option( 'siteId', siteId );
 
 			self._trigger( 'change' );
+			self._siteLinkRemover[ self.value() === null ? 'disable' : 'enable' ]();
 		} )
 		.on(
 			'siteselectorselected.' + this.widgetName + ' siteselectorchange.' + this.widgetName,
@@ -348,9 +382,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 
 		this._isInEditMode = true;
 		this._draw();
-		if ( this._badgeselector ) {
-			this._badgeselector.startEditing();
-		}
 
 		if ( this.option( 'disabled' ) ) {
 			this._setState( 'disable' );
@@ -486,6 +517,10 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 				var siteselector = $siteInput.data( 'siteselector' );
 				hasSiteId = !!siteselector.getSelectedSite();
 				siteselector[state]();
+			}
+
+			if ( this._siteLinkRemover ) {
+				this._siteLinkRemover[ state ]();
 			}
 
 			// Do not enable page input if no site is set:

@@ -50,7 +50,9 @@
 	function createSnaklistview( value, additionalOptions ) {
 		var options = $.extend( additionalOptions, {
 			value: value || undefined,
-			listItemAdapter: listItemAdapter
+			getListItemAdapter: function() {
+				return listItemAdapter;
+			}
 		} );
 
 		return $( '<div/>' )
