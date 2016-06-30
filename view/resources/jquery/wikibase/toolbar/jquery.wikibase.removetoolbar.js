@@ -17,8 +17,6 @@ var PARENT = $.wikibase.singlebuttontoolbar;
  * @param {string} [options.label=mw.msg( 'wikibase-remove' )]
  * @param {string} [options.eventName='remove']
  * @param {string} [buttonCssClassSuffix='remove']
- * @param {boolean} [icon=false]
- *        Whether the toolbar button should be an icon instead of the text.
  */
 $.widget( 'wikibase.removetoolbar', PARENT, {
 	/**
@@ -28,30 +26,8 @@ $.widget( 'wikibase.removetoolbar', PARENT, {
 		label: mw.msg( 'wikibase-remove' ),
 		eventName: 'remove',
 		buttonCssClassSuffix: 'remove',
-		icon: false
-	},
-
-	// TODO: Move code to base constructor and button widget.
-	/**
-	 * @inheritdoc
-	 * @protected
-	 */
-	_initDefaultButton: function( $scrapedButton ) {
-		var $button = PARENT.prototype._initDefaultButton.call( this, $scrapedButton );
-
-		if ( !this.options.icon ) {
-			return $button;
-		}
-
-		var $link = $button.children( 'a' );
-
-		$link
-		.attr( 'title', $link.text() )
-		.text( '' )
-		.append( $( '<span class="wb-icon"/>' ) );
-
-		return $button;
 	}
+
 } );
 
 }( mediaWiki, jQuery ) );
