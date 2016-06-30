@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_bff63558",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-06-30T15:42:45Z",
+      "side": 1,
+      "message": "The icon is cut of in my Firefox. When I remove the \"height: …\" and add \"vertical-align: middle\" it looks fine for me.",
+      "revId": "30f01f77fae17e9d1330757d0767e12feb518820",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
