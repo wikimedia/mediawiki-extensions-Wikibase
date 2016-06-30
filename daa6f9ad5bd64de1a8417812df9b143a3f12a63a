@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_84e32431",
+        "filename": "lib/includes/Store/EntityStore.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-30T10:47:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0efd9372_1d995471",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_7da18090",
         "filename": "lib/tests/phpunit/MockRepository.php",
         "patchSetId": 9
@@ -172,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_44f93c7d",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-30T10:47:28Z",
+      "side": 1,
+      "message": "\"Frob\" is the name of some imaginary custom entity type. It\u0027s conceptually on the same level as Item or Property. Could have called it \"Thingy\".",
+      "parentUuid": "0efd9372_fd7f30db",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_9d76e4ff",
         "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
         "patchSetId": 9
@@ -234,6 +270,24 @@
       "writtenOn": "2016-06-29T09:02:37Z",
       "side": 1,
       "message": "I assume this is meant to be some kind of dummy entity type. I find it confusing because it looks like an IDE failure, copy-paste or global search-and-replace mistake. Suggestion: Call it \"custom-type\".",
+      "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efd9372_24feb866",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityStoreTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-30T10:47:28Z",
+      "side": 1,
+      "message": "\"Frob\" is a metasyntactic variable, like Foo or Bar. \"a frob is any random small thing\". http://www.catb.org/jargon/html/F/frob.html",
+      "parentUuid": "0efd9372_3d5d387f",
       "revId": "daa6f9ad5bd64de1a8417812df9b143a3f12a63a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
