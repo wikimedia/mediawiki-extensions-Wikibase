@@ -6,32 +6,7 @@
 	'use strict';
 
 QUnit.module( 'jquery.wikibase.edittoolbar', QUnit.newMwEnvironment( {
-	setup: function() {
-		$.widget( 'wikibasetest.editablewidget', {
-			getHelpMessage: function() {
-				return $.Deferred().resolve( 'help message' ).promise();
-			},
-			startEditing: function() {
-				this._trigger( 'afterstartediting' );
-			},
-			stopEditing: function( dropValue ) {
-				var self = this;
-				this._trigger( 'stopediting', null, [dropValue] );
-				setTimeout( function() {
-					self._trigger( 'afterstopediting', null, [dropValue] );
-				}, 0 );
-			},
-			cancelEditing: function() {
-				return this.stopEditing( true );
-			},
-			setError: function() {
-				this._trigger( 'toggleerror' );
-			}
-		} );
-	},
 	teardown: function() {
-		delete( $.wikibasetest.editablewidget );
-
 		$( '.test_edittoolbar' ).each( function() {
 			var $edittoolbar = $( this ),
 				edittoolbar = $edittoolbar.data( 'edittoolbar' );
@@ -53,7 +28,9 @@ function createEdittoolbar( options ) {
 	return $( '<span/>' )
 		.addClass( 'test_edittoolbar' )
 		.edittoolbar( $.extend( {
-				interactionWidget: $( '<div/>' ).editablewidget().data( 'editablewidget' )
+				getHelpMessage: function() {
+					return $.Deferred().resolve().promise();
+				}
 		}, options || {} ) );
 }
 
@@ -194,34 +171,6 @@ QUnit.test( 'toEditMode(), toNonEditMode()', function( assert ) {
 		edittoolbar.getButton( 'remove' ),
 		'Verified toolbar\'s second button being the "remove" button.'
 	);
-} );
-
-QUnit.test( 'afterstartediting and afterstopediting events', 2, function( assert ) {
-	var $edittoolbar = createEdittoolbar(),
-		edittoolbar = $edittoolbar.data( 'edittoolbar' ),
-		widget = edittoolbar.option( 'interactionWidget' );
-
-	$edittoolbar
-	.on( 'edittoolbarafterstartediting', function() {
-		assert.ok(
-			true,
-			'Triggered "afterstartediting" event.'
-		);
-	} )
-	.on( 'edittoolbarafterstopediting', function() {
-		QUnit.start();
-
-		assert.ok(
-			true,
-			'Triggered "afterstopediting" event.'
-		);
-	} );
-
-	widget.startEditing();
-
-	QUnit.stop();
-
-	widget.stopEditing();
 } );
 
 }( jQuery, QUnit ) );
