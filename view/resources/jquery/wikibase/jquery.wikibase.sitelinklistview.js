@@ -27,7 +27,7 @@ function namespaceEventNames( eventNames, namespace ) {
  * @option {string[]} [allowedSiteIds]
  *         Default: []
  *
- * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
+ * @option {Function} getListItemAdapter
  *
  * @option {jQuery.util.EventSingletonManager} [eventSingletonManager]
  *         Should be set when the widget instance is part of a sitelinkgroupview.
@@ -52,8 +52,8 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		},
 		value: [],
 		allowedSiteIds: [],
-		entityIdPlainFormatter: null,
 		eventSingletonManager: null,
+		getListItemAdapter: null,
 		$counter: null,
 		autoInput: true
 	},
@@ -67,7 +67,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !this.options.entityIdPlainFormatter ) {
+		if ( !this.options.getListItemAdapter ) {
 			throw new Error( 'Required option(s) missing' );
 		}
 
@@ -124,31 +124,23 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 	 */
 	_createListView: function() {
 		var self = this,
-			listItemWidget = $.wikibase.sitelinkview,
-			prefix = listItemWidget.prototype.widgetEventPrefix;
+			listItemAdapter = this.options.getListItemAdapter(
+				function() {
+					return $.map( self._getUnusedAllowedSiteIds(), function( siteId ) {
+						return wb.sites.getSite( siteId );
+					} );
+				}
+			);
 
 		// Encapsulate sitelinkviews by suppressing their events:
 		this.$listview
 		.listview( {
-			listItemAdapter: new $.wikibase.listview.ListItemAdapter( {
-				listItemWidget: listItemWidget,
-				newItemOptionsFn: function( value ) {
-					return {
-						value: value,
-						getAllowedSites: function() {
-							return $.map( self._getUnusedAllowedSiteIds(), function( siteId ) {
-								return wb.sites.getSite( siteId );
-							} );
-						},
-						entityIdPlainFormatter: self.options.entityIdPlainFormatter
-					};
-				}
-			} ),
+			listItemAdapter: listItemAdapter,
 			value: self.options.value || null,
 			listItemNodeName: 'LI',
 			encapsulate: true
 		} )
-		.on( prefix + 'change.' + this.widgetName, function( event ) {
+		.on( listItemAdapter.prefixedEvent( 'change.' + this.widgetName ), function( event ) {
 			event.stopPropagation();
 			if ( self.options.autoInput ) {
 				self._updateAutoInput();
@@ -156,13 +148,13 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			}
 			self._trigger( 'change' );
 		} )
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
+		.on( listItemAdapter.prefixedEvent( 'toggleerror.' + this.widgetName ), function( event, error ) {
 			event.stopPropagation();
 		} )
 		.on( 'keydown.' + this.widgetName, function( event ) {
 			if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
-				var $sitelinkview = $( event.target ).closest( ':wikibase-sitelinkview' ),
-					sitelinkview = $sitelinkview.data( 'sitelinkview' );
+				var $sitelinkview = $( event.target ).parentsUntil( this ).andSelf().filter( '.listview-item' ),
+					sitelinkview = listItemAdapter.liInstance( $sitelinkview );
 
 				if ( sitelinkview ) {
 					self._removeSitelinkviewIfEmpty( sitelinkview, event );
@@ -171,10 +163,10 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		} )
 		.on(
 			[
-				prefix + 'create.' + this.widgetName,
-				prefix + 'afterstartediting.' + this.widgetName,
-				prefix + 'afterstopediting.' + this.widgetName,
-				prefix + 'disable.' + this.widgetName
+				listItemAdapter.prefixedEvent( 'create.' + this.widgetName ),
+				listItemAdapter.prefixedEvent( 'afterstartediting.' + this.widgetName ),
+				listItemAdapter.prefixedEvent( 'afterstopediting.' + this.widgetName ),
+				listItemAdapter.prefixedEvent( 'disable.' + this.widgetName )
 			].join( ' ' ),
 			function( event ) {
 				event.stopPropagation();
