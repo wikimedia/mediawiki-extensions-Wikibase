@@ -264,9 +264,10 @@
 	/**
 	 * @param {Function} startEditingCallback
 	 * @param {Function} getAllowedSites
+	 * @param {Function} removeCallback
 	 * @return {jQuery.wikibase.listview.ListItemAdapter}
 	 */
-	SELF.prototype.getListItemAdapterForSiteLinkView = function( startEditingCallback, getAllowedSites ) {
+	SELF.prototype.getListItemAdapterForSiteLinkView = function( startEditingCallback, getAllowedSites, removeCallback ) {
 		var self = this;
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.sitelinkview,
@@ -277,7 +278,16 @@
 					{
 						value: value,
 						getAllowedSites: getAllowedSites,
-						entityIdPlainFormatter: self._entityIdPlainFormatter
+						entityIdPlainFormatter: self._entityIdPlainFormatter,
+						getSiteLinkRemover: function( $dom, title ) {
+							return self._structureEditorFactory.getRemover(
+								function () {
+									return startEditingCallback().then( function() { return removeCallback( view ); } );
+								},
+								$dom,
+								title
+							);
+						}
 					}
 				);
 				return view;
@@ -489,9 +499,9 @@
 			listItemWidget: $.wikibase.snaklistview,
 			newItemOptionsFn: $.proxy( function( value ) {
 				return {
+					getListItemAdapter: this.getListItemAdapterForSnakView.bind( this, startEditingCallback ),
 					value: value || undefined,
-					singleProperty: true,
-					listItemAdapter: this.getListItemAdapterForSnakView( startEditingCallback )
+					singleProperty: true
 				};
 			}, this )
 		} );
@@ -502,11 +512,12 @@
 	 *
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
 	 */
-	SELF.prototype.getListItemAdapterForSnakView = function( startEditingCallback ) {
+	SELF.prototype.getListItemAdapterForSnakView = function( startEditingCallback, removeCallback ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.snakview,
-			newItemOptionsFn: $.proxy( function( value ) {
-				return this._getSnakViewOptions(
+			getNewItem: $.proxy( function( value, dom ) {
+				return this.getSnakView(
+					startEditingCallback,
 					true,
 					{
 						locked: {
@@ -517,7 +528,9 @@
 					value || {
 						property: null,
 						snaktype: wb.datamodel.PropertyValueSnak.TYPE
-					}
+					},
+					$( dom ),
+					removeCallback
 				);
 			}, this )
 		} );
@@ -533,31 +546,29 @@
 	 * @param {jQuery} $snakview
 	 * @return {jQuery.wikibase.snakview} The constructed snakview
 	 */
-	SELF.prototype.getSnakView = function( startEditingCallback, drawProperty, options, snak, $snakview ) {
-		return this._getView(
+	SELF.prototype.getSnakView = function( startEditingCallback, drawProperty, options, snak, $snakview, removeCallback ) {
+		var structureEditorFactory = this._structureEditorFactory;
+		var view = this._getView(
 			'snakview',
 			$snakview,
-			this._getSnakViewOptions( drawProperty, options, snak )
+			{
+				value: snak || undefined,
+				locked: options.locked,
+				autoStartEditing: options.autoStartEditing,
+				dataTypeStore: this._dataTypeStore,
+				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
+				entityIdPlainFormatter: this._entityIdPlainFormatter,
+				entityStore: this._entityStore,
+				valueViewBuilder: this._getValueViewBuilder(),
+				drawProperty: drawProperty,
+				getSnakRemover: removeCallback ? function( $dom ) {
+					return structureEditorFactory.getRemover( function() {
+						return startEditingCallback().then( function() { return removeCallback( view ); } );
+					}, $dom );
+				} : null
+			}
 		);
-	};
-
-	/**
-	 * @param {boolean} drawProperty Whether the snakview should draw its property
-	 * @param {Object} options An object with keys `locked` and `autoStartEditing`
-	 * @param {wikibase.datamodel.Snak|null} snak
-	 */
-	SELF.prototype._getSnakViewOptions = function( drawProperty, options, snak ) {
-		return {
-			value: snak || undefined,
-			locked: options.locked,
-			autoStartEditing: options.autoStartEditing,
-			dataTypeStore: this._dataTypeStore,
-			entityIdHtmlFormatter: this._entityIdHtmlFormatter,
-			entityIdPlainFormatter: this._entityIdPlainFormatter,
-			entityStore: this._entityStore,
-			valueViewBuilder: this._getValueViewBuilder(),
-			drawProperty: drawProperty
-		};
+		return view;
 	};
 
 	/**

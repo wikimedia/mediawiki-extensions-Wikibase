@@ -52,6 +52,14 @@
 	background-color: #D6F3FF;
 }
 
+.wikibase-sitelinkview .wikibase-removetoolbar {
+	display: none;
+}
+
+.wikibase-sitelinkview.wb-edit .wikibase-removetoolbar {
+	display: inline-block;
+}
+
 .wikibase-sitelinkview .wikibase-toolbar-button-remove {
 	display: inline-block;
 	overflow: hidden;
