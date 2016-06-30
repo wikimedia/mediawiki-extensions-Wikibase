@@ -27,11 +27,6 @@
  * @event afterstartediting
  *       - {jQuery.Event}
  *
- * @event stopediting
- *        - {jQuery.Event}
- *        - {boolean} Whether to drop the value.
- *        - {Function} Callback function.
- *
  * @event afterstopediting
  *        - {jQuery.Event}
  *        - {boolean} Whether to drop the value.
@@ -406,8 +401,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 		if ( !this._isInEditMode ) {
 			return deferred.resolve().promise();
 		}
-
-		this._trigger( 'stopediting', null, [dropValue] );
 
 		if ( this._badgeselector ) {
 			this._badgeselector.stopEditing( dropValue );

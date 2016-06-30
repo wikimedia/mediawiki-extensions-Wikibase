@@ -28,11 +28,6 @@
  * @event afterstartediting
  *       - {jQuery.Event}
  *
- * @event stopediting
- *        - {jQuery.Event}
- *        - {boolean} Whether to drop the value.
- *        - {Function} Callback function.
- *
  * @event afterstopediting
  *        - {jQuery.Event}
  *        - {boolean} Whether to drop the value.
@@ -155,7 +150,6 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 				[
 					widgetName + 'create.' + self.widgetName,
 					widgetName + 'afterstartediting.' + self.widgetName,
-					widgetName + 'stopediting.' + self.widgetName,
 					widgetName + 'afterstopediting.' + self.widgetName,
 					widgetName + 'disable.' + self.widgetName
 				].join( ' ' ),

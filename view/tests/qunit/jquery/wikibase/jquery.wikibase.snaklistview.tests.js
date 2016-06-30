@@ -232,7 +232,7 @@
 		);
 	} );
 
-	QUnit.test( 'Basic start and stop editing', 6, function( assert ) {
+	QUnit.test( 'Basic start and stop editing', 5, function( assert ) {
 		var $node = createSnaklistview(),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -258,16 +258,7 @@
 		// Should not trigger any events since in edit mode already:
 		snaklistview.startEditing();
 
-		QUnit.stop( 2 );
-
-		$node.on( 'snaklistviewstopediting', function( e ) {
-			assert.ok(
-				true,
-				'Triggered "stopediting" event.'
-			);
-
-			QUnit.start();
-		} );
+		QUnit.stop( 1 );
 
 		$node.on( 'snaklistviewafterstopediting', function( e ) {
 			assert.ok(
@@ -296,7 +287,7 @@
 		snaklistview.stopEditing();
 	} );
 
-	QUnit.test( 'Basic start and stop editing of filled snaklistview', 6, function( assert ) {
+	QUnit.test( 'Basic start and stop editing of filled snaklistview', 5, function( assert ) {
 		var $node = createSnaklistview( snakLists[0] ),
 			snaklistview = $node.data( 'snaklistview' );
 
@@ -326,16 +317,7 @@
 		// Should not trigger any events since in edit mode already:
 		snaklistview.startEditing();
 
-		QUnit.stop( 2 );
-
-		$node.on( 'snaklistviewstopediting', function( e ) {
-			assert.ok(
-				true,
-				'Triggered "stopediting" event.'
-			);
-
-			QUnit.start();
-		} );
+		QUnit.stop( 1 );
 
 		$node.on( 'snaklistviewafterstopediting', function( e ) {
 			assert.ok(

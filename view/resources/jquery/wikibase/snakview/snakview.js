@@ -55,12 +55,6 @@
  * @param {jQuery.Event} event
  */
 /**
- * @event stopediting
- * Triggered when stopping the widget's edit mode.
- * @param {jQuery.Event} event
- * @param {boolean} dropValue
- */
-/**
  * @event afterstopediting
  * Triggered after having stopped the widget's edit mode.
  * @param {jQuery.Event} event
@@ -363,8 +357,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 		}
 
 		var snak = this.snak();
-
-		this._trigger( 'stopediting', null, [dropValue] );
 
 		this._isInEditMode = false;
 
