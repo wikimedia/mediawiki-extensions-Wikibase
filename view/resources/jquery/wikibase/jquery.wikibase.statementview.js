@@ -248,9 +248,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		.on( 'snakviewchange.' + this.widgetName, function( event, status ) {
 			event.stopPropagation();
 			self._trigger( 'change' );
-		} )
-		.on( 'snakviewstopediting.' + this.widgetName, function( event ) {
-			event.stopPropagation();
 		} );
 
 		this._mainSnakSnakView = this.options.buildSnakView(
@@ -290,9 +287,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 		$qualifiers.listview( {
 			listItemAdapter: this.options.qualifiersListItemAdapter,
 			value: groupedQualifierSnaks
-		} )
-		.on( 'snaklistviewstopediting.' + this.widgetName, function( event, dropValue ) {
-			event.stopPropagation();
 		} )
 		.on( 'snaklistviewchange.' + this.widgetName,
 			function( event ) {

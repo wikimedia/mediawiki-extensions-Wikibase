@@ -24,13 +24,6 @@
  * @param {jQuery.Event} event
  */
 /**
- * @event stopediting
- * Triggered when stopping the widget's edit mode, immediately before re-drawing.
- * @param {jQuery.Event} event
- * @param {boolean} dropValue
- *        Whether the widget's value will be reset to the one from before starting edit mode.
- */
-/**
  * @event afterstopediting
  * Triggered after having stopped the widget's edit mode and non-edit mode is redrawn.
  * @param {boolean} dropValue
@@ -126,12 +119,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 			// Propagate "change" event.
 			self._trigger( 'change' );
-		} )
-		.one( lia.prefixedEvent( 'stopediting.' + this.widgetName ),
-			function( event, dropValue ) {
-				event.stopPropagation();
-				event.preventDefault();
-				self.stopEditing( dropValue );
 		} );
 	},
 
@@ -146,7 +133,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 				'snakviewchange.' + this.widgetName,
 				'listviewitemremoved.' + this.widgetName,
 				lia.prefixedEvent( 'change.' + this.widgetName ),
-				lia.prefixedEvent( 'stopediting.' + this.widgetName )
 			];
 		this.$listview.off( events.join( ' ' ) );
 	},
