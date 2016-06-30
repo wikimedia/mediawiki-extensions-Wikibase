@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0efd9372_c4e9ac11",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-06-30T09:16:14Z",
+      "side": 1,
+      "message": "This is no longer correct. It\u0027s not ignored if $id is given (and the parameter is not called $id any more).",
+      "revId": "66436545e65ace8a1b98161c574de95bc3484cca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
