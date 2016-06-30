@@ -97,7 +97,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	_create: function() {
 		this.options.value = this.options.value || new wb.datamodel.SnakList();
 
-		if ( !this.options.listItemAdapter || !( this.options.value instanceof wb.datamodel.SnakList ) ) {
+		if ( !this.options.getListItemAdapter || !( this.options.value instanceof wb.datamodel.SnakList ) ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
@@ -130,7 +130,9 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		}
 
 		this.$listview.listview( {
-			listItemAdapter: this.options.listItemAdapter,
+			listItemAdapter: this.options.getListItemAdapter( function( snakview ) {
+				self._listview.removeItem( snakview.element );
+			} ),
 			value: this.options.value.toArray()
 		} );
 
