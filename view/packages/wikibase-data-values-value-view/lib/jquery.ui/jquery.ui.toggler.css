@@ -7,16 +7,23 @@
 .ui-toggler.ui-state-default {
 	background: none;
 	border: 0;
+	color: #0645ad; /* Reset jQuery UI theme color "back" to MediaWiki's standard link color */
 	display: block;
 	margin-top: .5em;
 	white-space: nowrap;
 }
+
 .ui-toggler .ui-toggler-icon,
 .ui-toggler .ui-toggler-label {
 	cursor: pointer;
 	display: inline-block;
 	vertical-align: middle;
 }
+
+.ui-toggler .ui-toggler-label:hover {
+	text-decoration: underline;
+}
+
 .ui-toggler .ui-toggler-icon3dtrans {
 	-webkit-transition: transform .2s ease-out;
 	transition: transform .2s ease-out;
