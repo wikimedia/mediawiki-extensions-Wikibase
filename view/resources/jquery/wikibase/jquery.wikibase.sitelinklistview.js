@@ -184,8 +184,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			}
 		)
 		.on(
-			'listviewitemremoved.' + this.widgetName
-			+ ' listviewitemadded.' + this.widgetName,
+			'listviewitemremoved.' + this.widgetName,
 			function( event, sitelinkview ) {
 				self._refreshCounter();
 				if ( sitelinkview ) {
@@ -789,7 +788,8 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 				sitelinkview.startEditing();
 			}
 
-			this.__pendingItems = this.__pendingItems ? this.__pendingItems + 1 : 1;
+			self.__pendingItems = self.__pendingItems ? self.__pendingItems + 1 : 1;
+			self._trigger( 'change' );
 		} );
 	}
 } );

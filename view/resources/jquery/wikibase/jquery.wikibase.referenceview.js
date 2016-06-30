@@ -111,7 +111,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		var changeEvents = [
 			'snakviewchange.' + this.widgetName,
 			lia.prefixedEvent( 'change.' + this.widgetName ),
-			'listviewitemadded.' + this.widgetName,
 			'listviewitemremoved.' + this.widgetName
 		];
 
@@ -148,7 +147,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		var lia = this.$listview.data( 'listview' ).listItemAdapter(),
 			events = [
 				'snakviewchange.' + this.widgetName,
-				'listviewitemadded.' + this.widgetName,
 				'listviewitemremoved.' + this.widgetName,
 				lia.prefixedEvent( 'change.' + this.widgetName ),
 				lia.prefixedEvent( 'stopediting.' + this.widgetName )
