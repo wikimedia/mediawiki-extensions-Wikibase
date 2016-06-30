@@ -225,11 +225,58 @@
 			{
 				groupName: groupName,
 				value: siteLinks,
-				eventSingletonManager: eventSingletonManager,
-				siteLinksChanger: this._entityChangersFactory.getSiteLinksChanger(),
-				entityIdPlainFormatter: this._entityIdPlainFormatter
+				getSiteLinkListView: this.getSiteLinkListView.bind( this, eventSingletonManager )
 			}
 		);
+	};
+
+	/**
+	 * Construct a suitable view for the given sitelink list on the given DOM element
+	 *
+	 * @param {jQuery.util.EventSingletonManager} eventSingletonManager
+	 * @param {wikibase.datamodel.SiteLink[]} siteLinks
+	 * @param {jQuery} $sitelinklistview
+	 * @param {string[]} allowedSiteIds
+	 * @param {jQuery} $counter
+	 * @return {jQuery.wikibase.sitelinklistview} The constructed sitelinklistview
+	 **/
+	SELF.prototype.getSiteLinkListView = function( eventSingletonManager, siteLinks, $sitelinklistview, allowedSiteIds, $counter ) {
+		return this._getView(
+			'sitelinklistview',
+			$sitelinklistview,
+			{
+				$counter: $counter,
+				allowedSiteIds: allowedSiteIds,
+				encapsulate: true,
+				eventSingletonManager: eventSingletonManager,
+				getListItemAdapter: this.getListItemAdapterForSiteLinkView.bind( this ),
+				siteLinksChanger: this._entityChangersFactory.getSiteLinksChanger(),
+				value: siteLinks
+			}
+		);
+	};
+
+	/**
+	 * @param {Function} getAllowedSites
+	 * @return {jQuery.wikibase.listview.ListItemAdapter}
+	 */
+	SELF.prototype.getListItemAdapterForSiteLinkView = function( getAllowedSites ) {
+		var self = this;
+		return new $.wikibase.listview.ListItemAdapter( {
+			listItemWidget: $.wikibase.sitelinkview,
+			getNewItem: function( value, dom ) {
+				var view = self._getView(
+					'sitelinkview',
+					$( dom ),
+					{
+						value: value,
+						getAllowedSites: getAllowedSites,
+						entityIdPlainFormatter: self._entityIdPlainFormatter
+					}
+				);
+				return view;
+			}
+		} );
 	};
 
 	/**

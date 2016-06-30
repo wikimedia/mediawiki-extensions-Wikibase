@@ -26,14 +26,7 @@ function getSiteIdsOfGroup( group ) {
  *
  * @option {string} groupName
  * @option {wikibase.datamodel.SiteLink[]} value A list of SiteLinks
- *
- * @option {wikibase.entityChangers.SiteLinksChanger} siteLinksChanger
- *
- * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
- *
- * @option {jQuery.util.EventSingletonManager} [eventSingletonManager]
- *         Should be set when the widget instance is part of a jQuery.wikibase.sitelinkgrouplistview.
- *         Default: null (will be constructed automatically)
+ * @option {Function} getSiteLinkListView
  *
  * @option {string} [helpMessage]
  *                  Default: 'Add a site link by specifying a site and a page of that site, edit or
@@ -67,10 +60,8 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			$counter: '.wikibase-sitelinkgroupview-counter'
 		},
 		value: null,
+		getSiteLinkListView: null,
 		groupName: null,
-		entityIdPlainFormatter: null,
-		siteLinksChanger: null,
-		eventSingletonManager: null,
 		helpMessage: mw.msg( 'wikibase-sitelinkgroupview-input-help-message' )
 	},
 
@@ -78,11 +69,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @type {jQuery}
 	 */
 	$sitelinklistview: null,
-
-	/**
-	 * @type {jQuery.util.EventSingletonManager}
-	 */
-	_eventSingletonManager: null,
 
 	/**
 	 * @type {string[]}
@@ -93,10 +79,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !this.options.groupName
-			|| !this.options.siteLinksChanger
-			|| !this.options.entityIdPlainFormatter
-		) {
+		if ( !this.options.groupName || !this.options.getSiteLinkListView ) {
 			throw new Error( 'Required parameter(s) missing' );
 		}
 
@@ -110,9 +93,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		if ( !this.$sitelinklistview.length ) {
 			this.$sitelinklistview = $( '<table/>' ).appendTo( this.element );
 		}
-
-		this._eventSingletonManager
-			= this.options.eventSingletonManager || new $.util.EventSingletonManager();
 
 		this.draw();
 	},
@@ -169,24 +149,21 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * Creates and initializes the sitelinklistview widget.
 	 */
 	_createSitelinklistview: function() {
-		var self = this,
-			prefix = $.wikibase.sitelinklistview.prototype.widgetEventPrefix;
+		var sitelinklistview = this.options.getSiteLinkListView(
+			this._getSiteLinksOfGroup(),
+			this.$sitelinklistview,
+			this._siteIdsOfGroup,
+			this.$counter
+		);
+		var prefix = sitelinklistview.widgetEventPrefix;
 
+		var self = this;
 		this.$sitelinklistview
 		.on( prefix + 'change.' + this.widgetName, function( event ) {
 			self._trigger( 'change' );
 		} )
 		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
 			self.setError( error );
-		} )
-		.sitelinklistview( {
-			value: this._getSiteLinksOfGroup(),
-			allowedSiteIds: this._siteIdsOfGroup,
-			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-			siteLinksChanger: this.options.siteLinksChanger,
-			eventSingleton: this._eventSingleton,
-			$counter: this.$counter,
-			encapsulate: true
 		} );
 	},
 
