@@ -27,11 +27,6 @@
  * @event afterstartediting
  *       - {jQuery.Event}
  *
- * @event stopediting
- *        - {jQuery.Event}
- *        - {boolean} Whether to drop the value.
- *        - {Function} Callback function.
- *
  * @event afterstopediting
  *        - {jQuery.Event}
  *        - {boolean} Whether to drop the value.
@@ -324,7 +319,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			[
 				prefix + 'create.' + this.widgetName,
 				prefix + 'afterstartediting.' + this.widgetName,
-				prefix + 'stopediting.' + this.widgetName,
 				prefix + 'afterstopediting.' + this.widgetName,
 				prefix + 'disable.' + this.widgetName
 			].join( ' ' ),

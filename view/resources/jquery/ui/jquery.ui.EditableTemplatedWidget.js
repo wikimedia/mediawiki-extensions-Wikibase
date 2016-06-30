@@ -21,12 +21,6 @@
  *        Triggered after having started the widget's edit mode and edit mode has been rendered.
  *        - {jQuery.Event}
  *
- * @event stopediting
- *        Triggered when stopping the widget's edit mode, immediately before re-drawing.
- *        - {jQuery.Event}
- *        - {boolean} dropValue
- *          Whether the widget's value will be reset to the one from before starting edit mode.
- *
  * @event afterstopediting
  *        Triggered after having stopped the widget's edit mode and non-edit mode is redrawn.
  *        - {jQuery.Event}
@@ -122,7 +116,6 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 		if ( !this.isInEditMode() ) {
 			return done;
 		}
-		this._trigger( 'stopediting', null, [dropValue] );
 		this._afterStopEditing( dropValue );
 		return done;
 	},
