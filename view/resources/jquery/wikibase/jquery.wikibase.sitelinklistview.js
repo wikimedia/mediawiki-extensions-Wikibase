@@ -129,6 +129,9 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 					return $.map( self._getUnusedAllowedSiteIds(), function( siteId ) {
 						return wb.sites.getSite( siteId );
 					} );
+				},
+				function( sitelinkview ) {
+					self.$listview.data( 'listview' ).removeItem( sitelinkview.element );
 				}
 			);
 
