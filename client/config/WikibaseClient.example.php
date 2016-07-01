@@ -59,8 +59,8 @@ if ( !defined( 'WB_VERSION' ) ) {
 	define( 'WB_REPO_NS_ITEM', $baseRepoNs );
 	define( 'WB_REPO_NS_PROPERTY', $baseRepoNs + 2 );
 
-	$wgWBRepoSettings['entityNamespaces']['wikibase-item'] = WB_REPO_NS_ITEM;
-	$wgWBRepoSettings['entityNamespaces']['wikibase-property'] = WB_REPO_NS_PROPERTY;
+	$wgWBRepoSettings['entityNamespaces']['item'] = WB_REPO_NS_ITEM;
+	$wgWBRepoSettings['entityNamespaces']['property'] = WB_REPO_NS_PROPERTY;
 }
 
 // In order to access a remote repo using a different database server,
