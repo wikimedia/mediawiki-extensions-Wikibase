@@ -393,7 +393,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 		.then( function( suggestions, searchTerm, nextSuggestionOffset ) {
 			var deferred = $.Deferred();
 
-			if ( self._cache[searchTerm] ) {
+			if ( self._cache[searchTerm] && self._cache[searchTerm].nextSuggestionOffset ) {
 				self._cache[searchTerm].suggestions = self._cache[searchTerm].suggestions.concat( suggestions );
 				self._cache[searchTerm].nextSuggestionOffset = nextSuggestionOffset;
 			} else {

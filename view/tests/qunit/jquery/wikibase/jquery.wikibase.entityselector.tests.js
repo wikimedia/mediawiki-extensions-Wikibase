@@ -126,4 +126,27 @@
 		);
 	} );
 
+	QUnit.test( 'Cache invalidation of small (not continued) search results', function( assert ) {
+		assert.expect( 2 );
+
+		var $entitySelector = newTestEntitySelector( {
+				source: function() {
+					return $.Deferred().resolve( [ 'Alpha' ] ).promise();
+				}
+			} ),
+			entitySelector = $entitySelector.data( 'entityselector' );
+
+		QUnit.stop();
+
+		entitySelector._getSuggestions().then( function( suggestions ) {
+			assert.deepEqual( suggestions, [ 'Alpha' ], 'should cache' );
+
+			return entitySelector._getSuggestions();
+		} ).done( function( suggestions, term ) {
+			assert.deepEqual( suggestions, [ 'Alpha' ], 'should not concat on existing cache' );
+
+			QUnit.start();
+		} );
+	} );
+
 }( jQuery, QUnit ) );
