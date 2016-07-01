@@ -24,14 +24,19 @@ class EntityIdReader implements EntityIdPager, Disposable {
 	private $reader;
 
 	/**
-	 * @var ExceptionHandler
+	 * @var EntityIdParser
 	 */
-	private $exceptionHandler;
+	private $parser;
 
 	/**
 	 * @var string|null
 	 */
 	private $entityType;
+
+	/**
+	 * @var ExceptionHandler
+	 */
+	private $exceptionHandler;
 
 	/**
 	 * @param LineReader $reader
