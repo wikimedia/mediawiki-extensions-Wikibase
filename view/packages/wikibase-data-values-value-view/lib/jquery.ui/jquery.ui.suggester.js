@@ -304,8 +304,10 @@ $.widget( 'ui.suggester', {
 			suppressKeyPress = false;
 
 		this.element
-		.on( 'focus.suggester', function( event ) {
-			self._updateMenuVisibility();
+		.on( 'click.suggester', function( event ) {
+			if ( !self.isSearching() ) {
+				self._updateMenuVisibility();
+			}
 		} )
 		.on( 'keydown.suggester', function( event ) {
 			var isDisabled = self.element.hasClass( 'ui-state-disabled' );
