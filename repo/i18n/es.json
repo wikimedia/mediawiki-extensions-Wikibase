@@ -180,6 +180,7 @@
 	"wikibase-newitem-page": "Nombre de la primera página enlazada",
 	"wikibase-newitem-no-external-page": "No se encontró la página especificada en el sitio correspondiente.",
 	"wikibase-newitem-not-recognized-siteid": "No se reconoció el identificador de sitio especificado.",
+	"wikibase-newitem-not-recognized-language": "El código de idioma proporcionado no se reconoció.",
 	"wikibase-newentity-language": "Idioma:",
 	"wikibase-newentity-label": "Etiqueta:",
 	"wikibase-newentity-description": "Descripción:",

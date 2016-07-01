@@ -118,6 +118,7 @@
 	"wikibase-newitem-page": "Numm vun der éischter verlinkter Säit",
 	"wikibase-newitem-no-external-page": "Déi spezifizéiert Säit konnt op dem korrespondéierte Site net fonnt ginn.",
 	"wikibase-newitem-not-recognized-siteid": "Den Identifiant fir de Site deen Dir uginn hutt gouf net erkannt.",
+	"wikibase-newitem-not-recognized-language": "De Sproochcode deen Dir uginn hutt gouf net erkannt.",
 	"wikibase-newentity-language": "Sprooch:",
 	"wikibase-newentity-label": "Etikett:",
 	"wikibase-newentity-description": "Beschreiwung:",

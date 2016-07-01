@@ -176,6 +176,7 @@
 	"wikibase-newitem-page": "Titel der ersten verlinkten Seite",
 	"wikibase-newitem-no-external-page": "Die angegebene Seite konnte nicht auf der dazugehörigen Website gefunden werden.",
 	"wikibase-newitem-not-recognized-siteid": "Die angegebene Websitekennung ist nicht bekannt.",
+	"wikibase-newitem-not-recognized-language": "Der angegebene Sprachcode wurde nicht erkannt.",
 	"wikibase-newentity-language": "Sprache:",
 	"wikibase-newentity-label": "Bezeichnung:",
 	"wikibase-newentity-description": "Beschreibung:",

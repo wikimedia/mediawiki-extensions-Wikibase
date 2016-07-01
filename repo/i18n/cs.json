@@ -165,6 +165,7 @@
 	"wikibase-newitem-page": "Jméno první odkazované stránky",
 	"wikibase-newitem-no-external-page": "Taková stránka nebyla na příslušném webu nalezena.",
 	"wikibase-newitem-not-recognized-siteid": "Zadaný identifikátor projektu nebyl rozpoznán.",
+	"wikibase-newitem-not-recognized-language": "Zadaný kód jazyka nebyl rozpoznán.",
 	"wikibase-newentity-language": "Jazyk:",
 	"wikibase-newentity-label": "Štítek:",
 	"wikibase-newentity-description": "Popis:",

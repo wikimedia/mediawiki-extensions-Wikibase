@@ -161,6 +161,7 @@
 	"wikibase-newitem-page": "שם הדף המקושר הראשון",
 	"wikibase-newitem-no-external-page": "הדף שצוין לא נמצא באתר המתאים.",
 	"wikibase-newitem-not-recognized-siteid": "מזהה האתר שסופק אינו מוּכּר.",
+	"wikibase-newitem-not-recognized-language": "קוד השפה שצוין אינו קיים.",
 	"wikibase-newentity-language": "שפה:",
 	"wikibase-newentity-label": "תווית:",
 	"wikibase-newentity-description": "תיאור:",

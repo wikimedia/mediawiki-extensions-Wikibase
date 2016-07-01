@@ -8,7 +8,8 @@
 			"Poul G",
 			"Steenth",
 			"Fitoschido",
-			"Peter Alberti"
+			"Peter Alberti",
+			"Sarrus"
 		]
 	},
 	"wikibase-lib-desc": "Fælles funktionalitet for Wikibase og Wikibase-klientudvidelser",
@@ -107,6 +108,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-references": "Ændrede {{PLURAL:$4|en kilde|$4 kilder}} til {{PLURAL:$3|en påstand|$3 påstande}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Ændrede rangering af {{PLURAL:$3|en påstand|$3 påstande}}",
 	"wikibase-entity-summary-clientsitelink-update": "Side flyttet fra [$3] til [$4]",
+	"wikibase-entity-summary-clientsitelink-remove": "Side på [$3] slettet",
 	"wikibase-entity-summary-wbsetqualifier-add": "Tilføjede {{PLURAL:$1|kvalifikator|kvalifikatorer}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "Ændrede {{PLURAL:$1|kvalifikator|kvalifikatorer}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "Fjernede {{PLURAL:$1|kvalifikator|kvalifikatorer}}",

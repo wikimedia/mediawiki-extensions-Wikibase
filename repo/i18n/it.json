@@ -169,6 +169,7 @@
 	"wikibase-newitem-page": "Nome della prima pagina collegata",
 	"wikibase-newitem-no-external-page": "La pagina specificata non è stata trovata sul sito corrispondente.",
 	"wikibase-newitem-not-recognized-siteid": "L'identificatore del sito fornito non è stato riconosciuto.",
+	"wikibase-newitem-not-recognized-language": "Il codice della lingua fornito non è stato riconosciuto.",
 	"wikibase-newentity-language": "Lingua:",
 	"wikibase-newentity-label": "Etichetta:",
 	"wikibase-newentity-description": "Descrizione:",

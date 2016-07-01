@@ -11,7 +11,8 @@
 			"SeoJeongHo",
 			"Alex00728",
 			"Hwangjy9",
-			"고솜"
+			"고솜",
+			"Ykhwong"
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
@@ -71,7 +72,7 @@
 	"wikibase-omitted-undo-ops": "{{PLURAL:$1|값}}이 이후 다시 바뀌었기 때문에 $1 {{PLURAL:$1|바뀜}}을 생략했습니다.",
 	"wikibase-empty-undo": "여기에 아무 것도 취소할 수 없습니다.",
 	"wikibase-undo-revision-error": "되돌리기를 실패했습니다",
-	"wikibase-undo-samerev": "베이스와 대상을 되돌리도록 제공한 같은 판을 되돌릴 수 없습니다.",
+	"wikibase-undo-samerev": "편집을 취소하려면 두 개의 다른 판을 지정해야 합니다.",
 	"wikibase-undo-badpage": "잘못된 판: $2 판은 [[$1]]에 속하지 않습니다.",
 	"wikibase-undo-firstrev": "문서 만들기를 되돌릴 수 없습니다",
 	"wikibase-undo-nocontent": "$1 페이지의 $2 판의 내용을 불러올 수 없습니다",
@@ -255,7 +256,7 @@
 	"wikibase-mylanguagefallbackchain-text": "개체의 레이블을 보여주는 데 사용되는 언어 폴백 체인을 아래에 보여줍니다.",
 	"wikibase-mylanguagefallbackchain-babel": "{{GENDER:$1|자신의}} [[Special:MyPage|사용자 문서]]에 <nowiki>{{#babel: }}</nowiki>을 넣어 편집할 수 있습니다.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, $3 - $4에서 변환됨",
-	"wikibase-api-no-such-sitelink": "해당 사이트링크를 찾을 수 없습니다.",
+	"wikibase-api-no-such-sitelink": "배지 편집을 시도할 때 \"$1\"에 대한 사이트링크를 찾을 수 없었습니다.",
 	"wikibase-self-conflict-patched": "편집을 최신 버전으로 고쳤으며 중간 바뀜이 무시됩니다.",
 	"wikibase-conflict-patched": "편집을 최신 버전으로 고쳤습니다.",
 	"wikibase-restoreold": "복구",

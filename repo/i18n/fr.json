@@ -198,6 +198,7 @@
 	"wikibase-newitem-page": "Nom de la première page liée",
 	"wikibase-newitem-no-external-page": "La page spécifiée est introuvable sur le site correspondant.",
 	"wikibase-newitem-not-recognized-siteid": "L’identifiant de site fourni n’a pas été reconnu.",
+	"wikibase-newitem-not-recognized-language": "Le code de langue fourni n’a pas été reconnu.",
 	"wikibase-newentity-language": "Langue :",
 	"wikibase-newentity-label": "Libellé&nbsp;:",
 	"wikibase-newentity-description": "Description&nbsp;:",
