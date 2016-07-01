@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_c0b2c847",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkview.css",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-01T09:24:00Z",
+      "side": 1,
+      "message": "For me the height: 100% does nothing. Just wondering if there is a reason to have it?",
+      "revId": "138e577aef3f2c2c3947fd71d71807055aa52c45",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
