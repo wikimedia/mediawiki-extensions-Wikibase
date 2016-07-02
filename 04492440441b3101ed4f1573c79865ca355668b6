@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee011f3e_f376c338",
+        "filename": "view/resources/templates.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2016-07-02T11:05:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0efd9372_7d006039",
+      "revId": "04492440441b3101ed4f1573c79865ca355668b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_5dfd9c36",
         "filename": "view/src/ClaimHtmlGenerator.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee011f3e_538b4f1b",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2016-07-02T11:05:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0efd9372_5dfd9c36",
+      "revId": "04492440441b3101ed4f1573c79865ca355668b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_2c5d0c7f",
         "filename": "view/src/ClaimHtmlGenerator.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2016-06-29T09:36:56Z",
       "side": 1,
       "message": "Would be cool to have a class for such tasks, similar to what I proposed in https://github.com/wmde/WikibaseDataModel/pull/562",
+      "revId": "04492440441b3101ed4f1573c79865ca355668b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_33904b46",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 141
+      },
+      "writtenOn": "2016-07-02T11:05:22Z",
+      "side": 1,
+      "message": "Yes, definitely. But I believe it would be better to do it in an other change in order to don\u0027t block this change on the introduction of something nicer into WikibaseDataModel.",
+      "parentUuid": "0efd9372_2c5d0c7f",
       "revId": "04492440441b3101ed4f1573c79865ca355668b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
