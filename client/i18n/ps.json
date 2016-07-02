@@ -30,6 +30,7 @@
 	"wikibase-rc-show-wikidata-pref": "په وروستي بدلونونو کې د {{WBREPONAME}} سمونونه ښکاره کول",
 	"wikibase-rc-wikibase-edit-letter": "اومتوک",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون",
+	"wikibase-replicationnote": "لطفاً پام کې وساتئ چې په ټولو ويکي گانو کې ستاسې د بدلونونو په ښکاره کېدلو کې يو څو دقيقې وخت لگېږي.",
 	"unconnectedpages": "توکو سره ناتړلي مخونه",
 	"unconnectedpages-summary": "په دې مخ د هغو مخونو لړليک دی چې بل اومتوک سره لا نه دي تړل شوي (په نومتشيالونو کې چې د تړل شويو توکو ملاتړ کوي). دا لړليک د مخښکته مخ پېژند له مخې اوډل شوی چې نوي مخونه په سر کې راشي.",
 	"wikibase-unconnectedpages-submit": "ورځه",

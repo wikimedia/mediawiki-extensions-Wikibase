@@ -561,6 +561,7 @@
 	"apihelp-wbsetqualifier-example-1": "设置属性P1指定声称的限定符为字符串值GdyjxP8I6XB3",
 	"apihelp-wbsetreference-description": "创建一个参考文献或设置现有参考文献的值。",
 	"apihelp-wbsetreference-param-statement": "识别用于已在设置中的参考资料的声明的GUID",
+	"apihelp-wbsetreference-param-snaks": "要设置参考文献的snak。指向包含对应属性snak的数组，带属性ID的JSON对象",
 	"apihelp-wbsetreference-param-snaks-order": "snak的方向。属性ID字符串的JSON阵列",
 	"apihelp-wbsetreference-param-reference": "应被更新的参考文献的哈希值。可选。当不提供时，一个新参考文献会被创建",
 	"apihelp-wbsetreference-param-summary": "编辑摘要。\n将按照自动生成的评论。自动评论与摘要的长度限制是260个字符。需要小心任何超出上述限定的东西将被裁剪掉。",
