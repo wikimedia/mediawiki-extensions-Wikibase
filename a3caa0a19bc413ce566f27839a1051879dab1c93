@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_3f82cacd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-04T16:11:57Z",
+      "side": 1,
+      "message": "\"Mode\" vs. \"more\". I do this all the time.",
+      "revId": "a3caa0a19bc413ce566f27839a1051879dab1c93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
