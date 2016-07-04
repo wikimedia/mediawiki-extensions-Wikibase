@@ -13,6 +13,7 @@ local entity = {}
 local metatable = {}
 local methodtable = {}
 local util = require 'libraryUtil'
+local checkType = util.checkType
 local checkTypeMulti = util.checkTypeMulti
 
 metatable.__index = methodtable
@@ -139,6 +140,9 @@ end
 -- @param {string} propertyLabelOrId
 -- @param {table} [acceptableRanks]
 methodtable.formatPropertyValues = function( entity, propertyLabelOrId, acceptableRanks )
+	checkType( 'formatPropertyValues', 1, propertyLabelOrId, 'string' )
+	checkTypeMulti( 'formatPropertyValues', 2, acceptableRanks, { 'table', 'nil' } )
+
 	acceptableRanks = acceptableRanks or nil
 
 	local formatted = php.formatPropertyValues(

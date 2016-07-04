@@ -68,8 +68,8 @@ local function testGetProperties()
 	return getNewTestItem():getProperties()
 end
 
-local function testFormatPropertyValues( propertyId )
-	return getNewTestItem():formatPropertyValues( propertyId )
+local function testFormatPropertyValues( propertyId, acceptableRanks )
+	return getNewTestItem():formatPropertyValues( propertyId, acceptableRanks )
 end
 
 local function getClaimRank()
@@ -187,9 +187,13 @@ local tests = {
 	{ name = 'mw.wikibase.entity.getProperties', func = testGetProperties,
 	  expect = { { 'P4321', 'P321' } }
 	},
-	{ name = 'mw.wikibase.entity.formatPropertyValues', func = testFormatPropertyValues,
+	{ name = 'mw.wikibase.entity.formatPropertyValues bad param 1', func = testFormatPropertyValues,
 	  args = { function() end },
 	  expect = "bad argument #1 to 'formatPropertyValues' (string expected, got function)"
+	},
+	{ name = 'mw.wikibase.entity.formatPropertyValues bad param 2', func = testFormatPropertyValues,
+	  args = { 'Q123', function() end },
+	  expect = "bad argument #2 to 'formatPropertyValues' (table or nil expected, got function)"
 	},
 	{ name = 'mw.wikibase.entity.claimRanks', func = getClaimRank,
 	  expect = { 2 }
