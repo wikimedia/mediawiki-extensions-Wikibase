@@ -36,7 +36,7 @@
 	"wikibase-entitytermsforlanguagelistview-label": "Label",
 	"wikibase-entitytermsforlanguagelistview-language": "Language",
 	"wikibase-entitytermsforlanguagelistview-more": "More languages",
-	"wikibase-entitytermsforlanguagelistview-less": "Less languages",
+	"wikibase-entitytermsforlanguagelistview-less": "Fewer languages",
 	"wikibase-label-empty": "No label defined",
 	"wikibase-label-edit-placeholder": "enter a label",
 	"wikibase-label-edit-placeholder-language-aware": "enter a label in $1",
