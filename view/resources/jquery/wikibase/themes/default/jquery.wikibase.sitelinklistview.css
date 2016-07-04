@@ -35,7 +35,10 @@
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-siteid-container .wikibase-sitelinkview-siteid {
 	background: none;
+	display: inline-block;
+	min-width: 1.5em;
 	padding: 0 0.2em 0 0;
+	text-align: center;
 }
 
 .wikibase-sitelinklistview .wikibase-sitelinkview .wikibase-sitelinkview-link {
