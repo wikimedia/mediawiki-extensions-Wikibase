@@ -162,7 +162,7 @@
 	"wikibase-newproperty-datatype": "Data type:",
 	"wikibase-newproperty-invalid-datatype": "Invalid data type specified.",
 	"special-newitem": "Create a new item",
-	"wikibase-newitem-summary": "Make sure to [[Special:ItemByTitle|check if the item already exists]]!<br />You should create a [[Help:Label|label]] and a [[Help:Description|description]] for all new items.",
+	"wikibase-newitem-summary": "Make sure to [[Special:Search|check if the item already exists]]!<br />You should create a [[Help:Label|label]] and a [[Help:Description|description]] for all new items.",
 	"wikibase-newitem-fieldset": "Create a new item",
 	"wikibase-newitem-site": "Site of the first linked page",
 	"wikibase-newitem-page": "Name of the first linked page",
