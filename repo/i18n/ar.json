@@ -145,7 +145,7 @@
 	"wikibase-newproperty-datatype": "نوع البيانات:",
 	"wikibase-newproperty-invalid-datatype": "نوع بيانات غير صحيح تم تحديده.",
 	"special-newitem": "إنشاء عنصر جديد",
-	"wikibase-newitem-summary": "تأكد إن كان [[Special:ItemByTitle|العنصر موجوداً]]!<br />عليك أن تنشئ  [[Help:Label|وسماً]] و [[Help:Description|وصفاً]] لكل الخصائص الجديدة.",
+	"wikibase-newitem-summary": "تأكد إن كان [[Special:Search|العنصر موجوداً]]!<br />عليك أن تنشئ  [[Help:Label|وسماً]] و [[Help:Description|وصفاً]] لكل الخصائص الجديدة.",
 	"wikibase-newitem-fieldset": "أنشئ عنصر جديد",
 	"wikibase-newitem-site": "موقع أول صفحة مرتبطة",
 	"wikibase-newitem-page": "اسم أول صفحة مرتبطة",

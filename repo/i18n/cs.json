@@ -159,7 +159,7 @@
 	"wikibase-newproperty-datatype": "Datový typ:",
 	"wikibase-newproperty-invalid-datatype": "Zadán neplatný datový typ.",
 	"special-newitem": "Vytvořit novou položku",
-	"wikibase-newitem-summary": "Nezapomeňte [[Special:ItemByTitle|zkontrolovat, zda položka již neexistuje]]!<br />Pro všechny nové položky byste měli vytvořit [[Help:Label|štítek]] a [[Help:Description|popis]].",
+	"wikibase-newitem-summary": "Nezapomeňte [[Special:Search|zkontrolovat, zda položka již neexistuje]]!<br />Pro všechny nové položky byste měli vytvořit [[Help:Label|štítek]] a [[Help:Description|popis]].",
 	"wikibase-newitem-fieldset": "Vytvořit novou položku",
 	"wikibase-newitem-site": "Projekt první propojené položky",
 	"wikibase-newitem-page": "Jméno první odkazované stránky",

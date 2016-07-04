@@ -144,7 +144,7 @@
 	"wikibase-newproperty-datatype": "Tietotyyppi:",
 	"wikibase-newproperty-invalid-datatype": "Virheellinen tietotyyppi määritetty.",
 	"special-newitem": "Luo uusi kohde",
-	"wikibase-newitem-summary": "[[Special:ItemByTitle|Tarkista, onko kohde jo olemassa]]!<br />Sinun tulee lisätä [[Help:Label|nimi]] ja [[Help:Description|kuvaus]] kaikille uusille kohteille.",
+	"wikibase-newitem-summary": "[[Special:Search|Tarkista, onko kohde jo olemassa]]!<br />Sinun tulee lisätä [[Help:Label|nimi]] ja [[Help:Description|kuvaus]] kaikille uusille kohteille.",
 	"wikibase-newitem-fieldset": "Luo uusi kohde",
 	"wikibase-newitem-site": "Sivusto ensimmäisenä linkitettävälle sivulle",
 	"wikibase-newitem-page": "Nimi ensimmäisenä linkitettävälle sivulle",

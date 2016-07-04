@@ -172,7 +172,7 @@
 	"wikibase-newproperty-datatype": "数据类型：",
 	"wikibase-newproperty-invalid-datatype": "指定的数据类型无效。",
 	"special-newitem": "创建新项",
-	"wikibase-newitem-summary": "请务必[[Special:ItemByTitle|检查该项是否已经存在]]！<br />您应该为所有新项创建一个[[Help:Label|标签]]和一个[[Help:Description|说明]]。",
+	"wikibase-newitem-summary": "请务必[[Special:Search|检查该项是否已经存在]]！<br />您应该为所有新项创建一个[[Help:Label|标签]]和一个[[Help:Description|说明]]。",
 	"wikibase-newitem-fieldset": "创建新项",
 	"wikibase-newitem-site": "第一链接页面的网站",
 	"wikibase-newitem-page": "第一链接页面的名称",

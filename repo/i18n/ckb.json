@@ -63,7 +63,7 @@
 	"wikibase-newproperty-fieldset": "تایبەتمەندییەکی نوێ دروست بکە",
 	"wikibase-newproperty-datatype": "جۆری دراوە:",
 	"special-newitem": "بەندێکی نوێ دروست بکە",
-	"wikibase-newitem-summary": "دڵنیا بە [[Special:ItemByTitle|بەندەکە ھەر ئێستا بوونی نییە]]!<br /> تۆ دەبێ [[Help:Label|سەرناو]]ێک و [[Help:Description|شیکردنەوە]]یەک بۆ ھەموو بەندەکان دروست بکەی.",
+	"wikibase-newitem-summary": "دڵنیا بە [[Special:Search|بەندەکە ھەر ئێستا بوونی نییە]]!<br /> تۆ دەبێ [[Help:Label|سەرناو]]ێک و [[Help:Description|شیکردنەوە]]یەک بۆ ھەموو بەندەکان دروست بکەی.",
 	"wikibase-newitem-fieldset": "بەندێکی نوێ دروست بکە",
 	"wikibase-newitem-site": "پێگەی یەکەم پەڕەی بەستەردراو",
 	"wikibase-newitem-page": "ناوی یەکەم پەڕەی بەستەردراو",

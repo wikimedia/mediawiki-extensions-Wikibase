@@ -153,7 +153,7 @@
 	"wikibase-newproperty-datatype": "Tipo de datos:",
 	"wikibase-newproperty-invalid-datatype": "O tipo de datos especificado non é válido.",
 	"special-newitem": "Crear un novo elemento",
-	"wikibase-newitem-summary": "Asegúrese de [[Special:ItemByTitle|comprobar se o elemento xa existe]]!<br />Debería crear unha [[Help:Label|etiqueta]] e mais unha [[Help:Description|descrición]] para todos os elementos novos.",
+	"wikibase-newitem-summary": "Asegúrese de [[Special:Search|comprobar se o elemento xa existe]]!<br />Debería crear unha [[Help:Label|etiqueta]] e mais unha [[Help:Description|descrición]] para todos os elementos novos.",
 	"wikibase-newitem-fieldset": "Crear un novo elemento",
 	"wikibase-newitem-site": "Sitio da primeira páxina ligada",
 	"wikibase-newitem-page": "Nome da primeira páxina ligada",

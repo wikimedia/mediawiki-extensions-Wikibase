@@ -152,7 +152,7 @@
 	"wikibase-newproperty-datatype": "Kiểu dữ liệu:",
 	"wikibase-newproperty-invalid-datatype": "Đã định rõ một kiểu dữ liệu không hợp lệ.",
 	"special-newitem": "Tạo khoản mục mới",
-	"wikibase-newitem-summary": "Hãy nhớ [[Special:ItemByTitle|kiểm tra thuộc tính này có tồn tại chưa]]!<br />Hãy đặt [[Help:Label|nhãn]] và [[Help:Description|miêu tả]] cho mọi thuộc tính mới.",
+	"wikibase-newitem-summary": "Hãy nhớ [[Special:Search|kiểm tra thuộc tính này có tồn tại chưa]]!<br />Hãy đặt [[Help:Label|nhãn]] và [[Help:Description|miêu tả]] cho mọi thuộc tính mới.",
 	"wikibase-newitem-fieldset": "Tạo khoản mục mới",
 	"wikibase-newitem-site": "Dịch vụ của trang liên kết đầu tiên",
 	"wikibase-newitem-page": "Tên của trang liên kết đầu tiên",

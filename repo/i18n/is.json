@@ -145,7 +145,7 @@
 	"wikibase-newproperty-datatype": "Gagnagerð:",
 	"wikibase-newproperty-invalid-datatype": "Ógild gagnagerð tilgreind.",
 	"special-newitem": "Stofna nýjan hlut",
-	"wikibase-newitem-summary": "Sjáðu til þess að þú [[Special:ItemByTitle|athugir hvort hluturinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Description|merkimiða]] og [[Help:Label|lýsingu]] fyrir alla hluti.",
+	"wikibase-newitem-summary": "Sjáðu til þess að þú [[Special:Search|athugir hvort hluturinn sé þegar til staðar]]!<br />Þú ættir að búa til [[Help:Description|merkimiða]] og [[Help:Label|lýsingu]] fyrir alla hluti.",
 	"wikibase-newitem-fieldset": "Búa til nýjan hlut",
 	"wikibase-newitem-site": "Vefsíða fyrsta vefsvæðistengilsins",
 	"wikibase-newitem-page": "Nafn fyrsta vefsvæðistengilsins",

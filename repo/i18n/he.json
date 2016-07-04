@@ -155,7 +155,7 @@
 	"wikibase-newproperty-datatype": "סוג נתונים:",
 	"wikibase-newproperty-invalid-datatype": "צוין סוג נתונים בלתיֹ־תקין.",
 	"special-newitem": "יצירת פריט חדש",
-	"wikibase-newitem-summary": "נא [[Special:ItemByTitle|לבדוק אם הפריט כבר קיים]]!<br />כדאי ליצור [[Help:Label|תווית]] ו[[Help:Description|תיאור]] לכל הפריטים החדשים.",
+	"wikibase-newitem-summary": "נא [[Special:Search|לבדוק אם הפריט כבר קיים]]!<br />כדאי ליצור [[Help:Label|תווית]] ו[[Help:Description|תיאור]] לכל הפריטים החדשים.",
 	"wikibase-newitem-fieldset": "יצירת פריט חדש",
 	"wikibase-newitem-site": "האתר של הדף המקושר הראשון",
 	"wikibase-newitem-page": "שם הדף המקושר הראשון",

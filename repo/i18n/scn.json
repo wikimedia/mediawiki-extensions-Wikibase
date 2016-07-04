@@ -136,7 +136,7 @@
 	"wikibase-newproperty-datatype": "Tipu di datu:",
 	"wikibase-newproperty-invalid-datatype": "Spicificatu nu tipu di datu nun vàlidu.",
 	"special-newitem": "Criazzioni dûn suggettu novu",
-	"wikibase-newitem-summary": "Cuntrolla bonu [[Special:ItemByTitle|chi lu suggettu già nun esisti]]!<br />Pi tutti li suggetti novi s'avìssiru a criari n'[[Help:Label|etichetta]] e na [[Help:Description|discrizzioni]].",
+	"wikibase-newitem-summary": "Cuntrolla bonu [[Special:Search|chi lu suggettu già nun esisti]]!<br />Pi tutti li suggetti novi s'avìssiru a criari n'[[Help:Label|etichetta]] e na [[Help:Description|discrizzioni]].",
 	"wikibase-newitem-fieldset": "Criazzioni dûn suggettu novu",
 	"wikibase-newitem-site": "Situ dâ prima pàggina culligata",
 	"wikibase-newitem-page": "Nomu dâ prima pàggina culligata",

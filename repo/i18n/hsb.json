@@ -94,7 +94,7 @@
 	"wikibase-newproperty-datatype": "Datowy typ:",
 	"wikibase-newproperty-invalid-datatype": "Njepłaćiwy datowy typ podaty.",
 	"special-newitem": "Nowy element wutworić",
-	"wikibase-newitem-summary": "Skontroluj, [[Special:ItemByTitle|hač element hižo eksistuje]]!<br />Ty měł [[Help:Label|pomjenowanje]] a [[Help:Description|wopisanje]] za wšě nowe elementy wutworić.",
+	"wikibase-newitem-summary": "Skontroluj, [[Special:Search|hač element hižo eksistuje]]!<br />Ty měł [[Help:Label|pomjenowanje]] a [[Help:Description|wopisanje]] za wšě nowe elementy wutworić.",
 	"wikibase-newitem-fieldset": "Nowy element wutworić",
 	"wikibase-newitem-site": "Sydło prěnjeje wotkazaneje strony",
 	"wikibase-newitem-page": "Mjeno prěnjeje wotkazaneje strony",

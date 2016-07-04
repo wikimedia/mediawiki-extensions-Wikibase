@@ -111,7 +111,7 @@
 	"wikibase-newproperty-datatype": "Sòrt ëd dat:",
 	"wikibase-newproperty-invalid-datatype": "Sòrt ëd dat specificà pa bon.",
 	"special-newitem": "Creé n'element neuv",
-	"wikibase-newitem-summary": "Ch'as visa ëd controlé che l'[[Special:ItemByTitle|element a esista già nen]]!<br /> A dovrìa creé na [[Help:Label|tichëtta]] e na [[Help:Description|descrission]] për tuti ij neuv element.",
+	"wikibase-newitem-summary": "Ch'as visa ëd controlé che l'[[Special:Search|element a esista già nen]]!<br /> A dovrìa creé na [[Help:Label|tichëtta]] e na [[Help:Description|descrission]] për tuti ij neuv element.",
 	"wikibase-newitem-fieldset": "Creé n'element neuv",
 	"wikibase-newitem-site": "Sit dla prima pàgina colegà",
 	"wikibase-newitem-page": "Nòm ëd la prima pàgina colegà",

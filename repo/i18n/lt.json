@@ -153,7 +153,7 @@
 	"wikibase-newproperty-datatype": "Duomenų tipas:",
 	"wikibase-newproperty-invalid-datatype": "Nurodytas neteisingas duomenų tipas.",
 	"special-newitem": "Sukurti naują įrašą",
-	"wikibase-newitem-summary": "Įsitikinkite, kad [[Special:ItemByTitle|pažymėjote, ar elementas jau egzistuoja]]!<br />\nJūs turėtumėte sukurti [[Help:Label|žymę]] ir [[Help:Description|aprašymą]] kiekvienam naujam elementui.",
+	"wikibase-newitem-summary": "Įsitikinkite, kad [[Special:Search|pažymėjote, ar elementas jau egzistuoja]]!<br />\nJūs turėtumėte sukurti [[Help:Label|žymę]] ir [[Help:Description|aprašymą]] kiekvienam naujam elementui.",
 	"wikibase-newitem-fieldset": "Sukurti naują įrašą",
 	"wikibase-newitem-site": "Pirmo susieto puslapio svetainė",
 	"wikibase-newitem-page": "Pirmo susieto puslapio pavadinimas",

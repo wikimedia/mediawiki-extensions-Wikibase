@@ -103,7 +103,7 @@
 	"wikibase-newproperty-datatype": "Vrsta podatka:",
 	"wikibase-newproperty-invalid-datatype": "Naznačena je nevažeća vrsta podatka.",
 	"special-newitem": "Nova stavka",
-	"wikibase-newitem-summary": "Obavezno proverite [[Special:ItemByTitle|da li stavka već postoji]]!<br />Trebalo bi da dodate [[Help:Label|naziv]] i [[Help:Description|opis]] za sve nove stavke.",
+	"wikibase-newitem-summary": "Obavezno proverite [[Special:Search|da li stavka već postoji]]!<br />Trebalo bi da dodate [[Help:Label|naziv]] i [[Help:Description|opis]] za sve nove stavke.",
 	"wikibase-newitem-fieldset": "Pravljenje nove stavke",
 	"wikibase-newitem-site": "Sajt prve povezane stranice",
 	"wikibase-newitem-page": "Naziv prve povezane stranice",

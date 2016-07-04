@@ -170,7 +170,7 @@
 	"wikibase-newproperty-datatype": "Datentyp:",
 	"wikibase-newproperty-invalid-datatype": "Es wurde ein ungültiger Datentyp angegeben.",
 	"special-newitem": "Ein neues Datenobjekt erstellen",
-	"wikibase-newitem-summary": "Überprüfe, [[Special:ItemByTitle|ob das Objekt bereits vorhanden ist]]!<br />Du solltest eine [[Help:Label|Bezeichnung]] und eine [[Help:Description|Beschreibung]] für alle neuen Objekte erstellen.",
+	"wikibase-newitem-summary": "Überprüfe, [[Special:Search|ob das Objekt bereits vorhanden ist]]!<br />Du solltest eine [[Help:Label|Bezeichnung]] und eine [[Help:Description|Beschreibung]] für alle neuen Objekte erstellen.",
 	"wikibase-newitem-fieldset": "Ein neues Datenobjekt erstellen",
 	"wikibase-newitem-site": "Website der ersten verlinkten Seite",
 	"wikibase-newitem-page": "Titel der ersten verlinkten Seite",

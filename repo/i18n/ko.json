@@ -144,7 +144,7 @@
 	"wikibase-newproperty-datatype": "데이터 유형:",
 	"wikibase-newproperty-invalid-datatype": "지정한 데이터 형식이 잘못되었습니다.",
 	"special-newitem": "새 항목 만들기",
-	"wikibase-newitem-summary": "[[Special:ItemByTitle|항목이 이미 존재하는지 확인]]해야 합니다!<br />모든 새 항목에 대한 [[Help:Label|레이블]]과 [[Help:Description|설명]]을 만들어야 합니다.",
+	"wikibase-newitem-summary": "[[Special:Search|항목이 이미 존재하는지 확인]]해야 합니다!<br />모든 새 항목에 대한 [[Help:Label|레이블]]과 [[Help:Description|설명]]을 만들어야 합니다.",
 	"wikibase-newitem-fieldset": "새 항목 만들기",
 	"wikibase-newitem-site": "첫 링크한 문서의 사이트",
 	"wikibase-newitem-page": "첫 링크한 문서의 이름",

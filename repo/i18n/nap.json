@@ -148,7 +148,7 @@
 	"wikibase-newproperty-datatype": "Tipo 'e dato:",
 	"wikibase-newproperty-invalid-datatype": "Specificato nu tipo 'e dato nun valido.",
 	"special-newitem": "Crèa n'elemento nuovo nuovo",
-	"wikibase-newitem-summary": "Assicurateve ca [[Special:ItemByTitle|l'elemento fosse prisente ancora ncopp'a Wikidata]]!<br />Nzertàte n'[[Help:Label|etichetta]] e la [[Help:Description|descrizione]] pe' tutte nuove elemente.",
+	"wikibase-newitem-summary": "Assicurateve ca [[Special:Search|l'elemento fosse prisente ancora ncopp'a Wikidata]]!<br />Nzertàte n'[[Help:Label|etichetta]] e la [[Help:Description|descrizione]] pe' tutte nuove elemente.",
 	"wikibase-newitem-fieldset": "Crèa n'elemento nuovo nuovo",
 	"wikibase-newitem-site": "Sito d' 'a primma paggena cullegata",
 	"wikibase-newitem-page": "Nomme d' 'a primma paggena cullegata",

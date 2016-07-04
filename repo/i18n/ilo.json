@@ -147,7 +147,7 @@
 	"wikibase-newproperty-datatype": "Kita ti datos:",
 	"wikibase-newproperty-invalid-datatype": "Saan a husto a kita ti datos ti nainaganan.",
 	"special-newitem": "Agpartuat ti baro a banag",
-	"wikibase-newitem-summary": "Siguraduem a [[Special:ItemByTitle|kitaen no addan ti maysa a banag]]!<br />Nasken a partuatem ti maysa nga [[Help:Label|etiketa]] ken maysa a [[Help:Description|deskripsion]] para kadagiti amin a banag.",
+	"wikibase-newitem-summary": "Siguraduem a [[Special:Search|kitaen no addan ti maysa a banag]]!<br />Nasken a partuatem ti maysa nga [[Help:Label|etiketa]] ken maysa a [[Help:Description|deskripsion]] para kadagiti amin a banag.",
 	"wikibase-newitem-fieldset": "Agpartuat ti baro a banag",
 	"wikibase-newitem-site": "Sitio ti immuna a naisilpo a panid",
 	"wikibase-newitem-page": "Nagan ti immuna a naisilpo a panid",

@@ -148,7 +148,7 @@
 	"wikibase-newproperty-datatype": "Tipu de datu:",
 	"wikibase-newproperty-invalid-datatype": "El tipu de datos especificáu ye inválidu.",
 	"special-newitem": "Crear un nuevu elementu",
-	"wikibase-newitem-summary": "Asegúrese de [[Special:ItemByTitle|comprobar que l'elementu yá exista]]!<br />Tendría de crear una [[Help:Label|etiqueta]] y una [[Help:Description|descripción]] pa tolos elementos nuevos.",
+	"wikibase-newitem-summary": "Asegúrese de [[Special:Search|comprobar que l'elementu yá exista]]!<br />Tendría de crear una [[Help:Label|etiqueta]] y una [[Help:Description|descripción]] pa tolos elementos nuevos.",
 	"wikibase-newitem-fieldset": "Crear un nuevu elementu",
 	"wikibase-newitem-site": "Sitiu de la primera páxina enllazada",
 	"wikibase-newitem-page": "Nome de la primera páxina enllazada",

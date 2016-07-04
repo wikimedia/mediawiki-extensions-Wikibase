@@ -150,7 +150,7 @@
 	"wikibase-newproperty-datatype": "Typ danych:",
 	"wikibase-newproperty-invalid-datatype": "Podano nieprawidłowy typ danych.",
 	"special-newitem": "Utwórz nowy element",
-	"wikibase-newitem-summary": "Upewnij się czy [[Special:ItemByTitle|dany element już istnieje]]!<br />Dla wszystkich nowych elementów powinno się utworzyć [[Help:Label|etykietę]] oraz [[Help:Description|opis]].",
+	"wikibase-newitem-summary": "Upewnij się czy [[Special:Search|dany element już istnieje]]!<br />Dla wszystkich nowych elementów powinno się utworzyć [[Help:Label|etykietę]] oraz [[Help:Description|opis]].",
 	"wikibase-newitem-fieldset": "Utwórz nowy element",
 	"wikibase-newitem-site": "Położenie pierwszej linkowanej strony",
 	"wikibase-newitem-page": "Nazwa pierwszej linkowanej strony",

@@ -155,7 +155,7 @@
 	"wikibase-newproperty-datatype": "資料型態：",
 	"wikibase-newproperty-invalid-datatype": "指定的資料型態無效。",
 	"special-newitem": "建立一個新項目",
-	"wikibase-newitem-summary": "請確定己檢查 [[Special:ItemByTitle|項目是否已存在]]！<br />您應該對所有的新項目建立 [[Help:Label|標籤]] 和 [[Help:Description|描述]]。",
+	"wikibase-newitem-summary": "請確定己檢查 [[Special:Search|項目是否已存在]]！<br />您應該對所有的新項目建立 [[Help:Label|標籤]] 和 [[Help:Description|描述]]。",
 	"wikibase-newitem-fieldset": "建立一個新項目",
 	"wikibase-newitem-site": "第一個連結頁面的網站",
 	"wikibase-newitem-page": "第一個連結頁面的名稱",

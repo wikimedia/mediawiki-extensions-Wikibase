@@ -116,7 +116,7 @@
 	"wikibase-newproperty-datatype": "Datatype:",
 	"wikibase-newproperty-invalid-datatype": "Ugyldig datatype angivet.",
 	"special-newitem": "Opret et nyt emne",
-	"wikibase-newitem-summary": "Kontroller om [[Special:ItemByTitle|emnet allerede findes]]!<br />Du bør lave en [[Help:Label|etiket]] og en [[Help:Description|beskrivelse]] for alle nye emner.",
+	"wikibase-newitem-summary": "Kontroller om [[Special:Search|emnet allerede findes]]!<br />Du bør lave en [[Help:Label|etiket]] og en [[Help:Description|beskrivelse]] for alle nye emner.",
 	"wikibase-newitem-fieldset": "Opret et nyt emne",
 	"wikibase-newitem-site": "Webstedet for den første sidehenvisning",
 	"wikibase-newitem-page": "Navnet på den sidehenvisning",

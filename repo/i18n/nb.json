@@ -144,7 +144,7 @@
 	"wikibase-newproperty-datatype": "Datatype:",
 	"wikibase-newproperty-invalid-datatype": "En ugyldig datatype er angitt.",
 	"special-newitem": "Lag et nytt element",
-	"wikibase-newitem-summary": "Sjekk først at [[Special:ItemByTitle|elementet ikke finnes fra før]]!<br />For alle nye elementer bør du fylle inn en [[Help:Label|etikett]] og en kort [[Help:Description|beskrivelse]].",
+	"wikibase-newitem-summary": "Sjekk først at [[Special:Search|elementet ikke finnes fra før]]!<br />For alle nye elementer bør du fylle inn en [[Help:Label|etikett]] og en kort [[Help:Description|beskrivelse]].",
 	"wikibase-newitem-fieldset": "Opprettet et nytt element",
 	"wikibase-newitem-site": "Nettsted for første nettstedlenke",
 	"wikibase-newitem-page": "Tittel for første nettstedlenke",

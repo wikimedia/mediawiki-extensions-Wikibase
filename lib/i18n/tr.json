@@ -14,6 +14,7 @@
 	},
 	"specialpages-group-wikibase": "Wikibase veri deposu",
 	"wikibase-error-unexpected": "Hata: $1.",
+	"wikibase-error-save-generic": "Kayıt esnasında bir hata oluştuğundan değşiklikleriniz kaydedilemedi.",
 	"wikibase-timedetails-timezone": "Saat dilimi",
 	"wikibase-timedetails-calendar": "Takvim",
 	"wikibase-timedetails-precision": "Kesinlik",

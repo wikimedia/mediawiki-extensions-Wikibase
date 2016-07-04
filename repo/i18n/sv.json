@@ -153,7 +153,7 @@
 	"wikibase-newproperty-datatype": "Datatyp:",
 	"wikibase-newproperty-invalid-datatype": "Ogiltig datatyp angiven.",
 	"special-newitem": "Skapa ett nytt objekt",
-	"wikibase-newitem-summary": "Försäkra dig om att [[Special:ItemByTitle|detta objekt inte redan existerar]]!<br />Du borde skapa en [[Help:Label|etikett]] och en [[Help:Description|beskrivning]] för alla nya objekt.",
+	"wikibase-newitem-summary": "Försäkra dig om att [[Special:Search|detta objekt inte redan existerar]]!<br />Du borde skapa en [[Help:Label|etikett]] och en [[Help:Description|beskrivning]] för alla nya objekt.",
 	"wikibase-newitem-fieldset": "Skapa ett nytt objekt",
 	"wikibase-newitem-site": "Webbplatsen till den första länkade sidan",
 	"wikibase-newitem-page": "Namnet på den första länkade sidan",

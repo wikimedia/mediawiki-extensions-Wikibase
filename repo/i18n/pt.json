@@ -147,7 +147,7 @@
 	"wikibase-newproperty-datatype": "Tipo de dados:",
 	"wikibase-newproperty-invalid-datatype": "Tipo de dados especificado inválido.",
 	"special-newitem": "Criar um novo item",
-	"wikibase-newitem-summary": "Por favor, [[Special:ItemByTitle|confira se o item já existe]]!<br />Deve criar um [[Help:Label|rótulo]] e uma [[Help:Description|descrição]] para todos os novos itens.",
+	"wikibase-newitem-summary": "Por favor, [[Special:Search|confira se o item já existe]]!<br />Deve criar um [[Help:Label|rótulo]] e uma [[Help:Description|descrição]] para todos os novos itens.",
 	"wikibase-newitem-fieldset": "Criar um novo item",
 	"wikibase-newitem-site": "Sítio da primeira página ligada",
 	"wikibase-newitem-page": "Nome da primeira página ligada",

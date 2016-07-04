@@ -105,7 +105,7 @@
 	"wikibase-newproperty-datatype": "Datatype:",
 	"wikibase-newproperty-invalid-datatype": "Ein ugild datatype er oppgjeven.",
 	"special-newitem": "Opprett eit nytt element",
-	"wikibase-newitem-summary": "Gjer deg viss på at ikkje [[Special:ItemByTitle|elementet alt finst]]!<br />Du bør opretta ein [[Help:Label|merkelapp]] og ei [[Help:Description|skildring]] for alle nye element.",
+	"wikibase-newitem-summary": "Gjer deg viss på at ikkje [[Special:Search|elementet alt finst]]!<br />Du bør opretta ein [[Help:Label|merkelapp]] og ei [[Help:Description|skildring]] for alle nye element.",
 	"wikibase-newitem-fieldset": "Opprett eit nytt element",
 	"wikibase-newitem-site": "Nettstaden til den fyrst lenkja sida",
 	"wikibase-newitem-page": "Namnet til den fyrste lenkja sida",

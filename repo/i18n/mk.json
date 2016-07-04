@@ -142,7 +142,7 @@
 	"wikibase-newproperty-datatype": "Податочен тип:",
 	"wikibase-newproperty-invalid-datatype": "Укажан е неважечки податочен тип.",
 	"special-newitem": "Создај нов предмет",
-	"wikibase-newitem-summary": "Не заборавајте да [[Special:ItemByTitle|проверите дали можеби веќе постои ваков предмет]]!<br />Треба да создадете [[Help:Label|натпис]] и [[Help:Description|опис]] за сите нови единици.",
+	"wikibase-newitem-summary": "Не заборавајте да [[Special:Search|проверите дали можеби веќе постои ваков предмет]]!<br />Треба да создадете [[Help:Label|натпис]] и [[Help:Description|опис]] за сите нови единици.",
 	"wikibase-newitem-fieldset": "Создај нов предмет",
 	"wikibase-newitem-site": "Вики на првата сврзана страница",
 	"wikibase-newitem-page": "Име на првата врзана страница",

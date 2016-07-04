@@ -158,7 +158,7 @@
 	"wikibase-newproperty-datatype": "Jenis data:",
 	"wikibase-newproperty-invalid-datatype": "Jenis data tidak sahih tertentu.",
 	"special-newitem": "Buat butir baru",
-	"wikibase-newitem-summary": "Pastikan Anda selalu [[Special:ItemByTitle|memeriksa butir yang akan dimasukkan, siapa tahu data itu sudah ada]]<br />Buatlah [[Help:Label|label]] dan [[Help:Description|pemerian]] untuk semua butir baru.",
+	"wikibase-newitem-summary": "Pastikan Anda selalu [[Special:Search|memeriksa butir yang akan dimasukkan, siapa tahu data itu sudah ada]]<br />Buatlah [[Help:Label|label]] dan [[Help:Description|pemerian]] untuk semua butir baru.",
 	"wikibase-newitem-fieldset": "Buat butir baru",
 	"wikibase-newitem-site": "Situs dari laman tertaut pertama",
 	"wikibase-newitem-page": "Nama dari laman tertaut pertama",

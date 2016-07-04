@@ -129,7 +129,7 @@
 	"wikibase-newproperty-datatype": "উপাত্তের ধরণ:",
 	"wikibase-newproperty-invalid-datatype": "উল্লিখিত ডাটাটাইপ অবৈধ।",
 	"special-newitem": "নতুন আইটেম তৈরি করুন",
-	"wikibase-newitem-summary": "[[Special:ItemByTitle|আইটেমটি আগে থেকেই আছে কিনা তা পরীক্ষা করে]] নিশ্চিত করুন!<br /> সব নতুন আইটেম জন্য আপনার একটি [[Help:Label|লেভেল]] এবং একটি [[Help:Description|বিবরণ]] তৈরি করা উচিত।",
+	"wikibase-newitem-summary": "[[Special:Search|আইটেমটি আগে থেকেই আছে কিনা তা পরীক্ষা করে]] নিশ্চিত করুন!<br /> সব নতুন আইটেম জন্য আপনার একটি [[Help:Label|লেভেল]] এবং একটি [[Help:Description|বিবরণ]] তৈরি করা উচিত।",
 	"wikibase-newitem-fieldset": "নতুন আইটেম তৈরি করুন",
 	"wikibase-newitem-site": "প্রথম সংযুক্ত পাতার সাইট",
 	"wikibase-newitem-page": "প্রথম সংযুক্ত পাতার নাম",

@@ -97,7 +97,7 @@
 	"wikibase-newproperty-datatype": "Tipo de dato:",
 	"wikibase-newproperty-invalid-datatype": "Specificà un tipo de dato mia valido",
 	"special-newitem": "Crea un elemento novo",
-	"wikibase-newitem-summary": "Sta tento che [[Special:ItemByTitle|l'elemento no'l ghe sia gnancora su Wikidata]]!<br />Inserisi na [[Help:Label|eticheta]] e la [[Help:Description|descrision]] par tuti i elementi novi.",
+	"wikibase-newitem-summary": "Sta tento che [[Special:Search|l'elemento no'l ghe sia gnancora su Wikidata]]!<br />Inserisi na [[Help:Label|eticheta]] e la [[Help:Description|descrision]] par tuti i elementi novi.",
 	"wikibase-newitem-fieldset": "Crea un elemento novo",
 	"wikibase-newitem-site": "Sito de la prima pagina colegà",
 	"wikibase-newitem-page": "Nome de la prima pagina colegà",

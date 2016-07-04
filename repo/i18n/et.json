@@ -145,7 +145,7 @@
 	"wikibase-newproperty-datatype": "Andmetüüp:",
 	"wikibase-newproperty-invalid-datatype": "Määratud vigane andmetüüp.",
 	"special-newitem": "Uue üksuse loomine",
-	"wikibase-newitem-summary": "Kontrolli kindlasti, ega [[Special:ItemByTitle|üksus juba olemas pole]]!<br />Kõigi uute üksuste juurde tuleks lisada [[Help:Label|silt]] ja [[Help:Description|kirjeldus]].",
+	"wikibase-newitem-summary": "Kontrolli kindlasti, ega [[Special:Search|üksus juba olemas pole]]!<br />Kõigi uute üksuste juurde tuleks lisada [[Help:Label|silt]] ja [[Help:Description|kirjeldus]].",
 	"wikibase-newitem-fieldset": "Uue üksuse loomine",
 	"wikibase-newitem-site": "Esimese lingitud lehekülje võrgukoht",
 	"wikibase-newitem-page": "Esimese lingitud lehekülje pealkiri",

@@ -167,7 +167,7 @@
 	"wikibase-newproperty-datatype": "نوع داده:",
 	"wikibase-newproperty-invalid-datatype": "نوع داده غیر معتبر است",
 	"special-newitem": "ایجاد یک آیتم تازه",
-	"wikibase-newitem-summary": "مطمئن شوید که [[Special:ItemByTitle|اگر آیتم مربوطه از قبل وجود داشته باشد]]!<br /> شما باید یک [[Help:Label|برچسب]] و [[Help:Description|توضیح]] برای همهٔ آیتم‌های تازه ایجاد کنید.",
+	"wikibase-newitem-summary": "مطمئن شوید که [[Special:Search|اگر آیتم مربوطه از قبل وجود داشته باشد]]!<br /> شما باید یک [[Help:Label|برچسب]] و [[Help:Description|توضیح]] برای همهٔ آیتم‌های تازه ایجاد کنید.",
 	"wikibase-newitem-fieldset": "ایجاد یک آیتم تازه",
 	"wikibase-newitem-site": "وب‌گاه نخستین صفحهٔ پیوندداده‌شده",
 	"wikibase-newitem-page": "نام نخستین صفحهٔ پیوندداده‌شده",

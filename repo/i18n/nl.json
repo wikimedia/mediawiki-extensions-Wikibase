@@ -155,7 +155,7 @@
 	"wikibase-newproperty-datatype": "Gegevenstype:",
 	"wikibase-newproperty-invalid-datatype": "Er is een ongeldig gegevenstype opgegeven.",
 	"special-newitem": "Nieuw item aanmaken",
-	"wikibase-newitem-summary": "Zorg ervoor dat u [[Special:ItemByTitle|controleert of het item al bestaat]]!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe items.",
+	"wikibase-newitem-summary": "Zorg ervoor dat u [[Special:Search|controleert of het item al bestaat]]!<br />U moet een [[Help:Label|label]] en een [[Help:Description|beschrijving]] opgeven voor alle nieuwe items.",
 	"wikibase-newitem-fieldset": "Nieuw item aanmaken",
 	"wikibase-newitem-site": "Site van de eerste gekoppelde pagina",
 	"wikibase-newitem-page": "Naam van de eerste gekoppelde pagina",

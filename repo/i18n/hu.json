@@ -144,7 +144,7 @@
 	"wikibase-newproperty-datatype": "Adattípus:",
 	"wikibase-newproperty-invalid-datatype": "Érvénytelen adattípus.",
 	"special-newitem": "Új fogalom létrehozása",
-	"wikibase-newitem-summary": "Ellenőrizd, hogy [[Special:ItemByTitle|nem létezik-e már]] az elem!<br />Ha még új vagy a projektben, további információkat a [[Help:Label|címkékről]] és a [[Help:Description|leírásokról]] szóló segítségoldalakon találsz.",
+	"wikibase-newitem-summary": "Ellenőrizd, hogy [[Special:Search|nem létezik-e már]] az elem!<br />Ha még új vagy a projektben, további információkat a [[Help:Label|címkékről]] és a [[Help:Description|leírásokról]] szóló segítségoldalakon találsz.",
 	"wikibase-newitem-fieldset": "Új fogalom létrehozása",
 	"wikibase-newitem-site": "Az első kapcsolt lapot tartalmazó wiki",
 	"wikibase-newitem-page": "Az első kapcsolt lap neve",

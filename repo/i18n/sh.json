@@ -84,7 +84,7 @@
 	"wikibase-newproperty-datatype": "Tip podatka:",
 	"wikibase-newproperty-invalid-datatype": "Nevaljani tip podatka specificiran",
 	"special-newitem": "Stvorite novu stavku",
-	"wikibase-newitem-summary": "Svakako [[Special:ItemByTitle|da li stavka već postoji]]!<br />Trebali biste stvoriti [[Help:Label|oznaku]] i [[Help:Description|opis]] za sve nove stavke.",
+	"wikibase-newitem-summary": "Svakako [[Special:Search|da li stavka već postoji]]!<br />Trebali biste stvoriti [[Help:Label|oznaku]] i [[Help:Description|opis]] za sve nove stavke.",
 	"wikibase-newitem-fieldset": "Stvorite novu stavku",
 	"wikibase-newitem-site": "Sajt prve povezane stranice",
 	"wikibase-newitem-page": "Imenujte prvu povezanu stranicu",

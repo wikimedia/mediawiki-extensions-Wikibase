@@ -100,7 +100,7 @@
 	"wikibase-newproperty-datatype": "მონაცემის ტიპი:",
 	"wikibase-newproperty-invalid-datatype": "მითითებულია მონაცემთა არასწორი ტიპი.",
 	"special-newitem": "ახალი ელემენტის შექმნა",
-	"wikibase-newitem-summary": "დარწმუნდით, რომ [[Special:ItemByTitle|უკვე არ არსებობს მსგავსი ელემენტი]]!<br />თქვენ უნდა დააყენოთ [[Help:Label|სახელი]] და [[Help:Description|აღწერა]] ყველა ახალი ელემენტისათვის.",
+	"wikibase-newitem-summary": "დარწმუნდით, რომ [[Special:Search|უკვე არ არსებობს მსგავსი ელემენტი]]!<br />თქვენ უნდა დააყენოთ [[Help:Label|სახელი]] და [[Help:Description|აღწერა]] ყველა ახალი ელემენტისათვის.",
 	"wikibase-newitem-fieldset": "ახალი ელემენტის შექმნა",
 	"wikibase-newitem-site": "პირველი დაკავშირებული გვერდის საიტი",
 	"wikibase-newitem-page": "პირველი დაკავშირებული გვერდის სახელი",
