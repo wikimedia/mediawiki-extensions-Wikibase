@@ -55,7 +55,7 @@
 	"wikibase-diffview-alias": "aliases",
 	"wikibase-diffview-description": "description",
 	"wikibase-diffview-link": "links",
-	"wikibase-sitelink-site-edit-placeholder": "site",
+	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "page",
 	"wikibase-alias-edit-placeholder": "enter an alias",
 	"wikibase-label-input-help-message": "Enter the label of this entity in $1.",
