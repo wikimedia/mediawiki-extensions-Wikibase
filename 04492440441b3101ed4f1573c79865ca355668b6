@@ -104,6 +104,24 @@
       "revId": "04492440441b3101ed4f1573c79865ca355668b6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_7f9a9267",
+        "filename": "view/src/ClaimHtmlGenerator.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-04T15:16:45Z",
+      "side": 1,
+      "message": "Sure. This was only meant as a note, not as a blocker.",
+      "parentUuid": "ee011f3e_33904b46",
+      "revId": "04492440441b3101ed4f1573c79865ca355668b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
