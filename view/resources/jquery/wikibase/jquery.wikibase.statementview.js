@@ -168,17 +168,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 			this._createReferencesToggler();
 		}
 
-		var self = this;
 		this._referenceAdder = this.options.getAdder(
-			function() {
-				var listview = self._referencesListview,
-					lia = listview.listItemAdapter();
-
-				listview.enterNewItem().done( function( $referenceview ) {
-					var referenceview = lia.liInstance( $referenceview );
-					referenceview.focus();
-				} );
-			},
+			this._enterNewReference.bind( this ),
 			this.$references,
 			mw.msg( 'wikibase-addreference' )
 		);
@@ -351,21 +342,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 			}
 			self._trigger( 'change' );
 		} )
-		.on( lia.prefixedEvent( 'change.' + this.widgetName ),
-			function( event ) {
-				event.stopPropagation();
-				self._trigger( 'change' );
-			} )
-		.on( 'listviewenternewitem', function( event, $newLi ) {
-			if ( event.target !== $listview[0] ) {
-				return;
-			}
-
-			var liInstance = lia.liInstance( $newLi );
-
-			// Enter first item into the referenceview.
-			liInstance.enterNewItem();
-			self._drawReferencesCounter();
+		.on( lia.prefixedEvent( 'change.' + this.widgetName ), function( event ) {
+			event.stopPropagation();
 			self._trigger( 'change' );
 		} );
 
@@ -542,6 +520,18 @@ $.widget( 'wikibase.statementview', PARENT, {
 			references,
 			this._rankSelector.value()
 		);
+	},
+
+	_enterNewReference: function() {
+		var listview = this._referencesListview,
+			lia = listview.listItemAdapter();
+
+		listview.enterNewItem().done( function( $referenceview ) {
+			var referenceview = lia.liInstance( $referenceview );
+
+			// Enter first item into the referenceview.
+			referenceview.enterNewItem();
+		} ).done( this._drawReferencesCounter.bind( this ) );
 	},
 
 	/**
