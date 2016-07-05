@@ -68,14 +68,16 @@ var createStatementview = function( options, $node ) {
 		guidGenerator: 'I am a ClaimGuidGenerator',
 		locked: 'I am a',
 		predefined: 'I am a',
-		qualifiersListItemAdapter: wb.tests.getMockListItemAdapter(
-			'mytestqualifiersview',
-			function() {
-				this.value = function() {
-					return this.options.value;
-				};
-			}
-		)
+		getQualifiersListItemAdapter: function() {
+			return wb.tests.getMockListItemAdapter(
+				'mytestqualifiersview',
+				function() {
+					this.value = function() {
+						return this.options.value;
+					};
+				}
+			);
+		}
 	}, options || {} );
 
 	$node = $node || $( '<div/>' ).appendTo( 'body' );
