@@ -765,17 +765,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			$sitelinkview
 			.addClass( 'wb-new' )
 			.on( afterStopEditingEvent, function( event, dropValue ) {
-				var siteLink = sitelinkview.value();
-
-				listview.removeItem( $sitelinkview );
-
-				if ( !dropValue && siteLink ) {
-					listview.addItem( siteLink );
-				}
-
-				if ( self.__pendingItems && --self.__pendingItems !== 0 ) {
-					return;
-				}
+				$sitelinkview.removeClass( 'wb-new' );
 
 				self._refreshCounter();
 			} );
@@ -788,7 +778,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 				sitelinkview.startEditing();
 			}
 
-			self.__pendingItems = self.__pendingItems ? self.__pendingItems + 1 : 1;
 			self._trigger( 'change' );
 		} );
 	}
