@@ -91,7 +91,6 @@ $.widget( 'ui.unitsuggester', PARENT, {
 
 		this._term = this.element.val();
 		this._selectedUrl = null;
-		this._cache = {};
 
 		clearTimeout( this._searchTimeoutHandle );
 		this._searchTimeoutHandle = setTimeout( function() {
@@ -140,12 +139,13 @@ $.widget( 'ui.unitsuggester', PARENT, {
 
 	/**
 	 * Create and return the data object for the api call.
+	 *
 	 * @protected
 	 *
 	 * @param {string} term
 	 * @return {Object}
 	 */
-	_getData: function( term ) {
+	_getSearchApiParameters: function( term ) {
 		return {
 			action: 'wbsearchentities',
 			search: term,
@@ -167,13 +167,12 @@ $.widget( 'ui.unitsuggester', PARENT, {
 		var self = this;
 
 		return function( term ) {
-			var deferred = $.Deferred(),
-				data = self._getData( term );
+			var deferred = $.Deferred();
 
 			$.ajax( {
 				url: self.options.vocabularyLookupApiUrl || 'https://www.wikidata.org/w/api.php',
 				dataType: 'jsonp',
-				data: data,
+				data: self._getSearchApiParameters( term ),
 				timeout: self.options.timeout
 			} )
 			.done( function( response ) {
@@ -276,18 +275,18 @@ $.widget( 'ui.unitsuggester', PARENT, {
 		.then( function( suggestions, searchTerm, nextSuggestionOffset ) {
 			var deferred = $.Deferred();
 
-			if ( self._cache[searchTerm] ) {
-				self._cache[searchTerm].suggestions = self._cache[searchTerm].suggestions.concat( suggestions );
-				self._cache[searchTerm].nextSuggestionOffset = nextSuggestionOffset;
+			if ( self._cache.term === searchTerm && self._cache.nextSuggestionOffset ) {
+				self._cache.suggestions = self._cache.suggestions.concat( suggestions );
+				self._cache.nextSuggestionOffset = nextSuggestionOffset;
 			} else {
-				self._cache = {};
-				self._cache[searchTerm] = {
+				self._cache = {
+					term: searchTerm,
 					suggestions: suggestions,
 					nextSuggestionOffset: nextSuggestionOffset
 				};
 			}
 
-			deferred.resolve( self._cache[searchTerm].suggestions, searchTerm );
+			deferred.resolve( self._cache.suggestions, searchTerm );
 			return deferred.promise();
 		} );
 	},
