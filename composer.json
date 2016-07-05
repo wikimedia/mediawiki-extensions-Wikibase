@@ -41,8 +41,7 @@
 		"wikibase/javascript-api": "~1.1",
 		"wikibase/serialization-javascript": "~2.0.5",
 		"diff/diff": "~2.0",
-		"wikimedia/purtle": "~1.0",
-		"wikimedia/assert": "~0.2.2"
+		"wikimedia/purtle": "~1.0"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "0.9.2",
