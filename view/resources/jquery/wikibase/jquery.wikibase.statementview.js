@@ -258,8 +258,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		.on( 'snaklistviewstopediting.' + this.widgetName, function( event, dropValue ) {
 			event.stopPropagation();
 		} )
-		.on( 'snaklistviewchange.' + this.widgetName
-			+ ' listviewafteritemmove.' + this.widgetName,
+		.on( 'snaklistviewchange.' + this.widgetName,
 			function( event ) {
 				event.stopPropagation();
 				self._trigger( 'change' );
