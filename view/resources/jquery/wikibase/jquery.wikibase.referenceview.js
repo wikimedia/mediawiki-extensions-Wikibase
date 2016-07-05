@@ -256,16 +256,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 */
 	_stopEditingReferenceSnaks: function() {
 		var listview = this.$listview.data( 'listview' );
-
-		listview.items().each( function() {
-			listview.removeItem( $( this ) );
-		} );
-
-		if ( this.options.value ) {
-			$.each( this.options.value.getSnaks().getGroupedSnakLists(), function() {
-				listview.addItem( this );
-			} );
-		}
+		listview.value( this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : [] );
 	},
 
 	/**
