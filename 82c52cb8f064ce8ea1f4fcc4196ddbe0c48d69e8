@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_050fb434",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-05T07:18:01Z",
+      "side": 0,
+      "message": "This line does not seem to be correct.",
+      "revId": "82c52cb8f064ce8ea1f4fcc4196ddbe0c48d69e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
