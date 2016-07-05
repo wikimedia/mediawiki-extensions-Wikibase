@@ -348,25 +348,11 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'enterNewItem()', 2, function( assert ) {
+QUnit.test( 'enterNewItem()', 1, function( assert ) {
 	var $sitelinklistview = createSitelinklistview(),
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
-	sitelinklistview.$listview
-	.on( 'listviewenternewitem', function() {
-		assert.ok(
-			true,
-			'Triggered listview\'s "enternewitem" event on the listview node.'
-		);
-	} );
-
 	$sitelinklistview
-	.on( 'listviewenternewitem', function( event, $sitelinkview ) {
-		assert.ok(
-			false,
-			'Triggered listview\'s "enternewitem" event on the sitelinklistview node.'
-		);
-	} )
 	.on( 'sitelinklistviewafterstartediting', function() {
 		assert.ok(
 			true,
