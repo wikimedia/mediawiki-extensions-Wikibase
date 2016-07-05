@@ -336,22 +336,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 			liInstance.enterNewItem();
 			self._drawReferencesCounter();
 			self._trigger( 'change' );
-
-			if ( !liInstance.value() ) {
-				$newLi
-				.on( lia.prefixedEvent( 'afterstopediting' ), function( event, dropValue ) {
-					if ( !dropValue ) {
-						var newReferenceWithHash = liInstance.value();
-
-						// Destroy new reference input form and add reference to list
-						liInstance.destroy();
-						$newLi.remove();
-
-						// Display new reference with final GUID
-						self._addReference( newReferenceWithHash );
-					}
-				} );
-			}
 		} );
 
 		this._createReferencesToggler();
@@ -543,17 +527,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 			this._getReferences(),
 			this._rankSelector.value()
 		);
-	},
-
-	/**
-	 * Adds a `Reference` and renders it in the view.
-	 *
-	 * @private
-	 *
-	 * @param {wikibase.datamodel.Reference} reference
-	 */
-	_addReference: function( reference ) {
-		this._referencesListview.addItem( reference );
 	},
 
 	/**
