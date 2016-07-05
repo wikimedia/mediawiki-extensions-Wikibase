@@ -324,11 +324,10 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @return {jQuery} return.done.$snakview
 	 */
 	enterNewItem: function() {
-		var $snakview = this._listview.addItem();
-
-		this.startEditing();
-
-		return $.Deferred().resolve( $snakview ).promise();
+		var self = this;
+		return this._listview.enterNewItem().done( function() {
+			self.startEditing();
+		} );
 	},
 
 	/**
