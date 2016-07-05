@@ -132,6 +132,8 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 				},
 				function( sitelinkview ) {
 					self.$listview.data( 'listview' ).removeItem( sitelinkview.element );
+					self._refreshCounter();
+					self._trigger( 'change' );
 				}
 			);
 
@@ -173,16 +175,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			].join( ' ' ),
 			function( event ) {
 				event.stopPropagation();
-			}
-		)
-		.on(
-			'listviewitemremoved.' + this.widgetName,
-			function( event, sitelinkview ) {
-				self._refreshCounter();
-				if ( sitelinkview ) {
-					// Do not trigger "change" event when handling empty elements.
-					self._trigger( 'change' );
-				}
 			}
 		);
 	},
