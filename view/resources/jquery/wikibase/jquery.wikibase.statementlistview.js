@@ -201,14 +201,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			$statementview
 			.addClass( 'wb-new' )
 			.one( afterStopEditingEvent, function( event, dropValue ) {
-				var statement = statementview.value();
-
-				self._listview.removeItem( $statementview );
-
-				if ( !dropValue && statement ) {
-					self._listview.addItem( statement );
-				}
-
+				$statementview.removeClass( 'wb-new' );
 				self._trigger( 'afterstopediting', null, [dropValue] );
 			} );
 

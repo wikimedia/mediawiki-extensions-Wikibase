@@ -207,7 +207,7 @@ QUnit.test( 'value with empty reference', function( assert ) {
 	QUnit.stop();
 	statementview.startEditing().done( function() {
 		QUnit.start();
-		statementview._addReference( null );
+		statementview._referenceListview.enterNewItem();
 		assert.ok( statementview.value(), 'value should return a value' );
 	} );
 } );
