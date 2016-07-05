@@ -73,7 +73,7 @@ $.widget( 'wikibase.listview', PARENT, {
 
 	/**
 	 * The DOM elements this `listview`'s element contained when it was initialized. These DOM
-	 * elements are reused in `this.addItem` until the array is empty.
+	 * elements are reused in `this._addLiValue` until the array is empty.
 	 * @property [HTMLElement[]]
 	 * @private
 	 */
@@ -125,9 +125,7 @@ $.widget( 'wikibase.listview', PARENT, {
 			throw new Error( 'Can not change the ListItemAdapter after initialization' );
 		} else if ( key === 'value' ) {
 			this.items().each( function() {
-				var $node = $( this );
-				self._lia.liInstance( $node ).destroy();
-				$node.remove();
+				self._removeItem( $( this ) );
 			} );
 
 			for ( var i = 0; i < value.length; i++ ) {
@@ -160,11 +158,11 @@ $.widget( 'wikibase.listview', PARENT, {
 
 		if ( items === null ) {
 			for ( i = this._reusedItems.length; i--; ) {
-				this.addItem( null );
+				this._addLiValue( null );
 			}
 		} else {
 			for ( i in items ) {
-				this.addItem( items[i] );
+				this._addLiValue( items[i] );
 			}
 		}
 	},
@@ -350,9 +348,14 @@ $.widget( 'wikibase.listview', PARENT, {
 
 		var liValue = this._lia.liInstance( $li ).value();
 
+		this._removeItem( $li );
+
+		this._trigger( 'itemremoved', null, [liValue, $li] );
+	},
+
+	_removeItem: function( $li ) {
 		this._lia.liInstance( $li ).destroy();
 		$li.remove();
-		this._trigger( 'itemremoved', null, [liValue, $li] );
 	},
 
 	/**
@@ -365,7 +368,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 *         `listItemAdapter().liInstance( $newLi )` to receive the widget instance.
 	 */
 	enterNewItem: function() {
-		var $newLi = this.addItem();
+		var $newLi = this._addLiValue();
 		this._trigger( 'enternewitem', null, [$newLi] );
 		return $.Deferred().resolve( $newLi ).promise();
 	},
