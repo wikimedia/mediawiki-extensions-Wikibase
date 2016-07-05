@@ -25,13 +25,6 @@
  *         Node name of the base node of new list items.
  */
 /**
- * @event itemremoved
- * Triggered after a list got removed from the list.
- * @param {jQuery.Event} event
- * @param {*|null} value The value of the list item which will be removed. `null` for empty value.
- * @param {jQuery} $li The list item's DOM node that was removed.
- */
-/**
  * @event destroy
  * Triggered when the widget has been destroyed.
  * @param {jQuery.Event} event
@@ -285,11 +278,7 @@ $.widget( 'wikibase.listview', PARENT, {
 			throw new Error( 'The given node is not an element in this list' );
 		}
 
-		var liValue = this._lia.liInstance( $li ).value();
-
 		this._removeItem( $li );
-
-		this._trigger( 'itemremoved', null, [liValue, $li] );
 	},
 
 	_removeItem: function( $li ) {
