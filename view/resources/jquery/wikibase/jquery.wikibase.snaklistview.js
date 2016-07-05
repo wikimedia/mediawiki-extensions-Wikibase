@@ -19,10 +19,11 @@
  * @param {Object} options
  * @param {wikibase.datamodel.SnakList} [value=new wikibase.datamodel.SnakList()]
  *        The `SnakList` to be displayed by this view.
- * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
+ * @param {Function} options.getListItemAdapter
  * @param {boolean} [singleProperty=true]
  *        If `true`, it is assumed that the widget is filled with `Snak`s featuring a single common
  *        property.
+ * @param {Function} removeCallback A function that removes this snaklistview
  */
 /**
  * @event afterstartediting
@@ -56,7 +57,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		},
 		value: null,
 		singleProperty: false,
-		listItemAdapter: null
+		getListItemAdapter: null,
+		removeCallback: null
 	},
 
 	/**
@@ -125,6 +127,11 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		this.$listview.listview( {
 			listItemAdapter: this.options.getListItemAdapter( function( snakview ) {
 				self._listview.removeItem( snakview.element );
+				if ( self.value().length === 0 ) {
+					self.options.removeCallback();
+				} else {
+					self._trigger( 'change' );
+				}
 			} ),
 			value: this.options.value.toArray()
 		} );
@@ -139,8 +146,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 
 		this.$listview
 		.off( '.' + this.widgetName )
-		.on( this._lia.prefixedEvent( 'change.' ) + this.widgetName
-			+ ' listviewitemremoved.' + this.widgetName, function( event ) {
+		.on( this._lia.prefixedEvent( 'change.' ) + this.widgetName, function( event ) {
 				// Forward the "change" event to external components (e.g. the edit toolbar).
 				self._trigger( 'change' );
 			}

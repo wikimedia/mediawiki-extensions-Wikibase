@@ -448,9 +448,9 @@
 				),
 				entityIdPlainFormatter: this._entityIdPlainFormatter,
 				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getQualifiersListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceListItemAdapter: this.getListItemAdapterForReferenceView.bind( this, startEditingCallback ),
-				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
-				qualifiersListItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback )
+				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId )
 			}
 		);
 		return view;
@@ -477,8 +477,8 @@
 			$dom,
 			{
 				value: value || null,
-				listItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback ),
 				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceRemover: function( $dom ) {
 					return structureEditorFactory.getRemover( function() {
 						return startEditingCallback().then( function() { return removeCallback( view ); } );
@@ -494,17 +494,34 @@
 	 *
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
 	 */
-	SELF.prototype.getListItemAdapterForSnakListView = function( startEditingCallback ) {
+	SELF.prototype.getListItemAdapterForSnakListView = function( startEditingCallback, removeCallback ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.snaklistview,
-			newItemOptionsFn: $.proxy( function( value ) {
-				return {
-					getListItemAdapter: this.getListItemAdapterForSnakView.bind( this, startEditingCallback ),
-					value: value || undefined,
-					singleProperty: true
-				};
+			getNewItem: $.proxy( function( value, dom ) {
+				return this.getSnakListView( startEditingCallback, removeCallback, $( dom ), value );
 			}, this )
 		} );
+	};
+
+	/**
+	 * Construct a `snaklistview`
+	 *
+	 * @return {jQuery.wikibase.snaklistview} The constructed snaklistview
+	 */
+	SELF.prototype.getSnakListView = function( startEditingCallback, removeCallback, $dom, value ) {
+		var view = this._getView(
+			'snaklistview',
+			$dom,
+			{
+				value: value || undefined,
+				singleProperty: true,
+				removeCallback: function() {
+					removeCallback( view );
+				},
+				getListItemAdapter: this.getListItemAdapterForSnakView.bind( this, startEditingCallback )
+			}
+		);
+		return view;
 	};
 
 	/**

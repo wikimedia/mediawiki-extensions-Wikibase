@@ -41,7 +41,7 @@
  *        Allows to predefine certain aspects of the `Statement` to be created from the view. If
  *        this option is omitted, an empty view is created. A common use-case is adding a value to a
  *        property existing already by specifying, for example: `{ mainSnak.property: 'P1' }`.
- * @param {jQuery.wikibase.listview.ListItemAdapter} options.qualifiersListItemAdapter
+ * @param {Function} options.getQualifiersListItemAdapter
  * @param {Object} [options.locked={ mainSnak: false }]
  *        Elements that shall be locked and may not be changed by user interaction.
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-claimview-snak-new-tooltip' )]
@@ -118,12 +118,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_referencesListview: null,
 
 	/**
-	 * @property {boolean}
-	 * @private
-	 */
-	_ignoreReferencesListviewChanges: false,
-
-	/**
 	 * Reference to the `listview` widget managing the qualifier `snaklistview`s.
 	 * @property {jQuery.wikibase.listview|null}
 	 * @private
@@ -154,7 +148,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			|| !this.options.buildSnakView
 			|| !this.options.entityIdPlainFormatter
 			|| !this.options.guidGenerator
-			|| !this.options.qualifiersListItemAdapter
+			|| !this.options.getQualifiersListItemAdapter
 		) {
 			throw new Error( 'Required option not specified properly' );
 		}
@@ -276,7 +270,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 			$qualifiers = $( '<div/>' ).prependTo( this.$qualifiers );
 		}
 		$qualifiers.listview( {
-			listItemAdapter: this.options.qualifiersListItemAdapter,
+			listItemAdapter: this.options.getQualifiersListItemAdapter( function( snaklistview ) {
+				self._qualifiers.removeItem( snaklistview.element );
+			} ),
 			value: groupedQualifierSnaks
 		} )
 		.on( 'snaklistviewchange.' + this.widgetName,
@@ -284,22 +280,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 				event.stopPropagation();
 				self._trigger( 'change' );
 			}
-		)
-		.on( 'listviewitemremoved.' + this.widgetName, function( event, value, $itemNode ) {
-			if ( event.target === self._qualifiers.element.get( 0 ) ) {
-				self._trigger( 'change' );
-				return;
-			}
-
-			// Check if last snaklistview of a qualifier listview item has been removed and
-			// remove the listview item if so:
-			var $snaklistview = $( event.target ).closest( ':wikibase-snaklistview' ),
-				snaklistview = $snaklistview.data( 'snaklistview' );
-
-			if ( !snaklistview.value().length ) {
-				self._qualifiers.removeItem( snaklistview.element );
-			}
-		} );
+		);
 
 		this._qualifiers = $qualifiers.data( 'listview' );
 	},
@@ -322,6 +303,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 		var lia = this.options.getReferenceListItemAdapter(
 			function( referenceview ) {
 				self._referencesListview.removeItem( referenceview.element );
+				self._drawReferencesCounter();
+				self._trigger( 'change' );
 			}
 		);
 
@@ -333,17 +316,9 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this._referencesListview = $listview.data( 'listview' );
 
 		$listview
-		.on( 'listviewitemremoved', function( event, value, $li ) {
-			if ( self._ignoreReferencesListviewChanges ) {
-				return;
-			}
-			if ( event.target === $listview[0] ) {
-				self._drawReferencesCounter();
-			}
-			self._trigger( 'change' );
-		} )
 		.on( lia.prefixedEvent( 'change.' + this.widgetName ), function( event ) {
 			event.stopPropagation();
+			self._drawReferencesCounter();
 			self._trigger( 'change' );
 		} );
 
@@ -685,6 +660,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this._stopEditingQualifiers( dropValue );
 		this._rankSelector.stopEditing( dropValue );
 
+		// FIXME: Should not be necessary if _setOption would do the right thing for values
 		this._recreateReferences();
 
 		return PARENT.prototype._afterStopEditing.call( this, dropValue );
@@ -694,11 +670,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @protected
 	 */
 	_recreateReferences: function() {
-		// Normally, statementview would trigger a change event when references are removed and added
-		this._ignoreReferencesListviewChanges = true;
 		this._referencesListview.option( 'value', this.options.value
 				? this.options.value.getReferences().toArray() : [] );
-		this._ignoreReferencesListviewChanges = false;
 
 		this._drawReferencesCounter();
 	},
@@ -763,6 +736,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 		if ( key === 'value' ) {
 			this.element.toggleClass( 'wb-new', value === null );
+			// FIXME: set the value!
 		}
 
 		return response;

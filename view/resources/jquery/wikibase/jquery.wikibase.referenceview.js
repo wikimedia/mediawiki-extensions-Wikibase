@@ -16,7 +16,7 @@
  *
  * @param {Object} options
  * @param {wikibase.datamodel.Reference|null} options.value
- * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
+ * @param {Function} options.getListItemAdapter
  */
 /**
  * @event afterstartediting
@@ -55,7 +55,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 			$listview: '.wikibase-referenceview-listview'
 		},
 		value: null,
-		listItemAdapter: null
+		getListItemAdapter: null
 	},
 
 	/**
@@ -72,16 +72,20 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.listItemAdapter ) {
+		if ( !this.options.getListItemAdapter ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
 		PARENT.prototype._create.call( this );
 
+		var listview;
 		this.$listview.listview( {
-			listItemAdapter: this.options.listItemAdapter,
+			listItemAdapter: this.options.getListItemAdapter( function( snaklistview ) {
+				listview.removeItem( snaklistview.element );
+			} ),
 			value: this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : []
 		} );
+		listview = this.$listview.data( 'listview' );
 
 		this._updateReferenceHashClass( this.value() );
 
@@ -100,23 +104,11 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 		var changeEvents = [
 			'snakviewchange.' + this.widgetName,
-			lia.prefixedEvent( 'change.' + this.widgetName ),
-			'listviewitemremoved.' + this.widgetName
+			lia.prefixedEvent( 'change.' + this.widgetName )
 		];
 
 		this.$listview
 		.on( changeEvents.join( ' ' ), function( event ) {
-			if ( event.type === 'listviewitemremoved' ) {
-				// Check if last snaklistview item (snakview) has been removed and remove the
-				// listview item (the snaklistview itself) if so:
-				var $snaklistview = $( event.target ).closest( ':wikibase-snaklistview' ),
-					snaklistview = lia.liInstance( $snaklistview );
-
-				if ( snaklistview && !snaklistview.value().length ) {
-					listview.removeItem( $snaklistview );
-				}
-			}
-
 			// Propagate "change" event.
 			self._trigger( 'change' );
 		} );
@@ -131,7 +123,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		var lia = this.$listview.data( 'listview' ).listItemAdapter(),
 			events = [
 				'snakviewchange.' + this.widgetName,
-				'listviewitemremoved.' + this.widgetName,
 				lia.prefixedEvent( 'change.' + this.widgetName ),
 			];
 		this.$listview.off( events.join( ' ' ) );
