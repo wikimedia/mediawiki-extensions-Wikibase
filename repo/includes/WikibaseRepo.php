@@ -1688,7 +1688,10 @@ class WikibaseRepo {
 						'und', 'mis', 'mul', 'zxx',
 
 						// T125066
-						'ett', 'fkv', 'koy', 'lkt', 'lld', 'smj'
+						'ett', 'fkv', 'koy', 'lkt', 'lld', 'smj',
+
+						// T137115
+						'non',
 					) )
 				),
 
