@@ -16,6 +16,24 @@
       "revId": "82c52cb8f064ce8ea1f4fcc4196ddbe0c48d69e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_2591189d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-05T09:25:41Z",
+      "side": 0,
+      "message": "I was wondering too, but this is intended. I will do a follow-up.",
+      "parentUuid": "ee011f3e_050fb434",
+      "revId": "82c52cb8f064ce8ea1f4fcc4196ddbe0c48d69e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
