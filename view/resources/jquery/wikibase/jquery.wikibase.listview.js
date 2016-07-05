@@ -45,13 +45,6 @@
  * @param {jQuery} $li The DOM node pending to be added permanently to the list.
  */
 /**
- * @event afteritemmove
- * Triggered when an item node is moved within the list.
- * @param {jQuery.Event} event
- * @param {number} The item node's new index.
- * @param {number} Number of items in the list.
- */
-/**
  * @event destroy
  * Triggered when the widget has been destroyed.
  * @param {jQuery.Event} event
@@ -239,58 +232,6 @@ $.widget( 'wikibase.listview', PARENT, {
 		}
 
 		return -1;
-	},
-
-	/**
-	 * Moves a list item to a new index.
-	 *
-	 * @param {jQuery} $itemNode
-	 * @param {number} toIndex
-	 */
-	move: function( $itemNode, toIndex ) {
-		var currIndex = this.indexOf( $itemNode ),
-			items = this.items();
-
-		// No need to move if the item has the index already or if it should be moved to after the
-		// last item although it is at the end already:
-		if ( currIndex < 0
-			|| currIndex === toIndex
-			|| currIndex === items.length - 1 && toIndex >= items.length
-		) {
-			return;
-		}
-
-		if ( toIndex >= items.length ) {
-			$itemNode.insertAfter( items.last() );
-		} else if ( items.eq( toIndex ).prev().get( 0 ) === $itemNode.get( 0 ) ) {
-			// Item already is at the position it shall be moved to.
-			return;
-		} else {
-			$itemNode.insertBefore( items.eq( toIndex ) );
-		}
-
-		this._trigger( 'afteritemmove', null, [ this.indexOf( $itemNode ), items.length ] );
-	},
-
-	/**
-	 * Moves an item node one index towards the top of the list.
-	 *
-	 * @param {jQuery} $itemNode
-	 */
-	moveUp: function( $itemNode ) {
-		if ( this.indexOf( $itemNode ) !== 0 ) {
-			this.move( $itemNode, this.indexOf( $itemNode ) - 1 );
-		}
-	},
-
-	/**
-	 * Moves an item node one index towards the bottom of the list.
-	 *
-	 * @param {jQuery} $itemNode
-	 */
-	moveDown: function( $itemNode ) {
-		// Adding 2 to the index to move the element to before the element after the next element:
-		this.move( $itemNode, this.indexOf( $itemNode ) + 2 );
 	},
 
 	/**

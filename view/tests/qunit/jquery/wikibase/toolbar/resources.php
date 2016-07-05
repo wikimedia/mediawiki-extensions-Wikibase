@@ -35,16 +35,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.movetoolbar.tests' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.wikibase.movetoolbar.tests.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.movetoolbar',
-				'jquery.wikibase.listview',
-			),
-		),
-
 		'jquery.wikibase.removetoolbar.tests' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.removetoolbar.tests.js',

@@ -51,23 +51,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'jquery.wikibase.movetoolbar' => $moduleTemplate + array(
-			'scripts' => array(
-				'jquery.wikibase.movetoolbar.js',
-			),
-			'styles' => array(
-				'themes/default/jquery.wikibase.movetoolbar.css',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.toolbar',
-				'jquery.wikibase.toolbarbutton',
-			),
-			'messages' => array(
-				'wikibase-move-up',
-				'wikibase-move-down',
-			),
-		),
-
 		'jquery.wikibase.removetoolbar' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.wikibase.removetoolbar.js',
