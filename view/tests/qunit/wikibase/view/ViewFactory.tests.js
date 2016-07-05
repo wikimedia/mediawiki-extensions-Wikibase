@@ -274,11 +274,11 @@
 					}
 				},
 
+				getQualifiersListItemAdapter: sinon.match.instanceOf( Function ),
 				getReferenceListItemAdapter: sinon.match.instanceOf( Function ),
 				buildSnakView: sinon.match.instanceOf( Function ),
 				entityIdPlainFormatter: entityIdPlainFormatter,
-				guidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator ),
-				qualifiersListItemAdapter: sinon.match.instanceOf( ListItemAdapter )
+				guidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator )
 			} )
 		);
 
@@ -383,7 +383,7 @@
 			referenceview,
 			sinon.match( {
 				value: value || null,
-				listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter ),
+				getListItemAdapter: sinon.match.func,
 				getReferenceRemover: sinon.match.func
 			} )
 		);
@@ -392,9 +392,8 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', function( assert ) {
-		assert.expect( 3 );
-		var value = null,
-			viewFactory = new ViewFactory(),
+		assert.expect( 1 );
+		var viewFactory = new ViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
 		viewFactory.getListItemAdapterForSnakListView();
@@ -403,24 +402,33 @@
 			ListItemAdapter,
 			sinon.match( {
 				listItemWidget: $.wikibase.snaklistview,
-				newItemOptionsFn: sinon.match.func
+				getNewItem: sinon.match.func
 			} )
 		);
 
-		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+		ListItemAdapter.restore();
+	} );
 
-		assert.deepEqual(
-			result,
-			{
-				getListItemAdapter: result.getListItemAdapter, // Hack
+	QUnit.test( 'getSnakListView passes correct options to view', function( assert ) {
+		assert.expect( 1 );
+
+		var value = null,
+			viewFactory = new ViewFactory(),
+			$dom = $( '<div/>' ),
+			stub = sinon.stub( $dom, 'snaklistview' );
+
+		viewFactory.getSnakListView( {}, null, $dom, value );
+
+		sinon.assert.calledWith(
+			stub,
+			sinon.match( {
+				getListItemAdapter: sinon.match.func,
 				singleProperty: true,
 				value: value || undefined
-			}
-		);
+			} )
+		) ;
 
-		assert.ok( result.getListItemAdapter instanceof Function );
-
-		$.wikibase.listview.ListItemAdapter.restore();
+		stub.restore();
 	} );
 
 	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', function( assert ) {
@@ -441,7 +449,7 @@
 		$.wikibase.listview.ListItemAdapter.restore();
 	} );
 
-	QUnit.test( 'getSnakView passes correct options to ListItemAdapter', function( assert ) {
+	QUnit.test( 'getSnakView passes correct options to view', function( assert ) {
 		assert.expect( 2 );
 		var contentLanguages = {},
 			value = null,
