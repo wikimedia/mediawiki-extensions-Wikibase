@@ -55,7 +55,7 @@
 	"wikibase-diffview-alias": "Nomes alternativos",
 	"wikibase-diffview-description": "descrição",
 	"wikibase-diffview-link": "ligações",
-	"wikibase-sitelink-site-edit-placeholder": "sítio",
+	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "página",
 	"wikibase-alias-edit-placeholder": "introduza um nome alternativo",
 	"wikibase-label-input-help-message": "Introduza o título deste conjunto de dados em $1.",

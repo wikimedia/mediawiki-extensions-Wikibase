@@ -28,7 +28,7 @@
 	"wikibase-linkitem-input-site": "Zıwan:",
 	"wikibase-linkitem-input-page": "Pele:",
 	"wikibase-linkitem-confirmitem-button": "Tesdiq",
-	"wikibase-linkitem-success-link": "Perrê gre vırazi ya. Şıma şenê [merkezi malumata $1 ra]  zerrekê greyan bıvinê.",
+	"wikibase-linkitem-success-link": "Perrê gre vırazi ya. Şıma şenê [$1 ra merkezê malumati]  zerrekê greyan bıvinê.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "Bınımne",
 	"wikibase-rc-hide-wikidata-show": "Bıasene",

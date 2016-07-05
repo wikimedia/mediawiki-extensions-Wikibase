@@ -14,7 +14,8 @@
 			"Vks",
 			"Vogone",
 			"Matěj Grabovský",
-			"Cvanca"
+			"Cvanca",
+			"Dvorapa"
 		]
 	},
 	"wikibase-desc": "Strukturované úložiště dat",
@@ -58,7 +59,7 @@
 	"wikibase-diffview-alias": "aliasy",
 	"wikibase-diffview-description": "popis",
 	"wikibase-diffview-link": "odkazy",
-	"wikibase-sitelink-site-edit-placeholder": "projekt",
+	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "stránka",
 	"wikibase-alias-edit-placeholder": "zadejte alias",
 	"wikibase-label-input-help-message": "Zadejte název této entity v jazyce $1.",
@@ -159,7 +160,7 @@
 	"wikibase-newproperty-datatype": "Datový typ:",
 	"wikibase-newproperty-invalid-datatype": "Zadán neplatný datový typ.",
 	"special-newitem": "Vytvořit novou položku",
-	"wikibase-newitem-summary": "Nezapomeňte [[Special:Search|zkontrolovat, zda položka již neexistuje]]!<br />Pro všechny nové položky byste měli vytvořit [[Help:Label|štítek]] a [[Help:Description|popis]].",
+	"wikibase-newitem-summary": "Nezapomeňte [[Special:Search|zkontrolovat, jestli položka již neexistuje]]!<br />{{GENDER:|Měl|Měla|Měl(a)}} byste vytvořit [[Help:Label|štítek]] a [[Help:Description|popisek]] ke všem novým položkám.",
 	"wikibase-newitem-fieldset": "Vytvořit novou položku",
 	"wikibase-newitem-site": "Projekt první propojené položky",
 	"wikibase-newitem-page": "Jméno první odkazované stránky",

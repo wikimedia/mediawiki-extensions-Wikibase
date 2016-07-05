@@ -58,7 +58,7 @@
 	"wikibase-diffview-alias": "別名",
 	"wikibase-diffview-description": "描述",
 	"wikibase-diffview-link": "連結",
-	"wikibase-sitelink-site-edit-placeholder": "網站",
+	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "頁面",
 	"wikibase-alias-edit-placeholder": "輸入別名",
 	"wikibase-label-input-help-message": "使用 $1 輸入此實體的標籤。",

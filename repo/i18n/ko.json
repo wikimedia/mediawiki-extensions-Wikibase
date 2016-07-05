@@ -260,7 +260,7 @@
 	"wikibase-self-conflict-patched": "편집을 최신 버전으로 고쳤으며 중간 바뀜이 무시됩니다.",
 	"wikibase-conflict-patched": "편집을 최신 버전으로 고쳤습니다.",
 	"wikibase-restoreold": "복구",
-	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] 사용자에 의해 $3 판을 복구함",
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] 사용자의 $3 판으로 복구함",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|$4]] ([[User talk:$4|토론]])의 $3판 편집을 되돌림",
 	"wikibase-no-direct-editing": "$1 이름공간에서 직접 편집은 비활성화되어 있습니다.",
 	"wikibase-noentity": "이 객체가 존재하지 않습니다. 이 객체가 어떻게 되었는지 [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 관련 기록을 검색할] 수 있습니다.",
