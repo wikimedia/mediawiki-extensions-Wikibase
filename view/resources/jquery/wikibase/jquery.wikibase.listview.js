@@ -32,12 +32,6 @@
  * @param {jQuery} $li The list item's DOM node that was removed.
  */
 /**
- * @event enternewitem
- * Triggered when initializing the process of adding a new item to the list.
- * @param {jQuery.Event} event
- * @param {jQuery} $li The DOM node pending to be added permanently to the list.
- */
-/**
  * @event destroy
  * Triggered when the widget has been destroyed.
  * @param {jQuery.Event} event
@@ -314,7 +308,6 @@ $.widget( 'wikibase.listview', PARENT, {
 	 */
 	enterNewItem: function() {
 		var $newLi = this._addLiValue();
-		this._trigger( 'enternewitem', null, [$newLi] );
 		return $.Deferred().resolve( $newLi ).promise();
 	},
 
