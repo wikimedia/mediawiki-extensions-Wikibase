@@ -145,7 +145,6 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		this.$listview
 		.off( '.' + this.widgetName )
 		.on( this._lia.prefixedEvent( 'change.' ) + this.widgetName
-			+ ' listviewafteritemmove.' + this.widgetName
 			+ ' listviewitemremoved.' + this.widgetName, function( event ) {
 				// Forward the "change" event to external components (e.g. the edit toolbar).
 				self._trigger( 'change' );
@@ -382,89 +381,6 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		} else {
 			this.element.focus();
 		}
-	},
-
-	/**
-	 * Moves a `Snak`'s `snakview` within the `snaklistview`. Instead of a `Snak` and an index, a
-	 * reordered `SnakList` may be provided.
-	 *
-	 * @param {wikibase.datamodel.Snak|wikibase.datamodel.SnakList} snak
-	 * @param {number} [toIndex]
-	 */
-	move: function( snak, toIndex ) {
-		var self = this,
-			snakList;
-
-		if ( snak instanceof wb.datamodel.Snak ) {
-			snakList = this.value();
-			if ( snakList ) {
-				snakList.move( snak, toIndex );
-			}
-		} else if ( snak instanceof wb.datamodel.SnakList ) {
-			snakList = snak;
-		}
-
-		if ( snakList ) {
-			// Reflect new snak list order in snaklistview:
-			snakList.each( function( i, snak ) {
-				var $listItem = self._findListItem( snak );
-				if ( $listItem ) {
-					self._listview.move( self._findListItem( snak ), i );
-				}
-			} );
-			this._updatePropertyLabels();
-		}
-	},
-
-	/**
-	 * Moves a `Snak`'s `snakview` towards the top of the `snaklistview` by one step.
-	 *
-	 * @param {wikibase.datamodel.Snak} snak
-	 */
-	moveUp: function( snak ) {
-		var snakList = this.value();
-
-		if ( snakList ) {
-			this.move( snakList.moveUp( snak ) );
-		}
-	},
-
-	/**
-	 * Moves a `Snak`'s `snakview` towards the bottom of the `snaklistview` by one step.
-	 *
-	 * @param {wikibase.datamodel.Snak} snak
-	 */
-	moveDown: function( snak ) {
-		var snakList = this.value();
-
-		if ( snakList ) {
-			this.move( snakList.moveDown( snak ) );
-		}
-	},
-
-	/**
-	 * Finds a `Snak`'s `snakview` node within the `snaklistview`'s `listview` widget.
-	 *
-	 * @private
-	 *
-	 * @param {wikibase.datamodel.Snak} snak
-	 * @return {jQuery|null}
-	 */
-	_findListItem: function( snak ) {
-		var lia = this._lia,
-			$snakview = null;
-
-		this._listview.items().each( function() {
-			var $itemNode = $( this );
-
-			if ( lia.liInstance( $itemNode ).snak().equals( snak ) ) {
-				$snakview = $itemNode;
-			}
-
-			return $snakview === null;
-		} );
-
-		return $snakview;
 	}
 
 } );
