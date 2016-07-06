@@ -19,17 +19,14 @@
 	 * @param {number} rank
 	 * @return {string|null}
 	 */
-	function getRankString( rank ) {
-		var rankString = null;
-
-		$.each( wb.datamodel.Statement.RANK, function( rankId, i ) {
-			if ( rank === i ) {
-				rankString = rankId.toLowerCase();
+	function getRankName( rank ) {
+		for ( var rankName in wb.datamodel.Statement.RANK ) {
+			if ( rank === wb.datamodel.Statement.RANK[rankName] ) {
+				return rankName.toLowerCase();
 			}
-			return rankString === null;
-		} );
+		}
 
-		return rankString;
+		return null;
 	}
 
 	/**
@@ -201,16 +198,16 @@
 			var self = this,
 				$menu = $( '<ul/>' ).addClass( this.widgetFullName + '-menu' );
 
-			$.each( wb.datamodel.Statement.RANK, function( rankId, i ) {
-				rankId = rankId.toLowerCase();
+			$.each( wb.datamodel.Statement.RANK, function( rankName, rank ) {
+				rankName = rankName.toLowerCase();
 
 				$menu.append(
 					$( '<li/>' )
-					.addClass( self.widgetFullName + '-menuitem-' + rankId )
-					.data( self.widgetName + '-menuitem-rank', i )
+					.addClass( self.widgetFullName + '-menuitem-' + rankName )
+					.data( self.widgetName + '-menuitem-rank', rank )
 					.append(
 						$( '<a/>' )
-						.text( mw.msg( 'wikibase-statementview-rank-' + rankId ) )
+						.text( mw.msg( 'wikibase-statementview-rank-' + rankName ) )
 						.on( 'click.' + self.widgetName, function( event ) {
 							event.preventDefault();
 						} )
@@ -263,7 +260,7 @@
 		_updateMenuCss: function() {
 			$menu.children().removeClass( 'ui-state-active' );
 			$menu
-			.children( '.' + this.widgetFullName + '-menuitem-' + getRankString( this.value() ) )
+			.children( '.' + this.widgetFullName + '-menuitem-' + getRankName( this._rank ) )
 			.addClass( 'ui-state-active' );
 		},
 
@@ -273,16 +270,17 @@
 		 * @private
 		 */
 		_updateIcon: function() {
-			var self = this,
-				rankString = getRankString( this.value() );
+			for ( var rankId in wb.datamodel.Statement.RANK ) {
+				var rankName = rankId.toLowerCase();
 
-			$.each( wb.datamodel.Statement.RANK, function( rankId, i ) {
-				self.$icon.removeClass( self.widgetFullName + '-' + rankId.toLowerCase() );
-			} );
-
-			this.$icon
-			.addClass( this.widgetFullName + '-' + rankString )
-			.attr( 'title', mw.msg( 'wikibase-statementview-rank-' + rankString ) );
+				if ( this._rank === wb.datamodel.Statement.RANK[rankId] ) {
+					this.$icon
+					.addClass( this.widgetFullName + '-' + rankName )
+					.attr( 'title', mw.msg( 'wikibase-statementview-rank-' + rankName ) );
+				} else {
+					this.$icon.removeClass( this.widgetFullName + '-' + rankName );
+				}
+			}
 		},
 
 		/**
@@ -354,7 +352,7 @@
 		 * @inheritdoc
 		 */
 		isInitialValue: function() {
-			return this.value() === this.options.value;
+			return this._rank === this.options.value;
 		}
 	} );
 
