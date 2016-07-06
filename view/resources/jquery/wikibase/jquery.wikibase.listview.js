@@ -37,11 +37,6 @@
  * @param {jQuery.Event} event
  * @param {jQuery} $li The DOM node pending to be added permanently to the list.
  */
-/**
- * @event destroy
- * Triggered when the widget has been destroyed.
- * @param {jQuery.Event} event
- */
 $.widget( 'wikibase.listview', PARENT, {
 	/**
 	 * @inheritdoc
@@ -102,7 +97,6 @@ $.widget( 'wikibase.listview', PARENT, {
 		this._lia = null;
 		this._reusedItems = null;
 		PARENT.prototype.destroy.call( this );
-		this._trigger( 'destroy' );
 	},
 
 	/**
