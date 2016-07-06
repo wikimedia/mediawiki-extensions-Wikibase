@@ -335,4 +335,28 @@
 		assert.equal( listview.value().length, 2 );
 	} );
 
+	function destroyTest( getInstance, prototype ) {
+		QUnit.test( 'destroy', function( assert ) {
+			assert.expect( 1 );
+			var instance = getInstance();
+			instance.destroy();
+			assert.deepEqual( instance, prototype );
+		} );
+	}
+
+	destroyTest(
+		function() {
+			var $node = createListview();
+			return $node.data( 'listview' );
+		},
+		$.wikibase.listview.prototype
+	);
+	destroyTest(
+		function() {
+			var $node = createListview( [ 'a', 'b', 'c' ] );
+			return $node.data( 'listview' );
+		},
+		$.wikibase.listview.prototype
+	);
+
 } )( jQuery, QUnit );
