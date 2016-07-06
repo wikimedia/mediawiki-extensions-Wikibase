@@ -9,7 +9,8 @@
 			"Sjoerddebruin",
 			"Mar(c)",
 			"Robin0van0der0vliet",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"Patio"
 		]
 	},
 	"wikibase-client-desc": "Client voor de uitbreiding Wikibase",
@@ -18,7 +19,7 @@
 	"apihelp-query+pageterms-example-item": "Labels en aliassen voor het item Q84 opvragen.",
 	"wikibase-after-page-move": "U kunt ook het gekoppelde item van {{WBREPONAME}} [$1 bijwerken] om de taalkoppelingen op de hernoemde pagina te kunnen beheren.",
 	"wikibase-after-page-move-queued": "Het aan deze pagina gekoppelde [$1 item van {{WBREPONAME}}] wordt binnenkort automatisch bijgewerkt. Houdt er dus rekening mee dat dit niet gelijk gebeurd.",
-	"wikibase-after-page-delete-queued": "Het aan deze pagina gekoppelde [$1 item van {{WBREPONAME}}] wordt binnenkort automatisch bijgewerkt. Houdt er dus rekening mee dat dit niet gelijk gebeurd.",
+	"wikibase-after-page-delete-queued": "Het aan deze pagina gekoppelde [$1 item van {{WBREPONAME}}] wordt binnenkort automatisch bijgewerkt. Houd er dus rekening mee dat dit niet direct gebeurt.",
 	"wikibase-comment-add": "Item van {{WBREPONAME}} aangemaakt.",
 	"wikibase-comment-remove": "Het gekoppelde item van {{WBREPONAME}} is verwijderd. De taalkoppelingen zijn verwijderd.",
 	"wikibase-comment-linked": "Er is een item van {{WBREPONAME}} gekoppeld aan deze pagina.",

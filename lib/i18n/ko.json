@@ -84,7 +84,7 @@
 	"wikibase-time-precision-annum": "서기 {{PLURAL:$1|$1년}}",
 	"wikibase-time-precision-millennium": "$1. 천년",
 	"wikibase-time-precision-century": "$1. 세기",
-	"wikibase-time-precision-10annum": "$1",
+	"wikibase-time-precision-10annum": "$1년대",
 	"wikibase-time-precision-BCE-Gannum": "기원전 $1십억년",
 	"wikibase-time-precision-BCE-Mannum": "기원전 $1백만년",
 	"wikibase-time-precision-BCE-annum": "기원전 {{PLURAL:$1|$1년}}",

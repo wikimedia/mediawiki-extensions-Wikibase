@@ -22,7 +22,8 @@
 			"درفش کاویانی",
 			"Alirezaaa",
 			"Bersam",
-			"Huji"
+			"Huji",
+			"Alifakoor"
 		]
 	},
 	"wikibase-desc": "مخزن داده‌های ساخت‌یافته",
@@ -66,7 +67,7 @@
 	"wikibase-diffview-alias": "نام‌های دیگر",
 	"wikibase-diffview-description": "توضیحات",
 	"wikibase-diffview-link": "پیوندها",
-	"wikibase-sitelink-site-edit-placeholder": "وب‌گاه",
+	"wikibase-sitelink-site-edit-placeholder": "ویکی",
 	"wikibase-sitelink-page-edit-placeholder": "صفحه",
 	"wikibase-alias-edit-placeholder": "واردکردن نام مستعار",
 	"wikibase-label-input-help-message": "برچسب این موجودیت را به $1 وارد کنید.",
