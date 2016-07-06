@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_8138af9c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T13:50:47Z",
+      "side": 0,
+      "message": "I see two \"listviewdestroy\" events in addtoolbar/statementview-referenceview and addtoolbar/statementview-snakview, as well as \"statementlistviewdestroy\" and \"statementgrouplistviewdestroy\" events in other toolbars.\n\nWhen logging the event handlers, it seems the one in the snakview toolbar is still triggered. But the on in the referenceview toolbar is not.",
+      "revId": "8d72a98bcaf60e01fb1eff32881cd53daaedaf3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
