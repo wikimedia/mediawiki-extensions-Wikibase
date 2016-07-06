@@ -107,8 +107,8 @@
 
 			assert.strictEqual(
 				$node.children().length,
-				valuesLength,
-				'Reset listview node to initial state.'
+				0,
+				'Destroyed all listitems.'
 			);
 
 			$node.remove();

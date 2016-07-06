@@ -94,6 +94,10 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @inheritdoc
 	 */
 	destroy: function() {
+		var self = this;
+		this.items().each( function() {
+			self._removeItem( $( this ) );
+		} );
 		this._lia = null;
 		this._reusedItems = null;
 		PARENT.prototype.destroy.call( this );
