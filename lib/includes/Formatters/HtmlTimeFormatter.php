@@ -80,6 +80,11 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * @return bool
 	 */
 	private function calendarNameNeeded( TimeValue $value ) {
+		// Do not care about possibly wrong calendar models with precision 10 years and more.
+		if ( $value->getPrecision() <= TimeValue::PRECISION_YEAR10 ) {
+			return false;
+		}
+
 		// Loose check if the timestamp string is ISO-ish and starts with a year.
 		if ( !preg_match( '/^[-+]?\d+\b/', $value->getTime(), $matches ) ) {
 			return true;
