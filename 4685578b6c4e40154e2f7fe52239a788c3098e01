@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_cba01641",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T07:45:52Z",
+      "side": 1,
+      "message": "+2, create should not trigger \"itemadded\" events.",
+      "revId": "4685578b6c4e40154e2f7fe52239a788c3098e01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_eb9b5a19",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T07:45:52Z",
+      "side": 1,
+      "message": "JSDoc block missing, but not really needed.",
+      "revId": "4685578b6c4e40154e2f7fe52239a788c3098e01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_2b8562b2",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T07:45:52Z",
+      "side": 1,
+      "message": "Not totally sure about this, but I guess when a \"enternewitem\" event is triggered anyway you do not need an extra \"itemadded\" event.",
+      "revId": "4685578b6c4e40154e2f7fe52239a788c3098e01",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
