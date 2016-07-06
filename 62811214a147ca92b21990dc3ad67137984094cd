@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_617b0bec",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T13:31:05Z",
+      "side": 1,
+      "message": "Ouch. Luckily this was dead code.",
+      "revId": "62811214a147ca92b21990dc3ad67137984094cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
