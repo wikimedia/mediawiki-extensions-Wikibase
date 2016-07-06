@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_adf20101",
+        "filename": "lib/includes/Units/UnitConverter.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-06T22:02:32Z",
+      "side": 1,
+      "message": "This should use QuantityValue::transform, to ensure that appropriate rounding is applied to avoid the \"false precision\" issue \u003chttps://en.wikipedia.org/wiki/False_precision\u003e.\n\nNote that  QuantityValue::transform will likely to factored out of  QuantityValue in the next release of DataValues/Number. Expect to see something like QuantityMath::transform() in the future.",
+      "revId": "515c627ea845565bc59ffd6cf6d3f3850cea89f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
