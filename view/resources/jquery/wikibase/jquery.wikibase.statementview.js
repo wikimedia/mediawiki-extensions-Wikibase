@@ -189,7 +189,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}, $rankSelector );
 
 		var self = this,
-			changeEvent = ( this._rankSelector.widgetEventPrefix + 'afterchange' ).toLowerCase();
+			changeEvent = ( this._rankSelector.widgetEventPrefix + 'change' ).toLowerCase();
 
 		this.$rankSelector.on( changeEvent + '.' + this.widgetName, function( event ) {
 			if ( self.value() ) {

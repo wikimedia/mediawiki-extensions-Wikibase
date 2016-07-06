@@ -47,8 +47,8 @@
 	 *        Whether the widget is displayed in right-to-left context.
 	 */
 	/**
-	 * @event afterchange
-	 * Triggered after the snak type got changed.
+	 * @event change
+	 * Triggered when the snak type got changed.
 	 * @param {jQuery.Event} event
 	 */
 	$.wikibase.statementview.RankSelector = util.inherit( PARENT, {
@@ -171,7 +171,7 @@
 			var response = PARENT.prototype._setOption.apply( this, arguments );
 			if ( key === 'rank' ) {
 				this._setRank( value );
-				this._trigger( 'afterchange' );
+				this._trigger( 'change' );
 			} else if ( key === 'disabled' ) {
 				this.draw();
 			}
@@ -232,7 +232,7 @@
 
 			this._setRank( rank );
 
-			this._trigger( 'afterchange' );
+			this._trigger( 'change' );
 		},
 
 		/**
