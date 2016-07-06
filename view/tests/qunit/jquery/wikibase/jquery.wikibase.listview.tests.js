@@ -362,4 +362,80 @@
 		assert.equal( listview.value().length, 2 );
 	} );
 
+	function destroyTests( getInstances, prototype ) {
+		function tryDestroy( instance, assert ) {
+			instance.destroy();
+			// Cannot clean this up since it is set after destroy() was executed
+			delete instance._super;
+			delete instance._superApply;
+
+			// FIXME: Maybe this should actually be cleaned up in the production code?
+			delete instance.bindings;
+			delete instance.document;
+			delete instance.window;
+			delete instance.element;
+			delete instance.eventNamespace;
+			delete instance.focusable;
+			delete instance.hoverable;
+			delete instance.uuid;
+			delete instance.options;
+
+			assert.deepEqual( instance, prototype );
+		}
+		getInstances.forEach( function( getInstance ) {
+			QUnit.test( 'destroy', function( assert ) {
+				assert.expect( 1 );
+				var instance = getInstance();
+				tryDestroy( instance, assert );
+			} );
+			QUnit.test( 'destroy after startEditing', function( assert ) {
+				assert.expect( 1 );
+				var instance = getInstance();
+				QUnit.stop();
+				instance.startEditing().done( function() {
+					QUnit.start();
+					tryDestroy( instance, assert );
+				} );
+			} );
+		} );
+	}
+	// For other views: after startEditing; after startEditing and stopEditing
+
+	destroyTests(
+		[
+			function() {
+				var listItemAdapter = wb.tests.getMockListItemAdapter(
+					'test',
+					function() {
+						this.startEditing = function() {
+							var deferred = $.Deferred();
+							setTimeout( deferred.resolve, 0 );
+							return deferred.promise();
+						};
+					}
+				);
+				var $node = createListview( null, { listItemAdapter: listItemAdapter } );
+				return $node.data( 'listview' );
+			},
+			function() {
+				var listItemAdapter = wb.tests.getMockListItemAdapter(
+					'test',
+					function() {
+						this.startEditing = function() {
+							var deferred = $.Deferred();
+							setTimeout( deferred.resolve, 0 );
+							return deferred.promise();
+						};
+					}
+				);
+				var $node = createListview(
+					[ 'a', 'b', 'c' ],
+					{ listItemAdapter: listItemAdapter }
+				);
+				return $node.data( 'listview' );
+			}
+		],
+		$.wikibase.listview.prototype
+	);
+
 } )( jQuery, QUnit, wikibase );

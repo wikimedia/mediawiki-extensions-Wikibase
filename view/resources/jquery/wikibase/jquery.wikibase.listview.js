@@ -65,7 +65,7 @@ $.widget( 'wikibase.listview', PARENT, {
 	 * @property [HTMLElement[]]
 	 * @private
 	 */
-	_reusedItems: [],
+	_reusedItems: null,
 
 	/**
 	 * @inheritdoc
