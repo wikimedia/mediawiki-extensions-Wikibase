@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_0ba97e21",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, confirmed. There are a few listeners for \"listviewafteritemmove\", but they do not do anything but forwarding this event to a more generic \"change\" event. All removed in this patch.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_7e00ca04",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, confirmed this is not used outside of tests.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_6b85aa9f",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, no callers, except in tests.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_6b5c8a4f",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, no callers, except in tests.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_cb449671",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_2b29e29a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_4b070620",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, confirmed this is not used outside of tests.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_4b826698",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, no callers, except in tests.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_4b59c65c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, no callers, except in tests.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_9efbee10",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, only used in the removed move.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_0b269ec9",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_2b10c25a",
+        "filename": "view/resources/jquery/wikibase/toolbar/controller/resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_ab1cb27d",
+        "filename": "view/resources/jquery/wikibase/toolbar/jquery.wikibase.movetoolbar.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2, not used anywhere except for it\u0027s own test.",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_cb1bf680",
+        "filename": "view/resources/jquery/wikibase/toolbar/resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_0b0dfe41",
+        "filename": "view/resources/jquery/wikibase/toolbar/themes/default/jquery.wikibase.movetoolbar.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_cbb77680",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.listview.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_cb4db69d",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.snaklistview.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_8b21eeae",
+        "filename": "view/tests/qunit/jquery/wikibase/toolbar/jquery.wikibase.movetoolbar.tests.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_eb16ba59",
+        "filename": "view/tests/qunit/jquery/wikibase/toolbar/resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-06T08:13:01Z",
+      "side": 0,
+      "message": "+2",
+      "revId": "c9a6b260001273fba874975ebd192a57dd384403",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
