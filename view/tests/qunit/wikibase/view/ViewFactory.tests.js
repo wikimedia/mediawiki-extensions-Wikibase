@@ -351,7 +351,6 @@
 		assert.expect( 3 );
 		var contentLanguages = {},
 			value = null,
-			dataTypeStore = {},
 			claimsChanger = {},
 			entityChangersFactory = {
 				getClaimsChanger: function() { return claimsChanger; }
@@ -366,7 +365,7 @@
 			userLanguages = [],
 			viewFactory = new ViewFactory(
 				contentLanguages,
-				dataTypeStore,
+				null,
 				entityChangersFactory,
 				entityIdHtmlFormatter,
 				entityIdPlainFormatter,
@@ -395,7 +394,6 @@
 			result,
 			{
 				value: value || null,
-				dataTypeStore: dataTypeStore,
 				listItemAdapter: result.listItemAdapter // Hack
 			}
 		);
