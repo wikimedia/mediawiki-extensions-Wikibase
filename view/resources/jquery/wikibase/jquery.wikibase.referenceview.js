@@ -215,10 +215,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 			return;
 		}
 
-		// FIXME: There should be a listview::startEditing method
-		$.each( this.$listview.data( 'listview' ).value(), function() {
-			this.startEditing();
-		} );
+		this.$listview.data( 'listview' ).startEditing();
 
 		this._attachEditModeEventHandlers();
 

@@ -428,13 +428,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		this._isInEditMode = true;
 		this.element.addClass( 'wb-edit' );
 
-		var listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter();
-
-		listview.items().each( function() {
-			var entitytermsforlanguageview = lia.liInstance( $( this ) );
-			entitytermsforlanguageview.startEditing();
-		} );
+		var listview = this.$listview.data( 'listview' );
+		listview.startEditing();
 
 		this.updateInputSize();
 
