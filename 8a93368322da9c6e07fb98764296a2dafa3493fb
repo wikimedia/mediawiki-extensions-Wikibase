@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_567b26bd",
+        "filename": "lib/includes/Units/BaseUnitStorage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "please don\u0027t do i/o or other \"heavy work\" in a constructor. i\u0027d suggest lazy loading in a getter.",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_16499e90",
+        "filename": "lib/includes/Units/BaseUnitStorage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "please use a json object (named fields) instead of a list. It can still be a list in raw storage. i\u0027d actually prefer csv over json for compactness and easy of editing.",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_965c6e50",
+        "filename": "lib/includes/Units/JsonUnitStorage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "please check error cases. file_get_contents returns false upon failure, json_decode returns null (but the better check would be for !is_array.",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_16407e5a",
+        "filename": "lib/includes/Units/UnitConverter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "Hm, DecimalValue could use a convenience function for this, like newFromNumber",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_d63556f5",
+        "filename": "lib/includes/Units/UnitConverter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "eek",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_360dc242",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "Unit conversion should be optional. Can this be encoded in $mode?",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_d61c367f",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "why is this in this patch?",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_f61b3a80",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "Would be nicer to have this in a separate patch. It\u0027s hard to review ;)",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_1617de57",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T15:34:38Z",
+      "side": 1,
+      "message": "eek",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
