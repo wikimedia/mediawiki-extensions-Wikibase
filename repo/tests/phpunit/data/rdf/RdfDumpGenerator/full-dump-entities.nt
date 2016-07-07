@@ -68,3 +68,11 @@ _:genid1 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/
 <http://acme.test/prop/statement/value-normalized/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://test.acme.test/FooQ30> <http://schema.org/name> "FooQ30"@en-x-test .
 <http://test.acme.test/FooQ40> <http://schema.org/name> "FooQ40"@en-x-test .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#directClaimResource> <http://acme.test/prop/direct-resource/P10> .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#qualifierResource> <qualifier-resource/P10> .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#referenceResource> <reference-resource/P10> .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#statementPropertyResource> <http://acme.test/prop/statement-resource/P10> .
+<http://acme.test/prop/direct-resource/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://acme.test/prop/statement-resource/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<qualifier-resource/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<reference-resource/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
