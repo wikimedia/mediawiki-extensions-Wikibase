@@ -178,9 +178,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return;
 		}
 
-		this._listview.value().forEach( function( snakview ) {
-			snakview.startEditing();
-		} );
+		this._listview.startEditing();
 
 		this.element.addClass( 'wb-edit' );
 		this._isInEditMode = true;
