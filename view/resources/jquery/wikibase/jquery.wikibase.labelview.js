@@ -16,7 +16,6 @@
  * @param {Object} options
  * @param {wikibase.datamodel.Term} options.value
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-label-input-help-message' )]
- * @param {wikibase.entityChangers.LabelsChanger} options.labelsChanger
  */
 $.widget( 'wikibase.labelview', PARENT, {
 	/**
@@ -49,7 +48,6 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 */
 	_create: function() {
 		if ( !( this.options.value instanceof wb.datamodel.Term )
-			|| !this.options.labelsChanger
 			|| this.options.inputNodeName !== 'INPUT' && this.options.inputNodeName !== 'TEXTAREA'
 		) {
 			throw new Error( 'Required option not specified properly' );
@@ -176,14 +174,7 @@ $.widget( 'wikibase.labelview', PARENT, {
 	 */
 	_save: function() {
 		var deferred = $.Deferred();
-
-		this.options.labelsChanger.setLabel( this.value() )
-		.done( function( label ) {
-			deferred.resolve();
-		} )
-		.fail( deferred.reject );
-
-		return deferred.promise();
+		return deferred.resolve().promise();
 	},
 
 	/**
