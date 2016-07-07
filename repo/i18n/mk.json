@@ -26,6 +26,8 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Опис",
 	"wikibase-entitytermsforlanguagelistview-label": "Натпис",
 	"wikibase-entitytermsforlanguagelistview-language": "Јазик",
+	"wikibase-entitytermsforlanguagelistview-more": "Повеќе јазици",
+	"wikibase-entitytermsforlanguagelistview-less": "Помалку јазици",
 	"wikibase-label-empty": "Сè уште нема зададено натпис",
 	"wikibase-label-edit-placeholder": "внесете натпис",
 	"wikibase-label-edit-placeholder-language-aware": "внесете натпис на $1",

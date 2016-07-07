@@ -63,6 +63,7 @@
 	"wikibase-validator-no-such-property": "Својството $1 не е пронајдено",
 	"wikibase-validator-bad-value": "Податочната вредност е оштетена: $1",
 	"wikibase-validator-bad-value-type": "Погрешен тип на вредност $1; се очкеува $2",
+	"wikibase-validator-bad-data-type": "Грешен податочен тип: $1",
 	"wikibase-validator-bad-url": "Неисправно обликувана URL: $1",
 	"wikibase-validator-bad-url-scheme": "Неподдржана URL: $1",
 	"wikibase-validator-unknown-unit": "Непозната единица: $1",

@@ -77,7 +77,7 @@
 	"wikibase-diffview-alias": "alias",
 	"wikibase-diffview-description": "descripción",
 	"wikibase-diffview-link": "enlaces",
-	"wikibase-sitelink-site-edit-placeholder": "sitio",
+	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "página",
 	"wikibase-alias-edit-placeholder": "escribe un alias",
 	"wikibase-label-input-help-message": "Escribe la etiqueta de esta entidad en $1.",

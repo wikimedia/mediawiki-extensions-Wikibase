@@ -5,7 +5,8 @@
 			"Bellayet",
 			"Gitartha.bordoloi",
 			"Leemon2010",
-			"Aftabuzzaman"
+			"Aftabuzzaman",
+			"TMg"
 		]
 	},
 	"specialpages-group-wikibase": "উইকিবেজ",
@@ -63,7 +64,7 @@
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 বছর}}",
 	"wikibase-time-precision-millennium": "$1. সহস্রাব্দ",
 	"wikibase-time-precision-century": "$1. শতাব্দী",
-	"wikibase-time-precision-10annum": "$1",
+	"wikibase-time-precision-10annum": "$1s",
 	"wikibase-time-precision-BCE-Gannum": "খ্রিস্টপূর্ব $1 বিলিয়ন বছর",
 	"wikibase-time-precision-BCE-Mannum": "খ্রিস্টপূর্ব $1 মিলিয়ন বছর",
 	"wikibase-time-precision-BCE-annum": "খ্রিস্টপূর্ব {{PLURAL:$1|$1 বছর}}",

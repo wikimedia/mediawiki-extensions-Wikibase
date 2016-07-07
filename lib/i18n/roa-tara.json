@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Joetaras",
-			"Macofe"
+			"Macofe",
+			"TMg"
 		]
 	},
 	"wikibase-lib-desc": "Tìne le funzionalità comune pe Uicchibase e le estenziune d'u Client de UicchiBase",
@@ -77,7 +78,7 @@
 	"wikibase-time-precision-annum": "$1 anne A.C.",
 	"wikibase-time-precision-millennium": "$1. millennie",
 	"wikibase-time-precision-century": "$1. sechele",
-	"wikibase-time-precision-10annum": "$1",
+	"wikibase-time-precision-10annum": "anni $1",
 	"wikibase-time-precision-BCE-Gannum": "$1 migliarde de anne N.C.",
 	"wikibase-time-precision-BCE-Mannum": "$1 miliune de anne N.C.",
 	"wikibase-time-precision-BCE-annum": "$1 anne N.C.",
