@@ -293,7 +293,7 @@ HTML;
 
 	$templates['wikibase-toolbar-button'] =
 <<<HTML
-<span class="wikibase-toolbar-item wikibase-toolbar-button $1"><a href="$2"><span class="wb-icon"></span>$3</a></span>
+<span class="wikibase-toolbar-item wikibase-toolbar-button $1"><a href="$2" title="$4"><span class="wb-icon"></span>$3</a></span>
 HTML;
 
 	$templates['wikibase-toolbar'] =

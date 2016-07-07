@@ -135,7 +135,8 @@ class ToolbarEditSectionGenerator implements EditSectionGenerator {
 			'wikibase-toolbar-button',
 			'wikibase-toolbar-button-' . $cssClassSuffix,
 			$editUrl,
-			htmlspecialchars( $buttonLabel )
+			htmlspecialchars( $buttonLabel ),
+			'' // Title tooltip
 		);
 	}
 

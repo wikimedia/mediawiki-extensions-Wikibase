@@ -148,6 +148,9 @@ return call_user_func( function() {
 				'jquery.wikibase.sitelinkgroupview',
 				'jquery.wikibase.toolbarcontroller',
 			),
+			'messages' => array(
+				'wikibase-remove',
+			),
 		),
 
 		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.statementview-snakview' => $moduleTemplate + array(
