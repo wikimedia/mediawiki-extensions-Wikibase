@@ -125,7 +125,6 @@ class NTriplesRdfTestHelper {
 		$expected = $testData->getNTriples( $dataSetNames );
 		$expected = $this->normalizeNTriples( $expected );
 		$actual = $this->normalizeNTriples( $actual );
-
 		// Comparing $expected and $actual directly would show triples that are present in both but
 		// shifted in position. That makes the output hard to read. Calculating the $missing and
 		// $extra sets helps.

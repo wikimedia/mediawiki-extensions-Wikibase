@@ -29,16 +29,20 @@ class RdfVocabulary {
 	const NS_VALUE = 'wdv'; // value
 	// Predicates
 	const NSP_DIRECT_CLAIM = 'wdt'; // direct assertion entity -> value
+	const NSP_DIRECT_CLAIM_DIRECT_RESOURCE = 'wdtrc'; // entity -> value direct resource
 	const NSP_CLAIM = 'p'; // entity -> statement
 	const NSP_CLAIM_STATEMENT = 'ps'; // statement -> simple value
 	const NSP_CLAIM_VALUE = 'psv'; // statement -> deep value
 	const NSP_CLAIM_VALUE_NORM = 'psn'; // statement -> deep value, normalized
+	const NSP_CLAIM_VALUE_DIRECT_RESOURCE = 'psrc'; // statement -> value, direct resource
 	const NSP_QUALIFIER = 'pq'; // statement -> qualifier
 	const NSP_QUALIFIER_VALUE = 'pqv'; // statement ->  qualifier deep value
 	const NSP_QUALIFIER_VALUE_NORM = 'pqn'; // statement ->  qualifier deep value, normalized
+	const NSP_QUALIFIER_VALUE_DIRECT_RESOURCE = 'pqrc'; // statement ->  qualifier direct resource
 	const NSP_REFERENCE = 'pr'; // reference -> simple value
 	const NSP_REFERENCE_VALUE = 'prv'; // reference -> deep value
 	const NSP_REFERENCE_VALUE_NORM = 'prn'; // reference -> deep value, normalized
+	const NSP_REFERENCE_VALUE_DIRECT_RESOURCE = 'prrc'; // reference -> deep value, direct resource
 	const NSP_NOVALUE = 'wdno'; // novalue class
 	// other prefixes
 	const NS_SKOS = 'skos'; // SKOS vocabulary
@@ -89,6 +93,13 @@ class RdfVocabulary {
 		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_NORM,
 		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
 		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM,
+	];
+
+	public $normalizedPropertyValueNamespace = [
+		self::NSP_DIRECT_CLAIM => self::NSP_DIRECT_CLAIM_DIRECT_RESOURCE,
+		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_DIRECT_RESOURCE,
+		self::NSP_QUALIFIER_VALUE => self::NSP_QUALIFIER_VALUE_DIRECT_RESOURCE,
+		self::NSP_REFERENCE_VALUE => self::NSP_REFERENCE_VALUE_DIRECT_RESOURCE
 	];
 
 	/**
@@ -171,15 +182,19 @@ class RdfVocabulary {
 				self::NS_VALUE => $topUri . 'value/',
 				// predicates
 				self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
+				self::NSP_DIRECT_CLAIM_DIRECT_RESOURCE => $propUri . 'direct-resource/',
 				self::NSP_CLAIM => $propUri,
 				self::NSP_CLAIM_STATEMENT => $propUri . 'statement/',
 				self::NSP_CLAIM_VALUE => $propUri . 'statement/value/',
+				self::NSP_CLAIM_VALUE_DIRECT_RESOURCE => $propUri . 'statement-resource/',
 				self::NSP_CLAIM_VALUE_NORM => $propUri . 'statement/value-normalized/',
 				self::NSP_QUALIFIER => $propUri . 'qualifier/',
 				self::NSP_QUALIFIER_VALUE => $propUri . 'qualifier/value/',
+				self::NSP_QUALIFIER_VALUE_DIRECT_RESOURCE => 'qualifier-resource/',
 				self::NSP_QUALIFIER_VALUE_NORM => $propUri . 'qualifier/value-normalized/',
 				self::NSP_REFERENCE => $propUri . 'reference/',
 				self::NSP_REFERENCE_VALUE => $propUri . 'reference/value/',
+				self::NSP_REFERENCE_VALUE_DIRECT_RESOURCE => 'reference-resource/',
 				self::NSP_REFERENCE_VALUE_NORM => $propUri . 'reference/value-normalized/',
 				self::NSP_NOVALUE => $propUri . 'novalue/',
 				// external
