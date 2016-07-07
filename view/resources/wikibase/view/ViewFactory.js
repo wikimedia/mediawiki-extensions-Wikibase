@@ -214,17 +214,17 @@
 	 *
 	 * @param {jQuery.util.EventSingletonManager} eventSingletonManager
 	 * @param {string} groupName
-	 * @param {wikibase.datamodel.SiteLink[]} value
+	 * @param {wikibase.datamodel.SiteLink[]} siteLinks
 	 * @param {jQuery} $sitelinkgroupview
 	 * @return {jQuery.wikibase.sitelinkgroupview} The constructed sitelinkgroupview
 	 **/
-	SELF.prototype.getSitelinkGroupView = function( eventSingletonManager, groupName, value, $sitelinkgroupview ) {
+	SELF.prototype.getSitelinkGroupView = function( eventSingletonManager, groupName, siteLinks, $sitelinkgroupview ) {
 		return this._getView(
 			'sitelinkgroupview',
 			$sitelinkgroupview,
 			{
 				groupName: groupName,
-				value: value,
+				value: siteLinks,
 				eventSingletonManager: eventSingletonManager,
 				siteLinksChanger: this._entityChangersFactory.getSiteLinksChanger(),
 				entityIdPlainFormatter: this._entityIdPlainFormatter
