@@ -17,8 +17,6 @@
  * @param {Object} options
  * @param {wikibase.datamodel.Reference|null} options.value
  * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
- * @param {wikibase.entityChangers.ReferencesChanger} options.referencesChanger
- *        Required for saving the `Reference` represented by the widget instance.
  * @param {string|null} [options.statementGuid]
  *        The GUID of the `Statement` the `Reference` represented by the widget instance belongs to.
  */
@@ -66,7 +64,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		},
 		value: null,
 		listItemAdapter: null,
-		referencesChanger: null,
 		statementGuid: null
 	},
 
@@ -84,7 +81,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.listItemAdapter || !this.options.referencesChanger ) {
+		if ( !this.options.listItemAdapter ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 

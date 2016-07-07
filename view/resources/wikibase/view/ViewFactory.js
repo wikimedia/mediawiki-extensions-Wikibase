@@ -380,8 +380,7 @@
 					value: value || null,
 					statementGuid: statementGuid,
 					dataTypeStore: this._dataTypeStore,
-					listItemAdapter: this.getListItemAdapterForSnakListView(),
-					referencesChanger: this._entityChangersFactory.getReferencesChanger()
+					listItemAdapter: this.getListItemAdapterForSnakListView()
 				};
 			}, this )
 		} );
