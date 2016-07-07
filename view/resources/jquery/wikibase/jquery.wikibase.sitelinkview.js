@@ -396,7 +396,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	stopEditing: function( dropValue ) {
 		var deferred = $.Deferred();
 
-		if ( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this._isInEditMode || !this.isValid() && !dropValue ) {
 			return deferred.resolve().promise();
 		}
 

@@ -38,11 +38,6 @@ function createFingerprint() {
  */
 function createEntitytermsforlanguagelistview( options ) {
 	options = $.extend( {
-		entityChangersFactory: {
-			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
-			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
-			getLabelsChanger: function() { return 'I am a LabelsChanger'; }
-		},
 		value: createFingerprint(),
 		userLanguages: [ 'de', 'en' ]
 	}, options || {} );
