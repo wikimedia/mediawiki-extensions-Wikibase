@@ -12,19 +12,6 @@
  */
 var createEntitytermsforlanguageview = function( options, $node ) {
 	options = $.extend( {
-		entityChangersFactory: {
-			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
-			getDescriptionsChanger: function() {
-				return {
-					setDescription: function() { return $.Deferred().resolve(); }
-				};
-			},
-			getLabelsChanger: function() {
-				return {
-					setLabel: function() { return $.Deferred().resolve(); }
-				};
-			}
-		},
 		value: {
 			language: 'en',
 			label: new wb.datamodel.Term( 'en', 'test label' ),

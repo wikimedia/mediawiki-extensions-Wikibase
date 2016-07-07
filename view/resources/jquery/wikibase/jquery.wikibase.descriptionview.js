@@ -16,8 +16,6 @@
  *
  * @option {string} [inputNodeName='TEXTAREA']
  *         Should either be 'TEXTAREA' or 'INPUT'.
- *
- * @option {wikibase.entityChangers.DescriptionsChanger} descriptionsChanger
  */
 $.widget( 'wikibase.descriptionview', PARENT, {
 	/**
@@ -34,8 +32,7 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 			$text: '.wikibase-descriptionview-text'
 		},
 		value: null,
-		inputNodeName: 'TEXTAREA',
-		descriptionsChanger: null
+		inputNodeName: 'TEXTAREA'
 	},
 
 	/**
@@ -50,7 +47,6 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 */
 	_create: function() {
 		if ( !( this.options.value instanceof wb.datamodel.Term )
-			|| !this.options.descriptionsChanger
 			|| this.options.inputNodeName !== 'INPUT' && this.options.inputNodeName !== 'TEXTAREA'
 		) {
 			throw new Error( 'Required parameter(s) missing' );
@@ -187,8 +183,6 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 	 * @param {boolean} dropValue
 	 */
 	stopEditing: function( dropValue ) {
-		var self = this;
-
 		if ( !this._isInEditMode ) {
 			return;
 		} else if ( ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
@@ -202,15 +196,8 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 
 		this._trigger( 'stopediting', null, [dropValue] );
 
-		this.options.descriptionsChanger.setDescription( this.value() )
-		.done( function( description ) {
-			self.enable();
-			self._afterStopEditing( dropValue );
-		} )
-		.fail( function( error ) {
-			self.setError( error );
-			self.enable();
-		} );
+		this.enable();
+		this._afterStopEditing( dropValue );
 	},
 
 	/**
