@@ -12,7 +12,6 @@
  */
 var createAliasesview = function( options ) {
 	options = $.extend( {
-		aliasesChanger: 'I am an AliasesChanger',
 		value: new wb.datamodel.MultiTerm( 'en', ['a', 'b', 'c'] )
 	}, options || {} );
 

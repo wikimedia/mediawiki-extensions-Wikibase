@@ -595,7 +595,7 @@
 		assert.expect( 1 );
 		var contentLanguages = [],
 			fingerprint = new wb.datamodel.Fingerprint(),
-			entityChangersFactory = {},
+			entityChangersFactory = { getEntityTermsChanger: function() {} },
 			message = 'message',
 			messageProvider = { getMessage: function() { return message; } },
 			userLanguages = [],
