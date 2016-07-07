@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( $, QUnit ) {
+( function( $, QUnit, wb ) {
 	'use strict';
 
 	/**
@@ -321,6 +321,33 @@
 		}
 	} );
 
+	QUnit.test( 'startEditing', function( assert ) {
+		assert.expect( 2 );
+		var listItemAdapter = wb.tests.getMockListItemAdapter(
+			'test',
+			function() {
+				this.startEditing = function() {
+					var deferred = $.Deferred();
+					setTimeout( deferred.resolve, 0 );
+					return deferred.promise();
+				};
+			}
+		);
+		var $node = createListview(
+			['a', 'b', 'c'],
+			{ listItemAdapter: listItemAdapter }
+		 ),
+			listview = $node.data( 'listview' );
+
+		var result = listview.startEditing();
+		assert.strictEqual( result.state(), 'pending' );
+		result.done( function() {
+			QUnit.start();
+			assert.strictEqual( result.state(), 'resolved' );
+		} );
+		QUnit.stop();
+	} );
+
 	QUnit.test( 'reuse items', function( assert ) {
 		assert.expect( 1 );
 		var $node = $( document.createElement( 'span' ) );
@@ -335,4 +362,4 @@
 		assert.equal( listview.value().length, 2 );
 	} );
 
-} )( jQuery, QUnit );
+} )( jQuery, QUnit, wikibase );

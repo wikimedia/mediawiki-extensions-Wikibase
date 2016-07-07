@@ -638,9 +638,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return PARENT.prototype.startEditing.call( self );
 		} ).then( function() {
 			self._rankSelector.startEditing();
-			$.each( self._qualifiers.value(), function () {
-				this.startEditing();
-			} );
+			self._qualifiers.startEditing();
 			self._startEditingReferences();
 		} );
 	},
@@ -649,10 +647,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @protected
 	 */
 	_startEditingReferences: function() {
-		$.each( this._referencesListview.value(), function ( key, referenceView ) {
-			referenceView.startEditing();
-		} );
-
+		this._referencesListview.startEditing();
 		this._expandReferencesToggler();
 	},
 
