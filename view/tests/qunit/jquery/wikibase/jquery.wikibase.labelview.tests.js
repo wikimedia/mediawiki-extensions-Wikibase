@@ -12,7 +12,6 @@
  */
 var createLabelview = function( options, $node ) {
 	options = $.extend( {
-		labelsChanger: 'I am a LabelsChanger',
 		value: new wb.datamodel.Term( 'en', 'test label' )
 	}, options || {} );
 
@@ -66,11 +65,7 @@ QUnit.test( 'Create & destroy', function( assert ) {
 } );
 
 QUnit.test( 'startEditing() & stopEditing()', 5, function( assert ) {
-	var $labelview = createLabelview( {
-			labelsChanger: {
-				setLabel: function () { return $.Deferred().resolve(); }
-			}
-		} ),
+	var $labelview = createLabelview(),
 		labelview = $labelview.data( 'labelview' );
 
 	$labelview

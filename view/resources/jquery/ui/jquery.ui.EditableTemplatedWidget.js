@@ -120,7 +120,7 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 		var self = this,
 			deferred = $.Deferred();
 
-		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
+		if ( !this.isInEditMode() || !this.isValid() && !dropValue ) {
 			return deferred.resolve().promise();
 		}
 
