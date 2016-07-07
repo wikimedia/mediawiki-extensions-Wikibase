@@ -113,7 +113,8 @@ return call_user_func( function() {
 				'wikibase.store.ApiEntityStore',
 				'wikibase.store.CachingEntityStore',
 				'wikibase.store.CombiningEntityStore',
-				'wikibase.view.ViewFactory',
+				'wikibase.view.ControllerViewFactory',
+				'wikibase.view.ToolbarFactory',
 				'wikibase.WikibaseContentLanguages'
 			),
 			'messages' => array(

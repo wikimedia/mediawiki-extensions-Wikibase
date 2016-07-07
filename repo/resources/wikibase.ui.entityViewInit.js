@@ -109,7 +109,10 @@
 			htmlDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/html' ),
 			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
-			viewFactory = new wikibase.view.ViewFactory(
+			toolbarFactory = new wb.view.ToolbarFactory(),
+			viewFactory = new wb.view.ControllerViewFactory(
+				toolbarFactory,
+				entityChangersFactory,
 				contentLanguages,
 				dataTypeStore,
 				entityChangersFactory,

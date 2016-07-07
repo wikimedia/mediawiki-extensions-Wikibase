@@ -33,6 +33,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.view.ToolbarFactory' => $moduleTemplate + array(
+			'scripts' => 'ToolbarFactory.js',
+			'dependencies' => array(
+				'jquery.wikibase.edittoolbar',
+				'wikibase.view.__namespace',
+			)
+		),
+
+
 		'wikibase.view.ToolbarViewController' => $moduleTemplate + array(
 			'scripts' => 'ToolbarViewController.js',
 			'dependencies' => array(
@@ -43,6 +52,15 @@ return call_user_func( function() {
 			'messages' => array(
 				'wikibase-save-inprogress',
 			)
+		),
+
+		'wikibase.view.ControllerViewFactory' => $moduleTemplate + array(
+			'scripts' => 'ControllerViewFactory.js',
+			'dependencies' => array(
+				'wikibase.view.__namespace',
+				'wikibase.view.ToolbarViewController',
+				'wikibase.view.ViewFactory'
+			),
 		),
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + array(
