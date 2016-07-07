@@ -99,7 +99,13 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 			// With $1 in the PLURAL case
 			'wikibase-time-precision-BCE-century' => '{{PLURAL:$1|$1 one|$1 more|$1 evenmore}} precision-BCE-century',
 			// A random template in the message
-			'wikibase-time-precision-10annum' => '$1 precision-10annum{{PLURAL:$1||s}} {{dummy|1|2|3}}'
+			'wikibase-time-precision-10annum' => '$1 precision-10annum{{PLURAL:$1||s}} {{dummy|1|2|3}}',
+
+			// Invalid messages
+			'wikibase-time-precision-BCE-10annum' => '$1',
+			'wikibase-time-precision-BCE-millennium' => '-',
+			'wikibase-time-precision-BCE-annum' => '',
+			'wikibase-time-precision-BCE-Gannum' => null,
 		];
 	}
 
