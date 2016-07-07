@@ -105,9 +105,15 @@ class TimeParserFactory {
 			$canonicalMonthNames = $this->monthNameProvider->getLocalizedMonthNames(
 				self::CANONICAL_LANGUAGE_CODE
 			);
-			$replacements = array_map( function( $i ) use ( $canonicalMonthNames ) {
-				return $canonicalMonthNames[$i];
-			}, $this->monthNameProvider->getMonthNumbers( $languageCode ) );
+			$replacements = $this->monthNameProvider->getMonthNumbers( $languageCode );
+
+			foreach ( $replacements as $localizedMonthName => &$i ) {
+				if ( !is_string( $localizedMonthName ) ) {
+					unset( $replacements[$localizedMonthName] );
+				} else {
+					$i = $canonicalMonthNames[$i];
+				}
+			}
 		}
 
 		return new MonthNameUnlocalizer( $replacements );

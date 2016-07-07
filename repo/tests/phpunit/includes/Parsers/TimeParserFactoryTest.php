@@ -54,11 +54,17 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		return $monthNameProvider;
 	}
 
-	private function newTimeParserFactory( $languageCode ) {
+	private function newTimeParserFactory(
+		$languageCode,
+		MonthNameProvider $monthNameProvider = null
+	) {
 		$options = new ParserOptions();
 		$options->setOption( ValueParser::OPT_LANG, $languageCode );
 
-		return new TimeParserFactory( $options, $this->newMonthNameProvider() );
+		return new TimeParserFactory(
+			$options,
+			$monthNameProvider ?: $this->newMonthNameProvider()
+		);
 	}
 
 	public function testGetTimeParser() {
@@ -76,7 +82,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		$parser = $factory->getTimeParser();
 		$actual = $parser->parse( $value );
 
-		$this->assertEquals( $expected->getArrayValue(), $actual->getArrayValue() );
+		$this->assertSame( $expected->getArrayValue(), $actual->getArrayValue() );
 	}
 
 	public function validInputProvider() {
@@ -287,7 +293,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		);
 		$actual = $factory->getTimeParser()->parse( $value );
 
-		$this->assertEquals( $expected->getArrayValue(), $actual->getArrayValue() );
+		$this->assertSame( $expected->getArrayValue(), $actual->getArrayValue() );
 	}
 
 	public function parserOptionsProvider() {
@@ -373,7 +379,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 		$factory = $this->newTimeParserFactory( $languageCode );
 		$unlocalizer = $factory->getMonthNameUnlocalizer();
 
-		$this->assertEquals( $expected, $unlocalizer->unlocalize( $date ) );
+		$this->assertSame( $expected, $unlocalizer->unlocalize( $date ) );
 	}
 
 	public function localizedMonthNameProvider() {
@@ -457,7 +463,7 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			$date = $unlocalizer->unlocalize( $date );
 		}
 
-		$this->assertEquals( $expected, $date );
+		$this->assertSame( $expected, $date );
 	}
 
 	public function localizedMonthName_withLanguageChainProvider() {
@@ -474,6 +480,20 @@ class TimeParserFactoryTest extends PHPUnit_Framework_TestCase {
 			// No language contains the word.
 			array( 'enMonth6', array( 'de', 'la' ), 'enMonth6' ),
 		);
+	}
+
+	public function testMonthNameUnlocalizer_withUnlocalizedMonthNumbers() {
+		$monthNameProvider = $this->getMock( MonthNameProvider::class );
+		$monthNameProvider->expects( $this->any() )
+			->method( 'getLocalizedMonthNames' )
+			->will( $this->returnValue( [ 2 => 'Localized' ] ) );
+		$monthNameProvider->expects( $this->any() )
+			->method( 'getMonthNumbers' )
+			->will( $this->returnValue( [ '2' => 2 ] ) );
+
+		$factory = $this->newTimeParserFactory( 'ko', $monthNameProvider );
+		$unlocalizer = $factory->getMonthNameUnlocalizer();
+		$this->assertSame( '2000', $unlocalizer->unlocalize( '2000' ) );
 	}
 
 }
