@@ -37,9 +37,7 @@ function createEntitytermsview( options ) {
 		value: createFingerprint(),
 		userLanguages: [ 'de', 'en' ],
 		entityChangersFactory: {
-			getAliasesChanger: function() { return 'I am an AliasesChanger'; },
-			getDescriptionsChanger: function() { return 'I am a DescriptionsChanger'; },
-			getLabelsChanger: function() { return 'I am a LabelsChanger'; }
+			getEntityTermsChanger: function() { return 'I am an EntityTermsChanger'; }
 		}
 	}, options || {} );
 
