@@ -148,6 +148,11 @@ class MwTimeIsoParser extends StringValueParser {
 	 */
 	private function parseFromOutputString( Language $lang, $value, $precision, $msgKey ) {
 		$msgText = $lang->getMessage( $msgKey );
+
+		if ( strpos( $msgText, '$1' ) === false || $msgText === '$1' ) {
+			return null;
+		}
+
 		$isBceMsg = $this->isBceMsg( $msgKey );
 		$msgRegexp = $this->getRegexpFromMessageText( $msgText );
 
