@@ -147,6 +147,8 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			}
 		);
 
+		this._entityTermsChanger = this.options.entityChangersFactory.getEntityTermsChanger();
+
 		this.draw();
 	},
 
@@ -324,10 +326,6 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			// updating description and aliases).
 			self._trigger( 'change', null, [lang] );
 		} )
-		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
-			event.stopPropagation();
-			self.setError( error );
-		} )
 		.on(
 			[
 				prefix + 'create.' + this.widgetName,
@@ -380,59 +378,19 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	/**
 	 * @inheritdoc
 	 */
-	stopEditing: function( dropValue ) {
-		var self = this,
-			deferred = $.Deferred();
-
-		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
-			return deferred.resolve().promise();
-		}
-
-		this._trigger( 'stopediting', null, [dropValue] );
-
-		this.disable();
-
-		this.$entitytermsforlanguagelistview
-		.one(
-			'entitytermsforlanguagelistviewafterstopediting.entitytermsviewstopediting',
-			function( event, dropValue ) {
-				self._afterStopEditing( dropValue );
-				self.$entitytermsforlanguagelistview.off( '.entitytermsviewstopediting' );
-				deferred.resolve();
-			}
-		)
-		.one(
-			'entitytermsforlanguagelistviewtoggleerror.entitytermsviewstopediting',
-			function( event, error ) {
-				self.enable();
-				self.$entitytermsforlanguagelistview.off( '.entitytermsviewstopediting' );
-				deferred.reject( error );
-			}
-		);
-
-		this._getEntitytermsforlanguagelistview().stopEditing( dropValue );
-
-		return deferred.promise();
-	},
-
-	/**
-	 * @inheritdoc
-	 */
 	_save: function() {
-		// Currently unused.
-		// TODO: Implement function directly saving all (updated) entity terms instead of deferring
-		// the functionality to sub-components.
+		return this._entityTermsChanger.save( this.value(), this.options.value );
 	},
 
 	/**
 	 * @param {boolean} dropValue
 	 */
 	_afterStopEditing: function( dropValue ) {
-		this.notification();
-		if ( !dropValue ) {
-			this.options.value = this.value();
-		}
-		return PARENT.prototype._afterStopEditing.apply( this, arguments );
+		var self = this;
+		return this._getEntitytermsforlanguagelistview().stopEditing( dropValue ).done( function() {
+			self.notification();
+			return PARENT.prototype._afterStopEditing.call( self );
+		} );
 	},
 
 	/**
@@ -475,13 +433,13 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 	 * @inheritdoc
 	 */
 	_setOption: function( key, value ) {
-		if ( key === 'value' ) {
-			throw new Error( 'Impossible to set value after initialization' );
+		if ( key === 'value' && !( value instanceof wb.datamodel.Fingerprint ) ) {
+			throw new Error( 'value must be a Fingerprint' );
 		}
 
 		var response = PARENT.prototype._setOption.apply( this, arguments );
 
-		if ( key === 'disabled' ) {
+		if ( key === 'disabled' || key === 'value' ) {
 			this._getEntitytermsforlanguagelistview().option( key, value );
 		}
 
@@ -515,6 +473,19 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 
 		this._$notification.data( 'closeable' ).setContent( $content, additionalCssClasses );
 		return this._$notification;
+	},
+
+	/**
+	 * @inheritdoc
+	 */
+	setError: function( error ) {
+		if ( error ) {
+			var context = error.context;
+			var viewType = 'wikibase-' + context.type + 'view';
+			self.element.find( '.wikibase-entitytermsforlanguageview-' + context.value.getLanguageCode() )
+				.find( '.' + viewType ).data( viewType ).setError( error );
+		}
+		return PARENT.prototype.setError.apply( this, arguments );
 	}
 } );
 
