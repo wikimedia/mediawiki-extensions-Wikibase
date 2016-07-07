@@ -12,9 +12,6 @@
  */
 var createDescriptionview = function( options, $node ) {
 	options = $.extend( {
-		descriptionsChanger: {
-			setDescription: function () { return $.Deferred().resolve(); }
-		},
 		value: new wb.datamodel.Term( 'en', 'test description' )
 	}, options || {} );
 
