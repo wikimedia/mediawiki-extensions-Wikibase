@@ -17,7 +17,6 @@
  * @param {Object} options
  * @param {wikibase.datamodel.MultiTerm} options.value
  * @param {string} [options.helpMessage=mw.msg( 'wikibase-aliases-input-help-message' )]
- * @param {wikibase.entityChangers.AliasesChanger} aliasesChanger
  */
 $.widget( 'wikibase.aliasesview', PARENT, {
 	/**
@@ -43,8 +42,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 			$list: 'ul'
 		},
 		value: null,
-		helpMessage: mw.msg( 'wikibase-aliases-input-help-message' ),
-		aliasesChanger: null
+		helpMessage: mw.msg( 'wikibase-aliases-input-help-message' )
 	},
 
 	/**
@@ -54,9 +52,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !( this.options.value instanceof wb.datamodel.MultiTerm )
-			|| !this.options.aliasesChanger
-		) {
+		if ( !( this.options.value instanceof wb.datamodel.MultiTerm ) ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
@@ -168,7 +164,7 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 	 * @protected
 	 */
 	_save: function() {
-		return this.options.aliasesChanger.setAliases( this.value() );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**

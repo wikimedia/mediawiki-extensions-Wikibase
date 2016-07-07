@@ -68,7 +68,11 @@
 				function( newTerm ) {
 					return function() {
 						return labelsChanger.setLabel( newTerm ).done( function( savedLabel ) {
-							resultFingerprint.setLabel( newTerm.getLanguageCode(), savedLabel );
+							if ( savedLabel === null ) {
+								resultFingerprint.removeLabelFor( newTerm.getLanguageCode() );
+							} else {
+								resultFingerprint.setLabel( newTerm.getLanguageCode(), savedLabel );
+							}
 						} ).fail( function( error ) {
 							error.context = { type: 'label', value: newTerm };
 						} );
@@ -81,7 +85,11 @@
 				function( newTerm ) {
 					return function() {
 						return descriptionsChanger.setDescription( newTerm ).done( function( savedDescription ) {
-							resultFingerprint.setDescription( newTerm.getLanguageCode(), savedDescription );
+							if ( savedDescription === null ) {
+								resultFingerprint.removeDescriptionFor( newTerm.getLanguageCode() );
+							} else {
+								resultFingerprint.setDescription( newTerm.getLanguageCode(), savedDescription );
+							}
 						} ).fail( function( error ) {
 							error.context = { type: 'description', value: newTerm };
 						} );
