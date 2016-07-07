@@ -136,6 +136,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$siteLookup = $this->getTestData()->getSiteLookup();
 
 		// Note: using the actual factory here makes this an integration test!
+		// FIXME: we want to inject an ExternalIdentifierRdfBuilder here somehow!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ) );
 		$emitter = new NTriplesRdfWriter();
