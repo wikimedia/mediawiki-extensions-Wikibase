@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ee011f3e_81d426ee",
+        "filename": "lib/includes/Units/BaseUnitStorage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-07-07T16:56:48Z",
+      "side": 1,
+      "message": "Well, we have pluggable storage so the format can be anything. I can  make named fields here of course.",
+      "parentUuid": "ee011f3e_16499e90",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee011f3e_965c6e50",
         "filename": "lib/includes/Units/JsonUnitStorage.php",
         "patchSetId": 6
@@ -64,6 +82,24 @@
       "writtenOn": "2016-07-07T15:34:38Z",
       "side": 1,
       "message": "Hm, DecimalValue could use a convenience function for this, like newFromNumber",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_c1058e7e",
+        "filename": "lib/includes/Units/UnitConverter.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-07-07T16:56:48Z",
+      "side": 1,
+      "message": "See my patch to that effect to DecimalValues/Number repo :)",
+      "parentUuid": "ee011f3e_16407e5a",
       "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "ee011f3e_01003669",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-07-07T16:56:48Z",
+      "side": 1,
+      "message": "I can make a mode trigger for it, yes.",
+      "parentUuid": "ee011f3e_360dc242",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee011f3e_d61c367f",
         "filename": "repo/maintenance/SPARQLClient.php",
         "patchSetId": 6
@@ -121,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "ee011f3e_81eb869f",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-07-07T16:56:48Z",
+      "side": 1,
+      "message": "For preparing units DB. I can split it later if needed.",
+      "parentUuid": "ee011f3e_d61c367f",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee011f3e_f61b3a80",
         "filename": "repo/maintenance/updateUnits.php",
         "patchSetId": 6
@@ -132,6 +204,24 @@
       "writtenOn": "2016-07-07T15:34:38Z",
       "side": 1,
       "message": "Would be nicer to have this in a separate patch. It\u0027s hard to review ;)",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_e12ff2f1",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-07-07T16:56:48Z",
+      "side": 1,
+      "message": "ok, I\u0027ll split.",
+      "parentUuid": "ee011f3e_f61b3a80",
       "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
