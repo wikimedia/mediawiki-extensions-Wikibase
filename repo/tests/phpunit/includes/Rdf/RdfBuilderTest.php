@@ -69,6 +69,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		}
 
 		// Note: using the actual factory here makes this an integration test!
+		// FIXME: we want to inject an ExternalIdentifierRdfBuilder here somehow!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
 		$emitter = new NTriplesRdfWriter();

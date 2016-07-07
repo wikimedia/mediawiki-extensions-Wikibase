@@ -360,6 +360,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	private function propertyIsLink( Property $property ) {
 		// For now, it's very simple but can be more complex later
+		// FIXME: external-id properties may be literals or links. Check ExternalIdentifierRdfBuilder!
 		return in_array( $property->getDataTypeId(), array( 'wikibase-item', 'wikibase-property', 'url', 'commonsMedia' ) );
 	}
 
