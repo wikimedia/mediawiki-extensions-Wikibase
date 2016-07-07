@@ -38,6 +38,7 @@
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#propertyType> <http://wikiba.se/ontology-beta#Wibblywobbly> .
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#claim> <http://acme.test/prop/P10> .
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#directClaim> <http://acme.test/prop/direct/P10> .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#directClaimNormalized> <http://acme.test/prop/direct-normalized/P10> .
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#qualifier> <http://acme.test/prop/qualifier/P10> .
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#qualifierValue> <http://acme.test/prop/qualifier/value/P10> .
 <http://acme.test/P10> <http://wikiba.se/ontology-beta#reference> <http://acme.test/prop/reference/P10> .
@@ -52,6 +53,7 @@ _:genid1 <http://www.w3.org/2002/07/owl#onProperty> <http://acme.test/prop/direc
 _:genid1 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/07/owl#Thing> .
 <http://acme.test/prop/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://acme.test/prop/direct/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://acme.test/prop/direct-normalized/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://acme.test/prop/qualifier/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
 <http://acme.test/prop/qualifier/value/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://acme.test/prop/reference/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
