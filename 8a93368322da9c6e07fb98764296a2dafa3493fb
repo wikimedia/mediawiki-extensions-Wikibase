@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ee011f3e_a1f84a47",
+        "filename": "lib/includes/Units/BaseUnitStorage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-07T17:25:59Z",
+      "side": 1,
+      "message": "The external format can be anything. The format used by the methods in the interface and base class should be well defined.",
+      "parentUuid": "ee011f3e_81d426ee",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee011f3e_965c6e50",
         "filename": "lib/includes/Units/JsonUnitStorage.php",
         "patchSetId": 6
