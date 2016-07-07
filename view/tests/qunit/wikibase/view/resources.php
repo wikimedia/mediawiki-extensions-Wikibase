@@ -56,6 +56,15 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.view.ToolbarFactory.tests' => $moduleTemplate + array(
+			'scripts' => array(
+				'ToolbarFactory.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.view.ToolbarFactory',
+			)
+		),
+
 	);
 
 	return $modules;
