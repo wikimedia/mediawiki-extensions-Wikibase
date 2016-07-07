@@ -16,6 +16,24 @@
       "revId": "322a6a96762cb42310c9a6848d4b08a0445b77e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_13541001",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-07T07:23:48Z",
+      "side": 0,
+      "message": "Apparently … I don\u0027t really know if this does anything currently. I ended up removing it in one of my changes.",
+      "parentUuid": "ee011f3e_0155df52",
+      "revId": "322a6a96762cb42310c9a6848d4b08a0445b77e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
