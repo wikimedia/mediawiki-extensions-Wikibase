@@ -39,6 +39,10 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 	 */
 	private function writePropertyPredicates( $id, $isObjectProperty ) {
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaim' )->is( RdfVocabulary::NSP_DIRECT_CLAIM, $id );
+		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'directClaimNormalized' )->is(
+			RdfVocabulary::NSP_DIRECT_CLAIM_NORM,
+			$id
+		);
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'claim' )->is( RdfVocabulary::NSP_CLAIM, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementProperty' )->is( RdfVocabulary::NSP_CLAIM_STATEMENT, $id );
 		$this->writer->say( RdfVocabulary::NS_ONTOLOGY, 'statementValue' )->is( RdfVocabulary::NSP_CLAIM_VALUE, $id );
@@ -58,6 +62,7 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 		$this->writer->about( RdfVocabulary::NSP_CLAIM_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_QUALIFIER_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
 		$this->writer->about( RdfVocabulary::NSP_REFERENCE_VALUE_NORM, $id )->a( 'owl', 'ObjectProperty' );
+		$this->writer->about( RdfVocabulary::NSP_DIRECT_CLAIM_NORM, $id )->a( 'owl', 'ObjectProperty' );
 		// Depending on property type
 		if ( $isObjectProperty ) {
 			$datatype = 'ObjectProperty';
