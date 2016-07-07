@@ -29,6 +29,7 @@ class RdfVocabulary {
 	const NS_VALUE = 'wdv'; // value
 	// Predicates
 	const NSP_DIRECT_CLAIM = 'wdt'; // direct assertion entity -> value
+	const NSP_DIRECT_CLAIM_NORM = 'wdtn'; // direct assertion entity -> value, normalized
 	const NSP_CLAIM = 'p'; // entity -> statement
 	const NSP_CLAIM_STATEMENT = 'ps'; // statement -> simple value
 	const NSP_CLAIM_VALUE = 'psv'; // statement -> deep value
@@ -89,6 +90,13 @@ class RdfVocabulary {
 		self::NSP_CLAIM_STATEMENT => self::NSP_CLAIM_VALUE_NORM,
 		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
 		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM,
+	];
+
+	public static $normalizedPropertyValueNamespace = [
+		self::NSP_DIRECT_CLAIM => self::NSP_DIRECT_CLAIM_NORM,
+		self::NSP_CLAIM_STATEMENT => self::NSP_DIRECT_CLAIM_NORM,
+		self::NSP_QUALIFIER => self::NSP_QUALIFIER_VALUE_NORM,
+		self::NSP_REFERENCE => self::NSP_REFERENCE_VALUE_NORM
 	];
 
 	/**
@@ -171,6 +179,7 @@ class RdfVocabulary {
 				self::NS_VALUE => $topUri . 'value/',
 				// predicates
 				self::NSP_DIRECT_CLAIM => $propUri . 'direct/',
+				self::NSP_DIRECT_CLAIM_NORM => $propUri . 'direct-normalized/',
 				self::NSP_CLAIM => $propUri,
 				self::NSP_CLAIM_STATEMENT => $propUri . 'statement/',
 				self::NSP_CLAIM_VALUE => $propUri . 'statement/value/',
