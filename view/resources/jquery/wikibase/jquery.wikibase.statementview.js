@@ -318,9 +318,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return;
 		}
 
-		var lia = this.options.buildReferenceListItemAdapter(
-			this.options.value ? this.options.value.getClaim().getGuid() : null
-		);
+		var lia = this.options.buildReferenceListItemAdapter();
 
 		$listview.listview( {
 			listItemAdapter: lia,

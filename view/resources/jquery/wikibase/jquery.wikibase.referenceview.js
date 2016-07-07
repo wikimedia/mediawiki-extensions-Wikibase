@@ -17,8 +17,6 @@
  * @param {Object} options
  * @param {wikibase.datamodel.Reference|null} options.value
  * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
- * @param {string|null} [options.statementGuid]
- *        The GUID of the `Statement` the `Reference` represented by the widget instance belongs to.
  */
 /**
  * @event afterstartediting
@@ -63,8 +61,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 			$listview: '.wikibase-referenceview-listview'
 		},
 		value: null,
-		listItemAdapter: null,
-		statementGuid: null
+		listItemAdapter: null
 	},
 
 	/**
