@@ -54,6 +54,7 @@
 		 *         - {string} The saved fingerprint
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
+		 *         - {Object} An object with fields type (label, description or aliases) and the Term or MultiTerm
 		 */
 		save: function( newFingerprint, oldFingerprint ) {
 			var changes = [];
@@ -70,6 +71,8 @@
 					return function() {
 						return labelsChanger.setLabel( newTerm ).done( function( savedLabel ) {
 							resultFingerprint.setLabel( newTerm.getLanguageCode(), savedLabel );
+						} ).then( null, function( error ) {
+							return $.Deferred().reject( error, { type: 'label', value: newTerm } );
 						} );
 					};
 				}
@@ -81,6 +84,8 @@
 					return function() {
 						return descriptionsChanger.setDescription( newTerm ).done( function( savedDescription ) {
 							resultFingerprint.setDescription( newTerm.getLanguageCode(), savedDescription );
+						} ).then( null, function( error ) {
+							return $.Deferred().reject( error, { type: 'description', value: newTerm } );
 						} );
 					};
 				}
@@ -94,6 +99,8 @@
 					return function() {
 						return aliasesChanger.setAliases( newMultiTerm ).done( function( savedAliases ) {
 							resultFingerprint.setAliases( newMultiTerm.getLanguageCode(), savedAliases );
+						} ).then( null, function( error ) {
+							return $.Deferred().reject( error, { type: 'aliases', value: newMultiTerm } );
 						} );
 					};
 				}

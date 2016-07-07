@@ -21,8 +21,6 @@
  *           aliases: <{wikibase.datamodel.MultiTerm}>
  *         }
  *
- * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
- *
  * @event change
  *        - {jQuery.Event}
  *        - {string} Language code the change was made in.
@@ -67,8 +65,7 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 			$description: '.wikibase-entitytermsforlanguageview-description',
 			$aliases: '.wikibase-entitytermsforlanguageview-aliases'
 		},
-		value: null,
-		entityChangersFactory: null
+		value: null
 	},
 
 	/**
@@ -95,10 +92,6 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._create
 	 */
 	_create: function() {
-		if ( !this.options.entityChangersFactory ) {
-			throw new Error( 'Required option(s) missing' );
-		}
-
 		this.options.value = this._checkValue( this.options.value );
 
 		PARENT.prototype._create.call( this );
@@ -184,14 +177,6 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 				)
 			};
 
-			if ( widgetName === 'aliasesview' ) {
-				options.aliasesChanger = self.options.entityChangersFactory.getAliasesChanger();
-			} else if ( widgetName === 'descriptionview' ) {
-				options.descriptionsChanger = self.options.entityChangersFactory.getDescriptionsChanger();
-			} else if ( widgetName === 'labelview' ) {
-				options.labelsChanger = self.options.entityChangersFactory.getLabelsChanger();
-			}
-
 			self['$' + widgetName][widgetName]( options );
 		} );
 	},
@@ -244,8 +229,6 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 			return;
 		}
 
-		dropValue = !!dropValue;
-
 		this._trigger( 'stopediting', null, [dropValue] );
 
 		this.disable();
@@ -254,61 +237,11 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 			descriptionview = this.$descriptionview.data( 'descriptionview' ),
 			aliasesview = this.$aliasesview.data( 'aliasesview' );
 
-		// TODO: This widget should not need to queue the requests of its encapsulated widgets.
-		// However, the back-end produces edit conflicts when issuing multiple requests at once.
-		// Remove queueing as soon as the back-end is fixed; see bug T74020.
-		var $queue = $( {} );
+		labelview.stopEditing( dropValue );
+		descriptionview.stopEditing( dropValue );
+		aliasesview.stopEditing( dropValue );
 
-		/**
-		 * @param {jQuery} $queue
-		 * @param {jQuery.ui.TemplatedWidget} widget
-		 * @param {boolean} dropValue
-		 */
-		function addStopEditToQueue( $queue, widget, dropValue ) {
-			$queue.queue( 'stopediting', function( next ) {
-				widget.element
-				.one(
-					widget.widgetEventPrefix
-						+ 'afterstopediting.entitytermsforlanguageviewstopediting',
-					function( event ) {
-						widget.element.off( '.entitytermsforlanguageviewstopediting' );
-						setTimeout( next, 0 );
-					}
-				)
-				.one(
-					widget.widgetEventPrefix
-						+ 'toggleerror.entitytermsforlanguageviewstopediting',
-					function( event ) {
-						widget.element.off( '.entitytermsforlanguageviewstopediting' );
-						$queue.clearQueue();
-						self._resetEditMode();
-					}
-				);
-				widget.stopEditing( dropValue );
-			} );
-		}
-
-		addStopEditToQueue( $queue, labelview, dropValue || labelview.isInitialValue() );
-		addStopEditToQueue(
-			$queue,
-			descriptionview,
-			dropValue || descriptionview.isInitialValue()
-		);
-		addStopEditToQueue( $queue, aliasesview, dropValue || aliasesview.isInitialValue() );
-
-		$queue.queue( 'stopediting', function() {
-			self._afterStopEditing( dropValue );
-		} );
-
-		$queue.dequeue( 'stopediting' );
-	},
-
-	_resetEditMode: function() {
-		this.enable();
-
-		this.$labelview.data( 'labelview' ).startEditing();
-		this.$descriptionview.data( 'descriptionview' ).startEditing();
-		this.$aliasesview.data( 'aliasesview' ).startEditing();
+		this._afterStopEditing( dropValue );
 	},
 
 	/**

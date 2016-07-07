@@ -18,8 +18,6 @@
  * @option {string[]} userLanguages
  *         A list of languages for which terms should be displayed initially.
  *
- * @option {wikibase.entityChangers.EntityChangersFactory} entityChangersFactory
- *
  * @event change
  *        - {jQuery.Event}
  *        - {string} Language code the change was made in.
@@ -55,8 +53,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 			$listview: '.wikibase-entitytermsforlanguagelistview-listview'
 		},
 		value: null,
-		userLanguages: [],
-		entityChangersFactory: null
+		userLanguages: []
 	},
 
 	/**
@@ -85,7 +82,6 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	_create: function() {
 		if ( !( this.options.value instanceof wb.datamodel.Fingerprint )
 			|| !$.isArray( this.options.userLanguages )
-			|| !this.options.entityChangersFactory
 		) {
 			throw new Error( 'Required option(s) missing' );
 		}
@@ -188,8 +184,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 				listItemWidget: listItemWidget,
 				newItemOptionsFn: function( value ) {
 					return {
-						value: value,
-						entityChangersFactory: self.options.entityChangersFactory
+						value: value
 					};
 				}
 			} ),
@@ -445,13 +440,11 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @param {boolean} [dropValue]
 	 */
 	stopEditing: function( dropValue ) {
-		var self = this;
+		var deferred = $.Deferred();
 
 		if ( !this._isInEditMode || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
-			return;
+			return deferred.resolve().promise();
 		}
-
-		dropValue = !!dropValue;
 
 		this._trigger( 'stopediting', null, [dropValue] );
 
@@ -460,63 +453,13 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();
 
-		// TODO: This widget should not need to queue the requests of its encapsulated widgets.
-		// However, the back-end produces edit conflicts when issuing multiple requests at once.
-		// Remove queueing as soon as the back-end is fixed; see bug T74020.
-		var $queue = $( {} ),
-			eventNamespace = 'entitytermsforlanguagelistviewstopediting';
-
-		/**
-		 * @param {jQuery} $queue
-		 * @param {jQuery.wikibase.entitytermsforlanguageview} entitytermsforlanguageview
-		 * @param {boolean} dropValue
-		 */
-		function addStopEditToQueue( $queue, entitytermsforlanguageview, dropValue ) {
-			$queue.queue( 'stopediting', function( next ) {
-				entitytermsforlanguageview.element
-				.one( 'entitytermsforlanguageviewafterstopediting.' + eventNamespace,
-					function( event ) {
-						entitytermsforlanguageview.element.off( '.' + eventNamespace );
-						setTimeout( next, 0 );
-					}
-				)
-				.one( 'entitytermsforlanguageviewtoggleerror.' + eventNamespace,
-					function( event ) {
-						entitytermsforlanguageview.element.off( '.' + eventNamespace );
-						$queue.clearQueue();
-						self._resetEditMode();
-					}
-				);
-				entitytermsforlanguageview.stopEditing( dropValue );
-			} );
-		}
-
-		listview.items().each( function() {
-			var entitytermsforlanguageview = lia.liInstance( $( this ) );
-			addStopEditToQueue(
-				$queue,
-				entitytermsforlanguageview,
-				dropValue || entitytermsforlanguageview.isInitialValue()
-			);
+		listview.value().forEach( function( entitytermsforlanguageview ) {
+			entitytermsforlanguageview.stopEditing( dropValue );
 		} );
 
-		$queue.queue( 'stopediting', function() {
-			self._afterStopEditing( dropValue );
-		} );
-
-		$queue.dequeue( 'stopediting' );
-	},
-
-	_resetEditMode: function() {
-		this.enable();
-
-		var listview = this.$listview.data( 'listview' ),
-			lia = listview.listItemAdapter();
-
-		listview.items().each( function() {
-			var entitytermsforlanguageview = lia.liInstance( $( this ) );
-			entitytermsforlanguageview.startEditing();
-		} );
+		this._afterStopEditing( dropValue );
+		deferred.resolve();
+		return deferred.promise();
 	},
 
 	/**
@@ -637,11 +580,14 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
 	_setOption: function( key, value ) {
-		if ( key === 'value' ) {
-			throw new Error( 'Impossible to set value after initialization' );
-		}
-
 		var response = PARENT.prototype._setOption.apply( this, arguments );
+
+		if ( key === 'value' ) {
+			var self = this;
+			this.$listview.data( 'listview' ).value().forEach( function( entitytermsforlanguageview ) {
+				entitytermsforlanguageview.value( self._getValueForLanguage( entitytermsforlanguageview.value().language ) );
+			} );
+		}
 
 		if ( key === 'disabled' ) {
 			this.$listview.data( 'listview' ).option( key, value );
