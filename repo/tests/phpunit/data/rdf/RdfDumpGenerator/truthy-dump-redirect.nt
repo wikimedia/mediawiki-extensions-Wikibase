@@ -43,3 +43,11 @@ _:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/20
 _:genid1 <http://www.w3.org/2002/07/owl#onProperty> <http://acme.test/prop/direct/P10> .
 _:genid1 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.w3.org/2002/07/owl#Thing> .
 <http://acme.test/Q4242> <http://www.w3.org/2002/07/owl#sameAs> <http://acme.test/Q42> .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#directClaimResource> <http://acme.test/prop/direct-resource/P10> .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#qualifierResource> <http://acme.test/prop/qualifier-resource/P10> .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#referenceResource> <http://acme.test/prop/reference-resource/P10> .
+<http://acme.test/P10> <http://wikiba.se/ontology-beta#statementPropertyResource> <http://acme.test/prop/statement-resource/P10> .
+<http://acme.test/prop/direct-resource/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://acme.test/prop/statement-resource/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://acme.test/prop/qualifier-resource/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://acme.test/prop/reference-resource/P10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
