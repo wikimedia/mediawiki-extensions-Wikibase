@@ -62,7 +62,7 @@
 
 				// FIXME: Introduce Item.setLabels
 
-				deferred.resolve( savedLabel );
+				deferred.resolve( new wb.datamodel.Term( language, savedLabel ) );
 			} )
 			.fail( function( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );

@@ -62,7 +62,7 @@
 
 				// FIXME: Introduce Item.setDescriptions
 
-				deferred.resolve( savedDescription );
+				deferred.resolve( new wb.datamodel.Term( language, savedDescription ) );
 			} )
 			.fail( function( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
