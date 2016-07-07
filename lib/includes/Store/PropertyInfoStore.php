@@ -13,6 +13,11 @@ use Wikimedia\Rdbms\DBError;
 interface PropertyInfoStore {
 
 	/**
+	 * Key to use in the info array for the property's canonical URI pattern
+	 */
+	const KEY_CANONICAL_URI = 'canonicalURI';
+
+	/**
 	 * Update the info for the given property.
 	 *
 	 * @note: All well known fields MUST be set in $info.

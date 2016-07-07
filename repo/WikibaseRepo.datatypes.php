@@ -30,6 +30,8 @@ use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
+use Wikibase\Lib\Store\FieldPropertyInfoProvider;
+use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;
@@ -38,6 +40,7 @@ use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\CommonsMediaRdfBuilder;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
 use Wikibase\Rdf\Values\EntityIdRdfBuilder;
+use Wikibase\Rdf\Values\ExternalIdentifierRdfBuilder;
 use Wikibase\Rdf\Values\GlobeCoordinateRdfBuilder;
 use Wikibase\Rdf\Values\LiteralValueRdfBuilder;
 use Wikibase\Rdf\Values\MonolingualTextRdfBuilder;
@@ -300,7 +303,20 @@ return call_user_func( function() {
 				$factory = WikibaseRepo::getDefaultSnakFormatterBuilders();
 				return $factory->newExternalIdentifierFormatter( $format, $options );
 			},
-			// TODO: RDF mapping using canonical URI patterns
+			'rdf-builder-factory-callback' => function (
+				$mode,
+				RdfVocabulary $vocab,
+				RdfWriter $writer,
+				EntityMentionListener $tracker,
+				DedupeBag $dedupe
+			) {
+				$repo = WikibaseRepo::getDefaultInstance();
+				$uriPatternProvider = new FieldPropertyInfoProvider(
+					$repo->getStore()->getPropertyInfoLookup(),
+					PropertyInfoStore::KEY_CANONICAL_URI
+				);
+				return new ExternalIdentifierRdfBuilder( $uriPatternProvider );
+			},
 		],
 		'VT:wikibase-entityid' => [
 			'validator-factory-callback' => function() {
