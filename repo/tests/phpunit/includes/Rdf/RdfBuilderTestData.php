@@ -185,6 +185,10 @@ class RdfBuilderTestData {
 			$writer->prefix( $ns, $uri );
 		}
 
+		foreach ( $this->getVocabulary()->normalizedPropertyValueNamespace as $ns => $normalized ) {
+			$writer->prefix( $normalized, 'http://acme.test/' . $normalized . '/' );
+		}
+
 		if ( $start ) {
 			$writer->start();
 		}
