@@ -16,6 +16,24 @@
       "revId": "c1a34d42e62e73deebc86423a0119565a145cd91",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee011f3e_ecafe28f",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-07-08T14:28:35Z",
+      "side": 1,
+      "message": "Interestingly, I haven\u0027t found any example of {{int:...}} used as a link target (\u003d pagename) in core i18n.",
+      "parentUuid": "ee011f3e_b98b5e1a",
+      "revId": "c1a34d42e62e73deebc86423a0119565a145cd91",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
