@@ -311,10 +311,11 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @private
 	 */
 	_removeMoreLanguages: function() {
-		var listview = this.$listview.data( 'listview' );
+		var listview = this.$listview.data( 'listview' ),
+			self = this;
 
-		this._moreLanguagesItems.forEach( function( item ) {
-			listview.removeItem( item );
+		Object.keys( this._moreLanguagesItems ).forEach( function( key ) {
+			listview.removeItem( self._moreLanguagesItems[key] );
 		} );
 
 		this._moreLanguagesItems = {};
