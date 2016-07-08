@@ -313,9 +313,9 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	_removeMoreLanguages: function() {
 		var listview = this.$listview.data( 'listview' );
 
-		this._moreLanguagesItems.forEach( function( item ) {
-			listview.removeItem( item );
-		} );
+		for ( var languageCode in this._moreLanguagesItems ) {
+			listview.removeItem( this._moreLanguagesItems[languageCode] );
+		}
 
 		this._moreLanguagesItems = {};
 	},
