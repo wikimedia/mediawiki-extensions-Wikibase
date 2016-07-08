@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_acedda24",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-08T14:05:12Z",
+      "side": 0,
+      "message": "Introduced in I343e24843e64950eb36caf42d53ff164dee17365.",
+      "revId": "dfe5e7272d48a017ba814f77bbabd8adaf93c076",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

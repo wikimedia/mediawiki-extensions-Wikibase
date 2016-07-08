@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee011f3e_acd4ba4c",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-08T14:05:12Z",
+      "side": 1,
+      "message": "Works, but an even more simple solution is a native loop:\n\nfor ( var lang in this._moreLanguagesItems ) {\n\tlistview.removeItem( this._moreLanguagesItems[lang] );\n}",
+      "revId": "cf5b70d4b3bb59742d8a4c8d65f2aaf5ffb1913e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
