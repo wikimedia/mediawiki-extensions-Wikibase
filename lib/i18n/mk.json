@@ -88,6 +88,7 @@
 	"wikibase-time-precision-BCE-10annum": "$1-ти п.н.е.",
 	"wikibase-snakformatter-valuetype-mismatch": "Типит на вредноста („$1“) не одговара на типот на својството („$2“).",
 	"wikibase-snakformatter-property-not-found": "Не го најдов својството $1. Не можам да го одредам податочниот тип што треба да се користи.",
+	"wikibase-snakformatter-formatting-exception": "Грешка во форматирањето: $1.",
 	"wikibase-entity-summary-wbsetitem": "Создавање на нов предмет",
 	"wikibase-entity-summary-wbcreate-new": "Создадена нова единица",
 	"wikibase-entity-summary-wbcreateredirect": "Пренасочено на $4",

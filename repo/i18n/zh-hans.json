@@ -514,6 +514,7 @@
 	"apihelp-wbsetaliases-example-4": "对于ID为Q1的实体，当加入Bar作为英语别名时，从英语别名列表中移除Foo",
 	"apihelp-wbsetclaim-description": "创建或更新一个实体声明或声称。",
 	"apihelp-wbsetclaim-param-claim": "声明或声称序列化",
+	"apihelp-wbsetclaim-param-index": "在实体的声明列表内，要移动声明的索引。可选。Be aware that when setting an index that specifies a position not next to a statement whose main snak does not feature the same property, the whole group of statements whose main snaks feature the same property is moved. When not provided, an existing statement will stay in place while a new statement will be appended to the last one whose main snak features the same property.",
 	"apihelp-wbsetclaim-param-summary": "编辑摘要。\n将按照自动生成的评论。自动评论与摘要的长度限制是260个字符。需要小心任何超出上述限定的东西将被裁剪掉。",
 	"apihelp-wbsetclaim-param-baserevid": "要修改的基础修订的数字标识符。\n这被用于保存时检测冲突。",
 	"apihelp-wbsetclaim-param-bot": "将此编辑标记为机器人编辑。此URL标记将只在用户属于“bot”用户组时受尊重。",
