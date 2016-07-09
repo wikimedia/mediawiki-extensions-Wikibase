@@ -4,7 +4,8 @@
 			"Fryed-peach",
 			"Shirayuki",
 			"Sujiniku",
-			"Otokoume"
+			"Otokoume",
+			"Afaz"
 		]
 	},
 	"wikibase-lib-desc": "ウィキベースとウィキベースクライアント拡張機能で共通の機能を保持する",
@@ -79,7 +80,7 @@
 	"wikibase-time-precision-BCE-annum": "紀元前{{PLURAL:$1|$1世紀}}",
 	"wikibase-monolingualtext": "<span lang=\"$2\" class=\"wb-monolingualtext-value\">$1</span> <span class=\"wb-monolingualtext-language-name\" dir=\"auto\">($3)</span>",
 	"wikibase-snakformatter-valuetype-mismatch": "値の型「$1」が特性の型「$2」と一致しません。",
-	"wikibase-snakformatter-property-not-found": "特性「$1」が見つからないため、使用すべきデータ型が決定できません。",
+	"wikibase-snakformatter-property-not-found": "プロパティ「$1」が見つからないため、使用すべきデータ型が決定できません。",
 	"wikibase-entity-summary-wbsetitem": "項目を新規作成",
 	"wikibase-entity-summary-wbcreate-new": "新しいエンティティを作成しました",
 	"wikibase-entity-summary-wbcreateredirect": "$4 へのリダイレクト",
