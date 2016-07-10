@@ -3,16 +3,18 @@
 		"authors": [
 			"VASANTH S.N.",
 			"రహ్మానుద్దీన్",
-			"Vishwanatha Badikana"
+			"Vishwanatha Badikana",
+			"BHARATHESHA ALASANDEMAJALU"
 		]
 	},
 	"wikibase-edit": "ಸಂಪೊಲಿಪುಲೆ",
 	"wikibase-add": "ಸೇರ್ಸಾಲೆ",
+	"wikibase-entitytermsforlanguagelistview-less": "ಬೇತೆ ಬಾಸೆಲೆಡ್",
 	"wikibase-label-empty": "ಲೇಬಲ್ ಉಲ್ಲೇಕೊ ಆತ್‍ಜಿ",
 	"wikibase-description-empty": "ವಿವರನೆ ಇದ್ಯಾಂತೆ ವಿವರಿಸದ್ ಆತ್ಂಡ್",
+	"wikibase-sitelink-site-edit-placeholder": "ವಿಕಿ",
 	"wikibase-statementsection-statements": "ಪಾತೆರೊಲು",
 	"wikibase-sitelinks-special": "ಬೇತೆ ತಾನೊಲು",
-	"wikibase-aliases-empty": "ಅಲಿಯಾಸ್‍ನ್ ವಿವರಿಸವೊಡುಂದು ಇದ್ದಿ.",
 	"wikibase-statementview-rank-normal": "ಸಾದಾರಣೊ ಶ್ರೇಣಿ",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ಉಲ್ಲೇಕೊ|ಉಲ್ಲೇಕೊಲು}}"
 }
