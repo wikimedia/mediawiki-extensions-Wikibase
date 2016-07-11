@@ -220,7 +220,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 			var siteLink = siteLinks.pop();
 			self.options.siteLinksChanger.setSiteLink( siteLink ).done( function( savedSiteLink ) {
-				self._onSiteLinkSaved( siteLink, savedSiteLink );
 				next();
 			} ).fail( function( error ) {
 				deferred.reject( error );
@@ -228,30 +227,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		}
 
 		setTimeout( next, 0 );
-
-		return deferred.promise();
-	},
-
-	_onSiteLinkSaved: function( inSiteLink, savedSiteLink ) {
-		var deferred = $.Deferred();
-
-		var sitelinklistview = this.$sitelinklistview.data( 'sitelinklistview' );
-		if ( inSiteLink.getPageName() !== '' ) {
-			sitelinklistview.$listview.data( 'listview' ).value().some( function( sitelinkview ) {
-				var value = sitelinkview.value();
-				if ( !value ) {
-					return;
-				}
-				var found = value.equals( inSiteLink );
-				if ( found ) {
-					sitelinkview.stopEditing().done( function() {
-						sitelinkview.value( savedSiteLink );
-						deferred.resolve();
-					} );
-				}
-				return found;
-			} );
-		}
 
 		return deferred.promise();
 	},
