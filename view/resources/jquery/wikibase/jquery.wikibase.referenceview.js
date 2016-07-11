@@ -17,6 +17,7 @@
  * @param {Object} options
  * @param {wikibase.datamodel.Reference|null} options.value
  * @param {Function} options.getListItemAdapter
+ * @param {Function} options.removeCallback
  */
 /**
  * @event afterstartediting
@@ -72,16 +73,22 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.getListItemAdapter ) {
+		if ( !this.options.getListItemAdapter || !this.options.removeCallback ) {
 			throw new Error( 'Required option not specified properly' );
 		}
 
 		PARENT.prototype._create.call( this );
 
+		var self = this;
 		var listview;
 		this.$listview.listview( {
 			listItemAdapter: this.options.getListItemAdapter( function( snaklistview ) {
 				listview.removeItem( snaklistview.element );
+				if ( listview.items().length === 0 ) {
+					self.options.removeCallback();
+				} else {
+					self._trigger( 'change' );
+				}
 			} ),
 			value: this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : []
 		} );
