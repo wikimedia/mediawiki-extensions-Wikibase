@@ -452,26 +452,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			} );
 	},
 
-	diffValue: function() {
-		var listview = this.$listview.data( 'listview' );
-		var siteLinks = [];
-		siteLinks = siteLinks.concat( this._getRemovedSiteLinkIds().map( function( siteId ) {
-			return new wb.datamodel.SiteLink( siteId, '' );
-		} ) );
-
-		listview.items().each( function( i, dom ) {
-			var sitelinkview = $( dom ).data( 'sitelinkview' );
-			if ( sitelinkview.isInitialValue() ) {
-				return;
-			}
-			var value = sitelinkview.value();
-			if ( value ) {
-				siteLinks.push( value );
-			}
-		} );
-		return siteLinks;
-	},
-
 	/**
 	 * @see jQuery.ui.EditableTemplatedWidget._save
 	 */
@@ -512,26 +492,6 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			var sitelinkview = lia.liInstance( $( this ) );
 			sitelinkview.startEditing();
 		} );
-	},
-
-	/**
-	 * @return {string[]}
-	 */
-	_getRemovedSiteLinkIds: function() {
-		var currentSiteIds = $.map( this.value(), function( siteLink ) {
-			return siteLink.getSiteId();
-		} );
-
-		var removedSiteLinkIds = [];
-
-		for ( var i = 0; i < this.options.value.length; i++ ) {
-			var siteId = this.options.value[i].getSiteId();
-			if ( $.inArray( siteId, currentSiteIds ) === -1 ) {
-				removedSiteLinkIds.push( siteId );
-			}
-		}
-
-		return removedSiteLinkIds;
 	},
 
 	/**

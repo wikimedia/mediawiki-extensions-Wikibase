@@ -37,7 +37,7 @@ function createSitelinkgroupview( options ) {
 			$dom.data( 'sitelinklistview', widget );
 			return widget;
 		},
-		siteLinksChanger: 'I am a SiteLinksChanger'
+		siteLinkSetsChanger: 'I am a SiteLinkSetsChanger'
 	}, options );
 
 	var $sitelinkgroupview = $( '<div/>' )

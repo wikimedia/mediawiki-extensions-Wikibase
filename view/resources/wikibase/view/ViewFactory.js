@@ -231,7 +231,7 @@
 				groupName: groupName,
 				value: siteLinks,
 				getSiteLinkListView: this.getSiteLinkListView.bind( this ),
-				siteLinksChanger: this._entityChangersFactory.getSiteLinksChanger()
+				siteLinkSetsChanger: this._entityChangersFactory.getSiteLinkSetsChanger()
 			}
 		);
 	};
