@@ -472,7 +472,11 @@
 
 	SELF.prototype.getReferenceView = function( startEditingCallback, removeCallback, value, $dom ) {
 		var structureEditorFactory = this._structureEditorFactory;
-		var view = this._getView(
+		var view;
+		var doRemove = function() {
+			return removeCallback( view );
+		};
+		view = this._getView(
 			'referenceview',
 			$dom,
 			{
@@ -481,9 +485,10 @@
 				getListItemAdapter: this.getListItemAdapterForSnakListView.bind( this, startEditingCallback ),
 				getReferenceRemover: function( $dom ) {
 					return structureEditorFactory.getRemover( function() {
-						return startEditingCallback().then( function() { return removeCallback( view ); } );
+						return startEditingCallback().then( doRemove );
 					}, $dom );
-				}
+				},
+				removeCallback: doRemove
 			}
 		);
 		return view;
