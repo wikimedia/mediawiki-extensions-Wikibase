@@ -35,14 +35,13 @@
 
 		/**
 		 * @param {wikibase.datamodel.SiteLink} siteLink
-		 * @param {string} language
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
 		 *         - {string} The saved siteLink
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
-		setSiteLink: function( siteLink, language ) {
+		setSiteLink: function( siteLink ) {
 			var self = this,
 				deferred = $.Deferred();
 
@@ -54,7 +53,8 @@
 				siteLink.getBadges()
 			)
 			.done( function( result ) {
-				var siteId = siteLink.getSiteId();
+				var siteId = siteLink.getSiteId(),
+					resultData = result.entity.sitelinks[siteId];
 
 				// Update revision store
 				self._revisionStore.setSitelinksRevision( result.entity.lastrevid, siteId );
@@ -63,18 +63,15 @@
 
 				// FIXME: Introduce Item.setSiteLinks
 
-				var resultData = result.entity.sitelinks[siteId];
-				var savedSiteLink;
-				if ( resultData.removed === '' ) {
-					savedSiteLink = null;
-				} else {
-					savedSiteLink = new wb.datamodel.SiteLink(
-						siteId,
-						resultData.title,
-						resultData.badges
-					);
-				}
-				deferred.resolve( savedSiteLink );
+				deferred.resolve(
+					resultData.hasOwnProperty( 'removed' )
+						? null
+						: new wb.datamodel.SiteLink(
+							siteId,
+							resultData.title,
+							resultData.badges
+						)
+				);
 			} )
 			.fail( function( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse(
