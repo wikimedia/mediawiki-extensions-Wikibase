@@ -116,8 +116,7 @@ $.widget( 'ui.tagadata', {
 		this._initialTagLabels = [];
 
 		this._$tagList
-		.addClass( 'tagadata' )
-		.addClass( 'ui-widget ui-widget-content ui-corner-all' )
+		.addClass( 'tagadata ui-widget ui-widget-content ui-corner-all' )
 		.on( 'click.tagadata', function( event ) {
 			var target = $( event.target );
 			if ( target.hasClass( 'tagadata-label' ) ) {
@@ -449,11 +448,10 @@ $.widget( 'ui.tagadata', {
 				}
 
 				// Check whether the tag is modified/new compared to initial state:
-				if ( $.inArray( tagLabel, self._initialTagLabels ) === -1 ) {
-					$tag.addClass( 'tagadata-choice-modified' );
-				} else {
-					$tag.removeClass( 'tagadata-choice-modified' );
-				}
+				$tag.toggleClass(
+					'tagadata-choice-modified',
+					$.inArray( tagLabel, self._initialTagLabels ) === -1
+				);
 			}
 		);
 	},

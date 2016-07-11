@@ -125,14 +125,14 @@ $.widget( 'wikibase.statementgroupview', PARENT, {
 			self.$property.toggleClass( 'wb-error', Boolean( error ) );
 		} )
 		.on( prefix + 'afterstopediting.' + this.widgetName, function( event, dropValue ) {
-			self.$property.removeClass( 'wb-error' ).removeClass( 'wb-edit' );
+			self.$property.removeClass( 'wb-error wb-edit' );
 			self._trigger( 'afterstopediting', null, [dropValue] );
 		} )
 		.on( prefix + 'afterstartediting.' + this.widgetName, function( event ) {
 			self.$property.addClass( 'wb-edit' );
 		} )
 		.on( prefix + 'afterremove.' + this.widgetName, function( event ) {
-			self.$property.removeClass( 'wb-error' ).removeClass( 'wb-edit' );
+			self.$property.removeClass( 'wb-error wb-edit' );
 			self._trigger( 'afterremove' );
 		} );
 	},
