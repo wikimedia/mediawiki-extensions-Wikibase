@@ -211,6 +211,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @return string HTML
 	 */
 	protected function getFormElements( EntityDocument $entity = null ) {
+		$this->getOutput()->addModules( 'mediawiki.ui.input' );
+
 		if ( $this->page === null ) {
 			$this->page = $this->site === null ? '' : $this->getSiteLink( $entity, $this->site );
 		}
