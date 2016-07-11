@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce061b56_4a9f17ba",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguagelistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-11T17:37:11Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "b5d696789388614f3fc71eea1f3774e55ad77db7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_aa6043cd",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.listview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-11T17:37:11Z",
+      "side": 1,
+      "message": "After years of looking at JavaScript code I still don\u0027t get this without looking it up.\n* value() returns a native JavaScript array.\n* map() is native JavaScript. This creates an array with the results of all the inner startEditing calls.\n* I don\u0027t understand what the apply() does in this context and why. It seems it\u0027s *not* to change the \"this\" context, because it simply repeats \"$\". It seems this is to pass the array elements as multiple arguments.\n* when() is jQuery. There is a possible issue hidden here: Not all startEditing methods we have return a promise. Will this fail then? Will this make the loop stop after the first call that did not returned a resolved promise?",
+      "revId": "b5d696789388614f3fc71eea1f3774e55ad77db7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_cab2e747",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-11T17:37:11Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "b5d696789388614f3fc71eea1f3774e55ad77db7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_6aae5be6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-11T17:37:11Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "b5d696789388614f3fc71eea1f3774e55ad77db7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_2aa45304",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-11T17:37:11Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "b5d696789388614f3fc71eea1f3774e55ad77db7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
