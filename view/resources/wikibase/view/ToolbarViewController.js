@@ -1,4 +1,4 @@
-wikibase.view.ToolbarViewController = ( function( wb, mw ) {
+wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
 'use strict';
 
 /**
@@ -22,12 +22,19 @@ wikibase.view.ToolbarViewController = ( function( wb, mw ) {
  */
 var SELF = util.inherit(
 	wb.view.ViewController,
-	function( model, toolbar, view ) {
+	function( model, toolbar, view, removeView ) {
 		this._model = model;
 		this._toolbar = toolbar;
 		this._view = view;
+		this._removeView = removeView;
 	}
 );
+
+/**
+ * @property {Object|null}
+ * @private
+ */
+SELF.prototype._value = null;
 
 /**
  * @property {Object}
@@ -47,11 +54,19 @@ SELF.prototype._toolbar = null;
  */
 SELF.prototype._view = null;
 
+SELF.prototype.setValue = function( value ) {
+	this._value = value;
+	this._toolbar.option(
+		'onRemove',
+		( value && this._model.remove ) ? $.proxy( this, 'remove' ) : null
+	);
+};
+
 /**
  * Start editing
  */
 SELF.prototype.startEditing = function() {
-	this._view.startEditing();
+	var result = this._view.startEditing();
 	this._toolbar.toEditMode();
 
 	this._updateSaveButtonState();
@@ -63,6 +78,7 @@ SELF.prototype.startEditing = function() {
 		this._view.widgetEventPrefix + 'disable',
 		jQuery.proxy( this._updateToolbarState, this )
 	);
+	return result;
 };
 
 SELF.prototype._updateToolbarState = function() {
@@ -74,9 +90,14 @@ SELF.prototype._updateToolbarState = function() {
 	}
 };
 
+SELF.prototype._viewHasNewGoodValue = function() {
+	var viewValue = this._view.value();
+	return viewValue !== null && ( this._value === null || !this._value.equals( viewValue ) );
+};
+
 SELF.prototype._updateSaveButtonState = function() {
 	var btnSave = this._toolbar.getButton( 'save' ),
-		enableSave = this._view.isValid() && !this._view.isInitialValue();
+		enableSave = this._viewHasNewGoodValue();
 
 	btnSave[enableSave ? 'enable' : 'disable']();
 };
@@ -88,9 +109,7 @@ SELF.prototype._updateSaveButtonState = function() {
  * persisted or dropped
  */
 SELF.prototype.stopEditing = function( dropValue ) {
-	var self = this;
-
-	if ( ( !this._view.isValid() || this._view.isInitialValue() ) && !dropValue ) {
+	if ( !dropValue && !this._viewHasNewGoodValue() ) {
 		return;
 	}
 
@@ -100,16 +119,18 @@ SELF.prototype.stopEditing = function( dropValue ) {
 	this._view.disable();
 
 	if ( dropValue ) {
-		// FIXME: Shouldn't we re-set the value here?
-		this._leaveEditMode();
+		this._view.value( this._value );
+		this._leaveEditMode( dropValue );
 		return;
 	}
 
+	var self = this;
 	this._toolbar.toggleActionMessage( mw.msg( 'wikibase-save-inprogress' ) );
-	this._model.save( this._view.value() ).done( function( savedValue ) {
+	this._model.save( this._view.value(), this._value ).done( function( savedValue ) {
+		self.setValue( savedValue );
 		self._view.value( savedValue );
 		self._toolbar.toggleActionMessage();
-		self._leaveEditMode();
+		self._leaveEditMode( dropValue );
 	} ).fail( function( error ) {
 		self._view.enable();
 		self.setError( error );
@@ -130,21 +151,36 @@ SELF.prototype.remove = function() {
 
 	// FIXME: Currently done by the edittoolbar itself
 	// this._toolbar.toggleActionMessage( mw.msg( 'wikibase-remove-inprogress' ) );
-	return this._model.remove( this._view.value() ).done( function() {
+	var promise;
+	if ( this._value ) {
+		promise = this._model.remove( this._value );
+	} else {
+		promise = $.Deferred().resolve().promise();
+	}
+	return promise.done( function() {
+		self._value = null;
 		self._toolbar.toggleActionMessage();
-		self._leaveEditMode();
+		self._leaveEditMode( true );
 	} ).fail( function( error ) {
 		self._view.enable();
 		self.setError( error );
 	} );
 };
 
-SELF.prototype._leaveEditMode = function() {
-	this._view.enable();
-	this._view.stopEditing();
+SELF.prototype._leaveEditMode = function( dropValue ) {
+	if ( dropValue && !this._value ) {
+		this._removeView();
+	} else {
+		this._view.enable();
+		this._view.stopEditing( dropValue );
 
-	this._toolbar.enable();
-	this._toolbar.toNonEditMode();
+		this._toolbar.enable();
+		var self = this;
+		// FIXME: The toolbar has a race condition
+		window.setTimeout( function() {
+			self._toolbar.toNonEditMode();
+		} );
+	}
 };
 
 /**
@@ -161,24 +197,43 @@ SELF.prototype.cancelEditing = function() {
  * cleared
  */
 SELF.prototype.setError = function( error ) {
-	this._view.setError( Boolean( error ) );
-	if ( error instanceof wb.api.RepoApiError ) {
-		var toolbar = this._toolbar,
-			$anchor;
+	var viewParam = error ? ( error.context ? { context: error.context } : true ) : false;
+
+	this._view.setError( viewParam );
+
+	if ( !viewParam ) {
+		return;
+	}
+
+	if ( !( error instanceof wb.api.RepoApiError ) ) {
+		error = {
+			code: true, // Used by wbtooltip to detect errors
+			message: 'Unknown error' // FIXME: translate?
+		};
+	}
+
+	if ( this._view.doErrorNotification ) {
+		this._view.doErrorNotification( error );
+		this._toolbar.enable();
+		this._toolbar.toggleActionMessage();
+	} else {
+		// Use the toolbar for notification
+		var $anchor;
 
 		if ( error.action === 'save' ) {
-			$anchor = toolbar.getButton( 'save' ).element;
+			$anchor = this._toolbar.getButton( 'save' ).element;
 		} else if ( error.action === 'remove' ) {
-			$anchor = toolbar.getButton( 'remove' ).element;
+			$anchor = this._toolbar.getButton( 'remove' ).element;
 		}
 
-		toolbar.enable();
-		toolbar.toggleActionMessage( function() {
-			toolbar.displayError( error, $anchor );
+		this._toolbar.enable();
+		var self = this;
+		this._toolbar.toggleActionMessage( function() {
+			self._toolbar.displayError( error, $anchor );
 		} );
 	}
 };
 
 return SELF;
 
-} )( wikibase, mediaWiki );
+} )( jQuery, wikibase, mediaWiki );
