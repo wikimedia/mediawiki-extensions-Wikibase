@@ -180,11 +180,10 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			this._createBadgeSelector();
 		}
 
+		this.element.toggleClass( 'wb-edit', this._isInEditMode );
+
 		if ( this._isInEditMode ) {
-			this.element.addClass( 'wb-edit' );
 			this._drawEditMode();
-		} else {
-			this.element.removeClass( 'wb-edit' );
 		}
 	},
 
@@ -547,11 +546,11 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * @param {Error} [error]
 	 */
 	setError: function( error ) {
+		this.element.toggleClass( 'wb-error', !!error );
+
 		if ( error ) {
-			this.element.addClass( 'wb-error' );
 			this._trigger( 'toggleerror', null, [error] );
 		} else if ( this.element.hasClass( 'wb-error' ) ) {
-			this.element.removeClass( 'wb-error' );
 			this._trigger( 'toggleerror' );
 		}
 	}

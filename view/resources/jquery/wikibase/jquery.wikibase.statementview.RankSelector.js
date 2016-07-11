@@ -271,14 +271,13 @@
 		 */
 		_updateIcon: function() {
 			for ( var rankId in wb.datamodel.Statement.RANK ) {
-				var rankName = rankId.toLowerCase();
+				var rankName = rankId.toLowerCase(),
+					selected = this._rank === wb.datamodel.Statement.RANK[rankId];
 
-				if ( this._rank === wb.datamodel.Statement.RANK[rankId] ) {
-					this.$icon
-					.addClass( this.widgetFullName + '-' + rankName )
-					.attr( 'title', mw.msg( 'wikibase-statementview-rank-' + rankName ) );
-				} else {
-					this.$icon.removeClass( this.widgetFullName + '-' + rankName );
+				this.$icon.toggleClass( this.widgetFullName + '-' + rankName, selected );
+
+				if ( selected ) {
+					this.$icon.attr( 'title', mw.msg( 'wikibase-statementview-rank-' + rankName ) );
 				}
 			}
 		},
