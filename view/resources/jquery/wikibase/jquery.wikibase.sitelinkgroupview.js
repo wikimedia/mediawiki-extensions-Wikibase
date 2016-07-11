@@ -28,7 +28,7 @@ function getSiteIdsOfGroup( group ) {
  * @option {wikibase.datamodel.SiteLink[]} value A list of SiteLinks
  * @option {Function} getSiteLinkListView
  *
- * @option {wikibase.entityChangers.SiteLinksChanger} siteLinksChanger
+ * @option {wikibase.entityChangers.SiteLinkSetsChanger} siteLinkSetsChanger
  *
  * @option {string} [helpMessage]
  *                  Default: 'Add a site link by specifying a site and a page of that site, edit or
@@ -64,7 +64,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		value: null,
 		getSiteLinkListView: null,
 		groupName: null,
-		siteLinksChanger: null,
+		siteLinkSetsChanger: null,
 		helpMessage: mw.msg( 'wikibase-sitelinkgroupview-input-help-message' )
 	},
 
@@ -83,7 +83,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 */
 	_create: function() {
 		if ( !this.options.groupName
-			|| !this.options.siteLinksChanger
+			|| !this.options.siteLinkSetsChanger
 			|| !this.options.getSiteLinkListView
 		) {
 			throw new Error( 'Required parameter(s) missing' );
@@ -207,28 +207,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	},
 
 	_save: function() {
-		var deferred = $.Deferred();
-		var self = this;
-		var sitelinklistview = this.$sitelinklistview.data( 'sitelinklistview' );
-		var siteLinks = sitelinklistview.diffValue();
-
-		function next() {
-			if ( siteLinks.length === 0 ) {
-				deferred.resolve();
-				return;
-			}
-
-			var siteLink = siteLinks.pop();
-			self.options.siteLinksChanger.setSiteLink( siteLink ).done( function( savedSiteLink ) {
-				next();
-			} ).fail( function( error ) {
-				deferred.reject( error );
-			} );
-		}
-
-		setTimeout( next, 0 );
-
-		return deferred.promise();
+		return this.options.siteLinkSetsChanger.save( this.value(), this.options.value );
 	},
 
 	/**

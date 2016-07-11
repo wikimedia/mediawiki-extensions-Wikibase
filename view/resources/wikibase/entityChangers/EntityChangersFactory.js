@@ -79,10 +79,10 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.entityChangers.SiteLinksChanger}
+	 * @return {wikibase.entityChangers.SiteLinkSetsChanger}
 	 */
-	getSiteLinksChanger: function() {
-		return new MODULE.SiteLinksChanger( this._api, this._revisionStore, this._entity );
+	getSiteLinkSetsChanger: function() {
+		return new MODULE.SiteLinkSetsChanger( this._api, this._revisionStore, this._entity );
 	}
 } );
 
