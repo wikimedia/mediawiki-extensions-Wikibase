@@ -167,7 +167,7 @@
 	"wikibase-newproperty-datatype": "Тип данных:",
 	"wikibase-newproperty-invalid-datatype": "Указан недопустимый тип данных.",
 	"special-newitem": "Создание нового элемента",
-	"wikibase-newitem-summary": "Убедитесь, что [[Special:Search|проверили, не существует ли уже такой элемент]]!<br />Вы должны задать для всех новых элементов [[Help:Label|метку (название)]] и [[Help:Description|описание]].",
+	"wikibase-newitem-summary": "Убедитесь, что [[Special:Search|проверили, не существует ли уже такой элемент]]!<br />Вы должны задать для всех новых элементов [[Help:Label/ru|метку (название)]] и [[Help:Description/ru|описание]].",
 	"wikibase-newitem-fieldset": "Создать новый элемент",
 	"wikibase-newitem-site": "Сайт первой связанной страницы",
 	"wikibase-newitem-page": "Имя первой связанной страницы",
