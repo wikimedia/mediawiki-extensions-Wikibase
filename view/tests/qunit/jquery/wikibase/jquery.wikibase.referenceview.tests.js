@@ -45,7 +45,8 @@
 			},
 			getListItemAdapter: function() {
 				return listItemAdapter;
-			}
+			},
+			removeCallback: function() {}
 		}, options );
 
 		return $( '<div/>' )

@@ -382,9 +382,11 @@
 		sinon.assert.calledWith(
 			referenceview,
 			sinon.match( {
-				value: value || null,
+				getAdder: sinon.match.func,
 				getListItemAdapter: sinon.match.func,
-				getReferenceRemover: sinon.match.func
+				getReferenceRemover: sinon.match.func,
+				removeCallback: sinon.match.func,
+				value: value || null
 			} )
 		);
 
