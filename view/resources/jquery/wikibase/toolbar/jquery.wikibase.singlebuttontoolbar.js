@@ -15,6 +15,9 @@ var PARENT = $.wikibase.toolbar;
  * @option {string} [label]
  *         Default: ''
  *
+ * @option {string} [title]
+ *         Default: ''
+ *
  * @option {string} [eventName]
  *         Default: 'action'
  *
@@ -31,6 +34,7 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 	 */
 	options: {
 		label: '',
+		title: '',
 		eventName: 'action',
 		buttonCssClassSuffix: null
 	},
@@ -60,6 +64,7 @@ $.widget( 'wikibase.singlebuttontoolbar', PARENT, {
 
 		return $defaultButton.toolbarbutton( {
 			$label: this.options.label,
+			title: this.options.title,
 			cssClassSuffix: this.options.buttonCssClassSuffix
 		} )
 		.on( 'toolbarbuttonaction.' + this.widgetName, function( event ) {

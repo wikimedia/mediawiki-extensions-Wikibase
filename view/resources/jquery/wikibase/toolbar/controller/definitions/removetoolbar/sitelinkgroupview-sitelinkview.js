@@ -1,4 +1,4 @@
-( function( $ ) {
+( function( $, mw ) {
 	'use strict';
 
 /**
@@ -32,7 +32,8 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 					.removetoolbar( {
 						$container: $( '<span/>' ).appendTo(
 							$sitelinkview.data( 'sitelinkview' ).$siteIdContainer
-						)
+						),
+						title: mw.msg( 'wikibase-remove' )
 					} )
 					.on( 'removetoolbarremove.removetoolbar', function( event ) {
 						if ( event.target !== $sitelinkview.get( 0 ) ) {
@@ -102,4 +103,4 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 	}
 } );
 
-}( jQuery ) );
+}( jQuery, mediaWiki ) );

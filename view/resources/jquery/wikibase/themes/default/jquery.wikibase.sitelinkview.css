@@ -54,9 +54,9 @@
 
 .wikibase-sitelinkview .wikibase-toolbar-button-remove {
 	display: inline-block;
-	width: 20px;
-	vertical-align: middle;
 	overflow: hidden;
+	vertical-align: middle;
+	width: 20px;
 }
 
 .wb-badge:first-child {

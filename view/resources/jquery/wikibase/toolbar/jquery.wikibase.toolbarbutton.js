@@ -28,14 +28,16 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 	options: {
 		template: 'wikibase-toolbar-button',
 		templateParams: [
-			'',
-			'#',
-			''
+			'', // CSS class names
+			'#', // URL
+			'', // Label
+			'' // Title tooltip
 		],
 		templateShortCuts: {
 			$link: 'a'
 		},
 		$label: null,
+		title: '',
 		cssClassSuffix: null
 	},
 
@@ -53,6 +55,10 @@ $.widget( 'wikibase.toolbarbutton', PARENT, {
 
 		if ( this.$link.contents().text() === '' ) {
 			this.$link.append( this._getLabel() );
+		}
+
+		if ( this.options.title ) {
+			this.$link.prop( 'title', this.options.title );
 		}
 
 		this.$link
