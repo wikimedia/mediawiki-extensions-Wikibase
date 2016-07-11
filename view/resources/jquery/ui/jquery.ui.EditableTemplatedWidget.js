@@ -283,8 +283,12 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 */
 	getHelpMessage: function() {
 		return $.Deferred().resolve( this.options.helpMessage ).promise();
-	}
+	},
 
+	/**
+	 * @var {null|Function} A function notifying about an error or null if the toolbar should notify
+	 */
+	doErrorNotification: null
 } );
 
 }( jQuery ) );

@@ -8,6 +8,9 @@ function initToolbarViewController() {
 		{
 			remove: function() {
 				return $.Deferred();
+			},
+			save: function() {
+				return $.Deferred();
 			}
 		},
 		{
@@ -15,9 +18,11 @@ function initToolbarViewController() {
 			enable: function() {},
 			getButton: function() {
 				return {
-					disable: function() {}
+					disable: function() {},
+					enable: function() {}
 				};
 			},
+			toggleActionMessage: function() {},
 			toEditMode: function() {},
 			toNonEditMode: function() {}
 		},
@@ -32,7 +37,8 @@ function initToolbarViewController() {
 			startEditing: function() {},
 			stopEditing: function() {},
 			value: function() {}
-		}
+		},
+		function() {}
 	);
 
 	return controller;
