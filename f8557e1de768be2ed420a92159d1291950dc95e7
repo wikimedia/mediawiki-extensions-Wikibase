@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce061b56_41537543",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T17:18:44Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "f8557e1de768be2ed420a92159d1291950dc95e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_413a55e5",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T17:18:44Z",
+      "side": 1,
+      "message": "needs documentation in docs/options.wiki",
+      "revId": "f8557e1de768be2ed420a92159d1291950dc95e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
