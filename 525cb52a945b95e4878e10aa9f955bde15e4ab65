@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce061b56_30915d53",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-12T09:18:15Z",
+      "side": 1,
+      "message": "\"touched\", \"modified\", \"changed\", … could it be that our code uses different names for the same thing?\n\nOr to ask an other question: How did \"touched\" ended here?",
+      "revId": "525cb52a945b95e4878e10aa9f955bde15e4ab65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
