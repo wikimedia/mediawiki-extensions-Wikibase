@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "ce061b56_b07c2d1d",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T09:22:28Z",
+      "side": 1,
+      "message": "Hm,.. right. Will have to think about this. It\u0027s ok for now i guess.",
+      "parentUuid": "ce061b56_cd3cbebf",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee011f3e_d61c367f",
         "filename": "repo/maintenance/SPARQLClient.php",
         "patchSetId": 6
