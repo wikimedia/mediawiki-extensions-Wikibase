@@ -62,7 +62,7 @@ var createStatementview = function( options, $node ) {
 				stopEditing: function() {}
 			};
 		},
-		claimsChanger: 'I am a ClaimsChanger',
+		statementsChanger: 'I am a StatementsChanger',
 		entityIdPlainFormatter: {
 			format: function( entityId ) {
 				return $.Deferred().resolve( entityId ).promise();
@@ -212,7 +212,7 @@ QUnit.test( 'value with empty reference', function( assert ) {
 	} );
 } );
 
-QUnit.test( 'performs correct claimsChanger call', function( assert ) {
+QUnit.test( 'performs correct statementsChanger call', function( assert ) {
 	assert.expect( 3 );
 	var guid = 'GUID',
 		snak = new wb.datamodel.PropertyNoValueSnak( 'P1' ),
@@ -220,8 +220,8 @@ QUnit.test( 'performs correct claimsChanger call', function( assert ) {
 			return $.Deferred().resolve().promise();
 		} ),
 		$statementview = createStatementview( {
-			claimsChanger: {
-				setStatement: setStatement
+			statementsChanger: {
+				save: setStatement
 			},
 			guidGenerator: {
 				newGuid: function() { return guid; }

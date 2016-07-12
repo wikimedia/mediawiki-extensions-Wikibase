@@ -37,7 +37,7 @@
  * @param {Function} options.buildSnakView
  * @param {wikibase.utilities.ClaimGuidGenerator} options.guidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
- * @param {wikibase.entityChangers.ClaimsChanger} options.claimsChanger
+ * @param {wikibase.entityChangers.StatementsChanger} options.statementsChanger
  *        Required to store the view's `Statement`.
  * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
  *        Required for dynamically rendering plain text references to `Entity`s.
@@ -92,7 +92,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			$references: '.wikibase-statementview-references'
 		},
 		value: null,
-		claimsChanger: null,
+		statementsChanger: null,
 		entityIdPlainFormatter: null,
 		predefined: {
 			mainSnak: false
@@ -151,7 +151,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	_create: function() {
 		if ( !this.options.buildReferenceListItemAdapter
 			|| !this.options.buildSnakView
-			|| !this.options.claimsChanger
+			|| !this.options.statementsChanger
 			|| !this.options.entityIdPlainFormatter
 			|| !this.options.guidGenerator
 			|| !this.options.qualifiersListItemAdapter
@@ -775,7 +775,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			throw new Error( 'Unable to instantiate Statement' );
 		}
 
-		return this.options.claimsChanger.setStatement( statement )
+		return this.options.statementsChanger.save( statement )
 		.done( function( savedStatement ) {
 			// Update model of represented Statement:
 			self.options.value = savedStatement;

@@ -5,9 +5,9 @@
 ( function( sinon, wb, $ ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.entityChangers.ClaimsChanger' );
+	QUnit.module( 'wikibase.entityChangers.StatementsChanger' );
 
-	var SUBJECT = wikibase.entityChangers.ClaimsChanger;
+	var SUBJECT = wikibase.entityChangers.StatementsChanger;
 
 	QUnit.test( 'is a function', function( assert ) {
 		assert.expect( 1 );
@@ -23,20 +23,20 @@
 		assert.ok( new SUBJECT() instanceof SUBJECT );
 	} );
 
-	QUnit.test( 'removeStatement performs correct API call', function( assert ) {
+	QUnit.test( 'remove performs correct API call', function( assert ) {
 		assert.expect( 1 );
 		var api = {
 			removeClaim: sinon.spy( function() {
 				return $.Deferred().promise();
 			} )
 		};
-		var claimsChanger = new SUBJECT(
+		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function() { return 0; } },
 			'entity'
 		);
 
-		claimsChanger.removeStatement(
+		statementsChanger.remove(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
@@ -45,7 +45,7 @@
 		assert.ok( api.removeClaim.calledOnce );
 	} );
 
-	QUnit.test( 'removeStatement correctly handles API response', function( assert ) {
+	QUnit.test( 'remove correctly handles API response', function( assert ) {
 		assert.expect( 1 );
 		var api = {
 			removeClaim: sinon.spy( function() {
@@ -55,7 +55,7 @@
 				} ).promise();
 			} )
 		};
-		var claimsChanger = new SUBJECT(
+		var statementsChanger = new SUBJECT(
 			api,
 			{
 				getClaimRevision: function() { return 0; },
@@ -66,23 +66,23 @@
 
 		QUnit.stop();
 
-		claimsChanger.removeStatement(
+		statementsChanger.remove(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
 		)
 		.done( function() {
-			assert.ok( true, 'removeStatement succeeded' );
+			assert.ok( true, 'remove succeeded' );
 		} )
 		.fail( function() {
-			assert.ok( false, 'removeStatement failed' );
+			assert.ok( false, 'remove failed' );
 		} )
 		.always( function() {
 			QUnit.start();
 		} );
 	} );
 
-	QUnit.test( 'removeStatement correctly handles API failures', function( assert ) {
+	QUnit.test( 'remove correctly handles API failures', function( assert ) {
 		assert.expect( 2 );
 		var api = {
 			removeClaim: sinon.spy( function() {
@@ -91,7 +91,7 @@
 					.promise();
 			} )
 		};
-		var claimsChanger = new SUBJECT(
+		var statementsChanger = new SUBJECT(
 			api,
 			{
 				getClaimRevision: function() { return 0; },
@@ -102,18 +102,18 @@
 
 		QUnit.stop();
 
-		claimsChanger.removeStatement(
+		statementsChanger.remove(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
 		)
 		.done( function() {
-			assert.ok( false, 'removeStatement should have failed' );
+			assert.ok( false, 'remove should have failed' );
 		} )
 		.fail( function( error ) {
 			assert.ok(
 				error instanceof wb.api.RepoApiError,
-				'removeStatement did not fail with a RepoApiError'
+				'remove did not fail with a RepoApiError'
 			);
 
 			assert.equal( error.code, 'errorCode' );
@@ -123,122 +123,21 @@
 		} );
 	} );
 
-	QUnit.test( 'setClaim performs correct API call', function( assert ) {
+	QUnit.test( 'save performs correct API call', function( assert ) {
 		assert.expect( 1 );
 		var api = {
 			setClaim: sinon.spy( function() {
 				return $.Deferred().promise();
 			} )
 		};
-		var claimsChanger = new SUBJECT(
+		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function() { return 0; } },
 			'entity',
-			new wb.serialization.ClaimSerializer()
-		);
-
-		claimsChanger.setClaim(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		);
-
-		assert.ok( api.setClaim.calledOnce );
-	} );
-
-	QUnit.test( 'setClaim correctly handles API response', function( assert ) {
-		assert.expect( 1 );
-		var api = {
-			setClaim: sinon.spy( function() {
-				return $.Deferred().resolve( {
-					claim: { mainsnak: { snaktype: 'novalue', property: 'P1' } },
-					pageinfo: {}
-				} ).promise();
-			} )
-		};
-		var claimsChanger = new SUBJECT(
-			api,
-			{ getClaimRevision: function() { return 0; }, setClaimRevision: function() {} },
-			'entity',
-			new wb.serialization.ClaimSerializer(),
-			new wb.serialization.ClaimDeserializer()
-		);
-
-		QUnit.stop();
-
-		claimsChanger.setClaim(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		)
-		.done( function( savedClaim ) {
-			assert.ok(
-				savedClaim instanceof wb.datamodel.Claim,
-				'setClaim did not resolve with a Claim'
-			);
-		} )
-		.fail( function() {
-			assert.ok( false, 'setClaim failed' );
-		} )
-		.always( function() {
-			QUnit.start();
-		} );
-	} );
-
-	QUnit.test( 'setClaim correctly handles API failures', function( assert ) {
-		assert.expect( 2 );
-		var api = {
-			setClaim: sinon.spy( function() {
-				return $.Deferred()
-					.reject( 'errorCode', { error: { code: 'errorCode' } } )
-					.promise();
-			} )
-		};
-		var claimsChanger = new SUBJECT(
-			api,
-			{
-				getClaimRevision: function() { return 0; },
-				setClaimRevision: function() {}
-			},
-			'entity',
-			new wb.serialization.ClaimSerializer(),
-			new wb.serialization.ClaimDeserializer()
-		);
-
-		QUnit.stop();
-
-		claimsChanger.setClaim(
-			new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) )
-		)
-		.done( function( savedClaim ) {
-			assert.ok( false, 'setClaim should have failed' );
-		} )
-		.fail( function( error ) {
-			assert.ok(
-				error instanceof wb.api.RepoApiError,
-				'setClaim failed with a RepoApiError'
-			);
-
-			assert.equal( error.code, 'errorCode' );
-		} )
-		.always( function() {
-			QUnit.start();
-		} );
-	} );
-
-	QUnit.test( 'setStatement performs correct API call', function( assert ) {
-		assert.expect( 1 );
-		var api = {
-			setClaim: sinon.spy( function() {
-				return $.Deferred().promise();
-			} )
-		};
-		var claimsChanger = new SUBJECT(
-			api,
-			{ getClaimRevision: function() { return 0; } },
-			'entity',
-			null,
-			null,
 			new wb.serialization.StatementSerializer()
 		);
 
-		claimsChanger.setStatement(
+		statementsChanger.save(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
@@ -247,7 +146,7 @@
 		assert.ok( api.setClaim.calledOnce );
 	} );
 
-	QUnit.test( 'setStatement correctly handles API response', function( assert ) {
+	QUnit.test( 'save correctly handles API response', function( assert ) {
 		assert.expect( 1 );
 		var api = {
 			setClaim: sinon.spy( function() {
@@ -260,19 +159,17 @@
 				} ).promise();
 			} )
 		};
-		var claimsChanger = new SUBJECT(
+		var statementsChanger = new SUBJECT(
 			api,
 			{ getClaimRevision: function() { return 0; }, setClaimRevision: function() {} },
 			'entity',
-			null,
-			null,
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer()
 		);
 
 		QUnit.stop();
 
-		claimsChanger.setStatement(
+		statementsChanger.save(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
@@ -280,18 +177,18 @@
 		.done( function( savedStatement ) {
 			assert.ok(
 				savedStatement instanceof wb.datamodel.Statement,
-				'setStatement did not resolve with a Statement'
+				'save did not resolve with a Statement'
 			);
 		} )
 		.fail( function() {
-			assert.ok( false, 'setStatement failed' );
+			assert.ok( false, 'save failed' );
 		} )
 		.always( function() {
 			QUnit.start();
 		} );
 	} );
 
-	QUnit.test( 'setStatement correctly handles API failures', function( assert ) {
+	QUnit.test( 'save correctly handles API failures', function( assert ) {
 		assert.expect( 2 );
 		var api = {
 			setClaim: sinon.spy( function() {
@@ -300,33 +197,31 @@
 					.promise();
 			} )
 		};
-		var claimsChanger = new SUBJECT(
+		var statementsChanger = new SUBJECT(
 			api,
 			{
 				getClaimRevision: function() { return 0; },
 				setClaimRevision: function() {}
 			},
 			'entity',
-			null,
-			null,
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer()
 		);
 
 		QUnit.stop();
 
-		claimsChanger.setStatement(
+		statementsChanger.save(
 			new wb.datamodel.Statement( new wb.datamodel.Claim(
 				new wb.datamodel.PropertyNoValueSnak( 'P1' )
 			) )
 		)
 		.done( function( savedStatement ) {
-			assert.ok( false, 'setStatement should have failed' );
+			assert.ok( false, 'save should have failed' );
 		} )
 		.fail( function( error ) {
 			assert.ok(
 				error instanceof wb.api.RepoApiError,
-				'setStatement failed with a RepoApiError'
+				'save failed with a RepoApiError'
 			);
 
 			assert.equal( error.code, 'errorCode' );

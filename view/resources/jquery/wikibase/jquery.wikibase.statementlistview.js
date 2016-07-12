@@ -22,7 +22,7 @@
  * @param {Object} options
  * @param {wikibase.datamodel.StatementList} [options.value]
  *        The list of `Statement`s to be displayed by this view.
- * @param {wikibase.entityChangers.ClaimsChanger} options.claimsChanger
+ * @param {wikibase.entityChangers.StatementsChanger} options.statementsChanger
  * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
  */
 /**
@@ -66,7 +66,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			$listview: '.wikibase-statementlistview-listview'
 		},
 		value: null,
-		claimsChanger: null,
+		statementsChanger: null,
 		listItemAdapter: null
 	},
 
@@ -83,7 +83,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.claimsChanger
+		if ( !this.options.statementsChanger
 			|| !this.options.listItemAdapter
 			|| ( this.options.value && !( this.options.value instanceof wb.datamodel.StatementList ) )
 		) {
@@ -227,7 +227,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 		if ( statement && statement.getClaim().getGuid() ) {
 			statementview.disable();
-			this.options.claimsChanger.removeStatement( statement )
+			this.options.statementsChanger.remove( statement )
 			.done( function() {
 				self._removeStatementview( statementview );
 			} ).fail( function( error ) {

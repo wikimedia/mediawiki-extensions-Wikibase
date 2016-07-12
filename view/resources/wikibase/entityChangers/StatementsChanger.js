@@ -14,17 +14,13 @@ var MODULE = wb.entityChangers;
  * @param {wikibase.api.RepoApi} api
  * @param {wikibase.RevisionStore} revisionStore
  * @param {wikibase.datamodel.Entity} entity
- * @param {wikibase.serialization.ClaimSerializer} claimSerializer
- * @param {wikibase.serialization.ClaimDeserializer} claimDeserializer
  * @param {wikibase.serialization.StatementSerializer} statementSerializer
  * @param {wikibase.serialization.StatementDeserializer} statementDeserializer
  */
-var SELF = MODULE.ClaimsChanger = function WbEntityChangersClaimsChanger( api, revisionStore, entity, claimSerializer, claimDeserializer, statementSerializer, statementDeserializer ) {
+var SELF = MODULE.StatementsChanger = function WbEntityChangersStatementsChanger( api, revisionStore, entity, statementSerializer, statementDeserializer ) {
 	this._api = api;
 	this._revisionStore = revisionStore;
 	this._entity = entity;
-	this._claimSerializer = claimSerializer;
-	this._claimDeserializer = claimDeserializer;
 	this._statementSerializer = statementSerializer;
 	this._statementDeserializer = statementDeserializer;
 };
@@ -46,16 +42,6 @@ $.extend( SELF.prototype, {
 	_api: null,
 
 	/**
-	 * @type {wikibase.serialization.ClaimSerializer}
-	 */
-	_claimSerializer: null,
-
-	/**
-	 * @type {wikibase.serialization.ClaimDeserializer}
-	 */
-	_claimDeserializer: null,
-
-	/**
 	 * @type {wikibase.serialization.StatementSerializer}
 	 */
 	_statementSerializer: null,
@@ -72,7 +58,7 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	removeStatement: function( statement ) {
+	remove: function( statement ) {
 		var deferred = $.Deferred(),
 			self = this,
 			guid = statement.getClaim().getGuid();
@@ -92,40 +78,6 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {wikibase.datamodel.Claim} claim
-	 * @return {jQuery.Promise}
-	 *         Resolved parameters:
-	 *         - {wikibase.datamodel.Claim} The saved claim
-	 *         Rejected parameters:
-	 *         - {wikibase.api.RepoApiError}
-	 */
-	setClaim: function( claim ) {
-		var self = this,
-			deferred = $.Deferred();
-
-		this._api.setClaim(
-			this._claimSerializer.serialize( claim ),
-			this._revisionStore.getClaimRevision( claim.getGuid() )
-		)
-		.done( function( result ) {
-			var savedClaim = self._claimDeserializer.deserialize( result.claim ),
-				pageInfo = result.pageinfo;
-
-			// Update revision store:
-			self._revisionStore.setClaimRevision( pageInfo.lastrevid, savedClaim.getGuid() );
-
-			// FIXME: Set claim on this._entity
-
-			deferred.resolve( savedClaim );
-		} )
-		.fail( function( errorCode, error ) {
-			deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
-		} );
-
-		return deferred.promise();
-	},
-
-	/**
 	 * @param {wikibase.datamodel.Statement} statement
 	 * @return {Object} jQuery.Promise
 	 *         Resolved parameters:
@@ -133,7 +85,7 @@ $.extend( SELF.prototype, {
 	 *         Rejected parameters:
 	 *         - {wikibase.api.RepoApiError}
 	 */
-	setStatement: function( statement ) {
+	save: function( statement ) {
 		var self = this,
 			deferred = $.Deferred();
 
