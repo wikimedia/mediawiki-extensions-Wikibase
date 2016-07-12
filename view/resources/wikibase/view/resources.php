@@ -33,14 +33,22 @@ return call_user_func( function() {
 			)
 		),
 
-		'wikibase.view.ToolbarFactory' => $moduleTemplate + array(
-			'scripts' => 'ToolbarFactory.js',
+		'wikibase.view.StructureEditorFactory' => $moduleTemplate + array(
+			'scripts' => 'StructureEditorFactory.js',
 			'dependencies' => array(
-				'jquery.wikibase.edittoolbar',
 				'wikibase.view.__namespace',
 			)
 		),
 
+		'wikibase.view.ToolbarFactory' => $moduleTemplate + array(
+			'scripts' => 'ToolbarFactory.js',
+			'dependencies' => array(
+				'jquery.wikibase.addtoolbar',
+				'jquery.wikibase.edittoolbar',
+				'jquery.wikibase.removetoolbar',
+				'wikibase.view.__namespace',
+			)
+		),
 
 		'wikibase.view.ToolbarViewController' => $moduleTemplate + array(
 			'scripts' => 'ToolbarViewController.js',
