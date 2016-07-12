@@ -69,18 +69,6 @@ return call_user_func( function() {
 			),
 		),
 
-		'wikibase.entityChangers.ReferencesChanger.tests' => $moduleBase + array(
-			'scripts' => array(
-				'ReferencesChanger.tests.js',
-			),
-			'dependencies' => array(
-				'wikibase.datamodel',
-				'wikibase.entityChangers.ReferencesChanger',
-				'wikibase.serialization.ReferenceDeserializer',
-				'wikibase.serialization.ReferenceSerializer',
-			),
-		),
-
 		'wikibase.entityChangers.SiteLinksChanger.tests' => $moduleBase + array(
 			'scripts' => array(
 				'SiteLinksChanger.tests.js',
