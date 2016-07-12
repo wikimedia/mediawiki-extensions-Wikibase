@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "ce061b56_059a16bd",
+        "filename": "lib/includes/Units/BaseUnitStorage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T20:48:55Z",
+      "side": 1,
+      "message": "I\u0027s still prefer a getter that triggers the lazy loading. Do you want to save fcalls? Is this method that much of a hotspot?",
+      "revId": "010d3d9f6b270ad90d45f0cc281006710fffebf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_25baba1e",
+        "filename": "lib/includes/Units/BaseUnitStorage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T20:48:55Z",
+      "side": 1,
+      "message": "should this also check if the factor is one? what if it isn\u0027t?",
+      "revId": "010d3d9f6b270ad90d45f0cc281006710fffebf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce061b56_a21b4081",
         "filename": "lib/tests/phpunit/Units/testunits.json",
         "patchSetId": 9
