@@ -303,10 +303,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		return $parenthesesMsg.contents();
 	},
 
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.startEditing
-	 */
-	startEditing: function() {
+	_startEditing: function() {
 		var self = this;
 
 		this._eventSingletonManager.register(
@@ -326,7 +323,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 
 		self._startEditingInViewport();
 
-		return PARENT.prototype.startEditing.call( this );
+		return $.Deferred().resolve().promise();
 	},
 
 	_startEditingInViewport: function() {
@@ -372,21 +369,14 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 		return PARENT.prototype.stopEditing.call( this, dropValue );
 	},
 
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget._afterStopEditing
-	 */
-	_afterStopEditing: function( dropValue ) {
-		var self = this;
-
-		return PARENT.prototype._afterStopEditing.call( this, dropValue )
-			.done( function() {
-				self._refreshCounter();
-				self._eventSingletonManager.unregister(
-					self,
-					window,
-					namespaceEventNames( 'scroll touchmove resize', self.widgetName )
-				);
-			} );
+	_stopEditing: function( dropValue ) {
+		this._refreshCounter();
+		this._eventSingletonManager.unregister(
+			this,
+			window,
+			namespaceEventNames( 'scroll touchmove resize', this.widgetName )
+		);
+		return $.Deferred().resolve().promise();
 	},
 
 	_removeIncompleteSiteLinks: function() {

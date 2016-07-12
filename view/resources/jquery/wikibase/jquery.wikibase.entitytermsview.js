@@ -337,23 +337,19 @@ $.widget( 'wikibase.entitytermsview', PARENT, {
 			} );
 	},
 
-	/**
-	 * @inheritdoc
-	 */
-	startEditing: function() {
+	_startEditing: function() {
 		this._getEntitytermsforlanguagelistview().startEditing();
-
-		return PARENT.prototype.startEditing.call( this );
+		return this.draw();
 	},
 
 	/**
 	 * @param {boolean} dropValue
 	 */
-	_afterStopEditing: function( dropValue ) {
+	_stopEditing: function( dropValue ) {
+		this.draw();
 		var self = this;
 		return this._getEntitytermsforlanguagelistview().stopEditing( dropValue ).done( function() {
 			self.notification();
-			return PARENT.prototype._afterStopEditing.call( self );
 		} );
 	},
 
