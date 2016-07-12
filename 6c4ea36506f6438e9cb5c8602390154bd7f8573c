@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce061b56_cb3946cd",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-12T10:56:50Z",
+      "side": 0,
+      "message": "This means a failing save will leave the view in an inconsistent state, some sitelinkviews in edit mode and some not. This is bad and should not be done.",
+      "revId": "6c4ea36506f6438e9cb5c8602390154bd7f8573c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_2b473252",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-12T10:56:50Z",
+      "side": 0,
+      "message": "This stopEditing call is the only thing all this code does.",
+      "revId": "6c4ea36506f6438e9cb5c8602390154bd7f8573c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
