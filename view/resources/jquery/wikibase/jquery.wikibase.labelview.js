@@ -168,15 +168,17 @@ $.widget( 'wikibase.labelview', PARENT, {
 		return deferred.resolve().promise();
 	},
 
-	/**
-	 * @inheritdoc
-	 * @protected
-	 */
-	_afterStopEditing: function( dropValue ) {
+	_startEditing: function() {
+		// FIXME: This could be much faster
+		return this.draw();
+	},
+
+	_stopEditing: function( dropValue ) {
 		if ( dropValue && this.options.value.getText() === '' ) {
 			this.$text.children( '.' + this.widgetFullName + '-input' ).val( '' );
 		}
-		return PARENT.prototype._afterStopEditing.call( this, dropValue );
+		// FIXME: This could be much faster
+		return this.draw();
 	},
 
 	/**

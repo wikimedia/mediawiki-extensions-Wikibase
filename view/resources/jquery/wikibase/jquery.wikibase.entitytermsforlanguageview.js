@@ -170,32 +170,24 @@ $.widget( 'wikibase.entitytermsforlanguageview', PARENT, {
 		} );
 	},
 
-	draw: function() {
-		return $.Deferred().resolve().promise();
-	},
-
 	/**
 	 * Puts the widget into edit mode.
 	 */
-	startEditing: function() {
-		if ( this.isInEditMode() ) {
-			return $.Deferred().resolve().promise();
-		}
-
+	_startEditing: function() {
 		this.$labelview.data( 'labelview' ).startEditing();
 		this.$descriptionview.data( 'descriptionview' ).startEditing();
 		this.$aliasesview.data( 'aliasesview' ).startEditing();
-		return PARENT.prototype.startEditing.call( this );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
 	 * @param {boolean} [dropValue]
 	 */
-	_afterStopEditing: function( dropValue ) {
+	_stopEditing: function( dropValue ) {
 		this.$labelview.data( 'labelview' ).stopEditing( dropValue );
 		this.$descriptionview.data( 'descriptionview' ).stopEditing( dropValue );
 		this.$aliasesview.data( 'aliasesview' ).stopEditing( dropValue );
-		return PARENT.prototype._afterStopEditing.call( this, dropValue );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
