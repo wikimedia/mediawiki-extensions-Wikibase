@@ -51,19 +51,18 @@
 		 * @param {wikibase.datamodel.Fingerprint} oldFingerprint
 		 * @return {jQuery.Promise}
 		 *         Resolved parameters:
-		 *         - {string} The saved fingerprint
+		 *         - {wikibase.datamodel.Fingerprint} The saved fingerprint
 		 *         Rejected parameters:
 		 *         - {wikibase.api.RepoApiError}
 		 */
 		save: function( newFingerprint, oldFingerprint ) {
-			var changes = [];
-			var resultFingerprint = newFingerprint;
+			var labelsChanger = this._labelsChanger,
+				descriptionsChanger = this._descriptionsChanger,
+				aliasesChanger = this._aliasesChanger,
+				changes = [],
+				resultFingerprint = newFingerprint;
 
-			var aliasesChanger = this._aliasesChanger;
-			var descriptionsChanger = this._descriptionsChanger;
-			var labelsChanger = this._labelsChanger;
-
-			changes = changes.concat( this._getTermsChanges(
+			changes.push( this._getTermsChanges(
 				newFingerprint.getLabels(),
 				oldFingerprint.getLabels(),
 				function( newTerm ) {
@@ -76,7 +75,7 @@
 					};
 				}
 			) );
-			changes = changes.concat( this._getTermsChanges(
+			changes.push( this._getTermsChanges(
 				newFingerprint.getDescriptions(),
 				oldFingerprint.getDescriptions(),
 				function( newTerm ) {
@@ -91,7 +90,7 @@
 			) );
 
 			this._entity.setFingerprint( oldFingerprint ); // FIXME: For AliasesChanger
-			changes = changes.concat( this._getTermsChanges(
+			changes.push( this._getTermsChanges(
 				newFingerprint.getAliases(),
 				oldFingerprint.getAliases(),
 				function( newMultiTerm ) {
@@ -113,28 +112,39 @@
 			} );
 		},
 
+		/**
+		 * @param {wikibase.datamodel.TermMap|wikibase.datamodel.MultiTermMap} newTerms
+		 * @param {wikibase.datamodel.TermMap|wikibase.datamodel.MultiTermMap} oldTerms
+		 * @param {Function} getChange
+		 * @returns {Function[]}
+		 * @private
+		 */
 		_getTermsChanges: function( newTerms, oldTerms, getChange ) {
 			var changes = [];
+
 			newTerms.each( function( languageCode, newTerm ) {
 				var oldTerm = oldTerms.getItemByKey( languageCode );
+
 				if ( !newTerm.equals( oldTerm ) ) {
 					changes.push( getChange( newTerm ) );
 				}
 			} );
+
 			oldTerms.each( function( languageCode, oldTerm ) {
-				if (
-					!newTerms.hasItemForKey( languageCode ) ||
+				var isTerm = oldTerm instanceof wb.datamodel.Term;
+
+				if ( !newTerms.hasItemForKey( languageCode )
 					// There are also MultiTerms where this does not apply
-					( oldTerm instanceof wb.datamodel.Term && newTerms.getItemByKey( languageCode ).getText() === '' )
+					|| ( isTerm && newTerms.getItemByKey( languageCode ).getText() === '' )
 				) {
 					changes.push( getChange(
-						new oldTerm.constructor( languageCode, oldTerm instanceof wb.datamodel.Term ? '' : [] )
+						new oldTerm.constructor( languageCode, isTerm ? '' : [] )
 					) );
 				}
 			} );
+
 			return changes;
 		}
-
 	} );
 
 }( wikibase, jQuery ) );
