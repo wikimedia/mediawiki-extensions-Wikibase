@@ -71,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "ce061b56_4d1c4e7d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-12T07:27:51Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "b5d696789388614f3fc71eea1f3774e55ad77db7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce061b56_6aae5be6",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.snaklistview.js",
         "patchSetId": 3
