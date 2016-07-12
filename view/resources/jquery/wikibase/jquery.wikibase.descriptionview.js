@@ -161,6 +161,16 @@ $.widget( 'wikibase.descriptionview', PARENT, {
 		return done;
 	},
 
+	_startEditing: function() {
+		// FIXME: This could be much faster
+		return this.draw();
+	},
+
+	_stopEditing: function() {
+		// FIXME: This could be much faster
+		return this.draw();
+	},
+
 	/**
 	 * @see jQuery.ui.TemplatedWidget._setOption
 	 */
