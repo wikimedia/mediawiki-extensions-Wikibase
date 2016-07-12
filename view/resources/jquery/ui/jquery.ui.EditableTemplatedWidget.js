@@ -61,16 +61,6 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	},
 
 	/**
-	 * Draws the widget according to whether it is in edit mode or not.
-	 *
-	 * @return {Object} jQuery.Promise
-	 *         No resolved parameters.
-	 *         Rejected parameters:
-	 *         - {Error}
-	 */
-	draw: util.abstractMember,
-
-	/**
 	 * Starts the widget's edit mode.
 	 *
 	 * @return {Object} jQuery.Promise
@@ -79,26 +69,22 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         - {Error}
 	 */
 	startEditing: function() {
-		var deferred = $.Deferred();
-
 		if ( this.isInEditMode() ) {
-			return deferred.resolve().promise();
+			return $.Deferred().resolve().promise();
 		}
 
 		var self = this;
 
-		self.element.addClass( 'wb-edit' );
+		this.element.addClass( 'wb-edit' );
 
-		this.draw()
+		return this._startEditing()
 		.done( function() {
 			self._trigger( 'afterstartediting' );
-			deferred.resolve();
-		} )
-		.fail( function( error ) {
-			deferred.reject( error );
 		} );
+	},
 
-		return deferred.promise();
+	_startEditing: function() {
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
@@ -112,39 +98,25 @@ $.widget( 'ui.EditableTemplatedWidget', PARENT, {
 	 *         - {Error}
 	 */
 	stopEditing: function( dropValue ) {
-		var done = $.Deferred().resolve().promise();
 		if ( !this.isInEditMode() ) {
-			return done;
+			return $.Deferred().resolve().promise();
 		}
-		this._afterStopEditing( dropValue );
-		return done;
-	},
 
-	/**
-	 * @param {boolean} dropValue
-	 * @return {Object} jQuery.Promise
-	 *         No resolved parameters.
-	 *         Rejected parameters:
-	 *         - {Error}
-	 */
-	_afterStopEditing: function( dropValue ) {
-		var self = this,
-			deferred = $.Deferred();
+		this.element.removeClass( 'wb-edit' );
 
-		self.element.removeClass( 'wb-edit' );
-
-		this.draw()
+		var self = this;
+		return this._stopEditing( dropValue )
 		.done( function() {
 			self.enable();
 			self._trigger( 'afterstopediting', null, [dropValue] );
-			deferred.resolve();
 		} )
 		.fail( function( error ) {
 			self.setError( error );
-			deferred.reject( error );
 		} );
+	},
 
-		return deferred.promise();
+	_stopEditing: function( dropValue ) {
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
