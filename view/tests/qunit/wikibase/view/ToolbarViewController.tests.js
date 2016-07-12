@@ -34,7 +34,9 @@ function initToolbarViewController() {
 			enable: function() {},
 			isValid: function() {},
 			setError: function() {},
-			startEditing: function() {},
+			startEditing: function() {
+				return $.Deferred();
+			},
 			stopEditing: function() {},
 			value: function() {}
 		},
