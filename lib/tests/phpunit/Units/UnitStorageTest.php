@@ -9,7 +9,7 @@ use Wikibase\Lib\UnitStorage;
 use RuntimeException;
 
 /**
- * @covers Wikibase\Lib\UnitConverter
+ * @covers \Wikibase\Lib\UnitConverter
  *
  * @group Wikibase
  *
@@ -46,7 +46,7 @@ class UnitStorageTest extends MediaWikiTestCase {
 		$this->assertEquals( [ 'factor' => '22.234', 'unit' => 'Q1' ],
 			$storage->getConversion( 'Q2' ) );
 		$this->assertEquals( [ 'factor' => '1', 'unit' => 'Q3' ], $storage->getConversion( 'Q3' ) );
-		$this->assertEquals( [ 'factor' => '0.0000000000000000000243885945', 'unit' => 'Q3' ],
+		$this->assertArraySubset( [ 'factor' => '0.0000000000000000000243885945', 'unit' => 'Q3' ],
 			$storage->getConversion( 'Q4' ) );
 		$this->assertNull( $storage->getConversion( 'Q5' ) );
 
