@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce061b56_9095a938",
+        "filename": "repo/includes/Rdf/RdfProducer.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T09:22:37Z",
+      "side": 1,
+      "message": "oh noes!",
+      "revId": "d9c4df2ec9adf305e70302520445d5ca07c1f70c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
