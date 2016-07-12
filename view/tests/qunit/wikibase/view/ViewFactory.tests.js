@@ -90,13 +90,12 @@
 				null,
 				entityChangersFactory
 			),
-			eventSingletonManager = new $.util.EventSingletonManager(),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase, 'sitelinkgroupview' );
 		$dom.sitelinkgroupview = $.wikibase.sitelinkgroupview;
 
-		viewFactory.getSitelinkGroupView( eventSingletonManager, groupName, siteLinks, $dom );
+		viewFactory.getSitelinkGroupView( groupName, siteLinks, $dom );
 
 		sinon.assert.calledWith( $.wikibase.sitelinkgroupview, sinon.match( {
 			groupName: groupName,
@@ -112,17 +111,16 @@
 		assert.expect( 1 );
 		var siteLinks = [],
 			viewFactory = new ViewFactory(),
-			eventSingletonManager = new $.util.EventSingletonManager(),
 			$dom = $( '<div/>' );
 
 		sinon.spy( $.wikibase, 'sitelinklistview' );
 		$dom.sitelinklistview = $.wikibase.sitelinklistview;
 
-		viewFactory.getSiteLinkListView( eventSingletonManager, siteLinks, $dom );
+		viewFactory.getSiteLinkListView( siteLinks, $dom );
 
 		sinon.assert.calledWith( $.wikibase.sitelinklistview, sinon.match( {
 			value: siteLinks,
-			eventSingletonManager: eventSingletonManager
+			eventSingletonManager: sinon.match.instanceOf( $.util.EventSingletonManager )
 		} ) );
 
 		$.wikibase.sitelinklistview.restore();
