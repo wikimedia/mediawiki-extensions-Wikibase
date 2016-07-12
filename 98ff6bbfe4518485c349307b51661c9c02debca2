@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce061b56_6b701aa4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-12T11:16:12Z",
+      "side": 1,
+      "message": "This is a bool right? So I would prefer isFound as variable name. Or maybe delete variable and return false/true...",
+      "revId": "98ff6bbfe4518485c349307b51661c9c02debca2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_b0254dbf",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-12T11:16:12Z",
+      "side": 1,
+      "message": "jsdoc",
+      "revId": "98ff6bbfe4518485c349307b51661c9c02debca2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
