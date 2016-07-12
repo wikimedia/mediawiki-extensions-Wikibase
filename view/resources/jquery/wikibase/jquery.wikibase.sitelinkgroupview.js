@@ -200,25 +200,15 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		return value;
 	},
 
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.startEditing
-	 */
-	startEditing: function() {
-		var self = this;
-		return this.$sitelinklistview.data( 'sitelinklistview' ).startEditing().done( function() {
-			return PARENT.prototype.startEditing.call( self );
-		} );
+	_startEditing: function() {
+		return this.$sitelinklistview.data( 'sitelinklistview' ).startEditing();
 	},
 
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget._afterStopEditing
-	 */
-	_afterStopEditing: function( dropValue ) {
+	_stopEditing: function( dropValue ) {
 		var self = this;
 		return this.$sitelinklistview.data( 'sitelinklistview' ).stopEditing( dropValue )
 		.done( function() {
 			self.notification();
-			return PARENT.prototype._afterStopEditing.call( self );
 		} );
 	},
 

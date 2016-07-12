@@ -312,15 +312,16 @@
 			return $.Deferred().resolve().promise();
 		},
 
-		/**
-		 * @inheritdoc
-		 */
-		stopEditing: function( dropValue ) {
+		_startEditing: function() {
+			return this.draw();
+		},
+
+		_stopEditing: function( dropValue ) {
 			// Hide the menu the rank selector currently references to:
 			if ( $menu && $menu.data( this.widgetName ) === this ) {
 				$menu.hide();
 			}
-			return PARENT.prototype.stopEditing.call( this, dropValue );
+			return this.draw();
 		},
 
 	} );
