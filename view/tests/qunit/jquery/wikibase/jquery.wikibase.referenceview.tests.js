@@ -14,7 +14,6 @@
 	function createReferenceview( options ) {
 		options = $.extend( {
 			statementGuid: 'testGuid',
-			referencesChanger: 'I am a ReferencesChanger',
 			listItemAdapter: wb.tests.getMockListItemAdapter(
 				'snaklistview',
 				function() {
