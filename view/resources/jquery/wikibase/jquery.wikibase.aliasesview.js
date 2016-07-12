@@ -159,6 +159,16 @@ $.widget( 'wikibase.aliasesview', PARENT, {
 		} );
 	},
 
+	_startEditing: function() {
+		// FIXME: This could be much faster
+		return this.draw();
+	},
+
+	_stopEditing: function() {
+		// FIXME: This could be much faster
+		return this.draw();
+	},
+
 	/**
 	 * @inheritdoc
 	 * @protected
