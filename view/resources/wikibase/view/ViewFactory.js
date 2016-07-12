@@ -377,7 +377,6 @@
 			newItemOptionsFn: $.proxy( function( value ) {
 				return {
 					value: value || null,
-					dataTypeStore: this._dataTypeStore,
 					listItemAdapter: this.getListItemAdapterForSnakListView()
 				};
 			}, this )
