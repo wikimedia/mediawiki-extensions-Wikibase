@@ -68,7 +68,7 @@
 		descriptionsChanger.setDescription( new wb.datamodel.Term( 'language', 'description' ) )
 		.done( function( savedDescription ) {
 			QUnit.start();
-			assert.equal( savedDescription, 'description' );
+			assert.equal( savedDescription.getText(), 'description' );
 		} )
 		.fail( function() {
 			assert.ok( false, 'setDescription failed' );

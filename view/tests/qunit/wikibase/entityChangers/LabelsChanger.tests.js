@@ -68,7 +68,7 @@
 		labelsChanger.setLabel( new wb.datamodel.Term( 'language', 'label' ) )
 		.done( function( savedLabel ) {
 			QUnit.start();
-			assert.equal( savedLabel, 'label' );
+			assert.equal( savedLabel.getText(), 'label' );
 		} )
 		.fail( function() {
 			assert.ok( false, 'setLabel failed' );

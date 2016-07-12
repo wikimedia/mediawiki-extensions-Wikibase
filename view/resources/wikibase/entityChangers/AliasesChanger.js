@@ -62,7 +62,13 @@ $.extend( SELF.prototype, {
 
 			self._entity.getFingerprint().setAliases( language, aliases );
 
-			deferred.resolve();
+			var texts = [];
+			if ( response.entity.aliases && response.entity.aliases[language] ) {
+				texts = response.entity.aliases[language].map( function( value ) {
+					return value.value;
+				} );
+			}
+			deferred.resolve( new wb.datamodel.MultiTerm( language, texts ) );
 		} )
 		.fail( function( errorCode, errorObject ) {
 			deferred.reject( wb.api.RepoApiError.newFromApiResponse( errorObject, 'save' ) );

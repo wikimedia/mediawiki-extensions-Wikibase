@@ -53,7 +53,8 @@
 				language
 			)
 			.done( function( result ) {
-				var savedLabel = result.entity.labels[language].value;
+				var savedText = result.entity.labels[language].value,
+					savedTerm = savedText ? new wb.datamodel.Term( language, savedText ) : null;
 
 				// Update revision store:
 				self._revisionStore.setLabelRevision( result.entity.lastrevid );
@@ -62,7 +63,7 @@
 
 				// FIXME: Introduce Item.setLabels
 
-				deferred.resolve( savedLabel );
+				deferred.resolve( savedTerm );
 			} )
 			.fail( function( errorCode, error ) {
 				deferred.reject( wb.api.RepoApiError.newFromApiResponse( error, 'save' ) );
