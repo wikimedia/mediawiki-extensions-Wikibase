@@ -16,6 +16,57 @@
       "revId": "010d3d9f6b270ad90d45f0cc281006710fffebf0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_c505ae15",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T20:44:27Z",
+      "side": 1,
+      "message": "UnitConverter|null",
+      "revId": "010d3d9f6b270ad90d45f0cc281006710fffebf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_053df6b8",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T20:44:27Z",
+      "side": 1,
+      "message": "this needs an entry in docs/ontology.owl i think",
+      "revId": "010d3d9f6b270ad90d45f0cc281006710fffebf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_c553ee18",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T20:44:27Z",
+      "side": 1,
+      "message": "do we really need the self-reference here?",
+      "revId": "010d3d9f6b270ad90d45f0cc281006710fffebf0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
