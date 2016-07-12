@@ -16,6 +16,24 @@
       "revId": "525cb52a945b95e4878e10aa9f955bde15e4ab65",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_4b2716b2",
+        "filename": "repo/includes/Api/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-12T10:47:27Z",
+      "side": 1,
+      "message": "In the page table, \"touched\" is the last render date, while \"modified\" is the last edit date. Why we have the \"touched\" field here... good question. I guess because it\u0027s cheap and easy to get, it\u0027s in the page table anyway.",
+      "parentUuid": "ce061b56_30915d53",
+      "revId": "525cb52a945b95e4878e10aa9f955bde15e4ab65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
