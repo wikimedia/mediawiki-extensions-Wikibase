@@ -15,6 +15,17 @@
 	var SELF = MODULE.ToolbarFactory = function ToolbarFactory() {};
 
 	/**
+	 * Create a addtoolbar
+	 *
+	 * @param {Object} options
+	 * @param {jQuery} $dom
+	 * @return {jQuery.wikibase.addtoolbar} The addtoolbar
+	 **/
+	SELF.prototype.getAddToolbar = function( options, $dom ) {
+		return this._getToolbar( 'add', $dom, options );
+	};
+
+	/**
 	 * Create an edittoolbar
 	 *
 	 * @param {Object} options
@@ -23,6 +34,17 @@
 	 **/
 	SELF.prototype.getEditToolbar = function( options, $dom ) {
 		return this._getToolbar( 'edit', $dom, options );
+	};
+
+	/**
+	 * Create a removetoolbar
+	 *
+	 * @param {Object} options
+	 * @param {jQuery} $dom
+	 * @return {jQuery.wikibase.removetoolbar} The removetoolbar
+	 **/
+	SELF.prototype.getRemoveToolbar = function( options, $dom ) {
+		return this._getToolbar( 'remove', $dom, options );
 	};
 
 	/**

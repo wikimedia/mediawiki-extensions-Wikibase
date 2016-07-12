@@ -12,8 +12,12 @@ var SELF = util.inherit(
 	}
 );
 
-SELF.prototype.getEntityTermsView = function( value, $entitytermsview ) {
-	var view = PARENT.prototype.getEntityTermsView.apply( this, arguments );
+SELF.prototype.getEntityTermsView = function( startEditingCallback, value, $entitytermsview ) {
+	var controller;
+	var startEditingController = function() {
+		return controller.startEditing();
+	};
+	var view = PARENT.prototype.getEntityTermsView.call( this, startEditingController, value, $entitytermsview );
 	var $container = this._toolbarFactory.getToolbarContainer( view.element );
 	$container.sticknode( {
 		$container: view.$entitytermsforlanguagelistview,
@@ -67,13 +71,23 @@ SELF.prototype.getEntityTermsView = function( value, $entitytermsview ) {
 	} );
 
 	var entityTermsChanger = this._entityChangersFactory.getEntityTermsChanger();
-	this._getController( $container, view, entityTermsChanger, null, value );
+	controller = this._getController( $container, view, entityTermsChanger, null, value, startEditingCallback );
 	return view;
 };
 
-SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) {
+SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, value, $dom ) {
 	var controller;
-	var statementview = PARENT.prototype.getStatementView.apply( this, arguments );
+	var startEditingController = function() {
+		return controller.startEditing();
+	};
+	var statementview = PARENT.prototype.getStatementView.call(
+		this,
+		startEditingController,
+		entityId,
+		propertyId,
+		value,
+		$dom
+	);
 
 	var removeFromListView = function( statementview ) {
 		var $statementlistview = statementview.element.closest( ':wikibase-statementlistview' ),
@@ -89,7 +103,8 @@ SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) 
 		statementview,
 		statementsChanger,
 		removeFromListView.bind( null, statementview ),
-		value
+		value,
+		startEditingCallback
 	);
 
 	if ( !value ) {
@@ -98,20 +113,25 @@ SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) 
 	return statementview;
 };
 
-SELF.prototype.getSitelinkGroupView = function( groupName, value, $sitelinkgroupview ) {
-	var view = PARENT.prototype.getSitelinkGroupView.apply( this, arguments );
+SELF.prototype.getSitelinkGroupView = function( startEditingCallback, groupName, value, $sitelinkgroupview ) {
+	var controller;
+	var startEditingController = function() {
+		return controller.startEditing();
+	};
+	var view = PARENT.prototype.getSitelinkGroupView.call( this, startEditingController, groupName, value, $sitelinkgroupview );
 	var siteLinkSetsChanger = this._entityChangersFactory.getSiteLinkSetsChanger();
-	this._getController(
+	controller = this._getController(
 		this._toolbarFactory.getToolbarContainer( view.element.find( '.wikibase-sitelinkgroupview-heading-container' ) ),
 		view,
 		siteLinkSetsChanger,
 		null,
-		value
+		value,
+		startEditingCallback
 	);
 	return view;
 };
 
-SELF.prototype._getController = function( $container, view, model, onRemove, value ) {
+SELF.prototype._getController = function( $container, view, model, onRemove, value, startEditingCallback ) {
 	var edittoolbar = this._toolbarFactory.getEditToolbar(
 		{
 			$container: $container,
@@ -120,7 +140,7 @@ SELF.prototype._getController = function( $container, view, model, onRemove, val
 		view.element
 	);
 
-	var controller = new wb.view.ToolbarViewController( model, edittoolbar, view, onRemove );
+	var controller = new wb.view.ToolbarViewController( model, edittoolbar, view, onRemove, startEditingCallback );
 	edittoolbar.setController( controller );
 	controller.setValue( value );
 
