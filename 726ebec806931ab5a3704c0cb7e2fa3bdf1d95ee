@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce061b56_105c194e",
+        "filename": "view/resources/wikibase/entityChangers/AliasesChanger.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-12T10:32:08Z",
+      "side": 1,
+      "message": "I wondered why the other changers assume they get their own stuff back? In this case the .aliases key is indeed missing when removing all aliases.",
+      "revId": "726ebec806931ab5a3704c0cb7e2fa3bdf1d95ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_503501f3",
+        "filename": "view/resources/wikibase/entityChangers/DescriptionsChanger.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-12T10:32:08Z",
+      "side": 1,
+      "message": "The .value key does not exist when the user removes a description.",
+      "revId": "726ebec806931ab5a3704c0cb7e2fa3bdf1d95ee",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
