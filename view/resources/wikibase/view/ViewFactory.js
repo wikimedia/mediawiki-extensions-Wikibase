@@ -315,7 +315,7 @@
 					},
 					propertyId
 				),
-				claimsChanger: this._entityChangersFactory.getClaimsChanger()
+				statementsChanger: this._entityChangersFactory.getStatementsChanger()
 			}
 		);
 	};
@@ -356,10 +356,10 @@
 							this,
 							false
 						),
-						claimsChanger: this._entityChangersFactory.getClaimsChanger(),
 						entityIdPlainFormatter: this._entityIdPlainFormatter,
 						guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
-						qualifiersListItemAdapter: this.getListItemAdapterForSnakListView()
+						qualifiersListItemAdapter: this.getListItemAdapterForSnakListView(),
+						statementsChanger: this._entityChangersFactory.getStatementsChanger()
 					}
 				);
 			}, this )

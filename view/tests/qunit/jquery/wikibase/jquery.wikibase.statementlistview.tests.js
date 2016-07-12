@@ -26,7 +26,7 @@ var statementviewListItemAdapter = wb.tests.getMockListItemAdapter(
  */
 var createStatementlistview = function( options, $node ) {
 	options = $.extend( {
-		claimsChanger: 'I am a ClaimsChanger',
+		statementsChanger: 'I am a StatementsChanger',
 		listItemAdapter: statementviewListItemAdapter,
 		value: new wb.datamodel.StatementList()
 	}, options || {} );

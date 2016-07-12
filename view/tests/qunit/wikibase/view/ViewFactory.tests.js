@@ -169,9 +169,9 @@
 				new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ) )
 			] ),
 			entityId = 'entityId',
-			claimsChanger = {},
+			statementsChanger = {},
 			entityChangersFactory = {
-				getClaimsChanger: function() { return claimsChanger; }
+				getStatementsChanger: function() { return statementsChanger; }
 			},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
 			$dom = $( '<div/>' );
@@ -188,7 +188,7 @@
 				$dom,
 				{
 					value: value,
-					claimsChanger: claimsChanger,
+					statementsChanger: statementsChanger,
 					listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
 				}
 			)
@@ -202,9 +202,9 @@
 		assert.expect( 1 );
 		var value = new wb.datamodel.StatementList(),
 			entityId = 'entityId',
-			claimsChanger = {},
+			statementsChanger = {},
 			entityChangersFactory = {
-				getClaimsChanger: function() { return claimsChanger; }
+				getStatementsChanger: function() { return statementsChanger; }
 			},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
 			$dom = $( '<div/>' );
@@ -229,9 +229,9 @@
 		assert.expect( 2 );
 		var entityId = 'Q1',
 			value = null,
-			claimsChanger = {},
+			statementsChanger = {},
 			entityChangersFactory = {
-				getClaimsChanger: function() { return claimsChanger; }
+				getStatementsChanger: function() { return statementsChanger; }
 			},
 			entityIdPlainFormatter = {},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory, null, entityIdPlainFormatter ),
@@ -272,7 +272,7 @@
 
 				buildReferenceListItemAdapter: sinon.match.instanceOf( Function ),
 				buildSnakView: sinon.match.instanceOf( Function ),
-				claimsChanger: claimsChanger,
+				statementsChanger: statementsChanger,
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				guidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator ),
 				qualifiersListItemAdapter: sinon.match.instanceOf( ListItemAdapter )
@@ -289,7 +289,7 @@
 			propertyId = 'propertyId',
 			value = null,
 			entityChangersFactory = {
-				getClaimsChanger: function() { return {}; }
+				getStatementsChanger: function() { return {}; }
 			},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
@@ -321,7 +321,7 @@
 			propertyId = 'P1',
 			value = new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( propertyId ) ) ),
 			entityChangersFactory = {
-				getClaimsChanger: function() { return {}; }
+				getStatementsChanger: function() { return {}; }
 			},
 			viewFactory = new ViewFactory( null, null, entityChangersFactory ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
@@ -351,9 +351,9 @@
 		assert.expect( 3 );
 		var contentLanguages = {},
 			value = null,
-			claimsChanger = {},
+			statementsChanger = {},
 			entityChangersFactory = {
-				getClaimsChanger: function() { return claimsChanger; }
+				getStatementsChanger: function() { return statementsChanger; }
 			},
 			entityIdHtmlFormatter = {},
 			entityIdPlainFormatter = {},
@@ -440,9 +440,9 @@
 		var contentLanguages = {},
 			value = null,
 			dataTypeStore = {},
-			claimsChanger = {},
+			statementsChanger = {},
 			entityChangersFactory = {
-				getClaimsChanger: function() { return claimsChanger; }
+				getStatementsChanger: function() { return statementsChanger; }
 			},
 			entityIdHtmlFormatter = {},
 			entityIdPlainFormatter = {},
@@ -519,9 +519,9 @@
 		var contentLanguages = {},
 			value = null,
 			dataTypeStore = {},
-			claimsChanger = {},
+			statementsChanger = {},
 			entityChangersFactory = {
-				getClaimsChanger: function() { return claimsChanger; }
+				getStatementsChanger: function() { return statementsChanger; }
 			},
 			entityIdHtmlFormatter = {},
 			entityIdPlainFormatter = {},

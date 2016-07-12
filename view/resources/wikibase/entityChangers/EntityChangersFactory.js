@@ -45,15 +45,13 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.entityChangers.ClaimsChanger}
+	 * @return {wikibase.entityChangers.StatementsChanger}
 	 */
-	getClaimsChanger: function() {
-		return new MODULE.ClaimsChanger(
+	getStatementsChanger: function() {
+		return new MODULE.StatementsChanger(
 			this._api,
 			this._revisionStore,
 			this._entity,
-			new wb.serialization.ClaimSerializer(),
-			new wb.serialization.ClaimDeserializer(),
 			new wb.serialization.StatementSerializer(),
 			new wb.serialization.StatementDeserializer()
 		);
