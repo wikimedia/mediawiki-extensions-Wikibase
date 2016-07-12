@@ -377,10 +377,9 @@
 				parserStore,
 				userLanguages
 			),
-			statementGuid = 'statementGuid',
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
-		viewFactory.getListItemAdapterForReferenceView( statementGuid );
+		viewFactory.getListItemAdapterForReferenceView();
 
 		sinon.assert.calledWith(
 			ListItemAdapter,
@@ -396,7 +395,6 @@
 			result,
 			{
 				value: value || null,
-				statementGuid: statementGuid,
 				dataTypeStore: dataTypeStore,
 				listItemAdapter: result.listItemAdapter // Hack
 			}
