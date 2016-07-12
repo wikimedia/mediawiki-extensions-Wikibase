@@ -595,16 +595,8 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this.$refsHeading.find( '.ui-toggler-label' ).empty().append( $counterMsg );
 	},
 
-	/**
-	 * @inheritdoc
-	 */
-	startEditing: function() {
+	_startEditing: function() {
 		var self = this;
-
-		if ( this.isInEditMode() ) {
-			return $.Deferred().resolve().promise();
-		}
-
 		this._qualifierAdder = this.options.getAdder(
 			function() {
 				var listview = self._qualifiers;
@@ -619,18 +611,14 @@ $.widget( 'wikibase.statementview', PARENT, {
 			mw.msg( 'wikibase-addqualifier' )
 		);
 
-		// We need to initialize the main snak before calling PARENT::startEditing,
-		// since that triggers 'afterstartediting' which tries to set focus into
-		// the main snak
-		this._createMainSnak();
-		return this._mainSnakSnakView.startEditing().then( function() {
-			// PARENT::startEditing calls this.draw
-			return PARENT.prototype.startEditing.call( self );
-		} ).then( function() {
-			self._rankSelector.startEditing();
-			self._qualifiers.startEditing();
-			self._startEditingReferences();
-		} );
+		return $.when(
+			this._createMainSnak(),
+			this.draw(),
+			this._mainSnakSnakView.startEditing(),
+			this._rankSelector.startEditing(),
+			this._qualifiers.startEditing(),
+			this._startEditingReferences()
+		);
 	},
 
 	/**
@@ -651,19 +639,15 @@ $.widget( 'wikibase.statementview', PARENT, {
 		}
 	},
 
-	/**
-	 * @inheritdoc
-	 * @protected
-	 */
-	_afterStopEditing: function( dropValue ) {
-		this._mainSnakSnakView.stopEditing( dropValue );
-		this._stopEditingQualifiers( dropValue );
-		this._rankSelector.stopEditing( dropValue );
-
+	_stopEditing: function( dropValue ) {
 		// FIXME: Should not be necessary if _setOption would do the right thing for values
 		this._recreateReferences();
+		this._stopEditingQualifiers( dropValue );
 
-		return PARENT.prototype._afterStopEditing.call( this, dropValue );
+		return $.when(
+			this._mainSnakSnakView.stopEditing( dropValue ),
+			this._rankSelector.stopEditing( dropValue )
+		);
 	},
 
 	/**
