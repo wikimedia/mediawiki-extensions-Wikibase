@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce061b56_0d8526a0",
+        "filename": "view/resources/wikibase/entityChangers/SiteLinksChanger.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-12T06:50:33Z",
+      "side": 1,
+      "message": "You\u0027re right. And it has been like this since the beginning: Ib315d4644e5d07910838ed96e62230104374f9cb",
+      "parentUuid": "ce061b56_251be4d5",
+      "revId": "32a1941eb9500d97413bdc817828efea4b06efc4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce061b56_2582c4cd",
         "filename": "view/resources/wikibase/entityChangers/SiteLinksChanger.js",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2016-07-11T20:04:36Z",
       "side": 1,
       "message": "Comparing the *value* seems odd. Isn\u0027t it the existence of this attribute that makes the difference? So something like hasOwnProperty?",
+      "revId": "32a1941eb9500d97413bdc817828efea4b06efc4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_8d7116e0",
+        "filename": "view/resources/wikibase/entityChangers/SiteLinksChanger.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-12T06:50:33Z",
+      "side": 1,
+      "message": "typeof !\u003d\u003d \u0027undefined\u0027 :) I wouldn\u0027t do hasOwnProperty since I consider that an implementation detail. Imagine an RepoAPI implementation that has base objects for common API responses and then extends them with the actual response data. Not too realistic, but also not completely unreasonable.",
+      "parentUuid": "ce061b56_858730dc",
       "revId": "32a1941eb9500d97413bdc817828efea4b06efc4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
