@@ -74,19 +74,6 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @return {wikibase.entityChangers.ReferencesChanger}
-	 */
-	getReferencesChanger: function() {
-		return new MODULE.ReferencesChanger(
-			this._api,
-			this._revisionStore,
-			this._entity,
-			new wb.serialization.ReferenceSerializer(),
-			new wb.serialization.ReferenceDeserializer()
-		);
-	},
-
-	/**
 	 * @return {wikibase.entityChangers.SiteLinksChanger}
 	 */
 	getSiteLinksChanger: function() {
