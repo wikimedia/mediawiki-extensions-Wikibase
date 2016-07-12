@@ -12,7 +12,13 @@ var SELF = util.inherit(
 	}
 );
 
-SELF.prototype.getEntityTermsView = function( value, $entitytermsview ) {
+SELF.prototype.getEntityTermsView = function( startEditingCallback, value, $entitytermsview ) {
+	var controller;
+	arguments[0] = function() {
+		return startEditingCallback().then( function() {
+			return controller.startEditing();
+		} );
+	};
 	var view = PARENT.prototype.getEntityTermsView.apply( this, arguments );
 	var $container = this._toolbarFactory.getToolbarContainer( view.element );
 	$container.sticknode( {
@@ -67,12 +73,17 @@ SELF.prototype.getEntityTermsView = function( value, $entitytermsview ) {
 	} );
 
 	var entityTermsChanger = this._entityChangersFactory.getEntityTermsChanger();
-	this._getController( $container, view, entityTermsChanger, null, value );
+	controller = this._getController( $container, view, entityTermsChanger, null, value );
 	return view;
 };
 
-SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) {
+SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, value, $dom ) {
 	var controller;
+	arguments[0] = function() {
+		return startEditingCallback().then( function() {
+			return controller.startEditing();
+		} );
+	};
 	var statementview = PARENT.prototype.getStatementView.apply( this, arguments );
 
 	var removeFromListView = function( statementview ) {
@@ -98,10 +109,16 @@ SELF.prototype.getStatementView = function( entityId, propertyId, value, $dom ) 
 	return statementview;
 };
 
-SELF.prototype.getSitelinkGroupView = function( groupName, value, $sitelinkgroupview ) {
+SELF.prototype.getSitelinkGroupView = function( startEditingCallback, groupName, value, $sitelinkgroupview ) {
+	var controller;
+	arguments[0] = function() {
+		return startEditingCallback().then( function() {
+			return controller.startEditing();
+		} );
+	};
 	var view = PARENT.prototype.getSitelinkGroupView.apply( this, arguments );
 	var siteLinkSetsChanger = this._entityChangersFactory.getSiteLinkSetsChanger();
-	this._getController(
+	controller = this._getController(
 		this._toolbarFactory.getToolbarContainer( view.element.find( '.wikibase-sitelinkgroupview-heading-container' ) ),
 		view,
 		siteLinkSetsChanger,

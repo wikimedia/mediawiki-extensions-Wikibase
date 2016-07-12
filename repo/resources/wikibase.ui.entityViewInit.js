@@ -105,9 +105,11 @@
 			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
+			structureEditorFactory = new wb.view.StructureEditorFactory( toolbarFactory ),
 			viewFactory = new wb.view.ControllerViewFactory(
 				toolbarFactory,
 				entityChangersFactory,
+				structureEditorFactory,
 				contentLanguages,
 				dataTypeStore,
 				new wb.entityIdFormatter.CachingEntityIdHtmlFormatter(
@@ -127,9 +129,12 @@
 				parserStore,
 				userLanguages,
 				repoApiUrl
-			);
+			),
+			startEditingCallback = function() {
+				return $.Deferred().resolve().promise();
+			};
 
-		var entityView = viewFactory.getEntityView( entity, $entityview );
+		var entityView = viewFactory.getEntityView( startEditingCallback, entity, $entityview );
 
 		return entityView.widgetName;
 	}
