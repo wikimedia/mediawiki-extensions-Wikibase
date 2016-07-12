@@ -9,7 +9,7 @@ use Wikibase\Lib\UnitStorage;
 use RuntimeException;
 
 /**
- * @covers Wikibase\Lib\UnitConverter
+ * @covers \Wikibase\Lib\UnitConverter
  *
  * @group Wikibase
  *
