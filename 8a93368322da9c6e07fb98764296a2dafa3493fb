@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ce061b56_fa069622",
+        "filename": "lib/includes/Units/JsonUnitStorage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-07-12T00:40:51Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ee011f3e_965c6e50",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee011f3e_16407e5a",
         "filename": "lib/includes/Units/UnitConverter.php",
         "patchSetId": 6
@@ -170,6 +188,24 @@
       "side": 1,
       "message": "I can make a mode trigger for it, yes.",
       "parentUuid": "ee011f3e_360dc242",
+      "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_cd3cbebf",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-07-12T00:40:51Z",
+      "side": 1,
+      "message": "After some digging, I don\u0027t see a way to pass the flavor from RdfBuilder to here without changing tons of interfaces - too many abstractions in the way. Do you see any way to do this?",
+      "parentUuid": "ee011f3e_01003669",
       "revId": "8a93368322da9c6e07fb98764296a2dafa3493fb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
