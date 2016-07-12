@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce061b56_ebe08a27",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-12T11:19:45Z",
+      "side": 1,
+      "message": "This useless lump of code is removed again in Ifcd6442c7bf4bbff4ee50b23ada5ecc46b2d5366.",
+      "parentUuid": "ce061b56_6b701aa4",
+      "revId": "98ff6bbfe4518485c349307b51661c9c02debca2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce061b56_b0254dbf",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkview.js",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2016-07-12T11:16:12Z",
       "side": 1,
       "message": "jsdoc",
+      "revId": "98ff6bbfe4518485c349307b51661c9c02debca2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce061b56_cbddc675",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-12T11:19:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce061b56_b0254dbf",
       "revId": "98ff6bbfe4518485c349307b51661c9c02debca2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
