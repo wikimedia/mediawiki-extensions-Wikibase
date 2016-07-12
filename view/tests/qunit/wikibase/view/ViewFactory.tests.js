@@ -19,13 +19,13 @@
 	QUnit.test( 'getEntityView constructs correct views', function( assert ) {
 		assert.expect( 2 );
 		var entityStore = new wb.store.EntityStore(),
-			viewFactory = new ViewFactory( null, null, null, null, entityStore ),
+			viewFactory = new ViewFactory( null, null, null, null, null, entityStore ),
 			fooView = {},
 			$dom = $( '<div/>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
 		$dom.data = sinon.spy( function() { return fooView; } );
 
-		var res = viewFactory.getEntityView( getEntityStub( 'foo' ), $dom );
+		var res = viewFactory.getEntityView( null, getEntityStub( 'foo' ), $dom );
 
 		assert.strictEqual( res, fooView );
 		sinon.assert.calledOnce( FooView );
@@ -34,11 +34,11 @@
 	QUnit.test( 'getEntityView throws on incorrect views', function( assert ) {
 		assert.expect( 1 );
 		var entityStore = new wb.store.EntityStore(),
-			viewFactory = new ViewFactory( null, null, null, null, entityStore );
+			viewFactory = new ViewFactory( null, null, null, null, null, entityStore );
 
 		assert.throws(
 			function() {
-				viewFactory.getEntityView( getEntityStub( 'unknown' ) );
+				viewFactory.getEntityView( null, getEntityStub( 'unknown' ) );
 			},
 			new Error( 'View unknownview does not exist' )
 		);
@@ -51,7 +51,7 @@
 			$dom = $( '<div/>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
 
-		viewFactory.getEntityView( entity, $dom );
+		viewFactory.getEntityView( null, entity, $dom );
 
 		sinon.assert.calledWith( FooView, sinon.match( {
 			buildEntityTermsView: sinon.match.func,
@@ -70,7 +70,7 @@
 		sinon.spy( $.wikibase, 'sitelinkgrouplistview' );
 		$dom.sitelinkgrouplistview = $.wikibase.sitelinkgrouplistview;
 
-		viewFactory.getSitelinkGroupListView( sitelinkSet, $dom );
+		viewFactory.getSitelinkGroupListView( null, sitelinkSet, $dom );
 
 		sinon.assert.calledWith( $.wikibase.sitelinkgrouplistview, sinon.match( {
 			value: sitelinkSet
@@ -89,7 +89,7 @@
 		sinon.stub( $.wikibase, 'sitelinkgroupview' );
 		$dom.sitelinkgroupview = $.wikibase.sitelinkgroupview;
 
-		viewFactory.getSitelinkGroupView( groupName, siteLinks, $dom );
+		viewFactory.getSitelinkGroupView( null, groupName, siteLinks, $dom );
 
 		sinon.assert.calledWith( $.wikibase.sitelinkgroupview, sinon.match( {
 			groupName: groupName,
@@ -109,7 +109,7 @@
 		sinon.spy( $.wikibase, 'sitelinklistview' );
 		$dom.sitelinklistview = $.wikibase.sitelinklistview;
 
-		viewFactory.getSiteLinkListView( siteLinks, $dom );
+		viewFactory.getSiteLinkListView( null, siteLinks, $dom );
 
 		sinon.assert.calledWith( $.wikibase.sitelinklistview, sinon.match( {
 			value: siteLinks,
@@ -127,7 +127,7 @@
 
 		$dom.statementgrouplistview = sinon.stub( $.wikibase, 'statementgrouplistview' );
 
-		viewFactory.getStatementGroupListView( entity, $dom );
+		viewFactory.getStatementGroupListView( null, entity, $dom );
 
 		sinon.assert.calledWith( $.wikibase.statementgrouplistview, sinon.match( {
 			listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
@@ -140,11 +140,11 @@
 		assert.expect( 3 );
 		var entityId = 'Q1',
 			entityIdHtmlFormatter = {},
-			viewFactory = new ViewFactory( null, null, entityIdHtmlFormatter ),
+			viewFactory = new ViewFactory( null, null, null, entityIdHtmlFormatter ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			value = new wb.datamodel.StatementGroup( 'P1' );
 
-		viewFactory.getListItemAdapterForStatementGroupView( entityId );
+		viewFactory.getListItemAdapterForStatementGroupView( null, entityId );
 
 		sinon.assert.calledWith(
 			ListItemAdapter,
@@ -182,7 +182,7 @@
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getStatementListView( entityId, null, function () {}, value, $dom );
+		viewFactory.getStatementListView( null, entityId, null, function () {}, value, $dom );
 
 		sinon.assert.calledWith(
 			viewFactory._getView,
@@ -210,7 +210,7 @@
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
 		$dom.statementlistview = sinon.stub( $.wikibase, 'statementlistview' );
 
-		viewFactory.getStatementListView( entityId, null, function () {}, value, $dom );
+		viewFactory.getStatementListView( null, entityId, null, function () {}, value, $dom );
 
 		sinon.assert.calledWith(
 			$.wikibase.statementlistview,
@@ -232,6 +232,7 @@
 				null,
 				null,
 				null,
+				null,
 				entityIdPlainFormatter
 			),
 			ListItemAdapter = sinon.stub( $.wikibase.listview, 'ListItemAdapter' ),
@@ -240,7 +241,7 @@
 
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getListItemAdapterForStatementView( entityId, function () { return statement; } );
+		viewFactory.getListItemAdapterForStatementView( null, entityId, function () { return statement; } );
 
 		sinon.assert.calledWith(
 			ListItemAdapter,
@@ -292,7 +293,7 @@
 
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getListItemAdapterForStatementView( entityId, function () {}, propertyId );
+		viewFactory.getListItemAdapterForStatementView( null, entityId, function () {}, propertyId );
 
 		ListItemAdapter.args[0][0].getNewItem( value, dom );
 
@@ -321,7 +322,7 @@
 
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getListItemAdapterForStatementView( entityId, function () {}, null );
+		viewFactory.getListItemAdapterForStatementView( null, entityId, function () {}, null );
 
 		ListItemAdapter.args[0][0].getNewItem( value, dom );
 
@@ -416,6 +417,7 @@
 			parserStore = {},
 			userLanguages = [],
 			viewFactory = new ViewFactory(
+				null,
 				contentLanguages,
 				dataTypeStore,
 				entityIdHtmlFormatter,
@@ -490,6 +492,7 @@
 			parserStore = {},
 			userLanguages = [],
 			viewFactory = new ViewFactory(
+				null,
 				contentLanguages,
 				dataTypeStore,
 				entityIdHtmlFormatter,
@@ -508,7 +511,7 @@
 
 		sinon.spy( wb, 'ValueViewBuilder' );
 
-		viewFactory.getSnakView( false, options, value, $dom );
+		viewFactory.getSnakView( null, false, options, value, $dom );
 
 		sinon.assert.calledWith(
 			$.wikibase.snakview,
@@ -547,6 +550,7 @@
 			messageProvider = { getMessage: function() { return message; } },
 			userLanguages = [],
 			viewFactory = new ViewFactory(
+				null,
 				contentLanguages,
 				null,
 				null,
@@ -563,7 +567,7 @@
 		sinon.spy( $.wikibase, 'entitytermsview' );
 		$dom.entitytermsview = $.wikibase.entitytermsview;
 
-		viewFactory.getEntityTermsView( fingerprint, $dom );
+		viewFactory.getEntityTermsView( null, fingerprint, $dom );
 
 		sinon.assert.calledWith( $.wikibase.entitytermsview, sinon.match( {
 			value: fingerprint,
