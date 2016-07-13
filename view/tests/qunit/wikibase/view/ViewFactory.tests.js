@@ -344,9 +344,8 @@
 	} );
 
 	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function( assert ) {
-		assert.expect( 3 );
-		var value = null,
-			viewFactory = new ViewFactory(),
+		assert.expect( 1 );
+		var viewFactory = new ViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
 		viewFactory.getListItemAdapterForReferenceView();
@@ -355,23 +354,32 @@
 			ListItemAdapter,
 			sinon.match( {
 				listItemWidget: $.wikibase.referenceview,
-				newItemOptionsFn: sinon.match.func
+				getNewItem: sinon.match.func
 			} )
 		);
 
-		var result = ListItemAdapter.args[0][0].newItemOptionsFn( value );
+		ListItemAdapter.restore();
 
-		assert.deepEqual(
-			result,
-			{
+	} );
+
+	QUnit.test( 'getReferenceView passes correct options to view', function( assert ) {
+		assert.expect( 1 );
+		var value = null,
+			viewFactory = new ViewFactory(),
+			$dom = $( '<div/>' ),
+			referenceview = sinon.stub( $dom, 'referenceview' );
+
+		viewFactory.getReferenceView( {}, value, $dom );
+
+		sinon.assert.calledWith(
+			referenceview,
+			sinon.match( {
 				value: value || null,
-				listItemAdapter: result.listItemAdapter // Hack
-			}
+				listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter ),
+			} )
 		);
 
-		assert.ok( result.listItemAdapter instanceof $.wikibase.listview.ListItemAdapter );
-
-		ListItemAdapter.restore();
+		referenceview.restore();
 	} );
 
 	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', function( assert ) {
