@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0ba75f_52fcf2d5",
+        "filename": "view/resources/wikibase/entityChangers/EntityTermsChanger.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-13T07:06:26Z",
+      "side": 1,
+      "message": "that would create an array of arrays. I don\u0027t know if $.when automatically flattens, but I would not want to depend on that.",
+      "revId": "f55537785cd755585e3393124fd001f096c3d736",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
