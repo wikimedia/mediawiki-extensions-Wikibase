@@ -184,8 +184,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			}
 		)
 		.on(
-			'listviewitemremoved.' + this.widgetName
-			+ ' listviewitemadded.' + this.widgetName,
+			'listviewitemremoved.' + this.widgetName,
 			function( event, sitelinkview ) {
 				self._refreshCounter();
 				if ( sitelinkview ) {
@@ -426,9 +425,8 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			lia = listview.listItemAdapter(),
 			foundOne = false;
 
-		listview.items().each( function() {
-			if ( touchesViewport( this ) ) {
-				var sitelinkview = lia.liInstance( $( this ) );
+		listview.value().forEach( function( sitelinkview ) {
+			if ( touchesViewport( sitelinkview.element[0] ) ) {
 				sitelinkview.startEditing();
 				foundOne = true;
 			}
@@ -766,17 +764,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			$sitelinkview
 			.addClass( 'wb-new' )
 			.on( afterStopEditingEvent, function( event, dropValue ) {
-				var siteLink = sitelinkview.value();
-
-				listview.removeItem( $sitelinkview );
-
-				if ( !dropValue && siteLink ) {
-					listview.addItem( siteLink );
-				}
-
-				if ( self.__pendingItems && --self.__pendingItems !== 0 ) {
-					return;
-				}
+				$sitelinkview.removeClass( 'wb-new' );
 
 				self._refreshCounter();
 			} );
@@ -789,7 +777,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 				sitelinkview.startEditing();
 			}
 
-			this.__pendingItems = this.__pendingItems ? this.__pendingItems + 1 : 1;
+			self._trigger( 'change' );
 		} );
 	}
 } );

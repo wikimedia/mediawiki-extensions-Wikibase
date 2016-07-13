@@ -328,7 +328,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this._referencesListview = $listview.data( 'listview' );
 
 		$listview
-		.on( 'listviewitemadded listviewitemremoved', function( event, value, $li ) {
+		.on( 'listviewitemremoved', function( event, value, $li ) {
 			if ( self._ignoreReferencesListviewChanges ) {
 				return;
 			}
@@ -347,26 +347,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 				return;
 			}
 
-			// Enter first item into the referenceview.
-			lia.liInstance( $newLi ).enterNewItem();
-
 			var liInstance = lia.liInstance( $newLi );
 
-			if ( !liInstance.value() ) {
-				$newLi
-				.on( lia.prefixedEvent( 'afterstopediting' ), function( event, dropValue ) {
-					if ( !dropValue ) {
-						var newReferenceWithHash = liInstance.value();
-
-						// Destroy new reference input form and add reference to list
-						liInstance.destroy();
-						$newLi.remove();
-
-						// Display new reference with final GUID
-						self._addReference( newReferenceWithHash );
-					}
-				} );
-			}
+			// Enter first item into the referenceview.
+			liInstance.enterNewItem();
+			self._drawReferencesCounter();
+			self._trigger( 'change' );
 		} );
 
 		this._createReferencesToggler();
@@ -561,17 +547,6 @@ $.widget( 'wikibase.statementview', PARENT, {
 	},
 
 	/**
-	 * Adds a `Reference` and renders it in the view.
-	 *
-	 * @private
-	 *
-	 * @param {wikibase.datamodel.Reference} reference
-	 */
-	_addReference: function( reference ) {
-		this._referencesListview.addItem( reference );
-	},
-
-	/**
 	 * @private
 	 *
 	 * @return {wikibase.datamodel.SnakList}
@@ -661,9 +636,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return PARENT.prototype.startEditing.call( self );
 		} ).then( function() {
 			self._rankSelector.startEditing();
-			$.each( self._qualifiers.value(), function () {
-				this.startEditing();
-			} );
+			self._qualifiers.startEditing();
 			self._startEditingReferences();
 		} );
 	},
@@ -672,10 +645,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @protected
 	 */
 	_startEditingReferences: function() {
-		$.each( this._referencesListview.value(), function ( key, referenceView ) {
-			referenceView.startEditing();
-		} );
-
+		this._referencesListview.startEditing();
 		this._expandReferencesToggler();
 	},
 

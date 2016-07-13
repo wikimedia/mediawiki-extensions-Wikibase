@@ -105,7 +105,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		var changeEvents = [
 			'snakviewchange.' + this.widgetName,
 			lia.prefixedEvent( 'change.' + this.widgetName ),
-			'listviewitemadded.' + this.widgetName,
 			'listviewitemremoved.' + this.widgetName
 		];
 
@@ -142,7 +141,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		var lia = this.$listview.data( 'listview' ).listItemAdapter(),
 			events = [
 				'snakviewchange.' + this.widgetName,
-				'listviewitemadded.' + this.widgetName,
 				'listviewitemremoved.' + this.widgetName,
 				lia.prefixedEvent( 'change.' + this.widgetName ),
 				lia.prefixedEvent( 'stopediting.' + this.widgetName )
@@ -211,10 +209,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 			return;
 		}
 
-		// FIXME: There should be a listview::startEditing method
-		$.each( this.$listview.data( 'listview' ).value(), function() {
-			this.startEditing();
-		} );
+		this.$listview.data( 'listview' ).startEditing();
 
 		this._attachEditModeEventHandlers();
 
@@ -250,16 +245,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 */
 	_stopEditingReferenceSnaks: function() {
 		var listview = this.$listview.data( 'listview' );
-
-		listview.items().each( function() {
-			listview.removeItem( $( this ) );
-		} );
-
-		if ( this.options.value ) {
-			$.each( this.options.value.getSnaks().getGroupedSnakLists(), function() {
-				listview.addItem( this );
-			} );
-		}
+		listview.value( this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : [] );
 	},
 
 	/**
