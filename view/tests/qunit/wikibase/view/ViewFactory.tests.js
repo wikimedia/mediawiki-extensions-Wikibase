@@ -83,33 +83,47 @@
 		assert.expect( 1 );
 		var groupName = 'groupid',
 			siteLinks = [],
-			siteLinksChanger = {},
-			entityChangersFactory = { getSiteLinksChanger: function() { return siteLinksChanger; } },
-			entityIdPlainFormatter = {},
+			siteLinkSetsChanger = {},
+			entityChangersFactory = { getSiteLinkSetsChanger: function() { return siteLinkSetsChanger; } },
 			viewFactory = new ViewFactory(
 				null,
 				null,
-				entityChangersFactory,
-				null,
-				entityIdPlainFormatter
+				entityChangersFactory
 			),
-			eventSingletonManager = new $.util.EventSingletonManager(),
 			$dom = $( '<div/>' );
 
-		sinon.spy( $.wikibase, 'sitelinkgroupview' );
+		sinon.stub( $.wikibase, 'sitelinkgroupview' );
 		$dom.sitelinkgroupview = $.wikibase.sitelinkgroupview;
 
-		viewFactory.getSitelinkGroupView( eventSingletonManager, groupName, siteLinks, $dom );
+		viewFactory.getSitelinkGroupView( groupName, siteLinks, $dom );
 
 		sinon.assert.calledWith( $.wikibase.sitelinkgroupview, sinon.match( {
 			groupName: groupName,
 			value: siteLinks,
-			entityIdPlainFormatter: entityIdPlainFormatter,
-			eventSingletonManager: eventSingletonManager,
-			siteLinksChanger: siteLinksChanger
+			getSiteLinkListView: sinon.match.func,
+			siteLinkSetsChanger: siteLinkSetsChanger
 		} ) );
 
 		$.wikibase.sitelinkgroupview.restore();
+	} );
+
+	QUnit.test( 'getSiteLinkListView passes correct options to views', function( assert ) {
+		assert.expect( 1 );
+		var siteLinks = [],
+			viewFactory = new ViewFactory(),
+			$dom = $( '<div/>' );
+
+		sinon.spy( $.wikibase, 'sitelinklistview' );
+		$dom.sitelinklistview = $.wikibase.sitelinklistview;
+
+		viewFactory.getSiteLinkListView( siteLinks, $dom );
+
+		sinon.assert.calledWith( $.wikibase.sitelinklistview, sinon.match( {
+			value: siteLinks,
+			eventSingletonManager: sinon.match.instanceOf( $.util.EventSingletonManager )
+		} ) );
+
+		$.wikibase.sitelinklistview.restore();
 	} );
 
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function( assert ) {

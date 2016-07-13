@@ -79,6 +79,16 @@ return call_user_func( function() {
 			),
 		),
 
+		'wikibase.entityChangers.SiteLinkSetsChanger.tests' => $moduleBase + array(
+			'scripts' => array(
+				'SiteLinkSetsChanger.tests.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel',
+				'wikibase.entityChangers.SiteLinkSetsChanger'
+			),
+		),
+
 	);
 
 	return $modules;
