@@ -18,6 +18,11 @@
 					destroy: function() {}
 				};
 			},
+			getReferenceRemover: function() {
+				return {
+					destroy: function() {}
+				};
+			},
 			listItemAdapter: wb.tests.getMockListItemAdapter(
 				'snaklistview',
 				function() {
