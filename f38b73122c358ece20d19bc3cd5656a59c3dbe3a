@@ -16,6 +16,24 @@
       "revId": "f38b73122c358ece20d19bc3cd5656a59c3dbe3a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0ba75f_b8637dd9",
+        "filename": "view/resources/wikibase/entityChangers/SiteLinkSetsChanger.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-13T14:28:21Z",
+      "side": 1,
+      "message": "Good idea.",
+      "parentUuid": "ae0ba75f_b2843eb7",
+      "revId": "f38b73122c358ece20d19bc3cd5656a59c3dbe3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
