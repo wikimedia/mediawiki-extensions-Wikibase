@@ -67,7 +67,12 @@ return call_user_func( function() {
 				'wikibase.entityChangers.DescriptionsChanger',
 				'wikibase.entityChangers.EntityTermsChanger',
 				'wikibase.entityChangers.LabelsChanger',
+<<<<<<< HEAD   (afe9df Merge branches 'TC_EntityTermsChanger', 'itemadded' and 'TC_)
 				'wikibase.entityChangers.SiteLinksChanger',
+=======
+				'wikibase.entityChangers.ReferencesChanger',
+				'wikibase.entityChangers.SiteLinkSetsChanger',
+>>>>>>> BRANCH (74bf7b Simplify sitelinkview)
 				'wikibase.entityChangers.StatementsChanger',
 				'wikibase.serialization.StatementDeserializer',
 				'wikibase.serialization.StatementSerializer',
@@ -100,6 +105,17 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.entityChangers.__namespace',
+				'wikibase.api.RepoApiError',
+			)
+		),
+
+		'wikibase.entityChangers.SiteLinkSetsChanger' => $moduleTemplate + array(
+			'scripts' => array(
+				'SiteLinkSetsChanger.js',
+			),
+			'dependencies' => array(
+				'wikibase.entityChangers.__namespace',
+				'wikibase.entityChangers.SiteLinksChanger',
 				'wikibase.api.RepoApiError',
 			)
 		),

@@ -316,7 +316,6 @@ return call_user_func( function() {
 				'jquery.sticknode',
 				'jquery.ui.TemplatedWidget',
 				'jquery.util.EventSingletonManager',
-				'jquery.wikibase.sitelinklistview',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.buildErrorOutput',
 				'wikibase.sites',

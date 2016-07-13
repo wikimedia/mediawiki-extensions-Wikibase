@@ -117,9 +117,6 @@
 				'Started edit mode.'
 			);
 		} )
-		.on( 'sitelinkviewstopediting', function( event, dropValue, callback ) {
-			callback();
-		} )
 		.on( 'sitelinkviewafterstopediting', function( event, dropValue ) {
 			assert.ok(
 				true,
@@ -160,9 +157,6 @@
 				true,
 				'Started edit mode.'
 			);
-		} )
-		.on( 'sitelinkviewstopediting', function( event, dropValue, callback ) {
-			callback();
 		} )
 		.on( 'sitelinkviewafterstopediting', function( event, dropValue ) {
 			assert.ok(
@@ -267,74 +261,6 @@
 			!sitelinkview.isEmpty(),
 			'isEmpty() returns FALSE when a site link is set initially although the page suggester '
 			+ ' input is cleared in edit mode.'
-		);
-	} );
-
-	QUnit.test( 'isValid()', function( assert ) {
-		assert.expect( 4 );
-		var $sitelinkview = createSitelinkview(),
-			sitelinkview = $sitelinkview.data( 'sitelinkview' );
-
-		assert.ok(
-			!sitelinkview.isValid(),
-			'Returning false after initializing with no value.'
-		);
-
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' );
-
-		$sitelinkview = createSitelinkview( {
-			value: siteLink
-		} );
-		sitelinkview = $sitelinkview.data( 'sitelinkview' );
-
-		assert.ok(
-			sitelinkview.isValid(),
-			'Returning true after initializing with a proper value.'
-		);
-
-		sitelinkview.startEditing();
-		$sitelinkview.find( ':wikibase-pagesuggester' ).val( '' );
-
-		assert.ok(
-			!sitelinkview.isValid(),
-			'Returning false after erasing the page name.'
-		);
-
-		$sitelinkview.find( ':wikibase-pagesuggester' ).val( 'test' );
-
-		assert.ok(
-			sitelinkview.isValid(),
-			'Returning true after specifying another page name.'
-		);
-	} );
-
-	QUnit.test( 'isInitialValue()', function( assert ) {
-		assert.expect( 3 );
-		var siteLink = new wikibase.datamodel.SiteLink( 'enwiki', 'Main Page' ),
-			$sitelinkview = createSitelinkview( {
-				value: siteLink
-			} ),
-			sitelinkview = $sitelinkview.data( 'sitelinkview' );
-
-		assert.ok(
-			sitelinkview.isInitialValue(),
-			'Returning true after initializing with a proper value.'
-		);
-
-		sitelinkview.startEditing();
-
-		$sitelinkview.find( ':wikibase-pagesuggester' ).val( 'test' );
-
-		assert.ok(
-			!sitelinkview.isInitialValue(),
-			'Returning false after changing the value.'
-		);
-
-		$sitelinkview.find( ':wikibase-pagesuggester' ).val( 'Main Page' );
-
-		assert.ok(
-			sitelinkview.isInitialValue(),
-			'Returning true after resetting the value.'
 		);
 	} );
 

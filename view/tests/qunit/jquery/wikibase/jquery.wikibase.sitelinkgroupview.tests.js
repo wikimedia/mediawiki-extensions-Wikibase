@@ -11,25 +11,39 @@
  */
 function createSitelinkgroupview( options ) {
 	options = $.extend( {
-		siteLinksChanger: 'I am a SiteLinksChanger',
-		entityIdPlainFormatter: 'I am an EntityIdPlainFormatter'
+		getSiteLinkListView: function( value, $dom ) {
+			var widget = {
+				destroy: function() {},
+				draw: function() {
+					return $.Deferred().resolve().promise();
+				},
+				isInitialValue: function() {
+					return true;
+				},
+				isValid: function() {
+					return true;
+				},
+				option: function() {},
+				startEditing: function() {
+					$dom.trigger( 'sitelinklistviewafterstartediting' );
+					return $.Deferred().resolve().promise();
+				},
+				stopEditing: function() {
+					return $.Deferred().resolve().promise();
+				},
+				value: function() {},
+				widgetEventPrefix: ''
+			};
+			$dom.data( 'sitelinklistview', widget );
+			return widget;
+		},
+		siteLinkSetsChanger: 'I am a SiteLinkSetsChanger'
 	}, options );
 
 	var $sitelinkgroupview = $( '<div/>' )
 		.addClass( 'test_sitelinkgroupview' )
 		.appendTo( $( 'body' ) )
 		.sitelinkgroupview( options );
-
-	var sitelinkgroupview = $sitelinkgroupview.data( 'sitelinkgroupview' ),
-		sitelinklistview = sitelinkgroupview.$sitelinklistview.data( 'sitelinklistview' );
-
-	sitelinklistview._saveSiteLink = function( siteLink ) {
-		if ( !( siteLink instanceof wb.datamodel.SiteLink ) ) {
-			throw new Error( 'SiteLink object expected' );
-		} else {
-			return ( new $.Deferred() ).resolve().promise();
-		}
-	};
 
 	return $sitelinkgroupview;
 }

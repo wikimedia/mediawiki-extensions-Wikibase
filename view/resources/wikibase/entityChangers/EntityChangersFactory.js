@@ -79,10 +79,27 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
+<<<<<<< HEAD   (afe9df Merge branches 'TC_EntityTermsChanger', 'itemadded' and 'TC_)
 	 * @return {wikibase.entityChangers.SiteLinksChanger}
+=======
+	 * @return {wikibase.entityChangers.ReferencesChanger}
 	 */
-	getSiteLinksChanger: function() {
-		return new MODULE.SiteLinksChanger( this._api, this._revisionStore, this._entity );
+	getReferencesChanger: function() {
+		return new MODULE.ReferencesChanger(
+			this._api,
+			this._revisionStore,
+			this._entity,
+			new wb.serialization.ReferenceSerializer(),
+			new wb.serialization.ReferenceDeserializer()
+		);
+	},
+
+	/**
+	 * @return {wikibase.entityChangers.SiteLinkSetsChanger}
+>>>>>>> BRANCH (74bf7b Simplify sitelinkview)
+	 */
+	getSiteLinkSetsChanger: function() {
+		return new MODULE.SiteLinkSetsChanger( this._api, this._revisionStore, this._entity );
 	}
 } );
 

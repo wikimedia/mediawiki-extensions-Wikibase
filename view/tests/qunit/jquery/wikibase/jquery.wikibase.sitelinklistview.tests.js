@@ -12,8 +12,22 @@
 function createSitelinklistview( options ) {
 	options = $.extend( {
 		allowedSiteIds: ['aawiki', 'enwiki'],
-		entityIdPlainFormatter: 'I am an EntityIdPlainFormatter',
-		siteLinksChanger: 'I am a SiteLinksChanger'
+		getListItemAdapter: function() {
+			return wb.tests.getMockListItemAdapter(
+				'sitelinkview',
+				function() {
+					this.$siteId = $( '<div/>' );
+					this.focus = function() {};
+					this.isEmpty = function() { return !this.options.value; };
+					this.isInitialValue = function() { return Boolean( this.options.value ); };
+					this.isValid = function() { return Boolean( this.options.value ); };
+					this.startEditing = function() {};
+					this.value = function() {
+						return this.options.value;
+					};
+				}
+			);
+		}
 	}, options );
 
 	var $sitelinklistview = $( '<table/>' )
@@ -139,7 +153,7 @@ QUnit.test( 'isFull()', function( assert ) {
 
 	assert.ok(
 		sitelinklistview.isFull(),
-		'Retuning true.'
+		'Returning true.'
 	);
 } );
 
@@ -169,8 +183,12 @@ QUnit.test( 'isValid() with invalid sitelinkview', function( assert ) {
 		lia = listview.listItemAdapter(),
 		sitelinkview = lia.liInstance( listview.items().first() );
 
-	sitelinkview.startEditing();
-	sitelinkview.$siteId.find( 'input' ).val( 'foobar' );
+	sitelinkview.isEmpty = function() {
+		return false;
+	};
+	sitelinkview.isValid = function() {
+		return false;
+	};
 
 	assert.ok(
 		!sitelinklistview.isValid(),

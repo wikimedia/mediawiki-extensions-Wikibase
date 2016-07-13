@@ -56,6 +56,7 @@ return call_user_func( function() {
 				'jquery.wikibase.listview', // For ListItemAdapter
 				'jquery.wikibase.propertyview',
 				'jquery.wikibase.sitelinkgroupview',
+				'jquery.wikibase.sitelinklistview',
 				'jquery.wikibase.statementgrouplistview',
 				'jquery.wikibase.statementgroupview',
 				'jquery.wikibase.statementlistview',
