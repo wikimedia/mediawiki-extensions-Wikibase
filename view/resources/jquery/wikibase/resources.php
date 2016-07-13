@@ -45,7 +45,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.menu',
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'wikibase.templates',
 			),
 		),
@@ -184,7 +184,7 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
 			),
 			'dependencies' => array(
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.entitytermsforlanguageview',
 				'wikibase.getLanguageNameByCode',
 			),
@@ -206,7 +206,7 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.entitytermsforlanguageview.css',
 			),
 			'dependencies' => array(
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.aliasesview',
 				'jquery.wikibase.descriptionview',
 				'jquery.wikibase.labelview',
@@ -286,6 +286,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.removeClassByRegex',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel',
 			),
@@ -315,7 +316,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.makeCollapsible',
 				'jquery.sticknode',
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.EventSingletonManager',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'wikibase.buildErrorOutput',
@@ -358,7 +359,7 @@ return call_user_func( function() {
 				'themes/default/jquery.wikibase.sitelinkview.css',
 			),
 			'dependencies' => array(
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.util.EventSingletonManager',
 				'jquery.wikibase.badgeselector',
 				'jquery.wikibase.pagesuggester',
@@ -382,7 +383,7 @@ return call_user_func( function() {
 				'jquery.wikibase.snaklistview.js',
 			),
 			'dependencies' => array(
-				'jquery.ui.TemplatedWidget',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.wikibase.listview',
 				'wikibase.datamodel.Snak',
 				'wikibase.datamodel.SnakList',
