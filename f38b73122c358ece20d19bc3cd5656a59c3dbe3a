@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0ba75f_b2843eb7",
+        "filename": "view/resources/wikibase/entityChangers/SiteLinkSetsChanger.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-13T11:46:35Z",
+      "side": 1,
+      "message": "Extract method?",
+      "revId": "f38b73122c358ece20d19bc3cd5656a59c3dbe3a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
