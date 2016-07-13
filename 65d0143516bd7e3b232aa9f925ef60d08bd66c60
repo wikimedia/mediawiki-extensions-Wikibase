@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0ba75f_b2fd5e3b",
+        "filename": "view/resources/wikibase/entityChangers/EntityTermsChanger.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-13T09:45:18Z",
+      "side": 1,
+      "message": "Personally I prefer the concat way.\nWe could use [].push.apply to improve readability.",
+      "revId": "65d0143516bd7e3b232aa9f925ef60d08bd66c60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
