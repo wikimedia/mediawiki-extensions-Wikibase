@@ -117,6 +117,17 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.entityChangers.SiteLinkSetsChanger' => $moduleTemplate + array(
+			'scripts' => array(
+				'SiteLinkSetsChanger.js',
+			),
+			'dependencies' => array(
+				'wikibase.entityChangers.__namespace',
+				'wikibase.entityChangers.SiteLinksChanger',
+				'wikibase.api.RepoApiError',
+			)
+		),
+
 	);
 
 } );

@@ -26,14 +26,9 @@ function getSiteIdsOfGroup( group ) {
  *
  * @option {string} groupName
  * @option {wikibase.datamodel.SiteLink[]} value A list of SiteLinks
+ * @option {Function} getSiteLinkListView
  *
  * @option {wikibase.entityChangers.SiteLinksChanger} siteLinksChanger
- *
- * @option {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
- *
- * @option {jQuery.util.EventSingletonManager} [eventSingletonManager]
- *         Should be set when the widget instance is part of a jQuery.wikibase.sitelinkgrouplistview.
- *         Default: null (will be constructed automatically)
  *
  * @option {string} [helpMessage]
  *                  Default: 'Add a site link by specifying a site and a page of that site, edit or
@@ -67,10 +62,9 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 			$counter: '.wikibase-sitelinkgroupview-counter'
 		},
 		value: null,
+		getSiteLinkListView: null,
 		groupName: null,
-		entityIdPlainFormatter: null,
 		siteLinksChanger: null,
-		eventSingletonManager: null,
 		helpMessage: mw.msg( 'wikibase-sitelinkgroupview-input-help-message' )
 	},
 
@@ -78,11 +72,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * @type {jQuery}
 	 */
 	$sitelinklistview: null,
-
-	/**
-	 * @type {jQuery.util.EventSingletonManager}
-	 */
-	_eventSingletonManager: null,
 
 	/**
 	 * @type {string[]}
@@ -95,7 +84,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	_create: function() {
 		if ( !this.options.groupName
 			|| !this.options.siteLinksChanger
-			|| !this.options.entityIdPlainFormatter
+			|| !this.options.getSiteLinkListView
 		) {
 			throw new Error( 'Required parameter(s) missing' );
 		}
@@ -110,9 +99,6 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		if ( !this.$sitelinklistview.length ) {
 			this.$sitelinklistview = $( '<table/>' ).appendTo( this.element );
 		}
-
-		this._eventSingletonManager
-			= this.options.eventSingletonManager || new $.util.EventSingletonManager();
 
 		this.draw();
 	},
@@ -169,24 +155,21 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	 * Creates and initializes the sitelinklistview widget.
 	 */
 	_createSitelinklistview: function() {
-		var self = this,
-			prefix = $.wikibase.sitelinklistview.prototype.widgetEventPrefix;
+		var sitelinklistview = this.options.getSiteLinkListView(
+			this._getSiteLinksOfGroup(),
+			this.$sitelinklistview,
+			this._siteIdsOfGroup,
+			this.$counter
+		);
+		var prefix = sitelinklistview.widgetEventPrefix;
 
+		var self = this;
 		this.$sitelinklistview
 		.on( prefix + 'change.' + this.widgetName, function( event ) {
 			self._trigger( 'change' );
 		} )
 		.on( prefix + 'toggleerror.' + this.widgetName, function( event, error ) {
 			self.setError( error );
-		} )
-		.sitelinklistview( {
-			value: this._getSiteLinksOfGroup(),
-			allowedSiteIds: this._siteIdsOfGroup,
-			entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-			siteLinksChanger: this.options.siteLinksChanger,
-			eventSingleton: this._eventSingleton,
-			$counter: this.$counter,
-			encapsulate: true
 		} );
 	},
 
@@ -223,40 +206,41 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 		return deferred.promise();
 	},
 
-	/**
-	 * @see jQuery.ui.EditableTemplatedWidget.stopEditing
-	 */
-	stopEditing: function( dropValue ) {
-		var self = this,
-			deferred = $.Deferred();
+	_save: function() {
+		var deferred = $.Deferred();
+		var self = this;
+		var sitelinklistview = this.$sitelinklistview.data( 'sitelinklistview' );
+		var siteLinks = sitelinklistview.diffValue();
 
-		if ( !this.isInEditMode() || ( !this.isValid() || this.isInitialValue() ) && !dropValue ) {
-			return deferred.resolve().promise();
+		function next() {
+			if ( siteLinks.length === 0 ) {
+				deferred.resolve();
+				return;
+			}
+
+			var siteLink = siteLinks.pop();
+			self.options.siteLinksChanger.setSiteLink( siteLink ).done( function( savedSiteLink ) {
+				next();
+			} ).fail( function( error ) {
+				deferred.reject( error );
+			} );
 		}
 
-		this._trigger( 'stopediting', null, [dropValue] );
-
-		this.disable();
-
-		this.$sitelinklistview
-		.one(
-			'sitelinklistviewafterstopediting.sitelinkgroupviewstopediting',
-			function( event, dropValue ) {
-				self._afterStopEditing( dropValue );
-				self.$sitelinklistview.off( '.sitelinkgroupviewstopediting' );
-				self.notification();
-				deferred.resolve();
-			}
-		)
-		.one( 'sitelinklistviewtoggleerror.sitelinkgroupviewstopediting', function( event, error ) {
-			self.enable();
-			self.$sitelinklistview.off( '.sitelinkgroupviewstopediting' );
-			deferred.reject( error );
-		} );
-
-		this.$sitelinklistview.data( 'sitelinklistview' ).stopEditing( dropValue );
+		setTimeout( next, 0 );
 
 		return deferred.promise();
+	},
+
+	/**
+	 * @see jQuery.ui.EditableTemplatedWidget._afterStopEditing
+	 */
+	_afterStopEditing: function( dropValue ) {
+		var self = this;
+		return this.$sitelinklistview.data( 'sitelinklistview' ).stopEditing( dropValue )
+		.done( function() {
+			self.notification();
+			return PARENT.prototype._afterStopEditing.call( self );
+		} );
 	},
 
 	/**
