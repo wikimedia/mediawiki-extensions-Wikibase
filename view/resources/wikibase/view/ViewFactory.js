@@ -433,7 +433,6 @@
 					}
 				},
 
-				buildReferenceListItemAdapter: $.proxy( this.getListItemAdapterForReferenceView, this, startEditingCallback ),
 				buildSnakView: $.proxy(
 					this.getSnakView,
 					this,
@@ -442,6 +441,7 @@
 				),
 				entityIdPlainFormatter: this._entityIdPlainFormatter,
 				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getReferenceListItemAdapter: this.getListItemAdapterForReferenceView.bind( this, startEditingCallback ),
 				guidGenerator: new wb.utilities.ClaimGuidGenerator( entityId ),
 				qualifiersListItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback )
 			}
@@ -454,23 +454,29 @@
 	 *
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
 	 */
-	SELF.prototype.getListItemAdapterForReferenceView = function( startEditingCallback ) {
+	SELF.prototype.getListItemAdapterForReferenceView = function( startEditingCallback, removeCallback ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.referenceview,
 			getNewItem: $.proxy( function( value, dom ) {
-				return this.getReferenceView( startEditingCallback, value, $( dom ) );
+				return this.getReferenceView( startEditingCallback, removeCallback, value, $( dom ) );
 			}, this )
 		} );
 	};
 
-	SELF.prototype.getReferenceView = function( startEditingCallback, value, $dom ) {
+	SELF.prototype.getReferenceView = function( startEditingCallback, removeCallback, value, $dom ) {
+		var structureEditorFactory = this._structureEditorFactory;
 		var view = this._getView(
 			'referenceview',
 			$dom,
 			{
 				value: value || null,
 				listItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback ),
-				getAdder: this._getAdderWithStartEditing( startEditingCallback )
+				getAdder: this._getAdderWithStartEditing( startEditingCallback ),
+				getReferenceRemover: function( $dom ) {
+					return structureEditorFactory.getRemover( function() {
+						return startEditingCallback().then( function() { return removeCallback( view ); } );
+					}, $dom );
+				}
 			}
 		);
 		return view;
