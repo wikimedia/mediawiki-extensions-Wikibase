@@ -25,7 +25,6 @@
 			}
 			return _value;
 		};
-		this.isValid = function() {};
 		this.startEditing = function() {
 			this._trigger( 'change' );
 			this._trigger( 'afterstartediting' );
@@ -383,25 +382,6 @@
 			null,
 			'Snaklistview is not valid due to pending value.'
 		);
-	} );
-
-	QUnit.test( 'cancelEditing()', function( assert ) {
-		assert.expect( 1 );
-		var $node = createSnaklistview(),
-			snaklistview = $node.data( 'snaklistview' );
-
-		// Since cancelEditing is just a short-cut, there is no need for particular testing expect
-		// for verifying the actual short-cut behaviour.
-		snaklistview.stopEditing = function( dropValue ) {
-			assert.strictEqual(
-				dropValue,
-				true,
-				'Called stopEditing with dropValue flag set to TRUE.'
-			);
-		};
-
-		snaklistview.startEditing();
-		snaklistview.cancelEditing();
 	} );
 
 	QUnit.test( 'Stopping edit mode dropping value', function( assert ) {
