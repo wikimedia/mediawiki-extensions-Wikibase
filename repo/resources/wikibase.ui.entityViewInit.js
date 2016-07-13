@@ -25,7 +25,6 @@
 		var toolbarControllerConfig = {
 			toolbars: {
 				removetoolbar: [
-					'referenceview',
 					'statementview-snakview',
 					'referenceview-snakview',
 					'sitelinkgroupview-sitelinkview'

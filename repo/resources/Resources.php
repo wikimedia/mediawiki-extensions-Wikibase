@@ -79,7 +79,6 @@ return call_user_func( function() {
 				'mw.config.values.wbEntityTypes',
 				'mw.config.values.wbRepo',
 				'jquery.wikibase.toolbarcontroller',
-				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview',
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview-snakview',
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.sitelinkgroupview-sitelinkview',
 				'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.statementview-snakview',
