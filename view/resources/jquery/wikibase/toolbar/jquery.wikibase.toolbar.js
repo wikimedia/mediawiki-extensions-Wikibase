@@ -43,8 +43,7 @@ $.widget( 'wikibase.toolbar', PARENT, {
 		}
 
 		this.getContainer()
-		.addClass( this.widgetBaseClass + '-container' )
-		.addClass( 'wikibase-toolbar-container' );
+		.addClass( this.widgetBaseClass + '-container wikibase-toolbar-container' );
 	},
 
 	/**
@@ -60,9 +59,8 @@ $.widget( 'wikibase.toolbar', PARENT, {
 		var $container = this.getContainer();
 
 		$container
-		.removeClass( this.widgetBaseClass + '-container' )
-		.removeClass( 'wikibase-toolbar-container' )
-		.removeClass( 'ui-state-disabled' )
+		.removeClass( this.widgetBaseClass
+			+ '-container wikibase-toolbar-container ui-state-disabled' )
 		.off( '.' + this.widgetName );
 
 		if ( $container.get( 0 ) !== this.element.get( 0 ) ) {

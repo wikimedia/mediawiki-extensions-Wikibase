@@ -180,11 +180,10 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			this._createBadgeSelector();
 		}
 
+		this.element.toggleClass( 'wb-edit', this._isInEditMode );
+
 		if ( this._isInEditMode ) {
-			this.element.addClass( 'wb-edit' );
 			this._drawEditMode();
-		} else {
-			this.element.removeClass( 'wb-edit' );
 		}
 	},
 
