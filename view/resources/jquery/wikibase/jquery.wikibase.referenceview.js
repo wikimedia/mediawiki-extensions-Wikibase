@@ -1,13 +1,13 @@
 ( function( wb, $ ) {
 	'use strict';
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
  * View for displaying and editing `wikibase.datamodel.Reference` objects.
  * @see wikibase.datamodel.Reference
  * @class jQuery.wikibase.referenceview
- * @extends jQuery.ui.TemplatedWidget
+ * @extends jQuery.ui.EditableTemplatedWidget
  * @since 0.4
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
@@ -58,13 +58,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		value: null,
 		getListItemAdapter: null
 	},
-
-	/**
-	 * Whether the widget is currently in edit mode.
-	 * @property {boolean} [_isInEditMode=false]
-	 * @private
-	 */
-	_isInEditMode: false,
 
 	/**
 	 * @inheritdoc
@@ -197,21 +190,12 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 *
 	 * @since 0.5
 	 */
-	startEditing: function() {
-		if ( this.isInEditMode() ) {
-			return;
-		}
-
-		this.$listview.data( 'listview' ).startEditing();
-
+	_startEditing: function() {
 		this._attachEditModeEventHandlers();
-
-		this.element.addClass( 'wb-edit' );
-		this._isInEditMode = true;
 
 		this._snakListAdder = this.options.getAdder( this.enterNewItem.bind( this ), this.element );
 
-		this._trigger( 'afterstartediting' );
+		return this.$listview.data( 'listview' ).startEditing();
 	},
 
 	/**
@@ -219,23 +203,15 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	 *
 	 * @since 0.5
 	 */
-	stopEditing: function() {
-		if ( !this.isInEditMode() ) {
-			return;
-		}
+	_stopEditing: function() {
+		this._detachEditModeEventHandlers();
 
 		this._snakListAdder.destroy();
 		this._snakListAdder = null;
 
-		this._isInEditMode = false;
-		this.element.removeClass( 'wb-edit' );
-
-		this._detachEditModeEventHandlers();
-
 		// FIXME: There should be a listview::stopEditing method
 		this._stopEditingReferenceSnaks();
-
-		this._trigger( 'afterstopediting' );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
@@ -244,17 +220,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 	_stopEditingReferenceSnaks: function() {
 		var listview = this.$listview.data( 'listview' );
 		listview.value( this.options.value ? this.options.value.getSnaks().getGroupedSnakLists() : [] );
-	},
-
-	/**
-	 * Returns whether the widget is currently in edit mode.
-	 *
-	 * @since 0.5
-	 *
-	 * @return {boolean}
-	 */
-	isInEditMode: function() {
-		return this._isInEditMode;
 	},
 
 	/**
@@ -284,16 +249,6 @@ $.widget( 'wikibase.referenceview', PARENT, {
 				$snakview.data( 'snakview' ).focus();
 			} );
 		} );
-	},
-
-	/**
-	 * Sets/removes error state from the widget.
-	 *
-	 * @param {boolean} error
-	 */
-	setError: function( error ) {
-		this.element.toggleClass( 'wb-error', error );
-		this._trigger( 'toggleerror', null, [ error ] );
 	},
 
 	/**

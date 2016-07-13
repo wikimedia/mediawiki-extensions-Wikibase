@@ -5,12 +5,12 @@
 ( function( mw, wb, $ ) {
 	'use strict';
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
  * Displays and allows editing a site link.
  * @since 0.5
- * @extends jQuery.ui.TemplatedWidget
+ * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {wikibase.datamodel.SiteLink} [value]
  *         Default: null
@@ -72,11 +72,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	},
 
 	/**
-	 * @type {boolean}
-	 */
-	_isInEditMode: false,
-
-	/**
 	 * @type {jQuery.wikibase.badgeselector|null}
 	 */
 	_badgeselector: null,
@@ -133,7 +128,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			this._siteLinkRemover = null;
 		}
 
-		if ( this._isInEditMode ) {
+		if ( this.isInEditMode() ) {
 			var self = this;
 
 			this.element.one( this.widgetEventPrefix + 'afterstopediting', function( event ) {
@@ -201,9 +196,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			this._createBadgeSelector();
 		}
 
-		this.element.toggleClass( 'wb-edit', this._isInEditMode );
-
-		if ( this._isInEditMode ) {
+		if ( this.isInEditMode() ) {
 			this._drawEditMode();
 		}
 	},
@@ -358,7 +351,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * @return {boolean}
 	 */
 	isEmpty: function() {
-		if ( !this._isInEditMode ) {
+		if ( !this.isInEditMode() ) {
 			return !this.options.value;
 		}
 
@@ -370,19 +363,14 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	/**
 	 * Puts the widget into edit mode.
 	 */
-	startEditing: function() {
-		if ( this._isInEditMode ) {
-			return;
-		}
-
-		this._isInEditMode = true;
+	_startEditing: function() {
 		this._draw();
 
 		if ( this.option( 'disabled' ) ) {
 			this._setState( 'disable' );
 		}
 
-		this._trigger( 'afterstartediting' );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
@@ -395,35 +383,12 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 *         Rejected parameters:
 	 *         - {Error}
 	 */
-	stopEditing: function( dropValue ) {
-		var deferred = $.Deferred();
-
-		if ( !this._isInEditMode ) {
-			return deferred.resolve().promise();
-		}
-
+	_stopEditing: function( dropValue ) {
 		if ( this._badgeselector ) {
 			this._badgeselector.stopEditing( dropValue );
 		}
-		this._afterStopEditing( dropValue );
 
-		return deferred.resolve().promise();
-	},
-
-	/**
-	 * Callback tearing down edit mode.
-	 *
-	 * @param {boolean} dropValue
-	 */
-	_afterStopEditing: function( dropValue ) {
-		if ( !dropValue ) {
-			this.options.value = this.value();
-		}
-
-		this._isInEditMode = false;
-		this._draw();
-
-		this._trigger( 'afterstopediting', null, [dropValue] );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
@@ -442,7 +407,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 */
 	value: function( siteLink ) {
 		if ( siteLink === undefined ) {
-			if ( !this._isInEditMode ) {
+			if ( !this.isInEditMode() ) {
 				return this.options.value;
 			}
 
@@ -502,7 +467,7 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 	 * @param {string} state
 	 */
 	_setState: function( state ) {
-		if ( this._isInEditMode ) {
+		if ( this.isInEditMode() ) {
 			var $siteInput = this.$siteId.find( 'input' ),
 				hasSiteId = !!( this.options.value && this.options.value.getSiteId() );
 
@@ -541,21 +506,6 @@ $.widget( 'wikibase.sitelinkview', PARENT, {
 			$siteselector.focus();
 		} else {
 			this.element.focus();
-		}
-	},
-
-	/**
-	 * Applies/Removes error state.
-	 *
-	 * @param {Error} [error]
-	 */
-	setError: function( error ) {
-		if ( error ) {
-			this.element.addClass( 'wb-error' );
-			this._trigger( 'toggleerror', null, [error] );
-		} else if ( this.element.hasClass( 'wb-error' ) ) {
-			this.element.removeClass( 'wb-error' );
-			this._trigger( 'toggleerror' );
 		}
 	}
 

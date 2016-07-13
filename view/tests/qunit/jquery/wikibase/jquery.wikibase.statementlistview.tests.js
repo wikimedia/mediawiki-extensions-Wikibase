@@ -140,51 +140,6 @@ QUnit.test( 'value()', function( assert ) {
 	);
 } );
 
-QUnit.test( 'isEmpty()', function( assert ) {
-	assert.expect( 4 );
-	var $statementlistview = createStatementlistview(),
-		statementlistview = $statementlistview.data( 'statementlistview' );
-
-	assert.ok(
-		statementlistview.isEmpty(),
-		'Verified isEmpty() returning TRUE when widget has been initialized with an empty '
-			+ 'StatementList.'
-	);
-
-	$statementlistview = createStatementlistview( {
-		value: new wb.datamodel.StatementList( [
-			new wb.datamodel.Statement( new wb.datamodel.Claim(
-					new wb.datamodel.PropertyNoValueSnak( 'P1' )
-			) )
-		] )
-	} );
-	statementlistview = $statementlistview.data( 'statementlistview' );
-
-	assert.ok(
-		!statementlistview.isEmpty(),
-		'Verified isEmpty() returning FALSE when widget has been initialized with a filled '
-			+ 'StatmentList.'
-	);
-
-	statementlistview.value( new wb.datamodel.StatementList() );
-
-	assert.ok(
-		statementlistview.isEmpty(),
-		'Verified isEmpty() returning TRUE after setting an empty StatementList.'
-	);
-
-	statementlistview.value( new wb.datamodel.StatementList( [
-		new wb.datamodel.Statement( new wb.datamodel.Claim(
-			new wb.datamodel.PropertyNoValueSnak( 'P2' )
-		) )
-	] ) );
-
-	assert.ok(
-		!statementlistview.isEmpty(),
-		'Verified isEmpty() returning FALSE after setting an filled StatementList.'
-	);
-} );
-
 QUnit.test( 'enterNewItem', function( assert ) {
 	assert.expect( 2 );
 	var $statementlistview = createStatementlistview(),
