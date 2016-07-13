@@ -19,8 +19,6 @@ function createSitelinklistview( options ) {
 					this.$siteId = $( '<div/>' );
 					this.focus = function() {};
 					this.isEmpty = function() { return !this.options.value; };
-					this.isInitialValue = function() { return Boolean( this.options.value ); };
-					this.isValid = function() { return Boolean( this.options.value ); };
 					this.startEditing = function() {};
 					this.value = function() {
 						return this.options.value;
@@ -178,17 +176,6 @@ QUnit.test( 'value() with invalid sitelinkview', function( assert ) {
 		sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
 
 	sitelinklistview.enterNewItem();
-
-	var listview = sitelinklistview.$listview.data( 'listview' ),
-		lia = listview.listItemAdapter(),
-		sitelinkview = lia.liInstance( listview.items().first() );
-
-	sitelinkview.isEmpty = function() {
-		return false;
-	};
-	sitelinkview.isValid = function() {
-		return false;
-	};
 
 	assert.strictEqual(
 		sitelinklistview.value().length,
@@ -373,12 +360,16 @@ QUnit.test( 'remove empty sitelinkview when hitting backspace', function( assert
 	sitelinklistview.enterNewItem();
 
 	var listview = sitelinklistview.$listview.data( 'listview' ),
-		$sitelinkview = listview.items().first();
+		sitelinkview = listview.value()[0];
+
+	sitelinkview.isEmpty = function() {
+		return true;
+	};
 
 	assert.equal( listview.items().length, 2 );
 	var e = $.Event( 'keydown' );
 	e.which = e.keyCode = $.ui.keyCode.BACKSPACE;
-	$sitelinkview.trigger( e );
+	sitelinkview.element.trigger( e );
 
 	assert.equal( listview.items().length, 1 );
 } );

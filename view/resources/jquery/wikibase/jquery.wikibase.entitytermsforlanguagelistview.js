@@ -6,12 +6,12 @@
 ( function( mw, wb, $ ) {
 	'use strict';
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
  * Displays multiple fingerprints (see jQuery.wikibase.entitytermsforlanguageview).
  * @since 0.5
- * @extends jQuery.ui.TemplatedWidget
+ * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {Fingerprint} value
  *
@@ -60,11 +60,6 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 	 * @type {jQuery}
 	 */
 	$entitytermsforlanguagelistviewMore: null,
-
-	/**
-	 * @type {boolean}
-	 */
-	_isInEditMode: false,
 
 	/**
 	 * @type {Object} Map of language codes pointing to list items (in the form of jQuery nodes).
@@ -287,7 +282,7 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 
 		Object.keys( this._getMoreLanguages() ).sort().forEach( function( languageCode ) {
 			var $item = listview.addItem( self._getValueForLanguage( languageCode ) );
-			if ( self._isInEditMode ) {
+			if ( self.isInEditMode() ) {
 				lia.liInstance( $item ).startEditing();
 			}
 			self._moreLanguagesItems[languageCode] = $item;
@@ -364,67 +359,23 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		};
 	},
 
-	/**
-	 * @return {boolean}
-	 */
-	isEmpty: function() {
-		return !!this.$listview.data( 'listview' ).items().length;
-	},
-
-	startEditing: function() {
-		if ( this._isInEditMode ) {
-			return;
-		}
-
-		this._isInEditMode = true;
-		this.element.addClass( 'wb-edit' );
-
+	_startEditing: function() {
+		var self = this;
 		var listview = this.$listview.data( 'listview' );
-		listview.startEditing();
-
-		this.updateInputSize();
-
-		this._trigger( 'afterstartediting' );
+		return listview.startEditing().done( function() {
+			self.updateInputSize();
+		} );
 	},
 
 	/**
 	 * @param {boolean} [dropValue]
 	 */
-	stopEditing: function( dropValue ) {
-		var deferred = $.Deferred();
-
-		if ( !this._isInEditMode ) {
-			return deferred.resolve().promise();
-		}
-
-		this.disable();
-
+	_stopEditing: function( dropValue ) {
 		var listview = this.$listview.data( 'listview' );
 
-		listview.value().forEach( function( entitytermsforlanguageview ) {
-			entitytermsforlanguageview.stopEditing( dropValue );
-		} );
-
-		this._afterStopEditing( dropValue );
-		deferred.resolve();
-		return deferred.promise();
-	},
-
-	/**
-	 * @param {boolean} dropValue
-	 */
-	_afterStopEditing: function( dropValue ) {
-		if ( !dropValue ) {
-			this.options.value = this.value();
-		}
-		this._isInEditMode = false;
-		this.enable();
-		this.element.removeClass( 'wb-edit' );
-		this._trigger( 'afterstopediting', null, [dropValue] );
-	},
-
-	cancelEditing: function() {
-		this.stopEditing( true );
+		return $.when.apply( $, listview.value().map( function( entitytermsforlanguageview ) {
+			return entitytermsforlanguageview.stopEditing( dropValue );
+		} ) );
 	},
 
 	/**
@@ -466,23 +417,8 @@ $.widget( 'wikibase.entitytermsforlanguagelistview', PARENT, {
 		}
 	},
 
-	/**
-	 * Applies/Removes error state.
-	 *
-	 * @param {Error} [error]
-	 */
-	setError: function( error ) {
-		if ( error ) {
-			this.element.addClass( 'wb-error' );
-			this._trigger( 'toggleerror', null, [error] );
-		} else {
-			this.removeError();
-			this._trigger( 'toggleerror' );
-		}
-	},
-
 	removeError: function() {
-		this.element.removeClass( 'wb-error' );
+		PARENT.prototype.removeError.call( this );
 
 		var listview = this.$listview.data( 'listview' ),
 			lia = listview.listItemAdapter();

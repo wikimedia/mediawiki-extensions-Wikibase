@@ -36,7 +36,6 @@ function initToolbarViewController() {
 				on: function() {}
 			},
 			enable: function() {},
-			isValid: function() {},
 			setError: function() {},
 			startEditing: function() {},
 			stopEditing: function() {},

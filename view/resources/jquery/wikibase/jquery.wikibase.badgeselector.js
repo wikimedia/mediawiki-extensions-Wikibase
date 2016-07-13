@@ -5,7 +5,7 @@
 ( function( $, mw ) {
 	'use strict';
 
-var PARENT = $.ui.TemplatedWidget;
+var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
  * References one single $menu instance that is reused for all badgeselector instances.
@@ -16,7 +16,7 @@ var $menu = null;
 /**
  * Selector for toggling badges.
  * @since 0.5
- * @extends jQuery.ui.TemplatedWidget
+ * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {string[]} [value]
  *         Item ids of badges currently assigned.
@@ -361,31 +361,18 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 		}
 	},
 
-	startEditing: function() {
-		if ( this.isInEditMode() ) {
-			return;
-		}
-
-		this.element.addClass( 'wb-edit' );
-
+	_startEditing: function() {
 		this._updateEmptyBadge();
-
-		this._trigger( 'afterstartediting' );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
 	 * @param {boolean} dropValue
 	 */
-	stopEditing: function( dropValue ) {
-		if ( !this.isInEditMode() ) {
-			return;
-		}
-
+	_stopEditing: function( dropValue ) {
 		if ( $menu ) {
 			$menu.hide();
 		}
-
-		this.element.removeClass( 'wb-edit' );
 
 		if ( !dropValue ) {
 			this._updateEmptyBadge();
@@ -396,14 +383,7 @@ $.widget( 'wikibase.badgeselector', PARENT, {
 			// Reinitialize badges based on this.options.value
 			this._addBadges();
 		}
-		this._trigger( 'afterstopediting', null, [dropValue] );
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isInEditMode: function() {
-		return this.element.hasClass( 'wb-edit' );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
