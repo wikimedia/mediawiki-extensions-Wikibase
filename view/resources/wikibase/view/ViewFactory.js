@@ -447,13 +447,22 @@
 	SELF.prototype.getListItemAdapterForReferenceView = function( startEditingCallback ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.referenceview,
-			newItemOptionsFn: $.proxy( function( value ) {
-				return {
-					value: value || null,
-					listItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback )
-				};
+			getNewItem: $.proxy( function( value, dom ) {
+				return this.getReferenceView( startEditingCallback, value, $( dom ) );
 			}, this )
 		} );
+	};
+
+	SELF.prototype.getReferenceView = function( startEditingCallback, value, $dom ) {
+		var view = this._getView(
+			'referenceview',
+			$dom,
+			{
+				value: value || null,
+				listItemAdapter: this.getListItemAdapterForSnakListView( startEditingCallback )
+			}
+		);
+		return view;
 	};
 
 	/**
