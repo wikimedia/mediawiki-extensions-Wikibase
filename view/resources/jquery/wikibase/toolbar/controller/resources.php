@@ -15,18 +15,6 @@ return call_user_func( function() {
 	);
 
 	$modules = array(
-
-		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview' => $moduleTemplate + array(
-			'scripts' => array(
-				'definitions/removetoolbar/referenceview.js',
-			),
-			'dependencies' => array(
-				'jquery.wikibase.removetoolbar',
-				'jquery.wikibase.referenceview',
-				'jquery.wikibase.toolbarcontroller',
-			),
-		),
-
 		'jquery.wikibase.toolbarcontroller.definitions.removetoolbar.referenceview-snakview' => $moduleTemplate + array(
 			'scripts' => array(
 				'definitions/removetoolbar/referenceview-snakview.js',
