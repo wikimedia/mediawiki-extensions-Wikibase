@@ -274,7 +274,7 @@
 					}
 				},
 
-				buildReferenceListItemAdapter: sinon.match.instanceOf( Function ),
+				getReferenceListItemAdapter: sinon.match.instanceOf( Function ),
 				buildSnakView: sinon.match.instanceOf( Function ),
 				entityIdPlainFormatter: entityIdPlainFormatter,
 				guidGenerator: sinon.match.instanceOf( wb.utilities.ClaimGuidGenerator ),
@@ -348,9 +348,10 @@
 	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function( assert ) {
 		assert.expect( 1 );
 		var viewFactory = new ViewFactory(),
+			removeCallback = function() {},
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
-		viewFactory.getListItemAdapterForReferenceView();
+		viewFactory.getListItemAdapterForReferenceView( null, removeCallback );
 
 		sinon.assert.calledWith(
 			ListItemAdapter,
@@ -366,20 +367,19 @@
 	QUnit.test( 'getReferenceView passes correct options to view', function( assert ) {
 		assert.expect( 1 );
 		var value = null,
-			structureEditorFactory = {
-				getAdder: function() {}
-			},
-			viewFactory = new ViewFactory( structureEditorFactory ),
+			viewFactory = new ViewFactory(),
+			removeCallback = function() {},
 			$dom = $( '<div/>' ),
 			referenceview = sinon.stub( $dom, 'referenceview' );
 
-		viewFactory.getReferenceView( null, value, $dom );
+		viewFactory.getReferenceView( null, removeCallback, value, $dom );
 
 		sinon.assert.calledWith(
 			referenceview,
 			sinon.match( {
 				value: value || null,
-				listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter )
+				listItemAdapter: sinon.match.instanceOf( $.wikibase.listview.ListItemAdapter ),
+				getReferenceRemover: sinon.match.func
 			} )
 		);
 
