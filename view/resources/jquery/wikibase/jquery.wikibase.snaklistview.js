@@ -1,13 +1,13 @@
 ( function( wb, $ ) {
 	'use strict';
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
  * View for displaying and editing a `wikibase.datamodel.SnakList` object.
  * @see wikibase.datamodel.SnakList
  * @class jQuery.wikibase.snaklistview
- * @extends jQuery.ui.TemplatedWidget
+ * @extends jQuery.ui.EditableTemplatedWidget
  * @uses jQuery.wikibase.listview
  * @since 0.4
  * @license GPL-2.0+
@@ -76,12 +76,6 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @private
 	 */
 	_lia: null,
-
-	/**
-	 * Whether the `snaklistview` currently is in edit mode.
-	 * @property {boolean} [_isInEditMode=false]
-	 */
-	_isInEditMode: false,
 
 	/**
 	 * @inheritdoc
@@ -172,17 +166,8 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	/**
 	 * Starts the widget's edit mode.
 	 */
-	startEditing: function() {
-		if ( this._isInEditMode ) {
-			return;
-		}
-
-		this._listview.startEditing();
-
-		this.element.addClass( 'wb-edit' );
-		this._isInEditMode = true;
-
-		this._trigger( 'afterstartediting' );
+	_startEditing: function() {
+		return this._listview.startEditing();
 	},
 
 	/**
@@ -191,14 +176,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 	 * @param {boolean} [dropValue=false] If `true`, the widget's value will be reset to the one from
 	 *        before edit mode was started
 	 */
-	stopEditing: function( dropValue ) {
-		if ( !this._isInEditMode ) {
-			return;
-		}
-
-		this.element.removeClass( 'wb-error' );
-		this.disable();
-
+	_stopEditing: function( dropValue ) {
 		if ( dropValue ) {
 			// If the whole item was pending, remove the whole list item. This has to be
 			// performed in the widget using the snaklistview.
@@ -214,20 +192,7 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 				snakview.options.locked.property = true;
 			} );
 		}
-
-		this.enable();
-
-		this.element.removeClass( 'wb-edit' );
-		this._isInEditMode = false;
-
-		this._trigger( 'afterstopediting', null, [ dropValue ] );
-	},
-
-	/**
-	 * Cancels editing. (Short-cut for `stopEditing( true )`.)
-	 */
-	cancelEditing: function() {
-		return this.stopEditing( true ); // stop editing and drop value
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
@@ -271,13 +236,6 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 		return this._listview.enterNewItem().done( function() {
 			self.startEditing();
 		} );
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isInEditMode: function() {
-		return this._isInEditMode;
 	},
 
 	/**

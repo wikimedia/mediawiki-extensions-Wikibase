@@ -9,13 +9,13 @@
 	// Erase existing object to prevent jQuery.Widget detecting an existing constructor:
 	delete $.wikibase.snakview;
 
-	var PARENT = $.ui.TemplatedWidget;
+	var PARENT = $.ui.EditableTemplatedWidget;
 
 /**
  * View for displaying and editing `wikibase.datamodel.Snak` objects.
  * @see wikibase.datamodel.Snak
  * @class jQuery.wikibase.snakview
- * @extends jQuery.ui.TemplatedWidget
+ * @extends jQuery.ui.EditableTemplatedWidget
  * @since 0.3
  * @author Daniel Werner < daniel.werner@wikimedia.de >
  * @author H. Snater < mediawiki@snater.com >
@@ -112,12 +112,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @private
 	 */
 	_cachedValues: null,
-
-	/**
-	 * @property {boolean}
-	 * @private
-	 */
-	_isInEditMode: false,
 
 	/**
 	 * Whether then `snakview`'s value is regarded "valid" at the moment.
@@ -287,38 +281,20 @@ $.widget( 'wikibase.snakview', PARENT, {
 		$.Widget.prototype.destroy.call( this );
 	},
 
-	/**
-	 * Starts the widget's edit mode.
-	 *
-	 * @return {Object} jQuery.Promise
-	 * @return {Function} return.done
-	 * @return {Function} return.fail
-	 */
-	startEditing: function() {
+	_startEditing: function() {
 		var deferred = $.Deferred();
-
-		if ( this.isInEditMode() ) {
-			return deferred.resolve().promise();
-		}
-
-		var self = this;
-
-		this._isInEditMode = true;
-
 		if ( this.options.getSnakRemover ) {
 			this._snakRemover = this.options.getSnakRemover( this.element );
 		}
 
 		if ( this._variation ) {
 			$( this._variation ).one( 'afterstartediting', function() {
-				self._trigger( 'afterstartediting' );
 				deferred.resolve();
 			} );
 			this.draw();
 			this._variation.startEditing();
 		} else {
 			this.draw();
-			this._trigger( 'afterstartediting' );
 			deferred.resolve();
 		}
 		return deferred.promise();
@@ -346,47 +322,20 @@ $.widget( 'wikibase.snakview', PARENT, {
 	 * @param {boolean} [dropValue=false] If `true`, the widget's value will be reset to the one
 	 *        from before edit mode was started.
 	 */
-	stopEditing: function( dropValue ) {
-		if ( !this.isInEditMode() ) {
-			return;
-		}
-
+	_stopEditing: function( dropValue ) {
 		if ( this._snakRemover ) {
 			this._snakRemover.destroy();
 			this._snakRemover = null;
 		}
 
-		var snak = this.snak();
-
-		this._isInEditMode = false;
-
 		if ( this._variation ) {
 			this._variation.stopEditing( dropValue );
-
-			if ( !dropValue ) {
-				// TODO: "this.snak( this.snak() )" is supposed to work to update the Snak. However,
-				// the Variation asking the ValueView returns null as soon as edit mode is left.
-				this.snak( snak );
-			}
 		}
-
-		if ( !this._variation || dropValue ) {
-			this.value( this.options.value );
-		}
-
-		// TODO: Should throw an error somewhere when trying to leave edit mode while this.snak()
-		//  still returns null.
+		this.drawSnakTypeSelector();
 
 		this.element.off( 'keydown.' + this.widgetName );
 
-		this._trigger( 'afterstopediting', null, [dropValue] );
-	},
-
-	/**
-	 * Cancels editing. (Short-cut for `stopEditing( true )`.)
-	 */
-	cancelEditing: function() {
-		return this.stopEditing( true );
+		return $.Deferred().resolve().promise();
 	},
 
 	/**
@@ -405,13 +354,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 		if ( this._variation ) {
 			this._trigger( 'change' );
 		}
-	},
-
-	/**
-	 * @return {boolean}
-	 */
-	isInEditMode: function() {
-		return this._isInEditMode;
 	},
 
 	/**

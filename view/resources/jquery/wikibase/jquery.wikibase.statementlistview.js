@@ -181,15 +181,6 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	},
 
 	/**
-	 * Returns whether the widget currently features any `statementview` widgets.
-	 *
-	 * @return {boolean}
-	 */
-	isEmpty: function() {
-		return !this._listview.items().length;
-	},
-
-	/**
 	 * Adds a new, pending `statementview` to the `statementlistview`.
 	 *
 	 * @see jQuery.wikibase.listview.enterNewItem

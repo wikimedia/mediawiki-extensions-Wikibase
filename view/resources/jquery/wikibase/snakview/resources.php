@@ -27,8 +27,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'dataValues.DataValue',
 				'jquery.event.special.eachchange',
+				'jquery.ui.EditableTemplatedWidget',
 				'jquery.ui.position',
-				'jquery.ui.TemplatedWidget',
 				'jquery.wikibase.entityselector',
 				'jquery.wikibase.snakview.variations',
 				'jquery.wikibase.snakview.ViewState',
