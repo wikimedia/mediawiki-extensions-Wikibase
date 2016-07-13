@@ -349,33 +349,8 @@
 
 	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function( assert ) {
 		assert.expect( 3 );
-		var contentLanguages = {},
-			value = null,
-			statementsChanger = {},
-			entityChangersFactory = {
-				getStatementsChanger: function() { return statementsChanger; }
-			},
-			entityIdHtmlFormatter = {},
-			entityIdPlainFormatter = {},
-			entityStore = {},
-			expertStore = {},
-			formatterFactory = {},
-			messageProvider = {},
-			parserStore = {},
-			userLanguages = [],
-			viewFactory = new ViewFactory(
-				contentLanguages,
-				null,
-				entityChangersFactory,
-				entityIdHtmlFormatter,
-				entityIdPlainFormatter,
-				entityStore,
-				expertStore,
-				formatterFactory,
-				messageProvider,
-				parserStore,
-				userLanguages
-			),
+		var value = null,
+			viewFactory = new ViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
 		viewFactory.getListItemAdapterForReferenceView();
