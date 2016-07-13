@@ -359,7 +359,8 @@
 	SELF.prototype.getStatementListView = function( startEditingCallback, entityId, propertyId, getStatementForGuid, value, $statementlistview ) {
 		propertyId = propertyId || $statementlistview.closest( '.wikibase-statementgroupview' ).attr( 'id' );
 
-		return this._getView(
+		var statementlistview;
+		statementlistview = this._getView(
 			'statementlistview',
 			$statementlistview,
 			{
@@ -371,10 +372,14 @@
 						var guidMatch = dom.className.match( /wikibase-statement-(\S+)/ );
 						return guidMatch ? getStatementForGuid( guidMatch[ 1 ] ) : null;
 					},
-					propertyId
+					propertyId,
+					function( statementview ) {
+						return statementlistview.remove( statementview );
+					}
 				)
 			}
 		);
+		return statementlistview;
 	};
 
 	/**
@@ -387,19 +392,19 @@
 	 * @param {string|null} [propertyId] Optionally a property all statements are or should be on
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
 	 **/
-	SELF.prototype.getListItemAdapterForStatementView = function( startEditingCallback, entityId, getValueForDom, propertyId ) {
+	SELF.prototype.getListItemAdapterForStatementView = function( startEditingCallback, entityId, getValueForDom, propertyId, removeCallback ) {
 		var listItemAdapter = new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementview,
 			getNewItem: $.proxy( function( value, dom ) {
 				value = value || getValueForDom( dom );
-				var view = this.getStatementView( startEditingCallback, entityId, propertyId, value, $( dom ) );
+				var view = this.getStatementView( startEditingCallback, entityId, propertyId, removeCallback, value, $( dom ) );
 				return view;
 			}, this )
 		} );
 		return listItemAdapter;
 	};
 
-	SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, value, $dom ) {
+	SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, removeCallback, value, $dom ) {
 		var structureEditorFactory = this._structureEditorFactory;
 		var currentPropertyId = value ? value.getClaim().getMainSnak().getPropertyId() : propertyId;
 		var view = this._getView(

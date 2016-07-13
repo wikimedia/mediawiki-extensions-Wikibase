@@ -77,7 +77,7 @@ SELF.prototype.getEntityTermsView = function( startEditingCallback, value, $enti
 	return view;
 };
 
-SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, value, $dom ) {
+SELF.prototype.getStatementView = function( startEditingCallback, entityId, propertyId, removeCallback, value, $dom ) {
 	var controller;
 	arguments[0] = function() {
 		return startEditingCallback().then( function() {
@@ -85,21 +85,12 @@ SELF.prototype.getStatementView = function( startEditingCallback, entityId, prop
 		} );
 	};
 	var statementview = PARENT.prototype.getStatementView.apply( this, arguments );
-
-	var removeFromListView = function( statementview ) {
-		var $statementlistview = statementview.element.closest( ':wikibase-statementlistview' ),
-			statementlistview = $statementlistview.data( 'statementlistview' );
-		if ( statementlistview ) {
-			statementlistview.remove( statementview );
-		}
-	};
-
 	var statementsChanger = this._entityChangersFactory.getStatementsChanger();
 	controller = this._getController(
 		this._toolbarFactory.getToolbarContainer( statementview.element ),
 		statementview,
 		statementsChanger,
-		removeFromListView.bind( null, statementview ),
+		removeCallback.bind( null, statementview ),
 		value
 	);
 
