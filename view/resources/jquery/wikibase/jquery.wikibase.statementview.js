@@ -31,7 +31,7 @@
  * @param {Object} options
  * @param {wikibase.datamodel.Statement|null} [options.value=null]
  *        The `Statement` displayed by the view.
- * @param {Function} options.buildReferenceListItemAdapter
+ * @param {Function} options.getReferenceListItemAdapter
  * @param {Function} options.buildSnakView
  * @param {wikibase.utilities.ClaimGuidGenerator} options.guidGenerator
  *        Required for dynamically generating GUIDs for new `Statement`s.
@@ -150,7 +150,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.buildReferenceListItemAdapter
+		if ( !this.options.getReferenceListItemAdapter
 			|| !this.options.buildSnakView
 			|| !this.options.entityIdPlainFormatter
 			|| !this.options.guidGenerator
@@ -334,7 +334,11 @@ $.widget( 'wikibase.statementview', PARENT, {
 			return;
 		}
 
-		var lia = this.options.buildReferenceListItemAdapter();
+		var lia = this.options.getReferenceListItemAdapter(
+			function( referenceview ) {
+				self._referencesListview.removeItem( referenceview.element );
+			}
+		);
 
 		$listview.listview( {
 			listItemAdapter: lia,

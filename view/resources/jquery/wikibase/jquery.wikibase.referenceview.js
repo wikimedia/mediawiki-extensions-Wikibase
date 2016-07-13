@@ -58,6 +58,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 			'' // snaklistview widget
 		],
 		templateShortCuts: {
+			$heading: '.wikibase-referenceview-heading',
 			$listview: '.wikibase-referenceview-listview'
 		},
 		value: null,
@@ -90,6 +91,8 @@ $.widget( 'wikibase.referenceview', PARENT, {
 		} );
 
 		this._updateReferenceHashClass( this.value() );
+
+		this._referenceRemover = this.options.getReferenceRemover( this.$heading );
 	},
 
 	/**
@@ -328,6 +331,7 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 		if ( key === 'disabled' ) {
 			this.$listview.data( 'listview' ).option( key, value );
+			this._referenceRemover[ value ? 'disable' : 'enable' ]();
 			if ( this._snakListAdder ) {
 				this._snakListAdder[ value ? 'disable' : 'enable' ]();
 			}
