@@ -68,7 +68,7 @@ return call_user_func( function() {
 				'wikibase.view.__namespace',
 				'wikibase.view.ToolbarViewController',
 				'wikibase.view.ViewFactory'
-			),
+			)
 		),
 
 		'wikibase.view.ViewFactory' => $moduleTemplate + array(
