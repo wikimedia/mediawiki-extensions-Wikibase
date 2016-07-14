@@ -16,6 +16,24 @@
       "revId": "a7d76e31e8d82bbf8cd410e3fbdde418b927dc7c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eed2fc9_33d9702d",
+        "filename": "client/i18n/qqq.json",
+        "patchSetId": 37
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 519
+      },
+      "writtenOn": "2016-07-14T01:41:08Z",
+      "side": 1,
+      "message": "(not all of the usernames are the agent, but all should state which).",
+      "parentUuid": "6eed2fc9_13b714d5",
+      "revId": "a7d76e31e8d82bbf8cd410e3fbdde418b927dc7c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
