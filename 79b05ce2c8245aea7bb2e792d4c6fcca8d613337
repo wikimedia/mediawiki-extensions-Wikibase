@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eed2fc9_8739fa40",
+        "filename": "lib/includes/Units/JsonUnitStorage.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-14T17:30:07Z",
+      "side": 1,
+      "message": "the multipliers used to convert units are generally called \"factors\", see https://en.wikipedia.org/wiki/Conversion_of_units#Tables_of_conversion_factors",
+      "revId": "79b05ce2c8245aea7bb2e792d4c6fcca8d613337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
