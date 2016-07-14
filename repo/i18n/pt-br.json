@@ -14,7 +14,8 @@
 			"Fasouzafreitas",
 			"Macofe",
 			"TheEduGobi",
-			"Almondega"
+			"Almondega",
+			"Peter Fernando"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -38,6 +39,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Descrição",
 	"wikibase-entitytermsforlanguagelistview-label": "Rótulo",
 	"wikibase-entitytermsforlanguagelistview-language": "Idioma",
+	"wikibase-entitytermsforlanguagelistview-less": "Menos idiomas",
 	"wikibase-label-empty": "Nenhum rótulo definido",
 	"wikibase-label-edit-placeholder": "insira um rótulo",
 	"wikibase-label-edit-placeholder-language-aware": "insira um rótulo em $1",
