@@ -16,6 +16,24 @@
       "revId": "79b05ce2c8245aea7bb2e792d4c6fcca8d613337",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eed2fc9_965e4d7a",
+        "filename": "lib/includes/Units/JsonUnitStorage.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-07-14T22:09:20Z",
+      "side": 1,
+      "message": "ok, I can rename.",
+      "parentUuid": "6eed2fc9_8739fa40",
+      "revId": "79b05ce2c8245aea7bb2e792d4c6fcca8d613337",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
