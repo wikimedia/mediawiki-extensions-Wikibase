@@ -1213,8 +1213,8 @@ final class WikibaseClient {
 
 	private function fixLegacyContentModelSetting( array $setting, $name ) {
 		if ( isset( $setting[ 'wikibase-item' ] ) || isset( $setting[ 'wikibase-property' ] ) ) {
-			wfWarn( "The specified value for the Wikibase setting '$name' uses content model ids. This is deprecated. " .
-				"Please update to plain entity types." );
+			wfWarn( "The specified value for the Wikibase setting '$name' uses content model ids as keys. This is deprecated. " .
+				"Please update to plain entity types, e.g. 'item' instead of 'wikibase-item'." );
 			$oldSetting = $setting;
 			$setting = [];
 			$prefix = 'wikibase-';
