@@ -41,7 +41,7 @@
 	"wikibase-linkitem-confirmitem-button": "Пацьвердзіць",
 	"wikibase-linkitem-not-loggedin-title": "Вы мусіце ўвайсьці ў сыстэму",
 	"wikibase-linkitem-not-loggedin": "Для карыстаньня гэтай функцыяй вы мусіце ўвайсьці ў гэтую вікі і [$1 цэнтральны рэпазыторый].",
-	"wikibase-linkitem-success-link": "Старонкі былі пасьпяхова злучаныя. Новы аб’ект са спасылкамі вы можаце пабачыць у нашым [$1 цэнтральным рэпазыторыі].",
+	"wikibase-linkitem-success-link": "Старонкі былі злучаныя. Аб’ект са спасылкамі вы можаце знайсьці ў нашым [$1 цэнтральным сховішчы зьвестак].",
 	"wikibase-property-notfound": "Уласьцівасьць «$1» ня знойдзеная.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Схаваць",

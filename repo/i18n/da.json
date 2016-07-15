@@ -9,7 +9,8 @@
 			"Poul G",
 			"Steenth",
 			"아라",
-			"Macofe"
+			"Macofe",
+			"Sarrus"
 		]
 	},
 	"wikibase-desc": "Struktureret datalager",
@@ -24,6 +25,8 @@
 	"wikibase-addreference": "tilføj kilde",
 	"wikibase-save-inprogress": "Gemmer...",
 	"wikibase-remove-inprogress": "Fjerner…",
+	"wikibase-entitytermsforlanguagelistview-more": "Flere sprog",
+	"wikibase-entitytermsforlanguagelistview-less": "Færre sprog",
 	"wikibase-label-empty": "Ingen etiket er defineret",
 	"wikibase-label-edit-placeholder": "angiv etiket",
 	"wikibase-label-edit-placeholder-language-aware": "angiv etiket på $1",
