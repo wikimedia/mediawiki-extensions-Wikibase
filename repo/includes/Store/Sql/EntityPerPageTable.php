@@ -7,6 +7,7 @@ use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdComposer;
@@ -76,10 +77,12 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @throws InvalidArgumentException
 	 */
 	private function addRow( EntityId $entityId, $pageId, EntityId $targetId = null ) {
+		if ( !( $entityId instanceof Int32EntityId ) ) {
+			throw new InvalidArgumentException( '$entityId must be an Int32EntityId' );
+		}
 		if ( !is_int( $pageId ) ) {
 			throw new InvalidArgumentException( '$pageId must be an int' );
 		}
-
 		if ( $pageId <= 0 ) {
 			throw new InvalidArgumentException( '$pageId must be greater than 0' );
 		}
@@ -183,12 +186,15 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @return boolean
 	 */
 	public function deleteEntity( EntityId $entityId ) {
+		if ( !( $entityId instanceof Int32EntityId ) ) {
+			throw new InvalidArgumentException( '$entityId must be an Int32EntityId' );
+		}
+
 		$dbw = wfGetDB( DB_MASTER );
 
 		return $dbw->delete(
 			'wb_entity_per_page',
 			array(
-				// FIXME: this only works for items and properties
 				'epp_entity_id' => $entityId->getNumericId(),
 				'epp_entity_type' => $entityId->getEntityType()
 			),
@@ -362,6 +368,10 @@ class EntityPerPageTable implements EntityPerPage {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		if ( $after ) {
+			if ( !( $after instanceof Int32EntityId ) ) {
+				throw new InvalidArgumentException( '$after must be an Int32EntityId' );
+			}
+
 			$numericId = (int)$after->getNumericId();
 
 			if ( $entityType === null ) {
