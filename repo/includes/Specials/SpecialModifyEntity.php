@@ -278,6 +278,9 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			)
 		);
 
+		// Add form input styles
+		$this->getOutput()->addModules( 'mediawiki.ui.input' );
+
 		// Form elements
 		$this->getOutput()->addHTML( $this->getFormElements( $entity ) );
 
