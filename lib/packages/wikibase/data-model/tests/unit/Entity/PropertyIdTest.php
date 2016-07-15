@@ -38,7 +38,7 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 			array( 'p31337' ),
 			array( 'P31337' ),
 			array( 'P42' ),
-			array( 'P2147483648' ),
+			array( 'P2147483647' ),
 		);
 	}
 
@@ -67,6 +67,8 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 			array( '0' ),
 			array( 0 ),
 			array( 1 ),
+			array( 'P2147483648' ),
+			array( 'P99999999999' ),
 		);
 	}
 
@@ -122,8 +124,8 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 			array( '42' ),
 			array( 42.0 ),
 			// Check for 32-bit integer overflow on 32-bit PHP systems.
-			array( 2147483648 ),
-			array( '2147483648' ),
+			array( 2147483647 ),
+			array( '2147483647' ),
 		);
 	}
 
@@ -140,7 +142,8 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 			array( 'P1' ),
 			array( '42.1' ),
 			array( 42.1 ),
-			array( 2147483648.1 ),
+			array( 2147483648 ),
+			array( '2147483648' ),
 		);
 	}
 

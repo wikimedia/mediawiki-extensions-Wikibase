@@ -38,7 +38,7 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 			array( 'q31337' ),
 			array( 'Q31337' ),
 			array( 'Q42' ),
-			array( 'Q2147483648' ),
+			array( 'Q2147483647' ),
 		);
 	}
 
@@ -67,6 +67,8 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 			array( '0' ),
 			array( 0 ),
 			array( 1 ),
+			array( 'Q2147483648' ),
+			array( 'Q99999999999' ),
 		);
 	}
 
@@ -122,8 +124,8 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 			array( '42' ),
 			array( 42.0 ),
 			// Check for 32-bit integer overflow on 32-bit PHP systems.
-			array( 2147483648 ),
-			array( '2147483648' ),
+			array( 2147483647 ),
+			array( '2147483647' ),
 		);
 	}
 
@@ -140,7 +142,8 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 			array( 'Q1' ),
 			array( '42.1' ),
 			array( 42.1 ),
-			array( 2147483648.1 ),
+			array( 2147483648 ),
+			array( '2147483648' ),
 		);
 	}
 
