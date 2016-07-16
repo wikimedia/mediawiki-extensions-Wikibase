@@ -195,6 +195,8 @@ call_user_func( function() {
 		}
 	);
 
+	$wgAPIPropModules['wbcentityusage'] = Wikibase\Client\Api\ApiQueryEntityUsage::class;
+
 	// Special page registration
 	$wgSpecialPages['UnconnectedPages'] = 'Wikibase\Client\Specials\SpecialUnconnectedPages';
 	$wgSpecialPages['PagesWithBadges'] = 'Wikibase\Client\Specials\SpecialPagesWithBadges';
