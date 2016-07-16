@@ -41,7 +41,7 @@
 	"wikibase-linkitem-confirmitem-button": "Потврди",
 	"wikibase-linkitem-not-loggedin-title": "Морате бити пријављени",
 	"wikibase-linkitem-not-loggedin": "Морате бити пријављени на овом вики-сајту и на [$1 главном складишту података] како бисте користили ову могућност.",
-	"wikibase-linkitem-success-link": "Странице су успешно повезане. Можете пронаћи ставку која садржи везе на нашој [$1 централној бази података].",
+	"wikibase-linkitem-success-link": "Странице су повезане. Можете пронаћи ставку која садржи везе на нашој [$1 централној бази података].",
 	"wikibase-property-notfound": "$1 својство није пронађено.",
 	"wikibase-rc-hide-wikidata": "$1 Википодатке",
 	"wikibase-rc-hide-wikidata-hide": "Сакриј",
