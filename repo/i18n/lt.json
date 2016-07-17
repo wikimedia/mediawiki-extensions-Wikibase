@@ -159,6 +159,7 @@
 	"wikibase-newitem-page": "Pirmo susieto puslapio pavadinimas",
 	"wikibase-newitem-no-external-page": "Tinklapyje nepavyko rasti nurodytojo puslapio.",
 	"wikibase-newitem-not-recognized-siteid": "Nepavyko atpažinti nurodyto tinklapio identifikatoriaus.",
+	"wikibase-newitem-not-recognized-language": "Pateiktas kalbos kodas nebuvo atpažintas.",
 	"wikibase-newentity-language": "Kalba:",
 	"wikibase-newentity-label": "Žymė:",
 	"wikibase-newentity-description": "Aprašymas:",

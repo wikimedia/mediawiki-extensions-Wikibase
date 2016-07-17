@@ -14,7 +14,8 @@
 			"Hiba Alshawi",
 			"Hosseinblue",
 			"Maroen1990",
-			"Shbib Al-Subaie"
+			"Shbib Al-Subaie",
+			"علاء"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
@@ -42,7 +43,7 @@
 	"wikibase-linkitem-failure": "حدث خطأ غير معروف أثناء محاولة الارتباط بالصفحة المعينة.",
 	"wikibase-linkitem-title": "اربط مع الصفحة",
 	"wikibase-linkitem-linkpage": "اربط مع الصفحة",
-	"wikibase-linkitem-selectlink": "رجاء اختر موقعا و صفحة للربط مع هذه الصفحة.",
+	"wikibase-linkitem-selectlink": "رجاءاً اختر موقعاً وصفحة للربط مع هذه الصفحة.",
 	"wikibase-linkitem-input-site": "اللغة:",
 	"wikibase-linkitem-input-page": "صفحة:",
 	"wikibase-linkitem-confirmitem-text": "الصفحة التي اخترتها مرتبطة بالفعل ب[$1 غنصر في المستودع المركزي للبيانات]. تيقن من أن {{PLURAL:$2|الصفحة|الصفحات}} فيما يلي {{PLURAL:$2|هي}} التي تريد ربطها بهذه الصفحة.",

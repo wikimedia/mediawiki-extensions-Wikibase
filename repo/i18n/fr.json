@@ -327,7 +327,7 @@
 	"wikibase-conflict-patched": "Votre modification a été intégrée dans la dernière version.",
 	"wikibase-restoreold": "restaurer",
 	"wikibase-entity-summary-restore": "Restauration de la révision $3 par [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
-	"wikibase-entity-summary-undo": "Annuler la révision $3 par [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|talk]])",
+	"wikibase-entity-summary-undo": "Annulation de la révision $3 par [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|talk]])",
 	"wikibase-no-direct-editing": "La modification directe est désactivée dans l'espace $1",
 	"wikibase-noentity": "Cette entité n’existe pas. Vous pouvez [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} rechercher dans les journaux concernés]</span> pour savoir où elle est allée.",
 	"wikibase-noentity-createone": "Vous pouvez aussi [[$1|en créer une nouvelle]].",
