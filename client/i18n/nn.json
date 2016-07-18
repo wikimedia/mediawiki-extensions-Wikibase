@@ -13,7 +13,7 @@
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}}-elementet] som er knytt til sida vil snart verta automatisk oppdatert.",
 	"wikibase-comment-add": "Eit Wikidata-element vart oppretta.",
 	"wikibase-comment-remove": "Tilknytt {{WBREPONAME}}-element er sletta. Språklenkjer er fjerna.",
-	"wikibase-comment-linked": "Eit {{WBREPONAME}}-element har vorte lenkja til sida.",
+	"wikibase-comment-linked": "Eit {{WBREPONAME}}-element er vorte lenkja til sida.",
 	"wikibase-comment-unlink": "Lenkinga til sida har vorte fjerna frå {{WBREPONAME}}-elementet. Språklenkjer er fjerna.",
 	"wikibase-comment-restore": "Tilknytt {{WBREPONAME}}-element attoppretta. Språklenkjer lagde inn att.",
 	"wikibase-comment-update": "{{WBREPONAME}}-elementet vart endra",

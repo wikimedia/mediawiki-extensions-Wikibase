@@ -169,6 +169,7 @@
 	"wikibase-newitem-page": "Ім'я першої зв'язаної сторінки",
 	"wikibase-newitem-no-external-page": "Не вдалося знайти вказану сторінку на відповідному сайті.",
 	"wikibase-newitem-not-recognized-siteid": "Наданий ідентифікатор сайту не розпізнано.",
+	"wikibase-newitem-not-recognized-language": "Не розпізнано вказаний код мови.",
 	"wikibase-newentity-language": "Мова:",
 	"wikibase-newentity-label": "Назва:",
 	"wikibase-newentity-description": "Опис:",
