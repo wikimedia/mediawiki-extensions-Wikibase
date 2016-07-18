@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efa2b83_bb0ed335",
+        "filename": "repo/includes/WikibaseRepo.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-18T13:09:46Z",
+      "side": 1,
+      "message": "so far, we have always supplied defaults for all settings, in \u003cconfig/Wikibase.default.php\u003e.",
+      "revId": "b25878cc8d321490792f23b077b14da4d6c93ee7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
