@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4efa2b83_1b5f27ea",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T13:12:35Z",
+      "side": 1,
+      "message": "What would the difference between a wbc… and a wbrentityusage API module be? My assumption would be that they should be the exact same: same parameters, same formats and everything. The only difference would be that one runs on wikidata.org and the other on wikipedia.org.\n\nIf this assumption holds please go with a more generic name. \"wbentityusage\" is fine I think.",
+      "parentUuid": "4efa2b83_603e7a28",
+      "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efa2b83_608b1a21",
         "filename": "client/i18n/en.json",
         "patchSetId": 4
