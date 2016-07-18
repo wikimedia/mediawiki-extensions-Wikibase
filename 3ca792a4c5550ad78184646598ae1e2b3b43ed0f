@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efa2b83_7bfaab74",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:31:14Z",
+      "side": 1,
+      "message": "Isn\u0027t this kind of a circular reference? Does this actually work? I remember you explaining this, still surprising to see this.",
+      "revId": "3ca792a4c5550ad78184646598ae1e2b3b43ed0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
