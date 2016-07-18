@@ -425,9 +425,8 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			lia = listview.listItemAdapter(),
 			foundOne = false;
 
-		listview.items().each( function() {
-			if ( touchesViewport( this ) ) {
-				var sitelinkview = lia.liInstance( $( this ) );
+		listview.value().forEach( function( sitelinkview ) {
+			if ( touchesViewport( sitelinkview.element[0] ) ) {
 				sitelinkview.startEditing();
 				foundOne = true;
 			}
