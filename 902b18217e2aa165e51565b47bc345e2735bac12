@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efa2b83_e09f0a61",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T10:16:59Z",
+      "side": 1,
+      "message": "Can we avoid introducing an uncommon prefix? While we have many \"wb\" API modules, there is none with \"wbc\". When I search for other code registering stuff in wgAPIPropModules it\u0027s usually called like \"entityusage\" with no prefix.",
+      "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efa2b83_608b1a21",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T10:16:59Z",
+      "side": 1,
+      "message": "Direction of what? I mean, what fields are used for ordering? The page name only, or also something else?",
+      "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
