@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efa2b83_2053d244",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-18T12:31:50Z",
+      "side": 0,
+      "message": "Removing this breaks the counter.",
+      "revId": "df5fd3c26ffd896235eb7cbae9c8fae4bcbbe097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
