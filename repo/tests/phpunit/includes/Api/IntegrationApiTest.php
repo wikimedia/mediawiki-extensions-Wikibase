@@ -33,12 +33,12 @@ class IntegrationApiTest extends ApiTestCase {
 			'wbgetentities-id' => array(
 				array(
 					'action' => 'wbgetentities',
-					'ids' => 'Q919191919191',
+					'ids' => 'Q2147483647',
 				),
 				array(
 					'entities' => array(
-						'Q919191919191' => array(
-							'id' => 'Q919191919191',
+						'Q2147483647' => array(
+							'id' => 'Q2147483647',
 							'missing' => '',
 						),
 					),
