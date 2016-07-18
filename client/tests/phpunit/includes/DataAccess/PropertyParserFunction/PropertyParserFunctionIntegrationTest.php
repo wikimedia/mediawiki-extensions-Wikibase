@@ -93,10 +93,10 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	}
 
 	public function testPropertyParserFunction_byNonExistent() {
-		$result = $this->parseWikitextToHtml( '{{#property:P123456789111}}' );
+		$result = $this->parseWikitextToHtml( '{{#property:P2147483647}}' );
 
 		$this->assertRegExp(
-			'/<p.*class=".*wikibase-error.*">.*P123456789111.*<\/p>/',
+			'/<p.*class=".*wikibase-error.*">.*P2147483647.*<\/p>/',
 			$result
 		);
 	}
