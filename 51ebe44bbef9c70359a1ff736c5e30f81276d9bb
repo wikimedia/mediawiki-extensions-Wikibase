@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efa2b83_609afa67",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T10:25:03Z",
+      "side": 0,
+      "message": "This was here to avoid calling _refreshCounter to often. I agree that the performance gain is not worth the maintenance cost of this additional code (especially because it did not worked anyway before I087201b).\n\nMy question: What\u0027s the motivation for this removal?",
+      "revId": "51ebe44bbef9c70359a1ff736c5e30f81276d9bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
