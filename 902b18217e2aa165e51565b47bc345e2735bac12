@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4efa2b83_1bdc474b",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-07-18T13:23:00Z",
+      "side": 1,
+      "message": "wbcentityusage get an article (a page) and returns all repo items that this article uses their data but wbrentityusage will get an item and return all articles in clients that use data from the given item.\nThe complexity around wikidata is that wikidata is both client and repo at the same time so we can\u0027t have both of them under the same name. (An example of client use, we can pass title\u003dWikidata:Project_chat and see what items is being used for this page)",
+      "parentUuid": "4efa2b83_1b5f27ea",
+      "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efa2b83_608b1a21",
         "filename": "client/i18n/en.json",
         "patchSetId": 4
@@ -101,6 +119,24 @@
       "writtenOn": "2016-07-18T13:11:16Z",
       "side": 1,
       "message": "we\u0027re still on 0.5 :o",
+      "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efa2b83_1b2d6742",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-07-18T13:23:00Z",
+      "side": 1,
+      "message": "Copy paste error. Will be fixed :D",
+      "parentUuid": "4efa2b83_db4d9f41",
       "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
