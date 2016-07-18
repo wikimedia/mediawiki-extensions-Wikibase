@@ -39,6 +39,8 @@ var createStatementview = function( options, $node ) {
 					this.isValid = function() {
 						return true;
 					};
+					this.enterNewItem = function() {
+					};
 				}
 			);
 		},
@@ -207,7 +209,7 @@ QUnit.test( 'value with empty reference', function( assert ) {
 	QUnit.stop();
 	statementview.startEditing().done( function() {
 		QUnit.start();
-		statementview._addReference( null );
+		statementview._referencesListview.enterNewItem();
 		assert.ok( statementview.value(), 'value should return a value' );
 	} );
 } );
