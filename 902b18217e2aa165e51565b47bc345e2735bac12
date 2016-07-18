@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4efa2b83_603e7a28",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-07-18T11:12:33Z",
+      "side": 1,
+      "message": "I thought \"wb\" is an standard for modules introduced via Wikibase, I wanted to use wb instead but we want this module for repos (e.g. to get articles that used the given item) and since wikidata is both client and repo, it would create problems, So I went with wbc (and wbr for the future entityusage in repo).",
+      "parentUuid": "4efa2b83_e09f0a61",
+      "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efa2b83_608b1a21",
         "filename": "client/i18n/en.json",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-07-18T10:16:59Z",
       "side": 1,
       "message": "Direction of what? I mean, what fields are used for ordering? The page name only, or also something else?",
+      "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4efa2b83_40ea5e74",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-07-18T11:12:33Z",
+      "side": 1,
+      "message": "Good question. It seems to me right now it\u0027s order by when the entity is used. I\u0027m okay with changing it to something else.",
+      "parentUuid": "4efa2b83_608b1a21",
       "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
