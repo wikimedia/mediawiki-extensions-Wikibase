@@ -328,7 +328,7 @@ $.widget( 'wikibase.statementview', PARENT, {
 		this._referencesListview = $listview.data( 'listview' );
 
 		$listview
-		.on( 'listviewitemadded listviewitemremoved', function( event, value, $li ) {
+		.on( 'listviewitemremoved', function( event, value, $li ) {
 			if ( self._ignoreReferencesListviewChanges ) {
 				return;
 			}
@@ -347,10 +347,12 @@ $.widget( 'wikibase.statementview', PARENT, {
 				return;
 			}
 
-			// Enter first item into the referenceview.
-			lia.liInstance( $newLi ).enterNewItem();
-
 			var liInstance = lia.liInstance( $newLi );
+
+			// Enter first item into the referenceview.
+			liInstance.enterNewItem();
+			self._drawReferencesCounter();
+			self._trigger( 'change' );
 
 			if ( !liInstance.value() ) {
 				$newLi
