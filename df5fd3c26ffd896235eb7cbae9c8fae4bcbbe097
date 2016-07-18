@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0ba75f_3549586b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 0,
+      "message": "This does nothing but calling _refreshCounter().",
+      "revId": "df5fd3c26ffd896235eb7cbae9c8fae4bcbbe097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0ba75f_751c806b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 0,
+      "message": "What this did was *recreating* the sitelinkview after a successful edit. Why?",
+      "revId": "df5fd3c26ffd896235eb7cbae9c8fae4bcbbe097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0ba75f_b53548da",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 0,
+      "message": "… and enforcing a counter refresh.",
+      "revId": "df5fd3c26ffd896235eb7cbae9c8fae4bcbbe097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0ba75f_1527f4b2",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 0,
+      "message": "Turns out this __pendingItems was nothing but an optimization to avoid _refreshCounter() being called to often. Which happened (but did not mattered, except for runtime) because the use of \"this\" is bogus here.",
+      "revId": "df5fd3c26ffd896235eb7cbae9c8fae4bcbbe097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

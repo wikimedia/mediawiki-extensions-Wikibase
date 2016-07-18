@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae0ba75f_35d4b84b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 1,
+      "message": "What does \"in\" mean?",
+      "revId": "a1bbbe25b0be10e8cdfb7b553c6106d8037d4b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0ba75f_1538949a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 1,
+      "message": "The nesting level of this is pretty awful. :-(",
+      "revId": "a1bbbe25b0be10e8cdfb7b553c6106d8037d4b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0ba75f_b50ee835",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "a1bbbe25b0be10e8cdfb7b553c6106d8037d4b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0ba75f_950be425",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.sitelinklistview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "a1bbbe25b0be10e8cdfb7b553c6106d8037d4b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae0ba75f_d2f46253",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.sitelinkview.tests.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-18T14:55:31Z",
+      "side": 1,
+      "message": "+2",
+      "revId": "a1bbbe25b0be10e8cdfb7b553c6106d8037d4b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
