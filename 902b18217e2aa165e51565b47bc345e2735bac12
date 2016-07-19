@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "0e2673f8_ed9381a4",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-07-19T13:06:19Z",
+      "side": 1,
+      "message": "https://github.com/wikimedia/mediawiki/blob/master/includes/api/ApiQueryBase.php#L284\nIt is ordered by fields we add, so first, page_id, then entity_id then aspect.",
+      "parentUuid": "4efa2b83_40ea5e74",
+      "revId": "902b18217e2aa165e51565b47bc345e2735bac12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4efa2b83_db4d9f41",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 4
