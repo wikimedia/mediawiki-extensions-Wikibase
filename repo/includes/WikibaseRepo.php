@@ -1692,6 +1692,9 @@ class WikibaseRepo {
 
 						// T137115
 						'non',
+
+						// T138131
+						'hai',
 					) )
 				),
 
