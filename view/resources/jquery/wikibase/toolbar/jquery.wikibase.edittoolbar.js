@@ -91,6 +91,10 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	_create: function() {
 		PARENT.prototype._create.call( this );
 
+		if ( !this.options.getHelpMessage ) {
+			throw new Error( 'Required option not specified properly' );
+		}
+
 		this._buttons = {};
 
 		var $scrapedSubToolbar = this.getContainer().children( '.wikibase-toolbar' );
