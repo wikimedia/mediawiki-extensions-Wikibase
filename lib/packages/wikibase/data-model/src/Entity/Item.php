@@ -366,7 +366,7 @@ class Item implements EntityDocument, FingerprintHolder, StatementListHolder,
 	 */
 	public function __clone() {
 		$this->fingerprint = clone $this->fingerprint;
-		// SiteLinkList is mutable, but SiteLink is not. No deeper cloning necesarry.
+		// SiteLinkList is mutable, but SiteLink is not. No deeper cloning necessary.
 		$this->siteLinks = clone $this->siteLinks;
 		$this->statements = clone $this->statements;
 	}

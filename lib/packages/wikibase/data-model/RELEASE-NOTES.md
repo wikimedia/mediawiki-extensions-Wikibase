@@ -1,5 +1,15 @@
 # Wikibase DataModel release notes
 
+## Version 6.1.0 (2016-07-15)
+
+* Added optional index parameter to `Statement::addStatement`.
+* Added `Int32EntityId` interface.
+    * `ItemId` and `PropertyId` now implement `Int32EntityId`.
+    * `ItemId` and `PropertyId` construction now fails for numbers larger than 2147483647.
+* Added an `id` element containing the full ID string to the `EntityIdValue::getArrayValue`
+  serialization.
+* Fixed `ByPropertyIdArray` iterating the properties of non-traversable objects.
+
 ## Version 6.0.1 (2016-04-25)
 
 * Fixed `ItemId` and `PropertyId` not rejecting strings with a newline at the end.
