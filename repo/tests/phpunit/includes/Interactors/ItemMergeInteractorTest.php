@@ -343,7 +343,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		) );
 
 		if ( method_exists( $this, 'getTestSysop' ) ) {
-			$user = $this->getTestSysop( true )->getUser();
+			$user = $this->getTestSysop()->getUser();
 		} else {
 			$user = User::newFromName( 'UTSysop' );
 		}
