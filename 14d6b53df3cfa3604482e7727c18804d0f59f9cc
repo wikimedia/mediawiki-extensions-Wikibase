@@ -16,6 +16,24 @@
       "revId": "14d6b53df3cfa3604482e7727c18804d0f59f9cc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2673f8_dbc74c99",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-07-20T18:26:13Z",
+      "side": 1,
+      "message": "I want wb too but the reason that I chose wbc is that I want to make an exactly opposite API module for repos too and if there is a wiki that is both client and repo, it\u0027ll be problematic.",
+      "parentUuid": "0e2673f8_607dcbe4",
+      "revId": "14d6b53df3cfa3604482e7727c18804d0f59f9cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
