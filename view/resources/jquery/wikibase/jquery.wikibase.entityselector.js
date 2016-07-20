@@ -98,7 +98,8 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 		caseSensitive: false,
 		timeout: 8000,
 		messages: {
-			more: mwMsgOrString( 'wikibase-entityselector-more', 'more' )
+			more: mwMsgOrString( 'wikibase-entityselector-more', 'more' ),
+			notfound: mwMsgOrString( 'wikibase-entityselector-notfound', 'notfound' )
 		}
 	},
 
@@ -366,6 +367,15 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 			'ui-entityselector-more'
 		) );
 
+		customItems.unshift( new $.ui.ooMenu.CustomItem(
+				this.options.messages.notfound,
+				function() {
+					return self._cache.suggestions && self._cache.suggestions.length === 0;
+				},
+				null,
+				'ui-entityselector-notfound'
+			) );		
+		
 		ooMenu._evaluateVisibility = function( customItem ) {
 			if ( customItem instanceof $.ui.ooMenu.CustomItem ) {
 				return customItem.getVisibility( ooMenu );

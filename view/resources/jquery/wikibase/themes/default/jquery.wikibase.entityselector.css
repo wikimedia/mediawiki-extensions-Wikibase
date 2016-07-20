@@ -60,3 +60,8 @@
 	text-align: right;
 	padding-right: 1.2em;
 }
+
+.ui-entityselector-list .ui-entityselector-notfound .ui-entityselector-notfound.ui-state-hover  {
+	border-top-style: solid;
+	background-color: #F8F8F8;
+}
