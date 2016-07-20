@@ -132,7 +132,7 @@
 	"wikibase-newproperty-datatype": "Τύπος δεδομένων:",
 	"wikibase-newproperty-invalid-datatype": "Ορίσθηκε άκυρος τύπος δεδομένων",
 	"special-newitem": "Δημιουργία νέου αντικείμενου",
-	"wikibase-newitem-summary": "Βεβαιωθείτε πως [[Special:Search|ελέγξατε ότι το αντικείμενο δεν υπάρχει ήδη]]!<br /> Θα πρέπει να προσθέσετε [[Help:Label|ετικέτα]] και [[Help:Description|περιγραφή]] για κάθε νέο αντικείμενο που δημιουργείτε.",
+	"wikibase-newitem-summary": "Βεβαιωθείτε πως [[Special:Search|ελέγξατε ότι το αντικείμενο δεν υπάρχει ήδη]]!<br /> Θα πρέπει να προσθέσετε [[{{int:Wikibase-label-helppage}}|ετικέτα]] και [[{{int:Wikibase-description-helppage}}|περιγραφή]] για κάθε νέο αντικείμενο που δημιουργείτε.",
 	"wikibase-newitem-fieldset": "Δημιουργήστε ένα νέο αντικείμενο.",
 	"wikibase-newitem-page": "Όνομα της πρώτης σελίδας που συνδέεται",
 	"wikibase-newitem-no-external-page": "Η συγκεκριμένη σελίδα δεν βρέθηκε στον αντίστοιχο ιστότοπο.",

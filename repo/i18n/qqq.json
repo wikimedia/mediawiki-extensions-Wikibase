@@ -188,7 +188,7 @@
 	"wikibase-itemdisambiguation-description": "Further information about the search fields and whats valid values.",
 	"wikibase-itemdisambiguation-summary": "Summary of usage of the item disambiguation page",
 	"special-newproperty": "{{doc-special|NewProperty}}\nThe special page is for creating new properties.",
-	"wikibase-newproperty-summary": "Summary text for the NewProperty special page. This message could contain links to policy pages and guidelines for this specific type of entity.\n\nSee also:\n* {{msg-mw|Wikibase-item-summary}}",
+	"wikibase-newproperty-summary": "Summary text for the NewProperty special page. This message could contain links to policy pages and guidelines for this specific type of entity.\n\nSee also:\n* {{msg-mw|Wikibase-newitem-summary}}",
 	"wikibase-newproperty-fieldset": "Title for the fieldset on the CreateProperty special page.",
 	"wikibase-newproperty-datatype": "Label for the data-type-dropdown holding the data type of the new property.\n{{Identical|Data type}}",
 	"wikibase-newproperty-invalid-datatype": "Error message shown when the page gets an invalid datatype",

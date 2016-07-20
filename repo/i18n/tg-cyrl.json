@@ -12,6 +12,7 @@
 	"wikibase-sitelinks": "пайвандҳои вебгоҳ",
 	"wikibase-sitelinkgroupview-input-help-message": "Илова кардани пайванди сомона аз тарафи муайян дар як макон ва дар як саҳифа, ки сомонаи таҳрир ё тоза кардани пайвандҳои сомона мавҷуд аст.",
 	"wikibase-sitelinks-special": "Дигар сомонаҳо",
-	"wikibase-aliases-empty": "Бидуни номи мустаъори таърифшуда",
-	"wikibase-statementview-rank-normal": "Рутбаи оддӣ"
+	"wikibase-statementview-rank-normal": "Рутбаи оддӣ",
+	"wikibase-description-helppage": "Маълумот:Тавсиф",
+	"wikibase-label-helppage": "Маълумот:Голограмма"
 }

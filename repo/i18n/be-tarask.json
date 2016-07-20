@@ -127,7 +127,7 @@
 	"wikibase-newproperty-datatype": "Тып зьвестак:",
 	"wikibase-newproperty-invalid-datatype": "Пазначаны няслушны тып зьвестак.",
 	"special-newitem": "Стварыць новы аб’ект",
-	"wikibase-newitem-summary": "Упэўніцеся, што [[Special:Search|гэты аб’ект яшчэ не існуе]]!<br />Новым аб’ектам трэба надаць [[Help:Label|метку]] і [[Help:Description|апісаньне]].",
+	"wikibase-newitem-summary": "Упэўніцеся, што [[Special:Search|гэты аб’ект яшчэ не існуе]]!<br />Новым аб’ектам трэба надаць [[{{int:Wikibase-label-helppage}}|метку]] і [[{{int:Wikibase-description-helppage}}|апісаньне]].",
 	"wikibase-newitem-fieldset": "Стварыць новы аб’ект",
 	"wikibase-newitem-site": "Сайт першай злучанай старонкі",
 	"wikibase-newitem-page": "Назва першай злучанай старонкі",
