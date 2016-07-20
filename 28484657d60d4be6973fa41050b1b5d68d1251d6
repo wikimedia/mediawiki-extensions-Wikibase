@@ -33,6 +33,24 @@
       "revId": "28484657d60d4be6973fa41050b1b5d68d1251d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2673f8_aa8164a6",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-20T14:32:02Z",
+      "side": 1,
+      "message": "Jan is working on the styles. I think they will look different.",
+      "parentUuid": "0e2673f8_2ade1415",
+      "revId": "28484657d60d4be6973fa41050b1b5d68d1251d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
