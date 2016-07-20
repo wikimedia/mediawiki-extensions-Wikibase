@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2673f8_ca9e5859",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-20T14:08:40Z",
+      "side": 1,
+      "message": "The second string is supposed to be human readable. So \u0027Nothing found\u0027 would be better.",
+      "revId": "28484657d60d4be6973fa41050b1b5d68d1251d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2673f8_2ade1415",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-20T14:08:40Z",
+      "side": 1,
+      "message": "Looks like the new selector should be merged with this one, since they are meant to look identical and share the exact same styles.",
+      "revId": "28484657d60d4be6973fa41050b1b5d68d1251d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
