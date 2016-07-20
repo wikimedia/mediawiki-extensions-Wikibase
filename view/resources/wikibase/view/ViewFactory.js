@@ -342,8 +342,8 @@
 	/**
 	 * Construct a suitable view for the given list of statements on the given DOM element
 	 *
-	 * @param {wikibase.datamodel.EntityId} entityId
-	 * @param {wikibase.datamodel.EntityId|null} propertyId Optionally specifies a property
+	 * @param {string} entityId
+	 * @param {string|null} propertyId Optionally specifies a property
 	 *                                                      all statements should be on or are on
 	 * @param {Function} getStatementForGuid A function returning a `wikibase.datamodel.Statement` for a given GUID
 	 * @param {wikibase.datamodel.StatementList} value
