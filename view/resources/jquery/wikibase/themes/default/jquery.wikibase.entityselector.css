@@ -46,7 +46,9 @@
 	display: inline;
 }
 
-.ui-entityselector-list .ui-entityselector-more {
+.ui-entityselector-list .ui-entityselector-more,
+.ui-entityselector-list .ui-entityselector-notfound,
+.ui-entityselector-list .ui-entityselector-notfound.ui-state-hover  {
 	border-top-style: solid;
 	background-color: #F8F8F8;
 }

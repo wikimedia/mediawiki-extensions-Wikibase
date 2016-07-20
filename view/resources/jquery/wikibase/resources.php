@@ -135,6 +135,7 @@ return call_user_func( function() {
 			),
 			'messages' => array(
 				'wikibase-entityselector-more',
+				'wikibase-entityselector-notfound',
 			),
 		),
 
