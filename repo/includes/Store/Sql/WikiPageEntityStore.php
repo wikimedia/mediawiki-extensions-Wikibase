@@ -71,7 +71,7 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	public function assignFreshId( EntityDocument $entity ) {
 		if ( $entity->getId() !== null ) {
-			throw new StorageException( 'This entity already has an ID: ' . $entity->getId() . ' !' );
+			throw new StorageException( 'This entity already has an ID: ' . $entity->getId() . '!' );
 		}
 
 		$type = $entity->getType();
@@ -90,12 +90,12 @@ class WikiPageEntityStore implements EntityStore {
 	}
 
 	/**
-	 * @see EntityStore::canCreateWithId()
+	 * @see EntityStore::canCreateWithCustomId
 	 *
 	 * @param EntityId $id
 	 *
-	 * @return bool
 	 * @throws StorageException
+	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
 		$type = $id->getEntityType();

@@ -176,26 +176,26 @@ class EditEntity extends ModifyEntity {
 	}
 
 	/**
-	 * Create an empty entity.
+	 * @see ModifyEntity::createEntity
 	 *
-	 * @since 0.1
+	 * @param string|null $entityType
+	 * @param EntityId|null $customId
 	 *
-	 * @param string|null $entityType The type of entity to be created (ignored if $id is given)
-	 * @param EntityId|null $id The ID of the entity to be created (optional if $entityType is
-	 *        given)
-	 *
+	 * @throws InvalidArgumentException
 	 * @throws UsageException
 	 * @throws LogicException
-	 * @return EntityDocument Newly created entity
+	 * @return EntityDocument
 	 */
-	protected function createEntity( $entityType, EntityId $id = null ) {
+	protected function createEntity( $entityType, EntityId $customId = null ) {
 		// TODO: pull this up into ModifyEntity.
 
-		if ( $id ) {
-			$entityType = $id->getEntityType();
-		} elseif ( !$entityType ) {
-			$this->errorReporter->dieError( "No entity type provided for creation!", 'no-entity-type' );
-			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		if ( !$entityType ) {
+			if ( !$customId ) {
+				$this->errorReporter->dieError( 'No entity type provided for creation!', 'no-entity-type' );
+				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+			}
+
+			$entityType = $customId->getEntityType();
 		}
 
 		try {
@@ -205,13 +205,13 @@ class EditEntity extends ModifyEntity {
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
-		if ( $id !== null ) {
-			if ( !$this->entityStore->canCreateWithCustomId( $id ) ) {
-				$this->errorReporter->dieError( "Cannot create entity with ID: '$id'", 'bad-entity-id' );
+		if ( $customId !== null ) {
+			if ( !$this->entityStore->canCreateWithCustomId( $customId ) ) {
+				$this->errorReporter->dieError( "Cannot create entity with ID: '$customId'", 'bad-entity-id' );
 				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 			}
 
-			$entity->setId( $id );
+			$entity->setId( $customId );
 		} else {
 			// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
 			$this->entityStore->assignFreshId( $entity );

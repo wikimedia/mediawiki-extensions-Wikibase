@@ -146,9 +146,10 @@ interface EntityStore {
 	 * that this continues to be true after the method call returned. Callers must be careful
 	 * to handle race conditions.
 	 *
-	 * @see EntityHandler::canCreateWithCustomId()
+	 * @see EntityHandler::canCreateWithCustomId
 	 *
 	 * @param EntityId $id
+	 *
 	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id );

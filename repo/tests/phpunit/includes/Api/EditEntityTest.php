@@ -94,7 +94,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 	/**
 	 * Provide data for a sequence of requests that will work when run in order
-	 * @return array
 	 */
 	public function provideData() {
 		return array(
@@ -115,7 +114,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'new mediainfo from id' => array(
 				'p' => array( 'id' => '%M11%', 'data' => '{}' ),
 				'e' => array( 'type' => 'mediainfo' ),
-				't' => 'mediainfo', // skip if MediaInfo is not configured
+				'requires' => 'mediainfo', // skip if MediaInfo is not configured
 			),
 			'add a sitelink..' => array( // make sure if we pass in a valid id it is accepted
 				'p' => array(
@@ -402,16 +401,16 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * Skips a test of the given entity type is not enabled.
 	 *
-	 * @param string $needed the required entity type
+	 * @param string|null $requiredEntityType
 	 */
-	private function skipIfEntityTypeNotKnown( $needed ) {
-		if ( $needed === null ) {
+	private function skipIfEntityTypeNotKnown( $requiredEntityType ) {
+		if ( $requiredEntityType === null ) {
 			return;
 		}
 
 		$enabledTypes = WikibaseRepo::getDefaultInstance()->getEnabledEntityTypes();
-		if ( !in_array( $needed, $enabledTypes ) ) {
-			$this->markTestSkipped( 'Entity type not enabled: ' . $needed );
+		if ( !in_array( $requiredEntityType, $enabledTypes ) ) {
+			$this->markTestSkipped( 'Entity type not enabled: ' . $requiredEntityType );
 		}
 	}
 
@@ -500,7 +499,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 	/**
 	 * Provide data for requests that will fail with a set exception, code and message
-	 * @return array
 	 */
 	public function provideExceptionData() {
 		return array(
@@ -825,7 +823,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'type' => StorageException::class,
 					'message' => 'mediainfo entities do not support automatic IDs'
 				) ),
-				't' => 'mediainfo' // skip if MediaInfo is not configured
+				'requires' => 'mediainfo' // skip if MediaInfo is not configured
 			),
 			'create mediainfo with malformed id' => array(
 				'p' => array( 'id' => 'M123X', 'data' => '{}' ),
@@ -834,7 +832,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => 'no-such-entity-id',
 					'message' => 'Could not find such an entity ID'
 				) ),
-				't' => 'mediainfo' // skip if MediaInfo is not configured
+				'requires' => 'mediainfo' // skip if MediaInfo is not configured
 			),
 			'create mediainfo with bad id' => array(
 				'p' => array( 'id' => 'M12734569', 'data' => '{}' ),
@@ -843,7 +841,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 					'code' => 'no-such-entity',
 					'message' => 'Could not find such an entity'
 				) ),
-				't' => 'mediainfo' // skip if MediaInfo is not configured
+				'requires' => 'mediainfo' // skip if MediaInfo is not configured
 			),
 		);
 	}
