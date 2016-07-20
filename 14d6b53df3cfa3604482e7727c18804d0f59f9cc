@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2673f8_607dcbe4",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-20T17:09:26Z",
+      "side": 1,
+      "message": "You can register a callback now, and use proper injection...\nNot sure about \"wbc\" vs \"wb\" prefix. I tend towards \"wb\", but I don\u0027t really have much of a reason for that preference.",
+      "revId": "14d6b53df3cfa3604482e7727c18804d0f59f9cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
