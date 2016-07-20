@@ -458,7 +458,7 @@ final class RepoHooks {
 						: $skinTemplate->getRevisionId();
 
 					$rev = Revision::newFromId( $revid );
-					if ( $rev->isDeleted( Revision::DELETED_TEXT ) ) {
+					if ( !$rev || $rev->isDeleted( Revision::DELETED_TEXT ) ) {
 						return;
 					}
 
