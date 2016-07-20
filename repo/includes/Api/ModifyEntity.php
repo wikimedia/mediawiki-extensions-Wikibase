@@ -65,7 +65,7 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @var EntityStore
 	 */
-	private $entityStore;
+	protected $entityStore;
 
 	/**
 	 * @since 0.5
@@ -184,11 +184,12 @@ abstract class ModifyEntity extends ApiBase {
 	}
 
 	/**
-	 * Get the entity using the id, site and title params passed to the api
+	 * Get an EntityRevision using the id, site and title params as well as the
+	 * baserevid passed to the api.
 	 *
 	 * @param array $params
 	 *
-	 * @return EntityRevision Found existing entity
+	 * @return EntityRevision|null Found existing entity
 	 */
 	protected function getEntityRevisionFromApiParams( array $params ) {
 		$entityRevision = null;
@@ -211,11 +212,6 @@ abstract class ModifyEntity extends ApiBase {
 				// is a subclass of StorageException, so we still have some inconsistency
 				// and need to check both.
 				$this->errorReporter->dieException( $ex, 'no-such-entity' );
-			}
-
-			if ( $entityRevision === null ) {
-				$this->errorReporter->dieError( "Can't access entity " . $entityId
-					. ', revision may have been deleted.', 'no-such-entity' );
 			}
 		}
 
@@ -318,15 +314,19 @@ abstract class ModifyEntity extends ApiBase {
 	}
 
 	/**
-	 * Create the entity.
+	 * Create an empty entity.
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $entityType
+	 * @param string|null $entityType The type of entity to be created (ignored if $id is given)
+	 * @param EntityId|null $id The ID of the entity to be created (optional if $entityType is
+	 *        given)
 	 *
+	 * @throws UsageException
+	 * @throws LogicException
 	 * @return EntityDocument Newly created entity
 	 */
-	protected function createEntity( $entityType ) {
+	protected function createEntity( $entityType, EntityId $id = null ) {
 		$this->errorReporter->dieError( 'Could not find an existing entity', 'no-such-entity' );
 	}
 
@@ -417,13 +417,26 @@ abstract class ModifyEntity extends ApiBase {
 		// Try to find the entity or fail and create it, or die in the process
 		$entityRev = $this->getEntityRevisionFromApiParams( $params );
 		if ( is_null( $entityRev ) ) {
-			$entity = $this->createEntity( $params['new'] );
-			$entityRevId = 0;
+			$entityId = $this->getEntityIdFromParams( $params );
 
-			// HACK: We need to assign an ID early, for things like the ClaimIdGenerator.
-			if ( $entity->getId() === null ) {
-				$this->entityStore->assignFreshId( $entity );
+			if ( !$params['new'] ) {
+				if ( !$entityId ) {
+					$this->errorReporter->dieError(
+						'No entity was identified, nor was creation requested',
+						'param-illegal'
+					);
+				} elseif ( !$this->entityStore->canCreateWithCustomId( $entityId ) ) {
+					$this->errorReporter->dieError(
+						'Could not find entity ' . $entityId,
+						'no-such-entity'
+					);
+				}
 			}
+
+			$entity = $this->createEntity( $params['new'], $entityId );
+
+			$this->flags |= EDIT_NEW;
+			$entityRevId = 0;
 		} else {
 			$entity = $entityRev->getEntity();
 			$entityRevId = $entityRev->getRevisionId();

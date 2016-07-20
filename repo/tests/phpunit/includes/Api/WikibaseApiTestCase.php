@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Api;
 
 use ApiTestCase;
+use Exception;
 use OutOfBoundsException;
 use Revision;
 use TestSites;
@@ -182,6 +183,13 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			}
 			if ( array_key_exists( 'code', $exception ) ) {
 				$this->assertEquals( $exception['code'], $e->getCodeString() );
+			}
+			if ( array_key_exists( 'message', $exception ) ) {
+				$this->assertContains( $exception['message'], $e->getMessage() );
+			}
+		} catch ( Exception $e ) {
+			if ( array_key_exists( 'type', $exception ) ) {
+				$this->assertInstanceOf( $exception['type'], $e );
 			}
 			if ( array_key_exists( 'message', $exception ) ) {
 				$this->assertContains( $exception['message'], $e->getMessage() );

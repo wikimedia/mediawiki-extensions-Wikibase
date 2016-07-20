@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use MediaWikiTestCase;
+use RawMessage;
 use Revision;
 use Status;
 use User;
@@ -19,6 +20,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlIdGenerator;
@@ -34,6 +36,42 @@ use Wikibase\SqlIdGenerator;
  * @author Daniel Kinzler
  */
 class WikiPageEntityStoreTest extends MediaWikiTestCase {
+
+	/**
+	 * @return EntityHandler
+	 */
+	private function newFrobHandler() {
+		$handler = $this->getMockBuilder( EntityHandler::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$handler->expects( $this->any() )
+			->method( 'canCreateWithCustomId' )
+			->will( $this->returnValue( true ) );
+
+		return $handler;
+	}
+
+	/**
+	 * @param string $text
+	 *
+	 * @return EntityId
+	 */
+	private function newFrobId( $text ) {
+		$id = $this->getMockBuilder( EntityId::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$id->expects( $this->any() )
+			->method( 'getSerialization' )
+			->will( $this->returnValue( $text ) );
+
+		$id->expects( $this->any() )
+			->method( 'getEntityType' )
+			->will( $this->returnValue( 'frob' ) );
+
+		return $id;
+	}
 
 	/**
 	 * @see EntityLookupTest::newEntityLoader()
@@ -58,7 +96,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			new EntityContentFactory(
 				array(
 					'item' => CONTENT_MODEL_WIKIBASE_ITEM,
-					'property' => CONTENT_MODEL_WIKIBASE_PROPERTY
+					'property' => CONTENT_MODEL_WIKIBASE_PROPERTY,
+					'frob' => 'FROB',
 				),
 				array(
 					'item' => function() use ( $wikibaseRepo ) {
@@ -66,7 +105,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					},
 					'property' => function() use ( $wikibaseRepo ) {
 						return $wikibaseRepo->newPropertyHandler();
-					}
+					},
+					'frob' => function() use ( $wikibaseRepo ) {
+						return $this->newFrobHandler();
+					},
 				)
 			),
 			new SqlIdGenerator( wfGetLB() )
@@ -393,11 +435,22 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$status = $ex->getStatus();
 
 			if ( !$status ) {
-				$status = Status::newFatal( 'boohoo' );
+				$status = Status::newFatal( new RawMessage( $ex->getMessage() ) );
 			}
 		}
 
 		return $status;
+	}
+
+	private function getStatusLine( Status $status ) {
+		if ( $status->isGood() ) {
+			return '';
+		} elseif ( $status->isOK() ) {
+			$warnings = $status->getErrorsByType( 'warning' );
+			return "\nStatus (OK): Warnings: " . var_dump( $warnings );
+		} else {
+			return $status->getWikiText();
+		}
 	}
 
 	public function testSaveFlags() {
@@ -430,9 +483,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_NEW );
 		$this->assertTrue(
 			$status->isOK(),
-			'create with EDIT_NEW flag for ' .
-			$entity->getId()->getSerialization()
+			'create with EDIT_NEW flag for ' . $entity->getId() .
+			$this->getStatusLine( $status )
 		);
+		$this->assertNotNull( $entity->getId(), 'getEntityId() after save' );
 
 		// ok, the item exists now in the database.
 
@@ -450,13 +504,16 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_UPDATE );
 		$this->assertTrue(
 			$status->isOK(),
-			'try to save with EDIT_UPDATE flag, save failed'
+			'try to save with EDIT_UPDATE flag, save failed' . $this->getStatusLine( $status )
 		);
 
 		// try to save without flags
 		$entity->setLabel( 'en', $prefix . 'six' );
 		$status = $this->saveEntity( $store, $entity, 'create item' );
-		$this->assertTrue( $status->isOK(), 'try to save without flags, save failed' );
+		$this->assertTrue(
+			$status->isOK(),
+			'try to save without flags, save failed' . $this->getStatusLine( $status )
+		);
 	}
 
 	public function testRepeatedSave() {
@@ -469,15 +526,18 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// create
 		$entity->setLabel( 'en', $prefix . "First" );
 		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), 'create, save failed, status ok' );
-		$this->assertTrue( $status->isGood(), 'create, status is good' );
+		$this->assertTrue(
+			$status->isOK(),
+			'create, save failed, status ok' . $this->getStatusLine( $status )
+		);
+		$this->assertTrue( $status->isGood(), 'create, status is good' . $this->getStatusLine( $status ) );
 
 		// change
 		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
 		$entity->setLabel( 'en', $prefix . "Second" );
 		$status = $this->saveEntity( $store, $entity, 'modify item', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), 'change, status ok' );
-		$this->assertTrue( $status->isGood(), 'change, status good' );
+		$this->assertTrue( $status->isOK(), 'change, status ok' . $this->getStatusLine( $status ) );
+		$this->assertTrue( $status->isGood(), 'change, status good' . $this->getStatusLine( $status ) );
 
 		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
 		$this->assertNotEquals( $prev_id, $rev_id, "revision ID should change on edit" );
@@ -486,7 +546,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
 		$entity->setLabel( 'en', $prefix . "Third" );
 		$status = $this->saveEntity( $store, $entity, 'modify item again', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), 'change again, status ok' );
+		$this->assertTrue( $status->isOK(), 'change again, status ok' . $this->getStatusLine( $status ) );
 		$this->assertTrue( $status->isGood(), 'change again, status good' );
 
 		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
@@ -495,7 +555,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// save unchanged
 		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
 		$status = $this->saveEntity( $store, $entity, 'save unmodified', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), 'save unchanged, save failed, status ok' );
+		$this->assertTrue(
+			$status->isOK(),
+			'save unchanged, save failed, status ok'
+			. $this->getStatusLine( $status )
+		);
 
 		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
 		$this->assertEquals( $prev_id, $rev_id, "revision ID should stay the same if no change was made" );
@@ -571,6 +635,24 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		}
 
 		return $pageId = (int)$row->epp_page_id;
+	}
+
+	public function provideCanCreateWithCustomId() {
+		return [
+			'no custom id allowed' => [ new ItemId( 'Q7' ), false ],
+			'custom id allowed' => [ $this->newFrobId( 'F7' ), true ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideCanCreateWithCustomId
+	 * @covers WikiPageEntityStore::canCreateWithCustomId()
+	 */
+	public function testCanCreateWithCustomId( EntityId $id, $expected ) {
+		/* @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+
+		$this->assertSame( $expected, $store->canCreateWithCustomId( $id ), $id->getSerialization() );
 	}
 
 }

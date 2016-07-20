@@ -103,4 +103,15 @@ class PropertyHandlerTest extends EntityHandlerTest {
 		return $this->getWikibaseRepo( $settings )->newPropertyHandler();
 	}
 
+	public function testAllowAutomaticIds() {
+		$handler = $this->getHandler();
+		$this->assertTrue( $handler->allowAutomaticIds() );
+	}
+
+	public function testCanCreateWithCustomId() {
+		$handler = $this->getHandler();
+		$id = new PropertyId( 'P7' );
+		$this->assertFalse( $handler->canCreateWithCustomId( $id ) );
+	}
+
 }
