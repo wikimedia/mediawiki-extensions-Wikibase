@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e2673f8_aaafa4dd",
+        "filename": "repo/includes/Search/Elastic/FieldDefinitions/DescriptionsProviderFieldDefinitions.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-20T13:38:35Z",
+      "side": 1,
+      "message": "Please add a @see tag if applicable.\n\nSame in some more files in this patch.",
+      "revId": "ee35076d1b0639ec4a9c81c5988769c6b9f82aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2673f8_4a86e86b",
+        "filename": "repo/includes/Search/Elastic/FieldDefinitions/TermSearchFieldDefinition.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-20T13:38:35Z",
+      "side": 1,
+      "message": "Please make this as specific as possible and add a description for the expected structure of this array.",
+      "revId": "ee35076d1b0639ec4a9c81c5988769c6b9f82aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2673f8_2a8bb473",
+        "filename": "repo/includes/Search/Elastic/Indexer/Indexer.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-20T13:38:35Z",
+      "side": 1,
+      "message": "What is the relationship between the entity to be indexed and this \"Elastica document\"?",
+      "revId": "ee35076d1b0639ec4a9c81c5988769c6b9f82aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e2673f8_6a85ac5a",
+        "filename": "repo/includes/Search/FieldDefinitions/SearchFieldDefinitions.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-20T13:38:35Z",
+      "side": 1,
+      "message": "Please make this as specific as possible and add a description for the expected structure of this array.",
+      "revId": "ee35076d1b0639ec4a9c81c5988769c6b9f82aa3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
