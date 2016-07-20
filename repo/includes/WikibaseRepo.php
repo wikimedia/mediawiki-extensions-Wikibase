@@ -1258,7 +1258,7 @@ class WikibaseRepo {
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
 			$this->getEntityIdParser(),
-			$this->getEntitySerializer(),
+			$this->getEntitySerializer( MinifyingDataValueSerializer::OPTION_MINIFY_DATA_VALUE_SERIALIZATIONS ),
 			$this->getInternalFormatEntityDeserializer(),
 			$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024
 		);
@@ -1330,7 +1330,13 @@ class WikibaseRepo {
 	public function getEntitySerializer( $options = 0 ) {
 		if ( !isset( $this->entitySerializers[$options] ) ) {
 			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
-			$serializerFactory = new SerializerFactory( new DataValueSerializer(), $options );
+			$dataValueSerializer = $options & MinifyingDataValueSerializer::OPTION_MINIFY_DATA_VALUE_SERIALIZATIONS
+				? new MinifyingDataValueSerializer()
+				: new DataValueSerializer();
+			$serializerFactory = new SerializerFactory(
+				$dataValueSerializer,
+				$options
+			);
 			$serializers = array();
 
 			foreach ( $serializerFactoryCallbacks as $callback ) {
