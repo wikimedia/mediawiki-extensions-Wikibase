@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee2affbd_29d74d2a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-21T09:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e2673f8_ca9e5859",
+      "revId": "28484657d60d4be6973fa41050b1b5d68d1251d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e2673f8_2ade1415",
         "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2016-07-20T14:32:02Z",
       "side": 1,
       "message": "Jan is working on the styles. I think they will look different.",
+      "parentUuid": "0e2673f8_2ade1415",
+      "revId": "28484657d60d4be6973fa41050b1b5d68d1251d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee2affbd_09dc094b",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-21T09:38:05Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "0e2673f8_2ade1415",
       "revId": "28484657d60d4be6973fa41050b1b5d68d1251d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
