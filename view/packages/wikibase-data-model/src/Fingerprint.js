@@ -89,10 +89,10 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.Term} term
+	 * @param {wikibase.datamodel.Term|null} term
 	 */
 	setLabel: function( languageCode, term ) {
-		if ( term.getText() === '' ) {
+		if ( term === null || term.getText() === '' ) {
 			this._labels.removeItemByKey( languageCode );
 		} else {
 			this._labels.setItem( languageCode, term );
@@ -148,10 +148,10 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @param {wikibase.datamodel.Term} term
+	 * @param {wikibase.datamodel.Term|null} term
 	 */
 	setDescription: function( languageCode, term ) {
-		if ( term.getText() === '' ) {
+		if ( term === null || term.getText() === '' ) {
 			this._descriptions.removeItemByKey( languageCode );
 		} else {
 			this._descriptions.setItem( languageCode, term );
@@ -207,7 +207,7 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string|wikibase.datamodel.MultiTermMap} languageCodeOrAliases
-	 * @param {wikibase.datamodel.MultiTerm} [aliases]
+	 * @param {wikibase.datamodel.MultiTerm|null} [aliases]
 	 *
 	 * @throws {Error} when passing a MultiTerm without a language code.
 	 * @throws {Error} when passing a MultiTermMap with a language code.
@@ -222,12 +222,12 @@ $.extend( SELF.prototype, {
 			aliases = languageCodeOrAliases;
 		}
 
-		if( aliases instanceof wb.datamodel.MultiTerm ) {
+		if( aliases === null || aliases instanceof wb.datamodel.MultiTerm ) {
 			if( !languageCode ) {
 				throw new Error( 'Language code the wb.datamodel.MultiTerm object should be set '
 					+ 'for needs to be specified' );
 			}
-			if ( aliases.isEmpty() ) {
+			if ( aliases === null || aliases.isEmpty() ) {
 				this._aliases.removeItemByKey( languageCode );
 			} else {
 				this._aliases.setItem( languageCode, aliases );
