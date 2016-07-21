@@ -34,6 +34,24 @@
       "revId": "14d6b53df3cfa3604482e7727c18804d0f59f9cc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee2affbd_a90e9d35",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-21T07:48:07Z",
+      "side": 1,
+      "message": "From a users perspective I find this confusing. As far as I understood the only difference between these two API modules would be one of the query parameters. One queries via entity ID, the other via page name. The output is the same. Oh, and it\u0027s even possible to query the repo via sitelink, just as we do in several other API modules. So my suggestion is: Put this API module in the lib folder and make it work with both client and repo.",
+      "parentUuid": "0e2673f8_dbc74c99",
+      "revId": "14d6b53df3cfa3604482e7727c18804d0f59f9cc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
