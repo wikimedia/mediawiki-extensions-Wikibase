@@ -19,6 +19,7 @@
 	border-top: none;
 }
 
+
 .ui-entityselector-list .ui-entityselector-label,
 .ui-entityselector-list .ui-entityselector-description,
 .ui-entityselector-list .ui-entityselector-aliases {
@@ -46,16 +47,23 @@
 	display: inline;
 }
 
-.ui-entityselector-list .ui-entityselector-more,
-.ui-entityselector-list .ui-entityselector-notfound,
-.ui-entityselector-list .ui-entityselector-notfound.ui-state-hover  {
+.ui-entityselector-list .ui-entityselector-more{
 	border-top-style: solid;
 	background-color: #F8F8F8;
+}
+.ui-entityselector-list .ui-entityselector-notfound,
+.ui-entityselector-list .ui-entityselector-notfound.ui-state-hover  {
+	border: none;
+	background-color: #FFDFC9;
 }
 
 .ui-entityselector-list .ui-entityselector-more.ui-state-hover {
 	border-top-style: solid;
 	background-color: #4C59A6;
+}
+
+.ui-entityselector-list .ui-entityselector-notfound.ui-state-hover a {
+	color:#252525;
 }
 
 .ui-entityselector-list .ui-entityselector-more a {
