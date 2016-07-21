@@ -112,17 +112,20 @@ class ChangeOpStatement extends ChangeOpBase {
 		}
 
 		$this->validateStatementGuid( $entityId );
+		$oldIndex = $this->removeStatement( $entity->getStatements() );
 
 		if ( $this->index !== null ) {
 			if ( !( $entity instanceof StatementListHolder ) ) {
 				throw new ChangeOpException( 'Setting an index is not supported on this entity type' );
 			}
 
-			$this->applyStatementToEntity( $entity, $summary );
+			$statements = $this->addStatementToGroup( $entity->getStatements(), $this->index );
+			$entity->setStatements( new StatementList( $statements ) );
 		} else {
-			$oldIndex = $this->removeStatement( $entity->getStatements(), $summary );
 			$entity->getStatements()->addStatement( $this->statement, $oldIndex );
 		}
+
+		$this->updateSummary( $summary, $oldIndex === null ? 'create' : 'update' );
 	}
 
 	/**
@@ -143,23 +146,11 @@ class ChangeOpStatement extends ChangeOpBase {
 	}
 
 	/**
-	 * @param StatementListHolder $entity
-	 * @param Summary|null $summary
-	 */
-	private function applyStatementToEntity( StatementListHolder $entity, Summary $summary = null ) {
-		$oldIndex = $this->removeStatement( $entity->getStatements(), $summary );
-		$newIndex = $this->index !== null ? $this->index : $oldIndex;
-		$statements = $this->addStatementToGroup( $entity->getStatements(), $newIndex );
-		$entity->setStatements( new StatementList( $statements ) );
-	}
-
-	/**
 	 * @param StatementList $statements
-	 * @param Summary|null $summary
 	 *
 	 * @return int|null
 	 */
-	private function removeStatement( StatementList $statements, Summary $summary = null ) {
+	private function removeStatement( StatementList $statements ) {
 		$guid = $this->statement->getGuid();
 		$oldIndex = null;
 		$oldStatement = null;
@@ -173,11 +164,8 @@ class ChangeOpStatement extends ChangeOpBase {
 			}
 		}
 
-		if ( $oldStatement === null ) {
-			$this->updateSummary( $summary, 'create' );
-		} else {
+		if ( $oldStatement !== null ) {
 			$this->checkMainSnakUpdate( $oldStatement );
-			$this->updateSummary( $summary, 'update' );
 		}
 
 		return $oldIndex;
