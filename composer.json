@@ -33,7 +33,7 @@
 		"data-values/serialization": "~1.1",
 		"data-values/javascript": "~0.8.0",
 		"data-values/value-view": "~0.17.1",
-		"wikibase/data-model": "~6.0",
+		"wikibase/data-model": "~6.1",
 		"wikibase/data-model-serialization": "~2.2",
 		"wikibase/internal-serialization": "~2.3",
 		"wikibase/data-model-services": "~3.5",
