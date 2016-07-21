@@ -3,7 +3,8 @@
 		"authors": [
 			"Chrumps",
 			"Ty221",
-			"WTM"
+			"WTM",
+			"XnIcRaM"
 		]
 	},
 	"valueview-expert-advancedadjustments": "ustawienia zaawansowane",
@@ -21,5 +22,6 @@
 	"valueview-expertextender-languageselector-label": "Język (wymagane):",
 	"valueview-expertextender-unitsuggester-label": "Jednostka (opcjonalnie):",
 	"valueview-preview-label": "będzie wyświetlane jako:",
-	"valueview-preview-novalue": "nie rozpoznano prawidłowej wartości"
+	"valueview-preview-novalue": "nie rozpoznano prawidłowej wartości",
+	"valueview-listrotator-manually": "Ustaw ręcznie"
 }

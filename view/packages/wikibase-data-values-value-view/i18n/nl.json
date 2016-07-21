@@ -24,5 +24,6 @@
 	"valueview-expertextender-languageselector-label": "Taal (verplicht):",
 	"valueview-expertextender-unitsuggester-label": "Eenheid (optioneel):",
 	"valueview-preview-label": "wordt weergegeven als:",
-	"valueview-preview-novalue": "geen geldige waarde herkend"
+	"valueview-preview-novalue": "geen geldige waarde herkend",
+	"valueview-listrotator-manually": "handmatig instellen"
 }
