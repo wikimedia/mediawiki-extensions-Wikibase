@@ -162,7 +162,7 @@
 	"wikibase-itemdisambiguation-description": "Используемые для поиска значения должны представлять собой полный текст записи. Идентификатором выступает код языка, например «ru».",
 	"wikibase-itemdisambiguation-summary": "Поиск всех элементов с точно такой же меткой (названием).",
 	"special-newproperty": "Создать новое свойство",
-	"wikibase-newproperty-summary": "Убедитесь, что проверили, не существует ли уже такое свойство!<br />Вы должны указать для всех новых свойств [[{{int:Wikibase-label-helppage}}/ru|метку (название)]] и [[{{int:Wikibase-description-helppage}}/ru|описание]], и вдобавок — задать допустимый тип свойства.",
+	"wikibase-newproperty-summary": "Убедитесь, что проверили, не существует ли уже такое свойство!<br />Вы должны указать для всех новых свойств [[{{int:Wikibase-label-helppage}}|метку (название)]] и [[{{int:Wikibase-description-helppage}}|описание]], и вдобавок — задать допустимый тип свойства.",
 	"wikibase-newproperty-fieldset": "Создать новое свойство",
 	"wikibase-newproperty-datatype": "Тип данных:",
 	"wikibase-newproperty-invalid-datatype": "Указан недопустимый тип данных.",
