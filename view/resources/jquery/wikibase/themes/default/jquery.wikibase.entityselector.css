@@ -19,7 +19,6 @@
 	border-top: none;
 }
 
-
 .ui-entityselector-list .ui-entityselector-label,
 .ui-entityselector-list .ui-entityselector-description,
 .ui-entityselector-list .ui-entityselector-aliases {
@@ -47,7 +46,7 @@
 	display: inline;
 }
 
-.ui-entityselector-list .ui-entityselector-more{
+.ui-entityselector-list .ui-entityselector-more {
 	border-top-style: solid;
 	background-color: #F8F8F8;
 }
