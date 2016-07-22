@@ -8,6 +8,7 @@
 	padding: 0;
 	position: absolute;
 	z-index: 4; /* needed for MonoBook, #p-search is at 3 */
+	font-size: 0.8em;
 }
 
 .ui-entityselector-list li,
