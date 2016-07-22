@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e1983c1_8c3f6b20",
+        "filename": "repo/tests/phpunit/includes/Api/EditEntityTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-07-22T12:57:54Z",
+      "side": 1,
+      "message": "heh, good spot!\nI worried for a bit about how this was possibly passing until looking into it and the order things are done in!",
+      "revId": "3cd296f2f47c183b39b34881d11ca76dcdad0579",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
