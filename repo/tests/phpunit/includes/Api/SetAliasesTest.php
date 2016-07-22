@@ -35,6 +35,27 @@ class SetAliasesTest extends ModifyTermTestCase {
 		self::$hasSetup = true;
 	}
 
+	public function testSetAliases_create() {
+		$params = array(
+			'action' => self::$testAction,
+			'new' => 'property',
+			'language' => 'en',
+			'set' => 'Foo',
+		);
+
+		// -- do the request --------------------------------------------------
+		list( $result, , ) = $this->doApiRequestWithToken( $params );
+
+		// -- check the result ------------------------------------------------
+		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
+		$this->assertResultHasEntityType( $result );
+		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
+
+		$resAliases = $this->flattenArray( $result['entity']['aliases'], 'language', 'value', true );
+		$this->assertArrayHasKey( $params['language'], $resAliases );
+		$this->assertArrayEquals( explode( '|', $params['set'] ), $resAliases[ $params['language'] ] );
+	}
+
 	public function provideData() {
 		return array(
 			// p => params, e => expected
