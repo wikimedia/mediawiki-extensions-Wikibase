@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e1983c1_e609de35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3640
+      },
+      "writtenOn": "2016-07-22T06:03:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e1983c1_2622d6a2",
+      "revId": "a58bb2c9a70c8b18d62639634dc4a5e0cdd47c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e1983c1_0627dab2",
         "filename": "repo/config/Wikibase.default.php",
         "patchSetId": 2
