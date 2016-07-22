@@ -38,7 +38,7 @@ beta:
 test:
   language_code: en
   browser: firefox
-  mediawiki_url: http://test.wikidata.org/wiki/
+  mediawiki_url: https://test.wikidata.org/wiki/
   mediawiki_user: Selenium_user
   # mediawiki_password: SET THIS IN THE ENVIRONMENT!
 
