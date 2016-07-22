@@ -77,12 +77,21 @@
 		assert.expect( 2 );
 		var api = {
 			setLabel: sinon.spy( function() {
-				return $.Deferred().promise();
+				return $.Deferred().resolve( {
+					entity: {
+						labels: {
+							language: {}
+						}
+					}
+				} ).promise();
 			} )
 		};
 		var entityTermsChanger = new SUBJECT(
 			api,
-			{ getLabelRevision: function() { return 0; } },
+			{
+				getLabelRevision: function() { return 0; },
+				setLabelRevision: function() {}
+			},
 			new wb.datamodel.Item( 'Q1' )
 		);
 
@@ -232,12 +241,21 @@
 		assert.expect( 2 );
 		var api = {
 			setDescription: sinon.spy( function() {
-				return $.Deferred().promise();
+				return $.Deferred().resolve( {
+					entity: {
+						descriptions: {
+							language: {}
+						}
+					}
+				} ).promise();
 			} )
 		};
 		var entityTermsChanger = new SUBJECT(
 			api,
-			{ getDescriptionRevision: function() { return 0; } },
+			{
+				getDescriptionRevision: function() { return 0; },
+				setDescriptionRevision: function() {}
+			},
 			new wb.datamodel.Item( 'Q1' )
 		);
 
@@ -399,12 +417,17 @@
 		assert.expect( 2 );
 		var api = {
 			setAliases: sinon.spy( function() {
-				return $.Deferred().promise();
+				return $.Deferred().resolve( {
+					entity: {}
+				} ).promise();
 			} )
 		};
 		var entityTermsChanger = new SUBJECT(
 			api,
-			{ getAliasesRevision: function() { return 0; } },
+			{
+				getAliasesRevision: function() { return 0; },
+				setAliasesRevision: function() {}
+			},
 			new wb.datamodel.Item( 'Q1' )
 		);
 
