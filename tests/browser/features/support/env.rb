@@ -23,26 +23,18 @@ lenv = MediawikiSelenium::Environment.load_default
 ENV['WIKIDATA_REPO_URL'] = lenv.lookup(:mediawiki_url)
 ENV['WIKIDATA_REPO_API'] = lenv.lookup(:mediawiki_url_api, default: lambda do
   lenv.lookup(:mediawiki_url)
-    .gsub(%r{wiki/$}, 'w/api.php')
-    .gsub(%r{index.php/?$}, 'api.php')
+      .gsub(%r{wiki/$}, 'w/api.php')
+      .gsub(%r{index.php/?$}, 'api.php')
 end)
-# TODO: use user_factory instead
-# ENV['WB_REPO_USERNAME'] = lenv.lookup(:mediawiki_user)
 ENV['ITEM_NAMESPACE'] = lenv.lookup(:item_namespace, default: -> { '' })
 ENV['PROPERTY_NAMESPACE'] = lenv.lookup(:property_namespace, default: -> { 'Property:' })
 ENV['ITEM_ID_PREFIX'] = lenv.lookup(:item_id_prefix, default: -> { 'Q' })
 ENV['PROPERTY_ID_PREFIX'] = lenv.lookup(:property_id_prefix, default: -> { 'P' })
 ENV['LANGUAGE_CODE'] = lenv.lookup(:language_code, default: -> { 'en' })
 
-# require_all 'features/support/modules'
-require_all 'features/support/pages'
-# require_all 'features/support/utils'
-
-# TODO: remove once everything is migrated
-Before('@repo_login') do
-  abort('WB_REPO_USERNAME environment variable is not defined! Please export a value for that variable before proceeding.') unless ENV['WB_REPO_USERNAME']
-  abort('MEDIAWIKI_PASSWORD environment variable is not defined! Please export a value for that variable before proceeding.') unless ENV['MEDIAWIKI_PASSWORD']
-end
+require_all File.dirname(__FILE__) + '/modules'
+require_all File.dirname(__FILE__) + '/pages'
+require_all File.dirname(__FILE__) + '/utils'
 
 PageObject.default_element_wait = 10 # increased to avoid fails on saucelabs
 
