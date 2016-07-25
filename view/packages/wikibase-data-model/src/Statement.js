@@ -21,6 +21,9 @@ var SELF = wb.datamodel.Statement = function WbDataModelStatement( claim, refere
 	this.setRank( rank === undefined ? wb.datamodel.Statement.RANK.NORMAL : rank );
 };
 
+/**
+ * @class wikibase.datamodel.Statement
+ */
 $.extend( SELF.prototype, {
 	/**
 	 * @property {wikibase.datamodel.Claim}
