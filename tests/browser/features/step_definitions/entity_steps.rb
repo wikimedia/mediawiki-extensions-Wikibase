@@ -7,8 +7,9 @@
 # basic steps for entities
 
 Given(/^I am logged in to the repo$/) do
-  lenv = MediawikiSelenium::Environment.load_default
-  visit(RepoLoginPage).login_with(lenv.user, lenv.password)
+  as_user(:b) {
+    visit(RepoLoginPage).login_with(user(:b), password(:b))
+  }
 end
 
 Given(/^I am not logged in to the repo$/) do
@@ -74,7 +75,43 @@ Given(/^I navigate to property handle (.*)$/) do |handle|
 end
 
 Given(/^I have the following properties with datatype:$/) do |props|
-  @properties = visit(PropertyPage).create_properties(props)
+  as_user(:b) {
+  property_data = on(PropertyPage).create_property_data(props)
+  properties = {}
+  property_data.each do |handle, data|
+
+    wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+    wb_api.log_in(user(:b), password(:b))
+    resp = wb_api.create_property(data)
+
+    id = resp['entity']['id']
+
+    if resp['entity']['labels'].length > 0 && resp['entity']['labels']['en']
+      label_en = resp['entity']['labels']['en']['value']
+    else
+      label_en = ''
+    end
+
+    if resp['entity']['descriptions'].length > 0 && resp['entity']['descriptions']['en']
+      description_en = resp['entity']['descriptions']['en']['value']
+    else
+      description_en = ''
+    end
+
+    url = URL.repo_url(ENV['PROPERTY_NAMESPACE'] + id)
+
+    property = { 'id' => id, 'url' => url, 'label' => label_en, 'description' => description_en }
+
+
+    #property = create_property(data)
+    properties[handle] = property
+  end
+
+  @properties = properties
+
+  }
+
+  #@properties = visit(PropertyPage).create_properties(props)
 end
 
 Given(/^I have the following items:$/) do |handles|
@@ -99,14 +136,24 @@ Given(/^I am on an item page with empty label and description$/) do
 end
 
 Given(/^The following sitelinks do not exist:$/) do |sitelinks|
-  lenv = MediawikiSelenium::Environment.load_default
-  wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-  wb_api.log_in(lenv.user, lenv.password)
-  sitelinks.raw.each do |sitelink|
-    if wb_api.sitelink_exists?(sitelink[0], sitelink[1])
-      wb_api.remove_sitelink({ site_id: sitelink[0], title: sitelink[1] }, sitelink[0])
+  as_user(:b) {
+    wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+    puts "user"
+    puts user(:b)
+    puts "pass"
+    puts password(:b)
+    wb_api.log_in(user(:b), password(:b))
+    sitelinks.raw.each do |sitelink|
+      puts "sitelink id"
+      puts sitelink[0]
+      puts "sitelink title"
+      puts sitelink[1]
+      if wb_api.sitelink_exists?(sitelink[0], sitelink[1])
+        puts "removing sitelink"
+        wb_api.remove_sitelink({ site_id: sitelink[0], title: sitelink[1] }, sitelink[0])
+      end
     end
-  end
+  }
 end
 
 Then(/^An error message should be displayed$/) do

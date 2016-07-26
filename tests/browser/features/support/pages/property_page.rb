@@ -31,28 +31,29 @@ class PropertyPage
   end
 
   def create_property(data)
-    lenv = MediawikiSelenium::Environment.load_default
-    wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-    wb_api.log_in(lenv.user, lenv.password)
-    resp = wb_api.create_property(data)
+    as_user(:b) {
+      wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+      wb_api.log_in(user(:b), password(:b))
+      resp = wb_api.create_property(data)
 
-    id = resp['entity']['id']
+      id = resp['entity']['id']
 
-    if resp['entity']['labels'].length > 0 && resp['entity']['labels']['en']
-      label_en = resp['entity']['labels']['en']['value']
-    else
-      label_en = ''
-    end
+      if resp['entity']['labels'].length > 0 && resp['entity']['labels']['en']
+        label_en = resp['entity']['labels']['en']['value']
+      else
+        label_en = ''
+      end
 
-    if resp['entity']['descriptions'].length > 0 && resp['entity']['descriptions']['en']
-      description_en = resp['entity']['descriptions']['en']['value']
-    else
-      description_en = ''
-    end
+      if resp['entity']['descriptions'].length > 0 && resp['entity']['descriptions']['en']
+        description_en = resp['entity']['descriptions']['en']['value']
+      else
+        description_en = ''
+      end
 
-    url = URL.repo_url(ENV['PROPERTY_NAMESPACE'] + id)
+      url = URL.repo_url(ENV['PROPERTY_NAMESPACE'] + id)
 
-    { 'id' => id, 'url' => url, 'label' => label_en, 'description' => description_en }
+      { 'id' => id, 'url' => url, 'label' => label_en, 'description' => description_en }
+    }
   end
 
   def create_properties(props)
