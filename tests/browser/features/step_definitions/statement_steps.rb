@@ -7,9 +7,12 @@
 # tests for statements
 
 When(/^I have statements with the following properties and values:$/) do |statements|
-  lenv = MediawikiSelenium::Environment.load_default
   wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-  wb_api.log_in(lenv.user, lenv.password)
+
+  as_user(:b) do
+    wb_api.log_in(user(:b), password(:b))
+  end
+
   statements.raw.each do |statement|
     property_handle = statement[0]
     value = on(ItemPage).get_string_snak_value(statement[1])

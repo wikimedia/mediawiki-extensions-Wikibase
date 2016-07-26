@@ -30,12 +30,8 @@ class PropertyPage
     property_data
   end
 
-  def create_property(data)
-    lenv = MediawikiSelenium::Environment.load_default
-    wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-    wb_api.log_in(lenv.user, lenv.password)
+  def create_property(data, wb_api)
     resp = wb_api.create_property(data)
-
     id = resp['entity']['id']
 
     if resp['entity']['labels'].length > 0 && resp['entity']['labels']['en']
@@ -55,11 +51,10 @@ class PropertyPage
     { 'id' => id, 'url' => url, 'label' => label_en, 'description' => description_en }
   end
 
-  def create_properties(props)
-    property_data = create_property_data(props)
+  def create_properties(property_data, wb_api)
     properties = {}
     property_data.each do |handle, data|
-      property = create_property(data)
+      property = create_property(data, wb_api)
       properties[handle] = property
     end
 
