@@ -48,7 +48,7 @@ Feature: Edit label
       | click the header save button |
       | press the RETURN key in the label input field |
 
-  @modify_entity @save_label
+  @integration @modify_entity @save_label
   Scenario Outline: Save label and reload
     When I click the header edit button
       And I enter "MODIFIED LABEL" as label
