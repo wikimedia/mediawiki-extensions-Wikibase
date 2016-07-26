@@ -7,8 +7,10 @@
 # basic steps for entities
 
 Given(/^I am logged in to the repo$/) do
-  lenv = MediawikiSelenium::Environment.load_default
-  visit(RepoLoginPage).login_with(lenv.user, lenv.password)
+  as_user(:b) {
+    visit(RepoLoginPage).login_with(user(:b), password(:b))
+  }
+
 end
 
 Given(/^I am not logged in to the repo$/) do
@@ -99,14 +101,15 @@ Given(/^I am on an item page with empty label and description$/) do
 end
 
 Given(/^The following sitelinks do not exist:$/) do |sitelinks|
-  lenv = MediawikiSelenium::Environment.load_default
-  wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-  wb_api.log_in(lenv.user, lenv.password)
-  sitelinks.raw.each do |sitelink|
-    if wb_api.sitelink_exists?(sitelink[0], sitelink[1])
-      wb_api.remove_sitelink({ site_id: sitelink[0], title: sitelink[1] }, sitelink[0])
+  as_user(:b) {
+    wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+    wb_api.log_in(user(:b), password(:b))
+    sitelinks.raw.each do |sitelink|
+      if wb_api.sitelink_exists?(sitelink[0], sitelink[1])
+        wb_api.remove_sitelink({ site_id: sitelink[0], title: sitelink[1] }, sitelink[0])
+      end
     end
-  end
+  }
 end
 
 Then(/^An error message should be displayed$/) do
