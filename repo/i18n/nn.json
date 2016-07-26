@@ -139,6 +139,7 @@
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Språkkode:",
 	"special-mergeitems": "Flett saman to element",
+	"wikibase-mergeitems-intro": "Dersom du fletter saman to element, vil alle merkelappane, skildringane, andre namn, nettstadlenkjene og utsegnene flyttast frå det eine elementet til det andre.",
 	"wikibase-mergeitems-fromid": "ID-en det vert fletta frå",
 	"wikibase-mergeitems-toid": "ID-en det vert fletta til",
 	"wikibase-mergeitems-submit": "Flett saman element",

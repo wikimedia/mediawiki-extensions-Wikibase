@@ -129,7 +129,7 @@
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$3|주장}}의 {{PLURAL:$4|한정어 한 개|한정어 $4개}}를 바꿈",
 	"wikibase-entity-summary-wbsetclaim-update-references": "{{PLURAL:$3|주장}}의 {{PLURAL:$4|각주 한 개|각주 $4개}}을 바꿈",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "{{PLURAL:$3|주장}}의 등급을 바꿈",
-	"wikibase-entity-summary-clientsitelink-update": "페이지를 [$3]에서 [$4](으)로 옮김",
+	"wikibase-entity-summary-clientsitelink-update": "페이지를 [$3]에서 [$4](으)로 이동함",
 	"wikibase-entity-summary-clientsitelink-remove": "[$3]의 문서 삭제됨",
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|한정어}}를 추가함",
 	"wikibase-entity-summary-wbsetqualifier-update": "{{PLURAL:$1|한정어}}를 바꿈",
