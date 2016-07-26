@@ -7,7 +7,8 @@
 # basic steps for entities
 
 Given(/^I am logged in to the repo$/) do
-  visit(RepoLoginPage).login_with(ENV['MEDIAWIKI_USER'], ENV['MEDIAWIKI_PASSWORD'])
+  lenv = MediawikiSelenium::Environment.load_default
+  visit(RepoLoginPage).login_with(lenv.user, lenv.password)
 end
 
 Given(/^I am not logged in to the repo$/) do
@@ -98,8 +99,9 @@ Given(/^I am on an item page with empty label and description$/) do
 end
 
 Given(/^The following sitelinks do not exist:$/) do |sitelinks|
+  lenv = MediawikiSelenium::Environment.load_default
   wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-  wb_api.log_in(ENV['MEDIAWIKI_USER'], ENV['MEDIAWIKI_PASSWORD'])
+  wb_api.log_in(lenv.user, lenv.password)
   sitelinks.raw.each do |sitelink|
     if wb_api.sitelink_exists?(sitelink[0], sitelink[1])
       wb_api.remove_sitelink({ site_id: sitelink[0], title: sitelink[1] }, sitelink[0])

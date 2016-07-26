@@ -31,8 +31,9 @@ class PropertyPage
   end
 
   def create_property(data)
+    lenv = MediawikiSelenium::Environment.load_default
     wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-    wb_api.log_in(ENV['MEDIAWIKI_USER'], ENV['MEDIAWIKI_PASSWORD'])
+    wb_api.log_in(lenv.user, lenv.password)
     resp = wb_api.create_property(data)
 
     id = resp['entity']['id']
