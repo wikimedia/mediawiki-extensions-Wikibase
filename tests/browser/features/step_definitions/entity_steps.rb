@@ -7,7 +7,9 @@
 # basic steps for entities
 
 Given(/^I am logged in to the repo$/) do
-  visit(RepoLoginPage).login_with(ENV['MEDIAWIKI_USER'], ENV['MEDIAWIKI_PASSWORD'])
+  as_user(:b) do
+    visit(RepoLoginPage).login_with(user(:b), password(:b))
+  end
 end
 
 Given(/^I am not logged in to the repo$/) do
@@ -73,7 +75,14 @@ Given(/^I navigate to property handle (.*)$/) do |handle|
 end
 
 Given(/^I have the following properties with datatype:$/) do |props|
-  @properties = visit(PropertyPage).create_properties(props)
+  property_data = on(PropertyPage).create_property_data(props)
+  wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
+
+  as_user(:b) do
+    wb_api.log_in(user(:b), password(:b))
+  end
+
+  @properties = on(PropertyPage).create_properties(property_data, wb_api)
 end
 
 Given(/^I have the following items:$/) do |handles|
@@ -99,7 +108,11 @@ end
 
 Given(/^The following sitelinks do not exist:$/) do |sitelinks|
   wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-  wb_api.log_in(ENV['MEDIAWIKI_USER'], ENV['MEDIAWIKI_PASSWORD'])
+
+  as_user(:b) do
+    wb_api.log_in(user(:b), password(:b))
+  end
+
   sitelinks.raw.each do |sitelink|
     if wb_api.sitelink_exists?(sitelink[0], sitelink[1])
       wb_api.remove_sitelink({ site_id: sitelink[0], title: sitelink[1] }, sitelink[0])
