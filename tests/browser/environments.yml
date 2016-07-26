@@ -33,6 +33,7 @@ beta:
   browser: firefox
   mediawiki_url: https://wikidata.beta.wmflabs.org/wiki/
   mediawiki_user: Selenium_user
+  user_factory: true
   # mediawiki_password: SET THIS IN THE ENVIRONMENT!
 
 test:
@@ -40,6 +41,7 @@ test:
   browser: firefox
   mediawiki_url: https://test.wikidata.org/wiki/
   mediawiki_user: Selenium_user
+  user_factory: true
   # mediawiki_password: SET THIS IN THE ENVIRONMENT!
 
 integration:
