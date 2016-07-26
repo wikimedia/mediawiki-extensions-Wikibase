@@ -8,7 +8,11 @@
 
 When(/^I have statements with the following properties and values:$/) do |statements|
   wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-  wb_api.log_in(ENV['MEDIAWIKI_USER'], ENV['MEDIAWIKI_PASSWORD'])
+
+  as_user(:b) do
+    wb_api.log_in(user(:b), password(:b))
+  end
+
   statements.raw.each do |statement|
     property_handle = statement[0]
     value = on(ItemPage).get_string_snak_value(statement[1])
