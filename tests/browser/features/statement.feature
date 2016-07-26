@@ -53,7 +53,7 @@ Feature: Creating statements
     | click the statement cancel button |
     | press the ESC key in the claim entity selector input field |
 
-  @ui_only
+  @integration @ui_only
   Scenario: Select a property
     Given I have the following properties with datatype:
       | stringprop | string |
