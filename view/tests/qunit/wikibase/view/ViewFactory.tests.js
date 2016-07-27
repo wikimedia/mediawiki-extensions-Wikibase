@@ -331,8 +331,7 @@
 
 	QUnit.test( 'getListItemAdapterForStatementView passes correct options to views for non-empty StatementList', function( assert ) {
 		assert.expect( 1 );
-		var entityId = new wb.datamodel.EntityId( 'type', 1 ),
-			propertyId = 'P1',
+		var propertyId = 'P1',
 			value = new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( propertyId ) ) ),
 			entityChangersFactory = {
 				getStatementsChanger: function() { return {}; }
@@ -343,7 +342,7 @@
 
 		sinon.stub( viewFactory, '_getView' );
 
-		viewFactory.getListItemAdapterForStatementView( entityId, function () {}, null );
+		viewFactory.getListItemAdapterForStatementView( 'Q1', function () {}, null );
 
 		ListItemAdapter.args[0][0].getNewItem( value, dom );
 
