@@ -372,13 +372,13 @@ class WikiPageEntityStore implements EntityStore {
 			// Do this in its own transaction to reduce contention...
 			$dbw = wfGetDB( DB_MASTER );
 			$dbw->onTransactionIdle( function() use ( $dbw, $title, $watch, $user, $fname ) {
-				$dbw->begin( $fname );
+				$dbw->startAtomic( $fname );
 				if ( $watch ) {
 					WatchAction::doWatch( $title, $user );
 				} else {
 					WatchAction::doUnwatch( $title, $user );
 				}
-				$dbw->commit( $fname );
+				$dbw->endAtomic( $fname );
 			} );
 		}
 	}
