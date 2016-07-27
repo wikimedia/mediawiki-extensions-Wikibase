@@ -356,6 +356,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 		} );
 
 		var customItems = ooMenu.option( 'customItems' );
+
 		customItems.unshift( new $.ui.ooMenu.CustomItem(
 			this.options.messages.more,
 			function() {
@@ -368,13 +369,13 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 		) );
 
 		customItems.unshift( new $.ui.ooMenu.CustomItem(
-				this.options.messages.notfound,
-				function() {
-					return self._cache.suggestions && self._cache.suggestions.length === 0;
-				},
-				null,
-				'ui-entityselector-notfound'
-			) );
+			this.options.messages.notfound,
+			function() {
+				return self._cache.suggestions && !self._cache.suggestions.length;
+			},
+			null,
+			'ui-entityselector-notfound'
+		) );
 
 		ooMenu._evaluateVisibility = function( customItem ) {
 			if ( customItem instanceof $.ui.ooMenu.CustomItem ) {
