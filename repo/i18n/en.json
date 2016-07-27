@@ -111,6 +111,7 @@
 	"wikibase-shortcopyrightwarning-version": "wikibase-1",
 	"wikibase-copyrighttooltip-acknowledge": "I accept these terms for my future edits. Do not show this message again.",
 	"wikibase-entityselector-more": "more",
+	"wikibase-entityselector-notfound": "No match was found",
 	"wikibase-anonymouseditwarning": "Warning: You are not logged in.\nYour IP address will be recorded in the edit history of this entity.",
 	"wikibase-move-error": "You cannot move pages that are in a data namespace, and you cannot move pages into it.",
 	"wikibase-validator-sitelink-conflict": "The link $1 is already used by item $2. You may remove it from $2 if it does not belong there or merge the items if they are about the exact same topic.",
