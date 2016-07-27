@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eed2fc9_6c214e9a",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-27T09:46:26Z",
+      "side": 1,
+      "message": "This is very tricky and I think we should use comments here.",
+      "revId": "52044cabfdd745e6a8b3c41a9747a9b78f318d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eed2fc9_ec2c1e92",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-27T09:46:26Z",
+      "side": 1,
+      "message": "Can we get value from view?",
+      "revId": "52044cabfdd745e6a8b3c41a9747a9b78f318d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eed2fc9_8c53da19",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-27T09:46:26Z",
+      "side": 1,
+      "message": "Not sure if I understand this in detail.",
+      "revId": "52044cabfdd745e6a8b3c41a9747a9b78f318d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eed2fc9_ec437e41",
+        "filename": "view/resources/wikibase/view/ToolbarFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-27T09:46:26Z",
+      "side": 1,
+      "message": "Change order?",
+      "revId": "52044cabfdd745e6a8b3c41a9747a9b78f318d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eed2fc9_cc6322d9",
+        "filename": "view/resources/wikibase/view/ToolbarFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-27T09:46:26Z",
+      "side": 1,
+      "message": "This is strange",
+      "revId": "52044cabfdd745e6a8b3c41a9747a9b78f318d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
