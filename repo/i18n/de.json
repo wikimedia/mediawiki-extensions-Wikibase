@@ -122,6 +122,7 @@
 	"wikibase-shortcopyrightwarning": "Durch Klicken auf „$1“ stimmst du den [[$2|Nutzungsbedingungen]] und unwiderruflich der Veröffentlichung deines Beitrags unter der $3 zu.",
 	"wikibase-copyrighttooltip-acknowledge": "Ich akzeptiere diese Bedingungen für meine zukünftigen Bearbeitungen. Diese Nachricht nicht mehr anzeigen.",
 	"wikibase-entityselector-more": "mehr",
+	"wikibase-entityselector-notfound": "Kein Treffer gefunden",
 	"wikibase-anonymouseditwarning": "Warnung: Du bist nicht angemeldet.\nStattdessen wird deine IP-Adresse in der Bearbeitungsgeschichte dieses Objektes gespeichert.",
 	"wikibase-move-error": "Du kannst keine Seiten in einem Datennamensraum verschieben oder in ihn hinein schieben.",
 	"wikibase-validator-sitelink-conflict": "Der Link $1 wird bereits vom Objekt $2 verwendet. Du kannst ihn von $2 entfernen, falls er nicht dorthin gehört oder die Objekte zusammenführen, falls sie das gleiche Thema behandeln.",

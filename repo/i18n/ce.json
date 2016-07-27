@@ -94,6 +94,7 @@
 	"wikibase-itemdisambiguation-submit": "Лахар",
 	"wikibase-newproperty-datatype": "Хаамийн тайп:",
 	"wikibase-newproperty-invalid-datatype": "Билгалйина цамагина хаамийн тайп.",
+	"wikibase-description-helppage": "Help:Цунах лаьцна",
 	"special-newitem": "Керла элемент кхоллар",
 	"wikibase-newitem-summary": "Хьажа [[Special:Search|иштта элемент хӀинцале юьй]]!<br />Ахьа керла элементашна яздан деза [[{{int:Wikibase-label-helppage}}|билгало (цӀе)]] а [[{{int:Wikibase-description-helppage}}|цунах лаьцна]] а.",
 	"wikibase-newitem-fieldset": "Керла элемент кхоьллина",

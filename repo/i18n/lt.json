@@ -152,6 +152,8 @@
 	"wikibase-newproperty-fieldset": "Sukurti naują savybę",
 	"wikibase-newproperty-datatype": "Duomenų tipas:",
 	"wikibase-newproperty-invalid-datatype": "Nurodytas neteisingas duomenų tipas.",
+	"wikibase-description-helppage": "Help:Aprašymas",
+	"wikibase-label-helppage": "Help:Etiketė",
 	"special-newitem": "Sukurti naują įrašą",
 	"wikibase-newitem-summary": "Įsitikinkite, kad [[Special:Search|pažymėjote, ar elementas jau egzistuoja]]!<br />\nJūs turėtumėte sukurti [[{{int:Wikibase-label-helppage}}|žymę]] ir [[{{int:Wikibase-description-helppage}}|aprašymą]] kiekvienam naujam elementui.",
 	"wikibase-newitem-fieldset": "Sukurti naują įrašą",

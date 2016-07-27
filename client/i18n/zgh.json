@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amara-Amaziɣ"
+			"Amara-Amaziɣ",
+			"ⵕⴰⵊⵉ"
 		]
 	},
 	"wikibase-editlinks": "ⵙⵏⴼⵍ ⵉⵙⵖⵓⵏⵏ",
+	"wikibase-editlinkstitle": "ⵙⵏⴼⵍ ⵉⵙⵖⵓⵏ ⵏ ⵜⵓⵜⵍⴰⵢⵉⵏ ⵏ ⴱⵕⵕⴰ",
 	"wikibase-rc-hide-wikidata-hide": "ⵙⵙⵏⵜⵍ",
 	"wikibase-rc-hide-wikidata-show": "ⵙⴽⵏ",
 	"wikibase-rc-wikibase-edit-letter": "ⴷ",
