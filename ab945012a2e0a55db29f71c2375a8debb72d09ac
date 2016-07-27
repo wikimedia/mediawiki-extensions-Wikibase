@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8edee325_610bf0d9",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-07-27T09:46:26Z",
+      "side": 1,
+      "message": "2 times is better than once?",
+      "revId": "ab945012a2e0a55db29f71c2375a8debb72d09ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
