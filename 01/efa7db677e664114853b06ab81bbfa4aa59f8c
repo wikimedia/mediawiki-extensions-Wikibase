@@ -1,0 +1,9 @@
+Code-Review+1: Jonas Kress (WMDE) <jonas.kress@wikimedia.de>
+Code-Review+2: Thiemo Mättig (WMDE) <thiemo.maettig@wikimedia.de>
+Verified+2: Jonas Kress (WMDE) <jonas.kress@wikimedia.de>
+Verified+2: jenkins-bot
+Submitted-by: jenkins-bot
+Submitted-at: Wed, 27 Jul 2016 15:54:39 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/300277
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
