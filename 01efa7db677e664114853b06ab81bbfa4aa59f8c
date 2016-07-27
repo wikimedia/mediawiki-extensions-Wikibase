@@ -33,6 +33,98 @@
       "revId": "01efa7db677e664114853b06ab81bbfa4aa59f8c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8edee325_8759ec03",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-27T15:01:43Z",
+      "side": 1,
+      "message": "This extra hover selector does not do anything in my tests. Am I missing something?",
+      "range": {
+        "startLine": 55,
+        "startChar": 61,
+        "endLine": 55,
+        "endChar": 66
+      },
+      "revId": "01efa7db677e664114853b06ab81bbfa4aa59f8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8edee325_074ebc3c",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-27T15:01:43Z",
+      "side": 1,
+      "message": "Is this here for a specific reason? The border is already removed by the :first-child rule above.",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "01efa7db677e664114853b06ab81bbfa4aa59f8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8edee325_64b85ee3",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-27T15:01:43Z",
+      "side": 1,
+      "message": "This should be close to the other \"notfound\" style above.",
+      "range": {
+        "startLine": 65,
+        "startChar": 43,
+        "endLine": 65,
+        "endChar": 51
+      },
+      "revId": "01efa7db677e664114853b06ab81bbfa4aa59f8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8edee325_671ce06b",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.entityselector.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-27T15:01:43Z",
+      "side": 1,
+      "message": "Why this color? This still produces a hover effect where the black text becomes gray when hovering.",
+      "range": {
+        "startLine": 66,
+        "startChar": 7,
+        "endLine": 66,
+        "endChar": 14
+      },
+      "revId": "01efa7db677e664114853b06ab81bbfa4aa59f8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
