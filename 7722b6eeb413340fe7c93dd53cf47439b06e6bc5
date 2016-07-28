@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6edb6f39_0c07bf20",
+        "filename": "view/resources/wikibase/view/ToolbarFactory.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:11:46Z",
+      "side": 1,
+      "message": "Actual documentation of what this is would be nice. I know this is the existing DOM node where the toolbar should be applied.",
+      "range": {
+        "startLine": 21,
+        "startChar": 20,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "7722b6eeb413340fe7c93dd53cf47439b06e6bc5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
