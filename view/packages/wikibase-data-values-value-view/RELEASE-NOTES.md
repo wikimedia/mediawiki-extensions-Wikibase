@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.17.2 (2016-07-28)
+* Moved `valueviewchange` event after actual changing the value.
+
 ## 0.17.1 (2016-04-13)
 * Fixed `jQuery.focusAt` and `jquery.valueview.ExpertExtender.Listrotator` QUnit tests.
 
