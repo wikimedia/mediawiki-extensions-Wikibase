@@ -19,8 +19,6 @@ function createSitelinklistview( options ) {
 					this.$siteId = $( '<div/>' );
 					this.focus = function() {};
 					this.isEmpty = function() { return !this.options.value; };
-					this.isInitialValue = function() { return Boolean( this.options.value ); };
-					this.isValid = function() { return Boolean( this.options.value ); };
 					this.startEditing = function() {};
 					this.value = function() {
 						return this.options.value;

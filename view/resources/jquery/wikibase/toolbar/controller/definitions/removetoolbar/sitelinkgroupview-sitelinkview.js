@@ -45,7 +45,7 @@ $.wikibase.toolbarcontroller.definition( 'removetoolbar', {
 
 				var removetoolbar = $sitelinkview.data( 'removetoolbar' ),
 					isDisabled = removetoolbar.option( 'disabled' ),
-					isValid = sitelinkview.isValid(),
+					isValid = sitelinkview.value() !== null,
 					isEmpty = sitelinkview.isEmpty();
 
 				if ( ( !isValid || isEmpty ) && !isDisabled ) {
