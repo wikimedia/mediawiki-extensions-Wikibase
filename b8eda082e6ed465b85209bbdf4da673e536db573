@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6edb6f39_6c9be31b",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:02:28Z",
+      "side": 1,
+      "message": "Undocumented, and the property declaration is missing it seems.",
+      "range": {
+        "startLine": 25,
+        "startChar": 33,
+        "endLine": 25,
+        "endChar": 43
+      },
+      "revId": "b8eda082e6ed465b85209bbdf4da673e536db573",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_2cc39b0b",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:02:28Z",
+      "side": 1,
+      "message": "I wonder if all these methods should have JSDoc blocks? If not, why not?",
+      "range": {
+        "startLine": 57,
+        "startChar": 15,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "b8eda082e6ed465b85209bbdf4da673e536db573",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_0cdedfde",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:02:28Z",
+      "side": 1,
+      "message": "Other proxy() calls in this file have \"this\" as 2nd argument. Please be consistent.",
+      "range": {
+        "startLine": 61,
+        "startChar": 45,
+        "endLine": 61,
+        "endChar": 49
+      },
+      "revId": "b8eda082e6ed465b85209bbdf4da673e536db573",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_ccfa3740",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:02:28Z",
+      "side": 1,
+      "message": "To what does \"remove\" refer to? There is an undocumented _removeView parameter above.",
+      "range": {
+        "startLine": 61,
+        "startChar": 52,
+        "endLine": 61,
+        "endChar": 58
+      },
+      "revId": "b8eda082e6ed465b85209bbdf4da673e536db573",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_ccd317d6",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:02:28Z",
+      "side": 1,
+      "message": "Please use $ everywhere for consistency.",
+      "range": {
+        "startLine": 75,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 8
+      },
+      "revId": "b8eda082e6ed465b85209bbdf4da673e536db573",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_4cbd4763",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:02:28Z",
+      "side": 1,
+      "message": "This means the signature of the save() callback (or whatever it is) changed. Is this documented somewhere?",
+      "range": {
+        "startLine": 129,
+        "startChar": 39,
+        "endLine": 129,
+        "endChar": 50
+      },
+      "revId": "b8eda082e6ed465b85209bbdf4da673e536db573",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_2c4e3b9c",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:02:28Z",
+      "side": 1,
+      "message": "There is so much stuff happening with this \"error\" parameter, the allowed types and object structures should really be documented.",
+      "range": {
+        "startLine": 196,
+        "startChar": 19,
+        "endLine": 196,
+        "endChar": 24
+      },
+      "revId": "b8eda082e6ed465b85209bbdf4da673e536db573",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
