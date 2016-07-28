@@ -113,12 +113,12 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 
 		if ( $ok && $linksToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $linksToDelete ) . " links to delete." );
-			$ok = $dbw->deadlockLoop( array( $this, 'deleteLinksInternal' ), $item, $linksToDelete, $dbw );
+			$ok = $this->deleteLinksInternal( $item, $linksToDelete, $dbw );
 		}
 
 		if ( $ok && $linksToInsert ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ": " . count( $linksToInsert ) . " links to insert." );
-			$ok = $dbw->deadlockLoop( array( $this, 'insertLinksInternal' ), $item, $linksToInsert, $dbw );
+			$ok = $this->insertLinksInternal( $item, $linksToInsert, $dbw );
 		}
 
 		$this->releaseConnection( $dbw );

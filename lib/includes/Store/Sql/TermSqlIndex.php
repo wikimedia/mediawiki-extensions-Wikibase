@@ -117,12 +117,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		if ( $ok && $termsToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . count( $termsToDelete ) . ' terms to delete.' );
-			$ok = $dbw->deadlockLoop( array( $this, 'deleteTermsInternal' ), $entity->getId(), $termsToDelete, $dbw );
+			$ok = $this->deleteTermsInternal( $entity->getId(), $termsToDelete, $dbw );
 		}
 
 		if ( $ok && $termsToInsert ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . count( $termsToInsert ) . ' terms to insert.' );
-			$ok = $dbw->deadlockLoop( array( $this, 'insertTermsInternal' ), $entity, $termsToInsert, $dbw );
+			$ok = $this->insertTermsInternal( $entity, $termsToInsert, $dbw );
 		}
 
 		$this->releaseConnection( $dbw );
