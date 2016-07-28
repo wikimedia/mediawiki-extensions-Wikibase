@@ -121,6 +121,7 @@
 	"wikibase-shortcopyrightwarning": "点击“$1”即表示您接受[[$2|使用条款]]，并不可撤销地接受以$3发布您的贡献。",
 	"wikibase-copyrighttooltip-acknowledge": "我接受对我未来的编辑也采用这些条款。不再显示该信息。",
 	"wikibase-entityselector-more": "更多",
+	"wikibase-entityselector-notfound": "找不到匹配项目",
 	"wikibase-anonymouseditwarning": "警告：您没有登录。\n您的IP地址将被记录在该实体的编辑历史中。",
 	"wikibase-move-error": "您不能移动数据（data）名字空间的页面，并且您也不能移动页面至此。",
 	"wikibase-validator-sitelink-conflict": "网站链接$1已经被项$2使用。如果连接错误，您可以前往$2移除，或将之合并至此项。",

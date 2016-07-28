@@ -115,6 +115,7 @@
 	"wikibase-shortcopyrightwarning": "Cliccando su \"$1\", accetti le [[$2|condizioni d'uso]], ed accetti irrevocabilmente a rilasciare il tuo contributo in base alla $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Accetto questi termini per le mie future modifiche. Non mostrare di nuovo questo messaggio.",
 	"wikibase-entityselector-more": "altro",
+	"wikibase-entityselector-notfound": "Nessun risultato trovato",
 	"wikibase-anonymouseditwarning": "Attenzione: Accesso non effettuato.\nNella cronologia dell'entità verrà registrato il tuo indirizzo IP.",
 	"wikibase-move-error": "Non è possibile spostare le pagine che sono in un namespace dei dati e non è possibile spostare le pagine in esso.",
 	"wikibase-validator-sitelink-conflict": "Il collegamento $1 è già usato dall'elemento $2. Puoi rimuoverlo da $2 se non coincide, o unire gli elementi se sono sullo stesso argomento esatto.",

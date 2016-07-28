@@ -107,6 +107,7 @@
 	"wikibase-shortcopyrightwarning": "בלחיצה על \"$1\" היא הסכמה ל[[$2|תנאי השימוש]] ולשחרור של תרומתך לפי $3.",
 	"wikibase-copyrighttooltip-acknowledge": "קיבלתי את התנאים האלה לכל העריכות העתידיות שלי. אל תראו לי את ההודעה הזאת שוב.",
 	"wikibase-entityselector-more": "עוד",
+	"wikibase-entityselector-notfound": "לא נמצאה התאמה",
 	"wikibase-anonymouseditwarning": "אזהרה: לא נכנסת לחשבון.\nכתובת ה־IP שלך תירשם בהיסטוריית העריכות של הישות הזאת.",
 	"wikibase-move-error": "לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.",
 	"wikibase-validator-sitelink-conflict": "הקישור $1 כבר משמש בפריט $2. אפשר להסיר אותו מהדף $2 אם אינו שייך לשם או אם זה בדיוק אותו הנושא.",

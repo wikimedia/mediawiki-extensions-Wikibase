@@ -105,6 +105,7 @@
 	"wikibase-shortcopyrightwarning": "Ao premer en \"$1\", acepta os [[$2|termos de uso]] e acepta liberar irrevogablemente as súas achegas baixo a $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Acepto estes termos para as miñas futuras edicións. Non quero ver a mensaxe de novo.",
 	"wikibase-entityselector-more": "máis",
+	"wikibase-entityselector-notfound": "Non se atoparon coincidencias",
 	"wikibase-anonymouseditwarning": "Aviso: Non accedeu ao sistema.\nO seu enderezo IP quedará rexistrado no historial de revisións desta entidade.",
 	"wikibase-move-error": "Non pode trasladar as páxinas que se atopan nun espazo de nomes de datos, e tampouco pode mover páxinas a ese espazo de nomes.",
 	"wikibase-validator-sitelink-conflict": "A ligazón $1 xa se está usando no elemento $2. Pode eliminala de $2 se non pertence a ela ou fusionar os elementos se tratan exactamente do mesmo tema.",

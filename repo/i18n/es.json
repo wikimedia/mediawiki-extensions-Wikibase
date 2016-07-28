@@ -128,6 +128,7 @@
 	"wikibase-shortcopyrightwarning": "Al pulsar en «$1» aceptas los [[$2|términos de uso]] y aceptas liberar irrevocablemente tu contribución bajo la $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Acepto estos términos para mis futuras contribuciones. No volver a mostrar este mensaje otra vez.",
 	"wikibase-entityselector-more": "más",
+	"wikibase-entityselector-notfound": "No se encontraron coincidencias",
 	"wikibase-anonymouseditwarning": "Aviso: No has iniciado sesión.\nTu dirección IP quedará registrada en el historial de revisiones de esta entidad.",
 	"wikibase-move-error": "No puedes trasladar las páginas que se encuentran en el espacio de nombres de datos, y no puedes trasladar páginas hacia allí.",
 	"wikibase-validator-label-conflict": "La propiedad $3 ya tiene la etiqueta «$1» asociada con el código de idioma $2.",

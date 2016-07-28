@@ -103,6 +103,7 @@
 	"wikibase-shortcopyrightwarning": "「$1」をクリックすることで、あなたは[[$2|利用規約]]に同意し、自分の投稿内容を$3のもとで公開することに撤回不可能な形で同意することになります。",
 	"wikibase-copyrighttooltip-acknowledge": "今後の編集についてこれらの規約に同意します。次回からこのメッセージを表示しないでください。",
 	"wikibase-entityselector-more": "続き",
+	"wikibase-entityselector-notfound": "該当するものはありません",
 	"wikibase-anonymouseditwarning": "警告: ログインしていません。\n編集すると、IP アドレスがこの実体の編集履歴に記録されます。",
 	"wikibase-move-error": "データ名前空間内のページは移動できず、データ名前空間内にページを移動させることもできません。",
 	"wikibase-validator-sitelink-conflict": "リンク「$1」は既に項目「$2」で使われています。「$2」で使われているのが誤りならばそこから除去できますし、まったく同じ話題に関するものならば項目を統合することができます。",
