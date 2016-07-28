@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6edb6f39_d76ac47d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.statementview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-07-28T13:45:32Z",
+      "side": 1,
+      "message": "Is this really all we know about this object?",
+      "range": {
+        "startLine": 141,
+        "startChar": 15,
+        "endLine": 141,
+        "endChar": 21
+      },
+      "revId": "cafbe832990ed6d7f7a5c4b8aba2b9cb564e32be",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
