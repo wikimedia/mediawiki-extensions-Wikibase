@@ -281,8 +281,8 @@
 			.on( 'valueviewparse.' + this.variationBaseClass, function( event ) {
 				self._viewState.notify( 'invalid' );
 			} )
-			.on( 'valueviewafterparse.' + this.variationBaseClass, function( event ) {
-				self._viewState.notify( ( self._valueView.value() ) ? 'valid' : 'invalid' );
+			.on( 'valueviewchange.' + this.variationBaseClass, function( event ) {
+				self._viewState.notify( self._valueView.value() ? 'valid' : 'invalid' );
 			} )
 			.on( 'inputextenderanimation.' + this.variationBaseClass, function( animationEvent ) {
 				animationEvent.animationCallbacks.add( 'done', function() {
