@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6edb6f39_b129c8e4",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-28T09:29:06Z",
+      "side": 1,
+      "message": "Input. Bad name.",
+      "parentUuid": "ae0ba75f_35d4b84b",
+      "revId": "a1bbbe25b0be10e8cdfb7b553c6106d8037d4b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0ba75f_1538949a",
         "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-07-18T14:55:31Z",
       "side": 1,
       "message": "The nesting level of this is pretty awful. :-(",
+      "revId": "a1bbbe25b0be10e8cdfb7b553c6106d8037d4b13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_d1265411",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-28T09:29:06Z",
+      "side": 1,
+      "message": "The first conditional should be inverted, then it\u0027s better.",
+      "parentUuid": "ae0ba75f_1538949a",
       "revId": "a1bbbe25b0be10e8cdfb7b553c6106d8037d4b13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
