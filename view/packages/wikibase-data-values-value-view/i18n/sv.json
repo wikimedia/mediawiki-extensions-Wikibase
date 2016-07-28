@@ -17,8 +17,13 @@
 	"valueview-expert-timeinput-precision": "Precision:",
 	"valueview-expert-timeinput-calendar": "Kalender:",
 	"valueview-expertextender-calendarhint-gregorian": "(Gregorianska kalendern)",
+	"valueview-expertextender-calendarhint-julian": "(Julianska kalendern)",
 	"valueview-expertextender-calendarhint-switch-gregorian": "&rarr; ändra till Gregoriansk",
+	"valueview-expertextender-calendarhint-switch-julian": "&rarr; ändra till Julianska",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Språk (obligatoriskt):",
+	"valueview-expertextender-unitsuggester-label": "Enhet (valfritt):",
 	"valueview-preview-label": "kommer att visas som:",
-	"valueview-preview-novalue": "inget giltigt värde erkänns"
+	"valueview-preview-novalue": "inget giltigt värde erkänns",
+	"valueview-listrotator-manually": "ställ in manuellt"
 }
