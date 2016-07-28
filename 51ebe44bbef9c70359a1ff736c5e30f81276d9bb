@@ -16,6 +16,24 @@
       "revId": "51ebe44bbef9c70359a1ff736c5e30f81276d9bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_114a7cc8",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinklistview.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-28T09:26:41Z",
+      "side": 0,
+      "message": "No specific reason. I think you should be able to completely remove the refreshCounter call here and instead put it into the stopEditing logic, thus refreshing the counter exactly once per saving, no matter if there were pending sitelinks or not.",
+      "parentUuid": "4efa2b83_609afa67",
+      "revId": "51ebe44bbef9c70359a1ff736c5e30f81276d9bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
