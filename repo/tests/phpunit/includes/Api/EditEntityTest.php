@@ -131,8 +131,16 @@ class EditEntityTest extends WikibaseApiTestCase {
 					)
 				)
 			),
-			'add a label..' => array(
-				'p' => array( 'data' => '{"labels":{"en":{"language":"en","value":"A Label"}}}' ),
+			'add a label, (making sure some data fields are ignored)' => array(
+				'p' => array(
+					'data' => array(
+						'labels' => array( 'en' => array( 'language' => 'en', 'value' => 'A Label' ) ),
+						'length' => 'ignoreme!',
+						'count' => 'ignoreme!',
+						'touched' => 'ignoreme!',
+						'modified' => 'ignoreme!',
+					),
+				),
 				'e' => array(
 					'sitelinks' => array(
 						array(

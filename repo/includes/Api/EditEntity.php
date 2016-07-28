@@ -617,6 +617,7 @@ class EditEntity extends ModifyEntity {
 			'length',
 			'count',
 			'touched',
+			'modified',
 			// checked props
 			'id',
 			'type',
