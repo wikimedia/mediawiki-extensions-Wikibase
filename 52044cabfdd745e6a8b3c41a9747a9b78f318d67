@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6edb6f39_31c3f80b",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-28T09:39:49Z",
+      "side": 1,
+      "message": "Theoretically possible, but on a conceptional level I\u0027d rather have the controller pass the value to the view.",
+      "parentUuid": "6eed2fc9_ec2c1e92",
+      "revId": "52044cabfdd745e6a8b3c41a9747a9b78f318d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6eed2fc9_8c53da19",
         "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
         "patchSetId": 3
@@ -81,6 +99,24 @@
       "writtenOn": "2016-07-27T09:46:26Z",
       "side": 1,
       "message": "This is strange",
+      "revId": "52044cabfdd745e6a8b3c41a9747a9b78f318d67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edb6f39_f1e0b095",
+        "filename": "view/resources/wikibase/view/ToolbarFactory.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1366
+      },
+      "writtenOn": "2016-07-28T09:39:49Z",
+      "side": 1,
+      "message": "It\u0027s pretty similar to ViewFactory::_getView.",
+      "parentUuid": "6eed2fc9_cc6322d9",
       "revId": "52044cabfdd745e6a8b3c41a9747a9b78f318d67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
