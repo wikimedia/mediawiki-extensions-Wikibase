@@ -2,6 +2,8 @@
 
 ## 0.17.2 (2016-07-28)
 * Moved `valueviewchange` event after actual changing the value.
+* `jQuery.ui.suggester` now also closes when tabbing out and reopens on click.
+* `jQuery.ui.toggler` now uses the default MediaWiki link color.
 
 ## 0.17.1 (2016-04-13)
 * Fixed `jQuery.focusAt` and `jquery.valueview.ExpertExtender.Listrotator` QUnit tests.
