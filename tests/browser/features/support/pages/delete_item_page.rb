@@ -14,6 +14,7 @@ class DeleteItemPage
 
   def delete_item(url)
     navigate_to(url + '&action=delete')
+    sleep 2
     delete
     return_to_element.when_visible
   end
