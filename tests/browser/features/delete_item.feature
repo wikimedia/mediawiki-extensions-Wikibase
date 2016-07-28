@@ -4,7 +4,7 @@
 #
 # feature the delete of an item
 
-@chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @wikidata.beta.wmflabs.org
+@integration @chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @wikidata.beta.wmflabs.org
 Feature: Delete item
 
 Scenario: Delete item
