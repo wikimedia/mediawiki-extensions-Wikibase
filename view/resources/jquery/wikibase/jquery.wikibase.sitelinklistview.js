@@ -333,7 +333,7 @@ $.widget( 'wikibase.sitelinklistview', PARENT, {
 			// the siteId input field which does not resolve to a valid siteId and which is not
 			// empty.
 			var sitelinkview = lia.liInstance( $( this ) );
-			isValid = sitelinkview.isValid()
+			isValid = sitelinkview.value() !== null
 				|| sitelinkview.isEmpty()
 				// Previously existing values do always feature a valid site id:
 				|| Boolean( sitelinkview.option( 'value' ) );
