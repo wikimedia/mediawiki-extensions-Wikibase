@@ -97,40 +97,39 @@ class EntityPerPageTable implements EntityPerPage {
 	}
 
 	/**
-	 * @param array $values
-	 *
-	 * @throws DBError
+	 * @param array $row
 	 */
-	private function addRowInternal( array $values ) {
-		$conflictConds = $this->getConflictingRowConditions( $values );
-
+	private function addRowInternal( array $row ) {
 		$dbw = wfGetDB( DB_MASTER );
-
-		$ok = $dbw->deadlockLoop(
-			function ( DatabaseBase $dbw, array $values, array $conflictConds ) {
-				if ( $conflictConds ) {
-					$where = $dbw->makeList( $conflictConds, LIST_OR );
-					$dbw->delete(
-						'wb_entity_per_page',
-						$where,
-						__METHOD__
-					);
-				}
-
-				$dbw->insert(
-					'wb_entity_per_page',
-					$values,
-					__METHOD__
-				);
-
-				return true;
-			},
-			$dbw, $values, $conflictConds
+		// Try to add the row and see it it conflicts on (id,type) or (page_id).
+		// With innodb, this only sets IX gap and SH/EX record locks. This is useful for new
+		// page/entity creation, as just doing DELETE+INSERT would put SH gap locks on the range
+		// [highest page/entity ID, +infinity). Aside from serializing page creation, any case
+		// where 2+ such transactions made it past DELETE would deadlock on IX/SH gap locks.
+		$dbw->insert(
+			'wb_entity_per_page',
+			$row,
+			__METHOD__,
+			[ 'IGNORE' ]
 		);
-
-		if ( !$ok ) {
-			throw new DBError( $dbw, 'Failed to insert a row into wb_entity_per_page, the deadlock retry limit was exceeded.' );
+		if ( $dbw->affectedRows() > 0 ) {
+			return; // no conflicts
 		}
+
+		// Delete the conflicting rows...
+		$conflictConds = $this->getConflictingRowConditions( $row );
+		$where = $dbw->makeList( $conflictConds, LIST_OR );
+		$dbw->delete(
+			'wb_entity_per_page',
+			$where,
+			__METHOD__
+		);
+		// ...and try to insert again
+		$dbw->insert(
+			'wb_entity_per_page',
+			$row,
+			__METHOD__
+		);
 	}
 
 	private function getConflictingRowConditions( array $values ) {
