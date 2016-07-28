@@ -656,7 +656,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	_updateValue: function() {
 		var self = this;
 
-		this._parseValue()
+		return this._parseValue()
 			.done( function( parsedValue ) {
 				self._value = parsedValue;
 
@@ -944,8 +944,9 @@ $.widget( 'valueview.valueview', PARENT, {
 
 				if ( changeDetected ) {
 					self.__lastValueCharacteristics = newValueCharacteristics;
-					self._trigger( 'change' );
-					self._updateValue();
+					self._updateValue().done( function() {
+						self._trigger( 'change' );
+					} );
 				}
 			}
 		} );
