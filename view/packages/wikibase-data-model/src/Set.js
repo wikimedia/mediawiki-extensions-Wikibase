@@ -91,11 +91,15 @@ var SELF = wb.datamodel.Set = util.inherit(
 
 	/**
 	 * @inheritdoc
-	 *
-	 * @throws {Error} when being called since a set cannot be converted to an array.
 	 */
 	toArray: function() {
-		throw new Error( 'Set cannot be exported to an array' );
+		var items = [];
+
+		for( var key in this._items ) {
+			items.push( this._items[key] );
+		}
+
+		return items;
 	},
 
 	/**

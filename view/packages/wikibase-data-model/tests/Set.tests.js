@@ -388,6 +388,24 @@ QUnit.test( 'equals()', function( assert ) {
 	);
 } );
 
+QUnit.test( 'toArray()', function( assert ) {
+	assert.expect( 2 );
+	var item = getTestItems( 1 )[0],
+		set = createSet( [item] ),
+		actual = set.toArray();
+
+	assert.ok(
+		actual.length === 1 && actual[0] === item,
+		'toArray() returns original items.'
+	);
+
+	assert.notStrictEqual(
+		set.toArray(),
+		actual,
+		'toArray() does clone.'
+	);
+} );
+
 QUnit.test( 'hasItem()', function( assert ) {
 	assert.expect( 3 );
 	var items = getTestItems( 2 ),
