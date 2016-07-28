@@ -19,7 +19,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
-class ScribuntoLuaWikibaseInProcessEntityCacheTest extends Scribunto_LuaWikibaseLibraryTestCase {
+class Scribunto_LuaWikibaseLibraryInProcessEntityCacheTest extends Scribunto_LuaWikibaseLibraryTestCase {
 
 	protected static $moduleName = 'LuaWikibaseLibraryInProcessEntityCacheTests';
 
