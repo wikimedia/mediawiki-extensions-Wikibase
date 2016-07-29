@@ -18,6 +18,16 @@ mw.wikibase.getEntity( 'Q42' ) -- Returns a mw.wikibase.entity table for the Ite
 === mw.wikibase.getEntityObject ===
 Alias for [[#mw.wikibase.getEntity|mw.wikibase.getEntity]].
 
+=== mw.wikibase.getEntityIdForCurrentPage ===
+<code>wikibase.getEntityIdForCurrentPage()</code><br>
+
+Gets the Item id of the item connected to the current page.
+
+An example call might look like this:
+<source lang="lua">
+mw.wikibase.getEntityIdForCurrentPage() -- Returns the Item id as string, like "Q42"
+</source>
+
 == mw.wikibase.getEntityUrl ==
 <code>wikibase.getEntityUrl()</code><br>
 <code>wikibase.getEntityUrl( id )</code><br>
