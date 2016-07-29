@@ -36,7 +36,6 @@ return call_user_func( function() {
 			'messages' => array(
 				'wikibase-error-unexpected',
 				'wikibase-error-remove-timeout',
-				'wikibase-error-ui-client-error',
 			),
 		),
 	);
