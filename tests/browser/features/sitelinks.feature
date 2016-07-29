@@ -21,7 +21,7 @@ Feature: Edit sitelinks
       And Sitelink counter should be there
       And There should be 0 sitelinks in the list
 
-  @ui_only
+  @integration @ui_only
   Scenario: Click edit button
     When I click the sitelink edit button
     Then Sitelink edit button should not be there
