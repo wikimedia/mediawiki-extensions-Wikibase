@@ -47,8 +47,8 @@ Feature: Edit description
      | click the header save button |
      | press the RETURN key in the description input field |
 
-  @save_description @modify_entity
-  Scenario Outline: Save description
+  @integration @save_description @modify_entity
+  Scenario Outline: Save description and reload
     When I click the header edit button
       And I enter "MODIFIED DESCRIPTION" as description
       And I <save>
