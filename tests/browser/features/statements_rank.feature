@@ -60,7 +60,7 @@ Feature: Setting ranks of statements
       And Statement edit button for claim 1 in group 1 should be there
       And Claim value input element should not be there
 
-  @modify_entity
+  @integration @modify_entity
   Scenario: Change the rank, save and reload
     When I edit claim 1 in group 1
       And I click the rank selector of claim 1 in group 1
