@@ -58,19 +58,10 @@ function wikibase.setupInterface()
 	-- Caching variable for the entity id string belonging to the current page (nil if page is not linked to an entity)
 	local pageEntityId = false
 
-	-- Get the entity id for the current page. Cached
-	local getEntityIdForCurrentPage = function()
-		if pageEntityId == false then
-			pageEntityId = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
-		end
-
-		return pageEntityId
-	end
-
 	-- Get the entity id of the connected item, if id is nil. Cached.
 	local getIdOfConnectedItemIfNil = function( id )
 		if id == nil then
-			return getEntityIdForCurrentPage()
+			return wikibase.getEntityIdForCurrentPage()
 		end
 
 		return id
@@ -81,7 +72,7 @@ function wikibase.setupInterface()
 		if getCachedEntity( id ) == nil then
 			local entity = php.getEntity( id )
 
-			if id ~= getEntityIdForCurrentPage() then
+			if id ~= wikibase.getEntityIdForCurrentPage() then
 				-- Accessing an arbitrary item is supposed to increment the expensive function count
 				php.incrementExpensiveFunctionCount()
 			end
@@ -103,6 +94,16 @@ function wikibase.setupInterface()
 		end
 	end
 
+	-- Get the entity id for the current page. Cached.
+	-- Nil if not linked to an entity.
+	wikibase.getEntityIdForCurrentPage = function()
+		if pageEntityId == false then
+			pageEntityId = php.getEntityId( tostring( mw.title.getCurrentTitle().prefixedText ) )
+		end
+
+		return pageEntityId
+	end
+
 	-- Get the mw.wikibase.entity object for the current page or for the
 	-- specified id.
 	--
@@ -116,7 +117,7 @@ function wikibase.setupInterface()
 			return nil
 		end
 
-		if not php.getSetting( 'allowArbitraryDataAccess' ) and id ~= getEntityIdForCurrentPage() then
+		if not php.getSetting( 'allowArbitraryDataAccess' ) and id ~= wikibase.getEntityIdForCurrentPage() then
 			error( 'Access to arbitrary items has been disabled.', 2 )
 		end
 

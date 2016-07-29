@@ -54,6 +54,9 @@ end
 local tests = {
 	-- Integration tests
 
+	{ name = 'mw.wikibase.getEntityIdForCurrentPage', func = mw.wikibase.getEntityIdForCurrentPage,
+	  expect = { 'Q32487' }
+	},
 	{ name = 'mw.wikibase.getEntity (type)', func = testGetEntityType, type='ToString',
 	  expect = { 'table' }
 	},
