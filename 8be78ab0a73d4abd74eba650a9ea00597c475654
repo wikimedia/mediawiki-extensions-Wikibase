@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb2c7f3_9afdc93b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-07-30T16:20:11Z",
+      "side": 1,
+      "message": "should be @return {wikibase.datamodel.SiteLinkSet}",
+      "revId": "8be78ab0a73d4abd74eba650a9ea00597c475654",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
