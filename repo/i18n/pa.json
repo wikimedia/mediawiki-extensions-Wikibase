@@ -30,7 +30,6 @@
 	"wikibase-move-up": "ਉਤਾਂਹ ਘੱਲੋ",
 	"wikibase-move-down": "ਹੇਠਾਂ ਘੱਲੋ",
 	"wikibase-undo-title": "\"$1\" ਦੀ ਸੋਧ ਨਕਾਰੀ ਜਾ ਰਹੀ ਹੈ",
-	"wikibase-aliases-empty": "ਕੋਈ ਨਾਮ ਪਰਿਭਾਸ਼ਿਤ ਨਹੀਂ",
 	"wikibase-statementview-rank-normal": "ਆਮ ਦਰਜਾ",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|ਹਵਾਲਾ|ਹਵਾਲੇ}}",
 	"wikibase-itembytitle-lookup-site": "ਸਾਈਟ:",

@@ -110,6 +110,7 @@
 	"wikibase-shortcopyrightwarning": "Klikając „$1”, zgadzasz się na [[$2|warunki użytkowania]] oraz wyrażasz nieodwołalną zgodę na udostępnianie twojego wkładu na warunkach $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Przyjmuję te warunki dla moich przyszłych edycji. Nie pokazuj więcej tego komunikatu.",
 	"wikibase-entityselector-more": "więcej",
+	"wikibase-entityselector-notfound": "Brak wyników",
 	"wikibase-anonymouseditwarning": "Ostrzeżenie: Nie jesteś zalogowany.\nW historii edycji tej encji zostanie zapisany Twój adres IP.",
 	"wikibase-move-error": "Nie można przenosić stron, które znajdują się w przestrzeni nazw danych, a także nie można przenosić do niej stron.",
 	"wikibase-validator-sitelink-conflict": "Odnośnik do strony $1 jest już wykorzystywany przez element $2. Możesz usunąć go z $2, jeśli nie jest z nim związany, lub połączyć elementy, jeśli odnoszą się dokładnie do tego samego tematu.",

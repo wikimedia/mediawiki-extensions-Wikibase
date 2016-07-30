@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Babanwalia",
-			"Satdeep gill"
+			"Satdeep gill",
+			"Tow"
 		]
 	},
 	"tooltip-t-wikibase": "ਡਾਟਾ ਭੰਡਾਰ ਦੀ ਆਈਟਮ ਨਾਲ ਲਿੰਕ ਕਰੋ",
 	"wikibase-comment-update": "{{WBREPONAME}} ਆਈਟਮ ਬਦਲੀ ਗਈ",
 	"wikibase-dataitem": "{{WBREPONAME}} ਆਈਟਮ",
 	"wikibase-editlinks": "ਜੋੜ ਸੋਧੋ",
-	"wikibase-editlinkstitle": "ਅੰਤਰਭਾਸ਼ਾਈ ਲਿੰਕ ਸੋਧੋ",
+	"wikibase-editlinkstitle": "ਅੰਤਰਭਾਸ਼ਾਈ ਜੋੜ ਸੋਧੋ",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ਲੁਕਾਉ",
 	"wikibase-rc-hide-wikidata-show": "ਵਿਖਾਉ",
