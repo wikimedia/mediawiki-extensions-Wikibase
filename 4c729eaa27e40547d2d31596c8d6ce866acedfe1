@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb2c7f3_80a0fc3f",
+        "filename": "view/resources/wikibase/view/ToolbarViewController.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-07-30T22:51:37Z",
+      "side": 1,
+      "message": "\"Not needed on\" instead of \"Not needed an\"?",
+      "revId": "4c729eaa27e40547d2d31596c8d6ce866acedfe1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
