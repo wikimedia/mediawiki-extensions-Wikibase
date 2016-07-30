@@ -207,7 +207,12 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	},
 
 	_save: function() {
-		return this.options.siteLinkSetsChanger.save( this.value(), this.options.value );
+		var sitelinklistview = this.$sitelinklistview.data( 'sitelinklistview' );
+
+		return this.options.siteLinkSetsChanger.save(
+			new wb.datamodel.SiteLinkSet( sitelinklistview.value() ),
+			new wb.datamodel.SiteLinkSet( this.options.value )
+		);
 	},
 
 	/**
