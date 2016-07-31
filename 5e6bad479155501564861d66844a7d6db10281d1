@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb2c7f3_6cf75ff3",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-07-31T23:13:15Z",
+      "side": 0,
+      "message": "does this mean we no longer need unstub here?",
+      "revId": "5e6bad479155501564861d66844a7d6db10281d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
