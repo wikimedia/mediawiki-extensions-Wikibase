@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\EntityRevisionLookupTest;
 use Wikibase\Lib\Tests\MockRepository;
@@ -45,6 +46,25 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		}
 
 		return new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+	}
+
+	public function testGetEntityRevision_byRevisionIdWithMode() {
+		$id = new ItemId( 'Q123' );
+		$item = new Item( $id );
+
+		$mock = $this->getMock( EntityRevisionLookup::class );
+		$mock->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->with( $id, 1234, 'load-mode' )
+			->will( $this->returnValue( $item ) );
+
+		$lookup = new CachingEntityRevisionLookup( $mock, new HashBagOStuff() );
+		$lookup->setVerifyRevision( false );
+
+		$this->assertSame(
+			$item,
+			$lookup->getEntityRevision( $id, 1234, 'load-mode' )
+		);
 	}
 
 	public function testWithRevisionVerification() {

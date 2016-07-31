@@ -55,13 +55,21 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @see   EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE,
+	 *        LATEST_FROM_SLAVE_WITH_FALLBACK or LATEST_FROM_MASTER.
+	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER. Will be ignored if a mode has already been given as
+	 *        second parameter.
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
+	public function getEntityRevision(
+		EntityId $entityId,
+		$revisionId = self::LATEST_FROM_SLAVE_WITH_FALLBACK,
+		$mode = self::LATEST_FROM_SLAVE_WITH_FALLBACK
+	) {
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
 
@@ -76,7 +84,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 		$entityRevision = null;
 
 		if ( is_int( $revisionId ) ) {
-			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityId, $revisionId );
+			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
 		} else {
 			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $revisionId );
 			$row = $rows[$entityId->getSerialization()];

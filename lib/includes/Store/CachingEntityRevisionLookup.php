@@ -96,12 +96,20 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * still the latest. Otherwise, any cached revision will be used if $revisionId=0.
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE,
+	 *        LATEST_FROM_SLAVE_WITH_FALLBACK or LATEST_FROM_MASTER.
+	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER. Will be ignored if a mode has already been given as
+	 *        second parameter.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
+	public function getEntityRevision(
+		EntityId $entityId,
+		$revisionId = self::LATEST_FROM_SLAVE_WITH_FALLBACK,
+		$mode = self::LATEST_FROM_SLAVE_WITH_FALLBACK
+	) {
 		$key = $this->getCacheKey( $entityId );
 
 		if ( $revisionId === 0 ) {
@@ -129,7 +137,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 		}
 
 		if ( $entityRevision === false ) {
-			$entityRevision = $this->fetchEntityRevision( $entityId, $revisionId );
+			$entityRevision = $this->fetchEntityRevision( $entityId, $revisionId, $mode );
 		}
 
 		return $entityRevision;
@@ -140,13 +148,14 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 *
 	 * @param EntityId $entityId
 	 * @param int|string $revisionId
+	 * @param string $mode
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	private function fetchEntityRevision( EntityId $entityId, $revisionId ) {
+	private function fetchEntityRevision( EntityId $entityId, $revisionId, $mode ) {
 		$key = $this->getCacheKey( $entityId );
-		$entityRevision = $this->lookup->getEntityRevision( $entityId, $revisionId );
+		$entityRevision = $this->lookup->getEntityRevision( $entityId, $revisionId, $mode );
 
 		if ( !is_int( $revisionId ) ) {
 			if ( $entityRevision === null ) {

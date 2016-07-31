@@ -126,4 +126,32 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTest {
 		$lookup->getEntityRevision( new ItemId( 'Q42' ) );
 	}
 
+	public function testGetEntityRevision_byRevisionIdWithMode() {
+		$testEntityRevision = reset( self::$testEntities );
+		$entityId = $testEntityRevision->getEntity()->getId();
+		$revisionId = $testEntityRevision->getRevisionId();
+
+		$realMetaDataLookup = new WikiPageEntityMetaDataLookup( $this->getEntityNamespaceLookup() );
+		$metaDataLookup = $this->getMockBuilder( WikiPageEntityMetaDataLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$metaDataLookup->expects( $this->once() )
+			->method( 'loadRevisionInformationByRevisionId' )
+			->with( $entityId, $revisionId, 'load-mode' )
+			->will( $this->returnValue(
+				$realMetaDataLookup->loadRevisionInformationByRevisionId( $entityId, $revisionId )
+			) );
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			WikibaseRepo::getDefaultInstance()->getEntityContentDataCodec(),
+			$metaDataLookup,
+			false
+		);
+
+		$entityRevision = $lookup->getEntityRevision( $entityId, $revisionId, 'load-mode' );
+
+		$this->assertSame( $revisionId, $entityRevision->getRevisionId() );
+	}
+
 }
