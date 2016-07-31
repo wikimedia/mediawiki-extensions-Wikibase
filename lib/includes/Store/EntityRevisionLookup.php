@@ -23,6 +23,13 @@ interface EntityRevisionLookup {
 	const LATEST_FROM_SLAVE = 'slave';
 
 	/**
+	 * Flag used to indicate that loading slightly lagged data is fine (like
+	 * LATEST_FROM_SLAVE), but in case an entity or revision couldn't be found,
+	 * we try loading it from master.
+	 */
+	const LATEST_FROM_SLAVE_WITH_FALLBACK = 'master_fallback';
+
+	/**
 	 * Flag to use instead of a revision ID to indicate that the latest revision is desired,
 	 * and it is essential to assert that there really is no newer version, to avoid data loss
 	 * or conflicts. This would generally be the case when loading an entity for
@@ -41,15 +48,19 @@ interface EntityRevisionLookup {
 	 * @since 0.4
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER
-	 *        to indicate that the latest revision is required. LATEST_FROM_MASTER would force the
-	 *        revision to be determined from the canonical master database.
+	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
+	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER.
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE );
+	public function getEntityRevision(
+		EntityId $entityId,
+		$revisionId = 0,
+		$mode = self::LATEST_FROM_SLAVE_WITH_FALLBACK
+	);
 
 	/**
 	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.

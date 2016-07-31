@@ -171,7 +171,11 @@ class RedirectCreationInteractor {
 	 */
 	private function checkCanCreateRedirect( EntityId $entityId ) {
 		try {
-			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$revision = $this->entityRevisionLookup->getEntityRevision(
+				$entityId,
+				0,
+				EntityRevisionLookup::LATEST_FROM_MASTER
+			);
 
 			if ( !$revision ) {
 				$title = $this->entityTitleLookup->getTitleForId( $entityId );

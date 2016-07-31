@@ -186,15 +186,15 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @since 0.5
 	 *
 	 * @param EntityId $id
-	 * @param int|string $revisionId
 	 *
 	 * @throws MessageException
 	 * @throws UserInputException
 	 * @return EntityRevision
 	 */
-	protected function loadEntity( EntityId $id, $revisionId = EntityRevisionLookup::LATEST_FROM_MASTER ) {
+	protected function loadEntity( EntityId $id ) {
 		try {
-			$entity = $this->entityRevisionLookup->getEntityRevision( $id, $revisionId );
+			$entity = $this->entityRevisionLookup
+				->getEntityRevision( $id, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
 
 			if ( $entity === null ) {
 				throw new UserInputException(

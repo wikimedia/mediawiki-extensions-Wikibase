@@ -33,10 +33,14 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformation' )
-			->with( array(
-				$q1->getSerialization() => $q1,
-				$q3->getSerialization() => $q3,
-				$q2->getSerialization() => $q2 ) )
+			->with(
+				array(
+					$q1->getSerialization() => $q1,
+					$q3->getSerialization() => $q3,
+					$q2->getSerialization() => $q2
+				),
+				$fromSlave
+			)
 			->will( $this->returnValue( array(
 				'Q1' => 'Nyan',
 				'Q2' => 'cat',
@@ -193,6 +197,29 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		);
 	}
 
+	/**
+	 * Make sure we do the actual fetch with the right $mode set.
+	 */
+	public function testLoadRevisionInformation_mode() {
+		$q1 = new ItemId( 'Q1' );
+
+		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
+		$lookup->expects( $this->once() )
+			->method( 'loadRevisionInformation' )
+			->with(
+				array( $q1->getSerialization() => $q1 ),
+				'load-mode'
+			)
+			->will( $this->returnValue( array( 'Q1' => 'data' ) ) );
+
+		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );
+
+		// This loads Q1 with $mode = 'load-mode'
+		$result = $accessor->loadRevisionInformation( array( $q1 ), 'load-mode' );
+
+		$this->assertSame( array( 'Q1' => 'data' ), $result );
+	}
+
 	public function testLoadRevisionInformationByRevisionId() {
 		// This function is a very simple, it's just a wrapper around the
 		// lookup function.
@@ -201,7 +228,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends PHPUnit_Framework_Te
 		$lookup = $this->getMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
-			->with( $q1, 123 )
+			->with( $q1, 123, EntityRevisionLookup::LATEST_FROM_MASTER )
 			->will( $this->returnValue( 'passthrough' ) );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup );

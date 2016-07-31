@@ -137,7 +137,9 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 * @see WikiPageEntityMetaDataAccessor::loadRevisionInformation
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE,
+	 *     EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @return stdClass[] Array of entity id serialization => object.
 	 */
@@ -159,7 +161,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 		}
 
 		$this->prefetch( $entityIds );
-		$this->doFetch();
+		$this->doFetch( $mode );
 
 		$data = array();
 		foreach ( $entityIds as $entityId ) {
@@ -174,23 +176,27 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements EntityPrefetcher, Ent
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE,
+	 *     EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @return stdClass|bool false if no such entity exists
 	 */
-	public function loadRevisionInformationByRevisionId( EntityId $entityId, $revisionId ) {
+	public function loadRevisionInformationByRevisionId(
+		EntityId $entityId,
+		$revisionId,
+		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
 		// Caching this would have little or no benefit, but would be rather complex.
-		return $this->lookup->loadRevisionInformationByRevisionId( $entityId, $revisionId );
+		return $this->lookup->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
 	}
 
-	private function doFetch() {
+	private function doFetch( $mode ) {
 		if ( empty( $this->toFetch ) ) {
 			return;
 		}
 
-		$data = $this->lookup->loadRevisionInformation(
-			$this->toFetch,
-			EntityRevisionLookup::LATEST_FROM_SLAVE
-		);
+		$data = $this->lookup->loadRevisionInformation( $this->toFetch, $mode );
 
 		// Store the data, including cache misses
 		$this->store( $data );

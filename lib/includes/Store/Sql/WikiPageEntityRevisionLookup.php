@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\EntityRevision;
+use Wikimedia\Assert\Assert;
 
 /**
  * Implements an entity repo based on blobs stored in wiki pages on a locally reachable
@@ -55,30 +56,32 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @see   EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
+	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER.
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
+	public function getEntityRevision(
+		EntityId $entityId,
+		$revisionId = 0,
+		$mode = self::LATEST_FROM_SLAVE_WITH_FALLBACK
+	) {
+		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
+		Assert::parameterType( 'string', $mode, '$mode' );
+
 		wfDebugLog( __CLASS__, __FUNCTION__ . ': Looking up entity ' . $entityId
 			. " (revision $revisionId)." );
-
-		// default changed from false to 0 and then to LATEST_FROM_SLAVE
-		if ( $revisionId === false || $revisionId === 0 ) {
-			wfWarn( 'getEntityRevision() called with $revisionId = false or 0, ' .
-				'use EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER instead.' );
-			$revisionId = self::LATEST_FROM_SLAVE;
-		}
 
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = null;
 
-		if ( is_int( $revisionId ) ) {
-			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityId, $revisionId );
+		if ( $revisionId > 0 ) {
+			$row = $this->entityMetaDataAccessor->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
 		} else {
-			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $revisionId );
+			$rows = $this->entityMetaDataAccessor->loadRevisionInformation( array( $entityId ), $mode );
 			$row = $rows[$entityId->getSerialization()];
 		}
 
@@ -111,11 +114,11 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 			$actualEntityId = $entityRevision->getEntity()->getId()->getSerialization();
 
 			// Get the revision id we actually loaded, if none was passed explicitly
-			$revisionId = is_int( $revisionId ) ? $revisionId : $entityRevision->getRevisionId();
+			$revisionId = $revisionId ?: $entityRevision->getRevisionId();
 			throw new BadRevisionException( "Revision $revisionId belongs to $actualEntityId instead of expected $entityId" );
 		}
 
-		if ( is_int( $revisionId ) && $entityRevision === null ) {
+		if ( $revisionId > 0 && $entityRevision === null ) {
 			// If a revision ID was specified, but that revision doesn't exist:
 			throw new BadRevisionException( "No such revision found for $entityId: $revisionId" );
 		}
