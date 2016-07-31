@@ -117,14 +117,6 @@ class StatementGroupRendererFactory {
 	 * @throws MWException
 	 */
 	private function newLanguageAwareRenderer( $language, UsageAccumulator $usageAccumulator ) {
-		if ( !( $language instanceof Language ) ) {
-			wfDebugLog(
-				'T107711',
-				get_class( $language ) . ' is not a Language object.',
-				'all',
-				array( 'trace' => wfBacktrace( true ) )
-			);
-		}
 		StubUserLang::unstub( $language );
 
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
