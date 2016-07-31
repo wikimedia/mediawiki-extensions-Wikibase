@@ -288,6 +288,8 @@ class SearchEntities extends ApiBase {
 				'apihelp-wbsearchentities-example-1',
 			'action=wbsearchentities&search=abc&language=en&limit=50' =>
 				'apihelp-wbsearchentities-example-2',
+			'action=wbsearchentities&search=abc&language=en&limit=2&continue=2' =>
+				'apihelp-wbsearchentities-example-4',
 			'action=wbsearchentities&search=alphabet&language=en&type=property' =>
 				'apihelp-wbsearchentities-example-3',
 		);
