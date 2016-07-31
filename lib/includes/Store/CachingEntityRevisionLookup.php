@@ -96,12 +96,13 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * still the latest. Otherwise, any cached revision will be used if $revisionId=0.
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE,
+	 *     LATEST_FROM_SLAVE_WITH_FALLBACK or LATEST_FROM_MASTER.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
+	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE_WITH_FALLBACK ) {
 		$key = $this->getCacheKey( $entityId );
 
 		if ( $revisionId === 0 ) {

@@ -121,13 +121,14 @@ class MockRepository implements
 	 * @see EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE,
+	 *     LATEST_FROM_SLAVE_WITH_FALLBACK or LATEST_FROM_MASTER.
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
+	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE_WITH_FALLBACK ) {
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
