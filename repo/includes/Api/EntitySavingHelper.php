@@ -55,7 +55,7 @@ class EntitySavingHelper {
 	}
 
 	/**
-	 * Attempts to save the new entity content, chile first checking for permissions,
+	 * Attempts to save the new entity content, while first checking for permissions,
 	 * edit conflicts, etc. Saving is done via EditEntityHandler::attemptSave().
 	 *
 	 * This method automatically takes into account several parameters:
