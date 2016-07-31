@@ -16,6 +16,24 @@
       "revId": "5e6bad479155501564861d66844a7d6db10281d1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb2c7f3_ecea8f04",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/StatementGroupRendererFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-07-31T23:19:27Z",
+      "side": 0,
+      "message": "Yes! it should do, and should also mean we can add a typehint!\n(I\u0027ll amend it in the morning)",
+      "parentUuid": "aeb2c7f3_6cf75ff3",
+      "revId": "5e6bad479155501564861d66844a7d6db10281d1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
