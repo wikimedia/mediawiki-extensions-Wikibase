@@ -551,6 +551,7 @@
 	"apihelp-wbsearchentities-example-1": "{{doc-apihelp-example|wbsearchentities}}",
 	"apihelp-wbsearchentities-example-2": "{{doc-apihelp-example|wbsearchentities}}",
 	"apihelp-wbsearchentities-example-3": "{{doc-apihelp-example|wbsearchentities}}",
+	"apihelp-wbsearchentities-example-4": "{{doc-apihelp-example|wbsearchentities}}",
 	"apihelp-query+wbsearch-description": "{{doc-apihelp-description|query+wbsearch}}",
 	"apihelp-query+wbsearch-param-search": "{{doc-apihelp-param|query+wbsearch|search}}",
 	"apihelp-query+wbsearch-param-language": "{{doc-apihelp-param|query+wbsearch|language}}",
