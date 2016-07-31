@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0efd9372_c24f40bf",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-07-31T12:40:48Z",
+      "side": 1,
+      "message": "I don\u0027t think so, no.",
+      "parentUuid": "0efd9372_c41633ac",
+      "revId": "5eb8c5dbd8304ce16db2a145729590ca190671a8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0efd9372_845c2b50",
         "filename": "client/i18n/en.json",
         "patchSetId": 26
