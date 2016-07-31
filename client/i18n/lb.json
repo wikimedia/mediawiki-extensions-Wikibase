@@ -57,5 +57,6 @@
 	"wikibase-pageswithbadges-submit": "Säite weisen",
 	"wikibase-pageinfo-entity-id": "ID vum {{WBREPONAME}}-Element",
 	"wikibase-pageinfo-entity-id-none": "Keng",
-	"wikibase-otherprojects": "An anere Projeten"
+	"wikibase-otherprojects": "An anere Projeten",
+	"notification-link-text-view-item": "Element {{GENDER:$1|weisen}}"
 }

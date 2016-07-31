@@ -16,7 +16,7 @@
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",
 	"tooltip-t-wikibase": "데이터 저장소에 연결된 항목을 가리키는 링크",
-	"wikibase-after-page-move": "또한 이동된 문서에 언어 링크를 유지하기 위해 [$1 관련된 {{WBREPONAME}} 항목]을  업데이트해야 합니다.",
+	"wikibase-after-page-move": "또한 이동된 문서에 언어 링크를 유지하기 위해 [$1 관련된 {{WBREPONAME}} 항목]을 업데이트해야 합니다.",
 	"wikibase-after-page-move-queued": "이 문서와 연결된 [$1 {{WBREPONAME}} 항목]은 곧 자동으로 갱신됩니다.",
 	"wikibase-after-page-delete-queued": "이 문서와 연결된 [$1 {{WBREPONAME}} 항목]은 곧 자동으로 갱신됩니다.",
 	"wikibase-comment-add": "{{WBREPONAME}} 항목이 만들어졌습니다.",
@@ -71,5 +71,6 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} 항목 ID",
 	"wikibase-pageinfo-entity-id-none": "없음",
 	"wikibase-property-render-error": "$1 속성 표시 실패: $2",
-	"wikibase-otherprojects": "다른 프로젝트"
+	"wikibase-otherprojects": "다른 프로젝트",
+	"notification-link-text-view-item": "항목 {{GENDER:$1|보기}}"
 }

@@ -75,5 +75,11 @@
 	"wikibase-property-render-error": "Не успеав да го испишам својството $1: $2",
 	"wikibase-otherprojects": "На други проекти",
 	"wikibase-otherprojects-beta-message": "Странична лента со други проекти",
-	"wikibase-otherprojects-beta-description": "Во страничникот додава дел „{{int:wikibase-otherprojects}}“ што содржи врски до другите Викимедиини проекти врз основа на податоците на {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Во страничникот додава дел „{{int:wikibase-otherprojects}}“ што содржи врски до другите Викимедиини проекти врз основа на податоците на {{WBREPONAME}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Поврзување|Поврзувања}} со {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Извести ме кога некој ќе поврзе страница што {{GENDER:|ја имам создадено}} со предмет на {{WBREPONAME}}.",
+	"notification-header-page-connection": "Страницата <strong>$3</strong> е {{GENDER:$2|поврзана}} со предмет на {{WBREPONAME}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> и {{PLURAL:$4|уште една страница|уште $4 страници|100=преку 99 други страници}} се {{GENDER:$2|поврзани}} со предмет на {{WBREPONAME}}.",
+	"notification-link-text-view-item": "{{GENDER:$1|Погл.}} предмет",
+	"notification-subject-page-connection": "Страница на {{SITENAME}} што ја имате {{GENDER:$3|создадено}} е {{GENDER:$2|поврзана}} со предмет на {{WBREPONAME}}"
 }

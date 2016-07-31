@@ -75,5 +75,11 @@
 	"wikibase-property-render-error": "Erro ao processar a propriedade $1: $2",
 	"wikibase-otherprojects": "Noutros projetos",
 	"wikibase-otherprojects-beta-message": "Barra lateral de outros projetos",
-	"wikibase-otherprojects-beta-description": "Adiciona uma seção \"{{int:wikibase-otherprojects}}\" à barra lateral que fornece ligações para outros projetos Wikimedia baseados em dados {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Adiciona uma seção \"{{int:wikibase-otherprojects}}\" à barra lateral que fornece ligações para outros projetos Wikimedia baseados em dados {{WBREPONAME}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexão|Conexões}} com {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Notifique-me quando alguém conectar uma página que {{GENDER:|eu tenha criado}} a um item de {{WBREPONAME}}.",
+	"notification-header-page-connection": "A página <strong>$3</strong> foi {{GENDER:$2|conectada}} a um item de {{WBREPONAME}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|outra página|outras $4 páginas|100=+99 outras páginas}} foram {{GENDER:$2|conectadas}} a itens de {{WBREPONAME}}.",
+	"notification-link-text-view-item": "{{GENDER:$1|Ver}} item",
+	"notification-subject-page-connection": "A página que {{GENDER:$3|criou}} em {{SITENAME}} foi {{GENDER:$2|conectada}} a um item de {{WBREPONAME}}"
 }

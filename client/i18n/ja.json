@@ -69,5 +69,6 @@
 	"wikibase-property-render-error": "プロパティ $1 のレンダリングに失敗しました: $2",
 	"wikibase-otherprojects": "他のプロジェクト",
 	"wikibase-otherprojects-beta-message": "サイドバーに他のプロジェクト",
-	"wikibase-otherprojects-beta-description": "サイドバーに他のウィキメディアプロジェクトへのリンクを {{WBREPONAME}} データに基づいて提供する「{{int:wikibase-otherprojects}}」セクションを追加する。"
+	"wikibase-otherprojects-beta-description": "サイドバーに他のウィキメディアプロジェクトへのリンクを {{WBREPONAME}} データに基づいて提供する「{{int:wikibase-otherprojects}}」セクションを追加する。",
+	"notification-link-text-view-item": "項目を{{GENDER:$1|閲覧}}"
 }
