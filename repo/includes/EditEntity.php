@@ -278,6 +278,7 @@ class EditEntity {
 				// $this->getPage(), this should NOT change!
 				$this->latestRev = $this->entityRevisionLookup->getEntityRevision(
 					$id,
+					0,
 					EntityRevisionLookup::LATEST_FROM_MASTER
 				);
 			}
@@ -353,10 +354,6 @@ class EditEntity {
 			} elseif ( $baseRevId === $this->getLatestRevisionId() ) {
 				$this->baseRev = $this->getLatestRevision();
 			} else {
-				if ( $baseRevId === 0 ) {
-					$baseRevId = EntityRevisionLookup::LATEST_FROM_MASTER;
-				}
-
 				$id = $this->newEntity->getId();
 				$this->baseRev = $this->entityRevisionLookup->getEntityRevision( $id, $baseRevId );
 

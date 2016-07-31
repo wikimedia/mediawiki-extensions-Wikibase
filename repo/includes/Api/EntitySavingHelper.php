@@ -72,7 +72,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		// If a base revision is given, use if for consistency!
 		$baseRev = isset( $params['baserevid'] )
 			? (int)$params['baserevid']
-			: $this->defaultRetrievalMode;
+			: 0;
 
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRev );
 

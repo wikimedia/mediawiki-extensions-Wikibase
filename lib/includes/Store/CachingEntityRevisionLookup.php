@@ -6,6 +6,7 @@ use BagOStuff;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityRevision;
+use Wikimedia\Assert\Assert;
 
 /**
  * Implementation of EntityLookup that caches the obtained entities.
@@ -96,24 +97,29 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * still the latest. Otherwise, any cached revision will be used if $revisionId=0.
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
+	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER.
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
-		$key = $this->getCacheKey( $entityId );
+	public function getEntityRevision(
+		EntityId $entityId,
+		$revisionId = 0,
+		$mode = self::LATEST_FROM_SLAVE_WITH_FALLBACK
+	) {
+		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
+		Assert::parameterType( 'string', $mode, '$mode' );
 
-		if ( $revisionId === 0 ) {
-			$revisionId = self::LATEST_FROM_SLAVE;
-		}
+		$key = $this->getCacheKey( $entityId );
 
 		/** @var EntityRevision $entityRevision */
 		$entityRevision = $this->cache->get( $key );
 
 		if ( $entityRevision !== false ) {
-			if ( !is_int( $revisionId ) && $this->shouldVerifyRevision ) {
-				$latestRevision = $this->lookup->getLatestRevisionId( $entityId, $revisionId );
+			if ( $revisionId === 0 && $this->shouldVerifyRevision ) {
+				$latestRevision = $this->lookup->getLatestRevisionId( $entityId, $mode );
 
 				if ( $latestRevision === false ) {
 					// entity no longer exists!
@@ -123,13 +129,13 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 				}
 			}
 
-			if ( is_int( $revisionId ) && $entityRevision && $entityRevision->getRevisionId() !== $revisionId ) {
+			if ( $revisionId > 0 && $entityRevision && $entityRevision->getRevisionId() !== $revisionId ) {
 				$entityRevision = false;
 			}
 		}
 
 		if ( $entityRevision === false ) {
-			$entityRevision = $this->fetchEntityRevision( $entityId, $revisionId );
+			$entityRevision = $this->fetchEntityRevision( $entityId, $revisionId, $mode );
 		}
 
 		return $entityRevision;
@@ -139,16 +145,17 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * Fetches the EntityRevision and updates the cache accordingly.
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId
+	 * @param int $revisionId
+	 * @param string $mode
 	 *
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	private function fetchEntityRevision( EntityId $entityId, $revisionId ) {
+	private function fetchEntityRevision( EntityId $entityId, $revisionId, $mode ) {
 		$key = $this->getCacheKey( $entityId );
-		$entityRevision = $this->lookup->getEntityRevision( $entityId, $revisionId );
+		$entityRevision = $this->lookup->getEntityRevision( $entityId, $revisionId, $mode );
 
-		if ( !is_int( $revisionId ) ) {
+		if ( $revisionId === 0 ) {
 			if ( $entityRevision === null ) {
 				$this->cache->delete( $key );
 			} else {

@@ -130,10 +130,10 @@ class EntityLoadingHelper {
 	 *
 	 * @todo make this protected once more code has been moved from ModifyEntity to EntitySavingHelper.
 	 *
-	 * @param EntityId $entityId EntityId of the page to load the revision for
-	 * @param int|string|null $revId revision to load, or the retrieval mode,
-	 *        see the LATEST_XXX constants defined in EntityRevisionLookup.
-	 *        If not given, the current revision will be loaded, using the default retrieval mode.
+	 * @param EntityId $entityId
+	 * @param int $revId The desired revision id, or 0 for the latest revision.
+	 * @param string|null $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER (from EntityRevisionLookup). Null for the default.
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
@@ -141,14 +141,18 @@ class EntityLoadingHelper {
 	 */
 	public function loadEntityRevision( // FIXME testme
 		EntityId $entityId,
-		$revId = null
+		$revId = 0,
+		$mode = null
 	) {
 		if ( $revId === null ) {
-			$revId = $this->defaultRetrievalMode;
+			$revId = 0;
+		}
+		if ( $mode === null ) {
+			$mode = $this->defaultRetrievalMode;
 		}
 
 		try {
-			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId );
+			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId, $mode );
 			return $revision;
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
