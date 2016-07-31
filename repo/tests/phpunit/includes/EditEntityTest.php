@@ -216,7 +216,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		return array(
 			array( // #0: case I: no base rev given.
 				null,  // input data
-				EntityRevisionLookup::LATEST_FROM_MASTER,  // base rev
+				0,  // base rev
 				false, // expected conflict
 				false, // expected fix
 			),

@@ -8,8 +8,8 @@ use DBQueryError;
 use ResultWrapper;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * Service for looking up meta data about one or more entities as needed for
@@ -43,30 +43,38 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE,
+	 *     EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
 	 * @return stdClass[] Array of entity id serialization => object.
 	 */
-	public function loadRevisionInformation( array $entityIds, $mode ) {
+	public function loadRevisionInformation(
+		array $entityIds,
+		$mode
+	) {
 		$rows = array();
 
 		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
 			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_SLAVE );
 		}
 
-		$loadFromMaster = array();
-		foreach ( $entityIds as $entityId ) {
-			if ( !isset( $rows[$entityId->getSerialization()] ) || !$rows[$entityId->getSerialization()] ) {
-				$loadFromMaster[] = $entityId;
+		if ( $mode !== EntityRevisionLookup::LATEST_FROM_SLAVE ) {
+			// Attempt to load (missing) rows from master if the caller asked for that.
+			$loadFromMaster = array();
+			foreach ( $entityIds as $entityId ) {
+				if ( !isset( $rows[$entityId->getSerialization()] ) || !$rows[$entityId->getSerialization()] ) {
+					$loadFromMaster[] = $entityId;
+				}
 			}
-		}
 
-		if ( $loadFromMaster ) {
-			$rows = array_merge(
-				$rows,
-				$this->selectRevisionInformationMultiple( $loadFromMaster, DB_MASTER )
-			);
+			if ( $loadFromMaster ) {
+				$rows = array_merge(
+					$rows,
+					$this->selectRevisionInformationMultiple( $loadFromMaster, DB_MASTER )
+				);
+			}
 		}
 
 		return $rows;
@@ -75,15 +83,22 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	/**
 	 * @param EntityId $entityId
 	 * @param int $revisionId
+	 * @param string $mode (WikiPageEntityMetaDataAccessor::LATEST_FROM_SLAVE,
+	 *     WikiPageEntityMetaDataAccessor::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *     WikiPageEntityMetaDataAccessor::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
 	 * @return stdClass|bool
 	 */
-	public function loadRevisionInformationByRevisionId( EntityId $entityId, $revisionId ) {
+	public function loadRevisionInformationByRevisionId(
+		EntityId $entityId,
+		$revisionId,
+		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
+	) {
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_SLAVE );
 
-		if ( !$row ) {
-			// Try loading from master
+		if ( !$row && $mode !== EntityRevisionLookup::LATEST_FROM_SLAVE ) {
+			// Try loading from master, unless the caller only wants slave data.
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': try to load ' . $entityId
 				. " with $revisionId from DB_MASTER." );
 
