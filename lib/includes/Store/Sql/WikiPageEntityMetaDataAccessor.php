@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store\Sql;
 
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * Interface for services giving access to meta data about one or more entities as needed for
@@ -23,7 +24,9 @@ interface WikiPageEntityMetaDataAccessor {
 	 * 'page_latest', 'old_id', 'old_text' and 'old_flags'.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE,
+	 *     EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
 	 *
 	 * @return stdClass[] Array of entity id serialization => object.
 	 */
@@ -34,12 +37,22 @@ interface WikiPageEntityMetaDataAccessor {
 	 * revision of the entity or to load entity content from a MediaWiki revision. Included fields are
 	 * 'rev_id', 'rev_content_format', 'rev_timestamp', 'page_latest', 'old_id', 'old_text'
 	 * and 'old_flags'.
+	 * Given that revision are immutable, this function will always try to load a revision from
+	 * slave first and only use the master (with EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+	 * or EntityRevisionLookup::LATEST_FROM_MASTER) in case the revision couldn't be found.
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId Revision id to fetch data about, must be an integer greater than 0.
+	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_SLAVE,
+	 *     EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *     EntityRevisionLookup::LATEST_FROM_MASTER).
 	 *
 	 * @return stdClass|bool false if no such entity exists
 	 */
-	public function loadRevisionInformationByRevisionId( EntityId $entityId, $revisionId );
+	public function loadRevisionInformationByRevisionId(
+		EntityId $entityId,
+		$revisionId,
+		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
+	);
 
 }

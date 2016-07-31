@@ -84,7 +84,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	public function provideGetEntityRevision() {
 		$cases = array(
 			array( // #0: any revision
-				new ItemId( 'q42' ), EntityRevisionLookup::LATEST_FROM_SLAVE, true,
+				new ItemId( 'q42' ), 0, true,
 			),
 			array( // #1: first revision
 				new ItemId( 'q42' ), 11, true,
@@ -96,13 +96,13 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 				new ItemId( 'q42' ), 600000, false, StorageException::class,
 			),
 			array( // #4: wrong type
-				new ItemId( 'q753' ), EntityRevisionLookup::LATEST_FROM_SLAVE, false,
+				new ItemId( 'q753' ), 0, false,
 			),
 			array( // #5: mismatching revision
 				new PropertyId( 'p753' ), 11, false, StorageException::class,
 			),
 			array( // #6: some revision
-				new PropertyId( 'p753' ), EntityRevisionLookup::LATEST_FROM_SLAVE, true,
+				new PropertyId( 'p753' ), 0, true,
 			),
 		);
 
@@ -113,7 +113,7 @@ abstract class EntityRevisionLookupTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetEntityRevision
 	 *
 	 * @param EntityId $id    The entity to get
-	 * @param int             $revision The revision to get (or LATEST_FROM_SLAVE or LATEST_FROM_MASTER)
+	 * @param int             $revision The revision to get (or 0 for latest)
 	 * @param bool            $shouldExist
 	 * @param string|null     $expectException
 	 */

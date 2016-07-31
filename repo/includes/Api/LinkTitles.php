@@ -141,7 +141,7 @@ class LinkTitles extends ApiBase {
 		} elseif ( $fromId === null && $toId !== null ) {
 			// reuse to-site's item
 			/** @var Item $item */
-			$itemRev = $lookup->getEntityRevision( $toId, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$itemRev = $lookup->getEntityRevision( $toId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
 			$item = $itemRev->getEntity();
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$item->addSiteLink( $fromLink );
@@ -150,7 +150,7 @@ class LinkTitles extends ApiBase {
 		} elseif ( $fromId !== null && $toId === null ) {
 			// reuse from-site's item
 			/** @var Item $item */
-			$itemRev = $lookup->getEntityRevision( $fromId, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$itemRev = $lookup->getEntityRevision( $fromId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
 			$item = $itemRev->getEntity();
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$item->addSiteLink( $toLink );

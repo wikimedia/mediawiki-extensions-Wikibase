@@ -121,13 +121,19 @@ class MockRepository implements
 	 * @see EntityRevisionLookup::getEntityRevision
 	 *
 	 * @param EntityId $entityId
-	 * @param int|string $revisionId The desired revision id, or LATEST_FROM_SLAVE or LATEST_FROM_MASTER.
+	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
+	 * @param string $mode LATEST_FROM_SLAVE, LATEST_FROM_SLAVE_WITH_FALLBACK or
+	 *        LATEST_FROM_MASTER.
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
 	 * @return EntityRevision|null
 	 */
-	public function getEntityRevision( EntityId $entityId, $revisionId = self::LATEST_FROM_SLAVE ) {
+	public function getEntityRevision(
+		EntityId $entityId,
+		$revisionId = 0,
+		$mode = self::LATEST_FROM_SLAVE_WITH_FALLBACK
+	) {
 		$key = $entityId->getSerialization();
 
 		if ( isset( $this->redirects[$key] ) ) {
@@ -144,17 +150,15 @@ class MockRepository implements
 			return null;
 		}
 
-		// default changed from false to 0 and then to LATEST_FROM_SLAVE
-		if ( $revisionId === false || $revisionId === 0 ) {
-			wfWarn( 'getEntityRevision() called with $revisionId = false or 0, ' .
-				'use EntityRevisionLookup::LATEST_FROM_SLAVE or EntityRevisionLookup::LATEST_FROM_MASTER instead.' );
-			$revisionId = self::LATEST_FROM_SLAVE;
+		if ( !is_int( $revisionId ) ) {
+			wfWarn( 'getEntityRevision() called with $revisionId = false or a string, use 0 instead.' );
+			$revisionId = 0;
 		}
 
 		/** @var EntityRevision[] $revisions */
 		$revisions = $this->entities[$key];
 
-		if ( !is_int( $revisionId ) ) {
+		if ( $revisionId === 0 ) {
 			$revisionIds = array_keys( $revisions );
 			$revisionId = end( $revisionIds );
 		} elseif ( !isset( $revisions[$revisionId] ) ) {
@@ -467,7 +471,7 @@ class MockRepository implements
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_SLAVE ) {
 		try {
-			$revision = $this->getEntityRevision( $entityId, $mode );
+			$revision = $this->getEntityRevision( $entityId, 0, $mode );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {
 			return false;
 		}
