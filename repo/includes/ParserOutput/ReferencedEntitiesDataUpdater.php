@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\ParserOutput;
 
 use DataValues\DataValue;
-use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 use LinkBatch;
 use ParserOutput;
 use Title;
@@ -95,7 +95,7 @@ class ReferencedEntitiesDataUpdater implements StatementDataUpdater, SiteLinkDat
 		if ( $dataValue instanceof EntityIdValue ) {
 			$entityId = $dataValue->getEntityId();
 			$this->entityIds[$entityId->getSerialization()] = $entityId;
-		} elseif ( $dataValue instanceof QuantityValue ) {
+		} elseif ( $dataValue instanceof UnboundedQuantityValue ) {
 			$unitUri = $dataValue->getUnit();
 			$this->processUri( $unitUri );
 		}
