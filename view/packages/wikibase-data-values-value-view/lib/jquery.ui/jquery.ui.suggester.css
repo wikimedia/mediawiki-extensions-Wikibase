@@ -3,6 +3,11 @@
  * @author H. Snater <mediawiki@snater.com>
  */
 
+.ui-widget.ui-suggester-list {
+	font-family: sans-serif; /* reset the "Smoothness" jQuery UI theme */
+	font-size: 0.8125rem; /* results in 13px with the Vector skin */
+}
+
 .ui-suggester-list {
 	background: white;
 	border-color: #C9C9C9;

@@ -1,5 +1,8 @@
 # ValueView release notes
 
+## 0.17.3 (2016-08-01)
+* Fixed `jQuery.ui.suggester` font size.
+
 ## 0.17.2 (2016-07-28)
 * Moved `valueviewchange` event after actual changing the value.
 * `jQuery.ui.suggester` now also closes when tabbing out and reopens on click.
