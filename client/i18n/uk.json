@@ -90,5 +90,11 @@
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",
 	"wikibase-otherprojects": "В інших проектах",
 	"wikibase-otherprojects-beta-message": "Бічна панель інших проектів",
-	"wikibase-otherprojects-beta-description": "Додає розділ «{{int:wikibase-otherprojects}}» на бічну панель, який містить посилання на інші проекти Фонду Вікімедіа, використовуючи {{WBREPONAME}} для отримання потрібних для цього даних."
+	"wikibase-otherprojects-beta-description": "Додає розділ «{{int:wikibase-otherprojects}}» на бічну панель, який містить посилання на інші проекти Фонду Вікімедіа, використовуючи {{WBREPONAME}} для отримання потрібних для цього даних.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Зв'язок|Зв'язки}} з {{GRAMMAR:instrumental|{{WBREPONAME}}}}",
+	"echo-pref-tooltip-wikibase-action": "Повідомити мене, коли хтось поєднує сторінку, яку {{GENDER:|я створив|я створила}}, з елементом {{GRAMMAR:genitive|{{WBREPONAME}}}}.",
+	"notification-header-page-connection": "Сторінку <strong>$3</strong> {{GENDER:$2|поєднано}} з елементом {{GRAMMAR:genitive|{{WBREPONAME}}}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> та {{PLURAL:$4|одна інша сторінка|$4 інші сторінки|$4 інших сторінок|100=99+ інших сторінок}} {{GENDER:$2|поєднано}} з елементом {{GRAMMAR:genitive|{{WBREPONAME}}}}.",
+	"notification-link-text-view-item": "{{GENDER:$1|Переглянути}} елемент",
+	"notification-subject-page-connection": "Сторінка у {{GRAMMAR:locative|{{SITENAME}}}}, яку Ви {{GENDER:$3|створили}}, {{GENDER:$2|приєднана}} до елемента {{GRAMMAR:genitive|{{WBREPONAME}}}}"
 }
