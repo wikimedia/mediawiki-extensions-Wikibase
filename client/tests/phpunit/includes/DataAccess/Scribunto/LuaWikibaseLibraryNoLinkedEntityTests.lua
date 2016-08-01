@@ -10,6 +10,9 @@ local testframework = require 'Module:TestFramework'
 local tests = {
 	-- Integration tests
 
+	{ name = "mw.wikibase.getEntityIdForCurrentPage returns nil", func = mw.wikibase.getEntityIdForCurrentPage,
+	  expect = { nil }
+	},
 	{ name = "mw.wikibase.getEntityObject returns nil", func = mw.wikibase.getEntityObject,
 	  expect = { nil }
 	},
