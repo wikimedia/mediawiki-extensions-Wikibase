@@ -16,36 +16,35 @@
  *
  * @param {dataValues.DecimalValue} amount Numeric string or a number.
  * @param {string} unit A unit identifier. Must not be empty, use "1" for unit-less quantities.
- * @param {dataValues.DecimalValue} upperBound The upper bound of the quantity, inclusive.
- * @param {dataValues.DecimalValue} lowerBound The lower bound of the quantity, inclusive.
+ * @param {dataValues.DecimalValue|null} [upperBound] The upper bound of the quantity, inclusive.
+ * @param {dataValues.DecimalValue|null} [lowerBound] The lower bound of the quantity, inclusive.
  *
  * @throws {Error} if constructor parameters are invalid.
  */
 var SELF
 	= dv.QuantityValue
 	= util.inherit( 'DvQuantityValue', PARENT, function( amount, unit, upperBound, lowerBound ) {
-		if( !amount || !( amount instanceof dv.DecimalValue ) ) {
+		if ( !amount || !( amount instanceof dv.DecimalValue ) ) {
 			throw new Error( 'amount needs to be a DecimalValue object' );
 		}
 
-		if( typeof unit !== 'string' ) {
-			throw new Error( 'unit must be of type string' );
-		} else if( unit === '' ) {
-			throw new Error( 'unit can not be an empty string (use "1" for unit-less quantities)' );
+		if ( typeof unit !== 'string' || unit === '' ) {
+			throw new Error( 'unit must be a non-empty string (use "1" for unit-less quantities)' );
 		}
 
-		if( !lowerBound || !( lowerBound instanceof dv.DecimalValue ) ) {
-			throw new Error( 'lowerBound needs to be a DecimalValue object' );
-		}
-
-		if( !upperBound || !( upperBound instanceof dv.DecimalValue ) ) {
-			throw new Error( 'upperBound needs to be a DecimalValue object' );
+		// Both can be null/undefined. But if one is set, both must be set.
+		if ( upperBound || lowerBound ) {
+			if ( !( upperBound instanceof dv.DecimalValue )
+				|| !( lowerBound instanceof dv.DecimalValue )
+			) {
+				throw new Error( 'upperBound and lowerBound must both be defined or both undefined' );
+			}
 		}
 
 		this._amount = amount;
 		this._unit = unit;
-		this._lowerBound = lowerBound;
-		this._upperBound = upperBound;
+		this._lowerBound = lowerBound || null;
+		this._upperBound = upperBound || null;
 	},
 {
 	/**
@@ -61,13 +60,13 @@ var SELF
 	_unit: null,
 
 	/**
-	 * @property {dataValues.DecimalValue}
+	 * @property {dataValues.DecimalValue|null}
 	 * @private
 	 */
 	_lowerBound: null,
 
 	/**
-	 * @property {dataValues.DecimalValue}
+	 * @property {dataValues.DecimalValue|null}
 	 * @private
 	 */
 	_upperBound: null,
@@ -78,7 +77,7 @@ var SELF
 	 * @return {string}
 	 */
 	getSortKey: function() {
-		return this.getAmount().getValue();
+		return this._amount.getValue();
 	},
 
 	/**
@@ -134,10 +133,12 @@ var SELF
 			return false;
 		}
 
-		return this.getAmount().equals( that.getAmount() )
-			&& this.getUnit() === that.getUnit()
-			&& this.getLowerBound().equals( that.getLowerBound() )
-			&& this.getUpperBound().equals( that.getUpperBound() );
+		return this._amount.equals( that._amount )
+			&& this._unit === that._unit
+			&& ( this._upperBound === that._upperBound
+				|| ( this._upperBound && this._upperBound.equals( that._upperBound ) ) )
+			&& ( this._lowerBound === that._lowerBound
+				|| ( this._lowerBound && this._lowerBound.equals( that._lowerBound ) ) );
 	},
 
 	/**
@@ -146,12 +147,15 @@ var SELF
 	 * @return {Object}
 	 */
 	toJSON: function() {
-		return {
-			amount: this.getAmount().toJSON(),
-			unit: this.getUnit(),
-			upperBound: this.getUpperBound().toJSON(),
-			lowerBound: this.getLowerBound().toJSON()
+		var json = {
+			amount: this._amount.toJSON(),
+			unit: this._unit
 		};
+		if ( this._upperBound && this._lowerBound ) {
+			json.upperBound = this._upperBound.toJSON();
+			json.lowerBound = this._lowerBound.toJSON();
+		}
+		return json;
 	}
 } );
 
@@ -164,8 +168,8 @@ SELF.newFromJSON = function( json ) {
 	return new SELF(
 		new dv.DecimalValue( json.amount ),
 		json.unit,
-		new dv.DecimalValue( json.upperBound ),
-		new dv.DecimalValue( json.lowerBound )
+		json.upperBound ? new dv.DecimalValue( json.upperBound ) : null,
+		json.lowerBound ? new dv.DecimalValue( json.lowerBound ) : null
 	);
 };
 
