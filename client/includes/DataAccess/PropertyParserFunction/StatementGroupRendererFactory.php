@@ -5,7 +5,6 @@ namespace Wikibase\Client\DataAccess\PropertyParserFunction;
 use Language;
 use MWException;
 use Parser;
-use StubUserLang;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
@@ -110,23 +109,16 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
-	 * @param Language|StubUserLang $language
+	 * @param Language $language
 	 * @param UsageAccumulator $usageAccumulator
 	 *
 	 * @return LanguageAwareRenderer
 	 * @throws MWException
 	 */
-	private function newLanguageAwareRenderer( $language, UsageAccumulator $usageAccumulator ) {
-		if ( !( $language instanceof Language ) ) {
-			wfDebugLog(
-				'T107711',
-				get_class( $language ) . ' is not a Language object.',
-				'all',
-				array( 'trace' => wfBacktrace( true ) )
-			);
-		}
-		StubUserLang::unstub( $language );
-
+	private function newLanguageAwareRenderer(
+		Language $language,
+		UsageAccumulator $usageAccumulator
+	) {
 		$entityStatementsRenderer = new StatementTransclusionInteractor(
 			$language,
 			$this->propertyIdResolver,
