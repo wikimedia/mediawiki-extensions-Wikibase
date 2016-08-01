@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb2c7f3_0cf263cd",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-08-01T03:02:08Z",
+      "side": 1,
+      "message": "What is LATEST_FROM_SLAVE_WITH_FALLBACK useful for? Immutable data selected on an immutable key (e.g. like Revision rows...sans rev_deleted)?",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 39
+      },
+      "revId": "4d0f4238521d01b876059aeb73942bbd65c34bec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
