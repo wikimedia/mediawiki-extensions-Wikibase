@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 use MediaWikiTestCase;
 use ParserOutput;
 use Title;
@@ -144,10 +145,14 @@ class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
 
 		$set2 = new StatementList();
 		$this->addStatement( $set2, 'Q20' );
-		$this->addStatement( $set2, 'Q21' );
-		$set2->addNewStatement(
-			new PropertyValueSnak( 1, QuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q22' ) )
-		);
+		$set2->addNewStatement( new PropertyValueSnak(
+			1,
+			UnboundedQuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q21' )
+		) );
+		$set2->addNewStatement( new PropertyValueSnak(
+			1,
+			QuantityValue::newFromNumber( 1, self::UNIT_PREFIX . 'Q22' )
+		) );
 
 		$siteLinks = new SiteLinkList();
 		$siteLinks->addNewSiteLink( 'siteId', 'pageName', array( new ItemId( 'Q1' ) ) );
