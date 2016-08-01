@@ -117,12 +117,12 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 		if ( $ok && $termsToDelete ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . count( $termsToDelete ) . ' terms to delete.' );
-			$ok = $this->deleteTermsInternal( $entity->getId(), $termsToDelete, $dbw );
+			$ok = $this->deleteTerms( $entity->getId(), $termsToDelete, $dbw );
 		}
 
 		if ( $ok && $termsToInsert ) {
 			wfDebugLog( __CLASS__, __FUNCTION__ . ': ' . count( $termsToInsert ) . ' terms to insert.' );
-			$ok = $this->insertTermsInternal( $entity, $termsToInsert, $dbw );
+			$ok = $this->insertTerms( $entity, $termsToInsert, $dbw );
 		}
 
 		$this->releaseConnection( $dbw );
@@ -131,20 +131,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * Internal callback for inserting a list of terms.
-	 *
-	 * @note: this is public only because it acts as a callback, there should be no
-	 *        reason to call this directly!
-	 *
-	 * @since 0.5
-	 *
 	 * @param EntityDocument $entity
 	 * @param TermIndexEntry[] $terms
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	public function insertTermsInternal( EntityDocument $entity, array $terms, DatabaseBase $dbw ) {
+	private function insertTerms( EntityDocument $entity, array $terms, DatabaseBase $dbw ) {
 		$entityIdentifiers = array(
 			// FIXME: this will fail for IDs that do not have a numeric form
 			'term_entity_id' => $entity->getId()->getNumericId(),
@@ -268,20 +261,13 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	/**
-	 * Internal callback for deleting a list of terms.
-	 *
-	 * @note: this is public only because it acts as a callback, there should be no
-	 *        reason to call this directly!
-	 *
-	 * @since 0.5
-	 *
 	 * @param EntityId $entityId
 	 * @param TermIndexEntry[] $terms
 	 * @param DatabaseBase $dbw
 	 *
 	 * @return bool Success indicator
 	 */
-	public function deleteTermsInternal( EntityId $entityId, array $terms, DatabaseBase $dbw ) {
+	private function deleteTerms( EntityId $entityId, array $terms, DatabaseBase $dbw ) {
 		//TODO: Make getTermsOfEntity() collect term_row_id values, so we can use them here.
 		//      That would allow us to do the deletion in a single query, based on a set of ids.
 
