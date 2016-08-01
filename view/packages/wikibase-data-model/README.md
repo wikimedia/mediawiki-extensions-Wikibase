@@ -11,6 +11,15 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 ### 3.0.0 (alpha)
 
 * Removed cloning from `MultiTerm.getTexts`.
+* Turned EntityId into a simple wrapper around an opaque serialization string
+  * Removed EntityId::getNumericId
+  * Removed EntityId::getEntityType
+  * Removed EntityId::getPrefixedId
+  * Introduced EntityId::getSerialization
+  * Removed `numeric-id` and `entity-type` fields from `toJSON` return value
+  * Introduced `id` field to `toJSON` return value
+  * Removed `numeric-id` and `entity-type` arguments from EntityId constructor
+  * Introduced `id` argument to EntityId constructor
 
 ### 2.0.1 (2016-01-27)
 

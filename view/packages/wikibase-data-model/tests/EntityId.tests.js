@@ -7,20 +7,14 @@
 
 QUnit.module( 'wikibase.datamodel.EntityId' );
 
-var prefixMap = {
-	P: 'property',
-	Q: 'item'
-};
-
 var testSets = [
-	['item', 1, 'Q1'],
-	['property', 1, 'P1']
+	'Q1', 'P1'
 ];
 
 QUnit.test( 'Constructor and getters', function( assert ) {
-	assert.expect( 12 );
+	assert.expect( 8 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var entityId = new wb.datamodel.EntityId( testSets[i][0], testSets[i][1] );
+		var entityId = new wb.datamodel.EntityId( testSets[i] );
 
 		assert.ok(
 			entityId instanceof wb.datamodel.EntityId,
@@ -28,21 +22,9 @@ QUnit.test( 'Constructor and getters', function( assert ) {
 		);
 
 		assert.equal(
-			entityId.getEntityType(),
-			testSets[i][0],
-			'Test set #' + i + ': Verified entity type being set.'
-		);
-
-		assert.strictEqual(
-			entityId.getNumericId(),
-			testSets[i][1],
-			'Test set #' + i + ': Verified numeric id being set.'
-		);
-
-		assert.equal(
-			entityId.getPrefixedId( prefixMap ),
-			testSets[i][2],
-			'Test set #' + i + ': Verified retrieved prefixed id.'
+			entityId.getSerialization(),
+			testSets[i],
+			'Test set #' + i + ': Verified retrieved serialized id.'
 		);
 
 		assert.equal(
@@ -61,10 +43,10 @@ QUnit.test( 'Constructor and getters', function( assert ) {
 QUnit.test( 'equals()', function( assert ) {
 	assert.expect( 4 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var entityId1 = new wb.datamodel.EntityId( testSets[i][0], testSets[i][1] );
+		var entityId1 = new wb.datamodel.EntityId( testSets[i] );
 
 		for( var j = 0; j < testSets.length; j++ ) {
-			var entityId2 = new wb.datamodel.EntityId( testSets[j][0], testSets[j][1] );
+			var entityId2 = new wb.datamodel.EntityId( testSets[j] );
 
 			if( i === j ) {
 				assert.ok(
@@ -85,7 +67,7 @@ QUnit.test( 'equals()', function( assert ) {
 QUnit.test( 'toJSON() & newFromJSON()', function( assert ) {
 	assert.expect( 2 );
 	for( var i = 0; i < testSets.length; i++ ) {
-		var entityId = new wb.datamodel.EntityId( testSets[i][0], testSets[i][1] ),
+		var entityId = new wb.datamodel.EntityId( testSets[i] ),
 			json = entityId.toJSON();
 
 		assert.ok(
