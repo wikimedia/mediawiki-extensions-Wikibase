@@ -22,6 +22,30 @@
       "revId": "4d0f4238521d01b876059aeb73942bbd65c34bec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb2c7f3_0033070b",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-01T11:04:17Z",
+      "side": 1,
+      "message": "Mostly to get an entity we are fairly sure exists in Jobs etc.. This is most useful in jobs that run immediately after updates.",
+      "parentUuid": "aeb2c7f3_0cf263cd",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 39
+      },
+      "revId": "4d0f4238521d01b876059aeb73942bbd65c34bec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
