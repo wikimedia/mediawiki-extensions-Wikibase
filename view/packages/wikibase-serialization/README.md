@@ -21,6 +21,10 @@ version 2.0 of this package:
 
 ## Release notes
 
+### 2.0.7 (2016-08-01)
+
+* Added compatibility with DataModel JavaScript 3.0.0.
+
 ### 2.0.6 (2016-01-27)
 
 * Added compatibility with DataValues JavaScript 0.8.0.
