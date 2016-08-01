@@ -3,6 +3,7 @@
 namespace Wikibase\Rdf\Values;
 
 use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\UnitConverter;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
@@ -10,7 +11,7 @@ use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * RDF mapping for QuantityValue.
+ * RDF mapping for UnboundedQuantityValue and QuantityValue.
  *
  * @since 0.5
  *
@@ -55,7 +56,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 		$dataType,
 		PropertyValueSnak $snak
 	) {
-		/** @var QuantityValue $value */
+		/** @var UnboundedQuantityValue $value */
 		$value = $snak->getDataValue();
 		$writer->say( $propertyValueNamespace, $propertyValueLName )
 			->value( $value->getAmount(), 'xsd', 'decimal' );
@@ -130,7 +131,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
-	 * @param QuantityValue $value
+	 * @param UnboundedQuantityValue $value
 	 * @param bool $normalized Is this a normalized value?
 	 *
 	 * @return string|null The LName of the value node (in the RdfVocabulary::NS_VALUE namespace),
@@ -142,7 +143,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
-		QuantityValue $value,
+		UnboundedQuantityValue $value,
 		$normalized = false
 	) {
 		$valueLName = $this->complexValueHelper->attachValueNode(
@@ -167,19 +168,20 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * This expects the current subject of the RDF writer to be the value node.
 	 * No instance-of statement is written about the value.
 	 *
-	 * @param QuantityValue $value
+	 * @param UnboundedQuantityValue $value
 	 */
-	public function writeQuantityValue( QuantityValue $value ) {
+	public function writeQuantityValue( UnboundedQuantityValue $value ) {
 		$valueWriter = $this->complexValueHelper->getValueNodeWriter();
 
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityAmount' )
 			->value( $value->getAmount(), 'xsd', 'decimal' );
 
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUpperBound' )
-			->value( $value->getUpperBound(), 'xsd', 'decimal' );
-
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityLowerBound' )
-			->value( $value->getLowerBound(), 'xsd', 'decimal' );
+		if ( $value instanceof QuantityValue ) {
+			$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUpperBound' )
+				->value( $value->getUpperBound(), 'xsd', 'decimal' );
+			$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityLowerBound' )
+				->value( $value->getLowerBound(), 'xsd', 'decimal' );
+		}
 
 		$unitUri = trim( $value->getUnit() );
 

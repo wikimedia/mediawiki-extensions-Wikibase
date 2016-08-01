@@ -4,7 +4,7 @@ namespace Wikibase\Lib;
 
 use DataValues\DecimalMath;
 use DataValues\DecimalValue;
-use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 
 /**
  * Convert quantities to other units.
@@ -36,11 +36,11 @@ class UnitConverter {
 
 	/**
 	 * Convert QuantityValue to standard units
-	 * @param QuantityValue $value
-	 * @return QuantityValue|null Converted value in standard units, or null if no conversion
+	 * @param UnboundedQuantityValue $value
+	 * @return UnboundedQuantityValue|null Converted value in standard units, or null if no conversion
 	 *      possible. If the value is already in standard units, returns the original value.
 	 */
-	public function toStandardUnits( QuantityValue $value ) {
+	public function toStandardUnits( UnboundedQuantityValue $value ) {
 		$fromUnit = $value->getUnit();
 
 		if ( $fromUnit === '1' ) {

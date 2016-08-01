@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 use Html;
 use InvalidArgumentException;
 use Message;
@@ -77,14 +78,14 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 	 * Generates HTML representing the details of a QuantityValue,
 	 * as an itemized list.
 	 *
-	 * @param QuantityValue $value
+	 * @param UnboundedQuantityValue|QuantityValue $value
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
 	public function format( $value ) {
-		if ( !( $value instanceof QuantityValue ) ) {
-			throw new InvalidArgumentException( 'Data value type mismatch. Expected a QuantityValue.' );
+		if ( !( $value instanceof UnboundedQuantityValue ) ) {
+			throw new InvalidArgumentException( 'Data value type mismatch. Expected a UnboundedQuantityValue.' );
 		}
 
 		$html = '';
@@ -98,10 +99,12 @@ class QuantityDetailsFormatter extends ValueFormatterBase {
 
 		$html .= $this->renderLabelValuePair( 'amount',
 			$this->formatNumber( $value->getAmount(), $value->getUnit() ) );
-		$html .= $this->renderLabelValuePair( 'upperBound',
-			$this->formatNumber( $value->getUpperBound(), $value->getUnit() ) );
-		$html .= $this->renderLabelValuePair( 'lowerBound',
-			$this->formatNumber( $value->getLowerBound(), $value->getUnit() ) );
+		if ( $value instanceof QuantityValue ) {
+			$html .= $this->renderLabelValuePair( 'upperBound',
+				$this->formatNumber( $value->getUpperBound(), $value->getUnit() ) );
+			$html .= $this->renderLabelValuePair( 'lowerBound',
+				$this->formatNumber( $value->getLowerBound(), $value->getUnit() ) );
+		}
 		/**
 		 * @todo Display URIs to entities in the local repository as clickable labels.
 		 * @todo Display URIs that start with http:// or https:// as clickable links.

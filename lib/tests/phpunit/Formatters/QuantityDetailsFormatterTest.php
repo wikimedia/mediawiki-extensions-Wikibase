@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Test;
 
 use DataValues\NumberValue;
 use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
@@ -63,6 +64,12 @@ class QuantityDetailsFormatterTest extends PHPUnit_Framework_TestCase {
 						'<td[^<>]*>[^<>]*\b1\b[^<>]*</td>',
 					)
 				) . '@s'
+			),
+			array(
+				UnboundedQuantityValue::newFromNumber( '+5', '1' ),
+				'@<h4[^<>]*>5</h4>'
+					. '.*<td[^<>]*>5</td>'
+					. '.*<td[^<>]*>1</td>@s'
 			),
 			'Unit 1' => array(
 				QuantityValue::newFromNumber( '+5', '1', '+6', '+4' ),
