@@ -3,13 +3,14 @@
 namespace Wikibase\Rdf\Values;
 
 use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * RDF mapping for QuantityValue.
+ * RDF mapping for UnboundedQuantityValue and QuantityValue.
  *
  * @since 0.5
  *
@@ -47,7 +48,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 		$dataType,
 		PropertyValueSnak $snak
 	) {
-		/** @var QuantityValue $value */
+		/** @var UnboundedQuantityValue $value */
 		$value = $snak->getDataValue();
 		$writer->say( $propertyValueNamespace, $propertyValueLName )
 			->value( $value->getAmount(), 'xsd', 'decimal' );
@@ -65,14 +66,14 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
-	 * @param QuantityValue $value
+	 * @param UnboundedQuantityValue $value
 	 */
 	private function addValueNode(
 		RdfWriter $writer,
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
-		QuantityValue $value
+		UnboundedQuantityValue $value
 	) {
 		$valueLName = $this->complexValueHelper->attachValueNode(
 			$writer,
@@ -92,11 +93,12 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityAmount' )
 			->value( $value->getAmount(), 'xsd', 'decimal' );
 
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUpperBound' )
-			->value( $value->getUpperBound(), 'xsd', 'decimal' );
-
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityLowerBound' )
-			->value( $value->getLowerBound(), 'xsd', 'decimal' );
+		if ( $value instanceof QuantityValue ) {
+			$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUpperBound' )
+				->value( $value->getUpperBound(), 'xsd', 'decimal' );
+			$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityLowerBound' )
+				->value( $value->getLowerBound(), 'xsd', 'decimal' );
+		}
 
 		$unitUri = trim( $value->getUnit() );
 
