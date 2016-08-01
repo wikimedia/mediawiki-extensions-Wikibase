@@ -11,6 +11,7 @@ use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use DataValues\UnboundedQuantityValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Language;
@@ -538,6 +539,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			'unknown' => [ new UnknownValue( [ 'foo' => 'bar' ] ) ],
 			'globecoordinate' => [ new GlobeCoordinateValue( new LatLongValue( 2, 3 ), 1 ) ],
 			'monolingualtext' => [ new MonolingualTextValue( 'als', 'Test' ) ],
+			'unbounded quantity' => [ UnboundedQuantityValue::newFromNumber( 2 ) ],
 			'quantity' => [ QuantityValue::newFromNumber( 2 ) ],
 			'time' => [ new TimeValue(
 				'+1980-10-07T17:33:22Z',
