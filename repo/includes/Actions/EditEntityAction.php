@@ -40,7 +40,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jens Ohlig
  * @author Daniel Kinzler
  */
-abstract class EditEntityAction extends ViewEntityAction {
+class EditEntityAction extends ViewEntityAction {
 
 	/**
 	 * @var EntityDiffVisualizer

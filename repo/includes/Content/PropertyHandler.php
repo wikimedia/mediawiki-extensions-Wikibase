@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EditPropertyAction;
+use Wikibase\EditEntityAction;
 use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -22,10 +22,10 @@ use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\SubmitPropertyAction;
+use Wikibase\SubmitEntityAction;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
-use Wikibase\ViewPropertyAction;
+use Wikibase\ViewEntityAction;
 
 /**
  * Content handler for Wikibase items.
@@ -125,9 +125,9 @@ class PropertyHandler extends EntityHandler {
 					$this->labelLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
 				);
 			},
-			'view' => ViewPropertyAction::class,
-			'edit' => EditPropertyAction::class,
-			'submit' => SubmitPropertyAction::class,
+			'view' => ViewEntityAction::class,
+			'edit' => EditEntityAction::class,
+			'submit' => SubmitEntityAction::class,
 		);
 	}
 

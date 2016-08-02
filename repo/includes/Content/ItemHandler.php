@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\EditItemAction;
+use Wikibase\EditEntityAction;
 use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
 use Wikibase\ItemContent;
@@ -21,10 +21,10 @@ use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\SubmitItemAction;
+use Wikibase\SubmitEntityAction;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
-use Wikibase\ViewItemAction;
+use Wikibase\ViewEntityAction;
 
 /**
  * Content handler for Wikibase items.
@@ -117,9 +117,9 @@ class ItemHandler extends EntityHandler {
 					$this->labelLookupFactory->newLabelDescriptionLookup( $context->getLanguage() )
 				);
 			},
-			'view' => ViewItemAction::class,
-			'edit' => EditItemAction::class,
-			'submit' => SubmitItemAction::class,
+			'view' => ViewEntityAction::class,
+			'edit' => EditEntityAction::class,
+			'submit' => SubmitEntityAction::class,
 		);
 	}
 
