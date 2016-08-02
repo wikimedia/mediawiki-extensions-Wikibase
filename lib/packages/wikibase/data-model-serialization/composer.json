@@ -34,7 +34,7 @@
 	},
 	"require-dev": {
 		"data-values/geo": "~1.0|~0.1",
-		"data-values/number": "~0.2",
+		"data-values/number": ">=0.1 <0.9",
 		"data-values/time": "~0.2"
 	},
 	"autoload": {
