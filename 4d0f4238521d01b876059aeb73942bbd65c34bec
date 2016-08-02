@@ -46,6 +46,30 @@
       "revId": "4d0f4238521d01b876059aeb73942bbd65c34bec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb2c7f3_25a3b540",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-08-02T11:50:21Z",
+      "side": 1,
+      "message": "I generally don\u0027t like flags like this unless it\u0027s for read-for-writes on immutable data (fetched by unchanging keys like integer IDs). Otherwise you either need the master or a slave is good enough (combined with ChronologyProtector generally).\n\nAre these using the master to because of historically high I/O problems getting page rows (and other pointers to blobs, not the blobs themselves, which could use slaves safely).\n\nI guess its already doing it, so it\u0027s not a big deal anyway.",
+      "parentUuid": "aeb2c7f3_0033070b",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 39
+      },
+      "revId": "4d0f4238521d01b876059aeb73942bbd65c34bec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
