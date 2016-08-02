@@ -11,6 +11,7 @@ use DataValues\QuantityValue;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use DataValues\TimeValue;
+use DataValues\UnboundedQuantityValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use Deserializers\DispatchingDeserializer;
@@ -1377,9 +1378,13 @@ class WikibaseRepo {
 			'unknown' => UnknownValue::class,
 			'globecoordinate' => GlobeCoordinateValue::class,
 			'monolingualtext' => MonolingualTextValue::class,
-			'quantity' => QuantityValue::class,
+			'quantity' => function( array $value ) {
+				return isset( $data['upperBound'] ) || isset( $data['lowerBound'] )
+					? QuantityValue::newFromArray( $value )
+					: UnboundedQuantityValue::newFromArray( $value );
+			},
 			'time' => TimeValue::class,
-			'wikibase-entityid' => function( $value ) {
+			'wikibase-entityid' => function( array $value ) {
 				return isset( $value['id'] )
 					? new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) )
 					: EntityIdValue::newFromArray( $value );
