@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeb2c7f3_ec0e0537",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-02T14:57:50Z",
+      "side": 1,
+      "message": "We know the type at this point: {wikibase.datamodel.SiteLinkSet|null}. Everything else throws an error. That @throws line is also missing.",
+      "range": {
+        "startLine": 190,
+        "startChar": 12,
+        "endLine": 190,
+        "endChar": 13
+      },
+      "revId": "0816e0ab04804cc628cf4e3f8058643070a266ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aeb2c7f3_0c0c193d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.sitelinkgroupview.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-02T14:57:50Z",
+      "side": 1,
+      "message": "Should have a message.",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 20
+      },
+      "revId": "0816e0ab04804cc628cf4e3f8058643070a266ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
