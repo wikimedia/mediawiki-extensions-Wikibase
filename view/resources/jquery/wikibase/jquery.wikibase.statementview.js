@@ -551,15 +551,17 @@ $.widget( 'wikibase.statementview', PARENT, {
 	 * @return {wikibase.datamodel.ReferenceList|null}
 	 */
 	_getReferences: function() {
-		var valid = true;
-		var references = new wb.datamodel.ReferenceList(
-			$.map( this._referencesListview.value(), function( referenceview ) {
-				var value = referenceview.value();
-				valid = valid && value !== null;
-				return value;
-			} )
-		);
-		return valid ? references : null;
+		var references = [];
+
+		if ( !this._referencesListview.value().every( function( referenceview ) {
+			var value = referenceview.value();
+			references.push( value );
+			return value;
+		} ) ) {
+			return null;
+		}
+
+		return new wb.datamodel.ReferenceList( references );
 	},
 
 	/**

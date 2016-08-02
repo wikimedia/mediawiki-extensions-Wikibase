@@ -185,16 +185,15 @@ $.widget( 'wikibase.referenceview', PARENT, {
 
 		var snakList = new wb.datamodel.SnakList();
 
-		$.each( this.$listview.data( 'listview' ).value(), function( i, snaklistview ) {
+		if ( !this.$listview.data( 'listview' ).value().every( function( snaklistview ) {
 			var value = snaklistview.value();
-			if ( !value ) {
-				snakList = null;
-			} else if ( snakList ) {
-				snakList.merge( value );
-			}
-		} );
+			snakList.merge( value );
+			return value;
+		} ) ) {
+			return null;
+		}
 
-		if ( snakList && ( this.options.value || snakList.length ) ) {
+		if ( this.options.value || snakList.length ) {
 			return new wb.datamodel.Reference(
 				snakList,
 				this.options.value ? this.options.value.getHash() : undefined
