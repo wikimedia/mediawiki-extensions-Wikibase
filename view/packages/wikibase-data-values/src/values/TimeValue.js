@@ -220,8 +220,8 @@ var SELF = dv.TimeValue = util.inherit( 'DvTimeValue', PARENT, function( timesta
 	/**
 	 * @private
 	 *
-	 * @param {bool} [padYear=false] True if the year should be padded to the maximum length of 16
-	 * digits, false for the default padding to 4 digits.
+	 * @param {boolean} [padYear=false] True if the year should be padded to the maximum length of
+	 *  16 digits, false for the default padding to 4 digits.
 	 *
 	 * @return {string} A YMD-ordered timestamp string resembling ISO 8601.
 	 */
