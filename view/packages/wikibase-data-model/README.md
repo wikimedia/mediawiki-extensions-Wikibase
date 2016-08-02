@@ -8,8 +8,11 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
-### 3.0.0 (alpha)
+### 3.0.0 (2016-08-02)
 
+* Added `Set::toArray`.
+* `Fingerprint::setLabel`, `setDescription` and `setAliases` remove the element when null or an
+  empty Term or MultiTerm is given.
 * Removed cloning from `MultiTerm.getTexts`.
 * Turned EntityId into a simple wrapper around an opaque serialization string
   * Removed EntityId::getNumericId
@@ -20,6 +23,8 @@ at the heart of the [Wikibase software](http://wikiba.se/).
   * Introduced `id` field to `toJSON` return value
   * Removed `numeric-id` and `entity-type` arguments from EntityId constructor
   * Introduced `id` argument to EntityId constructor
+* Deprecated the `WIKIBASE_DATAMODEL_JAVASCRIPT_VERSION` PHP constant.
+* The (optional) extension registration in `init.php` now depends on MediaWiki >=1.25.
 
 ### 2.0.1 (2016-01-27)
 
