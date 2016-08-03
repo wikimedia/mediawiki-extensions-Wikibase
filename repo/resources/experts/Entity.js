@@ -1,12 +1,6 @@
 ( function( mw, wb, $, vv ) {
 	'use strict';
 
-	// temporarily define a hard coded prefix map until we get this from the server
-	var WB_ENTITIES_PREFIXMAP = {
-		Q: 'item',
-		P: 'property'
-	};
-
 	var MODULE = wb.experts,
 		PARENT = vv.experts.StringValue;
 
@@ -46,7 +40,7 @@
 			this._initEntityselector( repoApiUrl );
 
 			var value = this.viewState().value(),
-				entityId = value && value.getPrefixedId( WB_ENTITIES_PREFIXMAP );
+				entityId = value && value.getSerialization();
 
 			this.$input.data( 'entityselector' ).selectedEntity( entityId );
 
