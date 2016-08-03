@@ -79,6 +79,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $entityIdParser = null;
 
 	/**
+	 * @var RepoLinker
+	 */
+	private $repoLinker = null;
+
+	/**
 	 * @return WikibaseLuaBindings
 	 */
 	private function getLuaBindings() {
