@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec7c363_5c39753d",
+        "filename": "client/includes/DataAccess/PropertyParserFunction/Runner.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-03T07:41:23Z",
+      "side": 1,
+      "message": "We have no strong rule for this, but usually we prefer\n\nif ( condition\n    \u0026\u0026 condition\n) {\n\nover\n\nif (\n    condition \u0026\u0026\n    condition\n) {",
+      "revId": "e719e1cdcfb67edcfd4b07b2c87e0096236988cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec7c363_7c3e3128",
+        "filename": "client/tests/phpunit/includes/DataAccess/PropertyParserFunction/RunnerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-03T07:41:23Z",
+      "side": 1,
+      "message": "What the …? Why is this public? Core classes are so bad. :-(",
+      "range": {
+        "startLine": 140,
+        "startChar": 11,
+        "endLine": 140,
+        "endChar": 34
+      },
+      "revId": "e719e1cdcfb67edcfd4b07b2c87e0096236988cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
