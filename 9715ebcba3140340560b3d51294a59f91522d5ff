@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ec7c363_25649845",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-08-03T15:47:09Z",
+      "side": 1,
+      "message": "can we get a test for this, now that this is public and split from the above method?",
+      "revId": "9715ebcba3140340560b3d51294a59f91522d5ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
