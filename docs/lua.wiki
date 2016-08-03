@@ -28,12 +28,12 @@ An example call might look like this:
 mw.wikibase.getEntityIdForCurrentPage() -- Returns the Item id as string, like "Q42"
 </source>
 
-== mw.wikibase.getEntityUrl ==
+=== mw.wikibase.getEntityUrl ===
 <code>wikibase.getEntityUrl()</code><br>
 <code>wikibase.getEntityUrl( id )</code><br>
-Takes an item ID and returns the URL to the item in the repo.
+Takes an entity ID and returns the canonical URL to the entity in the repo.
 
-If no ID was specified, the URL of the item connected to the current page will be returned, if the page is indeed connected.
+If no ID was specified, the URL of the item connected to the current page will be returned, if the page is connected.
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.getEntityUrl( 'Q42' ) -- Returns the URL to the item as a string, like "http://wikidata.org/wiki/Q42".
