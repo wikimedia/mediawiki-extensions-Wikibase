@@ -124,6 +124,38 @@ class RunnerTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( 0, $parser->mExpensiveFunctionCount );
 	}
 
+	public function testRunPropertyParserFunction_expensiveParserFunctionLimitExceeded() {
+		$itemId = new ItemId( 'Q42' );
+
+		$runner = new Runner(
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat' ),
+			$this->getMock( SiteLinkLookup::class ),
+			new BasicEntityIdParser(),
+			$this->getRestrictedEntityLookup(),
+			'enwiki',
+			true
+		);
+
+		$parser = $this->getParser();
+		$parser->mExpensiveFunctionCount = PHP_INT_MAX;
+
+		$frame = $this->getFromFrame( $itemId->getSerialization() );
+		$result = $runner->runPropertyParserFunction(
+			$parser,
+			$frame,
+			array( 'Cat', $this->getMock( PPNode::class ) )
+		);
+
+		// No result, as we exceeded the expensive parser function limit
+		$expected = array(
+			'',
+			'noparse' => false,
+			'nowiki' => false
+		);
+
+		$this->assertEquals( $expected, $result );
+	}
+
 	public function testRunPropertyParserFunction_arbitraryAccessNotFound() {
 		$rendererFactory = $this->getMockBuilder( StatementGroupRendererFactory::class )
 			->disableOriginalConstructor()
