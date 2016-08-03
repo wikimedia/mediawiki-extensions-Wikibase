@@ -86,6 +86,23 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @dataProvider projectLinkSidebarProvider
+	 */
+	public function testBuildProjectLinkSidebarForItem( array $siteIdsToOutput, array $result ) {
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$this->getSiteLinkLookup(),
+			$this->getSiteStore(),
+			$siteIdsToOutput
+		);
+
+		$this->assertEquals(
+			$result,
+			$otherProjectSidebarGenerator->buildProjectLinkSidebarForItem( ItemId::unserialize( 'Q42' ) )
+		);
+	}
+
+	/**
 	 * @dataProvider projectLinkSidebarHookProvider
 	 */
 	public function testBuildProjectLinkSidebar_hook(
