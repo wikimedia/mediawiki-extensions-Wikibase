@@ -256,6 +256,11 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 				data: self._getSearchApiParameters( term )
 			} )
 			.done( function( response ) {
+				if ( response.error ) {
+					deferred.reject( response.error.info );
+					return;
+				}
+
 				deferred.resolve(
 					response.search,
 					response.searchinfo.search,
