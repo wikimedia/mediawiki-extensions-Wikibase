@@ -16,6 +16,24 @@
       "revId": "9715ebcba3140340560b3d51294a59f91522d5ff",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec7c363_0b16cd4d",
+        "filename": "client/includes/Hooks/OtherProjectsSidebarGenerator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-03T17:41:13Z",
+      "side": 1,
+      "message": "Yes, needs a unit test.\nAlso, \"ById\" is not very specific. \"ForItem\" would be more informative.",
+      "parentUuid": "8ec7c363_25649845",
+      "revId": "9715ebcba3140340560b3d51294a59f91522d5ff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
