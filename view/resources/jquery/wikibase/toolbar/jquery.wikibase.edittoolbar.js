@@ -325,6 +325,11 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 		var $subToolbar = this.getContainer().children( ':wikibase-toolbar' ),
 			subToolbar = $subToolbar.data( 'toolbar' );
 
+		// This may happen while "Saving..." is shown.
+		if ( !subToolbar ) {
+			return;
+		}
+
 		var $buttons = this.getButton( 'save' ).element;
 		if ( $.isFunction( this.options.onRemove ) ) {
 			$buttons = $buttons.add( this.getButton( 'remove' ).element );
@@ -359,6 +364,11 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 
 		var $subToolbar = this.getContainer().children( ':wikibase-toolbar' ),
 			subToolbar = $subToolbar.data( 'toolbar' );
+
+		// This may happen while "Saving..." is shown.
+		if ( !subToolbar ) {
+			return;
+		}
 
 		subToolbar.option( '$content', this.getButton( 'edit' ).element );
 
