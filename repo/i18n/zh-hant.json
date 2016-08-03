@@ -15,7 +15,8 @@
 			"Cwlin0416",
 			"Zhxy 519",
 			"飞舞回堂前",
-			"Gi25ni"
+			"Gi25ni",
+			"一個正常人"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -110,6 +111,7 @@
 	"wikibase-shortcopyrightwarning": "點選 \"$1\" 代表您接受 [[$2|使用條款]]，並不反悔接受使用 $3 發佈您的貢獻。",
 	"wikibase-copyrighttooltip-acknowledge": "我接受我未來的編輯使用這些條款。不要再顯示此訊息。",
 	"wikibase-entityselector-more": "更多",
+	"wikibase-entityselector-notfound": "沒有符合的資訊",
 	"wikibase-anonymouseditwarning": "警告：您尚未登入。\n您的 IP 位址將會被記錄在這個項目的編輯歷史中。",
 	"wikibase-move-error": "您無法移出資料 (data) 命名空間中的頁面，您也不能將頁面移入至該命名空間。",
 	"wikibase-validator-sitelink-conflict": "連結 $1 已被項目 $2 使用。 若該連結不屬於該項目，您可從 $2 中移除該連結，或若主題完全相同，您可合併項目。",

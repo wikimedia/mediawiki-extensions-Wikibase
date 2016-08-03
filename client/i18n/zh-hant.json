@@ -14,7 +14,8 @@
 			"LNDDYL",
 			"Cwlin0416",
 			"MoonYaksha",
-			"EagerLin"
+			"EagerLin",
+			"一個正常人"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
@@ -72,5 +73,6 @@
 	"wikibase-property-render-error": "顯示屬性 $1：$2 失敗",
 	"wikibase-otherprojects": "其他專案",
 	"wikibase-otherprojects-beta-message": "其他專案側邊欄",
-	"wikibase-otherprojects-beta-description": "在側邊欄加入 \"{{int:wikibase-otherprojects}}\" 區塊，可根據 {{WBREPONAME}} 中的資料提供連結可連至其他維基媒體專案。"
+	"wikibase-otherprojects-beta-description": "在側邊欄加入 \"{{int:wikibase-otherprojects}}\" 區塊，可根據 {{WBREPONAME}} 中的資料提供連結可連至其他維基媒體專案。",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|連接}}到{{WBREPONAME}}"
 }
