@@ -75,6 +75,16 @@ class OtherProjectsSidebarGenerator {
 			return array();
 		}
 
+		return $this->buildProjectLinkSidebarFromItemId( $itemId );
+	}
+
+	/**
+	 * @param ItemId $itemId
+	 *
+	 * @return array[] Array of arrays of attributes describing sidebar links, sorted by the site's
+	 * group and global ids.
+	 */
+	public function buildProjectLinkSidebarFromItemId( ItemId $itemId ) {
 		$sidebar = $this->buildPreliminarySidebarFromSiteLinks( $this->getSiteLinks( $itemId ) );
 		$sidebar = $this->runHook( $itemId, $sidebar );
 
