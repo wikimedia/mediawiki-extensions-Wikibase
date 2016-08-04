@@ -381,7 +381,8 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 		customItems.unshift( new $.ui.ooMenu.CustomItem(
 			this.options.messages.notfound,
 			function() {
-				return self._cache.suggestions && !self._cache.suggestions.length;
+				return self._cache.suggestions && !self._cache.suggestions.length
+					&& self.element.val().trim() !== '';
 			},
 			null,
 			'ui-entityselector-notfound'
