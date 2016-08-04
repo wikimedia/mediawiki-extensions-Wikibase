@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec44f61_980f993b",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entityselector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-04T10:02:34Z",
+      "side": 1,
+      "message": "I find self.element.val().trim() !\u003d\u003d \u0027\u0027 better to read.",
+      "revId": "3625ce09db781cb7aa32df9e46819ae9068cbe16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
