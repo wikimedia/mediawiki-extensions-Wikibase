@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec44f61_de8e59d5",
+        "filename": "repo/includes/ChangeOp/ChangeOpStatement.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-04T15:58:22Z",
+      "side": 1,
+      "message": "why keep an empty private method??",
+      "range": {
+        "startLine": 214,
+        "startChar": 1,
+        "endLine": 214,
+        "endChar": 8
+      },
+      "revId": "3d40116a5c77cb0199a68293c809c18d02f73c4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
