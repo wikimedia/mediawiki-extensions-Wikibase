@@ -87,7 +87,6 @@ function mwMsgOrString( msgKey, string ) {
 $.widget( 'wikibase.entityselector', $.ui.suggester, {
 
 	/**
-	 * Options
 	 * @property {Object}
 	 */
 	options: {
@@ -113,13 +112,13 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	/**
 	 * Caches retrieved results.
 	 * @property {Object} [_cache={}]
-	 * @private
+	 * @protected Warning, PropertySuggester's EntitySelector accesses this!
 	 */
 	_cache: null,
 
 	/**
 	 * @inheritdoc
-	 * @protected
+	 * @protected Warning, PropertySuggester's EntitySelector overrides this!
 	 */
 	_create: function() {
 		var self = this;
@@ -209,7 +208,7 @@ $.widget( 'wikibase.entityselector', $.ui.suggester, {
 	/**
 	 * Create and return the data object for the api call.
 	 *
-	 * @protected
+	 * @protected Warning, PropertySuggester's EntitySelector overrides this!
 	 *
 	 * @param {string} term
 	 * @return {Object}
