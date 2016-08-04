@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "6ec44f61_7ea0e53e",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/QuantityRdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-08-04T20:46:55Z",
+      "side": 1,
+      "message": "oops! Of course not, I was debugging tests :)",
+      "parentUuid": "6ec44f61_1ec3710b",
+      "revId": "e549e45301c4b38777dfa9ba101b7653033f26b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec44f61_9ed6a1c7",
         "filename": "repo/tests/phpunit/includes/Rdf/Values/QuantityRdfBuilderTest.php",
         "patchSetId": 17
@@ -36,6 +54,24 @@
       "writtenOn": "2016-08-04T15:52:34Z",
       "side": 1,
       "message": "quantities using primary units should now have themselves as normalized value, right?",
+      "revId": "e549e45301c4b38777dfa9ba101b7653033f26b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec44f61_9e84e1b7",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/QuantityRdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-08-04T20:46:55Z",
+      "side": 1,
+      "message": "right, they have value and value-norm on the statement.",
+      "parentUuid": "6ec44f61_9ed6a1c7",
       "revId": "e549e45301c4b38777dfa9ba101b7653033f26b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -59,6 +95,24 @@
         "endLine": 145,
         "endChar": 10
       },
+      "revId": "e549e45301c4b38777dfa9ba101b7653033f26b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec44f61_1eb8d173",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/QuantityRdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-08-04T20:46:55Z",
+      "side": 1,
+      "message": "hmmm. I thought we didn\u0027t want to have link, I missed the both part. Can be added of course. Thinking about it, doesn\u0027t hurt to have both probably.",
+      "parentUuid": "6ec44f61_1eea9173",
       "revId": "e549e45301c4b38777dfa9ba101b7653033f26b2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
