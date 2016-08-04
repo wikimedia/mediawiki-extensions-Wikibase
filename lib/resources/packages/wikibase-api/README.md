@@ -6,6 +6,10 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 2.1.1 (2016-08-04)
+
+* Follow up fix to HTML escaping in `wikibase.api.RepoApiError`.
+
 ### 2.1.0 (2016-08-03)
 
 * Fixed HTML escaping in `wikibase.api.RepoApiError`.
