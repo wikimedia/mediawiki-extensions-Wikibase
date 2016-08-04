@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ec44f61_1ec3710b",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/QuantityRdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-04T15:52:34Z",
+      "side": 1,
+      "message": "This probably shouldn\u0027t be commented out, right?",
+      "range": {
+        "startLine": 50,
+        "startChar": 5,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "e549e45301c4b38777dfa9ba101b7653033f26b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec44f61_9ed6a1c7",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/QuantityRdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-04T15:52:34Z",
+      "side": 1,
+      "message": "quantities using primary units should now have themselves as normalized value, right?",
+      "revId": "e549e45301c4b38777dfa9ba101b7653033f26b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec44f61_1eea9173",
+        "filename": "repo/tests/phpunit/includes/Rdf/Values/QuantityRdfBuilderTest.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-04T15:52:34Z",
+      "side": 1,
+      "message": "Is it intentional that we now only have the \"parallel\" properties for value and normalized value, and not link between value and normalized value? I thought we agreed on having both? I personally don\u0027t care much as long as we have the direct normalized value property. Just making sure we didn\u0027t miss anything.",
+      "range": {
+        "startLine": 145,
+        "startChar": 9,
+        "endLine": 145,
+        "endChar": 10
+      },
+      "revId": "e549e45301c4b38777dfa9ba101b7653033f26b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
