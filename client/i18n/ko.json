@@ -72,5 +72,6 @@
 	"wikibase-pageinfo-entity-id-none": "없음",
 	"wikibase-property-render-error": "$1 속성 표시 실패: $2",
 	"wikibase-otherprojects": "다른 프로젝트",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}}에 대한 {{PLURAL:$1|연결}}",
 	"notification-link-text-view-item": "항목 {{GENDER:$1|보기}}"
 }

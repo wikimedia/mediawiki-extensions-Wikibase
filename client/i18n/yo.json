@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Demmy"
+			"Demmy",
+			"Wikicology"
 		]
 	},
 	"tooltip-t-wikibase": "Àjápọ̀ sí dátà àjápọ̀mọ́ra ẹyọ ìnú ìkọ́pamọ́",
@@ -14,7 +15,9 @@
 	"wikibase-linkitem-input-page": "Ojúewé:",
 	"wikibase-linkitem-confirmitem-button": "Ìfidájú",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Fi pamọ́",
 	"wikibase-rc-hide-wikidata-show": "Ìfihàn",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Àtúnṣe {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Àtúnṣe {{WBREPONAME}}",
+	"wikibase-otherprojects": "Ní àkànṣe iṣẹ́ míràn"
 }

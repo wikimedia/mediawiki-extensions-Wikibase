@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Demmy"
+			"Demmy",
+			"Wikicology"
 		]
 	},
 	"wikibase-edit": "àtúnṣe",
-	"wikibase-add": "àròpọ̀"
+	"wikibase-add": "àròpọ̀",
+	"wikibase-label-empty": "Kò sí ààmì ìdánimọ̀",
+	"wikibase-description-empty": "Kò sí àpèjúwe kankan",
+	"wikibase-sitelinks-special": "Àwọn ojú òpó míràn",
+	"wikibase-statementview-rank-normal": "Ipò déédé"
 }

@@ -20,9 +20,9 @@
 	"apihelp-query+wikibase-description": "Hämta information om Wikibase-klienten och det tillhörande Wikibase-centralförvaret.",
 	"apihelp-query+wikibase-example": "Hämta URL-sökvägen och annan information om Wikibase-klienten och centralförvaret.",
 	"apihelp-query+wikibase-param-prop": "Vilka egenskaper att hämta:\n;<kbd>url</kbd>: Bas-URL, skript-sökväg och artikel-sökväg för Wikibase-centralförvaret.\n;<kbd>siteid</kbd>: siteid för denna webbplats.",
-	"wikibase-after-page-move": "Du kan också [$1 uppdatera] det associerade objektet på {{WBREPONAME}} för att bevara språklänkarna i den flyttade sidan.",
+	"wikibase-after-page-move": "Du bör också uppdatera [$1 det associerade objektet] på {{WBREPONAME}} för att bevara språklänkarna i den flyttade sidan.",
 	"wikibase-after-page-move-queued": "[$1 {{WBREPONAME}}objektet] som är associerat med denna sida kommer att uppdateras automatiskt. Notera att detta kanske inte sker omedelbart.",
-	"wikibase-after-page-delete": "Du kan också ta bort länken till den här sidan från tillhörande [$1 {{WBREPONAME}}-objekt] för att upprätthålla språklänkar.",
+	"wikibase-after-page-delete": "Du bör också ta bort länken till den här sidan från det tillhörande [$1 objektet på {{WBREPONAME}}] för att upprätthålla språklänkar.",
 	"wikibase-after-page-delete-queued": "[$1 {{WBREPONAME}}-objektet] associerat med denna sida kommer att uppdateras automatiskt. Notera att detta kanske inte sker omedelbart.",
 	"wikibase-comment-add": "Ett {{WBREPONAME}}objekt har skapats.",
 	"wikibase-comment-remove": "Tillhörande {{WBREPONAME}}objekt togs bort. Språklänkar togs bort.",
@@ -81,5 +81,11 @@
 	"wikibase-property-render-error": "Misslyckades att rendera egenskapen $1: $2",
 	"wikibase-otherprojects": "I andra projekt",
 	"wikibase-otherprojects-beta-message": "Sidopanel för andra projekt",
-	"wikibase-otherprojects-beta-description": "Lägger till ett \"{{int:wikibase-otherprojects}}\"-avsnitt till sidofältet som innehåller länkar till andra Wikimedia-projekten utifrån {{WBREPONAME}}-data."
+	"wikibase-otherprojects-beta-description": "Lägger till ett \"{{int:wikibase-otherprojects}}\"-avsnitt till sidofältet som innehåller länkar till andra Wikimedia-projekten utifrån {{WBREPONAME}}-data.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Anslutning|Anslutningar}} med {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Meddela mig när någon ansluter en sida som {{GENDER:|jag har skapats}} till ett {{WBREPONAME}}-objekt.",
+	"notification-header-page-connection": "Sidan <strong>$3</strong> {{GENDER:$2|anslöts}} till ett objekt på {{WBREPONAME}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> och {{PLURAL:$4|en till sida|$4 andra sidor|100=99+ andra sidor}} har {{GENDER:$2|anslutits}} till objekt på {{WBREPONAME}}.",
+	"notification-link-text-view-item": "{{GENDER:$1|Visa}} objekt",
+	"notification-subject-page-connection": "En sida på {{SITENAME}} som du {{GENDER:$3|skapade}} har {{GENDER:$2|anslutits}} till ett {{WBREPONAME}}-objekt"
 }

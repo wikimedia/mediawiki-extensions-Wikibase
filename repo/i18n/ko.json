@@ -145,6 +145,8 @@
 	"wikibase-newproperty-fieldset": "새 속성 만들기",
 	"wikibase-newproperty-datatype": "데이터 유형:",
 	"wikibase-newproperty-invalid-datatype": "지정한 데이터 형식이 잘못되었습니다.",
+	"wikibase-description-helppage": "Help:설명",
+	"wikibase-label-helppage": "Help:레이블",
 	"special-newitem": "새 항목 만들기",
 	"wikibase-newitem-summary": "[[Special:Search|항목이 이미 존재하는지 확인]]해야 합니다!<br />모든 새 항목에 대한 [[{{int:Wikibase-label-helppage}}|레이블]]과 [[{{int:Wikibase-description-helppage}}|설명]]을 만들어야 합니다.",
 	"wikibase-newitem-fieldset": "새 항목 만들기",

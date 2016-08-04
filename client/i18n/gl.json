@@ -77,5 +77,9 @@
 	"wikibase-property-render-error": "Erro ao renderizar a propiedade $1: $2",
 	"wikibase-otherprojects": "Noutros proxectos",
 	"wikibase-otherprojects-beta-message": "Barra lateral doutros proxectos",
-	"wikibase-otherprojects-beta-description": "Engade unha sección \"{{int:wikibase-otherprojects}}\" na barra lateral que achega ligazóns cara a outros proxectos da Wikimedia, segundo datos de {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Engade unha sección \"{{int:wikibase-otherprojects}}\" na barra lateral que achega ligazóns cara a outros proxectos da Wikimedia, segundo datos de {{WBREPONAME}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexión|Conexións}} con {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Avisarme cando alguén conecte unha páxina que {{GENDER:|eu creei}} a un elemento de {{WBREPONAME}}.",
+	"notification-header-page-connection": "A páxina <strong>$3</strong> foi {{GENDER:$2|conectada}} a un elemento de {{WBREPONAME}} .",
+	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento"
 }

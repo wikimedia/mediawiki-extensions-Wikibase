@@ -60,5 +60,9 @@
 	"wikibase-pageinfo-entity-id-none": "কোনটিই নয়",
 	"wikibase-otherprojects": "অন্যান্য প্রকল্পে",
 	"wikibase-otherprojects-beta-message": "অন্যান্য প্রকল্পের পার্শ্বদণ্ড",
-	"wikibase-otherprojects-beta-description": "পার্শ্বদণ্ডে \"{{int:wikibase-otherprojects}}\" অনুচ্ছেদ যোগ করে যা {{WBREPONAME}}ে থাকা উপাত্তের উপর ভিত্তি করে অন্যান্য উইকিমিডিয়া প্রকল্পের লিঙ্ক প্রদান করে।"
+	"wikibase-otherprojects-beta-description": "পার্শ্বদণ্ডে \"{{int:wikibase-otherprojects}}\" অনুচ্ছেদ যোগ করে যা {{WBREPONAME}}ে থাকা উপাত্তের উপর ভিত্তি করে অন্যান্য উইকিমিডিয়া প্রকল্পের লিঙ্ক প্রদান করে।",
+	"echo-pref-tooltip-wikibase-action": "কেউ {{GENDER:|আমার তৈরি}} করা পাতা {{WBREPONAME}} আইটেমে সংযুক্ত করলে আমাকে বিজ্ঞপ্তি দাও।",
+	"notification-header-page-connection": "<strong>$3</strong> পাতাটি একটি {{WBREPONAME}} আইটেমের সাথে {{GENDER:$2|সংযুক্ত হয়েছে}}।",
+	"notification-link-text-view-item": "আইটেম {{GENDER:$1|দেখুন}}",
+	"notification-subject-page-connection": "{{SITENAME}}-এ আপনার {{GENDER:$3|তৈরি করা}} একটি পাতা {{WBREPONAME}} আইটেমের সাথে {{GENDER:$2|সংযুক্ত হয়েছে}}।"
 }

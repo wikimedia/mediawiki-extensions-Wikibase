@@ -92,6 +92,7 @@
 	"wikibase-shortcopyrightwarning": "\"$1\"-এ ক্লিক করার মাধ্যমে, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং $3-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।",
 	"wikibase-copyrighttooltip-acknowledge": "আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।",
 	"wikibase-entityselector-more": "আরও",
+	"wikibase-entityselector-notfound": "মিলে যায় এমন কিছু পাওয়া যায়নি।",
 	"wikibase-anonymouseditwarning": "সতর্কতা: আপনি প্রবেশ করেননি।\nএই সত্তার সম্পাদনার ইতিহাসে আপনার আইপি ঠিকানা সংরক্ষিত হবে।",
 	"wikibase-validator-no-such-media": "[https://commons.wikimedia.org/ উইকিমিডিয়া কমন্সে] \"$1\" ফাইলটির অস্তিত্ব নেই।",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" কোন বৈধ আইটেম আইডি নয়।",

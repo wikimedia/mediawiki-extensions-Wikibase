@@ -71,7 +71,7 @@
 	"wikibase-entity-summary-special-create-item": "[$2] fogalom létrehozása {{PLURAL:$1|értékkel|értékekkel}}",
 	"wikibase-item-summary-wbcreate-new": "Fogalom létrehozása",
 	"wikibase-item-summary-wbeditentity": "Fogalom létrehozása",
-	"wikibase-item-summary-wbeditentity-create": "Fogalom létrehozása",
+	"wikibase-item-summary-wbeditentity-create": "Elem létrehozása",
 	"wikibase-item-summary-wbeditentity-update": "Fogalom módosítása",
 	"wikibase-item-summary-wbeditentity-override": "Fogalom átírása",
 	"wikibase-item-summary-wblinktitles-connect": "Lapok összekötése nyelvi linkkel",
