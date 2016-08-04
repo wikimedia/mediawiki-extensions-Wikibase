@@ -308,15 +308,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	},
 
 	doErrorNotification: function( error ) {
-		var self = this;
-
-		var $error = wb.buildErrorOutput( error, {
-			progress: function() {
-				self.$headingSection.data( 'sticknode' ).refresh();
-			}
-		} );
-
-		this.notification( $error, 'wb-error' );
+		this.notification( wb.buildErrorOutput( error ), 'wb-error' );
 	}
 } );
 
