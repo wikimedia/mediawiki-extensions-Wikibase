@@ -7,19 +7,18 @@ use DataValues\IllegalValueException;
 use InvalidArgumentException;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
-use ValueFormatters\ValueFormatterBase;
 
 /**
  * DispatchingValueFormatter is a formatter for DataValues. In addition to dispatching based on
  * the DataValue type, it also supports dispatching based on a DataType.
  *
- * @todo: drop ValueFormatterBase ancestry. Plain format() shouldn't be supported,
+ * @todo: Plain format() shouldn't be supported,
  * formatValue() should require the dataType ID.
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
  */
-class DispatchingValueFormatter extends ValueFormatterBase implements TypedValueFormatter {
+class DispatchingValueFormatter implements ValueFormatter, TypedValueFormatter {
 
 	/**
 	 * @var ValueFormatter[]
