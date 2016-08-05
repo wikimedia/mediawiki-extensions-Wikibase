@@ -22,6 +22,8 @@ return [
 		720101010,
 	],
 
+	// List of supported entity types, mapping entity type identifiers to namespace IDs.
+	// This setting is used to enable entity types.
 	'entityNamespaces' => [],
 
 	// See StatementGrouperBuilder for an example.
