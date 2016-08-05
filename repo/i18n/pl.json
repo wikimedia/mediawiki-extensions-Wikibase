@@ -15,7 +15,8 @@
 			"Alan ffm",
 			"Darellur",
 			"Devwebtel",
-			"PiotrAntosz"
+			"PiotrAntosz",
+			"Woytecr"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -33,7 +34,8 @@
 	"wikibase-remove-inprogress": "Usuwanie...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "W innych językach",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfiguruj",
-	"wikibase-setting-entitytermsview-showEntitytermslistview": "Pokaż etykiety, aliasy i opisy w wszystkich moich językach po załadowaniu strony",
+	"wikibase-setting-entitytermsview-showEntitytermslistview": "Pokaż etykiety, aliasy i opisy we wszystkich moich językach po załadowaniu strony",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Osobistego wyboru języków, oprócz języka interfejsu, można dokonać poprzez użycie składni [[mw:Extension:Babel/pl|rozszerzenia Babel]] na stronie użytkownika.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Inne nazwy",
 	"wikibase-entitytermsforlanguagelistview-description": "Opis",
 	"wikibase-entitytermsforlanguagelistview-label": "Etykieta",

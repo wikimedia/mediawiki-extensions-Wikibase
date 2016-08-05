@@ -115,6 +115,7 @@
 	"wikibase-shortcopyrightwarning": "Door te klikken op \"$1\" gaat u akkoord met de [[$2|gebruiksvoorwaarden]] en gaat u onherroepelijk akkoord met het vrijgeven van uw bijdrage onder de $3.",
 	"wikibase-copyrighttooltip-acknowledge": "Ik accepteer deze voorwaarden voor mijn toekomstige bewerkingen. Geef dit bericht niet opnieuw weer.",
 	"wikibase-entityselector-more": "meer",
+	"wikibase-entityselector-notfound": "Geen overeenkomsten gevonden",
 	"wikibase-anonymouseditwarning": "Waarschuwing: u bent niet aangemeld.\nUw IP-adres wordt opgeslagen in bewerkingsgeschiedenis van deze entiteit.",
 	"wikibase-move-error": "U kunt pagina's in de gegevensnaamruimte niet verplaatsen en u kunt er geen pagina naartoe verplaatsen.",
 	"wikibase-validator-label-conflict": "Het label \"$1\" is al gekoppeld met taalcode $2 aan de eigenschap $3.",

@@ -56,5 +56,6 @@
 	"wikibase-pageinfo-entity-id-none": "Nenio",
 	"wikibase-otherprojects": "En aliaj projektoj",
 	"wikibase-otherprojects-beta-message": "Aliaj projektoj en flanka strio",
-	"wikibase-otherprojects-beta-description": "Aldonas al flanka strio sekcion \"{{int:wikibase-otherprojects}}\", kiu provizas ligilojn al aliaj Vikimediaj projektoj laŭ datumoj de {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Aldonas al flanka strio sekcion \"{{int:wikibase-otherprojects}}\", kiu provizas ligilojn al aliaj Vikimediaj projektoj laŭ datumoj de {{WBREPONAME}}.",
+	"notification-link-text-view-item": "{{GENDER:$1|Vidi}} eron"
 }
