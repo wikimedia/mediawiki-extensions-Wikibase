@@ -41,10 +41,6 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase',
-				'jquery.ui.toggler'
-			),
-			'messages' => array(
-				'wikibase-tooltip-error-details',
 			),
 		),
 
