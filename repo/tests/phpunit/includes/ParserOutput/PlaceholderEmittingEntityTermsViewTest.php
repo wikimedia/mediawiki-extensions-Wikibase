@@ -43,16 +43,19 @@ class PlaceholderEmittingEntityTermsViewTest extends PHPUnit_Framework_TestCase 
 
 		$entityTermsView = $this->newEntityTermsView( $textInjector );
 
-		$result = $entityTermsView->getHtml(
-			'lkt',
-			$property,
-			$property,
-			$property
-		);
+		$html = $entityTermsView->getHtml( 'lkt', $property, $property );
+		$markers = $textInjector->getMarkers();
 
-		$this->assertEquals(
-			array_values( $textInjector->getMarkers() ),
-			[ [ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ], [ 'termbox' ] ]
+		foreach ( $markers as $marker => $name ) {
+			$this->assertContains( $marker, $html );
+		}
+
+		$this->assertSame(
+			[
+				[ 'entityViewPlaceholder-entitytermsview-entitytermsforlanguagelistview-class' ],
+				[ 'termbox' ],
+			],
+			array_values( $markers )
 		);
 	}
 
@@ -62,17 +65,9 @@ class PlaceholderEmittingEntityTermsViewTest extends PHPUnit_Framework_TestCase 
 
 		$entityTermsView = $this->newEntityTermsView( $textInjector );
 
-		$termsListItems = $entityTermsView->getTermsListItems(
-			'lkt',
-			$property,
-			$property,
-			$property
-		);
+		$termsListItems = $entityTermsView->getTermsListItems( 'lkt', $property, $property );
 
-		$this->assertEquals(
-			$termsListItems,
-			[ 'lkt' => null ]
-		);
+		$this->assertSame( [ 'lkt' => null ], $termsListItems );
 	}
 
 }
