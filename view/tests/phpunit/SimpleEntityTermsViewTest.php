@@ -186,9 +186,12 @@ class SimpleEntityTermsViewTest extends PHPUnit_Framework_TestCase {
 				$fingerprint,
 				$fingerprint,
 				$this->equalTo( $languageCode === 'de' ? [ 'de', 'en' ] : [ 'en' ] )
-			);
+			)
+			->will( $this->returnValue( '<TERMSLISTVIEW>' ) );
 		$entityTermsView = $this->getEntityTermsView( 1, $termsListView );
 		$html = $entityTermsView->getHtml( $languageCode, $fingerprint, $fingerprint, $fingerprint, $entityId );
+
+		$this->assertContains( '<TERMSLISTVIEW>', $html );
 	}
 
 	public function testGetTitleHtml_withEntityId() {
