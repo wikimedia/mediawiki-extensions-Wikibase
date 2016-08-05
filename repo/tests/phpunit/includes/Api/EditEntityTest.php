@@ -5,10 +5,7 @@ namespace Wikibase\Test\Repo\Api;
 use UsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\MediaInfo\DataModel\MediaInfo;
-use Wikibase\MediaInfo\DataModel\MediaInfoId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

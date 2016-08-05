@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Store\SQL;
 
-use DatabaseBase;
-use DBError;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
