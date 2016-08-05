@@ -121,12 +121,7 @@ class ChangeOpStatement extends ChangeOpBase {
 			$this->applyStatementToEntity( $entity, $summary );
 		} else {
 			$oldIndex = $this->removeStatement( $entity->getStatements(), $summary );
-			// TODO: Use StatementList::addStatement( …, $index ). This will require DataModel 6.1.
-			if ( $oldIndex !== null ) {
-				$this->addStatementAtIndex( $entity->getStatements(), $oldIndex );
-			} else {
-				$entity->getStatements()->addStatement( $this->statement );
-			}
+			$entity->getStatements()->addStatement( $this->statement, $oldIndex );
 		}
 	}
 
@@ -166,19 +161,16 @@ class ChangeOpStatement extends ChangeOpBase {
 	 */
 	private function removeStatement( StatementList $statements, Summary $summary = null ) {
 		$guid = $this->statement->getGuid();
-		$index = 0;
 		$oldIndex = null;
 		$oldStatement = null;
 
-		foreach ( $statements->toArray() as $statement ) {
+		foreach ( $statements->toArray() as $index => $statement ) {
 			if ( $statement->getGuid() === $guid ) {
 				$oldIndex = $index;
 				$oldStatement = $statement;
 				$statements->removeStatementsWithGuid( $guid );
 				break;
 			}
-
-			$index++;
 		}
 
 		if ( $oldStatement === null ) {
@@ -210,41 +202,6 @@ class ChangeOpStatement extends ChangeOpBase {
 			throw new ChangeOpException( "Claim with GUID $guid uses property "
 				. $oldPropertyId . ", can't change to "
 				. $newMainSnak->getPropertyId() );
-		}
-	}
-
-	/**
-	 * @param StatementList $statements
-	 * @param int $newIndex
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function addStatementAtIndex( StatementList $statements, $newIndex ) {
-		$index = 0;
-		$replacements = [];
-
-		foreach ( $statements->toArray() as $statement ) {
-			if ( $index >= $newIndex ) {
-				$guid = $statement->getGuid();
-
-				if ( $guid === null ) {
-					throw new InvalidArgumentException( 'Unexpected statement with no GUID set' );
-				}
-
-				$replacements[$guid] = $statement;
-			}
-
-			$index++;
-		}
-
-		foreach ( $replacements as $guid => $statement ) {
-			$statements->removeStatementsWithGuid( $guid );
-		}
-
-		$statements->addStatement( $this->statement );
-
-		foreach ( $replacements as $statement ) {
-			$statements->addStatement( $statement );
 		}
 	}
 
