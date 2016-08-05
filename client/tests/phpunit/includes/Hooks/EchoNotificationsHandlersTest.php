@@ -7,7 +7,6 @@ use MediaWikiTestCase;
 use Title;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\RepoLinker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 use Wikibase\SettingsArray;
 
