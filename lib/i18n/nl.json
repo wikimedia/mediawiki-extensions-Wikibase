@@ -9,7 +9,8 @@
 			"Sjoerddebruin",
 			"Macofe",
 			"Robin0van0der0vliet",
-			"Robin van der Vliet"
+			"Robin van der Vliet",
+			"MrLeopold"
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",
@@ -18,10 +19,10 @@
 	"wikibase-deletedentity-property": "Verwijderde eigenschap",
 	"wikibase-deletedentity-query": "Verwijderde zoekopdracht",
 	"wikibase-error-unexpected": "Fout: $1.",
-	"wikibase-error-save-generic": "Er is een fout opgetreden tijdens het opslaan van uw wijzigingen. Uw wijzigingen konden niet worden opgeslagen.",
-	"wikibase-error-remove-generic": "Er is een fout opgetreden tijdens het verwijderen. Uw wijzigingen konden niet worden opgeslagen.",
-	"wikibase-error-save-connection": "Er is een fout in de verbinding opgetreden tijdens het opslaan. Uw wijzigingen konden niet worden opgeslagen. Controleer uw internetverbinding.",
-	"wikibase-error-remove-connection": "Er is een fout in de verbinding opgetreden tijdens het verwijderen. Uw wijzigingen konden niet worden opgeslagen. Controleer uw internetverbinding.",
+	"wikibase-error-save-generic": "Kon het niet opslaan vanwege een fout.",
+	"wikibase-error-remove-generic": "Kon niet verwijderen vanwege een fout.",
+	"wikibase-error-save-connection": "Kon niet opslaan vanwege een verbindingsfout. Controleer alstublieft uw internetverbinding.",
+	"wikibase-error-remove-connection": "Kon niet verwijderen vanwege een verbindingsfout. Controleer alstublieft uw internetverbinding.",
 	"wikibase-error-save-timeout": "Wij ondervinden technische problemen. Uw wijzigingen kunnen niet worden opgeslagen.",
 	"wikibase-error-remove-timeout": "Wij ondervinden technische problemen. Uw wijzigingen kunnen niet worden opgeslagen.",
 	"wikibase-error-autocomplete-connection": "Het was niet mogelijk de site-API te bereiken. Probeer het later opnieuw.",

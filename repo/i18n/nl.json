@@ -20,7 +20,8 @@
 			"아라",
 			"Southparkfan",
 			"Macofe",
-			"HanV"
+			"HanV",
+			"MrLeopold"
 		]
 	},
 	"wikibase-desc": "Repository voor gestructureerde gegevens",
@@ -43,7 +44,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Beschrijving",
 	"wikibase-entitytermsforlanguagelistview-label": "Label",
 	"wikibase-entitytermsforlanguagelistview-language": "Taal",
-	"wikibase-entitytermsforlanguagelistview-more": "Meer talen",
+	"wikibase-entitytermsforlanguagelistview-more": "Alle ingevoerde talen",
 	"wikibase-entitytermsforlanguagelistview-less": "Minder talen",
 	"wikibase-label-empty": "Geen label ingesteld",
 	"wikibase-label-edit-placeholder": "geef een label op",
