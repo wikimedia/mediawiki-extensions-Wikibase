@@ -76,7 +76,7 @@ class EntityLoadingHelper {
 	 *
 	 * @throws UsageException
 	 * @throws LogicException
-	 * @return EntityRevision
+	 * @return EntityRevision|null
 	 */
 	protected function loadEntityRevision(
 		EntityId $entityId,
@@ -88,13 +88,6 @@ class EntityLoadingHelper {
 
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId );
-
-			if ( !$revision ) {
-				$this->errorReporter->dieError(
-					'Entity ' . $entityId->getSerialization() . ' not found',
-					'cant-load-entity-content' );
-			}
-
 			return $revision;
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
@@ -110,12 +103,83 @@ class EntityLoadingHelper {
 	/**
 	 * Returns the given EntityDocument.
 	 *
-	 * @param EntityId $entityId
+	 * @param EntityId|null $entityId ID of the entity to load. If not given, the ID is taken
+	 *        from the request parameters. If $entityId is coven, it must be consistent with
+	 *        the 'baserevid' parameter.
 	 * @return EntityDocument
 	 */
-	public function loadEntity( EntityId $entityId ) {
+	public function loadEntity( EntityId $entityId = null ) {
+		$params = $this->apiBase->extractRequestParams();
+
+		if ( !$entityId ) {
+			$entityId = $this->getEntityIdFromParams( $params );
+		}
+
 		$entityRevision = $this->loadEntityRevision( $entityId );
+
+		if ( !$entityRevision ) {
+			$this->errorReporter->dieError(
+				'Entity ' . $entityId->getSerialization() . ' not found',
+				'cant-load-entity-content' );
+		}
+
 		return $entityRevision->getEntity();
+	}
+
+	/**
+	 * @param string[] $params
+	 *
+	 * @return EntityId|null
+	 */
+	protected function getEntityIdFromParams( array $params ) {
+		if ( isset( $params['id'] ) ) {
+			return $this->getEntityIdFromString( $params['id'] );
+		} elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+			return $this->getEntityIdFromSiteTitleCombination(
+				$params['site'],
+				$params['title']
+			);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns an EntityId object based on the given $id,
+	 * or throws a usage exception if the ID is invalid.
+	 *
+	 * @param string $id
+	 *
+	 * @throws UsageException
+	 * @return EntityId
+	 */
+	private function getEntityIdFromString( $id ) {
+		try {
+			return $this->idParser->parse( $id );
+		} catch ( EntityIdParsingException $ex ) {
+			$this->errorReporter->dieException( $ex, 'no-such-entity-id' );
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param string $site
+	 * @param string $title
+	 *
+	 * @throws UsageException If no such entity is found.
+	 * @return EntityId The ID of the entity connected to $title on $site.
+	 */
+	private function getEntityIdFromSiteTitleCombination( $site, $title ) {
+		// FIXME: Normalization missing, see T47282.
+		$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
+
+		if ( $itemId === null ) {
+			$this->errorReporter->dieError( 'No entity found matching site link ' . $site . ':' . $title,
+			                                'no-such-entity-link' );
+		}
+
+		return $itemId;
 	}
 
 }

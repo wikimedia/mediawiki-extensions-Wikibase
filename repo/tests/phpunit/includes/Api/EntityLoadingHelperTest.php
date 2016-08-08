@@ -108,6 +108,10 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testLoadEntity_from_title() {
+		$this->fail( 'Test me!' );
+	}
+
 	public function testLoadEntity() {
 		$revision = $this->getMockRevision();
 		$entity = $revision->getEntity();

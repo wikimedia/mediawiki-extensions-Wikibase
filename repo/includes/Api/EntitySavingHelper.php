@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use InvalidArgumentException;
 use LogicException;
 use Status;
 use UsageException;
@@ -10,7 +11,9 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EditEntity as EditEntityHandler;
 use Wikibase\EditEntityFactory;
+use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -39,6 +42,34 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 */
 	private $editEntityFactory;
 
+	/**
+	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
+	 *
+	 * @see EditEntity::attemptSave
+	 * @see WikiPage::doEditContent
+	 *
+	 * @var int
+	 */
+	private $flags = 0;
+
+	/**
+	 * Base revision ID, for loading the entity revision for editing, and for avoiding
+	 * race conditions.
+	 *
+	 * @var int
+	 */
+	private $baseRevisionId = 0;
+
+	/**
+	 * @var EntityFactory|null
+	 */
+	private $entityFactory = null;
+
+	/**
+	 * @var EntityStore|null
+	 */
+	private $entityStore = null;
+
 	public function __construct(
 		ApiBase $apiBase,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -55,22 +86,163 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getBaseRevisionId() {
+		return $this->baseRevisionId;
+	}
+
+	/**
+	 * @return null|EntityFactory
+	 */
+	public function getEntityFactory() {
+		return $this->entityFactory;
+	}
+
+	/**
+	 * @param EntityFactory $entityFactory
+	 */
+	public function setEntityFactory( EntityFactory $entityFactory ) {
+		$this->entityFactory = $entityFactory;
+	}
+
+	/**
+	 * @return null|EntityStore
+	 */
+	public function getEntityStore() {
+		return $this->entityStore;
+	}
+
+	/**
+	 * @param EntityStore $entityStore
+	 */
+	public function setEntityStore( EntityFactory $entityStore ) {
+		$this->entityStore = $entityStore;
+	}
+
+	/**
 	 * Returns the given EntityDocument.
 	 *
-	 * @param EntityId $entityId
+	 * @param EntityId|null $entityId ID of the entity to load. If not given, the ID is taken
+	 *        from the request parameters. If $entityId is coven, it must be consistent with
+	 *        the 'baserevid' parameter.
 	 * @return EntityDocument
 	 */
-	public function loadEntity( EntityId $entityId ) {
+	public function loadEntity( EntityId $entityId = null ) {
 		$params = $this->apiBase->extractRequestParams();
+
+		if ( !$entityId ) {
+			$entityId = $this->getEntityIdFromParams( $params );
+		}
 
 		// If a base revision is given, use if for consistency!
 		$baseRev = isset( $params['baserevid'] )
 			? (int)$params['baserevid']
 			: $this->defaultRetrievalMode;
 
-		$entityRevision = $this->loadEntityRevision( $entityId, $baseRev );
+		if ( $entityId ) {
+			$entityRevision = $this->loadEntityRevision( $entityId, $baseRev );
+		} else {
+			$entityRevision = null;
+		}
 
-		return $entityRevision->getEntity();
+		$new = isset( $params['new'] ) ? $params['new'] : null;
+		if ( is_null( $entityRevision ) ) {
+			if ( !$this->isEntityCreationSupported() ) {
+				$this->errorReporter->dieError(
+					'Could not find entity ' . $entityId,
+					'no-such-entity'
+				);
+			}
+
+			if ( $new ) {
+				if ( !$entityId ) {
+					$this->errorReporter->dieError(
+						'No entity was identified, nor was creation requested',
+						'param-illegal'
+					);
+				} elseif ( !$this->entityStore->canCreateWithCustomId( $entityId ) ) {
+					$this->errorReporter->dieError(
+						'Could not find entity ' . $entityId,
+						'no-such-entity'
+					);
+				}
+			}
+
+			$entity = $this->createEntity( $new, $entityId );
+
+			$this->flags = EDIT_NEW;
+			$this->baseRevisionId = 0;
+		} else {
+			$this->flags = EDIT_UPDATE;
+			$this->baseRevisionId = $entityRevision->getRevisionId();
+			$entity = $entityRevision->getEntity();
+		}
+
+		return $entity;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function isEntityCreationSupported() {
+		return isset( $this->entityStore ) && isset( $this->entityFactory );
+	}
+
+	/**
+	 * Create an empty entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string|null $entityType The type of entity to create. Optional if an ID is given.
+	 * @param EntityId|null $customId Optionally assigns a specific ID instead of generating a new
+	 *  one.
+	 *
+	 * @throws InvalidArgumentException when entity type and ID are given but do not match.
+	 * @throws UsageException
+	 * @throws LogicException
+	 * @return EntityDocument
+	 */
+	protected function createEntity( $entityType, EntityId $customId = null ) {
+		if ( $customId ) {
+			$entityType = $customId->getEntityType();
+		} elseif ( !$entityType ) {
+			$this->errorReporter->dieError(
+				"No entity type provided for creation!",
+				'no-entity-type'
+			);
+
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		}
+
+		try {
+			$entity = $this->entityFactory->newEmpty( $entityType );
+		} catch ( InvalidArgumentException $ex ) {
+			$this->errorReporter->dieError(
+				"No such entity type: '$entityType'",
+				'no-such-entity-type'
+			);
+
+			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+		}
+
+		if ( $customId !== null ) {
+			if ( !$this->entityStore->canCreateWithCustomId( $customId ) ) {
+				$this->errorReporter->dieError(
+					"Cannot create entity with ID: '$customId'",
+					'bad-entity-id'
+				);
+
+				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
+			}
+
+			$entity->setId( $customId );
+		} else {
+			// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
+			$this->entityStore->assignFreshId( $entity );
+		}
+
+		return $entity;
 	}
 
 	/**
@@ -114,19 +286,25 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			$flags |= EDIT_FORCE_BOT;
 		}
 
-		$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
+		if ( !$this->baseRevisionId ) {
+			$this->baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : null;
+		}
 
 		$editEntityHandler = $this->editEntityFactory->newEditEntity(
 			$user,
 			$entity,
-			$baseRevisionId
+			$this->baseRevisionId
 		);
 
 		$token = $this->evaluateTokenParam( $params );
 
+		if ( isset( $params['bot'] ) && $params['bot'] ) {
+			$flags |= ( $this->apiBase->getUser()->isAllowed( 'bot' ) ) ? EDIT_FORCE_BOT : 0;
+		}
+
 		$status = $editEntityHandler->attemptSave(
 			$summary,
-			$flags,
+			$this->flags | $flags,
 			$token
 		);
 
