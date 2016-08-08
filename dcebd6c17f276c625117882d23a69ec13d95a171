@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_9a44cc70",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T13:53:56Z",
+      "side": 1,
+      "message": "This needs to go into $wgAPIListModules if it\u0027s supposed to act as a \"generator\" for page titles (as Query modules typically do).",
+      "revId": "dcebd6c17f276c625117882d23a69ec13d95a171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_5a3a64e5",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T13:53:56Z",
+      "side": 1,
+      "message": "No wait, what? There are two kinds of query modules, one for generating lists of titles (registered in $wgAPIListModules) and one for adding properties to a list of titles  (registered in $wgAPIPropModules). They are opposites of each other: one would find all pages that use specific entitites, the other would tell you which entitites are used by a specific set of pages. \n\nRenaming this to ApiPropsEntityUsage is misleading.",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "dcebd6c17f276c625117882d23a69ec13d95a171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
