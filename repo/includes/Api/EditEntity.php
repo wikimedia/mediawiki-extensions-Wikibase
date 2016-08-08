@@ -7,6 +7,7 @@ use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
 use InvalidArgumentException;
 use MWException;
+use RuntimeException;
 use SiteList;
 use Title;
 use UsageException;
@@ -15,6 +16,7 @@ use Wikibase\ChangeOp\ChangeOps;
 use Wikibase\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\ChangeOp\StatementChangeOpFactory;
+use Wikibase\DataModel\Deserializers\StatementDeserializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -26,7 +28,13 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\StringNormalizer;
 use Wikibase\Summary;
 
 /**
@@ -65,11 +73,6 @@ class EditEntity extends ModifyEntity {
 	private $siteLinkChangeOpFactory;
 
 	/**
-	 * @var EntityRevisionLookup
-	 */
-	private $revisionLookup;
-
-	/**
 	 * @var Deserializer
 	 */
 	private $statementDeserializer;
@@ -87,16 +90,71 @@ class EditEntity extends ModifyEntity {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		$this->setEditEntitySettings(
+			$wikibaseRepo->getEnabledEntityTypes(),
+			$wikibaseRepo->getTermsLanguages()
+		);
+
+		$this->setEditEntityServices(
+			$wikibaseRepo->getExternalFormatStatementDeserializer(),
+			$wikibaseRepo->getEntityFactory(),
+			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$changeOpFactoryProvider->getSiteLinkChangeOpFactory()
+		);
+
 		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
-		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
 
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();
 		$this->statementChangeOpFactory = $changeOpFactoryProvider->getStatementChangeOpFactory();
 		$this->siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
+	}
+
+
+	/**
+	 * Specify settings used by ModifyEntity.
+	 *
+	 * @see setModifyEntitySettings
+	 *
+	 * @param string[] $enabledEntityTypes
+	 * @param ContentLanguages $termsLanguages
+	 */
+	public function setEditEntitySettings(
+		array $enabledEntityTypes,
+		ContentLanguages $termsLanguages
+	) {
+		$this->enabledEntityTypes = $enabledEntityTypes;
+		$this->termsLanguages = $termsLanguages;
+	}
+
+	/**
+	 * Inject services used by EditEntity.
+	 *
+	 * @see setModifyEntityServices
+	 *
+	 * @param StatementDeserializer $statementDeserializer
+	 * @param EntityFactory $entityFactory
+	 * @param FingerprintChangeOpFactory $termChangeOpFactory
+	 * @param StatementChangeOpFactory $statementChangeOpFactory
+	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	 */
+	public function setEditEntityServices(
+		StatementDeserializer $statementDeserializer,
+		EntityFactory $entityFactory,
+		FingerprintChangeOpFactory $termChangeOpFactory,
+		StatementChangeOpFactory $statementChangeOpFactory,
+		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	) {
+		$this->statementDeserializer = $statementDeserializer;
+		$this->entityFactory = $entityFactory;
+
+		$this->termChangeOpFactory = $termChangeOpFactory;
+		$this->statementChangeOpFactory = $termChangeOpFactory;
+		$this->siteLinkChangeOpFactory = $termChangeOpFactory;
 	}
 
 	/**
