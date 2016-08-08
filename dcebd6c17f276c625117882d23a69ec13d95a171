@@ -39,6 +39,24 @@
       "revId": "dcebd6c17f276c625117882d23a69ec13d95a171",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1d16164e",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T13:59:20Z",
+      "side": 1,
+      "message": "Actually this one is prop (not gen or list). Because it can append properties to an existing gen, I \"fooled\" the parent api module by letting it work if entities is added (via $params) and no gen is defined but if no gen is defined and no entities too. It\u0027ll just fail like other prop modules.",
+      "parentUuid": "ee9d9f70_5a3a64e5",
+      "revId": "dcebd6c17f276c625117882d23a69ec13d95a171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
