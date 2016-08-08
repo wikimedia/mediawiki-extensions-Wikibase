@@ -16,7 +16,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EditEntity;
 use Wikibase\EditEntityFactory;
 use Wikibase\EntityRevision;
-use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\SummaryFormatter;
@@ -90,6 +89,42 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$context = new RequestContext();
 		$context->setUser( $user );
 		return $context;
+	}
+
+	public function testLoadEntity_baserevid() {
+		$itemId = new ItemId( 'Q1' );
+
+		$revision = $this->getMockRevision();
+		$entity = $revision->getEntity();
+
+		$mockApiBase = $this->getMockApiBase();
+		$mockApiBase->expects( $this->any() )
+			->method( 'isWriteMode' )
+			->will( $this->returnValue( true ) );
+		$mockApiBase->expects( $this->any() )
+			->method( 'getContext' )
+			->will( $this->returnValue( $this->newContext() ) );
+		$mockApiBase->expects( $this->any() )
+			->method( 'extractRequestParams' )
+			->will( $this->returnValue( array( 'baserevid' => 17 ) ) );
+
+		$revisionLookup = $this->getMockEntityRevisionLookup( true );
+		$revisionLookup->expects( $this->once() )
+			->method( 'getEntityRevision' )
+			->with( $itemId, 17 )
+			->will( $this->returnValue( $revision ) );
+
+		$helper = new EntitySavingHelper(
+			$mockApiBase,
+			$revisionLookup,
+			$this->getMockErrorReporter(),
+			$this->getMockSummaryFormatter(),
+			$this->getMockEditEntityFactory()
+		);
+
+		$return = $helper->loadEntity( $itemId );
+
+		$this->assertSame( $entity, $return );
 	}
 
 	public function testAttemptSave() {
