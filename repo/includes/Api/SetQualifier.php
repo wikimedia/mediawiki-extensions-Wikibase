@@ -49,11 +49,6 @@ class SetQualifier extends ApiBase {
 	private $resultBuilder;
 
 	/**
-	 * @var EntityLoadingHelper
-	 */
-	private $entityLoadingHelper;
-
-	/**
 	 * @var EntitySavingHelper
 	 */
 	private $entitySavingHelper;
@@ -82,7 +77,6 @@ class SetQualifier extends ApiBase {
 
 		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 	}
 
@@ -97,12 +91,12 @@ class SetQualifier extends ApiBase {
 
 		$entityId = $this->guidParser->parse( $params['claim'] )->getEntityId();
 		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
+			$entityRevision = $this->entitySavingHelper->loadEntityRevision(
 				$entityId,
 				(int)$params['baserevid']
 			);
 		} else {
-			$entityRevision = $this->entityLoadingHelper->loadEntityRevision( $entityId );
+			$entityRevision = $this->entitySavingHelper->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
 

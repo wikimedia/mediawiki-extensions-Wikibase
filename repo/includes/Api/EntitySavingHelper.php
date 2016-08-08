@@ -9,6 +9,7 @@ use UsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\EditEntity as EditEntityHandler;
 use Wikibase\EditEntityFactory;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
@@ -20,17 +21,12 @@ use Wikibase\SummaryFormatter;
  * @license GPL-2.0+
  * @author Addshore
  */
-class EntitySavingHelper {
+class EntitySavingHelper extends EntityLoadingHelper {
 
 	/**
 	 * @var ApiBase
 	 */
 	private $apiBase;
-
-	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
 
 	/**
 	 * @var SummaryFormatter
@@ -44,12 +40,13 @@ class EntitySavingHelper {
 
 	public function __construct(
 		ApiBase $apiBase,
+		EntityRevisionLookup $entityRevisionLookup,
 		ApiErrorReporter $errorReporter,
 		SummaryFormatter $summaryFormatter,
 		EditEntityFactory $editEntityFactory
 	) {
+		parent::__construct( $entityRevisionLookup, $errorReporter );
 		$this->apiBase = $apiBase;
-		$this->errorReporter = $errorReporter;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;
 	}

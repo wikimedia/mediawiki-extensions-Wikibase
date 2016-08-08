@@ -67,11 +67,6 @@ class SetClaim extends ApiBase {
 	private $resultBuilder;
 
 	/**
-	 * @var EntityLoadingHelper
-	 */
-	private $entityLoadingHelper;
-
-	/**
 	 * @var EntitySavingHelper
 	 */
 	private $entitySavingHelper;
@@ -101,7 +96,6 @@ class SetClaim extends ApiBase {
 
 		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 	}
 
@@ -128,12 +122,12 @@ class SetClaim extends ApiBase {
 
 		$entityId = $statementGuid->getEntityId();
 		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
+			$entityRevision = $this->entitySavingHelper->loadEntityRevision(
 				$entityId,
 				(int)$params['baserevid']
 			);
 		} else {
-			$entityRevision = $this->entityLoadingHelper->loadEntityRevision( $entityId );
+			$entityRevision = $this->entitySavingHelper->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
 

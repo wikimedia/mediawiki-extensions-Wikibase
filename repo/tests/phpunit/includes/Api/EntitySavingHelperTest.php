@@ -3,6 +3,7 @@
 namespace Wikibase\Test\Repo\Api;
 
 use ApiBase;
+use Exception;
 use LogicException;
 use PHPUnit_Framework_MockObject_MockObject;
 use RequestContext;
@@ -14,7 +15,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EditEntity;
 use Wikibase\EditEntityFactory;
+use Wikibase\EntityRevision;
 use Wikibase\Repo\Api\ApiErrorReporter;
+use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\SummaryFormatter;
 
@@ -29,22 +32,13 @@ use Wikibase\SummaryFormatter;
  * @license GPL-2.0+
  * @author Addshore
  */
-class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
+class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 	/**
 	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockApiBase() {
 		return $this->getMockBuilder( ApiBase::class )
-			->disableOriginalConstructor()
-			->getMock();
-	}
-
-	/**
-	 * @return ApiErrorReporter
-	 */
-	private function getMockErrorReporter() {
-		return $this->getMockBuilder( ApiErrorReporter::class )
 			->disableOriginalConstructor()
 			->getMock();
 	}
@@ -59,30 +53,30 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param int $calls
+	 * @param int|null $calls
 	 *
 	 * @return EditEntity
 	 */
-	private function getMockEditEntity( $calls ) {
+	private function getMockEditEntity( $calls = null ) {
 		$mock = $this->getMockBuilder( EditEntity::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->exactly( $calls ) )
+		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'attemptSave' )
 			->will( $this->returnValue( Status::newGood() ) );
 		return $mock;
 	}
 
 	/**
-	 * @param int $calls
+	 * @param int|null $calls
 	 *
 	 * @return EditEntityFactory
 	 */
-	private function getMockEditEntityFactory( $calls ) {
+	private function getMockEditEntityFactory( $calls = null ) {
 		$mock = $this->getMockBuilder( EditEntityFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mock->expects( $this->exactly( $calls ) )
+		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'newEditEntity' )
 			->will( $this->returnValue( $this->getMockEditEntity( $calls ) ) );
 		return $mock;
@@ -112,6 +106,7 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$helper = new EntitySavingHelper(
 			$mockApiBase,
+			$this->getMockEntityRevisionLookup( false ),
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
 			$this->getMockEditEntityFactory( 1 )
@@ -139,6 +134,7 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$helper = new EntitySavingHelper(
 			$mockApiBase,
+			$this->getMockEntityRevisionLookup( false ),
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
 			$this->getMockEditEntityFactory( 0 )
@@ -146,6 +142,36 @@ class EntitySavingHelperTest extends \PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException( LogicException::class );
 		$helper->attemptSaveEntity( new Item(), '' );
+	}
+
+	/**
+	 * @param EntityRevision|Exception|null $lookupResult
+	 * @param string|null $expectedError
+	 * @return EntityLoadingHelper
+	 */
+	protected function newEntityLoadingHelper(
+		$lookupResult = null,
+		$expectedExceptionCode = null,
+		$expectedErrorCode = null
+	) {
+		$mockApiBase = $this->getMockApiBase();
+		$mockApiBase->expects( $this->any() )
+			->method( 'isWriteMode' )
+			->will( $this->returnValue( true ) );
+		$mockApiBase->expects( $this->any() )
+			->method( 'getContext' )
+			->will( $this->returnValue( $this->newContext() ) );
+		$mockApiBase->expects( $this->any() )
+			->method( 'extractRequestParams' )
+			->will( $this->returnValue( array() ) );
+
+		return new EntitySavingHelper(
+			$mockApiBase,
+			$this->getMockEntityRevisionLookup( $lookupResult ),
+			$this->getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode ),
+			$this->getMockSummaryFormatter(),
+			$this->getMockEditEntityFactory()
+		);
 	}
 
 }
