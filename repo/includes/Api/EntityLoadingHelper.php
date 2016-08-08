@@ -2,14 +2,17 @@
 
 namespace Wikibase\Repo\Api;
 
+use ApiBase;
 use LogicException;
 use UsageException;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikimedia\Assert\Assert;
 
 /**
  * Helper class for api modules to load entities.
@@ -31,12 +34,33 @@ class EntityLoadingHelper {
 	 */
 	protected $errorReporter;
 
+	/**
+	 * @var string See the LATEST_XXX constants defined in EntityRevisionLookup
+	 */
+	protected $defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_SLAVE;
+
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,
 		ApiErrorReporter $errorReporter
 	) {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->errorReporter = $errorReporter;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDefaultRetrievalMode() {
+		return $this->defaultRetrievalMode;
+	}
+
+	/**
+	 * @param string $defaultRetrievalMode Use the LATEST_XXX constants defined
+	 *        in EntityRevisionLookup
+	 */
+	public function setDefaultRetrievalMode( $defaultRetrievalMode ) {
+		Assert::parameterType( 'string', $defaultRetrievalMode, '$defaultRetrievalMode' );
+		$this->defaultRetrievalMode = $defaultRetrievalMode;
 	}
 
 	/**
@@ -54,10 +78,14 @@ class EntityLoadingHelper {
 	 * @throws LogicException
 	 * @return EntityRevision
 	 */
-	public function loadEntityRevision(
+	protected function loadEntityRevision(
 		EntityId $entityId,
-		$revId = EntityRevisionLookup::LATEST_FROM_MASTER
+		$revId = null
 	) {
+		if ( $revId === null ) {
+			$revId = $this->defaultRetrievalMode;
+		}
+
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision( $entityId, $revId );
 
@@ -77,6 +105,17 @@ class EntityLoadingHelper {
 		}
 
 		throw new LogicException( 'ApiErrorReporter::dieException did not throw a UsageException' );
+	}
+
+	/**
+	 * Returns the given EntityDocument.
+	 *
+	 * @param EntityId $entityId
+	 * @return EntityDocument
+	 */
+	public function loadEntity( EntityId $entityId ) {
+		$entityRevision = $this->loadEntityRevision( $entityId );
+		return $entityRevision->getEntity();
 	}
 
 }

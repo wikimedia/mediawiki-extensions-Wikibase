@@ -3,8 +3,8 @@
 namespace Wikibase\Test\Repo\Api;
 
 use Exception;
-use Revision;
 use UsageException;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
@@ -43,7 +43,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 			$mock->expects( $this->once() )
 				->method( 'getEntityRevision' )
 				->will( $this->throwException( $entityRevisionReturn ) );
-		} else {
+		} elseif ( $entityRevisionReturn instanceof EntityRevision ) {
 			$mock->expects( $this->once() )
 				->method( 'getEntityRevision' )
 				->will( $this->returnValue( $entityRevisionReturn ) );
@@ -76,12 +76,20 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return Revision
+	 * @return EntityRevision
 	 */
 	protected function getMockRevision() {
-		return $this->getMockBuilder( Revision::class )
+		$entity = $this->getMock( EntityDocument::class );
+
+		$revision = $this->getMockBuilder( EntityRevision::class )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$revision->expects( $this->any() )
+			->method( 'getEntity' )
+			->will( $this->returnValue( $entity ) );
+
+		return $revision;
 	}
 
 	/**
@@ -100,23 +108,25 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testRevision_returnsRevision() {
+	public function testLoadEntity() {
 		$revision = $this->getMockRevision();
+		$entity = $revision->getEntity();
+
 		$helper = $this->newEntityLoadingHelper( $revision );
 
-		$return = $helper->loadEntityRevision( new ItemId( 'Q1' ) );
+		$return = $helper->loadEntity( new ItemId( 'Q1' ) );
 
-		$this->assertSame( $revision, $return );
+		$this->assertSame( $entity, $return );
 	}
 
-	public function testNullRevision_callsErrorReporter() {
+	public function testLoadEntity_NullRevision() {
 		$helper = $this->newEntityLoadingHelper( null, null, 'cant-load-entity-content' );
 
 		$this->setExpectedException( UsageException::class );
-		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
+		$helper->loadEntity( new ItemId( 'Q1' ) );
 	}
 
-	public function testUnresolvedRedirectException_callsErrorReporter() {
+	public function testLoadEntity_UnresolvedRedirectException() {
 		$helper = $this->newEntityLoadingHelper(
 			new RevisionedUnresolvedRedirectException(
 				new ItemId( 'Q1' ),
@@ -126,21 +136,21 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		);
 
 		$this->setExpectedException( UsageException::class );
-		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
+		$helper->loadEntity( new ItemId( 'Q1' ) );
 	}
 
-	public function testBadRevisionException_callsErrorReporter() {
+	public function testLoadEntity_BadRevisionException() {
 		$helper = $this->newEntityLoadingHelper( new BadRevisionException(), 'nosuchrevid' );
 
 		$this->setExpectedException( UsageException::class );
-		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
+		$helper->loadEntity( new ItemId( 'Q1' ) );
 	}
 
-	public function testStorageException_callsErrorReporter() {
+	public function testLoadEntity_StorageException() {
 		$helper = $this->newEntityLoadingHelper( new StorageException(), 'cant-load-entity-content' );
 
 		$this->setExpectedException( UsageException::class );
-		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
+		$helper->loadEntity( new ItemId( 'Q1' ) );
 	}
 
 }

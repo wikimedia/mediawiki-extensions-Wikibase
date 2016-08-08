@@ -82,15 +82,7 @@ class CreateClaim extends ApiBase {
 		$this->validateParameters( $params );
 
 		$entityId = $this->modificationHelper->getEntityIdFromString( $params['entity'] );
-		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->entitySavingHelper->loadEntityRevision(
-				$entityId,
-				(int)$params['baserevid']
-			);
-		} else {
-			$entityRevision = $this->entitySavingHelper->loadEntityRevision( $entityId );
-		}
-		$entity = $entityRevision->getEntity();
+		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {
