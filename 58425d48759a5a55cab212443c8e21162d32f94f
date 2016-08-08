@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_9a104c06",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_3afbe012",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_1a161c4e",
         "filename": "client/i18n/en.json",
         "patchSetId": 14
@@ -48,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_daf1f4db",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "It\u0027s ordered by first, page_ids, then entity_id and then aspect. This \"dir\" param says if it should be ascending or descending. I think that\u0027s a standard in API modules (see core)",
+      "parentUuid": "ee9d9f70_1a161c4e",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_5a27c4b1",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -65,6 +101,24 @@
         "endLine": 15,
         "endChar": 13
       },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9ad3ec60",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_5a27c4b1",
       "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -105,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_7ace48bb",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "I should fix that.",
+      "parentUuid": "ee9d9f70_bab27046",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_da39f4cc",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -122,6 +194,24 @@
         "endLine": 40,
         "endChar": 4
       },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_dac49497",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "This is a way that core API modules did to get proper continuation. I\u0027m not sure we should pursue another method.",
+      "parentUuid": "ee9d9f70_da39f4cc",
       "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -151,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_7a3d688a",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "When someone gets a query by not page title but by entity id, the API module doesn\u0027t return page info. I need to manually check if the page info is there or not and if it\u0027s not, I manually add it.",
+      "parentUuid": "ee9d9f70_1a445c4a",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_fabcf81c",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -162,6 +270,24 @@
       "writtenOn": "2016-08-08T11:03:18Z",
       "side": 1,
       "message": "Why are you executing this inside of a loop that iterates the result set?",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9a420c12",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "Answered above. I should make a note",
+      "parentUuid": "ee9d9f70_fabcf81c",
       "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -185,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_9a592c04",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_daaf34dd",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_3a86806b",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -196,6 +340,24 @@
       "writtenOn": "2016-08-08T11:03:18Z",
       "side": 1,
       "message": "What does this section of the code do? Why is it manipulating the result set? It looks like this is re-constructing something that\u0027s already there. I believe this section of the code does make a difference, but I can not tell what that is.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_ba6d1099",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "I wrote a more detailed note why I added this block.",
+      "parentUuid": "ee9d9f70_3a86806b",
       "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -225,6 +387,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_ba46f024",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_5a750492",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_9a6f6cc0",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -242,6 +422,24 @@
         "endLine": 62,
         "endChar": 40
       },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_da43b413",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_9a6f6cc0",
       "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -271,6 +469,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_fa5078db",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "Can\u0027t run CI tests. It was private.",
+      "parentUuid": "ee9d9f70_9aae8ce3",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_bae0b026",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -282,6 +498,24 @@
       "writtenOn": "2016-08-08T11:03:18Z",
       "side": 1,
       "message": "Please try to split all the continuation stuff into a separate private method.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_7a5488ca",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "I will do this in several steps.",
+      "parentUuid": "ee9d9f70_bae0b026",
       "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -357,6 +591,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_1a4e1c3d",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "It gives link to the wikibase entity, it would be useful (see iwlanglink module for instance)",
+      "parentUuid": "ee9d9f70_9a85ac5d",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_9a212c9d",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -380,6 +632,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_3a5a00fa",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "It\u0027s hard-coded into wikibase script. If it was something in the repo settings, I could do something about it.",
+      "parentUuid": "ee9d9f70_9a212c9d",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_7a80084c",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -397,6 +667,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_5a5fc4e8",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "It would be good to keep it at least for the sake of consistency with other api modules.",
+      "parentUuid": "ee9d9f70_7a80084c",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_5af26404",
         "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
         "patchSetId": 14
@@ -408,6 +696,24 @@
       "writtenOn": "2016-08-08T11:03:18Z",
       "side": 1,
       "message": "Why is this necessary? I believe this method should fail when a caller provides an invalid name. Please either make this throw an exception or simply remove it so the following code will fail.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_fa6798b2",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T11:38:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_5af26404",
       "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
