@@ -75,6 +75,24 @@
       "revId": "dcebd6c17f276c625117882d23a69ec13d95a171",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1d5b7627",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T14:07:20Z",
+      "side": 1,
+      "message": "Yes, I wanted to do otherwise (using two api modules) but per early discussions in this patchset, I thought you (or Thiemo) wants me to squash it into one module. If you you think we should have two modules, juts give me their names and (e.g. wbentityusage) and I will implement it.",
+      "parentUuid": "ee9d9f70_dd39eecc",
+      "revId": "dcebd6c17f276c625117882d23a69ec13d95a171",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
