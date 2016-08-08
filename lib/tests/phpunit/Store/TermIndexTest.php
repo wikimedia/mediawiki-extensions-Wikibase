@@ -805,15 +805,53 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			"expected to find $k in terms for item" );
 	}
 
-	protected function assertTermExists( TermIndex $termIndex, $text, $termType = null, $language = null, $entityType = null ) {
-		$this->assertTrue( $this->termExists( $termIndex, $text, $termType, $language, $entityType ) );
+	/**
+	 * @param TermIndex $termIndex
+	 * @param string $text
+	 * @param string|null $termType
+	 * @param string|null $language
+	 * @param string|null $entityType
+	 */
+	private function assertTermExists(
+		TermIndex $termIndex,
+		$text,
+		$termType = null,
+		$language = null,
+		$entityType = null
+	) {
+		$this->assertTrue(
+			$this->termExists( $termIndex, $text, $termType, $language, $entityType ),
+			"Term \"$text\" should exist"
+		);
 	}
 
-	protected function assertNotTermExists( TermIndex $termIndex, $text, $termType = null, $language = null, $entityType = null ) {
-		$this->assertFalse( $this->termExists( $termIndex, $text, $termType, $language, $entityType ) );
+	/**
+	 * @param TermIndex $termIndex
+	 * @param string $text
+	 */
+	private function assertNotTermExists( TermIndex $termIndex, $text ) {
+		$this->assertFalse(
+			$this->termExists( $termIndex, $text ),
+			"Term \"$text\" should not exist"
+		);
 	}
 
-	private function termExists( TermIndex $termIndex, $text, $termType = null, $language = null, $entityType = null ) {
+	/**
+	 * @param TermIndex $termIndex
+	 * @param string $text
+	 * @param string|null $termType
+	 * @param string|null $language
+	 * @param string|null $entityType
+	 *
+	 * @return bool
+	 */
+	private function termExists(
+		TermIndex $termIndex,
+		$text,
+		$termType = null,
+		$language = null,
+		$entityType = null
+	) {
 		$termFields = array();
 		$termFields['termText'] = $text;
 
@@ -821,7 +859,11 @@ abstract class TermIndexTest extends \MediaWikiTestCase {
 			$termFields['termLanguage'] = $language;
 		}
 
-		$matches = $termIndex->getMatchingTerms( array( new TermIndexEntry( $termFields ) ), $termType, $entityType );
+		$matches = $termIndex->getMatchingTerms(
+			array( new TermIndexEntry( $termFields ) ),
+			$termType,
+			$entityType
+		);
 		return !empty( $matches );
 	}
 
