@@ -3,7 +3,8 @@
 		"authors": [
 			"Simon Shek",
 			"Stevenliuyi",
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"A2093064"
 		]
 	},
 	"valueview-desc": "顯示和編輯數據值的用戶介面",
@@ -17,6 +18,7 @@
 	"valueview-expert-timevalue-calendar-julian": "儒略曆",
 	"valueview-expert-timeinput-precision": "精度：",
 	"valueview-expert-timeinput-calendar": "日曆：",
+	"valueview-expertextender-languageselector-languagetemplate": "$1（$2）",
 	"valueview-preview-label": "將顯示為：",
 	"valueview-preview-novalue": "無法識別"
 }
