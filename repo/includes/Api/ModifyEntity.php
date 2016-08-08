@@ -83,7 +83,7 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	/**
 	 * @var EntityPermissionChecker

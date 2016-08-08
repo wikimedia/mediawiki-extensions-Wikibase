@@ -65,11 +65,6 @@ class EditEntity extends ModifyEntity {
 	private $siteLinkChangeOpFactory;
 
 	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
-
-	/**
 	 * @var EntityRevisionLookup
 	 */
 	private $revisionLookup;
@@ -94,7 +89,6 @@ class EditEntity extends ModifyEntity {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
 		$this->termsLanguages = $wikibaseRepo->getTermsLanguages();
-		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->statementDeserializer = $wikibaseRepo->getExternalFormatStatementDeserializer();
