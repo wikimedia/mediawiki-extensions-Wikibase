@@ -650,6 +650,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_5a90a446",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:47:55Z",
+      "side": 1,
+      "message": "Just make EntityUsage::$aspects public (or make a static getter)",
+      "parentUuid": "ee9d9f70_3a5a00fa",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_7a80084c",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 14
@@ -679,6 +697,24 @@
       "side": 1,
       "message": "It would be good to keep it at least for the sake of consistency with other api modules.",
       "parentUuid": "ee9d9f70_7a80084c",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1aa61ca8",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:47:55Z",
+      "side": 1,
+      "message": "I think a dir parameter really only makes sense if sorting is in some why chronological (e.g. revisions, rc-entries, etc). I see no pint here, it just complicates things needlessly. The order has no meaning.",
+      "parentUuid": "ee9d9f70_5a5fc4e8",
       "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
