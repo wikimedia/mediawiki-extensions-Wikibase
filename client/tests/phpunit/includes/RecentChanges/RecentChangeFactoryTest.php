@@ -262,7 +262,20 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected, $actual, 'attributes' );
 	}
 
-	private function makeItemChangeFromMetaData( $action, Diff $diff, array $fields = array(), array $metadata = array() ) {
+	/**
+	 * @param string $action
+	 * @param Diff $diff
+	 * @param array $fields
+	 * @param array $metadata
+	 *
+	 * @return EntityChange
+	 */
+	private function makeItemChangeFromMetaData(
+		$action,
+		Diff $diff,
+		array $fields,
+		array $metadata
+	) {
 		$fields = array_merge( array(
 			'id' => '13',
 			'time' => '20150202030303',
@@ -303,8 +316,8 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 		$expectedComment,
 		$action,
 		Diff $diff,
-		array $fields = array(),
-		array $metadata = array()
+		array $fields,
+		array $metadata
 	) {
 		//@todo: also check pre-generated HTML when I5439a76c is merged
 
