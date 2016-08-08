@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_7a8728dd",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T13:35:58Z",
+      "side": 1,
+      "message": "I highly doubt that. Most extensions register their hooks this way. I have no way to test that though.",
+      "parentUuid": "ee9d9f70_fa15d8ea",
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_7ae1e8fa",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 15
@@ -36,6 +54,24 @@
         "endLine": 20,
         "endChar": 25
       },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9a8ccc01",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T13:35:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_7ae1e8fa",
       "revId": "942387221bb6bbec541946b8fff3d76797770b62",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -88,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_ba70b008",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T13:35:58Z",
+      "side": 1,
+      "message": "I do it in another patchset. I\u0027m not sure I can do it today.",
+      "parentUuid": "ee9d9f70_dae7340c",
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_5ac34461",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 15
@@ -105,6 +159,24 @@
         "endLine": 28,
         "endChar": 23
       },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_da6d742f",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-08T13:35:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_5ac34461",
       "revId": "942387221bb6bbec541946b8fff3d76797770b62",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
