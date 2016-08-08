@@ -1,0 +1,267 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_fa15d8ea",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "Does this cause the class to be loaded? If so, we should avoid this construct in bootstrap code.",
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_7ae1e8fa",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "It occurred to me that we\u0027d perhaps also want the reverse: ApiPropsEntityUsage (registered in $wgAPIPropModules) that would attach the entities used by each page to a list of pages.",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9ae68c12",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "If we want, we can use proper dependency injection here, see how the PageTerms module does it.",
+      "range": {
+        "startLine": 22,
+        "startChar": 8,
+        "endLine": 22,
+        "endChar": 16
+      },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_dae7340c",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "this method is pretty big. think about splitting it up.",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_5ac34461",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "To make the data flow obvious, pass $params to doQuery. Or better, pass only the bits from $params that doQuery actually needs. Ideally, all request handling happens here, and other methods only get \"clean\" parameters passed directly.",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 23
+      },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_bad19029",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "Should be injected",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 18
+      },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_dace5486",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "Let\u0027s hope that aspects never contain a \"|\"",
+      "range": {
+        "startLine": 41,
+        "startChar": 47,
+        "endLine": 41,
+        "endChar": 51
+      },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_facb1873",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "Extracting the code that builds $entry from $row into a separate method seems like a natural thing to do.",
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1af29ccd",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "this method is pretty big. think about splitting it up. More methods means more names, which makes it easier to read intent, and makes the data flow more obvious.",
+      "range": {
+        "startLine": 82,
+        "startChar": 17,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1ac9bc7b",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "$pages and some parts of $params should be passed as parameters.",
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_3aa5a0b2",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "Request handling should happen in execute()",
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_ba98b07d",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "The client can trigger an internal error here by providing an invalid continue parameter. That\u0027s not good...\nAlso, request processing shouldn\u0027t happen here but in execute() or a dedicated method.",
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9ab4cce6",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T12:43:50Z",
+      "side": 1,
+      "message": "this could use a comment to explain the logic",
+      "revId": "942387221bb6bbec541946b8fff3d76797770b62",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
