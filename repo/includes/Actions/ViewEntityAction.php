@@ -17,7 +17,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  */
-abstract class ViewEntityAction extends ViewAction {
+class ViewEntityAction extends ViewAction {
 
 	/**
 	 * Handler for the BeforeDisplayNoArticleText called by Article.
