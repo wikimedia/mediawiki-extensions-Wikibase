@@ -1,0 +1,416 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_3afbe012",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "I believe it does return \"entity IDs\", doesn\u0027t it?\n\nSame in the messages below.",
+      "range": {
+        "startLine": 14,
+        "startChar": 57,
+        "endLine": 14,
+        "endChar": 65
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1a161c4e",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "I wonder what the use of this parameter is. How are the results ordered? By entity ID? Page title? The description should at least explain that.",
+      "range": {
+        "startLine": 18,
+        "startChar": 36,
+        "endLine": 18,
+        "endChar": 39
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_5a27c4b1",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "0.5 (for a long time now).",
+      "range": {
+        "startLine": 15,
+        "startChar": 10,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_7af728f3",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Please split this method in two or three smaller ones.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_bab27046",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "The doQuery implementation below does not return anything.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_da39f4cc",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "This should be in a separate if ( count( $res ) \u003e … ) { … } and not in this loop.",
+      "range": {
+        "startLine": 32,
+        "startChar": 3,
+        "endLine": 40,
+        "endChar": 4
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1a445c4a",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Please move this out of the loop.",
+      "range": {
+        "startLine": 44,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 32
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_fabcf81c",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Why are you executing this inside of a loop that iterates the result set?",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_daaf34dd",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "This line is duplicated, should be removed.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_3a86806b",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "What does this section of the code do? Why is it manipulating the result set? It looks like this is re-constructing something that\u0027s already there. I believe this section of the code does make a difference, but I can not tell what that is.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_5a750492",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "All this should not be executed a hundred times in the loop.",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 80
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9a6f6cc0",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Must use single quotes, otherwise PHP will try to expand a non-existing variable.",
+      "range": {
+        "startLine": 62,
+        "startChar": 36,
+        "endLine": 62,
+        "endChar": 40
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9aae8ce3",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Should be private.",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 81,
+        "endChar": 7
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_bae0b026",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Please try to split all the continuation stuff into a separate private method.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_5aa42405",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Looks like this variable is unused.",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 139,
+        "endChar": 6
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_fa2f9883",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "It appears this parameter is undocumented in the en.json file.",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 8
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9a85ac5d",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Why \"url\"?",
+      "range": {
+        "startLine": 147,
+        "startChar": 6,
+        "endLine": 147,
+        "endChar": 9
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9a212c9d",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "I wonder if it\u0027s possible to list known aspects?",
+      "range": {
+        "startLine": 151,
+        "startChar": 15,
+        "endLine": 151,
+        "endChar": 19
+      },
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_7a80084c",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "As said before, I believe this parameter is of not much use.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_5af26404",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T11:03:18Z",
+      "side": 1,
+      "message": "Why is this necessary? I believe this method should fail when a caller provides an invalid name. Please either make this throw an exception or simply remove it so the following code will fail.",
+      "revId": "58425d48759a5a55cab212443c8e21162d32f94f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
