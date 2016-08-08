@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_fa5dd81b",
+        "filename": "lib/tests/phpunit/Store/TermIndexTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T10:41:23Z",
+      "side": 1,
+      "message": "Please add an informative message, like \"$termType $language:$text should exist\".",
+      "range": {
+        "startLine": 822,
+        "startChar": 21,
+        "endLine": 822,
+        "endChar": 26
+      },
+      "revId": "e72fcf69354dc4b386c49b5cc5d14aeb920c56f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1a5b7c27",
+        "filename": "lib/tests/phpunit/Store/TermIndexTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-08T10:41:23Z",
+      "side": 1,
+      "message": "Please add an informative message, like \"$termType $language:$text should not exist\".",
+      "revId": "e72fcf69354dc4b386c49b5cc5d14aeb920c56f9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
