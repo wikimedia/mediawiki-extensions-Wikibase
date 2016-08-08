@@ -8,7 +8,8 @@
 			"Ole Yves",
 			"ShinePhantom",
 			"Александр Сигачёв",
-			"Macofe"
+			"Macofe",
+			"Mailman"
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",
@@ -17,7 +18,7 @@
 	"wikibase-deletedentity-property": "Удалённое свойство",
 	"wikibase-deletedentity-query": "Удалённый запрос",
 	"wikibase-error-unexpected": "Ошибка: $1.",
-	"wikibase-error-save-generic": "При сохранении произошла ошибка. Ваши изменения не могут быть завершены.",
+	"wikibase-error-save-generic": "Не удалось сохранить из-за возникшей ошибки.",
 	"wikibase-error-remove-generic": "Произошла ошибка при попытке выполнить удаление. Ваши изменения не могут быть завершены.",
 	"wikibase-error-save-connection": "При попытке выполнить сохранение произошла ошибка подключения. Ваши изменения не могут быть завершены. Пожалуйста, проверьте своё подключение к интернету.",
 	"wikibase-error-remove-connection": "При попытке выполнить удаление произошла ошибка подключения. Ваши изменения не могут быть завершены. Пожалуйста, проверьте своё подключение к интернету.",

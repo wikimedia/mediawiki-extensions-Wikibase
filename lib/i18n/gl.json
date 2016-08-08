@@ -4,7 +4,8 @@
 			"Toliño",
 			"Chairego apc",
 			"Macofe",
-			"Elisardojm"
+			"Elisardojm",
+			"Banjo"
 		]
 	},
 	"wikibase-lib-desc": "Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client",
@@ -13,10 +14,10 @@
 	"wikibase-deletedentity-property": "Propiedade borrada",
 	"wikibase-deletedentity-query": "Pescuda borrada",
 	"wikibase-error-unexpected": "Erro: $1.",
-	"wikibase-error-save-generic": "Houbo un erro ao levar a cabo o gardado. Non se puideron completar os cambios.",
-	"wikibase-error-remove-generic": "Houbo un erro ao levar a cabo a eliminación. Non se puideron completar os cambios.",
-	"wikibase-error-save-connection": "Houbo un erro na conexión ao levar a cabo o gardado. Non se puideron completar os cambios. Comprobe a súa conexión á internet.",
-	"wikibase-error-remove-connection": "Houbo un erro na conexión ao levar a cabo a eliminación. Non se puideron completar os cambios. Comprobe a súa conexión á internet.",
+	"wikibase-error-save-generic": "Non se puido gardar por mor dun erro.",
+	"wikibase-error-remove-generic": "Non se puido eliminar por mor dun erro.",
+	"wikibase-error-save-connection": "Non se puido gardar por mor dun erro de conexión. Por favor, comproba a túa conexión de internet.",
+	"wikibase-error-remove-connection": "Non se puido eliminar por mor dun erro de conexión. Por favor, comproba a túa conexión de internet.",
 	"wikibase-error-save-timeout": "Estamos experimentando dificultades técnicas. Non se puido completar o gardado.",
 	"wikibase-error-remove-timeout": "Estamos experimentando dificultades técnicas. Non se puido completar a eliminación.",
 	"wikibase-error-autocomplete-connection": "Non se puido pescudar na API do sitio. Inténteo de novo máis tarde.",

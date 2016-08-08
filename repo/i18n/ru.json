@@ -23,7 +23,8 @@
 			"Mariya",
 			"Frhdkazan",
 			"Ядерный Трамвай",
-			"Adam-Yourist"
+			"Adam-Yourist",
+			"Mailman"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -47,7 +48,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Описание",
 	"wikibase-entitytermsforlanguagelistview-label": "Обозначение",
 	"wikibase-entitytermsforlanguagelistview-language": "Язык",
-	"wikibase-entitytermsforlanguagelistview-more": "Больше языков",
+	"wikibase-entitytermsforlanguagelistview-more": "Все введенные языки",
 	"wikibase-entitytermsforlanguagelistview-less": "Меньше языков",
 	"wikibase-label-empty": "Метка (название) отсутствует",
 	"wikibase-label-edit-placeholder": "введите название",

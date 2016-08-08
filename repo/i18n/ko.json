@@ -36,7 +36,7 @@
 	"wikibase-entitytermsforlanguagelistview-description": "설명",
 	"wikibase-entitytermsforlanguagelistview-label": "레이블",
 	"wikibase-entitytermsforlanguagelistview-language": "언어",
-	"wikibase-entitytermsforlanguagelistview-more": "더 많은 언어",
+	"wikibase-entitytermsforlanguagelistview-more": "입력된 모든 언어",
 	"wikibase-entitytermsforlanguagelistview-less": "더 적은 언어",
 	"wikibase-label-empty": "정의한 레이블이 없습니다.",
 	"wikibase-label-edit-placeholder": "레이블 입력",
