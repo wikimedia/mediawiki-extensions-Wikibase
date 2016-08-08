@@ -193,6 +193,7 @@ div.wikibase-statementview textarea {
 	float: left;
 	word-wrap: break-word;
 	padding: 10px;
+	padding-bottom: 0; /* avoid scrollbars on multi-line property labels */
 	-webkit-transition: top 0.1s ease-out;
 	transition: top 0.1s ease-out;
 }
