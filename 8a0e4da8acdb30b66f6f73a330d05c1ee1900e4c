@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_9dff6662",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T15:13:08Z",
+      "side": 1,
+      "message": "StringValue",
+      "range": {
+        "startLine": 68,
+        "startChar": 32,
+        "endLine": 68,
+        "endChar": 41
+      },
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_7dfac274",
+        "filename": "repo/includes/Rdf/Values/ExternalIdentifierRdfBuilder.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-08T15:13:08Z",
+      "side": 1,
+      "message": "I find this suspicious:\n* Trimming should not be done. Either it\u0027s already done somewhere else in the code base, which means it\u0027s not necessary to do it again here. Or it\u0027s not done, which means spaces are significant and should not be trimmed later.\n* If this is called on something that\u0027s not a StringValue the code should fail hard and not cast this to a string.",
+      "revId": "8a0e4da8acdb30b66f6f73a330d05c1ee1900e4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
