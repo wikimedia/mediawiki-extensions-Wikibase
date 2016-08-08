@@ -526,6 +526,23 @@ final class WikibaseClient {
 	}
 
 	/**
+	 * Overrides the TermLookup to be used.
+	 * This is intended for use by test cases.
+	 *
+	 * @param TermLookup|null $lookup
+	 *
+	 * @throws LogicException If MW_PHPUNIT_TEST is not defined, to avoid this
+	 * method being abused in production code.
+	 */
+	public function overrideTermLookup( TermLookup $lookup = null ) {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			throw new LogicException( 'Overriding TermLookup is only supported in test mode' );
+		}
+
+		$this->termLookup = $lookup;
+	}
+
+	/**
 	 * @since 0.4
 	 *
 	 * @return Language

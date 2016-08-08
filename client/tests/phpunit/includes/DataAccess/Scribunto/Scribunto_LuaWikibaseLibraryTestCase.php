@@ -10,6 +10,7 @@ use Title;
 use Wikibase\Client\Tests\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Test\MockClientStore;
 
 if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
@@ -63,8 +64,14 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 
 		$store = new MockClientStore( 'de' );
-		$store->setEntityLookup( static::getEntityLookup() );
+		$entityLookup = static::getEntityLookup();
+		$store->setEntityLookup( $entityLookup );
 		$wikibaseClient->overrideStore( $store );
+
+		// Create a term lookup from the ovewritten EntityLookup or the MockClientStore one
+		$wikibaseClient->overrideTermLookup(
+			new EntityRetrievingTermLookup( $entityLookup ?: $store->getEntityLookup() )
+		);
 
 		$settings = $wikibaseClient->getSettings();
 		if ( self::$oldAllowArbitraryDataAccess === null ) {
