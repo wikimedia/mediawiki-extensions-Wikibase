@@ -19,7 +19,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
-use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\SnakFormatter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
@@ -246,12 +245,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	private function newLuaBindings() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$entityLookup = $wikibaseClient->getStore()->getEntityLookup();
 		$usageAccumulator = $this->getUsageAccumulator();
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			new UsageTrackingTermLookup(
-				new EntityRetrievingTermLookup( $entityLookup ),
+				$wikibaseClient->getTermLookup(),
 				$usageAccumulator
 			),
 			$this->getLanguageFallbackChain()
@@ -259,7 +257,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 		return new WikibaseLuaBindings(
 			$wikibaseClient->getEntityIdParser(),
-			$entityLookup,
+			$wikibaseClient->getStore()->getEntityLookup(),
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$wikibaseClient->getSettings(),
 			$labelDescriptionLookup,
