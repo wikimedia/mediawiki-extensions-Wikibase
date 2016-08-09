@@ -2,10 +2,14 @@
 
 namespace Wikibase\Test\Repo\Api;
 
+use ApiBase;
 use Exception;
+use PHPUnit_Framework_MockObject_MockObject;
 use UsageException;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -27,11 +31,20 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
 class EntityLoadingHelperTest extends \MediaWikiTestCase {
 
 	/**
+	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
+	 */
+	protected function getMockApiBase() {
+		return $this->getMockBuilder( ApiBase::class )
+			->disableOriginalConstructor()
+			->getMock();
+	}
+
+	/**
 	 * @param mixed $entityRevisionReturn if value is instance of Exception it will be thrown;
 	 * If it is false, 0 calls will be expected. Instances of EntityRevision (and null) will be
 	 * returned as is.
 	 *
-	 * @return EntityRevisionLookup
+	 * @return EntityRevisionLookup|PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getMockEntityRevisionLookup( $entityRevisionReturn ) {
 		$mock = $this->getMock( EntityRevisionLookup::class );
@@ -103,9 +116,36 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		$expectedErrorCode = null
 	) {
 		return new EntityLoadingHelper(
+			$this->getMockApiBase(),
+			new BasicEntityIdParser(),
 			$this->getMockEntityRevisionLookup( $lookupResult ),
 			$this->getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode )
 		);
+	}
+
+	public function testLoadEntityRevision() {
+		$revision = $this->getMockRevision();
+
+		$helper = $this->newEntityLoadingHelper( $revision );
+
+		$return = $helper->loadEntityRevision( new ItemId( 'Q1' ) );
+
+		$this->assertSame( $revision, $return );
+
+		$this->markTestIncomplete( 'No tests for failure cases, since this method is not intended to stay public.' );
+	}
+
+	public function testGetEntityIdFromParams() {
+		$helper = $this->newEntityLoadingHelper();
+
+		$result = $helper->getEntityIdFromParams( [ 'entity' => 'Q12' ] );
+		$this->assertEquals( new ItemId( 'Q12' ), $result );
+
+		$helper->setEntityIdParam( 'foo' );
+		$result = $helper->getEntityIdFromParams( [ 'foo' => 'Q21' ] );
+		$this->assertEquals( new ItemId( 'Q21' ), $result );
+
+		$this->markTestIncomplete( 'Only basic test, since this method is not intended to stay public.' );
 	}
 
 	public function testLoadEntity() {
@@ -113,10 +153,11 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		$entity = $revision->getEntity();
 
 		$helper = $this->newEntityLoadingHelper( $revision );
-
 		$return = $helper->loadEntity( new ItemId( 'Q1' ) );
 
 		$this->assertSame( $entity, $return );
+
+		$this->markTestIncomplete( 'FIXME: needs test for ID supplied via request params, directly and as site:title.' );
 	}
 
 	public function testLoadEntity_NullRevision() {
