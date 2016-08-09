@@ -39,13 +39,14 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	private $editEntityFactory;
 
 	public function __construct(
-		ApiBase $apiBase,
 		EntityRevisionLookup $entityRevisionLookup,
 		ApiErrorReporter $errorReporter,
+		ApiBase $apiBase,
 		SummaryFormatter $summaryFormatter,
 		EditEntityFactory $editEntityFactory
 	) {
 		parent::__construct( $entityRevisionLookup, $errorReporter );
+
 		$this->apiBase = $apiBase;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;

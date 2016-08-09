@@ -141,9 +141,9 @@ class ApiHelperFactory {
 	 */
 	public function getEntitySavingHelper( ApiBase $apiBase ) {
 		return new EntitySavingHelper(
-			$apiBase,
 			$this->entityRevisionLookup,
 			$this->getErrorReporter( $apiBase ),
+			$apiBase,
 			$this->summaryFormatter,
 			$this->editEntityFactory
 		);

@@ -35,6 +35,38 @@ use Wikibase\SummaryFormatter;
 class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 	/**
+	 * @param EntityRevision|Exception|null $lookupResult
+	 * @param string|null $expectedExceptionCode
+	 * @param string|null $expectedErrorCode
+	 *
+	 * @return EntityLoadingHelper
+	 */
+	protected function newEntityLoadingHelper(
+		$lookupResult,
+		$expectedExceptionCode = null,
+		$expectedErrorCode = null
+	) {
+		$mockApiBase = $this->getMockApiBase();
+		$mockApiBase->expects( $this->any() )
+			->method( 'isWriteMode' )
+			->will( $this->returnValue( true ) );
+		$mockApiBase->expects( $this->any() )
+			->method( 'getContext' )
+			->will( $this->returnValue( $this->newContext() ) );
+		$mockApiBase->expects( $this->any() )
+			->method( 'extractRequestParams' )
+			->will( $this->returnValue( array() ) );
+
+		return new EntitySavingHelper(
+			$this->getMockEntityRevisionLookup( $lookupResult ),
+			$this->getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode ),
+			$mockApiBase,
+			$this->getMockSummaryFormatter(),
+			$this->getMockEditEntityFactory()
+		);
+	}
+
+	/**
 	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private function getMockApiBase() {
@@ -105,9 +137,9 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			->will( $this->returnValue( array() ) );
 
 		$helper = new EntitySavingHelper(
-			$mockApiBase,
 			$this->getMockEntityRevisionLookup( false ),
 			$this->getMockErrorReporter(),
+			$mockApiBase,
 			$this->getMockSummaryFormatter(),
 			$this->getMockEditEntityFactory( 1 )
 		);
@@ -133,45 +165,15 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			->will( $this->returnValue( false ) );
 
 		$helper = new EntitySavingHelper(
-			$mockApiBase,
 			$this->getMockEntityRevisionLookup( false ),
 			$this->getMockErrorReporter(),
+			$mockApiBase,
 			$this->getMockSummaryFormatter(),
 			$this->getMockEditEntityFactory( 0 )
 		);
 
 		$this->setExpectedException( LogicException::class );
 		$helper->attemptSaveEntity( new Item(), '' );
-	}
-
-	/**
-	 * @param EntityRevision|Exception|null $lookupResult
-	 * @param string|null $expectedError
-	 * @return EntityLoadingHelper
-	 */
-	protected function newEntityLoadingHelper(
-		$lookupResult = null,
-		$expectedExceptionCode = null,
-		$expectedErrorCode = null
-	) {
-		$mockApiBase = $this->getMockApiBase();
-		$mockApiBase->expects( $this->any() )
-			->method( 'isWriteMode' )
-			->will( $this->returnValue( true ) );
-		$mockApiBase->expects( $this->any() )
-			->method( 'getContext' )
-			->will( $this->returnValue( $this->newContext() ) );
-		$mockApiBase->expects( $this->any() )
-			->method( 'extractRequestParams' )
-			->will( $this->returnValue( array() ) );
-
-		return new EntitySavingHelper(
-			$mockApiBase,
-			$this->getMockEntityRevisionLookup( $lookupResult ),
-			$this->getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode ),
-			$this->getMockSummaryFormatter(),
-			$this->getMockEditEntityFactory()
-		);
 	}
 
 }

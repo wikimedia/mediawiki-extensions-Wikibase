@@ -27,26 +27,26 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
 class EntityLoadingHelperTest extends \MediaWikiTestCase {
 
 	/**
-	 * @param mixed $entityRevisionReturn if value is instance of Exception it will be thrown;
-	 * If it is false, 0 calls will be expected. Instances of EntityRevision (and null) will be
-	 * returned as is.
+	 * @param EntityRevision|Exception|false|null $lookupResult If the value is an instance of
+	 *  Exception it will be thrown. If it is null, 0 calls will be expected. Instances of
+	 *  EntityRevision (and null) will be returned by the lookup.
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	protected function getMockEntityRevisionLookup( $entityRevisionReturn ) {
+	protected function getMockEntityRevisionLookup( $lookupResult ) {
 		$mock = $this->getMock( EntityRevisionLookup::class );
 
-		if ( $entityRevisionReturn === false ) {
+		if ( $lookupResult === false ) {
 			$mock->expects( $this->never() )
 				->method( 'getEntityRevision' );
-		} elseif ( $entityRevisionReturn instanceof Exception ) {
+		} elseif ( $lookupResult instanceof Exception ) {
 			$mock->expects( $this->once() )
 				->method( 'getEntityRevision' )
-				->will( $this->throwException( $entityRevisionReturn ) );
+				->will( $this->throwException( $lookupResult ) );
 		} else {
 			$mock->expects( $this->once() )
 				->method( 'getEntityRevision' )
-				->will( $this->returnValue( $entityRevisionReturn ) );
+				->will( $this->returnValue( $lookupResult ) );
 		}
 		return $mock;
 	}
@@ -85,12 +85,14 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityRevision|Exception|null $lookupResult
-	 * @param string|null $expectedError
+	 * @param EntityRevision|Exception|false|null $lookupResult
+	 * @param string|null $expectedExceptionCode
+	 * @param string|null $expectedErrorCode
+	 *
 	 * @return EntityLoadingHelper
 	 */
 	protected function newEntityLoadingHelper(
-		$lookupResult = null,
+		$lookupResult,
 		$expectedExceptionCode = null,
 		$expectedErrorCode = null
 	) {
