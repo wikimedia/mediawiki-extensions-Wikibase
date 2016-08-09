@@ -105,8 +105,6 @@ $.extend( wb.PageConnector.prototype, {
 			pageName,
 			['info', 'sitelinks'],
 			'',
-			'sitelinks',
-			'ascending',
 			true
 		);
 	},
