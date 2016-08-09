@@ -242,6 +242,7 @@
 	"apihelp-wbsearchentities-param-language": "An dëser Sprooch sichen.",
 	"apihelp-wbsearchentities-param-strictlanguage": "Ob Ersatzsproochen ausgeschalt solle ginn",
 	"apihelp-wbsearchentities-example-2": "No \"abc\" an der Englescher Sprooch siche mat enger Limite vu 50",
+	"apihelp-wbsearchentities-example-4": "No \"abc\" op Englesch sichen mat enger Limit vun 2 an engem Decalage vun 2",
 	"apihelp-query+wbsearch-param-search": "No dësem Text sichen.",
 	"apihelp-query+wbsearch-param-language": "An dëser Sprooch sichen.",
 	"apihelp-query+wbsearch-param-limit": "Maximal Zuel vu Resultater",

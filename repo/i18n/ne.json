@@ -3,7 +3,8 @@
 		"authors": [
 			"बिप्लब आनन्द",
 			"Nirjal stha",
-			"NehalDaveND"
+			"NehalDaveND",
+			"राम प्रसाद जोशी"
 		]
 	},
 	"wikibase-entity-property": "गुणधर्म",
@@ -24,6 +25,7 @@
 	"wikibase-label-empty": "नामपत्र परिभाषित कुनै",
 	"wikibase-label-edit-placeholder": "नामपत्र लेख्नुहोस्",
 	"wikibase-label-edit-placeholder-language-aware": "$1 मा नामपत्र लेख्नुहोस्",
+	"wikibase-description-empty": "कुनै विवरण परिभाषित छैन ।",
 	"wikibase-diffview-rank": "क्रम",
 	"wikibase-diffview-rank-normal": "सामान्य ओहदा",
 	"wikibase-diffview-label": "नामपत्र",

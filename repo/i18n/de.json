@@ -444,6 +444,7 @@
 	"apihelp-wbsearchentities-param-continue": "Versatz, wo eine Suche weitergeführt werden soll.",
 	"apihelp-wbsearchentities-example-2": "Sucht nach „abc“ in englischer Sprache mit maximal 50",
 	"apihelp-wbsearchentities-example-3": "Sucht nach „Alphabet“ in deutscher Sprache für die Eigenschaft „Typ“",
+	"apihelp-wbsearchentities-example-4": "Sucht nach „abc“ in deutscher Sprache mit einer Beschränkung von 2 und einem Versatz von 2",
 	"apihelp-query+wbsearch-param-search": "Sucht nach diesem Text.",
 	"apihelp-query+wbsearch-param-language": "Sucht in dieser Sprache.",
 	"apihelp-query+wbsearch-param-strictlanguage": "Ob der Sprach-Fallback deaktiviert werden soll",

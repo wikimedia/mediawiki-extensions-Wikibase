@@ -482,6 +482,7 @@
 	"apihelp-wbsearchentities-example-1": "Шукати «abc» англійською мовою, зі значеннями за замовчуванням для типу та ліміту",
 	"apihelp-wbsearchentities-example-2": "Шукати «abc» англійською мовою, зі значенням ліміту 50",
 	"apihelp-wbsearchentities-example-3": "Шукати «alphabet» англійською мовою серед властивостей",
+	"apihelp-wbsearchentities-example-4": "Пошук «abc» англійською мовою з лімітом 2 та зміщенням 2",
 	"apihelp-query+wbsearch-description": "Виконує пошук сутностей, використовуючи назви та альтернативні назви.\nЦе можна використовувати як генератор для інших запитів.\nВиводить виявлений результат, що має бути показаний.",
 	"apihelp-query+wbsearch-param-search": "Шукати цей текст.",
 	"apihelp-query+wbsearch-param-language": "Шукати цією мовою.",
