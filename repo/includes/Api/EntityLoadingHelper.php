@@ -24,12 +24,12 @@ class EntityLoadingHelper {
 	/**
 	 * @var EntityRevisionLookup
 	 */
-	private $entityRevisionLookup;
+	protected $entityRevisionLookup;
 
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	public function __construct(
 		EntityRevisionLookup $entityRevisionLookup,

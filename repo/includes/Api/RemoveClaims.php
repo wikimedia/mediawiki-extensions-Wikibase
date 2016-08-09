@@ -52,11 +52,6 @@ class RemoveClaims extends ApiBase {
 	private $resultBuilder;
 
 	/**
-	 * @var EntityLoadingHelper
-	 */
-	private $entityLoadingHelper;
-
-	/**
 	 * @var EntitySavingHelper
 	 */
 	private $entitySavingHelper;
@@ -85,7 +80,6 @@ class RemoveClaims extends ApiBase {
 
 		$this->guidParser = $wikibaseRepo->getStatementGuidParser();
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
-		$this->entityLoadingHelper = $apiHelperFactory->getEntityLoadingHelper( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 	}
 
@@ -98,12 +92,12 @@ class RemoveClaims extends ApiBase {
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
 		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
+			$entityRevision = $this->entitySavingHelper->loadEntityRevision(
 				$entityId,
 				(int)$params['baserevid']
 			);
 		} else {
-			$entityRevision = $this->entityLoadingHelper->loadEntityRevision( $entityId );
+			$entityRevision = $this->entitySavingHelper->loadEntityRevision( $entityId );
 		}
 		$entity = $entityRevision->getEntity();
 

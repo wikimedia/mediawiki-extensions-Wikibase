@@ -6,6 +6,7 @@ use Exception;
 use Revision;
 use UsageException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
@@ -26,13 +27,19 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
 class EntityLoadingHelperTest extends \MediaWikiTestCase {
 
 	/**
-	 * @param mixed $entityRevisionReturn if value is instance of Exception it will be thrown
+	 * @param mixed $entityRevisionReturn if value is instance of Exception it will be thrown;
+	 * If it is false, 0 calls will be expected. Instances of EntityRevision (and null) will be
+	 * returned as is.
 	 *
 	 * @return EntityRevisionLookup
 	 */
-	public function getMockEntityRevisionLookup( $entityRevisionReturn ) {
+	protected function getMockEntityRevisionLookup( $entityRevisionReturn ) {
 		$mock = $this->getMock( EntityRevisionLookup::class );
-		if ( $entityRevisionReturn instanceof Exception ) {
+
+		if ( $entityRevisionReturn === false ) {
+			$mock->expects( $this->never() )
+				->method( 'getEntityRevision' );
+		} elseif ( $entityRevisionReturn instanceof Exception ) {
 			$mock->expects( $this->once() )
 				->method( 'getEntityRevision' )
 				->will( $this->throwException( $entityRevisionReturn ) );
@@ -49,7 +56,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	 * @param string|null $expectedErrorCode
 	 * @return ApiErrorReporter
 	 */
-	private function getMockErrorReporter( $expectedExceptionCode = null, $expectedErrorCode = null ) {
+	protected function getMockErrorReporter( $expectedExceptionCode = null, $expectedErrorCode = null ) {
 		$mock = $this->getMockBuilder( ApiErrorReporter::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -71,18 +78,31 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	/**
 	 * @return Revision
 	 */
-	public function getMockRevision() {
+	protected function getMockRevision() {
 		return $this->getMockBuilder( Revision::class )
 			->disableOriginalConstructor()
 			->getMock();
 	}
 
+	/**
+	 * @param EntityRevision|Exception|null $lookupResult
+	 * @param string|null $expectedError
+	 * @return EntityLoadingHelper
+	 */
+	protected function newEntityLoadingHelper(
+		$lookupResult = null,
+		$expectedExceptionCode = null,
+		$expectedErrorCode = null
+	) {
+		return new EntityLoadingHelper(
+			$this->getMockEntityRevisionLookup( $lookupResult ),
+			$this->getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode )
+		);
+	}
+
 	public function testRevision_returnsRevision() {
 		$revision = $this->getMockRevision();
-		$helper = new EntityLoadingHelper(
-			$this->getMockEntityRevisionLookup( $revision ),
-			$this->getMockErrorReporter()
-		);
+		$helper = $this->newEntityLoadingHelper( $revision );
 
 		$return = $helper->loadEntityRevision( new ItemId( 'Q1' ) );
 
@@ -90,22 +110,19 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testNullRevision_callsErrorReporter() {
-		$helper = new EntityLoadingHelper(
-			$this->getMockEntityRevisionLookup( null ),
-			$this->getMockErrorReporter( null, 'cant-load-entity-content' )
-		);
+		$helper = $this->newEntityLoadingHelper( null, null, 'cant-load-entity-content' );
 
 		$this->setExpectedException( UsageException::class );
 		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
 	}
 
 	public function testUnresolvedRedirectException_callsErrorReporter() {
-		$helper = new EntityLoadingHelper(
-			$this->getMockEntityRevisionLookup( new RevisionedUnresolvedRedirectException(
+		$helper = $this->newEntityLoadingHelper(
+			new RevisionedUnresolvedRedirectException(
 				new ItemId( 'Q1' ),
 				new ItemId( 'Q1' )
-			) ),
-			$this->getMockErrorReporter( 'unresolved-redirect' )
+			),
+			'unresolved-redirect'
 		);
 
 		$this->setExpectedException( UsageException::class );
@@ -113,20 +130,14 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	}
 
 	public function testBadRevisionException_callsErrorReporter() {
-		$helper = new EntityLoadingHelper(
-			$this->getMockEntityRevisionLookup( new BadRevisionException() ),
-			$this->getMockErrorReporter( 'nosuchrevid' )
-		);
+		$helper = $this->newEntityLoadingHelper( new BadRevisionException(), 'nosuchrevid' );
 
 		$this->setExpectedException( UsageException::class );
 		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
 	}
 
 	public function testStorageException_callsErrorReporter() {
-		$helper = new EntityLoadingHelper(
-			$this->getMockEntityRevisionLookup( new StorageException() ),
-			$this->getMockErrorReporter( 'cant-load-entity-content' )
-		);
+		$helper = $this->newEntityLoadingHelper( new StorageException(), 'cant-load-entity-content' );
 
 		$this->setExpectedException( UsageException::class );
 		$helper->loadEntityRevision( new ItemId( 'Q1' ) );
