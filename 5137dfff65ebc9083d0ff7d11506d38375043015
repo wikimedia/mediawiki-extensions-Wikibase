@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4efa2b83_e0beeaf9",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-08-09T10:26:01Z",
+      "side": 1,
+      "message": "Remove empty array?",
+      "revId": "5137dfff65ebc9083d0ff7d11506d38375043015",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
