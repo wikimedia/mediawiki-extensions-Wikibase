@@ -128,8 +128,6 @@ class EntityLoadingHelper {
 	 * Will fail by calling dieException() $this->errorReporter if the revision
 	 * cannot be found or cannot be loaded.
 	 *
-	 * @todo make this protected once more code has been moved from ModifyEntity to EntitySavingHelper.
-	 *
 	 * @param EntityId $entityId EntityId of the page to load the revision for
 	 * @param int|string $revId revision to load. If not given, the current revision will be loaded.
 	 *
@@ -137,7 +135,7 @@ class EntityLoadingHelper {
 	 * @throws LogicException
 	 * @return EntityRevision|null
 	 */
-	public function loadEntityRevision( // FIXME testme
+	protected function loadEntityRevision(
 		EntityId $entityId,
 		$revId = null
 	) {
@@ -191,13 +189,11 @@ class EntityLoadingHelper {
 	}
 
 	/**
-	 * @todo make this protected once more code has been moved from ModifyEntity to EntitySavingHelper.
-	 *
 	 * @param string[] $params
 	 *
 	 * @return EntityId|null
 	 */
-	public function getEntityIdFromParams( array $params ) {
+	protected function getEntityIdFromParams( array $params ) {
 		if ( isset( $params[$this->entityIdParam] ) ) {
 			return $this->getEntityIdFromString( $params[$this->entityIdParam] );
 		} elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {

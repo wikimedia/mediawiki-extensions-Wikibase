@@ -123,31 +123,6 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testLoadEntityRevision() {
-		$revision = $this->getMockRevision();
-
-		$helper = $this->newEntityLoadingHelper( $revision );
-
-		$return = $helper->loadEntityRevision( new ItemId( 'Q1' ) );
-
-		$this->assertSame( $revision, $return );
-
-		$this->markTestIncomplete( 'No tests for failure cases, since this method is not intended to stay public.' );
-	}
-
-	public function testGetEntityIdFromParams() {
-		$helper = $this->newEntityLoadingHelper();
-
-		$result = $helper->getEntityIdFromParams( [ 'entity' => 'Q12' ] );
-		$this->assertEquals( new ItemId( 'Q12' ), $result );
-
-		$helper->setEntityIdParam( 'foo' );
-		$result = $helper->getEntityIdFromParams( [ 'foo' => 'Q21' ] );
-		$this->assertEquals( new ItemId( 'Q21' ), $result );
-
-		$this->markTestIncomplete( 'Only basic test, since this method is not intended to stay public.' );
-	}
-
 	public function testLoadEntity() {
 		$revision = $this->getMockRevision();
 		$entity = $revision->getEntity();

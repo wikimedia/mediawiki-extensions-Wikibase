@@ -81,6 +81,10 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		return $context;
 	}
 
+	public function testLoadEntity_create() {
+		$this->fail( 'Test me!' );
+	}
+
 	public function testLoadEntity_baserevid() {
 		$itemId = new ItemId( 'Q1' );
 
@@ -114,8 +118,9 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		);
 
 		$return = $helper->loadEntity( $itemId );
-
 		$this->assertSame( $entity, $return );
+
+		$this->assertSame( 17, $helper->getBaseRevisionId() );
 	}
 
 	public function testAttemptSave() {
