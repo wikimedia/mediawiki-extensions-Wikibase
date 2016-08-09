@@ -24,6 +24,7 @@ use Wikimedia\Assert\Assert;
  *
  * @license GPL-2.0+
  * @author Addshore
+ * @author Daniel Kinzler
  */
 class EntityLoadingHelper {
 
@@ -31,6 +32,11 @@ class EntityLoadingHelper {
 	 * @var ApiBase
 	 */
 	protected $apiModule;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
 
 	/**
 	 * @var EntityRevisionLookup
@@ -46,11 +52,6 @@ class EntityLoadingHelper {
 	 * @var string See the LATEST_XXX constants defined in EntityRevisionLookup
 	 */
 	protected $defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_SLAVE;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
 
 	/**
 	 * @var SiteLinkLookup|null
@@ -163,6 +164,7 @@ class EntityLoadingHelper {
 	 * @param EntityId|null $entityId ID of the entity to load. If not given, the ID is taken
 	 *        from the request parameters. If $entityId is given, it must be consistent with
 	 *        the 'baserevid' parameter.
+	 *
 	 * @return EntityDocument
 	 */
 	public function loadEntity( EntityId $entityId = null ) {

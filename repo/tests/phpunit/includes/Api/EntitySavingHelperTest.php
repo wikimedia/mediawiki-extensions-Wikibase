@@ -35,6 +35,7 @@ use Wikibase\SummaryFormatter;
  *
  * @license GPL-2.0+
  * @author Addshore
+ * @author Daniel Kinzler
  */
 class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
@@ -68,7 +69,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 *
 	 * @return EditEntity
 	 */
-	private function getMockEditEntity( $calls = null ) {
+	private function getMockEditEntity( $calls ) {
 		$mock = $this->getMockBuilder( EditEntity::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -83,7 +84,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 *
 	 * @return EditEntityFactory
 	 */
-	private function getMockEditEntityFactory( $calls = null ) {
+	private function getMockEditEntityFactory( $calls ) {
 		$mock = $this->getMockBuilder( EditEntityFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -112,7 +113,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		return $mock;
 	}
 
-	protected function getMockApiBase( $params = [ ] ) {
+	protected function getMockApiBase( array $params ) {
 		$api = parent::getMockApiBase( $params );
 
 		$api->expects( $this->any() )
@@ -122,7 +123,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		return $api;
 	}
 
-	private function newContext( $params = [] ) {
+	private function newContext( array $params ) {
 		$user = $this->getMockBuilder( User::class )
 			->disableOriginalConstructor()
 			->getMock();

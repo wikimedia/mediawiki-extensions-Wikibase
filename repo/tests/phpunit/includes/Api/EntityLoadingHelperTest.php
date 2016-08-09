@@ -28,13 +28,16 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
  *
  * @license GPL-2.0+
  * @author Addshore
+ * @author Daniel Kinzler
  */
 class EntityLoadingHelperTest extends \MediaWikiTestCase {
 
 	/**
+	 * @param array $params
+	 *
 	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
 	 */
-	protected function getMockApiBase( $params = [] ) {
+	protected function getMockApiBase( array $params ) {
 		$apiBase = $this->getMockBuilder( ApiBase::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -50,8 +53,8 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	 * @param EntityId|null $entityId Entity ID getEntityRevision() should expect.
 	 * @param EntityRevision|null $entityRevision The EntityRevision getEntityRevision() should return.
 	 * @param Exception|null $exception The Exception getEntityRevision() should throw.
-	 * @return PHPUnit_Framework_MockObject_MockObject|EntityRevisionLookup
 	 *
+	 * @return EntityRevisionLookup|PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getMockEntityRevisionLookup(
 		EntityId $entityId = null,
@@ -81,9 +84,10 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	/**
 	 * @param string|null $expectedExceptionCode
 	 * @param string|null $expectedErrorCode
+	 *
 	 * @return ApiErrorReporter
 	 */
-	protected function getMockErrorReporter( $expectedExceptionCode = null, $expectedErrorCode = null ) {
+	protected function getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode ) {
 		$mock = $this->getMockBuilder( ApiErrorReporter::class )
 			->disableOriginalConstructor()
 			->getMock();
