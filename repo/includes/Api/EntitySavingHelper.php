@@ -46,6 +46,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		EditEntityFactory $editEntityFactory
 	) {
 		parent::__construct( $entityRevisionLookup, $errorReporter );
+
 		$this->apiBase = $apiBase;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;

@@ -146,11 +146,13 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 	/**
 	 * @param EntityRevision|Exception|null $lookupResult
-	 * @param string|null $expectedError
+	 * @param string|null $expectedExceptionCode
+	 * @param string|null $expectedErrorCode
+	 *
 	 * @return EntityLoadingHelper
 	 */
 	protected function newEntityLoadingHelper(
-		$lookupResult = null,
+		$lookupResult,
 		$expectedExceptionCode = null,
 		$expectedErrorCode = null
 	) {
