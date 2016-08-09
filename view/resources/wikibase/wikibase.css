@@ -286,7 +286,8 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-edit,
-.wikibase-statementlistview-listview .wb-edit .wikibase-snakview-property-container {
+.wikibase-statementlistview-listview .wb-edit .wikibase-snakview-property-container,
+.wikibase-statementgroupview-property.wb-edit + .wikibase-statementlistview > .wikibase-toolbar-wrapper {
 	background-color: #C0DAE5;
 }
 
@@ -295,10 +296,6 @@ div .wikibase-snakview-value span.error.wb-format-error {
 	background-color: #E5C8B5;
 }
 
-.wikibase-statementgrouplistview .wikibase-statementview.wb-edit,
-.wikibase-statementgrouplistview .wikibase-statementview.wb-edit .wb-claim {
-	background-color: #D6F3FF;
-}
 .wikibase-statementgrouplistview .wikibase-statementview.wb-error,
 .wikibase-statementgrouplistview .wikibase-statementview.wb-error .wb-claim {
 	background-color: #FFDFC9;
