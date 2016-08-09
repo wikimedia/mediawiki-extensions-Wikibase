@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_2852ad6a",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-09T15:59:43Z",
+      "side": 1,
+      "message": "$expectedExceptionCode\n\nAnd \"@param string|null $expectedErrorCode\" is missing.\n\nSame in the base class.",
+      "range": {
+        "startLine": 149,
+        "startChar": 23,
+        "endLine": 149,
+        "endChar": 37
+      },
+      "revId": "d81d4c13d32d4b9b0f82d81acb5d97455c63e900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_a8cdbd36",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-09T15:59:43Z",
+      "side": 1,
+      "message": "I would expect this method way up in the file, where it is in the base class.",
+      "revId": "d81d4c13d32d4b9b0f82d81acb5d97455c63e900",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
