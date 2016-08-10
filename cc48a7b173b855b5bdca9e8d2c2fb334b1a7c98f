@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_9c38369d",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T16:45:08Z",
+      "side": 1,
+      "message": "Could even be optimized further by aborting before the every in case !this.options.value.",
+      "range": {
+        "startLine": 196,
+        "startChar": 5,
+        "endLine": 196,
+        "endChar": 6
+      },
+      "revId": "cc48a7b173b855b5bdca9e8d2c2fb334b1a7c98f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
