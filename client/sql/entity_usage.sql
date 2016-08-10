@@ -2,8 +2,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wbc_entity_usage (
   eu_row_id         BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   eu_entity_id      VARBINARY(255) NOT NULL, -- the ID of the entity being used
   eu_aspect         VARBINARY(37) NOT NULL,  -- the aspect of the entity. See EntityUsage::XXX_USAGE for possible values.
-  eu_page_id        INT NOT NULL,            -- the ID of the page that uses the entities.
-  eu_touched        BINARY(14) NOT NULL DEFAULT '' -- timestamp corresponding to page.page_touched
+  eu_page_id        INT NOT NULL             -- the ID of the page that uses the entities.
 ) /*$wgDBTableOptions*/;
 
 -- record one usage per page per aspect of an entity
