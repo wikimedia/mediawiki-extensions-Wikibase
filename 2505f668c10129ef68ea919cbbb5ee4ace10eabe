@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_1e0d1e42",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-10T13:54:19Z",
+      "side": 1,
+      "message": "This means the default changes from MASTER to SLAVE for the LoadingHelper. Just pointing this out. It\u0027s intended as far as I can see.",
+      "revId": "2505f668c10129ef68ea919cbbb5ee4ace10eabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_be3fb2d2",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-10T13:54:19Z",
+      "side": 1,
+      "message": "Both the getter and the setter are never used, currently.",
+      "revId": "2505f668c10129ef68ea919cbbb5ee4ace10eabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_5e07a61f",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-10T13:54:19Z",
+      "side": 1,
+      "message": "int|string|null",
+      "range": {
+        "startLine": 75,
+        "startChar": 11,
+        "endLine": 75,
+        "endChar": 21
+      },
+      "revId": "2505f668c10129ef68ea919cbbb5ee4ace10eabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1e5fde45",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-10T13:54:19Z",
+      "side": 1,
+      "message": "This just repeats what the \"@return EntityDocument\" below already says. Except that the \"given\" confuses me.",
+      "revId": "2505f668c10129ef68ea919cbbb5ee4ace10eabe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
