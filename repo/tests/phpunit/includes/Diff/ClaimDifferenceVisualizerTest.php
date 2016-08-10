@@ -99,7 +99,8 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 					)
 				),
 				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
-				'<tr><td colspan="2" class="diff-lineno">property / P1</td><td colspan="2" class="diff-lineno">property / P1</td></tr>'.
+				'<tr><td colspan="2" class="diff-lineno">property / P1</td>' .
+				'<td colspan="2" class="diff-lineno">property / P1</td></tr>' .
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
 				'<div><del class="diffchange diffchange-inline"><span>bar (DETAILED)</span></del></div></td>'.
 				'<td class="diff-marker">+</td><td class="diff-addedline">'.
@@ -113,7 +114,8 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 					) )
 				),
 				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
-				'<tr><td colspan="2" class="diff-lineno"></td><td colspan="2" class="diff-lineno">property / P1: foo / qualifier</td></tr>'.
+				'<tr><td colspan="2" class="diff-lineno"></td>' .
+				'<td colspan="2" class="diff-lineno">property / P1: foo / qualifier</td></tr>' .
 				'<tr><td colspan="2">&nbsp;</td><td class="diff-marker">+</td><td class="diff-addedline">'.
 				'<div><ins class="diffchange diffchange-inline"><span>P44: v (DETAILED)</span></ins></div></td></tr>'
 			),
@@ -123,13 +125,17 @@ class ClaimDifferenceVisualizerTest extends MediaWikiTestCase {
 					null,
 					null,
 					new Diff( array(
-						new DiffOpRemove( new Reference( new SnakList( array( new PropertyValueSnak( 50, new StringValue( 'v' ) ) ) ) ) ),
+						new DiffOpRemove( new Reference( new SnakList( [
+							new PropertyValueSnak( 50, new StringValue( 'v' ) ),
+						] ) ) ),
 					) )
 				),
 				new Statement( new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'foo' ) ) ),
-				'<tr><td colspan="2" class="diff-lineno">property / P1: foo / reference</td><td colspan="2" class="diff-lineno"></td></tr>'.
+				'<tr><td colspan="2" class="diff-lineno">property / P1: foo / reference</td>' .
+				'<td colspan="2" class="diff-lineno"></td></tr>' .
 				'<tr><td class="diff-marker">-</td><td class="diff-deletedline">'.
-				'<div><del class="diffchange diffchange-inline"><span>P50: v (DETAILED)</span></del></div></td><td colspan="2">&nbsp;</td></tr>'
+				'<div><del class="diffchange diffchange-inline"><span>P50: v (DETAILED)</span>' .
+				'</del></div></td><td colspan="2">&nbsp;</td></tr>'
 			),
 			'ranks' => array(
 				new ClaimDifference(

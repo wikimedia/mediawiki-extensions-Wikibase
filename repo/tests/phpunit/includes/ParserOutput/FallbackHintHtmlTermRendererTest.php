@@ -39,7 +39,8 @@ class FallbackHintHtmlTermRendererTest extends PHPUnit_Framework_TestCase {
 					'de',
 					'de'
 				),
-				'<span lang="de" dir="ltr">lkt &amp; term</span><sup class="wb-language-fallback-indicator wb-language-fallback-variant"></sup>'
+				'<span lang="de" dir="ltr">lkt &amp; term</span><sup '
+					. 'class="wb-language-fallback-indicator wb-language-fallback-variant"></sup>'
 			],
 			[
 				new TermFallback(
@@ -48,7 +49,8 @@ class FallbackHintHtmlTermRendererTest extends PHPUnit_Framework_TestCase {
 					'arc',
 					'arc'
 				),
-				'<span lang="arc" dir="rtl">arc term</span><sup class="wb-language-fallback-indicator"></sup>'
+				'<span lang="arc" dir="rtl">arc term</span><sup '
+					. 'class="wb-language-fallback-indicator"></sup>'
 			],
 		];
 	}
