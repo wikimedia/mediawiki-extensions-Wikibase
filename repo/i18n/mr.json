@@ -22,6 +22,7 @@
 	"wikibase-save-inprogress": "जतन करीत आहे...",
 	"wikibase-remove-inprogress": "हटवित आहे...",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "अधिक भाषेत",
+	"wikibase-entitytermsforlanguagelistview-more": "सर्व प्रविष्ट भाषा",
 	"wikibase-label-empty": "कोणतेही लेबल व्याख्यिकृत नाही",
 	"wikibase-label-edit-placeholder": "लेबल टाका",
 	"wikibase-label-edit-placeholder-language-aware": "$1 मध्ये सारणी टाका",

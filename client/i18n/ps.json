@@ -6,6 +6,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "د نښلېدلي اومتوک زېرمتون توکي سره تړنه",
+	"wikibase-after-page-move": "په لېږدول شوي مخ کې د ژبو د تړنو ساتلو لپاره تاسې بايد د [$1 اړونده {{WBREPONAME}} توکی] هممهاله کړئ.",
 	"wikibase-after-page-move-queued": "د [$1 {{WBREPONAME}} توکی] چې دې مخ سره تړل شوی هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
 	"wikibase-after-page-delete-queued": "د [$1 {{WBREPONAME}} توکی] چې دې مخ سره تړل شوی هغه به په اتوماتيکه توگه ډېر ژر هممهاله شي.",
 	"wikibase-comment-update": "{{WBREPONAME}} توکی بدل شو",
@@ -16,6 +17,7 @@
 	"wikibase-editlinkstitle": "د ژبو خپلمنځي تړنې سمول",
 	"wikibase-addlinkstitle": "د ژبو خپلمنځي تړنې ورگډول",
 	"wikibase-linkitem-addlinks": "تړنې ورگډول",
+	"wikibase-linkitem-close": "کړکۍ بندول او مخ بياتاندول",
 	"wikibase-linkitem-title": "مخ سره تړل",
 	"wikibase-linkitem-linkpage": "مخ سره تړل",
 	"wikibase-linkitem-selectlink": "د دې مخ د اړوندې موضوع سره سم د ويکيډاټا يو بل وېبځی او يو بل مخ وټاکئ.",
@@ -41,5 +43,6 @@
 	"wikibase-pageinfo-entity-id-none": "هېڅ",
 	"wikibase-otherprojects": "په نورو پروژو کې",
 	"wikibase-otherprojects-beta-message": "د نورو پروژو څنگپټه",
-	"wikibase-otherprojects-beta-description": "د \"{{int:wikibase-otherprojects}}\" يوه برخه څنگپټې کې ورگډوي چې د ويکيمېډيا د نورو پروژو سره تړنې د {{WBREPONAME}} اومتوک پر بنسټ وربرابروي."
+	"wikibase-otherprojects-beta-description": "د \"{{int:wikibase-otherprojects}}\" يوه برخه څنگپټې کې ورگډوي چې د ويکيمېډيا د نورو پروژو سره تړنې د {{WBREPONAME}} اومتوک پر بنسټ وربرابروي.",
+	"notification-link-text-view-item": "توکی {{GENDER:$1|کتل}}"
 }

@@ -38,6 +38,7 @@
 	"wikibase-linkitem-not-loggedin-title": "Ахьа авторизаци ян еза",
 	"wikibase-linkitem-not-loggedin": "И функци лела я йиш хилийта ахьа хьай цӀерца болх ба беза хӀокху вики чох а, [$1 Викихаамаш чохь а].",
 	"wikibase-linkitem-success-link": "АгӀонаш кхиамца [$1 Викихаамаш чохь] вовшахтесна.",
+	"wikibase-limitreport-entities-accessed": "Чуяьхна Викибазан хӀумнийн дукхалла",
 	"wikibase-property-notfound": "Билгало «$1» ца карайо",
 	"wikibase-rc-hide-wikidata": "$1 Викихаамаш",
 	"wikibase-rc-hide-wikidata-hide": "Къайлабаха",
