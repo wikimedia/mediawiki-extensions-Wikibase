@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_1c44461c",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T16:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_010f7f34",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 23
+      },
+      "revId": "3f93af32ea730f92836a8b90f767181d91e2ebd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_61168b4f",
         "filename": "repo/includes/Api/EntityLoadingHelper.php",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2016-08-10T14:04:35Z",
       "side": 1,
       "message": "I believe this should allow …|null for consistency.",
+      "range": {
+        "startLine": 103,
+        "startChar": 11,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "3f93af32ea730f92836a8b90f767181d91e2ebd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_5c4ece3d",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T16:54:08Z",
+      "side": 1,
+      "message": "I think it should be null per default, but I see no need to be able to set it to null.",
+      "parentUuid": "ee9d9f70_61168b4f",
       "range": {
         "startLine": 103,
         "startChar": 11,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_7c5ab2fa",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T16:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_a12793b0",
+      "range": {
+        "startLine": 166,
+        "startChar": 56,
+        "endLine": 166,
+        "endChar": 61
+      },
+      "revId": "3f93af32ea730f92836a8b90f767181d91e2ebd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_2133a3f4",
         "filename": "repo/includes/Api/EntitySavingHelper.php",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2016-08-10T14:04:35Z",
       "side": 1,
       "message": "Please rename to $apiModule for consistency.",
+      "range": {
+        "startLine": 39,
+        "startChar": 10,
+        "endLine": 39,
+        "endChar": 18
+      },
+      "revId": "3f93af32ea730f92836a8b90f767181d91e2ebd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_9c5f56e8",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T16:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_2133a3f4",
       "range": {
         "startLine": 39,
         "startChar": 10,
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_1c6b6683",
+        "filename": "repo/includes/Api/ModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T16:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_4130a7e5",
+      "revId": "3f93af32ea730f92836a8b90f767181d91e2ebd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_8149af6c",
         "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
         "patchSetId": 2
@@ -128,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_bc0b3ad8",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T16:54:08Z",
+      "side": 1,
+      "message": "In theory I agree, in parcitce I get warnigns from PhpStorm if I remove this. Not here, but in EntitySavingHelperTest, which also uses this (in fact, this method was moved from there).",
+      "parentUuid": "ee9d9f70_8149af6c",
+      "revId": "3f93af32ea730f92836a8b90f767181d91e2ebd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_a14eb370",
         "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
         "patchSetId": 2
@@ -139,6 +271,24 @@
       "writtenOn": "2016-08-10T14:04:35Z",
       "side": 1,
       "message": "As above.",
+      "revId": "3f93af32ea730f92836a8b90f767181d91e2ebd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_dc10fe06",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T16:54:08Z",
+      "side": 1,
+      "message": "I agreee that it\u0027s ugly, but when I remove it, I do get warnings.",
+      "parentUuid": "ee9d9f70_a14eb370",
       "revId": "3f93af32ea730f92836a8b90f767181d91e2ebd4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
