@@ -70,6 +70,8 @@ class CreateClaim extends ApiBase {
 
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
+
+		$this->entitySavingHelper->setEntityIdParam( 'entity' );
 	}
 
 	/**
@@ -81,8 +83,7 @@ class CreateClaim extends ApiBase {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$entityId = $this->modificationHelper->getEntityIdFromString( $params['entity'] );
-		$entity = $this->entitySavingHelper->loadEntity( $entityId );
+		$entity = $this->entitySavingHelper->loadEntity();
 
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {

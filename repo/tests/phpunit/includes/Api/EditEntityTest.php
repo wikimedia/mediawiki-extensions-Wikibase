@@ -507,17 +507,17 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 */
 	public function provideExceptionData() {
 		return array(
-			'no entity id given' => array(
+			'empty entity id given' => array(
 				'p' => array( 'id' => '', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
-					'code' => 'no-such-entity-id'
+					'code' => 'invalid-entity-id'
 				) ) ),
 			'invalid id' => array(
 				'p' => array( 'id' => 'abcde', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
-					'code' => 'no-such-entity-id'
+					'code' => 'invalid-entity-id'
 				) ) ),
 			'unknown id' => array(
 				'p' => array( 'id' => 'Q1234567', 'data' => '{}' ),
@@ -529,7 +529,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => array( 'id' => '1234', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
-					'code' => 'no-such-entity-id'
+					'code' => 'invalid-entity-id'
 				) ) ),
 			'non existent sitelink' => array(
 				'p' => array( 'site' => 'dewiki','title' => 'NonExistent', 'data' => '{}' ),
@@ -834,7 +834,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => array( 'id' => 'M123X', 'data' => '{}' ),
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
-					'code' => 'no-such-entity-id',
+					'code' => 'invalid-entity-id',
 					'message' => 'Could not find such an entity ID'
 				) ),
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured

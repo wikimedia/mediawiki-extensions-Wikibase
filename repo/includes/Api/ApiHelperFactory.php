@@ -6,11 +6,13 @@ use ApiBase;
 use DataValues\Serializers\DataValueSerializer;
 use Serializers\Serializer;
 use SiteStore;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\SummaryFormatter;
 
@@ -65,6 +67,16 @@ class ApiHelperFactory {
 	 */
 	private $entitySerializer;
 
+	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	/**
+	 * @var SiteLinkLookup
+	 */
+	private $siteLinkLookup;
+
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
@@ -73,7 +85,9 @@ class ApiHelperFactory {
 		SummaryFormatter $summaryFormatter,
 		EntityRevisionLookup $entityRevisionLookup,
 		EditEntityFactory $editEntityFactory,
-		Serializer $entitySerializer
+		Serializer $entitySerializer,
+		EntityIdParser $idParser,
+		SiteLinkLookup $siteLinkLookup = null
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->exceptionLocalizer = $exceptionLocalizer;
@@ -83,6 +97,8 @@ class ApiHelperFactory {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->entitySerializer = $entitySerializer;
+		$this->idParser = $idParser;
+		$this->siteLinkLookup = $siteLinkLookup;
 	}
 
 	/**
@@ -135,32 +151,53 @@ class ApiHelperFactory {
 	/**
 	 * Return an EntitySavingHelper object for use in Api modules
 	 *
+	 * @warning The resulting EntitySavingHelper may be stateful and should only
+	 *          be used for a single API request.
+	 *
 	 * @param ApiBase $apiBase
 	 *
-	 * @return EntitySavingHelper
+	 * @return EntitySavingHelper a new EntitySavingHelper instance
 	 */
 	public function getEntitySavingHelper( ApiBase $apiBase ) {
-		return new EntitySavingHelper(
+		$helper = new EntitySavingHelper(
 			$apiBase,
+			$this->idParser,
 			$this->entityRevisionLookup,
 			$this->getErrorReporter( $apiBase ),
 			$this->summaryFormatter,
 			$this->editEntityFactory
 		);
+
+		if ( $this->siteLinkLookup ) {
+			$helper->setSiteLinkLookup( $this->siteLinkLookup );
+		}
+
+		return $helper;
 	}
 
 	/**
 	 * Return an EntityLoadingHelper object for use in Api modules
 	 *
+	 * @warning The resulting EntityLoadingHelper may be stateful and should only
+	 *          be used for a single API request.
+	 *
 	 * @param ApiBase $apiBase
 	 *
-	 * @return EntityLoadingHelper
+	 * @return EntityLoadingHelper a new EntityLoadingHelper instance
 	 */
 	public function getEntityLoadingHelper( ApiBase $apiBase ) {
-		return new EntityLoadingHelper(
+		$helper = new EntityLoadingHelper(
+			$apiBase,
+			$this->idParser,
 			$this->entityRevisionLookup,
 			$this->getErrorReporter( $apiBase )
 		);
+
+		if ( $this->siteLinkLookup ) {
+			$helper->setSiteLinkLookup( $this->siteLinkLookup );
+		}
+
+		return $helper;
 	}
 
 }
