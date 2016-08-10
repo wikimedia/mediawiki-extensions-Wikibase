@@ -8,6 +8,7 @@ use Status;
 use UsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\EditEntity as EditEntityHandler;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -25,11 +26,6 @@ use Wikibase\SummaryFormatter;
 class EntitySavingHelper extends EntityLoadingHelper {
 
 	/**
-	 * @var ApiBase
-	 */
-	private $apiBase;
-
-	/**
 	 * @var SummaryFormatter
 	 */
 	private $summaryFormatter;
@@ -40,14 +36,14 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	private $editEntityFactory;
 
 	public function __construct(
-		ApiBase $apiBase,
+		ApiBase $apiModule,
+		EntityIdParser $idParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		ApiErrorReporter $errorReporter,
 		SummaryFormatter $summaryFormatter,
 		EditEntityFactory $editEntityFactory
 	) {
-		parent::__construct( $entityRevisionLookup, $errorReporter );
-		$this->apiBase = $apiBase;
+		parent::__construct( $apiModule, $idParser, $entityRevisionLookup, $errorReporter );
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;
 
@@ -58,10 +54,20 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * Returns the given EntityDocument.
 	 *
 	 * @param EntityId $entityId
-	 * @return EntityDocument
+	 * @return EntityDocument|null
 	 */
-	public function loadEntity( EntityId $entityId ) {
-		$params = $this->apiBase->extractRequestParams();
+	public function loadEntity( EntityId $entityId = null ) {
+		$params = $this->apiModule->extractRequestParams();
+
+		if ( !$entityId ) {
+			$entityId = $this->getEntityIdFromParams( $params );
+		}
+
+		if ( !$entityId ) {
+			$this->errorReporter->dieError(
+				'No entity ID provided',
+				'no-entity-id' );
+		}
 
 		// If a base revision is given, use if for consistency!
 		$baseRev = isset( $params['baserevid'] )
@@ -69,6 +75,12 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			: $this->defaultRetrievalMode;
 
 		$entityRevision = $this->loadEntityRevision( $entityId, $baseRev );
+
+		if ( !$entityRevision ) {
+			$this->errorReporter->dieError(
+				'Entity ' . $entityId->getSerialization() . ' not found',
+				'cant-load-entity-content' );
+		}
 
 		return $entityRevision->getEntity();
 	}
@@ -96,7 +108,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @see  EditEntityHandler::attemptSave()
 	 */
 	public function attemptSaveEntity( EntityDocument $entity, $summary, $flags = 0 ) {
-		if ( !$this->apiBase->isWriteMode() ) {
+		if ( !$this->apiModule->isWriteMode() ) {
 			// sanity/safety check
 			throw new LogicException(
 				'attemptSaveEntity() cannot be used by API modules that do not return true from isWriteMode()!'
@@ -107,8 +119,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			$summary = $this->summaryFormatter->formatSummary( $summary );
 		}
 
-		$params = $this->apiBase->extractRequestParams();
-		$user = $this->apiBase->getContext()->getUser();
+		$params = $this->apiModule->extractRequestParams();
+		$user = $this->apiModule->getContext()->getUser();
 
 		if ( isset( $params['bot'] ) && $params['bot'] && $user->isAllowed( 'bot' ) ) {
 			$flags |= EDIT_FORCE_BOT;
@@ -140,7 +152,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @return string|bool|null Token string, or false if not needed, or null if not set.
 	 */
 	private function evaluateTokenParam( array $params ) {
-		if ( !$this->apiBase->needsToken() ) {
+		if ( !$this->apiModule->needsToken() ) {
 			// False disables the token check.
 			return false;
 		}

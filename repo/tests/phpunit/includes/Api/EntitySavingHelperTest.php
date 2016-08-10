@@ -2,13 +2,12 @@
 
 namespace Wikibase\Test\Repo\Api;
 
-use ApiBase;
 use Exception;
 use LogicException;
-use PHPUnit_Framework_MockObject_MockObject;
 use RequestContext;
 use Status;
 use User;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -32,15 +31,6 @@ use Wikibase\SummaryFormatter;
  * @author Addshore
  */
 class EntitySavingHelperTest extends EntityLoadingHelperTest {
-
-	/**
-	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
-	 */
-	private function getMockApiBase() {
-		return $this->getMockBuilder( ApiBase::class )
-			->disableOriginalConstructor()
-			->getMock();
-	}
 
 	/**
 	 * @return SummaryFormatter
@@ -116,6 +106,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 		$helper = new EntitySavingHelper(
 			$mockApiBase,
+			new BasicEntityIdParser(),
 			$revisionLookup,
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
@@ -141,6 +132,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 		$helper = new EntitySavingHelper(
 			$mockApiBase,
+			new BasicEntityIdParser(),
 			$this->getMockEntityRevisionLookup( false ),
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
@@ -169,6 +161,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 		$helper = new EntitySavingHelper(
 			$mockApiBase,
+			new BasicEntityIdParser(),
 			$this->getMockEntityRevisionLookup( false ),
 			$this->getMockErrorReporter(),
 			$this->getMockSummaryFormatter(),
@@ -202,6 +195,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 		return new EntitySavingHelper(
 			$mockApiBase,
+			new BasicEntityIdParser(),
 			$this->getMockEntityRevisionLookup( $lookupResult ),
 			$this->getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode ),
 			$this->getMockSummaryFormatter(),

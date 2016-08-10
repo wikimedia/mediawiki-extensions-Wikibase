@@ -17,14 +17,10 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\EntityFactory;
-use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
@@ -52,11 +48,6 @@ abstract class ModifyEntity extends ApiBase {
 	 * @var SiteLinkTargetProvider
 	 */
 	protected $siteLinkTargetProvider;
-
-	/**
-	 * @var SiteLinkLookup
-	 */
-	private $siteLinkLookup;
 
 	/**
 	 * @var EntityTitleLookup
@@ -106,11 +97,6 @@ abstract class ModifyEntity extends ApiBase {
 	private $entitySavingHelper;
 
 	/**
-	 * @var EntityIdParser
-	 */
-	protected $idParser;
-
-	/**
 	 * @var EntityFactory
 	 */
 	protected $entityFactory;
@@ -149,9 +135,10 @@ abstract class ModifyEntity extends ApiBase {
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
-		$this->idParser = $wikibaseRepo->getEntityIdParser();
 		$this->entityFactory = $wikibaseRepo->getEntityFactory();
 		$this->enabledEntityTypes = $wikibaseRepo->getEnabledEntityTypes();
+
+		$this->entitySavingHelper->setEntityIdParam( 'id' );
 
 		$this->setServices( new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteStore(),
@@ -164,7 +151,6 @@ abstract class ModifyEntity extends ApiBase {
 		$this->entityStore = $wikibaseRepo->getEntityStore();
 		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
-		$this->siteLinkLookup = $wikibaseRepo->getStore()->newSiteLinkStore();
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 	}
 
@@ -198,98 +184,9 @@ abstract class ModifyEntity extends ApiBase {
 	}
 
 	/**
-	 * Get an EntityRevision using the id, site and title params as well as the
-	 * baserevid passed to the api.
-	 *
-	 * @param array $params
-	 *
-	 * @return EntityRevision|null Found existing entity
-	 */
-	protected function getEntityRevisionFromApiParams( array $params ) {
-		$entityRevision = null;
-		$entityId = $this->getEntityIdFromParams( $params );
-
-		// Things that use this method assume null means we want a new entity
-		if ( $entityId !== null ) {
-			$baseRevisionId = isset( $params['baserevid'] ) ? (int)$params['baserevid'] : 0;
-
-			if ( $baseRevisionId === 0 ) {
-				$baseRevisionId = EntityRevisionLookup::LATEST_FROM_MASTER;
-			}
-
-			try {
-				$entityRevision = $this->revisionLookup->getEntityRevision( $entityId, $baseRevisionId );
-			} catch ( EntityLookupException $ex ) {
-				$this->errorReporter->dieException( $ex, 'no-such-entity' );
-			} catch ( StorageException $ex ) {
-				// @fixme EntityRevisionLookup still throws BadRevisionException, which
-				// is a subclass of StorageException, so we still have some inconsistency
-				// and need to check both.
-				$this->errorReporter->dieException( $ex, 'no-such-entity' );
-			}
-		}
-
-		return $entityRevision;
-	}
-
-	/**
-	 * @param string[] $params
-	 *
-	 * @return EntityId|null
-	 */
-	private function getEntityIdFromParams( array $params ) {
-		if ( isset( $params['id'] ) ) {
-			return $this->getEntityIdFromString( $params['id'] );
-		} elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			return $this->getEntityIdFromSiteTitleCombination(
-				$params['site'],
-				$params['title']
-			);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns an EntityId object based on the given $id,
-	 * or throws a usage exception if the ID is invalid.
-	 *
-	 * @param string $id
-	 *
-	 * @throws UsageException
-	 * @return EntityId
-	 */
-	private function getEntityIdFromString( $id ) {
-		try {
-			return $this->idParser->parse( $id );
-		} catch ( EntityIdParsingException $ex ) {
-			$this->errorReporter->dieException( $ex, 'no-such-entity-id' );
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param string $site
-	 * @param string $title
-	 *
-	 * @throws UsageException If no such entity is found.
-	 * @return EntityId The ID of the entity connected to $title on $site.
-	 */
-	private function getEntityIdFromSiteTitleCombination( $site, $title ) {
-		// FIXME: Normalization missing, see T47282.
-		$itemId = $this->siteLinkLookup->getItemIdForLink( $site, $title );
-
-		if ( $itemId === null ) {
-			$this->errorReporter->dieError( 'No entity found matching site link ' . $site . ':' . $title,
-				'no-such-entity-link' );
-		}
-
-		return $itemId;
-	}
-
-	/**
 	 * Validates badges from params and turns them into an array of ItemIds.
+	 *
+	 * @todo: extract this into a SiteLinkBadgeHelper
 	 *
 	 * @param string[] $badgesParams
 	 *
@@ -312,7 +209,7 @@ abstract class ModifyEntity extends ApiBase {
 					'not-badge' );
 			}
 
-			$itemTitle = $this->getTitleLookup()->getTitleForId( $badgeId );
+			$itemTitle = $this->titleLookup->getTitleForId( $badgeId );
 
 			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
 				$this->errorReporter->dieError(
@@ -421,9 +318,13 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
 		try {
-			// NOTE: always validate modification against the current revision, if it exists!
-			// TODO: this should be re-engineered, see T126231
-			// TODO: attemptSaveEntity() should somehow get the ID of the current revision.
+			// NOTE: Always validate modification against the current revision, if it exists!
+			//       Otherwise, we may miss e.g. a combination of language/label/description
+			//       that was already taken.
+			// TODO: conflict resolution should be re-engineered, see T126231
+			// TODO: use the EntitySavingHelper to load the entity, instead of an EntityRevisionLookup.
+			// TODO: consolidate with StatementModificationHelper::applyChangeOp
+			// FIXME: this EntityRevisionLookup is uncached, we may be loading the Entity several times!
 			$currentEntityRevision = $this->revisionLookup->getEntityRevision( $entity->getId() );
 			$currentEntity = $currentEntityRevision ? $currentEntityRevision->getEntity() : $entity;
 			$result = $changeOp->validate( $currentEntity );
@@ -469,10 +370,12 @@ abstract class ModifyEntity extends ApiBase {
 		$this->validateParameters( $params );
 
 		// Try to find the entity or fail and create it, or die in the process
-		$entityRev = $this->getEntityRevisionFromApiParams( $params );
-		if ( is_null( $entityRev ) ) {
-			$entityId = $this->getEntityIdFromParams( $params );
+		$params = $this->extractRequestParams();
+		$entityId = $this->entitySavingHelper->getEntityIdFromParams( $params );
 
+		$entityRev = $entityId ? $this->entitySavingHelper->loadEntityRevision( $entityId ) : null;
+
+		if ( is_null( $entityRev ) ) {
 			if ( !$params['new'] ) {
 				if ( !$entityId ) {
 					$this->errorReporter->dieError(
