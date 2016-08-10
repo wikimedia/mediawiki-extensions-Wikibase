@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_8d755e95",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 21
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "Seems odd that this is just entityusage while the other message strings contain wbentityusage.",
+      "range": {
+        "startLine": 20,
+        "startChar": 16,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_edc7ca98",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "why not just $settings?",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 25
+      },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_2d51d2dd",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "Could be factored out into a private setContinueParam( $row ); (also used below).",
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_ad3dc28c",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "This assumes entities to be in NS0 (which is not even true for properties on Wikidata). Should rather use RepoLinker::getEntityUrl, I guess.",
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_4d5b7626",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "Should be \u003d\u003d\u003d",
+      "range": {
+        "startLine": 72,
+        "startChar": 19,
+        "endLine": 72,
+        "endChar": 21
+      },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_adf782f1",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "You assume it to be set above (line 76)… probably better to check !empty( $entities )",
+      "range": {
+        "startLine": 96,
+        "startChar": 7,
+        "endLine": 96,
+        "endChar": 12
+      },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_cdae86e4",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "Why not enumarate the usable parameters here? (ApiBase::PARAM_TYPE \u003d\u003e [ EntityUsage::… ]). Could also easily allow multiple values here AFAIS.",
+      "range": {
+        "startLine": 139,
+        "startChar": 15,
+        "endLine": 139,
+        "endChar": 19
+      },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_2dbd5217",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be ApiBase::PARAM_ISMULTI \u003d\u003e true?",
+      "range": {
+        "startLine": 140,
+        "startChar": 17,
+        "endLine": 140,
+        "endChar": 21
+      },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_6d5afafa",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-10T22:32:42Z",
+      "side": 1,
+      "message": "No need for fully qualified class names here",
+      "range": {
+        "startLine": 26,
+        "startChar": 37,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
