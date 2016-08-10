@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_e1e6fb12",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-10T15:38:54Z",
+      "side": 1,
+      "message": "Can you please rename this to $editFlags?",
+      "revId": "4dcccaafd0f0848777ff27db781d8b42fc2b998e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_a134f347",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-10T15:38:54Z",
+      "side": 1,
+      "message": "Probably not true after this got moved.",
+      "revId": "4dcccaafd0f0848777ff27db781d8b42fc2b998e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
