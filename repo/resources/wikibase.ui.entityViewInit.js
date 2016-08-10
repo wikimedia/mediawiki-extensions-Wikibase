@@ -77,11 +77,12 @@
 	/**
 	 * @param {wikibase.datamodel.Entity} entity
 	 * @param {jQuery} $entityview
+	 * @param {boolean} canEdit
 	 * @return {string} The name of the entity view widget class
 	 *
 	 * @throws {Error} if no widget to render the entity exists.
 	 */
-	function createEntityView( entity, $entityview ) {
+	function createEntityView( entity, $entityview, canEdit ) {
 		var repoConfig = mw.config.get( 'wbRepo' ),
 			repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php',
 			mwApi = wb.api.getLocationAgnosticMwApi( repoApiUrl ),
@@ -106,10 +107,9 @@
 			htmlDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/html' ),
 			plaintextDataValueEntityIdFormatter = formatterFactory.getFormatter( null, null, 'text/plain' ),
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
-			toolbarFactory = new wb.view.ToolbarFactory(),
-			viewFactory = new wb.view.ControllerViewFactory(
-				toolbarFactory,
-				entityChangersFactory,
+			viewFactoryClass = wb.view.ViewFactory,
+			viewFactoryArguments = [
+				this,
 				contentLanguages,
 				dataTypeStore,
 				new wb.entityIdFormatter.CachingEntityIdHtmlFormatter(
@@ -129,7 +129,17 @@
 				parserStore,
 				userLanguages,
 				repoApiUrl
+			];
+
+		if ( canEdit ) {
+			viewFactoryClass = wb.view.ControllerViewFactory;
+			viewFactoryArguments.unshift(
+				new wb.view.ToolbarFactory(),
+				entityChangersFactory
 			);
+		}
+
+		var viewFactory = new ( Function.prototype.bind.apply( viewFactoryClass, viewFactoryArguments ) );
 
 		var entityView = viewFactory.getEntityView( entity, $entityview );
 
@@ -363,7 +373,7 @@
 		}
 
 		entityInitializer.getEntity().done( function( entity ) {
-			var viewName = createEntityView( entity, $entityview.first() );
+			var viewName = createEntityView( entity, $entityview.first(), canEdit );
 
 			if ( canEdit ) {
 				attachAnonymousEditWarningTrigger( $entityview, viewName, entity.getType() );

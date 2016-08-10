@@ -7,6 +7,7 @@ var SELF = util.inherit(
 	PARENT,
 	function( toolbarFactory, entityChangersFactory ) { // Actually there are more parmeters see ViewFactory.js
 		this._toolbarFactory = toolbarFactory;
+		// TODO: This parameter is duplicated!
 		this._entityChangersFactory = entityChangersFactory;
 		PARENT.apply( this, Array.prototype.slice.call( arguments, 2 ) ); // Forward other parameters to parent constructor
 	}
