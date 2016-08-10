@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_4d2d368b",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T21:59:34Z",
+      "side": 1,
+      "message": "The next change in the change does that: it makes the $entityId optional, and extracts it from the parameters if not given.\n\nI\u0027d like to remove the parameter completely, but several callers extract the entity ID from a statement ID. Moving that logic in here would be awkward, so we need a way to pass in the id. But I agree that it\u0027s not very nice.",
+      "parentUuid": "ee9d9f70_d21b8780",
+      "range": {
+        "startLine": 63,
+        "startChar": 29,
+        "endLine": 63,
+        "endChar": 47
+      },
+      "revId": "29b2511885b22d627eb3c656a002f87620dbcbe5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_72673b23",
         "filename": "repo/includes/Api/EntitySavingHelper.php",
         "patchSetId": 3
