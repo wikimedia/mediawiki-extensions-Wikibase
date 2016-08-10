@@ -54,9 +54,6 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 			save: mw.msg( 'wikibase-save' ),
 			remove: mw.msg( 'wikibase-remove' ),
 			cancel: mw.msg( 'wikibase-cancel' )
-		},
-		animationOptions: {
-			duration: 'fast'
 		}
 	},
 
@@ -447,8 +444,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	 *        replacement message again.
 	 */
 	toggleActionMessage: function( messageOrCallback ) {
-		var self = this,
-			$container = this.getContainer(),
+		var $container = this.getContainer(),
 			actionMessageClass = this.widgetBaseClass + '-actionmsg',
 			$actionMsg = $container.find( '.' + actionMessageClass );
 
@@ -458,16 +454,9 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 			if ( !$actionMsg.length ) {
 				messageOrCallback();
 			} else {
-				$actionMsg.stop()
-				.fadeOut( this.options.animationOptions )
-				.promise().done( function() {
-					$actionMsg.remove();
-					$container.contents()
-					.fadeIn( self.options.animationOptions )
-					.promise().done( function() {
-						messageOrCallback();
-					} );
-				} );
+				$actionMsg.remove();
+				$container.contents().show();
+				messageOrCallback();
 			}
 		} else {
 			$container.contents().hide();
@@ -475,9 +464,7 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 			$actionMsg = $( '<span/>' )
 				.addClass( actionMessageClass + ' wb-actionmsg' )
 				.text( messageOrCallback )
-				.appendTo( $container )
-				.hide()
-				.fadeIn( this.options.animationOptions );
+				.appendTo( $container );
 		}
 	},
 
