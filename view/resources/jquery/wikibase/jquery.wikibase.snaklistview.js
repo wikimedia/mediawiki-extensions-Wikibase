@@ -274,19 +274,17 @@ $.widget( 'wikibase.snaklistview', PARENT, {
 			return this.option( 'value', snakList );
 		}
 
-		var isValid = true;
 		var snaks = [];
 
-		this._listview.value().forEach( function( snakview ) {
+		if ( !this._listview.value().every( function( snakview ) {
 			var snak = snakview.snak();
-			if ( !snak ) {
-				isValid = false;
-			} else {
-				snaks.push( snak );
-			}
-		} );
+			snaks.push( snak );
+			return snak;
+		} ) ) {
+			return null;
+		}
 
-		return isValid ? new wb.datamodel.SnakList( snaks ) : null;
+		return new wb.datamodel.SnakList( snaks );
 	},
 
 	/**
