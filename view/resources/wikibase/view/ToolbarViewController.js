@@ -19,6 +19,7 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
  * returning a Promise.
  * @param {jQuery.wikibase.edittoolbar} toolbar
  * @param {jQuery.ui.EditableTemplatedWidget} view
+ * @param {Function} removeView
  */
 var SELF = util.inherit(
 	wb.view.ViewController,
@@ -54,18 +55,24 @@ SELF.prototype._toolbar = null;
  */
 SELF.prototype._view = null;
 
+/**
+ * @property {Function}
+ * @private
+ */
+SELF.prototype._removeView = null;
+
+/**
+ * @param {Object|null} value A wikibase.datamodel object supporting at least an equals method.
+ */
 SELF.prototype.setValue = function( value ) {
 	this._value = value;
 	// When option is set, remove icon is shown. Not really needed on every setValue().
 	this._toolbar.option(
 		'onRemove',
-		( value && this._model.remove ) ? $.proxy( this, 'remove' ) : null
+		( value && this._model.remove ) ? $.proxy( this.remove, this ) : null
 	);
 };
 
-/**
- * Start editing
- */
 SELF.prototype.startEditing = function() {
 	var result = this._view.startEditing();
 	this._toolbar.toEditMode();
@@ -73,11 +80,11 @@ SELF.prototype.startEditing = function() {
 	this._updateSaveButtonState();
 	this._view.element.on(
 		this._view.widgetEventPrefix + 'change',
-		jQuery.proxy( this._updateSaveButtonState, this )
+		$.proxy( this._updateSaveButtonState, this )
 	);
 	this._view.element.on(
 		this._view.widgetEventPrefix + 'disable',
-		jQuery.proxy( this._updateToolbarState, this )
+		$.proxy( this._updateToolbarState, this )
 	);
 	return result;
 };
@@ -104,8 +111,6 @@ SELF.prototype._updateSaveButtonState = function() {
 };
 
 /**
- * Stop editing
- *
  * @param {boolean} [dropValue=false] Whether the current value should be kept and
  * persisted or dropped
  */
@@ -168,6 +173,10 @@ SELF.prototype.remove = function() {
 	} );
 };
 
+/**
+ * @param {boolean} [dropValue=false] Whether the current value should be kept and
+ * persisted or dropped
+ */
 SELF.prototype._leaveEditMode = function( dropValue ) {
 	if ( dropValue && !this._value ) {
 		this._removeView();
@@ -194,7 +203,7 @@ SELF.prototype.cancelEditing = function() {
 /**
  * Set or clear error
  *
- * @param {mixed} [error] The error or undefined, if error should be
+ * @param {wikibase.api.RepoApiError} [error] The error or undefined, if error should be
  * cleared
  */
 SELF.prototype.setError = function( error ) {
