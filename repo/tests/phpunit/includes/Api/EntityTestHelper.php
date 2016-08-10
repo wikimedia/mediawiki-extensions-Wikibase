@@ -293,7 +293,7 @@ class EntityTestHelper {
 		if ( !array_key_exists( $handle, self::$entityOutput ) ) {
 			throw new OutOfBoundsException( "No entity output defined with handle {$handle}" );
 		}
-		if ( !is_array( $props ) ) {
+		if ( $props === null ) {
 			return self::$entityOutput[ $handle ];
 		} else {
 			return self::stripUnwantedOutputValues( self::$entityOutput[ $handle ], $props, $langs );
@@ -305,11 +305,15 @@ class EntityTestHelper {
 	 *
 	 * @param array $entityOutput Array of entity output
 	 * @param array $props Props to keep in the output
-	 * @param null|array $langs Languages to keep in the output
+	 * @param null|array $languageCodes Languages to keep in the output
 	 *
 	 * @return array Array of entity output with props and langs removed
 	 */
-	protected static function stripUnwantedOutputValues( array $entityOutput, array $props = array(), array $langs = null ) {
+	private static function stripUnwantedOutputValues(
+		array $entityOutput,
+		array $props,
+		array $languageCodes = null
+	) {
 		$entityProps = array();
 		$props[] = 'type'; // always return the type so we can demobilize
 		foreach ( $props as $prop ) {
@@ -318,9 +322,11 @@ class EntityTestHelper {
 			}
 		}
 		foreach ( $entityProps as $prop => $value ) {
-			if ( ( $prop == 'aliases' || $prop == 'labels' || $prop == 'descriptions' ) && $langs != null && is_array( $langs ) ) {
+			if ( ( $prop === 'labels' || $prop === 'descriptions' || $prop === 'aliases' )
+				&& $languageCodes !== null
+			) {
 				$langValues = array();
-				foreach ( $langs as $langCode ) {
+				foreach ( $languageCodes as $langCode ) {
 					if ( array_key_exists( $langCode, $value ) ) {
 						$langValues[ $langCode ] = $value[ $langCode ];
 					}
