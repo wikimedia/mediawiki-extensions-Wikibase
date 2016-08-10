@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_b7afd590",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T19:49:39Z",
+      "side": 1,
+      "message": "you probably want to urlencode the entity id. it might have a # or a \u0026 in it, who knows. Don\u0027t make assumptions.",
+      "revId": "b521b98f30a95b9690d60d7f307abd43c9c9d522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_1796e14f",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 20
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-10T19:49:39Z",
+      "side": 1,
+      "message": "This takes quite a bit of staring to understand. Please comment.",
+      "range": {
+        "startLine": 105,
+        "startChar": 10,
+        "endLine": 105,
+        "endChar": 18
+      },
+      "revId": "b521b98f30a95b9690d60d7f307abd43c9c9d522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
