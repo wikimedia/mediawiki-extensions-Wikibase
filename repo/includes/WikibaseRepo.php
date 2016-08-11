@@ -1509,7 +1509,9 @@ class WikibaseRepo {
 				SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 			),
 			$this->getEntityIdParser(),
-			$this->getStore()->newSiteLinkStore()
+			$this->getStore()->newSiteLinkStore(),
+			$this->getEntityFactory(),
+			$this->getEntityStore()
 		);
 	}
 

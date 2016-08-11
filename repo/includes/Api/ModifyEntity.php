@@ -7,7 +7,6 @@ use ApiMain;
 use InvalidArgumentException;
 use LogicException;
 use Status;
-use UsageException;
 use User;
 use Wikibase\ChangeOp\ChangeOp;
 use Wikibase\ChangeOp\ChangeOpException;
@@ -17,9 +16,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -53,11 +50,6 @@ abstract class ModifyEntity extends ApiBase {
 	 * @var EntityTitleLookup
 	 */
 	private $titleLookup;
-
-	/**
-	 * @var EntityStore
-	 */
-	protected $entityStore;
 
 	/**
 	 * @since 0.5
@@ -97,24 +89,9 @@ abstract class ModifyEntity extends ApiBase {
 	private $entitySavingHelper;
 
 	/**
-	 * @var EntityFactory
-	 */
-	protected $entityFactory;
-
-	/**
 	 * @var string[]
 	 */
 	private $enabledEntityTypes;
-
-	/**
-	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
-	 *
-	 * @see EditEntity::attemptSave
-	 * @see WikiPage::doEditContent
-	 *
-	 * @var int
-	 */
-	protected $flags;
 
 	/**
 	 * @param ApiMain $mainModule
@@ -135,7 +112,6 @@ abstract class ModifyEntity extends ApiBase {
 		$this->resultBuilder = $apiHelperFactory->getResultBuilder( $this );
 		$this->entitySavingHelper = $apiHelperFactory->getEntitySavingHelper( $this );
 		$this->stringNormalizer = $wikibaseRepo->getStringNormalizer();
-		$this->entityFactory = $wikibaseRepo->getEntityFactory();
 		$this->enabledEntityTypes = $wikibaseRepo->getEnabledEntityTypes();
 
 		$this->entitySavingHelper->setEntityIdParam( 'id' );
@@ -148,7 +124,6 @@ abstract class ModifyEntity extends ApiBase {
 		// TODO: use the EntitySavingHelper to load the entity, instead of an EntityRevisionLookup.
 		$this->revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
 		$this->permissionChecker = $wikibaseRepo->getEntityPermissionChecker();
-		$this->entityStore = $wikibaseRepo->getEntityStore();
 		$this->titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
@@ -156,17 +131,6 @@ abstract class ModifyEntity extends ApiBase {
 
 	public function setServices( SiteLinkTargetProvider $siteLinkTargetProvider ) {
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
-	}
-
-	/**
-	 * @see EntitySavingHelper::attemptSaveEntity
-	 */
-	private function attemptSaveEntity( EntityDocument $entity, $summary, $flags = 0 ) {
-		// TODO: we should pass the revision ID of the current revision loaded by
-		// applyChangeOp() to the storage layer, to avoid race conditions for
-		// concurrent edits.
-		// TODO: this should be re-engineered, see T126231
-		return $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, $flags );
 	}
 
 	/**
@@ -222,62 +186,6 @@ abstract class ModifyEntity extends ApiBase {
 		}
 
 		return $badges;
-	}
-
-	/**
-	 * Create an empty entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string|null $entityType The type of entity to create. Optional if an ID is given.
-	 * @param EntityId|null $customId Optionally assigns a specific ID instead of generating a new
-	 *  one.
-	 *
-	 * @throws InvalidArgumentException when entity type and ID are given but do not match.
-	 * @throws UsageException
-	 * @throws LogicException
-	 * @return EntityDocument
-	 */
-	protected function createEntity( $entityType, EntityId $customId = null ) {
-		if ( $customId ) {
-			$entityType = $customId->getEntityType();
-		} elseif ( !$entityType ) {
-			$this->errorReporter->dieError(
-				"No entity type provided for creation!",
-				'no-entity-type'
-			);
-
-			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
-		}
-
-		try {
-			$entity = $this->entityFactory->newEmpty( $entityType );
-		} catch ( InvalidArgumentException $ex ) {
-			$this->errorReporter->dieError(
-				"No such entity type: '$entityType'",
-				'no-such-entity-type'
-			);
-
-			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
-		}
-
-		if ( $customId !== null ) {
-			if ( !$this->entityStore->canCreateWithCustomId( $customId ) ) {
-				$this->errorReporter->dieError(
-					"Cannot create entity with ID: '$customId'",
-					'bad-entity-id'
-				);
-
-				throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
-			}
-
-			$entity->setId( $customId );
-		} else {
-			// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
-			$this->entityStore->assignFreshId( $entity );
-		}
-
-		return $entity;
 	}
 
 	/**
@@ -365,39 +273,12 @@ abstract class ModifyEntity extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
-		$this->flags = 0;
 
 		$this->validateParameters( $params );
 
 		// Try to find the entity or fail and create it, or die in the process
-		$params = $this->extractRequestParams();
-		$entityId = $this->entitySavingHelper->getEntityIdFromParams( $params );
-
-		$entityRev = $entityId ? $this->entitySavingHelper->loadEntityRevision( $entityId ) : null;
-
-		if ( is_null( $entityRev ) ) {
-			if ( !$params['new'] ) {
-				if ( !$entityId ) {
-					$this->errorReporter->dieError(
-						'No entity was identified, nor was creation requested',
-						'param-illegal'
-					);
-				} elseif ( !$this->entityStore->canCreateWithCustomId( $entityId ) ) {
-					$this->errorReporter->dieError(
-						'Could not find entity ' . $entityId,
-						'no-such-entity'
-					);
-				}
-			}
-
-			$entity = $this->createEntity( $params['new'], $entityId );
-
-			$this->flags |= EDIT_NEW;
-			$entityRevId = 0;
-		} else {
-			$entity = $entityRev->getEntity();
-			$entityRevId = $entityRev->getRevisionId();
-		}
+		$entity = $this->entitySavingHelper->loadEntity();
+		$entityRevId = $this->entitySavingHelper->getBaseRevisionId();
 
 		if ( $entity->getId() === null ) {
 			throw new LogicException( 'The Entity should have an ID at this point!' );
@@ -418,14 +299,9 @@ abstract class ModifyEntity extends ApiBase {
 			$this->errorReporter->dieError( 'Attempted modification of the item failed', 'failed-modify' );
 		}
 
-		$this->addFlags( $entity->getId() === null );
-
-		//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
-		//      not added to $this->flags explicitly, the save will fail.
-		$status = $this->attemptSaveEntity(
+		$status = $this->entitySavingHelper->attemptSaveEntity(
 			$entity,
-			$summary,
-			$this->flags
+			$summary
 		);
 
 		$this->addToOutput( $entity, $status, $entityRevId );
@@ -458,19 +334,6 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function getRequiredPermissions( EntityDocument $entity ) {
 		return $this->isWriteMode() ? array( 'read', 'edit' ) : array( 'read' );
-	}
-
-	/**
-	 * @param bool $entityIsNew
-	 */
-	private function addFlags( $entityIsNew ) {
-		// if the entity is not up for creation, set the EDIT_UPDATE flags
-		if ( !$entityIsNew && ( $this->flags & EDIT_NEW ) === 0 ) {
-			$this->flags |= EDIT_UPDATE;
-		}
-
-		$params = $this->extractRequestParams();
-		$this->flags |= ( $this->getUser()->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 	}
 
 	private function addToOutput( EntityDocument $entity, Status $status, $oldRevId = null ) {

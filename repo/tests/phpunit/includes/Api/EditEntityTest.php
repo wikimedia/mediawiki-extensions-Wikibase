@@ -835,7 +835,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => array( 'exception' => array(
 					'type' => UsageException::class,
 					'code' => 'invalid-entity-id',
-					'message' => 'Could not find such an entity ID'
+					'message' => 'Invalid entity ID.'
 				) ),
 				'requires' => 'mediainfo' // skip if MediaInfo is not configured
 			),
