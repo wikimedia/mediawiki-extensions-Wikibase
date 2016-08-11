@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_2dcc728c",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 21
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-11T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_8d755e95",
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_edc7ca98",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 21
@@ -42,6 +60,24 @@
         "endLine": 32,
         "endChar": 25
       },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_cdb4c6e7",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-11T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_edc7ca98",
       "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -82,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_0d0b2d29",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-11T00:03:25Z",
+      "side": 1,
+      "message": "hmm, I guess we should go with https://www.wikidata.org/entity/P## instead of getting getEntityUrl. But I have no preferences.",
+      "parentUuid": "ee9d9f70_ad3dc28c",
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_4d5b7626",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 21
@@ -99,6 +153,24 @@
         "endLine": 72,
         "endChar": 21
       },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_ed98aa7e",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-11T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_4d5b7626",
       "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -128,6 +200,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_2d0f1135",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-11T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_adf782f1",
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_cdae86e4",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 21
@@ -151,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_ad2221a0",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-11T00:03:25Z",
+      "side": 1,
+      "message": "I guess it\u0027s not possible to get possible values of EntityUsage. Please correct me if I\u0027m wrong.",
+      "parentUuid": "ee9d9f70_cdae86e4",
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_2dbd5217",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 21
@@ -168,6 +276,24 @@
         "endLine": 140,
         "endChar": 21
       },
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_6d19197e",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-11T00:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee9d9f70_2dbd5217",
       "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
