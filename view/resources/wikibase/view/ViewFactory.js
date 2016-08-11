@@ -53,6 +53,14 @@
 		userLanguages,
 		vocabularyLookupApiUrl
 	) {
+		if ( ( !structureEditorFactory || !structureEditorFactory.getAdder )
+			|| ( !messageProvider || !messageProvider.getMessage )
+			|| !$.isArray( userLanguages )
+			|| ( vocabularyLookupApiUrl && typeof vocabularyLookupApiUrl !== 'string' )
+		) {
+			throw new Error( 'Required parameter(s) not specified properly' );
+		}
+
 		this._structureEditorFactory = structureEditorFactory;
 		this._contentLanguages = contentLanguages;
 		this._dataTypeStore = dataTypeStore;

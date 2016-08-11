@@ -3,9 +3,39 @@
 
 	QUnit.module( 'wikibase.view.ViewFactory' );
 
+	function newViewFactory(
+		structureEditorFactory,
+		contentLanguages,
+		dataTypeStore,
+		entityIdHtmlFormatter,
+		entityIdPlainFormatter,
+		entityStore,
+		expertStore,
+		formatterFactory,
+		messageProvider,
+		parserStore,
+		userLanguages,
+		vocabularyLookupApiUrl
+	) {
+		return new ViewFactory(
+			structureEditorFactory || { getAdder: 'I am a getter' },
+			contentLanguages,
+			dataTypeStore,
+			entityIdHtmlFormatter,
+			entityIdPlainFormatter,
+			entityStore,
+			expertStore,
+			formatterFactory,
+			messageProvider || { getMessage: 'I am a getter' },
+			parserStore,
+			userLanguages || [],
+			vocabularyLookupApiUrl
+		);
+	}
+
 	QUnit.test( 'is constructable', function( assert ) {
 		assert.expect( 1 );
-		assert.ok( new ViewFactory() instanceof ViewFactory );
+		assert.ok( newViewFactory() instanceof ViewFactory );
 	} );
 
 	function getEntityStub( type ) {
@@ -18,8 +48,7 @@
 
 	QUnit.test( 'getEntityView constructs correct views', function( assert ) {
 		assert.expect( 2 );
-		var entityStore = new wb.store.EntityStore(),
-			viewFactory = new ViewFactory( null, null, null, null, null, entityStore ),
+		var viewFactory = newViewFactory(),
 			fooView = {},
 			$dom = $( '<div/>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
@@ -33,8 +62,7 @@
 
 	QUnit.test( 'getEntityView throws on incorrect views', function( assert ) {
 		assert.expect( 1 );
-		var entityStore = new wb.store.EntityStore(),
-			viewFactory = new ViewFactory( null, null, null, null, null, entityStore );
+		var viewFactory = newViewFactory();
 
 		assert.throws(
 			function() {
@@ -47,7 +75,7 @@
 	QUnit.test( 'getEntityView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
 		var entity = getEntityStub( 'foo' ),
-			viewFactory = new ViewFactory(),
+			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' ),
 			FooView = $dom.fooview = $.wikibase.fooview = sinon.spy();
 
@@ -64,7 +92,7 @@
 	QUnit.test( 'getSitelinkGroupListView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
 		var sitelinkSet = new wb.datamodel.SiteLinkSet( [] ),
-			viewFactory = new ViewFactory(),
+			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
 		sinon.spy( $.wikibase, 'sitelinkgrouplistview' );
@@ -83,7 +111,7 @@
 		assert.expect( 1 );
 		var groupName = 'groupid',
 			siteLinks = new wb.datamodel.SiteLinkSet( [] ),
-			viewFactory = new ViewFactory(),
+			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase, 'sitelinkgroupview' );
@@ -103,7 +131,7 @@
 	QUnit.test( 'getSiteLinkListView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
 		var siteLinks = [],
-			viewFactory = new ViewFactory(),
+			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
 		sinon.spy( $.wikibase, 'sitelinklistview' );
@@ -122,8 +150,7 @@
 	QUnit.test( 'getStatementGroupListView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
 		var entity = new wb.datamodel.Item( 'Q1' ),
-			structureEditorFactory = { getAdder: function() {} },
-			viewFactory = new ViewFactory( structureEditorFactory ),
+			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
 		$dom.statementgrouplistview = sinon.stub( $.wikibase, 'statementgrouplistview' );
@@ -141,7 +168,7 @@
 		assert.expect( 3 );
 		var entityId = 'Q1',
 			entityIdHtmlFormatter = {},
-			viewFactory = new ViewFactory( null, null, null, entityIdHtmlFormatter ),
+			viewFactory = newViewFactory( null, null, null, entityIdHtmlFormatter ),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			value = new wb.datamodel.StatementGroup( 'P1' );
 
@@ -177,8 +204,7 @@
 				new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( 'P1' ) ) )
 			] ),
 			entityId = 'entityId',
-			structureEditorFactory = { getAdder: function() {} },
-			viewFactory = new ViewFactory( structureEditorFactory ),
+			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
@@ -206,8 +232,7 @@
 		assert.expect( 1 );
 		var value = new wb.datamodel.StatementList(),
 			entityId = 'entityId',
-			structureEditorFactory = { getAdder: function() {} },
-			viewFactory = new ViewFactory( structureEditorFactory ),
+			viewFactory = newViewFactory(),
 			$dom = $( '<div/>' );
 
 		sinon.stub( $.wikibase.listview, 'ListItemAdapter' );
@@ -231,9 +256,8 @@
 		var entityId = 'Q1',
 			value = null,
 			entityIdPlainFormatter = {},
-			structureEditorFactory = { getAdder: function() {} },
-			viewFactory = new ViewFactory(
-				structureEditorFactory,
+			viewFactory = newViewFactory(
+				null,
 				null,
 				null,
 				null,
@@ -291,8 +315,7 @@
 		var entityId = 'Q1',
 			propertyId = 'propertyId',
 			value = null,
-			structureEditorFactory = { getAdder: function() {} },
-			viewFactory = new ViewFactory( structureEditorFactory ),
+			viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			dom = {};
 
@@ -320,8 +343,7 @@
 		assert.expect( 1 );
 		var propertyId = 'P1',
 			value = new wb.datamodel.Statement( new wb.datamodel.Claim( new wb.datamodel.PropertyNoValueSnak( propertyId ) ) ),
-			structureEditorFactory = { getAdder: function() {} },
-			viewFactory = new ViewFactory( structureEditorFactory ),
+			viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' ),
 			dom = {};
 
@@ -347,7 +369,7 @@
 
 	QUnit.test( 'getListItemAdapterForReferenceView passes correct options to ListItemAdapter', function( assert ) {
 		assert.expect( 1 );
-		var viewFactory = new ViewFactory(),
+		var viewFactory = newViewFactory(),
 			removeCallback = function() {},
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
@@ -367,7 +389,7 @@
 	QUnit.test( 'getReferenceView passes correct options to view', function( assert ) {
 		assert.expect( 1 );
 		var value = null,
-			viewFactory = new ViewFactory(),
+			viewFactory = newViewFactory(),
 			removeCallback = function() {},
 			$dom = $( '<div/>' ),
 			referenceview = sinon.stub( $dom, 'referenceview' );
@@ -390,7 +412,7 @@
 
 	QUnit.test( 'getListItemAdapterForSnakListView passes correct options to ListItemAdapter', function( assert ) {
 		assert.expect( 1 );
-		var viewFactory = new ViewFactory(),
+		var viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
 		viewFactory.getListItemAdapterForSnakListView();
@@ -430,7 +452,7 @@
 
 	QUnit.test( 'getListItemAdapterForSnakView passes correct options to ListItemAdapter', function( assert ) {
 		assert.expect( 1 );
-		var viewFactory = new ViewFactory(),
+		var viewFactory = newViewFactory(),
 			ListItemAdapter = sinon.spy( $.wikibase.listview, 'ListItemAdapter' );
 
 		viewFactory.getListItemAdapterForSnakView();
@@ -456,10 +478,10 @@
 			entityStore = {},
 			expertStore = {},
 			formatterFactory = {},
-			messageProvider = {},
+			messageProvider = { getMessage: 'I am a getter' },
 			parserStore = {},
 			userLanguages = [],
-			viewFactory = new ViewFactory(
+			viewFactory = newViewFactory(
 				null,
 				contentLanguages,
 				dataTypeStore,
@@ -512,14 +534,13 @@
 
 	QUnit.test( 'getEntityTermsView passes correct options to views', function( assert ) {
 		assert.expect( 1 );
-		var contentLanguages = [],
-			fingerprint = new wb.datamodel.Fingerprint(),
+		var fingerprint = new wb.datamodel.Fingerprint(),
 			message = 'message',
 			messageProvider = { getMessage: function() { return message; } },
 			userLanguages = [],
-			viewFactory = new ViewFactory(
+			viewFactory = newViewFactory(
 				null,
-				contentLanguages,
+				null,
 				null,
 				null,
 				null,

@@ -73,6 +73,14 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.view.ReadModeViewFactory' => $moduleTemplate + array(
+			'scripts' => 'ReadModeViewFactory.js',
+			'dependencies' => array(
+				'wikibase.view.__namespace',
+				'wikibase.view.ViewFactory'
+			),
+		),
+
 		'wikibase.view.ViewFactory' => $moduleTemplate + array(
 			'scripts' => array(
 				'ViewFactory.js'
