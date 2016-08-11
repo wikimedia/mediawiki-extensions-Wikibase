@@ -92,6 +92,8 @@
 	"wikibase-entity-summary-wbsetclaim-create": "Oppretta {{PLURAL:$3|påstand|påstandar}}",
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "Endra {{PLURAL:$4|éin kvalifikator|$4 kvalifikatorar}} for {{PLURAL:$3|éin påstand|fleire påstandar}}",
 	"wikibase-entity-summary-clientsitelink-update": "Sida flytt frå [$3] til [$4]",
+	"wikibase-entity-summary-wbmergeitems-from": "Flette element frå $3",
+	"wikibase-entity-summary-wbmergeitems-to": "Flette element inn i $3",
 	"wikibase-item-summary-wbcreate-new": "Oppretta eit nytt element",
 	"wikibase-item-summary-wbeditentity": "Oppretta eit nytt element",
 	"wikibase-item-summary-wbeditentity-create": "Oppretta eit nytt element",

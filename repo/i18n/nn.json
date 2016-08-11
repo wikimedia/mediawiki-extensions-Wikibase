@@ -25,6 +25,8 @@
 	"wikibase-entitytermsforlanguagelistview-description": "Skildring",
 	"wikibase-entitytermsforlanguagelistview-label": "Merkelapp",
 	"wikibase-entitytermsforlanguagelistview-language": "Språk",
+	"wikibase-entitytermsforlanguagelistview-more": "Alle språk med data",
+	"wikibase-entitytermsforlanguagelistview-less": "Færre språk",
 	"wikibase-label-empty": "Ingen merkelapp er definert",
 	"wikibase-label-edit-placeholder": "skriv inn merkelapp",
 	"wikibase-label-edit-placeholder-language-aware": "skriv inn merkelapp på $1",

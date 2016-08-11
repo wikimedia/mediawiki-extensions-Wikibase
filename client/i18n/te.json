@@ -4,7 +4,8 @@
 			"Arjunaraoc",
 			"Ravichandra",
 			"Veeven",
-			"రహ్మానుద్దీన్"
+			"రహ్మానుద్దీన్",
+			"WP MANIKHANTA"
 		]
 	},
 	"tooltip-t-wikibase": "ఈ పేజీకి జత చేసి ఉన్న వికీడేటా పేజీకి లంకె",
@@ -27,5 +28,5 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} సవరణ",
 	"wikibase-unconnectedpages-submit": "పేజీలను చూపించు",
 	"wikibase-pageinfo-entity-id-none": "ఏమీలేదు",
-	"wikibase-otherprojects": "ఇతర ప్రాజెక్టులు"
+	"wikibase-otherprojects": "ఇతర ప్రాజక్టులలో"
 }
