@@ -108,7 +108,7 @@ class RemoveQualifiers extends ApiBase {
 			$this->errorReporter->dieException( $e, 'failed-save' );
 		}
 
-		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary, EDIT_UPDATE );
+		$status = $this->entitySavingHelper->attemptSaveEntity( $entity, $summary );
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'pageinfo' );
 		$this->resultBuilder->markSuccess();
 	}

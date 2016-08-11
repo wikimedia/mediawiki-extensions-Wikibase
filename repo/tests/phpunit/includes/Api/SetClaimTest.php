@@ -205,7 +205,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$statement = new Statement( $goodSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $qx ) );
-		$cases['good claim for deleted item'] = array( $qx, $statement, 'cant-load-entity-content' );
+		$cases['good claim for deleted item'] = array( $qx, $statement, 'no-such-entity' );
 
 		$statement = new Statement( $goodSnak );
 		$statement->setGuid( $guidGenerator->newGuid( $q17 ) );
