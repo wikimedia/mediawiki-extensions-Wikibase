@@ -10,7 +10,9 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\EditEntityFactory;
+use Wikibase\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
@@ -73,10 +75,36 @@ class ApiHelperFactory {
 	private $idParser;
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var SiteLinkLookup|null
 	 */
 	private $siteLinkLookup;
 
+	/**
+	 * @var EntityFactory|null
+	 */
+	private $entityFactory;
+
+	/**
+	 * @var EntityStore|null
+	 */
+	private $entityStore;
+
+	/**
+	 * ApiHelperFactory constructor.
+	 *
+	 * @param EntityTitleLookup $titleLookup
+	 * @param ExceptionLocalizer $exceptionLocalizer
+	 * @param PropertyDataTypeLookup $dataTypeLookup
+	 * @param SiteStore $siteStore
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param EntityRevisionLookup $entityRevisionLookup
+	 * @param EditEntityFactory $editEntityFactory
+	 * @param Serializer $entitySerializer
+	 * @param EntityIdParser $idParser
+	 * @param SiteLinkLookup|null $siteLinkLookup
+	 * @param EntityFactory|null $entityFactory
+	 * @param EntityStore|null $entityStore
+	 */
 	public function __construct(
 		EntityTitleLookup $titleLookup,
 		ExceptionLocalizer $exceptionLocalizer,
@@ -87,7 +115,9 @@ class ApiHelperFactory {
 		EditEntityFactory $editEntityFactory,
 		Serializer $entitySerializer,
 		EntityIdParser $idParser,
-		SiteLinkLookup $siteLinkLookup = null
+		SiteLinkLookup $siteLinkLookup = null,
+		EntityFactory $entityFactory = null,
+		EntityStore $entityStore = null
 	) {
 		$this->titleLookup = $titleLookup;
 		$this->exceptionLocalizer = $exceptionLocalizer;
@@ -99,6 +129,8 @@ class ApiHelperFactory {
 		$this->entitySerializer = $entitySerializer;
 		$this->idParser = $idParser;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityFactory = $entityFactory;
+		$this->entityStore = $entityStore;
 	}
 
 	/**
@@ -170,6 +202,14 @@ class ApiHelperFactory {
 
 		if ( $this->siteLinkLookup ) {
 			$helper->setSiteLinkLookup( $this->siteLinkLookup );
+		}
+
+		if ( $this->entityFactory ) {
+			$helper->setEntityFactory( $this->entityFactory );
+		}
+
+		if ( $this->entityStore ) {
+			$helper->setEntityStore( $this->entityStore );
 		}
 
 		return $helper;
