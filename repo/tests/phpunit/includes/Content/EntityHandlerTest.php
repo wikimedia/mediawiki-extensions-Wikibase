@@ -8,6 +8,8 @@ use FauxRequest;
 use InvalidArgumentException;
 use Language;
 use MWException;
+use NullIndexField;
+use ParserOutput;
 use RequestContext;
 use Revision;
 use RuntimeException;
@@ -27,6 +29,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SettingsArray;
 use WikitextContent;
+use WikiPage;
 
 /**
  * @covers Wikibase\Repo\Content\EntityHandler
@@ -500,6 +503,44 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$handler->showMissingEntity( $title, $context );
 
 		$this->assertContains( '(wikibase-noentity)', $context->getOutput()->getHTML() );
+	}
+
+	public function testGetFieldsForSearchIndex() {
+		$searchEngine = $this->makeSearchEngine();
+		$searchEngine->expects( $this->any() )
+			->method( 'makeSearchFieldMapping' )
+			->will( $this->returnValue( new NullIndexField() ) );
+
+		$handler = $this->getHandler();
+
+		$fields = $handler->getFieldsForSearchIndex( $searchEngine );
+		$expectedField = new NullIndexField();
+
+		$this->assertEquals( $expectedField, $fields['external_link'] );
+		$this->assertEquals( $expectedField, $fields['outgoing_link'] );
+	}
+
+	public function testGetDataForSearchIndex() {
+		$handler = $this->getHandler();
+
+		$searchEngine = $this->makeSearchEngine();
+
+		$title = Title::makeTitle( $handler->getEntityNamespace(), 'Q999' );
+		$page = WikiPage::factory( $title );
+		$parserOutput = new ParserOutput();
+
+		$fieldData = $handler->getDataForSearchIndex( $page, $parserOutput, $searchEngine );
+
+		$this->assertEquals( [], $fieldData['external_link'] );
+		$this->assertEquals( [], $fieldData['outgoing_link'] );
+	}
+
+	private function makeSearchEngine() {
+		$searchEngine = $this->getMockBuilder( 'SearchEngine' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		return $searchEngine;
 	}
 
 }
