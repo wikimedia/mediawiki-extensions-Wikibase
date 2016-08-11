@@ -25,7 +25,7 @@ function getSiteIdsOfGroup( group ) {
  * @extends jQuery.ui.EditableTemplatedWidget
  *
  * @option {string} groupName
- * @option {wikibase.datamodel.SiteLink[]} value A list of SiteLinks
+ * @option {wikibase.datamodel.SiteLinkSet} value
  * @option {Function} getSiteLinkListView
  *
  * @option {string} [helpMessage]
@@ -187,14 +187,15 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 	},
 
 	/**
-	 * @param {*} value
-	 * @return {Object}
+	 * @param {wb.datamodel.SiteLinkSet|null} value
+	 * @throws {Error}
+	 * @return {wb.datamodel.SiteLinkSet}
 	 */
 	_checkValue: function( value ) {
 		if ( !value ) {
 			value = new wb.datamodel.SiteLinkSet( [] );
 		} else if ( !( value instanceof wb.datamodel.SiteLinkSet ) ) {
-			throw new Error();
+			throw new Error( 'value must be a SiteLinkSet or null' );
 		}
 
 		return value;
@@ -260,6 +261,7 @@ $.widget( 'wikibase.sitelinkgroupview', PARENT, {
 
 	_getSiteLinksArray: function() {
 		var res = [];
+		// FIXME: Replace with Set.toArray (requires DataModel JavaScript 3.0).
 		this.options.value.each( function( siteId, siteLink ) {
 			res.push( siteLink );
 		} );
