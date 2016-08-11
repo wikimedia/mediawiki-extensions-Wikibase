@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee9d9f70_616e822c",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-11T15:23:07Z",
+      "side": 1,
+      "message": "The array starts with the \"this\" as element 0. The two new elements must be inserted between 0 and 1.",
+      "range": {
+        "startLine": 136,
+        "startChar": 24,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "ba93d3fb571b74553688f37db400ff1c0690bc61",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
