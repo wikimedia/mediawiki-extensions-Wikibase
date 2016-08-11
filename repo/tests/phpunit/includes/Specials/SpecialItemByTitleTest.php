@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use FauxResponse;
 use Site;
 use SiteList;
 use SiteStore;
@@ -10,8 +9,10 @@ use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\SpecialItemByTitle;
 
 /**
@@ -46,6 +47,18 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 	}
 
 	/**
+	 * @return LanguageNameLookup
+	 */
+	private function getMockLanguageNameLookup() {
+		$mock = $this->getMock( LanguageNameLookup::class );
+		$mock->expects( $this->any() )
+			->method( 'getName' )
+			->will( $this->returnValue( '<LANG>' ) );
+
+		return $mock;
+	}
+
+	/**
 	 * @return SiteLinkLookup
 	 */
 	private function getMockSiteLinkLookup() {
@@ -74,10 +87,9 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			return $site;
 		};
 
-		$mockSiteList = $this->getMock( SiteList::class );
-		$mockSiteList->expects( $this->any() )
-			->method( 'getSite' )
-			->will( $this->returnCallback( $getSite ) );
+		$siteList = new SiteList();
+		$siteList[] = $getSite( 'dewiki' );
+		$siteList[] = $getSite( 'enwiki' );
 
 		$mock = $this->getMock( SiteStore::class );
 		$mock->expects( $this->any() )
@@ -86,7 +98,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 
 		$mock->expects( $this->any() )
 			->method( 'getSites' )
-			->will( $this->returnValue( $mockSiteList ) );
+			->will( $this->returnValue( $siteList ) );
 
 		return $mock;
 	}
@@ -101,10 +113,16 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			array( 'wikipedia' )
 		);
 
+		$siteStore = $this->getMockSiteStore();
+
+		$siteLinkTargetProvider = new SiteLinkTargetProvider( $siteStore, array() );
+
 		$page->initServices(
 			$this->getMockTitleLookup(),
-			$this->getMockSiteStore(),
-			$this->getMockSiteLinkLookup()
+			$this->getMockLanguageNameLookup(),
+			$siteStore,
+			$this->getMockSiteLinkLookup(),
+			$siteLinkTargetProvider
 		);
 
 		return $page;

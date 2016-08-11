@@ -6,9 +6,10 @@ use HTMLForm;
 use Html;
 use Site;
 use SiteStore;
+use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Repo\Content\ItemHandler;
+use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -29,6 +30,11 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	private $titleLookup;
 
 	/**
+	 * @var LanguageNameLookup
+	 */
+	private $languageNameLookup;
+
+	/**
 	 * @var SiteStore
 	 */
 	private $sites;
@@ -37,6 +43,11 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * @var SiteLinkLookup
 	 */
 	private $siteLinkLookup;
+
+	/**
+	 * @var SiteLinkTargetProvider
+	 */
+	private $siteLinkTargetProvider;
 
 	/**
 	 * site link groups
@@ -60,10 +71,17 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			$wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' )
 		);
 
+		$siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$wikibaseRepo->getSiteStore(),
+			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
+
 		$this->initServices(
 			$wikibaseRepo->getEntityTitleLookup(),
+			new LanguageNameLookup(),
 			$wikibaseRepo->getSiteStore(),
-			$wikibaseRepo->getStore()->newSiteLinkStore()
+			$wikibaseRepo->getStore()->newSiteLinkStore(),
+			$siteLinkTargetProvider
 		);
 	}
 
@@ -84,17 +102,23 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * May be used to inject mock services for testing.
 	 *
 	 * @param EntityTitleLookup $titleLookup
+	 * @param LanguageNameLookup $languageNameLookup
 	 * @param SiteStore $siteStore
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 */
 	public function initServices(
 		EntityTitleLookup $titleLookup,
+		LanguageNameLookup $languageNameLookup,
 		SiteStore $siteStore,
-		SiteLinkLookup $siteLinkLookup
+		SiteLinkLookup $siteLinkLookup,
+		SiteLinkTargetProvider $siteLinkTargetProvider
 	) {
 		$this->titleLookup = $titleLookup;
+		$this->languageNameLookup = $languageNameLookup;
 		$this->sites = $siteStore;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 	}
 
 	/**
@@ -163,6 +187,21 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	}
 
 	/**
+	 * Return options for the site input field.
+	 *
+	 * @return array
+	 */
+	private function getSiteOptions() {
+		$options = array();
+		foreach ( $this->siteLinkTargetProvider->getSiteList( $this->groups ) as $site ) {
+			$siteId = $site->getGlobalId();
+			$languageName = $this->languageNameLookup->getName( $site->getLanguageCode() );
+			$options["$languageName ($siteId)"] = $siteId;
+		}
+		return $options;
+	}
+
+	/**
 	 * Output a form to allow searching for a page
 	 *
 	 * @param string $siteId
@@ -178,13 +217,12 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
 
-		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
-
 		$formDescriptor = array(
 			'site' => array(
 				'name' => 'site',
 				'default' => $siteId,
-				'type' => 'text',
+				'type' => 'combobox',
+				'options' => $this->getSiteOptions(),
 				'id' => 'wb-itembytitle-sitename',
 				'size' => 12,
 				'label-message' => 'wikibase-itembytitle-lookup-site'
