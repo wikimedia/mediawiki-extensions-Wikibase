@@ -12,9 +12,13 @@ use InvalidArgumentException;
 use Language;
 use MWContentSerializationException;
 use MWException;
+use MediaWiki\Search\Field\ParserOutputSearchIndexFieldFactory;
+use MediaWiki\Search\ParserOutputSearchDataExtractor;
 use ParserOptions;
+use ParserOutput;
 use RequestContext;
 use Revision;
+use SearchEngine;
 use Title;
 use User;
 use Wikibase\Content\DeferredDecodingEntityHolder;
@@ -34,6 +38,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
 use Wikibase\Updates\DataUpdateAdapter;
+use WikiPage;
 
 /**
  * Base handler class for Entity content classes.
@@ -771,6 +776,42 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
 		return false;
+	}
+
+	/**
+	 * @param SearchEngine $engine
+	 *
+	 * @return array
+	 */
+	public function getFieldsForSearchIndex( SearchEngine $engine ) {
+		$parserOutputFieldFactory = new ParserOutputSearchIndexFieldFactory( $engine );
+
+		$fields = array_merge(
+			parent::getFieldsForSearchIndex( $engine ),
+			$parserOutputFieldFactory->newFields( [ 'external_link', 'outgoing_link' ] )
+		);
+
+		return $fields;
+	}
+
+	/**
+	 * @param WikiPage $page
+	 * @param ParserOutput $parserOutput
+	 * @param SearchEngine $engine
+	 */
+	public function getDataForSearchIndex(
+		WikiPage $page,
+		ParserOutput $parserOutput,
+		SearchEngine $engine
+	) {
+		$fieldData = parent::getDataForSearchIndex( $page, $parserOutput, $engine );
+
+		$parserOutputSearchDataExtractor = new ParserOutputSearchDataExtractor( $parserOutput );
+
+		$fieldData['external_link'] = $parserOutputSearchDataExtractor->getExternalLinks();
+		$fieldData['outgoing_link'] = $parserOutputSearchDataExtractor->getOutgoingLinks();
+
+		return $fieldData;
 	}
 
 }
