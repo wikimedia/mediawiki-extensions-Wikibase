@@ -68,12 +68,6 @@
 			repoApi = new wb.api.RepoApi( mwApi ),
 			userLanguages = getUserLanguages(),
 			entityStore = buildEntityStore( repoApi, userLanguages[0] ),
-			revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
-			entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
-				repoApi,
-				revisionStore,
-				entity
-			),
 			contentLanguages = new wikibase.WikibaseContentLanguages(),
 			formatterFactory = new wb.formatters.ApiValueFormatterFactory(
 				new wb.api.FormatValueCaller(
@@ -88,7 +82,7 @@
 			entityIdParser = new ( parserStore.getParser( wb.datamodel.EntityId.TYPE ) )( { lang: userLanguages[0] } ),
 			toolbarFactory = new wb.view.ToolbarFactory(),
 			structureEditorFactory = new wb.view.StructureEditorFactory( toolbarFactory ),
-			viewFactoryClass = wb.view.ViewFactory,
+			viewFactoryClass = wb.view.ReadModeViewFactory,
 			viewFactoryArguments = [
 				structureEditorFactory,
 				contentLanguages,
@@ -116,9 +110,16 @@
 			};
 
 		if ( isEditable() ) {
+			var revisionStore = new wb.RevisionStore( mw.config.get( 'wgCurRevisionId' ) ),
+				entityChangersFactory = new wb.entityChangers.EntityChangersFactory(
+					repoApi,
+					revisionStore,
+					entity
+				);
+
 			viewFactoryClass = wb.view.ControllerViewFactory;
 			viewFactoryArguments.unshift(
-				new wb.view.ToolbarFactory(),
+				toolbarFactory,
 				entityChangersFactory
 			);
 		}
