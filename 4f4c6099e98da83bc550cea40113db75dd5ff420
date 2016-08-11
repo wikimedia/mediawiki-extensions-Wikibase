@@ -136,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "ee9d9f70_8d5b9d25",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-11T00:10:13Z",
+      "side": 1,
+      "message": "The conceptBaseUri is not known in Wikibase client right now… I guess linking to the wiki pages is good enough for now.\n\nYou could also link to RepoLinker::getPageUrl( \u0027Special:EntityData/\u0027 . $row-\u003eeu_entity_id ) which is probably best for consuming data (it does content type negotiation).",
+      "parentUuid": "ee9d9f70_0d0b2d29",
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee9d9f70_4d5b7626",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 21
@@ -253,6 +271,24 @@
       "side": 1,
       "message": "I guess it\u0027s not possible to get possible values of EntityUsage. Please correct me if I\u0027m wrong.",
       "parentUuid": "ee9d9f70_cdae86e4",
+      "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9d9f70_0d596d39",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 21
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-11T00:10:13Z",
+      "side": 1,
+      "message": "I think it\u0027s ok to manually enumerate them here. If you want, you can put a comment about adding new ones to this list as well into EntityUsage, just in case we ever add new entity usage types to EntityUsage (which is very well possible).",
+      "parentUuid": "ee9d9f70_ad2221a0",
       "revId": "4f4c6099e98da83bc550cea40113db75dd5ff420",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
