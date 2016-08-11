@@ -176,6 +176,11 @@ $.widget( 'ui.unitsuggester', PARENT, {
 				timeout: self.options.timeout
 			} )
 			.done( function( response ) {
+				if ( response.error ) {
+					deferred.reject( response.error.info );
+					return;
+				}
+
 				deferred.resolve(
 					response.search,
 					response.searchinfo.search,
