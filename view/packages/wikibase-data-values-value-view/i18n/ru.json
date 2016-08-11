@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Okras",
-			"Alexandr Efremov"
+			"Alexandr Efremov",
+			"Putnik"
 		]
 	},
 	"valueview-desc": "Компоненты пользовательского интерфейса для отображения и редактирования значений",
@@ -22,7 +23,7 @@
 	"valueview-expertextender-calendarhint-switch-julian": "&rarr; изменить на юлианский",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Язык (обязательно):",
-	"valueview-expertextender-unitsuggester-label": "Блок (на выбор):",
+	"valueview-expertextender-unitsuggester-label": "Единица измерения (необязательно):",
 	"valueview-preview-label": "будет отображаться как:",
 	"valueview-preview-novalue": "не определено допустимое значение",
 	"valueview-listrotator-manually": "установить вручную"
