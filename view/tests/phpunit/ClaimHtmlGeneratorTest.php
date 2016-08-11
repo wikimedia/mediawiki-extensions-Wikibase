@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -114,6 +115,44 @@ class ClaimHtmlGeneratorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		return $testCases;
+	}
+
+	/**
+	 * @dataProvider referencesProvider
+	 */
+	public function testCollapsedReferences(
+		Statement $statement,
+		$editSectionHtml,
+		$expected
+	) {
+		$templateFactory = TemplateFactory::getDefaultInstance();
+		$claimHtmlGenerator = new ClaimHtmlGenerator(
+			$templateFactory,
+			$this->getSnakHtmlGeneratorMock(),
+			new BasicNumberLocalizer(),
+			new DummyLocalizedTextProvider()
+		);
+
+		$html = $claimHtmlGenerator->getHtmlForClaim( $statement, $editSectionHtml );
+
+		$this->assertSame(
+			$expected ? 1 : 0,
+			substr_count( $html, 'wikibase-initially-collapsed' )
+		);
+	}
+
+	public function referencesProvider() {
+		$snak = new PropertyNoValueSnak( 1 );
+		$statement = new Statement( $snak );
+		$referencedStatement = clone $statement;
+		$referencedStatement->addNewReference( $snak );
+
+		return [
+			[ $statement, '', false ],
+			[ $statement, '<EDIT SECTION>', false ],
+			[ $referencedStatement, '', false ],
+			[ $referencedStatement, '<EDIT SECTION>', true ],
+		];
 	}
 
 }

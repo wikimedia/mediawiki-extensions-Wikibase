@@ -87,11 +87,11 @@ class ClaimHtmlGenerator {
 	 * @since 0.4
 	 *
 	 * @param Statement $statement
-	 * @param null|string $editSectionHtml has the html for the edit section
+	 * @param string $editSectionHtml has the html for the edit section
 	 *
 	 * @return string HTML
 	 */
-	public function getHtmlForClaim( Statement $statement, $editSectionHtml = null ) {
+	public function getHtmlForClaim( Statement $statement, $editSectionHtml ) {
 		$mainSnakHtml = $this->snakHtmlGenerator->getSnakHtml(
 			$statement->getMainSnak(),
 			false
@@ -103,6 +103,7 @@ class ClaimHtmlGenerator {
 
 		$references = $statement->getReferences();
 		$referencesHtml = $this->getHtmlForReferences( $references );
+		$collapseReferences = $editSectionHtml !== '' && !$references->isEmpty();
 
 		return $this->templateFactory->render(
 			'wikibase-statementview',
@@ -114,7 +115,7 @@ class ClaimHtmlGenerator {
 			$editSectionHtml,
 			$referencesHeadingHtml,
 			$referencesHtml,
-			count( $references ) ? 'wikibase-initially-collapsed' : ''
+			$collapseReferences ? 'wikibase-initially-collapsed' : ''
 		);
 	}
 
