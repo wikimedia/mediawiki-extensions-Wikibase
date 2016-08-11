@@ -51,6 +51,21 @@
 		userLanguages,
 		vocabularyLookupApiUrl
 	) {
+		if ( !( contentLanguages instanceof util.ContentLanguages )
+			|| !( dataTypeStore instanceof dataTypes.DataTypeStore )
+			|| !( entityIdHtmlFormatter instanceof wb.entityIdFormatter.EntityIdHtmlFormatter )
+			|| !( entityIdPlainFormatter instanceof wb.entityIdFormatter.EntityIdPlainFormatter )
+			|| !( entityStore instanceof wb.store.EntityStore )
+			|| !( expertStore instanceof $.valueview.ExpertStore )
+			|| !( formatterFactory instanceof wb.ValueFormatterFactory )
+			|| ( !messageProvider || !messageProvider.getMessage )
+			|| !( parserStore instanceof valueParsers.ValueParserStore )
+			|| !$.isArray( userLanguages )
+			|| ( vocabularyLookupApiUrl && typeof vocabularyLookupApiUrl !== 'string' )
+		) {
+			throw new Error( 'Required parameter(s) not specified properly' );
+		}
+
 		this._contentLanguages = contentLanguages;
 		this._dataTypeStore = dataTypeStore;
 		this._entityIdHtmlFormatter = entityIdHtmlFormatter;
