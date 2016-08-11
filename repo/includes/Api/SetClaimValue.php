@@ -89,15 +89,7 @@ class SetClaimValue extends ApiBase {
 
 		$guid = $params['claim'];
 		$entityId = $this->guidParser->parse( $guid )->getEntityId();
-		if ( isset( $params['baserevid'] ) ) {
-			$entityRevision = $this->entitySavingHelper->loadEntityRevision(
-				$entityId,
-				(int)$params['baserevid']
-			);
-		} else {
-			$entityRevision = $this->entitySavingHelper->loadEntityRevision( $entityId );
-		}
-		$entity = $entityRevision->getEntity();
+		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
 		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
 

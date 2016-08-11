@@ -96,11 +96,7 @@ class GetClaims extends ApiBase {
 		}
 
 		/** @var EntityId $entityId */
-		$entityRevision = $this->entityLoadingHelper->loadEntityRevision(
-			$entityId,
-			EntityRevisionLookup::LATEST_FROM_SLAVE
-		);
-		$entity = $entityRevision->getEntity();
+		$entity = $this->entityLoadingHelper->loadEntity( $entityId );
 
 		$statements = $this->getStatements( $entity, $guid );
 		$this->resultBuilder->addStatements( $statements, null, $params['props'] );

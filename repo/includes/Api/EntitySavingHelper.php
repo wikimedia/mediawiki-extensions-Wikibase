@@ -7,6 +7,7 @@ use LogicException;
 use Status;
 use UsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EditEntity as EditEntityHandler;
 use Wikibase\EditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -49,6 +50,27 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$this->apiBase = $apiBase;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;
+
+		$this->defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_MASTER;
+	}
+
+	/**
+	 * Returns the given EntityDocument.
+	 *
+	 * @param EntityId $entityId
+	 * @return EntityDocument
+	 */
+	public function loadEntity( EntityId $entityId ) {
+		$params = $this->apiBase->extractRequestParams();
+
+		// If a base revision is given, use if for consistency!
+		$baseRev = isset( $params['baserevid'] )
+			? (int)$params['baserevid']
+			: $this->defaultRetrievalMode;
+
+		$entityRevision = $this->loadEntityRevision( $entityId, $baseRev );
+
+		return $entityRevision->getEntity();
 	}
 
 	/**
