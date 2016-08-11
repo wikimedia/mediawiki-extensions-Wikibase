@@ -248,9 +248,8 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 				self.toNonEditMode();
 				self.enable();
 				if ( !dropValue ) {
-					self.toggleActionMessage( function() {
-						self._trigger( 'afterstopediting' );
-					} );
+					self.toggleActionMessage();
+					self._trigger( 'afterstopediting' );
 				}
 			}
 		} )
@@ -268,12 +267,11 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 				}
 
 				self.enable();
-				self.toggleActionMessage( function() {
-					// FIXME Move responsibility of displaying error out of here completely.
-					if ( $( event.target ).data( 'sitelinkgroupview' ) === undefined ) {
-						self.displayError( error, $anchor );
-					}
-				} );
+				self.toggleActionMessage();
+				// FIXME Move responsibility of displaying error out of here completely.
+				if ( $( event.target ).data( 'sitelinkgroupview' ) === undefined ) {
+					self.displayError( error, $anchor );
+				}
 			}
 		} );
 	},
@@ -439,32 +437,24 @@ $.widget( 'wikibase.edittoolbar', PARENT, {
 	/**
 	 * Toggles a message replacing the toolbar contents.
 	 *
-	 * @param {string|Function} [messageOrCallback] Message to be displayed instead of the
-	 *        toolbar contents or callback that is supposed to be triggered after removing the
-	 *        replacement message again.
+	 * @param {string} [message] Message to be displayed instead of the
+	 *        toolbar contents. If omitted, the toolbar contents will be shown.
 	 */
-	toggleActionMessage: function( messageOrCallback ) {
+	toggleActionMessage: function( message ) {
 		var $container = this.getContainer(),
 			actionMessageClass = this.widgetBaseClass + '-actionmsg',
 			$actionMsg = $container.find( '.' + actionMessageClass );
 
-		messageOrCallback = messageOrCallback || function() {};
-
-		if ( $.isFunction( messageOrCallback ) ) {
-			if ( !$actionMsg.length ) {
-				messageOrCallback();
-			} else {
-				$actionMsg.remove();
-				$container.contents().show();
-				messageOrCallback();
-			}
-		} else {
+		if ( message !== undefined ) {
 			$container.contents().hide();
 
 			$actionMsg = $( '<span/>' )
 				.addClass( actionMessageClass + ' wb-actionmsg' )
-				.text( messageOrCallback )
+				.text( message )
 				.appendTo( $container );
+		} else if ( $actionMsg.length ) {
+			$actionMsg.remove();
+			$container.contents().show();
 		}
 	},
 

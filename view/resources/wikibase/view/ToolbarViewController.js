@@ -237,10 +237,8 @@ SELF.prototype.setError = function( error ) {
 		}
 
 		this._toolbar.enable();
-		var self = this;
-		this._toolbar.toggleActionMessage( function() {
-			self._toolbar.displayError( error, $anchor );
-		} );
+		this._toolbar.toggleActionMessage();
+		this._toolbar.displayError( error, $anchor );
 	}
 };
 
