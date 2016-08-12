@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea29bae_3605c07d",
+        "filename": "repo/resources/Resources.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-12T14:00:46Z",
+      "side": 1,
+      "message": "No longer needed AFAIS",
+      "range": {
+        "startLine": 113,
+        "startChar": 19,
+        "endLine": 113,
+        "endChar": 40
+      },
+      "revId": "b16a8437003215ccfc10b0cc8649cf1cfdcbb671",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
