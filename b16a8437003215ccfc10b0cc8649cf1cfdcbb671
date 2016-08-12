@@ -22,6 +22,29 @@
       "revId": "b16a8437003215ccfc10b0cc8649cf1cfdcbb671",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea29bae_56e404a4",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-12T14:53:06Z",
+      "side": 1,
+      "message": "Needed here.",
+      "range": {
+        "startLine": 143,
+        "startChar": 30,
+        "endLine": 143,
+        "endChar": 51
+      },
+      "revId": "b16a8437003215ccfc10b0cc8649cf1cfdcbb671",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
