@@ -45,6 +45,29 @@
       "revId": "b16a8437003215ccfc10b0cc8649cf1cfdcbb671",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea29bae_4a6c5706",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-13T12:31:24Z",
+      "side": 1,
+      "message": "This makes the ViewFactory tests fail (they rely on being able to construct this without parameters)",
+      "range": {
+        "startLine": 66,
+        "startChar": 13,
+        "endLine": 66,
+        "endChar": 18
+      },
+      "revId": "b16a8437003215ccfc10b0cc8649cf1cfdcbb671",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
