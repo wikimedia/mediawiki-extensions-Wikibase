@@ -14,6 +14,7 @@
 	"wikibase-error-save-generic": "Duerch e Feeler konnt et net gespäichert ginn.",
 	"wikibase-error-remove-generic": "Duerch e Feeler konnt et net ewechgeholl ginn.",
 	"wikibase-error-save-connection": "Konnt duerch e Verbindunsproblem net gespäichert ginn. Iwwerpréift w.e.g. Är Internetverbindung.",
+	"wikibase-error-remove-connection": "Konnt duerch e Verbindunsproblem net ewechgeholl ginn. Iwwerpréift w.e.g. Är Internetverbindung.",
 	"wikibase-error-save-timeout": "Mir hunn technesch Schwieregkeeten. Är Ännerung konnt net \"gespäichert\" ginn.",
 	"wikibase-error-remove-timeout": "Mir hunn technesch Schwieregkeeten. Är \"Ännerung\" konnt net ofgeschloss ginn.",
 	"wikibase-error-autocomplete-connection": "Den API-Site konnt net ofgefrot ginn. Probéiert w.e.g. méi spéit nach eng Kéier.",

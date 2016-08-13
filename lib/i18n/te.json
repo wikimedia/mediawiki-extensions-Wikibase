@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Veeven"
+			"Veeven",
+			"Chaduvari"
 		]
 	},
+	"wikibase-error-remove-generic": "ఏదో లోపం కారణంగా తీసివేయలేకపోయాం.",
+	"wikibase-error-save-connection": "కనెక్షను లోపం కారణంగా భద్రపరచలేకపోయాం. మీ అంతర్జాల కనెక్షన్ను చెక్ చేసుకోండి.",
 	"wikibase-timedetails-time": "సమయం",
 	"wikibase-timedetails-timezone": "కాలమండలం",
 	"wikibase-timedetails-calendar": "క్యాలెండర్",
