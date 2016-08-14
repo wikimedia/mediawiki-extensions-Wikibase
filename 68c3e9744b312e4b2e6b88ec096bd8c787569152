@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cea29bae_17bfd3f7",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-14T09:33:55Z",
+      "side": 1,
+      "message": "Really should be SearchIndexField[], even if one can understand this by going to the base class.",
+      "revId": "68c3e9744b312e4b2e6b88ec096bd8c787569152",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea29bae_3733f7c1",
+        "filename": "repo/includes/Content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-14T09:33:55Z",
+      "side": 1,
+      "message": "Weird, uncommon abbreviation. Can you please use the full $parserOutput name for this? Maybe $output?",
+      "range": {
+        "startLine": 807,
+        "startChar": 53,
+        "endLine": 807,
+        "endChar": 58
+      },
+      "revId": "68c3e9744b312e4b2e6b88ec096bd8c787569152",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea29bae_57387b9b",
+        "filename": "repo/tests/phpunit/includes/Content/EntityHandlerTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-14T09:33:55Z",
+      "side": 1,
+      "message": "SearchEngine is abstract and does not have a constructor anyway.",
+      "revId": "68c3e9744b312e4b2e6b88ec096bd8c787569152",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
