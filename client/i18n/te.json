@@ -5,7 +5,8 @@
 			"Ravichandra",
 			"Veeven",
 			"రహ్మానుద్దీన్",
-			"WP MANIKHANTA"
+			"WP MANIKHANTA",
+			"Chaduvari"
 		]
 	},
 	"tooltip-t-wikibase": "ఈ పేజీకి జత చేసి ఉన్న వికీడేటా పేజీకి లంకె",
@@ -28,5 +29,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} సవరణ",
 	"wikibase-unconnectedpages-submit": "పేజీలను చూపించు",
 	"wikibase-pageinfo-entity-id-none": "ఏమీలేదు",
-	"wikibase-otherprojects": "ఇతర ప్రాజక్టులలో"
+	"wikibase-otherprojects": "ఇతర ప్రాజక్టులలో",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}} తో {{PLURAL:$1|కనెక్షను|కనెక్షన్లు}}",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> తో పాటు {{PLURAL:$4|మరొక పేజీ|మరో $4 ఇతర పేజీలు|100=99+ ఇతర పేజీలు}} {{WBREPONAME}} ఐటములకు {{GENDER:$2|కనెక్టయ్యాయి}}."
 }
