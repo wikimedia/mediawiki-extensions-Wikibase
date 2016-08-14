@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test;
 
+use IDatabase;
+use LoadBalancer;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -47,6 +50,43 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 		$this->assertEquals( 55, $this->getPageIdForEntityId( $entityId ) );
 	}
 
+	public function testAddEntityPage_notInsertedTwice() {
+		$epp = $this->newEntityPerPageTable();
+		$epp->clear();
+
+		$entityId = new ItemId( 'Q42' );
+		$epp->addEntityPage( $entityId, 123 );
+
+		// Get a LoadBalancer that makes sure we do the initial select
+		// but don't try to (re-)insert.
+		$db = $this->getMockBuilder( IDatabase::class )
+			->disableOriginalConstructor()
+			->enableProxyingToOriginalMethods()
+			->setProxyTarget( wfGetDB( DB_MASTER ) )
+			->getMockForAbstractClass();
+
+		$db->expects( $this->never() )
+			->method( 'insert' );
+
+		$loadBalancer = $this->getMockBuilder( LoadBalancer::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$loadBalancer->expects( $this->once() )
+			->method( 'getConnection' )
+			->with( DB_MASTER )
+			->will( $this->returnValue( $db ) );
+
+		$epp = new EntityPerPageTable(
+			$loadBalancer,
+			new BasicEntityIdParser(),
+			new EntityIdComposer( [] )
+		);
+		$epp->addEntityPage( $entityId, 123 );
+
+		$this->assertEquals( 123, $this->getPageIdForEntityId( $entityId ) );
+	}
+
 	public function testAddRedirectPage() {
 		$epp = $this->newEntityPerPageTable();
 		$epp->clear();
@@ -68,7 +108,11 @@ class EntityPerPageTableTest extends \MediaWikiTestCase {
 	 * @return EntityPerPageTable
 	 */
 	private function newEntityPerPageTable( array $entities = array(), array $redirects = array() ) {
-		$table = new EntityPerPageTable( new BasicEntityIdParser(), new EntityIdComposer( [] ) );
+		$table = new EntityPerPageTable(
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			new BasicEntityIdParser(),
+			new EntityIdComposer( [] )
+		);
 		$table->clear();
 
 		foreach ( $entities as $entity ) {
