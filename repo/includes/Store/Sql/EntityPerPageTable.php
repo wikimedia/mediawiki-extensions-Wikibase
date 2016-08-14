@@ -94,7 +94,9 @@ class EntityPerPageTable implements EntityPerPage {
 			'epp_redirect_target' => $redirectTarget
 		);
 
-		$this->addRowInternal( $values );
+		if ( !$this->rowExists( $values ) ) {
+			$this->addRowInternal( $values );
+		}
 	}
 
 	/**
@@ -131,6 +133,17 @@ class EntityPerPageTable implements EntityPerPage {
 			$row,
 			__METHOD__
 		);
+	}
+
+	/**
+	 * @param array $row
+	 *
+	 * @return bool
+	 */
+	private function rowExists( array $row ) {
+		$dbw = wfGetDB( DB_MASTER );
+
+		$dbw->selectRow( 'wb_entity_per_page', '*', $row, __METHOD__ ) !== false;
 	}
 
 	private function getConflictingRowConditions( array $values ) {
