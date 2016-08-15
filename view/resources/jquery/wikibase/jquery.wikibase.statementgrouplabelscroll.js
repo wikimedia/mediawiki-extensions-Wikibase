@@ -222,14 +222,11 @@
 			for ( var i = 0; i < $visibleStatementviews.length; i++ ) {
 				var $visibleClaim = $visibleStatementviews.eq( i ),
 					$statementGroup = $visibleClaim.closest( '.wikibase-statementgroupview' ),
-					$groupname
-						= $statementGroup.children( '.wikibase-statementgroupview-property' ),
-					$statementGroupLabel = $groupname.children(
+					$statementGroupLabel = $statementGroup.find(
 							'.wikibase-statementgroupview-property-label'
 						);
 
-				if ( !$groupname.length ) {
-					// Statement likely is pending.
+				if ( !$statementGroupLabel.length || $statementGroupLabel.is( ':empty' ) ) {
 					continue;
 				}
 
