@@ -16,6 +16,24 @@
       "revId": "003f98cc42033d5ab22562d9085fca4faba93c30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aea727be_8ff495cd",
+        "filename": "repo/includes/Store/Sql/EntityPerPageTable.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-15T15:47:05Z",
+      "side": 1,
+      "message": "We have two unique indices on this table:\n\nCREATE UNIQUE INDEX /*i*/wb_epp_entity ON /*_*/wb_entity_per_page (epp_entity_id, epp_entity_type);\nCREATE UNIQUE INDEX /*i*/wb_epp_page ON /*_*/wb_entity_per_page (epp_page_id);\n\nThat\u0027s more useful and restrictive than one large one, as we can only have one entity per page id.",
+      "parentUuid": "aea727be_6ffcd1d6",
+      "revId": "003f98cc42033d5ab22562d9085fca4faba93c30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
