@@ -110,8 +110,8 @@ class ChunkCache implements ChunkAccess {
 		}
 
 		while ( $low <= $high ) {
-			assert( '$high >= 0' );
-			assert( '$low >= 0' );
+			assert( $high >= 0 );
+			assert( $low >= 0 );
 
 			$mid = (int)( ( $low + $high ) / 2 );
 
@@ -163,7 +163,7 @@ class ChunkCache implements ChunkAccess {
 					// we are inserting before an existing entry, so clip the size.
 
 					$next = $this->entries[ $ipos ];
-					assert( '$start < $next[\'start\']' );
+					assert( $start < $next['start'] );
 
 					$partSize = min( $this->chunkSize, $next['start'] - $start );
 				} else {
