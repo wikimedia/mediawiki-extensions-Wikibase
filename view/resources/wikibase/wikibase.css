@@ -222,6 +222,7 @@ div.wikibase-statementview-mainsnak .wikibase-snakview-property-container {
 	left: -15em;
 	width: 15em;
 	display: block;
+	z-index: 2; /* must be above .wikibase-statementgroupview-property */
 }
 
 div.wikibase-snakview {
