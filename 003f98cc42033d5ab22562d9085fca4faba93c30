@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea727be_6ffcd1d6",
+        "filename": "repo/includes/Store/Sql/EntityPerPageTable.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-15T15:41:39Z",
+      "side": 1,
+      "message": "This was introduced in Ie2d4758. While reviewing said patch I expected the \"wb_entity_per_page\" table to have a unique key including all three \"epp_entity_id\", \"epp_entity_type\" and \"epp_page_id\" columns, but my local installation does not have such a key. Why not?",
+      "revId": "003f98cc42033d5ab22562d9085fca4faba93c30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
