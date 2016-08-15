@@ -48,7 +48,6 @@
 	"wikibase-linkitem-not-loggedin-title": "Cómpre acceder ao sistema",
 	"wikibase-linkitem-not-loggedin": "Debe acceder ao sistema neste wiki e no [$1 repositorio central de datos] para utilizar esta característica.",
 	"wikibase-linkitem-success-link": "As páxinas ligáronse. Pode atopar o elemento coas ligazóns no noso [$1 repositorio central de datos].",
-	"wikibase-limitreport-entities-accessed": "Número de entidades de Wikibase cargadas",
 	"wikibase-property-notfound": "Non se atopou a propiedade \"$1\".",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Agochar",
