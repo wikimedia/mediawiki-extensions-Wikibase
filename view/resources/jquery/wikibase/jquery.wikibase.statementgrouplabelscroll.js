@@ -1,6 +1,7 @@
 /**
  * @license GPL-2.0+
  * @author Daniel Werner < daniel.werner@wikimedia.de >
+ * @author Thiemo Mättig
  */
 ( function( $ ) {
 	'use strict';
@@ -16,12 +17,6 @@
 	 * @type {jQuery.wikibase.statementgrouplabelscroll[]}
 	 */
 	var activeInstances = [];
-
-	/**
-	 * Counter for expensive checks done in an update. Used for debugging output.
-	 * @type {number}
-	 */
-	var expensiveChecks = 0;
 
 	function updateActiveInstances() {
 		for ( var i in activeInstances ) {
@@ -81,6 +76,10 @@
 		var $mainSnaks = $searchRange.find(
 			'.wikibase-statementview-mainsnak .wikibase-snakview-value-container'
 		);
+
+		if ( $mainSnaks.length < 2 ) {
+			return null;
+		}
 
 		$mainSnaks.each( function( i, mainSnakNode ) {
 			// Take first Main Snak value in viewport. If value is not fully visible in viewport,
@@ -173,20 +172,6 @@
 	 */
 	$.widget( 'wikibase.' + WIDGET_NAME, {
 		/**
-		 * @see jQuery.widget.options
-		 * @type {Object}
-		 */
-		options: {
-			/**
-			 * If set, this object will be used for logging certain debug messages. Requires a
-			 * member called "log" taking any value as parameter 1 to n.
-			 *
-			 * @type {Object|null}
-			 */
-			logger: null
-		},
-
-		/**
 		 * @see jQuery.Widget._create
 		 */
 		_create: function() {
@@ -211,10 +196,6 @@
 		 * @since 0.4
 		 */
 		update: function() {
-			var startTime = new Date().getTime();
-
-			expensiveChecks = 0;
-
 			var $visibleStatementviews
 				= findFirstVisibleMainSnakElementsWithinStatementlistview( this.element )
 					.closest( '.wikibase-statementview' );
@@ -226,37 +207,15 @@
 							'.wikibase-statementgroupview-property-label'
 						);
 
-				if ( !$statementGroupLabel.length || $statementGroupLabel.is( ':empty' ) ) {
+				if ( $statementGroupLabel.length !== 1 ) {
 					continue;
 				}
-
-				this._log(
-					'positioning',
-					$statementGroupLabel.get( 0 ),
-					'on',
-					$visibleClaim.get( 0 )
-				);
 
 				positionElementInOneLineWithAnother(
 					$statementGroupLabel,
 					$visibleClaim,
 					$statementGroup
 				);
-
-				var endTime = new Date().getTime();
-				this._log( expensiveChecks + ' expensive checks, execution time '
-					+ ( endTime - startTime ) + 'ms' );
-			}
-		},
-
-		/**
-		 * If the "logger" option is set, then this method will forward any given arguments
-		 * to its "log" function.
-		 */
-		_log: function() {
-			var logger = this.option( 'logger' );
-			if ( logger ) {
-				logger.log.apply( logger, arguments );
 			}
 		}
 	} );
