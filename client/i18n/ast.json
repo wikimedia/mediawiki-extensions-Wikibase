@@ -15,9 +15,9 @@
 	"apihelp-query+wikibase-description": "Algamar información sobro'l cliente de Wikibase ya'l repositoriu de Wikibase asociáu.",
 	"apihelp-query+wikibase-example": "Algamar el camín URL y otra información sobro'l cliente ya'l repositoriu de Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Qué propiedaes algamar:\n;<kbd>url</kbd>: URL base, camín a scripts y camín a artículos del repositoriu de Wikibase.\n;<kbd>siteid</kbd>: El siteid d'esti sitiu.",
-	"wikibase-after-page-move": "Tamién pue [$1 anovar] l'elementu asociáu de {{WBREPONAME}} pa caltener los enllaces d'idioma na páxina treslladada.",
+	"wikibase-after-page-move": "Tamién tendríes d'anovar [$1 l'elementu de {{WBREPONAME}} asociáu] pa caltener los enllaces d'idiomes na páxina treslladada.",
 	"wikibase-after-page-move-queued": "L'[$1 elementu de {{WBREPONAME}}] asociáu con esta páxina pronto s'actualizará automáticamente. Decátate de qu'esto podría nun asoceder nel intre.",
-	"wikibase-after-page-delete": "Tamién puedes desaniciar l'enllaz a esta páxina dende l'[$1 elementu de {{WBREPONAME}}] asociáu pa caltener los enllaces de llingua.",
+	"wikibase-after-page-delete": "Tamién tendríes de desaniciar l'enllaz a esta páxina del [$1 elementu de {{WBREPONAME}} asociáu] pa caltener los enllaces d'idiomes.",
 	"wikibase-after-page-delete-queued": "L'[$1 elementu de {{WBREPONAME}}] asociáu con esta páxina pronto s'actualizará automáticamente. Decátate de qu'esto podría nun asoceder nel intre.",
 	"wikibase-comment-add": "Creóse un elementu en {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Desanicióse l'elementu asociáu de {{WBREPONAME}}. Quitáronse los enllaces de llingua.",
@@ -47,7 +47,6 @@
 	"wikibase-linkitem-not-loggedin-title": "Tien d'aniciar sesión",
 	"wikibase-linkitem-not-loggedin": "Tien d'aniciar sesión nesta wiki y nel [$1 depósitu central de datos] pa usar esta carauterística.",
 	"wikibase-linkitem-success-link": "Enllazáronse les páxines. Puedes alcontrar l'elementu que contien los enllaces nel [$1 depósitu central de datos].",
-	"wikibase-limitreport-entities-accessed": "Númberu d'entidaes de Wikibase cargaes",
 	"wikibase-property-notfound": "Nun s'alcontró la propiedá $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Anubrir",
@@ -76,5 +75,11 @@
 	"wikibase-property-render-error": "Fallu al renderizar la propiedá $1: $2",
 	"wikibase-otherprojects": "N'otros proyeutos",
 	"wikibase-otherprojects-beta-message": "Barra llateral d'otros proyeutos",
-	"wikibase-otherprojects-beta-description": "Amiesta la seición «{{int:wikibase-otherprojects}}» a la barra llateral qu'ufre enllaces los demás proyeutos de Wikimedia basaos nos datos de {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Amiesta la seición «{{int:wikibase-otherprojects}}» a la barra llateral qu'ufre enllaces los demás proyeutos de Wikimedia basaos nos datos de {{WBREPONAME}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexón|Conexones}} con {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Avisame cuando daquién conecta una páxina que {{GENDER:|creé}} a un elementu de {{WBREPONAME}}.",
+	"notification-header-page-connection": "La páxina <strong>$3</strong> {{GENDER:$2|conectóse}} a un elementu de {{WBREPONAME}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> y {{PLURAL:$4|otra páxina|otres $4 páxines|100=+99 otres páxines}} {{GENDER:$2|coneutáronse}} con elementos de {{WBREPONAME}}.",
+	"notification-link-text-view-item": "{{GENDER:$1|Ver}} l'elementu",
+	"notification-subject-page-connection": "Una páxina de {{SITENAME}} que {{GENDER:$3|creasti}} {{GENDER:$2|coneutóse}} con un elementu de {{WBREPONAME}}"
 }

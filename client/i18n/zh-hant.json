@@ -45,7 +45,7 @@
 	"wikibase-linkitem-selectlink": "請選擇網站與您想要連結到此頁面的頁面。",
 	"wikibase-linkitem-input-site": "語言：",
 	"wikibase-linkitem-input-page": "頁面：",
-	"wikibase-linkitem-confirmitem-text": "您選擇的的頁面已與於 [中央資料儲存庫的 $1 項目] 關聯，請確認下列您欲連結的{{PLURAL:$2|頁面|頁面}}。",
+	"wikibase-linkitem-confirmitem-text": "您選擇的的頁面已與於[$1 中央資料儲存庫的一個項目]關聯，請確認下列您欲連結的{{PLURAL:$2|頁面|頁面}}。",
 	"wikibase-linkitem-confirmitem-button": "確認",
 	"wikibase-linkitem-not-loggedin-title": "您需要登入。",
 	"wikibase-linkitem-not-loggedin": "您需要登入此 Wiki 並在 [$1 中央資料儲存庫] 中使用此功能。",

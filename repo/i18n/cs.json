@@ -15,7 +15,8 @@
 			"Vogone",
 			"Matěj Grabovský",
 			"Cvanca",
-			"Dvorapa"
+			"Dvorapa",
+			"Marek Pavlica"
 		]
 	},
 	"wikibase-desc": "Strukturované úložiště dat",
@@ -340,5 +341,6 @@
 	"wikibase-entity-not-viewable-title": "Nesouhlasí typ obsahu: Obsah nelze zobrazit",
 	"wikibase-entity-not-viewable": "Zadaný typ obsahu „$1“ není entita a Wikibase ho nemůže zobrazit.",
 	"action-item-merge": "sloučit položky",
-	"action-property-create": "vytvářet vlastnosti"
+	"action-property-create": "vytvářet vlastnosti",
+	"apihelp-wbsearchentities-example-4": "Vyhledávání \"abc\" v anglickém jazyce s limitem 2 a posunem o 2"
 }
