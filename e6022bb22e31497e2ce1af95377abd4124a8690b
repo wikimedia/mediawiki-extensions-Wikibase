@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_3375d093",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-16T12:00:40Z",
+      "side": 1,
+      "message": "This causes \"PHP Warning:  Invalid argument supplied for foreach()\" if there is nothing to show.",
+      "revId": "e6022bb22e31497e2ce1af95377abd4124a8690b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
