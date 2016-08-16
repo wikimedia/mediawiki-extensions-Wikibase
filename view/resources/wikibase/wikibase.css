@@ -287,13 +287,11 @@ div .wikibase-snakview-value span.error.wb-format-error {
 }
 
 .wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-edit,
-.wikibase-statementlistview-listview .wb-edit .wikibase-snakview-property-container,
 .wikibase-statementgroupview-property.wb-edit + .wikibase-statementlistview > .wikibase-toolbar-wrapper {
 	background-color: #C0DAE5;
 }
 
-.wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-error,
-.wb-error div.wb-claim-new .wikibase-snakview-property-container {
+.wikibase-statementgrouplistview .wikibase-statementgroupview-property.wb-error {
 	background-color: #E5C8B5;
 }
 
