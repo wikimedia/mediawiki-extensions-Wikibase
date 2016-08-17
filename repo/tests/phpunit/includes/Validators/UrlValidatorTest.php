@@ -46,7 +46,7 @@ class UrlValidatorTest extends \MediaWikiTestCase {
 		$no  = new RegexValidator( '/.*/', true, 'bad-url' );
 
 		return array(
-			'no scheme' => array( array(), '', 'bad-url' ),
+			'no scheme' => array( array(), '', 'url-scheme-missing' ),
 			'empty' => array( array(), 'http://acme.com', 'bad-url-scheme' ),
 			'valid' => array( array( 'http' => $yes ), 'http://acme.com', null ),
 			'invalid' => array( array( 'http' => $no ), 'http://acme.com', 'bad-url' ),
