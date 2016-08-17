@@ -51,6 +51,23 @@
       "revId": "003f98cc42033d5ab22562d9085fca4faba93c30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_b90fda3a",
+        "filename": "repo/includes/Store/Sql/EntityPerPageTable.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-17T10:54:53Z",
+      "side": 1,
+      "message": "May still fail due to a race condition, if this isn\u0027t run in a transaction. Oh, well.",
+      "revId": "003f98cc42033d5ab22562d9085fca4faba93c30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
