@@ -66,6 +66,7 @@
 	"datatypes-type-commonsMedia": "Mediefil frå Commons",
 	"version-wikibase": "Wikibase",
 	"wikibase-entity-summary-wbsetitem": "Oppretta eit nytt element",
+	"wikibase-entity-summary-wbcreateredirect": "Omdirigert til $4",
 	"wikibase-entity-summary-wbsetreference": "Sette ei kjelde",
 	"wikibase-entity-summary-wbsetlabel-add": "La til merkelapp for [$2]",
 	"wikibase-entity-summary-wbsetlabel-set": "Endra merkelapp [$2]",
