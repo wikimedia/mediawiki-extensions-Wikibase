@@ -1,4 +1,4 @@
-This document can be found [https://git.wikimedia.org/blob/mediawiki%2Fextensions%2FWikibase/master/docs%2Fjson.wiki in the Wikibase source code] and should be edited only there. It should be ensured that this page is up to date with the version in the code.
+This document can be found [https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/docs/json.wiki in the Wikibase source code] and should be edited only there. It should be ensured that this page is up to date with the version in the code.
 
 = Wikibase JSON format =
 

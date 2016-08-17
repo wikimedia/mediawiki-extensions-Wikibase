@@ -11,7 +11,7 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 	'author' => array(
 		'[http://www.snater.com H. Snater]',
 	),
-	'url' => 'https://git.wikimedia.org/summary/mediawiki%2Fextensions%2FWikibaseView',
+	'url' => 'https://phabricator.wikimedia.org/diffusion/EWBV/',
 	'description' => 'Wikibase View',
 	'license-name' => 'GPL-2.0+'
 );
