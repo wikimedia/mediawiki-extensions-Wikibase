@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 
 use Language;
+use MediaWikiTestCase;
 use MWException;
 use RequestContext;
 use User;
@@ -18,7 +19,7 @@ use Wikibase\LanguageFallbackChainFactory;
  * @license GPL-2.0+
  * @author Liangent < liangent@gmail.com >
  */
-class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
+class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
 
 	/**
 	 * @param array $expectedItems
@@ -45,12 +46,58 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 		) );
 	}
 
+	private function getLanguageFallbackChainFactory() {
+		$factory = new LanguageFallbackChainFactory();
+		$factory->setGetLanguageFallbacksFor( function( $code ) {
+			return $this->getLanguageFallbacksForCallback( $code );
+		} );
+
+		return $factory;
+	}
+
+	/**
+	 * This captures the state of language fallbacks from 2016-08-17.
+	 * There's no need for this to be exactly up to date with MediaWiki,
+	 * we just need a data base to test with.
+	 *
+	 * @param string $code
+	 *
+	 * @return string[]
+	 */
+	private function getLanguageFallbacksForCallback( $code ) {
+		switch ( $code ) {
+			case 'en':
+				return array();
+			case 'de':
+				return array( 'en' );
+			case 'de-formal':
+				return array( 'de', 'en' );
+			case 'zh':
+				return array( 'zh-hans', 'en' );
+			case 'zh-cn':
+				return array( 'zh-hans', 'en' );
+			case 'ii':
+				return array( 'zh-cn', 'zh-hans', 'en' );
+			case 'lzh':
+				return array( 'en' );
+			case 'kk-cn':
+				return array( 'kk-arab', 'kk-cyrl', 'en' );
+			case 'zh-hk':
+				return array( 'zh-hant', 'zh-hans', 'en' );
+			case 'kk':
+				return array( 'kk-cyrl', 'en' );
+			default:
+				// Language::getFallbacksFor returns array( 'en' ) if $code is unknown
+				return array( 'en' );
+		}
+	}
+
 	/**
 	 * @dataProvider providerNewFromLanguage
 	 */
 	public function testNewFromLanguage( $lang, $mode, $expected, $disabledVariants = array() ) {
 		$this->setupDisabledVariants( $disabledVariants );
-		$factory = new LanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguage( Language::factory( $lang ), $mode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
@@ -60,7 +107,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	 */
 	public function testNewFromLanguageCode( $lang, $mode, $expected, $disabledVariants = array() ) {
 		$this->setupDisabledVariants( $disabledVariants );
-		$factory = new LanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory();
 		$chain = $factory->newFromLanguageCode( $lang, $mode )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
 	}
@@ -199,7 +246,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	 * @expectedException MWException
 	 */
 	public function testNewFromLanguageCodeException( $langCode ) {
-		$factory = new LanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory();
 		$factory->newFromLanguageCode( $langCode );
 	}
 
@@ -211,13 +258,13 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function testNewFromContext() {
-		$factory = new LanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $factory->newFromContext( RequestContext::getMain() );
 		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
 	}
 
 	public function testNewFromContextAndLanguageCode() {
-		$factory = new LanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $factory->newFromContextAndLanguageCode( RequestContext::getMain(), 'en' );
 		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
 	}
@@ -231,7 +278,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 			return;
 		}
 		$this->setupDisabledVariants( $disabledVariants );
-		$factory = new LanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory();
 		$anon = new User();
 		$chain = $factory->newFromUserAndLanguageCode( $anon, $lang )->getFallbackChain();
 		$this->assertChainEquals( $expected, $chain );
@@ -241,7 +288,7 @@ class LanguageFallbackChainFactoryTest extends \MediaWikiTestCase {
 	 * @dataProvider provideTestFromBabel
 	 */
 	public function testBuildFromBabel( $babel, $expected ) {
-		$factory = new LanguageFallbackChainFactory();
+		$factory = $this->getLanguageFallbackChainFactory();
 		$chain = $factory->buildFromBabel( $babel );
 		$this->assertChainEquals( $expected, $chain );
 	}
