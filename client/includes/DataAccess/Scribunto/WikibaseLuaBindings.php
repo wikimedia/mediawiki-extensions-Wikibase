@@ -125,62 +125,64 @@ class WikibaseLuaBindings {
 	 * @param string $prefixedEntityId
 	 *
 	 * @since 0.5
-	 * @return string|null Null if entity couldn't be found/ no label present
+	 * @return string[]|null[] Array containing label, label language code.
+	 *     Null for both, if entity couldn't be found/ no label present.
 	 */
 	public function getLabel( $prefixedEntityId ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 		} catch ( EntityIdParsingException $e ) {
-			return null;
+			return [ null, null ];
 		}
 
 		try {
 			$term = $this->labelDescriptionLookup->getLabel( $entityId );
 		} catch ( StorageException $ex ) {
 			// TODO: verify this catch is still needed
-			return null;
+			return [ null, null ];
 		} catch ( LabelDescriptionLookupException $ex ) {
-			return null;
+			return [ null, null ];
 		}
 
 		if ( $term === null ) {
-			return null;
+			return [ null, null ];
 		}
 
 		// NOTE: This tracks a label usage in the wiki's content language.
-		return $term->getText();
+		return [ $term->getText(), $term->getLanguageCode() ];
 	}
 
 	/**
 	 * @param string $prefixedEntityId
 	 *
 	 * @since 0.5
-	 * @return string|null Null if entity couldn't be found/ no description present
+	 * @return string[]|null[] Array containing description, description language code.
+	 *     Null for both, if entity couldn't be found/ no description present.
 	 */
 	public function getDescription( $prefixedEntityId ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
 		} catch ( EntityIdParsingException $e ) {
-			return null;
+			return [ null, null ];
 		}
 
 		try {
 			$term = $this->labelDescriptionLookup->getDescription( $entityId );
 		} catch ( StorageException $ex ) {
 			// TODO: verify this catch is still needed
-			return null;
+			return [ null, null ];
 		} catch ( LabelDescriptionLookupException $ex ) {
-			return null;
+			return [ null, null ];
 		}
 
 		if ( $term === null ) {
-			return null;
+			return [ null, null ];
 		}
 
 		// XXX: This. Sucks. A lot.
 		// Also notes about language fallbacks from getLabel apply
 		$this->usageAccumulator->addOtherUsage( $entityId );
-		return $term->getText();
+		return [ $term->getText(), $term->getLanguageCode() ];
 	}
 
 	/**
@@ -198,8 +200,8 @@ class WikibaseLuaBindings {
 
 		// @fixme the SiteLinks do not contain badges! but all we want here is page name.
 		$siteLinkRows = $this->siteLinkLookup->getLinks(
-			array( $itemId->getNumericId() ),
-			array( $this->siteId )
+			[ $itemId->getNumericId() ],
+			[ $this->siteId ]
 		);
 
 		foreach ( $siteLinkRows as $siteLinkRow ) {

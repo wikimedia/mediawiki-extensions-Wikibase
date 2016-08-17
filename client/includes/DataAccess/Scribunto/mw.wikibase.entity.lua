@@ -53,20 +53,21 @@ methodtable.getLabel = function( entity, langCode )
 	langCode = langCode or mw.language.getContentLanguage():getCode()
 
 	if langCode == nil then
-		return nil
+		return nil, nil
 	end
 
 	if entity.labels == nil then
-		return nil
+		return nil, nil
 	end
 
 	local label = entity.labels[langCode]
 
 	if label == nil then
-		return nil
+		return nil, nil
 	end
 
-	return label.value
+	local actualLang = label.language or langCode
+	return label.value, actualLang
 end
 
 -- Get the sitelink title linking to the given site id

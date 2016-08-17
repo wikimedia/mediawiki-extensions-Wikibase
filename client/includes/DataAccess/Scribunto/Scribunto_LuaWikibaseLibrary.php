@@ -408,13 +408,13 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $prefixedEntityId
 	 *
-	 * @return string[]
+	 * @return string[]|null[]
 	 */
 	public function getLabel( $prefixedEntityId ) {
 		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
 		$this->splitParserCacheIfMultilingual();
 
-		return array( $this->getLuaBindings()->getLabel( $prefixedEntityId ) );
+		return $this->getLuaBindings()->getLabel( $prefixedEntityId );
 	}
 
 	/**
@@ -424,13 +424,13 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 *
 	 * @param string $prefixedEntityId
 	 *
-	 * @return string[]
+	 * @return string[]|null[]
 	 */
 	public function getDescription( $prefixedEntityId ) {
 		$this->checkType( 'getDescription', 1, $prefixedEntityId, 'string' );
 		$this->splitParserCacheIfMultilingual();
 
-		return array( $this->getLuaBindings()->getDescription( $prefixedEntityId ) );
+		return $this->getLuaBindings()->getDescription( $prefixedEntityId );
 	}
 
 	/**
