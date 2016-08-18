@@ -61,6 +61,11 @@ interface RdfProducer {
 	const PRODUCE_RESOLVED_ENTITIES = 256;
 
 	/**
+	 * Produce page properties
+	 */
+	const PRODUCE_PAGE_PROPS = 1024;
+
+	/**
 	 * All options turned on.
 	 */
 	const PRODUCE_ALL = 0xFFFF;
