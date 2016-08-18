@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_4a2fe9f3",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-18T15:51:08Z",
+      "side": 1,
+      "message": "Unreachable code. But I can see why it\u0027s here.\n\nLong-term solution: turn these die… into newException… methods and have the actual throw here.",
+      "revId": "19925e68782d3291de848723f47be082f22d7a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_4aa529b1",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-18T15:51:08Z",
+      "side": 1,
+      "message": "At this point the EntityId should be tracked, and the save method should fail hard when somebody tries to call save with *another* entity.",
+      "revId": "19925e68782d3291de848723f47be082f22d7a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_eae7b50b",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-18T15:51:08Z",
+      "side": 1,
+      "message": "Duplicated, see a few lines above.",
+      "revId": "19925e68782d3291de848723f47be082f22d7a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_6ac3c561",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-18T15:51:08Z",
+      "side": 1,
+      "message": "I suggest to make it more obvious what this is. This can only be EDIT_NEW or EDIT_UPDATE, and never a combination of anything. Could even be a boolean?",
+      "range": {
+        "startLine": 332,
+        "startChar": 10,
+        "endLine": 332,
+        "endChar": 15
+      },
+      "revId": "19925e68782d3291de848723f47be082f22d7a0d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
