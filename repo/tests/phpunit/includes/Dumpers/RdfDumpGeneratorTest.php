@@ -2,10 +2,11 @@
 
 namespace Wikibase\Test\Dumpers;
 
+use MediaWikiTestCase;
 use MWException;
-use PHPUnit_Framework_TestCase;
 use Site;
 use SiteList;
+use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,6 +16,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
@@ -34,7 +36,7 @@ use Wikibase\Test\Rdf\RdfBuilderTestData;
  * @license GPL-2.0+
  * @author Stas Malyshev
  */
-class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
+class RdfDumpGeneratorTest extends MediaWikiTestCase {
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
@@ -83,6 +85,20 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 			__DIR__ . '/../../data/rdf/entities',
 			__DIR__ . '/../../data/rdf/RdfDumpGenerator'
 		);
+	}
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getEntityTitleLookup() {
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				return Title::newFromText( $entityId->getSerialization() );
+			} ) );
+
+		return $entityTitleLookup;
 	}
 
 	/**
@@ -143,7 +159,8 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 				self::URI_BASE,
 				self::URI_DATA,
 				array( 'test' => 'en-x-test' )
-			)
+			),
+			$this->getEntityTitleLookup()
 		);
 	}
 

@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
 class RdfVocabulary {
 
 	// Change this when changing data format!
-	const FORMAT_VERSION = '0.0.2';
+	const FORMAT_VERSION = '0.0.3';
 	const ONTOLOGY_VERSION = '1.0';
 
 	const ONTOLOGY_BASE_URI = 'http://wikiba.se/ontology';
@@ -115,22 +115,32 @@ class RdfVocabulary {
 	private static $canonicalLanguageCodeCache = array();
 
 	/**
-	 * @param string $baseUri Base URI for entity concept URIs.
-	 * @param string $dataUri Base URI for entity description URIs.
+	 * Map of the configured page properties.
+	 * @var string[]
+	 */
+	private $pagePropertyDefs;
+
+	/**
+	 * @param string   $baseUri Base URI for entity concept URIs.
+	 * @param string   $dataUri Base URI for entity description URIs.
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
 	 * @param string[] $dataTypeUris Mapping of property data type IDs to their URIs,
 	 *                 if different from the default mapping.
+	 * @param string[] $pagePropertyDefs Mapping of page props: pageProp => wikibase predicate
+	 *                 All predicates will be prefixed with wikibase:
 	 */
 	public function __construct(
 		$baseUri,
 		$dataUri,
 		array $canonicalLanguageCodes = array(),
-		array $dataTypeUris = array()
+		array $dataTypeUris = array(),
+		array $pagePropertyDefs = array()
 	) {
 		$this->baseUri = $baseUri;
 		$this->dataUri = $dataUri;
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 		$this->dataTypeUris = $dataTypeUris;
+		$this->pagePropertyDefs = $pagePropertyDefs;
 
 		if ( substr( $this->baseUri, -7 ) === 'entity/' ) {
 			$topUri = substr( $this->baseUri, 0, -7 );
@@ -298,6 +308,14 @@ class RdfVocabulary {
 	 */
 	public static function getOntologyURI() {
 		return self::ONTOLOGY_BASE_URI . "-" . self::ONTOLOGY_VERSION . ".owl";
+	}
+
+	/**
+	 * Get the map of configured page properties
+	 * @return string[]
+	 */
+	public function getPageProperties() {
+		return $this->pagePropertyDefs;
 	}
 
 }
