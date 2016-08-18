@@ -2,12 +2,17 @@
 
 namespace Wikibase\Test\Rdf;
 
+use PageProps;
+use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\NTriplesRdfWriter;
@@ -48,22 +53,36 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	 */
 	private function getTestData() {
 		if ( empty( $this->testData ) ) {
-			$this->testData = new RdfBuilderTestData(
-				__DIR__ . '/../../data/rdf/entities',
-				__DIR__ . '/../../data/rdf/RdfBuilder'
-			);
+			$this->testData =
+				new RdfBuilderTestData( __DIR__ . '/../../data/rdf/entities',
+					__DIR__ . '/../../data/rdf/RdfBuilder' );
 		}
 
 		return $this->testData;
 	}
 
 	/**
-	 * @param int $produce One of the RdfProducer::PRODUCE_... constants.
-	 * @param DedupeBag|null $dedup
-	 *
+	 * @return EntityTitleLookup
+	 */
+	private function getEntityTitleLookup() {
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function ( EntityId $entityId ) {
+				return Title::newFromText( $entityId->getSerialization() );
+			} ) );
+
+		return $entityTitleLookup;
+	}
+
+	/**
+	 * @param int           $produce One of the RdfProducer::PRODUCE_... constants.
+	 * @param DedupeBag     $dedup
+	 * @param RdfVocabulary $vocabulary
 	 * @return RdfBuilder
 	 */
-	private function newRdfBuilder( $produce, DedupeBag $dedup = null ) {
+	private function newRdfBuilder( $produce, DedupeBag $dedup = null,
+	                                RdfVocabulary $vocabulary = null ) {
 		if ( $dedup === null ) {
 			$dedup = new HashDedupeBag();
 		}
@@ -72,15 +91,11 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
 		$emitter = new NTriplesRdfWriter();
-		$builder = new RdfBuilder(
-			$this->getTestData()->getSiteList(),
-			$this->getTestData()->getVocabulary(),
-			$valueBuilderFactory,
-			$this->getTestData()->getMockRepository(),
-			$produce,
-			$emitter,
-			$dedup
-		);
+		$builder =
+			new RdfBuilder( $this->getTestData()->getSiteList(),
+				$vocabulary ?: $this->getTestData()->getVocabulary(), $valueBuilderFactory,
+				$this->getTestData()->getMockRepository(), $produce, $emitter, $dedup,
+				$this->getEntityTitleLookup() );
 
 		$builder->startDocument();
 		return $builder;
@@ -98,16 +113,16 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 	}
 
 	public function getRdfTests() {
-		$rdfTests = array(
-			array( 'Q1', 'Q1_simple' ),
-			array( 'Q2', 'Q2_labels' ),
-			array( 'Q3', 'Q3_links' ),
-			array( 'Q4', 'Q4_claims' ),
-			array( 'Q5', 'Q5_badges' ),
-			array( 'Q6', 'Q6_qualifiers' ),
-			array( 'Q7', 'Q7_references' ),
-			array( 'Q8', 'Q8_baddates' ),
-		);
+		$rdfTests = [
+			[ 'Q1', 'Q1_simple' ],
+			[ 'Q2', 'Q2_labels' ],
+			[ 'Q3', 'Q3_links' ],
+			[ 'Q4', 'Q4_claims' ],
+			[ 'Q5', 'Q5_badges' ],
+			[ 'Q6', 'Q6_qualifiers' ],
+			[ 'Q7', 'Q7_references' ],
+			[ 'Q8', 'Q8_baddates' ],
+		];
 
 		return $rdfTests;
 	}
@@ -119,13 +134,13 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$entity = $this->getEntityData( $entityName );
 		$expected = $this->getTestData()->getNTriples( $dataSetName );
 
-		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
-				RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
-				RdfProducer::PRODUCE_QUALIFIERS |
-				RdfProducer::PRODUCE_REFERENCES |
-				RdfProducer::PRODUCE_SITELINKS |
-				RdfProducer::PRODUCE_VERSION_INFO |
-				RdfProducer::PRODUCE_FULL_VALUES );
+		$builder =
+			$this->newRdfBuilder( RdfProducer::PRODUCE_ALL_STATEMENTS |
+			                      RdfProducer::PRODUCE_TRUTHY_STATEMENTS |
+			                      RdfProducer::PRODUCE_QUALIFIERS |
+			                      RdfProducer::PRODUCE_REFERENCES | RdfProducer::PRODUCE_SITELINKS |
+			                      RdfProducer::PRODUCE_VERSION_INFO |
+			                      RdfProducer::PRODUCE_FULL_VALUES );
 		$builder->addEntity( $entity );
 		$builder->addEntityRevisionInfo( $entity->getId(), 42, "2014-11-04T03:11:05Z" );
 
@@ -139,25 +154,50 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$q11 = new ItemId( 'Q11' );
 		$builder->addEntityRedirect( $q11, $q1 );
 
-		$expected = '<http://acme.test/Q11> <http://www.w3.org/2002/07/owl#sameAs> <http://acme.test/Q1> .';
+		$expected =
+			'<http://acme.test/Q11> <http://www.w3.org/2002/07/owl#sameAs> <http://acme.test/Q1> .';
 		$this->helper->assertNTriplesEquals( $expected, $builder->getRDF() );
 	}
 
 	public function getProduceOptions() {
-		$produceTests = array(
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q4_all_statements' ),
-			array( 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS, 'Q4_truthy_statements' ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q6_no_qualifiers' ),
-			array( 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS, 'Q6_with_qualifiers' ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS , 'Q7_no_refs' ),
-			array( 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES, 'Q7_refs' ),
-			array( 'Q3', RdfProducer::PRODUCE_SITELINKS, 'Q3_sitelinks' ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES, 'Q4_props' ),
-			array( 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES, 'Q4_values' ),
-			array( 'Q1', RdfProducer::PRODUCE_VERSION_INFO, 'Q1_info' ),
-			array( 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES, 'Q4_resolved' ),
-			array( 'Q10', RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES, 'Q10_redirect' ),
-		);
+		$produceTests = [
+			[ 'Q4', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q4_all_statements' ],
+			[ 'Q4', RdfProducer::PRODUCE_TRUTHY_STATEMENTS, 'Q4_truthy_statements' ],
+			[ 'Q6', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q6_no_qualifiers' ],
+			[
+				'Q6',
+				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_QUALIFIERS,
+				'Q6_with_qualifiers'
+			],
+			[ 'Q7', RdfProducer::PRODUCE_ALL_STATEMENTS, 'Q7_no_refs' ],
+			[
+				'Q7',
+				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_REFERENCES,
+				'Q7_refs'
+			],
+			[ 'Q3', RdfProducer::PRODUCE_SITELINKS, 'Q3_sitelinks' ],
+			[
+				'Q4',
+				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_PROPERTIES,
+				'Q4_props'
+			],
+			[
+				'Q4',
+				RdfProducer::PRODUCE_ALL_STATEMENTS | RdfProducer::PRODUCE_FULL_VALUES,
+				'Q4_values'
+			],
+			[ 'Q1', RdfProducer::PRODUCE_VERSION_INFO, 'Q1_info' ],
+			[
+				'Q4',
+				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
+				'Q4_resolved'
+			],
+			[
+				'Q10',
+				RdfProducer::PRODUCE_TRUTHY_STATEMENTS | RdfProducer::PRODUCE_RESOLVED_ENTITIES,
+				'Q10_redirect'
+			],
+		];
 
 		return $produceTests;
 	}
@@ -196,6 +236,101 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$expected = $this->getTestData()->getNTriples( 'Q7_Q9_dedup' );
 		$this->helper->assertNTriplesEquals( $expected, $data1 . $data2 );
+	}
+
+	public function getProps() {
+		return [
+			'simple prop' => [
+				'prop1',
+				[
+					'claims' => [ 'name' => 'rdf-claims' ]
+				]
+			],
+			'two props' => [
+				'prop2',
+				[
+					'claims' => [ 'name' => 'rdf-claims' ],
+					'sitelinks' => [ 'name' => 'rdf-sitelinks' ]
+				]
+			],
+			'unknown prop' => [
+				'prop3',
+				[
+					'Xclaims' => [ 'name' => 'rdf-claims' ],
+					'sitelinks' => [ 'name' => 'rdf-sitelinks' ]
+				]
+			],
+			'types' => [
+				'prop4',
+				[
+					'claims' => [ 'name' => 'rdf-claims', 'type' => 'integer' ],
+					'sitelinks' => [ 'name' => 'rdf-sitelinks', 'type' => 'float' ]
+				]
+			],
+		];
+	}
+
+	private function getPropsMock() {
+		$propsMock =
+			$this->getMockBuilder( PageProps::class )->disableOriginalConstructor()->getMock();
+		$propsMock->method( 'getProperties' )->willReturnCallback( function ( Title $title,
+		                                                                      $propertyNames ) {
+			$props = [ ];
+			foreach ( $propertyNames as $prop ) {
+				if ( $prop[0] == 'X' ) {
+					continue;
+				}
+				$props[$prop] = "test$prop";
+				// Numeric one
+				$props["len$prop"] = strlen( $prop );
+			}
+			return [ 'fakeID' => $props ];
+		} );
+		return $propsMock;
+	}
+
+	/**
+	 * @dataProvider getProps
+	 * @param string $name Datafile name
+	 * @param array $props Property config
+	 */
+	public function testPageProps( $name, $props ) {
+		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA,
+				[], [], $props );
+		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, null, $vocab );
+
+		$builder->setPageProps( $this->getPropsMock() );
+
+		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
+		$data = $builder->getRDF();
+
+		$expected = $this->getTestData()->getNTriples( $name );
+		$this->helper->assertNTriplesEquals( $expected, $data );
+	}
+
+	public function testPagePropsNone() {
+		// Props disabled by flag
+		$props = [
+			'claims' => [ 'name' => 'rdf-claims' ]
+		];
+		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA,
+				[], [], $props );
+		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_PAGE_PROPS, null, $vocab );
+
+		$builder->setPageProps( $this->getPropsMock() );
+
+		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
+		$data = $builder->getRDF();
+		$this->assertEquals( "", $data, "Should return empty string" );
+
+		// Props disabled by config of vocabulary
+		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL );
+
+		$builder->setPageProps( $this->getPropsMock() );
+
+		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
+		$data = $builder->getRDF();
+		$this->assertEquals( "", $data, "Should return empty string" );
 	}
 
 }
