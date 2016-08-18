@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_4fc37b0a",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.entitytermsforlanguageview.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-18T14:44:14Z",
+      "side": 1,
+      "message": "An empty draw looks bogus but I believe this is correct. Note that there was no draw before in this file.",
+      "revId": "4fb1a7fa569458bdc105ffb8db340cb7ee1677df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
