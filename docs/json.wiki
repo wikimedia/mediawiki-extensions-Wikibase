@@ -2,7 +2,7 @@ This document can be found [https://git.wikimedia.org/blob/mediawiki%2Fextension
 
 = Wikibase JSON format =
 
-This document describes the canonical JSON format used to represent Wikibase entities in the API, in JSON dumps,
+This document describes the canonical [[w:JSON|JSON]] format used to represent Wikibase entities in the API, in JSON dumps,
 as well as by Special:EntityData (when using JSON output).
 This format can be expected to be reasonably stable, and is designed with flexibility and robustness in mind.
 
@@ -10,7 +10,7 @@ For an explanation of the terms used in this document, please refer to the Wikib
 
 '''NOTE:''' this is different from the JSON format used by Wikibase internally, when storing entities to the database.
 The internal format is what is used in MediaWiki's XML dumps and returned by Special:Export and
-the by some API modules that return raw revision text. The internal format is designed to be terse, and may frequently change.
+then by some API modules that return raw revision text. The internal format is designed to be terse, and may frequently change.
 External tools should use the canonical JSON format whenever possible, and should not rely on the internal format.
 
 == JSON Flavor ==
@@ -160,7 +160,7 @@ while for labels and descriptions the record is associated directly with the lan
     },
     "frwiki": {
       "site": "frwiki",
-      "title": New York City",
+      "title": "New York City",
       "badges": []
     },
     "nlwiki": {
@@ -283,7 +283,7 @@ A Snak is represented by providing the following fields:
 
 * '''snaktype''': The type of the snak. Currently, this is one of ''value'', ''somevalue'' or ''novalue''.
 * '''property''': The ID of the property this Snak is about.
-* '''datatype''': The ''datatype'' field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on [[Special:ListDatatypes|Special:ListDatatypes]].
+* '''datatype''': The ''datatype'' field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on [[d:Special:ListDatatypes|Special:ListDatatypes]].
 * '''datavalue''': If the snaktype is ''value'', there is a ''datavalue'' field that contains the actual value the Snak associates with the Property. See [[#Data Values|Data Values]] below.
 
 ==== Data Values ====
@@ -371,7 +371,7 @@ URL from the information in the data value.
 <syntaxhighlight lang="javascript">
           "datavalue": {
             "value": {
-              "time": "+00000002001-12-31T00:00:00Z",
+              "time": "+2001-12-31T00:00:00Z",
               "timezone": 0,
               "before": 0,
               "after": 0,
@@ -384,8 +384,8 @@ URL from the information in the data value.
 
 Time values are given as a map with the following fields:
 
-* '''time''': Date and time in a notation resembling ISO 8601 for Julian and Gregorian, including. E.g. ''"+00000001994-01-01T00:00:00Z"''. ''Note:'' the format and interpretation of this string may vary based on the calendar model. Currently, only Julian and Gregorian dates are supported; a significantly different format would be required for other calendars if they are supported in the future.
-* '''timezone''': The time zone offset against UTC, in minutes. May be given as an integer or string literal.
+* '''time''': the format and interpretation of this string depends on the calendar model. Currently, only Julian and Gregorian dates are supported.<br>The format used for Gregorian and Julian dates use a notation resembling ISO 8601. E.g. ''"+1994-01-01T00:00:00Z"''. The year is represented by at least four digits, zeros are added on the left side as needed. Years BCE are represented as negative numbers, using the historical numbering, in which year 0 is undefined, and the year 1 BCE is represented as ''-0001,'' the year 44 BCE is represented as ''-0044'', etc., like XSD 1.0 (ISO 8601:1988) does. In contrast, the [[Wikibase/Indexing/RDF Dump Format|RDF mapping]] relies on XSD 1.1 (ISO 8601:2004) dates that use the [[:en:Proleptic Gregorian calendar|proleptic Gregorian calendar]] and [[:en:astronomical year numbering|astronomical year numbering]], where the year 1 BCE is represented as ''+0000'' and the year 44 BCE is represented as ''-0043''. See Wikipedia for more information about the [[:en:0_(year)#ISO_8601|year zero and ISO 8601]]. <br>Month and day may be 00 if they are unknown or insignificant. The day of the month may have values between 0 and 31 for any month, to accommodate "leap dates" like [[:en:February 30|February 30]]. Hour, minute, and second are currently unused and should always be 00.<br>''Note:'' more calendar models using a completely different notation may be supported in the future. Candidates include [[:en:julian day|Julian day]] and the [[:en:Hebrew calendar|Hebrew calendar]].<br>''Note:'' the notation for Julian and Gregorian dates may be changed to omit any unknown or insignificant parts. E.g. if only the year 1952 is known, this may in the future be represented as just "''+1952''" instead of currently ''"+1952-00-00T00:00:00Z"'' (which some libraries may turn into something like 1951-12-31) and the 19th century may be represented as "''+18**''".
+* '''timezone''': Signed integer. Currently unused, and should always be 0. In the future, timezone information will be given as an offset from UTC in minutes. For dates before the modern implementation of UTC in 1972, this is the offset of the time zone from [[w:Universal time universal time|Universal time universal time]]. Before the implementation of time zones, this is the longitude of the place of the event, expressed in the range &minus;180° to 180° (positive is east of Greenwich), multiplied by 4 to convert to minutes.
 * '''calendarmodel''': A URI of a calendar model, such as ''gregorian'' or ''julian''. Typically given as the URI of a data item on the repository
 * '''precision''': To what unit is the given date/time significant? Given as an integer indicating one of the following units:
 ** 0: 1 Gigayear
@@ -400,12 +400,12 @@ Time values are given as a map with the following fields:
 ** 9: years
 ** 10: months
 ** 11: days
-** 12: hours
-** 13: minutes
-** 14: seconds
-** ''more may be added in the future, in order to indicate milli-, micro-, and nanoseconds.''
-* '''''before''''': Begin of an uncertainty range, given in the unit defined by the ''precision'' field. (Currently unused, may be dropped in the future)
-* '''''after''''': End of an uncertainty range, given in the unit defined by the ''precision'' field. (Currently unused, may be dropped in the future)
+** 12: hours ''(unused)''
+** 13: minutes ''(unused)''
+** 14: seconds ''(unused)''
+*:Note that the precision should be read as an indicator of the significant parts of the date string, it does not directly specify an interval. That is, ''1988-07-13T00:00:00'' with precision 8 (decade) will be interpreted as ''198?-??-??'' and rendered as ''"1980s"''. ''1981-01-21T00:00:00'' with precision 8 would have the exact same interpretation. Thus the two dates are equivalent, since year, month, and days are treated as insignificant.
+* '''''before''''': Begin of an uncertainty range, given in the unit defined by the ''precision'' field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
+* '''''after''''': End of an uncertainty range, given in the unit defined by the ''precision'' field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
 
 === Qualifiers ===
 
@@ -540,7 +540,7 @@ Below is an example of an extract of a complete entity represented in JSON.
         {
             "language": "fr",
             "value": "NYC"
-        },
+        }
       ],
       "zh-mo": [
         {
@@ -858,7 +858,7 @@ Below is an example of an extract of a complete entity represented in JSON.
            "rank": "normal"
        }
     ]
-    },
+    }]},
     "sitelinks": {
     "afwiki": {
        "site": "afwiki",
