@@ -366,6 +366,27 @@ URL from the information in the data value.
 * '''globe''': the URI of a reference globe. This would typically refer to a data item on wikidata.org. This is usually just an indication of the celestial body (e.g. Q2 = earth), but could be more specific, like WGS 84 or ED50.
 * '''''altitude''''': ''Deprecated and no longer used. Will be dropped in the future.''
 
+===== quantity =====
+
+<syntaxhighlight lang="javascript">
+          "datavalue": {
+            "value":{
+              "amount":"+10.38",
+              "upperBound":"+10.375",
+              "lowerBound":"+10.385",
+              "unit":"http://www.wikidata.org/entity/Q712226"
+            },
+            "type":"quantity"
+          }
+</syntaxhighlight>
+
+Quantity values are given as a map with the following fields:
+
+* '''amount''': The nominal value of the quantity, as an arbitrary precision decimal string. The string always starts with a character indicating the sign of the value, either "+" or "-".
+* '''upperBound''': Optionally, the upper bound of the quantity's uncertainty interval, using the same notation as the amount field. If not given or null, the uncertainty (or precision) of the quantity is not known. If the upperBound field is given, the lowerBound field must also be given.
+* '''lowerBound''': Optionally, the lower bound of the quantity's uncertainty interval, using the same notation as the amount field. If not given or null, the uncertainty (or precision) of the quantity is not known. If the lowerBound field is given, the upperBound field must also be given.
+* '''unit''': the URI of a unit (or "1" to indicate a unit-less quantity). This would typically refer to a data item on wikidata.org, e.g. http://www.wikidata.org/entity/Q712226 for "square kilometer".
+
 ===== time =====
 
 <syntaxhighlight lang="javascript">
