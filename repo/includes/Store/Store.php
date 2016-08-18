@@ -14,6 +14,8 @@ use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Repo\Store\ChangeStore;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
+use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
 /**
@@ -78,6 +80,20 @@ interface Store {
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return EntitiesWithoutTermFinder
+	 */
+	public function newEntitiesWithoutTermFinder();
+
+	/**
+	 * @since 0.5
+	 *
+	 * @return ItemsWithoutSitelinksFinder
+	 */
+	public function newItemsWithoutSitelinksFinder();
 
 	/**
 	 * @since 0.5

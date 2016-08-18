@@ -6,7 +6,7 @@ use HTMLForm;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 
 /**
  * Base page for pages listing entities without a specific value.
@@ -44,9 +44,9 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private $legendMsg;
 
 	/**
-	 * @var EntityPerPage
+	 * @var EntitiesWithoutTermFinder
 	 */
-	private $entityPerPage;
+	private $entitiesWithoutTerm;
 
 	/**
 	 * @var string[]
@@ -67,7 +67,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @param string $name
 	 * @param string $termType One of the TermIndexEntry::TYPE_... constants.
 	 * @param string $legendMsg
-	 * @param EntityPerPage $entityPerPage
+	 * @param EntitiesWithoutTermFinder $entitiesWithoutTerm
 	 * @param string[] $entityTypes
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
@@ -76,7 +76,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$name,
 		$termType,
 		$legendMsg,
-		EntityPerPage $entityPerPage,
+		EntitiesWithoutTermFinder $entitiesWithoutTerm,
 		array $entityTypes,
 		ContentLanguages $termsLanguages,
 		LanguageNameLookup $languageNameLookup
@@ -85,7 +85,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 
 		$this->termType = $termType;
 		$this->legendMsg = $legendMsg;
-		$this->entityPerPage = $entityPerPage;
+		$this->entitiesWithoutTerm = $entitiesWithoutTerm;
 		$this->entityTypes = $entityTypes;
 		$this->termsLanguages = $termsLanguages;
 		$this->languageNameLookup = $languageNameLookup;
@@ -216,7 +216,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @return EntityId[]
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
-		return $this->entityPerPage->getEntitiesWithoutTerm( $this->termType, $this->language, $this->type, $limit, $offset );
+		return $this->entitiesWithoutTerm->getEntitiesWithoutTerm( $this->termType, $this->language, $this->type, $limit, $offset );
 	}
 
 	/**

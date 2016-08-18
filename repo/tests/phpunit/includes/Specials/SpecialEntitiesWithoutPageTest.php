@@ -37,7 +37,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			'EntitiesWithoutLabel',
 			TermIndexEntry::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
-			$wikibaseRepo->getStore()->newEntityPerPage(),
+			$wikibaseRepo->getStore()->newEntitiesWithoutTermFinder(),
 			array( 'item', 'property' ),
 			new StaticContentLanguages( array( 'acceptedlanguage' ) ),
 			new LanguageNameLookup()

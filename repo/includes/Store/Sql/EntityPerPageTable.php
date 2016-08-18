@@ -11,6 +11,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
+use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 
 /**
  * Represents a lookup database table that makes the link between entities and pages.
@@ -22,7 +24,7 @@ use Wikibase\Repo\Store\EntityPerPage;
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
  */
-class EntityPerPageTable implements EntityPerPage {
+class EntityPerPageTable implements EntityPerPage, EntitiesWithoutTermFinder, ItemsWithoutSitelinksFinder {
 
 	/**
 	 * @var EntityIdParser

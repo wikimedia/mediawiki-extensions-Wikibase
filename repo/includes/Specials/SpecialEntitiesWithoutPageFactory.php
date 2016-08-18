@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 
@@ -22,7 +22,7 @@ class SpecialEntitiesWithoutPageFactory {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
-			$wikibaseRepo->getStore()->newEntityPerPage(),
+			$wikibaseRepo->getStore()->newEntitiesWithoutTermFinder(),
 			$wikibaseRepo->getEnabledEntityTypes(),
 			$wikibaseRepo->getTermsLanguages(),
 			new LanguageNameLookup()
@@ -38,9 +38,9 @@ class SpecialEntitiesWithoutPageFactory {
 	}
 
 	/**
-	 * @var EntityPerPage
+	 * @var EntitiesWithoutTermFinder
 	 */
-	private $entityPerPage;
+	private $entitiesWithoutTerm;
 
 	/**
 	 * @var string[]
@@ -58,18 +58,18 @@ class SpecialEntitiesWithoutPageFactory {
 	private $languageNameLookup;
 
 	/**
-	 * @param EntityPerPage $entityPerPage
+	 * @param EntitiesWithoutTermFinder $entitiesWithoutTerm
 	 * @param string[] $entityTypes
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 */
 	public function __construct(
-		EntityPerPage $entityPerPage,
+		EntitiesWithoutTermFinder $entitiesWithoutTerm,
 		array $entityTypes,
 		ContentLanguages $termsLanguages,
 		LanguageNameLookup $languageNameLookup
 	) {
-		$this->entityPerPage = $entityPerPage;
+		$this->entitiesWithoutTerm = $entitiesWithoutTerm;
 		$this->entityTypes = $entityTypes;
 		$this->termsLanguages = $termsLanguages;
 		$this->languageNameLookup = $languageNameLookup;
@@ -85,7 +85,7 @@ class SpecialEntitiesWithoutPageFactory {
 			'EntitiesWithoutLabel',
 			TermIndexEntry::TYPE_LABEL,
 			'wikibase-entitieswithoutlabel-legend',
-			$this->entityPerPage,
+			$this->entitiesWithoutTerm,
 			$this->entityTypes,
 			$this->termsLanguages,
 			$this->languageNameLookup
@@ -102,7 +102,7 @@ class SpecialEntitiesWithoutPageFactory {
 			'EntitiesWithoutDescription',
 			TermIndexEntry::TYPE_DESCRIPTION,
 			'wikibase-entitieswithoutdescription-legend',
-			$this->entityPerPage,
+			$this->entitiesWithoutTerm,
 			$this->entityTypes,
 			$this->termsLanguages,
 			$this->languageNameLookup
