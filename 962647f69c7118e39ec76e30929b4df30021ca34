@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_758baa72",
+        "filename": "lib/includes/Store/CachingEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-18T16:41:19Z",
+      "side": 1,
+      "message": "shouldn\u0027t the default value now be 0?",
+      "revId": "962647f69c7118e39ec76e30929b4df30021ca34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_9580164d",
+        "filename": "lib/includes/Store/EntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-18T16:41:19Z",
+      "side": 1,
+      "message": "the default should now be 0, i think",
+      "revId": "962647f69c7118e39ec76e30929b4df30021ca34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_f5c4fa96",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-18T16:41:19Z",
+      "side": 1,
+      "message": "default should be 0, i think",
+      "revId": "962647f69c7118e39ec76e30929b4df30021ca34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
