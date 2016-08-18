@@ -818,7 +818,7 @@ final class WikibaseClient {
 				$this->getLanguageLinkBadgeDisplay(),
 				$this->getNamespaceChecker(),
 				$this->getStore()->getSiteLinkLookup(),
-				$this->getStore()->getEntityLookup(),
+				$this->getStore()->getEntityRevisionLookup(),
 				$this->getSiteStore(),
 				$this->settings->getSetting( 'siteGlobalID' ),
 				$this->getLangLinkSiteGroup()
@@ -836,7 +836,7 @@ final class WikibaseClient {
 			$this->parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 				$this->getOtherProjectsSidebarGeneratorFactory(),
 				$this->getStore()->getSiteLinkLookup(),
-				$this->getStore()->getEntityLookup(),
+				$this->getStore()->getEntityRevisionLookup(),
 				$this->settings->getSetting( 'siteGlobalID' )
 			);
 		}
