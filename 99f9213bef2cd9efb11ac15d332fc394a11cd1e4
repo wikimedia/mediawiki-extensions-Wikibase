@@ -16,6 +16,24 @@
       "revId": "99f9213bef2cd9efb11ac15d332fc394a11cd1e4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_1519867e",
+        "filename": "docs/json.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-18T16:26:39Z",
+      "side": 1,
+      "message": "Even if it is right now, we do not guarantee the order for the future, and clients should not rely on it.",
+      "parentUuid": "6e89af39_8a5e317a",
+      "revId": "99f9213bef2cd9efb11ac15d332fc394a11cd1e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
