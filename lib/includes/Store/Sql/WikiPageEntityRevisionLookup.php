@@ -67,7 +67,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_SLAVE_WITH_FALLBACK
+		$mode = self::LATEST_FROM_SLAVE
 	) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
