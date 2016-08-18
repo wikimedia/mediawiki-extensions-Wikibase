@@ -89,9 +89,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * language, otherwise it will be the content language.
 	 * In a perfect world, this would equal Parser::getTargetLanguage.
 	 *
-	 * This doesn't split the ParserCache by language yet, please see
-	 * self::splitParserCacheIfMultilingual for that.
-	 *
 	 * This can probably be removed after T114640 has been implemented.
 	 *
 	 * @return Language
@@ -100,23 +97,10 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		global $wgContLang;
 
 		if ( $this->allowDataAccessInUserLanguage() ) {
-			// Can't use ParserOptions::getUserLang as that already splits the ParserCache
-			$userLang = $this->getParserOptions()->getUser()->getOption( 'language' );
-
-			return Language::factory( $userLang );
+			return $this->getParserOptions()->getUserLangObj();
 		}
 
 		return $wgContLang;
-	}
-
-	/**
-	 * Splits the page's ParserCache in case we're on a multilingual wiki
-	 */
-	private function splitParserCacheIfMultilingual() {
-		if ( $this->allowDataAccessInUserLanguage() ) {
-			// ParserOptions::getUserLang splits the ParserCache
-			$this->getParserOptions()->getUserLang();
-		}
 	}
 
 	/**
@@ -188,8 +172,6 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'formatPropertyValues', 1, $propertyLabelOrId, 'string' );
 		$this->checkTypeOptional( 'formatPropertyValues', 2, $acceptableRanks, 'table', null );
 		try {
-			$this->splitParserCacheIfMultilingual();
-
 			return array(
 				$this->getImplementation()->formatPropertyValues(
 					$entityId,
