@@ -3,7 +3,9 @@
 namespace Wikibase\Test\Rdf;
 
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
@@ -57,6 +59,21 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		return $this->testData;
 	}
 
+
+	/**
+	 * @return EntityTitleLookup
+	 */
+	private function getEntityTitleLookup() {
+		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
+			->method( 'getTitleForId' )
+			->will( $this->returnCallback( function( EntityId $entityId ) {
+				return \Title::newFromText( $entityId->getSerialization() );
+			} ) );
+
+		return $entityTitleLookup;
+	}
+
 	/**
 	 * @param int $produce One of the RdfProducer::PRODUCE_... constants.
 	 * @param DedupeBag|null $dedup
@@ -79,7 +96,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$this->getTestData()->getMockRepository(),
 			$produce,
 			$emitter,
-			$dedup
+			$dedup,
+			$this->getEntityTitleLookup()
 		);
 
 		$builder->startDocument();
