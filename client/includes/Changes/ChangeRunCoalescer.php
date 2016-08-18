@@ -150,7 +150,11 @@ class ChangeRunCoalescer implements ChangeListTransformer {
 		$parentRevId = $firstmeta['parent_id'];
 		$latestRevId = $lastmeta['rev_id'];
 
-		$entityRev = $this->entityRevisionLookup->getEntityRevision( $entityId, $latestRevId );
+		$entityRev = $this->entityRevisionLookup->getEntityRevision(
+			$entityId,
+			$latestRevId,
+			EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+		);
 
 		if ( !$entityRev ) {
 			throw new MWException( "Failed to load revision $latestRevId of $entityId" );
