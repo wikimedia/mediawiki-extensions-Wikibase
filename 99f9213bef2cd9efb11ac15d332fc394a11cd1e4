@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_8a5e317a",
+        "filename": "docs/json.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-18T16:01:50Z",
+      "side": 1,
+      "message": "Is this always true? I believe the order is significant in *one* case.",
+      "revId": "99f9213bef2cd9efb11ac15d332fc394a11cd1e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
