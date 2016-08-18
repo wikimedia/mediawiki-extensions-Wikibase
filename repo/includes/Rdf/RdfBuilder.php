@@ -2,6 +2,7 @@
 
 namespace Wikibase\Rdf;
 
+use PageProps;
 use SiteList;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -10,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Purtle\RdfWriter;
 
@@ -82,13 +84,25 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $valueSnakRdfBuilderFactory;
 
 	/**
-	 * @param SiteList $sites
-	 * @param RdfVocabulary $vocabulary
+	 * @var EntityTitleLookup
+	 */
+	private $titleLookup;
+
+	/**
+	 * Page properties handler, can be null if we don't need them.
+	 * @var PageProps|null
+	 */
+	private $pageProps;
+
+	/**
+	 * @param SiteList                   $sites
+	 * @param RdfVocabulary              $vocabulary
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
-	 * @param PropertyDataTypeLookup $propertyLookup
-	 * @param int $flavor
-	 * @param RdfWriter $writer
-	 * @param DedupeBag $dedupeBag
+	 * @param PropertyDataTypeLookup     $propertyLookup
+	 * @param int                        $flavor
+	 * @param RdfWriter                  $writer
+	 * @param DedupeBag                  $dedupeBag
+	 * @param EntityTitleLookup          $titleLookup
 	 */
 	public function __construct(
 		SiteList $sites,
@@ -97,7 +111,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		PropertyDataTypeLookup $propertyLookup,
 		$flavor,
 		RdfWriter $writer,
-		DedupeBag $dedupeBag
+		DedupeBag $dedupeBag,
+		EntityTitleLookup $titleLookup
 	) {
 		$this->vocabulary = $vocabulary;
 		$this->propertyLookup = $propertyLookup;
@@ -105,6 +120,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$this->writer = $writer;
 		$this->produceWhat = $flavor;
 		$this->dedupeBag = $dedupeBag ?: new HashDedupeBag();
+		$this->titleLookup = $titleLookup;
 
 		// XXX: move construction of sub-builders to a factory class.
 		$this->termsBuilder = new TermsRdfBuilder( $vocabulary, $writer );
@@ -221,6 +237,15 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
+	 * Get map of page properties used by this builder
+	 *
+	 * @return string[]
+	 */
+	public function getPageProperties() {
+		return $this->vocabulary->getPageProperties();
+	}
+
+	/**
 	 * Should we produce this aspect?
 	 *
 	 * @param int $what
@@ -304,6 +329,52 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 
 		$this->writer->say( RdfVocabulary::NS_SCHEMA_ORG, 'version' )->value( $revision, 'xsd', 'integer' )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( $timestamp, 'xsd', 'dateTime' );
+	}
+
+	/**
+	 * Set page props handler
+	 * @param PageProps $pageProps
+	 * @return self
+	 */
+	public function setPageProps( PageProps $pageProps ) {
+		$this->pageProps = $pageProps;
+		return $this;
+	}
+
+	/**
+	 * Add page props information
+	 * @param EntityId $entityId
+	 */
+	public function addEntityPageProps( EntityId $entityId ) {
+		if ( !$this->pageProps || !$this->shouldProduce( RdfProducer::PRODUCE_PAGE_PROPS ) ) {
+			return;
+		}
+		$title = $this->titleLookup->getTitleForId( $entityId );
+		$props = $this->getPageProperties();
+		if ( !$title || !$props ) {
+			return;
+		}
+		$propValues = $this->pageProps->getProperties( $title, array_keys( $props ) );
+		if ( !$propValues ) {
+			return;
+		}
+		$entityProps = reset( $propValues );
+		if ( !$entityProps ) {
+			return;
+		}
+		foreach ( $entityProps as $name => $value ) {
+			if ( !isset( $props[$name]['name'] ) ) {
+				continue;
+			}
+
+			if ( isset( $props[$name]['type'] ) ) {
+				settype( $value, $props[$name]['type'] );
+			}
+
+			$this->writer->about( RdfVocabulary::NS_DATA, $entityId )
+				->say( RdfVocabulary::NS_ONTOLOGY, $props[$name]['name'] )
+				->value( $value );
+		}
 	}
 
 	/**
