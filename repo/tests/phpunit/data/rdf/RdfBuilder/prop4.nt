@@ -1,0 +1,2 @@
+<http://data.acme.test/Q9> <http://wikiba.se/ontology-beta#rdf-claims> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://data.acme.test/Q9> <http://wikiba.se/ontology-beta#rdf-sitelinks> "0"^^<http://www.w3.org/2001/XMLSchema#double> .
