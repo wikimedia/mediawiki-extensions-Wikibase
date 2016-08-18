@@ -222,6 +222,8 @@ class EntityDataSerializationService {
 				$entityRevision->getTimestamp()
 			);
 
+			$rdfBuilder->addEntityPageProps( $entityRevision->getEntity()->getId() );
+
 			$rdfBuilder->addEntity( $entityRevision->getEntity() );
 			$rdfBuilder->resolveMentionedEntities( $this->entityLookup );
 		}
@@ -323,6 +325,7 @@ class EntityDataSerializationService {
 					| RdfProducer::PRODUCE_REFERENCES
 					| RdfProducer::PRODUCE_SITELINKS
 					| RdfProducer::PRODUCE_FULL_VALUES
+				    | RdfProducer::PRODUCE_PAGE_PROPS
 					| RdfProducer::PRODUCE_VERSION_INFO;
 			case 'long':
 				return RdfProducer::PRODUCE_ALL_STATEMENTS
@@ -363,8 +366,11 @@ class EntityDataSerializationService {
 			$this->propertyLookup,
 			$this->getFlavor( $flavorName ),
 			$rdfWriter,
-			new HashDedupeBag()
+			new HashDedupeBag(),
+			$this->entityTitleLookup
 		);
+
+		$rdfBuilder->setPageProps( \PageProps::getInstance() );
 
 		return $rdfBuilder;
 	}
