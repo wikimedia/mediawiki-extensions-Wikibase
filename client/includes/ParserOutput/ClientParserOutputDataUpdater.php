@@ -125,6 +125,7 @@ class ClientParserOutputDataUpdater {
 	}
 
 	private function setBadgesProperty( ItemId $itemId, ParserOutput $out ) {
+		// XXX: Master fallback required?
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
 
