@@ -183,4 +183,10 @@ return [
 		'http://www.wikidata.org/entity/Q3359' => 'triton',
 		'http://www.wikidata.org/entity/Q339' => 'pluto'
 	],
+
+	// Map between page properties and Wikibase predicates
+	'pagePropertiesRdf' => [
+		'wb-sitelinks' => 'sitelinks',
+		'wb-claims' => 'claims'
+	]
 ];
