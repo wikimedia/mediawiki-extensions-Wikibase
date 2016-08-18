@@ -79,20 +79,14 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		);
 	}
 
-	/**
-	 * @dataProvider allowDataAccessInUserLanguageProvider
-	 */
-	public function testGetGlobalSiteId( $allowDataAccessInUserLanguage ) {
-		$cacheSplit = false;
-		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+	public function testGetGlobalSiteId() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$expected = array(
 			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
 		);
 
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
-		$this->assertFalse( $cacheSplit );
 	}
 
 	/**
