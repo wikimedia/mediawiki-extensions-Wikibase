@@ -15,10 +15,12 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\Test\Rdf\RdfBuilderTest;
 use Wikibase\Test\Rdf\RdfBuilderTestData;
 
@@ -131,6 +133,10 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 		// Note: we test against the actual RDF bindings here, so we get actual RDF.
 		$rdfBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
+		// Really simple mock that knows no titles
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup->method( 'getTitleForId' )->willReturn( null );
+
 		return RdfDumpGenerator::createDumpGenerator(
 			'ntriples',
 			$out,
@@ -143,7 +149,8 @@ class RdfDumpGeneratorTest extends PHPUnit_Framework_TestCase {
 				self::URI_BASE,
 				self::URI_DATA,
 				array( 'test' => 'en-x-test' )
-			)
+			),
+			$titleLookup
 		);
 	}
 

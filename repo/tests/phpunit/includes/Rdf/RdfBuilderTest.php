@@ -71,6 +71,10 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		// Note: using the actual factory here makes this an integration test!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
+		// Really simple mock that knows no titles
+		$titleLookup = $this->getMock( EntityTitleLookup::class );
+		$titleLookup->method( 'getTitleForId' )->willReturn( null );
+
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(
 			$this->getTestData()->getSiteList(),
@@ -79,7 +83,8 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			$this->getTestData()->getMockRepository(),
 			$produce,
 			$emitter,
-			$dedup
+			$dedup,
+			$titleLookup
 		);
 
 		$builder->startDocument();

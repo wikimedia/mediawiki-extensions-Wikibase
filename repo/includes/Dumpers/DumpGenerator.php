@@ -29,7 +29,7 @@ abstract class DumpGenerator {
 	 * @var int The max number of entities to process in a single batch.
 	 *      Also controls the interval for progress reports.
 	 */
-	private $batchSize = 100;
+	protected $batchSize = 100;
 
 	/**
 	 * @var resource File handle for output
@@ -214,6 +214,14 @@ abstract class DumpGenerator {
 	}
 
 	/**
+	 * Do something before dumping a batch of entities
+	 * @param EntityId[] $entities
+	 */
+	protected function preBatchDump( $entities ) {
+		$this->entityPrefetcher->prefetch( $entities );
+	}
+
+	/**
 	 * Do something before dumping entity
 	 *
 	 * @param int $dumpCount
@@ -273,7 +281,8 @@ abstract class DumpGenerator {
 				$toLoad[] = $entityId;
 			}
 		}
-		$this->entityPrefetcher->prefetch( $toLoad );
+
+		$this->preBatchDump( $toLoad );
 
 		foreach ( $toLoad as $entityId ) {
 			try {
