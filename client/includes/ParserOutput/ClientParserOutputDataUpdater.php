@@ -9,7 +9,7 @@ use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -29,9 +29,9 @@ class ClientParserOutputDataUpdater {
 	private $otherProjectsSidebarGeneratorFactory;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityRevisionLookup
 	 */
-	private $entityLookup;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var SiteLinkLookup
@@ -47,7 +47,7 @@ class ClientParserOutputDataUpdater {
 	 * @param OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory
 	 *            Use the factory here to defer initialization of things like Site objects.
 	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param EntityLookup $entityLookup
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param string $siteId The global site ID for the local wiki
 	 *
 	 * @throws InvalidArgumentException
@@ -55,7 +55,7 @@ class ClientParserOutputDataUpdater {
 	public function __construct(
 		OtherProjectsSidebarGeneratorFactory $otherProjectsSidebarGeneratorFactory,
 		SiteLinkLookup $siteLinkLookup,
-		EntityLookup $entityLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		$siteId
 	) {
 		if ( !is_string( $siteId ) ) {
@@ -63,7 +63,7 @@ class ClientParserOutputDataUpdater {
 		}
 
 		$this->otherProjectsSidebarGeneratorFactory = $otherProjectsSidebarGeneratorFactory;
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
 	}
@@ -125,8 +125,16 @@ class ClientParserOutputDataUpdater {
 	}
 
 	private function setBadgesProperty( ItemId $itemId, ParserOutput $out ) {
-		/** @var Item $item */
-		$item = $this->entityLookup->getEntity( $itemId );
+		$item = null;
+		$itemRevision = $this->entityRevisionLookup->getEntityRevision(
+			$itemId,
+			0,
+			EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+		);
+		if ( $itemRevision ) {
+			/** @var Item $item */
+			$item = $itemRevision->getEntity();
+		}
 
 		if ( !$item || !$item->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
 			// Probably some sort of race condition or data inconsistency, better log a warning

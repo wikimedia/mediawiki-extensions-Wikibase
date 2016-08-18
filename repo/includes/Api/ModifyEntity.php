@@ -233,7 +233,11 @@ abstract class ModifyEntity extends ApiBase {
 			// TODO: use the EntitySavingHelper to load the entity, instead of an EntityRevisionLookup.
 			// TODO: consolidate with StatementModificationHelper::applyChangeOp
 			// FIXME: this EntityRevisionLookup is uncached, we may be loading the Entity several times!
-			$currentEntityRevision = $this->revisionLookup->getEntityRevision( $entity->getId() );
+			$currentEntityRevision = $this->revisionLookup->getEntityRevision(
+				$entity->getId(),
+				0,
+				EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+			);
 			$currentEntity = $currentEntityRevision ? $currentEntityRevision->getEntity() : $entity;
 			$result = $changeOp->validate( $currentEntity );
 

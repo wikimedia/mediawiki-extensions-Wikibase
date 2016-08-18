@@ -8,8 +8,8 @@ use SiteStore;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -41,9 +41,9 @@ class LangLinkHandler {
 	private $siteLinkLookup;
 
 	/**
-	 * @var EntityLookup
+	 * @var EntityRevisionLookup
 	 */
-	private $entityLookup;
+	private $entityRevisionLookup;
 
 	/**
 	 * @var SiteStore
@@ -64,7 +64,7 @@ class LangLinkHandler {
 	 * @param LanguageLinkBadgeDisplay $badgeDisplay
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
 	 * @param SiteLinkLookup $siteLinkLookup A site link lookup service
-	 * @param EntityLookup $entityLookup An entity lookup service
+	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param SiteStore $siteStore
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
@@ -73,7 +73,7 @@ class LangLinkHandler {
 		LanguageLinkBadgeDisplay $badgeDisplay,
 		NamespaceChecker $namespaceChecker,
 		SiteLinkLookup $siteLinkLookup,
-		EntityLookup $entityLookup,
+		EntityRevisionLookup $entityRevisionLookup,
 		SiteStore $siteStore,
 		$siteId,
 		$siteGroup
@@ -81,7 +81,7 @@ class LangLinkHandler {
 		$this->badgeDisplay = $badgeDisplay;
 		$this->namespaceChecker = $namespaceChecker;
 		$this->siteLinkLookup = $siteLinkLookup;
-		$this->entityLookup = $entityLookup;
+		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->siteStore = $siteStore;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
@@ -108,8 +108,16 @@ class LangLinkHandler {
 			//NOTE: SiteLinks we could get from $this->siteLinkLookup do not contain badges,
 			//      so we have to fetch the links from the Item.
 
-			/* @var Item $item */
-			$item = $this->entityLookup->getEntity( $itemId );
+			$item = null;
+			$itemRevision = $this->entityRevisionLookup->getEntityRevision(
+				$itemId,
+				0,
+				EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+			);
+			if ( $itemRevision ) {
+				/* @var Item $item */
+				$item = $itemRevision->getEntity();
+			}
 
 			if ( $item ) {
 				$links = iterator_to_array( $item->getSiteLinkList() );
