@@ -133,8 +133,8 @@ class MockRepository implements
 	 */
 	public function getEntityRevision(
 		EntityId $entityId,
-		$revisionId = self::LATEST_FROM_SLAVE_WITH_FALLBACK,
-		$mode = self::LATEST_FROM_SLAVE_WITH_FALLBACK
+		$revisionId = self::LATEST_FROM_SLAVE,
+		$mode = self::LATEST_FROM_SLAVE
 	) {
 		$key = $entityId->getSerialization();
 
