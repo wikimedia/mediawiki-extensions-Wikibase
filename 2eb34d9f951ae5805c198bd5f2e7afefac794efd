@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_bdb894e3",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-19T09:52:05Z",
+      "side": 1,
+      "message": "Isn\u0027t this a breaking change?",
+      "revId": "2eb34d9f951ae5805c198bd5f2e7afefac794efd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
