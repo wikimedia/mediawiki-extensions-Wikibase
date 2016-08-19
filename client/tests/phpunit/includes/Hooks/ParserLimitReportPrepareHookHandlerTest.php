@@ -36,7 +36,8 @@ class ParserLimitReportPrepareHookHandlerTest extends PHPUnit_Framework_TestCase
 			->will( $this->returnValue( 42 ) );
 
 		$handler = new ParserLimitReportPrepareHookHandler(
-			$restrictedEntityLookup
+			$restrictedEntityLookup,
+			1234
 		);
 
 		$parserOutput = new ParserOutput();
@@ -45,7 +46,10 @@ class ParserLimitReportPrepareHookHandlerTest extends PHPUnit_Framework_TestCase
 
 		$limitReportData = $parserOutput->getLimitReportData();
 
-		$this->assertSame( 42, $limitReportData['EntityAccessCount'] );
+		$this->assertSame(
+			[ 'value' => 42, 'limit' => 1234 ],
+			$limitReportData['limitreport']['entityaccesscount']
+		);
 	}
 
 }
