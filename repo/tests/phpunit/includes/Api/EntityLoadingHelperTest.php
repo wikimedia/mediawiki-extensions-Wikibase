@@ -8,10 +8,12 @@ use PHPUnit_Framework_MockObject_MockObject;
 use UsageException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Api\ApiErrorReporter;
@@ -32,34 +34,47 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	/**
 	 * @return ApiBase|PHPUnit_Framework_MockObject_MockObject
 	 */
-	protected function getMockApiBase() {
-		return $this->getMockBuilder( ApiBase::class )
+	protected function getMockApiBase( $params = [] ) {
+		$apiBase = $this->getMockBuilder( ApiBase::class )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$apiBase->expects( $this->any() )
+			->method( 'extractRequestParams' )
+			->will( $this->returnValue( $params ) );
+
+		return $apiBase;
 	}
 
 	/**
-	 * @param mixed $entityRevisionReturn if value is instance of Exception it will be thrown;
-	 * If it is false, 0 calls will be expected. Instances of EntityRevision (and null) will be
-	 * returned as is.
+	 * @param EntityId|null $entityId Entity ID getEntityRevision() should expect.
+	 * @param EntityRevision|null $entityRevision The EntityRevision getEntityRevision() should return.
+	 * @param Exception|null $exception The Exception getEntityRevision() should throw.
+	 * @return PHPUnit_Framework_MockObject_MockObject|EntityRevisionLookup
 	 *
-	 * @return EntityRevisionLookup|PHPUnit_Framework_MockObject_MockObject
 	 */
-	protected function getMockEntityRevisionLookup( $entityRevisionReturn ) {
+	protected function getMockEntityRevisionLookup(
+		EntityId $entityId = null,
+		EntityRevision $entityRevision = null,
+		Exception $exception = null
+	) {
 		$mock = $this->getMock( EntityRevisionLookup::class );
 
-		if ( $entityRevisionReturn === false ) {
+		if ( !$entityId ) {
 			$mock->expects( $this->never() )
 				->method( 'getEntityRevision' );
-		} elseif ( $entityRevisionReturn instanceof Exception ) {
-			$mock->expects( $this->once() )
+		} else {
+			$invocation = $mock->expects( $this->once() )
 				->method( 'getEntityRevision' )
-				->will( $this->throwException( $entityRevisionReturn ) );
-		} elseif ( $entityRevisionReturn instanceof EntityRevision ) {
-			$mock->expects( $this->once() )
-				->method( 'getEntityRevision' )
-				->will( $this->returnValue( $entityRevisionReturn ) );
+				->with( $entityId );
+
+			if ( $exception ) {
+				$invocation->will( $this->throwException( $exception ) );
+			} else {
+				$invocation->will( $this->returnValue( $entityRevision ) );
+			}
 		}
+
 		return $mock;
 	}
 
@@ -72,23 +87,38 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		$mock = $this->getMockBuilder( ApiErrorReporter::class )
 			->disableOriginalConstructor()
 			->getMock();
+
 		if ( $expectedExceptionCode ) {
 			$mock->expects( $this->once() )
 				->method( 'dieException' )
 				->with( $this->isInstanceOf( Exception::class ), $expectedExceptionCode )
-				->will( $this->throwException( new UsageException( 'mockUsageException', 'mock' ) ) );
+				->will( $this->throwException( new UsageException( 'mockUsageException', $expectedExceptionCode ) ) );
+		} else {
+			$mock->expects( $this->any() )
+				->method( 'dieException' )
+				->will( $this->returnCallback( function( Exception $ex, $code ) {
+					throw new UsageException( $ex->getMessage(), $code );
+				} ) );
 		}
+
 		if ( $expectedErrorCode ) {
 			$mock->expects( $this->once() )
 				->method( 'dieError' )
 				->with( $this->isType( 'string' ), $expectedErrorCode )
-				->will( $this->throwException( new UsageException( 'mockUsageException', 'mock' ) ) );
+				->will( $this->throwException( new UsageException( 'mockUsageException', $expectedErrorCode ) ) );
+		} else {
+			$mock->expects( $this->any() )
+				->method( 'dieError' )
+				->will( $this->returnCallback( function( $msg, $code ) {
+					throw new UsageException( $msg, $code );
+				} ) );
 		}
+
 		return $mock;
 	}
 
 	/**
-	 * @return EntityRevision
+	 * @return EntityRevision|PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected function getMockRevision() {
 		$entity = $this->getMock( EntityDocument::class );
@@ -105,92 +135,159 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @param EntityRevision|Exception|null $lookupResult
-	 * @param string|null $expectedError
+	 * @param array $config Associative configuration array. Known keys:
+	 *   - params: request parameters, as an associative array
+	 *   - entityId: The ID expected by getEntityRevisions
+	 *   - revision: EntityRevision to return from getEntityRevisions
+	 *   - exception: Exception to throw from getEntityRevisions
+	 *   - dieErrorCode: The error code expected by dieError
+	 *   - dieExceptionCode: The error code expected by dieException
+	 *
 	 * @return EntityLoadingHelper
 	 */
-	protected function newEntityLoadingHelper(
-		$lookupResult = null,
-		$expectedExceptionCode = null,
-		$expectedErrorCode = null
-	) {
+	protected function newEntityLoadingHelper( array $config ) {
 		return new EntityLoadingHelper(
-			$this->getMockApiBase(),
+			$this->getMockApiBase( isset( $config['params'] ) ? $config['params'] : [] ),
 			new BasicEntityIdParser(),
-			$this->getMockEntityRevisionLookup( $lookupResult ),
-			$this->getMockErrorReporter( $expectedExceptionCode, $expectedErrorCode )
+			$this->getMockEntityRevisionLookup(
+				isset( $config['entityId'] ) ? $config['entityId'] : null,
+				isset( $config['revision'] ) ? $config['revision'] : null,
+				isset( $config['exception'] ) ? $config['exception'] : null
+			),
+			$this->getMockErrorReporter(
+				isset( $config['dieExceptionCode'] ) ? $config['dieExceptionCode'] : null,
+				isset( $config['dieErrorCode'] ) ? $config['dieErrorCode'] : null
+			)
 		);
-	}
-
-	public function testLoadEntityRevision() {
-		$revision = $this->getMockRevision();
-
-		$helper = $this->newEntityLoadingHelper( $revision );
-
-		$return = $helper->loadEntityRevision( new ItemId( 'Q1' ) );
-
-		$this->assertSame( $revision, $return );
-
-		$this->markTestIncomplete( 'No tests for failure cases, since this method is not intended to stay public.' );
-	}
-
-	public function testGetEntityIdFromParams() {
-		$helper = $this->newEntityLoadingHelper();
-
-		$result = $helper->getEntityIdFromParams( [ 'entity' => 'Q12' ] );
-		$this->assertEquals( new ItemId( 'Q12' ), $result );
-
-		$helper->setEntityIdParam( 'foo' );
-		$result = $helper->getEntityIdFromParams( [ 'foo' => 'Q21' ] );
-		$this->assertEquals( new ItemId( 'Q21' ), $result );
-
-		$this->markTestIncomplete( 'Only basic test, since this method is not intended to stay public.' );
 	}
 
 	public function testLoadEntity() {
 		$revision = $this->getMockRevision();
 		$entity = $revision->getEntity();
+		$id = new ItemId( 'Q1' );
 
-		$helper = $this->newEntityLoadingHelper( $revision );
-		$return = $helper->loadEntity( new ItemId( 'Q1' ) );
+		$helper = $this->newEntityLoadingHelper( [
+			'entityId' => $id,
+			'revision' => $revision,
+		] );
+		$return = $helper->loadEntity( $id );
 
 		$this->assertSame( $entity, $return );
-
-		$this->markTestIncomplete( 'FIXME: needs test for ID supplied via request params, directly and as site:title.' );
 	}
 
-	public function testLoadEntity_NullRevision() {
-		$helper = $this->newEntityLoadingHelper( null, null, 'cant-load-entity-content' );
+	public function testLoadEntity_idFromRequestParams() {
+		$revision = $this->getMockRevision();
+		$entity = $revision->getEntity();
+		$id = new ItemId( 'Q1' );
+
+		$params = [ 'entity' => 'Q1' ];
+		$helper = $this->newEntityLoadingHelper( [
+			'params' => $params,
+			'entityId' => $id,
+			'revision' => $revision,
+		] );
+		$return = $helper->loadEntity();
+
+		$this->assertSame( $entity, $return );
+	}
+
+	public function testLoadEntity_titleFromRequestParams() {
+		$revision = $this->getMockRevision();
+		$entity = $revision->getEntity();
+		$id = new ItemId( 'Q1' );
+
+		$params = [ 'site' => 'foowiki', 'title' => 'FooBar' ];
+		$helper = $this->newEntityLoadingHelper( [
+			'params' => $params,
+			'entityId' => $id,
+			'revision' => $revision,
+		] );
+
+		$siteLinkLookup = $this->getMock( SiteLinkLookup::class );
+		$siteLinkLookup->expects( $this->once() )
+			->method( 'getItemIdForLink' )
+			->with( 'foowiki', 'FooBar' )
+			->will( $this->returnValue( $id ) );
+
+		$helper->setSiteLinkLookup( $siteLinkLookup );
+
+		$return = $helper->loadEntity();
+		$this->assertSame( $entity, $return );
+	}
+
+	public function testLoadEntity_badId() {
+		$params = [ 'entity' => 'xyz' ];
+		$helper = $this->newEntityLoadingHelper( [
+			'params' => $params,
+			'dieExceptionCode' => 'invalid-entity-id'
+		] );
 
 		$this->setExpectedException( UsageException::class );
-		$helper->loadEntity( new ItemId( 'Q1' ) );
+		$helper->loadEntity();
+	}
+
+	public function testLoadEntity_noId() {
+		$helper = $this->newEntityLoadingHelper( [
+			'params' => [],
+			'dieErrorCode' => 'no-entity-id'
+		] );
+
+		$this->setExpectedException( UsageException::class );
+		$helper->loadEntity();
+	}
+
+	public function testLoadEntity_NotFound() {
+		$id = new ItemId( 'Q1' );
+
+		$helper = $this->newEntityLoadingHelper( [
+			'entityId' => $id,
+			'dieErrorCode' => 'no-such-entity'
+		] );
+
+		$this->setExpectedException( UsageException::class );
+		$helper->loadEntity( $id );
 	}
 
 	public function testLoadEntity_UnresolvedRedirectException() {
-		$helper = $this->newEntityLoadingHelper(
-			new RevisionedUnresolvedRedirectException(
-				new ItemId( 'Q1' ),
-				new ItemId( 'Q1' )
+		$id = new ItemId( 'Q1' );
+
+		$helper = $this->newEntityLoadingHelper( [
+			'entityId' => $id,
+			'exception' => new RevisionedUnresolvedRedirectException(
+				$id,
+				new ItemId( 'Q11' )
 			),
-			'unresolved-redirect'
-		);
+			'dieExceptionCode' => 'unresolved-redirect'
+		] );
 
 		$this->setExpectedException( UsageException::class );
-		$helper->loadEntity( new ItemId( 'Q1' ) );
+		$helper->loadEntity( $id );
 	}
 
 	public function testLoadEntity_BadRevisionException() {
-		$helper = $this->newEntityLoadingHelper( new BadRevisionException(), 'nosuchrevid' );
+		$id = new ItemId( 'Q1' );
+
+		$helper = $this->newEntityLoadingHelper( [
+			'entityId' => $id,
+			'exception' => new BadRevisionException(),
+			'dieExceptionCode' => 'nosuchrevid'
+		] );
 
 		$this->setExpectedException( UsageException::class );
-		$helper->loadEntity( new ItemId( 'Q1' ) );
+		$helper->loadEntity( $id );
 	}
 
 	public function testLoadEntity_StorageException() {
-		$helper = $this->newEntityLoadingHelper( new StorageException(), 'cant-load-entity-content' );
+		$id = new ItemId( 'Q1' );
+
+		$helper = $this->newEntityLoadingHelper( [
+			'entityId' => $id,
+			'exception' => new StorageException(),
+			'dieExceptionCode' => 'cant-load-entity-content'
+		] );
 
 		$this->setExpectedException( UsageException::class );
-		$helper->loadEntity( new ItemId( 'Q1' ) );
+		$helper->loadEntity( $id );
 	}
 
 }
