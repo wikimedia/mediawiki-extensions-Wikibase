@@ -1,0 +1,245 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_a75fa3e7",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "EntityId|null",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_e710cb06",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "coven?",
+      "range": {
+        "startLine": 139,
+        "startChar": 56,
+        "endLine": 139,
+        "endChar": 61
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_67c93b7b",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "huh?",
+      "range": {
+        "startLine": 231,
+        "startChar": 4,
+        "endLine": 231,
+        "endChar": 14
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_c7958f37",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "why protected?",
+      "range": {
+        "startLine": 242,
+        "startChar": 1,
+        "endLine": 242,
+        "endChar": 10
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_67a05b9b",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "PHP should have something like GNU C\u0027s __attribute__((noreturn)) :S",
+      "range": {
+        "startLine": 251,
+        "startChar": 13,
+        "endLine": 251,
+        "endChar": 27
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_872f07f3",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "EntityId|null",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 19
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_a7340348",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "EntityRevision|null",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_c7390f40",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "Exception|null",
+      "range": {
+        "startLine": 53,
+        "startChar": 11,
+        "endLine": 53,
+        "endChar": 20
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_07d797c5",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "Circular dependency, yikes. Given it\u0027s optional and test only, I guess it\u0027s ok.",
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_67de9be0",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "Nice hack… but why not just $id-\u003egetEntityType() \u003d\u003d\u003d \u0027mediainfo\u0027?",
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_e7a0cb40",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T00:42:55Z",
+      "side": 1,
+      "message": "array $params",
+      "range": {
+        "startLine": 205,
+        "startChar": 38,
+        "endLine": 205,
+        "endChar": 45
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
