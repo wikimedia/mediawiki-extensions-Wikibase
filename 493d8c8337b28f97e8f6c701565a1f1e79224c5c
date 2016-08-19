@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_4e77f435",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-08-19T20:08:39Z",
+      "side": 1,
+      "message": "Do I understand right that here LATEST_FROM_MASTER and LATEST_FROM_SLAVE_WITH_FALLBACK are essentially the same? Since WikiPageEntityMetaDataLookup would try the slave first anyway? If so, maybe using LATEST_FROM_SLAVE_WITH_FALLBACK as the default would be clearer?\n\nAlso, it looks a bit confusing that on LATEST_FROM_MASTER loadRevisionInformation would go directly to master but loadRevisionInformationByRevisionId would not, and it never says so explicitly anywhere.",
+      "revId": "493d8c8337b28f97e8f6c701565a1f1e79224c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_2ea9c878",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-08-19T20:08:39Z",
+      "side": 1,
+      "message": "I wonder why we\u0027re doing assert here, we aren\u0027t doing it in any of the many of similar functions e.g. in WikiPageEntityMetaDataLookup",
+      "revId": "493d8c8337b28f97e8f6c701565a1f1e79224c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
