@@ -50,6 +50,24 @@
       "revId": "fd6975f1eba058fe60428a04e3081d3e90c61f34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_38e11298",
+        "filename": "view/resources/wikibase/view/StructureEditorFactory.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-08-19T14:38:06Z",
+      "side": 1,
+      "message": "Why is this even necessary?",
+      "parentUuid": "6e89af39_b8cd0237",
+      "revId": "fd6975f1eba058fe60428a04e3081d3e90c61f34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
