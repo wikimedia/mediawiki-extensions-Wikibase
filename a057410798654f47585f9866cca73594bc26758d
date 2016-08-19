@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_a73a43e2",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_a75fa3e7",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_e710cb06",
         "filename": "repo/includes/Api/EntitySavingHelper.php",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2016-08-19T00:42:55Z",
       "side": 1,
       "message": "coven?",
+      "range": {
+        "startLine": 139,
+        "startChar": 56,
+        "endLine": 139,
+        "endChar": 61
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_e7444b71",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Changed to given.",
+      "parentUuid": "6e89af39_e710cb06",
       "range": {
         "startLine": 139,
         "startChar": 56,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_67305bfd",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "6e89af39_67c93b7b",
+      "range": {
+        "startLine": 231,
+        "startChar": 4,
+        "endLine": 231,
+        "endChar": 14
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_c7958f37",
         "filename": "repo/includes/Api/EntitySavingHelper.php",
         "patchSetId": 8
@@ -82,6 +154,30 @@
       "writtenOn": "2016-08-19T00:42:55Z",
       "side": 1,
       "message": "why protected?",
+      "range": {
+        "startLine": 242,
+        "startChar": 1,
+        "endLine": 242,
+        "endChar": 10
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_e71b6b80",
+        "filename": "repo/includes/Api/EntitySavingHelper.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Made this private",
+      "parentUuid": "6e89af39_c7958f37",
       "range": {
         "startLine": 242,
         "startChar": 1,
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_da0ac623",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_872f07f3",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 19
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_a7340348",
         "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
         "patchSetId": 8
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_1a0c4e3d",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_a7340348",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_c7390f40",
         "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
         "patchSetId": 8
@@ -174,6 +318,30 @@
       "writtenOn": "2016-08-19T00:42:55Z",
       "side": 1,
       "message": "Exception|null",
+      "range": {
+        "startLine": 53,
+        "startChar": 11,
+        "endLine": 53,
+        "endChar": 20
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_fa0ea236",
+        "filename": "repo/tests/phpunit/includes/Api/EntityLoadingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_c7390f40",
       "range": {
         "startLine": 53,
         "startChar": 11,
@@ -220,6 +388,24 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_da21e69b",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_67de9be0",
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_e7a0cb40",
         "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
         "patchSetId": 8
@@ -231,6 +417,30 @@
       "writtenOn": "2016-08-19T00:42:55Z",
       "side": 1,
       "message": "array $params",
+      "range": {
+        "startLine": 205,
+        "startChar": 38,
+        "endLine": 205,
+        "endChar": 45
+      },
+      "revId": "a057410798654f47585f9866cca73594bc26758d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_5a16d64e",
+        "filename": "repo/tests/phpunit/includes/Api/EntitySavingHelperTest.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T01:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_e7a0cb40",
       "range": {
         "startLine": 205,
         "startChar": 38,
