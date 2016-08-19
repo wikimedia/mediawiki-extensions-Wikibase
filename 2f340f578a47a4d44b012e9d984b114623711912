@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_dde9e07c",
+        "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T11:51:32Z",
+      "side": 1,
+      "message": "Not really… the EntityRevisionLookups only need to forward the $mode to WikiPageEntityMetaDataAccessor correctly. I\u0027ve added a test for the various modes there and also added tests that the individual EntityRevisionLookup pass the $mode through correctly.",
+      "parentUuid": "6e89af39_bd80944c",
+      "revId": "2f340f578a47a4d44b012e9d984b114623711912",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_dd85605c",
         "filename": "repo/includes/Api/EntityLoadingHelper.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-08-19T09:14:03Z",
       "side": 1,
       "message": "conflicts with Ie9463149c8",
+      "revId": "2f340f578a47a4d44b012e9d984b114623711912",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_bde414a5",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-19T11:51:32Z",
+      "side": 1,
+      "message": "Already resolved in PS5.",
+      "parentUuid": "6e89af39_dd85605c",
       "revId": "2f340f578a47a4d44b012e9d984b114623711912",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
