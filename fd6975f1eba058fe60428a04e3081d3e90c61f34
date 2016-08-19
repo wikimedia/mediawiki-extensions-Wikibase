@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_f8578a5a",
+        "filename": "repo/resources/wikibase.ui.entityViewInit.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-19T14:35:12Z",
+      "side": 1,
+      "message": "Dead code.",
+      "revId": "fd6975f1eba058fe60428a04e3081d3e90c61f34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_d8d2ced4",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-19T14:35:12Z",
+      "side": 1,
+      "message": "Adrian explained this weird \"loop\" (look where \"controller\" is set) once to me. It is intended.",
+      "revId": "fd6975f1eba058fe60428a04e3081d3e90c61f34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_b8cd0237",
+        "filename": "view/resources/wikibase/view/StructureEditorFactory.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-19T14:35:12Z",
+      "side": 1,
+      "message": "Why is this necessary on add, but not on remove?",
+      "revId": "fd6975f1eba058fe60428a04e3081d3e90c61f34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
