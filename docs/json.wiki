@@ -1,12 +1,10 @@
-This document can be found [https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/docs/json.wiki in the Wikibase source code] and should be edited only there. It should be ensured that this page is up to date with the version in the code.
-
-= Wikibase JSON format =
-
 This document describes the canonical [[w:JSON|JSON]] format used to represent Wikibase entities in the API, in JSON dumps,
 as well as by Special:EntityData (when using JSON output).
 This format can be expected to be reasonably stable, and is designed with flexibility and robustness in mind.
 
-For an explanation of the terms used in this document, please refer to the Wikibase Glossary.
+For an explanation of the terms used in this document, please refer to the [[d:Wikidata:Glossary|Wikibase Glossary]]. For a specification of the semantics of the data structures described here, see the [[mw:Wikibase/DataModel|Wikibase Data Model]].
+
+''NOTE: The canonical copy of this document can be found [https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/docs/json.wiki in the Wikibase source code] and should be edited there. Changes can be requested by filing a ticket on [https://phabricator.wikimedia.org Phabricator].''
 
 == JSON Flavor ==
 
