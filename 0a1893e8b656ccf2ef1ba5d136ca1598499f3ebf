@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_ddd3a05f",
+        "filename": "client/tests/phpunit/includes/DataAccess/Scribunto/WikibaseLanguageDependentLuaBindingsTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-19T09:23:53Z",
+      "side": 1,
+      "message": "wrong class name",
+      "revId": "0a1893e8b656ccf2ef1ba5d136ca1598499f3ebf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
