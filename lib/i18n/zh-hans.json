@@ -11,7 +11,8 @@
 			"Yfdyh000",
 			"Zhuyifei1999",
 			"乌拉跨氪",
-			"Duolaimi"
+			"Duolaimi",
+			"Hanyanbo98"
 		]
 	},
 	"wikibase-lib-desc": "储存维基库及其客户端的共同功能",
@@ -73,8 +74,9 @@
 	"wikibase-validator-bad-value": "数据值格式有误：$1",
 	"wikibase-validator-bad-value-type": "错误值类型$1，预期为$2",
 	"wikibase-validator-bad-data-type": "错误的数据类型：$1",
-	"wikibase-validator-bad-url": "格式不正确的地址：$1",
-	"wikibase-validator-bad-url-scheme": "不被支持的URL方案：$1",
+	"wikibase-validator-bad-url": "URL不允许包含某些特定字符，例如空格和方括号。",
+	"wikibase-validator-url-scheme-missing": "此URL缺少类似于“http:// ”或“https:// ”的协议。",
+	"wikibase-validator-bad-url-scheme": "URL协议“$1”不受支持。",
 	"wikibase-validator-unknown-unit": "未知单位：$1",
 	"wikibase-validator-not-allowed": "非法值：$1",
 	"wikibase-validator-no-validators": "禁止的",
@@ -121,7 +123,7 @@
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "已更改[$2]的标签、描述和别名",
 	"wikibase-entity-summary-wbsetsitelink-add": "已添加至[$2]的链接",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "已添加有徽章的至[$2]的链接",
-	"wikibase-entity-summary-wbsetsitelink-set": "已添加指向[$2]的链接",
+	"wikibase-entity-summary-wbsetsitelink-set": "已更改指向[$2]的链接",
 	"wikibase-entity-summary-wbsetsitelink-set-badges": "已更改指向[$2]链接的徽章",
 	"wikibase-entity-summary-wbsetsitelink-set-both": "已更改指向[$2]的链接及其徽章",
 	"wikibase-entity-summary-wbsetsitelink-remove": "已移除至[$2]的链接",

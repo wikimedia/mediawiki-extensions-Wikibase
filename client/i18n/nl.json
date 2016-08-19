@@ -48,7 +48,6 @@
 	"wikibase-linkitem-not-loggedin-title": "U moet aangemeld zijn",
 	"wikibase-linkitem-not-loggedin": "U moet aangemeld zijn bij deze wiki en de [$1 centrale gegevensrepository] om deze functie te kunnen gebruiken.",
 	"wikibase-linkitem-success-link": "De pagina's zijn gekoppeld. U kunt het item met de koppelingen vinden in de [$1 centrale gegevensrepository].",
-	"wikibase-limitreport-entities-accessed": "Aantal Wikibase-entiteiten geladen",
 	"wikibase-property-notfound": "Eigenschap $1 niet gevonden.",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "verbergen",
@@ -74,5 +73,6 @@
 	"wikibase-property-render-error": "Het verwerken van de eigenschap $1 is mislukt: $2",
 	"wikibase-otherprojects": "In andere projecten",
 	"wikibase-otherprojects-beta-message": "Zijbalk andere projecten",
-	"wikibase-otherprojects-beta-description": "Voegt een \"{{int:wikibase-otherprojects}}\"-sectie toe aan de zijbalk welke toegang biedt tot andere Wikimedia-projecten op basis van gegevens van {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Voegt een \"{{int:wikibase-otherprojects}}\"-sectie toe aan de zijbalk welke toegang biedt tot andere Wikimedia-projecten op basis van gegevens van {{WBREPONAME}}.",
+	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}"
 }
