@@ -20,14 +20,16 @@ wikibase.view.ToolbarViewController = ( function( $, wb, mw ) {
  * @param {jQuery.wikibase.edittoolbar} toolbar
  * @param {jQuery.ui.EditableTemplatedWidget} view
  * @param {Function} removeView
+ * @param {Function} startEditingCallback
  */
 var SELF = util.inherit(
 	wb.view.ViewController,
-	function( model, toolbar, view, removeView ) {
+	function( model, toolbar, view, removeView, startEditingCallback ) {
 		this._model = model;
 		this._toolbar = toolbar;
 		this._view = view;
 		this._removeView = removeView;
+		this._startEditingCallback = startEditingCallback;
 	}
 );
 
@@ -62,6 +64,12 @@ SELF.prototype._view = null;
 SELF.prototype._removeView = null;
 
 /**
+ * @property {Function}
+ * @private
+ */
+SELF.prototype._startEditingCallback = null;
+
+/**
  * @param {Object|null} value A wikibase.datamodel object supporting at least an equals method.
  */
 SELF.prototype.setValue = function( value ) {
@@ -86,6 +94,7 @@ SELF.prototype.startEditing = function() {
 		this._view.widgetEventPrefix + 'disable',
 		$.proxy( this._updateToolbarState, this )
 	);
+	result.done( this._startEditingCallback );
 	return result;
 };
 
