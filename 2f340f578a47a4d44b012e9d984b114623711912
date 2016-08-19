@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_bd80944c",
+        "filename": "lib/tests/phpunit/EntityRevisionLookupTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-19T09:14:03Z",
+      "side": 1,
+      "message": "This should test the different modes now, right? \nWould need quite a bit of mocking...",
+      "revId": "2f340f578a47a4d44b012e9d984b114623711912",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_dd85605c",
+        "filename": "repo/includes/Api/EntityLoadingHelper.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-19T09:14:03Z",
+      "side": 1,
+      "message": "conflicts with Ie9463149c8",
+      "revId": "2f340f578a47a4d44b012e9d984b114623711912",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
