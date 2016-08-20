@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_ba7091a4",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-08-20T20:12:48Z",
+      "side": 1,
+      "message": "rev_touched?\n\nAnyway, ignored rev_deleted is fine. It\u0027s so unlikely to change and even then the lag probably won\u0027t effect it it.",
+      "parentUuid": "6e89af39_3a3d81b9",
+      "revId": "493d8c8337b28f97e8f6c701565a1f1e79224c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_2ea9c878",
         "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
         "patchSetId": 5
