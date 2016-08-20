@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_f4af928f",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-20T02:03:49Z",
+      "side": 1,
+      "message": "Given that revisions are immutable, it\u0027s fine for us to use the slave, even if LATEST_FROM_MASTER was requested. I\u0027ll add a comment about that.",
+      "parentUuid": "6e89af39_4e77f435",
+      "revId": "493d8c8337b28f97e8f6c701565a1f1e79224c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_2ea9c878",
         "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2016-08-19T20:08:39Z",
       "side": 1,
       "message": "I wonder why we\u0027re doing assert here, we aren\u0027t doing it in any of the many of similar functions e.g. in WikiPageEntityMetaDataLookup",
+      "revId": "493d8c8337b28f97e8f6c701565a1f1e79224c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_d4aa9681",
+        "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-20T02:03:49Z",
+      "side": 1,
+      "message": "Because this is used in many places in Wikibase (but only in Wikibase), so I wanted to make sure they all call it in the new way. I could do the same in WikiPageEntityMetaDataLookup, but I don\u0027t see the value right now, as that class is only used in very few places (here and tests, I think).",
+      "parentUuid": "6e89af39_2ea9c878",
       "revId": "493d8c8337b28f97e8f6c701565a1f1e79224c5c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
