@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_3a3d81b9",
+        "filename": "lib/includes/Store/Sql/PrefetchingWikiPageEntityMetaDataAccessor.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-20T20:08:00Z",
+      "side": 1,
+      "message": "rev_touched and rev_deleted arn\u0027t immutable... should be fine anyway, i guess. We are only talking about 30 seconds or so, right?",
+      "parentUuid": "6e89af39_f4af928f",
+      "revId": "493d8c8337b28f97e8f6c701565a1f1e79224c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_2ea9c878",
         "filename": "lib/includes/Store/Sql/WikiPageEntityRevisionLookup.php",
         "patchSetId": 5
