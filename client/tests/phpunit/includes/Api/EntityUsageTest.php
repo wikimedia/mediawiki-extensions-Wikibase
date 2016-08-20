@@ -10,6 +10,7 @@ use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
 use Wikibase\Client\Api\ApiPropsEntityUsage;
+use WikiPage;
 
 /**
  * @covers Wikibase\Client\Api\ApiPropsEntityUsage
@@ -18,12 +19,70 @@ use Wikibase\Client\Api\ApiPropsEntityUsage;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseClient
+ * @group Database
  *
- * @todo More tests, specially on database side
  * @license GPL-2.0+
  * @author Amir Sarabadani
  */
 class EntityUsageTest extends MediaWikiLangTestCase {
+
+	protected function setUp() {
+		parent::setUp();
+	}
+
+	public function addDBDataOnce() {
+		$db = wfGetDB( DB_MASTER );
+		$dump = [
+			'page' => [
+				[
+					'page_title' => 'Vienna',
+					'page_namespace' => 0,
+					'page_id' => 11,
+				],
+				[
+					'page_title' => 'Berlin',
+					'page_namespace' => 0,
+					'page_id' => 22,
+				],
+			],
+			'wbc_entity_usage' => [
+				[
+					'eu_page_id' => 11,
+					'eu_entity_id' => 'Q3',
+					'eu_aspect' => 'S'
+				],
+				[
+					'eu_page_id' => 11,
+					'eu_entity_id' => 'Q3',
+					'eu_aspect' => 'O'
+				],
+				[
+					'eu_page_id' => 22,
+					'eu_entity_id' => 'Q4',
+					'eu_aspect' => 'S'
+				],
+			],
+		];
+
+		foreach ( $dump as $table => $rows ) {
+			// Clean everything
+			$db->delete( $table, '*' );
+			if ( $table === 'page' ) {
+				foreach ( $rows as $row ) {
+					$title = Title::newFromText( $row['page_title'], $row['page_namespace'] );
+					$page = WikiPage::factory( $title );
+					$page->insertOn( $db, $row['page_id'] );
+				}
+			} else {
+				foreach ( $rows as $row ) {
+					$db->insert(
+						$table,
+						$row
+					);
+				}
+			}
+		}
+	}
 
 	/**
 	 * @param array $params
@@ -53,6 +112,7 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 		$query->expects( $this->any() )
 			->method( 'getPageSet' )
 			->will( $this->returnValue( $pageSet ) );
+
 		return $query;
 	}
 
@@ -78,25 +138,18 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param array $params
-	 * @param array[] $res
+	 * @param array[] $dump
 	 *
 	 * @return array[]
 	 */
-	private function callApiModule( array $params, array $res ) {
+	private function callApiModule( array $params ) {
 		$titles = $this->makeTitles( explode( '|', $params['titles'] ) );
 
-		$module = $this->getMockBuilder( ApiPropsEntityUsage::class )
-			->setConstructorArgs( [
-				$this->getQueryModule( $params, $titles ),
-				'entityusage'
-			] )
-			->setMethods( [ 'doQuery' ] )
-			->getMock();
+		$module = new ApiPropsEntityUsage(
+			$this->getQueryModule( $params, $titles ),
+			'entityusage'
+		);
 
-		// Inject a fake doQuery method
-		$module->expects( $this->any() )
-			->method( 'doQuery' )
-			->will( $this->returnValue( $this->doQuery( $res ) ) );
 		$module->execute();
 
 		$result = $module->getResult();
@@ -109,41 +162,17 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 	}
 
 	public function entityUsageProvider() {
-		$res = [
-			['page_title' => 'Vienna',
-			'page_namespace' => 0,
-			'page_id' => 11,
-			'eu_page_id' => 11,
-			'eu_entity_id' => 'Q3',
-			'eu_aspect' => 'S'
-			],
-			['page_title' => 'Vienna',
-			'page_namespace' => 0,
-			'page_id' => 11,
-			'eu_page_id' => 11,
-			'eu_entity_id' => 'Q3',
-			'eu_aspect' => 'O'
-			],
-			['page_title' => 'Berlin',
-			'page_namespace' => 0,
-			'page_id' => 22,
-			'eu_page_id' => 22,
-			'eu_entity_id' => 'Q4',
-			'eu_aspect' => 'S'
-			],
-		];
-
 		return [
 			'by title' => [
 				[
 					'action' => 'query',
 					'query' => 'entityusage',
-					'titles' => 'Vienna|Berlin',
+					'titles' => 'Vienna11|Berlin22',
 				],
 				["11" => [
 					"entityusage" => [
-						["aspect" => "S", "*" => "Q3"],
-						["aspect" => "O", "*" => "Q3"]
+						["aspect" => "O", "*" => "Q3"],
+						["aspect" => "S", "*" => "Q3"]
 					]
 				],
 				"22" => [
@@ -151,19 +180,18 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 						["aspect" => "S", "*" => "Q4"]
 					]
 				] ],
-				$res
 			],
 			'by entity' => [
 				[
 					'action' => 'query',
 					'query' => 'entityusage',
-					'titles' => 'Vienna|Berlin',
+					'titles' => 'Vienna11|Berlin22',
 					'entities' => 'Q3|Q4',
 				],
 				["11" => [
 					"entityusage" => [
-						["aspect" => "S", "*" => "Q3"],
-						["aspect" => "O", "*" => "Q3"]
+						["aspect" => "O", "*" => "Q3"],
+						["aspect" => "S", "*" => "Q3"]
 					]
 				],
 				"22" => [
@@ -171,20 +199,15 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 						["aspect" => "S", "*" => "Q4"]
 					]
 				] ],
-				$res
 			],
 		];
-	}
-
-	public function doQuery( $res ) {
-		return json_decode( json_encode( $res ), false );
 	}
 
 	/**
 	 * @dataProvider entityUsageProvider
 	 */
-	public function testEntityUsage( array $params, array $expected, array $res ) {
-		$result = $this->callApiModule( $params, $res );
+	public function testEntityUsage( array $params, array $expected ) {
+		$result = $this->callApiModule( $params );
 
 		if ( isset( $result['error'] ) ) {
 			$this->fail( 'API error: ' . print_r( $result['error'], true ) );
