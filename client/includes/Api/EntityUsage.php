@@ -79,16 +79,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		] );
 
 		$this->addTables( 'wbc_entity_usage' );
-		if ( $pagesCount !== 0 ) {
-			$this->addWhereFld( 'eu_page_id', array_keys( $pages ) );
-		} else {
-			$this->addTables( 'page' );
-			$this->addJoinConds( [ 'wbc_entity_usage' => [ 'INNER JOIN', 'eu_page_id=page_id'] ] );
-			$this->addFields( [
-				'page_title',
-				'page_namespace',
-			] );
-		}
+		$this->addWhereFld( 'eu_page_id', array_keys( $pages ) );
 
 		if ( isset( $params['entities'] ) ) {
 			$this->addWhereFld( 'eu_entity_id',  $params['entities'] );
