@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Yueman"
+			"Yueman",
+			"Obonggi"
 		]
 	},
-	"wikibase-sitelinks-wikipedia": "維基百科"
+	"wikibase-sitelinks-wikipedia": "維基百科",
+	"wikibase-validator-bad-url": "不允許包含某啲字符（例如空格同方括號）嘅鏈接"
 }
