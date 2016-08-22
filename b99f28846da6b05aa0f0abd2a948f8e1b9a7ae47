@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_fa8cd401",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-22T13:20:13Z",
+      "side": 1,
+      "message": "This variable is no longer needed.",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 13
+      },
+      "revId": "b99f28846da6b05aa0f0abd2a948f8e1b9a7ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_9a64b047",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-22T13:20:13Z",
+      "side": 1,
+      "message": "Should not use fully qualified class name.",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "b99f28846da6b05aa0f0abd2a948f8e1b9a7ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_5a52486b",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-22T13:20:13Z",
+      "side": 1,
+      "message": "This should probably not be part of the provider, but rather be an own getTestData method (or so)",
+      "range": {
+        "startLine": 126,
+        "startChar": 2,
+        "endLine": 126,
+        "endChar": 7
+      },
+      "revId": "b99f28846da6b05aa0f0abd2a948f8e1b9a7ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
