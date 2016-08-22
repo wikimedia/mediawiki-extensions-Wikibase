@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_9aeaf071",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-22T13:26:36Z",
+      "side": 1,
+      "message": "Check out the line 71 (below)",
+      "parentUuid": "6e89af39_fa8cd401",
+      "revId": "b99f28846da6b05aa0f0abd2a948f8e1b9a7ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_9a64b047",
         "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
         "patchSetId": 2
@@ -48,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "6e89af39_fae9347c",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-22T13:26:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_9a64b047",
+      "revId": "b99f28846da6b05aa0f0abd2a948f8e1b9a7ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_5a52486b",
         "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
         "patchSetId": 2
@@ -65,6 +101,24 @@
         "endLine": 126,
         "endChar": 7
       },
+      "revId": "b99f28846da6b05aa0f0abd2a948f8e1b9a7ae47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_7af5444c",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-22T13:26:36Z",
+      "side": 1,
+      "message": "I think it would make things easier to have several types of test in future like, one for adding certain pages and one for another type of pages.",
+      "parentUuid": "6e89af39_5a52486b",
       "revId": "b99f28846da6b05aa0f0abd2a948f8e1b9a7ae47",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
