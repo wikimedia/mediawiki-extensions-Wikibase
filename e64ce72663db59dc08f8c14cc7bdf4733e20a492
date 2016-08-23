@@ -39,6 +39,24 @@
       "revId": "e64ce72663db59dc08f8c14cc7bdf4733e20a492",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_eeb88976",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-23T19:13:00Z",
+      "side": 1,
+      "message": "If you do this in setUp, be careful to do it after calling parent::setUp.",
+      "parentUuid": "6e89af39_680bb128",
+      "revId": "e64ce72663db59dc08f8c14cc7bdf4733e20a492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
