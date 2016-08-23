@@ -1,6 +1,9 @@
 Wikibase allows exporting data in RDF format. See details of the implementation in:
 https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format
 
+Changes to the RDF mapping are however subject to the Stable Interface Policy,
+see <https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy>.
+
 Change log
 ----------
 The following are the RDF format versions, see FORMAT_VERSION in RdfVocabulary.php:
