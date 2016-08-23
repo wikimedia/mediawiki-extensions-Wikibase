@@ -16,6 +16,7 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Test\StringNormalizerTest;
 
 /**
  * Term lookup cache.
@@ -226,7 +227,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 			$term->setLanguage( $languageCode );
 			$term->setType( $termType );
-			$term->setText( $text );
+			$term->setText( $this->fixTerm( $text ) );
 
 			$terms[] = $term;
 		}
@@ -251,7 +252,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 				$term->setLanguage( $languageCode );
 				$term->setType( TermIndexEntry::TYPE_ALIAS );
-				$term->setText( $alias );
+				$term->setText( $this->fixTerm( $alias ) );
 
 				$terms[] = $term;
 			}
@@ -339,7 +340,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		$fields = array(
 			'term_language' => $term->getLanguage(),
 			'term_type' => $term->getType(),
-			'term_text' => $term->getText(),
+			'term_text' => $term->getText(), // XXX: do we want to apply normalization here?
 			'term_search_key' => $this->getSearchKey( $term->getText() )
 		);
 
@@ -771,6 +772,10 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 				$matchingTerm[$this->termFieldMap[$key]] = $value;
 			}
 
+			if ( isset( $matchingTerm['termText'] ) ) {
+				$matchingTerm['termText'] = $this->fixTerm( $matchingTerm['termText'] );
+			}
+
 			$matchingTerms[] = new TermIndexEntry( $matchingTerm );
 		}
 
@@ -939,7 +944,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 				foreach ( $types as $type ) {
 					$terms[] = new TermIndexEntry( array(
-						'termText' => $text,
+						'termText' => $this->fixTerm( $text ),
 						'termLanguage' => $lang,
 						'termType' => $type,
 					) );
@@ -997,6 +1002,16 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		}
 
 		return $normalized;
+	}
+
+	/**
+	 * Fixes string possibly broken by truncation in the database.
+	 *
+	 * @param string $text
+	 * @return string
+	 */
+	private function fixTerm( $text ) {
+		return $this->stringNormalizer->trimBadChars( $text );
 	}
 
 }
