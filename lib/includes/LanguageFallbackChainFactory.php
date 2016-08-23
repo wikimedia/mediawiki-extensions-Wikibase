@@ -7,6 +7,7 @@ use IContextSource;
 use InvalidArgumentException;
 use Language;
 use LanguageConverter;
+use LogicException;
 use MWException;
 use User;
 
@@ -52,18 +53,9 @@ class LanguageFallbackChainFactory {
 	private $userLanguageCache;
 
 	/**
-	 * @var bool
+	 * @var callback
 	 */
-	private $anonymousPageViewCached;
-
-	/**
-	 * @param bool $anonymousPageViewCached Whether full page outputs are cached for anons, so some
-	 *                                      fine-grained fallbacks shouldn't be used for them.
-	 */
-	public function __construct( $anonymousPageViewCached = false ) {
-		// @fixme fix instantiation of factory in various lib classes
-		$this->anonymousPageViewCached = $anonymousPageViewCached;
-	}
+	private $getLanguageFallbacksFor = 'Language::getFallbacksFor';
 
 	/**
 	 * Get the fallback chain based a single language, and specified fallback level.
@@ -175,7 +167,9 @@ class LanguageFallbackChainFactory {
 			$recursiveMode = $mode;
 			$recursiveMode &= self::FALLBACK_VARIANTS;
 			$recursiveMode |= self::FALLBACK_SELF;
-			foreach ( Language::getFallbacksFor( $languageCode ) as $other ) {
+
+			$fallbacks = call_user_func( $this->getLanguageFallbacksFor, $languageCode );
+			foreach ( $fallbacks as $other ) {
 				$this->buildFromLanguage( $other, $recursiveMode, $chain, $fetched );
 			}
 		}
@@ -319,6 +313,19 @@ class LanguageFallbackChainFactory {
 		}
 
 		return $chain;
+	}
+
+	/**
+	 * @param callable $getLanguageFallbacksFor
+	 */
+	public function setGetLanguageFallbacksFor( $getLanguageFallbacksFor ) {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			throw new LogicException(
+				'Overriding the getLanguageFallbacksFor function is only supported in test mode'
+			);
+		}
+
+		$this->getLanguageFallbacksFor = $getLanguageFallbacksFor;
 	}
 
 }
