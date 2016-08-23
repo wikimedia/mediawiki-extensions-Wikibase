@@ -145,7 +145,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$this->assertEquals( $expected, $entityArray, 'getEntity' );
 
 		$label = $luaWikibaseLibrary->getLabel( 'Q885588' );
-		$this->assertEquals( array( 'پسیک' ), $label, 'getLabel' );
+		$this->assertEquals( array( 'پسیک', 'ku-arab' ), $label, 'getLabel' );
 
 		// All languages in the fallback chain for 'ku-arab' count as "used".
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
@@ -232,9 +232,15 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$label = $luaWikibaseLibrary->getLabel( 'Q32487' );
 
 		if ( $allowDataAccessInUserLanguage ) {
-			$this->assertSame( 'Lua Test Item', $label[0] );
+			$this->assertSame(
+				array( 'Lua Test Item', 'de' ),
+				$label
+			);
 		} else {
-			$this->assertSame( 'Test all the code paths', $label[0] );
+			$this->assertSame(
+				array( 'Test all the code paths', 'en' ),
+				$label
+			);
 		}
 
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );

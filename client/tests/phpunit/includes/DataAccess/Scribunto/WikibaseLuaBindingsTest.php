@@ -55,11 +55,11 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 		$labelDescriptionLookup = $this->getMock( LabelDescriptionLookup::class );
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getLabel' )
-			->will( $this->returnValue( new Term( 'xy', 'LabelString' ) ) );
+			->will( $this->returnValue( new Term( 'lang-code', 'LabelString' ) ) );
 
 		$labelDescriptionLookup->expects( $this->any() )
 			->method( 'getDescription' )
-			->will( $this->returnValue( new Term( 'xy', 'DescriptionString' ) ) );
+			->will( $this->returnValue( new Term( 'lang-code', 'DescriptionString' ) ) );
 
 		return new WikibaseLuaBindings(
 			new BasicEntityIdParser(),
@@ -115,8 +115,8 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 	public function getLabelProvider() {
 		return array(
-			array( 'LabelString', 'Q123' ),
-			array( null, 'DoesntExist' )
+			array( array( 'LabelString', 'lang-code' ), 'Q123' ),
+			array( array( null, null ), 'DoesntExist' )
 		);
 	}
 
@@ -154,8 +154,8 @@ class WikibaseLuaBindingsTest extends \PHPUnit_Framework_TestCase {
 
 	public function getDescriptionProvider() {
 		return array(
-			array( 'DescriptionString', 'Q123' ),
-			array( null, 'DoesntExist' )
+			array( array( 'DescriptionString', 'lang-code' ), 'Q123' ),
+			array( array( null, null ), 'DoesntExist' )
 		);
 	}
 
