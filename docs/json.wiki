@@ -16,7 +16,7 @@ When encoding the Wikibase data structure as JSON, several choices have been mad
 ** using either Unicode escape sequences (like \u0645) resulting in a UTF16 representation when decoded.
 ** ...or using native UTF8 encoding.
 * Numbers may be given in two ways:
-** integers from -31^2+1 to +31^2-1 may be represented as number literals.
+** integers from -(2^31) to 2^31-1 may be represented as number literals.
 ** all numbers may be represented as decimal strings. In particular, quantity values are represented as arbitrary precision decimal strings.
 * Entity IDs are given as upper-case strings, e.g. "P29" or "Q623289".
 * In JSON dumps, each entity is encoded in as a single line. This allows consumers to process the dump line by line, decoding each entity separately.
