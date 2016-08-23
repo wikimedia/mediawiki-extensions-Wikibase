@@ -16,6 +16,23 @@
       "revId": "be80df5f11cf30651d3906722c703b04b33988f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_8871bd0d",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-23T15:37:02Z",
+      "side": 1,
+      "message": "This can be reduced with the change above, possibly to 100 or even lower.",
+      "revId": "be80df5f11cf30651d3906722c703b04b33988f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
