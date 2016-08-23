@@ -35,7 +35,8 @@
 	 */
 	var newTestEntitySelector = function( options ) {
 		options = $.extend( {
-			source: entityStubs
+			source: entityStubs,
+			delay: 0 // Time waster, also some tests below assume this to be < 100ms
 		}, options || {} );
 
 		return $( '<input />' )
@@ -106,7 +107,7 @@
 
 		window.setTimeout( function() {
 			QUnit.start();
-		}, 200 );
+		}, 100 );
 	} );
 
 	QUnit.test( 'Item constructor', function( assert ) {
