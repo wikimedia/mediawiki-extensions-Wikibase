@@ -35,7 +35,8 @@
 	 */
 	var newTestEntitySelector = function( options ) {
 		options = $.extend( {
-			source: entityStubs
+			source: entityStubs,
+			delay: 25 // Time waster, also some tests below assume this to be < 200ms
 		}, options || {} );
 
 		return $( '<input />' )
