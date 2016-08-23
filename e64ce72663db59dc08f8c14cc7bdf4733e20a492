@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_4806f521",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-23T14:16:28Z",
+      "side": 1,
+      "message": "Shouldn\u0027t use fully qualified class names",
+      "range": {
+        "startLine": 35,
+        "startChar": 30,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "e64ce72663db59dc08f8c14cc7bdf4733e20a492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_680bb128",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-23T14:16:28Z",
+      "side": 1,
+      "message": "You should do this once in setUp… the tests can all act on the same data.",
+      "revId": "e64ce72663db59dc08f8c14cc7bdf4733e20a492",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
