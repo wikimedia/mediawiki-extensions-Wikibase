@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e89af39_ae520168",
+        "filename": "repo/includes/Store/EntitiesWithoutTerm.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-23T19:01:50Z",
+      "side": 1,
+      "message": "Hm... name... EntitiesWithoutTermFinder? EntitiesWithoutTermLookup? EntitiesWithoutTermQuery?",
+      "revId": "5bf5e3ed4380d0dcc7ed1ef47b468683f0920123",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e89af39_ce4f4dbf",
+        "filename": "repo/includes/Store/ItemsWithoutSitelinks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-23T19:01:50Z",
+      "side": 1,
+      "message": "Again, name... ItemsWithoutSitelinksFinder or something?",
+      "revId": "5bf5e3ed4380d0dcc7ed1ef47b468683f0920123",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
