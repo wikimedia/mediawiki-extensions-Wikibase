@@ -19,7 +19,8 @@
 			"Yahya Sakhnini",
 			"Mervat Salman",
 			"Shbib Al-Subaie",
-			"Maroen1990"
+			"Maroen1990",
+			"بدارين"
 		]
 	},
 	"wikibase-desc": "مستودع بيانات مهيكلة",
@@ -66,7 +67,7 @@
 	"wikibase-sitelinks-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|لا مدخلات|مدخلة واحدة|مدخلتان|$1 مدخلات|$1 مدخلة}}",
 	"wikibase-sitelinks-empty": "لا ترتبط أي صفحات بهذا العنصر بعد.",
 	"wikibase-sitelinks-special": "مواقع أخرى",
-	"wikibase-remove": "ألغ",
+	"wikibase-remove": "حذف",
 	"wikibase-move-up": "تحريك للأعلى",
 	"wikibase-move-down": "تحريك للأسفل",
 	"wikibase-undo-title": "الرجوع عن التعديل إلى \"$1\"",

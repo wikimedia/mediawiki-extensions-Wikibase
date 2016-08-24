@@ -40,7 +40,6 @@
 	"wikibase-linkitem-not-loggedin-title": "Bạn cần đăng nhập",
 	"wikibase-linkitem-not-loggedin": "Bạn cần đăng nhập vào cả wiki này lẫn [$1 kho dữ liệu chung] để sử dụng tính năng này.",
 	"wikibase-linkitem-success-link": "Các trang đã được liên kết với nhau. Xem khoản mục chứa các liên kết trong [$1 kho dữ liệu chung].",
-	"wikibase-limitreport-entities-accessed": "Số thục thể Wikibase được tải",
 	"wikibase-property-notfound": "Không tìm thấy thuộc tính $1.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ẩn",
@@ -69,5 +68,11 @@
 	"wikibase-property-render-error": "Thất bại khi kết xuất thuộc tính $1: $2",
 	"wikibase-otherprojects": "Tại dự án khác",
 	"wikibase-otherprojects-beta-message": "Hộp thanh bên dự án khác",
-	"wikibase-otherprojects-beta-description": "Thêm hộp thanh bên “{{int:wikibase-otherprojects}}” có liên kết đến các dự án Wikimedia khác theo dữ liệu {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Thêm hộp thanh bên “{{int:wikibase-otherprojects}}” có liên kết đến các dự án Wikimedia khác theo dữ liệu {{WBREPONAME}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Liên kết|Các liên kết}} từ {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Báo cho tôi biết khi có người liên kết một trang tôi tạo ra với khoản mục {{WBREPONAME}}.",
+	"notification-header-page-connection": "Trang <strong>$3</strong> đã được {{GENDER:$2}}liên kết với khoản mục {{WBREPONAME}}.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> và {{PLURAL:$4|một trang|$4 trang|100=99+ trang}} khác được  {{GENDER:$2}}liên kết với khoản mục {{WBREPONAME}}.",
+	"notification-link-text-view-item": "{{GENDER:$1}}Xem khoản mục",
+	"notification-subject-page-connection": "Một trang {{GENDER:$3}}bạn đã tạo ra tại {{SITENAME}} được {{GENDER:$2}}liên kết với khoản mục {{WBREPONAME}}"
 }

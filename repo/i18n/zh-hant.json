@@ -16,7 +16,8 @@
 			"Zhxy 519",
 			"飞舞回堂前",
 			"Gi25ni",
-			"一個正常人"
+			"一個正常人",
+			"Kanashimi"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -312,6 +313,7 @@
 	"wikibase-listdatatypes-time-body": "時間值的原始資料字段。給出一個含精度及邊界的時間。時間於內部儲存為外推格里高利歷的格式，但在解析及排版時可用其他格式。\n*時間 – 時間點的明確值，根據 ISO8601，年都表示為 11 位數字且日期均帶有符號，格式為+00000002013-01-01T00:00:00Z\n*時區 – 明確有符號的整數。時區信息是以分為單位以國際標準時間 (UTC) 為基準的一個偏移量。\n*之前 – 表示它發生時可能晚於給定時間多少單位。單位由精度給定。\n*之後 – 表示它發生時可能早於給定時間多少單位。單位由精度給定。\n*精度 – 編碼為短整數的明確值。這些數值有以下意義：0-十億年、1-億年、…、6-千年、7-世紀、8-十年、9-年、10-月、11-日、12-時、13-分、14-秒。\n*日曆模型 – 由一個 URI 給定的明確值。它可以確定用於顯示時間值的日曆模型。",
 	"wikibase-listdatatypes-url-head": "URL",
 	"wikibase-listdatatypes-url-body": "一個 URL 的文字字元。URL 被限制於外部連結的方式寫於維基文字中。",
+	"wikibase-listdatatypes-external-id-head": "外部識別符",
 	"wikibase-concept-uri": "概念 URI",
 	"wikibase-concept-uri-tooltip": "URI 用來辦識此項目所描述的概念",
 	"datatypes-type-url": "URL",
