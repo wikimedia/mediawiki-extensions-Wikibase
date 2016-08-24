@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e96ab59_dbd65ff6",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-24T18:38:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_08178da9",
+      "revId": "be80df5f11cf30651d3906722c703b04b33988f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_8871bd0d",
         "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-08-23T15:37:02Z",
       "side": 1,
       "message": "This can be reduced with the change above, possibly to 100 or even lower.",
+      "revId": "be80df5f11cf30651d3906722c703b04b33988f5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_bbc99357",
+        "filename": "view/tests/qunit/jquery/wikibase/jquery.wikibase.entityselector.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-24T18:38:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e89af39_8871bd0d",
       "revId": "be80df5f11cf30651d3906722c703b04b33988f5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
