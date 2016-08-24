@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
@@ -157,7 +158,7 @@ class EntityParserOutputGenerator {
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
-		$parserOutput->setExtensionData( 'wikibase-titletext', $this->getTitleText( $entity ) );
+		$parserOutput->setExtensionData( 'wikibase-meta-tags', $this->getMetaTags( $entity ) );
 
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
@@ -233,7 +234,29 @@ class EntityParserOutputGenerator {
 	/**
 	 * @param EntityDocument $entity
 	 *
-	 * @return string
+	 * @return string[]
+	 */
+	private function getMetaTags( EntityDocument $entity ) {
+		$meta = [
+			'title' => $this->getTitleText( $entity ),
+		];
+
+		if ( $entity instanceof DescriptionsProvider ) {
+			$descriptions = $entity->getDescriptions()->toTextArray();
+			$preferred = $this->languageFallbackChain->extractPreferredValue( $descriptions );
+
+			if ( is_array( $preferred ) ) {
+				$meta['description'] = $preferred['value'];
+			}
+		}
+
+		return $meta;
+	}
+
+	/**
+	 * @param EntityDocument $entity
+	 *
+	 * @return string|null
 	 */
 	private function getTitleText( EntityDocument $entity ) {
 		$titleText = null;

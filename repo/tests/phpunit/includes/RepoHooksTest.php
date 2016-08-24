@@ -229,16 +229,8 @@ XML
 
 		RepoHooks::onOutputPageParserOutput( $out, $parserOutput );
 
-		$this->assertSame(
-			'wikibase-view-chunks',
-			$out->getProperty( 'wikibase-view-chunks' )
-		);
-
-		$this->assertSame(
-			'wikibase-titletext',
-			$out->getProperty( 'wikibase-titletext' )
-		);
-
+		$this->assertSame( 'wikibase-view-chunks', $out->getProperty( 'wikibase-view-chunks' ) );
+		$this->assertSame( 'wikibase-meta-tags', $out->getProperty( 'wikibase-meta-tags' ) );
 		$this->assertSame( $altLinks, $out->getLinkTags() );
 	}
 
