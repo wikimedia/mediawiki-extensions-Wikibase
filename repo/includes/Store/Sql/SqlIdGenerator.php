@@ -62,11 +62,7 @@ class SqlIdGenerator implements IdGenerator {
 	 * @return int
 	 */
 	private function generateNewId( DatabaseBase $database, $type, $retry = true ) {
-		$trx = $database->trxLevel();
-
-		if ( $trx == 0 ) {
-			$database->begin( __METHOD__ );
-		}
+		$database->startAtomic( __METHOD__ );
 
 		$currentId = $database->selectRow(
 			'wb_id_counters',
@@ -103,9 +99,7 @@ class SqlIdGenerator implements IdGenerator {
 			}
 		}
 
-		if ( $trx == 0 ) {
-			$database->commit( __METHOD__ );
-		}
+		$database->endAtomic( __METHOD__ );
 
 		if ( !$success ) {
 			throw new MWException( 'Could not generate a reliably unique ID.' );
