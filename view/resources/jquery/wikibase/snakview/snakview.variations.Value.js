@@ -400,7 +400,7 @@
 			}
 		},
 
-		/*
+		/**
 		 * @inheritdoc
 		 */
 		isFocusable: function() {

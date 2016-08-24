@@ -245,6 +245,13 @@ $.widget( 'wikibase.snakview', PARENT, {
 			}
 		} )
 		.on( 'entityselectorselected', function( event, entityId ) {
+			if ( self._variation ) {
+				// A new property has been selected:
+				// Remove the existing variation as it's impossible to change
+				// the property id in the variation and its dependencies.
+				self._variation.destroy();
+				self._variation = null;
+			}
 			self._selectProperty();
 		} );
 	},
