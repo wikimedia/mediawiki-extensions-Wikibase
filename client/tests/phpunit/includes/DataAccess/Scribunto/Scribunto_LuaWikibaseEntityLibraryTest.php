@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
+use Language;
 use LuaSandboxFunction;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
@@ -79,20 +80,14 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		);
 	}
 
-	/**
-	 * @dataProvider allowDataAccessInUserLanguageProvider
-	 */
-	public function testGetGlobalSiteId( $allowDataAccessInUserLanguage ) {
-		$cacheSplit = false;
-		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+	public function testGetGlobalSiteId() {
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 
 		$expected = array(
 			WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'siteGlobalID' )
 		);
 
 		$this->assertSame( $expected, $luaWikibaseLibrary->getGlobalSiteId() );
-		$this->assertFalse( $cacheSplit );
 	}
 
 	/**
@@ -128,7 +123,8 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$cacheSplit = false;
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$lang = Language::factory( 'es' );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 
 		$this->assertSame(
 			array( 'Q885588' ),
@@ -139,11 +135,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$this->assertArrayHasKey( 'Q885588#T', $usages );
 
 		if ( $allowDataAccessInUserLanguage ) {
-			global $wgUser;
-
-			$userLang = $wgUser->getOption( 'language' );
-
-			$this->assertArrayHasKey( 'Q885588#L.' . $userLang, $usages );
+			$this->assertArrayHasKey( 'Q885588#L.' . $lang->getCode(), $usages );
 		} else {
 			$this->assertArrayHasKey( 'Q885588#L.de', $usages );
 		}
@@ -151,12 +143,22 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
 	}
 
-	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false ) {
+	/**
+	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
+	 * @param Language|null $userLang The user's language
+	 *
+	 * @return Scribunto_LuaWikibaseLibrary
+	 */
+	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
 		/* @var $engine Scribunto_LuaEngine */
 		$engine = $this->getEngine();
 		$engine->load();
 
-		$engine->getParser()->getOptions()->registerWatcher(
+		$parserOptions = $engine->getParser()->getOptions();
+		if ( $userLang ) {
+			$parserOptions->setUserLang( $userLang );
+		}
+		$parserOptions->registerWatcher(
 			function( $optionName ) use ( &$cacheSplit ) {
 				$this->assertSame( 'userlang', $optionName );
 				$cacheSplit = true;

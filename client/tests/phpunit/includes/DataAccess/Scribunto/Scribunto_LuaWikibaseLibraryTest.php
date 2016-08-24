@@ -7,7 +7,6 @@ use LuaSandboxFunction;
 use Scribunto_LuaEngine;
 use Scribunto_LuaStandaloneInterpreterFunction;
 use ScribuntoException;
-use User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\RepoLinker;
@@ -177,9 +176,14 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testGetEntityId() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		// Cache is not split, even if "allowDataAccessInUserLanguage" is true.
+		$this->setAllowDataAccessInUserLanguage( true );
+		$cacheSplit = false;
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+
 		$entityId = $luaWikibaseLibrary->getEntityId( 'CanHazKitten123' );
 		$this->assertEquals( array( null ), $entityId );
+		$this->assertFalse( $cacheSplit );
 	}
 
 	public function getEntityUrlProvider() {
@@ -193,11 +197,13 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	 * @dataProvider getEntityUrlProvider
 	 */
 	public function testGetEntityUrl( $expected, $entityIdSerialization ) {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$cacheSplit = false;
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 		$luaWikibaseLibrary->setRepoLinker( $this->getRepoLinker() );
 		$result = $luaWikibaseLibrary->getEntityUrl( $entityIdSerialization );
 
 		$this->assertSame( $expected, $result );
+		$this->assertFalse( $cacheSplit );
 	}
 
 	private function getRepoLinker() {
@@ -217,18 +223,15 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
 	public function testGetLabel( $allowDataAccessInUserLanguage ) {
-		$user = new User();
-		$user->setOption( 'language', 'de' );
-
-		$this->setMwGlobals( array(
-			'wgContLang' => Language::factory( 'en' ),
-			'wgUser' => $user
-		) );
+		$this->setMwGlobals( 'wgContLang', Language::factory( 'en' ) );
 
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 		$cacheSplit = false;
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary(
+			$cacheSplit,
+			Language::factory( 'de' )
+		);
 		$label = $luaWikibaseLibrary->getLabel( 'Q32487' );
 
 		if ( $allowDataAccessInUserLanguage ) {
@@ -252,8 +255,9 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnak( $allowDataAccessInUserLanguage ) {
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 		$cacheSplit = false;
+		$lang = Language::factory( 'es' );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32488' );
 
 		$snak = $entityArr[0]['claims']['P456'][1]['mainsnak'];
@@ -267,11 +271,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$usage = $luaWikibaseLibrary->getUsageAccumulator()->getUsages();
 
 		if ( $allowDataAccessInUserLanguage ) {
-			global $wgUser;
-
-			$userLang = $wgUser->getOption( 'language' );
-
-			$this->assertArrayHasKey( 'Q885588#L.' . $userLang, $usage );
+			$this->assertArrayHasKey( 'Q885588#L.' . $lang->getCode(), $usage );
 		} else {
 			$this->assertArrayHasKey( 'Q885588#L.de', $usage );
 		}
@@ -321,12 +321,14 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	}
 
 	public function testResolvePropertyId() {
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
+		$cacheSplit = false;
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
 
 		$this->assertSame(
 			array( 'P342' ),
 			$luaWikibaseLibrary->resolvePropertyId( 'LuaTestStringProperty' )
 		);
+		$this->assertFalse( $cacheSplit );
 	}
 
 	public function testResolvePropertyId_propertyIdGiven() {
@@ -424,15 +426,20 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	/**
 	 * @param bool &$cacheSplit Will become true when the ParserCache has been split
+	 * @param Language|null $userLang The user's language
 	 *
 	 * @return Scribunto_LuaWikibaseLibrary
 	 */
-	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false ) {
+	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
 		/* @var $engine Scribunto_LuaEngine */
 		$engine = $this->getEngine();
 		$engine->load();
 
-		$engine->getParser()->getOptions()->registerWatcher(
+		$parserOptions = $engine->getParser()->getOptions();
+		if ( $userLang ) {
+			$parserOptions->setUserLang( $userLang );
+		}
+		$parserOptions->registerWatcher(
 			function( $optionName ) use ( &$cacheSplit ) {
 				$this->assertSame( 'userlang', $optionName );
 				$cacheSplit = true;

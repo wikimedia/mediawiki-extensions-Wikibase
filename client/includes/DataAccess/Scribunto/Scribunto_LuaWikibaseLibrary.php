@@ -38,9 +38,14 @@ use Wikibase\Lib\Store\PropertyOrderProvider;
 class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 
 	/**
-	 * @var WikibaseLuaBindings|null
+	 * @var WikibaseLanguageIndependentLuaBindings|null
 	 */
-	private $luaBindings = null;
+	private $languageIndependentLuaBindings = null;
+
+	/**
+	 * @var WikibaseLanguageDependentLuaBindings|null
+	 */
+	private $languageDependentLuaBindings = null;
 
 	/**
 	 * @var EntityAccessor|null
@@ -83,14 +88,25 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $repoLinker = null;
 
 	/**
-	 * @return WikibaseLuaBindings
+	 * @return WikibaseLanguageIndependentLuaBindings
 	 */
-	private function getLuaBindings() {
-		if ( $this->luaBindings === null ) {
-			$this->luaBindings = $this->newLuaBindings();
+	private function getLanguageIndependentLuaBindings() {
+		if ( $this->languageIndependentLuaBindings === null ) {
+			$this->languageIndependentLuaBindings = $this->newLanguageIndependentLuaBindings();
 		}
 
-		return $this->luaBindings;
+		return $this->languageIndependentLuaBindings;
+	}
+
+	/**
+	 * @return WikibaseLanguageDependentLuaBindings
+	 */
+	private function getLanguageDependentLuaBindings() {
+		if ( $this->languageDependentLuaBindings === null ) {
+			$this->languageDependentLuaBindings = $this->newLanguageDependentLuaBindings();
+		}
+
+		return $this->languageDependentLuaBindings;
 	}
 
 	/**
@@ -160,10 +176,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * language, otherwise it will be the content language.
 	 * In a perfect world, this would equal Parser::getTargetLanguage.
 	 *
-	 * This doesn't split the ParserCache by language yet, please see
-	 * self::splitParserCacheIfMultilingual for that.
-	 *
 	 * This can probably be removed after T114640 has been implemented.
+	 *
+	 * Please note, that this splits the parser cache by user language, if
+	 * allowDataAccessInUserLanguage is true.
 	 *
 	 * @return Language
 	 */
@@ -171,23 +187,10 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		global $wgContLang;
 
 		if ( $this->allowDataAccessInUserLanguage() ) {
-			// Can't use ParserOptions::getUserLang as that already splits the ParserCache
-			$userLang = $this->getParserOptions()->getUser()->getOption( 'language' );
-
-			return Language::factory( $userLang );
+			return $this->getParserOptions()->getUserLangObj();
 		}
 
 		return $wgContLang;
-	}
-
-	/**
-	 * Splits the page's ParserCache in case we're on a multilingual wiki
-	 */
-	private function splitParserCacheIfMultilingual() {
-		if ( $this->allowDataAccessInUserLanguage() ) {
-			// ParserOptions::getUserLang splits the ParserCache
-			$this->getParserOptions()->getUserLang();
-		}
 	}
 
 	/**
@@ -203,7 +206,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new EntityAccessor(
-			$wikibaseClient->getEntityIdParser(),
+			$this->getEntityIdParser(),
 			$wikibaseClient->getRestrictedEntityLookup(),
 			$this->getUsageAccumulator(),
 			$wikibaseClient->getEntitySerializer(
@@ -243,7 +246,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		);
 	}
 
-	private function newLuaBindings() {
+	private function newLanguageDependentLuaBindings() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$usageAccumulator = $this->getUsageAccumulator();
 
@@ -255,15 +258,33 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$this->getLanguageFallbackChain()
 		);
 
-		return new WikibaseLuaBindings(
-			$wikibaseClient->getEntityIdParser(),
-			$wikibaseClient->getStore()->getEntityLookup(),
+		return new WikibaseLanguageDependentLuaBindings(
+			$this->getEntityIdParser(),
+			$labelDescriptionLookup,
+			$usageAccumulator
+		);
+	}
+
+	private function newLanguageIndependentLuaBindings() {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
+		return new WikibaseLanguageIndependentLuaBindings(
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$wikibaseClient->getSettings(),
-			$labelDescriptionLookup,
-			$usageAccumulator,
+			$this->getUsageAccumulator(),
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
+	}
+
+	/**
+	 * @return EntityIdParser
+	 */
+	private function getEntityIdParser() {
+		if ( !$this->entityIdParser ) {
+			$wikibaseClient = WikibaseClient::getDefaultInstance();
+			$this->entityIdParser = $wikibaseClient->getEntityIdParser();
+		}
+		return $this->entityIdParser;
 	}
 
 	/**
@@ -311,7 +332,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getEntity( $prefixedEntityId ) {
 		$this->checkType( 'getEntity', 1, $prefixedEntityId, 'string' );
-		$this->splitParserCacheIfMultilingual();
 
 		try {
 			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId );
@@ -336,7 +356,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getEntityId( $pageTitle = null ) {
 		$this->checkType( 'getEntityByTitle', 1, $pageTitle, 'string' );
-		return array( $this->getLuaBindings()->getEntityId( $pageTitle ) );
+		return array( $this->getLanguageIndependentLuaBindings()->getEntityId( $pageTitle ) );
 	}
 
 	/**
@@ -350,7 +370,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getSetting( $setting ) {
 		$this->checkType( 'setting', 1, $setting, 'string' );
-		return array( $this->getLuaBindings()->getSetting( $setting ) );
+		return array( $this->getLanguageIndependentLuaBindings()->getSetting( $setting ) );
 	}
 
 	/**
@@ -391,17 +411,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @return EntityIdParser
-	 */
-	private function getEntityIdParser() {
-		if ( !$this->entityIdParser ) {
-			$wikibaseClient = WikibaseClient::getDefaultInstance();
-			$this->entityIdParser = $wikibaseClient->getEntityIdParser();
-		}
-		return $this->entityIdParser;
-	}
-
-	/**
 	 * Wrapper for getLabel in Scribunto_LuaWikibaseLibraryImplementation
 	 *
 	 * @since 0.5
@@ -412,9 +421,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getLabel( $prefixedEntityId ) {
 		$this->checkType( 'getLabel', 1, $prefixedEntityId, 'string' );
-		$this->splitParserCacheIfMultilingual();
 
-		return $this->getLuaBindings()->getLabel( $prefixedEntityId );
+		return $this->getLanguageDependentLuaBindings()->getLabel( $prefixedEntityId );
 	}
 
 	/**
@@ -428,9 +436,8 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getDescription( $prefixedEntityId ) {
 		$this->checkType( 'getDescription', 1, $prefixedEntityId, 'string' );
-		$this->splitParserCacheIfMultilingual();
 
-		return $this->getLuaBindings()->getDescription( $prefixedEntityId );
+		return $this->getLanguageDependentLuaBindings()->getDescription( $prefixedEntityId );
 	}
 
 	/**
@@ -444,7 +451,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getSiteLinkPageName( $prefixedEntityId ) {
 		$this->checkType( 'getSiteLinkPageName', 1, $prefixedEntityId, 'string' );
-		return array( $this->getLuaBindings()->getSiteLinkPageName( $prefixedEntityId ) );
+		return array( $this->getLanguageIndependentLuaBindings()->getSiteLinkPageName( $prefixedEntityId ) );
 	}
 
 	/**
@@ -459,7 +466,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function renderSnak( $snakSerialization ) {
 		$this->checkType( 'renderSnak', 1, $snakSerialization, 'table' );
-		$this->splitParserCacheIfMultilingual();
 
 		try {
 			$ret = array( $this->getSnakSerializationRenderer()->renderSnak( $snakSerialization ) );
@@ -481,7 +487,6 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function renderSnaks( $snaksSerialization ) {
 		$this->checkType( 'renderSnaks', 1, $snaksSerialization, 'table' );
-		$this->splitParserCacheIfMultilingual();
 
 		try {
 			$ret = array( $this->getSnakSerializationRenderer()->renderSnaks( $snaksSerialization ) );
