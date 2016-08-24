@@ -245,13 +245,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 			}
 		} )
 		.on( 'entityselectorselected', function( event, entityId ) {
-			if ( self._variation ) {
-				// A new property has been selected:
-				// Remove the existing variation as it's impossible to change
-				// the property id in the variation and its dependencies.
-				self._variation.destroy();
-				self._variation = null;
-			}
 			self._selectProperty();
 		} );
 	},
@@ -266,6 +259,13 @@ $.widget( 'wikibase.snakview', PARENT, {
 		this.$snakValue.empty().append(
 			$( '<div/>' ).append( $( '<span/>' ).addClass( 'mw-small-spinner' ) )
 		);
+
+		// Would be better to only do this when the property or value type changes, but at this
+		// point we can't find out any more.
+		if ( this._variation ) {
+			this._variation.destroy();
+			this._variation = null;
+		}
 
 		this.updateVariation();
 		this.drawSnakTypeSelector();
