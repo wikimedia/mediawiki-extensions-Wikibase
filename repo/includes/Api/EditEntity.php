@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
-use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
+use Exception;
 use InvalidArgumentException;
 use MWException;
 use SiteList;
@@ -537,13 +537,11 @@ class EditEntity extends ModifyEntity {
 					$statement = $this->statementDeserializer->deserialize( $statementArray );
 
 					if ( !( $statement instanceof Statement ) ) {
-						throw new IllegalValueException( 'Statement serialization did not contained a Statement.' );
+						throw new Exception( 'Statement serialization did not contained a Statement.' );
 					}
 
 					$opsToReturn[] = $this->statementChangeOpFactory->newSetStatementOp( $statement );
-				} catch ( IllegalValueException $ex ) {
-					$this->errorReporter->dieException( $ex, 'invalid-claim' );
-				} catch ( MWException $ex ) {
+				} catch ( Exception $ex ) {
 					$this->errorReporter->dieException( $ex, 'invalid-claim' );
 				}
 			}
