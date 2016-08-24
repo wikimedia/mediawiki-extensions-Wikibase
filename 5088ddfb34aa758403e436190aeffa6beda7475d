@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_3238689b",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-24T09:36:11Z",
+      "side": 1,
+      "message": "This does not belong here.",
+      "revId": "5088ddfb34aa758403e436190aeffa6beda7475d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_7242f014",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-24T09:36:11Z",
+      "side": 1,
+      "message": "-1 for this one. These strings are coming from a TermList, which is a DataModel object. I expect a DataModel object to be in a valid state. If there is a fix necessary it should be done before creating the DataModel object.",
+      "revId": "5088ddfb34aa758403e436190aeffa6beda7475d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_92467c25",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-24T09:36:11Z",
+      "side": 1,
+      "message": "Same -1 as above.",
+      "revId": "5088ddfb34aa758403e436190aeffa6beda7475d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_1201acb9",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-24T09:36:11Z",
+      "side": 1,
+      "message": "Similar to the other places where this is a DataModel object, it is a TermIndexEntry object here. I expect this to be validated on construction. Which is the case as far as I can see. This even comes from DataModel objects.",
+      "revId": "5088ddfb34aa758403e436190aeffa6beda7475d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_b26a987c",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-24T09:36:11Z",
+      "side": 1,
+      "message": "I would expect the normalization to be part of this if block.\n\n} elseif ( $key \u003d\u003d\u003d \u0027term_text\u0027 ) {\n    $value \u003d $this-\u003estringNormalizer-\u003etrimBadChars( $value );\n}\n\nStarts looking like a switch.",
+      "revId": "5088ddfb34aa758403e436190aeffa6beda7475d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_d25004dc",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-24T09:36:11Z",
+      "side": 1,
+      "message": "This is not necessary. The only two code paths that call this are getting their strings from DataModel objects. Again, -1 because of the same reason as above.",
+      "revId": "5088ddfb34aa758403e436190aeffa6beda7475d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
