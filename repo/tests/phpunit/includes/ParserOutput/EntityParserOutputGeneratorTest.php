@@ -92,10 +92,11 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$this->assertSame( array( '<JS>' ), $parserOutput->getJsConfigVars(), 'config vars' );
 
-		$this->assertEquals(
-			$titleText,
-			$parserOutput->getExtensionData( 'wikibase-titletext' ),
-			'title text'
+		$this->assertSame(
+			[
+				'title' => $titleText,
+			],
+			$parserOutput->getExtensionData( 'wikibase-meta-tags' )
 		);
 
 		$this->assertEquals(
@@ -159,7 +160,7 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$this->assertFalse( $parserOutput->isCacheable() );
 	}
 
-	public function testTitleText_ItemHasNolabel() {
+	public function testTitleText_ItemHasNoLabel() {
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
 		$item = new Item( new ItemId( 'Q7799929' ) );
@@ -167,10 +168,12 @@ class EntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $item );
 
-		$this->assertEquals(
-			'Q7799929',
-			$parserOutput->getExtensionData( 'wikibase-titletext' ),
-			'title text'
+		$this->assertSame(
+			[
+				'title' => 'Q7799929',
+				'description' => 'a kitten',
+			],
+			$parserOutput->getExtensionData( 'wikibase-meta-tags' )
 		);
 	}
 

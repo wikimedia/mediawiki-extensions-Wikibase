@@ -84,7 +84,7 @@ class ViewEntityAction extends ViewAction {
 		$outputPage->addJsConfigVars( 'wbIsEditView', $editable );
 		$this->page->view();
 
-		$this->overrideTitleText( $outputPage );
+		$this->overridePageMetaTags( $outputPage );
 	}
 
 	/**
@@ -93,17 +93,19 @@ class ViewEntityAction extends ViewAction {
 	 *
 	 * @param OutputPage $outputPage
 	 */
-	private function overrideTitleText( OutputPage $outputPage ) {
-		$titleText = $this->getOutput()->getProperty( 'wikibase-titletext' );
+	private function overridePageMetaTags( OutputPage $outputPage ) {
+		$meta = $this->getOutput()->getProperty( 'wikibase-meta-tags' );
 
-		if ( $titleText === null ) {
-			return;
+		if ( isset( $meta['title'] ) ) {
+			if ( $this->isDiff() ) {
+				$this->setPageTitle( $outputPage, $meta['title'] );
+			} else {
+				$this->setHTMLTitle( $outputPage, $meta['title'] );
+			}
 		}
 
-		if ( $this->isDiff() ) {
-			$this->setPageTitle( $outputPage, $titleText );
-		} else {
-			$this->setHTMLTitle( $outputPage, $titleText );
+		if ( isset( $meta['description'] ) ) {
+			$outputPage->addMeta( 'description', $meta['description'] );
 		}
 	}
 
