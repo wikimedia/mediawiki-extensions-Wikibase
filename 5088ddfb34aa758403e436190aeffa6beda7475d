@@ -101,6 +101,23 @@
       "revId": "5088ddfb34aa758403e436190aeffa6beda7475d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_756f3ac1",
+        "filename": "lib/includes/Store/Sql/TermSqlIndex.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-08-24T12:36:11Z",
+      "side": 1,
+      "message": "perhaps we can name this method something more specific and descriptive? fixTermTruncation? though this is only doing trimming...",
+      "revId": "5088ddfb34aa758403e436190aeffa6beda7475d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
