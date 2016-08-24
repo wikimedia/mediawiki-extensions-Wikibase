@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
@@ -157,7 +158,9 @@ class EntityParserOutputGenerator {
 
 		$configVars = $this->configBuilder->build( $entity );
 		$parserOutput->addJsConfigVars( $configVars );
+		// FIXME: These two can possibly be merged into a single extension data element.
 		$parserOutput->setExtensionData( 'wikibase-titletext', $this->getTitleText( $entity ) );
+		$this->setMetaDescription( $parserOutput, $entity );
 
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
@@ -256,6 +259,21 @@ class EntityParserOutputGenerator {
 		}
 
 		return $titleText;
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param EntityDocument $entity
+	 */
+	private function setMetaDescription( ParserOutput $parserOutput, EntityDocument $entity ) {
+		if ( $entity instanceof DescriptionsProvider ) {
+			$descriptions = $entity->getDescriptions()->toTextArray();
+			$preferred = $this->languageFallbackChain->extractPreferredValue( $descriptions );
+
+			if ( is_array( $preferred ) ) {
+				$parserOutput->setExtensionData( 'wikibase-metadescription', $preferred['value'] );
+			}
+		}
 	}
 
 	/**
