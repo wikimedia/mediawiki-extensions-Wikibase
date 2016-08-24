@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_20ed7223",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-24T15:38:31Z",
+      "side": 1,
+      "message": "This works well, but I would wish for a comment that clearly says, that this is *needed* in case the property id changes.",
+      "revId": "499e8e6344faa9b67ae53c71fd210927c5416cde",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
