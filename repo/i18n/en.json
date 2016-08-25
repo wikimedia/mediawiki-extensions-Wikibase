@@ -19,7 +19,7 @@
 	"wikibase-entity-property": "property",
 	"wikibase-entity-query": "query",
 	"wikibase-edit": "edit",
-	"wikibase-save": "save",
+	"wikibase-save": "publish",
 	"wikibase-cancel": "cancel",
 	"wikibase-add": "add",
 	"wikibase-addqualifier": "add qualifier",
