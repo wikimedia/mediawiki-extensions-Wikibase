@@ -34,6 +34,8 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		$prop = array_flip( (array)$params['prop'] );
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$repoLinker = $wikibaseClient->newRepoLinker();
+		$currentPageId = null;
+		$entry = [];
 		foreach ( $res as $row ) {
 			if ( ++$count > $params['limit'] ) {
 				// We've reached the one extra which shows that
@@ -41,16 +43,31 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 				$this->setContinueFromRow( $row );
 				break;
 			}
-			$entry = [ 'aspect' => $row->eu_aspect ];
-			if ( isset( $prop['url'] ) ) {
-				$entry['url'] = $repoLinker->getPageUrl( 'Special:EntityData/' . $row->eu_entity_id );
+
+			if ( isset( $currentPageId ) && $row->eu_page_id !== $currentPageId ) {
+				// Flush out everything we built
+				$fit = $this->addPageSubItem( $currentPageId, $entry );
+				if ( !$fit ) {
+					$this->setContinueFromRow( $row );
+					break;
+				}
+				$entry = [];
 			}
-			ApiResult::setContentValue( $entry, 'entity', $row->eu_entity_id );
-			$fit = $this->addPageSubItem( $row->eu_page_id, $entry );
-			if ( !$fit ) {
-				$this->setContinueFromRow( $row );
-				break;
+			$currentPageId = $row->eu_page_id;
+			if ( array_key_exists( $row->eu_entity_id, $entry ) ) {
+				$entry[$row->eu_entity_id]['aspects'][] = $row->eu_aspect;
+			} else {
+				$entry[$row->eu_entity_id] = [ 'aspects' => [ $row->eu_aspect ] ];
+				if ( isset( $prop['url'] ) ) {
+					$entry[$row->eu_entity_id]['url'] = $repoLinker->getPageUrl(
+						'Special:EntityData/' . $row->eu_entity_id );
+				}
 			}
+		}
+
+		if ( $entry ) { // Sanity
+			// Flush out remaining ones
+			$fit = $this->addPageSubItem( $currentPageId, $entry );
 		}
 	}
 
