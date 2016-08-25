@@ -80,6 +80,11 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 					'eu_entity_id' => 'Q4',
 					'eu_aspect' => 'S'
 				],
+				[
+					'eu_page_id' => 22,
+					'eu_entity_id' => 'Q5',
+					'eu_aspect' => 'S'
+				],
 			],
 		];
 
@@ -182,13 +187,13 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 				],
 				["11" => [
 					"entityusage" => [
-						["aspect" => "O", "*" => "Q3"],
-						["aspect" => "S", "*" => "Q3"]
+						"Q3" => [ "aspects" => [ "O", "S" ] ],
 					]
 				],
 				"22" => [
 					"entityusage" => [
-						["aspect" => "S", "*" => "Q4"]
+						"Q4" => [ "aspects" => [ "S" ] ],
+						"Q5" => [ "aspects" => [ "S" ] ],
 					]
 				] ],
 			],
@@ -201,13 +206,13 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 				],
 				["11" => [
 					"entityusage" => [
-						["aspect" => "O", "*" => "Q3"],
-						["aspect" => "S", "*" => "Q3"]
+						"Q3" => [ "aspects" => [ "O", "S" ] ],
 					]
 				],
 				"22" => [
 					"entityusage" => [
-						["aspect" => "S", "*" => "Q4"]
+						"Q4" => [ "aspects" => [ "S" ] ],
+						"Q5" => [ "aspects" => [ "S" ] ],
 					]
 				] ],
 			],

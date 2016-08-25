@@ -30,10 +30,16 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 			return;
 		}
 
-		$count = 0;
 		$prop = array_flip( (array)$params['prop'] );
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$repoLinker = $wikibaseClient->newRepoLinker();
+		$this->formatResult( $res, $prop, $repoLinker, $params );
+	}
+
+	private function formatResult( $res, $prop, $repoLinker, $params ) {
+		$currentPageId = null;
+		$entry = [];
+		$count = 0;
 		foreach ( $res as $row ) {
 			if ( ++$count > $params['limit'] ) {
 				// We've reached the one extra which shows that
@@ -41,16 +47,37 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 				$this->setContinueFromRow( $row );
 				break;
 			}
-			$entry = [ 'aspect' => $row->eu_aspect ];
-			if ( isset( $prop['url'] ) ) {
-				$entry['url'] = $repoLinker->getPageUrl( 'Special:EntityData/' . $row->eu_entity_id );
+
+			if ( isset( $currentPageId ) && $row->eu_page_id !== $currentPageId ) {
+				// Flush out everything we built
+				$fit = $this->addPageSubItems( $currentPageId, $entry );
+				if ( !$fit ) {
+					$this->setContinueFromRow( $row );
+					break;
+				}
+				$entry = [];
 			}
-			ApiResult::setContentValue( $entry, 'entity', $row->eu_entity_id );
-			$fit = $this->addPageSubItem( $row->eu_page_id, $entry );
-			if ( !$fit ) {
-				$this->setContinueFromRow( $row );
-				break;
+			$currentPageId = $row->eu_page_id;
+			if ( array_key_exists( $row->eu_entity_id, $entry ) ) {
+				$entry[$row->eu_entity_id]['aspects'][] = $row->eu_aspect;
+			} else {
+				$entry[$row->eu_entity_id] = [ 'aspects' => [ $row->eu_aspect ] ];
+				if ( isset( $prop['url'] ) ) {
+					$entry[$row->eu_entity_id]['url'] = $repoLinker->getPageUrl(
+						'Special:EntityData/' . $row->eu_entity_id );
+				}
+				ApiResult::setIndexedTagName(
+					$entry[$row->eu_entity_id]['aspects'], 'aspect'
+				);
+				ApiResult::setIndexedTagName( $entry, 'entity' );
+				ApiResult::setArrayType( $entry, 'kvp', 'id' );
 			}
+
+		}
+
+		if ( $entry ) { // Sanity
+			// Flush out remaining ones
+			$fit = $this->addPageSubItems( $currentPageId, $entry );
 		}
 	}
 
