@@ -245,13 +245,6 @@ $.widget( 'wikibase.snakview', PARENT, {
 			}
 		} )
 		.on( 'entityselectorselected', function( event, entityId ) {
-			if ( self._variation ) {
-				// A new property has been selected:
-				// Remove the existing variation as it's impossible to change
-				// the property id in the variation and its dependencies.
-				self._variation.destroy();
-				self._variation = null;
-			}
 			self._selectProperty();
 		} );
 	},
@@ -266,6 +259,14 @@ $.widget( 'wikibase.snakview', PARENT, {
 		this.$snakValue.empty().append(
 			$( '<div/>' ).append( $( '<span/>' ).addClass( 'mw-small-spinner' ) )
 		);
+
+		// The "value" variation contains experts that depend on the property and value type. Must
+		// be recreated when the property changes. Would be better to do this in updateVariation,
+		// and only when the value type changes, but at this point we can't find out any more.
+		if ( this._variation ) {
+			this._variation.destroy();
+			this._variation = null;
+		}
 
 		this.updateVariation();
 		this.drawSnakTypeSelector();
