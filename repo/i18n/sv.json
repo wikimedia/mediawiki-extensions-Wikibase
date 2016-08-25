@@ -137,6 +137,7 @@
 	"wikibase-gotolinkedpage-lookup-item": "Objektid:",
 	"wikibase-gotolinkedpage-submit": "Utför",
 	"wikibase-gotolinkedpage-summary": "Special:GoToLinkedPage används för att hitta sidan till ett objekt på en ansluten webbplats.<br />Det första fältet \"{{int:wikibase-gotolinkedpage-lookup-site}}\" ska fyllas i med språk- och webbplatskoden.<br />I det andra fältet \"{{int:wikibase-gotolinkedpage-lookup-item}}\" måste du mata in det objekt-ID du letar efter.",
+	"wikibase-gotolinkedpage-error-page-not-found": "Ingen sida hittades för kombinationen av objekt och webbplats",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "Angivet objekt-ID är ogiltigt",
 	"wikibase-gotolinkedpage-error-item-not-found": "Objektet hittades inte",
 	"special-itemdisambiguation": "Objektsärskiljning",

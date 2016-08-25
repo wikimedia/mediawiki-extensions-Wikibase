@@ -16,7 +16,8 @@
 			"Mywood",
 			"Impersonator 1",
 			"Jason924tw",
-			"Duolaimi"
+			"Duolaimi",
+			"Cwek"
 		]
 	},
 	"wikibase-client-desc": "维基数据库扩展程序的客户端",
@@ -61,7 +62,6 @@
 	"wikibase-linkitem-not-loggedin-title": "您必须登录",
 	"wikibase-linkitem-not-loggedin": "您必须在此维基项目和[$1 中央数据存储库]上登录才能使用此功能。",
 	"wikibase-linkitem-success-link": "页面已链接。您可以在我们的[$1 中央数据库]中找到包含该链接的项。",
-	"wikibase-limitreport-entities-accessed": "加载的Wikibase实体数量",
 	"wikibase-property-notfound": "未找到$1属性。",
 	"wikibase-rc-hide-wikidata": "$1{{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "隐藏",
@@ -71,7 +71,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}编辑",
 	"wikibase-replicationnote": "该更改可能需要几分钟才能在所有的维基项目上显示，请谅解。",
 	"wikibase-watchlist-show-changes-pref": "在你的监视列表中显示{{WBREPONAME}}编辑",
-	"wikibase-error-deserialize-error": "并行化数据失败。",
+	"wikibase-error-deserialize-error": "无法反序列化数据。",
 	"wikibase-error-serialize-error": "无法序列化数据。",
 	"wikibase-error-invalid-entity-id": "输入的ID在系统中是未知的。请使用一个有效的实体ID。",
 	"wikibase-error-exceeded-entity-access-limit": "访问了太多的{{WBREPONAME}}实体。",
