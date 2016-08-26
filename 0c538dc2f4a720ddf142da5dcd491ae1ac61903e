@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_c4b4b4e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-26T00:06:08Z",
+      "side": 1,
+      "message": "OutputPage::setMeta should take care of that, but it might be good to double check how we handle html in descriptions.",
+      "range": {
+        "startLine": 11,
+        "startChar": 47,
+        "endLine": 12,
+        "endChar": 7
+      },
+      "revId": "0c538dc2f4a720ddf142da5dcd491ae1ac61903e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
