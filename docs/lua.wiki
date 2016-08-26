@@ -1,5 +1,7 @@
 Wikibase Client provides a Lua [[mw:Scribunto|Scribunto]] interface that implements functions to access data from the Wikibase repository, if the Wikibase Client configuration enables <code>allowDataTransclusion</code>. Lua modules and wiki templates can invoke these functions.
 
+Changes to the Wikibase Lua interface are subject to the [[d:Wikidata:Stable Interface Policy|Stable Interface Policy]].
+
 == mw.wikibase ==
 <code>mw.wikibase</code> has general Lua functionality for working with Wikibase data.
 

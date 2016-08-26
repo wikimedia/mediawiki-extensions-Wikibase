@@ -4,6 +4,8 @@ This format can be expected to be reasonably stable, and is designed with flexib
 
 For an explanation of the terms used in this document, please refer to the [[d:Wikidata:Glossary|Wikibase Glossary]]. For a specification of the semantics of the data structures described here, see the [[mw:Wikibase/DataModel|Wikibase Data Model]].
 
+Changes to the JSON format are subject to the [[d:Wikidata:Stable Interface Policy|Stable Interface Policy]].
+
 ''NOTE: The canonical copy of this document can be found [https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/docs/json.wiki in the Wikibase source code] and should be edited there. Changes can be requested by filing a ticket on [https://phabricator.wikimedia.org Phabricator].''
 
 == JSON Flavor ==
