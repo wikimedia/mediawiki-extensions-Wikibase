@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_874e2e71",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-26T01:43:10Z",
+      "side": 1,
+      "message": "Not true anymore",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "49d71a1fb0c123ae72210bbd777b8ab87dd2f270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_6749426a",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-26T01:43:10Z",
+      "side": 1,
+      "message": "No longer",
+      "revId": "49d71a1fb0c123ae72210bbd777b8ab87dd2f270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_07331ef4",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-26T01:43:10Z",
+      "side": 1,
+      "message": "The docs for this in core (docs/hooks.txt) are saying this is a raw html string… I\u0027ve checked the implementation and this seems correct.",
+      "revId": "49d71a1fb0c123ae72210bbd777b8ab87dd2f270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_e73c52bf",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-26T01:43:10Z",
+      "side": 1,
+      "message": "Is it worth testing here, that $html is actually an HtmlArmor instance? HtmlArmor::getHtml also takes strings transparently. Also below?",
+      "range": {
+        "startLine": 108,
+        "startChar": 58,
+        "endLine": 108,
+        "endChar": 63
+      },
+      "revId": "49d71a1fb0c123ae72210bbd777b8ab87dd2f270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
