@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "4e96ab59_c7fcb6d8",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-26T02:01:20Z",
+      "side": 1,
+      "message": "Fixed the docs in https://gerrit.wikimedia.org/r/306865",
+      "parentUuid": "4e96ab59_07331ef4",
+      "revId": "49d71a1fb0c123ae72210bbd777b8ab87dd2f270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_e73c52bf",
         "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
         "patchSetId": 7
