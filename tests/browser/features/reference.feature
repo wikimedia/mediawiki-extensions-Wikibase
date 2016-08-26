@@ -5,7 +5,7 @@
 #
 # feature definition for references
 
-@chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @wikidata.beta.wmflabs.org
+@chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @test.wikidata.org @wikidata.beta.wmflabs.org
 Feature: Adding references to statements
 
   Background:
@@ -51,6 +51,7 @@ Feature: Adding references to statements
   Scenario Outline: Cancel reference
     When I click the statement edit button
       And I click the reference add button
+      And I close the entity selector popup if present
       And I <cancel>
       And I click the statement edit button
     Then Reference add button should be there

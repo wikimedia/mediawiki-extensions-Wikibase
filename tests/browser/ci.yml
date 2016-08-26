@@ -3,6 +3,7 @@ BROWSER:
 
 MEDIAWIKI_ENVIRONMENT:
   - beta
+  - test
 
 PLATFORM:
   - Linux

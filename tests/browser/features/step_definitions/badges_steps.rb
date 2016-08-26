@@ -8,11 +8,11 @@ When(/^I click the empty badge selector$/) do
 end
 
 When(/^I click the (\d). badge selector id item$/) do |num|
-  on(ItemPage).badge_selector_list[@available_badges[num.to_i]].selector_id_link_element.when_visible.click
+  on(ItemPage).badge_selector_list[@available_badges[num.to_i - 1]].selector_id_link_element.when_visible.click
 end
 
 Then(/^The (\d+)\. badge id should be attached to the sitelink$/) do |num|
-  expect(on(ItemPage).badge_list[@available_badges[num.to_i]].badge_element.when_visible).to be_visible
+  expect(on(ItemPage).badge_list[@available_badges[num.to_i - 1]].badge_element.when_visible).to be_visible
 end
 
 Then(/^Sitelink badge selector should be there$/) do

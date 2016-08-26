@@ -112,8 +112,13 @@ module EntityPage
   end
 
   def ajax_wait
-    Timeout.timeout(5) do
-      sleep(1.0 / 3) while execute_script('return jQuery.active') != 0
+    sleep_period = 0.25
+    timeout_seconds = 2
+    timeout_loops = (timeout_seconds / sleep_period).to_i
+
+    while execute_script('return jQuery.active') != 0 && timeout_loops > 0
+      sleep(sleep_period)
+      timeout_loops -= 1
     end
     sleep 1
     true
@@ -141,62 +146,5 @@ module EntityPage
   def set_noanonymouseditwarning_cookie
     cookie = "$.cookie( 'wikibase-no-anonymouseditwarning', '1', { 'expires': null, 'path': '/' } );"
     execute_script(cookie)
-  end
-
-  # this method was moved from wikibase_api_module.rb since we are now using the mediawiki_api/wikidata gem for doing API requests
-  # this method is really ugly and should be refactored
-  def create_entity_and_properties(serialization)
-    wb_api = MediawikiApi::Wikidata::WikidataClient.new URL.repo_api
-    wb_api.log_in(ENV['MEDIAWIKI_USER'], ENV['MEDIAWIKI_PASSWORD'])
-
-    serialization['properties'].each do |old_id, prop|
-      if prop['description'] && prop['description']['en']['value']
-        search = prop['description']['en']['value']
-      else
-        search = prop['labels']['en']['value']
-      end
-      resp = wb_api.search_entities(search, 'en', 'property')
-      resp['search'].reject! do |found_prop|
-        found_prop['label'] != prop['labels']['en']['value']
-      end
-      if resp['search'][0]
-        id = resp['search'][0]['id']
-      else
-        saved_prop = wb_api.create_property(prop)
-        id = saved_prop['id']
-      end
-
-      serialization['entity']['claims'].each do |claim|
-        if claim['mainsnak']['property'] == old_id
-          claim['mainsnak']['property'] = id
-        end
-        if claim['qualifiers']
-          claim['qualifiers'].each do |qualifier|
-            if qualifier['property'] == old_id
-              qualifier['property'] = id
-            end
-          end
-        end
-        if claim['qualifiers-order']
-          claim['qualifiers-order'].map! do |p_id|
-            p_id == old_id ? id : p_id
-          end
-        end
-        if claim['references']
-          claim['references'].each do |reference|
-            reference['snaks'].each do |snak|
-              if snak['property'] == old_id
-                snak['property'] = id
-              end
-            end
-            reference['snaks-order'].map! do |p_id|
-              p_id == old_id ? id : p_id
-            end
-          end
-        end
-      end
-    end
-
-    wb_api.create_item(serialization['entity'])
   end
 end

@@ -31,7 +31,7 @@ mw-vagrant-guest:
 beta:
   language_code: en
   browser: firefox
-  mediawiki_url: http://wikidata.beta.wmflabs.org/wiki/
+  mediawiki_url: https://wikidata.beta.wmflabs.org/wiki/
   mediawiki_user: Selenium_user
   # mediawiki_password: SET THIS IN THE ENVIRONMENT!
 

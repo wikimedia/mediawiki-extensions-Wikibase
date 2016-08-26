@@ -13,7 +13,7 @@ Feature: Edit sitelinks
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
 
-  @ui_only
+  @ui_only @test.wikidata.org
   Scenario: Sitelink UI has all required elements
     Then wikipedia sitelink section should be there
       And Sitelink heading should be there
@@ -21,7 +21,7 @@ Feature: Edit sitelinks
       And Sitelink counter should be there
       And There should be 0 sitelinks in the list
 
-  @ui_only
+  @ui_only @test.wikidata.org
   Scenario: Click edit button
     When I click the sitelink edit button
     Then Sitelink edit button should not be there
@@ -32,7 +32,7 @@ Feature: Edit sitelinks
       And Sitelink siteid input field should be there
       And Sitelink pagename input field should not be there
 
-  @ui_only
+  @ui_only @test.wikidata.org
   Scenario Outline: Type site id
     When I click the sitelink edit button
       And I type <siteid> into the 1. siteid input field
@@ -48,7 +48,7 @@ Feature: Edit sitelinks
       | en | English |
       | he | עברית  |
 
-  @ui_only
+  @ui_only @test.wikidata.org
   Scenario Outline: Type site id and page name
     When I click the sitelink edit button
       And I type <siteid> into the 1. siteid input field
@@ -64,7 +64,7 @@ Feature: Edit sitelinks
       | en | Main Page | Main Page       |
       | he | עמוד ראשי | עמוד ראשי |
 
-  @ui_only
+  @ui_only @test.wikidata.org
   Scenario: Type site id and page name and change site id to something senseless
     When I click the sitelink edit button
       And I type en into the 1. siteid input field
@@ -75,7 +75,7 @@ Feature: Edit sitelinks
       And Sitelink remove button should be disabled
       And Sitelink pagename input field should not be there
 
-  @ui_only
+  @ui_only @test.wikidata.org
   Scenario Outline: Cancel sitelink during siteid selection
     When I click the sitelink edit button
       And I <cancel>
@@ -91,7 +91,7 @@ Feature: Edit sitelinks
       | click the sitelink cancel button |
       | press the ESC key in the siteid input field |
 
-  @ui_only
+  @ui_only @test.wikidata.org
   Scenario Outline: Cancel sitelink during pagename selection
     When I click the sitelink edit button
       And I type en into the 1. siteid input field
@@ -108,7 +108,7 @@ Feature: Edit sitelinks
       | click the sitelink cancel button |
       | press the ESC key in the pagename input field |
 
-  @modify_entity @save_sitelink @smoke
+  @modify_entity @save_sitelink @smoke @test.wikidata.org
   Scenario Outline: Save sitelink
     Given The following sitelinks do not exist:
       | enwiki | Asia |
@@ -123,7 +123,7 @@ Feature: Edit sitelinks
       | click the sitelink save button |
       | press the RETURN key in the pagename input field |
 
-  @modify_entity @save_sitelink
+  @modify_entity @save_sitelink @test.wikidata.org
   Scenario Outline: Save sitelink and reload
     Given The following sitelinks do not exist:
       | enwiki | Asia |
@@ -139,7 +139,7 @@ Feature: Edit sitelinks
       | click the sitelink save button |
       | press the RETURN key in the pagename input field |
 
-  @modify_entity @save_sitelink
+  @modify_entity @save_sitelink @test.wikidata.org
   Scenario: Edit sitelink
     Given The following sitelinks do not exist:
       | enwiki | Asia |
@@ -155,7 +155,7 @@ Feature: Edit sitelinks
       And Sitelink save button should not be there
       And Sitelink remove button should not be there
 
-  @modify_entity @save_sitelink
+  @modify_entity @save_sitelink @test.wikidata.org
   Scenario Outline: Add sitelink
     Given The following sitelinks do not exist:
       | enwiki | Asia   |
@@ -179,7 +179,7 @@ Feature: Edit sitelinks
       | en | Asia   |  Asia                 |
       | sq | wikipedia  | Wikipedia         |
 
-  @modify_entity @save_sitelink
+  @modify_entity @save_sitelink @test.wikidata.org
   Scenario: Add multiple sitelinks
     Given The following sitelinks do not exist:
       | enwiki | Europe |
@@ -206,7 +206,7 @@ Feature: Edit sitelinks
     Then There should be 0 sitelinks in the list
       And Sitelink edit button should be there
 
-  @modify_entity @save_sitelink
+  @modify_entity @save_sitelink @test.wikidata.org
   Scenario: List of sitelinks is complete
     Given The following sitelinks do not exist:
       | enwiki | Europe |
@@ -216,7 +216,7 @@ Feature: Edit sitelinks
       And I click the sitelink edit button
     Then Sitelink siteid input field should not be there
 
-  @save_sitelink
+  @save_sitelink @test.wikidata.org
   Scenario: Add sitelink to non existent page
     When I click the sitelink edit button
       And I type en into the 1. siteid input field
@@ -224,7 +224,7 @@ Feature: Edit sitelinks
       And I click the sitelink save button
     Then An error message should be displayed for sitelink group wikipedia
 
-  @save_sitelink
+  @save_sitelink @test.wikidata.org
   Scenario: Add new sitelink to already referenced site
     Given The following sitelinks do not exist:
       | enwiki | Asia |
