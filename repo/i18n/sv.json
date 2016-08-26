@@ -468,6 +468,7 @@
 	"apihelp-wbsearchentities-example-1": "Sök efter \"abc\" på engelska, med standardvärden för typ och begränsning",
 	"apihelp-wbsearchentities-example-2": "Sök efter \"abc\" på Engelska med en gräns på 50",
 	"apihelp-wbsearchentities-example-3": "Sök efter \"alphabet\" på engelska, för typen egenskap",
+	"apihelp-query+wbsearch-description": "Sök efter entiteter med etiketter och alias.\nDetta kan användas som en generator till andra förfrågan.\nReturnerar den matchade termen som bör visas.",
 	"apihelp-query+wbsearch-param-search": "Sök efter denna text.",
 	"apihelp-query+wbsearch-param-language": "Sök på detta språk.",
 	"apihelp-query+wbsearch-param-type": "Sök efter denna typ av entitet.",

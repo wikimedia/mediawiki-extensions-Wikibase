@@ -100,7 +100,7 @@
 	"wikibase-entity-summary-wbsetreference-add": "Bron toegevoegd aan verklaring",
 	"wikibase-entity-summary-wbsetreference-set": "Bron van verklaring gewijzigd",
 	"wikibase-entity-summary-wbsetlabel-add": "Label toegevoegd voor [$2]",
-	"wikibase-entity-summary-wbsetlabel-set": "[$2]-label gewijzigd.",
+	"wikibase-entity-summary-wbsetlabel-set": "[$2]-label gewijzigd",
 	"wikibase-entity-summary-wbsetlabel-remove": "[$2]-label verwijderd",
 	"wikibase-entity-summary-wbsetdescription-add": "Beschrijving toegevoegd voor [$2]",
 	"wikibase-entity-summary-wbsetdescription-set": "[$2]-beschrijving gewijzigd",
