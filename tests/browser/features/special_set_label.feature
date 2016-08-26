@@ -5,7 +5,7 @@
 #
 # feature definition for the Special:SetLabel page tests
 
-@chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @special_pages @wikidata.beta.wmflabs.org
+@chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @special_pages @test.wikidata.org @wikidata.beta.wmflabs.org
 Feature: Special:SetLabel page
 
   @ui_only

@@ -5,7 +5,7 @@
 #
 # feature definition for item sitelinks tests
 
-@chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @wikidata.beta.wmflabs.org
+@chrome @firefox @internet_explorer_10 @internet_explorer_11 @local_config @test.wikidata.org @wikidata.beta.wmflabs.org
 Feature: Add badges to sitelinks
 
   Background:
