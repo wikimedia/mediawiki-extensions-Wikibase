@@ -294,16 +294,14 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	public function testRenderSnaks( $allowDataAccessInUserLanguage ) {
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
 		$cacheSplit = false;
+		$lang = Language::factory( 'es' );
 
-		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
 		$entityArr = $luaWikibaseLibrary->getEntity( 'Q32487' );
 
 		$snaks = $entityArr[0]['claims']['P342'][1]['qualifiers'];
 		$expected = array( 'A qualifier Snak, Moar qualifiers' );
 		if ( $allowDataAccessInUserLanguage ) {
-			global $wgUser;
-
-			$lang = Language::factory( $wgUser->getOption( 'language' ) );
 			$expected = array(
 				$lang->commaList( array( 'A qualifier Snak', 'Moar qualifiers' ) )
 			);
