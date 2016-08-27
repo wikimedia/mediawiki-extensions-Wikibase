@@ -26,6 +26,7 @@ use Wikibase\SummaryFormatter;
  *
  * @license GPL-2.0+
  * @author Addshore
+ * @author Daniel Kinzler
  */
 class EntitySavingHelper extends EntityLoadingHelper {
 
@@ -84,6 +85,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		EditEntityFactory $editEntityFactory
 	) {
 		parent::__construct( $apiModule, $idParser, $entityRevisionLookup, $errorReporter );
+
 		$this->summaryFormatter = $summaryFormatter;
 		$this->editEntityFactory = $editEntityFactory;
 
@@ -105,7 +107,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	}
 
 	/**
-	 * @return null|EntityFactory
+	 * @return EntityFactory|null
 	 */
 	public function getEntityFactory() {
 		return $this->entityFactory;
@@ -119,7 +121,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	}
 
 	/**
-	 * @return null|EntityStore
+	 * @return EntityStore|null
 	 */
 	public function getEntityStore() {
 		return $this->entityStore;
@@ -133,11 +135,10 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	}
 
 	/**
-	 * Returns the given EntityDocument.
-	 *
 	 * @param EntityId|null $entityId ID of the entity to load. If not given, the ID is taken
 	 *        from the request parameters. If $entityId is given, the 'baserevid' parameter must
 	 *        belong to it.
+	 *
 	 * @return EntityDocument
 	 */
 	public function loadEntity( EntityId $entityId = null ) {
@@ -226,7 +227,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @return bool
 	 */
 	private function isEntityCreationSupported() {
-		return isset( $this->entityStore ) && isset( $this->entityFactory );
+		return $this->entityStore !== null && $this->entityFactory !== null;
 	}
 
 	/**
