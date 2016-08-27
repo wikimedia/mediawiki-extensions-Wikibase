@@ -1,0 +1,365 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_1e960050",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Should not use a qualified class name here.",
+      "range": {
+        "startLine": 53,
+        "startChar": 9,
+        "endLine": 53,
+        "endChar": 19
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_3ea3bca9",
+        "filename": "repo/includes/Dumpers/RdfDumpGenerator.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 31
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_5e77a835",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Indentation",
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_7e8b841b",
+        "filename": "repo/includes/LinkedData/EntityDataSerializationService.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Should not use fully qualified page name",
+      "range": {
+        "startLine": 373,
+        "startChar": 29,
+        "endLine": 373,
+        "endChar": 30
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_1e9c405f",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "PageProps|null AFAICT",
+      "range": {
+        "startLine": 92,
+        "startChar": 9,
+        "endLine": 92,
+        "endChar": 18
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_be95ec37",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "self",
+      "range": {
+        "startLine": 336,
+        "startChar": 12,
+        "endLine": 336,
+        "endChar": 17
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_deb1d8dd",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Why not just $entityProps \u003d reset( $propValues );",
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_3ec01c2f",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "This name suggests a PageProps instance, should be renamed.",
+      "range": {
+        "startLine": 120,
+        "startChar": 9,
+        "endLine": 120,
+        "endChar": 19
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_1ec3603e",
+        "filename": "repo/includes/Rdf/RdfVocabulary.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "string[]?",
+      "range": {
+        "startLine": 314,
+        "startChar": 12,
+        "endLine": 314,
+        "endChar": 17
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_7ed9c42b",
+        "filename": "repo/tests/phpunit/includes/Dumpers/RdfDumpGeneratorTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Should not use fully qualified class name. Also constructing Title objects leaks state into LinkCache, thus should only be done inside of a MediaWikiTestCase. If possible, try to mock Title.",
+      "range": {
+        "startLine": 97,
+        "startChar": 11,
+        "endLine": 97,
+        "endChar": 12
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_9ede7013",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Should not use fully qualified page name.",
+      "range": {
+        "startLine": 70,
+        "startChar": 11,
+        "endLine": 70,
+        "endChar": 12
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_bee32cd3",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Should not use fully qualified page name.",
+      "range": {
+        "startLine": 273,
+        "startChar": 26,
+        "endLine": 273,
+        "endChar": 27
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_feccd468",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Should not use fully qualified page name. Also line breaking is weird here.",
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_1eca804a",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Superfluous space",
+      "range": {
+        "startLine": 276,
+        "startChar": 13,
+        "endLine": 276,
+        "endChar": 14
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_3ed73cf4",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Line breaking is weird here",
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_5ed408ed",
+        "filename": "repo/tests/phpunit/includes/Rdf/RdfBuilderTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Line breaking is weird here",
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_9e05907f",
+        "filename": "repo/tests/phpunit/maintenance/dumpRdfTest.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-27T22:09:07Z",
+      "side": 1,
+      "message": "Should not use fully qualified page name.",
+      "range": {
+        "startLine": 210,
+        "startChar": 11,
+        "endLine": 210,
+        "endChar": 12
+      },
+      "revId": "4423896a705696cf22236a8a1587f6d5734bc56e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
