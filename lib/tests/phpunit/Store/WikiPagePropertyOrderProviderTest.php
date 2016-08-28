@@ -13,47 +13,14 @@ use MediaWikiTestCase;
  * @group WikibaseLib
  * @group Database
  *
- * @license GNU GPL v2+
+ * @license GPL-2.0+
  * @author Lucie-Aimée Kaffee
+ * @author Marius Hoch
  */
-class PropertyOrderProviderTest extends MediaWikiTestCase {
+class WikiPagePropertyOrderProviderTest extends MediaWikiTestCase {
 
 	public function provideGetPropertyOrder() {
-		return array(
-			'simple match' => array(
-				"* P1 \n"
-				. "*P133 \n"
-				. "* p5", // Testing for lower case property IDs
-				array( 'P1' => 0, 'P133' => 1, 'P5' => 2 )
-			),
-			'strip multiline comment' => array(
-				"* P1 \n"
-				. "<!-- * P133 \n"
-				. "* P5 -->",
-				array( 'P1' => 0 )
-			),
-			'muliple comments' => array(
-				"* P1 \n"
-				. "<!-- * P133 --> \n"
-				. "* <!-- P5 -->",
-				array( 'P1' => 0 )
-			),
-			'bullet point glibberish' => array(
-				"* P1 \n"
-				. "* P133 \n"
-				. "* P5 Unicorns are all \n"
-				. "*  very beautiful!"
-				. "** This is a subheading",
-				array( 'P1' => 0, 'P133' => 1, 'P5' => 2 )
-			),
-			'additional text' => array(
-				"* P1 \n"
-				. "* P133 \n"
-				. "* P5 Unicorns are all \n"
-				. "very beautiful!",
-				array( 'P1' => 0, 'P133' => 1, 'P5' => 2 )
-			),
-		);
+		return WikiTextPropertyOrderProviderTestHelper::provideGetPropertyOrder();
 	}
 
 	/**
@@ -63,13 +30,21 @@ class PropertyOrderProviderTest extends MediaWikiTestCase {
 		$this->makeWikiPage( 'MediaWiki:Wikibase-SortedProperties', $text );
 		$instance = new WikiPagePropertyOrderProvider( Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' ) );
 		$propertyOrder = $instance->getPropertyOrder();
-		$this->assertEquals( $expected, $propertyOrder );
+		$this->assertSame( $expected, $propertyOrder );
 	}
 
 	private function makeWikiPage( $name, $text ) {
 		$title = Title::newFromText( $name );
 		$wikiPage = WikiPage::factory( $title );
 		$wikiPage->doEditContent( new WikitextContent( $text ), 'test' );
+	}
+
+	public function testGetPropertyOrder_pageDoesNotExist() {
+		$instance = new WikiPagePropertyOrderProvider(
+			Title::newFromText( 'MediaWiki:WikiPagePropertyOrderProviderTest-DoesNotExist' )
+		);
+		$propertyOrder = $instance->getPropertyOrder();
+		$this->assertSame( null, $propertyOrder );
 	}
 
 }
