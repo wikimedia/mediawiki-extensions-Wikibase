@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e96ab59_99ef6a82",
+        "filename": "repo/includes/Store/EntitiesWithoutTerm.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-28T15:38:03Z",
+      "side": 1,
+      "message": "Done, renamed to EntitiesWithoutTermFinder.",
+      "parentUuid": "6e89af39_ae520168",
+      "revId": "5bf5e3ed4380d0dcc7ed1ef47b468683f0920123",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e89af39_ce4f4dbf",
         "filename": "repo/includes/Store/ItemsWithoutSitelinks.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-08-23T19:01:50Z",
       "side": 1,
       "message": "Again, name... ItemsWithoutSitelinksFinder or something?",
+      "revId": "5bf5e3ed4380d0dcc7ed1ef47b468683f0920123",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_79eabe74",
+        "filename": "repo/includes/Store/ItemsWithoutSitelinks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-28T15:38:03Z",
+      "side": 1,
+      "message": "Done, renamed to ItemsWithoutSitelinksFinder.",
+      "parentUuid": "6e89af39_ce4f4dbf",
       "revId": "5bf5e3ed4380d0dcc7ed1ef47b468683f0920123",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
