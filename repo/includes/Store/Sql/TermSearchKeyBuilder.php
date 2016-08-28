@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use DatabaseBase;
 use Wikibase\Lib\Reporting\MessageReporter;
+use MediaWiki\MediaWikiServices;
 
 /**
  * Utility class for rebuilding the term_search_key field.
@@ -101,12 +102,14 @@ class TermSearchKeyBuilder {
 
 		$total = 0;
 
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$ticket = $lbFactory->getEmptyTransactionTicket( __METHOD__ );
 		while ( true ) {
 			// Make sure we are not running too far ahead of the slaves,
 			// as that would cause the site to be rendered read only.
-			wfWaitForSlaves();
+			$lbFactory->commitAndWaitForReplication( __METHOD__, $ticket );
 
-			$dbw->begin( __METHOD__ );
+			$dbw->startAtomic( __METHOD__ );
 
 			$terms = $dbw->select(
 				$this->table->getTableName(),
@@ -143,7 +146,7 @@ class TermSearchKeyBuilder {
 				$rowId = $row->term_row_id;
 			}
 
-			$dbw->commit( __METHOD__ );
+			$dbw->endAtomic( __METHOD__ );
 
 			$this->report( "Updated $c search keys (skipped $cError), up to row $rowId." );
 			$total += $c;
