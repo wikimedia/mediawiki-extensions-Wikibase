@@ -112,7 +112,7 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 						'<td[^<>]*>\+01:00</td>',
 						'<td[^<>]*>\(valueview-expert-timevalue-calendar-gregorian\)</td>',
 						'<td[^<>]*>\(months: 1\)</td>',
-						'<td[^<>]*>\(months: 0\)</td>',
+						'<td[^<>]*>0</td>',
 						'<td[^<>]*>\(months: 1\)</td>',
 					)
 				) . '@s'
@@ -168,6 +168,14 @@ class TimeDetailsFormatterTest extends \PHPUnit_Framework_TestCase {
 			'After in days' => array(
 				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 125, $day, $gregorian ),
 				'@.*<td[^<>]*after">\(days: 125\)</td>.*@s'
+			),
+			'Extreme range' => array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 1000000, 1000000, $day, $gregorian ),
+				'@<td[^<>]*before">\(days: 1000000\)</td>.*<td[^<>]*after">\(days: 1000000\)</td>@s'
+			),
+			'Zero range' => array(
+				new TimeValue( '+2001-01-01T00:00:00Z', 0, 0, 0, $day, $gregorian ),
+				'@<td[^<>]*before">0</td>.*<td[^<>]*after">0</td>@s'
 			),
 		);
 	}

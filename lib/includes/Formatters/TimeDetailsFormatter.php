@@ -163,6 +163,11 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function getAmountAndPrecisionHtml( $precision, $amount = 1 ) {
+		if ( $amount === 0 ) {
+			// TODO: Use NumberLocalizer
+			return '0';
+		}
+
 		$key = 'years';
 
 		switch ( $precision ) {
@@ -194,6 +199,7 @@ class TimeDetailsFormatter extends ValueFormatterBase {
 		}
 
 		$lang = $this->getOption( ValueFormatter::OPT_LANG );
+		// TODO: Use NumberLocalizer
 		$msg = wfMessage( $key, $amount )->inLanguage( $lang );
 		return htmlspecialchars( $msg->text() );
 	}
