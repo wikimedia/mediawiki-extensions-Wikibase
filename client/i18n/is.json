@@ -39,7 +39,6 @@
 	"wikibase-linkitem-not-loggedin-title": "Þú þarft að vera skráð/ur inn",
 	"wikibase-linkitem-not-loggedin": "Þú þarft að vera skráð/ur inn á þennann wiki og á [$1 samnýtta þekkingargrunninn] til að nota þennan möguleika.",
 	"wikibase-linkitem-success-link": "Síðurnar hafa verið tengdar saman. Þú getur fundið hlutinn með tenglunum í [$1 samnýtta þekkingargrunninum].",
-	"wikibase-limitreport-entities-accessed": "Fjöldi hlaðinna Wikibase eininga",
 	"wikibase-property-notfound": "Eginleikinn „$1“ fannst ekki.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Fela",
@@ -68,5 +67,11 @@
 	"wikibase-property-render-error": "Mistókst að ganga frá eiginleikanum $1: $2",
 	"wikibase-otherprojects": "Í öðrum verkefnum",
 	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna",
-	"wikibase-otherprojects-beta-description": "Bætir við \"{{int:wikibase-otherprojects}}\" fyrirsögn í hliðarstikuna með tenglum á önnur Wikimedia verkefni, byggt á gögnum {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Bætir við \"{{int:wikibase-otherprojects}}\" fyrirsögn í hliðarstikuna með tenglum á önnur Wikimedia verkefni, byggt á gögnum {{WBREPONAME}}.",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Tenging|Tengingar}} við {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Láta mig vita þegar einhver tengir síðu sem {{GENDER:|ég bjó til}} við {{WBREPONAME}} hlut.",
+	"notification-header-page-connection": "Síðan <strong>$3</strong> {{GENDER:$2|tengdist}} við {{WBREPONAME}} hlut.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|$4 önnur síða|$4 aðrar síður|100=99+ aðrar síður}} voru {{GENDER:$2|tengdar}} við {{WBREPONAME}} hluti.",
+	"notification-link-text-view-item": "{{GENDER:$1|Skoða}} hlut",
+	"notification-subject-page-connection": "Síða á {{SITENAME}} sem þú {{GENDER:$3|bjóst til}} var {{GENDER:$2|tengd}} við {{WBREPONAME}} hlut"
 }

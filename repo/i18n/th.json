@@ -1,11 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Horus"
+			"Horus",
+			"Pon44695"
 		]
 	},
 	"wikibase-edit": "แก้ไข",
 	"wikibase-add": "เพิ่ม",
+	"wikibase-label-empty": "ไม่มีการกำหนดป้าย",
+	"wikibase-description-empty": "ไม่มีการกำหนดคำอธิบาย",
 	"wikibase-sitelinks-special": "เว็บอื่น",
-	"wikibase-statementview-referencesheading-pendingcountersubject": "อ้างอิง"
+	"wikibase-statementview-rank-normal": "พิสัยปกติ",
+	"wikibase-statementview-references-counter": "อ้างอิง"
 }

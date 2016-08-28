@@ -4,9 +4,13 @@
 			"Nullzero",
 			"Horus",
 			"Octahedron80",
-			"Pilarbini"
+			"Pilarbini",
+			"Pon44695"
 		]
 	},
+	"tooltip-t-wikibase": "ลิงก์เชื่อมต่อข้อมูลที่เก็บไอเท็ม",
+	"wikibase-comment-update": "{{WBREPONAME}} ไอเท็มถูกเปลี่ยนแปลง",
+	"wikibase-dataitem": "{{WBREPONAME}} ไอเท็ม",
 	"wikibase-editlinks": "แก้ไขลิงก์",
 	"wikibase-editlinkstitle": "แก้ไขลิงก์ข้ามภาษา",
 	"wikibase-linkitem-addlinks": "เพิ่มลิงก์ข้ามภาษา",
