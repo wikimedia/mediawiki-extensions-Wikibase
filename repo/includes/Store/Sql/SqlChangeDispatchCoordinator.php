@@ -399,7 +399,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 		// start transaction
 		$db = $this->getRepoMaster();
-		$db->begin( __METHOD__ );
+		$db->startAtomic( __METHOD__ );
 
 		try {
 			$this->trace( 'Loaded repo db master' );
@@ -472,7 +472,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			throw $ex;
 		}
 
-		$db->commit( __METHOD__ );
+		$db->endAtomic( __METHOD__ );
 		$this->releaseRepoMaster( $db );
 
 		$this->trace( "Locked site $siteID at {$state['chd_seen']}." );
@@ -498,7 +498,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 		// start transaction
 		$db = $this->getRepoMaster();
-		$db->begin( __METHOD__ );
+		$db->startAtomic( __METHOD__ );
 
 		try {
 			$this->releaseClientLock( $db, $state['chd_lock'] );
@@ -520,7 +520,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 			throw $ex;
 		}
 
-		$db->commit( __METHOD__ );
+		$db->endAtomic( __METHOD__ );
 		$this->releaseRepoMaster( $db );
 
 		$this->trace( "Released $wikiDB for site $siteID at {$state['chd_seen']}." );
