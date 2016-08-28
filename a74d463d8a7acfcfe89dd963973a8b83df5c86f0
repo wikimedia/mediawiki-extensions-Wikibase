@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_54ba271f",
+        "filename": "repo/includes/Store/Sql/TermSearchKeyBuilder.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-28T17:57:18Z",
+      "side": 1,
+      "message": "Using MediaWikiServices here, instead of injecting is a little awry. $this-\u003etable inherits from DBAccessBase… I wonder why that doesn\u0027t give us access to a LbFactory.",
+      "revId": "a74d463d8a7acfcfe89dd963973a8b83df5c86f0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
