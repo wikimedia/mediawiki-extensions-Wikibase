@@ -28,6 +28,15 @@ interface PageUpdater {
 	public function purgeParserCache( array $titles );
 
 	/**
+	 * TODO!
+	 *
+	 * @since    0.5
+	 *
+	 * @param Title[] $titles The Titles of the pages to update
+	 */
+	public function updateParserCacheLanglinks( array $titles );
+
+	/**
 	 * Invalidates external web cached of the given pages.
 	 *
 	 * @since    0.4

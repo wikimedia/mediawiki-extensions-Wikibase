@@ -85,6 +85,45 @@ class WikiPageUpdater implements PageUpdater {
 	}
 
 	/**
+	 * @see PageUpdater::updateParserCacheLanglinks
+	 *
+	 * @since    0.5
+	 *
+	 * @param Title[] $titles The Titles of the pages to update
+	 */
+	public function updateParserCacheLanglinks( array $titles ) {
+		$langLinkHandler = \Wikibase\Client\WikibaseClient::getDefaultInstance()->getLangLinkHandler();
+		$purgeTime = wfTimestampNow();
+
+		/* @var Title $title */
+		foreach ( $titles as $title ) {
+			echo 'Running for title: ' . $title->getPrefixedText();
+			// Update the old canonical parser cache, then purge the page.
+			$wikiPage = \WikiPage::factory( $title );
+			$canonicalParserOptions = $wikiPage->getContentHandler()->makeParserOptions( 'canonical' );
+
+			$pCache = \ParserCache::singleton();
+			$parserOutput = $pCache->get( $wikiPage, $canonicalParserOptions );
+			if ( $parserOutput ) {
+				echo 'Got parser output for title: ' . $title->getPrefixedText();
+				$oldLangLinks = $parserOutput->getExtensionData( 'wikibase_pre_wikibase_langlinks' );
+				// ParserOutput to old to update.
+				if ( $oldLangLinks === null ) {
+					echo 'Parser output has no "wikibase_pre_wikibase_langlinks": ' . $title->getPrefixedText();
+					continue;
+				}
+				$parserOutput->setLanguageLinks( $oldLangLinks );
+				$langLinkHandler->addLinksFromRepository( $title, $parserOutput );
+				$pCache->save( $parserOutput, $wikiPage, $canonicalParserOptions, $purgeTime );
+			}
+
+			$title->invalidateCache( $purgeTime );
+			wfDebugLog( __CLASS__, __FUNCTION__ . ": purging page " . $title->getText() );
+		}
+		$this->incrementStats( 'ParserCacheLanglinks', count( $titles ) );
+	}
+
+	/**
 	 * Invalidates external web cached of the given pages.
 	 *
 	 * @since 0.4

@@ -31,6 +31,11 @@ class ChangeHandler {
 	const PARSER_PURGE_ACTION = 'parser';
 
 	/**
+	 * TODO
+	 */
+	const UPDATE_PARSER_CACHE_LANGLINKS_ACTION = 'parser-update';
+
+	/**
 	 * The change requites a LinksUpdate job to be scheduled to update any links
 	 * associated with the page.
 	 */
@@ -191,9 +196,7 @@ class ChangeHandler {
 		if ( isset( $aspects[EntityUsage::SITELINK_USAGE] ) || $all ) {
 			$actions[self::LINKS_UPDATE_ACTION] = true;
 
-			// TODO: introduce an update action that updates just the metadata
-			// in the cached ParserOutput, without re-parsing the page!
-			$actions[self::PARSER_PURGE_ACTION] = true;
+			$actions[self::UPDATE_PARSER_CACHE_LANGLINKS_ACTION] = true;
 		}
 
 		if ( isset( $aspects[EntityUsage::LABEL_USAGE] ) || $all ) {
@@ -214,6 +217,14 @@ class ChangeHandler {
 			$actions[self::WEB_PURGE_ACTION] = true;
 			$actions[self::RC_ENTRY_ACTION] = true;
 			$actions[self::HISTORY_ENTRY_ACTION] = true;
+		}
+
+		// If we purge the parser cache, there's no need to also try to update the parser cache
+		if (
+			isset( $actions[self::PARSER_PURGE_ACTION] ) &&
+			isset( $actions[self::UPDATE_PARSER_CACHE_LANGLINKS_ACTION] )
+		) {
+			unset( $actions[self::UPDATE_PARSER_CACHE_LANGLINKS_ACTION] );
 		}
 
 		return array_keys( $actions );
@@ -241,6 +252,10 @@ class ChangeHandler {
 		switch ( $action ) {
 			case self::PARSER_PURGE_ACTION:
 				$this->updater->purgeParserCache( $titlesToUpdate );
+				break;
+
+			case self::UPDATE_PARSER_CACHE_LANGLINKS_ACTION:
+				$this->updater->updateParserCacheLanglinks( $titlesToUpdate );
 				break;
 
 			case self::WEB_PURGE_ACTION:
