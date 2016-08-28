@@ -12,7 +12,7 @@ use TextContent;
  * @license GNU GPL v2+
  * @author Lucie-Aimée Kaffee
  */
-class WikiPagePropertyOrderProvider implements PropertyOrderProvider {
+class WikiPagePropertyOrderProvider extends WikiTextPropertyOrderProvider implements PropertyOrderProvider {
 
 	/**
 	 * @var Title
@@ -29,27 +29,12 @@ class WikiPagePropertyOrderProvider implements PropertyOrderProvider {
 	}
 
 	/**
-	 * @see parent::getPropertyOrder()
-	 * @return null|int[] null if page doesn't exist
-	 * @throws PropertyOrderProviderException
-	 */
-	public function getPropertyOrder() {
-		$pageContent = $this->getOrderedPropertiesPageContent();
-		if ( $pageContent === null ) {
-			return null;
-		}
-		$parsedList = $this->parseList( $pageContent );
-
-		return array_flip( $parsedList );
-	}
-
-	/**
 	 * Get Content of MediaWiki:Wikibase-SortedProperties
 	 *
 	 * @return string|null
 	 * @throws PropertyOrderProviderException
 	 */
-	private function getOrderedPropertiesPageContent() {
+	protected function getPropertyOrderWikitext() {
 		if ( !$this->pageTitle ) {
 			throw new PropertyOrderProviderException( 'Not able to get a title' );
 		}
@@ -67,25 +52,6 @@ class WikiPagePropertyOrderProvider implements PropertyOrderProvider {
 		}
 
 		return strval( $pageContent->getNativeData() );
-	}
-
-	/**
-	 * @param string $pageContent
-	 *
-	 * @return string[]
-	 */
-	private function parseList( $pageContent ) {
-		$pageContent = preg_replace( '@<!--.*?-->@s', '', $pageContent );
-
-		preg_match_all(
-			'@^\*\s*(?:\[\[Property:)?(P\d+)@im',
-			$pageContent,
-			$orderedPropertiesMatches,
-			PREG_PATTERN_ORDER
-		);
-		$orderedProperties = array_map( 'strtoupper', $orderedPropertiesMatches[1] );
-
-		return $orderedProperties;
 	}
 
 }
