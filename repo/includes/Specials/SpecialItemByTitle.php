@@ -208,12 +208,9 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * @param string $page
 	 */
 	private function switchForm( $siteId, $page ) {
-		if ( $this->sites->getSites()->hasSite( $siteId ) ) {
-			$site = $this->sites->getSite( $siteId );
-			$siteExists = in_array( $site->getGroup(), $this->groups );
-		} else {
-			$siteExists = false;
-		}
+		$groups = $this->groups;
+		$siteExists = $this->sites->getSites()->hasSite( $siteId )
+			&& in_array( $siteId, $this->siteLinkTargetProvider->getSiteList( $groups ) );
 
 		wfDebugLog( __CLASS__, __FUNCTION__ . ": Site $siteId exists: " . var_export( $siteExists, true ) );
 
