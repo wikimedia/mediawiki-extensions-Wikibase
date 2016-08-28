@@ -94,6 +94,7 @@ Default:
 ;otherProjectsLinks: Site global id list of sites which should be linked in the other projects sidebar section.
 ;otherProjectsLinksByDefault: Whether to show links to other projects per default. If not set, the links can be enabled as a beta feature (see otherProjectsLinksBeta).
 ;otherProjectsLinksBeta: If this is set to true links to other projects will be available as beta feature, enabling every user to turn them on/ off if wanted. (Only applies if other project links aren't enabled per default and the BetaFeatures extension is installed)
+;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property id. Will be ignored, if set to null.
 
 === Expert Settings ===
 ;injectRecentChanges: whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
