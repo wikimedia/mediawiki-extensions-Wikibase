@@ -78,6 +78,8 @@ use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\DispatchingPropertyOrderProvider;
+use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\WikibaseValueFormatterBuilders;
@@ -218,6 +220,11 @@ final class WikibaseClient {
 	 * @var EntityNamespaceLookup|null
 	 */
 	private $entityNamespaceLookup = null;
+
+	/**
+	 * @var PropertyOrderProvider|null
+	 */
+	private $propertyOrderProvider = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -1182,12 +1189,25 @@ final class WikibaseClient {
 	 * @return CachingPropertyOrderProvider
 	 */
 	public function getPropertyOrderProvider() {
-		$title = Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' );
+		if ( $this->propertyOrderProvider === null ) {
+			$title = Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' );
+			$innerProvider = new WikiPagePropertyOrderProvider( $title );
 
-		return new CachingPropertyOrderProvider(
-			new WikiPagePropertyOrderProvider( $title ),
-			wfGetMainCache()
-		);
+			$url = $this->settings->getSetting( 'sortedPropertiesUrl' );
+			if ( $url !== null ) {
+				$innerProvider = new DispatchingPropertyOrderProvider(
+					$innerProvider,
+					new HttpUrlPropertyOrderProvider( $url )
+				);
+			}
+
+			$this->propertyOrderProvider = new CachingPropertyOrderProvider(
+				$innerProvider,
+				wfGetMainCache()
+			);
+		}
+
+		return $this->propertyOrderProvider;
 	}
 
 	/**

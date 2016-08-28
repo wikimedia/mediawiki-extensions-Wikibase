@@ -350,8 +350,21 @@ class WikibaseClientTest extends \PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf( RestrictedEntityLookup::class, $restrictedEntityLookup );
 	}
 
-	public function testGetPropertyOrderProvider() {
-		$propertyOrderProvider = $this->getWikibaseClient()->getPropertyOrderProvider();
+	public function sortedPropertiesUrlProvider() {
+		return [
+			[ 'page-url' ],
+			[ null ]
+		];
+	}
+
+	/**
+	 * @dataProvider sortedPropertiesUrlProvider
+	 */
+	public function testGetPropertyOrderProvider_noSortedPropertiesUrl( $sortedPropertiesUrl ) {
+		$wikibaseClient = $this->getWikibaseClient();
+		$wikibaseClient->getSettings()->setSetting( 'sortedPropertiesUrl', $sortedPropertiesUrl );
+
+		$propertyOrderProvider = $wikibaseClient->getPropertyOrderProvider();
 		$this->assertInstanceOf( PropertyOrderProvider::class, $propertyOrderProvider );
 	}
 
