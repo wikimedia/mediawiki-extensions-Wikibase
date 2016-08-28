@@ -337,6 +337,8 @@ class LangLinkHandler {
 		$allowedGroups = array( $this->siteGroup );
 
 		$onPageLinks = $out->getLanguageLinks();
+		$out->setExtensionData( 'wikibase_pre_wikibase_langlinks', $onPageLinks );
+
 		$onPageLinks = $this->localLinksToArray( $onPageLinks );
 
 		$repoLinks = $this->getEntityLinks( $title );

@@ -21,6 +21,7 @@ class MockPageUpdater implements PageUpdater {
 
 	private $updates = array(
 		'purgeParserCache' => array(),
+		'updateParserCacheLanglinks' => array(),
 		'purgeWebCache' => array(),
 		'scheduleRefreshLinks' => array(),
 		'injectRCRecord' => array(),
@@ -33,6 +34,16 @@ class MockPageUpdater implements PageUpdater {
 		foreach ( $titles as $title ) {
 			$key = $title->getPrefixedDBkey();
 			$this->updates['purgeParserCache'][ $key ] = $title;
+		}
+	}
+
+	/**
+	 * @param Title[] $titles
+	 */
+	public function updateParserCacheLanglinks( array $titles ) {
+		foreach ( $titles as $title ) {
+			$key = $title->getPrefixedDBkey();
+			$this->updates['updateParserCacheLanglinks'][ $key ] = $title;
 		}
 	}
 
