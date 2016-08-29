@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_b3ea7e71",
+        "filename": "view/resources/wikibase/view/resources.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-29T14:10:23Z",
+      "side": 1,
+      "message": "We usually have an empty line between each definition.",
+      "revId": "8fd6f1100d5c6b4d8c28b69b3a1cf3e90d154bac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
