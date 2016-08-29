@@ -102,6 +102,7 @@ class TermSearchKeyBuilder {
 
 		$total = 0;
 
+		// @TODO: Inject the LBFactory
 		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$ticket = $lbFactory->getEmptyTransactionTicket( __METHOD__ );
 		while ( true ) {
