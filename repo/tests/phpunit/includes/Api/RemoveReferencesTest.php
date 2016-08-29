@@ -95,7 +95,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 
 			$this->assertInternalType( 'string', $statement->getGuid() );
 
-			if ( count( $references ) === 0 ) {
+			if ( $references->isEmpty() ) {
 				$this->makeInvalidRequest(
 					$statement->getGuid(),
 					array( '~=[,,_,,]:3' ),
