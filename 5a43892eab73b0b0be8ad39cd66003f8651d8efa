@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e96ab59_9307421f",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-29T14:36:56Z",
+      "side": 1,
+      "message": "hm? The innerProvider is used to construct the CachingPropertyOrderProvider below.",
+      "parentUuid": "4e96ab59_f39b2619",
+      "range": {
+        "startLine": 1196,
+        "startChar": 3,
+        "endLine": 1196,
+        "endChar": 51
+      },
+      "revId": "5a43892eab73b0b0be8ad39cd66003f8651d8efa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_93a3c23e",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4e96ab59_f605d414",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-29T14:36:56Z",
+      "side": 1,
+      "message": "Ugh… indeed, the wording here is very weird. Will reword this.",
+      "parentUuid": "4e96ab59_93a3c23e",
+      "range": {
+        "startLine": 96,
+        "startChar": 69,
+        "endLine": 96,
+        "endChar": 82
+      },
+      "revId": "5a43892eab73b0b0be8ad39cd66003f8651d8efa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_b3b8be75",
         "filename": "docs/options.wiki",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2016-08-29T14:25:21Z",
       "side": 1,
       "message": "unrelated change? (not that I\u0027d be bothered, just wondering)",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 375
+      },
+      "revId": "5a43892eab73b0b0be8ad39cd66003f8651d8efa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_d600d806",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-08-29T14:36:56Z",
+      "side": 1,
+      "message": "Yeah, vim added a trailing new line, can be ignored.",
+      "parentUuid": "4e96ab59_b3b8be75",
       "range": {
         "startLine": 102,
         "startChar": 0,
