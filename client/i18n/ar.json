@@ -22,6 +22,7 @@
 	"tooltip-t-wikibase": "الربط بعنصر مرتبط في مستودع البيانات",
 	"wikibase-after-page-move": "يمكنك أيضا تحديث [$1 بند {{WBREPONAME}} المصاحب] للحفاظ على وصلات اللغة على الصفحة المنقولة.",
 	"wikibase-after-page-move-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
+	"wikibase-after-page-delete": "ينبغي أيضًا أن تُزيل الوصلة التي تقود لهذه الصفحة من [$1 عنصر {{WBREPONAME}} المرتبط بها] للحفاظ على وصلات اللغات.",
 	"wikibase-after-page-delete-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
 	"wikibase-comment-add": "تم إنشاء عنصر {{WBREPONAME}}.",
 	"wikibase-comment-remove": "تم حذف بند ويكيبيانات المرتبطة. و تم إزالة ارتباطات اللغة.",
