@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e96ab59_131c3279",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 30
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-08-29T14:37:23Z",
+      "side": 1,
+      "message": "\"this entities\" -\u003e \"these\" or \"entities\"",
+      "revId": "3f0fff4dc4cba4b35c8e17b95995f04139c998af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e96ab59_730ad62a",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 30
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-08-29T14:37:23Z",
+      "side": 1,
+      "message": "double space",
+      "range": {
+        "startLine": 84,
+        "startChar": 39,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "3f0fff4dc4cba4b35c8e17b95995f04139c998af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
