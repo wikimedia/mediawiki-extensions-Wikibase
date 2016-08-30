@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 
+use MediaWiki\MediaWikiServices;
 use RuntimeException;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -153,13 +154,16 @@ class PropertyInfoTableBuilder {
 			);
 		}
 
+		// @TODO: Inject the LBFactory
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$ticket = $lbFactory->getEmptyTransactionTicket( __METHOD__ );
 		while ( true ) {
 			// Make sure we are not running too far ahead of the slaves,
 			// as that would cause the site to be rendered read only.
-			wfWaitForSlaves();
+			$lbFactory->commitAndWaitForReplication( __METHOD__, $ticket );
 
 			if ( $this->useTransactions ) {
-				$dbw->begin( __METHOD__ );
+				$dbw->startAtomic( __METHOD__ );
 			}
 
 			//FIXME: use an EntityIdPager from EntityPerPage
@@ -198,7 +202,7 @@ class PropertyInfoTableBuilder {
 			}
 
 			if ( $this->useTransactions ) {
-				$dbw->commit( __METHOD__ );
+				$dbw->endAtomic( __METHOD__ );
 			}
 
 			$this->reportMessage( "Updated $c properties, up to ID $rowId." );
