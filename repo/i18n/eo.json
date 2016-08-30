@@ -18,6 +18,7 @@
 	"wikibase-save": "konservi",
 	"wikibase-cancel": "nuligi",
 	"wikibase-add": "aldoni",
+	"wikibase-addqualifier": "aldoni kvalifikon",
 	"wikibase-addreference": "aldoni referencon",
 	"wikibase-save-inprogress": "Konservado...",
 	"wikibase-remove-inprogress": "Forigado...",

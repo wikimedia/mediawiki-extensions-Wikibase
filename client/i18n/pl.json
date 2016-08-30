@@ -74,6 +74,6 @@
 	"wikibase-property-render-error": "Nie można zrenderować właściwości $1: $2",
 	"wikibase-otherprojects": "W innych projektach",
 	"wikibase-otherprojects-beta-message": "Pasek siostrzanych projektów",
-	"wikibase-otherprojects-beta-description": "Dodaje sekcję „{{int:wikibase-otherprojects}}” do paska bocznego, zawierającą odnośniki do innych projektów Wikimedia w oparciu o dane z {{GRAMMAR:D.lp|{{WBREPONAME}}}}.",
+	"wikibase-otherprojects-beta-description": "Dodaje sekcję „{{int:wikibase-otherprojects}}” do paska bocznego, zawierającą odnośniki do innych projektów Wikimedia w oparciu o dane z Wikidanych.",
 	"notification-link-text-view-item": "{{GENDER:$1|Zobacz}} element"
 }
