@@ -13,7 +13,7 @@ Feature: Creating statements of type item
       And The copyright warning has been dismissed
       And Anonymous edit warnings are disabled
 
-  @integration @modify_entity
+  @modify_entity
   Scenario Outline: Adding a statement of type item
     Given I have the following properties with datatype:
       | itemprop | wikibase-item |

@@ -119,7 +119,7 @@ Feature: Adding references to statements
     | click the statement save button |
     | press the RETURN key in the snak value input field |
 
-  @integration @modify_entity
+  @modify_entity
   Scenario: Add reference with multiple snaks
     Given I have the following properties with datatype:
         | stringprop1 | string |
