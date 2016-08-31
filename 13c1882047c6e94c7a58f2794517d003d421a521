@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_74bd7ed1",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T13:06:15Z",
+      "side": 1,
+      "message": "This is quite expensive, especially if you do it for every single test method call. Just inserting into the page table directly should work for this test, no?\n\nIf you want \"real\" pages, consider implementing addDBDataOnce(). If you do that, don\u0027t set $this-\u003etablesUsed[] \u003d \u0027page\u0027, since that will reset the page table for every test method call. Also, use page names that will not conflict (e.g. by including the name of the test in the page name).\n\nBut as I said, just inserting into the page table directly should work fine here.",
+      "revId": "13c1882047c6e94c7a58f2794517d003d421a521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
