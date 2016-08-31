@@ -156,7 +156,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 				$siteId .= 'wiki';
 			}
 
-			/* @var ItemHandler $itemHandler */
 			$itemId = $this->siteLinkLookup->getItemIdForLink( $siteId, $pageName );
 
 			// Do we have an item content, and if not can we try harder?
