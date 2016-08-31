@@ -72,79 +72,79 @@
 	/**
 	 * @property {wikibase.view.StructureEditorFactory}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._structureEditorFactory = null;
 
 	/**
 	 * @property {util.ContentLanguages}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._contentLanguages = null;
 
 	/**
 	 * @property {dataTypes.DataTypeStore}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._dataTypeStore = null;
 
 	/**
 	 * @property {wikibase.entityIdFormatter.EntityIdHtmlFormatter}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._entityIdHtmlFormatter = null;
 
 	/**
 	 * @property {wikibase.entityIdFormatter.EntityIdPlainFormatter}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._entityIdPlainFormatter = null;
 
 	/**
 	 * @property {wikibase.store.EntityStore}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._entityStore = null;
 
 	/**
 	 * @property {jQuery.util.EventSingletonManager}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._eventSingletonManager = null;
 
 	/**
 	 * @property {jQuery.valueview.ExpertStore}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._expertStore = null;
 
 	/**
 	 * @property {wikibase.ValueFormatterFactory}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._formatterFactory = null;
 
 	/**
 	 * @property {util.MessageProvider}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._messageProvider = null;
 
 	/**
 	 * @property {valueParsers.ValueParserStore}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._parserStore = null;
 
 	/**
 	 * @property {string[]}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._userLanguages = null;
 
 	/**
 	 * @property {string|null}
 	 * @private
-	 **/
+	 */
 	SELF.prototype._vocabularyLookupApiUrl = null;
 
 	/**
@@ -155,7 +155,7 @@
 	 * @param {jQuery} $entityview
 	 * @return {jQuery.wikibase.entityview} The constructed entity view
 	 * @throws {Error} If there is no view for the given entity type
-	 **/
+	 */
 	SELF.prototype.getEntityView = function( startEditingCallback, entity, $entityview ) {
 		return this._getView(
 			// Typically "itemview" or "propertyview".
@@ -177,7 +177,7 @@
 	 * @param {wikibase.datamodel.Fingerprint} fingerprint
 	 * @param {jQuery} $entitytermsview
 	 * @return {jQuery.wikibase.entitytermsview} The constructed entity terms view
-	 **/
+	 */
 	SELF.prototype.getEntityTermsView = function( startEditingCallback, fingerprint, $entitytermsview ) {
 		return this._getView(
 			'entitytermsview',
@@ -197,7 +197,7 @@
 	 * @param {wikibase.datamodel.SiteLinkSet} sitelinkSet
 	 * @param {jQuery} $sitelinkgrouplistview
 	 * @return {jQuery.wikibase.sitelinkgrouplistview} The constructed sitelinkgrouplistview
-	 **/
+	 */
 	SELF.prototype.getSitelinkGroupListView = function( startEditingCallback, sitelinkSet, $sitelinkgrouplistview ) {
 		var self = this;
 
@@ -224,7 +224,7 @@
 	 * @param {wikibase.datamodel.SiteLinkSet} siteLinks
 	 * @param {jQuery} $sitelinkgroupview
 	 * @return {jQuery.wikibase.sitelinkgroupview} The constructed sitelinkgroupview
-	 **/
+	 */
 	SELF.prototype.getSitelinkGroupView = function( startEditingCallback, groupName, siteLinks, $sitelinkgroupview ) {
 		return this._getView(
 			'sitelinkgroupview',
@@ -246,7 +246,7 @@
 	 * @param {string[]} allowedSiteIds
 	 * @param {jQuery} $counter
 	 * @return {jQuery.wikibase.sitelinklistview} The constructed sitelinklistview
-	 **/
+	 */
 	SELF.prototype.getSiteLinkListView = function( startEditingCallback, siteLinks, $sitelinklistview, allowedSiteIds, $counter ) {
 		return this._getView(
 			'sitelinklistview',
@@ -293,7 +293,7 @@
 	 * @param {wikibase.datamodel.Item|wikibase.datamodel.Property} entity
 	 * @param {jQuery} $statementgrouplistview
 	 * @return {jQuery.wikibase.statementgrouplistview} The constructed statementgrouplistview
-	 **/
+	 */
 	SELF.prototype.getStatementGroupListView = function( startEditingCallback, entity, $statementgrouplistview ) {
 		var statementGroupSet = entity.getStatements();
 		return this._getView(
@@ -331,7 +331,7 @@
 	 * @param {string} entityId
 	 * @param {Function} getStatementForGuid A function returning a `wikibase.datamodel.Statement` for a given GUID
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
-	 **/
+	 */
 	SELF.prototype.getListItemAdapterForStatementGroupView = function( startEditingCallback, entityId, getStatementForGuid ) {
 		return new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementgroupview,
@@ -356,7 +356,7 @@
 	 * @param {wikibase.datamodel.StatementList} value
 	 * @param {jQuery} $statementlistview
 	 * @return {jQuery.wikibase.statementgroupview} The constructed statementlistview
-	 **/
+	 */
 	SELF.prototype.getStatementListView = function( startEditingCallback, entityId, propertyId, getStatementForGuid, value, $statementlistview ) {
 		propertyId = propertyId || $statementlistview.closest( '.wikibase-statementgroupview' ).attr( 'id' );
 
@@ -391,8 +391,10 @@
 	 * @param {Function} getValueForDom A function returning a `wikibase.datamodel.Statement` or `null`
 	 *                                  for a given DOM element
 	 * @param {string|null} [propertyId] Optionally a property all statements are or should be on
+	 * @param {Function} removeCallback A function that accepts a statementview and removes it from
+	 *  the list.
 	 * @return {jQuery.wikibase.listview.ListItemAdapter} The constructed ListItemAdapter
-	 **/
+	 */
 	SELF.prototype.getListItemAdapterForStatementView = function( startEditingCallback, entityId, getValueForDom, propertyId, removeCallback ) {
 		var listItemAdapter = new $.wikibase.listview.ListItemAdapter( {
 			listItemWidget: $.wikibase.statementview,
@@ -555,7 +557,7 @@
 	/**
 	 * @private
 	 * @return {wikibase.ValueViewBuilder}
-	 **/
+	 */
 	SELF.prototype._getValueViewBuilder = function() {
 		return new wb.ValueViewBuilder(
 			this._expertStore,
@@ -572,7 +574,7 @@
 	 * @private
 	 * @return {Object} The constructed view
 	 * @throws {Error} If there is no view with the given name
-	 **/
+	 */
 	SELF.prototype._getView = function( viewName, $dom, options ) {
 		if ( !$.wikibase[ viewName ] ) {
 			throw new Error( 'View ' + viewName + ' does not exist' );

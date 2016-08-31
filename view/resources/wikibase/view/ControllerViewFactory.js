@@ -85,6 +85,7 @@ SELF.prototype.getStatementView = function( startEditingCallback, entityId, prop
 		startEditingController,
 		entityId,
 		propertyId,
+		removeCallback,
 		value,
 		$dom
 	);

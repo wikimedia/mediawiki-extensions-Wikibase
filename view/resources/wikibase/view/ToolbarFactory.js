@@ -20,7 +20,7 @@
 	 * @param {Object} options
 	 * @param {jQuery} $dom
 	 * @return {jQuery.wikibase.addtoolbar} The addtoolbar
-	 **/
+	 */
 	SELF.prototype.getAddToolbar = function( options, $dom ) {
 		return this._getToolbar( 'add', $dom, options );
 	};
@@ -31,7 +31,7 @@
 	 * @param {Object} options
 	 * @param {jQuery} $dom
 	 * @return {jQuery.wikibase.edittoolbar} The edittoolbar
-	 **/
+	 */
 	SELF.prototype.getEditToolbar = function( options, $dom ) {
 		return this._getToolbar( 'edit', $dom, options );
 	};
@@ -42,7 +42,7 @@
 	 * @param {Object} options
 	 * @param {jQuery} $dom
 	 * @return {jQuery.wikibase.removetoolbar} The removetoolbar
-	 **/
+	 */
 	SELF.prototype.getRemoveToolbar = function( options, $dom ) {
 		return this._getToolbar( 'remove', $dom, options );
 	};
@@ -52,7 +52,7 @@
 	 *
 	 * @param {jQuery} $root
 	 * @return {jQuery} The toolbar container
-	 **/
+	 */
 	SELF.prototype.getToolbarContainer = function( $root ) {
 		var $container = $root.children( '.wikibase-toolbar-container' ).first();
 		if ( $container.length === 0 ) {
@@ -65,7 +65,7 @@
 	 * @private
 	 * @return {Object} The constructed toolbar
 	 * @throws {Error} If there is no toolbar with the given name
-	 **/
+	 */
 	SELF.prototype._getToolbar = function( toolbarType, $dom, options ) {
 		var toolbarName = toolbarType + 'toolbar';
 		if ( !$.wikibase[ toolbarName ] ) {
