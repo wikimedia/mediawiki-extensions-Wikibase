@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_f4ea4e9b",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T13:26:56Z",
+      "side": 1,
+      "message": "I meant move the entire loop.",
+      "revId": "8f99728efd902d63ee69b23b6ef1c8ca9bdcc50c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_d4ed52b6",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T13:26:56Z",
+      "side": 1,
+      "message": "That doesn\u0027t work, you\u0027d need $currentPageId to be a reference param. I wonder why this doesn\u0027t make tests fail? It seems like something isn\u0027t actually being tested...\n\nBut I meant to move the entire loop into a private method. Then you don\u0027t have the issue with tracking state across loop iterations.",
+      "revId": "8f99728efd902d63ee69b23b6ef1c8ca9bdcc50c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
