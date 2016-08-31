@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_9f63e3d9",
+        "filename": "client/includes/Api/ApiClientInfo.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:35:27Z",
+      "side": 1,
+      "message": "Don\u0027t do this in a query submodule, override the getCacheMode() method instead.\n\nDoing this will get stomped on by ApiQuery making its own call.",
+      "revId": "70469d0be886dc8c14bacbcc09c6dc45e02bacf1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
