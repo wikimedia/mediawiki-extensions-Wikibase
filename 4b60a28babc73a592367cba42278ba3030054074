@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_54b79dd3",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T22:07:50Z",
+      "side": 1,
+      "message": "Technically now, but it adds bloat and is a bit misleading. \nI don\u0027t think it blocks this patch, but it would be nice to fix it in a follow-up.",
+      "parentUuid": "2e93376b_54907d46",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_7a85655a",
         "filename": "repo/includes/Rdf/RdfProducer.php",
         "patchSetId": 26
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "it\u0027s already kind of optional since you need to define units config for it to actually work :)",
       "parentUuid": "2e93376b_7a85655a",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f4a88976",
+        "filename": "repo/includes/Rdf/RdfProducer.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T22:07:50Z",
+      "side": 1,
+      "message": "Yea, but when it\u0027s configured, the client can\u0027t disable it.",
+      "parentUuid": "2e93376b_74957935",
       "revId": "4b60a28babc73a592367cba42278ba3030054074",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
