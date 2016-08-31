@@ -50,6 +50,7 @@ Default:
 ;formatterUrlProperty: Property to be used on properties that defines a formatter URL which is used to link identifiers. The placeholder <code>$1</code> will be replaced by the identifier. Example: <code>https://www.wikidata.org/entity/$1</code>
 ;transformLegacyFormatOnExport: Whether entity revisions stored in a legacy format should be converted on the fly while exporting. Enabled per default.
 ;allowEntityImport: allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
+;pagePropertiesRdf: array that maps between page properties and Wikibase predicates for RDF dumps. Maps from database property name to an array that contains a key 'name' (RDF property name, which will be prefixed by wikibase:) and an optional key 'type'.
 
 == Client Settings ==
 
