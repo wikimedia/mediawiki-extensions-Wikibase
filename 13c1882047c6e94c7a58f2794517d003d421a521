@@ -34,6 +34,24 @@
       "revId": "13c1882047c6e94c7a58f2794517d003d421a521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f4bc0eb4",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T13:20:37Z",
+      "side": 1,
+      "message": "Then try only inserting the pages once.\n\nWith the current code, you clear the page table for every test and re-create the page, but the revision table isn\u0027t cleared, nor are any of the secondary table. This is slow but still not clean. I\u0027d prefer to \"leak\" the pages from the test, but only create them once.",
+      "parentUuid": "2e93376b_d479d22b",
+      "revId": "13c1882047c6e94c7a58f2794517d003d421a521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
