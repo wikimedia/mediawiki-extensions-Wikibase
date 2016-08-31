@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_74273e60",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T12:39:28Z",
+      "side": 1,
+      "message": "Would be nice to have the construction of the result structure in a separate method",
+      "revId": "39f70acfa9960a20de114060ffb8fcbb0043a659",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_d41552eb",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T12:39:28Z",
+      "side": 1,
+      "message": "Would be good to have a test case that returns more than one used item ID. Otherwise, not all code pathes get tested.",
+      "revId": "39f70acfa9960a20de114060ffb8fcbb0043a659",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
