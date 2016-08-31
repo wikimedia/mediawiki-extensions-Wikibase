@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_94c58a44",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-31T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_74273e60",
+      "revId": "39f70acfa9960a20de114060ffb8fcbb0043a659",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_54afa291",
         "filename": "client/includes/Api/EntityUsage.php",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_34b776d5",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-31T13:20:20Z",
+      "side": 1,
+      "message": "All prop API modules I have seen work like this, checkout for example iwbacklinks. We should note that in a more general place like core API help.",
+      "parentUuid": "2e93376b_54afa291",
+      "revId": "39f70acfa9960a20de114060ffb8fcbb0043a659",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_d41552eb",
         "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2016-08-31T12:39:28Z",
       "side": 1,
       "message": "Would be good to have a test case that returns more than one used item ID. Otherwise, not all code pathes get tested.",
+      "revId": "39f70acfa9960a20de114060ffb8fcbb0043a659",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b4c28637",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-08-31T13:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_d41552eb",
       "revId": "39f70acfa9960a20de114060ffb8fcbb0043a659",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
