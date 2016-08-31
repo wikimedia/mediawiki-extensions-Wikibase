@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_d48472a6",
+        "filename": "view/resources/wikibase/view/ControllerViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-31T14:15:14Z",
+      "side": 1,
+      "message": "The new parameter is missing here.",
+      "revId": "5aff38165e1039165ac24e353ed010728354aee9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_74765ed7",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-31T14:15:14Z",
+      "side": 1,
+      "message": "@param missing.",
+      "revId": "5aff38165e1039165ac24e353ed010728354aee9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
