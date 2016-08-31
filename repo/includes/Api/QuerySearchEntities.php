@@ -148,6 +148,16 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	}
 
 	/**
+	 * @see ApiBase::getCacheMode
+	 *
+	 * @param array $params
+	 * @return string
+	 */
+	public function getCacheMode( array $params ) {
+		return 'public';
+	}
+
+	/**
 	 * @see ApiBase::isInternal
 	 */
 	public function isInternal() {

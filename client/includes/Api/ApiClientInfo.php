@@ -88,6 +88,16 @@ class ApiClientInfo extends ApiQueryBase {
 	}
 
 	/**
+	 * @see ApiBase::getCacheMode
+	 *
+	 * @param array $params
+	 * @return string
+	 */
+	public function getCacheMode( array $params ) {
+		return 'public';
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {

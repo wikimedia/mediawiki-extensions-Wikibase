@@ -33,6 +33,16 @@ class AvailableBadges extends ApiBase {
 	}
 
 	/**
+	 * @see ApiBase::getCacheMode
+	 *
+	 * @param array $params
+	 * @return string
+	 */
+	public function getCacheMode( array $params ) {
+		return 'public';
+	}
+
+	/**
 	 * @see ApiBase::getExamplesMessages
 	 */
 	protected function getExamplesMessages() {
