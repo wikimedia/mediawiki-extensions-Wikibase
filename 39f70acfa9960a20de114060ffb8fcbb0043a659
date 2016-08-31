@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_54afa291",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T13:11:22Z",
+      "side": 1,
+      "message": "The limit parameter does not account for this grouping. Paging should still work as expected (do we have a test for that?), but it might be confusing to only get 3 results if the limit is 10. People may assume this means that there are no more results, which may not be trues.\n\nFixing this will be tricky, though... Maybe we can live with it. It\u0027s worth a warning in the documentation, though.",
+      "revId": "39f70acfa9960a20de114060ffb8fcbb0043a659",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_d41552eb",
         "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
         "patchSetId": 2
