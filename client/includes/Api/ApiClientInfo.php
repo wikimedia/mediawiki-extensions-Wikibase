@@ -44,6 +44,7 @@ class ApiClientInfo extends ApiQueryBase {
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );
+		$this->getMain()->setCacheMaxAge( 3600 );
 
 		$params = $this->extractRequestParams();
 
