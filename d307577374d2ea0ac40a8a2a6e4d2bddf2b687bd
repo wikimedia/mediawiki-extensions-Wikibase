@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_9f6da399",
+        "filename": "client/includes/Api/ApiClientInfo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:55:07Z",
+      "side": 1,
+      "message": "This may not be that great of an idea here, since this would make action\u003dquery emit caching headers by default even when other modules are included in the query.",
+      "revId": "d307577374d2ea0ac40a8a2a6e4d2bddf2b687bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
