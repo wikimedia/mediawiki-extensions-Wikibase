@@ -128,7 +128,7 @@
 	"wikibase-wikibaserepopage-invalid-id": "Het ID is \"$1\" is niet bekend in het systeem. Gebruik een geldig entiteits-ID.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 is een doorverwijzing.",
 	"wikibase-wikibaserepopage-storage-exception": "Er is een fout opgetreden tijdens het laden van $1: $2.",
-	"special-itembytitle": "Item gesorteerd op naam",
+	"special-itembytitle": "Item op naam",
 	"wikibase-itembytitle-lookup-fieldset": "Items zoeken op site en paginanaam",
 	"wikibase-itembytitle-lookup-site": "Site:",
 	"wikibase-itembytitle-lookup-page": "Pagina:",
