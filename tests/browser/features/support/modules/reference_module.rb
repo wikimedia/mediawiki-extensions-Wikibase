@@ -59,6 +59,7 @@ module ReferencePage
       end
       property_handle = snak[0]
       value = snak[1]
+      ajax_wait
       snak_entity_selector_input(index).when_visible.clear
       snak_entity_selector_input(index).send_keys properties[property_handle]['label']
       ajax_wait

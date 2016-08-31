@@ -24,7 +24,10 @@ end
 
 When /^I add the following reference snaks:$/ do |table|
   step 'I click the statement edit button'
-  on(ItemPage).add_reference_snaks(table.raw, @properties)
+  on(ItemPage) do |page|
+    page.ajax_wait
+    page.add_reference_snaks(table.raw, @properties)
+  end
   step 'I click the statement save button'
 end
 
