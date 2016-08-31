@@ -439,7 +439,7 @@ class EditEntityAction extends ViewEntityAction {
 	 * Add style sheets and supporting JS for diff display.
 	 */
 	private function showDiffStyle() {
-		$this->getOutput()->addModuleStyles( 'mediawiki.action.history.diff' );
+		$this->getOutput()->addModuleStyles( 'mediawiki.action.history.diff.styles' );
 	}
 
 	/**
