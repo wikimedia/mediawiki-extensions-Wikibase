@@ -77,6 +77,57 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_74e65e15",
+        "filename": "repo/includes/Hooks/LinkBeginHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T12:48:46Z",
+      "side": 1,
+      "message": "Can we use a TitleFactory here, to allow tests to inject mock Titles?",
+      "revId": "49d71a1fb0c123ae72210bbd777b8ab87dd2f270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_54e162fa",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T12:48:46Z",
+      "side": 1,
+      "message": "Can\u0027t we do this without hitting the database now?",
+      "revId": "49d71a1fb0c123ae72210bbd777b8ab87dd2f270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_34dcd64b",
+        "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T12:48:46Z",
+      "side": 1,
+      "message": "Why not use a mock? That would make testing a lot easier, no?",
+      "revId": "49d71a1fb0c123ae72210bbd777b8ab87dd2f270",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e96ab59_e73c52bf",
         "filename": "repo/tests/phpunit/includes/Hooks/LinkBeginHookHandlerTest.php",
         "patchSetId": 7
