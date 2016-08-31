@@ -999,7 +999,8 @@ class WikibaseRepo {
 				$this->getVocabularyBaseUri(),
 				$entityDataTitle->getCanonicalURL() . '/',
 				$languageCodes,
-				$this->dataTypeDefinitions->getRdfTypeUris()
+				$this->dataTypeDefinitions->getRdfTypeUris(),
+				$this->settings->getSetting( 'pagePropertiesRdf' ) ?: []
 			);
 		}
 

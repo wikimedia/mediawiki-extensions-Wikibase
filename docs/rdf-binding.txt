@@ -10,3 +10,4 @@ The following are the RDF format versions, see FORMAT_VERSION in RdfVocabulary.p
 
 0.0.1 - Initial implementation
 0.0.2 - Changed WKT coordinate order (see T130049)
+0.0.3 - Added page props option to wdata: (see T129046)

@@ -185,4 +185,13 @@ return [
 		'http://www.wikidata.org/entity/Q3359' => 'triton',
 		'http://www.wikidata.org/entity/Q339' => 'pluto'
 	],
+
+	// Map between page properties and Wikibase predicates
+	// Maps from database property name to array:
+	// name => RDF property name (will be prefixed by wikibase:)
+	// type => type to convert to (optional)
+	'pagePropertiesRdf' => [
+		'wb-sitelinks' => [ 'name' => 'sitelinks', 'type' => 'integer' ],
+		'wb-claims' => [ 'name' => 'statements', 'type' => 'integer' ],
+	]
 ];
