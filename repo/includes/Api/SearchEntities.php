@@ -243,6 +243,16 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
+	 * @see ApiBase::getCacheMode
+	 *
+	 * @param array $params
+	 * @return string
+	 */
+	protected function getCacheMode( array $params ) {
+		return 'public';
+	}
+
+	/**
 	 * @see ApiBase::getAllowedParams
 	 */
 	protected function getAllowedParams() {
