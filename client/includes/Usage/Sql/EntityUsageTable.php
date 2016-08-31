@@ -146,14 +146,14 @@ class EntityUsageTable {
 
 		$c = 0;
 
-		foreach ( $batches as $rows ) {
-			$this->connection->startAtomic( __METHOD__ );
+		$this->connection->startAtomic( __METHOD__ );
 
+		foreach ( $batches as $rows ) {
 			$this->connection->insert( $this->tableName, $rows, __METHOD__, array( 'IGNORE' ) );
 			$c += $this->connection->affectedRows();
-
-			$this->connection->endAtomic( __METHOD__ );
 		}
+
+		$this->connection->endAtomic( __METHOD__ );
 
 		return $c;
 	}
@@ -247,9 +247,9 @@ class EntityUsageTable {
 		$rowIds = $this->getAffectedRowIds( $pageId, $usages );
 		$rowIdChunks = array_chunk( $rowIds, $this->batchSize );
 
-		foreach ( $rowIdChunks as $chunk ) {
-			$this->connection->startAtomic( __METHOD__ );
+		$this->connection->startAtomic( __METHOD__ );
 
+		foreach ( $rowIdChunks as $chunk ) {
 			$this->connection->delete(
 				$this->tableName,
 				[
@@ -257,9 +257,9 @@ class EntityUsageTable {
 				],
 				__METHOD__
 			);
-
-			$this->connection->endAtomic( __METHOD__ );
 		}
+
+		$this->connection->endAtomic( __METHOD__ );
 	}
 
 	/**
