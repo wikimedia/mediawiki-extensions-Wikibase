@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_fa5a3521",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T16:40:47Z",
+      "side": 1,
+      "message": "We only need this for properties with a type for which we support normalization. Currently, only for quantity...",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_7a85655a",
+        "filename": "repo/includes/Rdf/RdfProducer.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T16:40:47Z",
+      "side": 1,
+      "message": "This isn\u0027t actually used yet, is it? So if a unit converter is defined, we would always produce normalized values?\n\nIt would be ok to merge it like that, but I\u0027d like to see a follow-up that makes the production of normalized values optional.",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
