@@ -21,10 +21,17 @@ class ParserLimitReportPrepareHookHandler {
 	private $restrictedEntityLookup;
 
 	/**
-	 * @param RestrictedEntityLookup $restrictedEntityLookup
+	 * @var int
 	 */
-	public function __construct( RestrictedEntityLookup $restrictedEntityLookup ) {
+	private $entityAccessLimit;
+
+	/**
+	 * @param RestrictedEntityLookup $restrictedEntityLookup
+	 * @param int $entityAccessLimit
+	 */
+	public function __construct( RestrictedEntityLookup $restrictedEntityLookup, $entityAccessLimit ) {
 		$this->restrictedEntityLookup = $restrictedEntityLookup;
+		$this->entityAccessLimit = $entityAccessLimit;
 	}
 
 	/**
@@ -34,7 +41,8 @@ class ParserLimitReportPrepareHookHandler {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
-			$wikibaseClient->getRestrictedEntityLookup()
+			$wikibaseClient->getRestrictedEntityLookup(),
+			$wikibaseClient->getSettings()->getSetting( 'entityAccessLimit' )
 		);
 	}
 
@@ -58,8 +66,11 @@ class ParserLimitReportPrepareHookHandler {
 	 */
 	public function doParserLimitReportPrepare( Parser $parser, ParserOutput $output ) {
 		$output->setLimitReportData(
-			'EntityAccessCount',
-			$this->restrictedEntityLookup->getEntityAccessCount()
+			'limitreport-entityaccesscount',
+			[
+				'value' => $this->restrictedEntityLookup->getEntityAccessCount(),
+				'limit' => $this->entityAccessLimit
+			]
 		);
 
 		return true;
