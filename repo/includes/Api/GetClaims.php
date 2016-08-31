@@ -84,6 +84,8 @@ class GetClaims extends ApiBase {
 	 * @since 0.3
 	 */
 	public function execute() {
+		$this->getMain()->setCacheMode( 'public' );
+
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 

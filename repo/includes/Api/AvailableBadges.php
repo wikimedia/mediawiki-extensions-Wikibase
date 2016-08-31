@@ -22,6 +22,8 @@ class AvailableBadges extends ApiBase {
 	 * @since 0.5
 	 */
 	public function execute() {
+		$this->getMain()->setCacheMode( 'public' );
+
 		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
 		$idStrings = array_keys( $badgeItems );
 		ApiResult::setIndexedTagName( $idStrings, 'badge' );
