@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_9f1be320",
+        "filename": "client/includes/Api/ApiClientInfo.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-31T15:01:01Z",
+      "side": 1,
+      "message": "I find it good practice to not repeat these lines when they do not add much value and there is a @see.",
+      "revId": "b5ae96fd4704a37ec8bc754d1011dcace7b41905",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
