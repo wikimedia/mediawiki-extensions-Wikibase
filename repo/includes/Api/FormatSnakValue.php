@@ -121,6 +121,8 @@ class FormatSnakValue extends ApiBase {
 			'result',
 			$formattedValue
 		);
+
+		$this->setCacheMaxAge( 3600 );
 	}
 
 	/**

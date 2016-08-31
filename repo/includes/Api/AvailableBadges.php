@@ -30,6 +30,8 @@ class AvailableBadges extends ApiBase {
 			'badges',
 			$idStrings
 		);
+
+		$this->setCacheMaxAge( 3600 );
 	}
 
 	/**

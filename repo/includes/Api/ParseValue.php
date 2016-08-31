@@ -123,6 +123,8 @@ class ParseValue extends ApiBase {
 		}
 
 		$this->outputResults( $results );
+
+		$this->setCacheMaxAge( 3600 );
 	}
 
 	/**
