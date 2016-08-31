@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_3f34af46",
+        "filename": "tests/browser/features/step_definitions/reference_steps.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-31T15:19:36Z",
+      "side": 1,
+      "message": "It seems this wait should be inside of add_reference_snaks. And there is already an other wait. Hm.",
+      "revId": "a766c033baf7a038facc732b366e43675b7ddeb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_7f3e3728",
+        "filename": "tests/browser/features/support/modules/reference_module.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-08-31T15:19:36Z",
+      "side": 1,
+      "message": "What AJAX action is happening at this moment?",
+      "revId": "a766c033baf7a038facc732b366e43675b7ddeb7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
