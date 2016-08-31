@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_7f4d579b",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T16:10:42Z",
+      "side": 1,
+      "message": "For XML output, we need to give the API a bit more info:\n\n  ApiResult::setIndexedTagName( $entry[$row-\u003eeu_entity_id][\u0027aspects\u0027], \u0027aspect\u0027 );\n  ApiResult::setIndexedTagName( $entry, \u0027entity\u0027 );\n  ApiResult::setArrayType( $entry, \u0027kvp\u0027, \u0027id\u0027 );",
+      "revId": "5ac6d8693d0fc616548fb38c9decddf05fe05286",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
