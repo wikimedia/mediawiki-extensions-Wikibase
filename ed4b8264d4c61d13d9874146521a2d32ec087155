@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_94fd8a3b",
+        "filename": "client/includes/Api/ApiClientInfo.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "ApiQueryBase",
+      "range": {
+        "startLine": 91,
+        "startChar": 9,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_74b73e82",
+        "filename": "client/includes/Api/PageTerms.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "ApiQueryBase",
+      "range": {
+        "startLine": 232,
+        "startChar": 9,
+        "endLine": 232,
+        "endChar": 16
+      },
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_d4f71255",
+        "filename": "repo/includes/Api/AvailableBadges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "getCacheMode doesn\u0027t apply to ApiBase, only ApiQueryBase. To get the same effect for modules like action\u003dwbavailablebadges, you instead need to call $this-\u003esetCacheMode() from your execute() method.",
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_349696f4",
+        "filename": "repo/includes/Api/FormatSnakValue.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "getCacheMode doesn\u0027t apply to ApiBase, only ApiQueryBase. To get the same effect for modules like action\u003dwbformatvalue, you instead need to call $this-\u003esetCacheMode() from your execute() method.",
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_549b221b",
+        "filename": "repo/includes/Api/GetClaims.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "getCacheMode doesn\u0027t apply to ApiBase, only ApiQueryBase. To get the same effect for modules like action\u003dwbgetclaims, you instead need to call $this-\u003esetCacheMode() from your execute() method.",
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_74a01e3f",
+        "filename": "repo/includes/Api/GetEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "getCacheMode doesn\u0027t apply to ApiBase, only ApiQueryBase. To get the same effect for modules like action\u003dwbgetentities, you instead need to call $this-\u003esetCacheMode() from your execute() method.",
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_9484aab7",
+        "filename": "repo/includes/Api/ParseValue.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "getCacheMode doesn\u0027t apply to ApiBase, only ApiQueryBase. To get the same effect for modules like action\u003dwbparsevalue, you instead need to call $this-\u003esetCacheMode() from your execute() method.",
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b4a8c61e",
+        "filename": "repo/includes/Api/QuerySearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "ApiQueryBase",
+      "range": {
+        "startLine": 151,
+        "startChar": 9,
+        "endLine": 151,
+        "endChar": 16
+      },
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f48b2ec2",
+        "filename": "repo/includes/Api/SearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 221
+      },
+      "writtenOn": "2016-08-31T14:00:05Z",
+      "side": 1,
+      "message": "getCacheMode doesn\u0027t apply to ApiBase, only ApiQueryBase. To get the same effect for modules like action\u003dwbsearchentities, you instead need to call $this-\u003esetCacheMode() from your execute() method.",
+      "revId": "ed4b8264d4c61d13d9874146521a2d32ec087155",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
