@@ -70,6 +70,24 @@
       "revId": "13c1882047c6e94c7a58f2794517d003d421a521",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_14b8ba73",
+        "filename": "client/tests/phpunit/includes/Api/EntityUsageTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-08-31T13:58:00Z",
+      "side": 1,
+      "message": "Please use addDBDataOnce(), it is intended for this purpose.\nIf you use setUpBeforeClass(), the pages would be inserted into the read DB, not the test fake, I think. At least, there would be no guarantee.",
+      "parentUuid": "2e93376b_94702a09",
+      "revId": "13c1882047c6e94c7a58f2794517d003d421a521",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
