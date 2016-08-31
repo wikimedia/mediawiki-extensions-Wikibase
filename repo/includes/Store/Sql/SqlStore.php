@@ -31,6 +31,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\SQL\EntityPerPageTable;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
@@ -295,6 +296,28 @@ class SqlStore implements Store {
 	 */
 	public function newEntityPerPage() {
 		return new EntityPerPageTable( wfGetLB(), $this->entityIdParser, $this->entityIdComposer );
+	}
+
+	/**
+	 * @see Store::newEntitiesWithoutTerm
+	 *
+	 * @since 0.5
+	 *
+	 * @return EntitiesWithoutTermFinder
+	 */
+	public function newEntitiesWithoutTermFinder() {
+		return $this->newEntityPerPage();
+	}
+
+	/**
+	 * @see Store::newItemsWithoutSitelinks
+	 *
+	 * @since 0.5
+	 *
+	 * @return ItemsWithoutSitelinks
+	 */
+	public function newItemsWithoutSitelinksFinder() {
+		return $this->newEntityPerPage();
 	}
 
 	/**
