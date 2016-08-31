@@ -189,6 +189,8 @@ class SearchEntities extends ApiBase {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
+		$this->getMain()->setCacheMode( 'public' );
+
 		$params = $this->extractRequestParams();
 
 		$entries = $this->getSearchEntries( $params );
