@@ -48,6 +48,8 @@ class ApiClientInfo extends ApiQueryBase {
 		$apiData = $this->getInfo( $params );
 
 		$this->getResult()->addValue( 'query', 'wikibase', $apiData );
+
+		$this->getMain()->setCacheMaxAge( 3600 );
 	}
 
 	/**

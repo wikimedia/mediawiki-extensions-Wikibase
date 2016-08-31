@@ -92,6 +92,7 @@ class FormatSnakValue extends ApiBase {
 	 * @since 0.1
 	 */
 	public function execute() {
+		$this->getMain()->setCacheMaxAge( 3600 );
 		$params = $this->extractRequestParams();
 		$this->requireMaxOneParameter( $params, 'property', 'datatype' );
 
