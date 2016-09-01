@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_0aa08e99",
+        "filename": "view/resources/wikibase/wikibase.css",
+        "patchSetId": 7
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-01T08:09:27Z",
+      "side": 1,
+      "message": "I find alphabetic order good practice.",
+      "revId": "7c48a93d858f5b074660ae726f7ba303118eee66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
