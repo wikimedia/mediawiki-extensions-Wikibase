@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_0dc9887b",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-01T12:18:35Z",
+      "side": 1,
+      "message": "Ok, the only caller in statementview does pass a single parameter only.",
+      "parentUuid": "2e93376b_6ab832e3",
+      "revId": "3fb426d32733b478c170cc7b50c7d0f79e107b32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_aad13a29",
         "filename": "view/resources/wikibase/view/resources.php",
         "patchSetId": 7
