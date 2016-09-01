@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_2d22c4a2",
+        "filename": "client/includes/Api/EntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-01T11:20:04Z",
+      "side": 1,
+      "message": "Maybe we should use \u0027entity\u0027 here instead of \u0027id\u0027, then.",
+      "revId": "294942459a39f9da9ef2e0b48a01587ba33b1426",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
