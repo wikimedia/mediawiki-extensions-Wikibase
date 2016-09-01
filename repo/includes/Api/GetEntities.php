@@ -109,6 +109,8 @@ class GetEntities extends ApiBase {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
+		$this->getMain()->setCacheMode( 'public' );
+
 		$params = $this->extractRequestParams();
 
 		if ( !isset( $params['ids'] ) && ( empty( $params['sites'] ) || empty( $params['titles'] ) ) ) {

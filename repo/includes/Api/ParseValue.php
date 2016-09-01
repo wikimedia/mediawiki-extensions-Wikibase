@@ -111,6 +111,8 @@ class ParseValue extends ApiBase {
 	 * @since 0.1
 	 */
 	public function execute() {
+		$this->getMain()->setCacheMode( 'public' );
+
 		$parser = $this->getParser();
 
 		$results = array();
