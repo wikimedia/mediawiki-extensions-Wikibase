@@ -44,30 +44,48 @@ entity.create = function( data )
 	return entity
 end
 
--- Get the label for a given language code
+-- Get a term of a given type for a given language code or the content language.
 --
+-- @param {table} [entity]
 -- @param {string|number} [langCode]
-methodtable.getLabel = function( entity, langCode )
-	checkTypeMulti( 'getLabel', 1, langCode, { 'string', 'number', 'nil' } )
-
+-- @param {string} [termType]
+local getTerm = function( entity, langCode, termType )
 	langCode = langCode or mw.language.getContentLanguage():getCode()
 
 	if langCode == nil then
 		return nil, nil
 	end
 
-	if entity.labels == nil then
+	if entity[termType] == nil then
 		return nil, nil
 	end
 
-	local label = entity.labels[langCode]
+	local term = entity[termType][langCode]
 
-	if label == nil then
+	if term == nil then
 		return nil, nil
 	end
 
-	local actualLang = label.language or langCode
-	return label.value, actualLang
+	local actualLang = term.language or langCode
+	return term.value, actualLang
+end
+
+-- Get the label for a given language code or the content language
+--
+-- @param {string|number} [langCode]
+methodtable.getLabel = function( entity, langCode )
+	checkTypeMulti( 'getLabel', 1, langCode, { 'string', 'number', 'nil' } )
+
+	return getTerm( entity, langCode, 'labels' )
+end
+
+-- Get the description for a given language code or the content language
+--
+-- @param {string|number} [langCode]
+methodtable.getDescription = function( entity, langCode )
+	checkTypeMulti( 'getDescription', 1, langCode, { 'string', 'number', 'nil' } )
+
+	return getTerm( entity, langCode, 'descriptions' )
 end
 
 -- Get the sitelink title linking to the given site id
