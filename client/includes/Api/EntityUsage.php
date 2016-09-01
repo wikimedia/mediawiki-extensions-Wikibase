@@ -69,7 +69,6 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 				ApiResult::setIndexedTagName(
 					$entry[$row->eu_entity_id]['aspects'], 'aspect'
 				);
-				ApiResult::setIndexedTagName( $entry, 'entity' );
 				ApiResult::setArrayType( $entry, 'kvp', 'id' );
 			}
 
