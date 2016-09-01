@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e93376b_2a4e2a9c",
+        "filename": "lib/tests/phpunit/Units/UnitConverterTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-01T10:39:37Z",
+      "side": 1,
+      "message": "bad indent",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_4a537643",
+        "filename": "lib/tests/phpunit/Units/UnitConverterTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-01T10:39:37Z",
+      "side": 1,
+      "message": "This conditional is a bit arcane. Would be better to have separate test cases, or pass a flag or the expected value as a parameter.",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_8a4d5e9e",
+        "filename": "lib/tests/phpunit/Units/testunits.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-01T10:39:37Z",
+      "side": 1,
+      "message": "Does this also work with a number literal?",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_ca5e8648",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-01T10:39:37Z",
+      "side": 1,
+      "message": "We will have to pass the flavor flags in here to make this optional. I see no real alternative to doing this at construction time. Doesn\u0027t have to be in this patch, but we\u0027ll need it eventually.",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_fa5a3521",
         "filename": "repo/includes/Rdf/RdfBuilder.php",
         "patchSetId": 26
@@ -102,6 +170,57 @@
       "side": 1,
       "message": "Yea, but when it\u0027s configured, the client can\u0027t disable it.",
       "parentUuid": "2e93376b_74957935",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_ea5b4255",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-01T10:39:37Z",
+      "side": 1,
+      "message": "UnitConverter|null",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_0a596e5d",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-01T10:39:37Z",
+      "side": 1,
+      "message": "missing docs for $uc",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_2a354af4",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-01T10:39:37Z",
+      "side": 1,
+      "message": "please use long names for parameters. $unitConverter is a lot clearer than $uc.",
       "revId": "4b60a28babc73a592367cba42278ba3030054074",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
