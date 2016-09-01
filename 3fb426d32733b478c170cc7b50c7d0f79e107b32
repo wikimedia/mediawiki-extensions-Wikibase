@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_6ab832e3",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-01T08:11:16Z",
+      "side": 1,
+      "message": "I wonder why there is no removeCallback in this line? Is this an actual mistake or preparation for a later change?",
+      "revId": "3fb426d32733b478c170cc7b50c7d0f79e107b32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_aad13a29",
+        "filename": "view/resources/wikibase/view/resources.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-01T08:11:16Z",
+      "side": 1,
+      "message": "I find it good practice to always have these commas, at least in PHP.",
+      "revId": "3fb426d32733b478c170cc7b50c7d0f79e107b32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
