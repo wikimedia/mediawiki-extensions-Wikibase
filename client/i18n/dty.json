@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"रमेश सिंह बोहरा",
-			"राम प्रसाद जोशी"
+			"राम प्रसाद जोशी",
+			"Nirajan pant"
 		]
 	},
 	"tooltip-t-wikibase": "जडान अरियाका डाटा भराण प्रकारखि लेखा लिङ्क",
@@ -21,5 +22,5 @@
 	"wikibase-rc-wikibase-edit-letter": "डि",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} सम्पादन",
 	"wikibase-watchlist-show-changes-pref": "तमी आफ्नो ध्यानसूचीमी {{WBREPONAME}} सम्पादन धेकाओ",
-	"wikibase-otherprojects": "और प्रोजेक्टहरू"
+	"wikibase-otherprojects": "और प्रोजेक्टअनमी"
 }

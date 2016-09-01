@@ -8,6 +8,7 @@
 	},
 	"wikibase-client-desc": "Cliente para a extensión Wikibase",
 	"tooltip-t-wikibase": "Ligazón ao elemento conectado no repositorio de datos",
+	"apihelp-query+wbentityusage-param-limit": "Cantas entidades devolver.",
 	"apihelp-query+pageterms-description": "Obter os termos asociados a unha páxina a través dun elemento de datos asociado. Nunha páxina de entidade da wikibase, os termos de entidade usanse directamente.\nAdvertencia: Nunha wiki repositorio, os termos de páxina só funcionan directamente en páxinas de entidades, non en páxinas conectadas a un elemento. Isto pode cambiar nun futuro.",
 	"apihelp-query+pageterms-example-simple": "Obter todos os termos asociados á páxina \"London\", na lingua do usuario.",
 	"apihelp-query+pageterms-example-label-en": "Obter as etiquetas e os pseudónimos asociados á páxina \"London\", en inglés.",
