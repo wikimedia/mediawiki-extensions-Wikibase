@@ -6,8 +6,10 @@ use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
 use ApiResult;
-use Wikibase\Client\WikibaseClient;
+use ResultWrapper;
+use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * API module to get the usage of entities.
@@ -19,8 +21,19 @@ use Wikibase\Client\Usage\EntityUsage;
  */
 class ApiPropsEntityUsage extends ApiQueryBase {
 
+	/**
+	 * @var RepoLinker|null
+	 */
+	private $repoLinker = null;
+
+	/**
+	 * @param ApiQuery $query
+	 * @param string $moduleName
+	 */
 	public function __construct( ApiQuery $query, $moduleName ) {
 		parent::__construct( $query, $moduleName, 'wbeu' );
+
+		$this->repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
 	}
 
 	public function execute() {
@@ -31,17 +44,21 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		}
 
 		$prop = array_flip( (array)$params['prop'] );
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$repoLinker = $wikibaseClient->newRepoLinker();
-		$this->formatResult( $res, $prop, $repoLinker, $params );
+		$this->formatResult( $res, $params['limit'], $prop );
 	}
 
-	private function formatResult( $res, $prop, $repoLinker, $params ) {
+	/**
+	 * @param ResultWrapper $res
+	 * @param int $limit
+	 * @param array $prop
+	 */
+	private function formatResult( ResultWrapper $res, $limit, array $prop ) {
 		$currentPageId = null;
 		$entry = [];
 		$count = 0;
+
 		foreach ( $res as $row ) {
-			if ( ++$count > $params['limit'] ) {
+			if ( ++$count > $limit ) {
 				// We've reached the one extra which shows that
 				// there are additional pages to be had. Stop here...
 				$this->setContinueFromRow( $row );
@@ -63,7 +80,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 			} else {
 				$entry[$row->eu_entity_id] = [ 'aspects' => [ $row->eu_aspect ] ];
 				if ( isset( $prop['url'] ) ) {
-					$entry[$row->eu_entity_id]['url'] = $repoLinker->getPageUrl(
+					$entry[$row->eu_entity_id]['url'] = $this->repoLinker->getPageUrl(
 						'Special:EntityData/' . $row->eu_entity_id );
 				}
 				ApiResult::setIndexedTagName(
@@ -76,10 +93,13 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 
 		if ( $entry ) { // Sanity
 			// Flush out remaining ones
-			$fit = $this->addPageSubItems( $currentPageId, $entry );
+			$this->addPageSubItems( $currentPageId, $entry );
 		}
 	}
 
+	/**
+	 * @param object $row
+	 */
 	private function setContinueFromRow( $row ) {
 		$this->setContinueEnumParameter(
 			'continue',
@@ -91,10 +111,15 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		return 'public';
 	}
 
-	public function doQuery( $params ) {
+	/**
+	 * @param array $params
+	 *
+	 * @return ResultWrapper|null
+	 */
+	public function doQuery( array $params ) {
 		$pages = $this->getPageSet()->getGoodTitles();
 		if ( !$pages ) {
-			return;
+			return null;
 		}
 
 		$this->addFields( [

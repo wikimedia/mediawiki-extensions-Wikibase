@@ -24,7 +24,7 @@ use WikiPage;
  * @license GPL-2.0+
  * @author Amir Sarabadani
  */
-class EntityUsageTest extends MediaWikiLangTestCase {
+class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 	protected function setUp() {
 		$this->tablesUsed[] = 'wbc_entity_usage';
@@ -53,6 +53,7 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
 			$db->delete( $table, '*' );
+
 			foreach ( $rows as $row ) {
 				$title = Title::newFromText( $row['page_title'], $row['page_namespace'] );
 				$page = WikiPage::factory( $title );
@@ -91,11 +92,9 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 		foreach ( $dump as $table => $rows ) {
 			// Clean everything
 			$db->delete( $table, '*' );
+
 			foreach ( $rows as $row ) {
-				$db->insert(
-					$table,
-					$row
-				);
+				$db->insert( $table, $row );
 			}
 		}
 	}
@@ -154,7 +153,6 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param array $params
-	 * @param array[] $dump
 	 *
 	 * @return array[]
 	 */
@@ -231,7 +229,7 @@ class EntityUsageTest extends MediaWikiLangTestCase {
 
 		$this->assertArrayHasKey( 'query', $result );
 		$this->assertArrayHasKey( 'pages', $result['query'] );
-		$this->assertEquals( $expected, $result['query']['pages'] );
+		$this->assertSame( $expected, $result['query']['pages'] );
 	}
 
 }
