@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_5da5f9b0",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-01T22:30:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_0de8a80a",
+      "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_cdaf80dd",
         "filename": "composer.json",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-01T11:46:31Z",
       "side": 1,
       "message": "why do we need this?",
+      "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_7d90f546",
+        "filename": "composer.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-01T22:30:15Z",
+      "side": 1,
+      "message": "Because we make use of both in tests, but they don\u0027t derive from PHPUnit_Framework_TestCase, thus PHPUnit doesn\u0027t autoload them for us.",
+      "parentUuid": "2e93376b_cdaf80dd",
       "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_fd9b0566",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-01T22:30:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_6d804c4c",
+      "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_ad9954ca",
         "filename": "lib/includes/Store/DispatchingPropertyOrderProvider.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2016-09-01T11:46:31Z",
       "side": 1,
       "message": "This isn\u0027t really dispatching (based on a prefix or type). this implements a fallback, so FallbackPropertyOrderProvider would be a better name.",
+      "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_5dd9792b",
+        "filename": "lib/includes/Store/DispatchingPropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-01T22:30:15Z",
+      "side": 1,
+      "message": "True, changed to FallbackPropertyOrderProvider",
+      "parentUuid": "2e93376b_ad9954ca",
       "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_bde89db0",
+        "filename": "lib/includes/Store/HttpUrlPropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-01T22:30:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_6df76cf3",
+      "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_ade07426",
         "filename": "lib/includes/Store/HttpUrlPropertyOrderProvider.php",
         "patchSetId": 2
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_fdc94556",
+        "filename": "lib/includes/Store/HttpUrlPropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-01T22:30:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_ade07426",
+      "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_edea7c04",
         "filename": "lib/includes/Store/WikiTextPropertyOrderProvider.php",
         "patchSetId": 2
@@ -115,6 +223,24 @@
       "writtenOn": "2016-09-01T11:46:31Z",
       "side": 1,
       "message": "Should probably be renamed to getPropertyOrderWikitext",
+      "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_9de3e1d3",
+        "filename": "lib/includes/Store/WikiTextPropertyOrderProvider.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-01T22:30:15Z",
+      "side": 1,
+      "message": "Makes sense, changed.",
+      "parentUuid": "2e93376b_edea7c04",
       "revId": "eb60b76ac794c76e98f15a282cd70738aa549ebe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
