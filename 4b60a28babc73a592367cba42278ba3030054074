@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_323054fc",
+        "filename": "lib/tests/phpunit/Units/UnitConverterTest.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-02T21:14:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_4a537643",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_8a4d5e9e",
         "filename": "lib/tests/phpunit/Units/testunits.json",
         "patchSetId": 26
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_572f92f3",
+        "filename": "lib/tests/phpunit/Units/testunits.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-02T21:14:25Z",
+      "side": 1,
+      "message": "I think it would, but may be a problem with precision so I wouldn\u0027t recommend using it unless it\u0027s something obvious like 1. And maybe never for consistency.",
+      "parentUuid": "2e93376b_8a4d5e9e",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_ca5e8648",
         "filename": "repo/WikibaseRepo.datatypes.php",
         "patchSetId": 26
@@ -64,6 +100,24 @@
       "writtenOn": "2016-09-01T10:39:37Z",
       "side": 1,
       "message": "We will have to pass the flavor flags in here to make this optional. I see no real alternative to doing this at construction time. Doesn\u0027t have to be in this patch, but we\u0027ll need it eventually.",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_77348e47",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-02T21:14:25Z",
+      "side": 1,
+      "message": "I\u0027m not sure I even have flavor flags here. I looked briefly into this but didn\u0027t find a way to do it. Maybe we can get back to it.",
+      "parentUuid": "2e93376b_ca5e8648",
       "revId": "4b60a28babc73a592367cba42278ba3030054074",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -176,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_d742a2b1",
+        "filename": "repo/includes/Rdf/RdfProducer.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-02T21:14:25Z",
+      "side": 1,
+      "message": "it depends on how we define flavors, just as with other flags. We could have additional flag but then the question is why won\u0027t we have another 10 flags for each of the bits... I guess we need to discuss on how we control this.",
+      "parentUuid": "2e93376b_f4a88976",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_ea5b4255",
         "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
         "patchSetId": 26
@@ -187,6 +259,24 @@
       "writtenOn": "2016-09-01T10:39:37Z",
       "side": 1,
       "message": "UnitConverter|null",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_120a7829",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-02T21:14:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_ea5b4255",
       "revId": "4b60a28babc73a592367cba42278ba3030054074",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -210,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_a6008905",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-02T21:14:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_0a596e5d",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_2a354af4",
         "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
         "patchSetId": 26
@@ -221,6 +329,24 @@
       "writtenOn": "2016-09-01T10:39:37Z",
       "side": 1,
       "message": "please use long names for parameters. $unitConverter is a lot clearer than $uc.",
+      "revId": "4b60a28babc73a592367cba42278ba3030054074",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_c6059515",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 26
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-02T21:14:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_2a354af4",
       "revId": "4b60a28babc73a592367cba42278ba3030054074",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
