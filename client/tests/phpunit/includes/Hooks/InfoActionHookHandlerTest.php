@@ -7,8 +7,10 @@ use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\NamespaceChecker;
 
 /**
@@ -44,7 +46,11 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 					array(
 						$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
 						'https://www.wikidata.org/wiki/Q4'
-					)
+					),
+					array(
+						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
+						"<ul><li>https://www.wikidata.org/wiki/Q4</li><ul><li>Sitelink</li></ul></ul>",
+					),
 				)
 			),
 			$context, array( 'header-basic' => array() ), true, new ItemId( 'Q4' ),
@@ -52,7 +58,13 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$cases[] = array(
-			array( 'header-basic' => array() ),
+			array( 'header-basic' => array(
+					array(
+						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
+						"<ul><li>https://www.wikidata.org/wiki/Q4</li><ul><li>Sitelink</li></ul></ul>",
+					),
+				)
+			),
 			$context,
 			array( 'header-basic' => array() ),
 			false,
@@ -107,11 +119,23 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $entityId ) );
 
+		$sqlUsageTracker = $this->getMockBuilder( SqlUsageTracker::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		if ( $entityId ) {
+			$entityUsage = array( new EntityUsage( $entityId, 'S' ) );
+			$sqlUsageTracker->expects( $this->any() )
+				->method( 'getUsagesForPage' )
+				->will( $this->returnValue( $entityUsage ) );
+		}
+
 		$hookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$repoLinker,
 			$siteLinkLookup,
-			'enwiki'
+			'enwiki',
+			$sqlUsageTracker
 		);
 
 		return $hookHandler;
