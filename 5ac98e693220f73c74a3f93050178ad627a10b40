@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_26d73ef4",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-02T11:32:48Z",
+      "side": 1,
+      "message": "Could just be: $usageLookup \u003d $this-\u003egetStore()-\u003egetUsageLookup();",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_e6f3769a",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-02T11:32:48Z",
+      "side": 1,
+      "message": "Could just use the UsageLookup interface",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_c6ff5a61",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-02T11:32:48Z",
+      "side": 1,
+      "message": "How is this formatted? It\u0027s rather $usageAspectsByEntity or some such.",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_a6fa4e71",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-02T11:32:48Z",
+      "side": 1,
+      "message": "Don\u0027t cast to string here, but rather use -\u003egetSerialization()",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_46d44aed",
+        "filename": "client/includes/Usage/EntityUsageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-02T11:32:48Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of this class? Why not just use SqlUsageTracker directly?",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
