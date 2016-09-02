@@ -15,7 +15,6 @@ use UsageException;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group SetAliasesTest
  * @group BreakingTheSlownessBarrier
  *
  * @license GPL-2.0+

@@ -16,7 +16,6 @@ use FormatJson;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group PermissionsTest
  * @group BreakingTheSlownessBarrier
  * @group Database
  * @group medium

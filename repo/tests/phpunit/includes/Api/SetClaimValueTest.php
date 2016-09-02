@@ -30,7 +30,6 @@ use WikiPage;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group SetClaimValueTest
  *
  * @group medium
  *

@@ -15,7 +15,6 @@ use UsageException;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group LinkTitlesTest
  * @group BreakingTheSlownessBarrier
  *
  * @group Database

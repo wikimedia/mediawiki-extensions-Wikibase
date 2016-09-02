@@ -29,7 +29,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseDataAccess
- * @group PropertyParserFunctionTest
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

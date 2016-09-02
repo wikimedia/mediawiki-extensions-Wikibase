@@ -10,7 +10,6 @@ use Wikibase\SettingsArray;
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group SettingsArrayTest
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

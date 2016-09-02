@@ -28,7 +28,6 @@ use Wikibase\StatementRankSerializer;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group GetClaimsTest
  *
  * @group medium
  *

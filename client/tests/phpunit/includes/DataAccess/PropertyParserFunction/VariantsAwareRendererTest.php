@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @group Wikibase
  * @group WikibaseClient
- * @group PropertyParserFunctionTest
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

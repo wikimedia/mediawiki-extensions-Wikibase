@@ -29,7 +29,6 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseChange
- * @group ChangeHandlerTest
  *
  * @group Database
  *

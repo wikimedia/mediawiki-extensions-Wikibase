@@ -37,7 +37,6 @@ use Wikibase\Lib\Tests\MockRepository;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group MergeItemsTest
  * @group Database
  *
  * @license GPL-2.0+
