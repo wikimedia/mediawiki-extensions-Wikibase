@@ -407,6 +407,7 @@ final class ClientHooks {
 		$settings = $wikibaseClient->getSettings();
 
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
+		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
 
 		if ( !$namespaceChecker->isWikibaseEnabled( $context->getTitle()->getNamespace() ) ) {
 			// shorten out
@@ -417,7 +418,8 @@ final class ClientHooks {
 			$namespaceChecker,
 			$wikibaseClient->newRepoLinker(),
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
-			$settings->getSetting( 'siteGlobalID' )
+			$settings->getSetting( 'siteGlobalID' ),
+			$usageLookup
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
