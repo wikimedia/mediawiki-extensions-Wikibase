@@ -62,7 +62,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 		return $array;
 	}
 
-	private function removePageInfoAttributes( array $result, $entityId = null ) {
+	private function removePageInfoAttributes( array $result ) {
 		$attributesToRemove = array( 'pageid', 'lastrevid', 'modified', 'title', 'ns' );
 
 		foreach ( $attributesToRemove as $attributeToRemove ) {
@@ -107,7 +107,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 
 		$module = $this->getApiModule( GetEntities::class, 'wbgetentities', $params );
 		$result = $this->executeApiModule( $module );
-		$actual = $this->removePageInfoAttributes( $result, $entityId );
+		$actual = $this->removePageInfoAttributes( $result );
 
 		$this->assertEquals( $this->getExpectedJson( 'getentities' ), $actual );
 	}
@@ -125,7 +125,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 
 		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
-		$actual = $this->removePageInfoAttributes( $result, $entityId );
+		$actual = $this->removePageInfoAttributes( $result );
 
 		$this->assertEquals( $this->getExpectedJson( 'setlabel' ), $actual );
 
@@ -138,7 +138,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 
 		$module = $this->getApiModule( SetLabel::class, 'wbsetlabel', $params, true );
 		$result = $this->executeApiModule( $module );
-		$actual = $this->removePageInfoAttributes( $result, $entityId );
+		$actual = $this->removePageInfoAttributes( $result );
 
 		$this->assertEquals( $this->getExpectedJson( 'setlabel-removed' ), $actual );
 	}
