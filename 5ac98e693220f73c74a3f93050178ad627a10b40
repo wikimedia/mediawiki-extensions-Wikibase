@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_f1cece85",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-02T14:02:34Z",
+      "side": 1,
+      "message": "What\u0027s the difference?",
+      "parentUuid": "2e93376b_e6f3769a",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_c6ff5a61",
         "filename": "client/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2016-09-02T11:32:48Z",
       "side": 1,
       "message": "How is this formatted? It\u0027s rather $usageAspectsByEntity or some such.",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_d1d1d228",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-02T14:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_c6ff5a61",
       "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_b1bd26d4",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-02T14:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_a6fa4e71",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_46d44aed",
         "filename": "client/includes/Usage/EntityUsageLookup.php",
         "patchSetId": 3
@@ -81,6 +135,24 @@
       "writtenOn": "2016-09-02T11:32:48Z",
       "side": 1,
       "message": "What\u0027s the purpose of this class? Why not just use SqlUsageTracker directly?",
+      "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_31f216ce",
+        "filename": "client/includes/Usage/EntityUsageLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-02T14:02:34Z",
+      "side": 1,
+      "message": "For consitenancy between this type of entity usage lookup and other types (like sitelink usage lookup) I think methods in SqlUsageTracker regarding entity usage look up should be moved here",
+      "parentUuid": "2e93376b_46d44aed",
       "revId": "5ac98e693220f73c74a3f93050178ad627a10b40",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
