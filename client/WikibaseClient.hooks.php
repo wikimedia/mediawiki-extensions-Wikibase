@@ -27,6 +27,8 @@ use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
+use Wikibase\Client\Store\Sql\ConsistentReadConnectionManager;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\AutoCommentFormatter;
@@ -407,6 +409,8 @@ final class ClientHooks {
 		$settings = $wikibaseClient->getSettings();
 
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
+		$idParser = $wikibaseClient->getEntityIdParser();
+		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
 
 		if ( !$namespaceChecker->isWikibaseEnabled( $context->getTitle()->getNamespace() ) ) {
 			// shorten out
@@ -417,7 +421,8 @@ final class ClientHooks {
 			$namespaceChecker,
 			$wikibaseClient->newRepoLinker(),
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
-			$settings->getSetting( 'siteGlobalID' )
+			$settings->getSetting( 'siteGlobalID' ),
+			$usageLookup
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
