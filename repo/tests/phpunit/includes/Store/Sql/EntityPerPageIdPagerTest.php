@@ -1,16 +1,16 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
+use Wikibase\Repo\Store\Sql\EntityPerPageIdPager;
 
 /**
- * @covers Wikibase\Repo\Store\SQL\EntityPerPageIdPager
+ * @covers Wikibase\Repo\Store\Sql\EntityPerPageIdPager
  *
  * @group Wikibase
  * @group WikibaseRepo

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Store\Sql;
 
 use IDatabase;
 use LoadBalancer;
@@ -15,10 +15,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Repo\Store\SQL\EntityPerPageTable;
+use Wikibase\Repo\Store\Sql\EntityPerPageTable;
 
 /**
- * @covers Wikibase\Repo\Store\SQL\EntityPerPageTable
+ * @covers Wikibase\Repo\Store\Sql\EntityPerPageTable
  *
  * @group Wikibase
  * @group WikibaseRepo
@@ -34,8 +34,8 @@ use Wikibase\Repo\Store\SQL\EntityPerPageTable;
  */
 class EntityPerPageTableTest extends \MediaWikiTestCase {
 
-	public function __construct( $name = null, $data = array(), $dataName = '' ) {
-		parent::__construct( $name, $data, $dataName );
+	protected function setUp() {
+		parent::setUp();
 
 		$this->tablesUsed[] = 'wb_entity_per_page';
 	}

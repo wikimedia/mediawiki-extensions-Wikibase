@@ -1,17 +1,17 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Store\Sql;
 
 use RuntimeException;
 use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Repo\Store\SQL\EntityPerPageBuilder;
+use Wikibase\Repo\Store\Sql\EntityPerPageBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\SQL\EntityPerPageBuilder
+ * @covers Wikibase\Repo\Store\Sql\EntityPerPageBuilder
  *
  * @group Wikibase
  * @group WikibaseRepo

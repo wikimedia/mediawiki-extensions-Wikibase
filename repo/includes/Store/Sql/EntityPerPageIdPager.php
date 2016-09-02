@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Store\SQL;
+namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Store\EntityIdPager;
