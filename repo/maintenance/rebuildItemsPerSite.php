@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Maintenance;
 use Maintenance;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Store\SiteLinkTable;
-use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
-use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
+use Wikibase\Repo\Store\Sql\EntityPerPageIdPager;
+use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

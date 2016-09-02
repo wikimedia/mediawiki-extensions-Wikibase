@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Store\Sql;
 
 use DatabaseMysql;
 use LoadBalancer;
@@ -14,11 +14,11 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\Store\SQL\WikiPageEntityRedirectLookup;
+use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers Wikibase\Repo\Store\SQL\WikiPageEntityRedirectLookup
+ * @covers Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup
  *
  * @group Medium
  * @group Database

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Repo\Tests\Store\Sql;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -8,10 +8,10 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkTable;
 use Wikibase\Repo\Store\EntityIdPager;
-use Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder;
+use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 
 /**
- * @covers Wikibase\Repo\Store\SQL\ItemsPerSiteBuilder
+ * @covers Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder
  *
  * @group Wikibase
  * @group WikibaseStore

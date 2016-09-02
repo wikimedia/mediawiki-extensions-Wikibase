@@ -13,7 +13,7 @@ use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
 use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
+use Wikibase\Repo\Store\Sql\EntityPerPageIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\Repo;
+namespace Wikibase\Repo\Tests\Store\Sql;
 
 use RecentChange;
 use Diff\DiffOp\Diff\Diff;

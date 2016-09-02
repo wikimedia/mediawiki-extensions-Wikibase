@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Store\SQL;
+namespace Wikibase\Repo\Store\Sql;
 
 use InvalidArgumentException;
 use LoadBalancer;
