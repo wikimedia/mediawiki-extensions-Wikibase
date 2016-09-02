@@ -7,6 +7,7 @@ use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
@@ -107,11 +108,16 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 			->method( 'getItemIdForLink' )
 			->will( $this->returnValue( $entityId ) );
 
+		$sqlUsageTracker = $this->getMockBuilder( SqlUsageTracker::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$hookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$repoLinker,
 			$siteLinkLookup,
-			'enwiki'
+			'enwiki',
+			$sqlUsageTracker
 		);
 
 		return $hookHandler;
