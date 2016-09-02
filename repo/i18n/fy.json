@@ -7,12 +7,15 @@
 			"Robin van der Vliet"
 		]
 	},
+	"wikibase-entity": "entiteit",
 	"wikibase-entity-property": "eigenskip",
 	"wikibase-edit": "bewurkje",
 	"wikibase-save": "bewarje",
 	"wikibase-cancel": "Annulearje",
 	"wikibase-add": "tafoegje",
+	"wikibase-addqualifier": "kwalifikaasje tafoegje",
 	"wikibase-label-empty": "Gjin label definearre",
+	"wikibase-diffview-qualifier": "kwalifikaasje",
 	"wikibase-statementsection-statements": "Ferklearringen",
 	"wikibase-sitelinks-special": "Oare webstees",
 	"wikibase-statementview-rank-normal": "Normale rang",
