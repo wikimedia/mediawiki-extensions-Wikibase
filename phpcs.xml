@@ -32,11 +32,7 @@
 		</properties>
 		<exclude-pattern>(RdfWriterFactory|UrlSchemeValidators)\.php</exclude-pattern>
 	</rule>
-	<rule ref="Generic.Metrics.NestingLevel">
-		<properties>
-			<property name="nestingLevel" value="5" />
-		</properties>
-	</rule>
+	<rule ref="Generic.Metrics.NestingLevel" />
 
 	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
 
