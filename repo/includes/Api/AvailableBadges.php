@@ -23,6 +23,7 @@ class AvailableBadges extends ApiBase {
 	 */
 	public function execute() {
 		$this->getMain()->setCacheMode( 'public' );
+		$this->getMain()->setCacheMaxAge( 3600 );
 
 		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
 		$idStrings = array_keys( $badgeItems );
