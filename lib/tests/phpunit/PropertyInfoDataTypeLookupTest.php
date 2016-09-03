@@ -16,7 +16,6 @@ use Wikibase\Lib\Tests\Store\MockPropertyInfoStore;
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group DataTypeLookupTest
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -19,7 +19,6 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
  *
  * @group Wikibase
  * @group WikibaseClient
- * @group SiteLinkCommentCreatorTest
  *
  * @license GPL-2.0+
  * @author Katie Filbert < aude.wiki@gmail.com >

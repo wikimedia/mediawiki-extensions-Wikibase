@@ -79,7 +79,6 @@ use Wikibase\SummaryFormatter;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseRepoTest
  * @group Database
  *
  * @license GPL-2.0+

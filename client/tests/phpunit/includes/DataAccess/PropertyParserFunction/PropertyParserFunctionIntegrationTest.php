@@ -19,7 +19,6 @@ use Wikibase\Test\MockClientStore;
  * @group WikibaseClient
  * @group WikibaseDataAccess
  * @group WikibaseIntegration
- * @group PropertyParserFunctionTest
  * @group Database
  *
  * @license GPL-2.0+

@@ -18,7 +18,6 @@ use Wikibase\EntityChange;
  * @group Wikibase
  * @group WikibaseClient
  * @group WikibaseChange
- * @group ChangeHandlerTest
  *
  * @group Database
  *

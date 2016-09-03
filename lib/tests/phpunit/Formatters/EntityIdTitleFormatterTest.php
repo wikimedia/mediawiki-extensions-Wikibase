@@ -20,7 +20,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * @group ValueFormatters
  * @group DataValueExtensions
  * @group WikibaseLib
- * @group EntityIdFormatterTest
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler

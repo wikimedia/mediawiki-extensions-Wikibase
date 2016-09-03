@@ -14,8 +14,6 @@ namespace Wikibase\Test\Repo\Api;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group SetLabelTest
- * @group LanguageAttributeTest
  * @group BreakingTheSlownessBarrier
  *
  * @license GPL-2.0+

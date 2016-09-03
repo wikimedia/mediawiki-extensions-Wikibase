@@ -18,7 +18,6 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @covers Wikibase\Client\UpdateRepo\UpdateRepo
  *
  * @group WikibaseClient
- * @group Test
  * @group Wikibase
  *
  * @license GPL-2.0+

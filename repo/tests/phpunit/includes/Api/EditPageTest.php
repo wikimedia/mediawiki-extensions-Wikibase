@@ -18,7 +18,6 @@ use WikiPage;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group EditPageTest
  * @group BreakingTheSlownessBarrier
  *
  * @group Database

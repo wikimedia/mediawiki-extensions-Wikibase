@@ -12,7 +12,6 @@ use Wikibase\Repo\ValueParserFactory;
  *
  * @group Wikibase
  * @group WikibaseRepo
- * @group WikibaseRepoTest
  *
  * @license GPL-2.0+
  * @author Adrian Heine <adrian.heine@wikimedia.de>

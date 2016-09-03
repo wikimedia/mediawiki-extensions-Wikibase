@@ -17,7 +17,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group WikibaseAPI
  * @gorup WikibaseRepo
- * @group BotEditTest
  * @group BreakingTheSlownessBarrier
  * @group Database
  * @group medium

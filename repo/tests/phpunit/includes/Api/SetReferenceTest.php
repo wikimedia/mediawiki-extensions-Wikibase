@@ -27,7 +27,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Wikibase
  * @group WikibaseAPI
  * @group WikibaseRepo
- * @group SetReferenceTest
  *
  * @group medium
  *
