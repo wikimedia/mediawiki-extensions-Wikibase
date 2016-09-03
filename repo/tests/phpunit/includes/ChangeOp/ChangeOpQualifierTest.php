@@ -51,16 +51,15 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$item = new Item( new ItemId( 'Q42' ) );
 
 		$guidGenerator = new GuidGenerator();
-		$validClaimGuid = $guidGenerator->newGuid( $item->getId() );
+		$guid = $guidGenerator->newGuid( $item->getId() );
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 		$validSnakHash = $validSnak->getHash();
 
-		$args = array();
-		$args[] = array( 123, $validSnak, $validSnakHash );
-		$args[] = array( '', $validSnak, $validSnakHash );
-		$args[] = array( $validClaimGuid, $validSnak, 123 );
-
-		return $args;
+		return [
+			[ 123, $validSnak, $validSnakHash ],
+			[ '', $validSnak, $validSnakHash ],
+			[ $guid, $validSnak, 123 ],
+		];
 	}
 
 	/**
@@ -68,25 +67,34 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testInvalidConstruct( $claimGuid, $snak, $snakHash ) {
-		new ChangeOpQualifier( $claimGuid, $snak, $snakHash, $this->mockProvider->getMockSnakValidator() );
+	public function testInvalidConstruct( $statementGuid, $snak, $snakHash ) {
+		new ChangeOpQualifier(
+			$statementGuid,
+			$snak,
+			$snakHash,
+			$this->mockProvider->getMockSnakValidator()
+		);
 	}
 
 	public function changeOpAddProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
 
-		$item = $this->newItemWithClaim( $snak );
+		$item = $this->newItem( $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
-		$guid = $statement->getGuid();
 		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
-		$changeOp = new ChangeOpQualifier( $guid, $newQualifier, '', $this->mockProvider->getMockSnakValidator() );
+		$changeOp = new ChangeOpQualifier(
+			$statement->getGuid(),
+			$newQualifier,
+			'',
+			$this->mockProvider->getMockSnakValidator()
+		);
 		$snakHash = $newQualifier->getHash();
-		$args[] = array( $item, $changeOp, $snakHash );
 
-		return $args;
+		return [
+			[ $item, $changeOp, $snakHash ],
+		];
 	}
 
 	/**
@@ -98,26 +106,30 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$qualifiers = $statement->getQualifiers();
-		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), "No qualifier with expected hash" );
+		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), 'Qualifier not found' );
 	}
 
 	public function changeOpSetProvider() {
 		$snak = new PropertyValueSnak( 2754236, new StringValue( 'test' ) );
-		$args = array();
 
-		$item = $this->newItemWithClaim( $snak );
+		$item = $this->newItem( $snak );
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
 		$statement = reset( $statements );
-		$guid = $statement->getGuid();
 		$newQualifier = new PropertyValueSnak( 78462378, new StringValue( 'newQualifier' ) );
 		$statement->getQualifiers()->addSnak( $newQualifier );
 		$snakHash = $newQualifier->getHash();
 		$changedQualifier = new PropertyValueSnak( 78462378, new StringValue( 'changedQualifier' ) );
-		$changeOp = new ChangeOpQualifier( $guid, $changedQualifier, $snakHash, $this->mockProvider->getMockSnakValidator() );
-		$args[] = array( $item, $changeOp, $changedQualifier->getHash() );
+		$changeOp = new ChangeOpQualifier(
+			$statement->getGuid(),
+			$changedQualifier,
+			$snakHash,
+			$this->mockProvider->getMockSnakValidator()
+		);
 
-		return $args;
+		return [
+			[ $item, $changeOp, $changedQualifier->getHash() ],
+		];
 	}
 
 	/**
@@ -129,10 +141,15 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		/** @var Statement $statement */
 		$statement = reset( $statements );
 		$qualifiers = $statement->getQualifiers();
-		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), "No qualifier with expected hash" );
+		$this->assertTrue( $qualifiers->hasSnakHash( $snakHash ), 'Qualifier not found' );
 	}
 
-	private function newItemWithClaim( $snak ) {
+	/**
+	 * @param Snak $snak
+	 *
+	 * @return Item
+	 */
+	private function newItem( Snak $snak ) {
 		$item = new Item( new ItemId( 'Q123' ) );
 
 		$item->getStatements()->addNewStatement(
@@ -150,14 +167,14 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$q17 = new ItemId( 'Q17' );
 
 		$item = new Item( $q17 );
-		$claimGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+		$goodGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
 		$badGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
 		$snak = new PropertyNoValueSnak( $p11 );
 		$qualifiers = new SnakList( array( $oldSnak ) );
-		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $claimGuid );
+		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $goodGuid );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
 		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
@@ -165,26 +182,30 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$snakHash = $oldSnak->getHash();
 		$badSnakHash = sha1( "dummy" );
 
-		$cases = array();
-		$cases['malformed claim guid'] = array( $item, 'NotAGuid', $goodSnak, '' );
-		$cases['unknown claim guid'] = array( $item, $badGuid, $goodSnak, $snakHash );
-		$cases['unknown snak hash'] = array( $item, $claimGuid, $goodSnak, $badSnakHash );
-
-		return $cases;
+		return [
+			'malformed statement guid' => [ $item, 'NotAGuid', $goodSnak, '' ],
+			'unknown statement guid' => [ $item, $badGuid, $goodSnak, $snakHash ],
+			'unknown snak hash' => [ $item, $goodGuid, $goodSnak, $badSnakHash ],
+		];
 	}
 
 	/**
 	 * @dataProvider applyInvalidProvider
 	 */
-	public function testApplyInvalid( EntityDocument $entity, $claimGuid, Snak $snak, $snakHash = '' ) {
-		$this->setExpectedException( ChangeOpException::class );
+	public function testApplyInvalid(
+		EntityDocument $entity,
+		$statementGuid,
+		Snak $snak,
+		$snakHash
+	) {
 		$changeOpQualifier = new ChangeOpQualifier(
-			$claimGuid,
+			$statementGuid,
 			$snak,
 			$snakHash,
 			$this->mockProvider->getMockSnakValidator()
 		);
 
+		$this->setExpectedException( ChangeOpException::class );
 		$changeOpQualifier->apply( $entity );
 	}
 
@@ -193,13 +214,13 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 		$q17 = new ItemId( 'Q17' );
 
 		$item = new Item( $q17 );
-		$claimGuid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
+		$guid = $this->mockProvider->getGuidGenerator()->newGuid( $q17 );
 
 		$oldSnak = new PropertyValueSnak( $p11, new StringValue( "old qualifier" ) );
 
 		$snak = new PropertyNoValueSnak( $p11 );
 		$qualifiers = new SnakList( array( $oldSnak ) );
-		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $claimGuid );
+		$item->getStatements()->addNewStatement( $snak, $qualifiers, null, $guid );
 
 		//NOTE: the mock validator will consider the string "INVALID" to be invalid.
 		$badSnak = new PropertyValueSnak( $p11, new StringValue( 'INVALID' ) );
@@ -207,19 +228,18 @@ class ChangeOpQualifierTest extends \PHPUnit_Framework_TestCase {
 
 		$snakHash = $oldSnak->getHash();
 
-		$cases = array();
-		$cases['invalid snak value'] = array( $item, $claimGuid, $badSnak, '' );
-		$cases['invalid snak value type'] = array( $item, $claimGuid, $brokenSnak, $snakHash );
-
-		return $cases;
+		return [
+			'invalid snak value' => [ $item, $guid, $badSnak, '' ],
+			'invalid snak value type' => [ $item, $guid, $brokenSnak, $snakHash ],
+		];
 	}
 
 	/**
 	 * @dataProvider validateProvider
 	 */
-	public function testValidate( EntityDocument $entity, $claimGuid, Snak $snak, $snakHash = '' ) {
+	public function testValidate( EntityDocument $entity, $statementGuid, Snak $snak, $snakHash ) {
 		$changeOpQualifier = new ChangeOpQualifier(
-			$claimGuid,
+			$statementGuid,
 			$snak,
 			$snakHash,
 			$this->mockProvider->getMockSnakValidator()
