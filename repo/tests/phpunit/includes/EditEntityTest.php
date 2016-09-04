@@ -650,13 +650,7 @@ class EditEntityTest extends MediaWikiTestCase {
 		);
 
 		// make sure we have a working cache
-		$this->setMwGlobals(
-			'wgMainCacheType',
-			CACHE_ANYTHING
-		);
-
-		// make sure we have a fresh cache
-		ObjectCache::clear();
+		$this->setService( 'getLocalClusterObjectCache', new \HashBagOStuff() );
 
 		$user = $this->getUser( 'UserForTestAttemptSaveRateLimit' );
 		$this->setUserGroups( $user, $groups );
@@ -686,9 +680,6 @@ class EditEntityTest extends MediaWikiTestCase {
 			$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 			$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::RATE_LIMIT ) );
 		}
-
-		// make sure nobody else has to work with our cache
-		ObjectCache::clear();
 	}
 
 	public function provideIsTokenOk() {
