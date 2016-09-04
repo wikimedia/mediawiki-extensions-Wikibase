@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_d5ae15e4",
+        "filename": "client/includes/Usage/EntityUsageLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-04T17:35:58Z",
+      "side": 1,
+      "message": "I\u0027m still confused why this class exist. Callers can just typehint against UsageLookup. The implementation can just be a SqlUsageTracker, but only the factory needs to know that.",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
