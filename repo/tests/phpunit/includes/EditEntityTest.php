@@ -689,6 +689,13 @@ class EditEntityTest extends MediaWikiTestCase {
 
 		// make sure nobody else has to work with our cache
 		ObjectCache::clear();
+		$services = \MediaWiki\MediaWikiServices::getInstance();
+		if ( method_exists( $services, 'getLocalClusterObjectCache' ) ) {
+			$services->resetServiceForTesting( 'LocalClusterObjectCache' );
+			$services->redefineService( 'LocalClusterObjectCache', function () {
+				return new \HashBagOStuff();
+			} );
+		}
 	}
 
 	public function provideIsTokenOk() {
