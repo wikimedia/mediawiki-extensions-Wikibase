@@ -1,4 +1,4 @@
-( function( wb, $ ) {
+( function( wb, mw, $ ) {
 	'use strict';
 
 	var PARENT = $.ui.TemplatedWidget;
@@ -22,7 +22,7 @@
  * @param {Object} options
  * @param {wikibase.datamodel.StatementList} [options.value]
  *        The list of `Statement`s to be displayed by this view.
- * @param {jQuery.wikibase.listview.ListItemAdapter} options.listItemAdapter
+ * @param {Function} options.getListItemAdapter
  */
 /**
  * @event afterstartediting
@@ -65,7 +65,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 			$listview: '.wikibase-statementlistview-listview'
 		},
 		value: null,
-		listItemAdapter: null
+		getListItemAdapter: null
 	},
 
 	/**
@@ -81,7 +81,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 * @throws {Error} if a required option is not specified properly.
 	 */
 	_create: function() {
-		if ( !this.options.listItemAdapter
+		if ( !this.options.getListItemAdapter
 			|| ( this.options.value && !( this.options.value instanceof wb.datamodel.StatementList ) )
 		) {
 			throw new Error( 'Required option not specified properly' );
@@ -117,6 +117,13 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 		.on( toggleErrorEvent, function( event, error ) {
 			self._trigger( 'toggleerror', null, [error] );
 		} );
+
+		var $containerWrapper = this.element.children( '.wikibase-toolbar-wrapper' );
+		if ( $containerWrapper.length === 0 ) {
+			$containerWrapper = mw.wbTemplate( 'wikibase-toolbar-wrapper', '' ).appendTo( this.element );
+		}
+
+		this._statementAdder = this.options.getAdder( this.enterNewItem.bind( this ), $containerWrapper );
 	},
 
 	/**
@@ -125,6 +132,10 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 */
 	destroy: function() {
 		this._listview.destroy();
+		if ( this._statementAdder ) {
+			this._statementAdder.destroy();
+			this._statementAdder = null;
+		}
 		PARENT.prototype.destroy.call( this );
 	},
 
@@ -136,7 +147,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 */
 	_createListView: function() {
 		this.$listview.listview( {
-			listItemAdapter: this.options.listItemAdapter,
+			listItemAdapter: this.options.getListItemAdapter( this._remove.bind( this ) ),
 			value: this.options.value ? this.options.value.toArray() : null
 		} );
 
@@ -196,7 +207,7 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 	 *
 	 * @param {jQuery.wikibase.statementview} statementview
 	 */
-	remove: function( statementview ) {
+	_remove: function( statementview ) {
 		this._listview.removeItem( statementview.element );
 		this._trigger( 'afterremove' );
 	},
@@ -217,6 +228,9 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 		if ( key === 'disabled' ) {
 			this._listview.option( key, value );
+			if ( this._statementAdder ) {
+				this._statementAdder[ value ? 'disable' : 'enable' ]();
+			}
 		}
 
 		return response;
@@ -237,4 +251,4 @@ $.widget( 'wikibase.statementlistview', PARENT, {
 
 } );
 
-}( wikibase, jQuery ) );
+}( wikibase, mediaWiki, jQuery ) );
