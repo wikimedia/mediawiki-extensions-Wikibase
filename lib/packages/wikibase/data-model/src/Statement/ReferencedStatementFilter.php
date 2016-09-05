@@ -21,10 +21,10 @@ class ReferencedStatementFilter implements StatementFilter {
 	/**
 	 * @param Statement $statement
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function statementMatches( Statement $statement ) {
-		return count( $statement->getReferences() ) !== 0;
+		return !$statement->getReferences()->isEmpty();
 	}
 
 }
