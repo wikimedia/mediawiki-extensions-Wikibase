@@ -14,8 +14,13 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Store\EntityPerPage;
+<<<<<<< a755692be16f779b6e28ec6eca79fd3683eb3b8b
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\Sql\EntityPerPageTable;
+=======
+use Wikibase\Lib\Store\EntityPerPage;
+use Wikibase\Repo\Store\SQL\EntityPerPageTable;
+>>>>>>> Move EntityPerPage class to Lib
 
 /**
  * @covers Wikibase\Repo\Store\Sql\EntityPerPageTable

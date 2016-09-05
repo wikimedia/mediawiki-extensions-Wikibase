@@ -19,6 +19,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
@@ -116,6 +117,11 @@ class DirectSqlStore implements ClientStore {
 	private $entityIdLookup = null;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
 	 * @var EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup = null;
@@ -169,6 +175,7 @@ class DirectSqlStore implements ClientStore {
 		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
 		EntityNamespaceLookup $entityNamespaceLookup,
+		EntityIdComposer $entityIdComposer,
 		$repoWiki = false,
 		$languageCode
 	) {
@@ -176,6 +183,7 @@ class DirectSqlStore implements ClientStore {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->entityIdComposer = $entityIdComposer;
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
 
@@ -470,6 +478,13 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getEntityChangeLookup() {
 		return new EntityChangeLookup( $this->entityChangeFactory, $this->entityIdParser, $this->repoWiki );
+	}
+
+	/**
+	 * @return EntityPerPage
+	 */
+	public function getEntityPerPage() {
+		return new EntityPerPageTable( wfGetLB(), $this->entityIdParser, $this->entityIdComposer );
 	}
 
 }
