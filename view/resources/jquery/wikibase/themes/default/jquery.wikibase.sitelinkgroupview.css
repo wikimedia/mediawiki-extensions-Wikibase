@@ -33,9 +33,7 @@
 	background-color: #D6F3FF;
 }
 
-.wikibase-sitelinkgroupview h2, /* TODO: Temporarily kept for compatibility, remove after July 2015 */
-.wikibase-sitelinkgroupview h3 {
-	border-bottom: 0; /* TODO: Temporarily kept for compatibility, remove after July 2015 */
+.wikibase-sitelinkgroupview .wikibase-sitelinkgroupview-heading-section h3 {
 	display: inline;
 	float: none;
 	font-weight: normal;
