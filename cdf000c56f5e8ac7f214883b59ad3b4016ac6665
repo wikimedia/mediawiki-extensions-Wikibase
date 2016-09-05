@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_43feea36",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T23:42:31Z",
+      "side": 1,
+      "message": "I initially had BoundedQuantityValue extends QuantityValue - but that would have changed what QuantityValue is (a quantity with bounds), so I changed the names. I agree that BoundedQuantityValue extends QuantityValue is the clearer naming scheme, but continuity is also nice, so I kept the name of the class that has the old behavior.\n\nThe LSP issue isn\u0027t a problem because the objects are immutable. An square can indeed extend a rectangle if they are immutable objects, no problem there.",
+      "parentUuid": "2e93376b_d82d6543",
+      "revId": "cdf000c56f5e8ac7f214883b59ad3b4016ac6665",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_1828cd2e",
         "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-05T19:44:29Z",
       "side": 1,
       "message": "This probably also needs bump in format version in RDF Vocabulary.",
+      "revId": "cdf000c56f5e8ac7f214883b59ad3b4016ac6665",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_c391fafc",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T23:42:31Z",
+      "side": 1,
+      "message": "Only of our ontology explicitly says that these properties are required... does it? Otherwise, everything in RDF is optional, right?",
+      "parentUuid": "2e93376b_1828cd2e",
       "revId": "cdf000c56f5e8ac7f214883b59ad3b4016ac6665",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
