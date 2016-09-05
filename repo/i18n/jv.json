@@ -12,5 +12,7 @@
 	"wikibase-description-empty": "Durung katerangan",
 	"wikibase-sitelinks-special": "Sasana liya",
 	"wikibase-statementview-rank-normal": "Tataran sedhengan",
-	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rujukan|rujukan}}"
+	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|rujukan|rujukan}}",
+	"wikibase-dispatchstats-oldest-change": "Lawas dhéwé",
+	"wikibase-dispatchstats-newest-change": "Anyar dhéwé"
 }
