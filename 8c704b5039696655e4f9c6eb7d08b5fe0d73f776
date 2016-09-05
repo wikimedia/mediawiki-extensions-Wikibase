@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_ad9eb457",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-05T13:24:20Z",
+      "side": 1,
+      "message": "@param {Function} [removeCallback]",
+      "revId": "8c704b5039696655e4f9c6eb7d08b5fe0d73f776",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
