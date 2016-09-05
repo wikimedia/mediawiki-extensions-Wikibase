@@ -49,9 +49,10 @@ class ItemId extends EntityId implements Int32EntityId {
 	}
 
 	/**
-	 * @return int
+	 * @see Int32EntityId::getNumericId
 	 *
 	 * @throws RuntimeException if called on a foreign ID.
+	 * @return int Guaranteed to be a distinct integer in the range [1..2147483647].
 	 */
 	public function getNumericId() {
 		if ( $this->isForeign() ) {
