@@ -1,5 +1,5 @@
 {
-	// https://github.com/jscs-dev/node-jscs/blob/master/presets/wikimedia.json
+	// https://github.com/wikimedia/jscs-preset-wikimedia/blob/master/presets/wikimedia.json
 	"preset": "wikimedia",
 
 	// ----
@@ -10,6 +10,7 @@
 	"disallowDanglingUnderscores": null,
 	"requireSpacesInsideBrackets": null,
 	"requireVarDeclFirst": null,
+	"requireCamelCaseOrUpperCaseIdentifiers": { "allExcept": [ "zh_min_nan" ] },
 	"jsDoc": {
 		// what we don't yet follow is commented out
 		"checkAnnotations": {
