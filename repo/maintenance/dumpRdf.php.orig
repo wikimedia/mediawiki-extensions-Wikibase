@@ -8,8 +8,11 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+<<<<<<< a755692be16f779b6e28ec6eca79fd3683eb3b8b
 use Wikibase\Lib\Store\EntityTitleLookup;
+=======
 use Wikibase\Lib\Store\EntityPerPage;
+>>>>>>> Move EntityPerPage class to Lib
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\WikibaseRepo;
