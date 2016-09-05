@@ -508,6 +508,7 @@ final class WikibaseClient {
 				$this->getEntityContentDataCodec(),
 				$this->getEntityIdParser(),
 				$this->getEntityNamespaceLookup(),
+				$this->getEntityIdComposer(),
 				$repoDatabase,
 				$this->contentLanguage->getCode()
 			);
