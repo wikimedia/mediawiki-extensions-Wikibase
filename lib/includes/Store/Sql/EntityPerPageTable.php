@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Store\Sql;
+namespace Wikibase\Lib\Store\Sql;
 
 use InvalidArgumentException;
 use LoadBalancer;
@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 

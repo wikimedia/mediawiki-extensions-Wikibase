@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Store\Sql;
+namespace Wikibase\Lib\Tests\Store\Sql;
 
 use IDatabase;
 use LoadBalancer;
@@ -14,11 +14,11 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Repo\Store\EntityPerPage;
-use Wikibase\Repo\Store\Sql\EntityPerPageTable;
+use Wikibase\Lib\Store\EntityPerPage;
+use Wikibase\Lib\Store\Sql\EntityPerPageTable;
 
 /**
- * @covers Wikibase\Repo\Store\Sql\EntityPerPageTable
+ * @covers Wikibase\Lib\Store\Sql\EntityPerPageTable
  *
  * @group Wikibase
  * @group WikibaseRepo

@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Repo\Tests;
+namespace Wikibase\Lib\Tests;
 
 use BadMethodCallException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\Store\EntityPerPage;
 
 /**
  * @author Addshore

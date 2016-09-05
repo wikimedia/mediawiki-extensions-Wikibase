@@ -8,11 +8,11 @@ use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
+use Wikibase\Lib\Store\EntityPerPage;
 use Wikibase\Repo\Disposable;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
-use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\Sql\EntityPerPageIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
