@@ -4,12 +4,23 @@
 			"Cedric31"
 		]
 	},
+	"valueview-expert-advancedadjustments": "reglatges avançats",
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "La manipulacion de las valors de donadas « $1 » es pas encara suportada.",
 	"valueview-expert-emptyvalue-empty": "void",
 	"valueview-expert-globecoordinateinput-precision": "Precision :",
+	"valueview-expert-globecoordinateinput-customprecision": "especial ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
 	"valueview-expert-timevalue-calendar-julian": "Julian",
 	"valueview-expert-timeinput-precision": "Precision :",
 	"valueview-expert-timeinput-calendar": "Calendièr :",
+	"valueview-expertextender-calendarhint-gregorian": "(Calendièr gregorian)",
+	"valueview-expertextender-calendarhint-julian": "(Calendièr julian)",
+	"valueview-expertextender-calendarhint-switch-gregorian": "→ cambiar en gregorian",
+	"valueview-expertextender-calendarhint-switch-julian": "→ cambiar en julian",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "Lenga (obligatòri) :",
+	"valueview-expertextender-unitsuggester-label": "Unitat (facultatiu) :",
 	"valueview-preview-label": "afichat coma :",
-	"valueview-preview-novalue": "cap de valor valida pas reconeguda"
+	"valueview-preview-novalue": "cap de valor valida pas reconeguda",
+	"valueview-listrotator-manually": "definir manualament"
 }
