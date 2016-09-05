@@ -19,10 +19,13 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityPerPage;
+use Wikibase\Lib\Store\Sql\EntityPerPageTable;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
@@ -32,7 +35,6 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\WikiPageEntityRevisionLookup;
 use Wikibase\Store\EntityIdLookup;
-
 /**
  * Implementation of the client store interface using direct access to the repository's
  * database via MediaWiki's foreign wiki mechanism as implemented by LBFactoryMulti.
@@ -116,6 +118,11 @@ class DirectSqlStore implements ClientStore {
 	private $entityIdLookup = null;
 
 	/**
+	 * @var EntityIdComposer
+	 */
+	private $entityIdComposer;
+
+	/**
 	 * @var EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup = null;
@@ -169,6 +176,7 @@ class DirectSqlStore implements ClientStore {
 		EntityContentDataCodec $contentCodec,
 		EntityIdParser $entityIdParser,
 		EntityNamespaceLookup $entityNamespaceLookup,
+		EntityIdComposer $entityIdComposer,
 		$repoWiki = false,
 		$languageCode
 	) {
@@ -176,6 +184,7 @@ class DirectSqlStore implements ClientStore {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
+		$this->entityIdComposer = $entityIdComposer;
 		$this->repoWiki = $repoWiki;
 		$this->languageCode = $languageCode;
 
@@ -470,6 +479,13 @@ class DirectSqlStore implements ClientStore {
 	 */
 	public function getEntityChangeLookup() {
 		return new EntityChangeLookup( $this->entityChangeFactory, $this->entityIdParser, $this->repoWiki );
+	}
+
+	/**
+	 * @return EntityPerPage
+	 */
+	public function getEntityPerPage() {
+		return new EntityPerPageTable( wfGetLB(), $this->entityIdParser, $this->entityIdComposer );
 	}
 
 }
