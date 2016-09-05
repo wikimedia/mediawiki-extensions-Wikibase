@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_0fbec9ce",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-05T11:21:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_0f86c967",
+      "revId": "4c3cd9b6c62b696f2987f1282a2002c5af0aadf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_6f94ad8e",
         "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_6ff58db5",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-05T11:21:21Z",
+      "side": 1,
+      "message": "Makes a little more sense, I agree. Changed.",
+      "parentUuid": "2e93376b_6f94ad8e",
+      "revId": "4c3cd9b6c62b696f2987f1282a2002c5af0aadf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_efa97ddd",
         "filename": "docs/lua.wiki",
         "patchSetId": 2
@@ -47,6 +83,30 @@
       "writtenOn": "2016-09-05T10:41:36Z",
       "side": 1,
       "message": "This should be getDescription, shouldn\u0027t it?\n\nAlso below.",
+      "range": {
+        "startLine": 154,
+        "startChar": 7,
+        "endLine": 154,
+        "endChar": 18
+      },
+      "revId": "4c3cd9b6c62b696f2987f1282a2002c5af0aadf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_ef86dd17",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-05T11:21:21Z",
+      "side": 1,
+      "message": "Good catch… thanks for also carefully reviewing this! :)",
+      "parentUuid": "2e93376b_efa97ddd",
       "range": {
         "startLine": 154,
         "startChar": 7,
