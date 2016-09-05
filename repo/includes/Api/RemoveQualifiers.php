@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * API module for removing qualifiers from a claim.
+ * API module for removing qualifiers from a statement.
  *
  * @since 0.3
  *
@@ -95,9 +95,8 @@ class RemoveQualifiers extends ApiBase {
 
 		$summary = $this->modificationHelper->createSummary( $params, $this );
 
-		$claim = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
-
-		$qualifierHashes = $this->getQualifierHashesFromParams( $params, $claim );
+		$statement = $this->modificationHelper->getStatementFromEntity( $guid, $entity );
+		$qualifierHashes = $this->getQualifierHashesFromParams( $params, $statement );
 
 		$changeOps = new ChangeOps();
 		$changeOps->add( $this->getChangeOps( $guid, $qualifierHashes ) );
@@ -123,16 +122,19 @@ class RemoveQualifiers extends ApiBase {
 	}
 
 	/**
-	 * @param string $claimGuid
+	 * @param string $statementGuid
 	 * @param string[] $qualifierHashes
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getChangeOps( $claimGuid, array $qualifierHashes ) {
+	private function getChangeOps( $statementGuid, array $qualifierHashes ) {
 		$changeOps = array();
 
-		foreach ( $qualifierHashes as $qualifierHash ) {
-			$changeOps[] = $this->statementChangeOpFactory->newRemoveQualifierOp( $claimGuid, $qualifierHash );
+		foreach ( $qualifierHashes as $hash ) {
+			$changeOps[] = $this->statementChangeOpFactory->newRemoveQualifierOp(
+				$statementGuid,
+				$hash
+			);
 		}
 
 		return $changeOps;
@@ -152,6 +154,7 @@ class RemoveQualifiers extends ApiBase {
 			if ( !$qualifiers->hasSnakHash( $qualifierHash ) ) {
 				$this->errorReporter->dieError( 'Invalid snak hash', 'no-such-qualifier' );
 			}
+
 			$hashes[] = $qualifierHash;
 		}
 
