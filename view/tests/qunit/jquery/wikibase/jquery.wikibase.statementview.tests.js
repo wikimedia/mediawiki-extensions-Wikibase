@@ -32,7 +32,7 @@ var createStatementview = function( options, $node ) {
 				destroy: function() {}
 			};
 		},
-		buildReferenceListItemAdapter: function() {
+		getReferenceListItemAdapter: function() {
 			return wb.tests.getMockListItemAdapter(
 				'mytestreferenceview',
 				function() {
