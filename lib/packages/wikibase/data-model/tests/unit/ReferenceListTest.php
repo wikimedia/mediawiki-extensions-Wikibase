@@ -379,7 +379,7 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 			$references->removeReferenceHash( $hash );
 		}
 
-		$this->assertEquals( 0, count( $references ) );
+		$this->assertTrue( $references->isEmpty() );
 	}
 
 	public function testRemoveReferenceHashRemovesIdenticalObjects() {
