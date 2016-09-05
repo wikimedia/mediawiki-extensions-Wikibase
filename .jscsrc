@@ -1,5 +1,5 @@
 {
-	// https://github.com/jscs-dev/node-jscs/blob/master/presets/wikimedia.json
+	// https://github.com/wikimedia/jscs-preset-wikimedia/blob/master/presets/wikimedia.json
 	"preset": "wikimedia",
 
 	// ----
