@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_555f8044",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-05T17:42:30Z",
+      "side": 1,
+      "message": "I don\u0027t know. Why does the old code not set the title directly here? I was just copy-pasting this behavior.",
+      "parentUuid": "2e93376b_b5fb4410",
+      "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_b52264a0",
         "filename": "repo/includes/Actions/ViewEntityAction.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-05T15:46:03Z",
       "side": 1,
       "message": "ugh, why is this special case needed?",
+      "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b53504f6",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-05T17:42:30Z",
+      "side": 1,
+      "message": "Obviously because diffs behave different. Also this was already here and is not touched by this patch.",
+      "parentUuid": "2e93376b_b52264a0",
       "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_d53a90e3",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-05T17:42:30Z",
+      "side": 1,
+      "message": "This is an array of meta data about the page. They don\u0027t all belong in meta tags, e.g. the title.",
+      "parentUuid": "2e93376b_f51cec6c",
+      "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_353674e5",
         "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2016-09-05T15:46:03Z",
       "side": 1,
       "message": "can we avoid getting *all* descriptions here? based on LanguageFallbackChain::getFetchLanguageCodes perhaps?",
+      "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f53f8cd1",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-05T17:42:30Z",
+      "side": 1,
+      "message": "The entity is fully available anyway at this point. This would not save anything.",
+      "parentUuid": "2e93376b_353674e5",
       "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
