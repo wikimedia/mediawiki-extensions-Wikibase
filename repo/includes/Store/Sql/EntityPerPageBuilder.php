@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\MessageReporter;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\Store\EntityPerPage;
 
 /**
  * Utility class for rebuilding the wb_entity_per_page table.
