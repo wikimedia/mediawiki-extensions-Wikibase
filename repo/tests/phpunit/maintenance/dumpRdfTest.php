@@ -35,7 +35,7 @@ use Wikibase\DumpRdf;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Repo\Tests\MockEntityPerPage;
+use Wikibase\Lib\Tests\MockEntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

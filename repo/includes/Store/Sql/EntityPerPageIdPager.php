@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Store\EntityIdPager;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\EntityPerPage;
 
 /**
  * EntityPerPageIdPager is a cursor for iterating over batches of EntityIds from an

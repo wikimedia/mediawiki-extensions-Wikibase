@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\EntityChangeLookup;
+use Wikibase\Lib\Store\EntityPerPage;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Store\EntityIdLookup;
@@ -140,5 +141,10 @@ interface ClientStore {
 	 * @return EntityChangeLookup
 	 */
 	public function getEntityChangeLookup();
+
+	/**
+	 * @return EntityPerPage
+	 */
+	public function getEntityPerPage();
 
 }

@@ -222,4 +222,8 @@ class MockClientStore implements ClientStore {
 		// FIXME: Incomplete
 	}
 
+	public function getEntityPerPage() {
+		// FIXME: Incomplete
+	}
+
 }

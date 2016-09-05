@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Store;
+namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
