@@ -6,8 +6,13 @@ use RuntimeException;
 use User;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\Store\EntityPerPage;
+<<<<<<< a755692be16f779b6e28ec6eca79fd3683eb3b8b
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\Sql\EntityPerPageBuilder;
+=======
+use Wikibase\Lib\Store\EntityPerPage;
+use Wikibase\Repo\Store\SQL\EntityPerPageBuilder;
+>>>>>>> Move EntityPerPage class to Lib
 use Wikibase\Repo\WikibaseRepo;
 
 /**

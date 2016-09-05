@@ -13,7 +13,12 @@ use Wikibase\Repo\Disposable;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\EntityIdPager;
+<<<<<<< a755692be16f779b6e28ec6eca79fd3683eb3b8b
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\Sql\EntityPerPageIdPager;
+=======
+use Wikibase\Repo\Store\SQL\EntityPerPageIdPager;
+>>>>>>> Move EntityPerPage class to Lib
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

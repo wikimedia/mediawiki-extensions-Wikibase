@@ -10,9 +10,13 @@ use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Lib\Store\EntityPerPage;
+<<<<<<< a755692be16f779b6e28ec6eca79fd3683eb3b8b
+use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
+=======
+use Wikibase\Lib\Store\EntityPerPage;
+>>>>>>> Move EntityPerPage class to Lib
 
 /**
  * Represents a lookup database table that makes the link between entities and pages.
