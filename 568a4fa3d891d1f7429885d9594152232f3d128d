@@ -16,6 +16,24 @@
       "revId": "568a4fa3d891d1f7429885d9594152232f3d128d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_954e483b",
+        "filename": "repo/includes/Api/EntitySearchHelper.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T16:07:35Z",
+      "side": 1,
+      "message": "True, but building a regex from the actual entity ids would be tricky, and this is inclusive enough that it will probably cover most kinds of IDs.\n\nHowever, In order to handle something like L12345-F3 or L3455/S6 in the future, an additional step would be needed. Just allowing - and / as part of the id won\u0027t work, since then we\u0027d mis-match wiki/Q1234.\n\nPerhaps add a comment to that effect.",
+      "parentUuid": "2e93376b_ef5edd7a",
+      "revId": "568a4fa3d891d1f7429885d9594152232f3d128d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
