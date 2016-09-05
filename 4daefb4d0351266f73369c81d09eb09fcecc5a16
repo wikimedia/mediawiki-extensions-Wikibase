@@ -2,6 +2,108 @@
   "comments": [
     {
       "key": {
+        "uuid": "2e93376b_553a20c1",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T16:01:33Z",
+      "side": 1,
+      "message": "Avoid creating services directly. Use $wikibaseClient-\u003egetStore()-\u003egetUsageLookup() to get a UsageLookup.",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_55978093",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T16:01:33Z",
+      "side": 1,
+      "message": "This could perhaps be more informative. \"All entity data\" or some such.",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_1586d867",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T16:01:33Z",
+      "side": 1,
+      "message": "In practice, this currently means \"statements\".",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_3564b4e1",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T16:01:33Z",
+      "side": 1,
+      "message": "Don\u0027t type hint against a concrete implementation if you can help it. All you need is a UsageLookup here, so ask for a UsageLookup. What exactly it is and where it comes from should be left to the factory that creates this service.\n\nThe underlying principle is \"avoid strong coupling between implementations\".",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_d5753094",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T16:01:33Z",
+      "side": 1,
+      "message": "Why does this need to be wrapped? It\u0027s already a UsageLookup.",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f5806c4d",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T16:01:33Z",
+      "side": 1,
+      "message": "To make the l10n people happy, add a comment with all the different message keys that may come from this concatenation. This way, it\u0027s possible to grep for message keys.",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_d5ae15e4",
         "filename": "client/includes/Usage/EntityUsageLookup.php",
         "patchSetId": 5
