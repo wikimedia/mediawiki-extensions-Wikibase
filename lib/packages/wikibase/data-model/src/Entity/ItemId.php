@@ -45,9 +45,7 @@ class ItemId extends EntityId implements Int32EntityId {
 	}
 
 	/**
-	 * @see Int32EntityId::getNumericId
-	 *
-	 * @return int Guaranteed to be a unique integer in the range [1..2147483647].
+	 * @return int
 	 */
 	public function getNumericId() {
 		return (int)substr( $this->serialization, 1 );
