@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_0f86c967",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-05T10:41:36Z",
+      "side": 1,
+      "message": "Even if this is private, I think it should describe the possible values: \"labels\", \"descriptions\" and \"aliases\", I believe.",
+      "revId": "4c3cd9b6c62b696f2987f1282a2002c5af0aadf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_6f94ad8e",
+        "filename": "client/includes/DataAccess/Scribunto/mw.wikibase.entity.lua",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-05T10:41:36Z",
+      "side": 1,
+      "message": "Not relevant, but I find the order of the parameters a bit more logical when it is \"entity, termType, langCode\".",
+      "revId": "4c3cd9b6c62b696f2987f1282a2002c5af0aadf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_efa97ddd",
+        "filename": "docs/lua.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-05T10:41:36Z",
+      "side": 1,
+      "message": "This should be getDescription, shouldn\u0027t it?\n\nAlso below.",
+      "range": {
+        "startLine": 154,
+        "startChar": 7,
+        "endLine": 154,
+        "endChar": 18
+      },
+      "revId": "4c3cd9b6c62b696f2987f1282a2002c5af0aadf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
