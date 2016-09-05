@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_b5fb4410",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T15:46:03Z",
+      "side": 1,
+      "message": "Hm, why don\u0027t we call $out-\u003eaddMeta directly here?",
+      "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b52264a0",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T15:46:03Z",
+      "side": 1,
+      "message": "ugh, why is this special case needed?",
+      "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f51cec6c",
+        "filename": "repo/includes/Actions/ViewEntityAction.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T15:46:03Z",
+      "side": 1,
+      "message": "shouldn\u0027t we just loop over all keys in the $meta here?",
+      "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_353674e5",
+        "filename": "repo/includes/ParserOutput/EntityParserOutputGenerator.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-05T15:46:03Z",
+      "side": 1,
+      "message": "can we avoid getting *all* descriptions here? based on LanguageFallbackChain::getFetchLanguageCodes perhaps?",
+      "revId": "4b8bfc8144f94568ae95ae0e975861b3fb5d9338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
