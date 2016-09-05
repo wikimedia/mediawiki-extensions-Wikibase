@@ -6,7 +6,7 @@ use HTMLForm;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\Store\EntityPerPage;
 
 /**
  * Base page for pages listing entities without a specific value.

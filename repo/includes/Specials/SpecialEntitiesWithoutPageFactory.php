@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\Store\EntityPerPage;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndexEntry;
 

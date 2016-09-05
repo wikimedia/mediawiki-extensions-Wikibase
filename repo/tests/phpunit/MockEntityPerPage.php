@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests;
 use BadMethodCallException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\Store\EntityPerPage;
 
 /**
  * @author Addshore
