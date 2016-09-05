@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @group Wikibase
  * @group WikibaseDataModel
- * @group EntityIdTest
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

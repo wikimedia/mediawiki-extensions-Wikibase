@@ -22,7 +22,6 @@ use Wikibase\DataModel\Term\TermList;
  * @group Wikibase
  * @group WikibaseItem
  * @group WikibaseDataModel
- * @group WikibaseItemTest
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

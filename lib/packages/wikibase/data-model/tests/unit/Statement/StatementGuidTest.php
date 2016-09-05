@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemId;
  *
  * @group Wikibase
  * @group WikibaseDataModel
- * @group ClaimGuidTest
  *
  * @license GPL-2.0+
  * @author Addshore
