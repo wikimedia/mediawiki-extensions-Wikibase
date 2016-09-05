@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_d82d6543",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-05T19:44:29Z",
+      "side": 1,
+      "message": "This inheritance scheme doesn\u0027t look right to me. It looks like a classic example of extending square with rectangle. QuantityValue with bounds isn\u0027t a special case of unbounded QuantityValue. While it may make sense code-reuse-wise, logically if I see something accepts UnboundedQuantityValue I don\u0027t really expect it to mean \"QuantityValue that may or may not have bounds\" - I actually expect it to mean \"one that does not have bounds, period\". It should be either BoundedQuantityValue extends QuantityValue, or both extending an abstract super-class.",
+      "revId": "cdf000c56f5e8ac7f214883b59ad3b4016ac6665",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_1828cd2e",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-05T19:44:29Z",
+      "side": 1,
+      "message": "This probably also needs bump in format version in RDF Vocabulary.",
+      "revId": "cdf000c56f5e8ac7f214883b59ad3b4016ac6665",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
