@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\EntityIdComposer;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Lib\Store\EntityPerPage;
 use Wikibase\Repo\Store\Sql\EntityPerPageTable;
 
 /**
