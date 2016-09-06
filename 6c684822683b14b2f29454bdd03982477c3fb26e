@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_fbae96e3",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-06T15:47:28Z",
+      "side": 1,
+      "message": "I played around with this, removed this whole section …",
+      "revId": "6c684822683b14b2f29454bdd03982477c3fb26e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_5bbdea15",
+        "filename": "view/resources/jquery/wikibase/snakview/snakview.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-06T15:47:28Z",
+      "side": 1,
+      "message": "… and inlined the focus() call down here. This kind of \"works\", means the events are all fired in the right order and the focus is even on the right element (!), but the textcursor still does not appear.",
+      "revId": "6c684822683b14b2f29454bdd03982477c3fb26e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
