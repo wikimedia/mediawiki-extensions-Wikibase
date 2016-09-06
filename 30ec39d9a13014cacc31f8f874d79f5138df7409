@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_c449006c",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-06T11:21:22Z",
+      "side": 1,
+      "message": "The aspect modifier should be passed as a parameter to the message here, see comment below. Otherwise, label usage in different languages (because of fallback) will look like \"Label, Label\"...\n\n(please split the line if when you do that).",
+      "revId": "30ec39d9a13014cacc31f8f874d79f5138df7409",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_8430d8e6",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-06T11:21:22Z",
+      "side": 1,
+      "message": "This loses the aspect \"modifiers\" like \"en\" and \"de\" in \"L.de\" and \"L.en\". You can either use getAspectKey() and later split the string, or use [ getAspect(), getModifier() ]",
+      "revId": "30ec39d9a13014cacc31f8f874d79f5138df7409",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
