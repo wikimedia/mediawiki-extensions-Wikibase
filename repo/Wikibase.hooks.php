@@ -836,10 +836,8 @@ final class RepoHooks {
 		// with the label, if available, or else the id. Passed via parser output
 		// and output page to save overhead of fetching content and accessing an entity
 		// on page view.
-		$titleText = $parserOutput->getExtensionData( 'wikibase-titletext' );
-		if ( $titleText !== null ) {
-			$out->setProperty( 'wikibase-titletext', $titleText );
-		}
+		$meta = $parserOutput->getExtensionData( 'wikibase-meta-tags' );
+		$out->setProperty( 'wikibase-meta-tags', $meta );
 
 		// Array with <link rel="alternate"> tags for the page HEAD.
 		$alternateLinks = $parserOutput->getExtensionData( 'wikibase-alternate-links' );
