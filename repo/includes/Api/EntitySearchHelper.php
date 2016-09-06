@@ -121,17 +121,30 @@ class EntitySearchHelper {
 	 */
 	private function getExactMatchForEntityId( $term, $entityType ) {
 		try {
-			$entityId = $this->idParser->parse( $term );
-			$title = $this->titleLookup->getTitleForId( $entityId );
-
-			if ( $title && $title->exists() && ( $entityId->getEntityType() === $entityType ) ) {
-				return $entityId;
-			}
+			$entityId = $this->idParser->parse( trim( $term ) );
 		} catch ( EntityIdParsingException $ex ) {
-			// never mind, doesn't look like an ID.
+			// Extract the last (ASCII-only) word. This covers URIs and input strings like "(Q42)".
+			if ( !preg_match( '/.*(\b\w{2,})/s', $term, $matches ) ) {
+				return null;
+			}
+
+			try {
+				$entityId = $this->idParser->parse( $matches[1] );
+			} catch ( EntityIdParsingException $ex ) {
+				return null;
+			}
 		}
 
-		return null;
+		if ( $entityId->getEntityType() !== $entityType ) {
+			return null;
+		}
+
+		$title = $this->titleLookup->getTitleForId( $entityId );
+		if ( !$title || !$title->exists() ) {
+			return null;
+		}
+
+		return $entityId;
 	}
 
 	/**

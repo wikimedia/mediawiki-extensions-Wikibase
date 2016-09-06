@@ -159,6 +159,24 @@ class EntitySearchHelperTest extends \PHPUnit_Framework_TestCase {
 			'Exact EntityId match' => array(
 				'Q111', 10, array(), array( 'Q111' => $q111Result )
 			),
+			'EntityID plus term matches' => array(
+				'Q111', 10, array( $q222Result ), array( 'Q111' => $q111Result, 'Q222' => $q222Result )
+			),
+			'Trimming' => array(
+				' Q111 ', 10, array(), array( 'Q111' => $q111Result )
+			),
+			'Brackets are removed' => array(
+				'(Q111)', 10, array(), array( 'Q111' => $q111Result )
+			),
+			'URL prefixes are removed' => array(
+				'http://example.com/Q111', 10, array(), array( 'Q111' => $q111Result )
+			),
+			'Single characters are ignored' => array(
+				'w/Q111/w', 10, array(), array( 'Q111' => $q111Result )
+			),
+			'EntityID extraction plus term matches' => array(
+				'[id:Q111]', 10, array( $q222Result ), array( 'Q111' => $q111Result, 'Q222' => $q222Result )
+			),
 			'Multiple Results' => array(
 				'Foo', 10, array( $q222Result, $q333Result ), array( 'Q222' => $q222Result, 'Q333' => $q333Result )
 			),
