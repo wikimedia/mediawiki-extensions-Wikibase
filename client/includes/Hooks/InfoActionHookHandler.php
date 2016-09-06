@@ -2,9 +2,12 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Html;
 use IContextSource;
 use Title;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Usage\Sql\SqlUsageTracker;
+use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\NamespaceChecker;
@@ -37,12 +40,18 @@ class InfoActionHookHandler {
 	 */
 	private $siteId;
 
+	/**
+	 * @var UsageLookup
+	 */
+	private $usageLookup;
+
 	public function __construct( NamespaceChecker $namespaceChecker, RepoLinker $repoLinker,
-		SiteLinkLookup $siteLinkLookup, $siteId ) {
+		SiteLinkLookup $siteLinkLookup, $siteId, UsageLookup $usageLookup ) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->repoLinker = $repoLinker;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
+		$this->usageLookup = $usageLookup;
 	}
 
 	/**
@@ -54,9 +63,14 @@ class InfoActionHookHandler {
 	public function handle( IContextSource $context, array $pageInfo ) {
 		// Check if wikibase namespace is enabled
 		$title = $context->getTitle();
+		$usage = $this->usageLookup->getUsagesForPage( $title->getArticleID() );
 
 		if ( $this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) && $title->exists() ) {
 			$pageInfo['header-basic'][] = $this->getPageInfoRow( $context, $title );
+		}
+
+		if ( $usage ) {
+			$pageInfo['header-basic'][] = $this->formatEntityUsage( $context, $usage );
 		}
 
 		return $pageInfo;
@@ -110,6 +124,62 @@ class InfoActionHookHandler {
 			$context->msg( 'wikibase-pageinfo-entity-id' ),
 			$context->msg( 'wikibase-pageinfo-entity-id-none' )
 		);
+	}
+
+	private function formatAspects( array $aspects, IContextSource $context ) {
+		$aspectContent = '';
+		foreach ( $aspects as $aspect ) {
+			$aspectContent .= Html::rawElement(
+				'li',
+				[],
+				// Possible messages:
+				//   wikibase-pageinfo-entity-usage-S
+				//   wikibase-pageinfo-entity-usage-L
+				//   wikibase-pageinfo-entity-usage-T
+				//   wikibase-pageinfo-entity-usage-X
+				//   wikibase-pageinfo-entity-usage-O
+				$context->msg(
+					'wikibase-pageinfo-entity-usage-' . $aspect[0], $aspect[1] )->parse()
+			);
+		}
+		return $aspectContent;
+	}
+
+	/**
+	 * @param IContextSource $context
+	 * @param array $usage
+	 *
+	 * @return string[]
+	 */
+	private function formatEntityUsage( IContextSource $context, array $usage ) {
+		$usageAspectsByEntity = [];
+		$entities = [];
+		foreach ( $usage as $key => $entityUsage ) {
+			$entityId = $entityUsage->getEntityId()->getSerialization();
+			$entities[$entityId] = $entityUsage->getEntityId();
+			if ( !isset( $usageAspectsByEntity[$entityId] ) ) {
+				$usageAspectsByEntity[$entityId] = [];
+			}
+			$usageAspectsByEntity[$entityId][] = [
+				$entityUsage->getAspect(),
+				$entityUsage->getModifier()
+			];
+		}
+		$output = '';
+
+		foreach ( $usageAspectsByEntity as $entityId => $aspects ) {
+			$output .= Html::rawElement( 'li', [],
+				$this->repoLinker->buildEntityLink(
+					$entities[$entityId],
+					array( 'external' )
+				)
+			);
+
+			$aspectContent = $this->formatAspects( $aspects, $context );
+			$output .= Html::rawElement( 'ul', [], $aspectContent );
+		}
+		$output = Html::rawElement( 'ul', [], $output );
+		return array( $context->msg( 'wikibase-pageinfo-entity-usage' ), $output );
 	}
 
 }
