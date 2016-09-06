@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_a4e8740c",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-06T11:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_c449006c",
+      "revId": "30ec39d9a13014cacc31f8f874d79f5138df7409",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_8430d8e6",
         "filename": "client/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-06T11:21:22Z",
       "side": 1,
       "message": "This loses the aspect \"modifiers\" like \"en\" and \"de\" in \"L.de\" and \"L.en\". You can either use getAspectKey() and later split the string, or use [ getAspect(), getModifier() ]",
+      "revId": "30ec39d9a13014cacc31f8f874d79f5138df7409",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_44b3504c",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-06T11:48:36Z",
+      "side": 1,
+      "message": "[ getAspect(), getModifier() ] sounds much better since it\u0027s more readable.",
+      "parentUuid": "2e93376b_8430d8e6",
       "revId": "30ec39d9a13014cacc31f8f874d79f5138df7409",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
