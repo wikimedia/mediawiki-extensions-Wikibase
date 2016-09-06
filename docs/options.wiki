@@ -51,6 +51,8 @@ Default:
 ;transformLegacyFormatOnExport: Whether entity revisions stored in a legacy format should be converted on the fly while exporting. Enabled per default.
 ;allowEntityImport: allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
 ;pagePropertiesRdf: array that maps between page properties and Wikibase predicates for RDF dumps. Maps from database property name to an array that contains a key 'name' (RDF property name, which will be prefixed by wikibase:) and an optional key 'type'.
+;unitStorage: Definition for unit conversion storage. Should be in in the format <code>ObjectFactory</code understands,
+  example: <code>array( 'class' => 'Wikibase\\Lib\\JsonUnitStorage',  'args' => array( 'myUnits.json' ) )</code>
 
 == Client Settings ==
 
