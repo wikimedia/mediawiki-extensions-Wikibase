@@ -153,14 +153,10 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			? (int)$params['baserevid']
 			: 0;
 
-		if ( $baseRev === 0 ) {
-			$baseRev = $this->defaultRetrievalMode;
-		}
-
 		if ( $entityId ) {
 			$entityRevision = $this->loadEntityRevision( $entityId, $baseRev );
 		} else {
-			if ( is_int( $baseRev ) ) {
+			if ( $baseRev > 0 ) {
 				$this->errorReporter->dieError(
 					'Cannot load specific revision ' . $baseRev . ' if no entity is defined.',
 					'param-illegal'
@@ -172,7 +168,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 		$new = isset( $params['new'] ) ? $params['new'] : null;
 		if ( is_null( $entityRevision ) ) {
-			if ( is_int( $baseRev ) ) {
+			if ( $baseRev > 0 ) {
 				$this->errorReporter->dieError(
 					'Could not find revision ' . $baseRev,
 					'nosuchrevid'

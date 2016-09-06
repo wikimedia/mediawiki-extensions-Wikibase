@@ -225,6 +225,7 @@ class ItemMergeInteractor {
 		try {
 			$revision = $this->entityRevisionLookup->getEntityRevision(
 				$itemId,
+				0,
 				EntityRevisionLookup::LATEST_FROM_MASTER
 			);
 

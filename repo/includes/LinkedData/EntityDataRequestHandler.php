@@ -344,11 +344,6 @@ class EntityDataRequestHandler {
 	 */
 	private function getEntityRevision( EntityId $id, $revision ) {
 		$prefixedId = $id->getSerialization();
-
-		if ( $revision === 0 ) {
-			$revision = EntityRevisionLookup::LATEST_FROM_SLAVE;
-		}
-
 		$redirectRevision = null;
 
 		try {
@@ -365,7 +360,7 @@ class EntityDataRequestHandler {
 				$ex->getRevisionId(), $ex->getRevisionTimestamp()
 			);
 
-			if ( is_string( $revision ) ) {
+			if ( $revision === 0 ) {
 				// If no specific revision is requested, resolve the redirect.
 				list( $entityRevision, ) = $this->getEntityRevision( $ex->getRedirectTargetId(), $revision );
 			} else {

@@ -188,7 +188,7 @@ class OutputPageBeforeHTMLHookHandler {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param string $revisionId
+	 * @param int $revisionId
 	 * @param bool $termsListPrerendered
 	 *
 	 * @return EntityDocument|null
