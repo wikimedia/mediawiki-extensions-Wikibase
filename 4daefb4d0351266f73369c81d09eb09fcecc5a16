@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_231c7e79",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-06T01:06:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_55978093",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_1586d867",
         "filename": "client/i18n/en.json",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2016-09-05T16:01:33Z",
       "side": 1,
       "message": "In practice, this currently means \"statements\".",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_4310aa5b",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-06T01:06:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_1586d867",
       "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_630da641",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-06T01:06:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_3564b4e1",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_d5753094",
         "filename": "client/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 5
@@ -81,6 +135,24 @@
       "writtenOn": "2016-09-05T16:01:33Z",
       "side": 1,
       "message": "Why does this need to be wrapped? It\u0027s already a UsageLookup.",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_de00ed06",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-06T01:06:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_d5753094",
       "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_fe05a914",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-06T01:06:10Z",
+      "side": 1,
+      "message": "Done. I\u0027m not sure I did it in the best way possible. Do you think it\u0027s okay?",
+      "parentUuid": "2e93376b_f5806c4d",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_d5ae15e4",
         "filename": "client/includes/Usage/EntityUsageLookup.php",
         "patchSetId": 5
@@ -115,6 +205,24 @@
       "writtenOn": "2016-09-04T17:35:58Z",
       "side": 1,
       "message": "I\u0027m still confused why this class exist. Callers can just typehint against UsageLookup. The implementation can just be a SqlUsageTracker, but only the factory needs to know that.",
+      "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_1e0b5529",
+        "filename": "client/includes/Usage/EntityUsageLookup.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-06T01:06:10Z",
+      "side": 1,
+      "message": "I actually wanted to move SqlUsageTracker methods related to EntityUsage here so it won\u0027t be a \"UsageLookup\" anymore. Mostly to keep abstraction layers separated. but I\u0027m okay with this too.",
+      "parentUuid": "2e93376b_d5ae15e4",
       "revId": "4daefb4d0351266f73369c81d09eb09fcecc5a16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
