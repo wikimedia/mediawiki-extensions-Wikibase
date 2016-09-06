@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_098881eb",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-06T10:23:14Z",
+      "side": 1,
+      "message": "is this still needed? doesn\u0027t seem to be used.",
+      "revId": "ecfc74684fa753dd26029821ba16f70dd286375c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_298d3dfc",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-06T10:23:14Z",
+      "side": 1,
+      "message": "nested loops are generally an indicator that the method should be split. You could move the inner loop to private formatAspects",
+      "revId": "ecfc74684fa753dd26029821ba16f70dd286375c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_897b91ea",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-06T10:23:14Z",
+      "side": 1,
+      "message": "This returns a Message object, not a string. You are using rawElement, so you would need to parse each message to HTML first, with -\u003eparse().\n\nAlternatively, use -\u003eplain() and element(), that way you have plain text strings that get escaped.",
+      "revId": "ecfc74684fa753dd26029821ba16f70dd286375c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
