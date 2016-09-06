@@ -69,6 +69,24 @@
       "revId": "cdf000c56f5e8ac7f214883b59ad3b4016ac6665",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f121579b",
+        "filename": "repo/includes/Rdf/Values/QuantityRdfBuilder.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-06T18:05:19Z",
+      "side": 1,
+      "message": "Well, we don\u0027t really specify what is required and what\u0027s not (maybe we should start). I\u0027m not 100% sure about it - if we add stuff, we should bump it but if we just make some stuff optional - I don\u0027t know....",
+      "parentUuid": "2e93376b_c391fafc",
+      "revId": "cdf000c56f5e8ac7f214883b59ad3b4016ac6665",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
