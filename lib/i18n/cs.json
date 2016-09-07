@@ -12,7 +12,7 @@
 			"Cvanca"
 		]
 	},
-	"wikibase-lib-desc": "Obsahuje společné funkce pro rozšíření Wikibase a Klient Wikibase",
+	"wikibase-lib-desc": "Obsahuje společné funkce pro rozšíření Wikibase a Wikibase Client",
 	"specialpages-group-wikibase": "Wikibáze",
 	"wikibase-deletedentity-item": "Smazaná položka",
 	"wikibase-deletedentity-property": "Smazaná vlastnost",

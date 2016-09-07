@@ -71,6 +71,8 @@
 	"wikibase-pageswithbadges-submit": "Pokaż strony",
 	"wikibase-pageinfo-entity-id": "Identyfikator elementu Wikidanych",
 	"wikibase-pageinfo-entity-id-none": "brak",
+	"wikibase-pageinfo-entity-usage-L": "Etykieta: $1",
+	"wikibase-pageinfo-entity-usage-T": "Tytuł",
 	"wikibase-property-render-error": "Nie można zrenderować właściwości $1: $2",
 	"wikibase-otherprojects": "W innych projektach",
 	"wikibase-otherprojects-beta-message": "Pasek siostrzanych projektów",

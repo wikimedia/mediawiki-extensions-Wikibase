@@ -240,7 +240,7 @@
 	"wikibase-entitydata-unsupported-format": "Gagnagerðin $1 er ekki studd af þessu viðmóti.",
 	"wikibase-entitydata-storage-error": "Gat ekki hlaðið einingunni $1.",
 	"wikibase-entitydata-title": "Færslugögn",
-	"wikibase-entitydata-text": "Þessi síða er viðmót fyrir gildi eininga. Vinsamlegast skrifaðu auðkennið í vefslóðinni, með því að nota málskipan undirsíðunnar.",
+	"wikibase-entitydata-text": "Þessi síða er viðmót tengdra gagna við gildi eininga. Vinsamlegast tilgreindu auðkenni einingarinnar í vefslóðinni með málskipan undirssíðu.\n* Samkomulag um innihald byggir á accept haus biðlarans þíns. Það þýðir að gögn um eiginleikann er gefið upp á því formi sem biðlarinn kýs. Fyrir vafra er það HTML, sem áframsendir vafrann þinn yfir á hefðbundnu síðu einingarinnar.\n* Þú getur sérstaklega óskað eftir gögnunum á ákveðnu formi með því að bæta við viðeigandi skráarendingu við auðkenni einingarinnar. Q23.json sendir gögn á json formi, Q23.ttl sendir gögn á RDF formi og svo framveigis.",
 	"special-redirectentity": "Endurbeina einingu",
 	"wikibase-redirectentity-success": "$1 var endurbeint á $2.",
 	"wikibase-redirectentity-fromid": "Auðkennið sem á að endurbeina frá",

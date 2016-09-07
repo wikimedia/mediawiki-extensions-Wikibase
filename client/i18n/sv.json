@@ -7,7 +7,8 @@
 			"Skalman",
 			"Stryn",
 			"WikiPhoenix",
-			"Rockyfelle"
+			"Rockyfelle",
+			"Josve05a"
 		]
 	},
 	"wikibase-client-desc": "Klient för tillägget Wikibase",
@@ -77,6 +78,7 @@
 	"wikibase-pageswithbadges-submit": "Visa sidor",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} objekt-ID",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
+	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-property-render-error": "Misslyckades att rendera egenskapen $1: $2",
 	"wikibase-otherprojects": "I andra projekt",
 	"wikibase-otherprojects-beta-message": "Sidopanel för andra projekt",

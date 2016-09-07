@@ -15,7 +15,8 @@
 			"Hosseinblue",
 			"Maroen1990",
 			"Shbib Al-Subaie",
-			"علاء"
+			"علاء",
+			"بدارين"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
@@ -76,6 +77,7 @@
 	"wikibase-pageswithbadges-submit": "عرض الصفحات",
 	"wikibase-pageinfo-entity-id": "معرف عنصر {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "لا شيء",
+	"wikibase-pageinfo-entity-usage-T": "عنوان",
 	"wikibase-property-render-error": "\nفشل عرض الملكية$1: $2",
 	"wikibase-otherprojects": "في مشاريع أخرى",
 	"wikibase-otherprojects-beta-message": "المشاريع الأخرى في الشريط الجانبي",

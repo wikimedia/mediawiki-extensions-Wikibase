@@ -70,6 +70,7 @@
 	"wikibase-pageswithbadges-submit": "Pagina's weergeven",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} item-ID",
 	"wikibase-pageinfo-entity-id-none": "Geen",
+	"wikibase-pageinfo-entity-usage-L": "Label: $1",
 	"wikibase-property-render-error": "Het verwerken van de eigenschap $1 is mislukt: $2",
 	"wikibase-otherprojects": "In andere projecten",
 	"wikibase-otherprojects-beta-message": "Zijbalk andere projecten",
