@@ -375,7 +375,11 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
 		// NOTE: always validate modification against the current revision!
 		// TODO: this should be re-engineered, see T126231
-		$currentEntityRevision = $this->entityRevisionLookup->getEntityRevision( $entity->getId() );
+		$currentEntityRevision = $this->entityRevisionLookup->getEntityRevision(
+			$entity->getId(),
+			0,
+			EntityRevisionLookup::LATEST_FROM_SLAVE_WITH_FALLBACK
+		);
 		$result = $changeOp->validate( $currentEntityRevision->getEntity() );
 
 		if ( !$result->isValid() ) {
