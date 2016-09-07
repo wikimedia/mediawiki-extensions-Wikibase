@@ -16,6 +16,24 @@
       "revId": "bf84950e5ed79547e18325a3c42f7cc12777607f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_eaf5d94d",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2016-09-07T17:01:28Z",
+      "side": 1,
+      "message": "I think a branch makes more sense. I\u0027ll go back to doing it that way.",
+      "parentUuid": "2e93376b_e4bfd2f4",
+      "revId": "bf84950e5ed79547e18325a3c42f7cc12777607f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
