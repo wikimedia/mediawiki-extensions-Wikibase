@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Test;
 
-use DataValues\DecimalMath;
 use DataValues\DecimalValue;
 use DataValues\QuantityValue;
 use PHPUnit_Framework_TestCase;
@@ -17,10 +16,15 @@ use Wikibase\Lib\UnitStorage;
  */
 class UnitConverterTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * @var UnitConverter
-	 */
-	private $uc;
+	public function setUp() {
+		parent::setUp();
+
+		if ( !function_exists( 'bcscale' ) ) {
+			$this->markTestSkipped(
+				'Missing bcmath: This test needs arbitrary precision math.'
+			);
+		}
+	}
 
 	public function getConverterPairs() {
 		return [

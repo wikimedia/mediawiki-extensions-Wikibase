@@ -18,10 +18,15 @@ class UnitConverter {
 	private $store;
 
 	/**
+	 * @var DecimalMath
+	 */
+	private $math;
+
+	/**
 	 * Prefix of the data entity (concept URI)
 	 * @var string
 	 */
-	private $entityPrefix;
+	private $prefix;
 
 	public function __construct( UnitStorage $store, $entityPrefix ) {
 		$this->store = $store;
