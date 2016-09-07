@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_e4bfd2f4",
+        "filename": "repo/tests/phpunit/includes/EditEntityTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-07T10:54:24Z",
+      "side": 1,
+      "message": "\u0027getLocalClusterObjectCache\u0027 is not a service name.\n\nWhen changing this to \u0027LocalClusterObjectCache\u0027, this will fail with the old code in repo - we need the compat branch that sets calls ObjectCache::clear() until I017e8ac9 is merged. Should be removed in a follow-up.\n\nWith the new code in core and the name set to \u0027LocalClusterObjectCache\u0027, i\u0027m not getting database errors:\nError: 1146 Table \u0027wikibase_repo.unittest_user\u0027 doesn\u0027t exist (localhost)\n\nThis doesn\u0027t happen with your original code here. I\u0027m a bit confused about why that happens... I\u0027d be fine with going back to using resetServiceForTesting and redefineService for now, if you don\u0027t want to investigate why setServices doesn\u0027t quite work.",
+      "revId": "bf84950e5ed79547e18325a3c42f7cc12777607f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
