@@ -53,21 +53,21 @@ local getTerm = function( entity, termType, langCode )
 	langCode = langCode or mw.language.getContentLanguage():getCode()
 
 	if langCode == nil then
-		return nil, nil
+		return nil
 	end
 
 	if entity[termType] == nil then
-		return nil, nil
+		return nil
 	end
 
 	local term = entity[termType][langCode]
 
 	if term == nil then
-		return nil, nil
+		return nil
 	end
 
 	local actualLang = term.language or langCode
-	return term.value, actualLang
+	return term.value
 end
 
 -- Get the label for a given language code or the content language
