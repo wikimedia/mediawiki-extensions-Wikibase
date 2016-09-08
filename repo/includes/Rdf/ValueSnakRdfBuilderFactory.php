@@ -34,50 +34,24 @@ class ValueSnakRdfBuilderFactory {
 	}
 
 	/**
-	 * Returns an ValueSnakRdfBuilder for simple value output.
-	 *
-	 * @param RdfVocabulary $vocabulary
-	 * @param RdfWriter $writer
-	 * @param EntityMentionListener $mentionedEntityTracker
-	 * @param DedupeBag $dedupe
-	 *
-	 * @return DispatchingValueSnakRdfBuilder
-	 */
-	public function getSimpleValueSnakRdfBuilder(
-		RdfVocabulary $vocabulary,
-		RdfWriter $writer,
-		EntityMentionListener $mentionedEntityTracker,
-		DedupeBag $dedupe
-	) {
-		$builders = $this->createValueSnakRdfBuilders(
-			'simple',
-			$vocabulary,
-			$writer,
-			$mentionedEntityTracker,
-			$dedupe
-		);
-
-		return new DispatchingValueSnakRdfBuilder( $builders );
-	}
-
-	/**
 	 * Returns an ValueSnakRdfBuilder for reified value output.
 	 *
-	 * @param RdfVocabulary $vocabulary
-	 * @param RdfWriter $writer
+	 * @param                       $mode
+	 * @param RdfVocabulary         $vocabulary
+	 * @param RdfWriter             $writer
 	 * @param EntityMentionListener $mentionedEntityTracker
-	 * @param DedupeBag $dedupe
-	 *
+	 * @param DedupeBag             $dedupe
 	 * @return DispatchingValueSnakRdfBuilder
 	 */
-	public function getComplexValueSnakRdfBuilder(
+	public function getValueSnakRdfBuilder(
+		$mode,
 		RdfVocabulary $vocabulary,
 		RdfWriter $writer,
 		EntityMentionListener $mentionedEntityTracker,
 		DedupeBag $dedupe
 	) {
 		$builders = $this->createValueSnakRdfBuilders(
-			'complex',
+			$mode,
 			$vocabulary,
 			$writer,
 			$mentionedEntityTracker,

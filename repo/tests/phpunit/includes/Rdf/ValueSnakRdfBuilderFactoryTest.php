@@ -4,6 +4,7 @@ namespace Wikibase\Test\Rdf;
 
 use Closure;
 use PHPUnit_Framework_TestCase;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
@@ -34,11 +35,11 @@ class ValueSnakRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 		$called = false;
 
 		$constructor = $this->newRdfBuilderConstructorCallback(
-			'simple', $vocab, $writer, $tracker, $dedupe, $called
+			0, $vocab, $writer, $tracker, $dedupe, $called
 		);
 
 		$factory = new ValueSnakRdfBuilderFactory( array( 'PT:test' => $constructor ) );
-		$factory->getSimpleValueSnakRdfBuilder( $vocab, $writer, $tracker, $dedupe );
+		$factory->getValueSnakRdfBuilder( 0, $vocab, $writer, $tracker, $dedupe );
 		$this->assertTrue( $called );
 	}
 
@@ -50,18 +51,18 @@ class ValueSnakRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 		$called = false;
 
 		$constructor = $this->newRdfBuilderConstructorCallback(
-			'complex', $vocab, $writer, $tracker, $dedupe, $called
+			RdfProducer::PRODUCE_FULL_VALUES, $vocab, $writer, $tracker, $dedupe, $called
 		);
 
 		$factory = new ValueSnakRdfBuilderFactory( array( 'PT:test' => $constructor ) );
-		$factory->getComplexValueSnakRdfBuilder( $vocab, $writer, $tracker, $dedupe );
+		$factory->getValueSnakRdfBuilder( RdfProducer::PRODUCE_FULL_VALUES, $vocab, $writer, $tracker, $dedupe );
 		$this->assertTrue( $called );
 	}
 
 	/**
 	 * Constructs a closure that asserts that it is being called with the expected parameters.
 	 *
-	 * @param string $expectedMode
+	 * @param int $expectedMode
 	 * @param RdfVocabulary $expectedVocab
 	 * @param RdfWriter $expectedWriter
 	 * @param EntityMentionListener $expectedTracker

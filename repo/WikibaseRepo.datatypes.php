@@ -32,6 +32,7 @@ use ValueParsers\ValueParser;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\CommonsMediaRdfBuilder;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
@@ -126,7 +127,8 @@ return call_user_func( function() {
 				EntityMentionListener $tracker,
 				DedupeBag $dedupe
 			) {
-				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
+				$complexValueHelper = ( $mode & RdfProducer::PRODUCE_FULL_VALUES ) ?
+					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new GlobeCoordinateRdfBuilder( $complexValueHelper );
 			},
 		),
@@ -173,10 +175,11 @@ return call_user_func( function() {
 				EntityMentionListener $tracker,
 				DedupeBag $dedupe
 			) {
-				$complexValueHelper = $mode === 'simple' ? null
-					: new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
-				return new QuantityRdfBuilder( $complexValueHelper,
-					WikibaseRepo::getDefaultInstance()->getUnitConverter() );
+				$complexValueHelper = ( $mode & RdfProducer::PRODUCE_FULL_VALUES ) ?
+					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
+				$unitConverter = ( $mode & RdfProducer::PRODUCE_NORMALIZED_VALUES ) ?
+					WikibaseRepo::getDefaultInstance()->getUnitConverter() : null;
+				return new QuantityRdfBuilder( $complexValueHelper, $unitConverter );
 			},
 		),
 		'VT:string' => array(
@@ -221,7 +224,8 @@ return call_user_func( function() {
 			) {
 				// TODO: if data is fixed to be always Gregorian, replace with DateTimeValueCleaner
 				$dateCleaner = new JulianDateTimeValueCleaner();
-				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
+				$complexValueHelper = ( $mode & RdfProducer::PRODUCE_FULL_VALUES ) ?
+					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new TimeRdfBuilder( $dateCleaner, $complexValueHelper );
 			},
 		),
