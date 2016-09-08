@@ -16,8 +16,8 @@ $GLOBALS['wgExtensionCredits']['wikibase'][] = array(
 	'license-name' => 'GPL-2.0+'
 );
 
-include 'resources.php';
-include 'resources.test.php';
+include __DIR__ . '/resources.php';
+include __DIR__ . '/resources.test.php';
 
 $GLOBALS['wgHooks']['UnitTestsList'][] = function( array &$paths ) {
 	$paths[] = __DIR__ . '/tests/phpunit';
