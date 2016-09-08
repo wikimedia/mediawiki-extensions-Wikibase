@@ -46,12 +46,11 @@ mw.wikibase.getEntityUrl( 'Q42' ) -- Returns the URL to the item as a string, li
 <code>wikibase.label( id )</code><br>
 Takes an item ID and returns the label in the language of the local Wiki.
 
-If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists in the wiki's language or in a fallback language. Second return parameter is the language the returned label is in.
+If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists in the wiki's language or in a fallback language.
 
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.label( 'Q42' ) -- Returns the label of the item as a string, like "Berlin".
-local label, lang = mw.wikibase.label( 'Q42' ) -- label contains the text of the label. lang is the language the returned label is in, like "de".
 </source>
 
 === mw.wikibase.sitelink ===
@@ -68,12 +67,11 @@ mw.wikibase.sitelink( 'Q42' ) -- Returns the given item's page title in the curr
 <code>wikibase.description( id )</code><br>
 Takes an item ID and returns the description in the language of the local Wiki.
 
-If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists in the wiki's language or in a fallback language. Second return parameter is the language the returned description is in.
+If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists in the wiki's language or in a fallback language.
 
 An example call might look like this:
 <source lang="lua">
 mw.wikibase.description( 'Q42' ) -- Returns the description of the item as a string, like "capital of Germany".
-local description, lang = mw.wikibase.description( 'Q42' ) -- description contains the text of the description. lang is the language the returned description is in, like "de".
 </source>
 
 === mw.wikibase.renderSnak ===
@@ -136,23 +134,21 @@ Functions documented as <code>mw.wikibase.entity.name</code> are available on th
 === mw.wikibase.entity:getLabel ===
 <code>entity:getLabel()</code><br>
 <code>entity:getLabel( langCode )</code><br>
-Returns the label of the entity in the language given as <code>langCode</code> or in the Wiki's content language. Second return parameter is the language the returned label is in.
+Returns the label of the entity in the language given as <code>langCode</code> or in the Wiki's content language.
 
 An example call might look like this:
 <source lang="lua">
 entity:getLabel( 'de' ) -- Returns a string, like "Berlin"
-local label, lang = entity:getLabel( 'de' ) -- label contains the text of the label. lang is the language the returned label is in, like "de".
 </source>
 
 === mw.wikibase.entity:getDescription ===
 <code>entity:getDescription()</code><br>
 <code>entity:getDescription( langCode )</code><br>
-Returns the description of the entity in the language given as <code>langCode</code> or in the Wiki's content language. Second return parameter is the language the returned description is in.
+Returns the description of the entity in the language given as <code>langCode</code> or in the Wiki's content language.
 
 An example call might look like this:
 <source lang="lua">
 entity:getDescription( 'de' ) -- Returns a string, like "capital and city-state of Germany"
-local desc, lang = entity:getDescription( 'de' ) -- desc contains the text of the description. lang is the language the returned description is in, like "de".
 </source>
 
 === mw.wikibase.entity:getSitelink ===

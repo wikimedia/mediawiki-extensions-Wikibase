@@ -156,7 +156,8 @@ function wikibase.setupInterface()
 			return nil
 		end
 
-		return php.getLabel( id )
+		local label = php.getLabel( id )
+		return label
 	end
 
 	-- Get the description for the given entity id, if specified, or of the
@@ -172,7 +173,8 @@ function wikibase.setupInterface()
 			return nil
 		end
 
-		return php.getDescription( id )
+		local description = php.getDescription( id )
+		return description
 	end
 
 	-- Get the local sitelink title for the given entity id.
