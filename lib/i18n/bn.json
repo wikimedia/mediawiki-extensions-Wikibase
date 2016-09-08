@@ -6,7 +6,8 @@
 			"Gitartha.bordoloi",
 			"Leemon2010",
 			"Aftabuzzaman",
-			"TMg"
+			"TMg",
+			"আজিজ"
 		]
 	},
 	"specialpages-group-wikibase": "উইকিবেজ",
@@ -15,7 +16,7 @@
 	"wikibase-error-unexpected": "ত্রুটি: $1।",
 	"wikibase-error-save-generic": "একটি ত্রুটির কারণে সংরক্ষণ করা যায়নি।",
 	"wikibase-error-remove-generic": "একটি ত্রুটির কারণে সরানো যায়নি।",
-	"wikibase-error-save-connection": "একটি সংযোগ ত্রুটির কারণে সংরক্ষণ করা যায়নি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগটি পরীক্ষা করুন।",
+	"wikibase-error-save-connection": "একটি সংযোগ ত্রুটির কারণে সংরক্ষণ করা যায়নি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।",
 	"wikibase-error-remove-connection": "একটি সংযোগ ত্রুটির কারণে সরানো যায়নি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগটি পরীক্ষা করুন।",
 	"wikibase-error-autocomplete-response": "সার্ভারের প্রতিক্রিয়া: $1",
 	"wikibase-error-ui-no-external-page": "উল্লেখিত নিবন্ধ সংশ্লিষ্ট সাইটে খুঁজে পাওয়া যায়নি।",

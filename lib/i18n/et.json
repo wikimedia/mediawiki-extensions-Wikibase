@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Avjoska",
-			"Pikne"
+			"Pikne",
+			"Metsavend"
 		]
 	},
 	"wikibase-lib-desc": "Sisaldab tarkvaralisade Wikibase ja Wikibase Client ühiseid funktsioone.",
@@ -12,7 +13,7 @@
 	"wikibase-deletedentity-query": "Kustutatud päring",
 	"wikibase-error-unexpected": "Tõrge: $1.",
 	"wikibase-error-save-generic": "Esines tõrge, ei õnnestunud salvestada.",
-	"wikibase-error-remove-generic": "Esines tõrge, ei õnnestunud salvestada.",
+	"wikibase-error-remove-generic": "Esines tõrge, ei õnnestunud eemaldada.",
 	"wikibase-error-save-connection": "Esines tõrge, ei õnnestunud salvestada. Palun kontrolli oma internetiühendust.",
 	"wikibase-error-remove-connection": "Esines tõrge, ei õnnestunud salvestada. Palun kontrolli oma internetiühendust.",
 	"wikibase-error-save-timeout": "Praegu esinevate tehniliste probleemide tõttu ei saa salvestamist lõpule viia.",
