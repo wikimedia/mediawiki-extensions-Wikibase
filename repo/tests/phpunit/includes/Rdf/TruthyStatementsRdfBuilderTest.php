@@ -5,6 +5,7 @@ namespace Wikibase\Test\Rdf;
 use PHPUnit_Framework_TestCase;
 use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\NullEntityMentionListener;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\TruthyStatementRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
@@ -68,7 +69,8 @@ class TruthyStatementRdfBuilderTest extends PHPUnit_Framework_TestCase {
 		// Note: using the actual factory here makes this an integration test!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
-		$valueBuilder = $valueBuilderFactory->getSimpleValueSnakRdfBuilder(
+		$valueBuilder = $valueBuilderFactory->getValueSnakRdfBuilder(
+			RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_FULL_VALUES,
 			$vocabulary,
 			$writer,
 			new NullEntityMentionListener(),

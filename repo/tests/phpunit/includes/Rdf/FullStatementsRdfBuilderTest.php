@@ -88,21 +88,17 @@ class FullStatementRdfBuilderTest extends \PHPUnit_Framework_TestCase {
 
 		if ( $flavor & RdfProducer::PRODUCE_FULL_VALUES ) {
 			$valueWriter = $writer->sub();
-
-			$statementValueBuilder = $valueBuilderFactory->getComplexValueSnakRdfBuilder(
-				$this->getTestData()->getVocabulary(),
-				$valueWriter,
-				$mentionTracker,
-				new HashDedupeBag()
-			);
 		} else {
-			$statementValueBuilder = $valueBuilderFactory->getSimpleValueSnakRdfBuilder(
-				$this->getTestData()->getVocabulary(),
-				$writer,
-				$mentionTracker,
-				new HashDedupeBag()
-			);
+			$valueWriter = $writer;
 		}
+
+		$statementValueBuilder = $valueBuilderFactory->getValueSnakRdfBuilder(
+			$flavor,
+			$this->getTestData()->getVocabulary(),
+			$valueWriter,
+			$mentionTracker,
+			new HashDedupeBag()
+		);
 
 		$snakRdfBuilder = new SnakRdfBuilder( $vocabulary, $statementValueBuilder, $this->getTestData()->getMockRepository() );
 		$statementBuilder = new FullStatementRdfBuilder( $vocabulary, $writer, $snakRdfBuilder );
