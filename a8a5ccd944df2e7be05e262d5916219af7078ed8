@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_036dab01",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-08T11:12:40Z",
+      "side": 1,
+      "message": "shall we rename $mode to $flags or $flavor now?",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_4377b3d1",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-08T11:12:40Z",
+      "side": 1,
+      "message": "if the param contains flavor flags, it should be called $flavorFlags, I think.",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_8378bbc0",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-08T11:12:40Z",
+      "side": 1,
+      "message": "much nicer!",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_a385b7a1",
+        "filename": "repo/includes/Rdf/ValueSnakRdfBuilderFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-08T11:12:40Z",
+      "side": 1,
+      "message": "please explain (and perhaps rename)",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_e34edf9a",
+        "filename": "repo/tests/phpunit/includes/Rdf/TruthyStatementsRdfBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-08T11:12:40Z",
+      "side": 1,
+      "message": "The -1 is a bit arcane here, you have to know it translates to 0xFFFFFFFF (does PHP even guarantee that it uses two\u0027s complement representation?). Please use PRODUCE_ALL instead.\n\nAlso, do we really want \"all but full values\" here? For a test case, it makes more sense to explicitly state what we expect to be included in the output, no?",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_6362ef07",
+        "filename": "repo/tests/phpunit/includes/Rdf/ValueSnakRdfBuilderFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-08T11:12:40Z",
+      "side": 1,
+      "message": "Using 0 is not very readable, it\u0027s not obvious what it means. can we have a PRODUCE_MINIMAL or PRODUCE_BASELINE constant?",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_835fdb43",
+        "filename": "repo/tests/phpunit/includes/Rdf/ValueSnakRdfBuilderFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-08T11:12:40Z",
+      "side": 1,
+      "message": "perhaps the two test methods should be combined and take the flavor as a param.",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
