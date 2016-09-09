@@ -9,11 +9,11 @@ use FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
-use Wikibase\Client\Api\ApiPropsEntityUsage;
+use Wikibase\Client\Api\ApiListEntityUsage;
 use WikiPage;
 
 /**
- * @covers Wikibase\Client\Api\ApiPropsEntityUsage
+ * @covers Wikibase\Client\Api\ApiListEntityUsage
  *
  * @group API
  * @group Wikibase
@@ -24,7 +24,7 @@ use WikiPage;
  * @license GPL-2.0+
  * @author Amir Sarabadani
  */
-class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
+class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 
 	protected function setUp() {
 		$this->tablesUsed[] = 'wbc_entity_usage';
@@ -101,50 +101,18 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param array $params
-	 * @param Title[] $titles
 	 *
 	 * @return ApiQuery
 	 */
-	private function getQueryModule( array $params, array $titles ) {
+	private function getQueryModule( array $params ) {
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest( $params, true ) );
 
 		$main = new ApiMain( $context );
 
-		$pageSet = $this->getMockBuilder( ApiPageSet::class )
-			->setConstructorArgs( [ $main ] )
-			->getMock();
-
-		$query = $this->getMockBuilder( ApiQuery::class )
-			->setConstructorArgs( [ $main, $params['action'] ] )
-			->setMethods( [ 'getPageSet' ] )
-			->getMock();
-
-		$query->expects( $this->any() )
-			->method( 'getPageSet' )
-			->will( $this->returnValue( $pageSet ) );
+		$query = new ApiQuery( $main, $params['action'] );
 
 		return $query;
-	}
-
-	/**
-	 * @param string[] $names
-	 *
-	 * @return Title[]
-	 */
-	private function makeTitles( array $names ) {
-		$titles = [];
-
-		foreach ( $names as $name ) {
-			$title = Title::makeTitle( NS_MAIN, $name );
-
-			$pid = (int)preg_replace( '/^\D+/', '', $name );
-			$title->resetArticleID( $pid );
-
-			$titles[$pid] = $title;
-		}
-
-		return $titles;
 	}
 
 	/**
@@ -153,10 +121,8 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 	 * @return array[]
 	 */
 	private function callApiModule( array $params ) {
-		$titles = $this->makeTitles( explode( '|', $params['titles'] ) );
-
-		$module = new ApiPropsEntityUsage(
-			$this->getQueryModule( $params, $titles ),
+		$module = new ApiListEntityUsage(
+			$this->getQueryModule( $params ),
 			'entityusage'
 		);
 
@@ -173,39 +139,40 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 	public function entityUsageProvider() {
 		return [
-			'by title' => [
+			'only Q3' => [
 				[
 					'action' => 'query',
 					'query' => 'entityusage',
-					'titles' => 'Vienna11|Berlin22',
+					'wbeuentities' => 'Q3',
 				],
 				["11" => [
+					"ns" => 0,
+					"title" => "Vienna",
+					"pageid" => 11,
 					"entityusage" => [
 						"Q3" => [ "aspects" => [ "O", "S" ] ],
-					]
-				],
-				"22" => [
-					"entityusage" => [
-						"Q4" => [ "aspects" => [ "S" ] ],
-						"Q5" => [ "aspects" => [ "S" ] ],
 					]
 				] ],
 			],
-			'by entity' => [
+			'two entities in two pages' => [
 				[
 					'action' => 'query',
 					'query' => 'entityusage',
-					'titles' => 'Vienna11|Berlin22',
-					'entities' => 'Q3|Q4',
+					'wbeuentities' => 'Q3|Q5',
 				],
 				["11" => [
+					"ns" => 0,
+					"title" => "Vienna",
+					"pageid" => 11,
 					"entityusage" => [
 						"Q3" => [ "aspects" => [ "O", "S" ] ],
 					]
 				],
 				"22" => [
+					"ns" => 0,
+					"title" => "Berlin",
+					"pageid" => 22,
 					"entityusage" => [
-						"Q4" => [ "aspects" => [ "S" ] ],
 						"Q5" => [ "aspects" => [ "S" ] ],
 					]
 				] ],
