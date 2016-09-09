@@ -144,27 +144,18 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 	/**
-	 * @param string $full
-	 *
+	 * @param int $flavorFlags Flavor flags to use for this builder
 	 * @return SnakRdfBuilder
+	 *
 	 */
-	private function newSnakBuilder( $full ) {
-		if ( $full === 'full' ) {
-			$statementValueBuilder = $this->valueSnakRdfBuilderFactory->getComplexValueSnakRdfBuilder(
-				$this->vocabulary,
-				$this->writer,
-				$this,
-				$this->dedupeBag
-			);
-		} else {
-			$statementValueBuilder = $this->valueSnakRdfBuilderFactory->getSimpleValueSnakRdfBuilder(
-				$this->vocabulary,
-				$this->writer,
-				$this,
-				$this->dedupeBag
-			);
-		}
-
+	private function newSnakBuilder( $flavorFlags ) {
+		$statementValueBuilder = $this->valueSnakRdfBuilderFactory->getValueSnakRdfBuilder(
+			$flavorFlags,
+			$this->vocabulary,
+			$this->writer,
+			$this,
+			$this->dedupeBag
+		);
 		$snakBuilder = new SnakRdfBuilder( $this->vocabulary, $statementValueBuilder, $this->propertyLookup );
 		$snakBuilder->setEntityMentionListener( $this );
 
@@ -176,7 +167,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 */
 	private function newTruthyStatementRdfBuilder() {
 		//NOTE: currently, the only simple values are supported in truthy mode!
-		$simpleSnakBuilder = $this->newSnakBuilder( 'simple' );
+		$simpleSnakBuilder = $this->newSnakBuilder( $this->produceWhat & ~RdfProducer::PRODUCE_FULL_VALUES );
 		$statementBuilder = new TruthyStatementRdfBuilder( $this->vocabulary, $this->writer, $simpleSnakBuilder );
 
 		return $statementBuilder;
@@ -186,9 +177,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @return EntityRdfBuilder
 	 */
 	private function newFullStatementRdfBuilder() {
-		$snakBuilder = $this->newSnakBuilder(
-			$this->shouldProduce( RdfProducer::PRODUCE_FULL_VALUES ) ? 'full' : 'simple'
-		);
+		$snakBuilder = $this->newSnakBuilder( $this->produceWhat );
 
 		$builder = new FullStatementRdfBuilder( $this->vocabulary, $this->writer, $snakBuilder );
 		$builder->setDedupeBag( $this->dedupeBag );

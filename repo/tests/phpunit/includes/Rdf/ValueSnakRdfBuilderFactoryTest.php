@@ -4,6 +4,7 @@ namespace Wikibase\Test\Rdf;
 
 use Closure;
 use PHPUnit_Framework_TestCase;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
@@ -26,23 +27,17 @@ use Wikibase\Rdf\DedupeBag;
  */
 class ValueSnakRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetSimpleValueSnakRdfBuilder() {
-		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA );
-		$writer = new NTriplesRdfWriter();
-		$tracker = new NullEntityMentionListener();
-		$dedupe = new NullDedupeBag();
-		$called = false;
-
-		$constructor = $this->newRdfBuilderConstructorCallback(
-			'simple', $vocab, $writer, $tracker, $dedupe, $called
-		);
-
-		$factory = new ValueSnakRdfBuilderFactory( array( 'PT:test' => $constructor ) );
-		$factory->getSimpleValueSnakRdfBuilder( $vocab, $writer, $tracker, $dedupe );
-		$this->assertTrue( $called );
+	public function getBuilderFlags() {
+		return [
+			[ 0 ], // simple values
+			[ RdfProducer::PRODUCE_FULL_VALUES ], // complex values
+		];
 	}
 
-	public function testGetComplexValueSnakRdfBuilder() {
+	/**
+	 * @dataProvider getBuilderFlags
+	 */
+	public function testGetValueSnakRdfBuilder( $flags ) {
 		$vocab = new RdfVocabulary( RdfBuilderTestData::URI_BASE, RdfBuilderTestData::URI_DATA );
 		$writer = new NTriplesRdfWriter();
 		$tracker = new NullEntityMentionListener();
@@ -50,18 +45,18 @@ class ValueSnakRdfBuilderFactoryTest extends PHPUnit_Framework_TestCase {
 		$called = false;
 
 		$constructor = $this->newRdfBuilderConstructorCallback(
-			'complex', $vocab, $writer, $tracker, $dedupe, $called
+			$flags, $vocab, $writer, $tracker, $dedupe, $called
 		);
 
 		$factory = new ValueSnakRdfBuilderFactory( array( 'PT:test' => $constructor ) );
-		$factory->getComplexValueSnakRdfBuilder( $vocab, $writer, $tracker, $dedupe );
+		$factory->getValueSnakRdfBuilder( $flags, $vocab, $writer, $tracker, $dedupe );
 		$this->assertTrue( $called );
 	}
 
 	/**
 	 * Constructs a closure that asserts that it is being called with the expected parameters.
 	 *
-	 * @param string $expectedMode
+	 * @param int $expectedMode
 	 * @param RdfVocabulary $expectedVocab
 	 * @param RdfWriter $expectedWriter
 	 * @param EntityMentionListener $expectedTracker

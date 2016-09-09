@@ -32,6 +32,7 @@ use ValueParsers\ValueParser;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;
+use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\CommonsMediaRdfBuilder;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
@@ -98,7 +99,7 @@ return call_user_func( function() {
 				return $factory->newCommonsMediaFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
-				$mode,
+				$flags,
 				RdfVocabulary $vocab,
 				RdfWriter $writer,
 				EntityMentionListener $tracker,
@@ -120,13 +121,14 @@ return call_user_func( function() {
 				return $factory->newGlobeCoordinateFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
-				$mode,
+				$flags,
 				RdfVocabulary $vocab,
 				RdfWriter $writer,
 				EntityMentionListener $tracker,
 				DedupeBag $dedupe
 			) {
-				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
+				$complexValueHelper = ( $flags & RdfProducer::PRODUCE_FULL_VALUES ) ?
+					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new GlobeCoordinateRdfBuilder( $complexValueHelper );
 			},
 		),
@@ -143,7 +145,7 @@ return call_user_func( function() {
 				return $factory->newMonolingualFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
-				$mode,
+				$flags,
 				RdfVocabulary $vocab,
 				RdfWriter $writer,
 				EntityMentionListener $tracker,
@@ -167,16 +169,17 @@ return call_user_func( function() {
 				return $factory->newQuantityFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
-				$mode,
+				$flags,
 				RdfVocabulary $vocab,
 				RdfWriter $writer,
 				EntityMentionListener $tracker,
 				DedupeBag $dedupe
 			) {
-				$complexValueHelper = $mode === 'simple' ? null
-					: new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
-				return new QuantityRdfBuilder( $complexValueHelper,
-					WikibaseRepo::getDefaultInstance()->getUnitConverter() );
+				$complexValueHelper = ( $flags & RdfProducer::PRODUCE_FULL_VALUES ) ?
+					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
+				$unitConverter = ( $flags & RdfProducer::PRODUCE_NORMALIZED_VALUES ) ?
+					WikibaseRepo::getDefaultInstance()->getUnitConverter() : null;
+				return new QuantityRdfBuilder( $complexValueHelper, $unitConverter );
 			},
 		),
 		'VT:string' => array(
@@ -190,7 +193,7 @@ return call_user_func( function() {
 				return $factory->newStringFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
-				$mode,
+				$flags,
 				RdfVocabulary $vocab,
 				RdfWriter $writer,
 				EntityMentionListener $tracker,
@@ -213,7 +216,7 @@ return call_user_func( function() {
 				return $factory->newTimeFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
-				$mode,
+				$flags,
 				RdfVocabulary $vocab,
 				RdfWriter $writer,
 				EntityMentionListener $tracker,
@@ -221,7 +224,8 @@ return call_user_func( function() {
 			) {
 				// TODO: if data is fixed to be always Gregorian, replace with DateTimeValueCleaner
 				$dateCleaner = new JulianDateTimeValueCleaner();
-				$complexValueHelper = $mode === 'simple' ? null : new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe );
+				$complexValueHelper = ( $flags & RdfProducer::PRODUCE_FULL_VALUES ) ?
+					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new TimeRdfBuilder( $dateCleaner, $complexValueHelper );
 			},
 		),
@@ -236,7 +240,7 @@ return call_user_func( function() {
 				return $factory->newUrlFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
-				$mode,
+				$flags,
 				RdfVocabulary $vocab,
 				RdfWriter $writer,
 				EntityMentionListener $tracker,
@@ -269,7 +273,7 @@ return call_user_func( function() {
 				return $factory->newEntityIdFormatter( $format, $options );
 			},
 			'rdf-builder-factory-callback' => function (
-				$mode,
+				$flags,
 				RdfVocabulary $vocab,
 				RdfWriter $writer,
 				EntityMentionListener $tracker,
