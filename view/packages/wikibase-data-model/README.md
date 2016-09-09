@@ -8,6 +8,10 @@ at the heart of the [Wikibase software](http://wikiba.se/).
 
 ## Release notes
 
+### 3.0.1 (2016-09-09)
+
+* Fix an issue with MediaWiki loading (init.php)
+
 ### 3.0.0 (2016-08-02)
 
 * Added `Set::toArray`.
