@@ -9,11 +9,11 @@ use FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
-use Wikibase\Client\Api\ApiPropsEntityUsage;
+use Wikibase\Client\Api\ApiListEntityUsage;
 use WikiPage;
 
 /**
- * @covers Wikibase\Client\Api\ApiPropsEntityUsage
+ * @covers Wikibase\Client\Api\ApiListEntityUsage
  *
  * @group API
  * @group Wikibase
@@ -24,7 +24,7 @@ use WikiPage;
  * @license GPL-2.0+
  * @author Amir Sarabadani
  */
-class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
+class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 
 	protected function setUp() {
 		$this->tablesUsed[] = 'wbc_entity_usage';
@@ -101,7 +101,6 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param array $params
-	 * @param Title[] $titles
 	 *
 	 * @return ApiQuery
 	 */
@@ -119,35 +118,13 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @param string[] $names
-	 *
-	 * @return Title[]
-	 */
-	private function makeTitles( array $names ) {
-		$titles = [];
-
-		foreach ( $names as $name ) {
-			$title = Title::makeTitle( NS_MAIN, $name );
-
-			$pid = (int)preg_replace( '/^\D+/', '', $name );
-			$title->resetArticleID( $pid );
-
-			$titles[$pid] = $title;
-		}
-
-		return $titles;
-	}
-
-	/**
 	 * @param array $params
 	 *
 	 * @return array[]
 	 */
 	private function callApiModule( array $params ) {
-		$titles = $this->makeTitles( explode( '|', $params['titles'] ) );
-
-		$module = new ApiPropsEntityUsage(
-			$this->getQueryModule( $params, $titles ),
+		$module = new ApiListEntityUsage(
+			$this->getQueryModule( $params ),
 			'entityusage'
 		);
 
@@ -164,30 +141,23 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 	public function entityUsageProvider() {
 		return [
-			'by title' => [
+			'only Q3' => [
 				[
 					'action' => 'query',
 					'query' => 'entityusage',
-					'titles' => 'Vienna11|Berlin22',
+					'entities' => 'Q3',
 				],
 				["11" => [
 					"entityusage" => [
 						"Q3" => [ "aspects" => [ "O", "S" ] ],
-					]
-				],
-				"22" => [
-					"entityusage" => [
-						"Q4" => [ "aspects" => [ "S" ] ],
-						"Q5" => [ "aspects" => [ "S" ] ],
 					]
 				] ],
 			],
-			'by entity' => [
+			'two entities in two pages' => [
 				[
 					'action' => 'query',
 					'query' => 'entityusage',
-					'titles' => 'Vienna11|Berlin22',
-					'entities' => 'Q3|Q4',
+					'entities' => 'Q3|Q5',
 				],
 				["11" => [
 					"entityusage" => [
@@ -196,7 +166,6 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 				],
 				"22" => [
 					"entityusage" => [
-						"Q4" => [ "aspects" => [ "S" ] ],
 						"Q5" => [ "aspects" => [ "S" ] ],
 					]
 				] ],
