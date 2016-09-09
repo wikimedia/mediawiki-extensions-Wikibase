@@ -21,6 +21,10 @@ version 2.0 of this package:
 
 ## Release notes
 
+### 2.0.8 (2016-09-09)
+
+* Fix an issue with MediaWiki loading (init.mw.php)
+
 ### 2.0.7 (2016-08-01)
 
 * Added compatibility with DataModel JavaScript 3.0.0.
