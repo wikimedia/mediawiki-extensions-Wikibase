@@ -5,7 +5,7 @@
 	],
 	"url": "https://github.com/wmde/WikibaseDataModelJavascript",
 	"description": "Javascript implementation of the Wikibase data model",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"type": "wikibase",
 	"license-name": "GPL-2.0+",
 	"manifest_version": 1
