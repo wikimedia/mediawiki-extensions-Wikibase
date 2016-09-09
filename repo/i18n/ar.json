@@ -322,7 +322,14 @@
 	"apihelp-query+wbsearch-param-strictlanguage": "إذا ما سيتم التراجع عن تعطيل اللغة",
 	"apihelp-query+wbsearch-param-limit": "العدد الأقصى للنتائج.",
 	"apihelp-wbsetaliases-description": "يضبط الأسماء المستعارة لكيان ويكي بيز.",
+	"apihelp-wbsetclaimvalue-description": "يضبط قيمة زعم ويكي بيز.",
+	"apihelp-wbsetclaimvalue-param-claim": "GUID لتعريف الزعم",
+	"apihelp-wbsetdescription-description": "يضبط وصفا لكيان ويكي بيز وحيد.",
 	"apihelp-wbsetdescription-param-language": "لغة الوصف",
+	"apihelp-wbsetdescription-param-value": "القيمة للضبط للوصف",
 	"apihelp-wbsetlabel-param-language": "لغة الوسم",
-	"apihelp-wbsetlabel-param-value": "قيمة الوسم"
+	"apihelp-wbsetlabel-param-value": "قيمة الوسم",
+	"apihelp-wbsetreference-description": "ينشيء مرجعا أو يضبط قيمة واحد موجود.",
+	"apihelp-wbsetsitelink-param-linksite": "معرف الموقع الذي يحتوي على المقالة للربط",
+	"apihelp-wbsetsitelink-example-4": "إزالة وصلة الموقع الألمانية من العنصر"
 }

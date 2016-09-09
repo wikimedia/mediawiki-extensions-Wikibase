@@ -3,17 +3,17 @@
 		"authors": [
 			"रमेश सिंह बोहरा",
 			"राम प्रसाद जोशी",
-			"जनक राज भट्ट"
+			"जनक राज भट्ट",
+			"Nirajan pant"
 		]
 	},
 	"wikibase-edit": "सम्पादन गर्न्या",
 	"wikibase-add": "जोड्या",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "अन्य भाषामी",
-	"wikibase-label-empty": "नामपत्र परिभाषित कोई",
+	"wikibase-label-empty": "परिभाषित नामपत्र आथिन",
 	"wikibase-description-empty": "कसैलै बिवरणलाई परिभाषित नगरया |",
 	"wikibase-statementsection-statements": "बयान",
-	"wikibase-sitelinks-special": "और साइटहरू",
-	"wikibase-aliases-empty": "नामपत्र परिभाषित नाइँ",
+	"wikibase-sitelinks-special": "और साइटअन",
 	"wikibase-statementview-rank-normal": "सानतिनो ओहदा",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|reference|सन्दर्भहरू}}"
 }

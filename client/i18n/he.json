@@ -97,7 +97,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|חיבור|חיבורים}} עם {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "להודיע לי כשמישהו מחבר דף {{GENDER:|שיצרתי}} לפריט {{WBREPONAME}}.",
 	"notification-header-page-connection": "הדף <strong>$3</strong> {{GENDER:$2|חובר}} לפריט {{WBREPONAME}}.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> ועוד {{PLURAL:$4|דף אחד|$4 דפים אחרים|100=יותר מ־99 דפים}} {{GENDER:$2|חוברו}} לפריטי {{WBREPONAME}}.",
+	"notification-bundle-header-page-connection": "הדף <strong>$3</strong> ועוד {{PLURAL:$4|דף אחד|$4 דפים|100=99+ דפים}} {{GENDER:$2|חוברו}} לפריטי {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|הצגת}} פריט",
 	"notification-subject-page-connection": "דף {{GENDER:$3|שיצרת}} באתר {{SITENAME}} {{GENDER:$2|חובר}} לפריט {{WBREPONAME}}"
 }
