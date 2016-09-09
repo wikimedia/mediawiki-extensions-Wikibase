@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_49018d70",
+        "filename": "repo/WikibaseRepo.datatypes.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-09T00:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_036dab01",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_4377b3d1",
         "filename": "repo/includes/Rdf/RdfBuilder.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-08T11:12:40Z",
       "side": 1,
       "message": "if the param contains flavor flags, it should be called $flavorFlags, I think.",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_a9fe7164",
+        "filename": "repo/includes/Rdf/RdfBuilder.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-09T00:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_4377b3d1",
       "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_09ef85ae",
+        "filename": "repo/includes/Rdf/ValueSnakRdfBuilderFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-09T00:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_a385b7a1",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_e34edf9a",
         "filename": "repo/tests/phpunit/includes/Rdf/TruthyStatementsRdfBuilderTest.php",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2016-09-08T11:12:40Z",
       "side": 1,
       "message": "The -1 is a bit arcane here, you have to know it translates to 0xFFFFFFFF (does PHP even guarantee that it uses two\u0027s complement representation?). Please use PRODUCE_ALL instead.\n\nAlso, do we really want \"all but full values\" here? For a test case, it makes more sense to explicitly state what we expect to be included in the output, no?",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_094ea5dd",
+        "filename": "repo/tests/phpunit/includes/Rdf/TruthyStatementsRdfBuilderTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-09T00:24:34Z",
+      "side": 1,
+      "message": "I\u0027ll use PRODUCE_ALL for now, as most other bits are not really considered for this purpose now. If we start using them we may adjust the test then (and probably add more tests).",
+      "parentUuid": "2e93376b_e34edf9a",
       "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -115,6 +187,24 @@
       "writtenOn": "2016-09-08T11:12:40Z",
       "side": 1,
       "message": "perhaps the two test methods should be combined and take the flavor as a param.",
+      "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_691ac9d1",
+        "filename": "repo/tests/phpunit/includes/Rdf/ValueSnakRdfBuilderFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2096
+      },
+      "writtenOn": "2016-09-09T00:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_835fdb43",
       "revId": "a8a5ccd944df2e7be05e262d5916219af7078ed8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
