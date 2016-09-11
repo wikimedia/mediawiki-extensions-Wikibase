@@ -4,5 +4,12 @@
 			"NoiX180"
 		]
 	},
+	"specialpages-group-wikibase": "Wikibase",
+	"wikibase-deletedentity-item": "Wiji dibusak",
+	"wikibase-deletedentity-property": "Properti dibusak",
+	"wikibase-error-unexpected": "Cacad: $1.",
+	"wikibase-error-save-generic": "Ora bisa nyimpen amarga ana cacad.",
+	"wikibase-error-remove-generic": "Ora bisa mbusak amarga ana cacad.",
+	"wikibase-error-save-connection": "Ora bisa nyimpen amarga ana cacad konèksi. Tulung tiliki konèksi Internètmu.",
 	"wikibase-sitelinks-wikipedia": "Wikipédia"
 }
