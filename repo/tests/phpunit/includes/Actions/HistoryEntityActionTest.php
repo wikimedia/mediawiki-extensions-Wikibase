@@ -70,7 +70,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 	 */
 	private function getContext( PHPUnit_Framework_MockObject_MockObject $output ) {
 		$context = $this->getMock( IContextSource::class );
-		$context->expects( $this->once() )
+		$context->expects( $this->any() )
 			->method( 'getConfig' )
 			->will( $this->returnValue( new HashConfig( [
 				'UseFileCache' => false,
