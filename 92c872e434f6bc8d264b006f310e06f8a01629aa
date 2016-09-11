@@ -1,0 +1,342 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_369011f1",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Could you please make this an own change?",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_76b9b977",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "pages that *use*",
+      "range": {
+        "startLine": 22,
+        "startChar": 72,
+        "endLine": 22,
+        "endChar": 76
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f6acc934",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "This sounds odd, rather reword to \"If enabled the url of the entity will be added to the result\" or something along these lines.",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_7668d9f2",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "I think the default text from MediaWiki already explains that it\u0027s pipe (or U+001F) separated.",
+      "range": {
+        "startLine": 26,
+        "startChar": 80,
+        "endLine": 26,
+        "endChar": 97
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_d6b6ed84",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Entities used in an entity? That doesn\u0027t sound like a typical, easily understandable client example.",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b617a155",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Why also null? The constructor makes sure this is always propagated… also this is not checked for below.",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_562f5d9c",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Missing type hint for $resultPageSet",
+      "range": {
+        "startLine": 51,
+        "startChar": 22,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_167795d0",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Missing type hint for $resultPageSet",
+      "range": {
+        "startLine": 81,
+        "startChar": 73,
+        "endLine": 81,
+        "endChar": 87
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_764ff997",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "$currentPageId is defined above and never unset, thus can never be not set here.",
+      "range": {
+        "startLine": 99,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 31
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_761d3978",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Is it a problem that this array gets amended later on?",
+      "range": {
+        "startLine": 122,
+        "startChar": 5,
+        "endLine": 122,
+        "endChar": 42
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_9620e5a9",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Is this just for sanity? As far as I can see at a glance, this is always needed.",
+      "range": {
+        "startLine": 128,
+        "startChar": 18,
+        "endLine": 128,
+        "endChar": 27
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_165eb548",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Missing type hint for $resultPageSet",
+      "range": {
+        "startLine": 156,
+        "startChar": 40,
+        "endLine": 156,
+        "endChar": 55
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_56583d59",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Don\u0027t you need to check whether this actually has three parts?",
+      "range": {
+        "startLine": 182,
+        "startChar": 3,
+        "endLine": 182,
+        "endChar": 18
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_365d714b",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "has -\u003e have (plural)",
+      "range": {
+        "startLine": 186,
+        "startChar": 33,
+        "endLine": 186,
+        "endChar": 36
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f6620905",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Why did you set this?",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b6496192",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-11T22:45:42Z",
+      "side": 1,
+      "message": "Wrong section",
+      "range": {
+        "startLine": 254,
+        "startChar": 54,
+        "endLine": 254,
+        "endChar": 67
+      },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
