@@ -75,6 +75,7 @@ class HistoryEntityActionTest extends PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( new HashConfig( [
 				'UseFileCache' => false,
 				'UseMediaWikiUIEverywhere' => false,
+				'Localtimezone' => 'UTC',
 			] ) ) );
 		$context->expects( $this->any() )
 			->method( 'getRequest' )
