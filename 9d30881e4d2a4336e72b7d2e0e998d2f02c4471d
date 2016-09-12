@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_75fb6ede",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 106
+      },
+      "writtenOn": "2016-09-12T07:00:19Z",
+      "side": 1,
+      "message": "shouldn\u0027t this also be pages ?",
+      "range": {
+        "startLine": 19,
+        "startChar": 60,
+        "endLine": 19,
+        "endChar": 64
+      },
+      "revId": "9d30881e4d2a4336e72b7d2e0e998d2f02c4471d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
