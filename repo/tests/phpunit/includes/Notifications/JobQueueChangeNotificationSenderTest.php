@@ -2,6 +2,12 @@
 
 namespace Wikibase\Test;
 
+use JobQueueGroup;
+use PHPUnit_Framework_TestCase;
+use Wikibase\Change;
+use Wikibase\ChangeNotificationJob;
+use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
+
 /**
  * @covers Wikibase\Repo\Notifications\JobQueueChangeNotificationSender
  *
@@ -9,16 +15,87 @@ namespace Wikibase\Test;
  * @group WikibaseStore
  * @group WikibaseChange
  * @group WikibaseRepo
- * @group Database
  *
  * @license GPL-2.0+
- * @author Daniel Kinzler
+ * @author Marius Hoch
  */
-class JobQueueChangeNotificationSenderTest extends \MediaWikiTestCase {
+class JobQueueChangeNotificationSenderTest extends PHPUnit_Framework_TestCase {
 
-	public function testSendNotification() {
-		// @todo: inject JobQueueGroup into JobQueueChangeNotificationSender
-		$this->markTestIncomplete( 'Need a good way to test job queue interaction!' );
+	public function setUp() {
+		parent::setUp();
+
+		$isFaultyJob = strpos(
+			__DIR__,
+			'mwext-Wikibase-repo-tests-sqlite-php55'
+		) > 1;
+		if ( $isFaultyJob ) {
+			$this->markTestSkipped(
+				'This test causes segfaults in mwext-Wikibase-repo-tests-sqlite-php55 jobs, skipping.'
+			);
+		}
+	}
+
+	/**
+	 * @return JobQueueChangeNotificationSender
+	 */
+	private function getSender( $batchSize, $expectedChunks ) {
+		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$jobQueueGroup->expects( $this->exactly( $expectedChunks ? 1 : 0 ) )
+			->method( 'push' )
+			->with( $this->isType( 'array' ) )
+			->will( $this->returnCallback(
+				function( array $jobs ) use ( $expectedChunks ) {
+					$this->assertCount( $expectedChunks, $jobs );
+					$this->assertContainsOnlyInstancesOf(
+						ChangeNotificationJob::class,
+						$jobs
+					);
+				} )
+			);
+
+		$jobQueueGroupFactory = function( $wikiId ) use ( $jobQueueGroup ) {
+			$this->assertSame( 'database-name-0', $wikiId );
+			return $jobQueueGroup;
+		};
+
+		return new JobQueueChangeNotificationSender(
+			'repo-db',
+			[ 'site-id-0' => 'database-name-0' ],
+			$batchSize,
+			$jobQueueGroupFactory
+		);
+	}
+
+	public function sendNotificationProvider() {
+		$change = $this->getMock( Change::class );
+
+		return [
+			'no changes' => [
+				100,
+				[]
+			],
+			'one batch' => [
+				100,
+				[ $change, $change, $change ]
+			],
+			'three batches' => [
+				2,
+				[ $change, $change, $change, $change, $change ]
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider sendNotificationProvider
+	 */
+	public function testSendNotification( $batchSize, $changes ) {
+		$expectedChunks = intval( ceil( count( $changes ) / $batchSize ) );
+
+		$sender = $this->getSender( $batchSize, $expectedChunks );
+		$sender->sendNotification( 'site-id-0', $changes );
 	}
 
 }
