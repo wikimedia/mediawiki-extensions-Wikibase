@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_b15fab76",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_369011f1",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_76b9b977",
         "filename": "client/i18n/en.json",
         "patchSetId": 9
@@ -42,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_d1627736",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_76b9b977",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_f6acc934",
         "filename": "client/i18n/en.json",
         "patchSetId": 9
@@ -53,6 +89,24 @@
       "writtenOn": "2016-09-11T22:45:42Z",
       "side": 1,
       "message": "This sounds odd, rather reword to \"If enabled the url of the entity will be added to the result\" or something along these lines.",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f158538e",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_f6acc934",
       "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -82,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_3153bb6f",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "You are right. https://en.wikipedia.org/w/api.php?action\u003dhelp\u0026modules\u003dquery%2Bwbentityusage\nDone",
+      "parentUuid": "2e93376b_7668d9f2",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_d6b6ed84",
         "filename": "client/i18n/en.json",
         "patchSetId": 9
@@ -99,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_514e87c5",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_d6b6ed84",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_b617a155",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 9
@@ -110,6 +200,24 @@
       "writtenOn": "2016-09-11T22:45:42Z",
       "side": 1,
       "message": "Why also null? The constructor makes sure this is always propagated… also this is not checked for below.",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_91c70f15",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_b617a155",
       "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_71c46312",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "$resultPageSet can be either null or ApiPageSet. Typehint doesn\u0027t make sense here. Maybe line 39?",
+      "parentUuid": "2e93376b_562f5d9c",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_167795d0",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 9
@@ -156,6 +282,24 @@
         "endLine": 81,
         "endChar": 87
       },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b1cecb2f",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "See line 79, it can be either null or ApiPageSet",
+      "parentUuid": "2e93376b_167795d0",
       "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -185,6 +329,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_51dda7e0",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "I meant $currentPageId !\u003d\u003d null, It returns the same, but fixed for more readability.",
+      "parentUuid": "2e93376b_764ff997",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_761d3978",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 9
@@ -202,6 +364,24 @@
         "endLine": 122,
         "endChar": 42
       },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_71eb8377",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "For the sake of xml, per our talk with Daniel.",
+      "parentUuid": "2e93376b_761d3978",
       "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -231,6 +411,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_91ee2f85",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Note always but meh, removed now.",
+      "parentUuid": "2e93376b_9620e5a9",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_165eb548",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 9
@@ -248,6 +446,24 @@
         "endLine": 156,
         "endChar": 55
       },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b1e5eba1",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "See line 154",
+      "parentUuid": "2e93376b_165eb548",
       "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -277,6 +493,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_f1fe9334",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "I\u0027ve got this part from core modules, They don\u0027t check, maybe we should do somehow?",
+      "parentUuid": "2e93376b_56583d59",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_365d714b",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 9
@@ -300,6 +534,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_11fa3f40",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_365d714b",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_f6620905",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 9
@@ -311,6 +563,24 @@
       "writtenOn": "2016-09-11T22:45:42Z",
       "side": 1,
       "message": "Why did you set this?",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_31f9fb4a",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Otherwise it doesn\u0027t show help message for url, try it",
+      "parentUuid": "2e93376b_f6620905",
       "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -334,6 +604,24 @@
         "endLine": 254,
         "endChar": 67
       },
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_51f4c750",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-12T06:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_b6496192",
       "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
