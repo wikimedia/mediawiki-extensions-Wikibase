@@ -22,7 +22,7 @@ use Wikibase\Client\WikibaseClient;
 class ApiPropsEntityUsage extends ApiQueryBase {
 
 	/**
-	 * @var RepoLinker|null
+	 * @var RepoLinker
 	 */
 	private $repoLinker = null;
 
@@ -141,7 +141,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 			$pageContinue = intval( $continueParams[0] );
 			$entityContinue = $db->addQuotes( $continueParams[1] );
 			$aspectContinue = $db->addQuotes( $continueParams[2] );
-			// Filtering out results that has been shown already and
+			// Filtering out results that have been shown already and
 			// starting the query from where it ended.
 			$this->addWhere(
 				"eu_page_id > $pageContinue OR " .
