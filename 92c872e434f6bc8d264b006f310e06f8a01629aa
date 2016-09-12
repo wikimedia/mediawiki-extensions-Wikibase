@@ -265,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_d55182de",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-12T07:11:13Z",
+      "side": 1,
+      "message": "Why does a typehint not make sense here? ApiPageSet $resultPageSet \u003d null (also below).",
+      "parentUuid": "2e93376b_71c46312",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_167795d0",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 9
@@ -341,6 +359,24 @@
       "side": 1,
       "message": "I meant $currentPageId !\u003d\u003d null, It returns the same, but fixed for more readability.",
       "parentUuid": "2e93376b_764ff997",
+      "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_355e46ed",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-12T07:11:13Z",
+      "side": 1,
+      "message": "Yes, isset checks for !\u003d\u003d null as a side effect, but we shouldn\u0027t exploit that.",
+      "parentUuid": "2e93376b_51dda7e0",
       "revId": "92c872e434f6bc8d264b006f310e06f8a01629aa",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
