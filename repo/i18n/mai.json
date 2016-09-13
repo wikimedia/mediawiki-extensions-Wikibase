@@ -6,11 +6,10 @@
 		]
 	},
 	"wikibase-edit": "सम्पादन करी",
-	"wikibase-add": "जोडु",
+	"wikibase-add": "जोडी",
 	"wikibase-label-empty": "कोनो नामपत्र परिभाषित नै",
 	"wikibase-description-empty": "कोनो विवरण परिभाषित नै",
 	"wikibase-sitelinks-special": "दोसर साइटसभ",
-	"wikibase-aliases-empty": "कोनो उर्फ परिभाषित नै।",
 	"wikibase-statementview-rank-normal": "सामान्य क्रम",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|स्रोत|स्रोतसभ}}"
 }

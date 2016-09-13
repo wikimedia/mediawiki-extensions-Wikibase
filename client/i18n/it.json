@@ -20,6 +20,7 @@
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",
 	"tooltip-t-wikibase": "Collegamento all'elemento connesso dell'archivio dati",
+	"apihelp-query+wbentityusage-param-entities": "Restituisce solo le pagine che utilizzano queste entità.",
 	"apihelp-query+pageterms-description": "Ottieni termini associati a una pagina tramite un elemento dati associato. Su una pagina di un'entità wikibase, i termini dell'entità sono usati direttamente.\nAttenzione: su un repository wiki, i termini sono usati direttamente sulle pagine dell'entità, non sulle pagine connesse a un elemento. Questa cosa potrebbe cambiare in futuro.",
 	"apihelp-query+pageterms-example-simple": "Ottieni tutti i termini associati alla pagina 'London', nella lingua dell'utente.",
 	"apihelp-query+pageterms-example-label-en": "Ottieni etichette ed alias associati alla pagina 'London', in inglese.",

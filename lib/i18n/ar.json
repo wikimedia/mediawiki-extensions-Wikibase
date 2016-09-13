@@ -15,6 +15,7 @@
 			"Sonic N800"
 		]
 	},
+	"wikibase-lib-desc": "يمسك بالوظيفة المشتركة لامتدادات Wikibase و Wikibase Client",
 	"specialpages-group-wikibase": "بيانات ويكي",
 	"wikibase-deletedentity-item": "عنصر محذوف",
 	"wikibase-deletedentity-property": "خاصية محذوفة",
@@ -30,6 +31,7 @@
 	"wikibase-error-autocomplete-response": "إجابة الخادوم: $1",
 	"wikibase-error-ui-no-external-page": "لم يمكن إيجاد المقالة المحددة على الموقع الموافق.",
 	"wikibase-error-ui-edit-conflict": "هناك نزاع في تحرير. الرجاء حفظ التغييرات في حاسوبك، إعادة تحميل هذه الصفحة وحفظها مرة أخرى.",
+	"wikibase-language-fallback-transliteration-hint": "$1 (مترجم)",
 	"wikibase-quantitydetails-amount": "الكمية",
 	"wikibase-quantitydetails-upperbound": "الحد الأعلى",
 	"wikibase-quantitydetails-lowerbound": "الحد الأدنى",
