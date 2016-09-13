@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_cd8ba9c2",
+        "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-13T23:52:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_091db378",
+      "revId": "33a23841c512bf00cc480a273c570095e8841f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_248a966e",
         "filename": "repo/tests/phpunit/includes/Notifications/JobQueueChangeNotificationSenderTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-12T18:27:44Z",
       "side": 1,
       "message": "*sigh* every time. I stared at this for at least 30 seconds thinking \"what is a NotificationProvider, and why do we send it\"?\n\nprovideSendNotification() makes so much more sense. The essential verb here is \"provide\", not \"send\".",
+      "revId": "33a23841c512bf00cc480a273c570095e8841f16",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_4d76d9d6",
+        "filename": "repo/tests/phpunit/includes/Notifications/JobQueueChangeNotificationSenderTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-13T23:52:40Z",
+      "side": 1,
+      "message": "I agree, but I remember us agreeing on this convention at some point.",
+      "parentUuid": "2e93376b_248a966e",
       "revId": "33a23841c512bf00cc480a273c570095e8841f16",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
