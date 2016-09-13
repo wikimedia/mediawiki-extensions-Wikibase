@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_ea4f6b95",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.referenceview.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-09-13T21:10:06Z",
+      "side": 1,
+      "message": "This line will not be necessary after \nhttps://gerrit.wikimedia.org/r/#/c/298768 \nwas merged.",
+      "revId": "cba4a5b9fc5b127c01bd17849144717e54a8612f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
