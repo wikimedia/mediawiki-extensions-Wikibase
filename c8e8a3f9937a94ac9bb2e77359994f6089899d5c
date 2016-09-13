@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_61a9eb8c",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-09-13T03:13:36Z",
+      "side": 1,
+      "message": "The change is okay, except I wonder about adding such dependency on MediaWiki here when I thought we were trying to move away.\n\nIs there a better place we can put this or have a rule here for both .mw-body .wikibase-sitelinkgroupview h3 and without .mw-body?",
+      "revId": "c8e8a3f9937a94ac9bb2e77359994f6089899d5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
