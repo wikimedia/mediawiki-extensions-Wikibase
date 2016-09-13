@@ -16,6 +16,24 @@
       "revId": "c8e8a3f9937a94ac9bb2e77359994f6089899d5c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b4feaf33",
+        "filename": "view/resources/jquery/wikibase/themes/default/jquery.wikibase.sitelinkgroupview.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-13T08:12:15Z",
+      "side": 1,
+      "message": "The original selector is \".mw-body h3\", that\u0027s why I was going with this. But you are right, even if I don\u0027t think what we do here will ever be independent from core. But this specific case is easy to fix. Since the only reason why I\u0027m touching this is to make the selector more specific, I can add anything.",
+      "parentUuid": "2e93376b_61a9eb8c",
+      "revId": "c8e8a3f9937a94ac9bb2e77359994f6089899d5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
