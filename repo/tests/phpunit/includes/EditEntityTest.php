@@ -650,13 +650,17 @@ class EditEntityTest extends MediaWikiTestCase {
 		);
 
 		// make sure we have a working cache
-		$this->setMwGlobals(
-			'wgMainCacheType',
-			CACHE_ANYTHING
-		);
-
-		// make sure we have a fresh cache
-		ObjectCache::clear();
+		$services = \MediaWiki\MediaWikiServices::getInstance();
+		if ( method_exists( $services, 'getLocalClusterObjectCache' ) ) {
+			$services->resetServiceForTesting( 'LocalClusterObjectCache' );
+			$services->redefineService( 'LocalClusterObjectCache', function () {
+				return new \HashBagOStuff();
+			} );
+		} else {
+			$this->setMwGlobals( 'wgMainCacheType', CACHE_ANYTHING );
+			// make sure we have a fresh cache
+			ObjectCache::clear();
+		}
 
 		$user = $this->getUser( 'UserForTestAttemptSaveRateLimit' );
 		$this->setUserGroups( $user, $groups );
@@ -688,7 +692,11 @@ class EditEntityTest extends MediaWikiTestCase {
 		}
 
 		// make sure nobody else has to work with our cache
-		ObjectCache::clear();
+		if ( method_exists( $services, 'getLocalClusterObjectCache' ) ) {
+			$services->resetServiceForTesting( 'LocalClusterObjectCache' );
+		} else {
+			ObjectCache::clear();
+		}
 	}
 
 	public function provideIsTokenOk() {
