@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_e8ee98b0",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "the class is called ListEntityUsage, but the module is called entityusagelist. That\u0027s confusing, please change one or the other.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_a8cd7064",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "$this:: is strange syntax, i didn\u0027t even know this was legal. Should be self:: or, in rare cases, static::",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_084e84c4",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "this method is large and complex, please split.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_08dda4e1",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "An aggregation variable like $entity makes splitting the code more tricky. You can try to keep all the code that changes $entity in this method and move other code, or use a reference param (ugh), or make an aggregate object with methods (probably overkill).",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_68ce2833",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "If you write a comment saying what a block of code does, you can just as well move that code into a private method and give it a good name.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_c8539c6d",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "Five levels of indentation are a code smell of itself.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_e8f85848",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "this block can probably be extracted",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_a88570b3",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "you could make a method for these three lines, and call it here and above.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_48332c5f",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "request parameter wrangling should be done outside this method, the method should ask for the parameters it actually needs.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_6811c8b0",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "If a variable contains quoted or escaped data, this should be mentioned in the name. The idea is that you should never assume the value of a variable is escaped or quoted unless the name tells you so (e.g. $userNameHtml or some such). \nIn this case, I would perhaps use $aspectContinueSql etc.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_a82ad0d4",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-13T16:08:33Z",
+      "side": 1,
+      "message": "It\u0027s not obvious here that all the variables have been escaped/quoted, see above.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
