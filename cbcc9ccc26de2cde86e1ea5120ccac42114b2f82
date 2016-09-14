@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_0dbef5d1",
+        "filename": "client/tests/phpunit/includes/Api/ApiListEntityUsageTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-14T10:26:34Z",
+      "side": 1,
+      "message": "please test a query with continuation",
+      "revId": "cbcc9ccc26de2cde86e1ea5120ccac42114b2f82",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
