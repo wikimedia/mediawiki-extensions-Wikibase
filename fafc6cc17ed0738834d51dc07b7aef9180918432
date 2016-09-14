@@ -16,6 +16,24 @@
       "revId": "fafc6cc17ed0738834d51dc07b7aef9180918432",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_aa814fa6",
+        "filename": "view/resources/jquery/wikibase/jquery.wikibase.aliasesview.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-14T08:48:05Z",
+      "side": 1,
+      "message": "I asked Adrian. The draw() method currently does way to many things and always rebuilds the whole thing, which is not necessary most of the time. We can continue working on this later.",
+      "parentUuid": "2e93376b_78b0c3d8",
+      "revId": "fafc6cc17ed0738834d51dc07b7aef9180918432",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
