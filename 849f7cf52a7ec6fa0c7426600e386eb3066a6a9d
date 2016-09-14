@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e93376b_5b212f99",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-09-14T03:05:32Z",
+      "side": 1,
+      "message": "what is $fit?",
+      "revId": "849f7cf52a7ec6fa0c7426600e386eb3066a6a9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_aa606fcd",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-09-14T03:05:32Z",
+      "side": 1,
+      "message": "can we have more examples that use the other params?",
+      "revId": "849f7cf52a7ec6fa0c7426600e386eb3066a6a9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_7b10ab53",
+        "filename": "client/tests/phpunit/includes/Api/ApiListEntityUsageTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-09-14T03:05:32Z",
+      "side": 1,
+      "message": "does this need to be a static method?",
+      "revId": "849f7cf52a7ec6fa0c7426600e386eb3066a6a9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
