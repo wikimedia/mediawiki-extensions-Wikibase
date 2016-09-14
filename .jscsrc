@@ -10,7 +10,6 @@
 	"disallowDanglingUnderscores": null,
 	"requireSpacesInsideBrackets": null,
 	"requireVarDeclFirst": null,
-	"requireCamelCaseOrUpperCaseIdentifiers": { "allExcept": [ "zh_min_nan" ] },
 	"jsDoc": {
 		// what we don't yet follow is commented out
 		"checkAnnotations": {
