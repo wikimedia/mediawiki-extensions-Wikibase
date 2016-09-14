@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_10906645",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_e8ee98b0",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_a8cd7064",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-13T16:08:33Z",
       "side": 1,
       "message": "$this:: is strange syntax, i didn\u0027t even know this was legal. Should be self:: or, in rare cases, static::",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_d0817e93",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_a8cd7064",
       "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_b086b2aa",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done?",
+      "parentUuid": "2e93376b_084e84c4",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_08dda4e1",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2016-09-13T16:08:33Z",
       "side": 1,
       "message": "An aggregation variable like $entity makes splitting the code more tricky. You can try to keep all the code that changes $entity in this method and move other code, or use a reference param (ugh), or make an aggregate object with methods (probably overkill).",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_f04f5a95",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "We need to aggregate several entity usage rows with common page_id into one. It keeps the data, flush it out and waits for new data.",
+      "parentUuid": "2e93376b_08dda4e1",
       "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_9077f6ce",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_68ce2833",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_c8539c6d",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2016-09-13T16:08:33Z",
       "side": 1,
       "message": "Five levels of indentation are a code smell of itself.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_707c4ab5",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "I tried to move this but I couldn\u0027t find a good way. I moved everything else.",
+      "parentUuid": "2e93376b_c8539c6d",
       "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_3073a2e7",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_e8f85848",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_a88570b3",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 11
@@ -132,6 +258,24 @@
       "writtenOn": "2016-09-13T16:08:33Z",
       "side": 1,
       "message": "you could make a method for these three lines, and call it here and above.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_50766ed6",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_a88570b3",
       "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_106ce604",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_48332c5f",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_6811c8b0",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 11
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_70c7ea4a",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_6811c8b0",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_a82ad0d4",
         "filename": "client/includes/Api/ApiListEntityUsage.php",
         "patchSetId": 11
@@ -183,6 +363,24 @@
       "writtenOn": "2016-09-13T16:08:33Z",
       "side": 1,
       "message": "It\u0027s not obvious here that all the variables have been escaped/quoted, see above.",
+      "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_b0aa326b",
+        "filename": "client/includes/Api/ApiListEntityUsage.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-14T02:14:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_a82ad0d4",
       "revId": "2e679cdcb99b38b0c0c725969a3e7090c32ce433",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
