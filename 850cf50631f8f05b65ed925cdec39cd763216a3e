@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e93376b_3060022f",
+        "filename": "repo/includes/Notifications/JobQueueChangeNotificationSender.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-14T01:47:04Z",
+      "side": 1,
+      "message": "Daniel argued for the exact opposite in PS2",
+      "parentUuid": "2e93376b_50b10edb",
+      "revId": "850cf50631f8f05b65ed925cdec39cd763216a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e93376b_10dea614",
         "filename": "repo/tests/phpunit/includes/Notifications/JobQueueChangeNotificationSenderTest.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-14T01:20:14Z",
       "side": 1,
       "message": "no longer need @group Database",
+      "revId": "850cf50631f8f05b65ed925cdec39cd763216a3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e93376b_5063ce3a",
+        "filename": "repo/tests/phpunit/includes/Notifications/JobQueueChangeNotificationSenderTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-14T01:47:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e93376b_10dea614",
       "revId": "850cf50631f8f05b65ed925cdec39cd763216a3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
