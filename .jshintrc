@@ -1,5 +1,5 @@
 {
-	"camelcase": false, // conflicts with JSCS' disallowQuotedKeysInObjects
+	"camelcase": true,
 	"curly": true,
 	"eqeqeq": true,
 	"immed": true,
