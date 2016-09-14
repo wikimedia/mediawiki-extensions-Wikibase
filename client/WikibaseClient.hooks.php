@@ -27,6 +27,7 @@ use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
+use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\AutoCommentFormatter;
@@ -473,6 +474,7 @@ final class ClientHooks {
 	public static function onwgQueryPages( &$queryPages ) {
 		$queryPages[] = array( SpecialUnconnectedPages::class, 'UnconnectedPages' );
 		$queryPages[] = array( SpecialPagesWithBadges::class, 'PagesWithBadges' );
+		$queryPages[] = array( SpecialEntityUsage::class, 'EntityUsage' );
 		return true;
 	}
 
