@@ -18,6 +18,7 @@
 	"tooltip-t-wikibase": "데이터 저장소에 연결된 항목을 가리키는 링크",
 	"wikibase-after-page-move": "또한 이동된 문서에 언어 링크를 유지하기 위해 [$1 관련된 {{WBREPONAME}} 항목]을 업데이트해야 합니다.",
 	"wikibase-after-page-move-queued": "이 문서와 연결된 [$1 {{WBREPONAME}} 항목]은 곧 자동으로 갱신됩니다.",
+	"wikibase-after-page-delete": "언어 링크를 정비하려면 [$1 관련 {{WBREPONAME}} 항목]에서 이 문서의 링크도 제거해야 합니다.",
 	"wikibase-after-page-delete-queued": "이 문서와 연결된 [$1 {{WBREPONAME}} 항목]은 곧 자동으로 갱신됩니다.",
 	"wikibase-comment-add": "{{WBREPONAME}} 항목이 만들어졌습니다.",
 	"wikibase-comment-remove": "연결한 {{WBREPONAME}} 항목을 삭제했습니다. 언어 링크를 제거했습니다.",
