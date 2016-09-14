@@ -14,6 +14,7 @@ $specialPageAliases = array();
 
 /** English (English) */
 $specialPageAliases['en'] = array(
+	'EntityUsage' => array( 'EntityUsageData' ),
 	'PagesWithBadges' => array( 'PagesWithBadges', 'QueryBadges' ),
 	'UnconnectedPages' => array( 'UnconnectedPages', 'WithoutConnection', 'WithoutSitelinks' ),
 );
