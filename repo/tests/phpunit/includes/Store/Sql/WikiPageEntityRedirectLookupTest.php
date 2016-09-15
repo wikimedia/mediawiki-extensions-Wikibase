@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use ContentHandler;
 use DatabaseMysql;
 use LoadBalancer;
 use MediaWikiTestCase;
@@ -84,7 +85,13 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 		$wikiText = '#REDIRECT [[' . $title->getFullText() . ']]';
 
 		$page = WikiPage::factory( Title::newFromText( 'Help:WikiPageEntityMetaDataLookupTest' ) );
-		$page->doEdit( $wikiText, 'test', 0, false, $wgUser );
+		$page->doEditContent(
+			ContentHandler::makeContent( $wikiText, $title ),
+			'test',
+			0,
+			false,
+			$wgUser
+		);
 	}
 
 	public function testGetRedirectForEntityId() {
