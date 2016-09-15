@@ -119,6 +119,7 @@
 	"wikibase-listproperties-datatype": "Datu tips:",
 	"wikibase-listproperties-all": "Visi datu tipi",
 	"wikibase-listproperties-submit": "Atrast",
+	"wikibase-listproperties-invalid-datatype": "\"$1\" nav derīgs datu tips.",
 	"special-entitieswithoutlabel": "Ieraksti bez nosaukuma",
 	"wikibase-entitieswithoutlabel-legend": "Iegūt sarakstu ar ierakstiem bez nosaukuma",
 	"wikibase-entitieswithoutlabel-label-language": "Valodas kods:",
@@ -127,6 +128,7 @@
 	"wikibase-entitieswithoutlabel-submit": "Atrast",
 	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" nav derīgs valodas kods.",
 	"wikibase-entitydata-bad-id": "Nederīgs ID: $1.",
+	"wikibase-redirectentity-submit": "Pāradresācija",
 	"wikibase-restoreold": "atjaunot",
 	"wikibase-no-direct-editing": "Vārdtelpā $1 tieša labošana ir atslēgta",
 	"wikibase-noentity-createone": "Jūs varat arī [[$1|izveidot jaunu]].",
@@ -134,5 +136,7 @@
 	"wikibase-listdatatypes-globe-coordinate-head": "Ģeogrāfiskās koordinātas",
 	"wikibase-listdatatypes-time-head": "Laiks",
 	"wikibase-listdatatypes-url-head": "URL",
+	"wikibase-concept-uri": "Jēdziena URI",
+	"wikibase-concept-uri-tooltip": "URI, kas apzīmē šajā vienumā aprakstīto jēdzienu",
 	"datatypes-type-url": "URL"
 }

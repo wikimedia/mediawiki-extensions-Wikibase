@@ -16,7 +16,8 @@
 			"Maroen1990",
 			"Shbib Al-Subaie",
 			"علاء",
-			"بدارين"
+			"بدارين",
+			"Mr. Ibrahem"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد ويكيبيس",
@@ -37,12 +38,14 @@
 	"apihelp-query+wblistentityusage-example-simple": "الحصول على الصفحات التي تستخدم الكيان <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "الحصول على الصفحات التي تستخدم الكيان <kbd>Q2</kbd> مع تضمين المسار.",
 	"apihelp-query+wblistentityusage-example-aspect": "الحصول على الصفحات التي تستخدم الكيان <kbd>Q2</kbd> والجانب كان وصلة موقع أو بيان.",
+	"apihelp-query+pageterms-description": "الحصول على المصطلحات المقترنة بصفحة عن طريق عنصر بيانات مقترن. على صفحة كيان wikibase، يتم استخدام مصطلحات الكيانات مباشرة.\nملاحظة: على ويكي مستودع، pageterms فقط تعمل مباشرة على صفحات الكيانات، وليس على الصفحات المتصلة بعنصر. هذا ربما يتغير في المستقبل.",
 	"apihelp-query+pageterms-example-simple": "الحصول على كل المصطلحات المرتبطة بالصفحة 'London'، بلغة المستخدم.",
-	"apihelp-query+pageterms-example-label-en": "الحصول على العلامات والاسماء المستعارة مع الصفحة 'London'، بالإنجليزية.",
-	"apihelp-query+pageterms-example-item": "الحصول على العلامات والأسماء المستعارة للعنصر Q84.",
+	"apihelp-query+pageterms-example-label-en": "الحصول على التسميات والاسماء المستعارة مع الصفحة 'London'، بالإنجليزية.",
+	"apihelp-query+pageterms-example-item": "الحصول على التسميات والأسماء المستعارة للعنصر Q84.",
 	"apihelp-query+pageterms-param-terms": "أنواع المصطلحات للحصول عليها، مثلا 'description'. لو غير محدد، فكل الأنواع يتم إرجاعها.",
 	"apihelp-query+wikibase-description": "الحصول على المعلومات حول عميل Wikibase ومستودع Wikibase المصاحب.",
 	"apihelp-query+wikibase-example": "الحصول على المسار والمعلومات الأخرى حول عميل ومستودع Wikibase.",
+	"apihelp-query+wikibase-param-prop": "ما هي الخصائص للحصول عليها:\n;<kbd>url</kbd>: المسار الأساسي، مسار السكريبتات ومسار المقالات لمستودع Wikibase.\n;<kbd>siteid</kbd>: رقم الموقع لهذا الموقع.",
 	"wikibase-after-page-move": "يمكنك أيضا تحديث [$1 بند {{WBREPONAME}} المصاحب] للحفاظ على وصلات اللغة على الصفحة المنقولة.",
 	"wikibase-after-page-move-queued": "[$1 عنصر {{WBREPONAME}}] المرتبط بهذه الصفحة سيُحدّث تلقائيًا. كن على علمٍ بأن هذا قد لا يحدث فورًا.",
 	"wikibase-after-page-delete": "ينبغي أيضًا أن تُزيل الوصلة التي تقود لهذه الصفحة من [$1 عنصر {{WBREPONAME}} المرتبط بها] للحفاظ على وصلات اللغات.",
