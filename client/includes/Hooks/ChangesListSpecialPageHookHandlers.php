@@ -6,7 +6,7 @@ use ChangesListSpecialPage;
 use FormOptions;
 use IContextSource;
 use LoadBalancer;
-use LBFactory;
+use MediaWiki\MediaWikiServices;
 use RequestContext;
 use User;
 use WebRequest;
@@ -90,7 +90,7 @@ class ChangesListSpecialPageHookHandlers {
 		return new self(
 			$context->getRequest(),
 			$context->getUser(),
-			LBFactory::singleton()->getMainLB(),
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
 			$specialPageName,
 			$settings->getSetting( 'showExternalRecentChanges' )
 		);
