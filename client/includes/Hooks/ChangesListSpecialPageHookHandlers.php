@@ -13,6 +13,7 @@ use WebRequest;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Assert\Assert;
+use \MediaWiki\MediaWikiServices;
 
 /**
  * @since 0.5
@@ -90,7 +91,7 @@ class ChangesListSpecialPageHookHandlers {
 		return new self(
 			$context->getRequest(),
 			$context->getUser(),
-			LBFactory::singleton()->getMainLB(),
+			MediaWikiServices::getInstance()->getDBLoadBalancer();
 			$specialPageName,
 			$settings->getSetting( 'showExternalRecentChanges' )
 		);
