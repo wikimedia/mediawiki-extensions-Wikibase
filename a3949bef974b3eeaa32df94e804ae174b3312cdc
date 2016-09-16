@@ -22,6 +22,24 @@
       "revId": "a3949bef974b3eeaa32df94e804ae174b3312cdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_3f5e6a18",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-16T17:17:33Z",
+      "side": 1,
+      "message": "oops. It did work in my localhost",
+      "parentUuid": "0e82f318_ff63f2d7",
+      "revId": "a3949bef974b3eeaa32df94e804ae174b3312cdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
