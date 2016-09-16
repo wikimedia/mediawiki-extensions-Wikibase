@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_cd7f6710",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-16T16:05:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_0dcc1f8c",
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_ede7cb0b",
         "filename": "client/includes/Specials/SpecialEntityUsage.php",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-16T15:49:45Z",
       "side": 1,
       "message": "Why not check this above and not even try to construct the ItemId in case !$entity.",
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_2d772337",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-16T16:05:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_ede7cb0b",
       "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
         "endLine": 119,
         "endChar": 34
       },
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_8d864f17",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-16T16:05:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_4dbe17d3",
       "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -93,6 +147,24 @@
         "endLine": 68,
         "endChar": 48
       },
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_6d903b47",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-16T16:05:27Z",
+      "side": 1,
+      "message": "I thought about it and tried to make a workaround but then I saw https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/tests/phpunit/includes/Specials/SpecialPagesWithBadgesTest.php#L76\n\nAre you really sure we need to get this fixed? or am I missing a point here?",
+      "parentUuid": "0e82f318_adbdd3d3",
       "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
