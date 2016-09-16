@@ -186,6 +186,24 @@
       "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_6d53db43",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-16T16:49:19Z",
+      "side": 1,
+      "message": "This is indeed needed (I tested this by running this test on a German wiki).\n\nI usually just get the localized special page name (like Daniel says) for asserting.",
+      "parentUuid": "0e82f318_adb153de",
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
