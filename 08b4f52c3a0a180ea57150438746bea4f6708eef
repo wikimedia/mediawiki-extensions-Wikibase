@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_e70c4a48",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-16T12:31:22Z",
+      "side": 1,
+      "message": "I usually prefer the json hack since It\u0027s recursive but you\u0027re right. It\u0027s not the case for this variable.",
+      "parentUuid": "0e82f318_c7282699",
+      "revId": "08b4f52c3a0a180ea57150438746bea4f6708eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_07331e0b",
         "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2016-09-16T10:51:42Z",
       "side": 1,
       "message": "Cases to check:\n- no param\n- subpage syntax\n- get param syntax\n- paging (your mock will have to check that the right parameters get passed to select())",
+      "revId": "08b4f52c3a0a180ea57150438746bea4f6708eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_92ce6eb8",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-16T12:31:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_07331e0b",
       "revId": "08b4f52c3a0a180ea57150438746bea4f6708eef",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
