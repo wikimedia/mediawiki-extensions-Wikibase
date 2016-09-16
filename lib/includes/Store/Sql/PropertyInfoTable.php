@@ -32,7 +32,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoStore {
 	/**
 	 * @param bool $isReadonly Whether the table can be modified.
 	 * @param string|bool $wiki The wiki's database to connect to.
-	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 *        Must be a value LBFactoryMW understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */

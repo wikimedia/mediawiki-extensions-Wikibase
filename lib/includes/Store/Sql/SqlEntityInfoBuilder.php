@@ -123,7 +123,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityId[] $ids
 	 * @param string|bool $wiki The wiki's database to connect to.
-	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 *        Must be a value LBFactoryMW understands. Defaults to false, which is the local wiki.
 	 *
 	 * @throws InvalidArgumentException
 	 */

@@ -501,7 +501,7 @@ final class WikibaseClient {
 		if ( $this->store === null ) {
 			// NOTE: $repoDatabase is null per default, meaning no direct access to the repo's
 			// database. If $repoDatabase is false, the local wiki IS the repository. Otherwise,
-			// $repoDatabase needs to be a logical database name that LBFactory understands.
+			// $repoDatabase needs to be a logical database name that LBFactoryMW understands.
 			$repoDatabase = $this->settings->getSetting( 'repoDatabase' );
 			$this->store = new DirectSqlStore(
 				$this->getEntityChangeFactory(),

@@ -41,7 +41,7 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param string|bool $wiki The target wiki's name. This must be an ID
-	 * that LBFactory can understand.
+	 * that LBFactoryMW can understand.
 	 */
 	public function __construct(
 		EntityChangeFactory $entityChangeFactory,

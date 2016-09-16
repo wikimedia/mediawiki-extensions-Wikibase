@@ -49,7 +49,7 @@ if ( !defined( 'WB_VERSION' ) ) {
 
 	// Database name of the repository, for direct access from the client.
 	// repoDatabase and changesDatabase will generally be the same.
-	// This requires the given database name to be known to LBFactory, see
+	// This requires the given database name to be known to LBFactoryMW, see
 	// $wgLBFactoryConf below.
 	$wgWBClientSettings['repoDatabase'] = "repo";
 

@@ -24,7 +24,7 @@ return [
 
 	'specialSiteLinkGroups' => [],
 
-	// local by default. Set to something LBFactory understands.
+	// local by default. Set to something LBFactoryMW understands.
 	'changesDatabase' => false,
 
 	// list of logical database names of local client wikis.
