@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_adb4f3e5",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/WikiPageEntityRedirectLookupTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-16T15:52:42Z",
+      "side": 1,
+      "message": "This needs to be the title in $page. $title is the target of the redirect we place.",
+      "range": {
+        "startLine": 89,
+        "startChar": 43,
+        "endLine": 89,
+        "endChar": 49
+      },
+      "revId": "f17d5c0b5bb91de4046881883cab9ba5bbedcfc1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
