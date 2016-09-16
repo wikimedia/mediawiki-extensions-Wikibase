@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_a7441270",
+        "filename": "client/WikibaseClient.i18n.alias.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-16T10:51:42Z",
+      "side": 1,
+      "message": "This makes EntityUsageData the *preferred* name. \n\"Aliases\" is a bit misleading. This is really for localizing the special page name. The first entry is the preferred name in a language. The preferred name should still be \"EntityUsage\", right?",
+      "revId": "08b4f52c3a0a180ea57150438746bea4f6708eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c7282699",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-16T10:51:42Z",
+      "side": 1,
+      "message": "to turn an associative array into an object, use a type cast:\n  $rows \u003d [ (object)[ \u0027value\u0027 \u003d\u003e 11, .... ] ];",
+      "revId": "08b4f52c3a0a180ea57150438746bea4f6708eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_07331e0b",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-16T10:51:42Z",
+      "side": 1,
+      "message": "Cases to check:\n- no param\n- subpage syntax\n- get param syntax\n- paging (your mock will have to check that the right parameters get passed to select())",
+      "revId": "08b4f52c3a0a180ea57150438746bea4f6708eef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
