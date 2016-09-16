@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_2782e297",
+        "filename": "client/config/WikibaseClient.example.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-16T10:41:31Z",
+      "side": 1,
+      "message": "does this really need changing?",
+      "revId": "15352ca4272177e782ca7b20f2fc72d9c790ec51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_474ef69c",
+        "filename": "client/includes/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-16T10:41:31Z",
+      "side": 1,
+      "message": "the logical database name is a concept introduced and defined by LBFactory, not LBFactoryMW, right? It\u0027s apparently called \"domain\" now, though. That should be mentioned here...\n\nI have added some comments regarding naming to the merged change I325f59b746, please have a look.",
+      "revId": "15352ca4272177e782ca7b20f2fc72d9c790ec51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_6753fa43",
+        "filename": "docs/options.wiki",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-16T10:41:31Z",
+      "side": 1,
+      "message": "not sure this needs changing, LBFactory itself uses logical db names...",
+      "revId": "15352ca4272177e782ca7b20f2fc72d9c790ec51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_8748ee8d",
+        "filename": "lib/config/WikibaseLib.default.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-16T10:41:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "15352ca4272177e782ca7b20f2fc72d9c790ec51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
