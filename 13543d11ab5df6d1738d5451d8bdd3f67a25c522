@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_0dcc1f8c",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-16T15:49:45Z",
+      "side": 1,
+      "message": "Two empty lines, one is enough",
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_ede7cb0b",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-16T15:49:45Z",
+      "side": 1,
+      "message": "Why not check this above and not even try to construct the ItemId in case !$entity.",
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_4dbe17d3",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-16T15:49:45Z",
+      "side": 1,
+      "message": "Rather use DB_REPLICA",
+      "range": {
+        "startLine": 119,
+        "startChar": 26,
+        "endLine": 119,
+        "endChar": 34
+      },
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_4da537b1",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-16T15:49:45Z",
+      "side": 1,
+      "message": "This is untested.",
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_adbdd3d3",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-16T15:49:45Z",
+      "side": 1,
+      "message": "This wont (necessarily) work on non-English wikis.",
+      "range": {
+        "startLine": 68,
+        "startChar": 26,
+        "endLine": 68,
+        "endChar": 48
+      },
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
