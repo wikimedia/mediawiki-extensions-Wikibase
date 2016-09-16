@@ -168,6 +168,24 @@
       "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_adb153de",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-16T16:14:11Z",
+      "side": 1,
+      "message": "Yes, there should be nothing in the expected value that depends on language, unless you force the language.\n\nThe easiest way in this case would be to just find out what the expected value for the local language is:\n$expected \u003d SpecialPageFactory::getLocalNameFor( \u0027Special:EntityUsage\u0027, \u0027Q3\u0027 );\n\nGenerally, when matching against system messages, we often force the language to qqx. See how ActiontestCase does this. However, I\u0027m not sure this works for special page aliases... that depends on content language, not user language, and is probably aggressively cached...",
+      "parentUuid": "0e82f318_6d903b47",
+      "revId": "13543d11ab5df6d1738d5451d8bdd3f67a25c522",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
