@@ -133,6 +133,7 @@ class RecentChangeFactory {
 			'rc_log_action' => '',
 			'rc_source' => self::SRC_WIKIBASE,
 			'rc_deleted' => false,
+			'rc_new' => false,
 		);
 	}
 

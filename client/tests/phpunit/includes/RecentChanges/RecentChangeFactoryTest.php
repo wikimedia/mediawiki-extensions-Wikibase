@@ -165,6 +165,7 @@ class RecentChangeFactoryTest extends \PHPUnit_Framework_TestCase {
 			'rc_log_type' => null,
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_deleted' => false,
+			'rc_new' => false,
 		);
 
 		$preparedAttr = array(
