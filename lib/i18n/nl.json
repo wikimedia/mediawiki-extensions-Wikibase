@@ -55,7 +55,7 @@
 	"wikibase-undeserializable-value": "De waarde is ongeldig en kan niet weergegeven worden.",
 	"wikibase-validator-invalid": "Ongeldige waarde",
 	"wikibase-validator-bad-type": "$2 in plaats van $1",
-	"wikibase-validator-too-long": "Moet niet meer dan {{PLURAL:$1|één teken $1 tekens}} lang zijn",
+	"wikibase-validator-too-long": "Moet niet meer dan {{PLURAL:$1|één teken|$1 tekens}} lang zijn",
 	"wikibase-validator-too-short": "Moet ten minste {{PLURAL:$1|één teken|$1 tekens}} lang zijn",
 	"wikibase-validator-too-high": "Buiten het bereik, moet niet hoger zijn dan $1",
 	"wikibase-validator-too-low": "Buiten het bereik, moet niet lager zijn dan $1",

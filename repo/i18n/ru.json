@@ -344,6 +344,7 @@
 	"action-property-create": "создание свойств",
 	"apihelp-wbcreateredirect-example-1": "Превратить Q11 в перенаправление на Q12",
 	"apihelp-wbeditentity-example-1": "Создать новый пустой элемент, вернуть полную структуру сущности",
+	"apihelp-wbeditentity-example-2": "Создать новый элемент и установить метки для языков de и en",
 	"apihelp-wbeditentity-example-12": "Удаляет метку",
 	"apihelp-wbformatvalue-description": "Форматирует DataValues.",
 	"apihelp-wbmergeitems-description": "Объединяет несколько элементов.",

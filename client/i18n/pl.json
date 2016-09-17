@@ -69,6 +69,8 @@
 	"wikibase-pageswithbadges-legend": "Lista stron, którym przyznano odznakę",
 	"wikibase-pageswithbadges-badge": "Odznaka:",
 	"wikibase-pageswithbadges-submit": "Pokaż strony",
+	"wikibase-entityusage-invalid-id": "$1 nie jest poprawnym identyfikatorem elementu",
+	"wikibase-entityusage-submit": "Pokaż strony",
 	"wikibase-pageinfo-entity-id": "Identyfikator elementu Wikidanych",
 	"wikibase-pageinfo-entity-id-none": "brak",
 	"wikibase-pageinfo-entity-usage-L": "Etykieta: $1",

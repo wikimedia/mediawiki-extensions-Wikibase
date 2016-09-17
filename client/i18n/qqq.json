@@ -106,7 +106,7 @@
 	"entityusage-summary": "Introductory text used on Special:EntityUsage.",
 	"wikibase-entityusage-invalid-id": "Error message when an invalid id is passed to the special page. Parameters:\n* $1 - the invalid ID",
 	"wikibase-entityusage-legend": "Legend for the EntityUsage special page",
-	"wikibase-entityusage-entity": "Label for the input field to select the entity to show.",
+	"wikibase-entityusage-entity": "Label for the input field to select the entity to show.\n{{Identical|Entity}}",
 	"wikibase-entityusage-submit": "Label for the button that activates the action",
 	"wikibase-pageinfo-entity-id": "A link to the corresponding Wikibase Item",
 	"wikibase-pageinfo-entity-id-none": "The page is not linked with a wikibase item.\n{{Identical|None}}",
