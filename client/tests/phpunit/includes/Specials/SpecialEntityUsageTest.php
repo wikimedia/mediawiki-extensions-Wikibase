@@ -3,15 +3,10 @@
 namespace Wikibase\Client\Tests\Specials;
 
 use FakeResultWrapper;
+use RequestContext;
 use SpecialPageFactory;
 use SpecialPageTestBase;
-use Title;
-use WikiPage;
 use Wikibase\Client\Specials\SpecialEntityUsage;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers Wikibase\Client\Specials\SpecialEntityUsage
@@ -64,12 +59,13 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 			wfMessage( 'wikibase-pageinfo-entity-usage-O' )->parse(),
 			wfMessage( 'wikibase-pageinfo-entity-usage-L', 'fa' )->parse(),
 		];
+		$aspectList = RequestContext::getMain()->getLanguage()->commaList( $aspects );
 
 		$this->assertContains( 'Tehran', $result );
 		$this->assertNotContains( '<p class="error"', $result );
 		$expected = SpecialPageFactory::getLocalNameFor( 'EntityUsage', 'Q3' );
 		$this->assertContains( $expected, $result );
-		$this->assertContains( implode( ", ", $aspects ), $result );
+		$this->assertContains( $aspectList, $result );
 	}
 
 	public function testExecuteWithInvalidParam() {
