@@ -65,6 +65,8 @@ return call_user_func( function() {
 		'wikibase.view.ControllerViewFactory' => $moduleTemplate + array(
 			'scripts' => 'ControllerViewFactory.js',
 			'dependencies' => array(
+				'jquery.cookie',
+				'mediawiki.user',
 				'wikibase.view.__namespace',
 				'wikibase.view.ToolbarViewController',
 				'wikibase.view.ViewFactory'
