@@ -47,6 +47,8 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 						$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
 						'https://www.wikidata.org/wiki/Q4'
 					),
+				),
+				'header-properties' => array(
 					array(
 						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
 						"<ul><li>https://www.wikidata.org/wiki/Q4</li><ul><li>Sitelink</li></ul></ul>",
@@ -58,7 +60,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$cases[] = array(
-			array( 'header-basic' => array(
+			array( 'header-properties' => array(
 					array(
 						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
 						"<ul><li>https://www.wikidata.org/wiki/Q4</li><ul><li>Sitelink</li></ul></ul>",
@@ -66,7 +68,7 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 				)
 			),
 			$context,
-			array( 'header-basic' => array() ),
+			array( 'header-properties' => array() ),
 			false,
 			new ItemId( 'Q4' ),
 			'namespace does not have wikibase enabled'
