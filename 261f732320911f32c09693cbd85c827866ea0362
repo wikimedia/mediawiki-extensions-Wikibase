@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_09f24cdf",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-18T10:27:30Z",
+      "side": 1,
+      "message": "A short comment about what this does would be useful, like \"// As x is used as a prefix for two and three letter codes, read one or two more characters, if appropriate\"",
+      "revId": "261f732320911f32c09693cbd85c827866ea0362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_096b2c83",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-18T10:27:30Z",
+      "side": 1,
+      "message": "Should use MediaWiki\\suppressWarnings and MediaWiki\\restoreWarnings.",
+      "revId": "261f732320911f32c09693cbd85c827866ea0362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_09196c27",
+        "filename": "repo/tests/phpunit/includes/Parsers/DateFormatParserTest.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-18T10:27:30Z",
+      "side": 1,
+      "message": "Should not use fully qualified class name",
+      "range": {
+        "startLine": 28,
+        "startChar": 12,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "261f732320911f32c09693cbd85c827866ea0362",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
