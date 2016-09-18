@@ -70,7 +70,7 @@ class InfoActionHookHandler {
 		}
 
 		if ( $usage ) {
-			$pageInfo['header-basic'][] = $this->formatEntityUsage( $context, $usage );
+			$pageInfo['header-properties'][] = $this->formatEntityUsage( $context, $usage );
 		}
 
 		return $pageInfo;
