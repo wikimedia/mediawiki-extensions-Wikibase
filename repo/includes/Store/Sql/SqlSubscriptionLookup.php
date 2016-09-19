@@ -63,6 +63,31 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	}
 
 	/**
+	 * Return the existing subscriptions for given Id to check
+	 *
+	 * @param EntityId $idToCheck EntityId to get subscribers
+	 *
+	 * @return string[] wiki IDs of wikis subscribed to the given entity
+	 */
+	public function getSubscribers( EntityId $idToCheck ) {
+
+		$where = [ 'cs_entity_id' => $idToCheck->getSerialization() ];
+		$dbr = $this->dbLoadBalancer->getConnection( DB_REPLICA );
+
+		$rows = $dbr->select(
+			'wb_changes_subscription',
+			'cs_subscriber_id',
+			$where,
+			__METHOD__
+		);
+
+		$subscriptions = $this->extractColumn( $rows, 'cs_subscriber_id' );
+		$this->dbLoadBalancer->reuseConnection( $dbr );
+
+		return $subscriptions;
+	}
+
+	/**
 	 * For a set of potential subscriptions, returns the existing subscriptions.
 	 *
 	 * @param DatabaseBase $db
