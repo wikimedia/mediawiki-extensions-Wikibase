@@ -123,7 +123,7 @@
 	"wikibase-wikibaserepopage-invalid-id": "Penanda \"$1\" tidak dikenali oleh sistem. Tolong gunakan penanda entitas yang sahih.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 adalah laman pengalihan.",
 	"wikibase-wikibaserepopage-storage-exception": "Galat terjadi saat mencoba memuat $1:$2.",
-	"special-itembytitle": "Cari butir menurut judul",
+	"special-itembytitle": "Butir menurut judul",
 	"wikibase-itembytitle-lookup-fieldset": "Cari butir menurut situs dan judul",
 	"wikibase-itembytitle-lookup-site": "Situs:",
 	"wikibase-itembytitle-lookup-page": "laman:",
