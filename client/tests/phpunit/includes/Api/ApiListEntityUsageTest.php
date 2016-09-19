@@ -3,7 +3,6 @@
 namespace Wikibase\Client\Tests\Api;
 
 use ApiMain;
-use ApiPageSet;
 use ApiQuery;
 use FauxRequest;
 use MediaWikiLangTestCase;

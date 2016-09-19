@@ -9,7 +9,6 @@ use Linker;
 use QueryPage;
 use Skin;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\DataModel\Entity\ItemId;
 
