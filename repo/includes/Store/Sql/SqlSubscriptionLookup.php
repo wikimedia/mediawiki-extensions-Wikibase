@@ -63,26 +63,44 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	}
 
 	/**
-	 * For a set of potential subscriptions, returns the existing subscriptions.
+	 * Returnthe existing subscriptions for given Ids to check
+	 *
+	 * @param string[]|null $idsToCheck Id strings to check
+	 *
+	 * @return string[] subscriptions for the given Ids
+	 */
+	public function queryIdBasedSubscriptions( array $idsToCheck ) {
+
+		$where['cs_entity_id'] = $idsToCheck;
+		$dbr = $this->dbLoadBalancer->getConnection( DB_SLAVE );
+
+		$rows = $dbr->select(
+			'wb_changes_subscription',
+			'cs_subscriber_id',
+			$where,
+			__METHOD__
+		);
+
+		$subscriptions = $this->extractColumn( $rows, 'cs_subscriber_id' );
+		$this->dbLoadBalancer->reuseConnection( $dbr );
+
+		return $subscriptions;
+	}
+
+	/**
+	 * Return the existing subscriptions for given entities.
 	 *
 	 * @param DatabaseBase $db
-	 * @param string $subscriber
 	 * @param string[]|null $idsToCheck Id strings to check
 	 *
 	 * @return string[] Entity ID strings from $subscriptions which $subscriber is subscribed to.
 	 */
-	private function querySubscriptions( DatabaseBase $db, $subscriber, array $idsToCheck = null ) {
-		$where = array(
-			'cs_subscriber_id' => $subscriber,
-		);
-
-		if ( $idsToCheck ) {
-			$where['cs_entity_id'] = $idsToCheck;
-		}
+	private function querySubscriptions( DatabaseBase $db, array $idsToCheck ) {
+		$where['cs_entity_id'] = $idsToCheck;
 
 		$rows = $db->select(
 			'wb_changes_subscription',
-			'cs_entity_id',
+			'cs_subscriber_id',
 			$where,
 			__METHOD__
 		);
