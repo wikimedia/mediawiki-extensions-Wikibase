@@ -11,6 +11,7 @@ use ContentHandler;
 use ExtensionRegistry;
 use HistoryPager;
 use Html;
+use IContextSource;
 use Linker;
 use LogEntry;
 use MWException;
@@ -28,12 +29,15 @@ use SpecialSearch;
 use StubUserLang;
 use Title;
 use User;
+use wfGetLB;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\Lib\AutoCommentFormatter;
 use Wikibase\Lib\Store\EntityChangeLookup;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store\Sql\SqlSubscriptionLookup;
 use WikiPage;
 
 /**
@@ -1132,6 +1136,38 @@ final class RepoHooks {
 		}
 
 		$resourceLoader->register( $modules );
+
+		return true;
+	}
+
+	/**
+	 * Adds the Wikis using the entity in action=info
+	 *
+	 * @param IContextSource $context
+	 * @param array $pageInfo
+	 *
+	 * @return bool
+	 */
+	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$namespaceChecker = $wikibaseRepo->getEntityNamespaceLookup();
+		$subscriptionLookup = new SqlSubscriptionLookup( wfGetLB() );
+
+		if ( !$namespaceChecker->isEntityNamespace( $context->getTitle()->getNamespace() ) ) {
+			// shorten out
+			return true;
+		}
+
+		$siteLookup = \MediaWiki\MediaWikiServices::getInstance()->getSiteLookup();
+
+		$infoActionHookHandler = new InfoActionHookHandler(
+			$namespaceChecker,
+			$subscriptionLookup,
+			$siteLookup
+		);
+
+		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
 
 		return true;
 	}
