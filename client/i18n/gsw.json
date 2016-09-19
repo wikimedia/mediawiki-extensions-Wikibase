@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Als-Holder",
-			"J. 'mach' wust"
+			"J. 'mach' wust",
+			"Terfili"
 		]
 	},
 	"wikibase-client-desc": "Macht e Client fir d Erwyterig Wikibase megli",
@@ -25,7 +26,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-Bearbeitig",
 	"wikibase-replicationnote": "Bitte dänk draa, ass es e baar Minute cha goh, bi s d Änderige uf allene Wiki sichtbar sin.",
-	"wikibase-otherprojects": "Andri Projäkt",
+	"wikibase-otherprojects": "In andre Projäkt",
 	"wikibase-otherprojects-beta-message": "Syteleiste für anderi Projekt",
 	"wikibase-otherprojects-beta-description": "En Abschnitt «{{int:wikibase-otherprojects}}» chunt zur Syteleiste derzue. Är het Links zu anderne Wikimedia-Projekt, wo uf {{WBREPONAME}}-Date basiere."
 }

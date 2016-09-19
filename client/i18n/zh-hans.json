@@ -103,7 +103,7 @@
 	"wikibase-pageswithbadges-submit": "显示页面",
 	"entityusage": "实体使用",
 	"entityusage-summary": "此页面列举使用指定实体（例如Q42）的页面。列表按页面ID降序排列，所以新页面会首先列出。",
-	"wikibase-entityusage-invalid-id": "$1不是一个有效的项ID",
+	"wikibase-entityusage-invalid-id": "$1不是一个有效的实体ID",
 	"wikibase-entityusage-legend": "使用指定实体的页面列表",
 	"wikibase-entityusage-entity": "实体：",
 	"wikibase-entityusage-submit": "显示页面",

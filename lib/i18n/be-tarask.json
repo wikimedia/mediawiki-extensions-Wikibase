@@ -45,7 +45,7 @@
 	"wikibase-validator-no-such-property": "Уласьцівасьць $1 ня знойдзеная",
 	"wikibase-validator-bad-value-type": "Благі тып значэньня $1, чакаецца $2",
 	"wikibase-validator-bad-url": "URL-адрасы ня могуць утрымліваць пэўныя сымбалі, такія як прабелы ці квадратныя дужкі.",
-	"wikibase-validator-bad-url-scheme": "Схема URL не падтрымліваецца: $1",
+	"wikibase-validator-bad-url-scheme": "URL-схема «$1» не падтрымліваецца.",
 	"wikibase-validator-not-allowed": "Недапушчальнае значэньне: $1",
 	"datatypes-type-wikibase-item": "Аб’ект",
 	"datatypes-type-commonsMedia": "Мэдыяфайл зь Вікісховішча",

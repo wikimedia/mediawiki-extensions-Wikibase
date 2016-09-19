@@ -1,11 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kazu89"
+			"Kazu89",
+			"Terfili"
 		]
 	},
 	"wikibase-editlinks": "Modifitgar colliaziuns",
 	"wikibase-linkitem-addlinks": "Agiunscher colliaziuns",
 	"wikibase-linkitem-input-site": "Lingua:",
-	"wikibase-linkitem-input-page": "Pagina"
+	"wikibase-linkitem-input-page": "Pagina",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Zuppentar",
+	"wikibase-rc-hide-wikidata-show": "Mussar",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Elavuraziun da {{WBREPONAME}}"
 }
