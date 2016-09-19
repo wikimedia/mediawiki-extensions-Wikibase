@@ -63,6 +63,31 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 	}
 
 	/**
+	 * Returnthe existing subscriptions for given Ids to check
+	 *
+	 * @param string[]|null $idsToCheck Id strings to check
+	 *
+	 * @return string[] subscriptions for the given Ids
+	 */
+	public function queryIdBasedSubscriptions( array $idsToCheck ) {
+
+		$where['cs_entity_id'] = $idsToCheck;
+		$dbr = $this->dbLoadBalancer->getConnection( DB_SLAVE );
+
+		$rows = $dbr->select(
+			'wb_changes_subscription',
+			'cs_subscriber_id',
+			$where,
+			__METHOD__
+		);
+
+		$subscriptions = $this->extractColumn( $rows, 'cs_subscriber_id' );
+		$this->dbLoadBalancer->reuseConnection( $dbr );
+
+		return $subscriptions;
+	}
+
+	/**
 	 * For a set of potential subscriptions, returns the existing subscriptions.
 	 *
 	 * @param DatabaseBase $db
