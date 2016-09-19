@@ -381,6 +381,8 @@
 	"wikibase-entity-not-viewable": "The given content of type \"$1\" is not an Entity and cannot be displayed by Wikibase.",
 	"action-item-merge": "merge items",
 	"action-property-create": "create properties",
+	"wikibase-pageinfo-subscription": "Wikis subscribed to this entity",
+	"wikibase-pageinfo-subscription-none": "None",
 	"apihelp-wbavailablebadges-description": "Queries available badge items.",
 	"apihelp-wbavailablebadges-example-1": "Queries all available badge items",
 	"apihelp-wbcreateclaim-description": "Creates Wikibase claims.",
