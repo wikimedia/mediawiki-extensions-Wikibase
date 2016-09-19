@@ -44,7 +44,14 @@ class DispatchingEntityIdParser implements EntityIdParser {
 		}
 
 		foreach ( $this->idBuilders as $idPattern => $idBuilder ) {
-			if ( preg_match( $idPattern, $idSerialization ) ) {
+			try {
+				list( , , $localId ) = EntityId::splitSerialization( $idSerialization );
+			} catch ( InvalidArgumentException $ex ) {
+				// EntityId::splitSerialization performs some sanity checks which
+				// might result in an exception. Should this happen, re-throw the exception message
+				throw new EntityIdParsingException( $ex->getMessage() );
+			}
+			if ( preg_match( $idPattern, $localId ) ) {
 				return $this->buildId( $idBuilder, $idSerialization );
 			}
 		}
