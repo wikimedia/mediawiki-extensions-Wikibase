@@ -61,7 +61,11 @@ class SqlSubscriptionLookupTest extends MediaWikiTestCase {
 
 		$expected = array( 'P1', 'Q7' );
 
+		$subscribers = $lookup->getSubscribers( new ItemId( 'Q2' ) );
+		$expectedSubscibers = [ 'dewiki' ];
+
 		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $expectedSubscibers, $subscribers );
 	}
 
 }
