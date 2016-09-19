@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\Repo;
+namespace Wikibase\Repo\Tests\Notifications;
 
 use Wikibase\EntityChange;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;

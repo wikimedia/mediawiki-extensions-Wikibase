@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests\Repo;
+namespace Wikibase\Repo\Tests\Notifications;
 
 use Wikibase\Change;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
