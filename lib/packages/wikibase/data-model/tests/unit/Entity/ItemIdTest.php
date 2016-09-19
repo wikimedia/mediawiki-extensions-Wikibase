@@ -4,6 +4,8 @@ namespace Wikibase\DataModel\Tests\Entity;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use InvalidArgumentException;
+use RuntimeException;
 
 /**
  * @covers Wikibase\DataModel\Entity\ItemId
@@ -21,24 +23,27 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider idSerializationProvider
 	 */
-	public function testCanConstructId( $idSerialization ) {
+	public function testCanConstructId( $idSerialization, $normalizedIdSerialization ) {
 		$id = new ItemId( $idSerialization );
 
 		$this->assertEquals(
-			strtoupper( $idSerialization ),
+			$normalizedIdSerialization,
 			$id->getSerialization()
 		);
 	}
 
 	public function idSerializationProvider() {
 		return array(
-			array( 'q1' ),
-			array( 'q100' ),
-			array( 'q1337' ),
-			array( 'q31337' ),
-			array( 'Q31337' ),
-			array( 'Q42' ),
-			array( 'Q2147483647' ),
+			array( 'q1', 'Q1' ),
+			array( 'q100', 'Q100' ),
+			array( 'q1337', 'Q1337' ),
+			array( 'q31337', 'Q31337' ),
+			array( 'Q31337', 'Q31337' ),
+			array( 'Q42', 'Q42' ),
+			array( ':Q42', 'Q42' ),
+			array( 'foo:Q42', 'foo:Q42' ),
+			array( 'foo:bar:q42', 'foo:bar:Q42' ),
+			array( 'Q2147483647', 'Q2147483647' ),
 		);
 	}
 
@@ -46,7 +51,7 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidIdSerializationProvider
 	 */
 	public function testCannotConstructWithInvalidSerialization( $invalidSerialization ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new ItemId( $invalidSerialization );
 	}
 
@@ -133,7 +138,7 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidNumericIdProvider
 	 */
 	public function testNewFromNumberWithInvalidNumericId( $number ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		ItemId::newFromNumber( $number );
 	}
 
@@ -145,6 +150,11 @@ class ItemIdTest extends PHPUnit_Framework_TestCase {
 			array( 2147483648 ),
 			array( '2147483648' ),
 		);
+	}
+
+	public function testGetNumericIdThrowsExceptionOnForeignIds() {
+		$this->setExpectedException( RuntimeException::class );
+		( new ItemId( 'foo:Q42' ) )->getNumericId();
 	}
 
 }
