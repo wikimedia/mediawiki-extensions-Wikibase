@@ -6,7 +6,6 @@ use Html;
 use IContextSource;
 use Title;
 use Wikibase\Client\RepoLinker;
-use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
