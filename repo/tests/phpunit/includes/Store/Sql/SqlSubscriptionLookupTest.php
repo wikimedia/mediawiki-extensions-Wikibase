@@ -64,4 +64,23 @@ class SqlSubscriptionLookupTest extends MediaWikiTestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
+	public function testGetSubscribers() {
+		$subscriptions = [
+			[ 'cs_subscriber_id' => 'enwiki', 'cs_entity_id' => 'Q2' ],
+			[ 'cs_subscriber_id' => 'dewiki', 'cs_entity_id' => 'Q3' ],
+			[ 'cs_subscriber_id' => 'frwiki', 'cs_entity_id' => 'Q3' ],
+			[ 'cs_subscriber_id' => 'dewiki', 'cs_entity_id' => 'Q2' ],
+		];
+
+		$this->insertSubscriptions( $subscriptions );
+
+		$lookup = new SqlSubscriptionLookup( wfGetLB() );
+
+		$subscribers = $lookup->getSubscribers( new ItemId( 'Q2' ) );
+		$expected = [ 'dewiki', 'enwiki' ];
+
+		sort( $subscribers );
+
+		$this->assertEquals( $expected, $subscribers );
+	}
 }

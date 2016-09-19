@@ -252,6 +252,7 @@ call_user_func( function() {
 	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
 	$wgHooks['ContentHandlerForModelID'][] = 'Wikibase\RepoHooks::onContentHandlerForModelID';
 	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\ViewEntityAction::onBeforeDisplayNoArticleText';
+	$wgHooks['InfoAction'][] = '\Wikibase\RepoHooks::onInfoAction';
 
 	// CirrusSearch hooks
 	$wgHooks['CirrusSearchMappingConfig'][] = 'Wikibase\Repo\Hooks\CirrusSearchHookHandlers::onCirrusSearchMappingConfig';

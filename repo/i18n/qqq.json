@@ -412,6 +412,8 @@
 	"wikibase-entity-not-viewable": "Error message saying that some content can't be rendered. $1 is the content model of the content that can't be displayed (e.g. wikitext).",
 	"action-item-merge": "{{Doc-action|item-merge}}",
 	"action-property-create": "{{Doc-action|property-create}}",
+	"wikibase-pageinfo-subscription": "Text to put in action=info for entity usage",
+	"wikibase-pageinfo-subscription-none": "When there is no wiki subscribed to this entity",
 	"apihelp-wbavailablebadges-description": "{{doc-apihelp-description|wbavailablebadges}}",
 	"apihelp-wbavailablebadges-example-1": "{{doc-apihelp-example|wbavailablebadges}}",
 	"apihelp-wbcreateclaim-description": "{{doc-apihelp-description|wbcreateclaim}}",
