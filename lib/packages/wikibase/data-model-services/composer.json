@@ -21,9 +21,10 @@
 	},
 	"require": {
 		"php": ">=5.5.0",
-		"wikibase/data-model": "~6.0|~5.0|~4.2",
+		"wikibase/data-model": "~6.2",
 		"data-values/data-values": "~0.1|~1.0",
-		"diff/diff": "~2.0|~1.0"
+		"diff/diff": "~2.0|~1.0",
+		"wikimedia/assert": "~0.2.2"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "~2.3",
