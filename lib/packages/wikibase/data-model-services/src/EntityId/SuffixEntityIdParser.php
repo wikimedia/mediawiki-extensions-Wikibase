@@ -28,7 +28,7 @@ class SuffixEntityIdParser implements EntityIdParser {
 	private $idParser;
 
 	/**
-	 * @param string $prefix The prefix to be stripped. Stripping is cases sensitive.
+	 * @param string $prefix The prefix to be stripped. Stripping is case sensitive.
 	 * @param EntityIdParser $idParser
 	 */
 	public function __construct( $prefix, EntityIdParser $idParser ) {
