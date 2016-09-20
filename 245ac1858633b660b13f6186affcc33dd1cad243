@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_d79b5f19",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_37191b28",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f7e6a312",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "Assigning $pageInfo here seems a bit odd. I think InfoActionHookHandler shouldn\u0027t know about that array, and just generate HTML, which gets added to $pageInfo here.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b796ebf1",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "That\u0027s how the hook works https://www.mediawiki.org/wiki/Manual:Hooks/InfoAction\nwe manipulate the pageinfo array",
+      "parentUuid": "0e82f318_f7e6a312",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_97b80776",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_97be47d0",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_d7b8bfe4",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "type hint missing for $siteLookup",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d7719fde",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "I did at first but typehint failed for SiteLookup test. I think there\u0027s an upstream bug we should look into later.",
+      "parentUuid": "0e82f318_d7b8bfe4",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_7759d35c",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "pageinfo hook sends an array of arrays. It\u0027s something like this:\n$pageInfo \u003d [ \u0027header-basic\u0027 \u003d\u003e [ \u0027HTML\u0027 \u003d\u003e \u0027HTML\u0027, ... ] ]\nSo some parts are HTML and some parts are string. Not sure how to address that here.",
+      "parentUuid": "0e82f318_37967b50",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_57a3efa7",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "Please indicate structure and content (or just return a string here, see above).\nMost importantly, be very explicit about whether strings are plain text or HTML. Confusion about this is a prime reason for XSS vulnerabilities.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_1729779a",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "We are not reading anything from user not sure how that can be a XSS vulnerability. I explained above.",
+      "parentUuid": "0e82f318_57a3efa7",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +263,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_320cc93d",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_17c6d74e",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_179fb756",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -166,6 +292,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "$context-\u003emsg returns a Message object. If you want HTML, call parse() on the object.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_120fc534",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_179fb756",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_52193d7d",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_577a0f20",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_b7b7cbd2",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -206,6 +368,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_b227d9b0",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_b7b7cbd2",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_57d76ff2",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -217,6 +397,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "if this is expected to be HTML, say so explicitly",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_52305de5",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-20T20:15:50Z",
+      "side": 1,
+      "message": "subscription is like \u0027enwiki\u0027, \u0027dewiki\u0027. Not HTML",
+      "parentUuid": "0e82f318_57d76ff2",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
