@@ -11,7 +11,7 @@
 	},
 	"wikibase-client-desc": "উইকিবেজ এক্সটেনশনের জন্য গ্রাহক",
 	"tooltip-t-wikibase": "আইটেম উপাত্ত ভান্ডারে সংযুক্ত করা লিঙ্ক",
-	"apihelp-query+wbentityusage-param-prop": "ফলাফলে যোহ করবার বৈশিষ্ট্য।",
+	"apihelp-query+wbentityusage-param-prop": "ফলাফলে যোগ করবার বৈশিষ্ট্য।",
 	"apihelp-query+wblistentityusage-description": "প্রদত্ত সত্তা অভিজ্ঞান ব্যবহৃত হয়েছে, এমন সব পাতা ফিরিয়ে আনো।",
 	"apihelp-query+wblistentityusage-param-prop": "ফলাফলে যোগ করবার বৈশিষ্ট্য।",
 	"apihelp-query+wblistentityusage-param-entities": "ব্যবহার কারা হয়েছে এমন সত্তাসমূহ।",
