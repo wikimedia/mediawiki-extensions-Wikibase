@@ -1,0 +1,344 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_37191b28",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Perhaps there should be Store::getSubscriptionLookup method",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f7e6a312",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Assigning $pageInfo here seems a bit odd. I think InfoActionHookHandler shouldn\u0027t know about that array, and just generate HTML, which gets added to $pageInfo here.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_97be47d0",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Code style: either don\u0027t wrap, or use a new line for each parameter.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d7b8bfe4",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "type hint missing for $siteLookup",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_37967b50",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Please indicate structure and content. Or leave it to the caller (the hook handler) to deal with the array, and just return HTML.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_57a3efa7",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Please indicate structure and content (or just return a string here, see above).\nMost importantly, be very explicit about whether strings are plain text or HTML. Confusion about this is a prime reason for XSS vulnerabilities.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f7b4e3e6",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Passing $context though all method calls indicates a design problem. Since InfoActionHookHandler is a one-off handler instance, not a service singleton, I think it would be fine to inject the context into the constructor, for use as a lookup for messages.\n\nI would still pass the title explicitly to the handle() function, to keep the information flow obvious.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d7fa7f72",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Please do not rely on the title being the same as the ID. Use an EntityIdLookup instead.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_17c6d74e",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "If this is HTML, say so explicitly!",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_179fb756",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "$context-\u003emsg returns a Message object. If you want HTML, call parse() on the object.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_577a0f20",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "This is incorrect, IContextSource::msg returns a Message object.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b7b7cbd2",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "The name is misleading - this doesn\u0027t return unsubscribed entities. It doesn\u0027t return any entities.\nBetter name: getNoSubscriptionText.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_57d76ff2",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "if this is expected to be HTML, say so explicitly",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_37cafb4a",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "It seems this just returns a string, nto an array.\nAlso, please say explicitly that this returns HTML.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_17cdf762",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Using a TitleFactory here would make testing simpler. But I think TitleFactory is still in client... perhaps it\u0027s time to move it. Maybe even into core...",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d7e35fd2",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "If possible, use a LinkRenderer service instead.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f73ea325",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "This cannot be null. Also, these should be EntityIds, not strings.\n\nAlso, I see no use case for checking multiple entities at once.\n\nThe interface should be based on the actual needs of the caller, not on the underlying data, and only to a small extent on our guess what we might need in the future.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d7399f3f",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "\"wiki IDs of wikis subscribed to the given entity\"",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_37f11b93",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Better name: getSubscribers",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d710bfaf",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-20T19:17:07Z",
+      "side": 1,
+      "message": "Needs a unit test",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
