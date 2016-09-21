@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_b116ed4b",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T20:54:00Z",
+      "side": 1,
+      "message": "I think that should be done in another patch. What do you think?",
+      "parentUuid": "0e82f318_db49c26b",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f7e6a312",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 6
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Sure, that\u0027s how the hook works, but that doesn\u0027t need to be how InfoActionHandler works. I think InfoActionHandler  should just return an HTML string and not know about the array. Wouldn\u0027t that work?",
       "parentUuid": "0e82f318_b796ebf1",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_915e4916",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T20:54:00Z",
+      "side": 1,
+      "message": "hmm, I see it now. What do you think if we keep it this way so we can add more hooks handler later? See the client, aude wrote that for adding link to entity this way but I got it and added entity usage without much trouble.",
+      "parentUuid": "0e82f318_3b59fe39",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -208,6 +244,24 @@
       "side": 1,
       "message": "Hm.... that\u0027s veeeeery strange... it really indicates an error, but probably not upstream. Mocking the wrong class, perhaps?",
       "parentUuid": "0e82f318_d7719fde",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_91bd6919",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T20:54:00Z",
+      "side": 1,
+      "message": "Yeah, I mocked a SiteLookup which is abstract. Got it fixed now :)",
+      "parentUuid": "0e82f318_fb75a693",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
