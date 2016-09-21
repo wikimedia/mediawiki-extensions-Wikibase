@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_8361a2d2",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-21T11:20:34Z",
+      "side": 1,
+      "message": "If \"something is seriously wrong\" then throw an exception or show an error message.\n\nBut if having red links is acceptable (and I agree it is), then the format of the line should be identical to the ones with blue links. Suppressing the usage information because of something else, even if we have the data and can show them with no problem, does not make sense.",
+      "parentUuid": "0e82f318_833a82be",
+      "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_c882d996",
         "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
         "patchSetId": 1
