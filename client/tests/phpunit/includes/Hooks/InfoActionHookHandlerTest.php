@@ -2,13 +2,18 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
+use Html;
 use IContextSource;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\NamespaceChecker;
@@ -37,55 +42,72 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 	public function handleProvider() {
 		$context = $this->getContext();
+		$labeledLink = '<a href="https://www.wikidata.org/wiki/Q4" classes="external">Berlin</a>';
+		$unLabeledLink = '<a href="https://www.wikidata.org/wiki/Q4" classes="external"></a>';
+		$q5Link = '<a href="https://www.wikidata.org/wiki/Q5" classes="external">Q5</a>';
+		$cases = [];
 
-		$cases = array();
-
-		$cases[] = array(
-			array(
-				'header-basic' => array(
-					array(
+		$cases[] = [
+			[
+				'header-basic' => [
+					[
 						$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
-						'https://www.wikidata.org/wiki/Q4'
-					),
-				),
-				'header-properties' => array(
-					array(
+						$unLabeledLink
+					],
+				],
+				'header-properties' => [
+					[
 						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
-						"<ul><li>https://www.wikidata.org/wiki/Q4</li><ul><li>Sitelink</li></ul></ul>",
-					),
-				)
-			),
-			$context, array( 'header-basic' => array() ), true, new ItemId( 'Q4' ),
+						"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
+					],
+				]
+			],
+			$context, [ 'header-basic' => [] ], true, new ItemId( 'Q4' ),
 			'item id link'
-		);
+		];
 
-		$cases[] = array(
-			array( 'header-properties' => array(
-					array(
+		$cases[] = [
+			[ 'header-properties' => [
+					[
 						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
-						"<ul><li>https://www.wikidata.org/wiki/Q4</li><ul><li>Sitelink</li></ul></ul>",
-					),
-				)
-			),
+						"<ul><li>$labeledLink</li><ul><li>Sitelink</li></ul></ul>",
+					],
+				]
+			],
 			$context,
-			array( 'header-properties' => array() ),
+			[ 'header-properties' => [] ],
 			false,
 			new ItemId( 'Q4' ),
 			'namespace does not have wikibase enabled'
-		);
+		];
 
-		$cases[] = array(
-			array(
-				'header-basic' => array(
-					array(
+		$cases[] = [
+			[
+				'header-basic' => [
+					[
 						$context->msg( 'wikibase-pageinfo-entity-id' )->escaped(),
 						$context->msg( 'wikibase-pageinfo-entity-id-none' )->escaped()
-					)
-				)
-			),
-			$context, array( 'header-basic' => array() ), true, false,
+					]
+				]
+			],
+			$context, [ 'header-basic' => [] ], true, false,
 			'page is not connected to an item'
-		);
+		];
+
+		$cases[] = [
+			[ 'header-properties' => [
+					[
+						$context->msg( 'wikibase-pageinfo-entity-usage' )->escaped(),
+						"<ul><li>$q5Link</li><ul><li>Sitelink</li></ul></ul>",
+					],
+				]
+			],
+			$context,
+			[ 'header-properties' => [] ],
+			false,
+			new ItemId( 'Q5' ),
+			'No label for Q5'
+		];
 
 		return $cases;
 	}
@@ -107,11 +129,12 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 
 		$repoLinker = $this->getMockBuilder( RepoLinker::class )
 			->disableOriginalConstructor()
+			->setMethods( [ 'buildEntityLink' ] )
 			->getMock();
 
 		$repoLinker->expects( $this->any() )
 			->method( 'buildEntityLink' )
-			->will( $this->returnValue( 'https://www.wikidata.org/wiki/Q4' ) );
+			->will( $this->returnCallback( [ $this, 'buildEntityLink' ] ) );
 
 		$siteLinkLookup = $this->getMockBuilder( SiteLinkLookup::class )
 			->disableOriginalConstructor()
@@ -132,12 +155,32 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 				->will( $this->returnValue( $entityUsage ) );
 		}
 
+		$labelDescriptionLookupFactory = $this->getMockBuilder(
+			LanguageFallbackLabelDescriptionLookupFactory::class
+		)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$labelDescriptionLookupFactory->expects( $this->any() )
+			->method( 'newLabelDescriptionLookup' )
+			->will( $this->returnCallback( [ $this, 'newLabelDescriptionLookup' ] ) );
+
+		$idParser = $this->getMockBuilder( EntityIdParser::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$idParser->expects( $this->any() )
+			->method( 'parse' )
+			->will( $this->returnCallback( [ $this, 'parse' ] ) );
+
 		$hookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$repoLinker,
 			$siteLinkLookup,
 			'enwiki',
-			$sqlUsageTracker
+			$sqlUsageTracker,
+			$labelDescriptionLookupFactory,
+			$idParser
 		);
 
 		return $hookHandler;
@@ -169,6 +212,62 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$context->setLanguage( 'en' );
 
 		return $context;
+	}
+
+	/**
+	 * @return LabelDescriptionLookup
+	 */
+	public function newLabelDescriptionLookup() {
+		$lookup = $this->getMockBuilder( LabelDescriptionLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$lookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnCallback( [ $this, 'getLabel' ] ) );
+
+		return $lookup;
+	}
+
+	/**
+	 * @param EntityId $entity
+	 *
+	 * @return Term
+	 */
+	public function getLabel( $entity ) {
+		$labelMap = [ 'Q4' => 'Berlin' ];
+		$entityId = $entity->getSerialization();
+		if ( !isset( $labelMap[$entityId] ) ) {
+			return null;
+		}
+		$term = new Term( 'en', $labelMap[$entityId] );
+		return $term;
+	}
+
+	/**
+	 * @param string $entity
+	 *
+	 * @return ItemId
+	 */
+	public function parse( $entity ) {
+		// TODO: Let properties be tested too
+		return new ItemId( $entity );
+	}
+
+	/**
+	 * @param string $entityId
+	 * @param string[] $classes
+	 * @param string $text
+	 *
+	 * @return string HTML
+	 */
+	public function buildEntityLink( $entityId, array $classes, $text ) {
+		$attr = [
+			'href' => 'https://www.wikidata.org/wiki/' . $entityId,
+			'classes' => implode( ' ', $classes )
+		];
+
+		return Html::rawElement( 'a', $attr, $text );
 	}
 
 }
