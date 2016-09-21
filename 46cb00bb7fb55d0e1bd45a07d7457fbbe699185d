@@ -16,6 +16,24 @@
       "revId": "46cb00bb7fb55d0e1bd45a07d7457fbbe699185d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_ae24cd08",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-21T14:48:11Z",
+      "side": 1,
+      "message": "Good question. We are currently using $.isArray in 30+ places in our code base. We can try to replace them all, when we do guarantee the browser support. But this must not be done in this patch.",
+      "parentUuid": "0e82f318_eebec5d0",
+      "revId": "46cb00bb7fb55d0e1bd45a07d7457fbbe699185d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
