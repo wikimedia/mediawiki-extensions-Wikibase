@@ -7,14 +7,6 @@
 	color: grey;
 }
 
-.wikibase-toolbar-item .wb-help-field-hint {
-	display: inline-block;
-	margin-left: 3px;
-	padding: 0;
-	text-decoration: none;
-	min-width: 11px;
-}
-
 .wikibase-toolbar-item .mw-collapsible-toggle {
 	background-position: right;
 	background-repeat: no-repeat;
