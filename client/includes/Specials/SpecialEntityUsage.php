@@ -4,16 +4,19 @@ namespace Wikibase\Client\Specials;
 
 use HTMLForm;
 use Html;
-use InvalidArgumentException;
 use Linker;
 use QueryPage;
 use Skin;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
- * Get usage of any given entity.
+ * A special page that lists client wiki pages that use a given entity ID from the repository, and
+ * which aspects each page uses.
  *
  * @since 0.5
  *
@@ -23,9 +26,14 @@ use Wikibase\DataModel\Entity\ItemId;
 class SpecialEntityUsage extends QueryPage {
 
 	/**
-	 * @var ItemId|null
+	 * @var EntityIdParser
 	 */
-	private $entityId;
+	private $idParser;
+
+	/**
+	 * @var EntityId|null
+	 */
+	private $entityId = null;
 
 	/**
 	 * @see SpecialPage::__construct
@@ -34,6 +42,9 @@ class SpecialEntityUsage extends QueryPage {
 	 */
 	public function __construct( $name = 'EntityUsage' ) {
 		parent::__construct( $name );
+
+		// TODO: Inject.
+		$this->idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 	}
 
 	/**
@@ -53,13 +64,16 @@ class SpecialEntityUsage extends QueryPage {
 		}
 	}
 
+	/**
+	 * @param string $subPage
+	 */
 	private function prepareParams( $subPage ) {
 		$entity = $this->getRequest()->getText( 'entity', $subPage );
 
 		if ( $entity ) {
 			try {
-				$this->entityId = new ItemId( $entity );
-			} catch ( InvalidArgumentException $ex ) {
+				$this->entityId = $this->idParser->parse( $entity );
+			} catch ( EntityIdParsingException $ex ) {
 				$this->getOutput()->addHTML(
 					Html::element(
 						'p',
@@ -76,7 +90,7 @@ class SpecialEntityUsage extends QueryPage {
 	/**
 	 * @see QueryPage::getPageHeader
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function getPageHeader() {
 		$formDescriptor = [
@@ -141,26 +155,36 @@ class SpecialEntityUsage extends QueryPage {
 	 * @see QueryPage::formatResult
 	 *
 	 * @param Skin $skin
-	 * @param object $result
+	 * @param object $row
 	 *
-	 * @return string
+	 * @return string HTML
 	 */
 	public function formatResult( $skin, $row ) {
 		global $wgContLang;
 
 		$title = Title::makeTitleSafe( $row->namespace, $row->title );
-		$aspects = $this->formatAspects( $row->aspects );
-		if ( $title instanceof Title ) {
-			$text = $wgContLang->convert( $title->getPrefixedText() );
-			return Linker::link( $title, htmlspecialchars( $text ) ) . ': ' . $aspects;
-		} else {
-			return Html::element( 'span', [ 'class' => 'mw-invalidtitle' ],
-				Linker::getInvalidTitleDescription( $this->getContext(), $row->namespace, $row->title ) );
+
+		if ( !$title ) {
+			return Html::element(
+				'span',
+				[ 'class' => 'mw-invalidtitle' ],
+				Linker::getInvalidTitleDescription(
+					$this->getContext(),
+					$row->namespace,
+					$row->title
+				)
+			);
 		}
+
+		return Linker::link(
+			$title,
+			htmlspecialchars( $wgContLang->convert( $title->getPrefixedText() ) )
+		) . ': ' . $this->formatAspects( $row->aspects );
 	}
 
 	/**
 	 * @param string $rowAspects
+	 *
 	 * @return string
 	 */
 	public function formatAspects( $rowAspects ) {
@@ -197,7 +221,7 @@ class SpecialEntityUsage extends QueryPage {
 	/**
 	 * @see QueryPage::linkParameters
 	 *
-	 * @return array
+	 * @return string[]
 	 */
 	public function linkParameters() {
 		return [ 'entity' => $this->entityId->getSerialization() ];
