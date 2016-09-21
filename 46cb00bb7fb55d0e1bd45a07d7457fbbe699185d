@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_eebec5d0",
+        "filename": "view/resources/wikibase/view/ViewFactory.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2016-09-21T14:06:10Z",
+      "side": 1,
+      "message": "do we really need jQuery to check if this is an array?\n\nwhat about !Array.isArray( userLanguages ) or some other way?",
+      "revId": "46cb00bb7fb55d0e1bd45a07d7457fbbe699185d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
