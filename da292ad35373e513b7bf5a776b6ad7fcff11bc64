@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_141167b1",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlSubscriptionLookupTest.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T23:05:26Z",
+      "side": 1,
+      "message": "to test that the method is really doing the right thing, there should be a row mapping dewiki so some other id, like Q7; and a row mapping perhaps enwiki to Q2.\n\nThe cases mapping enwiki to other IDs aren\u0027t really needed here i think.",
+      "revId": "da292ad35373e513b7bf5a776b6ad7fcff11bc64",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
