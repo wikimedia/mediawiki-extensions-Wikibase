@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_348cab37",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T22:36:01Z",
+      "side": 1,
+      "message": "Still needs a unit test??",
+      "revId": "3b143d1e63ceb9ecbe946f161e1e0fd51e30cd73",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
