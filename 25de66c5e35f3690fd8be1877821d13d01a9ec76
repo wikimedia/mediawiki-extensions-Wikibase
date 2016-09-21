@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_235556c6",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T11:39:32Z",
+      "side": 1,
+      "message": "This is not a red link! It\u0027s not that the target doesn\u0027t exist, the title is *invalid*, no Title object could be constructed.\n\nSure, you can add the aspects... if you want that, why not just add them? It\u0027s not more code than the FIXME line.\n\nOr turn the FIXME (indicating a problem with a definitive solution) with an XXX (something to think about)?",
+      "parentUuid": "0e82f318_8361a2d2",
+      "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_c882d996",
         "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I did not wanted to touch the tests in this patch. Feel free.",
       "parentUuid": "0e82f318_c882d996",
+      "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c3655aac",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T11:39:32Z",
+      "side": 1,
+      "message": "yea, just a thought",
+      "parentUuid": "0e82f318_c3447a4d",
       "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
