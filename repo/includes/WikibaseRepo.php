@@ -1696,6 +1696,9 @@ class WikibaseRepo {
 						// T138131
 						'hai',
 
+						// T137808
+						'mnc',
+
 						// T137809
 						'otk',
 					) )
