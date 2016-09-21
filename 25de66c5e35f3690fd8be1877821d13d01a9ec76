@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_63710e0b",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-21T12:47:04Z",
+      "side": 1,
+      "message": "It\u0027s more code because it needs a test.\n\nI wonder why this can\u0027t be a red link. As a user, this is what I would expect.\n\nI see that many, many other special pages do the exact same, but arrange the code a bit different. I find this more obvious:\n\n$title \u003d Title::makeTitleSafe( … );\nif ( !$title ) {\n    return … Linker::getInvalidTitleDescription( … ) …;\n}\n// Proceed\n\nI will rework my patch accordingly.",
+      "parentUuid": "0e82f318_235556c6",
+      "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_c882d996",
         "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
         "patchSetId": 1
