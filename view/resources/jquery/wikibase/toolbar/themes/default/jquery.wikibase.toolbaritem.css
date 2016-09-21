@@ -7,7 +7,7 @@
 	color: grey;
 }
 
-.wikibase-toolbar-item .mw-help-field-hint {
+.wikibase-toolbar-item .wb-help-field-hint {
 	display: inline-block;
 	margin-left: 3px;
 	padding: 0;
