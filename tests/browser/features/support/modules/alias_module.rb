@@ -16,7 +16,7 @@ module AliasPage
   text_field(:aliases_input_empty, xpath: "//div[contains(@class, 'wikibase-aliasesview')]//li[contains(@class, 'tagadata-choice-empty')]//input")
   text_field(:aliases_input_modified, xpath: "//div[contains(@class, 'wikibase-aliasesview')]//li[contains(@class, 'tagadata-choice-modified')]//input")
   text_field(:aliases_input_equal, xpath: "//div[contains(@class, 'wikibase-aliasesview')]//li[contains(@class, 'tagadata-choice-equal')]//input")
-  span(:aliases_help_field, css: 'div.wikibase-aliasesview span.mw-help-field-hint')
+  span(:aliases_help_field, css: 'div.wikibase-aliasesview span.wb-help-field-hint')
 
   # aliases methods
   def aliases_array

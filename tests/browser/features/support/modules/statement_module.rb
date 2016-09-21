@@ -23,7 +23,7 @@ module StatementPage
   a(:save_statement_disabled, css: '.wikibase-statementlistview div.listview-item span.wikibase-toolbar-button-save.wikibase-toolbarbutton-disabled > a')
   a(:cancel_statement, css: '.wikibase-statementlistview div.listview-item span.wikibase-toolbar-button-cancel:not(.wikibase-toolbarbutton-disabled) > a')
   a(:cancel_statement_disabled, css: '.wikibase-statementlistview div.listview-item span.wikibase-toolbar-button-cancel.wikibase-toolbarbutton-disabled > a')
-  span(:statement_help_field, css: 'div.wikibase-statementlistview span.mw-help-field-hint')
+  span(:statement_help_field, css: 'div.wikibase-statementlistview span.wb-help-field-hint')
   div(:claim_edit_mode, css: '.wb-claim-section div.wb-edit')
   textarea(:claim_value_input_field, css: 'div.wikibase-statementview-mainsnak .valueview-input')
 
