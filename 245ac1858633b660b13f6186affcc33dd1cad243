@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_b4f25bcb",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T22:36:01Z",
+      "side": 1,
+      "message": "yes, that would be fine.",
+      "parentUuid": "0e82f318_b116ed4b",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f7e6a312",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 6
@@ -156,6 +174,24 @@
       "side": 1,
       "message": "hmm, I see it now. What do you think if we keep it this way so we can add more hooks handler later? See the client, aude wrote that for adding link to entity this way but I got it and added entity usage without much trouble.",
       "parentUuid": "0e82f318_3b59fe39",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_14b967e6",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T22:36:01Z",
+      "side": 1,
+      "message": "If we want to use the same hook for something else, we should write another handler class, not put unrelated logic in the same class. \n\nBut this is not a blocker. Just seems a little awkward. If you want, we can leave it as it is.",
+      "parentUuid": "0e82f318_915e4916",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -262,6 +298,24 @@
       "side": 1,
       "message": "Yeah, I mocked a SiteLookup which is abstract. Got it fixed now :)",
       "parentUuid": "0e82f318_fb75a693",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_94cc778e",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T22:36:01Z",
+      "side": 1,
+      "message": "good :)",
+      "parentUuid": "0e82f318_91bd6919",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
