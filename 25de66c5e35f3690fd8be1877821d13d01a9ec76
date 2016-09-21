@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_8878e1c0",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T10:45:49Z",
+      "side": 1,
+      "message": "If this happens, something is *seriously* wrong. I don\u0027t think we need to worry about the aspects.",
+      "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c882d996",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T10:45:49Z",
+      "side": 1,
+      "message": "Would be good to have a test that uses a property ID, just to make sure that also works.",
+      "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
