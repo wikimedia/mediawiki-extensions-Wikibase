@@ -7,8 +7,10 @@ use IContextSource;
 use Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\NamespaceChecker;
 
 /**
@@ -44,13 +46,32 @@ class InfoActionHookHandler {
 	 */
 	private $usageLookup;
 
-	public function __construct( NamespaceChecker $namespaceChecker, RepoLinker $repoLinker,
-		SiteLinkLookup $siteLinkLookup, $siteId, UsageLookup $usageLookup ) {
+	/**
+	 * @var LanguageFallbackLabelDescriptionLookupFactory
+	 */
+	private $labelDescriptionLookupFactory;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $idParser;
+
+	public function __construct(
+		NamespaceChecker $namespaceChecker,
+		RepoLinker $repoLinker,
+		SiteLinkLookup $siteLinkLookup,
+		$siteId,
+		UsageLookup $usageLookup,
+		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		EntityIdParser $idParser
+	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->repoLinker = $repoLinker;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
 		$this->usageLookup = $usageLookup;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
+		$this->idParser = $idParser;
 	}
 
 	/**
@@ -165,12 +186,25 @@ class InfoActionHookHandler {
 			];
 		}
 		$output = '';
-
+		$entityIds = array_map(
+			function( $entityId ) {
+				return $this->idParser->parse( $entityId );
+			},
+			array_keys( $usageAspectsByEntity )
+		);
+		$labelLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
+			$context->getLanguage(),
+			$entityIds
+		);
 		foreach ( $usageAspectsByEntity as $entityId => $aspects ) {
+			$label = $labelLookup->getLabel( $this->idParser->parse( $entityId ) );
+			$label = $label === null ? $entityId : $entityId;
+
 			$output .= Html::rawElement( 'li', [],
 				$this->repoLinker->buildEntityLink(
 					$entities[$entityId],
-					array( 'external' )
+					[ 'external' ],
+					$label
 				)
 			);
 
