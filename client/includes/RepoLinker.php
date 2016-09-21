@@ -118,11 +118,15 @@ class RepoLinker {
 	 *
 	 * @param EntityId $entityId
 	 * @param array $classes
+	 * @param string title
 	 *
 	 * @return string (html)
 	 */
-	public function buildEntityLink( EntityId $entityId, array $classes = array() ) {
-		$title = $entityId->getSerialization();
+	public function buildEntityLink( EntityId $entityId, array $classes = [], $title = null ) {
+		if ( $title === null ) {
+			$title = $entityId->getSerialization();
+		}
+
 		$class = 'wb-entity-link';
 
 		if ( $classes !== array() ) {
