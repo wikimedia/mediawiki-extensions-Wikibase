@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_db49c26b",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T17:19:57Z",
+      "side": 1,
+      "message": "Yes, I was suggesting to add it!",
+      "parentUuid": "0e82f318_e3641e48",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f7e6a312",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 6
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "That\u0027s how the hook works https://www.mediawiki.org/wiki/Manual:Hooks/InfoAction\nwe manipulate the pageinfo array",
       "parentUuid": "0e82f318_f7e6a312",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_3b59fe39",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T17:19:57Z",
+      "side": 1,
+      "message": "Sure, that\u0027s how the hook works, but that doesn\u0027t need to be how InfoActionHandler works. I think InfoActionHandler  should just return an HTML string and not know about the array. Wouldn\u0027t that work?",
+      "parentUuid": "0e82f318_b796ebf1",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -160,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_fb75a693",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T17:19:57Z",
+      "side": 1,
+      "message": "Hm.... that\u0027s veeeeery strange... it really indicates an error, but probably not upstream. Mocking the wrong class, perhaps?",
+      "parentUuid": "0e82f318_d7719fde",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_37967b50",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -195,6 +249,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_3b701ea0",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T17:19:57Z",
+      "side": 1,
+      "message": "Say it\u0027s an array of HTML string and point to some place where more details can be found.",
+      "parentUuid": "0e82f318_7759d35c",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_57a3efa7",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -224,6 +296,24 @@
       "side": 1,
       "message": "We are not reading anything from user not sure how that can be a XSS vulnerability. I explained above.",
       "parentUuid": "0e82f318_57a3efa7",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_5bb3124c",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T17:19:57Z",
+      "side": 1,
+      "message": "It\u0027s just best practice. Always be very explicit about which things are HTML or SQL etc, and which things are plain strings. If not explicitly told otherwise, always assume that a string is plain text and needs escaping.",
+      "parentUuid": "0e82f318_1729779a",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
