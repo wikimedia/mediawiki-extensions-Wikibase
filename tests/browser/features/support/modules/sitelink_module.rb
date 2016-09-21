@@ -33,7 +33,7 @@ module SitelinkPage
   a(:edit_sitelink_link_en, css: "div[data-wb-sitelinks-group='wikipedia'] table tr.wikibase-sitelinkview-enwiki span.wikibase-toolbar-button-edit:not(.wikibase-toolbarbutton-disabled) > a")
   a(:edit_sitelink_link_en_disabled, css: "div[data-wb-sitelinks-group='wikipedia'] table tr.wikibase-sitelinkview-enwiki span.wikibase-toolbar-button-edit.wikibase-toolbarbutton-disabled > a")
   h1(:article_title, xpath: "//h1[contains(@class, 'firstHeading')]")
-  span(:sitelink_help_field, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.mw-help-field-hint")
+  span(:sitelink_help_field, css: "div[data-wb-sitelinks-group='wikipedia'] .wikibase-toolbar-container span.wb-help-field-hint")
 
   indexed_property(:sitelinks_form, [
     [:text_field, :site_id_input_field, { css: "div[data-wb-sitelinks-group='wikipedia'] ul li:nth-child(%s) span.wikibase-sitelinkview-siteid input" }],

@@ -5,3 +5,22 @@
 .wikibase-edittoolbar-container > .wikibase-toolbar {
 	padding-left: 0;
 }
+
+/* TODO: For now this is a 1:1 copy from core's resources/src/mediawiki.legacy/shared.css. */
+.wb-help-field-hint {
+	display: none;
+	margin-left: 2px;
+	margin-bottom: -8px;
+	padding: 0 0 0 15px;
+	background-image: url( images/help-question.gif );
+	background-position: left center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	font-size: .8em;
+	text-decoration: underline;
+	color: #0645ad;
+}
+
+.wb-help-field-hint:hover {
+	background-image: url( images/help-question-hover.gif );
+}
