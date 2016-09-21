@@ -8,7 +8,11 @@ use Title;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\DataModel\Term;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\NamespaceChecker;
@@ -132,12 +136,32 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 				->will( $this->returnValue( $entityUsage ) );
 		}
 
+		$labelDescriptionLookupFactory = $this->getMockBuilder(
+			LanguageFallbackLabelDescriptionLookupFactory::class
+		)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$labelDescriptionLookupFactory->expects( $this->any() )
+			->method( 'newLabelDescriptionLookup' )
+			->will( $this->returnCallback( [ $this, 'newLabelDescriptionLookup' ] ) );
+
+		$idParser = $this->getMockBuilder( EntityIdParser::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$idParser->expects( $this->any() )
+			->method( 'parse' )
+			->will( $this->returnCallback( [ $this, 'parse' ] ) );
+
 		$hookHandler = new InfoActionHookHandler(
 			$namespaceChecker,
 			$repoLinker,
 			$siteLinkLookup,
 			'enwiki',
-			$sqlUsageTracker
+			$sqlUsageTracker,
+			$labelDescriptionLookupFactory,
+			$idParser
 		);
 
 		return $hookHandler;
@@ -169,6 +193,41 @@ class InfoActionHookHandlerTest extends \PHPUnit_Framework_TestCase {
 		$context->setLanguage( 'en' );
 
 		return $context;
+	}
+
+	/**
+	 * @return LabelDescriptionLookup
+	 */
+	public function newLabelDescriptionLookup() {
+		$lookup = $this->getMockBuilder( LabelDescriptionLookup::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$lookup->expects( $this->any() )
+			->method( 'getLabel' )
+			->will( $this->returnCallback( [ $this, 'getLabel' ] ) );
+
+		return $lookup;
+	}
+
+	/**
+	 * @param EntityId $entity
+	 *
+	 * @return string
+	 */
+	public function getLabel( $entity ) {
+		$term = new Term( 'en', $entity->getSerialization() );
+		return $term;
+	}
+
+	/**
+	 * @param string $entity
+	 *
+	 * @return ItemId
+	 */
+	public function parse( $entity ) {
+		// TODO: Let properties be tested too
+		return new ItemId( $entity );
 	}
 
 }
