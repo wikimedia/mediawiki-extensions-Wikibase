@@ -21,10 +21,6 @@ use Wikibase\Client\Specials\SpecialEntityUsage;
  */
 class SpecialEntityUsageTest extends SpecialPageTestBase {
 
-	protected function setUp() {
-		parent::setUp();
-	}
-
 	public function reallyDoQueryMock() {
 		$rows = [
 			(object)[
@@ -36,10 +32,13 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 				'eu_entity_id' => 'Q3',
 			],
 		];
-		$res = new FakeResultWrapper( $rows );
-		return $res;
+
+		return new FakeResultWrapper( $rows );
 	}
 
+	/**
+	 * @return SpecialEntityUsage
+	 */
 	protected function newSpecialPage() {
 		$specialPage = $this->getMockBuilder( SpecialEntityUsage::class )
 			->setMethods( [ 'reallyDoQuery' ] )
