@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_833a82be",
+        "filename": "client/includes/Specials/SpecialEntityUsage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-21T11:17:10Z",
+      "side": 1,
+      "message": "But we do have the aspects at this point. Why not display them? We do have the title and everything. The only difference should be that the link is red.",
+      "parentUuid": "0e82f318_8878e1c0",
+      "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_c882d996",
         "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2016-09-21T10:45:49Z",
       "side": 1,
       "message": "Would be good to have a test that uses a property ID, just to make sure that also works.",
+      "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c3447a4d",
+        "filename": "client/tests/phpunit/includes/Specials/SpecialEntityUsageTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-21T11:17:10Z",
+      "side": 1,
+      "message": "I did not wanted to touch the tests in this patch. Feel free.",
+      "parentUuid": "0e82f318_c882d996",
       "revId": "25de66c5e35f3690fd8be1877821d13d01a9ec76",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
