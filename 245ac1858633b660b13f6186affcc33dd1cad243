@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_e3641e48",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "Undone: Call to undefined method Wikibase\\SqlStore::getSubscriptionLookup()\n\nI checked everything. Couldn\u0027t find getSubscriptionLookup",
+      "parentUuid": "0e82f318_d79b5f19",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f7e6a312",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 6
@@ -229,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_c3eb9a9e",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_f7b4e3e6",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_d7fa7f72",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -240,6 +276,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "Please do not rely on the title being the same as the ID. Use an EntityIdLookup instead.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_e38c1e3d",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_d7fa7f72",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -438,6 +492,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_e32fbef1",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_37cafb4a",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_17cdf762",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 6
@@ -449,6 +521,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "Using a TitleFactory here would make testing simpler. But I think TitleFactory is still in client... perhaps it\u0027s time to move it. Maybe even into core...",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_a3a9467a",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "TitleFactory is in client but repo uses it in LabelPrefetchHookHandlers.php. Do you think It\u0027s okay to do it in this case too?",
+      "parentUuid": "0e82f318_17cdf762",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -472,6 +562,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_43e96ab2",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_d7e35fd2",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f73ea325",
         "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
         "patchSetId": 6
@@ -483,6 +591,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "This cannot be null. Also, these should be EntityIds, not strings.\n\nAlso, I see no use case for checking multiple entities at once.\n\nThe interface should be based on the actual needs of the caller, not on the underlying data, and only to a small extent on our guess what we might need in the future.",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_8340c2a9",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_f73ea325",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -506,6 +632,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_6343ceb6",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_d7399f3f",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_37f11b93",
         "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
         "patchSetId": 6
@@ -517,6 +661,24 @@
       "writtenOn": "2016-09-20T19:17:07Z",
       "side": 1,
       "message": "Better name: getSubscribers",
+      "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_4316caaa",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-21T13:32:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_37f11b93",
       "revId": "245ac1858633b660b13f6186affcc33dd1cad243",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
