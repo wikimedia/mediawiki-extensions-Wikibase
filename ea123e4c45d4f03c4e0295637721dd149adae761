@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_b4d41bee",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlSubscriptionLookupTest.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-21T22:47:16Z",
+      "side": 1,
+      "message": "Please make a separate test method for this. If you have to copy the setup part of the test, do that, that\u0027s fine for a test.",
+      "revId": "ea123e4c45d4f03c4e0295637721dd149adae761",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
