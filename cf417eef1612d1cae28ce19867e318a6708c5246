@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_b575f2ca",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-22T17:56:17Z",
+      "side": 1,
+      "message": "$badgeId??\n\n  $label \u003d $label \u003d\u003d\u003d null ? $entityId : $label;",
+      "revId": "cf417eef1612d1cae28ce19867e318a6708c5246",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_155dde4a",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-22T17:56:17Z",
+      "side": 1,
+      "message": "\"$title\" is generally a page title in MediaWiki. This parameter is called $text in formatLink, so I think it should be called $text here. \n\nBefore, the local variable was called $title - same problem, but not part of the interface, so not such a big deal. I think using consistent names for parameters across methods is important.",
+      "revId": "cf417eef1612d1cae28ce19867e318a6708c5246",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
