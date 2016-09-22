@@ -44,17 +44,6 @@
 			searchContaining.setLink( getHref( $form ) + '&fulltext=1' );
 		}
 
-		/**
-		 * Removes the native search box suggestion list.
-		 *
-		 * @param {HTMLElement} input Search box node
-		 */
-		function removeSuggestionContext( input ) {
-			// Native fetch() updates/re-sets the data attribute with the suggestion context.
-			$.data( input, 'suggestionsContext' ).config.fetch = function() {};
-			$.removeData( input, 'suggestionsContext' );
-		}
-
 		var suggestionsPlaceholder = new $.ui.ooMenu.CustomItem(
 			$( '<div/>' ).append( $.createSpinner() )
 		);
@@ -81,19 +70,14 @@
 		$input.before( $hiddenInput );
 
 		$input
-		.one( 'focus', function( event ) {
-			if ( $.data( this, 'suggestionsContext' ) ) {
-				removeSuggestionContext( this );
-			} else {
-				// Suggestion context might not be initialized when focusing the search box while
-				// the page is still rendered.
-				var $input = $( this );
-				$input.on( 'keypress.entitysearch', function( event ) {
-					if ( $.data( this, 'suggestionsContext' ) ) {
-						removeSuggestionContext( this );
-						$input.off( '.entitysearch' );
-					}
-				} );
+		.one( 'eachchange.entitysearch', function() {
+			// Removes the native search box suggestion list.
+			var context = $.data( this, 'suggestionsContext' );
+
+			if ( context ) {
+				// Native fetch() updates/re-sets the data attribute with the suggestion context.
+				context.config.fetch = function() {};
+				$.removeData( this, 'suggestionsContext' );
 			}
 		} )
 		.entitysearch( {
