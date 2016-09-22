@@ -22,7 +22,6 @@ use Wikibase\DataModel\Statement\Statement;
  *
  * @group Wikibase
  * @group WikibaseDataModel
- * @group ByPropertyIdArrayTest
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
