@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"V.narsikar"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "रिकामे",
+	"valueview-expert-globecoordinateinput-precision": "अचूकता:",
+	"valueview-expert-globecoordinateinput-customprecision": "विशेष ($1)",
+	"valueview-expert-timeinput-precision": "अचूकता:",
+	"valueview-expert-timeinput-calendar": "दिनदर्शिका:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
+	"valueview-expertextender-languageselector-label": "भाषा (आवश्यक):",
+	"valueview-expertextender-unitsuggester-label": "एकक (वैकल्पिक):",
+	"valueview-preview-label": "असे दर्शविल्या जाईल:",
+	"valueview-preview-novalue": "वैध किंमत ओळखल्या गेली नाही",
+	"valueview-listrotator-manually": "मानवीकृत स्थापा"
+}

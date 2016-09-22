@@ -3,7 +3,8 @@
 		"authors": [
 			"Amire80",
 			"Orsa",
-			"Guycn2"
+			"Guycn2",
+			"ערן"
 		]
 	},
 	"valueview-desc": "רכיבי ממשק להצגה ועריכה של ערכי נתונים",
@@ -18,6 +19,7 @@
 	"valueview-expert-timeinput-precision": "דיוק:",
 	"valueview-expert-timeinput-calendar": "לוח שנה:",
 	"valueview-expertextender-calendarhint-gregorian": "(לוח שנה גאורגי)",
+	"valueview-expertextender-calendarhint-julian": "(לוח השנה היוליאני)",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "שפה (חובה):",
 	"valueview-expertextender-unitsuggester-label": "יחידה (אופציונלי):",
