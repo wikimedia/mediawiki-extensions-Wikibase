@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_fbf03bd8",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-22T19:38:42Z",
+      "side": 1,
+      "message": "$label \u003d $label \u003d\u003d\u003d null ? $entityId : $label;",
+      "revId": "0ae4cdfe20918e70c054daa5018518c26f57818c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
