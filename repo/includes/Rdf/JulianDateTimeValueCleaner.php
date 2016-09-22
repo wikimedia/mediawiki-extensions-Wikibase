@@ -54,21 +54,27 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 		} catch ( IllegalValueException $e ) {
 			return null;
 		}
+
 		// We accept here certain precision loss since we will need to do calculations anyway,
 		// and we can't calculate with dates that don't fit in int.
 		$y = $minus ? -(int)$y : (int)$y;
 
 		// cal_to_jd needs int year
 		// If it's too small it's fine, we'll get 0
-		// If it's too big, it doesn't make sense anyway,
-		// since who uses Julian with day precision in year 2 billion?
 		$jd = cal_to_jd( CAL_JULIAN, $m, $d, (int)$y );
 		if ( $jd == 0 ) {
-			// that means the date is broken
-			return null;
+			// Fall back to >= 1 year precision when Julian to Gregorian conversion is not possible.
+			return $this->cleanupGregorianValue( $dateValue, TimeValue::PRECISION_YEAR );
 		}
+
 		// PHP API for Julian/Gregorian conversions is kind of awful
-		list( $m, $d, $y ) = explode( '/', jdtogregorian( $jd ) );
+		$gregorian = jdtogregorian( $jd );
+		if ( $gregorian === '0/0/0' ) {
+			// Fall back to >= 1 year precision when Julian to Gregorian conversion is not possible.
+			return $this->cleanupGregorianValue( $dateValue, TimeValue::PRECISION_YEAR );
+		}
+
+		list( $m, $d, $y ) = explode( '/', $gregorian );
 
 		if ( $this->xsd11 && $y < 0 ) {
 			// To make year match XSD 1.1 we need to bump up the negative years by 1
