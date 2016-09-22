@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_602659cb",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2664
+      },
+      "writtenOn": "2016-09-22T14:36:08Z",
+      "side": 1,
+      "message": "this change is obsolete I suppose",
+      "range": {
+        "startLine": 6,
+        "startChar": 3,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "0286877e30b0e6bac0a528cd2b58e5fac61f3ad6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
