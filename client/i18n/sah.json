@@ -1,10 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"HalanTul"
+			"HalanTul",
+			"Туллук"
 		]
 	},
 	"tooltip-t-wikibase": "Репозиторийга сигэнии",
+	"apihelp-query+wblistentityusage-description": "Бу ID аадырыһы туттубут сирэйдэри көрдөрөр",
+	"apihelp-query+wblistentityusage-example-simple": "<kbd>Q2</kbd> коду туттар сирэйдэри көр",
+	"apihelp-query+wblistentityusage-example-url": "<kbd>Q2</kbd> коду URL аадырыһын учуоттаан туран туттар сирэйдэри көр",
+	"apihelp-query+wblistentityusage-example-aspect": "<kbd>Q2</kbd> коду туттар уонна киниэхэ сигэнэр сирэйдэри көр",
 	"wikibase-comment-update": "{{WBREPONAME}} уларыйда",
 	"wikibase-dataitem": "{{WBREPONAME}} кэрискэ",
 	"wikibase-editlinks": "Сигэни уларыт",
@@ -14,5 +19,9 @@
 	"wikibase-rc-hide-wikidata-show": "Көрдөр",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}: уларыт",
+	"entityusage": "Киэби туттуу",
+	"entityusage-summary": "Бу сирэй объекка (холобура, Q42) сигэнэр сирэйдэр тиһиктэрэ буолар.  Тиһиктэр сирэй ID-та аччыырынан көстеллер, саҥа сирэйдэр бастакынан көстеллер",
+	"wikibase-entityusage-legend": "Бу киэби туттар сирэйдэр тиһиктэрэ",
+	"wikibase-entityusage-submit": "Баар сирэйдэри көрдөр",
 	"wikibase-otherprojects": "Атын бырайыактарга"
 }

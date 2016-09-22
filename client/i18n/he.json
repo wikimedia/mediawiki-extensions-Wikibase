@@ -92,6 +92,8 @@
 	"wikibase-pageswithbadges-badge": "סמל:",
 	"wikibase-pageswithbadges-submit": "הצגת דפים",
 	"entityusage": "שימוש בישות",
+	"entityusage-summary": "הדף הזה מציג רשימת דפים שמשתמשים בישות הנתונה (למשל Q42). הרשימה ממוינת לפי סדר יורד של מזהה דף, כך שדפים חדשים יותר מוצגים תחילה.",
+	"wikibase-entityusage-invalid-id": "$1 הוא לא מזהה ישות תקין",
 	"wikibase-entityusage-legend": "רשימת דפים המשתמשים בישות הנתונה",
 	"wikibase-entityusage-entity": "ישות:",
 	"wikibase-entityusage-submit": "הצגת הדפים",
