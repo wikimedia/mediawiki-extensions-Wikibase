@@ -4,6 +4,8 @@ namespace Wikibase\DataModel\Tests\Entity;
 
 use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
+use InvalidArgumentException;
+use RuntimeException;
 
 /**
  * @covers Wikibase\DataModel\Entity\PropertyId
@@ -21,24 +23,27 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider idSerializationProvider
 	 */
-	public function testCanConstructId( $idSerialization ) {
+	public function testCanConstructId( $idSerialization, $normalizedIdSerialization ) {
 		$id = new PropertyId( $idSerialization );
 
 		$this->assertEquals(
-			strtoupper( $idSerialization ),
+			$normalizedIdSerialization,
 			$id->getSerialization()
 		);
 	}
 
 	public function idSerializationProvider() {
 		return array(
-			array( 'p1' ),
-			array( 'p100' ),
-			array( 'p1337' ),
-			array( 'p31337' ),
-			array( 'P31337' ),
-			array( 'P42' ),
-			array( 'P2147483647' ),
+			array( 'p1', 'P1' ),
+			array( 'p100', 'P100' ),
+			array( 'p1337', 'P1337' ),
+			array( 'p31337', 'P31337' ),
+			array( 'P31337', 'P31337' ),
+			array( 'P42', 'P42' ),
+			array( ':P42', 'P42' ),
+			array( 'foo:P42', 'foo:P42' ),
+			array( 'foo:bar:p42', 'foo:bar:P42' ),
+			array( 'P2147483647', 'P2147483647' ),
 		);
 	}
 
@@ -46,7 +51,7 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidIdSerializationProvider
 	 */
 	public function testCannotConstructWithInvalidSerialization( $invalidSerialization ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		new PropertyId( $invalidSerialization );
 	}
 
@@ -133,7 +138,7 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider invalidNumericIdProvider
 	 */
 	public function testNewFromNumberWithInvalidNumericId( $number ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->setExpectedException( InvalidArgumentException::class );
 		PropertyId::newFromNumber( $number );
 	}
 
@@ -145,6 +150,11 @@ class PropertyIdTest extends PHPUnit_Framework_TestCase {
 			array( 2147483648 ),
 			array( '2147483648' ),
 		);
+	}
+
+	public function testGetNumericIdThrowsExceptionOnForeignIds() {
+		$this->setExpectedException( RuntimeException::class );
+		( new PropertyId( 'foo:P42' ) )->getNumericId();
 	}
 
 }
