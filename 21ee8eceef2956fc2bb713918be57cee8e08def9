@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_55659640",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-22T17:36:09Z",
+      "side": 1,
+      "message": "This will use the entity namespaces as locally configured. To have a test setup that works independently of the local setup, it would be better to mock this service.",
+      "revId": "21ee8eceef2956fc2bb713918be57cee8e08def9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f56cca33",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-22T17:36:09Z",
+      "side": 1,
+      "message": "This assumes items live in the main namespace. They don\u0027t always do that, and in particular, they don\u0027t in the setup that Jenkins uses. If we force NS_MAIN here, we have to mock the EntityNamespaceLookup above. Alternatively, we look up an use the actual item namespace here.",
+      "revId": "21ee8eceef2956fc2bb713918be57cee8e08def9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
