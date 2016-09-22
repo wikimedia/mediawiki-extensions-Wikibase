@@ -70,6 +70,30 @@
       "revId": "0286877e30b0e6bac0a528cd2b58e5fac61f3ad6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_b2418810",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2016-09-22T15:09:14Z",
+      "side": 1,
+      "message": "I see no harm in mentioning a contributor who helped clarify the usage of these messages.",
+      "parentUuid": "0e82f318_f20a2021",
+      "range": {
+        "startLine": 6,
+        "startChar": 3,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "0286877e30b0e6bac0a528cd2b58e5fac61f3ad6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
