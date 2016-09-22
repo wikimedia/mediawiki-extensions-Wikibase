@@ -86,7 +86,7 @@ class DateTimeValueCleaner {
 			// If we have year's or finer precision, to make year match XSD 1.1 we
 			// need to bump up the negative years by 1
 			// Note that $y is an absolute value here.
-			$y = (string)( (int)$y - 1 );
+			$y = number_format( (float)$y - 1, 0, '', '' );
 			if ( $y == "0" ) {
 				$minus = "";
 			}
