@@ -88,6 +88,7 @@
 	"wikibase-pageswithbadges-badge": "Distintivo:",
 	"wikibase-pageswithbadges-submit": "Mostrar as páxinas",
 	"entityusage": "Uso da entidade",
+	"entityusage-summary": "Esta páxina lista páxinas que usan a entidade indicada (p.ex. Q42). A lista está ordenada de forma descendente por identificador de páxina, polo que as páxinas máis novas aparecen ó comezo.",
 	"wikibase-entityusage-invalid-id": "$1 non é un identificador de entidade válido",
 	"wikibase-entityusage-legend": "Lista de páxinas que usan unha entidade dada",
 	"wikibase-entityusage-entity": "Entidade:",

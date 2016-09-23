@@ -62,6 +62,7 @@
 	"wikibase-entityusage-submit": "Säite weisen",
 	"wikibase-pageinfo-entity-id": "ID vum {{WBREPONAME}}-Element",
 	"wikibase-pageinfo-entity-id-none": "Keng",
+	"wikibase-pageinfo-entity-usage-S": "Link vum Site",
 	"wikibase-pageinfo-entity-usage-L": "Etikett: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-otherprojects": "An anere Projeten",
