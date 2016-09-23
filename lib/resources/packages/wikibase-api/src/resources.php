@@ -8,65 +8,65 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
+	return [
 
-		'wikibase.api.__namespace' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.api.__namespace' => $moduleTemplate + [
+			'scripts' => [
 				'namespace.js'
-			),
-		),
+			],
+		],
 
-		'wikibase.api.FormatValueCaller' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.api.FormatValueCaller' => $moduleTemplate + [
+			'scripts' => [
 				'FormatValueCaller.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'dataValues.DataValue',
 				'wikibase.api.__namespace',
 				'wikibase.api.RepoApiError',
-			)
-		),
+			]
+		],
 
-		'wikibase.api.getLocationAgnosticMwApi' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.api.getLocationAgnosticMwApi' => $moduleTemplate + [
+			'scripts' => [
 				'getLocationAgnosticMwApi.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'mediawiki.api',
 				'mediawiki.ForeignApi',
 				'wikibase.api.__namespace',
-			),
-		),
+			],
+		],
 
-		'wikibase.api.ParseValueCaller' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.api.ParseValueCaller' => $moduleTemplate + [
+			'scripts' => [
 				'ParseValueCaller.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.api.__namespace',
 				'wikibase.api.RepoApiError',
-			)
-		),
+			]
+		],
 
-		'wikibase.api.RepoApi' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.api.RepoApi' => $moduleTemplate + [
+			'scripts' => [
 				'RepoApi.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.api.__namespace',
-			),
-		),
+			],
+		],
 
-		'wikibase.api.RepoApiError' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.api.RepoApiError' => $moduleTemplate + [
+			'scripts' => [
 				'RepoApiError.js',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-error-unexpected',
 				'wikibase-error-save-generic',
 				'wikibase-error-remove-generic',
@@ -74,13 +74,13 @@ return call_user_func( function() {
 				'wikibase-error-remove-timeout',
 				'wikibase-error-ui-no-external-page',
 				'wikibase-error-ui-edit-conflict',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'util.inherit',
 				'wikibase.api.__namespace',
-			),
-		),
+			],
+		],
 
-	);
+	];
 
 } );

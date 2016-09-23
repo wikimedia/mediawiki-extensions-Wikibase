@@ -10,34 +10,34 @@ return call_user_func( function() {
 	preg_match( '+' . preg_quote( DIRECTORY_SEPARATOR ) . '(?:vendor|extensions)'
 		. preg_quote( DIRECTORY_SEPARATOR ) . '.*+', __DIR__, $remoteExtPath );
 
-	$moduleTemplate = array(
+	$moduleTemplate = [
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => '..' . $remoteExtPath[0],
-	);
+	];
 
-	return array(
-		'wikibase.api.RepoApi.tests' => $moduleTemplate + array(
-			'scripts' => array(
+	return [
+		'wikibase.api.RepoApi.tests' => $moduleTemplate + [
+			'scripts' => [
 				'RepoApi.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.api.getLocationAgnosticMwApi',
 				'wikibase.api.RepoApi',
-			),
-		),
+			],
+		],
 
-		'wikibase.api.RepoApiError.tests' => $moduleTemplate + array(
-			'scripts' => array(
+		'wikibase.api.RepoApiError.tests' => $moduleTemplate + [
+			'scripts' => [
 				'RepoApiError.tests.js',
-			),
-			'dependencies' => array(
+			],
+			'dependencies' => [
 				'wikibase.api.RepoApiError',
-			),
-			'messages' => array(
+			],
+			'messages' => [
 				'wikibase-error-unexpected',
 				'wikibase-error-remove-timeout',
-			),
-		),
-	);
+			],
+		],
+	];
 
 } );
