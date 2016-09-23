@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_120c0945",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-23T20:00:34Z",
+      "side": 1,
+      "message": "this returns a Term object, not a string.",
+      "revId": "7f0e70cf30f3bbeef077ba5c70a72626c5f6ed21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_0d106a52",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-23T20:00:34Z",
+      "side": 1,
+      "message": "$text \u003d $label \u003d\u003d\u003d null ? $entityId : $label-\u003egetText();\n\n...because $label is a Term object.",
+      "revId": "7f0e70cf30f3bbeef077ba5c70a72626c5f6ed21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_2d0b6e27",
+        "filename": "client/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-23T20:00:34Z",
+      "side": 1,
+      "message": "$text, not $label",
+      "revId": "7f0e70cf30f3bbeef077ba5c70a72626c5f6ed21",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
