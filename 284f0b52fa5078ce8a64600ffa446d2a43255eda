@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_b987a813",
+        "filename": "client/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-23T08:17:36Z",
+      "side": 1,
+      "message": "Why is this user name here?",
+      "revId": "284f0b52fa5078ce8a64600ffa446d2a43255eda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_d98a9c1b",
+        "filename": "lib/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-23T08:17:36Z",
+      "side": 1,
+      "message": "Why is this user name here?",
+      "revId": "284f0b52fa5078ce8a64600ffa446d2a43255eda",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

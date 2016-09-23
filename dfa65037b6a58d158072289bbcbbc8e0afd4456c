@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_f98040fb",
+        "filename": "repo/i18n/en.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-09-23T08:17:36Z",
+      "side": 0,
+      "message": "This is not an improvement. According to https://www.mediawiki.org/wiki/Localisation#.E2.80.A6on_user_names_via_GENDER there is no need to remove this.",
+      "revId": "dfa65037b6a58d158072289bbcbbc8e0afd4456c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
