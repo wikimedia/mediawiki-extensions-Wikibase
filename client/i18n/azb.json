@@ -9,6 +9,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "آیتمه باغلی وئری مخزنی ایله ایلگی‌سی وار",
+	"wikibase-after-page-move": "سیز دیل باغلانتیلاری‌نین داشینمیش صفحه‌ده دۇرماسی اۆچون {{WBREPONAME}}-ه علاقه‌لی آیتمی ده [$1 آپدئیت] ائتمه‌لیسینیز.",
 	"wikibase-comment-update": "{{WBREPONAME}} آیتمی دَییشیلدی",
 	"wikibase-dataitem": "{{WBREPONAME}} آیتمی",
 	"wikibase-editlinks": "باغلانتیلاری دَییشدیر",
