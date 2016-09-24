@@ -1,0 +1,4 @@
+<http://acme.test/value/testunit> <http://wikiba.se/ontology-beta#quantityNormalized> <http://acme.test/value/testunit> .
+<Qstatement> <http://acme.test/prop/statement/value-normalized/P123> <http://acme.test/value/testunit> .
+<Qstatement> <http://acme.test/prop/qualifier/value-normalized/P123> <http://acme.test/value/testunit> .
+<Qstatement-another> <http://acme.test/prop/reference/value-normalized/P123> <http://acme.test/value/testunit> .
