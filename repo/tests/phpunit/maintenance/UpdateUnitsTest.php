@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: smalyshev
- * Date: 10/7/16
- * Time: 3:31 PM
- */
-
 namespace Wikibase\Test;
 
 use MediaWikiLangTestCase;
