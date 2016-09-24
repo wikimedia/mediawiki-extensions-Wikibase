@@ -1,0 +1,4 @@
+wdv:testunit wikibase:quantityNormalized wdv:testunit .
+<Qstatement> psn:P123 wdv:testunit ;
+	pqn:P123 wdv:testunit .
+<Qstatement-another> prn:P123 wdv:testunit .
