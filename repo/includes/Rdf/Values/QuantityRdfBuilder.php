@@ -104,28 +104,17 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 
 		$valueWriter = $this->complexValueHelper->getValueNodeWriter();
 
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityAmount' )
-			->value( $value->getAmount(), 'xsd', 'decimal' );
-
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUpperBound' )
-			->value( $value->getUpperBound(), 'xsd', 'decimal' );
-
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityLowerBound' )
-			->value( $value->getLowerBound(), 'xsd', 'decimal' );
-
 		$unitUri = trim( $value->getUnit() );
 
 		if ( $unitUri === '1' ) {
 			$unitUri = RdfVocabulary::ONE_ENTITY;
 		}
 
-		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUnit' )
-			->is( $unitUri );
+		$normalizedValue = null;
 
 		if ( $convertUnits && $normalized ) {
 			// Normalized value is it's own normalization
-			$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
-				->is( RdfVocabulary::NS_VALUE, $valueLName );
+			$normalizedValue = $valueLName;
 		}
 
 		// FIXME: make this depend on flavor
@@ -136,13 +125,38 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 
 			if ( $newValue ) {
 				// Add normalized node
-				$normLName = $newValue->getHash();
-				$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
-					->is( RdfVocabulary::NS_VALUE, $normLName );
+				$normalizedValue = $newValue->getHash();
 
 				$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName,
 					$dataType, $newValue, true );
 			}
+		}
+		$this->writeQuantityValue( $valueWriter, $value, $unitUri, $normalizedValue );
+	}
+
+	/**
+	 * Write data for the unit.
+	 * @param RdfWriter     $valueWriter
+	 * @param QuantityValue $value
+	 * @param string        $unitUri Unit URI
+	 * @param string|null   $valueNormalized Normalized value ID
+	 */
+	public function writeQuantityValue( RdfWriter $valueWriter, QuantityValue $value, $unitUri,
+	                                    $valueNormalized ) {
+		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityAmount' )
+			->value( $value->getAmount(), 'xsd', 'decimal' );
+
+		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUpperBound' )
+			->value( $value->getUpperBound(), 'xsd', 'decimal' );
+
+		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityLowerBound' )
+			->value( $value->getLowerBound(), 'xsd', 'decimal' );
+
+		$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityUnit' )->is( $unitUri );
+
+		if ( $valueNormalized ) {
+			$valueWriter->say( RdfVocabulary::NS_ONTOLOGY, 'quantityNormalized' )
+				->is( RdfVocabulary::NS_VALUE, $valueNormalized );
 		}
 	}
 
