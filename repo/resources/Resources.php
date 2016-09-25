@@ -101,6 +101,7 @@ return call_user_func( function() {
 				'wikibase.store.CachingEntityStore',
 				'wikibase.store.CombiningEntityStore',
 				'wikibase.view.ControllerViewFactory',
+				'wikibase.view.ReadModeViewFactory',
 				'wikibase.view.StructureEditorFactory',
 				'wikibase.view.ToolbarFactory',
 				'wikibase.WikibaseContentLanguages'
