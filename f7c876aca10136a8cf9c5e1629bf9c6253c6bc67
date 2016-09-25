@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_46379cab",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-25T23:39:17Z",
+      "side": 1,
+      "message": "@param string $text Defaults to the entity id serialization.",
+      "range": {
+        "startLine": 121,
+        "startChar": 18,
+        "endLine": 121,
+        "endChar": 23
+      },
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c642ac10",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-25T23:39:17Z",
+      "side": 1,
+      "message": "Do we need this public?",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_e65170de",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-25T23:39:17Z",
+      "side": 1,
+      "message": "Do we need this public?",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_064da43f",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-25T23:39:17Z",
+      "side": 1,
+      "message": "Do we need this public?",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_663e6089",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-25T23:39:17Z",
+      "side": 1,
+      "message": "Just use a BasicEntityIdParser then",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
