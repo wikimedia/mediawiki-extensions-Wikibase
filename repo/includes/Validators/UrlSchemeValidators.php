@@ -43,6 +43,8 @@ class UrlSchemeValidators {
 			case 'ssh':
 			case 'svn':
 			case 'telnet':
+                        case 'bzr':
+                        case 'cvs':
 			case 'worldwind':
 				$regex = '!^' . preg_quote( $scheme, '!' ) . '://(' . Parser::EXT_LINK_URL_CLASS . ')+\z!ui';
 				break;
