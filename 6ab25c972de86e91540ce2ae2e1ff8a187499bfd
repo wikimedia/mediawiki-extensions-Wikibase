@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_343732ad",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-26T14:37:23Z",
+      "side": 1,
+      "message": "This triggers a warning, because getDBLoadBalancer is not a static method. Use\n\n  MediaWikiServices::getInstance()-\u003egetDBLoadBalancer()",
+      "revId": "6ab25c972de86e91540ce2ae2e1ff8a187499bfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_946e1e92",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 15
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-26T14:37:23Z",
+      "side": 1,
+      "message": "1) the second parameter must *not* contain a namespace prefix. The current code generates xx:Special:Special:EntityUsage/Q123\n\n2) $site-\u003egetInterwikiIds() may return an empty array; then [0] will fail. If we have no interwiki prefix for the wiki in question, just output the subscription info without a link.",
+      "revId": "6ab25c972de86e91540ce2ae2e1ff8a187499bfd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
