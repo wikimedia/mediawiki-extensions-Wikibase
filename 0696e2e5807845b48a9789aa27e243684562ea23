@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_358f2c28",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T21:32:30Z",
+      "side": 1,
+      "message": "Does it really matter in tests?",
+      "parentUuid": "0e82f318_b5cddc8b",
+      "revId": "0696e2e5807845b48a9789aa27e243684562ea23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_b5e6bc0f",
         "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 16
@@ -53,6 +71,24 @@
         "endLine": 112,
         "endChar": 58
       },
+      "revId": "0696e2e5807845b48a9789aa27e243684562ea23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_758a841d",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T21:32:30Z",
+      "side": 1,
+      "message": "There\u0027s nothing in PS11 (strange). But I get your point. It errors out because I\u0027m setting methods in it (see line 114) and since SiteLookup is an interface, PHPunit errors out. Go ahead and try it :)",
+      "parentUuid": "0e82f318_b5e6bc0f",
       "revId": "0696e2e5807845b48a9789aa27e243684562ea23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -82,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_9580d8fa",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T21:32:30Z",
+      "side": 1,
+      "message": "There\u0027s nothing in PS11 (strange). But I get your point. It errors out because I\u0027m setting methods in it (see line 114) and since EntityIdLookup is an interface, PHPunit errors out. Go ahead and try it :)",
+      "parentUuid": "0e82f318_f5f034c6",
+      "revId": "0696e2e5807845b48a9789aa27e243684562ea23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_d5cc108f",
         "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 16
@@ -99,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_f59e7465",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T21:32:30Z",
+      "side": 1,
+      "message": "Otherwise the callback in mock doesn\u0027t work and errors out (because this method should be a part of the mock methods)",
+      "parentUuid": "0e82f318_d5cc108f",
+      "revId": "0696e2e5807845b48a9789aa27e243684562ea23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_f5c75465",
         "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 16
@@ -110,6 +182,24 @@
       "writtenOn": "2016-09-26T21:23:09Z",
       "side": 1,
       "message": "Why public",
+      "revId": "0696e2e5807845b48a9789aa27e243684562ea23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_158dc836",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 16
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T21:32:30Z",
+      "side": 1,
+      "message": "Same.",
+      "parentUuid": "0e82f318_f5c75465",
       "revId": "0696e2e5807845b48a9789aa27e243684562ea23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
