@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_09bcd7b0",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "See onInfoAction on the client.",
+      "parentUuid": "0e82f318_26daa821",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_468f9c26",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 14
@@ -36,6 +54,24 @@
         "endLine": 1155,
         "endChar": 60
       },
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_49688f19",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_468f9c26",
       "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_e97b03e9",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_06768439",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_46b6bcd8",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 14
@@ -76,6 +130,42 @@
       "writtenOn": "2016-09-26T01:15:27Z",
       "side": 1,
       "message": "We usually don\u0027t use such short forms. Rather use $subscriptionLookup or some such.",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_695f1378",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_46b6bcd8",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c9d2bfd2",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_46b6bcd8",
       "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_89628735",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_06a5a49a",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_e6a97079",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 14
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_a9582b8d",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_e6a97079",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_26b388e9",
         "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
         "patchSetId": 14
@@ -150,6 +276,24 @@
       "writtenOn": "2016-09-26T01:15:27Z",
       "side": 1,
       "message": "This returns a plain string, not an array.",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_e9522369",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Returns HTML, changed to \"string HTML\"",
+      "parentUuid": "0e82f318_26b388e9",
       "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -179,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_c9f9df4c",
+        "filename": "repo/includes/Hooks/InfoActionHookHandler.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_06bcc4b0",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_a6c6984c",
         "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
         "patchSetId": 14
@@ -196,6 +358,24 @@
         "endLine": 66,
         "endChar": 60
       },
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_4995efe5",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_a6c6984c",
       "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -225,6 +405,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_699c7313",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_c6c1cc35",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_66ad8080",
         "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
         "patchSetId": 14
@@ -236,6 +434,24 @@
       "writtenOn": "2016-09-26T01:15:27Z",
       "side": 1,
       "message": "Shouldn\u0027t this also be added to the SubscriptionLookup interface? Or rather create a new one for this?",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_e98f83cf",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "hmm, okay. Added to the interface",
+      "parentUuid": "0e82f318_66ad8080",
       "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -265,6 +481,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_899fe705",
+        "filename": "repo/includes/Store/Sql/SqlSubscriptionLookup.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_86b0b4d9",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_46dddc16",
         "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 14
@@ -282,6 +516,24 @@
         "endLine": 28,
         "endChar": 41
       },
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_29b99b78",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "I don\u0027t quite get it. Do you mean \\InfoActionHookHandlerTest?",
+      "parentUuid": "0e82f318_46dddc16",
       "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -328,6 +580,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_c9a71f4c",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Doesn\u0027t work it says when mocking an interface you are not allowed to setMethods",
+      "parentUuid": "0e82f318_66e4a0dc",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_a6cdb864",
         "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 14
@@ -351,6 +621,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_e9a6a34f",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Same as above",
+      "parentUuid": "0e82f318_a6cdb864",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_c6c8ec53",
         "filename": "repo/tests/phpunit/includes/Store/Sql/SqlSubscriptionLookupTest.php",
         "patchSetId": 14
@@ -362,6 +650,24 @@
       "writtenOn": "2016-09-26T01:15:27Z",
       "side": 1,
       "message": "Missing test case for no subscribers found",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_a97bcbbb",
+        "filename": "repo/tests/phpunit/includes/Store/Sql/SqlSubscriptionLookupTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T13:42:41Z",
+      "side": 1,
+      "message": "Done, Added to this test function. It might be better to move to another method.",
+      "parentUuid": "0e82f318_c6c8ec53",
       "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
