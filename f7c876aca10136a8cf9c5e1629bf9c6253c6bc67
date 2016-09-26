@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_555580c4",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T23:43:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_46379cab",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_c642ac10",
         "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 6
@@ -36,6 +54,24 @@
       "writtenOn": "2016-09-25T23:39:17Z",
       "side": 1,
       "message": "Do we need this public?",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_7558c4fd",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T23:43:13Z",
+      "side": 1,
+      "message": "Yes, otherwise return callback errors. Feel free to give it a try",
+      "parentUuid": "0e82f318_c642ac10",
       "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -59,6 +95,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_956e1892",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T23:43:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_a09a00bb",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_e65170de",
         "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 6
@@ -76,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_b5695c8b",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T23:43:13Z",
+      "side": 1,
+      "message": "Same as above",
+      "parentUuid": "0e82f318_e65170de",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_064da43f",
         "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 6
@@ -87,6 +159,24 @@
       "writtenOn": "2016-09-25T23:39:17Z",
       "side": 1,
       "message": "Do we need this public?",
+      "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f563d4a4",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-26T23:43:13Z",
+      "side": 1,
+      "message": "Same",
+      "parentUuid": "0e82f318_064da43f",
       "revId": "f7c876aca10136a8cf9c5e1629bf9c6253c6bc67",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
