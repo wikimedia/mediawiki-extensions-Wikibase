@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_099f7763",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.siteselector.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 2677
+      },
+      "writtenOn": "2016-09-26T12:57:54Z",
+      "side": 1,
+      "message": "Why not use URL() here?\nMight be easier to read and more robust.",
+      "revId": "e8ecd291edea8a1d334a3cce4401253cc84f9826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
