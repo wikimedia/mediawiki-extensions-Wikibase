@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_550ca0f0",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-26T21:15:08Z",
+      "side": 1,
+      "message": "There\u0027s no relevant information regarding this subject there.",
+      "parentUuid": "0e82f318_09bcd7b0",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_468f9c26",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 14
@@ -540,6 +558,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_d5ffb0a5",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-26T21:15:08Z",
+      "side": 1,
+      "message": "No, don\u0027t use \"\\PHPUnit_Framework_TestCase\" but \" PHPUnit_Framework_TestCase\" (with a use statement above).",
+      "parentUuid": "0e82f318_29b99b78",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_86e7d4de",
         "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 14
@@ -592,6 +628,24 @@
       "side": 1,
       "message": "Doesn\u0027t work it says when mocking an interface you are not allowed to setMethods",
       "parentUuid": "0e82f318_66e4a0dc",
+      "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_f5faf4b4",
+        "filename": "repo/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-26T21:15:08Z",
+      "side": 1,
+      "message": "But you can still mock them. No need to even use the mockBuilder there, you can just\n\n$mock \u003d $this-\u003egetMock( Interface );\n$mock-\u003eexpects( … )-\u003emethod( \u0027blah\u0027 )-\u003e…",
+      "parentUuid": "0e82f318_c9a71f4c",
       "revId": "3bb105bcc2c78e937b2fb64d861eac44373ba008",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
