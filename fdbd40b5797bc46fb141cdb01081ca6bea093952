@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_b1eb29da",
+        "filename": "repo/includes/Rdf/DateTimeValueCleaner.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-27T22:59:24Z",
+      "side": 1,
+      "message": "Why number_format instead of just strval/ (string) type hint? (Not criticism, mostly wondering)",
+      "revId": "fdbd40b5797bc46fb141cdb01081ca6bea093952",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
