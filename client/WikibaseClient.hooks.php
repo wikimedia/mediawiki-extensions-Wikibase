@@ -31,6 +31,7 @@ use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\AutoCommentFormatter;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -409,6 +410,12 @@ final class ClientHooks {
 
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
+		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
+			$wikibaseClient->getLanguageFallbackChainFactory(),
+			$wikibaseClient->getTermLookup(),
+			$wikibaseClient->getTermBuffer()
+		);
+		$idParser = $wikibaseClient->getEntityIdParser();
 
 		if ( !$namespaceChecker->isWikibaseEnabled( $context->getTitle()->getNamespace() ) ) {
 			// shorten out
@@ -420,7 +427,9 @@ final class ClientHooks {
 			$wikibaseClient->newRepoLinker(),
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$settings->getSetting( 'siteGlobalID' ),
-			$usageLookup
+			$usageLookup,
+			$labelDescriptionLookupFactory,
+			$idParser
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
