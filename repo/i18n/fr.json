@@ -374,6 +374,8 @@
 	"wikibase-entity-not-viewable": "Le contenu fourni de type \"$1\" n'est pas une Entité ne peut pas être affiché par Wikibase.",
 	"action-item-merge": "fusionner les éléments",
 	"action-property-create": "créer des propriétés",
+	"wikibase-pageinfo-subscription": "Wikis abonnés à cette entité",
+	"wikibase-pageinfo-subscription-none": "Aucun",
 	"apihelp-wbavailablebadges-description": "Recherche les éléments de badge disponibles.",
 	"apihelp-wbavailablebadges-example-1": "Recherche tous les éléments de badge disponibles",
 	"apihelp-wbcreateclaim-description": "Crée les déclarations Wikibase.",

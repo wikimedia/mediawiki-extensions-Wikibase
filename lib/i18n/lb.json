@@ -50,7 +50,7 @@
 	"wikibase-validator-no-such-property": "Eegeschaft $1 net fonnt",
 	"wikibase-validator-bad-value": "Korrupten Datewäert: $1",
 	"wikibase-validator-bad-data-type": "Falschen Datentyp: $1",
-	"wikibase-validator-bad-url": "An URLen däerfe gewëss Zeechen, wéi Leerzeechen a véiereckeg Klameren, net dra sinn.",
+	"wikibase-validator-bad-url": "An URLen däerfe gewëss Zeechen net dra sinn, wéi Leerzeechen a véiereckeg Klameren: $1",
 	"wikibase-validator-unknown-unit": "Onbekannten Eenheet: $1",
 	"wikibase-validator-not-allowed": "net valabele wäert: $1",
 	"wikibase-validator-no-validators": "Verbueden",

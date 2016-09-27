@@ -228,6 +228,7 @@
 	"right-property-create": "Eegeschaften uleeën",
 	"action-item-merge": "Elementer zesummeleeën",
 	"action-property-create": "Eegeschaften uleeën",
+	"wikibase-pageinfo-subscription-none": "Keng",
 	"apihelp-wbcreateclaim-param-bot": "Dës Ännerung als Bot markéieren. Dës Markéierung vun der URL gëtt nëmme respektéiert wann de Benotzer zum Grupp \"Bot\" gehéiert.",
 	"apihelp-wbcreateredirect-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",
 	"apihelp-wbeditentity-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"Bot\" gehéiert.",

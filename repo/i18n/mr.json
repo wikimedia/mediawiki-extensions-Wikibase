@@ -138,6 +138,7 @@
 	"content-model-wikibase-query": "विकिबेस पृच्छा",
 	"right-property-create": "गुणधर्म तयार करा",
 	"action-property-create": "गुणधर्म तयार करा",
+	"wikibase-pageinfo-subscription-none": "काहीही नाही",
 	"apihelp-wbeditentity-example-11": "जर ते आधीच अस्तित्वात असेल तर, उपरीलेखनाविना एक खूणपट्टी(लेबल) जोडते",
 	"apihelp-wbeditentity-example-12": "खूणपट्टी हटविते",
 	"apihelp-query+wbsearch-param-search": "हा मजकूर शोधा."

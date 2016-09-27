@@ -52,6 +52,7 @@
 	"wikibase-validator-bad-entity-id": "ত্রুটিপূর্ণভাবে গঠিত আইডি: $1",
 	"wikibase-validator-bad-entity-type": "$1 অপ্রত্যাশিত ভুক্তির ধরণ",
 	"wikibase-validator-no-such-entity": "$1 খুঁজে পাওয়া যায়নি",
+	"wikibase-validator-url-scheme-missing": "URL-তে \"https://\"-এর মত স্কিম অনুপস্থিত: $1",
 	"wikibase-validator-unknown-unit": "অজানা একক: $1",
 	"wikibase-validator-not-allowed": "অবৈধ মান: $1",
 	"wikibase-validator-no-validators": "নিষিদ্ধ",

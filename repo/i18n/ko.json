@@ -304,6 +304,7 @@
 	"right-property-create": "속성 만들기",
 	"action-item-merge": "항목 병합",
 	"action-property-create": "속성을 만들",
+	"wikibase-pageinfo-subscription-none": "없음",
 	"apihelp-wbmergeitems-description": "여러 항목 병합.",
 	"apihelp-wbsetlabel-param-title": "연결한 파일 이름.\n<var>site</var>과 함께 사용하면 완전한 사이트링크가 됩니다."
 }
