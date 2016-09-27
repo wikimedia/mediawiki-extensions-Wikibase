@@ -259,18 +259,23 @@ $.widget( 'wikibase.snakview', PARENT, {
 
 		this.updateVariation();
 		this.drawSnakTypeSelector();
-		this.drawVariation();
 
-		this._trigger( 'change' );
-
-		// Since it takes a while for the value view to gather its data from the API,
+		// Since it might take a while for the value view to gather its data from the API,
 		// the property might not be valid anymore aborting the rendering of the value
 		// view.
 		if ( this._variation ) {
 			$( this._variation ).one( 'afterdraw', function() {
-				self._variation.focus();
+				// If the variant wasn't actually updated 'afterdraw' will run synchronously,
+				// but we need to break out of the stack here.
+				setTimeout( function() {
+					self._variation.focus();
+				}, 0 );
 			} );
 		}
+
+		this.drawVariation();
+
+		this._trigger( 'change' );
 	},
 
 	/**
