@@ -22,6 +22,24 @@
       "revId": "7212a050b24761316d0f28cb2b7fe93d5604ffcc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_47b313e8",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-27T01:55:28Z",
+      "side": 1,
+      "message": "Oops, I thought I fixed this. Got it done ASAP",
+      "parentUuid": "0e82f318_c79f0354",
+      "revId": "7212a050b24761316d0f28cb2b7fe93d5604ffcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
