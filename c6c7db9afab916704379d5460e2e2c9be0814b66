@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_20128501",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "array of what?",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_a0267561",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "When doing HTTP requests within another request (who knows what this class will be used for?) it\u0027s crucial to specify low timeouts. I think the timeout should be a member of this class, with a sensible default (maybe 3 sec) and a setter.",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_c01c491b",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "I generally prefer exceptions to special return values. Makes for cleaner code. Any reason not to do that here?",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_e0178df1",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "array of what?",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_60db9d54",
+        "filename": "repo/maintenance/SPARQLClient.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "array of what?",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_a0e59508",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "eek",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_40bf79cd",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "Please split this method, it\u0027s already long, and now it\u0027s getting complex.\n\nAlso, please extract the app logic into a separate task, for unit testing.",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_e0cdcd8a",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "Nested loops usually want to be in a separate method",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_00cd8188",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "Don\u0027t name code blocks, make methods :)",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_60a9dd8c",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "eek!",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_40a699bf",
+        "filename": "repo/maintenance/updateUnits.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-27T16:26:08Z",
+      "side": 1,
+      "message": "eek!",
+      "revId": "c6c7db9afab916704379d5460e2e2c9be0814b66",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
