@@ -18,12 +18,12 @@ use HashBagOStuff;
 use Hooks;
 use IContextSource;
 use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use RequestContext;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
-use SiteSQLStore;
 use SiteStore;
 use StubObject;
 use Title;
@@ -1159,7 +1159,7 @@ class WikibaseRepo {
 	 */
 	public function getSiteStore() {
 		if ( $this->siteStore === null ) {
-			$this->siteStore = SiteSQLStore::newInstance();
+			$this->siteStore = MediaWikiServices::getInstance()->getSiteStore();
 		}
 
 		return $this->siteStore;

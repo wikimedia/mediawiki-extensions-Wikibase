@@ -4,8 +4,8 @@ namespace Wikibase;
 
 use Http;
 use Maintenance;
+use MediaWiki\MediaWikiServices;
 use MWException;
-use SiteSQLStore;
 use Wikibase\Lib\Sites\SiteMatrixParser;
 use Wikibase\Lib\Sites\SitesBuilder;
 
@@ -90,7 +90,7 @@ class PopulateSitesTable extends Maintenance {
 
 			$sites = $siteMatrixParser->sitesFromJson( $json );
 
-			$store = SiteSQLStore::newInstance();
+			$store = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesBuilder = new SitesBuilder( $store, $validGroups );
 			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 
