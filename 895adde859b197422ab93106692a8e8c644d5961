@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0e82f318_c7eb83d9",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-27T01:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_07003bae",
+      "revId": "895adde859b197422ab93106692a8e8c644d5961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e82f318_a7d20f5b",
         "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
         "patchSetId": 7
@@ -47,6 +65,24 @@
       "writtenOn": "2016-09-27T00:43:29Z",
       "side": 1,
       "message": "Term|null",
+      "revId": "895adde859b197422ab93106692a8e8c644d5961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_87b98be8",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 920
+      },
+      "writtenOn": "2016-09-27T01:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e82f318_a7d20f5b",
       "revId": "895adde859b197422ab93106692a8e8c644d5961",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
