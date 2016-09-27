@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_47d5d346",
+        "filename": "client/includes/RepoLinker.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-27T00:43:29Z",
+      "side": 1,
+      "message": "s/title/$text/",
+      "revId": "895adde859b197422ab93106692a8e8c644d5961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_07003bae",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-27T00:43:29Z",
+      "side": 1,
+      "message": "This looks very weird… you rely on PHPUnit magic to default the third parameter to RepoLinker::buildEntityLink to null (which is probably ok), but also use null to do string concatenation in your mock.",
+      "revId": "895adde859b197422ab93106692a8e8c644d5961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_a7d20f5b",
+        "filename": "client/tests/phpunit/includes/Hooks/InfoActionHookHandlerTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-27T00:43:29Z",
+      "side": 1,
+      "message": "Term|null",
+      "revId": "895adde859b197422ab93106692a8e8c644d5961",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
