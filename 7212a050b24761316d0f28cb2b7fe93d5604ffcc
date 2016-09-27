@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_c79f0354",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-27T01:46:23Z",
+      "side": 1,
+      "message": "I don\u0027t think you can call that statically. Also you should have a $mediaWikiServices \u003d MediaWikiServices::getInstance() here",
+      "range": {
+        "startLine": 1156,
+        "startChar": 18,
+        "endLine": 1156,
+        "endChar": 57
+      },
+      "revId": "7212a050b24761316d0f28cb2b7fe93d5604ffcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
