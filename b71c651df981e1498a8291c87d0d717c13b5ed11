@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_678ad76f",
+        "filename": "repo/includes/Parsers/DateFormatParser.php",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 50
+      },
+      "writtenOn": "2016-09-27T00:05:14Z",
+      "side": 1,
+      "message": "This means this is a year in Iranian (see Language::tsToIranian). You either need to cover, or skip this. I guess this also happens below.",
+      "revId": "b71c651df981e1498a8291c87d0d717c13b5ed11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
