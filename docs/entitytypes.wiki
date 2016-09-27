@@ -23,7 +23,7 @@ to be implemented and registered:
 
 * Serializers and Deserializers must be defined to convert the entity into native data structures
   that can be (de-)serialized as json. These classes have to implement the DispatchableSerializer
-  respectively the DispatchableDeserializer interfaces from the serialization compoment.
+  and DispatchableDeserializer interfaces from the serialization component.
 * Each entity needs a view to provide an HTML representation to the user. Each view has to extend
   the abstract EntityView class from the WikibaseView component.
 * MediaWiki bindings are needed by defining a content class extending EntityContent and a handler
@@ -66,7 +66,7 @@ associated with a function having the dedicated signature:
 : a string representing a resource loader module that, when `require`d, returns a function returning
   a `wikibase.serialization.Deserializer` instance supporting this entity type
 
-Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes respectively
+Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or
 WikibaseClientEntityTypes hooks to provide additional entity type definitions.
 
 == Programmatic Access ==
