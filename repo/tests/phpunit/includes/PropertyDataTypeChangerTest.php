@@ -104,6 +104,11 @@ class PropertyDataTypeChangerTest extends PHPUnit_Framework_TestCase {
 
 		$entityRevisionLookup->expects( $this->once() )
 			->method( 'getEntityRevision' )
+			->with(
+				$this->isInstanceOf( PropertyId::class ),
+				0,
+				EntityRevisionLookup::LATEST_FROM_MASTER
+			)
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {
 				if ( $propertyId->getSerialization() === 'P42' ) {
 					$property = new Property(

@@ -63,6 +63,7 @@ class PropertyDataTypeChanger {
 	public function changeDataType( PropertyId $propertyId, User $user, $dataTypeId ) {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision(
 			$propertyId,
+			0,
 			EntityRevisionLookup::LATEST_FROM_MASTER
 		);
 
