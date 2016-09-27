@@ -126,7 +126,7 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 */
 	private function querySubscriptions( DatabaseBase $db, $subscriber, array $subscriptions ) {
 		if ( $subscriptions ) {
-			$rows = $db->select(
+			$subscriptions = $db->selectFieldValues(
 				'wb_changes_subscription',
 				'cs_entity_id',
 				array(
@@ -135,8 +135,6 @@ class SqlSubscriptionManager implements SubscriptionManager {
 				),
 				__METHOD__
 			);
-
-			$subscriptions = $this->extractField( $rows, 'cs_entity_id' );
 		}
 
 		return $subscriptions;
@@ -200,22 +198,6 @@ class SqlSubscriptionManager implements SubscriptionManager {
 		}
 
 		return $rows;
-	}
-
-	/**
-	 * @param object[]|ResultWrapper $rows Plain objects
-	 * @param string $field The name of the field to extract from each plain object
-	 *
-	 * @return array
-	 */
-	private function extractField( $rows, $field ) {
-		$values = array();
-
-		foreach ( $rows as $row ) {
-			$values[] = $row->$field;
-		}
-
-		return $values;
 	}
 
 }

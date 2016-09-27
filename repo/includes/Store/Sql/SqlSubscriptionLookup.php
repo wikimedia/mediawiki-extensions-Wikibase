@@ -74,14 +74,13 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 		$where = [ 'cs_entity_id' => $idToCheck->getSerialization() ];
 		$dbr = $this->dbLoadBalancer->getConnection( DB_REPLICA );
 
-		$rows = $dbr->select(
+		$subscriptions = $dbr->selectFieldValues(
 			'wb_changes_subscription',
 			'cs_subscriber_id',
 			$where,
 			__METHOD__
 		);
 
-		$subscriptions = $this->extractColumn( $rows, 'cs_subscriber_id' );
 		$this->dbLoadBalancer->reuseConnection( $dbr );
 
 		return $subscriptions;
@@ -105,16 +104,12 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 			$where['cs_entity_id'] = $idsToCheck;
 		}
 
-		$rows = $db->select(
+		return $db->selectFieldValues(
 			'wb_changes_subscription',
 			'cs_entity_id',
 			$where,
 			__METHOD__
 		);
-
-		$subscriptions = $this->extractColumn( $rows, 'cs_entity_id' );
-
-		return $subscriptions;
 	}
 
 	/**
@@ -131,22 +126,6 @@ class SqlSubscriptionLookup implements SubscriptionLookup {
 		}
 
 		return $reindexed;
-	}
-
-	/**
-	 * @param object[]|ResultWrapper $rows Plain objects
-	 * @param string $field The name of the field to extract from each plain object
-	 *
-	 * @return array
-	 */
-	private function extractColumn( $rows, $field ) {
-		$values = array();
-
-		foreach ( $rows as $row ) {
-			$values[] = $row->$field;
-		}
-
-		return $values;
 	}
 
 }
