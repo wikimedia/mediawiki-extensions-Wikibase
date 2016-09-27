@@ -2,9 +2,9 @@
 
 namespace Wikibase;
 
+use MediaWiki\MediaWikiServices;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
-use SiteSQLStore;
 use Wikibase\Lib\SitesModuleWorker;
 
 /**
@@ -25,7 +25,7 @@ class SitesModule extends ResourceLoaderModule {
 	public function __construct() {
 		$this->worker = new SitesModuleWorker(
 			Settings::singleton(),
-			SiteSQLStore::newInstance(),
+			MediaWikiServices::getInstance()->getSiteStore(),
 			wfGetCache( wfIsHHVM() ? CACHE_ACCEL : CACHE_ANYTHING )
 		);
 	}

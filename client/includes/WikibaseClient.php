@@ -19,13 +19,13 @@ use Http;
 use JobQueueGroup;
 use Language;
 use LogicException;
+use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
 use RequestContext;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
 use Site;
-use SiteSQLStore;
 use SiteStore;
 use StubObject;
 use Title;
@@ -868,7 +868,7 @@ final class WikibaseClient {
 	 */
 	public function getSiteStore() {
 		if ( $this->siteStore === null ) {
-			$this->siteStore = SiteSQLStore::newInstance();
+			$this->siteStore = MediaWikiServices::getInstance()->getSiteStore();
 		}
 
 		return $this->siteStore;
