@@ -2,104 +2,107 @@
 
 This document describes the configuration of the Wikibase extensions.
 
-As usual, the extension is configured in MediaWiki's LocalSettings.php file. However, Wikibase settings are placed in associative arrays, <code>$wgWBRepoSettings</code> and <code>$wgWBClientSettings</code> respectively, instead of individual global variables. So, if below the setting <code>foo</code> is described below, you would need to use <code>$wgWBClientSettings['foo']</code> in LocalSettings.php.
-
+As usual, the extension is configured in MediaWiki's LocalSettings.php file. However, Wikibase settings are placed in associative arrays, <code>$wgWBRepoSettings</code> and <code>$wgWBClientSettings</code> respectively, instead of individual global variables. So, if the setting <code>foo</code> is described below, you would need to use <code>$wgWBRepoSettings['foo']</code> or <code>$wgWBClientSettings['foo']</code> in LocalSettings.php.
 
 == Common Settings ==
 === Basic Settings ===
 
-;entityNamespaces: Defines which kind of entity is managed in which namespace; this is given as an associative array mapping entity types such as <code>'item'</code> to namespace IDs. This setting is required for each kind of entity that should be supported.
-;changesDatabase: The database that changes are recorded to for processing by clients. This must be set to a symbolic database identifier that MediaWiki's LBFactory class understands; <code>false</code> means that the wiki's own database shall be used. '''Note''' that on the client, this setting should usually be the same as the <code>repoDatabase</code> setting.
-;siteLinkGroups: The site groups to use in sitelinks. Must correspond to a value used to give the site group in the MediaWiki <code>sites</code> table. Default is array( "wikipedia" ). This defines which groups of sites can be linked to Wikibase items. '''Note''' that this setting replaces the old ''siteLinkGroup'' setting, which only allowed for a single group.
+;entityNamespaces: Defines which kind of entity is managed in which namespace. It is given as an associative array mapping entity types such as <code>'item'</code> to namespace IDs. Mapping must be done for each type of entity that should be supported.
+;changesDatabase: The database that changes are recorded to for processing by clients. This must be set to a symbolic database identifier that MediaWiki's LBFactory class understands; <code>false</code> means that the wiki's own database shall be used. '''Note''' that on the client, this setting should usually be the same as the '''repoDatabase''' setting.
+;siteLinkGroups: The site groups to use in sitelinks. Must correspond to a value used to give the site group in the MediaWiki <code>sites</code> table. Default is <code>array( 'wikipedia' )</code>. This defines which groups of sites can be linked to Wikibase items.
+:'''Note''' that this setting replaces the old ''siteLinkGroup'' setting, which only allowed for a single group.
 ;specialSiteLinkGroups: This maps one or more site groups into a single "special" group. This is useful if sites from multiple site groups should be shown in a single "special" section on item pages, instead of one section per site group. To show these site-groups you have to add the group "special" to the '''siteLinkGroups''' setting (see above).
-;localClientDatabases: An array of locally accessible client databases, for use by the <code>dispatchChanges.php</code> script. This setting determines which wikis changes are pushed to directly. It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases. The default is an empty array, indicating no local client databases.
+;localClientDatabases: An array of locally accessible client databases, for use by the <code>dispatchChanges.php</code> script. This setting determines to which wikis changes are pushed directly. It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases. The default is an empty array, indicating no local client databases.
 
 === Expert Settings ===
 
-;sharedCacheKeyPrefix:  Prefix to use for cache keys that should be shared among a wikibase repo and all its clients. The default is constructed from $wgDBname and WBL_VERSION. In order to share caches between clients (and the repo), set a prefix based on the repo's name and WBL_VERSION or a similar version ID.
-:* NOTE: The default may change in order to use the repo's database name automatically.
-;sharedCacheDuration: The default duration of entries in the shared object cache, in seconds. Default is 3600 seconds = 1 hour.
-;sharedCacheType: The type of cache to use for the shared object cache. Defaults to $wgMainCacheType. Use CACHE_XXX constants.
-;useChangesTable: Whether to record changes in the database, so they can be pushed to clients. Boolean, defaults to <code>true</code>. May be set to false in situations where there are no clients to notify, to preserve space. '''Note''' that if this is true, the <code>pruneChanges.php</code> script should be run periodically to remove old changes from the database table.
-;disabledDataTypes: Array listing of disabled data types on a wiki. This setting is intended to be used a new Wikibase install without items yet, or to control deployment of new data types. This setting should be set the same in the client and repo settings.
-Default:
-<poem>
-          array()
-</poem>
-;maxSerializedEntitySize: The maximum serialized size of entities, in KB. Loading and storing will fail if this size is exceeded. This is intended as a hard limit that prevents very large chunks of data being stored or processed due to abuse or erroneous code. Defaults to MediaWiki core's $wgMaxArticleSize setting.
+;sharedCacheKeyPrefix:  Prefix to use for cache keys that should be shared among a wikibase repo and all its clients. The default is constructed from <code>$wgDBname</code> and <code>WBL_VERSION</code>. In order to share caches between clients (and the repo), set a prefix based on the repo's name and <code>WBL_VERSION</code> or a similar version ID.
+:'''Note''': The default may change in order to use the repo's database name automatically.
+;sharedCacheDuration: The default duration of entries in the shared object cache, in seconds. Default is 3600 seconds (1 hour).
+;sharedCacheType: The type of cache to use for the shared object cache. Defaults to <code>$wgMainCacheType</code>. Use <code>CACHE_XXX</code> constants.
+;useChangesTable: Whether to record changes in the database, so they can be pushed to clients. Boolean, defaults to <code>true</code>. May be set to <code>false</code> in situations where there are no clients to notify to preserve space.
+:'''Note''' that if this is <code>true</code>, the <code>pruneChanges.php</code> script should be run periodically to remove old changes from the database table.
+;disabledDataTypes: Array listing of disabled data types on a wiki. This setting is intended to be used in a new Wikibase installation without items yet, or to control deployment of new data types. This setting should be set to the same value in both client and repo settings. Defaults to an empty array.
+;maxSerializedEntitySize: The maximum serialized size of entities, in KB. Loading and storing will fail if this size is exceeded. This is intended as a hard limit that prevents very large chunks of data being stored or processed due to abuse or erroneous code. Defaults to MediaWiki core's <code>$wgMaxArticleSize</code> setting.
 
 == Repository Settings ==
 
 === Basic Settings ===
 
-;dataRightsUrl: Url to link to license for data contents. Defaults to $wgRightsUrl setting.
-;dataRightsText: Text for data license link. Defaults to $wgRightsText setting.
-;sparqlEndpoint: Url to the service description of the SPARQL end point for the repository. Defaults to null, meaning there is no SPARQL endpoint.
-;badgeItems: Items allowed to be used as badges. This setting expects an array of serialized item ids pointing to their CSS class names, like <code>array( 'Q101' => 'wb-badge-goodarticle' )</code>. With this class name it is possible to change the icon of a specific badge.
-;preferredPageImagesProperties: List of image property id strings, in order of preference, that should be considered for the <code>page_image</code> page property. Defaults to an empty array.
+;dataRightsUrl: URL to link to license for data contents. Defaults to <code>$wgRightsUrl</code> setting.
+;dataRightsText: Text for data license link. Defaults to <code>$wgRightsText</code> setting.
+;sparqlEndpoint: URL to the service description of the SPARQL end point for the repository. Defaults to null, meaning there is no SPARQL endpoint.
+;badgeItems: Items allowed to be used as badges. This setting expects an array of serialized item IDs pointing to their CSS class names, like <code>array( 'Q101' => 'wb-badge-goodarticle' )</code>. With this class name it is possible to change the icon of a specific badge.
+;preferredPageImagesProperties: List of image property ID strings, in order of preference, that should be considered for the <code>page_image</code> page property. Defaults to an empty array.
 ;conceptBaseUri: Base URI for building concept URIs (for example used in Rdf output). This has to include the protocol and domain, only an entity identifier will be appended.
-;preferredGeoDataProperties: List of properties (by id string), in order of preference, that are considered when finding primary coordinates for the GeoData extension on an entity. Defaults to an empty array.
+;preferredGeoDataProperties: List of properties (by ID string), in order of preference, that are considered when finding primary coordinates for the GeoData extension on an entity. Defaults to an empty array.
 
 === Expert Settings ===
 ;dispatchBatchChunkFactor: Chunk factor used internally by the <code>dispatchChanges.php</code> script. The default is 3. If most clients are not interested in most changes, this factor can be raised to lower the number of database queries needed to fetch a batch of changes.
-;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities. '''Note:''' this may change in the future to allow separate blacklists for different kinds of entities.
+;idBlacklist: A list of IDs to reserve and skip for new entities. IDs are given as integers, the blacklist applies to all types of entities.
+:'''Note:''' this may change in the future to allow separate blacklists for different kinds of entities.
 ;multilang-limits: Limits to impose on multilanguage strings like labels, descriptions and such. Supported limits:
 :;length: the maximum length of the string, in characters.
-:Default: <code>array( 'length' => 250 )</code>
-;urlSchemes: Which URL schemes should be allowed in URL data values. The default is array( 'http', 'https' ). Other supported schemes are 'ftp' and 'mailto'. Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding 'mailto' will work, while adding 'gopher' will do nothing.
+:Default: <code>array( 'length' => 250 )</code>.
+;urlSchemes: Which URL schemes should be allowed in URL data values. The default is <code>array( 'http', 'https' )</code>. Other supported schemes are <code>'ftp'</code> and <code>'mailto'</code>. Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding <code>'mailto'</code> will work, while adding <code>'gopher'</code> will do nothing.
 ;formatterUrlProperty: Property to be used on properties that defines a formatter URL which is used to link identifiers. The placeholder <code>$1</code> will be replaced by the identifier. Example: <code>https://www.wikidata.org/entity/$1</code>
 ;transformLegacyFormatOnExport: Whether entity revisions stored in a legacy format should be converted on the fly while exporting. Enabled per default.
-;allowEntityImport: allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
-;pagePropertiesRdf: array that maps between page properties and Wikibase predicates for RDF dumps. Maps from database property name to an array that contains a key 'name' (RDF property name, which will be prefixed by wikibase:) and an optional key 'type'.
-;unitStorage: Definition for unit conversion storage. Should be in in the format <code>ObjectFactory</code understands,
-  example: <code>array( 'class' => 'Wikibase\\Lib\\JsonUnitStorage',  'args' => array( 'myUnits.json' ) )</code>
+;allowEntityImport: Allow importing entities via Special:Import and importDump.php. Per default, imports are forbidden, since entities defined in another wiki would have or use IDs that conflict with entities defined locally.
+;pagePropertiesRdf: Array that maps between page properties and Wikibase predicates for RDF dumps. Maps from database property name to an array that contains a key <code>'name'</code> (RDF property name, which will be prefixed by <code>wikibase:</code>) and an optional key <code>'type'</code>.
+;unitStorage: Definition for unit conversion storage. Should be in in the format <code>ObjectFactory</code> understands, example: <code>array( 'class' => 'Wikibase\\Lib\\JsonUnitStorage',  'args' => array( 'myUnits.json' ) )</code>.
 
 == Client Settings ==
 
 === Basic Settings ===
-;namespaces: List of namespaces on the client wiki that should have access to repository items. Default: <code>array()</code> (treated as setting is not set; all namespaces enabled)
-;excludeNamespaces: List of namespaces on the client wiki to disable wikibase links, etc. for.  Default: <code>array()</code>  Example: <code>array( NS_USER_TALK )</code>
-;repoUrl: The repository's base URL, including the schema (protocol) and domain; This URL can be protocol-relative. Default is <code>'//wikidata.org'</code>. '''Note:''' this may be removed once we can get this information from the sites table.
-;repoConceptBaseUri: The base of the repository's concept URIs. Default is <code>'<i>repoUrl</i>/entity/'</code>. '''Note:''' this may be removed once we can get this information from the sites table.
-;repoScriptPath: The repository's script path. Default is $wgScriptPath, assuming that the repo's script path is the same as this wiki's script path. '''Note:''' this may be removed once we can get this information from the sites table.
-;repoArticlePath: The repository's article path. Default is $wgArticlePath, assuming that the repo's article path is the same as this wiki's script path. '''Note:''' this may be removed once we can get this information from the sites table.
+;namespaces: List of namespaces on the client wiki that should have access to repository items. Default: <code>array()</code> (treated as setting is not set, ie. namespaces are enabled).
+;excludeNamespaces: List of namespaces on the client wiki to disable wikibase links, etc. for.  Default: <code>array()</code>. Example: <code>array( NS_USER_TALK )</code>.
+;repoUrl: The repository's base URL, including the schema (protocol) and domain; This URL can be protocol-relative. Default is <code>'//wikidata.org'</code>.
+:'''Note:''' this may be removed once we can get this information from the sites table.
+;repoConceptBaseUri: The base of the repository's concept URIs. Default is <code>'<i>repoUrl</i>/entity/'</code>.
+:'''Note:''' this may be removed once we can get this information from the sites table.
+;repoScriptPath: The repository's script path. Default is $wgScriptPath, assuming that the repo's script path is the same as this wiki's script path.
+:'''Note:''' this may be removed once we can get this information from the sites table.
+;repoArticlePath: The repository's article path. Default is $wgArticlePath, assuming that the repo's article path is the same as this wiki's script path.
+:'''Note:''' this may be removed once we can get this information from the sites table.
 ;sort: How to sort language links in the side bar. Possible values:
-:;<code>'code'</code>: by language code
+:;<code>'code'</code>: By language code
 :;<code>'alphabetic'</code>: [[meta:Interwiki_sorting_order|By language name]] (<code>meta-native-languagename</code>)
 :;<code>'alphabetic_revised'</code>: [[meta:Interwiki_sorting_order|By language name (alternative)]] (<code>meta-native-languagename-firstword</code>)
 :;<code>'none'</code>: Don't sort. Basically, the order of the links is not guaranteed. '''Deprecated''' and dysfunctional.
 : Default is <code>'code'</code>.
-;sortPrepend: List of language codes to put on top of the language links in the side bar. Default: <code>array()</code>. '''Note''': this may change to use global wiki IDs instead of language codes in the future.
+;sortPrepend: List of language codes to put on top of the language links in the side bar. Default: <code>array()</code>.
+:'''Note''': this may change to use global wiki IDs instead of language codes in the future.
 ;interwikiSortOrders: Array of arrays of language codes, specifying custom sort orders for interwiki links; default options provided include <code>'code'</code>, <code>'alphabetic'</code>, <code>'alphabetic_revised'</code>, <code>'alphabetic_sr'</code>, and <code>'alphabetic_fy'</code>.
 ;alwaysSort: Sort links from wikitext even if <code><nowiki>{{noexternallanglinks:*}}</nowiki></code> is used. Default: <code>true</code>.
 ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.
-;siteLocalID: This site's local ID resp. language code (e.g. <code>'it'</code>). Default: <code>$wgLanguageCode</code>. '''Note:''' this setting will be removed once we can take this information from the sites table.
+;siteLocalID: This site's local ID resp. language code (e.g. <code>'it'</code>). Default: <code>$wgLanguageCode</code>.
+:'''Note:''' this setting will be removed once we can take this information from the sites table.
 ;siteGroup: This site's site group (e.g. <code>'wikipedia'</code> or <code>'wikivoyage'</code>) as used in the sites table. The setting is optional and falls back to site store lookup. For performance reasons, it may be desireable to set this explicitly to avoid lookups.
-;repoSiteId: Site id of connected repository wiki. Default is to assume client and repo, so this setting defaults to siteGlobalID.
-;repoSiteName: Site name of the connected repository wiki.  Default is to assume client and repo are same wiki, so defaults to global $wgSitename setting.  If not the same wiki, defaults to 'Wikidata'. This setting can also be set to an i18n message key and will be handled as a message, if the message key exists so that the repo site name can be translatable.
-;repoDatabase: The logical name of the repository database, in a form that LBFactory can understand. If not <code>null</code>, the client wiki will access the repository's database directly, instead of locally caching information received via change notifications. Default: <node>null</code>. Note that <code>false</code> would mean "this wiki's database"! '''Note:''' this is currently required to be not <code>null</code>, since local caching is not fully implemented.
-	// default for repo items in main namespace
-;repoNamespaces: An array telling the client wiki which namespaces on the repository are used for which kind of entity. This is given as an associative array mapping entity type IDs such as Item::ENTITY_TYPE, to namespace names. This information is used when constructing links to entities on the repository. Default:
+;repoSiteId: Site ID of connected repository wiki. Default is to assume client and repo, so this setting defaults to siteGlobalID.
+;repoSiteName: Site name of the connected repository wiki. Default is to assume client and repo are same wiki, so defaults to global $wgSitename setting.  If not the same wiki, defaults to 'Wikidata'. This setting can also be set to an i18n message key and will be handled as a message, if the message key exists so that the repo site name can be translatable.
+;repoDatabase: The logical name of the repository database, in a form that LBFactory can understand. If not <code>null</code>, the client wiki will access the repository's database directly, instead of locally caching information received via change notifications. Default: <code>null</code>. Note that <code>false</code> would mean "this wiki's database"!
+:'''Note:''' this is currently required to be not <code>null</code>, since local caching is not fully implemented.
+;repoNamespaces: An array telling the client wiki which namespaces on the repository are used for which entity type. This is given as an associative array mapping entity type IDs such as Item::ENTITY_TYPE, to namespace names. This information is used when constructing links to entities on the repository. Default (items in main namespace):
 <poem>
           array(
               'item' => '',
               'property' => 'Property'
           )
 </poem>
-;allowDataTransclusion: switch to enable data transclusion features like the <nowiki>{{#property}}</nowiki> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <tt>true</tt>.
-;allowArbitraryDataAccess: switch to allow accessing arbitrary items from the <tt>wikibase</tt> Scribunto module and the via the parser functions (instead of just the item which is linked to the current page). Defaults to <tt>true</tt>.
-;allowDataAccessInUserLanguage: switch to allow accessing data in the user's language rather than the content language from the <tt>wikibase</tt> Scribunto module and the via the parser functions. Useful for multilingual wikis: Allows users to split the ParserCache by user language. Defaults to <tt>false</tt>.
-;entityAccessLimit: limit for the number of different full entities that can be loaded on any given page, via Scribunto or the property parser function. Defaults to 200.
-;propagateChangesToRepo: switch to enable or disable the propagation of client changes to the repo. Defaults to <tt>true</tt>.
-;languageLinkSiteGroup: the ID of the site group to be shown as language links. Defaults to <tt>null</tt>, which means the site's own site group.
-;badgeClassNames: A list of additional CSS class names for site links that have badges. The array has to consist of serialized item ids pointing to their CSS class names, like <code>array( 'Q101' => 'badge-goodarticle' )</code>. Note that this extension does not add any CSS to actually display the badges.
-;otherProjectsLinks: Site global id list of sites which should be linked in the other projects sidebar section.
-;otherProjectsLinksByDefault: Whether to show links to other projects per default. If not set, the links can be enabled as a beta feature (see otherProjectsLinksBeta).
-;otherProjectsLinksBeta: If this is set to true links to other projects will be available as beta feature, enabling every user to turn them on/ off if wanted. (Only applies if other project links aren't enabled per default and the BetaFeatures extension is installed)
-;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property id. Will be ignored, if set to null.
+;allowDataTransclusion: Switch to enable data transclusion features like the <code><nowiki>{{#property}}</nowiki></code> parser function and the <tt>wikibase</tt> Scribunto module. Defaults to <code>true</code>.
+;allowArbitraryDataAccess: switch to allow accessing arbitrary items from the <tt>wikibase</tt> Scribunto module and the via the parser functions (instead of just the item which is linked to the current page). Defaults to <code>true</code>.
+;allowDataAccessInUserLanguage: Switch to allow accessing data in the user's language rather than the content language from the <tt>wikibase</tt> Scribunto module and the via the parser functions. Useful for multilingual wikis: Allows users to split the ParserCache by user language. Defaults to <code>false</code>.
+;entityAccessLimit: Limit for the number of different full entities that can be loaded on any given page, via Scribunto or the property parser function. Defaults to 200.
+;propagateChangesToRepo: Switch to enable or disable the propagation of client changes to the repo. Defaults to <code>true</code>.
+;languageLinkSiteGroup: ID of the site group to be shown as language links. Defaults to <code>null</code>, which means the site's own site group.
+;badgeClassNames: A list of additional CSS class names for site links that have badges. The array has to consist of serialized item IDs pointing to their CSS class names, like <code>array( 'Q101' => 'badge-goodarticle' )</code>. Note that this extension does not add any CSS to actually display the badges.
+;otherProjectsLinks: Site global ID list of sites which should be linked in the other projects sidebar section.
+;otherProjectsLinksByDefault: Whether to show links to other projects per default. If not set, the links can be enabled as a beta feature (see '''otherProjectsLinksBeta''').
+;otherProjectsLinksBeta: If this is set to true links to other projects will be available as beta feature, enabling every user to turn them on/off if wanted. (Only applies if other project links aren't enabled per default and the BetaFeatures extension is installed)
+;propertyOrderUrl: URL to use for retrieving the property order used for sorting properties by property ID. Will be ignored if set to null.
 
 === Expert Settings ===
-;injectRecentChanges: whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
-;showExternalRecentChanges: whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki. In contrast to <code>injectRecentChanges</code>, this setting just removes the changes from the user interface. The default is <code>false</code>. This is intended to temporarily prevent external changes from showing in order to find or fix some issue on a live site.
-;sendEchoNotification: if true, allows users on the client wiki to get a notification when a page they created is connected to a repo item. This requires the Echo extension.
-;repoIcon: if <code>sendEchoNotification</code> is set to <tt>true</tt>, you can also provide what icon the user will see. The correct syntax is <code>array( 'url' => '...' )</code> or <code>array( 'path' => '...' )</code> where <tt>path</tt> is relative to <code>$wgExtensionAssetsPath</code>. Defaults to <tt>false</tt> which means that there will be the default Echo icon.
+;injectRecentChanges: Whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc. Requires the <code>dispatchChanges.php</code> script to run, and this wiki to be listed in the <code>localClientDatabases</code> setting on the repository.
+;showExternalRecentChanges: Whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki. In contrast to <code>injectRecentChanges</code>, this setting just removes the changes from the user interface. The default is <code>false</code>. This is intended to temporarily prevent external changes from showing in order to find or fix some issue on a live site.
+;sendEchoNotification: If true, allows users on the client wiki to get a notification when a page they created is connected to a repo item. This requires the Echo extension.
+;repoIcon: If <code>sendEchoNotification</code> is set to <code>true</code>, you can also provide what icon the user will see. The correct syntax is <code>array( 'url' => '...' )</code> or <code>array( 'path' => '...' )</code> where <code>path</code> is relative to <code>$wgExtensionAssetsPath</code>. Defaults to <code>false</code> which means that there will be the default Echo icon.
