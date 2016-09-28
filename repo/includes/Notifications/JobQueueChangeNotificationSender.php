@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Notifications;
 
+use JobQueueGroup;
 use Wikibase\Change;
 use Wikibase\ChangeNotificationJob;
 
@@ -12,7 +13,6 @@ use Wikibase\ChangeNotificationJob;
  *
  * @license GPL-2.0+
  * @author Daniel Kinzler
- * @author Marius Hoch
  */
 class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 
@@ -27,32 +27,12 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 	private $wikiDBNames;
 
 	/**
-	 * @var int
-	 */
-	private $batchSize;
-
-	/**
-	 * @var callable
-	 */
-	private $jobQueueGroupFactory;
-
-	/**
 	 * @param string $repoDB
 	 * @param string[] $wikiDBNames An associative array mapping site IDs to logical database names.
-	 * @param int $batchSize Number of changes to push per job.
-	 * @param callable|null $jobQueueGroupFactory Function that returns a JobQueueGroup for a given wiki.
 	 */
-	public function __construct(
-		$repoDB,
-		array $wikiDBNames = array(),
-		$batchSize = 50,
-		$jobQueueGroupFactory = null
-	) {
+	public function __construct( $repoDB, array $wikiDBNames = array() ) {
 		$this->repoDB = $repoDB;
 		$this->wikiDBNames = $wikiDBNames;
-		$this->batchSize = $batchSize;
-		$this->jobQueueGroupFactory =
-			$jobQueueGroupFactory === null ? 'JobQueueGroup::singleton' : $jobQueueGroupFactory;
 	}
 
 	/**
@@ -72,20 +52,14 @@ class JobQueueChangeNotificationSender implements ChangeNotificationSender {
 			$wikiDB = $siteID;
 		}
 
-		$qgroup = call_user_func( $this->jobQueueGroupFactory, $wikiDB );
-		$chunks = array_chunk( $changes, $this->batchSize );
+		$job = ChangeNotificationJob::newFromChanges( $changes, $this->repoDB );
 
-		$jobs = [];
-		foreach ( $chunks as $chunk ) {
-			$jobs[] = ChangeNotificationJob::newFromChanges( $chunk, $this->repoDB );
-		}
-		$qgroup->push( $jobs );
+		// @todo: inject JobQueueGroup
+		$qgroup = JobQueueGroup::singleton( $wikiDB );
+		$qgroup->push( $job );
 
-		wfDebugLog(
-			__METHOD__,
-			"Posted " . count( $jobs ) . " notification jobs for site $siteID with " .
-				count( $changes ) . " changes to $wikiDB."
-		);
+		wfDebugLog( __METHOD__, "Posted notification job for site $siteID with "
+			. count( $changes ) . " changes to $wikiDB." );
 	}
 
 }
