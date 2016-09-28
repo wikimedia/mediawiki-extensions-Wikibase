@@ -7,7 +7,8 @@
 			"Silvonen",
 			"Stryn",
 			"VezonThunder",
-			"Pxos"
+			"Pxos",
+			"Pyscowicz"
 		]
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
@@ -65,6 +66,7 @@
 	"wikibase-pageswithbadges-submit": "Näytä sivut",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-kohteen tunniste",
 	"wikibase-pageinfo-entity-id-none": "Ei mitään",
+	"wikibase-pageinfo-entity-usage-T": "Otsikko",
 	"wikibase-property-render-error": "Ominaisuuden $1 näyttäminen epäonnistui: $2",
 	"wikibase-otherprojects": "Muissa projekteissa",
 	"wikibase-otherprojects-beta-message": "Muut projektit -sivupalkki",

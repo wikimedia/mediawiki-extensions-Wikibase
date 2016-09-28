@@ -8,13 +8,12 @@
 	},
 	"wikibase-edit": "ترميم",
 	"wikibase-add": "ڏيو",
-	"wikibase-entitytermsforlanguagelistview-more": "وڌيڪ ٻوليون",
+	"wikibase-entitytermsforlanguagelistview-more": "سڀ داخل ٿيل ٻوليون",
 	"wikibase-entitytermsforlanguagelistview-less": "گھٽ ٻوليون",
 	"wikibase-label-empty": "ڪو بہ ليبل بيان ڪيل نہ آهي",
 	"wikibase-description-empty": "تشريح غير ميسر",
 	"wikibase-statementsection-statements": "بيانات",
 	"wikibase-sitelinks-special": "ٻيون سرزمينون",
-	"wikibase-aliases-empty": "ڪي بہ عرف بيان ناهن ڪيل",
 	"wikibase-statementview-rank-normal": "عام درجو",
 	"wikibase-statementview-references-counter": "$1{{PLURAL:$2|0=|$3+$2$4}} {{PLURAL:$1|حوالو|حوالا}}"
 }

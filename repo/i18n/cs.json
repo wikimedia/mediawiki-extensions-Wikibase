@@ -342,5 +342,7 @@
 	"wikibase-entity-not-viewable": "Zadaný typ obsahu „$1“ není entita a Wikibase ho nemůže zobrazit.",
 	"action-item-merge": "sloučit položky",
 	"action-property-create": "vytvářet vlastnosti",
+	"wikibase-pageinfo-subscription": "Wiki odebírající tuto entitu",
+	"wikibase-pageinfo-subscription-none": "Žádné",
 	"apihelp-wbsearchentities-example-4": "Vyhledávání „abc“ v angličtině s limitem 2 a posunem o 2"
 }

@@ -331,6 +331,7 @@
 	"wikibase-entity-not-viewable": "Pateiktasis turinys su tipu \"$1\" nėra Esybė ir negali būti pavaizduotas Wikibase.",
 	"action-item-merge": "apjungti įrašus",
 	"action-property-create": "sukurti savybes",
+	"wikibase-pageinfo-subscription-none": "Nėra",
 	"apihelp-wbavailablebadges-description": "Užklausia prieinamų ženkliukų įrašų.",
 	"apihelp-wbavailablebadges-example-1": "Užklausia visų prieinamų ženkliukų įrašų.",
 	"apihelp-wbcreateclaim-description": "Sukuria Wikibase priekaištus.",

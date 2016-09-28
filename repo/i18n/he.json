@@ -336,6 +336,7 @@
 	"wikibase-entity-not-viewable": "סוג התוכן \"$1\" אינו ישות ולכן אי־אפשר להציג אותו בוויקיבייס.",
 	"action-item-merge": "למזג פריטים",
 	"action-property-create": "ליצור מאפיינים",
+	"wikibase-pageinfo-subscription-none": "אין",
 	"apihelp-wbavailablebadges-description": "שאילת של פריטי סמלים זמינים.",
 	"apihelp-wbavailablebadges-example-1": "שאילת של כל פריטי סמלים זמינים.",
 	"apihelp-wbcreateclaim-description": "יצירת טענות של ויקיבייס.",
