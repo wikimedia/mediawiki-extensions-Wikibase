@@ -7,12 +7,9 @@ use LoadBalancer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Int32EntityId;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityIdComposer;
 use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
-use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 
 /**
  * Represents a lookup database table that makes the link between entities and pages.
@@ -24,7 +21,7 @@ use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
  * @author Thomas Pellissier Tanon
  * @author Daniel Kinzler
  */
-class EntityPerPageTable implements EntityPerPage, EntitiesWithoutTermFinder, ItemsWithoutSitelinksFinder {
+class EntityPerPageTable implements EntityPerPage, EntitiesWithoutTermFinder {
 
 	/**
 	 * @var EntityIdParser
@@ -300,57 +297,6 @@ class EntityPerPageTable implements EntityPerPage, EntitiesWithoutTermFinder, It
 		}
 
 		return $entities;
-	}
-
-	/**
-	 * Return all items without sitelinks
-	 *
-	 * @since 0.4
-	 *
-	 * @param string|null $siteId Restrict the request to a specific site.
-	 * @param integer $limit Limit of the query.
-	 * @param integer $offset Offset of the query.
-	 * @return ItemId[]
-	 */
-	public function getItemsWithoutSitelinks( $siteId = null, $limit = 50, $offset = 0 ) {
-		$dbr = wfGetDB( DB_SLAVE );
-		$conditions = array(
-			'ips_site_page IS NULL'
-		);
-		$conditions['epp_entity_type'] = Item::ENTITY_TYPE;
-
-		$joinConditions = 'ips_item_id = epp_entity_id AND epp_redirect_target IS NULL';
-
-		if ( $siteId !== null ) {
-			$joinConditions .= ' AND ips_site_id = ' . $dbr->addQuotes( $siteId );
-		}
-
-		$rows = $dbr->select(
-			array( 'wb_entity_per_page', 'wb_items_per_site' ),
-			array(
-				'entity_id' => 'epp_entity_id'
-			),
-			$conditions,
-			__METHOD__,
-			array(
-				'OFFSET' => $offset,
-				'LIMIT' => $limit,
-				'ORDER BY' => 'epp_page_id DESC'
-			),
-			array( 'wb_items_per_site' => array( 'LEFT JOIN', $joinConditions ) )
-		);
-
-		return $this->getItemIdsFromRows( $rows );
-	}
-
-	protected function getItemIdsFromRows( $rows ) {
-		$itemIds = array();
-
-		foreach ( $rows as $row ) {
-			$itemIds[] = ItemId::newFromNumber( (int)$row->entity_id );
-		}
-
-		return $itemIds;
 	}
 
 	/**
