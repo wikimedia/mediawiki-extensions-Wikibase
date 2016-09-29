@@ -77,7 +77,7 @@ local tests = {
 	  expect = { nil }
 	},
 	{ name = "mw.wikibase.getEntityObject (foreign access)", func = testGetEntityObjectForeignLabel,
-	  expect = { 'Arbitrary access \\o/', 'de' }
+	  expect = { 'Arbitrary access \\o/' }
 	},
 	{ name = 'mw.wikibase.getEntityObject (id must be string)', func = mw.wikibase.getEntityObject,
 	  args = { 123 },
@@ -85,7 +85,7 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.label', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32487' },
-	  expect = { 'Lua Test Item', 'de' }
+	  expect = { 'Lua Test Item' }
 	},
 	{ name = 'mw.wikibase.label (no such item)', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q1224342342' },
@@ -93,19 +93,35 @@ local tests = {
 	},
 	{ name = 'mw.wikibase.label (connected item)', func = mw.wikibase.label, type='ToString',
 	  args = {},
-	  expect = { 'Lua Test Item', 'de' }
+	  expect = { 'Lua Test Item' }
 	},
 	{ name = 'mw.wikibase.label (no label)', func = mw.wikibase.label, type='ToString',
 	  args = { 'Q32488' },
 	  expect = { nil }
 	},
+	{ name = 'mw.wikibase.getLabelWithLang', func = mw.wikibase.getLabelWithLang, type='ToString',
+	  args = { 'Q32487' },
+	  expect = { 'Lua Test Item', 'de' }
+	},
+	{ name = 'mw.wikibase.getLabelWithLang (no such item)', func = mw.wikibase.getLabelWithLang, type='ToString',
+	  args = { 'Q1224342342' },
+	  expect = { nil, nil }
+	},
+	{ name = 'mw.wikibase.getLabelWithLang (connected item)', func = mw.wikibase.getLabelWithLang, type='ToString',
+	  args = {},
+	  expect = { 'Lua Test Item', 'de' }
+	},
+	{ name = 'mw.wikibase.getLabelWithLang (no label)', func = mw.wikibase.getLabelWithLang, type='ToString',
+	  args = { 'Q32488' },
+	  expect = { nil, nil }
+	},
 	{ name = 'mw.wikibase.description', func = mw.wikibase.description, type='ToString',
 	  args = { 'Q32487' },
-	  expect = { 'Description of Q32487', 'de' }
+	  expect = { 'Description of Q32487' }
 	},
 	{ name = 'mw.wikibase.description (connected item)', func = mw.wikibase.description, type='ToString',
 	  args = {},
-	  expect = { 'Description of Q32487', 'de' }
+	  expect = { 'Description of Q32487' }
 	},
 	{ name = 'mw.wikibase.description (no such item)', func = mw.wikibase.description, type='ToString',
 	  args = { 'Q1224342342' },
@@ -114,6 +130,18 @@ local tests = {
 	{ name = 'mw.wikibase.description (no such description)', func = mw.wikibase.description, type='ToString',
 	  args = { 'P342' },
 	  expect = { nil }
+	},
+	{ name = 'mw.wikibase.getDescriptionWithLang (connected item)', func = mw.wikibase.getDescriptionWithLang, type='ToString',
+	  args = {},
+	  expect = { 'Description of Q32487', 'de' }
+	},
+	{ name = 'mw.wikibase.getDescriptionWithLang (no such item)', func = mw.wikibase.getDescriptionWithLang, type='ToString',
+	  args = { 'Q1224342342' },
+	  expect = { nil, nil }
+	},
+	{ name = 'mw.wikibase.getDescriptionWithLang (no such description)', func = mw.wikibase.getDescriptionWithLang, type='ToString',
+	  args = { 'P342' },
+	  expect = { nil, nil }
 	},
 	{ name = 'mw.wikibase.sitelink', func = mw.wikibase.sitelink, type='ToString',
 	  args = { 'Q32487' },

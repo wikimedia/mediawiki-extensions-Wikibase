@@ -22,11 +22,14 @@ local tests = {
 	{ name = "mw.wikibase.label returns nil", func = mw.wikibase.label,
 	  expect = { nil }
 	},
-	{ name = "mw.wikibase.description returns nil", func = mw.wikibase.description,
-	  expect = { nil }
+	{ name = "mw.wikibase.getLabelWithLang returns nil, nil", func = mw.wikibase.getLabelWithLang,
+	  expect = { nil, nil }
 	},
 	{ name = "mw.wikibase.description returns nil", func = mw.wikibase.description,
 	  expect = { nil }
+	},
+	{ name = "mw.wikibase.getDescriptionWithLang returns nil, nil", func = mw.wikibase.getDescriptionWithLang,
+	  expect = { nil, nil }
 	},
 }
 
