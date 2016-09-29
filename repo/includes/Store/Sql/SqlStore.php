@@ -34,8 +34,9 @@ use Wikibase\Repo\Store\EntityPerPage;
 use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\EntityPerPageTable;
-use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
+use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
+use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\Store\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
@@ -317,7 +318,9 @@ class SqlStore implements Store {
 	 * @return ItemsWithoutSitelinks
 	 */
 	public function newItemsWithoutSitelinksFinder() {
-		return $this->newEntityPerPage();
+		return new SqlItemsWithoutSitelinksFinder(
+			$this->entityNamespaceLookup
+		);
 	}
 
 	/**
