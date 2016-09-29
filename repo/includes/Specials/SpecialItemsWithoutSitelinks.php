@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Page for listing entities without label.
+ * Special page for listing Items without sitelinks.
  *
  * @since 0.4
  *
@@ -44,7 +44,7 @@ class SpecialItemsWithoutSitelinks extends SpecialWikibaseQueryPage {
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$itemsWithoutSitelinks = WikibaseRepo::getDefaultInstance()->getStore()->newItemsWithoutSitelinksFinder();
-		return $itemsWithoutSitelinks->getItemsWithoutSitelinks( null, $limit, $offset );
+		return $itemsWithoutSitelinks->getItemsWithoutSitelinks( $limit, $offset );
 	}
 
 }
