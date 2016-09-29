@@ -353,6 +353,7 @@
 	"wikibase-entity-not-viewable": "指定的内容类型“$1”不是实体，不能通过Wikibase显示。",
 	"action-item-merge": "合并项",
 	"action-property-create": "创建属性",
+	"wikibase-pageinfo-subscription-none": "无",
 	"apihelp-wbavailablebadges-description": "查询可用的徽章项。",
 	"apihelp-wbavailablebadges-example-1": "查询所有可用的徽章项",
 	"apihelp-wbcreateclaim-description": "创建Wikibase声称。",
