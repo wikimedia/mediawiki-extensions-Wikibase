@@ -6,6 +6,7 @@ use Action;
 use BaseTemplate;
 use ChangesList;
 use EchoEvent;
+use EditPage;
 use IContextSource;
 use Message;
 use OutputPage;
@@ -22,6 +23,7 @@ use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
+use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
@@ -435,6 +437,28 @@ final class ClientHooks {
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
 
 		return true;
+	}
+
+	/**
+	 * Adds the Entity usage data in ActionEdit
+	 *
+	 * @param EditPage $editor
+	 * @param string[] $checkboxes
+	 * @param int $tabindex
+	 */
+	public static function onEditAction( EditPage &$editor, array &$checkboxes, &$tabindex ) {
+		if ( $editor->preview || $editor->section ) {
+			// Shorten out, like template translusion in core
+			return;
+		}
+
+		$editActionHookHandler = EditActionHookHandler::newFromGlobalState(
+			$editor->getContext()
+		);
+		$editActionHookHandler->handle( $editor );
+
+		$out = $editor->getContext()->getOutput();
+		$out->addModules( 'wikibase.client.action.edit.collapsibleFooter' );
 	}
 
 	/**
