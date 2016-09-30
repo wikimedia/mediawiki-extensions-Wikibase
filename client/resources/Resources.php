@@ -105,7 +105,15 @@ return call_user_func( function() {
 				'wikibase-sitelinks-sitename-columnheading',
 				'wikibase-sitelinks-link-columnheading'
 			),
-		)
+		),
+		'wikibase.client.action.edit.collapsibleFooter' => $moduleTemplate + [
+			'scripts' => 'wikibase.client.action.edit.collapsibleFooter.js',
+			'dependencies' => [
+				'jquery.makeCollapsible',
+				'mediawiki.cookie',
+				'mediawiki.icon',
+			],
+		]
 	);
 
 } );
