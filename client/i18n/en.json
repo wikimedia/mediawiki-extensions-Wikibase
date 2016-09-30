@@ -105,6 +105,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Title",
 	"wikibase-pageinfo-entity-usage-X": "All entity data",
 	"wikibase-pageinfo-entity-usage-O": "Other (Statements)",
+	"wikibase-entityusage-explanation": "{{WBREPONAME}} entities used in this page:",
 	"wikibase-property-render-error": "Failed to render property $1: $2",
 	"wikibase-otherprojects": "In other projects",
 	"wikibase-otherprojects-beta-message": "Other projects sidebar",
