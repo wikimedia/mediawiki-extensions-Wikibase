@@ -23,6 +23,7 @@ use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
+use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
@@ -433,6 +434,40 @@ final class ClientHooks {
 		);
 
 		$pageInfo = $infoActionHookHandler->handle( $context, $pageInfo );
+
+		return true;
+	}
+
+	/**
+	 * Adds the Entity usage data in ActionEdit
+	 *
+	 * @param EditPage $editor
+	 *
+	 * @return bool
+	 */
+	public static function onEditAction( EditPage &$editor, &$checkboxes, &$tabindex ) {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+
+		if ( $editor->preview || $editor->section != '' ) {
+			// Shorten out, like template translusion in core
+			return true;
+		}
+		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
+		$labelDescriptionLookupFactory = new LanguageFallbackLabelDescriptionLookupFactory(
+			$wikibaseClient->getLanguageFallbackChainFactory(),
+			$wikibaseClient->getTermLookup(),
+			$wikibaseClient->getTermBuffer()
+		);
+		$idParser = $wikibaseClient->getEntityIdParser();
+
+		$editActionHookHandler = new EditActionHookHandler(
+			$wikibaseClient->newRepoLinker(),
+			$usageLookup,
+			$labelDescriptionLookupFactory,
+			$idParser
+		);
+
+		$editActionHookHandler->handle( $editor );
 
 		return true;
 	}
