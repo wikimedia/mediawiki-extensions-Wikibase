@@ -116,6 +116,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Name for ''title'' entity usage\n{{Identical|Title}}",
 	"wikibase-pageinfo-entity-usage-X": "Name for ''all'' entity usage",
 	"wikibase-pageinfo-entity-usage-O": "Name for ''other'' entity usage",
+	"wikibase-entityusage-explanation": "Explanation on bottom of edti page for entity usage",
 	"wikibase-property-render-error": "Error message shown when the #property parser function fails to render a property value.\n\nParameters:\n* $1 - the property ID or name\n* $2 - the original error message (this is typically in English and may be rather technical)",
 	"wikibase-otherprojects": "Label of the sidebar section containing links to other projects.\n\nAlso used in {{msg-mw|Wikibase-otherprojects-beta-description}}\n{{Identical|Other project}}\n{{related|Wikibase-otherprojects}}",
 	"wikibase-otherprojects-beta-message": "Used as checkbox label for the \"other projects\" beta feature.\n\nThe description for this label is {{msg-mw|wikibase-otherprojects-beta-description}}\n{{related|Wikibase-otherprojects}}",
