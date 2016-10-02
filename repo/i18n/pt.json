@@ -279,6 +279,8 @@
 	"right-property-create": "Criar propriedades",
 	"action-item-merge": "fundir itens",
 	"action-property-create": "criar propriedades",
+	"wikibase-pageinfo-subscription": "Wikis subscritas a esta entidade",
+	"wikibase-pageinfo-subscription-none": "Nenhuma",
 	"apihelp-wbcreateclaim-description": "Cria alegações do Wikidata.",
 	"apihelp-wbeditentity-param-new": "Se definido, uma nova entidade será criada.\nDefinir o tipo de entidade que você deseja criar.\nNão é permitido ter isso definido quando o <var>id</var> é também definido.",
 	"apihelp-wbmergeitems-description": "Faz a fusão de vários itens.",

@@ -345,7 +345,7 @@
 	"wikibase-entity-not-viewable": "Il tipo di contenuto \"$1\" indicato non è un'entità e non può essere visualizzato da Wikibase.",
 	"action-item-merge": "unisci elementi",
 	"action-property-create": "creare proprietà",
-	"wikibase-pageinfo-subscription": "Wikis iscritti a questa entità",
+	"wikibase-pageinfo-subscription": "Wiki sottoscritte a questa entità",
 	"wikibase-pageinfo-subscription-none": "Nessuno",
 	"apihelp-wbavailablebadges-description": "Interroga gli elementi distintivi disponibili.",
 	"apihelp-wbavailablebadges-example-1": "Interroga tutti gli elementi distintivi disponibili",

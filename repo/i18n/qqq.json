@@ -413,7 +413,7 @@
 	"action-item-merge": "{{Doc-action|item-merge}}",
 	"action-property-create": "{{Doc-action|property-create}}",
 	"wikibase-pageinfo-subscription": "Text to put in action=info for entity usage",
-	"wikibase-pageinfo-subscription-none": "When there is no wiki subscribed to this entity",
+	"wikibase-pageinfo-subscription-none": "When there is no wiki subscribed to this entity\n{{Identical|None}}",
 	"apihelp-wbavailablebadges-description": "{{doc-apihelp-description|wbavailablebadges}}",
 	"apihelp-wbavailablebadges-example-1": "{{doc-apihelp-example|wbavailablebadges}}",
 	"apihelp-wbcreateclaim-description": "{{doc-apihelp-description|wbcreateclaim}}",

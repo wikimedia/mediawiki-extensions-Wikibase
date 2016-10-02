@@ -365,6 +365,7 @@
 	"apihelp-wbsearchentities-example-2": "Искать «abc» на английском языке с ограничением в 50 результатов",
 	"apihelp-query+wbsearch-param-search": "Искать данный текст.",
 	"apihelp-query+wbsearch-param-language": "Искать на этом языке.",
+	"apihelp-query+wbsearch-param-limit": "Максимальное количество результатов",
 	"apihelp-wbsetaliases-example-1": "Установить Foo и Bar в качестве синонимов на английском языке для сущности с ID Q1",
 	"apihelp-wbsetaliases-example-2": "Добавить Foo и Bar в список синонимов на английском языке для сущности с ID Q1",
 	"apihelp-wbsetaliases-example-3": "Удалить Foo и Bar из списка синонимов на английском языке для сущности с ID Q1",

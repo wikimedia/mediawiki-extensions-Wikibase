@@ -3,7 +3,8 @@
 		"authors": [
 			"Dbc334",
 			"Eleassar",
-			"Skalcaa"
+			"Skalcaa",
+			"Pickle12"
 		]
 	},
 	"wikibase-desc": "Zbirka strukturiranih podatkov",
@@ -104,5 +105,6 @@
 	"wikibase-setdescription-label": "Opis:",
 	"wikibase-setdescription-submit": "Določite opis",
 	"wikibase-modifyterm-language": "Koda jezika:",
-	"wikibase-entitieswithoutlabel-label-language": "Koda jezika:"
+	"wikibase-entitieswithoutlabel-label-language": "Koda jezika:",
+	"wikibase-pageinfo-subscription-none": "Brez vnosa"
 }

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Eleassar",
-			"Dbc334"
+			"Dbc334",
+			"Pickle12"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibaza",
@@ -22,6 +23,7 @@
 	"wikibase-validator-bad-entity-id": "Slabo oblikovan ID: $1",
 	"wikibase-validator-no-such-entity": "$1 ni mogoče najti",
 	"wikibase-validator-no-such-property": "Lastnosti $1 ni mogoče najti",
+	"wikibase-validator-bad-url": "Povezave ne smejo vsebovati določenih znakov, kot so presledki ali okvirčki: $1",
 	"wikibase-validator-not-allowed": "Nedovoljena vrednost: $1",
 	"datatypes-type-wikibase-item": "Predmet",
 	"datatypes-type-commonsMedia": "Predstavnostna datoteka v Zbirki",

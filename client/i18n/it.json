@@ -96,6 +96,7 @@
 	"wikibase-pageswithbadges-badge": "Distintivo:",
 	"wikibase-pageswithbadges-submit": "Mostra pagine",
 	"entityusage": "Utilizzo dell'entità",
+	"entityusage-summary": "Questa pagina elenca pagine che usano una determinata entità (per es. Q42). L'elenco è ordinato in ordine decrescente secondo l'ID della pagina, in modo che le pagine più recenti sono elencate per prime.",
 	"wikibase-entityusage-invalid-id": "$1 non è un ID entità valido",
 	"wikibase-entityusage-legend": "Elenco delle pagine che utilizzano una determinata entità",
 	"wikibase-entityusage-entity": "Entità:",

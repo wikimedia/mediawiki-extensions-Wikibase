@@ -308,6 +308,7 @@
 	"wikibase-entity-not-viewable-title": "Niezgodność typu treści: Nie można wyświetlić treści",
 	"action-item-merge": "połącz elementy",
 	"action-property-create": "tworzenia właściwości",
+	"wikibase-pageinfo-subscription-none": "Brak",
 	"apihelp-wbcreateclaim-description": "Tworzy stwierdzenia Wikibase.",
 	"apihelp-wbcreateclaim-param-snaktype": "Typ łącznika",
 	"apihelp-wbformatvalue-description": "Formaty DataValues.",

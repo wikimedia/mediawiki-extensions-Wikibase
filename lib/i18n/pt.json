@@ -76,7 +76,7 @@
 	"wikibase-validator-bad-value": "Valor de dados corrompido: $1",
 	"wikibase-validator-bad-value-type": "Tipo de valor inválido $1; esperava-se $2",
 	"wikibase-validator-bad-data-type": "Tipo de dados incorreto: $1",
-	"wikibase-validator-bad-url": "URL não podem conter certos caracteres, como espaços e colchetes.",
+	"wikibase-validator-bad-url": "URL não podem conter certos caracteres, como espaços e colchetes: $1",
 	"wikibase-validator-bad-url-scheme": "Um esquema de URL \"$1\" não é suportado.",
 	"wikibase-validator-unknown-unit": "Unidade desconhecida: $1",
 	"wikibase-validator-not-allowed": "Valor inválido: $1",
