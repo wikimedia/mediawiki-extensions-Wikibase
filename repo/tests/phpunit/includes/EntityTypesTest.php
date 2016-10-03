@@ -13,6 +13,9 @@ use Wikibase\View\EntityView;
 /**
  * @covers WikibaseRepo.entitytypes.php
  *
+ * @group Wikibase
+ * @group WikibaseRepo
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

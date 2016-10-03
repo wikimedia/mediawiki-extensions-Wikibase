@@ -11,6 +11,9 @@ use Wikibase\DataModel\SerializerFactory;
 /**
  * @covers WikibaseLib.entitytypes.php
  *
+ * @group Wikibase
+ * @group WikibaseLib
+ *
  * @licence GNU GPL v2+
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

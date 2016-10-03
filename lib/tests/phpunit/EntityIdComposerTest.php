@@ -13,6 +13,9 @@ use Wikibase\Lib\EntityIdComposer;
 /**
  * @covers Wikibase\Lib\EntityIdComposer
  *
+ * @group Wikibase
+ * @group WikibaseLib
+ *
  * @licence GNU GPL v2+
  * @author Thiemo Mättig
  */
