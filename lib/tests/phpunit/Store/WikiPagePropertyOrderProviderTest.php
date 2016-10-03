@@ -10,6 +10,7 @@ use MediaWikiTestCase;
 
 /**
  * @covers Wikibase\Store\WikiPagePropertyOrderProvider
+ * @group Wikibase
  * @group WikibaseLib
  * @group Database
  *
