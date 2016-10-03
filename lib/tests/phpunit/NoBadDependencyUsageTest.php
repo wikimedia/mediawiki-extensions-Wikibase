@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Test;
 
+use PHPUnit_Framework_TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -13,11 +14,11 @@ use SplFileInfo;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NoBadDependencyUsageTest extends \PHPUnit_Framework_TestCase {
+class NoBadDependencyUsageTest extends PHPUnit_Framework_TestCase {
 
 	public function testNoRepoUsageInLib() {
 		// Increasing this allowance is forbidden
-		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 4 );
+		$this->assertStringNotInLib( 'WikibaseRepo' . '::', 2 );
 		$this->assertStringNotInLib( 'Wikibase\\Repo\\', 4 );
 	}
 
