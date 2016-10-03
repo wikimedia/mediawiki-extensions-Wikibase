@@ -154,7 +154,7 @@ Functions documented as <code>mw.wikibase.entity.name</code> are available on th
 === mw.wikibase.entity:getLabel ===
 <code>entity:getLabel()</code><br>
 <code>entity:getLabel( langCode )</code><br>
-Returns the label of the entity in the language given as <code>langCode</code> or in the Wiki's content language. See also [[#mw.wikibase.entity:getLabelWithLang|<code>mw.wikibase.entity:getLabelWithLang</code>]].
+Returns the label of the entity in the language given as <code>langCode</code> or in the Wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [[#mw.wikibase.entity:getLabelWithLang|<code>mw.wikibase.entity:getLabelWithLang</code>]].
 
 An example call might look like this:
 <source lang="lua">
@@ -164,7 +164,7 @@ entity:getLabel( 'de' ) -- Returns a string like "Berlin"
 === mw.wikibase.entity:getDescription ===
 <code>entity:getDescription()</code><br>
 <code>entity:getDescription( langCode )</code><br>
-Returns the description of the entity in the language given as <code>langCode</code> or in the Wiki's content language. See also [[#mw.wikibase.entity:getDescriptionWithLang|<code>mw.wikibase.entity:getDescriptionWithLang</code>]].
+Returns the description of the entity in the language given as <code>langCode</code> or in the Wiki's content language (on monolingual wikis) or the user's language (on multilingual wikis). See also [[#mw.wikibase.entity:getDescriptionWithLang|<code>mw.wikibase.entity:getDescriptionWithLang</code>]].
 
 An example call might look like this:
 <source lang="lua">
