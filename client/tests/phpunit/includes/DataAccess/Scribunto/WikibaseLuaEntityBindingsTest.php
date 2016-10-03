@@ -2,6 +2,8 @@
 
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
+use Language;
+use PHPUnit_Framework_TestCase;
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLuaEntityBindings;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\ItemId;
@@ -18,7 +20,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0+
  * @author Marius Hoch < hoo@online.de >
  */
-class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
+class WikibaseLuaEntityBindingsTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @return WikibaseLuaEntityBindings
@@ -36,6 +38,7 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		return new WikibaseLuaEntityBindings(
 			$entityStatementsRenderer,
 			new BasicEntityIdParser(),
+			Language::factory( 'es' ),
 			'enwiki'
 		);
 	}
@@ -57,6 +60,12 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit_Framework_TestCase {
 		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
 
 		$this->assertEquals( 'enwiki', $wikibaseLuaEntityBindings->getGlobalSiteId() );
+	}
+
+	public function testGetLanguageCode() {
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings();
+
+		$this->assertEquals( 'es', $wikibaseLuaEntityBindings->getLanguageCode() );
 	}
 
 }

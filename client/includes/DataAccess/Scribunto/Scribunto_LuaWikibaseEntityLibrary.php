@@ -79,6 +79,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		return new WikibaseLuaEntityBindings(
 			$entityStatementsRenderer,
 			$wikibaseClient->getEntityIdParser(),
+			$lang,
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
@@ -135,6 +136,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		// these can't be called from user code, unless explicitly exposed in Lua.
 		$lib = array(
 			'getGlobalSiteId' => array( $this, 'getGlobalSiteId' ),
+			'getLanguageCode' => array( $this, 'getLanguageCode' ),
 			'formatPropertyValues' => array( $this, 'formatPropertyValues' ),
 		);
 
@@ -152,6 +154,17 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 */
 	public function getGlobalSiteId() {
 		return array( $this->getImplementation()->getGlobalSiteId() );
+	}
+
+	/**
+	 * Wrapper for getLanguageCode in WikibaseLuaEntityBindings
+	 *
+	 * @since 0.5
+	 *
+	 * @return string[]
+	 */
+	public function getLanguageCode() {
+		return array( $this->getImplementation()->getLanguageCode() );
 	}
 
 	/**

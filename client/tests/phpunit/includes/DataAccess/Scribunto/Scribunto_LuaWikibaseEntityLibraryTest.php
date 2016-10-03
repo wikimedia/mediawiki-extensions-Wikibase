@@ -93,6 +93,23 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	/**
 	 * @dataProvider allowDataAccessInUserLanguageProvider
 	 */
+	public function testGetLanguageCode( $allowDataAccessInUserLanguage ) {
+		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
+
+		$cacheSplit = false;
+		$lang = Language::factory( 'es' );
+		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary( $cacheSplit, $lang );
+
+		$this->assertSame(
+			[ $allowDataAccessInUserLanguage ? 'es' : 'de' ],
+			$luaWikibaseLibrary->getLanguageCode()
+		);
+		$this->assertSame( $allowDataAccessInUserLanguage, $cacheSplit );
+	}
+
+	/**
+	 * @dataProvider allowDataAccessInUserLanguageProvider
+	 */
 	public function testFormatPropertyValues( $allowDataAccessInUserLanguage ) {
 		$cacheSplit = false;
 		$this->setAllowDataAccessInUserLanguage( $allowDataAccessInUserLanguage );
