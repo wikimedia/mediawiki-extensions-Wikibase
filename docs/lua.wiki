@@ -46,7 +46,7 @@ mw.wikibase.getEntityUrl( 'Q42' ) -- Returns the URL to the item as a string, li
 <code>wikibase.label( id )</code><br>
 Takes an item ID and returns the label in the language of the local Wiki.
 
-If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists in the wiki's language or in a fallback language. See also [[#mw.wikibase.getLabelWithLang|<code>mw.wikibase.getLabelWithLang</code>]].
+If no ID was specified, then the label of the item connected to the current page will be returned, if the page is indeed connected and a label exists. The label will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [[#mw.wikibase.getLabelWithLang|<code>mw.wikibase.getLabelWithLang</code>]].
 
 An example call might look like this:
 <source lang="lua">
@@ -77,7 +77,7 @@ mw.wikibase.sitelink( 'Q42' ) -- Returns the given item's page title in the curr
 <code>wikibase.description( id )</code><br>
 Takes an item ID and returns the description in the language of the local Wiki.
 
-If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists in the wiki's language or in a fallback language. See also [[#mw.wikibase.getDescriptionWithLang|<code>mw.wikibase.getDescriptionWithLang</code>]].
+If no ID was specified, then the description of the item connected to the current page will be returned, if the page is indeed connected and a description exists. The description will either be in the Wiki's language (on monolingual wikis) or the user's language (on multilingual Wikis), furthermore language fallbacks will be applied. See also [[#mw.wikibase.getDescriptionWithLang|<code>mw.wikibase.getDescriptionWithLang</code>]].
 
 An example call might look like this:
 <source lang="lua">
