@@ -76,6 +76,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 			$plainTextTransclusionInteractor,
 			$richWikitextTransclusionInteractor,
 			$wikibaseClient->getEntityIdParser(),
+			$lang,
 			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' )
 		);
 	}
@@ -132,6 +133,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		// these can't be called from user code, unless explicitly exposed in Lua.
 		$lib = [
 			'getGlobalSiteId' => [ $this, 'getGlobalSiteId' ],
+			'getLanguageCode' => [ $this, 'getLanguageCode' ],
 			'formatStatements' => [ $this, 'formatStatements' ],
 			'formatPropertyValues' => [ $this, 'formatPropertyValues' ],
 			'isFormatStatementsEnabled' => [ $this, 'isFormatStatementsEnabled' ],
@@ -167,6 +169,17 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		);
 
 		return [ $value ];
+	}
+
+	/**
+	 * Wrapper for getLanguageCode in WikibaseLuaEntityBindings
+	 *
+	 * @since 0.5
+	 *
+	 * @return string[]
+	 */
+	public function getLanguageCode() {
+		return [ $this->getImplementation()->getLanguageCode() ];
 	}
 
 	/**

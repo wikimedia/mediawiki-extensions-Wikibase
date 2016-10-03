@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\DataAccess\Scribunto;
 
+use Language;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
@@ -31,6 +32,11 @@ class WikibaseLuaEntityBindings {
 	private $entityIdParser;
 
 	/**
+	 * @var Language
+	 */
+	private $language;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -39,17 +45,20 @@ class WikibaseLuaEntityBindings {
 	 * @param StatementTransclusionInteractor $plainTextTransclusionInteractor
 	 * @param StatementTransclusionInteractor $richWikitextTransclusionInteractor
 	 * @param EntityIdParser $entityIdParser
+	 * @param Language $language
 	 * @param string $siteId
 	 */
 	public function __construct(
 		StatementTransclusionInteractor $plainTextTransclusionInteractor,
 		StatementTransclusionInteractor $richWikitextTransclusionInteractor,
 		EntityIdParser $entityIdParser,
+		Language $language,
 		$siteId
 	) {
 		$this->plainTextTransclusionInteractor = $plainTextTransclusionInteractor;
 		$this->richWikitextTransclusionInteractor = $richWikitextTransclusionInteractor;
 		$this->entityIdParser = $entityIdParser;
+		$this->language = $language;
 		$this->siteId = $siteId;
 	}
 
@@ -108,6 +117,19 @@ class WikibaseLuaEntityBindings {
 	 */
 	public function getGlobalSiteId() {
 		return $this->siteId;
+	}
+
+	/**
+	 * Get the language we are currently working with.
+	 * @TODO: Once T114640 has been implemented, this should probably be
+	 * generally exposed in Scribunto as parser target language.
+	 *
+	 * @since 0.5
+	 *
+	 * @return string
+	 */
+	public function getLanguageCode() {
+		return $this->language->getCode();
 	}
 
 }
