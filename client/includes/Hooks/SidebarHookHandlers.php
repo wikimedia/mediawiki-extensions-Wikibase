@@ -158,7 +158,8 @@ class SidebarHookHandlers {
 	 * @return bool
 	 */
 	public function doOutputPageParserOutput( OutputPage &$out, ParserOutput $parserOutput ) {
-		if ( !$this->namespaceChecker->isWikibaseEnabled( $out->getTitle()->getNamespace() ) ) {
+		$title = $out->getTitle();
+		if ( !$title || !$this->namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
 			return true;
 		}
@@ -230,7 +231,7 @@ class SidebarHookHandlers {
 		$outputPage = $skin->getContext()->getOutput();
 		$title = $outputPage->getTitle();
 
-		if ( !$outputPage->getProperty( 'wikibase_item' ) ) {
+		if ( !$title || !$outputPage->getProperty( 'wikibase_item' ) ) {
 			return true;
 		}
 

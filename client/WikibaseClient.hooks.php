@@ -201,16 +201,17 @@ final class ClientHooks {
 	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$skin = $baseTemplate->getSkin();
+		$title = $skin->getTitle();
 		$idString = $skin->getOutput()->getProperty( 'wikibase_item' );
 		$entityId = null;
 
 		if ( $idString !== null ) {
 			$entityIdParser = $wikibaseClient->getEntityIdParser();
 			$entityId = $entityIdParser->parse( $idString );
-		} elseif ( Action::getActionName( $skin ) !== 'view' && $skin->getTitle()->exists() ) {
+		} elseif ( $title && Action::getActionName( $skin ) !== 'view' && $title->exists() ) {
 			// Try to load the item ID from Database, but only do so on non-article views,
 			// (where the article's OutputPage isn't available to us).
-			$entityId = self::getEntityIdForTitle( $skin->getTitle() );
+			$entityId = self::getEntityIdForTitle( $title );
 		}
 
 		if ( $entityId !== null ) {
@@ -416,8 +417,9 @@ final class ClientHooks {
 			$wikibaseClient->getTermBuffer()
 		);
 		$idParser = $wikibaseClient->getEntityIdParser();
+		$title = $context->getTitle();
 
-		if ( !$namespaceChecker->isWikibaseEnabled( $context->getTitle()->getNamespace() ) ) {
+		if ( !$title || !$namespaceChecker->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
 			return true;
 		}

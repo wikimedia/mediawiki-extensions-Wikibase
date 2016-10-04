@@ -59,7 +59,7 @@ class SkinTemplateOutputPageBeforeExecHandler {
 	public static function onSkinTemplateOutputPageBeforeExec( Skin &$skin, QuickTemplate &$template ) {
 		$title = $skin->getTitle();
 
-		if ( !WikibaseClient::getDefaultInstance()->getNamespaceChecker()->isWikibaseEnabled( $title->getNamespace() ) ) {
+		if ( !$title || !WikibaseClient::getDefaultInstance()->getNamespaceChecker()->isWikibaseEnabled( $title->getNamespace() ) ) {
 			// shorten out
 			return true;
 		}
