@@ -35,7 +35,9 @@ use Wikibase\DumpRdf;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Repo\Tests\MockEntityPerPage;
+use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
+use Wikibase\Repo\Tests\MockEntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -53,7 +55,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 		$dumpScript = new DumpRdf();
 
 		$mockRepo = new MockRepository();
-		$mockEntityPerPage = new MockEntityPerPage();
+		$mockEntityIdPager = new MockEntityIdPager();
 
 		$snakList = new SnakList();
 		$snakList->addSnak( new PropertySomeValueSnak( new PropertyId( 'P12' ) ) );
@@ -129,14 +131,22 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 
 		foreach ( $testEntities as $key => $testEntity ) {
 			$mockRepo->putEntity( $testEntity, $key, '20000101000000' );
-			$mockEntityPerPage->addEntityPage( $testEntity->getId(), $key );
+			$mockEntityIdPager->addEntityPage( $testEntity->getId(), $key );
 		}
+
+		$sqlEntityIdPagerFactory = $this->getMockBuilder( SqlEntityIdPagerFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$sqlEntityIdPagerFactory->expects( $this->once() )
+			->method( 'newSqlEntityIdPager' )
+			->with( null, EntityIdPager::INCLUDE_REDIRECTS )
+			->will( $this->returnValue( $mockEntityIdPager ) );
 
 		// Note: We are testing with the actual RDF bindings, so we can check for actual RDF output.
 		$rdfBuilder = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
 
 		$dumpScript->setServices(
-			$mockEntityPerPage,
+			$sqlEntityIdPagerFactory,
 			new NullEntityPrefetcher(),
 			new HashSiteStore( TestSites::getSites() ),
 			$this->getMockPropertyDataTypeLookup(),

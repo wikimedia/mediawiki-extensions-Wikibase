@@ -8,30 +8,12 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Interface to a table that join wiki pages and entities.
  *
- * @todo: Combine with the EntityTitleLookup interface?
- * @todo: At least add a way to get page IDs!
- *
  * @since 0.2
  *
  * @license GPL-2.0+
  * @author Thomas Pellissier Tanon
  */
 interface EntityPerPage {
-
-	/**
-	 * Omit redirects from entity listing.
-	 */
-	const NO_REDIRECTS = 'no';
-
-	/**
-	 * Include redirects in entity listing.
-	 */
-	const INCLUDE_REDIRECTS = 'include';
-
-	/**
-	 * Include only redirects in listing.
-	 */
-	const ONLY_REDIRECTS = 'only';
 
 	/**
 	 * Adds a new link between an entity and a page
@@ -55,20 +37,6 @@ interface EntityPerPage {
 	 * @param EntityId $targetId
 	 */
 	public function addRedirectPage( EntityId $entityId, $pageId, EntityId $targetId );
-
-	/**
-	 * Lists entities of the given type (optionally including redirects).
-	 *
-	 * @since 0.5
-	 *
-	 * @param null|string $entityType The entity type to look for.
-	 * @param int $limit The maximum number of IDs to return.
-	 * @param EntityId|null $after Only return entities with IDs greater than this.
-	 * @param string $redirects A XXX_REDIRECTS constant (default is NO_REDIRECTS).
-	 *
-	 * @return EntityId[]
-	 */
-	public function listEntities( $entityType, $limit, EntityId $after = null, $redirects = self::NO_REDIRECTS );
 
 	/**
 	 * Removes a link between an entity (or entity redirect) and a page

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\DumpGenerator;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 require_once __DIR__ . '/dumpEntities.php';
@@ -62,13 +62,13 @@ class DumpJson extends DumpScript {
 	}
 
 	public function setServices(
-		EntityPerPage $entityPerPage,
+		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
 		EntityPrefetcher $entityPrefetcher,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityLookup $entityLookup,
 		Serializer $entitySerializer
 	) {
-		parent::setDumpEntitiesServices( $entityPerPage );
+		parent::setDumpEntitiesServices( $sqlEntityIdPagerFactory );
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->entityLookup = $entityLookup;
@@ -79,9 +79,11 @@ class DumpJson extends DumpScript {
 	public function execute() {
 		if ( !$this->hasHadServicesSet ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory( $wikibaseRepo->getEntityIdComposer() );
 			$revisionLookup = $wikibaseRepo->getEntityRevisionLookup( 'uncached' );
+
 			$this->setServices(
-				$wikibaseRepo->getStore()->newEntityPerPage(),
+				$sqlEntityIdPagerFactory,
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				new RevisionBasedEntityLookup( $revisionLookup ),

@@ -297,7 +297,7 @@ class SqlStore implements Store {
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage() {
-		return new EntityPerPageTable( wfGetLB(), $this->entityIdParser, $this->entityIdComposer );
+		return new EntityPerPageTable( wfGetLB(), $this->entityIdParser );
 	}
 
 	/**

@@ -11,7 +11,8 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
-use Wikibase\Repo\Store\EntityPerPage;
+use Wikibase\Repo\Store\EntityIdPager;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 require_once __DIR__ . '/dumpEntities.php';
@@ -71,7 +72,7 @@ class DumpRdf extends DumpScript {
 	}
 
 	/**
-	 * @param EntityPerPage              $entityPerPage
+	 * @param SqlEntityIdPagerFactory    $sqlEntityIdPagerFactory
 	 * @param EntityPrefetcher           $entityPrefetcher
 	 * @param SiteStore                  $siteStore
 	 * @param PropertyDataTypeLookup     $propertyDataTypeLookup
@@ -81,7 +82,7 @@ class DumpRdf extends DumpScript {
 	 * @param EntityTitleLookup          $titleLookup
 	 */
 	public function setServices(
-		EntityPerPage $entityPerPage,
+		SqlEntityIdPagerFactory $sqlEntityIdPagerFactory,
 		EntityPrefetcher $entityPrefetcher,
 		SiteStore $siteStore,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
@@ -90,7 +91,7 @@ class DumpRdf extends DumpScript {
 		RdfVocabulary $rdfVocabulary,
 		EntityTitleLookup $titleLookup
 	) {
-		parent::setDumpEntitiesServices( $entityPerPage );
+		parent::setDumpEntitiesServices( $sqlEntityIdPagerFactory );
 		$this->entityPrefetcher = $entityPrefetcher;
 		$this->siteStore = $siteStore;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
@@ -104,8 +105,10 @@ class DumpRdf extends DumpScript {
 	public function execute() {
 		if ( !$this->hasHadServicesSet ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+			$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory( $wikibaseRepo->getEntityIdComposer() );
+
 			$this->setServices(
-				$wikibaseRepo->getStore()->newEntityPerPage(),
+				$sqlEntityIdPagerFactory,
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getSiteStore(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
@@ -119,12 +122,12 @@ class DumpRdf extends DumpScript {
 	}
 
 	/**
-	 * Returns EntityPerPage::INCLUDE_REDIRECTS.
+	 * Returns EntityIdPager::INCLUDE_REDIRECTS.
 	 *
-	 * @return mixed a EntityPerPage::XXX_REDIRECTS constant
+	 * @return mixed a EntityIdPager::XXX_REDIRECTS constant
 	 */
 	protected function getRedirectMode() {
-		return EntityPerPage::INCLUDE_REDIRECTS;
+		return EntityIdPager::INCLUDE_REDIRECTS;
 	}
 
 	/**
