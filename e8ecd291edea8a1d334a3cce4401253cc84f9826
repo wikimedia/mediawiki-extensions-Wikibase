@@ -16,6 +16,24 @@
       "revId": "e8ecd291edea8a1d334a3cce4401253cc84f9826",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_48be9e14",
+        "filename": "lib/resources/jquery.wikibase/jquery.wikibase.siteselector.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1453
+      },
+      "writtenOn": "2016-10-04T14:36:14Z",
+      "side": 1,
+      "message": "How \"more robust\"? Sure, we could add a separate step that first tries to parse the users input as a URL. But simply replacing the current code would make the whole parser more fragile, because it would then fail for every input that\u0027s not a perfectly valid URL. I want this to succeed for partial strings like \"ttps://de.wikipedia.org\".",
+      "parentUuid": "0e82f318_099f7763",
+      "revId": "e8ecd291edea8a1d334a3cce4401253cc84f9826",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
