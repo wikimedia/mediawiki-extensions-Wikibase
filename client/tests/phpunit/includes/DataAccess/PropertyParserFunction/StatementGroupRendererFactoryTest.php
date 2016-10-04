@@ -9,6 +9,7 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\PropertyParserFunction\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\PropertyParserFunction\StatementGroupRendererFactory;
@@ -151,9 +152,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = new StatementGroupRendererFactory(
 			$idResolver,
 			new SnaksFinder(),
-			new LanguageFallbackChainFactory(),
-			$formatterFactory,
 			$this->getMock( EntityLookup::class ),
+			new DataAccessSnakFormatterFactory(
+				$this->getLanguageFallbackChainFactory(),
+				$formatterFactory
+			),
 			$allowDataAccessInUserLanguage
 		);
 		$factory->newRendererFromParser( $this->getParser( 'de', 'es' ) );
@@ -170,9 +173,11 @@ class StatementGroupRendererFactoryTest extends \PHPUnit_Framework_TestCase {
 		return new StatementGroupRendererFactory(
 			$this->getPropertyIdResolver(),
 			$this->getSnaksFinder(),
-			$this->getLanguageFallbackChainFactory(),
-			$this->getSnakFormatterFactory(),
 			$this->getEntityLookup(),
+			new DataAccessSnakFormatterFactory(
+				$this->getLanguageFallbackChainFactory(),
+				$this->getSnakFormatterFactory()
+			),
 			$allowDataAccessInUserLanguage
 		);
 	}
