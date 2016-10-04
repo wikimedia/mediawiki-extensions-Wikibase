@@ -34,6 +34,24 @@
       "revId": "accffadf60de5be4411a2da055787cc10f6515e5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e82f318_da0ed590",
+        "filename": "repo/tests/phpunit/includes/Validators/UrlSchemeValidatorsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3640
+      },
+      "writtenOn": "2016-10-04T17:47:02Z",
+      "side": 1,
+      "message": "Yes, this is correct, I did not mean to comment on the cvs line itself. I mean to suggest adding a line like:\n\n[\u0027bzr\u0027, \u0027bzr:\u0027]\n\nlike the one for ftp. Unless it\u0027s not important to have all schemes covered to verify the URL validation spots incorrect URLs ?",
+      "parentUuid": "0e82f318_c8b9aee7",
+      "revId": "accffadf60de5be4411a2da055787cc10f6515e5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
