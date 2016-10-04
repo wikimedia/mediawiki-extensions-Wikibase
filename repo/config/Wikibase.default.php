@@ -35,7 +35,7 @@ return [
 	],
 
 	// URL schemes allowed for URL values. See UrlSchemeValidators for a full list.
-	'urlSchemes' => [ 'ftp', 'http', 'https', 'irc', 'mailto', 'svn', 'git', 'ssh', 'bzr', 'cvs' ],
+	'urlSchemes' => [ 'bzr', 'cvs', 'ftp', 'git', 'http', 'https', 'irc', 'mailto', 'ssh', 'svn' ],
 
 	// Items allowed to be used as badges pointing to their CSS class names
 	'badgeItems' => [],
