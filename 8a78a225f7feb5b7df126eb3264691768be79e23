@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e82f318_c8cfeeb3",
+        "filename": "docs/options.wiki",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2626
+      },
+      "writtenOn": "2016-10-04T14:42:08Z",
+      "side": 1,
+      "message": "You could even use short array syntax here but this could be also done separately throughout the whole file",
+      "range": {
+        "startLine": 47,
+        "startChar": 36,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "8a78a225f7feb5b7df126eb3264691768be79e23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
